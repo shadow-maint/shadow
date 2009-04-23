@@ -85,7 +85,7 @@ static void usage (void)
 	exit (E_USAGE);
 }
 
-static void print_one (const struct passwd *pw, bool force)
+static void print_one (/*@null@*/const struct passwd *pw, bool force)
 {
 	static bool once = false;
 	struct tm *tm;
@@ -112,8 +112,8 @@ static void print_one (const struct passwd *pw, bool force)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %d\n"),
-			         pw->pw_uid);
+			         _("faillog: Failed to get the entry for UID %lu\n"),
+			         (unsigned long int)pw->pw_uid);
 			return;
 		}
 	} else {
@@ -211,8 +211,8 @@ static bool reset_one (uid_t uid)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %d\n"),
-			         uid);
+			         _("faillog: Failed to get the entry for UID %lu\n"),
+			         (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -241,8 +241,8 @@ static bool reset_one (uid_t uid)
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to reset fail count for UID %d\n"),
-	         uid);
+	         _("faillog: Failed to reset fail count for UID %lu\n"),
+	         (unsigned long int)uid);
 	return true;
 }
 
@@ -297,8 +297,8 @@ static bool setmax_one (uid_t uid, int max)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %d\n"),
-			         uid);
+			         _("faillog: Failed to get the entry for UID %lu\n"),
+			         (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -323,13 +323,13 @@ static bool setmax_one (uid_t uid, int max)
 
 	if (   (fseeko (fail, offset, SEEK_SET) == 0)
 	    && (fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1)) {
-		fflush (fail);
+		(void) fflush (fail);
 		return false;
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to set max for UID %d\n"),
-	         uid);
+	         _("faillog: Failed to set max for UID %lu\n"),
+	         (unsigned long int)uid);
 	return true;
 }
 
@@ -387,8 +387,8 @@ static bool set_locktime_one (uid_t uid, long locktime)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %d\n"),
-			         uid);
+			         _("faillog: Failed to get the entry for UID %lu\n"),
+			         (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -411,15 +411,15 @@ static bool set_locktime_one (uid_t uid, long locktime)
 
 	fl.fail_locktime = locktime;
 
-	if (fseeko (fail, offset, SEEK_SET) == 0
-	    && fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1) {
-		fflush (fail);
+	if (   (fseeko (fail, offset, SEEK_SET) == 0)
+	    && (fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1)) {
+		(void) fflush (fail);
 		return false;
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to set locktime for UID %d\n"),
-	         uid);
+	         _("faillog: Failed to set locktime for UID %lu\n"),
+	         (unsigned long int)uid);
 	return true;
 }
 
