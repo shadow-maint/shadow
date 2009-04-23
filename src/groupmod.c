@@ -505,13 +505,13 @@ static void prepare_failure_reports (void)
 	                      + strlen (info_passwd.audit_msg);
 
 	snprintf (info_group.action,   511 - strlen (info_group.audit_msg),
-	          "group %s/%d", group_name, group_id);
+	          "group %s/%lu", group_name, (unsigned long int) group_id);
 #ifdef	SHADOWGRP
 	snprintf (info_gshadow.action, 511 - strlen (info_group.audit_msg),
 	          "group %s", group_name);
 #endif
 	snprintf (info_passwd.action,  511 - strlen (info_group.audit_msg),
-	          "group %s/%d", group_name, group_id);
+	          "group %s/%lu", group_name, (unsigned long int) group_id);
 
 	if (nflg) {
 		strncat (info_group.action, ", new name: ",
@@ -545,13 +545,13 @@ static void prepare_failure_reports (void)
 		         511 - strlen (info_group.audit_msg));
 		snprintf (info_group.action+strlen (info_group.action),
 		          511 - strlen (info_group.audit_msg),
-		          "%d", group_newid);
+		          "%lu", (unsigned long int) group_newid);
 
 		strncat (info_passwd.action, ", new gid: ",
 		         511 - strlen (info_passwd.audit_msg));
 		snprintf (info_passwd.action+strlen (info_passwd.action),
 		          511 - strlen (info_passwd.audit_msg),
-		          "%d", group_newid);
+		          "%lu", (unsigned long int) group_newid);
 	}
 	info_group.audit_msg[511]   = '\0';
 #ifdef	SHADOWGRP

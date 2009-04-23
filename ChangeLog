@@ -1,5 +1,9 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmod.c: Cast ID to ulongs and use ulong formats for IDs.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Added splint annotations.
 	* src/newgrp.c: audit_buf is only used in newgrp. Make it static.
 	* src/newgrp.c: Ignore the return value of fputs().
