@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@
 
 static void login_exit (unused int sig)
 {
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
 /*
@@ -86,13 +86,13 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 * be displayed and display it before the prompt.
 	 */
 
-	if (prompt) {
+	if (NULL != prompt) {
 		cp = getdef_str ("ISSUE_FILE");
 		if (NULL != cp) {
 			fp = fopen (cp, "r");
 			if (NULL != fp) {
 				while ((i = getc (fp)) != EOF) {
-					putc (i, stdout);
+					(void) putc (i, stdout);
 				}
 
 				(void) fclose (fp);
@@ -110,12 +110,12 @@ void login_prompt (const char *prompt, char *name, int namesize)
 
 	memzero (buf, sizeof buf);
 	if (fgets (buf, (int) sizeof buf, stdin) != buf) {
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	cp = strchr (buf, '\n');
 	if (NULL == cp) {
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	*cp = '\0';		/* remove \n [ must be there ] */
 

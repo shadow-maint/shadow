@@ -1,5 +1,13 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/loginprompt.c: Use exit(EXIT_FAILURE) instead of
+	exit(1).
+	* libmisc/loginprompt.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/loginprompt.c: Ignore return value of putc().
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/env.c, libmisc/age.c: Added splint annotations.
 	* libmisc/age.c: Added brackets and parenthesis.
 	* libmisc/age.c: Ignore the return value of fclose (file opened
