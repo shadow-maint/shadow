@@ -38,6 +38,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <assert.h>
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
@@ -619,6 +620,7 @@ int main (int argc, char **argv)
 		 * Re-read the group entry for further processing.
 		 */
 		grp = xgetgrnam (group);
+		assert (NULL != grp);
 	}
 #ifdef SHADOWGRP
 	sgrp = getsgnam (group);

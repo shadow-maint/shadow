@@ -1,5 +1,9 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Added assertion to guide splint (and me).
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_gid.c: Use booleans instead of char fo
 	used_gids.
 	* libmisc/find_new_gid.c: Use getdef_ulong and cast to git_t to
