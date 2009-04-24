@@ -54,21 +54,34 @@
 	*sg = *sgent;
 	sg->sg_name = strdup (sgent->sg_name);
 	if (NULL == sg->sg_name) {
+		free (sg);
 		return NULL;
 	}
 	sg->sg_passwd = strdup (sgent->sg_passwd);
 	if (NULL == sg->sg_passwd) {
+		free (sg->sg_name);
+		free (sg);
 		return NULL;
 	}
 
 	for (i = 0; NULL != sgent->sg_adm[i]; i++);
 	sg->sg_adm = (char **) malloc ((i + 1) * sizeof (char *));
 	if (NULL == sg->sg_adm) {
+		free (sg->sg_passwd);
+		free (sg->sg_name);
+		free (sg);
 		return NULL;
 	}
 	for (i = 0; NULL != sgent->sg_adm[i]; i++) {
 		sg->sg_adm[i] = strdup (sgent->sg_adm[i]);
 		if (NULL == sg->sg_adm[i]) {
+			for (i = 0; NULL != sg->sg_adm[i]; i++) {
+				free (sg->sg_adm[i]);
+			}
+			free (sg->sg_adm);
+			free (sg->sg_passwd);
+			free (sg->sg_name);
+			free (sg);
 			return NULL;
 		}
 	}
@@ -77,11 +90,29 @@
 	for (i = 0; NULL != sgent->sg_mem[i]; i++);
 	sg->sg_mem = (char **) malloc ((i + 1) * sizeof (char *));
 	if (NULL == sg->sg_mem) {
+		for (i = 0; NULL != sg->sg_adm[i]; i++) {
+			free (sg->sg_adm[i]);
+		}
+		free (sg->sg_adm);
+		free (sg->sg_passwd);
+		free (sg->sg_name);
+		free (sg);
 		return NULL;
 	}
 	for (i = 0; NULL != sgent->sg_mem[i]; i++) {
 		sg->sg_mem[i] = strdup (sgent->sg_mem[i]);
 		if (NULL == sg->sg_mem[i]) {
+			for (i = 0; NULL != sg->sg_mem[i]; i++) {
+				free (sg->sg_mem[i]);
+			}
+			free (sg->sg_mem);
+			for (i = 0; NULL != sg->sg_adm[i]; i++) {
+				free (sg->sg_adm[i]);
+			}
+			free (sg->sg_adm);
+			free (sg->sg_passwd);
+			free (sg->sg_name);
+			free (sg);
 			return NULL;
 		}
 	}
@@ -192,7 +223,7 @@ int sgr_open (int mode)
 	return commonio_open (&gshadow_db, mode);
 }
 
-const struct sgrp *sgr_locate (const char *name)
+/*@observer@*/ /*@null@*/const struct sgrp *sgr_locate (const char *name)
 {
 	return commonio_locate (&gshadow_db, name);
 }
@@ -232,7 +263,7 @@ void __sgr_set_changed (void)
 	gshadow_db.changed = true;
 }
 
-/*@null@*/struct commonio_entry *__sgr_get_head (void)
+/*@dependent@*/ /*@null@*/struct commonio_entry *__sgr_get_head (void)
 {
 	return gshadow_db.head;
 }

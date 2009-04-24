@@ -1,5 +1,10 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgroupio.c: Free allocated structures on failure.
+	* lib/sgroupio.c: Added splint annotations.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/Makefile.am, lib/get_pid.c, lib/getulong.c: Added get_pid()
 	and getulong().
 
