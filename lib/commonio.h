@@ -112,7 +112,7 @@ struct commonio_db {
 	/*
 	 * Operations from above.
 	 */
-	struct commonio_ops *ops;
+	/*@observer@*/const struct commonio_ops *ops;
 
 	/*
 	 * Currently open file stream.
@@ -120,12 +120,12 @@ struct commonio_db {
 	/*@null@*/FILE *fp;
 
 #ifdef WITH_SELINUX
-	security_context_t scontext;
+	/*@null@*/security_context_t scontext;
 #endif
 	/*
 	 * Head, tail, current position in linked list.
 	 */
-	/*@null@*/struct commonio_entry *head, *tail, *cursor;
+	/*@owned@*/ /*@null@*/struct commonio_entry *head, *tail, *cursor;
 
 	/*
 	 * Various flags.

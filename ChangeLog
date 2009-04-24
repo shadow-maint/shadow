@@ -1,5 +1,9 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.h: Added splint annotations.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/sgroupio.c: Free allocated structures on failure.
 	* lib/sgroupio.c: Added splint annotations.
 
