@@ -158,6 +158,9 @@ extern /*@null@*/struct group *getgr_nam_gid (const char *grname);
 /* getlong.c */
 extern int getlong (const char *numstr, /*@out@*/long int *result);
 
+/* get_pid.c */
+extern int get_pid (const char *pidstr, pid_t *pid);
+
 /* getrange */
 extern int getrange (char *range,
                      unsigned long *min, bool *has_min,
@@ -166,14 +169,17 @@ extern int getrange (char *range,
 /* get_uid.c */
 extern int get_uid (const char *uidstr, uid_t *uid);
 
+/* getulong.c */
+extern int getulong (const char *numstr, /*@out@*/unsigned long int *result);
+
 /* fputsx.c */
 extern /*@null@*/char *fgetsx (/*@returned@*/ /*@out@*/char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
 
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
-extern struct commonio_db *__gr_get_db (void);
-extern /*@null@*/struct commonio_entry *__gr_get_head (void);
+extern /*@observer@*/const struct commonio_db *__gr_get_db (void);
+extern /*@dependent@*/ /*@null@*/struct commonio_entry *__gr_get_head (void);
 extern void __gr_set_changed (void);
 
 /* groupmem.c */
@@ -260,7 +266,7 @@ extern void pwd_init (void);
 /* pwio.c */
 extern void __pw_del_entry (const struct commonio_entry *ent);
 extern struct commonio_db *__pw_get_db (void);
-extern /*@null@*/struct commonio_entry *__pw_get_head (void);
+extern /*@dependent@*/ /*@null@*/struct commonio_entry *__pw_get_head (void);
 
 /* pwmem.c */
 extern /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent);
@@ -303,11 +309,11 @@ extern struct spwd *sgetspent (const char *string);
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent);
 extern void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent);
-extern /*@null@*/struct commonio_entry *__sgr_get_head (void);
+extern /*@dependent@*/ /*@null@*/struct commonio_entry *__sgr_get_head (void);
 extern void __sgr_set_changed (void);
 
 /* shadowio.c */
-extern /*@null@*/struct commonio_entry *__spw_get_head (void);
+extern /*@dependent@*/ /*@null@*/struct commonio_entry *__spw_get_head (void);
 extern void __spw_del_entry (const struct commonio_entry *ent);
 
 /* shadowmem.c */
@@ -368,7 +374,8 @@ extern int setutmpx (struct utmpx *utx);
 extern bool valid (const char *, const struct passwd *);
 
 /* xmalloc.c */
-extern /*@maynotreturn@*/ /*@only@*/char *xmalloc (size_t);
+extern /*@maynotreturn@*/ /*@out@*//*@only@*/char *xmalloc (size_t size)
+  /*@ensures MaxSet(result) == (size - 1); @*/;
 extern /*@maynotreturn@*/ /*@only@*/char *xstrdup (const char *);
 
 /* xgetpwnam.c */
