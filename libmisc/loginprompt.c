@@ -156,8 +156,9 @@ void login_prompt (const char *prompt, char *name, int namesize)
 			if (strchr (nvar, '=') != NULL) {
 				envp[envc] = nvar;
 			} else {
-				envp[envc] = xmalloc (strlen (nvar) + 32);
-				sprintf (envp[envc], "L%d=%s", count++, nvar);
+				size_t len = strlen (nvar) + 32;
+				envp[envc] = xmalloc (len);
+				snprintf (envp[envc], len, "L%d=%s", count++, nvar);
 			}
 		}
 		set_env (envc, envp);
