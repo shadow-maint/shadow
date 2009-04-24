@@ -57,13 +57,14 @@ void mailcheck (void)
 	mailbox = getenv ("MAILDIR");
 	if (NULL != mailbox) {
 		char *newmail;
+		size_t len = strlen (mailbox) + 5;
 
-		newmail = xmalloc (strlen (mailbox) + 5);
-		sprintf (newmail, "%s/new", mailbox);
+		newmail = xmalloc (len);
+		snprintf (newmail, len, "%s/new", mailbox);
 		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {
 				free (newmail);
-				puts (_("You have new mail."));
+				(void) puts (_("You have new mail."));
 				return;
 			}
 		}
@@ -77,11 +78,11 @@ void mailcheck (void)
 
 	if (   (stat (mailbox, &statbuf) == -1)
 	    || (statbuf.st_size == 0)) {
-		puts (_("No mail."));
+		(void) puts (_("No mail."));
 	} else if (statbuf.st_atime > statbuf.st_mtime) {
-		puts (_("You have mail."));
+		(void) puts (_("You have mail."));
 	} else {
-		puts (_("You have new mail."));
+		(void) puts (_("You have new mail."));
 	}
 }
 
