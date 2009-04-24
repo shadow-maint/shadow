@@ -44,17 +44,17 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif
-static const char *src_orig;
-static const char *dst_orig;
+static /*@null@*/const char *src_orig;
+static /*@null@*/const char *dst_orig;
 
 struct link_name {
 	dev_t ln_dev;
 	ino_t ln_ino;
-	int ln_count;
+	nlink_t ln_count;
 	char *ln_name;
-	struct link_name *ln_next;
+	/*@dependent@*/struct link_name *ln_next;
 };
-static struct link_name *links;
+static /*@exposed@*/struct link_name *links;
 
 static int copy_entry (const char *src, const char *dst,
                        long int uid, long int gid);
@@ -120,7 +120,7 @@ int selinux_file_context (const char *dst_name)
 /*
  * remove_link - delete a link from the linked list
  */
-static void remove_link (struct link_name *ln)
+static void remove_link (/*@only@*/struct link_name *ln)
 {
 	struct link_name *lp;
 
@@ -137,6 +137,8 @@ static void remove_link (struct link_name *ln)
 	}
 
 	if (NULL == lp) {
+		free (ln->ln_name);
+		free (ln);
 		return;
 	}
 
@@ -149,7 +151,7 @@ static void remove_link (struct link_name *ln)
  * check_link - see if a file is really a link
  */
 
-static struct link_name *check_link (const char *name, const struct stat *sb)
+static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, const struct stat *sb)
 {
 	struct link_name *lp;
 	size_t src_len;
@@ -157,7 +159,11 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	size_t name_len;
 	size_t len;
 
-	for (lp = links; lp; lp = lp->ln_next) {
+	/* copy_tree () must be the entry point */
+	assert (NULL != src_orig);
+	assert (NULL != dst_orig);
+
+	for (lp = links; NULL != lp; lp = lp->ln_next) {
 		if ((lp->ln_dev == sb->st_dev) && (lp->ln_ino == sb->st_ino)) {
 			return lp;
 		}
@@ -192,8 +198,8 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 int copy_tree (const char *src_root, const char *dst_root,
                long int uid, long int gid)
 {
-	char src_name[1024];
-	char dst_name[1024];
+	char src_name[PATH_MAX];
+	char dst_name[PATH_MAX];
 	int err = 0;
 	bool set_orig = false;
 	struct DIRECT *ent;
@@ -267,6 +273,10 @@ int copy_tree (const char *src_root, const char *dst_root,
 	/* Reset SELinux to create files with default contexts */
 	setfscreatecon (NULL);
 #endif
+
+	/* FIXME: with the call to remove_link, we could also check that
+	 *        no links remain in links.
+	 * assert (NULL == links); */
 
 	return err;
 }
@@ -418,10 +428,14 @@ static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid)
 {
-	char oldlink[1024];
-	char dummy[1024];
+	char oldlink[PATH_MAX];
+	char dummy[PATH_MAX];
 	int len;
 	int err = 0;
+
+	/* copy_tree () must be the entry point */
+	assert (NULL != src_orig);
+	assert (NULL != dst_orig);
 
 	/*
 	 * Get the name of the file which the link points
@@ -480,10 +494,13 @@ static int copy_hardlink (const char *src, const char *dst,
 	if (link (lp->ln_name, dst) != 0) {
 		return -1;
 	}
+
+	/* FIXME: why is it unlinked? This is a copy, not a move*/
 	if (unlink (src) != 0) {
 		return -1;
 	}
 
+	/* FIXME: idem, although it may never be used again */
 	/* If the file could be unlinked, decrement the links counter,
 	 * and delete the file if it was the last reference */
 	lp->ln_count--;
@@ -553,12 +570,12 @@ static int copy_file (const char *src, const char *dst,
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
 #endif
-	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0);
+	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, statp->st_mode & 07777);
 	if (   (ofd < 0)
-	    || (chown (dst,
-	               (uid == -1) ? statp->st_uid : (uid_t) uid,
-	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
-	    || (chmod (dst, statp->st_mode & 07777) != 0)) {
+	    || (fchown (ofd,
+	                (uid == -1) ? statp->st_uid : (uid_t) uid,
+	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
+	    || (fchmod (ofd, statp->st_mode & 07777) != 0)) {
 		(void) close (ifd);
 		return -1;
 	}
@@ -600,7 +617,7 @@ static int copy_file (const char *src, const char *dst,
 
 int remove_tree (const char *root)
 {
-	char new_name[1024];
+	char new_name[PATH_MAX];
 	int err = 0;
 	struct DIRECT *ent;
 	struct stat sb;

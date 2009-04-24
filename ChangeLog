@@ -1,5 +1,19 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: Added splint annotations.
+	* libmisc/copydir.c: Added assert to help splint.
+	* libmisc/copydir.c: Free allocated structures in cas of failure.
+	* libmisc/copydir.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/copydir.c: Use buffers of size PATH_MAX instead of 1024
+	for filenames.
+	* libmisc/copydir.c: Use fchmod and fchown to change the mode of
+	the opened file.
+	* libmisc/copydir.c: Indicate the mode to open(), even if we chmod
+	later.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h: Added prototypes of getulong() and get_pid().
 	* lib/prototypes.h: Added splint annotations.
 
