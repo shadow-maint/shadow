@@ -1,5 +1,12 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/setupenv.c: Prefer snprintf to sprintf, even if a small
+	context indicates no issues.
+	* libmisc/setupenv.c: Avoid implicit conversion of pointers to
+	booleans.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/loginprompt.c: Prefer snprintf to sprintf, even if a
 	small context indicates no issues.
 

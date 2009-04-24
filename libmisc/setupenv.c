@@ -38,6 +38,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -52,9 +53,13 @@ static void
 addenv_path (const char *varname, const char *dirname, const char *filename)
 {
 	char *buf;
+	size_t len = strlen (dirname) + strlen (filename) + 2;
+	int wlen;
 
-	buf = xmalloc (strlen (dirname) + strlen (filename) + 2);
-	sprintf (buf, "%s/%s", dirname, filename);
+	buf = xmalloc (len);
+	wlen = snprintf (buf, len, "%s/%s", dirname, filename);
+	assert (wlen == (int) len - 1);
+
 	addenv (varname, buf);
 	free (buf);
 }
@@ -66,12 +71,14 @@ static void read_env_file (const char *filename)
 	char *cp, *name, *val;
 
 	fp = fopen (filename, "r");
-	if (!fp)
+	if (NULL == fp) {
 		return;
+	}
 	while (fgets (buf, sizeof buf, fp) == buf) {
 		cp = strrchr (buf, '\n');
-		if (!cp)
+		if (NULL == cp) {
 			break;
+		}
 		*cp = '\0';
 
 		cp = buf;

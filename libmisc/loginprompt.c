@@ -34,6 +34,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
@@ -157,8 +158,10 @@ void login_prompt (const char *prompt, char *name, int namesize)
 				envp[envc] = nvar;
 			} else {
 				size_t len = strlen (nvar) + 32;
+				int wlen;
 				envp[envc] = xmalloc (len);
-				snprintf (envp[envc], len, "L%d=%s", count++, nvar);
+				wlen = snprintf (envp[envc], len, "L%d=%s", count++, nvar);
+				assert (wlen == (int) len -1);
 			}
 		}
 		set_env (envc, envp);

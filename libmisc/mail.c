@@ -58,9 +58,12 @@ void mailcheck (void)
 	if (NULL != mailbox) {
 		char *newmail;
 		size_t len = strlen (mailbox) + 5;
+		int wlen;
 
 		newmail = xmalloc (len);
-		snprintf (newmail, len, "%s/new", mailbox);
+		wlen = snprintf (newmail, len, "%s/new", mailbox);
+		assert (wlen == (int) len - 1);
+
 		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {
 				free (newmail);
