@@ -19,7 +19,9 @@ libshadow_la_SOURCES = \
 	getdef.h \
 	get_gid.c \
 	getlong.c \
+	get_pid.c \
 	get_uid.c \
+	getulong.c \
 	groupio.c \
 	groupmem.c \
 	groupio.h \
