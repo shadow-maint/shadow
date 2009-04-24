@@ -52,7 +52,7 @@
  */
 static bool palindrome (unused const char *old, const char *new)
 {
-	int i, j;
+	size_t i, j;
 
 	i = strlen (new);
 
@@ -223,7 +223,7 @@ static const char *password_check (const char *old, const char *new,
 static const char *obscure_msg (const char *old, const char *new,
 				    const struct passwd *pwdp)
 {
-	int maxlen, oldlen, newlen;
+	size_t maxlen, oldlen, newlen;
 	char *new1, *old1;
 	const char *msg;
 	char *result;
@@ -231,7 +231,7 @@ static const char *obscure_msg (const char *old, const char *new,
 	oldlen = strlen (old);
 	newlen = strlen (new);
 
-	if (newlen < getdef_num ("PASS_MIN_LEN", 0)) {
+	if (newlen < (size_t) getdef_num ("PASS_MIN_LEN", 0)) {
 		return _("too short");
 	}
 
@@ -271,7 +271,7 @@ static const char *obscure_msg (const char *old, const char *new,
 		}
 
 	}
-	maxlen = getdef_num ("PASS_MAX_LEN", 8);
+	maxlen = (size_t) getdef_num ("PASS_MAX_LEN", 8);
 	if (   (oldlen <= maxlen)
 	    && (newlen <= maxlen)) {
 		return NULL;
