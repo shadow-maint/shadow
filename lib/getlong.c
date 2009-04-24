@@ -49,7 +49,7 @@ int getlong (const char *numstr, /*@out@*/long int *result)
 
 	errno = 0;
 	val = strtol (numstr, &endptr, 0);
-	if (('\0' == numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
+	if (('\0' == *numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
 		return 0;
 	}
 
