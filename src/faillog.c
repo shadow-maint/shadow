@@ -105,7 +105,8 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 	offset = pw->pw_uid * sizeof (fl);
 	if (offset <= (statbuf.st_size - sizeof (fl))) {
 		/* fseeko errors are not really relevant for us. */
-		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		int err = fseeko (fail, offset, SEEK_SET);
+		assert (0 == err);
 		/* faillog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
@@ -204,7 +205,8 @@ static bool reset_one (uid_t uid)
 	offset = uid * sizeof (fl);
 	if (offset <= (statbuf.st_size - sizeof (fl))) {
 		/* fseeko errors are not really relevant for us. */
-		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		int err = fseeko (fail, offset, SEEK_SET);
+		assert (0 == err);
 		/* faillog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
@@ -290,7 +292,8 @@ static bool setmax_one (uid_t uid, int max)
 	offset = (off_t) uid * sizeof (fl);
 	if (offset <= (statbuf.st_size - sizeof (fl))) {
 		/* fseeko errors are not really relevant for us. */
-		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		int err = fseeko (fail, offset, SEEK_SET);
+		assert (0 == err);
 		/* faillog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
@@ -380,7 +383,8 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	offset = (off_t) uid * sizeof (fl);
 	if (offset <= (statbuf.st_size - sizeof (fl))) {
 		/* fseeko errors are not really relevant for us. */
-		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		int err = fseeko (fail, offset, SEEK_SET);
+		assert (0 == err);
 		/* faillog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.

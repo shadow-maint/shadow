@@ -1,5 +1,9 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: Remove function calls from within assert().
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/mail.c: Ignore the return value of puts().
 	* libmisc/mail.c: Prefer snprintf to sprintf, even if a small
 	context indicates no issues.
