@@ -1,5 +1,9 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/lastlog.c: Remove function calls from within assert().
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/obscure.c: Change some int to size_t.
 
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>

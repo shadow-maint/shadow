@@ -108,7 +108,8 @@ static void print_one (/*@null@*/const struct passwd *pw)
 
 	if (offset <= (statbuf.st_size - sizeof (ll))) {
 		/* fseeko errors are not really relevant for us. */
-		assert ( fseeko (lastlogfile, offset, SEEK_SET) == 0 );
+		int err = fseeko (lastlogfile, offset, SEEK_SET);
+		assert (0 == err);
 		/* lastlog is a sparse file. Even if no entries were
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
