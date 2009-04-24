@@ -44,7 +44,7 @@
 #include "groupio.h"
 
 static /*@null@*/struct commonio_entry *merge_group_entries (
-	/*@null@*/struct commonio_entry *gr1,
+	/*@null@*/ /*@returned@*/struct commonio_entry *gr1,
 	/*@null@*/struct commonio_entry *gr2);
 static int split_groups (unsigned int max_members);
 static int group_open_hook (void);
@@ -105,7 +105,7 @@ static struct commonio_ops group_ops = {
 	group_close_hook
 };
 
-static struct commonio_db group_db = {
+static /*@owned@*/struct commonio_db group_db = {
 	GROUP_FILE,		/* filename */
 	&group_ops,		/* ops */
 	NULL,			/* fp */
@@ -193,12 +193,12 @@ void __gr_set_changed (void)
 	group_db.changed = true;
 }
 
-/*@null@*/struct commonio_entry *__gr_get_head (void)
+/*@dependent@*/ /*@null@*/struct commonio_entry *__gr_get_head (void)
 {
 	return group_db.head;
 }
 
-struct commonio_db *__gr_get_db (void)
+/*@observer@*/const struct commonio_db *__gr_get_db (void)
 {
 	return &group_db;
 }
@@ -265,9 +265,12 @@ static int group_open_hook (void)
 				if (NULL != gr2->next) {
 					gr2->next->prev = gr2->prev;
 				}
+				/* gr2 does not start with head */
+				assert (NULL != gr2->prev);
 				gr2->prev->next = gr2->next;
 			}
 		}
+		assert (NULL != gr1);
 	}
 
 	return 1;
@@ -286,7 +289,7 @@ static int group_open_hook (void)
  * set).
  */
 static /*@null@*/struct commonio_entry *merge_group_entries (
-	/*@null@*/struct commonio_entry *gr1,
+	/*@null@*/ /*@returned@*/struct commonio_entry *gr1,
 	/*@null@*/struct commonio_entry *gr2)
 {
 	struct group *gptr1;

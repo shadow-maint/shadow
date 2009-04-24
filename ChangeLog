@@ -1,5 +1,10 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Updated splint annotations.
+	* lib/groupio.c: Added assert to help splint.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Check assumptions on snprintf().
 	* src/useradd.c: Replace peror by an strerror and avoid an
 	intermediate buffer.
