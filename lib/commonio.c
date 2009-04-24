@@ -48,6 +48,7 @@
 #include <selinux/selinux.h>
 static security_context_t old_context = NULL;
 #endif
+#include "prototypes.h"
 #include "commonio.h"
 
 /* local function prototypes */
@@ -152,9 +153,7 @@ static int do_lock_file (const char *file, const char *lock)
 		return 0;
 	}
 	buf[len] = '\0';
-	/* FIXME: use a get_pid */
-	pid = strtol (buf, (char **) 0, 10);
-	if (0 == pid) {
+	if (get_pid (buf, &pid) == 0) {
 		unlink (file);
 		errno = EINVAL;
 		return 0;
@@ -638,7 +637,7 @@ int
 commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 {
 	struct commonio_entry **entries, *ptr;
-	int n = 0, i;
+	size_t n = 0, i;
 
 	for (ptr = db->head; NULL != ptr; ptr = ptr->next) {
 		n++;

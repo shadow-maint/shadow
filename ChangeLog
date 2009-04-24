@@ -1,5 +1,10 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Use get_pid() instead of strtol.
+	* lib/commonio.c: Replace an int by a size_t.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.h: Added splint annotations.
 
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
