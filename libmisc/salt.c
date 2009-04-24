@@ -69,8 +69,8 @@ static void seedRNG (void)
 	static int seeded = 0;
 
 	if (0 == seeded) {
-		gettimeofday(&tv, NULL);
-		srandom (tv.tv_sec + tv.tv_usec);
+		(void) gettimeofday (&tv, NULL);
+		srandom (tv.tv_sec ^ tv.tv_usec ^ getpid ());
 		seeded = 1;
 	}
 }
