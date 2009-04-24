@@ -65,22 +65,22 @@
  *	multiplier - value*multiplier is the actual limit
  */
 static int
-setrlimit_value (unsigned int rlimit, const char *value,
+setrlimit_value (unsigned int resource, const char *value,
 		 unsigned int multiplier)
 {
 	struct rlimit rlim;
 	long limit;
-	char **endptr = (char **) &value;
-	const char *value_orig = value;
 
-	limit = strtol (value, endptr, 10);
-	if ((0 == limit) && (value_orig == *endptr)) {	/* no chars read */
+	if (getlong (value, &limit) == 0) {
 		return 0;
 	}
 	limit *= multiplier;
-	rlim.rlim_cur = limit;
-	rlim.rlim_max = limit;
-	if (setrlimit (rlimit, &rlim) != 0) {
+	if (limit != (rlim_t) limit) {
+		return 0;
+	}
+	rlim.rlim_cur = (rlim_t) limit;
+	rlim.rlim_max = (rlim_t) limit;
+	if (setrlimit (resource, &rlim) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
 	return 0;
@@ -105,14 +105,14 @@ static int set_prio (const char *value)
 
 static int set_umask (const char *value)
 {
-	mode_t mask;
-	char **endptr = (char **) &value;
+	unsigned long int mask;
 
-	mask = strtol (value, endptr, 8) & 0777;
-	if ((0 == mask) && (value == *endptr)) {
+	if (   (getulong (value, &mask) == 0)
+	    || (mask != (mode_t) mask)) {
 		return 0;
 	}
-	(void) umask (mask);
+
+	(void) umask ((mode_t) mask);
 	return 0;
 }
 
@@ -125,12 +125,9 @@ static int check_logins (const char *name, const char *maxlogins)
 #else
 	struct utmp *ut;
 #endif
-	unsigned int limit, count;
-	char **endptr = (char **) &maxlogins;
-	const char *ml_orig = maxlogins;
+	unsigned long limit, count;
 
-	limit = strtol (maxlogins, endptr, 10);
-	if ((0 == limit) && (ml_orig == *endptr)) {	/* no chars read */
+	if (getulong (maxlogins, &limit) == 0) {
 		return 0;
 	}
 
@@ -396,7 +393,7 @@ static int setup_user_limits (const char *uname)
 static void setup_usergroups (const struct passwd *info)
 {
 	const struct group *grp;
-	mode_t oldmask;
+	mode_t tmpmask;
 
 /*
  *	if not root, and UID == GID, and username is the same as primary
@@ -408,8 +405,9 @@ static void setup_usergroups (const struct passwd *info)
 		grp = getgrgid (info->pw_gid);
 		if (   (NULL != grp)
 		    && (strcmp (info->pw_name, grp->gr_name) == 0)) {
-			oldmask = umask (0777);
-			(void) umask ((oldmask & ~070) | ((oldmask >> 3) & 070));
+			tmpmask = umask (0777);
+			tmpmask = (tmpmask & ~070) | ((tmpmask >> 3) & 070);
+			(void) umask (tmpmask);
 		}
 	}
 }
@@ -421,8 +419,6 @@ static void setup_usergroups (const struct passwd *info)
 void setup_limits (const struct passwd *info)
 {
 	char *cp;
-	int i;
-	long l;
 
 	if (getdef_bool ("USERGROUPS_ENAB")) {
 		setup_usergroups (info);
@@ -451,22 +447,28 @@ void setup_limits (const struct passwd *info)
 			}
 
 			if (strncmp (cp, "pri=", 4) == 0) {
-				i = atoi (cp + 4);
-				if ((i >= -20) && (i <= 20)) {
+				long int inc;
+				if (   (getlong (cp + 4, &inc) == 1)
+				    && (inc >= -20) && (inc <= 20)) {
 					errno = 0;
-					if (   (nice (i) == -1)
-					    && (0 != errno)) {
-						SYSLOG ((LOG_WARN,
-						         "Can't set the nice value for user %s",
-						         info->pw_name));
+					if (   (nice ((int) inc) != -1)
+					    || (0 != errno)) {
+						continue;
 					}
 				}
+
+				/* Failed to parse or failed to nice() */
+				SYSLOG ((LOG_WARN,
+				         "Can't set the nice value for user %s",
+				         info->pw_name));
 
 				continue;
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
-				l = strtol (cp + 7, (char **) 0, 10);
-				if (set_filesize_limit (l) != 0) {
+				long int blocks;
+				if (   (getlong (cp + 7, &blocks) == 0)
+				    || (blocks != (int) blocks)
+				    || (set_filesize_limit ((int) blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
 					         info->pw_name));
@@ -474,8 +476,15 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "umask=", 6) == 0) {
-				i = strtol (cp + 6, (char **) 0, 8) & 0777;
-				(void) umask (i);
+				unsigned long int mask;
+				if (   (getulong (cp + 6, &mask) == 0)
+				    || (mask != (mode_t) mask)) {
+					SYSLOG ((LOG_WARN,
+					         "Can't set umask value for user %s",
+					         info->pw_name));
+				} else {
+					(void) umask ((mode_t) mask);
+				}
 
 				continue;
 			}

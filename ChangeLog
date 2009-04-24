@@ -1,5 +1,13 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c: Parse the limits, umask, nice, maxlogin, file
+	limit with getlog() / getulong(). This also means, in case of
+	non-PAM enabled systems, that the umask specified on the GECOS
+	fields should start with a 0 if specified in octal. (it used to be
+	force to octal). Do the appropriate cast and range checking.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: In case gettimeofday() fails, get some entropy
 	from the PID.
 
