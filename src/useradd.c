@@ -48,6 +48,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
@@ -419,10 +420,11 @@ static int set_defaults (void)
 {
 	FILE *ifp;
 	FILE *ofp;
-	char buf[1024];
+	char buf[PATH_MAX];
 	static char new_file[] = NEW_USER_FILE;
 	char *cp;
 	int ofd;
+	int wlen;
 	bool out_group = false;
 	bool out_home = false;
 	bool out_inactive = false;
@@ -533,10 +535,13 @@ static int set_defaults (void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	snprintf (buf, sizeof buf, "%s-", def_file);
+	wlen = snprintf (buf, sizeof buf, "%s-", def_file);
+	assert (wlen < sizeof buf);
 	if ((rename (def_file, buf) != 0) && (ENOENT != errno)) {
-		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, def_file);
-		perror (buf);
+		int err = errno;
+		fprintf (stderr,
+		         _("%s: rename: %s: %s"),
+		         Prog, def_file, strerror (err));
 		unlink (new_file);
 		return -1;
 	}
@@ -545,8 +550,10 @@ static int set_defaults (void)
 	 * Rename the new default file to its correct name.
 	 */
 	if (rename (new_file, def_file) != 0) {
-		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, new_file);
-		perror (buf);
+		int err = errno;
+		fprintf (stderr,
+		         _("%s: rename: %s: %s"),
+		         Prog, new_file, strerror (err));
 		return -1;
 	}
 #ifdef WITH_AUDIT
@@ -1268,10 +1275,13 @@ static void process_flags (int argc, char **argv)
 		}
 		if (!dflg) {
 			char *uh;
+			size_t len = strlen (def_home) + strlen (user_name) + 2;
+			int wlen;
 
-			uh = xmalloc (strlen (def_home) +
-			              strlen (user_name) + 2);
-			sprintf (uh, "%s/%s", def_home, user_name);
+			uh = xmalloc (len);
+			wlen = snprintf (uh, len, "%s/%s", def_home, user_name);
+			assert (wlen == (int) len -1);
+
 			user_home = uh;
 		}
 	}
@@ -1841,7 +1851,7 @@ int main (int argc, char **argv)
 	OPENLOG ("useradd");
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups = xmalloc ((1 + sys_ngroups) * sizeof (char *));
 	/*
 	 * Initialize the list to be empty
 	 */

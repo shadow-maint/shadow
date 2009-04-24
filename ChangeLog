@@ -1,5 +1,14 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Check assumptions on snprintf().
+	* src/useradd.c: Replace peror by an strerror and avoid an
+	intermediate buffer.
+	* src/useradd.c: Save errno between the failure and the report by
+	perror/strerror.
+	* src/useradd.c: Prefer xmalloc to malloc.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: Remove function calls from within assert().
 
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
