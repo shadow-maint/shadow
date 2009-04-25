@@ -1,6 +1,7 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.h, lib/commonio.c: Added splint annotations.
+	* lib/commonio.c: Do not assumes eptr is always notnull.
 
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -64,11 +64,13 @@ static void free_linked_list (struct commonio_db *);
 static void add_one_entry (struct commonio_db *, /*@owned@*/struct commonio_entry *);
 static bool name_is_nis (const char *name);
 static int write_all (const struct commonio_db *);
-static struct commonio_entry *find_entry_by_name (struct commonio_db *,
-						  const char *);
-static struct commonio_entry *next_entry_by_name (struct commonio_db *,
-                                                  struct commonio_entry *pos,
-                                                  const char *);
+static /*@dependent@*/ /*@null@*/struct commonio_entry *find_entry_by_name (
+	struct commonio_db *,
+	const char *);
+static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
+	struct commonio_db *,
+	struct commonio_entry *pos,
+	const char *);
 
 static int lock_count = 0;
 static bool nscd_need_reload = false;
@@ -703,6 +705,9 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
 		for (spw_ptr = shadow->head;
 		     NULL != spw_ptr;
 		     spw_ptr = spw_ptr->next) {
+			if (NULL == spw_ptr->eptr) {
+				continue;
+			}
 			if (strcmp (name, shadow->ops->getname (spw_ptr->eptr))
 			    == 0) {
 				break;
@@ -738,6 +743,7 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
  * It returns 0 if all the entries could be written correctly.
  */
 static int write_all (const struct commonio_db *db)
+	/*@requires notnull db->fp@*/
 {
 	const struct commonio_entry *p;
 	void *eptr;
@@ -745,6 +751,7 @@ static int write_all (const struct commonio_db *db)
 	for (p = db->head; NULL != p; p = p->next) {
 		if (p->changed) {
 			eptr = p->eptr;
+			assert (NULL != eptr);
 			if (db->ops->put (eptr, db->fp) != 0) {
 				return -1;
 			}
@@ -762,6 +769,7 @@ static int write_all (const struct commonio_db *db)
 
 
 int commonio_close (struct commonio_db *db)
+	/*@requires notnull db->fp@*/
 {
 	char buf[1024];
 	int errors = 0;
@@ -888,9 +896,10 @@ int commonio_close (struct commonio_db *db)
 	return errors == 0;
 }
 
-static struct commonio_entry *next_entry_by_name (struct commonio_db *db,
-                                                  struct commonio_entry *pos,
-                                                  const char *name)
+static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
+	struct commonio_db *db,
+	/*@null@*/struct commonio_entry *pos,
+	const char *name)
 {
 	struct commonio_entry *p;
 	void *ep;
@@ -909,8 +918,9 @@ static struct commonio_entry *next_entry_by_name (struct commonio_db *db,
 	return p;
 }
 
-static struct commonio_entry *find_entry_by_name (struct commonio_db *db,
-						  const char *name)
+static /*@dependent@*/ /*@null@*/struct commonio_entry *find_entry_by_name (
+	struct commonio_db *db,
+	const char *name)
 {
 	return next_entry_by_name(db, db->head, name);
 }
