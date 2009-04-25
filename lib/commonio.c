@@ -61,7 +61,7 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	const struct stat *sb);
 static int create_backup (const char *, FILE *);
 static void free_linked_list (struct commonio_db *);
-static void add_one_entry (struct commonio_db *, struct commonio_entry *);
+static void add_one_entry (struct commonio_db *, /*@owned@*/struct commonio_entry *);
 static bool name_is_nis (const char *name);
 static int write_all (const struct commonio_db *);
 static struct commonio_entry *find_entry_by_name (struct commonio_db *,
@@ -426,7 +426,7 @@ int commonio_unlock (struct commonio_db *db)
 }
 
 
-static void add_one_entry (struct commonio_db *db, struct commonio_entry *p)
+static void add_one_entry (struct commonio_db *db, /*@owned@*/struct commonio_entry *p)
 {
 	p->next = NULL;
 	p->prev = db->tail;

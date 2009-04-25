@@ -46,7 +46,8 @@
 struct commonio_entry {
 	/*@null@*/char *line;
 	/*@null@*/void *eptr;		/* struct passwd, struct spwd, ... */
-	/*@null@*/struct commonio_entry *prev, *next;
+	/*@dependent@*/ /*@null@*/struct commonio_entry *prev;
+	/*@owned@*/ /*@null@*/struct commonio_entry *next;
 	bool changed:1;
 };
 
