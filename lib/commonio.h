@@ -126,7 +126,8 @@ struct commonio_db {
 	/*
 	 * Head, tail, current position in linked list.
 	 */
-	/*@owned@*/ /*@null@*/struct commonio_entry *head, *tail, *cursor;
+	/*@owned@*/ /*@null@*/struct commonio_entry *head, *tail;
+	/*@dependent@*/ /*@null@*/struct commonio_entry *cursor;
 
 	/*
 	 * Various flags.

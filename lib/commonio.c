@@ -69,7 +69,7 @@ static /*@dependent@*/ /*@null@*/struct commonio_entry *find_entry_by_name (
 	const char *);
 static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
 	struct commonio_db *,
-	struct commonio_entry *pos,
+	/*@null@*/struct commonio_entry *pos,
 	const char *);
 
 static int lock_count = 0;
@@ -514,7 +514,8 @@ int commonio_open (struct commonio_db *db, int mode)
 		return 0;
 	}
 
-	db->head = db->tail = db->cursor = NULL;
+	db->head = db->tail = NULL;
+	db->cursor = NULL;
 	db->changed = false;
 
 	db->fp = fopen (db->filename, db->readonly ? "r" : "r+");
