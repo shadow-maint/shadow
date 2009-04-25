@@ -1,5 +1,9 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, po/pt.po: Updated Portuguese translation.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c: Added splint annotations.
 	* libmisc/copydir.c: Added assert to help splint.
 	* libmisc/copydir.c: Free allocated structures in cas of failure.
