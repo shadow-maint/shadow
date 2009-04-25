@@ -117,7 +117,7 @@ struct commonio_db {
 	/*
 	 * Currently open file stream.
 	 */
-	/*@null@*/FILE *fp;
+	/*@dependent@*/ /*@null@*/FILE *fp;
 
 #ifdef WITH_SELINUX
 	/*@null@*/security_context_t scontext;

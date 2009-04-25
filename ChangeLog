@@ -1,5 +1,9 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.h, lib/commonio.c: Added splint annotations.
+
+2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, po/pt.po: Updated Portuguese translation.
 
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>

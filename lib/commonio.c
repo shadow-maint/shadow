@@ -46,7 +46,7 @@
 #include "nscd.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-static security_context_t old_context = NULL;
+static /*@null@*/security_context_t old_context = NULL;
 #endif
 #include "prototypes.h"
 #include "commonio.h"
@@ -55,7 +55,10 @@ static security_context_t old_context = NULL;
 static int lrename (const char *, const char *);
 static int check_link_count (const char *file);
 static int do_lock_file (const char *file, const char *lock);
-static FILE *fopen_set_perms (const char *, const char *, const struct stat *);
+static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
+	const char *name,
+	const char *mode,
+	const struct stat *sb);
 static int create_backup (const char *, FILE *);
 static void free_linked_list (struct commonio_db *);
 static void add_one_entry (struct commonio_db *, struct commonio_entry *);
@@ -178,8 +181,10 @@ static int do_lock_file (const char *file, const char *lock)
 }
 
 
-static FILE *fopen_set_perms (const char *name, const char *mode,
-                              const struct stat *sb)
+static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
+	const char *name,
+	const char *mode,
+	const struct stat *sb)
 {
 	FILE *fp;
 	mode_t mask;
@@ -488,9 +493,9 @@ int commonio_open (struct commonio_db *db, int mode)
 	char *cp;
 	char *line;
 	struct commonio_entry *p;
-	void *eptr;
+	void *eptr = NULL;
 	int flags = mode;
-	int buflen;
+	size_t buflen;
 	int saved_errno;
 
 	mode &= ~O_CREAT;
@@ -542,10 +547,10 @@ int commonio_open (struct commonio_db *db, int mode)
 		goto cleanup_ENOMEM;
 	}
 
-	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
+	while (db->ops->fgets (buf, (int) buflen, db->fp) == buf) {
 		while (   ((cp = strrchr (buf, '\n')) == NULL)
 		       && (feof (db->fp) == 0)) {
-			int len;
+			size_t len;
 
 			buflen += BUFLEN;
 			cp = (char *) realloc (buf, buflen);
@@ -554,7 +559,9 @@ int commonio_open (struct commonio_db *db, int mode)
 			}
 			buf = cp;
 			len = strlen (buf);
-			if (db->ops->fgets (buf + len, buflen - len, db->fp) == NULL) {
+			if (db->ops->fgets (buf + len,
+			                    (int) (buflen - len),
+			                    db->fp) == NULL) {
 				goto cleanup_buf;
 			}
 		}
