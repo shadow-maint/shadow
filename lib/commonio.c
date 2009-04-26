@@ -46,7 +46,6 @@
 #include "nscd.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-static /*@null@*/security_context_t old_context = NULL;
 #endif
 #include "prototypes.h"
 #include "commonio.h"
@@ -63,8 +62,7 @@ static int create_backup (const char *, FILE *);
 static void free_linked_list (struct commonio_db *);
 static void add_one_entry (
 	struct commonio_db *db,
-	/*@owned@*/struct commonio_entry *p)
-	/*@requires isnull p->next, p->prev@*/;
+	/*@owned@*/struct commonio_entry *p);
 static bool name_is_nis (const char *name);
 static int write_all (const struct commonio_db *);
 static /*@dependent@*/ /*@null@*/struct commonio_entry *find_entry_by_name (
@@ -431,12 +429,19 @@ int commonio_unlock (struct commonio_db *db)
 }
 
 
+/*
+ * Add an entry at the end.
+ *
+ * defines p->next, p->prev
+ * (unfortunately, owned special are not supported)
+ */
 static void add_one_entry (struct commonio_db *db,
                            /*@owned@*/struct commonio_entry *p)
-	/*@requires isnull p->next, p->prev@*/
 {
+	/*@-mustfreeonly@*/
 	p->next = NULL;
 	p->prev = db->tail;
+	/*@=mustfreeonly@*/
 	if (NULL == db->head) {
 		db->head = p;
 	}
@@ -463,23 +468,26 @@ static bool name_is_nis (const char *name)
 
 #if KEEP_NIS_AT_END
 static void add_one_entry_nis (struct commonio_db *db,
-                               /*@owned@*/struct commonio_entry *newp)
-	/*@requires isnull newp->next, newp->prev@*/;
+                               /*@owned@*/struct commonio_entry *newp);
 
 /*
  * Insert an entry between the regular entries, and the NIS entries.
+ *
+ * defines newp->next, newp->prev
+ * (unfortunately, owned special are not supported)
  */
 static void add_one_entry_nis (struct commonio_db *db,
                                /*@owned@*/struct commonio_entry *newp)
-	/*@requires isnull newp->next, newp->prev@*/
 {
 	struct commonio_entry *p;
 
 	for (p = db->head; NULL != p; p = p->next) {
 		if (name_is_nis (p->eptr ? db->ops->getname (p->eptr)
 		                         : p->line)) {
+			/*@-mustfreeonly@*/
 			newp->next = p;
 			newp->prev = p->prev;
+			/*@=mustfreeonly@*/
 			if (NULL != p->prev) {
 				p->prev->next = newp;
 			} else {
@@ -784,6 +792,10 @@ int commonio_close (struct commonio_db *db)
 	int errors = 0;
 	struct stat sb;
 
+#ifdef WITH_SELINUX
+	/*@null@*/security_context_t old_context = NULL;
+#endif
+
 	if (!db->isopen) {
 		errno = EINVAL;
 		return 0;
@@ -890,10 +902,10 @@ int commonio_close (struct commonio_db *db)
 
 #ifdef WITH_SELINUX
 	if (db->scontext != NULL) {
+		if (NULL != old_context) {
 		if (setfscreatecon (old_context) < 0) {
 			errors++;
 		}
-		if (NULL != old_context) {
 			freecon (old_context);
 			old_context = NULL;
 		}

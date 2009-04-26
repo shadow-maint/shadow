@@ -1,5 +1,11 @@
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Added splint annotations.
+	* lib/commonio.c: old_context should be local to commonio_close(),
+	not global.
+
+2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Do not freecon strings duplicated with strdup.
 	Also avoid allocation of memory.
 	* src/passwd.c: Use SYSLOG instead of syslog.
