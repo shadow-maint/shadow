@@ -1,3 +1,7 @@
+2009-04-25  Miroslav Kure  <kurem@upcase.inf.upol.cz>
+
+	* po/cs.po: Updated to 352T7f8u
+
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.h, lib/commonio.c: Added splint annotations.

@@ -1,13 +1,13 @@
 # Czech translation of shadow-utils.
 # Jiří Pavlovský <pavlovsk@ff.cuni.cz>, 1999-2000
-# Miroslav Kuře <kurem@debian.cz>, 2004-2008
+# Miroslav Kuře <kurem@debian.cz>, 2004-2009
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-04-15 23:29+0200\n"
-"PO-Revision-Date: 2008-05-25 12:30+0200\n"
+"PO-Revision-Date: 2009-04-26 12:18+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgid "  Choose a new password."
 msgstr "  Zvolte nové heslo."
 
 msgid "You must change your password."
-msgstr ""
+msgstr "Musíte si změnit heslo."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
@@ -83,17 +83,15 @@ msgstr "Platnost vašeho hesla vyprší dnes."
 
 #, c-format
 msgid "Cannot open audit interface - aborting.\n"
-msgstr ""
+msgstr "Nelze otevřít auditní rozhraní - končím.\n"
 
-#, fuzzy, c-format
-#| msgid "Unable to change tty %s"
+#, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr "TTY %s nelze změnit"
+msgstr "Nelze změnit vlastníka nebo oprávnění k tty stdin: %s"
 
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
+#, c-format
 msgid "%s: failed to unlock %s\n"
-msgstr "%s: položka je příliš dlouhá\n"
+msgstr "%s: nepodařilo se odemknout %s\n"
 
 msgid "Environment overflow\n"
 msgstr "Přetečení prostředí\n"
@@ -119,20 +117,18 @@ msgstr[2] ""
 "%d selhání od posledního přihlášení.\n"
 "Poslední: %s na %s.\n"
 
-#, fuzzy, c-format
-#| msgid "Can't get unique GID (no more available GIDs)\n"
+#, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
-msgstr "Nelze získat jedinečné GID (další GID již nejsou dostupná)\n"
+msgstr "%s: Nelze získat jedinečné GID (volná GID neexistují)\n"
 
 #, fuzzy, c-format
-#| msgid "Can't get unique UID (no more available UIDs)\n"
+#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
-msgstr "Nelze získat jedinečné UID (další UID již nejsou dostupná)\n"
+msgstr "%s: Nelze získat jedinečné UID (volná UID neexistují)\n"
 
-#, fuzzy, c-format
-#| msgid "Can't get unique UID (no more available UIDs)\n"
+#, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
-msgstr "Nelze získat jedinečné UID (další UID již nejsou dostupná)\n"
+msgstr "%s: Nelze získat jedinečné UID (volná UID neexistují)\n"
 
 msgid "Too many logins.\n"
 msgstr "Příliš mnoho přihlášení.\n"
@@ -230,10 +226,8 @@ msgstr "%s: došla paměť\n"
 msgid "malloc(%d) failed\n"
 msgstr "volání malloc(%d) selhalo\n"
 
-#, fuzzy
-#| msgid "No\n"
 msgid "No"
-msgstr "Ne\n"
+msgstr "Ne"
 
 #, fuzzy
 #| msgid ""
@@ -366,25 +360,21 @@ msgstr "%s: vaše uživatelské jméno nelze zjistit.\n"
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: ověření pomocí PAM selhalo\n"
 
-#, fuzzy, c-format
-#| msgid "%s: can't lock files, try again later\n"
+#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
-msgstr "%s: soubory nelze zamknout. Zkuste to opět později.\n"
+msgstr "%s: nelze zamknout %s, zkuste to opět později.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "%s: cannot open %s\n"
-msgstr "%s: soubor %s nelze otevřít\n"
+msgstr "%s: nelze otevřít %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failure forking: %s\n"
+#, c-format
 msgid "%s: failure while writing changes to %s\n"
-msgstr "%s: chyba rozdvojení: %s\n"
+msgstr "%s: chyba při zápisu změn do %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
+#, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: selhalo odevzdání privilegií (%s)\n"
+msgstr "%s: selhala příprava nového %s záznamu „%s“\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
@@ -394,10 +384,9 @@ msgstr "%s: soubor se stínovými hesly není přítomen\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: selhalo odevzdání privilegií (%s)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
-msgstr "%s: uživatel „%s“ neexistuje\n"
+msgstr "%s: uživatel „%s“ v %s neexistuje\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -424,10 +413,9 @@ msgstr ""
 msgid "Full Name"
 msgstr "Celé jméno"
 
-#, fuzzy, c-format
-#| msgid "%s: %s\n"
+#, c-format
 msgid "\t%s: %s\n"
-msgstr "%s: %s\n"
+msgstr "\t%s: %s\n"
 
 msgid "Room Number"
 msgstr "Číslo místnosti"
@@ -476,8 +464,7 @@ msgstr "%s: „%s“ obsahuje jiné znaky než ASCII\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: „%s“ obsahuje chybné znaky\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: uživatel „%s“ neexistuje\n"
 
@@ -524,10 +511,9 @@ msgid ""
 "                                crypt algorithms\n"
 msgstr "  -s, --sha-rounds              počet SHA iterací algoritmu SHA*\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+#, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
-msgstr "%s: přepínač %s je povolen POUZE s přepínačem %s\n"
+msgstr "%s: přepínač %s je povolen pouze s přepínačem %s\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
@@ -545,24 +531,21 @@ msgstr "%s: řádek %d je příliš dlouhý\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: řádek %d: chybí nové heslo\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
-msgstr "%s: skupina %s neexistuje\n"
+msgstr "%s: řádek %d: skupina „%s“ neexistuje\n"
 
-#, fuzzy, c-format
-#| msgid "%s: line %d: can't update entry\n"
+#, c-format
 msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: řádek %d: položku nelze aktualizovat\n"
+msgstr "%s: řádek %d: selhala příprava nového %s záznamu „%s“\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: chyba, změny budou ignorovány\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
-msgstr "%s: uživatel „%s“ neexistuje\n"
+msgstr "%s: řádek %d: uživatel „%s“ neexistuje\n"
 
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
@@ -582,10 +565,9 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Přihlašovací shell"
 
-#, fuzzy, c-format
-#| msgid "You may not change the shell for %s.\n"
+#, c-format
 msgid "You may not change the shell for '%s'.\n"
-msgstr "Nemůžete změnit shell pro %s.\n"
+msgstr "Nemůžete změnit shell pro „%s“.\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
@@ -595,33 +577,13 @@ msgstr "Měním přihlašovací shell pro %s\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: chybná položka %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s is an invalid shell.\n"
+#, c-format
 msgid "%s: %s is an invalid shell.\n"
-msgstr "Shell %s je neplatný.\n"
+msgstr "%s: %s není platný shell.\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Použití: expiry {-f|-c}\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: faillog [options]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     display faillog records for all users\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -l, --lock-time SEC           after failed login lock accout to SEC "
-#| "seconds\n"
-#| "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-#| "  -r, --reset                   reset the counters of login failures\n"
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
-#| "  -u, --user LOGIN              display faillog record or maintains "
-#| "failure\n"
-#| "                                counters and limits (if used with -r, -m "
-#| "or -l\n"
-#| "                                options) only for user with LOGIN\n"
-#| "\n"
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -650,7 +612,7 @@ msgstr ""
 "                                sekund\n"
 "  -m, --maximum MAX             nastaví maximální počet chybných přihlášení\n"
 "                                na MAX\n"
-"  -r, --reset                   vynuluje počitadlo chybných přihlášení\n"
+"  -r, --reset                   vynuluje počitadla chybných přihlášení\n"
 "  -t, --time DNŮ                zobrazí záznamy faillogu novější než DNŮ\n"
 "  -u, --user ÚČET               zobrazí záznamy faillogu nebo upraví\n"
 "                                počitadla a limity chybných přihlášení\n"
@@ -660,15 +622,14 @@ msgstr ""
 
 #, c-format
 msgid "faillog: Failed to get the entry for UID %d\n"
-msgstr ""
+msgstr "faillog: Nepodařilo se získat záznam pro UID %d\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Uživatel    Chyb     Maximum Poslední                 Na\n"
 
-#, fuzzy, c-format
-#| msgid " [%lds left]"
+#, c-format
 msgid " [%lus left]"
-msgstr " [%lds zbývá]"
+msgstr " [%lus zbývá]"
 
 #, c-format
 msgid " [%lds lock]"
@@ -677,28 +638,27 @@ msgstr " [%lds zámek]"
 #, c-format
 msgid "faillog: Failed to reset fail count for UID %d\n"
 msgstr ""
+"faillog: nepodařilo se vynulovat počet chybných přihlášení pro UID %d\n"
 
 #, c-format
 msgid "faillog: Failed to set max for UID %d\n"
-msgstr ""
+msgstr "faillog: nepodařilo se nastavit maximum pro UID %d\n"
 
 #, c-format
 msgid "faillog: Failed to set locktime for UID %d\n"
-msgstr ""
+msgstr "faillog: nepodařilo se nastavit čas zablokování pro UID %d\n"
 
-#, fuzzy, c-format
-#| msgid "Unknown user or range: %s\n"
+#, c-format
 msgid "lastlog: Unknown user or range: %s\n"
-msgstr "Neznámý uživatel nebo rozsah: %s\n"
+msgstr "lastlog: Neznámý uživatel nebo rozsah: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s: soubor %s nelze otevřít\n"
+msgstr "faillog: Nelze otevřít %s: %s\n"
 
 #, c-format
 msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+msgstr "faillog: Nelze zjistit velikost %s: %s\n"
 
 #, c-format
 msgid ""
@@ -713,31 +673,40 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"Použití: %s [volby] SKUPINA\n"
+"\n"
+"Volby:\n"
+"  -a, --add UŽIVATEL            přidá UŽIVATELE do SKUPINY\n"
+"  -d, --delete UŽIVATEL         odstraní UŽIVATELE ze SKUPINY\n"
+"  -r, --remove-password         odstraní heslo SKUPINY\n"
+"  -R, --restrict                povolí přístup ke SKUPINĚ jen členům\n"
+"  -M, --members UŽIVATEL,...    nastaví seznam členů SKUPINY\n"
+"%s\n"
+"\n"
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
+"  -A, --administrators SPRÁVCE,...\n"
+"                                nastaví seznam správců SKUPINY\n"
+"Kromě voleb -A a -M není možné volby kombinovat.\n"
 
-#, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "The options cannot be combined.\n"
-msgstr "Heslo uživatele %s nelze změnit.\n"
+msgstr "Volby se nedají kombinovat.\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: přepínač -A funguje pouze se stínovými hesly skupin\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: group '%s' does not exist in %s\n"
-msgstr "%s: skupina %s neexistuje\n"
+msgstr "%s: skupina „%s“ v %s neexistuje\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failure forking: %s\n"
+#, c-format
 msgid "%s: failure while closing read-only %s\n"
-msgstr "%s: chyba rozdvojení: %s\n"
+msgstr "%s: chyba při zavírání databáze %s otevřené jen pro čtení\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -764,10 +733,9 @@ msgstr "Přidávám uživatele %s do skupiny %s\n"
 msgid "Removing user %s from group %s\n"
 msgstr "Odstraňuji uživatele %s ze skupiny %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
-msgstr "%s: uživatel „%s“ neexistuje\n"
+msgstr "%s: uživatel „%s“ není členem „%s“\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -802,66 +770,56 @@ msgstr ""
 "  -r, --system                  vytvoří systémový účet\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s is not a valid group name\n"
+#, c-format
 msgid "%s: '%s' is not a valid group name\n"
-msgstr "%s: %s není platným jménem skupiny\n"
+msgstr "%s: „%s“ není platným jménem skupiny\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid group name `%s'\n"
+#, c-format
 msgid "%s: invalid group ID '%s'\n"
-msgstr "%s: neplatné jméno skupiny „%s“\n"
+msgstr "%s: neplatné ID skupiny „%s“\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: parametr -K vyžaduje argument typu KLÍČ=HODNOTA\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s exists\n"
+#, c-format
 msgid "%s: group '%s' already exists\n"
-msgstr "%s: skupina %s již existuje\n"
+msgstr "%s: skupina „%s“ již existuje\n"
 
-#, fuzzy, c-format
-#| msgid "Member already exists\n"
+#, c-format
 msgid "%s: GID '%lu' already exists\n"
-msgstr "Člen již ve skupině existuje\n"
+msgstr "%s: GID „%lu“ již existuje\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Použití: groupdel skupina\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
+#, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
-msgstr "%s: adresář %s nelze na %s přejmenovat\n"
+msgstr "%s: nelze odstranit záznam „%s“ z %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+#, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
-msgstr "%s: nelze změnit primární skupinu uživatele „%s“ z %u na %u.\n"
+msgstr "%s: nelze odstranit primární skupinu uživatele „%s“.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: group '%s' does not exist\n"
-msgstr "%s: skupina %s neexistuje\n"
+msgstr "%s: skupina „%s“ neexistuje\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group '%s' is a NIS group.\n"
+#, c-format
 msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: skupina „%s“ je NIS skupinou.\n"
+msgstr "%s: skupina „%s“ je NIS skupinou\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s je hlavním NIS serverem\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s is a NIS user\n"
+#, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: uživatel %s je NIS uživatelem\n"
+msgstr "%s: uživatel „%s“ je již členem „%s“\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Out of memory. Cannot update the group database.\n"
+#, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: Nedostatek paměti. Nelze aktualizovat databázi skupin.\n"
+msgstr "%s: Nedostatek paměti. Nelze aktualizovat %s.\n"
 
 msgid ""
 "Usage: groupmems [options] [action]\n"
@@ -879,14 +837,26 @@ msgid ""
 "  -l, --list                    list the members of the group\n"
 "\n"
 msgstr ""
+"Použití: groupmems [volby] [akce]\n"
+"\n"
+"Volby:\n"
+"  -g, --group skupina           místo uživatelovy skupiny změní zadanou\n"
+"                                skupinu (pouze root)\n"
+"\n"
+"Akce:\n"
+"  -a, --add uživatel            přidá uživatele mezi členy skupiny\n"
+"  -d, --delete uživatel         odebere uživateli členství ve skupině\n"
+"  -p, --purge                   ze skupiny odstraní všechny uživatele\n"
+"  -l, --list                    vypíše členy skupiny\n"
+"\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
-msgstr ""
+msgstr "%s: vaše skupina neodpovídá vašemu uživatelskému jménu\n"
 
 #, c-format
 msgid "%s: only root can use the -g/--group option\n"
-msgstr ""
+msgstr "%s: volbu -g/--group může používat pouze root\n"
 
 msgid ""
 "Usage: groupmod [options] GROUP\n"
@@ -911,8 +881,7 @@ msgstr ""
 "  -p, --password HESLO          pro SKUPINU použije šifrované heslo\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid group name `%s'\n"
+#, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: neplatné jméno skupiny „%s“\n"
 
@@ -951,10 +920,9 @@ msgstr "tato položka se v souboru se skupinami vyskytuje vícekrát"
 msgid "invalid group name '%s'\n"
 msgstr "jméno skupiny „%s“ je chybné\n"
 
-#, fuzzy, c-format
-#| msgid "invalid group name '%s'\n"
+#, c-format
 msgid "invalid group ID '%lu'\n"
-msgstr "jméno skupiny „%s“ je chybné\n"
+msgstr "ID skupiny „%lu“ je chybné\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
@@ -968,10 +936,9 @@ msgstr "smazat člena „%s“? "
 msgid "no matching group file entry in %s\n"
 msgstr "žádný záznam v souboru se skupinami %s neodpovídá\n"
 
-#, fuzzy, c-format
-#| msgid "add group '%s' in %s ?"
+#, c-format
 msgid "add group '%s' in %s? "
-msgstr "přidat skupinu „%s“ do %s ?"
+msgstr "přidat skupinu „%s“ do %s?"
 
 msgid "invalid shadow group file entry"
 msgstr "chybná položka v souboru se stínovými skupinami"
@@ -999,20 +966,15 @@ msgstr "%s: soubory byly aktualizovány\n"
 msgid "%s: no changes\n"
 msgstr "%s: žádné změny nebyly provedeny\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
 msgid "Usage: grpconv\n"
-msgstr "Použití: groupdel skupina\n"
+msgstr "Použití: grpconv\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
 msgid "Usage: grpunconv\n"
-msgstr "Použití: groupdel skupina\n"
+msgstr "Použití: grpunconv\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
+#, c-format
 msgid "%s: cannot delete %s\n"
-msgstr "%s: soubor %s nelze aktualizovat\n"
+msgstr "%s: nelze smazat %s\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "Použití: id [-a]\n"
@@ -1045,7 +1007,7 @@ msgstr ""
 
 #, c-format
 msgid "lastlog: Failed to get the entry for UID %d\n"
-msgstr ""
+msgstr "lastlog: nepodařilo se získat záznam pro UID %d\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Uživatel         Port     Z                Naposledy"
@@ -1062,7 +1024,7 @@ msgstr "lastlog: neočekávaný argument: %s\n"
 
 #, c-format
 msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
+msgstr "lastlog: nelze zjistit velikost %s: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1161,10 +1123,8 @@ msgstr ""
 "Čas přihlášení vypršel\n"
 "\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: logoutd\n"
-msgstr "Použití: id\n"
+msgstr "Použití: logoutd\n"
 
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Použití: newgrp [-] [skupina]\n"
@@ -1179,10 +1139,9 @@ msgstr "Neplatné heslo.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: chyba rozdvojení: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: GID '%lu' does not exist\n"
-msgstr "%s: uživatel „%s“ neexistuje\n"
+msgstr "%s: GID „%lu“ neexistuje\n"
 
 msgid "too many groups\n"
 msgstr "příliš mnoho skupin\n"
@@ -1201,15 +1160,13 @@ msgstr ""
 "  -r, --system                  vytvoří systémové účty\n"
 "%s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+#, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: skupina %s je stínovou skupinou, ale neexistuje v /etc/group\n"
+msgstr "%s: skupina „%s“ je stínovou skupinou, ale neexistuje v /etc/group\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
+#, c-format
 msgid "%s: invalid user ID '%s'\n"
-msgstr "%s: chybné uživatelské jméno „%s“\n"
+msgstr "%s: chybné uživatelské ID „%s“\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1232,10 +1189,9 @@ msgstr "%s: řádek %d: nelze vytvořit uživatele\n"
 msgid "%s: line %d: can't create group\n"
 msgstr "%s: řádek %d: nelze vytvořit skupinu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
-msgstr "%s: uživatel „%s“ neexistuje\n"
+msgstr "%s: řádek %d: uživatel „%s“ v %s neexistuje\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1255,34 +1211,6 @@ msgstr "%s: řádek %d: volání chown selhalo\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: řádek %d: položku nelze aktualizovat\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: passwd [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     report password status on all accounts\n"
-#| "  -d, --delete                  delete the password for the named "
-#| "account\n"
-#| "  -e, --expire                  force expire the password for the named "
-#| "account\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -k, --keep-tokens             change password only if expired\n"
-#| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --lock                    lock the named account\n"
-#| "  -n, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -q, --quiet                   quiet mode\n"
-#| "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-#| "  -S, --status                  report password status on the named "
-#| "account\n"
-#| "  -u, --unlock                  unlock the named account\n"
-#| "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "\n"
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1318,13 +1246,13 @@ msgstr ""
 "                                platnost\n"
 "  -i, --inactive NEAKTIV        zablokuje účet po NEAKTIV dnech od\n"
 "                                vypršení platnosti hesla\n"
-"  -l, --lock                    zamkne zadaný účet\n"
+"  -l, --lock                    zamkne heslo zadaného účtu\n"
 "  -n, --mindays MIN_DNŮ         nastaví minimální počet dnů před změnou\n"
 "                                hesla na MIN_DNŮ\n"
 "  -q, --quiet                   tichý režim\n"
 "  -r, --repository REPOSITÁŘ    změní heslo v repositáři REPOSITÁŘ\n"
 "  -S, --status                  pro zadaný účet vypíše stav hesla\n"
-"  -u, --unlock                  odemkne zadaný účet\n"
+"  -u, --unlock                  odemkne heslo zadaného účtu\n"
 "  -w, --warndays VAR_DNŮ        nastaví varování o expiraci na VAR_DNŮ\n"
 "  -x, --maxdays MAX_DNŮ         nastaví maximální počet dnů před změnou\n"
 "                                hesla na MAX_DNŮ\n"
@@ -1373,18 +1301,15 @@ msgstr "Heslo uživatele %s nelze změnit.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Heslo uživatele %s nelze zatím změnit.\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: unlocking the user would result in a passwordless account.\n"
-#| "You should set a password with usermod -p to unlock this user account.\n"
+#, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock the password of this "
 "account.\n"
 msgstr ""
-"%s odemknutí uživatele by znamenalo mít účet bez hesla.\n"
-"Pro odemknutí tohoto uživatelského účtu byste měli nastavit heslo pomocí "
-"usermod -p.\n"
+"%s odemknutí hesla by znamenalo mít účet bez hesla.\n"
+"Pro odemknutí hesla tohoto účtu byste měli nastavit heslo pomocí usermod -"
+"p.\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1425,27 +1350,23 @@ msgstr "duplikovaná položka v souboru s hesly"
 
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "chybné uživatelské jméno '%s'\n"
+msgstr "chybné uživatelské jméno „%s“\n"
 
-#, fuzzy, c-format
-#| msgid "invalid user name '%s'\n"
+#, c-format
 msgid "invalid user ID '%lu'\n"
-msgstr "chybné uživatelské jméno '%s'\n"
+msgstr "chybné uživatelské ID „%lu“\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: no group %u\n"
+#, c-format
 msgid "user '%s': no group %lu\n"
-msgstr "uživatel %s: skupina %u neexistuje\n"
+msgstr "uživatel „%s“: skupina %lu neexistuje\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: directory %s does not exist\n"
+#, c-format
 msgid "user '%s': directory '%s' does not exist\n"
-msgstr "uživatel %s: adresář %s neexistuje\n"
+msgstr "uživatel „%s“: adresář „%s“ neexistuje\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: program %s does not exist\n"
+#, c-format
 msgid "user '%s': program '%s' does not exist\n"
-msgstr "uživatel %s: program %s neexistuje\n"
+msgstr "uživatel „%s“: program „%s“ neexistuje\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1465,25 +1386,19 @@ msgstr "duplikovaná položka v souboru se stínovými hesly"
 msgid "user %s: last password change in the future\n"
 msgstr "uživatel %s: poslední změna hesla v budoucnosti\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "%s: cannot sort entries in %s\n"
-msgstr "%s: soubor %s nelze otevřít\n"
+msgstr "%s: nelze seřadit záznamy v %s\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: pwconv\n"
-msgstr "Použití: id\n"
+msgstr "Použití: pwconv\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
+#, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
-msgstr "%s: %s není oprávněn změnit heslo %s\n"
+msgstr "%s: nepodařilo se změnit oprávnění %s na 0600\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: pwunconv\n"
-msgstr "Použití: id\n"
+msgstr "Použití: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "Z tohoto účtu je přístup k su ZAKÁZÁN.\n"
@@ -1551,15 +1466,13 @@ msgstr ""
 "%s: %s\n"
 "(Ignoruji)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: PAM authentication failed\n"
+#, c-format
 msgid "%s: Authentication failure\n"
-msgstr "%s: ověření pomocí PAM selhalo\n"
+msgstr "%s: Chyba ověření\n"
 
-#, fuzzy, c-format
-#| msgid "You are not authorized to su %s\n"
+#, c-format
 msgid "%s: You are not authorized to su at that time\n"
-msgstr "Nejste oprávněn používat su %s\n"
+msgstr "%s: Toto času nejste oprávněni používat su\n"
 
 msgid "No shell\n"
 msgstr "Žádný shell\n"
@@ -1631,10 +1544,12 @@ msgstr "%s: zadáno příliš mnoho skupin (max %d).\n"
 #| "  -h, --help                    display this help message and exit\n"
 #| "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 #| "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-#| "  -l,                           do not add the user to the lastlog and\n"
+#| "  -l, --no-log-init             do not add the user to the lastlog and\n"
 #| "                                faillog databases\n"
 #| "  -m, --create-home             create home directory for the new user\n"
 #| "                                account\n"
+#| "  -M, --no-create-home          do not create user's home directory\n"
+#| "                                (overrides /etc/login.defs)\n"
 #| "  -N, --no-user-group           do not create a group with the same name "
 #| "as\n"
 #| "                                the user\n"
@@ -1706,10 +1621,12 @@ msgstr ""
 "  -h, --help                    zobrazí tuto nápovědu a skončí\n"
 "  -k, --skel VZOR_ADR           zadá alternativní vzorový adresář\n"
 "  -K, --key KLÍČ=HODNOTA        přebije výchozí nastavení /etc/login.defs\n"
-"  -l,                           nepřidá uživatele do databází lastlog\n"
+"  -l, --no-log-init             nepřidá uživatele do databází lastlog\n"
 "                                a faillog\n"
 "  -m, --create-home             vytvoří domovský adresář pro nový\n"
 "                                uživatelský účet\n"
+"  -M, --no-create-home          nevytvoří domovský adresář uživatele\n"
+"                                (přebíjí nastavení /etc/login.defs)\n"
 "  -N, --no-user-group           nevytvoří skupinu se stejným jménem jako\n"
 "                                uživatel\n"
 "  -o, --non-unique              povolí vytvoření uživatele s duplicitním\n"
@@ -1766,11 +1683,11 @@ msgstr "%s: volby %s a %s kolidují\n"
 
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: nepodařilo se vynulovat faillog záznam UID %lu: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: nepodařilo se vynulovat lastlog záznam UID %lu: %s\n"
 
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
@@ -1792,10 +1709,9 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr "Nastavuji oprávnění k poštovní schránce"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
+#, c-format
 msgid "%s: user '%s' already exists\n"
-msgstr "%s: uživatel %s již existuje\n"
+msgstr "%s: uživatel „%s“ již existuje\n"
 
 #, c-format
 msgid ""
@@ -1808,10 +1724,9 @@ msgstr ""
 msgid "%s: can't create user\n"
 msgstr "%s: nelze vytvořit uživatele\n"
 
-#, fuzzy, c-format
-#| msgid "%s: UID %u is not unique\n"
+#, c-format
 msgid "%s: UID %lu is not unique\n"
-msgstr "%s: UID %u není jedinečné\n"
+msgstr "%s: UID %lu není jedinečné\n"
 
 #, c-format
 msgid "%s: can't create group\n"
@@ -1845,22 +1760,18 @@ msgstr ""
 "                                schránku\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: Cannot remove group %s which is a primary group for another user.\n"
+#, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
-"%s: Nemohu odstranit skupinu %s, která je primární skupinou jiného "
-"uživatele.\n"
+"%s: skupina %s je primární skupinou jiného uživatele a nelze ji odstranit.\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: uživatel %s je právě přihlášen\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
+#, c-format
 msgid "%s: warning: can't remove %s: %s"
-msgstr "%s: varování: nemohu smazat "
+msgstr "%s: varování: nemohu smazat %s: %s"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
@@ -1966,22 +1877,18 @@ msgid ""
 "account\n"
 msgstr ""
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: unlocking the user would result in a passwordless account.\n"
-#| "You should set a password with usermod -p to unlock this user account.\n"
+#, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
-"%s odemknutí uživatele by znamenalo mít účet bez hesla.\n"
-"Pro odemknutí tohoto uživatelského účtu byste měli nastavit heslo pomocí "
+"%s odemknutí uživatelova hesla by znamenalo mít účet bez hesla.\n"
+"Pro odemknutí hesla tohoto uživatele byste měli nastavit heslo pomocí "
 "usermod -p.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
+#, c-format
 msgid "%s: user '%s' already exists in %s\n"
-msgstr "%s: uživatel %s již existuje\n"
+msgstr "%s: uživatel „%s“ již v %s existuje\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1995,10 +1902,9 @@ msgstr "%s: přepínače -e a -f vyžadují stínová hesla\n"
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: přepínače -L, -p a -U se navzájem vylučují\n"
 
-#, fuzzy, c-format
-#| msgid "Member already exists\n"
+#, c-format
 msgid "%s: UID '%lu' already exists\n"
-msgstr "Člen již ve skupině existuje\n"
+msgstr "%s: UID „%lu“ již existuje\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2023,10 +1929,14 @@ msgstr "%s: adresář %s nelze na %s přejmenovat\n"
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
+"%s: nepodařilo se zkopírovat lastlog záznamy uživatele %lu uživateli %lu: %"
+"s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
+"%s: nepodařilo se zkopírovat faillog záznamy uživatele %lu uživateli %lu: %"
+"s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2038,11 +1948,7 @@ msgstr "chyba při změně vlastníka poštovní schránky"
 msgid "failed to rename mailbox"
 msgstr "chyba při přejmenovávání poštovní schránky"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "You have modified %s.\n"
-#| "You may need to modify %s for consistency.\n"
-#| "Please use the command `%s' to do so.\n"
+#, c-format
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
@@ -2073,19 +1979,13 @@ msgstr ""
 "  -s, --shadow                  upraví databázi shadow nebo gshadow\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
+#, c-format
 msgid "%s: failed to remove %s\n"
-msgstr "%s: selhalo odevzdání privilegií (%s)\n"
+msgstr "%s: selhalo odstranění %s\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "%s: %s is unchanged\n"
+#, c-format
 msgid "%s: %s is unchanged\n"
-msgstr ""
-"\n"
-"%s: %s je beze změny\n"
+msgstr "%s: %s je beze změny\n"
 
 #, fuzzy
 #| msgid "Couldn't lock file"
