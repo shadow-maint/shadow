@@ -672,6 +672,19 @@ int main (int argc, char **argv)
 #endif
 
 	/*
+	 * Close all files before changing the user/group IDs.
+	 *
+	 * The needed structure should have been copied before, or
+	 * permission to read the database will be required.
+	 */
+	endspent ();
+#ifdef	SHADOWGRP
+	endsgent ();
+#endif
+	endpwent ();
+	endgrent ();
+
+	/*
 	 * Set the effective GID to the new group id and the effective UID
 	 * to the real UID. For root, this also sets the real GID to the
 	 * new group id.
@@ -749,13 +762,6 @@ int main (int argc, char **argv)
 	 * become argv[0] of the spawned command.
 	 */
 	cp = Basename ((char *) prog);
-
-	endspent ();
-#ifdef	SHADOWGRP
-	endsgent ();
-#endif
-	endpwent ();
-	endgrent ();
 
 	/*
 	 * Switch back to her home directory if i am doing login

@@ -1,5 +1,10 @@
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Close the databases before changing the UDI and
+	GID.
+
+2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/myname.c: Updated splint annotations.
 
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
