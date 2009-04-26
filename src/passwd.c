@@ -991,17 +991,20 @@ int main (int argc, char **argv)
 	   changing a password without entering the old one */
 	if ((is_selinux_enabled() > 0) && (getuid() == 0) &&
 	    (check_selinux_access (name, pw->pw_uid, PASSWD__PASSWD) != 0)) {
-		security_context_t user_context;
-		if (getprevcon(&user_context) < 0) {
-			user_context = strdup("Unknown user context");
+		security_context_t user_context = NULL;
+		const char *user = "Unknown user context";
+		if (getprevcon (&user_context) == 0) {
+			user = user_context;
 		}
-		syslog(LOG_ALERT,
-		       "%s is not authorized to change the password of %s",
-		       user_context, name);
+		SYSLOG ((LOG_ALERT,
+		         "%s is not authorized to change the password of %s",
+		         user, name));
 		fprintf(stderr,
 		        _("%s: %s is not authorized to change the password of %s\n"),
-		        Prog, user_context, name);
-		freecon(user_context);
+		        Prog, user, name);
+		if (NULL != user_context) {
+			freecon (user_context);
+		}
 		exit(1);
 	}
 #endif /* WITH_SELINUX */

@@ -1,3 +1,9 @@
+2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/passwd.c: Do not freecon strings duplicated with strdup.
+	Also avoid allocation of memory.
+	* src/passwd.c: Use SYSLOG instead of syslog.
+
 2009-04-25  Miroslav Kure  <kurem@upcase.inf.upol.cz>
 
 	* po/cs.po: Updated to 352T7f8u
