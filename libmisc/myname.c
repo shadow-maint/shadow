@@ -41,7 +41,7 @@
 #include "defines.h"
 #include <pwd.h>
 #include "prototypes.h"
-/*@null@*/struct passwd *get_my_pwent (void)
+/*@null@*/ /*@only@*/struct passwd *get_my_pwent (void)
 {
 	struct passwd *pw;
 	const char *cp = getlogin ();

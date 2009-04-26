@@ -1,5 +1,9 @@
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/myname.c: Updated splint annotations.
+
+2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Added splint annotations.
 	* lib/commonio.c: old_context should be local to commonio_close(),
 	not global.
