@@ -827,7 +827,8 @@ int main (int argc, char **argv)
 			close (audit_fd);
 #endif				/* WITH_AUDIT */
 
-			fprintf (stderr, "\nLogin incorrect\n");
+			(void) puts ("");
+			(void) puts (_("Login incorrect"));
 
 			if (failcount >= retries) {
 				SYSLOG ((LOG_NOTICE,
