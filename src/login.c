@@ -124,9 +124,9 @@ static void usage (void);
 static void setup_tty (void);
 static void process_flags (int argc, char *const *argv);
 static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *user);
-static void update_utmp (const char *username,
+static void update_utmp (const char *user,
                          const char *tty,
-                         const char *hostname,
+                         const char *host,
                          /*@null@*/const struct utmp *utent);
 
 #ifndef USE_PAM
@@ -476,23 +476,23 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  *	utent should be the utmp entry returned by get_current_utmp (or
  *	NULL).
  */
-static void update_utmp (const char *username,
+static void update_utmp (const char *user,
                          const char *tty,
-                         const char *hostname,
+                         const char *host,
                          /*@null@*/const struct utmp *utent)
 {
-	struct utmp  *ut  = prepare_utmp  (username, tty, hostname, utent);
-#ifdef HAVE_UTMPX_H
-	struct utmpx *utx = prepare_utmpx (username, tty, hostname, utent);
-#endif				/* HAVE_UTMPX_H */
+	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
+#ifdef USE_UTMPX
+	struct utmpx *utx = prepare_utmpx (user, tty, host, utent);
+#endif				/* USE_UTMPX */
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 	free (ut);
 
-#ifdef HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	(void) setutmpx (utx);	/* make entry in the utmpx & wtmpx files */
 	free (utx);
-#endif				/* HAVE_UTMPX_H */
+#endif				/* USE_UTMPX */
 }
 
 /*
@@ -1022,19 +1022,19 @@ int main (int argc, char **argv)
 			failure (pwd->pw_uid, tty, &faillog);
 		}
 		if (getdef_str ("FTMP_FILE") != NULL) {
-#ifdef HAVE_UTMPX_H
+#ifdef USE_UTMPX
 			struct utmpx *failent =
 				prepare_utmpx (failent_user,
 				               tty,
 			/* FIXME: or fromhost? */hostname,
 				               utent);
-#else
+#else				/* !USE_UTMPX */
 			struct utmp *failent =
 				prepare_utmp (failent_user,
 				              tty,
 				              hostname,
 				              utent);
-#endif
+#endif				/* !USE_UTMPX */
 			failtmp (failent_user, failent);
 			free (failent);
 		}

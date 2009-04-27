@@ -1,5 +1,11 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Replace HAVE_UTMPX_H by USE_UTMPX.
+	* src/login.c: Avoid name clash between global variables and the
+	update_utmp() arguments.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupadd.c, lib/commonio.c, lib/groupio.c: Added missing
 	include of <assert.h>
 
