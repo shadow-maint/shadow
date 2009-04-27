@@ -43,7 +43,7 @@
 #define _PROTOTYPES_H
 
 #include <sys/stat.h>
-#if HAVE_UTMPX_H
+#if USE_UTMPX
 #include <utmpx.h>
 #else
 #include <utmp.h>
@@ -217,10 +217,11 @@ extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 
 /* log.c */
-extern void dolastlog (struct lastlog *ll,
-                       const struct passwd *pw,
-                       const char *line,
-                       const char *host);
+extern void dolastlog (
+	struct lastlog *ll,
+	const struct passwd *pw,
+	/*@unique@*/const char *line,
+	/*@unique@*/const char *host);
 
 /* login_nopam.c */
 extern int login_access (const char *user, const char *from);
@@ -362,13 +363,13 @@ extern struct utmp *prepare_utmp (const char *name,
                                   const char *host,
                                   /*@null@*/const struct utmp *ut);
 extern int setutmp (struct utmp *ut);
-#ifdef HAVE_UTMPX_H
+#ifdef USE_UTMPX
 extern struct utmpx *prepare_utmpx (const char *name,
                                     const char *line,
                                     const char *host,
                                     /*@null@*/const struct utmp *ut);
 extern int setutmpx (struct utmpx *utx);
-#endif
+#endif				/* USE_UTMPX */
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);

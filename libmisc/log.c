@@ -49,9 +49,11 @@
  *	UID is extracted from the global (struct passwd) entry and the
  *	TTY information is gotten from the (struct utmp).
  */
-void
-dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
-	   const char *host)
+void dolastlog (
+	struct lastlog *ll,
+	const struct passwd *pw,
+	/*@unique@*/const char *line,
+	/*@unique@*/const char *host)
 {
 	int fd;
 	off_t offset;
@@ -75,7 +77,10 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	offset = (off_t) pw->pw_uid * sizeof newlog;
 
 	if (lseek (fd, offset, SEEK_SET) != offset) {
-		close (fd);
+		SYSLOG ((LOG_WARN,
+		         "Can't read last lastlog entry for UID %lu in %s. Entry not updated.",
+		         (unsigned long) pw->pw_uid, LASTLOG_FILE));
+		(void) close (fd);
 		return;
 	}
 

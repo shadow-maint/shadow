@@ -1,5 +1,12 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Replace HAVE_UTMPX_H by USE_UTMPX.
+	* lib/prototypes.h, libmisc/log.c: Added splint annotations.
+	* libmisc/log.c: Added SYSLOG warning when lseek fails (should not
+	happen).
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/mail.c, libmisc/copydir.c: Added missing include of
 	<assert.h>
 
