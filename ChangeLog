@@ -1,6 +1,7 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/groupadd.c: Added missing include of <assert.h>
+	* src/groupadd.c, lib/commonio.c, lib/groupio.c: Added missing
+	include of <assert.h>
 
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 

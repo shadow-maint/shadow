@@ -35,6 +35,7 @@
 #ident "$Id$"
 
 #include "defines.h"
+#include <assert.h>
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <limits.h>
