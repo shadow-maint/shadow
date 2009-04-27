@@ -1,5 +1,11 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, configure.in: Added configure option --enable-utmpx,
+	disabled by default. This defines USE_UTMPX, which should be used
+	instead of HAVE_UTMPX_H.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Fix typo.
 
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
