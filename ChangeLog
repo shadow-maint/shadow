@@ -3,6 +3,9 @@
 	* NEWS, configure.in: Added configure option --enable-utmpx,
 	disabled by default. This defines USE_UTMPX, which should be used
 	instead of HAVE_UTMPX_H.
+	* libmisc/utmp.c: Replace HAVE_UTMPX_H by USE_UTMPX.
+	* libmisc/utmp.c: Removed old comment on HAVE_STRUCT_UTMP_UT_ID
+	and UTMPX support.
 
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 

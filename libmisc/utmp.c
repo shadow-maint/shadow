@@ -37,10 +37,7 @@
 
 #include <utmp.h>
 
-// FIXME: disable UTMPX on Linux in configure.in
-//        Maybe define an intermediate USE_UTMPX to replace HAVE_UTMPX_H,
-//        which would be defined if HAVE_UTMPX_H is defined on non-Linux.
-#if HAVE_UTMPX_H
+#if USE_UTMPX
 #include <utmpx.h>
 #endif
 
@@ -149,7 +146,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 }
 #endif				/* ! HAVE_UPDWTMP */
 
-#ifdef HAVE_UTMPX_H
+#ifdef USE_UTMPX
 #ifndef HAVE_UPDWTMPX
 static void updwtmpx (const char *filename, const struct utmpx *utx)
 {
@@ -162,7 +159,7 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 	}
 }
 #endif				/* ! HAVE_UPDWTMPX */
-#endif				/* ! HAVE_UTMPX_H */
+#endif				/* ! USE_UTMPX */
 
 
 /*
@@ -184,9 +181,9 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
  *	The returned structure shall be freed by the caller.
  */
 /*@only@*/struct utmp *prepare_utmp (const char *name,
-                           const char *line,
-                           const char *host,
-                           /*@null@*/const struct utmp *ut)
+                                     const char *line,
+                                     const char *host,
+                                     /*@null@*/const struct utmp *ut)
 {
 	struct timeval tv;
 	char *hostname = NULL;
@@ -322,14 +319,14 @@ int setutmp (struct utmp *ut)
 	return err;
 }
 
-#ifdef HAVE_UTMPX_H
+#ifdef USE_UTMPX
 /*
  * prepare_utmpx - the UTMPX version for prepare_utmp
  */
 /*@only@*/struct utmpx *prepare_utmpx (const char *name,
-                             const char *line,
-                             const char *host,
-                             /*@null@*/const struct utmp *ut)
+                                       const char *line,
+                                       const char *host,
+                                       /*@null@*/const struct utmp *ut)
 {
 	struct timeval tv;
 	char *hostname = NULL;
@@ -366,10 +363,7 @@ int setutmp (struct utmp *ut)
 	utxent->ut_type = USER_PROCESS;
 	utxent->ut_pid = getpid ();
 	strncpy (utxent->ut_line, line,      sizeof (utxent->ut_line));
-#ifndef HAVE_STRUCT_UTMP_UT_ID
-// FIXME: move to configure.in
-# error "No support for systems with utmpx and no ut_id field in utmp"
-#endif				/* !HAVE_STRUCT_UTMP_UT_ID */
+	/* existence of ut->ut_id is enforced by configure */
 	if (NULL != ut) {
 		strncpy (utxent->ut_id, ut->ut_id, sizeof (utxent->ut_id));
 	} else {
@@ -457,5 +451,5 @@ int setutmpx (struct utmpx *utx)
 
 	return err;
 }
-#endif				/* HAVE_UTMPX_H */
+#endif				/* USE_UTMPX */
 
