@@ -34,6 +34,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -92,8 +93,11 @@ void addenv (const char *string, /*@null@*/const char *value)
 	size_t n;
 
 	if (NULL != value) {
-		newstring = xmalloc (strlen (string) + strlen (value) + 2);
-		sprintf (newstring, "%s=%s", string, value);
+		size_t len = strlen (string) + strlen (value) + 2;
+		int wlen;
+		newstring = xmalloc (len);
+		wlen = snprintf (newstring, len, "%s=%s", string, value);
+		assert (wlen == (int) len -1);
 	} else {
 		newstring = xstrdup (string);
 	}
@@ -187,7 +191,10 @@ void set_env (int argc, char *const *argv)
 
 		cp = strchr (*argv, '=');
 		if (NULL == cp) {
-			snprintf (variable, sizeof variable, "L%d", noname++);
+			int wlen;
+			wlen = snprintf (variable, sizeof variable, "L%d", noname);
+			assert (wlen < (int) sizeof(variable));
+			noname++;
 			addenv (variable, *argv);
 		} else {
 			const char **p;

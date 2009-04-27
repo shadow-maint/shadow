@@ -1,5 +1,9 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/env.c: Added assertions on the snprintf results.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, configure.in: Added configure option --enable-utmpx,
 	disabled by default. This defines USE_UTMPX, which should be used
 	instead of HAVE_UTMPX_H.
