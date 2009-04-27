@@ -1109,8 +1109,6 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	update_utmp (username, tty, hostname, utent);
-
 	if (pwd->pw_shell[0] == '*') {	/* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */
 		subsystem (pwd);	/* figure out what to execute */
@@ -1198,6 +1196,7 @@ int main (int argc, char **argv)
 	}
 	/* child */
 #endif
+
 	/* If we were init, we need to start a new session */
 	if (getppid() == 1) {
 		setsid();
@@ -1206,6 +1205,11 @@ int main (int argc, char **argv)
 		}
 	}
 
+	/*
+	 * The utmp entry needs to be updated to indicate the new status
+	 * of the session, the new PID and SID.
+	 */
+	update_utmp (username, tty, hostname, utent);
 
 	/* The pwd and spwd entries for the user have been copied.
 	 *

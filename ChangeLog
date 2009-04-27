@@ -1,5 +1,11 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Move update_utmp() after the PID or session ID
+	changed in order to get more accurate data in UTMP. This also
+	fixes "exec login" when login in installed setuid.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Reuse a string and avoid an untranslated message
 	"Login incorrect".
 
