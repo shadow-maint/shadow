@@ -1,3 +1,7 @@
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/po/fr.po: Fix typo.
+
 2009-04-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c: Close the databases before changing the UDI and

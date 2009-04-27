@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2009-04-15 23:30+0200\n"
-"PO-Revision-Date: 2009-04-12 00:38+0200\n"
+"PO-Revision-Date: 2009-04-27 21:56+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -5627,7 +5627,7 @@ msgstr ""
 "Ce sera probablement écrasé par PAM, puisque le module pam_unix est réglé en "
 "dur pour n'effectuer que 3 tentatives. Toutefois, il s'agit d'une solution "
 "de repli au cas où vous utilisez un module d'authentification qui ne fait "
-"pas appliquer PAM_MAXTRIES"
+"pas appliquer PAM_MAXTRIES."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
