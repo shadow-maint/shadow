@@ -230,6 +230,11 @@
 	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
 	    </citerefentry>.
 	  </para>
+	  <para>
+	    <emphasis role="bold">Note:</emphasis> This option is not
+	    recommended because the password (or encrypted password) will
+	    be visible by users listing the processes.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

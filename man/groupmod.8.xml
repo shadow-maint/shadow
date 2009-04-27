@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1991       , Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -127,7 +127,12 @@
 	  <para>
 	    The encrypted password, as returned by <citerefentry>
 	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-	    </citerefentry>. The default is to disable the password.
+	    </citerefentry>.
+	  </para>
+	  <para>
+	    <emphasis role="bold">Note:</emphasis> This option is not
+	    recommended because the password (or encrypted password) will
+	    be visible by users listing the processes.
 	  </para>
 	</listitem>
       </varlistentry>

@@ -1,5 +1,15 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupmod.8.xml, man/usermod.8.xml, man/groupadd.8.xml,
+	man/useradd.8.xml: Added note to warn about insecurity in using
+	--password.
+	* man/groupmod.8.xml: Removed not regarding default if --password
+	is not used. This was a cut&paste from groupadd.8.xml.
+	* man/passwd.1.xml: Split some paragraphs.
+	* man/passwd.1.xml: Recommend other encryption methods than DES.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Move update_utmp() after the PID or session ID
 	changed in order to get more accurate data in UTMP. This also
 	fixes "exec login" when login in installed setuid.

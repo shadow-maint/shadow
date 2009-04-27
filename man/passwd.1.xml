@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1989 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -125,9 +125,10 @@
       <title>Hints for user passwords</title>
       <para>
 	The security of a password depends upon the strength of the
-	encryption algorithm and the size of the key space. The
+	encryption algorithm and the size of the key space. The legacy
 	<emphasis>UNIX</emphasis> System encryption method is based on the
-	NBS DES algorithm and is very secure. The size of the key space
+	NBS DES algorithm. More recent methods are now recommended (see
+	<option>ENCRYPT_METHOD</option>). The size of the key space
 	depends upon the randomness of the password which is selected.
       </para>
 
@@ -337,9 +338,12 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      Not all options may be supported. Password complexity checking may
+      Password complexity checking may
       vary from site to site. The user is urged to select a password as
-      complex as he or she feels comfortable with. Users may not be able to 
+      complex as he or she feels comfortable with.
+    </para>
+    <para>
+      Users may not be able to 
       change their password on a system if NIS is enabled and they are not 
       logged into the NIS server.
     </para>
