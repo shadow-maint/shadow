@@ -1104,10 +1104,12 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "password for '%s' changed by '%s'", name, myname));
 	closelog ();
 	if (!qflg) {
-		if (!eflg) {
-			puts (_("Password changed."));
+		if (!anyflag) {
+#ifndef USE_PAM
+			printf (_("%s: password changed."), Prog);
+#endif				/* USE_PAM */
 		} else {
-			puts (_("Password set to expire."));
+			printf (_("%s: password properties changed."), Prog);
 		}
 	}
 	exit (E_SUCCESS);
