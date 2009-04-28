@@ -1,7 +1,13 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: There is no need to test for 0 after
+	getopt_long. No options have flag != NULL.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h: Replace #if by #ifdef
-	* lib/prototypes.h, libmisc/non_interactive_pam_conv.c: Added
+	* libmisc/Makefile.am, lib/prototypes.h,
+	libmisc/non_interactive_pam_conv.c: Added
 	non_interactive_pam_conv() and non_interactive_password.
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>

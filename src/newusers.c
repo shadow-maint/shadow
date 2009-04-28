@@ -518,9 +518,6 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 #endif
-		case 0:
-			/* long option */
-			break;
 		default:
 			usage ();
 			break;
