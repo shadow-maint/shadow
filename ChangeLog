@@ -1,5 +1,9 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/failure.c: Replace HAVE_UTMPX_H by USE_UTMPX.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chkname.c: Do not include <utmp.h> and <utmpx.h>. There
 	are no more needed.
 
