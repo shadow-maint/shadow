@@ -1,5 +1,14 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/chpasswd.c: Added support for changing the passwords
+	with PAM.
+	* src/chpasswd.c: Split the usage string in smaller parts to
+	allows enabling single parts.
+	* src/chpasswd.c: Do not set a global lock on the password files.
+	This is done by PAM each time a password is updated.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Include <utmpx.h> and <utmp.h> to define
 	USER_NAME_MAX_LENGTH.
 
