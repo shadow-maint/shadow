@@ -60,9 +60,7 @@ static unsigned long umin;	/* if uflg and has_umin, only display users with uid 
 static bool has_umin = false;
 static unsigned long umax;	/* if uflg and has_umax, only display users with uid <= umax */
 static bool has_umax = false;
-static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
-static int inverse_days;	/* number of days to consider for print command */
 static time_t inverse_seconds;	/* that number of days in seconds */
 static struct stat statbuf;	/* fstat buffer for file size */
 
@@ -213,15 +211,31 @@ int main (int argc, char **argv)
 				usage ();
 				break;
 			case 't':
-				days = atoi (optarg); /* FIXME */
+			{
+				unsigned long days;
+				if (getulong (optarg, &days) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         "lastlog", optarg);
+					exit (EXIT_FAILURE);
+				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
 				break;
+			}
 			case 'b':
-				inverse_days = atoi (optarg); /* FIXME */
+			{
+				unsigned long inverse_days;
+				if (getulong (optarg, &inverse_days) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         "lastlog", optarg);
+					exit (EXIT_FAILURE);
+				}
 				inverse_seconds = (time_t) inverse_days * DAY;
 				bflg = true;
 				break;
+			}
 			case 'u':
 			{
 				const struct passwd *pwent;
