@@ -1,5 +1,11 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Replace #if by #ifdef
+	* lib/prototypes.h, libmisc/non_interactive_pam_conv.c: Added
+	non_interactive_pam_conv() and non_interactive_password.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c, src/userdel.c, src/logoutd.c: Replace #if by #ifdef
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>

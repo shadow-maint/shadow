@@ -43,7 +43,7 @@
 #define _PROTOTYPES_H
 
 #include <sys/stat.h>
-#if USE_UTMPX
+#ifdef USE_UTMPX
 #include <utmpx.h>
 #else
 #include <utmp.h>
@@ -237,6 +237,10 @@ extern void motd (void);
 
 /* myname.c */
 extern /*@null@*/struct passwd *get_my_pwent (void);
+
+/* non_interactive_pam_conv.c */
+/*@null@*/ /*@only@*/extern char *non_interactive_password;
+extern struct pam_conv non_interactive_pam_conv;
 
 /* obscure.c */
 #ifndef USE_PAM
