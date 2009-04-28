@@ -38,6 +38,7 @@ libmisc_a_SOURCES = \
 	mail.c \
 	motd.c \
 	myname.c \
+	non_interactive_pam_conv.c \
 	obscure.c \
 	pam_pass.c \
 	pwd2spwd.c \
