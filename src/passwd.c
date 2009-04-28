@@ -46,7 +46,7 @@
 #include <selinux/flask.h>
 #include <selinux/av_permissions.h>
 #include <selinux/context.h>
-#endif
+#endif				/* WITH_SELINUX */
 #include <time.h>
 #include "defines.h"
 #include "getdef.h"
@@ -101,7 +101,7 @@ static long inact = 0;		/* Days without change before locked */
 
 #ifndef USE_PAM
 static bool do_update_age = false;
-#endif
+#endif				/* ! USE_PAM */
 
 static bool pw_locked = false;
 static bool spw_locked = false;
@@ -122,7 +122,7 @@ static bool spw_locked = false;
  */
 static char crypt_passwd[256];
 static bool do_update_pwd = false;
-#endif
+#endif				/* !USE_PAM */
 
 /*
  * External identifiers
@@ -151,7 +151,7 @@ static void update_shadow (void);
 static int check_selinux_access (const char *changed_user,
                                  uid_t changed_uid,
                                  access_vector_t requested_access);
-#endif
+#endif				/* WITH_SELINUX */
 
 /*
  * usage - print command usage and exit
@@ -192,16 +192,16 @@ static int reuse (const char *pass, const struct passwd *pw)
 	const char *FascistHistoryPw (const char *, const struct passwd *);
 
 	reason = FascistHistory (pass, pw);
-#else
+#else				/* !HAVE_LIBCRACK_PW */
 	const char *FascistHistory (const char *, int);
 
 	reason = FascistHistory (pass, pw->pw_uid);
-#endif
+#endif				/* !HAVE_LIBCRACK_PW */
 	if (NULL != reason) {
 		printf (_("Bad password: %s.  "), reason);
 		return 1;
 	}
-#endif
+#endif				/* HAVE_LIBCRACK_HIST */
 	return 0;
 }
 
@@ -223,7 +223,7 @@ static int new_password (const struct passwd *pw)
 
 #ifdef HAVE_LIBCRACK_HIST
 	int HistUpdate (const char *, const char *);
-#endif
+#endif				/* HAVE_LIBCRACK_HIST */
 
 	/*
 	 * Authenticate the user. The user will be prompted for their own
@@ -268,7 +268,7 @@ static int new_password (const struct passwd *pw)
 #ifdef USE_SHA_CRYPT
 		    || (strcmp (method, "SHA256") == 0)
 		    || (strcmp (method, "SHA512") == 0)
-#endif
+#endif				/* USE_SHA_CRYPT */
 		    ) {
 			pass_max_len = -1;
 		} else {
@@ -345,7 +345,7 @@ static int new_password (const struct passwd *pw)
 
 #ifdef HAVE_LIBCRACK_HIST
 	HistUpdate (pw->pw_name, crypt_passwd);
-#endif
+#endif				/* HAVE_LIBCRACK_HIST */
 	STRFCPY (crypt_passwd, cp);
 	return 0;
 }
@@ -434,10 +434,10 @@ static char *date_to_str (time_t t)
 	tm = gmtime (&t);
 #ifdef HAVE_STRFTIME
 	strftime (buf, sizeof buf, "%m/%d/%Y", tm);
-#else
+#else				/* !HAVE_STRFTIME */
 	snprintf (buf, sizeof buf, "%02d/%02d/%04d",
 		  tm->tm_mon + 1, tm->tm_mday, tm->tm_year + 1900);
-#endif
+#endif				/* !HAVE_STRFTIME */
 	return buf;
 }
 
@@ -508,7 +508,7 @@ static char *update_crypt_pw (char *cp)
 	if (do_update_pwd) {
 		cp = insert_crypt_passwd (cp, crypt_passwd);
 	}
-#endif
+#endif				/* !USE_PAM */
 
 	if (dflg) {
 		*cp = '\0';
@@ -644,7 +644,7 @@ static void update_shadow (void)
 			nsp->sp_lstchg = -1;
 		}
 	}
-#endif
+#endif				/* !USE_PAM */
 
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris
@@ -723,7 +723,7 @@ static int check_selinux_access (const char *changed_user,
 	return status;
 }
 
-#endif
+#endif				/* WITH_SELINUX */
 
 /*
  * passwd - change a user's password file information
@@ -762,7 +762,7 @@ int main (int argc, char **argv)
 	char *cp;		/* Miscellaneous character pointing  */
 
 	const struct spwd *sp;	/* Shadow file entry for user   */
-#endif
+#endif				/* !USE_PAM */
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
@@ -808,9 +808,8 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c =
-			getopt_long (argc, argv, "adei:kln:qr:Suw:x:",
-				     long_options, &option_index)) != -1) {
+		while ((c = getopt_long (argc, argv, "adei:kln:qr:Suw:x:",
+		                         long_options, &option_index)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;
@@ -1007,7 +1006,7 @@ int main (int argc, char **argv)
 		}
 		exit(1);
 	}
-#endif /* WITH_SELINUX */
+#endif				/* WITH_SELINUX */
 
 	/*
 	 * If the UID of the user does not match the current real UID,
@@ -1113,6 +1112,6 @@ int main (int argc, char **argv)
 		}
 	}
 	exit (E_SUCCESS);
-	/* NOT REACHED */
+	/*@notreached@*/
 }
 
