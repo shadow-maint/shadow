@@ -1108,7 +1108,7 @@ int main (int argc, char **argv)
 			printf (_("%s: password changed."), Prog);
 #endif				/* USE_PAM */
 		} else {
-			printf (_("%s: password properties changed."), Prog);
+			printf (_("%s: password expiry information changed."), Prog);
 		}
 	}
 	exit (E_SUCCESS);
