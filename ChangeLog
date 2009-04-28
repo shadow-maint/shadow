@@ -1,7 +1,7 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/newusers.c: There is no need to test for 0 after
-	getopt_long. No options have flag != NULL.
+	* src/chgpasswd.c, src/newusers.c: There is no need to test for 0
+	after getopt_long. No options have flag != NULL.
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
