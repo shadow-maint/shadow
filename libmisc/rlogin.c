@@ -133,7 +133,7 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 	struct passwd *pwd;
 	char remote_name[32];
 	char *cp;
-	int remote_speed = 9600;
+	unsigned long remote_speed = 9600;
 	int speed_name = B9600;
 	int i;
 	TERMIO termio;
@@ -147,8 +147,7 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 		*cp = '\0';
 		cp++;
 
-		remote_speed = atoi (cp);
-		if (0 == remote_speed) {
+		if (getulong (cp, &remote_speed) == 0) {
 			remote_speed = 9600;
 		}
 	}

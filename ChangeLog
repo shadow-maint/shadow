@@ -1,5 +1,9 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/rlogin.c: Replace atoi() by getulong().
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.c: Replace HAVE_UTMPX_H by USE_UTMPX.
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
