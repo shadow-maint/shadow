@@ -37,7 +37,7 @@
 
 #include <utmp.h>
 
-#if USE_UTMPX
+#ifdef USE_UTMPX
 #include <utmpx.h>
 #endif
 

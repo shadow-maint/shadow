@@ -590,17 +590,17 @@ static void user_busy (const char *name, uid_t uid)
  * We see if the user is logged in by looking for the user name
  * in the utmp file.
  */
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	struct utmpx *utent;
 
 	setutxent ();
 	while ((utent = getutxent ()) != NULL)
-#else
+#else				/* !USE_UTMPX */
 	struct utmp *utent;
 
 	setutent ();
 	while ((utent = getutent ()) != NULL)
-#endif
+#endif				/* !USE_UTMPX */
 	{
 		if (utent->ut_type != USER_PROCESS)
 			continue;

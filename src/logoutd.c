@@ -54,21 +54,21 @@ char *Prog;
 #endif
 
 /* local function prototypes */
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 static int check_login (const struct utmpx *ut);
-#else
+#else				/* !USE_UTMPX */
 static int check_login (const struct utmp *ut);
-#endif
+#endif				/* !USE_UTMPX */
 static void send_mesg_to_tty (int tty_fd);
 
 /*
  * check_login - check if user (struct utmpx/utmp) allowed to stay logged in
  */
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 static int check_login (const struct utmpx *ut)
-#else
+#else				/* !USE_UTMPX */
 static int check_login (const struct utmp *ut)
-#endif
+#endif				/* !USE_UTMPX */
 {
 	char user[sizeof (ut->ut_user) + 1];
 	time_t now;
@@ -147,11 +147,11 @@ int main (int argc, char **argv)
 	int status;
 	pid_t pid;
 
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	struct utmpx *ut;
-#else
+#else				/* !USE_UTMPX */
 	struct utmp *ut;
-#endif
+#endif				/* !USE_UTMPX */
 	char user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
 	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
 	int tty_fd;
@@ -200,22 +200,22 @@ int main (int argc, char **argv)
 		 * Attempt to re-open the utmpx/utmp file. The file is only
 		 * open while it is being used.
 		 */
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 		setutxent ();
-#else
+#else				/* !USE_UTMPX */
 		setutent ();
-#endif
+#endif				/* !USE_UTMPX */
 
 		/*
 		 * Read all of the entries in the utmpx/utmp file. The entries
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 		while ((ut = getutxent ()) != NULL)
-#else
+#else				/* !USE_UTMPX */
 		while ((ut = getutent ()) != NULL)
-#endif
+#endif				/* !USE_UTMPX */
 		{
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
@@ -279,11 +279,11 @@ int main (int argc, char **argv)
 			exit (0);
 		}
 
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 		endutxent ();
-#else
+#else				/* !USE_UTMPX */
 		endutent ();
-#endif
+#endif				/* !USE_UTMPX */
 
 #ifndef DEBUG
 		sleep (60);

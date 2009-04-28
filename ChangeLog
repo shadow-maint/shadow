@@ -1,5 +1,9 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c, src/userdel.c, src/logoutd.c: Replace #if by #ifdef
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/vipw.c: Harmonize messages.
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
