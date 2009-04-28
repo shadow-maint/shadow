@@ -1,5 +1,10 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Change a snprintf() to strncpy(). There are no
+	format.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Harmonize status report at the end of passwd.
 	Prefix the messages with "passwd: ", only indicate a password
 	change if the password was actually changed, and password
