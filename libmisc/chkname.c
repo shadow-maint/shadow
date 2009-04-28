@@ -45,11 +45,6 @@
 #include <ctype.h>
 #include "defines.h"
 #include "chkname.h"
-#if HAVE_UTMPX_H
-#include <utmpx.h>
-#else
-#include <utmp.h>
-#endif
 
 static bool is_valid_name (const char *name)
 {
