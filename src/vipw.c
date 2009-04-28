@@ -284,7 +284,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	/* unset the fscreatecon */                                             
 	if (is_selinux_enabled ()) {
 		if (setfscreatecon (NULL)) {
-			vipwexit (_("setfscreatecon() failed"), errno, 1);
+			vipwexit (_("setfscreatecon () failed"), errno, 1);
 		}
 	}
 #endif

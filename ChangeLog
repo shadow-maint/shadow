@@ -1,5 +1,9 @@
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Harmonize messages.
+
+2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: Replace atoi() by getulong().
 
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
