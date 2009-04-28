@@ -89,14 +89,13 @@ setrlimit_value (unsigned int resource, const char *value,
 
 static int set_prio (const char *value)
 {
-	int prio;
-	char **endptr = (char **) &value;
+	long prio;
 
-	prio = strtol (value, endptr, 10);
-	if ((0 == prio) && (value == *endptr)) {
+	if (   (getlong (value, &prio) == 0)
+	    || (prio != (int) prio)) {
 		return 0;
 	}
-	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
+	if (setpriority (PRIO_PROCESS, 0, (int) prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
 	return 0;
@@ -120,11 +119,11 @@ static int set_umask (const char *value)
 /* Counts the number of user logins and check against the limit */
 static int check_logins (const char *name, const char *maxlogins)
 {
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	struct utmpx *ut;
-#else
+#else				/* !USE_UTMPX */
 	struct utmp *ut;
-#endif
+#endif				/* !USE_UTMPX */
 	unsigned long limit, count;
 
 	if (getulong (maxlogins, &limit) == 0) {
@@ -137,13 +136,13 @@ static int check_logins (const char *name, const char *maxlogins)
 	}
 
 	count = 0;
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	setutxent ();
 	while ((ut = getutxent ())) {
-#else
+#else				/* !USE_UTMPX */
 	setutent ();
 	while ((ut = getutent ())) {
-#endif
+#endif				/* !USE_UTMPX */
 		if (USER_PROCESS != ut->ut_type) {
 			continue;
 		}
@@ -158,11 +157,11 @@ static int check_logins (const char *name, const char *maxlogins)
 			break;
 		}
 	}
-#if HAVE_UTMPX_H
+#ifdef USE_UTMPX
 	endutxent ();
-#else
+#else				/* !USE_UTMPX */
 	endutent ();
-#endif
+#endif				/* !USE_UTMPX */
 	/*
 	 * This is called after setutmp(), so the number of logins counted
 	 * includes the user who is currently trying to log in.

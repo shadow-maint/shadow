@@ -1,5 +1,10 @@
 2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c: Replace strtol() by getlong().
+	* libmisc/limits.c: Replace HAVE_UTMPX_H by USE_UTMPX.
+
+2009-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupmod.8.xml, man/usermod.8.xml, man/groupadd.8.xml,
 	man/useradd.8.xml: Added note to warn about insecurity in using
 	--password.
