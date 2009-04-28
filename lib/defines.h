@@ -367,8 +367,10 @@ extern char *strerror ();
 
 /* Maximum length of usernames */
 #ifdef HAVE_UTMPX_H
+# include <utmpx.h>
 # define USER_NAME_MAX_LENGTH (sizeof (((struct utmpx *)NULL)->ut_user))
 #else
+# include <utmp.h>
 # ifdef HAVE_STRUCT_UTMP_UT_USER
 #  define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_user))
 # else
