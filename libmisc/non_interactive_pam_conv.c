@@ -44,10 +44,9 @@
 static int ni_conv (int num_msg,
                     const struct pam_message **msg,
                     struct pam_response **resp,
-                    void *appdata_ptr) {
+                    unused void *appdata_ptr) {
 	struct pam_response *responses;
 	int count;
-fputs ("ni_conv\n", stderr);
 
 	assert (NULL != non_interactive_password);
 
@@ -55,7 +54,7 @@ fputs ("ni_conv\n", stderr);
 		return PAM_CONV_ERR;
 	}
 
-	responses = (struct pam_response *) calloc (num_msg,
+	responses = (struct pam_response *) calloc ((size_t) num_msg,
 	                                            sizeof (*responses));
 	if (NULL == responses) {
 		return PAM_CONV_ERR;
@@ -66,13 +65,11 @@ fputs ("ni_conv\n", stderr);
 
 		switch (msg[count]->msg_style) {
 		case PAM_PROMPT_ECHO_ON:
-fputs ("PAM_PROMPT_ECHO_ON\n", stderr);
 			fprintf (stderr,
 			         _("%s: PAM modules requesting echoing are not supported.\n"),
 			         Prog);
 			goto failed_conversation;
 		case PAM_PROMPT_ECHO_OFF:
-fputs ("PAM_PROMPT_ECHO_OFF\n", stderr);
 			responses[count].resp = strdup (non_interactive_password);
 			if (NULL == responses[count].resp) {
 				goto failed_conversation;
