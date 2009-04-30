@@ -1,5 +1,9 @@
 2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getulong.c: Added splint annotations.
+
+2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c, src/chfn.c, src/groupmems.c, src/usermod.c,
 	src/userdel.c, src/chpasswd.c, src/grpck.c, src/gpasswd.c,
 	src/groupdel.c, src/chgpasswd.c, src/vipw.c, src/useradd.c,

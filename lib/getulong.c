@@ -52,7 +52,10 @@ int getulong (const char *numstr, /*@out@*/unsigned long int *result)
 	if (    ('\0' == *numstr)
 	     || ('\0' != *endptr)
 	     || (ERANGE == errno)
-	     || (val != (unsigned long int)val)) {
+	     /*@+ignoresigns@*/
+	     || (val != (unsigned long int)val)
+	     /*@=ignoresigns@*/
+	   ) {
 		return 0;
 	}
 
