@@ -59,6 +59,7 @@
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */

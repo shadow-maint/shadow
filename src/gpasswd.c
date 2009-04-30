@@ -43,13 +43,15 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include "defines.h"
-#include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables
  */
@@ -220,7 +222,7 @@ static void failure (void)
 {
 	fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 	log_gpasswd_failure (": Permission denied");
-	exit (1);
+	exit (E_NOPERM);
 }
 
 /*
@@ -248,9 +250,9 @@ static void process_flags (int argc, char **argv)
 			/* local, no need for xgetpwnam */
 			if (getpwnam (user) == NULL) {
 				fprintf (stderr,
-				         _("%s: user '%s' does not exist\n"), Prog,
-				         user);
-				exit (1);
+				         _("%s: user '%s' does not exist\n"),
+				         Prog, user);
+				exit (E_BAD_ARG);
 			}
 			break;
 #ifdef SHADOWGRP
@@ -259,11 +261,11 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: shadow group passwords required for -A\n"),
 				         Prog);
-				exit (2);
+				exit (E_GSHADOW_NOTFOUND);
 			}
 			admins = optarg;
 			if (!is_valid_user_list (admins)) {
-				exit (1);
+				exit (E_BAD_ARG);
 			}
 			Aflg = true;
 			break;
@@ -277,7 +279,7 @@ static void process_flags (int argc, char **argv)
 		case 'M':	/* set the list of members */
 			members = optarg;
 			if (!is_valid_user_list (members)) {
-				exit (1);
+				exit (E_BAD_ARG);
 			}
 			Mflg = true;
 			break;
@@ -345,7 +347,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		exit (1);
+		exit (E_NOPERM);
 	}
 	add_cleanup (cleanup_unlock_group, NULL);
 
@@ -355,7 +357,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-			exit (1);
+			exit (E_NOPERM);
 		}
 		add_cleanup (cleanup_unlock_gshadow, NULL);
 	}
@@ -368,7 +370,7 @@ static void open_files (void)
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 #ifdef SHADOWGRP
@@ -378,7 +380,7 @@ static void open_files (void)
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
-			exit (1);
+			exit (E_NOPERM);
 		}
 		add_cleanup (log_gpasswd_failure_gshadow, NULL);
 	}
@@ -669,7 +671,7 @@ static void close_files (void)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		exit (1);
+		exit (E_NOPERM);
 	}
 	add_cleanup (log_gpasswd_success_group, NULL);
 	del_cleanup (log_gpasswd_failure_group);
@@ -683,7 +685,7 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			exit (1);
+			exit (E_NOPERM);
 		}
 		add_cleanup (log_gpasswd_success_gshadow, NULL);
 		del_cleanup (log_gpasswd_failure_gshadow);
@@ -815,7 +817,7 @@ static void get_group (struct group *gr)
 	if (gr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	tmpgr = gr_locate (group);
@@ -823,7 +825,7 @@ static void get_group (struct group *gr)
 		fprintf (stderr,
 		         _("%s: group '%s' does not exist in %s\n"),
 		         Prog, group, gr_dbname ());
-		exit (1);
+		exit (E_BAD_ARG);
 	}
 
 	*gr = *tmpgr;
@@ -838,7 +840,7 @@ static void get_group (struct group *gr)
 		SYSLOG ((LOG_ERR,
 		         "failure while closing read-only %s",
 		         gr_dbname ()));
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 #ifdef SHADOWGRP
@@ -848,7 +850,7 @@ static void get_group (struct group *gr)
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
-			exit (1);
+			exit (E_NOPERM);
 		}
 		tmpsg = sgr_locate (group);
 		if (NULL != tmpsg) {
@@ -884,7 +886,7 @@ static void get_group (struct group *gr)
 			SYSLOG ((LOG_ERR,
 			         "failure while closing read-only %s",
 			         sgr_dbname ()));
-			exit (1);
+			exit (E_NOPERM);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -1010,7 +1012,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN,
 		         "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
-		exit (1);
+		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
 
@@ -1020,7 +1022,7 @@ int main (int argc, char **argv)
 	 */
 	if (atexit (do_cleanups) != 0) {
 		fprintf(stderr, "%s: cannot set exit function\n", Prog);
-		exit(EXIT_FAILURE);
+		exit (1);
 	}
 
 	/* Parse the options */
@@ -1106,7 +1108,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, user, group);
-			exit (1);
+			exit (E_BAD_ARG);
 		}
 		goto output;
 	}
@@ -1144,7 +1146,7 @@ int main (int argc, char **argv)
 	 */
 	if ((isatty (0) == 0) || (isatty (1) == 0)) {
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	catch_signals (0);	/* save tty modes */
@@ -1175,7 +1177,7 @@ int main (int argc, char **argv)
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	pwd_init ();
 

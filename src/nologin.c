@@ -31,20 +31,24 @@
 #include <stdio.h>
 #include <syslog.h>
 #include <unistd.h>
-#include "exitcodes.h"
 
 int main (void)
 {
 	const char *user, *tty;
 
-	if ((tty = ttyname (0)) == NULL)
+	tty = ttyname (0);
+	if (NULL == tty) {
 		tty = "UNKNOWN";
-	if ((user = getlogin ()) == NULL)
+	}
+	user = getlogin ();
+	if (NULL == user) {
 		user = "UNKNOWN";
+	}
 	openlog ("nologin", LOG_CONS, LOG_AUTH);
 	syslog (LOG_CRIT, "Attempted login by %s on %s", user, tty);
 	closelog ();
 
 	printf ("%s", "This account is currently not available.\n");
-	return E_NOPERM;
+
+	return EXIT_FAILURE;
 }

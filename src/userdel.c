@@ -56,10 +56,12 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
-#include "exitcodes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * exit status values
  */
@@ -1021,7 +1023,6 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	exit ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
-	/* NOT REACHED */
+	return ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
 }
 

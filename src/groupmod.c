@@ -58,6 +58,7 @@
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
@@ -813,7 +814,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("group");
 
-	exit (E_SUCCESS);
-	/* NOT REACHED */
+	return E_SUCCESS;
 }
 

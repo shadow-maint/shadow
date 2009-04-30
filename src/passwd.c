@@ -55,9 +55,11 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
+
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_NOPERM	1	/* permission denied */
 #define E_USAGE		2	/* invalid combination of options */
@@ -1004,7 +1006,7 @@ int main (int argc, char **argv)
 		if (NULL != user_context) {
 			freecon (user_context);
 		}
-		exit(1);
+		exit (E_NOPERM);
 	}
 #endif				/* WITH_SELINUX */
 
@@ -1111,7 +1113,7 @@ int main (int argc, char **argv)
 			printf (_("%s: password expiry information changed."), Prog);
 		}
 	}
-	exit (E_SUCCESS);
-	/*@notreached@*/
+
+	return E_SUCCESS;
 }
 

@@ -153,6 +153,7 @@ static bool home_added = false;
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_PW_UPDATE	1	/* can't update password file */
 #define E_USAGE		2	/* invalid command syntax */

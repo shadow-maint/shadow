@@ -51,7 +51,9 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
+/*@-exitarg@*/
 #include "exitcodes.h"
+
 #ifdef USE_PAM
 #include "pam_defs.h"
 
@@ -1324,8 +1326,7 @@ int main (int argc, char **argv)
 		/* exec the shell finally */
 		err = shell (pwd->pw_shell, (char *) 0, newenvp);
 	}
-	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	/* NOT REACHED */
-	return 0;
+
+	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }
 

@@ -51,7 +51,7 @@
 /*
  * Exit codes
  */
-
+/*@-exitarg@*/
 #define	E_OKAY		0
 #define	E_USAGE		1
 #define	E_BADENTRY	2
@@ -707,6 +707,6 @@ int main (int argc, char **argv)
 	}
 
 	closelog ();
-	exit ((0 != errors) ? E_BADENTRY : E_OKAY);
+	return ((0 != errors) ? E_BADENTRY : E_OKAY);
 }
 

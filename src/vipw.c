@@ -29,6 +29,9 @@
 
 #include <errno.h>
 #include <getopt.h>
+#ifdef WITH_SELINUX                                                            
+#include <selinux/selinux.h>                                                   
+#endif
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,17 +40,14 @@
 #include <unistd.h>
 #include <utime.h>
 #include "defines.h"
-#include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
-
-#ifdef WITH_SELINUX                                                            
-#include <selinux/selinux.h>                                                   
-#endif
+/*@-exitarg@*/
+#include "exitcodes.h"
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \
 	"You have modified %s.\n"\
@@ -406,6 +406,6 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	exit (E_SUCCESS);
+	return E_SUCCESS;
 }
 

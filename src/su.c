@@ -63,12 +63,14 @@
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
-#include "exitcodes.h"
 #include "pwauth.h"
 #include "getdef.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
-#endif
+#endif				/* USE_PAM */
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Assorted #defines to control su's behavior
  */

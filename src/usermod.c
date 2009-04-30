@@ -63,11 +63,13 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+
 /*
  * exit status values
  * for E_GRP_UPDATE and E_NOSPACE (not used yet), other update requests
  * will be implemented (as documented in the Solaris 2.x man page).
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_PW_UPDATE	1	/* can't update password file */
 #define E_USAGE		2	/* invalid command syntax */
@@ -1792,8 +1794,7 @@ int main (int argc, char **argv)
 			    user_gid, gflg ? user_newgid : user_gid);
 	}
 
-	exit (E_SUCCESS);
-	/* NOT REACHED */
+	return E_SUCCESS;
 }
 
 #ifdef WITH_SELINUX

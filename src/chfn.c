@@ -44,7 +44,6 @@
 #include <selinux/av_permissions.h>
 #endif
 #include "defines.h"
-#include "exitcodes.h"
 #include "getdef.h"
 #include "nscd.h"
 #ifdef USE_PAM
@@ -53,6 +52,9 @@
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables.
  */

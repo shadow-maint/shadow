@@ -67,6 +67,7 @@ static bool is_shadow_grp;
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_NOTFOUND	6	/* specified group doesn't exist */

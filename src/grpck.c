@@ -53,7 +53,7 @@
 /*
  * Exit codes
  */
-
+/*@-exitarg@*/
 #define	E_OKAY		0
 #define	E_USAGE		1
 #define	E_BAD_ENTRY	2
@@ -840,6 +840,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-	exit ((0 != errors) ? E_BAD_ENTRY : E_OKAY);
+	return ((0 != errors) ? E_BAD_ENTRY : E_OKAY);
 }
 

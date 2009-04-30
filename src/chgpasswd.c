@@ -45,13 +45,15 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include "defines.h"
-#include "exitcodes.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "groupio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables
  */

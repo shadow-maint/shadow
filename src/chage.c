@@ -52,11 +52,13 @@
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
 #endif
-#include "exitcodes.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwio.h"
 #include "shadowio.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables
  */

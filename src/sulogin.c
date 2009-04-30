@@ -43,7 +43,9 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
+/*@-exitarg@*/
 #include "exitcodes.h"
+
 /*
  * Global variables
  */
@@ -244,7 +246,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 #endif
 	/* exec the shell finally. */
 	err = shell (pwent.pw_shell, (char *) 0, environ);
-	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	 /*NOTREACHED*/ return (0);
+
+	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }
 

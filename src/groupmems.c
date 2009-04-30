@@ -49,7 +49,7 @@
 #endif
 
 /* Exit Status Values */
-
+/*@-exitarg@*/
 #define EXIT_SUCCESS		0	/* success */
 #define EXIT_USAGE		1	/* invalid command syntax */
 #define EXIT_GROUP_FILE		2	/* group file access problems */

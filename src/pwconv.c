@@ -71,9 +71,11 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "nscd.h"
+
 /*
  * exit status values
  */
+/*@-exitarg@*/
 #define E_SUCCESS	0	/* success */
 #define E_NOPERM	1	/* permission denied */
 #define E_USAGE		2	/* invalid command syntax */
@@ -269,6 +271,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 
-	exit (E_SUCCESS);
+	return E_SUCCESS;
 }
 

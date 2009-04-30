@@ -42,7 +42,9 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+/*@-exitarg@*/
 #include "exitcodes.h"
+
 /*
  * Global variables
  */
@@ -345,7 +347,7 @@ static void syslog_sg (const char *name, const char *group)
 				         (unsigned long) gid, name));
 			}
 			closelog ();
-			exit (EXIT_SUCCESS);
+			exit (E_SUCCESS);
 		}
 
 		/* child - restore signals to their default state */
@@ -728,7 +730,7 @@ int main (int argc, char **argv)
 		              (unsigned int) getuid (), 0);
 #endif
 		perror ("/bin/sh");
-		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
 	/*
@@ -800,7 +802,7 @@ int main (int argc, char **argv)
 	 * the previous environment which should be the user's login shell.
 	 */
 	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
-	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/* @notreached@ */
       failure:
 

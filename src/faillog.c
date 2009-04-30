@@ -42,9 +42,11 @@
 #include <time.h>
 #include <assert.h>
 #include "defines.h"
-#include "exitcodes.h"
 #include "faillog.h"
 #include "prototypes.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables
  */
@@ -498,7 +500,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         "faillog", optarg);
-					usage ();
+					exit (E_BAD_ARG);
 				}
 				lflg = true;
 				break;
@@ -507,7 +509,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         "faillog", optarg);
-					usage ();
+					exit (E_BAD_ARG);
 				}
 				mflg = true;
 				break;
@@ -519,7 +521,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         "faillog", optarg);
-					usage ();
+					exit (E_BAD_ARG);
 				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
@@ -550,7 +552,7 @@ int main (int argc, char **argv)
 						fprintf (stderr,
 						         _("lastlog: Unknown user or range: %s\n"),
 						         optarg);
-						exit (EXIT_FAILURE);
+						exit (E_BAD_ARG);
 					}
 				}
 
@@ -579,7 +581,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("faillog: Cannot open %s: %s\n"),
 		         FAILLOG_FILE, strerror (errno));
-		exit (EXIT_FAILURE);
+		exit (E_NOPERM);
 	}
 
 	/* Get the size of the faillog */
@@ -587,7 +589,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("faillog: Cannot get the size of %s: %s\n"),
 		         FAILLOG_FILE, strerror (errno));
-		exit (EXIT_FAILURE);
+		exit (E_NOPERM);
 	}
 
 	if (lflg) {
@@ -608,6 +610,6 @@ int main (int argc, char **argv)
 
 	fclose (fail);
 
-	exit (errors ? EXIT_FAILURE : EXIT_SUCCESS);
+	exit (errors ? E_NOPERM : E_SUCCESS);
 }
 

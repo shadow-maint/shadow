@@ -43,11 +43,13 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "defines.h"
-#include "exitcodes.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 /*
  * Global variables
  */
@@ -494,8 +496,8 @@ int main (int argc, char **argv)
 
 #else				/* !USE_PAM */
 		if (   !eflg
-		    && ((NULL == crypt_method)
-		        (0 != strcmp (crypt_method, "NONE")))) {
+		    && (   (NULL == crypt_method)
+		        || (0 != strcmp (crypt_method, "NONE")))) {
 			void *arg = NULL;
 			if (md5flg) {
 				crypt_method = "MD5";

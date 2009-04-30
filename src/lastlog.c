@@ -296,6 +296,7 @@ int main (int argc, char **argv)
 	print ();
 
 	(void) fclose (lastlogfile);
-	exit (EXIT_SUCCESS);
+
+	return EXIT_SUCCESS;
 }
 

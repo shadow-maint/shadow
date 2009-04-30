@@ -44,7 +44,6 @@
 #include <selinux/av_permissions.h>
 #endif
 #include "defines.h"
-#include "exitcodes.h"
 #include "getdef.h"
 #include "nscd.h"
 #include "prototypes.h"
@@ -53,6 +52,9 @@
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
 #endif
