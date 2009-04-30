@@ -222,8 +222,9 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	return fp;
 
       fail:
-	fclose (fp);
-	unlink (name);
+	(void) fclose (fp);
+	/* fopen_set_perms is used for intermediate files */
+	(void) unlink (name);
 	return NULL;
 }
 
@@ -257,11 +258,13 @@ static int create_backup (const char *backup, FILE * fp)
 		}
 	}
 	if ((c != EOF) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
-		fclose (bkfp);
+		(void) fclose (bkfp);
+		/* FIXME: unlink the backup file? */
 		return -1;
 	}
 	if (   (fsync (fileno (bkfp)) != 0)
 	    || (fclose (bkfp) != 0)) {
+		/* FIXME: unlink the backup file? */
 		return -1;
 	}
 
