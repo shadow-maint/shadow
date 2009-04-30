@@ -44,7 +44,7 @@ int get_uid (const char *uidstr, uid_t *uid)
 	if (   ('\0' == *uidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
-	    || (val != (uid_t)val)) {
+	    || (/*@+longintegral@*/val != (uid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}
 

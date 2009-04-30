@@ -44,7 +44,7 @@ int get_gid (const char *gidstr, gid_t *gid)
 	if (   ('\0' == *gidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
-	    || (val != (gid_t)val)) {
+	    || (/*@+longintegral@*/val != (gid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}
 

@@ -44,7 +44,7 @@ int get_pid (const char *pidstr, pid_t *pid)
 	if (   ('\0' == *pidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
-	    || (val != (pid_t)val)) {
+	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}
 

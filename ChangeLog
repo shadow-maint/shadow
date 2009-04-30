@@ -1,5 +1,10 @@
 2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/getgr_nam_gid.c, lib/get_gid.c, lib/get_pid.c,
+	lib/get_uid.c: Added splint annotations.
+
+2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/exitcodes.h: Define E_SUCCESS as EXIT_SUCCESS. Added FIXMEs.
 	* libmisc/chowntty.c, libmisc/rlogin.c, libmisc/sub.c,
 	src/newusers.c, libmisc/sulog.c, libmisc/system.c, src/logoutd.c,
