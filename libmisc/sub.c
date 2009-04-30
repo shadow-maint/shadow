@@ -58,7 +58,7 @@ void subsystem (const struct passwd *pw)
 		printf (_("Invalid root directory '%s'\n"), pw->pw_dir);
 		SYSLOG ((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	/*
@@ -71,6 +71,6 @@ void subsystem (const struct passwd *pw)
 			pw->pw_dir);
 		SYSLOG ((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 }

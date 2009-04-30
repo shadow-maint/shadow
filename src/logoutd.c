@@ -175,11 +175,11 @@ int main (int argc, char **argv)
 	pid = fork ();
 	if (pid > 0) {
 		/* parent */
-		exit (0);
+		exit (EXIT_SUCCESS);
 	} else if (pid < 0) {
 		/* error */
 		perror ("fork");
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 #endif				/* !DEBUG */
 
@@ -276,7 +276,7 @@ int main (int argc, char **argv)
 			/*
 			 * This child has done all it can, drop dead.
 			 */
-			exit (0);
+			exit (EXIT_SUCCESS);
 		}
 
 #ifdef USE_UTMPX
@@ -293,7 +293,7 @@ int main (int argc, char **argv)
 		 */
 		while (wait (&status) != -1);
 	}
-	return 1;
-	/* NOT REACHED */
+
+	return EXIT_FAILURE;
 }
 

@@ -32,7 +32,12 @@
 /*
  * Exit codes used by shadow programs
  */
-#define E_SUCCESS       	0	/* success */
+#define E_SUCCESS       	EXIT_SUCCESS	/* success */
+/*
+ * FIXME: other values should differ from EXIT_FAILURE (and EXIT_SUCCESS).
+ *
+ * FIXME: reserve EXIT_FAILURE for internal failures.
+ */
 #define E_NOPERM        	1	/* permission denied */
 #define E_USAGE         	2	/* invalid command syntax */
 #define E_BAD_ARG       	3	/* invalid argument to option */

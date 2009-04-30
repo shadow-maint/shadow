@@ -51,8 +51,11 @@ int safe_system (const char *command,
 	}
 
 	if (pid) {       /* Parent */
-		waitpid (pid, &status, 0);
-		return status;
+		if (waitpid (pid, &status, 0) > 0) {
+			return status;
+		} else {
+			return -1;
+		}
 	}
 
 	fd = open ("/dev/null", O_RDWR);
@@ -64,6 +67,6 @@ int safe_system (const char *command,
 
 	execve (command, (char *const *) argv, (char *const *) env);
 	fprintf (stderr, _("Failed to exec '%s'\n"), argv[0]);
-	exit (-1);
+	exit (EXIT_FAILURE);
 }
 

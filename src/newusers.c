@@ -126,7 +126,7 @@ static void usage (void)
 	                   "                                crypt algorithms\n")
 #endif
 	                 );
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
 /*
@@ -529,7 +529,7 @@ static void process_flags (int argc, char **argv)
 			char buf[BUFSIZ];
 			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
-			fail_exit (1);
+			fail_exit (EXIT_FAILURE);
 		}
 	}
 
@@ -593,7 +593,7 @@ static void check_perms (void)
 		fprintf (stderr,
 		         _("%s: Cannot determine your user name.\n"),
 		         Prog);
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 
 	retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
@@ -611,7 +611,7 @@ static void check_perms (void)
 	}
 	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
@@ -632,7 +632,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	pw_locked = true;
 	if (is_shadow) {
@@ -640,7 +640,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
-			fail_exit (1);
+			fail_exit (EXIT_FAILURE);
 		}
 		spw_locked = true;
 	}
@@ -648,7 +648,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	gr_locked = true;
 #ifdef SHADOWGRP
@@ -657,7 +657,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-			fail_exit (1);
+			fail_exit (EXIT_FAILURE);
 		}
 		sgr_locked = true;
 	}
@@ -665,20 +665,20 @@ static void open_files (void)
 
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	if (is_shadow && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 #ifdef SHADOWGRP
 	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 #endif
 }
@@ -691,7 +691,7 @@ static void close_files (void)
 	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	if (pw_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
@@ -706,7 +706,7 @@ static void close_files (void)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
-			fail_exit (1);
+			fail_exit (EXIT_FAILURE);
 		}
 		if (spw_unlock () == 0) {
 			fprintf (stderr,
@@ -723,7 +723,7 @@ static void close_files (void)
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 	if (gr_unlock () == 0) {
 		fprintf (stderr,
@@ -741,7 +741,7 @@ static void close_files (void)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-			fail_exit (1);
+			fail_exit (EXIT_FAILURE);
 		}
 		if (sgr_unlock () == 0) {
 			fprintf (stderr,
@@ -963,7 +963,7 @@ int main (int argc, char **argv)
 	if (0 != errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
-		fail_exit (1);
+		fail_exit (EXIT_FAILURE);
 	}
 
 	close_files ();
@@ -971,6 +971,6 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 

@@ -114,7 +114,7 @@ static void get_remote_string (char *buf, size_t size)
 {
 	for (;;) {
 		if (read (0, buf, 1) != 1) {
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
 		if ('\0' == *buf) {
 			return;

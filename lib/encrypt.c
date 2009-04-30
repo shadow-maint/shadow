@@ -53,7 +53,7 @@ char *pw_encrypt (const char *clear, const char *salt)
 		 * expect us to return NULL, so...
 		 */
 		perror ("crypt");
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	/* The GNU crypt does not return NULL if the algorithm is not
@@ -82,11 +82,13 @@ char *pw_encrypt (const char *clear, const char *salt)
 		fprintf (stderr,
 			 _("crypt method not supported by libcrypt? (%s)\n"),
 			  method);
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
-	if (strlen (cp) != 13)
+	if (strlen (cp) != 13) {
 		return cp;	/* nonstandard crypt() in libc, better bail out */
+	}
+
 	strcpy (cipher, cp);
 
 	return cipher;

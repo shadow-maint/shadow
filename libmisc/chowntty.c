@@ -83,7 +83,7 @@ void chown_tty (const struct passwd *info)
 		         info->pw_name, strerror (err)));
 		if (EROFS != err) {
 			closelog ();
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
 	}
 #ifdef __linux__

@@ -57,7 +57,7 @@ static void usage (void)
 #else
 	(void) fputs (_("Usage: id\n"), stderr);
 #endif
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
  /*ARGSUSED*/ int main (int argc, char **argv)
@@ -201,7 +201,7 @@ static void usage (void)
 	 * Finish off the line.
 	 */
 	(void) putchar ('\n');
-	exit (0);
-	/* NOT REACHED */
+
+	return EXIT_SUCCESS;
 }
 

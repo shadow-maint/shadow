@@ -64,7 +64,7 @@ static void print_groups (const char *member)
 	if (NULL == pwd) {
 		(void) fprintf (stderr, _("%s: unknown user %s\n"),
 		                Prog, member);
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	setgrent ();
@@ -146,7 +146,7 @@ int main (int argc, char **argv)
 		ngroups = getgroups (sys_ngroups, groups);
 		if (ngroups < 0) {
 			perror ("getgroups");
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
 
 		/*
@@ -203,7 +203,7 @@ int main (int argc, char **argv)
 		if (NULL != logname) {
 			print_groups (logname);
 		} else {
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
 #endif
 	} else {
@@ -214,6 +214,6 @@ int main (int argc, char **argv)
 		 */
 		print_groups (argv[1]);
 	}
-	exit (0);
+	return EXIT_SUCCESS;
 }
 

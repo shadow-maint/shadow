@@ -53,12 +53,14 @@ void audit_help_open (void)
 	if (audit_fd < 0) {
 		/* You get these only when the kernel doesn't have
 		 * audit compiled in. */
-		if (errno == EINVAL || errno == EPROTONOSUPPORT ||
-		    errno == EAFNOSUPPORT)
+		if (   (errno == EINVAL)
+		    || (errno == EPROTONOSUPPORT)
+		    || (errno == EAFNOSUPPORT)) {
 			return;
-		fprintf (stderr,
-		         _("Cannot open audit interface - aborting.\n"));
-		exit (1);
+		}
+		(void) fputs (_("Cannot open audit interface - aborting.\n"),
+		              stderr);
+		exit (EXIT_FAILURE);
 	}
 }
 
@@ -73,7 +75,6 @@ void audit_help_open (void)
  * name - user's account or group name. If not available use NULL.
  * id  -  uid or gid that the operation is being performed on. This is used
  *	  only when user is NULL.
- * result - 1 is "success" and 0 is "failed"
  */
 void audit_logger (int type, const char *pgname, const char *op,
                    const char *name, unsigned int id,

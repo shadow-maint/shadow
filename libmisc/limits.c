@@ -436,7 +436,7 @@ void setup_limits (const struct passwd *info)
 			    LOGIN_ERROR_LOGIN) {
 				(void) fputs (_("Too many logins.\n"), stderr);
 				(void) sleep (2); /* XXX: Should be FAIL_DELAY */
-				exit (1);
+				exit (EXIT_FAILURE);
 			}
 		}
 #endif

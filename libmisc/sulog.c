@@ -83,7 +83,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		         "can't switch back to group `%d' in sulog",
 		         oldgid));
 		/* Do not return if the group permission were raised. */
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	if (fp == (FILE *) 0) {
 		return;		/* can't open or create logfile */

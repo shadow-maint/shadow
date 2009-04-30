@@ -1,3 +1,17 @@
+2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/exitcodes.h: Define E_SUCCESS as EXIT_SUCCESS. Added FIXMEs.
+	* libmisc/chowntty.c, libmisc/rlogin.c, libmisc/sub.c,
+	src/newusers.c, libmisc/sulog.c, libmisc/system.c, src/logoutd.c,
+	src/groups.c, src/id.c, lib/encrypt.c, libmisc/audit_help.c,
+	libmisc/limits.c: Return EXIT_FAILURE instead of 1, and
+	EXIT_SUCCESS instead of 0.
+	* libmisc/audit_help.c: Replace an fprintf() by fputs().
+	* libmisc/audit_help.c: Remove documentation of the audit_logger
+	returned values. The function returns void.
+	* libmisc/system.c: Only return status if waitpid succeeded.
+	Return -1 otherwise.
+
 2009-04-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/chpasswd.c: Added support for changing the passwords
