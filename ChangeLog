@@ -1,3 +1,8 @@
+2009-05-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, configure.in: Fix build failure on non-PAM enabled system
+	when --without-pam is not specified.
+
 2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.c: Ignore teh return values of fclose() and

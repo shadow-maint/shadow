@@ -417,6 +417,7 @@ if test "$with_libpam" != "no"; then
 		with_libpam="yes"
 	else
 		with_libpam="no"
+		unset LIBPAM
 	fi
 fi
 dnl Now with_libpam is either yes or no
