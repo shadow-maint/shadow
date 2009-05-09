@@ -1,5 +1,12 @@
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Warn if an user has an entry in passwd and shadow,
+	and the password field in passwd is not 'x'.
+	* src/grpck.c: Warn if a group has an entry in group and gshadow,
+	and the password field in group is not 'x'.
+
+2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/ENCRYPT_METHOD.xml,
 	man/login.defs.d/MD5_CRYPT_ENAB.xml,
 	man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml: Updated note for PAM

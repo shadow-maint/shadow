@@ -497,6 +497,15 @@ static void check_pw_file (int *errors, bool *changed)
 						exit (E_CANTUPDATE);
 					}
 				}
+			} else {
+				/* The passwd entry has a shadow counterpart.
+				 * Make sure no passwords are in passwd.
+				 */
+				if (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) != 0) {
+					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
+					        pwd->pw_name, spw_file, pwd_file);
+					*errors += 1;
+				}
 			}
 		}
 	}

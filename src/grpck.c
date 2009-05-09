@@ -627,6 +627,15 @@ static void check_grp_file (int *errors, bool *changed)
 				compare_members_lists (grp->gr_name,
 				                       grp->gr_mem, sgr->sg_mem,
 				                       grp_file, sgr_file);
+
+				/* The group entry has a gshadow counterpart.
+				 * Make sure no passwords are in group.
+				 */
+				if (strcmp (grp->gr_passwd, SHADOW_PASSWD_STRING) != 0) {
+					printf (_("group %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
+					        grp->gr_name, sgr_file, grp_file);
+					*errors += 1;
+				}
 			}
 		}
 #endif

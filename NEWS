@@ -14,6 +14,9 @@ shadow-4.1.3.1 -> shadow-4.1.3.2					UNRELEASED
     policy in a central place. The -c/--crypt-method, -e/--encrypted,
     -m/--md5 and -s/--sha-rounds options are no more supported on PAM
     enabled systems.
+- grpck
+  * Warn if a group has an entry in group and gshadow, and the password
+    field in group is not 'x'.
 - login
   * Do not trust the current utmp entry's ut_line to set PAM_TTY. This could
     lead to DOS attacks.
@@ -25,6 +28,9 @@ shadow-4.1.3.1 -> shadow-4.1.3.2					UNRELEASED
   * Change the passwords using PAM. This permits to define the password
     policy in a central place. The -c/--crypt-method and -s/--sha-rounds
     options are no more supported on PAM enabled systems.
+- pwck
+  * Warn if an user has an entry in passwd and shadow, and the password
+    field in passwd is not 'x'.
 
 *** translation
  - Updated Czech translation
