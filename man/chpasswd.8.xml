@@ -67,6 +67,7 @@
       <emphasis remap='I'>user_name</emphasis>:<emphasis
       remap='I'>password</emphasis>
     </para>
+    <refsect2 condition="no_pam">
     <para>
       By default the supplied password must be in clear-text, and is
       encrypted by <command>chpasswd</command>.
@@ -78,6 +79,26 @@
       and can be overwiten with the <option>-e</option>,
       <option>-m</option>, or <option>-c</option> options.
     </para>
+      <para>
+	<command>chpasswd</command> first update the password in memory,
+	and then commit all the changes to disk if no errors occured for
+	any users.
+      </para>
+    </refsect2>
+    <refsect2 condition="pam">
+      <para>
+	The supplied passwords must be in clear-text.
+      </para>
+      <para>
+	PAM is used to update the password in the system database
+	according to the PAM chpasswd configuration.
+      </para>
+      <para>
+	When <command>chpasswd</command> fails to update a password, it
+	continues updating the passwords of the next users, and will
+	return an error code on exit.
+      </para>
+    </refsect2>
     <para>
       This command is intended to be used in a large system environment
       where many accounts are created at a single time.
@@ -91,6 +112,14 @@
       are:
     </para>
     <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP' condition="no_pam">
       <varlistentry>
 	<term><option>-c</option>, <option>--crypt-method</option></term>
 	<listitem>
@@ -108,12 +137,6 @@
 	<term><option>-e</option>, <option>--encrypted</option></term>
 	<listitem>
 	  <para>Supplied passwords are in encrypted form.</para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>-h</option>, <option>--help</option></term>
-	<listitem>
-	  <para>Display help message and exit.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -159,15 +182,9 @@
       Remember to set permissions or umask to prevent readability of
       unencrypted files by other users.
     </para>
-    <para>
-      PAM is not used to update the passwords.
-      Only <filename>/etc/passwd</filename> and
-      <filename>/etc/shadow</filename> are updated, and the various checks
-      or options provided by PAM modules are not used.
-    </para>
   </refsect1>
 
-  <refsect1 id='configuration'>
+  <refsect1 id='configuration' condition="no_pam">
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
@@ -184,22 +201,28 @@
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
 	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="pam">
+	<term><filename>/etc/pam.d/chpasswd</filename></term>
+	<listitem>
+	  <para>PAM configuration for <command>chpasswd</command>.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -214,11 +237,11 @@
       <citerefentry>
 	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
-      <citerefentry>
-	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      <citerefentry condition="no_pam">
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>

@@ -1,5 +1,12 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chpasswd.8.xml: Describe how chpasswd in case of error.
+	* man/chpasswd.8.xml: Describe the PAM enabled chpasswd behavior.
+	* man/chpasswd.8.xml: Differentiate the files and configurations
+	needed for PAM and non PAM versions.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: failcount does not need to be signed.
 
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
