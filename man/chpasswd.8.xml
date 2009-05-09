@@ -111,14 +111,6 @@
       The options which apply to the <command>chpasswd</command> command
       are:
     </para>
-    <variablelist remap='IP'>
-      <varlistentry>
-	<term><option>-h</option>, <option>--help</option></term>
-	<listitem>
-	  <para>Display help message and exit.</para>
-	</listitem>
-      </varlistentry>
-    </variablelist>
     <variablelist remap='IP' condition="no_pam">
       <varlistentry>
 	<term><option>-c</option>, <option>--crypt-method</option></term>
@@ -139,6 +131,16 @@
 	  <para>Supplied passwords are in encrypted form.</para>
 	</listitem>
       </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP' condition="no_pam">
       <varlistentry>
 	<term><option>-m</option>, <option>--md5</option></term>
 	<listitem>

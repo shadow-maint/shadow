@@ -1,5 +1,9 @@
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chpasswd.8.xml: Sorted options alphabetically.
+
+2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newusers.c, src/Makefile.am: Added support for
 	changing the passwords with PAM.
 	* src/newusers.c: Split the usage string in smaller parts to
