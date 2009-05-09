@@ -386,6 +386,18 @@
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry condition="no_pam">
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="pam">
+	<term><filename>/etc/pam.d/passwd</filename></term>
+	<listitem>
+	  <para>PAM configuration for <command>passwd</command>.</para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
@@ -444,14 +456,14 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
-	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>.
+      </citerefentry>,
+      <citerefentry condition="no_pam">
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
       <citerefentry>
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
