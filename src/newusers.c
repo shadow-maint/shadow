@@ -72,16 +72,15 @@
  */
 char *Prog;
 
-static bool cflg = false;
 static bool rflg = false;	/* create a system account */
-#ifdef USE_SHA_CRYPT
-static bool sflg = false;
-#endif
-
+#ifndef USE_PAM
+static bool cflg = false;
 static char *crypt_method = NULL;
 #ifdef USE_SHA_CRYPT
+static bool sflg = false;
 static long sha_rounds = 5000;
-#endif
+#endif				/* USE_SHA_CRYPT */
+#endif				/* !USE_PAM */
 
 static bool is_shadow;
 #ifdef SHADOWGRP
@@ -98,7 +97,9 @@ static void fail_exit (int);
 static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_user_id (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
+#ifndef USE_PAM
 static void update_passwd (struct passwd *, const char *);
+#endif				/* !USE_PAM */
 static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
@@ -111,21 +112,32 @@ static void close_files (void);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [options] [input]\n"
-	                   "\n"
-	                   "  -c, --crypt-method            the crypt method (one of %s)\n"
-	                   "  -r, --system                  create system accounts\n"
-	                   "%s"
-	                   "\n"),
-	                 Prog,
+	(void) fprintf (stderr,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+#ifndef USE_PAM
+	(void) fprintf (stderr,
+	                _("  -c, --crypt-method            the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
-	                 "NONE DES MD5", ""
-#else
-	                 "NONE DES MD5 SHA256 SHA512",
-	                 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-	                   "                                crypt algorithms\n")
-#endif
-	                 );
+	                "NONE DES MD5"
+#else				/* USE_SHA_CRYPT */
+	                "NONE DES MD5 SHA256 SHA512"
+#endif				/* USE_SHA_CRYPT */
+	               );
+#endif				/* !USE_PAM */
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
+	(void) fputs (_("  -r, --system                  create system accounts\n"), stderr);
+#ifndef USE_PAM
+#ifdef USE_SHA_CRYPT
+	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+	                "                                crypt algorithms\n"),
+	              stderr);
+#endif				/* USE_SHA_CRYPT */
+#endif				/* !USE_PAM */
+	(void) fputs ("\n", stderr);
+
 	exit (EXIT_FAILURE);
 }
 
@@ -243,7 +255,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		grent.gr_name = xstrdup (gid);
 	} else {
 		grent.gr_name = xstrdup (name);
-/* FIXME: check if the group exist */
+/* FIXME: check if the group exists */
 	}
 
 	/* Check if this is a valid group name */
@@ -368,6 +380,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	return (pw_update (&pwent) == 0);
 }
 
+#ifndef USE_PAM
 static void update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
@@ -387,6 +400,7 @@ static void update_passwd (struct passwd *pwd, const char *password)
 		                                              crypt_arg));
 	}
 }
+#endif				/* !USE_PAM */
 
 /*
  * add_passwd - add or update the encrypted password
@@ -395,13 +409,15 @@ static int add_passwd (struct passwd *pwd, const char *password)
 {
 	const struct spwd *sp;
 	struct spwd spent;
+
+#ifndef USE_PAM
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
 #ifdef USE_SHA_CRYPT
 		if (sflg) {
 			crypt_arg = &sha_rounds;
 		}
-#endif
+#endif				/* USE_SHA_CRYPT */
 	}
 
 	/*
@@ -413,12 +429,14 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		update_passwd (pwd, password);
 		return 0;
 	}
+#endif				/* USE_PAM */
 
 	/*
 	 * Do the first and easiest shadow file case. The user already
 	 * exists in the shadow password file.
 	 */
 	sp = spw_locate (pwd->pw_name);
+#ifndef USE_PAM
 	if (NULL != sp) {
 		spent = *sp;
 		if (   (NULL != crypt_method)
@@ -428,6 +446,12 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			const char *salt = crypt_make_salt (crypt_method,
 			                                    crypt_arg);
 			spent.sp_pwdp = pw_encrypt (password, salt);
+		}
+		spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		if (0 == spent.sp_lstchg) {
+			/* Better disable aging than requiring a password
+			 * change */
+			spent.sp_lstchg = -1;
 		}
 		return (spw_update (&spent) == 0);
 	}
@@ -442,18 +466,38 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		update_passwd (pwd, password);
 		return 0;
 	}
+#else				/* USE_PAM */
+	/*
+	 * If there is already a shadow entry, do not touch it.
+	 * If there is already a passwd entry with a password, do not
+	 * touch it.
+	 * The password will be updated later for all users using PAM.
+	 */
+	if (   (NULL != sp)
+	    || (strcmp (pwd->pw_passwd, "x") != 0)) {
+		return 0;
+	}
+#endif				/* USE_PAM */
 
 	/*
 	 * Now the really hard case - I need to create an entirely new
 	 * shadow password file entry.
 	 */
 	spent.sp_namp = pwd->pw_name;
+#ifndef USE_PAM
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
 		spent.sp_pwdp = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		spent.sp_pwdp = pw_encrypt (password, salt);
 	}
+#else
+	/*
+	 * Lock the password.
+	 * The password will be updated later for all users using PAM.
+	 */
+	spent.sp_pwdp = "!";
+#endif
 	spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 	if (0 == spent.sp_lstchg) {
 		/* Better disable aging than requiring a password change */
@@ -480,32 +524,39 @@ static void process_flags (int argc, char **argv)
 	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
+#ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
-		{"help", no_argument, NULL, 'h'},
 #ifdef USE_SHA_CRYPT
 		{"sha-rounds", required_argument, NULL, 's'},
-#endif
+#endif				/* USE_SHA_CRYPT */
+#endif				/* !USE_PAM */
+		{"help", no_argument, NULL, 'h'},
 		{"system", no_argument, NULL, 'r'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	while ((c = getopt_long (argc, argv,
+#ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 	                         "c:hrs:",
-#else
+#else				/* !USE_SHA_CRYPT */
 	                         "c:hr",
+#endif				/* !USE_SHA_CRYPT */
+#else				/* USE_PAM */
+	                         "hr",
 #endif
 	                     long_options, &option_index)) != -1) {
 		switch (c) {
-		case 'c':
-			cflg = true;
-			crypt_method = optarg;
-			break;
 		case 'h':
 			usage ();
 			break;
 		case 'r':
 			rflg = true;
+			break;
+#ifndef USE_PAM
+		case 'c':
+			cflg = true;
+			crypt_method = optarg;
 			break;
 #ifdef USE_SHA_CRYPT
 		case 's':
@@ -517,7 +568,8 @@ static void process_flags (int argc, char **argv)
 				usage ();
 			}
 			break;
-#endif
+#endif				/* USE_SHA_CRYPT */
+#endif				/* !USE_PAM */
 		default:
 			usage ();
 			break;
@@ -544,6 +596,7 @@ static void process_flags (int argc, char **argv)
  */
 static void check_flags (void)
 {
+#ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 	if (sflg && !cflg) {
 		fprintf (stderr,
@@ -551,7 +604,7 @@ static void check_flags (void)
 		         Prog, "-s", "-c");
 		usage ();
 	}
-#endif
+#endif				/* USE_SHA_CRYPT */
 
 	if (cflg) {
 		if (   (0 != strcmp (crypt_method, "DES"))
@@ -560,7 +613,7 @@ static void check_flags (void)
 #ifdef USE_SHA_CRYPT
 		    && (0 != strcmp (crypt_method, "SHA256"))
 		    && (0 != strcmp (crypt_method, "SHA512"))
-#endif
+#endif				/* USE_SHA_CRYPT */
 		    ) {
 			fprintf (stderr,
 			         _("%s: unsupported crypt method: %s\n"),
@@ -568,6 +621,7 @@ static void check_flags (void)
 			usage ();
 		}
 	}
+#endif				/* !USE_PAM */
 }
 
 /*
@@ -767,6 +821,12 @@ int main (int argc, char **argv)
 	int line = 0;
 	uid_t uid;
 	gid_t gid;
+#ifdef USE_PAM
+	int *lines = NULL;
+	char **usernames = NULL;
+	char **passwords = NULL;
+	unsigned int nusers = 0;
+#endif				/* USE_PAM */
 
 	Prog = Basename (argv[0]);
 
@@ -831,7 +891,7 @@ int main (int argc, char **argv)
 		}
 
 		/*
-		 * First check if we have to create of update an user
+		 * First check if we have to create or update an user
 		 */
 		pw = pw_locate (fields[0]);
 		/* local, no need for xgetpwnam */
@@ -902,6 +962,16 @@ int main (int argc, char **argv)
 		}
 		newpw = *pw;
 
+#if USE_PAM
+		/* keep the list of user/password for later update by PAM */
+		nusers++;
+		lines     = realloc (lines,     sizeof (lines[0])     * nusers);
+		usernames = realloc (usernames, sizeof (usernames[0]) * nusers);
+		passwords = realloc (passwords, sizeof (passwords[0]) * nusers);
+		lines[nusers-1]     = line;
+		usernames[nusers-1] = strdup (fields[0]);
+		passwords[nusers-1] = strdup (fields[1]);
+#endif
 		if (add_passwd (&newpw, fields[1])) {
 			fprintf (stderr,
 			         _("%s: line %d: can't update password\n"),
@@ -971,6 +1041,19 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	return EXIT_SUCCESS;
+#ifdef USE_PAM
+	unsigned int i;
+	/* Now update the passwords using PAM */
+	for (i = 0; i < nusers; i++) {
+		if (do_pam_passwd_non_interractive ("newusers", usernames[i], passwords[i]) != 0) {
+			fprintf (stderr,
+			         _("%s: (line %d, user %s) password not changed\n"),
+			         Prog, lines[i], usernames[i]);
+			errors++;
+		}
+	}
+#endif				/* USE_PAM */
+
+	return ((0 == errors) ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 

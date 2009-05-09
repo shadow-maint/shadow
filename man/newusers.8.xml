@@ -60,6 +60,7 @@
     <cmdsynopsis>
       <command>newusers</command>
       <arg choice='opt'>
+	<replaceable>options</replaceable>
 	<replaceable>new_users</replaceable>
       </arg>
     </cmdsynopsis>
@@ -219,9 +220,10 @@
 
   <refsect1 id='options'>
     <title>OPTIONS</title>
-    <para>The options which apply to the <command>newusers</command> command are:
+    <para>
+      The options which apply to the <command>newusers</command> command are:
     </para>
-    <variablelist remap='IP'>
+    <variablelist remap='IP' condition="no_pam">
       <varlistentry>
 	<term><option>-c</option>, <option>--crypt-method</option></term>
 	<listitem>
@@ -230,6 +232,14 @@
 	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
 	    if your libc support these methods.
 	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -251,6 +261,8 @@
 	  </para>
 	</listitem>
       </varlistentry>
+    </variablelist>
+    <variablelist remap='IP' condition="no_pam">
       <varlistentry condition="sha_crypt">
 	<term><option>-s</option>, <option>--sha-rounds</option></term>
 	<listitem>
@@ -300,15 +312,25 @@
       <filename>/etc/login.defs</filename> change the behavior of this
       tool:
     </para>
-    <variablelist>
+    <variablelist condition="no_pam">
       &ENCRYPT_METHOD;
+    </variablelist>
+    <variablelist>
       &GID_MAX; <!-- documents also GID_MIN -->
       &MAX_MEMBERS_PER_GROUP;
+    </variablelist>
+    <variablelist condition="no_pam">
       &MD5_CRYPT_ENAB;
+    </variablelist>
+    <variablelist>
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
+    </variablelist>
+    <variablelist condition="no_pam">
       &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS-->
+    </variablelist>
+    <variablelist>
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
       &UID_MAX; <!-- documents also UID_MIN -->
@@ -347,6 +369,12 @@
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="pam">
+	<term><filename>/etc/pam.d/newusers</filename></term>
+	<listitem>
+	  <para>PAM configuration for <command>newusers</command>.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

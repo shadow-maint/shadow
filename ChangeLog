@@ -1,5 +1,15 @@
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c, src/Makefile.am: Added support for
+	changing the passwords with PAM.
+	* src/newusers.c: Split the usage string in smaller parts to
+	allow enabling single parts.
+	* man/newusers.8.xml: Indicate the options and configuration
+	variables valid for PAM and non-PAM versions.
+	* man/newusers.8.xml: Added pointer to /etc/pam.d/chpasswd.
+
+2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: Remove duplicate definitions of exit codes.
 
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
@@ -52,7 +62,7 @@
 
 	* src/chpasswd.c: Added the line number when an error is reported
 	instead of only the username.
-	* src/chpasswd.c: PAM enabled chpasswd do may change the password
+	* src/chpasswd.c: PAM enabled chpasswd may change the password
 	database (for the user where the password update succeeded) even
 	if there were a failure for one user. Do not indicate that changes
 	were ignored.
@@ -127,7 +137,7 @@
 	* NEWS, src/chpasswd.c: Added support for changing the passwords
 	with PAM.
 	* src/chpasswd.c: Split the usage string in smaller parts to
-	allows enabling single parts.
+	allow enabling single parts.
 	* src/chpasswd.c: Do not set a global lock on the password files.
 	This is done by PAM each time a password is updated.
 

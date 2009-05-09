@@ -12,8 +12,8 @@ shadow-4.1.3.1 -> shadow-4.1.3.2					UNRELEASED
 - chpasswd
   * Change the passwords using PAM. This permits to define the password
     policy in a central place. The -c/--crypt-method, -e/--encrypted,
-    -m/--md5, -s/--sha-rounds are no more supported on PAM enabled
-    systems.
+    -m/--md5 and -s/--sha-rounds options are no more supported on PAM
+    enabled systems.
 - login
   * Do not trust the current utmp entry's ut_line to set PAM_TTY. This could
     lead to DOS attacks.
@@ -21,6 +21,10 @@ shadow-4.1.3.1 -> shadow-4.1.3.2					UNRELEASED
     user to update his authentication token if needed.
 - lastlog
   * Fix regression causing empty reports.
+- newusers
+  * Change the passwords using PAM. This permits to define the password
+    policy in a central place. The -c/--crypt-method and -s/--sha-rounds
+    options are no more supported on PAM enabled systems.
 
 *** translation
  - Updated Korean translation
