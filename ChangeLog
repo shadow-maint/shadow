@@ -1,5 +1,10 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/pam_pass.c: Removed comment regarding pam_misc. This is
+	checked by configure.in.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.5.xml: PAM enabled chpasswd do not use any
 	configuration variable from login.defs.
 

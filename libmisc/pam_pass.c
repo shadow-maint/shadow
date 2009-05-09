@@ -37,10 +37,7 @@
 
 
 /*
- * Change the user's password using PAM.  Requires libpam and libpam_misc
- * (for misc_conv).  Note: libpam_misc is probably Linux-PAM specific,
- * so you may have to port it if you want to use this code on non-Linux
- * systems with PAM (such as Solaris 2.6).  --marekm
+ * Change the user's password using PAM.
  */
 #include <stdio.h>
 #include <stdlib.h>
