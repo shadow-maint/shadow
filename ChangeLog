@@ -1,3 +1,7 @@
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/nologin.c: Include <stdlib.h> to get EXIT_FAILURE.
+
 2009-05-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Fix build failure on non-PAM enabled system
