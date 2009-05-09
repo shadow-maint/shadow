@@ -482,12 +482,12 @@ int main (int argc, char **argv)
 		non_interactive_password = newpwd;
 		ret = pam_chauthtok (pamh, 0);
 		if (ret != PAM_SUCCESS) {
-			fprintf (stderr, _("chpasswd: (user %s) pam_chauthtok() failed, error:\n"
+			fprintf (stderr, _("chpasswd: (line %d, user %s) pam_chauthtok() failed, error:\n"
 			                   "          %s\n"),
-			                 name, pam_strerror (pamh, ret));
+			                 line, name, pam_strerror (pamh, ret));
 			fprintf (stderr,
-			         _("chpasswd: (user %s) password unchanged\n"),
-			         name);
+			         _("chpasswd: (line %d, user %s) password unchanged\n"),
+			         line, name);
 			errors++;
 			continue;
 		}
@@ -582,14 +582,20 @@ int main (int argc, char **argv)
 	 * changes to be ignored. Otherwise the file is closed, causing the
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
+	 *
+	 * With PAM, it is not possible to delay the update of the
+	 * password database.
 	 */
 	if (0 != errors) {
+#ifndef USE_PAM
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
+#endif
 		fail_exit (1);
 	}
 
 #ifndef USE_PAM
+	/* Save the changes */
 	close_files ();
 #endif
 

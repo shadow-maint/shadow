@@ -1,5 +1,14 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chpasswd.c: Added the line number when an error is reported
+	instead of only the username.
+	* src/chpasswd.c: PAM enabled chpasswd do may change the password
+	database (for the user where the password update succeeded) even
+	if there were a failure for one user. Do not indicate that changes
+	were ignored.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Exit immediately when unlocking a password would
 	result in a passwordless account. This avoid printing a success
 	message after the warning.
