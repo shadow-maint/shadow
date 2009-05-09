@@ -159,6 +159,8 @@ int do_pam_passwd_non_interractive (const char *pam_service,
 	}
 
 	(void) pam_end (pamh, PAM_SUCCESS);
+
+	return ((PAM_SUCCESS == ret) ? 0 : 1);
 }
 #else				/* !USE_PAM */
 extern int errno;		/* warning: ANSI C forbids an empty source file */

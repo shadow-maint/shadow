@@ -239,9 +239,11 @@ extern void motd (void);
 extern /*@null@*/struct passwd *get_my_pwent (void);
 
 /* pam_pass_non_interractive.c */
+#ifdef USE_PAM
 extern int do_pam_passwd_non_interractive (const char *pam_service,
                                            const char *username,
-                                           const char* password)
+                                           const char* password);
+#endif				/* USE_PAM */
 
 /* obscure.c */
 #ifndef USE_PAM
