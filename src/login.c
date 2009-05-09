@@ -738,7 +738,7 @@ int main (int argc, char **argv)
 #endif
 	/* if fflg, then the user has already been authenticated */
 	if (!fflg) {
-		int failcount = 0;
+		unsigned int failcount = 0;
 		char hostn[256];
 		char loginprompt[256];	/* That's one hell of a prompt :) */
 
@@ -790,10 +790,10 @@ int main (int argc, char **argv)
 
 			if (retcode == PAM_MAXTRIES) {
 				SYSLOG ((LOG_NOTICE,
-				         "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
+				         "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
 				         failcount, fromhost, failent_user));
 				fprintf(stderr,
-				        _("Maximum number of tries exceeded (%d)\n"),
+				        _("Maximum number of tries exceeded (%u)\n"),
 				        failcount);
 				PAM_END;
 				exit(0);
@@ -804,7 +804,7 @@ int main (int argc, char **argv)
 				PAM_END;
 				exit(99);
 			} else if (retcode != PAM_SUCCESS) {
-				SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR '%s', %s",
+				SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%u)%s FOR '%s', %s",
 				         failcount, fromhost, failent_user,
 				         pam_strerror (pamh, retcode)));
 				failed = true;
@@ -834,10 +834,10 @@ int main (int argc, char **argv)
 
 			if (failcount >= retries) {
 				SYSLOG ((LOG_NOTICE,
-				         "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
+				         "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
 				         failcount, fromhost, failent_user));
 				fprintf(stderr,
-				        _("Maximum number of tries exceeded (%d)\n"),
+				        _("Maximum number of tries exceeded (%u)\n"),
 				        failcount);
 				PAM_END;
 				exit(0);

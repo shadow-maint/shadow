@@ -1,5 +1,9 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: failcount does not need to be signed.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/Makefile.am: PAM enabled chpasswd now needs to be linked to
 	the PAM library, even if --enable-account-tools-setuid is not
 	used.
