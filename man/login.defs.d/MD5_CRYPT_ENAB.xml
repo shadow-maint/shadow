@@ -50,9 +50,11 @@
       This variable is deprecated. You should use
       <option>ENCRYPT_METHOD</option>.
     </para>
-    <para>
-      Note: if you use PAM, it is recommended to set this variable
-      consistently with the PAM modules configuration.
+    <para condition="pam">
+      Note: This only affect the generation of group passwords.
+      The generation of user passwords is done by PAM and subject to the
+      PAM configuration. It is recommended to set this variable
+      consistently with the PAM configuration.
     </para>
   </listitem>
 </varlistentry>

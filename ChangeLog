@@ -1,5 +1,13 @@
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/ENCRYPT_METHOD.xml,
+	man/login.defs.d/MD5_CRYPT_ENAB.xml,
+	man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml: Updated note for PAM
+	enabled versions. These variables are only used for group
+	passwords in this case.
+
+2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chpasswd.8.xml: Sorted options alphabetically.
 
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
