@@ -31,6 +31,7 @@
 
 #ident "$Id:$"
 
+#ifdef USE_PAM
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
@@ -38,13 +39,23 @@
 #include <security/pam_appl.h>
 #include "prototypes.h"
 
-/*@null@*/ /*@only@*/char *non_interactive_password = NULL;
+/*@null@*/ /*@only@*/static char *non_interactive_password = NULL;
+static int ni_conv (int num_msg,
+                    const struct pam_message **msg,
+                    struct pam_response **resp,
+                    unused void *appdata_ptr);
+static struct pam_conv non_interactive_pam_conv = {
+	ni_conv,
+	NULL
+};
+
 
 
 static int ni_conv (int num_msg,
                     const struct pam_message **msg,
                     struct pam_response **resp,
-                    unused void *appdata_ptr) {
+                    unused void *appdata_ptr)
+{
 	struct pam_response *responses;
 	int count;
 
@@ -117,8 +128,38 @@ failed_conversation:
 	return PAM_CONV_ERR;
 }
 
-struct pam_conv non_interactive_pam_conv = {
-	ni_conv,
-	NULL
-};
 
+/*
+ * Change non interactively the user's password using PAM.
+ *
+ * Return 0 on success, 1 on failure.
+ */
+int do_pam_passwd_non_interractive (const char *pam_service,
+                                    const char *username,
+                                    const char* password)
+{
+	pam_handle_t *pamh = NULL;
+	int ret;
+
+	ret = pam_start (pam_service, username, &non_interactive_pam_conv, &pamh);
+	if (ret != PAM_SUCCESS) {
+		fprintf (stderr,
+		         _("%s: (user %s) pam_start failure %d\n"),
+		         Prog, username, ret);
+		return 1;
+	}
+
+	non_interactive_password = password;
+	ret = pam_chauthtok (pamh, 0);
+	if (ret != PAM_SUCCESS) {
+		fprintf (stderr,
+		         _("%s: (user %s) pam_chauthtok() failed, error:\n"
+		           "%s\n"),
+		         Prog, username, pam_strerror (pamh, ret));
+	}
+
+	(void) pam_end (pamh, PAM_SUCCESS);
+}
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* !USE_PAM */

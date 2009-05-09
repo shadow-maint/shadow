@@ -465,35 +465,12 @@ int main (int argc, char **argv)
 		newpwd = cp;
 
 #ifdef USE_PAM
-		pam_handle_t *pamh = NULL;
-		int ret;
-		ret = pam_start ("chpasswd", name, &non_interactive_pam_conv, &pamh);
-		if (ret != PAM_SUCCESS) {
+		if (do_pam_passwd_non_interractive ("chpasswd", name, newpwd) != 0) {
 			fprintf (stderr,
-			         _("chpasswd: (user %s) pam_start failure %d\n"),
-			         name, ret);
-			fprintf (stderr,
-			         _("chpasswd: (user %s) password unchanged\n"),
-			         name);
-			errors++;
-			continue;
+			         _("%s: (line %d, user %s) password not changed\n"),
+			         Prog, line, name);
+			error++;
 		}
-
-		non_interactive_password = newpwd;
-		ret = pam_chauthtok (pamh, 0);
-		if (ret != PAM_SUCCESS) {
-			fprintf (stderr, _("chpasswd: (line %d, user %s) pam_chauthtok() failed, error:\n"
-			                   "          %s\n"),
-			                 line, name, pam_strerror (pamh, ret));
-			fprintf (stderr,
-			         _("chpasswd: (line %d, user %s) password unchanged\n"),
-			         line, name);
-			errors++;
-			continue;
-		}
-
-		(void) pam_end (pamh, PAM_SUCCESS);
-
 #else				/* !USE_PAM */
 		if (   !eflg
 		    && (   (NULL == crypt_method)

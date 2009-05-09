@@ -1,5 +1,19 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/non_interactive_pam_conv.c,
+	libmisc/pam_pass_non_interractive.c, libmisc/Makefile.am: Renamed.
+	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
+	non_interactive_password and non_interactive_pam_conv do not need
+	to be externally visible.
+	* libmisc/pam_pass_non_interractive.c: Added declaration of
+	ni_conv.
+	* libmisc/pam_pass_non_interractive.c: Only compile ifdef USE_PAM.
+	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
+	Added do_pam_passwd_non_interractive().
+	* src/chpasswd.c: Use do_pam_passwd_non_interractive().
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/pam_pass.c: Removed comment regarding pam_misc. This is
 	checked by configure.in.
 
