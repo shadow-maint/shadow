@@ -55,7 +55,7 @@
 
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/chpasswd.8.xml: Describe how chpasswd in case of error.
+	* man/chpasswd.8.xml: Describe how chpasswd behaves in case of error.
 	* man/chpasswd.8.xml: Describe the PAM enabled chpasswd behavior.
 	* man/chpasswd.8.xml: Differentiate the files and configurations
 	used for PAM and non-PAM versions.
