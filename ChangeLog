@@ -1,5 +1,11 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Exit immediately when unlocking a password would
+	result in a passwordless account. This avoid printing a success
+	message after the warning.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/nologin.c: Include <stdlib.h> to get EXIT_FAILURE.
 
 2009-05-04  Nicolas François  <nicolas.francois@centraliens.net>

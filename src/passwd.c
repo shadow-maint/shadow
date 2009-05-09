@@ -519,9 +519,10 @@ static char *update_crypt_pw (char *cp)
 	if (uflg && *cp == '!') {
 		if (cp[1] == '\0') {
 			fprintf (stderr,
-				 _("%s: unlocking the password would result in a passwordless account.\n"
-				   "You should set a password with usermod -p to unlock the password of this account.\n"),
-				 Prog);
+			         _("%s: unlocking the password would result in a passwordless account.\n"
+			           "You should set a password with usermod -p to unlock the password of this account.\n"),
+			         Prog);
+			fail_exit (E_FAILURE);
 		} else {
 			cp++;
 		}
