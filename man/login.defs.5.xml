@@ -234,7 +234,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term>chpasswd</term>
 	<listitem>
 	  <para>

@@ -1,5 +1,10 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.5.xml: PAM enabled chpasswd do not use any
+	configuration variable from login.defs.
+
+2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/passwd.1.xml: Differentiate the files used for PAM and
 	non-PAM versions.
 
