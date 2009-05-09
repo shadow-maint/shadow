@@ -65,9 +65,7 @@
 /*
  * exit status values
  */
-#define E_SUCCESS	0
 #define E_PW_UPDATE	1	/* can't update password file */
-#define E_USAGE		2	/* invalid command syntax */
 #define E_NOTFOUND	6	/* specified user doesn't exist */
 #define E_USER_BUSY	8	/* user currently logged in */
 #define E_GRP_UPDATE	10	/* can't update group file */

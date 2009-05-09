@@ -1,3 +1,7 @@
+2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/userdel.c: Remove duplicate definitions of exit codes.
+
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/non_interactive_pam_conv.c,
