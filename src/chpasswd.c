@@ -469,7 +469,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: (line %d, user %s) password not changed\n"),
 			         Prog, line, name);
-			error++;
+			errors++;
 		}
 #else				/* !USE_PAM */
 		if (   !eflg
