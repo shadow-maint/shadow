@@ -460,16 +460,16 @@ int main (int argc, char **argv)
 		}
 	}
 	if ('\0' == name[0]) {		/* use default user */
-		struct passwd *root_pw = getpwnam("root");
+		struct passwd *root_pw = getpwnam ("root");
 		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
 			(void) strcpy (name, "root");
 		} else {
-			struct passwd *root_pw = getpwuid(0);
+			root_pw = getpwuid (0);
 			if (NULL == root_pw) {
-				SYSLOG((LOG_CRIT, "There is no UID 0 user."));
-				su_failure(tty);
+				SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
+				su_failure (tty);
 			}
-			(void) strcpy(name, root_pw->pw_name);
+			(void) strcpy (name, root_pw->pw_name);
 		}
 	}
 
