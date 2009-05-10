@@ -547,7 +547,7 @@ static int set_defaults (void)
 	 * Rename the current default file to its backup name.
 	 */
 	wlen = snprintf (buf, sizeof buf, "%s-", def_file);
-	assert (wlen < sizeof buf);
+	assert (wlen < (int) sizeof buf);
 	if ((rename (def_file, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;
 		fprintf (stderr,
@@ -1862,7 +1862,7 @@ int main (int argc, char **argv)
 	OPENLOG ("useradd");
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = xmalloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups = (char **) xmalloc ((1 + sys_ngroups) * sizeof (char *));
 	/*
 	 * Initialize the list to be empty
 	 */
