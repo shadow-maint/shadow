@@ -421,7 +421,7 @@ static int set_defaults (void)
 {
 	FILE *ifp;
 	FILE *ofp;
-	char buf[PATH_MAX];
+	char buf[1024];
 	static char new_file[] = NEW_USER_FILE;
 	char *cp;
 	int ofd;
@@ -468,6 +468,16 @@ static int set_defaults (void)
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
+		} else {
+			/* A line which does not end with \n is only valid
+			 * at the end of the file.
+			 */
+			if (feof (ifp) == 0) {
+				fprintf (stderr,
+				         _("%s: line too long in %s: %s..."),
+				         Prog, def_file, buf);
+				return -1;
+			}
 		}
 
 		if (!out_group && MATCH (buf, DGROUP)) {

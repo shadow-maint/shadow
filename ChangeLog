@@ -1,3 +1,15 @@
+2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/commonio.c: Avoid PATH_MAX. On glibc, we can use realpath
+	with a NULL argument.
+	* src/useradd.c: Replace PATH_MAX by a fixed constant. The buffer
+	was not meant as a storage for a path.
+	* src/useradd.c, src/newusers.c, src/chpasswd.c: Better detection
+	of fgets errors. Lines shall end with a \n, unless we reached the
+	end of file.
+	* libmisc/copydir.c: Avoid PATH_MAX. Support file paths with any
+	length. Added readlink_malloc().
+
 2009-05-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwck.c: Warn if an user has an entry in passwd and shadow,

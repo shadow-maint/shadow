@@ -199,8 +199,6 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 int copy_tree (const char *src_root, const char *dst_root,
                long int uid, long int gid)
 {
-	char src_name[PATH_MAX];
-	char dst_name[PATH_MAX];
 	int err = 0;
 	bool set_orig = false;
 	struct DIRECT *ent;
@@ -240,26 +238,35 @@ int copy_tree (const char *src_root, const char *dst_root,
 		 */
 		if ((strcmp (ent->d_name, ".") != 0) &&
 		    (strcmp (ent->d_name, "..") != 0)) {
-			/*
-			 * Make sure the resulting source and destination
-			 * filenames will fit in their buffers.
-			 */
-			if (   (strlen (src_root) + strlen (ent->d_name) + 2 >
-			        sizeof src_name)
-			    || (strlen (dst_root) + strlen (ent->d_name) + 2 >
-			        sizeof dst_name)) {
+			char *src_name;
+			char *dst_name;
+			size_t src_len = strlen (ent->d_name) + 2;
+			size_t dst_len = strlen (ent->d_name) + 2;
+			src_len += strlen (src_root);
+			dst_len += strlen (dst_root);
+
+			src_name = (char *) malloc (src_len);
+			dst_name = (char *) malloc (dst_len);
+
+			if ((NULL == src_name) || (NULL == dst_name)) {
 				err = -1;
 			} else {
 				/*
 				 * Build the filename for both the source and
 				 * the destination files.
 				 */
-				snprintf (src_name, sizeof src_name, "%s/%s",
+				snprintf (src_name, src_len, "%s/%s",
 				          src_root, ent->d_name);
-				snprintf (dst_name, sizeof dst_name, "%s/%s",
+				snprintf (dst_name, dst_len, "%s/%s",
 				          dst_root, ent->d_name);
 
 				err = copy_entry (src_name, dst_name, uid, gid);
+			}
+			if (NULL != src_name) {
+				free (src_name);
+			}
+			if (NULL != dst_name) {
+				free (dst_name);
 			}
 		}
 	}
@@ -416,6 +423,41 @@ static int copy_dir (const char *src, const char *dst,
 
 #ifdef	S_IFLNK
 /*
+ * readlink_malloc - wrapper for readlink
+ *
+ * return NULL on error.
+ * The return string shall be freed by the caller.
+ */
+char *readlink_malloc (const char *filename)
+{
+	size_t size = 1024;
+
+	while (1) {
+		ssize_t nchars;
+		char *buffer = (char *) malloc (size);
+		if (NULL == buffer) {
+			return NULL;
+		}
+
+		nchars = readlink (filename, buffer, size);
+
+		if (nchars < 0) {
+			return NULL;
+		}
+
+		if ( (size_t) nchars < size) { /* The buffer was large enough */
+			/* readlink does not nul-terminate */
+			buffer[nchars] = '\0';
+			return buffer;
+		}
+
+		/* Try again with a bigger buffer */
+		free (buffer);
+		size *= 2;
+	}
+}
+
+/*
  * copy_symlink - copy a symlink
  *
  *	Copy a symlink from src to dst.
@@ -429,10 +471,7 @@ static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid)
 {
-	char oldlink[PATH_MAX];
-	char dummy[PATH_MAX];
-	int len;
-	int err = 0;
+	char *oldlink;
 
 	/* copy_tree () must be the entry point */
 	assert (NULL != src_orig);
@@ -446,17 +485,25 @@ static int copy_symlink (const char *src, const char *dst,
 	 * destination directory name.
 	 */
 
-	len = readlink (src, oldlink, sizeof (oldlink) - 1);
-	if (len < 0) {
+	oldlink = readlink_malloc (src);
+	if (NULL == oldlink) {
 		return -1;
 	}
-	oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
+
+	/* If src was a link to an entry of the src_orig directory itself,
+	 * create a link to the corresponding entry in the dst_orig
+	 * directory.
+	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
-		snprintf (dummy, sizeof dummy, "%s%s",
+		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
+		char *dummy = (char *) malloc (len);
+		snprintf (dummy, len, "%s%s",
 		          dst_orig,
 		          oldlink + strlen (src_orig));
-		strcpy (oldlink, dummy);
+		free (oldlink);
+		oldlink = dummy;
 	}
+
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
 #endif
@@ -464,8 +511,10 @@ static int copy_symlink (const char *src, const char *dst,
 	    || (lchown (dst,
 	                (uid == -1) ? statp->st_uid : (uid_t) uid,
 	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)) {
+		free (oldlink);
 		return -1;
 	}
+	free (oldlink);
 
 #ifdef HAVE_LUTIMES
 	/* 2007-10-18: We don't care about
@@ -476,7 +525,7 @@ static int copy_symlink (const char *src, const char *dst,
 	lutimes (dst, mt);
 #endif
 
-	return err;
+	return 0;
 }
 #endif
 
@@ -618,7 +667,7 @@ static int copy_file (const char *src, const char *dst,
 
 int remove_tree (const char *root)
 {
-	char new_name[PATH_MAX];
+	char *new_name = NULL;
 	int err = 0;
 	struct DIRECT *ent;
 	struct stat sb;
@@ -645,6 +694,7 @@ int remove_tree (const char *root)
 	}
 
 	while ((ent = readdir (dir))) {
+		size_t new_len = strlen (root) + strlen (ent->d_name) + 2;
 
 		/*
 		 * Skip the "." and ".." entries
@@ -659,12 +709,15 @@ int remove_tree (const char *root)
 		 * Make the filename for the current entry.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name) {
+		if (NULL != new_name) {
+			free (new_name);
+		}
+		new_name = (char *) malloc (new_len);
+		if (NULL == new_name) {
 			err = -1;
 			break;
 		}
-		snprintf (new_name, sizeof new_name, "%s/%s", root,
-			  ent->d_name);
+		snprintf (new_name, new_len, "%s/%s", root, ent->d_name);
 		if (LSTAT (new_name, &sb) == -1) {
 			continue;
 		}
@@ -686,6 +739,9 @@ int remove_tree (const char *root)
 				break;
 			}
 		}
+	}
+	if (NULL != new_name) {
+		free (new_name);
 	}
 	(void) closedir (dir);
 

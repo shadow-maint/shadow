@@ -434,11 +434,13 @@ int main (int argc, char **argv)
 		if (NULL != cp) {
 			*cp = '\0';
 		} else {
-			fprintf (stderr,
-			         _("%s: line %d: line too long\n"),
-			         Prog, line);
-			errors++;
-			continue;
+			if (feof (stdin) == 0) {
+				fprintf (stderr,
+				         _("%s: line %d: line too long\n"),
+				         Prog, line);
+				errors++;
+				continue;
+			}
 		}
 
 		/*
