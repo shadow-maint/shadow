@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -77,7 +77,6 @@ msgstr "Jelszavad már csak holnapig érvényes"
 msgid "Your password will expire today."
 msgstr "Jelszavad érvényessége ma lejár"
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
@@ -202,11 +201,6 @@ msgstr "Érvénytelen gyökérkönyvtár: \"%s\"\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Nem lehet a gyökérkönyvtárba váltani: \"%s\"\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű \"sh\"-"
-"ból."
 
 msgid "Unable to determine your tty name."
 msgstr "Sikertelen tty név meghatározás."
@@ -548,6 +542,33 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: hibákat észleltem, a változások elvetve\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: %s felhasználó nem létezik\n"
+
+#, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: %s felhasználó nem létezik\n"
 
@@ -650,7 +671,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -666,15 +687,15 @@ msgid " [%lds lock]"
 msgstr " [%lds zárolva]"
 
 #, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -956,6 +977,11 @@ msgstr "nincs megfelelő csoportfájl bejegyzés a következőben: %s\n"
 msgid "add group '%s' in %s? "
 msgstr "hozzáadod a(z) %s csoportot a következőhöz: %s ?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "érvénytelen árnyék csoport fájl bejegyzés"
 
@@ -1030,7 +1056,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1062,6 +1088,10 @@ msgstr "       %s [-p] [-h host] [-f név]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r host\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Érvénytelen bejelentkezési idő"
 
@@ -1079,13 +1109,25 @@ msgstr ""
 "\n"
 "[Leválasztás átlépve -- root bejelentkezés engedélyezett]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "A bejelentkezés %d mp. után elkésett\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű \"sh\"-"
+"ból."
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1095,16 +1137,19 @@ msgstr "login: PAM hiba, törölve: %s\n"
 msgid "%s login: "
 msgstr "%s bejelentkezés: "
 
-#, c-format
 msgid "login: "
 msgstr "bejelentkezés: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Próbálkozások megengedett száma átlépve (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: a PAM törlést kért\n"
+
+msgid "Login incorrect"
+msgstr "Hibás bejelentkezés"
 
 #, c-format
 msgid ""
@@ -1113,9 +1158,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s bejelentkezés: "
-
-msgid "Login incorrect"
-msgstr "Hibás bejelentkezés"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1173,13 +1215,7 @@ msgstr "%s: %s felhasználó nem létezik\n"
 msgid "too many groups\n"
 msgstr "túl sok csoport\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1378,11 +1414,15 @@ msgstr "%s jelszavának cseréje\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s jelszava változatlan.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Jelszó módosítva."
 
-msgid "Password set to expire."
-msgstr "Jelszó lejárata beállítva."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Jelszó elévülési figyelmeztetés"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1425,6 +1465,11 @@ msgstr "nincs megfelelő jelszófájl bejegyzés a következőben: %s\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "hozzáadja \"%s\" felhasználót a következőbe: %s? "
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "érvénytelen árnyék jelszófájl bejegyzés"
@@ -1568,8 +1613,14 @@ msgstr "%s: nem tudom létrehozni az új defaults fájlt\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: nem tudom megnyitni az új defaults fájlt\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: %d. sor: chown sikertelen\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: átnevezés: %s"
 
 #, c-format
@@ -2001,12 +2052,12 @@ msgstr "Nem tudtam zárolni a fájlt"
 msgid "Couldn't make backup"
 msgstr "Nem tudtam biztonsági másolatot készíteni"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Jelszó lejárata beállítva."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: nem tudom zárolni a jelszófájlt\n"
@@ -2460,9 +2511,6 @@ msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Nincs jelszófájl\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Használat: %s [bemenet]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Bocs.\n"

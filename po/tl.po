@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2007-11-26 21:34+0100\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -83,7 +83,6 @@ msgstr "Hanggang bukas ang taning ng inyong kontrasenyas."
 msgid "Your password will expire today."
 msgstr "Mapapaso ang inyong kontrasenyas ngayong araw na ito."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
@@ -215,11 +214,6 @@ msgstr "Hindi tanggap na root directory '%s'\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Hindi mapalitan ang root directory sa '%s'\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Walang nakapasok sa utmp. Kailangan niyong mag-exec \"login\" mula sa "
-"pinakamababang antas ng \"sh\""
 
 msgid "Unable to determine your tty name."
 msgstr "Hindi malaman ang pangalan ng tty ninyo."
@@ -560,6 +554,33 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: may error na naganap, di pinansin ang mga pagbabago\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Pag-gamit: %s [input]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: walang gumagamit na nagngangalang %s\n"
+
+#, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: walang gumagamit na nagngangalang %s\n"
 
@@ -660,7 +681,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -676,15 +697,15 @@ msgid " [%lds lock]"
 msgstr " [%lds lock]"
 
 #, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -964,6 +985,11 @@ msgstr "walang katumbas na entry sa talaksang grupo sa %s\n"
 msgid "add group '%s' in %s? "
 msgstr "idagdag ang grupong '%s' sa %s ?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "hindi tanggap na entry sa talaksang shadow group"
 
@@ -1037,7 +1063,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1069,6 +1095,10 @@ msgstr "       %s [-p] [-h host] [-f pangalan]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r host\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Di tamang oras ng pagpasok"
 
@@ -1086,13 +1116,25 @@ msgstr ""
 "\n"
 "[Nilaktawan ang pag-diskonek -- pinayagang makapasok ang root.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Lumipas ang taning ng pagpasok ng %d segundo.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Walang nakapasok sa utmp. Kailangan niyong mag-exec \"login\" mula sa "
+"pinakamababang antas ng \"sh\""
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1102,16 +1144,19 @@ msgstr "login: kabiguan sa PAM, humihinto: %s\n"
 msgid "%s login: "
 msgstr "%s login: "
 
-#, c-format
 msgid "login: "
 msgstr "login: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Lumampas sa bilang ng maaaring pagsubok : (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: hiniling na mag-abort ng PAM\n"
+
+msgid "Login incorrect"
+msgstr "Maling pagpasok"
 
 #, c-format
 msgid ""
@@ -1120,9 +1165,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s login: "
-
-msgid "Login incorrect"
-msgstr "Maling pagpasok"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1180,13 +1222,7 @@ msgstr "%s: walang gumagamit na nagngangalang %s\n"
 msgid "too many groups\n"
 msgstr "labis ang dami ng mga grupo\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1360,11 +1396,15 @@ msgstr "Pinapalitan ang password ni %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Ang password ni %s ay hindi napalitan.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Napalitan ang password."
 
-msgid "Password set to expire."
-msgstr "Itinakdang lumampas sa taning ang password."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Babala ng Paglipas ng Taning ng Password"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1407,6 +1447,11 @@ msgstr "walang kaparehas na kontrasenyas sa %s\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "idagdag ang gumagamit na si '%s' sa %s? "
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "hindi tanggap na ipinasok sa talaksang password na shadow"
@@ -1550,8 +1595,14 @@ msgstr "%s: hindi malikha ang bagong talaksan ng mga default\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: hindi mabuksan ang bagong talaksan ng mga default\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: linya %d: bigo ang chown\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: baguhin ang pangalan: %s"
 
 #, c-format
@@ -1975,12 +2026,12 @@ msgstr "Hindi maaldaba ang talaksan"
 msgid "Couldn't make backup"
 msgstr "Hindi makagawa ng backup"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Itinakdang lumampas sa taning ang password."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: hindi maaldaba ang talaksan ng mga kontrasenyas\n"
@@ -2435,9 +2486,6 @@ msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Walang talaksang password\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Pag-gamit: %s [input]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Ipagpaumanhin.\n"

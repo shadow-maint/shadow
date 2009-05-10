@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2009-04-12 17:14+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -85,7 +85,6 @@ msgstr "Ditt passord vil utløpe i morgen."
 msgid "Your password will expire today."
 msgstr "Ditt passord vil utløpe i dag."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr "Kan ikke åpne kontrollgrensesnitt – avbryter.\n"
 
@@ -217,9 +216,6 @@ msgstr "Ugyldig rot-mappe «%s»\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Kan ikke endre rot-mappa til «%s»\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Ingen oppføring i utmp. Du må kjøre «login» fra «sh» på laveste nivå"
 
 msgid "Unable to determine your tty name."
 msgstr "Kan ikke finne ut ditt terminalnavn."
@@ -572,6 +568,41 @@ msgstr "%s: linje %d: klarte ikke lage det nye %s-innslaget «%s»\n"
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: feil funnet, endringer er ikke utført\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+# , c-format
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: linje %d: bruker «%s» finnes ikke\n"
+
 # , c-format
 #, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
@@ -651,8 +682,9 @@ msgstr ""
 "                                eller -l) bare for bruker BRUKER\n"
 "\n"
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr "faillog: klarte ikke finne oppføring for UID %d\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -667,16 +699,19 @@ msgstr " [%lus igjen]"
 msgid " [%lds lock]"
 msgstr " [%lds lås]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr "faillog: Klarte ikke tilbakestille feiltelling for UID %d\n"
 
-#, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr "faillog: Klarte ikke sette maksimum for UID %d\n"
 
-#, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr "faillog: Klarte ikke sette låsetid for UID %d\n"
 
 # , c-format
@@ -991,6 +1026,11 @@ msgstr "fant ingen tilsvarende oppføring i %s\n"
 msgid "add group '%s' in %s? "
 msgstr "legg til gruppe «%s» i %s?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "ugyldig oppføring i shadow-gruppefila"
 
@@ -1057,8 +1097,9 @@ msgstr ""
 "  -u, --user BRUKER             skriv oppføringer for bruker BRUKER\n"
 "\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr "lastlog: Klarte ikke hente innslag for UID %d\n"
 
 msgid "Username         Port     From             Latest"
@@ -1090,6 +1131,10 @@ msgstr "      %s [-p] [-h host] [-f navn]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "      %s [-p] -r host\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Ugyldig tidspunkt for innlogging"
 
@@ -1107,13 +1152,23 @@ msgstr ""
 "\n"
 "[Frakobling omgått - root-innlogging tillatt.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Innlogging avbrutt på tid etter %d sekunder.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr "Ingen oppføring i utmp. Du må kjøre «login» fra «sh» på laveste nivå"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1123,16 +1178,19 @@ msgstr "login: PAM mislyktes, avbryter: %s\n"
 msgid "%s login: "
 msgstr "%s login: "
 
-#, c-format
 msgid "login: "
 msgstr "login: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Maks. antall forsøk er overskredet (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: PAM ber om avbrytelse\n"
+
+msgid "Login incorrect"
+msgstr "Ugyldig innlogging"
 
 #, c-format
 msgid ""
@@ -1141,9 +1199,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s login: "
-
-msgid "Login incorrect"
-msgstr "Ugyldig innlogging"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1200,19 +1255,8 @@ msgstr "%s: GID «%lu» finnes ikke\n"
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
-"Bruk: %s [valg] [inndata]\n"
-"\n"
-"  -c, --crypt-method           krypteringsmetode (en av %s)\n"
-"  -r, --system                  opprett systemkontoer\n"
-"%s\n"
 
 # , c-format
 #, c-format
@@ -1393,11 +1437,15 @@ msgstr "Endrer passordet for %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Passordet for %s er uendret.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Passordet er endret."
 
-msgid "Password set to expire."
-msgstr "Passordet vil utgå på dato."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Varsel når passordet snart går ut på dato"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1440,6 +1488,11 @@ msgstr "fant ingen tilsvarende passordoppføring i %s\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "legg til bruker «%s» i %s? "
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "ugyldig oppføring i shadow-passordfila"
@@ -1578,8 +1631,14 @@ msgstr "%s: klarer ikke å opprette ny «defaults»-fil\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: klarer ikke å åpne ny «defaults»-fil\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: linje %d: chown mislyktes\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: gi nytt navn: %s"
 
 #, c-format
@@ -2064,12 +2123,25 @@ msgstr "Kunne ikke låse fil"
 msgid "Couldn't make backup"
 msgstr "Kunne ikke lage backup"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
+
+#~ msgid ""
+#~ "Usage: %s [options] [input]\n"
+#~ "\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -r, --system                  create system accounts\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Bruk: %s [valg] [inndata]\n"
+#~ "\n"
+#~ "  -c, --crypt-method           krypteringsmetode (en av %s)\n"
+#~ "  -r, --system                  opprett systemkontoer\n"
+#~ "%s\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Passordet vil utgå på dato."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: kan ikke låse passordfila\n"
@@ -2507,9 +2579,6 @@ msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Ingen passordfil.\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Bruk: %s [input]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Beklager.\n"

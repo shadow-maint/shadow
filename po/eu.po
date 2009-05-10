@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2008-03-31 12:50+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -83,7 +83,6 @@ msgstr "Pasahitza bihar iraungi egingo da."
 msgid "Your password will expire today."
 msgstr "Pasahitza gaur iraungi egingo da."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
@@ -216,11 +215,6 @@ msgstr "Baliogabeko erro direktorioa '%s'\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Ezin da erro direktorioa '%s'-ra aldatu.\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Ez dago utmp sarrerarik. \"login\" \"sh\" maila baxuenetik exekutatu beharko "
-"zenuke"
 
 msgid "Unable to determine your tty name."
 msgstr "Ezin da zure tty izena zehaztu."
@@ -561,6 +555,39 @@ msgstr "%s: %d lerroa: ezin da sarrera eguneratu\n"
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s:errorea atzeman da, aldaketak alde batera utzi dira\n"
 
+#, c-format
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr ""
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user `%s' does not exist\n"
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+
 #, fuzzy, c-format
 #| msgid "%s: user `%s' does not exist\n"
 msgid "%s: line %d: user '%s' does not exist\n"
@@ -665,7 +692,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -681,15 +708,15 @@ msgid " [%lds lock]"
 msgstr " [%lds blokeatuta]"
 
 #, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -981,6 +1008,11 @@ msgstr "ez dago bat datorren talde fitxategi sarrerarik %s-(e)n\n"
 msgid "add group '%s' in %s? "
 msgstr "'%s' taldea %s(e)n gehitu?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "Baliogabeko itzalpeko talde-fitxategiko sarrera"
 
@@ -1056,7 +1088,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1088,6 +1120,10 @@ msgstr "           %s [-p] [-h ostalaria] [-f izena]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "           %s [-p] -r ostalaria\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Baliogabeko saio-hasieraren denbora"
 
@@ -1105,13 +1141,25 @@ msgstr ""
 "\n"
 "[Deskonexioa saltatuta -- root-ek saio-hastea baimenduta.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Saio-hasiera denboraz kanpo %d segundo igarotakoan.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Ez dago utmp sarrerarik. \"login\" \"sh\" maila baxuenetik exekutatu beharko "
+"zenuke"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1121,16 +1169,19 @@ msgstr "saio hasiera: PAM hutsa, uzten: %s\n"
 msgid "%s login: "
 msgstr "%s izena: "
 
-#, c-format
 msgid "login: "
 msgstr "izena: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Saiakera muga gainditu da (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "Saioa hastea: PAM-ek uztea eskatu du\n"
+
+msgid "Login incorrect"
+msgstr "Izen okerra"
 
 #, c-format
 msgid ""
@@ -1139,9 +1190,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s izena: "
-
-msgid "Login incorrect"
-msgstr "Izen okerra"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1200,19 +1248,8 @@ msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
 msgid "too many groups\n"
 msgstr "talde gehiegi\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
-"Erabilera: %s [aukerak] [sarrera]\n"
-"\n"
-"  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
-"  -r, --system                  sortu sistema kontuak\n"
-"%s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1426,11 +1463,15 @@ msgstr "%s(r)en pasahitza aldatzen\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s(r)en pasahitza aldatu gabe dago.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Pasahitza aldatuta."
 
-msgid "Password set to expire."
-msgstr "Pasahitza iraungi egin da."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Pasahitza iraungitzearen abisua"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1473,6 +1514,11 @@ msgstr "ez dago bat datorren pasahitz sarrerarik %s(e)n\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "'%s' erabiltzailea %s(e)n gehitu?"
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "baliogabeko itzalpeko pasahitz-fitxategiko sarrera"
@@ -1615,8 +1661,14 @@ msgstr "%s: ezin da lehenespen fitxategi berria sortu\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: ezin da lehenespen fitxategi berria ireki\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: %d lerroa: chown-ek huts egin du\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: berrizendatu: %s"
 
 #, c-format
@@ -2121,12 +2173,25 @@ msgstr "Ezin da fitxategia blokeatu"
 msgid "Couldn't make backup"
 msgstr "Ezin izan da babeskopiarik egin"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
+
+#~ msgid ""
+#~ "Usage: %s [options] [input]\n"
+#~ "\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -r, --system                  create system accounts\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Erabilera: %s [aukerak] [sarrera]\n"
+#~ "\n"
+#~ "  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
+#~ "  -r, --system                  sortu sistema kontuak\n"
+#~ "%s\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Pasahitza iraungi egin da."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: ezin da pasahitzen fitxategia blokeatu\n"

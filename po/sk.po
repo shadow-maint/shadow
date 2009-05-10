@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2009-04-11 15:38+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -80,7 +80,6 @@ msgstr "Zajtra uplynie platnosť vášho hesla."
 msgid "Your password will expire today."
 msgstr "Dnes uplynie platnosť vášho hesla."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr "Nie je možné otvoriť rozhranie pre audit - prerušuje sa.\n"
 
@@ -210,9 +209,6 @@ msgstr "Chybný koreňový adresár „%s“\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Koreňový adresár sa nedá zmeniť na „%s“\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Žiaden utmp záznam. Musíte spustiť „login“ z najnižšej inštancie „sh“"
 
 msgid "Unable to determine your tty name."
 msgstr "Nedá sa zistiť názov vášho tty."
@@ -549,6 +545,40 @@ msgstr "%s: riadok %d: nepodarilo sa pripraviť novú položku %s „%s“\n"
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: zistená chyba, zmeny budú zamietnuté\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Použitie: %s [vstup]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+"  -s, --sha-rounds              počet cyklov šifrovacích\n"
+"                                algoritmov SHA*\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: riadok %d: používateľ „%s“ neexistuje\n"
+
 #, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: riadok %d: používateľ „%s“ neexistuje\n"
@@ -624,8 +654,9 @@ msgstr ""
 "                        -r, -m or -l) pre používateľa s loginom LOGIN\n"
 "\n"
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr "faillog: Nepodarilo sa získať položku s UID %d\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -639,16 +670,19 @@ msgstr " [%lus ostalo]"
 msgid " [%lds lock]"
 msgstr " [%lds zámok]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr "faillog: Nepodarilo sa znulovať počet chýb pre UID %d\n"
 
-#, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr "faillog: Nepodarilo sa nastaviť max. pre UID %d\n"
 
-#, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr "faillog: Nepodarilo sa nastaviť čas zamknutia pre UID %d\n"
 
 #, c-format
@@ -946,6 +980,11 @@ msgstr "neexistuje zodpovedajúca položka skupiny v súbore %s\n"
 msgid "add group '%s' in %s? "
 msgstr "pridať skupinu „%s“ do %s?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "chybná položka v súbore s tieňovými skupinami"
 
@@ -1012,8 +1051,9 @@ msgstr ""
 "  -u, --user LOGIN      vypíše posledné prihlásenia používateľa uvedeného\n"
 "                        ako LOGIN\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr "lastlog: Nepodarilo sa získať položku s UID %d\n"
 
 msgid "Username         Port     From             Latest"
@@ -1045,6 +1085,10 @@ msgstr "          %s [-p] [-h počítač] [-f meno]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "          %s [-p] -r počítač\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Chybný čas prihlásenia"
 
@@ -1062,13 +1106,23 @@ msgstr ""
 "\n"
 "[Odpojenie vynechané -- používateľ root sa môže prihlásiť.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Uplynul časový limit (%d sekúnd) na prihlásenie.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr "Žiaden utmp záznam. Musíte spustiť „login“ z najnižšej inštancie „sh“"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1078,16 +1132,19 @@ msgstr "prihlásenie: Chyba PAM, ukončuje sa: %s\n"
 msgid "%s login: "
 msgstr "%s prihlasovacie meno: "
 
-#, c-format
 msgid "login: "
 msgstr "Prihlasovacie meno: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Prekročený maximálny počet pokusov (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "prihlásenie: PAM prerušenie\n"
+
+msgid "Login incorrect"
+msgstr "Chybné prihlásenie"
 
 #, c-format
 msgid ""
@@ -1096,9 +1153,6 @@ msgid ""
 msgstr ""
 "\n"
 "Prihlasovacie meno na %s: "
-
-msgid "Login incorrect"
-msgstr "Chybné prihlásenie"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1153,19 +1207,8 @@ msgstr "%s: GID „%lu“ neexistuje\n"
 msgid "too many groups\n"
 msgstr "príliš mnoho skupín\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
-"Použitie: %s [voľby] [vstup]\n"
-"\n"
-"  -c, --crypt-method            metóda šifrovania (jedna z %s)\n"
-"  -r, --system                  vytorí systémové účty\n"
-"%s\n"
 
 #, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
@@ -1338,11 +1381,15 @@ msgstr "Mení sa heslo používateľovi %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Heslo používateľa %s nebolo zmenené.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Heslo bolo zmenené."
 
-msgid "Password set to expire."
-msgstr "Uplynula platnosť vášho hesla."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Upozornenie o uplynutí doby platnosti hesla"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1382,6 +1429,11 @@ msgstr "neexistuje zodpovedajúca položka hesla v súbore %s\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "pridať používateľa „%s“ do %s? "
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "chybná položka v súbore s tieňovými heslami"
@@ -1518,8 +1570,14 @@ msgstr "%s: nedá sa vytvoriť nový súbor s predvolenými hodnotami\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: nedá sa otvoriť nový súbor s predvolenými hodnotami\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: riadok %d: volanie chown zlyhalo\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: premenovať: %s"
 
 #, c-format
@@ -2014,12 +2072,25 @@ msgstr "Súbor sa nedá zamknúť"
 msgid "Couldn't make backup"
 msgstr "Nedá sa vytvoriť záloha"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
+
+#~ msgid ""
+#~ "Usage: %s [options] [input]\n"
+#~ "\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -r, --system                  create system accounts\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Použitie: %s [voľby] [vstup]\n"
+#~ "\n"
+#~ "  -c, --crypt-method            metóda šifrovania (jedna z %s)\n"
+#~ "  -r, --system                  vytorí systémové účty\n"
+#~ "%s\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Uplynula platnosť vášho hesla."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: súbor s heslami sa nedá zamknúť\n"
@@ -2477,9 +2548,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Súbor s heslami neexistuje\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Použitie: %s [vstup]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Ľutujem.\n"

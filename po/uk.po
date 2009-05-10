@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2007-11-26 22:52+0100\n"
 "Last-Translator: Eugeniy Meshcheryakov <eugen@univ.kiev.ua>\n"
 "Language-Team: Ukrainian\n"
@@ -82,7 +82,6 @@ msgstr "Ваш пароль буде прострочено завтра."
 msgid "Your password will expire today."
 msgstr "Ваш пароль буде прострочено сьогодні."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
@@ -209,10 +208,6 @@ msgstr "Невірна коренева тека \"%s\"\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Неможливо змінити кореневу теку на \"%s\"\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Немає запису utmp.  Вам потрібно виконати \"login\" з \"sh\" найнижчого рівня"
 
 msgid "Unable to determine your tty name."
 msgstr "Неможливо визначити назву вашого термінала."
@@ -555,6 +550,33 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: виявлено помилку, зміни ігноруються\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Використання: %s [вхідні_данні]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: користувач %s не існує\n"
+
+#, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: користувач %s не існує\n"
 
@@ -651,7 +673,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -667,15 +689,15 @@ msgid " [%lds lock]"
 msgstr " [%lds блоковано]"
 
 #, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -957,6 +979,11 @@ msgstr "відповідний запис файлу груп відсутній
 msgid "add group '%s' in %s? "
 msgstr "додати групу \"%s\" у %s?"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "невірний запис у файлі прихованих груп"
 
@@ -1029,7 +1056,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1061,6 +1088,10 @@ msgstr "                %s [-p] [-h вузол] [-f ім'я]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "                %s [-p] -r вузол\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Невірний час для входу"
 
@@ -1078,13 +1109,24 @@ msgstr ""
 "\n"
 "[Сталося відключення -- дозволено лише вхід root-a.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Час логіну буде вичерпано за %d секунд.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Немає запису utmp.  Вам потрібно виконати \"login\" з \"sh\" найнижчого рівня"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1094,16 +1136,19 @@ msgstr "login: Помилка PAM, перервано: %s\n"
 msgid "%s login: "
 msgstr "%s логін: "
 
-#, c-format
 msgid "login: "
 msgstr "логін: "
 
-#, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+#, fuzzy, c-format
+#| msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Перевищено максимальну кількість спроб (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: система PAM запросила переривання\n"
+
+msgid "Login incorrect"
+msgstr "Невірний логін"
 
 #, c-format
 msgid ""
@@ -1112,9 +1157,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s логін: "
-
-msgid "Login incorrect"
-msgstr "Невірний логін"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1172,13 +1214,7 @@ msgstr "%s: користувач %s не існує\n"
 msgid "too many groups\n"
 msgstr "занадто багато груп\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1378,11 +1414,15 @@ msgstr "Зміна пароля для %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Пароль для %s не змінено.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Пароль змінено."
 
-msgid "Password set to expire."
-msgstr "Пароль прострочений."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Застереження про прострочення пароля"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1425,6 +1465,11 @@ msgstr "відсутній відповідний запис у файлі па�
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "додати користувача \"%s\" в %s? "
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "невірний запис у файлі прихованих паролів"
@@ -1566,8 +1611,14 @@ msgstr "%s: не можу створити новий файл із значен
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: не можу відкрити новий файл із значеннями по замовчуванню\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: рядок %d: chown не виконався\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: перейменування: %s"
 
 #, c-format
@@ -1990,12 +2041,12 @@ msgstr "Не можу блокувати файл"
 msgid "Couldn't make backup"
 msgstr "Не можу зробити резервну копію"
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: не можу відновити %s: %s (ваші зміни у %s)\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Пароль прострочений."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: не можу заблокувати файл паролів\n"
@@ -2448,9 +2499,6 @@ msgstr "%s: не можу відновити %s: %s (ваші зміни у %s)\
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Немає файлу паролів\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Використання: %s [вхідні_данні]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Вибачте.\n"

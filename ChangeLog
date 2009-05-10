@@ -1,5 +1,11 @@
 2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, configure.in: New release will be 4.1.4.
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
+2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c: Added prototype of readlink_malloc(), and
 	readlink_malloc() changed to static.
 

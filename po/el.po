@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-15 23:29+0200\n"
+"POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -82,7 +82,6 @@ msgstr "Το συνθηματικό σας θα λήξει αύριο."
 msgid "Your password will expire today."
 msgstr "Το συνθηματικό σας θα λήξει σήμερα."
 
-#, c-format
 msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
@@ -210,11 +209,6 @@ msgstr "Μη έγκυρος πρωταρχικός κατάλογος \"%s\"\n"
 #, fuzzy, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Αδυναμία αλλαγής του πρωταρχικού καταλόγου σε \"%s\"\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Δεν υπάρχει καταχώριση utmp.  Πρέπει να εκτελέσετε \"login\" από το \"sh\" "
-"του πιο χαμηλού επιπέδου"
 
 msgid "Unable to determine your tty name."
 msgstr "Δεν είναι δυνατόν να καθοριστεί το όνομα tty."
@@ -557,6 +551,33 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: Ανιχνεύτηκε σφάλμα, οι αλλαγές αγνοήθηκαν\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options]\n"
+"\n"
+"Options:\n"
+msgstr "Χρήση: %s [είσοδος]\n"
+
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: (line %d, user %s) password not changed\n"
+msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
 
@@ -653,7 +674,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "faillog: Failed to get the entry for UID %d\n"
+msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -669,15 +690,15 @@ msgid " [%lds lock]"
 msgstr " [%lds κλείδωμα]"
 
 #, c-format
-msgid "faillog: Failed to reset fail count for UID %d\n"
+msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set max for UID %d\n"
+msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 
 #, c-format
-msgid "faillog: Failed to set locktime for UID %d\n"
+msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -958,6 +979,11 @@ msgstr "Δεν βρέθηκε καταχώρηση στο αρχείο ομάδ�
 msgid "add group '%s' in %s? "
 msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
 
+#, c-format
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+
 msgid "invalid shadow group file entry"
 msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών ομάδων"
 
@@ -1033,7 +1059,7 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1065,6 +1091,10 @@ msgstr "       %s [-p] [-h σύστημα] [-f όνομα]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r σύστημα\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%d'"
+msgstr ""
+
 msgid "Invalid login time"
 msgstr "Εσφαλμένη ώρα εισόδου"
 
@@ -1082,13 +1112,25 @@ msgstr ""
 "\n"
 "[Παράκαμψη αποσύνδεσης -- Η είσοδος του root επετράπη.]"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
-"Login timed out after %d seconds.\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Η διαδικασία εισόδου τερματίστηκε μετά από %d δευτερόλεπτα.\n"
+
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Δεν υπάρχει καταχώριση utmp.  Πρέπει να εκτελέσετε \"login\" από το \"sh\" "
+"του πιο χαμηλού επιπέδου"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1098,16 +1140,18 @@ msgstr "login: αποτυχία PAM, εγκατάλειψη: %s\n"
 msgid "%s login: "
 msgstr "%s login: "
 
-#, c-format
 msgid "login: "
 msgstr "login: "
 
 #, fuzzy, c-format
-msgid "Maximum number of tries exceeded (%d)\n"
+msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Μέγιστος αριθμός ημερών μεταξύ των αλλαγών συνθηματικού\t\t: %ld\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr ""
+
+msgid "Login incorrect"
+msgstr "Διαδικασία εισόδου απέτυχε"
 
 #, c-format
 msgid ""
@@ -1116,9 +1160,6 @@ msgid ""
 msgstr ""
 "\n"
 "%s login: "
-
-msgid "Login incorrect"
-msgstr "Διαδικασία εισόδου απέτυχε"
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1177,13 +1218,7 @@ msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
 msgid "too many groups\n"
 msgstr "πάρα πολλές ομάδες\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options] [input]\n"
-"\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -r, --system                  create system accounts\n"
-"%s\n"
+msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1363,11 +1398,15 @@ msgstr "Αλλαγή συνθηματικού για τον %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Το συνθηματικό για τον %s δεν άλλαξε.\n"
 
-msgid "Password changed."
+#, fuzzy, c-format
+#| msgid "Password changed."
+msgid "%s: password changed."
 msgstr "Το συνθηματικό άλλαξε."
 
-msgid "Password set to expire."
-msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει."
+#, fuzzy, c-format
+#| msgid "Password Expiration Warning"
+msgid "%s: password expiry information changed."
+msgstr "Προειδοποίηση λήξης συνθηματικού"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1410,6 +1449,11 @@ msgstr "Δεν βρέθηκε καταχώριση στο αρχείο συνθ�
 #, fuzzy, c-format
 msgid "add user '%s' in %s? "
 msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
+
+#, c-format
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
 
 msgid "invalid shadow password file entry"
 msgstr "Μη έγκυρη καταχώριση στο αρχείο σκιωδών συνθηματικών"
@@ -1554,8 +1598,14 @@ msgstr "%s: αδυναμία δημιουργίας νέου αρχείου πρ
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: αδυναμία ανοίγματος νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
 
-#, c-format
-msgid "%s: rename: %s"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line too long in %s: %s..."
+msgstr "%s: γραμμή %d: αποτυχία αλλαγής ιδιοκτήτη(chown)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: rename: %s: %s"
 msgstr "%s: μετονομασία: %s"
 
 #, fuzzy, c-format
@@ -1973,12 +2023,12 @@ msgstr "Αδυναμία ξεκλειδώματος αρχείου"
 msgid "Couldn't make backup"
 msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας "
 
-msgid "setfscreatecon() failed"
-msgstr ""
-
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#~ msgid "Password set to expire."
+#~ msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει."
 
 #~ msgid "%s: can't lock password file\n"
 #~ msgstr "%s: αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
@@ -2448,9 +2498,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Χρήση: %s [είσοδος]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Λυπάμαι.\n"
