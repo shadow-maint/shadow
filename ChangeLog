@@ -1,3 +1,11 @@
+2009-05-10  NAKANO Takeo  <nakano@webmasters.gr.jp>
+
+	* po/ja.po: Updated Japanese translation.
+
+2009-05-10  Jean-Luc Coulon (f5ibh)  <jean-luc.coulon@wanadoo.fr>
+
+	* po/fr.po: Updated French translation.
+
 2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.c: Avoid PATH_MAX. On glibc, we can use realpath
