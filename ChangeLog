@@ -1,5 +1,10 @@
 2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: Added prototype of readlink_malloc(), and
+	readlink_malloc() changed to static.
+
+2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Avoid redeclaration of root_pw.
 
 2009-05-10  NAKANO Takeo  <nakano@webmasters.gr.jp>

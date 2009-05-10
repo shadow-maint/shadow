@@ -63,6 +63,7 @@ static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[],
                      long int uid, long int gid);
 #ifdef	S_IFLNK
+static char *readlink_malloc (const char *filename);
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid);
@@ -428,7 +429,7 @@ static int copy_dir (const char *src, const char *dst,
  * return NULL on error.
  * The return string shall be freed by the caller.
  */
-char *readlink_malloc (const char *filename)
+static char *readlink_malloc (const char *filename)
 {
 	size_t size = 1024;
 
