@@ -1,3 +1,8 @@
+2009-05-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml: PAM enabled version: describe how passwords
+	are updated and how newusers behave in case of error.
+
 2009-05-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: New release will be 4.1.4.
