@@ -1,5 +1,15 @@
 2009-05-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/shell.c: Removed invalid code that executed the user's
+	shell as a shell script when the direct execution of the user's
+	shell failed with ENOEXEC and the user's shell has a shebang. The
+	interpreter might not be the right one.  Executing the user's
+	shell with sh -c might be better, but I'm not sure we should try
+	harder when there is a failure. Note: the removed code was only
+	included #ifndef __linux__.
+
+2009-05-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/userdel.8.xml: The USERGROUPS_ENAB group may not be removed
 	when the group is used by other users, not the user.
 

@@ -46,11 +46,8 @@ extern size_t newenvc;
  *	shell begins by trying to figure out what argv[0] is going to
  *	be for the named process.  The user may pass in that argument,
  *	or it will be the last pathname component of the file with a
- *	'-' prepended.  The first attempt is to just execute the named
- *	file.  If the errno comes back "ENOEXEC", the file is assumed
- *	at first glance to be a shell script.  The first two characters
- *	must be "#!", in which case "/bin/sh" is executed to process
- *	the file.  If all that fails, give up in disgust ...
+ *	'-' prepended.
+ *	Then, it executes the named file.
  */
 
 int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
@@ -82,32 +79,6 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	execle (file, arg, (char *) 0, envp);
 	err = errno;
 
-	/* Linux handles #! in the kernel, and bash doesn't make
-	   sense of "#!" so it wouldn't work anyway...  --marekm */
-#ifndef __linux__
-	/*
-	 * It is perfectly OK to have a shell script for a login
-	 * shell, and this code attempts to support that.  It
-	 * relies on the standard shell being able to make sense
-	 * of the "#!" magic number.
-	 */
-	if (err == ENOEXEC) {
-		FILE *fp;
-
-		fp = fopen (file, "r");
-		if (NULL != fp) {
-			if (getc (fp) == '#' && getc (fp) == '!') {
-				(void) fclose (fp);
-				execle ("/bin/sh", "sh",
-				        file, (char *) 0, envp);
-				err = errno;
-			} else {
-				(void) fclose (fp);
-			}
-		}
-	}
-#endif
-
 	/*
 	 * Obviously something is really wrong - I can't figure out
 	 * how to execute this stupid shell, so I might as well give
@@ -118,3 +89,4 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	perror (arg0);
 	return err;
 }
+
