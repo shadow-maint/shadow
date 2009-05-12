@@ -1,4 +1,9 @@
-2009-05-11  Nicolas François  <nicolas.francois@centraliens.net>
+2009-05-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/userdel.8.xml: The USERGROUPS_ENAB group may not be removed
+	when the group is used by other users, not the user.
+
+2009-05-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/userdel.c, man/login.defs.d/USERDEL_CMD.xml: Move the
 	USERDEL_CMD script example from the source code to the

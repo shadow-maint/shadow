@@ -233,7 +233,7 @@
       as the user. To avoid inconsistencies in the passwd and group
       databases, <command>userdel</command> will check that this group is
       not used as a primary group for another user, and will just warn
-      without deleting the user otherwise. The <option>-f</option> option
+      without deleting the group otherwise. The <option>-f</option> option
       can force the deletion of this group.
     </para>
   </refsect1>
