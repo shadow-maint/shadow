@@ -625,40 +625,10 @@ static void user_busy (const char *name, uid_t uid)
 /* 
  * user_cancel - cancel cron and at jobs
  *
- *	user_cancel removes the crontab and any at jobs for a user
+ *	user_cancel calls a script for additional cleanups like removal of
+ *	cron, at, or print jobs.
  */
 
-/*
- * We used to have all this stuff hardcoded here, but now
- * we just run an external script - it may need to do other
- * things as well (like removing print jobs) and we may not
- * want to recompile userdel too often. Below is a sample
- * script (should work at least on Debian 1.1).  --marekm
-==========
-#! /bin/sh
-
-# Check for the required argument.
-if [ $# != 1 ]; then
-	echo Usage: $0 username
-	exit 1
-fi
-
-# Remove cron jobs.
-crontab -r -u $1
-
-# Remove at jobs. XXX - will remove any jobs owned by the same UID, even if
-# it was shared by a different username. at really should store the username
-# somewhere, and atrm should support an option to remove all jobs owned by
-# the specified user - for now we have to do this ugly hack...
-find /var/spool/cron/atjobs -name "[^.]*" -type f -user $1 -exec rm {} \;
-
-# Remove print jobs.
-lprm $1
-
-# All done.
-exit 0
-==========
- */
 static void user_cancel (const char *user)
 {
 	char *cmd;

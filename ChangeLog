@@ -1,5 +1,11 @@
 2009-05-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c, man/login.defs.d/USERDEL_CMD.xml: Move the
+	USERDEL_CMD script example from the source code to the
+	documentation.
+
+2009-05-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newusers.8.xml: PAM enabled version: describe how passwords
 	are updated and how newusers behave in case of error.
 
