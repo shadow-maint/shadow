@@ -2,6 +2,10 @@ $Id$
 
 shadow-4.1.4 -> shadow-4.1.4.1						UNRELEASED
 
+- login
+  * Fix failures with empty usernames on non PAM versions.
+  * Fix CONSOLE (securetty) support on non PAM versions.
+
 shadow-4.1.3.1 -> shadow-4.1.4						2009-05-10
 
 - packaging
