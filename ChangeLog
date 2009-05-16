@@ -1,5 +1,10 @@
 2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/CONSOLE.xml: Document the format of the CONSOLE
+	file.
+
+2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Fix failure of non PAM enabled versions when an
 	empty username is entered after a first prompt.
 

@@ -33,11 +33,14 @@
   <listitem>
     <para>
       If defined, either full pathname of a file containing device names
-      or a ":" delimited list of device names.  Root logins will be
+      (one per line) or a ":" delimited list of device names.  Root logins will be
       allowed only upon these devices.
     </para>
     <para>
       If not defined, root will be allowed on any device.
+    </para>
+    <para>
+      The device should be specified without the /dev/ prefix.
     </para>
   </listitem>
 </varlistentry>
