@@ -1,3 +1,7 @@
+2009-05-16  sacha  <sachall@infonie.fr>
+
+	* po/fr.po: Fixed typo in the vipw usage string.
+
 2009-05-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/shell.c: Removed invalid code that executed the user's
