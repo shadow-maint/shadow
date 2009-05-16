@@ -121,6 +121,10 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 
 bool console (const char *tty)
 {
+	if (strncmp (tty, "/dev/", 5) == 0) {
+		tty += 5;
+	}
+
 	return is_listed ("CONSOLE", tty, true);
 }
 

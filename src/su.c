@@ -425,13 +425,8 @@ int main (int argc, char **argv)
 	 * Get the tty name. Entries will be logged indicating that the user
 	 * tried to change to the named new user from the current terminal.
 	 */
-	cp = ttyname (0);
-	if ((isatty (0) != 0) && (NULL != cp)) {
-		if (strncmp (cp, "/dev/", 5) == 0) {
-			tty = cp + 5;
-		} else {
-			tty = cp;
-		}
+	tty = ttyname (0);
+	if ((isatty (0) != 0) && (NULL != tty)) {
 #ifndef USE_PAM
 		is_console = console (tty);
 #endif

@@ -1,5 +1,12 @@
 2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/console.c (console): Remove the leading /dev/ from the
+	tty before comparing with the lines specified by CONSOLE.
+	* src/su.c: Do not remove the /dev/ prefix since it is done by
+	console().
+
+2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/CONSOLE.xml: Document the format of the CONSOLE
 	file.
 
