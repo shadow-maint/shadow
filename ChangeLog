@@ -1,5 +1,10 @@
 2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Fix failure of non PAM enabled versions when an
+	empty username is entered after a first prompt.
+
+2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Added missing end of line at the end of success
 	messages.
 

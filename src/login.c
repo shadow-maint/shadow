@@ -913,6 +913,7 @@ int main (int argc, char **argv)
 		 * anymore. */
 		if (NULL != pwd) {
 			pw_free (pwd);
+			pwd = NULL;
 		}
 		if (NULL != spwd) {
 			spw_free (spwd);
