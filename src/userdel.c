@@ -602,14 +602,19 @@ static void user_busy (const char *name, uid_t uid)
 	while ((utent = getutent ()) != NULL)
 #endif				/* !USE_UTMPX */
 	{
-		if (utent->ut_type != USER_PROCESS)
+		if (utent->ut_type != USER_PROCESS) {
 			continue;
-
+		}
 		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
 			continue;
 		}
+		if (kill (utent->ut_pid, 0) != 0) {
+			continue;
+		}
+
 		fprintf (stderr,
-			 _("%s: user %s is currently logged in\n"), Prog, name);
+		         _("%s: user %s is currently logged in\n"),
+		         Prog, name);
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,

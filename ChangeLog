@@ -1,3 +1,10 @@
+2009-05-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/userdel.c (user_busy): Check if the process registered in
+	utmp is still running. This avoids rejecting the removal of an
+	user when UTMP was not updated and indicate that the user is still
+	logged in.
+
 2009-05-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, libmisc/console.c (console): Remove the leading /dev/ from
