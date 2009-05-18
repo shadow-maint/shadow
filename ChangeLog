@@ -1,5 +1,10 @@
 2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/shadow.5.xml: What is important in shadow is not the
+	encryption, but that the file is not world readable.
+
+2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Updated French translation. Thanks to ABBAS
 	Belkacem for the login.defs update.
 

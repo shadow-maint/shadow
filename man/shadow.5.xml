@@ -37,7 +37,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>shadow</refname>
-    <refpurpose>encrypted password file</refpurpose>
+    <refpurpose>shadowed password file</refpurpose>
   </refnamediv>
 
   <refsect1 id='description'>
