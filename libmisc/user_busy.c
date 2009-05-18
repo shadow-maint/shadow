@@ -91,8 +91,10 @@ static int user_busy_utmp (const char *name)
 			continue;
 		}
 
-		return USER_BUSY;
+		return 1;
 	}
+
+	return 0;
 }
 #endif				/* !__linux__ */
 
