@@ -1,4 +1,14 @@
-2009-05-17  Nicolas François  <nicolas.francois@centraliens.net>
+2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/userdel.c, libmisc/user_busy.c, libmisc/Makefile.am,
+	lib/prototypes.h: Move user_busy() to libmisc/user_busy.c.
+	* NEWS, libmisc/user_busy.c: On Linux, do not check if an user is
+	logged in with utmp, but check if the user is running some
+	processes. If not on Linux, continue to search for an utmp record,
+	but make sure the process recorded in the utmp entry is still
+	running.
+
+2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/usermod.8.xml: Document the -m/--move-home option.
 

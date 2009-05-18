@@ -5,6 +5,11 @@ shadow-4.1.4 -> shadow-4.1.4.1						UNRELEASED
 - login
   * Fix failures with empty usernames on non PAM versions.
   * Fix CONSOLE (securetty) support on non PAM versions.
+- userdel
+  * On Linux, do not check if an user is logged in with utmp, but check if
+    the user is running some processes.
+  * If not on Linux, continue to search for an utmp record, but make sure
+    the process recorded in the utmp entry is still running.
 
 shadow-4.1.3.1 -> shadow-4.1.4						2009-05-10
 

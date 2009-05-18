@@ -363,6 +363,9 @@ extern char *tz (const char *);
 /* ulimit.c */
 extern int set_filesize_limit (int blocks);
 
+/* user_busy.c */
+extern int user_busy (const char *name, uid_t uid);
+
 /* utmp.c */
 extern /*@null@*/struct utmp *get_current_utmp (void);
 extern struct utmp *prepare_utmp (const char *name,

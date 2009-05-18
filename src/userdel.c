@@ -100,7 +100,6 @@ static void close_files (void);
 static void fail_exit (int);
 static void open_files (void);
 static void update_user (void);
-static void user_busy (const char *, uid_t);
 static void user_cancel (const char *);
 
 #ifdef EXTRA_CHECK_HOME_DIR
@@ -576,57 +575,6 @@ static void update_user (void)
 	SYSLOG ((LOG_INFO, "delete user '%s'\n", user_name));
 }
 
-/*
- * user_busy - see if user is logged in.
- *
- * XXX - should probably check if there are any processes owned
- * by this user. Also, I think this check should be in usermod
- * as well (at least when changing username or UID).  --marekm
- */
-static void user_busy (const char *name, uid_t uid)
-{
-
-/*
- * We see if the user is logged in by looking for the user name
- * in the utmp file.
- */
-#ifdef USE_UTMPX
-	struct utmpx *utent;
-
-	setutxent ();
-	while ((utent = getutxent ()) != NULL)
-#else				/* !USE_UTMPX */
-	struct utmp *utent;
-
-	setutent ();
-	while ((utent = getutent ()) != NULL)
-#endif				/* !USE_UTMPX */
-	{
-		if (utent->ut_type != USER_PROCESS) {
-			continue;
-		}
-		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
-			continue;
-		}
-		if (kill (utent->ut_pid, 0) != 0) {
-			continue;
-		}
-
-		fprintf (stderr,
-		         _("%s: user %s is currently logged in\n"),
-		         Prog, name);
-		if (!fflg) {
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
-			              "deleting user logged in",
-			              name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			exit (E_USER_BUSY);
-		}
-	}
-}
-
 /* 
  * user_cancel - cancel cron and at jobs
  *
@@ -648,7 +596,7 @@ static void user_cancel (const char *user)
 	if (pid == 0) {
 		execl (cmd, cmd, user, (char *) 0);
 		perror (cmd);
-		_exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
 		perror ("fork");
 		return;
@@ -893,8 +841,23 @@ int main (int argc, char **argv)
 #endif
 	/*
 	 * Check to make certain the user isn't logged in.
+	 * Note: This is a best effort basis. The user may log in between,
+	 * a cron job may be started on her behalf, etc.
 	 */
-	user_busy (user_name, user_id);
+	if (user_busy (user_name, user_id) != 0) {
+		fprintf (stderr,
+		         _("%s: user %s is currently logged in\n"),
+		         Prog, user_name);
+		if (!fflg) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_DEL_USER, Prog,
+			              "deleting user logged in",
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
+#endif
+			exit (E_USER_BUSY);
+		}
+	}
 
 	/*
 	 * Do the hard stuff - open the files, create the user entries,
