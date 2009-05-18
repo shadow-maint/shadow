@@ -10,6 +10,9 @@ shadow-4.1.4 -> shadow-4.1.4.1						UNRELEASED
     the user is running some processes.
   * If not on Linux, continue to search for an utmp record, but make sure
     the process recorded in the utmp entry is still running.
+- usermod
+  * Check if the user is busy when the user's UID, name or home directory
+    is changed.
 
 shadow-4.1.3.1 -> shadow-4.1.4						2009-05-10
 

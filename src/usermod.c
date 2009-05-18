@@ -1715,6 +1715,18 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
+	/*
+	 * The home directory, the username and the user's UID should not
+	 * be changed while the user is logged in.
+	 */
+	if (   (uflg || lflg || dflg)
+	    && (user_busy (user_name, user_id) != 0)) {
+		fprintf (stderr,
+		         _("%s: user %s is currently logged in\n"),
+		         Prog, user_name);
+		exit (E_USER_BUSY);
+	}
+
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	{
