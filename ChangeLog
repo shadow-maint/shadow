@@ -1,5 +1,10 @@
 2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupadd.8.xml, man/useradd.8.xml: names may also contain
+	digits.
+
+2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/shadow.5.xml: What is important in shadow is not the
 	encryption, but that the file is not world readable.
 

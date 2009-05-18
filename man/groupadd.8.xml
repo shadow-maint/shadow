@@ -217,9 +217,10 @@
    <refsect1 id='caveats'>
      <title>CAVEATS</title>
      <para>
-       Groupnames must begin with a lower case letter or an underscore,
-       and only lower case letters, underscores, dashes, and dollar signs
-       may follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]?
+       Groupnames must start with a lower case letter or an underscore,
+       followed by lower case letters, digits, underscores, or dashes.
+       They can end with a dollar sign.
+       In regular expression terms: [a-z_][a-z0-9_-]*[$]?
      </para>
      <para>
        Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long.
