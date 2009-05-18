@@ -327,13 +327,19 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      <command>usermod</command> will not allow you to change the name of an
-      user who is logged in. You must make certain that the named user is
+      You must make certain that the named user is
       not executing any processes when this command is being executed if the
-      user's numerical user ID is being changed. You must change the owner
-      of any <command>crontab</command> files manually. You must change
-      the owner of any <command>at</command> jobs manually. You must make
-      any changes involving NIS on the NIS server.
+      user's numerical user ID, the user's name, or the user's home
+      directory is being changed. <command>usermod</command> checks this
+      on Linux, but only check if the user is logged in according to utmp
+      on other architectures.
+    </para>
+    <para>
+      You must change the owner of any <command>crontab</command> files or
+      <command>at</command> jobs manually.
+    </para>
+    <para>
+      You must make any changes involving NIS on the NIS server.
     </para>
   </refsect1>
 
