@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
-"POT-Creation-Date: 2009-05-10 20:31+0200\n"
-"PO-Revision-Date: 2009-04-27 21:56+0200\n"
+"POT-Creation-Date: 2009-05-18 22:35+0200\n"
+"PO-Revision-Date: 2009-05-19 00:37+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgstr ""
 
 #: vipw.8.xml:84(title) usermod.8.xml:67(title) userdel.8.xml:69(title)
 #: useradd.8.xml:97(title) su.1.xml:123(title) pwck.8.xml:133(title)
-#: passwd.1.xml:152(title) newusers.8.xml:222(title) login.1.xml:188(title)
+#: passwd.1.xml:152(title) newusers.8.xml:229(title) login.1.xml:188(title)
 #: lastlog.8.xml:66(title) grpck.8.xml:114(title) groupmod.8.xml:67(title)
 #: groupmems.8.xml:75(title) groupadd.8.xml:71(title) gpasswd.1.xml:109(title)
 #: faillog.8.xml:64(title) chsh.1.xml:73(title) chpasswd.8.xml:109(title)
@@ -148,7 +148,7 @@ msgid "Edit group database."
 msgstr "Éditer la base de données de groupes."
 
 #: vipw.8.xml:97(term) userdel.8.xml:99(term) useradd.8.xml:247(term)
-#: passwd.1.xml:192(term) newusers.8.xml:240(term) lastlog.8.xml:82(term)
+#: passwd.1.xml:192(term) newusers.8.xml:247(term) lastlog.8.xml:82(term)
 #: groupmod.8.xml:93(term) groupadd.8.xml:106(term) faillog.8.xml:80(term)
 #: chsh.1.xml:79(term) chpasswd.8.xml:137(term) chgpasswd.8.xml:114(term)
 #: chage.1.xml:103(term)
@@ -156,7 +156,7 @@ msgid "<option>-h</option>, <option>--help</option>"
 msgstr "<option>-h</option>, <option>--help</option>"
 
 #: vipw.8.xml:99(para) userdel.8.xml:101(para) useradd.8.xml:249(para)
-#: passwd.1.xml:194(para) newusers.8.xml:242(para) lastlog.8.xml:86(para)
+#: passwd.1.xml:194(para) newusers.8.xml:249(para) lastlog.8.xml:86(para)
 #: groupmod.8.xml:95(para) groupadd.8.xml:108(para) faillog.8.xml:82(para)
 #: chsh.1.xml:81(para) chpasswd.8.xml:139(para) chgpasswd.8.xml:116(para)
 #: chage.1.xml:105(para)
@@ -187,11 +187,11 @@ msgstr "<option>-s</option>, <option>--shadow</option>"
 msgid "Edit shadow or gshadow database."
 msgstr "Éditer les bases de données shadow ou gshadow."
 
-#: vipw.8.xml:124(title) usermod.8.xml:339(title) userdel.8.xml:140(title)
+#: vipw.8.xml:124(title) usermod.8.xml:360(title) userdel.8.xml:140(title)
 #: useradd.8.xml:637(title) suauth.5.xml:168(title) su.1.xml:253(title)
 #: sg.1.xml:88(title) shadow.5.xml:230(title) shadow.3.xml:201(title)
 #: pwconv.8.xml:168(title) pwck.8.xml:196(title) porttime.5.xml:105(title)
-#: passwd.5.xml:116(title) passwd.1.xml:375(title) newusers.8.xml:342(title)
+#: passwd.5.xml:116(title) passwd.1.xml:375(title) newusers.8.xml:343(title)
 #: newgrp.1.xml:99(title) logoutd.8.xml:64(title) login.access.5.xml:96(title)
 #: login.1.xml:316(title) limits.5.xml:140(title) lastlog.8.xml:147(title)
 #: gshadow.5.xml:89(title) grpck.8.xml:166(title) groups.1.xml:75(title)
@@ -203,10 +203,10 @@ msgstr "Éditer les bases de données shadow ou gshadow."
 msgid "FILES"
 msgstr "FICHIERS"
 
-#: vipw.8.xml:127(filename) usermod.8.xml:342(filename)
+#: vipw.8.xml:127(filename) usermod.8.xml:363(filename)
 #: userdel.8.xml:143(filename) useradd.8.xml:652(filename)
 #: sg.1.xml:103(filename) pwck.8.xml:199(filename)
-#: newusers.8.xml:357(filename) newgrp.1.xml:114(filename)
+#: newusers.8.xml:358(filename) newgrp.1.xml:114(filename)
 #: gshadow.5.xml:92(filename) grpck.8.xml:169(filename)
 #: groups.1.xml:78(filename) groupmod.8.xml:158(filename)
 #: groupmems.8.xml:171(filename) groupdel.8.xml:91(filename)
@@ -215,9 +215,9 @@ msgstr "FICHIERS"
 msgid "/etc/group"
 msgstr "/etc/group"
 
-#: vipw.8.xml:129(para) usermod.8.xml:344(para) userdel.8.xml:145(para)
+#: vipw.8.xml:129(para) usermod.8.xml:365(para) userdel.8.xml:145(para)
 #: useradd.8.xml:654(para) sg.1.xml:105(para) pwck.8.xml:201(para)
-#: newusers.8.xml:359(para) newgrp.1.xml:116(para) gshadow.5.xml:94(para)
+#: newusers.8.xml:360(para) newgrp.1.xml:116(para) gshadow.5.xml:94(para)
 #: grpck.8.xml:171(para) groups.1.xml:80(para) groupmod.8.xml:160(para)
 #: groupmems.8.xml:173(para) groupdel.8.xml:93(para) groupadd.8.xml:199(para)
 #: gpasswd.1.xml:235(para) chgpasswd.8.xml:185(para)
@@ -225,7 +225,7 @@ msgid "Group account information."
 msgstr "Informations sur les groupes."
 
 #: vipw.8.xml:133(filename) useradd.8.xml:658(filename) sg.1.xml:109(filename)
-#: newusers.8.xml:363(filename) newgrp.1.xml:120(filename)
+#: newusers.8.xml:364(filename) newgrp.1.xml:120(filename)
 #: gshadow.5.xml:98(filename) grpck.8.xml:175(filename)
 #: groupmod.8.xml:164(filename) groupmems.8.xml:177(filename)
 #: groupdel.8.xml:97(filename) groupadd.8.xml:203(filename)
@@ -235,17 +235,17 @@ msgid "/etc/gshadow"
 msgstr "/etc/gshadow"
 
 #: vipw.8.xml:135(para) useradd.8.xml:660(para) sg.1.xml:111(para)
-#: newusers.8.xml:365(para) newgrp.1.xml:122(para) gshadow.5.xml:100(para)
+#: newusers.8.xml:366(para) newgrp.1.xml:122(para) gshadow.5.xml:100(para)
 #: grpck.8.xml:177(para) groupmod.8.xml:166(para) groupdel.8.xml:99(para)
 #: groupadd.8.xml:205(para) gpasswd.1.xml:241(para) chgpasswd.8.xml:191(para)
 msgid "Secure group account information."
 msgstr "Informations sécurisées sur les groupes."
 
-#: vipw.8.xml:139(filename) usermod.8.xml:348(filename)
+#: vipw.8.xml:139(filename) usermod.8.xml:369(filename)
 #: userdel.8.xml:155(filename) useradd.8.xml:640(filename)
 #: su.1.xml:256(filename) sg.1.xml:91(filename) shadow.5.xml:233(filename)
 #: pwck.8.xml:205(filename) passwd.5.xml:119(filename)
-#: passwd.1.xml:378(filename) newusers.8.xml:345(filename)
+#: passwd.1.xml:378(filename) newusers.8.xml:346(filename)
 #: newgrp.1.xml:102(filename) login.1.xml:331(filename)
 #: grpck.8.xml:181(filename) expiry.1.xml:71(filename)
 #: chsh.1.xml:136(filename) chpasswd.8.xml:207(filename)
@@ -253,42 +253,42 @@ msgstr "Informations sécurisées sur les groupes."
 msgid "/etc/passwd"
 msgstr "/etc/passwd"
 
-#: vipw.8.xml:141(para) usermod.8.xml:350(para) userdel.8.xml:157(para)
+#: vipw.8.xml:141(para) usermod.8.xml:371(para) userdel.8.xml:157(para)
 #: useradd.8.xml:642(para) su.1.xml:258(para) sg.1.xml:93(para)
 #: shadow.5.xml:235(para) pwck.8.xml:207(para) passwd.5.xml:121(para)
-#: passwd.1.xml:380(para) newusers.8.xml:347(para) newgrp.1.xml:104(para)
+#: passwd.1.xml:380(para) newusers.8.xml:348(para) newgrp.1.xml:104(para)
 #: login.1.xml:333(para) grpck.8.xml:183(para) expiry.1.xml:73(para)
 #: chsh.1.xml:138(para) chpasswd.8.xml:209(para) chfn.1.xml:124(para)
 #: chage.1.xml:213(para)
 msgid "User account information."
 msgstr "Informations sur les comptes des utilisateurs."
 
-#: vipw.8.xml:145(filename) usermod.8.xml:354(filename)
+#: vipw.8.xml:145(filename) usermod.8.xml:375(filename)
 #: userdel.8.xml:161(filename) useradd.8.xml:646(filename)
 #: su.1.xml:262(filename) sg.1.xml:97(filename) shadow.5.xml:239(filename)
 #: shadow.3.xml:204(filename) pwck.8.xml:211(filename)
 #: passwd.5.xml:125(filename) passwd.1.xml:384(filename)
-#: newusers.8.xml:351(filename) newgrp.1.xml:108(filename)
+#: newusers.8.xml:352(filename) newgrp.1.xml:108(filename)
 #: login.1.xml:337(filename) expiry.1.xml:77(filename)
 #: chpasswd.8.xml:213(filename) chage.1.xml:218(filename)
 msgid "/etc/shadow"
 msgstr "/etc/shadow"
 
-#: vipw.8.xml:147(para) usermod.8.xml:356(para) userdel.8.xml:163(para)
+#: vipw.8.xml:147(para) usermod.8.xml:377(para) userdel.8.xml:163(para)
 #: useradd.8.xml:648(para) su.1.xml:264(para) sg.1.xml:99(para)
 #: shadow.5.xml:241(para) shadow.3.xml:206(para) pwck.8.xml:213(para)
-#: passwd.1.xml:386(para) newusers.8.xml:353(para) newgrp.1.xml:110(para)
+#: passwd.1.xml:386(para) newusers.8.xml:354(para) newgrp.1.xml:110(para)
 #: login.1.xml:339(para) expiry.1.xml:79(para) chpasswd.8.xml:215(para)
 #: chage.1.xml:221(para)
 msgid "Secure user account information."
 msgstr "Informations sécurisées sur les comptes utilisateurs."
 
-#: vipw.8.xml:154(title) usermod.8.xml:363(title) userdel.8.xml:242(title)
+#: vipw.8.xml:154(title) usermod.8.xml:384(title) userdel.8.xml:244(title)
 #: useradd.8.xml:754(title) suauth.5.xml:197(title) su.1.xml:271(title)
 #: sg.1.xml:118(title) shadow.5.xml:248(title) shadow.3.xml:213(title)
 #: pwconv.8.xml:180(title) pwck.8.xml:220(title) porttime.5.xml:117(title)
 #: passwd.5.xml:134(title) passwd.1.xml:456(title) nologin.8.xml:64(title)
-#: newusers.8.xml:384(title) newgrp.1.xml:129(title)
+#: newusers.8.xml:385(title) newgrp.1.xml:129(title)
 #: login.defs.5.xml:471(title) login.access.5.xml:108(title)
 #: login.1.xml:370(title) limits.5.xml:150(title) gshadow.5.xml:107(title)
 #: grpck.8.xml:190(title) groups.1.xml:87(title) groupmod.8.xml:224(title)
@@ -389,23 +389,16 @@ msgstr ""
 "replaceable>"
 
 #: usermod.8.xml:104(para)
-#, fuzzy
-#| msgid "user home directory"
 msgid "The user's new login directory."
-msgstr "le répertoire personnel de l'utilisateur"
+msgstr "Le nouveau répertoire personnel de l'utilisateur."
 
 #: usermod.8.xml:107(para)
-#, fuzzy
-#| msgid ""
-#| "The user's new login directory. If the <option>-m</option> option is "
-#| "given the contents of the current home directory will be moved to the new "
-#| "home directory, which is created if it does not already exist."
 msgid ""
 "If the <option>-m</option> option is given the contents of the current home "
 "directory will be moved to the new home directory, which is created if it "
 "does not already exist."
 msgstr ""
-"Le nouveau répertoire de connexion de l'utilisateur. Si l'option <option>-m</"
+"Si l'option <option>-m</"
 "option> est fournie, le contenu du répertoire personnel actuel sera déplacé "
 "dans le nouveau répertoire personnel, qui sera créé si nécessaire."
 
@@ -434,32 +427,21 @@ msgstr ""
 "<replaceable>DURÉE_INACTIVITÉ</replaceable>"
 
 #: usermod.8.xml:133(para)
-#, fuzzy
-#| msgid ""
-#| "The number of days after a password has expired before the account will "
-#| "be disabled."
 msgid ""
 "The number of days after a password expires until the account is permanently "
 "disabled."
 msgstr ""
-"Nombre de jours après la fin de validité d'un mot de passe avant que le "
-"compte ne soit désactivé."
+"Nombre de jours suivant la fin de validité d'un mot de passe après lequel le "
+"compte est définitivement désactivé."
 
 #: usermod.8.xml:137(para)
-#, fuzzy
-#| msgid ""
-#| "The number of days after a password expires until the account is "
-#| "permanently disabled. A value of 0 disables the account as soon as the "
-#| "password has expired, and a value of -1 disables the feature. The default "
-#| "value is -1."
 msgid ""
 "A value of 0 disables the account as soon as the password has expired, and a "
 "value of -1 disables the feature."
 msgstr ""
-"Nombre de jours suivant la fin de validité d'un mot de passe après lequel le "
-"compte est définitivement désactivé. Une valeur de 0 désactive le compte dès "
+"Une valeur de 0 désactive le compte dès "
 "que le mot de passe a dépassé sa fin de validité, et une valeur de -1 "
-"désactive cette fonctionnalité. La valeur par défaut est de -1."
+"désactive cette fonctionnalité."
 
 #: usermod.8.xml:145(term) useradd.8.xml:203(term) useradd.8.xml:541(term)
 msgid ""
@@ -468,18 +450,12 @@ msgstr ""
 "<option>-g</option>, <option>--gid</option> <replaceable>GROUPE</replaceable>"
 
 #: usermod.8.xml:150(para)
-#, fuzzy
-#| msgid ""
-#| "The group name or number of the user's new initial login group. The group "
-#| "name must exist. A group number must refer to an already existing group. "
-#| "The default group number is 1."
 msgid ""
 "The group name or number of the user's new initial login group. The group "
 "must exist."
 msgstr ""
 "Nom du groupe ou identifiant numérique du groupe de connexion initial de "
-"l'utilisateur. Le nom du groupe doit exister. Un numéro de groupe doit se "
-"référer à un groupe déjà existant. Le numéro de groupe par défaut est de 1."
+"l'utilisateur. Le groupe doit exister."
 
 #: usermod.8.xml:157(term) useradd.8.xml:231(term)
 msgid ""
@@ -492,13 +468,6 @@ msgstr ""
 "\"I\">,GROUPEN</emphasis>]]]"
 
 #: usermod.8.xml:162(para)
-#, fuzzy
-#| msgid ""
-#| "A list of supplementary groups which the user is also a member of. Each "
-#| "group is separated from the next by a comma, with no intervening "
-#| "whitespace. The groups are subject to the same restrictions as the group "
-#| "given with the <option>-g</option> option. The default is for the user to "
-#| "belong only to the initial group."
 msgid ""
 "A list of supplementary groups which the user is also a member of. Each "
 "group is separated from the next by a comma, with no intervening whitespace. "
@@ -508,21 +477,16 @@ msgstr ""
 "Liste de groupes supplémentaires auxquels appartient également "
 "l'utilisateur. Chaque groupe est séparé du suivant par une virgule, sans "
 "espace entre eux. Les groupes sont soumis aux mêmes restrictions que celles "
-"de l'option <option>-g</option>. Le comportement par défaut pour "
-"l'utilisateur est de n'appartenir qu'au groupe initial."
+"de l'option <option>-g</option>."
 
 #: usermod.8.xml:169(para)
-#, fuzzy
 msgid ""
 "If the user is currently a member of a group which is not listed, the user "
 "will be removed from the group. This behaviour can be changed via the "
 "<option>-a</option> option, which appends the user to the current "
 "supplementary group list."
 msgstr ""
-"Liste de groupes supplémentaires auxquels appartient également "
-"l'utilisateur. Les groupes sont séparés par une virgule, sans espace entre "
-"eux. Les groupes sont soumis aux mêmes restrictions que celles données avec "
-"l'option <option>-g</option>. Si l'utilisateur fait actuellement partie d'un "
+"Si l'utilisateur fait actuellement partie d'un "
 "groupe qui n'est pas listé, l'utilisateur sera supprimé du groupe. Ce "
 "comportement peut être modifié par l'option <option>-a</option>, qui permet "
 "d'ajouter l'utilisateur à la liste actuelle des groupes supplémentaires."
@@ -535,9 +499,7 @@ msgstr ""
 "<option>-l</option>, <option>--login</option> <replaceable>NOUVEAU_LOGIN</"
 "replaceable>"
 
-# NOTE: relaceable
 #: usermod.8.xml:183(para)
-#, fuzzy
 msgid ""
 "The name of the user will be changed from <replaceable>LOGIN</replaceable> "
 "to <replaceable>NEW_LOGIN</replaceable>. Nothing else is changed. In "
@@ -571,12 +533,26 @@ msgid ""
 "<replaceable>1</replaceable>."
 msgstr ""
 
-#: usermod.8.xml:212(term) useradd.8.xml:364(term) groupmod.8.xml:111(term)
+#: usermod.8.xml:212(term)
+msgid "<option>-m</option>, <option>--move-home</option>"
+msgstr "<option>-m</option>, <option>--move-home</option>"
+
+#: usermod.8.xml:216(para)
+msgid "Move the content of the user's home directory to the new location."
+msgstr ""
+
+#: usermod.8.xml:220(para)
+msgid ""
+"This option is only valid in combination with the <option>-d</option> (or "
+"<option>--home</option>) option."
+msgstr ""
+
+#: usermod.8.xml:227(term) useradd.8.xml:364(term) groupmod.8.xml:111(term)
 #: groupadd.8.xml:133(term)
 msgid "<option>-o</option>, <option>--non-unique</option>"
 msgstr "<option>-o</option>, <option>--non-unique</option>"
 
-#: usermod.8.xml:216(para)
+#: usermod.8.xml:231(para)
 msgid ""
 "When used with the <option>-u</option> option, this option allows to change "
 "the user ID to a non-unique value."
@@ -584,7 +560,7 @@ msgstr ""
 "En combinaison avec l'option <option>-u</option>, cette option permet de "
 "changer l'identifiant utilisateur vers une valeur déjà utilisée."
 
-#: usermod.8.xml:223(term) useradd.8.xml:376(term) groupmod.8.xml:122(term)
+#: usermod.8.xml:238(term) useradd.8.xml:376(term) groupmod.8.xml:122(term)
 #: groupadd.8.xml:143(term)
 msgid ""
 "<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
@@ -593,7 +569,7 @@ msgstr ""
 "<option>-p</option>, <option>--password</option> <replaceable>MOT_DE_PASSE</"
 "replaceable>"
 
-#: usermod.8.xml:228(para) groupmod.8.xml:127(para)
+#: usermod.8.xml:243(para) groupmod.8.xml:127(para)
 msgid ""
 "The encrypted password, as returned by <citerefentry><refentrytitle>crypt</"
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>."
@@ -601,7 +577,7 @@ msgstr ""
 "Mot de passe chiffré, comme renvoyé par <citerefentry><refentrytitle>crypt</"
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>."
 
-#: usermod.8.xml:233(para) useradd.8.xml:386(para) groupmod.8.xml:132(para)
+#: usermod.8.xml:248(para) useradd.8.xml:386(para) groupmod.8.xml:132(para)
 #: groupadd.8.xml:153(para)
 msgid ""
 "<emphasis role=\"bold\">Note:</emphasis> This option is not recommended "
@@ -609,7 +585,7 @@ msgid ""
 "listing the processes."
 msgstr ""
 
-#: usermod.8.xml:241(term) useradd.8.xml:421(term) useradd.8.xml:562(term)
+#: usermod.8.xml:256(term) useradd.8.xml:421(term) useradd.8.xml:562(term)
 #: su.1.xml:157(term) chsh.1.xml:85(term)
 msgid ""
 "<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
@@ -617,7 +593,7 @@ msgstr ""
 "<option>-s</option>, <option>--shell</option> <replaceable>INTERPRÉTEUR</"
 "replaceable>"
 
-#: usermod.8.xml:246(para) chsh.1.xml:89(para)
+#: usermod.8.xml:261(para) chsh.1.xml:89(para)
 msgid ""
 "The name of the user's new login shell. Setting this field to blank causes "
 "the system to select the default login shell."
@@ -626,67 +602,45 @@ msgstr ""
 "l'utilisateur. Si ce champ est vide, le système sélectionnera l'interpréteur "
 "de commandes initial par défaut."
 
-#: usermod.8.xml:253(term) useradd.8.xml:436(term)
+#: usermod.8.xml:268(term) useradd.8.xml:436(term)
 msgid ""
 "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
 msgstr ""
 "<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
 
-#: usermod.8.xml:258(para)
+#: usermod.8.xml:273(para)
 msgid "The new numerical value of the user's ID."
-msgstr ""
+msgstr "La valeur numérique de l'identifiant de l'utilisateur."
 
-#: usermod.8.xml:261(para)
-#, fuzzy
-#| msgid ""
-#| "The numerical value of the user's ID. This value must be unique, unless "
-#| "the <option>-o</option> option is used. The value must be non-negative. "
-#| "The default is to use the smallest ID value greater than 999 and greater "
-#| "than every other user. Values between 0 and 999 are typically reserved "
-#| "for system accounts."
+#: usermod.8.xml:276(para)
 msgid ""
 "This value must be unique, unless the <option>-o</option> option is used. "
 "The value must be non-negative. Values between 0 and 999 are typically "
 "reserved for system accounts."
 msgstr ""
-"La valeur numérique de l'identifiant de l'utilisateur. Cette valeur doit "
-"être unique, à moins que l'option <option>-o</option> ne soit utilisée. La "
-"valeur ne doit pas être négative. Le comportement par défaut est d'utiliser "
-"la plus petite valeur d'identifiant plus grande que 999, et plus grande que "
-"celle des identifiants de tous les autres utilisateurs. Les valeurs "
-"comprises entre 0 et 999 sont généralement réservées pour les comptes "
-"systèmes."
+"Cette valeur doit être "
+"unique, à moins que l'option <option>-o</option> ne soit utilisée. La valeur "
+"ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont "
+"généralement réservées aux comptes système."
 
-#: usermod.8.xml:267(para)
-#, fuzzy
-#| msgid ""
-#| "The numerical value of the user's ID. This value must be unique, unless "
-#| "the <option>-o</option> option is used. The value must be non-negative. "
-#| "Values between 0 and 999 are typically reserved for system accounts. Any "
-#| "files which the user owns and which are located in the directory tree "
-#| "rooted at the user's home directory will have the file user ID changed "
-#| "automatically. Files outside of the user's home directory must be altered "
-#| "manually."
+#: usermod.8.xml:282(para)
 msgid ""
 "Any files which the user owns and which are located in the directory tree "
 "rooted at the user's home directory will have the file user ID changed "
 "automatically. Files outside of the user's home directory must be altered "
 "manually."
 msgstr ""
-"Valeur numérique de l'identifiant de l'utilisateur. Cette valeur doit être "
-"unique, à moins que l'option <option>-o</option> ne soit utilisée. La valeur "
-"ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont "
-"généralement réservées aux comptes système. Tous les fichiers possédés par "
+"Tous les fichiers possédés par "
 "l'utilisateur et qui sont situés dans son répertoire personnel verront leur "
 "identifiant d'utilisateur automatiquement modifié. Vous devrez modifier vous-"
 "même les fichiers situés à l'extérieur du répertoire personnel de "
 "l'utilisateur."
 
-#: usermod.8.xml:277(term)
+#: usermod.8.xml:292(term)
 msgid "<option>-U</option>, <option>--unlock</option>"
 msgstr "<option>-U</option>, <option>--unlock</option>"
 
-#: usermod.8.xml:281(para)
+#: usermod.8.xml:296(para)
 msgid ""
 "Unlock a user's password. This removes the '!' in front of the encrypted "
 "password. You can't use this option with <option>-p</option> or <option>-L</"
@@ -696,7 +650,7 @@ msgstr ""
 "devant le mot de passe chiffré. Vous ne pouvez pas utiliser cette option "
 "avec <option>-p</option> ou <option>-L</option>."
 
-#: usermod.8.xml:286(para)
+#: usermod.8.xml:301(para)
 msgid ""
 "Note: if you wish to unlock the account (not only access with a password), "
 "you should also set the <replaceable>EXPIRE_DATE</replaceable> (for example "
@@ -704,19 +658,15 @@ msgid ""
 "replaceable> value from <filename>/etc/default/useradd</filename>)."
 msgstr ""
 
-#: usermod.8.xml:297(term) useradd.8.xml:468(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-s</option>, <option>--shell</option><replaceable>SHELL</"
-#| "replaceable>"
+#: usermod.8.xml:312(term) useradd.8.xml:468(term)
 msgid ""
 "<option>-Z</option>, <option>--selinux-user</option><replaceable>SEUSER</"
 "replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--shell</option> <replaceable>INTERPRÉTEUR</"
+"<option>-Z</option>, <option>--selinux-user</option><replaceable>UTILISATEUR_SELINUX</"
 "replaceable>"
 
-#: usermod.8.xml:302(para)
+#: usermod.8.xml:317(para)
 #, fuzzy
 #| msgid ""
 #| "The name of the user's new login shell. Setting this field to blank "
@@ -729,57 +679,48 @@ msgstr ""
 "l'utilisateur. Si ce champ est vide, le système sélectionnera l'interpréteur "
 "de commandes initial par défaut."
 
-#: usermod.8.xml:313(title) userdel.8.xml:221(title) useradd.8.xml:591(title)
+#: usermod.8.xml:328(title) userdel.8.xml:221(title) useradd.8.xml:591(title)
 #: su.1.xml:217(title) shadow.3.xml:193(title) passwd.1.xml:339(title)
-#: newusers.8.xml:295(title) login.1.xml:238(title) lastlog.8.xml:159(title)
+#: newusers.8.xml:302(title) login.1.xml:238(title) lastlog.8.xml:159(title)
 #: groupdel.8.xml:69(title) groupadd.8.xml:218(title) gpasswd.1.xml:203(title)
 #: faillog.8.xml:193(title) chpasswd.8.xml:182(title)
 #: chgpasswd.8.xml:157(title)
 msgid "CAVEATS"
 msgstr "AVERTISSEMENTS"
 
-#: usermod.8.xml:314(para)
-#, fuzzy
-#| msgid ""
-#| "<command>usermod</command> will not allow you to change the name of a "
-#| "user who is logged in. You must make certain that the named user is not "
-#| "executing any processes when this command is being executed if the user's "
-#| "numerical user ID is being changed. You must change the owner of any "
-#| "<command>crontab</command> files manually. You must change the owner of "
-#| "any <command>at</command> jobs manually. You must make any changes "
-#| "involving NIS on the NIS server."
+#: usermod.8.xml:329(para)
 msgid ""
-"<command>usermod</command> will not allow you to change the name of an user "
-"who is logged in. You must make certain that the named user is not executing "
-"any processes when this command is being executed if the user's numerical "
-"user ID is being changed. You must change the owner of any <command>crontab</"
-"command> files manually. You must change the owner of any <command>at</"
-"command> jobs manually. You must make any changes involving NIS on the NIS "
-"server."
+"You must make certain that the named user is not executing any processes "
+"when this command is being executed if the user's numerical user ID, the "
+"user's name, or the user's home directory is being changed. "
+"<command>usermod</command> checks this on Linux, but only check if the user "
+"is logged in according to utmp on other architectures."
 msgstr ""
-"<command>Usermod</command> ne vous permet pas de modifier le nom d'un "
-"utilisateur qui est actuellement connecté. Vous devez vous assurer que "
-"l'utilisateur nommé n'est pas en train d'exécuter un quelconque programme "
-"lorsque cette commande est exécutée si l'UID numérique de l'utilisateur est "
-"modifié. Vous devez modifier vous-même le nom du propriétaire de tous les "
-"fichiers <command>crontab</command> et des tâches <command>at</command>. "
-"Vous devez effectuer toutes les modifications impliquant NIS sur le serveur "
-"NIS."
 
-#: usermod.8.xml:326(title) userdel.8.xml:125(title) useradd.8.xml:614(title)
+#: usermod.8.xml:337(para)
+msgid ""
+"You must change the owner of any <command>crontab</command> files or "
+"<command>at</command> jobs manually."
+msgstr ""
+
+#: usermod.8.xml:341(para)
+msgid "You must make any changes involving NIS on the NIS server."
+msgstr ""
+
+#: usermod.8.xml:347(title) userdel.8.xml:125(title) useradd.8.xml:614(title)
 #: su.1.xml:225(title) sg.1.xml:76(title) pwconv.8.xml:146(title)
-#: pwck.8.xml:182(title) passwd.1.xml:357(title) newusers.8.xml:309(title)
+#: pwck.8.xml:182(title) passwd.1.xml:357(title) newusers.8.xml:310(title)
 #: newgrp.1.xml:87(title) login.1.xml:272(title) grpck.8.xml:154(title)
 #: groupmod.8.xml:143(title) groupmems.8.xml:156(title)
 #: groupdel.8.xml:76(title) groupadd.8.xml:180(title) gpasswd.1.xml:215(title)
 #: chsh.1.xml:120(title) chpasswd.8.xml:190(title) chgpasswd.8.xml:165(title)
 #: chfn.1.xml:99(title)
 msgid "CONFIGURATION"
-msgstr ""
+msgstr "CONFIGURATION"
 
-#: usermod.8.xml:327(para) userdel.8.xml:126(para) useradd.8.xml:615(para)
+#: usermod.8.xml:348(para) userdel.8.xml:126(para) useradd.8.xml:615(para)
 #: su.1.xml:226(para) sg.1.xml:77(para) pwck.8.xml:183(para)
-#: passwd.1.xml:358(para) newusers.8.xml:310(para) newgrp.1.xml:88(para)
+#: passwd.1.xml:358(para) newusers.8.xml:311(para) newgrp.1.xml:88(para)
 #: login.1.xml:273(para) grpck.8.xml:155(para) groupmod.8.xml:144(para)
 #: groupmems.8.xml:157(para) groupdel.8.xml:77(para) groupadd.8.xml:181(para)
 #: gpasswd.1.xml:216(para) chsh.1.xml:121(para) chpasswd.8.xml:191(para)
@@ -791,9 +732,8 @@ msgstr ""
 
 #: usermod.8.xml:32(term) userdel.8.xml:32(term) useradd.8.xml:32(term)
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>MAIL_DIR</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>MAIL_DIR</option> (chaîne ce caractères)"
 
 #: usermod.8.xml:34(para) userdel.8.xml:34(para) useradd.8.xml:34(para)
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
@@ -809,9 +749,8 @@ msgstr ""
 
 #: usermod.8.xml:41(term) userdel.8.xml:41(term) useradd.8.xml:41(term)
 #: su.1.xml:41(term) login.defs.5.xml:41(term) login.1.xml:41(term)
-#, fuzzy
 msgid "<option>MAIL_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>MAIL_FILE</option> (chaîne ce caractères)"
 
 #: usermod.8.xml:43(para) userdel.8.xml:43(para) useradd.8.xml:43(para)
 #: su.1.xml:43(para) login.defs.5.xml:43(para) login.1.xml:43(para)
@@ -910,10 +849,6 @@ msgstr "Si vous avez besoin de fixer cette limite, vous pouvez utiliser 25."
 #: grpck.8.xml:51(para) groupmod.8.xml:51(para) groupmems.8.xml:51(para)
 #: groupdel.8.xml:51(para) groupadd.8.xml:51(para) gpasswd.1.xml:51(para)
 #: chgpasswd.8.xml:51(para)
-#, fuzzy
-#| msgid ""
-#| "Note: split groups may not be supported by all tools (even in the Shadow "
-#| "toolsuite. You should not use this variable unless you really need it."
 msgid ""
 "Note: split groups may not be supported by all tools (even in the Shadow "
 "toolsuite). You should not use this variable unless you really need it."
@@ -922,7 +857,7 @@ msgstr ""
 "tous les outils (même dans la suite d'outils Shadow). Vous ne devriez pas "
 "utiliser cette variable, sauf si vous en avez vraiment besoin."
 
-#: usermod.8.xml:364(para)
+#: usermod.8.xml:385(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -970,7 +905,6 @@ msgid "delete a user account and related files"
 msgstr "supprimer un compte utilisateur et les fichiers associés"
 
 #: userdel.8.xml:61(para)
-#, fuzzy
 msgid ""
 "The <command>userdel</command> command modifies the system account files, "
 "deleting all entries that refer to the user name <emphasis remap=\"I"
@@ -978,7 +912,7 @@ msgid ""
 msgstr ""
 "La commande <command>userdel</command> modifie les fichiers d'administration "
 "des comptes du système, en supprimant les entrées qui se réfèrent à "
-"<emphasis remap=\"I\">utilisateur</emphasis>. L'utilisateur nommé doit "
+"<emphasis remap=\"I\">LOGIN</emphasis>. L'utilisateur nommé doit "
 "exister."
 
 #: userdel.8.xml:70(para)
@@ -1043,12 +977,11 @@ msgstr ""
 "Le répertoire d'attente des courriels est défini par la variable "
 "<emphasis>MAIL_DIR</emphasis> du fichier <filename>login.defs</filename>."
 
-#: userdel.8.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
+#: userdel.8.xml:33(term) login.defs.5.xml:33(term)
 msgid "<option>USERDEL_CMD</option> (string)"
-msgstr "USERDEL_CMD (chaîne)"
+msgstr "<option>USERDEL_CMD</option> (chaîne ce caractères)"
 
-#: userdel.8.xml:34(para) login.defs.5.xml:34(para)
+#: userdel.8.xml:35(para) login.defs.5.xml:35(para)
 msgid ""
 "If defined, this command is run when removing a user. It should remove any "
 "at/cron/print jobs etc. owned by the user to be removed (passed as the first "
@@ -1059,11 +992,71 @@ msgstr ""
 "périodiques cron ou at, tous les travaux d'impression, etc. de l'utilisateur "
 "(qui sera fourni comme premier paramètre)."
 
+#: userdel.8.xml:40(para) login.defs.5.xml:40(para)
+msgid "The return code of the script is not taken into account."
+msgstr ""
+
+#: userdel.8.xml:46(programlisting) login.defs.5.xml:46(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"#! /bin/sh\n"
+"\n"
+"# Check for the required argument.\n"
+"if [ $# != 1 ]; then\n"
+"\techo \"Usage: $0 username\"\n"
+"\texit 1\n"
+"fi\n"
+"\n"
+"# Remove cron jobs.\n"
+"crontab -r -u $1\n"
+"\n"
+"# Remove at jobs.\n"
+"# Note that it will remove any jobs owned by the same UID,\n"
+"# even if it was shared by a different username.\n"
+"find /var/spool/cron/atjobs -name \"[^.]*\" -type f -user $1 -exec rm {} \\;\n"
+"\n"
+"# Remove print jobs.\n"
+"lprm $1\n"
+"\n"
+"# All done.\n"
+"exit 0\n"
+"      "
+msgstr ""
+"\n"
+"#! /bin/sh\n"
+"\n"
+"# Check for the required argument.\n"
+"if [ $# != 1 ]; then\n"
+"\techo \"Usage: $0 username\"\n"
+"\texit 1\n"
+"fi\n"
+"\n"
+"# Remove cron jobs.\n"
+"crontab -r -u $1\n"
+"\n"
+"# Remove at jobs.\n"
+"# Note that it will remove any jobs owned by the same UID,\n"
+"# even if it was shared by a different username.\n"
+"find /var/spool/cron/atjobs -name \"[^.]*\" -type f -user $1 -exec rm {} \\;\n"
+"\n"
+"# Remove print jobs.\n"
+"lprm $1\n"
+"\n"
+"# All done.\n"
+"exit 0\n"
+"      "
+
+#: userdel.8.xml:43(para) login.defs.5.xml:43(para)
+msgid ""
+"Here is an example script, which removes the user's cron, at and print jobs: "
+"<placeholder-1/>"
+msgstr ""
+
 #: userdel.8.xml:32(term) useradd.8.xml:32(term) su.1.xml:32(term)
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>USERGROUPS_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>USERGROUPS_ENAB</option> (booléen)"
 
 #: userdel.8.xml:34(para) useradd.8.xml:34(para) su.1.xml:34(para)
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
@@ -1084,7 +1077,7 @@ msgstr ""
 
 #: userdel.8.xml:149(filename) useradd.8.xml:676(filename)
 #: pwconv.8.xml:171(filename) passwd.1.xml:390(filename)
-#: newusers.8.xml:369(filename) login.access.5.xml:99(filename)
+#: newusers.8.xml:370(filename) login.access.5.xml:99(filename)
 #: groupadd.8.xml:209(filename) chsh.1.xml:148(filename)
 #: chpasswd.8.xml:219(filename) chgpasswd.8.xml:195(filename)
 #: chfn.1.xml:116(filename)
@@ -1092,7 +1085,7 @@ msgid "/etc/login.defs"
 msgstr "/etc/login.defs"
 
 #: userdel.8.xml:151(para) useradd.8.xml:678(para) pwconv.8.xml:173(para)
-#: passwd.1.xml:392(para) newusers.8.xml:371(para)
+#: passwd.1.xml:392(para) newusers.8.xml:372(para)
 #: login.access.5.xml:101(para) groupadd.8.xml:211(para) chsh.1.xml:150(para)
 #: chpasswd.8.xml:221(para) chgpasswd.8.xml:197(para) chfn.1.xml:118(para)
 msgid "Shadow password suite configuration."
@@ -1190,16 +1183,14 @@ msgstr ""
 
 #: userdel.8.xml:222(para)
 msgid ""
-"<command>userdel</command> will not allow you to remove an account if the "
-"user is currently logged in. You must kill any running processes which "
-"belong to an account that you are deleting."
+"<command>userdel</command> will not allow you to remove an account if there "
+"are running processes which belong to this account. In that case, you may "
+"have to kill those processes or lock the user's password or account and "
+"remove the account later. The <option>-f</option> option can force the "
+"deletion of this account."
 msgstr ""
-"<command>Userdel</command> ne vous permet pas de supprimer un compte si "
-"l'utilisateur en question est actuellement connecté. Vous devez tuer tous "
-"les processus en cours d'exécution appartenant à l'utilisateur que vous êtes "
-"en train de supprimer."
 
-#: userdel.8.xml:227(para)
+#: userdel.8.xml:229(para)
 msgid ""
 "You may not remove any NIS attributes on a NIS client. This must be "
 "performed on the NIS server."
@@ -1207,14 +1198,14 @@ msgstr ""
 "Vous ne pouvez supprimer aucun attribut NIS d'un client NIS. Cela doit être "
 "effectué sur le serveur NIS."
 
-#: userdel.8.xml:230(para)
+#: userdel.8.xml:232(para)
 msgid ""
 "If <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis remap=\"I"
 "\">yes</emphasis> in <filename>/etc/login.defs</filename>, <command>userdel</"
 "command> will delete the group with the same name as the user. To avoid "
 "inconsistencies in the passwd and group databases, <command>userdel</"
 "command> will check that this group is not used as a primary group for "
-"another user, and will just warn without deleting the user otherwise. The "
+"another user, and will just warn without deleting the group otherwise. The "
 "<option>-f</option> option can force the deletion of this group."
 msgstr ""
 "Si <emphasis>USERGROUPS_ENAB</emphasis> vaut <emphasis remap=\"I\">yes</"
@@ -1223,10 +1214,10 @@ msgstr ""
 "l'utilisateur. Afin d'éviter des incohérences entre les fichiers passwd et "
 "group, <command>userdel</command> vérifie que le groupe n'est pas utilisé "
 "comme groupe primaire d'un autre utilisateur ; si c'est le cas un "
-"avertissement sera affiché et l'utilisateur ne sera pas supprimé. L'option "
+"avertissement sera affiché et le groupe ne sera pas supprimé. L'option "
 "<option>-f</option> permet de forcer la suppression du groupe."
 
-#: userdel.8.xml:243(para)
+#: userdel.8.xml:245(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -1362,10 +1353,8 @@ msgstr ""
 "mais il ne sera pas créé s'il n'existe pas."
 
 #: useradd.8.xml:155(term)
-#, fuzzy
-#| msgid "<option>-d</option>, <option>--delete</option>"
 msgid "<option>-D</option>, <option>--defaults</option>"
-msgstr "<option>-d</option>, <option>--delete</option>"
+msgstr "<option>-D</option>, <option>--defaults</option>"
 
 #: useradd.8.xml:159(para)
 #, fuzzy
@@ -1380,12 +1369,6 @@ msgid ""
 msgstr ""
 
 #: useradd.8.xml:188(para)
-#, fuzzy
-#| msgid ""
-#| "The number of days after a password expires until the account is "
-#| "permanently disabled. A value of 0 disables the account as soon as the "
-#| "password has expired, and a value of -1 disables the feature. The default "
-#| "value is -1."
 msgid ""
 "The number of days after a password expires until the account is permanently "
 "disabled. A value of 0 disables the account as soon as the password has "
@@ -1394,7 +1377,7 @@ msgstr ""
 "Nombre de jours suivant la fin de validité d'un mot de passe après lequel le "
 "compte est définitivement désactivé. Une valeur de 0 désactive le compte dès "
 "que le mot de passe a dépassé sa fin de validité, et une valeur de -1 "
-"désactive cette fonctionnalité. La valeur par défaut est de -1."
+"désactive cette fonctionnalité."
 
 #: useradd.8.xml:194(para)
 msgid ""
@@ -1404,18 +1387,13 @@ msgid ""
 msgstr ""
 
 #: useradd.8.xml:208(para)
-#, fuzzy
-#| msgid ""
-#| "The group name or number of the user's new initial login group. The group "
-#| "name must exist. A group number must refer to an already existing group. "
-#| "The default group number is 1."
 msgid ""
 "The group name or number of the user's initial login group. The group name "
 "must exist. A group number must refer to an already existing group."
 msgstr ""
 "Nom du groupe ou identifiant numérique du groupe de connexion initial de "
 "l'utilisateur. Le nom du groupe doit exister. Un numéro de groupe doit se "
-"référer à un groupe déjà existant. Le numéro de groupe par défaut est de 1."
+"référer à un groupe déjà existant."
 
 #: useradd.8.xml:213(para)
 msgid ""
@@ -1446,15 +1424,11 @@ msgstr ""
 "l'utilisateur est de n'appartenir qu'au groupe initial."
 
 #: useradd.8.xml:253(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-s</option>, <option>--shell</option><replaceable>SHELL</"
-#| "replaceable>"
 msgid ""
 "<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--shell</option> <replaceable>INTERPRÉTEUR</"
+"<option>-k</option>, <option>--skel</option><replaceable>RÉP_SQUELETTE</"
 "replaceable>"
 
 #: useradd.8.xml:258(para)
@@ -1465,12 +1439,12 @@ msgid ""
 msgstr ""
 
 #: useradd.8.xml:263(para)
-#, fuzzy
-#| msgid "<option>-m</option>, <option>--create-home</option>"
 msgid ""
 "This option is only valid if the <option>-m</option> (or <option>--create-"
 "home</option>) option is specified."
-msgstr "<option>-m</option>, <option>--create-home</option>"
+msgstr ""
+"Cette option n'est valable que si l'option <option>-m</option> (ou "
+"<option>--create-home</option>) est utilisée."
 
 #: useradd.8.xml:267(para)
 msgid ""
@@ -1488,17 +1462,6 @@ msgstr ""
 "replaceable>=<replaceable>VALEUR</replaceable>"
 
 #: useradd.8.xml:281(para)
-#, fuzzy
-#| msgid ""
-#| "Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, "
-#| "PASS_MAX_DAYS and others). <placeholder-1/> Example: <option>-K </"
-#| "option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</"
-#| "replaceable> can be used when creating system account to turn off "
-#| "password ageing, even though system account has no password at all. "
-#| "Multiple <option>-K</option> options can be specified, e.g.: <option>-K </"
-#| "option><replaceable>UID_MIN</replaceable>=<replaceable>100</"
-#| "replaceable><option> -K </option><replaceable>UID_MAX</"
-#| "replaceable>=<replaceable>499</replaceable>"
 msgid ""
 "Overrides <filename>/etc/login.defs</filename> defaults (UID_MIN, UID_MAX, "
 "UMASK, PASS_MAX_DAYS and others). <placeholder-1/> Example: <option>-K </"
@@ -1532,10 +1495,8 @@ msgstr ""
 "replaceable>=<replaceable>499</replaceable> ne fonctionne pas pour l'instant."
 
 #: useradd.8.xml:303(term)
-#, fuzzy
-#| msgid "<option>-l</option>, <option>--list</option>"
 msgid "<option>-l</option>, <option>--no-log-init</option>"
-msgstr "<option>-l</option>, <option>--list</option>"
+msgstr "<option>-l</option>, <option>--no-log-init</option>"
 
 #: useradd.8.xml:305(para)
 msgid "Do not add the user to the lastlog and faillog databases."
@@ -1563,10 +1524,8 @@ msgid "By default, no home directories are created."
 msgstr ""
 
 #: useradd.8.xml:333(option)
-#, fuzzy
-#| msgid "-"
 msgid "-M"
-msgstr "-"
+msgstr "-M"
 
 #: useradd.8.xml:336(para)
 msgid ""
@@ -1576,10 +1535,8 @@ msgid ""
 msgstr ""
 
 #: useradd.8.xml:345(term)
-#, fuzzy
-#| msgid "<option>-g</option>, <option>--group</option>"
 msgid "<option>-N</option>, <option>--no-user-group</option>"
-msgstr "<option>-g</option>, <option>--group</option>"
+msgstr "<option>-N</option>, <option>--no-user-group</option>"
 
 #: useradd.8.xml:349(para)
 msgid ""
@@ -1619,13 +1576,11 @@ msgstr ""
 "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></"
 "citerefentry>. Le comportement par défaut est de désactiver le compte."
 
-#: useradd.8.xml:394(term) newusers.8.xml:246(term) groupadd.8.xml:161(term)
-#, fuzzy
-#| msgid "<option>-r</option>, <option>--reset</option>"
+#: useradd.8.xml:394(term) newusers.8.xml:253(term) groupadd.8.xml:161(term)
 msgid "<option>-r</option>, <option>--system</option>"
-msgstr "<option>-r</option>, <option>--reset</option>"
+msgstr "<option>-r</option>, <option>--system</option>"
 
-#: useradd.8.xml:398(para) newusers.8.xml:250(para)
+#: useradd.8.xml:398(para) newusers.8.xml:257(para)
 msgid "Create a system account."
 msgstr ""
 
@@ -1680,10 +1635,8 @@ msgstr ""
 "systèmes."
 
 #: useradd.8.xml:451(term)
-#, fuzzy
-#| msgid "<option>-g</option>, <option>--group</option>"
 msgid "<option>-U</option>, <option>--user-group</option>"
-msgstr "<option>-g</option>, <option>--group</option>"
+msgstr "<option>-U</option>, <option>--user-group</option>"
 
 #: useradd.8.xml:455(para)
 msgid ""
@@ -1828,11 +1781,6 @@ msgstr ""
 
 # NOTE: digits
 #: useradd.8.xml:603(para)
-#, fuzzy
-#| msgid ""
-#| "Usernames must begin with a lower case letter or an underscore, and only "
-#| "lower case letters, underscores, dashes, and dollar signs may follow. In "
-#| "regular expression terms: [a-z_][a-z0-9_-]*[$]"
 msgid ""
 "Usernames must begin with a lower case letter or an underscore, and only "
 "lower case letters, underscores, dashes, and dollar signs may follow. In "
@@ -1841,18 +1789,15 @@ msgstr ""
 "Les noms d'utilisateur doivent commencer par une lettre minuscule ou un "
 "tiret bas (« underscore »), et seuls des lettres minuscules, des chiffres, "
 "des « underscore », des tirets ou un dollar peuvent suivre. Soit, sous la "
-"forme d'une expression rationnelle : [a-z_][a-z0-9_-]*[$]"
+"forme d'une expression rationnelle : [a-z_][a-z0-9_-]*[$]?"
 
 #: useradd.8.xml:608(para)
-#, fuzzy
-#| msgid "Groupnames may only be up to 16 characters long."
 msgid "Usernames may only be up to 32 characters long."
-msgstr "Les noms de groupe sont limités à 16 caractères."
+msgstr "Les noms d'utilisateur sont limités à 16 caractères."
 
 #: useradd.8.xml:30(term) login.defs.5.xml:30(term)
-#, fuzzy
 msgid "<option>CREATE_HOME</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>CREATE_HOME</option> (boolean)"
 
 #: useradd.8.xml:32(para) login.defs.5.xml:32(para)
 msgid ""
@@ -1871,15 +1816,13 @@ msgstr ""
 
 #: useradd.8.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: groupadd.8.xml:32(term)
-#, fuzzy
 msgid "<option>GID_MAX</option> (number)"
-msgstr "GID_MAX (nombre)"
+msgstr "<option>GID_MAX</option> (nombre)"
 
 #: useradd.8.xml:33(term) newusers.8.xml:33(term) login.defs.5.xml:33(term)
 #: groupadd.8.xml:33(term)
-#, fuzzy
 msgid "<option>GID_MIN</option> (number)"
-msgstr "GID_MIN (nombre)"
+msgstr "<option>GID_MIN</option> (nombre)"
 
 #: useradd.8.xml:35(para) newusers.8.xml:35(para) login.defs.5.xml:35(para)
 #: groupadd.8.xml:35(para)
@@ -1897,9 +1840,8 @@ msgstr ""
 
 #: useradd.8.xml:32(term) pwconv.8.xml:32(term) pwck.8.xml:32(term)
 #: newusers.8.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_MAX_DAYS</option> (number)"
-msgstr "PASS_MAX_DAYS (nombre)"
+msgstr "<option>PASS_MAX_DAYS</option> (nombre)"
 
 #: useradd.8.xml:34(para) pwconv.8.xml:34(para) pwck.8.xml:34(para)
 #: newusers.8.xml:34(para) login.defs.5.xml:34(para)
@@ -1914,9 +1856,8 @@ msgstr ""
 
 #: useradd.8.xml:32(term) pwconv.8.xml:32(term) pwck.8.xml:32(term)
 #: newusers.8.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_MIN_DAYS</option> (number)"
-msgstr "PASS_MIN_DAYS (nombre)"
+msgstr "<option>PASS_MIN_DAYS</option> (nombre)"
 
 #: useradd.8.xml:34(para) pwconv.8.xml:34(para) pwck.8.xml:34(para)
 #: newusers.8.xml:34(para) login.defs.5.xml:34(para)
@@ -1932,9 +1873,8 @@ msgstr ""
 
 #: useradd.8.xml:32(term) pwconv.8.xml:32(term) pwck.8.xml:32(term)
 #: newusers.8.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_WARN_AGE</option> (number)"
-msgstr "PASS_WARN_AGE (nombre)"
+msgstr "<option>PASS_WARN_AGE</option> (nombre)"
 
 #: useradd.8.xml:34(para) pwconv.8.xml:34(para) pwck.8.xml:34(para)
 #: newusers.8.xml:34(para) login.defs.5.xml:34(para)
@@ -1950,15 +1890,13 @@ msgstr ""
 
 #: useradd.8.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
 #: groupadd.8.xml:30(term)
-#, fuzzy
 msgid "<option>SYS_GID_MAX</option> (number)"
-msgstr "GID_MAX (nombre)"
+msgstr "<option>SYS_GID_MAX</option> (nombre)"
 
 #: useradd.8.xml:31(term) newusers.8.xml:31(term) login.defs.5.xml:31(term)
 #: groupadd.8.xml:31(term)
-#, fuzzy
 msgid "<option>SYS_GID_MIN</option> (number)"
-msgstr "GID_MIN (nombre)"
+msgstr "<option>SYS_GID_MIN</option> (nombre)"
 
 #: useradd.8.xml:33(para) newusers.8.xml:33(para) login.defs.5.xml:33(para)
 #: groupadd.8.xml:33(para)
@@ -1975,14 +1913,12 @@ msgstr ""
 "command> et <command>groupadd</command> peuvent utiliser."
 
 #: useradd.8.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
-#, fuzzy
 msgid "<option>SYS_UID_MAX</option> (number)"
-msgstr "UID_MAX (nombre)"
+msgstr "<option>SYS_UID_MAX</option> (nombre)"
 
 #: useradd.8.xml:31(term) newusers.8.xml:31(term) login.defs.5.xml:31(term)
-#, fuzzy
 msgid "<option>SYS_UID_MIN</option> (number)"
-msgstr "UID_MIN (nombre)"
+msgstr "<option>SYS_UID_MIN</option> (nombre)"
 
 #: useradd.8.xml:33(para) newusers.8.xml:33(para) login.defs.5.xml:33(para)
 #, fuzzy
@@ -1997,14 +1933,12 @@ msgstr ""
 "command> et <command>groupadd</command> peuvent utiliser."
 
 #: useradd.8.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>UID_MAX</option> (number)"
-msgstr "UID_MAX (nombre)"
+msgstr "<option>UID_MAX</option> (nombre)"
 
 #: useradd.8.xml:33(term) newusers.8.xml:33(term) login.defs.5.xml:33(term)
-#, fuzzy
 msgid "<option>UID_MIN</option> (number)"
-msgstr "UID_MIN (nombre)"
+msgstr "<option>UID_MIN</option> (nombre)"
 
 #: useradd.8.xml:35(para) newusers.8.xml:35(para) login.defs.5.xml:35(para)
 #, fuzzy
@@ -2020,9 +1954,8 @@ msgstr ""
 
 #: useradd.8.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: login.1.xml:32(term)
-#, fuzzy
 msgid "<option>UMASK</option> (number)"
-msgstr "UMASK (nombre)"
+msgstr "<option>UMASK</option> (nombre)"
 
 #: useradd.8.xml:34(para) newusers.8.xml:34(para) login.defs.5.xml:34(para)
 #: login.1.xml:34(para)
@@ -2642,20 +2575,19 @@ msgstr ""
 "votre site."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>CONSOLE</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>CONSOLE</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
-"If defined, either full pathname of a file containing device names or a \":"
-"\" delimited list of device names. Root logins will be allowed only upon "
-"these devices."
+"If defined, either full pathname of a file containing device names (one per "
+"line) or a \":\" delimited list of device names. Root logins will be allowed "
+"only upon these devices."
 msgstr ""
 "S'il est défini, soit un chemin complet du fichier contenant les noms de "
-"périphériques ou d'une liste de noms du périphérique délimitée par \":\". "
-"Les connexions d'un administrateur ne seront autorisées que depuis ces "
-"périphériques."
+"périphériques (un par ligne), soit une liste de noms du périphérique "
+"délimitée par des « : ». Les connexions d'un administrateur ne seront "
+"autorisées que depuis ces périphériques."
 
 #: su.1.xml:39(para) login.defs.5.xml:39(para) login.1.xml:39(para)
 msgid "If not defined, root will be allowed on any device."
@@ -2663,19 +2595,15 @@ msgstr ""
 "S'il n'est pas défini, root pourra se connecter depuis n'importe quel "
 "périphérique."
 
+#: su.1.xml:42(para) login.defs.5.xml:42(para) login.1.xml:42(para)
+msgid "The device should be specified without the /dev/ prefix."
+msgstr ""
+
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>CONSOLE_GROUPS</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>CONSOLE_GROUPS</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
-#| msgid ""
-#| "List of groups to add to the user's supplementary group set when logging "
-#| "in on the console (as determined by the CONSOLE setting). Default is "
-#| "none. <placeholder-1/> Use with caution - it is possible for users to "
-#| "gain permanent access to these groups, even when not logged in on the "
-#| "console."
 msgid ""
 "List of groups to add to the user's supplementary groups set when logging in "
 "on the console (as determined by the CONSOLE setting). Default is none. "
@@ -2684,14 +2612,13 @@ msgid ""
 msgstr ""
 "Une liste de groupes à rajouter aux groupes supplémentaires de l'utilisateur "
 "lors d'une connexion sur une console (déterminé par le paramètre CONSOLE). "
-"Par défaut, aucun groupe n'est ajouté. <placeholder-1/> A utiliser avec "
+"Par défaut, aucun groupe n'est ajouté. <placeholder-1/> À utiliser avec "
 "précaution : il est possible que les utilisateurs aient un accès permanent "
 "à ces groupes, et cela même s'ils ne sont pas connectés sur la console."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>DEFAULT_HOME</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>DEFAULT_HOME</option> (booléen)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -2713,9 +2640,8 @@ msgstr ""
 
 #. XXX: When compiled with PAM support, only sulogin uses ENV_HZ
 #: su.1.xml:33(term) login.defs.5.xml:33(term) login.1.xml:33(term)
-#, fuzzy
 msgid "<option>ENV_HZ</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>ENV_HZ</option> (chaîne ce caractères)"
 
 #: su.1.xml:35(para) login.defs.5.xml:35(para) login.1.xml:35(para)
 msgid ""
@@ -2738,9 +2664,8 @@ msgstr ""
 "command>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ENVIRON_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>ENVIRON_FILE</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -2748,12 +2673,11 @@ msgid ""
 "Every line should be in the form name=value."
 msgstr ""
 "Si ce fichier existe et est lisible, l'environnement de connexion sera lu à  "
-"partir de lui. Chaque ligne doit être sous la forme nom=valeur"
+"partir de lui. Chaque ligne doit être sous la forme nom=valeur."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ENV_PATH</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>ENV_PATH</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -2763,7 +2687,7 @@ msgid ""
 "bin:/usr/bin</replaceable>). The default value is <replaceable>PATH=/bin:/"
 "usr/bin</replaceable>."
 msgstr ""
-"S'il est défini, il sera utilisée pour définir la variable d'environnement "
+"S'il est défini, il sera utilisé pour définir la variable d'environnement "
 "PATH quand un utilisateur ordinaire se connecte. La valeur peut être "
 "précédée par <replaceable>PATH=</replaceable>, ou une liste de chemins "
 "séparés par des deux points (par exemple <replaceable>/bin:/usr/bin</"
@@ -2771,9 +2695,8 @@ msgstr ""
 "replaceable>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ENV_SUPATH</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>ENV_SUPATH</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -2783,17 +2706,16 @@ msgid ""
 "sbin:/bin:/usr/sbin:/usr/bin</replaceable>). The default value is "
 "<replaceable>PATH=/bin:/usr/bin</replaceable>."
 msgstr ""
-"S'il est défini, il sera utilisée pour définir la variable d'environnement "
+"S'il est défini, il sera utilisé pour définir la variable d'environnement "
 "PATH quand le super-utilisateur se connecte. La valeur peut être précédée "
-"par <replaceable>PATH=</replaceable>, ou une liste de chemins séparés par "
-"deux points ( par exemple <replaceable>/sbin:/bin:/usr/sbin:/usr/bin</"
+"par <replaceable>PATH=</replaceable> ou une liste de chemins séparés par "
+"deux points (par exemple <replaceable>/sbin:/bin:/usr/sbin:/usr/bin</"
 "replaceable>). La valeur par défaut est <replaceable>PATH=/bin:/usr/bin</"
 "replaceable>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ENV_TZ</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>ENV_TZ</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -2803,11 +2725,11 @@ msgid ""
 "full path to the file containing the timezone specification (for example "
 "<filename>/etc/tzname</filename>)."
 msgstr ""
-"S'il est défini, il sera utilisée pour définir la variable d'environnement "
-"TZ quand un utilisateur se connecte. La valeur peut être le nom d'une zone "
-"horaire précédée par <replaceable>TZ=</replaceable> (par exemple "
+"S'il est défini, il sera utilisé pour définir la variable d'environnement TZ "
+"quand un utilisateur se connecte. La valeur peut être le nom d'un fuseau "
+"horaire précédé par <replaceable>TZ=</replaceable> (par exemple "
 "<replaceable>TZ=CST6CDT</replaceable>), ou le chemin complet vers le fichier "
-"contenant la spécification de la zone horaire (par exemple <filename>/etc/"
+"contenant la spécification du fuseau horaire (par exemple <filename>/etc/"
 "tzname</filename>)."
 
 #. TODO: it can in fact be used to set any other variable
@@ -2822,9 +2744,8 @@ msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #: chsh.1.xml:32(term) chfn.1.xml:32(term)
-#, fuzzy
 msgid "<option>LOGIN_STRING</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>LOGIN_STRING</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 #: chsh.1.xml:34(para) chfn.1.xml:34(para)
@@ -2836,7 +2757,7 @@ msgstr ""
 "La chaîne de caractères utilisée pour l'invite de mot de passe. La valeur "
 "par défaut est d'utiliser \"Password: \" (« mot de passe : »), ou une "
 "traduction de cette chaîne. Si vous définissez cette variable, l'invite ne "
-"sera pas traduit."
+"sera pas traduite."
 
 #: su.1.xml:39(para) login.defs.5.xml:39(para) login.1.xml:39(para)
 #: chsh.1.xml:39(para) chfn.1.xml:39(para)
@@ -2848,14 +2769,13 @@ msgstr ""
 "remplacés par le nom de l'utilisateur."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>MAIL_CHECK_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>MAIL_CHECK_ENAB</option> (booléen)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable checking and display of mailbox status upon login."
 msgstr ""
-"Activer le contrôle et l'affichage du statut de la boite aux lettres durant "
+"Activer le contrôle et l'affichage du statut de la boîte aux lettres durant "
 "la connexion."
 
 #: su.1.xml:37(para) login.defs.5.xml:37(para) login.1.xml:37(para)
@@ -2864,30 +2784,28 @@ msgid ""
 "(\"mailx -e\" or equivalent)."
 msgstr ""
 "Vous devriez le désactiver si les fichiers de démarrage de l'interpréteur de "
-"commandes vérifie déjà la présence de courriers (\"mail -e\" ou équivalent)."
+"commandes vérifie déjà la présence de courriers (« mail -e » ou équivalent)."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>QUOTAS_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>QUOTAS_ENAB</option> (booléen)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable setting of ulimit, umask, and niceness from passwd gecos field."
 msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>SULOG_FILE</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>SULOG_FILE</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para)
 msgid "If defined, all su activity is logged to this file."
 msgstr ""
+"S'il est défini, les activités de su seront enregistrées dans ce fichier."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>SU_NAME</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>SU_NAME</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para)
 msgid ""
@@ -2898,9 +2816,8 @@ msgid ""
 msgstr ""
 
 #: su.1.xml:33(term) login.defs.5.xml:33(term)
-#, fuzzy
 msgid "<option>SU_WHEEL_ONLY</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>SU_WHEEL_ONLY</option> (booléen)"
 
 #: su.1.xml:35(para) login.defs.5.xml:35(para)
 msgid ""
@@ -2912,9 +2829,8 @@ msgid ""
 msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>SYSLOG_SU_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>SYSLOG_SU_ENAB</option> (booléen)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para)
 msgid ""
@@ -2984,28 +2900,14 @@ msgstr ""
 "sortie de <command>sg</command>."
 
 #: sg.1.xml:32(term) newgrp.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>SYSLOG_SG_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>SYSLOG_SG_ENAB</option> (booléen)"
 
 #: sg.1.xml:34(para) newgrp.1.xml:34(para) login.defs.5.xml:34(para)
 msgid "Enable \"syslog\" logging of <command>sg</command> activity."
 msgstr ""
 
 #: sg.1.xml:119(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>login</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -3026,7 +2928,7 @@ msgstr ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>gshadow</"
+"citerefentry>, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>"
 
 #: shadow.5.xml:34(refentrytitle) shadow.5.xml:39(refname)
@@ -3042,18 +2944,13 @@ msgid "encrypted password file"
 msgstr "fichier des mots de passe cachés"
 
 #: shadow.5.xml:45(para)
-#, fuzzy
-#| msgid ""
-#| "<emphasis remap=\"I\">shadow</emphasis> contains the encrypted password "
-#| "information for user's accounts and optional the password aging "
-#| "information. Included is:"
 msgid ""
 "<filename>shadow</filename> is a file which contains the password "
 "information for the system's accounts and optional aging information."
 msgstr ""
-"Le fichier <filename>/etc/shadow</filename> contient les informations "
+"<filename>shadow</filename> est un fichier qui contient les informations "
 "cachées concernant les mots de passe des utilisateurs et leurs dates de "
-"validité. Ces informations comprennent :"
+"validité."
 
 #: shadow.5.xml:51(para) gshadow.5.xml:82(para)
 msgid ""
@@ -3092,14 +2989,6 @@ msgstr ""
 "cette chaîne."
 
 #: shadow.5.xml:78(para)
-#, fuzzy
-#| msgid ""
-#| "If the password field contains some string that is not valid result of "
-#| "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</"
-#| "manvolnum></citerefentry>, for instance ! or *, the user will not be able "
-#| "to use a unix password to log in, subject to "
-#| "<citerefentry><refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum></"
-#| "citerefentry>."
 msgid ""
 "If the password field contains some string that is not a valid result of "
 "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></"
@@ -3110,9 +2999,8 @@ msgstr ""
 "résultat valable de <citerefentry><refentrytitle>crypt</"
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>, par exemple si elle "
 "contient les caractères ! ou *, alors l'utilisateur ne pourra pas utiliser "
-"son mot de passe UNIX pour se connecter. Ceci peut dépendre de "
-"<citerefentry><refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum></"
-"citerefentry>."
+"son mot de passe UNIX pour se connecter (mais il se peut que l'utilisateur "
+"puisse se connecter au système par d'autres moyens)."
 
 #: shadow.5.xml:85(para)
 msgid ""
@@ -3130,10 +3018,8 @@ msgid ""
 msgstr ""
 
 #: shadow.5.xml:102(emphasis)
-#, fuzzy
-#| msgid "days before password may be changed"
 msgid "date of last password change"
-msgstr "nombre de jours à attendre avant de pouvoir changer le mot de passe"
+msgstr "date du dernier changement de mot de passe"
 
 #: shadow.5.xml:105(para)
 msgid ""
@@ -3152,10 +3038,8 @@ msgid "An empty field means that password aging features are disabled."
 msgstr ""
 
 #: shadow.5.xml:121(emphasis)
-#, fuzzy
-#| msgid "Password Changes"
 msgid "minimum password age"
-msgstr "Modifications du mot de passe"
+msgstr "age minimum du mot de passe"
 
 #: shadow.5.xml:123(para)
 msgid ""
@@ -3168,10 +3052,8 @@ msgid "An empty field and value 0 mean that there are no minimum password age."
 msgstr ""
 
 #: shadow.5.xml:135(emphasis)
-#, fuzzy
-#| msgid "Password Changes"
 msgid "maximum password age"
-msgstr "Modifications du mot de passe"
+msgstr "age maximum du mot de passe"
 
 #: shadow.5.xml:137(para)
 msgid ""
@@ -3244,10 +3126,8 @@ msgid ""
 msgstr ""
 
 #: shadow.5.xml:197(emphasis)
-#, fuzzy
-#| msgid "User account information."
 msgid "account expiration date"
-msgstr "Informations sur les comptes des utilisateurs."
+msgstr "date de fin de validité du compte"
 
 #: shadow.5.xml:200(para)
 msgid ""
@@ -3273,34 +3153,14 @@ msgid ""
 msgstr ""
 
 #: shadow.5.xml:221(emphasis)
-#, fuzzy
-#| msgid "a reserved field"
 msgid "reserved field"
 msgstr "champ réservé"
 
 #: shadow.5.xml:223(para)
-#, fuzzy
-#| msgid "sp_flag - reserved for future use"
 msgid "This field is reserved for future use."
-msgstr "sp_flag - réservé pour une utilisation future"
+msgstr "Ce champ est réservé pour une utilisation future."
 
 #: shadow.5.xml:249(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>chage</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -3317,20 +3177,20 @@ msgid ""
 "<citerefentry><refentrytitle>sulogin</refentrytitle><manvolnum>8</"
 "manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>chsh</"
+"<citerefentry><refentrytitle>chage</refentrytitle><manvolnum>1</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>login</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>gpasswd</"
+"citerefentry>, <citerefentry><refentrytitle>passwd</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>pwconv</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>"
+"<citerefentry><refentrytitle>pwunconv</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
+"refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>sulogin</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>."
 
 #: shadow.3.xml:36(refmiscinfo)
 msgid "Library Calls"
@@ -3917,16 +3777,6 @@ msgstr ""
 "emphasis>."
 
 #: pwck.8.xml:221(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>grpck</"
@@ -3937,14 +3787,14 @@ msgid ""
 "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
 "manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>group</"
+"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>grpck</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>shadow</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>."
+"<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>."
 
 #: pwck.8.xml:260(para)
 msgid "one or more bad password entries"
@@ -3963,10 +3813,8 @@ msgid "can't update password files"
 msgstr "impossible de mettre à jour les fichiers des mots de passe"
 
 #: pwck.8.xml:284(para)
-#, fuzzy
-#| msgid "can't open password files"
 msgid "can't sort password files"
-msgstr "impossible d'ouvrir les fichiers de mots de passe"
+msgstr "impossible de trier les fichiers de mots de passe"
 
 #: pwck.8.xml:242(para)
 msgid ""
@@ -4213,25 +4061,6 @@ msgid "optional encrypted password file"
 msgstr "un mot de passe chiffré optionnel"
 
 #: passwd.5.xml:135(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>crypt</"
-#| "refentrytitle><manvolnum>3</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>getent</"
@@ -4250,23 +4079,22 @@ msgid ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>chsh</"
+"<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>getent</"
+"refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>getpwnam</refentrytitle><manvolnum>3</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>login</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>crypt</"
-"refentrytitle><manvolnum>3</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
+"citerefentry>, <citerefentry><refentrytitle>pwck</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
+"<citerefentry><refentrytitle>pwconv</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>pwunconv</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>."
+"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: passwd.1.xml:50(refpurpose)
 msgid "change user password"
@@ -4635,29 +4463,22 @@ msgstr ""
 "être modifié."
 
 #: passwd.1.xml:340(para)
-#, fuzzy
-#| msgid ""
-#| "Not all options may be supported. Password complexity checking may vary "
-#| "from site to site. The user is urged to select a password as complex as "
-#| "he or she feels comfortable with. Users may not be able to change their "
-#| "password on a system if NIS is enabled and they are not logged into the "
-#| "NIS server."
 msgid ""
 "Password complexity checking may vary from site to site. The user is urged "
 "to select a password as complex as he or she feels comfortable with."
 msgstr ""
-"Toutes les options ne sont pas forcément gérées. La vérification de la "
+"La vérification de la "
 "complexité des mots de passe peut varier d'un site à l'autre. Il est "
 "vivement conseillé aux utilisateurs de choisir un mot de passe aussi "
 "complexe que possible dans la limite de ce qu'il est capable de mémoriser. "
-"Il se peut que les utilisateurs ne puisse pas changer leur mot de passe sur "
-"un système si NIS est activé et qu'ils ne sont pas connectés au serveur NIS."
 
 #: passwd.1.xml:345(para)
 msgid ""
 "Users may not be able to change their password on a system if NIS is enabled "
 "and they are not logged into the NIS server."
 msgstr ""
+"Il se peut que les utilisateurs ne puisse pas changer leur mot de passe sur "
+"un système si NIS est activé et qu'ils ne sont pas connectés au serveur NIS."
 
 #: passwd.1.xml:350(para)
 msgid ""
@@ -4676,9 +4497,9 @@ msgid ""
 "This defines the system default encryption algorithm for encrypting "
 "passwords (if no algorithm are specified on the command line)."
 msgstr ""
-"Celle-ci détermine les algorithmes de chiffrement par défaut du système pour "
-"coder les mots de passes (si aucun algorithme n'a été indiqué sur la ligne "
-"des commandes)."
+"Définit les algorithmes de chiffrement par défaut du système pour coder les "
+"mots de passes (si aucun algorithme n'a été indiqué sur la ligne de "
+"commandes)."
 
 #: passwd.1.xml:40(para) newusers.8.xml:40(para) login.defs.5.xml:40(para)
 #: gpasswd.1.xml:40(para) chpasswd.8.xml:40(para) chgpasswd.8.xml:40(para)
@@ -4713,7 +4534,7 @@ msgstr "Il peut prendre une de ces valeurs : <placeholder-1/>"
 msgid ""
 "Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option> variable."
 msgstr ""
-"Remarque : ce paramètre remplace la variable <option>MD5_CRYPT_ENAB</option>"
+"Remarque : ce paramètre remplace la variable <option>MD5_CRYPT_ENAB</option>."
 
 #: passwd.1.xml:57(para) passwd.1.xml:53(para) passwd.1.xml:62(para)
 #: newusers.8.xml:57(para) newusers.8.xml:53(para) newusers.8.xml:62(para)
@@ -4731,7 +4552,7 @@ msgstr ""
 #: passwd.1.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: gpasswd.1.xml:32(term) chpasswd.8.xml:32(term) chgpasswd.8.xml:32(term)
 msgid "<option>MD5_CRYPT_ENAB</option> (boolean)"
-msgstr ""
+msgstr "<option>MD5_CRYPT_ENAB</option> (booléen)"
 
 #: passwd.1.xml:34(para) newusers.8.xml:34(para) login.defs.5.xml:34(para)
 #: gpasswd.1.xml:34(para) chpasswd.8.xml:34(para) chgpasswd.8.xml:34(para)
@@ -4759,41 +4580,36 @@ msgid ""
 msgstr ""
 
 #: passwd.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>OBSCURE_CHECKS_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>OBSCURE_CHECKS_ENAB</option> (booléen)"
 
 #: passwd.1.xml:34(para) login.defs.5.xml:34(para)
 msgid "Enable additional checks upon password changes."
 msgstr ""
 
 #: passwd.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_ALWAYS_WARN</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>PASS_ALWAYS_WARN</option> (booléen)"
 
 #: passwd.1.xml:34(para) login.defs.5.xml:34(para)
 msgid "Warn about weak passwords (but still allow them) if you are root."
 msgstr ""
 
 #: passwd.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_CHANGE_TRIES</option> (number)"
-msgstr "PASS_WARN_AGE (nombre)"
+msgstr "<option>PASS_CHANGE_TRIES</option> (nombre)"
 
 #: passwd.1.xml:34(para) login.defs.5.xml:34(para)
 msgid "Maximum number of attempts to change password if rejected (too easy)."
 msgstr ""
 
 #: passwd.1.xml:32(term) login.defs.5.xml:32(term)
-#, fuzzy
 msgid "<option>PASS_MAX_LEN</option> (number)"
-msgstr "PASS_MAX_DAYS (nombre)"
+msgstr "<option>PASS_MAX_LEN</option> (nombre)"
 
 #: passwd.1.xml:33(term) login.defs.5.xml:33(term)
-#, fuzzy
 msgid "<option>PASS_MIN_LEN</option> (number)"
-msgstr "PASS_MIN_DAYS (nombre)"
+msgstr "<option>PASS_MIN_LEN</option> (nombre)"
 
 #: passwd.1.xml:35(para) login.defs.5.xml:35(para)
 msgid ""
@@ -4806,12 +4622,12 @@ msgstr ""
 #: passwd.1.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
 #: gpasswd.1.xml:30(term) chpasswd.8.xml:30(term) chgpasswd.8.xml:30(term)
 msgid "<option>SHA_CRYPT_MIN_ROUNDS</option> (number)"
-msgstr ""
+msgstr "<option>SHA_CRYPT_MIN_ROUNDS</option> (nombre)"
 
 #: passwd.1.xml:31(term) newusers.8.xml:31(term) login.defs.5.xml:31(term)
 #: gpasswd.1.xml:31(term) chpasswd.8.xml:31(term) chgpasswd.8.xml:31(term)
 msgid "<option>SHA_CRYPT_MAX_ROUNDS</option> (number)"
-msgstr ""
+msgstr "<option>SHA_CRYPT_MAX_ROUNDS</option> (nombre)"
 
 #: passwd.1.xml:33(para) newusers.8.xml:33(para) login.defs.5.xml:33(para)
 #: gpasswd.1.xml:33(para) chpasswd.8.xml:33(para) chgpasswd.8.xml:33(para)
@@ -4856,10 +4672,8 @@ msgid ""
 msgstr ""
 
 #: passwd.1.xml:396(filename)
-#, fuzzy
-#| msgid "/etc/passwd"
 msgid "/etc/pam.d/passwd"
-msgstr "/etc/passwd"
+msgstr "/etc/pam.d/passwd"
 
 #: passwd.1.xml:398(para)
 msgid "PAM configuration for <command>passwd</command>."
@@ -4896,14 +4710,6 @@ msgstr ""
 "quittant : <placeholder-1/>"
 
 #: passwd.1.xml:457(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>shadow</"
@@ -4912,11 +4718,11 @@ msgid ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>usermod</"
+"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>shadow</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
+"condition=\"no_pam\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: nologin.8.xml:34(refentrytitle) nologin.8.xml:39(refname)
@@ -4960,14 +4766,10 @@ msgstr ""
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 
 #: nologin.8.xml:76(title)
-#, fuzzy
-#| msgid "HYSTORY"
 msgid "HISTORY"
 msgstr "HISTORIQUE"
 
 #: nologin.8.xml:77(para)
-#, fuzzy
-#| msgid "The <command>nologin</command> command appeared in BSD 4.4."
 msgid "The <command>nologin</command> command appearred in BSD 4.4."
 msgstr "La commande <command>nologin</command> est apparue avec BSD 4.4."
 
@@ -5003,13 +4805,11 @@ msgstr ""
 
 #: newusers.8.xml:79(para)
 msgid "pw_name:pw_passwd:pw_uid:pw_gid:pw_gecos:pw_dir:pw_shell"
-msgstr ""
+msgstr "pw_name:pw_passwd:pw_uid:pw_gid:pw_gecos:pw_dir:pw_shell"
 
 #: newusers.8.xml:84(emphasis)
-#, fuzzy
-#| msgid "group_name"
 msgid "pw_name"
-msgstr "nom_groupe"
+msgstr "pw_name"
 
 #: newusers.8.xml:87(para)
 msgid "This is the name of the user."
@@ -5035,10 +4835,8 @@ msgstr ""
 "chiffré."
 
 #: newusers.8.xml:112(emphasis)
-#, fuzzy
-#| msgid "pw_gid"
 msgid "pw_uid"
-msgstr "pw_gid"
+msgstr "pw_uid"
 
 #: newusers.8.xml:115(para)
 msgid "This field is used to define the UID of the user."
@@ -5102,7 +4900,7 @@ msgstr ""
 
 #: newusers.8.xml:172(emphasis)
 msgid "pw_gecos"
-msgstr ""
+msgstr "pw_gecos"
 
 #: newusers.8.xml:175(para)
 msgid "This field is copied in the GECOS field of the user."
@@ -5125,7 +4923,7 @@ msgstr ""
 
 #: newusers.8.xml:197(emphasis)
 msgid "pw_shell"
-msgstr ""
+msgstr "pw_shell"
 
 #: newusers.8.xml:200(para)
 msgid ""
@@ -5141,7 +4939,15 @@ msgid ""
 "no changes are committed to the databases."
 msgstr ""
 
-#: newusers.8.xml:215(para)
+#: newusers.8.xml:214(para)
+msgid ""
+"During this first pass, users are created with a locked password (and "
+"passwords are not changed for the users which are not created). A second "
+"pass is used to update the passwords using PAM. Failures to update a "
+"password are reported, but will not stop the other password updates."
+msgstr ""
+
+#: newusers.8.xml:222(para)
 msgid ""
 "This command is intended to be used in a large system environment where many "
 "accounts are updated at a single time."
@@ -5149,30 +4955,26 @@ msgstr ""
 "Cette commande a été conçue pour les gros systèmes pour lesquels un grand "
 "nombre de comptes sont mis à jour à un même instant."
 
-#: newusers.8.xml:223(para)
-#, fuzzy
-#| msgid ""
-#| "The options which apply to the <command>usermod</command> command are:"
+#: newusers.8.xml:230(para)
 msgid "The options which apply to the <command>newusers</command> command are:"
 msgstr ""
-"Les options disponibles pour la commande <command>usermod</command> sont :"
+"Les options disponibles pour la commande <command>newusers</command> sont :"
 
-#: newusers.8.xml:228(term) chpasswd.8.xml:116(term) chgpasswd.8.xml:95(term)
-#, fuzzy
+#: newusers.8.xml:235(term) chpasswd.8.xml:116(term) chgpasswd.8.xml:95(term)
 msgid "<option>-c</option>, <option>--crypt-method</option>"
-msgstr "<option>-e</option>, <option>--encrypted</option>"
+msgstr "<option>-c</option>, <option>--crypt-method</option>"
 
-#: newusers.8.xml:230(para) chpasswd.8.xml:118(para) chgpasswd.8.xml:97(para)
+#: newusers.8.xml:237(para) chpasswd.8.xml:118(para) chgpasswd.8.xml:97(para)
 msgid "Use the specified method to encrypt the passwords."
 msgstr ""
 
-#: newusers.8.xml:231(para) chpasswd.8.xml:122(para) chgpasswd.8.xml:101(para)
+#: newusers.8.xml:238(para) chpasswd.8.xml:122(para) chgpasswd.8.xml:101(para)
 msgid ""
 "The available methods are DES, MD5, NONE, and SHA256 or SHA512 if your libc "
 "support these methods."
 msgstr ""
 
-#: newusers.8.xml:253(para)
+#: newusers.8.xml:260(para)
 msgid ""
 "System users will be created with no aging information in <filename>/etc/"
 "shadow</filename>, and their numeric identifiers are choosen in the "
@@ -5182,61 +4984,51 @@ msgid ""
 "the creation of groups)."
 msgstr ""
 
-#: newusers.8.xml:267(term) chpasswd.8.xml:154(term) chgpasswd.8.xml:129(term)
-#, fuzzy
+#: newusers.8.xml:274(term) chpasswd.8.xml:154(term) chgpasswd.8.xml:129(term)
 msgid "<option>-s</option>, <option>--sha-rounds</option>"
-msgstr "<option>-s</option>, <option>--shadow</option>"
+msgstr "<option>-s</option>, <option>--sha-rounds</option>"
 
-#: newusers.8.xml:269(para) chpasswd.8.xml:156(para) chgpasswd.8.xml:131(para)
+#: newusers.8.xml:276(para) chpasswd.8.xml:156(para) chgpasswd.8.xml:131(para)
 msgid "Use the specified number of rounds to encrypt the passwords."
 msgstr ""
 
-#: newusers.8.xml:272(para) chpasswd.8.xml:159(para) chgpasswd.8.xml:134(para)
+#: newusers.8.xml:279(para) chpasswd.8.xml:159(para) chgpasswd.8.xml:134(para)
 msgid ""
 "The value 0 means that the system will choose the default number of rounds "
 "for the crypt method (5000)."
 msgstr ""
 
-#: newusers.8.xml:276(para) chpasswd.8.xml:163(para) chgpasswd.8.xml:138(para)
+#: newusers.8.xml:283(para) chpasswd.8.xml:163(para) chgpasswd.8.xml:138(para)
 msgid ""
 "A minimal value of 1000 and a maximal value of 999,999,999 will be enforced."
 msgstr ""
 
-#: newusers.8.xml:280(para) chpasswd.8.xml:167(para) chgpasswd.8.xml:142(para)
+#: newusers.8.xml:287(para) chpasswd.8.xml:167(para) chgpasswd.8.xml:142(para)
 msgid "You can only use this option with the SHA256 or SHA512 crypt method."
 msgstr ""
 
-#: newusers.8.xml:284(para) chpasswd.8.xml:171(para) chgpasswd.8.xml:146(para)
+#: newusers.8.xml:291(para) chpasswd.8.xml:171(para) chgpasswd.8.xml:146(para)
 msgid ""
 "By default, the number of rounds is defined by the SHA_CRYPT_MIN_ROUNDS and "
 "SHA_CRYPT_MAX_ROUNDS variables in <filename>/etc/login.defs</filename>."
 msgstr ""
 
-#: newusers.8.xml:296(para)
+#: newusers.8.xml:303(para)
 msgid ""
 "The input file must be protected since it contains unencrypted passwords."
 msgstr ""
 "Le fichier d'entrée doit être correctement protégé puisqu'il contient des "
 "mots de passe en clair."
 
-#: newusers.8.xml:300(para)
-msgid ""
-"PAM is not used to update the passwords. Only <filename>/etc/passwd</"
-"filename> and <filename>/etc/shadow</filename> are updated, and the various "
-"checks or options provided by PAM modules are not used."
-msgstr ""
-
-#: newusers.8.xml:375(filename)
-#, fuzzy
-#| msgid "/etc/passwd"
+#: newusers.8.xml:376(filename)
 msgid "/etc/pam.d/newusers"
-msgstr "/etc/passwd"
+msgstr "/etc/pam.d/newusers"
 
-#: newusers.8.xml:377(para)
+#: newusers.8.xml:378(para)
 msgid "PAM configuration for <command>newusers</command>."
 msgstr ""
 
-#: newusers.8.xml:385(para)
+#: newusers.8.xml:386(para)
 msgid ""
 "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
@@ -5320,7 +5112,6 @@ msgstr ""
 "utilisée."
 
 #: newgrp.1.xml:130(para)
-#, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -5336,12 +5127,12 @@ msgstr ""
 "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>sg</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</"
+"<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>sg</refentrytitle><manvolnum>1</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>gshadow</"
+"citerefentry>, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 
 #: logoutd.8.xml:34(refentrytitle) logoutd.8.xml:39(refname)
@@ -5441,9 +5232,8 @@ msgid "The following configuration items are provided:"
 msgstr "Les paramètres de configuration suivants sont fournis :"
 
 #: login.defs.5.xml:32(term) chfn.1.xml:32(term)
-#, fuzzy
 msgid "<option>CHFN_AUTH</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>CHFN_AUTH</option> (booléen)"
 
 #: login.defs.5.xml:34(para) chfn.1.xml:34(para)
 #, fuzzy
@@ -5458,9 +5248,8 @@ msgstr ""
 "soient exécutés par le superutilisateur."
 
 #: login.defs.5.xml:32(term) chfn.1.xml:32(term)
-#, fuzzy
 msgid "<option>CHFN_RESTRICT</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>CHFN_RESTRICT</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) chfn.1.xml:34(para)
 #, fuzzy
@@ -5492,9 +5281,8 @@ msgstr ""
 "l'indicateur SUID positionné."
 
 #: login.defs.5.xml:32(term) chsh.1.xml:32(term)
-#, fuzzy
 msgid "<option>CHSH_AUTH</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>CHSH_AUTH</option> (booléen)"
 
 #: login.defs.5.xml:34(para) chsh.1.xml:34(para)
 #, fuzzy
@@ -5509,18 +5297,16 @@ msgstr ""
 "soient exécutés par le superutilisateur."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ERASECHAR</option> (number)"
-msgstr "UMASK (nombre)"
+msgstr "<option>ERASECHAR</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
 msgid ""
 "Terminal ERASE character (<replaceable>010</replaceable> = backspace, "
 "<replaceable>0177</replaceable> = DEL)."
 msgstr ""
-"Le nom du groupe sera modifié de <emphasis remap=\"I\">GROUPE</emphasis> "
-"vers <emphasis remap=\"I\">NOUVEAU_NOM_GROUPE</emphasis>."
+"Le caractère ERASE du terminal (<replaceable>010</replaceable> = backspace, "
+"<replaceable>0177</replaceable> = DEL)."
 
 #: login.defs.5.xml:38(para) login.defs.5.xml:37(para) login.1.xml:38(para)
 #: login.1.xml:37(para)
@@ -5528,13 +5314,12 @@ msgid ""
 "The value can be prefixed \"0\" for an octal value, or \"0x\" for an "
 "hexadecimal value."
 msgstr ""
-"La valeur peut être préfixée par \"0\" pour une valeur octale, ou \"0x\" "
-"pour une valeur hexadécimale."
+"La valeur peut être préfixée par « 0 » pour une valeur octale, ou « 0x » pour "
+"une valeur hexadécimale."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>FAIL_DELAY</option> (number)"
-msgstr "PASS_MIN_DAYS (nombre)"
+msgstr "<option>FAIL_DELAY</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5544,9 +5329,8 @@ msgstr ""
 "connexion."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>FAILLOG_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>FAILLOG_ENAB</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5557,9 +5341,8 @@ msgstr ""
 "connexion de <filename>/var/log/faillog</filename>"
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>FAKE_SHELL</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>FAKE_SHELL</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5571,9 +5354,8 @@ msgstr ""
 "<filename>/etc/passwd</filename>."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>FTMP_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>FTMP_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5583,9 +5365,8 @@ msgstr ""
 "sous le format utmp"
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>HUSHLOGIN_FILE</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>HUSHLOGIN_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5603,9 +5384,8 @@ msgstr ""
 "le répertoire personnel de l'utilisateur."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ISSUE_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>ISSUE_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "If defined, this file will be displayed before each login prompt."
@@ -5613,18 +5393,16 @@ msgstr ""
 "S'il est défini, ce fichier sera affiché avant chaque invite de connexion."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>KILLCHAR</option> (number)"
-msgstr "GID_MAX (nombre)"
+msgstr "<option>KILLCHAR</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Terminal KILL character (<replaceable>025</replaceable> = CTRL/U)."
-msgstr "Le caractère KILL final (<replaceable>025</replaceable> = CTRL/U)."
+msgstr "Le caractère KILL du terminal (<replaceable>025</replaceable> = CTRL/U)."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>LASTLOG_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>LASTLOG_ENAB</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable logging and display of /var/log/lastlog login time info."
@@ -5633,18 +5411,16 @@ msgstr ""
 "connexion de /var/log/lastlog."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>LOG_OK_LOGINS</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>LOG_OK_LOGINS</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable logging of successful logins."
 msgstr "Activer la journalisation des connexions réussies."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>LOG_UNKFAIL_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>LOG_UNKFAIL_ENAB</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable display of unknown usernames when login failures are recorded."
@@ -5662,9 +5438,8 @@ msgstr ""
 "nom d'utilisateur."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>LOGIN_RETRIES</option> (number)"
-msgstr "GID_MIN (nombre)"
+msgstr "<option>LOGIN_RETRIES</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Maximum number of login retries in case of bad password."
@@ -5683,18 +5458,16 @@ msgstr ""
 "pas appliquer PAM_MAXTRIES."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>LOGIN_TIMEOUT</option> (number)"
-msgstr "GID_MAX (nombre)"
+msgstr "<option>LOGIN_TIMEOUT</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Max time in seconds for login."
 msgstr "Le temps maximum en secondes pour la connexion."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>MOTD_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>MOTD_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5703,9 +5476,8 @@ msgid ""
 msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>NOLOGINS_FILE</option> (string)"
-msgstr "CHFN_RESTRICT (chaîne)"
+msgstr "<option>NOLOGINS_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5726,23 +5498,20 @@ msgstr ""
 "n'affecteront pas les comptes existants."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>PORTTIME_CHECKS_ENAB</option> (boolean)"
-msgstr "CHFN_AUTH (booléen)"
+msgstr "<option>PORTTIME_CHECKS_ENAB</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable checking of time restrictions specified in /etc/porttime."
 msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>TTYGROUP</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>TTYGROUP</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:33(term) login.1.xml:33(term)
-#, fuzzy
 msgid "<option>TTYPERM</option> (string)"
-msgstr "USERDEL_CMD (chaîne)"
+msgstr "<option>TTYPERM</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:35(para) login.1.xml:35(para)
 msgid ""
@@ -5772,9 +5541,8 @@ msgid ""
 msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>TTYTYPE_FILE</option> (string)"
-msgstr "MAIL_DIR (chaîne)"
+msgstr "<option>TTYTYPE_FILE</option> (chaîne ce caractères)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid ""
@@ -5783,21 +5551,18 @@ msgid ""
 msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
-#, fuzzy
 msgid "<option>ULIMIT</option> (number)"
-msgstr "UID_MIN (nombre)"
+msgstr "<option>ULIMIT</option> (nombre)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Default <command>ulimit</command> value."
-msgstr ""
+msgstr "Valeur par défaut d'<command>ulimit</command>."
 
 #: login.defs.5.xml:209(title)
-#, fuzzy
 msgid "CROSS REFERENCES"
 msgstr "RÉFÉRENCES CROISÉES"
 
 #: login.defs.5.xml:210(para)
-#, fuzzy
 msgid ""
 "The following cross references show which programs in the shadow password "
 "suite use which parameters."
@@ -5826,6 +5591,8 @@ msgid ""
 "ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase condition="
 "\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 msgstr ""
+"ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase condition="
+"\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 
 #: login.defs.5.xml:238(term) chpasswd.8.xml:41(refentrytitle)
 #: chpasswd.8.xml:46(refname) chpasswd.8.xml:52(command)
@@ -5837,6 +5604,8 @@ msgid ""
 "ENCRYPT_METHOD MD5_CRYPT_ENAB <phrase condition=\"sha_crypt"
 "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 msgstr ""
+"ENCRYPT_METHOD MD5_CRYPT_ENAB <phrase condition=\"sha_crypt"
+"\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 
 #: login.defs.5.xml:248(term) chsh.1.xml:40(refentrytitle)
 #: chsh.1.xml:45(refname) chsh.1.xml:51(command)
@@ -5844,9 +5613,8 @@ msgid "chsh"
 msgstr "chsh"
 
 #: login.defs.5.xml:250(para)
-#, fuzzy
 msgid "CHSH_AUTH LOGIN_STRING"
-msgstr "CHFN_AUTH CHFN_RESTRICT"
+msgstr "CHSH_AUTH LOGIN_STRING"
 
 #: login.defs.5.xml:258(term) gpasswd.1.xml:42(refentrytitle)
 #: gpasswd.1.xml:47(refname) gpasswd.1.xml:58(command)
@@ -5859,11 +5627,8 @@ msgid "groupadd"
 msgstr "groupadd"
 
 #: login.defs.5.xml:270(para)
-#, fuzzy
 msgid "GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP SYS_GID_MAX SYS_GID_MIN"
-msgstr ""
-"GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN "
-"UMASK"
+msgstr "GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP SYS_GID_MAX SYS_GID_MIN"
 
 #: login.defs.5.xml:277(term) groupdel.8.xml:38(refentrytitle)
 #: groupdel.8.xml:43(refname) groupdel.8.xml:49(command)
@@ -5874,7 +5639,7 @@ msgstr "groupdel"
 #: login.defs.5.xml:291(para) login.defs.5.xml:298(para)
 #: login.defs.5.xml:304(para) login.defs.5.xml:310(para)
 msgid "MAX_MEMBERS_PER_GROUP"
-msgstr ""
+msgstr "MAX_MEMBERS_PER_GROUP"
 
 #: login.defs.5.xml:283(term) groupmems.8.xml:38(refentrytitle)
 #: groupmems.8.xml:43(refname) groupmems.8.xml:49(command)
@@ -5911,27 +5676,37 @@ msgid ""
 "TTYGROUP TTYPERM TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT UMASK</"
 "phrase> USERGROUPS_ENAB"
 msgstr ""
+"<phrase condition=\"no_pam\">CONSOLE</phrase> CONSOLE_GROUPS DEFAULT_HOME "
+"<phrase condition=\"no_pam\">ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ ENVIRON_FILE</"
+"phrase> ERASECHAR FAIL_DELAY <phrase condition=\"no_pam\">FAILLOG_ENAB</"
+"phrase> FAKE_SHELL <phrase condition=\"no_pam\">FTMP_FILE</phrase> "
+"HUSHLOGIN_FILE <phrase condition=\"no_pam\">ISSUE_FILE</phrase> KILLCHAR "
+"<phrase condition=\"no_pam\">LASTLOG_ENAB</phrase> LOGIN_RETRIES <phrase "
+"condition=\"no_pam\">LOGIN_STRING</phrase> LOGIN_TIMEOUT LOG_OK_LOGINS "
+"LOG_UNKFAIL_ENAB <phrase condition=\"no_pam\">MAIL_CHECK_ENAB MAIL_DIR "
+"MAIL_FILE MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB QUOTAS_ENAB</phrase> "
+"TTYGROUP TTYPERM TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT UMASK</"
+"phrase> USERGROUPS_ENAB"
 
 #: login.defs.5.xml:345(term)
-#, fuzzy
-#| msgid "newgrp"
 msgid "newgrp / sg"
-msgstr "newgrp"
+msgstr "newgrp / sg"
 
 #: login.defs.5.xml:347(para)
 msgid "SYSLOG_SG_ENAB"
-msgstr ""
+msgstr "SYSLOG_SG_ENAB"
 
 #: login.defs.5.xml:355(para)
-#, fuzzy
 msgid ""
 "ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB "
 "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"sha_crypt"
 "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase> SYS_GID_MAX "
 "SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK"
 msgstr ""
-"GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN "
-"UMASK"
+"ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB "
+"PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"sha_crypt"
+"\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase> SYS_GID_MAX "
+"SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK"
 
 #: login.defs.5.xml:371(para)
 msgid ""
@@ -5939,6 +5714,9 @@ msgid ""
 "PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase condition=\"sha_crypt"
 "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 msgstr ""
+"ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB PASS_ALWAYS_WARN "
+"PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase condition=\"sha_crypt"
+"\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 
 #: login.defs.5.xml:382(para) login.defs.5.xml:390(para)
 msgid "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE"
@@ -5953,46 +5731,40 @@ msgid ""
 "\"no_pam\">SU_WHEEL_ONLY</phrase> SYSLOG_SU_ENAB <phrase condition=\"no_pam"
 "\">USERGROUPS_ENAB</phrase>"
 msgstr ""
+"<phrase condition=\"no_pam\">CONSOLE</phrase> CONSOLE_GROUPS DEFAULT_HOME "
+"<phrase condition=\"no_pam\">ENV_HZ ENVIRON_FILE</phrase> ENV_PATH "
+"ENV_SUPATH <phrase condition=\"no_pam\">ENV_TZ LOGIN_STRING MAIL_CHECK_ENAB "
+"MAIL_DIR MAIL_FILE QUOTAS_ENAB</phrase> SULOG_FILE SU_NAME <phrase condition="
+"\"no_pam\">SU_WHEEL_ONLY</phrase> SYSLOG_SU_ENAB <phrase condition=\"no_pam"
+"\">USERGROUPS_ENAB</phrase>"
 
 #: login.defs.5.xml:412(term)
-#, fuzzy
 msgid "sulogin"
-msgstr "login"
+msgstr "sulogin"
 
 #: login.defs.5.xml:414(para)
 msgid "ENV_HZ <phrase condition=\"no_pam\">ENV_TZ</phrase>"
-msgstr ""
+msgstr "ENV_HZ <phrase condition=\"no_pam\">ENV_TZ</phrase>"
 
 #: login.defs.5.xml:423(para)
-#, fuzzy
 msgid ""
 "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 "PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN "
 "UID_MAX UID_MIN UMASK"
 msgstr ""
-"GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN "
-"UMASK"
+"CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
+"PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN "
+"UID_MAX UID_MIN UMASK"
 
 #: login.defs.5.xml:436(para)
 msgid "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
-msgstr ""
+msgstr "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
 
 #: login.defs.5.xml:445(para)
 msgid "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP"
-msgstr ""
+msgstr "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP"
 
 #: login.defs.5.xml:456(para)
-#, fuzzy
-#| msgid ""
-#| "Much of the functionality that used to be provided by the shadow password "
-#| "suite is now handled by PAM. Thus, <filename>/etc/login.defs</filename> "
-#| "is no longer used by programs such as: "
-#| "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>. Please refer to the corresponding PAM configuration files "
-#| "instead."
 msgid ""
 "Much of the functionality that used to be provided by the shadow password "
 "suite is now handled by PAM. Thus, <filename>/etc/login.defs</filename> is "
@@ -6005,9 +5777,9 @@ msgid ""
 msgstr ""
 "La plupart des fonctionnalités qui étaient fournies par les mots de passe "
 "cachés (« shadow password ») sont désormais gérées par PAM. De ce fait, "
-"<filename>/etc/login.defs</filename> n'est plus utilisé par les programmes "
-"tels que <citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
+"<filename>/etc/login.defs</filename> n'est plus utilisé par "
+"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
+"manvolnum></citerefentry> et moins utilisé par <citerefentry><refentrytitle>login</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry> et "
 "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>. Veuillez plutôt vous référer aux fichiers de configuration de "
@@ -6556,11 +6328,6 @@ msgid "O: max real time priority"
 msgstr ""
 
 #: limits.5.xml:102(para)
-#, fuzzy
-#| msgid ""
-#| "For example, <emphasis remap=\"I\">L2D2048N5</emphasis> is a valid "
-#| "<emphasis>LIMITS_STRING </emphasis>. For reading convenience, the "
-#| "following entries are equivalent:"
 msgid ""
 "For example, <emphasis remap=\"I\">L2D2048N5</emphasis> is a valid "
 "<emphasis>LIMITS_STRING</emphasis>. For reading convenience, the following "
@@ -6703,16 +6470,12 @@ msgstr ""
 "\">JOURS</emphasis>."
 
 #: lastlog.8.xml:102(term) faillog.8.xml:153(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-K</option>, <option>--key</option><replaceable>KEY</"
-#| "replaceable>=<replaceable>VALUE</replaceable>"
 msgid ""
 "<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 msgstr ""
-"<option>-K</option>, <option>--key</option> <replaceable>CLÉ</"
-"replaceable>=<replaceable>VALEUR</replaceable>"
+"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<replaceable>INTERVALLE</replaceable>"
 
 #: lastlog.8.xml:107(para)
 #, fuzzy
@@ -6857,16 +6620,6 @@ msgstr ""
 "<filename>/etc/group</filename>."
 
 #: gshadow.5.xml:108(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>5</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
@@ -6877,13 +6630,13 @@ msgid ""
 "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>group</"
+"<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
+"<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>grpconv</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>."
 
 #: grpck.8.xml:44(refpurpose)
@@ -6946,11 +6699,9 @@ msgstr ""
 "command> doit être utilisé dans ce cas pour supprimer ces entrées."
 
 #: grpck.8.xml:115(para)
-#, fuzzy
-#| msgid "The options which apply to the <command>pwck</command> command are:"
 msgid "The options which apply to the <command>grpck</command> command are:"
 msgstr ""
-"Les options disponibles pour la commande <command>pwck</command> sont :"
+"Les options disponibles pour la commande <command>grpck</command> sont :"
 
 #: grpck.8.xml:122(para)
 msgid ""
@@ -6960,16 +6711,12 @@ msgid ""
 msgstr ""
 
 #: grpck.8.xml:132(para)
-#, fuzzy
-#| msgid ""
-#| "Sort entries in <filename>/etc/passwd</filename> and <filename>/etc/"
-#| "shadow</filename> by UID."
 msgid ""
 "Sort entries in <filename>/etc/group</filename><phrase condition=\"gshadow"
 "\">and <filename>/etc/gshadow</filename></phrase> by GID."
 msgstr ""
-"Trie les entrées de <filename>/etc/passwd</filename> et <filename>/etc/"
-"shadow</filename> par UID."
+"Trie les entrées de <filename>/etc/group</filename><phrase condition=\"gshadow"
+"\"> et <filename>/etc/gshadow</filename></phrase> par GID."
 
 #: grpck.8.xml:141(para)
 #, fuzzy
@@ -6993,7 +6740,6 @@ msgstr ""
 "emphasis>."
 
 #: grpck.8.xml:191(para)
-#, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>groupmod</"
@@ -7005,15 +6751,15 @@ msgid ""
 "citerefentry>, <citerefentry><refentrytitle>shadow</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>passwd</"
+"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>groupmod</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
+"condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
+"manvolnum>, </citerefentry><citerefentry><refentrytitle>passwd</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>pam</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>."
+"<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>shadow</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 
 #: grpck.8.xml:233(para)
 msgid "one or more bad group entries"
@@ -7274,14 +7020,12 @@ msgstr ""
 "Les options disponibles pour la commande <command>groupmems</command> sont :"
 
 #: groupmems.8.xml:82(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
 msgid ""
 "<option>-a</option>, <option>--add</option><replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
+"<option>-a</option>, <option>--add</option><replaceable>nom_utilisateur</"
+"replaceable>"
 
 #: groupmems.8.xml:84(para)
 #, fuzzy
@@ -7298,15 +7042,12 @@ msgid ""
 msgstr ""
 
 #: groupmems.8.xml:93(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-t</option>, <option>--time</option><replaceable>DAYS</"
-#| "replaceable>"
 msgid ""
 "<option>-d</option>, <option>--delete</option><replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-t</option>, <option>--time</option> <replaceable>JOURS</replaceable>"
+"<option>-d</option>, <option>--delete</option><replaceable>nom_utilisateur</"
+"replaceable>"
 
 #: groupmems.8.xml:95(para)
 msgid "Delete a user from the group membership list."
@@ -7319,14 +7060,12 @@ msgid ""
 msgstr ""
 
 #: groupmems.8.xml:109(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
 msgid ""
 "<option>-g</option>, <option>--group</option><replaceable>group_name</"
 "replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option> <replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--group</option><replaceable>nom_groupe</"
+"replaceable>"
 
 #: groupmems.8.xml:111(para)
 #, fuzzy
@@ -7342,10 +7081,8 @@ msgid "List the group membership list."
 msgstr "Afficher la liste des membres du groupe."
 
 #: groupmems.8.xml:123(term)
-#, fuzzy
-#| msgid "<option>-e</option>, <option>--expire</option>"
 msgid "<option>-p</option>, <option>--purge</option>"
-msgstr "<option>-e</option>, <option>--expire</option>"
+msgstr "<option>-p</option>, <option>--purge</option>"
 
 #: groupmems.8.xml:125(para)
 msgid "Purge all users from the group membership list."
@@ -7579,11 +7316,6 @@ msgid "This option permits to add a group with a non-unique GID."
 msgstr "Permet de créer un groupe avec un identifiant (« GID ») déjà utilisé."
 
 #: groupadd.8.xml:148(para)
-#, fuzzy
-#| msgid ""
-#| "The encrypted password, as returned by "
-#| "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</"
-#| "manvolnum></citerefentry>. The default is to disable the account."
 msgid ""
 "The encrypted password, as returned by <citerefentry><refentrytitle>crypt</"
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>. The default is to "
@@ -7591,13 +7323,11 @@ msgid ""
 msgstr ""
 "Le mot de passe chiffré, comme renvoyé par "
 "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></"
-"citerefentry>. Le comportement par défaut est de désactiver le compte."
+"citerefentry>. Le comportement par défaut est de désactiver le mot de passe."
 
 #: groupadd.8.xml:165(para)
-#, fuzzy
-#| msgid "create a new group"
 msgid "Create a system group."
-msgstr "Créer un nouveau groupe"
+msgstr "Créer un groupe système."
 
 #: groupadd.8.xml:168(para)
 msgid ""
@@ -7609,11 +7339,6 @@ msgstr ""
 
 # NOTE: +digits
 #: groupadd.8.xml:219(para)
-#, fuzzy
-#| msgid ""
-#| "Groupnames must begin with a lower case letter or an underscore, and only "
-#| "lower case letters, underscores, dashes, and dollar signs may follow. In "
-#| "regular expression terms: [a-z_][a-z0-9_-]*[$]"
 msgid ""
 "Groupnames must begin with a lower case letter or an underscore, and only "
 "lower case letters, underscores, dashes, and dollar signs may follow. In "
@@ -7622,13 +7347,11 @@ msgstr ""
 "Les noms de groupe doivent commencer par une lettre minuscule ou un tiret "
 "bas (« underscore »), et seuls des lettres minuscules, des chiffres, des "
 "« underscore », des tirets ou un dollar peuvent suivre. Soit, sous la forme "
-"d'une expression rationnelle : [a-z_][a-z0-9_-]*[$]"
+"d'une expression rationnelle : [a-z_][a-z0-9_-]*[$]?"
 
 #: groupadd.8.xml:224(para)
-#, fuzzy
-#| msgid "Groupnames may only be up to 16 characters long."
 msgid "Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long."
-msgstr "Les noms de groupe sont limités à 16 caractères."
+msgstr "Les noms de groupe sont limités à &GROUP_NAME_MAX_LENGTH; caractères."
 
 #: groupadd.8.xml:227(para)
 #, fuzzy
@@ -7798,13 +7521,10 @@ msgstr ""
 "Les options disponibles pour la commande <command>passwd</command> sont :"
 
 #: gpasswd.1.xml:122(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
 msgid ""
 "<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
+"<option>-a</option>, <option>--add</option><replaceable>utilisateur</replaceable>"
 
 #: gpasswd.1.xml:126(para)
 #, fuzzy
@@ -7816,14 +7536,10 @@ msgstr ""
 "vers <emphasis remap=\"I\">NOUVEAU_NOM_GROUPE</emphasis>."
 
 #: gpasswd.1.xml:135(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-t</option>, <option>--time</option><replaceable>DAYS</"
-#| "replaceable>"
 msgid ""
 "<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
 msgstr ""
-"<option>-t</option>, <option>--time</option> <replaceable>JOURS</replaceable>"
+"<option>-d</option>, <option>--delete</option><replaceable>utilisateur</replaceable>"
 
 #: gpasswd.1.xml:139(para)
 #, fuzzy
@@ -7835,10 +7551,8 @@ msgstr ""
 "vers <emphasis remap=\"I\">NOUVEAU_NOM_GROUPE</emphasis>."
 
 #: gpasswd.1.xml:148(term)
-#, fuzzy
-#| msgid "<option>-r</option>, <option>--remove</option>"
 msgid "<option>-r</option>, <option>--remove-password</option>"
-msgstr "<option>-r</option>, <option>--remove</option>"
+msgstr "<option>-r</option>, <option>--remove-password</option>"
 
 #: gpasswd.1.xml:152(para)
 msgid ""
@@ -7848,10 +7562,8 @@ msgid ""
 msgstr ""
 
 #: gpasswd.1.xml:163(term)
-#, fuzzy
-#| msgid "<option>-r</option>, <option>--reset</option>"
 msgid "<option>-R</option>, <option>--restrict</option>"
-msgstr "<option>-r</option>, <option>--reset</option>"
+msgstr "<option>-R</option>, <option>--restrict</option>"
 
 #: gpasswd.1.xml:167(para)
 msgid ""
@@ -7861,16 +7573,12 @@ msgid ""
 msgstr ""
 
 #: gpasswd.1.xml:178(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
-#| "replaceable>"
 msgid ""
 "<option>-A</option>, <option>--administrators</option><replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-m</option>, <option>--mindays</option> <replaceable>JOURS_MIN</"
-"replaceable>"
+"<option>-A</option>, <option>--administrators</option><replaceable>utilisateur</"
+"replaceable>,..."
 
 #: gpasswd.1.xml:182(para)
 #, fuzzy
@@ -7878,16 +7586,12 @@ msgid "Set the list of administrative users."
 msgstr "liste d'administrateurs du groupe séparés par des virgules"
 
 #: gpasswd.1.xml:190(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-b</option>, <option>--before</option><replaceable>DAYS</"
-#| "replaceable>"
 msgid ""
 "<option>-M</option>, <option>--members</option><replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-b</option>, <option>--before</option> <replaceable>JOURS</"
-"replaceable>"
+"<option>-M</option>, <option>--members</option><replaceable>utilisateur</"
+"replaceable>,..."
 
 #: gpasswd.1.xml:194(para)
 #, fuzzy
@@ -7904,7 +7608,6 @@ msgid ""
 msgstr ""
 
 #: gpasswd.1.xml:249(para)
-#, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>groupadd</"
@@ -7919,16 +7622,16 @@ msgid ""
 "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 msgstr ""
 "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>gshadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupdel</"
+"citerefentry>, <citerefentry><refentrytitle>groupadd</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>groupmod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>grpck</"
+"<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>."
+"<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>group</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
+"\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 
 #: faillog.8.xml:34(refentrytitle) faillog.8.xml:39(refname)
 #: faillog.8.xml:45(command) faillog.5.xml:34(refentrytitle)
@@ -7987,6 +7690,8 @@ msgid ""
 "Write access to <filename>/var/log/faillog</filename> is required for this "
 "option."
 msgstr ""
+"L'accès en écriture sur <filename>/var/log/faillog</filename> est "
+"nécessaire pour cette option."
 
 #: faillog.8.xml:102(term)
 msgid ""
@@ -8018,38 +7723,22 @@ msgid "<option>-r</option>, <option>--reset</option>"
 msgstr "<option>-r</option>, <option>--reset</option>"
 
 #: faillog.8.xml:130(para)
-#, fuzzy
-#| msgid ""
-#| "Reset the counters of login failures or one record if used with the "
-#| "<option>-u</option><replaceable>LOGIN</replaceable> option. Write access "
-#| "to <filename>/var/log/faillog</filename> is required for this option."
 msgid ""
 "Reset the counters of login failures or one record if used with the <option>-"
 "u</option><replaceable>LOGIN</replaceable> option."
 msgstr ""
 "Réinitialiser les compteurs (ou un compteur, si l'option <option>-u</option> "
 "<replaceable>IDENTIFIANT</replaceable> est utilisée) des échecs de "
-"connexion. L'accès en écriture sur <filename>/var/log/faillog</filename> est "
-"nécessaire pour cette option."
+"connexion."
 
 #: faillog.8.xml:146(para)
-#, fuzzy
-#| msgid ""
-#| "Display faillog records more recent than <replaceable>DAYS</replaceable>. "
-#| "The <option>-t</option> flag overrides the use of <option>-u</option>."
 msgid ""
 "Display faillog records more recent than <replaceable>DAYS</replaceable>."
 msgstr ""
 "Afficher les entrées de faillog plus récentes que <replaceable>JOURS</"
-"replaceable>. L'option <option>-t</option> surcharge l'utilisation de "
-"l'option <option>-u</option>."
+"replaceable>."
 
 #: faillog.8.xml:158(para)
-#, fuzzy
-#| msgid ""
-#| "Display faillog record or maintains failure counters and limits (if used "
-#| "with <option>-l</option>, <option>-m</option> or <option>-r</option> "
-#| "options) only for user with <replaceable>LOGIN</replaceable>."
 msgid ""
 "Display faillog record or maintains failure counters and limits (if used "
 "with <option>-l</option>, <option>-m</option> or <option>-r</option> "
@@ -8057,8 +7746,7 @@ msgid ""
 msgstr ""
 "Afficher l'entrée de faillog ou maintient le décompte et les limitations "
 "(suivant que l'option <option>-l</option>, <option>-m</option> ou <option>-"
-"r</option> est utilisée) seulement pour l'utilisateur "
-"<replaceable>IDENTIFIANT</replaceable>."
+"r</option> est utilisée) seulement pour les utilisateurs indiqués."
 
 #: faillog.8.xml:176(para)
 #, fuzzy
@@ -8389,17 +8077,14 @@ msgstr ""
 "autres utilisateurs des fichiers non chiffrés. "
 
 #: chpasswd.8.xml:225(filename)
-#, fuzzy
-#| msgid "/etc/passwd"
 msgid "/etc/pam.d/chpasswd"
-msgstr "/etc/passwd"
+msgstr "/etc/pam.d/chpasswd"
 
 #: chpasswd.8.xml:227(para)
 msgid "PAM configuration for <command>chpasswd</command>."
 msgstr ""
 
 #: chpasswd.8.xml:235(para)
-#, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>newusers</"
@@ -8408,11 +8093,11 @@ msgid ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>usermod</"
+"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>newusers</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
+"condition=\"no_pam\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: chgpasswd.8.xml:48(refpurpose)
@@ -8455,7 +8140,6 @@ msgstr ""
 "Les options disponibles pour la commande <command>chgpasswd</command> sont :"
 
 #: chgpasswd.8.xml:205(para)
-#, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
@@ -8463,11 +8147,11 @@ msgid ""
 "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
 "manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>."
+"<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>."
 
 #: chfn.1.xml:47(refpurpose)
 msgid "change real user name and information"
@@ -8797,6 +8481,43 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ msgstr ""
 #~ "Remarque : si vous utilisez PAM, il est recommandé d'ajuster cette "
 #~ "variable de façon cohérente avec la configuration des modules PAM."
+
+#, fuzzy
+#~| msgid ""
+#~| "<command>usermod</command> will not allow you to change the name of a "
+#~| "user who is logged in. You must make certain that the named user is not "
+#~| "executing any processes when this command is being executed if the "
+#~| "user's numerical user ID is being changed. You must change the owner of "
+#~| "any <command>crontab</command> files manually. You must change the owner "
+#~| "of any <command>at</command> jobs manually. You must make any changes "
+#~| "involving NIS on the NIS server."
+#~ msgid ""
+#~ "<command>usermod</command> will not allow you to change the name of an "
+#~ "user who is logged in. You must make certain that the named user is not "
+#~ "executing any processes when this command is being executed if the user's "
+#~ "numerical user ID is being changed. You must change the owner of any "
+#~ "<command>crontab</command> files manually. You must change the owner of "
+#~ "any <command>at</command> jobs manually. You must make any changes "
+#~ "involving NIS on the NIS server."
+#~ msgstr ""
+#~ "<command>Usermod</command> ne vous permet pas de modifier le nom d'un "
+#~ "utilisateur qui est actuellement connecté. Vous devez vous assurer que "
+#~ "l'utilisateur nommé n'est pas en train d'exécuter un quelconque programme "
+#~ "lorsque cette commande est exécutée si l'UID numérique de l'utilisateur "
+#~ "est modifié. Vous devez modifier vous-même le nom du propriétaire de tous "
+#~ "les fichiers <command>crontab</command> et des tâches <command>at</"
+#~ "command>. Vous devez effectuer toutes les modifications impliquant NIS "
+#~ "sur le serveur NIS."
+
+#~ msgid ""
+#~ "<command>userdel</command> will not allow you to remove an account if the "
+#~ "user is currently logged in. You must kill any running processes which "
+#~ "belong to an account that you are deleting."
+#~ msgstr ""
+#~ "<command>Userdel</command> ne vous permet pas de supprimer un compte si "
+#~ "l'utilisateur en question est actuellement connecté. Vous devez tuer tous "
+#~ "les processus en cours d'exécution appartenant à l'utilisateur que vous "
+#~ "êtes en train de supprimer."
 
 #~ msgid ""
 #~ "The group name or number of the user's new initial login group. The group "
