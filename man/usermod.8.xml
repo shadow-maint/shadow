@@ -210,6 +210,21 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-m</option>, <option>--move-home</option>
+	</term>
+	<listitem>
+	  <para>
+	    Move the content of the user's home directory to the new
+	    location.
+	  </para>
+	  <para>
+	    This option is only valid in combination with the
+	    <option>-d</option> (or <option>--home</option>) option.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-o</option>, <option>--non-unique</option>
 	</term>
 	<listitem>
