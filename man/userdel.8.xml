@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1991 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -221,8 +221,10 @@
     <title>CAVEATS</title>
     <para>
       <command>userdel</command> will not allow you to remove an account if
-      the user is currently logged in. You must kill any running processes
-      which belong to an account that you are deleting.
+      there are running processes which belong to this account. In that
+      case, you may have to kill those processes or lock the user's
+      password or account and remove the account later. The
+      <option>-f</option> option can force the deletion of this account.
     </para>
     <para>You may not remove any NIS attributes on a NIS client. This must
       be performed on the NIS server.

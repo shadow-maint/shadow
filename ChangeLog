@@ -1,5 +1,10 @@
 2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/userdel.8.xml: Document tat -f may force teh deletion of a
+	busy user.
+
+2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/usermod.c: Check if the user is busy when the user's
 	UID, name or home directory is changed.
 
