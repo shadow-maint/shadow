@@ -1,5 +1,9 @@
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupadd.8.xml: Fixed formatting issue.
+
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/userdel.8.xml: Added warning for files that could remain
 	owner by the removed user.
 

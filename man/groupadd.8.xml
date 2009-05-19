@@ -53,6 +53,8 @@
       <command>groupadd</command>
       <arg choice='opt'>
 	<replaceable>options</replaceable>
+      </arg>
+      <arg choice='plain'>
 	<replaceable>group</replaceable>
       </arg>
     </cmdsynopsis>
