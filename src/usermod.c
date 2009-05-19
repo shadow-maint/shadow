@@ -1425,6 +1425,10 @@ static void move_home (void)
 					rmdir (user_newhome);
 					fail_exit (E_HOMEDIR);
 				}
+				// FIXME: the current uid & gid should
+				// also be provided so that only the files
+				// owned by the user/group have their
+				// ownership changed.
 				if (copy_tree (user_home, user_newhome,
 				               uflg ? (long int)user_newid : -1,
 				               gflg ? (long int)user_newgid : -1) == 0) {
@@ -1793,7 +1797,7 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	if (uflg) {
+	if (uflg) { // FIXME: gflg also, except for faillog/lastlog
 		update_lastlog ();
 		update_faillog ();
 
