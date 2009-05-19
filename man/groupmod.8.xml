@@ -77,15 +77,20 @@
 	<listitem>
 	  <para>
 	    The group ID of the given <replaceable>GROUP</replaceable> will
-	    be changed to <replaceable>GID</replaceable>.  The value of
+	    be changed to <replaceable>GID</replaceable>.
+	  </para>
+	  <para>
+	    The value of
 	    <replaceable>GID</replaceable> must be a non-negative decimal
 	    integer. This value must be unique, unless the
 	    <option>-o</option> option is used. Values between 0 and 999 are
-	    typically reserved for system groups. Any files that have the
+	    typically reserved for system groups.
+	  </para>
+	  <para>
+	    Any files that have the
 	    old group ID and must continue to belong to
 	    <replaceable>GROUP</replaceable>, must have their group ID
 	    changed manually.
-
 	  </para>
 	</listitem>
       </varlistentry>
