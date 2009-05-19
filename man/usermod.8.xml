@@ -250,6 +250,16 @@
 	    recommended because the password (or encrypted password) will
 	    be visible by users listing the processes.
 	  </para>
+	  <para condition="pam">
+	    The password will be written in the local
+	    <filename>/etc/passwd</filename> or
+	    <filename>/etc/shadow</filename> file. This might differ from the
+	    password database configured in your PAM configuration.
+	  </para>
+	  <para>
+	    You should make sure the password respects the system's
+	    password policy.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

@@ -1,5 +1,12 @@
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newusers.8.xml, man/chpasswd.8.xml, man/useradd.8.xml,
+	man/groupadd.8.xml, man/usermod.8.xml, man/chgpasswd.8.xml,
+	man/groupmod.8.xml: Added warning: passwords set with these tools
+	may not respect the password policy.
+
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupadd.8.xml: Fixed formatting issue.
 
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>

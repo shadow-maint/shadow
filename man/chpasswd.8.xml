@@ -184,6 +184,10 @@
       Remember to set permissions or umask to prevent readability of
       unencrypted files by other users.
     </para>
+    <para condition="no_pam">
+      You should make sure the passwords and the encryption method respect
+      the system's password policy.
+    </para>
   </refsect1>
 
   <refsect1 id='configuration' condition="no_pam">

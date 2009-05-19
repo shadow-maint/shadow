@@ -157,6 +157,10 @@
 	    recommended because the password (or encrypted password) will
 	    be visible by users listing the processes.
 	  </para>
+	  <para>
+	    You should make sure the password respects the system's
+	    password policy.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

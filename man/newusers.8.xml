@@ -304,6 +304,10 @@
       The input file must be protected since it contains unencrypted
       passwords.
     </para>
+    <para condition="no_pam">
+      You should make sure the passwords and the encryption method respect
+      the system's password policy.
+    </para>
   </refsect1>
 
   <refsect1 id='configuration'>
