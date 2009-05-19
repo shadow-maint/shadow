@@ -290,11 +290,13 @@
 	    for system accounts.
 	  </para>
 	  <para>
-	    Any files which the user owns and which are
-	    located in the directory tree rooted at the user's home
-	    directory will have the file user ID changed automatically. 
-	    Files outside of the user's home directory must be altered
-	    manually.
+	    The user's mailbox, and any files which the user owns and which are
+	    located in the user's home
+	    directory will have the file user ID changed automatically.
+	  </para>
+	  <para>
+	    The ownership of files outside of the user's home directory
+	    must be fixed manually.
 	  </para>
 	</listitem>
       </varlistentry>
