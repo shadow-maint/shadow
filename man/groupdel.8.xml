@@ -59,16 +59,17 @@
       account files, deleting all entries that refer to <emphasis
       remap='I'>group</emphasis>. The named group must exist.
     </para>
-
-    <para>You must manually check all file systems to insure that no files
-      remain with the named group as the file group ID.
-    </para>
   </refsect1>
 
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>You may not remove the primary group of any existing user. You
+    <para>
+      You may not remove the primary group of any existing user. You
       must remove the user before you remove the group.
+    </para>
+    <para>
+      You should manually check all file systems to ensure that no files
+      remain owned by this group.
     </para>
   </refsect1>
 
