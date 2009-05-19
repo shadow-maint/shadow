@@ -1,5 +1,9 @@
 2009-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Next version will be 4.1.4.1.
+
+2009-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newusers.8.xml: Added notes regarding the ownership of
 	files.
 
