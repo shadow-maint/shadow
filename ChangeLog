@@ -1,5 +1,10 @@
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/useradd.8.xml: When no passwords are provided, the password
+	is disabled, not the account.
+
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newusers.8.xml, man/chpasswd.8.xml, man/useradd.8.xml,
 	man/groupadd.8.xml, man/usermod.8.xml, man/chgpasswd.8.xml,
 	man/groupmod.8.xml: Added warning: passwords set with these tools

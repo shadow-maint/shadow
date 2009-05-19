@@ -381,7 +381,7 @@
 	  <para>
 	    The encrypted password, as returned by <citerefentry>
 	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-	    </citerefentry>. The default is to disable the account.
+	    </citerefentry>. The default is to disable the password.
 	  </para>
 	  <para>
 	    <emphasis role="bold">Note:</emphasis> This option is not
