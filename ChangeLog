@@ -1,5 +1,10 @@
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/userdel.8.xml: Added warning for files that could remain
+	owner by the removed user.
+
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/useradd.8.xml: Fix formatting typo.
 
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
