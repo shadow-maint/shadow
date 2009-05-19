@@ -129,6 +129,10 @@
 	    <command>newusers</command>), the UID of the specified user
 	    will be used.
 	  </para>
+	  <para>
+	    If the UID of an existing user is changed, the files ownership
+	    of the user's file should be fixed manually.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -189,6 +193,12 @@
 	    If this field does not specify an existing directory, the
 	    specified directory is created, with ownership set to the
 	    user being created or updated and its primary group.
+	  </para>
+	  <para>
+	    If the home directory of an existing user is changed,
+	    <command>newusers</command> does not move or copy the content
+	    of the old directory to the new location. This should be done
+	    manually.
 	  </para>
 	</listitem>
       </varlistentry>

@@ -1,3 +1,8 @@
+2009-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml: Added notes regarding the ownership of
+	files.
+
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/groupmod.8.xml: Split the -g option description into smaller
