@@ -289,7 +289,7 @@
 	    Multiple <option>-K</option> options can be specified, e.g.:
 	    <option>-K </option>
 	    <replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>
-	    <option> -K </option>
+	    <option>-K </option>
 	    <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
 	  <para>

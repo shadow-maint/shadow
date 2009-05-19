@@ -1,5 +1,9 @@
 2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/useradd.8.xml: Fix formatting typo.
+
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupdel.8.xml: Move the warning on filesystems checks to
 	the CAVEAT section.
 
