@@ -1,3 +1,8 @@
+2009-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/groupdel.8.xml: Move the warning on filesystems checks to
+	the CAVEAT section.
+
 2009-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/GID_MAX.xml: Fixed typo. useradd was specified

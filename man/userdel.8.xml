@@ -226,6 +226,10 @@
       password or account and remove the account later. The
       <option>-f</option> option can force the deletion of this account.
     </para>
+    <para>
+      You should manually check all file systems to ensure that no files
+      remain owned by this user.
+    </para>
     <para>You may not remove any NIS attributes on a NIS client. This must
       be performed on the NIS server.
     </para>
