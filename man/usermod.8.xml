@@ -76,7 +76,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Add the user to the supplemental group(s). Use only with
+	    Add the user to the supplementary group(s). Use only with the
 	    <option>-G</option> option.
 	  </para>
 	</listitem>
@@ -106,7 +106,7 @@
 	  </para>
 	  <para>
 	    If the <option>-m</option>
-	    option is given the contents of the current home directory will
+	    option is given, the contents of the current home directory will
 	    be moved to the new home directory, which is created if it does
 	    not already exist.
 	  </para>
