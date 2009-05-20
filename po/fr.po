@@ -5,25 +5,24 @@
 #
 # Vincent Renardias <vincent@ldsol.com>, 1999, 2005.
 # Jean-Luc Coulon <jean.luc.coulon@wanadoo.fr>, 2005, 2006, 2008.
-# Christian Perrier <bubulle@debian.org>, 2005, 2006, 2008.
+# Christian Perrier <bubulle@debian.org>, 2005, 2006, 2008, 2009.
 # Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-05-10 20:30+0200\n"
-"PO-Revision-Date: 2009-05-13 11:35+0200\n"
-"Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
+"PO-Revision-Date: 2009-05-20 07:37+0200\n"
+"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
 
 #, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
 "Il existe plusieurs entrées nommées « %s » dans %s. Veuillez corriger cela "
 "avec pwck ou grpck.\n"
@@ -95,8 +94,7 @@ msgstr "Impossible de créer l'interface d'audit - abandon.\n"
 
 #, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr ""
-"Impossible de modifier le propriétaire ou le tty d'entrée standard : %s"
+msgstr "Impossible de modifier le propriétaire ou le tty d'entrée standard : %s"
 
 #, c-format
 msgid "%s: failed to unlock %s\n"
@@ -550,18 +548,24 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
+"Utilisation : %s [options]\n"
+"\n"
+"Options:\n"
 
 #, c-format
 msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
 msgstr ""
+"  -c, --crypt-method            méthode de chiffrement\n"
+"                               (parmi %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
+"  -e, --encrypted               les mots de passe fournis sont chiffrés\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
+msgstr "  -h, --help                    afficher ce message d'aide et quitter\n"
 
-#, fuzzy
+
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 #| "                                crypt algorithms\n"
@@ -569,13 +573,13 @@ msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -m, --md5                     utiliser le chiffrement MD5 pour les mots\n"
+"                                de passe\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "%s: line %d: user '%s' does not exist\n"
 msgid "%s: (line %d, user %s) password not changed\n"
-msgstr "%s : ligne %d : l'utilisateur « %s » n'existe pas\n"
+msgstr "%s : (ligne %d, utilisateur %s) mot de passe non modifié\n"
 
 #, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
@@ -659,12 +663,12 @@ msgstr ""
 "                                l'utilisateur dont le compte est LOGIN\n"
 "\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "faillog: Failed to get the entry for UID %d\n"
 msgid "faillog: Failed to get the entry for UID %lu\n"
 msgstr ""
 "failog : impossible d'obtenir l'entrée pour l'identifiant d'utilisateur "
-"(UID) %d\n"
+"(UID) %lu\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Identifiant Échecs   Maximum Dernier                 Sur\n"
@@ -677,26 +681,26 @@ msgstr " [%lus restants]"
 msgid " [%lds lock]"
 msgstr " [%lds verrou]"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "faillog: Failed to reset fail count for UID %d\n"
 msgid "faillog: Failed to reset fail count for UID %lu\n"
 msgstr ""
 "faillog : impossible de réinitialiser le compteur d'échecs de l'identifiant "
-"d'utilisateur (UID) %d\n"
+"d'utilisateur (UID) %lu\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "faillog: Failed to set max for UID %d\n"
 msgid "faillog: Failed to set max for UID %lu\n"
 msgstr ""
 "faillog : impossible de définir la valeur maximum pour l'identifiant "
-"d'utilisateur (UID) %d\n"
+"d'utilisateur (UID) %lu\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "faillog: Failed to set locktime for UID %d\n"
 msgid "faillog: Failed to set locktime for UID %lu\n"
 msgstr ""
 "faillog : échec de positionnement de locktime pour l'identifiant "
-"d'utilisateur %d\n"
+"d'utilisateur %lu\n"
 
 #, c-format
 msgid "lastlog: Unknown user or range: %s\n"
@@ -1008,6 +1012,8 @@ msgstr "Faut-il ajouter le groupe « %s » dans %s ? "
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"le groupe %s a une entrée dans %s, mais le champ du mot de passe dans %s ne "
+"contient pas « x »\n"
 
 msgid "invalid shadow group file entry"
 msgstr ""
@@ -1080,12 +1086,12 @@ msgstr ""
 "                                l'utilisateur dont le compte est LOGIN\n"
 "\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "lastlog: Failed to get the entry for UID %d\n"
 msgid "lastlog: Failed to get the entry for UID %lu\n"
 msgstr ""
 "lastlog : échec de l'obtention de l'entrée pour l'identifiant d'utilisateur "
-"(UID) %d\n"
+"(UID) %lu\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Utilisateur      Port     Venant de        Dernière"
@@ -1116,11 +1122,11 @@ msgstr "       %s [-p] [-h hôte] [-f nom]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r hôte\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "configuration error - cannot parse %s value: '%s'"
 msgid "configuration error - cannot parse %s value: '%d'"
 msgstr ""
-"erreur de configuration - évaluation impossible de la valeur de %s : « %s »"
+"erreur de configuration - évaluation impossible de la valeur de %s : « %d »"
 
 msgid "Invalid login time"
 msgstr "Heure de connexion non valable"
@@ -1139,7 +1145,7 @@ msgstr ""
 "\n"
 "[Déconnexion court-circuitée -- accès superutilisateur autorisé]."
 
-#, fuzzy, c-format
+# , c-format
 #| msgid ""
 #| "\n"
 #| "Login timed out after %d seconds.\n"
@@ -1148,11 +1154,12 @@ msgid ""
 "Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
-"Tentative de connexion : délai de %d secondes dépassé.\n"
+"Tentative de connexion : délai de %u secondes dépassé.\n"
 
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
+"%s : fonctionnement impossible sans être réellement le superutilisateur\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -1170,10 +1177,10 @@ msgstr "%s login : "
 msgid "login: "
 msgstr "login : "
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "Maximum number of tries exceeded (%d)\n"
 msgid "Maximum number of tries exceeded (%u)\n"
-msgstr "Dépassement du nombre maximum de tentatives (%d)\n"
+msgstr "Dépassement du nombre maximum de tentatives (%u)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login : interruption requise par PAM\n"
@@ -1245,14 +1252,12 @@ msgstr "%s : l'identifiant de groupe (GID) « %lu » n'existe pas\n"
 msgid "too many groups\n"
 msgstr "trop de groupes\n"
 
-#, fuzzy
+
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
 #| "account\n"
 msgid "  -r, --system                  create system accounts\n"
-msgstr ""
-"  -Z, --selinux-user            nouvelle corespondance de l'utilisateur "
-"SELinux pour le compte d'utilisateur\n"
+msgstr "  -r, --system                  créer des comptes système\n"
 
 #, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
@@ -1435,15 +1440,15 @@ msgstr "Changement du mot de passe de %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Le mot de passe pour %s est inchangé.\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "Password changed."
 msgid "%s: password changed."
-msgstr "Mot de passe changé."
+msgstr "%s : mot de passe changé."
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "Password Expiration Warning"
 msgid "%s: password expiry information changed."
-msgstr "Avertissement de fin de validité du mot de passe"
+msgstr "%s : expiration du mot de passe modifiée"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1487,10 +1492,11 @@ msgstr "ajouter l'utilisateur « %s » dans %s ? "
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"l'utilisateur %s a une entrée dans %s, mais le champ du mot de passe dans %s "
+"ne contient pas « x »\n"
 
 msgid "invalid shadow password file entry"
-msgstr ""
-"entrée non valable dans le fichier des mots de passe cachés /etc/shadow"
+msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/shadow"
 
 msgid "duplicate shadow password entry"
 msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/shadow"
@@ -1630,15 +1636,15 @@ msgstr "%s : impossible de créer le nouveau fichier des valeurs par défaut\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s : impossible d'ouvrir le nouveau fichier des valeurs par défaut\n"
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
 msgid "%s: line too long in %s: %s..."
-msgstr "%s : ligne %d : échec de chown %s : %s\n"
+msgstr "%s : ligne trop longue dans %s : %s..."
 
-#, fuzzy, c-format
+# , c-format
 #| msgid "%s: rename: %s"
 msgid "%s: rename: %s: %s"
-msgstr "%s : renomme : %s"
+msgstr "%s : renomme : %s : %s"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -1802,8 +1808,7 @@ msgstr "%s : impossible de créer le répertoire %s\n"
 msgid "Creating mailbox file"
 msgstr "Création de la boîte à lettres"
 
-msgid ""
-"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Le groupe « mail » est introuvable. Création de la boîte à lettre avec le "
 "mode 0600.\n"
@@ -2080,13 +2085,13 @@ msgstr "%s : échec lors de la suppression de %s\n"
 msgid "%s: %s is unchanged\n"
 msgstr "%s : %s est inchangé\n"
 
-#, fuzzy
+
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
-msgstr "Impossible de verrouiller le fichier"
+msgstr "Impossible d'obtenir le contexte du fichier"
 
 msgid "setfscreatecon () failed"
-msgstr ""
+msgstr "échec de setfscreatecon ()"
 
 msgid "Couldn't lock file"
 msgstr "Impossible de verrouiller le fichier"
@@ -2096,8 +2101,7 @@ msgstr "Impossible d'effectuer une sauvegarde"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr ""
-"%s : impossible de restaurer %s : %s (vos modifications sont dans %s)\n"
+msgstr "%s : impossible de restaurer %s : %s (vos modifications sont dans %s)\n"
 
 #~ msgid ""
 #~ "Usage: %s [options] [input]\n"
