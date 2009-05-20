@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-05-10 20:30+0200\n"
 "PO-Revision-Date: 2009-05-20 07:37+0200\n"
-"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
+"Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,8 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 
 #, c-format
-msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
 "Il existe plusieurs entrées nommées « %s » dans %s. Veuillez corriger cela "
 "avec pwck ou grpck.\n"
@@ -94,7 +95,8 @@ msgstr "Impossible de créer l'interface d'audit - abandon.\n"
 
 #, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr "Impossible de modifier le propriétaire ou le tty d'entrée standard : %s"
+msgstr ""
+"Impossible de modifier le propriétaire ou le tty d'entrée standard : %s"
 
 #, c-format
 msgid "%s: failed to unlock %s\n"
@@ -563,8 +565,8 @@ msgstr ""
 "  -e, --encrypted               les mots de passe fournis sont chiffrés\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
-msgstr "  -h, --help                    afficher ce message d'aide et quitter\n"
-
+msgstr ""
+"  -h, --help                    afficher ce message d'aide et quitter\n"
 
 #| msgid ""
 #| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -1252,7 +1254,6 @@ msgstr "%s : l'identifiant de groupe (GID) « %lu » n'existe pas\n"
 msgid "too many groups\n"
 msgstr "trop de groupes\n"
 
-
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
 #| "account\n"
@@ -1496,7 +1497,8 @@ msgstr ""
 "ne contient pas « x »\n"
 
 msgid "invalid shadow password file entry"
-msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/shadow"
+msgstr ""
+"entrée non valable dans le fichier des mots de passe cachés /etc/shadow"
 
 msgid "duplicate shadow password entry"
 msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/shadow"
@@ -1808,7 +1810,8 @@ msgstr "%s : impossible de créer le répertoire %s\n"
 msgid "Creating mailbox file"
 msgstr "Création de la boîte à lettres"
 
-msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Le groupe « mail » est introuvable. Création de la boîte à lettre avec le "
 "mode 0600.\n"
@@ -2085,7 +2088,6 @@ msgstr "%s : échec lors de la suppression de %s\n"
 msgid "%s: %s is unchanged\n"
 msgstr "%s : %s est inchangé\n"
 
-
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Impossible d'obtenir le contexte du fichier"
@@ -2101,7 +2103,8 @@ msgstr "Impossible d'effectuer une sauvegarde"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s : impossible de restaurer %s : %s (vos modifications sont dans %s)\n"
+msgstr ""
+"%s : impossible de restaurer %s : %s (vos modifications sont dans %s)\n"
 
 #~ msgid ""
 #~ "Usage: %s [options] [input]\n"
