@@ -194,7 +194,7 @@
 	  <para>
 	    If not specified, <command>useradd</command> will use the
 	    default inactivity period specified by the
-	    <option>INACTIVE</option> variable in the
+	    <option>INACTIVE</option> variable in
 	    <filename>/etc/default/useradd</filename>, or -1 by default.
 	  </para>
 	</listitem>
@@ -279,8 +279,10 @@
 	</term>
 	<listitem>
 	  <para>
-	    Overrides <filename>/etc/login.defs</filename> defaults (UID_MIN, UID_MAX, UMASK,
-	    PASS_MAX_DAYS and others).
+	    Overrides <filename>/etc/login.defs</filename> defaults
+	    (<option>UID_MIN</option>, <option>UID_MAX</option>,
+	    <option>UMASK</option>, <option>PASS_MAX_DAYS</option>
+	    and others).
 	  <para>
 	  </para>
 	    Example: <option>-K </option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
@@ -349,7 +351,7 @@
 	  <para>
 	    Do not create a group with the same name as the user, but
 	    add the user to the group specified by the <option>-g</option>
-	    option or by the GROUP variable in
+	    option or by the <option>GROUP</option> variable in
 	    <filename>/etc/default/useradd</filename>.
 	  </para>
 	  <para>

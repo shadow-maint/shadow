@@ -58,7 +58,8 @@ crontab -r -u $1
 # Remove at jobs.
 # Note that it will remove any jobs owned by the same UID,
 # even if it was shared by a different username.
-find /var/spool/cron/atjobs -name "[^.]*" -type f -user $1 -exec rm {} \;
+AT_SPOOL_DIR=/var/spool/cron/atjobs
+find $AT_SPOOL_DIR -name "[^.]*" -type f -user $1 -delete \;
 
 # Remove print jobs.
 lprm $1

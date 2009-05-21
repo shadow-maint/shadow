@@ -122,7 +122,7 @@
 	  </para>
 	  <para>
 	     Example: <option>-K </option><replaceable>GID_MIN</replaceable>=<replaceable>100</replaceable>
-	    <option> -K </option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	    <option>-K </option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
 	  <para>
 	    Note: <option>-K </option>

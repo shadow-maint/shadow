@@ -83,7 +83,7 @@
 	    the user's home directory and mail spool, even if another
 	    user uses the same home directory or if the mail spool is not
 	    owned by the specified user.  If
-	    <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis
+	    <option>USERGROUPS_ENAB</option> is defined to <emphasis
 	    remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>
 	    and if a group exists with the same name as the deleted user,
 	    then this group will be removed, even if it is still the primary
@@ -113,7 +113,7 @@
 	    deleted manually.
 	  </para>
 	  <para>
-	    The mail spool is defined by the <emphasis>MAIL_DIR</emphasis>
+	    The mail spool is defined by the <option>MAIL_DIR</option>
 	    variable in the <filename>login.defs</filename> file.
 	  </para>
 	</listitem>
@@ -233,7 +233,7 @@
     <para>You may not remove any NIS attributes on a NIS client. This must
       be performed on the NIS server.
     </para>
-    <para>If <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis
+    <para>If <option>USERGROUPS_ENAB</option> is defined to <emphasis
       remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>,
       <command>userdel</command> will delete the group with the same name
       as the user. To avoid inconsistencies in the passwd and group

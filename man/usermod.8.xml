@@ -315,7 +315,7 @@
 	    password), you should also set the
 	    <replaceable>EXPIRE_DATE</replaceable> (for example to
 	    <replaceable>99999</replaceable>, or to the
-	    <replaceable>EXPIRE</replaceable> value from
+	    <option>EXPIRE</option> value from
 	    <filename>/etc/default/useradd</filename>).
 	  </para>
 	</listitem>
@@ -375,6 +375,12 @@
 	<term><filename>/etc/group</filename></term>
 	<listitem>
 	  <para>Group account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="gshadow">
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>Secure group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
