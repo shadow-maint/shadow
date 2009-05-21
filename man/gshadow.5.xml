@@ -43,46 +43,98 @@
     <title>DESCRIPTION</title>
     <para>
       <filename>/etc/gshadow</filename> contains the shadowed information
-      for group accounts. It contains lines with the following
-      colon-separated fields:
-    </para>
-    <itemizedlist mark='bullet'>
-      <listitem>
-	<para>group name</para>
-      </listitem>
-      <listitem>
-	<para>encrypted password</para>
-      </listitem>
-      <listitem>
-	<para>comma-separated list of group administrators</para>
-      </listitem>
-      <listitem>
-	<para>comma-separated list of group members</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>
-      The group name and password fields must be filled. The encrypted
-      password consists of characters from the 64-character alphabet a thru
-      z, A thru Z, 0 thru 9, \. and /. Refer to <citerefentry>
-      <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry> for details on how this string is interpreted. If the
-      password field contains some string that is not valid result of
-      <citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry>, for instance ! or *, the user will not be able to use
-      a unix password to log in, subject to <citerefentry>
-      <refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum></citerefentry>.
-    </para>
-
-    <para>
-      This information supersedes any password present in
-      <filename>/etc/group</filename>.
+      for group accounts.
     </para>
 
     <para>
       This file must not be readable by regular users if password security
       is to be maintained.
     </para>
+
+    <para>
+      Each line of this file contains the following colon-separated
+      fields:
+    </para>
+    <variablelist>
+      <varlistentry>
+	<term><emphasis role="bold">group name</emphasis></term>
+	<listitem>
+	  <para>
+	    It must be a valid group name, which exist on the system.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">encrypted password</emphasis></term>
+	<listitem>
+	  <para>
+	    Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry> for details on how
+	    this string is interpreted.
+	  </para>
+	  <para>
+	    If the password field contains some string that is not a valid
+	    result of <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
+	    users will not be able to use a unix password to access the
+	    group (but group members do not need the password).
+	  </para>
+	  <para>
+	    The password is used when an user who is not a member of the
+	    group wants to gain the permissions of this group (see
+	    <citerefentry><refentrytitle>newgrp</refentrytitle>
+	    <manvolnum>1</manvolnum></citerefentry>).
+	  </para>
+	  <para>
+	    This field may be empty, in which case only the group members
+	    can gain the group permissions.
+	  </para>
+	  <para>
+	    A password field which starts with a exclamation mark means
+	    that the password is locked.  The remaining characters on the
+	    line represent the password field before the password was
+	    locked.
+	  </para>
+	  <para>
+	    This password supersedes any password specified in
+	    <filename>/etc/group</filename>.
+	  </para>
+
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">administrators</emphasis></term>
+	<listitem>
+	  <para>
+	    It must be a comma-separated list of user names.
+	  </para>
+	  <para>
+	    Administrators can change the password or the members of the
+	    group.
+	  </para>
+	  <para>
+	    Administrators also have the same permissions as the members
+	    (see below).
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">members</emphasis></term>
+	<listitem>
+	  <para>
+	    It must be a comma-separated list of user names.
+	  </para>
+	  <para>
+	    Members can access the group without being prompted for a
+	    password.
+	  </para>
+	  <para>
+	    You should use the same list of users as in
+	    <filename>/etc/group</filename>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

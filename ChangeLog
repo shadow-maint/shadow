@@ -1,5 +1,9 @@
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gshadow.5.xml: Updated documentation.
+
+2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/usermod.8.xml, man/userdel.8.xml, man/useradd.8.xml:
 	Harmonize formatting of login.defs and default/useradd variables.
 	Use an <option> tag.
