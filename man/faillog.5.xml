@@ -42,13 +42,17 @@
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><filename>/var/log/faillog</filename> maintains a count of login
-      failures and the limits for each account. The file is fixed length
-      record, indexed by numerical UID. Each record contains the count of
+    <para>
+      <filename>/var/log/faillog</filename> maintains a count of login
+      failures and the limits for each account.
+    </para>
+    <para>
+      The file contains fixed length
+      records, indexed by numerical UID. Each record contains the count of
       login failures since the last successful login; the maximum number of
-      failures before the account is disabled; the line the last login
-      failure occurred on; the date the last login failure occurred;
-      and the time in seconds how long the account will be locked after
+      failures before the account is disabled; the line on whiche the last login
+      failure occurred; the date of the last login failure;
+      and the duration (in seconds) during which the account will be locked after
       a failure.
     </para>
 
