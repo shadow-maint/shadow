@@ -52,11 +52,11 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>faillog</command> formats the contents of the failure log
-      from <filename>/var/log/faillog</filename> database. It also can be
-      used for maintains failure counters and limits. Run
-      <command>faillog</command> without arguments display only list of user
-      faillog records who have ever had a login failure.
+      <command>faillog</command> displays the contents of the failure log
+      database (<filename>/var/log/faillog</filename>). It can also
+      set the failure counters and limits. When
+      <command>faillog</command> is run without arguments, it only displays the
+      faillog records of the users who had a login failure.
     </para>
   </refsect1>
 
@@ -89,7 +89,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Lock account to <replaceable>SEC</replaceable>
+	    Lock account for <replaceable>SEC</replaceable>
 	    seconds after failed login.
 	  </para>
 	  <para>
@@ -105,7 +105,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set maximum number of login failures after the account is
+	    Set the maximum number of login failures after the account is
 	    disabled to <replaceable>MAX</replaceable>.
 	  </para>
 	  <para>
@@ -128,9 +128,7 @@
 	<term><option>-r</option>, <option>--reset</option></term>
 	<listitem>
 	  <para>
-	    Reset the counters of login failures or one record if used with
-	    the <option>-u</option> <replaceable>LOGIN</replaceable>
-	    option.
+	    Reset the counters of login failures.
 	  </para>
 	  <para>
 	    Write access to <filename>/var/log/faillog</filename>

@@ -1,5 +1,9 @@
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/faillog.8.xml: Minor updates.
+
+2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/faillog.5.xml: Split a long paragraph. Typo fixes.
 
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
