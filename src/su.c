@@ -161,7 +161,7 @@ static bool restricted_shell (const char *shellstr)
 
 static void su_failure (const char *tty)
 {
-	sulog (tty, 0, oldname, name);	/* log failed attempt */
+	sulog (tty, false, oldname, name);	/* log failed attempt */
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG (((0 != pwent.pw_uid) ? LOG_INFO : LOG_NOTICE,

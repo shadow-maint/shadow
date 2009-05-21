@@ -1,3 +1,7 @@
+2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c: Use a boolean instead of 0.
+
 2009-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/usermod.8.xml: Fixed typos.
