@@ -76,7 +76,7 @@
       members and a password.
     </para>
     <para condition="gshadow">
-      System administrator can use the <option>-A</option> option to define
+      System administrators can use the <option>-A</option> option to define
       group administrator(s) and the <option>-M</option> option to define
       members and has all rights of group administrators and members.
     </para>
@@ -88,7 +88,7 @@
       <replaceable>group</replaceable>.
     </para>
     <para>
-      If a password is set the members can still <citerefentry>
+      If a password is set the members can still use <citerefentry>
       <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> without a password, and non-members must supply the
       password.

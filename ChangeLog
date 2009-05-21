@@ -1,5 +1,9 @@
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gpasswd.1.xml: Minor updates.
+
+2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/gshadow.5.xml: Updated documentation.
 
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
