@@ -526,7 +526,7 @@ static char *update_crypt_pw (char *cp)
 		} else {
 			cp++;
 		}
-        }
+	}
 
 	if (lflg && *cp != '!') {
 		char *newpw = xmalloc (strlen (cp) + 2);
