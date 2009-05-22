@@ -1,5 +1,10 @@
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Added warnings for absolute symlinks which could
+	be broken by rename().
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/userdel.c: Report errors to remove the user's mailbox.
 	* NEWS, src/userdel.c: When USERGROUPS_ENAB is enabled, remove the
 	user's group when the user was the only member. This is still not

@@ -1412,6 +1412,9 @@ static void move_home (void)
 			         Prog, user_newhome);
 			fail_exit (E_HOMEDIR);
 		} else if (rename (user_home, user_newhome) != 0) {
+			// FIXME: rename above may have broken symlinks
+			//        pointing to the user's home directory
+			//        with an absolute path.
 			if (errno == EXDEV) {
 				if (mkdir (user_newhome, sb.st_mode & 0777) != 0) {
 					fprintf (stderr,
