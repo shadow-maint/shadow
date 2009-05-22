@@ -347,7 +347,8 @@ static void syslog_sg (const char *name, const char *group)
 				         (unsigned long) gid, name));
 			}
 			closelog ();
-			exit (E_SUCCESS);
+			exit ((0 != WIFEXITED (cst)) ? WEXITSTATUS (cst)
+			                             : WTERMSIG (cst) + 128);
 		}
 
 		/* child - restore signals to their default state */
