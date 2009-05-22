@@ -5,6 +5,8 @@ shadow-4.1.4 -> shadow-4.1.4.1						UNRELEASED
 - login
   * Fix failures with empty usernames on non PAM versions.
   * Fix CONSOLE (securetty) support on non PAM versions.
+- newgrp
+  * Return the exit status of the child.
 - userdel
   * On Linux, do not check if an user is logged in with utmp, but check if
     the user is running some processes.

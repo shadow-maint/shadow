@@ -1,5 +1,10 @@
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newgrp.c: Return the exit status of the child. Thanks
+	to Lionel Elie Mamane.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Added warnings for absolute symlinks which could
 	be broken by rename().
 
