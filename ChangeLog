@@ -1,5 +1,9 @@
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Updated some strings.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newgrp.c: Return the exit status of the child. Thanks
 	to Lionel Elie Mamane.
 
