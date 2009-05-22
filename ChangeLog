@@ -1,5 +1,11 @@
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: Added warning for relative symlinks.
+	* libmisc/copydir.c (remove_tree): There is no need to check if
+	the root argument exist. opendir() will report this.
+
+2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/faillog.8.xml: Minor updates.
 
 2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>

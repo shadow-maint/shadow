@@ -494,6 +494,7 @@ static int copy_symlink (const char *src, const char *dst,
 	/* If src was a link to an entry of the src_orig directory itself,
 	 * create a link to the corresponding entry in the dst_orig
 	 * directory.
+	 * FIXME: This may change a relative link to an absolute link
 	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
 		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
@@ -546,7 +547,7 @@ static int copy_hardlink (const char *src, const char *dst,
 		return -1;
 	}
 
-	/* FIXME: why is it unlinked? This is a copy, not a move*/
+	/* FIXME: why is it unlinked? This is a copy, not a move */
 	if (unlink (src) != 0) {
 		return -1;
 	}
@@ -673,14 +674,6 @@ int remove_tree (const char *root)
 	struct DIRECT *ent;
 	struct stat sb;
 	DIR *dir;
-
-	/*
-	 * Make certain the directory exists.
-	 */
-
-	if (access (root, F_OK) != 0) {
-		return -1;
-	}
 
 	/*
 	 * Open the source directory and read each entry.  Every file
