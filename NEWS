@@ -10,6 +10,10 @@ shadow-4.1.4 -> shadow-4.1.4.1						UNRELEASED
     the user is running some processes.
   * If not on Linux, continue to search for an utmp record, but make sure
     the process recorded in the utmp entry is still running.
+  * Report failures to remove the user's mailbox
+  * When USERGROUPS_ENAB is enabled, remove the user's group when the
+    user was the only member.
+  * Do not fail when -r is used and the home directory does not exist.
 - usermod
   * Check if the user is busy when the user's UID, name or home directory
     is changed.

@@ -106,7 +106,7 @@ static void user_cancel (const char *);
 static bool path_prefix (const char *, const char *);
 #endif
 static int is_owner (uid_t, const char *);
-static void remove_mailbox (void);
+static int remove_mailbox (void);
 
 /*
  * usage - display usage message and exit
@@ -196,11 +196,16 @@ static void update_groups (void)
 	 * we've removed their name from all the groups above, so
 	 * now if they have a group with the same name as their
 	 * user name, with no members, we delete it.
+	 * FIXME: below, the check for grp->gr_mem[0] is not sufficient.
+	 *        We should retrieve the group with gr_locate and check
+	 *        that gr_mem is empty.
 	 */
 	grp = xgetgrnam (user_name);
 	if (   (NULL != grp)
 	    && getdef_bool ("USERGROUPS_ENAB")
-	    && (NULL == grp->gr_mem[0])) {
+	    && (   (NULL == grp->gr_mem[0])
+	        || (   (NULL == grp->gr_mem[1])
+	            && (strcmp (grp->gr_mem[0], user_name) == 0)))) {
 
 		pwd = NULL;
 		if (!fflg) {
@@ -615,21 +620,36 @@ static bool path_prefix (const char *s1, const char *s2)
 }
 #endif
 
+/*
+ * is_owner - Check if path is owned by uid
+ *
+ * Return
+ *  1: path exists and is owned by uid
+ *  0: path is not owned by uid, or a failure occured
+ * -1: path does not exist
+ */
 static int is_owner (uid_t uid, const char *path)
 {
 	struct stat st;
 
+	errno = 0;
 	if (stat (path, &st) != 0) {
-		return -1;
+		if ((ENOENT == errno) || (ENOTDIR == errno)) {
+			/* The file or directory does not exist */
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 	return (st.st_uid == uid);
 }
 
-static void remove_mailbox (void)
+static int remove_mailbox (void)
 {
 	const char *maildir;
 	char mailfile[1024];
 	int i;
+	int errors = 0;
 
 	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
@@ -638,12 +658,14 @@ static void remove_mailbox (void)
 	}
 #endif
 	if (NULL == maildir) {
-		return;
+		return 0;
 	}
 	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
-			fprintf (stderr, _("%s: warning: can't remove %s: %s"), Prog, mailfile, strerror (errno));
+			fprintf (stderr,
+			         _("%s: warning: can't remove %s: %s\n"),
+			         Prog, mailfile, strerror (errno));
 			SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
@@ -651,6 +673,7 @@ static void remove_mailbox (void)
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
 #endif
+			errors = 1;
 			/* continue */
 		}
 #ifdef WITH_AUDIT
@@ -662,26 +685,30 @@ static void remove_mailbox (void)
 			              SHADOW_AUDIT_SUCCESS);
 		}
 #endif
-		return;
+		return errors;
 	}
 	i = is_owner (user_id, mailfile);
 	if (i == 0) {
 		fprintf (stderr,
 		         _("%s: %s not owned by %s, not removing\n"),
 		         Prog, mailfile, user_name);
-		SYSLOG ((LOG_ERR, "%s not owned by %s, not removed", mailfile, strerror (errno)));
+		SYSLOG ((LOG_ERR,
+		         "%s not owned by %s, not removed",
+		         mailfile, strerror (errno)));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting mail file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
 #endif
-		return;
+		return 1;
 	} else if (i == -1) {
-		return;		/* mailbox doesn't exist */
+		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
-		fprintf (stderr, _("%s: warning: can't remove %s: %s"), Prog, mailfile, strerror (errno));
+		fprintf (stderr,
+		         _("%s: warning: can't remove %s: %s\n"),
+		         Prog, mailfile, strerror (errno));
 		SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
@@ -689,6 +716,7 @@ static void remove_mailbox (void)
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
 #endif
+		errors = 1;
 		/* continue */
 	}
 #ifdef WITH_AUDIT
@@ -700,6 +728,7 @@ static void remove_mailbox (void)
 		              SHADOW_AUDIT_SUCCESS);
 	}
 #endif
+	return errors;
 }
 
 /*
@@ -868,15 +897,23 @@ int main (int argc, char **argv)
 	update_groups ();
 
 	if (rflg) {
-		remove_mailbox ();
+		errors += remove_mailbox ();
 	}
-	if (rflg && !fflg && (is_owner (user_id, user_home) == 0)) {
-		fprintf (stderr,
-			 _("%s: %s not owned by %s, not removing\n"),
-			 Prog, user_home, user_name);
-		rflg = 0;
-		errors++;
-		/* continue */
+	if (rflg) {
+		int home_owned = is_owner (user_id, user_home);
+		if (-1 == home_owned) {
+			fprintf (stderr,
+			         _("%s: %s home directory (%s) not found\n"),
+			         Prog, user_name, user_home);
+			rflg = 0;
+		} else if ((0 == home_owned) && !fflg) {
+			fprintf (stderr,
+			         _("%s: %s not owned by %s, not removing\n"),
+			         Prog, user_home, user_name);
+			rflg = 0;
+			errors++;
+			/* continue */
+		}
 	}
 
 #ifdef EXTRA_CHECK_HOME_DIR

@@ -1,4 +1,14 @@
-2009-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/userdel.c: Report errors to remove the user's mailbox.
+	* NEWS, src/userdel.c: When USERGROUPS_ENAB is enabled, remove the
+	user's group when the user was the only member. This is still not
+	complete, as the user could have been specified twice in the
+	members.
+	* NEWS, src/userdel.c: Do not fail when -r is used and the home
+	directory does not exist.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/copydir.c: Added warning for relative symlinks.
 	* libmisc/copydir.c (remove_tree): There is no need to check if
