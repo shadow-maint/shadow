@@ -302,8 +302,7 @@
 	    Unlock the password of the named account. This option
 	    re-enables a password by changing the password back to its
 	    previous value (to the value before using the
-	    <option>-l</option> option), and by resetting the account
-	    expiry field.
+	    <option>-l</option> option).
 	  </para>
 	</listitem>
       </varlistentry>

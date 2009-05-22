@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2009-03-02 13:55+0600\n"
 "Last-Translator: Baurzhan M. <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -1465,12 +1465,12 @@ msgstr "%s пайдаланушының паролі өзгертілмеді.\n
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Пароль өзгертілді."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Мерзімі аяқталу туралы хабарламаны көрсету (күн саны)"
 
 #, c-format
@@ -1926,13 +1926,9 @@ msgstr ""
 "%s: %s тобын өшіру мүмкін емес, ол басқа пайдалануы үшін басыңқы топ болып "
 "табылады.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: %s пайдаланушысы қазір жүйеге кіріп тұр\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: ексерту: өшіру мүмкін емес"
 
 #, c-format
@@ -1942,6 +1938,15 @@ msgstr "%s: %s қазір %s иелігінде емес, өшірілмейді
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: %s қазір NIS пайдаланушысы болып тұр\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: %s пайдаланушысы қазір жүйеге кіріп тұр\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: '%s' үй бумасы қате\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1:4.1.1-6\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2009-05-08 22:36+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -1384,12 +1384,12 @@ msgstr "Пароль для %s не был изменён.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Пароль изменён."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Предупреждать об истечении срока действия пароля за (дней)"
 
 #, c-format
@@ -1807,12 +1807,9 @@ msgstr ""
 "%s: группа %s является первичной для другого пользователя и не может быть "
 "удалена.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: пользователь %s находится в системе\n"
-
-#, c-format
-msgid "%s: warning: can't remove %s: %s"
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: внимание: не удалось удалить %s: %s"
 
 #, c-format
@@ -1822,6 +1819,15 @@ msgstr "%s: %s не принадлежит %s, удаление не выпол�
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: пользователь %s является пользователем NIS\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: пользователь %s находится в системе\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: неверный домашний каталог '%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

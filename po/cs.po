@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2009-04-26 12:18+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -1374,12 +1374,12 @@ msgstr "Heslo uživatele %s nebylo změněno.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Heslo bylo změněno."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Varování o vypršení platnosti hesla"
 
 #, c-format
@@ -1821,12 +1821,9 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: skupina %s je primární skupinou jiného uživatele a nelze ji odstranit.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: uživatel %s je právě přihlášen\n"
-
-#, c-format
-msgid "%s: warning: can't remove %s: %s"
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: varování: nemohu smazat %s: %s"
 
 #, c-format
@@ -1836,6 +1833,15 @@ msgstr "%s: vlastníkem %s není %s, nemažu jej\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: uživatel %s je NIS uživatelem\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: uživatel %s je právě přihlášen\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: chybný domácí adresář „%s“\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

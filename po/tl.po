@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2007-11-26 21:34+0100\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -1398,12 +1398,12 @@ msgstr "Ang password ni %s ay hindi napalitan.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Napalitan ang password."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Babala ng Paglipas ng Taning ng Password"
 
 #, c-format
@@ -1815,13 +1815,9 @@ msgstr ""
 "%s: hindi matanggal ang grupong %s dahil ito'y pangunahing grupo ng ibang "
 "gumagamit.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: gumagamit na si %s ay kasalukuyang nakapasok\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
 #, c-format
@@ -1831,6 +1827,15 @@ msgstr "%s: %s ay hindi pag-aari ni %s, hindi tatanggalin\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: ang gumagamit na %s ay nasa NIS\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: gumagamit na si %s ay kasalukuyang nakapasok\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: hindi tanggap na directory na tahanan '%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

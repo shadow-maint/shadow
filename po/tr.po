@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2008-03-29 20:31+0200\n"
 "Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -1468,12 +1468,12 @@ msgstr "%s için parola değişmedi\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Parola değişti "
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Parola Kullanım Süresi Bitti Uyarısı"
 
 #, c-format
@@ -1931,13 +1931,9 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Başka bir kullanıcı için birincil grub olan %s grubu kaldırılamıyor.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: kullanıcı %s şu an oturumda\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: uyarı: silinemiyor "
 
 #, c-format
@@ -1947,6 +1943,15 @@ msgstr "%s: %s %s kullanıcısına ait değil, silinmiyor\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: kullanıcı %s bir NIS kullanıcısı\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: kullanıcı %s şu an oturumda\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: geçersiz ev dizini '%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

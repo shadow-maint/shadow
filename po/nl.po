@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2007-11-25 21:11+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@skolelinux.no>\n"
 "Language-Team: debian-l10n-dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -1419,12 +1419,12 @@ msgstr "Het wachtwoord voor %s is niet veranderd.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Wachtwoord is veranderd."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Waarschuwing voor wachtwoordverval"
 
 #, c-format
@@ -1837,13 +1837,9 @@ msgstr ""
 "%s: kan de groep %s niet verwijderen, daar deze de primaire groep van een "
 "andere gebruiker is.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: gebruiker %s is momenteel niet aangemeld\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: waarschuwing: kan niet verwijderen "
 
 #, c-format
@@ -1853,6 +1849,15 @@ msgstr "%s: %s is niet van %s, wordt niet verwijderd\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: gebruiker %s is een NIS-gebruiker\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: gebruiker %s is momenteel niet aangemeld\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: ongeldige thuismap '%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

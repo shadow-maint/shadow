@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2007-11-25 21:23+0100\n"
 "Last-Translator: Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -1396,12 +1396,12 @@ msgstr "La contraseña para %s no se ha modificado.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Contraseña cambiada."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Aviso de caducidad de la contraseña"
 
 #, c-format
@@ -1818,13 +1818,9 @@ msgstr ""
 "%s: no se puede eliminar el grupo %s, que es un prupo primario\n"
 "para otro usuario.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: el usuario %s está actualmente dentro del sistema\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: aviso: no se puede eliminar "
 
 #, c-format
@@ -1834,6 +1830,15 @@ msgstr "%s: %s no pertenece a %s, no se elimina\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: el usuario %s es un usuario NIS\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: el usuario %s está actualmente dentro del sistema\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: directorio home «%s» inválido\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

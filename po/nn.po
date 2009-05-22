@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -1236,12 +1236,12 @@ msgstr "Passordet til %s er ikkje endra.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Passord er endra."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Åtvaring for utgått passord"
 
 #, c-format
@@ -1591,13 +1591,9 @@ msgstr ""
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s: klarer ikkje fjerna primærgruppa til brukaren.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: brukaren %s er pålogga\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: åtvaring: kan ikkje fjerna "
 
 #, c-format
@@ -1607,6 +1603,14 @@ msgstr "%s: %s ikkje eigd av %s, ikkje fjerna\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: brukar %s er ikkje ein NIS brukar\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: brukaren %s er pålogga\n"
+
+#, fuzzy, c-format
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: ugyldig heimemappe «%s»\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

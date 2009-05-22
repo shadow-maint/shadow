@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2006-07-18 23:27+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -1345,12 +1345,12 @@ msgstr "Non se cambiou o contrasinal de %s\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Cambiouse o contrasinal."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Aviso de caducidade de contrasinal"
 
 #, c-format
@@ -1756,13 +1756,9 @@ msgstr ""
 "%s: Non se pode eliminar o grupo %s, que é o grupo primario de outro "
 "usuario.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: o usuario %s está conectado\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: aviso: non se pode eliminar "
 
 #, c-format
@@ -1772,6 +1768,15 @@ msgstr "%s: %s non pertence a %s, non se elimina\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: o usuario %s é un usuario NIS\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: o usuario %s está conectado\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: directorio inicial \"%s\" non válido\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

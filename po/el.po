@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1400,12 +1400,12 @@ msgstr "Το συνθηματικό για τον %s δεν άλλαξε.\n"
 
 #, fuzzy, c-format
 #| msgid "Password changed."
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "Το συνθηματικό άλλαξε."
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "Προειδοποίηση λήξης συνθηματικού"
 
 #, c-format
@@ -1810,13 +1810,9 @@ msgstr ""
 "%s: Αδυναμία αφαίρεσης της ομάδας %s ή οποία είναι πρωταρχική ομάδα για άλλο "
 "χρήστη.\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: Ο χρήστης %s βρίσκεται στο σύστημα\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
 
 #, c-format
@@ -1826,6 +1822,14 @@ msgstr "%s: Το %s δεν ανήκει στον %s, δεν αφαιρείται
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: Ο χρήστης %s είναι NIS χρήστης\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: Ο χρήστης %s βρίσκεται στο σύστημα\n"
+
+#, fuzzy, c-format
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s: Μη έγκυρος αρχικός κατάλογος χρήστη `%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"

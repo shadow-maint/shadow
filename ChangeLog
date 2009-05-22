@@ -1,5 +1,15 @@
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Prepare the next release.
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/passwd.1.xml: passwd -u does not reset the expiry field.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Updated some strings.
 
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>

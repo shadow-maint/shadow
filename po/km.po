@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-05-10 20:30+0200\n"
+"POT-Creation-Date: 2009-05-22 13:14+0200\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1361,12 +1361,12 @@ msgid "The password for %s is unchanged.\n"
 msgstr "មិនបានប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s ឡើយ ។\n"
 
 #, fuzzy, c-format
-msgid "%s: password changed."
+msgid "%s: password changed.\n"
 msgstr "ពាក្យ​សម្ងាត់​បាន​ប្តូរ​ ។\n"
 
 #, fuzzy, c-format
 #| msgid "Password Expiration Warning"
-msgid "%s: password expiry information changed."
+msgid "%s: password expiry information changed.\n"
 msgstr "ការព្រមាន​ការផុត​កំណត់​នៃ​ពាក្យ​សម្ងាត់​"
 
 #, c-format
@@ -1773,13 +1773,9 @@ msgstr ""
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s ៖ មិនអាច​យកក្រុម %s ដែលជា​ក្រុម​ចម្បង​សម្រាប់​អ្នកប្រើដទៃទៀតចេញបានទេ ។\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s ៖ បច្ចុប្បន្ន ​អ្នក​ប្រើ​ %s បាន​ចូលហើយ​\n"
-
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
-msgid "%s: warning: can't remove %s: %s"
+msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s  ៖ ការព្រមាន​ ៖ មិន​អាច​យកចេញបានឡើយ "
 
 #, c-format
@@ -1789,6 +1785,15 @@ msgstr "%s ៖ %s មិន​បានទទួលយក​​ %s ទេ, ម�
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s ៖ អ្នកប្រើ​ %s គឺជា​អ្នក​​ប្រើ​ NIS\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s ៖ បច្ចុប្បន្ន ​អ្នក​ប្រើ​ %s បាន​ចូលហើយ​\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s home directory (%s) not found\n"
+msgstr "%s ៖ ថត​ផ្ទះ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
