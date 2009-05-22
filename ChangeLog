@@ -1,5 +1,9 @@
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/fr.po: Updated French translation.
+
+2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS: Prepare the next release.
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.

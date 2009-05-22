@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-05-22 13:14+0200\n"
-"PO-Revision-Date: 2009-05-20 07:37+0200\n"
+"PO-Revision-Date: 2009-05-22 15:52+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -1434,16 +1434,14 @@ msgid "The password for %s is unchanged.\n"
 msgstr "Le mot de passe pour %s est inchangé.\n"
 
 # , c-format
-#, fuzzy, c-format
-#| msgid "%s: password changed."
+#, c-format
 msgid "%s: password changed.\n"
-msgstr "%s : mot de passe changé."
+msgstr "%s : mot de passe changé.\n"
 
 # , c-format
-#, fuzzy, c-format
-#| msgid "%s: password expiry information changed."
+#, c-format
 msgid "%s: password expiry information changed.\n"
-msgstr "%s : expiration du mot de passe modifiée"
+msgstr "%s : expiration du mot de passe modifiée.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1870,10 +1868,9 @@ msgstr ""
 "%s : le groupe %s est le groupe primaire d'un autre utilisateur et il ne "
 "sera pas supprimé.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: can't remove %s: %s"
+#, c-format
 msgid "%s: warning: can't remove %s: %s\n"
-msgstr "%s : attention : impossible de supprimer %s : %s"
+msgstr "%s : attention : impossible de supprimer %s : %s\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
@@ -1887,10 +1884,9 @@ msgstr "%s : le compte %s est un compte NIS\n"
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s : l'utilisateur %s est connecté\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
+#, c-format
 msgid "%s: %s home directory (%s) not found\n"
-msgstr "%s : répertoire personnel « %s » non valable\n"
+msgstr "%s : le répertoire personnel de %s (%s) n'a pas été trouvé\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
