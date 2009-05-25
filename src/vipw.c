@@ -116,8 +116,12 @@ static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 		unlink (backup);
 		return -1;
 	}
-	if (   (fsync (fileno (bkfp)) != 0)
-	    || (fclose (bkfp) != 0)) {
+	if (fsync (fileno (bkfp)) != 0) {
+		(void) fclose (bkfp);
+		unlink (backup);
+		return -1;
+	}
+	if (fclose (bkfp) != 0) {
 		unlink (backup);
 		return -1;
 	}
@@ -225,6 +229,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (create_backup_file (f, fileedit, &st1) != 0) {
 		vipwexit (_("Couldn't make backup"), errno, 1);
 	}
+	(void) fclose (f);
 	createedit = true;
 
 	editor = getenv ("VISUAL");

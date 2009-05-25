@@ -1,5 +1,9 @@
 2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Make sure opened files are closed.
+
+2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chpasswd.8.xml, man/grpck.8.xml, man/newgrp.1.xml,
 	man/passwd.1.xml, man/sg.1.xml: Avoid a spurious comma.
 
