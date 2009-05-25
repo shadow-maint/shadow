@@ -460,9 +460,11 @@
       <citerefentry>
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
-      <citerefentry condition="no_pam">
-	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
+      <phrase condition="no_pam">
+	<citerefentry>
+	  <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.

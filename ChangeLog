@@ -1,3 +1,11 @@
+2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/passwd.1.xml: Avoid a spurious comma.
+
+2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS: New placeholder for the next release.
+
 2009-05-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/fr.po: Updated French translation.
