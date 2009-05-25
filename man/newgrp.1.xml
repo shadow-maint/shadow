@@ -145,10 +145,11 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry condition="gshadow">
-	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>.
+      </citerefentry><phrase condition="gshadow">,
+	<citerefentry condition="gshadow">
+	  <refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>
+      </phrase>.
     </para>
   </refsect1>
 </refentry>

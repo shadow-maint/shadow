@@ -195,9 +195,11 @@
       <citerefentry>
 	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
-      <citerefentry condition="gshadow">
-	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>,
-      </citerefentry>
+      <phrase condition="gshadow">
+	<citerefentry>
+	  <refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>,
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,

@@ -1,6 +1,7 @@
 2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/passwd.1.xml: Avoid a spurious comma.
+	* man/chpasswd.8.xml, man/grpck.8.xml, man/newgrp.1.xml,
+	man/passwd.1.xml, man/sg.1.xml: Avoid a spurious comma.
 
 2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 

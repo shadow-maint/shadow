@@ -243,9 +243,11 @@
       <citerefentry>
 	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
-      <citerefentry condition="no_pam">
-	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
+      <phrase condition="no_pam">
+	<citerefentry>
+	  <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
