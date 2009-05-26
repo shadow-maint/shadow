@@ -186,32 +186,6 @@
     </variablelist>
   </refsect1>
 
-  <refsect1 id='see_also'>
-    <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
-	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>,
-      <phrase condition="gshadow">
-	<citerefentry>
-	  <refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>,
-	</citerefentry>,
-      </phrase>
-      <citerefentry>
-	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>.
-    </para>
-  </refsect1>
-
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
     <para>
@@ -254,6 +228,32 @@
 	  </listitem>
 	</varlistentry>
       </variablelist>
+    </para>
+  </refsect1>
+
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <phrase condition="gshadow">
+	<citerefentry>
+	  <refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>,
+	</citerefentry>,
+      </phrase>
+      <citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
 </refentry>

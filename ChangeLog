@@ -1,3 +1,8 @@
+2009-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/pwck.8.xml, man/grpck.8.xml: Move the SEE ALSO section at
+	the end.
+
 2009-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/vipw.c: Make sure opened files are closed.
