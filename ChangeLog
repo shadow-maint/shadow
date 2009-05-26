@@ -1,5 +1,10 @@
 2009-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gpasswd.1.xml: Ease the translation of the refpurpose.
+	* man/gpasswd.1.xml: Fix typo, shorten sentences.
+
+2009-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/pwck.8.xml, man/grpck.8.xml: Move the SEE ALSO section at
 	the end.
 

@@ -46,10 +46,13 @@
   <refnamediv id='name'>
     <refname>gpasswd</refname>
     <refpurpose>
-      administer the <filename>/etc/group</filename>
-      <phrase condition="gshadow">and <filename>/etc/gshadow</filename>
-      files</phrase>
-      <phrase condition="no_gshadow">file</phrase>
+      <phrase condition="no_gshadow">
+	administer <filename>/etc/group</filename>
+      </phrase>
+      <phrase condition="gshadow">
+	administer <filename>/etc/group</filename> and
+	<filename>/etc/gshadow</filename>
+      </phrase>
     </refpurpose>
   </refnamediv>
   <!-- body begins here -->
@@ -78,7 +81,7 @@
     <para condition="gshadow">
       System administrators can use the <option>-A</option> option to define
       group administrator(s) and the <option>-M</option> option to define
-      members and has all rights of group administrators and members.
+      members. They have all rights of group administrators and members.
     </para>
     <para>
       <command>gpasswd</command> called by
