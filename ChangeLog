@@ -1,5 +1,9 @@
 2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.1.xml: Document that the login.defs file is used.
+
+2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/ENVIRON_FILE.xml: Document the format for
 	comments.
 

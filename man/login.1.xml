@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1989 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -62,7 +62,7 @@
 <!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
 <!ENTITY ULIMIT                SYSTEM "login.defs.d/ULIMIT.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
-<!ENTITY USERGROUPS_ENAB         SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 ]>
 <refentry id='login.1'>
   <!--  $Id$ -->
@@ -361,6 +361,12 @@
 	<term><filename>$HOME/.hushlogin</filename></term>
 	<listitem>
 	  <para>Suppress printing of system messages.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
