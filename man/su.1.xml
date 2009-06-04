@@ -108,7 +108,7 @@
       <envar>$PATH</envar> is reset to <filename>/bin:/usr/bin</filename>
       for normal users, or <filename>/sbin:/bin:/usr/sbin:/usr/bin</filename>
       for the superuser. This may be changed with the
-      <emphasis>ENV_PATH</emphasis> and <emphasis>ENV_SUPATH</emphasis>
+      <option>ENV_PATH</option> and <option>ENV_SUPATH</option>
       definitions in <filename>/etc/login.defs</filename>.
     </para>
 
@@ -162,30 +162,31 @@
 	  <para>The shell that will be invoked.</para>
 	  <para>
 	    The invoked shell is chosen from (highest priority first):
-	    <itemizedlist>
-	      <listitem>
+	    <!--This should be an orderedlist, but lists inside another
+	        list does not work well with current docbook.
+	        - nekral - 2009.06.03 -->
+	    <variablelist>
+	      <varlistentry><term></term><listitem>
 		<para>The shell specified with --shell.</para>
-	      </listitem>
-	      <listitem>
+	      </listitem></varlistentry>
+	      <varlistentry><term></term><listitem>
 		<para>
 		  If <option>--preserve-environment</option> is used, the
 		  shell specified by the <envar>$SHELL</envar> environment
 		  variable.
 		</para>
-	      </listitem>
-	      <listitem>
+	      </listitem></varlistentry>
+	      <varlistentry><term></term><listitem>
 		<para>
 		  The shell indicated in the <filename>/etc/passwd</filename>
 		  entry for the target user.
 		</para>
-	      </listitem>
-	      <listitem>
-		<para>
-		  <filename>/bin/sh</filename> if a shell could not be
-		  found by any above method.
-		</para>
-	      </listitem>
-	    </itemizedlist>
+	      </listitem></varlistentry>
+	      <varlistentry><term></term><listitem>
+		<para><filename>/bin/sh</filename> if a shell could not be
+		found by any above method.</para>
+	      </listitem></varlistentry>
+	    </variablelist>
 	  </para>
 	  <para>
 	    If the target user has a restricted shell (i.e. the shell field of
@@ -203,10 +204,83 @@
 	  <option>--preserve-environment</option>
 	</term>
 	<listitem>
-	  <para>Preserve the current environment.</para>
+	  <para>
+	    Preserve the current environment, except for:
+	    <variablelist>
+	      <varlistentry>
+		<term><envar>$PATH</envar></term>
+		<listitem>
+		  <para>
+		    reset according to the
+		    <filename>/etc/login.defs</filename> options
+		    <option>ENV_PATH</option> or
+		    <option>ENV_SUPATH</option> (see below);
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term><envar>$IFS</envar></term>
+		<listitem>
+		  <para>
+		    reset to
+		    <quote>&lt;space&gt;&lt;tab&gt;&lt;newline&gt;</quote>,
+		    if it was set.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
+	  </para>
 	  <para>
 	    If the target user has a restricted shell, this option has no
 	    effect (unless <command>su</command> is called by root).
+	  </para>
+	  <para>
+	    Note that the default behavior for the environment is the
+	    following:
+	    <variablelist>
+	      <varlistentry><term></term><listitem>
+		  <para>
+		    The <envar>$HOME</envar>, <envar>$SHELL</envar>,
+		    <envar>$USER</envar>, <envar>$LOGNAME</envar>,
+		    <envar>$PATH</envar>, and <envar>$IFS</envar>
+		    environment variables are reset.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry><term></term><listitem>
+		  <para>
+		    If <option>--login</option> is used, the
+		    <envar>$TERM</envar>, <envar>$COLORTERM</envar>,
+		    <envar>$DISPLAY</envar>, and
+		    <envar>$XAUTHORITY</envar> environment variables are
+		    kept if they were set.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry condition="no_pam"><term></term><listitem>
+		  <para>
+		    If <option>--login</option> is used, the
+		    <envar>$TZ</envar>, <envar>$HZ</envar>, and
+		    <envar>$MAIL</envar> environment
+		    variables are set according to the 
+		    <filename>/etc/login.defs</filename>
+		    options <option>ENV_TZ</option>,
+		    <option>ENV_HZ</option>, <option>MAIL_DIR</option>, and
+		    <option>MAIL_FILE</option> (see below).
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry><term></term><listitem>
+		  <para>
+		    Other environment variables might be set by
+		    <phrase condition="no_pam">the
+		    <option>ENVIRON_FILE</option> file (see
+		    below)</phrase><phrase condition="pam">PAM
+		    modules</phrase>.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
 	  </para>
 	</listitem>
       </varlistentry>
@@ -264,6 +338,12 @@
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
@@ -280,7 +360,7 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>
+      </citerefentry>.
     </para>
   </refsect1>
 </refentry>

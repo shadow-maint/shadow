@@ -1,5 +1,12 @@
 2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/su.1.xml: Use <option> for the login.defs options.
+	* man/su.1.xml: Improve the documentation of the su behavior
+	regarding environment variables.
+	* man/su.1.xml: Document that the login.defs file is used.
+
+2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.1.xml: Document that the login.defs file is used.
 
 2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
