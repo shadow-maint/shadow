@@ -272,8 +272,8 @@
 	      </varlistentry>
 	      <varlistentry><term></term><listitem>
 		  <para>
-		    Other environment variables might be set by
-		    <phrase condition="no_pam">the
+		    Other environment variables are deleted, but might be
+		    set by <phrase condition="no_pam">the
 		    <option>ENVIRON_FILE</option> file (see
 		    below)</phrase><phrase condition="pam">PAM
 		    modules</phrase>.
