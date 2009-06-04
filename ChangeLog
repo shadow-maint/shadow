@@ -1,3 +1,8 @@
+2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/login.defs.d/ENVIRON_FILE.xml: Document the format for
+	comments.
+
 2009-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/gpasswd.1.xml: Ease the translation of the refpurpose.

@@ -1,7 +1,7 @@
 <!--
    Copyright (c) 1991 - 1993, Julianne Frances Haugh
    Copyright (c) 1991 - 1993, Chip Rosenthal
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,9 @@
     <para>
       If this file exists and is readable, login environment will be
       read from it.  Every line should be in the form name=value.
+    </para>
+    <para>
+      Lines starting with a # are treated as comment lines and ignored.
     </para>
   </listitem>
 </varlistentry>
