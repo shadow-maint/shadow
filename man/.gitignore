@@ -1,0 +1,7 @@
+.xml2po.mo
+config.xml
+
+*.[0-9]
+
+/po/POTFILES
+/po/stamp-po

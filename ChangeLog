@@ -1,3 +1,8 @@
+2009-06-04  Mike Frysinger  <vapier@gentoo.org>
+
+	* .gitignore, man/.gitignore, src/.gitignore: Added .gitignore
+	files.
+
 2009-06-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/su.1.xml: Use <option> for the login.defs options.
