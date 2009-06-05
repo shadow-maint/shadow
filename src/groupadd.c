@@ -107,19 +107,21 @@ static void check_perms (void);
  */
 static void usage (void)
 {
-	fputs (_("Usage: groupadd [options] GROUP\n"
-	         "\n"
-	         "Options:\n"
-	         "  -f, --force                   force exit with success status if the\n"
-	         "                                specified group already exists\n"
-	         "  -g, --gid GID                 use GID for the new group\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-	         "  -o, --non-unique              allow create group with duplicate\n"
-	         "                                (non-unique) GID\n"
-	         "  -p, --password PASSWORD       use encrypted password for the new group\n"
-	         "  -r, --system                  create a system account\n"
-	         "\n"), stderr);
+	(void) fprintf (stderr,
+	                _("Usage: %s [options] GROUP\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -f, --force                   exit successfully if the group already exists,\n"
+	                "                                and cancel -g if the GID is already used\n"), stderr);
+	(void) fputs (_("  -g, --gid GID                 use GID for the new group\n"), stderr);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
+	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), stderr);
+	(void) fputs (_("  -o, --non-unique              allow to create groups with duplicate\n"
+	                "                                (non-unique) GID\n"), stderr);
+	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), stderr);
+	(void) fputs (_("  -r, --system                  create a system account\n"), stderr);
+	(void) fputs ("\n", stderr);
 	exit (E_USAGE);
 }
 

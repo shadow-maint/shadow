@@ -683,49 +683,42 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fprintf (stderr,
-	         _("Usage: useradd [options] LOGIN\n"
-	         "\n"
-	         "Options:\n"
-	         "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
-	         "                                home directory\n"
-	         "  -c, --comment COMMENT         set the GECOS field for the new user account\n"
-	         "  -d, --home-dir HOME_DIR       home directory for the new user account\n"
-	         "  -D, --defaults                print or save modified default useradd\n"
-	         "                                configuration\n"
-	         "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-	         "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-	         "                                to INACTIVE\n"
-	         "  -g, --gid GROUP               force use GROUP for the new user account\n"
-	         "  -G, --groups GROUPS           list of supplementary groups for the new\n"
-	         "                                user account\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
-	         "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-	         "  -l, --no-log-init             do not add the user to the lastlog and\n"
-	         "                                faillog databases\n"
-	         "  -m, --create-home             create home directory for the new user\n"
-	         "                                account\n"
-	         "  -M, --no-create-home          do not create user's home directory\n"
-	         "                                (overrides /etc/login.defs)\n"
-	         "  -N, --no-user-group           do not create a group with the same name as\n"
-	         "                                the user\n"
-	         "  -o, --non-unique              allow create user with duplicate\n"
-	         "                                (non-unique) UID\n"
-	         "  -p, --password PASSWORD       use encrypted password for the new user\n"
-	         "                                account\n"
-	         "  -r, --system                  create a system account\n"
-	         "  -s, --shell SHELL             the login shell for the new user account\n"
-	         "  -u, --uid UID                 force use the UID for the new user account\n"
-	         "  -U, --user-group              create a group with the same name as the user\n"
-	         "%s"
-	         "\n"),
+	(void) fprintf (stderr,
+	                _("Usage: useradd [options] LOGIN\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
+	                "                                new account\n"), stderr);
+	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), stderr);
+	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), stderr);
+	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), stderr);
+	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), stderr);
+	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), stderr);
+	(void) fputs (_("  -g, --gid GROUP               name or ID of the primary group of the new\n"
+	                "                                account\n"), stderr);
+	(void) fputs (_("  -G, --groups GROUPS           list of supplementary groups of the new\n"
+	                "                                account\n"), stderr);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
+	(void) fputs (_("  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"), stderr);
+	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), stderr);
+	(void) fputs (_("  -l, --no-log-init             do not add the user to the lastlog and\n"
+	                "                                faillog databases\n"), stderr);
+	(void) fputs (_("  -m, --create-home             create the user's home directory\n"), stderr);
+	(void) fputs (_("  -M, --no-create-home          do not create the user's home directory\n"), stderr);
+	(void) fputs (_("  -N, --no-user-group           do not create a group with the same name as\n"
+	                "                                the user\n"), stderr);
+	(void) fputs (_("  -o, --non-unique              allow to create users with duplicate\n"
+	                "                                (non-unique) UID\n"), stderr);
+	(void) fputs (_("  -p, --password PASSWORD       encrypted password of the new account\n"), stderr);
+	(void) fputs (_("  -r, --system                  create a system account\n"), stderr);
+	(void) fputs (_("  -s, --shell SHELL             login shell of the new account\n"), stderr);
+	(void) fputs (_("  -u, --uid UID                 user ID of the new account\n"), stderr);
+	(void) fputs (_("  -U, --user-group              create a group with the same name as the user\n"), stderr);
 #ifdef WITH_SELINUX
-	         _("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n")
-#else
-	         ""
+	(void) fputs (_("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"), stderr);
 #endif
-	         );
+	(void) fputs ("\n", stderr);
 	exit (E_USAGE);
 }
 

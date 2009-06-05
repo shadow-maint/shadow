@@ -1,3 +1,10 @@
+2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c, src/groupmod.c, src/groupadd.c, src/faillog.c:
+	Fix typos. Take this opportunity to split the usage messages into
+	smaller messages (one per option).
+	* src/pwck.c: Fix typo.
+
 2009-06-05  Petri Koistinen  <petri.koistinen@iki.fi>
 
 	* man/passwd.1.xml: The short option for --mindays is -n, not -m.

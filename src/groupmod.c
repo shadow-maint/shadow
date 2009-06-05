@@ -115,15 +115,18 @@ static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 static void usage (void)
 {
-	fputs (_("Usage: groupmod [options] GROUP\n"
-	         "\n"
-	         "Options:\n"
-	         "  -g, --gid GID                 force use new GID by GROUP\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
-	         "  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
-	         "  -p, --password PASSWORD       use encrypted password for the new password\n"
-	         "\n"), stderr);
+	(void) fprintf (stderr,
+	                _("Usage: %s [options] GROUP\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -g, --gid GID                 change the group ID to GID\n"), stderr);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
+	(void) fputs (_("  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"), stderr);
+	(void) fputs (_("  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"), stderr);
+	(void) fputs (_("  -p, --password PASSWORD       change the password to this (encrypted)\n"
+	                "                                PASSWORD\n"), stderr);
+	(void) fputs ("\n", stderr);
 	exit (E_USAGE);
 }
 

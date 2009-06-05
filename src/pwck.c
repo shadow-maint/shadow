@@ -154,7 +154,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (sort_mode && read_only) {
-		fprintf (stderr, _("%s: -s and -r are incompatibile\n"), Prog);
+		fprintf (stderr, _("%s: -s and -r are incompatible\n"), Prog);
 		exit (E_USAGE);
 	}
 

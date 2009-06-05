@@ -71,19 +71,21 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 static void usage (void)
 {
-	fputs (_("Usage: faillog [options]\n"
-	         "\n"
-	         "Options:\n"
-	         "  -a, --all                     display faillog records for all users\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -l, --lock-time SEC           after failed login lock account to SEC seconds\n"
-	         "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-	         "  -r, --reset                   reset the counters of login failures\n"
-	         "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-	         "  -u, --user LOGIN              display faillog record or maintains failure\n"
-	         "                                counters and limits (if used with -r, -m or -l\n"
-	         "                                options) only for user with LOGIN\n"
-	         "\n"), stderr);
+	(void) fprintf (stderr,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                "faillog");
+	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), stderr);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
+	(void) fputs (_("  -l, --lock-time SEC           after failed login lock account for SEC seconds\n"), stderr);
+	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), stderr);
+	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), stderr);
+	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), stderr);
+	(void) fputs (_("  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
+	                "                                counters and limits (if used with -r, -m,\n"
+	                "                                or -l) only for the specified LOGIN(s)\n"), stderr);
+	(void) fputs ("\n", stderr);
 	exit (E_USAGE);
 }
 
