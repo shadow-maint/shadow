@@ -245,7 +245,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-m</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
+	  <option>-n</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
