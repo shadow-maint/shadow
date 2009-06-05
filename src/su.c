@@ -559,7 +559,8 @@ int main (int argc, char **argv)
 	 * (note: in the case of a subsystem, the shell will be restricted,
 	 *        and this won't be executed on the first pass)
 	 */
-	if (fakelogin && change_environment) {
+	if (change_environment) {
+		if (fakelogin) {
 		/*
 		 * The terminal type will be left alone if it is present in
 		 * the environment already.
@@ -595,6 +596,7 @@ int main (int argc, char **argv)
 		if (NULL != cp) {
 			addenv (cp, NULL);	/* set the default $HZ, if one */
 		}
+#endif				/* !USE_PAM */
 
 		/*
 		 * Also leave DISPLAY and XAUTHORITY if present, else
@@ -608,7 +610,7 @@ int main (int argc, char **argv)
 		if (NULL != cp) {
 			addenv ("XAUTHORITY", cp);
 		}
-#endif				/* !USE_PAM */
+		}
 	} else {
 		while (NULL != *envp) {
 			addenv (*envp, NULL);

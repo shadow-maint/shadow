@@ -1,5 +1,11 @@
 2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/su.c: Preserve the DISPLAY and XAUTHORITY environment
+	variables, even with --login. This was not the case before in the
+	PAM version.
+
+2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c, src/groupmod.c, src/groupadd.c, src/faillog.c:
 	Fix typos. Take this opportunity to split the usage messages into
 	smaller messages (one per option).
