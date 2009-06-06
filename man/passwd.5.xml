@@ -127,6 +127,16 @@
 	  <para>optional encrypted password file</para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/passwd-</filename></term>
+	<listitem>
+	  <para>Backup file for /etc/passwd.</para>
+	  <para>
+	    Note that this file is used by the tools of the shadow
+	    toolsuite, but not by all user and password management tools.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 

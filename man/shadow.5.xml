@@ -241,6 +241,16 @@
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/shadow-</filename></term>
+	<listitem>
+	  <para>Backup file for /etc/shadow.</para>
+	  <para>
+	    Note that this file is used by the tools of the shadow
+	    toolsuite, but not by all user and password management tools.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 

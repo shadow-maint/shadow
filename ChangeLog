@@ -1,5 +1,10 @@
 2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/passwd.5.xml, man/shadow.5.xml: Document the passwd- and
+	shadow- files.
+
+2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/su.c: Preserve the DISPLAY and XAUTHORITY environment
 	variables, even with --login. This was not the case before in the
 	PAM version.
