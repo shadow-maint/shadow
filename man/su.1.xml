@@ -249,11 +249,18 @@
 	      </varlistentry>
 	      <varlistentry><term></term><listitem>
 		  <para>
+		    If <option>--login</option> is not used, the
+		    environment is copied, except for the variables above.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry><term></term><listitem>
+		  <para>
 		    If <option>--login</option> is used, the
 		    <envar>$TERM</envar>, <envar>$COLORTERM</envar>,
 		    <envar>$DISPLAY</envar>, and
 		    <envar>$XAUTHORITY</envar> environment variables are
-		    kept if they were set.
+		    copied if they were set.
 		  </para>
 		</listitem>
 	      </varlistentry>
@@ -270,13 +277,17 @@
 		  </para>
 		</listitem>
 	      </varlistentry>
-	      <varlistentry><term></term><listitem>
+	      <varlistentry condition="no_pam"><term></term><listitem>
 		  <para>
-		    Other environment variables are deleted, but might be
-		    set by <phrase condition="no_pam">the
-		    <option>ENVIRON_FILE</option> file (see
-		    below)</phrase><phrase condition="pam">PAM
-		    modules</phrase>.
+		    If <option>--login</option> is used, other environment
+		    variables might be set by the
+		    <option>ENVIRON_FILE</option> file (see below).
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry condition="pam"><term></term><listitem>
+		  <para>
+		    Other environment might be set by PAM modules.
 		  </para>
 		</listitem>
 	      </varlistentry>

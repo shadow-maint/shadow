@@ -559,8 +559,7 @@ int main (int argc, char **argv)
 	 * (note: in the case of a subsystem, the shell will be restricted,
 	 *        and this won't be executed on the first pass)
 	 */
-	if (change_environment) {
-		if (fakelogin) {
+	if (change_environment && fakelogin) {
 		/*
 		 * The terminal type will be left alone if it is present in
 		 * the environment already.
@@ -609,7 +608,6 @@ int main (int argc, char **argv)
 		cp = getenv ("XAUTHORITY");
 		if (NULL != cp) {
 			addenv ("XAUTHORITY", cp);
-		}
 		}
 	} else {
 		while (NULL != *envp) {
