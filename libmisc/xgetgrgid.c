@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007       , Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,6 @@
 #define ARG_TYPE	gid_t
 #define ARG_NAME	gid
 #define DUP_FUNCTION	__gr_dup
-#define MAX_LENGTH	0x8000
 #define HAVE_FUNCTION_R (defined HAVE_GETGRGID_R)
 
 #include "xgetXXbyYY.c"

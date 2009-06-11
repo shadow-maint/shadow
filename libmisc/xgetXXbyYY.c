@@ -79,7 +79,7 @@
 		exit (13);
 	}
 
-	do {
+	while (true) {
 		int status;
 		LOOKUP_TYPE *resbuf = NULL;
 		buffer = (char *)realloc (buffer, length);
@@ -106,8 +106,14 @@
 			return NULL;
 		}
 
-		length *= 4;
-	} while (length < MAX_LENGTH);
+		if (length <= ((size_t)-1 / 4)) {
+			length *= 4;
+		} else if (length == (size_t) -1) {
+			break;
+		} else {
+			length = (size_t) -1;
+		}
+	}
 
 	free(buffer);
 	free(result);

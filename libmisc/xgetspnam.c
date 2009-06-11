@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,6 @@
 #define ARG_TYPE	const char *
 #define ARG_NAME	name
 #define DUP_FUNCTION	__spw_dup
-#define MAX_LENGTH	0x8000
 #define HAVE_FUNCTION_R (defined HAVE_GETSPNAM_R)
 
 #include "xgetXXbyYY.c"

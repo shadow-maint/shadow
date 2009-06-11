@@ -1,4 +1,12 @@
-2009-06-06  Nicolas François  <nicolas.francois@centraliens.net>
+2009-06-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/xgetXXbyYY.c, libmisc/xgetpwnam.c, libmisc/xgetgrnam.c,
+	libmisc/xgetpwuid.c, libmisc/xgetgrgid.c, libmisc/xgetspnam.c: Do
+	not limit the size of the buffer to hold the group or user
+	structure. It used to be limited to 16k, which caused issues with
+	groups having many users.
+
+2009-06-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c, man/su.1.xml: The default behavior (without -p or
 	--login) is to copy most of the environment variables. Revert a
