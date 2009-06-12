@@ -1,5 +1,12 @@
 2009-06-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/gshadow.c: Removed limitation on the length of the gshadow
+	lines.
+	* lib/gshadow.c: Compare the result of fgetsx() with the provided
+	buffer instead of NULL.
+
+2009-06-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/xgetXXbyYY.c, libmisc/xgetpwnam.c, libmisc/xgetgrnam.c,
 	libmisc/xgetpwuid.c, libmisc/xgetgrgid.c, libmisc/xgetspnam.c: Do
 	not limit the size of the buffer to hold the group or user

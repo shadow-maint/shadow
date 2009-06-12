@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,6 @@
 #include "prototypes.h"
 #include "defines.h"
 static /*@null@*/FILE *shadow;
-static char sgrbuf[BUFSIZ * 4];
 static /*@null@*//*@only@*/char **members = NULL;
 static size_t nmembers = 0;
 static /*@null@*//*@only@*/char **admins = NULL;
@@ -131,12 +130,25 @@ void endsgent (void)
 
 /*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *string)
 {
+	static char *sgrbuf = NULL;
+	static size_t sgrbuflen = 0;
+
 	char *fields[FIELDS];
 	char *cp;
 	int i;
+	size_t len = strlen (string) + 1;
 
-	strncpy (sgrbuf, string, sizeof sgrbuf - 1);
-	sgrbuf[sizeof sgrbuf - 1] = '\0';
+	if (len > sgrbuflen) {
+		char *buf = (char *) realloc (sgrbuf, sizeof (char) * len);
+		if (NULL == buf) {
+			return NULL;
+		}
+		sgrbuf = buf;
+		sgrbuflen = len;
+	}
+
+	strncpy (sgrbuf, string, len);
+	sgrbuf[len-1] = '\0';
 
 	cp = strrchr (sgrbuf, '\n');
 	if (NULL != cp) {
@@ -161,7 +173,7 @@ void endsgent (void)
 	 * the line is invalid.
 	 */
 
-	if ((NULL != cp) || (i != FIELDS))
+	if ((NULL != cp) || (i != FIELDS)) {
 #ifdef	USE_NIS
 		if (!IS_NISCHAR (fields[0][0])) {
 			return 0;
@@ -171,6 +183,7 @@ void endsgent (void)
 #else
 		return 0;
 #endif
+	}
 
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
@@ -199,20 +212,48 @@ void endsgent (void)
 
 /*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE * fp)
 {
-	char buf[sizeof sgrbuf];
+	static size_t buflen = 0;
+	static char *buf = NULL;
+
 	char *cp;
+	struct sgrp *ret;
+
+	if (0 == buflen) {
+		buf = (char *) malloc (BUFSIZ);
+		if (NULL == buf) {
+			return NULL;
+		}
+	}
 
 	if (NULL == fp) {
-		return (0);
+		return NULL;
 	}
 
 #ifdef	USE_NIS
-	while (fgetsx (buf, (int) sizeof buf, fp) != (char *) 0)
+	while (fgetsx (buf, (int) sizeof buf, fp) == buf)
 #else
-	if (fgetsx (buf, (int) sizeof buf, fp) != (char *) 0)
+	if (fgetsx (buf, (int) sizeof buf, fp) == buf)
 #endif
 	{
-		cp = strchr (buf, '\n');
+		while (   ((cp = strrchr (buf, '\n')) == NULL)
+		       && (feof (fp) == 0)) {
+			size_t len;
+
+			cp = (char *) realloc (buf, buflen*2);
+			if (NULL == cp) {
+				return NULL;
+			}
+			buf = cp;
+			buflen *= 2;
+
+			len = strlen (buf);
+			if (fgetsx (&buf[len],
+			            (int) (buflen - len),
+			            fp) != &buf[len]) {
+				return NULL;
+			}
+		}
+		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
 		}
@@ -223,7 +264,7 @@ void endsgent (void)
 #endif
 		return (sgetsgent (buf));
 	}
-	return 0;
+	return NULL;
 }
 
 /*
@@ -235,7 +276,6 @@ void endsgent (void)
 #ifdef	USE_NIS
 	bool nis_1_group = false;
 	struct sgrp *val;
-	char buf[BUFSIZ];
 #endif
 	if (NULL == shadow) {
 		setsgent ();
@@ -334,7 +374,6 @@ void endsgent (void)
 	struct sgrp *sgrp;
 
 #ifdef	USE_NIS
-	char buf[BUFSIZ];
 	static char save_name[16];
 	int nis_disabled = 0;
 #endif
