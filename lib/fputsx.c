@@ -45,7 +45,7 @@
 	char *ep;
 
 	while (cnt > 0) {
-		if (fgets (cp, cnt, f) == 0) {
+		if (fgets (cp, cnt, f) != cp) {
 			if (cp == buf) {
 				return 0;
 			} else {
