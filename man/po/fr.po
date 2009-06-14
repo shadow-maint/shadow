@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2009-05-22 13:15+0200\n"
-"PO-Revision-Date: 2009-05-22 15:30+0200\n"
+"PO-Revision-Date: 2009-06-14 14:46+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -8097,7 +8097,7 @@ msgstr ""
 
 #: chpasswd.8.xml:89(para)
 msgid "The supplied passwords must be in clear-text."
-msgstr "Les mots de passe doivent être forunis en clair."
+msgstr "Les mots de passe doivent être fournis en clair."
 
 #: chpasswd.8.xml:92(para)
 msgid ""

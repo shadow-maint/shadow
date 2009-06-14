@@ -1,5 +1,9 @@
 2009-06-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Fixed typo (forunis)
+
+2009-06-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/fputsx.c: Compare the result of fgets() with the provided
 	buffer instead of NULL.
 
