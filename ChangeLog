@@ -1,3 +1,10 @@
+2009-06-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/pwck.8.xml: The shadow file is optional.
+	* man/pwck.8.xml: Updated description of the checks. Added
+	description of the shadow checks.
+	* man/pwck.8.xml: Updated description of the checks.
+
 2009-06-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/fr.po: Fixed typo (forunis)

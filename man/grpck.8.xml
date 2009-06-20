@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1992 - 1993, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -69,11 +69,11 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>grpck</command> command verifies the integrity of the
-      system authentication information. All entries in
+      groups information. It checks that all entries in
       <filename>/etc/group</filename> <phrase condition="gshadow">and
       <filename>/etc/gshadow</filename></phrase>
-      are checked to see that the entry has the proper format and valid data
-      in each field. The user is prompted to delete entries that are
+      have the proper format and contain valid data.
+      The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
     </para>
 
@@ -84,16 +84,33 @@
 	<para>the correct number of fields</para>
       </listitem>
       <listitem>
-	<para>a unique group name</para>
+	<para>a unique and valid group name</para>
       </listitem>
       <listitem>
-	<para>a valid list of members and administrators</para>
+	<para>
+	  a valid group identifier
+	  <phrase condition="gshadow"> (<filename>/etc/group</filename>
+	  only)</phrase>
+	</para>
+      </listitem>
+      <listitem>
+	<para>
+	  a valid list of members
+	  <phrase condition="gshadow"> and administrators</phrase>
+	</para>
+      </listitem>
+      <listitem condition="gshadow">
+	<para>
+	  a corresponding entry in the <filename>/etc/gshadow</filename>
+	  file (respectively <filename>/etc/group</filename> for the
+	  <filename>gshadow</filename> checks)
+	</para>
       </listitem>
     </itemizedlist>
 
     <para>
       The checks for correct number of fields and unique group name are
-      fatal. If the entry has the wrong number of fields, the user will be
+      fatal. If an entry has the wrong number of fields, the user will be
       prompted to delete the entire line. If the user does not answer
       affirmatively, all further checks are bypassed. An entry with a
       duplicated group name is prompted for deletion, but the remaining
@@ -103,10 +120,12 @@
     </para>
 
     <para>
-      The commands which operate on the <filename>/etc/group</filename> file
+      The commands which operate on the <filename>/etc/group</filename>
+      <phrase condition="no_gshadow">file</phrase><phrase
+      condition="gshadow">and <filename>/etc/gshadow</filename> files</phrase>
       are not able to alter corrupted or duplicated entries. 
       <command>grpck</command> should be used in those circumstances to
-      remove the offending entry.
+      remove the offending entries.
     </para>
   </refsect1>
 
