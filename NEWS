@@ -9,6 +9,10 @@ shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
   * Preserve the DISPLAY and XAUTHORITY environment variables. This was
     only the case in the non PAM enabled versions.
 
+*** translation
+  * The Finnish translation of passwd(1) was outdated and is no more
+    distributed.
+
 shadow-4.1.4 -> shadow-4.1.4.1						2009-05-22
 
 - login

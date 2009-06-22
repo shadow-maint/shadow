@@ -1,5 +1,10 @@
 2009-06-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/fi/Makefile.am: Stop distributing the Finnish translation of
+	passwd.1 (outdated).
+
+2009-06-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/pwck.8.xml: The shadow file is optional.
 	* man/pwck.8.xml: Updated description of the checks. Added
 	description of the shadow checks.
