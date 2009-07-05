@@ -1,3 +1,7 @@
+2009-07-05  Piarres Beobide  <pi+debian@beobide.net>
+
+	* po/eu.po: Updated Basque translation.
+
 2009-06-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/fi/Makefile.am: Stop distributing the Finnish translation of

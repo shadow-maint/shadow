@@ -1,25 +1,25 @@
 # translation of eu.po to Euskara
-# Copyright (C) 2004, 2005, 2006, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 #
-# Piarres Beobide <pi@beobide.net>, 2004, 2005, 2006, 2008.
+# Piarres Beobide <pi@beobide.net>, 2004, 2005, 2006, 2008, 2009.
 # Inaki Larranga Murgoitio <dooteo@euskalgnu.org>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-05-22 13:14+0200\n"
-"PO-Revision-Date: 2008-03-31 12:50+0200\n"
+"PO-Revision-Date: 2009-07-03 11:06+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
-"Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
+"Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
 "'%s' izeneko sarrera anitz %s-en. Mesedez konpondu pwck edo grpck "
 "erabiliaz.\n"
@@ -30,7 +30,7 @@ msgstr "libcrypt-ek onartzen ez duen kriptografia metodoa? (%s)\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%s'"
-msgstr ""
+msgstr "konfigurazio errorea - ezin da %s balioa analizatu: '%s'"
 
 msgid "Could not allocate space for config info.\n"
 msgstr "Ezin izan da lekua esleitu, konfigurazioaren informaziorako.\n"
@@ -71,7 +71,7 @@ msgid "  Choose a new password."
 msgstr "  Aukeratu pasahitz berria."
 
 msgid "You must change your password."
-msgstr ""
+msgstr "Zure pasahitza aldatu behar duzu."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
@@ -84,17 +84,15 @@ msgid "Your password will expire today."
 msgstr "Pasahitza gaur iraungi egingo da."
 
 msgid "Cannot open audit interface - aborting.\n"
-msgstr ""
+msgstr "Ezin da auditatzeko interfazea ireki - uzten.\n"
 
-#, fuzzy, c-format
-#| msgid "Unable to change tty %s"
+#, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr "Ezin da %s tty aldatu"
+msgstr "Ezin da tty sarrera-estandar modu edo jabea aldatu: %s"
 
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
+#, c-format
 msgid "%s: failed to unlock %s\n"
-msgstr "%s: eremu luzegiak\n"
+msgstr "%s: huts %s desblokeatzean\n"
 
 msgid "Environment overflow\n"
 msgstr "Inguruneak gainezka egin du\n"
@@ -117,18 +115,15 @@ msgstr[1] ""
 "%d hutsegite azken saio hasieratik.\n"
 "Azkena %s izan zen %s(e)n.\n"
 
-#, fuzzy, c-format
-#| msgid "Can't get unique GID (no more available GIDs)\n"
+#, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
-msgstr "%s: ezin da GID bakarra lortu (ez dago GID erabilgarri gehiago)\n"
+msgstr "%s: Ezin da GID bakarra lortu (ez dago GID erabilgarri gehiago)\n"
 
-#, fuzzy, c-format
-#| msgid "Can't get unique UID (no more available UIDs)\n"
+#, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
-msgstr "%s: ezin da UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
+msgstr "%s: Ezin da sistema UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
 
-#, fuzzy, c-format
-#| msgid "Can't get unique UID (no more available UIDs)\n"
+#, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: ezin da UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
 
@@ -177,10 +172,8 @@ msgstr "passwd: pam_start() huts egin du, errorea: %d\n"
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#, fuzzy
-#| msgid "Password changed."
 msgid "passwd: password unchanged\n"
-msgstr "Pasahitza aldatuta."
+msgstr "passwd: pasahitza ez da aldatu\n"
 
 msgid "passwd: password updated successfully\n"
 msgstr "passwd: pasahitza ongi eguneratu da\n"
@@ -214,7 +207,7 @@ msgstr "Baliogabeko erro direktorioa '%s'\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
-msgstr "Ezin da erro direktorioa '%s'-ra aldatu.\n"
+msgstr "Ezin da erro direktorioa '%s'-ra aldatu\n"
 
 msgid "Unable to determine your tty name."
 msgstr "Ezin da zure tty izena zehaztu."
@@ -228,28 +221,8 @@ msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) huts egin du\n"
 
 msgid "No"
-msgstr ""
+msgstr "Ez"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: chage [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --list                    show account aging information\n"
-#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "\n"
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -322,7 +295,7 @@ msgid "Password inactive\t\t\t\t\t: "
 msgstr "Pasahitza ezgaitu egingo da\t\t\t\t\t: "
 
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Kontua iraungitzeko data\t\t\t\t\t: "
+msgstr "Kontua iraungitzeko data\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
@@ -360,25 +333,21 @@ msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM autentifikazioak huts egin du\n"
 
-#, fuzzy, c-format
-#| msgid "Cannot lock the password file; try again later.\n"
+#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
-msgstr "Ezin izan da pasahitzen fitxategia blokeatu; saiatu geroago.\n"
+msgstr "%s: ezin da %s blokeatu; saiatu geroago.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "%s: cannot open %s\n"
-msgstr "%s: ezin da %s fitxategia ireki\n"
+msgstr "%s: ezin da %s ireki\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failure forking: %s\n"
+#, c-format
 msgid "%s: failure while writing changes to %s\n"
-msgstr "%s: huts zatitzerakoan: %s\n"
+msgstr "%s: huts %s-en aldaketak idazterakoan\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
+#, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: huts baimenak kentzerakoan (%s)\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
@@ -388,10 +357,9 @@ msgstr "%s: ezin da itzalpeko (shadow) pasahitz fitxategia ez dago\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: huts baimenak kentzerakoan (%s)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: `%s' erabiltzailea ez da %s-en existitzen\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -416,10 +384,9 @@ msgstr "Erabilera: %s [-f izen_osoa] [-r gela_zb] [-w lan_tlf] [-h etxe_tlf]\n"
 msgid "Full Name"
 msgstr "Izen osoa"
 
-#, fuzzy, c-format
-#| msgid "%s: %s\n"
+#, c-format
 msgid "\t%s: %s\n"
-msgstr "%s: %s\n"
+msgstr "\t%s: %s\n"
 
 msgid "Room Number"
 msgstr "Gela zenbakia"
@@ -438,7 +405,7 @@ msgstr "Ezin izan da IDa root-era aldatu.\n"
 
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
-msgstr ""
+msgstr "%s: ASCII ez diren karaktereak dituen izena: '%s'\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -446,7 +413,7 @@ msgstr "%s: izen baliogabea: '%s'\n"
 
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
-msgstr ""
+msgstr "%s: ASCII ez diren karaktereak dituen gela zenbakia: '%s'\n"
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -460,19 +427,17 @@ msgstr "%s: laneko tlf baliogabea: '%s'\n"
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: etxeko tlf baliogabea: '%s'\n"
 
-#, fuzzy, c-format
-#| msgid "%s: '%s' contains illegal characters\n"
+#, c-format
 msgid "%s: '%s' contains non-ASCII characters\n"
-msgstr "%s: '%s'(e)k karaktere baliogabeak ditu\n"
+msgstr "%s: '%s'(e)k ASCII ez diren karaktereak ditu\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s'(e)k karaktere baliogabeak ditu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' does not exist\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: '%s' erabiltzailea ez da existitzen\n"
 
 #, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
@@ -506,7 +471,7 @@ msgstr ""
 "\n"
 "Aukerak:\n"
 "  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
-"  -e, .- encrypted              emandako pasahitzak enkripatzen dira\n"
+"  -e, --encrypted              emandako pasahitzak enkripatzen dira\n"
 "  -h, --help                    laguntzako mezu hau erakutsi eta irten\n"
 "                                egiten da\n"
 "  -m, --md5                     erabili MD5 enkriptatze algoritmoa ,\n"
@@ -520,10 +485,9 @@ msgstr ""
 "  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
 "                                SHA erronda kopurua\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+#, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
-msgstr "%s: %s bandera BAKARRIK %s banderarekin onartzen da\n"
+msgstr "%s: %s bandera bakarrik %s banderarekin onartzen da\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
@@ -541,15 +505,13 @@ msgstr "%s: %d. lerroa: lerro luzegia\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: %d. lerroa: pasahitz berria falta da\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
-msgstr "%s: %s taldea ez da existitzen\n"
+msgstr "%s: %d lerroa: '%s' taldea ez da existitzen\n"
 
-#, fuzzy, c-format
-#| msgid "%s: line %d: can't update entry\n"
+#, c-format
 msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: %d lerroa: ezin da sarrera eguneratu\n"
+msgstr "%s: %d lerroa: huts %s sarrera berria prestatzean '%s'\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
@@ -561,37 +523,34 @@ msgid ""
 "\n"
 "Options:\n"
 msgstr ""
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
 
 #, c-format
 msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr ""
+msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
+msgstr "  -e, --encrypted               emandako pasahitzak zifraturik daude\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
+msgstr "  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
-"                                SHA erronda kopurua\n"
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: `(%d lerroa, %s erabiltzailea) pasahitza ez da aldatu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: %d lerroa: '%s' erabiltzailea ez da existitzen\n"
 
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
@@ -611,10 +570,9 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Saio-hasierako shell-a"
 
-#, fuzzy, c-format
-#| msgid "You may not change the shell for %s.\n"
+#, c-format
 msgid "You may not change the shell for '%s'.\n"
-msgstr "Ez zenuke %s(r)en shell-a aldatu behar.\n"
+msgstr "Ez zenuke '%s'-(r)en shell-a aldatu behar.\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
@@ -624,33 +582,13 @@ msgstr "%s(r)en saio-hasierako shell-a aldatzen\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: baliogabeko sarrera: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s is an invalid shell.\n"
+#, c-format
 msgid "%s: %s is an invalid shell.\n"
-msgstr "%s shell baliogabea da.\n"
+msgstr "%s: %s shell baliogabea da.\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Erabilera: expiry {-f|-c}\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: faillog [options]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     display faillog records for all users\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -l, --lock-time SEC           after failed login lock accout to SEC "
-#| "seconds\n"
-#| "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-#| "  -r, --reset                   reset the counters of login failures\n"
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
-#| "  -u, --user LOGIN              display faillog record or maintains "
-#| "failure\n"
-#| "                                counters and limits (if used with -r, -m "
-#| "or -l\n"
-#| "                                options) only for user with LOGIN\n"
-#| "\n"
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -675,9 +613,7 @@ msgstr ""
 "  -a, --all                     erabiltzaile guztien faillog-en\n"
 "                                erregistroak bistaratzen ditu\n"
 "  -h, --help                    laguntzako mezu hau bistarazi eta irten\n"
-"                                egiten da\n"
-"  -l, --lock-time SEG           saio-hasieran hutsegin ondoren kontua "
-"zenbat\n"
+"  -l, --lock-time SEG           saio-hasieran hutsegin ondoren kontua zenbat\n"
 "                                segundutan blokeatuta egongo den\n"
 "  -m, --maximum GEH             saio-hasierako GEHiengo hutsegite kopurua\n"
 "                                ezartzeko\n"
@@ -688,20 +624,19 @@ msgstr ""
 "  -u, --user SAIOA              faillog-en erregistroak bistaratzeko edo\n"
 "                                hutsegiteen kontatzailea eta ERABILTZAILEA\n"
 "                                izeneko erabiltzailearen(-r, -m edo -l\n"
-"                                aukerekin erabiltzen bada) mantentzeko.\n"
+"                                aukerekin erabiltzen bada) mantentzeko\n"
 "\n"
 
 #, c-format
 msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+msgstr "huts-erregistroa: Huts %lu UID-arentat sarrera eskuratzean\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Saio-hasiera    Hutsegiteak Gehienezkoa Azkena     Aktiboa\n"
 
-#, fuzzy, c-format
-#| msgid " [%lds left]"
+#, c-format
 msgid " [%lus left]"
-msgstr " [%lds falta]"
+msgstr " [%lus falta]"
 
 #, c-format
 msgid " [%lds lock]"
@@ -709,29 +644,27 @@ msgstr " [%lds blokeatuta]"
 
 #, c-format
 msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
+msgstr "huts-erregistroa: Errorea %lu UIDaren huts kontua berrabiaraztean\n"
 
 #, c-format
 msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
+msgstr "huts-erregistroa: Huts %lu UIDarentzat max ezartzean\n"
 
 #, c-format
 msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+msgstr "huts-erregistroa: Huts %lu UIDarentzat blokeo-ordua ezartzean\n"
 
-#, fuzzy, c-format
-#| msgid "Unknown user or range: %s\n"
+#, c-format
 msgid "lastlog: Unknown user or range: %s\n"
-msgstr "Erabiltzaile edo eremu ezezaguna: %s\n"
+msgstr "azken-erregistroa: Eremu edo erabiltzaile ezezaguna: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s: ezin da %s fitxategia ireki\n"
+msgstr "huts-erregistroa: Ezin da %s ireki: %s\n"
 
 #, c-format
 msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+msgstr "huts-erregistroa: Ezinda %s tamaina eskuratu: %s\n"
 
 #, c-format
 msgid ""
@@ -746,31 +679,40 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"Erabilera: %s [aukera] TALDEA\n"
+"\n"
+"Aukerak:\n"
+"  -a, --add ERAB                Gehitu ERABiltzailea TALDEra\n"
+"  -d, --delete ERAB             kendu ERABiltzailea TALDEtik\n"
+"  -r, --remove-password         TALDEaren pasahitaz kendu\n"
+"  -R, --restrict                mugatu sarrera TALDEra bere partaideetara\n"
+"  -M, --members ERAB,...        ezarri TALDEaren partaideen zerrenda\n"
+"%s\n"
+"\n"
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
+"  -A, --administrators ADMIN,...\n"
+"                                ezarri TALDEaren kudeatzaile zerrenda\n"
+"-A eta -M auekrekin kenduta, aukerak ezin dira nahastu.\n"
 
-#, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "The options cannot be combined.\n"
-msgstr "%s(r)en pasahitzak ezin dira aldatu.\n"
+msgstr "Aukera hauek ezin dira nahastu.\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: -A erabiltzeko itzalpeko talde-pasahitza eskatzen da\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: group '%s' does not exist in %s\n"
-msgstr "%s: %s taldea ez da existitzen\n"
+msgstr "%s: '%s' taldea ez da existitzen %s-(e)n\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failure forking: %s\n"
+#, c-format
 msgid "%s: failure while closing read-only %s\n"
-msgstr "%s: huts zatitzerakoan: %s\n"
+msgstr "%s: huts irakurketa-soileko %s ixtean\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -797,10 +739,9 @@ msgstr "%s erabiltzailea %s taldean gehitzen\n"
 msgid "Removing user %s from group %s\n"
 msgstr "%s erabiltzailea %s taldetik kentzen\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: '%s' erabiltzailea ez da existitzen '%s'-ko partaide\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -836,66 +777,56 @@ msgstr ""
 "  -r, --system                  sistema kontu bat sortu\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s is not a valid group name\n"
+#, c-format
 msgid "%s: '%s' is not a valid group name\n"
-msgstr "%s: %s ez da baliozko talde-izena\n"
+msgstr "%s: '%s' ez da baliozko talde-izena\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid group name `%s'\n"
+#, c-format
 msgid "%s: invalid group ID '%s'\n"
-msgstr "%s: `%s' talde izen baliogabea\n"
+msgstr "%s: '%s' talde ID baliogabea\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: -K KEY=BALIOA eskatzen du\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s exists\n"
+#, c-format
 msgid "%s: group '%s' already exists\n"
-msgstr "%s: %s taldea badago\n"
+msgstr "%s: '%s' taldea badago dagoeneko\n"
 
-#, fuzzy, c-format
-#| msgid "Member already exists\n"
+#, c-format
 msgid "%s: GID '%lu' already exists\n"
-msgstr "Partaidea dagoeneko badago\n"
+msgstr "%s: '%lu' GIDa badago dagoeneko\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Erabilera: groupdel taldea\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
+#, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
-msgstr "%s: ezin da %s direktorioa %s gisa izenez aldatu\n"
+msgstr "%s: ezin da '%s' sarrera %s-tik kendu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+#, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
-msgstr "%s: Ezin da '%s' erabiltzailearen talde nagusia %u-tik %u-ra aldatu.\n"
+msgstr "%s: Ezin da '%s' erabiltzailearen talde nagusia kendu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
+#, c-format
 msgid "%s: group '%s' does not exist\n"
-msgstr "%s: %s taldea ez da existitzen\n"
+msgstr "%s: '%s' taldea ez da existitzen\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group '%s' is a NIS group.\n"
+#, c-format
 msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: taldea '%s' NIS talde bat da.\n"
+msgstr "%s: '%s' taldea NIS talde bat da\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s NIS nagusia da\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s is a NIS user\n"
+#, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s:  %s erabiltzailea NIS erabiltzaile bat da\n"
+msgstr "%s:  '%s' erabiltzailea '%s' taldeko partaide da dagoeneko\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Out of memory. Cannot update the group database.\n"
+#, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: memoriarik ez. Ezin da talde datubasea eguneratu\n"
+msgstr "%s: memoriarik ez. Ezin da %s eguneratu.\n"
 
 msgid ""
 "Usage: groupmems [options] [action]\n"
@@ -913,14 +844,26 @@ msgid ""
 "  -l, --list                    list the members of the group\n"
 "\n"
 msgstr ""
+"Erabilera: groupmems [aukerak] [ekintza]\n"
+"\n"
+"Aukerak:\n"
+"  -g, --group groupname         aldatu talde-izena erabiltzailearen taldea ordez\n"
+"                                (root bakarrik)\n"
+"\n"
+"Ekintzak:\n"
+"  -a, --add erabiltzailea            gehitu erabiltzaile-izena taldearen partaideetara\n"
+"  -d, --delete erabiltzailea         kendu erabiltzaile-izena taldearen partaideetatik\n"
+"  -p, --purge                   garbitu talde baten partaide guztiak\n"
+"  -l, --list                    taldearen partaideak zerrendatu\n"
+"\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
-msgstr ""
+msgstr "%s: zure talde-izena ez da erabiltzaile-izenaren berdina\n"
 
 #, c-format
 msgid "%s: only root can use the -g/--group option\n"
-msgstr ""
+msgstr "%s: root-ek bakarrik erabili dezake -g/--group aukera\n"
 
 msgid ""
 "Usage: groupmod [options] GROUP\n"
@@ -947,10 +890,9 @@ msgstr ""
 "berrirako\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid group name `%s'\n"
+#, c-format
 msgid "%s: invalid group name '%s'\n"
-msgstr "%s: `%s' talde izen baliogabea\n"
+msgstr "%s: '%s' talde izen baliogabea\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
@@ -986,10 +928,9 @@ msgstr "bikoiztu taldearen sarrera"
 msgid "invalid group name '%s'\n"
 msgstr "'%s' baliogabeko talde-izena\n"
 
-#, fuzzy, c-format
-#| msgid "invalid group name '%s'\n"
+#, c-format
 msgid "invalid group ID '%lu'\n"
-msgstr "'%s' baliogabeko talde-izena\n"
+msgstr "'%lu' talde ID baliogabea\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
@@ -1003,15 +944,15 @@ msgstr "'%s' kidea ezabatu? "
 msgid "no matching group file entry in %s\n"
 msgstr "ez dago bat datorren talde fitxategi sarrerarik %s-(e)n\n"
 
-#, fuzzy, c-format
-#| msgid "add group '%s' in %s ?"
+#, c-format
 msgid "add group '%s' in %s? "
-msgstr "'%s' taldea %s(e)n gehitu?"
+msgstr "'%s' taldea %s(e)n gehitu? "
 
 #, c-format
-msgid ""
-"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgid "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"%s taldeak %s-n sarrera bat du, baina %s-ko pasahitza eremua ez dago 'x' "
+"bezala ezarririk\n"
 
 msgid "invalid shadow group file entry"
 msgstr "Baliogabeko itzalpeko talde-fitxategiko sarrera"
@@ -1039,20 +980,15 @@ msgstr "%s: fitxategiak eguneratu dira\n"
 msgid "%s: no changes\n"
 msgstr "%s: aldaketarik gabe\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
 msgid "Usage: grpconv\n"
-msgstr "Erabilera: groupdel taldea\n"
+msgstr "Erabilera: grpconv\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
 msgid "Usage: grpunconv\n"
-msgstr "Erabilera: groupdel taldea\n"
+msgstr "Erabilera: grpunconv\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
+#, c-format
 msgid "%s: cannot delete %s\n"
-msgstr "%s: ezin da %s fitxategia eguneratu\n"
+msgstr "%s: ezin da %s ezabatu\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "Erabilera: id [-a]\n"
@@ -1089,7 +1025,7 @@ msgstr ""
 
 #, c-format
 msgid "lastlog: Failed to get the entry for UID %lu\n"
-msgstr ""
+msgstr "lastlog: Huts %lu UIDaren sarrera eskuratzean\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Erabiltzaile-izena        Ataka      Nondik           Azkena"
@@ -1106,7 +1042,7 @@ msgstr "lastlog: argumentu esperogabea: %s\n"
 
 #, c-format
 msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
+msgstr "lastlog: Ezinda %s-ren tamaina eskuratu: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1114,15 +1050,15 @@ msgstr "Erabilera: %s [-p] [izena]\n"
 
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "           %s [-p] [-h ostalaria] [-f izena]\n"
+msgstr "       %s [-p] [-h ostalaria] [-f izena]\n"
 
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "           %s [-p] -r ostalaria\n"
+msgstr "       %s [-p] -r ostalaria\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
-msgstr ""
+msgstr "konfigurazio errorea - ezin da %s balioa analizatu: '%d'"
 
 msgid "Invalid login time"
 msgstr "Baliogabeko saio-hasieraren denbora"
@@ -1141,20 +1077,17 @@ msgstr ""
 "\n"
 "[Deskonexioa saltatuta -- root-ek saio-hastea baimenduta.]"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "Login timed out after %d seconds.\n"
+#, c-format
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
-"Saio-hasiera denboraz kanpo %d segundo igarotakoan.\n"
+"Saio-hasiera denboraz kanpo %u segundo igarotakoan.\n"
 
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
+msgstr "%s: Ezingo du ziurrenik funtzionatu erro efektibo bat gabe\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -1172,10 +1105,9 @@ msgstr "%s izena: "
 msgid "login: "
 msgstr "izena: "
 
-#, fuzzy, c-format
-#| msgid "Maximum number of tries exceeded (%d)\n"
+#, c-format
 msgid "Maximum number of tries exceeded (%u)\n"
-msgstr "Saiakera muga gainditu da (%d)\n"
+msgstr "Saiakera muga gainditu da (%u)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "Saioa hastea: PAM-ek uztea eskatu du\n"
@@ -1200,8 +1132,7 @@ msgid "TIOCSCTTY failed on %s"
 msgstr "TIOCSCTTY huts %s-en"
 
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr ""
-"Abisua: saio-hasiera berriro gaitu egingo da aldi bateko blokeoaren ondoren."
+msgstr "Abisua: saio-hasiera berriro gaitu egingo da aldi bateko blokeoaren ondoren."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1213,7 +1144,7 @@ msgstr "Azken saio-hasiera: %.19s  %s(e)n"
 
 #, c-format
 msgid " from %.*s"
-msgstr "%.*s(e)tik"
+msgstr " %.*s(e)tik"
 
 msgid ""
 "login time exceeded\n"
@@ -1222,10 +1153,8 @@ msgstr ""
 "saio hasiera denbora pasa da\n"
 "\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: logoutd\n"
-msgstr "Erabilera: id\n"
+msgstr "Erabilera: logoutd\n"
 
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Erabilera: newgrp [-] [taldea]\n"
@@ -1240,26 +1169,23 @@ msgstr "Pasahitz baliogabea.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: huts zatitzerakoan: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: GID '%lu' does not exist\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: `%lu' GIDa ez da existitzen\n"
 
 msgid "too many groups\n"
 msgstr "talde gehiegi\n"
 
 msgid "  -r, --system                  create system accounts\n"
-msgstr ""
+msgstr "  -r, --system                  sortu sistema kontuak\n"
 
-#, fuzzy, c-format
-#| msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+#, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: %s taldea itzalpeko talde bat da, baina ez dago /etc/group-en\n"
+msgstr "%s: '%s' taldea itzalpeko talde bat da, baina ez dago /etc/group-en\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
+#, c-format
 msgid "%s: invalid user ID '%s'\n"
-msgstr "%s: '%s' erabiltzaile-izen baliogabea\n"
+msgstr "%s: '%s' erabiltzaile ID baliogabea\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1283,57 +1209,26 @@ msgstr "%s: %d lerroa: ezin da erabiltzailea sortu\n"
 msgid "%s: line %d: can't create group\n"
 msgstr "%s: %d lerroa: ezin da taldea sortu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user `%s' does not exist\n"
+#, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
-msgstr "%s: `%s' erabiltzailea ez da existitzen\n"
+msgstr "%s: %d lerroa: `%s' erabiltzailea ez da existitzen %s-en\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: %d lerroa: ezin da pasahitza eguneratu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: line %d: mkdir failed\n"
+#, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
-msgstr "%s: %d lerroa: mkdir-ek huts egin du\n"
+msgstr "%s: %d lerroa: mkdir %s-ek huts egin du: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
+#, c-format
 msgid "%s: line %d: chown %s failed: %s\n"
-msgstr "%s: %d lerroa: chown-ek huts egin du\n"
+msgstr "%s: %d lerroa: chown %s-ek huts egin du: %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d lerroa: ezin da sarrera eguneratu\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: passwd [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     report password status on all accounts\n"
-#| "  -d, --delete                  delete the password for the named "
-#| "account\n"
-#| "  -e, --expire                  force expire the password for the named "
-#| "account\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -k, --keep-tokens             change password only if expired\n"
-#| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --lock                    lock the named account\n"
-#| "  -n, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -q, --quiet                   quiet mode\n"
-#| "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-#| "  -S, --status                  report password status on the named "
-#| "account\n"
-#| "  -u, --unlock                  unlock the named account\n"
-#| "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "\n"
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1430,10 +1325,7 @@ msgstr "%s(r)en pasahitzak ezin dira aldatu.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "%s(r)en pasahitza ezin dira aldatu oraindik.\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: unlocking the user would result in a passwordless account.\n"
-#| "You should set a password with usermod -p to unlock this user account.\n"
+#, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock the password of this "
@@ -1449,7 +1341,7 @@ msgstr "%s: %s biltegia ez da onartzen\n"
 
 #, c-format
 msgid "%s: %s is not authorized to change the password of %s\n"
-msgstr ""
+msgstr "%s: %s ez dago %s-ren pasahitza aldatzeko baimendurik\n"
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1463,15 +1355,13 @@ msgstr "%s(r)en pasahitza aldatzen\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s(r)en pasahitza aldatu gabe dago.\n"
 
-#, fuzzy, c-format
-#| msgid "Password changed."
+#, c-format
 msgid "%s: password changed.\n"
-msgstr "Pasahitza aldatuta."
+msgstr "%s: pasahitza aldatuta.\n"
 
-#, fuzzy, c-format
-#| msgid "Password Expiration Warning"
+#, c-format
 msgid "%s: password expiry information changed.\n"
-msgstr "Pasahitza iraungitzearen abisua"
+msgstr "%s: pasahitz iraungitzea informazioa aldatua.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1487,25 +1377,21 @@ msgstr "bikoiztutako pasahitz sarrera"
 msgid "invalid user name '%s'\n"
 msgstr "%s erabiltzaile-izen baliogabea\n"
 
-#, fuzzy, c-format
-#| msgid "invalid user name '%s'\n"
+#, c-format
 msgid "invalid user ID '%lu'\n"
-msgstr "%s erabiltzaile-izen baliogabea\n"
+msgstr "'%lu' erabiltzaile ID baliogabea\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: no group %u\n"
+#, c-format
 msgid "user '%s': no group %lu\n"
-msgstr "%s erabiltzailea: ez da %u taldea\n"
+msgstr "'%s' erabiltzailea: ez da %lu talderik\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: directory %s does not exist\n"
+#, c-format
 msgid "user '%s': directory '%s' does not exist\n"
-msgstr "%s erabiltzailea: %s direktorioa ez da existitzen\n"
+msgstr "'%s' erabiltzailea: '%s' direktorioa ez da existitzen\n"
 
-#, fuzzy, c-format
-#| msgid "user %s: program %s does not exist\n"
+#, c-format
 msgid "user '%s': program '%s' does not exist\n"
-msgstr "%s erabiltzailea: %s programa ez da existitzen\n"
+msgstr "'%s' erabiltzailea: '%s' programa ez da existitzen\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1513,12 +1399,13 @@ msgstr "ez dago bat datorren pasahitz sarrerarik %s(e)n\n"
 
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "'%s' erabiltzailea %s(e)n gehitu?"
+msgstr "'%s' erabiltzailea %s(e)n gehitu? "
 
 #, c-format
-msgid ""
-"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgid "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"%s erabiltzaileak sarrera bat du %s-en baina %s-ko pasahitza ereemua ez dago "
+"'x' gisa ezarririk\n"
 
 msgid "invalid shadow password file entry"
 msgstr "baliogabeko itzalpeko pasahitz-fitxategiko sarrera"
@@ -1530,24 +1417,19 @@ msgstr "bikoiztutako itzalpeko pasahitz-fitxategiko sarrera"
 msgid "user %s: last password change in the future\n"
 msgstr "%s erabiltzailea: pasahitza etorkizunean aldatu zen azken aldiz\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
+#, c-format
 msgid "%s: cannot sort entries in %s\n"
-msgstr "%s: ezin da %s fitxategia ireki\n"
+msgstr "%s: ezin dira %s fitxategiko sarrerak ordenatu\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: pwconv\n"
-msgstr "Erabilera: id\n"
+msgstr "Erabilera: pwconv\n"
 
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
-msgstr ""
+msgstr "%s: huts %s-ren modua 0600-ra aldatzean\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: pwunconv\n"
-msgstr "Erabilera: id\n"
+msgstr "Erabilera: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "kontu honentzako 'su' sarbidea UKATUTA.\n"
@@ -1556,7 +1438,7 @@ msgid "Password authentication bypassed.\n"
 msgstr "Pasahitz autentifikazioa saltatuta.\n"
 
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Sartu zure pasahitz PROPIOA autentifikazio gisa\n"
+msgstr "Sartu zure pasahitz PROPIOA autentifikazio gisa.\n"
 
 #, c-format
 msgid "%s: %s\n"
@@ -1615,15 +1497,13 @@ msgstr ""
 "%s: %s\n"
 "(Ez ikusi egin zaio)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: PAM authentication failed\n"
+#, c-format
 msgid "%s: Authentication failure\n"
-msgstr "%s: PAM autentifikazioak huts egin du\n"
+msgstr "%s: ¡autentifikazio errorea\n"
 
-#, fuzzy, c-format
-#| msgid "You are not authorized to su %s\n"
+#, c-format
 msgid "%s: You are not authorized to su at that time\n"
-msgstr "Ez duzu 'su %s' exekutatzeko baimenik\n"
+msgstr "%s: Ez duzu orain su erabiltzeko baimenik\n"
 
 msgid "No shell\n"
 msgstr "Ez dago shell-a\n"
@@ -1651,7 +1531,7 @@ msgstr "Sistemaren mantentze-lanetako moduan sartzen"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
-msgstr ""
+msgstr "%s: %s konfigurazioa %s-n dagoena alde batetara utziko da\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -1661,15 +1541,13 @@ msgstr "%s: ezin da lehenespen fitxategi berria sortu\n"
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: ezin da lehenespen fitxategi berria ireki\n"
 
-#, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
+#, c-format
 msgid "%s: line too long in %s: %s..."
-msgstr "%s: %d lerroa: chown-ek huts egin du\n"
+msgstr "%s: lerro luzeegia %s-n: %s..."
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s"
+#, c-format
 msgid "%s: rename: %s: %s"
-msgstr "%s: berrizendatu: %s"
+msgstr "%s: berrizendatu: %s: %s"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -1679,46 +1557,7 @@ msgstr "%s: taldea '%s' NIS talde bat da.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: talde gehiegi zehaztu dira (geh. %d).\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: useradd [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
-#| "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
-#| "                                home directory\n"
-#| "  -c, --comment COMMENT         set the GECOS field for the new user "
-#| "account\n"
-#| "  -d, --home-dir HOME_DIR       home directory for the new user account\n"
-#| "  -D, --defaults                print or save modified default useradd\n"
-#| "                                configuration\n"
-#| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -g, --gid GROUP               force use GROUP for the new user account\n"
-#| "  -G, --groups GROUPS           list of supplementary groups for the new\n"
-#| "                                user account\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
-#| "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-#| "  -l,                           do not add the user to the lastlog and\n"
-#| "                                faillog databases\n"
-#| "  -m, --create-home             create home directory for the new user\n"
-#| "                                account\n"
-#| "  -N, --no-user-group           do not create a group with the same name "
-#| "as\n"
-#| "                                the user\n"
-#| "  -o, --non-unique              allow create user with duplicate\n"
-#| "                                (non-unique) UID\n"
-#| "  -p, --password PASSWORD       use encrypted password for the new user\n"
-#| "                                account\n"
-#| "  -r, --system                  create a system account\n"
-#| "  -s, --shell SHELL             the login shell for the new user account\n"
-#| "  -u, --uid UID                 force use the UID for the new user "
-#| "account\n"
-#| "  -U, --user-group              create a group with the same name as the "
-#| "user\n"
-#| "\n"
+#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1760,7 +1599,7 @@ msgid ""
 msgstr ""
 "Erabilera: useradd [aukerak] IZENA\n"
 "\n"
-"Options:\n"
+"Aukerak:\n"
 "  -b, --base-dir BASE_DIR       Erabiltzaile kontu berriaren etxe\n"
 "                                direktorioaren oinarri direktorioa\n"
 "  -c, --comment IRUZKINA        erabiltzaile kontu berriaren GECOS ezarri\n"
@@ -1769,37 +1608,43 @@ msgstr ""
 "  -D, --defaults                bistarazi edo gorde aldaturiko\n"
 "                                lehenetsiriko useradd konfigurazioa\n"
 "  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
-"  -f, --inactive INACTIVE       set password inactive after expiration\n"
-"                                to INACTIVE\n"
+"  -f, --inactive EZAKTIBO       ezarri pasahitza ez-aktibo gisa EZAKTIBO "
+"iarungitzearen\n"
+"                                ondoren\n"
 "  -g, --gid TALDE               erabiltzaile kontu berriarekin TALDE\n"
 "                                erabiltzea behartu\n"
 "  -G, --groups TALDEAK          erabiltzaile kontu berriaren talde\n"
 "                                gehiarriak bistarazi\n"
 "  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
 "  -k, --skel SKEL_DIR           beste skel direktorio bat ezarri\n"
-"  -K, --key KEY=VALUE           lehenetsiriko /etc/login.defs gainidatzi\n"
+"  -K, --key KEY=BALIO           lehenetsiriko /etc/login.defs gainidatzi\n"
+"  -l, --no-log-init             ez gehitu erabiltzailea lastlog eta faillog\n"
+"                                datu-baseetara\n"
 "  -m, --create-home             erabiltzaile kontu berriarentzar etxe\n"
 "                                direktorioa sortu\n"
+"  -M, --no-create-home          ez sortu erabiltzailearen etxe-direktorioa\n"
+"                                (/etc/login.defs gainidazten du)\n"
 "  -N, --no-user-group           ez sortu erabiltzailearen izen berdineko\n"
 "                                talde bat\n"
 "  -o, --non-unique              onartu erabiltzailea sortzea bikoizturiko\n"
 "                                (ez-bakarra) UIDa erabiliaz\n"
-"  -p, --password PASSWORD       enkriptatutako pasahitza erabili "
+"  -p, --password PASAHITZA       enkriptatutako pasahitza erabili "
 "erabiltzaile\n"
 "                                berri kontuarentzat\n"
 "  -r, --system                  sistema kontu bat sortu\n"
-"  -s, --shell SHELL             Erabiltzaile kontu berriaren sarrera shell-"
-"a\n"
+"  -s, --shell SHELL             Erabiltzaile kontu berriaren sarrera shell-a\n"
 "  -u, --uid UID                 behartu UID erabiltzea erabiltzaile kontu "
 "berriarentzat\n"
 "  -U, --user-group              sortu erabiltzailearen izen berdineko talde "
 "bat\n"
-"\n"
+"%s\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
 msgstr ""
+"  -Z, --selinux-user SEERAB     erabili SEUSER zehatz bat SELinux erabiltzaile "
+"mapatzearentzat\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1831,7 +1676,7 @@ msgstr "%s: '%s' shell baliogabea\n"
 
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
-msgstr ""
+msgstr "%s: -Z-ek  SELinux gaituriko kernel bat behar du\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
@@ -1839,15 +1684,17 @@ msgstr "%s: %s eta %s aukerak elkar-jotzen dute\n"
 
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: huts %lu UIDaren faillog erregistroa berrezartzean: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: huts %lu UIDaren lastlog sarrera berrezartzean: %s\n"
 
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
+"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
+"egin du.\n"
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
@@ -1856,8 +1703,7 @@ msgstr "%s: ezin da %s direktorioa sortu\n"
 msgid "Creating mailbox file"
 msgstr "Postakutxa fitxategia sortzen"
 
-msgid ""
-"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Ez da 'mail' taldea aurkitu. Erabiltzaile postakutxa fitxategia 0600 moduan\n"
 "sortzen.\n"
@@ -1865,25 +1711,21 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr "Postakutxa fitxategi baimenak ezartzen"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
+#, c-format
 msgid "%s: user '%s' already exists\n"
-msgstr "%s: %s erabiltzailea badago dagoeneko\n"
+msgstr "%s: '%s' erabiltzailea badago dagoeneko\n"
 
 #, c-format
-msgid ""
-"%s: group %s exists - if you want to add this user to that group, use -g.\n"
-msgstr ""
-"%s: %s taldea badago - erabiltzaile hau talde honetan gehiteko erabili '-g'\n"
+msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr "%s: %s taldea badago - erabiltzaile hau talde honetan gehitzeko -g erabili.\n"
 
 #, c-format
 msgid "%s: can't create user\n"
 msgstr "%s: ezin da erabiltzailea sortu\n"
 
-#, fuzzy, c-format
-#| msgid "%s: UID %u is not unique\n"
+#, c-format
 msgid "%s: UID %lu is not unique\n"
-msgstr "%s: %u UID-a ez da bakarra\n"
+msgstr "%s: %lu UIDa ez da bakarra\n"
 
 #, c-format
 msgid "%s: can't create group\n"
@@ -1916,18 +1758,15 @@ msgstr ""
 "  -r, --remove                  etxe direktorioa eta posta hilara ezabatu\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: Cannot remove group %s which is a primary group for another user.\n"
+#, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ezin da %s taldea ezabatu beste erabiltzaile baten talde nagusia bait "
 "da.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
+#, c-format
 msgid "%s: warning: can't remove %s: %s\n"
-msgstr "%s: abisua: ezin da ezabatu "
+msgstr "%s: abisua: ezin da %s ezabatu: %s\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
@@ -1941,10 +1780,9 @@ msgstr "%s:  %s erabiltzailea NIS erabiltzaile bat da\n"
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: une honetan %s erabiltzaileak saioan sartuta dago\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
+#, c-format
 msgid "%s: %s home directory (%s) not found\n"
-msgstr "%s: '%s' etxe-direktorio baliogabea\n"
+msgstr "%s: %s etxe-direktorioa (%s) ez dago\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
@@ -1954,37 +1792,7 @@ msgstr "%s: ez da %s direktorioa ezabatuko (%s(r)en etxea ezabatuko luke)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: errorea %s direktorioa ezabatzean\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: usermod [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
-#| "  -c, --comment COMMENT         new value of the GECOS field\n"
-#| "  -d, --home HOME_DIR           new home directory for the user account\n"
-#| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -g, --gid GROUP               force use GROUP as new primary group\n"
-#| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-#| "  -a, --append                  append the user to the supplemental "
-#| "GROUPS\n"
-#| "                                mentioned by the -G option without "
-#| "removing\n"
-#| "                                him/her from other groups\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -l, --login NEW_LOGIN         new value of the login name\n"
-#| "  -L, --lock                    lock the user account\n"
-#| "  -m, --move-home               move contents of the home directory to "
-#| "the\n"
-#| "                                new location (use only with -d)\n"
-#| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-#| "  -p, --password PASSWORD       use encrypted password for the new "
-#| "password\n"
-#| "  -s, --shell SHELL             new login shell for the user account\n"
-#| "  -u, --uid UID                 new UID for the user account\n"
-#| "  -U, --unlock                  unlock the user account\n"
-#| "\n"
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -2014,8 +1822,8 @@ msgstr ""
 "Erabilera: usermod [aukerak] IZENA\n"
 "\n"
 "Aukerak:\n"
-"  -c, --comment COMMENT         GECOS eremuaren balio berria\n"
-"  -d, --home-dir HOME_DIR       erabiltzaile kontu berriaren etxe "
+"  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
+"  -d, --home-dir ETXE_DIR       erabiltzaile kontu berriaren etxe "
 "direktorioa\n"
 "  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
 "  -f, --inactive INAKTIBO       iraungitze ondorengo pasahitz ezgaitzea\n"
@@ -2024,6 +1832,9 @@ msgstr ""
 "                                erabiltzea behartu\n"
 "  -G, --groups TALDEAK          erabiltzaile kontu berriaren talde\n"
 "                                gehigarriak bistarazi\n"
+"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
+"talde\n"
+"                                gehigarrietara beste taldeetatik kendu gabe\n"
 "  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
 "  -l, --login IZENA             saio hasiera izenaren balio berria\n"
 "  -L, --lock                    erabiltzaile kontua blokeatu\n"
@@ -2036,29 +1847,28 @@ msgstr ""
 "  -s, --shell SHELL             erabiltzaile kontuaren saio shell berria\n"
 "  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
 "  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
-"\n"
+"%s\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
 "account\n"
 msgstr ""
+"  -Z, --selinux-user            SELinux erabiltzaile mapatze berria "
+"erabiltzailearen kontuarentzat\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "%s: unlocking the user would result in a passwordless account.\n"
-#| "You should set a password with usermod -p to unlock this user account.\n"
+#, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
-"%s: taldea desblokeatzeak pasahitz gabeko kontu baten emaitza izan dezake\n"
-"Erabiltzaile hau desblokeatzeko usermod -p erabiliaz pasahitz bat ezarri "
+"%s: erabiltzaile pasahitza  desblokeatzeak pasahitz gabeko kontu baten emaitza "
+"izan dezake\n"
+"Erabiltzaile pasahitz hau desblokeatzeko usermod -p erabiliaz pasahitz bat ezarri "
 "behar duzu.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
+#, c-format
 msgid "%s: user '%s' already exists in %s\n"
-msgstr "%s: %s erabiltzailea badago dagoeneko\n"
+msgstr "%s: '%s' erabiltzailea badago dagoeneko %s-n\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -2072,10 +1882,9 @@ msgstr "%s:  -e eta -f aukerek itzalpeko pasahitzak eskatzen dute\n"
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: -L, -p, eta -U banderak esklusiboak dira\n"
 
-#, fuzzy, c-format
-#| msgid "Member already exists\n"
+#, c-format
 msgid "%s: UID '%lu' already exists\n"
-msgstr "Partaidea dagoeneko badago\n"
+msgstr "%s: '%lu' UIDa badago dagoeneko\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2099,11 +1908,11 @@ msgstr "%s: ezin da %s direktorioa %s gisa izenez aldatu\n"
 
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
-msgstr ""
+msgstr "%s: huts %lu erabiltzailearen lastlog sarrera %lu erabiltzailera kopiatzean: %s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
-msgstr ""
+msgstr "%s: huts %lu erabiltzailearen faillog sarrera %lu erabiltzailera kopiatzean: %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2115,11 +1924,7 @@ msgstr "huts egin du postontzia jabez aldatzean"
 msgid "failed to rename mailbox"
 msgstr "huts egin du postontzia izenez aldatzean"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "You have modified %s.\n"
-#| "You may need to modify %s for consistency.\n"
-#| "Please use the command `%s' to do so.\n"
+#, c-format
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
@@ -2127,7 +1932,7 @@ msgid ""
 msgstr ""
 "%s eraldatu duzu\n"
 "Konsistetziagatik %s eraldatu behar duzu.\n"
-"Mesedez erabili `%s' komandoa horretarako.\n"
+"Mesedez erabili '%s' komandoa horretarako.\n"
 
 msgid ""
 "Usage: vipw [options]\n"
@@ -2150,27 +1955,19 @@ msgstr ""
 "  -s, --shadow                  shadow edo gshadow datubasea editatu\n"
 "\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
+#, c-format
 msgid "%s: failed to remove %s\n"
-msgstr "%s: huts baimenak kentzerakoan (%s)\n"
+msgstr "%s: huts %s kentzerakoan\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "%s: %s is unchanged\n"
+#, c-format
 msgid "%s: %s is unchanged\n"
-msgstr ""
-"\n"
-"%s: %s ez da aldatu\n"
+msgstr "%s: %s ez da aldatu\n"
 
-#, fuzzy
-#| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
-msgstr "Ezin da fitxategia blokeatu"
+msgstr "Ezin da fitxategi testuingurua eskuratu"
 
 msgid "setfscreatecon () failed"
-msgstr ""
+msgstr "setfscreatecon () -ek huts egin du"
 
 msgid "Couldn't lock file"
 msgstr "Ezin da fitxategia blokeatu"
@@ -2181,427 +1978,3 @@ msgstr "Ezin izan da babeskopiarik egin"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
-
-#~ msgid ""
-#~ "Usage: %s [options] [input]\n"
-#~ "\n"
-#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
-#~ "  -r, --system                  create system accounts\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Erabilera: %s [aukerak] [sarrera]\n"
-#~ "\n"
-#~ "  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
-#~ "  -r, --system                  sortu sistema kontuak\n"
-#~ "%s\n"
-
-#~ msgid "Password set to expire."
-#~ msgstr "Pasahitza iraungi egin da."
-
-#~ msgid "%s: can't lock password file\n"
-#~ msgstr "%s: ezin da pasahitzen fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open password file\n"
-#~ msgstr "%s: ezin da pasahitzen fitxategia ireki\n"
-
-#~ msgid "%s: can't lock shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko (shadow) pasahitz fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko (shadow) pasahitz fitxategia ireki\n"
-
-#~ msgid "%s: can't rewrite shadow password file\n"
-#~ msgstr "%s:ezin da itzalpeko pasahitz fitxategia berridatzi\n"
-
-#~ msgid "%s: can't rewrite password file\n"
-#~ msgstr "%s: ezin da pasahitzen fitxategia berridatzi\n"
-
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s: ezin da pasahitzen fitxategia eguneratu\n"
-
-#~ msgid "%s: can't update shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko (shadow) pasahitz fitxategia eguneratu\n"
-
-#~ msgid "\tFull Name: %s\n"
-#~ msgstr "\tIzen osoa: %s\n"
-
-#~ msgid "\tRoom Number: %s\n"
-#~ msgstr "\tGela zenbakia: %s\n"
-
-#~ msgid "\tWork Phone: %s\n"
-#~ msgstr "\tLaneko telefonoa: %s\n"
-
-#~ msgid "\tHome Phone: %s\n"
-#~ msgstr "\tEtxeko telefonoa: %s\n"
-
-#~ msgid "Cannot open the password file.\n"
-#~ msgstr "Ezin izan da pasahitzen fitxategia ireki.\n"
-
-#~ msgid "%s: %s not found in /etc/passwd\n"
-#~ msgstr "%s: %s ez da '/etc/paswd'-en aurkitu\n"
-
-#~ msgid "Error updating the password entry.\n"
-#~ msgstr "Errorea pasahitzen sarrera eguneratzean.\n"
-
-#~ msgid "Cannot commit password file changes.\n"
-#~ msgstr "Ezin izan da pasahitzen fitxategiko aldaketak bidali.\n"
-
-#~ msgid "Cannot unlock the password file.\n"
-#~ msgstr "Ezin izan da pasahitzen fitxategia desblokeatu.\n"
-
-#~ msgid "%s: can't lock group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia ireki\n"
-
-#~ msgid "%s: can't lock gshadow file\n"
-#~ msgstr "%s: ezin da gshadow fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open shadow file\n"
-#~ msgstr "%s ezin da 'shadow' fitxategia ireki\n"
-
-#~ msgid "%s: error updating gshadow file\n"
-#~ msgstr "%s: errorea gshadow fitxategia eguneratzean\n"
-
-#~ msgid "%s: error updating group file\n"
-#~ msgstr "%s: errorea talde fitxategia eguneratzean\n"
-
-#~ msgid "%s: line %d: unknown group %s\n"
-#~ msgstr "%s: %d. lerroa: %s talde ezezaguna\n"
-
-#~ msgid "%s: line %d: cannot update group entry\n"
-#~ msgstr "%s: %d lerroa: ezin da talde sarrera eguneratu\n"
-
-#~ msgid "%s: can't lock shadow file\n"
-#~ msgstr "%s: ezin da 'shadow' fitxategia blokeatu\n"
-
-#~ msgid "%s: error updating shadow file\n"
-#~ msgstr "%s: errorea 'shadow' fitxategia eguneratzean\n"
-
-#~ msgid "%s: error updating password file\n"
-#~ msgstr "%s: errorea pasahitzen fitxategia eguneratzean\n"
-
-#~ msgid "%s: line %d: unknown user %s\n"
-#~ msgstr "%s: %d. lerroa: %s erabiltzaile ezezaguna\n"
-
-#~ msgid "%s: line %d: cannot update password entry\n"
-#~ msgstr "%s: %d. lerroa: ezin da pasahitzaren sarerra eguneratu\n"
-
-#~ msgid "%s: unknown user\n"
-#~ msgstr "%s: erabiltzaile ezezaguna\n"
-
-#~ msgid "Unknown User: %s\n"
-#~ msgstr "Erabiltzaile ezezaguna: %s\n"
-
-#~ msgid "Usage: %s [-r|-R] group\n"
-#~ msgstr "Erabilera: %s [-r|-R] taldea\n"
-
-#~ msgid "       %s [-a user] group\n"
-#~ msgstr "           %s [-a erabiltzailea] taldea\n"
-
-#~ msgid "       %s [-d user] group\n"
-#~ msgstr "           %s [-d erabiltzailea] taldea\n"
-
-#~ msgid "       %s [-A user,...] [-M user,...] group\n"
-#~ msgstr "           %s [-A erab,...] [-M erab,...] taldea\n"
-
-#~ msgid "       %s [-M user,...] group\n"
-#~ msgstr "           %s [-M erab,...] taldea\n"
-
-#~ msgid "%s: can't get lock\n"
-#~ msgstr "%s: ezin da blokeatu\n"
-
-#~ msgid "%s: can't get shadow lock\n"
-#~ msgstr "%s: ezin da 'shadow' blokeatu\n"
-
-#~ msgid "%s: can't open file\n"
-#~ msgstr "%s: ezin da fitxategia ireki\n"
-
-#~ msgid "%s: can't re-write file\n"
-#~ msgstr "%s: ezin da fitxategia berridatzi\n"
-
-#~ msgid "%s: can't re-write shadow file\n"
-#~ msgstr "%s: ezin da 'shadow' fitxategia berridatzi\n"
-
-#~ msgid "%s: can't unlock file\n"
-#~ msgstr "%s: ezin da fitxategia desblokeatu\n"
-
-#~ msgid "%s: can't update entry\n"
-#~ msgstr "%s: ezin da sarrera eguneratu\n"
-
-#~ msgid "%s: can't update shadow entry\n"
-#~ msgstr "%s: ezin da 'shadow'-eko sarrera eguneratu\n"
-
-#~ msgid "unknown group: %s\n"
-#~ msgstr "talde ezezaguna: %s\n"
-
-#~ msgid "%s: can't close file\n"
-#~ msgstr "%s: ezin da fitxategia itxi\n"
-
-#~ msgid "%s: can't close shadow file\n"
-#~ msgstr "%s ezin da shadow fitxategia itxi\n"
-
-#~ msgid "Who are you?\n"
-#~ msgstr "Zer moduz zaude?\n"
-
-#~ msgid "%s: unknown member %s\n"
-#~ msgstr "%s: %s kide ezezaguna\n"
-
-#~ msgid "%s: error adding new group entry\n"
-#~ msgstr "%s: errorea talde sarrera berria gehitzean\n"
-
-#~ msgid "%s: cannot rewrite group file\n"
-#~ msgstr "%s: ezin da 'group' fitxategia berridatzi\n"
-
-#~ msgid "%s: cannot rewrite shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia berridatzi\n"
-
-#~ msgid "%s: unable to lock group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia blokeatu\n"
-
-#~ msgid "%s: unable to open group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia ireki\n"
-
-#~ msgid "%s: unable to lock shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia blokeatu\n"
-
-#~ msgid "%s: unable to open shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia ireki\n"
-
-#~ msgid "%s: GID %u is not unique\n"
-#~ msgstr "%s: %u GID-a ez da bakarra\n"
-
-#~ msgid "%s: error removing group entry\n"
-#~ msgstr "%s: errorea taldearen sarrera ezabatzean\n"
-
-#~ msgid "%s: error removing shadow group entry\n"
-#~ msgstr "%s: errorea itzalpeko taldearen sarrera ezabatzean\n"
-
-#~ msgid "%s: cannot remove user's primary group.\n"
-#~ msgstr "%s ezin da erabiltzailearen talde nagusia ezabatu\n"
-
-#~ msgid "Member to remove could not be found\n"
-#~ msgstr "Ezabatzeko partaidea ez da aurkitu\n"
-
-#~ msgid ""
-#~ "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-#~ msgstr ""
-#~ "Erabilera: groupmems -a erabiltzailea | -d erabiltzailea | -D | -l [-g "
-#~ "taldea]\n"
-
-#~ msgid "Only root can add members to different groups\n"
-#~ msgstr "Root-ekbakarri gehitu ditzake partaideak talde ezberdinetara\n"
-
-#~ msgid "Group access is required\n"
-#~ msgstr "Talde sarrera beharrezkoa da\n"
-
-#~ msgid "Not primary owner of current group\n"
-#~ msgstr "Ez da taldearen jabe nagusia\n"
-
-#~ msgid "PAM authentication failed for\n"
-#~ msgstr "PAM autentifikazioak huts egin du\n"
-
-#~ msgid "Unable to lock group file\n"
-#~ msgstr "Ezin da talde-fitxategia blokeatu\n"
-
-#~ msgid "Unable to open group file\n"
-#~ msgstr "Ezin da talde fitxategia ireki\n"
-
-#~ msgid "Cannot close group file\n"
-#~ msgstr "Ezin da talde fitxategia ireki\n"
-
-#~ msgid "%s: %s not found in /etc/group\n"
-#~ msgstr "%s: %s ez da aurkitu /etc/group-en\n"
-
-#~ msgid "%s: %u is not a unique GID\n"
-#~ msgstr "%s: %u ez da GID bakarra\n"
-
-#~ msgid "%s: %s is not a unique name\n"
-#~ msgstr "%s: %s ez da izen bakarra\n"
-
-#~ msgid "%s: cannot rewrite passwd file\n"
-#~ msgstr "%s: ezin da passwd fitxategia berridatzi\n"
-
-#~ msgid "%s: unable to lock password file\n"
-#~ msgstr "%s: ezin da pasahitz-fitxategia blokeatu\n"
-
-#~ msgid "%s: unable to open password file\n"
-#~ msgstr "%s: ezin da pasahitz-fitxategia ireki\n"
-
-#~ msgid ""
-#~ "%s: cannot change the primary group of user '%s' from %u to %u, since it "
-#~ "is not in the passwd file.\n"
-#~ msgstr ""
-#~ "%s: Ezin da '%s' erabiltzailearen talde nagusia %u-tik %u-ra aldatu, "
-#~ "berau ez dago passwd fitxategian eta.\n"
-
-#~ msgid "%s: cannot lock file %s\n"
-#~ msgstr "%s: ezin da %s fitxategia blokeatu\n"
-
-#~ msgid "%s: can't update shadow entry for %s\n"
-#~ msgstr "%s: ezin da %s-ren itzalpeko sarrera eguneratu\n"
-
-#~ msgid "%s: can't update entry for group %s\n"
-#~ msgstr "%s: ezin da %s taldearen sarrera eguneratu\n"
-
-#~ msgid "%s: can't lock shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia ireki\n"
-
-#~ msgid "%s: can't remove shadow group %s\n"
-#~ msgstr "%s: ezin da itzalpeko %s taldea ezabatu\n"
-
-#~ msgid "%s: can't update shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia eguneratu\n"
-
-#~ msgid "%s: can't update group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia eguneratu\n"
-
-#~ msgid "%s: can't delete shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia ezabatu\n"
-
-#~ msgid "unknown UID: %u\n"
-#~ msgstr "UID ezezaguna: %u\n"
-
-#~ msgid "unknown GID: %lu\n"
-#~ msgstr "GID ezezaguna: %lu\n"
-
-#~ msgid "%s: group ID `%s' is not valid\n"
-#~ msgstr "%s: `%s' taldea IDa ez da baliozkoa\n"
-
-#~ msgid ""
-#~ "%s: group %s created, failure during the creation of the corresponding "
-#~ "gshadow group\n"
-#~ msgstr "%s: %s taldea sortua, huts dagokion gshadow taldea sortzerakoan\n"
-
-#~ msgid "%s: user ID `%s' is not valid\n"
-#~ msgstr "%s: `%s' erabiltzaile IDa ez da baliozkoa\n"
-
-#~ msgid "%s: invalid user name `%s'\n"
-#~ msgstr "%s: `%s' erabiltzaile-izen baliogabea\n"
-
-#~ msgid "%s: can't lock /etc/passwd.\n"
-#~ msgstr "%s: ezin da '/etc/passwd' blokeatu.\n"
-
-#~ msgid "%s: can't lock /etc/shadow.\n"
-#~ msgstr "%s: ezin da /etc/shadow blokeatu.\n"
-
-#~ msgid "%s: can't lock /etc/group.\n"
-#~ msgstr "%s: ezin da /etc/group blokeatu.\n"
-
-#~ msgid "%s: can't lock /etc/gshadow.\n"
-#~ msgstr "%s: ezin da /etc/gshadow blokeatu.\n"
-
-#~ msgid "%s: can't open files\n"
-#~ msgstr "%s: ezin dira fitxategiak ireki\n"
-
-#~ msgid "%s: error updating files\n"
-#~ msgstr "%s: errorea fitxategiak eguneratzean\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: %d lerroa: ezin da %s erabiltzailea aurkitu\n"
-
-#~ msgid "%s: can't update passwd entry for %s\n"
-#~ msgstr "%s: ezin da %s(r)en pasahitzaren sarrera eguneratu\n"
-
-#~ msgid "%s: can't lock passwd file\n"
-#~ msgstr "%s: ezin da pasahitz-fitxategia blokeatu\n"
-
-#~ msgid "%s: can't open passwd file\n"
-#~ msgstr "%s: ezin da pasahitz-fitxategia ireki\n"
-
-#~ msgid "%s: can't remove shadow entry for %s\n"
-#~ msgstr "%s: ezin da %s(r)en itzalpeko sarrera kendu\n"
-
-#~ msgid "%s: can't update shadow file\n"
-#~ msgstr "%s: ezin da 'shadow' fitxategia eguneratu\n"
-
-#~ msgid "%s: can't update passwd file\n"
-#~ msgstr "%s: ezin da 'passwd' fitxategia eguneratu\n"
-
-#~ msgid "%s: can't update entry for user %s\n"
-#~ msgstr "%s: ezin da %s erabiltzailearen sarrera eguneratu\n"
-
-#~ msgid "%s: can't delete shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko pasahitz-fitxategia ezabatu\n"
-
-#~ msgid "%s: unknown GID %s\n"
-#~ msgstr "%s: %s GID ezezaguna\n"
-
-#~ msgid "%s: unknown group %s\n"
-#~ msgstr "%s: %s talde ezezaguna\n"
-
-#~ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-#~ msgstr "%s: memoriarik ez. Ezin da shadow talde datubasea eguneratu\n"
-
-#~ msgid "%s: cannot rewrite password file\n"
-#~ msgstr "%s: ezin da pasahitz-fitxategia berridatzi\n"
-
-#~ msgid "%s: cannot rewrite shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko pasahitz-fitxategia berridatzi\n"
-
-#~ msgid "%s: cannot lock shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko pasahitz-fitxategia blokeatu\n"
-
-#~ msgid "%s: cannot open shadow password file\n"
-#~ msgstr "%s: ezin da itzalpeko pasahitz-fitxategia ireki\n"
-
-#~ msgid "%s: error locking group file\n"
-#~ msgstr "%s: errorea talde-fitxategia blokeatzean\n"
-
-#~ msgid "%s: error opening group file\n"
-#~ msgstr "%s: errorea talde-fitxategia irekitzean\n"
-
-#~ msgid "%s: error locking shadow group file\n"
-#~ msgstr "%s: errorea itzalpeko talde-fitxategia blokeatzean\n"
-
-#~ msgid "%s: error opening shadow group file\n"
-#~ msgstr "%s: errorea itzalpeko talde-fitxategia irekitzean\n"
-
-#~ msgid "%s: error adding new password entry\n"
-#~ msgstr "%s: errorea pasahitzaren sarrera berria gehitzean\n"
-
-#~ msgid "%s: error adding new shadow password entry\n"
-#~ msgstr "%s: errorea itzalpeko pasahitzaren sarrera berria gehitzean\n"
-
-#~ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-#~ msgstr "%s: abisua: CREATE_HOME ez da onartzen, erabili '-m' aukera.\n"
-
-#~ msgid "%s: error updating group entry\n"
-#~ msgstr "%s: errorea taldearen sarrera eguneratzean\n"
-
-#~ msgid "%s: error updating shadow group entry\n"
-#~ msgstr "%s: errorea itzalpeko taldearen sarrera eguneratzean\n"
-
-#~ msgid "%s: cannot open group file\n"
-#~ msgstr "%s: ezin da talde-fitxategia ireki\n"
-
-#~ msgid "%s: cannot open shadow group file\n"
-#~ msgstr "%s: ezin da itzalpeko talde-fitxategia ireki\n"
-
-#~ msgid "%s: error deleting password entry\n"
-#~ msgstr "%s: errorea pasahitzaren sarrera ezabatzean\n"
-
-#~ msgid "%s: error deleting shadow password entry\n"
-#~ msgstr "%s: errorea itzalpeko pasahitzaren sarrera ezabatzean\n"
-
-#~ msgid "%s: user %s does not exist\n"
-#~ msgstr "%s: %s erabiltzailea ez da existitzen\n"
-
-#~ msgid "%s: error adding new shadow group entry\n"
-#~ msgstr "%s: errorea itzalpeko talde sarrera berria gehitzean\n"
-
-#~ msgid "%s: uid %lu is not unique\n"
-#~ msgstr "%s:  %lu ez da uid bakarra\n"
-
-#~ msgid "%s: error changing password entry\n"
-#~ msgstr "%s: errorea pasahitzaren sarrera aldatzean\n"
-
-#~ msgid "%s: error removing password entry\n"
-#~ msgstr "%s: errorea pasahitzaren sarrera ezabatzean\n"
-
-#~ msgid "%s: error removing shadow password entry\n"
-#~ msgstr "%s: errorea itzalpeko pasahitzaren sarrera ezabatzean\n"
