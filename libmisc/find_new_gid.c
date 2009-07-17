@@ -90,17 +90,31 @@ int find_new_gid (bool sys_group,
 	 * but we also check the local database (gr_rewind/gr_next) in case
 	 * some groups were created but the changes were not committed yet.
 	 */
-	setgrent ();
-	while ((grp = getgrent ()) != NULL) {
-		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
-			group_id = grp->gr_gid + 1;
+	if (sys_group ) {
+		/* setgrent / getgrent / endgrent can be very slow with
+		 * LDAP configurations (and many accounts).
+		 * Since there is a limited amount of IDs to be tested
+		 * for system accounts, we just check the existence
+		 * of IDs with getgrgid.
+		 */
+		for (group_id = gid_min; group_id <= gid_max; group_id++) {
+			if (getgrgid (group_id) != NULL) {
+				used_gids[grp->gr_gid] = true;
+			}
 		}
-		/* create index of used GIDs */
-		if (grp->gr_gid <= gid_max) {
-			used_gids[grp->gr_gid] = true;
+	} else {
+		setgrent ();
+		while ((grp = getgrent ()) != NULL) {
+			if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
+				group_id = grp->gr_gid + 1;
+			}
+			/* create index of used GIDs */
+			if (grp->gr_gid <= gid_max) {
+				used_gids[grp->gr_gid] = true;
+			}
 		}
+		endgrent ();
 	}
-	endgrent ();
 	gr_rewind ();
 	while ((grp = gr_next ()) != NULL) {
 		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {

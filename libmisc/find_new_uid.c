@@ -80,7 +80,6 @@ int find_new_uid (bool sys_user,
 		return 0;
 	}
 
-
 	user_id = uid_min;
 
 	/*
@@ -91,17 +90,31 @@ int find_new_uid (bool sys_user,
 	 * but we also check the local database (pw_rewind/pw_next) in case
 	 * some users were created but the changes were not committed yet.
 	 */
-	setpwent ();
-	while ((pwd = getpwent ()) != NULL) {
-		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
-			user_id = pwd->pw_uid + 1;
+	if (sys_user) {
+		/* setpwent / getpwent / endpwent can be very slow with
+		 * LDAP configurations (and many accounts).
+		 * Since there is a limited amount of IDs to be tested
+		 * for system accounts, we just check the existence
+		 * of IDs with getpwuid.
+		 */
+		for (user_id = uid_min; user_id <= uid_max; user_id++) {
+			if (getpwuid (user_id) != NULL) {
+				used_uids[user_id] = true;
+			}
 		}
-		/* create index of used UIDs */
-		if (pwd->pw_uid <= uid_max) {
-			used_uids[pwd->pw_uid] = true;
+	} else {
+		setpwent ();
+		while ((pwd = getpwent ()) != NULL) {
+			if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
+				user_id = pwd->pw_uid + 1;
+			}
+			/* create index of used UIDs */
+			if (pwd->pw_uid <= uid_max) {
+				used_uids[pwd->pw_uid] = true;
+			}
 		}
+		endpwent ();
 	}
-	endpwent ();
 	pw_rewind ();
 	while ((pwd = pw_next ()) != NULL) {
 		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {

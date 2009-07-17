@@ -5,6 +5,10 @@ shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
 - general
   * Improved support for large groups (impacts most tools).
 
+- addition of system users or groups
+  * Speed improvement. This should be noticeable in case of LDAP configured
+    systems. This should impact useradd, groupadd, and newusers
+
 - su
   * Preserve the DISPLAY and XAUTHORITY environment variables. This was
     only the case in the non PAM enabled versions.
