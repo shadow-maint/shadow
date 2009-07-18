@@ -8,6 +8,9 @@ shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
 - addition of system users or groups
   * Speed improvement. This should be noticeable in case of LDAP configured
     systems. This should impact useradd, groupadd, and newusers
+  * Since system accounts are allocated from SYS_?ID_MIN to SYS_?ID_MAX in
+    reverse order, accounts are packed close to SYS_?ID_MAX if SYS_?ID_MIN
+    is already used but there are still dome gaps.
 
 - su
   * Preserve the DISPLAY and XAUTHORITY environment variables. This was

@@ -52,7 +52,7 @@ int find_new_uid (bool sys_user,
                   /*@null@*/uid_t const *preferred_uid)
 {
 	const struct passwd *pwd;
-	uid_t uid_min, uid_max, user_id;
+	uid_t uid_min, uid_max, user_id, id;
 	bool *used_uids;
 
 	assert (uid != NULL);
@@ -61,7 +61,7 @@ int find_new_uid (bool sys_user,
 		uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
 		uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
 	} else {
-		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 1UL);
+		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
 		uid_max = (uid_t) getdef_ulong ("UID_MIN", 1000UL) - 1;
 		uid_max = (uid_t) getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
 	}
@@ -80,7 +80,6 @@ int find_new_uid (bool sys_user,
 		return 0;
 	}
 
-	user_id = uid_min;
 
 	/*
 	 * Search the entire password file,
@@ -97,12 +96,26 @@ int find_new_uid (bool sys_user,
 		 * for system accounts, we just check the existence
 		 * of IDs with getpwuid.
 		 */
-		for (user_id = uid_min; user_id <= uid_max; user_id++) {
-			if (getpwuid (user_id) != NULL) {
-				used_uids[user_id] = true;
+		user_id = uid_max;
+		for (id = uid_max; id >= uid_min; id--) {
+			if (getpwuid (id) != NULL) {
+				user_id = id - 1;
+				used_uids[id] = true;
+			}
+		}
+
+		pw_rewind ();
+		while ((pwd = pw_next ()) != NULL) {
+			if ((pwd->pw_uid <= user_id) && (pwd->pw_uid >= uid_min)) {
+				user_id = pwd->pw_uid - 1;
+			}
+			/* create index of used UIDs */
+			if (pwd->pw_uid <= uid_max) {
+				used_uids[pwd->pw_uid] = true;
 			}
 		}
 	} else {
+		user_id = uid_min;
 		setpwent ();
 		while ((pwd = getpwent ()) != NULL) {
 			if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
@@ -114,32 +127,16 @@ int find_new_uid (bool sys_user,
 			}
 		}
 		endpwent ();
-	}
-	pw_rewind ();
-	while ((pwd = pw_next ()) != NULL) {
-		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
-			user_id = pwd->pw_uid + 1;
-		}
-		/* create index of used UIDs */
-		if (pwd->pw_uid <= uid_max) {
-			used_uids[pwd->pw_uid] = true;
-		}
-	}
 
-	/* find free system account in reverse order */
-	if (sys_user) {
-		for (user_id = uid_max; user_id >= uid_min; user_id--) {
-			if (false == used_uids[user_id]) {
-				break;
+		pw_rewind ();
+		while ((pwd = pw_next ()) != NULL) {
+			if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
+				user_id = pwd->pw_uid + 1;
 			}
-		}
-		if (user_id < uid_min ) {
-			fprintf (stderr,
-			         _("%s: Can't get unique system UID (no more available UIDs)\n"),
-			         Prog);
-			SYSLOG ((LOG_WARN,
-			         "no more available UID on the system"));
-			return -1;
+			/* create index of used UIDs */
+			if (pwd->pw_uid <= uid_max) {
+				used_uids[pwd->pw_uid] = true;
+			}
 		}
 	}
 
@@ -148,16 +145,36 @@ int find_new_uid (bool sys_user,
 	 * will give us UID_MAX+1 even if not unique. Search for the first
 	 * free UID starting with UID_MIN.
 	 */
-	if (user_id == uid_max + 1) {
-		for (user_id = uid_min; user_id < uid_max; user_id++) {
-			if (false == used_uids[user_id]) {
-				break;
+	if (sys_user) {
+		if (user_id == uid_min - 1) {
+			for (user_id = uid_max; user_id >= uid_min; user_id--) {
+				if (false == used_uids[user_id]) {
+					break;
+				}
+			}
+			if (user_id < uid_min ) {
+				fprintf (stderr,
+				         _("%s: Can't get unique system UID (no more available UIDs)\n"),
+				         Prog);
+				SYSLOG ((LOG_WARN,
+				         "no more available UID on the system"));
+				return -1;
 			}
 		}
-		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: Can't get unique UID (no more available UIDs)\n"), Prog);
-			SYSLOG ((LOG_WARN, "no more available UID on the system"));
-			return -1;
+	} else {
+		if (user_id == uid_max + 1) {
+			for (user_id = uid_min; user_id < uid_max; user_id++) {
+				if (false == used_uids[user_id]) {
+					break;
+				}
+			}
+			if (user_id == uid_max) {
+				fprintf (stderr,
+				         _("%s: Can't get unique UID (no more available UIDs)\n"),
+				         Prog);
+				SYSLOG ((LOG_WARN, "no more available UID on the system"));
+				return -1;
+			}
 		}
 	}
 

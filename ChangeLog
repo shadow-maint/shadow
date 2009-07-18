@@ -4,6 +4,10 @@
 	getpwent / getgrent for system accounts. Trying the low-IDs with
 	getpwuid / getgrgid should be more efficient on LDAP configured
 	systems with many accounts.
+	* NEWS, libmisc/find_new_gid.c, libmisc/find_new_uid.c: Since
+	system accounts are allocated from SYS_?ID_MIN to SYS_?ID_MAX in
+	reverse order, accounts are packed close to SYS_?ID_MAX if
+	SYS_?ID_MIN is already used but there are still dome gaps.
 
 2009-07-05  Piarres Beobide  <pi+debian@beobide.net>
 
