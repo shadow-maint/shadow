@@ -1996,7 +1996,7 @@ msgstr "%s : les indicateurs -L, -p et -U s'excluent mutuellement\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
-msgstr "%s : l'identifiant d'utilisateru (UID) « %lu » existe déjà\n"
+msgstr "%s : l'identifiant d'utilisateur (UID) « %lu » existe déjà\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2028,7 +2028,7 @@ msgstr ""
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
-"%s : impossible de copier l'entrée faillog de l'utilisateur %lu vers "
+"%s : impossible de copier l'entrée faillog de l'utilisateur %lu vers "
 "l'utilisateur %lu : %s\n"
 
 #, c-format
