@@ -1,3 +1,7 @@
+2009-07-19  Jean-Louis Dupond  <info@dupondje.be>
+
+	* po/nl.po: Fix obvious mistake in Dutch translation.
+
 2009-07-18  Peter Vrabec  <pvrabec@redhat.com>
 
 	* NEWS, libmisc/find_new_gid.c, libmisc/find_new_uid.c: Do not use

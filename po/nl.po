@@ -1852,7 +1852,7 @@ msgstr "%s: gebruiker %s is een NIS-gebruiker\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: gebruiker %s is momenteel niet aangemeld\n"
+msgstr "%s: gebruiker %s is momenteel aangemeld\n"
 
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
