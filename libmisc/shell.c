@@ -2,6 +2,7 @@
  * Copyright (c) 1989 - 1991, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2003 - 2006, Tomasz Kłoczko
+ * Copyright (c) 2009       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -78,6 +79,15 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 */
 	execle (file, arg, (char *) 0, envp);
 	err = errno;
+
+	if (access (file, R_OK|X_OK) == 0) {
+		/*
+		 * Assume this is a shell script (with no shebang).
+		 * Interpret it with /bin/sh
+		 */
+		execle ("/bin/sh", "sh", file, (char *)0, envp);
+		err = errno;
+	}
 
 	/*
 	 * Obviously something is really wrong - I can't figure out

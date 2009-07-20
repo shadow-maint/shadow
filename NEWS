@@ -12,9 +12,12 @@ shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
     reverse order, accounts are packed close to SYS_?ID_MAX if SYS_?ID_MIN
     is already used but there are still dome gaps.
 
+- login
+  * Add support for shells being a shell script without a shebang.
 - su
   * Preserve the DISPLAY and XAUTHORITY environment variables. This was
     only the case in the non PAM enabled versions.
+  * Add support for shells being a shell script without a shebang.
 
 *** translation
   * The Finnish translation of passwd(1) was outdated and is no more

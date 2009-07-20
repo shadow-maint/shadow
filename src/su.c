@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -174,6 +174,40 @@ static void su_failure (const char *tty)
 	exit (1);
 }
 
+/*
+ * execve_shell - Execute a shell with execve, or interpret it with
+ * /bin/sh
+ */
+void execve_shell (const char *shellstr, char *args[], char *const envp[])
+{
+	int err;
+	(void) execve (shellstr, (char **) args, envp);
+	err = errno;
+
+	if (access (shellstr, R_OK|X_OK) == 0) {
+		/*
+		 * Assume this is a shell script (with no shebang).
+		 * Interpret it with /bin/sh
+		 */
+		size_t n_args = 0;
+		char **targs;
+		while (NULL != args[n_args]) {
+			n_args++;
+		}
+		targs = (char **) xmalloc ((n_args + 2) * sizeof (args[0]));
+		targs[0] = "sh";
+		targs[1] = xstrdup (shellstr);
+		targs[n_args+1] = NULL;
+		while (1 != n_args) {
+			targs[n_args] = args[n_args - 1];
+			n_args--;
+		}
+
+		(void) execve ("/bin/sh", targs, envp);
+	} else {
+		errno = err;
+	}
+}
 
 #ifdef USE_PAM
 /* Signal handler for parent process later */
@@ -206,8 +240,9 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		if (doshell) {
 			(void) shell (shellstr, (char *) args[0], envp);
 		} else {
-			(void) execve (shellstr, (char **) args, envp);
+			execve_shell (shellstr, (char **) args, envp);
 		}
+
 		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == child) {
 		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
@@ -315,7 +350,7 @@ static void usage (void)
  */
 int main (int argc, char **argv)
 {
-	char *cp;
+	const char *cp;
 	const char *tty = NULL;	/* Name of tty SU is run from        */
 	bool doshell = false;
 	bool fakelogin = false;
@@ -949,7 +984,7 @@ int main (int argc, char **argv)
 		 */
 		argv[-1] = shellstr;
 #ifndef USE_PAM
-		(void) execve (shellstr, &argv[-1], environ);
+		execve_shell (shellstr, &argv[-1], environ);
 		err = errno;
 		(void) fputs (_("No shell\n"), stderr);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
