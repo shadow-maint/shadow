@@ -1,5 +1,10 @@
 2009-07-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/shell.c, src/su.c: Execute the scripts with "sh -"
+	rather than "sh".
+
+2009-07-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in, libmisc/shell.c, libmisc/setupenv.c, src/newgrp.c,
 	src/su.c: Let the system shell be configurable.
 

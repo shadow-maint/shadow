@@ -194,12 +194,13 @@ void execve_shell (const char *shellstr, char *args[], char *const envp[])
 		while (NULL != args[n_args]) {
 			n_args++;
 		}
-		targs = (char **) xmalloc ((n_args + 2) * sizeof (args[0]));
+		targs = (char **) xmalloc ((n_args + 3) * sizeof (args[0]));
 		targs[0] = "sh";
-		targs[1] = xstrdup (shellstr);
-		targs[n_args+1] = NULL;
+		targs[1] = "-";
+		targs[2] = xstrdup (shellstr);
+		targs[n_args+2] = NULL;
 		while (1 != n_args) {
-			targs[n_args] = args[n_args - 1];
+			targs[n_args+1] = args[n_args - 1];
 			n_args--;
 		}
 
