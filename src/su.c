@@ -203,7 +203,7 @@ void execve_shell (const char *shellstr, char *args[], char *const envp[])
 			n_args--;
 		}
 
-		(void) execve ("/bin/sh", targs, envp);
+		(void) execve (SHELL, targs, envp);
 	} else {
 		errno = err;
 	}
@@ -724,7 +724,7 @@ int main (int argc, char **argv)
 	 * Set the default shell.
 	 */
 	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
-		shellstr = "/bin/sh";
+		shellstr = SHELL;
 	}
 
 	(void) signal (SIGINT, SIG_IGN);

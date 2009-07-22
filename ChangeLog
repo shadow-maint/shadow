@@ -1,3 +1,8 @@
+2009-07-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in, libmisc/shell.c, libmisc/setupenv.c, src/newgrp.c,
+	src/su.c: Let the system shell be configurable.
+
 2009-07-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/su.c, libmisc/shell.c: Added support for shells being a

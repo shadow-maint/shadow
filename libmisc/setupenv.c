@@ -242,7 +242,7 @@ void setup_env (struct passwd *info)
 	 */
 
 	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
-		static char temp_pw_shell[] = "/bin/sh";
+		static char temp_pw_shell[] = SHELL;
 
 		info->pw_shell = temp_pw_shell;
 	}

@@ -722,7 +722,7 @@ int main (int argc, char **argv)
 	 */
 	if (cflag) {
 		closelog ();
-		execl ("/bin/sh", "sh", "-c", command, (char *) 0);
+		execl (SHELL, "sh", "-c", command, (char *) 0);
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-gid=%lu", (unsigned long) gid);
@@ -730,7 +730,7 @@ int main (int argc, char **argv)
 		              audit_buf, NULL,
 		              (unsigned int) getuid (), 0);
 #endif
-		perror ("/bin/sh");
+		perror (SHELL);
 		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
@@ -757,7 +757,7 @@ int main (int argc, char **argv)
 	} else if ((NULL != pwd->pw_shell) && ('\0' != pwd->pw_shell[0])) {
 		prog = pwd->pw_shell;
 	} else {
-		prog = "/bin/sh";
+		prog = SHELL;
 	}
 
 	/*

@@ -85,7 +85,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
 		 */
-		execle ("/bin/sh", "sh", file, (char *)0, envp);
+		execle (SHELL, "sh", file, (char *)0, envp);
 		err = errno;
 	}
 
