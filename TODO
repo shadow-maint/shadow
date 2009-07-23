@@ -1,3 +1,5 @@
+Check when RLOGIN is enabled if ruserok() exists
+
 Move selinux_file_context out of libmisc/copydir.c
 
 Review hardcoded root account?
