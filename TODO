@@ -1,3 +1,6 @@
+/etc/default/useradd
+ * GROUP=1000 should accept a group name.
+
 Check when RLOGIN is enabled if ruserok() exists
 
 Move selinux_file_context out of libmisc/copydir.c
