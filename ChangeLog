@@ -1,5 +1,9 @@
 2009-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Fixed definition of the SHELL configuration.
+
+2009-07-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* etc/login.defs: SYS_GID_MIN /SYS_UID_MIN changed from 100 to
 	101. GID 100 seems to be used statically.
 
