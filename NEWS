@@ -1,9 +1,10 @@
 $Id$
 
-shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
+shadow-4.1.4.1 -> shadow-4.1.4.2						2009-07-24
 
 - general
-  * Improved support for large groups (impacts most tools).
+  * Improved support for large groups (impacts most user/group management
+    tools).
 
 - addition of system users or groups
   * Speed improvement. This should be noticeable in case of LDAP configured
