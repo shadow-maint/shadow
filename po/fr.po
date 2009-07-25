@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-07-24 03:02+0200\n"
-"PO-Revision-Date: 2009-05-22 15:52+0200\n"
-"Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
+"PO-Revision-Date: 2009-07-25 19:17+0200\n"
+"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,8 +25,8 @@ msgstr ""
 msgid ""
 "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
-"Il existe plusieurs entrées nommées « %s » dans %s. Veuillez corriger cela "
-"avec pwck ou grpck.\n"
+"Il existe plusieurs entrées nommées « %s » dans %s. Vous devriez corriger "
+"cela avec pwck ou grpck.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
@@ -123,12 +123,12 @@ msgstr[1] ""
 "%d échecs depuis la dernière connexion.\n"
 "Le dernier échec était le %s sur %s.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+# , c-format
+#, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
-"%s : impossible d'obtenir un identifiant d'utilisateur (UID) unique (plus "
-"d'UID disponible)\n"
+"%s : impossible d'obtenir un identifiant de groupe (GID) unique (plus de GID "
+"disponibles)\n"
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
@@ -629,39 +629,50 @@ msgstr "%s : %s  n'est pas un interpréteur de commandes valable.\n"
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Syntaxe : expiry {-f|-c}\n"
 
-#, fuzzy
-#| msgid "  -h, --help                    display this help message and exit\n"
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
-"  -h, --help                    afficher ce message d'aide et quitter\n"
+"  -a, --all                     afficher les enregistrements d'échec "
+"(« faillog »)\n"
+"                                pour tous les utilisateurs\n"
 
 msgid ""
 "  -l, --lock-time SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
+"  -l, --lock-time SEC           empêcher la connexion pendant SEC secondes "
+"après                                 un échec\n"
 
 msgid ""
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 msgstr ""
+"  -m, --maximum MAX             nombre maximum d'échecs successifs de "
+"connexion\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -r, --reset                   reset the counters of login failures\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -r, --reset                   réinitialiser les compteurs d'échecs de "
+"connexion\n"
 
-#, fuzzy
-#| msgid "  -h, --help                    display this help message and exit\n"
 msgid ""
 "  -t, --time DAYS               display faillog records more recent than "
 "DAYS\n"
 msgstr ""
-"  -h, --help                    afficher ce message d'aide et quitter\n"
+"  -t, --time DAYS               afficher les enregistrements d'échecs de "
+"connexion\n"
+"                                plus récents que DAYS jours\n"
 
 msgid ""
 "  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
+"  -u, --user LOGIN/PLAGE        afficher les échecs de connexion, gérer les\n"
+"                                compteurs d'échecs ou définir les valeurs "
+"limites\n"
+"                                (si utilisé respectivement avec -r, -m ou -"
+"l)\n"
+"                                uniquement pour l'identifiant LOGIN ou la "
+"plage                                 d'identifiants PLAGE\n"
 
 # , c-format
 #, c-format
@@ -800,60 +811,54 @@ msgstr "%s : l'utilisateur %s n'est pas membre de %s\n"
 msgid "%s: Not a tty\n"
 msgstr "%s : n'est pas un tty\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
+# , c-format
+#, c-format
 msgid ""
 "Usage: %s [options] GROUP\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Utilisation : %s [options]\n"
+"Syntaxe: %s [options] GROUPE\n"
 "\n"
 "Options:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
 msgid ""
 "  -f, --force                   exit successfully if the group already "
 "exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
-"  -m, --md5                     utiliser le chiffrement MD5 pour les mots\n"
-"                                de passe\n"
+"  -f, --force                   terminer avec succès si le groupe existe "
+"déjà\n"
+"                                ou interrompre -g si le GID est déjà "
+"utilisé\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -g, --gid GID                 use GID for the new group\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -g, --gid GID                 utiliser cet identifiant (GID) pour le "
+"nouveau groupe\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
+"  -K, --key CLÉ=VALEUR          ignorer les valeurs par défaut de /etc/login."
+"defs\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
 "                                (non-unique) GID\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -o, --non-unique              autoriser la création de groupes avec des "
+"identifiants\n"
+"                                (GID) non uniques\n"
 
 msgid ""
 "  -p, --password PASSWORD       use this encrypted password for the new "
 "group\n"
 msgstr ""
+"  -p, --password MOT_DE_PASSE   utiliser ce mot de passe chiffré pour le "
+"nouveau groupe\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -r, --system                  create a system account\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr "  -r, --system                  créer un compte système\n"
 
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
@@ -947,22 +952,26 @@ msgstr "%s : votre nom de groupe ne correspond pas à votre nom d'utilisateur\n
 msgid "%s: only root can use the -g/--group option\n"
 msgstr "%s : seul l'administrateur peut utiliser l'option -g/--group\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -g, --gid GID                 change the group ID to GID\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -g, --gid GID                 modifier l'identifiant de groupe en\n"
+"                                utilisant GID comme valeur\n"
 
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
-msgstr ""
+msgstr "  -n, --new-name NOUVEAU_GROUPE renommer en NOUVEAU_GROUPE\n"
 
 msgid ""
 "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
 msgstr ""
+"  -o, --non-unique              utiliser un identifiant de groupe déjà\n"
+"                                utilisé\n"
 
 msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
 msgstr ""
+"  -p, --password MOT_DE_PASSE   remplacer le mot de passe par le mot de\n"
+"                                passe chiffré MOT_DE_PASSE\n"
 
 #, c-format
 msgid "%s: invalid group name '%s'\n"
@@ -1462,8 +1471,8 @@ msgstr "%s : expiration du mot de passe modifiée.\n"
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Syntaxe : %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-#, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
+# , c-format
+#, c-format
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s : -s et -r sont incompatibles\n"
 
@@ -1668,136 +1677,126 @@ msgstr "%s : le groupe « %s » est un groupe NIS.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s : trop de groupes spécifiés (max %d).\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
+# , c-format
+#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Utilisation : %s [options]\n"
+"Syntaxe : useradd [options] IDENTIFIANT\n"
 "\n"
 "Options:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -b, --base-dir REP_BASE       répertoire de base pour le répertoire "
+"personnel\n"
+"                                du compte du nouvel utilisateur\n"
 
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr ""
+"  -c, --comment COMMENTAIRE     définir le champ « GECOS » du compte du\n"
+"                                nouvel utilisateur\n"
 
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr ""
+"  -d, --home-dir REP_PERS       répertoire personnel pour le compte du\n"
+"                                nouvel utilisateur\n"
 
 msgid ""
 "  -D, --defaults                print or change default useradd "
 "configuration\n"
 msgstr ""
+"  -D, --defaults                afficher ou enregistrer la configuration\n"
+"                                par défaut modifiée de « useradd »\n"
 
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr ""
+"  -e, --expiredate DATE_EXPIR   fixer la date de fin de validité du\n"
+"                                compte à DATE_EXPIR\n"
 
 msgid ""
 "  -f, --inactive INACTIVE       password inactivity period of the new "
 "account\n"
 msgstr ""
+"  -f, --inactive INACTIF        fixer la durée d'inactivité du mot de passe\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -g, --gid GROUPE              forcer l'utilisation de GROUPE pour le\n"
+"                                compte du nouvel utilisateur\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -G, --groups GROUPES          liste des GROUPES supplémentaires pour le\n"
+"                                compte du nouvel utilisateur\n"
 
 msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
-msgstr ""
+msgstr "  -k, --skel REP_SQEL           définir un autre répertoire « skel »\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -l, --no-log-init             ne pas ajouter l'utilisateur aux bases de\n"
+"                                données lastlog et faillog\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -m, --create-home             create the user's home directory\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -m, --create-home             créer le répertoire personnel pour le\n"
+"                                compte du nouvel utilisateur\n"
 
 msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr ""
+"  -M, --no-create-home          ne pas créer de répertoire personnel pour\n"
+"                                le compte du nouvel utilisateur\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 msgstr ""
-"  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
-"                                de chiffrement SHA*\n"
+"  -N, --no-user-group           ne pas créer de groupe de même nom que\n"
+"                                l'utilisateur\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
 msgstr ""
-"  -m, --md5                     utiliser le chiffrement MD5 pour les mots\n"
-"                                de passe\n"
+"  -o, --non-unique              autoriser la création d'un utilisateur\n"
+"                                avec un identifiant d'utilisateur (UID)\n"
+"                                dupliqué (non unique)\n"
 
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
+"  -p, --password MOT_DE_PASSE   utiliser un mot de passe chiffré pour le\n"
+"                                compte du nouvel utilisateur\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -s, --shell SHELL             login shell of the new account\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -s, --shell INTERPRÉTEUR      interpréteur de commandes initial pour le\n"
+"                                compte du nouvel utilisateur\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -u, --uid UID                 user ID of the new account\n"
-msgstr "  -r, --system                  créer des comptes système\n"
+msgstr ""
+"  -u, --uid UID                 forcer l'utilisation de l'identifiant\n"
+"                                « UID » pour le compte du nouvel utilisateur\n"
 
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
 msgstr ""
+"  -U, --user-group              créer un groupe ayant le même nom que\n"
+"                                l'utilisateur\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
