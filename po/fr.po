@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2009-07-24 03:02+0200\n"
-"PO-Revision-Date: 2009-07-25 19:17+0200\n"
+"PO-Revision-Date: 2009-08-14 23:11+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -127,7 +127,7 @@ msgstr[1] ""
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
-"%s : impossible d'obtenir un identifiant de groupe (GID) unique (plus de GID "
+"%s : impossible d'obtenir un identifiant (GID) de groupe système unique (plus de GID "
 "disponibles)\n"
 
 #, c-format
@@ -139,7 +139,7 @@ msgstr ""
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgstr ""
-"%s : impossible d'obtenir un identifiant d'utilisateur (UID) unique (plus "
+"%s : impossible d'obtenir un identifiant (UID) d'utilisateur système unique (plus "
 "d'UID disponible)\n"
 
 #, c-format
@@ -624,7 +624,7 @@ msgstr "%s : entrée non valable : %s\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell.\n"
-msgstr "%s : %s  n'est pas un interpréteur de commandes valable.\n"
+msgstr "%s : %s n'est pas un interpréteur de commandes valable.\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Syntaxe : expiry {-f|-c}\n"
@@ -906,7 +906,7 @@ msgstr "%s : %s est le maître NIS\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s : l'utilisateur « %s » est déjà memebre de « %s »\n"
+msgstr "%s : l'utilisateur « %s » est déjà membre de « %s »\n"
 
 #, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
@@ -1035,8 +1035,8 @@ msgstr "Faut-il ajouter le groupe « %s » dans %s ? "
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"le groupe %s a une entrée dans %s, mais le champ du mot de passe dans %s ne "
-"contient pas « x »\n"
+"le groupe %s a une entrée dans %s, mais le champ du mot de passe dans %s "
+"n'est pas « x »\n"
 
 msgid "invalid shadow group file entry"
 msgstr ""
@@ -1515,7 +1515,7 @@ msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
 "l'utilisateur %s a une entrée dans %s, mais le champ du mot de passe dans %s "
-"ne contient pas « x »\n"
+"n'est pas « x »\n"
 
 msgid "invalid shadow password file entry"
 msgstr ""
