@@ -1,3 +1,8 @@
+2009-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/login.defs.d/ENCRYPT_METHOD.xml: Avoid using sub-lists. They
+	break the groff formatting.
+
 2009-07-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/fr.po: Fix typos, based on reviews by the Debian French
