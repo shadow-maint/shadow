@@ -1,3 +1,9 @@
+2009-08-30  Mike Frysinger  <vapier@gentoo.org>
+
+	* man/generate_mans.mak, man/generate_translations.mak: Provide an
+	useful error message when --enable-man is not enabled and the
+	translated manpages are not generated.
+
 2009-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/ENCRYPT_METHOD.xml: Avoid using sub-lists. They
