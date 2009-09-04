@@ -180,7 +180,7 @@ static void usage (int status)
 	         "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 	         "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	         "                                change to MAX_DAYS\n"
-	         "\n"), stderr);
+	         "\n"), status ? stderr : stdout);
 	exit (status);
 }
 
@@ -811,7 +811,7 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "adei:kln:qr:Suw:x:",
+		while ((c = getopt_long (argc, argv, "adehi:kln:qr:Suw:x:",
 		                         long_options, &option_index)) != -1) {
 			switch (c) {
 			case 'a':
@@ -897,6 +897,8 @@ int main (int argc, char **argv)
 				xflg = true;
 				anyflag = true;
 				break;
+			case 'h':
+				usage (E_SUCCESS);
 			default:
 				usage (E_BAD_ARG);
 			}

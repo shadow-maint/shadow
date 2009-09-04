@@ -1,5 +1,11 @@
 $Id$
 
+shadow-4.1.4.1 -> shadow-4.1.4.2						UNRELEASED
+
+- general
+  * report usage error to stderr, but report usage help to stdout (and return
+    zero) when explicitly requested (e.g. with --help).
+
 shadow-4.1.4.1 -> shadow-4.1.4.2						2009-07-24
 
 - general

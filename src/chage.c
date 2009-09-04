@@ -91,7 +91,7 @@ static long expdate;
 
 /* local function prototypes */
 static bool isnum (const char *s);
-static void usage (void);
+static void usage (int status);
 static void date_to_str (char *buf, size_t maxsize, time_t date);
 static int new_fields (void);
 static void print_date (time_t date);
@@ -152,7 +152,7 @@ static bool isnum (const char *s)
 /*
  * usage - print command line syntax and exit
  */
-static void usage (void)
+static void usage (int status)
 {
 	fputs (_("Usage: chage [options] [LOGIN]\n"
 	         "\n"
@@ -168,8 +168,8 @@ static void usage (void)
 	         "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 	         "                                change to MAX_DAYS\n"
 	         "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	         "\n"), stderr);
-	exit (E_USAGE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 static void date_to_str (char *buf, size_t maxsize, time_t date)
@@ -413,7 +413,7 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		case 'E':
@@ -425,11 +425,11 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		case 'h':
-			usage ();
+			usage (E_SUCCESS);
 			break;
 		case 'I':
 			Iflg = true;
@@ -438,7 +438,7 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		case 'l':
@@ -451,7 +451,7 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		case 'M':
@@ -461,7 +461,7 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		case 'W':
@@ -471,11 +471,11 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (E_USAGE);
 			}
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
@@ -495,14 +495,14 @@ static void check_flags (int argc, int opt_index)
 	 */
 
 	if (argc != opt_index + 1) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
 		fprintf (stderr,
 		         _("%s: do not include \"l\" with other flags\n"),
 		         Prog);
-		usage ();
+		usage (E_USAGE);
 	}
 }
 

@@ -179,7 +179,7 @@ static void get_defaults (void);
 static void show_defaults (void);
 static int set_defaults (void);
 static int get_groups (char *);
-static void usage (void);
+static void usage (int status);
 static void new_pwent (struct passwd *);
 #ifdef WITH_SELINUX
 static void selinux_update_mapping (void);
@@ -681,45 +681,46 @@ static int get_groups (char *list)
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
-	(void) fprintf (stderr,
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
 	                _("Usage: %s [options] LOGIN\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
-	                "                                new account\n"), stderr);
-	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), stderr);
-	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), stderr);
-	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), stderr);
-	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), stderr);
-	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), stderr);
+	                "                                new account\n"), usageout);
+	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), usageout);
+	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), usageout);
+	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), usageout);
+	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), usageout);
+	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), usageout);
 	(void) fputs (_("  -g, --gid GROUP               name or ID of the primary group of the new\n"
-	                "                                account\n"), stderr);
+	                "                                account\n"), usageout);
 	(void) fputs (_("  -G, --groups GROUPS           list of supplementary groups of the new\n"
-	                "                                account\n"), stderr);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
-	(void) fputs (_("  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"), stderr);
-	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), stderr);
+	                "                                account\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"), usageout);
+	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), usageout);
 	(void) fputs (_("  -l, --no-log-init             do not add the user to the lastlog and\n"
-	                "                                faillog databases\n"), stderr);
-	(void) fputs (_("  -m, --create-home             create the user's home directory\n"), stderr);
-	(void) fputs (_("  -M, --no-create-home          do not create the user's home directory\n"), stderr);
+	                "                                faillog databases\n"), usageout);
+	(void) fputs (_("  -m, --create-home             create the user's home directory\n"), usageout);
+	(void) fputs (_("  -M, --no-create-home          do not create the user's home directory\n"), usageout);
 	(void) fputs (_("  -N, --no-user-group           do not create a group with the same name as\n"
-	                "                                the user\n"), stderr);
+	                "                                the user\n"), usageout);
 	(void) fputs (_("  -o, --non-unique              allow to create users with duplicate\n"
-	                "                                (non-unique) UID\n"), stderr);
-	(void) fputs (_("  -p, --password PASSWORD       encrypted password of the new account\n"), stderr);
-	(void) fputs (_("  -r, --system                  create a system account\n"), stderr);
-	(void) fputs (_("  -s, --shell SHELL             login shell of the new account\n"), stderr);
-	(void) fputs (_("  -u, --uid UID                 user ID of the new account\n"), stderr);
-	(void) fputs (_("  -U, --user-group              create a group with the same name as the user\n"), stderr);
+	                "                                (non-unique) UID\n"), usageout);
+	(void) fputs (_("  -p, --password PASSWORD       encrypted password of the new account\n"), usageout);
+	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs (_("  -s, --shell SHELL             login shell of the new account\n"), usageout);
+	(void) fputs (_("  -u, --uid UID                 user ID of the new account\n"), usageout);
+	(void) fputs (_("  -U, --user-group              create a group with the same name as the user\n"), usageout);
 #ifdef WITH_SELINUX
-	(void) fputs (_("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"), stderr);
+	(void) fputs (_("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"), usageout);
 #endif
-	(void) fputs ("\n", stderr);
-	exit (E_USAGE);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -989,9 +990,9 @@ static void process_flags (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
-		                         "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:UZ:",
+		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rs:u:UZ:",
 #else
-		                         "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
+		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rs:u:U",
 #endif
 		                         long_options, NULL)) != -1) {
 			switch (c) {
@@ -1029,7 +1030,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'D':
 				if (anyflag) {
-					usage ();
+					usage (E_USAGE);
 				}
 				Dflg = true;
 				break;
@@ -1066,7 +1067,7 @@ static void process_flags (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					usage ();
+					usage (E_USAGE);
 				}
 				/*
 				 * -f -1 is allowed
@@ -1106,7 +1107,7 @@ static void process_flags (int argc, char **argv)
 				Gflg = true;
 				break;
 			case 'h':
-				usage ();
+				usage (E_SUCCESS);
 				break;
 			case 'k':
 				def_template = optarg;
@@ -1201,7 +1202,7 @@ static void process_flags (int argc, char **argv)
 				break;
 #endif
 			default:
-				usage ();
+				usage (E_USAGE);
 			}
 			anyflag = true;
 		}
@@ -1220,31 +1221,31 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-o", "-u");
-		usage ();
+		usage (E_USAGE);
 	}
 	if (kflg && !mflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-k", "-m");
-		usage ();
+		usage (E_USAGE);
 	}
 	if (Uflg && gflg) {
 		fprintf (stderr,
 		         _("%s: options %s and %s conflict\n"),
 		         Prog, "-U", "-g");
-		usage ();
+		usage (E_USAGE);
 	}
 	if (Uflg && Nflg) {
 		fprintf (stderr,
 		         _("%s: options %s and %s conflict\n"),
 		         Prog, "-U", "-N");
-		usage ();
+		usage (E_USAGE);
 	}
 	if (mflg && Mflg) {
 		fprintf (stderr,
 		         _("%s: options %s and %s conflict\n"),
 		         Prog, "-m", "-M");
-		usage ();
+		usage (E_USAGE);
 	}
 
 	/*
@@ -1253,15 +1254,15 @@ static void process_flags (int argc, char **argv)
 	 */
 	if (Dflg) {
 		if (optind != argc) {
-			usage ();
+			usage (E_USAGE);
 		}
 
 		if (uflg || oflg || Gflg || dflg || cflg || mflg) {
-			usage ();
+			usage (E_USAGE);
 		}
 	} else {
 		if (optind != argc - 1) {
-			usage ();
+			usage (E_USAGE);
 		}
 
 		user_name = argv[optind];

@@ -1,3 +1,15 @@
+2009-09-05  Mike Frysinger  <vapier@gentoo.org>
+
+	* NEWS, src/userdel.c, src/lastlog.c, src/gpasswd.c,
+	src/newusers.c, src/chpasswd.c, src/groupmems.c, src/usermod.c,
+	src/chgpasswd.c, src/vipw.c, src/su.c, src/useradd.c,
+	src/groupmod.c, src/passwd.c, src/groupadd.c, src/chage.c,
+	src/faillog.c, src/chsh.c: If someone uses the -h/--help options,
+	the usage should not go to stderr nor should the utility exit with
+	non-zero status. All of the shadow utils do just this
+	unfortunately, so convert them over to sanity.
+	* man/groupmems.8.xml, man/gpasswd.1.xml: Added option -h/--help.
+
 2009-09-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Fixed wrong format string.

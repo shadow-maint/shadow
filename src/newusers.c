@@ -92,7 +92,7 @@ static bool gr_locked = false;
 static bool spw_locked = false;
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static void fail_exit (int);
 static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_user_id (const char *, uid_t *);
@@ -110,15 +110,16 @@ static void close_files (void);
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
-	(void) fprintf (stderr,
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
 #ifndef USE_PAM
-	(void) fprintf (stderr,
+	(void) fprintf (usageout,
 	                _("  -c, --crypt-method            the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
 	                "NONE DES MD5"
@@ -127,18 +128,18 @@ static void usage (void)
 #endif				/* USE_SHA_CRYPT */
 	               );
 #endif				/* !USE_PAM */
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
-	(void) fputs (_("  -r, --system                  create system accounts\n"), stderr);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -r, --system                  create system accounts\n"), usageout);
 #ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 	                "                                crypt algorithms\n"),
-	              stderr);
+	              usageout);
 #endif				/* USE_SHA_CRYPT */
 #endif				/* !USE_PAM */
-	(void) fputs ("\n", stderr);
+	(void) fputs ("\n", usageout);
 
-	exit (EXIT_FAILURE);
+	exit (status);
 }
 
 /*
@@ -548,7 +549,7 @@ static void process_flags (int argc, char **argv)
 	                     long_options, &option_index)) != -1) {
 		switch (c) {
 		case 'h':
-			usage ();
+			usage (EXIT_SUCCESS);
 			break;
 		case 'r':
 			rflg = true;
@@ -565,13 +566,13 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
-				usage ();
+				usage (EXIT_FAILURE);
 			}
 			break;
 #endif				/* USE_SHA_CRYPT */
 #endif				/* !USE_PAM */
 		default:
-			usage ();
+			usage (EXIT_FAILURE);
 			break;
 		}
 	}
@@ -602,7 +603,7 @@ static void check_flags (void)
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
-		usage ();
+		usage (EXIT_FAILURE);
 	}
 #endif				/* USE_SHA_CRYPT */
 
@@ -618,7 +619,7 @@ static void check_flags (void)
 			fprintf (stderr,
 			         _("%s: unsupported crypt method: %s\n"),
 			         Prog, crypt_method);
-			usage ();
+			usage (EXIT_FAILURE);
 		}
 	}
 #endif				/* !USE_PAM */

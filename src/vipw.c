@@ -1,7 +1,7 @@
 /*
   vipw, vigr  edit the password or group file
   with -s will edit shadow or gshadow file
- 
+
   Copyright (c) 1997       , Guy Maor <maor@ece.utexas.edu>
   Copyright (c) 1999 - 2000, Marek Michałkiewicz
   Copyright (c) 2002 - 2006, Tomasz Kłoczko
@@ -29,8 +29,8 @@
 
 #include <errno.h>
 #include <getopt.h>
-#ifdef WITH_SELINUX                                                            
-#include <selinux/selinux.h>                                                   
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
 #endif
 #include <signal.h>
 #include <stdio.h>
@@ -64,7 +64,7 @@ static int (*unlock) (void);
 static bool quiet = false;
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static int create_backup_file (FILE *, const char *, struct stat *);
 static void vipwexit (const char *msg, int syserr, int ret);
 static void vipwedit (const char *, int (*)(void), int (*)(void));
@@ -72,9 +72,9 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
-	(void) 
+	(void)
 	fputs (_("Usage: vipw [options]\n"
 	         "\n"
 	         "Options:\n"
@@ -83,8 +83,8 @@ static void usage (void)
 	         "  -p, --passwd                  edit passwd database\n"
 	         "  -q, --quiet                   quiet mode\n"
 	         "  -s, --shadow                  edit shadow or gshadow database\n"
-	         "\n"), stderr);
-	exit (E_USAGE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 /*
@@ -285,8 +285,8 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (st1.st_mtime == st2.st_mtime) {
 		vipwexit (0, 0, 0);
 	}
-#ifdef WITH_SELINUX                                                            
-	/* unset the fscreatecon */                                             
+#ifdef WITH_SELINUX
+	/* unset the fscreatecon */
 	if (is_selinux_enabled ()) {
 		if (setfscreatecon (NULL)) {
 			vipwexit (_("setfscreatecon () failed"), errno, 1);
@@ -353,7 +353,7 @@ int main (int argc, char **argv)
 				do_vipw = false;
 				break;
 			case 'h':
-				usage ();
+				usage (E_SUCCESS);
 				break;
 			case 'p':
 				do_vipw = true;
@@ -365,7 +365,7 @@ int main (int argc, char **argv)
 				editshadow = true;
 				break;
 			default:
-				usage ();
+				usage (E_USAGE);
 			}
 		}
 	}

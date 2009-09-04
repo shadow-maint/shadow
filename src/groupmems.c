@@ -88,7 +88,7 @@ static void remove_user (const char *user,
                          const struct group *grp);
 static void purge_members (const struct group *grp);
 static void display_members (const char *const *members);
-static void usage (void);
+static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
 static void fail_exit (int code);
@@ -361,7 +361,7 @@ static void display_members (const char *const *members)
 	}
 }
 
-static void usage (void)
+static void usage (int status)
 {
 	(void) fputs (_("Usage: groupmems [options] [action]\n"
 	                "\n"
@@ -372,10 +372,11 @@ static void usage (void)
 	                "Actions:\n"
 	                "  -a, --add username            add username to the members of the group\n"
 	                "  -d, --delete username         remove username from the members of the group\n"
+	                "  -h, --help                    display this help message and exit\n"
 	                "  -p, --purge                   purge all members from the group\n"
 	                "  -l, --list                    list the members of the group\n"
-	                "\n"), stderr);
-	fail_exit (EXIT_USAGE);
+	                "\n"), status ? stderr : stdout);
+	fail_exit (status);
 }
 
 /*
@@ -389,12 +390,13 @@ static void process_flags (int argc, char **argv)
 		{"add", required_argument, NULL, 'a'},
 		{"delete", required_argument, NULL, 'd'},
 		{"group", required_argument, NULL, 'g'},
+		{"help", no_argument, NULL, 'h'},
 		{"list", no_argument, NULL, 'l'},
 		{"purge", no_argument, NULL, 'p'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((arg = getopt_long (argc, argv, "a:d:g:lp", long_options,
+	while ((arg = getopt_long (argc, argv, "a:d:g:hlp", long_options,
 	                           &option_index)) != EOF) {
 		switch (arg) {
 		case 'a':
@@ -408,6 +410,8 @@ static void process_flags (int argc, char **argv)
 		case 'g':
 			thisgroup = xstrdup (optarg);
 			break;
+		case 'h':
+			usage (EXIT_SUCCESS);
 		case 'l':
 			list = true;
 			++exclusive;
@@ -417,12 +421,12 @@ static void process_flags (int argc, char **argv)
 			++exclusive;
 			break;
 		default:
-			usage ();
+			usage (EXIT_USAGE);
 		}
 	}
 
 	if ((exclusive > 1) || (optind < argc)) {
-		usage ();
+		usage (EXIT_USAGE);
 	}
 
 	/* local, no need for xgetpwnam */

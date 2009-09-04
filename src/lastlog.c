@@ -71,7 +71,7 @@ static bool bflg = false;	/* print excludes most recent days */
 
 #define	NOW	(time ((time_t *) 0))
 
-static void usage (void)
+static void usage (int status)
 {
 	fputs (_("Usage: lastlog [options]\n"
 	         "\n"
@@ -80,8 +80,8 @@ static void usage (void)
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
 	         "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-	         "\n"), stderr);
-	exit (EXIT_FAILURE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 static void print_one (/*@null@*/const struct passwd *pw)
@@ -208,7 +208,7 @@ int main (int argc, char **argv)
 		                         NULL)) != -1) {
 			switch (c) {
 			case 'h':
-				usage ();
+				usage (EXIT_SUCCESS);
 				break;
 			case 't':
 			{
@@ -267,7 +267,7 @@ int main (int argc, char **argv)
 				break;
 			}
 			default:
-				usage ();
+				usage (EXIT_FAILURE);
 				break;
 			}
 		}
@@ -275,7 +275,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("lastlog: unexpected argument: %s\n"),
 			         argv[optind]);
-			usage();
+			usage (EXIT_FAILURE);
 		}
 	}
 

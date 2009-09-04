@@ -47,6 +47,17 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 
+/* local function prototypes */
+static void usage (int status);
+static void print_one (/*@null@*/const struct passwd *pw, bool force);
+static void set_locktime (long locktime);
+static bool set_locktime_one (uid_t uid, long locktime);
+static void setmax (int max);
+static bool setmax_one (uid_t uid, int max);
+static void print (void);
+static bool reset_one (uid_t uid);
+static void reset (void);
+
 /*
  * Global variables
  */
@@ -69,24 +80,25 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 #define	NOW	(time((time_t *) 0))
 
-static void usage (void)
+static void usage (int status)
 {
-	(void) fprintf (stderr,
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                "faillog");
-	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), stderr);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
-	(void) fputs (_("  -l, --lock-time SEC           after failed login lock account for SEC seconds\n"), stderr);
-	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), stderr);
-	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), stderr);
-	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), stderr);
+	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -l, --lock-time SEC           after failed login lock account for SEC seconds\n"), usageout);
+	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), usageout);
+	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), usageout);
+	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), usageout);
 	(void) fputs (_("  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 	                "                                counters and limits (if used with -r, -m,\n"
-	                "                                or -l) only for the specified LOGIN(s)\n"), stderr);
-	(void) fputs ("\n", stderr);
-	exit (E_USAGE);
+	                "                                or -l) only for the specified LOGIN(s)\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 static void print_one (/*@null@*/const struct passwd *pw, bool force)
@@ -495,7 +507,7 @@ int main (int argc, char **argv)
 				aflg = true;
 				break;
 			case 'h':
-				usage ();
+				usage (E_SUCCESS);
 				break;
 			case 'l':
 				if (getlong (optarg, &fail_locktime) == 0) {
@@ -561,16 +573,16 @@ int main (int argc, char **argv)
 				break;
 			}
 			default:
-				usage ();
+				usage (E_USAGE);
 			}
 		}
 	}
 
 	if (aflg && uflg) {
-		usage ();
+		usage (E_USAGE);
 	}
 	if (tflg && (lflg || mflg || rflg)) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	/* Open the faillog database */

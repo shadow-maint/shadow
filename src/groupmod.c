@@ -93,7 +93,7 @@ static bool
     pflg = false;		/* new encrypted password */
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static void new_grent (struct group *);
 
 #ifdef SHADOWGRP
@@ -113,21 +113,22 @@ static void update_primary_groups (gid_t ogid, gid_t ngid);
  * usage - display usage message and exit
  */
 
-static void usage (void)
+static void usage (int status)
 {
-	(void) fprintf (stderr,
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
 	                _("Usage: %s [options] GROUP\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -g, --gid GID                 change the group ID to GID\n"), stderr);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
-	(void) fputs (_("  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"), stderr);
-	(void) fputs (_("  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"), stderr);
+	(void) fputs (_("  -g, --gid GID                 change the group ID to GID\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"), usageout);
+	(void) fputs (_("  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       change the password to this (encrypted)\n"
-	                "                                PASSWORD\n"), stderr);
-	(void) fputs ("\n", stderr);
-	exit (E_USAGE);
+	                "                                PASSWORD\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -362,6 +363,8 @@ static void process_flags (int argc, char **argv)
 				exit (E_BAD_ARG);
 			}
 			break;
+		case 'h':
+			usage (E_SUCCESS);
 		case 'n':
 			nflg = true;
 			group_newname = optarg;
@@ -374,16 +377,16 @@ static void process_flags (int argc, char **argv)
 			pflg = true;
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
 	if (oflg && !gflg) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	if (optind != (argc - 1)) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	group_name = argv[argc - 1];

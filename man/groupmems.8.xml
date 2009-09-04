@@ -114,6 +114,12 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term><option>-l</option>, <option>--list</option></term>
 	<listitem>
 	  <para>List the group membership list.</para>

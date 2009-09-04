@@ -94,7 +94,7 @@ static bool gr_locked   = false;
 static bool spw_locked  = false;
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static void update_groups (void);
 static void close_files (void);
 static void fail_exit (int);
@@ -111,7 +111,7 @@ static int remove_mailbox (void);
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
 	fputs (_("Usage: userdel [options] LOGIN\n"
 	         "\n"
@@ -120,8 +120,8 @@ static void usage (void)
 	         "                                even if not owned by user\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -r, --remove                  remove home directory and mail spool\n"
-	         "\n"), stderr);
-	exit (E_USAGE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 /*
@@ -774,17 +774,19 @@ int main (int argc, char **argv)
 			case 'f':	/* force remove even if not owned by user */
 				fflg = true;
 				break;
+			case 'h':
+				usage (E_SUCCESS);
 			case 'r':	/* remove home dir and mailbox */
 				rflg = true;
 				break;
 			default:
-				usage ();
+				usage (E_USAGE);
 			}
 		}
 	}
 
 	if ((optind + 1) != argc) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	OPENLOG ("userdel");

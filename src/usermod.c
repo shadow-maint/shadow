@@ -149,7 +149,7 @@ static bool sgr_locked = false;
 static void date_to_str (char *buf, size_t maxsize,
                          long int date, const char *negativ);
 static int get_groups (char *);
-static void usage (void);
+static void usage (int status);
 static void new_pwent (struct passwd *);
 #ifdef WITH_SELINUX
 static void selinux_update_mapping (void);
@@ -300,9 +300,9 @@ static int get_groups (char *list)
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
-	fprintf (stderr,
+	fprintf (status ? stderr : stdout,
 	         _("Usage: usermod [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
@@ -334,7 +334,7 @@ static void usage (void)
 	         ""
 #endif
 	         );
-	exit (E_USAGE);
+	exit (status);
 }
 
 /*
@@ -815,7 +815,7 @@ static void process_flags (int argc, char **argv)
 	bool anyflag = false;
 
 	if ((1 == argc) || ('-' == argv[argc - 1][0])) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	{
@@ -955,7 +955,7 @@ static void process_flags (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					usage ();
+					usage (E_USAGE);
 				}
 				fflg = true;
 				break;
@@ -976,6 +976,8 @@ static void process_flags (int argc, char **argv)
 				}
 				Gflg = true;
 				break;
+			case 'h':
+				usage (E_SUCCESS);
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
@@ -1036,7 +1038,7 @@ static void process_flags (int argc, char **argv)
 				break;
 #endif
 			default:
-				usage ();
+				usage (E_USAGE);
 			}
 			anyflag = true;
 		}
@@ -1092,14 +1094,14 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (optind != argc - 1) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-a", "-G");
-		usage ();
+		usage (E_USAGE);
 		exit (E_USAGE);
 	}
 
@@ -1107,7 +1109,7 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: the -L, -p, and -U flags are exclusive\n"),
 		         Prog);
-		usage ();
+		usage (E_USAGE);
 		exit (E_USAGE);
 	}
 
@@ -1115,7 +1117,7 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-o", "-u");
-		usage ();
+		usage (E_USAGE);
 		exit (E_USAGE);
 	}
 
@@ -1123,7 +1125,7 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-m", "-d");
-		usage ();
+		usage (E_USAGE);
 		exit (E_USAGE);
 	}
 

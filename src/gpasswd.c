@@ -94,7 +94,7 @@ static uid_t bywho;
 #endif
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static RETSIGTYPE catch_signals (int killed);
 static bool is_valid_user_list (const char *users);
 static void process_flags (int argc, char **argv);
@@ -128,14 +128,15 @@ static void log_gpasswd_success_gshadow (unused void *arg);
 /*
  * usage - display usage message
  */
-static void usage (void)
+static void usage (int status)
 {
-	fprintf (stderr,
+	fprintf (status ? stderr : stdout,
 	         _("Usage: %s [option] GROUP\n"
 	           "\n"
 	           "Options:\n"
 	           "  -a, --add USER                add USER to GROUP\n"
 	           "  -d, --delete USER             remove USER from GROUP\n"
+	           "  -h, --help                    display this help message and exit\n"
 	           "  -r, --remove-password         remove the GROUP's password\n"
 	           "  -R, --restrict                restrict access to GROUP to its members\n"
 	           "  -M, --members USER,...        set the list of members of GROUP\n"
@@ -150,7 +151,7 @@ static void usage (void)
 	         _("The options cannot be combined.\n")
 #endif
 	        );
-	exit (E_USAGE);
+	exit (status);
 }
 
 /*
@@ -235,6 +236,7 @@ static void process_flags (int argc, char **argv)
 	static struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
 		{"delete", required_argument, NULL, 'd'},
+		{"help", no_argument, NULL, 'h'},
 		{"remove-password", no_argument, NULL, 'r'},
 		{"restrict", no_argument, NULL, 'R'},
 		{"administrators", required_argument, NULL, 'A'},
@@ -242,7 +244,7 @@ static void process_flags (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 		};
 
-	while ((flag = getopt_long (argc, argv, "a:A:d:gM:rR", long_options, &option_index)) != -1) {
+	while ((flag = getopt_long (argc, argv, "a:A:d:ghM:rR", long_options, &option_index)) != -1) {
 		switch (flag) {
 		case 'a':	/* add a user */
 			aflg = true;
@@ -276,6 +278,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'g':	/* no-op from normal password */
 			break;
+		case 'h':
+			usage (E_SUCCESS);
 		case 'M':	/* set the list of members */
 			members = optarg;
 			if (!is_valid_user_list (members)) {
@@ -290,7 +294,7 @@ static void process_flags (int argc, char **argv)
 			Rflg = true;
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
@@ -325,14 +329,14 @@ static void check_flags (int argc, int opt_index)
 		exclusive++;
 	}
 	if (exclusive > 1) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	/*
 	 * Make sure one (and only one) group was provided
 	 */
 	if ((argc != (opt_index+1)) || (NULL == group)) {
-		usage ();
+		usage (E_USAGE);
 	}
 }
 

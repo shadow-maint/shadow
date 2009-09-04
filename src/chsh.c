@@ -72,7 +72,7 @@ static bool pw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static void usage (void);
+static void usage (int status);
 static void new_fields (void);
 static bool shell_is_listed (const char *);
 static bool is_restricted_shell (const char *);
@@ -101,15 +101,15 @@ static void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static void usage (void)
+static void usage (int status)
 {
 	fputs (_("Usage: chsh [options] [LOGIN]\n"
 	         "\n"
 	         "Options:\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -s, --shell SHELL             new login shell for the user account\n"
-	         "\n"), stderr);
-	exit (E_USAGE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 /*
@@ -217,14 +217,14 @@ static void process_flags (int argc, char **argv)
 		             &option_index)) != -1) {
 		switch (c) {
 		case 'h':
-			usage ();
+			usage (E_SUCCESS);
 			break;
 		case 's':
 			sflg = true;
 			STRFCPY (loginsh, optarg);
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
@@ -233,7 +233,7 @@ static void process_flags (int argc, char **argv)
 	 * be the user's name.
 	 */
 	if (argc > (optind + 1)) {
-		usage ();
+		usage (E_USAGE);
 	}
 }
 

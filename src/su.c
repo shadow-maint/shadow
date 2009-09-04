@@ -323,7 +323,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 /*
  * usage - print command line syntax and exit
   */
-static void usage (void)
+static void usage (int status)
 {
 	fputs (_("Usage: su [options] [LOGIN]\n"
 	         "\n"
@@ -335,8 +335,8 @@ static void usage (void)
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "\n"), stderr);
-	exit (E_USAGE);
+	         "\n"), status ? stderr : stdout);
+	exit (status);
 }
 
 /*
@@ -421,7 +421,7 @@ int main (int argc, char **argv)
 				command = optarg;
 				break;
 			case 'h':
-				usage ();
+				usage (E_SUCCESS);
 				break;
 			case 'l':
 				fakelogin = true;
@@ -438,7 +438,7 @@ int main (int argc, char **argv)
 				shellstr = optarg;
 				break;
 			default:
-				usage ();	/* NOT REACHED */
+				usage (E_USAGE);	/* NOT REACHED */
 			}
 		}
 

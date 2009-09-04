@@ -88,7 +88,7 @@ static bool is_shadow_grp;
 #endif
 
 /* local function prototypes */
-static void usage (void);
+static void usage (int status);
 static void new_grent (struct group *grent);
 
 #ifdef SHADOWGRP
@@ -105,24 +105,25 @@ static void check_perms (void);
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static void usage (int status)
 {
-	(void) fprintf (stderr,
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
 	                _("Usage: %s [options] GROUP\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
 	(void) fputs (_("  -f, --force                   exit successfully if the group already exists,\n"
-	                "                                and cancel -g if the GID is already used\n"), stderr);
-	(void) fputs (_("  -g, --gid GID                 use GID for the new group\n"), stderr);
-	(void) fputs (_("  -h, --help                    display this help message and exit\n"), stderr);
-	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), stderr);
+	                "                                and cancel -g if the GID is already used\n"), usageout);
+	(void) fputs (_("  -g, --gid GID                 use GID for the new group\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), usageout);
 	(void) fputs (_("  -o, --non-unique              allow to create groups with duplicate\n"
-	                "                                (non-unique) GID\n"), stderr);
-	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), stderr);
-	(void) fputs (_("  -r, --system                  create a system account\n"), stderr);
-	(void) fputs ("\n", stderr);
-	exit (E_USAGE);
+	                "                                (non-unique) GID\n"), usageout);
+	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
+	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -412,7 +413,7 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 		case 'h':
-			usage ();
+			usage (E_SUCCESS);
 			break;
 		case 'K':
 			/*
@@ -444,7 +445,7 @@ static void process_flags (int argc, char **argv)
 			rflg = true;
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
@@ -452,7 +453,7 @@ static void process_flags (int argc, char **argv)
 	 * Check the flags consistency
 	 */
 	if (optind != argc - 1) {
-		usage ();
+		usage (E_USAGE);
 	}
 	group_name = argv[optind];
 
@@ -468,7 +469,7 @@ static void check_flags (void)
 {
 	/* -o does not make sense without -g */
 	if (oflg && !gflg) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	check_new_name ();
