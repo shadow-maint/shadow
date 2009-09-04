@@ -216,7 +216,6 @@ void endsgent (void)
 	static char *buf = NULL;
 
 	char *cp;
-	struct sgrp *ret;
 
 	if (0 == buflen) {
 		buf = (char *) malloc (BUFSIZ);

@@ -1,3 +1,8 @@
+2009-09-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Fixed wrong format string.
+	* lib/gshadow.c: Removed declaration of unused variable.
+
 2009-08-30  Mike Frysinger  <vapier@gentoo.org>
 
 	* man/generate_mans.mak, man/generate_translations.mak: Provide an
