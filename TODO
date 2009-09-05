@@ -1,3 +1,10 @@
+ * Create a common usage function that'd take the array of     
+   long options and an array of descriptions and output that so things would
+   be standardized across the utils.
+   Usage strings should be normalized and split first.
+   Investigate optparse.
+
+
 /etc/default/useradd
  * GROUP=1000 should accept a group name.
 
