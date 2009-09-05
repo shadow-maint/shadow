@@ -83,7 +83,7 @@ static void usage (int status)
 	         "  -p, --passwd                  edit passwd database\n"
 	         "  -q, --quiet                   quiet mode\n"
 	         "  -s, --shadow                  edit shadow or gshadow database\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 

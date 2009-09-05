@@ -115,7 +115,7 @@ static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options] GROUP\n"
 	                  "\n"
@@ -365,6 +365,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (E_SUCCESS);
+			break;
 		case 'n':
 			nflg = true;
 			group_newname = optarg;

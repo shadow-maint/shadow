@@ -108,7 +108,7 @@ static void usage (int status)
 	         "Options:\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -s, --shell SHELL             new login shell for the user account\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 

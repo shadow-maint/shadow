@@ -180,7 +180,7 @@ static void usage (int status)
 	         "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 	         "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	         "                                change to MAX_DAYS\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 
@@ -899,6 +899,7 @@ int main (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
+				break;
 			default:
 				usage (E_BAD_ARG);
 			}

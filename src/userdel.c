@@ -120,7 +120,7 @@ static void usage (int status)
 	         "                                even if not owned by user\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -r, --remove                  remove home directory and mail spool\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 
@@ -776,6 +776,7 @@ int main (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
+				break;
 			case 'r':	/* remove home dir and mailbox */
 				rflg = true;
 				break;

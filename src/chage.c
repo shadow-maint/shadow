@@ -168,7 +168,7 @@ static void usage (int status)
 	         "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 	         "                                change to MAX_DAYS\n"
 	         "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 

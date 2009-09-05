@@ -363,7 +363,7 @@ static void display_members (const char *const *members)
 
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (EXIT_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options] [action]\n"
 	                  "\n"
@@ -414,6 +414,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (EXIT_SUCCESS);
+			break;
 		case 'l':
 			list = true;
 			++exclusive;

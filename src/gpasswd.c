@@ -130,7 +130,7 @@ static void log_gpasswd_success_gshadow (unused void *arg);
  */
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [option] GROUP\n"
 	                  "\n"
@@ -278,6 +278,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (E_SUCCESS);
+			break;
 		case 'M':	/* set the list of members */
 			members = optarg;
 			if (!is_valid_user_list (members)) {

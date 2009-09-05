@@ -335,7 +335,7 @@ static void usage (int status)
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 

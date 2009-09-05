@@ -112,7 +112,7 @@ static void close_files (void);
  */
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (EXIT_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"

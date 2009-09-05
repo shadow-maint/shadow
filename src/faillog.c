@@ -82,7 +82,7 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"

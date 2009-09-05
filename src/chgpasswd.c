@@ -116,7 +116,7 @@ static void fail_exit (int code)
  */
 static void usage (int status)
 {
-	fprintf (status ? stderr : stdout,
+	(void) fprintf ((E_SUCCESS != status) ? stderr : stdout,
 	                 _("Usage: %s [options]\n"
 	                   "\n"
 	                   "Options:\n"

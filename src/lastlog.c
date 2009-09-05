@@ -80,7 +80,7 @@ static void usage (int status)
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
 	         "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-	         "\n"), status ? stderr : stdout);
+	         "\n"), (EXIT_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 

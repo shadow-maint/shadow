@@ -302,7 +302,7 @@ static int get_groups (char *list)
  */
 static void usage (int status)
 {
-	fprintf (status ? stderr : stdout,
+	fprintf ((E_SUCCESS != status) ? stderr : stdout,
 	         _("Usage: usermod [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
@@ -978,6 +978,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
+				break;
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,

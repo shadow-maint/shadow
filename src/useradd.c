@@ -683,7 +683,7 @@ static int get_groups (char *list)
  */
 static void usage (int status)
 {
-	FILE *usageout = status ? stderr : stdout;
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options] LOGIN\n"
 	                  "\n"
