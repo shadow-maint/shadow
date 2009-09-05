@@ -2,7 +2,7 @@
  * Copyright (c) 2000       , International Business Machines
  *                            George Kraft IV, gk4@us.ibm.com, 03/23/2000
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -363,19 +363,21 @@ static void display_members (const char *const *members)
 
 static void usage (int status)
 {
-	(void) fputs (_("Usage: groupmems [options] [action]\n"
-	                "\n"
-	                "Options:\n"
-	                "  -g, --group groupname         change groupname instead of the user's group\n"
-	                "                                (root only)\n"
-	                "\n"
-	                "Actions:\n"
-	                "  -a, --add username            add username to the members of the group\n"
-	                "  -d, --delete username         remove username from the members of the group\n"
-	                "  -h, --help                    display this help message and exit\n"
-	                "  -p, --purge                   purge all members from the group\n"
-	                "  -l, --list                    list the members of the group\n"
-	                "\n"), status ? stderr : stdout);
+	FILE *usageout = status ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] [action]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -g, --group groupname         change groupname instead of the user's group\n"
+	                "                                (root only)\n"), usageout);
+	(void) fputs (_("\n"), usageout);
+	(void) fputs (_("Actions:\n"), usageout);
+	(void) fputs (_("  -a, --add username            add username to the members of the group\n"), usageout);
+	(void) fputs (_("  -d, --delete username         remove username from the members of the group\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -p, --purge                   purge all members from the group\n"), usageout);
+	(void) fputs (_("  -l, --list                    list the members of the group\n"), usageout);
 	fail_exit (status);
 }
 
