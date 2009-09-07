@@ -1,3 +1,8 @@
+2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/sgroupio.h: Harmonize splint annotations of sgr_locate()
+	prototype with the one used in its definition.
+
 2009-09-07  Steve Grubb  <sgrubb@redhat.com>
 
 	* libmisc/copydir.c, lib/shadowmem.c, lib/groupmem.c, lib/pwmem.c:
