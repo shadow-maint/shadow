@@ -1,3 +1,10 @@
+2009-09-07  Steve Grubb  <sgrubb@redhat.com>
+
+	* libmisc/limits.c: Fix the format to match the unsigned long
+	variable in argument.
+	* libmisc/utmp.c: Fix tests. tmptty is a variable stack. ut_host
+	is an array of the ut structure. None of them can be NULL.
+
 2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/shadowmem.c: Only copy the required fields of the struct
