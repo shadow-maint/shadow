@@ -51,22 +51,37 @@
 	*pw = *pwent;
 	pw->pw_name = strdup (pwent->pw_name);
 	if (NULL == pw->pw_name) {
+		free(pw);
 		return NULL;
 	}
 	pw->pw_passwd = strdup (pwent->pw_passwd);
 	if (NULL == pw->pw_passwd) {
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_gecos = strdup (pwent->pw_gecos);
 	if (NULL == pw->pw_gecos) {
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_dir = strdup (pwent->pw_dir);
 	if (NULL == pw->pw_dir) {
+		free(pw->pw_gecos);
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_shell = strdup (pwent->pw_shell);
 	if (NULL == pw->pw_shell) {
+		free(pw->pw_dir);
+		free(pw->pw_gecos);
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 

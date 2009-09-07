@@ -1,3 +1,8 @@
+2009-09-07  Steve Grubb  <sgrubb@redhat.com>
+
+	* libmisc/copydir.c, lib/shadowmem.c, lib/groupmem.c, lib/pwmem.c:
+	Fix some memory leaks.
+
 2009-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/userdel.c, src/lastlog.c, src/gpasswd.c, src/newusers.c,

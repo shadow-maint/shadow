@@ -52,10 +52,13 @@
 	*sp = *spent;
 	sp->sp_namp = strdup (spent->sp_namp);
 	if (NULL == sp->sp_namp) {
+		free(sp);
 		return NULL;
 	}
 	sp->sp_pwdp = strdup (spent->sp_pwdp);
 	if (NULL == sp->sp_pwdp) {
+		free(sp->sp_namp);
+		free(sp);
 		return NULL;
 	}
 

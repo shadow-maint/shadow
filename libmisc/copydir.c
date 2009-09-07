@@ -443,6 +443,7 @@ static char *readlink_malloc (const char *filename)
 		nchars = readlink (filename, buffer, size);
 
 		if (nchars < 0) {
+			free(buffer);
 			return NULL;
 		}
 
