@@ -51,7 +51,6 @@
 	if (NULL == sg) {
 		return NULL;
 	}
-	*sg = *sgent;
 	sg->sg_name = strdup (sgent->sg_name);
 	if (NULL == sg->sg_name) {
 		free (sg);
@@ -137,17 +136,20 @@ static void gshadow_free (/*@out@*/ /*@only@*/void *ent)
 
 void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent)
 {
+	size_t i;
 	free (sgent->sg_name);
-	memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
-	free (sgent->sg_passwd);
-	while (NULL != *(sgent->sg_adm)) {
-		free (*(sgent->sg_adm));
-		sgent->sg_adm++;
+	if (NULL != sgent->sg_passwd) {
+		memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
+		free (sgent->sg_passwd);
 	}
-	while (NULL != *(sgent->sg_mem)) {
-		free (*(sgent->sg_mem));
-		sgent->sg_mem++;
+	for (i = 0; NULL != sgent->sg_adm[i]; i++) {
+		free (sgent->sg_adm[i]);
 	}
+	free (sgent->sg_adm);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++) {
+		free (sgent->sg_mem[i]);
+	}
+	free (sgent->sg_mem);
 	free (sgent);
 }
 

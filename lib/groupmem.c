@@ -48,7 +48,7 @@
 	if (NULL == gr) {
 		return NULL;
 	}
-	*gr = *grent;
+	gr->gr_gid = grent->gr_gid;
 	gr->gr_name = strdup (grent->gr_name);
 	if (NULL == gr->gr_name) {
 		free(gr);
@@ -90,12 +90,17 @@
 
 void gr_free (/*@out@*/ /*@only@*/struct group *grent)
 {
+	size_t i;
 	free (grent->gr_name);
-	memzero (grent->gr_passwd, strlen (grent->gr_passwd));
-	free (grent->gr_passwd);
-	while (*(grent->gr_mem)) {
-		free (*(grent->gr_mem));
-		grent->gr_mem++;
+	if (NULL != grent->gr_passwd) {
+		memzero (grent->gr_passwd, strlen (grent->gr_passwd));
+		free (grent->gr_passwd);
+	}
+	if (NULL != grent->gr_mem) {
+		for (i = 0; NULL != grent->gr_mem[i]; i++) {
+			free (grent->gr_mem[i]);
+		}
+		free (grent->gr_mem);
 	}
 	free (grent);
 }

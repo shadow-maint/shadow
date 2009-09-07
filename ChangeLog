@@ -1,5 +1,22 @@
 2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadowmem.c: Only copy the required fields of the struct
+	spwd. (start with the primitive types)
+	* lib/shadowmem.c: Avoid memzero() on a possibly NULL pointer.
+	* lib/groupmem.c: Only copy the required fields of the struct
+	group. (start with the primitive types)
+	* lib/groupmem.c: Avoid memzero() on a possibly NULL pointer.
+	* lib/groupmem.c: Free gr_mem in addition to its elements.
+	* lib/sgroupio.c: The struct sgrp has no primitive types to be
+	copied initially.
+	* lib/sgroupio.c: Avoid memzero() on a possibly NULL pointer.
+	* lib/sgroupio.c: Free sg_mem and sg_add in addition to their
+	elements.
+	* lib/pwmem.c: Only copy the required fields of the struct
+	passwd. (start with the primitive types)
+
+2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/sgroupio.h: Harmonize splint annotations of sgr_locate()
 	prototype with the one used in its definition.
 
