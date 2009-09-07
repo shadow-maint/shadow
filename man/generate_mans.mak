@@ -15,7 +15,10 @@ else
 SHA_CRYPT_COND=no_sha_crypt
 endif
 
-%: %.xml Makefile config.xml
+%.xml-config: %.xml Makefile
+	sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $< > $@
+
+%: %.xml-config Makefile config.xml
 if ENABLE_REGENERATE_MAN
 	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(SHA_CRYPT_COND)" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<

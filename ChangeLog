@@ -1,3 +1,14 @@
+2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/generate_translations.mak, man/generate_mans.mak,
+	po/Makefile.in.in: Removing and restoring the config.xml file
+	broke parallel builds. Build the manpages based on *.xml-config
+	files instead of *.xml files.  The *.xml do not include config.xml
+	anymore, which permits to run xml2po without needing to remove
+	config.xml. The config.xml is restored in the *.xml-config files.
+	* man/groupadd.8.xml: Implementation of the above.
+	* man/generate_mans.deps: Updated dependencies
+
 2009-09-07  Steve Grubb  <sgrubb@redhat.com>
 
 	* libmisc/limits.c: Fix the format to match the unsigned long

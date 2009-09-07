@@ -17,7 +17,6 @@ gpasswd.1: login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml
 groupadd.8: login.defs.d/GID_MAX.xml
 groupadd.8: login.defs.d/MAX_MEMBERS_PER_GROUP.xml
 groupadd.8: login.defs.d/SYS_GID_MAX.xml
-groupadd.8: config.xml
 groupdel.8: login.defs.d/MAX_MEMBERS_PER_GROUP.xml
 groupmems.8: login.defs.d/MAX_MEMBERS_PER_GROUP.xml
 groupmod.8: login.defs.d/MAX_MEMBERS_PER_GROUP.xml
