@@ -384,7 +384,7 @@ static void get_defaults (void)
 		 */
 		else if (MATCH (buf, DCREATE_MAIL_SPOOL)) {
 			if (*cp == '\0') {
-				cp = DCREATE_MAIL_SPOOL;	/* XXX warning: const */
+				cp = "no";	/* XXX warning: const */
 			}
 
 			def_create_mail_spool = xstrdup (cp);

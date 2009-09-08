@@ -1,5 +1,11 @@
 2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: The default value for the CREATE_MAIL_SPOOL
+	variable (i.e. if CREATE_MAIL_SPOOL= is specified without any
+	values) is "no", not DCREATE_MAIL_SPOOL ("CREATE_MAIL_SPOOL=").
+
+2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Avoid redefinition of SHELL. Use DSHELL instead.
 	For consistency, change HOME, INACT, EXPIRE, SKEL, and
 	CREATE_MAIL_SPOOL to DHOME, DINACT, DEXPIRE, DSKEL, and
