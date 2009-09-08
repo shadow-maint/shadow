@@ -197,7 +197,9 @@ static void su_failure (const char *tty)
  * execve_shell - Execute a shell with execve, or interpret it with
  * /bin/sh
  */
-void execve_shell (const char *shellstr, char *args[], char *const envp[])
+static void execve_shell (const char *shellstr,
+                          char *args[],
+                          char *const envp[])
 {
 	int err;
 	(void) execve (shellstr, (char **) args, envp);
@@ -241,7 +243,7 @@ static void catch_signals (unused int sig)
  * su.c from shadow.
  */
 static void run_shell (const char *shellstr, char *args[], bool doshell,
-		       char *const envp[])
+                       char *const envp[])
 {
 	pid_t child;
 	sigset_t ourset;
@@ -265,7 +267,9 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 
 		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == child) {
-		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
+		(void) fprintf (stderr,
+		                _("%s: Cannot fork user shell\n"),
+		                Prog);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
 		exit (1);
@@ -274,7 +278,9 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 	pid_child = child;
 	sigfillset (&ourset);
 	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
-		(void) fprintf (stderr, "%s: signal malfunction\n", Prog);
+		(void) fprintf (stderr,
+		                _("%s: signal malfunction\n"),
+		                Prog);
 		caught = true;
 	}
 	if (!caught) {
@@ -291,7 +297,8 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
 			fprintf (stderr,
-				 "%s: signal masking malfunction\n", Prog);
+			         _("%s: signal masking malfunction\n"),
+			         Prog);
 			caught = true;
 		}
 	}
@@ -316,7 +323,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
-		kill (child, SIGTERM);
+		(void) kill (child, SIGTERM);
 	}
 
 	ret = pam_close_session (pamh, 0);
@@ -495,7 +502,8 @@ int main (int argc, char **argv)
 		 */
 		if (!amroot) {
 			fprintf (stderr,
-				 _("%s: must be run from a terminal\n"), Prog);
+			         _("%s: must be run from a terminal\n"),
+			         Prog);
 			exit (1);
 		}
 		tty = "???";
@@ -538,7 +546,8 @@ int main (int argc, char **argv)
 	 */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		fprintf (stderr,
+		         _("%s: Cannot determine your user name.\n"),
 		         Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) my_uid));
@@ -563,8 +572,9 @@ int main (int argc, char **argv)
 	ret = pam_start ("su", name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_start: error %d", ret);
-			fprintf (stderr, _("%s: pam_start: error %d\n"),
-				 Prog, ret));
+			fprintf (stderr,
+			         _("%s: pam_start: error %d\n"),
+			         Prog, ret));
 		exit (1);
 	}
 
@@ -699,7 +709,8 @@ int main (int argc, char **argv)
 		    && getdef_bool ("SU_WHEEL_ONLY")
 		    && !iswheel (oldname)) {
 			fprintf (stderr,
-				 _("You are not authorized to su %s\n"), name);
+			         _("You are not authorized to su %s\n"),
+			         name);
 			exit (1);
 		}
 #ifdef SU_ACCESS
@@ -715,7 +726,8 @@ int main (int argc, char **argv)
 			break;
 		default:	/* access denied (-1) or unexpected value */
 			fprintf (stderr,
-				 _("You are not authorized to su %s\n"), name);
+			         _("You are not authorized to su %s\n"),
+			         name);
 			exit (1);
 		}
 #endif				/* SU_ACCESS */
@@ -766,23 +778,26 @@ int main (int argc, char **argv)
 	ret = pam_acct_mgmt (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		if (amroot) {
-			fprintf (stderr, _("%s: %s\n(Ignored)\n"), Prog,
-				 pam_strerror (pamh, ret));
+			fprintf (stderr,
+			         _("%s: %s\n(Ignored)\n"),
+			         Prog, pam_strerror (pamh, ret));
 		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
 			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 			if (PAM_SUCCESS != ret) {
 				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
 					 pam_strerror (pamh, ret)));
-				fprintf (stderr, _("%s: %s\n"), Prog,
-					 pam_strerror (pamh, ret));
+				fprintf (stderr,
+				         _("%s: %s\n"),
+				         Prog, pam_strerror (pamh, ret));
 				(void) pam_end (pamh, ret);
 				su_failure (tty);
 			}
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
 				 pam_strerror (pamh, ret)));
-			fprintf (stderr, _("%s: %s\n"), Prog,
-				 pam_strerror (pamh, ret));
+			fprintf (stderr,
+			         _("%s: %s\n"),
+			         Prog, pam_strerror (pamh, ret));
 			(void) pam_end (pamh, ret);
 			su_failure (tty);
 		}
@@ -840,8 +855,9 @@ int main (int argc, char **argv)
 			SYSLOG (((0 != pwent.pw_uid) ? LOG_WARN : LOG_CRIT,
 			         "SU by %s to restricted account %s",
 			         oldname, name));
-			fprintf(stderr,
-			        _("%s: You are not authorized to su at that time\n"), Prog);
+			fprintf (stderr,
+			         _("%s: You are not authorized to su at that time\n"),
+			         Prog);
 			su_failure (tty);
 		}
 	}

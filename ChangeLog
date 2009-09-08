@@ -1,5 +1,12 @@
 2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Fix indentation.
+	* src/su.c: Add more messages for translation.
+	* src/su.c: Ignore kill() return value when sending the TERM
+	signal. If it fails, a KILL should be sent anyway.
+
+2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/su.c: When su receives a signal, wait for the child to
 	terminate (after sending a SIGTERM), and kill it only if it did
 	not terminate by itself. No delay will be enforced if the child
