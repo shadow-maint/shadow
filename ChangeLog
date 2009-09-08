@@ -1,5 +1,13 @@
 2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/su.c: When su receives a signal, wait for the child to
+	terminate (after sending a SIGTERM), and kill it only if it did
+	not terminate by itself. No delay will be enforced if the child
+	cooperates. See http://bugs.gentoo.org/282094
+	* NEWS, man/su.1.xml: Document su's exit values.
+
+2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: The default value for the CREATE_MAIL_SPOOL
 	variable (i.e. if CREATE_MAIL_SPOOL= is specified without any
 	values) is "no", not DCREATE_MAIL_SPOOL ("CREATE_MAIL_SPOOL=").

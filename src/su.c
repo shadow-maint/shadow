@@ -78,6 +78,8 @@
  * Global variables
  */
 char *Prog;
+/* PID of the child, in case it needs to be killed */
+static pid_t pid_child = 0;
 
 /* not needed by sulog.c anymore */
 static char name[BUFSIZ];
@@ -103,11 +105,16 @@ extern size_t newenvc;
 
 /* local function prototypes */
 
+static void execve_shell (const char *shellstr,
+                          char *args[],
+                          char *const envp[]);
+static RETSIGTYPE kill_child (int s);
 #ifndef USE_PAM
-
 static RETSIGTYPE die (int);
 static int iswheel (const char *);
+#endif				/* !USE_PAM */
 
+#ifndef USE_PAM
 /*
  * die - set or reset termio modes.
  *
@@ -126,7 +133,7 @@ static RETSIGTYPE die (int killed)
 
 	if (killed) {
 		closelog ();
-		exit (killed);
+		exit (128+killed);
 	}
 }
 
@@ -142,6 +149,18 @@ static int iswheel (const char *username)
 	return is_on_list (grp->gr_mem, username);
 }
 #endif				/* !USE_PAM */
+
+static RETSIGTYPE kill_child (int unused(s))
+{
+	if (0 != pid_child) {
+		(void) kill (pid_child, SIGKILL);
+		(void) fputs (_(" ...killed.\n"), stderr);
+	} else {
+		(void) fputs (_(" ...waiting for child to terminate.\n"),
+		              stderr);
+	}
+	exit (255);
+}
 
 /* borrowed from GNU sh-utils' "su.c" */
 static bool restricted_shell (const char *shellstr)
@@ -252,6 +271,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		exit (1);
 	}
 	/* parent only */
+	pid_child = child;
 	sigfillset (&ourset);
 	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
 		(void) fprintf (stderr, "%s: signal malfunction\n", Prog);
@@ -293,7 +313,9 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 	}
 
 	if (caught) {
-		fprintf (stderr, "\nSession terminated, killing shell...");
+		(void) fputs ("\n", stderr);
+		(void) fputs (_("Session terminated, terminating shell..."),
+		              stderr);
 		kill (child, SIGTERM);
 	}
 
@@ -309,10 +331,11 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 	ret = pam_end (pamh, PAM_SUCCESS);
 
 	if (caught) {
-		sleep (2);
-		kill (child, SIGKILL);
-		fprintf (stderr, " ...killed.\n");
-		exit (-1);
+		(void) signal (SIGALRM, kill_child);
+		(void) alarm (2);
+
+		(void) wait (&status);
+		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
 
 	exit ((0 != WIFEXITED (status)) ? WEXITSTATUS (status)

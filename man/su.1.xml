@@ -358,6 +358,53 @@
     </variablelist>
   </refsect1>
 
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <para>
+      On success, <command>su</command> returns the exit value of the
+      command it executed.
+    </para>
+    <para>
+      If this command was terminated by a signal, <command>su</command>
+      returns the number of this signal plus 128.
+    </para>
+    <para>
+      If su has to kill the command (because it was asked to terminate,
+      and the command did not terminate in time), <command>su</command>
+      returns 255.
+    </para>
+    <para>
+      Some exit values from <command>su</command> are independent from the
+      executed command:
+      <variablelist>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success (<option>--help</option> only)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>System or authentication failure</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>126</replaceable></term>
+	  <listitem>
+	    <para>The requested command was not found</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>127</replaceable></term>
+	  <listitem>
+	    <para>The requested command could not be executed</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
+  </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para><citerefentry>
