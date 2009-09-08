@@ -78,8 +78,6 @@
  * Global variables
  */
 char *Prog;
-/* PID of the child, in case it needs to be killed */
-static pid_t pid_child = 0;
 
 /* not needed by sulog.c anymore */
 static char name[BUFSIZ];
@@ -91,6 +89,8 @@ static bool change_environment;
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 static bool caught = false;
+/* PID of the child, in case it needs to be killed */
+static pid_t pid_child = 0;
 #endif
 
 extern struct passwd pwent;
@@ -108,8 +108,9 @@ extern size_t newenvc;
 static void execve_shell (const char *shellstr,
                           char *args[],
                           char *const envp[]);
-static RETSIGTYPE kill_child (int s);
-#ifndef USE_PAM
+#ifdef USE_PAM
+static RETSIGTYPE kill_child (int unused(s));
+#else				/* !USE_PAM */
 static RETSIGTYPE die (int);
 static int iswheel (const char *);
 #endif				/* !USE_PAM */
@@ -148,8 +149,7 @@ static int iswheel (const char *username)
 	}
 	return is_on_list (grp->gr_mem, username);
 }
-#endif				/* !USE_PAM */
-
+#else				/* USE_PAM */
 static RETSIGTYPE kill_child (int unused(s))
 {
 	if (0 != pid_child) {
@@ -161,6 +161,7 @@ static RETSIGTYPE kill_child (int unused(s))
 	}
 	exit (255);
 }
+#endif				/* USE_PAM */
 
 /* borrowed from GNU sh-utils' "su.c" */
 static bool restricted_shell (const char *shellstr)
