@@ -966,7 +966,7 @@ int main (int argc, char **argv)
 		}
 		newpw = *pw;
 
-#if USE_PAM
+#ifdef USE_PAM
 		/* keep the list of user/password for later update by PAM */
 		nusers++;
 		lines     = realloc (lines,     sizeof (lines[0])     * nusers);
@@ -975,7 +975,7 @@ int main (int argc, char **argv)
 		lines[nusers-1]     = line;
 		usernames[nusers-1] = strdup (fields[0]);
 		passwords[nusers-1] = strdup (fields[1]);
-#endif
+#endif				/* USE_PAM */
 		if (add_passwd (&newpw, fields[1])) {
 			fprintf (stderr,
 			         _("%s: line %d: can't update password\n"),
