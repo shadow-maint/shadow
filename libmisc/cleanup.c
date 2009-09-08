@@ -109,7 +109,8 @@ void del_cleanup (cleanup_function pcf)
 	/* Move the rest of the cleanup functions */
 	for (; i<CLEANUP_FUNCTIONS; i++) {
 		/* Make sure the cleanup function was specified only once */
-		assert (cleanup_functions[i+1] != pcf);
+		assert (   (i == (CLEANUP_FUNCTIONS -1))
+		        || (cleanup_functions[i+1] != pcf));
 
 		if (i == (CLEANUP_FUNCTIONS -1)) {
 			cleanup_functions[i] = NULL;

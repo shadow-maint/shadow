@@ -1,5 +1,11 @@
 2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Avoid pre-decrement operator (--n). Add some
+	comments.
+	* libmisc/cleanup.c: Fix off by one in an assertion.
+
+2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Fix indentation.
 	* src/su.c: Add more messages for translation.
 	* src/su.c: Ignore kill() return value when sending the TERM

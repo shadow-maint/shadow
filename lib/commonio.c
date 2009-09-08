@@ -703,13 +703,16 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	}
 	qsort (entries, n, sizeof (struct commonio_entry *), cmp);
 
+	/* Take care of the head and tail separately */
 	db->head = entries[0];
-	db->tail = entries[--n];
+	n--;
+	db->tail = entries[n];
 	db->head->prev = NULL;
 	db->head->next = entries[1];
 	db->tail->prev = entries[n - 1];
 	db->tail->next = NULL;
 
+	/* Now other elements have prev and next entries */
 	for (i = 1; i < n; i++) {
 		entries[i]->prev = entries[i - 1];
 		entries[i]->next = entries[i + 1];
