@@ -1,3 +1,9 @@
+2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in: We do not use SETPGRP_VOID, and already assume
+	that setpgrp has a void argument. Remove AC_FUNC_SETPGRP to ease
+	cross compiling.
+
 2009-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/generate_translations.mak, man/generate_mans.mak,
