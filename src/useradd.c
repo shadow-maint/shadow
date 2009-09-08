@@ -166,12 +166,12 @@ static bool home_added = false;
 #define	E_MAIL_SPOOL	13	/* can't create mail spool */
 
 #define DGROUP			"GROUP="
-#define HOME			"HOME="
-#define SHELL			"SHELL="
-#define INACT			"INACTIVE="
-#define EXPIRE			"EXPIRE="
-#define SKEL			"SKEL="
-#define CREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
+#define DHOME			"HOME="
+#define DSHELL			"SHELL="
+#define DINACT			"INACTIVE="
+#define DEXPIRE			"EXPIRE="
+#define DSKEL			"SKEL="
+#define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
 
 /* local function prototypes */
 static void fail_exit (int);
@@ -334,21 +334,21 @@ static void get_defaults (void)
 		/*
 		 * Default HOME filesystem
 		 */
-		else if (MATCH (buf, HOME)) {
+		else if (MATCH (buf, DHOME)) {
 			def_home = xstrdup (cp);
 		}
 
 		/*
 		 * Default Login Shell command
 		 */
-		else if (MATCH (buf, SHELL)) {
+		else if (MATCH (buf, DSHELL)) {
 			def_shell = xstrdup (cp);
 		}
 
 		/*
 		 * Default Password Inactive value
 		 */
-		else if (MATCH (buf, INACT)) {
+		else if (MATCH (buf, DINACT)) {
 			if (   (getlong (cp, &def_inactive) == 0)
 			    || (def_inactive < -1)) {
 				fprintf (stderr,
@@ -356,7 +356,7 @@ static void get_defaults (void)
 				         Prog, optarg);
 				fprintf (stderr,
 				         _("%s: the %s configuration in %s will be ignored\n"),
-				         Prog, INACT, def_file);
+				         Prog, DINACT, def_file);
 				def_inactive = -1;
 			}
 		}
@@ -364,14 +364,14 @@ static void get_defaults (void)
 		/*
 		 * Default account expiration date
 		 */
-		else if (MATCH (buf, EXPIRE)) {
+		else if (MATCH (buf, DEXPIRE)) {
 			def_expire = xstrdup (cp);
 		}
 
 		/*
 		 * Default Skeleton information
 		 */
-		else if (MATCH (buf, SKEL)) {
+		else if (MATCH (buf, DSKEL)) {
 			if ('\0' == *cp) {
 				cp = SKEL_DIR;	/* XXX warning: const */
 			}
@@ -382,9 +382,9 @@ static void get_defaults (void)
 		/*
 		 * Create by default user mail spool or not ?
 		 */
-		else if (MATCH (buf, CREATE_MAIL_SPOOL)) {
+		else if (MATCH (buf, DCREATE_MAIL_SPOOL)) {
 			if (*cp == '\0') {
-				cp = CREATE_MAIL_SPOOL;	/* XXX warning: const */
+				cp = DCREATE_MAIL_SPOOL;	/* XXX warning: const */
 			}
 
 			def_create_mail_spool = xstrdup (cp);
@@ -483,25 +483,25 @@ static int set_defaults (void)
 		if (!out_group && MATCH (buf, DGROUP)) {
 			fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 			out_group = true;
-		} else if (!out_home && MATCH (buf, HOME)) {
-			fprintf (ofp, HOME "%s\n", def_home);
+		} else if (!out_home && MATCH (buf, DHOME)) {
+			fprintf (ofp, DHOME "%s\n", def_home);
 			out_home = true;
-		} else if (!out_inactive && MATCH (buf, INACT)) {
-			fprintf (ofp, INACT "%ld\n", def_inactive);
+		} else if (!out_inactive && MATCH (buf, DINACT)) {
+			fprintf (ofp, DINACT "%ld\n", def_inactive);
 			out_inactive = true;
-		} else if (!out_expire && MATCH (buf, EXPIRE)) {
-			fprintf (ofp, EXPIRE "%s\n", def_expire);
+		} else if (!out_expire && MATCH (buf, DEXPIRE)) {
+			fprintf (ofp, DEXPIRE "%s\n", def_expire);
 			out_expire = true;
-		} else if (!out_shell && MATCH (buf, SHELL)) {
-			fprintf (ofp, SHELL "%s\n", def_shell);
+		} else if (!out_shell && MATCH (buf, DSHELL)) {
+			fprintf (ofp, DSHELL "%s\n", def_shell);
 			out_shell = true;
-		} else if (!out_skel && MATCH (buf, SKEL)) {
-			fprintf (ofp, SKEL "%s\n", def_template);
+		} else if (!out_skel && MATCH (buf, DSKEL)) {
+			fprintf (ofp, DSKEL "%s\n", def_template);
 			out_skel = true;
 		} else if (!out_create_mail_spool
-			   && MATCH (buf, CREATE_MAIL_SPOOL)) {
+			   && MATCH (buf, DCREATE_MAIL_SPOOL)) {
 			fprintf (ofp,
-			         CREATE_MAIL_SPOOL "%s\n",
+			         DCREATE_MAIL_SPOOL "%s\n",
 			         def_create_mail_spool);
 			out_create_mail_spool = true;
 		} else
@@ -518,18 +518,18 @@ static int set_defaults (void)
 	if (!out_group)
 		fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 	if (!out_home)
-		fprintf (ofp, HOME "%s\n", def_home);
+		fprintf (ofp, DHOME "%s\n", def_home);
 	if (!out_inactive)
-		fprintf (ofp, INACT "%ld\n", def_inactive);
+		fprintf (ofp, DINACT "%ld\n", def_inactive);
 	if (!out_expire)
-		fprintf (ofp, EXPIRE "%s\n", def_expire);
+		fprintf (ofp, DEXPIRE "%s\n", def_expire);
 	if (!out_shell)
-		fprintf (ofp, SHELL "%s\n", def_shell);
+		fprintf (ofp, DSHELL "%s\n", def_shell);
 	if (!out_skel)
-		fprintf (ofp, SKEL "%s\n", def_template);
+		fprintf (ofp, DSKEL "%s\n", def_template);
 
 	if (!out_create_mail_spool)
-		fprintf (ofp, CREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
+		fprintf (ofp, DCREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
 
 	/*
 	 * Flush and close the file. Check for errors to make certain
