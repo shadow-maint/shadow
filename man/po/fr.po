@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2009-07-24 03:03+0200\n"
-"PO-Revision-Date: 2009-07-28 00:33+0200\n"
+"PO-Revision-Date: 2009-07-31 12:32+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -1107,6 +1107,10 @@ msgid ""
 "(examples: 022 -&gt; 002, 077 -&gt; 007) for non-root users, if the uid is "
 "the same as gid, and username is the same as the primary group name."
 msgstr ""
+"Activer la mise en place de bits de masque de groupe (« umask group bits ») "
+"identiques à ceux du propriétaire (exemple : 022 -&gt; 002, 077 -&gt; 007) pou rles "
+"utilisateurs non privilégiés, si l'UID est identique au GID et que l'identifiant de "
+"connexion est identique au groupe principal."
 
 #: userdel.8.xml:39(para) useradd.8.xml:39(para) su.1.xml:39(para)
 #: login.defs.5.xml:39(para) login.1.xml:39(para)
@@ -1116,6 +1120,10 @@ msgid ""
 "<command>useradd</command> will create by default a group with the name of "
 "the user."
 msgstr ""
+"Si cette variable est positionnée à <replaceable>yes</replaceable>, <command>"
+"userdel</command> supprimera le groupe de l'utilisateur s'il ne contient pas "
+"d'autres membres, et <command>useradd</command> créera par défaut un groupe portant "
+"le nom de l'utilisateur."
 
 #: userdel.8.xml:149(filename) useradd.8.xml:683(filename)
 #: su.1.xml:353(filename) pwconv.8.xml:171(filename)
@@ -1233,6 +1241,11 @@ msgid ""
 "remove the account later. The <option>-f</option> option can force the "
 "deletion of this account."
 msgstr ""
+"<command>userdel</command> ne permet pas la suppression d'un compte si des processus "
+"actifs lui appartiennent encore. Dans ce cas, il peeut être nécessaire de tuer ces "
+"processus ou de simplement verrouiller le mot de passe ou le compte de "
+"l'utilisateur, afin de supprimer le compte plus tard. L'option <option>-f</option> "
+"permet de forcer la suppression du compte."
 
 #: userdel.8.xml:229(para)
 msgid ""
@@ -1320,7 +1333,6 @@ msgid "-D"
 msgstr "-D"
 
 #: useradd.8.xml:80(para)
-#, fuzzy
 msgid ""
 "When invoked without the <option>-D</option> option, the <command>useradd</"
 "command> command creates a new user account using the values specified on "
@@ -1333,7 +1345,8 @@ msgstr ""
 "<command>useradd</command> crée un nouveau compte utilisateur qui utilise "
 "les valeurs indiquées sur la ligne de commande et les valeurs par défaut du "
 "système. En fonction des options de la ligne de commande, la commande "
-"useradd fera la mise à jour des fichiers du système, elle pourra créer le "
+"<command>useradd</command> fera la mise à jour des fichiers du système, elle pourra "
+"créer le "
 "répertoire personnel et copier les fichiers initiaux."
 
 #: useradd.8.xml:89(para)
