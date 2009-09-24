@@ -1,3 +1,7 @@
+2009-09-24  Clytie Siddall  <clytie@riverland.net.au>
+
+        * po/vi.po: updated to 348t30f34u
+
 2009-09-08  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.c: Avoid pre-decrement operator (--n). Add some
