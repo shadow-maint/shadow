@@ -84,7 +84,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-l</option>, <option>--lock-time</option>
+	  <option>-l</option>, <option>--lock-secs</option>
 	  <replaceable>SEC</replaceable>
 	</term>
 	<listitem>

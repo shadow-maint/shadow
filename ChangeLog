@@ -1,3 +1,8 @@
+2009-10-15  Thorsten Kukuk  <kukuk@suse.de>
+
+	* src/faillog.c, man/faillog.8.xml: Harmonize long option in code
+	and documentation. Use --lock-secs instead of --lock-time.
+
 2009-10-05  Miroslav Kure  <kurem@upcase.inf.upol.cz>
 
 	* po/cs.po: updated to 412t

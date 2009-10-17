@@ -90,7 +90,7 @@ static void usage (int status)
 	                "faillog");
 	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -l, --lock-time SEC           after failed login lock account for SEC seconds\n"), usageout);
+	(void) fputs (_("  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"), usageout);
 	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), usageout);
 	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), usageout);
 	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), usageout);
