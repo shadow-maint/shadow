@@ -1,6 +1,6 @@
 $Id$
 
-shadow-4.1.4.2 -> shadow-4.1.4.3						UNRELEASED
+shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
 
 - general
   * report usage error to stderr, but report usage help to stdout (and return
@@ -12,7 +12,11 @@ shadow-4.1.4.2 -> shadow-4.1.4.3						UNRELEASED
     sending a SIGTERM), and kill it only if it did not terminate by itself.
     No delay will be enforced if the child cooperates.
 
-shadow-4.1.4.1 -> shadow-4.1.4.2						2009-07-24
+*** translation
+  * Updated Czech translation.
+  * Updated Vietnamese translation.
+
+shadow-4.1.4.1 -> shadow-4.1.4.2					2009-07-24
 
 - general
   * Improved support for large groups (impacts most user/group management
