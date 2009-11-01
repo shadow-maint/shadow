@@ -1,3 +1,9 @@
+2009-11-01  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, man/login.defs.d/ENV_SUPATH.xml, libmisc/setupenv.c:
+	Harmonize other paths and documentation with previous
+	change.
+
 2009-11-01  Michel Hermier  <michel.hermier@gmail.com>
 
 	* src/su.c: Set the default ENV_SUPATH to

@@ -11,6 +11,7 @@ shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
   * When su receives a signal, wait for the child to terminate (after
     sending a SIGTERM), and kill it only if it did not terminate by itself.
     No delay will be enforced if the child cooperates.
+  * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
 
 *** translation
   * Updated Czech translation.
