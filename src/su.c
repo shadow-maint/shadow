@@ -869,7 +869,7 @@ int main (int argc, char **argv)
 
 	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
-		addenv ("PATH=/bin:/usr/bin", NULL);
+		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=') != NULL) {
 		addenv (cp, NULL);
 	} else {
