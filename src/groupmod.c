@@ -724,7 +724,7 @@ int main (int argc, char **argv)
 	{
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (NULL == pamh) {
+		if (NULL == pampw) {
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);

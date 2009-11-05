@@ -6,6 +6,8 @@ shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
   * report usage error to stderr, but report usage help to stdout (and return
     zero) when explicitly requested (e.g. with --help).
 
+- groupmod
+  * Fixed groupmod when configured with --enable-account-tools-setuid.
 - su
   * Document the su exit values.
   * When su receives a signal, wait for the child to terminate (after

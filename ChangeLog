@@ -1,3 +1,8 @@
+2009-11-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/groupmod.c: Fixed groupmod when configured with
+	--enable-account-tools-setuid.
+
 2009-11-01  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, man/login.defs.d/ENV_SUPATH.xml, libmisc/setupenv.c:
