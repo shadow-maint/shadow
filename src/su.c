@@ -409,8 +409,6 @@ int main (int argc, char **argv)
 #endif
 #endif				/* !USE_PAM */
 
-	sanitize_env ();
-
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);

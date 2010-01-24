@@ -1,5 +1,14 @@
 2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Do not sanitize the environment. This breaks
+	--preserve-environment. This sanitation was disabled on Debian
+	since quite some time with no reported issues, and sanitize_env()
+	documentation agrees that it should be useless as all modern
+	Unixes will handle setuid executables properly. This Fixes
+	Alioth#312287.
+
+2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/setupenv.c: Fix typo from 2009-11-01.
 
 2009-01-24  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
