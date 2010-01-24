@@ -265,7 +265,7 @@ void setup_env (struct passwd *info)
 
 	if (NULL == cp) {
 		/* not specified, use a minimal default */
-		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+		addenv ((info->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=')) {
 		/* specified as name=value (PATH=...) */
 		addenv (cp, NULL);

@@ -1,3 +1,7 @@
+2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/setupenv.c: Fix typo from 2009-11-01.
+
 2009-01-24  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
 
 	* configure.in: Add support for TCB in configure.in. Actual TCB
