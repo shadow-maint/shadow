@@ -249,6 +249,9 @@ AC_ARG_WITH(selinux,
 AC_ARG_WITH(skey,
 	[AC_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
 	[with_skey=$withval], [with_skey=no])
+AC_ARG_WITH(tcb,
+	[AC_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
+	[with_tcb=$withval], [with_tcb=maybe])
 AC_ARG_WITH(libcrack,
 	[AC_HELP_STRING([--with-libcrack], [use libcrack @<:@default=yes if found and if PAM not enabled@:>@])],
 	[with_libcrack=$withval], [with_libcrack=no])
@@ -379,6 +382,27 @@ if test "$with_selinux" != "no"; then
 		fi
 	else
 		with_selinux="no"
+	fi
+fi
+
+AC_SUBST(LIBTCB)
+if test "$with_tcb" != "no"; then
+	AC_CHECK_HEADERS(tcb.h, [tcb_header="yes"], [tcb_header="no"])
+	if test "$tcb_header$with_tcb" = "noyes" ; then
+		AC_MSG_ERROR([tcb.h is missing])
+	elif test "$tcb_header" = "yes" ; then
+		AC_CHECK_LIB(tcb, tcb_is_suspect, [tcb_lib="yes"], [tcb_lib="no"])
+		if test "$tcb_lib$with_tcb" = "noyes" ; then
+			AC_MSG_ERROR([libtcb not found])
+		elif test "$tcb_lib" = "no" ; then
+			with_tcb="no"
+		else
+			AC_DEFINE(WITH_TCB, 1, [Build shadow with tcb support (incomplete)])
+			LIBTCB="-ltcb"
+			with_tcb="yes"
+		fi
+	else
+		with_tcb="no"
 	fi
 fi
 
@@ -540,6 +564,7 @@ if test "$with_libpam" = "yes"; then
 echo "	suid account management tools:	$enable_acct_tools_setuid"
 fi
 echo "	SELinux support:		$with_selinux"
+echo "	tcb support (incomplete):	$with_tcb"
 echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"

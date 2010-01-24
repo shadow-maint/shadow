@@ -1,3 +1,8 @@
+2009-01-24  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
+
+	* configure.in: Add support for TCB in configure.in. Actual TCB
+	support will follow.
+
 2009-11-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/groupmod.c: Fixed groupmod when configured with
