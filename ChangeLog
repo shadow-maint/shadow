@@ -1,10 +1,15 @@
 2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/env.c: Fix sanitize_env() noslash support. This fixes
+	Alioth#311740.
+
+2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Do not sanitize the environment. This breaks
 	--preserve-environment. This sanitation was disabled on Debian
 	since quite some time with no reported issues, and sanitize_env()
 	documentation agrees that it should be useless as all modern
-	Unixes will handle setuid executables properly. This Fixes
+	Unixes will handle setuid executables properly. This fixes
 	Alioth#312287.
 
 2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>

@@ -251,7 +251,7 @@ void sanitize_env (void)
 			if (strncmp (*cur, *bad, strlen (*bad)) != 0) {
 				continue;
 			}
-			if (strchr (*cur, '/') != NULL) {
+			if (strchr (*cur, '/') == NULL) {
 				continue;	/* OK */
 			}
 			for (move = cur; NULL != *move; move++) {
