@@ -149,6 +149,8 @@ login_defs_v = \
 	SU_WHEEL_ONLY.xml \
 	SYSLOG_SG_ENAB.xml \
 	SYSLOG_SU_ENAB.xml \
+	TCB_AUTH_GROUP.xml \
+	TCB_SYMLINKS.xml \
 	TTYGROUP.xml \
 	TTYTYPE_FILE.xml \
 	UID_MAX.xml \
@@ -156,6 +158,7 @@ login_defs_v = \
 	UMASK.xml \
 	USERDEL_CMD.xml \
 	USERGROUPS_ENAB.xml \
+	USE_TCB.xml \
 	SYS_GID_MAX.xml \
 	SYS_UID_MAX.xml
 

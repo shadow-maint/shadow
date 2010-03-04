@@ -105,6 +105,8 @@ login.defs.5: login.defs.d/SYS_GID_MAX.xml
 login.defs.5: login.defs.d/SYSLOG_SG_ENAB.xml
 login.defs.5: login.defs.d/SYSLOG_SU_ENAB.xml
 login.defs.5: login.defs.d/SYS_UID_MAX.xml
+login.defs.5: login.defs.d/TCB_AUTH_GROUP.xml
+login.defs.5: login.defs.d/TCB_SYMLINKS.xml
 login.defs.5: login.defs.d/TTYGROUP.xml
 login.defs.5: login.defs.d/TTYTYPE_FILE.xml
 login.defs.5: login.defs.d/UID_MAX.xml
@@ -112,6 +114,7 @@ login.defs.5: login.defs.d/ULIMIT.xml
 login.defs.5: login.defs.d/UMASK.xml
 login.defs.5: login.defs.d/USERDEL_CMD.xml
 login.defs.5: login.defs.d/USERGROUPS_ENAB.xml
+login.defs.5: login.defs.d/USE_TCB.xml
 newgrp.1: login.defs.d/SYSLOG_SG_ENAB.xml
 newusers.8: login.defs.d/ENCRYPT_METHOD.xml
 newusers.8: login.defs.d/GID_MAX.xml

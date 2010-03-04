@@ -405,6 +405,7 @@ if test "$with_tcb" != "no"; then
 		with_tcb="no"
 	fi
 fi
+AM_CONDITIONAL(WITH_TCB, test x$with_tcb = xyes)
 
 AC_SUBST(LIBPAM)
 if test "$with_libpam" != "no"; then

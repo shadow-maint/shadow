@@ -48,6 +48,9 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif
+#ifdef WITH_TCB
+#include <tcb.h>
+#endif
 #include "prototypes.h"
 #include "commonio.h"
 
@@ -533,6 +536,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	void *eptr = NULL;
 	int flags = mode;
 	size_t buflen;
+	int fd;
 	int saved_errno;
 
 	mode &= ~O_CREAT;
@@ -553,7 +557,24 @@ int commonio_open (struct commonio_db *db, int mode)
 	db->cursor = NULL;
 	db->changed = false;
 
-	db->fp = fopen (db->filename, db->readonly ? "r" : "r+");
+	fd = open(db->filename, (db->readonly ? O_RDONLY : O_RDWR) |
+		O_NOCTTY | O_NONBLOCK | O_NOFOLLOW);
+	saved_errno = errno;
+	db->fp = NULL;
+	if (fd >= 0) {
+#ifdef WITH_TCB
+		if (tcb_is_suspect(fd)) {
+			close(fd);
+			errno = EINVAL;
+			return 0;
+		}
+#endif
+		db->fp = fdopen(fd, db->readonly ? "r" : "r+");
+		saved_errno = errno;
+		if (!db->fp)
+			close(fd);
+	}
+	errno = saved_errno;
 
 	/*
 	 * If O_CREAT was specified and the file didn't exist, it will be

@@ -82,6 +82,8 @@
 <!ENTITY SYSLOG_SG_ENAB        SYSTEM "login.defs.d/SYSLOG_SG_ENAB.xml">
 <!ENTITY SYSLOG_SU_ENAB        SYSTEM "login.defs.d/SYSLOG_SU_ENAB.xml">
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
+<!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
+<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
 <!ENTITY TTYGROUP              SYSTEM "login.defs.d/TTYGROUP.xml">
 <!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
@@ -89,6 +91,7 @@
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
 <!ENTITY USERDEL_CMD           SYSTEM "login.defs.d/USERDEL_CMD.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 ]>
 
 <refentry id='login.defs.5'>
@@ -195,6 +198,8 @@
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
       &SYSLOG_SG_ENAB;
       &SYSLOG_SU_ENAB;
+      &TCB_AUTH_GROUP;
+      &TCB_SYMLINKS;
       &TTYGROUP;
       &TTYTYPE_FILE;
       &UID_MAX; <!-- documents also UID_MIN -->
@@ -202,6 +207,7 @@
       &UMASK;
       &USERDEL_CMD;
       &USERGROUPS_ENAB;
+      &USE_TCB;
     </variablelist>
   </refsect1>
 
@@ -381,16 +387,27 @@
 	<listitem>
 	  <para>
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>pwconv</term>
 	<listitem>
-	  <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE</para>
+	  <para>
+	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    <phrase condition="tcb">USE_TCB</phrase>
+	  </para>
 	</listitem>
       </varlistentry>
-      <!-- pwunconv: no variables -->
+      <varlistentry condition="tcb">
+	<term>pwunconv</term>
+	<listitem>
+	  <para>
+	    <phrase condition="tcb">USE_TCB</phrase>
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>su</term>
 	<listitem>
@@ -427,6 +444,7 @@
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN
 	    UMASK
+	    <phrase condition="tcb">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
@@ -436,6 +454,7 @@
 	  <para>
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD
 	    USERGROUPS_ENAB
+	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
@@ -444,10 +463,18 @@
 	<listitem>
 	  <para>
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
+	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
-      <!-- vipw / vigr: no variables (MAX_MEMBERS_PER_GROUP linked but not used) -->
+      <varlistentry condition="tcb">
+	<term>vipw</term>
+	<listitem>
+	  <para>
+	    <phrase condition="tcb">USE_TCB</phrase>
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 

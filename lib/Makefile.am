@@ -49,6 +49,10 @@ libshadow_la_SOURCES = \
 	shadowmem.c \
 	utent.c
 
+if WITH_TCB
+libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
+endif
+
 # These files are unneeded for some reason, listed in
 # order of appearance:
 #

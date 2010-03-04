@@ -1,9 +1,32 @@
-2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+2010-01-30  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
+
+	* NEWS: Add support for TCB.
+	* lib/tcbfuncs.h, lib/tcbfuncs.c, lib/Makefile.am: New library to
+	support TCB.
+	* lib/prototypes, libmisc/copydir.c (remove_tree): Add boolean
+	parameter remove_root.
+	* configure.in: Add conditional WITH_TCB.
+	* src/userdel.c, src/usermod.c: Add support for TCB. Update call to
+	remove_tree().
+	* src/pwconv.c, src/pwunconv.c: Should not be used with TCB enabled.
+	* src/vipw.c: Add support for TCB. Update call to remove_tree().
+	* src/useradd.c: Add support for TCB. Open the shadow file outside
+	of open_files().
+	* src/chage.c: Add support for TCB.
+	* src/Makefile.am: Install passwd sgid shadow when TCB is enabled.
+	* lib/getdefs.c, man/vipw.8.xml, man/login.defs.5.xml,
+	man/login.defs/TCB_AUTH_GROUP.xml, man/login.defs/USE_TCB.xml,
+	man/login.defs/TCB_SYMLINKS.xml, man/generate_mans.mak,
+	man/generate_mans.deps, man/Makefile.am: New configuration
+	parameters: TCB_AUTH_GROUP, TCB_SYMLINKS, USE_TCB.
+	* lib/shadowio.c, lib/commonio.c: Add support for TCB.
+
+2010-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/env.c: Fix sanitize_env() noslash support. This fixes
 	Alioth#311740.
 
-2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+2010-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: Do not sanitize the environment. This breaks
 	--preserve-environment. This sanitation was disabled on Debian
@@ -12,11 +35,11 @@
 	Unixes will handle setuid executables properly. This fixes
 	Alioth#312287.
 
-2009-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+2010-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/setupenv.c: Fix typo from 2009-11-01.
 
-2009-01-24  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
+2010-01-24  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
 
 	* configure.in: Add support for TCB in configure.in. Actual TCB
 	support will follow.

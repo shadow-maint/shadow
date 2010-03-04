@@ -63,6 +63,9 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+#ifdef WITH_TCB
+#include "tcbfuncs.h"
+#endif
 
 /*
  * exit status values
@@ -1438,7 +1441,7 @@ static void move_home (void)
 				if (copy_tree (user_home, user_newhome,
 				               uflg ? (long int)user_newid : -1,
 				               gflg ? (long int)user_newgid : -1) == 0) {
-					if (remove_tree (user_home) != 0) {
+					if (remove_tree (user_home, true) != 0) {
 						fprintf (stderr,
 						         _("%s: warning: failed to completely remove old home directory %s"),
 						         Prog, user_home);
@@ -1456,7 +1459,7 @@ static void move_home (void)
 
 				/* TODO: do some cleanup if the copy
 				 *       was started */
-				(void) remove_tree (user_newhome);
+				(void) remove_tree (user_newhome, true);
 			}
 			fprintf (stderr,
 			         _("%s: cannot rename directory %s to %s\n"),
@@ -1655,7 +1658,7 @@ static void move_mailbox (void)
 		return;
 	}
 	if (uflg) {
-		if (fchown (fd, user_newid, (gid_t) - 1) < 0) {
+		if (fchown (fd, user_newid, (gid_t) -1) < 0) {
 			perror (_("failed to change mailbox owner"));
 		}
 #ifdef WITH_AUDIT
@@ -1770,6 +1773,11 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
+#ifdef WITH_TCB
+	if (!shadowtcb_set_user(user_name))
+		exit(E_PW_UPDATE);
+#endif
+
 	/*
 	 * Do the hard stuff - open the files, change the user entries,
 	 * change the home directory, then close and update the files.
@@ -1783,6 +1791,13 @@ int main (int argc, char **argv)
 		grp_update ();
 	}
 	close_files ();
+
+#ifdef WITH_TCB
+	if ((user_newname || user_newid != -1) &&
+		!shadowtcb_move(user_newname, user_newid)) {
+		exit(E_PW_UPDATE);
+	}
+#endif
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

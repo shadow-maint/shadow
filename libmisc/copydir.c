@@ -668,7 +668,7 @@ static int copy_file (const char *src, const char *dst,
  *	At the end, it deletes the root directory itself.
  */
 
-int remove_tree (const char *root)
+int remove_tree (const char *root, bool remove_root)
 {
 	char *new_name = NULL;
 	int err = 0;
@@ -721,7 +721,7 @@ int remove_tree (const char *root)
 			/*
 			 * Recursively delete this directory.
 			 */
-			if (remove_tree (new_name) != 0) {
+			if (remove_tree (new_name, true) != 0) {
 				err = -1;
 				break;
 			}
@@ -740,7 +740,7 @@ int remove_tree (const char *root)
 	}
 	(void) closedir (dir);
 
-	if (0 == err) {
+	if (remove_root && 0 == err) {
 		if (rmdir (root) != 0) {
 			err = -1;
 		}

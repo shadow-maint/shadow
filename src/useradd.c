@@ -65,6 +65,9 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+#ifdef WITH_TCB
+#include "tcbfuncs.h"
+#endif
 
 #ifndef SKEL_DIR
 #define SKEL_DIR "/etc/skel"
@@ -192,6 +195,7 @@ static void grp_update (void);
 static void process_flags (int argc, char **argv);
 static void close_files (void);
 static void open_files (void);
+static void open_shadow (void);
 static void faillog_reset (uid_t);
 static void lastlog_reset (uid_t);
 static void usr_update (void);
@@ -1429,21 +1433,8 @@ static void open_files (void)
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd) {
-		if (spw_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, spw_dbname ());
-			fail_exit (E_PW_UPDATE);
-		}
-		spw_locked = true;
-		if (spw_open (O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, spw_dbname ());
-			fail_exit (E_PW_UPDATE);
-		}
-	}
+
+	/* shadow file will be opened by open_shadow(); */
 
 	/*
 	 * Lock and open the group file.
@@ -1476,6 +1467,25 @@ static void open_files (void)
 		}
 	}
 #endif
+}
+
+static void open_shadow (void)
+{
+	if (!is_shadow_pwd)
+		return;
+	if (!spw_lock ()) {
+		fprintf(stderr,
+			_("%s: cannot lock shadow password file\n"),
+			Prog);
+		fail_exit(E_PW_UPDATE);
+	}
+	spw_locked = true;
+	if (!spw_open (O_RDWR)) {
+		fprintf(stderr,
+			_("%s: cannot open shadow password file\n"),
+			Prog);
+		fail_exit(E_PW_UPDATE);
+	}
 }
 
 static char *empty_list = NULL;
@@ -1989,6 +1999,16 @@ int main (int argc, char **argv)
 			}
 		}
 	}
+
+#ifdef WITH_TCB
+	if (getdef_bool("USE_TCB")) {
+		if (!shadowtcb_create(user_name, user_id)) {
+			fprintf(stderr, "Failed to create tcb directory for %s\n", user_name);
+			fail_exit (E_UID_IN_USE);
+		}
+	}
+#endif
+	open_shadow();
 
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */

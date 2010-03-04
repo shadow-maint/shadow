@@ -41,6 +41,10 @@
 #include <stdio.h>
 #include "commonio.h"
 #include "shadowio.h"
+#ifdef WITH_TCB
+#include <tcb.h>
+#include "tcbfuncs.h"
+#endif
 
 static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {
@@ -120,12 +124,40 @@ bool spw_file_present (void)
 
 int spw_lock (void)
 {
-	return commonio_lock (&shadow_db);
+#ifdef WITH_TCB
+	int retval = 0;
+
+	if (!getdef_bool("USE_TCB"))
+#endif
+		return commonio_lock (&shadow_db);
+#ifdef WITH_TCB
+	if (!shadowtcb_drop_priv())
+		return 0;
+	if (lckpwdf_tcb(shadow_db.filename) == 0) {
+		shadow_db.locked = 1;
+		retval = 1;
+	}
+	if (!shadowtcb_gain_priv())
+		return 0;
+	return retval;
+#endif
 }
 
 int spw_open (int mode)
 {
-	return commonio_open (&shadow_db, mode);
+	int retval = 0;
+#ifdef WITH_TCB
+	int use_tcb = getdef_bool("USE_TCB");
+
+	if (use_tcb && !shadowtcb_drop_priv() != 0)
+		return 0;
+#endif
+	retval = commonio_open (&shadow_db, mode);
+#ifdef WITH_TCB
+	if (use_tcb && !shadowtcb_gain_priv() != 0)
+		return 0;
+#endif
+	return retval;
 }
 
 /*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name)
@@ -155,12 +187,40 @@ int spw_rewind (void)
 
 int spw_close (void)
 {
-	return commonio_close (&shadow_db);
+	int retval = 0;
+#ifdef WITH_TCB
+	int use_tcb = getdef_bool("USE_TCB");
+
+	if (use_tcb && !shadowtcb_drop_priv() != 0)
+		return 0;
+#endif
+	retval = commonio_close (&shadow_db);
+#ifdef WITH_TCB
+	if (use_tcb && !shadowtcb_gain_priv() != 0)
+		return 0;
+#endif
+	return retval;
 }
 
 int spw_unlock (void)
 {
-	return commonio_unlock (&shadow_db);
+#ifdef WITH_TCB
+	int retval = 0;
+
+	if (!getdef_bool("USE_TCB"))
+#endif
+		return commonio_unlock (&shadow_db);
+#ifdef WITH_TCB
+	if (!shadowtcb_drop_priv())
+		return 0;
+	if (ulckpwdf_tcb() == 0) {
+		shadow_db.locked = 0;
+		retval = 1;
+	}
+	if (!shadowtcb_gain_priv())
+		return 0;
+	return retval;
+#endif
 }
 
 struct commonio_entry *__spw_get_head (void)
@@ -176,5 +236,9 @@ void __spw_del_entry (const struct commonio_entry *ent)
 /* Sort with respect to passwd ordering. */
 int spw_sort ()
 {
+#ifdef WITH_TCB
+	if (getdef_bool("USE_TCB"))
+		return 0;
+#endif
 	return commonio_sort_wrt (&shadow_db, __pw_get_db ());
 }

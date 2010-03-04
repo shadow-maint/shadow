@@ -117,6 +117,12 @@
 	  <para>Edit shadow or gshadow database.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry condition="tcb">
+	<term><option>-u</option>, <option>--user</option></term>
+	<listitem>
+	  <para>Indicates which user's tcb shadow file to edit.</para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
@@ -164,6 +170,9 @@
       </citerefentry>
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry condition="tcb">
+	<refentrytitle>tcb</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>

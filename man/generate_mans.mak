@@ -8,6 +8,11 @@ SHADOWGRP_COND=gshadow
 else
 SHADOWGRP_COND=no_gshadow
 endif
+if WITH_TCB
+TCB_COND=tcb
+else
+TCB_COND=no_tcb
+endif
 
 if USE_SHA_CRYPT
 SHA_CRYPT_COND=sha_crypt
@@ -20,7 +25,7 @@ endif
 
 %: %.xml-config Makefile config.xml
 if ENABLE_REGENERATE_MAN
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(SHA_CRYPT_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND)" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 else
 	@echo you need to run configure with --enable-man to generate man pages

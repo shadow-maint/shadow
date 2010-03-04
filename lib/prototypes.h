@@ -117,7 +117,7 @@ extern bool console (const char *);
 /* copydir.c */
 extern int copy_tree (const char *src_root, const char *dst_root,
                       long int uid, long int gid);
-extern int remove_tree (const char *root);
+extern int remove_tree (const char *root, bool remove_root);
 
 #ifdef WITH_SELINUX
 extern int selinux_file_context (const char *dst_name);

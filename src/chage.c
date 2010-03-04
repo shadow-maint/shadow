@@ -56,6 +56,9 @@
 #include "defines.h"
 #include "pwio.h"
 #include "shadowio.h"
+#ifdef WITH_TCB
+#include "tcbfuncs.h"
+#endif
 /*@-exitarg@*/
 #include "exitcodes.h"
 
@@ -853,6 +856,10 @@ int main (int argc, char **argv)
 	}
 
 	STRFCPY (user_name, pw->pw_name);
+#ifdef WITH_TCB
+	if (!shadowtcb_set_user(pw->pw_name))
+		fail_exit(E_NOPERM);
+#endif
 	user_uid = pw->pw_uid;
 
 	sp = spw_locate (argv[optind]);

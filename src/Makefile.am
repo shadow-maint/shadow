@@ -5,6 +5,7 @@ EXTRA_DIST = \
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
 suidperms = 4755
+sgidperms = 2755
 
 INCLUDES = \
 	-I${top_srcdir}/lib \
@@ -53,7 +54,13 @@ if ACCT_TOOLS_SETUID
 	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
 
+if WITH_TCB
+suidubins -= passwd
+shadowsgidubins = passwd
+endif
+
 LDADD          = $(INTLLIBS) \
+		 $(LIBTCB) \
 		 $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
@@ -114,3 +121,9 @@ install-am: all-am
 	for i in $(suidubins); do \
 		chmod -f $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
+if WITH_TCB
+	for i in $(shadowsgidubins); do \
+		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
+		chmod -f $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
+	done
+endif

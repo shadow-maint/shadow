@@ -93,6 +93,11 @@ int main (int argc, char **argv)
 
 	OPENLOG ("pwunconv");
 
+	if (getdef_bool("USE_TCB")) {
+		fprintf(stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		exit(1);
+	}
+
 	if (!spw_file_present ()) {
 		/* shadow not installed, do nothing */
 		exit (0);

@@ -59,6 +59,10 @@
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
+#ifdef WITH_TCB
+#include <tcb.h>
+#include "tcbfuncs.h"
+#endif
 /*@-exitarg@*/
 #include "exitcodes.h"
 
@@ -107,6 +111,9 @@ static bool path_prefix (const char *, const char *);
 #endif
 static int is_owner (uid_t, const char *);
 static int remove_mailbox (void);
+#ifdef WITH_TCB
+static int remove_tcbdir (const char *user_name, uid_t user_id);
+#endif
 
 /*
  * usage - display usage message and exit
@@ -731,6 +738,49 @@ static int remove_mailbox (void)
 	return errors;
 }
 
+#ifdef WITH_TCB
+static int remove_tcbdir (const char *user_name, uid_t user_id)
+{
+	char *buf;
+	int ret = 0;
+
+	if (!getdef_bool("USE_TCB"))
+		return 0;
+	
+	buf = malloc(strlen(TCB_DIR) + strlen(user_name) + 2);
+	if (!buf) {
+		fprintf(stderr, "Can't allocate memory, "
+			"tcb entry for %s not removed.\n",
+			user_name);
+		return 1;
+	}
+	snprintf(buf, strlen(TCB_DIR) + strlen(user_name) + 2,
+		TCB_DIR "/%s", user_name);
+	if (!shadowtcb_drop_priv()) {
+		perror("shadowtcb_drop_priv");
+		free(buf);
+		return 1;
+	}
+	/* Only remove directory contents with dropped privileges.
+	 * We will regain them and remove the user's tcb directory afterwards.
+	 */
+	if (remove_tree(buf, false)) {
+		perror("remove_tree");
+		shadowtcb_gain_priv();
+		free(buf);
+		return 1;
+	}
+	shadowtcb_gain_priv();
+	free(buf);
+	if (!shadowtcb_remove(user_name)) {
+		fprintf(stderr, "Cannot remove tcb files for %s: %s\n",
+			user_name, strerror(errno));
+		ret = 1;
+	}
+	return ret;
+}
+#endif
+
 /*
  * main - userdel command
  */
@@ -851,6 +901,10 @@ int main (int argc, char **argv)
 		user_id = pwd->pw_uid;
 		user_home = xstrdup (pwd->pw_dir);
 	}
+#ifdef WITH_TCB
+	if (!shadowtcb_set_user(user_name))
+		exit (E_NOTFOUND);
+#endif
 #ifdef	USE_NIS
 
 	/*
@@ -951,7 +1005,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (rflg) {
-		if (remove_tree (user_home) != 0) {
+		if (remove_tree (user_home, true) != 0) {
 			fprintf (stderr,
 				 _("%s: error removing directory %s\n"),
 				 Prog, user_home);
@@ -995,6 +1049,10 @@ int main (int argc, char **argv)
 	 */
 	user_cancel (user_name);
 	close_files ();
+
+#ifdef WITH_TCB
+	errors += remove_tcbdir(user_name, user_id);
+#endif
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

@@ -124,6 +124,11 @@ static struct itemdef def_table[] = {
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
 #endif
+#ifdef WITH_TCB
+	{"TCB_AUTH_GROUP", NULL},
+	{"TCB_SYMLINKS", NULL},
+	{"USE_TCB", NULL},
+#endif
 	{NULL, NULL}
 };
 
