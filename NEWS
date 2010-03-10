@@ -15,6 +15,8 @@ shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
     sending a SIGTERM), and kill it only if it did not terminate by itself.
     No delay will be enforced if the child cooperates.
   * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
+- newgrp, sg, groupmems
+  * Fix parsing of gshadow entries.
 
 *** translation
   * Updated Czech translation.

@@ -222,6 +222,7 @@ void endsgent (void)
 		if (NULL == buf) {
 			return NULL;
 		}
+		buflen = BUFSIZ;
 	}
 
 	if (NULL == fp) {
@@ -229,9 +230,9 @@ void endsgent (void)
 	}
 
 #ifdef	USE_NIS
-	while (fgetsx (buf, (int) sizeof buf, fp) == buf)
+	while (fgetsx (buf, (int) buflen, fp) == buf)
 #else
-	if (fgetsx (buf, (int) sizeof buf, fp) == buf)
+	if (fgetsx (buf, (int) buflen, fp) == buf)
 #endif
 	{
 		while (   ((cp = strrchr (buf, '\n')) == NULL)
