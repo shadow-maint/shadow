@@ -1774,8 +1774,8 @@ int main (int argc, char **argv)
 #endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_TCB
-	if (!shadowtcb_set_user(user_name))
-		exit(E_PW_UPDATE);
+	if (!shadowtcb_set_user (user_name))
+		exit (E_PW_UPDATE);
 #endif
 
 	/*
@@ -1793,9 +1793,9 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_TCB
-	if ((user_newname || user_newid != -1) &&
-		!shadowtcb_move(user_newname, user_newid)) {
-		exit(E_PW_UPDATE);
+	if (   ((NULL != user_newname) || (user_newid != -1))
+	    && (!shadowtcb_move (user_newname, user_newid)) ) {
+		exit (E_PW_UPDATE);
 	}
 #endif
 

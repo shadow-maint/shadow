@@ -1,5 +1,12 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Re-indent.
+	* src/usermod.c: Avoid implicit conversion of pointers to
+	booleans.
+	* src/usermod.c: Added parenthesis.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwunconv.c: Only check USE_TCB if configured WITH_TCB.
 
 2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
