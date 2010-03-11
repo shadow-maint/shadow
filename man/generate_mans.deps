@@ -1,3 +1,4 @@
+# This file is generated
 chfn.1: login.defs.d/CHFN_AUTH.xml
 chfn.1: login.defs.d/CHFN_RESTRICT.xml
 chfn.1: login.defs.d/LOGIN_STRING.xml

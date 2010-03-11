@@ -1,5 +1,10 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/Makefile.am: Indicate that man/generate_mans.deps is
+	generated.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Re-indent.
 	* lib/commonio.c: Document the sections closed by #endif
 	* lib/commonio.c: Added brackets.
