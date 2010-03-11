@@ -740,7 +740,7 @@ int remove_tree (const char *root, bool remove_root)
 	}
 	(void) closedir (dir);
 
-	if (remove_root && 0 == err) {
+	if (remove_root && (0 == err)) {
 		if (rmdir (root) != 0) {
 			err = -1;
 		}

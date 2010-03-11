@@ -1,3 +1,7 @@
+2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/copydir.c: Added parenthesis.
+
 2010-02-14  Michael Bunk  <mb@computer-leipzig.com>
 
 	* NEWS, lib/gshadow.c: Fix parsing of gshadow entries.
