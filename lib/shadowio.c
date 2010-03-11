@@ -44,7 +44,7 @@
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
-#endif
+#endif				/* WITH_TCB */
 
 static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {
@@ -97,7 +97,7 @@ static struct commonio_db shadow_db = {
 	NULL,			/* fp */
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
-#endif
+#endif				/* WITH_SELINUX */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
@@ -127,36 +127,41 @@ int spw_lock (void)
 #ifdef WITH_TCB
 	int retval = 0;
 
-	if (!getdef_bool("USE_TCB"))
-#endif
+	if (!getdef_bool ("USE_TCB")) {
+#endif				/* WITH_TCB */
 		return commonio_lock (&shadow_db);
 #ifdef WITH_TCB
-	if (!shadowtcb_drop_priv())
+	}
+	if (shadowtcb_drop_priv () == 0) {
 		return 0;
-	if (lckpwdf_tcb(shadow_db.filename) == 0) {
+	}
+	if (lckpwdf_tcb (shadow_db.filename) == 0) {
 		shadow_db.locked = 1;
 		retval = 1;
 	}
-	if (!shadowtcb_gain_priv())
+	if (shadowtcb_gain_priv () == 0) {
 		return 0;
+	}
 	return retval;
-#endif
+#endif				/* WITH_TCB */
 }
 
 int spw_open (int mode)
 {
 	int retval = 0;
 #ifdef WITH_TCB
-	int use_tcb = getdef_bool("USE_TCB");
+	bool use_tcb = getdef_bool ("USE_TCB");
 
-	if (use_tcb && !shadowtcb_drop_priv() != 0)
+	if (use_tcb && (shadowtcb_drop_priv () == 0)) {
 		return 0;
-#endif
+	}
+#endif				/* WITH_TCB */
 	retval = commonio_open (&shadow_db, mode);
 #ifdef WITH_TCB
-	if (use_tcb && !shadowtcb_gain_priv() != 0)
+	if (use_tcb && (shadowtcb_gain_priv () == 0)) {
 		return 0;
-#endif
+	}
+#endif				/* WITH_TCB */
 	return retval;
 }
 
@@ -189,16 +194,18 @@ int spw_close (void)
 {
 	int retval = 0;
 #ifdef WITH_TCB
-	int use_tcb = getdef_bool("USE_TCB");
+	bool use_tcb = getdef_bool ("USE_TCB");
 
-	if (use_tcb && !shadowtcb_drop_priv() != 0)
+	if (use_tcb && (shadowtcb_drop_priv () == 0)) {
 		return 0;
-#endif
+	}
+#endif				/* WITH_TCB */
 	retval = commonio_close (&shadow_db);
 #ifdef WITH_TCB
-	if (use_tcb && !shadowtcb_gain_priv() != 0)
+	if (use_tcb && (shadowtcb_gain_priv () == 0)) {
 		return 0;
-#endif
+	}
+#endif				/* WITH_TCB */
 	return retval;
 }
 
@@ -207,20 +214,23 @@ int spw_unlock (void)
 #ifdef WITH_TCB
 	int retval = 0;
 
-	if (!getdef_bool("USE_TCB"))
-#endif
+	if (!getdef_bool ("USE_TCB")) {
+#endif				/* WITH_TCB */
 		return commonio_unlock (&shadow_db);
 #ifdef WITH_TCB
-	if (!shadowtcb_drop_priv())
+	}
+	if (shadowtcb_drop_priv () == 0) {
 		return 0;
-	if (ulckpwdf_tcb() == 0) {
+	}
+	if (ulckpwdf_tcb () == 0) {
 		shadow_db.locked = 0;
 		retval = 1;
 	}
-	if (!shadowtcb_gain_priv())
+	if (shadowtcb_gain_priv () == 0) {
 		return 0;
+	}
 	return retval;
-#endif
+#endif				/* WITH_TCB */
 }
 
 struct commonio_entry *__spw_get_head (void)
@@ -237,8 +247,9 @@ void __spw_del_entry (const struct commonio_entry *ent)
 int spw_sort ()
 {
 #ifdef WITH_TCB
-	if (getdef_bool("USE_TCB"))
+	if (getdef_bool ("USE_TCB")) {
 		return 0;
-#endif
+	}
+#endif				/* WITH_TCB */
 	return commonio_sort_wrt (&shadow_db, __pw_get_db ());
 }

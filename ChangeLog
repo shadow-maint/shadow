@@ -1,5 +1,14 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadowio.c: Re-indent.
+	* lib/shadowio.c: Added brackets and parenthesis.
+	* lib/shadowio.c: Document the sections closed by #endif
+	* lib/shadowio.c: Avoid negation of comparisons.
+	* lib/shadowio.c: Avoid implicit conversion of integer to booleans
+	and booleans to integers.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Re-indent.
 	* src/useradd.c: Added brackets.
 	* src/useradd.c: Avoid implicit conversion of integers to
