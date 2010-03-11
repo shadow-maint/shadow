@@ -1,5 +1,9 @@
 2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwconv.c: Only check USE_TCB if configured WITH_TCB.
+
+2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c: Added parenthesis.
 
 2010-02-14  Michael Bunk  <mb@computer-leipzig.com>

@@ -133,10 +133,12 @@ int main (int argc, char **argv)
 
 	OPENLOG ("pwconv");
 
+#ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
 		fprintf(stderr, _("%s: can't work with tcb enabled\n"), Prog);
 		fail_exit(E_FAILURE);
 	}
+#endif				/* WITH_TCB */
 
 	if (pw_lock () == 0) {
 		fprintf (stderr,
