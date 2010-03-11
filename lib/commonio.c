@@ -47,10 +47,10 @@
 #include "nscd.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-#endif
+#endif				/* WITH_SELINUX */
 #ifdef WITH_TCB
 #include <tcb.h>
-#endif
+#endif				/* WITH_TCB */
 #include "prototypes.h"
 #include "commonio.h"
 
@@ -222,21 +222,21 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	if (fchown (fileno (fp), sb->st_uid, sb->st_gid) != 0) {
 		goto fail;
 	}
-#else
+#else				/* !HAVE_FCHOWN */
 	if (chown (name, sb->st_mode) != 0) {
 		goto fail;
 	}
-#endif
+#endif				/* !HAVE_FCHOWN */
 
 #ifdef HAVE_FCHMOD
 	if (fchmod (fileno (fp), sb->st_mode & 0664) != 0) {
 		goto fail;
 	}
-#else
+#else				/* !HAVE_FCHMOD */
 	if (chmod (name, sb->st_mode & 0664) != 0) {
 		goto fail;
 	}
-#endif
+#endif				/* !HAVE_FCHMOD */
 	return fp;
 
       fail:
@@ -374,7 +374,7 @@ int commonio_lock (struct commonio_db *db)
 
 	ulckpwdf ();
 	return 0;		/* failure */
-#else
+#else				/* !HAVE_LCKPWDF */
 	int i;
 
 	/*
@@ -400,7 +400,7 @@ int commonio_lock (struct commonio_db *db)
 		}
 	}
 	return 0;		/* failure */
-#endif
+#endif				/* !HAVE_LCKPWDF */
 }
 
 static void dec_lock_count (void)
@@ -417,7 +417,7 @@ static void dec_lock_count (void)
 			}
 #ifdef HAVE_LCKPWDF
 			ulckpwdf ();
-#endif
+#endif				/* HAVE_LCKPWDF */
 		}
 	}
 }
@@ -557,22 +557,24 @@ int commonio_open (struct commonio_db *db, int mode)
 	db->cursor = NULL;
 	db->changed = false;
 
-	fd = open(db->filename, (db->readonly ? O_RDONLY : O_RDWR) |
-		O_NOCTTY | O_NONBLOCK | O_NOFOLLOW);
+	fd = open (db->filename,
+	             (db->readonly ? O_RDONLY : O_RDWR)
+	           | O_NOCTTY | O_NONBLOCK | O_NOFOLLOW);
 	saved_errno = errno;
 	db->fp = NULL;
 	if (fd >= 0) {
 #ifdef WITH_TCB
-		if (tcb_is_suspect(fd)) {
-			close(fd);
+		if (tcb_is_suspect (fd) != 0) {
+			close (fd);
 			errno = EINVAL;
 			return 0;
 		}
-#endif
-		db->fp = fdopen(fd, db->readonly ? "r" : "r+");
+#endif				/* WITH_TCB */
+		db->fp = fdopen (fd, db->readonly ? "r" : "r+");
 		saved_errno = errno;
-		if (!db->fp)
-			close(fd);
+		if (!db->fp) {
+			close (fd);
+		}
 	}
 	errno = saved_errno;
 
@@ -589,7 +591,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 
 	/* Do not inherit fd in spawned processes (e.g. nscd) */
-	fcntl(fileno(db->fp), F_SETFD, FD_CLOEXEC);
+	fcntl (fileno (db->fp), F_SETFD, FD_CLOEXEC);
 
 #ifdef WITH_SELINUX
 	db->scontext = NULL;
@@ -598,7 +600,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			goto cleanup_errno;
 		}
 	}
-#endif
+#endif				/* WITH_SELINUX */
 
 	buflen = BUFLEN;
 	buf = (char *) malloc (buflen);
@@ -689,7 +691,7 @@ int commonio_open (struct commonio_db *db, int mode)
 		freecon (db->scontext);
 		db->scontext = NULL;
 	}
-#endif
+#endif				/* WITH_SELINUX */
 	fclose (db->fp);
 	db->fp = NULL;
 	errno = saved_errno;
@@ -837,7 +839,7 @@ int commonio_close (struct commonio_db *db)
 
 #ifdef WITH_SELINUX
 	/*@null@*/security_context_t old_context = NULL;
-#endif
+#endif				/* WITH_SELINUX */
 
 	if (!db->isopen) {
 		errno = EINVAL;
@@ -873,7 +875,7 @@ int commonio_close (struct commonio_db *db)
 				goto fail;
 			}
 		}
-#endif
+#endif				/* WITH_SELINUX */
 		/*
 		 * Create backup file.
 		 */
@@ -919,9 +921,9 @@ int commonio_close (struct commonio_db *db)
 	if (fsync (fileno (db->fp)) != 0) {
 		errors++;
 	}
-#else
+#else				/* !HAVE_FSYNC */
 	sync ();
-#endif
+#endif				/* !HAVE_FSYNC */
 	if (fclose (db->fp) != 0) {
 		errors++;
 	}
@@ -955,7 +957,7 @@ int commonio_close (struct commonio_db *db)
 		freecon (db->scontext);
 		db->scontext = NULL;
 	}
-#endif
+#endif				/* WITH_SELINUX */
 	free_linked_list (db);
 	return errors == 0;
 }
@@ -986,7 +988,7 @@ static /*@dependent@*/ /*@null@*/struct commonio_entry *find_entry_by_name (
 	struct commonio_db *db,
 	const char *name)
 {
-	return next_entry_by_name(db, db->head, name);
+	return next_entry_by_name (db, db->head, name);
 }
 
 
@@ -1032,9 +1034,9 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 
 #if KEEP_NIS_AT_END
 	add_one_entry_nis (db, p);
-#else
+#else				/* !KEEP_NIS_AT_END */
 	add_one_entry (db, p);
-#endif
+#endif				/* !KEEP_NIS_AT_END */
 
 	db->changed = true;
 	return 1;

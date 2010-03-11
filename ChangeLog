@@ -1,5 +1,13 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Re-indent.
+	* lib/commonio.c: Document the sections closed by #endif
+	* lib/commonio.c: Added brackets.
+	* lib/commonio.c: Avoid implicit conversion of integer to
+	booleans.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: Re-indent.
 	* src/userdel.c: Added brackets.
 	* src/userdel.c: Avoid implicit conversion of pointers to
