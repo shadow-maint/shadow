@@ -1,5 +1,12 @@
 2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: Re-indent.
+	* src/userdel.c: Avoid implicit conversion of pointers to
+	booleans.
+	* src/userdel.c: Document the sections closed by #endif
+
+2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwconv.c: Only check USE_TCB if configured WITH_TCB.
 
 2010-03-10  Nicolas François  <nicolas.francois@centraliens.net>

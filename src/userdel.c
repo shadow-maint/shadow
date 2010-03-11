@@ -58,11 +58,11 @@
 #include "shadowio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
-#endif
+#endif				/* SHADOWGRP */
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
-#endif
+#endif				/* WITH_TCB */
 /*@-exitarg@*/
 #include "exitcodes.h"
 
@@ -92,7 +92,7 @@ static bool is_shadow_pwd;
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
 static bool sgr_locked = false;
-#endif
+#endif				/* SHADOWGRP */
 static bool pw_locked  = false;
 static bool gr_locked   = false;
 static bool spw_locked  = false;
@@ -108,12 +108,12 @@ static void user_cancel (const char *);
 
 #ifdef EXTRA_CHECK_HOME_DIR
 static bool path_prefix (const char *, const char *);
-#endif
+#endif				/* EXTRA_CHECK_HOME_DIR */
 static int is_owner (uid_t, const char *);
 static int remove_mailbox (void);
 #ifdef WITH_TCB
 static int remove_tcbdir (const char *user_name, uid_t user_id);
-#endif
+#endif				/* WITH_TCB */
 
 /*
  * usage - display usage message and exit
@@ -194,7 +194,7 @@ static void update_groups (void)
 		              "deleting user from group",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_SUCCESS);
-#endif
+#endif				/* WITH_AUDIT */
 		SYSLOG ((LOG_INFO, "delete '%s' from group '%s'\n",
 			 user_name, ngrp->gr_name));
 	}
@@ -249,14 +249,14 @@ static void update_groups (void)
 
 #ifdef SHADOWGRP
 			deleted_user_group = true;
-#endif
+#endif				/* SHADOWGRP */
 
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "deleting group",
 			              grp->gr_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
-#endif
+#endif				/* WITH_AUDIT */
 			SYSLOG ((LOG_INFO,
 				 "removed group '%s' owned by '%s'\n",
 				 grp->gr_name, user_name));
@@ -315,7 +315,7 @@ static void update_groups (void)
 		              "deleting user from shadow group",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_SUCCESS);
-#endif
+#endif				/* WITH_AUDIT */
 		SYSLOG ((LOG_INFO, "delete '%s' from shadow group '%s'\n",
 			 user_name, nsgrp->sg_name));
 	}
@@ -395,7 +395,7 @@ static void close_files (void)
 		}
 		sgr_locked = false;
 	}
-#endif
+#endif				/* SHADOWGRP */
 }
 
 /*
@@ -432,14 +432,14 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
-#endif
+#endif				/* SHADOWGRP */
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_USER, Prog,
 	              "deleting user",
 	              user_name, (unsigned int) user_id,
 	              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 
 	exit (code);
 }
@@ -461,7 +461,7 @@ static void open_files (void)
 		              "locking password file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		fail_exit (E_PW_UPDATE);
 	}
 	pw_locked = true;
@@ -473,7 +473,7 @@ static void open_files (void)
 		              "opening password file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd) {
@@ -486,7 +486,7 @@ static void open_files (void)
 			              "locking shadow password file",
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			fail_exit (E_PW_UPDATE);
 		}
 		spw_locked = true;
@@ -499,7 +499,7 @@ static void open_files (void)
 			              "opening shadow password file",
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			fail_exit (E_PW_UPDATE);
 		}
 	}
@@ -512,7 +512,7 @@ static void open_files (void)
 		              "locking group file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_locked = true;
@@ -523,7 +523,7 @@ static void open_files (void)
 		              "opening group file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -537,7 +537,7 @@ static void open_files (void)
 			              "locking shadow group file",
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			fail_exit (E_GRP_UPDATE);
 		}
 		sgr_locked= true;
@@ -549,11 +549,11 @@ static void open_files (void)
 			              "opening shadow group file",
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
-#endif
+#endif				/* SHADOWGRP */
 }
 
 /*
@@ -583,7 +583,7 @@ static void update_user (void)
 	              "deleting user entries",
 	              user_name, (unsigned int) user_id,
 	              SHADOW_AUDIT_SUCCESS);
-#endif
+#endif				/* WITH_AUDIT */
 	SYSLOG ((LOG_INFO, "delete user '%s'\n", user_name));
 }
 
@@ -625,7 +625,7 @@ static bool path_prefix (const char *s1, const char *s2)
 	        && (   ('\0' == s2[strlen (s1)])
 	            || ('/'  == s2[strlen (s1)])));
 }
-#endif
+#endif				/* EXTRA_CHECK_HOME_DIR */
 
 /*
  * is_owner - Check if path is owned by uid
@@ -663,7 +663,7 @@ static int remove_mailbox (void)
 	if ((NULL == maildir) && (getdef_str ("MAIL_FILE") == NULL)) {
 		maildir = MAIL_SPOOL_DIR;
 	}
-#endif
+#endif				/* MAIL_SPOOL_DIR */
 	if (NULL == maildir) {
 		return 0;
 	}
@@ -679,7 +679,7 @@ static int remove_mailbox (void)
 			              "deleting mail file",
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			errors = 1;
 			/* continue */
 		}
@@ -691,7 +691,7 @@ static int remove_mailbox (void)
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_SUCCESS);
 		}
-#endif
+#endif				/* WITH_AUDIT */
 		return errors;
 	}
 	i = is_owner (user_id, mailfile);
@@ -707,7 +707,7 @@ static int remove_mailbox (void)
 		              "deleting mail file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		return 1;
 	} else if (i == -1) {
 		return 0;		/* mailbox doesn't exist */
@@ -722,7 +722,7 @@ static int remove_mailbox (void)
 		              "deleting mail file",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 		errors = 1;
 		/* continue */
 	}
@@ -734,7 +734,7 @@ static int remove_mailbox (void)
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_SUCCESS);
 	}
-#endif
+#endif				/* WITH_AUDIT */
 	return errors;
 }
 
@@ -743,43 +743,43 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 {
 	char *buf;
 	int ret = 0;
+	size_t bufsize = (sizeof TCB_DIR) + strlen (user_name) + 2;
 
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool ("USE_TCB"))
 		return 0;
 	
-	buf = malloc(strlen(TCB_DIR) + strlen(user_name) + 2);
-	if (!buf) {
-		fprintf(stderr, "Can't allocate memory, "
-			"tcb entry for %s not removed.\n",
-			user_name);
+	buf = malloc (buflen);
+	if (NULL == buf) {
+		fprintf (stderr, "Can't allocate memory, "
+		                 "tcb entry for %s not removed.\n",
+		         user_name);
 		return 1;
 	}
-	snprintf(buf, strlen(TCB_DIR) + strlen(user_name) + 2,
-		TCB_DIR "/%s", user_name);
-	if (!shadowtcb_drop_priv()) {
-		perror("shadowtcb_drop_priv");
-		free(buf);
+	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
+	if (!shadowtcb_drop_priv ()) {
+		perror ("shadowtcb_drop_priv");
+		free (buf);
 		return 1;
 	}
 	/* Only remove directory contents with dropped privileges.
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
-	if (remove_tree(buf, false)) {
-		perror("remove_tree");
-		shadowtcb_gain_priv();
-		free(buf);
+	if (remove_tree (buf, false)) {
+		perror ("remove_tree");
+		shadowtcb_gain_priv ();
+		free (buf);
 		return 1;
 	}
-	shadowtcb_gain_priv();
-	free(buf);
-	if (!shadowtcb_remove(user_name)) {
-		fprintf(stderr, "Cannot remove tcb files for %s: %s\n",
-			user_name, strerror(errno));
+	shadowtcb_gain_priv ();
+	free (buf);
+	if (!shadowtcb_remove (user_name)) {
+		fprintf (stderr, "Cannot remove tcb files for %s: %s\n",
+		         user_name, strerror (errno));
 		ret = 1;
 	}
 	return ret;
 }
-#endif
+#endif				/* WITH_TCB */
 
 /*
  * main - userdel command
@@ -797,7 +797,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
-#endif
+#endif				/* WITH_AUDIT */
 
 	/*
 	 * Get my name so that I can use it to report errors.
@@ -878,7 +878,7 @@ int main (int argc, char **argv)
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
-#endif
+#endif				/* SHADOWGRP */
 
 	/*
 	 * Start with a quick check to see if the user exists.
@@ -895,16 +895,16 @@ int main (int argc, char **argv)
 			              "deleting user not found",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			exit (E_NOTFOUND);
 		}
 		user_id = pwd->pw_uid;
 		user_home = xstrdup (pwd->pw_dir);
 	}
 #ifdef WITH_TCB
-	if (!shadowtcb_set_user(user_name))
+	if (!shadowtcb_set_user (user_name))
 		exit (E_NOTFOUND);
-#endif
+#endif				/* WITH_TCB */
 #ifdef	USE_NIS
 
 	/*
@@ -924,7 +924,7 @@ int main (int argc, char **argv)
 		}
 		exit (E_NOTFOUND);
 	}
-#endif
+#endif				/* USE_NIS */
 	/*
 	 * Check to make certain the user isn't logged in.
 	 * Note: This is a best effort basis. The user may log in between,
@@ -940,7 +940,7 @@ int main (int argc, char **argv)
 			              "deleting user logged in",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
-#endif
+#endif				/* WITH_AUDIT */
 			exit (E_USER_BUSY);
 		}
 	}
@@ -1002,7 +1002,7 @@ int main (int argc, char **argv)
 		}
 		endpwent ();
 	}
-#endif
+#endif				/* EXTRA_CHECK_HOME_DIR */
 
 	if (rflg) {
 		if (remove_tree (user_home, true) != 0) {
@@ -1020,7 +1020,7 @@ int main (int argc, char **argv)
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_SUCCESS);
 		}
-#endif
+#endif				/* WITH_AUDIT */
 	}
 #ifdef WITH_AUDIT
 	if (0 != errors) {
@@ -1029,7 +1029,7 @@ int main (int argc, char **argv)
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
 	}
-#endif
+#endif				/* WITH_AUDIT */
 
 #ifdef WITH_SELINUX
 	if (is_selinux_enabled () > 0) {
@@ -1041,7 +1041,7 @@ int main (int argc, char **argv)
 		args[4] = NULL;
 		safe_system (args[0], args, NULL, 1);
 	}
-#endif
+#endif				/* WITH_SELINUX */
 
 	/*
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
@@ -1051,8 +1051,8 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_TCB
-	errors += remove_tcbdir(user_name, user_id);
-#endif
+	errors += remove_tcbdir (user_name, user_id);
+#endif				/* WITH_TCB */
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
