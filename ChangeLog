@@ -1,5 +1,20 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Document the sections closed by #endif
+	* src/vipw.c: Avoid implicit conversion of pointers or integers to
+	booleans.
+	* src/vipw.c: Added brackets and parenthesis.
+	* src/vipw.c: Limit the definition of some variables and macros to
+	the WITH_TCB scope.
+	* src/vipw.c: Avoid assignment in comparisons.
+	* src/vipw.c: Replace PASSWD_FILE (resp. GROUP_FILE and
+	SGROUP_FILE) by pw_dbname () (resp. gr_dbname () and sgr_dbname ()).
+	This is more consistent with the shadow file handling and may be
+	useful to allow edition of another partition's files.
+
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Re-indent.
 	* src/usermod.c: Avoid implicit conversion of pointers to
 	booleans.
