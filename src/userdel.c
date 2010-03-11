@@ -167,7 +167,7 @@ static void update_groups (void)
 			continue;
 		}
 
-		/* 
+		/*
 		 * Delete the username from the list of group members and
 		 * update the group entry to reflect the change.
 		 */
@@ -587,7 +587,7 @@ static void update_user (void)
 	SYSLOG ((LOG_INFO, "delete user '%s'\n", user_name));
 }
 
-/* 
+/*
  * user_cancel - cancel cron and at jobs
  *
  *	user_cancel calls a script for additional cleanups like removal of
@@ -745,9 +745,10 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	int ret = 0;
 	size_t bufsize = (sizeof TCB_DIR) + strlen (user_name) + 2;
 
-	if (!getdef_bool ("USE_TCB"))
+	if (!getdef_bool ("USE_TCB")) {
 		return 0;
-	
+	}
+
 	buf = malloc (buflen);
 	if (NULL == buf) {
 		fprintf (stderr, "Can't allocate memory, "
@@ -756,7 +757,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 1;
 	}
 	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
-	if (!shadowtcb_drop_priv ()) {
+	if (shadowtcb_drop_priv () == 0) {
 		perror ("shadowtcb_drop_priv");
 		free (buf);
 		return 1;
@@ -764,7 +765,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	/* Only remove directory contents with dropped privileges.
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
-	if (remove_tree (buf, false)) {
+	if (remove_tree (buf, false) != 0) {
 		perror ("remove_tree");
 		shadowtcb_gain_priv ();
 		free (buf);
@@ -772,7 +773,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	}
 	shadowtcb_gain_priv ();
 	free (buf);
-	if (!shadowtcb_remove (user_name)) {
+	if (shadowtcb_remove (user_name) == 0) {
 		fprintf (stderr, "Cannot remove tcb files for %s: %s\n",
 		         user_name, strerror (errno));
 		ret = 1;
@@ -902,8 +903,9 @@ int main (int argc, char **argv)
 		user_home = xstrdup (pwd->pw_dir);
 	}
 #ifdef WITH_TCB
-	if (!shadowtcb_set_user (user_name))
+	if (shadowtcb_set_user (user_name) == 0) {
 		exit (E_NOTFOUND);
+	}
 #endif				/* WITH_TCB */
 #ifdef	USE_NIS
 
@@ -1007,8 +1009,8 @@ int main (int argc, char **argv)
 	if (rflg) {
 		if (remove_tree (user_home, true) != 0) {
 			fprintf (stderr,
-				 _("%s: error removing directory %s\n"),
-				 Prog, user_home);
+			         _("%s: error removing directory %s\n"),
+			         Prog, user_home);
 			errors++;
 			/* continue */
 		}

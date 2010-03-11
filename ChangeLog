@@ -1,5 +1,12 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: Re-indent.
+	* src/userdel.c: Added brackets.
+	* src/userdel.c: Avoid implicit conversion of pointers to
+	booleans.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadowio.c: Re-indent.
 	* lib/shadowio.c: Added brackets and parenthesis.
 	* lib/shadowio.c: Document the sections closed by #endif
