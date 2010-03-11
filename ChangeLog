@@ -1,5 +1,13 @@
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Re-indent.
+	* src/useradd.c: Added brackets.
+	* src/useradd.c: Avoid implicit conversion of integers to
+	booleans.
+	* src/useradd.c: Harmonize error messages.
+
+2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/vipw.c: Document the sections closed by #endif
 	* src/vipw.c: Avoid implicit conversion of pointers or integers to
 	booleans.

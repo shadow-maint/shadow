@@ -1471,20 +1471,21 @@ static void open_files (void)
 
 static void open_shadow (void)
 {
-	if (!is_shadow_pwd)
+	if (!is_shadow_pwd) {
 		return;
-	if (!spw_lock ()) {
-		fprintf(stderr,
-			_("%s: cannot lock shadow password file\n"),
-			Prog);
-		fail_exit(E_PW_UPDATE);
+	}
+	if (spw_lock () == 0) {
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, spw_dbname ());
+		fail_exit (E_PW_UPDATE);
 	}
 	spw_locked = true;
-	if (!spw_open (O_RDWR)) {
-		fprintf(stderr,
-			_("%s: cannot open shadow password file\n"),
-			Prog);
-		fail_exit(E_PW_UPDATE);
+	if (spw_open (O_RDWR) == 0) {
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"),
+		         Prog, spw_dbname ());
+		fail_exit (E_PW_UPDATE);
 	}
 }
 
@@ -2002,7 +2003,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		if (!shadowtcb_create(user_name, user_id)) {
+		if (shadowtcb_create(user_name, user_id) == 0) {
 			fprintf(stderr, "Failed to create tcb directory for %s\n", user_name);
 			fail_exit (E_UID_IN_USE);
 		}
