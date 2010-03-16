@@ -74,6 +74,23 @@
 	    Display (or act on) faillog records for all users having an
 	    entry in the <filename>faillog</filename> database.
 	  </para>
+	  <para>
+	    The range of users can be restricted with the
+	    <option>-u</option> option.
+	  </para>
+	  <para>
+	    In display mode, this is still restricted to existing users
+	    but forces the display of the faillog entries even if they
+	    are empty.
+	  </para>
+	  <para>
+	    With the <option>-l</option>, <option>-m</option>,
+	    <option>-r</option>, <option>-t</option> options, the users'
+	    records are changed, even if the user does not exist on the
+	    system. This is useful to reset records of users that have
+	    been deleted or to set a policy in advance for a range of
+	    users.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -175,15 +192,6 @@
       When none of the <option>-l</option>, <option>-m</option>, or
       <option>-r</option> options are used, <command>faillog</command>
       displays the faillog record of the specified user(s).
-    </para>
-    <para>
-      NOTE: in display mode, only the records of users which currently
-      exist in the system are displayed.  In the other modes (when the
-      <option>-l</option>, <option>-m</option>, or <option>-r</option>
-      options are used), the records of the user, or the range of users,
-      or all the users that may have an entry in the faillog database will
-      be changed.  This is useful to reset records of users that have been
-      deleted or set a policy in advance for a range of users.
     </para>
   </refsect1>
 

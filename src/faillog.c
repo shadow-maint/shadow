@@ -271,26 +271,53 @@ static void reset (void)
 			errors = true;
 		}
 	} else {
-		/* Reset all entries in the specified range.
-		 * Non existing entries will not be touched.
-		 * Entries for non existing users are also reset.
+		/* There is no need to reset outside of the faillog
+		 * database.
 		 */
-		uid_t uid = 0;
 		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
-
-		/* Make sure we stay in the umin-umax range if specified */
-		if (has_umin) {
-			uid = (uid_t)umin;
+		if (uidmax > 1) {
+			uidmax--;
 		}
 		if (has_umax && (uid_t)umax < uidmax) {
 			uidmax = (uid_t)umax;
 		}
 
-		while (uid < uidmax) {
+		/* Reset all entries in the specified range.
+		 * Non existing entries will not be touched.
+		 */
+		if (aflg) {
+			/* Entries for non existing users are also reset.
+			 */
+		uid_t uid = 0;
+
+		/* Make sure we stay in the umin-umax range if specified */
+		if (has_umin) {
+			uid = (uid_t)umin;
+		}
+
+		while (uid <= uidmax) {
 			if (reset_one (uid)) {
 				errors = true;
 			}
 			uid++;
+		}
+		} else {
+			/* Only reset records for existing users.
+			 */
+			struct passwd *pwent;
+
+			setpwent ();
+			while ( (pwent = getpwent ()) != NULL ) {
+				if (   uflg
+				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
+				        || (pwent->pw_uid > (uid_t)uidmax))) {
+					continue;
+				}
+				if (reset_one (pwent->pw_uid)) {
+					errors = true;
+				}
+			}
+			endpwent ();
 		}
 	}
 }
@@ -359,29 +386,55 @@ static void setmax (int max)
 			errors = true;
 		}
 	} else {
-		/* Set max for all entries in the specified range.
+		/* Set max for entries in the specified range.
 		 * If max is unchanged for an entry, the entry is not touched.
 		 * If max is null, and no entries exist for this user, no
 		 * entries will be created.
-		 * Entries for non existing user are also taken into
+		 */
+		if (aflg) {
+		/* Entries for non existing user are also taken into
 		 * account (in order to define policy for future users).
 		 */
 		uid_t uid = 0;
+		/* The default umax value is based on the size of the
+		 * faillog database.
+		 */
 		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+		if (uidmax > 1) {
+			uidmax--;
+		}
 
 		/* Make sure we stay in the umin-umax range if specified */
 		if (has_umin) {
 			uid = (uid_t)umin;
 		}
-		if (has_umax && (uid_t)umax < uidmax) {
+		if (has_umax) {
 			uidmax = (uid_t)umax;
 		}
 
-		while (uid < uidmax) {
+		while (uid <= uidmax) {
 			if (setmax_one (uid, max)) {
 				errors = true;
 			}
 			uid++;
+		}
+		} else {
+			/* Only change records for existing users.
+			 */
+			struct passwd *pwent;
+
+			setpwent ();
+			while ( (pwent = getpwent ()) != NULL ) {
+				if (   uflg
+				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
+				        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
+					continue;
+				}
+				if (setmax_one (pwent->pw_uid, max)) {
+					errors = true;
+				}
+			}
+			endpwent ();
 		}
 	}
 }
@@ -450,29 +503,55 @@ static void set_locktime (long locktime)
 			errors = true;
 		}
 	} else {
-		/* Set locktime for all entries in the specified range.
+		/* Set locktime for entries in the specified range.
 		 * If locktime is unchanged for an entry, the entry is not touched.
 		 * If locktime is null, and no entries exist for this user, no
 		 * entries will be created.
-		 * Entries for non existing user are also taken into
+		 */
+		if (aflg) {
+		/* Entries for non existing user are also taken into
 		 * account (in order to define policy for future users).
 		 */
 		uid_t uid = 0;
+		/* The default umax value is based on the size of the
+		 * faillog database.
+		 */
 		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+		if (uidmax > 1) {
+			uidmax--;
+		}
 
 		/* Make sure we stay in the umin-umax range if specified */
 		if (has_umin) {
 			uid = (uid_t)umin;
 		}
-		if (has_umax && (uid_t)umax < uidmax) {
+		if (has_umax) {
 			uidmax = (uid_t)umax;
 		}
 
-		while (uid < uidmax) {
+		while (uid <= uidmax) {
 			if (set_locktime_one (uid, locktime)) {
 				errors = true;
 			}
 			uid++;
+		}
+		} else {
+			/* Only change records for existing users.
+			 */
+			struct passwd *pwent;
+
+			setpwent ();
+			while ( (pwent = getpwent ()) != NULL ) {
+				if (   uflg
+				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
+				        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
+					continue;
+				}
+				if (set_locktime_one (pwent->pw_uid, locktime)) {
+					errors = true;
+				}
+			}
+			endpwent ();
 		}
 	}
 }
@@ -578,9 +657,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (aflg && uflg) {
-		usage (E_USAGE);
-	}
 	if (tflg && (lflg || mflg || rflg)) {
 		usage (E_USAGE);
 	}

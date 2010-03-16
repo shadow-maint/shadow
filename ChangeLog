@@ -1,3 +1,12 @@
+2010-03-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/faillog.8.xml: Document the behavior in display mode of the
+	-a option.
+	* NEWS, man/faillog.8.xml, src/faillog.c: Extend the -a option to
+	the non-display mode. This changes the default behavior of the -l,
+	-m, -r, -t options when -a is not specified (restrict to existing
+	users).
+
 2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/chage.1.xml, man/login.defs.5.xml, man/pwck.8.xml,

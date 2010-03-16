@@ -7,6 +7,9 @@ shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
     zero) when explicitly requested (e.g. with --help).
   * initial support for tcb (http://openwall.com/tcb/).
 
+- faillog
+  * The -l, -m, -r, -t options only act on the existing users, unless -a is
+    specified.
 - groupmod
   * Fixed groupmod when configured with --enable-account-tools-setuid.
 - su
