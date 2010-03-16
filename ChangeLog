@@ -1,3 +1,7 @@
+2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/userdel.c: Avoid perror. Give more verbose warnings.
+
 2010-03-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/Makefile.am: Indicate that man/generate_mans.deps is

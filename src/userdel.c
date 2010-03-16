@@ -758,7 +758,9 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	}
 	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
 	if (shadowtcb_drop_priv () == 0) {
-		perror ("shadowtcb_drop_priv");
+		fprintf (stderr, "Cannot drop privileges: %s\n",
+		         strerror (errno));
+		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
 	}
@@ -766,7 +768,8 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
 	if (remove_tree (buf, false) != 0) {
-		perror ("remove_tree");
+		fprintf (stderr, "Cannot remove the content of %s: %s\n",
+		         buf, strerror (errno));
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
