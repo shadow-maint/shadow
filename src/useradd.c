@@ -1312,7 +1312,7 @@ static void process_flags (int argc, char **argv)
 	if (!rflg) {
 		/* for system accounts defaults are ignored and we
 		 * do not create a home dir */
-		if (getdef_bool("CREATE_HOME")) {
+		if (getdef_bool ("CREATE_HOME")) {
 			mflg = true;
 		}
 	}
@@ -2002,14 +2002,16 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_TCB
-	if (getdef_bool("USE_TCB")) {
-		if (shadowtcb_create(user_name, user_id) == 0) {
-			fprintf(stderr, "Failed to create tcb directory for %s\n", user_name);
+	if (getdef_bool ("USE_TCB")) {
+		if (shadowtcb_create (user_name, user_id) == 0) {
+			fprintf (stderr,
+			         _("%s: Failed to create tcb directory for %s\n"),
+			         Prog, user_name);
 			fail_exit (E_UID_IN_USE);
 		}
 	}
 #endif
-	open_shadow();
+	open_shadow ();
 
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */
@@ -2039,7 +2041,7 @@ int main (int argc, char **argv)
 	}
 
 	/* Do not create mail directory for system accounts */
-	if( !rflg ) {
+	if (!rflg) {
 		create_mail ();
 	}
 

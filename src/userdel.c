@@ -751,15 +751,15 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 
 	buf = malloc (buflen);
 	if (NULL == buf) {
-		fprintf (stderr, "Can't allocate memory, "
-		                 "tcb entry for %s not removed.\n",
-		         user_name);
+		fprintf (stderr, _("%s: Can't allocate memory, "
+		                   "tcb entry for %s not removed.\n"),
+		         Prog, user_name);
 		return 1;
 	}
 	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
 	if (shadowtcb_drop_priv () == 0) {
-		fprintf (stderr, "Cannot drop privileges: %s\n",
-		         strerror (errno));
+		fprintf (stderr, _("%s: Cannot drop privileges: %s\n"),
+		         Prog, strerror (errno));
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -768,8 +768,8 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
 	if (remove_tree (buf, false) != 0) {
-		fprintf (stderr, "Cannot remove the content of %s: %s\n",
-		         buf, strerror (errno));
+		fprintf (stderr, _("%s: Cannot remove the content of %s: %s\n"),
+		         Prog, buf, strerror (errno));
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -777,8 +777,8 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	shadowtcb_gain_priv ();
 	free (buf);
 	if (shadowtcb_remove (user_name) == 0) {
-		fprintf (stderr, "Cannot remove tcb files for %s: %s\n",
-		         user_name, strerror (errno));
+		fprintf (stderr, _("%s: Cannot remove tcb files for %s: %s\n"),
+		         Prog, user_name, strerror (errno));
 		ret = 1;
 	}
 	return ret;
@@ -920,12 +920,12 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: user %s is a NIS user\n"), Prog, user_name);
+		         _("%s: user %s is a NIS user\n"), Prog, user_name);
 		if (   !yp_get_default_domain (&nis_domain)
 		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
-				 _("%s: %s is the NIS master\n"),
-				 Prog, nis_master);
+			         _("%s: %s is the NIS master\n"),
+			         Prog, nis_master);
 		}
 		exit (E_NOTFOUND);
 	}
@@ -996,9 +996,8 @@ int main (int argc, char **argv)
 			}
 			if (path_prefix (user_home, pwd->pw_dir)) {
 				fprintf (stderr,
-					 _
-					 ("%s: not removing directory %s (would remove home of user %s)\n"),
-					 Prog, user_home, pwd->pw_name);
+				         _("%s: not removing directory %s (would remove home of user %s)\n"),
+				         Prog, user_home, pwd->pw_name);
 				rflg = false;
 				errors++;
 				/* continue */

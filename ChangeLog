@@ -1,5 +1,18 @@
 2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/POTFILES.in, lib/tcbfuncs.c: Add more strings for
+	translation.
+	* lib/tcbfuncs.c: Indicate the name of the program in error
+	messages. Avoid perror.
+	* src/useradd.c: Re-indent.
+	* src/useradd.c: Add more strings for translation. Indicate the
+	name of the program in error messages.
+	* src/userdel.c: Re-indent.
+	* src/userdel.c: Add more strings for translation. Indicate the
+	name of the program in error messages.
+
+2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: user_newname and user_newid cannot be used to
 	test if the username or ID is changed. lflg and uflg should be
 	used instead.

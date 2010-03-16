@@ -63,7 +63,7 @@ int shadowtcb_gain_priv()
  * to exit soon.
  */
 #define OUT_OF_MEMORY do { \
-	fprintf(stderr, "Out of memory.\n"); \
+	fprintf(stderr, _("%s: out of memory\n"), Prog); \
 	fflush(stderr); \
 	return 0; \
 } while(0)
@@ -101,7 +101,7 @@ static char *shadowtcb_path_rel_existing(const char *name)
 		OUT_OF_MEMORY;
 	}
 	if (lstat(path, &st)) {
-		fprintf(stderr, "Cannot stat %s: %s\n", path, strerror(errno));
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, path, strerror(errno));
 		free(path);
 		return NULL;
 	}
@@ -114,19 +114,19 @@ static char *shadowtcb_path_rel_existing(const char *name)
 		return rval;
 	}
 	if (!S_ISLNK(st.st_mode)) {
-		fprintf(stderr, "%s is neither a directory, nor a symlink.\n", path);
+		fprintf(stderr, _("%s: %s is neither a directory, nor a symlink.\n"), Prog, path);
 		free(path);
 		return NULL;
 	}
 	ret = readlink(path, link, sizeof(link) - 1);
 	free(path);
 	if (ret == -1) {
-		perror("readlink");
+		fprintf(stderr, _("%s: Cannot read symbolic link %s: %s\n"), Prog, path, strerror(errno));
 		return NULL;
 	}
 	if (ret >= sizeof(link) - 1) {
 		link[sizeof(link) - 1] = '\0';
-		fprintf(stderr, "Suspiciously long symlink: %s\n", link);
+		fprintf(stderr, _("%s: Suspiciously long symlink: %s\n"), Prog, link);
 		return NULL;
 	}
 	link[ret] = '\0';
@@ -174,7 +174,7 @@ static int mkdir_leading(const char *name, uid_t uid)
 		return 0;
 	ptr = path;
 	if (stat(TCB_DIR, &st)) {
-		perror("stat");
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, TCB_DIR, strerror(errno));
 		goto out_free_path;
 	}
 	while ((ind = strchr(ptr, '/'))) {
@@ -184,15 +184,15 @@ static int mkdir_leading(const char *name, uid_t uid)
 			OUT_OF_MEMORY;
 		}
 		if (mkdir(dir, 0700) && errno != EEXIST) {
-			perror("mkdir");
+			fprintf(stderr, _("%s: Cannot create directory %s: %s\n"), Prog, dir, strerror(errno));
 			goto out_free_dir;
 		}
 		if (chown(dir, 0, st.st_gid)) {
-			perror("chown");
+			fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, dir, strerror(errno));
 			goto out_free_dir;
 		}
 		if (chmod(dir, 0711)) {
-			perror("chmod");
+			fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, dir, strerror(errno));
 			goto out_free_dir;
 		}
 		free(dir);
@@ -220,8 +220,7 @@ static int unlink_suffs(const char *user)
 			OUT_OF_MEMORY;
 		}
 		if (unlink(tmp) && errno != ENOENT) {
-			fprintf(stderr, "unlink: %s: %s\n", tmp,
-				strerror(errno));
+			fprintf(stderr, _("%s: unlink: %s: %s\n"), Prog, tmp, strerror(errno));
 			free(tmp);
 			return 0;
 		}
@@ -244,7 +243,7 @@ static int rmdir_leading(char *path)
 		}
 		if (rmdir(dir)) {
 			if (errno != ENOTEMPTY) {
-				perror("rmdir");
+				fprintf(stderr, _("%s: Cannot removedirectory %s: %s\n"), Prog, dir, strerror(errno));
 				ret = 0;
 			}
 			free(dir);
@@ -268,7 +267,7 @@ static int move_dir(const char *user_newname, uid_t user_newid)
 	if (!olddir)
 		goto out_free_nomem;
 	if (stat(olddir, &oldmode)) {
-		perror("stat");
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, olddir, strerror(errno));
 		goto out_free;
 	}
 	old_uid = oldmode.st_uid;
@@ -286,13 +285,13 @@ static int move_dir(const char *user_newname, uid_t user_newid)
 	if (!mkdir_leading(user_newname, the_newid))
 		goto out_free;
 	if (rename(real_old_dir, real_new_dir)) {
-		perror("rename");
+		fprintf(stderr, _("%s: Cannot rename %s to %s: %s\n"), Prog, real_old_dir, real_new_dir, strerror(errno));
 		goto out_free;
 	}
 	if (!rmdir_leading(real_old_dir_rel))
 		goto out_free;
 	if (unlink(olddir) && errno != ENOENT) {
-		perror("unlink");
+		fprintf(stderr, _("%s: Cannot remove %s: %s\n"), Prog, olddir, strerror(errno));
 		goto out_free;
 	}
 	asprintf(&newdir, TCB_DIR "/%s", user_newname);
@@ -301,13 +300,13 @@ static int move_dir(const char *user_newname, uid_t user_newid)
 	if (!(real_new_dir_rel = shadowtcb_path_rel(user_newname, the_newid)))
 		goto out_free;
 	if (strcmp(real_new_dir, newdir) && symlink(real_new_dir_rel, newdir)) {
-		perror("symlink");
+		fprintf(stderr, _("%s: Cannot create symbolic link %s: %s\n"), Prog, real_new_dir_rel, strerror(errno));
 		goto out_free;
 	}
 	ret = 1;
 	goto out_free;
 out_free_nomem:
-	fprintf(stderr, "Out of memory\n");
+	fprintf(stderr, _("%s: out of memory\n"), Prog); \
 	fflush(stderr);
 out_free:
 	free(olddir);
@@ -386,48 +385,48 @@ int shadowtcb_move(const char *user_newname, uid_t user_newid)
 		OUT_OF_MEMORY;
 	}
 	if (stat(tcbdir, &dirmode)) {
-		perror("stat");
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, tcbdir, strerror(errno));
 		goto out_free;
 	}
 	if (chown(tcbdir, 0, 0)) {
-		perror("chown");
+		fprintf(stderr, _("%s: Cannot change owners of %s: %s\n"), Prog, tcbdir, strerror(errno));
 		goto out_free;
 	}
 	if (chmod(tcbdir, 0700)) {
-		perror("chmod");
+		fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, tcbdir, strerror(errno));
 		goto out_free;
 	}
 	if (lstat(shadow, &filemode)) {
 		if (errno != ENOENT) {
-			perror("lstat");
+			fprintf(stderr, _("%s: Cannot lstat %s: %s\n"), Prog, shadow, strerror(errno));
 			goto out_free;
 		}
 		fprintf(stderr,
-			"Warning, user %s has no tcb shadow file.\n",
-			user_newname);
+			_("%s: Warning, user %s has no tcb shadow file.\n"),
+			Prog, user_newname);
 	} else {
 		if (!S_ISREG(filemode.st_mode) ||
 			filemode.st_nlink != 1) {
 			fprintf(stderr,
-				"Emergency: %s's tcb shadow is not a regular file"
+				_("%s: Emergency: %s's tcb shadow is not a regular file"
 				" with st_nlink=1.\n"
-				"The account is left locked.\n",
-				user_newname);
+				"The account is left locked.\n"),
+				Prog, user_newname);
 			goto out_free;
 		}
 		if (chown(shadow, user_newid, filemode.st_gid)) {
-			perror("chown");
+			fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, shadow, strerror(errno));
 			goto out_free;
 		}
 		if (chmod(shadow, filemode.st_mode & 07777)) {
-			perror("chmod");
+			fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, shadow, strerror(errno));
 			goto out_free;
 		}
 	}
 	if (!unlink_suffs(user_newname))
 		goto out_free;
 	if (chown(tcbdir, user_newid, dirmode.st_gid)) {
-		perror("chown");
+		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, tcbdir, strerror(errno));
 		goto out_free;
 	}
 	ret = 1;
@@ -448,7 +447,7 @@ int shadowtcb_create(const char *name, uid_t uid)
 	if (!getdef_bool("USE_TCB"))
 		return 1;
 	if (stat(TCB_DIR, &tcbdir_stat)) {
-		perror("stat");
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, tcbdir, strerror(errno));
 		return 0;
 	}
 	shadowgid = tcbdir_stat.st_gid;
@@ -465,30 +464,30 @@ int shadowtcb_create(const char *name, uid_t uid)
 		OUT_OF_MEMORY;
 	}
 	if (mkdir(dir, 0700)) {
-		fprintf(stderr, "mkdir: %s: %s\n", dir, strerror(errno));
+		fprintf(stderr, _("%s: mkdir: %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
 		return 0;
 	}
 	fd = open(shadow, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (fd < 0) {
-		perror("open");
+		fprintf(stderr, _("%s: Cannot open %s: %s\n"), Prog, shadow, strerror(errno));
 		goto out_free;
 	}
 	close(fd);
 	if (chown(shadow, 0, authgid)) {
-		perror("chown");
+		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, shadow, strerror(errno));
 		goto out_free;
 	}
 	if (chmod(shadow, authgid == shadowgid ? 0600 : 0640)) {
-		perror("chmod");
+		fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, shadow, strerror(errno));
 		goto out_free;
 	}
 	if (chown(dir, 0, authgid)) {
-		perror("chown");
+		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
 	}
 	if (chmod(dir, authgid == shadowgid ? 02700 : 02710)) {
-		perror("chmod");
+		fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
 	}
 	if (!shadowtcb_set_user(name) || !shadowtcb_move(NULL, uid))
