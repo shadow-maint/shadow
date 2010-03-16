@@ -28,6 +28,10 @@
    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
+]>
 <refentry id='chage.1'>
   <!--  $Id$  -->
   <refmeta>
@@ -200,6 +204,18 @@
       an unprivileged user to determine when his/her password or account is due
       to expire.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &USE_TCB;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

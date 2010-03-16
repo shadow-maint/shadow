@@ -41,6 +41,9 @@
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
+<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 ]>
 <refentry id='useradd.8'>
@@ -634,8 +637,11 @@
       &PASS_WARN_AGE;
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
+      &TCB_AUTH_GROUP;
+      &TCB_SYMLINKS;
       &UID_MAX; <!-- documents also UID_MIN -->
       &UMASK;
+      &USE_TCB;
       &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>

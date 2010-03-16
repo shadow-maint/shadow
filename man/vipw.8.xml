@@ -31,6 +31,7 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 ]>
 <refentry id='vipw.8'>
   <!--  $Id$  -->
@@ -123,6 +124,18 @@
 	  <para>Indicates which user's tcb shadow file to edit.</para>
 	</listitem>
       </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &USE_TCB;
     </variablelist>
   </refsect1>
 

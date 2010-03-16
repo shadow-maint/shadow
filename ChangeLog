@@ -1,5 +1,15 @@
 2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chage.1.xml, man/login.defs.5.xml, man/pwck.8.xml,
+	man/pwconv.8.xml, man/useradd.8.xml, man/userdel.8.xml,
+	man/usermod.8.xml, man/vipw.8.xml: Document the usage of the
+	TCB_AUTH_GROUP, TCB_SYMLINKS, and USE_TCB configuration
+	parameters.
+	* man/pwconv.8.xml, man/pwck.8.xml: Document the behavior when
+	USE_TCB is enabled.
+
+2010-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/POTFILES.in, lib/tcbfuncs.c: Add more strings for
 	translation.
 	* lib/tcbfuncs.c: Indicate the name of the program in error

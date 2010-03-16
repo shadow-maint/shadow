@@ -35,6 +35,7 @@
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 ]>
 <refentry id='pwconv.8'>
   <!-- $Id$ -->
@@ -73,12 +74,29 @@
       remap='I'>shadow</emphasis> from <emphasis remap='I'>passwd</emphasis>
       and an optionally existing <emphasis remap='I'>shadow</emphasis>.
     </para>
+    <para condition="tcb">
+      <command>pwconv</command> does not work with
+      <option>USE_TCB</option> enabled. To convert to tcb passwords, you
+      should first use <command>pwconv</command> to convert to shadowed
+      passwords by disabling <option>USE_TCB</option> in
+      <filename>login.defs</filename> and then convert to tcb password
+      using <command>tcb_convert</command> (and re-enable
+      <option>USE_TCB</option> in <filename>login.defs</filename>.)
+    </para>
 
     <para>
       The <command>pwunconv</command> command creates <emphasis
       remap='I'>passwd</emphasis> from <emphasis remap='I'>passwd</emphasis>
       and <emphasis remap='I'>shadow</emphasis> and then removes <emphasis
       remap='I'>shadow</emphasis>.
+    </para>
+    <para condition="tcb">
+      <command>pwunconv</command> does not work with
+      <option>USE_TCB</option> enabled. You should first switch back from
+      tcb to shadowed passwords using <command>tcb_unconvert</command>,
+      and then disable <option>USE_TCB</option> in
+      <filename>login.defs</filename> before using
+      <command>pwunconv</command>.
     </para>
 
     <para>
@@ -161,6 +179,7 @@
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
+      &USE_TCB;
     </variablelist>
   </refsect1>
 
@@ -187,7 +206,13 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>.
+      </citerefentry><phrase condition="tcb">,
+      <citerefentry>
+	<refentrytitle>tcb_convert</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>tcb_unconvert</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry></phrase>.
     </para>
   </refsect1>
 </refentry>

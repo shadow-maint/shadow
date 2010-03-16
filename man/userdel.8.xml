@@ -32,6 +32,8 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!ENTITY USERDEL_CMD           SYSTEM "login.defs.d/USERDEL_CMD.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 ]>
@@ -131,6 +133,8 @@
     <variablelist>
       &MAIL_DIR; <!-- documents also MAIL_FILE -->
       &MAX_MEMBERS_PER_GROUP;
+      &TCB_SYMLINKS;
+      &USE_TCB;
       &USERDEL_CMD;
       &USERGROUPS_ENAB;
     </variablelist>

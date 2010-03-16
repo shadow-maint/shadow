@@ -219,7 +219,12 @@
     </para>
     <!-- .na -->
     <variablelist remap='IP'>
-      <!-- chage: no variables -->
+      <varlistentry condition="tcb">
+	<term>chage</term>
+	<listitem>
+	  <para>USE_TCB</para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>chfn</term>
 	<listitem>
@@ -387,7 +392,7 @@
 	<listitem>
 	  <para>
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
-	    <phrase condition="tcb">USE_TCB</phrase>
+	    <phrase condition="tcb">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
@@ -454,7 +459,7 @@
 	  <para>
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD
 	    USERGROUPS_ENAB
-	    <phrase condition="tcb">USE_TCB</phrase>
+	    <phrase condition="tcb">TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
@@ -463,7 +468,7 @@
 	<listitem>
 	  <para>
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
-	    <phrase condition="tcb">USE_TCB</phrase>
+	    <phrase condition="tcb">TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
 	</listitem>
       </varlistentry>
