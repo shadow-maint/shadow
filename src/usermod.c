@@ -1793,7 +1793,7 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_TCB
-	if (   ((NULL != user_newname) || (user_newid != -1))
+	if (   (lflg || uflg)
 	    && (!shadowtcb_move (user_newname, user_newid)) ) {
 		exit (E_PW_UPDATE);
 	}
