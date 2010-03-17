@@ -572,8 +572,8 @@ int commonio_open (struct commonio_db *db, int mode)
 #endif				/* WITH_TCB */
 		db->fp = fdopen (fd, db->readonly ? "r" : "r+");
 		saved_errno = errno;
-		if (!db->fp) {
-			close (fd);
+		if (NULL == db->fp) {
+			(void) close (fd);
 		}
 	}
 	errno = saved_errno;

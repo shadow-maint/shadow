@@ -1,3 +1,10 @@
+2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/commonio.c: Avoid implicit conversion of pointers to
+	booleans.
+	* lib/commonio.c: Ignore the return value of close when a
+	failure is reported.
+
 2010-03-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/faillog.8.xml: Document the behavior in display mode of the
@@ -878,7 +885,7 @@
 
 2009-04-30  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* lib/commonio.c: Ignore teh return values of fclose() and
+	* lib/commonio.c: Ignore the return values of fclose() and
 	unlink() in case of failure of fopen_set_perms() or
 	create_backup().
 	* lib/commonio.c: Should the backup file be unlink'ed in case of
