@@ -1,5 +1,12 @@
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/tcbfuncs.h: Added type shadowtcb_status.
+	* lib/tcbfuncs.h, lib/tcbfuncs.c: Return a shadowtcb_status
+	instead of an int.
+	* lib/tcbfuncs.c: Do not return in OUT_OF_MEMORY.
+
+2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Avoid implicit conversion of pointers to
 	booleans.
 	* lib/commonio.c: Ignore the return value of close when a
