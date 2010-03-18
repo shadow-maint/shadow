@@ -565,7 +565,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (fd >= 0) {
 #ifdef WITH_TCB
 		if (tcb_is_suspect (fd) != 0) {
-			close (fd);
+			(void) close (fd);
 			errno = EINVAL;
 			return 0;
 		}
