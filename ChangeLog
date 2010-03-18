@@ -4,6 +4,9 @@
 	* lib/tcbfuncs.h, lib/tcbfuncs.c: Return a shadowtcb_status
 	instead of an int.
 	* lib/tcbfuncs.c: Do not return in OUT_OF_MEMORY.
+	* lib/tcbfuncs.c: Only FreeBSD specify that the returned buffer is
+	NULL in case of failure. The return value of asprintf shall be
+	checked.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
