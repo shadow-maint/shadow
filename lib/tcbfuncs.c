@@ -66,7 +66,7 @@ shadowtcb_status shadowtcb_gain_priv()
  */
 #define OUT_OF_MEMORY do { \
 	fprintf(stderr, _("%s: out of memory\n"), Prog); \
-	fflush(stderr); \
+	(void) fflush(stderr); \
 } while(false)
 
 /* Returns user's tcb directory path relative to TCB_DIR. */
