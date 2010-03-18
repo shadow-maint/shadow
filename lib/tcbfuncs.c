@@ -40,7 +40,7 @@
 #define SHADOWTCB_HASH_BY 1000
 #define SHADOWTCB_LOCK_SUFFIX ".lock"
 
-static char *stored_tcb_user = NULL;
+static /*@null@*//*@only@*/char *stored_tcb_user = NULL;
 
 shadowtcb_status shadowtcb_drop_priv()
 {
@@ -70,7 +70,7 @@ shadowtcb_status shadowtcb_gain_priv()
 } while(false)
 
 /* Returns user's tcb directory path relative to TCB_DIR. */
-static char *shadowtcb_path_rel(const char *name, uid_t uid)
+static /*@null@*/ char *shadowtcb_path_rel(const char *name, uid_t uid)
 {
 	char *ret;
 
@@ -96,7 +96,7 @@ static char *shadowtcb_path_rel(const char *name, uid_t uid)
 	return ret;
 }
 
-static char *shadowtcb_path_rel_existing(const char *name)
+static /*@null@*/ char *shadowtcb_path_rel_existing(const char *name)
 {
 	char *path, *rval;
 	struct stat st;
@@ -147,7 +147,7 @@ static char *shadowtcb_path_rel_existing(const char *name)
 	return rval;
 }
 
-static char *shadowtcb_path(const char *name, uid_t uid)
+static /*@null@*/ char *shadowtcb_path(const char *name, uid_t uid)
 {
 	char *ret, *rel;
 
@@ -163,7 +163,7 @@ static char *shadowtcb_path(const char *name, uid_t uid)
 	return ret;
 }
 
-static char *shadowtcb_path_existing(const char *name)
+static /*@null@*/ char *shadowtcb_path_existing(const char *name)
 {
 	char *ret, *rel;
 
@@ -382,7 +382,7 @@ shadowtcb_status shadowtcb_remove(const char *name)
 	return ret;
 }
 
-shadowtcb_status shadowtcb_move(const char *user_newname, uid_t user_newid)
+shadowtcb_status shadowtcb_move(/*@NULL@*/const char *user_newname, uid_t user_newid)
 {
 	struct stat dirmode, filemode;
 	char *tcbdir, *shadow;
