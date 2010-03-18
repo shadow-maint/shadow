@@ -10,6 +10,7 @@
 	* lib/tcbfuncs.c: Avoid implicit conversion of pointers or
 	integers to booleans.
 	* lib/tcbfuncs.c: Avoid assignments in comparisons.
+	* lib/tcbfuncs.c: Do not free path before its last use.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 

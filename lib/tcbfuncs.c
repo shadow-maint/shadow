@@ -126,11 +126,12 @@ static char *shadowtcb_path_rel_existing(const char *name)
 		return NULL;
 	}
 	ret = readlink(path, link, sizeof(link) - 1);
-	free(path);
 	if (ret == -1) {
 		fprintf(stderr, _("%s: Cannot read symbolic link %s: %s\n"), Prog, path, strerror(errno));
+		free(path);
 		return NULL;
 	}
+	free(path);
 	if (ret >= sizeof(link) - 1) {
 		link[sizeof(link) - 1] = '\0';
 		fprintf(stderr, _("%s: Suspiciously long symlink: %s\n"), Prog, link);
