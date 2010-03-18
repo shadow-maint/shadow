@@ -486,7 +486,6 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 	if (mkdir(dir, 0700) != 0) {
 		fprintf(stderr, _("%s: mkdir: %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
-		return 0;
 	}
 	fd = open(shadow, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (fd < 0) {

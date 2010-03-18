@@ -17,6 +17,7 @@
 	* lib/tcbfuncs.c: Avoid implicit signed to unsigned conversions.
 	* lib/tcbfuncs.c: Avoid integer to char conversions.
 	* lib/tcbfuncs.c: Include prototypes.h for the definition of Prog.
+	* lib/tcbfuncs.c: Removed dead return.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
