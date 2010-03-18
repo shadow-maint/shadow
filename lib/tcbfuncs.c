@@ -45,19 +45,23 @@ static /*@null@*//*@only@*/char *stored_tcb_user = NULL;
 
 shadowtcb_status shadowtcb_drop_priv()
 {
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool("USE_TCB")) {
 		return SHADOWTCB_SUCCESS;
+	}
 	
-	if (stored_tcb_user)
+	if (stored_tcb_user) {
 		return (tcb_drop_priv(stored_tcb_user) == 0) ? SHADOWTCB_SUCCESS : SHADOWTCB_FAILURE;
+	}
 	
 	return SHADOWTCB_FAILURE;
 }
 
 shadowtcb_status shadowtcb_gain_priv()
 {
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool("USE_TCB")) {
 		return SHADOWTCB_SUCCESS;
+	}
+
 	return (tcb_gain_priv() == 0) ? SHADOWTCB_SUCCESS : SHADOWTCB_FAILURE;
 }
 
@@ -153,8 +157,9 @@ static /*@null@*/ char *shadowtcb_path(const char *name, uid_t uid)
 	char *ret, *rel;
 
 	rel = shadowtcb_path_rel(name, uid);
-	if (NULL == rel)
+	if (NULL == rel) {
 		return NULL;
+	}
 	if (asprintf(&ret, TCB_DIR "/%s", rel) == -1) {
 		OUT_OF_MEMORY;
 		free(rel);
@@ -169,8 +174,9 @@ static /*@null@*/ char *shadowtcb_path_existing(const char *name)
 	char *ret, *rel;
 
 	rel = shadowtcb_path_rel_existing(name);
-	if (NULL == rel)
+	if (NULL == rel) {
 		return NULL;
+	}
 	if (asprintf(&ret, TCB_DIR "/%s", rel) == -1) {
 		OUT_OF_MEMORY;
 		free(rel);
@@ -185,8 +191,9 @@ static shadowtcb_status mkdir_leading(const char *name, uid_t uid)
 	char *ind, *dir, *ptr, *path = shadowtcb_path_rel(name, uid);
 	struct stat st;
 
-	if (NULL == path)
+	if (NULL == path) {
 		return SHADOWTCB_FAILURE;
+	}
 	ptr = path;
 	if (stat(TCB_DIR, &st) != 0) {
 		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, TCB_DIR, strerror(errno));
@@ -198,7 +205,7 @@ static shadowtcb_status mkdir_leading(const char *name, uid_t uid)
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;
 		}
-		if (mkdir(dir, 0700) != 0 && errno != EEXIST) {
+		if ((mkdir(dir, 0700) != 0) && (errno != EEXIST)) {
 			fprintf(stderr, _("%s: Cannot create directory %s: %s\n"), Prog, dir, strerror(errno));
 			goto out_free_dir;
 		}
@@ -234,7 +241,7 @@ static shadowtcb_status unlink_suffs(const char *user)
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;
 		}
-		if (unlink(tmp) != 0 && errno != ENOENT) {
+		if ((unlink(tmp) != 0) && (errno != ENOENT)) {
 			fprintf(stderr, _("%s: unlink: %s: %s\n"), Prog, tmp, strerror(errno));
 			free(tmp);
 			return SHADOWTCB_FAILURE;
@@ -281,8 +288,9 @@ static shadowtcb_status move_dir(const char *user_newname, uid_t user_newid)
 	if (NULL == stored_tcb_user) {
 		return SHADOWTCB_FAILURE;
 	}
-	if (asprintf(&olddir, TCB_DIR "/%s", stored_tcb_user) == -1)
+	if (asprintf(&olddir, TCB_DIR "/%s", stored_tcb_user) == -1) {
 		goto out_free_nomem;
+	}
 	if (stat(olddir, &oldmode) != 0) {
 		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, olddir, strerror(errno));
 		goto out_free;
@@ -290,35 +298,42 @@ static shadowtcb_status move_dir(const char *user_newname, uid_t user_newid)
 	old_uid = oldmode.st_uid;
 	the_newid = (user_newid == -1) ? old_uid : user_newid;
 	real_old_dir = shadowtcb_path_existing(stored_tcb_user);
-	if (NULL == real_old_dir)
+	if (NULL == real_old_dir) {
 		goto out_free;
+	}
 	real_new_dir = shadowtcb_path(user_newname, the_newid);
-	if (NULL == real_new_dir)
+	if (NULL == real_new_dir) {
 		goto out_free;
+	}
 	if (strcmp(real_old_dir, real_new_dir) == 0) {
 		ret = SHADOWTCB_SUCCESS;
 		goto out_free;
 	}
 	real_old_dir_rel = shadowtcb_path_rel_existing(stored_tcb_user);
-	if (NULL == real_old_dir_rel)
+	if (NULL == real_old_dir_rel) {
 		goto out_free;
-	if (mkdir_leading(user_newname, the_newid) == SHADOWTCB_FAILURE)
+	}
+	if (mkdir_leading(user_newname, the_newid) == SHADOWTCB_FAILURE) {
 		goto out_free;
+	}
 	if (rename(real_old_dir, real_new_dir) != 0) {
 		fprintf(stderr, _("%s: Cannot rename %s to %s: %s\n"), Prog, real_old_dir, real_new_dir, strerror(errno));
 		goto out_free;
 	}
-	if (rmdir_leading(real_old_dir_rel) == SHADOWTCB_FAILURE)
+	if (rmdir_leading(real_old_dir_rel) == SHADOWTCB_FAILURE) {
 		goto out_free;
-	if (unlink(olddir) != 0 && errno != ENOENT) {
+	}
+	if ((unlink(olddir) != 0) && (errno != ENOENT)) {
 		fprintf(stderr, _("%s: Cannot remove %s: %s\n"), Prog, olddir, strerror(errno));
 		goto out_free;
 	}
-	if (asprintf(&newdir, TCB_DIR "/%s", user_newname) == -1)
+	if (asprintf(&newdir, TCB_DIR "/%s", user_newname) == -1) {
 		goto out_free_nomem;
+	}
 	real_new_dir_rel = shadowtcb_path_rel(user_newname, the_newid);
-	if (NULL == real_new_dir_rel)
+	if (NULL == real_new_dir_rel) {
 		goto out_free;
+	}
 	if (   (strcmp(real_new_dir, newdir) != 0)
 	    && (symlink(real_new_dir_rel, newdir) != 0)) {
 		fprintf(stderr, _("%s: Cannot create symbolic link %s: %s\n"), Prog, real_new_dir_rel, strerror(errno));
@@ -343,11 +358,13 @@ shadowtcb_status shadowtcb_set_user(const char* name)
 	char *buf;
 	shadowtcb_status retval;
 
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool("USE_TCB")) {
 		return SHADOWTCB_SUCCESS;
+	}
 	
-	if (NULL != stored_tcb_user)
+	if (NULL != stored_tcb_user) {
 		free(stored_tcb_user);
+	}
 	
 	stored_tcb_user = strdup(name);
 	if (NULL == stored_tcb_user) {
@@ -370,18 +387,21 @@ shadowtcb_status shadowtcb_remove(const char *name)
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 	char *path = shadowtcb_path_existing(name);
 	char *rel = shadowtcb_path_rel_existing(name);
-	if (NULL == path || NULL == rel || rmdir(path) != 0)
+	if ((NULL == path) || (NULL == rel) || (rmdir(path) != 0)) {
 		return SHADOWTCB_FAILURE;
-	if (rmdir_leading(rel) == SHADOWTCB_FAILURE)
+	}
+	if (rmdir_leading(rel) == SHADOWTCB_FAILURE) {
 		return SHADOWTCB_FAILURE;
+	}
 	free(path);
 	free(rel);
 	if (asprintf(&path, TCB_DIR "/%s", name) == -1) {
 		OUT_OF_MEMORY;
 		return SHADOWTCB_FAILURE;
 	}
-	if (unlink(path) != 0 && errno != ENOENT)
+	if ((unlink(path) != 0) && (errno != ENOENT)) {
 		ret = SHADOWTCB_FAILURE;
+	}
 	free(path);
 	return ret;
 }
@@ -392,16 +412,21 @@ shadowtcb_status shadowtcb_move(/*@NULL@*/const char *user_newname, uid_t user_n
 	char *tcbdir, *shadow;
 	shadowtcb_status ret = SHADOWTCB_FAILURE;
 
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool("USE_TCB")) {
 		return SHADOWTCB_SUCCESS;
-	if (NULL == stored_tcb_user)
+	}
+	if (NULL == stored_tcb_user) {
 		return SHADOWTCB_FAILURE;
-	if (NULL == user_newname)
+	}
+	if (NULL == user_newname) {
 		user_newname = stored_tcb_user;
-	if (move_dir(user_newname, user_newid) == SHADOWTCB_FAILURE)
+	}
+	if (move_dir(user_newname, user_newid) == SHADOWTCB_FAILURE) {
 		return SHADOWTCB_FAILURE;
-	if (user_newid == -1)
+	}
+	if (-1 == user_newid) {
 		return SHADOWTCB_SUCCESS;
+	}
 	if (   (asprintf(&tcbdir, TCB_DIR "/%s", user_newname) == -1)
 	    || (asprintf(&shadow, TCB_FMT, user_newname) == -1)) {
 		OUT_OF_MEMORY;
@@ -446,8 +471,9 @@ shadowtcb_status shadowtcb_move(/*@NULL@*/const char *user_newname, uid_t user_n
 			goto out_free;
 		}
 	}
-	if (unlink_suffs(user_newname) == SHADOWTCB_FAILURE)
+	if (unlink_suffs(user_newname) == SHADOWTCB_FAILURE) {
 		goto out_free;
+	}
 	if (chown(tcbdir, user_newid, dirmode.st_gid) != 0) {
 		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, tcbdir, strerror(errno));
 		goto out_free;
@@ -468,8 +494,9 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 	int fd;
 	shadowtcb_status ret = SHADOWTCB_FAILURE;
 
-	if (!getdef_bool("USE_TCB"))
+	if (!getdef_bool("USE_TCB")) {
 		return SHADOWTCB_SUCCESS;
+	}
 	if (stat(TCB_DIR, &tcbdir_stat) != 0) {
 		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, TCB_DIR, strerror(errno));
 		return SHADOWTCB_FAILURE;
@@ -515,8 +542,9 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 		goto out_free;
 	}
 	if (   (shadowtcb_set_user(name) == SHADOWTCB_FAILURE)
-	    || (shadowtcb_move(NULL, uid) == SHADOWTCB_FAILURE))
+	    || (shadowtcb_move(NULL, uid) == SHADOWTCB_FAILURE)) {
 		goto out_free;
+	}
 	ret = SHADOWTCB_SUCCESS;
 out_free:
 	free(dir);
