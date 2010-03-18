@@ -33,6 +33,7 @@
 /*
  * Separated from setup.c.  --marekm
  * Resource limits thanks to Cristian Gafton.
+ * Enhancements of resource limit code by Thomas Orgis <thomas@orgis.org> ("thor").
  */
 
 #include <config.h>
@@ -44,6 +45,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -69,17 +71,37 @@ setrlimit_value (unsigned int resource, const char *value,
 		 unsigned int multiplier)
 {
 	struct rlimit rlim;
-	long limit;
+	rlim_t limit;
 
-	if (getlong (value, &limit) == 0) {
-		return 0;
+	/* The "-" is special, not belonging to a strange negative limit.
+	   It is infinity, in a controlled way. --thor */
+	if(value[0] == '-') {
+		limit = RLIM_INFINITY;
 	}
-	limit *= multiplier;
-	if (limit != (rlim_t) limit) {
-		return 0;
+	else {
+		/* We cannot use getlong here because it fails when there
+		   is more to the value than just this number!
+		   Also, we are limited to base 10 here (hex numbers will not
+		   work with the limit string parser as is anyway) --thor */
+		char *endptr;
+		long longlimit = strtol(value, &endptr, 10);
+		if ((0 == longlimit) && (value == endptr)) {
+			/* No argument at all. No-op.
+			   We could instead throw an error, though. --thor */
+			return 0;
+		}
+		longlimit *= multiplier;
+		limit = (rlim_t)longlimit;
+		if(longlimit != limit)
+		{
+			/* Again, silent error handling... I left it that way.
+			   Wouldn't screaming make more sense? --thor */
+			return 0;
+		}
 	}
-	rlim.rlim_cur = (rlim_t) limit;
-	rlim.rlim_max = (rlim_t) limit;
+
+	rlim.rlim_cur = limit;
+	rlim.rlim_max = limit;
 	if (setrlimit (resource, &rlim) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
@@ -199,6 +221,9 @@ static int check_logins (const char *name, const char *maxlogins)
  * [Ii]: i = RLIMIT_NICE    max nice value (0..39 translates to 20..-19)
  * [Oo]: o = RLIMIT_RTPRIO  max real time priority (linux/sched.h 0..MAX_RT_PRIO)
  *
+ * Remember to extend the "no-limits" string below when adding a new limit...
+ *   --thor
+ *
  * Return value:
  *		0 = okay, of course
  *		LOGIN_ERROR_RLIMIT = error setting some RLIMIT
@@ -214,6 +239,19 @@ static int do_user_limits (const char *buf, const char *name)
 	bool reported = false;
 
 	pp = buf;
+	/* Skip leading whitespace. --thor */
+	while(*pp == ' ' || *pp == '\t') ++pp;
+
+	/* The special limit string "-" results in no limit for all known limits.
+	   We achieve that by parsing a full limit string, parts of it being ignored
+	   if a limit type is not known to the system.
+	   Though, there will be complaining for unknown limit types. --thor */
+	if(strcmp(pp, "-") == 0) {
+		/* Remember to extend this, too, when adding new limits!
+		   Oh... but "unlimited" does not make sense for umask, or does it?
+		   --thor */
+		pp = "A- C- D- F- M- N- R- S- T- P- I- O-";
+	}
 
 	while ('\0' != *pp) {
 		switch (*pp++) {
@@ -316,6 +354,10 @@ static int do_user_limits (const char *buf, const char *name)
 			break;
 		default:
 			/* Only report invalid strings once */
+			/* Note: A string can be invalid just because a specific (theoretically
+			   valid) setting is not supported by this build.
+			   It is just a warning in syslog anyway. The line is still processed
+			   --thor */
 			if (!reported) {
 				SYSLOG ((LOG_WARN,
 				         "Invalid limit string: '%s'",
@@ -324,13 +366,51 @@ static int do_user_limits (const char *buf, const char *name)
 				retval |= LOGIN_ERROR_RLIMIT;
 			}
 		}
+		/* After parsing one limit setting (or just complaining about it),
+		   one still needs to skip its argument to prevent a bogus warning on
+		   trying to parse that as limit specification.
+		   So, let's skip all digits, "-" and our limited set of whitespace.
+		   --thor */
+		while(isdigit(*pp) || *pp == '-' || *pp == ' ' || *pp == '\t') {
+			++pp;
+		}
 	}
 	return retval;
 }
 
+/* Check if user uname is in the group gname.
+ * Can I be sure that gr_mem contains no UID as string?
+ * Returns true when user is in the group, false when not.
+ * Any error is treated as false. --thor
+ */
+static bool user_in_group (const char *uname, const char *gname)
+{
+	struct group *groupdata;
+	char **member;
+	if(uname == NULL || gname == NULL){ 
+		return false;
+	}
+	/* We are not claiming to be re-entrant!
+	 * In case of paranoia or a multithreaded login program,
+	 * one needs to add some mess for getgrnam_r. */
+	groupdata = getgrnam(gname);
+	if(groupdata == NULL) {
+		SYSLOG ((LOG_WARN, "Nonexisting group `%s' in limits file.", gname));
+		return false;
+	}
+	/* Now look for our user in the list of members. */
+	member = groupdata->gr_mem;
+	while(*member != NULL) {
+		if(strcmp(*member, uname) == 0) {
+			return true;
+		}
+		++member;
+	}
+	return false;
+}
+
 static int setup_user_limits (const char *uname)
 {
-	/* TODO: allow and use @group syntax --cristiang */
 	FILE *fil;
 	char buf[1024];
 	char name[1024];
@@ -352,7 +432,7 @@ static int setup_user_limits (const char *uname)
 	}
 	/* The limits file have the following format:
 	 * - '#' (comment) chars only as first chars on a line;
-	 * - username must start on first column
+	 * - username must start on first column (or *, or @group --thor)
 	 * A better (smarter) checking should be done --cristiang */
 	while (fgets (buf, 1024, fil) != NULL) {
 		if (('#' == buf[0]) || ('\n' == buf[0])) {
@@ -367,6 +447,13 @@ static int setup_user_limits (const char *uname)
 		 * Imposing a limit should be done with care, so a wrong
 		 * entry means no care anyway :-). A '-' as a limits
 		 * strings means no limits --cristiang */
+		/* In addition to the handling of * as name which was alrady present,
+		   I added handling of the @group syntax.
+		   To clarify: The first entry with matching user name rules,
+		   everything after it is ignored. If there is no user entry,
+		   the last encountered entry for a matching group rules.
+		   If there is no matching group entry, the default limits rule.
+		      --thor. */
 		if (sscanf (buf, "%s%[ACDFMNRSTULPIOacdfmnrstulpio0-9 \t-]",
 			    name, tempbuf) == 2) {
 			if (strcmp (name, uname) == 0) {
@@ -374,6 +461,12 @@ static int setup_user_limits (const char *uname)
 				break;
 			} else if (strcmp (name, "*") == 0) {
 				strcpy (deflimits, tempbuf);
+			} else if (name[0] == '@') {
+				/* If the user is in the group, the group limits apply unless
+				   later a line for the specific user is found. --thor */
+				if(user_in_group(uname, name+1)) {
+					strcpy (limits, tempbuf);
+				}
 			}
 		}
 	}

@@ -64,6 +64,12 @@
       <emphasis remap='I'>user LIMITS_STRING</emphasis>
     </para>
 
+    <para>or in the form:</para>
+
+    <para>
+      <emphasis remap='I'>@group LIMITS_STRING</emphasis>
+    </para>
+
     <para>
       The <emphasis>LIMITS_STRING</emphasis> is a string of a concatenated
       list of resource limits. Each limit consists of a letter identifier
@@ -125,8 +131,20 @@
     </para>
 
     <para>
+      The limits specified in the form "<replaceable>@group</replaceable>"
+      apply to the members of the specified
+      <replaceable>group</replaceable>.
+    </para>
+
+    <para>
       To completely disable limits for a user, a single dash
       "<emphasis>-</emphasis>" will do.
+    </para>
+
+    <para>
+      To disable a limit for a user, a single dash
+      "<replaceable>-</replaceable>" can be used instead of the numerical
+      value for this limit.
     </para>
 
     <para>
