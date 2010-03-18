@@ -101,7 +101,7 @@ static char *shadowtcb_path_rel_existing(const char *name)
 	char *path, *rval;
 	struct stat st;
 	char link[8192];
-	int ret;
+	ssize_t ret;
 
 	if (asprintf(&path, TCB_DIR "/%s", name) == -1) {
 		OUT_OF_MEMORY;
@@ -133,12 +133,12 @@ static char *shadowtcb_path_rel_existing(const char *name)
 		return NULL;
 	}
 	free(path);
-	if (ret >= sizeof(link) - 1) {
+	if ((size_t)ret >= sizeof(link) - 1) {
 		link[sizeof(link) - 1] = '\0';
 		fprintf(stderr, _("%s: Suspiciously long symlink: %s\n"), Prog, link);
 		return NULL;
 	}
-	link[ret] = '\0';
+	link[(size_t)ret] = '\0';
 	rval = strdup(link);
 	if (NULL == rval) {
 		OUT_OF_MEMORY;
