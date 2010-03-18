@@ -1,10 +1,15 @@
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/limits.c: Re-indent.
+	* libmisc/limits.c: Reformat the documentation. Avoid personal
+	comments.
+	* man/limits.5.xml: Document the new features.
+
 2010-03-18  Thomas Orgis  <thomas@orgis.org>
 
 	* NEWS, libmisc/limits.c: Fix parsing of limits.
-	* NEWS, libmisc/limits.c, man/limits.5.xml: Add support for
-	infinite limits.
-	* NEWS, libmisc/limits.c, man/limits.5.xml: Add support for @group
-	syntax.
+	* NEWS, libmisc/limits.c: Add support for infinite limits.
+	* NEWS, libmisc/limits.c: Add support for @group syntax.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
