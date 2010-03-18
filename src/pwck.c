@@ -125,7 +125,7 @@ static void usage (void)
 {
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {
-		fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd]\n"),
+		fprintf (stderr, _("Usage: %s [-q] [-r] [passwd]\n"),
 		         Prog);
 	} else
 #endif				/* WITH_TCB */

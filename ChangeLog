@@ -3,6 +3,9 @@
 	* src/pwck.c: Document the sections closed by #endif
 	* src/pwck.c, man/pwck.8.xml: No alternative shadow file can be
 	given when USE_TCB is enabled.
+	* src/pwck.c: Remove the -s option from the usage when USE_TCB is
+	enabled. The option is still supported, but has no effect, as
+	documented in the manpage.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
