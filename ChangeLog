@@ -1,5 +1,10 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: When exiting because of a failure, warn if an
+	home directory created, but cannot be removed.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chowndir.c: Re-indent.
 	* libmisc/chowndir.c: Avoid assignment in comparisons.
 	* libmisc/chowndir.c: Added brackets and parenthesis.

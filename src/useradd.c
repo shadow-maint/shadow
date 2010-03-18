@@ -208,7 +208,12 @@ static void create_mail (void);
 static void fail_exit (int code)
 {
 	if (home_added) {
-		rmdir (user_home);
+		if (rmdir (user_home) != 0) {
+			frpintf (stderr,
+			         _("%s: %s was created, but could not be removed\n"),
+			         Prog, user_home);
+			SYSLOG ((LOG_ERR, "failed to remove %s", user_home));
+		}
 	}
 
 	if (spw_locked) {
