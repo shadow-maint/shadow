@@ -88,6 +88,9 @@
       The <command>pwck</command> command verifies the integrity of the
       users and authentication information. It checks that all entries in
       <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
+      <phrase condition="tcb">(or the files in
+      <filename>/etc/tcb</filename>, when <option>USE_TCB</option> is
+      enabled)</phrase>
       have the proper format and contain valid data.
       The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
@@ -200,7 +203,7 @@
 	    <filename>/etc/shadow</filename> by UID.
 	  </para>
 	  <para condition="tcb">
-	    This option has no effect when TCB is enabled.
+	    This option has no effect when <option>USE_TCB</option> is enabled.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -208,10 +211,18 @@
 
     <para>
       By default, <command>pwck</command> operates on the files
-      <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>.
-      The user may select alternate files with the <emphasis
-      remap='I'>passwd</emphasis> and <emphasis remap='I'>shadow</emphasis>
-      parameters.
+      <filename>/etc/passwd</filename> and
+      <filename>/etc/shadow</filename><phrase condition="tcb"> (or the
+      files in <filename>/etc/tcb</filename>)</phrase>.
+      The user may select alternate files with the
+      <replaceable>passwd</replaceable> and
+      <replaceable>shadow</replaceable> parameters.
+    </para>
+    <para condition="tcb">
+      Note that when <option>USE_TCB</option> is enabled, you cannot
+      specify an alternative <replaceable>shadow</replaceable> file. In
+      future releases, this paramater could be replaced by an alternate
+      TCB directory.
     </para>
   </refsect1>
 

@@ -49,7 +49,7 @@
 #include "nscd.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
-#endif
+#endif				/* WITH_TCB */
 
 /*
  * Exit codes
@@ -123,8 +123,17 @@ static void fail_exit (int code)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
-	         Prog);
+#ifdef WITH_TCB
+	if (getdef_bool ("USE_TCB")) {
+		fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd]\n"),
+		         Prog);
+	} else
+#endif				/* WITH_TCB */
+	{
+		fprintf (stderr,
+		         _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
+		         Prog);
+	}
 	exit (E_USAGE);
 }
 
@@ -178,6 +187,14 @@ static void process_flags (int argc, char **argv)
 		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
+#ifdef WITH_TCB
+		if (getdef_bool ("USE_TCB")) {
+			fprintf (stderr,
+			         _("%s: no alternative shadow file allowed when USE_TCB is enabled.\n"),
+			         Prog);
+			usage ();
+		}
+#endif				/* WITH_TCB */
 		spw_setdbname (argv[optind + 1]);
 		is_shadow = true;
 		use_system_spw_file = false;
@@ -197,7 +214,7 @@ static void open_files (void)
 	bool use_tcb = false;
 #ifdef WITH_TCB
 	use_tcb = getdef_bool ("USE_TCB");
-#endif
+#endif				/* WITH_TCB */
 
 	/*
 	 * Lock the files if we aren't in "read-only" mode
@@ -513,7 +530,7 @@ static void check_pw_file (int *errors, bool *changed)
 				}
 				spw_opened = true;
 			}
-#endif
+#endif				/* WITH_TCB */
 			spw = (struct spwd *) spw_locate (pwd->pw_name);
 			if (NULL == spw) {
 				printf (_("no matching password file entry in %s\n"),
@@ -595,7 +612,7 @@ static void check_pw_file (int *errors, bool *changed)
 				spw_locked = false;
 			}
 		}
-#endif
+#endif				/* WITH_TCB */
 	}
 }
 
