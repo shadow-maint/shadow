@@ -116,6 +116,7 @@ ALL:
   - Add check to move passwd passwords to shadow if there is a shadow
     file.
   - Support an alternative /etc/tcb directory as second parameter.
+  - add options -g / -G to specify alternative group / gshadow files
 
 - su
   - add a login.defs configuration parameter to add variables to keep in
