@@ -1,5 +1,9 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Indicate which tools support TCB.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Unlock the password and shadow files when there is a
 	failure to prepare the update in memory.
 

@@ -5,7 +5,8 @@ shadow-4.1.4.2 -> shadow-4.1.4.3					UNRELEASED
 - general
   * report usage error to stderr, but report usage help to stdout (and return
     zero) when explicitly requested (e.g. with --help).
-  * initial support for tcb (http://openwall.com/tcb/).
+  * initial support for tcb (http://openwall.com/tcb/) for useradd,
+    userdel, usermod, chage, pwck, vipw.
 
 - faillog
   * The -l, -m, -r, -t options only act on the existing users, unless -a is
