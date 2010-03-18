@@ -68,9 +68,7 @@
  */
 char *Prog;
 
-static const char *pwd_file = PASSWD_FILE;
 static bool use_system_pw_file = true;
-static const char *spw_file = SHADOW_FILE;
 static bool use_system_spw_file = true;
 
 static bool is_shadow = false;
@@ -176,13 +174,11 @@ static void process_flags (int argc, char **argv)
 	 * and shadow password filenames.
 	 */
 	if (optind != argc) {
-		pwd_file = argv[optind];
-		pw_setdbname (pwd_file);
+		pw_setdbname (argv[optind]);
 		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
-		spw_file = argv[optind + 1];
-		spw_setdbname (spw_file);
+		spw_setdbname (argv[optind + 1]);
 		is_shadow = true;
 		use_system_spw_file = false;
 	} else if (optind == argc) {
@@ -210,7 +206,7 @@ static void open_files (void)
 		if (pw_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, pwd_file);
+			         Prog, pw_dbname ());
 			fail_exit (E_CANTLOCK);
 		}
 		pw_locked = true;
@@ -231,9 +227,9 @@ static void open_files (void)
 	 */
 	if (pw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"),
-		         Prog, pwd_file);
+		         Prog, pw_dbname ());
 		if (use_system_pw_file) {
-			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
+			SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		}
 		fail_exit (E_CANTOPEN);
 	}
@@ -269,10 +265,10 @@ static void close_files (bool changed)
 		if (pw_opened && pw_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
-			         Prog, pwd_file);
+			         Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR,
 			         "failure while writing changes to %s",
-			         pwd_file));
+			         pw_dbname ()));
 			fail_exit (E_CANTUPDATE);
 		}
 		pw_opened = false;
@@ -571,7 +567,7 @@ static void check_pw_file (int *errors, bool *changed)
 				 */
 				if (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) != 0) {
 					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
-					        pwd->pw_name, spw_dbname (), pwd_file);
+					        pwd->pw_name, spw_dbname (), pw_dbname ());
 					*errors += 1;
 				}
 			}
@@ -722,7 +718,7 @@ static void check_spw_file (int *errors, bool *changed)
 			 * /etc/passwd entry and ask them to delete it.
 			 */
 			printf (_("no matching password file entry in %s\n"),
-			        pwd_file);
+			        pw_dbname ());
 			printf (_("delete line '%s'? "), spe->line);
 			*errors += 1;
 

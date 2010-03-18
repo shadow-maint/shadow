@@ -1,5 +1,10 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Do not use pwd_file and spw_file. Always use the
+	dbname() functions.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Re-indent.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
