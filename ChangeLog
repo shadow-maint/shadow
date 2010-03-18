@@ -1,5 +1,10 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/limits.5.xml: Document the selection of the limits when
+	multiple lines match the user.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/limits.c: Re-indent.
 	* libmisc/limits.c: Reformat the documentation. Avoid personal
 	comments.
