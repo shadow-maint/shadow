@@ -34,6 +34,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "shadowio.h"
 #include "tcbfuncs.h"
 
 #define SHADOWTCB_HASH_BY 1000
