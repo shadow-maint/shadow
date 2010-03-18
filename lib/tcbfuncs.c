@@ -139,7 +139,7 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 		return NULL;
 	}
 	ret = readlink (path, link, sizeof (link) - 1);
-	if (ret == -1) {
+	if (-1 == ret) {
 		fprintf (stderr,
 		         _("%s: Cannot read symbolic link %s: %s\n"),
 		         Prog, path, strerror (errno));
