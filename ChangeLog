@@ -1,5 +1,9 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Harmonize name of parameters.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS: Indicate which tools support TCB.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
