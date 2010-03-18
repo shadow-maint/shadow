@@ -7,6 +7,8 @@
 	* lib/tcbfuncs.c: Only FreeBSD specify that the returned buffer is
 	NULL in case of failure. The return value of asprintf shall be
 	checked.
+	* lib/tcbfuncs.c: Avoid implicit conversion of pointers or
+	integers to booleans.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
