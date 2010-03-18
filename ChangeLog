@@ -1,5 +1,11 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/tcbfuncs.h: Re-indent.
+	* lib/tcbfuncs.h: Explicitly indicate functiontakinga void
+	parameter.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: When exiting because of a failure, warn if an
 	home directory created, but cannot be removed.
 
