@@ -1,3 +1,10 @@
+2010-03-18  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
+
+	* src/pwck.c: Add support for TCB.
+	* src/pwck.c: Use spw_dbname() instead of spw_file since TCB
+	changes from a file to another depending on the user. Also use
+	pw_dbname() for consistency.
+
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/faillog.c: Re-indent.
