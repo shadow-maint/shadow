@@ -132,14 +132,14 @@ int spw_lock (void)
 		return commonio_lock (&shadow_db);
 #ifdef WITH_TCB
 	}
-	if (shadowtcb_drop_priv () == 0) {
+	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	if (lckpwdf_tcb (shadow_db.filename) == 0) {
 		shadow_db.locked = 1;
 		retval = 1;
 	}
-	if (shadowtcb_gain_priv () == 0) {
+	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	return retval;
@@ -152,13 +152,13 @@ int spw_open (int mode)
 #ifdef WITH_TCB
 	bool use_tcb = getdef_bool ("USE_TCB");
 
-	if (use_tcb && (shadowtcb_drop_priv () == 0)) {
+	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
 	retval = commonio_open (&shadow_db, mode);
 #ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == 0)) {
+	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
@@ -196,13 +196,13 @@ int spw_close (void)
 #ifdef WITH_TCB
 	bool use_tcb = getdef_bool ("USE_TCB");
 
-	if (use_tcb && (shadowtcb_drop_priv () == 0)) {
+	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
 	retval = commonio_close (&shadow_db);
 #ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == 0)) {
+	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
 		return 0;
 	}
 #endif				/* WITH_TCB */
@@ -219,14 +219,14 @@ int spw_unlock (void)
 		return commonio_unlock (&shadow_db);
 #ifdef WITH_TCB
 	}
-	if (shadowtcb_drop_priv () == 0) {
+	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	if (ulckpwdf_tcb () == 0) {
 		shadow_db.locked = 0;
 		retval = 1;
 	}
-	if (shadowtcb_gain_priv () == 0) {
+	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
 		return 0;
 	}
 	return retval;

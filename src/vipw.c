@@ -209,7 +209,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		    && (errno != EEXIST)) {
 			vipwexit (_("failed to create scratch directory"), errno, 1);
 		}
-		if (shadowtcb_drop_priv () == 0) {
+		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
 		snprintf (fileedit, sizeof fileedit,
@@ -245,7 +245,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	}
 #endif				/* WITH_SELINUX */
 #ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_gain_priv () == 0)) {
+	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
 		vipwexit (_("failed to gain privileges"), errno, 1);
 	}
 #endif				/* WITH_TCB */
@@ -254,7 +254,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	}
 	filelocked = true;
 #ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_drop_priv () == 0)) {
+	if (tcb_mode && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
 		vipwexit (_("failed to drop privileges"), errno, 1);
 	}
 #endif				/* WITH_TCB */
@@ -268,7 +268,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		vipwexit (file, 1, 1);
 	}
 #ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_gain_priv () == 0))
+	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE))
 		vipwexit (_("failed to gain privileges"), errno, 1);
 #endif				/* WITH_TCB */
 	if (create_backup_file (f, fileedit, &st1) != 0) {
@@ -354,7 +354,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (unlink (fileedit) != 0) {
 			vipwexit (_("failed to unlink scratch file"), errno, 1);
 		}
-		if (shadowtcb_drop_priv () == 0) {
+		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
 		if (stat (file, &st1) != 0) {
@@ -392,8 +392,9 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 #ifdef WITH_TCB
 	if (tcb_mode) {
 		free (to_rename);
-		if (shadowtcb_gain_priv () == 0)
+		if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to gain privileges"), errno, 1);
+		}
 	}
 #endif				/* WITH_TCB */
 
@@ -474,7 +475,7 @@ int main (int argc, char **argv)
 		if (editshadow) {
 #ifdef WITH_TCB
 			if (getdef_bool ("USE_TCB") && (NULL != user)) {
-				if (shadowtcb_set_user (user) == 0) {
+				if (shadowtcb_set_user (user) == SHADOWTCB_FAILURE) {
 					fprintf (stderr,
 					         _("%s: failed to find tcb directory for %s\n"),
 					         progname, user);

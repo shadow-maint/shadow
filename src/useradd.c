@@ -2003,7 +2003,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {
-		if (shadowtcb_create (user_name, user_id) == 0) {
+		if (shadowtcb_create (user_name, user_id) == SHADOWTCB_FAILURE) {
 			fprintf (stderr,
 			         _("%s: Failed to create tcb directory for %s\n"),
 			         Prog, user_name);

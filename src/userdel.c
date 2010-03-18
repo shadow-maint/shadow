@@ -757,7 +757,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 1;
 	}
 	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
-	if (shadowtcb_drop_priv () == 0) {
+	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 		fprintf (stderr, _("%s: Cannot drop privileges: %s\n"),
 		         Prog, strerror (errno));
 		shadowtcb_gain_priv ();
@@ -776,7 +776,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	}
 	shadowtcb_gain_priv ();
 	free (buf);
-	if (shadowtcb_remove (user_name) == 0) {
+	if (shadowtcb_remove (user_name) == SHADOWTCB_FAILURE) {
 		fprintf (stderr, _("%s: Cannot remove tcb files for %s: %s\n"),
 		         Prog, user_name, strerror (errno));
 		ret = 1;
@@ -906,7 +906,7 @@ int main (int argc, char **argv)
 		user_home = xstrdup (pwd->pw_dir);
 	}
 #ifdef WITH_TCB
-	if (shadowtcb_set_user (user_name) == 0) {
+	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
 		exit (E_NOTFOUND);
 	}
 #endif				/* WITH_TCB */

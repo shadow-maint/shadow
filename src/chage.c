@@ -857,13 +857,14 @@ int main (int argc, char **argv)
 
 	STRFCPY (user_name, pw->pw_name);
 #ifdef WITH_TCB
-	if (!shadowtcb_set_user(pw->pw_name))
-		fail_exit(E_NOPERM);
+	if (shadowtcb_set_user (pw->pw_name) == SHADOWTCB_FAILURE) {
+		fail_exit (E_NOPERM);
+	}
 #endif
 	user_uid = pw->pw_uid;
 
 	sp = spw_locate (argv[optind]);
-	get_defaults(sp);
+	get_defaults (sp);
 
 	/*
 	 * Print out the expiration fields if the user has requested the

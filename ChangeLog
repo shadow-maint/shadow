@@ -1,3 +1,10 @@
+2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/userdel.c, src/usermod.c, src/vipw.c, src/useradd.c,
+	src/pwck.c, src/chage.c, lib/shadowio.c: Explicitly use the
+	SHADOWTCB_FAILURE return code instead of 0 or implicit conversion
+	to booleans.
+
 2010-03-18  Paweł Hajdan, Jr.  <phajdan.jr@gentoo.org>
 
 	* src/pwck.c: Add support for TCB.

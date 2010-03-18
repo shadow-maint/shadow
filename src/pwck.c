@@ -469,12 +469,12 @@ static void check_pw_file (int *errors, bool *changed)
 		if (is_shadow) {
 #ifdef WITH_TCB
 			if (getdef_bool("USE_TCB")) {
-				if (!shadowtcb_set_user (pwd->pw_name)) {
+				if (shadowtcb_set_user (pwd->pw_name) == SHADOWTCB_FAILURE) {
 					printf(_("no tcb directory for %s\n"), pwd->pw_name);
 					printf(_("create tcb directory for %s?"), pwd->pw_name);
 					*errors += 1;
 					if (yes_or_no (read_only)) {
-						if (!shadowtcb_create(pwd->pw_name, pwd->pw_uid)) {
+						if (shadowtcb_create(pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
 							*errors += 1;
 							printf(_("failed to create tcb directory for %s\n"), pwd->pw_name);
 							continue;
