@@ -1,5 +1,9 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Only log to SYSLOG when acting on system files.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Document the sections closed by #endif
 	* src/pwck.c, man/pwck.8.xml: No alternative shadow file can be
 	given when USE_TCB is enabled.

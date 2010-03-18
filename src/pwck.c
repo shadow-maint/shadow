@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2010, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -101,7 +101,10 @@ static void fail_exit (int code)
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			if (use_system_spw_file) {
+				SYSLOG ((LOG_ERR, "failed to unlock %s",
+				         spw_dbname ()));
+			}
 			/* continue */
 		}
 	}
@@ -109,7 +112,10 @@ static void fail_exit (int code)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			if (use_system_pw_file) {
+				SYSLOG ((LOG_ERR, "failed to unlock %s",
+				         pw_dbname ()));
+			}
 			/* continue */
 		}
 	}
@@ -283,9 +289,11 @@ static void close_files (bool changed)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failure while writing changes to %s",
-			         pw_dbname ()));
+			if (use_system_pw_file) {
+				SYSLOG ((LOG_ERR,
+				         "failure while writing changes to %s",
+				         pw_dbname ()));
+			}
 			fail_exit (E_CANTUPDATE);
 		}
 		pw_opened = false;
@@ -293,9 +301,11 @@ static void close_files (bool changed)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failure while writing changes to %s",
-			         spw_dbname ()));
+			if (use_system_spw_file) {
+				SYSLOG ((LOG_ERR,
+				         "failure while writing changes to %s",
+				         spw_dbname ()));
+			}
 			fail_exit (E_CANTUPDATE);
 		}
 		spw_opened = false;
@@ -306,16 +316,26 @@ static void close_files (bool changed)
 	 */
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, spw_dbname ());
+			if (use_system_spw_file) {
+				SYSLOG ((LOG_ERR, "failed to unlock %s",
+				         spw_dbname ()));
+			}
 			/* continue */
 		}
 	}
 	spw_locked = false;
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, pw_dbname ());
+			if (use_system_pw_file) {
+				SYSLOG ((LOG_ERR, "failed to unlock %s",
+				         pw_dbname ()));
+			}
 			/* continue */
 		}
 	}
@@ -371,8 +391,10 @@ static void check_pw_file (int *errors, bool *changed)
 			 * loop to try out the next list element.
 			 */
 		      delete_pw:
-			SYSLOG ((LOG_INFO, "delete passwd line '%s'",
-			         pfe->line));
+			if (use_system_pw_file) {
+				SYSLOG ((LOG_INFO, "delete passwd line '%s'",
+				         pfe->line));
+			}
 			*changed = true;
 
 			__pw_del_entry (pfe);
@@ -522,9 +544,11 @@ static void check_pw_file (int *errors, bool *changed)
 						fprintf (stderr,
 						         _("%s: failed to unlock %s\n"),
 						         Prog, spw_dbname ());
-						SYSLOG ((LOG_ERR,
-						         "failed to unlock %s",
-						         spw_dbname ()));
+						if (use_system_spw_file) {
+							SYSLOG ((LOG_ERR,
+							         "failed to unlock %s",
+							         spw_dbname ()));
+						}
 					}
 					continue;
 				}
@@ -595,9 +619,11 @@ static void check_pw_file (int *errors, bool *changed)
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, spw_dbname ());
-				SYSLOG ((LOG_ERR,
-				         "failure while writing changes to %s",
-				         spw_dbname ()));
+				if (use_system_spw_file) {
+					SYSLOG ((LOG_ERR,
+					         "failure while writing changes to %s",
+					         spw_dbname ()));
+				}
 			} else {
 				spw_opened = false;
 			}
@@ -605,9 +631,10 @@ static void check_pw_file (int *errors, bool *changed)
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, spw_dbname ());
-				SYSLOG ((LOG_ERR,
-				         "failed to unlock %s",
-				         spw_dbname ()));
+				if (use_system_spw_file) {
+					SYSLOG ((LOG_ERR, "failed to unlock %s",
+					         spw_dbname ()));
+				}
 			} else {
 				spw_locked = false;
 			}
@@ -672,8 +699,10 @@ static void check_spw_file (int *errors, bool *changed)
 			 * to try out the next list element.
 			 */
 		      delete_spw:
-			SYSLOG ((LOG_INFO, "delete shadow line '%s'",
-			         spe->line));
+			if (use_system_spw_file) {
+				SYSLOG ((LOG_INFO, "delete shadow line '%s'",
+				         spe->line));
+			}
 			*changed = true;
 
 			__spw_del_entry (spe);
