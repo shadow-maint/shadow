@@ -706,10 +706,24 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 {
 	struct commonio_entry **entries, *ptr;
 	size_t n = 0, i;
+#if KEEP_NIS_AT_END
+	struct commonio_entry *nis = NULL
+#endif
 
-	for (ptr = db->head; NULL != ptr; ptr = ptr->next) {
+	for (ptr = db->head;
+	        (NULL != ptr)
+#if KEEP_NIS_AT_END
+	     && ('+' != ptr->line[0])
+#endif
+	     ;
+	     ptr = ptr->next) {
 		n++;
 	}
+#if KEEP_NIS_AT_END
+	if (NULL != ptr) {
+		nis = ptr;
+	}
+#endif
 
 	if (n <= 1) {
 		return 0;
@@ -721,7 +735,13 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	}
 
 	n = 0;
-	for (ptr = db->head; NULL != ptr; ptr = ptr->next) {
+	for (ptr = db->head;
+#if KEEP_NIS_AT_END
+	     nis != ptr;
+#else
+	     NULL != ptr;
+#endif
+	     ptr = ptr->next) {
 		entries[n++] = ptr;
 	}
 	qsort (entries, n, sizeof (struct commonio_entry *), cmp);
@@ -729,11 +749,16 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	/* Take care of the head and tail separately */
 	db->head = entries[0];
 	n--;
-	db->tail = entries[n];
+#if KEEP_NIS_AT_END
+	if (NULL == nis)
+#endif
+	{
+		db->tail = entries[n];
+	}
 	db->head->prev = NULL;
 	db->head->next = entries[1];
-	db->tail->prev = entries[n - 1];
-	db->tail->next = NULL;
+	entries[n]->prev = entries[n - 1];
+	entries[n]->next = NULL;
 
 	/* Now other elements have prev and next entries */
 	for (i = 1; i < n; i++) {

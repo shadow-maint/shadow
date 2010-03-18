@@ -1,3 +1,8 @@
+2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/commonio.c: Stop sorting entries when we reach the first
+	NIS line.
+
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chsh.c: Even for root, warn if an invalid shell is
