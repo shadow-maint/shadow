@@ -1,5 +1,9 @@
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: Re-indent.
+
+2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/tcbfuncs.h: Added type shadowtcb_status.
 	* lib/tcbfuncs.h, lib/tcbfuncs.c: Return a shadowtcb_status
 	instead of an int.

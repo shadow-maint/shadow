@@ -288,19 +288,19 @@ static void reset (void)
 		if (aflg) {
 			/* Entries for non existing users are also reset.
 			 */
-		uid_t uid = 0;
+			uid_t uid = 0;
 
-		/* Make sure we stay in the umin-umax range if specified */
-		if (has_umin) {
-			uid = (uid_t)umin;
-		}
-
-		while (uid <= uidmax) {
-			if (reset_one (uid)) {
-				errors = true;
+			/* Make sure we stay in the umin-umax range if specified */
+			if (has_umin) {
+				uid = (uid_t)umin;
 			}
-			uid++;
-		}
+
+			while (uid <= uidmax) {
+				if (reset_one (uid)) {
+					errors = true;
+				}
+				uid++;
+			}
 		} else {
 			/* Only reset records for existing users.
 			 */
@@ -392,32 +392,32 @@ static void setmax (int max)
 		 * entries will be created.
 		 */
 		if (aflg) {
-		/* Entries for non existing user are also taken into
-		 * account (in order to define policy for future users).
-		 */
-		uid_t uid = 0;
-		/* The default umax value is based on the size of the
-		 * faillog database.
-		 */
-		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
-		if (uidmax > 1) {
-			uidmax--;
-		}
-
-		/* Make sure we stay in the umin-umax range if specified */
-		if (has_umin) {
-			uid = (uid_t)umin;
-		}
-		if (has_umax) {
-			uidmax = (uid_t)umax;
-		}
-
-		while (uid <= uidmax) {
-			if (setmax_one (uid, max)) {
-				errors = true;
+			/* Entries for non existing user are also taken into
+			 * account (in order to define policy for future users).
+			 */
+			uid_t uid = 0;
+			/* The default umax value is based on the size of the
+			 * faillog database.
+			 */
+			uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+			if (uidmax > 1) {
+				uidmax--;
 			}
-			uid++;
-		}
+
+			/* Make sure we stay in the umin-umax range if specified */
+			if (has_umin) {
+				uid = (uid_t)umin;
+			}
+			if (has_umax) {
+				uidmax = (uid_t)umax;
+			}
+
+			while (uid <= uidmax) {
+				if (setmax_one (uid, max)) {
+					errors = true;
+				}
+				uid++;
+			}
 		} else {
 			/* Only change records for existing users.
 			 */
@@ -509,32 +509,32 @@ static void set_locktime (long locktime)
 		 * entries will be created.
 		 */
 		if (aflg) {
-		/* Entries for non existing user are also taken into
-		 * account (in order to define policy for future users).
-		 */
-		uid_t uid = 0;
-		/* The default umax value is based on the size of the
-		 * faillog database.
-		 */
-		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
-		if (uidmax > 1) {
-			uidmax--;
-		}
-
-		/* Make sure we stay in the umin-umax range if specified */
-		if (has_umin) {
-			uid = (uid_t)umin;
-		}
-		if (has_umax) {
-			uidmax = (uid_t)umax;
-		}
-
-		while (uid <= uidmax) {
-			if (set_locktime_one (uid, locktime)) {
-				errors = true;
+			/* Entries for non existing user are also taken into
+			 * account (in order to define policy for future users).
+			 */
+			uid_t uid = 0;
+			/* The default umax value is based on the size of the
+			 * faillog database.
+			 */
+			uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+			if (uidmax > 1) {
+				uidmax--;
 			}
-			uid++;
-		}
+
+			/* Make sure we stay in the umin-umax range if specified */
+			if (has_umin) {
+				uid = (uid_t)umin;
+			}
+			if (has_umax) {
+				uidmax = (uid_t)umax;
+			}
+
+			while (uid <= uidmax) {
+				if (set_locktime_one (uid, locktime)) {
+					errors = true;
+				}
+				uid++;
+			}
 		} else {
 			/* Only change records for existing users.
 			 */
