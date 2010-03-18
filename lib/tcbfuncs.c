@@ -33,6 +33,7 @@
 #include "config.h"
 
 #include "defines.h"
+#include "prototypes.h"
 #include "getdef.h"
 #include "shadowio.h"
 #include "tcbfuncs.h"
