@@ -502,7 +502,7 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, shadow, strerror(errno));
 		goto out_free;
 	}
-	if (chmod(shadow, authgid == shadowgid ? 0600 : 0640) != 0) {
+	if (chmod(shadow, (mode_t) ((authgid == shadowgid) ? 0600 : 0640)) != 0) {
 		fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, shadow, strerror(errno));
 		goto out_free;
 	}
@@ -510,7 +510,7 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 		fprintf(stderr, _("%s: Cannot change owner of %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
 	}
-	if (chmod(dir, authgid == shadowgid ? 02700 : 02710) != 0) {
+	if (chmod(dir, (mode_t) ((authgid == shadowgid) ? 02700 : 02710)) != 0) {
 		fprintf(stderr, _("%s: Cannot change mode of %s: %s\n"), Prog, dir, strerror(errno));
 		goto out_free;
 	}
