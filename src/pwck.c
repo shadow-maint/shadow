@@ -200,7 +200,7 @@ static void open_files (void)
 {
 	bool use_tcb = false;
 #ifdef WITH_TCB
-	use_tcb = getdef_bool("USE_TCB");
+	use_tcb = getdef_bool ("USE_TCB");
 #endif
 
 	/*
@@ -218,7 +218,7 @@ static void open_files (void)
 			if (spw_lock () == 0) {
 				fprintf (stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
-				         Prog, spw_dbname());
+				         Prog, spw_dbname ());
 				fail_exit (E_CANTLOCK);
 			}
 			spw_locked = true;
@@ -241,9 +241,10 @@ static void open_files (void)
 	if (is_shadow && !use_tcb) {
 		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
-				 Prog, spw_dbname());
+			         Prog, spw_dbname ());
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname()));
+				SYSLOG ((LOG_WARN, "cannot open %s",
+				         spw_dbname ()));
 			}
 			fail_exit (E_CANTOPEN);
 		}
@@ -266,16 +267,22 @@ static void close_files (bool changed)
 	 */
 	if (changed) {
 		if (pw_opened && pw_close () == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pwd_file);
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", pwd_file));
+			SYSLOG ((LOG_ERR,
+			         "failure while writing changes to %s",
+			         pwd_file));
 			fail_exit (E_CANTUPDATE);
 		}
 		pw_opened = false;
 		if (is_shadow && spw_opened && (spw_close () == 0)) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
-			         Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname()));
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR,
+			         "failure while writing changes to %s",
+			         spw_dbname ()));
 			fail_exit (E_CANTUPDATE);
 		}
 		spw_opened = false;
@@ -468,15 +475,17 @@ static void check_pw_file (int *errors, bool *changed)
 
 		if (is_shadow) {
 #ifdef WITH_TCB
-			if (getdef_bool("USE_TCB")) {
+			if (getdef_bool ("USE_TCB")) {
 				if (shadowtcb_set_user (pwd->pw_name) == SHADOWTCB_FAILURE) {
-					printf(_("no tcb directory for %s\n"), pwd->pw_name);
-					printf(_("create tcb directory for %s?"), pwd->pw_name);
+					printf (_("no tcb directory for %s\n"),
+					        pwd->pw_name);
+					printf (_("create tcb directory for %s?"),
+					        pwd->pw_name);
 					*errors += 1;
 					if (yes_or_no (read_only)) {
-						if (shadowtcb_create(pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
+						if (shadowtcb_create (pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
 							*errors += 1;
-							printf(_("failed to create tcb directory for %s\n"), pwd->pw_name);
+							printf (_("failed to create tcb directory for %s\n"), pwd->pw_name);
 							continue;
 						}
 					} else {
@@ -486,18 +495,23 @@ static void check_pw_file (int *errors, bool *changed)
 				if (spw_lock () == 0) {
 					*errors += 1;
 					fprintf (stderr,
-						_("%s: cannot lock %s.\n"),
-						Prog, spw_dbname());
+					         _("%s: cannot lock %s.\n"),
+					         Prog, spw_dbname ());
 					continue;
 				}
 				spw_locked = true;
 				if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-					fprintf (stderr, _("%s: cannot open %s\n"),
-						 Prog, spw_dbname());
+					fprintf (stderr,
+					         _("%s: cannot open %s\n"),
+					         Prog, spw_dbname ());
 					*errors += 1;
 					if (spw_unlock () == 0) {
-						fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-						SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+						fprintf (stderr,
+						         _("%s: failed to unlock %s\n"),
+						         Prog, spw_dbname ());
+						SYSLOG ((LOG_ERR,
+						         "failed to unlock %s",
+						         spw_dbname ()));
 					}
 					continue;
 				}
@@ -507,9 +521,9 @@ static void check_pw_file (int *errors, bool *changed)
 			spw = (struct spwd *) spw_locate (pwd->pw_name);
 			if (NULL == spw) {
 				printf (_("no matching password file entry in %s\n"),
-				        spw_dbname());
+				        spw_dbname ());
 				printf (_("add user '%s' in %s? "),
-				        pwd->pw_name, spw_dbname());
+				        pwd->pw_name, spw_dbname ());
 				*errors += 1;
 				if (yes_or_no (read_only)) {
 					struct spwd sp;
@@ -557,23 +571,30 @@ static void check_pw_file (int *errors, bool *changed)
 				 */
 				if (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) != 0) {
 					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
-					        pwd->pw_name, spw_dbname(), pwd_file);
+					        pwd->pw_name, spw_dbname (), pwd_file);
 					*errors += 1;
 				}
 			}
 		}
 #ifdef WITH_TCB
-		if (getdef_bool("USE_TCB") && spw_locked) {
-			if (spw_opened && spw_close () == 0) {
-				fprintf (stderr, _("%s: failure while writing changes to %s\n"),
-					 Prog, spw_dbname());
-				SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname()));
+		if (getdef_bool ("USE_TCB") && spw_locked) {
+			if (spw_opened && (spw_close () == 0)) {
+				fprintf (stderr,
+				         _("%s: failure while writing changes to %s\n"),
+				         Prog, spw_dbname ());
+				SYSLOG ((LOG_ERR,
+				         "failure while writing changes to %s",
+				         spw_dbname ()));
 			} else {
 				spw_opened = false;
 			}
 			if (spw_unlock () == 0) {
-				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-				SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+				fprintf (stderr,
+				         _("%s: failed to unlock %s\n"),
+				         Prog, spw_dbname ());
+				SYSLOG ((LOG_ERR,
+				         "failed to unlock %s",
+				         spw_dbname ()));
 			} else {
 				spw_locked = false;
 			}

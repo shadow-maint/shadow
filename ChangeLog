@@ -1,4 +1,8 @@
-2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/pwck.c: Re-indent.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/userdel.c, src/usermod.c, src/vipw.c, src/useradd.c,
 	src/pwck.c, src/chage.c, lib/shadowio.c: Explicitly use the
