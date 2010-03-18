@@ -590,7 +590,7 @@ static void check_pw_file (int *errors, bool *changed)
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, spw_dbname (), sp.sp_namp);
-						exit (E_CANTUPDATE);
+						fail_exit (E_CANTUPDATE);
 					}
 					/* remove password from /etc/passwd */
 					pw = *pwd;

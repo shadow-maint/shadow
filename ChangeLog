@@ -1,5 +1,10 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Unlock the password and shadow files when there is a
+	failure to prepare the update in memory.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Only log to SYSLOG when acting on system files.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
