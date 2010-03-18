@@ -1,5 +1,15 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/strtoday.c: Add support for numerical dates, assuming
+	they are already specified in number of days since Epoch. Return
+	-2 in case of errors to support the specification of -1.
+	* src/usermod.c, src/useradd.c: Adapt to the new error value of
+	strtoday().
+	* src/chage.c:  Remove isnum(). Adapt to the new error value of
+	strtoday(). Support for numerical dates is moved to strtoday().
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Harmonize name of parameters.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>

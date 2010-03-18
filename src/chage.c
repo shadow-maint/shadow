@@ -93,7 +93,6 @@ static long expdate;
 #define	EPOCH		"1969-12-31"
 
 /* local function prototypes */
-static bool isnum (const char *s);
 static void usage (int status);
 static void date_to_str (char *buf, size_t maxsize, time_t date);
 static int new_fields (void);
@@ -136,20 +135,6 @@ static void fail_exit (int code)
 #endif
 
 	exit (code);
-}
-
-/*
- * isnum - determine whether or not a string is a number
- */
-static bool isnum (const char *s)
-{
-	while ('\0' != *s) {
-		if (!isdigit (*s)) {
-			return false;
-		}
-		s++;
-	}
-	return true;
 }
 
 /*
@@ -226,7 +211,7 @@ static int new_fields (void)
 		lstchgdate = -1;
 	} else {
 		lstchgdate = strtoday (buf);
-		if (lstchgdate == -1) {
+		if (lstchgdate < -1) {
 			return 0;
 		}
 	}
@@ -254,7 +239,7 @@ static int new_fields (void)
 		expdate = -1;
 	} else {
 		expdate = strtoday (buf);
-		if (expdate == -1) {
+		if (expdate < -1) {
 			return 0;
 		}
 	}
@@ -409,10 +394,8 @@ static void process_flags (int argc, char **argv)
 		switch (c) {
 		case 'd':
 			dflg = true;
-			if (!isnum (optarg)) {
-				lstchgdate = strtoday (optarg);
-			} else if (   (getlong (optarg, &lstchgdate) == 0)
-			           || (lstchgdate < -1)) {
+			lstchgdate = strtoday (optarg);
+			if (lstchgdate < -1) {
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
@@ -421,10 +404,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'E':
 			Eflg = true;
-			if (!isnum (optarg)) {
-				expdate = strtoday (optarg);
-			} else if (   (getlong (optarg, &expdate) == 0)
-			           || (expdate < -1)) {
+			expdate = strtoday (optarg);
+			if (expdate < -1) {
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);

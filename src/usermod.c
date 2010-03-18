@@ -940,7 +940,7 @@ static void process_flags (int argc, char **argv)
 			case 'e':
 				if ('\0' != *optarg) {
 					user_newexpire = strtoday (optarg);
-					if (user_newexpire == -1) {
+					if (user_newexpire < -1) {
 						fprintf (stderr,
 						         _("%s: invalid date '%s'\n"),
 						         Prog, optarg);

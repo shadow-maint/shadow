@@ -1041,7 +1041,7 @@ static void process_flags (int argc, char **argv)
 			case 'e':
 				if ('\0' != *optarg) {
 					user_expire = strtoday (optarg);
-					if (user_expire == -1) {
+					if (user_expire < -1) {
 						fprintf (stderr,
 						         _("%s: invalid date '%s'\n"),
 						         Prog, optarg);
