@@ -192,7 +192,7 @@ static shadowtcb_status mkdir_leading(const char *name, uid_t uid)
 		goto out_free_path;
 	}
 	while ((ind = strchr(ptr, '/'))) {
-		*ind = 0;
+		*ind = '\0';
 		if (asprintf(&dir, TCB_DIR "/%s", path) == -1) {
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;
@@ -250,7 +250,7 @@ static shadowtcb_status rmdir_leading(char *path)
 	char *ind, *dir;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 	while ((ind = strrchr(path, '/'))) {
-		*ind = 0;
+		*ind = '\0';
 		if (asprintf(&dir, TCB_DIR "/%s", path) == -1) {
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;

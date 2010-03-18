@@ -15,6 +15,7 @@
 	spw_setdbname's prototype.
 	* lib/tcbfuncs.c: Ignore fflush() return value.
 	* lib/tcbfuncs.c: Avoid implicit signed to unsigned conversions.
+	* lib/tcbfuncs.c: Avoid integer to char conversions.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
