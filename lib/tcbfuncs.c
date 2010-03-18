@@ -149,7 +149,8 @@ static char *shadowtcb_path(const char *name, uid_t uid)
 {
 	char *ret, *rel;
 
-	if (!(rel = shadowtcb_path_rel(name, uid)))
+	rel = shadowtcb_path_rel(name, uid);
+	if (NULL == rel)
 		return NULL;
 	if (asprintf(&ret, TCB_DIR "/%s", rel) == -1) {
 		OUT_OF_MEMORY;
@@ -164,7 +165,8 @@ static char *shadowtcb_path_existing(const char *name)
 {
 	char *ret, *rel;
 
-	if (!(rel = shadowtcb_path_rel_existing(name)))
+	rel = shadowtcb_path_rel_existing(name);
+	if (NULL == rel)
 		return NULL;
 	if (asprintf(&ret, TCB_DIR "/%s", rel) == -1) {
 		OUT_OF_MEMORY;
@@ -281,15 +283,18 @@ static shadowtcb_status move_dir(const char *user_newname, uid_t user_newid)
 	}
 	old_uid = oldmode.st_uid;
 	the_newid = (user_newid == -1) ? old_uid : user_newid;
-	if (!(real_old_dir = shadowtcb_path_existing(stored_tcb_user)))
+	real_old_dir = shadowtcb_path_existing(stored_tcb_user);
+	if (NULL == real_old_dir)
 		goto out_free;
-	if (!(real_new_dir = shadowtcb_path(user_newname, the_newid)))
+	real_new_dir = shadowtcb_path(user_newname, the_newid);
+	if (NULL == real_new_dir)
 		goto out_free;
 	if (strcmp(real_old_dir, real_new_dir) == 0) {
 		ret = SHADOWTCB_SUCCESS;
 		goto out_free;
 	}
-	if (!(real_old_dir_rel = shadowtcb_path_rel_existing(stored_tcb_user)))
+	real_old_dir_rel = shadowtcb_path_rel_existing(stored_tcb_user);
+	if (NULL == real_old_dir_rel)
 		goto out_free;
 	if (mkdir_leading(user_newname, the_newid) == SHADOWTCB_FAILURE)
 		goto out_free;
@@ -305,9 +310,11 @@ static shadowtcb_status move_dir(const char *user_newname, uid_t user_newid)
 	}
 	if (asprintf(&newdir, TCB_DIR "/%s", user_newname) == -1)
 		goto out_free_nomem;
-	if (!(real_new_dir_rel = shadowtcb_path_rel(user_newname, the_newid)))
+	real_new_dir_rel = shadowtcb_path_rel(user_newname, the_newid);
+	if (NULL == real_new_dir_rel)
 		goto out_free;
-	if (strcmp(real_new_dir, newdir) != 0 && symlink(real_new_dir_rel, newdir) != 0) {
+	if (   (strcmp(real_new_dir, newdir) != 0)
+	    && (symlink(real_new_dir_rel, newdir) != 0)) {
 		fprintf(stderr, _("%s: Cannot create symbolic link %s: %s\n"), Prog, real_new_dir_rel, strerror(errno));
 		goto out_free;
 	}
@@ -460,11 +467,12 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 		return SHADOWTCB_FAILURE;
 	}
 	shadowgid = tcbdir_stat.st_gid;
-	if (getdef_bool("TCB_AUTH_GROUP") &&
-		(gr = getgrnam("auth"))) {
-		authgid = gr->gr_gid;
-	} else {
-		authgid = shadowgid;
+	authgid = shadowgid;
+	if (getdef_bool("TCB_AUTH_GROUP")) {
+		gr = getgrnam("auth");
+		if (NULL != gr) {
+			authgid = gr->gr_gid;
+		}
 	}
 	
 	if (   (asprintf(&dir, TCB_DIR "/%s", name) == -1)
