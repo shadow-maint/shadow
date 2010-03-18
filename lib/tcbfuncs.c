@@ -278,6 +278,9 @@ static shadowtcb_status move_dir(const char *user_newname, uid_t user_newid)
 	struct stat oldmode;
 	shadowtcb_status ret = SHADOWTCB_FAILURE;
 
+	if (NULL == stored_tcb_user) {
+		return SHADOWTCB_FAILURE;
+	}
 	if (asprintf(&olddir, TCB_DIR "/%s", stored_tcb_user) == -1)
 		goto out_free_nomem;
 	if (stat(olddir, &oldmode) != 0) {
@@ -391,6 +394,8 @@ shadowtcb_status shadowtcb_move(/*@NULL@*/const char *user_newname, uid_t user_n
 
 	if (!getdef_bool("USE_TCB"))
 		return SHADOWTCB_SUCCESS;
+	if (NULL == stored_tcb_user)
+		return SHADOWTCB_FAILURE;
 	if (NULL == user_newname)
 		user_newname = stored_tcb_user;
 	if (move_dir(user_newname, user_newid) == SHADOWTCB_FAILURE)
