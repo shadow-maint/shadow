@@ -2,6 +2,7 @@
  * Copyright (c) 1992 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2010 -     , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,8 +47,11 @@
  *	of all files owned by the provided user ID.
  */
 int
-chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
-	    gid_t new_gid)
+chown_tree (const char *root,
+            uid_t old_uid,
+            uid_t new_uid,
+            gid_t old_gid,
+            gid_t new_gid)
 {
 	char new_name[1024];
 	int rc = 0;
@@ -60,8 +64,9 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 	 * directory by the invoker, or recursively.
 	 */
 
-	if (access (root, F_OK) != 0)
+	if (access (root, F_OK) != 0) {
 		return -1;
+	}
 
 	/*
 	 * Open the directory and read each entry.  Every entry is tested
@@ -70,8 +75,10 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 	 * old user ID.
 	 */
 
-	if (!(dir = opendir (root)))
+	dir = opendir (root);
+	if (NULL == dir) {
 		return -1;
+	}
 
 	while ((ent = readdir (dir))) {
 
@@ -79,24 +86,27 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 		 * Skip the "." and ".." entries
 		 */
 
-		if (strcmp (ent->d_name, ".") == 0 ||
-		    strcmp (ent->d_name, "..") == 0)
+		if (   (strcmp (ent->d_name, ".") == 0)
+		    || (strcmp (ent->d_name, "..") == 0)) {
 			continue;
+		}
 
 		/*
 		 * Make the filename for both the source and the
 		 * destination files.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name)
+		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name) {
 			break;
+		}
 
 		snprintf (new_name, sizeof new_name, "%s/%s", root,
-			  ent->d_name);
+		          ent->d_name);
 
 		/* Don't follow symbolic links! */
-		if (LSTAT (new_name, &sb) == -1)
+		if (LSTAT (new_name, &sb) == -1) {
 			continue;
+		}
 
 		if (S_ISDIR (sb.st_mode) && !S_ISLNK (sb.st_mode)) {
 
@@ -112,12 +122,14 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 		}
 #ifndef HAVE_LCHOWN
 		/* don't use chown (follows symbolic links!) */
-		if (S_ISLNK (sb.st_mode))
+		if (S_ISLNK (sb.st_mode)) {
 			continue;
+		}
 #endif
-		if (sb.st_uid == old_uid)
+		if (sb.st_uid == old_uid) {
 			LCHOWN (new_name, new_uid,
-				sb.st_gid == old_gid ? new_gid : sb.st_gid);
+			        (sb.st_gid == old_gid) ? new_gid : sb.st_gid);
+		}
 	}
 	(void) closedir (dir);
 

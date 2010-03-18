@@ -1,5 +1,11 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chowndir.c: Re-indent.
+	* libmisc/chowndir.c: Avoid assignment in comparisons.
+	* libmisc/chowndir.c: Added brackets and parenthesis.
+
+2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/strtoday.c: Add support for numerical dates, assuming
 	they are already specified in number of days since Epoch. Return
 	-2 in case of errors to support the specification of -1.
