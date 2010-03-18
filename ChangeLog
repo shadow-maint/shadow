@@ -22,6 +22,7 @@
 	stored_tcb_user.
 	* lib/tcbfuncs.c: Avoid implicit int to mode_t conversion.
 	* lib/tcbfuncs.c: Added brackets and parenthesis.
+	* lib/tcbfuncs.c: Re-indent.
 
 2010-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
