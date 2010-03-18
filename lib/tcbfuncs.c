@@ -256,7 +256,7 @@ static shadowtcb_status rmdir_leading(char *path)
 		}
 		if (rmdir(dir) != 0) {
 			if (errno != ENOTEMPTY) {
-				fprintf(stderr, _("%s: Cannot removedirectory %s: %s\n"), Prog, dir, strerror(errno));
+				fprintf(stderr, _("%s: Cannot remove directory %s: %s\n"), Prog, dir, strerror(errno));
 				ret = SHADOWTCB_FAILURE;
 			}
 			free(dir);
@@ -464,7 +464,7 @@ shadowtcb_status shadowtcb_create(const char *name, uid_t uid)
 	if (!getdef_bool("USE_TCB"))
 		return SHADOWTCB_SUCCESS;
 	if (stat(TCB_DIR, &tcbdir_stat) != 0) {
-		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, tcbdir, strerror(errno));
+		fprintf(stderr, _("%s: Cannot stat %s: %s\n"), Prog, TCB_DIR, strerror(errno));
 		return SHADOWTCB_FAILURE;
 	}
 	shadowgid = tcbdir_stat.st_gid;
