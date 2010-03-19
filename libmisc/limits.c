@@ -402,7 +402,6 @@ static int do_user_limits (const char *buf, const char *name)
 static bool user_in_group (const char *uname, const char *gname)
 {
 	struct group *groupdata;
-	char **member;
 
 	if (uname == NULL || gname == NULL){ 
 		return false;

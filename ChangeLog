@@ -1,6 +1,7 @@
 2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c, lib/commonio.c, po/POTFILES.in: Fix typos.
+	* libmisc/limits.c: Removed unused variable.
 
 2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
 
