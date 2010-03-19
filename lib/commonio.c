@@ -707,7 +707,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	struct commonio_entry **entries, *ptr;
 	size_t n = 0, i;
 #if KEEP_NIS_AT_END
-	struct commonio_entry *nis = NULL
+	struct commonio_entry *nis = NULL;
 #endif
 
 	for (ptr = db->head;

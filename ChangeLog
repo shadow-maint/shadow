@@ -1,5 +1,9 @@
 2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c, lib/commonio.c, po/POTFILES.in: Fix typos.
+
+2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Stop sorting entries when we reach the first
 	NIS line.
 

@@ -23,8 +23,8 @@ lib/sgroupio.c
 lib/shadow.c
 lib/shadowio.c
 lib/shadowmem.c
-lib/utent.c
 lib/tcbfuncs.c
+lib/utent.c
 libmisc/addgrps.c
 libmisc/age.c
 libmisc/audit_help.c

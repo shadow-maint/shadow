@@ -209,7 +209,7 @@ static void fail_exit (int code)
 {
 	if (home_added) {
 		if (rmdir (user_home) != 0) {
-			frpintf (stderr,
+			fprintf (stderr,
 			         _("%s: %s was created, but could not be removed\n"),
 			         Prog, user_home);
 			SYSLOG ((LOG_ERR, "failed to remove %s", user_home));
