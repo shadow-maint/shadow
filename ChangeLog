@@ -1,5 +1,9 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c: Re-indent to make pmccabe happy.
+
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/generate_translations.mak, man/generate_mans.mak: Fix
 	distcheck. All manpages generation code shall be enclosed in
 	ENABLE_REGENERATE_MAN conditions.

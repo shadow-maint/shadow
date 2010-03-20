@@ -164,11 +164,12 @@ static int check_logins (const char *name, const char *maxlogins)
 	count = 0;
 #ifdef USE_UTMPX
 	setutxent ();
-	while ((ut = getutxent ())) {
+	while ((ut = getutxent ()))
 #else				/* !USE_UTMPX */
 	setutent ();
-	while ((ut = getutent ())) {
+	while ((ut = getutent ()))
 #endif				/* !USE_UTMPX */
+	{
 		if (USER_PROCESS != ut->ut_type) {
 			continue;
 		}
