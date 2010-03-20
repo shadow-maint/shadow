@@ -1,5 +1,9 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, configure.in: Next version will be 4.1.5.
+
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/limits.c: Re-indent to make pmccabe happy.
 
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
