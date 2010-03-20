@@ -1,5 +1,13 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/useradd.8.xml: Do not document the features which are not
+	working.
+	* man/useradd.8.xml: Fix typo: -u was meant instead of -o.
+	* man/useradd.8.xml: Document that the default behavior depends on
+	CREATE_HOME.
+
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: Fix memory management insplit_groups().
 
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
