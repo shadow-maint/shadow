@@ -1,3 +1,8 @@
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/strtoday.c: Empty dates indicate a disabled date, this is
+	not an error.
+
 2010-03-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c, lib/commonio.c, po/POTFILES.in: Fix typos.

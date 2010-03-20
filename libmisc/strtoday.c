@@ -75,7 +75,7 @@ long strtoday (const char *str)
 	 * (useradd sets sp_expire = current date for new lusers)
 	 */
 	if ((NULL == str) || ('\0' == *str)) {
-		return -2;
+		return -1;
 	}
 
 	/* If a numerical value is provided, this is already a number of
