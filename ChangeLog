@@ -1,5 +1,11 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/generate_translations.mak, man/generate_mans.mak: Fix
+	distcheck. All manpages generation code shall be enclosed in
+	ENABLE_REGENERATE_MAN conditions.
+
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/useradd.8.xml: Do not document the features which are not
 	working.
 	* man/useradd.8.xml: Fix typo: -u was meant instead of -o.
