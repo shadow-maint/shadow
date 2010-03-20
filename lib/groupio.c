@@ -382,6 +382,7 @@ static int split_groups (unsigned int max_members)
 		struct commonio_entry *new;
 		struct group *new_gptr;
 		unsigned int members = 0;
+		int i;
 
 		/* Check if this group must be split */
 		if (!gr->changed)
@@ -408,9 +409,23 @@ static int split_groups (unsigned int max_members)
 		new->changed = true;
 
 		/* Enforce the maximum number of members on gptr */
-		gptr->gr_mem[max_members] = NULL;
+		for (i = max_members; NULL != gptr->gr_mem[i]; i++) {
+			free (gptr->gr_mem[i]);
+			gptr->gr_mem[i] = NULL;
+		}
+		/* Shift all the members */
 		/* The number of members in new_gptr will be check later */
-		new_gptr->gr_mem = &new_gptr->gr_mem[max_members];
+		for (i = 0; NULL != new_gptr->gr_mem[i + max_members]; i++) {
+			if (NULL != new_gptr->gr_mem[i]) {
+				free (new_gptr->gr_mem[i]);
+			}
+			new_gptr->gr_mem[i] = new_gptr->gr_mem[i + max_members];
+			new_gptr->gr_mem[i + max_members] = NULL;
+		}
+		for (; NULL != new_gptr->gr_mem[i]; i++) {
+			free (new_gptr->gr_mem[i]);
+			new_gptr->gr_mem[i] = NULL;
+		}
 
 		/* insert the new entry in the list */
 		new->prev = gr;

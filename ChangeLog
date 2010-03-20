@@ -1,5 +1,9 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Fix memory management insplit_groups().
+
+2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/strtoday.c: Empty dates indicate a disabled date, this is
 	not an error.
 
