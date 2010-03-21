@@ -60,10 +60,20 @@ int find_new_uid (bool sys_user,
 	if (!sys_user) {
 		uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
 		uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
+		if (uid_max < uid_min) {
+			(void) fprintf (stderr,
+			                _("%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"),
+			                Prog, (unsigned long) uid_min, (unsigned long) uid_max);
+		}
 	} else {
 		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
 		uid_max = (uid_t) getdef_ulong ("UID_MIN", 1000UL) - 1;
 		uid_max = (uid_t) getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
+		if (uid_max < uid_min) {
+			(void) fprintf (stderr,
+			                _("%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"),
+			                Prog, (unsigned long) uid_min, getdef_ulong ("UID_MIN", 1000UL), (unsigned long) uid_max);
+		}
 	}
 	used_uids = alloca (sizeof (bool) * (uid_max +1));
 	memset (used_uids, false, sizeof (bool) * (uid_max + 1));

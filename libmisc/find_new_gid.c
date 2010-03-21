@@ -60,10 +60,20 @@ int find_new_gid (bool sys_group,
 	if (!sys_group) {
 		gid_min = (gid_t) getdef_ulong ("GID_MIN", 1000UL);
 		gid_max = (gid_t) getdef_ulong ("GID_MAX", 60000UL);
+		if (gid_max < gid_min) {
+			(void) fprintf (stderr,
+			                _("%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"),
+			                Prog, (unsigned long) gid_min, (unsigned long) gid_max);
+		}
 	} else {
 		gid_min = (gid_t) getdef_ulong ("SYS_GID_MIN", 101UL);
 		gid_max = (gid_t) getdef_ulong ("GID_MIN", 1000UL) - 1;
 		gid_max = (gid_t) getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
+		if (gid_max < gid_min) {
+			(void) fprintf (stderr,
+			                _("%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"),
+			                Prog, (unsigned long) gid_min, getdef_ulong ("GID_MIN", 1000UL), (unsigned long) gid_max);
+		}
 	}
 	used_gids = alloca (sizeof (bool) * (gid_max +1));
 	memset (used_gids, false, sizeof (bool) * (gid_max + 1));
