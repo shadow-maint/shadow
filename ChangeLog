@@ -1,5 +1,10 @@
 2010-03-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c, src/vipw.c, src/newgrp.c: When the child is
+	interrupted, stop ourself with a SIGSTOP signal.
+
+2010-03-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Limit the scope of variable pid.
 	* src/login_nopam.c: Limit the scope of variables end, lineno, i,
 	str_len.

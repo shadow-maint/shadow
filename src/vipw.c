@@ -310,7 +310,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if ((pid != -1) && (WIFSTOPPED (status) != 0)) {
 			/* The child (editor) was suspended.
 			 * Suspend vipw. */
-			kill (getpid (), WSTOPSIG (status));
+			kill (getpid (), SIGSTOP);
 			/* wake child when resumed */
 			kill (pid, SIGCONT);
 		} else {

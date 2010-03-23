@@ -313,7 +313,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 			if (((pid_t)-1 != pid) && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
-				kill (getpid (), WSTOPSIG(status));
+				kill (getpid (), SIGSTOP);
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 			}

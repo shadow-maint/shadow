@@ -322,8 +322,9 @@ static void syslog_sg (const char *name, const char *group)
 				errno = 0;
 				pid = waitpid (child, &cst, WUNTRACED);
 				if ((pid == child) && (WIFSTOPPED (cst) != 0)) {
-					/* stop when child stops */
-					kill (getpid (), WSTOPSIG(cst));
+					/* The child (shell) was suspended.
+					 * Suspend sg/newgrp. */
+					kill (getpid (), SIGSTOP);
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
