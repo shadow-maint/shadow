@@ -282,7 +282,7 @@ static void syslog_sg (const char *name, const char *group)
 	 * receives SIGCHLD from the terminating subshell.  -- JWP
 	 */
 	{
-		pid_t child, pid;
+		pid_t child;
 
 		/* Ignore these signals. The signal handlers will later be
 		 * restored to the default handlers. */
@@ -316,6 +316,7 @@ static void syslog_sg (const char *name, const char *group)
 			int cst = 0;
 			gid_t gid = getgid();
 			struct group *grp = getgrgid (gid);
+			pid_t pid;
 
 			do {
 				errno = 0;

@@ -1,3 +1,21 @@
+2010-03-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newgrp.c: Limit the scope of variable pid.
+	* src/login_nopam.c: Limit the scope of variables end, lineno, i,
+	str_len.
+	* src/logoutd.c: Limit the scope of variable c.
+	* src/vipw.c: Re-indent.
+	* src/vipw.c: Close the file after the creation of the backup.
+	* src/useradd.c (set_default): Close input file on failure.
+	* src/useradd.c: Limit the scope of variables spool, file, fd, gr,
+	gid, mode.
+	* src/passwd.c: Limit the scope of variables last and ok.
+	* src/chage.c: Fix typo (non breaking space).
+	* src/login.c: Limit the scope of variables erasechar killchar, c,
+	failed.
+	* src/groups.c: Limit the scope of variable ngroups, pri_grp, i.
+	* src/id.c: Limit the scope of variable i.
+
 2010-03-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/utent.c (getutline): Remove getutline(). This function is

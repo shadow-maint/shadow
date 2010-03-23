@@ -64,7 +64,6 @@ static void usage (void)
 {
 	uid_t ruid, euid;
 	gid_t rgid, egid;
-	int i;
 	long sys_ngroups;
 
 /*
@@ -168,6 +167,7 @@ static void usage (void)
 	 * The group numbers will be printed followed by their names.
 	 */
 	if (aflg && (ngroups = getgroups (sys_ngroups, groups)) != -1) {
+		int i;
 
 		/*
 		 * Start off the group message. It will be of the format

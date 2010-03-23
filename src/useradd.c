@@ -485,6 +485,7 @@ static int set_defaults (void)
 				fprintf (stderr,
 				         _("%s: line too long in %s: %s..."),
 				         Prog, def_file, buf);
+				(void) fclose (ifp);
 				return -1;
 			}
 		}
@@ -1804,13 +1805,13 @@ static void create_home (void)
  */
 static void create_mail (void)
 {
-	char *spool, *file;
-	int fd;
-	struct group *gr;
-	gid_t gid;
-	mode_t mode;
-
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
+		char *spool, *file;
+		int fd;
+		struct group *gr;
+		gid_t gid;
+		mode_t mode;
+
 		spool = getdef_str ("MAIL_DIR");
 		if (NULL == spool) {
 			spool = "/var/mail";

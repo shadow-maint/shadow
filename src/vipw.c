@@ -298,7 +298,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			  "%s %s", editor, fileedit);
 		if (system (buf) != 0) {
 			fprintf (stderr, "%s: %s: %s\n", progname, editor,
-				 strerror (errno));
+			         strerror (errno));
 			exit (1);
 		} else {
 			exit (0);
@@ -369,6 +369,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			free (to_rename);
 			vipwexit (_("failed to create backup file"), errno, 1);
 		}
+		(void) fclose (f);
 	} else {
 #endif				/* WITH_TCB */
 		to_rename = fileedit;

@@ -270,7 +270,7 @@ static void print_date (time_t date)
 	}
 	if (NULL != cp) {
 		(void) printf ("%6.6s, %4.4s\n", cp + 4, cp + 20);
-	} else {
+	} else {
 		(void) printf ("time_t: %lu\n", date);
 	}
 #endif

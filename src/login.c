@@ -167,10 +167,10 @@ static void usage (void)
 static void setup_tty (void)
 {
 	TERMIO termio;
-	int erasechar;
-	int killchar;
 
 	if (GTTY (0, &termio) == 0) {	/* get terminal characteristics */
+		int erasechar;
+		int killchar;
 
 		/*
 		 * Add your favorite terminal modes here ...
@@ -242,7 +242,6 @@ static void check_nologin (bool login_to_root)
 	fname = getdef_str ("NOLOGINS_FILE");
 	if ((NULL != fname) && (access (fname, F_OK) == 0)) {
 		FILE *nlfp;
-		int c;
 
 		/*
 		 * Cat the file if it can be opened, otherwise just
@@ -250,6 +249,7 @@ static void check_nologin (bool login_to_root)
 		 */
 		nlfp = fopen (fname, "r");
 		if (NULL != nlfp) {
+			int c;
 			while ((c = getc (nlfp)) != EOF) {
 				if (c == '\n') {
 					(void) putchar ('\r');
@@ -527,7 +527,6 @@ int main (int argc, char **argv)
 #endif
 	unsigned int delay;
 	unsigned int retries;
-	bool failed;
 	bool subroot = false;
 #ifndef USE_PAM
 	bool is_console;
@@ -773,7 +772,7 @@ int main (int argc, char **argv)
 		 */
 		failcount = 0;
 		while (true) {
-			failed = false;
+			bool failed = false;
 
 			failcount++;
 #ifdef HAS_PAM_FAIL_DELAY
@@ -903,6 +902,7 @@ int main (int argc, char **argv)
 
 #else				/* ! USE_PAM */
 	while (true) {	/* repeatedly get login/password pairs */
+		bool failed;
 		/* user_passwd is always a pointer to this constant string
 		 * or a passwd or shadow password that will be memzero by
 		 * pw_free / spw_free.

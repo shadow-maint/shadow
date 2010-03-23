@@ -81,8 +81,6 @@ int login_access (const char *user, const char *from)
 	char *users;		/* becomes list of login names */
 	char *froms;		/* becomes list of terminals or hosts */
 	bool match = false;
-	int end;
-	int lineno = 0;		/* for diagnostics */
 
 	/*
 	 * Process the table one line at a time and stop at the first match.
@@ -93,8 +91,10 @@ int login_access (const char *user, const char *from)
 	 */
 	fp = fopen (TABLE, "r");
 	if (NULL != fp) {
+		int lineno = 0;	/* for diagnostics */
 		while (   !match
 		       && (fgets (line, (int) sizeof (line), fp) == line)) {
+			int end;
 			lineno++;
 			end = (int) strlen (line) - 1;
 			if (line[end] != '\n') {
@@ -211,7 +211,6 @@ static bool user_match (const char *tok, const char *string)
 #ifdef PRIMARY_GROUP_MATCH
 	struct passwd *userinf;
 #endif
-	int i;
 	char *at;
 
 	/*
@@ -232,6 +231,7 @@ static bool user_match (const char *tok, const char *string)
 		return true;
 	/* local, no need for xgetgrnam */
 	} else if ((group = getgrnam (tok)) != NULL) {	/* try group membership */
+		int i;
 		for (i = 0; NULL != group->gr_mem[i]; i++) {
 			if (strcasecmp (string, group->gr_mem[i]) == 0) {
 				return true;
@@ -280,7 +280,6 @@ static const char *resolve_hostname (const char *string)
 static bool from_match (const char *tok, const char *string)
 {
 	size_t tok_len;
-	size_t str_len;
 
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds. Return
@@ -298,6 +297,7 @@ static bool from_match (const char *tok, const char *string)
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
 	} else if (tok[0] == '.') {	/* domain: match last fields */
+		size_t str_len;
 		str_len = strlen (string);
 		tok_len = strlen (tok);
 		if (   (str_len > tok_len)
