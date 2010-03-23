@@ -52,7 +52,7 @@ int find_new_gid (bool sys_group,
                   /*@null@*/gid_t const *preferred_gid)
 {
 	const struct group *grp;
-	gid_t gid_min, gid_max, group_id, id;
+	gid_t gid_min, gid_max, group_id;
 	bool *used_gids;
 
 	assert (gid != NULL);
@@ -100,6 +100,7 @@ int find_new_gid (bool sys_group,
 	 * some groups were created but the changes were not committed yet.
 	 */
 	if (sys_group) {
+		gid_t id;
 		/* setgrent / getgrent / endgrent can be very slow with
 		 * LDAP configurations (and many accounts).
 		 * Since there is a limited amount of IDs to be tested

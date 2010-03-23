@@ -52,7 +52,7 @@ int find_new_uid (bool sys_user,
                   /*@null@*/uid_t const *preferred_uid)
 {
 	const struct passwd *pwd;
-	uid_t uid_min, uid_max, user_id, id;
+	uid_t uid_min, uid_max, user_id;
 	bool *used_uids;
 
 	assert (uid != NULL);
@@ -100,6 +100,7 @@ int find_new_uid (bool sys_user,
 	 * some users were created but the changes were not committed yet.
 	 */
 	if (sys_user) {
+		uid_t id;
 		/* setpwent / getpwent / endpwent can be very slow with
 		 * LDAP configurations (and many accounts).
 		 * Since there is a limited amount of IDs to be tested

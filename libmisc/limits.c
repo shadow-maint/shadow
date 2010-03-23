@@ -507,7 +507,6 @@ static int setup_user_limits (const char *uname)
 static void setup_usergroups (const struct passwd *info)
 {
 	const struct group *grp;
-	mode_t tmpmask;
 
 /*
  *	if not root, and UID == GID, and username is the same as primary
@@ -519,6 +518,7 @@ static void setup_usergroups (const struct passwd *info)
 		grp = getgrgid (info->pw_gid);
 		if (   (NULL != grp)
 		    && (strcmp (info->pw_name, grp->gr_name) == 0)) {
+			mode_t tmpmask;
 			tmpmask = umask (0777);
 			tmpmask = (tmpmask & ~070) | ((tmpmask >> 3) & 070);
 			(void) umask (tmpmask);

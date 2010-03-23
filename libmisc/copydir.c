@@ -635,6 +635,7 @@ static int copy_file (const char *src, const char *dst,
 
 	while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
 		if (write (ofd, buf, (size_t)cnt) != cnt) {
+			(void) close (ifd);
 			return -1;
 		}
 	}

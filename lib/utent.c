@@ -88,25 +88,6 @@ struct utmp *getutent (void)
 
 	return &utmp_buf;
 }
-
-/*
- * getutline - get the utmp entry matching ut_line
- */
-
-struct utmp *getutline (const struct utmp *utent)
-{
-	struct utmp save;
-	struct utmp *new;
-
-	save = *utent;
-	while (new = getutent ())
-		if (strncmp (new->ut_line, save.ut_line, sizeof new->ut_line))
-			continue;
-		else
-			return new;
-
-	return (struct utmp *) 0;
-}
 #else
 extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif

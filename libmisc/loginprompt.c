@@ -60,7 +60,6 @@ void login_prompt (const char *prompt, char *name, int namesize)
 
 #define MAX_ENV 32
 	char *envp[MAX_ENV];
-	int envc;
 	char *cp;
 	int i;
 	FILE *fp;
@@ -148,6 +147,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	if ('\0' != *cp) {	/* process new variables */
 		char *nvar;
 		int count = 1;
+		int envc;
 
 		for (envc = 0; envc < MAX_ENV; envc++) {
 			nvar = strtok ((0 != envc) ? (char *) 0 : cp, " \t,");

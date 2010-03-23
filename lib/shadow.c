@@ -42,10 +42,10 @@
 #include "defines.h"
 #include <stdio.h>
 #ifdef	USE_NIS
-static int nis_used;
-static int nis_ignore;
+static bool nis_used;
+static bool nis_ignore;
 static enum { native, start, middle, native2 } nis_state;
-static int nis_bound;
+static bool nis_bound;
 static char *nis_domain;
 static char *nis_key;
 static int nis_keylen;
@@ -66,12 +66,12 @@ static FILE *shadow;
  * __setspNIS - turn on or off NIS searches
  */
 
-void __setspNIS (int flag)
+void __setspNIS (bool flag)
 {
 	nis_ignore = !flag;
 
 	if (nis_ignore) {
-		nis_used = 0;
+		nis_used = false;
 	}
 }
 
@@ -81,10 +81,11 @@ void __setspNIS (int flag)
 
 static int bind_nis (void)
 {
-	if (yp_get_default_domain (&nis_domain))
+	if (yp_get_default_domain (&nis_domain)) {
 		return -1;
+	}
 
-	nis_bound = 1;
+	nis_bound = true;
 	return 0;
 }
 #endif
@@ -95,10 +96,11 @@ static int bind_nis (void)
 
 void setspent (void)
 {
-	if (shadow)
+	if (NULL != shadow) {
 		rewind (shadow);
-	else
+	}else {
 		shadow = fopen (SHADOW_FILE, "r");
+	}
 
 #ifdef	USE_NIS
 	nis_state = native;
@@ -111,8 +113,9 @@ void setspent (void)
 
 void endspent (void)
 {
-	if (shadow)
+	if (NULL != shadow) {
 		(void) fclose (shadow);
+	}
 
 	shadow = (FILE *) 0;
 }
@@ -172,8 +175,9 @@ static struct spwd *my_sgetspent (const char *string)
 
 	spwd.sp_namp = fields[0];
 #ifdef	USE_NIS
-	if (IS_NISCHAR (fields[0][0]))
-		nis_used = 1;
+	if (IS_NISCHAR (fields[0][0])) {
+		nis_used = true;
+	}
 #endif
 	spwd.sp_pwdp = fields[1];
 
@@ -211,7 +215,9 @@ static struct spwd *my_sgetspent (const char *string)
 				spwd.sp_min = -1;
 			} else
 #endif
+			{
 				return 0;
+			}
 		} else if (spwd.sp_min < 0) {
 			return 0;
 		}
@@ -263,7 +269,9 @@ static struct spwd *my_sgetspent (const char *string)
 				spwd.sp_warn = -1;
 			} else
 #endif
+			{
 				return 0;
+			}
 		} else if (spwd.sp_warn < 0) {
 			return 0;
 		}
@@ -283,7 +291,9 @@ static struct spwd *my_sgetspent (const char *string)
 				spwd.sp_inact = -1;
 			} else
 #endif
+			{
 				return 0;
+			}
 		} else if (spwd.sp_inact < 0) {
 			return 0;
 		}
@@ -303,7 +313,9 @@ static struct spwd *my_sgetspent (const char *string)
 				spwd.sp_expire = -1;
 			} else
 #endif
+			{
 				return 0;
+			}
 		} else if (spwd.sp_expire < 0) {
 			return 0;
 		}
@@ -324,7 +336,9 @@ static struct spwd *my_sgetspent (const char *string)
 				spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 			} else
 #endif
+			{
 				return 0;
+			}
 		} else if (spwd.sp_flag < 0) {
 			return 0;
 		}
@@ -377,8 +391,9 @@ struct spwd *getspent (void)
 	struct spwd *val;
 	char buf[BUFSIZ];
 #endif
-	if (!shadow)
+	if (NULL == shadow) {
 		setspent ();
+	}
 
 #ifdef	USE_NIS
       again:
@@ -432,7 +447,7 @@ struct spwd *getspent (void)
 
 		return 0;
 	} else {
-		if (nis_bound == 0) {
+		if (!nis_bound) {
 			if (bind_nis ()) {
 				nis_state = native2;
 				goto again;
@@ -440,15 +455,15 @@ struct spwd *getspent (void)
 		}
 		if (nis_state == start) {
 			if (yp_first (nis_domain, "shadow.bynam", &nis_key,
-				      &nis_keylen, &nis_val, &nis_vallen)) {
+			              &nis_keylen, &nis_val, &nis_vallen)) {
 				nis_state = native2;
 				goto again;
 			}
 			nis_state = middle;
 		} else if (nis_state == middle) {
 			if (yp_next (nis_domain, "shadow.bynam", nis_key,
-				     nis_keylen, &nis_key, &nis_keylen,
-				     &nis_val, &nis_vallen)) {
+			             nis_keylen, &nis_key, &nis_keylen,
+			             &nis_val, &nis_vallen)) {
 				nis_state = native2;
 				goto again;
 			}
@@ -471,7 +486,7 @@ struct spwd *getspnam (const char *name)
 #ifdef	USE_NIS
 	char buf[BUFSIZ];
 	static char save_name[16];
-	int nis_disabled = 0;
+	bool nis_disabled = false;
 #endif
 
 	setspent ();
@@ -481,18 +496,20 @@ struct spwd *getspnam (const char *name)
 	 * Search the shadow.byname map for this user.
 	 */
 
-	if (!nis_ignore && !nis_bound)
+	if (!nis_ignore && !nis_bound) {
 		bind_nis ();
+	}
 
 	if (!nis_ignore && nis_bound) {
 		char *cp;
 
 		if (yp_match (nis_domain, "shadow.byname", name,
-			      strlen (name), &nis_val, &nis_vallen) == 0) {
+		              strlen (name), &nis_val, &nis_vallen) == 0) {
 
 			cp = strchr (nis_val, '\n');
-			if (NULL != cp)
+			if (NULL != cp) {
 				*cp = '\0';
+			}
 
 			nis_state = middle;
 			sp = my_sgetspent (nis_val);
@@ -503,8 +520,9 @@ struct spwd *getspnam (const char *name)
 			}
 			endspent ();
 			return sp;
-		} else
+		} else {
 			nis_state = native2;
+		}
 	}
 #endif
 #ifdef	USE_NIS
@@ -516,17 +534,19 @@ struct spwd *getspnam (const char *name)
 	 */
 
 	if (nis_used) {
-		nis_ignore++;
-		nis_disabled++;
+		nis_ignore = true;
+		nis_disabled = true;
 	}
 #endif
 	while ((sp = getspent ()) != (struct spwd *) 0) {
-		if (strcmp (name, sp->sp_namp) == 0)
+		if (strcmp (name, sp->sp_namp) == 0) {
 			break;
+		}
 	}
 #ifdef	USE_NIS
-	if (nis_disabled)
-		nis_ignore--;
+	if (nis_disabled) {
+		nis_ignore = false;
+	}
 #endif
 	endspent ();
 	return (sp);

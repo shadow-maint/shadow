@@ -90,13 +90,13 @@
 
 void gr_free (/*@out@*/ /*@only@*/struct group *grent)
 {
-	size_t i;
 	free (grent->gr_name);
 	if (NULL != grent->gr_passwd) {
 		memzero (grent->gr_passwd, strlen (grent->gr_passwd));
 		free (grent->gr_passwd);
 	}
 	if (NULL != grent->gr_mem) {
+		size_t i;
 		for (i = 0; NULL != grent->gr_mem[i]; i++) {
 			free (grent->gr_mem[i]);
 		}

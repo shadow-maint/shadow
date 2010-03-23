@@ -1,3 +1,17 @@
+2010-03-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/utent.c (getutline): Remove getutline(). This function is
+	no more used.
+	* lib/groupmem.c: Limit the scope of variable i.
+	* lib/shadow.c: Avoid implicit conversion of pointers and integers
+	to booleans.
+	* lib/shadow.c: Added brackets.
+	* libmisc/limits.c: Limit the scope of variable tmpmask.
+	* libmisc/copydir.c: Close opened file on failure.
+	* libmisc/loginprompt.c: Limit the scope of variable envc.
+	* libmisc/find_new_uid.c, libmisc/find_new_gid.c: Limit the scope
+	of variable id.
+
 2010-03-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Detect some
@@ -7,6 +21,8 @@
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Next version will be 4.1.5.
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
 
 2010-03-20  Nicolas François  <nicolas.francois@centraliens.net>
 
