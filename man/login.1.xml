@@ -131,7 +131,7 @@
       </citerefentry> for more information.
     </para>
 
-    <para>
+    <para condition="no_pam">
       After a successful login, you will be informed of any system messages
       and the presence of mail. You may turn off the printing of the system
       message file, <filename>/etc/motd</filename>, by creating a

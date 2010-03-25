@@ -1,5 +1,10 @@
 2010-03-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.1.xml: login does not check for new mails in PAM
+	enabled versions. This is done by pam_mail.
+
+2010-03-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/chpasswd.c, man/chpasswd.8.xml, man/login.defs.5.xml:
 	PAM enabled versions: restore the -e option to allow restoring
 	passwords without knowing those passwords. Restore together the -m
