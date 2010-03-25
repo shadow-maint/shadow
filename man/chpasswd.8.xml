@@ -67,38 +67,37 @@
       <emphasis remap='I'>user_name</emphasis>:<emphasis
       remap='I'>password</emphasis>
     </para>
-    <refsect2 condition="no_pam">
     <para>
-      By default the supplied password must be in clear-text, and is
+      By default the passwords must be supplied in clear-text, and are
       encrypted by <command>chpasswd</command>.
       Also the password age will be updated, if present.
     </para>
-    <para>
+    <para condition="no_pam">
       The default encryption algorithm can be defined for the system with
-      the ENCRYPT_METHOD variable of <filename>/etc/login.defs</filename>,
-      and can be overwiten with the <option>-e</option>,
-      <option>-m</option>, or <option>-c</option> options.
+      the <option>ENCRYPT_METHOD</option> or
+      <option>MD5_CRYPT_ENAB</option> variables of
+      <filename>/etc/login.defs</filename>, and can be overwitten with the
+      <option>-e</option>, <option>-m</option>, or <option>-c</option>
+      options.
     </para>
-      <para>
-	<command>chpasswd</command> first update the password in memory,
-	and then commit all the changes to disk if no errors occured for
-	any users.
-      </para>
-    </refsect2>
-    <refsect2 condition="pam">
-      <para>
-	The supplied passwords must be in clear-text.
-      </para>
-      <para>
-	PAM is used to update the password in the system database
-	according to the PAM chpasswd configuration.
-      </para>
-      <para>
-	When <command>chpasswd</command> fails to update a password, it
-	continues updating the passwords of the next users, and will
-	return an error code on exit.
-      </para>
-    </refsect2>
+    <para condition="pam">
+      By default, passwords are encrypted by PAM, but (even if not
+      recommended) you can select a different encryption method with the
+      <option>-e</option>, <option>-m</option>, or <option>-c</option>
+      options.
+    </para>
+    <para>
+      <phrase condition="pam">Except when PAM is used to encrypt the
+      passwords,</phrase> <command>chpasswd</command> first updates all the
+      passwords in memory, and then commits all the changes to disk if no
+      errors occured for any user.
+    </para>
+    <para condition="pam">
+      When PAM is used to encrypt the passwords (and update the passwords in
+      the system database) then if a password cannot be updated
+      <command>chpasswd</command> continues updating the passwords of the
+      next users, and will return an error code on exit.
+    </para>
     <para>
       This command is intended to be used in a large system environment
       where many accounts are created at a single time.
@@ -111,9 +110,12 @@
       The options which apply to the <command>chpasswd</command> command
       are:
     </para>
-    <variablelist remap='IP' condition="no_pam">
+    <variablelist remap='IP'>
       <varlistentry>
-	<term><option>-c</option>, <option>--crypt-method</option></term>
+	<term>
+	  <option>-c</option>, <option>--crypt-method</option>
+	  <replaceable>METHOD</replaceable>
+	</term>
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
 	  <para condition="no_sha_crypt">
@@ -122,6 +124,17 @@
 	  <para condition="sha_crypt">
 	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
 	    if your libc support these methods.
+	  </para>
+	  <para condition="pam">
+	    By default, PAM is used to encrypt the passwords.
+	  </para>
+	  <para condition="no_pam">
+	    By default (if none of the <option>-c</option>,
+	    <option>-m</option>, or <option>-e</option> options are
+	    specified), the encryption method is defined by the 
+	    <option>ENCRYPT_METHOD</option> or
+	    <option>MD5_CRYPT_ENAB</option> variables of
+	    <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -140,7 +153,7 @@
 	</listitem>
       </varlistentry>
     </variablelist>
-    <variablelist remap='IP' condition="no_pam">
+    <variablelist remap='IP'>
       <varlistentry>
 	<term><option>-m</option>, <option>--md5</option></term>
 	<listitem>
@@ -151,7 +164,10 @@
 	</listitem>
       </varlistentry>
       <varlistentry condition="sha_crypt">
-	<term><option>-s</option>, <option>--sha-rounds</option></term>
+	<term>
+	  <option>-s</option>, <option>--sha-rounds</option>
+	  <replaceable>ROUNDS</replaceable>
+	</term>
 	<listitem>
 	  <para>
 	    Use the specified number of rounds to encrypt the passwords.
@@ -170,7 +186,8 @@
 	  </para>
 	  <para>
 	    By default, the number of rounds is defined by the
-	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
+	    <option>SHA_CRYPT_MIN_ROUNDS</option> and
+	    <option>SHA_CRYPT_MAX_ROUNDS</option> variables in
 	    <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
@@ -184,22 +201,20 @@
       Remember to set permissions or umask to prevent readability of
       unencrypted files by other users.
     </para>
-    <para condition="no_pam">
-      You should make sure the passwords and the encryption method respect
-      the system's password policy.
-    </para>
   </refsect1>
 
-  <refsect1 id='configuration' condition="no_pam">
+  <refsect1 id='configuration'>
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
       <filename>/etc/login.defs</filename> change the behavior of this
       tool:
     </para>
-    <variablelist>
+    <variablelist condition="no_pam">
       &ENCRYPT_METHOD;
       &MD5_CRYPT_ENAB;
+    </variablelist>
+    <variablelist>
       &SHA_CRYPT_MIN_ROUNDS; <!--documents also SHA_CRYPT_MAX_ROUNDS-->
     </variablelist>
   </refsect1>
@@ -207,19 +222,19 @@
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
-      <varlistentry condition="no_pam">
+      <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
 	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="no_pam">
+      <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="no_pam">
+      <varlistentry>
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
@@ -243,7 +258,7 @@
       <citerefentry>
 	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
-      <phrase condition="no_pam">
+      <phrase>
 	<citerefentry>
 	  <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
 	</citerefentry>,

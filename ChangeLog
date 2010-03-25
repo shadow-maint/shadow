@@ -1,3 +1,10 @@
+2010-03-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/chpasswd.c, man/chpasswd.8.xml, man/login.defs.5.xml:
+	PAM enabled versions: restore the -e option to allow restoring
+	passwords without knowing those passwords. Restore together the -m
+	and -c options.
+
 2010-03-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c, src/vipw.c, src/newgrp.c: When the child is

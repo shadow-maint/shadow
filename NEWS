@@ -8,6 +8,11 @@ shadow-4.1.4.2 -> shadow-4.1.5					UNRELEASED
   * initial support for tcb (http://openwall.com/tcb/) for useradd,
     userdel, usermod, chage, pwck, vipw.
 
+-chpasswd
+  * PAM enabled versions: restore the -e option to allow restoring
+    passwords without knowing those passwords. Restore together the -m
+    and -c options. (These options were removed in shadow-4.1.4 on PAM
+    enabled versions)
 - faillog
   * The -l, -m, -r, -t options only act on the existing users, unless -a is
     specified.

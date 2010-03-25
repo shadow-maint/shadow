@@ -54,7 +54,6 @@
  * Global variables
  */
 char *Prog;
-#ifndef USE_PAM
 static bool cflg   = false;
 static bool eflg   = false;
 static bool md5flg = false;
@@ -70,7 +69,6 @@ static long sha_rounds = 5000;
 static bool is_shadow_pwd;
 static bool pw_locked = false;
 static bool spw_locked = false;
-#endif				/* !USE_PAM */
 
 /* local function prototypes */
 static void fail_exit (int code);
@@ -78,17 +76,14 @@ static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
-#ifndef USE_PAM
 static void open_files (void);
 static void close_files (void);
-#endif				/* !USE_PAM */
 
 /*
  * fail_exit - exit with a failure code after unlocking the files
  */
 static void fail_exit (int code)
 {
-#ifndef USE_PAM
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
@@ -104,7 +99,6 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
-#endif				/* !USE_PAM */
 
 	exit (code);
 }
@@ -120,9 +114,8 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-#ifndef USE_PAM
 	(void) fprintf (usageout,
-	                _("  -c, --crypt-method            the crypt method (one of %s)\n"),
+	                _("  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
 	                "NONE DES MD5"
 #else				/* USE_SHA_CRYPT */
@@ -130,9 +123,7 @@ static void usage (int status)
 #endif				/* USE_SHA_CRYPT */
 	               );
 	(void) fputs (_("  -e, --encrypted               supplied passwords are encrypted\n"), usageout);
-#endif				/* !USE_PAM */
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-#ifndef USE_PAM
 	(void) fputs (_("  -m, --md5                     encrypt the clear text password using\n"
 	                "                                the MD5 algorithm\n"),
 	              usageout);
@@ -141,7 +132,6 @@ static void usage (int status)
 	                "                                crypt algorithms\n"),
 	              usageout);
 #endif				/* USE_SHA_CRYPT */
-#endif				/* !USE_PAM */
 	(void) fputs ("\n", usageout);
 
 	exit (status);
@@ -157,34 +147,27 @@ static void process_flags (int argc, char **argv)
 	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
-#ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
 		{"encrypted", no_argument, NULL, 'e'},
 		{"md5", no_argument, NULL, 'm'},
 #ifdef USE_SHA_CRYPT
 		{"sha-rounds", required_argument, NULL, 's'},
 #endif				/* USE_SHA_CRYPT */
-#endif				/* !USE_PAM */
 		{"help", no_argument, NULL, 'h'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	while ((c = getopt_long (argc, argv,
-#ifndef USE_PAM
-# ifdef USE_SHA_CRYPT
+#ifdef USE_SHA_CRYPT
 	                         "c:ehms:",
-# else				/* !USE_SHA_CRYPT */
+#else				/* !USE_SHA_CRYPT */
 	                         "c:ehm",
-# endif				/* !USE_SHA_CRYPT */
-#else
-	                         "h",
-#endif				/* !USE_PAM */
+#endif				/* !USE_SHA_CRYPT */
 	                         long_options, &option_index)) != -1) {
 		switch (c) {
 		case 'h':
 			usage (E_SUCCESS);
 			break;
-#ifndef USE_PAM
 		case 'c':
 			cflg = true;
 			crypt_method = optarg;
@@ -206,7 +189,6 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 #endif				/* USE_SHA_CRYPT */
-#endif				/* !USE_PAM */
 		default:
 			usage (E_USAGE);
 			break;
@@ -224,7 +206,6 @@ static void process_flags (int argc, char **argv)
  */
 static void check_flags (void)
 {
-#ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 	if (sflg && !cflg) {
 		fprintf (stderr,
@@ -249,7 +230,7 @@ static void check_flags (void)
 #ifdef USE_SHA_CRYPT
 		    && (0 != strcmp (crypt_method, "SHA256"))
 		    && (0 != strcmp (crypt_method, "SHA512"))
-#endif
+#endif				/* USE_SHA_CRYPT */
 		    ) {
 			fprintf (stderr,
 			         _("%s: unsupported crypt method: %s\n"),
@@ -257,7 +238,6 @@ static void check_flags (void)
 			usage (E_USAGE);
 		}
 	}
-#endif				/* USE_PAM */
 }
 
 /*
@@ -274,6 +254,10 @@ static void check_perms (void)
 {
 #ifdef USE_PAM
 #ifdef ACCT_TOOLS_SETUID
+	/* If chpasswd uses PAM and is SUID, check the permissions,
+	 * otherwise, the permissions are enforced by the access to the
+	 * passwd and shadow files.
+	 */
 	pam_handle_t *pamh = NULL;
 	int retval;
 	struct passwd *pampw;
@@ -307,7 +291,6 @@ static void check_perms (void)
 #endif				/* USE_PAM */
 }
 
-#ifndef USE_PAM
 /*
  * open_files - lock and open the password databases
  */
@@ -383,7 +366,6 @@ static void close_files (void)
 	}
 	pw_locked = false;
 }
-#endif
 
 int main (int argc, char **argv)
 {
@@ -392,13 +374,9 @@ int main (int argc, char **argv)
 	char *newpwd;
 	char *cp;
 
-#ifndef USE_PAM
-	const struct spwd *sp;
-	struct spwd newsp;
-
-	const struct passwd *pw;
-	struct passwd newpw;
-#endif				/* !USE_PAM */
+#ifdef USE_PAM
+	bool use_pam = true;
+#endif				/* USE_PAM */
 
 	int errors = 0;
 	int line = 0;
@@ -411,15 +389,24 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
+#ifdef USE_PAM
+	if (md5flg || eflg || cflg) {
+		use_pam = false;
+	}
+#endif				/* USE_PAM */
+
 	OPENLOG ("chpasswd");
 
 	check_perms ();
 
-#ifndef USE_PAM
-	is_shadow_pwd = spw_file_present ();
+#ifdef USE_PAM
+	if (!use_pam)
+#endif				/* USE_PAM */
+	{
+		is_shadow_pwd = spw_file_present ();
 
-	open_files ();
-#endif
+		open_files ();
+	}
 
 	/*
 	 * Read each line, separating the user name from the password. The
@@ -468,13 +455,21 @@ int main (int argc, char **argv)
 		newpwd = cp;
 
 #ifdef USE_PAM
+		if (use_pam){
 		if (do_pam_passwd_non_interractive ("chpasswd", name, newpwd) != 0) {
 			fprintf (stderr,
 			         _("%s: (line %d, user %s) password not changed\n"),
 			         Prog, line, name);
 			errors++;
 		}
-#else				/* !USE_PAM */
+		} else
+#endif				/* USE_PAM */
+		{
+		const struct spwd *sp;
+		struct spwd newsp;
+		const struct passwd *pw;
+		struct passwd newpw;
+
 		if (   !eflg
 		    && (   (NULL == crypt_method)
 		        || (0 != strcmp (crypt_method, "NONE")))) {
@@ -553,7 +548,7 @@ int main (int argc, char **argv)
 				continue;
 			}
 		}
-#endif				/* !USE_PAM */
+		}
 	}
 
 	/*
@@ -567,17 +562,24 @@ int main (int argc, char **argv)
 	 * password database.
 	 */
 	if (0 != errors) {
-#ifndef USE_PAM
-		fprintf (stderr,
-		         _("%s: error detected, changes ignored\n"), Prog);
-#endif
+#ifdef USE_PAM
+		if (!use_pam)
+#endif				/* USE_PAM */
+		{
+			fprintf (stderr,
+			         _("%s: error detected, changes ignored\n"),
+			         Prog);
+		}
 		fail_exit (1);
 	}
 
-#ifndef USE_PAM
+#ifdef USE_PAM
+	if (!use_pam)
+#endif				/* USE_PAM */
+	{
 	/* Save the changes */
-	close_files ();
-#endif
+		close_files ();
+	}
 
 	nscd_flush_cache ("passwd");
 

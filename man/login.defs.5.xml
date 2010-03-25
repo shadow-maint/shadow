@@ -245,11 +245,12 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="no_pam">
+      <varlistentry>
 	<term>chpasswd</term>
 	<listitem>
 	  <para>
-	    ENCRYPT_METHOD MD5_CRYPT_ENAB
+	    <phrase condition="no_pam">ENCRYPT_METHOD
+	    MD5_CRYPT_ENAB </phrase>
 	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
 	    SHA_CRYPT_MIN_ROUNDS</phrase>
 	  </para>
