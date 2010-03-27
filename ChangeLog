@@ -1,3 +1,7 @@
+2010-03-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/vipw.8.xml: Add section ENVIRONMENT.
+
 2010-03-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* etc/login.defs: Updated description of UMASK to indicate its

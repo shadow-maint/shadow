@@ -139,6 +139,24 @@
     </variablelist>
   </refsect1>
 
+  <refsect1 id='environment'>
+    <title>ENVIRONMENT</title>
+    <variablelist>
+      <varlistentry>
+	<term><option>VISUAL</option></term>
+	<listitem>
+	  <para>Editor to be used.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>EDITOR</option></term>
+	<listitem>
+	  <para>Editor to be used if <option>VISUAL</option> is not set.</para>
+	</listitem>
+      </varlistentry>
+    <variablelist>
+  </refsect1>
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
