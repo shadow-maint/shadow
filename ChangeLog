@@ -6,6 +6,7 @@
 
 	* etc/login.defs: Updated description of UMASK to indicate its
 	usage by pam_umask.
+	* man/login.defs.d/UMASK.xml: Likewise.
 
 2010-03-25  Nicolas François  <nicolas.francois@centraliens.net>
 

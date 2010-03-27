@@ -47,5 +47,9 @@
       in <citerefentry><refentrytitle>limits</refentrytitle>
       <manvolnum>5</manvolnum></citerefentry>.
     </para>
+    <para condition="pam">
+      It is also used by <command>pam_umask</command> as the default umask
+      value.
+    </para>
   </listitem>
 </varlistentry>
