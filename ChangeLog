@@ -1,3 +1,7 @@
+2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/copydir.c: Document the sections closed by #endif
+
 2010-03-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/vipw.8.xml: Add section ENVIRONMENT.
@@ -132,7 +136,7 @@
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/tcbfuncs.h: Re-indent.
-	* lib/tcbfuncs.h: Explicitly indicate functiontakinga void
+	* lib/tcbfuncs.h: Explicitly indicate function taking a void
 	parameter.
 
 2010-03-18  Nicolas François  <nicolas.francois@centraliens.net>

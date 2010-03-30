@@ -44,7 +44,7 @@
 #include "defines.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-#endif
+#endif				/* WITH_SELINUX */
 static /*@null@*/const char *src_orig;
 static /*@null@*/const char *dst_orig;
 
@@ -67,7 +67,7 @@ static char *readlink_malloc (const char *filename);
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid);
-#endif
+#endif				/* S_IFLNK */
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp);
 static int copy_special (const char *dst,
@@ -117,7 +117,7 @@ int selinux_file_context (const char *dst_name)
 	}
 	return 0;
 }
-#endif
+#endif				/* WITH_SELINUX */
 
 /*
  * remove_link - delete a link from the linked list
@@ -281,7 +281,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 #ifdef WITH_SELINUX
 	/* Reset SELinux to create files with default contexts */
 	setfscreatecon (NULL);
-#endif
+#endif				/* WITH_SELINUX */
 
 	/* FIXME: with the call to remove_link, we could also check that
 	 *        no links remain in links.
@@ -319,26 +319,26 @@ static int copy_entry (const char *src, const char *dst,
 #ifdef HAVE_STRUCT_STAT_ST_ATIM
 		mt[0].tv_sec  = sb.st_atim.tv_sec;
 		mt[0].tv_usec = sb.st_atim.tv_nsec / 1000;
-#else
+#else				/* !HAVE_STRUCT_STAT_ST_ATIM */
 		mt[0].tv_sec  = sb.st_atime;
-#ifdef HAVE_STRUCT_STAT_ST_ATIMENSEC
+# ifdef HAVE_STRUCT_STAT_ST_ATIMENSEC
 		mt[0].tv_usec = sb.st_atimensec / 1000;
-#else
+# else				/* !HAVE_STRUCT_STAT_ST_ATIMENSEC */
 		mt[0].tv_usec = 0;
-#endif
-#endif
+# endif				/* !HAVE_STRUCT_STAT_ST_ATIMENSEC */
+#endif				/* !HAVE_STRUCT_STAT_ST_ATIM */
 
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
 		mt[1].tv_sec  = sb.st_mtim.tv_sec;
 		mt[1].tv_usec = sb.st_mtim.tv_nsec / 1000;
-#else
+#else				/* !HAVE_STRUCT_STAT_ST_MTIM */
 		mt[1].tv_sec  = sb.st_mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIMENSEC
+# ifdef HAVE_STRUCT_STAT_ST_MTIMENSEC
 		mt[1].tv_usec = sb.st_mtimensec / 1000;
-#else
+# else				/* !HAVE_STRUCT_STAT_ST_MTIMENSEC */
 		mt[1].tv_usec = 0;
-#endif
-#endif
+# endif				/* !HAVE_STRUCT_STAT_ST_MTIMENSEC */
+#endif				/* !HAVE_STRUCT_STAT_ST_MTIM */
 
 		if (S_ISDIR (sb.st_mode)) {
 			err = copy_dir (src, dst, &sb, mt, uid, gid);
@@ -352,7 +352,7 @@ static int copy_entry (const char *src, const char *dst,
 		else if (S_ISLNK (sb.st_mode)) {
 			err = copy_symlink (src, dst, &sb, mt, uid, gid);
 		}
-#endif
+#endif				/* S_IFLNK */
 
 		/*
 		 * See if this is a previously copied link
@@ -408,7 +408,7 @@ static int copy_dir (const char *src, const char *dst,
 
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
-#endif
+#endif				/* WITH_SELINUX */
 	if (   (mkdir (dst, statp->st_mode) != 0)
 	    || (chown (dst,
 	               (uid == - 1) ? statp->st_uid : (uid_t) uid,
@@ -509,7 +509,7 @@ static int copy_symlink (const char *src, const char *dst,
 
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
-#endif
+#endif				/* WITH_SELINUX */
 	if (   (symlink (oldlink, dst) != 0)
 	    || (lchown (dst,
 	                (uid == -1) ? statp->st_uid : (uid_t) uid,
@@ -526,11 +526,11 @@ static int copy_symlink (const char *src, const char *dst,
 	 *  - not implemented
 	 */
 	lutimes (dst, mt);
-#endif
+#endif				/* HAVE_LUTIMES */
 
 	return 0;
 }
-#endif
+#endif				/* S_IFLNK */
 
 /*
  * copy_hardlink - copy a hardlink
@@ -582,7 +582,7 @@ static int copy_special (const char *dst,
 
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
-#endif
+#endif				/* WITH_SELINUX */
 
 	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
 	    || (chown (dst,
@@ -622,7 +622,7 @@ static int copy_file (const char *src, const char *dst,
 	}
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
-#endif
+#endif				/* WITH_SELINUX */
 	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, statp->st_mode & 07777);
 	if (   (ofd < 0)
 	    || (fchown (ofd,
@@ -646,7 +646,7 @@ static int copy_file (const char *src, const char *dst,
 	if (futimes (ofd, mt) != 0) {
 		return -1;
 	}
-#endif
+#endif				/* HAVE_FUTIMES */
 
 	if (close (ofd) != 0) {
 		return -1;
@@ -656,7 +656,7 @@ static int copy_file (const char *src, const char *dst,
 	if (utimes(dst, mt) != 0) {
 		return -1;
 	}
-#endif
+#endif				/* !HAVE_FUTIMES */
 
 	return err;
 }
