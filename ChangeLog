@@ -1,5 +1,11 @@
 2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/POTFILES.in, libmisc/Makefile.am, lib/prototypes.h,
+	libmisc/remove_tree.c, libmisc/copydir.c: Split remove_tree()
+	outside of copydir.c to avoid linking against libacl or libattr.
+
+2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: shell's name must be -su when a su fakes a login.
 
 2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>

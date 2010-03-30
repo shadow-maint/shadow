@@ -117,7 +117,6 @@ extern bool console (const char *);
 /* copydir.c */
 extern int copy_tree (const char *src_root, const char *dst_root,
                       long int uid, long int gid);
-extern int remove_tree (const char *root, bool remove_root);
 
 #ifdef WITH_SELINUX
 extern int selinux_file_context (const char *dst_name);
@@ -279,6 +278,9 @@ extern /*@dependent@*/ /*@null@*/struct commonio_entry *__pw_get_head (void);
 /* pwmem.c */
 extern /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent);
 extern void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent);
+
+/* remove_tree.c */
+extern int remove_tree (const char *root, bool remove_root);
 
 /* rlogin.c */
 extern int do_rlogin (const char *remote_host, char *name, size_t namelen,

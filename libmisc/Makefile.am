@@ -44,6 +44,7 @@ libmisc_a_SOURCES = \
 	pwd2spwd.c \
 	pwdcheck.c \
 	pwd_init.c \
+	remove_tree.c \
 	rlogin.c \
 	salt.c \
 	setugid.c \

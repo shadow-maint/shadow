@@ -59,6 +59,7 @@ libmisc/pam_pass.c
 libmisc/pwd2spwd.c
 libmisc/pwdcheck.c
 libmisc/pwd_init.c
+libmisc/remove_tree.c
 libmisc/rlogin.c
 libmisc/salt.c
 libmisc/setugid.c
