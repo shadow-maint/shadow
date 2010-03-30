@@ -305,16 +305,17 @@ int copy_tree (const char *src_root, const char *dst_root,
 	if (set_orig) {
 		src_orig = NULL;
 		dst_orig = NULL;
+		/* FIXME: clean links
+		 * Since there can be hardlinks elsewhere on the device,
+		 * we cannot check that all the hardlinks were found:
+		assert (NULL == links);
+		 */
 	}
 
 #ifdef WITH_SELINUX
 	/* Reset SELinux to create files with default contexts */
 	setfscreatecon (NULL);
 #endif				/* WITH_SELINUX */
-
-	/* FIXME: with the call to remove_link, we could also check that
-	 *        no links remain in links.
-	 * assert (NULL == links); */
 
 	return err;
 }
@@ -538,7 +539,6 @@ static int copy_symlink (const char *src, const char *dst,
 	/* If src was a link to an entry of the src_orig directory itself,
 	 * create a link to the corresponding entry in the dst_orig
 	 * directory.
-	 * FIXME: This may change a relative link to an absolute link
 	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
 		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
@@ -592,20 +592,14 @@ static int copy_symlink (const char *src, const char *dst,
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp)
 {
-	/* TODO: selinux, ACL, Extended Attributes needed? */
+	/* FIXME: selinux, ACL, Extended Attributes needed? */
 
 	if (link (lp->ln_name, dst) != 0) {
 		return -1;
 	}
 
-	/* FIXME: why is it unlinked? This is a copy, not a move */
-	if (unlink (src) != 0) {
-		return -1;
-	}
-
-	/* FIXME: idem, although it may never be used again */
 	/* If the file could be unlinked, decrement the links counter,
-	 * and delete the file if it was the last reference */
+	 * and forget about this link if it was the last reference */
 	lp->ln_count--;
 	if (lp->ln_count <= 0) {
 		remove_link (lp);

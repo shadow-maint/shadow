@@ -33,6 +33,9 @@ shadow-4.1.4.2 -> shadow-4.1.5					UNRELEASED
   * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
+- useradd
+  * If the skeleton directory contained hardlinked files, copies of the
+    hardlink were removed from the skeleton directory.
 
 *** translation
   * Updated Czech translation.

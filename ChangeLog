@@ -1,3 +1,8 @@
+2010-03-31  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, libmisc/copydir.c: When a hardlink is detected, the
+	original hardlink should not be removed.
+
 2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/POTFILES.in, libmisc/Makefile.am, lib/prototypes.h,
