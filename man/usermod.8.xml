@@ -223,6 +223,11 @@
 	    This option is only valid in combination with the
 	    <option>-d</option> (or <option>--home</option>) option.
 	  </para>
+	  <para>
+	    <command>usermod</command> will try to adapt the ownership of the
+	    files and to copy the modes, ACL and extended attributes, but
+	    manual changes might be needed afterwards.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

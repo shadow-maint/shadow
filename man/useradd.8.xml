@@ -273,6 +273,9 @@
 	    <filename>/etc/default/useradd</filename> or, by default,
 	    <filename>/etc/skel</filename>.
 	  </para>
+	  <para>
+	    If possible, the ACLs and extended attributes are copied.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

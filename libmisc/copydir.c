@@ -45,6 +45,16 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif				/* WITH_SELINUX */
+#if defined(WITH_ACL) || defined(WITH_ATTR)
+#include <attr/error_context.h>
+#endif				/* WITH_ACL || WITH_ATTR */
+#ifdef WITH_ACL
+#include <acl/libacl.h>
+#endif				/* WITH_ACL */
+#ifdef WITH_ATTR
+#include <attr/libattr.h>
+#endif				/* WITH_ATTR */
+
 static /*@null@*/const char *src_orig;
 static /*@null@*/const char *dst_orig;
 
@@ -70,7 +80,7 @@ static int copy_symlink (const char *src, const char *dst,
 #endif				/* S_IFLNK */
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp);
-static int copy_special (const char *dst,
+static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid);
 static int copy_file (const char *src, const char *dst,
@@ -118,6 +128,25 @@ int selinux_file_context (const char *dst_name)
 	return 0;
 }
 #endif				/* WITH_SELINUX */
+
+#if defined(WITH_ACL) || defined(WITH_ATTR)
+void error (struct error_context *ctx, const char *fmt, ...)
+{
+	va_list ap;
+
+	va_start (ap, fmt);
+	(void) fprintf (stderr, _("%s: "), Prog);
+	if (vfprintf (stderr, fmt, ap) != 0) {
+		(void) fputs (_(": "), stderr);
+	}
+	(void) fprintf (stderr, "%s\n", strerror (errno));
+	va_end (ap);
+}
+
+struct error_context ctx = {
+	error
+};
+#endif				/* WITH_ACL || WITH_ATTR */
 
 /*
  * remove_link - delete a link from the linked list
@@ -369,7 +398,7 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else if (!S_ISREG (sb.st_mode)) {
-			err = copy_special (dst, &sb, mt, uid, gid);
+			err = copy_special (src, dst, &sb, mt, uid, gid);
 		}
 
 		/*
@@ -413,7 +442,21 @@ static int copy_dir (const char *src, const char *dst,
 	    || (chown (dst,
 	               (uid == - 1) ? statp->st_uid : (uid_t) uid,
 	               (gid == - 1) ? statp->st_gid : (gid_t) gid) != 0)
+#ifdef WITH_ACL
+	    || (perm_copy_file (src, dst, &ctx) != 0)
+#else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode) != 0)
+#endif				/* !WITH_ACL */
+#ifdef WITH_ATTR
+	/*
+	 * If the third parameter is NULL, all extended attributes
+	 * except those that define Access Control Lists are copied.
+	 * ACLs are excluded by default because copying them between
+	 * file systems with and without ACL support needs some
+	 * additional logic so that no unexpected permissions result.
+	 */
+	    || (attr_copy_file (src, dst, NULL, &ctx) != 0)
+#endif				/* WITH_ATTR */
 	    || (copy_tree (src, dst, uid, gid) != 0)
 	    || (utimes (dst, mt) != 0)) {
 		err = -1;
@@ -514,6 +557,13 @@ static int copy_symlink (const char *src, const char *dst,
 	    || (lchown (dst,
 	                (uid == -1) ? statp->st_uid : (uid_t) uid,
 	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)) {
+		/* FIXME: there are no modes on symlinks, right?
+		 *        ACL could be copied, but this would be much more
+		 *        complex than calling perm_copy_file.
+		 *        Ditto for Extended Attributes.
+		 *        We currently only document that ACL and Extended
+		 *        Attributes are not copied.
+		 */
 		free (oldlink);
 		return -1;
 	}
@@ -542,7 +592,7 @@ static int copy_symlink (const char *src, const char *dst,
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp)
 {
-	/* TODO: selinux needed? */
+	/* TODO: selinux, ACL, Extended Attributes needed? */
 
 	if (link (lp->ln_name, dst) != 0) {
 		return -1;
@@ -574,7 +624,7 @@ static int copy_hardlink (const char *src, const char *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_special (const char *dst,
+static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid)
 {
@@ -588,7 +638,21 @@ static int copy_special (const char *dst,
 	    || (chown (dst,
 	               (uid == -1) ? statp->st_uid : (uid_t) uid,
 	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
+#ifdef WITH_ACL
+	    || (perm_copy_file (src, dst, &ctx) != 0)
+#else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode & 07777) != 0)
+#endif				/* !WITH_ACL */
+#ifdef WITH_ATTR
+	/*
+	 * If the third parameter is NULL, all extended attributes
+	 * except those that define Access Control Lists are copied.
+	 * ACLs are excluded by default because copying them between
+	 * file systems with and without ACL support needs some
+	 * additional logic so that no unexpected permissions result.
+	 */
+	    || (attr_copy_file (src, dst, NULL, &ctx) != 0)
+#endif				/* WITH_ATTR */
 	    || (utimes (dst, mt) != 0)) {
 		err = -1;
 	}
@@ -628,7 +692,22 @@ static int copy_file (const char *src, const char *dst,
 	    || (fchown (ofd,
 	                (uid == -1) ? statp->st_uid : (uid_t) uid,
 	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
-	    || (fchmod (ofd, statp->st_mode & 07777) != 0)) {
+#ifdef WITH_ACL
+	    || (perm_copy_fd (src, ifd, dst, ofd, &ctx) != 0)
+#else				/* !WITH_ACL */
+	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
+#endif				/* !WITH_ACL */
+#ifdef WITH_ATTR
+	/*
+	 * If the third parameter is NULL, all extended attributes
+	 * except those that define Access Control Lists are copied.
+	 * ACLs are excluded by default because copying them between
+	 * file systems with and without ACL support needs some
+	 * additional logic so that no unexpected permissions result.
+	 */
+	    || (attr_copy_fd (src, ifd, dst, ofd, NULL, &ctx) != 0)
+#endif				/* WITH_ATTR */
+	   ) {
 		(void) close (ifd);
 		return -1;
 	}

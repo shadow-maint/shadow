@@ -120,4 +120,7 @@ ALL:
 
 - su
   - add a login.defs configuration parameter to add variables to keep in
-    the environment with "su -l" (TERM/TERMCOLOR/...
+    the environment with "su -l" (TERM/TERMCOLOR/...)
+
+- vipw
+  - set ACT and XATTR on the temporary file (and backups?)

@@ -7,6 +7,9 @@ shadow-4.1.4.2 -> shadow-4.1.5					UNRELEASED
     zero) when explicitly requested (e.g. with --help).
   * initial support for tcb (http://openwall.com/tcb/) for useradd,
     userdel, usermod, chage, pwck, vipw.
+  * Added support for ACLs and Extended Attributes in useradd and usermod.
+    Support shall be enabled with the new --with-acl or --with-attr
+    configure options.
 
 -chpasswd
   * PAM enabled versions: restore the -e option to allow restoring
