@@ -1,5 +1,9 @@
 2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: shell's name must be -su when a su fakes a login.
+
+2010-03-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, configure.in, libmisc/copydir.c, man/useradd.8.xml,
 	man/usermod.8.xml, src/Makefile.am: Added support for ACLs and
 	Extended Attributes.

@@ -1021,7 +1021,7 @@ int main (int argc, char **argv)
 		 * Use the shell and create an argv
 		 * with the rest of the command line included.
 		 */
-		argv[-1] = shellstr;
+		argv[-1] = cp;
 #ifndef USE_PAM
 		execve_shell (shellstr, &argv[-1], environ);
 		err = errno;
