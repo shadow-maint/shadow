@@ -123,4 +123,4 @@ ALL:
     the environment with "su -l" (TERM/TERMCOLOR/...)
 
 - vipw
-  - set ACT and XATTR on the temporary file (and backups?)
+  - set ACLs and XATTRs on the temporary file (and backups?)
