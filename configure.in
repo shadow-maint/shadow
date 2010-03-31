@@ -33,7 +33,7 @@ AC_HEADER_STDBOOL
 AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utmpx.h termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
 	utime.h ulimit.h sys/resource.h gshadow.h lastlog.h \
-	locale.h rpc/key_prot.h netdb.h acl/libacl.h attr/libattr.h
+	locale.h rpc/key_prot.h netdb.h acl/libacl.h attr/libattr.h \
 	attr/error_context.h)
 
 dnl shadow now uses the libc's shadow implementation
@@ -249,6 +249,8 @@ AC_ARG_WITH(selinux,
 	[with_selinux=$withval], [with_selinux=maybe])
 AC_ARG_WITH(acl,
 	[AC_HELP_STRING([--with-acl], [use ACL support @<:@default=yes if found@:>@])],
+	[with_acl=$withval], [with_acl=maybe])
+AC_ARG_WITH(attr,
 	[AC_HELP_STRING([--with-attr], [use Extended Attribute support @<:@default=yes if found@:>@])],
 	[with_attr=$withval], [with_attr=maybe])
 AC_ARG_WITH(skey,
