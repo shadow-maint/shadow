@@ -41,7 +41,7 @@
     </para>
     <para condition="no_pam">
       It is also used by <command>login</command> to define users' initial
-      umask.  Note that this mask can be overriden by the user's GECOS
+      umask.  Note that this mask can be overridden by the user's GECOS
       line (if <option>QUOTAS_ENAB</option> is set) or by the
       specification of a limit with the <emphasis>K</emphasis> identifier
       in <citerefentry><refentrytitle>limits</refentrytitle>

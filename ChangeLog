@@ -1,3 +1,10 @@
+2010-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml, man/useradd.8.xml, man/groupadd.8.xml,
+	man/login.defs.d/UMASK.xml, man/login.defs.d/CREATE_HOME.xml,
+	man/login.defs.d/LOGIN_RETRIES.xml: Fix typos: choosen, overriden,
+	bahavior.
+
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/usermod.8.xml: Document changes of ownerships.

@@ -270,7 +270,7 @@
 	  <para>
 	    System users will be created with no aging information in
 	    <filename>/etc/shadow</filename>, and their numeric
-	    identifiers are choosen in the
+	    identifiers are chosen in the
 	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
 	    range, defined in <filename>login.defs</filename>, instead of
 	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their

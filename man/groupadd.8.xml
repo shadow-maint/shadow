@@ -171,7 +171,7 @@
 	    Create a system group.
 	  </para>
 	  <para>
-	    The numeric identifiers of new system groups are choosen in
+	    The numeric identifiers of new system groups are chosen in
 	    the <option>SYS_GID_MIN</option>-<option>SYS_GID_MAX</option>
 	    range, defined in <filename>login.defs</filename>, instead of
 	    <option>GID_MIN</option>-<option>GID_MAX</option>.

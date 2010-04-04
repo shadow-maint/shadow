@@ -34,7 +34,7 @@
       users.
     </para>
     <para>
-      This setting does not apply to system users, and can be overriden on
+      This setting does not apply to system users, and can be overridden on
       the command line.
     </para>
   </listitem>
