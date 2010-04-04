@@ -1,3 +1,8 @@
+2010-04-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/hu/passwd.5: Fix formatting typo.
+	* man/id/login.1: Likewise.
+
 2010-03-31  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/vipw.8.xml: When TCB is enabled, vipw uses login.defs.
