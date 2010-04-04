@@ -153,6 +153,14 @@
 	    The group name or number of the user's new initial login group.
 	    The group must exist.
 	  </para>
+	  <para>
+	    Any file from the user's home directory owned by the previous
+	    primary group of the user will be owned by this new group.
+	  </para>
+	  <para>
+	    The group ownership of files outside of the user's home directory
+	    must be fixed manually.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
