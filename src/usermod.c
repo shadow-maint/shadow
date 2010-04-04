@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2010, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -1403,44 +1403,51 @@ static void move_home (void)
 {
 	struct stat sb;
 
-	if (mflg && (stat (user_home, &sb) == 0)) {
+	if (stat (user_home, &sb) == 0) {
 		/*
-		 * Don't try to move it if it is not a directory
-		 * (but /dev/null for example).  --marekm
+		 * If the new home directory already exist, the user
+		 * should not use -m.
 		 */
-		if (!S_ISDIR (sb.st_mode)) {
-			return;
-		}
-
 		if (access (user_newhome, F_OK) == 0) {
 			fprintf (stderr,
 			         _("%s: directory %s exists\n"),
 			         Prog, user_newhome);
 			fail_exit (E_HOMEDIR);
-		} else if (rename (user_home, user_newhome) != 0) {
-			// FIXME: rename above may have broken symlinks
-			//        pointing to the user's home directory
-			//        with an absolute path.
-			if (errno == EXDEV) {
-				if (mkdir (user_newhome, sb.st_mode & 0777) != 0) {
-					fprintf (stderr,
-					         _("%s: can't create %s\n"),
-					         Prog, user_newhome);
-				}
-				if (chown (user_newhome, sb.st_uid, sb.st_gid) != 0) {
-					fprintf (stderr,
-					         _("%s: can't chown %s\n"),
-					         Prog, user_newhome);
-					rmdir (user_newhome);
-					fail_exit (E_HOMEDIR);
-				}
-				// FIXME: the current uid & gid should
-				// also be provided so that only the files
-				// owned by the user/group have their
-				// ownership changed.
-				if (copy_tree (user_home, user_newhome,
-				               uflg ? (long int)user_newid : -1,
-				               gflg ? (long int)user_newgid : -1) == 0) {
+		}
+
+		/*
+		 * Don't try to move it if it is not a directory
+		 * (but /dev/null for example).  --marekm
+		 */
+		if (!S_ISDIR (sb.st_mode)) {
+			fprintf (stderr,
+			         _("%s: The previous home directory (%s) was "
+			           "not a directory. It is not removed and no "
+			           "home directories are created.\n"),
+			         Prog, user_home);
+			fail_exit (E_HOMEDIR);
+		}
+
+		if (rename (user_home, user_newhome) == 0) {
+			/* FIXME: rename above may have broken symlinks
+			 *        pointing to the user's home directory
+			 *        with an absolute path. */
+			if (chown_tree (user_newhome,
+			                user_id,  uflg ? user_newid  : (uid_t)-1,
+			                user_gid, gflg ? user_newgid : (gid_t)-1) != 0) {
+				fprintf (stderr,
+				         _("%s: Failed to change ownership of the home directory"),
+				         Prog);
+				fail_exit (E_HOMEDIR);
+			}
+			return;
+		} else {
+			if (EXDEV == errno) {
+				if (copy_tree (user_home, user_newhome, true,
+				               user_id,
+				               uflg ? user_newid : (uid_t)-1,
+				               user_gid,
+				               gflg ? user_newgid : (gid_t)-1) == 0) {
 					if (remove_tree (user_home, true) != 0) {
 						fprintf (stderr,
 						         _("%s: warning: failed to completely remove old home directory %s"),
@@ -1457,8 +1464,6 @@ static void move_home (void)
 					return;
 				}
 
-				/* TODO: do some cleanup if the copy
-				 *       was started */
 				(void) remove_tree (user_newhome, true);
 			}
 			fprintf (stderr,
@@ -1471,16 +1476,6 @@ static void move_home (void)
 		              "moving home directory",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-	}
-	if (uflg || gflg) {
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "changing home directory owner",
-		              user_newname, (unsigned int) user_newid, 1);
-#endif
-		chown (dflg ? user_newhome : user_home,
-		       uflg ? user_newid : user_id,
-		       gflg ? user_newgid : user_gid);
 	}
 }
 
@@ -1819,17 +1814,28 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	if (uflg) { // FIXME: gflg also, except for faillog/lastlog
+	if (uflg) {
 		update_lastlog ();
 		update_faillog ();
+	}
 
+	if (!mflg && (uflg || gflg)) {
+		if (access (dflg ? user_newhome : user_home, F_OK) == 0) {
 		/*
 		 * Change the UID on all of the files owned by `user_id' to
 		 * `user_newid' in the user's home directory.
+		 *
+		 * move_home() already takes care of changing the ownership.
 		 */
-		chown_tree (dflg ? user_newhome : user_home,
-			    user_id, user_newid,
-			    user_gid, gflg ? user_newgid : user_gid);
+		if (chown_tree (dflg ? user_newhome : user_home,
+		                user_id,  uflg ? user_newid  : (uid_t)-1,
+		                user_gid, gflg ? user_newgid : (gid_t)-1) != 0) {
+			fprintf (stderr,
+			         _("%s: Failed to change ownership of the home directory"),
+			         Prog);
+			fail_exit (E_HOMEDIR);
+		}
+		}
 	}
 
 	return E_SUCCESS;

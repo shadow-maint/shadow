@@ -1,3 +1,45 @@
+2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: spool is a constant string.
+	* src/useradd.c: Set the new copy_tree's paramater 'copy_root' to false 
+
+2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/usermod.c: move_home() is only called if mflg is set.
+	* src/usermod.c: Fail is -m is provided but the old home directory
+	is not a directory.
+	* src/usermod.c: Use the previous improvement of copy_tree to
+	provide better error diagnosis.
+	* src/usermod.c: When rename() is used, also change the ownership.
+	* src/usermod.c: Do not change the ownership of the root directory
+	twice.
+	* src/usermod.c: When -u is provided, only change the ownership of
+	the home directory if it is a directory.
+	* src/usermod.c: Also change ownerships when -g is used.
+
+2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h, libmisc/copydir.c: Add the old UID and GID to
+	copy_tree to detect when ownership shall be changed.
+	* libmisc/copydir.c: Document the behavior when the IDs are set to
+	-1.
+	* lib/prototypes.h, libmisc/copydir.c (copy_tree): Add parameter
+	copy_root.
+	* libmisc/copydir.c: error() and ctx can be static.
+	* libmisc/copydir.c (copy_hardlink): Remove parameter src.
+
+2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/chowndir.c: Dynamically allocate memory to support
+	path longer than 1024 characters.
+	* libmisc/chowndir.c: Fix typos in documentation.
+	* libmisc/chowndir.c: Support and document the behavior when a old
+	or new ID is set to -1.
+	* libmisc/chowndir.c: Improved error detection when chown fails.
+	* libmisc/chowndir.c: Harmonize error handling strategy when an
+	error occurs: stop changing ownership as soon as an error was
+	detected.
+
 2010-04-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/hu/passwd.5: Fix formatting typo.

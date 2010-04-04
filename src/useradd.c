@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2010, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -1806,7 +1806,8 @@ static void create_home (void)
 static void create_mail (void)
 {
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
-		char *spool, *file;
+		const char *spool;
+		char *file;
 		int fd;
 		struct group *gr;
 		gid_t gid;
@@ -2036,7 +2037,8 @@ int main (int argc, char **argv)
 	if (mflg) {
 		create_home ();
 		if (home_added) {
-			copy_tree (def_template, user_home, user_id, user_gid);
+			copy_tree (def_template, user_home, false,
+			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
 		} else {
 			fprintf (stderr,
 			         _("%s: warning: the home directory already exists.\n"

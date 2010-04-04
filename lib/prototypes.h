@@ -75,7 +75,9 @@ extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
 extern char *Basename (char *str);
 
 /* chowndir.c */
-extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
+extern int chown_tree (const char *root,
+                       uid_t old_uid, uid_t new_uid,
+                       gid_t old_gid, gid_t new_gid);
 
 /* chowntty.c */
 extern void chown_tty (const struct passwd *);
@@ -116,8 +118,9 @@ extern bool console (const char *);
 
 /* copydir.c */
 extern int copy_tree (const char *src_root, const char *dst_root,
-                      long int uid, long int gid);
-
+                      bool copy_root,
+                      uid_t old_uid, uid_t new_uid,
+                      gid_t old_gid, gid_t new_gid);
 #ifdef WITH_SELINUX
 extern int selinux_file_context (const char *dst_name);
 #endif

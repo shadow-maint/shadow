@@ -68,24 +68,38 @@ struct link_name {
 static /*@exposed@*/struct link_name *links;
 
 static int copy_entry (const char *src, const char *dst,
-                       long int uid, long int gid);
+                       uid_t old_uid, uid_t new_uid,
+                       gid_t old_gid, gid_t new_gid);
 static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[],
-                     long int uid, long int gid);
+                     uid_t old_uid, uid_t new_uid,
+                     gid_t old_gid, gid_t new_gid);
 #ifdef	S_IFLNK
 static char *readlink_malloc (const char *filename);
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
-                         long int uid, long int gid);
+                         uid_t old_uid, uid_t new_uid,
+                         gid_t old_gid, gid_t new_gid);
 #endif				/* S_IFLNK */
-static int copy_hardlink (const char *src, const char *dst,
+static int copy_hardlink (const char *dst,
                           struct link_name *lp);
 static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
-                         long int uid, long int gid);
+                         uid_t old_uid, uid_t new_uid,
+                         gid_t old_gid, gid_t new_gid);
 static int copy_file (const char *src, const char *dst,
                       const struct stat *statp, const struct timeval mt[],
-                      long int uid, long int gid);
+                      uid_t old_uid, uid_t new_uid,
+                      gid_t old_gid, gid_t new_gid);
+static int chown_if_needed (const char *dst, const struct stat *statp,
+                            uid_t old_uid, uid_t new_uid,
+                            gid_t old_gid, gid_t new_gid);
+static int lchown_if_needed (const char *dst, const struct stat *statp,
+                             uid_t old_uid, uid_t new_uid,
+                             gid_t old_gid, gid_t new_gid);
+static int fchown_if_needed (int fdst, const struct stat *statp,
+                             uid_t old_uid, uid_t new_uid,
+                             gid_t old_gid, gid_t new_gid);
 
 #ifdef WITH_SELINUX
 /*
@@ -130,7 +144,10 @@ int selinux_file_context (const char *dst_name)
 #endif				/* WITH_SELINUX */
 
 #if defined(WITH_ACL) || defined(WITH_ATTR)
-void error (struct error_context *ctx, const char *fmt, ...)
+/*
+ * error - format the error messages for the ACL and EQ libraries.
+ */
+static void error (struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
 
@@ -143,7 +160,7 @@ void error (struct error_context *ctx, const char *fmt, ...)
 	va_end (ap);
 }
 
-struct error_context ctx = {
+static struct error_context ctx = {
 	error
 };
 #endif				/* WITH_ACL || WITH_ATTR */
@@ -225,14 +242,45 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
  *
  *	copy_tree() walks a directory tree and copies ordinary files
  *	as it goes.
+ *
+ *	old_uid and new_uid are used to set the ownership of the copied
+ *	files. Unless old_uid is set to -1, only the files owned by
+ *	old_uid have their ownership changed to new_uid. In addition, if
+ *	new_uid is set to -1, no ownership will be changed.
+ *
+ *	The same logic applies for the group-ownership and
+ *	old_gid/new_gid.
  */
 int copy_tree (const char *src_root, const char *dst_root,
-               long int uid, long int gid)
+               bool copy_root,
+               uid_t old_uid, uid_t new_uid,
+               gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
 	bool set_orig = false;
 	struct DIRECT *ent;
 	DIR *dir;
+
+	if (copy_root) {
+		struct stat sb;
+		if (access (dst_root, F_OK) == 0) {
+			return -1;
+		}
+
+		if (LSTAT (src_root, &sb) == -1) {
+			return -1;
+		}
+
+		if (!S_ISDIR (sb.st_mode)) {
+			fprintf (stderr,
+			         "%s: %s is not a directory",
+			         Prog, src_root);
+			return -1;
+		}
+
+		return copy_entry (src_root, dst_root,
+		                   old_uid, new_uid, old_gid, new_gid);
+	}
 
 	/*
 	 * Make certain both directories exist.  This routine is called
@@ -290,7 +338,9 @@ int copy_tree (const char *src_root, const char *dst_root,
 				snprintf (dst_name, dst_len, "%s/%s",
 				          dst_root, ent->d_name);
 
-				err = copy_entry (src_name, dst_name, uid, gid);
+				err = copy_entry (src_name, dst_name,
+				                  old_uid, new_uid,
+				                  old_gid, new_gid);
 			}
 			if (NULL != src_name) {
 				free (src_name);
@@ -330,13 +380,18 @@ int copy_tree (const char *src_root, const char *dst_root,
  *
  *	The access and modification time will not be modified.
  *
- *	The permissions will be set to uid/gid.
+ *	The permissions will be set to new_uid/new_gid.
  *
- *	If uid (resp. gid) is equal to -1, the user (resp. group) will
+ *	If new_uid (resp. new_gid) is equal to -1, the user (resp. group) will
  *	not be modified.
+ *
+ *	Only the files owned (resp. group-owned) by old_uid (resp.
+ *	old_gid) will be modified, unless old_uid (resp. old_gid) is set
+ *	to -1.
  */
 static int copy_entry (const char *src, const char *dst,
-                       long int uid, long int gid)
+                       uid_t old_uid, uid_t new_uid,
+                       gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
 	struct stat sb;
@@ -371,7 +426,8 @@ static int copy_entry (const char *src, const char *dst,
 #endif				/* !HAVE_STRUCT_STAT_ST_MTIM */
 
 		if (S_ISDIR (sb.st_mode)) {
-			err = copy_dir (src, dst, &sb, mt, uid, gid);
+			err = copy_dir (src, dst, &sb, mt,
+			                old_uid, new_uid, old_gid, new_gid);
 		}
 
 #ifdef	S_IFLNK
@@ -380,7 +436,8 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else if (S_ISLNK (sb.st_mode)) {
-			err = copy_symlink (src, dst, &sb, mt, uid, gid);
+			err = copy_symlink (src, dst, &sb, mt,
+			                    old_uid, new_uid, old_gid, new_gid);
 		}
 #endif				/* S_IFLNK */
 
@@ -389,7 +446,7 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else if ((lp = check_link (src, &sb)) != NULL) {
-			err = copy_hardlink (src, dst, lp);
+			err = copy_hardlink (dst, lp);
 		}
 
 		/*
@@ -399,7 +456,8 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else if (!S_ISREG (sb.st_mode)) {
-			err = copy_special (src, dst, &sb, mt, uid, gid);
+			err = copy_special (src, dst, &sb, mt,
+			                    old_uid, new_uid, old_gid, new_gid);
 		}
 
 		/*
@@ -408,7 +466,8 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else {
-			err = copy_file (src, dst, &sb, mt, uid, gid);
+			err = copy_file (src, dst, &sb, mt,
+			                 old_uid, new_uid, old_gid, new_gid);
 		}
 	}
 
@@ -420,14 +479,15 @@ static int copy_entry (const char *src, const char *dst,
  *
  *	Copy a directory (recursively) from src to dst.
  *
- *	statp, mt, uid, gid are used to set the access and modification and the
- *	access rights.
+ *	statp, mt, old_uid, new_uid, old_gid, and new_gid are used to set
+ *	the access and modification and the access rights.
  *
  *	Return 0 on success, -1 on error.
  */
 static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[],
-                     long int uid, long int gid)
+                     uid_t old_uid, uid_t new_uid,
+                     gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
 
@@ -440,9 +500,8 @@ static int copy_dir (const char *src, const char *dst,
 	selinux_file_context (dst);
 #endif				/* WITH_SELINUX */
 	if (   (mkdir (dst, statp->st_mode) != 0)
-	    || (chown (dst,
-	               (uid == - 1) ? statp->st_uid : (uid_t) uid,
-	               (gid == - 1) ? statp->st_gid : (gid_t) gid) != 0)
+	    || (chown_if_needed (dst, statp,
+	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (perm_copy_file (src, dst, &ctx) != 0)
 #else				/* !WITH_ACL */
@@ -458,7 +517,8 @@ static int copy_dir (const char *src, const char *dst,
 	 */
 	    || (attr_copy_file (src, dst, NULL, &ctx) != 0)
 #endif				/* WITH_ATTR */
-	    || (copy_tree (src, dst, uid, gid) != 0)
+	    || (copy_tree (src, dst, false,
+	                   old_uid, new_uid, old_gid, new_gid) != 0)
 	    || (utimes (dst, mt) != 0)) {
 		err = -1;
 	}
@@ -508,14 +568,15 @@ static char *readlink_malloc (const char *filename)
  *
  *	Copy a symlink from src to dst.
  *
- *	statp, mt, uid, gid are used to set the access and modification and the
- *	access rights.
+ *	statp, mt, old_uid, new_uid, old_gid, and new_gid are used to set
+ *	the access and modification and the access rights.
  *
  *	Return 0 on success, -1 on error.
  */
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
-                         long int uid, long int gid)
+                         uid_t old_uid, uid_t new_uid,
+                         gid_t old_gid, gid_t new_gid)
 {
 	char *oldlink;
 
@@ -554,9 +615,8 @@ static int copy_symlink (const char *src, const char *dst,
 	selinux_file_context (dst);
 #endif				/* WITH_SELINUX */
 	if (   (symlink (oldlink, dst) != 0)
-	    || (lchown (dst,
-	                (uid == -1) ? statp->st_uid : (uid_t) uid,
-	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)) {
+	    || (lchown_if_needed (dst, statp,
+	                          old_uid, new_uid, old_gid, new_gid) != 0)) {
 		/* FIXME: there are no modes on symlinks, right?
 		 *        ACL could be copied, but this would be much more
 		 *        complex than calling perm_copy_file.
@@ -589,7 +649,7 @@ static int copy_symlink (const char *src, const char *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_hardlink (const char *src, const char *dst,
+static int copy_hardlink (const char *dst,
                           struct link_name *lp)
 {
 	/* FIXME: selinux, ACL, Extended Attributes needed? */
@@ -613,14 +673,15 @@ static int copy_hardlink (const char *src, const char *dst,
  *
  *	Copy a special file from src to dst.
  *
- *	statp, mt, uid, gid are used to set the access and modification and the
- *	access rights.
+ *	statp, mt, old_uid, new_uid, old_gid, and new_gid are used to set
+ *	the access and modification and the access rights.
  *
  *	Return 0 on success, -1 on error.
  */
 static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[],
-                         long int uid, long int gid)
+                         uid_t old_uid, uid_t new_uid,
+                         gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
 
@@ -629,9 +690,8 @@ static int copy_special (const char *src, const char *dst,
 #endif				/* WITH_SELINUX */
 
 	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
-	    || (chown (dst,
-	               (uid == -1) ? statp->st_uid : (uid_t) uid,
-	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
+	    || (chown_if_needed (dst, statp,
+	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (perm_copy_file (src, dst, &ctx) != 0)
 #else				/* !WITH_ACL */
@@ -659,14 +719,15 @@ static int copy_special (const char *src, const char *dst,
  *
  *	Copy a file from src to dst.
  *
- *	statp, mt, uid, gid are used to set the access and modification and the
- *	access rights.
+ *	statp, mt, old_uid, new_uid, old_gid, and new_gid are used to set
+ *	the access and modification and the access rights.
  *
  *	Return 0 on success, -1 on error.
  */
 static int copy_file (const char *src, const char *dst,
                       const struct stat *statp, const struct timeval mt[],
-                      long int uid, long int gid)
+                      uid_t old_uid, uid_t new_uid,
+                      gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
 	int ifd;
@@ -683,9 +744,8 @@ static int copy_file (const char *src, const char *dst,
 #endif				/* WITH_SELINUX */
 	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, statp->st_mode & 07777);
 	if (   (ofd < 0)
-	    || (fchown (ofd,
-	                (uid == -1) ? statp->st_uid : (uid_t) uid,
-	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
+	    || (fchown_if_needed (ofd, statp,
+	                          old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (perm_copy_fd (src, ifd, dst, ofd, &ctx) != 0)
 #else				/* !WITH_ACL */
@@ -733,4 +793,38 @@ static int copy_file (const char *src, const char *dst,
 
 	return err;
 }
+
+#define def_chown_if_needed(chown_function, type_dst)                  \
+static int chown_function ## _if_needed (type_dst dst,                 \
+                                         const struct stat *statp,     \
+                                         uid_t old_uid, uid_t new_uid, \
+                                         gid_t old_gid, gid_t new_gid) \
+{                                                                      \
+	uid_t tmpuid = (uid_t) -1;                                     \
+	gid_t tmpgid = (gid_t) -1;                                     \
+                                                                       \
+	/* Use new_uid if old_uid is set to -1 or if the file was      \
+	 * owned by the user. */                                       \
+	if (((uid_t) -1 == old_uid) || (statp->st_uid == old_uid)) {   \
+		tmpuid = new_uid;                                      \
+	}                                                              \
+	/* Otherwise, or if new_uid was set to -1, we keep the same    \
+	 * owner. */                                                   \
+	if ((uid_t) -1 == tmpuid) {                                    \
+		tmpuid = statp->st_uid;                                \
+	}                                                              \
+                                                                       \
+	if (((gid_t) -1 == old_gid) || (statp->st_gid == old_gid)) {   \
+		tmpgid = new_gid;                                      \
+	}                                                              \
+	if ((gid_t) -1 == tmpgid) {                                    \
+		tmpgid = statp->st_gid;                                \
+	}                                                              \
+                                                                       \
+	return chown_function (dst, tmpuid, tmpgid);                   \
+}
+
+def_chown_if_needed (chown, const char *)
+def_chown_if_needed (lchown, const char *)
+def_chown_if_needed (fchown, int)
 
