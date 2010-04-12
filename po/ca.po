@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2007-11-24 17:34+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -42,6 +42,100 @@ msgstr "Contrasenya: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Contrasenya de l'usuari %s: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: sense memòria\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: no es pot actualitzar el fitxer %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: el directori personal «%s» no és vàlid\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: no es pot reanomenar el directori %s a %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: avís: no es pot eliminar "
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: avís: no es pot eliminar "
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: renomena: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: no es pot reanomenar el directori %s a %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: no es pot reanomenar el directori %s a %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: avís: no es pot eliminar "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: avís: no es pot eliminar "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: no es pot actualitzar el fitxer %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update shadow file\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: no es pot actualitzar el fitxer de contrasenyes ombra\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: renomena: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: no es pot obrir el fitxer %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -91,6 +185,14 @@ msgstr "No es pot canviar la tty %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: els camps són massa llargs\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "Desbordament d'entorn\n"
 
@@ -112,6 +214,16 @@ msgstr[1] ""
 "S'han produït %d fallades des de l'últim accés.\n"
 "L'ultim va ser %s en %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: no es pot obtenir un UID únic\n"
@@ -119,6 +231,16 @@ msgstr "%s: no es pot obtenir un UID únic\n"
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: no es pot obtenir un GID únic\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -212,10 +334,6 @@ msgstr "No es pot canviar el directori arrel a «%s»\n"
 
 msgid "Unable to determine your tty name."
 msgstr "No s'ha pogut determinar el nom de la vostra tty."
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: sense memòria\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -556,7 +674,7 @@ msgid ""
 msgstr "Forma d'ús: %s [entrada]\n"
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -612,8 +730,18 @@ msgstr "%s: L'entrada no és vàlida: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s is an invalid shell.\n"
-msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s no és un intèrpret vàlid.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: l'usuari %s no existeix\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: avís: %s no és propietat de %s\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Forma d'ús: expiry {-f|-c}\n"
@@ -622,7 +750,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -685,25 +813,39 @@ msgstr "%s: no es pot obrir el fitxer %s\n"
 msgid "faillog: Cannot get the size of %s: %s\n"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
+msgstr "Forma d'ús: %s [entrada]\n"
+
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
+
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "No es pot canviar la contrasenya per a %s.\n"
 
 #, fuzzy
 #| msgid "The password for %s cannot be changed.\n"
@@ -847,21 +989,39 @@ msgstr "%s: l'usuari %s és un usuari NIS\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: sense memòria a update_group\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr "Forma d'ús: %s [entrada]\n"
+
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
+msgstr ""
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
 msgstr ""
 
 #, c-format
@@ -1184,6 +1344,10 @@ msgstr "%s: l'usuari %s no existeix\n"
 msgid "too many groups\n"
 msgstr "hi ha massa grups\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1399,6 +1563,11 @@ msgstr "S'ha canviat la contrasenya."
 msgid "%s: password expiry information changed.\n"
 msgstr "Avís de caducitat de la contrasenya"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "Forma d'ús: %s [-q] [-r] [-s] [contrasenya [ombra]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Forma d'ús: %s [-q] [-r] [-s] [contrasenya [ombra]]\n"
@@ -1407,6 +1576,10 @@ msgstr "Forma d'ús: %s [-q] [-r] [-s] [contrasenya [ombra]]\n"
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: «-s» i «-r» són incompatibles\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "l'entrada del fitxer de contrasenyes no és vàlida"
@@ -1437,6 +1610,26 @@ msgstr "usuari %s: el directori %s no existeix\n"
 #| msgid "user %s: program %s does not exist\n"
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "usuari %s: el programa %s no existeix\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: no es pot blocar el fitxer %s\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1471,6 +1664,11 @@ msgstr "%s: no es pot obrir el fitxer %s\n"
 msgid "Usage: pwconv\n"
 msgstr "Forma d'ús: id\n"
 
+#, fuzzy, c-format
+#| msgid "%s: can't re-write file\n"
+msgid "%s: can't work with tcb enabled\n"
+msgstr "%s: no es pot reescriure el fitxer\n"
+
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
@@ -1489,9 +1687,34 @@ msgstr "S'ha evitat l'autenticació de contrasenya.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Si us plau introduïu la VOSTRA contrasenya com a autenticació.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: no es pot blocar el fitxer %s\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1582,6 +1805,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "S'està entrant en mode de manteniment del sistema"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1614,7 +1841,7 @@ msgstr "%s: s'han especificat massa grups (màx de %d).\n"
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr "Forma d'ús: %s [entrada]\n"
@@ -1785,6 +2012,11 @@ msgid "%s: UID %lu is not unique\n"
 msgstr "%s: el UID %u no és únic\n"
 
 #, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: no es pot crear el directori %s\n"
+
+#, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: no es pot crear %s\n"
 
@@ -1832,6 +2064,25 @@ msgstr "%s: avís: no es pot eliminar "
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: %s no és propietat de %s, no s'elimina\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: ha fallat el despreniment de privilegis (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "%s: no es pot reanomenar el directori %s a %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: no es pot reanomenar el directori %s a %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1950,12 +2201,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: el directori %s ja existeix\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: no es pot crear %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: no es pot fer canviar el propietari a %s\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: no es pot crear el directori %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -1991,6 +2245,17 @@ msgid ""
 "Please use the command '%s' to do so.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -2000,6 +2265,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "Forma d'ús: vipw [opcions]\n"
@@ -2027,6 +2293,16 @@ msgstr ""
 "%s: no s'ha canviat %s\n"
 
 #, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "no s'ha pogut reanomenar la bústia de correu"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s: ha fallat el despreniment de privilegis (%s)\n"
+
+#, fuzzy
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "No s'ha pogut blocar el fitxer"
@@ -2034,15 +2310,64 @@ msgstr "No s'ha pogut blocar el fitxer"
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s: ha fallat el despreniment de privilegis (%s)\n"
+
 msgid "Couldn't lock file"
 msgstr "No s'ha pogut blocar el fitxer"
 
 msgid "Couldn't make backup"
 msgstr "No s'ha pogut fer una còpia de seguretat"
 
+#, fuzzy
+#| msgid "Unable to open group file\n"
+msgid "failed to open scratch file"
+msgstr "No es pot obrir el fitxer de grup\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: els camps són massa llargs\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "no s'ha pogut reanomenar la bústia de correu"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "no s'ha pogut canviar el propietari de la bústia de correu"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "no s'ha pogut reanomenar la bústia de correu"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid base directory '%s'\n"
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: el directori base «%s» no és vàlid\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: useradd [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "Forma d'ús: %s [entrada]\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: no es pot crear %s\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: no es pot fer canviar el propietari a %s\n"
 
 #, fuzzy
 #~| msgid ""
@@ -2383,9 +2708,6 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 #~ msgid "%s: can't open file\n"
 #~ msgstr "%s: no es pot obrir el fitxer\n"
 
-#~ msgid "%s: can't re-write file\n"
-#~ msgstr "%s: no es pot reescriure el fitxer\n"
-
 #~ msgid "%s: can't re-write shadow file\n"
 #~ msgstr "%s: no es pot reescriure el fitxer ombra\n"
 
@@ -2471,9 +2793,6 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 #~ msgid "Unable to lock group file\n"
 #~ msgstr "No es pot blocar el fitxer de grup\n"
 
-#~ msgid "Unable to open group file\n"
-#~ msgstr "No es pot obrir el fitxer de grup\n"
-
 #~ msgid "Cannot close group file\n"
 #~ msgstr "No es pot obrir el fitxer de grup\n"
 
@@ -2495,9 +2814,6 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 
 #~ msgid "%s: unable to open password file\n"
 #~ msgstr "%s: no es pot d'obrir el fitxer de contrasenyes\n"
-
-#~ msgid "%s: cannot lock file %s\n"
-#~ msgstr "%s: no es pot blocar el fitxer %s\n"
 
 #~ msgid "%s: can't update shadow entry for %s\n"
 #~ msgstr "%s: no es pot actualitzar l'entrada ombra per a %s\n"
@@ -2577,9 +2893,6 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 #~ msgid "%s: can't remove shadow entry for %s\n"
 #~ msgstr "%s: no es pot eliminar l'entrada ombra per a %s\n"
 
-#~ msgid "%s: can't update shadow file\n"
-#~ msgstr "%s: no es pot actualitzar el fitxer de contrasenyes ombra\n"
-
 #~ msgid "%s: can't update passwd file\n"
 #~ msgstr "%s: no es pot actualitzar el fitxer de contrasenyes\n"
 
@@ -2655,9 +2968,6 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 #~ msgid "%s: error deleting shadow password entry\n"
 #~ msgstr ""
 #~ "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
-
-#~ msgid "%s: user %s does not exist\n"
-#~ msgstr "%s: l'usuari %s no existeix\n"
 
 #, fuzzy
 #~ msgid "%s: error adding new shadow group entry\n"

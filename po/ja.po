@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2009-05-10 15:58+0900\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -44,6 +44,100 @@ msgstr "パスワード: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s のパスワード: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: メモリが足りません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: %s を削除できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: ホームディレクトリ '%s' は不正です\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: '%s' のエントリを %s から削除できません\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "lastlog: %s のサイズを取得できませんでした: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: 警告: %s を削除できません: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: ファイル名変更: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: ディレクトリ %s の名前を %s に変更できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: ディレクトリ %s の名前を %s に変更できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: 警告: %s を削除できません: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "lastlog: %s のサイズを取得できませんでした: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: %s を削除できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: %d 行目: ユーザ '%s' は存在しません\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: ファイル名変更: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: %s を開けません\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -91,6 +185,14 @@ msgstr "端末 stdin: %s の所有者かモードを変更できません"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: %s がアンロックできませんでした\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "環境変数領域のオーバーフロー\n"
 
@@ -109,6 +211,16 @@ msgstr[0] ""
 "最後のログインから %d 回失敗。\n"
 "最後のログインは %s (マシン %s)。\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -121,6 +233,16 @@ msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr ""
 "%s: 他と重ならないグループ ID を取得できません (利用できる GID がありませ"
 "ん)\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -217,10 +339,6 @@ msgstr "ルートディレクトリを '%s' へ変更できません\n"
 
 msgid "Unable to determine your tty name."
 msgstr "あなたの端末 (tty) 名を決定できません。"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: メモリが足りません\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -529,7 +647,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -587,9 +705,20 @@ msgstr "%s のログインシェルを変更中\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: 不正なエントリ: %s\n"
 
-#, c-format
-msgid "%s: %s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s: %s はシェルに指定できません。\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user '%s' does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: ユーザ '%s' は存在しません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: 警告: %s は %s の所有ではありません\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "使い方: expiry {-f|-c}\n"
@@ -598,7 +727,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -674,36 +803,53 @@ msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
-"  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
 msgstr ""
-"使い方: %s [オプション] GROUP\n"
-"\n"
-"オプション:\n"
-"  -a, --add USER        \n"
-"\n"
-"  -a, --add USER                USER を GROUP に追加する\n"
-"  -d, --delete USER             USER を GROUP から削除する\n"
-"  -r, --remove-password         GROUP のパスワードを削除する\n"
-"  -R, --restrict                GROUP へのアクセスをそのメンバーのみに制限す"
-"る\n"
-"  -M, --members USER,...        GROUP のメンバーリストを設定する\n"
-"%s\n"
-"\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+"  -Z, --selinux-user            このユーザアカウントへの新規 SELinux\n"
+"                                ユーザマッピング\n"
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"  -R, --restrict                restrict access to GROUP to its members\n"
+msgstr ""
+"  -Z, --selinux-user            このユーザアカウントへの新規 SELinux\n"
+"                                ユーザマッピング\n"
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -A, --administrators ADMIN,...\n"
+#| "                                set the list of administrators for GROUP\n"
+#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 "  -A, --administrators ADMIN,...\n"
 "                                GROUP の管理者のリストを設定する\n"
 "-A オプションと -M オプション以外は同時に指定できない\n"
+
+#, fuzzy
+#| msgid "The options cannot be combined.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "これらのオプションは同時に指定できません。\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "これらのオプションは同時に指定できません。\n"
@@ -858,34 +1004,62 @@ msgstr "%s: ユーザ '%s' はすでに '%s' のメンバーです\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: メモリ不足です。%s を更新できません。\n"
 
+#, c-format
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+"  -Z, --selinux-user            このユーザアカウントへの新規 SELinux\n"
+"                                ユーザマッピング\n"
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
 msgstr ""
-"使い方: groupmems [オプション] [動作]\n"
-"\n"
-"オプション:\n"
-"  -g, --group groupname         ユーザのグループでなく groupname を使う\n"
-"                                (root のみ)\n"
-"\n"
-"動作:\n"
-"  -a, --add username            username をグループのメンバーに加える\n"
-"  -d, --delete username         username をグループのメンバーから除く\n"
-"  -p, --purge                   すべてのメンバーをグループから削除する\n"
-"  -l, --list                    グループのメンバー一覧を表示する\n"
-"\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+"  -Z, --selinux-user            このユーザアカウントへの新規 SELinux\n"
+"                                ユーザマッピング\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -l, --list                    list the members of the group\n"
+msgstr ""
+"  -Z, --selinux-user            このユーザアカウントへの新規 SELinux\n"
+"                                ユーザマッピング\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1205,6 +1379,10 @@ msgstr "%s: GID '%lu' は存在しません\n"
 msgid "too many groups\n"
 msgstr "グループが多すぎます\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -1395,6 +1573,11 @@ msgstr "パスワードは変更されました。"
 msgid "%s: password expiry information changed.\n"
 msgstr "パスワード期限切れ警告日数"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "使い方: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "使い方: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
@@ -1403,6 +1586,10 @@ msgstr "使い方: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s と -r は同時に指定できません\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "パスワードファイルのエントリが不正です"
@@ -1429,6 +1616,26 @@ msgstr "ユーザ %s: ディレクトリ '%s' が存在しません\n"
 #, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "ユーザ '%s': プログラム '%s' が存在しません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: %s を開けません\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1461,6 +1668,10 @@ msgid "Usage: pwconv\n"
 msgstr "使い方: pwconv\n"
 
 #, c-format
+msgid "%s: can't work with tcb enabled\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: %s のモードを 0600 に変更できませんでした\n"
 
@@ -1476,9 +1687,34 @@ msgstr "パスワード認証を迂回します。\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "「あなた自身のパスワード」を入力して認証してください。\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: あなたのユーザ名を判定できません。\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1565,6 +1801,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "システムメンテナンスモードへ入ります"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr "%1$s: %3$s 中の設定 %2$s は無視されます\n"
 
@@ -1596,7 +1836,7 @@ msgstr "%s: 指定したグループ数が多すぎます (最大 %d 個)。\n"
 
 #, c-format
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1815,6 +2055,11 @@ msgstr "%s: ユーザを作成できません\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: ユーザ ID %lu は重複しています\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
+
 #, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: グループを作成できません\n"
@@ -1858,6 +2103,25 @@ msgstr "%s: 警告: %s を削除できません: %s"
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: %s は %s の所有ではありません。削除は行いません\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: 特権を落とせませんでした (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "lastlog: %s のサイズを取得できませんでした: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: '%s' のエントリを %s から削除できません\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1977,12 +2241,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: ディレクトリ %s は存在します\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: %s を作成できません\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: %s を chown できません\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: ディレクトリ %s を作成できません\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -2022,6 +2289,17 @@ msgstr ""
 "整合性を保つために %s を変更する必要があるかもしれません。\n"
 "その場合はコマンド '%s' を使ってください。\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -2031,6 +2309,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "使い方: vipw [オプション]\n"
@@ -2052,11 +2331,26 @@ msgstr "%s: %s を削除できませんでした\n"
 msgid "%s: %s is unchanged\n"
 msgstr "%s: %s は変更されません\n"
 
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "mailbox の名前変更に失敗しました"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s: 特権を落とせませんでした (%s)\n"
+
 msgid "Couldn't get file context"
 msgstr "ファイルコンテキストを取得できません"
 
 msgid "setfscreatecon () failed"
 msgstr "setfscreatecon () が失敗しました"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s: 特権を落とせませんでした (%s)\n"
 
 msgid "Couldn't lock file"
 msgstr "ファイルをロックできません"
@@ -2064,9 +2358,100 @@ msgstr "ファイルをロックできません"
 msgid "Couldn't make backup"
 msgstr "バックアップを作成できません"
 
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to open scratch file"
+msgstr "mailbox の名前変更に失敗しました"
+
+#, fuzzy
+#| msgid "%s: failed to unlock %s\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: %s がアンロックできませんでした\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "mailbox の名前変更に失敗しました"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "mailbox 所有者の変更に失敗しました"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "mailbox の名前変更に失敗しました"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s を復旧できませんでした: %s (あなたの変更は %s にあります)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid base directory '%s'\n"
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: ベースディレクトリ '%s' は不正です\n"
+
+#~ msgid ""
+#~ "Usage: %s [option] GROUP\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --add USER                add USER to GROUP\n"
+#~ "  -d, --delete USER             remove USER from GROUP\n"
+#~ "  -r, --remove-password         remove the GROUP's password\n"
+#~ "  -R, --restrict                restrict access to GROUP to its members\n"
+#~ "  -M, --members USER,...        set the list of members of GROUP\n"
+#~ "%s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "使い方: %s [オプション] GROUP\n"
+#~ "\n"
+#~ "オプション:\n"
+#~ "  -a, --add USER        \n"
+#~ "\n"
+#~ "  -a, --add USER                USER を GROUP に追加する\n"
+#~ "  -d, --delete USER             USER を GROUP から削除する\n"
+#~ "  -r, --remove-password         GROUP のパスワードを削除する\n"
+#~ "  -R, --restrict                GROUP へのアクセスをそのメンバーのみに制限"
+#~ "する\n"
+#~ "  -M, --members USER,...        GROUP のメンバーリストを設定する\n"
+#~ "%s\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: groupmems [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ "\n"
+#~ "Actions:\n"
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ "  -p, --purge                   purge all members from the group\n"
+#~ "  -l, --list                    list the members of the group\n"
+#~ "\n"
+#~ msgstr ""
+#~ "使い方: groupmems [オプション] [動作]\n"
+#~ "\n"
+#~ "オプション:\n"
+#~ "  -g, --group groupname         ユーザのグループでなく groupname を使う\n"
+#~ "                                (root のみ)\n"
+#~ "\n"
+#~ "動作:\n"
+#~ "  -a, --add username            username をグループのメンバーに加える\n"
+#~ "  -d, --delete username         username をグループのメンバーから除く\n"
+#~ "  -p, --purge                   すべてのメンバーをグループから削除する\n"
+#~ "  -l, --list                    グループのメンバー一覧を表示する\n"
+#~ "\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: %s を作成できません\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: %s を chown できません\n"
 
 #~ msgid ""
 #~ "Usage: faillog [options]\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -42,6 +42,87 @@ msgstr "Šifra:"
 #, c-format
 msgid "%s's Password: "
 msgstr "%s's Šifra: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: grupa %s postoji\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -89,6 +170,13 @@ msgstr ""
 msgid "%s: failed to unlock %s\n"
 msgstr ""
 
+#, c-format
+msgid "%s: "
+msgstr ""
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr ""
 
@@ -107,11 +195,31 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
 msgstr ""
 
 #, c-format
@@ -204,10 +312,6 @@ msgid "Can't change root directory to '%s'\n"
 msgstr ""
 
 msgid "Unable to determine your tty name."
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory\n"
 msgstr ""
 
 #, c-format
@@ -494,7 +598,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -541,7 +645,15 @@ msgid "%s: Invalid entry: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
+msgstr "%s: grupa %s postoji\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: grupa %s postoji\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: grupa %s postoji\n"
 
 msgid "Usage: expiry {-f|-c}\n"
@@ -551,7 +663,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -617,19 +729,30 @@ msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
+msgstr ""
+
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 
 msgid "The options cannot be combined.\n"
@@ -764,21 +887,38 @@ msgstr ""
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr ""
 
+#, c-format
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr ""
+
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
+msgstr ""
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
 msgstr ""
 
 #, c-format
@@ -1068,6 +1208,10 @@ msgstr "%s: grupa %s postoji\n"
 msgid "too many groups\n"
 msgstr ""
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1220,11 +1364,19 @@ msgid "%s: password expiry information changed.\n"
 msgstr "Upozorenje o isteku šifre"
 
 #, c-format
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
+msgstr ""
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
 
 #, fuzzy
@@ -1254,6 +1406,23 @@ msgstr "%s: grupa %s postoji\n"
 #, fuzzy, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "%s: grupa %s postoji\n"
+
+#, fuzzy, c-format
+msgid "no tcb directory for %s\n"
+msgstr "Mijenjam šifru za grupu %s\n"
+
+#, c-format
+msgid "create tcb directory for %s?"
+msgstr ""
+
+#, c-format
+msgid "failed to create tcb directory for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: nepoznat član %s\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1286,6 +1455,10 @@ msgid "Usage: pwconv\n"
 msgstr ""
 
 #, c-format
+msgid "%s: can't work with tcb enabled\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
 
@@ -1301,8 +1474,33 @@ msgstr ""
 msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
+msgstr ""
+
+msgid " ...terminated.\n"
 msgstr ""
 
 msgid ""
@@ -1376,6 +1574,10 @@ msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1405,7 +1607,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1569,6 +1771,10 @@ msgstr ""
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: grupa %s postoji\n"
 
+#, c-format
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "nepoznata grupa: %s\n"
@@ -1601,6 +1807,23 @@ msgstr "nepoznata grupa: %s\n"
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr ""
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: unknown member %s\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1686,11 +1909,13 @@ msgid "%s: directory %s exists\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't create %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't chown %s\n"
+msgid "%s: Failed to change ownership of the home directory"
 msgstr ""
 
 #, c-format
@@ -1735,6 +1960,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 
@@ -1746,10 +1972,19 @@ msgstr ""
 msgid "%s: %s is unchanged\n"
 msgstr "Šifra:"
 
+msgid "failed to create scratch directory"
+msgstr ""
+
+msgid "failed to drop privileges"
+msgstr ""
+
 msgid "Couldn't get file context"
 msgstr ""
 
 msgid "setfscreatecon () failed"
+msgstr ""
+
+msgid "failed to gain privileges"
 msgstr ""
 
 msgid "Couldn't lock file"
@@ -1758,8 +1993,27 @@ msgstr ""
 msgid "Couldn't make backup"
 msgstr ""
 
+msgid "failed to open scratch file"
+msgstr ""
+
+msgid "failed to unlink scratch file"
+msgstr ""
+
+msgid "failed to stat edited file"
+msgstr ""
+
+msgid "failed to allocate memory"
+msgstr ""
+
+msgid "failed to create backup file"
+msgstr ""
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
 
 #, fuzzy

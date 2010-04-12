@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -46,6 +46,99 @@ msgstr "Συνθηματικό: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Του %s το Συνθηματικό: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: δεν υπάρχει ελεύθερη μνήμη\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
+
+#, fuzzy, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: Μη έγκυρος αρχικός κατάλογος χρήστη `%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: μετονομασία: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update shadow file\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: αδυναμία ανανέωσης καταχώρησης του αρχείου σκιωδών συνθηματικών\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: μετονομασία: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -95,6 +188,14 @@ msgstr "Αδυναμία αλλαγής tty %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: Πολύ μακριά πεδία\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "Υπερχείλιση περιβάλλοντος\n"
 
@@ -116,6 +217,16 @@ msgstr[1] ""
 "%d αποτυχίες από την τελευταία είσοδο.\n"
 " Η τελευταία ήταν στις %s στο %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: αδυναμία λήψης μοναδικού UID\n"
@@ -123,6 +234,16 @@ msgstr "%s: αδυναμία λήψης μοναδικού UID\n"
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -216,10 +337,6 @@ msgstr "Αδυναμία αλλαγής του πρωταρχικού καταλ
 
 msgid "Unable to determine your tty name."
 msgstr "Δεν είναι δυνατόν να καθοριστεί το όνομα tty."
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: δεν υπάρχει ελεύθερη μνήμη\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -563,7 +680,7 @@ msgid ""
 msgstr "Χρήση: %s [είσοδος]\n"
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -612,8 +729,18 @@ msgstr "%s: Μη έγκυρη καταχώρηση: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s is an invalid shell.\n"
-msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s δεν είναι έγκυρος φλοιός.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: προειδοποίηση: Το %s δεν ανήκει στον %s\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Χρήση: expiry {-f|-c}\n"
@@ -622,7 +749,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -685,25 +812,39 @@ msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
 msgid "faillog: Cannot get the size of %s: %s\n"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
+msgstr "Χρήση: %s [είσοδος]\n"
+
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
+
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "Το συνθηματικό για τον %s δεν μπορεί να αλλάξει.\n"
 
 #, fuzzy
 #| msgid "The password for %s cannot be changed.\n"
@@ -845,21 +986,39 @@ msgstr "%s: Ο χρήστης %s είναι NIS χρήστης\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: δεν υπάρχει ελεύθερη μνήμη στο update_group\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr "Χρήση: %s [είσοδος]\n"
+
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
+msgstr ""
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
 msgstr ""
 
 #, c-format
@@ -1182,6 +1341,10 @@ msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
 msgid "too many groups\n"
 msgstr "πάρα πολλές ομάδες\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1372,6 +1535,11 @@ msgstr "Το συνθηματικό άλλαξε."
 msgid "%s: password expiry information changed.\n"
 msgstr "Προειδοποίηση λήξης συνθηματικού"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1380,6 +1548,10 @@ msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s και -r είναι ασύμβατα\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "Μη έγκυρη καταχώρηση στο αρχείο συνθηματικών"
@@ -1410,6 +1582,26 @@ msgstr "χρήστης %s: ο κατάλογος %s δεν υπάρχει\n"
 #| msgid "user %s: program %s does not exist\n"
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "χρήστης %s: το πρόγραμμα %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: αδυναμία κλειδώματος του αρχείου %s\n"
 
 #, fuzzy, c-format
 msgid "no matching password file entry in %s\n"
@@ -1444,6 +1636,11 @@ msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
 msgid "Usage: pwconv\n"
 msgstr "Χρήση: id\n"
 
+#, fuzzy, c-format
+#| msgid "%s: can't re-write file\n"
+msgid "%s: can't work with tcb enabled\n"
+msgstr "%s: αδυναμία επανεγγραφής αρχείου\n"
+
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
@@ -1462,9 +1659,34 @@ msgstr "Παράκαμψη εξακρίβωσης με συνθηματικό.\n
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Παρακαλώ εισάγετε το ΔΙΚΟ σας συνθηματικό για εξακρίβωση.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: αδυναμία κλειδώματος του αρχείου %s\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1556,6 +1778,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "Έναρξη Κατάστασης Συντήρησης Συστήματος"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1588,7 +1814,7 @@ msgstr "%s: Προσδιορίστηκαν υπερβολικές ομάδες (
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr "Χρήση: %s [είσοδος]\n"
@@ -1757,6 +1983,11 @@ msgid "%s: UID %lu is not unique\n"
 msgstr "%s: Το UID %u δεν είναι μοναδικό\n"
 
 #, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+
+#, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: αδυναμία δημιουργίας του %s\n"
 
@@ -1795,6 +2026,25 @@ msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: Το %s δεν ανήκει στον %s, δεν αφαιρείται\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1912,12 +2162,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: ο κατάλογος %s υπάρχει\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: αδυναμία δημιουργίας του %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: Αδυναμία αλλαγής ιδιοκτήτη(chown) του %s\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -1954,6 +2207,17 @@ msgid ""
 "Please use the command '%s' to do so.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -1963,6 +2227,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "Χρήση: vipw [options]\n"
@@ -1991,6 +2256,16 @@ msgstr ""
 "%s: Το %s δεν άλλαξε\n"
 
 #, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "αποτυχία μετονομασίας mailbox"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
+
+#, fuzzy
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Αδυναμία ξεκλειδώματος αρχείου"
@@ -1998,15 +2273,62 @@ msgstr "Αδυναμία ξεκλειδώματος αρχείου"
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
+
 msgid "Couldn't lock file"
 msgstr "Αδυναμία ξεκλειδώματος αρχείου"
 
 msgid "Couldn't make backup"
 msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας "
 
+#, fuzzy
+msgid "failed to open scratch file"
+msgstr "%s: Αδυναμία ανοίγματος του αρχείου ομάδων\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: Πολύ μακριά πεδία\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "αποτυχία μετονομασίας mailbox"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "αποτυχία αλλαγής του ιδιοκτήτη του γραμματοκιβωτίου"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "αποτυχία μετονομασίας mailbox"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: Μη έγκυρος κατάλογος βάσης `%s'\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: useradd [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "Χρήση: %s [είσοδος]\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: αδυναμία δημιουργίας του %s\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: Αδυναμία αλλαγής ιδιοκτήτη(chown) του %s\n"
 
 #, fuzzy
 #~| msgid ""
@@ -2356,9 +2678,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #~ msgid "%s: can't open file\n"
 #~ msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
 
-#~ msgid "%s: can't re-write file\n"
-#~ msgstr "%s: αδυναμία επανεγγραφής αρχείου\n"
-
 #~ msgid "%s: can't re-write shadow file\n"
 #~ msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
 
@@ -2433,10 +2752,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #~ msgstr "%s: Αδυναμία κλειδώματος του αρχείου ομάδων\n"
 
 #, fuzzy
-#~ msgid "Unable to open group file\n"
-#~ msgstr "%s: Αδυναμία ανοίγματος του αρχείου ομάδων\n"
-
-#, fuzzy
 #~ msgid "Cannot close group file\n"
 #~ msgstr "%s: αδυναμία ανοίγματος αρχείου ομάδων\n"
 
@@ -2458,9 +2773,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 
 #~ msgid "%s: unable to open password file\n"
 #~ msgstr "%s: Αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
-
-#~ msgid "%s: cannot lock file %s\n"
-#~ msgstr "%s: αδυναμία κλειδώματος του αρχείου %s\n"
 
 #~ msgid "%s: can't update shadow entry for %s\n"
 #~ msgstr ""
@@ -2547,10 +2859,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #~ msgstr ""
 #~ "%s: αδυναμία απομάκρυνσης καταχώρησης σκιώδους συνθηματικού για τον %s\n"
 
-#~ msgid "%s: can't update shadow file\n"
-#~ msgstr ""
-#~ "%s: αδυναμία ανανέωσης καταχώρησης του αρχείου σκιωδών συνθηματικών\n"
-
 #~ msgid "%s: can't update passwd file\n"
 #~ msgstr "%s: αδυναμία ανανέωσης αρχείου συνθηματικών\n"
 
@@ -2629,9 +2937,6 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #~ msgid "%s: error deleting shadow password entry\n"
 #~ msgstr ""
 #~ "%s: Σφάλμα κατά την διαγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
-
-#~ msgid "%s: user %s does not exist\n"
-#~ msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
 
 #, fuzzy
 #~ msgid "%s: error adding new shadow group entry\n"

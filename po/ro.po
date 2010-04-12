@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2007-11-26 18:18+0100\n"
 "Last-Translator: Sorin Batariuc <sorin@bonbon.net>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -44,6 +44,100 @@ msgstr "Parola: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Parola pentru %s: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: nu mai este memorie\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: nu pot actualiza fişierul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: director personal nevalid '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: nu pot redenumi directorul %s în %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: avertisment: nu pot şterge "
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: avertisment: nu pot şterge "
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: redenumire: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: nu pot redenumi directorul %s în %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: nu pot redenumi directorul %s în %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: avertisment: nu pot şterge "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: avertisment: nu pot şterge "
+
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: nu pot actualiza fişierul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update shadow file\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: nu pot actualiza fişierul shadow\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: redenumire: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: nu pot deschide fişierul %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -93,6 +187,14 @@ msgstr "Nu pot schimba tty %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: câmpuri prea lungi\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "Inundaţie de mediu\n"
 
@@ -114,6 +216,16 @@ msgstr[1] ""
 "%d eşuări de la ultima autentificare.\n"
 "Ultima oară a fost %s în %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: nu pot prelua UID\n"
@@ -121,6 +233,16 @@ msgstr "%s: nu pot prelua UID\n"
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: nu pot prelua GID unic\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -214,10 +336,6 @@ msgstr "Nu pot schimba directorul rădăcină la '%s'\n"
 
 msgid "Unable to determine your tty name."
 msgstr "Nu vă pot determina numele tty."
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: nu mai este memorie\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -541,7 +659,7 @@ msgid ""
 msgstr "Utilizare: %s [input]\n"
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -600,8 +718,18 @@ msgstr "%s: Intrare nevalidă: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s is an invalid shell.\n"
-msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s este o consolă nevalidă.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: utilizatorul %s nu există\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: avertisment: %s nu este deţinut de către %s\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Utilizare: expiry {-f|-c}\n"
@@ -610,7 +738,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -673,25 +801,39 @@ msgstr "%s: nu pot deschide fişierul %s\n"
 msgid "faillog: Cannot get the size of %s: %s\n"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
+msgstr "Utilizare: %s [input]\n"
+
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
+
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "Parola pentru %s nu poate fi schimbată.\n"
 
 #, fuzzy
 #| msgid "The password for %s cannot be changed.\n"
@@ -834,21 +976,39 @@ msgstr "%s: utilizatorul %s este un utilizator NIS\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: nu mai este memorie pentru update_group\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr "Utilizare: %s [input]\n"
+
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
+msgstr ""
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
 msgstr ""
 
 #, c-format
@@ -1173,6 +1333,10 @@ msgstr "%s: utilizatorul %s nu există\n"
 msgid "too many groups\n"
 msgstr "prea multe grupuri\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1359,6 +1523,11 @@ msgstr "Parolă schimbată."
 msgid "%s: password expiry information changed.\n"
 msgstr "Avertisment de expirare a parolei"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "Folosire: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Folosire: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1367,6 +1536,10 @@ msgstr "Folosire: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s şi -r sunt incompatibile\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "intrare nevalidă în fişierul passwd"
@@ -1397,6 +1570,26 @@ msgstr "utilizatorul %s: directorul %s nu există\n"
 #| msgid "user %s: program %s does not exist\n"
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "utilizatorul %s: programul %s nu există\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: nu pot încuia fişierul %s\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1431,6 +1624,11 @@ msgstr "%s: nu pot deschide fişierul %s\n"
 msgid "Usage: pwconv\n"
 msgstr "Utilizare: id\n"
 
+#, fuzzy, c-format
+#| msgid "%s: can't re-write file\n"
+msgid "%s: can't work with tcb enabled\n"
+msgstr "%s: nu pot rescrie fişierul\n"
+
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
@@ -1449,9 +1647,34 @@ msgstr "Autentificare cu parolă ocolită.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Vă rog introduceţi PROPRIA parolă pentru autentificare.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: nu pot încuia fişierul %s\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1542,6 +1765,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "Intrare în modul de întreţinere sistem"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1574,7 +1801,7 @@ msgstr "%s: prea multe grupuri specificate (maximum %d).\n"
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr "Utilizare: %s [input]\n"
@@ -1745,6 +1972,11 @@ msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %u nu este unic\n"
 
 #, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: nu pot crea directorul %s\n"
+
+#, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: nu pot crea %s\n"
 
@@ -1791,6 +2023,25 @@ msgstr "%s: avertisment: nu pot şterge "
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: %s nu aparţine de %s, nu se şterge\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s : eşuare în abandonarea privilegiilor (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "%s: nu pot redenumi directorul %s în %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: nu pot redenumi directorul %s în %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1907,12 +2158,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: directorul %s există\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: nu pot crea %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: nu pot schimba proprietarul %s\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: nu pot crea directorul %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -1948,6 +2202,17 @@ msgid ""
 "Please use the command '%s' to do so.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -1957,6 +2222,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "Utilizare: vipw [opţiuni]\n"
@@ -1984,6 +2250,16 @@ msgstr ""
 "%s: %s este neschimbat\n"
 
 #, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "eşuare în redenumirea căsuţei poştale"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s : eşuare în abandonarea privilegiilor (%s)\n"
+
+#, fuzzy
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "N-am putut încuia fişierul"
@@ -1991,15 +2267,63 @@ msgstr "N-am putut încuia fişierul"
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s : eşuare în abandonarea privilegiilor (%s)\n"
+
 msgid "Couldn't lock file"
 msgstr "N-am putut încuia fişierul"
 
 msgid "Couldn't make backup"
 msgstr "N-am putut face o copie de rezervă"
 
+#, fuzzy
+msgid "failed to open scratch file"
+msgstr "%s: nu pot deschide fişierul de grupuri\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: câmpuri prea lungi\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "eşuare în redenumirea căsuţei poştale"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "eşuare în schimbarea proprietarului căsuţei poştale"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "eşuare în redenumirea căsuţei poştale"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid base directory '%s'\n"
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: director de bază nevalid '%s'\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: useradd [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "Utilizare: %s [input]\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: nu pot crea %s\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: nu pot schimba proprietarul %s\n"
 
 #, fuzzy
 #~| msgid ""
@@ -2330,9 +2654,6 @@ msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 #~ msgid "%s: can't open file\n"
 #~ msgstr "%s: nu pot deschide fişierul\n"
 
-#~ msgid "%s: can't re-write file\n"
-#~ msgstr "%s: nu pot rescrie fişierul\n"
-
 #~ msgid "%s: can't re-write shadow file\n"
 #~ msgstr "%s: nu pot rescrie fişierul shadow\n"
 
@@ -2404,10 +2725,6 @@ msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 #~ msgstr "%s: nu pot încuia fişierul de grupuri\n"
 
 #, fuzzy
-#~ msgid "Unable to open group file\n"
-#~ msgstr "%s: nu pot deschide fişierul de grupuri\n"
-
-#, fuzzy
 #~ msgid "Cannot close group file\n"
 #~ msgstr "%s: nu pot deschide fişierul de grupuri\n"
 
@@ -2429,9 +2746,6 @@ msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 
 #~ msgid "%s: unable to open password file\n"
 #~ msgstr "%s: nu pot deschide fişierul passwd\n"
-
-#~ msgid "%s: cannot lock file %s\n"
-#~ msgstr "%s: nu pot încuia fişierul %s\n"
 
 #~ msgid "%s: can't update shadow entry for %s\n"
 #~ msgstr "%s: nu pot actualiza intrarea parolei criptate pentru %s\n"
@@ -2511,9 +2825,6 @@ msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 #~ msgid "%s: can't remove shadow entry for %s\n"
 #~ msgstr "%s: nu pot şterge intrarea shadow pentru %s\n"
 
-#~ msgid "%s: can't update shadow file\n"
-#~ msgstr "%s: nu pot actualiza fişierul shadow\n"
-
 #~ msgid "%s: can't update passwd file\n"
 #~ msgstr "%s: nu pot actualiza fişierul passwd\n"
 
@@ -2585,9 +2896,6 @@ msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 
 #~ msgid "%s: error deleting shadow password entry\n"
 #~ msgstr "%s: eroare la ştergerea intrării din shadow\n"
-
-#~ msgid "%s: user %s does not exist\n"
-#~ msgstr "%s: utilizatorul %s nu există\n"
 
 #, fuzzy
 #~ msgid "%s: error adding new shadow group entry\n"

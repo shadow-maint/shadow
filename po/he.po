@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -43,6 +43,86 @@ msgstr "סיסמה: "
 #, c-format
 msgid "%s's Password: "
 msgstr "הסיסמה של %s: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't lock shadow file\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't open shadow file\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -92,6 +172,13 @@ msgstr "לא יכול לשנות tty %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
+#, fuzzy, c-format
+msgid "%s: "
+msgstr "passwd: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "הצפת סביבה\n"
 
@@ -109,6 +196,16 @@ msgid_plural ""
 msgstr[0] "%d שגיאה מאז כניסה אחרונה למערכת. האחרונה היתה %s על %s.\n"
 msgstr[1] "%d שגיאה מאז כניסה אחרונה למערכת. האחרונה היתה %s על %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
@@ -116,6 +213,16 @@ msgstr "%s: שם לא חוקי: \"%s\"\n"
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -209,10 +316,6 @@ msgstr "לא יכול לשנות ספרית שורש ל-\"%s\"\n"
 #, fuzzy
 msgid "Unable to determine your tty name."
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr ""
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -500,7 +603,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -551,8 +654,16 @@ msgstr "%s: רשומה לא חוקית: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s is an invalid shell.\n"
-msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s היא מעטפת לא חוקית.\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "שימוש: expiry {-f|-c}\n"
@@ -561,7 +672,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -627,19 +738,30 @@ msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
+msgstr ""
+
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 
 msgid "The options cannot be combined.\n"
@@ -774,21 +896,38 @@ msgstr ""
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr ""
 
+#, c-format
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr ""
+
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
+msgstr ""
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
 msgstr ""
 
 #, c-format
@@ -1084,6 +1223,10 @@ msgstr "%s: שם לא חוקי: \"%s\"\n"
 msgid "too many groups\n"
 msgstr ""
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1235,12 +1378,20 @@ msgstr "סיסמה: "
 msgid "%s: password expiry information changed.\n"
 msgstr "אזהרת תוקף סיסמה"
 
+#, fuzzy, c-format
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "שימוש: %s [-p] [name]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
+msgstr ""
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
 
 #, fuzzy
@@ -1270,6 +1421,23 @@ msgstr ""
 #, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "no tcb directory for %s\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "create tcb directory for %s?"
+msgstr "לא יכול לשנות ספרית שורש ל-\"%s\"\n"
+
+#, fuzzy, c-format
+msgid "failed to create tcb directory for %s\n"
+msgstr "לא יכול לשנות ספרית שורש ל-\"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't open shadow file\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, fuzzy, c-format
 msgid "no matching password file entry in %s\n"
@@ -1305,6 +1473,11 @@ msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
 msgid "Usage: pwconv\n"
 msgstr "שימוש: id\n"
 
+#, fuzzy, c-format
+#| msgid "%s: can't lock shadow file\n"
+msgid "%s: can't work with tcb enabled\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
@@ -1323,9 +1496,34 @@ msgstr ""
 msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: %s\n"
 msgstr "passwd: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1398,6 +1596,10 @@ msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1427,7 +1629,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1592,6 +1794,10 @@ msgid "%s: UID %lu is not unique\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, fuzzy, c-format
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
@@ -1623,6 +1829,22 @@ msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr ""
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1708,12 +1930,14 @@ msgid "%s: directory %s exists\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't create %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
 msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -1757,6 +1981,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 
@@ -1768,10 +1993,20 @@ msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
 msgid "%s: %s is unchanged\n"
 msgstr "סיסמה: "
 
+msgid "failed to create scratch directory"
+msgstr ""
+
+#, fuzzy
+msgid "failed to drop privileges"
+msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
+
 msgid "Couldn't get file context"
 msgstr ""
 
 msgid "setfscreatecon () failed"
+msgstr ""
+
+msgid "failed to gain privileges"
 msgstr ""
 
 msgid "Couldn't lock file"
@@ -1780,9 +2015,30 @@ msgstr ""
 msgid "Couldn't make backup"
 msgstr ""
 
+msgid "failed to open scratch file"
+msgstr ""
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: שדות ארוכים מידי\n"
+
+msgid "failed to stat edited file"
+msgstr ""
+
+msgid "failed to allocate memory"
+msgstr ""
+
+msgid "failed to create backup file"
+msgstr ""
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, fuzzy
 #~ msgid "Password set to expire."
@@ -1854,9 +2110,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "%s: line %d: cannot update group entry\n"
 #~ msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#~ msgid "%s: can't lock shadow file\n"
-#~ msgstr "%s: לא יכול לנעול קובץ צל\n"
 
 #~ msgid "%s: error updating shadow file\n"
 #~ msgstr "%s: שגיאה בעדכון קובץ צל\n"

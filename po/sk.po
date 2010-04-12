@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2009-04-11 15:38+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -44,6 +44,100 @@ msgstr "Heslo: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Heslo používateľa %s:"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: nedostatok pamäti\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: nie je možné zmazať %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: chybný domovský adresár „%s“\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: upozornenie: nemôžem odstrániť %s: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: premenovať: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: adresár %s sa nedá premenovať na %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: adresár %s sa nedá premenovať na %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: upozornenie: nemôžem odstrániť %s: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: nie je možné zmazať %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update shadow file\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: súbor s tieňovými heslami sa nedá aktualizovať\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: premenovať: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: súbor %s sa nedá otvoriť\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -91,6 +185,14 @@ msgstr "Nedá sa zmeniť režim vlastníka TTY štandardného vstupu: %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: nepodarilo sa odmknúť %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "Preplnenie prostredia\n"
 
@@ -115,6 +217,16 @@ msgstr[2] ""
 "%d chybných pokusov o prihlásenie od posledného prihlásenia.\n"
 "Posledné bolo %s na %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -123,6 +235,16 @@ msgstr "%s: Nedá sa získať jedinečný UID (už nie sú dostupné žiadne UID
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Nedá sa získať jedinečný GID (už nie sú dostupné žiadne GID)\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique UID (no more available UIDs)\n"
@@ -217,10 +339,6 @@ msgstr "Koreňový adresár sa nedá zmeniť na „%s“\n"
 
 msgid "Unable to determine your tty name."
 msgstr "Nedá sa zistiť názov vášho tty."
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: nedostatok pamäti\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -559,7 +677,7 @@ msgid ""
 msgstr "Použitie: %s [vstup]\n"
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -619,9 +737,20 @@ msgstr "Mením predvolený shell pre %s\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Chybná položka: %s\n"
 
-#, c-format
-msgid "%s: %s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s: %s je neplatný shell.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: používateľ %s neexistuje\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: upozornenie: vlastníkom %s nie je %s\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Použitie: expiry {-f|-c}\n"
@@ -630,7 +759,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -695,39 +824,47 @@ msgstr "faillog: Súbor %s sa nedá otvoriť: %s\n"
 msgid "faillog: Cannot get the size of %s: %s\n"
 msgstr "faillog: Nepodarilo sa zistiť veľkosť %s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
-"  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
-msgstr ""
-"Použitie: %s [voľba] SKUPINA\n"
-"\n"
-"Voľby:\n"
-"  -a, --add POUŽ                pridať POUŽ do SKUPINY\n"
-"  -d, --delete POUŽ             odstrániť POUŽ zo SKUPINY\n"
-"  -r, --remove-password         odstrániť heslo SKUPINY\n"
-"  -R, --restrict                obmedziť prístup do SKUPINY iba na jej "
-"členov\n"
-"  -M, --members POUŽ,...        nastaviť zoznam členov SKUPINY\n"
-"%s\n"
-"\n"
+msgstr "Použitie: %s [vstup]\n"
 
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+msgid ""
+"  -R, --restrict                restrict access to GROUP to its members\n"
+msgstr ""
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -A, --administrators ADMIN,...\n"
+#| "                                set the list of administrators for GROUP\n"
+#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 "  -A, --administrators ADMIN,...\n"
 "                                nastaviť zoznam správcov SKUPINY\n"
 "Okrem volieb -A a -M nie je možné voľby kombinovať.\n"
+
+#, fuzzy
+#| msgid "The options cannot be combined.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "Voľby nie je možné kombinovať.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "Voľby nie je možné kombinovať.\n"
@@ -873,35 +1010,46 @@ msgstr "%s: používateľ „%s“ je členom „%s“\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: Nedostatok pamäte. Nie je možné aktualizovať %s.\n"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr "Použitie: %s [vstup]\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+"  -s, --sha-rounds              počet cyklov šifrovacích\n"
+"                                algoritmov SHA*\n"
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
 msgstr ""
-"Použitie: groupmems [voľby] [operácia]\n"
-"\n"
-"Voľby:\n"
-"  -g, --group groupname         zmeniť názov skupiny namiesto skupiny "
-"používateľa\n"
-"                                (iba root)\n"
-"\n"
-"Actions:\n"
-"  -a, --add používateľ           pridať používateľa medzi členov skupiny\n"
-"  -d, --delete používateľ       odobrať používateľa spomedzi členov skupiny\n"
-"  -p, --purge                   odstrániť všetkých členov skupiny\n"
-"  -l, --list                    vypísať členov skupiny\n"
-"\n"
+
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+
+msgid "  -l, --list                    list the members of the group\n"
+msgstr ""
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1212,6 +1360,10 @@ msgstr "%s: GID „%lu“ neexistuje\n"
 msgid "too many groups\n"
 msgstr "príliš mnoho skupín\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
 
@@ -1396,6 +1548,12 @@ msgstr "Heslo bolo zmenené."
 msgid "%s: password expiry information changed.\n"
 msgstr "Upozornenie o uplynutí doby platnosti hesla"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr ""
+"Použitie: %s [-q] [-r] [-s] [súbor_s_heslami [súbor_s_tieňovými_heslami]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
@@ -1405,6 +1563,10 @@ msgstr ""
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s a -r nie sú zlučiteľné\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "chybná položka v súbore s heslami"
@@ -1431,6 +1593,26 @@ msgstr "používateľ „%s“: adresár „%s“ neexistuje\n"
 #, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "používateľ „%s“: program „%s“ neexistuje\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: súbor %s sa nedá zamknúť\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1462,6 +1644,11 @@ msgstr "%s: nie je možné zoradiť položdy v %s\n"
 msgid "Usage: pwconv\n"
 msgstr "Použitie: pwconv\n"
 
+#, fuzzy, c-format
+#| msgid "%s: can't re-write file\n"
+msgid "%s: can't work with tcb enabled\n"
+msgstr "%s: súbor sa nedá prepísať\n"
+
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: lastlog: Nepodarilo sa zmeniť režim %s na 0600\n"
@@ -1478,9 +1665,34 @@ msgstr "Overenie hesla vynechané.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Pre overenie zadajte VAŠE vlastné heslo.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot lock file %s\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: súbor %s sa nedá zamknúť\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1569,6 +1781,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "Prepnutie do režimu údržby systému"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
@@ -1601,7 +1817,7 @@ msgstr "%s: bolo zadaných príliš veľa skupín (max %d).\n"
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr "Použitie: %s [vstup]\n"
@@ -1805,6 +2021,11 @@ msgstr "%s: nie je možné vytvoriť používateľa\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %lu nie je jedinečný\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
+
 #, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: sa nedá vytvoriť skupina\n"
@@ -1850,6 +2071,25 @@ msgstr "%s: upozornenie: nemôžem odstrániť %s: %s"
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: vlastníkom %s nie je %s, nemažem ho\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "lastlog: Nepodarilo sa zistiť veľkosť %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: nie je možné odstrániť položku „%s“ z %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1998,12 +2238,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: adresár %s už existuje\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: %s sa nedá vytvoriť\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: volanie chown pre %s zlyhalo\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -2046,6 +2289,17 @@ msgstr ""
 "Kvôli zachovaniu konzistentnosti budete možno musieť zmeniť %s.\n"
 "Prosím, urobte tak príkazom „%s“.\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -2055,6 +2309,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "Použitie: vipw [voľby]\n"
@@ -2076,6 +2331,16 @@ msgid "%s: %s is unchanged\n"
 msgstr "%s: %s je bez zmien\n"
 
 #, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "chyba pri premenovaní schránky"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
+
+#, fuzzy
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Súbor sa nedá zamknúť"
@@ -2083,15 +2348,119 @@ msgstr "Súbor sa nedá zamknúť"
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
+
 msgid "Couldn't lock file"
 msgstr "Súbor sa nedá zamknúť"
 
 msgid "Couldn't make backup"
 msgstr "Nedá sa vytvoriť záloha"
 
+#, fuzzy
+#| msgid "Unable to open group file\n"
+msgid "failed to open scratch file"
+msgstr "Súbor so skupinami sa nedá otvoriť\n"
+
+#, fuzzy
+#| msgid "%s: failed to unlock %s\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: nepodarilo sa odmknúť %s\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "chyba pri premenovaní schránky"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "chyba pri zmene vlastníka schránky"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "chyba pri premenovaní schránky"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid base directory '%s'\n"
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: chybný základný adresár „%s“\n"
+
+#~ msgid ""
+#~ "Usage: %s [option] GROUP\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --add USER                add USER to GROUP\n"
+#~ "  -d, --delete USER             remove USER from GROUP\n"
+#~ "  -r, --remove-password         remove the GROUP's password\n"
+#~ "  -R, --restrict                restrict access to GROUP to its members\n"
+#~ "  -M, --members USER,...        set the list of members of GROUP\n"
+#~ "%s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Použitie: %s [voľba] SKUPINA\n"
+#~ "\n"
+#~ "Voľby:\n"
+#~ "  -a, --add POUŽ                pridať POUŽ do SKUPINY\n"
+#~ "  -d, --delete POUŽ             odstrániť POUŽ zo SKUPINY\n"
+#~ "  -r, --remove-password         odstrániť heslo SKUPINY\n"
+#~ "  -R, --restrict                obmedziť prístup do SKUPINY iba na jej "
+#~ "členov\n"
+#~ "  -M, --members POUŽ,...        nastaviť zoznam členov SKUPINY\n"
+#~ "%s\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: groupmems [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ "\n"
+#~ "Actions:\n"
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ "  -p, --purge                   purge all members from the group\n"
+#~ "  -l, --list                    list the members of the group\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Použitie: groupmems [voľby] [operácia]\n"
+#~ "\n"
+#~ "Voľby:\n"
+#~ "  -g, --group groupname         zmeniť názov skupiny namiesto skupiny "
+#~ "používateľa\n"
+#~ "                                (iba root)\n"
+#~ "\n"
+#~ "Actions:\n"
+#~ "  -a, --add používateľ           pridať používateľa medzi členov skupiny\n"
+#~ "  -d, --delete používateľ       odobrať používateľa spomedzi členov "
+#~ "skupiny\n"
+#~ "  -p, --purge                   odstrániť všetkých členov skupiny\n"
+#~ "  -l, --list                    vypísať členov skupiny\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: useradd [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "Použitie: %s [vstup]\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: %s sa nedá vytvoriť\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: volanie chown pre %s zlyhalo\n"
 
 #~ msgid ""
 #~ "Usage: faillog [options]\n"
@@ -2451,9 +2820,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #~ msgid "%s: can't open file\n"
 #~ msgstr "%s: nedá sa otvoriť súbor\n"
 
-#~ msgid "%s: can't re-write file\n"
-#~ msgstr "%s: súbor sa nedá prepísať\n"
-
 #~ msgid "%s: can't re-write shadow file\n"
 #~ msgstr "%s: súbor s tieňovými heslami sa nedá prepísať\n"
 
@@ -2539,9 +2905,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #~ msgid "Unable to lock group file\n"
 #~ msgstr "Súbor so skupinami sa nedá zamknúť\n"
 
-#~ msgid "Unable to open group file\n"
-#~ msgstr "Súbor so skupinami sa nedá otvoriť\n"
-
 #~ msgid "Cannot close group file\n"
 #~ msgstr "Súbor so skupinami sa nedá zatvoriť\n"
 
@@ -2569,9 +2932,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #~ msgstr ""
 #~ "%s: nie je možné zmeniť primárnu skupinu používateľa „%s“ z %u na %u, "
 #~ "pretože nie je v súbore passwd.\n"
-
-#~ msgid "%s: cannot lock file %s\n"
-#~ msgstr "%s: súbor %s sa nedá zamknúť\n"
 
 #~ msgid "%s: can't update shadow entry for %s\n"
 #~ msgstr "%s: položka %s súboru s tieňovými heslami sa nedá aktualizovať\n"
@@ -2653,9 +3013,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 #~ msgid "%s: can't remove shadow entry for %s\n"
 #~ msgstr "%s: položka súboru s heslami pre používateľe %s sa nedá odstrániť\n"
 
-#~ msgid "%s: can't update shadow file\n"
-#~ msgstr "%s: súbor s tieňovými heslami sa nedá aktualizovať\n"
-
 #~ msgid "%s: can't update passwd file\n"
 #~ msgstr "%s: súbor s heslami sa nedá aktualizovať\n"
 
@@ -2728,9 +3085,6 @@ msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
 
 #~ msgid "%s: error deleting shadow password entry\n"
 #~ msgstr "%s: chyba pri odstraňovaní položky zo súboru s tieňovými heslami\n"
-
-#~ msgid "%s: user %s does not exist\n"
-#~ msgstr "%s: používateľ %s neexistuje\n"
 
 #~ msgid "%s: error adding new shadow group entry\n"
 #~ msgstr "%s: chyba pri pridávaní položky do súboru so skupinami\n"

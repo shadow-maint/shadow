@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-07-24 03:02+0200\n"
+"POT-Creation-Date: 2010-04-03 15:36+0200\n"
 "PO-Revision-Date: 2009-04-19 10:32+0100\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -45,6 +45,100 @@ msgstr "Palavra-passe: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Palavra-passe de %s: "
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: memória esgotada\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: não é possível apagar %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: o directório home '%s' é inválida\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: não é possível remover a entrada '%s' de %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "lastlog: Não conseguiu obter o tamanho de %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: aviso: não é possível remover %s: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: renomear: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: não é possível renomear o directório %s para %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: não é possível renomear o directório %s para %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove %s: %s"
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: aviso: não é possível remover %s: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "lastlog: Não conseguiu obter o tamanho de %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot delete %s\n"
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: não é possível apagar %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: linha %d: o utilizador '%s' não existe\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s"
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: renomear: %s"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: não é possível abrir %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -92,6 +186,14 @@ msgstr "Foi impossível mudar o dono ou o modo do tty stdin: %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: falha ao desbloquear %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: "
+msgstr "%s: %s\n"
+
+msgid ": "
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr "Overflow do ambiente\n"
 
@@ -113,6 +215,16 @@ msgstr[1] ""
 "%d falhas desde o último login.\n"
 "O último foi %s em %s.\n"
 
+#, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
+"lu)\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -124,6 +236,16 @@ msgstr ""
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr ""
 "%s: Não foi possível obter um GID único (não existem mais GIDs disponíveis)\n"
+
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
+"lu)\n"
+msgstr ""
 
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -220,10 +342,6 @@ msgstr "Não é possível mudar o directório raiz para '%s'\n"
 
 msgid "Unable to determine your tty name."
 msgstr "Não é possível determinar o nome do seu tty."
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: memória esgotada\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -539,7 +657,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -599,9 +717,20 @@ msgstr "A alterar a shell de entrada de %s\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Entrada inválida: %s\n"
 
-#, c-format
-msgid "%s: %s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell\n"
 msgstr "%s: %s é uma shell inválida.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user '%s' does not exist\n"
+msgid "%s: Warning: %s does not exist\n"
+msgstr "%s: o utilizador '%s' não existe\n"
+
+#, fuzzy, c-format
+#| msgid "%s: warning: %s not owned by %s\n"
+msgid "%s: Warning: %s is not executable\n"
+msgstr "%s: aviso: o %s não pertence a %s\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Utilização: expiry {-f|-c}\n"
@@ -610,7 +739,7 @@ msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 
 msgid ""
-"  -l, --lock-time SEC           after failed login lock account for SEC "
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
 
@@ -686,33 +815,53 @@ msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-"  -a, --add USER                add USER to GROUP\n"
-"  -d, --delete USER             remove USER from GROUP\n"
-"  -r, --remove-password         remove the GROUP's password\n"
-"  -R, --restrict                restrict access to GROUP to its members\n"
-"  -M, --members USER,...        set the list of members of GROUP\n"
-"%s\n"
-"\n"
 msgstr ""
-"Utilização: %s [opção] GRUPO\n"
-"\n"
-"Opções:\n"
-"  -a, --add UTILIZADOR\t\tacrescentar UTILIZADOR ao GRUPO\n"
-"  -d, --delete UTILIZADOR\tremover UTILIZADOR do GRUPO\n"
-"  -r, --remove-password\tremover a palavra-passe do GRUPO\n"
-"  -R, --restrict\t\trestringir o acesso ao GRUPO aos seus membros\n"
-"  -M, --members UTILIZADOR,...\tdefinir a lista de membros do GRUPO\n"
-"%s\n"
-"\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -a, --add USER                add USER to GROUP\n"
+msgstr ""
+"  -Z, --selinux-user\t\t novo mapeamento de utilizador SELinux para a conta "
+"do utilizador\n"
+
+msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -r, --remove-password         remove the GROUP's password\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"  -R, --restrict                restrict access to GROUP to its members\n"
+msgstr ""
+"  -Z, --selinux-user\t\t novo mapeamento de utilizador SELinux para a conta "
+"do utilizador\n"
+
+msgid "  -M, --members USER,...        set the list of members of GROUP\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -A, --administrators ADMIN,...\n"
+#| "                                set the list of administrators for GROUP\n"
+#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
-"Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 "  -A, --administrators ADMIN,...\n"
 "\t\t\t\tdefinir a lista de administradores do GRUPO\n"
 "Excepto para as opções -A e -M, as opções não podem ser combinadas.\n"
+
+#, fuzzy
+#| msgid "The options cannot be combined.\n"
+msgid "Except for the -A and -M options, the options cannot be combined.\n"
+msgstr "As opções não podem ser combinadas.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "As opções não podem ser combinadas.\n"
@@ -869,34 +1018,63 @@ msgstr "%s: o utilizador '%s' já é um membro de '%s'\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: Memória esgotada. Não é possível actualizar %s.\n"
 
+#, c-format
 msgid ""
-"Usage: groupmems [options] [action]\n"
+"Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-"\n"
-"Actions:\n"
+msgstr ""
+"  -s, --sha-rounds              número de iterações SHA para algoritmos\n"
+"                                de encriptação SHA*\n"
+
+msgid "\n"
+msgstr ""
+
+msgid "Actions:\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
 "  -a, --add username            add username to the members of the group\n"
+msgstr ""
+"  -Z, --selinux-user\t\t novo mapeamento de utilizador SELinux para a conta "
+"do utilizador\n"
+
+msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-"  -p, --purge                   purge all members from the group\n"
-"  -l, --list                    list the members of the group\n"
-"\n"
 msgstr ""
-"Utilização: groupmems [opções] [acção]\n"
-"\n"
-"Opções:\n"
-"  -g, --group nomegrupo\tmudar nomegrupo em vez do grupo do utilizador\n"
-"\t\t\t\t(apenas root)\n"
-"\n"
-"Acções:\n"
-"  -a, --add nomeutilizador\tacrescentar nomeutilizador aos membros do grupo\n"
-"  -d, --delete nomeutilizador\tremover nomeutilizador dos membros do grupo\n"
-"  -p, --purge\t\t\tpurgar todos os membros do grupo\n"
-"  -l, --list\t\t\tlistar todos os membros do grupo\n"
-"\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -p, --purge                   purge all members from the group\n"
+msgstr ""
+"  -Z, --selinux-user\t\t novo mapeamento de utilizador SELinux para a conta "
+"do utilizador\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid "  -l, --list                    list the members of the group\n"
+msgstr ""
+"  -Z, --selinux-user\t\t novo mapeamento de utilizador SELinux para a conta "
+"do utilizador\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1218,6 +1396,10 @@ msgstr "%s: o GID '%lu' não existe\n"
 msgid "too many groups\n"
 msgstr "demasiados grupos\n"
 
+#, c-format
+msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -1416,6 +1598,11 @@ msgstr "Palavra-passe alterada."
 msgid "%s: password expiry information changed.\n"
 msgstr "Aviso de Caducidade da palavra-passe"
 
+#, fuzzy, c-format
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid "Usage: %s [-q] [-r] [passwd]\n"
+msgstr "Utilização: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Utilização: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1424,6 +1611,10 @@ msgstr "Utilização: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 #| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s e -r são incompatíveis\n"
+
+#, c-format
+msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
+msgstr ""
 
 msgid "invalid password file entry"
 msgstr "entrada no ficheiro de palavras-passe inválida"
@@ -1450,6 +1641,26 @@ msgstr "utilizador '%s': o directório '%s' não existe\n"
 #, c-format
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "utilizador '%s': o programa '%s' não existe\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "no tcb directory for %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "create tcb directory for %s?"
+msgstr "%s: não é possível criar o directório %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "failed to create tcb directory for %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: cannot lock %s.\n"
+msgstr "%s: não é possível abrir %s\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1482,6 +1693,10 @@ msgid "Usage: pwconv\n"
 msgstr "Utilização: pwconv\n"
 
 #, c-format
+msgid "%s: can't work with tcb enabled\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: falhou mudar o modo de %s para 0600\n"
 
@@ -1497,9 +1712,34 @@ msgstr "Autenticação por palavra-passe foi contornada.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Por favor introduza a SUA palavra-passe como autenticação.\n"
 
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot fork user shell\n"
+msgstr "%s: Não é possível determinar o seu nome de utilizador.\n"
+
+#, c-format
+msgid "%s: signal malfunction\n"
+msgstr ""
+
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+msgid "Session terminated, terminating shell..."
+msgstr ""
+
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
+
+msgid " ...terminated.\n"
+msgstr ""
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1586,6 +1826,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "A Entrar no Modo de Manutenção do Sistema"
 
 #, c-format
+msgid "%s: %s was created, but could not be removed\n"
+msgstr ""
+
+#, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr "%s: a configuração %s em %s será ignorada\n"
 
@@ -1619,7 +1863,7 @@ msgstr "%s: estão especificados demasiados grupos (max %d).\n"
 
 #, c-format
 msgid ""
-"Usage: useradd [options] LOGIN\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1845,6 +2089,11 @@ msgstr "%s: não é possível criar o utilizador\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %lu não é único\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to create tcb directory for %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
+
 #, c-format
 msgid "%s: can't create group\n"
 msgstr "%s: não é possível criar grupo\n"
@@ -1889,6 +2138,25 @@ msgstr "%s: aviso: não é possível remover %s: %s"
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: o %s não pertence a %s, não será removido\n"
+
+#, c-format
+msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Cannot drop privileges: %s\n"
+msgstr "%s: falhou baixar privilégios (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot remove the content of %s: %s\n"
+msgstr "lastlog: Não conseguiu obter o tamanho de %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: Cannot remove tcb files for %s: %s\n"
+msgstr "%s: não é possível remover a entrada '%s' de %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -2014,12 +2282,15 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: o directório %s existe\n"
 
 #, c-format
-msgid "%s: can't create %s\n"
-msgstr "%s: não é possível criar %s\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't chown %s\n"
-msgstr "%s: não é possível efectuar o chown a %s\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to change ownership of the home directory"
+msgstr "%s: não é possível criar o directório %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -2062,6 +2333,17 @@ msgstr ""
 "Poderá ter de modificar %s para manter a consistência.\n"
 "Por favor utilize o comando '%s' para o fazer.\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: vipw [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -g, --group                   edit group database\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -p, --passwd                  edit passwd database\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -s, --shadow                  edit shadow or gshadow database\n"
+#| "\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -2071,6 +2353,7 @@ msgid ""
 "  -p, --passwd                  edit passwd database\n"
 "  -q, --quiet                   quiet mode\n"
 "  -s, --shadow                  edit shadow or gshadow database\n"
+"  -u, --user                    which user's tcb shadow file to edit\n"
 "\n"
 msgstr ""
 "Utilização: vipw [opções]\n"
@@ -2090,6 +2373,16 @@ msgid "%s: %s is unchanged\n"
 msgstr "%s: %s não foi alterado\n"
 
 #, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create scratch directory"
+msgstr "falha ao renomear a caixa do correio"
+
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to drop privileges"
+msgstr "%s: falhou baixar privilégios (%s)\n"
+
+#, fuzzy
 #| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Não é possível obter acesso exclusivo ao ficheiro"
@@ -2097,15 +2390,110 @@ msgstr "Não é possível obter acesso exclusivo ao ficheiro"
 msgid "setfscreatecon () failed"
 msgstr ""
 
+#, fuzzy
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "failed to gain privileges"
+msgstr "%s: falhou baixar privilégios (%s)\n"
+
 msgid "Couldn't lock file"
 msgstr "Não é possível obter acesso exclusivo ao ficheiro"
 
 msgid "Couldn't make backup"
 msgstr "Não é possível efectuar cópia de segurança"
 
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to open scratch file"
+msgstr "falha ao renomear a caixa do correio"
+
+#, fuzzy
+#| msgid "%s: failed to unlock %s\n"
+msgid "failed to unlink scratch file"
+msgstr "%s: falha ao desbloquear %s\n"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to stat edited file"
+msgstr "falha ao renomear a caixa do correio"
+
+#, fuzzy
+#| msgid "failed to change mailbox owner"
+msgid "failed to allocate memory"
+msgstr "a alteração do dono da caixa de correio falhou"
+
+#, fuzzy
+#| msgid "failed to rename mailbox"
+msgid "failed to create backup file"
+msgstr "falha ao renomear a caixa do correio"
+
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: não é possível restaurar %s: %s (a suas alterações estão em %s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid base directory '%s'\n"
+msgid "%s: failed to find tcb directory for %s\n"
+msgstr "%s: directório base inválido '%s'\n"
+
+#~ msgid ""
+#~ "Usage: %s [option] GROUP\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --add USER                add USER to GROUP\n"
+#~ "  -d, --delete USER             remove USER from GROUP\n"
+#~ "  -r, --remove-password         remove the GROUP's password\n"
+#~ "  -R, --restrict                restrict access to GROUP to its members\n"
+#~ "  -M, --members USER,...        set the list of members of GROUP\n"
+#~ "%s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Utilização: %s [opção] GRUPO\n"
+#~ "\n"
+#~ "Opções:\n"
+#~ "  -a, --add UTILIZADOR\t\tacrescentar UTILIZADOR ao GRUPO\n"
+#~ "  -d, --delete UTILIZADOR\tremover UTILIZADOR do GRUPO\n"
+#~ "  -r, --remove-password\tremover a palavra-passe do GRUPO\n"
+#~ "  -R, --restrict\t\trestringir o acesso ao GRUPO aos seus membros\n"
+#~ "  -M, --members UTILIZADOR,...\tdefinir a lista de membros do GRUPO\n"
+#~ "%s\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: groupmems [options] [action]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -g, --group groupname         change groupname instead of the user's "
+#~ "group\n"
+#~ "                                (root only)\n"
+#~ "\n"
+#~ "Actions:\n"
+#~ "  -a, --add username            add username to the members of the group\n"
+#~ "  -d, --delete username         remove username from the members of the "
+#~ "group\n"
+#~ "  -p, --purge                   purge all members from the group\n"
+#~ "  -l, --list                    list the members of the group\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Utilização: groupmems [opções] [acção]\n"
+#~ "\n"
+#~ "Opções:\n"
+#~ "  -g, --group nomegrupo\tmudar nomegrupo em vez do grupo do utilizador\n"
+#~ "\t\t\t\t(apenas root)\n"
+#~ "\n"
+#~ "Acções:\n"
+#~ "  -a, --add nomeutilizador\tacrescentar nomeutilizador aos membros do "
+#~ "grupo\n"
+#~ "  -d, --delete nomeutilizador\tremover nomeutilizador dos membros do "
+#~ "grupo\n"
+#~ "  -p, --purge\t\t\tpurgar todos os membros do grupo\n"
+#~ "  -l, --list\t\t\tlistar todos os membros do grupo\n"
+#~ "\n"
+
+#~ msgid "%s: can't create %s\n"
+#~ msgstr "%s: não é possível criar %s\n"
+
+#~ msgid "%s: can't chown %s\n"
+#~ msgstr "%s: não é possível efectuar o chown a %s\n"
 
 #~ msgid ""
 #~ "Usage: faillog [options]\n"

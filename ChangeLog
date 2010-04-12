@@ -1,3 +1,8 @@
+2010-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
 2010-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/newusers.8.xml, man/useradd.8.xml, man/groupadd.8.xml,
