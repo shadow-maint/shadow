@@ -1,5 +1,9 @@
 2010-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Fix some typos. Minor updates: 886t70f187u.
+
+2010-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.
 

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2010-04-12 22:01+0200\n"
-"PO-Revision-Date: 2010-04-04 23:15+0200\n"
+"PO-Revision-Date: 2010-04-12 23:47+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -190,14 +190,12 @@ msgid "Edit shadow or gshadow database."
 msgstr "Éditer les bases de données shadow ou gshadow."
 
 #: vipw.8.xml:122(term)
-#, fuzzy
-#| msgid "<option>-q</option>, <option>--quiet</option>"
 msgid "<option>-u</option>, <option>--user</option>"
-msgstr "<option>-q</option>, <option>--quiet</option>"
+msgstr "<option>-u</option>, <option>--user</option>"
 
 #: vipw.8.xml:124(para)
 msgid "Indicates which user's tcb shadow file to edit."
-msgstr ""
+msgstr "Indique l'utilisateur dont le fichier shadow tcb doit être édité."
 
 #: vipw.8.xml:131(title) usermod.8.xml:374(title) userdel.8.xml:127(title)
 #: useradd.8.xml:629(title) su.1.xml:310(title) sg.1.xml:76(title)
@@ -228,10 +226,8 @@ msgstr ""
 #: vipw.8.xml:30(term) usermod.8.xml:30(term) userdel.8.xml:30(term)
 #: useradd.8.xml:30(term) pwconv.8.xml:30(term) pwck.8.xml:30(term)
 #: login.defs.5.xml:30(term) chage.1.xml:30(term)
-#, fuzzy
-#| msgid "<option>QUOTAS_ENAB</option> (boolean)"
 msgid "<option>USE_TCB</option> (boolean)"
-msgstr "<option>QUOTAS_ENAB</option> (booléen)"
+msgstr "<option>USE_TCB</option> (booléen)"
 
 #: vipw.8.xml:32(para) usermod.8.xml:32(para) userdel.8.xml:32(para)
 #: useradd.8.xml:32(para) pwconv.8.xml:32(para) pwck.8.xml:32(para)
@@ -251,25 +247,23 @@ msgstr ""
 
 #: vipw.8.xml:143(title)
 msgid "ENVIRONMENT"
-msgstr ""
+msgstr "ENVIRONNEMENT"
 
 #: vipw.8.xml:146(option)
 msgid "VISUAL"
-msgstr ""
+msgstr "VISUAL"
 
 #: vipw.8.xml:148(para)
 msgid "Editor to be used."
-msgstr ""
+msgstr "L'éditeur à utiliser"
 
 #: vipw.8.xml:152(option)
-#, fuzzy
-#| msgid "HISTORY"
 msgid "EDITOR"
-msgstr "HISTORIQUE"
+msgstr "EDITOR"
 
 #: vipw.8.xml:154(para)
 msgid "Editor to be used if <option>VISUAL</option> is not set."
-msgstr ""
+msgstr "L'éditeur à utiliser si <option>VISUAL</option> n'est pas définie."
 
 #: vipw.8.xml:161(title) usermod.8.xml:389(title) userdel.8.xml:144(title)
 #: useradd.8.xml:655(title) suauth.5.xml:168(title) su.1.xml:338(title)
@@ -388,19 +382,6 @@ msgid "SEE ALSO"
 msgstr "VOIR AUSSI"
 
 #: vipw.8.xml:192(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>login</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>group</"
@@ -414,16 +395,17 @@ msgid ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>login</"
-"refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-"refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>"
+"<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>group</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry><citerefentry condition=\"tcb"
+"\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <citerefentry><refentrytitle>passwd</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
+"condition=\"tcb\"><refentrytitle>tcb</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 
 #: usermod.8.xml:41(refentrytitle) usermod.8.xml:46(refname)
 #: usermod.8.xml:52(command) login.defs.5.xml:468(term)
@@ -831,7 +813,7 @@ msgid ""
 "replaceable>"
 msgstr ""
 "<option>-Z</option>, <option>--selinux-user</"
-"option><replaceable>UTILISATEUR_SELINUX</replaceable>"
+"option> <replaceable>UTILISATEUR_SELINUX</replaceable>"
 
 #: usermod.8.xml:344(para)
 msgid ""
@@ -1008,10 +990,8 @@ msgstr ""
 
 #: usermod.8.xml:30(term) userdel.8.xml:30(term) useradd.8.xml:30(term)
 #: pwck.8.xml:30(term) login.defs.5.xml:30(term)
-#, fuzzy
-#| msgid "<option>LOG_OK_LOGINS</option> (boolean)"
 msgid "<option>TCB_SYMLINKS</option> (boolean)"
-msgstr "<option>LOG_OK_LOGINS</option> (booléen)"
+msgstr "<option>TCB_SYMLINKS</option> (booléen)"
 
 #: usermod.8.xml:37(programlisting) userdel.8.xml:37(programlisting)
 #: useradd.8.xml:37(programlisting) pwck.8.xml:37(programlisting)
@@ -1525,7 +1505,7 @@ msgid ""
 "define the home directory. If the <option>-m</option> option is not used, "
 "<replaceable>BASE_DIR</replaceable> must exist."
 msgstr ""
-"Répertoire de base par défaut du système si l'option <option>-d</option> rép "
+"Répertoire de base par défaut du système si l'option <option>-d</option> <replmaceable>RÉP_PERSO</replaceable> "
 "n'est pas spécifiée. <replaceable>RÉP_BASE</replaceable> est concaténé avec "
 "le nom du compte pour définir le répertoire personnel. Quand l'option "
 "<option>-m</option> n'est pas utilisée, <replaceable>RÉP_BASE</replaceable> "
@@ -1568,10 +1548,9 @@ msgstr ""
 msgid "<option>-D</option>, <option>--defaults</option>"
 msgstr "<option>-D</option>, <option>--defaults</option>"
 
-#: useradd.8.xml:162(para)
-#, fuzzy
+#: useradd.8.xml:159(para)
 msgid "See below, the subsection \"Changing the default values\"."
-msgstr "Modifier les valeurs par défaut"
+msgstr "Voir ci-dessous la sous-section « Modifier les valeurs par défaut »."
 
 #: useradd.8.xml:177(para)
 msgid ""
@@ -1647,7 +1626,7 @@ msgid ""
 "<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-k</option>, <option>--skel</option><replaceable>RÉP_SQUELETTE</"
+"<option>-k</option>, <option>--skel</option> <replaceable>RÉP_SQUELETTE</"
 "replaceable>"
 
 #: useradd.8.xml:261(para)
@@ -1777,13 +1756,9 @@ msgstr ""
 "dupliqué (non unique)."
 
 #: useradd.8.xml:379(para)
-#, fuzzy
-#| msgid ""
-#| "This option is only valid in combination with the <option>-o</option> "
-#| "option."
 msgid ""
 "This option is only valid in combination with the <option>-u</option> option."
-msgstr "Cette option n'est valable qu'avec l'option <option>-o</option>."
+msgstr "Cette option n'est valable qu'avec l'option <option>-u</option>."
 
 #: useradd.8.xml:391(para) groupadd.8.xml:149(para)
 msgid ""
@@ -1974,24 +1949,22 @@ msgstr ""
 "de modèles indiqué dans <filename>/etc/default/useradd</filename> ou sur la "
 "ligne de commande)."
 
-#: useradd.8.xml:606(para)
-#, fuzzy
+#: useradd.8.xml:598(para)
 msgid ""
 "You may not add a user to a NIS or LDAP group. This must be performed on the "
 "corresponding server."
 msgstr ""
-"Vous ne pouvez pas ajouter d'utilisateur à un groupe NIS. Cela doit être "
-"effectué sur le serveur NIS."
+"Vous ne pouvez pas ajouter d'utilisateur à un groupe NIS ou LDAP. Cela doit être "
+"effectué sur le serveur correspondant."
 
-#: useradd.8.xml:611(para)
-#, fuzzy
+#: useradd.8.xml:603(para)
 msgid ""
 "Similarly, if the username already exists in an external user database such "
 "as NIS or LDAP, <command>useradd</command> will deny the user account "
 "creation request."
 msgstr ""
 "De la même façon, si le nom de l'utilisateur existe dans une base de données "
-"externe, telle que NIS, <command>useradd</command> refusera de créer le "
+"externe, telle que NIS ou LDAP, <command>useradd</command> refusera de créer le "
 "compte d'utilisateur."
 
 #: useradd.8.xml:617(para)
@@ -2022,10 +1995,6 @@ msgstr ""
 "nouveaux utilisateurs."
 
 #: useradd.8.xml:36(para) login.defs.5.xml:36(para)
-#, fuzzy
-#| msgid ""
-#| "This setting does not apply to system users, and can be overriden on the "
-#| "command line."
 msgid ""
 "This setting does not apply to system users, and can be overridden on the "
 "command line."
@@ -2145,10 +2114,8 @@ msgstr ""
 "pour la création d'utilisateurs système."
 
 #: useradd.8.xml:30(term) pwck.8.xml:30(term) login.defs.5.xml:30(term)
-#, fuzzy
-#| msgid "<option>CHFN_AUTH</option> (boolean)"
 msgid "<option>TCB_AUTH_GROUP</option> (boolean)"
-msgstr "<option>CHFN_AUTH</option> (booléen)"
+msgstr "<option>TCB_AUTH_GROUP</option> (booléen)"
 
 #: useradd.8.xml:32(para) pwck.8.xml:32(para) login.defs.5.xml:32(para)
 #, fuzzy
@@ -2593,7 +2560,6 @@ msgid "User Commands"
 msgstr "Commandes utilisateur"
 
 #: su.1.xml:60(refpurpose)
-#, fuzzy
 msgid "change user ID or become superuser"
 msgstr "Changer d'identifiant d'utilisateur ou devenir superutilisateur"
 
@@ -2603,7 +2569,6 @@ msgid "username"
 msgstr "nom_utilisateur"
 
 #: su.1.xml:78(para)
-#, fuzzy
 msgid ""
 "The <command>su</command> command is used to become another user during a "
 "login session. Invoked without a <option>username</option>, <command>su</"
@@ -2611,8 +2576,8 @@ msgid ""
 "</option> may be used to provide an environment similar to what the user "
 "would expect had the user logged in directly."
 msgstr ""
-"<command>Su</command> permet de devenir un autre utilisateur pour la durée "
-"d'une session. Invoqué sans nom d'utilisateur, le comportement par défaut "
+"La commande <command>su</command> permet de devenir un autre utilisateur pour la durée "
+"d'une session. Invoqué sans nom d'<option>utilisateur</option>, le comportement par défaut de <command>su</command>"
 "est de devenir superutilisateur. Le paramètre optionnel <option>-</option> "
 "permet d'obtenir un environnement similaire à celui que l'utilisateur aurait "
 "obtenu lors d'une connexion directe."
@@ -2685,12 +2650,11 @@ msgid "The options which apply to the <command>su</command> command are:"
 msgstr "Les options applicables à la commande <command>su</command> sont :"
 
 #: su.1.xml:128(term)
-#, fuzzy
 msgid ""
 "<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--comment</option> <replaceable>COMMENTAIRE</"
+"<option>-c</option>, <option>--commande</option> <replaceable>COMMANDE</"
 "replaceable>"
 
 #: su.1.xml:133(para)
@@ -2757,11 +2721,10 @@ msgstr ""
 "trouvé par l'une des méthodes ci-dessus."
 
 #: su.1.xml:163(para)
-#, fuzzy
 msgid ""
 "The invoked shell is chosen from (highest priority first): <placeholder-1/>"
 msgstr ""
-"L'interpréteur de commandes est choisi parmi (celui de plus haute priorité "
+"L'interpréteur de commandes a appeler est choisi parmi (le choix de plus haute priorité "
 "en tête) : <placeholder-1/>"
 
 #: su.1.xml:191(para)
@@ -2809,10 +2772,8 @@ msgid ""
 msgstr ""
 
 #: su.1.xml:207(para)
-#, fuzzy
-#| msgid "Preserve the current environment."
 msgid "Preserve the current environment, except for: <placeholder-1/>"
-msgstr "Préserver l'environnement actuel."
+msgstr "Préserver l'environnement actuel, sauf pour : <placeholder-1/>"
 
 #: su.1.xml:233(para)
 msgid ""
@@ -2979,14 +2940,10 @@ msgstr ""
 "partir de lui. Chaque ligne doit être sous la forme nom=valeur."
 
 #: su.1.xml:38(para) login.defs.5.xml:38(para) login.1.xml:38(para)
-#, fuzzy
-#| msgid ""
-#| "The file is formatted like this, with lines starting with a # being "
-#| "treated as comment lines and ignored;"
 msgid "Lines starting with a # are treated as comment lines and ignored."
 msgstr ""
-"Le fichier est formaté de la façon suivante (les lignes commençant par un "
-"« # » sont des commentaires, et sont ignorées) :"
+"Les lignes commençant par un « # » sont considérés comme des "
+"commentaires, et sont ignorées."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 msgid "<option>ENV_PATH</option> (string)"
@@ -3012,13 +2969,6 @@ msgid "<option>ENV_SUPATH</option> (string)"
 msgstr "<option>ENV_SUPATH</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
-#| msgid ""
-#| "If set, it will be used to define the PATH environment variable when the "
-#| "superuser login. The value can be preceded by <replaceable>PATH=</"
-#| "replaceable>, or a colon separated list of paths (for example "
-#| "<replaceable>/sbin:/bin:/usr/sbin:/usr/bin</replaceable>). The default "
-#| "value is <replaceable>PATH=/bin:/usr/bin</replaceable>."
 msgid ""
 "If set, it will be used to define the PATH environment variable when the "
 "superuser login. The value can be preceded by <replaceable>PATH=</"
@@ -3030,7 +2980,7 @@ msgstr ""
 "PATH quand le super-utilisateur se connecte. La valeur peut être précédée "
 "par <replaceable>PATH=</replaceable> ou une liste de chemins séparés par "
 "deux points (par exemple <replaceable>/sbin:/bin:/usr/sbin:/usr/bin</"
-"replaceable>). La valeur par défaut est <replaceable>PATH=/bin:/usr/bin</"
+"replaceable>). La valeur par défaut est <replaceable>PATH=/sbin:/bin:/usr/sbin:/usr/bin</"
 "replaceable>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
@@ -3185,10 +3135,8 @@ msgid "System or authentication failure"
 msgstr ""
 
 #: su.1.xml:393(replaceable)
-#, fuzzy
-#| msgid "12"
 msgid "126"
-msgstr "12"
+msgstr "126"
 
 #: su.1.xml:395(para)
 #, fuzzy
@@ -3197,10 +3145,8 @@ msgid "The requested command was not found"
 msgstr "exécuter une commande avec un autre identifiant de groupe"
 
 #: su.1.xml:399(replaceable)
-#, fuzzy
-#| msgid "12"
 msgid "127"
-msgstr "12"
+msgstr "127"
 
 #: su.1.xml:401(para)
 msgid "The requested command could not be executed"
@@ -3213,14 +3159,6 @@ msgid ""
 msgstr ""
 
 #: su.1.xml:410(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>sg</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>sh</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login.defs</"
@@ -3234,7 +3172,7 @@ msgstr ""
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>sg</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>sh</refentrytitle><manvolnum>1</"
-"manvolnum></citerefentry>"
+"manvolnum></citerefentry>."
 
 #: sg.1.xml:38(refentrytitle) sg.1.xml:43(refname) sg.1.xml:49(command)
 msgid "sg"
@@ -3290,19 +3228,6 @@ msgid "Enable \"syslog\" logging of <command>sg</command> activity."
 msgstr ""
 
 #: sg.1.xml:119(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>login</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -3324,8 +3249,9 @@ msgstr ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>"
+"citerefentry><phrase condition=\"gshadow\">, "
+"<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry></phrase>."
 
 #: shadow.5.xml:34(refentrytitle) shadow.5.xml:39(refname)
 #: shadow.3.xml:34(refentrytitle) shadow.3.xml:39(refname)
@@ -3558,10 +3484,8 @@ msgid "This field is reserved for future use."
 msgstr "Ce champ est réservé pour une utilisation future."
 
 #: shadow.5.xml:245(filename)
-#, fuzzy
-#| msgid "/etc/shadow"
 msgid "/etc/shadow-"
-msgstr "/etc/shadow"
+msgstr "/etc/shadow-"
 
 #: shadow.5.xml:247(para)
 msgid "Backup file for /etc/shadow."
@@ -3893,14 +3817,13 @@ msgid "convert to and from shadow passwords and groups"
 msgstr ""
 "Convertir vers ou depuis les fichiers de mots de passe ou de groupe cachés"
 
-#: pwconv.8.xml:72(para)
-#, fuzzy
+#: pwconv.8.xml:71(para)
 msgid ""
 "The <command>pwconv</command> command creates <emphasis remap=\"I\">shadow</"
 "emphasis> from <emphasis remap=\"I\">passwd</emphasis> and an optionally "
 "existing <emphasis remap=\"I\">shadow</emphasis>."
 msgstr ""
-"<command>pwconv</command> crée le fichier <emphasis remap=\"I\">shadow</"
+"La commande <command>pwconv</command> crée le fichier <emphasis remap=\"I\">shadow</"
 "emphasis> à partir du fichier <emphasis remap=\"I\">passwd</emphasis> et "
 "d'un éventuel fichier <emphasis remap=\"I\">shadow</emphasis>."
 
@@ -3915,14 +3838,13 @@ msgid ""
 msgstr ""
 
 #: pwconv.8.xml:87(para)
-#, fuzzy
 msgid ""
 "The <command>pwunconv</command> command creates <emphasis remap=\"I"
 "\">passwd</emphasis> from <emphasis remap=\"I\">passwd</emphasis> and "
 "<emphasis remap=\"I\">shadow</emphasis> and then removes <emphasis remap=\"I"
 "\">shadow</emphasis>."
 msgstr ""
-"<command>pwunconv</command> crée le fichier <emphasis remap=\"I\">passwd</"
+"La commande <command>pwunconv</command> crée le fichier <emphasis remap=\"I\">passwd</"
 "emphasis> à partir des fichiers <emphasis remap=\"I\">passwd</emphasis> et "
 "<emphasis remap=\"I\">shadow</emphasis> puis supprime <emphasis remap=\"I"
 "\">shadow</emphasis>."
@@ -3936,25 +3858,23 @@ msgid ""
 msgstr ""
 
 #: pwconv.8.xml:102(para)
-#, fuzzy
 msgid ""
 "The <command>grpconv</command> command creates <emphasis remap=\"I"
 "\">gshadow</emphasis> from <emphasis remap=\"I\">group</emphasis> and an "
 "optionally existing <emphasis remap=\"I\">gshadow</emphasis>."
 msgstr ""
-"<command>grpconv</command> crée <emphasis remap=\"I\">gshadow</emphasis> à "
+"La commande <command>grpconv</command> crée <emphasis remap=\"I\">gshadow</emphasis> à "
 "partir de <emphasis remap=\"I\">group</emphasis> et d'un éventuel fichier "
 "<emphasis remap=\"I\">gshadow</emphasis>."
 
 #: pwconv.8.xml:108(para)
-#, fuzzy
 msgid ""
 "The <command>grpunconv</command> command creates <emphasis remap=\"I"
 "\">group</emphasis> from <emphasis remap=\"I\">group</emphasis> and "
 "<emphasis remap=\"I\">gshadow</emphasis> and then removes <emphasis remap=\"I"
 "\">gshadow</emphasis>."
 msgstr ""
-"<command>grpunconv</command> crée <emphasis remap=\"I\">group</emphasis> à "
+"La commande <command>grpunconv</command> crée <emphasis remap=\"I\">group</emphasis> à "
 "partir des fichiers <emphasis remap=\"I\">group</emphasis> et <emphasis "
 "remap=\"I\">gshadow</emphasis> puis supprime <emphasis remap=\"I\">gshadow</"
 "emphasis>."
@@ -4051,16 +3971,6 @@ msgid ""
 msgstr ""
 
 #: pwconv.8.xml:200(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>grpconv</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login.defs</"
@@ -4071,14 +3981,14 @@ msgid ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>tcb_unconvert</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry></phrase>."
 msgstr ""
-"<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>grpconv</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
-"citerefentry>."
+"citerefentry>, <citerefentry><refentrytitle>login.defs</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum></"
+"citerefentry><phrase condition=\"tcb\">, "
+"<citerefentry><refentrytitle>tcb_convert</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>tcb_unconvert</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry></phrase>."
 
 #: pwck.8.xml:43(refentrytitle) pwck.8.xml:48(refname) pwck.8.xml:54(command)
 #: pwck.8.xml:69(command) login.defs.5.xml:392(term)
@@ -4111,7 +4021,6 @@ msgid "-r"
 msgstr "-r"
 
 #: pwck.8.xml:87(para)
-#, fuzzy
 msgid ""
 "The <command>pwck</command> command verifies the integrity of the users and "
 "authentication information. It checks that all entries in <filename>/etc/"
@@ -4121,8 +4030,8 @@ msgid ""
 "The user is prompted to delete entries that are improperly formatted or "
 "which have other uncorrectable errors."
 msgstr ""
-"<command>Pwck</command> vérifie l'intégrité des informations "
-"d'authentification du système. Toutes les entrées des fichiers <filename>/"
+"La commande <command>pwck</command> vérifie l'intégrité des informations "
+"du système concernant les utilisateurs et leur mots de passe. Toutes les entrées des fichiers <filename>/"
 "etc/passwd</filename> et <filename>/etc/shadow</filename> sont vérifiées "
 "afin de s'assurer qu'elles ont le bon format et qu'elles contiennent des "
 "données valables dans chaque champ. Une confirmation de l'utilisateur sera "
@@ -4177,13 +4086,11 @@ msgstr ""
 
 #: pwck.8.xml:137(para)
 msgid "passwords are specified in the shadowed file"
-msgstr ""
+msgstr "les mots de passe sont indiqués dans le fichier des mot de passe cachés"
 
 #: pwck.8.xml:140(para)
-#, fuzzy
-#| msgid "the correct number of fields"
 msgid "shadow entries have the correct number of fields"
-msgstr "nombre correct de champs"
+msgstr "les entrées de shadow ont le bon nombre de champs"
 
 #: pwck.8.xml:143(para)
 msgid "shadow entries are unique in shadow"
@@ -4251,20 +4158,10 @@ msgstr ""
 "shadow</filename> par UID."
 
 #: pwck.8.xml:205(para)
-#, fuzzy
-#| msgid ""
-#| "This option is only valid in combination with the <option>-o</option> "
-#| "option."
 msgid "This option has no effect when <option>USE_TCB</option> is enabled."
-msgstr "Cette option n'est valable qu'avec l'option <option>-o</option>."
+msgstr "Cette option n'a aucun effet quand <option>USE_TCB</option> est activée."
 
 #: pwck.8.xml:212(para)
-#, fuzzy
-#| msgid ""
-#| "By default, <command>pwck</command> operates on the files <filename>/etc/"
-#| "passwd</filename> and <filename>/etc/shadow</filename>. The user may "
-#| "select alternate files with the <emphasis remap=\"I\">passwd</emphasis> "
-#| "and <emphasis remap=\"I\">shadow</emphasis> parameters."
 msgid ""
 "By default, <command>pwck</command> operates on the files <filename>/etc/"
 "passwd</filename> and <filename>/etc/shadow</filename><phrase condition=\"tcb"
@@ -4273,9 +4170,11 @@ msgid ""
 "<replaceable>shadow</replaceable> parameters."
 msgstr ""
 "Par défaut, <command>pwck</command> opère sur les fichiers <filename>/etc/"
-"passwd</filename> et <filename>/etc/shadow</filename>. L'utilisateur peut "
-"spécifier d'autres fichiers avec les paramètres <emphasis remap=\"I"
-"\">passwd</emphasis> et <emphasis remap=\"I\">shadow</emphasis>."
+"passwd</filename> et <filename>/etc/shadow</filename><phrase "
+"condition=\"tcb> (ou les fichiers dans "
+"<filename>/etc/tcb</filename>)</phrase>. L'utilisateur peut "
+"spécifier d'autres fichiers avec les paramètres <replaceable>"
+"passwd</replaceable> et <replaceable>shadow</replaceable>."
 
 #: pwck.8.xml:221(para)
 msgid ""
@@ -4569,10 +4468,8 @@ msgid "optional encrypted password file"
 msgstr "un mot de passe chiffré optionnel"
 
 #: passwd.5.xml:131(filename)
-#, fuzzy
-#| msgid "/etc/passwd"
 msgid "/etc/passwd-"
-msgstr "/etc/passwd"
+msgstr "/etc/passwd-"
 
 #: passwd.5.xml:133(para)
 msgid "Backup file for /etc/passwd."
@@ -4857,15 +4754,11 @@ msgid "Users with a locked password are not allowed to change their password."
 msgstr ""
 
 #: passwd.1.xml:247(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
-#| "replaceable>"
 msgid ""
 "<option>-n</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--mindays</option> <replaceable>JOURS_MIN</"
+"<option>-n</option>, <option>--mindays</option> <replaceable>JOURS_MIN</"
 "replaceable>"
 
 #: passwd.1.xml:251(para) chage.1.xml:146(para)
@@ -5008,20 +4901,16 @@ msgstr ""
 
 #: passwd.1.xml:36(para) newusers.8.xml:36(para) login.defs.5.xml:36(para)
 #: gpasswd.1.xml:36(para) chpasswd.8.xml:36(para) chgpasswd.8.xml:36(para)
-#, fuzzy
-#| msgid ""
-#| "Example: <option>-K </option><replaceable>GID_MIN</"
-#| "replaceable>=<replaceable>100</replaceable><option>-K </"
-#| "option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 msgid ""
 "It can take one of these values: <replaceable>DES</replaceable> (default), "
 "<replaceable>MD5</replaceable><phrase condition=\"sha_crypt\">, "
 "<replaceable>SHA256</replaceable>, <replaceable>SHA512</replaceable></"
 "phrase>."
 msgstr ""
-"Exemple : <option>-K</option> <replaceable>GID_MIN</"
-"replaceable>=<replaceable>10</replaceable> <option>-K</option> "
-"<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Les valeurs suivantes sont acceptées : <replaceable>DES</replaceable> (default), "
+"<replaceable>MD5</replaceable><phrase condition=\"sha_crypt\">, "
+"<replaceable>SHA256</replaceable>, <replaceable>SHA512</replaceable></"
+"phrase>."
 
 #: passwd.1.xml:43(para) newusers.8.xml:43(para) login.defs.5.xml:43(para)
 #: gpasswd.1.xml:43(para) chpasswd.8.xml:43(para) chgpasswd.8.xml:43(para)
@@ -5204,15 +5093,6 @@ msgstr ""
 "quittant : <placeholder-1/>"
 
 #: passwd.1.xml:456(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"no_pam\"><refentrytitle>login.defs</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>shadow</"
@@ -5224,10 +5104,11 @@ msgid ""
 msgstr ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>shadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-"condition=\"no_pam\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, <phrase condition="
+"\"no_pam\"><citerefentry><refentrytitle>login.defs</"
+"refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
+"phrase><citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>."
 
 #: nologin.8.xml:34(refentrytitle) nologin.8.xml:39(refname)
 #: nologin.8.xml:45(command)
@@ -5239,16 +5120,15 @@ msgid "politely refuse a login"
 msgstr "refuser poliment une connexion"
 
 #: nologin.8.xml:51(para)
-#, fuzzy
 msgid ""
 "The <command>nologin</command> command displays a message that an account is "
 "not available and exits non-zero. It is intended as a replacement shell "
 "field for accounts that have been disabled."
 msgstr ""
-"<command>nologin</command> affiche un message indiquant que le compte n'est "
-"pas disponible et retourne avec un code non nul. Ceci est prévu en "
-"remplacement d'un champ de remplacement de l'interpréteur de commandes pour "
-"les comptes qui ont été désactivés."
+"La commande <command>nologin</command> affiche un message indiquant que le compte n'est "
+"pas disponible et retourne avec un code non nul. Elle peut être placée "
+"dans le champ indiquant l'interpréteur de commandes pour les comptes qui "
+"ont été désactivés."
 
 #: nologin.8.xml:56(para)
 msgid ""
@@ -5291,7 +5171,6 @@ msgid "new_users"
 msgstr "nouveaux_utilisateurs"
 
 #: newusers.8.xml:71(para)
-#, fuzzy
 msgid ""
 "The <command>newusers</command> command reads a file of user name and clear-"
 "text password pairs and uses this information to update a group of existing "
@@ -5300,7 +5179,7 @@ msgid ""
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>) with the exceptions "
 "explained below:"
 msgstr ""
-"<command>Newusers</command> lit un fichier contenant des paires de nom "
+"La commande <command>newusers</command> lit un fichier contenant des paires de nom "
 "d'utilisateur et de mot de passe et utilise ces informations pour mettre à "
 "jour un groupe d'utilisateurs existants ou pour créer de nouveaux "
 "utilisateurs. Chaque ligne est au même format que le fichier des mots de "
@@ -5581,7 +5460,6 @@ msgid "group"
 msgstr "groupe"
 
 #: newgrp.1.xml:56(para)
-#, fuzzy
 msgid ""
 "The <command>newgrp</command> command is used to change the current group ID "
 "during a login session. If the optional <option>-</option> flag is given, "
@@ -5589,7 +5467,7 @@ msgid ""
 "in, otherwise the current environment, including current working directory, "
 "remains unchanged."
 msgstr ""
-"<command>Newgrp</command> permet de changer l'identifiant de groupe de "
+"La commande <command>newgrp</command> permet de changer l'identifiant de groupe de "
 "l'utilisateur au cours d'une session. Si l'option <option>-</option> est "
 "fournie, l'environnement de l'utilisateur est réinitialisé, comme si "
 "l'utilisateur venait de se connecter. Sinon, l'environnement actuel, y-"
@@ -5635,19 +5513,6 @@ msgstr ""
 "utilisée."
 
 #: newgrp.1.xml:130(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>login</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#| "citerefentry>, <citerefentry><refentrytitle>sg</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -5669,8 +5534,9 @@ msgstr ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
+"citerefentry><phrase condition=\"gshadow\">, <citerefentry condition="
+"\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry></phrase>."
 
 #: logoutd.8.xml:34(refentrytitle) logoutd.8.xml:39(refname)
 #: logoutd.8.xml:45(command)
@@ -5773,14 +5639,13 @@ msgid "<option>CHFN_AUTH</option> (boolean)"
 msgstr "<option>CHFN_AUTH</option> (booléen)"
 
 #: login.defs.5.xml:34(para) chfn.1.xml:34(para)
-#, fuzzy
 msgid ""
 "If <replaceable>yes</replaceable>, the <command>chfn</command> program will "
 "require authentication before making any changes, unless run by the "
 "superuser."
 msgstr ""
-"La valeur <emphasis remap=\"I\">yes</emphasis> indique que les programmes "
-"<command>chfn</command> et <command>chsh</command> nécessiteront une "
+"La valeur <replaceable>yes</replaceable> indique que le programme "
+"<command>chfn</command> nécessitera une "
 "authentification avant de procéder à tout changement, à moins qu'ils ne "
 "soient exécutés par le superutilisateur."
 
@@ -5822,14 +5687,13 @@ msgid "<option>CHSH_AUTH</option> (boolean)"
 msgstr "<option>CHSH_AUTH</option> (booléen)"
 
 #: login.defs.5.xml:34(para) chsh.1.xml:34(para)
-#, fuzzy
 msgid ""
 "If <replaceable>yes</replaceable>, the <command>chsh</command> program will "
 "require authentication before making any changes, unless run by the "
 "superuser."
 msgstr ""
-"La valeur <emphasis remap=\"I\">yes</emphasis> indique que les programmes "
-"<command>chfn</command> et <command>chsh</command> nécessiteront une "
+"La valeur <replaceable>yes</replaceable> indique que le programme "
+"<command>chsh</command> nécessitera une "
 "authentification avant de procéder à tout changement, à moins qu'ils ne "
 "soient exécutés par le superutilisateur."
 
@@ -5985,12 +5849,6 @@ msgstr ""
 "Le nombre maximum de tentatives de connexion en cas de mauvais mot de passe."
 
 #: login.defs.5.xml:37(para) login.1.xml:37(para)
-#, fuzzy
-#| msgid ""
-#| "This will most likely be overriden by PAM, since the default pam_unix "
-#| "module has it's own built in of 3 retries. However, this is a safe "
-#| "fallback in case you are using an authentication module that does not "
-#| "enforce PAM_MAXTRIES."
 msgid ""
 "This will most likely be overridden by PAM, since the default pam_unix "
 "module has it's own built in of 3 retries. However, this is a safe fallback "
@@ -6032,13 +5890,12 @@ msgid ""
 msgstr ""
 
 #: login.defs.5.xml:184(para)
-#, fuzzy
 msgid ""
 "<option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> and "
 "<option>PASS_WARN_AGE</option> are only used at the time of account "
 "creation. Any changes to these settings won't affect existing accounts."
 msgstr ""
-"Les paramètres PASS_MAX_DAYS, PASS_MIN_DAYS et PASS_WARN_AGE ne sont "
+"Les paramètres <option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> et <option>PASS_WARN_AGE</option> ne sont "
 "utilisés qu'au moment de la création d'un compte. Les changements "
 "n'affecteront pas les comptes existants."
 
@@ -6280,12 +6137,12 @@ msgid ""
 msgstr ""
 
 #: login.defs.5.xml:403(para)
-#, fuzzy
-#| msgid "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UMASK"
 msgid ""
 "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb\">USE_TCB</"
 "phrase>"
-msgstr "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UMASK"
+msgstr ""
+"PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb\">USE_TCB</"
+"phrase>"
 
 #: login.defs.5.xml:420(para)
 msgid ""
@@ -6312,11 +6169,6 @@ msgid "ENV_HZ <phrase condition=\"no_pam\">ENV_TZ</phrase>"
 msgstr "ENV_HZ <phrase condition=\"no_pam\">ENV_TZ</phrase>"
 
 #: login.defs.5.xml:446(para)
-#, fuzzy
-#| msgid ""
-#| "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
-#| "PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX "
-#| "SYS_UID_MIN UID_MAX UID_MIN UMASK"
 msgid ""
 "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 "PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN "
@@ -6325,23 +6177,24 @@ msgid ""
 msgstr ""
 "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 "PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN "
-"UID_MAX UID_MIN UMASK"
+"UID_MAX UID_MIN UMASK <phrase condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINK "
+"USE_TCB</phrase>"
 
 #: login.defs.5.xml:460(para)
-#, fuzzy
-#| msgid "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
 msgid ""
 "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB <phrase "
 "condition=\"tcb\">TCB_SYMLINKS USE_TCB</phrase>"
-msgstr "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
+msgstr ""
+"MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB <phrase "
+"condition=\"tcb\">TCB_SYMLINKS USE_TCB</phrase>"
 
 #: login.defs.5.xml:470(para)
-#, fuzzy
-#| msgid "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
 msgid ""
 "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase condition=\"tcb"
 "\">TCB_SYMLINKS USE_TCB</phrase>"
-msgstr "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB"
+msgstr ""
+"MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase condition=\"tcb"
+"\">TCB_SYMLINKS USE_TCB</phrase>"
 
 #: login.defs.5.xml:489(para)
 msgid ""
@@ -6817,13 +6670,11 @@ msgstr "utilisateur LISTE_DE_LIMITES"
 
 #: limits.5.xml:67(para)
 msgid "or in the form:"
-msgstr ""
+msgstr "ou sous la forme :"
 
 #: limits.5.xml:70(emphasis)
-#, fuzzy
-#| msgid "user LIMITS_STRING"
 msgid "@group LIMITS_STRING"
-msgstr "utilisateur LISTE_DE_LIMITES"
+msgstr "@groupe LISTE_DE_LIMITES"
 
 #: limits.5.xml:73(para)
 msgid ""
@@ -7092,7 +6943,7 @@ msgid ""
 "<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</replaceable>|"
 "<replaceable>INTERVALLE</replaceable>"
 
 #: lastlog.8.xml:107(para)
@@ -7302,7 +7153,6 @@ msgid "verify integrity of group files"
 msgstr "Vérifier l'intégrité des fichiers d'administration des groupes"
 
 #: grpck.8.xml:70(para)
-#, fuzzy
 msgid ""
 "The <command>grpck</command> command verifies the integrity of the groups "
 "information. It checks that all entries in <filename>/etc/group</"
@@ -7311,9 +7161,9 @@ msgid ""
 "is prompted to delete entries that are improperly formatted or which have "
 "other uncorrectable errors."
 msgstr ""
-"<command>Grpck</command> vérifie l'intégrité des informations "
-"d'authentification du système. Toutes les entrées des fichiers <filename>/"
-"etc/group</filename> et <filename>/etc/gshadow</filename> sont vérifiées "
+"La commande <command>grpck</command> vérifie l'intégrité des informations "
+"sur les groupes du système. Toutes les entrées des fichiers <filename>/"
+"etc/group</filename><phrase condition=\"gshadow\"> et <filename>/etc/gshadow</filename></phrase> sont vérifiées "
 "afin de s'assurer qu'elles ont le bon format et qu'elles contiennent des "
 "données valables dans chaque champ. Une confirmation de l'utilisateur sera "
 "demandée pour détruire les entrées mal formatées ou ayant d'autres erreurs "
@@ -7474,17 +7324,6 @@ msgstr ""
 "quittant : <placeholder-1/>"
 
 #: grpck.8.xml:255(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#| "manvolnum>, </citerefentry><citerefentry><refentrytitle>passwd</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>groupmod</"
@@ -7499,13 +7338,14 @@ msgid ""
 msgstr ""
 "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>groupmod</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
-"condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-"manvolnum>, </citerefentry><citerefentry><refentrytitle>passwd</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>shadow</"
-"refentrytitle><manvolnum>5</manvolnum></citerefentry>."
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase condition="
+"\"gshadow\"><citerefentry><refentrytitle>gshadow</"
+"refentrytitle><manvolnum>5</manvolnum>, </citerefentry>, </"
+"phrase><citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>pwck</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>."
 
 #: groups.1.xml:34(refentrytitle) groups.1.xml:39(refname)
 #: groups.1.xml:45(command)
@@ -7573,7 +7413,6 @@ msgid "GROUP"
 msgstr "GROUPE"
 
 #: groupmod.8.xml:59(para)
-#, fuzzy
 msgid ""
 "The <command>groupmod</command> command modifies the definition of the "
 "specified <replaceable>GROUP</replaceable> by modifying the appropriate "
@@ -7760,7 +7599,7 @@ msgid ""
 "<option>-a</option>, <option>--add</option><replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>nom_utilisateur</"
+"<option>-a</option>, <option>--add</option> <replaceable>nom_utilisateur</"
 "replaceable>"
 
 #: groupmems.8.xml:84(para)
@@ -7780,7 +7619,7 @@ msgid ""
 "<option>-d</option>, <option>--delete</option><replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>nom_utilisateur</"
+"<option>-d</option>, <option>--delete</option> <replaceable>nom_utilisateur</"
 "replaceable>"
 
 #: groupmems.8.xml:95(para)
@@ -7798,7 +7637,7 @@ msgid ""
 "<option>-g</option>, <option>--group</option><replaceable>group_name</"
 "replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--group</option><replaceable>nom_groupe</"
+"<option>-g</option>, <option>--group</option> <replaceable>nom_groupe</"
 "replaceable>"
 
 #: groupmems.8.xml:111(para)
@@ -8146,21 +7985,16 @@ msgstr ""
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: gpasswd.1.xml:49(phrase)
-#, fuzzy
-#| msgid "administer the <placeholder-1/> file"
 msgid "administer <placeholder-1/>"
-msgstr "Administrer le fichier <placeholder-1/>"
+msgstr "Administrer <placeholder-1/>"
 
 #: gpasswd.1.xml:52(phrase)
-#, fuzzy
-#| msgid "-K <placeholder-1/>=<placeholder-2/>"
 msgid "administer <placeholder-1/> and <placeholder-2/>"
-msgstr "-K <placeholder-1/>=<placeholder-2/>"
+msgstr "Administrer <placeholder-1/> et <placeholder-2/>"
 
 #: gpasswd.1.xml:63(replaceable)
-#, fuzzy
 msgid "option"
-msgstr "options"
+msgstr "option"
 
 #: gpasswd.1.xml:73(para)
 msgid ""
@@ -8234,19 +8068,18 @@ msgstr ""
 
 #: gpasswd.1.xml:117(para)
 msgid "The options cannot be combined."
-msgstr ""
+msgstr "Les options ne peuvent pas être combinées."
 
 #: gpasswd.1.xml:120(para)
-#, fuzzy
 msgid "The options which apply to the <command>gpasswd</command> command are:"
 msgstr ""
-"Les options disponibles pour la commande <command>passwd</command> sont :"
+"Les options disponibles pour la commande <command>gpasswd</command> sont :"
 
 #: gpasswd.1.xml:125(term)
 msgid ""
 "<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>utilisateur</"
+"<option>-a</option>, <option>--add</option> <replaceable>utilisateur</"
 "replaceable>"
 
 #: gpasswd.1.xml:129(para)
@@ -8262,7 +8095,7 @@ msgstr ""
 msgid ""
 "<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>utilisateur</"
+"<option>-d</option>, <option>--delete</option> <replaceable>utilisateur</"
 "replaceable>"
 
 #: gpasswd.1.xml:142(para)
@@ -8302,7 +8135,7 @@ msgid ""
 "replaceable>,..."
 msgstr ""
 "<option>-A</option>, <option>--administrators</"
-"option><replaceable>utilisateur</replaceable>,..."
+"option> <replaceable>utilisateur</replaceable>,..."
 
 #: gpasswd.1.xml:193(para)
 #, fuzzy
@@ -8314,7 +8147,7 @@ msgid ""
 "<option>-M</option>, <option>--members</option><replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-M</option>, <option>--members</option><replaceable>utilisateur</"
+"<option>-M</option>, <option>--members</option> <replaceable>utilisateur</"
 "replaceable>,..."
 
 #: gpasswd.1.xml:205(para)
@@ -8424,15 +8257,11 @@ msgid ""
 msgstr ""
 
 #: faillog.8.xml:103(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-l</option>, <option>--lock-time</option><replaceable>SEC</"
-#| "replaceable>"
 msgid ""
 "<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--lock-time</option> <replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option> <replaceable>SEC</"
 "replaceable>"
 
 # NOTE: s/to/during/
@@ -8731,13 +8560,12 @@ msgid "update passwords in batch mode"
 msgstr "Mettre à jour des mots de passe par lot"
 
 #: chpasswd.8.xml:61(para)
-#, fuzzy
 msgid ""
 "The <command>chpasswd</command> command reads a list of user name and "
 "password pairs from standard input and uses this information to update a "
 "group of existing users. Each line is of the format:"
 msgstr ""
-"<command>Chpasswd</command> lit une liste de paires de noms d'utilisateurs "
+"La commande <command>chpasswd</command> lit une liste de paires de noms d'utilisateurs "
 "et de mots de passe depuis l'entrée standard et utilise ces informations "
 "pour mettre à jour un groupe d'utilisateurs existants. Chaque ligne est au "
 "format suivant :"
@@ -8806,24 +8634,20 @@ msgstr ""
 "Les options disponibles pour la commande <command>chpasswd</command> sont :"
 
 #: chpasswd.8.xml:115(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
-#| "replaceable>"
 msgid ""
 "<option>-c</option>, <option>--crypt-method</option><replaceable>METHOD</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--comment</option> <replaceable>COMMENTAIRE</"
+"<option>-c</option>, <option>--crypt-method</option><replaceable>MÉTHODE</"
 "replaceable>"
 
 #: chpasswd.8.xml:121(para) chgpasswd.8.xml:98(para)
 msgid "The available methods are DES, MD5, and NONE."
-msgstr ""
+msgstr "Les méthodes disponibles sont DES, MD5 et NONE."
 
 #: chpasswd.8.xml:128(para)
 msgid "By default, PAM is used to encrypt the passwords."
-msgstr ""
+msgstr "Par défaut, PAM est utilisé pour chiffrer les mots de passe."
 
 #: chpasswd.8.xml:131(para)
 msgid ""
@@ -8895,15 +8719,6 @@ msgid "PAM configuration for <command>chpasswd</command>."
 msgstr ""
 
 #: chpasswd.8.xml:254(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>newusers</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
-#| "condition=\"no_pam\"><refentrytitle>login.defs</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>newusers</"
@@ -8914,9 +8729,9 @@ msgid ""
 msgstr ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>newusers</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry "
-"condition=\"no_pam\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+"<phrase><citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: chgpasswd.8.xml:48(refpurpose)
@@ -8924,13 +8739,12 @@ msgid "update group passwords in batch mode"
 msgstr "Mettre à jour par lot des mots de passe des groupes"
 
 #: chgpasswd.8.xml:62(para)
-#, fuzzy
 msgid ""
 "The <command>chgpasswd</command> command reads a list of group name and "
 "password pairs from standard input and uses this information to update a set "
 "of existing groups. Each line is of the format:"
 msgstr ""
-"<command>Chgpasswd</command> lit une liste de paires de noms de groupes et "
+"La commande <command>chgpasswd</command> lit une liste de paires de noms de groupes et "
 "de mots de passe depuis l'entrée standard et utilise ces informations pour "
 "mettre à jour un ensemble de groupes existants. Chaque ligne est au format "
 "suivant :"
@@ -9303,58 +9117,7 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: chage.1.xml:0(None)
 msgid "translator-credits"
-msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
-
-#, fuzzy
-#~| msgid ""
-#~| "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</"
-#~| "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~| "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#~| "citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~| "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~| "manvolnum></citerefentry>, <citerefentry><refentrytitle>pam</"
-#~| "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
-#~ "condition=\"tcb\"><refentrytitle>tcb</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pam</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry><citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>."
+msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005-2010."
 
 #~ msgid ""
 #~ "Note: <option>-K </option><replaceable>UID_MIN</"
@@ -9366,46 +9129,8 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "replaceable>=<replaceable>499</replaceable> ne fonctionne pas pour "
 #~ "l'instant."
 
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwck</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>."
-
-#~ msgid "<replaceable>DES</replaceable> (default)"
-#~ msgstr "<replaceable>DES</replaceable> (par défaut)"
-
-#~ msgid "MD5"
-#~ msgstr "MD5"
-
-#~ msgid "SHA256"
-#~ msgstr "SHA256"
-
-#~ msgid "SHA512"
-#~ msgstr "SHA512"
-
 #~ msgid "It can take one of these values: <placeholder-1/>"
 #~ msgstr "Il peut prendre une de ces valeurs : <placeholder-1/>"
-
-#~ msgid ""
-#~ "ENCRYPT_METHOD MD5_CRYPT_ENAB <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
-#~ msgstr ""
-#~ "ENCRYPT_METHOD MD5_CRYPT_ENAB <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
-
-#~ msgid "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE"
-#~ msgstr "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE"
-
-#~ msgid "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP"
-#~ msgstr "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP"
 
 #~ msgid "The supplied passwords must be in clear-text."
 #~ msgstr "Les mots de passe doivent être fournis en clair."
@@ -9616,79 +9341,6 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "Ces informations sont prioritaires sur tous les autres champs présents "
 #~ "dans <filename>/etc/passwd</filename>."
 
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>chage</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwconv</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwunconv</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>chage</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwconv</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwunconv</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>getent</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>getpwnam</"
-#~ "refentrytitle><manvolnum>3</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwconv</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwunconv</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>getent</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>su</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>getpwnam</"
-#~ "refentrytitle><manvolnum>3</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwconv</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>pwunconv</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>sulogin</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>."
-
 #, fuzzy
 #~ msgid ""
 #~ "This field will be checked for existence as a directory, and a new "
@@ -9699,55 +9351,6 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "L'existence du répertoire indiqué dans ce champ est vérifiée, et dans le "
 #~ "cas contraire, le répertoire est créé. Le propriétaire du répertoire sera "
 #~ "l'utilisateur dont le compte est créé ou mis à jour."
-
-#, fuzzy
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>."
-
-#~ msgid "-a"
-#~ msgstr "-a"
-
-#~ msgid "-d"
-#~ msgstr "-d"
-
-#~ msgid "-g"
-#~ msgstr "-g"
-
-#~ msgid "GID"
-#~ msgstr "GID"
-
-#~ msgid "-o"
-#~ msgstr "-o"
-
-#~ msgid "KEY"
-#~ msgstr "CLÉ"
-
-#~ msgid "VALUE"
-#~ msgstr "VALEUR"
-
-#, fuzzy
-#~ msgid "-R"
-#~ msgstr "-"
-
-#, fuzzy
-#~ msgid "<option>-A</option><replaceable>user</replaceable>,..."
-#~ msgstr ""
-#~ "<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
-
-#, fuzzy
-#~ msgid "<option>-M</option><replaceable>user</replaceable>,..."
-#~ msgstr ""
-#~ "<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
 
 #~ msgid "Display faillog records for all users."
 #~ msgstr "Afficher les échecs de tous les utilisateurs."
@@ -9765,13 +9368,6 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "limite d'échec. La limite pour l'utilisateur <emphasis>root</emphasis> "
 #~ "devrait toujours être 0 pour éviter tout risque de déni de service contre "
 #~ "le système."
-
-#~ msgid ""
-#~ "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
-#~ "replaceable>"
-#~ msgstr ""
-#~ "<option>-u</option>, <option>--user</option> <replaceable>IDENTIFIANT</"
-#~ "replaceable>"
 
 #~ msgid ""
 #~ "The user's home directory will be created if it does not exist. The files "
@@ -9888,73 +9484,12 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "alors effectuée, les entrées sont seulement triées."
 
 #~ msgid ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-
-#~ msgid "MAIL_DIR USERDEL_CMD"
-#~ msgstr "MAIL_DIR USERDEL_CMD"
-
-#~ msgid "MAIL_DIR"
-#~ msgstr "MAIL_DIR"
-
-#~ msgid "CHFN_AUTH"
-#~ msgstr "CHFN_AUTH"
-
-#~ msgid "GID_MAX GID_MIN"
-#~ msgstr "GID_MAX GID_MIN"
-
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>newusers</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>newusers</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#~ "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>."
-
-#~ msgid ""
-#~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-#~ msgstr ""
-#~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
-
-#~ msgid ""
 #~ "The name of the new user's login shell. The named program will be used "
 #~ "for all future new user accounts."
 #~ msgstr ""
 #~ "Nom de l'interpréteur de commandes initial (« login shell ») d'un nouvel "
 #~ "utilisateur. Le programme nommé sera utilisé pour tous les futurs "
 #~ "nouveaux comptes utilisateur."
-
-#~ msgid "-R <placeholder-1/>"
-#~ msgstr "-R <placeholder-1/>"
-
-#~ msgid "user,"
-#~ msgstr "utilisateur,"
-
-#~ msgid "-A <placeholder-1/>"
-#~ msgstr "-A <placeholder-1/>"
-
-#~ msgid "-M <placeholder-1/>"
-#~ msgstr "-M <placeholder-1/>"
 
 #~ msgid ""
 #~ "Group administrator can add and delete users using <option>-a</option> "
@@ -9973,13 +9508,6 @@ msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
 #~ "<command>newgrp</command> pour utiliser ce groupe. L'option <option>-R</"
 #~ "option> désactive l'accès au groupe via la commande <command>newgrp</"
 #~ "command> (sauf pour les membres du groupe)."
-
-#~ msgid ""
-#~ "<option>-c</option>, <option>--command</option><replaceable>SHELL</"
-#~ "replaceable>"
-#~ msgstr ""
-#~ "<option>-c</option>, <option>--command</"
-#~ "option><replaceable>INTERPRÉTEUR_COMMANDES</replaceable>"
 
 #, fuzzy
 #~ msgid ""
