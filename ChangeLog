@@ -1,5 +1,9 @@
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Re-indent.
+
+2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Avoid multi-statements lines.
 
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>

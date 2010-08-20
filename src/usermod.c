@@ -1821,20 +1821,25 @@ int main (int argc, char **argv)
 
 	if (!mflg && (uflg || gflg)) {
 		if (access (dflg ? user_newhome : user_home, F_OK) == 0) {
-		/*
-		 * Change the UID on all of the files owned by `user_id' to
-		 * `user_newid' in the user's home directory.
-		 *
-		 * move_home() already takes care of changing the ownership.
-		 */
-		if (chown_tree (dflg ? user_newhome : user_home,
-		                user_id,  uflg ? user_newid  : (uid_t)-1,
-		                user_gid, gflg ? user_newgid : (gid_t)-1) != 0) {
-			fprintf (stderr,
-			         _("%s: Failed to change ownership of the home directory"),
-			         Prog);
-			fail_exit (E_HOMEDIR);
-		}
+			/*
+			 * Change the UID on all of the files owned by
+			 * `user_id' to `user_newid' in the user's home
+			 * directory.
+			 *
+			 * move_home() already takes care of changing the
+			 * ownership.
+			 *
+			 */
+			if (chown_tree (dflg ? user_newhome : user_home,
+			                user_id,
+			                uflg ? user_newid  : (uid_t)-1,
+			                user_gid,
+			                gflg ? user_newgid : (gid_t)-1) != 0) {
+				fprintf (stderr,
+				         _("%s: Failed to change ownership of the home directory"),
+				         Prog);
+				fail_exit (E_HOMEDIR);
+			}
 		}
 	}
 
