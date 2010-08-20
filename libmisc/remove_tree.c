@@ -96,7 +96,7 @@ int remove_tree (const char *root, bool remove_root)
 			err = -1;
 			break;
 		}
-		snprintf (new_name, new_len, "%s/%s", root, ent->d_name);
+		(void) snprintf (new_name, new_len, "%s/%s", root, ent->d_name);
 		if (LSTAT (new_name, &sb) == -1) {
 			continue;
 		}
