@@ -742,7 +742,8 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	     NULL != ptr;
 #endif
 	     ptr = ptr->next) {
-		entries[n++] = ptr;
+		entries[n] = ptr;
+		n++;
 	}
 	qsort (entries, n, sizeof (struct commonio_entry *), cmp);
 
