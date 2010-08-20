@@ -1,5 +1,9 @@
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Avoid implicit conversion from signed to unsigned.
+
+2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Make sure there are no NULL pointer dereference.
 
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>

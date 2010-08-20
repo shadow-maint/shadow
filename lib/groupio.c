@@ -382,16 +382,19 @@ static int split_groups (unsigned int max_members)
 		struct commonio_entry *new;
 		struct group *new_gptr;
 		unsigned int members = 0;
-		int i;
+		unsigned int i;
 
 		/* Check if this group must be split */
-		if (!gr->changed)
+		if (!gr->changed) {
 			continue;
-		if (NULL == gptr)
+		}
+		if (NULL == gptr) {
 			continue;
+		}
 		for (members = 0; NULL != gptr->gr_mem[members]; members++);
-		if (members <= max_members)
+		if (members <= max_members) {
 			continue;
+		}
 
 		new = (struct commonio_entry *) malloc (sizeof *new);
 		if (NULL == new) {
