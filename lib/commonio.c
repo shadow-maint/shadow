@@ -713,6 +713,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	for (ptr = db->head;
 	        (NULL != ptr)
 #if KEEP_NIS_AT_END
+	     && (NULL != ptr->line)
 	     && ('+' != ptr->line[0])
 #endif
 	     ;
@@ -720,7 +721,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		n++;
 	}
 #if KEEP_NIS_AT_END
-	if (NULL != ptr) {
+	if ((NULL != ptr) && (NULL != ptr->line)) {
 		nis = ptr;
 	}
 #endif
@@ -741,7 +742,10 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 #else
 	     NULL != ptr;
 #endif
-	     ptr = ptr->next) {
+/*@ -nullderef @*/
+	     ptr = ptr->next
+/*@ +nullderef @*/
+	    ) {
 		entries[n] = ptr;
 		n++;
 	}
