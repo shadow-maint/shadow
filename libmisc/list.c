@@ -141,7 +141,7 @@
 	return tmp;
 }
 
-/*@only@*/ /*@out@*/char **dup_list (char *const *list)
+/*@only@*/ /*@out@*/char **dup_list (const char *const *list)
 {
 	int i;
 	char **tmp;
@@ -163,7 +163,7 @@
 	return tmp;
 }
 
-bool is_on_list (char *const *list, const char *member)
+bool is_on_list (const char *const *list, const char *member)
 {
 	assert (NULL != member);
 	assert (NULL != list);

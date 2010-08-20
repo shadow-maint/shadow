@@ -1,5 +1,11 @@
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h, libmisc/list.c: dup_list() and is_on_list() do
+	not change the members of the list they receive. Added const
+	qualifiers.
+
+2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Re-indent.
 
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
