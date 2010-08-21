@@ -370,7 +370,7 @@ if test "$with_attr" != "no"; then
 		else
 			AC_DEFINE(WITH_ATTR, 1,
 			          [Build shadow with Extended Attributes support])
-			LIBACL="-lattr"
+			LIBATTR="-lattr"
 			with_attr="yes"
 		fi
 	else

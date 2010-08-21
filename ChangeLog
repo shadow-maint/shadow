@@ -1,5 +1,27 @@
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Fixed typo.
+
+2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/console.c, libmisc/motd.c, libmisc/setupenv.c,
+	libmisc/sulog.c, libmisc/hushed.c, libmisc/failure.c,
+	libmisc/loginprompt.c, libmisc/ttytype.c,
+	libmisc/pam_pass_non_interractive.c, src/userdel.c, src/login.c,
+	lib/commonio.c, lib/commonio.h: Fix some const issues.
+	* libmisc/motd.c: Avoid multi-statements lines.
+	* libmisc/motd.c: Support long MOTD_FILE.
+	* libmisc/list.c, lib/prototypes.h: Revert previous change.
+	dup_list and is_on_list are used with members as defined for the
+	group structure, and thus even if the list is not modified, the
+	list elements cannot be constant strings.
+	* libmisc/system.c: Avoid C++ comments.
+	* src/vipw.c: WITH_TCB cannot be tested inside a gettextized
+	string. Split the Usage string.
+	* lib/commonio.h: Re-indent.
+
+2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/audit_help.c (audit_logger):pgname is not used. We let
 	audit find out the name of the program.
 	* libmisc/audit_help.c: Re-indent.
