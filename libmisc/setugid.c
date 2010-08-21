@@ -131,7 +131,7 @@ int setup_uid_gid (const struct passwd *info)
 
 #if defined (HAVE_INITGROUPS) && ! defined (USE_PAM)
 	if (is_console) {
-		char *cp = getdef_str ("CONSOLE_GROUPS");
+		const char *cp = getdef_str ("CONSOLE_GROUPS");
 
 		if ((NULL != cp) && (add_groups (cp) != 0)) {
 			perror ("Warning: add_groups");

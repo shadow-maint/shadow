@@ -200,7 +200,7 @@ static void read_env_file (const char *filename)
 void setup_env (struct passwd *info)
 {
 #ifndef USE_PAM
-	char *envf;
+	const char *envf;
 #endif
 	const char *cp;
 

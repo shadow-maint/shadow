@@ -226,7 +226,7 @@ static const char *obscure_msg (const char *old, const char *new,
 	size_t maxlen, oldlen, newlen;
 	char *new1, *old1;
 	const char *msg;
-	char *result;
+	const char *result;
 
 	oldlen = strlen (old);
 	newlen = strlen (new);
