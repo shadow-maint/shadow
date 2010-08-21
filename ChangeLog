@@ -2,6 +2,7 @@
 
 	* src/passwd.c: Fix a const issue.
 	* src/passwd.c: Avoid multi-statements lines.
+	* src/sulogin.c: Fix a const issue.
 
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -80,7 +80,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 
  /*ARGSUSED*/ int main (int argc, char **argv)
 {
-	char *cp;
+	const char *env;
 	char **envp = environ;
 	TERMIO termio;
 	int err = 0;
@@ -162,13 +162,13 @@ static RETSIGTYPE catch_signals (unused int sig)
 
 #ifndef USE_PAM
 
-	cp = getdef_str ("ENV_TZ");
-	if (NULL != cp) {
-		addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+	env = getdef_str ("ENV_TZ");
+	if (NULL != env) {
+		addenv (('/' == *env) ? tz (env) : env, NULL);
 	}
-	cp = getdef_str ("ENV_HZ");
-	if (NULL != cp) {
-		addenv (cp, NULL);	/* set the default $HZ, if one */
+	env = getdef_str ("ENV_HZ");
+	if (NULL != env) {
+		addenv (env, NULL);	/* set the default $HZ, if one */
 	}
 #endif				/* !USE_PAM */
 
@@ -178,6 +178,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	(void) alarm (ALARM);		/* only wait so long ... */
 
 	while (true) {		/* repeatedly get login/password pairs */
+		char *cp;
 		pw_entry (name, &pwent);	/* get entry from password file */
 		if (pwent.pw_name == (char *) 0) {
 			/*
