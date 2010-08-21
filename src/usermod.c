@@ -1444,6 +1444,7 @@ static void move_home (void)
 		} else {
 			if (EXDEV == errno) {
 				if (copy_tree (user_home, user_newhome, true,
+				               true,
 				               user_id,
 				               uflg ? user_newid : (uid_t)-1,
 				               user_gid,

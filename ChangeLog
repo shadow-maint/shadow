@@ -1,5 +1,12 @@
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c, lib/prototypes.h: Caller can choose not to
+	copy the extended attributes (the SELinux context is hence reset)
+	* src/usermod.c: Copy the extended attributes.
+	* src/useradd.c: Only reset the SELinux context.
+
+2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: Fixed typo.
 
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
