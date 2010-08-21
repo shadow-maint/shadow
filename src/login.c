@@ -533,7 +533,7 @@ int main (int argc, char **argv)
 #endif
 	int err;
 	const char *cp;
-	char *tmp;
+	const char *tmp;
 	char fromhost[512];
 	struct passwd *pwd = NULL;
 	char **envp = environ;

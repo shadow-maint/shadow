@@ -141,7 +141,13 @@
 	return tmp;
 }
 
-/*@only@*/ /*@out@*/char **dup_list (const char *const *list)
+/*
+ * Duplicate a list.
+ * The input list is not modified, but in order to allow the use of this
+ * function with list of members, the list elements are not enforced to be
+ * constant strings here.
+ */
+/*@only@*/ /*@out@*/char **dup_list (char *const *list)
 {
 	int i;
 	char **tmp;
@@ -163,7 +169,13 @@
 	return tmp;
 }
 
-bool is_on_list (const char *const *list, const char *member)
+/*
+ * Check if member is part of the input list
+ * The input list is not modified, but in order to allow the use of this
+ * function with list of members, the list elements are not enforced to be
+ * constant strings here.
+ */
+bool is_on_list (char *const *list, const char *member)
 {
 	assert (NULL != member);
 	assert (NULL != list);
@@ -187,7 +199,7 @@ bool is_on_list (const char *const *list, const char *member)
 	char *members;
 	char **array;
 	int i;
-	const char *cp;
+	char *cp;
 	char *cp2;
 
 	assert (NULL != comma);

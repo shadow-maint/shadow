@@ -83,19 +83,19 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
  */
 static void usage (int status)
 {
-	(void)
-	fputs (_("Usage: vipw [options]\n"
-	         "\n"
-	         "Options:\n"
-	         "  -g, --group                   edit group database\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -p, --passwd                  edit passwd database\n"
-	         "  -q, --quiet                   quiet mode\n"
-	         "  -s, --shadow                  edit shadow or gshadow database\n"
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fputs (_("Usage: vipw [options]\n"
+	                "\n"
+	                "Options:\n"), usageout);
+	(void) fputs (_("  -g, --group                   edit group database\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -p, --passwd                  edit passwd database\n"), usageout);
+	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
+	(void) fputs (_("  -s, --shadow                  edit shadow or gshadow database\n"), usageout);
 #ifdef WITH_TCB
-	         "  -u, --user                    which user's tcb shadow file to edit\n"
+	(void) fputs (_("  -u, --user                    which user's tcb shadow file to edit\n"), usageout);
 #endif				/* WITH_TCB */
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	(void) fputs (_("\n"), usageout);
 	exit (status);
 }
 

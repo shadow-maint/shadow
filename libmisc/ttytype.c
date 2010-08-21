@@ -45,7 +45,7 @@ void ttytype (const char *line)
 {
 	FILE *fp;
 	char buf[BUFSIZ];
-	char *typefile;
+	const char *typefile;
 	char *cp;
 	char type[BUFSIZ];
 	char port[BUFSIZ];

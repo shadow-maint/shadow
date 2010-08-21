@@ -60,9 +60,9 @@ int safe_system (const char *command,
 
 	fd = open ("/dev/null", O_RDWR);
 	/* Child */
-	dup2 (fd, 0);	// Close Stdin
+	dup2 (fd, 0);           /* Close Stdin */
 	if (ignore_stderr) {
-		dup2 (fd, 2);	// Close Stderr
+		dup2 (fd, 2);   /* Close Stderr */
 	}
 
 	execve (command, (char *const *) argv, (char *const *) env);

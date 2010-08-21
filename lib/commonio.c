@@ -780,7 +780,8 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 /*
  * Sort entries in db according to order in another.
  */
-int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
+int commonio_sort_wrt (struct commonio_db *shadow,
+                       const struct commonio_db *passwd)
 {
 	struct commonio_entry *head = NULL, *pw_ptr, *spw_ptr;
 	const char *name;

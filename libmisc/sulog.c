@@ -47,7 +47,7 @@
  */
 void sulog (const char *tty, bool success, const char *oldname, const char *name)
 {
-	char *sulog_file;
+	const char *sulog_file;
 	time_t now;
 	struct tm *tm;
 	FILE *fp;
@@ -62,8 +62,10 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 			"FAILED su for %s by %s",name,oldname));
 	}
 
-	if ((sulog_file = getdef_str ("SULOG_FILE")) == (char *) 0)
+	sulog_file = getdef_str ("SULOG_FILE");
+	if (NULL == sulog_file) {
 		return;
+	}
 
 	oldgid = getgid ();
 	oldmask = umask (077);

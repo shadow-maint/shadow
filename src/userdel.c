@@ -596,7 +596,7 @@ static void update_user (void)
 
 static void user_cancel (const char *user)
 {
-	char *cmd;
+	const char *cmd;
 	pid_t pid, wpid;
 	int status;
 

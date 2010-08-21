@@ -50,7 +50,8 @@ static bool is_listed (const char *cfgin, const char *tty, bool def);
 static bool is_listed (const char *cfgin, const char *tty, bool def)
 {
 	FILE *fp;
-	char buf[200], *cons, *s;
+	char buf[200], *s;
+	const char *cons;
 
 	/*
 	 * If the CONSOLE configuration definition isn't given,

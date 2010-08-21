@@ -296,7 +296,7 @@ void failtmp (const char *username,
 #endif				/* !USE_UTMPX */
     )
 {
-	char *ftmp;
+	const char *ftmp;
 	int fd;
 
 	/*

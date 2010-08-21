@@ -50,7 +50,7 @@
 bool hushed (const char *username)
 {
 	struct passwd *pw;
-	char *hushfile;
+	const char *hushfile;
 	char buf[BUFSIZ];
 	bool found;
 	FILE *fp;

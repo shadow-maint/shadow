@@ -87,9 +87,9 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 */
 
 	if (NULL != prompt) {
-		cp = getdef_str ("ISSUE_FILE");
-		if (NULL != cp) {
-			fp = fopen (cp, "r");
+		const char *fname = getdef_str ("ISSUE_FILE");
+		if (NULL != fname) {
+			fp = fopen (fname, "r");
 			if (NULL != fp) {
 				while ((i = getc (fp)) != EOF) {
 					(void) putc (i, stdout);

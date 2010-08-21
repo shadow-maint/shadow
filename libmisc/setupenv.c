@@ -202,7 +202,7 @@ void setup_env (struct passwd *info)
 #ifndef USE_PAM
 	char *envf;
 #endif
-	char *cp;
+	const char *cp;
 
 	/*
 	 * Change the current working directory to be the home directory
