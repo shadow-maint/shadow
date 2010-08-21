@@ -1,5 +1,10 @@
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Fix a const issue.
+	* src/passwd.c: Avoid multi-statements lines.
+
+2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c, lib/prototypes.h: Caller can choose not to
 	copy the extended attributes (the SELinux context is hence reset)
 	* src/usermod.c: Copy the extended attributes.
