@@ -1,3 +1,9 @@
+2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/audit_help.c (audit_logger):pgname is not used. We let
+	audit find out the name of the program.
+	* libmisc/audit_help.c: Re-indent.
+
 2010-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/groupio.c: Avoid implicit conversion from signed to unsigned.

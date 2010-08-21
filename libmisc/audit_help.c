@@ -76,7 +76,7 @@ void audit_help_open (void)
  * id  -  uid or gid that the operation is being performed on. This is used
  *	  only when user is NULL.
  */
-void audit_logger (int type, const char *pgname, const char *op,
+void audit_logger (int type, unused const char *pgname, const char *op,
                    const char *name, unsigned int id,
                    shadow_audit_result result)
 {
@@ -84,7 +84,7 @@ void audit_logger (int type, const char *pgname, const char *op,
 		return;
 	} else {
 		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-					NULL, NULL, NULL, (int) result);
+		                        NULL, NULL, NULL, (int) result);
 	}
 }
 
