@@ -42,7 +42,7 @@
 #include "prototypes.h"
 
 /* Global variables */
-char *Prog;
+const char *Prog;
 
 /* local function prototypes */
 static RETSIGTYPE catch_signals (int);

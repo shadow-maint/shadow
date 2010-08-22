@@ -56,7 +56,7 @@
  * Global variables
  */
 /* The name of this command, as it is invoked */
-char *Prog;
+const char *Prog;
 
 #ifdef SHADOWGRP
 /* Indicate if shadow groups are enabled on the system

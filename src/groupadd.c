@@ -70,7 +70,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static /*@null@*/char *group_name;
 static gid_t group_id;

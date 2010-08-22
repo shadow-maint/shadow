@@ -64,7 +64,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static char *adduser = NULL;
 static char *deluser = NULL;

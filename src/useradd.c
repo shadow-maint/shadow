@@ -85,7 +85,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 /*
  * These defaults are used if there is no defaults file.

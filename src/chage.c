@@ -65,7 +65,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static bool
     dflg = false,		/* set last password change date */

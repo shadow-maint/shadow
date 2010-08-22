@@ -1,5 +1,15 @@
 2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c, src/userdel.c, src/grpck.c, src/gpasswd.c,
+	src/newusers.c, src/pwconv.c, src/chpasswd.c, src/logoutd.c,
+	src/chfn.c, src/groupmems.c, src/usermod.c, src/pwunconv.c,
+	src/expiry.c, src/groupdel.c, src/chgpasswd.c, src/useradd.c,
+	src/su.c, src/groupmod.c, src/passwd.c, src/pwck.c, src/chage.c,
+	src/groupadd.c, src/login.c, src/grpconv.c, src/groups.c,
+	src/grpunconv.c, src/chsh.c: Prog changed to a constant string.
+
+2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/limits.c: Avoid implicit conversion of integer to
 	boolean.
 	* libmisc/basename.c: Avoid implicit conversion of pointer to

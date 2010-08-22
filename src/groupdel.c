@@ -55,7 +55,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static char *group_name;
 static gid_t group_id = -1;

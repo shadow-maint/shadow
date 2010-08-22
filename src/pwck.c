@@ -66,7 +66,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static bool use_system_pw_file = true;
 static bool use_system_spw_file = true;

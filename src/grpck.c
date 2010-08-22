@@ -64,7 +64,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static const char *grp_file = GROUP_FILE;
 static bool use_system_grp_file = true;

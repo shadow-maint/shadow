@@ -61,7 +61,7 @@
 /*
  * Global variables
  */
-char *Prog;		/* Program name */
+const char *Prog;		/* Program name */
 static bool amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */

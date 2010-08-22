@@ -48,7 +48,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static bool spw_locked = false;
 static bool pw_locked = false;

@@ -82,7 +82,7 @@ static pam_handle_t *pamh = NULL;
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static const char *hostname = "";
 static /*@null@*/ /*@only@*/char *username = NULL;

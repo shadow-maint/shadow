@@ -43,7 +43,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 #ifndef DEFAULT_HUP_MESG
 #define DEFAULT_HUP_MESG _("login time exceeded\n\n")

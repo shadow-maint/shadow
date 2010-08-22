@@ -58,7 +58,7 @@
 /*
  * Global variables.
  */
-char *Prog;
+const char *Prog;
 static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];

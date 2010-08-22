@@ -69,7 +69,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 #ifdef	SHADOWGRP
 static bool is_shadow_grp;

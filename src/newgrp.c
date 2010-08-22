@@ -48,7 +48,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 extern char **newenvp;
 extern char **environ;

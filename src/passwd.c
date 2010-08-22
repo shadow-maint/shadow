@@ -70,7 +70,7 @@
 /*
  * Global variables
  */
-char *Prog;			/* Program name */
+const char *Prog;		/* Program name */
 
 static char *name;		/* The name of user whose password is being changed */
 static char *myname;		/* The current user's name */

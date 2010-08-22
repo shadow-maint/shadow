@@ -70,7 +70,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM

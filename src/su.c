@@ -77,7 +77,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 /* not needed by sulog.c anymore */
 static char name[BUFSIZ];

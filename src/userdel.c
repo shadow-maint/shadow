@@ -78,7 +78,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static char *user_name;
 static uid_t user_id;

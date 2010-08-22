@@ -54,7 +54,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 static bool gr_locked  = false;
 static bool sgr_locked = false;
