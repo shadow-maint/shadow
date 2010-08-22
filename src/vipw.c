@@ -5,7 +5,7 @@
   Copyright (c) 1997       , Guy Maor <maor@ece.utexas.edu>
   Copyright (c) 1999 - 2000, Marek Michałkiewicz
   Copyright (c) 2002 - 2006, Tomasz Kłoczko
-  Copyright (c) 2007 - 2008, Nicolas François
+  Copyright (c) 2007 - 2010, Nicolas François
   All rights reserved.
 
   This program is free software; you can redistribute it and/or modify
