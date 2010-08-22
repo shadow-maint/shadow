@@ -77,7 +77,7 @@ static int copy_dir (const char *src, const char *dst,
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
 #ifdef	S_IFLNK
-static char *readlink_malloc (const char *filename);
+static /*@null@*/char *readlink_malloc (const char *filename);
 static int copy_symlink (const char *src, const char *dst,
                          unused bool reset_selinux,
                          const struct stat *statp, const struct timeval mt[],
@@ -123,7 +123,7 @@ int selinux_file_context (const char *dst_name)
 {
 	static bool selinux_checked = false;
 	static bool selinux_enabled;
-	security_context_t scontext = NULL;
+	/*@null@*/security_context_t scontext = NULL;
 
 	if (!selinux_checked) {
 		selinux_enabled = is_selinux_enabled () > 0;
@@ -236,7 +236,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	lp->ln_count = sb->st_nlink;
 	len = name_len - src_len + dst_len + 1;
 	lp->ln_name = (char *) xmalloc (len);
-	snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
+	(void) snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
 	lp->ln_next = links;
 	links = lp;
 
@@ -342,10 +342,10 @@ int copy_tree (const char *src_root, const char *dst_root,
 				 * Build the filename for both the source and
 				 * the destination files.
 				 */
-				snprintf (src_name, src_len, "%s/%s",
-				          src_root, ent->d_name);
-				snprintf (dst_name, dst_len, "%s/%s",
-				          dst_root, ent->d_name);
+				(void) snprintf (src_name, src_len, "%s/%s",
+				                 src_root, ent->d_name);
+				(void) snprintf (dst_name, dst_len, "%s/%s",
+				                 dst_root, ent->d_name);
 
 				err = copy_entry (src_name, dst_name,
 				                  reset_selinux,
@@ -374,7 +374,9 @@ int copy_tree (const char *src_root, const char *dst_root,
 
 #ifdef WITH_SELINUX
 	/* Reset SELinux to create files with default contexts */
-	setfscreatecon (NULL);
+	if (setfscreatecon (NULL) != 0) {
+		err = -1;
+	}
 #endif				/* WITH_SELINUX */
 
 	return err;
@@ -509,7 +511,9 @@ static int copy_dir (const char *src, const char *dst,
 	 */
 
 #ifdef WITH_SELINUX
-	selinux_file_context (dst);
+	if (selinux_file_context (dst) != 0) {
+		return -1;
+	}
 #endif				/* WITH_SELINUX */
 	if (   (mkdir (dst, statp->st_mode) != 0)
 	    || (chown_if_needed (dst, statp,
@@ -545,11 +549,11 @@ static int copy_dir (const char *src, const char *dst,
  * return NULL on error.
  * The return string shall be freed by the caller.
  */
-static char *readlink_malloc (const char *filename)
+static /*@null@*/char *readlink_malloc (const char *filename)
 {
 	size_t size = 1024;
 
-	while (1) {
+	while (true) {
 		ssize_t nchars;
 		char *buffer = (char *) malloc (size);
 		if (NULL == buffer) {
@@ -563,7 +567,7 @@ static char *readlink_malloc (const char *filename)
 			return NULL;
 		}
 
-		if ( (size_t) nchars < size) { /* The buffer was large enough */
+		if ((size_t) nchars < size) { /* The buffer was large enough */
 			/* readlink does not nul-terminate */
 			buffer[nchars] = '\0';
 			return buffer;
@@ -616,16 +620,19 @@ static int copy_symlink (const char *src, const char *dst,
 	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
 		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
-		char *dummy = (char *) malloc (len);
-		snprintf (dummy, len, "%s%s",
-		          dst_orig,
-		          oldlink + strlen (src_orig));
+		char *dummy = (char *) xmalloc (len);
+		(void) snprintf (dummy, len, "%s%s",
+		                 dst_orig,
+		                 oldlink + strlen (src_orig));
 		free (oldlink);
 		oldlink = dummy;
 	}
 
 #ifdef WITH_SELINUX
-	selinux_file_context (dst);
+	if (selinux_file_context (dst) != 0) {
+		free (oldlink);
+		return -1;
+	}
 #endif				/* WITH_SELINUX */
 	if (   (symlink (oldlink, dst) != 0)
 	    || (lchown_if_needed (dst, statp,
@@ -648,7 +655,7 @@ static int copy_symlink (const char *src, const char *dst,
 	 *  it returns ENOSYS on many system
 	 *  - not implemented
 	 */
-	lutimes (dst, mt);
+	(void) lutimes (dst, mt);
 #endif				/* HAVE_LUTIMES */
 
 	return 0;
@@ -701,7 +708,9 @@ static int copy_special (const char *src, const char *dst,
 	int err = 0;
 
 #ifdef WITH_SELINUX
-	selinux_file_context (dst);
+	if (selinux_file_context (dst) != 0) {
+		return -1;
+	}
 #endif				/* WITH_SELINUX */
 
 	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
@@ -756,7 +765,9 @@ static int copy_file (const char *src, const char *dst,
 		return -1;
 	}
 #ifdef WITH_SELINUX
-	selinux_file_context (dst);
+	if (selinux_file_context (dst) != 0) {
+		return -1;
+	}
 #endif				/* WITH_SELINUX */
 	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, statp->st_mode & 07777);
 	if (   (ofd < 0)

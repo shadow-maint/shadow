@@ -126,7 +126,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		}
 	}
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
-		puts (_("No password file"));
+		(void) puts (_("No password file"));
 #ifdef	USE_SYSLOG
 		SYSLOG (LOG_WARN, "No password file\n");
 		closelog ();
@@ -152,7 +152,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	if (getppid() == 1) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
-			fputs (_("TIOCSCTTY failed"), stderr);
+			(void) fputs (_("TIOCSCTTY failed"), stderr);
 		}
 	}
 	while (NULL != *envp) {		/* add inherited environment, */
@@ -184,7 +184,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 			/*
 			 * Fail secure
 			 */
-			puts (_("No password entry for 'root'"));
+			(void) puts (_("No password entry for 'root'"));
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_WARN, "No password entry for 'root'\n");
 			closelog ();
@@ -198,10 +198,10 @@ static RETSIGTYPE catch_signals (unused int sig)
 		 */
 
 		/* get a password for root */
-		cp = getpass (_
-			      ("\n"
-			       "Type control-d to proceed with normal startup,\n"
-			       "(or give root password for system maintenance):"));
+		cp = getpass (_(
+"\n"
+"Type control-d to proceed with normal startup,\n"
+"(or give root password for system maintenance):"));
 		/*
 		 * XXX - can't enter single user mode if root password is
 		 * empty.  I think this doesn't happen very often :-). But
@@ -213,7 +213,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 			SYSLOG (LOG_INFO, "Normal startup\n");
 			closelog ();
 #endif
-			puts ("");
+			(void) puts ("");
 #ifdef	TELINIT
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) 0);
 #endif
@@ -230,14 +230,14 @@ static RETSIGTYPE catch_signals (unused int sig)
 		SYSLOG (LOG_WARN, "Incorrect root password\n");
 #endif
 		sleep (2);
-		puts (_("Login incorrect"));
+		(void) puts (_("Login incorrect"));
 	}
 	strzero (pass);
 	(void) alarm (0);
 	(void) signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
 
-	puts (_("Entering System Maintenance Mode"));
+	(void) puts (_("Entering System Maintenance Mode"));
 #ifdef	USE_SYSLOG
 	SYSLOG (LOG_INFO, "System Maintenance Mode\n");
 #endif

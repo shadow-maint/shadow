@@ -127,7 +127,7 @@ extern int selinux_file_context (const char *dst_name);
 #endif
 
 /* encrypt.c */
-extern char *pw_encrypt (const char *, const char *);
+extern /*@exposed@*/char *pw_encrypt (const char *, const char *);
 
 /* entry.c */
 extern void pw_entry (const char *, struct passwd *);
@@ -250,7 +250,7 @@ extern int do_pam_passwd_non_interractive (const char *pam_service,
 
 /* obscure.c */
 #ifndef USE_PAM
-extern int obscure (const char *, const char *, const struct passwd *);
+extern bool obscure (const char *, const char *, const struct passwd *);
 #endif
 
 /* pam_pass.c */
@@ -363,7 +363,7 @@ extern void ttytype (const char *);
 
 /* tz.c */
 #ifndef USE_PAM
-extern char *tz (const char *);
+extern /*@observer@*/const char *tz (const char *);
 #endif
 
 /* ulimit.c */

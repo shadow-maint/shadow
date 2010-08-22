@@ -1,3 +1,27 @@
+2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/obscure.c, lib/prototypes.h (obscure): Return a bool
+	instead of an int.
+	* libmisc/obscure.c, libmisc/tz.c, src/passwd.c, lib/encrypt.c,
+	libmisc/copydir.c, lib/prototypes.h: Add splint annotations.
+	* libmisc/tz.c: Fix some const issues.
+	* libmisc/tz.c: Avoid multi-statements lines.
+	* libmisc/tz.c: Add brackets.
+	* libmisc/copydir.c: Do not check *printf/*puts return value.
+	* libmisc/copydir.c: Fail if we cannot set or reset the SELinux
+	fscreate context.
+	* libmisc/copydir.c: Use xmalloc instead of malloc.
+	* libmisc/copydir.c: Do not check lutimes return value
+	* src/vipw.c: Avoid implicit conversion of integer to boolean.
+	* src/su.c (iswheel): Return a bool instead of an int.
+	* src/passwd.c: Remove insert_crypt_passwd(). Use xstrdup instead.
+	* src/passwd.c: Return constant strings when sufficient.
+	* src/passwd.c: Do not check *printf/*puts return value.
+	* src/passwd.c: Avoid implicit conversion of character to boolean.
+	* src/passwd.c: Do not check sleep return value.
+	* src/sulogin.c: Do not check *printf/*puts return value.
+	* lib/encrypt.c: Do not check fprintf return value.
+
 2010-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/passwd.c: Fix a const issue.

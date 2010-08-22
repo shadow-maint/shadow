@@ -112,7 +112,7 @@ static void execve_shell (const char *shellstr,
 static RETSIGTYPE kill_child (int unused(s));
 #else				/* !USE_PAM */
 static RETSIGTYPE die (int);
-static int iswheel (const char *);
+static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 
 #ifndef USE_PAM
@@ -138,14 +138,14 @@ static RETSIGTYPE die (int killed)
 	}
 }
 
-static int iswheel (const char *username)
+static bool iswheel (const char *username)
 {
 	struct group *grp;
 
 	grp = getgrnam ("wheel"); /* !USE_PAM, no need for xgetgrnam */
 	if (   (NULL ==grp)
 	    || (NULL == grp->gr_mem)) {
-		return 0;
+		return false;
 	}
 	return is_on_list (grp->gr_mem, username);
 }

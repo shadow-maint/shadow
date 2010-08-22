@@ -304,15 +304,15 @@ static const char *obscure_msg (const char *old, const char *new,
  *	check passwords.
  */
 
-int obscure (const char *old, const char *new, const struct passwd *pwdp)
+bool obscure (const char *old, const char *new, const struct passwd *pwdp)
 {
 	const char *msg = obscure_msg (old, new, pwdp);
 
 	if (NULL != msg) {
 		printf (_("Bad password: %s.  "), msg);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 #else				/* !USE_PAM */

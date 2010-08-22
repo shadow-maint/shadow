@@ -40,7 +40,7 @@
 #include "prototypes.h"
 #include "defines.h"
 
-char *pw_encrypt (const char *clear, const char *salt)
+/*@exposed@*/char *pw_encrypt (const char *clear, const char *salt)
 {
 	static char cipher[128];
 	char *cp;
@@ -60,7 +60,7 @@ char *pw_encrypt (const char *clear, const char *salt)
 	 * supported, and return a DES encrypted password. */
 	if ((NULL != salt) && (salt[0] == '$') && (strlen (cp) <= 13))
 	{
-		const char *method;
+		/*@observer@*/const char *method;
 		switch (salt[1])
 		{
 			case '1':
@@ -79,9 +79,9 @@ char *pw_encrypt (const char *clear, const char *salt)
 				method = &nummethod[0];
 			}
 		}
-		fprintf (stderr,
-			 _("crypt method not supported by libcrypt? (%s)\n"),
-			  method);
+		(void) fprintf (stderr,
+		                _("crypt method not supported by libcrypt? (%s)\n"),
+		                method);
 		exit (EXIT_FAILURE);
 	}
 
