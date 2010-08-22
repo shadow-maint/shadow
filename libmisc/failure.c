@@ -273,12 +273,14 @@ void failprint (const struct faillog *fail)
 		lasttime++;
 	}
 #endif
+	/*@-formatconst@*/
 	(void) printf (ngettext ("%d failure since last login.\n"
 	                         "Last was %s on %s.\n",
 	                         "%d failures since last login.\n"
 	                         "Last was %s on %s.\n",
 	                         (unsigned long) fail->fail_cnt),
 	               fail->fail_cnt, lasttime, fail->fail_line);
+	/*@=formatconst@*/
 }
 
 /*

@@ -1731,7 +1731,7 @@ static void usr_update (void)
 static void selinux_update_mapping (void) {
 	if (is_selinux_enabled () <= 0) return;
 
-	if (*user_selinux) { /* must be done after passwd write() */
+	if ('\0' != *user_selinux) { /* must be done after passwd write() */
 		const char *argv[7];
 		argv[0] = "/usr/sbin/semanage";
 		argv[1] = "login";
@@ -1740,7 +1740,7 @@ static void selinux_update_mapping (void) {
 		argv[4] = user_selinux;
 		argv[5] = user_name;
 		argv[6] = NULL;
-		if (safe_system (argv[0], argv, NULL, 0)) {
+		if (safe_system (argv[0], argv, NULL, false) != 0) {
 			fprintf (stderr,
 			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 			         Prog, user_name, user_selinux);

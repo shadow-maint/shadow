@@ -69,7 +69,7 @@ static bool palindrome (unused const char *old, const char *new)
  * more than half of the characters are different ones.
  */
 
-static bool similar (const char *old, const char *new)
+static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 {
 	int i, j;
 
@@ -100,7 +100,7 @@ static bool similar (const char *old, const char *new)
  * a nice mix of characters.
  */
 
-static int simple (unused const char *old, const char *new)
+static bool simple (unused const char *old, const char *new)
 {
 	bool digits = false;
 	bool uppers = false;
@@ -147,7 +147,7 @@ static int simple (unused const char *old, const char *new)
 	return true;
 }
 
-static char *str_lower (char *string)
+static char *str_lower (/*@returned@*/char *string)
 {
 	char *cp;
 
@@ -157,8 +157,10 @@ static char *str_lower (char *string)
 	return string;
 }
 
-static const char *password_check (const char *old, const char *new,
-				   const struct passwd *pwdp)
+static /*@observer@*//*@null@*/const char *password_check (
+	/*@notnull@*/const char *old,
+	/*@notnull@*/const char *new,
+	/*@notnull@*/const struct passwd *pwdp)
 {
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
@@ -219,9 +221,10 @@ static const char *password_check (const char *old, const char *new,
 	return msg;
 }
 
-/*ARGSUSED*/
-static const char *obscure_msg (const char *old, const char *new,
-				    const struct passwd *pwdp)
+static /*@observer@*//*@null@*/const char *obscure_msg (
+	/*@notnull@*/const char *old,
+	/*@notnull@*/const char *new,
+	/*@notnull@*/const struct passwd *pwdp)
 {
 	size_t maxlen, oldlen, newlen;
 	char *new1, *old1;

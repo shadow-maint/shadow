@@ -632,7 +632,7 @@ static bool path_prefix (const char *s1, const char *s2)
  *
  * Return
  *  1: path exists and is owned by uid
- *  0: path is not owned by uid, or a failure occured
+ *  0: path is not owned by uid, or a failure occurred
  * -1: path does not exist
  */
 static int is_owner (uid_t uid, const char *path)
@@ -648,7 +648,7 @@ static int is_owner (uid_t uid, const char *path)
 			return 0;
 		}
 	}
-	return (st.st_uid == uid);
+	return (st.st_uid == uid) ? 1 : 0;
 }
 
 static int remove_mailbox (void)
@@ -1043,7 +1043,7 @@ int main (int argc, char **argv)
 		args[2] = "-d";
 		args[3] = user_name;
 		args[4] = NULL;
-		safe_system (args[0], args, NULL, 1);
+		safe_system (args[0], args, NULL, true);
 	}
 #endif				/* WITH_SELINUX */
 

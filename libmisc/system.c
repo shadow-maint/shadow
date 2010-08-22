@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2009       , Dan Walsh <dwalsh@redhat.com>
+ * Copyright (c) 2010       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,8 +39,8 @@
 
 int safe_system (const char *command,
                  const char *argv[],
-                 const char *env[],
-                 int ignore_stderr)
+                 /*@null@*/const char *env[],
+                 bool ignore_stderr)
 {
 	int status = -1;
 	int fd;
@@ -50,7 +51,7 @@ int safe_system (const char *command,
 		return -1;
 	}
 
-	if (pid) {       /* Parent */
+	if (pid != 0) {       /* Parent */
 		if (waitpid (pid, &status, 0) > 0) {
 			return status;
 		} else {
@@ -60,13 +61,19 @@ int safe_system (const char *command,
 
 	fd = open ("/dev/null", O_RDWR);
 	/* Child */
-	dup2 (fd, 0);           /* Close Stdin */
+	/* Close Stdin */
+	if (dup2 (fd, 0) == -1) {
+		exit (EXIT_FAILURE);
+	}
 	if (ignore_stderr) {
-		dup2 (fd, 2);   /* Close Stderr */
+		/* Close Stderr */
+		if (dup2 (fd, 2) == -1) {
+			exit (EXIT_FAILURE);
+		}
 	}
 
-	execve (command, (char *const *) argv, (char *const *) env);
-	fprintf (stderr, _("Failed to exec '%s'\n"), argv[0]);
+	(void) execve (command, (char *const *) argv, (char *const *) env);
+	(void) fprintf (stderr, _("Failed to exec '%s'\n"), argv[0]);
 	exit (EXIT_FAILURE);
 }
 

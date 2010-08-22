@@ -150,7 +150,7 @@ static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds
 		rounds = ROUNDS_MAX;
 	}
 
-	snprintf (rounds_prefix, 18, "rounds=%ld$", rounds);
+	(void) snprintf (rounds_prefix, 18, "rounds=%ld$", rounds);
 
 	/* Sanity checks. That should not be necessary. */
 	rounds_prefix[17] = '\0';

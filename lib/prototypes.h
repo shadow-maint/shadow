@@ -57,7 +57,7 @@
 #include "defines.h"
 #include "commonio.h"
 
-extern char *Prog;
+extern /*@observer@*/ const char *Prog;
 
 /* addgrps.c */
 #if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)
@@ -72,7 +72,7 @@ extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
-extern char *Basename (char *str);
+extern /*@observer@*/const char *Basename (char *str);
 
 /* chowndir.c */
 extern int chown_tree (const char *root,
@@ -156,7 +156,7 @@ extern int find_new_uid (bool sys_user,
 extern int get_gid (const char *gidstr, gid_t *gid);
 
 /* getgr_nam_gid.c */
-extern /*@null@*/struct group *getgr_nam_gid (const char *grname);
+extern /*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
 
 /* getlong.c */
 extern int getlong (const char *numstr, /*@out@*/long int *result);
@@ -340,8 +340,8 @@ extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[
 /* system.c */
 extern int safe_system (const char *command,
                         const char *argv[],
-                        const char *env[],
-                        int ignore_stderr);
+                        /*@null@*/const char *env[],
+                        bool ignore_stderr);
 
 /* strtoday.c */
 extern long strtoday (const char *);
@@ -391,9 +391,9 @@ extern int setutmpx (struct utmpx *utx);
 extern bool valid (const char *, const struct passwd *);
 
 /* xmalloc.c */
-extern /*@maynotreturn@*/ /*@out@*//*@only@*/char *xmalloc (size_t size)
+extern /*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/char *xmalloc (size_t size)
   /*@ensures MaxSet(result) == (size - 1); @*/;
-extern /*@maynotreturn@*/ /*@only@*/char *xstrdup (const char *);
+extern /*@maynotreturn@*/ /*@only@*//*@notnull@*/char *xstrdup (const char *);
 
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);

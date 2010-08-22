@@ -78,6 +78,7 @@ int chown_tree (const char *root,
 	 */
 
 	if (access (root, F_OK) != 0) {
+		free (new_name);
 		return -1;
 	}
 
@@ -90,6 +91,7 @@ int chown_tree (const char *root,
 
 	dir = opendir (root);
 	if (NULL == dir) {
+		free (new_name);
 		return -1;
 	}
 
@@ -120,7 +122,7 @@ int chown_tree (const char *root,
 			new_name_len += 1024;
 		}
 
-		snprintf (new_name, new_name_len, "%s/%s", root, ent->d_name);
+		(void) snprintf (new_name, new_name_len, "%s/%s", root, ent->d_name);
 
 		/* Don't follow symbolic links! */
 		if (LSTAT (new_name, &sb) == -1) {

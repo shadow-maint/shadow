@@ -1,5 +1,57 @@
 2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c: Avoid implicit conversion of integer to
+	boolean.
+	* libmisc/basename.c: Avoid implicit conversion of pointer to
+	boolean.
+	* libmisc/basename.c, lib/prototypes.h (Basename): Return a
+	constant string.
+	* libmisc/basename.c, libmisc/obscure.c, lib/prototypes.h,
+	libmisc/xmalloc.c, libmisc/getdate.h, libmisc/system.c,
+	libmisc/getgr_nam_gid.c, libmisc/failure.c, libmisc/valid.c: Add
+	splint annotations.
+	* libmisc/chowndir.c: Avoid memory leak.
+	* libmisc/chowndir.c: Do not check *printf/*puts return value.
+	* libmisc/chowntty.c: Avoid implicit conversion between integer
+	types.
+	* libmisc/obscure.c: Return a bool when possible instead of int.
+	* libmisc/shell.c: Do not check *printf/*puts return value.
+	* libmisc/shell.c: Do not check execle return value.
+	* libmisc/setupenv.c: Avoid implicit conversion between integer
+	types.
+	* libmisc/xmalloc.c: size should not be zero to avoid returning
+	NULL pointers.
+	* libmisc/hushed.c: Do not check *printf/*puts return value.
+	* libmisc/system.c: Avoid implicit conversion of integer to
+	boolean. safe_system last argument is a boolean.
+	* libmisc/system.c: Check return value of dup2.
+	* libmisc/system.c: Do not check *printf/*puts return value.
+	* libmisc/system.c: Do not check execve return value. 
+	* libmisc/salt.c: Do not check *printf/*puts return value.
+	* libmisc/loginprompt.c: Do not check gethostname return value.
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Do not check
+	gr_rewind/pw_rewind return value.
+	* libmisc/ttytype.c: Limit the number of parsed characters in the
+	sscanf format.
+	* libmisc/ttytype.c: Test if a type was really read.
+	* libmisc/sub.c: Do not check *printf/*puts return value.
+	* libmisc/sub.c: Avoid implicit conversion of integer to boolean.
+	* src/userdel.c: Fix typo in comment.
+	* src/userdel.c: Avoid implicit conversion of boolean to integer.
+	* src/userdel.c: safe_system last argument is a boolean.
+	* src/newusers.c: Avoid implicit conversion of boolean to integer.
+	* src/newusers.c: Avoid implicit conversion of integer to boolean.
+	* src/usermod.c: Add brackets.
+	* src/usermod.c: Avoid implicit conversion of characters or
+	integers to booleans.
+	* src/vipw.c: Avoid implicit conversion of integer to boolean.
+	* src/su.c: Avoid implicit conversion of integer to boolean.
+	* src/su.c: Add brackets.
+	* src/useradd.c: Avoid implicit conversion of characters or
+	integers to booleans.
+
+2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/obscure.c, lib/prototypes.h (obscure): Return a bool
 	instead of an int.
 	* libmisc/obscure.c, libmisc/tz.c, src/passwd.c, lib/encrypt.c,

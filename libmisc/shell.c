@@ -68,7 +68,8 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * don't want to tell us what it is themselves.
 	 */
 	if (arg == (char *) 0) {
-		snprintf (arg0, sizeof arg0, "-%s", Basename ((char *) file));
+		(void) snprintf (arg0, sizeof arg0, "-%s", Basename ((char *) file));
+		arg0[sizeof arg0 - 1] = '\0';
 		arg = arg0;
 	}
 
@@ -77,7 +78,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * able to figure out what we are up to without too much
 	 * grief.
 	 */
-	execle (file, arg, (char *) 0, envp);
+	(void) execle (file, arg, (char *) 0, envp);
 	err = errno;
 
 	if (access (file, R_OK|X_OK) == 0) {
@@ -85,7 +86,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
 		 */
-		execle (SHELL, "sh", "-", file, (char *)0, envp);
+		(void) execle (SHELL, "sh", "-", file, (char *)0, envp);
 		err = errno;
 	}
 
@@ -94,7 +95,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * how to execute this stupid shell, so I might as well give
 	 * up in disgust ...
 	 */
-	snprintf (arg0, sizeof arg0, _("Cannot execute %s"), file);
+	(void) snprintf (arg0, sizeof arg0, _("Cannot execute %s"), file);
 	errno = err;
 	perror (arg0);
 	return err;

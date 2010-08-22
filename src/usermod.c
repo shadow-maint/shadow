@@ -1851,9 +1851,11 @@ int main (int argc, char **argv)
 static void selinux_update_mapping (void) {
 	const char *argv[7];
 
-	if (is_selinux_enabled () <= 0) return;
+	if (is_selinux_enabled () <= 0) {
+		return;
+	}
 
-	if (*user_selinux) {
+	if ('\0' != *user_selinux) {
 		argv[0] = "/usr/sbin/semanage";
 		argv[1] = "login";
 		argv[2] = "-m";
@@ -1861,9 +1863,9 @@ static void selinux_update_mapping (void) {
 		argv[4] = user_selinux;
 		argv[5] = user_name;
 		argv[6] = NULL;
-		if (safe_system (argv[0], argv, NULL, 1)) {
+		if (safe_system (argv[0], argv, NULL, true) != 0) {
 			argv[2] = "-a";
-			if (safe_system (argv[0], argv, NULL, 0)) {
+			if (safe_system (argv[0], argv, NULL, false) != 0) {
 				fprintf (stderr,
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 				         Prog, user_name, user_selinux);

@@ -98,7 +98,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 				(void) fclose (fp);
 			}
 		}
-		gethostname (buf, sizeof buf);
+		(void) gethostname (buf, sizeof buf);
 		printf (prompt, buf);
 		(void) fflush (stdout);
 	}

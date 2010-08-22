@@ -547,8 +547,7 @@ void setup_limits (const struct passwd *info)
 	if (getdef_bool ("QUOTAS_ENAB")) {
 #ifdef LIMITS
 		if (info->pw_uid != 0) {
-			if (setup_user_limits (info->pw_name) &
-			    LOGIN_ERROR_LOGIN) {
+			if ((setup_user_limits (info->pw_name) & LOGIN_ERROR_LOGIN) != 0) {
 				(void) fputs (_("Too many logins.\n"), stderr);
 				(void) sleep (2); /* XXX: Should be FAIL_DELAY */
 				exit (EXIT_FAILURE);

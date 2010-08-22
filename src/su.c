@@ -127,12 +127,13 @@ static RETSIGTYPE die (int killed)
 {
 	static TERMIO sgtty;
 
-	if (killed)
+	if (killed != 0) {
 		STTY (0, &sgtty);
-	else
+	} else {
 		GTTY (0, &sgtty);
+	}
 
-	if (killed) {
+	if (killed != 0) {
 		closelog ();
 		exit (128+killed);
 	}
@@ -813,8 +814,9 @@ int main (int argc, char **argv)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (!amroot && pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0)) {
-		SYSLOG ((pwent.pw_uid ? LOG_NOTICE : LOG_WARN,
+	if (   !amroot
+	    && (pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0) != 0)) {
+		SYSLOG (((pwent.pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
 		su_failure (tty);
@@ -831,7 +833,7 @@ int main (int argc, char **argv)
 			spwd = pwd_to_spwd (&pwent);
 		}
 
-		if (expire (&pwent, spwd)) {
+		if (expire (&pwent, spwd) != 0) {
 			/* !USE_PAM, no need for xgetpwnam */
 			struct passwd *pwd = getpwnam (name);
 

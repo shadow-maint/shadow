@@ -42,9 +42,9 @@
 
 #include "defines.h"
 #include "prototypes.h"
-char *Basename (char *str)
+/*@observer@*/const char *Basename (char *str)
 {
 	char *cp = strrchr (str, '/');
 
-	return cp ? cp + 1 : str;
+	return (NULL != cp) ? cp + 1 : str;
 }

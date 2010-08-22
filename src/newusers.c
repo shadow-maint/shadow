@@ -378,7 +378,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	pwent.pw_dir = "";	/* XXX warning: const */
 	pwent.pw_shell = "";	/* XXX warning: const */
 
-	return (pw_update (&pwent) == 0);
+	return (pw_update (&pwent) == 0) ? -1 : 0;
 }
 
 #ifndef USE_PAM
@@ -976,7 +976,7 @@ int main (int argc, char **argv)
 		usernames[nusers-1] = strdup (fields[0]);
 		passwords[nusers-1] = strdup (fields[1]);
 #endif				/* USE_PAM */
-		if (add_passwd (&newpw, fields[1])) {
+		if (add_passwd (&newpw, fields[1]) != 0) {
 			fprintf (stderr,
 			         _("%s: line %d: can't update password\n"),
 			         Prog, line);

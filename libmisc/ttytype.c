@@ -47,8 +47,8 @@ void ttytype (const char *line)
 	char buf[BUFSIZ];
 	const char *typefile;
 	char *cp;
-	char type[BUFSIZ];
-	char port[BUFSIZ];
+	char type[1024] = "";
+	char port[1024];
 
 	if (getenv ("TERM") != NULL) {
 		return;
@@ -76,12 +76,12 @@ void ttytype (const char *line)
 			*cp = '\0';
 		}
 
-		if ((sscanf (buf, "%s %s", type, port) == 2) &&
-		    (strcmp (line, port) == 0)) {
+		if (   (sscanf (buf, "%1023s %1023s", type, port) == 2)
+		    && (strcmp (line, port) == 0)) {
 			break;
 		}
 	}
-	if ((feof (fp) == 0) && (ferror (fp) == 0)) {
+	if ((feof (fp) == 0) && (ferror (fp) == 0) && (type[0] != '\0')) {
 		addenv ("TERM", type);
 	}
 

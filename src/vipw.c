@@ -231,7 +231,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 #ifdef WITH_SELINUX
 	/* if SE Linux is enabled then set the context of all new files
 	   to be the context of the file we are editing */
-	if (is_selinux_enabled ()) {
+	if (is_selinux_enabled () != 0) {
 		security_context_t passwd_context=NULL;
 		int ret = 0;
 		if (getfilecon (file, &passwd_context) < 0) {
@@ -332,7 +332,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	}
 #ifdef WITH_SELINUX
 	/* unset the fscreatecon */
-	if (is_selinux_enabled ()) {
+	if (is_selinux_enabled () != 0) {
 		if (setfscreatecon (NULL) != 0) {
 			vipwexit (_("setfscreatecon () failed"), errno, 1);
 		}

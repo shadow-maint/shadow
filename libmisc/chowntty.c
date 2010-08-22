@@ -72,7 +72,7 @@ void chown_tty (const struct passwd *info)
 	 */
 
 	if (   (fchown (STDIN_FILENO, info->pw_uid, gid) != 0)
-	    || (fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600)) != 0)) {
+	    || (fchmod (STDIN_FILENO, (mode_t)getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
 		fprintf (stderr,

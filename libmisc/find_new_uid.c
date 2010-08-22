@@ -115,7 +115,7 @@ int find_new_uid (bool sys_user,
 			}
 		}
 
-		pw_rewind ();
+		(void) pw_rewind ();
 		while ((pwd = pw_next ()) != NULL) {
 			if ((pwd->pw_uid <= user_id) && (pwd->pw_uid >= uid_min)) {
 				user_id = pwd->pw_uid - 1;
@@ -139,7 +139,7 @@ int find_new_uid (bool sys_user,
 		}
 		endpwent ();
 
-		pw_rewind ();
+		(void) pw_rewind ();
 		while ((pwd = pw_next ()) != NULL) {
 			if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
 				user_id = pwd->pw_uid + 1;

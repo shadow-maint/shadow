@@ -115,7 +115,7 @@ int find_new_gid (bool sys_group,
 			}
 		}
 
-		gr_rewind ();
+		(void) gr_rewind ();
 		while ((grp = gr_next ()) != NULL) {
 			if ((grp->gr_gid <= group_id) && (grp->gr_gid >= gid_min)) {
 				group_id = grp->gr_gid - 1;
@@ -139,7 +139,7 @@ int find_new_gid (bool sys_group,
 		}
 		endgrent ();
 
-		gr_rewind ();
+		(void) gr_rewind ();
 		while ((grp = gr_next ()) != NULL) {
 			if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
 				group_id = grp->gr_gid + 1;

@@ -52,7 +52,7 @@
 bool valid (const char *password, const struct passwd *ent)
 {
 	const char *encrypted;
-	const char *salt;
+	/*@observer@*/const char *salt;
 
 	/*
 	 * Start with blank or empty password entries.  Always encrypt

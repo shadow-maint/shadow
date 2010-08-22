@@ -74,7 +74,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets (buf, (int)(sizeof buf), fp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL == cp) {
 			break;
