@@ -933,13 +933,13 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	if (change_environment) {
-		/* we need to setup the environment *after* pam_open_session(),
-		 * else the UID is changed before stuff like pam_xauth could
-		 * run, and we cannot access /etc/shadow and co
-		 */
-		environ = newenvp;	/* make new environment active */
+	/* we need to setup the environment *after* pam_open_session(),
+	 * else the UID is changed before stuff like pam_xauth could
+	 * run, and we cannot access /etc/shadow and co
+	 */
+	environ = newenvp;	/* make new environment active */
 
+	if (change_environment) {
 		/* update environment with all pam set variables */
 		envcp = pam_getenvlist (pamh);
 		if (NULL != envcp) {

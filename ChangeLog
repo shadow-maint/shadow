@@ -1,5 +1,12 @@
 2010-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Fix handling of environment variables when
+	the environment is not changed. In particular, this makes su
+	behave as documented regarding PATH and IFS (i.e. they are reset)
+	when -p is provided.
+
+2010-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/su.1.xml: Fix typo.
 
 2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
