@@ -1,3 +1,7 @@
+2010-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/su.1.xml: Fix typo.
+
 2010-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c, src/userdel.c, src/grpck.c, src/gpasswd.c,
