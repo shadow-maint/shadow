@@ -178,6 +178,10 @@
 
 	* man/po/fr.po: Fix a typo.
 
+2010-06-24  Baurzhan Muftakhidinov  <baurthefirst@gmail.com>
+
+	* NEWS, po/kk.po: Updated Kazakh translation.
+
 2010-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/fr.po: Fix some typos. Minor updates: 886t70f187u.
