@@ -63,7 +63,7 @@
     <para>
       The <command>chsh</command> command changes the user login shell.
       This determines the name of the user's initial login command. A normal
-      user may only change the login shell for her own account, the
+      user may only change the login shell for her own account; the
       superuser may change the login shell for any account.
     </para>
 
