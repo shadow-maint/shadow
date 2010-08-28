@@ -55,6 +55,11 @@
 #include <attr/libattr.h>
 #endif				/* WITH_ATTR */
 
+#ifdef WITH_SELINUX
+static bool selinux_checked = false;
+static bool selinux_enabled;
+#endif				/* WITH_SELINUX */
+
 static /*@null@*/const char *src_orig;
 static /*@null@*/const char *dst_orig;
 
@@ -109,20 +114,17 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
 
 #ifdef WITH_SELINUX
 /*
- * selinux_file_context - Set the security context before any file or
- *                        directory creation.
+ * set_selinux_file_context - Set the security context before any file or
+ *                            directory creation.
  *
- *	selinux_file_context () should be called before any creation of file,
- *	symlink, directory, ...
+ *	set_selinux_file_context () should be called before any creation
+ *	of file, symlink, directory, ...
  *
  *	Callers may have to Reset SELinux to create files with default
- *	contexts:
- *		setfscreatecon (NULL);
+ *	contexts with reset_selinux_file_context
  */
-int selinux_file_context (const char *dst_name)
+int set_selinux_file_context (const char *dst_name)
 {
-	static bool selinux_checked = false;
-	static bool selinux_enabled;
 	/*@null@*/security_context_t scontext = NULL;
 
 	if (!selinux_checked) {
@@ -144,6 +146,27 @@ int selinux_file_context (const char *dst_name)
 			}
 		}
 		freecon (scontext);
+	}
+	return 0;
+}
+
+/*
+ * reset_selinux_file_context - Reset the security context to the default
+ *                              policy behavior
+ *
+ *	reset_selinux_file_context () should be called after the context
+ *	was changed with set_selinux_file_context ()
+ */
+int reset_selinux_file_context (void)
+{
+	if (!selinux_checked) {
+		selinux_enabled = is_selinux_enabled () > 0;
+		selinux_checked = true;
+	}
+	if (selinux_enabled) {
+		if (setfscreatecon (NULL) != 0) {
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -373,8 +396,14 @@ int copy_tree (const char *src_root, const char *dst_root,
 	}
 
 #ifdef WITH_SELINUX
-	/* Reset SELinux to create files with default contexts */
-	if (setfscreatecon (NULL) != 0) {
+	/* Reset SELinux to create files with default contexts.
+	 * Note that the context is only reset on exit of copy_tree (it is
+	 * assumed that the program would quit without needing a restored
+	 * context if copy_tree failed previously), and that copy_tree can
+	 * be called recursively (hence the context is set on the
+	 * sub-functions of copy_entry).
+	 */
+	if (reset_selinux_file_context () != 0) {
 		err = -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -511,7 +540,7 @@ static int copy_dir (const char *src, const char *dst,
 	 */
 
 #ifdef WITH_SELINUX
-	if (selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -629,7 +658,7 @@ static int copy_symlink (const char *src, const char *dst,
 	}
 
 #ifdef WITH_SELINUX
-	if (selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst) != 0) {
 		free (oldlink);
 		return -1;
 	}
@@ -708,7 +737,7 @@ static int copy_special (const char *src, const char *dst,
 	int err = 0;
 
 #ifdef WITH_SELINUX
-	if (selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -765,7 +794,7 @@ static int copy_file (const char *src, const char *dst,
 		return -1;
 	}
 #ifdef WITH_SELINUX
-	if (selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */

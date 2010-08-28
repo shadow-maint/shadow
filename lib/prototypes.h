@@ -123,7 +123,8 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid);
 #ifdef WITH_SELINUX
-extern int selinux_file_context (const char *dst_name);
+extern int set_selinux_file_context (const char *dst_name);
+extern int reset_selinux_file_context (void);
 #endif
 
 /* encrypt.c */

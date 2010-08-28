@@ -1,5 +1,16 @@
 2010-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/protoypes.h, libmisc/copydir.c, src/useradd.c:
+	selinux_file_context renamed set_selinux_file_context.
+	* lib/protoypes.h, libmisc/copydir.c, src/useradd.c:
+	Added reset_selinux_file_context.
+	* src/useradd.c: Check the return value of
+	set_selinux_file_context and reset_selinux_file_context.
+	* libmisc/copydir.c: Check the return value of
+	reset_selinux_file_context.
+
+2010-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Fix handling of environment variables when
 	the environment is not changed. In particular, this makes su
 	behave as documented regarding PATH and IFS (i.e. they are reset)

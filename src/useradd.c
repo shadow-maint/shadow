@@ -1764,7 +1764,9 @@ static void create_home (void)
 {
 	if (access (user_home, F_OK) != 0) {
 #ifdef WITH_SELINUX
-		selinux_file_context (user_home);
+		if (set_selinux_file_context (user_home) != 0) {
+			fail_exit (E_HOMEDIR);
+		}
 #endif
 		/* XXX - create missing parent directories.  --marekm */
 		if (mkdir (user_home, 0) != 0) {
@@ -1791,7 +1793,9 @@ static void create_home (void)
 #endif
 #ifdef WITH_SELINUX
 		/* Reset SELinux to create files with default contexts */
-		setfscreatecon (NULL);
+		if (reset_selinux_file_context () != 0) {
+			fail_exit (E_HOMEDIR);
+		}
 #endif
 	}
 }
