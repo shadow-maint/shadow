@@ -1,5 +1,9 @@
 2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* autogen.sh: Expand autoreconf to avoid running autopoint.
+
+2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.
 
