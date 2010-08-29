@@ -36,6 +36,8 @@ shadow-4.1.4.2 -> shadow-4.1.5					UNRELEASED
 - useradd
   * If the skeleton directory contained hardlinked files, copies of the
     hardlink were removed from the skeleton directory.
+- usermod
+  * Accept options in any order (username not necessarily at the end)
 
 *** translation
   * Updated Czech translation.

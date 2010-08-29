@@ -92,21 +92,21 @@
 const char *Prog;
 
 static char *user_name;
-static char *user_newname;
+static char *user_newname = NULL;
 static char *user_pass;
 static uid_t user_id;
 static uid_t user_newid;
 static gid_t user_gid;
 static gid_t user_newgid;
 static char *user_comment;
-static char *user_newcomment;
+static char *user_newcomment = NULL;
 static char *user_home;
-static char *user_newhome;
+static char *user_newhome = NULL;
 static char *user_shell;
 #ifdef WITH_SELINUX
 static const char *user_selinux = "";
 #endif
-static char *user_newshell;
+static char *user_newshell = NULL;
 static long user_expire;
 static long user_newexpire;
 static long user_inactive;
@@ -817,68 +817,6 @@ static void process_flags (int argc, char **argv)
 
 	bool anyflag = false;
 
-	if ((1 == argc) || ('-' == argv[argc - 1][0])) {
-		usage (E_USAGE);
-	}
-
-	{
-		const struct passwd *pwd;
-		/* local, no need for xgetpwnam */
-		pwd = getpwnam (argv[argc - 1]);
-		if (NULL == pwd) {
-			fprintf (stderr,
-			         _("%s: user '%s' does not exist\n"),
-			         Prog, argv[argc - 1]);
-			exit (E_NOTFOUND);
-		}
-
-		user_name = argv[argc - 1];
-		user_id = pwd->pw_uid;
-		user_gid = pwd->pw_gid;
-		user_comment = xstrdup (pwd->pw_gecos);
-		user_home = xstrdup (pwd->pw_dir);
-		user_shell = xstrdup (pwd->pw_shell);
-	}
-	user_newname = user_name;
-	user_newid = user_id;
-	user_newgid = user_gid;
-	user_newcomment = user_comment;
-	user_newhome = user_home;
-	user_newshell = user_shell;
-
-#ifdef	USE_NIS
-	/*
-	 * Now make sure it isn't an NIS user.
-	 */
-	if (__ispwNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: user %s is a NIS user\n"),
-		         Prog, user_name);
-
-		if (   !yp_get_default_domain (&nis_domain)
-		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: %s is the NIS master\n"),
-			         Prog, nis_master);
-		}
-		exit (E_NOTFOUND);
-	}
-#endif
-
-	{
-		const struct spwd *spwd = NULL;
-		/* local, no need for xgetspnam */
-		if (is_shadow_pwd && ((spwd = getspnam (user_name)) != NULL)) {
-			user_expire = spwd->sp_expire;
-			user_inactive = spwd->sp_inact;
-			user_newexpire = user_expire;
-			user_newinactive = user_inactive;
-		}
-	}
-
 	{
 		/*
 		 * Parse the command line options.
@@ -1048,6 +986,74 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
+	if (optind != argc - 1) {
+		usage (E_USAGE);
+	}
+
+	user_name = argv[argc - 1];
+
+	{
+		const struct passwd *pwd;
+		/* local, no need for xgetpwnam */
+		pwd = getpwnam (user_name);
+		if (NULL == pwd) {
+			fprintf (stderr,
+			         _("%s: user '%s' does not exist\n"),
+			         Prog, user_name);
+			exit (E_NOTFOUND);
+		}
+
+		user_id = pwd->pw_uid;
+		user_gid = pwd->pw_gid;
+		user_comment = xstrdup (pwd->pw_gecos);
+		user_home = xstrdup (pwd->pw_dir);
+		user_shell = xstrdup (pwd->pw_shell);
+	}
+
+	/* user_newname, user_newid, user_newgid can be used even when the
+	 * options where not specified. */
+	if (!lflg) {
+		user_newname = user_name;
+	}
+	if (!uflg) {
+		user_newid = user_id;
+	}
+	if (!gflg) {
+		user_newgid = user_gid;
+	}
+
+#ifdef	USE_NIS
+	/*
+	 * Now make sure it isn't an NIS user.
+	 */
+	if (__ispwNIS ()) {
+		char *nis_domain;
+		char *nis_master;
+
+		fprintf (stderr,
+		         _("%s: user %s is a NIS user\n"),
+		         Prog, user_name);
+
+		if (   !yp_get_default_domain (&nis_domain)
+		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
+			fprintf (stderr,
+			         _("%s: %s is the NIS master\n"),
+			         Prog, nis_master);
+		}
+		exit (E_NOTFOUND);
+	}
+#endif
+
+	{
+		const struct spwd *spwd = NULL;
+		/* local, no need for xgetspnam */
+		if (is_shadow_pwd && ((spwd = getspnam (user_name)) != NULL)) {
+			user_expire = spwd->sp_expire;
+			user_inactive = spwd->sp_inact;
+		}
+	}
+
+
 	if (!anyflag) {
 		fprintf (stderr, _("%s: no flags given\n"), Prog);
 		exit (E_USAGE);
@@ -1060,7 +1066,8 @@ static void process_flags (int argc, char **argv)
 	if (user_newgid == user_gid) {
 		gflg = false;
 	}
-	if (strcmp (user_newshell, user_shell) == 0) {
+	if (   (NULL != user_newshell)
+	    && (strcmp (user_newshell, user_shell) == 0)) {
 		sflg = false;
 	}
 	if (strcmp (user_newname, user_name) == 0) {
@@ -1072,11 +1079,13 @@ static void process_flags (int argc, char **argv)
 	if (user_newexpire == user_expire) {
 		eflg = false;
 	}
-	if (strcmp (user_newhome, user_home) == 0) {
+	if (   (NULL != user_newhome)
+	    && (strcmp (user_newhome, user_home) == 0)) {
 		dflg = false;
 		mflg = false;
 	}
-	if (strcmp (user_newcomment, user_comment) == 0) {
+	if (   (NULL != user_newcomment)
+	    && (strcmp (user_newcomment, user_comment) == 0)) {
 		cflg = false;
 	}
 
@@ -1095,10 +1104,6 @@ static void process_flags (int argc, char **argv)
 		         _("%s: shadow passwords required for -e and -f\n"),
 		         Prog);
 		exit (E_USAGE);
-	}
-
-	if (optind != argc - 1) {
-		usage (E_USAGE);
 	}
 
 	if (aflg && (!Gflg)) {

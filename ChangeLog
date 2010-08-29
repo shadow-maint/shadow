@@ -1,5 +1,10 @@
 2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/usermod.c: Accept options in any order (username not
+	necessarily at the end)
+
+2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* autogen.sh: Expand autoreconf to avoid running autopoint.
 
 2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
