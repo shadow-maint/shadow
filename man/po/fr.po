@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2010-08-29 17:54+0200\n"
-"PO-Revision-Date: 2010-08-20 19:56+0200\n"
+"PO-Revision-Date: 2010-08-29 21:10+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -551,15 +551,11 @@ msgid ""
 msgstr ""
 
 #: usermod.8.xml:160(para)
-#, fuzzy
-#| msgid ""
-#| "The ownership of files outside of the user's home directory must be fixed "
-#| "manually."
 msgid ""
 "The group ownership of files outside of the user's home directory must be "
 "fixed manually."
 msgstr ""
-"Le propriétaire des fichiers en dehors du répertoire personnel de "
+"Le groupe propriétaire des fichiers en dehors du répertoire personnel de "
 "l'utilisateur doit être modifié manuellement."
 
 #: usermod.8.xml:167(term) useradd.8.xml:234(term)
@@ -8481,14 +8477,13 @@ msgid "change login shell"
 msgstr "Changer l'interpréteur de commandes initial"
 
 #: chsh.1.xml:63(para)
-#, fuzzy
 msgid ""
 "The <command>chsh</command> command changes the user login shell. This "
 "determines the name of the user's initial login command. A normal user may "
 "only change the login shell for her own account; the superuser may change "
 "the login shell for any account."
 msgstr ""
-"<command>Chsh</command> modifie l'interpréteur de commandes initial (« login "
+"La commande <command>chsh</command> modifie l'interpréteur de commandes initial (« login "
 "shell ») de l'utilisateur qui sera invoqué lors des connexions de "
 "l'utilisateur. Un utilisateur normal ne peut changer que l'interpréteur "
 "associé à son propre compte. Le superutilisateur peut changer l'interpréteur "

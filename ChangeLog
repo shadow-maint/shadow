@@ -1,5 +1,9 @@
 2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Fix 2 fuzzy strings.
+
+2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/usermod.c: Accept options in any order (username not
 	necessarily at the end)
 
