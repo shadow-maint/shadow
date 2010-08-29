@@ -1,3 +1,8 @@
+2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
 2010-08-28  Brian M. Carlson  <sandals@crustytoothpaste.ath.cx>
 
 	* man/chsh.1.xml: Fix comma splice.

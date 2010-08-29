@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-04-12 22:01+0200\n"
+"POT-Creation-Date: 2010-08-29 17:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1328,7 +1328,7 @@ msgid "If <option>--login</option> is used, other environment variables might be
 msgstr ""
 
 #: su.1.xml:289(para)
-msgid "Other environment might be set by PAM modules."
+msgid "Other environments might be set by PAM modules."
 msgstr ""
 
 #: su.1.xml:237(para)
@@ -4295,7 +4295,7 @@ msgid "change login shell"
 msgstr ""
 
 #: chsh.1.xml:63(para)
-msgid "The <command>chsh</command> command changes the user login shell. This determines the name of the user's initial login command. A normal user may only change the login shell for her own account, the superuser may change the login shell for any account."
+msgid "The <command>chsh</command> command changes the user login shell. This determines the name of the user's initial login command. A normal user may only change the login shell for her own account; the superuser may change the login shell for any account."
 msgstr ""
 
 #: chsh.1.xml:74(para)

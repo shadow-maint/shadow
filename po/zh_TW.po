@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-04-03 15:36+0200\n"
+"POT-Creation-Date: 2010-08-29 17:53+0200\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -218,8 +219,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%"
-"lu)\n"
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -236,8 +237,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%"
-"lu)\n"
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2094,25 +2095,27 @@ msgid ""
 msgstr ""
 
 #, fuzzy
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
-"  -g, --group                   edit group database\n"
-"  -h, --help                    display this help message and exit\n"
-"  -p, --passwd                  edit passwd database\n"
-"  -q, --quiet                   quiet mode\n"
-"  -s, --shadow                  edit shadow or gshadow database\n"
-"  -u, --user                    which user's tcb shadow file to edit\n"
-"\n"
+msgstr "用法：%s [輸入]\n"
+
+msgid "  -g, --group                   edit group database\n"
 msgstr ""
-"用法：lastlog [選項]\n"
-"\n"
-"選項：\n"
-"  -h, --help\t\t顯示這份說明文字然後結束\n"
-"  -t, --time DAYS\t只列出 DAYS 天內的歷史記錄\n"
-"  -u, --user LOGIN\t根據指定的 LOGIN 列出該使用者最後的歷史記錄\n"
-"\n"
+
+msgid "  -p, --passwd                  edit passwd database\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -s, --shadow                  edit shadow or gshadow database\n"
+msgstr ""
+
+msgid "  -u, --user                    which user's tcb shadow file to edit\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: failed to remove %s\n"
@@ -2184,6 +2187,27 @@ msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s：無效的主目錄“%s”\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -g, --group                   edit group database\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -p, --passwd                  edit passwd database\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -s, --shadow                  edit shadow or gshadow database\n"
+#~ "  -u, --user                    which user's tcb shadow file to edit\n"
+#~ "\n"
+#~ msgstr ""
+#~ "用法：lastlog [選項]\n"
+#~ "\n"
+#~ "選項：\n"
+#~ "  -h, --help\t\t顯示這份說明文字然後結束\n"
+#~ "  -t, --time DAYS\t只列出 DAYS 天內的歷史記錄\n"
+#~ "  -u, --user LOGIN\t根據指定的 LOGIN 列出該使用者最後的歷史記錄\n"
+#~ "\n"
 
 #, fuzzy
 #~| msgid "Usage: %s [input]\n"
