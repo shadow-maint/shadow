@@ -96,6 +96,7 @@ int chown_tree (const char *root,
 	}
 
 	while ((ent = readdir (dir))) {
+		size_t ent_name_len;
 		uid_t tmpuid = (uid_t) -1;
 		gid_t tmpgid = (gid_t) -1;
 
@@ -113,13 +114,15 @@ int chown_tree (const char *root,
 		 * destination files.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 > new_name_len) {
-			new_name = realloc (new_name, new_name_len + 1024);
-			if (NULL == new_name) {
+		ent_name_len = strlen (root) + strlen (ent->d_name) + 2;
+		if (ent_name_len > new_name_len) {
+			char *tmp = realloc (new_name, ent_name_len);
+			if (NULL == tmp) {
 				rc = -1;
 				break;
 			}
-			new_name_len += 1024;
+			new_name = tmp;
+			new_name_len = ent_name_len;
 		}
 
 		(void) snprintf (new_name, new_name_len, "%s/%s", root, ent->d_name);

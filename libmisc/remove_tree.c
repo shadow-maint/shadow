@@ -88,9 +88,7 @@ int remove_tree (const char *root, bool remove_root)
 		 * Make the filename for the current entry.
 		 */
 
-		if (NULL != new_name) {
-			free (new_name);
-		}
+		free (new_name);
 		new_name = (char *) malloc (new_len);
 		if (NULL == new_name) {
 			err = -1;

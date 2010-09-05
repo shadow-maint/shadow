@@ -273,7 +273,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
  *	as it goes.
  *
  *	When reset_selinux is enabled, extended attributes (and thus
- *	SELinux attributes are not copied.
+ *	SELinux attributes) are not copied.
  *
  *	old_uid and new_uid are used to set the ownership of the copied
  *	files. Unless old_uid is set to -1, only the files owned by

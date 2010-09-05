@@ -1,3 +1,12 @@
+2010-09-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Integrate review comments from Julien Cristau
+	* libmisc/copydir.c: Missing parenthesis in comment.
+	* libmisc/chowndir.c: Fixed memory leak on failed realloc().
+	* libmisc/chowndir.c: Make sure the buffer for the path is large
+	enough.
+	* libmisc/remove_tree.c: Remove check for NULL before free().
+
 2010-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/fr.po: Fix 2 fuzzy strings.
