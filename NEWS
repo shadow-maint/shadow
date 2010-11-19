@@ -25,12 +25,16 @@ shadow-4.1.4.2 -> shadow-4.1.5					UNRELEASED
   * Fixed limits support (non PAM enabled versions only)
   * Added support for infinite limits and group based limits (non PAM
     enabled versions only)
+  * Fixed infinite loop when CONSOLE is configured with a colon-separated
+    list of TTYs.
 - su
   * Document the su exit values.
   * When su receives a signal, wait for the child to terminate (after
     sending a SIGTERM), and kill it only if it did not terminate by itself.
     No delay will be enforced if the child cooperates.
   * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
+  * Fixed infinite loop when CONSOLE is configured with a colon-separated
+    list of TTYs.
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
 - useradd

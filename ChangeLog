@@ -1,3 +1,9 @@
+2010-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, libmisc/console.c: Fix CONSOLE parser. This caused login
+	to hang when CONSOLE was configured with a colon separated list of
+	TTYs.  See http://bugs.gentoo.org/show_bug.cgi?id=324419
+
 2010-09-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Integrate review comments from Julien Cristau

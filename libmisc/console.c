@@ -69,13 +69,15 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 */
 
 	if (*cons != '/') {
+		char *pbuf;
 		strcpy (buf, cons);
-		while ((s = strtok (buf, ":")) != NULL) {
+		pbuf = &buf[0];
+		while ((s = strtok (pbuf, ":")) != NULL) {
 			if (strcmp (s, tty) == 0) {
 				return true;
 			}
 
-			cons = NULL;
+			pbuf = NULL;
 		}
 		return false;
 	}
