@@ -180,7 +180,7 @@ generate_mans.deps: *.xml
 
 if ENABLE_REGENERATE_MAN
 
-include generate_mans.deps
+@ENABLE_REGENERATE_MAN_TRUE@include generate_mans.deps
 
 include generate_mans.mak
 

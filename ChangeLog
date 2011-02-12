@@ -1,3 +1,16 @@
+2011-02-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* autogen.sh: Restore original autoreconf (see 2010-08-29's change
+	for autogen.sh)
+	* configure.in, man/po/Makefile.in.in, man/po/Makefile.in:
+	Makefile.in.in replaced by Makefile.in to avoid config.status
+	issues when there are multiple po directories.
+	* man/po/LINGUAS: Adapted to above change.
+	* man/po/POTFILES.in, man/po/XMLFILES: POTFILES.in replaced by
+	XMLFILES.
+	* man/Makefile.am: generate_mans.deps shall be included by make,
+	not automake.
+
 2010-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, libmisc/console.c: Fix CONSOLE parser. This caused login

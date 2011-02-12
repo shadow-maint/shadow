@@ -586,7 +586,7 @@ AC_CONFIG_FILES([
 	doc/Makefile
 	man/Makefile
 	man/config.xml
-	man/po/Makefile.in
+	man/po/Makefile
 	man/cs/Makefile
 	man/de/Makefile
 	man/es/Makefile

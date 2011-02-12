@@ -11,40 +11,39 @@
 # Origin: gettext-0.16
 # Modified to handle translations with xml2po by Nicolas François - 2007
 
-PACKAGE = @PACKAGE@
-VERSION = @VERSION@
-PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
+PACKAGE = shadow
+VERSION = 4.1.4.2+svn3283
+PACKAGE_BUGREPORT = 
 
 SHELL = /bin/sh
-@SET_MAKE@
 
-srcdir = @srcdir@
-top_srcdir = @top_srcdir@
-VPATH = @srcdir@
 
-MSGFMT_ = @MSGFMT@
-MSGFMT_no = @MSGFMT@
-MSGFMT_yes = @MSGFMT_015@
+srcdir = .
+top_srcdir = ../..
+
+
+MSGFMT_ = /usr/bin/msgfmt
+MSGFMT_no = /usr/bin/msgfmt
+MSGFMT_yes = /usr/bin/msgfmt
 MSGFMT = $(MSGFMT_$(USE_MSGCTXT))
-XGETTEXT_ = @XGETTEXT@
-XGETTEXT_no = @XGETTEXT@
-XGETTEXT_yes = @XGETTEXT_015@
+XGETTEXT_ = /usr/bin/xgettext
+XGETTEXT_no = /usr/bin/xgettext
+XGETTEXT_yes = /usr/bin/xgettext
 XGETTEXT = $(XGETTEXT_$(USE_MSGCTXT))
 MSGMERGE = msgmerge --previous
-MSGMERGE_UPDATE = @MSGMERGE@ --update --previous
+MSGMERGE_UPDATE = /usr/bin/msgmerge --update --previous
 MSGINIT = msginit
 MSGCONV = msgconv
 MSGFILTER = msgfilter
 
-POFILES = @POFILES@
-UPDATEPOFILES = @UPDATEPOFILES@
-DUMMYPOFILES = @DUMMYPOFILES@
-DISTFILES.common = Makefile.in.in remove-potcdate.sin
-DISTFILES = $(DISTFILES.common) Makevars POTFILES.in $(POFILES)
+include $(srcdir)/LINGUAS
+#DISTFILES.common = Makefile.in remove-potcdate.sin
+DISTFILES.common = remove-potcdate.sin
+DISTFILES = $(DISTFILES.common) Makevars XMLFILES LINGUAS $(POFILES)
 
-POTFILES = \
+include $(srcdir)/XMLFILES
 
-# Makevars gets inserted here. (Don't remove this line!)
+include $(srcdir)/Makevars
 
 .SUFFIXES:
 .SUFFIXES: .po .sed .sin .nop .po-create .po-update
@@ -57,7 +56,7 @@ remove-potcdate.sin: ../../po/remove-potcdate.sin
 	mv t-$@ $@
 
 
-all: all-@USE_NLS@
+all: all-yes
 
 all-yes: stamp-po
 all-no:
@@ -90,12 +89,12 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 # This target rebuilds $(DOMAIN).pot; it is an expensive operation.
 # Note that $(DOMAIN).pot is not touched if it doesn't need to be changed.
 # TODO: set MSGID_BUGS_ADDRESS, COPYRIGHT_HOLDER
-$(DOMAIN).pot-update: $(POTFILES) $(srcdir)/POTFILES.in remove-potcdate.sed
+$(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
 	@set -e; tmpdir=`pwd`; \
 	echo "cd $(top_srcdir)/man"; \
 	cd $(top_srcdir)/man; \
-	echo "xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES))"; \
-	xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES)); \
+	echo "xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(XMLFILES))"; \
+	xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(XMLFILES)); \
 	cd $$tmpdir
 	test ! -f $(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \
@@ -160,7 +159,7 @@ mostlyclean:
 clean: mostlyclean
 
 distclean: clean
-	rm -f Makefile Makefile.in POTFILES
+	rm -f Makefile
 
 maintainer-clean: distclean
 	@echo "This command is intended for maintainers to use;"
@@ -185,7 +184,6 @@ dist2: stamp-po $(DISTFILES)
 	    dists="$$dists ChangeLog.$$i"; \
 	  fi; \
 	done; \
-	if test -f $(srcdir)/LINGUAS; then dists="$$dists LINGUAS"; fi; \
 	for file in $$dists; do \
 	  if test -f $$file; then \
 	    cp -p $$file $(distdir) || exit 1; \
@@ -193,6 +191,8 @@ dist2: stamp-po $(DISTFILES)
 	    cp -p $(srcdir)/$$file $(distdir) || exit 1; \
 	  fi; \
 	done
+# avant for precedant
+#	if test -f $(srcdir)/LINGUAS; then dists="$$dists LINGUAS"; fi; \
 
 update-po: Makefile
 	$(MAKE) $(DOMAIN).pot-update
@@ -232,9 +232,9 @@ update-po: Makefile
 
 $(DUMMYPOFILES):
 
-Makefile: Makefile.in.in Makevars $(top_builddir)/config.status @POMAKEFILEDEPS@
-	cd $(top_builddir) \
-	  && $(SHELL) ./config.status $(subdir)/$@.in po-directories
+#Makefile: Makefile.in Makevars $(top_builddir)/config.status LINGUAS
+#	cd $(top_builddir) \
+#	  && $(SHELL) ./config.status $(subdir)/$@
 
 force:
 
