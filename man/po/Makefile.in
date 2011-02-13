@@ -11,35 +11,33 @@
 # Origin: gettext-0.16
 # Modified to handle translations with xml2po by Nicolas François - 2007
 
-PACKAGE = shadow
-VERSION = 4.1.4.2+svn3283
-PACKAGE_BUGREPORT = 
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 
 SHELL = /bin/sh
+@SET_MAKE@
 
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
 
-srcdir = .
-top_srcdir = ../..
-
-
-MSGFMT_ = /usr/bin/msgfmt
-MSGFMT_no = /usr/bin/msgfmt
-MSGFMT_yes = /usr/bin/msgfmt
+MSGFMT_ = @MSGFMT@
+MSGFMT_no = @MSGFMT@
+MSGFMT_yes = @MSGFMT_015@
 MSGFMT = $(MSGFMT_$(USE_MSGCTXT))
-XGETTEXT_ = /usr/bin/xgettext
-XGETTEXT_no = /usr/bin/xgettext
-XGETTEXT_yes = /usr/bin/xgettext
+XGETTEXT_ = @XGETTEXT@
+XGETTEXT_no = @XGETTEXT@
+XGETTEXT_yes = @XGETTEXT_015@
 XGETTEXT = $(XGETTEXT_$(USE_MSGCTXT))
-MSGMERGE = msgmerge --previous
-MSGMERGE_UPDATE = /usr/bin/msgmerge --update --previous
+MSGMERGE = @MSGMERGE@ --previous
+MSGMERGE_UPDATE = @MSGMERGE@ --update --previous
 MSGINIT = msginit
 MSGCONV = msgconv
 MSGFILTER = msgfilter
 
 include $(srcdir)/LINGUAS
-#DISTFILES.common = Makefile.in remove-potcdate.sin
-DISTFILES.common = remove-potcdate.sin
-DISTFILES = $(DISTFILES.common) Makevars XMLFILES LINGUAS $(POFILES)
+DISTFILES = $(srcdir)/Makevars $(srcdir)/XMLFILES $(srcdir)/LINGUAS $(POFILES)
 
 include $(srcdir)/XMLFILES
 
@@ -48,13 +46,12 @@ include $(srcdir)/Makevars
 .SUFFIXES:
 .SUFFIXES: .po .sed .sin .nop .po-create .po-update
 
-remove-potcdate.sin: ../../po/remove-potcdate.sin
-	cp ../../po/remove-potcdate.sin .
+remove-potcdate.sin: $(top_srcdir)/po/remove-potcdate.sin
+	cp $? $@
 
 .sin.sed:
 	sed -e '/^#/d' $< > t-$@
 	mv t-$@ $@
-
 
 all: all-yes
 
@@ -76,6 +73,7 @@ all-no:
 # $(POFILES) has been designed to not touch files that don't need to be
 # changed.
 stamp-po: $(srcdir)/$(DOMAIN).pot
+	echo "TOTO 0"
 	@test ! -f $(srcdir)/$(DOMAIN).pot || { \
 	  echo "touch stamp-po" && \
 	  echo timestamp > stamp-poT && \
@@ -152,7 +150,7 @@ check: all
 info dvi ps pdf html tags TAGS ctags CTAGS ID:
 
 mostlyclean:
-	rm -f remove-potcdate.sed
+	rm -f remove-potcdate.sed remove-potcdate.sin
 	rm -f stamp-poT
 	rm -f core core.* $(DOMAIN).po $(DOMAIN).1po $(DOMAIN).2po *.new.po
 
@@ -191,8 +189,6 @@ dist2: stamp-po $(DISTFILES)
 	    cp -p $(srcdir)/$$file $(distdir) || exit 1; \
 	  fi; \
 	done
-# avant for precedant
-#	if test -f $(srcdir)/LINGUAS; then dists="$$dists LINGUAS"; fi; \
 
 update-po: Makefile
 	$(MAKE) $(DOMAIN).pot-update
@@ -232,11 +228,18 @@ update-po: Makefile
 
 $(DUMMYPOFILES):
 
-#Makefile: Makefile.in Makevars $(top_builddir)/config.status LINGUAS
-#	cd $(top_builddir) \
-#	  && $(SHELL) ./config.status $(subdir)/$@
+.PRECIOUS: Makefile
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@case '$?' in \
+	  *config.status*) \
+	    cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh;; \
+	  *) \
+	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
+	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
+	esac;
 
-force:
+$(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
+	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
 # Tell versions [3.59,3.63) of GNU make not to export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

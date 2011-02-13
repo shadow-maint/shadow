@@ -1,4 +1,8 @@
+# LINGUAS
+
 LINGUAS = de fr it pl ru sv
-POFILES = $(srcdir)/de.po $(srcdir)/fr.po $(srcdir)/it.po $(srcdir)/pl.po $(srcdir)/ru.po $(srcdir)/sv.po
-UPDATEPOFILES = de.po-update fr.po-update it.po-update pl.po-update ru.po-update sv.po-update
-DUMMYPOFILES = de.nop fr.nop it.nop pl.nop ru.nop sv.nop
+
+# These variables are generated based on the LINGUAS list
+POFILES = $(patsubst %,$(srcdir)/%.po,$(LINGUAS))
+UPDATEPOFILES = $(patsubst %,%.po-update,$(LINGUAS))
+DUMMYPOFILES = $(patsubst %,%.nop,$(LINGUAS))
