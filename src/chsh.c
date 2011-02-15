@@ -528,7 +528,7 @@ int main (int argc, char **argv)
 	 * users are restricted to using the shells in /etc/shells.
 	 * The shell must be executable by the user.
 	 */
-	if (valid_field (loginsh, ":,=") != 0) {
+	if (valid_field (loginsh, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		fail_exit (1);
 	}

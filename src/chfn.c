@@ -551,14 +551,14 @@ static void get_old_fields (const char *gecos)
 static void check_fields (void)
 {
 	int err;
-	err = valid_field (fullnm, ":,=");
+	err = valid_field (fullnm, ":,=\n");
 	if (err > 0) {
 		fprintf (stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
 	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
 		fail_exit (E_NOPERM);
 	}
-	err = valid_field (roomno, ":,=");
+	err = valid_field (roomno, ":,=\n");
 	if (err > 0) {
 		fprintf (stderr, _("%s: room number with non-ASCII characters: '%s'\n"), Prog, roomno);
 	} else if (err < 0) {
@@ -566,17 +566,17 @@ static void check_fields (void)
 		         Prog, roomno);
 		fail_exit (E_NOPERM);
 	}
-	if (valid_field (workph, ":,=") != 0) {
+	if (valid_field (workph, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
 		         Prog, workph);
 		fail_exit (E_NOPERM);
 	}
-	if (valid_field (homeph, ":,=") != 0) {
+	if (valid_field (homeph, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
 		         Prog, homeph);
 		fail_exit (E_NOPERM);
 	}
-	err = valid_field (slop, ":");
+	err = valid_field (slop, ":\n");
 	if (err > 0) {
 		fprintf (stderr, _("%s: '%s' contains non-ASCII characters\n"), Prog, slop);
 	} else if (err < 0) {

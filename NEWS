@@ -1,5 +1,11 @@
 $Id$
 
+shadow-4.1.4.2 -> shadow-4.1.4.3						2011-02-15
+
+*** security:
+- CVE-2011-0721: An insufficient input sanitation in chfn can be exploited
+  to create users or groups in a NIS environment.
+
 shadow-4.1.4.1 -> shadow-4.1.4.2						2009-07-24
 
 - general

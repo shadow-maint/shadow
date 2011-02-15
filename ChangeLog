@@ -1,3 +1,27 @@
+2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, configure.in: Prepare for the next release 4.1.4.2.
+	* man/generate_mans.deps, man/groupadd.8.xml: config.xml shall be
+	inserted during generation time.
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
+2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in, man/po/Makefile.in.in, man/po/Makefile.in:
+	Makefile.in.in replaced by Makefile.in to avoid config.status
+	issues when there are multiple po directories.
+	* man/po/LINGUAS: Adapted to above change.
+	* man/po/POTFILES.in, man/po/XMLFILES: POTFILES.in replaced by
+	XMLFILES.
+	* man/Makefile.am: generate_mans.deps shall be included by make,
+	not automake.
+
+2010-02-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/chfn.c, src/chsh.c: Fix CVE-2011-0721: forbid \n in
+	gecos or shell.
+
 2009-07-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Prepare for the next release 4.1.4.2.

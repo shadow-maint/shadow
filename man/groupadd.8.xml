@@ -33,8 +33,7 @@
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
-<!ENTITY % config SYSTEM "config.xml">
-%config;
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='groupadd.8'>
   <!-- $Id$ -->
