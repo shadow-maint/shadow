@@ -23,7 +23,6 @@ libmisc_a_SOURCES = \
 	env.c \
 	failure.c \
 	failure.h \
-	fields.c \
 	find_new_gid.c \
 	find_new_uid.c \
 	getdate.h \

@@ -14,6 +14,7 @@ libshadow_la_SOURCES = \
 	encrypt.c \
 	exitcodes.h \
 	faillog.h \
+	fields.c \
 	fputsx.c \
 	getdef.c \
 	getdef.h \

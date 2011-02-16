@@ -169,6 +169,32 @@ static int gshadow_put (const void *ent, FILE * file)
 {
 	const struct sgrp *sg = ent;
 
+	if (   (NULL == sg)
+	    || (valid_field (sg->sg_name, ":\n") == -1)
+	    || (valid_field (sg->sg_passwd, ":\n") == -1)) {
+		return -1;
+	}
+
+	/* FIXME: fail also if sg->sg_adm == NULL ?*/
+	if (NULL != sg->sg_adm) {
+		size_t i;
+		for (i = 0; NULL != sg->sg_adm[i]; i++) {
+			if (valid_field (sg->sg_adm[i], ",:\n") == -1) {
+				return -1;
+			}
+		}
+	}
+
+	/* FIXME: fail also if sg->sg_mem == NULL ?*/
+	if (NULL != sg->sg_mem) {
+		size_t i;
+		for (i = 0; NULL != sg->sg_mem[i]; i++) {
+			if (valid_field (sg->sg_mem[i], ",:\n") == -1) {
+				return -1;
+			}
+		}
+	}
+
 	return (putsgent (sg, file) == -1) ? -1 : 0;
 }
 

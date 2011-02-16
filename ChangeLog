@@ -1,3 +1,11 @@
+2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/groupio.c, lib/sgroupio.c, lib/shadowio.c, lib/pwio.c: Check
+	entry validity before commits to databases.
+	* libmisc/fields.c, libmisc/Makefile.am, lib/fields.c,
+	lib/Makefile.am, po/POTFILES.in: fields.c moved from libmisc to
+	lib.
+
 2010-02-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/chfn.c, src/chsh.c: Fix CVE-2011-0721: forbid \n in

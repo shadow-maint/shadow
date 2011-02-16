@@ -54,6 +54,10 @@ int valid_field (const char *field, const char *illegal)
 	const char *cp;
 	int err = 0;
 
+	if (NULL == cp) {
+		return -1;
+	}
+
 	/* For each character of field, search if it appears in the list
 	 * of illegal characters. */
 	for (cp = field; '\0' != *cp; cp++) {

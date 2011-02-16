@@ -72,6 +72,17 @@ static int passwd_put (const void *ent, FILE * file)
 {
 	const struct passwd *pw = ent;
 
+	if (   (NULL == pw)
+	    || (valid_field (pw->pw_name, ":\n") == -1)
+	    || (valid_field (pw->pw_passwd, ":\n") == -1)
+	    || (pw->pw_uid == (uid_t)-1)
+	    || (pw->pw_gid == (gid_t)-1)
+	    || (valid_field (pw->pw_gecos, ":\n") == -1)
+	    || (valid_field (pw->pw_dir, ":\n") == -1)
+	    || (valid_field (pw->pw_shell, ":\n") == -1)) {
+		return -1;
+	}
+
 	return (putpwent (pw, file) == -1) ? -1 : 0;
 }
 

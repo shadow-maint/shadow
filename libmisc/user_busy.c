@@ -43,7 +43,7 @@
 
 #ifdef __linux__
 static int check_status (const char *sname, uid_t uid);
-static int user_busy_processes (uid_t uid);
+static int user_busy_processes (const char *name, uid_t uid);
 #else				/* !__linux__ */
 static int user_busy_utmp (const char *name);
 #endif				/* !__linux__ */
@@ -58,7 +58,7 @@ int user_busy (const char *name, uid_t uid)
 	 */
 #ifdef __linux__
 	/* On Linux, directly parse /proc */
-	return user_busy_processes (uid);
+	return user_busy_processes (name, uid);
 #else				/* !__linux__ */
 	/* If we cannot rely on /proc, check is there is a record in utmp
 	 * indicating that the user is still logged in */
@@ -91,6 +91,9 @@ static int user_busy_utmp (const char *name)
 			continue;
 		}
 
+		fprintf (stderr,
+		         _("%s: user %s is currently logged in\n"),
+		         Prog, name);
 		return 1;
 	}
 
@@ -137,7 +140,7 @@ static int check_status (const char *sname, uid_t uid)
 	return 0;
 }
 
-static int user_busy_processes (uid_t uid)
+static int user_busy_processes (const char *name, uid_t uid)
 {
 	DIR *proc;
 	struct dirent *ent;
@@ -195,6 +198,9 @@ static int user_busy_processes (uid_t uid)
 
 		if (check_status (tmp_d_name, uid) != 0) {
 			(void) closedir (proc);
+			fprintf (stderr,
+			         _("%s: user %s is currently used by process %d\n"),
+			         Prog, name, pid);
 			return 1;
 		}
 
@@ -212,6 +218,9 @@ static int user_busy_processes (uid_t uid)
 				}
 				if (check_status (task_path+6, uid) != 0) {
 					(void) closedir (proc);
+					fprintf (stderr,
+					         _("%s: user %s is currently used by process %d\n"),
+					         Prog, name, pid);
 					return 1;
 				}
 			}

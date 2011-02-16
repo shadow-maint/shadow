@@ -76,6 +76,12 @@ static int shadow_put (const void *ent, FILE * file)
 {
 	const struct spwd *sp = ent;
 
+	if (   (NULL == sp)
+	    || (valid_field (sp->sp_namp, ":\n") == -1)
+	    || (valid_field (sp->sp_pwdp, ":\n") == -1)) {
+		return -1;
+	}
+
 	return (putspent (sp, file) == -1) ? -1 : 0;
 }
 

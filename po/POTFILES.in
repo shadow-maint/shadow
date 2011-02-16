@@ -2,6 +2,7 @@
 
 lib/commonio.c
 lib/encrypt.c
+lib/fields.c
 lib/fputsx.c
 lib/getdef.c
 lib/get_gid.c
@@ -40,7 +41,6 @@ libmisc/copydir.c
 libmisc/entry.c
 libmisc/env.c
 libmisc/failure.c
-libmisc/fields.c
 libmisc/find_new_gid.c
 libmisc/find_new_uid.c
 libmisc/getgr_nam_gid.c
