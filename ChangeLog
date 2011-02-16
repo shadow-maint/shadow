@@ -1,5 +1,12 @@
 2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/user_busy.c, src/userdel.c, src/usermod.c: Warn in
+	user_busy() rather than in src/userdel.c or src/usermod.c to
+	provide more accurate failure cause (user is logged in or user
+	still executes processes).
+
+2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c, lib/sgroupio.c, lib/shadowio.c, lib/pwio.c: Check
 	entry validity before commits to databases.
 	* libmisc/fields.c, libmisc/Makefile.am, lib/fields.c,

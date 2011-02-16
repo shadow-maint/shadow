@@ -936,9 +936,6 @@ int main (int argc, char **argv)
 	 * a cron job may be started on her behalf, etc.
 	 */
 	if (user_busy (user_name, user_id) != 0) {
-		fprintf (stderr,
-		         _("%s: user %s is currently logged in\n"),
-		         Prog, user_name);
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,

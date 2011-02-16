@@ -1735,9 +1735,6 @@ int main (int argc, char **argv)
 	 */
 	if (   (uflg || lflg || dflg)
 	    && (user_busy (user_name, user_id) != 0)) {
-		fprintf (stderr,
-		         _("%s: user %s is currently logged in\n"),
-		         Prog, user_name);
 		exit (E_USER_BUSY);
 	}
 
