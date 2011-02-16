@@ -1,3 +1,8 @@
+2010-02-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/chfn.c, src/chsh.c: Fix CVE-2011-0721: forbid \n in
+	gecos or shell.
+
 2011-02-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* autogen.sh: Restore original autoreconf (see 2010-08-29's change
