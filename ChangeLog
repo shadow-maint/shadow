@@ -5,6 +5,7 @@
 	* libmisc/fields.c, libmisc/Makefile.am, lib/fields.c,
 	lib/Makefile.am, po/POTFILES.in: fields.c moved from libmisc to
 	lib.
+	* lib/fields.c: Fail if input pointer is NULL.
 
 2010-02-13  Nicolas François  <nicolas.francois@centraliens.net>
 
