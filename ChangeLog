@@ -1,5 +1,9 @@
 2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/ru/Makefile.am: Remove double inclusion of $(man_nopam)
+
+2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/user_busy.c, src/userdel.c, src/usermod.c: Warn in
 	user_busy() rather than in src/userdel.c or src/usermod.c to
 	provide more accurate failure cause (user is logged in or user

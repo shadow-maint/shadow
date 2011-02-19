@@ -1,7 +1,6 @@
 mandir = @mandir@/ru
 
 man_MANS = \
-	$(man_nopam) \
 	chage.1 \
 	chfn.1 \
 	chgpasswd.8 \
