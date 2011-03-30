@@ -1,3 +1,8 @@
+2011-03-30  YunQiang Su  <wzssyqa@gmail.com>
+
+	* man/po/zh_CN.po: convert Simplified Chinese translation 
+	  of manpages to gettext
+
 2010-02-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/ru/Makefile.am: Remove double inclusion of $(man_nopam)
