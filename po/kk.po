@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2010-08-29 17:53+0200\n"
-"PO-Revision-Date: 2010-06-22 22:58+0600\n"
+"PO-Revision-Date: 2011-04-05 10:17+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -50,95 +50,81 @@ msgstr "%s пайдаланушының паролі: "
 msgid "%s: out of memory\n"
 msgstr "%s: жады жеткіліксіз\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot delete %s\n"
+#, c-format
 msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: %s өшіру мүмкін емес\n"
+msgstr "%s: %s табылмады: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
+#, c-format
 msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: %s үшін үй бумасы (%s) табылмады\n"
+msgstr "%s: %s бума да, сілтеме де емес.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
+#, c-format
 msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: '%s' жазбасын %s ішінен өшіру мүмкін емес\n"
+msgstr "%s: %s символдық сілтемесін оқу мүмкін емес: %s\n"
 
 #, c-format
 msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
+msgstr "%s: Күдіктілі ұзын символдық сілтеме: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s: %s бумасын жасау мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "lastlog: %s өлшемін алу мүмкін емес: %s\n"
+msgstr "%s: %s үшін иені ауыстыру мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: can't remove %s: %s\n"
+#, c-format
 msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: ексерту: %s өшіру мүмкін емес: %s\n"
+msgstr "%s: %s үшін режимді ауыстыру мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s: %s"
+#, c-format
 msgid "%s: unlink: %s: %s\n"
-msgstr "%s: атын ауыстыру: %s: %s"
+msgstr "%s: unlink: %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
+#, c-format
 msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: %s бумасының атын %s атына ауыстыру мүмкін емес\n"
+msgstr "%s: %s бумасын өшіру мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
+#, c-format
 msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: %s бумасының атын %s атына ауыстыру мүмкін емес\n"
+msgstr "%s: %s атын %s етіп орнату мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: can't remove %s: %s\n"
+#, c-format
 msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: ексерту: %s өшіру мүмкін емес: %s\n"
+msgstr "%s: %s өшіру мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s: %s символдық сілтемесін жасау мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "lastlog: %s өлшемін алу мүмкін емес: %s\n"
+msgstr "%s: %s үшін иелерді өзгерту мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot delete %s\n"
+#, c-format
 msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: %s өшіру мүмкін емес\n"
+msgstr "%s: lstat %s мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: (line %d, user %s) password not changed\n"
+#, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: (жол %d, пайдаланушы %s) пароль өзгертілмеген\n"
+msgstr "%s: Ескерту, %s пайдаланушысында tcb shadow файлы жоқ.\n"
 
 #, c-format
 msgid ""
 "%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
 "The account is left locked.\n"
 msgstr ""
+"%s: Төтенше жағдай: %s үшін tcb shadow қалыпты, st_nlink=1, файл емес.\n"
+"Тіркелгі блокталған күйінде қалдырылады.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s: %s"
+#, c-format
 msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: атын ауыстыру: %s: %s"
+msgstr "%s: mkdir: %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open %s\n"
+#, c-format
 msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: %s ашу мүмкін емес\n"
+msgstr "%s: %s ашу мүмкін емес: %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -186,13 +172,12 @@ msgstr "Терминал иесін не рұқстатын өзгерту мү�
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: %s босату сәтсіз\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s\n"
+#, c-format
 msgid "%s: "
-msgstr "%s: %s\n"
+msgstr "%s: "
 
 msgid ": "
-msgstr ""
+msgstr ": "
 
 msgid "Environment overflow\n"
 msgstr "Орындалу орта айнымалыларының шектен көп саны\n"
@@ -214,13 +199,14 @@ msgstr[0] ""
 
 #, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
-msgstr ""
+msgstr "%s: Қате баптаулар: GID_MIN (%lu), GID_MAX (%lu)\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 msgstr ""
+"%s: Қате баптаулар: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -232,13 +218,14 @@ msgstr "%s:  Ерекше GID алу мүмкін емес (бос GID-тар қ
 
 #, c-format
 msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
-msgstr ""
+msgstr "%s: Қате баптаулар: UID_MIN (%lu), UID_MAX (%lu)\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
 msgstr ""
+"%s: Қате баптаулар: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -652,10 +639,9 @@ msgstr ""
 "\n"
 "Опциялар:\n"
 
-#, fuzzy, c-format
-#| msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+#, c-format
 msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method            шифрлеу тәсілі (%s ішінен біреу)\n"
+msgstr "  -c, --crypt-method <ТӘСІЛ>  шифрлеу тәсілі (%s ішінен біреу)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr "  -e, --encrypted               берілген парольдер шифрленген\n"
@@ -708,20 +694,17 @@ msgstr "%s үшін қоршамды өзгерту\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Қате мән: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s is an invalid shell.\n"
+#, c-format
 msgid "%s: %s is an invalid shell\n"
-msgstr "%s: %s дұрыс қоршам емес.\n"
+msgstr "%s: %s дұрыс қоршам емес\n"
 
-#, fuzzy, c-format
-#| msgid "%s: user '%s' does not exist\n"
+#, c-format
 msgid "%s: Warning: %s does not exist\n"
-msgstr "%s: пайдаланушы '%s' жоқ болып тұр\n"
+msgstr "%s: Ескерту: %s жоқ болып тұр\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: %s not owned by %s\n"
+#, c-format
 msgid "%s: Warning: %s is not executable\n"
-msgstr "%s: ескерту: %s қазір %s иелігінде емес\n"
+msgstr "%s: Ескерту: %s орындалатын емес\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Қолданылуы: expiry {-f|-c}\n"
@@ -731,15 +714,11 @@ msgstr ""
 "  -a, --all                     барлық пайдаланушылар үшін faillog "
 "жазбаларын көрсету\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -l, --lock-time SEC           after failed login lock account for SEC "
-#| "seconds\n"
 msgid ""
 "  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
-"  -l, --lock-time СЕК           сәтсіз кіру талабынан кейін тіркелгіні СЕК "
+"  -l, --lock-secs СЕК           сәтсіз кіру талабынан кейін тіркелгіні СЕК "
 "секундқа блоктау\n"
 
 msgid ""
@@ -809,58 +788,43 @@ msgstr "faillog: %s ашу мүмкін емес: %s\n"
 msgid "faillog: Cannot get the size of %s: %s\n"
 msgstr "faillog: %s өлшемін алу мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] GROUP\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Қолданылуы: %s [опциялар] ТОП\n"
+"Қолданылуы: %s [опция] ТОП\n"
 "\n"
 "Опциялар:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgid "  -a, --add USER                add USER to GROUP\n"
-msgstr "  -g, --gid GID                 топ ID-ін GID мәніне орнату\n"
+msgstr "  -a, --add ПАЙД                ПАЙДаланушыны ТОПқа қосу\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
-msgstr ""
+msgstr "  -d, --delete ПАЙД             ПАЙДаланушыны ТОПтан өшіру\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
-msgstr ""
+msgstr "  -r, --remove-password         ТОП паролін өшіру\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
-msgstr "  -r, --reset                   сәтсіз кіру талап санағышын нөлдеу\n"
+msgstr ""
+"  -R, --restrict                ТОПқа қатынауды тек оның мүшелерімен шектеу\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
-msgstr ""
+msgstr "  -M, --members ПАЙД,...        ТОП мүшелерін орнату\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -A, --administrators ADMIN,...\n"
-#| "                                set the list of administrators for GROUP\n"
-#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 msgstr ""
 "  -A, --administrators ӘКІМШІ,...\n"
 "                                ТОП үшін әкімшілер тізімін орнату\n"
-"-A мен -M опцияларынан бөлек, бұл опцияларды бірге қолдануға болмайды.\n"
 
-#, fuzzy
-#| msgid "The options cannot be combined.\n"
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr "Бұл опцияларды бірге қолдануға болмайды.\n"
+msgstr ""
+"Бұл опцияларды, -A және -M опцияларынан басқа, бірге қолдануға болмайды.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "Бұл опцияларды бірге қолдануға болмайды.\n"
@@ -1004,57 +968,45 @@ msgstr "%s: '%s' пайдаланушысы '%s' тобының мүшесі б�
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: Жады жеткіліксіз. %s жаңарту мүмкін емес.\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Қолданылуы: %s [опциялар]\n"
+"Қолданылуы: %s [опциялар] [әрекет]\n"
 "\n"
 "Опциялар:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -N, --no-user-group           do not create a group with the same name "
-#| "as\n"
-#| "                                the user\n"
 msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
-msgstr "  -N, --no-user-group           пайдаланушымен аттас топты жасамау\n"
+msgstr ""
+"  -g, --group топ_аты           пайд. тобы орнына топты көрсету\n"
+"                                (тек root)\n"
 
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 msgid "Actions:\n"
-msgstr ""
+msgstr "Әрекеттер:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid ""
 "  -a, --add username            add username to the members of the group\n"
-msgstr "  -g, --gid GID                 жаңа топ үшін GID қолдану\n"
+msgstr ""
+"  -a, --add пайд_аты            пайдаланушыны топтың мүшелер тізіміне қосу\n"
 
 msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
-msgstr ""
+msgstr "  -d, --delete пайд_аты         пайдаланушыны топтан өшіру\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -p, --purge                   purge all members from the group\n"
-msgstr "  -g, --gid GID                 жаңа топ үшін GID қолдану\n"
+msgstr "  -p, --purge                   топтан барлық мүшелерді өшіру\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -g, --gid GID                 жаңа топ үшін GID қолдану\n"
+msgstr "  -l, --list                    топ мүшелердің тізімін шығару\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1559,10 +1511,9 @@ msgstr "%s: пароль өзгертілді.\n"
 msgid "%s: password expiry information changed.\n"
 msgstr "%s: пароль мерзімі туралы ақпарат өзгертілді.\n"
 
-#, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#, c-format
 msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Қолданылуы: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "Қолданылуы: %s [-q] [-r] [passwd]\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1575,6 +1526,7 @@ msgstr "%s: -s пен -r өзара үйлеспейді\n"
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
+"%s: USE_TCB іске қосулы болса, альтернативті shadow файлына рұқсат жоқ.\n"
 
 msgid "invalid password file entry"
 msgstr "парольдер файлының қате жазбасы"
@@ -1602,25 +1554,21 @@ msgstr "пайдаланушы '%s':  '%s' бумасы жоқ болып тұр
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "пайдаланушы '%s': '%s' бағдарламасы жоқ болып тұр\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "no tcb directory for %s\n"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s үшін tcb бумасы жоқ\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "create tcb directory for %s?"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s үшін tcb бумасын жасау керек пе?"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "failed to create tcb directory for %s\n"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s үшін tcb бумасын жасау сәтсіз аяқталды\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open %s\n"
+#, c-format
 msgid "%s: cannot lock %s.\n"
-msgstr "%s: %s ашу мүмкін емес\n"
+msgstr "%s: %s оқшаулау мүмкін емес.\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
@@ -1656,7 +1604,7 @@ msgstr "Қолданылуы: pwconv\n"
 
 #, c-format
 msgid "%s: can't work with tcb enabled\n"
-msgstr ""
+msgstr "%s: tcb іске қосулы болса, жұмыс істеу мүмкін емес\n"
 
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
@@ -1675,33 +1623,32 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Шындылықты тексеру үшін ӨЗІҢІЗДІҢ пароліңізді енгізіңіз.\n"
 
 msgid " ...killed.\n"
-msgstr ""
+msgstr " ...өлтірілді.\n"
 
 msgid " ...waiting for child to terminate.\n"
-msgstr ""
+msgstr " ...ұрпақ үрдістің тоқтатылуын күту.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
+#, c-format
 msgid "%s: Cannot fork user shell\n"
-msgstr "%s: Сіздің пайдаланушы атын анықтау мүмкін емес.\n"
+msgstr "%s: Пайдаланушы қоршамын іске қосу мүмкін емес\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
+msgstr "%s: сигнал ақаулығы\n"
 
 #, c-format
 msgid "%s: signal masking malfunction\n"
-msgstr ""
+msgstr "%s: сигналды басқару ақаулығы\n"
 
 msgid "Session terminated, terminating shell..."
-msgstr ""
+msgstr "Сессия тоқтатылды, қоршамды тоқтату..."
 
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
 msgid " ...terminated.\n"
-msgstr ""
+msgstr " ...тоқтатылды.\n"
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1791,7 +1738,7 @@ msgstr "Жүйені жөндеу режиміне өту"
 
 #, c-format
 msgid "%s: %s was created, but could not be removed\n"
-msgstr ""
+msgstr "%s: %s жасалды, бірақ оны өшіру мүмкін емес\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
@@ -1821,17 +1768,13 @@ msgstr "%s: '%s' тобы NIS тобы болып тұр.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: шектен көп топ саны көрсетілген (максимум %d).\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: useradd [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Қолданылуы: useradd [опциялар] ТІРКЕЛГІ\n"
+"Қолданылуы: %s [опциялар] ЛОГИН\n"
 "\n"
 "Опциялар:\n"
 
@@ -2012,10 +1955,9 @@ msgstr "%s: пайдаланушыны жасау мүмкін емес\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %lu бар болып тұр\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
+#, c-format
 msgid "%s: Failed to create tcb directory for %s\n"
-msgstr "%s: %s бумасын жасау мүкін емес\n"
+msgstr "%s: %s үшін tcb бумасын жасау мүмкін емес\n"
 
 #, c-format
 msgid "%s: can't create group\n"
@@ -2064,22 +2006,19 @@ msgstr "%s: %s қазір %s иелігінде емес, өшірілмейді
 
 #, c-format
 msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
-msgstr ""
+msgstr "%s: Жадыны бөлу мүмкін емес, %s үшін tcb жазбасы өшірілмеді.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
+#, c-format
 msgid "%s: Cannot drop privileges: %s\n"
-msgstr "%s: привилегиялар деңгейін төмендету мүмкін емес (%s)\n"
+msgstr "%s: Привилегияларды тастау мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot remove the content of %s: %s\n"
-msgstr "lastlog: %s өлшемін алу мүмкін емес: %s\n"
+msgstr "%s: %s құрамасын өшіру мүмкін емес: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
+#, c-format
 msgid "%s: Cannot remove tcb files for %s: %s\n"
-msgstr "%s: '%s' жазбасын %s ішінен өшіру мүмкін емес\n"
+msgstr "%s: %s үшін tcb файлдарын өшіру мүмкін емес: %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -2203,11 +2142,12 @@ msgid ""
 "%s: The previous home directory (%s) was not a directory. It is not removed "
 "and no home directories are created.\n"
 msgstr ""
+"%s: Алдыңғы үй бумасы (%s) бума емес болған. Ол өшірілмеді де, ешбір үй "
+"бумасы жасалмады.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: failed to completely remove old home directory %s"
+#, c-format
 msgid "%s: Failed to change ownership of the home directory"
-msgstr "%s: ескерту: %s ескі үй бумасын толығымен өшіру мүмкін емес"
+msgstr "%s: Үй бумасының иелігін ауыстыру мүмкін емес"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
@@ -2247,47 +2187,31 @@ msgstr ""
 "Сізге %s құрамасын түзетуге керек болуы мүмкін.\n"
 "Оны орындау үшін '%s' командасын қолданыңыз.\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Қолданылуы: %s [опциялар]\n"
+"Қолданылуы: vipw [опциялар]\n"
 "\n"
 "Опциялар:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgid "  -g, --group                   edit group database\n"
-msgstr "  -g, --gid GID                 топ ID-ін GID мәніне орнату\n"
+msgstr "  -g, --group                   топ дерекқорын түзету\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr "  -r, --system                  жүйелік тіркелгіні жасау\n"
+msgstr "  -p, --passwd                  passwd дерекқорын түзету\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -q, --quiet                   quiet mode\n"
-msgstr "  -g, --gid GID                 жаңа топ үшін GID қолдану\n"
+msgstr "  -q, --quiet                   тыныш режимі\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
-msgstr ""
-"  -a, --all                     барлық пайдаланушылар үшін faillog "
-"жазбаларын көрсету\n"
+msgstr "  -s, --shadow                  shadow не gshadow дерекқорын түзету\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
-msgstr "  -u, --uid UID                 жаңа тіркелгі үшін пайдаланушы ID-і\n"
+msgstr ""
+"  -u, --user                    қай пайдаланушының tcb shadow файлын түзету "
+"керек\n"
 
 #, c-format
 msgid "%s: failed to remove %s\n"
@@ -2297,15 +2221,11 @@ msgstr "%s: %s өшіру сәтсіз аяқталды\n"
 msgid "%s: %s is unchanged\n"
 msgstr "%s: %s өзгертілмеді\n"
 
-#, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create scratch directory"
-msgstr "mailbox атын ауыстыру қатемен аяқталды"
+msgstr "scratch бумасын жасау сәтсіз"
 
-#, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to drop privileges"
-msgstr "%s: привилегиялар деңгейін төмендету мүмкін емес (%s)\n"
+msgstr "привилегияларды тастау сәтсіз"
 
 msgid "Couldn't get file context"
 msgstr "Файлға қол жеткізу мүмкін емес"
@@ -2313,10 +2233,8 @@ msgstr "Файлға қол жеткізу мүмкін емес"
 msgid "setfscreatecon () failed"
 msgstr "setfscreatecon () сәтсіз"
 
-#, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to gain privileges"
-msgstr "%s: привилегиялар деңгейін төмендету мүмкін емес (%s)\n"
+msgstr "привилегияларды алу мүмкін емес"
 
 msgid "Couldn't lock file"
 msgstr "Файлды оқшаулау мүмкін емес"
@@ -2324,128 +2242,25 @@ msgstr "Файлды оқшаулау мүмкін емес"
 msgid "Couldn't make backup"
 msgstr "Қор көшірмені жасау мүмкін емес"
 
-#, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to open scratch file"
-msgstr "mailbox атын ауыстыру қатемен аяқталды"
+msgstr "scratch файлын ашу сәтсіз"
 
-#, fuzzy
-#| msgid "%s: failed to unlock %s\n"
 msgid "failed to unlink scratch file"
-msgstr "%s: %s босату сәтсіз\n"
+msgstr "scratch файлын жою сәтсіз"
 
-#, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to stat edited file"
-msgstr "mailbox атын ауыстыру қатемен аяқталды"
+msgstr "түзетілген файлды табу сәтсіз"
 
-#, fuzzy
-#| msgid "failed to change mailbox owner"
 msgid "failed to allocate memory"
-msgstr "mailbox иесін ауыстыру қатемен аяқталды"
+msgstr "жадыны бөлу сәтсіз"
 
-#, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create backup file"
-msgstr "mailbox атын ауыстыру қатемен аяқталды"
+msgstr "резервті көшірме файлын жасау сәтсіз"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s қайтару мүмкін емес: %s (сіздің өзгертулеріңіз %s ішінде)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid base directory '%s'\n"
+#, c-format
 msgid "%s: failed to find tcb directory for %s\n"
-msgstr "%s: '%s' негізгі бумасы қате\n"
-
-#, fuzzy
-#~| msgid ""
-#~| "Usage: vipw [options]\n"
-#~| "\n"
-#~| "Options:\n"
-#~| "  -g, --group                   edit group database\n"
-#~| "  -h, --help                    display this help message and exit\n"
-#~| "  -p, --passwd                  edit passwd database\n"
-#~| "  -q, --quiet                   quiet mode\n"
-#~| "  -s, --shadow                  edit shadow or gshadow database\n"
-#~| "\n"
-#~ msgid ""
-#~ "Usage: vipw [options]\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  -g, --group                   edit group database\n"
-#~ "  -h, --help                    display this help message and exit\n"
-#~ "  -p, --passwd                  edit passwd database\n"
-#~ "  -q, --quiet                   quiet mode\n"
-#~ "  -s, --shadow                  edit shadow or gshadow database\n"
-#~ "  -u, --user                    which user's tcb shadow file to edit\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Қолданылуы: vipw [опциялар]\n"
-#~ "\n"
-#~ "Опциялары:\n"
-#~ "  -g, --group                   топтар дерекқорын түзету\n"
-#~ "  -h, --help                    осы көмек ақпаратын көрсету және шығу\n"
-#~ "  -p, --passwd                  парольлдер дерекқорын түзету\n"
-#~ "  -q, --quiet                   \"тыныш\" түрі\n"
-#~ "  -s, --shadow                  shadow не gshadow дерекқорын түзету\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Usage: %s [option] GROUP\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  -a, --add USER                add USER to GROUP\n"
-#~ "  -d, --delete USER             remove USER from GROUP\n"
-#~ "  -r, --remove-password         remove the GROUP's password\n"
-#~ "  -R, --restrict                restrict access to GROUP to its members\n"
-#~ "  -M, --members USER,...        set the list of members of GROUP\n"
-#~ "%s\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Қолданылуы: %s [опция] ТОП\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  -a, --add ПАЙДАЛАНУШЫ         ПАЙДАЛАНУШЫНЫ ТОП ішіне қосу\n"
-#~ "  -d, --delete ПАЙДАЛАНУШЫ         ПАЙДАЛАНУШЫНЫ ТОП ішінен өшіру\n"
-#~ "  -r, --remove-password         ТОП паролін өшіру\n"
-#~ "  -R, --restrict                ТОПқа рұқсатты тек оның мүшелеріне беру\n"
-#~ "  -M, --members ПАЙДАЛАНУШЫ,... ТОП мүшелер тізімін орнату\n"
-#~ "%s\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Usage: groupmems [options] [action]\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  -g, --group groupname         change groupname instead of the user's "
-#~ "group\n"
-#~ "                                (root only)\n"
-#~ "\n"
-#~ "Actions:\n"
-#~ "  -a, --add username            add username to the members of the group\n"
-#~ "  -d, --delete username         remove username from the members of the "
-#~ "group\n"
-#~ "  -p, --purge                   purge all members from the group\n"
-#~ "  -l, --list                    list the members of the group\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Қолданылуы: groupmems [опциялар] [әрекет]\n"
-#~ "\n"
-#~ "Опциялар:\n"
-#~ "  -g, --group топ_аты           пайдаланушы тобының орнына топ_аты "
-#~ "орнату\n"
-#~ "                                (тек root үшін)\n"
-#~ "\n"
-#~ "Әрекеттер:\n"
-#~ "  -a, --add тіркелгі            тіркелгіні топ мүшелеріне қосу\n"
-#~ "  -d, --delete тіркелгі         тіркелгіні топ мүшелерінен өшіру\n"
-#~ "  -p, --purge                   топтан барлық мүшелерді өшіру\n"
-#~ "  -l, --list                    топ мүшелерін тізіп шығару\n"
-#~ "\n"
-
-#~ msgid "%s: can't create %s\n"
-#~ msgstr "%s: %s құру мүмкін емес\n"
-
-#~ msgid "%s: can't chown %s\n"
-#~ msgstr "%s: %s үшін chown жасау мүмкін емес\n"
+msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
