@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2010-08-29 17:53+0200\n"
-"PO-Revision-Date: 2011-04-05 23:29+0900\n"
+"PO-Revision-Date: 2011-04-06 11:18+0900\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
 "Language: \n"
@@ -88,7 +88,7 @@ msgstr "%s: ディレクトリ %s を削除できません: %s\n"
 
 #, c-format
 msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: %s の名前を %s に変更できません\n"
+msgstr "%s: %s の名前を %s に変更できません: %s\n"
 
 #, c-format
 msgid "%s: Cannot remove %s: %s\n"
@@ -227,7 +227,7 @@ msgstr "%s: 設定が不正: UID_MIN (%lu), UID_MAX (%lu)\n"
 msgid ""
 "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
-msgstr "%s: 設定が不正: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)"
+msgstr "%s: 設定が不正: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -1541,15 +1541,15 @@ msgstr "ユーザ '%s': プログラム '%s' が存在しません\n"
 
 #, c-format
 msgid "no tcb directory for %s\n"
-msgstr "%s: %s の tcb ディレクトリがありません\n"
+msgstr "%s の tcb ディレクトリがありません\n"
 
 #, c-format
 msgid "create tcb directory for %s?"
-msgstr "%s: %s の tcb ディレクトリを作成しますか?\n"
+msgstr "%s の tcb ディレクトリを作成しますか?"
 
 #, c-format
 msgid "failed to create tcb directory for %s\n"
-msgstr "%s: %s の tcb ディレクトリを作成できませんでした\n"
+msgstr "%s の tcb ディレクトリを作成できませんでした\n"
 
 #, c-format
 msgid "%s: cannot lock %s.\n"
@@ -1975,7 +1975,7 @@ msgstr "%s: グループ %s は他のユーザのプライマリグループな�
 
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
-msgstr "%s: 警告: %s を削除できません: %s: %s\n"
+msgstr "%s: 警告: %s を削除できません: %s\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
@@ -1991,7 +1991,7 @@ msgstr "%s: 特権を落とせませんでした %s\n"
 
 #, c-format
 msgid "%s: Cannot remove the content of %s: %s\n"
-msgstr "lastlog: %s の内容を削除できませんでした: %s\n"
+msgstr "%s: %s の内容を削除できませんでした: %s\n"
 
 #, c-format
 msgid "%s: Cannot remove tcb files for %s: %s\n"
