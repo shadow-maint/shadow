@@ -9,6 +9,7 @@
 	  man/login.defs.d/PORTTIME_CHECKS_ENAB.xml, 
 	  man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml:
 	  Fix typos
+	* man/po/de.po: German translation of manpages completed
 
 2011-05-23  Innocent De Marchi  <tangram.peces@gmail.com>
 
