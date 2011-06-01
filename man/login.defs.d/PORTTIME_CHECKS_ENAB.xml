@@ -32,7 +32,8 @@
   <term><option>PORTTIME_CHECKS_ENAB</option> (boolean)</term>
   <listitem>
     <para>
-      Enable checking of time restrictions specified in /etc/porttime.
+      Enable checking of time restrictions specified in
+      <filename>/etc/porttime</filename>.
     </para>
   </listitem>
 </varlistentry>

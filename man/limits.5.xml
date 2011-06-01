@@ -137,15 +137,15 @@
     </para>
 
     <para>
-      If a line with limits for an user exist, only the first line for
+      If more than one line with limits for an user exist, only the first line for
       this user will be considered.
     </para>
 
     <para>
       If no lines are specified for an user, the last
       <replaceable>@group</replaceable> line matching a group whose the
-      user is a member of will be conisdered, or the last line with
-      default limits if no groups contain the user).
+      user is a member of will be considered, or the last line with
+      default limits if no groups contain the user.
     </para>
 
     <para>

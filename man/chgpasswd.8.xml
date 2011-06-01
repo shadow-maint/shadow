@@ -74,7 +74,7 @@
     </para>
     <para>
       The default encryption algorithm can be defined for the system with
-      the ENCRYPT_METHOD variable of <filename>/etc/login.defs</filename>,
+      the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>,
       and can be overwiten with the <option>-e</option>,
       <option>-m</option>, or <option>-c</option> options.
     </para>

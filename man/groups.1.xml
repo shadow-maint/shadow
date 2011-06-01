@@ -67,7 +67,7 @@
       Systems which do not support concurrent group sets will have the
       information from <filename>/etc/group</filename> reported. The user
       must use <command>newgrp</command> or <command>sg</command> to change
-      their current real and effective group ID.
+      his current real and effective group ID.
     </para>
   </refsect1>
 

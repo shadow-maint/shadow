@@ -50,7 +50,7 @@
       The file contains fixed length
       records, indexed by numerical UID. Each record contains the count of
       login failures since the last successful login; the maximum number of
-      failures before the account is disabled; the line on whiche the last login
+      failures before the account is disabled; the line on which the last login
       failure occurred; the date of the last login failure;
       and the duration (in seconds) during which the account will be locked after
       a failure.

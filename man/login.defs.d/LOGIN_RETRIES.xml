@@ -36,7 +36,7 @@
     </para>
     <para condition="pam">
       This will most likely be overridden by PAM, since the default
-      pam_unix module has it's own built in of 3 retries. However, this is
+      pam_unix module has its own built in of 3 retries. However, this is
       a safe fallback in case you are using an authentication module that
       does not enforce PAM_MAXTRIES.
     </para>

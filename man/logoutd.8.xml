@@ -37,7 +37,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>logoutd</refname>
-    <refpurpose>Enforce login time restrictions</refpurpose>
+    <refpurpose>enforce login time restrictions</refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>

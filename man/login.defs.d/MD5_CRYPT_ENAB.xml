@@ -42,7 +42,7 @@
       Default is <replaceable>no</replaceable>.
     </para>
     <para>
-      This variable is superceded by the <option>ENCRYPT_METHOD</option>
+      This variable is superseded by the <option>ENCRYPT_METHOD</option>
       variable or by any command line option used to configure the
       encryption algorithm.
     </para>

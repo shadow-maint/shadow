@@ -163,11 +163,11 @@
 	  </para>
 	  <para>
 	    If this field contains the name of a group which does not
-	    exist (and was not created earlier wbefore by
+	    exist (and was not created before by
 	    <command>newusers</command>), a new group will be created with
 	    the specified name and a GID will be automatically defined by
 	    <command>newusers</command> to be used as the primary group ID
-	    for the user and Gs the ID for the new group.
+	    for the user and GID for the new group.
 	  </para>
 	</listitem>
       </varlistentry>

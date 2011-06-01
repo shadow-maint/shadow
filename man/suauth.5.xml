@@ -76,7 +76,7 @@
     <para>
       Where to-id is either the word <emphasis>ALL</emphasis>, a list of
       usernames delimited by "," or the words <emphasis>ALL
-      EXCEPT</emphasis> followed by a list of usernames delimited by ","
+      EXCEPT</emphasis> followed by a list of usernames delimited by ",".
     </para>
 
     <para>

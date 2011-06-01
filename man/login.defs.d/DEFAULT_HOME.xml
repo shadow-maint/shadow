@@ -33,7 +33,7 @@
   <listitem>
     <para>
       Indicate if login is allowed if we can't cd to the home directory.
-      Default in no.
+      Default is no.
     </para>
     <para>
       If set to <replaceable>yes</replaceable>, the user will login in

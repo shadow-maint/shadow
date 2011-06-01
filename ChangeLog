@@ -1,6 +1,22 @@
+2011-06-01  Simon Brandmair  <sbrandmair@gmx.net>
+
+	* man/newusers.8.xml, man/suauth.5.xml, man/suauth.5.xml,
+	  man/logoutd.8.xml, man/chgpasswd.8.xml, man/groups.1.xml,
+	  man/faillog.5.xml, man/login.defs.d/MD5_CRYPT_ENAB.xml,
+	  man/login.defs.d/DEFAULT_HOME.xml,
+	  man/login.defs.d/LOGIN_RETRIES.xml,
+	  man/login.defs.d/MD5_CRYPT_ENAB.xml,
+	  man/login.defs.d/PORTTIME_CHECKS_ENAB.xml, 
+	  man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml:
+	  Fix typos
+
+2011-05-23  Innocent De Marchi  <tangram.peces@gmail.com>
+
+	* po/ca.po: Catalan translation completed
+
 2011-04-22  Miguel Figueiredo  <elmig@debianpt.org>
 
-	* po/pt.po: French translation completed
+	* po/pt.po: Portuguese translation completed
 
 2011-04-22  Thomas Blein  <tblein@tblein.eu>
 
