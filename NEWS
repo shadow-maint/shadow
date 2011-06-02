@@ -27,6 +27,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     enabled versions only)
   * Fixed infinite loop when CONSOLE is configured with a colon-separated
     list of TTYs.
+  * Fixed warning and support for CONSOLE_GROUPS for users member of more
+    than 16 groups.
 - su
   * Document the su exit values.
   * When su receives a signal, wait for the child to terminate (after
@@ -35,6 +37,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
   * Fixed infinite loop when CONSOLE is configured with a colon-separated
     list of TTYs.
+  * Fixed warning and support for CONSOLE_GROUPS for users member of more
+    than 16 groups.
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
 - useradd

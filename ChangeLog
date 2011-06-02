@@ -1,3 +1,8 @@
+2010-06-02  Cal Peake  <cp@absolutedigital.net>
+
+	* NEWS, libmisc/addgrps.c: Fix allocator loop. Continue to
+	getgroups() when getgroups fails (-1) with errno==EINVAL.
+
 2011-06-01  Simon Brandmair  <sbrandmair@gmx.net>
 
 	* man/newusers.8.xml, man/suauth.5.xml, man/suauth.5.xml,

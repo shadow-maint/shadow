@@ -71,7 +71,11 @@ int add_groups (const char *list)
 			return -1;
 		}
 		ngroups = getgroups (i, grouplist);
-		if ((-1 == ngroups) || (i > (size_t)ngroups)) {
+		if (   (   (-1 == ngroups)
+		        && (EINVAL != errno))
+		    || (i > (size_t)ngroups)) {
+			/* Unexpected failure of getgroups or successful
+			 * reception of the groups */
 			break;
 		}
 		/* not enough room, so try allocating a larger buffer */
