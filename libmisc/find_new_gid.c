@@ -32,6 +32,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include "prototypes.h"
 #include "groupio.h"
@@ -75,7 +76,13 @@ int find_new_gid (bool sys_group,
 			                Prog, (unsigned long) gid_min, getdef_ulong ("GID_MIN", 1000UL), (unsigned long) gid_max);
 		}
 	}
-	used_gids = alloca (sizeof (bool) * (gid_max +1));
+	used_gids = malloc (sizeof (bool) * (gid_max +1));
+	if (NULL == used_gids) {
+		fprintf (stderr,
+		         _("%s: failed to allocate memory: %s\n"),
+		         Prog, strerror (errno));
+		return -1;
+	}
 	memset (used_gids, false, sizeof (bool) * (gid_max + 1));
 
 	if (   (NULL != preferred_gid)
@@ -189,6 +196,7 @@ int find_new_gid (bool sys_group,
 		}
 	}
 
+	free (used_gids);
 	*gid = group_id;
 	return 0;
 }

@@ -32,6 +32,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include "prototypes.h"
 #include "pwio.h"
@@ -75,7 +76,13 @@ int find_new_uid (bool sys_user,
 			                Prog, (unsigned long) uid_min, getdef_ulong ("UID_MIN", 1000UL), (unsigned long) uid_max);
 		}
 	}
-	used_uids = alloca (sizeof (bool) * (uid_max +1));
+	used_uids = malloc (sizeof (bool) * (uid_max +1));
+	if (NULL == used_uids) {
+		fprintf (stderr,
+		         _("%s: failed to allocate memory. %s\n"),
+		         Prog, strerror (errno));
+		return -1;
+	}
 	memset (used_uids, false, sizeof (bool) * (uid_max + 1));
 
 	if (   (NULL != preferred_uid)
@@ -189,6 +196,7 @@ int find_new_uid (bool sys_user,
 		}
 	}
 
+	free (used_uids);
 	*uid = user_id;
 	return 0;
 }
