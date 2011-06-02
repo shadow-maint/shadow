@@ -1,3 +1,7 @@
+2011-06-02  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/xmalloc.c: Harmonize message.
+
 2011-06-02  Peter Vrabec  <pvrabec@redhat.com>
 
 	* libmisc/find_new_uid.c, libmisc/find_new_gid.c: Add missing

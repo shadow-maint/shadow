@@ -44,6 +44,7 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <errno.h>
 #include "defines.h"
 #include "prototypes.h"
 
@@ -53,7 +54,9 @@
 
 	ptr = (char *) malloc (size);
 	if (NULL == ptr) {
-		(void) fprintf (stderr, _("malloc(%d) failed\n"), (int) size);
+		(void) fprintf (stderr,
+		                _("%s: failed to allocate memory: %s\n"),
+		                Prog, strerror (errno));
 		exit (13);
 	}
 	return ptr;
