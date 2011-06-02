@@ -118,8 +118,8 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		return;
 	}
 
-	offset = pw->pw_uid * sizeof (fl);
-	if (offset <= (statbuf.st_size - sizeof (fl))) {
+	offset = (off_t) pw->pw_uid * sizeof (fl);
+	if (offset + sizeof (fl) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -218,8 +218,8 @@ static bool reset_one (uid_t uid)
 	off_t offset;
 	struct faillog fl;
 
-	offset = uid * sizeof (fl);
-	if (offset <= (statbuf.st_size - sizeof (fl))) {
+	offset = (off_t) uid * sizeof (fl);
+	if (offset + sizeof (fl) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -333,7 +333,7 @@ static bool setmax_one (uid_t uid, int max)
 	struct faillog fl;
 
 	offset = (off_t) uid * sizeof (fl);
-	if (offset <= (statbuf.st_size - sizeof (fl))) {
+	if (offset + sizeof (fl) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -450,7 +450,7 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	struct faillog fl;
 
 	offset = (off_t) uid * sizeof (fl);
-	if (offset <= (statbuf.st_size - sizeof (fl))) {
+	if (offset + sizeof (fl) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
