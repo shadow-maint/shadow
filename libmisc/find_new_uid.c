@@ -79,7 +79,7 @@ int find_new_uid (bool sys_user,
 	used_uids = malloc (sizeof (bool) * (uid_max +1));
 	if (NULL == used_uids) {
 		fprintf (stderr,
-		         _("%s: failed to allocate memory. %s\n"),
+		         _("%s: failed to allocate memory: %s\n"),
 		         Prog, strerror (errno));
 		return -1;
 	}
