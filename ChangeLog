@@ -1,3 +1,13 @@
+2011-06-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/zh_CN/, man/zh_CN/Makefile.am: Added directory, and zh_CN
+	Makefile.
+	* man/Makefile.am: Build zh_CN pages.
+	* man/generate_translations.mak: Add config.xml to CLEANFILES.
+	* man/po/zh_CN.po: limits, groups, faillog, expiry should not be
+	translated (command name, file name), also this broke the build
+	system as they are used to derive manpage names.
+
 2011-06-02  Peter Vrabec  <pvrabec@redhat.com>
 
 	* src/lastlog.c, src/faillog.c: Fix underflows causing wrong entry
