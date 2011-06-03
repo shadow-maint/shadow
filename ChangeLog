@@ -1,5 +1,10 @@
 2011-06-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/sulogin.c: Added Prog, needed because of the last xmalloc()
+	change.
+
+2011-06-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/zh_CN/, man/zh_CN/Makefile.am: Added directory, and zh_CN
 	Makefile.
 	* man/Makefile.am: Build zh_CN pages.
