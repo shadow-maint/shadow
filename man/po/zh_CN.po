@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages VERSION\n"
 "POT-Creation-Date: 2010-08-29 17:54+0200\n"
-"PO-Revision-Date: 2011-03-26 01:52+0800\n"
+"PO-Revision-Date: 2011-06-03 22:36+0200\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -6138,7 +6138,7 @@ msgstr ""
 
 #: limits.5.xml:35(refentrytitle) limits.5.xml:40(refname)
 msgid "limits"
-msgstr "限制"
+msgstr "limits"
 
 #: limits.5.xml:41(refpurpose)
 msgid "resource limits definition"
@@ -6704,7 +6704,7 @@ msgstr ""
 #: groups.1.xml:34(refentrytitle) groups.1.xml:39(refname)
 #: groups.1.xml:45(command)
 msgid "groups"
-msgstr "组"
+msgstr "groups"
 
 #: groups.1.xml:40(refpurpose)
 msgid "display current group names"
@@ -7418,7 +7418,7 @@ msgstr ""
 #: faillog.8.xml:45(command) faillog.5.xml:34(refentrytitle)
 #: faillog.5.xml:39(refname) faillog.5.xml:86(refentrytitle)
 msgid "faillog"
-msgstr "登录失败"
+msgstr "faillog"
 
 #: faillog.8.xml:40(refpurpose)
 msgid "display faillog records or set login failure limits"
@@ -7607,7 +7607,7 @@ msgstr ""
 #: expiry.1.xml:41(refentrytitle) expiry.1.xml:46(refname)
 #: expiry.1.xml:52(command)
 msgid "expiry"
-msgstr "过期"
+msgstr "expiry"
 
 #: expiry.1.xml:47(refpurpose)
 msgid "check and enforce password expiration policy"

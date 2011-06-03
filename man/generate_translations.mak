@@ -17,4 +17,4 @@ $(man_MANS):
 	@false
 endif
 
-CLEANFILES = .xml2po.mo $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST))
+CLEANFILES = .xml2po.mo $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST)) config.xml
