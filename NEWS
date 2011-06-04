@@ -44,6 +44,9 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
 - useradd
   * If the skeleton directory contained hardlinked files, copies of the
     hardlink were removed from the skeleton directory.
+- userdel
+  * Check the existence of the user's mail spool before trying to remove
+    it. If it does not exist, a warning is issued, but no failure.
 - usermod
   * Accept options in any order (username not necessarily at the end)
 

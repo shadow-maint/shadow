@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -668,6 +668,28 @@ static int remove_mailbox (void)
 		return 0;
 	}
 	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
+
+	if (access (mailfile, F_OK) != 0) {
+		if (ENOENT == errno) {
+			fprintf (stderr,
+			         _("%s: %s mail spool (%s) not found\n"),
+			         Prog, user_name, user_home);
+			return 0;
+		} else {
+			fprintf (stderr,
+			         _("%s: warning: can't remove %s: %s\n"),
+			         Prog, mailfile, strerror (errno));
+			SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_DEL_USER, Prog,
+			              "deleting mail file",
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
+#endif				/* WITH_AUDIT */
+			return -1;
+		}
+	}
+
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
 			fprintf (stderr,

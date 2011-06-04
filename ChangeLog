@@ -1,3 +1,9 @@
+2011-06-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/userdel.c: Check the existence of the user's mail
+	spool before trying to remove it. If it does not exist, a warning
+	is issued, but no failure.
+
 2011-06-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/sulogin.c: Added Prog, needed because of the last xmalloc()
