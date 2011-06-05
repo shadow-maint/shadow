@@ -88,7 +88,7 @@ static bool change_environment;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
-static bool caught = false;
+static int caught = 0;
 /* PID of the child, in case it needs to be killed */
 static pid_t pid_child = 0;
 #endif
@@ -235,9 +235,9 @@ static void execve_shell (const char *shellstr,
 
 #ifdef USE_PAM
 /* Signal handler for parent process later */
-static void catch_signals (unused int sig)
+static void catch_signals (int sig)
 {
-	caught = true;
+	caught = sig;
 }
 
 /* This I ripped out of su.c from sh-utils after the Mandrake pam patch
@@ -264,6 +264,11 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		if (doshell) {
 			(void) shell (shellstr, (char *) args[0], envp);
 		} else {
+			/* There is no need for a controlling terminal.
+			 * This avoids the callee to inject commands on
+			 * the caller's tty. */
+			(void) setsid ();
+
 			execve_shell (shellstr, (char **) args, envp);
 		}
 
@@ -283,9 +288,9 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		(void) fprintf (stderr,
 		                _("%s: signal malfunction\n"),
 		                Prog);
-		caught = true;
+		caught = SIGTERM;
 	}
-	if (!caught) {
+	if (0 == caught) {
 		struct sigaction action;
 
 		action.sa_handler = catch_signals;
@@ -296,36 +301,66 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		if (   (sigaddset (&ourset, SIGTERM) != 0)
 		    || (sigaddset (&ourset, SIGALRM) != 0)
 		    || (sigaction (SIGTERM, &action, NULL) != 0)
+		    || (   !doshell /* handle SIGINT (Ctrl-C), SIGQUIT
+		                     * (Ctrl-\), and SIGTSTP (Ctrl-Z)
+		                     * since the child does not control
+		                     * the tty anymore.
+		                     */
+		        && (   (sigaddset (&ourset, SIGINT)  != 0)
+		            || (sigaddset (&ourset, SIGQUIT) != 0)
+		            || (sigaddset (&ourset, SIGTSTP) != 0)
+		            || (sigaction (SIGINT,  &action, NULL) != 0)
+		            || (sigaction (SIGQUIT, &action, NULL) != 0))
+		            || (sigaction (SIGTSTP,  &action, NULL) != 0))
 		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
 			fprintf (stderr,
 			         _("%s: signal masking malfunction\n"),
 			         Prog);
-			caught = true;
+			caught = SIGTERM;
 		}
 	}
 
-	if (!caught) {
+	if (0 == caught) {
+		bool stop = true;
+
 		do {
 			pid_t pid;
+			stop = true;
 
 			pid = waitpid (-1, &status, WUNTRACED);
 
-			if (((pid_t)-1 != pid) && (0 != WIFSTOPPED (status))) {
+			/* When interrupted by signal, the signal will be
+			 * forwarded to the child, and termination will be
+			 * forced later.
+			 */
+			if (   ((pid_t)-1 == pid)
+			    && (EINTR == errno)
+			    && (SIGTSTP == caught)) {
+				/* Except for SIGTSTP, which request to
+				 * stop the child.
+				 * We will SIGSTOP ourself on the next
+				 * waitpid round.
+				 */
+				kill (child, SIGSTOP);
+				stop = false;
+			} else if (   ((pid_t)-1 != pid)
+			           && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
 				kill (getpid (), SIGSTOP);
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
+				stop = false;
 			}
-		} while (0 != WIFSTOPPED (status));
+		} while (!stop);
 	}
 
-	if (caught) {
+	if (0 != caught) {
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
-		(void) kill (child, SIGTERM);
+		(void) kill (child, caught);
 	}
 
 	ret = pam_close_session (pamh, 0);
@@ -339,7 +374,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 
 	ret = pam_end (pamh, PAM_SUCCESS);
 
-	if (caught) {
+	if (0 != caught) {
 		(void) signal (SIGALRM, kill_child);
 		(void) alarm (2);
 

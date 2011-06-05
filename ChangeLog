@@ -1,5 +1,13 @@
 2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/su.c: Do not forward the controlling terminal to
+	commands executed with -c. This prevents tty hijacking which could
+	lead to execution with the caller's privileges. This required to
+	forward signals from the terminal (SIGINT, SIGQUIT, SIGTSTP) to
+	the executed command.
+
+2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/userdel.c: Do not remove a group with the same name as
 	the user (usergroup) if this group isn't the user's primary group.
 
