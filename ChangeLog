@@ -1,3 +1,8 @@
+2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/userdel.c: Do not remove a group with the same name as
+	the user (usergroup) if this group isn't the user's primary group.
+
 2011-06-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/userdel.c: Check the existence of the user's mail

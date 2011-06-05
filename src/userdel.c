@@ -82,6 +82,7 @@ const char *Prog;
 
 static char *user_name;
 static uid_t user_id;
+static gid_t user_gid;
 static char *user_home;
 
 static bool fflg = false;
@@ -100,6 +101,7 @@ static bool spw_locked  = false;
 /* local function prototypes */
 static void usage (int status);
 static void update_groups (void);
+static void remove_usergroup (void);
 static void close_files (void);
 static void fail_exit (int);
 static void open_files (void);
@@ -145,10 +147,8 @@ static void update_groups (void)
 {
 	const struct group *grp;
 	struct group *ngrp;
-	struct passwd *pwd;
 
 #ifdef	SHADOWGRP
-	bool deleted_user_group = false;
 	const struct sgrp *sgrp;
 	struct sgrp *nsgrp;
 #endif				/* SHADOWGRP */
@@ -199,69 +199,10 @@ static void update_groups (void)
 			 user_name, ngrp->gr_name));
 	}
 
-	/*
-	 * we've removed their name from all the groups above, so
-	 * now if they have a group with the same name as their
-	 * user name, with no members, we delete it.
-	 * FIXME: below, the check for grp->gr_mem[0] is not sufficient.
-	 *        We should retrieve the group with gr_locate and check
-	 *        that gr_mem is empty.
-	 */
-	grp = xgetgrnam (user_name);
-	if (   (NULL != grp)
-	    && getdef_bool ("USERGROUPS_ENAB")
-	    && (   (NULL == grp->gr_mem[0])
-	        || (   (NULL == grp->gr_mem[1])
-	            && (strcmp (grp->gr_mem[0], user_name) == 0)))) {
-
-		pwd = NULL;
-		if (!fflg) {
-			/*
-			 * Scan the passwd file to check if this group is still
-			 * used as a primary group.
-			 */
-			setpwent ();
-			while ((pwd = getpwent ()) != NULL) {
-				if (strcmp (pwd->pw_name, user_name) == 0) {
-					continue;
-				}
-				if (pwd->pw_gid == grp->gr_gid) {
-					fprintf (stderr,
-					         _("%s: group %s is the primary group of another user and is not removed.\n"),
-					         Prog, grp->gr_name);
-					break;
-				}
-			}
-			endpwent ();
-		}
-
-		if (NULL == pwd) {
-			/*
-			 * We can remove this group, it is not the primary
-			 * group of any remaining user.
-			 */
-			if (gr_remove (grp->gr_name) == 0) {
-				fprintf (stderr,
-				         _("%s: cannot remove entry '%s' from %s\n"),
-				         Prog, grp->gr_name, gr_dbname ());
-				fail_exit (E_GRP_UPDATE);
-			}
-
-#ifdef SHADOWGRP
-			deleted_user_group = true;
-#endif				/* SHADOWGRP */
-
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_GROUP, Prog,
-			              "deleting group",
-			              grp->gr_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_SUCCESS);
-#endif				/* WITH_AUDIT */
-			SYSLOG ((LOG_INFO,
-				 "removed group '%s' owned by '%s'\n",
-				 grp->gr_name, user_name));
-		}
+	if (getdef_bool ("USERGROUPS_ENAB")) {
+		remove_usergroup ();
 	}
+
 #ifdef	SHADOWGRP
 	if (!is_shadow_grp) {
 		return;
@@ -317,19 +258,109 @@ static void update_groups (void)
 		              SHADOW_AUDIT_SUCCESS);
 #endif				/* WITH_AUDIT */
 		SYSLOG ((LOG_INFO, "delete '%s' from shadow group '%s'\n",
-			 user_name, nsgrp->sg_name));
-	}
-
-	if (   deleted_user_group
-	    && (sgr_locate (user_name) != NULL)) {
-		if (sgr_remove (user_name) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, user_name, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
-		}
+		         user_name, nsgrp->sg_name));
 	}
 #endif				/* SHADOWGRP */
+}
+
+/*
+ * remove_usergroup - delete the user's group if it is a usergroup
+ *
+ *	An usergroup is removed if
+ *	  + it has the same name as the user
+ *	  + it is the primary group of the user
+ *	  + it has no other members
+ *	  + it is not the primary group of any other user
+ */
+static void remove_usergroup (void)
+{
+	const struct group *grp;
+	const struct passwd *pwd = NULL;
+
+	grp = gr_locate (user_name);
+	if (NULL == grp) {
+		/* This user has no usergroup. */
+		return;
+	}
+
+	if (grp->gr_gid != user_gid) {
+		fprintf (stderr,
+		         _("%s: group %s not removed because it is not the primary group of user %s.\n"),
+		         Prog, grp->gr_name, user_name);
+		return;
+	}
+
+	if (NULL != grp->gr_mem[0]) {
+		/* The usergroup has other members. */
+		fprintf (stderr,
+		         _("%s: group %s not removed because it has other members.\n"),
+		         Prog, grp->gr_name);
+		return;
+	}
+
+	if (!fflg) {
+		/*
+		 * Scan the passwd file to check if this group is still
+		 * used as a primary group.
+		 */
+		setpwent ();
+		while ((pwd = getpwent ()) != NULL) {
+			if (strcmp (pwd->pw_name, user_name) == 0) {
+				continue;
+			}
+			if (pwd->pw_gid == grp->gr_gid) {
+				fprintf (stderr,
+				         _("%s: group %s is the primary group of another user and is not removed.\n"),
+				         Prog, grp->gr_name);
+				break;
+			}
+		}
+		endpwent ();
+	}
+
+	if (NULL == pwd) {
+		/*
+		 * We can remove this group, it is not the primary
+		 * group of any remaining user.
+		 */
+		if (gr_remove (grp->gr_name) == 0) {
+			fprintf (stderr,
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, grp->gr_name, gr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_DEL_GROUP, Prog,
+		              "deleting group",
+		              grp->gr_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_SUCCESS);
+#endif				/* WITH_AUDIT */
+		SYSLOG ((LOG_INFO,
+		         "removed group '%s' owned by '%s'\n",
+		         grp->gr_name, user_name));
+
+#ifdef	SHADOWGRP
+		if (sgr_locate (user_name) != NULL) {
+			if (sgr_remove (user_name) == 0) {
+				fprintf (stderr,
+				         _("%s: cannot remove entry '%s' from %s\n"),
+				         Prog, user_name, sgr_dbname ());
+				fail_exit (E_GRP_UPDATE);
+			}
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_DEL_GROUP, Prog,
+			              "deleting shadow group",
+			              grp->gr_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_SUCCESS);
+#endif				/* WITH_AUDIT */
+			SYSLOG ((LOG_INFO,
+			         "removed shadow group '%s' owned by '%s'\n",
+			         grp->gr_name, user_name));
+
+		}
+#endif				/* SHADOWGRP */
+	}
 }
 
 /*
@@ -925,6 +956,7 @@ int main (int argc, char **argv)
 			exit (E_NOTFOUND);
 		}
 		user_id = pwd->pw_uid;
+		user_gid = pwd->pw_gid;
 		user_home = xstrdup (pwd->pw_dir);
 	}
 #ifdef WITH_TCB
