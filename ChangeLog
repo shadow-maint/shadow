@@ -4,6 +4,7 @@
 	used to save the caller's context.
 	* src/su.c: Split check_perms() in to a PAM (check_perms_pam) and
 	a non-PAM (check_perms_nopam) version.
+	* src/su.c: Cleanup check_perms_nopam().
 
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 

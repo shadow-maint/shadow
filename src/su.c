@@ -450,7 +450,7 @@ static void check_perms_pam (struct passwd *pw)
 			}
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
-				 pam_strerror (pamh, ret)));
+			         pam_strerror (pamh, ret)));
 			fprintf (stderr,
 			         _("%s: %s\n"),
 			         Prog, pam_strerror (pamh, ret));
@@ -462,10 +462,12 @@ static void check_perms_pam (struct passwd *pw)
 #else				/* !USE_PAM */
 static void check_perms_nopam (struct passwd *pw)
 {
-#ifdef SU_ACCESS
 	struct spwd *spwd = NULL;
-#endif				/* SU_ACCESS */
 	RETSIGTYPE (*oldsig) (int);
+
+	if (caller_is_root) {
+		return;
+	}
 
 	/*
 	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
@@ -485,41 +487,39 @@ static void check_perms_nopam (struct passwd *pw)
 	 * to Chris Evans <lady0110@sable.ox.ac.uk>.
 	 */
 
-	if (!caller_is_root) {
-		if (   (0 == pw->pw_uid)
-		    && getdef_bool ("SU_WHEEL_ONLY")
-		    && !iswheel (caller_name)) {
-			fprintf (stderr,
-			         _("You are not authorized to su %s\n"),
-			         name);
-			exit (1);
-		}
-#ifdef SU_ACCESS
-		spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
-		if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
-			if (NULL != spwd) {
-				pw->pw_passwd = spwd->sp_pwdp;
-			}
-		}
-
-		switch (check_su_auth (caller_name, name, 0 == pw->pw_uid)) {
-		case 0:	/* normal su, require target user's password */
-			break;
-		case 1:	/* require no password */
-			pw->pw_passwd = "";	/* XXX warning: const */
-			break;
-		case 2:	/* require own password */
-			puts (_("(Enter your own password)"));
-			pw->pw_passwd = caller_pass;
-			break;
-		default:	/* access denied (-1) or unexpected value */
-			fprintf (stderr,
-			         _("You are not authorized to su %s\n"),
-			         name);
-			exit (1);
-		}
-#endif				/* SU_ACCESS */
+	if (   (0 == pw->pw_uid)
+	    && getdef_bool ("SU_WHEEL_ONLY")
+	    && !iswheel (caller_name)) {
+		fprintf (stderr,
+		         _("You are not authorized to su %s\n"),
+		         name);
+		exit (1);
 	}
+	spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
+#ifdef SU_ACCESS
+	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+		if (NULL != spwd) {
+			pw->pw_passwd = spwd->sp_pwdp;
+		}
+	}
+
+	switch (check_su_auth (caller_name, name, 0 == pw->pw_uid)) {
+	case 0:	/* normal su, require target user's password */
+		break;
+	case 1:	/* require no password */
+		pw->pw_passwd = "";	/* XXX warning: const */
+		break;
+	case 2:	/* require own password */
+		puts (_("(Enter your own password)"));
+		pw->pw_passwd = caller_pass;
+		break;
+	default:	/* access denied (-1) or unexpected value */
+		fprintf (stderr,
+		         _("You are not authorized to su %s\n"),
+		         name);
+		exit (1);
+	}
+#endif				/* SU_ACCESS */
 	/*
 	 * Set up a signal handler in case the user types QUIT.
 	 */
@@ -531,8 +531,7 @@ static void check_perms_nopam (struct passwd *pw)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (   !caller_is_root
-	    && (pw_auth (pw->pw_passwd, name, PW_SU, (char *) 0) != 0)) {
+	if (pw_auth (pw->pw_passwd, name, PW_SU, (char *) 0) != 0) {
 		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
@@ -545,7 +544,7 @@ static void check_perms_nopam (struct passwd *pw)
 	 * expired accounts, but normal users can't become a user with an
 	 * expired password.
 	 */
-	if ((!caller_is_root) && (NULL != spwd)) {
+	if (NULL != spwd) {
 		(void) expire (pw, spwd);
 	}
 
@@ -555,16 +554,14 @@ static void check_perms_nopam (struct passwd *pw)
 	 * there is a "SU" entry in the /etc/porttime file denying access to
 	 * the account.
 	 */
-	if (!caller_is_root) {
-		if (!isttytime (name, "SU", time ((time_t *) 0))) {
-			SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
-			         "SU by %s to restricted account %s",
-			         caller_name, name));
-			fprintf (stderr,
-			         _("%s: You are not authorized to su at that time\n"),
-			         Prog);
-			su_failure (caller_tty, 0 == pw->pw_uid);
-		}
+	if (!isttytime (name, "SU", time ((time_t *) 0))) {
+		SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
+		         "SU by %s to restricted account %s",
+		         caller_name, name));
+		fprintf (stderr,
+		         _("%s: You are not authorized to su at that time\n"),
+		         Prog);
+		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
 }
 #endif				/* !USE_PAM */
