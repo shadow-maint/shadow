@@ -4,8 +4,13 @@
 	definition of shellstr, PATH and IFS is not influenced (getenv,
 	getdef, restricted_shell) by and does not influence (addenv does
 	not change environ) the authentication. And the authentication
-	does not overwrite those definitions. This will ease an extraction
+	did not overwrite those definitions. This will ease an extraction
 	from the big main() function.
+	* src/su.c: Move definition of change_environment and shellstr
+	after the switch to the final subsystem. The previous architecture
+	forced to always change the environment (the shell starts with a
+	'*' and was thus restricted, and change_environment could not be
+	reset to false).
 	* src/su.c: No need to change the user's shell in case of
 	subsystem root. Update the comments.
 

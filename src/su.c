@@ -652,116 +652,6 @@ int main (int argc, char **argv)
 #endif				/* !USE_PAM */
 	pwent = *pw;
 
-	/* If su is not called by root, and the target user has a restricted
-	 * shell, the environment must be changed.
-	 */
-	change_environment |= (restricted_shell (pwent.pw_shell) && !amroot);
-
-	/*
-	 * If a new login is being set up, the old environment will be
-	 * ignored and a new one created later on.
-	 * (note: in the case of a subsystem, the shell will be restricted,
-	 *        and this won't be executed on the first pass)
-	 */
-	if (change_environment && fakelogin) {
-		/*
-		 * The terminal type will be left alone if it is present in
-		 * the environment already.
-		 */
-		cp = getenv ("TERM");
-		if (NULL != cp) {
-			addenv ("TERM", cp);
-		}
-
-		/*
-		 * For some terminals COLORTERM seems to be the only way
-		 * for checking for that specific terminal. For instance,
-		 * gnome-terminal sets its TERM as "xterm" but its
-		 * COLORTERM as "gnome-terminal". The COLORTERM variable
-		 * is also of use when running GNU screen since it sets
-		 * TERM to "screen" but doesn't touch COLORTERM.
-		 */
-		cp = getenv ("COLORTERM");
-		if (NULL != cp) {
-			addenv ("COLORTERM", cp);
-		}
-
-#ifndef USE_PAM
-		cp = getdef_str ("ENV_TZ");
-		if (NULL != cp) {
-			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
-		}
-
-		/*
-		 * The clock frequency will be reset to the login value if required
-		 */
-		cp = getdef_str ("ENV_HZ");
-		if (NULL != cp) {
-			addenv (cp, NULL);	/* set the default $HZ, if one */
-		}
-#endif				/* !USE_PAM */
-
-		/*
-		 * Also leave DISPLAY and XAUTHORITY if present, else
-		 * pam_xauth will not work.
-		 */
-		cp = getenv ("DISPLAY");
-		if (NULL != cp) {
-			addenv ("DISPLAY", cp);
-		}
-		cp = getenv ("XAUTHORITY");
-		if (NULL != cp) {
-			addenv ("XAUTHORITY", cp);
-		}
-	} else {
-		while (NULL != *envp) {
-			addenv (*envp, NULL);
-			envp++;
-		}
-	}
-
-	/* If the user do not want to change the environment,
-	 * use the current SHELL.
-	 * (unless another shell is required by the command line)
-	 */
-	if ((NULL == shellstr) && !change_environment) {
-		shellstr = getenv ("SHELL");
-	}
-	/* For users with non null UID, if this user has a restricted
-	 * shell, the shell must be the one specified in /etc/passwd
-	 */
-	if (   (NULL != shellstr)
-	    && !amroot
-	    && restricted_shell (pwent.pw_shell)) {
-		shellstr = NULL;
-	}
-	/* If the shell is not set at this time, use the shell specified
-	 * in /etc/passwd.
-	 */
-	if (NULL == shellstr) {
-		shellstr = (char *) strdup (pwent.pw_shell);
-	}
-
-	/*
-	 * Set the default shell.
-	 */
-	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
-		shellstr = SHELL;
-	}
-
-	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
-	if (NULL == cp) {
-		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
-		addenv (cp, NULL);
-	} else {
-		addenv ("PATH", cp);
-	}
-
-	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
-		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
-	}
-
 #ifndef USE_PAM
 	/*
 	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
@@ -912,6 +802,114 @@ int main (int argc, char **argv)
 		endpwent ();		/* close the old password databases */
 		endspent ();
 		goto top;		/* authenticate in the subsystem */
+	}
+
+	/* If su is not called by root, and the target user has a restricted
+	 * shell, the environment must be changed.
+	 */
+	change_environment |= (restricted_shell (pwent.pw_shell) && !amroot);
+
+	/*
+	 * If a new login is being set up, the old environment will be
+	 * ignored and a new one created later on.
+	 */
+	if (change_environment && fakelogin) {
+		/*
+		 * The terminal type will be left alone if it is present in
+		 * the environment already.
+		 */
+		cp = getenv ("TERM");
+		if (NULL != cp) {
+			addenv ("TERM", cp);
+		}
+
+		/*
+		 * For some terminals COLORTERM seems to be the only way
+		 * for checking for that specific terminal. For instance,
+		 * gnome-terminal sets its TERM as "xterm" but its
+		 * COLORTERM as "gnome-terminal". The COLORTERM variable
+		 * is also of use when running GNU screen since it sets
+		 * TERM to "screen" but doesn't touch COLORTERM.
+		 */
+		cp = getenv ("COLORTERM");
+		if (NULL != cp) {
+			addenv ("COLORTERM", cp);
+		}
+
+#ifndef USE_PAM
+		cp = getdef_str ("ENV_TZ");
+		if (NULL != cp) {
+			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+		}
+
+		/*
+		 * The clock frequency will be reset to the login value if required
+		 */
+		cp = getdef_str ("ENV_HZ");
+		if (NULL != cp) {
+			addenv (cp, NULL);	/* set the default $HZ, if one */
+		}
+#endif				/* !USE_PAM */
+
+		/*
+		 * Also leave DISPLAY and XAUTHORITY if present, else
+		 * pam_xauth will not work.
+		 */
+		cp = getenv ("DISPLAY");
+		if (NULL != cp) {
+			addenv ("DISPLAY", cp);
+		}
+		cp = getenv ("XAUTHORITY");
+		if (NULL != cp) {
+			addenv ("XAUTHORITY", cp);
+		}
+	} else {
+		while (NULL != *envp) {
+			addenv (*envp, NULL);
+			envp++;
+		}
+	}
+
+	/* If the user do not want to change the environment,
+	 * use the current SHELL.
+	 * (unless another shell is required by the command line)
+	 */
+	if ((NULL == shellstr) && !change_environment) {
+		shellstr = getenv ("SHELL");
+	}
+	/* For users with non null UID, if this user has a restricted
+	 * shell, the shell must be the one specified in /etc/passwd
+	 */
+	if (   (NULL != shellstr)
+	    && !amroot
+	    && restricted_shell (pwent.pw_shell)) {
+		shellstr = NULL;
+	}
+	/* If the shell is not set at this time, use the shell specified
+	 * in /etc/passwd.
+	 */
+	if (NULL == shellstr) {
+		shellstr = (char *) strdup (pwent.pw_shell);
+	}
+
+	/*
+	 * Set the default shell.
+	 */
+	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
+		shellstr = SHELL;
+	}
+
+	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	if (NULL == cp) {
+		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+	} else if (strchr (cp, '=') != NULL) {
+		addenv (cp, NULL);
+	} else {
+		addenv ("PATH", cp);
+	}
+
+	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
+		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
 	sulog (tty, true, oldname, name);	/* save SU information */
