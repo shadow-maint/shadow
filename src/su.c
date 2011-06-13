@@ -602,12 +602,10 @@ int main (int argc, char **argv)
 	bool amroot = false;
 	uid_t my_uid;
 	struct passwd *pw = NULL;
-	char **envp = environ;
 	char *shellstr = NULL;
 	char *command = NULL;
 
 #ifdef USE_PAM
-	char **envcp;
 	int ret;
 #else				/* !USE_PAM */
 	int err = 0;
@@ -892,6 +890,7 @@ int main (int argc, char **argv)
 			addenv ("XAUTHORITY", cp);
 		}
 	} else {
+		char **envp = environ;
 		while (NULL != *envp) {
 			addenv (*envp, NULL);
 			envp++;
@@ -959,7 +958,7 @@ int main (int argc, char **argv)
 
 	if (change_environment) {
 		/* update environment with all pam set variables */
-		envcp = pam_getenvlist (pamh);
+		char **envcp = pam_getenvlist (pamh);
 		if (NULL != envcp) {
 			while (NULL != *envcp) {
 				addenv (*envcp, NULL);

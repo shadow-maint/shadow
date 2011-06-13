@@ -25,6 +25,7 @@
 	authenticated user. Remove usage of the pwent variable.
 	* src/su.c: The password of the caller is the one from the
 	spwd structure only if the passwd's password is 'x'.
+	* src/su.c: Cleanup local variables.
 
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
