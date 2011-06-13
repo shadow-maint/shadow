@@ -778,6 +778,120 @@ static void process_flags (int argc, char **argv)
 	}
 }
 
+static void set_environment (struct passwd *pw)
+{
+	const char *cp;
+	/*
+	 * If a new login is being set up, the old environment will be
+	 * ignored and a new one created later on.
+	 */
+	if (change_environment && fakelogin) {
+		/*
+		 * The terminal type will be left alone if it is present in
+		 * the environment already.
+		 */
+		cp = getenv ("TERM");
+		if (NULL != cp) {
+			addenv ("TERM", cp);
+		}
+
+		/*
+		 * For some terminals COLORTERM seems to be the only way
+		 * for checking for that specific terminal. For instance,
+		 * gnome-terminal sets its TERM as "xterm" but its
+		 * COLORTERM as "gnome-terminal". The COLORTERM variable
+		 * is also of use when running GNU screen since it sets
+		 * TERM to "screen" but doesn't touch COLORTERM.
+		 */
+		cp = getenv ("COLORTERM");
+		if (NULL != cp) {
+			addenv ("COLORTERM", cp);
+		}
+
+#ifndef USE_PAM
+		cp = getdef_str ("ENV_TZ");
+		if (NULL != cp) {
+			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+		}
+
+		/*
+		 * The clock frequency will be reset to the login value if required
+		 */
+		cp = getdef_str ("ENV_HZ");
+		if (NULL != cp) {
+			addenv (cp, NULL);	/* set the default $HZ, if one */
+		}
+#endif				/* !USE_PAM */
+
+		/*
+		 * Also leave DISPLAY and XAUTHORITY if present, else
+		 * pam_xauth will not work.
+		 */
+		cp = getenv ("DISPLAY");
+		if (NULL != cp) {
+			addenv ("DISPLAY", cp);
+		}
+		cp = getenv ("XAUTHORITY");
+		if (NULL != cp) {
+			addenv ("XAUTHORITY", cp);
+		}
+	} else {
+		char **envp = environ;
+		while (NULL != *envp) {
+			addenv (*envp, NULL);
+			envp++;
+		}
+	}
+
+	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	if (NULL == cp) {
+		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+	} else if (strchr (cp, '=') != NULL) {
+		addenv (cp, NULL);
+	} else {
+		addenv ("PATH", cp);
+	}
+
+	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
+		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
+	}
+
+#ifdef USE_PAM
+	/* we need to setup the environment *after* pam_open_session(),
+	 * else the UID is changed before stuff like pam_xauth could
+	 * run, and we cannot access /etc/shadow and co
+	 */
+	environ = newenvp;	/* make new environment active */
+
+	if (change_environment) {
+		/* update environment with all pam set variables */
+		char **envcp = pam_getenvlist (pamh);
+		if (NULL != envcp) {
+			while (NULL != *envcp) {
+				addenv (*envcp, NULL);
+				envcp++;
+			}
+		}
+	}
+
+#else				/* !USE_PAM */
+	environ = newenvp;	/* make new environment active */
+#endif				/* !USE_PAM */
+
+	if (change_environment) {
+		if (fakelogin) {
+			pw->pw_shell = shellstr;
+			setup_env (pw);
+		} else {
+			addenv ("HOME", pw->pw_dir);
+			addenv ("USER", pw->pw_name);
+			addenv ("LOGNAME", pw->pw_name);
+			addenv ("SHELL", shellstr);
+		}
+	}
+
+}
+
 /*
  * su - switch user id
  *
@@ -924,114 +1038,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* !USE_PAM */
 
-	/*
-	 * If a new login is being set up, the old environment will be
-	 * ignored and a new one created later on.
-	 */
-	if (change_environment && fakelogin) {
-		/*
-		 * The terminal type will be left alone if it is present in
-		 * the environment already.
-		 */
-		cp = getenv ("TERM");
-		if (NULL != cp) {
-			addenv ("TERM", cp);
-		}
-
-		/*
-		 * For some terminals COLORTERM seems to be the only way
-		 * for checking for that specific terminal. For instance,
-		 * gnome-terminal sets its TERM as "xterm" but its
-		 * COLORTERM as "gnome-terminal". The COLORTERM variable
-		 * is also of use when running GNU screen since it sets
-		 * TERM to "screen" but doesn't touch COLORTERM.
-		 */
-		cp = getenv ("COLORTERM");
-		if (NULL != cp) {
-			addenv ("COLORTERM", cp);
-		}
-
-#ifndef USE_PAM
-		cp = getdef_str ("ENV_TZ");
-		if (NULL != cp) {
-			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
-		}
-
-		/*
-		 * The clock frequency will be reset to the login value if required
-		 */
-		cp = getdef_str ("ENV_HZ");
-		if (NULL != cp) {
-			addenv (cp, NULL);	/* set the default $HZ, if one */
-		}
-#endif				/* !USE_PAM */
-
-		/*
-		 * Also leave DISPLAY and XAUTHORITY if present, else
-		 * pam_xauth will not work.
-		 */
-		cp = getenv ("DISPLAY");
-		if (NULL != cp) {
-			addenv ("DISPLAY", cp);
-		}
-		cp = getenv ("XAUTHORITY");
-		if (NULL != cp) {
-			addenv ("XAUTHORITY", cp);
-		}
-	} else {
-		char **envp = environ;
-		while (NULL != *envp) {
-			addenv (*envp, NULL);
-			envp++;
-		}
-	}
-
-	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
-	if (NULL == cp) {
-		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
-		addenv (cp, NULL);
-	} else {
-		addenv ("PATH", cp);
-	}
-
-	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
-		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
-	}
-
-#ifdef USE_PAM
-	/* we need to setup the environment *after* pam_open_session(),
-	 * else the UID is changed before stuff like pam_xauth could
-	 * run, and we cannot access /etc/shadow and co
-	 */
-	environ = newenvp;	/* make new environment active */
-
-	if (change_environment) {
-		/* update environment with all pam set variables */
-		char **envcp = pam_getenvlist (pamh);
-		if (NULL != envcp) {
-			while (NULL != *envcp) {
-				addenv (*envcp, NULL);
-				envcp++;
-			}
-		}
-	}
-
-#else				/* !USE_PAM */
-	environ = newenvp;	/* make new environment active */
-#endif				/* !USE_PAM */
-
-	if (change_environment) {
-		if (fakelogin) {
-			pw->pw_shell = shellstr;
-			setup_env (pw);
-		} else {
-			addenv ("HOME", pw->pw_dir);
-			addenv ("USER", pw->pw_name);
-			addenv ("LOGNAME", pw->pw_name);
-			addenv ("SHELL", shellstr);
-		}
-	}
+	set_environment (pw);
 
 	endpwent ();
 	endspent ();
