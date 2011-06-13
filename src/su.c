@@ -120,6 +120,11 @@ static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static struct passwd * check_perms (void);
+#ifdef USE_PAM
+static void check_perms_pam (struct passwd *pw)
+#else				/* !USE_PAM */
+static void check_perms_nopam (struct passwd *pw);
+#endif				/* !USE_PAM */
 static void save_caller_context (char **argv);
 
 #ifndef USE_PAM
@@ -413,34 +418,55 @@ static void usage (int status)
 	exit (status);
 }
 
-/*
- * check_perms - check permissions to switch to the user 'name'
- *
- *	In case of subsystem login, the user is first authenticated in the
- *	caller's root subsystem, and then in the user's target subsystem.
- */
-static struct passwd * check_perms (void)
-{
 #ifdef USE_PAM
+static void check_perms_pam (struct passwd *pw)
+{
 	int ret;
+	ret = pam_authenticate (pamh, 0);
+	if (PAM_SUCCESS != ret) {
+		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
+		         pam_strerror (pamh, ret)));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		(void) pam_end (pamh, ret);
+		su_failure (caller_tty, 0 == pw->pw_uid);
+	}
+
+	ret = pam_acct_mgmt (pamh, 0);
+	if (PAM_SUCCESS != ret) {
+		if (caller_is_root) {
+			fprintf (stderr,
+			         _("%s: %s\n(Ignored)\n"),
+			         Prog, pam_strerror (pamh, ret));
+		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
+			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+			if (PAM_SUCCESS != ret) {
+				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
+				         pam_strerror (pamh, ret)));
+				fprintf (stderr,
+				         _("%s: %s\n"),
+				         Prog, pam_strerror (pamh, ret));
+				(void) pam_end (pamh, ret);
+				su_failure (caller_tty, 0 == pw->pw_uid);
+			}
+		} else {
+			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
+				 pam_strerror (pamh, ret)));
+			fprintf (stderr,
+			         _("%s: %s\n"),
+			         Prog, pam_strerror (pamh, ret));
+			(void) pam_end (pamh, ret);
+			su_failure (caller_tty, 0 == pw->pw_uid);
+		}
+	}
+}
 #else				/* !USE_PAM */
+static void check_perms_nopam (struct passwd *pw)
+{
 #ifdef SU_ACCESS
 	struct spwd *spwd = NULL;
 #endif				/* SU_ACCESS */
 	RETSIGTYPE (*oldsig) (int);
-#endif				/* !USE_PAM */
-	/*
-	 * The password file entries for the user is gotten and the account
-	 * validated.
-	 */
-	struct passwd *pw = xgetpwnam (name);
-	if (NULL == pw) {
-		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
-		closelog ();
-		exit (1);
-	}
 
-#ifndef USE_PAM
 	/*
 	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
 	 * so we make this a configurable option.
@@ -494,48 +520,6 @@ static struct passwd * check_perms (void)
 		}
 #endif				/* SU_ACCESS */
 	}
-#endif				/* !USE_PAM */
-
-	(void) signal (SIGINT, SIG_IGN);
-	(void) signal (SIGQUIT, SIG_IGN);
-#ifdef USE_PAM
-	ret = pam_authenticate (pamh, 0);
-	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
-		         pam_strerror (pamh, ret)));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		su_failure (caller_tty, 0 == pw->pw_uid);
-	}
-
-	ret = pam_acct_mgmt (pamh, 0);
-	if (PAM_SUCCESS != ret) {
-		if (caller_is_root) {
-			fprintf (stderr,
-			         _("%s: %s\n(Ignored)\n"),
-			         Prog, pam_strerror (pamh, ret));
-		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
-			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
-			if (PAM_SUCCESS != ret) {
-				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
-				         pam_strerror (pamh, ret)));
-				fprintf (stderr,
-				         _("%s: %s\n"),
-				         Prog, pam_strerror (pamh, ret));
-				(void) pam_end (pamh, ret);
-				su_failure (caller_tty, 0 == pw->pw_uid);
-			}
-		} else {
-			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
-				 pam_strerror (pamh, ret)));
-			fprintf (stderr,
-			         _("%s: %s\n"),
-			         Prog, pam_strerror (pamh, ret));
-			(void) pam_end (pamh, ret);
-			su_failure (caller_tty, 0 == pw->pw_uid);
-		}
-	}
-#else				/* !USE_PAM */
 	/*
 	 * Set up a signal handler in case the user types QUIT.
 	 */
@@ -582,8 +566,35 @@ static struct passwd * check_perms (void)
 			su_failure (caller_tty, 0 == pw->pw_uid);
 		}
 	}
+}
 #endif				/* !USE_PAM */
 
+/*
+ * check_perms - check permissions to switch to the user 'name'
+ *
+ *	In case of subsystem login, the user is first authenticated in the
+ *	caller's root subsystem, and then in the user's target subsystem.
+ */
+static struct passwd * check_perms (void)
+{
+	/*
+	 * The password file entries for the user is gotten and the account
+	 * validated.
+	 */
+	struct passwd *pw = xgetpwnam (name);
+	if (NULL == pw) {
+		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
+		closelog ();
+		exit (1);
+	}
+
+	(void) signal (SIGINT, SIG_IGN);
+	(void) signal (SIGQUIT, SIG_IGN);
+#ifdef USE_PAM
+	check_perms_pam (pw);
+#else				/* !USE_PAM */
+	check_perms_pam (pw);
+#endif				/* !USE_PAM */
 	(void) signal (SIGINT, SIG_DFL);
 	(void) signal (SIGQUIT, SIG_DFL);
 
