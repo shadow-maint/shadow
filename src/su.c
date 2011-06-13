@@ -75,10 +75,20 @@
  * Global variables
  */
 const char *Prog;
+const char *caller_tty = NULL;	/* Name of tty SU is run from */
+bool caller_is_root = false;
+uid_t caller_uid;
+#ifndef USE_PAM
+int caller_on_console = 0;
+#ifdef SU_ACCESS
+char *caller_pass;
+#endif
+#endif				/* !USE_PAM */
+
 
 /* not needed by sulog.c anymore */
 static char name[BUFSIZ];
-static char oldname[BUFSIZ];
+static char caller_name[BUFSIZ];
 
 /* If nonzero, change some environment vars to indicate the user su'd to. */
 static bool change_environment;
@@ -110,6 +120,7 @@ static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static struct passwd * check_perms (void);
+static void save_caller_context (char **argv);
 
 #ifndef USE_PAM
 /*
@@ -178,12 +189,12 @@ static bool restricted_shell (const char *shellstr)
 
 static void su_failure (const char *tty, bool su_to_root)
 {
-	sulog (tty, false, oldname, name);	/* log failed attempt */
+	sulog (tty, false, caller_name, name);	/* log failed attempt */
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
 		         "- %s %s:%s", tty,
-		         ('\0' != oldname[0]) ? oldname : "???",
+		         ('\0' != caller_name[0]) ? caller_name : "???",
 		         ('\0' != name[0]) ? name : "???"));
 	}
 	closelog ();
@@ -440,10 +451,10 @@ static struct passwd * check_perms (void)
 	 * to Chris Evans <lady0110@sable.ox.ac.uk>.
 	 */
 
-	if (!amroot) {
+	if (!caller_is_root) {
 		if (   (0 == pw->pw_uid)
 		    && getdef_bool ("SU_WHEEL_ONLY")
-		    && !iswheel (oldname)) {
+		    && !iswheel (caller_name)) {
 			fprintf (stderr,
 			         _("You are not authorized to su %s\n"),
 			         name);
@@ -457,7 +468,7 @@ static struct passwd * check_perms (void)
 			}
 		}
 
-		switch (check_su_auth (oldname, name, 0 == pw->pw_uid)) {
+		switch (check_su_auth (caller_name, name, 0 == pw->pw_uid)) {
 		case 0:	/* normal su, require target user's password */
 			break;
 		case 1:	/* require no password */
@@ -465,7 +476,7 @@ static struct passwd * check_perms (void)
 			break;
 		case 2:	/* require own password */
 			puts (_("(Enter your own password)"));
-			pw->pw_passwd = oldpass;
+			pw->pw_passwd = caller_pass;
 			break;
 		default:	/* access denied (-1) or unexpected value */
 			fprintf (stderr,
@@ -486,12 +497,12 @@ static struct passwd * check_perms (void)
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
-		su_failure (tty, 0 == pw->pw_uid);
+		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
 
 	ret = pam_acct_mgmt (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		if (amroot) {
+		if (caller_is_root) {
 			fprintf (stderr,
 			         _("%s: %s\n(Ignored)\n"),
 			         Prog, pam_strerror (pamh, ret));
@@ -504,7 +515,7 @@ static struct passwd * check_perms (void)
 				         _("%s: %s\n"),
 				         Prog, pam_strerror (pamh, ret));
 				(void) pam_end (pamh, ret);
-				su_failure (tty, 0 == pw->pw_uid);
+				su_failure (caller_tty, 0 == pw->pw_uid);
 			}
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
@@ -513,7 +524,7 @@ static struct passwd * check_perms (void)
 			         _("%s: %s\n"),
 			         Prog, pam_strerror (pamh, ret));
 			(void) pam_end (pamh, ret);
-			su_failure (tty, 0 == pw->pw_uid);
+			su_failure (caller_tty, 0 == pw->pw_uid);
 		}
 	}
 #else				/* !USE_PAM */
@@ -528,12 +539,12 @@ static struct passwd * check_perms (void)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (   !amroot
+	if (   !caller_is_root
 	    && (pw_auth (pw->pw_passwd, name, PW_SU, (char *) 0) != 0)) {
 		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
-		su_failure (tty, 0 == pw->pw_uid);
+		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
 	(void) signal (SIGQUIT, oldsig);
 
@@ -542,7 +553,7 @@ static struct passwd * check_perms (void)
 	 * expired accounts, but normal users can't become a user with an
 	 * expired password.
 	 */
-	if ((!amroot) && (NULL != spwd)) {
+	if ((!caller_is_root) && (NULL != spwd)) {
 		(void) expire (pw, spwd);
 	}
 
@@ -552,15 +563,15 @@ static struct passwd * check_perms (void)
 	 * there is a "SU" entry in the /etc/porttime file denying access to
 	 * the account.
 	 */
-	if (!amroot) {
+	if (!caller_is_root) {
 		if (!isttytime (name, "SU", time ((time_t *) 0))) {
 			SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
 			         "SU by %s to restricted account %s",
-			         oldname, name));
+			         caller_name, name));
 			fprintf (stderr,
 			         _("%s: You are not authorized to su at that time\n"),
 			         Prog);
-			su_failure (tty, 0 == pw->pw_uid);
+			su_failure (caller_tty, 0 == pw->pw_uid);
 		}
 	}
 #endif				/* !USE_PAM */
@@ -584,6 +595,80 @@ static struct passwd * check_perms (void)
 }
 
 /*
+ * save_caller_context - save information from the call context
+ *
+ *	Save the program's name (Prog), caller's UID (caller_uid /
+ *	caller_is_root), name (caller_name), and password (caller_pass),
+ *	the TTY (ttyp), and whether su was called from a console
+ *	(is_console) for further processing and before they might change.
+ */
+static void save_caller_context (char **argv)
+{
+	struct passwd *pw = NULL;
+	/*
+	 * Get the program name. The program name is used as a prefix to
+	 * most error messages.
+	 */
+	Prog = Basename (argv[0]);
+
+	caller_uid = getuid ();
+	caller_is_root = (caller_uid == 0);
+
+	/*
+	 * Get the tty name. Entries will be logged indicating that the user
+	 * tried to change to the named new user from the current terminal.
+	 */
+	caller_tty = ttyname (0);
+	if ((isatty (0) != 0) && (NULL != caller_tty)) {
+#ifndef USE_PAM
+		caller_on_console = console (caller_tty);
+#endif
+	} else {
+		/*
+		 * Be more paranoid, like su from SimplePAMApps.  --marekm
+		 */
+		if (!caller_is_root) {
+			fprintf (stderr,
+			         _("%s: must be run from a terminal\n"),
+			         Prog);
+			exit (1);
+		}
+		caller_tty = "???";
+	}
+
+	/*
+	 * Get the user's real name. The current UID is used to determine
+	 * who has executed su. That user ID must exist.
+	 */
+	pw = get_my_pwent ();
+	if (NULL == pw) {
+		fprintf (stderr,
+		         _("%s: Cannot determine your user name.\n"),
+		         Prog);
+		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		         (unsigned long) caller_uid));
+		su_failure (caller_tty, true); // FIXME: at this time I do not know the target UID
+	}
+	STRFCPY (caller_name, pw->pw_name);
+
+#ifndef USE_PAM
+#ifdef SU_ACCESS
+	/*
+	 * Sort out the password of user calling su, in case needed later
+	 * -- chris
+	 */
+	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+		struct spwd *spwd = getspnam (caller_name);
+		if (NULL != spwd) {
+			pw->pw_passwd = spwd->sp_pwdp;
+		}
+	}
+	caller_pass = xstrdup (pw->pw_passwd);
+#endif				/* SU_ACCESS */
+#endif				/* !USE_PAM */
+}
+
+/*
  * su - switch user id
  *
  *	su changes the user's ids to the values for the specified user.  if
@@ -596,11 +681,8 @@ static struct passwd * check_perms (void)
 int main (int argc, char **argv)
 {
 	const char *cp;
-	const char *tty = NULL;	/* Name of tty SU is run from        */
 	bool doshell = false;
 	bool fakelogin = false;
-	bool amroot = false;
-	uid_t my_uid;
 	struct passwd *pw = NULL;
 	char *shellstr = NULL;
 	char *command = NULL;
@@ -611,11 +693,7 @@ int main (int argc, char **argv)
 	int err = 0;
 
 	RETSIGTYPE (*oldsig) (int);
-	int is_console = 0;
 
-#ifdef SU_ACCESS
-	char *oldpass;
-#endif
 #endif				/* !USE_PAM */
 
 	(void) setlocale (LC_ALL, "");
@@ -624,11 +702,7 @@ int main (int argc, char **argv)
 
 	change_environment = true;
 
-	/*
-	 * Get the program name. The program name is used as a prefix to
-	 * most error messages.
-	 */
-	Prog = Basename (argv[0]);
+	save_caller_context (argv);
 
 	OPENLOG ("su");
 
@@ -692,31 +766,6 @@ int main (int argc, char **argv)
 
 	initenv ();
 
-	my_uid = getuid ();
-	amroot = (my_uid == 0);
-
-	/*
-	 * Get the tty name. Entries will be logged indicating that the user
-	 * tried to change to the named new user from the current terminal.
-	 */
-	tty = ttyname (0);
-	if ((isatty (0) != 0) && (NULL != tty)) {
-#ifndef USE_PAM
-		is_console = console (tty);
-#endif
-	} else {
-		/*
-		 * Be more paranoid, like su from SimplePAMApps.  --marekm
-		 */
-		if (!amroot) {
-			fprintf (stderr,
-			         _("%s: must be run from a terminal\n"),
-			         Prog);
-			exit (1);
-		}
-		tty = "???";
-	}
-
 	/*
 	 * The next argument must be either a user ID, or some flag to a
 	 * subshell. Pretty sticky since you can't have an argument which
@@ -737,7 +786,7 @@ int main (int argc, char **argv)
 			root_pw = getpwuid (0);
 			if (NULL == root_pw) {
 				SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
-				su_failure (tty, true);
+				su_failure (caller_tty, true);
 			}
 			(void) strcpy (name, root_pw->pw_name);
 		}
@@ -748,37 +797,7 @@ int main (int argc, char **argv)
 		doshell = false;
 	}
 
-	/*
-	 * Get the user's real name. The current UID is used to determine
-	 * who has executed su. That user ID must exist.
-	 */
-	pw = get_my_pwent ();
-	if (NULL == pw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) my_uid));
-		su_failure (tty, true); // FIXME: at this time I do not know the target UID
-	}
-	STRFCPY (oldname, pw->pw_name);
-
-#ifndef USE_PAM
-#ifdef SU_ACCESS
-	/*
-	 * Sort out the password of user calling su, in case needed later
-	 * -- chris
-	 */
-	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
-		struct spwd *spwd = getspnam (oldname);
-		if (NULL != spwd) {
-			pw->pw_passwd = spwd->sp_pwdp;
-		}
-	}
-	oldpass = xstrdup (pw->pw_passwd);
-#endif				/* SU_ACCESS */
-
-#else				/* USE_PAM */
+#ifdef USE_PAM
 	ret = pam_start ("su", name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_start: error %d", ret);
@@ -788,9 +807,9 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	ret = pam_set_item (pamh, PAM_TTY, (const void *) tty);
+	ret = pam_set_item (pamh, PAM_TTY, (const void *) caller_tty);
 	if (PAM_SUCCESS == ret) {
-		ret = pam_set_item (pamh, PAM_RUSER, (const void *) oldname);
+		ret = pam_set_item (pamh, PAM_RUSER, (const void *) caller_name);
 	}
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_set_item: %s",
@@ -815,7 +834,7 @@ int main (int argc, char **argv)
 	 * restricted shell, the environment must be changed and the shell
 	 * must be the one specified in /etc/passwd.
 	 */
-	if (   !amroot
+	if (   !caller_is_root
 	    && restricted_shell (pw->pw_shell)) {
 		shellstr = NULL;
 		change_environment = true;
@@ -910,13 +929,13 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	sulog (tty, true, oldname, name);	/* save SU information */
+	sulog (caller_tty, true, caller_name, name);	/* save SU information */
 	endpwent ();
 	endspent ();
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
-		SYSLOG ((LOG_INFO, "+ %s %s:%s", tty,
-		         ('\0' != oldname[0]) ? oldname : "???",
+		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
+		         ('\0' != caller_name[0]) ? caller_name : "???",
 		         ('\0' != name[0]) ? name : "???"));
 	}
 #endif
@@ -978,11 +997,11 @@ int main (int argc, char **argv)
 	environ = newenvp;	/* make new environment active */
 
 	/* no limits if su from root (unless su must fake login's behavior) */
-	if (!amroot || fakelogin) {
+	if (!caller_is_root || fakelogin) {
 		setup_limits (pw);
 	}
 
-	if (setup_uid_gid (pw, is_console) != 0) {
+	if (setup_uid_gid (pw, caller_on_console) != 0) {
 		exit (1);
 	}
 #endif				/* !USE_PAM */

@@ -1,3 +1,8 @@
+2011-06-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c (save_caller_context): Extract from main() the code
+	used to save the caller's context.
+
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: Group some of the environment processing blocks. The
