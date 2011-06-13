@@ -867,6 +867,64 @@ int main (int argc, char **argv)
 		shellstr = SHELL;
 	}
 
+	sulog (caller_tty, true, caller_name, name);	/* save SU information */
+	endpwent ();
+	endspent ();
+#ifdef USE_SYSLOG
+	if (getdef_bool ("SYSLOG_SU_ENAB")) {
+		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
+		         ('\0' != caller_name[0]) ? caller_name : "???",
+		         ('\0' != name[0]) ? name : "???"));
+	}
+#endif
+
+#ifdef USE_PAM
+	/* set primary group id and supplementary groups */
+	if (setup_groups (pw) != 0) {
+		pam_end (pamh, PAM_ABORT);
+		exit (1);
+	}
+
+	/*
+	 * pam_setcred() may do things like resource limits, console groups,
+	 * and much more, depending on the configured modules
+	 */
+	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
+	if (PAM_SUCCESS != ret) {
+		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		(void) pam_end (pamh, ret);
+		exit (1);
+	}
+
+	ret = pam_open_session (pamh, 0);
+	if (PAM_SUCCESS != ret) {
+		SYSLOG ((LOG_ERR, "pam_open_session: %s",
+			 pam_strerror (pamh, ret)));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		pam_setcred (pamh, PAM_DELETE_CRED);
+		(void) pam_end (pamh, ret);
+		exit (1);
+	}
+
+	/* become the new user */
+	if (change_uid (pw) != 0) {
+		pam_close_session (pamh, 0);
+		pam_setcred (pamh, PAM_DELETE_CRED);
+		(void) pam_end (pamh, PAM_ABORT);
+		exit (1);
+	}
+#else				/* !USE_PAM */
+	/* no limits if su from root (unless su must fake login's behavior) */
+	if (!caller_is_root || fakelogin) {
+		setup_limits (pw);
+	}
+
+	if (setup_uid_gid (pw, caller_on_console) != 0) {
+		exit (1);
+	}
+#endif				/* !USE_PAM */
+
 	/*
 	 * If a new login is being set up, the old environment will be
 	 * ignored and a new one created later on.
@@ -942,46 +1000,7 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	sulog (caller_tty, true, caller_name, name);	/* save SU information */
-	endpwent ();
-	endspent ();
-#ifdef USE_SYSLOG
-	if (getdef_bool ("SYSLOG_SU_ENAB")) {
-		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
-		         ('\0' != caller_name[0]) ? caller_name : "???",
-		         ('\0' != name[0]) ? name : "???"));
-	}
-#endif
-
 #ifdef USE_PAM
-	/* set primary group id and supplementary groups */
-	if (setup_groups (pw) != 0) {
-		pam_end (pamh, PAM_ABORT);
-		exit (1);
-	}
-
-	/*
-	 * pam_setcred() may do things like resource limits, console groups,
-	 * and much more, depending on the configured modules
-	 */
-	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
-	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		exit (1);
-	}
-
-	ret = pam_open_session (pamh, 0);
-	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_open_session: %s",
-			 pam_strerror (pamh, ret)));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		pam_setcred (pamh, PAM_DELETE_CRED);
-		(void) pam_end (pamh, ret);
-		exit (1);
-	}
-
 	/* we need to setup the environment *after* pam_open_session(),
 	 * else the UID is changed before stuff like pam_xauth could
 	 * run, and we cannot access /etc/shadow and co
@@ -999,24 +1018,8 @@ int main (int argc, char **argv)
 		}
 	}
 
-	/* become the new user */
-	if (change_uid (pw) != 0) {
-		pam_close_session (pamh, 0);
-		pam_setcred (pamh, PAM_DELETE_CRED);
-		(void) pam_end (pamh, PAM_ABORT);
-		exit (1);
-	}
 #else				/* !USE_PAM */
 	environ = newenvp;	/* make new environment active */
-
-	/* no limits if su from root (unless su must fake login's behavior) */
-	if (!caller_is_root || fakelogin) {
-		setup_limits (pw);
-	}
-
-	if (setup_uid_gid (pw, caller_on_console) != 0) {
-		exit (1);
-	}
 #endif				/* !USE_PAM */
 
 	if (change_environment) {
