@@ -1,5 +1,14 @@
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Group some of the environment processing blocks. The
+	definition of shellstr, PATH and IFS is not influenced (getenv,
+	getdef, restricted_shell) by and does not influence (addenv does
+	not change environ) the authentication. And the authentication
+	does not overwrite those definitions. This will ease an extraction
+	from the big main() function.
+
+2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Updating pwent after expire() is not useful. Only the
 	password information may have changed and they are not used
 	anymore afterwards.

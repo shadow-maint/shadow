@@ -720,6 +720,48 @@ int main (int argc, char **argv)
 		}
 	}
 
+	/* If the user do not want to change the environment,
+	 * use the current SHELL.
+	 * (unless another shell is required by the command line)
+	 */
+	if ((NULL == shellstr) && !change_environment) {
+		shellstr = getenv ("SHELL");
+	}
+	/* For users with non null UID, if this user has a restricted
+	 * shell, the shell must be the one specified in /etc/passwd
+	 */
+	if (   (NULL != shellstr)
+	    && !amroot
+	    && restricted_shell (pwent.pw_shell)) {
+		shellstr = NULL;
+	}
+	/* If the shell is not set at this time, use the shell specified
+	 * in /etc/passwd.
+	 */
+	if (NULL == shellstr) {
+		shellstr = (char *) strdup (pwent.pw_shell);
+	}
+
+	/*
+	 * Set the default shell.
+	 */
+	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
+		shellstr = SHELL;
+	}
+
+	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	if (NULL == cp) {
+		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+	} else if (strchr (cp, '=') != NULL) {
+		addenv (cp, NULL);
+	} else {
+		addenv ("PATH", cp);
+	}
+
+	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
+		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
+	}
+
 #ifndef USE_PAM
 	/*
 	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
@@ -768,35 +810,6 @@ int main (int argc, char **argv)
 #endif				/* SU_ACCESS */
 	}
 #endif				/* !USE_PAM */
-
-	/* If the user do not want to change the environment,
-	 * use the current SHELL.
-	 * (unless another shell is required by the command line)
-	 */
-	if ((NULL == shellstr) && !change_environment) {
-		shellstr = getenv ("SHELL");
-	}
-	/* For users with non null UID, if this user has a restricted
-	 * shell, the shell must be the one specified in /etc/passwd
-	 */
-	if (   (NULL != shellstr)
-	    && !amroot
-	    && restricted_shell (pwent.pw_shell)) {
-		shellstr = NULL;
-	}
-	/* If the shell is not set at this time, use the shell specified
-	 * in /etc/passwd.
-	 */
-	if (NULL == shellstr) {
-		shellstr = (char *) strdup (pwent.pw_shell);
-	}
-
-	/*
-	 * Set the default shell.
-	 */
-	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
-		shellstr = SHELL;
-	}
 
 	(void) signal (SIGINT, SIG_IGN);
 	(void) signal (SIGQUIT, SIG_IGN);
@@ -888,19 +901,6 @@ int main (int argc, char **argv)
 
 	(void) signal (SIGINT, SIG_DFL);
 	(void) signal (SIGQUIT, SIG_DFL);
-
-	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
-	if (NULL == cp) {
-		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
-		addenv (cp, NULL);
-	} else {
-		addenv ("PATH", cp);
-	}
-
-	if (getenv ("IFS") != NULL) {	/* don't export user IFS ... */
-		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
-	}
 
 	/*
 	 * Even if --shell is specified, the subsystem login test is based on
