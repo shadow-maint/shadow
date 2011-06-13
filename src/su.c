@@ -75,15 +75,19 @@
  * Global variables
  */
 const char *Prog;
-const char *caller_tty = NULL;	/* Name of tty SU is run from */
-bool caller_is_root = false;
-uid_t caller_uid;
+static const char *caller_tty = NULL;	/* Name of tty SU is run from */
+static bool caller_is_root = false;
+static uid_t caller_uid;
 #ifndef USE_PAM
-int caller_on_console = 0;
+static int caller_on_console = 0;
 #ifdef SU_ACCESS
-char *caller_pass;
+static char *caller_pass;
 #endif
 #endif				/* !USE_PAM */
+static bool doshell = false;
+static bool fakelogin = false;
+static char *shellstr = NULL;
+static char *command = NULL;
 
 
 /* not needed by sulog.c anymore */
@@ -91,7 +95,7 @@ static char name[BUFSIZ];
 static char caller_name[BUFSIZ];
 
 /* If nonzero, change some environment vars to indicate the user su'd to. */
-static bool change_environment;
+static bool change_environment = true;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -121,11 +125,12 @@ static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static struct passwd * check_perms (void);
 #ifdef USE_PAM
-static void check_perms_pam (struct passwd *pw)
+static void check_perms_pam (struct passwd *pw);
 #else				/* !USE_PAM */
 static void check_perms_nopam (struct passwd *pw);
 #endif				/* !USE_PAM */
 static void save_caller_context (char **argv);
+static void process_flags (int argc, char **argv);
 
 #ifndef USE_PAM
 /*
@@ -590,7 +595,7 @@ static struct passwd * check_perms (void)
 #ifdef USE_PAM
 	check_perms_pam (pw);
 #else				/* !USE_PAM */
-	check_perms_pam (pw);
+	check_perms_nopam (pw);
 #endif				/* !USE_PAM */
 	(void) signal (SIGINT, SIG_DFL);
 	(void) signal (SIGQUIT, SIG_DFL);
@@ -685,99 +690,61 @@ static void save_caller_context (char **argv)
 }
 
 /*
- * su - switch user id
+ * process_flags - Process the command line arguments
  *
- *	su changes the user's ids to the values for the specified user.  if
- *	no new user name is specified, "root" or UID 0 is used by default.
- *
- *	Any additional arguments are passed to the user's shell. In
- *	particular, the argument "-c" will cause the next argument to be
- *	interpreted as a command by the common shell programs.
+ *	process_flags() interprets the command line arguments and sets
+ *	the values that the user will be created with accordingly. The
+ *	values are checked for sanity.
  */
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
-	const char *cp;
-	bool doshell = false;
-	bool fakelogin = false;
-	struct passwd *pw = NULL;
-	char *shellstr = NULL;
-	char *command = NULL;
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"command", required_argument, NULL, 'c'},
+		{"help", no_argument, NULL, 'h'},
+		{"login", no_argument, NULL, 'l'},
+		{"preserve-environment", no_argument, NULL, 'p'},
+		{"shell", required_argument, NULL, 's'},
+		{NULL, 0, NULL, '\0'}
+	};
 
-#ifdef USE_PAM
-	int ret;
-#else				/* !USE_PAM */
-	int err = 0;
-#endif				/* !USE_PAM */
-
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
-
-	change_environment = true;
-
-	save_caller_context (argv);
-
-	OPENLOG ("su");
-
-	/*
-	 * Process the command line arguments. 
-	 */
-
-	{
-		/*
-		 * Parse the command line options.
-		 */
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"command", required_argument, NULL, 'c'},
-			{"help", no_argument, NULL, 'h'},
-			{"login", no_argument, NULL, 'l'},
-			{"preserve-environment", no_argument, NULL, 'p'},
-			{"shell", required_argument, NULL, 's'},
-			{NULL, 0, NULL, '\0'}
-		};
-
-		while ((c =
-			getopt_long (argc, argv, "c:hlmps:", long_options,
-				     &option_index)) != -1) {
-			switch (c) {
-			case 'c':
-				command = optarg;
-				break;
-			case 'h':
-				usage (E_SUCCESS);
-				break;
-			case 'l':
-				fakelogin = true;
-				break;
-			case 'm':
-			case 'p':
-				/* This will only have an effect if the target
-				 * user do not have a restricted shell, or if
-				 * su is called by root.
-				 */
-				change_environment = false;
-				break;
-			case 's':
-				shellstr = optarg;
-				break;
-			default:
-				usage (E_USAGE);	/* NOT REACHED */
-			}
-		}
-
-		if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
+	while ((c = getopt_long (argc, argv, "c:hlmps:", long_options,
+	                         &option_index)) != -1) {
+		switch (c) {
+		case 'c':
+			command = optarg;
+			break;
+		case 'h':
+			usage (E_SUCCESS);
+			break;
+		case 'l':
 			fakelogin = true;
-			optind++;
-			if (   (optind < argc)
-			    && (strcmp (argv[optind], "--") == 0)) {
-				optind++;
-			}
+			break;
+		case 'm':
+		case 'p':
+			/* This will only have an effect if the target
+			 * user do not have a restricted shell, or if
+			 * su is called by root.
+			 */
+			change_environment = false;
+			break;
+		case 's':
+			shellstr = optarg;
+			break;
+		default:
+			usage (E_USAGE);	/* NOT REACHED */
 		}
 	}
 
-	initenv ();
+	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
+		fakelogin = true;
+		optind++;
+		if (   (optind < argc)
+		    && (strcmp (argv[optind], "--") == 0)) {
+			optind++;
+		}
+	}
 
 	/*
 	 * The next argument must be either a user ID, or some flag to a
@@ -809,6 +776,40 @@ int main (int argc, char **argv)
 	if (NULL != command) {
 		doshell = false;
 	}
+}
+
+/*
+ * su - switch user id
+ *
+ *	su changes the user's ids to the values for the specified user.  if
+ *	no new user name is specified, "root" or UID 0 is used by default.
+ *
+ *	Any additional arguments are passed to the user's shell. In
+ *	particular, the argument "-c" will cause the next argument to be
+ *	interpreted as a command by the common shell programs.
+ */
+int main (int argc, char **argv)
+{
+	const char *cp;
+	struct passwd *pw = NULL;
+
+#ifdef USE_PAM
+	int ret;
+#else				/* !USE_PAM */
+	int err = 0;
+#endif				/* !USE_PAM */
+
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
+
+	save_caller_context (argv);
+
+	OPENLOG ("su");
+
+	process_flags (argc, argv);
+
+	initenv ();
 
 #ifdef USE_PAM
 	ret = pam_start ("su", name, &conv, &pamh);
@@ -898,7 +899,7 @@ int main (int argc, char **argv)
 	ret = pam_open_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_open_session: %s",
-			 pam_strerror (pamh, ret)));
+		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		(void) pam_end (pamh, ret);

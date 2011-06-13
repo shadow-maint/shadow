@@ -8,6 +8,7 @@
 	* src/su.c: Merge environment setting blocks after the creation of
 	the session.
 	* src/su.c: Close the password databases together with syslog.
+	* src/su.c: Extract command line processing from main().
 
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
