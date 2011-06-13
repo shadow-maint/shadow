@@ -868,8 +868,6 @@ int main (int argc, char **argv)
 	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
-	endpwent ();
-	endspent ();
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
@@ -1034,6 +1032,8 @@ int main (int argc, char **argv)
 		}
 	}
 
+	endpwent ();
+	endspent ();
 	/*
 	 * This is a workaround for Linux libc bug/feature (?) - the
 	 * /dev/log file descriptor is open without the close-on-exec flag
