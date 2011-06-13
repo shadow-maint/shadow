@@ -348,7 +348,9 @@ extern int safe_system (const char *command,
 extern long strtoday (const char *);
 
 /* suauth.c */
-extern int check_su_auth (const char *actual_id, const char *wanted_id);
+extern int check_su_auth (const char *actual_id,
+                          const char *wanted_id,
+                          bool su_to_root);
 
 /* sulog.c */
 extern void sulog (const char *tty,

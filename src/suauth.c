@@ -48,11 +48,6 @@
 #define	DENY		-1
 #define	OWNPWORD	2
 
-/*
- * Global variables
- */
-struct passwd pwent;
-
 #ifdef SU_ACCESS
 
 /* Really, I could do with a few const char's here defining all the 
@@ -65,7 +60,9 @@ static int isgrp (const char *, const char *);
 static int lines = 0;
 
 
-int check_su_auth (const char *actual_id, const char *wanted_id)
+int check_su_auth (const char *actual_id,
+                   const char *wanted_id,
+                   bool su_to_root)
 {
 	int posn, endline;
 	const char field[] = ":";
@@ -131,7 +128,7 @@ int check_su_auth (const char *actual_id, const char *wanted_id)
 		if (!applies (actual_id, from_users))
 			continue;
 		if (!strcmp (action, "DENY")) {
-			SYSLOG ((pwent.pw_uid ? LOG_NOTICE : LOG_WARN,
+			SYSLOG ((su_to_root ? LOG_WARN : LOG_NOTICE,
 				 "DENIED su from '%s' to '%s' (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
 			fputs (_("Access to su to that account DENIED.\n"),
@@ -139,14 +136,14 @@ int check_su_auth (const char *actual_id, const char *wanted_id)
 			fclose (authfile_fd);
 			return DENY;
 		} else if (!strcmp (action, "NOPASS")) {
-			SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
+			SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
 				 "NO password asked for su from '%s' to '%s' (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
 			fputs (_("Password authentication bypassed.\n"),stderr);
 			fclose (authfile_fd);
 			return NOPWORD;
 		} else if (!strcmp (action, "OWNPASS")) {
-			SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
+			SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
 				 "su from '%s' to '%s': asking for user's own password (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
 			fputs (_("Please enter your OWN password as authentication.\n"),

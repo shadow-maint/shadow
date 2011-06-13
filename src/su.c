@@ -93,8 +93,6 @@ static int caught = 0;
 static pid_t pid_child = 0;
 #endif
 
-extern struct passwd pwent;
-
 /*
  * External identifiers
  */
@@ -114,7 +112,7 @@ static RETSIGTYPE kill_child (int unused(s));
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
-static void check_perms (void);
+static struct passwd * check_perms (void);
 
 #ifndef USE_PAM
 /*
@@ -181,12 +179,12 @@ static bool restricted_shell (const char *shellstr)
 	return true;
 }
 
-static void su_failure (const char *tty)
+static void su_failure (const char *tty, bool su_to_root)
 {
 	sulog (tty, false, oldname, name);	/* log failed attempt */
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
-		SYSLOG (((0 != pwent.pw_uid) ? LOG_INFO : LOG_NOTICE,
+		SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
 		         "- %s %s:%s", tty,
 		         ('\0' != oldname[0]) ? oldname : "???",
 		         ('\0' != name[0]) ? name : "???"));
@@ -413,28 +411,18 @@ static void usage (int status)
  *	In case of subsystem login, the user is first authenticated in the
  *	caller's root subsystem, and then in the user's target subsystem.
  */
-static void check_perms (void)
+static struct passwd * check_perms (void)
 {
 	/*
 	 * The password file entries for the user is gotten and the account
 	 * validated.
 	 */
-	pw = xgetpwnam (name);
+	struct passwd *pw = xgetpwnam (name);
 	if (NULL == pw) {
 		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
 		closelog ();
 		exit (1);
 	}
-#ifndef USE_PAM
-	spwd = NULL;
-	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
-		spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
-		if (NULL != spwd) {
-			pw->pw_passwd = spwd->sp_pwdp;
-		}
-	}
-#endif				/* !USE_PAM */
-	pwent = *pw;
 
 #ifndef USE_PAM
 	/*
@@ -456,7 +444,7 @@ static void check_perms (void)
 	 */
 
 	if (!amroot) {
-		if (   (0 == pwent.pw_uid)
+		if (   (0 == pw->pw_uid)
 		    && getdef_bool ("SU_WHEEL_ONLY")
 		    && !iswheel (oldname)) {
 			fprintf (stderr,
@@ -465,15 +453,22 @@ static void check_perms (void)
 			exit (1);
 		}
 #ifdef SU_ACCESS
-		switch (check_su_auth (oldname, name)) {
+		spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
+		if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+			if (NULL != spwd) {
+				pw->pw_passwd = spwd->sp_pwdp;
+			}
+		}
+
+		switch (check_su_auth (oldname, name, 0 == pw->pw_uid)) {
 		case 0:	/* normal su, require target user's password */
 			break;
 		case 1:	/* require no password */
-			pwent.pw_passwd = "";	/* XXX warning: const */
+			pw->pw_passwd = "";	/* XXX warning: const */
 			break;
 		case 2:	/* require own password */
 			puts (_("(Enter your own password)"));
-			pwent.pw_passwd = oldpass;
+			pw->pw_passwd = oldpass;
 			break;
 		default:	/* access denied (-1) or unexpected value */
 			fprintf (stderr,
@@ -494,7 +489,7 @@ static void check_perms (void)
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
-		su_failure (tty);
+		su_failure (tty, 0 == pw->pw_uid);
 	}
 
 	ret = pam_acct_mgmt (pamh, 0);
@@ -512,7 +507,7 @@ static void check_perms (void)
 				         _("%s: %s\n"),
 				         Prog, pam_strerror (pamh, ret));
 				(void) pam_end (pamh, ret);
-				su_failure (tty);
+				su_failure (tty, 0 == pw->pw_uid);
 			}
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
@@ -521,7 +516,7 @@ static void check_perms (void)
 			         _("%s: %s\n"),
 			         Prog, pam_strerror (pamh, ret));
 			(void) pam_end (pamh, ret);
-			su_failure (tty);
+			su_failure (tty, 0 == pw->pw_uid);
 		}
 	}
 #else				/* !USE_PAM */
@@ -537,11 +532,11 @@ static void check_perms (void)
 	 * character.
 	 */
 	if (   !amroot
-	    && (pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0) != 0)) {
-		SYSLOG (((pwent.pw_uid != 0)? LOG_NOTICE : LOG_WARN,
+	    && (pw_auth (pw->pw_passwd, name, PW_SU, (char *) 0) != 0)) {
+		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
-		su_failure (tty);
+		su_failure (tty, 0 == pw->pw_uid);
 	}
 	(void) signal (SIGQUIT, oldsig);
 
@@ -551,7 +546,7 @@ static void check_perms (void)
 	 * expired password.
 	 */
 	if ((!amroot) && (NULL != spwd)) {
-		(void) expire (&pwent, spwd);
+		(void) expire (pw, spwd);
 	}
 
 	/*
@@ -561,14 +556,14 @@ static void check_perms (void)
 	 * the account.
 	 */
 	if (!amroot) {
-		if (!isttytime (pwent.pw_name, "SU", time ((time_t *) 0))) {
-			SYSLOG (((0 != pwent.pw_uid) ? LOG_WARN : LOG_CRIT,
+		if (!isttytime (name, "SU", time ((time_t *) 0))) {
+			SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
 			         "SU by %s to restricted account %s",
 			         oldname, name));
 			fprintf (stderr,
 			         _("%s: You are not authorized to su at that time\n"),
 			         Prog);
-			su_failure (tty);
+			su_failure (tty, 0 == pw->pw_uid);
 		}
 	}
 #endif				/* !USE_PAM */
@@ -581,13 +576,14 @@ static void check_perms (void)
 	 * the shell specified in /etc/passwd (not the one specified with
 	 * --shell, which will be the one executed in the chroot later).
 	 */
-	if ('*' == pwent.pw_shell[0]) {	/* subsystem root required */
-		subsystem (&pwent);	/* change to the subsystem root */
+	if ('*' == pw->pw_shell[0]) {	/* subsystem root required */
+		subsystem (pw);	/* change to the subsystem root */
 		endpwent ();		/* close the old password databases */
 		endspent ();
 		return check_perms ();	/* authenticate in the subsystem */
 	}
 
+	return pw;
 }
 
 /*
@@ -621,8 +617,6 @@ int main (int argc, char **argv)
 
 	RETSIGTYPE (*oldsig) (int);
 	int is_console = 0;
-
-	struct spwd *spwd = 0;
 
 #ifdef SU_ACCESS
 	char *oldpass;
@@ -748,7 +742,7 @@ int main (int argc, char **argv)
 			root_pw = getpwuid (0);
 			if (NULL == root_pw) {
 				SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
-				su_failure (tty);
+				su_failure (tty, true);
 			}
 			(void) strcpy (name, root_pw->pw_name);
 		}
@@ -770,7 +764,7 @@ int main (int argc, char **argv)
 		         Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) my_uid));
-		su_failure (tty);
+		su_failure (tty, true); // FIXME: at this time I do not know the target UID
 	}
 	STRFCPY (oldname, pw->pw_name);
 
@@ -780,9 +774,11 @@ int main (int argc, char **argv)
 	 * Sort out the password of user calling su, in case needed later
 	 * -- chris
 	 */
-	spwd = getspnam (oldname); /* !USE_PAM, no need for xgetspnam */
-	if (NULL != spwd) {
-		pw->pw_passwd = spwd->sp_pwdp;
+	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+		struct spwd *spwd = getspnam (oldname);
+		if (NULL != spwd) {
+			pw->pw_passwd = spwd->sp_pwdp;
+		}
 	}
 	oldpass = xstrdup (pw->pw_passwd);
 #endif				/* SU_ACCESS */
@@ -810,7 +806,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* USE_PAM */
 
-	check_perms ();
+	pw = check_perms ();
 
 	/* If the user do not want to change the environment,
 	 * use the current SHELL.
@@ -825,7 +821,7 @@ int main (int argc, char **argv)
 	 * must be the one specified in /etc/passwd.
 	 */
 	if (   !amroot
-	    && restricted_shell (pwent.pw_shell)) {
+	    && restricted_shell (pw->pw_shell)) {
 		shellstr = NULL;
 		change_environment = true;
 	}
@@ -834,7 +830,7 @@ int main (int argc, char **argv)
 	 * in /etc/passwd.
 	 */
 	if (NULL == shellstr) {
-		shellstr = (char *) strdup (pwent.pw_shell);
+		shellstr = (char *) strdup (pw->pw_shell);
 	}
 
 	/*
@@ -905,9 +901,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
-		addenv ((pwent.pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
+		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=') != NULL) {
 		addenv (cp, NULL);
 	} else {
@@ -931,7 +927,7 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	/* set primary group id and supplementary groups */
-	if (setup_groups (&pwent) != 0) {
+	if (setup_groups (pw) != 0) {
 		pam_end (pamh, PAM_ABORT);
 		exit (1);
 	}
@@ -976,7 +972,7 @@ int main (int argc, char **argv)
 	}
 
 	/* become the new user */
-	if (change_uid (&pwent) != 0) {
+	if (change_uid (pw) != 0) {
 		pam_close_session (pamh, 0);
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		(void) pam_end (pamh, PAM_ABORT);
@@ -987,22 +983,22 @@ int main (int argc, char **argv)
 
 	/* no limits if su from root (unless su must fake login's behavior) */
 	if (!amroot || fakelogin) {
-		setup_limits (&pwent);
+		setup_limits (pw);
 	}
 
-	if (setup_uid_gid (&pwent, is_console) != 0) {
+	if (setup_uid_gid (pw, is_console) != 0) {
 		exit (1);
 	}
 #endif				/* !USE_PAM */
 
 	if (change_environment) {
 		if (fakelogin) {
-			pwent.pw_shell = shellstr;
-			setup_env (&pwent);
+			pw->pw_shell = shellstr;
+			setup_env (pw);
 		} else {
-			addenv ("HOME", pwent.pw_dir);
-			addenv ("USER", pwent.pw_name);
-			addenv ("LOGNAME", pwent.pw_name);
+			addenv ("HOME", pw->pw_dir);
+			addenv ("USER", pw->pw_name);
+			addenv ("LOGNAME", pw->pw_name);
 			addenv ("SHELL", shellstr);
 		}
 	}

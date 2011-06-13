@@ -17,6 +17,14 @@
 	restricted_shell is called only once. This will allow moving the
 	environment definition after the switch to the new user.
 	* src/su.c: Extract the authentication from the main function.
+	* lib/prototypes.h, src/suauth.c, src/su.c (check_su_auth): Do not
+	use the pwent global variable to communicate between APIs of
+	different files. Added boolean parameter su_to_root to
+	check_su_auth().
+	* src/su.c (check_perms): Return the passwd entry of the finally
+	authenticated user. Remove usage of the pwent variable.
+	* src/su.c: The password of the caller is the one from the
+	spwd structure only if the passwd's password is 'x'.
 
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
