@@ -863,11 +863,7 @@ int main (int argc, char **argv)
 	 * expired accounts, but normal users can't become a user with an
 	 * expired password.
 	 */
-	if (!amroot) {
-		if (NULL == spwd) {
-			spwd = pwd_to_spwd (&pwent);
-		}
-
+	if ((!amroot) && (NULL != spwd)) {
 		(void) expire (&pwent, spwd);
 	}
 

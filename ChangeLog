@@ -1,12 +1,14 @@
-2011-06-12  Thomas Blein  <tblein@tblein.eu>
-
-	* man/po/fr.po: French manpages translation
-
-2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
+2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: Updating pwent after expire() is not useful. Only the
 	password information may have changed and they are not used
 	anymore afterwards.
+	* src/su.c: No need to call expire() if there are no shadow entry.
+	No need to convert a passwd entry into an spwd entry in that case.
+
+2011-06-12  Thomas Blein  <tblein@tblein.eu>
+
+	* man/po/fr.po: French manpages translation
 
 2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
 
