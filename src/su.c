@@ -61,6 +61,13 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <unistd.h>
+#ifndef USE_PAM
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#endif				/* !USE_PAM */
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
@@ -119,6 +126,7 @@ static void execve_shell (const char *shellstr,
                           char *const envp[]);
 #ifdef USE_PAM
 static RETSIGTYPE kill_child (int unused(s));
+static void prepare_pam_close_session (void);
 #else				/* !USE_PAM */
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
@@ -258,9 +266,10 @@ static void catch_signals (int sig)
 }
 
 /*
- * Create a session and fork.
- * Only the child returns. The parent will wait for the child to terminate
- * and exit.
+ * prepare_pam_close_session - Fork and wait for the child to close the session
+ *
+ *	Only the child returns. The parent will wait for the child to
+ *	terminate and exit.
  */
 static void prepare_pam_close_session (void)
 {
@@ -385,35 +394,11 @@ static void prepare_pam_close_session (void)
 	                                : WTERMSIG (status) + 128);
 	/* Only the child returns. See above. */
 }
-
-static void run_shell (const char *shellstr, char *args[], bool doshell,
-                       char *const envp[])
-{
-		/*
-		 * PAM_DATA_SILENT is not supported by some modules, and
-		 * there is no strong need to clean up the process space's
-		 * memory since we will either call exec or exit.
-		pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
-		 */
-
-		if (doshell) {
-			(void) shell (shellstr, (char *) args[0], envp);
-		} else {
-			/* There is no need for a controlling terminal.
-			 * This avoids the callee to inject commands on
-			 * the caller's tty. */
-			(void) setsid ();
-
-			execve_shell (shellstr, (char **) args, envp);
-		}
-
-		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-}
 #endif				/* USE_PAM */
 
 /*
  * usage - print command line syntax and exit
-  */
+ */
 static void usage (int status)
 {
 	fputs (_("Usage: su [options] [LOGIN]\n"
@@ -1049,6 +1034,40 @@ int main (int argc, char **argv)
 
 	set_environment (pw);
 
+	if (!doshell) {
+		/* There is no need for a controlling terminal.
+		 * This avoids the callee to inject commands on
+		 * the caller's tty. */
+		int err = -1;
+
+#ifdef USE_PAM
+		/* When PAM is used, we are on the child */
+		err = setsid ();
+#else
+		/* Otherwise, we cannot use setsid */
+		int fd = open ("/dev/tty", O_RDWR);
+
+		if (fd >= 0) {
+			err = ioctl (fd, TIOCNOTTY, (char *) 0);
+			(void) close (fd);
+		}
+#endif				/* USE_PAM */
+
+		if (-1 == err) {
+			(void) fprintf (stderr,
+			                _("%s: Cannot drop the controlling terminal\n"),
+			                Prog);
+			exit (1);
+		}
+	}
+
+	/*
+	 * PAM_DATA_SILENT is not supported by some modules, and
+	 * there is no strong need to clean up the process space's
+	 * memory since we will either call exec or exit.
+	pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
+	 */
+
 	endpwent ();
 	endspent ();
 	/*
@@ -1081,6 +1100,7 @@ int main (int argc, char **argv)
 	}
 
 	if (!doshell) {
+		int err;
 		/* Position argv to the remaining arguments */
 		argv += optind;
 		if (NULL != command) {
@@ -1093,24 +1113,15 @@ int main (int argc, char **argv)
 		 * with the rest of the command line included.
 		 */
 		argv[-1] = cp;
-#ifndef USE_PAM
 		execve_shell (shellstr, &argv[-1], environ);
 		err = errno;
-		(void) fputs (_("No shell\n"), stderr);
-		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
-		closelog ();
-		exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-#else
-		run_shell (shellstr, &argv[-1], false, environ); /* no return */
-#endif
+		(void) fprintf (stderr,
+		                _("Cannot execute %s\n"), shellstr);
+		errno = err;
+	} else {
+		(void) shell (shellstr, cp, environ);
 	}
-#ifndef USE_PAM
-	err = shell (shellstr, cp, environ);
-	exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-#else
-	run_shell (shellstr, &cp, true, environ);
-#endif
-	/* NOT REACHED */
-	exit (1);
+
+	return (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }
 

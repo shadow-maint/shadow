@@ -5,6 +5,9 @@
 	prepare_pam_close_session() is now executed before the creation of
 	the pam session and before the UID is changed. This allows to
 	close the session as root.
+	* src/su.c: Also drop the controlling terminal when PAM is not
+	used.
+	* src/su.c: Remove run_shell().
 
 2011-06-12  Nicolas François  <nicolas.francois@centraliens.net>
 
