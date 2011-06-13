@@ -804,10 +804,37 @@ int main (int argc, char **argv)
 		goto top;		/* authenticate in the subsystem */
 	}
 
-	/* If su is not called by root, and the target user has a restricted
-	 * shell, the environment must be changed.
+	/* If the user do not want to change the environment,
+	 * use the current SHELL.
+	 * (unless another shell is required by the command line)
 	 */
-	change_environment |= (restricted_shell (pwent.pw_shell) && !amroot);
+	if ((NULL == shellstr) && !change_environment) {
+		shellstr = getenv ("SHELL");
+	}
+
+	/* If su is not called by root, and the target user has a
+	 * restricted shell, the environment must be changed and the shell
+	 * must be the one specified in /etc/passwd.
+	 */
+	if (   !amroot
+	    && restricted_shell (pwent.pw_shell)) {
+		shellstr = NULL;
+		change_environment = true;
+	}
+
+	/* If the shell is not set at this time, use the shell specified
+	 * in /etc/passwd.
+	 */
+	if (NULL == shellstr) {
+		shellstr = (char *) strdup (pwent.pw_shell);
+	}
+
+	/*
+	 * Set the default shell.
+	 */
+	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
+		shellstr = SHELL;
+	}
 
 	/*
 	 * If a new login is being set up, the old environment will be
@@ -868,35 +895,6 @@ int main (int argc, char **argv)
 			addenv (*envp, NULL);
 			envp++;
 		}
-	}
-
-	/* If the user do not want to change the environment,
-	 * use the current SHELL.
-	 * (unless another shell is required by the command line)
-	 */
-	if ((NULL == shellstr) && !change_environment) {
-		shellstr = getenv ("SHELL");
-	}
-	/* For users with non null UID, if this user has a restricted
-	 * shell, the shell must be the one specified in /etc/passwd
-	 */
-	if (   (NULL != shellstr)
-	    && !amroot
-	    && restricted_shell (pwent.pw_shell)) {
-		shellstr = NULL;
-	}
-	/* If the shell is not set at this time, use the shell specified
-	 * in /etc/passwd.
-	 */
-	if (NULL == shellstr) {
-		shellstr = (char *) strdup (pwent.pw_shell);
-	}
-
-	/*
-	 * Set the default shell.
-	 */
-	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
-		shellstr = SHELL;
 	}
 
 	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
