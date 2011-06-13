@@ -72,9 +72,6 @@
 #include "exitcodes.h"
 
 /*
- * Assorted #defines to control su's behavior
- */
-/*
  * Global variables
  */
 const char *Prog;
