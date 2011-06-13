@@ -900,9 +900,7 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	int ret;
-#else				/* !USE_PAM */
-	int err = 0;
-#endif				/* !USE_PAM */
+#endif				/* USE_PAM */
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
