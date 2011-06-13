@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -868,16 +868,7 @@ int main (int argc, char **argv)
 			spwd = pwd_to_spwd (&pwent);
 		}
 
-		if (expire (&pwent, spwd) != 0) {
-			/* !USE_PAM, no need for xgetpwnam */
-			struct passwd *pwd = getpwnam (name);
-
-			/* !USE_PAM, no need for xgetspnam */
-			spwd = getspnam (name);
-			if (NULL != pwd) {
-				pwent = *pwd;
-			}
-		}
+		(void) expire (&pwent, spwd);
 	}
 
 	/*

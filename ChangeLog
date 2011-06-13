@@ -4,6 +4,12 @@
 
 2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Updating pwent after expire() is not useful. Only the
+	password information may have changed and they are not used
+	anymore afterwards.
+
+2011-06-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/su.c: Do not forward the controlling terminal to
 	commands executed with -c. This prevents tty hijacking which could
 	lead to execution with the caller's privileges. This required to
