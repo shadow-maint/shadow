@@ -257,49 +257,31 @@ static void catch_signals (int sig)
 	caught = sig;
 }
 
-/* This I ripped out of su.c from sh-utils after the Mandrake pam patch
- * have been applied.  Some work was needed to get it integrated into
- * su.c from shadow.
+/*
+ * Create a session and fork.
+ * Only the child returns. The parent will wait for the child to terminate
+ * and exit.
  */
-static void run_shell (const char *shellstr, char *args[], bool doshell,
-                       char *const envp[])
+static void prepare_pam_close_session (void)
 {
-	pid_t child;
 	sigset_t ourset;
 	int status;
 	int ret;
 
-	child = fork ();
-	if (child == 0) {	/* child shell */
-		/*
-		 * PAM_DATA_SILENT is not supported by some modules, and
-		 * there is no strong need to clean up the process space's
-		 * memory since we will either call exec or exit.
-		pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
-		 */
-
-		if (doshell) {
-			(void) shell (shellstr, (char *) args[0], envp);
-		} else {
-			/* There is no need for a controlling terminal.
-			 * This avoids the callee to inject commands on
-			 * the caller's tty. */
-			(void) setsid ();
-
-			execve_shell (shellstr, (char **) args, envp);
-		}
-
-		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	} else if ((pid_t)-1 == child) {
+	pid_child = fork ();
+	if (pid_child == 0) {	/* child shell */
+		return; /* Only the child will return from pam_create_session */
+	} else if ((pid_t)-1 == pid_child) {
 		(void) fprintf (stderr,
 		                _("%s: Cannot fork user shell\n"),
 		                Prog);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
 		exit (1);
+		/* Only the child returns. See above. */
 	}
+
 	/* parent only */
-	pid_child = child;
 	sigfillset (&ourset);
 	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
 		(void) fprintf (stderr,
@@ -320,8 +302,8 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		    || (sigaction (SIGTERM, &action, NULL) != 0)
 		    || (   !doshell /* handle SIGINT (Ctrl-C), SIGQUIT
 		                     * (Ctrl-\), and SIGTSTP (Ctrl-Z)
-		                     * since the child does not control
-		                     * the tty anymore.
+		                     * since the child will not control
+		                     * the tty.
 		                     */
 		        && (   (sigaddset (&ourset, SIGINT)  != 0)
 		            || (sigaddset (&ourset, SIGQUIT) != 0)
@@ -359,7 +341,7 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 				 * We will SIGSTOP ourself on the next
 				 * waitpid round.
 				 */
-				kill (child, SIGSTOP);
+				kill (pid_child, SIGSTOP);
 				stop = false;
 			} else if (   ((pid_t)-1 != pid)
 			           && (0 != WIFSTOPPED (status))) {
@@ -377,13 +359,13 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
-		(void) kill (child, caught);
+		(void) kill (pid_child, caught);
 	}
 
 	ret = pam_close_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_close_session: %s",
-			 pam_strerror (pamh, ret)));
+		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
 		exit (1);
@@ -401,8 +383,33 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 
 	exit ((0 != WIFEXITED (status)) ? WEXITSTATUS (status)
 	                                : WTERMSIG (status) + 128);
+	/* Only the child returns. See above. */
 }
-#endif
+
+static void run_shell (const char *shellstr, char *args[], bool doshell,
+                       char *const envp[])
+{
+		/*
+		 * PAM_DATA_SILENT is not supported by some modules, and
+		 * there is no strong need to clean up the process space's
+		 * memory since we will either call exec or exit.
+		pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
+		 */
+
+		if (doshell) {
+			(void) shell (shellstr, (char *) args[0], envp);
+		} else {
+			/* There is no need for a controlling terminal.
+			 * This avoids the callee to inject commands on
+			 * the caller's tty. */
+			(void) setsid ();
+
+			execve_shell (shellstr, (char **) args, envp);
+		}
+
+		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+}
+#endif				/* USE_PAM */
 
 /*
  * usage - print command line syntax and exit
@@ -929,9 +936,9 @@ int main (int argc, char **argv)
 	ret = pam_start ("su", name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_start: error %d", ret);
-			fprintf (stderr,
-			         _("%s: pam_start: error %d\n"),
-			         Prog, ret));
+		fprintf (stderr,
+		         _("%s: pam_start: error %d\n"),
+		         Prog, ret));
 		exit (1);
 	}
 
@@ -941,7 +948,7 @@ int main (int argc, char **argv)
 	}
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_set_item: %s",
-			 pam_strerror (pamh, ret)));
+		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
@@ -1019,6 +1026,8 @@ int main (int argc, char **argv)
 		(void) pam_end (pamh, ret);
 		exit (1);
 	}
+
+	prepare_pam_close_session ();
 
 	/* become the new user */
 	if (change_uid (pw) != 0) {

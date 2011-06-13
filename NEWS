@@ -46,6 +46,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Do not forward the controlling terminal to commands executed with -c.
     This prevents tty hijacking which could lead to execution with the
     caller's privileges.
+  * Close PAM sessions as root. This will be more friendly to PAM modules
+    like pam_mount or pam_systemd.
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
 - useradd

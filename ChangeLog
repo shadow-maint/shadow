@@ -1,3 +1,11 @@
+2011-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c (prepare_pam_close_session): Extract the creation of a
+	child and listening for signal in the parent from run_shell().
+	prepare_pam_close_session() is now executed before the creation of
+	the pam session and before the UID is changed. This allows to
+	close the session as root.
+
 2011-06-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c (save_caller_context): Extract from main() the code
