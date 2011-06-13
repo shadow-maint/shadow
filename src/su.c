@@ -908,11 +908,10 @@ int main (int argc, char **argv)
 	 * --shell, which will be the one executed in the chroot later).
 	 */
 	if ('*' == pwent.pw_shell[0]) {	/* subsystem root required */
-		pwent.pw_shell++;	/* skip the '*' */
-		subsystem (&pwent);	/* figure out what to execute */
-		endpwent ();
+		subsystem (&pwent);	/* change to the subsystem root */
+		endpwent ();		/* close the old password databases */
 		endspent ();
-		goto top;
+		goto top;		/* authenticate in the subsystem */
 	}
 
 	sulog (tty, true, oldname, name);	/* save SU information */
