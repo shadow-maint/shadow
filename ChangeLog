@@ -8,6 +8,9 @@
 	* src/su.c: Also drop the controlling terminal when PAM is not
 	used.
 	* src/su.c: Remove run_shell().
+	* src/su.c: After prepare_pam_close_session() there is no need to
+	close the session in the child. Added pam_setcred to
+	prepare_pam_close_session().
 
 2011-06-12  Nicolas François  <nicolas.francois@centraliens.net>
 

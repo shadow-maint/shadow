@@ -376,11 +376,10 @@ static void prepare_pam_close_session (void)
 		SYSLOG ((LOG_ERR, "pam_close_session: %s",
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		exit (1);
 	}
 
-	ret = pam_end (pamh, PAM_SUCCESS);
+	(void) pam_setcred (pamh, PAM_DELETE_CRED);
+	(void) pam_end (pamh, PAM_SUCCESS);
 
 	if (0 != caught) {
 		(void) signal (SIGALRM, kill_child);
@@ -1016,9 +1015,6 @@ int main (int argc, char **argv)
 
 	/* become the new user */
 	if (change_uid (pw) != 0) {
-		pam_close_session (pamh, 0);
-		pam_setcred (pamh, PAM_DELETE_CRED);
-		(void) pam_end (pamh, PAM_ABORT);
 		exit (1);
 	}
 #else				/* !USE_PAM */
