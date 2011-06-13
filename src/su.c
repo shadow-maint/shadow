@@ -317,8 +317,8 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		            || (sigaddset (&ourset, SIGQUIT) != 0)
 		            || (sigaddset (&ourset, SIGTSTP) != 0)
 		            || (sigaction (SIGINT,  &action, NULL) != 0)
-		            || (sigaction (SIGQUIT, &action, NULL) != 0))
-		            || (sigaction (SIGTSTP,  &action, NULL) != 0))
+		            || (sigaction (SIGQUIT, &action, NULL) != 0)
+		            || (sigaction (SIGTSTP,  &action, NULL) != 0)))
 		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
 			fprintf (stderr,
@@ -421,6 +421,14 @@ static void usage (int status)
  */
 static struct passwd * check_perms (void)
 {
+#ifdef USE_PAM
+	int ret;
+#else				/* !USE_PAM */
+#ifdef SU_ACCESS
+	struct spwd *spwd = NULL;
+#endif				/* SU_ACCESS */
+	RETSIGTYPE (*oldsig) (int);
+#endif				/* !USE_PAM */
 	/*
 	 * The password file entries for the user is gotten and the account
 	 * validated.
@@ -691,9 +699,6 @@ int main (int argc, char **argv)
 	int ret;
 #else				/* !USE_PAM */
 	int err = 0;
-
-	RETSIGTYPE (*oldsig) (int);
-
 #endif				/* !USE_PAM */
 
 	(void) setlocale (LC_ALL, "");
