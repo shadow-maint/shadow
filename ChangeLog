@@ -16,6 +16,7 @@
 	* src/su.c: Define shellstr before the environment so that
 	restricted_shell is called only once. This will allow moving the
 	environment definition after the switch to the new user.
+	* src/su.c: Extract the authentication from the main function.
 
 2011-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 

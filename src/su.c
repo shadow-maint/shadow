@@ -114,6 +114,7 @@ static RETSIGTYPE kill_child (int unused(s));
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
+static void check_perms (void);
 
 #ifndef USE_PAM
 /*
@@ -407,6 +408,189 @@ static void usage (int status)
 }
 
 /*
+ * check_perms - check permissions to switch to the user 'name'
+ *
+ *	In case of subsystem login, the user is first authenticated in the
+ *	caller's root subsystem, and then in the user's target subsystem.
+ */
+static void check_perms (void)
+{
+	/*
+	 * The password file entries for the user is gotten and the account
+	 * validated.
+	 */
+	pw = xgetpwnam (name);
+	if (NULL == pw) {
+		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
+		closelog ();
+		exit (1);
+	}
+#ifndef USE_PAM
+	spwd = NULL;
+	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+		spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
+		if (NULL != spwd) {
+			pw->pw_passwd = spwd->sp_pwdp;
+		}
+	}
+#endif				/* !USE_PAM */
+	pwent = *pw;
+
+#ifndef USE_PAM
+	/*
+	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
+	 * so we make this a configurable option.
+	 */
+
+	/* The original Shadow 3.3.2 did this differently. Do it like BSD:
+	 *
+	 * - check for UID 0 instead of name "root" - there are systems with
+	 *   several root accounts under different names,
+	 *
+	 * - check the contents of /etc/group instead of the current group
+	 *   set (you must be listed as a member, GID 0 is not sufficient).
+	 *
+	 * In addition to this traditional feature, we now have complete su
+	 * access control (allow, deny, no password, own password).  Thanks
+	 * to Chris Evans <lady0110@sable.ox.ac.uk>.
+	 */
+
+	if (!amroot) {
+		if (   (0 == pwent.pw_uid)
+		    && getdef_bool ("SU_WHEEL_ONLY")
+		    && !iswheel (oldname)) {
+			fprintf (stderr,
+			         _("You are not authorized to su %s\n"),
+			         name);
+			exit (1);
+		}
+#ifdef SU_ACCESS
+		switch (check_su_auth (oldname, name)) {
+		case 0:	/* normal su, require target user's password */
+			break;
+		case 1:	/* require no password */
+			pwent.pw_passwd = "";	/* XXX warning: const */
+			break;
+		case 2:	/* require own password */
+			puts (_("(Enter your own password)"));
+			pwent.pw_passwd = oldpass;
+			break;
+		default:	/* access denied (-1) or unexpected value */
+			fprintf (stderr,
+			         _("You are not authorized to su %s\n"),
+			         name);
+			exit (1);
+		}
+#endif				/* SU_ACCESS */
+	}
+#endif				/* !USE_PAM */
+
+	(void) signal (SIGINT, SIG_IGN);
+	(void) signal (SIGQUIT, SIG_IGN);
+#ifdef USE_PAM
+	ret = pam_authenticate (pamh, 0);
+	if (PAM_SUCCESS != ret) {
+		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
+		         pam_strerror (pamh, ret)));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		(void) pam_end (pamh, ret);
+		su_failure (tty);
+	}
+
+	ret = pam_acct_mgmt (pamh, 0);
+	if (PAM_SUCCESS != ret) {
+		if (amroot) {
+			fprintf (stderr,
+			         _("%s: %s\n(Ignored)\n"),
+			         Prog, pam_strerror (pamh, ret));
+		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
+			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+			if (PAM_SUCCESS != ret) {
+				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
+				         pam_strerror (pamh, ret)));
+				fprintf (stderr,
+				         _("%s: %s\n"),
+				         Prog, pam_strerror (pamh, ret));
+				(void) pam_end (pamh, ret);
+				su_failure (tty);
+			}
+		} else {
+			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
+				 pam_strerror (pamh, ret)));
+			fprintf (stderr,
+			         _("%s: %s\n"),
+			         Prog, pam_strerror (pamh, ret));
+			(void) pam_end (pamh, ret);
+			su_failure (tty);
+		}
+	}
+#else				/* !USE_PAM */
+	/*
+	 * Set up a signal handler in case the user types QUIT.
+	 */
+	die (0);
+	oldsig = signal (SIGQUIT, die);
+
+	/*
+	 * See if the system defined authentication method is being used. 
+	 * The first character of an administrator defined method is an '@'
+	 * character.
+	 */
+	if (   !amroot
+	    && (pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0) != 0)) {
+		SYSLOG (((pwent.pw_uid != 0)? LOG_NOTICE : LOG_WARN,
+		         "Authentication failed for %s", name));
+		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
+		su_failure (tty);
+	}
+	(void) signal (SIGQUIT, oldsig);
+
+	/*
+	 * Check to see if the account is expired. root gets to ignore any
+	 * expired accounts, but normal users can't become a user with an
+	 * expired password.
+	 */
+	if ((!amroot) && (NULL != spwd)) {
+		(void) expire (&pwent, spwd);
+	}
+
+	/*
+	 * Check to see if the account permits "su". root gets to ignore any
+	 * restricted accounts, but normal users can't become a user if
+	 * there is a "SU" entry in the /etc/porttime file denying access to
+	 * the account.
+	 */
+	if (!amroot) {
+		if (!isttytime (pwent.pw_name, "SU", time ((time_t *) 0))) {
+			SYSLOG (((0 != pwent.pw_uid) ? LOG_WARN : LOG_CRIT,
+			         "SU by %s to restricted account %s",
+			         oldname, name));
+			fprintf (stderr,
+			         _("%s: You are not authorized to su at that time\n"),
+			         Prog);
+			su_failure (tty);
+		}
+	}
+#endif				/* !USE_PAM */
+
+	(void) signal (SIGINT, SIG_DFL);
+	(void) signal (SIGQUIT, SIG_DFL);
+
+	/*
+	 * Even if --shell is specified, the subsystem login test is based on
+	 * the shell specified in /etc/passwd (not the one specified with
+	 * --shell, which will be the one executed in the chroot later).
+	 */
+	if ('*' == pwent.pw_shell[0]) {	/* subsystem root required */
+		subsystem (&pwent);	/* change to the subsystem root */
+		endpwent ();		/* close the old password databases */
+		endspent ();
+		return check_perms ();	/* authenticate in the subsystem */
+	}
+
+}
+
+/*
  * su - switch user id
  *
  *	su changes the user's ids to the values for the specified user.  if
@@ -626,183 +810,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* USE_PAM */
 
-      top:
-	/*
-	 * This is the common point for validating a user whose name is
-	 * known. It will be reached either by normal processing, or if the
-	 * user is to be logged into a subsystem root.
-	 *
-	 * The password file entries for the user is gotten and the account
-	 * validated.
-	 */
-	pw = xgetpwnam (name);
-	if (NULL == pw) {
-		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
-		closelog ();
-		exit (1);
-	}
-#ifndef USE_PAM
-	spwd = NULL;
-	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
-		spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
-		if (NULL != spwd) {
-			pw->pw_passwd = spwd->sp_pwdp;
-		}
-	}
-#endif				/* !USE_PAM */
-	pwent = *pw;
-
-#ifndef USE_PAM
-	/*
-	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
-	 * so we make this a configurable option.
-	 */
-
-	/* The original Shadow 3.3.2 did this differently. Do it like BSD:
-	 *
-	 * - check for UID 0 instead of name "root" - there are systems with
-	 *   several root accounts under different names,
-	 *
-	 * - check the contents of /etc/group instead of the current group
-	 *   set (you must be listed as a member, GID 0 is not sufficient).
-	 *
-	 * In addition to this traditional feature, we now have complete su
-	 * access control (allow, deny, no password, own password).  Thanks
-	 * to Chris Evans <lady0110@sable.ox.ac.uk>.
-	 */
-
-	if (!amroot) {
-		if (   (0 == pwent.pw_uid)
-		    && getdef_bool ("SU_WHEEL_ONLY")
-		    && !iswheel (oldname)) {
-			fprintf (stderr,
-			         _("You are not authorized to su %s\n"),
-			         name);
-			exit (1);
-		}
-#ifdef SU_ACCESS
-		switch (check_su_auth (oldname, name)) {
-		case 0:	/* normal su, require target user's password */
-			break;
-		case 1:	/* require no password */
-			pwent.pw_passwd = "";	/* XXX warning: const */
-			break;
-		case 2:	/* require own password */
-			puts (_("(Enter your own password)"));
-			pwent.pw_passwd = oldpass;
-			break;
-		default:	/* access denied (-1) or unexpected value */
-			fprintf (stderr,
-			         _("You are not authorized to su %s\n"),
-			         name);
-			exit (1);
-		}
-#endif				/* SU_ACCESS */
-	}
-#endif				/* !USE_PAM */
-
-	(void) signal (SIGINT, SIG_IGN);
-	(void) signal (SIGQUIT, SIG_IGN);
-#ifdef USE_PAM
-	ret = pam_authenticate (pamh, 0);
-	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
-			 pam_strerror (pamh, ret)));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		(void) pam_end (pamh, ret);
-		su_failure (tty);
-	}
-
-	ret = pam_acct_mgmt (pamh, 0);
-	if (PAM_SUCCESS != ret) {
-		if (amroot) {
-			fprintf (stderr,
-			         _("%s: %s\n(Ignored)\n"),
-			         Prog, pam_strerror (pamh, ret));
-		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
-			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
-			if (PAM_SUCCESS != ret) {
-				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
-					 pam_strerror (pamh, ret)));
-				fprintf (stderr,
-				         _("%s: %s\n"),
-				         Prog, pam_strerror (pamh, ret));
-				(void) pam_end (pamh, ret);
-				su_failure (tty);
-			}
-		} else {
-			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
-				 pam_strerror (pamh, ret)));
-			fprintf (stderr,
-			         _("%s: %s\n"),
-			         Prog, pam_strerror (pamh, ret));
-			(void) pam_end (pamh, ret);
-			su_failure (tty);
-		}
-	}
-#else				/* !USE_PAM */
-	/*
-	 * Set up a signal handler in case the user types QUIT.
-	 */
-	die (0);
-	oldsig = signal (SIGQUIT, die);
-
-	/*
-	 * See if the system defined authentication method is being used. 
-	 * The first character of an administrator defined method is an '@'
-	 * character.
-	 */
-	if (   !amroot
-	    && (pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0) != 0)) {
-		SYSLOG (((pwent.pw_uid != 0)? LOG_NOTICE : LOG_WARN,
-		         "Authentication failed for %s", name));
-		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
-		su_failure (tty);
-	}
-	(void) signal (SIGQUIT, oldsig);
-
-	/*
-	 * Check to see if the account is expired. root gets to ignore any
-	 * expired accounts, but normal users can't become a user with an
-	 * expired password.
-	 */
-	if ((!amroot) && (NULL != spwd)) {
-		(void) expire (&pwent, spwd);
-	}
-
-	/*
-	 * Check to see if the account permits "su". root gets to ignore any
-	 * restricted accounts, but normal users can't become a user if
-	 * there is a "SU" entry in the /etc/porttime file denying access to
-	 * the account.
-	 */
-	if (!amroot) {
-		if (!isttytime (pwent.pw_name, "SU", time ((time_t *) 0))) {
-			SYSLOG (((0 != pwent.pw_uid) ? LOG_WARN : LOG_CRIT,
-			         "SU by %s to restricted account %s",
-			         oldname, name));
-			fprintf (stderr,
-			         _("%s: You are not authorized to su at that time\n"),
-			         Prog);
-			su_failure (tty);
-		}
-	}
-#endif				/* !USE_PAM */
-
-	(void) signal (SIGINT, SIG_DFL);
-	(void) signal (SIGQUIT, SIG_DFL);
-
-	/*
-	 * Even if --shell is specified, the subsystem login test is based on
-	 * the shell specified in /etc/passwd (not the one specified with
-	 * --shell, which will be the one executed in the chroot later).
-	 */
-	if ('*' == pwent.pw_shell[0]) {	/* subsystem root required */
-		subsystem (&pwent);	/* change to the subsystem root */
-		endpwent ();		/* close the old password databases */
-		endspent ();
-		goto top;		/* authenticate in the subsystem */
-	}
+	check_perms ();
 
 	/* If the user do not want to change the environment,
 	 * use the current SHELL.
