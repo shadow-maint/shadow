@@ -115,6 +115,9 @@ void addenv (const char *string, /*@null@*/const char *value)
 
 	n = (size_t) (cp - newstring);
 
+	/*
+	 * If this environment variable is already set, change its value.
+	 */
 	for (i = 0; i < newenvc; i++) {
 		if (   (strncmp (newstring, newenvp[i], n) == 0)
 		    && (('=' == newenvp[i][n]) || ('\0' == newenvp[i][n]))) {
@@ -128,7 +131,14 @@ void addenv (const char *string, /*@null@*/const char *value)
 		return;
 	}
 
+	/*
+	 * Otherwise, save the new environment variable
+	 */
 	newenvp[newenvc++] = newstring;
+
+	/*
+	 * And extend the environment if needed.
+	 */
 
 	/*
 	 * Check whether newenvc is a multiple of NEWENVP_STEP.
@@ -143,14 +153,14 @@ void addenv (const char *string, /*@null@*/const char *value)
 		size_t newsize;
 
 		/*
-		 * If the resize operation succeds we can
+		 * If the resize operation succeeds we can
 		 * happily go on, else print a message.
 		 */
 
 		newsize = (newenvc + NEWENVP_STEP) * sizeof (char *);
 		__newenvp = (char **) realloc (newenvp, newsize);
 
-		if (__newenvp) {
+		if (NULL != __newenvp) {
 			/*
 			 * If this is our current environment, update
 			 * environ so that it doesn't point to some

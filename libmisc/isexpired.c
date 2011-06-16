@@ -107,7 +107,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 	if (   (-1 == sp->sp_lstchg)
 	    || (-1 == sp->sp_max)
-	    || (sp->sp_max >= (10000L * DAY / SCALE))) {
+	    || (sp->sp_max >= ((10000L * DAY) / SCALE))) {
 		return 0;
 	}
 

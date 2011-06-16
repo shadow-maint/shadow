@@ -1,5 +1,11 @@
 2011-06-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/isexpired.c: Added parenthesis.
+	* libmisc/env.c: Added comments.
+	* libmisc/env.c: Avoid implicit conversion of pointer to boolean.
+
+2011-06-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: environ is provided by <unistd.h>.
 	* src/su.c: Added function prototypes.
 	* src/su.c: Rename shellstr parameter to shellname to avoid
