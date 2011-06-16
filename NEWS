@@ -48,6 +48,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     caller's privileges.
   * Close PAM sessions as root. This will be more friendly to PAM modules
     like pam_mount or pam_systemd.
+  * Added support for PAM modules which change PAM_USER.
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
 - useradd
@@ -67,6 +68,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Updated Czech translation.
   * Updated Danish translation.
   * Updated French translation.
+  * Updated French man pages translation.
   * Updated German translation.
   * Updated German man pages translation.
   * Updated Japanese translation.

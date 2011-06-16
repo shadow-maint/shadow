@@ -115,13 +115,12 @@ static pid_t pid_child = 0;
  * External identifiers
  */
 
-extern char **newenvp;
-extern char **environ;
-extern size_t newenvc;
+extern char **newenvp; /* libmisc/env.c */
+extern size_t newenvc; /* libmisc/env.c */
 
 /* local function prototypes */
 
-static void execve_shell (const char *shellstr,
+static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
@@ -131,6 +130,8 @@ static void prepare_pam_close_session (void);
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
+static bool restricted_shell (const char *shellname);
+static void su_failure (const char *tty, bool su_to_root);
 static struct passwd * check_perms (void);
 #ifdef USE_PAM
 static void check_perms_pam (struct passwd *pw);
@@ -139,6 +140,7 @@ static void check_perms_nopam (struct passwd *pw);
 #endif				/* !USE_PAM */
 static void save_caller_context (char **argv);
 static void process_flags (int argc, char **argv);
+static void set_environment (struct passwd *pw);
 
 #ifndef USE_PAM
 /*
@@ -190,13 +192,13 @@ static RETSIGTYPE kill_child (int unused(s))
 #endif				/* USE_PAM */
 
 /* borrowed from GNU sh-utils' "su.c" */
-static bool restricted_shell (const char *shellstr)
+static bool restricted_shell (const char *shellname)
 {
 	char *line;
 
 	setusershell ();
 	while ((line = getusershell ()) != NULL) {
-		if (('#' != *line) && (strcmp (line, shellstr) == 0)) {
+		if (('#' != *line) && (strcmp (line, shellname) == 0)) {
 			endusershell ();
 			return false;
 		}
@@ -224,15 +226,15 @@ static void su_failure (const char *tty, bool su_to_root)
  * execve_shell - Execute a shell with execve, or interpret it with
  * /bin/sh
  */
-static void execve_shell (const char *shellstr,
+static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[])
 {
 	int err;
-	(void) execve (shellstr, (char **) args, envp);
+	(void) execve (shellname, (char **) args, envp);
 	err = errno;
 
-	if (access (shellstr, R_OK|X_OK) == 0) {
+	if (access (shellname, R_OK|X_OK) == 0) {
 		/*
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
@@ -245,7 +247,7 @@ static void execve_shell (const char *shellstr,
 		targs = (char **) xmalloc ((n_args + 3) * sizeof (args[0]));
 		targs[0] = "sh";
 		targs[1] = "-";
-		targs[2] = xstrdup (shellstr);
+		targs[2] = xstrdup (shellname);
 		targs[n_args+2] = NULL;
 		while (1 != n_args) {
 			targs[n_args+1] = args[n_args - 1];
@@ -570,24 +572,57 @@ static void check_perms_nopam (struct passwd *pw)
  */
 static struct passwd * check_perms (void)
 {
+#ifdef USE_PAM
+	const char *tmp_name;
+	int ret;
+#endif				/* !USE_PAM */
 	/*
 	 * The password file entries for the user is gotten and the account
 	 * validated.
 	 */
 	struct passwd *pw = xgetpwnam (name);
 	if (NULL == pw) {
-		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
-		closelog ();
-		exit (1);
+		(void) fprintf (stderr,
+		                _("No passwd entry for user '%s'\n"), name);
+		SYSLOG ((LOG_ERR, "No passwd entry for user '%s'", name));
+		su_failure (caller_tty, true);
 	}
 
 	(void) signal (SIGINT, SIG_IGN);
 	(void) signal (SIGQUIT, SIG_IGN);
+
 #ifdef USE_PAM
 	check_perms_pam (pw);
+	/* PAM authentication can request a change of account */
+	ret = pam_get_item(pamh, PAM_USER, (const void **) &tmp_name);
+	if (ret != PAM_SUCCESS) {
+		SYSLOG((LOG_ERR, "pam_get_item: internal PAM error\n"));
+		(void) fprintf (stderr,
+		                "%s: Internal PAM error retrieving username\n",
+		                Prog);
+		(void) pam_end (pamh, ret);
+		su_failure (caller_tty, 0 == pw->pw_uid);
+	}
+	if (strcmp (name, tmp_name) != 0) {
+		SYSLOG ((LOG_INFO,
+		         "Change user from '%s' to '%s' as requested by PAM",
+		         name, tmp_name));
+		strncpy (name, tmp_name, sizeof(name) - 1);
+		name[sizeof(name) - 1] = '\0';
+		pw = xgetpwnam (name);
+		if (NULL == pw) {
+			(void) fprintf (stderr,
+			                _("No passwd entry for user '%s'\n"),
+			                name);
+			SYSLOG ((LOG_ERR,
+			         "No passwd entry for user '%s'", name));
+			su_failure (caller_tty, true);
+		}
+	}
 #else				/* !USE_PAM */
 	check_perms_nopam (pw);
 #endif				/* !USE_PAM */
+
 	(void) signal (SIGINT, SIG_DFL);
 	(void) signal (SIGQUIT, SIG_DFL);
 
@@ -659,7 +694,7 @@ static void save_caller_context (char **argv)
 		         Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) caller_uid));
-		su_failure (caller_tty, true); // FIXME: at this time I do not know the target UID
+		su_failure (caller_tty, true); /* unknown target UID*/
 	}
 	STRFCPY (caller_name, pw->pw_name);
 

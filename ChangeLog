@@ -1,3 +1,12 @@
+2011-06-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c: environ is provided by <unistd.h>.
+	* src/su.c: Added function prototypes.
+	* src/su.c: Rename shellstr parameter to shellname to avoid
+	collision with static variable.
+	* NEWS, src/su.c: Added support for PAM modules which change
+	PAM_USER.
+
 2011-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c (prepare_pam_close_session): Extract the creation of a
