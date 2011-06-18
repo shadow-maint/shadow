@@ -1,3 +1,7 @@
+2011-06-16  Francisco Javier Cuadrado  <fcocuadrado@gmail.com>
+
+	* po/es.po: Spanish translation
+
 2011-06-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/isexpired.c: Added parenthesis.
