@@ -1,6 +1,7 @@
 2011-06-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/passwd.1.xml: Added reference to chpasswd(8).
+	* man/po/ru.po: Add space between option and argument.
 
 2011-06-16  Francisco Javier Cuadrado  <fcocuadrado@gmail.com>
 
