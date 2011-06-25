@@ -1,3 +1,7 @@
+2011-06-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/passwd.1.xml: Added reference to chpasswd(8).
+
 2011-06-16  Francisco Javier Cuadrado  <fcocuadrado@gmail.com>
 
 	* po/es.po: Spanish translation

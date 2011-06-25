@@ -455,6 +455,9 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
+	<refentrytitle>chpasswd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
