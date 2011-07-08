@@ -344,7 +344,7 @@ static void open_files (void)
 	 */
 	add_cleanup (cleanup_report_add_group, group_name);
 
-	/* An now open the databases */
+	/* And now open the databases */
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
