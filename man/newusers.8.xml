@@ -42,6 +42,7 @@
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='newusers.8'>
@@ -50,6 +51,8 @@
     <refentrytitle>newusers</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>newusers</refname>

@@ -32,6 +32,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY CHSH_AUTH             SYSTEM "login.defs.d/CHSH_AUTH.xml">
 <!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='chsh.1'>
@@ -40,6 +41,8 @@
     <refentrytitle>chsh</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>chsh</refname>

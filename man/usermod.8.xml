@@ -34,6 +34,7 @@
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='usermod.8'>
   <!--  $Id$  -->
@@ -41,6 +42,8 @@
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>usermod</refname>

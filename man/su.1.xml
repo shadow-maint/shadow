@@ -47,6 +47,7 @@
 <!ENTITY SU_WHEEL_ONLY         SYSTEM "login.defs.d/SU_WHEEL_ONLY.xml">
 <!ENTITY SYSLOG_SU_ENAB        SYSTEM "login.defs.d/SYSLOG_SU_ENAB.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='su.1'>
   <!--  $Id$ -->
@@ -54,6 +55,8 @@
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>su</refname>

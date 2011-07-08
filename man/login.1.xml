@@ -63,6 +63,7 @@
 <!ENTITY ULIMIT                SYSTEM "login.defs.d/ULIMIT.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='login.1'>
   <!--  $Id$ -->
@@ -70,6 +71,8 @@
     <refentrytitle>login</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>login</refname>

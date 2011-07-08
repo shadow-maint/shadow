@@ -33,6 +33,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!--ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml"-->
 <!-- A call to CONSOLE_GROUPS is linked, but not used -->
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='expiry.1'>
@@ -41,6 +42,8 @@
     <refentrytitle>expiry</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>expiry</refname>

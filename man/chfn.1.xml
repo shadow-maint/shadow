@@ -33,6 +33,7 @@
 <!ENTITY CHFN_AUTH             SYSTEM "login.defs.d/CHFN_AUTH.xml">
 <!ENTITY CHFN_RESTRICT         SYSTEM "login.defs.d/CHFN_RESTRICT.xml">
 <!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='chfn.1'>
@@ -41,6 +42,8 @@
     <refentrytitle>chfn</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>chfn</refname>

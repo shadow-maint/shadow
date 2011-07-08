@@ -34,6 +34,7 @@
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='gpasswd.1'>
@@ -42,6 +43,8 @@
     <refentrytitle>gpasswd</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>gpasswd</refname>

@@ -33,6 +33,7 @@
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 
 <refentry id='chpasswd.8'>
@@ -41,6 +42,8 @@
     <refentrytitle>chpasswd</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>chpasswd</refname>

@@ -32,6 +32,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
 <!ENTITY ENV_TZ                SYSTEM "login.defs.d/ENV_TZ.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='sulogin.8'>
   <!--  $Id$ -->
@@ -39,6 +40,8 @@
     <refentrytitle>sulogin</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>sulogin</refname>

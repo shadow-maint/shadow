@@ -37,6 +37,7 @@
 <!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
 <!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='passwd.1'>
   <!--  $Id$ -->
@@ -44,6 +45,8 @@
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>passwd</refname>

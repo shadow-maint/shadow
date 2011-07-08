@@ -36,6 +36,7 @@
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='pwconv.8'>
   <!-- $Id$ -->
@@ -43,6 +44,8 @@
     <refentrytitle>pwconv</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>pwconv</refname>

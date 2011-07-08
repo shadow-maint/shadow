@@ -32,6 +32,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='vipw.8'>
   <!--  $Id$  -->
@@ -39,6 +40,8 @@
     <refentrytitle>vipw</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>vipw</refname>

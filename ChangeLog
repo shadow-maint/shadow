@@ -1,3 +1,9 @@
+2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/*.xml, man/config.xml.in: Add source and version
+	information. This reduce the amount of warnings during the
+	manpages generation.
+
 2011-06-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/passwd.1.xml: Added reference to chpasswd(8).
