@@ -7,6 +7,7 @@
 	ought to be checked.
 	* src/vipw.c: Use Prog instead of progname. This is needed since
 	Prog is used in the library.
+	* configure.in: Fix typo. libcrack default is 'no'.
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 

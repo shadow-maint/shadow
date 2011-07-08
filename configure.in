@@ -260,7 +260,7 @@ AC_ARG_WITH(tcb,
 	[AC_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
 	[with_tcb=$withval], [with_tcb=maybe])
 AC_ARG_WITH(libcrack,
-	[AC_HELP_STRING([--with-libcrack], [use libcrack @<:@default=yes if found and if PAM not enabled@:>@])],
+	[AC_HELP_STRING([--with-libcrack], [use libcrack @<:@default=no@:>@])],
 	[with_libcrack=$withval], [with_libcrack=no])
 AC_ARG_WITH(sha-crypt,
 	[AC_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
