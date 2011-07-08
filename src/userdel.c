@@ -704,7 +704,7 @@ static int remove_mailbox (void)
 		if (ENOENT == errno) {
 			fprintf (stderr,
 			         _("%s: %s mail spool (%s) not found\n"),
-			         Prog, user_name, user_home);
+			         Prog, user_name, mailfile);
 			return 0;
 		} else {
 			fprintf (stderr,
