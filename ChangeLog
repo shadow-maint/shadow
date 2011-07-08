@@ -1,5 +1,15 @@
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Fix typo in comment.
+	* src/userdel.c: Fix typo from 2011-06-04. Report failure on the
+	mailfile instead of user_home.
+	* lib/fields.c: Fixed typo from 2010-02-15. field insteadof cp
+	ought to be checked.
+	* src/vipw.c: Use Prog instead of progname. This is needed since
+	Prog is used in the library.
+
+2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/*.xml, man/config.xml.in: Add source and version
 	information. This reduce the amount of warnings during the
 	manpages generation.

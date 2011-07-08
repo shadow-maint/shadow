@@ -61,7 +61,9 @@
 /*
  * Global variables
  */
-static const char *progname, *filename, *fileeditname;
+const char *Prog;
+
+static const char *filename, *fileeditname;
 static bool filelocked = false;
 static bool createedit = false;
 static int (*unlock) (void);
@@ -158,26 +160,26 @@ static void vipwexit (const char *msg, int syserr, int ret)
 
 	if (createedit) {
 		if (unlink (fileeditname) != 0) {
-			fprintf (stderr, _("%s: failed to remove %s\n"), progname, fileeditname);
+			fprintf (stderr, _("%s: failed to remove %s\n"), Prog, fileeditname);
 			/* continue */
 		}
 	}
 	if (filelocked) {
 		if ((*unlock) () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
 			SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 			/* continue */
 		}
 	}
 	if (NULL != msg) {
-		fprintf (stderr, "%s: %s", progname, msg);
+		fprintf (stderr, "%s: %s", Prog, msg);
 	}
 	if (0 != syserr) {
 		fprintf (stderr, ": %s", strerror (err));
 	}
 	(void) fputs ("\n", stderr);
 	if (!quiet) {
-		fprintf (stdout, _("%s: %s is unchanged\n"), progname,
+		fprintf (stdout, _("%s: %s is unchanged\n"), Prog,
 			 filename);
 	}
 	exit (ret);
@@ -297,7 +299,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
 			  "%s %s", editor, fileedit);
 		if (system (buf) != 0) {
-			fprintf (stderr, "%s: %s: %s\n", progname, editor,
+			fprintf (stderr, "%s: %s: %s\n", Prog, editor,
 			         strerror (errno));
 			exit (1);
 		} else {
@@ -381,7 +383,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (rename (to_rename, file) == -1) {
 		fprintf (stderr,
 		         _("%s: can't restore %s: %s (your changes are in %s)\n"),
-		         progname, file, strerror (errno), to_rename);
+		         Prog, file, strerror (errno), to_rename);
 #ifdef WITH_TCB
 		if (tcb_mode) {
 			free (to_rename);
@@ -400,7 +402,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 #endif				/* WITH_TCB */
 
 	if ((*file_unlock) () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
 		SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 		/* continue */
 	}
@@ -417,8 +419,8 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	progname = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
-	do_vipw = (strcmp (progname, "vigr") != 0);
+	Prog = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
+	do_vipw = (strcmp (Prog, "vigr") != 0);
 
 	OPENLOG (do_vipw ? "vipw" : "vigr");
 
@@ -479,7 +481,7 @@ int main (int argc, char **argv)
 				if (shadowtcb_set_user (user) == SHADOWTCB_FAILURE) {
 					fprintf (stderr,
 					         _("%s: failed to find tcb directory for %s\n"),
-					         progname, user);
+					         Prog, user);
 					return E_SHADOW_NOTFOUND;
 				}
 				tcb_mode = true;

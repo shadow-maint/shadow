@@ -54,7 +54,7 @@ int valid_field (const char *field, const char *illegal)
 	const char *cp;
 	int err = 0;
 
-	if (NULL == cp) {
+	if (NULL == field) {
 		return -1;
 	}
 
