@@ -8,6 +8,9 @@
 	* src/vipw.c: Use Prog instead of progname. This is needed since
 	Prog is used in the library.
 	* configure.in: Fix typo. libcrack default is 'no'.
+	* src/groupmod.c: Avoid implicit conversion of pointer to boolean.
+	* src/groupmod.c: osgrp can be set only if pflg || nflg. No need
+	to check for pflg || nflg again
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 

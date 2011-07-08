@@ -190,7 +190,7 @@ static void grp_update (void)
 	 * Get the current settings for this group.
 	 */
 	ogrp = gr_locate (group_name);
-	if (!ogrp) {
+	if (NULL == ogrp) {
 		fprintf (stderr,
 		         _("%s: group '%s' does not exist in %s\n"),
 		         Prog, group_name, gr_dbname ());
@@ -231,13 +231,12 @@ static void grp_update (void)
 		         Prog, grp.gr_name, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
-#ifdef	SHADOWGRP
 
+#ifdef	SHADOWGRP
 	/*
 	 * Make sure there was a shadow entry to begin with.
 	 */
-	if (   (NULL != osgrp)
-	    && (pflg || nflg)) {
+	if (NULL != osgrp) {
 		/*
 		 * Write out the new shadow group entries as well.
 		 */
