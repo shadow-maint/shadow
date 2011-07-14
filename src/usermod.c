@@ -402,6 +402,10 @@ static void new_pwent (struct passwd *pwent)
 {
 	if (lflg) {
 		if (pw_locate (user_newname) != NULL) {
+			/* This should never happen.
+			 * It was already checked that the user doesn't
+			 * exist on the system.
+			 */
 			fprintf (stderr,
 			         _("%s: user '%s' already exists in %s\n"),
 			         Prog, user_newname, pw_dbname ());
