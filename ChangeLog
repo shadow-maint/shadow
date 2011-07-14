@@ -12,6 +12,7 @@
 	* src/usermod.c (process_flags): Check for oflg is not needed to
 	check if changes are needed.
 	* src/usermod.c: usage() does not return. Add annotations.
+	* src/usermod.c (update_gshadow): is_member was computed twice.
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 

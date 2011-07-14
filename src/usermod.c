@@ -699,7 +699,6 @@ static void update_gshadow (void)
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-		is_member = Gflg && is_on_list (user_groups, sgrp->sg_name);
 		is_member = Gflg && (   (was_member && aflg)
 		                     || is_on_list (user_groups, sgrp->sg_name));
 
