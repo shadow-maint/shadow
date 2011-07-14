@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -613,35 +613,47 @@ static void update_group (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 
-		if (was_member && (!Gflg || is_member)) {
-			if (lflg) {
-				ngrp->gr_mem = del_list (ngrp->gr_mem,
-				                         user_name);
-				ngrp->gr_mem = add_list (ngrp->gr_mem,
-				                         user_newname);
+		if (was_member) {
+			if ((!Gflg) || is_member) {
+				/* User was a member and is still a member
+				 * of this group.
+				 * But the user might have been renamed.
+				 */
+				if (lflg) {
+					ngrp->gr_mem = del_list (ngrp->gr_mem,
+					                         user_name);
+					ngrp->gr_mem = add_list (ngrp->gr_mem,
+					                         user_newname);
+					changed = true;
+#ifdef WITH_AUDIT
+					audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					              "changing group member",
+					              user_newname, AUDIT_NO_ID, 1);
+#endif
+					SYSLOG ((LOG_INFO,
+					         "change '%s' to '%s' in group '%s'",
+					         user_name, user_newname,
+					         ngrp->gr_name));
+				}
+			} else {
+				/* User was a member but is no more a
+				 * member of this group.
+				 */
+				ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "changing group member",
-				              user_newname, AUDIT_NO_ID, 1);
+				              "removing group member",
+				              user_name, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-				         "change '%s' to '%s' in group '%s'",
-				         user_name, user_newname,
-				         ngrp->gr_name));
+				         "delete '%s' from group '%s'",
+				         user_name, ngrp->gr_name));
 			}
-		} else if (was_member && !aflg && Gflg && !is_member) {
-			ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
-			changed = true;
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "removing group member",
-			              user_name, AUDIT_NO_ID, 1);
-#endif
-			SYSLOG ((LOG_INFO,
-			         "delete '%s' from group '%s'",
-			         user_name, ngrp->gr_name));
-		} else if (!was_member && Gflg && is_member) {
+		} else {
+			/* User was not a member but is now a member this
+			 * group.
+			 */
 			ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
 			changed = true;
 #ifdef WITH_AUDIT
@@ -715,6 +727,9 @@ static void update_gshadow (void)
 		}
 
 		if (was_admin && lflg) {
+			/* User was an admin of this group but the user
+			 * has been renamed.
+			 */
 			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
 			nsgrp->sg_adm = add_list (nsgrp->sg_adm, user_newname);
 			changed = true;
@@ -727,35 +742,48 @@ static void update_gshadow (void)
 			         "change admin '%s' to '%s' in shadow group '%s'",
 			         user_name, user_newname, nsgrp->sg_name));
 		}
-		if (was_member && (!Gflg || is_member)) {
-			if (lflg) {
-				nsgrp->sg_mem = del_list (nsgrp->sg_mem,
-				                          user_name);
-				nsgrp->sg_mem = add_list (nsgrp->sg_mem,
-				                          user_newname);
+
+		if (was_member) {
+			if ((!Gflg) || is_member) {
+				/* User was a member and is still a member
+				 * of this group.
+				 * But the user might have been renamed.
+				 */
+				if (lflg) {
+					nsgrp->sg_mem = del_list (nsgrp->sg_mem,
+					                          user_name);
+					nsgrp->sg_mem = add_list (nsgrp->sg_mem,
+					                          user_newname);
+					changed = true;
+#ifdef WITH_AUDIT
+					audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					              "changing member in shadow group",
+					              user_name, AUDIT_NO_ID, 1);
+#endif
+					SYSLOG ((LOG_INFO,
+					         "change '%s' to '%s' in shadow group '%s'",
+					         user_name, user_newname,
+					         nsgrp->sg_name));
+				}
+			} else {
+				/* User was a member but is no more a
+				 * member of this group.
+				 */
+				nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "changing member in shadow group",
+				              "removing user from shadow group",
 				              user_name, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-				         "change '%s' to '%s' in shadow group '%s'",
-				         user_name, user_newname,
-				         nsgrp->sg_name));
+				         "delete '%s' from shadow group '%s'",
+				         user_name, nsgrp->sg_name));
 			}
-		} else if (was_member && !aflg && Gflg && !is_member) {
-			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
-			changed = true;
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "removing user from shadow group",
-			              user_name, AUDIT_NO_ID, 1);
-#endif
-			SYSLOG ((LOG_INFO,
-			         "delete '%s' from shadow group '%s'",
-			         user_name, nsgrp->sg_name));
-		} else if (!was_member && Gflg && is_member) {
+		} else if (is_member) {
+			/* User was not a member but is now a member this
+			 * group.
+			 */
 			nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
 			changed = true;
 #ifdef WITH_AUDIT
