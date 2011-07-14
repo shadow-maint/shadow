@@ -152,7 +152,7 @@ static bool sgr_locked = false;
 static void date_to_str (char *buf, size_t maxsize,
                          long int date, const char *negativ);
 static int get_groups (char *);
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void new_pwent (struct passwd *);
 #ifdef WITH_SELINUX
 static void selinux_update_mapping (void);
@@ -303,7 +303,7 @@ static int get_groups (char *list)
 /*
  * usage - display usage message and exit
  */
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	fprintf ((E_SUCCESS != status) ? stderr : stdout,
 	         _("Usage: usermod [options] LOGIN\n"
@@ -919,7 +919,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
-				break;
+				/* @notreached@ */break;
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
