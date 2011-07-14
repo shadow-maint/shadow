@@ -1591,7 +1591,7 @@ static void update_faillog (void)
 		/* Check if the new UID already has an entry */
 		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
 		    && (read (fd, &fl, sizeof fl) == (ssize_t) sizeof fl)) {
-			/* Reset the new uid's lastlog entry */
+			/* Reset the new uid's faillog entry */
 			memzero (&fl, sizeof (fl));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
