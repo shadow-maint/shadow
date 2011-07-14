@@ -1116,7 +1116,7 @@ static void process_flags (int argc, char **argv)
 		cflg = false;
 	}
 
-	if (!(Uflg || uflg || sflg || pflg || oflg || mflg || Lflg ||
+	if (!(Uflg || uflg || sflg || pflg || mflg || Lflg ||
 	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg
 #ifdef WITH_SELINUX
 	      || Zflg
