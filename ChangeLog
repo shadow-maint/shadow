@@ -16,6 +16,11 @@
 	* src/usermod.c (update_group, update_gshadow): Reduce complexity
 	and document checks. Some checks were always true/false within
 	their call context.
+	* NEWS, src/usermod.c; man/usermod.8.xml: When the shadow file
+	exists but there are no shadow entries, an entry has to be created
+	if the password is changed and passwd requires a shadow entry, or
+	if aging features are used (-e or -f). Document this and also that
+	-e and -f require a shadow file.
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 

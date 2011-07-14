@@ -417,7 +417,13 @@ static void new_pwent (struct passwd *pwent)
 		         pwent->pw_name, user_newname));
 		pwent->pw_name = xstrdup (user_newname);
 	}
-	if (!is_shadow_pwd) {
+	/* Update the password in passwd if there is no shadow file or if
+	 * the password is currently in passwd (pw_passwd != "x").
+	 * We do not force the usage of shadow passwords if they are not
+	 * used for this account.
+	 */
+	if (   (!is_shadow_pwd)
+	    || (strcmp (pwent->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
 		pwent->pw_passwd = new_pw_passwd (pwent->pw_passwd);
 	}
 
@@ -522,12 +528,23 @@ static void new_spent (struct spwd *spent)
 		         spent->sp_namp, old_exp, new_exp));
 		spent->sp_expire = user_newexpire;
 	}
+
+	/* Always update the shadowed password if there is a shadow entry
+	 * (even if shadowed passwords might not be enabled for this
+	 * account (pw_passwd != "x")).
+	 * It seems better to update the password in both places in case a
+	 * shadow and a non shadow entry exist.
+	 * This might occur if:
+	 *  + there were already both entries
+	 *  + aging has been requested
+	 */
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
+
 	if (pflg) {
 		spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 		if (0 == spent->sp_lstchg) {
 			/* Better disable aging than requiring a password
-			 * change */
+			 * change. */
 			spent->sp_lstchg = -1;
 		}
 	}
@@ -1380,13 +1397,46 @@ static void usr_update (void)
 	new_pwent (&pwent);
 
 
-	/* 
-	 * Locate the entry in /etc/shadow. It doesn't have to exist, and
-	 * won't be created if it doesn't.
-	 */
-	if (is_shadow_pwd && ((spwd = spw_locate (user_name)) != NULL)) {
-		spent = *spwd;
-		new_spent (&spent);
+	/* If the shadow file does not exist, it won't be created */
+	if (is_shadow_pwd) {
+		spwd = spw_locate (user_name);
+		if (NULL != spwd) {
+			/* Update the shadow entry if it exists */
+			spent = *spwd;
+			new_spent (&spent);
+		} else if (   (    pflg
+		               && (strcmp (pwent.pw_passwd, SHADOW_PASSWD_STRING) == 0))
+		           || eflg || fflg) {
+			/* In some cases, we force the creation of a
+			 * shadow entry:
+			 *  + new password requested and passwd indicates
+			 *    a shadowed password
+			 *  + aging information is requested
+			 */
+			memset (&spent, 0, sizeof spent);
+			spent.sp_namp   = user_name;
+
+			/* The user explicitly asked for a shadow feature.
+			 * Enable shadowed passwords for this new account.
+			 */
+			spent.sp_pwdp   = xstrdup (pwent.pw_passwd);
+			pwent.pw_passwd = xstrdup (SHADOW_PASSWD_STRING);
+
+			spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+			if (0 == spent.sp_lstchg) {
+				/* Better disable aging than
+				 * requiring a password change */
+				spent.sp_lstchg = -1;
+			}
+			spent.sp_min    = getdef_num ("PASS_MIN_DAYS", -1);
+			spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
+			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
+			spent.sp_inact  = -1;
+			spent.sp_expire = -1;
+			spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
+			new_spent (&spent);
+			spwd = &spent; /* entry needs to be committed */
+		}
 	}
 
 	if (lflg || uflg || gflg || cflg || dflg || sflg || pflg

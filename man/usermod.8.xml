@@ -127,6 +127,11 @@
 	    The date on which the user account will be disabled. The date is
 	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
 	  </para>
+	  <para>
+	    This option requires a <filename>/etc/shadow</filename> file.
+	    A <filename>/etc/shadow</filename> entry will be created if
+	    there were none.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -143,6 +148,11 @@
 	    A value of 0 disables the account as soon
 	    as the password has expired, and a value of -1 disables the
 	    feature.
+	  </para>
+	  <para>
+	    This option requires a <filename>/etc/shadow</filename> file.
+	    A <filename>/etc/shadow</filename> entry will be created if
+	    there were none.
 	  </para>
 	</listitem>
       </varlistentry>
