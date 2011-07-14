@@ -128,6 +128,10 @@
 	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
 	  </para>
 	  <para>
+	    An empty <replaceable>EXPIRE_DATE</replaceable> argument will
+	    disable the expiration of the account.
+	  </para>
+	  <para>
 	    This option requires a <filename>/etc/shadow</filename> file.
 	    A <filename>/etc/shadow</filename> entry will be created if
 	    there were none.
@@ -207,8 +211,8 @@
 	    The name of the user will be changed from
 	    <replaceable>LOGIN</replaceable> to
 	    <replaceable>NEW_LOGIN</replaceable>. Nothing else is changed. In
-	    particular, the user's home directory name should probably be
-	    changed manually to reflect the new login name.
+	    particular, the user's home directory or mail spool should
+	    probably be renamed manually to reflect the new login name.
 	  </para>
 	</listitem>
       </varlistentry>

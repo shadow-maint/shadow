@@ -21,6 +21,9 @@
 	if the password is changed and passwd requires a shadow entry, or
 	if aging features are used (-e or -f). Document this and also that
 	-e and -f require a shadow file.
+	* man/usermod.8.xml: Document behavior of an empty EXPIRE_DATE.
+	* man/usermod.8.xml: Document that the mail spool might have to be
+	renamed (as for the homedir)
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 
