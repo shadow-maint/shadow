@@ -25,6 +25,9 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     specified.
 - groupmod
   * Fixed groupmod when configured with --enable-account-tools-setuid.
+  * When the gshadow file exists but there are no gshadow entries, an entry
+    is created if the password is changed and group requires a
+    shadow entry.
 -login
   * Fixed limits support (non PAM enabled versions only)
   * Added support for infinite limits and group based limits (non PAM

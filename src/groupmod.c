@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -147,7 +147,17 @@ static void new_grent (struct group *grent)
 		grent->gr_gid = group_newid;
 	}
 
-	if (pflg) {
+	if (   pflg
+#ifdef SHADOWGRP
+	    && (   (!is_shadow_grp)
+	        || (strcmp (grent->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+#endif
+		) {
+		/* Update the password in group if there is no gshadow
+		 * file or if the password is currently in group
+		 * (gr_passwd != "x").  We do not force the usage of
+		 * shadow passwords if it was not the case before.
+		 */
 		grent->gr_passwd = group_passwd;
 	}
 }
@@ -165,6 +175,13 @@ static void new_sgent (struct sgrp *sgent)
 		sgent->sg_name = xstrdup (group_newname);
 	}
 
+	/* Always update the shadowed password if there is a shadow entry
+	 * (even if shadowed passwords might not be enabled for this group
+	 * (gr_passwd != "x")).
+	 * It seems better to update the password in both places in case a
+	 * shadow and a non shadow entry exist.
+	 * This might occur only if there were already both entries.
+	 */
 	if (pflg) {
 		sgent->sg_passwd = group_passwd;
 	}
@@ -205,9 +222,21 @@ static void grp_update (void)
 		if (NULL != osgrp) {
 			sgrp = *osgrp;
 			new_sgent (&sgrp);
-			if (pflg) {
-				grp.gr_passwd = SHADOW_PASSWD_STRING;
-			}
+		} else if (   pflg
+		           && (strcmp (grp.gr_passwd, SHADOW_PASSWD_STRING) == 0)) {
+			static char *empty = NULL;
+			/* If there is a gshadow file with no entries for
+			 * the group, but the group file indicates a
+			 * shadowed password, we force the creation of a
+			 * gshadow entry when a new password is requested.
+			 */
+			memset (&sgrp, 0, sizeof sgrp);
+			sgrp.sg_name   = xstrdup (grp.gr_name);
+			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
+			sgrp.sg_adm    = &empty;
+			sgrp.sg_mem    = dup_list (grp.gr_mem);
+			new_sgent (&sgrp);
+			osgrp = &sgrp; /* entry needs to be committed */
 		}
 	}
 #endif				/* SHADOWGRP */

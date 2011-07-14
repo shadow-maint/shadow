@@ -1,5 +1,11 @@
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmod.c: When the gshadow file exists but there are
+	no gshadow entries, an entry is created if the password is changed
+	and group requires a shadow entry.
+
+2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Fix typo in comment.
 	* src/usermod.c (move_home): It is always an error to use -m if
 	the new home directory already exist (independently from the
