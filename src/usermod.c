@@ -971,7 +971,7 @@ static void process_flags (int argc, char **argv)
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
-					         _("%s: invalid field '%s'\n"),
+					         _("%s: invalid user name '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
