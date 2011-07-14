@@ -1053,10 +1053,37 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-
 	if (!anyflag) {
-		fprintf (stderr, _("%s: no flags given\n"), Prog);
-		exit (E_USAGE);
+		fprintf (stderr, _("%s: no options\n"), Prog);
+		usage (E_USAGE);
+	}
+
+	if (aflg && (!Gflg)) {
+		fprintf (stderr,
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-a", "-G");
+		usage (E_USAGE);
+	}
+
+	if ((Lflg && (pflg || Uflg)) || (pflg && Uflg)) {
+		fprintf (stderr,
+		         _("%s: the -L, -p, and -U flags are exclusive\n"),
+		         Prog);
+		usage (E_USAGE);
+	}
+
+	if (oflg && !uflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-o", "-u");
+		usage (E_USAGE);
+	}
+
+	if (mflg && !dflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-m", "-d");
+		usage (E_USAGE);
 	}
 
 	if (user_newid == user_id) {
@@ -1103,38 +1130,6 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: shadow passwords required for -e and -f\n"),
 		         Prog);
-		exit (E_USAGE);
-	}
-
-	if (aflg && (!Gflg)) {
-		fprintf (stderr,
-		         _("%s: %s flag is only allowed with the %s flag\n"),
-		         Prog, "-a", "-G");
-		usage (E_USAGE);
-		exit (E_USAGE);
-	}
-
-	if ((Lflg && (pflg || Uflg)) || (pflg && Uflg)) {
-		fprintf (stderr,
-		         _("%s: the -L, -p, and -U flags are exclusive\n"),
-		         Prog);
-		usage (E_USAGE);
-		exit (E_USAGE);
-	}
-
-	if (oflg && !uflg) {
-		fprintf (stderr,
-		         _("%s: %s flag is only allowed with the %s flag\n"),
-		         Prog, "-o", "-u");
-		usage (E_USAGE);
-		exit (E_USAGE);
-	}
-
-	if (mflg && !dflg) {
-		fprintf (stderr,
-		         _("%s: %s flag is only allowed with the %s flag\n"),
-		         Prog, "-m", "-d");
-		usage (E_USAGE);
 		exit (E_USAGE);
 	}
 

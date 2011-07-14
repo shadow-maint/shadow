@@ -4,6 +4,11 @@
 	* src/usermod.c (move_home): It is always an error to use -m if
 	the new home directory already exist (independently from the
 	existence of the old home directory did not exist)
+	* src/usermod.c (process_flags): Report usage if no options are
+	provided. Update the error message.
+	* src/usermod.c (process_flags): Check option compatibility and
+	dependency before options are discarded when no changes are
+	requested.
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 
