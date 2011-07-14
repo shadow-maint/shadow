@@ -1408,18 +1408,18 @@ static void move_home (void)
 {
 	struct stat sb;
 
-	if (stat (user_home, &sb) == 0) {
+	if (access (user_newhome, F_OK) == 0) {
 		/*
 		 * If the new home directory already exist, the user
 		 * should not use -m.
 		 */
-		if (access (user_newhome, F_OK) == 0) {
-			fprintf (stderr,
-			         _("%s: directory %s exists\n"),
-			         Prog, user_newhome);
-			fail_exit (E_HOMEDIR);
-		}
+		fprintf (stderr,
+		         _("%s: directory %s exists\n"),
+		         Prog, user_newhome);
+		fail_exit (E_HOMEDIR);
+	}
 
+	if (stat (user_home, &sb) == 0) {
 		/*
 		 * Don't try to move it if it is not a directory
 		 * (but /dev/null for example).  --marekm

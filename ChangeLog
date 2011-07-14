@@ -1,6 +1,9 @@
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Fix typo in comment.
+	* src/usermod.c (move_home): It is always an error to use -m if
+	the new home directory already exist (independently from the
+	existence of the old home directory did not exist)
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 
