@@ -26,6 +26,8 @@
 	renamed (as for the homedir)
 	* src/usermod.c (new_pwent): Document that pw_locate will not fail
 	because getpwnam returned successfully.
+	* src/usermod.c (process_flags): Do not display the usage in case
+	of an invalid -f value (similar to -e).
 
 2011-07-08  Nicolas François  <nicolas.francois@centraliens.net>
 

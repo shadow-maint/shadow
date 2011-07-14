@@ -944,7 +944,7 @@ static void process_flags (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					usage (E_USAGE);
+					exit (E_BAD_ARG);
 				}
 				fflg = true;
 				break;
