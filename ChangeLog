@@ -1,5 +1,10 @@
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Fix some spacing issues due to configuration
+	variants.
+
+2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Overflow when computing the number of days based
 	on the scaling. Use of long long needed.
 
