@@ -14,6 +14,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Added support for ACLs and Extended Attributes in useradd and usermod.
     Support shall be enabled with the new --with-acl or --with-attr
     configure options.
+  * Added diagnosis for lock failures.
 
 -chpasswd
   * PAM enabled versions: restore the -e option to allow restoring
@@ -28,6 +29,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * When the gshadow file exists but there are no gshadow entries, an entry
     is created if the password is changed and group requires a
     shadow entry.
+- grpck
+  * NIS entries were dropped by -s (sort).
 -login
   * Fixed limits support (non PAM enabled versions only)
   * Added support for infinite limits and group based limits (non PAM
@@ -54,6 +57,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Added support for PAM modules which change PAM_USER.
 - newgrp, sg, groupmems
   * Fix parsing of gshadow entries.
+- pwpck
+  * NIS entries were dropped by -s (sort).
 - useradd
   * If the skeleton directory contained hardlinked files, copies of the
     hardlink were removed from the skeleton directory.

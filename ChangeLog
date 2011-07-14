@@ -1,5 +1,13 @@
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, lib/commonio.h, lib/commonio.c: Additional messages to
+	indicate why locking failed.
+	* NEWS, lib/commonio.c: Fix the sort algorithm in case of NIS. NIS
+	entries were dropped.
+	* lib/commonio.c: NIS entries can start by '+' or '-'.
+
+2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmod.c: When the gshadow file exists but there are
 	no gshadow entries, an entry is created if the password is changed
 	and group requires a shadow entry.

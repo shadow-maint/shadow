@@ -57,7 +57,7 @@
 /* local function prototypes */
 static int lrename (const char *, const char *);
 static int check_link_count (const char *file);
-static int do_lock_file (const char *file, const char *lock);
+static int do_lock_file (const char *file, const char *lock, bool log);
 static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	const char *name,
 	const char *mode,
@@ -135,7 +135,7 @@ static int check_link_count (const char *file)
 }
 
 
-static int do_lock_file (const char *file, const char *lock)
+static int do_lock_file (const char *file, const char *lock, bool log)
 {
 	int fd;
 	pid_t pid;
@@ -145,6 +145,11 @@ static int do_lock_file (const char *file, const char *lock)
 
 	fd = open (file, O_CREAT | O_EXCL | O_WRONLY, 0600);
 	if (-1 == fd) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: %s: %s\n",
+			                Prog, file, strerror (errno));
+		}
 		return 0;
 	}
 
@@ -152,6 +157,11 @@ static int do_lock_file (const char *file, const char *lock)
 	snprintf (buf, sizeof buf, "%lu", (unsigned long) pid);
 	len = (ssize_t) strlen (buf) + 1;
 	if (write (fd, buf, (size_t) len) != len) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: %s: %s\n",
+			                Prog, file, strerror (errno));
+		}
 		(void) close (fd);
 		unlink (file);
 		return 0;
@@ -160,12 +170,22 @@ static int do_lock_file (const char *file, const char *lock)
 
 	if (link (file, lock) == 0) {
 		retval = check_link_count (file);
+		if ((0==retval) && log) {
+			(void) fprintf (stderr,
+			                "%s: %s: lock file already used\n",
+			                Prog, file);
+		}
 		unlink (file);
 		return retval;
 	}
 
 	fd = open (lock, O_RDWR);
 	if (-1 == fd) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: %s: %s\n",
+			                Prog, lock, strerror (errno));
+		}
 		unlink (file);
 		errno = EINVAL;
 		return 0;
@@ -173,29 +193,60 @@ static int do_lock_file (const char *file, const char *lock)
 	len = read (fd, buf, sizeof (buf) - 1);
 	close (fd);
 	if (len <= 0) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: existing lock file %s without a PID\n",
+			                Prog, lock);
+		}
 		unlink (file);
 		errno = EINVAL;
 		return 0;
 	}
 	buf[len] = '\0';
 	if (get_pid (buf, &pid) == 0) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: existing lock file %s with an invalid PID '%s'\n",
+			                Prog, lock, buf);
+		}
 		unlink (file);
 		errno = EINVAL;
 		return 0;
 	}
 	if (kill (pid, 0) == 0) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: lock %s already used by PID %d\n",
+			                Prog, lock, pid);
+		}
 		unlink (file);
 		errno = EEXIST;
 		return 0;
 	}
 	if (unlink (lock) != 0) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: cannot get lock %s: %s\n",
+			                Prog, lock, strerror (errno));
+		}
 		unlink (file);
 		return 0;
 	}
 
 	retval = 0;
-	if ((link (file, lock) == 0) && (check_link_count (file) != 0)) {
-		retval = 1;
+	if (link (file, lock) == 0) {
+		retval = check_link_count (file);
+		if ((0==retval) && log) {
+			(void) fprintf (stderr,
+			                "%s: %s: lock file already used\n",
+			                Prog, file);
+		}
+	} else {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: cannot get lock %s: %s\n",
+			                Prog, lock, strerror (errno));
+		}
 	}
 
 	unlink (file);
@@ -328,7 +379,7 @@ bool commonio_present (const struct commonio_db *db)
 }
 
 
-int commonio_lock_nowait (struct commonio_db *db)
+int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
 	char file[1024];
 	char lock[1024];
@@ -340,7 +391,7 @@ int commonio_lock_nowait (struct commonio_db *db)
 	snprintf (file, sizeof file, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
 	snprintf (lock, sizeof lock, "%s.lock", db->filename);
-	if (do_lock_file (file, lock) != 0) {
+	if (do_lock_file (file, lock, log) != 0) {
 		db->locked = true;
 		lock_count++;
 		return 1;
@@ -364,11 +415,16 @@ int commonio_lock (struct commonio_db *db)
 	 */
 	if (0 == lock_count) {
 		if (lckpwdf () == -1) {
+			if (geteuid () != 0) {
+				(void) fprintf (stderr,
+				                "%s: Permission denied.\n",
+				                Prog);
+			}
 			return 0;	/* failure */
 		}
 	}
 
-	if (commonio_lock_nowait (db) != 0) {
+	if (commonio_lock_nowait (db, true) != 0) {
 		return 1;	/* success */
 	}
 
@@ -391,11 +447,13 @@ int commonio_lock (struct commonio_db *db)
 		if (i > 0) {
 			sleep (LOCK_SLEEP);	/* delay between retries */
 		}
-		if (commonio_lock_nowait (db) != 0) {
+		if (commonio_lock_nowait (db, i==LOCK_TRIES-1) != 0) {
 			return 1;	/* success */
 		}
 		/* no unnecessary retries on "permission denied" errors */
 		if (geteuid () != 0) {
+			(void) fprintf (stderr, "%s: Permission denied.\n",
+			                Prog);
 			return 0;
 		}
 	}
@@ -714,7 +772,8 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	        (NULL != ptr)
 #if KEEP_NIS_AT_END
 	     && (NULL != ptr->line)
-	     && ('+' != ptr->line[0])
+	     && (   ('+' != ptr->line[0])
+	         || ('-' != ptr->line[0]))
 #endif
 	     ;
 	     ptr = ptr->next) {
@@ -763,7 +822,11 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	db->head->prev = NULL;
 	db->head->next = entries[1];
 	entries[n]->prev = entries[n - 1];
+#if KEEP_NIS_AT_END
+	entries[n]->next = nis;
+#else
 	entries[n]->next = NULL;
+#endif
 
 	/* Now other elements have prev and next entries */
 	for (i = 1; i < n; i++) {
