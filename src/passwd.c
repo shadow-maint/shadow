@@ -458,14 +458,14 @@ static void print_status (const struct passwd *pw)
 
 	sp = getspnam (pw->pw_name); /* local, no need for xgetspnam */
 	if (NULL != sp) {
-		(void) printf ("%s %s %s %ld %ld %ld %ld\n",
+		(void) printf ("%s %s %s %lld %lld %lld %lld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),
 		               date_to_str (sp->sp_lstchg * SCALE),
-		               (sp->sp_min * SCALE) / DAY,
-		               (sp->sp_max * SCALE) / DAY,
-		               (sp->sp_warn * SCALE) / DAY,
-		               (sp->sp_inact * SCALE) / DAY);
+		               ((long long)sp->sp_min * SCALE) / DAY,
+		               ((long long)sp->sp_max * SCALE) / DAY,
+		               ((long long)sp->sp_warn * SCALE) / DAY,
+		               ((long long)sp->sp_inact * SCALE) / DAY);
 	} else {
 		(void) printf ("%s %s\n",
 		               pw->pw_name, pw_status (pw->pw_passwd));

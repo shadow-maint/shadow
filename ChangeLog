@@ -1,5 +1,10 @@
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Overflow when computing the number of days based
+	on the scaling. Use of long long needed.
+
+2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, lib/commonio.h, lib/commonio.c: Additional messages to
 	indicate why locking failed.
 	* NEWS, lib/commonio.c: Fix the sort algorithm in case of NIS. NIS
