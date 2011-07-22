@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2002 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,7 +48,7 @@
 #include "exitcodes.h"
 
 /* local function prototypes */
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void print_one (/*@null@*/const struct passwd *pw, bool force);
 static void set_locktime (long locktime);
 static bool set_locktime_one (uid_t uid, long locktime);
@@ -80,7 +80,7 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 #define	NOW	(time((time_t *) 0))
 
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -587,7 +587,7 @@ int main (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
-				break;
+				/*@notreached@*/break;
 			case 'l':
 				if (getlong (optarg, &fail_locktime) == 0) {
 					fprintf (stderr,
@@ -643,7 +643,7 @@ int main (int argc, char **argv)
 					              &umin, &has_umin,
 					              &umax, &has_umax) == 0) {
 						fprintf (stderr,
-						         _("lastlog: Unknown user or range: %s\n"),
+						         _("faillog: Unknown user or range: %s\n"),
 						         optarg);
 						exit (E_BAD_ARG);
 					}
@@ -654,6 +654,12 @@ int main (int argc, char **argv)
 			default:
 				usage (E_USAGE);
 			}
+		}
+		if (argc > optind) {
+			fprintf (stderr,
+			         _("faillog: unexpected argument: %s\n"),
+			         argv[optind]);
+			usage (EXIT_FAILURE);
 		}
 	}
 
