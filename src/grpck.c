@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -148,21 +148,21 @@ static void usage (void)
  * delete_member - delete an entry in a list of members
  *
  * It only deletes the first entry with the given name.
+ * The member is defined by its address, no string comparison are
+ * performed.
  */
 static void delete_member (char **list, const char *member)
 {
 	int i;
 
-	for (i = 0; list[i]; i++) {
+	for (i = 0; NULL != list[i]; i++) {
 		if (list[i] == member) {
 			break;
 		}
 	}
 
-	if (list[i]) {
-		for (; list[i]; i++) {
-			list[i] = list[i + 1];
-		}
+	for (; NULL != list[i]; i++) {
+		list[i] = list[i + 1];
 	}
 }
 
@@ -203,9 +203,9 @@ static void process_flags (int argc, char **argv)
 	 * Make certain we have the right number of arguments
 	 */
 #ifdef	SHADOWGRP
-	if ((argc < optind) || (argc > (optind + 2)))
+	if (argc > (optind + 2))
 #else
-	if ((argc < optind) || (argc > (optind + 1)))
+	if (argc > (optind + 1))
 #endif
 	{
 		usage ();

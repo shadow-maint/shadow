@@ -1,3 +1,10 @@
+2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/grpck.c: Added comments.
+	* src/grpck.c: Avoid implicit conversion of pointer to boolean.
+	* src/grpck.c: Remove dead code. argc cannot be lower than optind.
+	Avoid checking twice in a row for NULL != list[i].
+
 2011-07-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Fail in case of
