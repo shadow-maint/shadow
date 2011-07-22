@@ -1,3 +1,13 @@
+2011-07-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Fail in case of
+	invalid configuration. 
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Updated
+	comments.
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Be more strict
+	on the loop stop conditions. Stop if we passed the limit, even if
+	the limit itself was never noticed.
+
 2011-07-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/fr.po: Fix some spacing issues due to configuration

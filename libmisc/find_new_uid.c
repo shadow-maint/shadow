@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
- * Copyright (c) 2008 - 2009, Nicolas François
+ * Copyright (c) 2008 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -65,6 +65,7 @@ int find_new_uid (bool sys_user,
 			(void) fprintf (stderr,
 			                _("%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"),
 			                Prog, (unsigned long) uid_min, (unsigned long) uid_max);
+			return -1;
 		}
 	} else {
 		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
@@ -74,6 +75,7 @@ int find_new_uid (bool sys_user,
 			(void) fprintf (stderr,
 			                _("%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"),
 			                Prog, (unsigned long) uid_min, getdef_ulong ("UID_MIN", 1000UL), (unsigned long) uid_max);
+			return -1;
 		}
 	}
 	used_uids = malloc (sizeof (bool) * (uid_max +1));
@@ -159,12 +161,13 @@ int find_new_uid (bool sys_user,
 	}
 
 	/*
-	 * If a user with UID equal to UID_MAX exists, the above algorithm
-	 * will give us UID_MAX+1 even if not unique. Search for the first
-	 * free UID starting with UID_MIN.
+	 * If a user (resp. system user) with UID equal to UID_MAX (resp.
+	 * UID_MIN) exists, the above algorithm will give us UID_MAX+1
+	 * (resp. UID_MIN-1) even if not unique. Search for the first free
+	 * UID starting with UID_MIN (resp. UID_MAX).
 	 */
 	if (sys_user) {
-		if (user_id == uid_min - 1) {
+		if (user_id < uid_min) {
 			for (user_id = uid_max; user_id >= uid_min; user_id--) {
 				if (false == used_uids[user_id]) {
 					break;
@@ -180,13 +183,13 @@ int find_new_uid (bool sys_user,
 			}
 		}
 	} else {
-		if (user_id == uid_max + 1) {
-			for (user_id = uid_min; user_id < uid_max; user_id++) {
+		if (user_id > uid_max) {
+			for (user_id = uid_min; user_id <= uid_max; user_id++) {
 				if (false == used_uids[user_id]) {
 					break;
 				}
 			}
-			if (user_id == uid_max) {
+			if (user_id > uid_max) {
 				fprintf (stderr,
 				         _("%s: Can't get unique UID (no more available UIDs)\n"),
 				         Prog);
