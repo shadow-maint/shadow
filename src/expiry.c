@@ -2,7 +2,7 @@
  * Copyright (c) 1994       , Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -136,23 +136,13 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * If forcing password change, use expire() function.
+	 * Otherwise, force a password change with the expire() function.
+	 * It will force the change or give a message indicating what to
+	 * do.
+	 * It won't return unless the account is unexpired.
 	 */
-	if (strcmp (argv[1], "-f") == 0) {
+	expire (pwd, spwd);
 
-		/*
-		 * Just call expire(). It will force the change or give a
-		 * message indicating what to do. And it doesn't return at
-		 * all unless the account is unexpired.
-		 */
-		expire (pwd, spwd);
-		exit (0);
-	}
-
-	/*
-	 * Can't get here ...
-	 */
-	usage ();
-	exit (1);
+	exit (0);
 }
 

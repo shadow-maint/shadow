@@ -1,5 +1,10 @@
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/expiry.c: Remove dead code.
+	* src/expiry.c: Improve comments.
+
+2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpck.c: Added comments.
 	* src/grpck.c: Avoid implicit conversion of pointer to boolean.
 	* src/grpck.c: Remove dead code. argc cannot be lower than optind.
