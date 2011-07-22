@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 2006       , Tomasz Kłoczko
  * Copyright (c) 2006       , Jonas Meurer
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -78,7 +78,7 @@ static bool gr_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
@@ -114,28 +114,34 @@ static void fail_exit (int code)
 /*
  * usage - display usage message and exit
  */
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
-	(void) fprintf ((E_SUCCESS != status) ? stderr : stdout,
-	                 _("Usage: %s [options]\n"
-	                   "\n"
-	                   "Options:\n"
-	                   "  -c, --crypt-method            the crypt method (one of %s)\n"
-	                   "  -e, --encrypted               supplied passwords are encrypted\n"
-	                   "  -h, --help                    display this help message and exit\n"
-	                   "  -m, --md5                     encrypt the clear text password using\n"
-	                   "                                the MD5 algorithm\n"
-	                   "%s"
-	                   "\n"),
-	                 Prog,
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	void) fprintf (usageout,
+	                _("  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
-	                 "NONE DES MD5", ""
-#else
-	                 "NONE DES MD5 SHA256 SHA512",
-	                 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-	                   "                                crypt algorithms\n")
-#endif
-	                 );
+	                "NONE DES MD5"
+#else				/* USE_SHA_CRYPT */
+	                "NONE DES MD5 SHA256 SHA512"
+#endif				/* USE_SHA_CRYPT */
+	               );
+	(void) fputs (_("  -e, --encrypted               supplied passwords are encrypted\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -m, --md5                     encrypt the clear text password using\n"
+	                "                                the MD5 algorithm\n"),
+	              usageout);
+#ifdef USE_SHA_CRYPT
+	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+	                "                                crypt algorithms\n"),
+	              usageout);
+#endif				/* USE_SHA_CRYPT */
+	(void) fputs ("\n", usageout);
+
 	exit (status);
 }
 
@@ -176,7 +182,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (E_SUCCESS);
-			break;
+			/*@notreached@*/break;
 		case 'm':
 			md5flg = true;
 			break;
@@ -193,7 +199,7 @@ static void process_flags (int argc, char **argv)
 #endif
 		default:
 			usage (E_USAGE);
-			break;
+			/*@notreached@*/break;
 		}
 	}
 
@@ -442,21 +448,18 @@ int main (int argc, char **argv)
 			continue;
 		}
 		newpwd = cp;
-		if (!eflg &&
-		    (NULL == crypt_method ||
-		     0 != strcmp(crypt_method, "NONE"))) {
+		if (   (!eflg)
+		    && (   (NULL == crypt_method)
+		        || (0 != strcmp(crypt_method, "NONE")))) {
 			void *arg = NULL;
 			if (md5flg) {
 				crypt_method = "MD5";
-			} else if (crypt_method != NULL) {
-#ifdef USE_SHA_CRYPT
-				if (sflg) {
-					arg = &sha_rounds;
-				}
-#endif
-			} else {
-				crypt_method = NULL;
 			}
+#ifdef USE_SHA_CRYPT
+			if (sflg) {
+				arg = &sha_rounds;
+			}
+#endif
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt(crypt_method, arg));
 		}

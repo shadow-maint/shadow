@@ -1,5 +1,16 @@
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c: Add annotations to indicate that usage() does
+	not return.
+	* src/chgpasswd.c: Split usage in smaller parts. Those parts are
+	already translated for chpasswd. Usage is now closer to
+	chpasswd's.
+	* src/chgpasswd.c: Remove dead code. No need to set crypt_method
+	to NULL when it is already NULL. sflg is only set if crypt_method
+	is not NULL.
+
+2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/expiry.c: Remove dead code.
 	* src/expiry.c: Improve comments.
 
