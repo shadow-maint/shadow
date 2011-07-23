@@ -39,6 +39,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     list of TTYs.
   * Fixed warning and support for CONSOLE_GROUPS for users member of more
     than 16 groups.
+  * Do not log into utmp(x) or wtmp when PAM is enabled. This is done by
+    pam_lastlog.
 - su
   * Document the su exit values.
   * When su receives a signal, wait for the child to terminate (after
