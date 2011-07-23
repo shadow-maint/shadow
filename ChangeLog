@@ -1,5 +1,10 @@
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/lastlog.c: Add annotations to indicate that usage() does not
+	return.
+
+2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: Add annotations to indicate that usage() does not
 	return.
 	* src/faillog.c: Fix message: this is faillog, not lastlog.

@@ -71,7 +71,7 @@ static bool bflg = false;	/* print excludes most recent days */
 
 #define	NOW	(time ((time_t *) 0))
 
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	fputs (_("Usage: lastlog [options]\n"
 	         "\n"
@@ -208,7 +208,7 @@ int main (int argc, char **argv)
 			switch (c) {
 			case 'h':
 				usage (EXIT_SUCCESS);
-				break;
+				/*@notreached@*/break;
 			case 't':
 			{
 				unsigned long days;
@@ -267,7 +267,7 @@ int main (int argc, char **argv)
 			}
 			default:
 				usage (EXIT_FAILURE);
-				break;
+				/*@notreached@*/break;
 			}
 		}
 		if (argc > optind) {
