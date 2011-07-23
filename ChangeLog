@@ -1,7 +1,9 @@
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/login.c: Do not log in utmp / utmpx / wtmp when PAM is
-	enabled. This is already done by pam_lastlog.
+	enabled. This is already done by pam_lastlog. Note that
+	pam_lastlog can only log the parent PID, not the PID of the
+	process forked by login.
 
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
 
