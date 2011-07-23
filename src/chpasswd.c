@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,7 +72,7 @@ static bool spw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
@@ -106,7 +106,7 @@ static void fail_exit (int code)
 /*
  * usage - display usage message and exit
  */
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -167,7 +167,7 @@ static void process_flags (int argc, char **argv)
 		switch (c) {
 		case 'h':
 			usage (E_SUCCESS);
-			break;
+			/*@notreached@*/break;
 		case 'c':
 			cflg = true;
 			crypt_method = optarg;
@@ -191,7 +191,7 @@ static void process_flags (int argc, char **argv)
 #endif				/* USE_SHA_CRYPT */
 		default:
 			usage (E_USAGE);
-			break;
+			/*@notreached@*/break;
 		}
 	}
 
@@ -456,12 +456,12 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 		if (use_pam){
-		if (do_pam_passwd_non_interractive ("chpasswd", name, newpwd) != 0) {
-			fprintf (stderr,
-			         _("%s: (line %d, user %s) password not changed\n"),
-			         Prog, line, name);
-			errors++;
-		}
+			if (do_pam_passwd_non_interractive ("chpasswd", name, newpwd) != 0) {
+				fprintf (stderr,
+				         _("%s: (line %d, user %s) password not changed\n"),
+				         Prog, line, name);
+				errors++;
+			}
 		} else
 #endif				/* USE_PAM */
 		{
@@ -476,15 +476,12 @@ int main (int argc, char **argv)
 			void *arg = NULL;
 			if (md5flg) {
 				crypt_method = "MD5";
-			} else if (crypt_method != NULL) {
-#ifdef USE_SHA_CRYPT
-				if (sflg) {
-					arg = &sha_rounds;
-				}
-#endif
-			} else {
-				crypt_method = NULL;
 			}
+#ifdef USE_SHA_CRYPT
+			if (sflg) {
+				arg = &sha_rounds;
+			}
+#endif
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt(crypt_method, arg));
 		}
