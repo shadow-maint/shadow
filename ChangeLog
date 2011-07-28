@@ -1,5 +1,14 @@
 2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/chpasswd.c: Create a shadow entry if the password is
+	set to 'x' in passwd and there are no entry in shadow for the
+	user.
+	* NEWS, src/chgpasswd.c: Create a gshadow entry if the password is 
+	set to 'x' in group and there are no entry in gshadow for the 
+	group.
+
+2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwunconv.c: Exit after printing usage when arguments or
 	options are provided.
 	* src/pwunconv.c: Re-indent.
