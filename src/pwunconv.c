@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -84,6 +84,7 @@ int main (int argc, char **argv)
 
 	if (1 != argc) {
 		(void) fputs (_("Usage: pwunconv\n"), stderr);
+		exit (1);
 	}
 	Prog = Basename (argv[0]);
 
@@ -95,8 +96,8 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		fprintf(stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit(1);
+		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		exit (1);
 	}
 #endif				/* WITH_TCB */
 
@@ -126,7 +127,7 @@ int main (int argc, char **argv)
 		fail_exit (5);
 	}
 	spw_locked = true;
-	if (spw_open (O_RDWR) == 0) {
+	if (spw_open (O_RDONLY) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, spw_dbname ());

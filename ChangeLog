@@ -1,5 +1,15 @@
 2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwunconv.c: Exit after printing usage when arguments or
+	options are provided.
+	* src/pwunconv.c: Re-indent.
+	* src/pwunconv.c: Open the shadow file read only.
+	* src/grpunconv.c: Exit after printing usage when arguments or
+	options are provided.
+	* src/grpunconv.c: Open the gshadow file read only.
+
+2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chgpasswd.c: Fix typo.
 
 2011-07-23  Nicolas François  <nicolas.francois@centraliens.net>
