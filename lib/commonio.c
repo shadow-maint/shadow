@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2001, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -773,7 +773,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 #if KEEP_NIS_AT_END
 	     && (NULL != ptr->line)
 	     && (   ('+' != ptr->line[0])
-	         || ('-' != ptr->line[0]))
+	         && ('-' != ptr->line[0]))
 #endif
 	     ;
 	     ptr = ptr->next) {
