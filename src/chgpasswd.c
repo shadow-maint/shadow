@@ -478,7 +478,28 @@ int main (int argc, char **argv)
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
+			/* The gshadow entry should be updated if the
+			 * group entry has a password set to 'x'.
+			 * But on the other hand, if there is already both
+			 * a group and a gshadow password, it's preferable
+			 * to update both.
+			 */
 			sg = sgr_locate (name);
+
+			if (   (NULL == sp)
+			    && (strcmp (pw->pw_passwd,
+			                SHADOW_PASSWD_STRING) == 0)) {
+				static char *empty = NULL;
+				/* If the password is set to 'x' in
+				 * group, but there are no entries in
+				 * gshadow, create one.
+				 */
+				newsg.sg_namp   = name;
+				/* newsg.sg_passwd = NULL; will be set later */
+				newsg.sg_adm    = &empty;
+				newsg.sg_mem    = dup_list (gr->gr_mem);
+				sg = &newsg;
+			}
 		} else {
 			sg = NULL;
 		}
@@ -492,9 +513,10 @@ int main (int argc, char **argv)
 		if (NULL != sg) {
 			newsg = *sg;
 			newsg.sg_passwd = cp;
-		} else
+		}
 #endif
-		{
+		if (   (NULL == sg)
+		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)) {
 			newgr = *gr;
 			newgr.gr_passwd = cp;
 		}
@@ -513,9 +535,10 @@ int main (int argc, char **argv)
 				errors++;
 				continue;
 			}
-		} else
+		}
 #endif
-		{
+		if (   (NULL == sg)
+		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)) {
 			if (gr_update (&newgr) == 0) {
 				fprintf (stderr,
 				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),

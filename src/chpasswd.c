@@ -44,6 +44,7 @@
 #endif				/* USE_PAM */
 #include "defines.h"
 #include "nscd.h"
+#include "getdef.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -499,7 +500,32 @@ int main (int argc, char **argv)
 			continue;
 		}
 		if (is_shadow_pwd) {
+			/* The shadow entry should be updated if the
+			 * passwd entry has a password set to 'x'.
+			 * But on the other hand, if there is already both
+			 * a passwd and a shadow password, it's preferable
+			 * to update both.
+			 */
 			sp = spw_locate (name);
+
+			if (   (NULL == sp)
+			    && (strcmp (pw->pw_passwd,
+			                SHADOW_PASSWD_STRING) == 0)) {
+				/* If the password is set to 'x' in
+				 * passwd, but there are no entries in
+				 * shadow, create one.
+				 */
+				newsp.sp_namp  = name;
+				/* newsp.sp_pwdp  = NULL; will be set later */
+				/* newsp.sp_lstchg= 0;    will be set later */
+				newsp.sp_min   = getdef_num ("PASS_MIN_DAYS", -1);
+				newsp.sp_max   = getdef_num ("PASS_MAX_DAYS", -1);
+				newsp.sp_warn  = getdef_num ("PASS_WARN_AGE", -1);
+				newsp.sp_inact = -1;
+				newsp.sp_expire= -1;
+				newsp.sp_flag  = SHADOW_SP_FLAG_UNSET;
+				sp = &newsp;
+			}
 		} else {
 			sp = NULL;
 		}
@@ -518,7 +544,10 @@ int main (int argc, char **argv)
 				 * password change */
 				newsp.sp_lstchg = -1;
 			}
-		} else {
+		}
+
+		if (   (NULL == sp)
+		    || (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
 			newpw = *pw;
 			newpw.pw_passwd = cp;
 		}
@@ -536,7 +565,9 @@ int main (int argc, char **argv)
 				errors++;
 				continue;
 			}
-		} else {
+		}
+		if (   (NULL == sp)
+		    || (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
 			if (pw_update (&newpw) == 0) {
 				fprintf (stderr,
 				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
