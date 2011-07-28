@@ -122,7 +122,7 @@ static /*@noreturn@*/void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	void) fprintf (usageout,
+	(void) fprintf (usageout,
 	                _("  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
 	                "NONE DES MD5"
