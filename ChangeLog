@@ -1,5 +1,9 @@
 2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Display PID as unsigned long.
+
+2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Remove unused Zflg.
 
 2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>

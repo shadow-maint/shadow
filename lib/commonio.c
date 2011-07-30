@@ -216,8 +216,8 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	if (kill (pid, 0) == 0) {
 		if (log) {
 			(void) fprintf (stderr,
-			                "%s: lock %s already used by PID %d\n",
-			                Prog, lock, pid);
+			                "%s: lock %s already used by PID %lu\n",
+			                Prog, lock, (unsigned long) pid);
 		}
 		unlink (file);
 		errno = EEXIST;
