@@ -159,7 +159,7 @@ static void selinux_update_mapping (void);
 #endif
 
 static void new_spent (struct spwd *);
-static void fail_exit (int);
+static /*@noreturn@*/void fail_exit (int);
 static void update_group (void);
 
 #ifdef SHADOWGRP
@@ -557,7 +557,7 @@ static void new_spent (struct spwd *spent)
 /*
  * fail_exit - exit with an error code after unlocking files
  */
-static void fail_exit (int code)
+static /*@noreturn@*/void fail_exit (int code)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
@@ -967,7 +967,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'h':
 				usage (E_SUCCESS);
-				/* @notreached@ */break;
+				/*@notreached@*/break;
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
