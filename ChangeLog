@@ -1,5 +1,9 @@
 2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Fix typo in notreached annotation.
+
+2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Add annotations to indicate that fail_exit() does
 	not return.
 	* src/usermod.c: Fix typo in notreached annotation.

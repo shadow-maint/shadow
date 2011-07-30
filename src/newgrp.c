@@ -806,7 +806,7 @@ int main (int argc, char **argv)
 	 */
 	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
 	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	/* @notreached@ */
+	/*@notreached@*/
       failure:
 
 	/*
