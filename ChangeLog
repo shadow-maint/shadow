@@ -1,3 +1,8 @@
+2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/find_new_uid.c: free (used_uids) on return.
+	* libmisc/find_new_gid.c: free (used_gids) on return.
+
 2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.c: Fix NIS commit from 2011-07-14.

@@ -96,6 +96,7 @@ int find_new_uid (bool sys_user,
 	     * changes */
 	    && (pw_locate_uid (*preferred_uid) == NULL)) {
 		*uid = *preferred_uid;
+		free (used_uids);
 		return 0;
 	}
 
@@ -179,6 +180,7 @@ int find_new_uid (bool sys_user,
 				         Prog);
 				SYSLOG ((LOG_WARN,
 				         "no more available UID on the system"));
+				free (used_uids);
 				return -1;
 			}
 		}
@@ -194,6 +196,7 @@ int find_new_uid (bool sys_user,
 				         _("%s: Can't get unique UID (no more available UIDs)\n"),
 				         Prog);
 				SYSLOG ((LOG_WARN, "no more available UID on the system"));
+				free (used_uids);
 				return -1;
 			}
 		}

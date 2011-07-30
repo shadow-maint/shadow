@@ -96,6 +96,7 @@ int find_new_gid (bool sys_group,
 	     * changes */
 	    && (gr_locate_gid (*preferred_gid) == NULL)) {
 		*gid = *preferred_gid;
+		free (used_gids);
 		return 0;
 	}
 
@@ -179,6 +180,7 @@ int find_new_gid (bool sys_group,
 				         Prog);
 				SYSLOG ((LOG_WARN,
 				         "no more available GID on the system"));
+				free (used_gids);
 				return -1;
 			}
 		}
@@ -194,6 +196,7 @@ int find_new_gid (bool sys_group,
 				         _("%s: Can't get unique GID (no more available GIDs)\n"),
 				         Prog);
 				SYSLOG ((LOG_WARN, "no more available GID on the system"));
+				free (used_gids);
 				return -1;
 			}
 		}
