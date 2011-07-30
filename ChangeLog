@@ -1,5 +1,9 @@
 2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Remove unused Zflg.
+
+2011-07-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chgpasswd.c: Fix typo sp -> sg. sg_namp -> sg_name
 	* src/chgpasswd.c: Always update the group file when SHADOWGRP is
 	not enabled.

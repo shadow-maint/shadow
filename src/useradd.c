@@ -148,8 +148,7 @@ static bool
     rflg = false,		/* create a system account */
     sflg = false,		/* shell program for new account */
     uflg = false,		/* specify user ID for new account */
-    Uflg = false,		/* create a group having the same name as the user */
-    Zflg = false;		/* new selinux user */
+    Uflg = false;		/* create a group having the same name as the user */
 
 static bool home_added = false;
 
@@ -1201,7 +1200,6 @@ static void process_flags (int argc, char **argv)
 			case 'Z':
 				if (is_selinux_enabled () > 0) {
 					user_selinux = optarg;
-					Zflg = true;
 				} else {
 					fprintf (stderr,
 					         _("%s: -Z requires SELinux enabled kernel\n"),
