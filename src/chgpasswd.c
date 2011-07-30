@@ -450,7 +450,7 @@ int main (int argc, char **argv)
 		newpwd = cp;
 		if (   (!eflg)
 		    && (   (NULL == crypt_method)
-		        || (0 != strcmp(crypt_method, "NONE")))) {
+		        || (0 != strcmp (crypt_method, "NONE")))) {
 			void *arg = NULL;
 			if (md5flg) {
 				crypt_method = "MD5";
@@ -461,7 +461,7 @@ int main (int argc, char **argv)
 			}
 #endif
 			cp = pw_encrypt (newpwd,
-			                 crypt_make_salt(crypt_method, arg));
+			                 crypt_make_salt (crypt_method, arg));
 		}
 
 		/*
@@ -486,15 +486,15 @@ int main (int argc, char **argv)
 			 */
 			sg = sgr_locate (name);
 
-			if (   (NULL == sp)
-			    && (strcmp (pw->pw_passwd,
+			if (   (NULL == sg)
+			    && (strcmp (gr->gr_passwd,
 			                SHADOW_PASSWD_STRING) == 0)) {
 				static char *empty = NULL;
 				/* If the password is set to 'x' in
 				 * group, but there are no entries in
 				 * gshadow, create one.
 				 */
-				newsg.sg_namp   = name;
+				newsg.sg_name   = name;
 				/* newsg.sg_passwd = NULL; will be set later */
 				newsg.sg_adm    = &empty;
 				newsg.sg_mem    = dup_list (gr->gr_mem);
@@ -514,9 +514,10 @@ int main (int argc, char **argv)
 			newsg = *sg;
 			newsg.sg_passwd = cp;
 		}
-#endif
 		if (   (NULL == sg)
-		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)) {
+		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+#endif
+		{
 			newgr = *gr;
 			newgr.gr_passwd = cp;
 		}
@@ -536,9 +537,10 @@ int main (int argc, char **argv)
 				continue;
 			}
 		}
-#endif
 		if (   (NULL == sg)
-		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)) {
+		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+#endif
+		{
 			if (gr_update (&newgr) == 0) {
 				fprintf (stderr,
 				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
