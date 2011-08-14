@@ -1,6 +1,10 @@
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/chowndir.c: Add splint annotations.
+	* src/chgpasswd.c: Likewise.
+	* src/chpasswd.c: Likewise.
+	* src/newusers.c: Likewise.
+	* libmisc/salt.c, lib/prototypes.h (crypt_make_salt): Likewise.
 
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 

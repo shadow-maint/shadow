@@ -75,7 +75,7 @@ const char *Prog;
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
 static bool cflg = false;
-static char *crypt_method = NULL;
+static /*@null@*//*@observer@*/char *crypt_method = NULL;
 #ifdef USE_SHA_CRYPT
 static bool sflg = false;
 static long sha_rounds = 5000;

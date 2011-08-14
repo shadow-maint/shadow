@@ -292,7 +292,7 @@ extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
                       char *term, size_t termlen);
 
 /* salt.c */
-extern /*@observer@*/const char *crypt_make_salt (/*@null@*/const char *meth, /*@null@*/void *arg);
+extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);

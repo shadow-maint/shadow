@@ -202,7 +202,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
  */
-/*@observer@*/const char *crypt_make_salt (/*@null@*/const char *meth, /*@null@*/void *arg)
+/*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
 {
 	/* Max result size for the SHA methods:
 	 *  +3		$5$

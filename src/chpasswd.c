@@ -62,7 +62,7 @@ static bool md5flg = false;
 static bool sflg   = false;
 #endif				/* USE_SHA_CRYPT */
 
-static const char *crypt_method = NULL;
+static /*@null@*//*@observer@*/const char *crypt_method = NULL;
 #ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
 #endif				/* USE_SHA_CRYPT */
