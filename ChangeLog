@@ -1,5 +1,10 @@
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c, src/chpasswd.c, src/newusers.c: Replace cflg by
+	a test on crypt_method.
+
+2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chowndir.c: Add splint annotations.
 	* src/chgpasswd.c: Likewise.
 	* src/chpasswd.c: Likewise.

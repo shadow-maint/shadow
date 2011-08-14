@@ -74,8 +74,8 @@ const char *Prog;
 
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
-static bool cflg = false;
 static /*@null@*//*@observer@*/char *crypt_method = NULL;
+#define cflg (NULL != crypt_method)
 #ifdef USE_SHA_CRYPT
 static bool sflg = false;
 static long sha_rounds = 5000;
@@ -556,7 +556,6 @@ static void process_flags (int argc, char **argv)
 			break;
 #ifndef USE_PAM
 		case 'c':
-			cflg = true;
 			crypt_method = optarg;
 			break;
 #ifdef USE_SHA_CRYPT

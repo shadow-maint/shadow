@@ -58,7 +58,6 @@
  * Global variables
  */
 const char *Prog;
-static bool cflg   = false;
 static bool eflg   = false;
 static bool md5flg = false;
 #ifdef USE_SHA_CRYPT
@@ -66,6 +65,7 @@ static bool sflg   = false;
 #endif
 
 static /*@null@*//*@observer@*/const char *crypt_method = NULL;
+#define cflg (NULL != crypt_method)
 #ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
 #endif
@@ -174,7 +174,6 @@ static void process_flags (int argc, char **argv)
 	                         long_options, &option_index)) != -1) {
 		switch (c) {
 		case 'c':
-			cflg = true;
 			crypt_method = optarg;
 			break;
 		case 'e':
