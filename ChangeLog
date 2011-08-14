@@ -1,5 +1,12 @@
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Add splint annotations.
+	* src/su.c: Set caller_on_console as boolean.
+	* src/su.c: Ignore retunr value from fputs (usage) / puts (prompt).
+	* src/su.c: Improved memory management.
+
+2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chgpasswd.c, src/chpasswd.c, src/newusers.c: Replace cflg by
 	a test on crypt_method.
 

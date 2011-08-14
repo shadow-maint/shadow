@@ -82,19 +82,19 @@
  * Global variables
  */
 const char *Prog;
-static const char *caller_tty = NULL;	/* Name of tty SU is run from */
+static /*@observer@*/const char *caller_tty = NULL;	/* Name of tty SU is run from */
 static bool caller_is_root = false;
 static uid_t caller_uid;
 #ifndef USE_PAM
-static int caller_on_console = 0;
+static bool caller_on_console = false;
 #ifdef SU_ACCESS
-static char *caller_pass;
+static /*@only@*/char *caller_pass;
 #endif
 #endif				/* !USE_PAM */
 static bool doshell = false;
 static bool fakelogin = false;
-static char *shellstr = NULL;
-static char *command = NULL;
+static /*@observer@*/const char *shellstr;
+static /*@null@*/char *command = NULL;
 
 
 /* not needed by sulog.c anymore */
@@ -194,7 +194,7 @@ static RETSIGTYPE kill_child (int unused(s))
 /* borrowed from GNU sh-utils' "su.c" */
 static bool restricted_shell (const char *shellname)
 {
-	char *line;
+	/*@observer@*/const char *line;
 
 	setusershell ();
 	while ((line = getusershell ()) != NULL) {
@@ -402,6 +402,7 @@ static void prepare_pam_close_session (void)
  */
 static void usage (int status)
 {
+	(void)
 	fputs (_("Usage: su [options] [LOGIN]\n"
 	         "\n"
 	         "Options:\n"
@@ -461,6 +462,7 @@ static void check_perms_pam (struct passwd *pw)
 static void check_perms_nopam (struct passwd *pw)
 {
 	struct spwd *spwd = NULL;
+	/*@observer@*/const char *password = pw->pw_passwd;
 	RETSIGTYPE (*oldsig) (int);
 
 	if (caller_is_root) {
@@ -497,7 +499,7 @@ static void check_perms_nopam (struct passwd *pw)
 #ifdef SU_ACCESS
 	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 		if (NULL != spwd) {
-			pw->pw_passwd = spwd->sp_pwdp;
+			password = spwd->sp_pwdp;
 		}
 	}
 
@@ -505,11 +507,11 @@ static void check_perms_nopam (struct passwd *pw)
 	case 0:	/* normal su, require target user's password */
 		break;
 	case 1:	/* require no password */
-		pw->pw_passwd = "";	/* XXX warning: const */
+		password = "";	/* XXX warning: const */
 		break;
 	case 2:	/* require own password */
-		puts (_("(Enter your own password)"));
-		pw->pw_passwd = caller_pass;
+		(void) puts (_("(Enter your own password)"));
+		password = caller_pass;
 		break;
 	default:	/* access denied (-1) or unexpected value */
 		fprintf (stderr,
@@ -529,7 +531,7 @@ static void check_perms_nopam (struct passwd *pw)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (pw_auth (pw->pw_passwd, name, PW_SU, (char *) 0) != 0) {
+	if (pw_auth (password, name, PW_SU, (char *) 0) != 0) {
 		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
@@ -635,6 +637,7 @@ static struct passwd * check_perms (void)
 		subsystem (pw);	/* change to the subsystem root */
 		endpwent ();		/* close the old password databases */
 		endspent ();
+		pw_free (pw);
 		return check_perms ();	/* authenticate in the subsystem */
 	}
 
@@ -652,6 +655,7 @@ static struct passwd * check_perms (void)
 static void save_caller_context (char **argv)
 {
 	struct passwd *pw = NULL;
+	const char *password = NULL;
 	/*
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
@@ -704,15 +708,18 @@ static void save_caller_context (char **argv)
 	 * Sort out the password of user calling su, in case needed later
 	 * -- chris
 	 */
+	password = pw->pw_passwd;
 	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 		struct spwd *spwd = getspnam (caller_name);
 		if (NULL != spwd) {
-			pw->pw_passwd = spwd->sp_pwdp;
+			password = spwd->sp_pwdp;
 		}
 	}
-	caller_pass = xstrdup (pw->pw_passwd);
+	free (caller_pass);
+	caller_pass = xstrdup (password);
 #endif				/* SU_ACCESS */
 #endif				/* !USE_PAM */
+	pw_free (pw);
 }
 
 /*
@@ -906,7 +913,10 @@ static void set_environment (struct passwd *pw)
 
 	if (change_environment) {
 		if (fakelogin) {
-			pw->pw_shell = shellstr;
+			if (shellstr != pw->pw_shell) {
+				free (pw->pw_shell);
+				pw->pw_shell = xstrdup (shellstr);
+			}
 			setup_env (pw);
 		} else {
 			addenv ("HOME", pw->pw_dir);
