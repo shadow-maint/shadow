@@ -1,5 +1,9 @@
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/gshadow_.h: Fix typo in comment.
+
+2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, libmisc/getgr_nam_gid.c: getgr_nam_gid()
 	returns an allocated structure.
 
