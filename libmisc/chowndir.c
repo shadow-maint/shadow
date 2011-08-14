@@ -116,7 +116,7 @@ int chown_tree (const char *root,
 
 		ent_name_len = strlen (root) + strlen (ent->d_name) + 2;
 		if (ent_name_len > new_name_len) {
-			char *tmp = realloc (new_name, ent_name_len);
+			/*@only@*/char *tmp = realloc (new_name, ent_name_len);
 			if (NULL == tmp) {
 				rc = -1;
 				break;
