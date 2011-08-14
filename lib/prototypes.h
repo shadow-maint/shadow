@@ -157,7 +157,7 @@ extern int find_new_uid (bool sys_user,
 extern int get_gid (const char *gidstr, gid_t *gid);
 
 /* getgr_nam_gid.c */
-extern /*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
+extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
 
 /* getlong.c */
 extern int getlong (const char *numstr, /*@out@*/long int *result);
