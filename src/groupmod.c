@@ -551,7 +551,8 @@ static void prepare_failure_reports (void)
 #endif
 	(void) snprintf (info_passwd.action,
 	                 511 - strlen (info_group.audit_msg),
-	                 "group %s/%lu", group_name, (unsigned long int) group_id);
+	                 "group %s/%lu",
+	                 group_name, (unsigned long int) group_id);
 
 	if (nflg) {
 		strncat (info_group.action, ", new name: ",
