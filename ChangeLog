@@ -1,3 +1,8 @@
+2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c: Added const modifiers.
+	* lib/prototypes: Synchronize splint annotations.
+
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: Add splint annotations.

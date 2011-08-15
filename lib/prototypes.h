@@ -240,7 +240,7 @@ extern void mailcheck (void);
 extern void motd (void);
 
 /* myname.c */
-extern /*@null@*/struct passwd *get_my_pwent (void);
+extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
 /* pam_pass_non_interractive.c */
 #ifdef USE_PAM

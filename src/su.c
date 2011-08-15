@@ -132,11 +132,11 @@ static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static bool restricted_shell (const char *shellname);
 static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root);
-static struct passwd * check_perms (void);
+static /*@only@*/struct passwd * check_perms (void);
 #ifdef USE_PAM
-static void check_perms_pam (struct passwd *pw);
+static void check_perms_pam (const struct passwd *pw);
 #else				/* !USE_PAM */
-static void check_perms_nopam (struct passwd *pw);
+static void check_perms_nopam (const struct passwd *pw);
 #endif				/* !USE_PAM */
 static void save_caller_context (char **argv);
 static void process_flags (int argc, char **argv);
@@ -418,7 +418,7 @@ static void usage (int status)
 }
 
 #ifdef USE_PAM
-static void check_perms_pam (struct passwd *pw)
+static void check_perms_pam (const struct passwd *pw)
 {
 	int ret;
 	ret = pam_authenticate (pamh, 0);
@@ -459,9 +459,9 @@ static void check_perms_pam (struct passwd *pw)
 	}
 }
 #else				/* !USE_PAM */
-static void check_perms_nopam (struct passwd *pw)
+static void check_perms_nopam (const struct passwd *pw)
 {
-	struct spwd *spwd = NULL;
+	/*@observer@*/const struct spwd *spwd = NULL;
 	/*@observer@*/const char *password = pw->pw_passwd;
 	RETSIGTYPE (*oldsig) (int);
 
@@ -572,7 +572,7 @@ static void check_perms_nopam (struct passwd *pw)
  *	In case of subsystem login, the user is first authenticated in the
  *	caller's root subsystem, and then in the user's target subsystem.
  */
-static struct passwd * check_perms (void)
+static /*@only@*/struct passwd * check_perms (void)
 {
 #ifdef USE_PAM
 	const char *tmp_name;
@@ -654,7 +654,7 @@ static struct passwd * check_perms (void)
  */
 static void save_caller_context (char **argv)
 {
-	struct passwd *pw = NULL;
+	const struct passwd *pw = NULL;
 	const char *password = NULL;
 	/*
 	 * Get the program name. The program name is used as a prefix to
@@ -710,7 +710,7 @@ static void save_caller_context (char **argv)
 	 */
 	password = pw->pw_passwd;
 	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
-		struct spwd *spwd = getspnam (caller_name);
+		const struct spwd *spwd = getspnam (caller_name);
 		if (NULL != spwd) {
 			password = spwd->sp_pwdp;
 		}
@@ -1006,7 +1006,7 @@ int main (int argc, char **argv)
 	 * in /etc/passwd.
 	 */
 	if (NULL == shellstr) {
-		shellstr = (char *) strdup (pw->pw_shell);
+		shellstr = pw->pw_shell;
 	}
 
 	/*
@@ -1160,6 +1160,8 @@ int main (int argc, char **argv)
 	} else {
 		(void) shell (shellstr, cp, environ);
 	}
+
+	pw_free (pw);
 
 	return (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }
