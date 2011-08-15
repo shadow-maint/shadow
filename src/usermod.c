@@ -92,21 +92,21 @@
 const char *Prog;
 
 static char *user_name;
-static char *user_newname = NULL;
+static char *user_newname;
 static char *user_pass;
 static uid_t user_id;
 static uid_t user_newid;
 static gid_t user_gid;
 static gid_t user_newgid;
 static char *user_comment;
-static char *user_newcomment = NULL;
+static char *user_newcomment;
 static char *user_home;
-static char *user_newhome = NULL;
+static char *user_newhome;
 static char *user_shell;
 #ifdef WITH_SELINUX
 static const char *user_selinux = "";
 #endif
-static char *user_newshell = NULL;
+static char *user_newshell;
 static long user_expire;
 static long user_newexpire;
 static long user_inactive;
@@ -149,7 +149,7 @@ static bool sgr_locked = false;
 
 
 /* local function prototypes */
-static void date_to_str (char *buf, size_t maxsize,
+static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date, const char *negativ);
 static int get_groups (char *);
 static /*@noreturn@*/void usage (int status);
@@ -179,7 +179,7 @@ static void update_faillog (void);
 static void move_mailbox (void);
 #endif
 
-static void date_to_str (char *buf, size_t maxsize,
+static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date, const char *negativ)
 {
 	struct tm *tp;
@@ -192,8 +192,10 @@ static void date_to_str (char *buf, size_t maxsize,
 #ifdef HAVE_STRFTIME
 		strftime (buf, maxsize, "%Y-%m-%d", tp);
 #else
-		snprintf (buf, maxsize, "%04d-%02d-%02d",
-		          tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
+		(void) snprintf (buf, maxsize, "%04d-%02d-%02d",
+		                 tp->tm_year + 1900,
+		                 tp->tm_mon + 1,
+		                 tp->tm_mday);
 #endif				/* HAVE_STRFTIME */
 	}
 	buf[maxsize - 1] = '\0';
@@ -271,6 +273,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: group '%s' is a NIS group.\n"),
 			         Prog, grp->gr_name);
+			gr_free (grp);
 			continue;
 		}
 #endif
@@ -279,6 +282,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: too many groups specified (max %d).\n"),
 			         Prog, ngroups);
+			gr_free (grp);
 			break;
 		}
 
@@ -286,6 +290,7 @@ static int get_groups (char *list)
 		 * Add the group name to the user's list of groups.
 		 */
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
+		gr_free (grp);
 	} while (NULL != list);
 
 	user_groups[ngroups] = (char *) 0;
@@ -1521,6 +1526,12 @@ static void move_home (void)
 				         Prog);
 				fail_exit (E_HOMEDIR);
 			}
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "moving home directory",
+			              user_newname, (unsigned int) user_newid,
+			              1);
+#endif
 			return;
 		} else {
 			if (EXDEV == errno) {
@@ -1553,11 +1564,6 @@ static void move_home (void)
 			         Prog, user_home, user_newhome);
 			fail_exit (E_HOMEDIR);
 		}
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "moving home directory",
-		              user_newname, (unsigned int) user_newid, 1);
-#endif
 	}
 }
 
@@ -1713,7 +1719,9 @@ static void move_mailbox (void)
 	 * replacing /var/spool/mail/luser with a hard link to /etc/passwd
 	 * between stat and chown).  --marekm
 	 */
-	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
+	(void) snprintf (mailfile, sizeof mailfile, "%s/%s",
+	                 maildir, user_name);
+	mailfile[(sizeof mailfile) - 1] = '\0';
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
 	if (fd < 0) {
 		/* no need for warnings if the mailbox doesn't exist */
@@ -1724,14 +1732,14 @@ static void move_mailbox (void)
 	}
 	if (fstat (fd, &st) < 0) {
 		perror ("fstat");
-		close (fd);
+		(void) close (fd);
 		return;
 	}
 	if (st.st_uid != user_id) {
 		/* better leave it alone */
 		fprintf (stderr, _("%s: warning: %s not owned by %s\n"),
 		         Prog, mailfile, user_name);
-		close (fd);
+		(void) close (fd);
 		return;
 	}
 	if (uflg) {
@@ -1747,11 +1755,12 @@ static void move_mailbox (void)
 #endif
 	}
 
-	close (fd);
+	(void) close (fd);
 
 	if (lflg) {
-		snprintf (newmailfile, sizeof newmailfile, "%s/%s",
-		          maildir, user_newname);
+		(void) snprintf (newmailfile, sizeof newmailfile, "%s/%s",
+		                 maildir, user_newname);
+		newmailfile[(sizeof newmailfile) - 1] = '\0';
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {
 			perror (_("failed to rename mailbox"));

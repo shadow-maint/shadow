@@ -1,5 +1,18 @@
 2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Do not assign static to NULL.
+	* src/usermod.c (date_to_str): buf needs to be unique (e.g.
+	independent from negativ), and is an out buffer.
+	* src/usermod.c: Ignore return value from snprintf, and force
+	nul-termination of buffer.
+	* src/usermod.c: Improve memory management.
+	* src/usermod.c: An audit bloc was not reachable, moved above on
+	success to move the home directory.
+	* src/usermod.c: Ignore close() return value for the mailbox
+	(opened read only).
+
+2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Added const modifiers.
 	* lib/prototypes: Synchronize splint annotations.
 
