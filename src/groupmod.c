@@ -80,10 +80,10 @@ static char *group_passwd;
 static gid_t group_id;
 static gid_t group_newid;
 
-struct cleanup_info_mod info_passwd;
-struct cleanup_info_mod info_group;
+static struct cleanup_info_mod info_passwd;
+static struct cleanup_info_mod info_group;
 #ifdef	SHADOWGRP
-struct cleanup_info_mod info_gshadow;
+static struct cleanup_info_mod info_gshadow;
 #endif
 
 static bool
@@ -522,14 +522,14 @@ static void prepare_failure_reports (void)
 #endif
 	info_passwd.audit_msg  = xmalloc (512);
 
-	snprintf (info_group.audit_msg, 511,
-	          "changing %s; ", gr_dbname ());
+	(void) snprintf (info_group.audit_msg, 511,
+	                 "changing %s; ", gr_dbname ());
 #ifdef	SHADOWGRP
-	snprintf (info_gshadow.audit_msg, 511,
-	          "changing %s; ", sgr_dbname ());
+	(void) snprintf (info_gshadow.audit_msg, 511,
+	                 "changing %s; ", sgr_dbname ());
 #endif
-	snprintf (info_passwd.audit_msg, 511,
-	          "changing %s; ", pw_dbname ());
+	(void) snprintf (info_passwd.audit_msg, 511,
+	                 "changing %s; ", pw_dbname ());
 
 	info_group.action   =   info_group.audit_msg
 	                      + strlen (info_group.audit_msg);
@@ -540,14 +540,18 @@ static void prepare_failure_reports (void)
 	info_passwd.action  =   info_passwd.audit_msg
 	                      + strlen (info_passwd.audit_msg);
 
-	snprintf (info_group.action,   511 - strlen (info_group.audit_msg),
-	          "group %s/%lu", group_name, (unsigned long int) group_id);
+	(void) snprintf (info_group.action,
+	                 511 - strlen (info_group.audit_msg),
+	                 "group %s/%lu",
+	                 group_name, (unsigned long int) group_id);
 #ifdef	SHADOWGRP
-	snprintf (info_gshadow.action, 511 - strlen (info_group.audit_msg),
-	          "group %s", group_name);
+	(void) snprintf (info_gshadow.action,
+	                 511 - strlen (info_group.audit_msg),
+	                 "group %s", group_name);
 #endif
-	snprintf (info_passwd.action,  511 - strlen (info_group.audit_msg),
-	          "group %s/%lu", group_name, (unsigned long int) group_id);
+	(void) snprintf (info_passwd.action,
+	                 511 - strlen (info_group.audit_msg),
+	                 "group %s/%lu", group_name, (unsigned long int) group_id);
 
 	if (nflg) {
 		strncat (info_group.action, ", new name: ",
@@ -579,15 +583,15 @@ static void prepare_failure_reports (void)
 	if (gflg) {
 		strncat (info_group.action, ", new gid: ",
 		         511 - strlen (info_group.audit_msg));
-		snprintf (info_group.action+strlen (info_group.action),
-		          511 - strlen (info_group.audit_msg),
-		          "%lu", (unsigned long int) group_newid);
+		(void) snprintf (info_group.action+strlen (info_group.action),
+		                 511 - strlen (info_group.audit_msg),
+		                 "%lu", (unsigned long int) group_newid);
 
 		strncat (info_passwd.action, ", new gid: ",
 		         511 - strlen (info_passwd.audit_msg));
-		snprintf (info_passwd.action+strlen (info_passwd.action),
-		          511 - strlen (info_passwd.audit_msg),
-		          "%lu", (unsigned long int) group_newid);
+		(void) snprintf (info_passwd.action+strlen (info_passwd.action),
+		                 511 - strlen (info_passwd.audit_msg),
+		                 "%lu", (unsigned long int) group_newid);
 	}
 	info_group.audit_msg[511]   = '\0';
 #ifdef	SHADOWGRP

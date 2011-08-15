@@ -1,5 +1,10 @@
 2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmod.c: Ignore return value from snprintf.
+	* src/groupmod.c: Add static qualifier to the cleanup structures.
+
+2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Do not assign static to NULL.
 	* src/usermod.c (date_to_str): buf needs to be unique (e.g.
 	independent from negativ), and is an out buffer.
