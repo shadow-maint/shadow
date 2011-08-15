@@ -736,7 +736,6 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	atexit (do_cleanups);
 
 	/*
 	 * Get my name so that I can use it to report errors.
@@ -746,6 +745,13 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	if (atexit (do_cleanups) != 0) {
+		fprintf (stderr,
+		         _("%s: Cannot setup cleanup service.\n"),
+		         Prog);
+		exit (1);
+	}
 
 	process_flags (argc, argv);
 

@@ -2,6 +2,7 @@
 
 	* src/groupmod.c: Ignore return value from snprintf.
 	* src/groupmod.c: Add static qualifier to the cleanup structures.
+	* src/groupmod.c: Check atexit failures.
 
 2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
