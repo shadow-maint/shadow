@@ -16,7 +16,9 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "exitcodes.h"
 #include "defines.h"
+#include "spawn.h"
 #include "nscd.h"
 
 #define MSG_NSCD_FLUSH_CACHE_FAILED "Failed to flush the nscd cache.\n"
@@ -26,37 +28,32 @@
  */
 int nscd_flush_cache (const char *service)
 {
-	pid_t pid, termpid;
-	int err, status;
-	char *spawnedArgs[] = {"/usr/sbin/nscd", "nscd", "-i", service, NULL};
-	char *spawnedEnv[] = {NULL};
+	pid_t pid;
+	int err, status, code;
+	const char *spawnedArgs[] = {"/usr/sbin/nscd", "nscd", "-i", service, NULL};
+	const char *spawnedEnv[] = {NULL};
 
-	/* spawn process */
-	err = posix_spawn (&pid, spawnedArgs[0], NULL, NULL,
-	                   spawnedArgs, spawnedEnv);
-	if(0 != err)
+	err = run_command (spawnedArgs[0], spawnedArgs, spawnedEnv, &status);
+	if (0 != err)
 	{
+		/* run_command writes its own more detailed message. */
 		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
-		(void) fprintf (stderr, "posix_spawn() error=%d\n", err);
 		return -1;
 	}
-
-	/* Wait for the spawned process to exit */
-	termpid = TEMP_FAILURE_RETRY (waitpid (pid, &status, 0));
-	if (-1 == termpid)
+	code = WIFEXITED (status) ? WEXITSTATUS (status)
+	                          : (WTERMSIG (status) + 128);
+	if (code == E_CMD_NOTFOUND)
 	{
+		/* nscd is not installed, or it is installed but uses an
+		   interpreter that is missing.  Probably the former. */
+		return 0;
+	}
+	if (code != 0)
+	{
+		(void) fprintf (stderr, "nscd exited with status %d", code);
 		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
-		perror("waitpid");
 		return -1;
 	}
-	else if (termpid != pid)
-	{
-		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
-		(void) fprintf (stderr, "waitpid returned %ld != %ld\n",
-		               (long int) termpid, (long int) pid);
-		return -1;
-	}
-
 	return 0;
 }
 #else				/* USE_NSCD */

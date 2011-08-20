@@ -1,3 +1,11 @@
+2011-08-20  Jonathan Nieder  <jrnieder@gmail.com>
+
+	* lib/Makefile.am: Added lib/spawn.c and lib/spawn.h.
+	* lib/nscd.c, lib/spawn.c, lib/spawn.h: It is not possible to
+	differentiate between an nscd failure, and a failure to execute
+	due to no nscd with posix_spawn. Use our own run_command routine.
+	* src/userdel.c: Use run_command()
+
 2011-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmod.c: Ignore return value from snprintf.
