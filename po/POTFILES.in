@@ -24,6 +24,7 @@ lib/sgroupio.c
 lib/shadow.c
 lib/shadowio.c
 lib/shadowmem.c
+lib/spawn.c
 lib/tcbfuncs.c
 lib/utent.c
 libmisc/addgrps.c

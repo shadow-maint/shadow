@@ -1,3 +1,7 @@
+2011-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/POTFILES.in: Added lib/spawn.c.
+
 2011-08-20  Jonathan Nieder  <jrnieder@gmail.com>
 
 	* lib/Makefile.am: Added lib/spawn.c and lib/spawn.h.
