@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -268,7 +268,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		return -1;
 	}
 
-	grent.gr_passwd = "x";	/* XXX warning: const */
+	grent.gr_passwd = "*";	/* XXX warning: const */
 	members[0] = NULL;
 	grent.gr_mem = members;
 
@@ -287,16 +287,13 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	}
 #endif
 
-	if (gr_update (&grent) == 0) {
-		return -1;
-	}
-
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
 		struct sgrp sgrent;
 		char *admins[1];
 		sgrent.sg_name = grent.gr_name;
 		sgrent.sg_passwd = "*";	/* XXX warning: const */
+		grent.gr_passwd  = "x";	/* XXX warning: const */
 		admins[0] = NULL;
 		sgrent.sg_adm = admins;
 		sgrent.sg_mem = members;
@@ -306,6 +303,10 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		}
 	}
 #endif
+
+	if (gr_update (&grent) == 0) {
+		return -1;
+	}
 
 	return 0;
 }
@@ -890,6 +891,7 @@ int main (int argc, char **argv)
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
 			         Prog, line);
+			errors++
 			continue;
 		}
 

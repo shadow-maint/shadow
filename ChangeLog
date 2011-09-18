@@ -1,5 +1,13 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Initially set the passwd's password to '*'
+	instead of 'x'. Only when it is confirmed that a shadow entry is
+	(will be) added, set the passwd's password to 'x'.
+	* src/newusers.c: An invalid line is an error. A failure needs to
+	be reported.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Remove log_gpasswd_success_gshadow(). Writing in
 	gshadowis the last sub-task.
 
