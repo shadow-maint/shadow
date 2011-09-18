@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -99,8 +99,6 @@ static const char *def_create_mail_spool = "no";
 
 static long def_inactive = -1;
 static const char *def_expire = "";
-
-static char def_file[] = USER_DEFAULTS_FILE;
 
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 
@@ -299,7 +297,7 @@ static void get_defaults (void)
 	 * Open the defaults file for reading.
 	 */
 
-	fp = fopen (def_file, "r");
+	fp = fopen (USER_DEFAULTS_FILE, "r");
 	if (NULL == fp) {
 		return;
 	}
@@ -332,7 +330,7 @@ static void get_defaults (void)
 				         Prog, cp);
 				fprintf (stderr,
 				         _("%s: the %s configuration in %s will be ignored\n"),
-				         Prog, DGROUP, def_file);
+				         Prog, DGROUP, USER_DEFAULTS_FILE);
 			} else {
 				def_group = grp->gr_gid;
 				def_gname = xstrdup (grp->gr_name);
@@ -361,10 +359,10 @@ static void get_defaults (void)
 			    || (def_inactive < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
-				         Prog, optarg);
+				         Prog, cp);
 				fprintf (stderr,
 				         _("%s: the %s configuration in %s will be ignored\n"),
-				         Prog, DINACT, def_file);
+				         Prog, DINACT, USER_DEFAULTS_FILE);
 				def_inactive = -1;
 			}
 		}
@@ -466,7 +464,7 @@ static int set_defaults (void)
 	 * temporary file, using any new values. Each line is checked
 	 * to insure that it is not output more than once.
 	 */
-	ifp = fopen (def_file, "r");
+	ifp = fopen (USER_DEFAULTS_FILE, "r");
 	if (NULL == ifp) {
 		fprintf (ofp, "# useradd defaults file\n");
 		goto skip;
@@ -483,7 +481,7 @@ static int set_defaults (void)
 			if (feof (ifp) == 0) {
 				fprintf (stderr,
 				         _("%s: line too long in %s: %s..."),
-				         Prog, def_file, buf);
+				         Prog, USER_DEFAULTS_FILE, buf);
 				(void) fclose (ifp);
 				return -1;
 			}
@@ -555,13 +553,13 @@ static int set_defaults (void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	wlen = snprintf (buf, sizeof buf, "%s-", def_file);
+	wlen = snprintf (buf, sizeof buf, "%s-", USER_DEFAULTS_FILE);
 	assert (wlen < (int) sizeof buf);
-	if ((rename (def_file, buf) != 0) && (ENOENT != errno)) {
+	if ((rename (USER_DEFAULTS_FILE, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;
 		fprintf (stderr,
-		         _("%s: rename: %s: %s"),
-		         Prog, def_file, strerror (err));
+		         _("%s: rename: %s: %s\n"),
+		         Prog, USER_DEFAULTS_FILE, strerror (err));
 		unlink (new_file);
 		return -1;
 	}
@@ -569,10 +567,10 @@ static int set_defaults (void)
 	/*
 	 * Rename the new default file to its correct name.
 	 */
-	if (rename (new_file, def_file) != 0) {
+	if (rename (new_file, USER_DEFAULTS_FILE) != 0) {
 		int err = errno;
 		fprintf (stderr,
-		         _("%s: rename: %s: %s"),
+		         _("%s: rename: %s: %s\n"),
 		         Prog, new_file, strerror (err));
 		return -1;
 	}
@@ -632,6 +630,8 @@ static int get_groups (char *list)
 		/*
 		 * There must be a match, either by GID value or by
 		 * string name.
+		 * FIXME: It should exist according to gr_locate,
+		 *        otherwise, we can't change its members
 		 */
 		if (NULL == grp) {
 			fprintf (stderr,
@@ -695,6 +695,8 @@ static void usage (int status)
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
 	                _("Usage: %s [options] LOGIN\n"
+	                  "       %s -D\n"
+	                  "       %s -D [options]\n"
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
@@ -787,11 +789,11 @@ static void new_spent (struct spwd *spent)
 		spent->sp_inact = scale_age (def_inactive);
 		spent->sp_expire = scale_age (user_expire);
 	} else {
-		spent->sp_min = scale_age (-1);
-		spent->sp_max = scale_age (-1);
-		spent->sp_warn = scale_age (-1);
-		spent->sp_inact = scale_age (-1);
-		spent->sp_expire = scale_age (-1);
+		spent->sp_min = -1;
+		spent->sp_max = -1;
+		spent->sp_warn = -1;
+		spent->sp_inact = -1;
+		spent->sp_expire = -1;
 	}
 	spent->sp_flag = SHADOW_SP_FLAG_UNSET;
 }
@@ -820,6 +822,8 @@ static void grp_update (void)
 	/*
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
+	 * FIXME: we currently do not check that all groups of user_groups
+	 *        were completed with the new user.
 	 */
 	for (gr_rewind (), grp = gr_next (); NULL != grp; grp = gr_next ()) {
 
@@ -893,6 +897,10 @@ static void grp_update (void)
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
+		 * FIXME: is it really needed?
+		 *        This would be important only if the group is in
+		 *        user_groups. All these groups should be checked
+		 *        for existence with gr_locate already.
 		 */
 		if (gr_locate (sgrp->sg_name) == NULL) {
 			continue;
@@ -1057,9 +1065,10 @@ static void process_flags (int argc, char **argv)
 				}
 
 				/*
-				 * -e "" is allowed - it's a no-op without /etc/shadow
+				 * -e "" is allowed without /etc/shadow
+				 * (it's a no-op in such case)
 				 */
-				if (('\0' != *optarg) && !is_shadow_pwd) {
+				if ((-1 != user_expire) && !is_shadow_pwd) {
 					fprintf (stderr,
 					         _("%s: shadow passwords required for -e\n"),
 					         Prog);
@@ -1076,7 +1085,7 @@ static void process_flags (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					usage (E_USAGE);
+					exit (E_BAD_ARG);
 				}
 				/*
 				 * -f -1 is allowed
@@ -1265,7 +1274,7 @@ static void process_flags (int argc, char **argv)
 			usage (E_USAGE);
 		}
 
-		if (uflg || oflg || Gflg || dflg || cflg || mflg) {
+		if (uflg || Gflg || dflg || cflg || mflg) {
 			usage (E_USAGE);
 		}
 	} else {
