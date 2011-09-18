@@ -150,7 +150,7 @@ static bool sgr_locked = false;
 
 /* local function prototypes */
 static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
-                         long int date, const char *negativ);
+                         long int date);
 static int get_groups (char *);
 static /*@noreturn@*/void usage (int status);
 static void new_pwent (struct passwd *);
@@ -180,12 +180,12 @@ static void move_mailbox (void);
 #endif
 
 static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
-                         long int date, const char *negativ)
+                         long int date)
 {
 	struct tm *tp;
 
-	if ((negativ != NULL) && (date < 0)) {
-		strncpy (buf, negativ, maxsize);
+	if (date < 0) {
+		strncpy (buf, "never", maxsize);
 	} else {
 		time_t t = (time_t) date;
 		tp = gmtime (&t);
@@ -273,7 +273,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: group '%s' is a NIS group.\n"),
 			         Prog, grp->gr_name);
-			gr_free (grp);
+			gr_free ((struct group *)grp);
 			continue;
 		}
 #endif
@@ -282,7 +282,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: too many groups specified (max %d).\n"),
 			         Prog, ngroups);
-			gr_free (grp);
+			gr_free ((struct group *)grp);
 			break;
 		}
 
@@ -290,7 +290,7 @@ static int get_groups (char *list)
 		 * Add the group name to the user's list of groups.
 		 */
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
-		gr_free (grp);
+		gr_free ((struct group *)grp);
 	} while (NULL != list);
 
 	user_groups[ngroups] = (char *) 0;
@@ -524,9 +524,9 @@ static void new_spent (struct spwd *spent)
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
 		date_to_str (new_exp, sizeof(new_exp),
-		             user_newexpire * DAY, "never");
+		             user_newexpire * DAY);
 		date_to_str (old_exp, sizeof(old_exp),
-		             user_expire * DAY, "never");
+		             user_expire * DAY);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "changing expiration date",
