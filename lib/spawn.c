@@ -1,21 +1,24 @@
 /*
- * Copyright (c) 2011, Jonathan Nieder
+ * Copyright (c) 2011       , Jonathan Nieder
+ * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
+ * 3. The name of the copyright holders or contributors may not be used to
+ *    endorse or promote products derived from this software without
+ *    specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD
- * PROJECT OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
@@ -26,51 +29,54 @@
 
 #include <config.h>
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
 #include "exitcodes.h"
-#include "spawn.h"
-
-extern char **environ;
+#include "prototypes.h"
 
 int run_command (const char *cmd, const char *argv[], const char *envp[],
                  int *status)
 {
 	pid_t pid, wpid;
 
-	if (!envp)
+	if (NULL == envp) {
 		envp = (const char **)environ;
+	}
+
+	(void) fflush (stdout);
+	(void) fflush (stderr);
+
 	pid = fork ();
-	if (pid == 0) {
-		execve (cmd, (char * const *) argv, (char * const *) envp);
-		if (errno == ENOENT)
+	if (0 == pid) {
+		(void) execve (cmd, (char * const *) argv,
+		               (char * const *) envp);
+		if (ENOENT == errno) {
 			exit (E_CMD_NOTFOUND);
-		perror(cmd);
+		}
+		fprintf (stderr, "%s: cannot execute %s: %s\n",
+		         Prog, cmd, strerror (errno));
 		exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
-		int saved_errno = errno;
-		perror ("fork");
-		errno = saved_errno;
+		fprintf (stderr, "%s: cannot execute %s: %s\n",
+		         Prog, cmd, strerror (errno));
 		return -1;
 	}
 
 	do {
 		wpid = waitpid (pid, status, 0);
-	} while ((pid_t)-1 == wpid && errno == EINTR);
+	} while (   ((pid_t)-1 == wpid && errno == EINTR)
+	         || (wpid != pid));
 
 	if ((pid_t)-1 == wpid) {
-		int saved_errno = errno;
-		perror ("waitpid");
-		return -1;
-	} else if (wpid != pid) {
-		(void) fprintf (stderr, "waitpid returned %ld != %ld\n",
-		                (long int) wpid, (long int) pid);
-		errno = ECHILD;
+		fprintf (stderr, "%s: waitpid (status: %d): %s\n",
+		         Prog, *status, strerror (errno));
 		return -1;
 	}
+
 	return 0;
 }
+

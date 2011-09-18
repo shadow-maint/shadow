@@ -72,7 +72,7 @@ extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
-extern /*@observer@*/const char *Basename (char *str);
+extern /*@observer@*/const char *Basename (const char *str);
 
 /* chowndir.c */
 extern int chown_tree (const char *root,
@@ -92,7 +92,7 @@ void do_cleanups (void);
 struct cleanup_info_mod {
 	char *audit_msg;
 	char *action;
-	char *name;
+	/*@observer@*/const char *name;
 };
 void cleanup_report_add_group (void *group_name);
 void cleanup_report_add_group_group (void *group_name);
@@ -337,6 +337,10 @@ extern void spw_free (/*@out@*/ /*@only@*/struct spwd *spent);
 
 /* shell.c */
 extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[]);
+
+/* spawn.c */
+extern int run_command (const char *cmd, const char *argv[],
+                        const char *envp[], int *status);
 
 /* system.c */
 extern int safe_system (const char *command,

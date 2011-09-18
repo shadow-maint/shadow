@@ -1,5 +1,26 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes, libmisc/basename.c (Basename): Input is a
+	constant string.
+	* lib/prototypes.h, lib/spawn.h, lib/spawn.c, src/userdel.c,
+	lib/nscd.c, lib/Makefile.am: Delete spawn.h. Move from spawn.h to
+	prototypes.h.
+	* src/userdel.c: Remove unused variables.
+	* lib/nscd.c: Remove unused header files.
+	* lib/nscd.c: Add the program name to error messages.
+	* lib/nscd.c: Indicate when nscd does not terminate normally (signal).
+	* lib/spawn.c: Updated header.
+	* lib/spawn.c: Flush stdout and stderr to avoid inheriting from
+	ongoing buffers.
+	* lib/spawn.c: Avoid implicit conversion of pointer to boolean.
+	* lib/spawn.c: Replace perror by a complete message.
+	* lib/spawn.c: Continue to wait for the child if another child
+	terminates.
+	* lib/prototypes.h: The name field from cleanup_info_mod is a
+	constant string. (username).
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/cleanup.c: Spawn children should no trigger cleanup
 	actions. Make sure only the parent (initial caller) perform the
 	cleanup actions.

@@ -49,7 +49,6 @@ libshadow_la_SOURCES = \
 	shadowio.h \
 	shadowmem.c \
 	spawn.c \
-	spawn.h \
 	utent.c
 
 if WITH_TCB

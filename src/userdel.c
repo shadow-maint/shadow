@@ -59,7 +59,6 @@
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif				/* SHADOWGRP */
-#include "spawn.h"
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
@@ -630,7 +629,6 @@ static void user_cancel (const char *user)
 {
 	const char *cmd;
 	const char *argv[3];
-	pid_t pid, wpid;
 	int status;
 
 	cmd = getdef_str ("USERDEL_CMD");
