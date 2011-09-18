@@ -177,7 +177,7 @@ char *strchr (), *strrchr (), *strtok ();
  * --Nekral */
 #define SYSLOG(x)							\
 	do {								\
-		char *old_locale = setlocale(LC_ALL, NULL);		\
+		char *old_locale = setlocale (LC_ALL, NULL);		\
 		char *saved_locale = NULL;				\
 		if (NULL != old_locale) {				\
 			saved_locale = strdup (old_locale);		\
