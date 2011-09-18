@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -90,8 +90,6 @@ static long warndays;
 static long inactdays;
 static long expdate;
 
-#define	EPOCH		"1969-12-31"
-
 /* local function prototypes */
 static void usage (int status);
 static void date_to_str (char *buf, size_t maxsize, time_t date);
@@ -142,7 +140,7 @@ static void fail_exit (int code)
  */
 static void usage (int status)
 {
-	fputs (_("Usage: chage [options] [LOGIN]\n"
+	fputs (_("Usage: chage [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
 	         "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
@@ -203,15 +201,19 @@ static int new_fields (void)
 		return 0;
 	}
 
-	date_to_str (buf, sizeof buf, lstchgdate * SCALE);
+	if (-1 == lstchgdate) {
+		strcpy (buf, "-1");
+	} else {
+		date_to_str (buf, sizeof buf, lstchgdate * SCALE);
+	}
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
-	if (strcmp (buf, EPOCH) == 0) {
+	if (strcmp (buf, "-1") == 0) {
 		lstchgdate = -1;
 	} else {
 		lstchgdate = strtoday (buf);
-		if (lstchgdate < -1) {
+		if (lstchgdate <= -1) {
 			return 0;
 		}
 	}
@@ -230,16 +232,20 @@ static int new_fields (void)
 		return 0;
 	}
 
-	date_to_str (buf, sizeof buf, expdate * SCALE);
+	if (-1 == expdate) {
+		strcpy (buf, "-1");
+	} else {
+		date_to_str (buf, sizeof buf, expdate * SCALE);
+	}
 
 	change_field (buf, sizeof buf,
 	              _("Account Expiration Date (YYYY-MM-DD)"));
 
-	if (strcmp (buf, EPOCH) == 0) {
+	if (strcmp (buf, "-1") == 0) {
 		expdate = -1;
 	} else {
 		expdate = strtoday (buf);
-		if (expdate < -1) {
+		if (expdate <= -1) {
 			return 0;
 		}
 	}
@@ -833,7 +839,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: user '%s' does not exist in %s\n"),
 		         Prog, argv[optind], pw_dbname ());
 		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 
 	STRFCPY (user_name, pw->pw_name);
