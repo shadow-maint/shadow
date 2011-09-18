@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2002 - 2006, Tomasz Kłoczko
- * Copyright (c) 2009       , Nicolas François
+ * Copyright (c) 2009 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -124,6 +124,7 @@ int main (int argc, char **argv)
 
 	if (1 != argc) {
 		(void) fputs (_("Usage: pwconv\n"), stderr);
+		fail_exit (E_USAGE);
 	}
 	Prog = Basename (argv[0]);
 
@@ -260,20 +261,16 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	if (pw_locked) {
-		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
-			/* continue */
-		}
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
 	}
 
-	if (spw_locked) {
-		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
-			/* continue */
-		}
+	if (spw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		/* continue */
 	}
 
 	nscd_flush_cache ("passwd");
