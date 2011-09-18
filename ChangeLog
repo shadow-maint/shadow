@@ -1,3 +1,7 @@
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/chage.1.xml: The LOGIN argument is not optional.
+
 2011-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/POTFILES.in: Added lib/spawn.c.
