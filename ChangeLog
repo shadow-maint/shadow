@@ -1,5 +1,11 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/cleanup.c: Spawn children should no trigger cleanup
+	actions. Make sure only the parent (initial caller) perform the
+	cleanup actions.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c (SHA_salt_rounds): It is statically ensured that
 	the format fits in rounds_prefix.
 	* libmisc/loginprompt.c: Likewise.

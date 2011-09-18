@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@
 #define CLEANUP_FUNCTIONS 10
 static cleanup_function cleanup_functions[CLEANUP_FUNCTIONS];
 static void * cleanup_function_args[CLEANUP_FUNCTIONS];
+static pid_t cleanup_pid = 0;
 
 /*
  * - Cleanup functions shall not fail.
@@ -53,6 +54,9 @@ static void * cleanup_function_args[CLEANUP_FUNCTIONS];
 /*
  * do_cleanups - perform the actions stored in the cleanup_functions stack.
  *
+ * Cleanup action are not executed on exit of the processes started by the
+ * parent (first caller of add_cleanup).
+ *
  * It is intended to be used as:
  *     atexit (do_cleanups);
  */
@@ -62,6 +66,10 @@ void do_cleanups (void)
 
 	/* Make sure there were no overflow */
 	assert (NULL == cleanup_functions[CLEANUP_FUNCTIONS-1]);
+
+	if (getpid () != cleanup_pid) {
+		return;
+	}
 
 	i = CLEANUP_FUNCTIONS;
 	do {
@@ -81,6 +89,10 @@ void add_cleanup (cleanup_function pcf, /*@null@*/void *arg)
 	assert (NULL != pcf);
 
 	assert (NULL == cleanup_functions[CLEANUP_FUNCTIONS-2]);
+
+	if (0 == cleanup_pid) {
+		cleanup_pid = getpid ();
+	}
 
 	/* Add the cleanup_function at the end of the stack */
 	for (i=0; NULL != cleanup_functions[i]; i++);
