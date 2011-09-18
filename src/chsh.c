@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -161,10 +161,6 @@ static bool shell_is_listed (const char *sh)
 #ifdef HAVE_GETUSERSHELL
 	setusershell ();
 	while ((cp = getusershell ())) {
-		if (*cp == '#') {
-			continue;
-		}
-
 		if (strcmp (cp, sh) == 0) {
 			found = true;
 			break;

@@ -1,5 +1,11 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chsh.c: No needto remove lines tarting with '#' from
+	/etc/shells. This is already done by getusershell() and these
+	shell would fail the access(X_OK) test.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/generate_mans.mak: Fix the generation of translated man
 	pages. xml2po removed the comment from empty headers and the
 	config was no more inserted.
