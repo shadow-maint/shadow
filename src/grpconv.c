@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2002 - 2006, Tomasz Kłoczko
+ * Copyright (c) 2011       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -91,6 +92,7 @@ int main (int argc, char **argv)
 
 	if (1 != argc) {
 		(void) fputs (_("Usage: grpconv\n"), stderr);
+		fail_exit (2);
 	}
 	Prog = Basename (argv[0]);
 
@@ -209,13 +211,11 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 		/* continue */
 	}
-	sgr_locked = false;
 	if (gr_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
-	gr_locked = false;
 
 	nscd_flush_cache ("group");
 

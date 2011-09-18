@@ -1,5 +1,12 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpconv.c: Fail if not called correctly.
+	* src/grpconv.c: At the end of main, the passwd and shadow files
+	are locked. No need to check before unlocking. No need to set the
+	lock as false neither since there cannot be anymore failures.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chage.c: EPOCH is not needed, it's converted to -1 by
 	strtoday(). But we need to support "-1" specifically.
 	* src/chage.c: Fix usage: LOGIN is mandatory.
