@@ -106,7 +106,7 @@ static size_t SHA_salt_size (void)
  */
 static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds)
 {
-	static char rounds_prefix[18];
+	static char rounds_prefix[18]; /* Max size: rounds=999999999$ */
 	long rounds;
 
 	if (NULL == prefered_rounds) {
@@ -150,13 +150,8 @@ static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds
 		rounds = ROUNDS_MAX;
 	}
 
-	(void) snprintf (rounds_prefix, 18, "rounds=%ld$", rounds);
-
-	/* Sanity checks. That should not be necessary. */
-	rounds_prefix[17] = '\0';
-	if ('$' != rounds_prefix[16]) {
-		rounds_prefix[17] = '$';
-	}
+	(void) snprintf (rounds_prefix, sizeof rounds_prefix,
+	                 "rounds=%ld$", rounds);
 
 	return rounds_prefix;
 }

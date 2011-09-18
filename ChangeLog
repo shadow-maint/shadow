@@ -1,5 +1,10 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c (SHA_salt_rounds): It is statically ensured that
+	the format fits in rounds_prefix.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpconv.c: Fail if not called correctly.
 	* src/grpconv.c: At the end of main, the passwd and shadow files
 	are locked. No need to check before unlocking. No need to set the
@@ -37,7 +42,7 @@
 	* src/su.c: Too much const were added on 2011-08-15. pw in
 	save_caller_context() is allocated and freed.
 	* src/su.c: Added missing #endif indication
-	* src/su.c save_caller_context(): password only needed if
+	* src/su.c (save_caller_context): password only needed if
 	SU_ACCESS and !USE_PAM.
 
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
