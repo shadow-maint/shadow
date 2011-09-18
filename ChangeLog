@@ -1,5 +1,11 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/generate_mans.mak: Fix the generation of translated man
+	pages. xml2po removed the comment from empty headers and the
+	config was no more inserted.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chage.1.xml: The LOGIN argument is not optional.
 	* man/login.defs.d/QUOTAS_ENAB.xml: Document the dependency
 	between /etc/limits and QUOTAS_ENAB.
