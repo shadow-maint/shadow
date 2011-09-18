@@ -1,6 +1,8 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/chage.1.xml: The LOGIN argument is not optional.
+	* man/login.defs.d/QUOTAS_ENAB.xml: Document the dependency
+	between /etc/limits and QUOTAS_ENAB.
 
 2011-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
