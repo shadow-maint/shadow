@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -121,9 +121,6 @@ static void log_gpasswd_failure_gshadow (unused void *arg);
 static void log_gpasswd_success (const char *suffix);
 static void log_gpasswd_success_system (unused void *arg);
 static void log_gpasswd_success_group (unused void *arg);
-#ifdef SHADOWGRP
-static void log_gpasswd_success_gshadow (unused void *arg);
-#endif
 
 /*
  * usage - display usage message
@@ -651,16 +648,6 @@ static void log_gpasswd_success_group (unused void *arg)
 	log_gpasswd_success (buf);
 }
 
-#ifdef SHADOWGRP
-static void log_gpasswd_success_gshadow (unused void *arg)
-{
-	char buf[1024];
-	snprintf (buf, 1023, " in %s", sgr_dbname ());
-	buf[1023] = '\0';
-	log_gpasswd_success (buf);
-}
-#endif				/* SHADOWGRP */
-
 /*
  * close_files - close and unlock the group databases
  *
@@ -690,7 +677,6 @@ static void close_files (void)
 			         Prog, sgr_dbname ());
 			exit (E_NOPERM);
 		}
-		add_cleanup (log_gpasswd_success_gshadow, NULL);
 		del_cleanup (log_gpasswd_failure_gshadow);
 
 		cleanup_unlock_gshadow (NULL);
@@ -700,11 +686,6 @@ static void close_files (void)
 
 	log_gpasswd_success_system (NULL);
 	del_cleanup (log_gpasswd_success_group);
-#ifdef SHADOWGRP
-	if (is_shadowgrp) {
-		del_cleanup (log_gpasswd_success_gshadow);
-	}
-#endif
 }
 
 /*
