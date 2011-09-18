@@ -1,5 +1,13 @@
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Too much const were added on 2011-08-15. pw in
+	save_caller_context() is allocated and freed.
+	* src/su.c: Added missing #endif indication
+	* src/su.c save_caller_context(): password only needed if
+	SU_ACCESS and !USE_PAM.
+
+2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: date_to_str() is always called with negativ set
 	to "never", remove this argument.
 	* src/usermod.c: Added missing cast for gr_free argument.
@@ -81,7 +89,7 @@
 
 	* src/su.c: Add splint annotations.
 	* src/su.c: Set caller_on_console as boolean.
-	* src/su.c: Ignore retunr value from fputs (usage) / puts (prompt).
+	* src/su.c: Ignore return value from fputs (usage) / puts (prompt).
 	* src/su.c: Improved memory management.
 
 2011-08-14  Nicolas François  <nicolas.francois@centraliens.net>

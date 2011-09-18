@@ -654,8 +654,12 @@ static /*@only@*/struct passwd * check_perms (void)
  */
 static void save_caller_context (char **argv)
 {
-	const struct passwd *pw = NULL;
+	struct passwd *pw = NULL;
+#ifndef USE_PAM
+#ifdef SU_ACCESS
 	const char *password = NULL;
+#endif				/* SU_ACCESS */
+#endif				/* !USE_PAM */
 	/*
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
@@ -673,7 +677,7 @@ static void save_caller_context (char **argv)
 	if ((isatty (0) != 0) && (NULL != caller_tty)) {
 #ifndef USE_PAM
 		caller_on_console = console (caller_tty);
-#endif
+#endif				/* !USE_PAM */
 	} else {
 		/*
 		 * Be more paranoid, like su from SimplePAMApps.  --marekm
