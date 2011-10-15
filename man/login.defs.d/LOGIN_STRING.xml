@@ -34,7 +34,7 @@
     <para>
       The string used for prompting a password. The default is to use
       "Password: ", or a translation of that string. If you set this
-      variable, the prompt will no be translated.
+      variable, the prompt will not be translated.
     </para>
     <para>
       If the string contains <replaceable>%s</replaceable>, this will be

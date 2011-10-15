@@ -1,3 +1,7 @@
+2011-10-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/login.defs.d/LOGIN_STRING.xml: Fix typo.
+
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/prototypes, libmisc/basename.c (Basename): Input is a
