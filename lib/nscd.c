@@ -18,7 +18,6 @@
  */
 int nscd_flush_cache (const char *service)
 {
-	pid_t pid;
 	int status, code;
 	const char *cmd = "/usr/sbin/nscd";
 	const char *spawnedArgs[] = {"nscd", "-i", service, NULL};
