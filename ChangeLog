@@ -1,3 +1,8 @@
+2011-10-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newusers.c: Fix typo.
+	* src/useradd.c: Likewise.
+
 2011-10-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/LOGIN_STRING.xml: Fix typo.

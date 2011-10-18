@@ -891,7 +891,7 @@ int main (int argc, char **argv)
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
 			         Prog, line);
-			errors++
+			errors++;
 			continue;
 		}
 

@@ -699,7 +699,7 @@ static void usage (int status)
 	                  "       %s -D [options]\n"
 	                  "\n"
 	                  "Options:\n"),
-	                Prog);
+	                Prog, Prog, Prog);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 	                "                                new account\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), usageout);
