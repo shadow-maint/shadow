@@ -82,7 +82,9 @@ static RETSIGTYPE catch_signals (unused int sig)
 
  /*ARGSUSED*/ int main (int argc, char **argv)
 {
+#ifndef USE_PAM
 	const char *env;
+#endif				/* !USE_PAM */
 	char **envp = environ;
 	TERMIO termio;
 	int err = 0;
@@ -164,7 +166,6 @@ static RETSIGTYPE catch_signals (unused int sig)
 	}
 
 #ifndef USE_PAM
-
 	env = getdef_str ("ENV_TZ");
 	if (NULL != env) {
 		addenv (('/' == *env) ? tz (env) : env, NULL);

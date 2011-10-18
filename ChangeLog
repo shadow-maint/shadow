@@ -5,6 +5,7 @@
 	* lib/nscd.c: Remove unused variable.
 	* lib/prototypes.h, libmisc/cleanup.c, lib/spawn.c, src/chage.c:
 	Add splint annotations.
+	* src/sulogin.c (main): env is only used when USE_PAM is not set.
 
 2011-10-15  Nicolas François  <nicolas.francois@centraliens.net>
 
