@@ -91,7 +91,7 @@ static long inactdays;
 static long expdate;
 
 /* local function prototypes */
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void date_to_str (char *buf, size_t maxsize, time_t date);
 static int new_fields (void);
 static void print_date (time_t date);
@@ -101,12 +101,12 @@ static void check_flags (int argc, int opt_index);
 static void check_perms (void);
 static void open_files (bool readonly);
 static void close_files (void);
-static void fail_exit (int code);
+static /*@noreturn@*/void fail_exit (int code);
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static void fail_exit (int code)
+static /*@noreturn@*/void fail_exit (int code)
 {
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
@@ -138,8 +138,9 @@ static void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
+	(void)
 	fputs (_("Usage: chage [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
@@ -187,14 +188,14 @@ static int new_fields (void)
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	snprintf (buf, sizeof buf, "%ld", mindays);
+	(void) snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
 	if (   (getlong (buf, &mindays) == 0)
 	    || (mindays < -1)) {
 		return 0;
 	}
 
-	snprintf (buf, sizeof buf, "%ld", maxdays);
+	(void) snprintf (buf, sizeof buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
 	if (   (getlong (buf, &maxdays) == 0)
 	    || (maxdays < -1)) {
@@ -218,14 +219,14 @@ static int new_fields (void)
 		}
 	}
 
-	snprintf (buf, sizeof buf, "%ld", warndays);
+	(void) snprintf (buf, sizeof buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
 	if (   (getlong (buf, &warndays) == 0)
 	    || (warndays < -1)) {
 		return 0;
 	}
 
-	snprintf (buf, sizeof buf, "%ld", inactdays);
+	(void) snprintf (buf, sizeof buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
 	if (   (getlong (buf, &inactdays) == 0)
 	    || (inactdays < -1)) {
@@ -261,7 +262,7 @@ static void print_date (time_t date)
 
 	tp = gmtime (&date);
 	if (NULL == tp) {
-		(void) printf ("time_t: %lu\n", date);
+		(void) printf ("time_t: %lu\n", (unsigned long)date);
 	} else {
 		(void) strftime (buf, sizeof buf, "%b %d, %Y", tp);
 		(void) puts (buf);
@@ -420,7 +421,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (E_SUCCESS);
-			break;
+			/*@notreached@*/break;
 		case 'I':
 			Iflg = true;
 			if (   (getlong (optarg, &inactdays) == 0)
@@ -657,7 +658,8 @@ static void close_files (void)
  *
  *	It will not return in case of error
  */
-static void update_age (const struct spwd *sp, const struct passwd *pw)
+static void update_age (/*@null@*/const struct spwd *sp,
+                        /*@notnull@*/const struct passwd *pw)
 {
 	struct spwd spwent;
 
@@ -709,7 +711,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 /*
  * get_defaults - get the value of the fields not set from the command line
  */
-static void get_defaults (const struct spwd *sp)
+static void get_defaults (/*@null@*/const struct spwd *sp)
 {
 	/*
 	 * Set the fields that aren't being set from the command line from

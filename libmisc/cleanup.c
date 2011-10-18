@@ -38,8 +38,11 @@
  * The cleanup_functions stack.
  */
 #define CLEANUP_FUNCTIONS 10
+
+typedef /*@null@*/void * parg_t;
+
 static cleanup_function cleanup_functions[CLEANUP_FUNCTIONS];
-static void * cleanup_function_args[CLEANUP_FUNCTIONS];
+static parg_t cleanup_function_args[CLEANUP_FUNCTIONS];
 static pid_t cleanup_pid = 0;
 
 /*
@@ -83,7 +86,7 @@ void do_cleanups (void)
 /*
  * add_cleanup - Add a cleanup_function to the cleanup_functions stack.
  */
-void add_cleanup (cleanup_function pcf, /*@null@*/void *arg)
+void add_cleanup (/*@notnull@*/cleanup_function pcf, /*@null@*/void *arg)
 {
 	unsigned int i;
 	assert (NULL != pcf);
@@ -103,7 +106,7 @@ void add_cleanup (cleanup_function pcf, /*@null@*/void *arg)
 /*
  * del_cleanup - Remove a cleanup_function from the cleanup_functions stack.
  */
-void del_cleanup (cleanup_function pcf)
+void del_cleanup (/*@notnull@*/cleanup_function pcf)
 {
 	unsigned int i;
 	assert (NULL != pcf);

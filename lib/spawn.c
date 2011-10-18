@@ -38,8 +38,8 @@
 #include "exitcodes.h"
 #include "prototypes.h"
 
-int run_command (const char *cmd, const char *argv[], const char *envp[],
-                 int *status)
+int run_command (const char *cmd, const char *argv[],
+                 /*@null@*/const char *envp[], /*@out@*/int *status)
 {
 	pid_t pid, wpid;
 

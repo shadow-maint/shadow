@@ -83,9 +83,9 @@ extern int chown_tree (const char *root,
 extern void chown_tty (const struct passwd *);
 
 /* cleanup.c */
-typedef void (*cleanup_function) (/*@null@*/void *arg);
-void add_cleanup (cleanup_function pcf, /*@null@*/void *arg);
-void del_cleanup (cleanup_function pcf);
+typedef /*@null@*/void (*cleanup_function) (/*@null@*/void *arg);
+void add_cleanup (/*@notnull@*/cleanup_function pcf, /*@null@*/void *arg);
+void del_cleanup (/*@notnull@*/cleanup_function pcf);
 void do_cleanups (void);
 
 /* cleanup_group.c */
@@ -340,7 +340,7 @@ extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[
 
 /* spawn.c */
 extern int run_command (const char *cmd, const char *argv[],
-                        const char *envp[], int *status);
+                        /*@null@*/const char *envp[], /*@out@*/int *status);
 
 /* system.c */
 extern int safe_system (const char *command,

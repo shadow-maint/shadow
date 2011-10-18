@@ -3,6 +3,8 @@
 	* src/newusers.c: Fix typo.
 	* src/useradd.c: Likewise.
 	* lib/nscd.c: Remove unused variable.
+	* lib/prototypes.h, libmisc/cleanup.c, lib/spawn.c, src/chage.c:
+	Add splint annotations.
 
 2011-10-15  Nicolas François  <nicolas.francois@centraliens.net>
 
