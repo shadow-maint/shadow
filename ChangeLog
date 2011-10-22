@@ -1,5 +1,13 @@
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/ja/Makefile.am, man/fr/Makefile.am, man/ru/Makefile.am,
+	man/sv/Makefile.am, man/pl/Makefile.am, man/zh_CN/Makefile.am,
+	man/it/Makefile.am, man/Makefile.am: Include man_nopam in
+	EXTRA_DIST only when USE_PAM (they are already in man_MANS
+	otherwise).
+
+2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/su.1.xml: Document that su -c does not providea controlling
 	terminal.
 

@@ -49,7 +49,10 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	$(man_nopam) \
 	id.1 \
 	shadow.3 \
 	sulogin.8
+
+if USE_PAM
+EXTRA_DIST += $(man_nopam)
+endif

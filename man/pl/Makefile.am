@@ -49,11 +49,14 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	$(man_nopam) \
 	getspnam.3 \
 	id.1 \
 	shadow.3 \
 	sulogin.8
+
+if USE_PAM
+EXTRA_DIST += $(man_nopam)
+endif
 
 include ../generate_translations.mak
 

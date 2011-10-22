@@ -166,13 +166,16 @@ EXTRA_DIST = \
 	$(man_MANS) \
 	$(man_XMANS) \
 	$(addprefix login.defs.d/,$(login_defs_v)) \
-	$(man_nopam) \
 	id.1 \
 	id.1.xml \
 	sulogin.8 \
 	sulogin.8.xml \
 	generate_mans.mak \
 	generate_translations.mak
+
+if USE_PAM
+EXTRA_DIST += $(man_nopam)
+endif
 
 generate_mans.deps: *.xml
 	echo "# This file is generated" > $@
