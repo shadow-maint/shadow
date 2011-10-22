@@ -137,6 +137,13 @@
 	    Specify a command that will be invoked by the shell using its
 	    <option>-c</option>.
 	  </para>
+	  <para>
+	    The executed command will have no controlling terminal. This
+	    option cannot be used to execute interractive programs which
+	    need a controlling TTY.
+	    <!-- This avoids TTY hijacking when su is used to lower
+	         privileges -->
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
