@@ -51,7 +51,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Add --root option.
 - grpunconv
   * Add --root option.
--login
+- login
   * Fixed limits support (non PAM enabled versions only)
   * Added support for infinite limits and group based limits (non PAM
     enabled versions only)
@@ -61,22 +61,6 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     than 16 groups.
   * Do not log into utmp(x) or wtmp when PAM is enabled. This is done by
     pam_lastlog.
-- su
-  * Document the su exit values.
-  * When su receives a signal, wait for the child to terminate (after
-    sending a SIGTERM), and kill it only if it did not terminate by itself.
-    No delay will be enforced if the child cooperates.
-  * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
-  * Fixed infinite loop when CONSOLE is configured with a colon-separated
-    list of TTYs.
-  * Fixed warning and support for CONSOLE_GROUPS for users member of more
-    than 16 groups.
-  * Do not forward the controlling terminal to commands executed with -c.
-    This prevents tty hijacking which could lead to execution with the
-    caller's privileges.
-  * Close PAM sessions as root. This will be more friendly to PAM modules
-    like pam_mount or pam_systemd.
-  * Added support for PAM modules which change PAM_USER.
 - newgrp, sg
   * Fix parsing of gshadow entries.
 - passwd
@@ -103,6 +87,22 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     is created if the password is changed and passwd requires a
     shadow entry, or if aging features are used (-e or -f).
   * Add --root option.
+- su
+  * Document the su exit values.
+  * When su receives a signal, wait for the child to terminate (after
+    sending a SIGTERM), and kill it only if it did not terminate by itself.
+    No delay will be enforced if the child cooperates.
+  * Default ENV_SUPATH is /sbin:/bin:/usr/sbin:/usr/bin
+  * Fixed infinite loop when CONSOLE is configured with a colon-separated
+    list of TTYs.
+  * Fixed warning and support for CONSOLE_GROUPS for users member of more
+    than 16 groups.
+  * Do not forward the controlling terminal to commands executed with -c.
+    This prevents tty hijacking which could lead to execution with the
+    caller's privileges.
+  * Close PAM sessions as root. This will be more friendly to PAM modules
+    like pam_mount or pam_systemd.
+  * Added support for PAM modules which change PAM_USER.
 
 *** translation
   * Updated Brazilian Portuguese translation.
