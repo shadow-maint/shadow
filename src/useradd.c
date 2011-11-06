@@ -724,6 +724,7 @@ static void usage (int status)
 	                "                                (non-unique) UID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       encrypted password of the new account\n"), usageout);
 	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --shell SHELL             login shell of the new account\n"), usageout);
 	(void) fputs (_("  -u, --uid UID                 user ID of the new account\n"), usageout);
 	(void) fputs (_("  -U, --user-group              create a group with the same name as the user\n"), usageout);
@@ -997,6 +998,7 @@ static void process_flags (int argc, char **argv)
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
 			{"system", no_argument, NULL, 'r'},
+			{"root", required_argument, NULL, 'R'},
 			{"shell", required_argument, NULL, 's'},
 #ifdef WITH_SELINUX
 			{"selinux-user", required_argument, NULL, 'Z'},
@@ -1007,9 +1009,9 @@ static void process_flags (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rs:u:UZ:",
+		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:UZ:",
 #else
-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rs:u:U",
+		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:U",
 #endif
 		                         long_options, NULL)) != -1) {
 			switch (c) {
@@ -1177,6 +1179,8 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'r':
 				rflg = true;
+				break;
+			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
@@ -1869,10 +1873,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1882,7 +1882,12 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
 	OPENLOG ("useradd");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = (char **) xmalloc ((1 + sys_ngroups) * sizeof (char *));

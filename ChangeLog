@@ -4,6 +4,8 @@
 	po/POTFILES.in: Add process_root_flag() to process the --root
 	option and chroot so that the chroot config is used and changes
 	are applied to the chroot.
+	* NEWS, src/useradd.c, man/useradd.8.xml: Add --root option. Open
+	audit after the potential chroot.
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 
