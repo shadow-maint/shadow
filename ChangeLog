@@ -17,7 +17,7 @@
 	of main().
 	* NEWS, src/groupadd.c, man/groupadd.8.xml: Add --root option. Open
 	audit and syslog after the potential chroot.
-	* src/groupmod.c: The index of long options is not used.
+	* src/groupmod.c: The getopt index of long options is not used.
 	* src/groupdel.c: Add process_flags().
 	* src/groupdel.c, man/groupdel.8.xml: Add --help option.
 	* NEWS, src/groupdel.c, man/groupdel.8.xml: Add --root option. Open
@@ -29,6 +29,10 @@
 	Add --help option.
 	* src/pwconv.c, src/pwunconv.c, src/grpconv.c, src/grpunconv.c:
 	Add process_flags() and usage().
+	* NEWS, src/chpasswd.c, man/chpasswd.8.xml, src/chgpasswd.c,
+	man/chgpasswd.8.xml: Add --root option.
+	* src/chpasswd.c, src/chgpasswd.c: The getopt index of long
+	options is not used.
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

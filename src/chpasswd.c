@@ -128,6 +128,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -m, --md5                     encrypt the clear text password using\n"
 	                "                                the MD5 algorithm\n"),
 	              usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifdef USE_SHA_CRYPT
 	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 	                "                                crypt algorithms\n"),
@@ -145,12 +146,12 @@ static /*@noreturn@*/void usage (int status)
  */
 static void process_flags (int argc, char **argv)
 {
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"crypt-method", required_argument, NULL, 'c'},
 		{"encrypted", no_argument, NULL, 'e'},
 		{"md5", no_argument, NULL, 'm'},
+		{"root", required_argument, NULL, 'R'},
 #ifdef USE_SHA_CRYPT
 		{"sha-rounds", required_argument, NULL, 's'},
 #endif				/* USE_SHA_CRYPT */
@@ -160,11 +161,11 @@ static void process_flags (int argc, char **argv)
 
 	while ((c = getopt_long (argc, argv,
 #ifdef USE_SHA_CRYPT
-	                         "c:ehms:",
+	                         "c:ehmR:s:",
 #else				/* !USE_SHA_CRYPT */
-	                         "c:ehm",
+	                         "c:ehmR:",
 #endif				/* !USE_SHA_CRYPT */
-	                         long_options, &option_index)) != -1) {
+	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
 			usage (E_SUCCESS);
@@ -177,6 +178,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'm':
 			md5flg = true;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 #ifdef USE_SHA_CRYPT
 		case 's':
@@ -386,6 +389,8 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
 
 	process_flags (argc, argv);
 
