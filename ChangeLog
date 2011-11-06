@@ -23,6 +23,12 @@
 	* NEWS, src/groupdel.c, man/groupdel.8.xml: Add --root option. Open
 	audit and syslog after the potential chroot.
 	* src/groupdel.c: Check atexit failures.
+	* NEWS, src/pwconv.c, src/pwunconv.c, src/grpconv.c,
+	src/grpunconv.c, man/pwconv.8.xml: Add --root option.
+	* src/pwconv.c, src/pwunconv.c, src/grpconv.c, src/grpunconv.c:
+	Add --help option.
+	* src/pwconv.c, src/pwunconv.c, src/grpconv.c, src/grpunconv.c:
+	Add process_flags() and usage().
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

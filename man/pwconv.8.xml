@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 1996 - 1998, Marek Michałkiewicz
    Copyright (c) 2000 - 2006, Tomasz Kłoczko
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -58,15 +58,27 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>pwconv</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>pwunconv</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>grpconv</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>grpunconv</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
@@ -150,6 +162,36 @@
       password aging information is lost by <command>pwunconv</command>. It
       will convert what it can.
     </para>
+  </refsect1>
+
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>pwconv</command>,
+      <command>pwunconv</command>, <command>grpconv</command>, and
+      <command>grpunconv</command> commands are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-R</option>, <option>--root</option>
+	  <replaceable>CHROOT_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>CHROOT_DIR</replaceable> directory.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='bugs'>

@@ -43,6 +43,10 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Add --root option.
 - grpck
   * NIS entries were dropped by -s (sort).
+- grpconv
+  * Add --root option.
+- grpunconv
+  * Add --root option.
 -login
   * Fixed limits support (non PAM enabled versions only)
   * Added support for infinite limits and group based limits (non PAM
@@ -73,6 +77,10 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Fix parsing of gshadow entries.
 - pwpck
   * NIS entries were dropped by -s (sort).
+- pwconv
+  * Add --root option.
+- pwunconv
+  * Add --root option.
 - useradd
   * If the skeleton directory contained hardlinked files, copies of the
     hardlink were removed from the skeleton directory.

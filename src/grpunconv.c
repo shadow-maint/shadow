@@ -46,8 +46,11 @@
 #include <time.h>
 #include <unistd.h>
 #include <grp.h>
+#include <getopt.h>
 #include "nscd.h"
 #include "prototypes.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
@@ -61,6 +64,8 @@ static bool sgr_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
+static void usage (int status);
+static void process_flags (int argc, char **argv);
 
 static void fail_exit (int status)
 {
@@ -83,23 +88,72 @@ static void fail_exit (int status)
 	exit (status);
 }
 
+static void usage (int status)
+{
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
+}
+
+/*
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
+{
+	/*
+	 * Parse the command line options.
+	 */
+	int c;
+	static struct option long_options[] = {
+		{"help", no_argument, NULL, 'h'},
+		{"root", required_argument, NULL, 'R'},
+		{NULL, 0, NULL, '\0'}
+	};
+
+	while ((c = getopt_long (argc, argv, "hR:",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
+		case 'h':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
+		case 'R': /* no-op, handled in process_root_flag () */
+			break;
+		default:
+			usage (E_USAGE);
+		}
+	}
+
+	if (optind != argc) {
+		usage (E_USAGE);
+	}
+}
+
 int main (int argc, char **argv)
 {
 	const struct group *gr;
 	struct group grent;
 	const struct sgrp *sg;
 
-	if (1 != argc) {
-		(void) fputs (_("Usage: grpunconv\n"), stderr);
-		exit (1);
-	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
 	OPENLOG ("grpunconv");
+
+	process_flags (argc, argv);
 
 	if (sgr_file_present () == 0) {
 		exit (0);	/* no /etc/gshadow, nothing to do */

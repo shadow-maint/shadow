@@ -65,6 +65,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <getopt.h>
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
@@ -93,6 +94,8 @@ static bool pw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
+static void usage (int status);
+static void process_flags (int argc, char **argv);
 
 static void fail_exit (int status)
 {
@@ -115,6 +118,55 @@ static void fail_exit (int status)
 	exit (status);
 }
 
+static void usage (int status)
+{
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
+}
+
+/*
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
+{
+	/*
+	 * Parse the command line options.
+	 */
+	int c;
+	static struct option long_options[] = {
+		{"help", no_argument, NULL, 'h'},
+		{"root", required_argument, NULL, 'R'},
+		{NULL, 0, NULL, '\0'}
+	};
+
+	while ((c = getopt_long (argc, argv, "hR:",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
+		case 'h':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
+		case 'R': /* no-op, handled in process_root_flag () */
+			break;
+		default:
+			usage (E_USAGE);
+		}
+	}
+
+	if (optind != argc) {
+		usage (E_USAGE);
+	}
+}
+
 int main (int argc, char **argv)
 {
 	const struct passwd *pw;
@@ -122,22 +174,22 @@ int main (int argc, char **argv)
 	const struct spwd *sp;
 	struct spwd spent;
 
-	if (1 != argc) {
-		(void) fputs (_("Usage: pwconv\n"), stderr);
-		fail_exit (E_USAGE);
-	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
 	OPENLOG ("pwconv");
+
+	process_flags (argc, argv);
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		fprintf(stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		fail_exit(E_FAILURE);
+		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		exit (E_FAILURE);
 	}
 #endif				/* WITH_TCB */
 
