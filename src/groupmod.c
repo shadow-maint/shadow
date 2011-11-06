@@ -127,6 +127,7 @@ static void usage (int status)
 	(void) fputs (_("  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       change the password to this (encrypted)\n"
 	                "                                PASSWORD\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -367,7 +368,6 @@ static void check_new_name (void)
  */
 static void process_flags (int argc, char **argv)
 {
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"gid", required_argument, NULL, 'g'},
@@ -375,11 +375,11 @@ static void process_flags (int argc, char **argv)
 		{"new-name", required_argument, NULL, 'n'},
 		{"non-unique", no_argument, NULL, 'o'},
 		{"password", required_argument, NULL, 'p'},
+		{"root", required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};
-	while ((c =
-		getopt_long (argc, argv, "g:hn:op:",
-		             long_options, &option_index)) != -1) {
+	while ((c = getopt_long (argc, argv, "g:hn:op:R:",
+		                 long_options, NULL)) != -1) {
 		switch (c) {
 		case 'g':
 			gflg = true;
@@ -404,6 +404,8 @@ static void process_flags (int argc, char **argv)
 		case 'p':
 			group_passwd = optarg;
 			pflg = true;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		default:
 			usage (E_USAGE);
@@ -734,10 +736,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -747,6 +745,13 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
+	OPENLOG ("groupmod");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	if (atexit (do_cleanups) != 0) {
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
@@ -755,8 +760,6 @@ int main (int argc, char **argv)
 	}
 
 	process_flags (argc, argv);
-
-	OPENLOG ("groupmod");
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
