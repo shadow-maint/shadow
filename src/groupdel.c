@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,6 +45,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
 #include <sys/types.h>
+#include <getopt.h>
 #include "defines.h"
 #include "groupio.h"
 #include "nscd.h"
@@ -75,19 +76,28 @@ static bool is_shadow_grp;
 #define E_GRP_UPDATE	10	/* can't update group file */
 
 /* local function prototypes */
-static void usage (void);
+static /*@noreturn@*/void usage (int status);
 static void grp_update (void);
 static void close_files (void);
 static void open_files (void);
-static void group_busy (gid_t);
+static void group_busy (gid_t gid);
+static void process_flags (int argc, char **argv);
 
 /*
  * usage - display usage message and exit
  */
-static void usage (void)
+static /*@noreturn@*/void usage (int status)
 {
-	fputs (_("Usage: groupdel group\n"), stderr);
-	exit (E_USAGE);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] GROUP\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -295,6 +305,42 @@ static void group_busy (gid_t gid)
 }
 
 /*
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
+{
+	/*
+	 * Parse the command line options.
+	 */
+	int c;
+	static struct option long_options[] = {
+		{"help", no_argument, NULL, 'h'},
+		{"root", required_argument, NULL, 'R'},
+		{NULL, 0, NULL, '\0'}
+	};
+
+	while ((c = getopt_long (argc, argv, "hR:",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
+		case 'h':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
+		case 'R': /* no-op, handled in process_root_flag () */
+			break;
+		default:
+			usage (E_USAGE);
+		}
+	}
+
+	if (optind != argc - 1) {
+		usage (E_USAGE);
+	}
+	group_name = argv[optind];
+}
+
+/*
  * main - groupdel command
  *
  *	The syntax of the groupdel command is
@@ -313,28 +359,30 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-	atexit (do_cleanups);
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	if (argc != 2) {
-		usage ();
-	}
-
-	group_name = argv[1];
+	process_root_flag ("-R", argc, argv);
 
 	OPENLOG ("groupdel");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
+	if (atexit (do_cleanups) != 0) {
+		fprintf (stderr,
+		         _("%s: Cannot setup cleanup service.\n"),
+		         Prog);
+		exit (1);
+	}
+
+	process_flags (argc, argv);
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
