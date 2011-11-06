@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1992 - 1993, Julianne Frances Haugh
-   Copyright (c) 2007 - 2009, Nicolas François
+   Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -49,16 +49,8 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>grpck</command>    <arg choice='opt'>-r </arg>
-      <arg choice='opt'>
-	<arg choice='plain'><replaceable>group</replaceable></arg>
-	<arg choice='opt' condition="gshadow">
-	  <arg choice='plain'><replaceable>shadow</replaceable></arg>
-	</arg>
-      </arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>grpck</command>    <arg choice='opt'>-s </arg>
+      <command>grpck</command>
+      <arg choice='opt'>options</arg>
       <arg choice='opt'>
 	<arg choice='plain'><replaceable>group</replaceable></arg>
 	<arg choice='opt' condition="gshadow">
@@ -135,11 +127,21 @@
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
+      The <option>-r</option> and <option>-s</option> options cannot be
+      combined.
+    </para>
+    <para>
       The options which apply to the <command>grpck</command> command are:
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-	<term><option>-r</option></term>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-r</option>, <option>--read-only</option></term>
 	<listitem>
 	  <para>
 	    Execute the <command>grpck</command> command in read-only mode.
@@ -149,7 +151,7 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-s</option></term>
+	<term><option>-s</option>, <option>--sort</option></term>
 	<listitem>
 	  <para>
 	    Sort entries in <filename>/etc/group</filename>

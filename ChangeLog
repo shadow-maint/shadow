@@ -1,3 +1,10 @@
+2011-10-31  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/pwck.c, man/pwck.8.xml: Add support for long options.
+	* src/pwck.c, man/pwck.8.xml: Add -h/--help option
+	* src/grpck.c, man/grpck.8.xml: Add support for long options.
+	* src/grpck.c, man/grpck.8.xml: Add -h/--help option
+
 2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/expiry.c, man/expiry.1.xml: Add support for long options.

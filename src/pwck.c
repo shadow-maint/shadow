@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <getopt.h>
 #include "chkname.h"
 #include "commonio.h"
 #include "defines.h"
@@ -56,6 +57,7 @@
  */
 /*@-exitarg@*/
 #define	E_OKAY		0
+#define	E_SUCCESS	0
 #define	E_USAGE		1
 #define	E_BADENTRY	2
 #define	E_CANTOPEN	3
@@ -86,7 +88,7 @@ static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
 static void fail_exit (int code);
-static void usage (void);
+static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (bool changed);
@@ -127,20 +129,37 @@ static void fail_exit (int code)
 /*
  * usage - print syntax message and exit
  */
-static void usage (void)
+static /*@noreturn@*/void usage (int status)
 {
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {
-		fprintf (stderr, _("Usage: %s [-q] [-r] [passwd]\n"),
-		         Prog);
+		(void) fprintf (usageout,
+		                _("Usage: %s [options] [passwd]\n"
+		                  "\n"
+		                  "Options:\n"),
+		                Prog);
 	} else
 #endif				/* WITH_TCB */
 	{
-		fprintf (stderr,
-		         _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
-		         Prog);
+		(void) fprintf (usageout,
+		                _("Usage: %s [options] [passwd [shadow]]\n"
+		                  "\n"
+		                  "Options:\n"),
+		                Prog);
 	}
-	exit (E_USAGE);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
+	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
+	                "                                but do not change files\n"), usageout);
+#ifdef WITH_TCB
+	if (!getdef_bool ("USE_TCB")) {
+#endif				/* !WITH_TCB */
+	{
+		(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
+	}
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -150,13 +169,24 @@ static void usage (void)
  */
 static void process_flags (int argc, char **argv)
 {
-	int arg;
+	int c;
+	static struct option long_options[] = {
+		{"help",      no_argument, NULL, 'h'},
+		{"quiet",     no_argument, NULL, 'q'},
+		{"read-only", no_argument, NULL, 'r'},
+		{"sort",      no_argument, NULL, 's'},
+		{NULL, 0, NULL, '\0'}
+	};
 
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((arg = getopt (argc, argv, "eqrs")) != EOF) {
-		switch (arg) {
+	while ((c = getopt_long (argc, argv, "ehqrs",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
+		case 'h':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
 		case 'e':	/* added for Debian shadow-961025-2 compatibility */
 		case 'q':
 			quiet = true;
@@ -168,7 +198,7 @@ static void process_flags (int argc, char **argv)
 			sort_mode = true;
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 
@@ -181,7 +211,7 @@ static void process_flags (int argc, char **argv)
 	 * Make certain we have the right number of arguments
 	 */
 	if ((argc < optind) || (argc > (optind + 2))) {
-		usage ();
+		usage (E_USAGE);
 	}
 
 	/*
@@ -198,7 +228,7 @@ static void process_flags (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: no alternative shadow file allowed when USE_TCB is enabled.\n"),
 			         Prog);
-			usage ();
+			usage (E_USAGE);
 		}
 #endif				/* WITH_TCB */
 		spw_setdbname (argv[optind + 1]);
