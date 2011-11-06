@@ -2,7 +2,7 @@
  * Copyright (c) 2000       , International Business Machines
  *                            George Kraft IV, gk4@us.ibm.com, 03/23/2000
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -88,7 +88,7 @@ static void remove_user (const char *user,
                          const struct group *grp);
 static void purge_members (const struct group *grp);
 static void display_members (const char *const *members);
-static void usage (int status);
+static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
 static void fail_exit (int code);
@@ -361,7 +361,7 @@ static void display_members (const char *const *members)
 	}
 }
 
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	FILE *usageout = (EXIT_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -371,6 +371,7 @@ static void usage (int status)
 	                Prog);
 	(void) fputs (_("  -g, --group groupname         change groupname instead of the user's group\n"
 	                "                                (root only)\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("\n"), usageout);
 	(void) fputs (_("Actions:\n"), usageout);
 	(void) fputs (_("  -a, --add username            add username to the members of the group\n"), usageout);
@@ -386,8 +387,7 @@ static void usage (int status)
  */
 static void process_flags (int argc, char **argv)
 {
-	int arg;
-	int option_index = 0;
+	int c;
 	static struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
 		{"delete", required_argument, NULL, 'd'},
@@ -395,12 +395,13 @@ static void process_flags (int argc, char **argv)
 		{"help", no_argument, NULL, 'h'},
 		{"list", no_argument, NULL, 'l'},
 		{"purge", no_argument, NULL, 'p'},
+		{"root", required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((arg = getopt_long (argc, argv, "a:d:g:hlp", long_options,
-	                           &option_index)) != EOF) {
-		switch (arg) {
+	while ((c = getopt_long (argc, argv, "a:d:g:hlpR:",
+	                         long_options, NULL)) != EOF) {
+		switch (c) {
 		case 'a':
 			adduser = xstrdup (optarg);
 			++exclusive;
@@ -414,7 +415,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'h':
 			usage (EXIT_SUCCESS);
-			break;
+			/*@notreached@*/break;
 		case 'l':
 			list = true;
 			++exclusive;
@@ -422,6 +423,8 @@ static void process_flags (int argc, char **argv)
 		case 'p':
 			purge = true;
 			++exclusive;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		default:
 			usage (EXIT_USAGE);
@@ -590,11 +593,13 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	OPENLOG ("groupmems");
-
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
+
+	OPENLOG ("groupmems");
 
 #ifdef SHADOWGRP
 	is_shadowgrp = sgr_file_present ();
