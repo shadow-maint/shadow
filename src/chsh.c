@@ -198,7 +198,7 @@ static bool shell_is_listed (const char *sh)
 }
 
 /*
- *  * process_flags - parse the command line options
+ * process_flags - parse the command line options
  *
  *	It will not return if an error is encountered.
  */
