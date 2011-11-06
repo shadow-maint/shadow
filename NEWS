@@ -35,6 +35,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
 - faillog
   * The -l, -m, -r, -t options only act on the existing users, unless -a is
     specified.
+- gpasswd
+  * Add --root option.
 - groupadd
   * Add --root option.
 - groupdel

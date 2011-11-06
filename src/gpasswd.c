@@ -136,6 +136,7 @@ static void usage (int status)
 	(void) fputs (_("  -a, --add USER                add USER to GROUP\n"), usageout);
 	(void) fputs (_("  -d, --delete USER             remove USER from GROUP\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -Q, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -r, --remove-password         remove the GROUP's password\n"), usageout);
 	(void) fputs (_("  -R, --restrict                restrict access to GROUP to its members\n"), usageout);
 	(void) fputs (_("  -M, --members USER,...        set the list of members of GROUP\n"), usageout);
@@ -226,8 +227,7 @@ static void failure (void)
  */
 static void process_flags (int argc, char **argv)
 {
-	int flag;
-	int option_index = 0;
+	int c;
 	static struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
 		{"delete", required_argument, NULL, 'd'},
@@ -236,11 +236,13 @@ static void process_flags (int argc, char **argv)
 		{"restrict", no_argument, NULL, 'R'},
 		{"administrators", required_argument, NULL, 'A'},
 		{"members", required_argument, NULL, 'M'},
+		{"root", required_argument, NULL, 'Q'},
 		{NULL, 0, NULL, '\0'}
 		};
 
-	while ((flag = getopt_long (argc, argv, "a:A:d:ghM:rR", long_options, &option_index)) != -1) {
-		switch (flag) {
+	while ((c = getopt_long (argc, argv, "a:A:d:ghM:Q:rR",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
 		case 'a':	/* add a user */
 			aflg = true;
 			user = optarg;
@@ -282,6 +284,8 @@ static void process_flags (int argc, char **argv)
 				exit (E_BAD_ARG);
 			}
 			Mflg = true;
+			break;
+		case 'Q':	/* no-op, handled in process_root_flag () */
 			break;
 		case 'r':	/* remove group password */
 			rflg = true;
@@ -978,6 +982,8 @@ int main (int argc, char **argv)
 	OPENLOG ("gpasswd");
 	setbuf (stdout, NULL);
 	setbuf (stderr, NULL);
+
+	process_root_flag ("-Q", argc, argv);
 
 #ifdef SHADOWGRP
 	is_shadowgrp = sgr_file_present ();
