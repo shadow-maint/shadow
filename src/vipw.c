@@ -5,7 +5,7 @@
   Copyright (c) 1997       , Guy Maor <maor@ece.utexas.edu>
   Copyright (c) 1999 - 2000, Marek Michałkiewicz
   Copyright (c) 2002 - 2006, Tomasz Kłoczko
-  Copyright (c) 2007 - 2010, Nicolas François
+  Copyright (c) 2007 - 2011, Nicolas François
   All rights reserved.
 
   This program is free software; you can redistribute it and/or modify
@@ -93,6 +93,7 @@ static void usage (int status)
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -p, --passwd                  edit passwd database\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --shadow                  edit shadow or gshadow database\n"), usageout);
 #ifdef WITH_TCB
 	(void) fputs (_("  -u, --user                    which user's tcb shadow file to edit\n"), usageout);
@@ -415,11 +416,14 @@ int main (int argc, char **argv)
 	char *a;
 	bool do_vipw;
 
+	Prog = Basename (argv[0]);
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	Prog = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
+	process_root_flag ("-R", argc, argv);
+
 	do_vipw = (strcmp (Prog, "vigr") != 0);
 
 	OPENLOG (do_vipw ? "vipw" : "vigr");
@@ -434,6 +438,7 @@ int main (int argc, char **argv)
 			{"help", no_argument, NULL, 'h'},
 			{"passwd", no_argument, NULL, 'p'},
 			{"quiet", no_argument, NULL, 'q'},
+			{"root", required_argument, NULL, 'R'},
 			{"shadow", no_argument, NULL, 's'},
 #ifdef WITH_TCB
 			{"user", required_argument, NULL, 'u'},
@@ -442,9 +447,9 @@ int main (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_TCB
-		                         "ghpqsu:",
+		                         "ghpqR:su:",
 #else				/* !WITH_TCB */
-		                         "ghpqs",
+		                         "ghpqR:s",
 #endif				/* !WITH_TCB */
 		                         long_options, NULL)) != -1) {
 			switch (c) {
@@ -459,6 +464,8 @@ int main (int argc, char **argv)
 				break;
 			case 'q':
 				quiet = true;
+				break;
+			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 's':
 				editshadow = true;

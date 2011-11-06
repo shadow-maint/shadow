@@ -1,5 +1,9 @@
 2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/vipw.c, man/vipw.8.xml: Add --root option.
+
+2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/faillog.c, man/faillog.8.xml: Add --root option.
 	* NEWS, src/lastlog.c, man/lastlog.8.xml: Likewise.
 	* src/faillog.c: Add Prog variable, and prefix error messages with
