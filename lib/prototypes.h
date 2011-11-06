@@ -291,6 +291,9 @@ extern int remove_tree (const char *root, bool remove_root);
 extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
                       char *term, size_t termlen);
 
+/* root_flag.c */
+extern void process_root_flag (const char* short_opt, int argc, char **argv);
+
 /* salt.c */
 extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
 

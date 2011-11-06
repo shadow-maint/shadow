@@ -1,3 +1,10 @@
+2011-10-29  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h, libmisc/Makefile.am, libmisc/root_flag.c,
+	po/POTFILES.in: Add process_root_flag() to process the --root
+	option and chroot so that the chroot config is used and changes
+	are applied to the chroot.
+
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/ja/Makefile.am, man/fr/Makefile.am, man/ru/Makefile.am,

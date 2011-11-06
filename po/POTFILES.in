@@ -62,6 +62,7 @@ libmisc/pwdcheck.c
 libmisc/pwd_init.c
 libmisc/remove_tree.c
 libmisc/rlogin.c
+libmisc/root_flag.c
 libmisc/salt.c
 libmisc/setugid.c
 libmisc/setupenv.c

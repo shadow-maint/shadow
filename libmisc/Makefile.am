@@ -45,6 +45,7 @@ libmisc_a_SOURCES = \
 	pwd_init.c \
 	remove_tree.c \
 	rlogin.c \
+	root_flag.c \
 	salt.c \
 	setugid.c \
 	setupenv.c \
