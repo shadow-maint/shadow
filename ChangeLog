@@ -1,3 +1,8 @@
+2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/faillog.c, src/chage.c, src/newusers.c, src/su.c: The getopt
+	index of long options is not used.
+
 2011-10-29  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/prototypes.h, libmisc/Makefile.am, libmisc/root_flag.c,

@@ -567,7 +567,6 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	{
-		int option_index = 0;
 		int c;
 		static struct option long_options[] = {
 			{"all", no_argument, NULL, 'a'},
@@ -580,7 +579,7 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv, "ahl:m:rt:u:",
-		                         long_options, &option_index)) != -1) {
+		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;

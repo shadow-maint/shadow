@@ -735,7 +735,6 @@ static void save_caller_context (char **argv)
  */
 static void process_flags (int argc, char **argv)
 {
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"command", required_argument, NULL, 'c'},
@@ -746,8 +745,8 @@ static void process_flags (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "c:hlmps:", long_options,
-	                         &option_index)) != -1) {
+	while ((c = getopt_long (argc, argv, "c:hlmps:",
+	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'c':
 			command = optarg;

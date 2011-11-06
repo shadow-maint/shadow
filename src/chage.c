@@ -381,7 +381,6 @@ static void process_flags (int argc, char **argv)
 	/*
 	 * Parse the command line options.
 	 */
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"lastday", required_argument, NULL, 'd'},
@@ -395,9 +394,8 @@ static void process_flags (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c =
-		getopt_long (argc, argv, "d:E:hI:lm:M:W:", long_options,
-			     &option_index)) != -1) {
+	while ((c = getopt_long (argc, argv, "d:E:hI:lm:M:W:",
+	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'd':
 			dflg = true;

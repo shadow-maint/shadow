@@ -523,7 +523,6 @@ static int add_passwd (struct passwd *pwd, const char *password)
  */
 static void process_flags (int argc, char **argv)
 {
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 #ifndef USE_PAM
@@ -547,7 +546,7 @@ static void process_flags (int argc, char **argv)
 #else				/* USE_PAM */
 	                         "hr",
 #endif
-	                     long_options, &option_index)) != -1) {
+	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
 			usage (EXIT_SUCCESS);
