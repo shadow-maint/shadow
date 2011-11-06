@@ -10,6 +10,11 @@
 	audit and syslog after the potential chroot. userdel's usage split
 	in smaller messages.
 	* NEWS, src/usermod.c, man/usermod.8.xml: Likewise
+	* NEWS, src/groupadd.c, man/groupadd.8.xml: Add --root option. Open
+	audit after the potential chroot.
+	* src/groupadd.c: Check atexit failures.
+	* src/groupadd.c: Return E_SUCCESS instead of exit'ing at the end
+	of main().
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

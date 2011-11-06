@@ -122,6 +122,7 @@ static void usage (int status)
 	                "                                (non-unique) GID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
 	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -375,7 +376,6 @@ static void process_flags (int argc, char **argv)
 	 * Parse the command line options.
 	 */
 	char *cp;
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"force", no_argument, NULL, 'f'},
@@ -385,12 +385,12 @@ static void process_flags (int argc, char **argv)
 		{"non-unique", no_argument, NULL, 'o'},
 		{"password", required_argument, NULL, 'p'},
 		{"system", no_argument, NULL, 'r'},
+		{"root", required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c =
-		getopt_long (argc, argv, "fg:hK:op:r", long_options,
-		             &option_index)) != -1) {
+	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:",
+		                 long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
 			/*
@@ -443,6 +443,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'r':
 			rflg = true;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		default:
 			usage (E_USAGE);
@@ -563,11 +565,6 @@ static void check_perms (void)
  */
 int main (int argc, char **argv)
 {
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-	atexit (do_cleanups);
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -577,7 +574,19 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
 	OPENLOG ("groupadd");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
+	if (atexit (do_cleanups) != 0) {
+		fprintf (stderr,
+		         _("%s: Cannot setup cleanup service.\n"),
+		         Prog);
+		exit (1);
+	}
 
 	/*
 	 * Parse the command line options.
@@ -607,7 +616,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("group");
 
-	exit (E_SUCCESS);
-	/*@notreached@*/
+	return E_SUCCESS;
 }
 
