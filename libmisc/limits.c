@@ -214,17 +214,17 @@ static int check_logins (const char *name, const char *maxlogins)
  * [Cc]: c = RLIMIT_CORE	max core file size (KB)
  * [Dd]: d = RLIMIT_DATA	max data size (KB)
  * [Ff]: f = RLIMIT_FSIZE	max file size (KB)
+ * [Ii]: i = RLIMIT_NICE    max nice value (0..39 translates to 20..-19)
+ * [Kk]: k = file creation masK (umask)
+ * [Ll]: l = max number of logins for this user
  * [Mm]: m = RLIMIT_MEMLOCK	max locked-in-memory address space (KB)
  * [Nn]: n = RLIMIT_NOFILE	max number of open files
+ * [Oo]: o = RLIMIT_RTPRIO  max real time priority (linux/sched.h 0..MAX_RT_PRIO)
+ * [Pp]: p = process priority -20..20 (negative = high, positive = low)
  * [Rr]: r = RLIMIT_RSS		max resident set size (KB)
  * [Ss]: s = RLIMIT_STACK	max stack size (KB)
  * [Tt]: t = RLIMIT_CPU		max CPU time (MIN)
  * [Uu]: u = RLIMIT_NPROC	max number of processes
- * [Kk]: k = file creation masK (umask)
- * [Ll]: l = max number of logins for this user
- * [Pp]: p = process priority -20..20 (negative = high, positive = low)
- * [Ii]: i = RLIMIT_NICE    max nice value (0..39 translates to 20..-19)
- * [Oo]: o = RLIMIT_RTPRIO  max real time priority (linux/sched.h 0..MAX_RT_PRIO)
  *
  * NOTE: Remember to extend the "no-limits" string below when adding a new
  * limit...
@@ -258,9 +258,9 @@ static int do_user_limits (const char *buf, const char *name)
 	if (strcmp (pp, "-") == 0) {
 		/* Remember to extend this, too, when adding new limits!
 		 * Oh... but "unlimited" does not make sense for umask,
-		 * or does it?
+		 * or does it? (K-)
 		 */
-		pp = "A- C- D- F- M- N- R- S- T- P- I- O-";
+		pp = "A- C- D- F- I- L- M- N- O- P- R- S- T- U-";
 	}
 
 	while ('\0' != *pp) {
@@ -272,11 +272,11 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_AS, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_CPU
-		case 't':
-		case 'T':
-			/* RLIMIT_CPU - max CPU time (MIN) */
-			retval |= setrlimit_value (RLIMIT_CPU, pp, 60);
+#ifdef RLIMIT_CORE
+		case 'c':
+		case 'C':
+			/* RLIMIT_CORE - max core file size (KB) */
+			retval |= setrlimit_value (RLIMIT_CORE, pp, 1024);
 			break;
 #endif
 #ifdef RLIMIT_DATA
@@ -293,20 +293,22 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_FSIZE, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_NPROC
-		case 'u':
-		case 'U':
-			/* RLIMIT_NPROC - max number of processes */
-			retval |= setrlimit_value (RLIMIT_NPROC, pp, 1);
+#ifdef RLIMIT_NICE
+		case 'i':
+		case 'I':
+			/* RLIMIT_NICE - max scheduling priority (0..39) */
+			retval |= setrlimit_value (RLIMIT_NICE, pp, 1);
 			break;
 #endif
-#ifdef RLIMIT_CORE
-		case 'c':
-		case 'C':
-			/* RLIMIT_CORE - max core file size (KB) */
-			retval |= setrlimit_value (RLIMIT_CORE, pp, 1024);
+		case 'k':
+		case 'K':
+			retval |= set_umask (pp);
 			break;
-#endif
+		case 'l':
+		case 'L':
+			/* LIMIT the number of concurrent logins */
+			retval |= check_logins (name, pp);
+			break;
 #ifdef RLIMIT_MEMLOCK
 		case 'm':
 		case 'M':
@@ -321,6 +323,17 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_NOFILE, pp, 1);
 			break;
 #endif
+#ifdef RLIMIT_RTPRIO
+		case 'o':
+		case 'O':
+			/* RLIMIT_RTPRIO - max real time priority (0..MAX_RT_PRIO) */
+			retval |= setrlimit_value (RLIMIT_RTPRIO, pp, 1);
+			break;
+#endif
+		case 'p':
+		case 'P':
+			retval |= set_prio (pp);
+			break;
 #ifdef RLIMIT_RSS
 		case 'r':
 		case 'R':
@@ -335,33 +348,20 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_STACK, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_NICE
-		case 'i':
-		case 'I':
-			/* RLIMIT_NICE - max scheduling priority (0..39) */
-			retval |= setrlimit_value (RLIMIT_NICE, pp, 1);
+#ifdef RLIMIT_CPU
+		case 't':
+		case 'T':
+			/* RLIMIT_CPU - max CPU time (MIN) */
+			retval |= setrlimit_value (RLIMIT_CPU, pp, 60);
 			break;
 #endif
-#ifdef RLIMIT_RTPRIO
-		case 'o':
-		case 'O':
-			/* RLIMIT_RTPRIO - max real time priority (0..MAX_RT_PRIO) */
-			retval |= setrlimit_value (RLIMIT_RTPRIO, pp, 1);
+#ifdef RLIMIT_NPROC
+		case 'u':
+		case 'U':
+			/* RLIMIT_NPROC - max number of processes */
+			retval |= setrlimit_value (RLIMIT_NPROC, pp, 1);
 			break;
 #endif
-		case 'k':
-		case 'K':
-			retval |= set_umask (pp);
-			break;
-		case 'l':
-		case 'L':
-			/* LIMIT the number of concurrent logins */
-			retval |= check_logins (name, pp);
-			break;
-		case 'p':
-		case 'P':
-			retval |= set_prio (pp);
-			break;
 		default:
 			/* Only report invalid strings once */
 			/* Note: A string can be invalid just because a
@@ -473,7 +473,7 @@ static int setup_user_limits (const char *uname)
 		 * the last encountered entry for a matching group rules.
 		 * If there is no matching group entry, the default limits rule.
 		 */
-		if (sscanf (buf, "%s%[ACDFMNRSTULPIOacdfmnrstulpio0-9 \t-]",
+		if (sscanf (buf, "%s%[ACDFIKLMNOPRSTUacdfiklmnoprstu0-9 \t-]",
 		            name, tempbuf) == 2) {
 			if (strcmp (name, uname) == 0) {
 				strcpy (limits, tempbuf);
