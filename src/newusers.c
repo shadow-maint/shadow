@@ -130,6 +130,7 @@ static void usage (int status)
 #endif				/* !USE_PAM */
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --system                  create system accounts\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -530,6 +531,7 @@ static void process_flags (int argc, char **argv)
 #endif				/* !USE_PAM */
 		{"help",         no_argument,       NULL, 'h'},
 		{"system",       no_argument,       NULL, 'r'},
+		{"root",         required_argument, NULL, 'R'},
 #ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
 		{"sha-rounds",   required_argument, NULL, 's'},
@@ -560,6 +562,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'r':
 			rflg = true;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 #ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
@@ -837,6 +841,9 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	/* FIXME: will not work with an input file */
+	process_root_flag ("-R", argc, argv);
 
 	OPENLOG ("newusers");
 

@@ -76,6 +76,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     pam_lastlog.
 - newgrp, sg
   * Fix parsing of gshadow entries.
+- newusers
+  * Add --root option.
 - passwd
   * Add --root option.
 - pwpck
