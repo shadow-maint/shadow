@@ -37,6 +37,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
 - faillog
   * The -l, -m, -r, -t options only act on the existing users, unless -a is
     specified.
+  * Add --root option.
 - gpasswd
   * Add --root option.
 - groupadd
@@ -57,6 +58,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
 - grpconv
   * Add --root option.
 - grpunconv
+  * Add --root option.
+- lastlog
   * Add --root option.
 - login
   * Fixed limits support (non PAM enabled versions only)

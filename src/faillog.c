@@ -61,6 +61,7 @@ static void reset (void);
 /*
  * Global variables
  */
+const char *Prog;		/* Program name */
 static FILE *fail;		/* failure file stream */
 static time_t seconds;		/* that number of days in seconds */
 static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
@@ -87,12 +88,13 @@ static /*@noreturn@*/void usage (int status)
 	                _("Usage: %s [options]\n"
 	                  "\n"
 	                  "Options:\n"),
-	                "faillog");
+	                Prog);
 	(void) fputs (_("  -a, --all                     display faillog records for all users\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"), usageout);
 	(void) fputs (_("  -m, --maximum MAX             set maximum failed login counters to MAX\n"), usageout);
 	(void) fputs (_("  -r, --reset                   reset the counters of login failures\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -t, --time DAYS               display faillog records more recent than DAYS\n"), usageout);
 	(void) fputs (_("  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 	                "                                counters and limits (if used with -r, -m,\n"
@@ -129,8 +131,8 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %lu\n"),
-			         (unsigned long int)pw->pw_uid);
+			         _("%s: Failed to get the entry for UID %lu\n"),
+			         Prog, (unsigned long int)pw->pw_uid);
 			return;
 		}
 	} else {
@@ -229,8 +231,8 @@ static bool reset_one (uid_t uid)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %lu\n"),
-			         (unsigned long int)uid);
+			         _("%s: Failed to get the entry for UID %lu\n"),
+			         Prog, (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -259,8 +261,8 @@ static bool reset_one (uid_t uid)
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to reset fail count for UID %lu\n"),
-	         (unsigned long int)uid);
+	         _("%s: Failed to reset fail count for UID %lu\n"),
+	         Prog, (unsigned long int)uid);
 	return true;
 }
 
@@ -343,8 +345,8 @@ static bool setmax_one (uid_t uid, int max)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %lu\n"),
-			         (unsigned long int)uid);
+			         _("%s: Failed to get the entry for UID %lu\n"),
+			         Prog, (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -374,8 +376,8 @@ static bool setmax_one (uid_t uid, int max)
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to set max for UID %lu\n"),
-	         (unsigned long int)uid);
+	         _("%s: Failed to set max for UID %lu\n"),
+	         Prog, (unsigned long int)uid);
 	return true;
 }
 
@@ -460,8 +462,8 @@ static bool set_locktime_one (uid_t uid, long locktime)
 		 */
 		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
 			fprintf (stderr,
-			         _("faillog: Failed to get the entry for UID %lu\n"),
-			         (unsigned long int)uid);
+			         _("%s: Failed to get the entry for UID %lu\n"),
+			         Prog, (unsigned long int)uid);
 			return true;
 		}
 	} else {
@@ -491,8 +493,8 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	}
 
 	fprintf (stderr,
-	         _("faillog: Failed to set locktime for UID %lu\n"),
-	         (unsigned long int)uid);
+	         _("%s: Failed to set locktime for UID %lu\n"),
+	         Prog, (unsigned long int)uid);
 	return true;
 }
 
@@ -562,9 +564,17 @@ int main (int argc, char **argv)
 	long fail_max;
 	long days;
 
+	/*
+	 * Get the program name. The program name is used as a prefix to
+	 * most error messages.
+	 */
+	Prog = Basename (argv[0]);
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
 
 	{
 		int c;
@@ -574,11 +584,12 @@ int main (int argc, char **argv)
 			{"lock-secs", required_argument, NULL, 'l'},
 			{"maximum", required_argument, NULL, 'm'},
 			{"reset", no_argument, NULL, 'r'},
+			{"root", required_argument, NULL, 'R'},
 			{"time", required_argument, NULL, 't'},
 			{"user", required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c = getopt_long (argc, argv, "ahl:m:rt:u:",
+		while ((c = getopt_long (argc, argv, "ahl:m:rR:t:u:",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
@@ -591,7 +602,7 @@ int main (int argc, char **argv)
 				if (getlong (optarg, &fail_locktime) == 0) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
-					         "faillog", optarg);
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
@@ -600,7 +611,7 @@ int main (int argc, char **argv)
 				if (getlong (optarg, &fail_max) == 0) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
-					         "faillog", optarg);
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				mflg = true;
@@ -608,11 +619,13 @@ int main (int argc, char **argv)
 			case 'r':
 				rflg = true;
 				break;
+			case 'R': /* no-op, handled in process_root_flag () */
+				break;
 			case 't':
 				if (getlong (optarg, &days) == 0) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
-					         "faillog", optarg);
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				seconds = (time_t) days * DAY;
@@ -642,8 +655,8 @@ int main (int argc, char **argv)
 					              &umin, &has_umin,
 					              &umax, &has_umax) == 0) {
 						fprintf (stderr,
-						         _("faillog: Unknown user or range: %s\n"),
-						         optarg);
+						         _("%s: Unknown user or range: %s\n"),
+						         Prog, optarg);
 						exit (E_BAD_ARG);
 					}
 				}
@@ -656,8 +669,8 @@ int main (int argc, char **argv)
 		}
 		if (argc > optind) {
 			fprintf (stderr,
-			         _("faillog: unexpected argument: %s\n"),
-			         argv[optind]);
+			         _("%s: unexpected argument: %s\n"),
+			         Prog, argv[optind]);
 			usage (EXIT_FAILURE);
 		}
 	}
@@ -674,16 +687,16 @@ int main (int argc, char **argv)
 	}
 	if (NULL == fail) {
 		fprintf (stderr,
-		         _("faillog: Cannot open %s: %s\n"),
-		         FAILLOG_FILE, strerror (errno));
+		         _("%s: Cannot open %s: %s\n"),
+		         Prog, FAILLOG_FILE, strerror (errno));
 		exit (E_NOPERM);
 	}
 
 	/* Get the size of the faillog */
 	if (fstat (fileno (fail), &statbuf) != 0) {
 		fprintf (stderr,
-		         _("faillog: Cannot get the size of %s: %s\n"),
-		         FAILLOG_FILE, strerror (errno));
+		         _("%s: Cannot get the size of %s: %s\n"),
+		         Prog, FAILLOG_FILE, strerror (errno));
 		exit (E_NOPERM);
 	}
 
