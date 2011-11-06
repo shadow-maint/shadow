@@ -140,22 +140,25 @@ static /*@noreturn@*/void fail_exit (int code)
  */
 static /*@noreturn@*/void usage (int status)
 {
-	(void)
-	fputs (_("Usage: chage [options] LOGIN\n"
-	         "\n"
-	         "Options:\n"
-	         "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
-	         "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-	         "                                to INACTIVE\n"
-	         "  -l, --list                    show account aging information\n"
-	         "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
-	         "                                change to MIN_DAYS\n"
-	         "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
-	         "                                change to MAX_DAYS\n"
-	         "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] LOGIN\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"), usageout);
+	(void) fputs (_("  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -I, --inactive INACTIVE       set password inactive after expiration\n"
+	                "                                to INACTIVE\n"), usageout);
+	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
+	(void) fputs (_("  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+	                "                                change to MIN_DAYS\n"), usageout);
+	(void) fputs (_("  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+	                "                                change to MAX_DAYS\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
+	(void) fputs ("\n", usageout);
 	exit (status);
 }
 
@@ -390,11 +393,12 @@ static void process_flags (int argc, char **argv)
 		{"list", no_argument, NULL, 'l'},
 		{"mindays", required_argument, NULL, 'm'},
 		{"maxdays", required_argument, NULL, 'M'},
+		{"root", required_argument, NULL, 'R'},
 		{"warndays", required_argument, NULL, 'W'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "d:E:hI:lm:M:W:",
+	while ((c = getopt_long (argc, argv, "d:E:hI:lm:M:R:W:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'd':
@@ -452,6 +456,8 @@ static void process_flags (int argc, char **argv)
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 'W':
 			Wflg = true;
@@ -788,13 +794,22 @@ int main (int argc, char **argv)
 	gid_t rgid;
 	const struct passwd *pw;
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
+	/*
+	 * Get the program name so that error messages can use it.
+	 */
+	Prog = Basename (argv[0]);
+
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
+
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+	OPENLOG ("chage");
 
 	ruid = getuid ();
 	rgid = getgid ();
@@ -805,14 +820,7 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	/*
-	 * Get the program name so that error messages can use it.
-	 */
-	Prog = Basename (argv[0]);
-
 	process_flags (argc, argv);
-
-	OPENLOG ("chage");
 
 	check_perms ();
 

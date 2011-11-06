@@ -16,12 +16,14 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     configure options.
   * Added diagnosis for lock failures.
 
--chgpasswd
+- chage
+  * Add --root option.
+- chgpasswd
   * When the gshadow file exists but there are no gshadow entries, an entry
     is created if the password is changed and group requires a
     shadow entry.
   * Add --root option.
--chpasswd
+- chpasswd
   * PAM enabled versions: restore the -e option to allow restoring
     passwords without knowing those passwords. Restore together the -m
     and -c options. (These options were removed in shadow-4.1.4 on PAM

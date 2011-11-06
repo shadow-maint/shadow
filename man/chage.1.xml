@@ -176,6 +176,19 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-R</option>, <option>--root</option>
+	  <replaceable>CHROOT_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>CHROOT_DIR</replaceable> directory.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-W</option>, <option>--warndays</option> <replaceable>WARN_DAYS</replaceable>
 	</term>
 	<listitem>

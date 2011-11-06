@@ -1,5 +1,11 @@
 2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/chage.c, man/chage.1.xml: Add --root option. Open
+	audit and syslog after the potential chroot. chage's usage split
+	in smaller messages.
+
+2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: re-indent.
 	* src/login.c: Fix support for sub-logins.
 
