@@ -1,5 +1,9 @@
 2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Remove unused variable a.
+
+2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/generate_mans.mak: The xml-config files do not depend on the
 	Makefile.
 

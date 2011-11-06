@@ -413,7 +413,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 int main (int argc, char **argv)
 {
 	bool editshadow = false;
-	char *a;
 	bool do_vipw;
 
 	Prog = Basename (argv[0]);
