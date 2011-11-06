@@ -123,6 +123,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -h, --home-phone HOME_PHONE   change user's home phone number\n"), usageout);
 	(void) fputs (_("  -o, --other OTHER_INFO        change user's other GECOS information\n"), usageout);
 	(void) fputs (_("  -r, --room ROOM_NUMBER        change user's room number\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -u, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -w, --work-phone WORK_PHONE   change user's office phone number\n"), usageout);
 	(void) fputs ("\n", usageout);
@@ -272,6 +273,7 @@ static void process_flags (int argc, char **argv)
 		{"home-phone", required_argument, NULL, 'h'},
 		{"other",      required_argument, NULL, 'o'},
 		{"room",       required_argument, NULL, 'r'},
+		{"root",       required_argument, NULL, 'R'},
 		{"help",       no_argument,       NULL, 'u'},
 		{"work-phone", required_argument, NULL, 'w'},
 		{NULL, 0, NULL, '\0'}
@@ -284,7 +286,7 @@ static void process_flags (int argc, char **argv)
 	 * environment and must agree with the real UID. Also, the UID will
 	 * be checked for any commands which are restricted to root only.
 	 */
-	while ((c = getopt_long (argc, argv, "f:h:o:r:uw:",
+	while ((c = getopt_long (argc, argv, "f:h:o:r:R:uw:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
@@ -322,6 +324,8 @@ static void process_flags (int argc, char **argv)
 			}
 			rflg = true;
 			STRFCPY (roomno, optarg);
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 'u':
 			usage (E_SUCCESS);
@@ -626,22 +630,24 @@ int main (int argc, char **argv)
 	char new_gecos[BUFSIZ];	/* buffer for new GECOS fields       */
 	char *user;
 
+	/*
+	 * Get the program name. The program name is used as a
+	 * prefix to most error messages.
+	 */
+	Prog = Basename (argv[0]);
+
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
 
 	/*
 	 * This command behaves different for root and non-root
 	 * users.
 	 */
 	amroot = (getuid () == 0);
-
-	/*
-	 * Get the program name. The program name is used as a
-	 * prefix to most error messages.
-	 */
-	Prog = Basename (argv[0]);
 
 	OPENLOG ("chfn");
 

@@ -2,6 +2,7 @@
 
 	* src/chfn.c, man/chfn.1.xml: Add support for long options.
 	* src/chfn.c, man/chfn.1.xml: Add -u/--help option
+	* NEWS, src/chfn.c, man/chfn.1.xml: Add --root option.
 
 2011-10-30  Nicolas François  <nicolas.francois@centraliens.net>
 
