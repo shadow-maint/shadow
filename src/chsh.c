@@ -103,12 +103,16 @@ static void fail_exit (int code)
  */
 static void usage (int status)
 {
-	fputs (_("Usage: chsh [options] [LOGIN]\n"
-	         "\n"
-	         "Options:\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -s, --shell SHELL             new login shell for the user account\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] [LOGIN]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -s, --shell SHELL             new login shell for the user account\n"), usageout);
+	(void) fputs ("\n", usageout);
 	exit (status);
 }
 
@@ -200,20 +204,21 @@ static bool shell_is_listed (const char *sh)
  */
 static void process_flags (int argc, char **argv)
 {
-	int option_index = 0;
 	int c;
 	static struct option long_options[] = {
 		{"help", no_argument, NULL, 'h'},
+		{"root", required_argument, NULL, 'R'},
 		{"shell", required_argument, NULL, 's'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c =
-		getopt_long (argc, argv, "hs:", long_options,
-		             &option_index)) != -1) {
+	while ((c = getopt_long (argc, argv, "hR:s:",
+	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
 			usage (E_SUCCESS);
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 's':
 			sflg = true;
@@ -432,20 +437,22 @@ int main (int argc, char **argv)
 
 	sanitize_env ();
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
-
-	/*
-	 * This command behaves different for root and non-root users.
-	 */
-	amroot = (getuid () == 0);
-
 	/*
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
+
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
+
+	/*
+	 * This command behaves different for root and non-root users.
+	 */
+	amroot = (getuid () == 0);
 
 	OPENLOG ("chsh");
 
