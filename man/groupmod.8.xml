@@ -90,6 +90,10 @@
 	    typically reserved for system groups.
 	  </para>
 	  <para>
+	    Users who use the group as primary group will be updated to
+	    keep the group as their primary group.
+	  </para>
+	  <para>
 	    Any files that have the
 	    old group ID and must continue to belong to
 	    <replaceable>GROUP</replaceable>, must have their group ID
@@ -189,6 +193,12 @@
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
 	  <para>Secure group account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

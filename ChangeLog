@@ -1,5 +1,10 @@
 2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupmod.8.xml: Document that the primary group of users may
+	be changed by groupmod -g.
+
+2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newusers.c, man/newusers.8.xml: Add --root option.
 
 2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
