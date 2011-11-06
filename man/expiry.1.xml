@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 1990 - 1994, Julianne Frances Haugh
    Copyright (c) 1999       , Ben Collins
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -53,8 +53,9 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>expiry</command>
-      <arg choice='opt'>-c </arg>
-      <arg choice='opt'>-f </arg>
+      <arg choice='plain'>
+	<replaceable>option</replaceable>
+      </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
@@ -65,6 +66,36 @@
       the current password expiration and forces (<option>-f</option>)
       changes when required. It is callable as a normal user command.
     </para>
+  </refsect1>
+
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>expiry</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-c</option>, <option>--check</option></term>
+	<listitem>
+	  <para>Check the password expiration of the current user.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-f</option>, <option>--force</option></term>
+	<listitem>
+	  <para>
+	    Force a password change if the current user has an expired
+	    password.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>
