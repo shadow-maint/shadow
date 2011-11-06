@@ -378,14 +378,14 @@ static void process_flags (int argc, char **argv)
 	char *cp;
 	int c;
 	static struct option long_options[] = {
-		{"force", no_argument, NULL, 'f'},
-		{"gid", required_argument, NULL, 'g'},
-		{"help", no_argument, NULL, 'h'},
-		{"key", required_argument, NULL, 'K'},
-		{"non-unique", no_argument, NULL, 'o'},
-		{"password", required_argument, NULL, 'p'},
-		{"system", no_argument, NULL, 'r'},
-		{"root", required_argument, NULL, 'R'},
+		{"force",      no_argument,       NULL, 'f'},
+		{"gid",        required_argument, NULL, 'g'},
+		{"help",       no_argument,       NULL, 'h'},
+		{"key",        required_argument, NULL, 'K'},
+		{"non-unique", no_argument,       NULL, 'o'},
+		{"password",   required_argument, NULL, 'p'},
+		{"system",     no_argument,       NULL, 'r'},
+		{"root",       required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};
 

@@ -1,5 +1,14 @@
 2011-10-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c, src/chgpasswd.c, src/chpasswd.c, src/chsh.c,
+	src/faillog.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c,
+	src/groupmems.c, src/groupmod.c, src/grpconv.c, src/grpunconv.c,
+	src/lastlog.c, src/newusers.c, src/passwd.c, src/pwconv.c,
+	src/pwunconv.c, src/su.c, src/useradd.c, src/userdel.c,
+	src/usermod.c, src/vipw.c: Align and sort options.
+
+2011-10-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/pwck.c, man/pwck.8.xm, src/grpck.c, man/grpck.8.xml:
 	Add --root option.
 

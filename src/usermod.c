@@ -875,26 +875,26 @@ static void process_flags (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"append", no_argument, NULL, 'a'},
-			{"comment", required_argument, NULL, 'c'},
-			{"home", required_argument, NULL, 'd'},
-			{"expiredate", required_argument, NULL, 'e'},
-			{"inactive", required_argument, NULL, 'f'},
-			{"gid", required_argument, NULL, 'g'},
-			{"groups", required_argument, NULL, 'G'},
-			{"help", no_argument, NULL, 'h'},
-			{"login", required_argument, NULL, 'l'},
-			{"lock", no_argument, NULL, 'L'},
-			{"move-home", no_argument, NULL, 'm'},
-			{"non-unique", no_argument, NULL, 'o'},
-			{"password", required_argument, NULL, 'p'},
-			{"root", required_argument, NULL, 'R'},
+			{"append",       no_argument,       NULL, 'a'},
+			{"comment",      required_argument, NULL, 'c'},
+			{"home",         required_argument, NULL, 'd'},
+			{"expiredate",   required_argument, NULL, 'e'},
+			{"inactive",     required_argument, NULL, 'f'},
+			{"gid",          required_argument, NULL, 'g'},
+			{"groups",       required_argument, NULL, 'G'},
+			{"help",         no_argument,       NULL, 'h'},
+			{"login",        required_argument, NULL, 'l'},
+			{"lock",         no_argument,       NULL, 'L'},
+			{"move-home",    no_argument,       NULL, 'm'},
+			{"non-unique",   no_argument,       NULL, 'o'},
+			{"password",     required_argument, NULL, 'p'},
+			{"root",         required_argument, NULL, 'R'},
+			{"shell",        required_argument, NULL, 's'},
+			{"uid",          required_argument, NULL, 'u'},
+			{"unlock",       no_argument,       NULL, 'U'},
 #ifdef WITH_SELINUX
 			{"selinux-user", required_argument, NULL, 'Z'},
 #endif
-			{"shell", required_argument, NULL, 's'},
-			{"uid", required_argument, NULL, 'u'},
-			{"unlock", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,

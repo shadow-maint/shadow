@@ -579,14 +579,14 @@ int main (int argc, char **argv)
 	{
 		int c;
 		static struct option long_options[] = {
-			{"all", no_argument, NULL, 'a'},
-			{"help", no_argument, NULL, 'h'},
+			{"all",       no_argument,       NULL, 'a'},
+			{"help",      no_argument,       NULL, 'h'},
 			{"lock-secs", required_argument, NULL, 'l'},
-			{"maximum", required_argument, NULL, 'm'},
-			{"reset", no_argument, NULL, 'r'},
-			{"root", required_argument, NULL, 'R'},
-			{"time", required_argument, NULL, 't'},
-			{"user", required_argument, NULL, 'u'},
+			{"maximum",   required_argument, NULL, 'm'},
+			{"reset",     no_argument,       NULL, 'r'},
+			{"root",      required_argument, NULL, 'R'},
+			{"time",      required_argument, NULL, 't'},
+			{"user",      required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv, "ahl:m:rR:t:u:",

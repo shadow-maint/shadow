@@ -211,33 +211,17 @@ int main (int argc, char **argv)
 	{
 		int c;
 		static struct option const longopts[] = {
-			{"help", no_argument, NULL, 'h'},
-			{"time", required_argument, NULL, 't'},
 			{"before", required_argument, NULL, 'b'},
-			{"root", required_argument, NULL, 'R'},
-			{"user", required_argument, NULL, 'u'},
+			{"help",   no_argument,       NULL, 'h'},
+			{"root",   required_argument, NULL, 'R'},
+			{"time",   required_argument, NULL, 't'},
+			{"user",   required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "ht:b:R:u:", longopts,
+		while ((c = getopt_long (argc, argv, "b:hR:t:u:", longopts,
 		                         NULL)) != -1) {
 			switch (c) {
-			case 'h':
-				usage (EXIT_SUCCESS);
-				/*@notreached@*/break;
-			case 't':
-			{
-				unsigned long days;
-				if (getulong (optarg, &days) == 0) {
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					exit (EXIT_FAILURE);
-				}
-				seconds = (time_t) days * DAY;
-				tflg = true;
-				break;
-			}
 			case 'b':
 			{
 				unsigned long inverse_days;
@@ -251,8 +235,24 @@ int main (int argc, char **argv)
 				bflg = true;
 				break;
 			}
+			case 'h':
+				usage (EXIT_SUCCESS);
+				/*@notreached@*/break;
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
+			case 't':
+			{
+				unsigned long days;
+				if (getulong (optarg, &days) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					exit (EXIT_FAILURE);
+				}
+				seconds = (time_t) days * DAY;
+				tflg = true;
+				break;
+			}
 			case 'u':
 			{
 				const struct passwd *pwent;

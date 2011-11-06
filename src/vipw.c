@@ -434,14 +434,14 @@ int main (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"group", no_argument, NULL, 'g'},
-			{"help", no_argument, NULL, 'h'},
-			{"passwd", no_argument, NULL, 'p'},
-			{"quiet", no_argument, NULL, 'q'},
-			{"root", required_argument, NULL, 'R'},
-			{"shadow", no_argument, NULL, 's'},
+			{"group",  no_argument,       NULL, 'g'},
+			{"help",   no_argument,       NULL, 'h'},
+			{"passwd", no_argument,       NULL, 'p'},
+			{"quiet",  no_argument,       NULL, 'q'},
+			{"root",   required_argument, NULL, 'R'},
+			{"shadow", no_argument,       NULL, 's'},
 #ifdef WITH_TCB
-			{"user", required_argument, NULL, 'u'},
+			{"user",   required_argument, NULL, 'u'},
 #endif				/* WITH_TCB */
 			{NULL, 0, NULL, '\0'}
 		};

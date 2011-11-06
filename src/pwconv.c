@@ -144,7 +144,7 @@ static void process_flags (int argc, char **argv)
 	 */
 	int c;
 	static struct option long_options[] = {
-		{"help", no_argument, NULL, 'h'},
+		{"help", no_argument,       NULL, 'h'},
 		{"root", required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};

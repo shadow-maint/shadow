@@ -156,12 +156,12 @@ static void process_flags (int argc, char **argv)
 	int c;
 	static struct option long_options[] = {
 		{"crypt-method", required_argument, NULL, 'c'},
-		{"encrypted", no_argument, NULL, 'e'},
-		{"help", no_argument, NULL, 'h'},
-		{"md5", no_argument, NULL, 'm'},
-		{"root", required_argument, NULL, 'R'},
+		{"encrypted",    no_argument,       NULL, 'e'},
+		{"help",         no_argument,       NULL, 'h'},
+		{"md5",          no_argument,       NULL, 'm'},
+		{"root",         required_argument, NULL, 'R'},
 #ifdef USE_SHA_CRYPT
-		{"sha-rounds", required_argument, NULL, 's'},
+		{"sha-rounds",   required_argument, NULL, 's'},
 #endif
 		{NULL, 0, NULL, '\0'}
 	};

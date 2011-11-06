@@ -149,13 +149,13 @@ static void process_flags (int argc, char **argv)
 	int c;
 	static struct option long_options[] = {
 		{"crypt-method", required_argument, NULL, 'c'},
-		{"encrypted", no_argument, NULL, 'e'},
-		{"md5", no_argument, NULL, 'm'},
-		{"root", required_argument, NULL, 'R'},
+		{"encrypted",    no_argument,       NULL, 'e'},
+		{"help",         no_argument,       NULL, 'h'},
+		{"md5",          no_argument,       NULL, 'm'},
+		{"root",         required_argument, NULL, 'R'},
 #ifdef USE_SHA_CRYPT
-		{"sha-rounds", required_argument, NULL, 's'},
+		{"sha-rounds",   required_argument, NULL, 's'},
 #endif				/* USE_SHA_CRYPT */
-		{"help", no_argument, NULL, 'h'},
 		{NULL, 0, NULL, '\0'}
 	};
 
@@ -167,15 +167,15 @@ static void process_flags (int argc, char **argv)
 #endif				/* !USE_SHA_CRYPT */
 	                         long_options, NULL)) != -1) {
 		switch (c) {
-		case 'h':
-			usage (E_SUCCESS);
-			/*@notreached@*/break;
 		case 'c':
 			crypt_method = optarg;
 			break;
 		case 'e':
 			eflg = true;
 			break;
+		case 'h':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
 		case 'm':
 			md5flg = true;
 			break;

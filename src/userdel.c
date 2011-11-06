@@ -870,10 +870,10 @@ int main (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"force", no_argument, NULL, 'f'},
-			{"help", no_argument, NULL, 'h'},
-			{"remove", no_argument, NULL, 'r'},
-			{"root", required_argument, NULL, 'R'},
+			{"force",  no_argument,       NULL, 'f'},
+			{"help",   no_argument,       NULL, 'h'},
+			{"remove", no_argument,       NULL, 'r'},
+			{"root",   required_argument, NULL, 'R'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv, "fhrR:",

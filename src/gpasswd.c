@@ -229,14 +229,14 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
-		{"add", required_argument, NULL, 'a'},
-		{"delete", required_argument, NULL, 'd'},
-		{"help", no_argument, NULL, 'h'},
-		{"remove-password", no_argument, NULL, 'r'},
-		{"restrict", no_argument, NULL, 'R'},
-		{"administrators", required_argument, NULL, 'A'},
-		{"members", required_argument, NULL, 'M'},
-		{"root", required_argument, NULL, 'Q'},
+		{"add",             required_argument, NULL, 'a'},
+		{"administrators",  required_argument, NULL, 'A'},
+		{"delete",          required_argument, NULL, 'd'},
+		{"help",            no_argument,       NULL, 'h'},
+		{"members",         required_argument, NULL, 'M'},
+		{"root",            required_argument, NULL, 'Q'},
+		{"remove-password", no_argument,       NULL, 'r'},
+		{"restrict",        no_argument,       NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 		};
 

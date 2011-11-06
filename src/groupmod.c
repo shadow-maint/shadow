@@ -370,12 +370,12 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
-		{"gid", required_argument, NULL, 'g'},
-		{"help", no_argument, NULL, 'h'},
-		{"new-name", required_argument, NULL, 'n'},
-		{"non-unique", no_argument, NULL, 'o'},
-		{"password", required_argument, NULL, 'p'},
-		{"root", required_argument, NULL, 'R'},
+		{"gid",        required_argument, NULL, 'g'},
+		{"help",       no_argument,       NULL, 'h'},
+		{"new-name",   required_argument, NULL, 'n'},
+		{"non-unique", no_argument,       NULL, 'o'},
+		{"password",   required_argument, NULL, 'p'},
+		{"root",       required_argument, NULL, 'R'},
 		{NULL, 0, NULL, '\0'}
 	};
 	while ((c = getopt_long (argc, argv, "g:hn:op:R:",

@@ -527,12 +527,14 @@ static void process_flags (int argc, char **argv)
 	static struct option long_options[] = {
 #ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
+#endif				/* !USE_PAM */
+		{"help",         no_argument,       NULL, 'h'},
+		{"system",       no_argument,       NULL, 'r'},
+#ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
-		{"sha-rounds", required_argument, NULL, 's'},
+		{"sha-rounds",   required_argument, NULL, 's'},
 #endif				/* USE_SHA_CRYPT */
 #endif				/* !USE_PAM */
-		{"help", no_argument, NULL, 'h'},
-		{"system", no_argument, NULL, 'r'},
 		{NULL, 0, NULL, '\0'}
 	};
 
@@ -548,6 +550,11 @@ static void process_flags (int argc, char **argv)
 #endif
 	                         long_options, NULL)) != -1) {
 		switch (c) {
+#ifndef USE_PAM
+		case 'c':
+			crypt_method = optarg;
+			break;
+#endif				/* !USE_PAM */
 		case 'h':
 			usage (EXIT_SUCCESS);
 			break;
@@ -555,9 +562,6 @@ static void process_flags (int argc, char **argv)
 			rflg = true;
 			break;
 #ifndef USE_PAM
-		case 'c':
-			crypt_method = optarg;
-			break;
 #ifdef USE_SHA_CRYPT
 		case 's':
 			sflg = true;

@@ -386,15 +386,15 @@ static void process_flags (int argc, char **argv)
 	 */
 	int c;
 	static struct option long_options[] = {
-		{"lastday", required_argument, NULL, 'd'},
+		{"lastday",    required_argument, NULL, 'd'},
 		{"expiredate", required_argument, NULL, 'E'},
-		{"help", no_argument, NULL, 'h'},
-		{"inactive", required_argument, NULL, 'I'},
-		{"list", no_argument, NULL, 'l'},
-		{"mindays", required_argument, NULL, 'm'},
-		{"maxdays", required_argument, NULL, 'M'},
-		{"root", required_argument, NULL, 'R'},
-		{"warndays", required_argument, NULL, 'W'},
+		{"help",       no_argument,       NULL, 'h'},
+		{"inactive",   required_argument, NULL, 'I'},
+		{"list",       no_argument,       NULL, 'l'},
+		{"mindays",    required_argument, NULL, 'm'},
+		{"maxdays",    required_argument, NULL, 'M'},
+		{"root",       required_argument, NULL, 'R'},
+		{"warndays",   required_argument, NULL, 'W'},
 		{NULL, 0, NULL, '\0'}
 	};
 

@@ -802,21 +802,21 @@ int main (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"all", no_argument, NULL, 'a'},
-			{"delete", no_argument, NULL, 'd'},
-			{"expire", no_argument, NULL, 'e'},
-			{"help", no_argument, NULL, 'h'},
-			{"inactive", required_argument, NULL, 'i'},
-			{"keep-tokens", no_argument, NULL, 'k'},
-			{"lock", no_argument, NULL, 'l'},
-			{"mindays", required_argument, NULL, 'n'},
-			{"quiet", no_argument, NULL, 'q'},
-			{"repository", required_argument, NULL, 'r'},
-			{"root", required_argument, NULL, 'R'},
-			{"status", no_argument, NULL, 'S'},
-			{"unlock", no_argument, NULL, 'u'},
-			{"warndays", required_argument, NULL, 'w'},
-			{"maxdays", required_argument, NULL, 'x'},
+			{"all",         no_argument,       NULL, 'a'},
+			{"delete",      no_argument,       NULL, 'd'},
+			{"expire",      no_argument,       NULL, 'e'},
+			{"help",        no_argument,       NULL, 'h'},
+			{"inactive",    required_argument, NULL, 'i'},
+			{"keep-tokens", no_argument,       NULL, 'k'},
+			{"lock",        no_argument,       NULL, 'l'},
+			{"mindays",     required_argument, NULL, 'n'},
+			{"quiet",       no_argument,       NULL, 'q'},
+			{"repository",  required_argument, NULL, 'r'},
+			{"root",        required_argument, NULL, 'R'},
+			{"status",      no_argument,       NULL, 'S'},
+			{"unlock",      no_argument,       NULL, 'u'},
+			{"warndays",    required_argument, NULL, 'w'},
+			{"maxdays",     required_argument, NULL, 'x'},
 			{NULL, 0, NULL, '\0'}
 		};
 
@@ -834,6 +834,9 @@ int main (int argc, char **argv)
 				eflg = true;
 				anyflag = true;
 				break;
+			case 'h':
+				usage (E_SUCCESS);
+				/*@notreached@*/break;
 			case 'i':
 				if (   (getlong (optarg, &inact) == 0)
 				    || (inact < -1)) {
@@ -908,9 +911,6 @@ int main (int argc, char **argv)
 				xflg = true;
 				anyflag = true;
 				break;
-			case 'h':
-				usage (E_SUCCESS);
-				/*@notreached@*/break;
 			default:
 				usage (E_BAD_ARG);
 			}
