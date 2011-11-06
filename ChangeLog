@@ -6,6 +6,9 @@
 	are applied to the chroot.
 	* NEWS, src/useradd.c, man/useradd.8.xml: Add --root option. Open
 	audit after the potential chroot.
+	* NEWS, src/userdel.c, man/userdel.8.xml: Add --root option. Open
+	audit and syslog after the potential chroot. userdel's usage split
+	in smaller messages.
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

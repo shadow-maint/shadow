@@ -122,14 +122,19 @@ static int remove_tcbdir (const char *user_name, uid_t user_id);
  */
 static void usage (int status)
 {
-	fputs (_("Usage: userdel [options] LOGIN\n"
-	         "\n"
-	         "Options:\n"
-	         "  -f, --force                   force removal of files,\n"
-	         "                                even if not owned by user\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -r, --remove                  remove home directory and mail spool\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] LOGIN\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -f, --force                   force removal of files,\n"
+	                "                                even if not owned by user\n"),
+	              usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -r, --remove                  remove home directory and mail spool\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs ("\n", usageout);
 	exit (status);
 }
 
@@ -844,10 +849,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif				/* WITH_AUDIT */
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -855,6 +856,13 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
+
+	OPENLOG ("userdel");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif				/* WITH_AUDIT */
 
 	{
 		/*
@@ -865,9 +873,10 @@ int main (int argc, char **argv)
 			{"force", no_argument, NULL, 'f'},
 			{"help", no_argument, NULL, 'h'},
 			{"remove", no_argument, NULL, 'r'},
+			{"root", required_argument, NULL, 'R'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c = getopt_long (argc, argv, "fhr",
+		while ((c = getopt_long (argc, argv, "fhrR:",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'f':	/* force remove even if not owned by user */
@@ -879,6 +888,8 @@ int main (int argc, char **argv)
 			case 'r':	/* remove home dir and mailbox */
 				rflg = true;
 				break;
+			case 'R': /* no-op, handled in process_root_flag () */
+				break;
 			default:
 				usage (E_USAGE);
 			}
@@ -888,8 +899,6 @@ int main (int argc, char **argv)
 	if ((optind + 1) != argc) {
 		usage (E_USAGE);
 	}
-
-	OPENLOG ("userdel");
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
