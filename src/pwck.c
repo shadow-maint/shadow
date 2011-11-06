@@ -152,6 +152,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
 	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
 	                "                                but do not change files\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifdef WITH_TCB
 	if (!getdef_bool ("USE_TCB")) {
 #endif				/* !WITH_TCB */
@@ -171,17 +172,18 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
-		{"help",      no_argument, NULL, 'h'},
-		{"quiet",     no_argument, NULL, 'q'},
-		{"read-only", no_argument, NULL, 'r'},
-		{"sort",      no_argument, NULL, 's'},
+		{"help",      no_argument,       NULL, 'h'},
+		{"quiet",     no_argument,       NULL, 'q'},
+		{"read-only", no_argument,       NULL, 'r'},
+		{"root",      required_argument, NULL, 'R'},
+		{"sort",      no_argument,       NULL, 's'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((c = getopt_long (argc, argv, "ehqrs",
+	while ((c = getopt_long (argc, argv, "ehqrR:s",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
@@ -193,6 +195,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'r':
 			read_only = true;
+			break;
+		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 's':
 			sort_mode = true;
@@ -834,6 +838,8 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
 
 	OPENLOG ("pwck");
 

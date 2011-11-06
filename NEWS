@@ -56,6 +56,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
     shadow entry.
   * Add --root option.
 - grpck
+  * Add --root option.
   * NIS entries were dropped by -s (sort).
 - grpconv
   * Add --root option.
@@ -79,6 +80,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Add --root option.
 - pwpck
   * NIS entries were dropped by -s (sort).
+  * Add --root option.
 - pwconv
   * Add --root option.
 - pwunconv
