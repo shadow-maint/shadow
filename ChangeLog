@@ -9,6 +9,7 @@
 	* NEWS, src/userdel.c, man/userdel.8.xml: Add --root option. Open
 	audit and syslog after the potential chroot. userdel's usage split
 	in smaller messages.
+	* NEWS, src/usermod.c, man/usermod.8.xml: Likewise
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

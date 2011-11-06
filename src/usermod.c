@@ -310,38 +310,37 @@ static int get_groups (char *list)
  */
 static /*@noreturn@*/void usage (int status)
 {
-	fprintf ((E_SUCCESS != status) ? stderr : stdout,
-	         _("Usage: usermod [options] LOGIN\n"
-	         "\n"
-	         "Options:\n"
-	         "  -c, --comment COMMENT         new value of the GECOS field\n"
-	         "  -d, --home HOME_DIR           new home directory for the user account\n"
-	         "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-	         "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-	         "                                to INACTIVE\n"
-	         "  -g, --gid GROUP               force use GROUP as new primary group\n"
-	         "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-	         "  -a, --append                  append the user to the supplemental GROUPS\n"
-	         "                                mentioned by the -G option without removing\n"
-	         "                                him/her from other groups\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -l, --login NEW_LOGIN         new value of the login name\n"
-	         "  -L, --lock                    lock the user account\n"
-	         "  -m, --move-home               move contents of the home directory to the\n"
-	         "                                new location (use only with -d)\n"
-	         "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-	         "  -p, --password PASSWORD       use encrypted password for the new password\n"
-	         "  -s, --shell SHELL             new login shell for the user account\n"
-	         "  -u, --uid UID                 new UID for the user account\n"
-	         "  -U, --unlock                  unlock the user account\n"
-	         "%s"
-	         "\n"),
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] LOGIN\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
+	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
+	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
+	(void) fputs (_("  -f, --inactive INACTIVE       set password inactive after expiration\n"
+	                "                                to INACTIVE\n"), usageout);
+	(void) fputs (_("  -g, --gid GROUP               force use GROUP as new primary group\n"), usageout);
+	(void) fputs (_("  -G, --groups GROUPS           new list of supplementary GROUPS\n"), usageout);
+	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
+	                "                                mentioned by the -G option without removing\n"
+	                "                                him/her from other groups\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -l, --login NEW_LOGIN         new value of the login name\n"), usageout);
+	(void) fputs (_("  -L, --lock                    lock the user account\n"), usageout);
+	(void) fputs (_("  -m, --move-home               move contents of the home directory to the\n"
+	                "                                new location (use only with -d)\n"), usageout);
+	(void) fputs (_("  -o, --non-unique              allow using duplicate (non-unique) UID\n"), usageout);
+	(void) fputs (_("  -p, --password PASSWORD       use encrypted password for the new password\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -s, --shell SHELL             new login shell for the user account\n"), usageout);
+	(void) fputs (_("  -u, --uid UID                 new UID for the user account\n"), usageout);
+	(void) fputs (_("  -U, --unlock                  unlock the user account\n"), usageout);
 #ifdef WITH_SELINUX
-	         _("  -Z, --selinux-user            new SELinux user mapping for the user account\n")
-#else
-	         ""
+	(void) fputs (_("  -Z, --selinux-user            new SELinux user mapping for the user account\n"), usageout);
 #endif
-	         );
+	(void) fputs ("\n", usageout);
 	exit (status);
 }
 
@@ -889,6 +888,7 @@ static void process_flags (int argc, char **argv)
 			{"move-home", no_argument, NULL, 'm'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
+			{"root", required_argument, NULL, 'R'},
 #ifdef WITH_SELINUX
 			{"selinux-user", required_argument, NULL, 'Z'},
 #endif
@@ -899,9 +899,9 @@ static void process_flags (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
-			                 "ac:d:e:f:g:G:hl:Lmop:s:u:UZ:",
+			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:UZ:",
 #else
-			                 "ac:d:e:f:g:G:hl:Lmop:s:u:U",
+			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:U",
 #endif
 			                 long_options, NULL)) != -1) {
 			switch (c) {
@@ -995,6 +995,8 @@ static void process_flags (int argc, char **argv)
 			case 'p':
 				user_pass = optarg;
 				pflg = true;
+				break;
+			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 's':
 				if (!VALID (optarg)) {
@@ -1788,10 +1790,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1801,11 +1799,16 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	process_root_flag ("-R", argc, argv);
+
+	OPENLOG ("usermod");
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = (char **) malloc (sizeof (char *) * (1 + sys_ngroups));
 	user_groups[0] = (char *) 0;
-
-	OPENLOG ("usermod");
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP
