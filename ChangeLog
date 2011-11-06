@@ -1,3 +1,8 @@
+2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/generate_mans.mak: The xml-config files do not depend on the
+	Makefile.
+
 2011-10-31  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chage.c, src/chgpasswd.c, src/chpasswd.c, src/chsh.c,

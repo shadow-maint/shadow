@@ -21,7 +21,7 @@ SHA_CRYPT_COND=no_sha_crypt
 endif
 
 if ENABLE_REGENERATE_MAN
-%.xml-config: %.xml Makefile
+%.xml-config: %.xml
 	if grep -q SHADOW-CONFIG-HERE $<; then \
 		sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $< > $@; \
 	else \
