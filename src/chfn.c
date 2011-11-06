@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <getopt.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
@@ -79,7 +80,7 @@ static bool pw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static void usage (void);
+static /*@noreturn@*/void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
 static char *copy_field (char *, char *, char *);
@@ -110,19 +111,22 @@ static void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static void usage (void)
+static /*@noreturn@*/void usage (int status)
 {
-	if (amroot) {
-		fprintf (stderr,
-		         _("Usage: %s [-f full_name] [-r room_no] "
-		           "[-w work_ph]\n"
-		           "\t[-h home_ph] [-o other] [user]\n"), Prog);
-	} else {
-		fprintf (stderr,
-		         _("Usage: %s [-f full_name] [-r room_no] "
-		           "[-w work_ph] [-h home_ph]\n"), Prog);
-	}
-	exit (E_USAGE);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] [LOGIN]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -f, --full-name FULL_NAME     change user's full name\n"), usageout);
+	(void) fputs (_("  -h, --home-phone HOME_PHONE   change user's home phone number\n"), usageout);
+	(void) fputs (_("  -o, --other OTHER_INFO        change user's other GECOS information\n"), usageout);
+	(void) fputs (_("  -r, --room ROOM_NUMBER        change user's room number\n"), usageout);
+	(void) fputs (_("  -u, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -w, --work-phone WORK_PHONE   change user's office phone number\n"), usageout);
+	(void) fputs ("\n", usageout);
+	exit (status);
 }
 
 /*
@@ -262,7 +266,16 @@ static char *copy_field (char *in, char *out, char *extra)
  */
 static void process_flags (int argc, char **argv)
 {
-	int flag;		/* flag currently being processed    */
+	int c;		/* flag currently being processed    */
+	static struct option long_options[] = {
+		{"full-name",  required_argument, NULL, 'f'},
+		{"home-phone", required_argument, NULL, 'h'},
+		{"other",      required_argument, NULL, 'o'},
+		{"room",       required_argument, NULL, 'r'},
+		{"help",       no_argument,       NULL, 'u'},
+		{"work-phone", required_argument, NULL, 'w'},
+		{NULL, 0, NULL, '\0'}
+	};
 
 	/* 
 	 * The remaining arguments will be processed one by one and executed
@@ -271,8 +284,9 @@ static void process_flags (int argc, char **argv)
 	 * environment and must agree with the real UID. Also, the UID will
 	 * be checked for any commands which are restricted to root only.
 	 */
-	while ((flag = getopt (argc, argv, "f:r:w:h:o:")) != EOF) {
-		switch (flag) {
+	while ((c = getopt_long (argc, argv, "f:h:o:r:uw:",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
 		case 'f':
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
@@ -291,15 +305,6 @@ static void process_flags (int argc, char **argv)
 			hflg = true;
 			STRFCPY (homeph, optarg);
 			break;
-		case 'r':
-			if (!may_change_field ('r')) {
-				fprintf (stderr,
-				         _("%s: Permission denied.\n"), Prog);
-				exit (E_NOPERM);
-			}
-			rflg = true;
-			STRFCPY (roomno, optarg);
-			break;
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
@@ -309,6 +314,18 @@ static void process_flags (int argc, char **argv)
 			oflg = true;
 			STRFCPY (slop, optarg);
 			break;
+		case 'r':
+			if (!may_change_field ('r')) {
+				fprintf (stderr,
+				         _("%s: Permission denied.\n"), Prog);
+				exit (E_NOPERM);
+			}
+			rflg = true;
+			STRFCPY (roomno, optarg);
+			break;
+		case 'u':
+			usage (E_SUCCESS);
+			/*@notreached@*/break;
 		case 'w':
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
@@ -319,7 +336,7 @@ static void process_flags (int argc, char **argv)
 			STRFCPY (workph, optarg);
 			break;
 		default:
-			usage ();
+			usage (E_USAGE);
 		}
 	}
 }

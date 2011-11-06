@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1990 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,6 @@
 <!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
-
 <refentry id='chfn.1'>
   <!-- $Id$ -->
   <refmeta>
@@ -53,12 +52,12 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>chfn</command>
-      <arg choice='opt'>-f <replaceable>full_name</replaceable></arg>
-      <arg choice='opt'>-r <replaceable>room_no</replaceable></arg>
-      <arg choice='opt'>-w <replaceable>work_ph</replaceable></arg>
-      <arg choice='opt'>-h <replaceable>home_ph</replaceable></arg>
-      <arg choice='opt'>-o <replaceable>other</replaceable></arg>
-      <arg choice='opt'><replaceable>user</replaceable></arg>
+      <arg choice='opt'>
+	<replaceable>options</replaceable>
+      </arg>
+      <arg choice='opt'>
+	<replaceable>LOGIN</replaceable>
+      </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
@@ -66,7 +65,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>chfn</command> command changes user fullname,
-      office number, office extension, and home phone number information
+      office room number, office phone number, and home phone number information
       for a user's account. This information is typically printed by
       <citerefentry><refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> and similar programs. A normal user may only change
@@ -87,6 +86,67 @@
       store accounting information used by other applications.
     </para>
 
+  </refsect1>
+
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>chfn</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-f</option>, <option>--full-name</option> <replaceable>FULL_NAME</replaceable>
+	</term>
+	<listitem>
+	  <para>Change the user's full name.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-h</option>, <option>--home-phone</option> <replaceable>HOME_PHONE</replaceable>
+	</term>
+	<listitem>
+	  <para>Change the user's home phone number.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-o</option>, <option>--other</option> <replaceable>OTHER</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Change the user's other GECOS information. This field is used to
+	    store accounting information used by other applications, and can
+	    be changed only by a superuser.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-r</option>, <option>--room</option> <replaceable>ROOM_NUMBER</replaceable>
+	</term>
+	<listitem>
+	  <para>Change the user's room number.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-u</option>, <option>--help</option>
+	</term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-w</option>, <option>--work-phone</option> <replaceable>WORK_PHONE</replaceable>
+	</term>
+	<listitem>
+	  <para>Change the user's office phone number.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
     <para>
       If none of the options are selected, <command>chfn</command>
       operates in an interactive fashion, prompting the user with the
