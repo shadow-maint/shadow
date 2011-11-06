@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2010, Nicolas François
+ * Copyright (c) 2007 - 2011, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -159,28 +159,31 @@ static int check_selinux_access (const char *changed_user,
  */
 static /*@noreturn@*/void usage (int status)
 {
-	(void)
-	fputs (_("Usage: passwd [options] [LOGIN]\n"
-	         "\n"
-	         "Options:\n"
-	         "  -a, --all                     report password status on all accounts\n"
-	         "  -d, --delete                  delete the password for the named account\n"
-	         "  -e, --expire                  force expire the password for the named account\n"
-	         "  -h, --help                    display this help message and exit\n"
-	         "  -k, --keep-tokens             change password only if expired\n"
-	         "  -i, --inactive INACTIVE       set password inactive after expiration\n"
-	         "                                to INACTIVE\n"
-	         "  -l, --lock                    lock the password of the named account\n"
-	         "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
-	         "                                change to MIN_DAYS\n"
-	         "  -q, --quiet                   quiet mode\n"
-	         "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-	         "  -S, --status                  report password status on the named account\n"
-	         "  -u, --unlock                  unlock the password of the named account\n"
-	         "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	         "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
-	         "                                change to MAX_DAYS\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] [LOGIN]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
+	(void) fputs (_("  -a, --all                     report password status on all accounts\n"), usageout);
+	(void) fputs (_("  -d, --delete                  delete the password for the named account\n"), usageout);
+	(void) fputs (_("  -e, --expire                  force expire the password for the named account\n"), usageout);
+	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -k, --keep-tokens             change password only if expired\n"), usageout);
+	(void) fputs (_("  -i, --inactive INACTIVE       set password inactive after expiration\n"
+	                "                                to INACTIVE\n"), usageout);
+	(void) fputs (_("  -l, --lock                    lock the password of the named account\n"), usageout);
+	(void) fputs (_("  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
+	                "                                change to MIN_DAYS\n"), usageout);
+	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
+	(void) fputs (_("  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -S, --status                  report password status on the named account\n"), usageout);
+	(void) fputs (_("  -u, --unlock                  unlock the password of the named account\n"), usageout);
+	(void) fputs (_("  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
+	(void) fputs (_("  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
+	                "                                change to MAX_DAYS\n"), usageout);
+	(void) fputs ("\n", usageout);
 	exit (status);
 }
 
@@ -771,15 +774,7 @@ int main (int argc, char **argv)
 	const struct spwd *sp;	/* Shadow file entry for user   */
 #endif				/* !USE_PAM */
 
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
-
-	/*
-	 * The program behaves differently when executed by root than when
-	 * executed by a normal user.
-	 */
-	amroot = (getuid () == 0);
+	sanitize_env ();
 
 	/*
 	 * Get the program name. The program name is used as a prefix to
@@ -787,7 +782,17 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	sanitize_env ();
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
+
+	process_root_flag ("-R", argc, argv);
+
+	/*
+	 * The program behaves differently when executed by root than when
+	 * executed by a normal user.
+	 */
+	amroot = (getuid () == 0);
 
 	OPENLOG ("passwd");
 
@@ -795,7 +800,6 @@ int main (int argc, char **argv)
 		/*
 		 * Parse the command line options.
 		 */
-		int option_index = 0;
 		int c;
 		static struct option long_options[] = {
 			{"all", no_argument, NULL, 'a'},
@@ -808,6 +812,7 @@ int main (int argc, char **argv)
 			{"mindays", required_argument, NULL, 'n'},
 			{"quiet", no_argument, NULL, 'q'},
 			{"repository", required_argument, NULL, 'r'},
+			{"root", required_argument, NULL, 'R'},
 			{"status", no_argument, NULL, 'S'},
 			{"unlock", no_argument, NULL, 'u'},
 			{"warndays", required_argument, NULL, 'w'},
@@ -815,8 +820,8 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "adehi:kln:qr:Suw:x:",
-		                         long_options, &option_index)) != -1) {
+		while ((c = getopt_long (argc, argv, "adehi:kln:qr:R:Suw:x:",
+		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;
@@ -871,6 +876,8 @@ int main (int argc, char **argv)
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
+				break;
+			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 'S':
 				Sflg = true;	/* ok for users */

@@ -33,6 +33,9 @@
 	man/chgpasswd.8.xml: Add --root option.
 	* src/chpasswd.c, src/chgpasswd.c: The getopt index of long
 	options is not used.
+	* NEWS, src/passwd.c, man/passwd.1.xml: Add --root option.
+	passwd's usage split in smaller messages.
+	* src/passwd.c: Call sanitize_env() before setting the locales.
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -37,6 +37,8 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Add --root option.
 - groupdel
   * Add --root option.
+- groupmems
+  * Fix parsing of gshadow entries.
 - groupmod
   * Fixed groupmod when configured with --enable-account-tools-setuid.
   * When the gshadow file exists but there are no gshadow entries, an entry
@@ -75,8 +77,10 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
   * Close PAM sessions as root. This will be more friendly to PAM modules
     like pam_mount or pam_systemd.
   * Added support for PAM modules which change PAM_USER.
-- newgrp, sg, groupmems
+- newgrp, sg
   * Fix parsing of gshadow entries.
+- passwd
+  * Add --root option.
 - pwpck
   * NIS entries were dropped by -s (sort).
 - pwconv
