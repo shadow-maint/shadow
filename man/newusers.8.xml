@@ -64,7 +64,9 @@
       <command>newusers</command>
       <arg choice='opt'>
 	<replaceable>options</replaceable>
-	<replaceable>new_users</replaceable>
+      </arg>
+      <arg choice='opt'>
+	<replaceable>file</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -72,8 +74,8 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>newusers</command> command reads a file of user name and
-      clear-text password pairs and uses this information to update a group
+      The <command>newusers</command> command reads a <replaceable>file</replaceable> (or the standard input by default)
+      and uses this information to update a set
       of existing users or to create new users. Each line is in the same format
       as the standard password file (see
       <citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>

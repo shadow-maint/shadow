@@ -1,3 +1,8 @@
+2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml: Document the optional file argument.
+	* man/newusers.8.xml: Fix the documentation of the inputs' format.
+
 2011-11-06  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/groupmod.8.xml: Document that the primary group of users may
