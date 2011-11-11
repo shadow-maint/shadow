@@ -83,6 +83,14 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 
 static void change_root (const char* newroot)
 {
+	/* Drop privileges */
+	if (   (setregid (rgid, rgid) != 0)
+	    || (setreuid (ruid, ruid) != 0)) {
+		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
+		         Prog, strerror (errno));
+		exit (EXIT_FAILURE);
+	}
+
 	if ('/' != newroot[0]) {
 		fprintf (stderr,
 		         _("%s: invalid chroot path '%s'\n"),
@@ -92,14 +100,14 @@ static void change_root (const char* newroot)
 
 	if (access (newroot, F_OK) != 0) {
 		fprintf(stderr,
-		        _("%s: chroot directory %s does not exist\n"),
-		        Prog, newroot);
+		        _("%s: cannot access chroot directory %s: %s\n"),
+		        Prog, newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 	if (chroot (newroot) != 0) {
 		fprintf(stderr,
-		        _("%s: unable to chroot to directory %s\n"),
-		        Prog, newroot);
+		        _("%s: unable to chroot to directory %s: %s\n"),
+		        Prog, newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 }

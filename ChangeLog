@@ -1,5 +1,11 @@
 2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/root_flag.c: Drop privileges before changing root. The
+	--root option should not be used by regular users for suid utils.
+	* libmisc/root_flag.c: Improve error messages.
+
+2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Compile fix for TCB.
 
 2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
