@@ -1,5 +1,9 @@
 2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Compile fix for TCB.
+
+2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c: Avoid conflict with glibc. Rename error to
 	error_acl.
 

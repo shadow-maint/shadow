@@ -154,7 +154,7 @@ static /*@noreturn@*/void usage (int status)
 	                "                                but do not change files\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifdef WITH_TCB
-	if (!getdef_bool ("USE_TCB")) {
+	if (!getdef_bool ("USE_TCB"))
 #endif				/* !WITH_TCB */
 	{
 		(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
