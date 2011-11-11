@@ -174,9 +174,9 @@ int reset_selinux_file_context (void)
 
 #if defined(WITH_ACL) || defined(WITH_ATTR)
 /*
- * error - format the error messages for the ACL and EQ libraries.
+ * error_acl - format the error messages for the ACL and EQ libraries.
  */
-static void error (struct error_context *ctx, const char *fmt, ...)
+static void error_acl (struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
 
@@ -190,7 +190,7 @@ static void error (struct error_context *ctx, const char *fmt, ...)
 }
 
 static struct error_context ctx = {
-	error
+	error_acl
 };
 #endif				/* WITH_ACL || WITH_ATTR */
 
