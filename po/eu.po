@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2009-07-03 11:06+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
@@ -41,6 +41,14 @@ msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
 "konfigurazio errorea - %s item ezezaguna (eman honen berri "
 "administratzaileari)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "Pasahitza: "
@@ -229,6 +237,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "huts egin du postontzia jabez aldatzean"
+
+#, fuzzy, c-format
 #| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
@@ -313,6 +326,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "%s(r)en pasahitz okerra.\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: huts baimenak kentzerakoan (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: etxeko tlf baliogabea: '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: ezin da %s direktorioa sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: ezin da %s direktorioa sortu\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -342,47 +382,80 @@ msgstr "Ezin da erro direktorioa '%s'-ra aldatu\n"
 msgid "Unable to determine your tty name."
 msgstr "Ezin da zure tty izena zehaztu."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) huts egin du\n"
-
 msgid "No"
 msgstr "Ez"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set date of last password change to "
-"LAST_DAY\n"
-"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
-"  -I, --inactive INACTIVE       set password inactive after expiration\n"
-"                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
-"  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
-"                                change to MIN_DAYS\n"
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
-"                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"Erabilera: chage [aukerak] [IZENA]\n"
+"Erabilera: %s [aukerak]\n"
 "\n"
 "Aukerak:\n"
-"  -d, --lastday AZKEN_EGUNA         ezarri pasahitz aldaketa AZKEN_EGUNA\n"
-"  -E, --expiredate IRAUNGITZE_DATA  ezarri kontu iraungitze data\n"
-"                                    IRAUNGITZE_DATA-ra\n"
-"  -h, --help                        laguntza mezu hau bistarazi eta  irten\n"
-"  -I, --inactive INACTIVE           ezarri pasahitza ezgaitua bezala\n"
-"                                    -INACTIVE iraungitzean\n"
-"  -l, --list                        kontu denbora informazioa bistarazi\n"
-"  -m, --mindays GUTXI_EGUN          pasahitz aldaketa gutxieneko data\n"
-"                                    GUTXI_EGUN-era aldatu\n"
-"  -M, --maxdays GEHI_EGUN           pasashitz aldaketa gehienezko data\n"
-"                                    GEHI_EGUN-era aldatu\n"
-"  -W, --warndays ABISU_EGUN         iraungitze abisua ABISU_EGUN-era ezarri\n"
-"\n"
+
+msgid ""
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
+msgstr ""
+
+msgid ""
+"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
+"  -I, --inactive INACTIVE       set password inactive after expiration\n"
+"                                to INACTIVE\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -l, --list                    show account aging information\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+"                                change to MIN_DAYS\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"                                change to MAX_DAYS\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Idatzi balio berria, edo sakatu 'Sartu' tekla lehenetsirako"
@@ -455,9 +528,10 @@ msgstr "%s: baimena ukatua.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM autentifikazioak huts egin du\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid "%s: cannot lock %s; try again later.\n"
@@ -480,10 +554,6 @@ msgid "%s: the shadow password file is not present\n"
 msgstr "%s: ezin da itzalpeko (shadow) pasahitz fitxategia ez dago\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: huts baimenak kentzerakoan (%s)\n"
-
-#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: `%s' erabiltzailea ez da %s-en existitzen\n"
 
@@ -495,17 +565,40 @@ msgstr "%s(r)en data informazioa aldatzen\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: errorea eremuak aldatzean\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
 msgstr ""
-"Erabilera: %s [-f izen_osoa] [-r gela_zenb] [-w lan_tlf]\n"
-"\t[-h etxe_tlf] [-o bestelakoa] [erabiltzaile-izena]\n"
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "Erabilera: %s [-f izen_osoa] [-r gela_zb] [-w lan_tlf] [-h etxe_tlf]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -h, --help                    display this help message and exit\n"
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "Izen osoa"
@@ -586,23 +679,25 @@ msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
 "Erabilera: %s [aukerak]\n"
 "\n"
 "Aukerak:\n"
-"  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
-"  -e, --encrypted              emandako pasahitzak enkripatzen dira\n"
-"  -h, --help                    laguntzako mezu hau erakutsi eta irten\n"
-"                                egiten da\n"
-"  -m, --md5                     erabili MD5 enkriptatze algoritmoa ,\n"
-"                                pasahitzak enkriptatuta ez daudenean\n"
-"%s\n"
+
+#, fuzzy, c-format
+#| msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr "  -e, --encrypted               emandako pasahitzak zifraturik daude\n"
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -644,35 +739,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s:errorea atzeman da, aldaketak alde batera utzi dira\n"
 
 #, c-format
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Erabilera: %s [aukerak]\n"
-"\n"
-"Aukerak:\n"
-
-#, fuzzy, c-format
-#| msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr "  -e, --encrypted               emandako pasahitzak zifraturik daude\n"
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
-"                                algoritmoa erabiliaz\n"
-
-#, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: `(%d lerroa, %s erabiltzailea) pasahitza ez da aldatu\n"
 
@@ -680,20 +746,10 @@ msgstr "%s: `(%d lerroa, %s erabiltzailea) pasahitza ez da aldatu\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: %d lerroa: '%s' erabiltzailea ez da existitzen\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
-msgstr ""
-"Erabilera: chsh [aukerak] [IZENA]\n"
-"\n"
-"Aukerak:\n"
-"  -h, --help                    laguntza testu hau bistarazi eta irten\n"
-"  -r, --shell IZENA             erabiltzaile kontukoaren shell berria\n"
-"\n"
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
 
 msgid "Login Shell"
 msgstr "Saio-hasierako shell-a"
@@ -725,8 +781,31 @@ msgstr "%s: '%s' erabiltzailea ez da existitzen\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: abisua: %s ez dago %s(r)en jabegoan\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "Erabilera: expiry {-f|-c}\n"
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: %s eta %s aukerak elkar-jotzen dute\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: argumentu esperogabea: %s\n"
 
 #, fuzzy
 #| msgid "  -h, --help                    display this help message and exit\n"
@@ -762,9 +841,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr "huts-erregistroa: Huts %lu UID-arentat sarrera eskuratzean\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "lastlog: Huts %lu UIDaren sarrera eskuratzean\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Saio-hasiera    Hutsegiteak Gehienezkoa Azkena     Aktiboa\n"
@@ -777,29 +857,30 @@ msgstr " [%lus falta]"
 msgid " [%lds lock]"
 msgstr " [%lds blokeatuta]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to reset fail count for UID %lu\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "huts-erregistroa: Errorea %lu UIDaren huts kontua berrabiaraztean\n"
 
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set max for UID %lu\n"
+msgid "%s: Failed to set max for UID %lu\n"
 msgstr "huts-erregistroa: Huts %lu UIDarentzat max ezartzean\n"
 
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set locktime for UID %lu\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "huts-erregistroa: Huts %lu UIDarentzat blokeo-ordua ezartzean\n"
 
-#, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Unknown user or range: %s\n"
+msgid "%s: Unknown user or range: %s\n"
 msgstr "azken-erregistroa: Eremu edo erabiltzaile ezezaguna: %s\n"
 
-#, c-format
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "huts-erregistroa: Ezin da %s ireki: %s\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr "huts-erregistroa: Ezinda %s tamaina eskuratu: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "lastlog: Ezinda %s-ren tamaina eskuratu: %s\n"
 
 #, fuzzy, c-format
 #| msgid ""
@@ -821,6 +902,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr "  -r, --system                  sortu sistema kontuak\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -976,8 +1060,10 @@ msgstr "%s: '%s' taldea badago dagoeneko\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: '%lu' GIDa badago dagoeneko\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "Erabilera: groupdel taldea\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1097,16 +1183,53 @@ msgstr "%s: %s taldea NIS talde bat da\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: %s erabiltzaile ezezaguna\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Erabilera: %s [-r] [-s] [taldea [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Erabilera: %s [-r] [-s] [taldea]\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s eta -r ezin dira batera erabili\n"
 
 msgid "invalid group file entry"
@@ -1176,12 +1299,6 @@ msgstr "%s: fitxategiak eguneratu dira\n"
 msgid "%s: no changes\n"
 msgstr "%s: aldaketarik gabe\n"
 
-msgid "Usage: grpconv\n"
-msgstr "Erabilera: grpconv\n"
-
-msgid "Usage: grpunconv\n"
-msgstr "Erabilera: grpunconv\n"
-
 #, c-format
 msgid "%s: cannot delete %s\n"
 msgstr "%s: ezin da %s ezabatu\n"
@@ -1195,33 +1312,24 @@ msgstr "Erabilera: id\n"
 msgid " groups="
 msgstr " taldeak="
 
+#, fuzzy
+#| msgid "  -h, --help                    display this help message and exit\n"
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
+
+#, fuzzy
+#| msgid "  -h, --help                    display this help message and exit\n"
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"Erabilera: lastlog [aukerak]\n"
-"\n"
-"Aukerak:\n"
-"  -b, --before EGUN             EGUN kopurua baino zaharragoak diren\n"
-"                                erregistroak\n"
-"  -h, --help                    laguntzako mezu hau bistaratu eta irten\n"
-"                                egiten da\n"
-"  -t, --time EGUNAK             EGUNAK baino berriagoak diren erregistroak\n"
-"                                bakarrik bistaratzen ditu\n"
-"  -u, --user IZENA              IZENA duen erabiltzailearen lastlog\n"
-"                                erregistroa bistaratzen du\n"
-"\n"
+"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: Huts %lu UIDaren sarrera eskuratzean\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
 
 msgid "Username         Port     From             Latest"
 msgstr "Erabiltzaile-izena        Ataka      Nondik           Azkena"
@@ -1231,14 +1339,6 @@ msgstr "Erabiltzaile-izena           Ataka          Azkena"
 
 msgid "**Never logged in**"
 msgstr "**Inoiz ez du saiorik hasi**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: argumentu esperogabea: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr "lastlog: Ezinda %s-ren tamaina eskuratu: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1310,6 +1410,11 @@ msgstr "Saioa hastea: PAM-ek uztea eskatu du\n"
 
 msgid "Login incorrect"
 msgstr "Izen okerra"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
 
 #, c-format
 msgid ""
@@ -1430,58 +1535,94 @@ msgstr "%s: %d lerroa: chown %s-ek huts egin du: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d lerroa: ezin da sarrera eguneratu\n"
 
+#, fuzzy
+#| msgid "  -h, --help                    display this help message and exit\n"
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr "  -e, --encrypted               emandako pasahitzak zifraturik daude\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"Erabilera: passwd [aukerak] [IZENA]\n"
-"\n"
-"Aukerak:\n"
-"  -a, --all                        kontu guztien pasahitzen egoera "
-"erreportea\n"
-"  -d, --delete                     emandako kontuaren pasahitza ezabatu\n"
-"  -e, --expire                     emandako kontuaren pasahitzaren\n"
-"                                   iraungitzea behartu\n"
-"  -h, --help                       laguntza mezu hau bistarazi eta irten\n"
-"  -k, --keep-tokens                pasahitza iraungirik bakarrik badago\n"
-"                                   aldatu\n"
-"  -i, --inactive INAKTIBO          ezarri iraungiriko pasahitz ezgaitzea\n"
-"                                   INAKTIBO-ra\n"
-"  -l, --lock                       emandako kontua blokeatu\n"
-"  -n, --mindays GUTXI_EGUN         ezarri pasahitz aldaketa gutxieneko data\n"
-"                                   GUTXI_EGUN-ra\n"
-"  -q, --quiet                      ixilik modua\n"
-"  -r, --repository ERREPOSITORIOA  ERREPOSITORIOA errepositorioko pashitza\n"
-"                                   aldatu\n"
-"  -S, --status                     emandako kontuaren pasahitz egoera\n"
-"                                   erreportea egin\n"
-"  -u, --unlock                     emandako kontuaren blokeoa kendu\n"
-"  -w, --warndays ABISU_EGUN        ezarri iraungitze abisu data ABISU_EGUN-"
-"era\n"
-"  -x, --maxdays GEHI_EGUN          ezarri pasahitz aldatu aurretik "
-"gehienezko\n"
-"                                   egun kopurua GEHI_EGUN-era\n"
-"\n"
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
 
 msgid "Old password: "
 msgstr "Pasahitz zaharra: "
@@ -1565,18 +1706,37 @@ msgid "%s: password expiry information changed.\n"
 msgstr "%s: pasahitz iraungitzea informazioa aldatua.\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Erabilera: %s [-q] [-r] [-s] [pasahitza [itzalpekoa]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Erabilera: %s [-q] [-r] [-s] [pasahitza [itzalpekoa]]\n"
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s eta -r ezin dira batera erabili\n"
+#| msgid ""
+#| "Usage: %s [options]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Erabilera: %s [aukerak]\n"
+"\n"
+"Aukerak:\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -q, --quiet                   report errors only\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1657,9 +1817,6 @@ msgstr "%s erabiltzailea: pasahitza etorkizunean aldatu zen azken aldiz\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: ezin dira %s fitxategiko sarrerak ordenatu\n"
 
-msgid "Usage: pwconv\n"
-msgstr "Erabilera: pwconv\n"
-
 #, c-format
 msgid "%s: can't work with tcb enabled\n"
 msgstr ""
@@ -1667,9 +1824,6 @@ msgstr ""
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: huts %s-ren modua 0600-ra aldatzean\n"
-
-msgid "Usage: pwunconv\n"
-msgstr "Erabilera: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "kontu honentzako 'su' sarbidea UKATUTA.\n"
@@ -1736,16 +1890,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: terminal batetik exekutatu behar da\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: %d errorea\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "ID ezezaguna: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Ez ikusi egin zaio)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1755,14 +1905,6 @@ msgid "(Enter your own password)"
 msgstr "(zure pasahitza idatzi)"
 
 #, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(Ez ikusi egin zaio)\n"
-
-#, c-format
 msgid "%s: Authentication failure\n"
 msgstr "%s: ¡autentifikazio errorea\n"
 
@@ -1770,8 +1912,28 @@ msgstr "%s: ¡autentifikazio errorea\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Ez duzu orain su erabiltzeko baimenik\n"
 
-msgid "No shell\n"
-msgstr "Ez dago shell-a\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "Ez dago 'root'-en pasahitzik"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: terminal batetik exekutatu behar da\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: %d errorea\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "lastlog: Ezinda %s-ren tamaina eskuratu: %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "Ezin izan da %s exekutatu"
 
 msgid "No password file"
 msgstr "Ez dago pasahitz-fitxategirik"
@@ -1814,8 +1976,9 @@ msgstr "%s: ezin da lehenespen fitxategi berria ireki\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: lerro luzeegia %s-n: %s..."
 
-#, c-format
-msgid "%s: rename: %s: %s"
+#, fuzzy, c-format
+#| msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: berrizendatu: %s: %s"
 
 #, c-format
@@ -1833,6 +1996,8 @@ msgstr "%s: talde gehiegi zehaztu dira (geh. %d).\n"
 #| "Options:\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1997,10 +2162,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z-ek  SELinux gaituriko kernel bat behar du\n"
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: %s eta %s aukerak elkar-jotzen dute\n"
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr "%s: huts %lu UIDaren faillog erregistroa berrezartzean: %s\n"
 
@@ -2065,30 +2226,42 @@ msgstr ""
 "%s: abisua: etxe direktorioa badago dagoeneko.\n"
 "Ez da bertara skel direktorioko fitxategirik kopiatuko.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"Erabilera: userdel [aukerak] IZENA\n"
-"\n"
-"Aukerak:\n"
-"  -f, --force                   fitxategien ezabatzea indartu nahiz ez\n"
-"                                erabiltzailearenak izan\n"
-"  -h, --help                    laguntza testu hau bistarazi eta irten\n"
-"  -r, --remove                  etxe direktorioa eta posta hilara ezabatu\n"
-"\n"
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove the primary group of user '%s'\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: Ezin da '%s' erabiltzailearen talde nagusia kendu\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ezin da %s taldea ezabatu beste erabiltzaile baten talde nagusia bait "
 "da.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s home directory (%s) not found\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: %s etxe-direktorioa (%s) ez dago\n"
 
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
@@ -2122,10 +2295,6 @@ msgid "%s: user %s is a NIS user\n"
 msgstr "%s:  %s erabiltzailea NIS erabiltzaile bat da\n"
 
 #, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: une honetan %s erabiltzaileak saioan sartuta dago\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s etxe-direktorioa (%s) ez dago\n"
 
@@ -2137,62 +2306,92 @@ msgstr "%s: ez da %s direktorioa ezabatuko (%s(r)en etxea ezabatuko luke)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: errorea %s direktorioa ezabatzean\n"
 
-#, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -L, --lock                    lock the user account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"Erabilera: usermod [aukerak] IZENA\n"
-"\n"
-"Aukerak:\n"
-"  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
-"  -d, --home-dir ETXE_DIR       erabiltzaile kontu berriaren etxe "
-"direktorioa\n"
-"  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
-"  -f, --inactive INAKTIBO       iraungitze ondorengo pasahitz ezgaitzea\n"
-"                                to INAKTIBO-ra ezarri\n"
-"  -g, --gid TALDE               erabiltzaile kontu berriarekin TALDE\n"
-"                                erabiltzea behartu\n"
-"  -G, --groups TALDEAK          erabiltzaile kontu berriaren talde\n"
-"                                gehigarriak bistarazi\n"
-"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
-"talde\n"
-"                                gehigarrietara beste taldeetatik kendu gabe\n"
-"  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
-"  -l, --login IZENA             saio hasiera izenaren balio berria\n"
-"  -L, --lock                    erabiltzaile kontua blokeatu\n"
-"  -m, --move-home               etxe direktorioaren edukia kokapen berrira\n"
-"                                mugitu (--d-rekin bakarrik erabilgarri)\n"
-"  -o, --non-unique              onartu UID bikoiztuak (ez bakarrak) "
-"erabiltzea\n"
-"  -p, --password PASAHITZA      Enkriptaturiko pasahitza erabili pasahitz\n"
-"                                berriarentzat\n"
-"  -s, --shell SHELL             erabiltzaile kontuaren saio shell berria\n"
-"  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
-"  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
-"%s\n"
+"  -s, --sha-rounds              SHA* kriptografia algoritmoentzako\n"
+"                                SHA erronda kopurua\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+"  -m, --md5                     zifratu testu laueko pasahitza MD5\n"
+"                                algoritmoa erabiliaz\n"
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create system accounts\n"
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr "  -r, --system                  sortu sistema kontuak\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2215,17 +2414,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' erabiltzailea badago dagoeneko %s-n\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: ez da banderarik eman\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s:  -e eta -f aukerek itzalpeko pasahitzak eskatzen dute\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: no options\n"
+msgstr "%s: ezin da %s ireki\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: -L, -p, eta -U banderak esklusiboak dira\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s:  -e eta -f aukerek itzalpeko pasahitzak eskatzen dute\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2311,11 +2511,6 @@ msgid "  -p, --passwd                  edit passwd database\n"
 msgstr "  -r, --system                  sortu sistema kontuak\n"
 
 #, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
-msgid "  -q, --quiet                   quiet mode\n"
-msgstr "  -r, --system                  sortu sistema kontuak\n"
-
-#, fuzzy
 #| msgid "  -h, --help                    display this help message and exit\n"
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr ""
@@ -2394,6 +2589,326 @@ msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: oinarrizko '%s' direktorio baliogabea\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) huts egin du\n"
+
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: chage [aukerak] [IZENA]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -d, --lastday AZKEN_EGUNA         ezarri pasahitz aldaketa AZKEN_EGUNA\n"
+#~ "  -E, --expiredate IRAUNGITZE_DATA  ezarri kontu iraungitze data\n"
+#~ "                                    IRAUNGITZE_DATA-ra\n"
+#~ "  -h, --help                        laguntza mezu hau bistarazi eta  "
+#~ "irten\n"
+#~ "  -I, --inactive INACTIVE           ezarri pasahitza ezgaitua bezala\n"
+#~ "                                    -INACTIVE iraungitzean\n"
+#~ "  -l, --list                        kontu denbora informazioa bistarazi\n"
+#~ "  -m, --mindays GUTXI_EGUN          pasahitz aldaketa gutxieneko data\n"
+#~ "                                    GUTXI_EGUN-era aldatu\n"
+#~ "  -M, --maxdays GEHI_EGUN           pasashitz aldaketa gehienezko data\n"
+#~ "                                    GEHI_EGUN-era aldatu\n"
+#~ "  -W, --warndays ABISU_EGUN         iraungitze abisua ABISU_EGUN-era "
+#~ "ezarri\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: PAM autentifikazioak huts egin du\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "Erabilera: %s [-f izen_osoa] [-r gela_zenb] [-w lan_tlf]\n"
+#~ "\t[-h etxe_tlf] [-o bestelakoa] [erabiltzaile-izena]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr ""
+#~ "Erabilera: %s [-f izen_osoa] [-r gela_zb] [-w lan_tlf] [-h etxe_tlf]\n"
+
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Erabilera: %s [aukerak]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -c, --crypt-method            kriptografia metodoa (%s-etako bat)\n"
+#~ "  -e, --encrypted              emandako pasahitzak enkripatzen dira\n"
+#~ "  -h, --help                    laguntzako mezu hau erakutsi eta irten\n"
+#~ "                                egiten da\n"
+#~ "  -m, --md5                     erabili MD5 enkriptatze algoritmoa ,\n"
+#~ "                                pasahitzak enkriptatuta ez daudenean\n"
+#~ "%s\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: chsh [aukerak] [IZENA]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -h, --help                    laguntza testu hau bistarazi eta irten\n"
+#~ "  -r, --shell IZENA             erabiltzaile kontukoaren shell berria\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "Erabilera: expiry {-f|-c}\n"
+
+#~ msgid "faillog: Failed to get the entry for UID %lu\n"
+#~ msgstr "huts-erregistroa: Huts %lu UID-arentat sarrera eskuratzean\n"
+
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "huts-erregistroa: Ezin da %s ireki: %s\n"
+
+#~ msgid "faillog: Cannot get the size of %s: %s\n"
+#~ msgstr "huts-erregistroa: Ezinda %s tamaina eskuratu: %s\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "Erabilera: groupdel taldea\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "Erabilera: %s [-r] [-s] [taldea [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "Erabilera: %s [-r] [-s] [taldea]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s eta -r ezin dira batera erabili\n"
+
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "Erabilera: grpconv\n"
+
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "Erabilera: grpunconv\n"
+
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: lastlog [aukerak]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -b, --before EGUN             EGUN kopurua baino zaharragoak diren\n"
+#~ "                                erregistroak\n"
+#~ "  -h, --help                    laguntzako mezu hau bistaratu eta irten\n"
+#~ "                                egiten da\n"
+#~ "  -t, --time EGUNAK             EGUNAK baino berriagoak diren "
+#~ "erregistroak\n"
+#~ "                                bakarrik bistaratzen ditu\n"
+#~ "  -u, --user IZENA              IZENA duen erabiltzailearen lastlog\n"
+#~ "                                erregistroa bistaratzen du\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: passwd [aukerak] [IZENA]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -a, --all                        kontu guztien pasahitzen egoera "
+#~ "erreportea\n"
+#~ "  -d, --delete                     emandako kontuaren pasahitza ezabatu\n"
+#~ "  -e, --expire                     emandako kontuaren pasahitzaren\n"
+#~ "                                   iraungitzea behartu\n"
+#~ "  -h, --help                       laguntza mezu hau bistarazi eta irten\n"
+#~ "  -k, --keep-tokens                pasahitza iraungirik bakarrik badago\n"
+#~ "                                   aldatu\n"
+#~ "  -i, --inactive INAKTIBO          ezarri iraungiriko pasahitz ezgaitzea\n"
+#~ "                                   INAKTIBO-ra\n"
+#~ "  -l, --lock                       emandako kontua blokeatu\n"
+#~ "  -n, --mindays GUTXI_EGUN         ezarri pasahitz aldaketa gutxieneko "
+#~ "data\n"
+#~ "                                   GUTXI_EGUN-ra\n"
+#~ "  -q, --quiet                      ixilik modua\n"
+#~ "  -r, --repository ERREPOSITORIOA  ERREPOSITORIOA errepositorioko "
+#~ "pashitza\n"
+#~ "                                   aldatu\n"
+#~ "  -S, --status                     emandako kontuaren pasahitz egoera\n"
+#~ "                                   erreportea egin\n"
+#~ "  -u, --unlock                     emandako kontuaren blokeoa kendu\n"
+#~ "  -w, --warndays ABISU_EGUN        ezarri iraungitze abisu data "
+#~ "ABISU_EGUN-era\n"
+#~ "  -x, --maxdays GEHI_EGUN          ezarri pasahitz aldatu aurretik "
+#~ "gehienezko\n"
+#~ "                                   egun kopurua GEHI_EGUN-era\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "Erabilera: %s [-q] [-r] [-s] [pasahitza [itzalpekoa]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "Erabilera: %s [-q] [-r] [-s] [pasahitza [itzalpekoa]]\n"
+
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "Erabilera: pwconv\n"
+
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "Erabilera: pwunconv\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "ID ezezaguna: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "Ez dago shell-a\n"
+
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: userdel [aukerak] IZENA\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -f, --force                   fitxategien ezabatzea indartu nahiz ez\n"
+#~ "                                erabiltzailearenak izan\n"
+#~ "  -h, --help                    laguntza testu hau bistarazi eta irten\n"
+#~ "  -r, --remove                  etxe direktorioa eta posta hilara "
+#~ "ezabatu\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: une honetan %s erabiltzaileak saioan sartuta dago\n"
+
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Erabilera: usermod [aukerak] IZENA\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
+#~ "  -d, --home-dir ETXE_DIR       erabiltzaile kontu berriaren etxe "
+#~ "direktorioa\n"
+#~ "  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
+#~ "  -f, --inactive INAKTIBO       iraungitze ondorengo pasahitz ezgaitzea\n"
+#~ "                                to INAKTIBO-ra ezarri\n"
+#~ "  -g, --gid TALDE               erabiltzaile kontu berriarekin TALDE\n"
+#~ "                                erabiltzea behartu\n"
+#~ "  -G, --groups TALDEAK          erabiltzaile kontu berriaren talde\n"
+#~ "                                gehigarriak bistarazi\n"
+#~ "  -a, --append                  gehitu erabiltzailea -G aukerak "
+#~ "zehaztutako talde\n"
+#~ "                                gehigarrietara beste taldeetatik kendu "
+#~ "gabe\n"
+#~ "  -h, --help                    laguntza mezu hau bistarazi eta irten\n"
+#~ "  -l, --login IZENA             saio hasiera izenaren balio berria\n"
+#~ "  -L, --lock                    erabiltzaile kontua blokeatu\n"
+#~ "  -m, --move-home               etxe direktorioaren edukia kokapen "
+#~ "berrira\n"
+#~ "                                mugitu (--d-rekin bakarrik erabilgarri)\n"
+#~ "  -o, --non-unique              onartu UID bikoiztuak (ez bakarrak) "
+#~ "erabiltzea\n"
+#~ "  -p, --password PASAHITZA      Enkriptaturiko pasahitza erabili "
+#~ "pasahitz\n"
+#~ "                                berriarentzat\n"
+#~ "  -s, --shell SHELL             erabiltzaile kontuaren saio shell berria\n"
+#~ "  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
+#~ "  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
+#~ "%s\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: ez da banderarik eman\n"
 
 #, fuzzy
 #~| msgid ""

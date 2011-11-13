@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2009-04-12 17:14+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -43,6 +43,14 @@ msgstr "Fant ikke plass til config-info.\n"
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "feil med oppsettet - ukjent element «%s» (kontakt administrator)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "Passord: "
@@ -238,6 +246,11 @@ msgid ""
 "(%lu)\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "klarte ikke å endre eier av mailbox"
+
 # , c-format
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique UID (no more available UIDs)\n"
@@ -326,6 +339,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "Feil passord for «%s».\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: klarte ikke minske privilegier (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: ugyldig hjemmetelefon: «%s»\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: kan ikke opprette mappa %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: kan ikke opprette mappa %s\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -355,69 +395,71 @@ msgstr "Kan ikke endre rot-mappa til «%s»\n"
 msgid "Unable to determine your tty name."
 msgstr "Kan ikke finne ut ditt terminalnavn."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) mislyktes\n"
-
 msgid "No"
 msgstr "Nei"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: chage [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --list                    show account aging information\n"
-#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "Bruk: %s [input]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"Bruk: chage [valg] [bruker]\n"
-"\n"
-"Valg:\n"
-"  -d, --lastday SISTE_DAG       angi at siste passord-endring skjedde "
-"SISTE_DAG\n"
-"  -E, --expiredate UTLØPSDATO   angi at kontoen utløper UTLØPSDATO\n"
-"  -h, .--help                   vis denne hjelpeteksten og avslutt\n"
-"  -I, --inaktive INAKTIV        angi at passordet settes inaktivt etter "
-"utløp\n"
-"  -l, --list                    vis informasjon om kontoens aldring og "
-"utløp\n"
-"  m, --mindays MIN_DAGER        oppgir at passordet først kan endres etter\n"
-"                                MIN_DAGER\n"
-"  M, --maxdays MAKS_DAGER       oppgir at passordet må endres før det er\n"
-"                                gått MAKS_DAGER\n"
-"  -W, --warndays VARSLDAGER     etter VARSLDAGER varsles bruker om at\n"
-"                                passordet snart utløper\n"
-"\n"
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
@@ -491,9 +533,10 @@ msgstr "%s: Ikke tillatelse.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan ikke avgjøre ditt brukernavn.\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM autentisering mislyktes\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 # , c-format
 #, c-format
@@ -519,10 +562,6 @@ msgstr "%s: klarte ikke lage det nye %s-innslaget «%s»\n"
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: skyggepassordfila finnes ikke\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: klarte ikke minske privilegier (%s)\n"
-
 # , c-format
 #, c-format
 msgid "%s: user '%s' does not exist in %s\n"
@@ -536,17 +575,31 @@ msgstr "Endrer aldringsinformasjon for %s\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: feil ved endring i feltene\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf]\n"
-"\t[-h hjemmetlf] [-o annet] [bruker]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf] [-h hjemmetlf]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "Fullt navn"
@@ -625,37 +678,31 @@ msgstr "Endrer brukerinformasjon for %s\n"
 msgid "%s: fields too long\n"
 msgstr "%s: feltene er for lange\n"
 
-# , c-format
 #, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -c, --crypt-method            the crypt method (one of %s)\n"
-#| "  -e, --encrypted               supplied passwords are encrypted\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
-#| "%s\n"
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "Bruk: %s [input]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"Bruk: %s [valg]\n"
-"\n"
-"Valg:\n"
-"  -c, --crypt-method        krypteringsmetode (en av %s)\n"
-"  -e, --encrypted               oppgitte passord er krypterte\n"
-"  h, --help                     vis denne hjelpeteksten og avslutt\n"
-"  -m, --md5                     krypter klartekst-passordene med\n"
-"                                 MD5-algoritmen\n"
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -699,35 +746,6 @@ msgstr "%s: linje %d: klarte ikke lage det nye %s-innslaget «%s»\n"
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: feil funnet, endringer er ikke utført\n"
 
-#, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "Bruk: %s [input]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
-"                                kryptoalgoritmene\n"
-
 # , c-format
 #, fuzzy, c-format
 #| msgid "%s: line %d: user '%s' does not exist\n"
@@ -739,20 +757,8 @@ msgstr "%s: linje %d: bruker «%s» finnes ikke\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: linje %d: bruker «%s» finnes ikke\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"Bruk: chsh [valg] LOGIN\n"
-"\n"
-"Valg:\n"
-"  -h, --help        vis denne meldingen og avslutt\n"
-"  -s, --shell SKALL      nytt innloggingsskall for brukerkontoen\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "Innloggingsskall"
@@ -786,8 +792,29 @@ msgstr "%s: bruker %s finnes ikke\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: advarsel: %s er ikke eid av %s\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "Bruk: expiry {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: konflikt mellom valgene %s og %s\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: uventet argument: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -816,9 +843,9 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "faillog: Failed to get the entry for UID %d\n"
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr "faillog: klarte ikke finne oppføring for UID %d\n"
+#| msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "lastlog: Klarte ikke hente innslag for UID %d\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Logginn       Mislykt Maksimum Siste                   På\n"
@@ -834,32 +861,29 @@ msgstr " [%lds lås]"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to reset fail count for UID %d\n"
-msgid "faillog: Failed to reset fail count for UID %lu\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "faillog: Klarte ikke tilbakestille feiltelling for UID %d\n"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to set max for UID %d\n"
-msgid "faillog: Failed to set max for UID %lu\n"
+msgid "%s: Failed to set max for UID %lu\n"
 msgstr "faillog: Klarte ikke sette maksimum for UID %d\n"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to set locktime for UID %d\n"
-msgid "faillog: Failed to set locktime for UID %lu\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "faillog: Klarte ikke sette låsetid for UID %d\n"
 
 # , c-format
-#, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Unknown user or range: %s\n"
+msgid "%s: Unknown user or range: %s\n"
 msgstr "lastlog: Ukjent bruker eller område: %s\n"
 
-# , c-format
-#, c-format
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "faillog: Kan ikke åpne %s:%s\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr "faillog: Kan ikke finne størrelse av %s: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "lastlog: Kan ikke finne størrelse på %s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -873,6 +897,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -1022,8 +1049,10 @@ msgstr "%s: gruppa «%s» finnes fra før\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s; GID «%lu» finnes fra før.\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "Bruk: groupdel gruppe\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: Kan ikke avgjøre ditt brukernavn.\n"
 
 # , c-format
 #, c-format
@@ -1136,16 +1165,39 @@ msgstr "%s: gruppa %s er en NIS gruppe\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: ukjent bruker %s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Bruk: %s [-r] [-s] [gruppe [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Bruk: %s [-r] [-s] [gruppe]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s og -r kan ikke brukes samtidig\n"
 
 msgid "invalid group file entry"
@@ -1215,12 +1267,6 @@ msgstr "%s: filene er blitt oppdatert\n"
 msgid "%s: no changes\n"
 msgstr "%s: ingen endringer\n"
 
-msgid "Usage: grpconv\n"
-msgstr "Bruk: grpconv\n"
-
-msgid "Usage: grpunconv\n"
-msgstr "Bruk: grpunconv\n"
-
 # , c-format
 #, c-format
 msgid "%s: cannot delete %s\n"
@@ -1236,29 +1282,17 @@ msgid " groups="
 msgstr " grupper="
 
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"Bruk: lastlog [valg]\n"
-"\n"
-"Valg:\n"
-"  -b, --before DAGER            skriv bare oppføringer eldre enn DAGER\n"
-"  -h, --help                    vis denne hjelpeteksten og avslutt\n"
-"  -t, --time DAGER              skriv bare oppføringer nyere enn DAGER\n"
-"  -u, --user BRUKER             skriv oppføringer for bruker BRUKER\n"
-"\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Failed to get the entry for UID %d\n"
-msgid "lastlog: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: Klarte ikke hente innslag for UID %d\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
 
 msgid "Username         Port     From             Latest"
 msgstr "Brukernavn         Port     Fra             Sist"
@@ -1268,14 +1302,6 @@ msgstr "Brukernavn                Port     Sist"
 
 msgid "**Never logged in**"
 msgstr "**Aldri vært innlogget**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: uventet argument: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr "lastlog: Kan ikke finne størrelse på %s: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1349,6 +1375,11 @@ msgstr "login: PAM ber om avbrytelse\n"
 
 msgid "Login incorrect"
 msgstr "Ugyldig innlogging"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: linje %d: kan ikke finne bruker %s\n"
 
 #, c-format
 msgid ""
@@ -1479,50 +1510,76 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linje %d: kan ikke oppdatere oppføring\n"
 
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"Bruk: passwd [valg] [bruker]\n"
-"\n"
-"Valg:\n"
-"  -a, --all                     rapporter passordstatus for alle kontoer\n"
-"  -d, --delete                  slett passordet for oppgitt konto\n"
-"  -e, --expire                  angi at passordet for konten er utgått\n"
-"  -h, --help                    vis denne hjelpeteksten og avslutt\n"
-"  -k, --keep-tokens             endre passord bare hvis utgått\n"
-"  -i, --inactive INAKTIV        set passord inaktivt etter utløp til "
-"INAKTIV\n"
-"  -l, --lock                    lås oppgitt konto\n"
-"  -n, --mindays MIN_DAGER       angi at passord ikke kan endres før etter\n"
-"                                MIN_DAGER\n"
-"  -q, --quiet                   ordknapp kjøremåte\n"
-"  -r, --repository LAGER        endre passord i lageret LAGER\n"
-"  -S, --status                  rapporter passordstatus på oppgitt konto\n"
-"  -u, .--unlock                 lås opp oppgitt konto\n"
-"  -w, --warndays DAGER          varsle om utgått passord DAGER før utløp\n"
-"  -x, --maxdays MAX_DAGER           passordet må endres før det er gått "
-"MAX_DAGER\n"
-"\n"
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
 
 msgid "Old password: "
 msgstr "Gammelt passord: "
@@ -1610,18 +1667,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "Varsel når passordet snart går ut på dato"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Bruk: %s [-q] [-r] [-s] [passord [shadow]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Bruk: %s [-q] [-r] [-s] [passord [shadow]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s og -r kan ikke brukes samtidig\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Bruk: %s [input]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1705,9 +1767,6 @@ msgstr "bruker %s: seneste passordendring i fremtiden\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: kan ikke sortere oppføringer i %s\n"
 
-msgid "Usage: pwconv\n"
-msgstr "Bruk: pwconv\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1716,9 +1775,6 @@ msgstr "%s: klarer ikke å omskrive fila\n"
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: klarte ikke endre rettigheter på %s til 0600\n"
-
-msgid "Usage: pwunconv\n"
-msgstr "Bruk: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "NEKTET tilgang til su til den kontoen.\n"
@@ -1785,16 +1841,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: må kjøres fra en terminal\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: feil %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "Ukjent id: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Ignorert)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1802,14 +1854,6 @@ msgstr "Du har ikke adgang til å su %s\n"
 
 msgid "(Enter your own password)"
 msgstr "(Oppgi ditt eget passord)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(Ignorert)\n"
 
 # , c-format
 #, c-format
@@ -1821,8 +1865,28 @@ msgstr "%s: Autentisering mislyktes\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Du har ikke adgang til å su på den tiden\n"
 
-msgid "No shell\n"
-msgstr "Mangler skall\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "Ingen oppføring for «root» i passordfila"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: må kjøres fra en terminal\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: feil %d\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "lastlog: Kan ikke finne størrelse på %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "Kan ikke utføre %s"
 
 msgid "No password file"
 msgstr "Ingen passordfil."
@@ -1868,7 +1932,7 @@ msgstr "%s: linje %d: chown mislyktes\n"
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: gi nytt navn: %s"
 
 #, c-format
@@ -1883,6 +1947,8 @@ msgstr "%s: for mange grupper oppgitt (maks %d).\n"
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "Bruk: %s [input]\n"
@@ -2036,10 +2102,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: konflikt mellom valgene %s og %s\n"
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr "%s: klarte ikke nullstille faillog-innslaget for UID %lu: %s\n"
 
@@ -2107,30 +2169,41 @@ msgstr ""
 "%s: advarsel: hjemmemappa finnes fra før.\n"
 "Kopierer ikke filer dit fra skel-mappa.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"Bruk: userdel [valg] LOGIN\n"
-"\n"
-"Valg:\n"
-"  -f, --force                   slett filer, selv om det ikke er\n"
-"                                brukeren som eier dem\n"
-"  -h, --help                    vis denne meldingen og avslutt\n"
-"  -r, --remove                  slett hjemmemappa og postkassa\n"
-"\n"
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+# , c-format
+#, fuzzy, c-format
+#| msgid "%s: cannot remove the primary group of user '%s'\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: kan ikke fjerne hovedgruppa til bruker «%s».\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 # , c-format
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: gruppa %s er en primærgruppe for en annen bruker og blir ikke fjernet.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: ugyldig hjemmemappe «%s»\n"
 
 # , c-format
 #, fuzzy, c-format
@@ -2166,10 +2239,6 @@ msgstr "%s: kunne ikke fjerne innslaget «%s» fra %s\n"
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: bruker %s er en NIS bruker\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: brukeren %s er pålogget\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2184,79 +2253,82 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: feil ved fjerning av mappe %s\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: usermod [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
-#| "  -c, --comment COMMENT         new value of the GECOS field\n"
-#| "  -d, --home HOME_DIR           new home directory for the user account\n"
-#| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -g, --gid GROUP               force use GROUP as new primary group\n"
-#| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-#| "  -a, --append                  append the user to the supplemental "
-#| "GROUPS\n"
-#| "                                mentioned by the -G option without "
-#| "removing\n"
-#| "                                him/her from other groups\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -l, --login NEW_LOGIN         new value of the login name\n"
-#| "  -L, --lock                    lock the user account\n"
-#| "  -m, --move-home               move contents of the home directory to "
-#| "the\n"
-#| "                                new location (use only with -d)\n"
-#| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-#| "  -p, --password PASSWORD       use encrypted password for the new "
-#| "password\n"
-#| "  -s, --shell SHELL             new login shell for the user account\n"
-#| "  -u, --uid UID                 new UID for the user account\n"
-#| "  -U, --unlock                  unlock the user account\n"
-#| "\n"
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"Bruk: usermod [valg] konto\n"
-"\n"
-"Valg:\n"
-"  -a, --append                     legg til bruker i tilleggsgruppene "
-"GRUPPER\n"
-"                                         nevnt i valget -G uten å fjerne ham/"
-"henne fra\n"
-"                                         andre grupper\n"
-"   -c, --comment KOMMENTAR       ny verdi i GECOS-feltet\n"
-"  -d, --home HJEMME             hjemmemappe for den nye kontoen\n"
-"  -e, --expiredate DATO         kontoen utgår på datoen DATE\n"
-"  -f, --inactive INAKTIV        passordet settes inaktivt etter utløp\n"
-"  -g, --gid GRUPPE              bruk GRUPPE som ny primærgruppe\n"
-"  -G, --groups GRUPPER      ny  liste over tilleggsgrupper\n"
-"  -h, --help                         vis denne hjelpeteksten og avslutt\n"
-"\n"
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+"  -s, --sha-rounds              antall SHA-runder for  SHA*\n"
+"                                kryptoalgoritmene\n"
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2276,17 +2348,19 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: bruker «%sx finnes fra før i %s\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: ingen flagg oppgitt\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: shadow-passord kreves for -e og -f\n"
+# , c-format
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: no options\n"
+msgstr "%s: kan ikke åpne %s\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: valgene -L, -p og -U utelukker hverandre\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: shadow-passord kreves for -e og -f\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2360,9 +2434,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2443,6 +2514,361 @@ msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: ugyldig basismappe «%s»\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) mislyktes\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: chage [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+#~| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --list                    show account aging information\n"
+#~| "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "  -W, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Bruk: chage [valg] [bruker]\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -d, --lastday SISTE_DAG       angi at siste passord-endring skjedde "
+#~ "SISTE_DAG\n"
+#~ "  -E, --expiredate UTLØPSDATO   angi at kontoen utløper UTLØPSDATO\n"
+#~ "  -h, .--help                   vis denne hjelpeteksten og avslutt\n"
+#~ "  -I, --inaktive INAKTIV        angi at passordet settes inaktivt etter "
+#~ "utløp\n"
+#~ "  -l, --list                    vis informasjon om kontoens aldring og "
+#~ "utløp\n"
+#~ "  m, --mindays MIN_DAGER        oppgir at passordet først kan endres "
+#~ "etter\n"
+#~ "                                MIN_DAGER\n"
+#~ "  M, --maxdays MAKS_DAGER       oppgir at passordet må endres før det er\n"
+#~ "                                gått MAKS_DAGER\n"
+#~ "  -W, --warndays VARSLDAGER     etter VARSLDAGER varsles bruker om at\n"
+#~ "                                passordet snart utløper\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: PAM autentisering mislyktes\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf]\n"
+#~ "\t[-h hjemmetlf] [-o annet] [bruker]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr "Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf] [-h hjemmetlf]\n"
+
+# , c-format
+#, fuzzy
+#~| msgid ""
+#~| "Usage: %s [options]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~| "  -e, --encrypted               supplied passwords are encrypted\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -m, --md5                     encrypt the clear text password using\n"
+#~| "                                the MD5 algorithm\n"
+#~| "%s\n"
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Bruk: %s [valg]\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -c, --crypt-method        krypteringsmetode (en av %s)\n"
+#~ "  -e, --encrypted               oppgitte passord er krypterte\n"
+#~ "  h, --help                     vis denne hjelpeteksten og avslutt\n"
+#~ "  -m, --md5                     krypter klartekst-passordene med\n"
+#~ "                                 MD5-algoritmen\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Bruk: chsh [valg] LOGIN\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -h, --help        vis denne meldingen og avslutt\n"
+#~ "  -s, --shell SKALL      nytt innloggingsskall for brukerkontoen\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "Bruk: expiry {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "faillog: Failed to get the entry for UID %d\n"
+#~ msgid "faillog: Failed to get the entry for UID %lu\n"
+#~ msgstr "faillog: klarte ikke finne oppføring for UID %d\n"
+
+# , c-format
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "faillog: Kan ikke åpne %s:%s\n"
+
+#~ msgid "faillog: Cannot get the size of %s: %s\n"
+#~ msgstr "faillog: Kan ikke finne størrelse av %s: %s\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "Bruk: groupdel gruppe\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "Bruk: %s [-r] [-s] [gruppe [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "Bruk: %s [-r] [-s] [gruppe]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s og -r kan ikke brukes samtidig\n"
+
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "Bruk: grpconv\n"
+
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "Bruk: grpunconv\n"
+
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Bruk: lastlog [valg]\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -b, --before DAGER            skriv bare oppføringer eldre enn DAGER\n"
+#~ "  -h, --help                    vis denne hjelpeteksten og avslutt\n"
+#~ "  -t, --time DAGER              skriv bare oppføringer nyere enn DAGER\n"
+#~ "  -u, --user BRUKER             skriv oppføringer for bruker BRUKER\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Bruk: passwd [valg] [bruker]\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -a, --all                     rapporter passordstatus for alle kontoer\n"
+#~ "  -d, --delete                  slett passordet for oppgitt konto\n"
+#~ "  -e, --expire                  angi at passordet for konten er utgått\n"
+#~ "  -h, --help                    vis denne hjelpeteksten og avslutt\n"
+#~ "  -k, --keep-tokens             endre passord bare hvis utgått\n"
+#~ "  -i, --inactive INAKTIV        set passord inaktivt etter utløp til "
+#~ "INAKTIV\n"
+#~ "  -l, --lock                    lås oppgitt konto\n"
+#~ "  -n, --mindays MIN_DAGER       angi at passord ikke kan endres før "
+#~ "etter\n"
+#~ "                                MIN_DAGER\n"
+#~ "  -q, --quiet                   ordknapp kjøremåte\n"
+#~ "  -r, --repository LAGER        endre passord i lageret LAGER\n"
+#~ "  -S, --status                  rapporter passordstatus på oppgitt konto\n"
+#~ "  -u, .--unlock                 lås opp oppgitt konto\n"
+#~ "  -w, --warndays DAGER          varsle om utgått passord DAGER før utløp\n"
+#~ "  -x, --maxdays MAX_DAGER           passordet må endres før det er gått "
+#~ "MAX_DAGER\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "Bruk: %s [-q] [-r] [-s] [passord [shadow]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "Bruk: %s [-q] [-r] [-s] [passord [shadow]]\n"
+
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "Bruk: pwconv\n"
+
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "Bruk: pwunconv\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "Ukjent id: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "Mangler skall\n"
+
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Bruk: userdel [valg] LOGIN\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -f, --force                   slett filer, selv om det ikke er\n"
+#~ "                                brukeren som eier dem\n"
+#~ "  -h, --help                    vis denne meldingen og avslutt\n"
+#~ "  -r, --remove                  slett hjemmemappa og postkassa\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: brukeren %s er pålogget\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: usermod [options] LOGIN\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~| "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~| "  -a, --append                  append the user to the supplemental "
+#~| "GROUPS\n"
+#~| "                                mentioned by the -G option without "
+#~| "removing\n"
+#~| "                                him/her from other groups\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~| "  -L, --lock                    lock the user account\n"
+#~| "  -m, --move-home               move contents of the home directory to "
+#~| "the\n"
+#~| "                                new location (use only with -d)\n"
+#~| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~| "  -p, --password PASSWORD       use encrypted password for the new "
+#~| "password\n"
+#~| "  -s, --shell SHELL             new login shell for the user account\n"
+#~| "  -u, --uid UID                 new UID for the user account\n"
+#~| "  -U, --unlock                  unlock the user account\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Bruk: usermod [valg] konto\n"
+#~ "\n"
+#~ "Valg:\n"
+#~ "  -a, --append                     legg til bruker i tilleggsgruppene "
+#~ "GRUPPER\n"
+#~ "                                         nevnt i valget -G uten å fjerne "
+#~ "ham/henne fra\n"
+#~ "                                         andre grupper\n"
+#~ "   -c, --comment KOMMENTAR       ny verdi i GECOS-feltet\n"
+#~ "  -d, --home HJEMME             hjemmemappe for den nye kontoen\n"
+#~ "  -e, --expiredate DATO         kontoen utgår på datoen DATE\n"
+#~ "  -f, --inactive INAKTIV        passordet settes inaktivt etter utløp\n"
+#~ "  -g, --gid GRUPPE              bruk GRUPPE som ny primærgruppe\n"
+#~ "  -G, --groups GRUPPER      ny  liste over tilleggsgrupper\n"
+#~ "  -h, --help                         vis denne hjelpeteksten og avslutt\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: ingen flagg oppgitt\n"
 
 #, fuzzy
 #~| msgid ""
@@ -3060,9 +3486,6 @@ msgstr "%s: ugyldig basismappe «%s»\n"
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s: feil ved oppdatering av filer\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: linje %d: kan ikke finne bruker %s\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s: klarer ikke å endre passord-oppføringen for %s\n"

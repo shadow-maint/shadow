@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -35,6 +35,14 @@ msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "beállítási hiba - ismeretlen '%s' elem (értesítsd a rendszergazdát)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "Jelszó: "
@@ -222,6 +230,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "a postafiók tulajdonosának váltása sikertelen"
+
+#, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: nem kérhető le egyedi felhasználói azonosító\n"
 
@@ -305,6 +318,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "Hibás jelszó ehhez: %s.\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: érvénytelen otthoni telefonszám: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -332,73 +372,55 @@ msgstr "Nem lehet a gyökérkönyvtárba váltani: \"%s\"\n"
 msgid "Unable to determine your tty name."
 msgstr "Sikertelen tty név meghatározás."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "Sikertelen malloc(%d)\n"
-
 #, fuzzy
 #| msgid "No\n"
 msgid "No"
 msgstr "Nem\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: chage [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --list                    show account aging information\n"
-#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "Használat: %s [bemenet]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"Használat: chage [kapcsolók] [NÉV]\n"
-"\n"
-"Kapcsolók:\n"
-"  -d, --lastday UTOLSÓ_NAP         utolsó jelszómódosítás beállítása az\n"
-"                                   UTOLSÓ_NAPRA\n"
-"  -E, --expiredate LEJÁRATI_DÁTUM  fiók lejárati dátumának beállítása a\n"
-"                                   LEJÁRATI_DÁTUMRA\n"
-"  -h, --help                       ezen súgószöveg megjelenítése és kilépés\n"
-"  -I, --inactive INAKTÍV           a jelszó inaktívvá tétele lejárat után\n"
-"                                   az INAKTÍV értékre\n"
-"  -l, --list                       fiókelévülési információk megjelenítése\n"
-"  -m, --mindays MIN_NAPOK          napok minimális számának beállítása\n"
-"                                   jelszómódosítás előtt a MIN_NAPOK "
-"értékre\n"
-"  -M, --maxdays MAX_NAPOK          napok maximális számának beállítása\n"
-"                                   jelszómódosítás előtt a MAX_NAPOK "
-"értékre\n"
-"  -W, --warndays FIGYELM_NAPOK     a lejáratra figyelmeztetés napjai\n"
-"                                   számának beállítása FIGYELM_NAPOK-ra\n"
-"\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Add meg az új értéket vagy üss ENTER-t az alapértelmezetthez"
@@ -471,9 +493,10 @@ msgstr "%s: Hozzáférés megtagadva.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: A felhasználóneved megállapítása sikertelen\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM hitelesítési hiba\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't lock files, try again later\n"
@@ -498,10 +521,6 @@ msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: nincs meg az árnyék jelszófájl\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
-
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: %s felhasználó nem létezik\n"
@@ -514,19 +533,31 @@ msgstr "%s elévülési információinak módosítása\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: hiba a mezők módosításakor\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"Használat: %s [-f TELJES_Név] [-r szobaszám] [-w munka_tel]\n"
-"\t[-h otthoni_tel] [-o egyéb] [felhasználónév]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
-"Használat: %s [-f TELJES_Név] [-r szobaszám] [-w munka_tel] \t[-h "
-"otthoni_tel]\n"
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "TELJES Név"
@@ -605,25 +636,24 @@ msgid "%s: fields too long\n"
 msgstr "%s: túl hosszú mezők\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "Használat: %s [bemenet]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"Használat: chpasswd [kapcsolók]\n"
-"\n"
-"Kapcsolók:\n"
-"  -e, --encrypted               a megadott jelszavak titkosítottak\n"
-"  -h, --help                    ezen súgó megjelenítése és kilépés\n"
-"  -m, --md5                     MD5 titkosítás használata DES helyett,ha a\n"
-"                                megadott jelszavak nem titkosítottak\n"
-"\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -665,29 +695,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: hibákat észleltem, a változások elvetve\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "Használat: %s [bemenet]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-#, fuzzy, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: %s felhasználó nem létezik\n"
 
@@ -695,20 +702,8 @@ msgstr "%s: %s felhasználó nem létezik\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: %s felhasználó nem létezik\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"Használat: chsh [kapcsolók] NÉV\n"
-"\n"
-"Kapcsolók:\n"
-"  -h, --help                    kiírja e súgót és kilép\n"
-"  -s, --shell                   új bejelentkező héj a felhasználói fiókhoz\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "Bejelentkező héj"
@@ -741,8 +736,23 @@ msgstr "%s: %s felhasználó nem létezik\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: figyelem: %s tulajdonosa nem %s\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "Használat: expiry {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: váratlan argumentum: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -770,9 +780,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Név         Hibás Maximális Legutóbbi                   Ezen\n"
@@ -786,30 +797,29 @@ msgstr " [%lds van hátra]"
 msgid " [%lds lock]"
 msgstr " [%lds zárolva]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, fuzzy, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Failed to set max for UID %lu\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+msgid "%s: Unknown user or range: %s\n"
 msgstr "Ismeretlen felhasználó: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s: %s fájl nem nyitható meg\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -823,6 +833,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -952,8 +965,10 @@ msgstr "%s: %s csoport létezik\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "A tag már létezik\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "Használat: groupdel csoport\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: A felhasználóneved megállapítása sikertelen\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1057,16 +1072,33 @@ msgstr "%s: %s egy NIS csoport\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: ismeretlen %s felhasználó\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Használat: %s [-r] [-s] [csoport [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Használat: %s [-r] [-s] [csoport]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s és -r inkompatibilisek\n"
 
 msgid "invalid group file entry"
@@ -1136,16 +1168,6 @@ msgstr "%s: fájlok frissítve\n"
 msgid "%s: no changes\n"
 msgstr "%s: nincs változás\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpconv\n"
-msgstr "Használat: groupdel csoport\n"
-
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpunconv\n"
-msgstr "Használat: groupdel csoport\n"
-
 #, fuzzy, c-format
 #| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
@@ -1161,30 +1183,16 @@ msgid " groups="
 msgstr " csoportok="
 
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"Használat: lastlog [kapcsolók]\n"
-"\n"
-"Kapcsolók:\n"
-"  -b, --before NAP              csak a NAPOK számánál régebbi lastlog\n"
-"                                rekordok megjelenítése\n"
-"  -h, --help                    ezen súgószöveg megjelenítése és kilépés\n"
-"  -t, --time NAP                csak a megadott NAPNÁL újabb lastlog\n"
-"                                rekordok kiírása\n"
-"  -u, --user NÉV                a megadott NEVŰ felhasználó lastlog\n"
-"                                rekordjainak kiírása\n"
-"\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1195,14 +1203,6 @@ msgstr "Felhasználónév          Port     Legutóbb"
 
 msgid "**Never logged in**"
 msgstr "**Sosem lépett be**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: váratlan argumentum: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1278,6 +1278,11 @@ msgstr "login: a PAM törlést kért\n"
 
 msgid "Login incorrect"
 msgstr "Hibás bejelentkezés"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: %d. sor: nem találom e felhasználót: %s\n"
 
 #, c-format
 msgid ""
@@ -1401,80 +1406,59 @@ msgstr "%s: %d. sor: chown sikertelen\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d. sor: nem tudom frissíteni a bejegyzést\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: passwd [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     report password status on all accounts\n"
-#| "  -d, --delete                  delete the password for the named "
-#| "account\n"
-#| "  -e, --expire                  force expire the password for the named "
-#| "account\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -k, --keep-tokens             change password only if expired\n"
-#| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --lock                    lock the named account\n"
-#| "  -n, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -q, --quiet                   quiet mode\n"
-#| "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-#| "  -S, --status                  report password status on the named "
-#| "account\n"
-#| "  -u, --unlock                  unlock the named account\n"
-#| "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "\n"
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"Használat: passwd [kapcsolók] [NÉV]\n"
-"\n"
-"Kapcsolók:\n"
-"  -a, --all                     jelszóállapot jelentés az összes fiókon\n"
-"  -d, --delete                  a megadott fiók jelszavának törlése\n"
-"  -e, --expire                  a megadott fiók jelszava lejáratának\n"
-"                                kényszerítése\n"
-"  -h, --help                    kiírja e súgót és kilép\n"
-"  -k, --keep-tokens             a jelszót csak annak lejáratakor módosítsa\n"
-"  -i, --inactive INAKTÍV        a jelszó inaktívvá tétele lejárat után\n"
-"                                az INAKTÍV értékre\n"
-"  -l, --lock                    a megadott fiók zárolása\n"
-"  -n, --mindays MIN_NAPOK       napok minimális számának beállítása\n"
-"                                jelszómódosítás előtt a MIN_NAPOK értékre\n"
-"  -q, --quiet                   csendes mód\n"
-"  -r, --repository LERAKAT      jelszó módosítása a LERAKAT lerakatban\n"
-"  -S, --status                  jelentés a megadott fiók jelszóállapotáról\n"
-"  -u, --unlock                  a megadott fiók zárolásának feloldása\n"
-"  -w, --warndays FIGYELEM_NAPOK a lejáratra figyelmeztetés napjai számának\n"
-"  -x, --maxdays MAX_NAPOK       napok maximális számának beállítása\n"
-"                                jelszómódosítás előtt a MAX_NAPOK értékre\n"
-"\n"
 
 msgid "Old password: "
 msgstr "Régi jelszó: "
@@ -1557,18 +1541,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "Jelszó elévülési figyelmeztetés"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Használat: %s [-q] [-r] [-s] [jelszó [árnyék]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Használat: %s [-q] [-r] [-s] [jelszó [árnyék]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s és -r inkompatibilisek\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Használat: %s [bemenet]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1652,11 +1641,6 @@ msgstr "%s felhasználó: az utolsó jelszómódosítás időpontja a jövőben 
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: %s fájl nem nyitható meg\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwconv\n"
-msgstr "Használat: id\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1665,11 +1649,6 @@ msgstr "%s: nem tudom újraírni a fájlt\n"
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwunconv\n"
-msgstr "Használat: id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "A su-zás e hozzáféréshez ELUTASÍTVA.\n"
@@ -1737,16 +1716,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: terminálból kell futnia\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: hiba: %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "Ismeretlen azonosító: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Átlépve)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1754,14 +1729,6 @@ msgstr "Nem vagy jogosult ehhez: su %s\n"
 
 msgid "(Enter your own password)"
 msgstr "(Add meg saját jelszavad)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(Átlépve)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: PAM authentication failed\n"
@@ -1773,8 +1740,28 @@ msgstr "%s: PAM hitelesítési hiba\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "Nem vagy jogosult ehhez: su %s\n"
 
-msgid "No shell\n"
-msgstr "Nincs héj\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "Nincs 'root' jelszó bejegyzés"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: terminálból kell futnia\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: hiba: %d\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "%s nem futtatható"
 
 msgid "No password file"
 msgstr "Nincs jelszófájl"
@@ -1820,7 +1807,7 @@ msgstr "%s: %d. sor: chown sikertelen\n"
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: átnevezés: %s"
 
 #, c-format
@@ -1835,6 +1822,8 @@ msgstr "%s: túl sok csoport van megadva (max %d).\n"
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "Használat: %s [bemenet]\n"
@@ -1952,10 +1941,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
@@ -2022,24 +2007,21 @@ msgstr ""
 "Nem másolok semmit bele a vázkönyvtárból.\n"
 
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"Használat: userdel [kapcsolók] NÉV\n"
-"\n"
-"Kapcsolók:\n"
-"  -f, --force                   fájlok eltávolításának kényszerítése, még\n"
-"                                ha nem a felhasználó a tulajdonos is\n"
-"  -h, --help                    ezen súgószöveg megjelenítése és kilépés\n"
-"  -r, --remove                  saját könyvtár és levelezési sor "
-"eltávolítása\n"
-"\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: `%s' felhasználó nem módosítható NIS kliensen.\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -2048,6 +2030,11 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Nem tudom %s csoportot törölni, ami egy másik felhasználó elsődleges "
 "csoportja.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: érvénytelen saját könyvtár: \"%s\"\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
@@ -2081,10 +2068,6 @@ msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: %s egy NIS felhasználó\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: %s felhasználó most be van jelentkezve\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2098,69 +2081,58 @@ msgstr "%s: nem törlöm %s könyvtárat (%s saját könyvtára)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: hiba %s könyvtár törlésekor\n"
 
-# FIXME
-#, fuzzy, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"Használat: usermod [kapcsolók] NÉV\n"
-"\n"
-"Kapcsolók:\n"
-"  -a, --append                     felhasználó adása a kiegészítő "
-"CSOPORTHOZ\n"
-"                                   (csak -G-vel használd)\n"
-"  -c, --comment MEGJEGYZÉS         a GECOS mező új értéke\n"
-"  -d, --home SAJÁT_KVT             új bejelentkezési könyvtár az új\n"
-"                                   felhasználói\n"
-"  -e, --expiredate LEJÁRATI_DÁTUM  fiók lejárati dátumának beállítása a\n"
-"                                   LEJÁRATI_DÁTUMRA\n"
-"  -f, --inactive INAKTÍV           a jelszó inaktívvá tétele lejárat után\n"
-"                                   az INAKTÍV értékre\n"
-"  -g, --gid CSOPORT                a CSOPORT használatának kényszerítése\n"
-"                                   az új felhasználói fiókhoz\n"
-"  -G, --groups CSOPORTOK           kiegészítő csoportok felsorolása az új\n"
-"                                   felhasználói fiókhoz\n"
-"  -h, --help                       ezen súgószöveg megjelenítése és kilépés\n"
-"  -l, --login NÉV                  a bejelentkezési név új értéke\n"
-"  -L, --lock                       a megadott fiók zárolása\n"
-"  -m, --move-home                  a saját könyvtár tartalmának áthelyezése "
-"az\n"
-"                                   új helyre (csak a -d kapcsolóval "
-"használd)\n"
-"  -o, --non-unique                 engedélyezi a csoport létrehozását "
-"többször\n"
-"                                   szereplő (nem egyedi) GID értékkel\n"
-"  -p, --password JELSZÓ            az új jelszó titkosított\n"
-"  -s, --shell PARANCSÉRTELMEZŐ     a PARANCSÉRTELMEZŐ használata a\n"
-"                                   passwd-ben megadott alapértelmezett "
-"helyett\n"
-"  -u, --uid UID                    új UID a felhasználó fiókjához\n"
-"  -U, --unlock                     a felhasználói fiók zárolásának "
-"feloldása\n"
-"\n"
+
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2178,17 +2150,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: %s felhasználó létezik\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: nincs kapcsoló megadva\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: -e és -f árnyék jelszavakat vár\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: no options\n"
+msgstr "%s: %s fájl nem nyitható meg\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: -e és -f árnyék jelszavakat vár\n"
 
 #, fuzzy, c-format
 #| msgid "Member already exists\n"
@@ -2255,9 +2228,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2342,6 +2312,392 @@ msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "Sikertelen malloc(%d)\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: chage [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+#~| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --list                    show account aging information\n"
+#~| "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "  -W, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: chage [kapcsolók] [NÉV]\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -d, --lastday UTOLSÓ_NAP         utolsó jelszómódosítás beállítása az\n"
+#~ "                                   UTOLSÓ_NAPRA\n"
+#~ "  -E, --expiredate LEJÁRATI_DÁTUM  fiók lejárati dátumának beállítása a\n"
+#~ "                                   LEJÁRATI_DÁTUMRA\n"
+#~ "  -h, --help                       ezen súgószöveg megjelenítése és "
+#~ "kilépés\n"
+#~ "  -I, --inactive INAKTÍV           a jelszó inaktívvá tétele lejárat "
+#~ "után\n"
+#~ "                                   az INAKTÍV értékre\n"
+#~ "  -l, --list                       fiókelévülési információk "
+#~ "megjelenítése\n"
+#~ "  -m, --mindays MIN_NAPOK          napok minimális számának beállítása\n"
+#~ "                                   jelszómódosítás előtt a MIN_NAPOK "
+#~ "értékre\n"
+#~ "  -M, --maxdays MAX_NAPOK          napok maximális számának beállítása\n"
+#~ "                                   jelszómódosítás előtt a MAX_NAPOK "
+#~ "értékre\n"
+#~ "  -W, --warndays FIGYELM_NAPOK     a lejáratra figyelmeztetés napjai\n"
+#~ "                                   számának beállítása FIGYELM_NAPOK-ra\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: PAM hitelesítési hiba\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "Használat: %s [-f TELJES_Név] [-r szobaszám] [-w munka_tel]\n"
+#~ "\t[-h otthoni_tel] [-o egyéb] [felhasználónév]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr ""
+#~ "Használat: %s [-f TELJES_Név] [-r szobaszám] [-w munka_tel] \t[-h "
+#~ "otthoni_tel]\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Használat: chpasswd [kapcsolók]\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -e, --encrypted               a megadott jelszavak titkosítottak\n"
+#~ "  -h, --help                    ezen súgó megjelenítése és kilépés\n"
+#~ "  -m, --md5                     MD5 titkosítás használata DES helyett,ha "
+#~ "a\n"
+#~ "                                megadott jelszavak nem titkosítottak\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: chsh [kapcsolók] NÉV\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -h, --help                    kiírja e súgót és kilép\n"
+#~ "  -s, --shell                   új bejelentkező héj a felhasználói "
+#~ "fiókhoz\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "Használat: expiry {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "%s: cannot open file %s\n"
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "%s: %s fájl nem nyitható meg\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "Használat: groupdel csoport\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "Használat: %s [-r] [-s] [csoport [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "Használat: %s [-r] [-s] [csoport]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s és -r inkompatibilisek\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "Használat: groupdel csoport\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "Használat: groupdel csoport\n"
+
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: lastlog [kapcsolók]\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -b, --before NAP              csak a NAPOK számánál régebbi lastlog\n"
+#~ "                                rekordok megjelenítése\n"
+#~ "  -h, --help                    ezen súgószöveg megjelenítése és kilépés\n"
+#~ "  -t, --time NAP                csak a megadott NAPNÁL újabb lastlog\n"
+#~ "                                rekordok kiírása\n"
+#~ "  -u, --user NÉV                a megadott NEVŰ felhasználó lastlog\n"
+#~ "                                rekordjainak kiírása\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: passwd [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -a, --all                     report password status on all accounts\n"
+#~| "  -d, --delete                  delete the password for the named "
+#~| "account\n"
+#~| "  -e, --expire                  force expire the password for the named "
+#~| "account\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -k, --keep-tokens             change password only if expired\n"
+#~| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --lock                    lock the named account\n"
+#~| "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -q, --quiet                   quiet mode\n"
+#~| "  -r, --repository REPOSITORY   change password in REPOSITORY "
+#~| "repository\n"
+#~| "  -S, --status                  report password status on the named "
+#~| "account\n"
+#~| "  -u, --unlock                  unlock the named account\n"
+#~| "  -w, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: passwd [kapcsolók] [NÉV]\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -a, --all                     jelszóállapot jelentés az összes fiókon\n"
+#~ "  -d, --delete                  a megadott fiók jelszavának törlése\n"
+#~ "  -e, --expire                  a megadott fiók jelszava lejáratának\n"
+#~ "                                kényszerítése\n"
+#~ "  -h, --help                    kiírja e súgót és kilép\n"
+#~ "  -k, --keep-tokens             a jelszót csak annak lejáratakor "
+#~ "módosítsa\n"
+#~ "  -i, --inactive INAKTÍV        a jelszó inaktívvá tétele lejárat után\n"
+#~ "                                az INAKTÍV értékre\n"
+#~ "  -l, --lock                    a megadott fiók zárolása\n"
+#~ "  -n, --mindays MIN_NAPOK       napok minimális számának beállítása\n"
+#~ "                                jelszómódosítás előtt a MIN_NAPOK "
+#~ "értékre\n"
+#~ "  -q, --quiet                   csendes mód\n"
+#~ "  -r, --repository LERAKAT      jelszó módosítása a LERAKAT lerakatban\n"
+#~ "  -S, --status                  jelentés a megadott fiók "
+#~ "jelszóállapotáról\n"
+#~ "  -u, --unlock                  a megadott fiók zárolásának feloldása\n"
+#~ "  -w, --warndays FIGYELEM_NAPOK a lejáratra figyelmeztetés napjai "
+#~ "számának\n"
+#~ "  -x, --maxdays MAX_NAPOK       napok maximális számának beállítása\n"
+#~ "                                jelszómódosítás előtt a MAX_NAPOK "
+#~ "értékre\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "Használat: %s [-q] [-r] [-s] [jelszó [árnyék]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "Használat: %s [-q] [-r] [-s] [jelszó [árnyék]]\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "Használat: id\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "Használat: id\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "Ismeretlen azonosító: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "Nincs héj\n"
+
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: userdel [kapcsolók] NÉV\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -f, --force                   fájlok eltávolításának kényszerítése, "
+#~ "még\n"
+#~ "                                ha nem a felhasználó a tulajdonos is\n"
+#~ "  -h, --help                    ezen súgószöveg megjelenítése és kilépés\n"
+#~ "  -r, --remove                  saját könyvtár és levelezési sor "
+#~ "eltávolítása\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: %s felhasználó most be van jelentkezve\n"
+
+# FIXME
+#, fuzzy
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Használat: usermod [kapcsolók] NÉV\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -a, --append                     felhasználó adása a kiegészítő "
+#~ "CSOPORTHOZ\n"
+#~ "                                   (csak -G-vel használd)\n"
+#~ "  -c, --comment MEGJEGYZÉS         a GECOS mező új értéke\n"
+#~ "  -d, --home SAJÁT_KVT             új bejelentkezési könyvtár az új\n"
+#~ "                                   felhasználói\n"
+#~ "  -e, --expiredate LEJÁRATI_DÁTUM  fiók lejárati dátumának beállítása a\n"
+#~ "                                   LEJÁRATI_DÁTUMRA\n"
+#~ "  -f, --inactive INAKTÍV           a jelszó inaktívvá tétele lejárat "
+#~ "után\n"
+#~ "                                   az INAKTÍV értékre\n"
+#~ "  -g, --gid CSOPORT                a CSOPORT használatának kényszerítése\n"
+#~ "                                   az új felhasználói fiókhoz\n"
+#~ "  -G, --groups CSOPORTOK           kiegészítő csoportok felsorolása az "
+#~ "új\n"
+#~ "                                   felhasználói fiókhoz\n"
+#~ "  -h, --help                       ezen súgószöveg megjelenítése és "
+#~ "kilépés\n"
+#~ "  -l, --login NÉV                  a bejelentkezési név új értéke\n"
+#~ "  -L, --lock                       a megadott fiók zárolása\n"
+#~ "  -m, --move-home                  a saját könyvtár tartalmának "
+#~ "áthelyezése az\n"
+#~ "                                   új helyre (csak a -d kapcsolóval "
+#~ "használd)\n"
+#~ "  -o, --non-unique                 engedélyezi a csoport létrehozását "
+#~ "többször\n"
+#~ "                                   szereplő (nem egyedi) GID értékkel\n"
+#~ "  -p, --password JELSZÓ            az új jelszó titkosított\n"
+#~ "  -s, --shell PARANCSÉRTELMEZŐ     a PARANCSÉRTELMEZŐ használata a\n"
+#~ "                                   passwd-ben megadott alapértelmezett "
+#~ "helyett\n"
+#~ "  -u, --uid UID                    új UID a felhasználó fiókjához\n"
+#~ "  -U, --unlock                     a felhasználói fiók zárolásának "
+#~ "feloldása\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: nincs kapcsoló megadva\n"
 
 #, fuzzy
 #~| msgid ""
@@ -2894,9 +3250,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s: hiba a fájlok frissítésekor\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: %d. sor: nem találom e felhasználót: %s\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s: nem tudom frissíteni %s jelszó bejegyzését\n"

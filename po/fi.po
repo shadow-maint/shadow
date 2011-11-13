@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2007-11-24 22:54+0100\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -35,6 +35,14 @@ msgstr "Asetustiedoille ei voi varata tilaa.\n"
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "asetusvirhe - tuntematon kohta \"%s\" (kerro ylläpidolle)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "Salasana: "
@@ -227,6 +235,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "postilaatikon omistajan vaihtaminen epäonnistui"
+
+#, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: ei saa ainutkertaista UID:tä\n"
 
@@ -310,6 +323,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "Väärä salasana käyttäjälle \"%s\".\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: virheellinen kotipuhelin: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: hakemistoa %s ei voi luoda\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: hakemistoa %s ei voi luoda\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -337,72 +377,55 @@ msgstr "Ei voi vaihtaa juurihakemistoksi \"%s\"\n"
 msgid "Unable to determine your tty name."
 msgstr "Tty-päätteesi nimeä ei voi selvittää."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) epäonnistui\n"
-
 #, fuzzy
 #| msgid "No\n"
 msgid "No"
 msgstr "Ei\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: chage [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --list                    show account aging information\n"
-#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"Käyttö: chage [valitsimet] [TUNNUS]\n"
-"\n"
-"Valitsimet:\n"
-"  -d, --lastday VIIM_PVM        Aseta edelliseksi salasanan vaihtopäiväksi\n"
-"                                VIIM_PVM\n"
-"  -E, --expiredate VANH_PVM     Aseta tilin vanhenemispäiväykseksi VANH_PVM\n"
-"  -h, --help                    Näytä tämä ohje ja lopeta\n"
-"  -I, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
-"                                päivää vanhenemisen jälkeen\n"
-"  -l, --list                    Näytä tilin vanhenemistiedot\n"
-"  -m, --mindays MIN_PÄIVIÄ      Aseta pienimmäksi sallittuksi määräksi\n"
-"                                päiviä ennen salasanan vaihtamista "
-"MIN_PÄIVIÄ\n"
-"  -M, --maxdays MAX_PÄIVIÄ      Aseta suurimmaksi sallituksi määräksi "
-"päiviä\n"
-"                                ennen salasanan vaihtamista MAX_PÄIVIÄ\n"
-"  -W, --warndays VAR_PÄIVIÄ     Aseta vanhenemisen varoitusajaksi "
-"VAR_PÄIVIÄ\n"
-"\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Syötä uusi arvo tai paina ENTER jättääksesi oletuksen"
@@ -475,9 +498,10 @@ msgstr "%s: Lupa evätty.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Käyttäjätunnusta ei voi selvittää.\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM-todennus epäonnistui\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't lock files, try again later\n"
@@ -502,10 +526,6 @@ msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: varjosalasanatiedostoa ei ole\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
-
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: käyttäjää %s ei ole olemassa\n"
@@ -518,17 +538,31 @@ msgstr "Muutetaan käyttäjän %s vanhenemistietoja\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: virhe muutettaessa kenttiä\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"Käyttö: %s [-f koko_nimi] [-r huonenro] [-w työpuh]\n"
-"\t[-h kotipuh] [-o muu] [käyttäjä]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "Käyttö: %s [-f koko_nimi] [-r huonenro] [-w työpuh] [-h kotipuh]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "Koko nimi"
@@ -607,24 +641,24 @@ msgid "%s: fields too long\n"
 msgstr "%s: kentät liian pitkiä\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "Käyttö: %s [syöte]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"Käyttö: chpasswd [valitsimet]\n"
-"\n"
-"Valitsimet:\n"
-"  -e, --encrypted               Annetut salasanat ovat salakirjoitettuja\n"
-"  -h, --help                    Näytä tämä ohje ja lopeta\n"
-"  -m, --md5                     Käytä MD5:tä eikä DES:iä kun annetut\n"
-"                                salasanat eivät ole salakirjoitettuja\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -666,29 +700,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: virhe havaittu, muutokset ohitetaan\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "Käyttö: %s [syöte]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-#, fuzzy, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: käyttäjää %s ei ole olemassa\n"
 
@@ -696,21 +707,8 @@ msgstr "%s: käyttäjää %s ei ole olemassa\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: käyttäjää %s ei ole olemassa\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"Käyttö: chsh [valitsimet] [TUNNUS]\n"
-"\n"
-"Valitsimet:\n"
-"  -h, --help                    Näytä tämä ohje ja poistu\n"
-"  -s, --shell KUORI             Aseta uusi sisäänkirjautumiskuori "
-"käyttäjälle\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "Sisäänkirjautumiskuori"
@@ -743,8 +741,23 @@ msgstr "%s: käyttäjää %s ei ole olemassa\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: varoitus: tiedoston %s omistaja ei ole %s\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "Käyttö: expiry {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: odottamaton argumentti: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -772,9 +785,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Tunnus      Epäonn.  Enint.  Edellinen                Päätteellä\n"
@@ -788,30 +802,29 @@ msgstr " [%lds jäljellä]"
 msgid " [%lds lock]"
 msgstr " [%lds lukittu]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
+msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Failed to set max for UID %lu\n"
+msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
+msgstr "%s: hakemistoa %s ei voi luoda\n"
+
+#, fuzzy, c-format
+msgid "%s: Unknown user or range: %s\n"
 msgstr "Tuntematon käyttäjä: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s: tiedostoa %s ei voi lukita\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -825,6 +838,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -954,8 +970,10 @@ msgstr "%s: ryhmä %s on olemassa\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "Jäsen on jo olemassa\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "Käyttö: groupdel ryhmä\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: Käyttäjätunnusta ei voi selvittää.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1059,16 +1077,33 @@ msgstr "%s: ryhmä %s on NIS-ryhmä\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: Tuntematon käyttäjä %s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Käyttö: %s [-r] [-s] [ryhmä [ryhmävarjo]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Käyttö: %s [-r] [-s] [ryhmä]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: valitsimet -s ja -r eivät sovi yhteen\n"
 
 msgid "invalid group file entry"
@@ -1138,16 +1173,6 @@ msgstr "%s: tiedostot päivitettiin\n"
 msgid "%s: no changes\n"
 msgstr "%s: ei muutoksia\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpconv\n"
-msgstr "Käyttö: groupdel ryhmä\n"
-
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpunconv\n"
-msgstr "Käyttö: groupdel ryhmä\n"
-
 #, fuzzy, c-format
 #| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
@@ -1162,30 +1187,17 @@ msgstr "Käyttö: id\n"
 msgid " groups="
 msgstr " ryhmät="
 
-#, fuzzy
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"Käyttö: lastlog [valitsimet]\n"
-"\n"
-"Valitsimet:\n"
-"  -b, --before PÄIVÄÄ        Tulosta vain PÄIVÄÄ vanhemmat lastlog-tietueet\n"
-"  -t, --time PÄIVÄÄ          Tulosta vain PÄIVÄÄ tuoreemmat lastlog-"
-"tietueet\n"
-"  -u, --login TUNNUS         Tulosta lastlog-tietue käyttäjälle TUNNUS\n"
-"  -h, --help                 Näytä tämä ohje ja lopeta\n"
-"\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1196,14 +1208,6 @@ msgstr "Käyttäjä                Portti   Viimeksi"
 
 msgid "**Never logged in**"
 msgstr "**Ei koskaan kirjautunut sisään**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: odottamaton argumentti: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1277,6 +1281,11 @@ msgstr "login: keskeytyspyyntö PAM:sta\n"
 
 msgid "Login incorrect"
 msgstr "Sisäänkirjautuminen epäonnistui"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: rivi %d: käyttäjää %s ei löydy\n"
 
 #, c-format
 msgid ""
@@ -1401,81 +1410,59 @@ msgstr "%s: rivi %d: chown epäonnistui\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: rivi %d: tietuetta ei voi päivittää\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: passwd [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -a, --all                     report password status on all accounts\n"
-#| "  -d, --delete                  delete the password for the named "
-#| "account\n"
-#| "  -e, --expire                  force expire the password for the named "
-#| "account\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -k, --keep-tokens             change password only if expired\n"
-#| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --lock                    lock the named account\n"
-#| "  -n, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -q, --quiet                   quiet mode\n"
-#| "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-#| "  -S, --status                  report password status on the named "
-#| "account\n"
-#| "  -u, --unlock                  unlock the named account\n"
-#| "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "\n"
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"Käyttö: passwd [valitsimet] [TUNNUS]\n"
-"\n"
-"Valitsimet:\n"
-"  -a, --all                     Ilmoita jokaisen tunnuksen salasanatilanne\n"
-"  -d, --delete                  Poista annetun tunnuksen salasana\n"
-"  -e, --expire                  Aseta annetun tunnuksen salasana\n"
-"                                vanhentuneeksi\n"
-"  -h, --help                    Näytä tämä ohje ja lopeta\n"
-"  -k, --keep-tokens             Vaihda vain vanhentunut salasana\n"
-"  -i, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
-"                                päivää vanhenemisen jälkeen\n"
-"  -l, --lock                    Lukitse annettu tunnus\n"
-"  -n, --mindays VÄH_PÄIVÄ       Aseta vähin määrä päiviä ennen kuin\n"
-"                                salasanan voi vaihtaa VÄH_PÄIVÄksi\n"
-"  -q, --quiet                   Hiljainen toiminta\n"
-"  -r, --repository TIETOLÄHDE   Vaihda salasana tietolähteessä TIETOLÄHDE\n"
-"  -S, --status                  Ilmoita annetun tunnuksen salasanan tila\n"
-"  -u, --unlock                  Avaa annetun tunnuksen lukitus\n"
-"  -w, --warndays VAR_PÄIVÄÄ     Aseta varoituspäiviksi VAR_PÄIVÄÄ ennen\n"
-"                                vanhentumista\n"
-"  -x, --maxdays KORK_PÄIVÄ      Aseta korkein määrä päivä ennen kuin\n"
-"                                salasana täytyy vaihtaa KORK_PÄIVÄksi\n"
-"\n"
 
 msgid "Old password: "
 msgstr "Vanha salasana: "
@@ -1558,18 +1545,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "Salasanan vanhenemisvaroitus"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Käyttö: %s [-q] [-r] [-s] [passwd [varjo]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Käyttö: %s [-q] [-r] [-s] [passwd [varjo]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: valitsimet -s ja -r eivät sovi yhteen\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "Käyttö: %s [syöte]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1653,11 +1645,6 @@ msgstr "käyttäjä %s: viimeisin salasanan vaihto tapahtunut tulevaisuudessa\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwconv\n"
-msgstr "Käyttö: id\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1666,11 +1653,6 @@ msgstr "%s: tiedostoa ei voi uudelleenkirjoittaa\n"
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwunconv\n"
-msgstr "Käyttö: id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "Tunnuksen vaihtaminen täksi käyttäjäksi EVÄTTY.\n"
@@ -1737,16 +1719,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: täytyy suorittaa päätteessä\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: virhe %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "Tuntematon id: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Ohitettu)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1754,14 +1732,6 @@ msgstr "Sinulla ei ole lupaa asettua käyttäjäksi %s\n"
 
 msgid "(Enter your own password)"
 msgstr "(Syötä oma salasanasi)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(Ohitettu)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: PAM authentication failed\n"
@@ -1773,8 +1743,28 @@ msgstr "%s: PAM-todennus epäonnistui\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "Sinulla ei ole lupaa asettua käyttäjäksi %s\n"
 
-msgid "No shell\n"
-msgstr "Ei kuorta\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "Ei salasanatietuetta pääkäyttäjälle (\"root\")"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: täytyy suorittaa päätteessä\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: virhe %d\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "Ei voi suorittaa %s"
 
 msgid "No password file"
 msgstr "Ei salasanatiedosto"
@@ -1821,7 +1811,7 @@ msgstr "%s: rivi %d: chown epäonnistui\n"
 # Kannattaako tuota kääntää, siinä viitataan rename()-funktioon...
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: rename: %s"
 
 #, c-format
@@ -1836,6 +1826,8 @@ msgstr "%s: liian monta ryhmää määritelty (korkeintaan %d).\n"
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "Käyttö: %s [syöte]\n"
@@ -1953,10 +1945,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
@@ -2022,25 +2010,22 @@ msgstr ""
 "%s: varoitus: kotihakemisto on jo olemassa.\n"
 "Ei kopioida yhtään tiedostoa sinne skel-hakemistosta.\n"
 
-#, fuzzy
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"Käyttö: userdel [valitsimet] TUNNUS\n"
-"\n"
-"Valitsimet:\n"
-"  -f, --force                   Pakota tiedostojen poisto vaikkei niitä\n"
-"                                omistaisikaan käyttäjä\n"
-"  -h, --help                    Näytä tämä ohje ja poistu\n"
-"  -r, --remove                  Poista kotihakemistoja ja postilaatikko\n"
-"\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: ei voi vaihtaa käyttäjää \"%s\" NIS-asiakkaalla.\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -2049,6 +2034,11 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Ryhmää %s ei voi poistaa, koska se on toisen käyttäjän ensisijainen "
 "ryhmä.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: virheellinen kotihakemisto \"%s\"\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
@@ -2082,10 +2072,6 @@ msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: käyttäjä %s on NIS-käyttäjä\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: käyttäjä %s on nyt sisäänkirjautuneena\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2100,60 +2086,58 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: virhe poistettaessa hakemistoa %s\n"
 
-#, fuzzy, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"Käyttö: usermod [valitsimet] TUNNUS\n"
-"\n"
-"Valitsimet:\n"
-"  -a, --append RYHMÄ            Lisää käyttäjä ryhmään RYHMÄ\n"
-"                                (käytetään vain valitsimen -G kanssa)\n"
-"  -c, --comment KOMMENTTI       Aseta GECOS-kenttään uusi arvo\n"
-"  -d, --home KOTIHAK            Käyttäjätunnuksen uusi kotihakemisto\n"
-"  -e, --expiredate VANH_PVM     Aseta tilin vanhenemispäiväykseksi VANH_PVM\n"
-"  -f, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
-"                                päivää vanhenemisen jälkeen\n"
-"  -g, --gid RYHMÄ               Aseta RYHMÄ uudeksi "
-"sisäänkirjautumisryhmäksi\n"
-"  -G, --groups RYHMÄT           Luettelo lisäryhmistä\n"
-"  -h, --help                    Näytä tämä ohje ja lopeta\n"
-"  -l, --login TUNNUS            Uusi arvo tunnukseksi\n"
-"  -L, --lock                    Lukitse annettu tunnus\n"
-"  -m, --move-home               Siirrä kotihakemiston sisältö uuteen\n"
-"                                sijaintiin (käytä vain yhdessä valitsimen\n"
-"                                -d kanssa)\n"
-"  -o, --non-unique              Salli UID:n uudelleenkäyttö (ei-uniikki "
-"UID)\n"
-"  -p, --password SALASANA       Käytä salakirjoitettua salasanaa\n"
-"  -s, --shell KUORI             Käyttäjätunnuksen uusi "
-"sisäänkirjautumiskuori\n"
-"  -u, --uid UID                 Uusi UID käyttäjätunnukselle\n"
-"  -U, --unlock                  Avaa annetun tunnuksen lukitus\n"
-"\n"
+
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2171,17 +2155,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: käyttäjä %s on olemassa\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: lippuja ei annettu\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: varjosalasanat vaaditaan valitsimille -e ja -f\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: no options\n"
+msgstr "%s: tiedostoa %s ei voi lukita\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: varjosalasanat vaaditaan valitsimille -e ja -f\n"
 
 #, fuzzy, c-format
 #| msgid "Member already exists\n"
@@ -2249,9 +2234,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2337,6 +2319,373 @@ msgstr ""
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: virheellinen perushakemisto \"%s\"\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) epäonnistui\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: chage [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+#~| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --list                    show account aging information\n"
+#~| "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "  -W, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Käyttö: chage [valitsimet] [TUNNUS]\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -d, --lastday VIIM_PVM        Aseta edelliseksi salasanan "
+#~ "vaihtopäiväksi\n"
+#~ "                                VIIM_PVM\n"
+#~ "  -E, --expiredate VANH_PVM     Aseta tilin vanhenemispäiväykseksi "
+#~ "VANH_PVM\n"
+#~ "  -h, --help                    Näytä tämä ohje ja lopeta\n"
+#~ "  -I, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
+#~ "                                päivää vanhenemisen jälkeen\n"
+#~ "  -l, --list                    Näytä tilin vanhenemistiedot\n"
+#~ "  -m, --mindays MIN_PÄIVIÄ      Aseta pienimmäksi sallittuksi määräksi\n"
+#~ "                                päiviä ennen salasanan vaihtamista "
+#~ "MIN_PÄIVIÄ\n"
+#~ "  -M, --maxdays MAX_PÄIVIÄ      Aseta suurimmaksi sallituksi määräksi "
+#~ "päiviä\n"
+#~ "                                ennen salasanan vaihtamista MAX_PÄIVIÄ\n"
+#~ "  -W, --warndays VAR_PÄIVIÄ     Aseta vanhenemisen varoitusajaksi "
+#~ "VAR_PÄIVIÄ\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: PAM-todennus epäonnistui\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "Käyttö: %s [-f koko_nimi] [-r huonenro] [-w työpuh]\n"
+#~ "\t[-h kotipuh] [-o muu] [käyttäjä]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr "Käyttö: %s [-f koko_nimi] [-r huonenro] [-w työpuh] [-h kotipuh]\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Käyttö: chpasswd [valitsimet]\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -e, --encrypted               Annetut salasanat ovat salakirjoitettuja\n"
+#~ "  -h, --help                    Näytä tämä ohje ja lopeta\n"
+#~ "  -m, --md5                     Käytä MD5:tä eikä DES:iä kun annetut\n"
+#~ "                                salasanat eivät ole salakirjoitettuja\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Käyttö: chsh [valitsimet] [TUNNUS]\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -h, --help                    Näytä tämä ohje ja poistu\n"
+#~ "  -s, --shell KUORI             Aseta uusi sisäänkirjautumiskuori "
+#~ "käyttäjälle\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "Käyttö: expiry {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "%s: cannot open file %s\n"
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "%s: tiedostoa %s ei voi lukita\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "Käyttö: groupdel ryhmä\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "Käyttö: %s [-r] [-s] [ryhmä [ryhmävarjo]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "Käyttö: %s [-r] [-s] [ryhmä]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: valitsimet -s ja -r eivät sovi yhteen\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "Käyttö: groupdel ryhmä\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "Käyttö: groupdel ryhmä\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Käyttö: lastlog [valitsimet]\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -b, --before PÄIVÄÄ        Tulosta vain PÄIVÄÄ vanhemmat lastlog-"
+#~ "tietueet\n"
+#~ "  -t, --time PÄIVÄÄ          Tulosta vain PÄIVÄÄ tuoreemmat lastlog-"
+#~ "tietueet\n"
+#~ "  -u, --login TUNNUS         Tulosta lastlog-tietue käyttäjälle TUNNUS\n"
+#~ "  -h, --help                 Näytä tämä ohje ja lopeta\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: passwd [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -a, --all                     report password status on all accounts\n"
+#~| "  -d, --delete                  delete the password for the named "
+#~| "account\n"
+#~| "  -e, --expire                  force expire the password for the named "
+#~| "account\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -k, --keep-tokens             change password only if expired\n"
+#~| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --lock                    lock the named account\n"
+#~| "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -q, --quiet                   quiet mode\n"
+#~| "  -r, --repository REPOSITORY   change password in REPOSITORY "
+#~| "repository\n"
+#~| "  -S, --status                  report password status on the named "
+#~| "account\n"
+#~| "  -u, --unlock                  unlock the named account\n"
+#~| "  -w, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Käyttö: passwd [valitsimet] [TUNNUS]\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -a, --all                     Ilmoita jokaisen tunnuksen "
+#~ "salasanatilanne\n"
+#~ "  -d, --delete                  Poista annetun tunnuksen salasana\n"
+#~ "  -e, --expire                  Aseta annetun tunnuksen salasana\n"
+#~ "                                vanhentuneeksi\n"
+#~ "  -h, --help                    Näytä tämä ohje ja lopeta\n"
+#~ "  -k, --keep-tokens             Vaihda vain vanhentunut salasana\n"
+#~ "  -i, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
+#~ "                                päivää vanhenemisen jälkeen\n"
+#~ "  -l, --lock                    Lukitse annettu tunnus\n"
+#~ "  -n, --mindays VÄH_PÄIVÄ       Aseta vähin määrä päiviä ennen kuin\n"
+#~ "                                salasanan voi vaihtaa VÄH_PÄIVÄksi\n"
+#~ "  -q, --quiet                   Hiljainen toiminta\n"
+#~ "  -r, --repository TIETOLÄHDE   Vaihda salasana tietolähteessä "
+#~ "TIETOLÄHDE\n"
+#~ "  -S, --status                  Ilmoita annetun tunnuksen salasanan tila\n"
+#~ "  -u, --unlock                  Avaa annetun tunnuksen lukitus\n"
+#~ "  -w, --warndays VAR_PÄIVÄÄ     Aseta varoituspäiviksi VAR_PÄIVÄÄ ennen\n"
+#~ "                                vanhentumista\n"
+#~ "  -x, --maxdays KORK_PÄIVÄ      Aseta korkein määrä päivä ennen kuin\n"
+#~ "                                salasana täytyy vaihtaa KORK_PÄIVÄksi\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "Käyttö: %s [-q] [-r] [-s] [passwd [varjo]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "Käyttö: %s [-q] [-r] [-s] [passwd [varjo]]\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "Käyttö: id\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "Käyttö: id\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "Tuntematon id: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "Ei kuorta\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Käyttö: userdel [valitsimet] TUNNUS\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -f, --force                   Pakota tiedostojen poisto vaikkei niitä\n"
+#~ "                                omistaisikaan käyttäjä\n"
+#~ "  -h, --help                    Näytä tämä ohje ja poistu\n"
+#~ "  -r, --remove                  Poista kotihakemistoja ja postilaatikko\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: käyttäjä %s on nyt sisäänkirjautuneena\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Käyttö: usermod [valitsimet] TUNNUS\n"
+#~ "\n"
+#~ "Valitsimet:\n"
+#~ "  -a, --append RYHMÄ            Lisää käyttäjä ryhmään RYHMÄ\n"
+#~ "                                (käytetään vain valitsimen -G kanssa)\n"
+#~ "  -c, --comment KOMMENTTI       Aseta GECOS-kenttään uusi arvo\n"
+#~ "  -d, --home KOTIHAK            Käyttäjätunnuksen uusi kotihakemisto\n"
+#~ "  -e, --expiredate VANH_PVM     Aseta tilin vanhenemispäiväykseksi "
+#~ "VANH_PVM\n"
+#~ "  -f, --inactive POISKÄYTÖSTÄ   Ota salasana pois käytöstä POISKÄYTÖSTÄ\n"
+#~ "                                päivää vanhenemisen jälkeen\n"
+#~ "  -g, --gid RYHMÄ               Aseta RYHMÄ uudeksi "
+#~ "sisäänkirjautumisryhmäksi\n"
+#~ "  -G, --groups RYHMÄT           Luettelo lisäryhmistä\n"
+#~ "  -h, --help                    Näytä tämä ohje ja lopeta\n"
+#~ "  -l, --login TUNNUS            Uusi arvo tunnukseksi\n"
+#~ "  -L, --lock                    Lukitse annettu tunnus\n"
+#~ "  -m, --move-home               Siirrä kotihakemiston sisältö uuteen\n"
+#~ "                                sijaintiin (käytä vain yhdessä "
+#~ "valitsimen\n"
+#~ "                                -d kanssa)\n"
+#~ "  -o, --non-unique              Salli UID:n uudelleenkäyttö (ei-uniikki "
+#~ "UID)\n"
+#~ "  -p, --password SALASANA       Käytä salakirjoitettua salasanaa\n"
+#~ "  -s, --shell KUORI             Käyttäjätunnuksen uusi "
+#~ "sisäänkirjautumiskuori\n"
+#~ "  -u, --uid UID                 Uusi UID käyttäjätunnukselle\n"
+#~ "  -U, --unlock                  Avaa annetun tunnuksen lukitus\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: lippuja ei annettu\n"
 
 #, fuzzy
 #~| msgid ""
@@ -2870,9 +3219,6 @@ msgstr "%s: virheellinen perushakemisto \"%s\"\n"
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s: virhe päivitettäessä tiedostoja\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: rivi %d: käyttäjää %s ei löydy\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s: salasanatietuetta %s ei voi päivittää\n"

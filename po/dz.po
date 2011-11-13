@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2006-06-01 15:28+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -39,6 +39,14 @@ msgstr "རིམ་སྒྲིག་བརྡ་དོན་གྱི་དོ
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "རིམ་སྒྲིག་འཚོལ་བ་-མ་ཤེས་པའི་རྣམ་གྲངས་ '%s'(བདག་སྐྱོང་པ་བརྡ་བསྐུལ་འབད་)།\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "ཆོག་ཡིག་:"
@@ -231,6 +239,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "ཡིག་སྒྲོམ་བདག་པོ་སོར་ནི་ལུ་ འཐུས་ཤོར་བྱུང་ཡོདཔ།"
+
+#, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: ཐུན་མོང་ ཡུ་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
 
@@ -314,6 +327,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "%s གི་དོན་ལུ་ བདེན་མེད་ཀྱི་ཆོག་ཡིག\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: ནུས་མེད་ཀྱི་ ཁྱིམ་གྱི་བརྒྱུད་འཕྲིན་: '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -341,51 +381,55 @@ msgstr " '%s'ལུ་ རྩ་བའི་སྣོད་ཐོ་བསྒྱ
 msgid "Unable to determine your tty name."
 msgstr "ཁྱོད་ཀྱི་ཊི་ཊི་ཝའི་མིང་ གཏན་འབེབས་བཟོ་མ་ཚུགས།"
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
-
 #, fuzzy
 #| msgid "No\n"
 msgid "No"
 msgstr "མེན།\n"
 
-#, fuzzy
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"ལག་ལེན་:chage[གདམ་ཁ་ཚུ་]user\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"   -d, ---lastday LAST_DAY\t མཇུག་མམ་གྱི་ཆོག་ཡིག་འདི་ LAST_DAYལུ་ བསྒྱུར་བཅོས་གཞི་སྒྲིག་"
-"འབད།\n"
-"   -E, --expiredate EXPIRE_DATE\t རྩིས་ཐོའི་དུས་ཡོལ་ཚེས་གྲངས་འདི་ཚུ་ EXPIRE_DATE ལུ་ "
-"བསྒྱུར་བཅོས་གཞི་སྒྲིག་འབད།\n"
-"   -h, --help\t\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"   -I, --inactive INACTIVE\t དུས་ཡོལ་ \n"
-"\t\t\t\tto INACTIVE གི་ཤུལ་མ་ཆོག་ཡིག་ནུས་མེད་འདི་ གཞི་སྒྲིག་འབད།\n"
-"   -l, --list\t\t\t རྩིས་ཐོ་རྒས་པའི་བརྡ་དོན་ སྟོན།\n"
-"   -m, --mindays MIN_DAYS\t ཉིན་གྲངས་ཉུང་མཐའ་འདི་ཚུ་ ཆོག་ཡིག་\n"
-"\t\t\t\tགི་ཧེ་མར་ MIN_DAYSལུ་བསྒྱུར་བཅོས་ གཞི་སྒྲིག་འབད།\n"
-"   -M, --maxdays MAX_DAYS\t ཉིན་གྲངས་མང་མཐའ་འདི་ཚུ་ ཆོག་ཡིག་\n"
-"\t\t\t\tགི་ཧེ་མར་ MAX_DAYSལུ་ བསྒྱུར་བཅོས་ གཞི་སྒྲིག་འབད།\n"
-"   -W, --warndays WARN_DAYS\t དུས་ཡོལ་ཉེན་བརྡའི་ཉིནམ་འདི་ཚུ་ WARN_DAYSལུ་ གཞི་སྒྲིག་འབད།\n"
-"\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "བེ་ལུ་གསརཔ་བཙུགས་ ཡང་ཅིན་ སྔོན་སྒྲིག་གི་དོན་ལུ་ ENTERལུ་ཨེབས།"
@@ -458,9 +502,10 @@ msgstr "%s: སྣང་བ་ཉན་མ་བཏུབ།\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: ཁྱོད་ཀྱི་ལག་ལེན་པའི་མིང་ གཏན་འབེབས་བཟོ་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't lock files, try again later\n"
@@ -485,10 +530,6 @@ msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འ�
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་འདི་ མིན་འདུག\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
-
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
@@ -501,17 +542,31 @@ msgstr "%s གི་དོན་ལུ་ རྒས་པའི་བརྡ་�
 msgid "%s: error changing fields\n"
 msgstr "%s: ས་སྒོ་ཚུ་བསྒྱུར་བཅོས་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"ལག་ལེན་:%s[-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] user]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "ལག་ལེན་:%s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "མིང་ཆ་ཚང་།"
@@ -590,25 +645,24 @@ msgid "%s: fields too long\n"
 msgstr "%s: ས་སྒོ་ཚུ་རིང་དྲགས་པས།\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"ལག་ལེན་: chpasswd [གདམ་ཁ་ཚུ་]\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་འབད་ཡོདཔ།\n"
-"  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -m, --md5\t\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་\t\t\tཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་ཡིན་པའི་སྐབས་ལུ་ ཌི་ཨི་"
-"ཨེསི་གི་ཚབ་ལུ་ ཨེབ་ཌི་ ༥ གསང་བཟོ་ ལག་ལེན་འཐབ།\n"
-"\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -650,29 +704,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: འཛོལ་བ་སྐྱོན་འཛིན་འབད་ཡི་ བསྒྱུར་བཅོས་ཚུ་སྣང་མེད་བཞག་ཡི།\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-#, fuzzy, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
@@ -680,23 +711,8 @@ msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
-#, fuzzy
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"ལག་ལེན་: userdel [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -f, --force\t\t\t  ལག་ལེན་པ་གིས་བདག་དབང་མ་བཟུང་སྟེ་འབད་རུང་ ཡིག་སྣོད་བང་བཙོང་སྟེ་རྩ་བསྐྲད་"
-"གཏང་།\n"
-"  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -r, --remove\t\t\t  ཁྱིམ་གྱི་སྣོད་ཐོ་དང་ཡིག་འཕྲིན་འཕྲལ་གསོག་རྩ་བསྐྲད་གཏང་།\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "ནང་བསྐྱོད་ཀྱི་ཤལ།"
@@ -729,8 +745,23 @@ msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: ཉེན་བརྡ་: %s འདི་ %s གིས་ བདག་དབང་བཟུངམ་མེན།\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "ལག་ལེན་: དུས་ཡོལ་{-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: རེ་བ་མ་བསྐྱེད་པའི་སྒྲུབ་རྟགས་:%s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -758,9 +789,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "ནང་བསྐྱོད་       མང་མཐའི་མཇུག་མཐའ་འཐུས་ཤོར་                   ཨཱོན། \n"
@@ -774,30 +806,29 @@ msgstr " [%lds གཡོན་]"
 msgid " [%lds lock]"
 msgstr " [%lds ལྡེ་མིག་]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Failed to set max for UID %lu\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+msgid "%s: Unknown user or range: %s\n"
 msgstr "མ་ཤེས་པའི་ལག་ལེན་པ་:%s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱར་མིང་བཏགས་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -811,6 +842,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -939,8 +973,10 @@ msgstr "%s: སྡེ་ཚན་ %sཡོདཔ་ཨིན།\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr ""
 
-msgid "Usage: groupdel group\n"
-msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: ཁྱོད་ཀྱི་ལག་ལེན་པའི་མིང་ གཏན་འབེབས་བཟོ་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1044,16 +1080,33 @@ msgstr "%s: སྡེ་ཚན་ %s འདི་ ཨེན་ཇི་ཨེས
 msgid "%s: unknown user %s\n"
 msgstr "%s: མ་ཤེས་པའི་ལག་ལེན་པ་%s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "ལག་ལེན་:%s [-r] [-s] [group [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "ལག་ལེན་: %s [-r] [-s] [སྡེ་ཚན་]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s དང་ -r གཉིས་མཐུན་འགྱུར་ཅན་མེན།\n"
 
 msgid "invalid group file entry"
@@ -1123,16 +1176,6 @@ msgstr "%s: ཡིག་སྣོད་ཚུ་དུས་མཐུན་བ�
 msgid "%s: no changes\n"
 msgstr "%s: སོར་ནི་མེད།\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpconv\n"
-msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
-
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpunconv\n"
-msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
-
 #, fuzzy, c-format
 #| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
@@ -1147,31 +1190,17 @@ msgstr "ལག་ལེན་པ་: id\n"
 msgid " groups="
 msgstr "སྡེ་ཚན་="
 
-#, fuzzy
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"ལག་ལེན་: lastlog [གདམ་ཁ་ཚུ་]\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -b, --before DAYS\t ཉིན་གྲངས་ལས་རྙིང་པའི་lastlogདྲན་ཐོ་ཚུ་རྐྱངམ་ཅིག་ དཔར་བསྐྲུན་འབད།\n"
-"  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -t, --time DAYS\t ཉིན་གྲངས་ལས་ལྷག་པའི་འཕྲལ་གྱི་ lastlogདྲན་ཐོ་ཚུ་རྐྱངམ་ཅིག་ དཔར་བསྐྲུན་"
-"འབད།\n"
-"  -u, ---user LOGIN\t ལག་ལེན་པའི་དོན་ལུ་ གསལ་བཀོད་འབད་ཡོད་པའི་ནང་བསྐྱོད་དང་བཅས་ "
-"lastlog དྲན་ཐོ་ དཔར་བསྐྲུན་འབད།\n"
-"\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1182,14 +1211,6 @@ msgstr "ལག་ལེན་པའི་མིང་                འདྲ�
 
 msgid "**Never logged in**"
 msgstr "**ནམ་ཡང་ནང་བསྐྱོད་མ་འབད་**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: རེ་བ་མ་བསྐྱེད་པའི་སྒྲུབ་རྟགས་:%s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1264,6 +1285,11 @@ msgstr "ནང་བསྐྱོད་:པི་ཨུ་ཨེམ་གྱི�
 
 msgid "Login incorrect"
 msgstr "ནང་བསྐྱོད་བདེན་མེད།"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: གྲལ་ཐིག་ %d:ལག་ལེན་པ་ %sའཚོལ་མི་ཚུགས།\n"
 
 #, c-format
 msgid ""
@@ -1387,52 +1413,59 @@ msgstr "%s: གྲལ་ཐིག་ %d: chown འཐུས་ཤོར་བྱ
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
-#, fuzzy
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"ལག་ལེན་: passwd [གདམ་ཁ་ཚུ་] [ནང་བསྐྱོད་]\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -a, --all\t\t\t རྩིས་ཐོ་ཆ་མཉམ་གྱི་གུ་ ཆོག་ཡིག་གནས་ཚད་ སྙན་ཞུ་འབད།\n"
-"  -d, --delete\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཆོག་ཡིག་བཏོན་གཏང་།\n"
-"  -e, --expire\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཆོག་ཡིག་གི་དུས་ཡོལ་བང་བཙོང་།\n"
-"  -h, --help\t\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -k, --keep-tokens\t\t དུས་ལས་ཡོལ་སོང་པ་ཅིན་རྐྱངམ་ཅིག་ ཆོག་ཡིག་སོར།\n"
-"  -i, --inactive INACTIVE\t ཆོག་ཡིག་འདི་ནུས་མེད་ལུ་ དུས་ཡོལ་\n"
-"\t\t\t\t གི་ཤུལ་མར་ ནུས་མེད་སྦེ་གཞི་སྒྲིག་འབད།\n"
-"  -l, --lock\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོ་ ལྡེ་མིག་རྐྱབས།\n"
-"  -n, --mindays MIN_DAYS\t ཆོག་ཡིག་ \n"
-"\t\t\t\tའདི་ MIN_DAYSལུ་མ་བསྒྱུར་བའི་ཧེ་མ་ ཉིན་གྲངས་ཉུང་མཐའ་གཞི་སྒྲིག་འབད།  -q, --quiet\t\t"
-"\t ཁུ་སིམ་སིམ་གྱི་ཐབས་ལམ།\n"
-"  -r, --repository REPOSITORY\t  REPOSITORYམཛོད་གནས་ནང་ལུ་ ཆོག་ཡིག་སོར།\n"
-"  -s, --status\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་གུ་ ཆོག་ཡིག་སྙན་ཞུ་འབད།\n"
-"  -u, --unlock\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོ་འདི་ ལྡེ་མིག་ཕྱེ།\n"
-"  -w, --warndays WARN_DAYS\t  WARN_DAYSལུ་ དུས་ཡོལ་ཉེན་བརྡའི་ཉིན་གྲངས་ གཞི་སྒྲིག་འབད།\n"
-"  -x, --maxdays MAX_DAYS\t ཆོག་ཡིག་ \n"
-"\t\t\t\tའདི་ MAX_DAYSལུ་ བསྒྱུར་བཅོས་མ་འབད་བའི་ཧེ་མ་ ཉིན་གྲངས་ཉུང་མཐའ་ གཞི་སྒྲིག་འབད།\n"
-"\n"
 
 msgid "Old password: "
 msgstr "ཆོག་ཡིག་རྙིངམ་:"
@@ -1512,18 +1545,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "ཆོག་ཡིག་དུས་ཡོལ་ཉེན་བརྡ།"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "ལག་ལེན་:%s [-q] [-r] [-s] [passwd [གྱིབ་མ་]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "ལག་ལེན་:%s [-q] [-r] [-s] [passwd [གྱིབ་མ་]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s དང་ -r གཉིས་མཐུན་འགྱུར་ཅན་མེན།\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1607,11 +1645,6 @@ msgstr "ལག་ལེན་པ་ %s: མ་འོངས་པ་ནང་ མ
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwconv\n"
-msgstr "ལག་ལེན་པ་: id\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1620,11 +1653,6 @@ msgstr "%s: ཡིག་སྣོད་ལོག་འབྲི་མི་ཚ�
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwunconv\n"
-msgstr "ལག་ལེན་པ་: id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "རྩིས་ཐོ་དེ་ལུ་ ཟླ་ལུ་འཛུལ་སྤྱོད་འབད་ནི་ ཉན་མ་བཏུབ་པས།\n"
@@ -1691,16 +1719,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: ཊར་མི་ནཱལ་ལས་གཡོག་བཀོལ་དགོ\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start:འཛོལ་བ་%d(_s)\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "མ་ཤེས་པའི་ཨའི་ཌི་:%s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(སྣང་མེད་བཞག་ཡོདཔ་)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1708,14 +1732,6 @@ msgstr "ཁྱོད་ ཟླ་%sལུ་ དབང་སྤྲོད་མ�
 
 msgid "(Enter your own password)"
 msgstr "(ཁྱོད་རའི་ཆོག་ཡིག་རྐྱངམ་ཅིག་བཙུགས་)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(སྣང་མེད་བཞག་ཡོདཔ་)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: PAM authentication failed\n"
@@ -1727,8 +1743,28 @@ msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུ�
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "ཁྱོད་ ཟླ་%sལུ་ དབང་སྤྲོད་མ་འབད།\n"
 
-msgid "No shell\n"
-msgstr "ཤལ་མེད།\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "'རྩ་བ་'གི་དོན་ལུ་ ཆོག་ཡིག་ཐོ་བཀོད་མེད།"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: ཊར་མི་ནཱལ་ལས་གཡོག་བཀོལ་དགོ\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start:འཛོལ་བ་%d(_s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱར་མིང་བཏགས་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "%sལག་ལེན་འཐབ་མི་ཚུགས།"
 
 msgid "No password file"
 msgstr "ཆོག་ཡིག་ཡིག་སྣོད་མེད།"
@@ -1774,7 +1810,7 @@ msgstr "%s: གྲལ་ཐིག་ %d: chown འཐུས་ཤོར་བྱ
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: བསྐྱར་མིང་བཏགས་:%s"
 
 #, c-format
@@ -1789,6 +1825,8 @@ msgstr "%s: སྡེ་ཚན་མང་རབས་ཅིག་གསལ་�
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
@@ -1906,10 +1944,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
@@ -1974,25 +2008,22 @@ msgstr ""
 "%s: ཉེན་བརྡ་:ཁྱིམ་གྱི་སྣོད་ཐོ་འདི་ཧེ་མ་ལས་རང་ཡོདཔ་ཨིན།\n"
 "འདི་ནང་ལུ་ སི་ཀེལ་སྣོད་ཐོ་ནང་ལས་ ཡིག་སྣོད་ག་ཅི་ཡང་འདྲ་བཤུས་མ་བརྐྱབ་ནི།\n"
 
-#, fuzzy
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"ལག་ལེན་: userdel [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -f, --force\t\t\t  ལག་ལེན་པ་གིས་བདག་དབང་མ་བཟུང་སྟེ་འབད་རུང་ ཡིག་སྣོད་བང་བཙོང་སྟེ་རྩ་བསྐྲད་"
-"གཏང་།\n"
-"  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -r, --remove\t\t\t  ཁྱིམ་གྱི་སྣོད་ཐོ་དང་ཡིག་འཕྲིན་འཕྲལ་གསོག་རྩ་བསྐྲད་གཏང་།\n"
-"\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: ཨེན་ཨའི་ཨེསི་ ཞབས་ཏོག་སྤྱོད་མི་གུ་ ལག་ལེན་པ་ '%s' བསྒྱུར་བཅོས་འབད་མི་ཚུགས།\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
@@ -2000,6 +2031,11 @@ msgstr ""
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ལག་ལེན་པ་གཞན་གྱི་དོན་ལུ་ གཞི་རིམ་སྡེ་ཚན་ཅིག་ཨིན་མི་སྡེ་ཚན་ %sའདི་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: ནུས་མེད་ཁྱིམ་གྱི་སྣོད་ཐོ་  '%s'།\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
@@ -2033,10 +2069,6 @@ msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱ�
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: ལག་ལེན་པ་ %sའདི་ ཨེན་ཨའི་ཨེསི་ ལག་ལེན་པ་ཅིག་ཨིན།\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: ལག་ལེན་པ་  %sའདི་ ད་ལྟོ་རང་ནང་བསྐྱོད་འབད་ཡི།\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2050,57 +2082,58 @@ msgstr "%s: སྣོད་ཐོ་ %sའདི་ རྩ་བསྐྲད་�
 msgid "%s: error removing directory %s\n"
 msgstr "%s: སྣོད་ཐོ་%s རྩ་བསྐྲད་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
 
-#, fuzzy, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"ལག་ལེན་: usermod [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -a, --append GROUP\t\t  ལྷན་ཐབས་སྡེ་ཚན་ལུ་ ལག་ལེན་པ་མཇུག་བསྣོད་འབད། \n"
-"  -c, --comment COMMENT\t\t  ཇི་ཨི་སི་ཨོ་ཨེསི་ ས་སྒོའི་བེ་ལུ་གསརཔ།\n"
-"  -d, --home HOME_DIR\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་གསརཔ་གི་དོན་ལུ་ ནང་བསྐྱོད་སྣོད་ཐོ་གསརཔ།\n"
-"  -e, --expiredate EXPIRE_DATE\t  EXPIRE_DATEལུ་ རྩིས་ཐོའི་དུས་ཡོལ་ཚེས་གྲངས་ གཞི་སྒྲིག་"
-"འབད།\n"
-"  -f, ---inactive INACTIVE\t   INACTIVEལུ་ དུས་ཡོལ་ \n"
-" \t\t\t\tགི་ཤུལ་མ་ ཆོག་ཡིག་ནུས་མེད་སྦེ་ གཞི་སྒྲིག་འབད།\n"
-"  -g, ---gid GROUP\t\t  འགོ་ཐོག་ནང་བསྐྱོད་སྡེ་ཚན་གསརཔ་སྦེ་ སྡེ་ཚན་འདི་བང་ཅན་སྦེ་ལག་ལེན་"
-"འཐབ།\n"
-"  -G, --groups GROUPS\t\t  ལྷན་ཐབས་སྡེ་ཚན་གྱི་ཐོ་ཡིག\n"
-"  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -l, --login LOGIN\t\t  ནང་བསྐྱོད་མིང་གི་བེ་ལུ་གསརཔ།\n"
-"  -L, --lock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་རྐྱབས།\n"
-"  -m, --move-home\t\t  ཁྱིམ་གྱི་སྣོད་ཐོའི་ནང་དོན་ཚུ་ \n"
-" \t\t\t\t གནས་ཁོངས་ (-dདང་རྐྱངམ་ཅིག་)གསརཔ་ལུ་སྤོ།\n"
-"  -o, --non-unique\t\t  ཡུ་ཨའི་ཌི་ རྫུན་མ་(ཐུན་མོང་)ལག་ལེན་གྱི་ཐོག་ལས་ འབད་བཅུག\n"
-"  -p, --password PASSWORD\t  ཆོག་ཡིག་གསརཔ་གི་དོན་ལུ་ གསང་བཟོས་ཆོག་ཡིག་ལག་ལེན་འཐབ།\n"
-"  -s, --shell SHELL\t\t  ལག་ལེན་པའི་རྩིས་ཐོའི་དོན་ལུ་ ནང་བསྐྱོད་ཤལ་གསརཔ།\n"
-"  -u, --uid UID\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཡུ་ཨི་ཌི་གསརཔ།\n"
-"  -U, --unlock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་ཕྱེ།\n"
-"\n"
+
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2118,17 +2151,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: ལག་ལེན་པ་ %sཡོདཔ་ཨིན།\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: ཟུར་རྟགས་ཚུ་གྲ་སྒྲིག་མིན་འདུག\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: -e aདང་ -f གཉིས་ལུ་དངོས་མཁོ་ཡོད་པའི་གྱིབ་མའི་ཆོག་ཡིག་ཚུ།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: no options\n"
+msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: -e aདང་ -f གཉིས་ལུ་དངོས་མཁོ་ཡོད་པའི་གྱིབ་མའི་ཆོག་ཡིག་ཚུ།\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2195,9 +2229,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2281,6 +2312,316 @@ msgstr "%s: %sསོར་ཆུད་འབད་མ་ཚུགས་: %s (ཁ
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་ཐོ་'%s'།\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་:chage[གདམ་ཁ་ཚུ་]user\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "   -d, ---lastday LAST_DAY\t མཇུག་མམ་གྱི་ཆོག་ཡིག་འདི་ LAST_DAYལུ་ བསྒྱུར་བཅོས་གཞི་སྒྲིག་"
+#~ "འབད།\n"
+#~ "   -E, --expiredate EXPIRE_DATE\t རྩིས་ཐོའི་དུས་ཡོལ་ཚེས་གྲངས་འདི་ཚུ་ EXPIRE_DATE ལུ་ "
+#~ "བསྒྱུར་བཅོས་གཞི་སྒྲིག་འབད།\n"
+#~ "   -h, --help\t\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "   -I, --inactive INACTIVE\t དུས་ཡོལ་ \n"
+#~ "\t\t\t\tto INACTIVE གི་ཤུལ་མ་ཆོག་ཡིག་ནུས་མེད་འདི་ གཞི་སྒྲིག་འབད།\n"
+#~ "   -l, --list\t\t\t རྩིས་ཐོ་རྒས་པའི་བརྡ་དོན་ སྟོན།\n"
+#~ "   -m, --mindays MIN_DAYS\t ཉིན་གྲངས་ཉུང་མཐའ་འདི་ཚུ་ ཆོག་ཡིག་\n"
+#~ "\t\t\t\tགི་ཧེ་མར་ MIN_DAYSལུ་བསྒྱུར་བཅོས་ གཞི་སྒྲིག་འབད།\n"
+#~ "   -M, --maxdays MAX_DAYS\t ཉིན་གྲངས་མང་མཐའ་འདི་ཚུ་ ཆོག་ཡིག་\n"
+#~ "\t\t\t\tགི་ཧེ་མར་ MAX_DAYSལུ་ བསྒྱུར་བཅོས་ གཞི་སྒྲིག་འབད།\n"
+#~ "   -W, --warndays WARN_DAYS\t དུས་ཡོལ་ཉེན་བརྡའི་ཉིནམ་འདི་ཚུ་ WARN_DAYSལུ་ གཞི་སྒྲིག་"
+#~ "འབད།\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "ལག་ལེན་:%s[-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] user]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr "ལག་ལེན་:%s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: chpasswd [གདམ་ཁ་ཚུ་]\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་འབད་ཡོདཔ།\n"
+#~ "  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -m, --md5\t\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་\t\t\tཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་ཡིན་པའི་སྐབས་ལུ་ ཌི་"
+#~ "ཨི་ཨེསི་གི་ཚབ་ལུ་ ཨེབ་ཌི་ ༥ གསང་བཟོ་ ལག་ལེན་འཐབ།\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: userdel [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -f, --force\t\t\t  ལག་ལེན་པ་གིས་བདག་དབང་མ་བཟུང་སྟེ་འབད་རུང་ ཡིག་སྣོད་བང་བཙོང་སྟེ་རྩ་"
+#~ "བསྐྲད་གཏང་།\n"
+#~ "  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -r, --remove\t\t\t  ཁྱིམ་གྱི་སྣོད་ཐོ་དང་ཡིག་འཕྲིན་འཕྲལ་གསོག་རྩ་བསྐྲད་གཏང་།\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "ལག་ལེན་: དུས་ཡོལ་{-f|-c}\n"
+
+#, fuzzy
+#~| msgid "%s: cannot open file %s\n"
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "ལག་ལེན་:%s [-r] [-s] [group [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "ལག་ལེན་: %s [-r] [-s] [སྡེ་ཚན་]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s དང་ -r གཉིས་མཐུན་འགྱུར་ཅན་མེན།\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: lastlog [གདམ་ཁ་ཚུ་]\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -b, --before DAYS\t ཉིན་གྲངས་ལས་རྙིང་པའི་lastlogདྲན་ཐོ་ཚུ་རྐྱངམ་ཅིག་ དཔར་བསྐྲུན་འབད།\n"
+#~ "  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -t, --time DAYS\t ཉིན་གྲངས་ལས་ལྷག་པའི་འཕྲལ་གྱི་ lastlogདྲན་ཐོ་ཚུ་རྐྱངམ་ཅིག་ དཔར་བསྐྲུན་"
+#~ "འབད།\n"
+#~ "  -u, ---user LOGIN\t ལག་ལེན་པའི་དོན་ལུ་ གསལ་བཀོད་འབད་ཡོད་པའི་ནང་བསྐྱོད་དང་བཅས་ "
+#~ "lastlog དྲན་ཐོ་ དཔར་བསྐྲུན་འབད།\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: passwd [གདམ་ཁ་ཚུ་] [ནང་བསྐྱོད་]\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -a, --all\t\t\t རྩིས་ཐོ་ཆ་མཉམ་གྱི་གུ་ ཆོག་ཡིག་གནས་ཚད་ སྙན་ཞུ་འབད།\n"
+#~ "  -d, --delete\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཆོག་ཡིག་བཏོན་གཏང་།\n"
+#~ "  -e, --expire\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཆོག་ཡིག་གི་དུས་ཡོལ་བང་བཙོང་།\n"
+#~ "  -h, --help\t\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -k, --keep-tokens\t\t དུས་ལས་ཡོལ་སོང་པ་ཅིན་རྐྱངམ་ཅིག་ ཆོག་ཡིག་སོར།\n"
+#~ "  -i, --inactive INACTIVE\t ཆོག་ཡིག་འདི་ནུས་མེད་ལུ་ དུས་ཡོལ་\n"
+#~ "\t\t\t\t གི་ཤུལ་མར་ ནུས་མེད་སྦེ་གཞི་སྒྲིག་འབད།\n"
+#~ "  -l, --lock\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོ་ ལྡེ་མིག་རྐྱབས།\n"
+#~ "  -n, --mindays MIN_DAYS\t ཆོག་ཡིག་ \n"
+#~ "\t\t\t\tའདི་ MIN_DAYSལུ་མ་བསྒྱུར་བའི་ཧེ་མ་ ཉིན་གྲངས་ཉུང་མཐའ་གཞི་སྒྲིག་འབད།  -q, --quiet"
+#~ "\t\t\t ཁུ་སིམ་སིམ་གྱི་ཐབས་ལམ།\n"
+#~ "  -r, --repository REPOSITORY\t  REPOSITORYམཛོད་གནས་ནང་ལུ་ ཆོག་ཡིག་སོར།\n"
+#~ "  -s, --status\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོའི་གུ་ ཆོག་ཡིག་སྙན་ཞུ་འབད།\n"
+#~ "  -u, --unlock\t\t\t མིང་བཏགས་ཡོད་པའི་རྩིས་ཐོ་འདི་ ལྡེ་མིག་ཕྱེ།\n"
+#~ "  -w, --warndays WARN_DAYS\t  WARN_DAYSལུ་ དུས་ཡོལ་ཉེན་བརྡའི་ཉིན་གྲངས་ གཞི་སྒྲིག་"
+#~ "འབད།\n"
+#~ "  -x, --maxdays MAX_DAYS\t ཆོག་ཡིག་ \n"
+#~ "\t\t\t\tའདི་ MAX_DAYSལུ་ བསྒྱུར་བཅོས་མ་འབད་བའི་ཧེ་མ་ ཉིན་གྲངས་ཉུང་མཐའ་ གཞི་སྒྲིག་འབད།\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "ལག་ལེན་:%s [-q] [-r] [-s] [passwd [གྱིབ་མ་]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "ལག་ལེན་:%s [-q] [-r] [-s] [passwd [གྱིབ་མ་]]\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "ལག་ལེན་པ་: id\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "ལག་ལེན་པ་: id\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "མ་ཤེས་པའི་ཨའི་ཌི་:%s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "ཤལ་མེད།\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: userdel [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -f, --force\t\t\t  ལག་ལེན་པ་གིས་བདག་དབང་མ་བཟུང་སྟེ་འབད་རུང་ ཡིག་སྣོད་བང་བཙོང་སྟེ་རྩ་"
+#~ "བསྐྲད་གཏང་།\n"
+#~ "  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -r, --remove\t\t\t  ཁྱིམ་གྱི་སྣོད་ཐོ་དང་ཡིག་འཕྲིན་འཕྲལ་གསོག་རྩ་བསྐྲད་གཏང་།\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: ལག་ལེན་པ་  %sའདི་ ད་ལྟོ་རང་ནང་བསྐྱོད་འབད་ཡི།\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "ལག་ལེན་: usermod [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
+#~ "\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -a, --append GROUP\t\t  ལྷན་ཐབས་སྡེ་ཚན་ལུ་ ལག་ལེན་པ་མཇུག་བསྣོད་འབད། \n"
+#~ "  -c, --comment COMMENT\t\t  ཇི་ཨི་སི་ཨོ་ཨེསི་ ས་སྒོའི་བེ་ལུ་གསརཔ།\n"
+#~ "  -d, --home HOME_DIR\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་གསརཔ་གི་དོན་ལུ་ ནང་བསྐྱོད་སྣོད་ཐོ་གསརཔ།\n"
+#~ "  -e, --expiredate EXPIRE_DATE\t  EXPIRE_DATEལུ་ རྩིས་ཐོའི་དུས་ཡོལ་ཚེས་གྲངས་ གཞི་སྒྲིག་"
+#~ "འབད།\n"
+#~ "  -f, ---inactive INACTIVE\t   INACTIVEལུ་ དུས་ཡོལ་ \n"
+#~ " \t\t\t\tགི་ཤུལ་མ་ ཆོག་ཡིག་ནུས་མེད་སྦེ་ གཞི་སྒྲིག་འབད།\n"
+#~ "  -g, ---gid GROUP\t\t  འགོ་ཐོག་ནང་བསྐྱོད་སྡེ་ཚན་གསརཔ་སྦེ་ སྡེ་ཚན་འདི་བང་ཅན་སྦེ་ལག་ལེན་"
+#~ "འཐབ།\n"
+#~ "  -G, --groups GROUPS\t\t  ལྷན་ཐབས་སྡེ་ཚན་གྱི་ཐོ་ཡིག\n"
+#~ "  -h, --help\t\t\t  གྲོགས་རམ་འཕྲིན་དོན་འདི་བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -l, --login LOGIN\t\t  ནང་བསྐྱོད་མིང་གི་བེ་ལུ་གསརཔ།\n"
+#~ "  -L, --lock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་རྐྱབས།\n"
+#~ "  -m, --move-home\t\t  ཁྱིམ་གྱི་སྣོད་ཐོའི་ནང་དོན་ཚུ་ \n"
+#~ " \t\t\t\t གནས་ཁོངས་ (-dདང་རྐྱངམ་ཅིག་)གསརཔ་ལུ་སྤོ།\n"
+#~ "  -o, --non-unique\t\t  ཡུ་ཨའི་ཌི་ རྫུན་མ་(ཐུན་མོང་)ལག་ལེན་གྱི་ཐོག་ལས་ འབད་བཅུག\n"
+#~ "  -p, --password PASSWORD\t  ཆོག་ཡིག་གསརཔ་གི་དོན་ལུ་ གསང་བཟོས་ཆོག་ཡིག་ལག་ལེན་འཐབ།\n"
+#~ "  -s, --shell SHELL\t\t  ལག་ལེན་པའི་རྩིས་ཐོའི་དོན་ལུ་ ནང་བསྐྱོད་ཤལ་གསརཔ།\n"
+#~ "  -u, --uid UID\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཡུ་ཨི་ཌི་གསརཔ།\n"
+#~ "  -U, --unlock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་ཕྱེ།\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: ཟུར་རྟགས་ཚུ་གྲ་སྒྲིག་མིན་འདུག\n"
 
 #, fuzzy
 #~ msgid ""
@@ -2770,9 +3111,6 @@ msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་�
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s: ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་སྐབས་ལུ་ འཛོལ་བ།\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: གྲལ་ཐིག་ %d:ལག་ལེན་པ་ %sའཚོལ་མི་ཚུགས།\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s: %sགི་དོན་ལུ་ ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"

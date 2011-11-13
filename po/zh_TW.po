@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -39,6 +39,14 @@ msgstr "無法為設定訊息配置空間。\n"
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "配置錯誤 - 未知項目“%s”(請通知管理員)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "密碼："
@@ -224,6 +232,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "改變信箱所有者失敗"
+
+#, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
@@ -308,6 +321,32 @@ msgid "Incorrect password for %s.\n"
 msgstr "“%s”的密碼不正確\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s：無效的住家電話：“%s”\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s：無法建立目錄 %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s：無法建立目錄 %s\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -336,45 +375,54 @@ msgstr "無法將根目錄改變為“%s”\n"
 msgid "Unable to determine your tty name."
 msgstr "%s：無法確定您的使用者名稱。\n"
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) 失敗\n"
-
 #, fuzzy
 msgid "No"
 msgstr "取消"
 
-#, fuzzy
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "用法：%s [輸入]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"用法：chage [選項] 使用者\n"
-"\n"
-"選項：\n"
-"  -d, --lastday LAST_DAY\t設定密碼的最後修改日期為 LAST_DAY\n"
-"  -E, --expiredate EXPIRE_DATE\t設定帳號過期的日期為 EXPIRE\n"
-"  -h, --help\t\t\t顯示這份說明文字然後結束\n"
-"  -I, --inactive INACTIVE\t設定密碼在 INACTIVE 天後失效\n"
-"  -l, --list\t\t\t顯示帳號期限的相關資訊\n"
-"  -m, --mindays MIN_DAYS\t最少必須相隔 MIN_DAYS 天才能改變密碼\n"
-"  -M, --maxdays MAX_DAYS\t最多必須相隔 MIN_DAYS 天才能改變密碼\n"
-"  -W, --warndays WARN_DAYS\t密碼在過期前 WARN_DAYS 天會發出警告\n"
-"\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "請輸入新值，或直接按 ENTER 鍵以使用預設值"
@@ -447,9 +495,9 @@ msgstr "%s：權限被拒。\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s：無法確定您的使用者名稱。\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s：PAM 驗証失敗\n"
+#, fuzzy, c-format
+msgid "%s: PAM: %s\n"
+msgstr "passwd：%s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't lock files, try again later\n"
@@ -473,10 +521,6 @@ msgstr ""
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s：無法打開影子密碼文件\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s：使用者 %s 不存在\n"
@@ -489,17 +533,31 @@ msgstr "正在為 %s 修改年齡訊息\n"
 msgid "%s: error changing fields\n"
 msgstr "%s：改變字段時出錯\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"用法：%s [-f 全名] [-r 房間號] [-w 工作電話]\n"
-"\t[-h 住家電話] [-o 其它] [使用者]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "用法：%s [輸入]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "用法：%s [-f 全名] [-r 房間號] [-w 工作電話] [-h 住家電話]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "全名"
@@ -576,24 +634,24 @@ msgid "%s: fields too long\n"
 msgstr "%s：字段太長\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "用法：%s [輸入]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"用法：chpasswd [選項]\n"
-"\n"
-"選項：\n"
-"  -e, --encrypted\t所提供的密碼已經過加密\n"
-"  -h, --help\t\t顯示這份說明文字然後結束\n"
-"  -m,  --md5\t\t如果所提供的密碼沒有加密，則使用 MD5 加密法\n"
-"\t\t\t來替代 DES。\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -636,29 +694,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s：發現錯誤，忽略更動\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "用法：%s [輸入]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-#, fuzzy, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s：使用者 %s 不存在\n"
 
@@ -666,13 +701,7 @@ msgstr "%s：使用者 %s 不存在\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s：使用者 %s 不存在\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
 
 msgid "Login Shell"
@@ -706,8 +735,22 @@ msgstr "%s：使用者 %s 不存在\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s：警告：%s 不屬於 %s\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "用法：expiry {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: unexpected argument: %s\n"
+msgstr "%s：無效的數字參數“%s”\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -735,9 +778,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "%s：無法建立目錄 %s\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "登入        失敗     最多    最後                     在\n"
@@ -751,30 +795,28 @@ msgstr " [還剩 %lds]"
 msgid " [%lds lock]"
 msgstr " [鎖定 %lds]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
+msgstr "%s：無法建立目錄 %s\n"
 
 #, fuzzy, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+msgid "%s: Failed to set max for UID %lu\n"
+msgstr "%s：無效的工作電話：“%s”\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
+msgstr "%s：無法建立目錄 %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Unknown user or range: %s\n"
 msgstr "未知使用者：%s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s：無法打開檔案 %s\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "%s：無法將目錄 %s 改名為 %s\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -788,6 +830,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -916,8 +961,10 @@ msgstr "%s：%s 群組已存在\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr ""
 
-msgid "Usage: groupdel group\n"
-msgstr "用法：groupdel 群組\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s：無法確定您的使用者名稱。\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1020,16 +1067,33 @@ msgstr "%s：%s 群組是一個 NIS 群組\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s：未知使用者：%s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "用法：%s [-r] [-s] [群組 [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "用法：%s [輸入]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "用法：%s [-r] [-s] [群組]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "用法：%s [輸入]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s：-s 和 -r 是互不相容的\n"
 
 msgid "invalid group file entry"
@@ -1097,16 +1161,6 @@ msgstr "%s：檔案已被更新\n"
 msgid "%s: no changes\n"
 msgstr "%s：無改變\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpconv\n"
-msgstr "用法：groupdel 群組\n"
-
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpunconv\n"
-msgstr "用法：groupdel 群組\n"
-
 #, fuzzy, c-format
 #| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
@@ -1121,28 +1175,17 @@ msgstr "用法：id\n"
 msgid " groups="
 msgstr " 群組="
 
-#, fuzzy
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"用法：lastlog [選項]\n"
-"\n"
-"選項：\n"
-"  -h, --help\t\t顯示這份說明文字然後結束\n"
-"  -t, --time DAYS\t只列出 DAYS 天內的歷史記錄\n"
-"  -u, --user LOGIN\t根據指定的 LOGIN 列出該使用者最後的歷史記錄\n"
-"\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
 msgid "Username         Port     From             Latest"
@@ -1153,14 +1196,6 @@ msgstr "使用者名                  埠號     最後登入時間"
 
 msgid "**Never logged in**"
 msgstr "**從未登入過**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr ""
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1238,6 +1273,11 @@ msgstr ""
 
 msgid "Login incorrect"
 msgstr "登入錯誤"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s：第 %d 行：無法找到使用者 %s\n"
 
 #, c-format
 msgid ""
@@ -1359,43 +1399,59 @@ msgstr "%s：第 %d 行：改變擁有者或群組失敗\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s：第 %d 行：無法更新項目\n"
 
-#, fuzzy
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"用法：chage [選項] 使用者\n"
-"\n"
-"選項：\n"
-"  -d, --lastday LAST_DAY\t設定密碼的最後修改日期為 LAST_DAY\n"
-"  -E, --expiredate EXPIRE_DATE\t設定帳號過期的日期為 EXPIRE\n"
-"  -h, --help\t\t\t顯示這份說明文字然後結束\n"
-"  -I, --inactive INACTIVE\t設定密碼在 INACTIVE 天後失效\n"
-"  -l, --list\t\t\t顯示帳號期限的相關資訊\n"
-"  -m, --mindays MIN_DAYS\t最少必須相隔 MIN_DAYS 天才能改變密碼\n"
-"  -M, --maxdays MAX_DAYS\t最多必須相隔 MIN_DAYS 天才能改變密碼\n"
-"  -W, --warndays WARN_DAYS\t密碼在過期前 WARN_DAYS 天會發出警告\n"
-"\n"
 
 msgid "Old password: "
 msgstr "舊密碼："
@@ -1478,18 +1534,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "密碼過期警告"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "用法：%s [-q] [-r] [-s] [passwd [shadow]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "用法：%s [-q] [-r] [-s] [passwd [shadow]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "用法：%s [輸入]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s：-s 和 -r 是互不相容的\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "用法：%s [輸入]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1573,11 +1634,6 @@ msgstr "使用者 %s：最近一次密碼更動\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s：無法打開檔案 %s\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwconv\n"
-msgstr "用法：id\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1586,11 +1642,6 @@ msgstr "%s：無法重寫檔案\n"
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwunconv\n"
-msgstr "用法：id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "su 到該帳戶被拒。\n"
@@ -1645,16 +1696,12 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s：必須從終端中執行\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s：pam_start：錯誤 %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "未知 id：%s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s：%s\n"
+"(忽略)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1662,14 +1709,6 @@ msgstr "您沒有被授權 su %s\n"
 
 msgid "(Enter your own password)"
 msgstr "(請輸入您自己的密碼)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s：%s\n"
-"(忽略)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: PAM authentication failed\n"
@@ -1681,8 +1720,28 @@ msgstr "%s：PAM 驗証失敗\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "您沒有被授權 su %s\n"
 
-msgid "No shell\n"
-msgstr "沒有 shell\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "沒有“root”的密碼項目"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s：必須從終端中執行\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s：pam_start：錯誤 %d\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s：無法將目錄 %s 改名為 %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "無法執行 %s"
 
 msgid "No password file"
 msgstr "沒有密碼檔案"
@@ -1728,7 +1787,7 @@ msgstr "%s：第 %d 行：改變擁有者或群組失敗\n"
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s：更名：%s"
 
 #, fuzzy, c-format
@@ -1743,6 +1802,8 @@ msgstr "%s：指定了過多群組(最多 %d)。\n"
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "用法：%s [輸入]\n"
@@ -1860,10 +1921,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
@@ -1924,19 +1981,29 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
+msgstr ""
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s：不能在 NIS 用戶端上修改使用者“%s”。\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s：不能刪除使用者的主群組。\n"
+
+#, fuzzy, c-format
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s：無效的主目錄“%s”\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
@@ -1970,10 +2037,6 @@ msgstr "%s：無法將目錄 %s 改名為 %s\n"
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s：使用者 %s 是 NIS 使用者\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s：使用者 %s 目前已登入\n"
-
 #, fuzzy, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s：無效的主目錄“%s”\n"
@@ -1986,32 +2049,57 @@ msgstr "%s：不能刪除目錄 %s (因為這將刪除使用者 %s 的主目錄)
 msgid "%s: error removing directory %s\n"
 msgstr "%s：刪除目錄 %s 時出錯\n"
 
-#, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
+msgstr ""
+
+msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+
+msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
 msgid ""
@@ -2030,17 +2118,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s：使用者 %s 已存在\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s：沒有指定標誌\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s：-e 和 -f 參數需要shadow密碼\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: no options\n"
+msgstr "%s：無法打開檔案 %s\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s：-e 和 -f 參數需要shadow密碼\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2106,9 +2195,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2187,6 +2273,201 @@ msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s：無效的主目錄“%s”\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) 失敗\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "用法：chage [選項] 使用者\n"
+#~ "\n"
+#~ "選項：\n"
+#~ "  -d, --lastday LAST_DAY\t設定密碼的最後修改日期為 LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE\t設定帳號過期的日期為 EXPIRE\n"
+#~ "  -h, --help\t\t\t顯示這份說明文字然後結束\n"
+#~ "  -I, --inactive INACTIVE\t設定密碼在 INACTIVE 天後失效\n"
+#~ "  -l, --list\t\t\t顯示帳號期限的相關資訊\n"
+#~ "  -m, --mindays MIN_DAYS\t最少必須相隔 MIN_DAYS 天才能改變密碼\n"
+#~ "  -M, --maxdays MAX_DAYS\t最多必須相隔 MIN_DAYS 天才能改變密碼\n"
+#~ "  -W, --warndays WARN_DAYS\t密碼在過期前 WARN_DAYS 天會發出警告\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s：PAM 驗証失敗\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "用法：%s [-f 全名] [-r 房間號] [-w 工作電話]\n"
+#~ "\t[-h 住家電話] [-o 其它] [使用者]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr "用法：%s [-f 全名] [-r 房間號] [-w 工作電話] [-h 住家電話]\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "用法：chpasswd [選項]\n"
+#~ "\n"
+#~ "選項：\n"
+#~ "  -e, --encrypted\t所提供的密碼已經過加密\n"
+#~ "  -h, --help\t\t顯示這份說明文字然後結束\n"
+#~ "  -m,  --md5\t\t如果所提供的密碼沒有加密，則使用 MD5 加密法\n"
+#~ "\t\t\t來替代 DES。\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "用法：expiry {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "%s: cannot open file %s\n"
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "%s：無法打開檔案 %s\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "用法：groupdel 群組\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "用法：%s [-r] [-s] [群組 [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "用法：%s [-r] [-s] [群組]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s：-s 和 -r 是互不相容的\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "用法：groupdel 群組\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "用法：groupdel 群組\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "用法：lastlog [選項]\n"
+#~ "\n"
+#~ "選項：\n"
+#~ "  -h, --help\t\t顯示這份說明文字然後結束\n"
+#~ "  -t, --time DAYS\t只列出 DAYS 天內的歷史記錄\n"
+#~ "  -u, --user LOGIN\t根據指定的 LOGIN 列出該使用者最後的歷史記錄\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "用法：chage [選項] 使用者\n"
+#~ "\n"
+#~ "選項：\n"
+#~ "  -d, --lastday LAST_DAY\t設定密碼的最後修改日期為 LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE\t設定帳號過期的日期為 EXPIRE\n"
+#~ "  -h, --help\t\t\t顯示這份說明文字然後結束\n"
+#~ "  -I, --inactive INACTIVE\t設定密碼在 INACTIVE 天後失效\n"
+#~ "  -l, --list\t\t\t顯示帳號期限的相關資訊\n"
+#~ "  -m, --mindays MIN_DAYS\t最少必須相隔 MIN_DAYS 天才能改變密碼\n"
+#~ "  -M, --maxdays MAX_DAYS\t最多必須相隔 MIN_DAYS 天才能改變密碼\n"
+#~ "  -W, --warndays WARN_DAYS\t密碼在過期前 WARN_DAYS 天會發出警告\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "用法：%s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "用法：%s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "用法：id\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "用法：id\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "未知 id：%s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "沒有 shell\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s：使用者 %s 目前已登入\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s：沒有指定標誌\n"
 
 #, fuzzy
 #~ msgid ""
@@ -2549,9 +2830,6 @@ msgstr "%s：無效的主目錄“%s”\n"
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s：更新檔案出錯\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s：第 %d 行：無法找到使用者 %s\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s：無法為 %s 更新密碼項目\n"

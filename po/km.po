@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -41,6 +41,14 @@ msgstr "មិន​អាច​បម្រុង​ទុក​ទំហំ​
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "កំហុស​ការ​កំណត់​រចនាសម្ព័ន្ធ​ - មិន​ស្គាល់​ធាតុ '%s' (ជូន​ដំណឹង​អ្នក​គ្រប់គ្រង​)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "ពាក្យ​សម្ងាត់​ ៖ "
@@ -235,6 +243,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "បរាជ័យ​ក្នុងការ​ផ្លាស់ប្ដូរ​ម្ចាស់​ប្រអប់សំបុត្រ"
+
+#, fuzzy, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s ៖ មិនអាចយក​ UID ដែលមានតែមួយ​បានទេ\n"
 
@@ -317,6 +330,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​សម្រាប់​ %s ។\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s ៖ លេខ​ទូរស័ព្ទនៅផ្ទះ​មិន​ត្រឹមត្រូវ​ ៖ '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -344,49 +384,55 @@ msgstr "មិន​អាច​ប្តូរ​ថត root ទៅ​ '%s'ប�
 msgid "Unable to determine your tty name."
 msgstr "មិន​អាច​កំណត់​ឈ្មោះ​ tty របស់​អ្នកបានទេ​ ។"
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) បាន​បរាជ័យ​\n"
-
 #, fuzzy
 #| msgid "No\n"
 msgid "No"
 msgstr "ទេ\n"
 
-#, fuzzy
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"ការ​ប្រើប្រាស់​ ៖ ប្តូរ​អ្នកប្រើ​ [options]​\n"
-"ជម្រើស​ ៖\n"
-"  -d, --ថ្ងៃ​មុន​ LAST_DAY\t កំណត់​ការប្ដូរ​ពាក្យ​សម្ងាត់​មុន ​ទៅ​ជា​ LAST_DAY\n"
-"  -E, --កាលបរិច្ឆេទ​ផុត​កំណត់​ EXPIRE_DATE\t កំណត់​កាលបរិច្ឆេទ​ការផុត​កំណត់​​របស់គណនីទៅ​ជា​ "
-"EXPIRE_DATE\n"
-"  -h, --ជំនួយ​\t\t\t បង្ហាញ​សារ​ជំនួយនេះ ហើយ​ ចេញ​\n"
-"  -I, --អសកម្ម​ INACTIVE\t កំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​​អសកម្ម ​បន្ទាប់​ពី​ការផុត​កំណត់​\n"
-"\t\t\t\tទៅជា INACTIVE\n"
-"  -l, --បញ្ជី​\t\t\t បង្ហាញព័ត៌មាន​ចាស់​របស់​​គណនី​\n"
-"  -m, --ចំនួនថ្ងៃ​អប្បរមា MIN_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អប្បបរមា ​មុន​ពាក្យ​សម្ងាត់​ \n"
-"\t\t\t\tប្តូរទៅ​ជា​ MIN_DAYS\n"
-"  -M, --ចំនួនថ្ងៃ​អតិបរមា MAX_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អតិបរមា ​មុន​ពាក្យ​សម្ងាត់​\n"
-"\t\t\t\tប្តូរ​ទៅ​ជា​ MAX_DAYS\n"
-"  -W, --ថ្ងៃព្រមាន WARN_DAYS\tកំណត់ការព្រមាន​ថ្ងៃ​ផុត​កំណត់​ទៅជា​ WARN_DAYS\n"
-"\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 #, fuzzy
 msgid "Enter the new value, or press ENTER for the default"
@@ -462,9 +508,10 @@ msgstr "%s ៖ សិទ្ធ​ត្រូវ​បាន​បដិសេ�
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s ៖ មិន​អាចកំណត់​ឈ្មោះ​អ្នកប្រើ​របស់​អ្នក​បាន​ទេ ។\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s ៖ PAM ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវបាន​បរាជ័យ​\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s ៖ %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't lock files, try again later\n"
@@ -489,10 +536,6 @@ msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លា�
 msgid "%s: the shadow password file is not present\n"
 msgstr "%s ៖ គ្មាន​វត្តមាន​​ឯកសារ​ពាក្យ​សម្ងាត់ស្រមោលទេ​\n"
 
-#, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
-
 #, fuzzy, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
@@ -505,17 +548,31 @@ msgstr "ការផ្លាស់​ប្តូរ​ព័ត៌មាន​
 msgid "%s: error changing fields\n"
 msgstr "%s ៖ កំហុស​ការផ្លាស់ប្តូរ​វាល​\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
-msgstr ""
-"កា​រប្រើប្រាស់​ ៖ %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "របៀបប្រើ ៖ %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
+msgstr ""
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "ឈ្មោះ​ពេញ"
@@ -594,25 +651,24 @@ msgid "%s: fields too long\n"
 msgstr "%s ៖ វាល គឺ​វែងវែងពេក​\n"
 
 #, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
-"របៀបប្រើ ៖ chpasswd [ជម្រើស]\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -e, --encrypted\tពាក្យសម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
-"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​​នេះ និង​ចេញ\n"
-"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​ដែល​ពាក្យសម្ងាត់\n"
-"\t\t\tដែល​បាន​ផ្ដល់​មិន​ត្រូវបាន​អ៊ិនគ្រីប​ទេ\n"
-"\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -654,29 +710,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s ៖ បានរកឃើញ​កំហុស មិនអើពើនឹងការផ្លាស់ប្ដូរ​\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr "របៀបប្រើ ៖ %s [input]\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-
-#, fuzzy, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
 
@@ -684,22 +717,8 @@ msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s 
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
 
-#, fuzzy
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
-"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
-"  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "សែលចូល"
@@ -732,8 +751,23 @@ msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s 
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s ៖ ការព្រមាន ៖​ %s មិនត្រូវបានទទួល​យក​ដោយ %s ឡើយ\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "របៀបប្រើ ៖ ការផុតកំណត់ {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "កំណត់ត្រាចុងក្រោយ ៖ អាគុយម៉ង់​មិន​រំពឹង​ទុក​ ៖ %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -761,9 +795,10 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "ចូល       ភាពបរាជ័យ​នៃការចូល​ចុងក្រោយ​ជាអតិបរមា                   លើ\n"
@@ -777,30 +812,29 @@ msgstr " [%lds នៅសល់]"
 msgid " [%lds lock]"
 msgstr " [%lds ជាប់សោ]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
-msgstr ""
-
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
 
 #, fuzzy, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: Failed to set max for UID %lu\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+msgid "%s: Unknown user or range: %s\n"
 msgstr "មិន​ស្គាល់​អ្នក​ប្រើ ៖ %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr ""
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "%s ៖ មិនអាចប្ដូរឈ្មោះ​ថត​ %s ទៅ​ជា​ %s បានឡើយ\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -814,6 +848,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -942,8 +979,10 @@ msgstr "%s ៖ មានក្រុម​ %s រួច​ហើយ​\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr ""
 
-msgid "Usage: groupdel group\n"
-msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s ៖ មិន​អាចកំណត់​ឈ្មោះ​អ្នកប្រើ​របស់​អ្នក​បាន​ទេ ។\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1047,16 +1086,33 @@ msgstr "%s ៖ ក្រុម​ %s គឺជា​ក្រុម NIS\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s ៖ មិន​ស្គាល់​អ្នកប្រើ​ %s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "របៀបប្រើ ៖​ %s [-r] [-s] [group [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "របៀបប្រើ ៖ %s [-r] [-s] [group]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s ៖ -s និង​ -r គឺមិន​ត្រូវ​គ្នាទេ​\n"
 
 #, fuzzy
@@ -1130,16 +1186,6 @@ msgstr "%s ៖ មិនបានធ្វើឲ្យ​ឯកសារទា�
 msgid "%s: no changes\n"
 msgstr "%s ៖គ្មាន​ការផ្លាស់ប្ដូរ​\n"
 
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpconv\n"
-msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
-
-#, fuzzy
-#| msgid "Usage: groupdel group\n"
-msgid "Usage: grpunconv\n"
-msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
-
 #, fuzzy, c-format
 #| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
@@ -1154,30 +1200,17 @@ msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
 msgid " groups="
 msgstr " ក្រុម​="
 
-#, fuzzy
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"របៀបប្រើ ៖ lastlog [ជម្រើស]\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -b, --before DAYS\tបោះពុម្ពកំណត់កំណត់ហេតុចុងក្រោយចាស់ជាង DAYS\n"
-"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
-"  -t, --time DAYS\tបោះពុម្ព​តែ​កំណត់ត្រា​កំណត់​ហេតុ​ចុង​ក្រោយ​ដែល​ថ្មី​ជាង DAYS ប៉ុណ្ណោះ\n"
-"  -u, --user LOGIN\tបោះពុម្ព​កំណត់ត្រា​កំណត់ហេតុ​ចុង​ក្រោយ​សម្រាប់​អ្នក​ប្រើ​ដែល​មាន LOGIN ដែល​បាន​"
-"បញ្ជាក់\n"
-"\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
 #, fuzzy
@@ -1190,14 +1223,6 @@ msgstr "ឈ្មោះ​អ្នក​ប្រើ                ច្រ�
 
 msgid "**Never logged in**"
 msgstr "**មិន​ដែល​ចូល​សោះ**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "កំណត់ត្រាចុងក្រោយ ៖ អាគុយម៉ង់​មិន​រំពឹង​ទុក​ ៖ %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1274,6 +1299,11 @@ msgstr "ចូល​ ៖  PAM បានស្នើឲ្យ​បោះបង�
 
 msgid "Login incorrect"
 msgstr "ចូល​មិន​ត្រឹមត្រូវ​"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​រក​អ្នកប្រើ​ %s ឃើញឡើយ\n"
 
 #, c-format
 msgid ""
@@ -1398,52 +1428,59 @@ msgstr "%s ៖ បន្ទាត់​ %d ៖ chown បានបរាជ័�
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនអាចធ្វើឲ្យ​ធាតុបញ្ចូល​ទាន់សម័យបានឡើយ\n"
 
-#, fuzzy
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"របៀបប្រើ ៖ passwd [ជម្រើស] [ការចូល]\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -a, --all\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ទាំងអស់\n"
-"  -d, --delete\t\t\tលុប​ពាក្យសម្ងាត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
-"  -e, --expire\t\t\tបង្ហាញ​ឲ្យ​ពាក្យសម្ងាត់​ផុត​កំណត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
-"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
-"  -k, --keep-tokens\t\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់ ក្នុ​ង​ក​រណី​​ដែល​ផុត​កំណត់\n"
-"  -i, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
-"\t\t\t\tto INACTIVE\n"
-"  -l, --lock\t\t\tចាក់សោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
-"  -n, --mindays MIN_DAYS\tកំណត់ចំនួន​ថ្ងៃ​អប្បបរមា​មុន​ពាក្យសម្ងាត់\n"
-"\t\t\t\tផ្លាស់ប្ដូរទៅ MIN_DAYS\n"
-"  -q, --quiet\t\t\tរបៀប​ស្ងាត់\n"
-"  -r, --repository REPOSITORY\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់​នៅ​ក្នុង​ឃ្លាំង REPOSITORY\n"
-"  -S, --status\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ដែល​មាន​ឈ្មោះ\n"
-"  -u, --unlock\t\t\tដោះសោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
-"  -w, --warndays WARN_DAYS\tកំណត់​ថ្ងៃ​ព្រមាន​ផុត​កំណត់​ទៅ​ជា WARN_DAYS\n"
-"  -x, --maxdays MAX_DAYS\tកំណត់​ចំនួនថ្ងៃ​អតិបរមា​មុន​ពាក្យសម្ងាត់\n"
-"\t\t\t\tផ្លាស់ប្ដូរ​ទៅ​ជា MAX_DAYS\n"
-"\n"
 
 msgid "Old password: "
 msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
@@ -1527,18 +1564,23 @@ msgid "%s: password expiry information changed.\n"
 msgstr "ការព្រមាន​ការផុត​កំណត់​នៃ​ពាក្យ​សម្ងាត់​"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s ៖ -s និង​ -r គឺមិន​ត្រូវ​គ្នាទេ​\n"
+#| msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1626,11 +1668,6 @@ msgstr "អ្នកប្រើ​ %s ៖ ពាក្យ​សម្ងាត
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
 
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwconv\n"
-msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
-
 #, fuzzy, c-format
 #| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
@@ -1639,11 +1676,6 @@ msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ឡ�
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: id\n"
-msgid "Usage: pwunconv\n"
-msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "ដំណើរការ​ជា​ su ទៅ​កាន់​គណនី​នោះ​ DENIED ។\n"
@@ -1710,16 +1742,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s ៖ ត្រូវ​តែ​រត់​ពី ស្ថានីយមួយ\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s ៖ pam_start ៖ កំហុស​ %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "មិន​ស្គាល់​លេខ​សម្គាល់​ ៖ %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(មិន​អើពើ​)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1727,14 +1755,6 @@ msgstr "អ្នកគ្មាន​ការ​អនុញ្ញាតឲ្
 
 msgid "(Enter your own password)"
 msgstr "(បញ្ចូល​ពាក្យ​សម្ងាត់​ផ្ទាល់​ខ្លួនរបស់អ្នក​)"
-
-#, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(មិន​អើពើ​)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: PAM authentication failed\n"
@@ -1746,8 +1766,27 @@ msgstr "%s ៖ PAM ការ​ផ្ទៀងផ្ទាត់​ភាព​
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "អ្នកគ្មាន​ការ​អនុញ្ញាតឲ្យ​ចូល​ទៅ​កាន់​ su ទេ​ %s\n"
 
-msgid "No shell\n"
-msgstr "គ្មានសែល​\n"
+#, fuzzy, c-format
+msgid "No passwd entry for user '%s'\n"
+msgstr "គ្មាន​ធាតុ​ពាក្យ​សម្ងាត់​សម្រាប់ 'root'​ ឡើយ\n"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s ៖ ត្រូវ​តែ​រត់​ពី ស្ថានីយមួយ\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s ៖ pam_start ៖ កំហុស​ %d\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s ៖ មិនអាចប្ដូរឈ្មោះ​ថត​ %s ទៅ​ជា​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "មិន​អាចប្រតិបត្តិ​ %s បានទេ"
 
 #, fuzzy
 msgid "No password file"
@@ -1796,7 +1835,7 @@ msgstr "%s ៖ បន្ទាត់​ %d ៖ chown បានបរាជ័�
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s ៖​ ប្តូរ​ឈ្មោះ​ ៖ %s"
 
 #, c-format
@@ -1811,6 +1850,8 @@ msgstr "%s ៖ ក្រុម​ដែលបានបញ្ជាក់​ច�
 #| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr "របៀបប្រើ ៖ %s [input]\n"
@@ -1928,10 +1969,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
@@ -1993,30 +2030,33 @@ msgstr ""
 "%s ៖ ការព្រមាន​ ៖ មានថតផ្ទះ​រួចហើយ ។\n"
 "មិនចម្លង​​ឯកសារណាមួយ​ពីថត​ skel ចូលក្នុង​វានោះទេ ។\n"
 
-#, fuzzy
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
-"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
-"  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
-"\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s ៖ មិនអាចផ្លាស់​​ប្តូរ​អ្នក​ប្រើបានទេ​ '%s' លើ​ម៉ាស៊ីន​ភ្ញៀវ NIS បានទេ ។\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s ៖ មិនអាច​យកក្រុម %s ដែលជា​ក្រុម​ចម្បង​សម្រាប់​អ្នកប្រើដទៃទៀតចេញបានទេ ។\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s ៖ ថត​ផ្ទះ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove "
@@ -2050,10 +2090,6 @@ msgstr "%s ៖ មិនអាចប្ដូរឈ្មោះ​ថត​ %s 
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s ៖ អ្នកប្រើ​ %s គឺជា​អ្នក​​ប្រើ​ NIS\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s ៖ បច្ចុប្បន្ន ​អ្នក​ប្រើ​ %s បាន​ចូលហើយ​\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2067,55 +2103,58 @@ msgstr "%s ៖ មិនយក​ថត​ %s ចេញ​ឡើយ (នឹង�
 msgid "%s: error removing directory %s\n"
 msgstr "%s ៖ មានកំហុស​ក្នុងការយក​ថត​ %s ចេញ\n"
 
-#, fuzzy, c-format
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"របៀបប្រើ ៖ usermod [ជម្រើស] LOGIN\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -a, --append GROUP\t\tបន្ថែម​អ្នក​ប្រើ​ទៅ​ខាង​ចុង​ក្រុម​បន្ទាប់បន្សំ\n"
-"  -c, --comment COMMENT\t\tតម្លៃ​ថ្មី​របស់​វាល GECOS\n"
-"  -d, --home HOME_DIR\t\tថតផ្ទះ​ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
-"  -e, --expiredate EXPIRE_DATE\tកំណត់​កាលបរិច្ឆេទ​ផុត​កំណត់​ទៅ​ជា EXPIRE_DATE\n"
-"  -f, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
-"\t\t\t\tto INACTIVE\n"
-"  -g, --gid GROUP\t\tបង្ខំ​ឲ្យ​ប្រើ GROUP ជា​ក្រុម​សំខាន់​ថ្មី\n"
-"  -G, --groups GROUPS\t\tបញ្ជី​ថ្មី​របស់​ក្រុម​បន្ទាប់បន្សំ\n"
-"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួ​យនេះ និង​ចេញ\n"
-"  -l, --login NEW_LOGIN\t\tតម្លៃ​ថ្មី​របស់​ឈ្មោះ​ចូល\n"
-"  -L, --lock\t\t\tចាក់សោ​គណនី​អ្នកប្រើ\n"
-"  -m, --move-home\t\tផ្លាស់ទី​មាតិកា​របស់​ថតផ្ទះ​ទៅ\n"
-"\t\t\t\tទីតាំង​ថ្មី (ប្រើ​តែជា​មួយ -d ប៉ុណ្ណោះ)\n"
-"  -o, --non-unique\t\tអនុញ្ញាត​ឲ្យ​ប្រើ UID (មិនមាន​តែ​មួយគត់) ស្ទួន\n"
-"  -p, --password PASSWORD\tប្រើ​​ពាក្យសម្ងា​ត់​​ដែ​ល​បាន​អ៊ិនគ្រីប​សម្រាប់​​ពាក្យសម្ងា​ត់​ថ្មី\n"
-"  -s, --shell SHELL\t\tសែល​​ចូ​ល​​ថ្មី​​សម្រាប់​​គណនី​អ្នកប្រើ\n"
-"  -u, --uid UID\t\t\t UID ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ\n"
-"  -U, --unlock\t\t\tដោះសោ​គណនី​អ្នកប្រើ\n"
-"\n"
+
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2133,17 +2172,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s ៖ អ្នក​ប្រើ​ %s មាន​រួច​ហើយ​\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s ៖ មិន​ផ្តល់​ទង់​ឲ្យឡើយ​\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s ៖ ពាក្យ​សម្ងាត់​ស្រមោល​បានត្រូវការ​​ -e និង -f\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: no options\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s ៖ ពាក្យ​សម្ងាត់​ស្រមោល​បានត្រូវការ​​ -e និង -f\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2209,9 +2249,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2295,6 +2332,308 @@ msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) បាន​បរាជ័យ​\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ការ​ប្រើប្រាស់​ ៖ ប្តូរ​អ្នកប្រើ​ [options]​\n"
+#~ "ជម្រើស​ ៖\n"
+#~ "  -d, --ថ្ងៃ​មុន​ LAST_DAY\t កំណត់​ការប្ដូរ​ពាក្យ​សម្ងាត់​មុន ​ទៅ​ជា​ LAST_DAY\n"
+#~ "  -E, --កាលបរិច្ឆេទ​ផុត​កំណត់​ EXPIRE_DATE\t កំណត់​កាលបរិច្ឆេទ​ការផុត​កំណត់​​របស់គណនីទៅ​ជា​ "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --ជំនួយ​\t\t\t បង្ហាញ​សារ​ជំនួយនេះ ហើយ​ ចេញ​\n"
+#~ "  -I, --អសកម្ម​ INACTIVE\t កំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​​អសកម្ម ​បន្ទាប់​ពី​ការផុត​កំណត់​\n"
+#~ "\t\t\t\tទៅជា INACTIVE\n"
+#~ "  -l, --បញ្ជី​\t\t\t បង្ហាញព័ត៌មាន​ចាស់​របស់​​គណនី​\n"
+#~ "  -m, --ចំនួនថ្ងៃ​អប្បរមា MIN_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អប្បបរមា ​មុន​ពាក្យ​សម្ងាត់​ \n"
+#~ "\t\t\t\tប្តូរទៅ​ជា​ MIN_DAYS\n"
+#~ "  -M, --ចំនួនថ្ងៃ​អតិបរមា MAX_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អតិបរមា ​មុន​ពាក្យ​សម្ងាត់​\n"
+#~ "\t\t\t\tប្តូរ​ទៅ​ជា​ MAX_DAYS\n"
+#~ "  -W, --ថ្ងៃព្រមាន WARN_DAYS\tកំណត់ការព្រមាន​ថ្ងៃ​ផុត​កំណត់​ទៅជា​ WARN_DAYS\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s ៖ PAM ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវបាន​បរាជ័យ​\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "កា​រប្រើប្រាស់​ ៖ %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ chpasswd [ជម្រើស]\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -e, --encrypted\tពាក្យសម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
+#~ "  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​​នេះ និង​ចេញ\n"
+#~ "  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​ដែល​ពាក្យសម្ងាត់\n"
+#~ "\t\t\tដែល​បាន​ផ្ដល់​មិន​ត្រូវបាន​អ៊ិនគ្រីប​ទេ\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
+#~ "  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+#~ "  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "របៀបប្រើ ៖ ការផុតកំណត់ {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "%s: cannot open file %s\n"
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "របៀបប្រើ ៖​ %s [-r] [-s] [group [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "របៀបប្រើ ៖ %s [-r] [-s] [group]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s ៖ -s និង​ -r គឺមិន​ត្រូវ​គ្នាទេ​\n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
+
+#, fuzzy
+#~| msgid "Usage: groupdel group\n"
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ lastlog [ជម្រើស]\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -b, --before DAYS\tបោះពុម្ពកំណត់កំណត់ហេតុចុងក្រោយចាស់ជាង DAYS\n"
+#~ "  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+#~ "  -t, --time DAYS\tបោះពុម្ព​តែ​កំណត់ត្រា​កំណត់​ហេតុ​ចុង​ក្រោយ​ដែល​ថ្មី​ជាង DAYS ប៉ុណ្ណោះ\n"
+#~ "  -u, --user LOGIN\tបោះពុម្ព​កំណត់ត្រា​កំណត់ហេតុ​ចុង​ក្រោយ​សម្រាប់​អ្នក​ប្រើ​ដែល​មាន LOGIN ដែល​បាន​"
+#~ "បញ្ជាក់\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ passwd [ជម្រើស] [ការចូល]\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -a, --all\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ទាំងអស់\n"
+#~ "  -d, --delete\t\t\tលុប​ពាក្យសម្ងាត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
+#~ "  -e, --expire\t\t\tបង្ហាញ​ឲ្យ​ពាក្យសម្ងាត់​ផុត​កំណត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
+#~ "  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+#~ "  -k, --keep-tokens\t\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់ ក្នុ​ង​ក​រណី​​ដែល​ផុត​កំណត់\n"
+#~ "  -i, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
+#~ "\t\t\t\tto INACTIVE\n"
+#~ "  -l, --lock\t\t\tចាក់សោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
+#~ "  -n, --mindays MIN_DAYS\tកំណត់ចំនួន​ថ្ងៃ​អប្បបរមា​មុន​ពាក្យសម្ងាត់\n"
+#~ "\t\t\t\tផ្លាស់ប្ដូរទៅ MIN_DAYS\n"
+#~ "  -q, --quiet\t\t\tរបៀប​ស្ងាត់\n"
+#~ "  -r, --repository REPOSITORY\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់​នៅ​ក្នុង​ឃ្លាំង REPOSITORY\n"
+#~ "  -S, --status\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ដែល​មាន​ឈ្មោះ\n"
+#~ "  -u, --unlock\t\t\tដោះសោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
+#~ "  -w, --warndays WARN_DAYS\tកំណត់​ថ្ងៃ​ព្រមាន​ផុត​កំណត់​ទៅ​ជា WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS\tកំណត់​ចំនួនថ្ងៃ​អតិបរមា​មុន​ពាក្យសម្ងាត់\n"
+#~ "\t\t\t\tផ្លាស់ប្ដូរ​ទៅ​ជា MAX_DAYS\n"
+#~ "\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
+
+#, fuzzy
+#~| msgid "Usage: id\n"
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "មិន​ស្គាល់​លេខ​សម្គាល់​ ៖ %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "គ្មានសែល​\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
+#~ "  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+#~ "  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s ៖ បច្ចុប្បន្ន ​អ្នក​ប្រើ​ %s បាន​ចូលហើយ​\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ usermod [ជម្រើស] LOGIN\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -a, --append GROUP\t\tបន្ថែម​អ្នក​ប្រើ​ទៅ​ខាង​ចុង​ក្រុម​បន្ទាប់បន្សំ\n"
+#~ "  -c, --comment COMMENT\t\tតម្លៃ​ថ្មី​របស់​វាល GECOS\n"
+#~ "  -d, --home HOME_DIR\t\tថតផ្ទះ​ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
+#~ "  -e, --expiredate EXPIRE_DATE\tកំណត់​កាលបរិច្ឆេទ​ផុត​កំណត់​ទៅ​ជា EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
+#~ "\t\t\t\tto INACTIVE\n"
+#~ "  -g, --gid GROUP\t\tបង្ខំ​ឲ្យ​ប្រើ GROUP ជា​ក្រុម​សំខាន់​ថ្មី\n"
+#~ "  -G, --groups GROUPS\t\tបញ្ជី​ថ្មី​របស់​ក្រុម​បន្ទាប់បន្សំ\n"
+#~ "  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួ​យនេះ និង​ចេញ\n"
+#~ "  -l, --login NEW_LOGIN\t\tតម្លៃ​ថ្មី​របស់​ឈ្មោះ​ចូល\n"
+#~ "  -L, --lock\t\t\tចាក់សោ​គណនី​អ្នកប្រើ\n"
+#~ "  -m, --move-home\t\tផ្លាស់ទី​មាតិកា​របស់​ថតផ្ទះ​ទៅ\n"
+#~ "\t\t\t\tទីតាំង​ថ្មី (ប្រើ​តែជា​មួយ -d ប៉ុណ្ណោះ)\n"
+#~ "  -o, --non-unique\t\tអនុញ្ញាត​ឲ្យ​ប្រើ UID (មិនមាន​តែ​មួយគត់) ស្ទួន\n"
+#~ "  -p, --password PASSWORD\tប្រើ​​ពាក្យសម្ងា​ត់​​ដែ​ល​បាន​អ៊ិនគ្រីប​សម្រាប់​​ពាក្យសម្ងា​ត់​ថ្មី\n"
+#~ "  -s, --shell SHELL\t\tសែល​​ចូ​ល​​ថ្មី​​សម្រាប់​​គណនី​អ្នកប្រើ\n"
+#~ "  -u, --uid UID\t\t\t UID ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ\n"
+#~ "  -U, --unlock\t\t\tដោះសោ​គណនី​អ្នកប្រើ\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s ៖ មិន​ផ្តល់​ទង់​ឲ្យឡើយ​\n"
 
 #, fuzzy
 #~ msgid ""
@@ -2777,9 +3116,6 @@ msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹ�
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s ៖ មានកំហុសក្នុងការ​ធ្វើឲ្យ​ឯកសារទាន់សម័យ\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​រក​អ្នកប្រើ​ %s ឃើញឡើយ\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ធាតុបញ្ចូលពាក្យសម្ងាត់​ទាន់សម័យ​សម្រាប់​​ %s បានឡើយ\n"

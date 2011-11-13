@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.4.2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2011-06-09 20:22+0100\n"
 "Last-Translator: Francisco Javier Cuadrado <fcocuadrado@gmail.com>\n"
 "Language-Team: Debian l10n Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -65,6 +65,14 @@ msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
 "error de configuración, elemento «%s» desconocido (informe al "
 "administrador)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "Contraseña: "
@@ -241,6 +249,11 @@ msgstr ""
 "%s: configuración incorrecta: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 
+#, fuzzy, c-format
+#| msgid "failed to allocate memory"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "se produjo un fallo al reservar memoria"
+
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
@@ -329,6 +342,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "Contraseña incorrecta para %s.\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: se produjo un fallo al desprenderse de los privilegios (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: teléfono de casa incorrecto: «%s»\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create directory %s: %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: no se pudo crear el directorio %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to create tcb directory for %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: se produjo un fallo al crear el directorio tcb para %s\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -358,49 +398,83 @@ msgstr "No se pudo cambiar el directorio raíz a «%s»\n"
 msgid "Unable to determine your tty name."
 msgstr "No se pudo determinar el nombre de su tty."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) falló\n"
-
 msgid "No"
 msgstr "No"
 
+#, c-format
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set date of last password change to "
-"LAST_DAY\n"
-"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
-"  -I, --inactive INACTIVE       set password inactive after expiration\n"
-"                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
-"  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
-"                                change to MIN_DAYS\n"
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
-"                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
 msgstr ""
-"Modo de uso: chage [opciones] [USUARIO]\n"
+"Modo de uso: %s [opciones] USUARIO\n"
 "\n"
 "Opciones:\n"
-"  -d, --lastday ÚLTIMO_DÍA      establece el día del último cambio de la\n"
-"                                contraseña a ÚLTIMO_DÍA\n"
-"  -E, --expiredate FECHA_CAD    establece la fecha de caducidad a FECHA_CAD\n"
+
+msgid ""
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
+msgid ""
+"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+"  -e, --expiredate FECHA_CADUCIDAD  fecha de caducidad de la nueva cuenta\n"
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
 "  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -I, --inactive INACTIVA       deshabilita la cuenta después de INACTIVA\n"
-"                                días de la fecha de caducidad\n"
-"  -l, --list                    muestra la información de la edad de la "
-"cuenta\n"
-"  -m, --mindays DÍAS_MIN        establece el número mínimo de días antes de\n"
-"                                cambiar la contraseña a DÍAS_MIN\n"
-"  -M, --maxdays DÍAS_MAX        establece el número máximo de días antes de\n"
-"                                cambiar la contraseña a DÍAS_MAX\n"
-"  -W, --warndays DÍAS_AVISO     establece los días de aviso de expiración a\n"
-"                                DÍAS_AVISO\n"
-"\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
+#| "                                PASSWORD\n"
+msgid ""
+"  -I, --inactive INACTIVE       set password inactive after expiration\n"
+"                                to INACTIVE\n"
+msgstr ""
+"  -p, --password CONTRASEÑA     cambia la contraseña a CONTRASEÑA (cifrada)\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+"  -r, --reset                   reinicia el contador de accesos fallidos\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+"                                change to MIN_DAYS\n"
+msgstr ""
+"  -s, --sha-rounds              número de rondas SHA para los algoritmos\n"
+"                                de cifrado SHA*\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"                                change to MAX_DAYS\n"
+msgstr ""
+"  -s, --sha-rounds              número de rondas SHA para los algoritmos\n"
+"                                de cifrado SHA*\n"
+
+#, fuzzy
+#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+"  -d, --home-dir DIR_PERSONAL   directorio personal de la nueva cuenta\n"
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
@@ -474,9 +548,10 @@ msgstr "%s: permiso denegado.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: no se pudo determinar su nombre de usuario.\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: la autenticación PAM falló\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid "%s: cannot lock %s; try again later.\n"
@@ -499,10 +574,6 @@ msgid "%s: the shadow password file is not present\n"
 msgstr "%s: el fichero de contraseñas ocultas no está presente\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: se produjo un fallo al desprenderse de los privilegios (%s)\n"
-
-#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: el usuario «%s» no existe en %s\n"
 
@@ -514,19 +585,40 @@ msgstr "Cambiando la información de la edad para %s\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: error cambiando los campos\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] LOGIN\n"
+#| "\n"
+#| "Options:\n"
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
 msgstr ""
-"Modo de uso: %s [-f nombre_completo] [-r num_habitación] [-w telf_trabajo]\n"
-"\t[-h telf_casa] [-o otro] [usuario]\n"
+"Modo de uso: %s [opciones] USUARIO\n"
+"\n"
+"Opciones:\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
-"Modo de uso: %s [-f nombre_completo] [-r num_habitación] [-w telf_trabajo]\n"
-"\t[-h telf_casa]\n"
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -h, --help                    display this help message and exit\n"
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+"  -h, --help                    muestra este mensaje de ayuda y termina\n"
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "Nombre completo"
@@ -608,23 +700,25 @@ msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-"%s\n"
 msgstr ""
 "Modo de uso: %s [opciones]\n"
 "\n"
 "Opciones:\n"
-"  -c, --crypt-method            el método de cifrado (uno de %s)\n"
-"  -e, --encrypted               las contraseñas proporcionadas están "
-"cifradas\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -m, --md5                     usa el algoritmo MD5 para cifrar las\n"
-"                                contraseñas\n"
-"%s\n"
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr "  -c, --crypt-method <MÉTODO>   el método de cifrado (uno de %s)\n"
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+"  -e, --encrypted               se cifran las contraseñas proporcionadas\n"
+
+msgid ""
+"  -m, --md5                     encrypt the clear text password using\n"
+"                                the MD5 algorithm\n"
+msgstr ""
+"  -m, --md5                     cifra la contraseña en claro utilizando\n"
+"                                el algoritmo MD5\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -667,35 +761,6 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: error detectado, cambios ignorados\n"
 
 #, c-format
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Modo de uso: %s [opciones]\n"
-"\n"
-"Opciones:\n"
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method <MÉTODO>   el método de cifrado (uno de %s)\n"
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-"  -e, --encrypted               se cifran las contraseñas proporcionadas\n"
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr ""
-"  -m, --md5                     cifra la contraseña en claro utilizando\n"
-"                                el algoritmo MD5\n"
-
-#, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: (línea %d, usuario %s) la contraseña no ha cambiado\n"
 
@@ -703,21 +768,10 @@ msgstr "%s: (línea %d, usuario %s) la contraseña no ha cambiado\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: línea %d: el usuario «%s» no existe\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
-msgstr ""
-"Modo de uso: chsh [opciones] [USUARIO]\n"
-"\n"
-"Opciones:\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -s, --shell CONSOLA           nueva consola de acceso para la cuenta del\n"
-"                                usuario\n"
-"\n"
+#, fuzzy
+#| msgid "  -s, --shell SHELL             login shell of the new account\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
+msgstr "  -s, --shell CONSOLA           consola de acceso de la nueva cuenta\n"
 
 msgid "Login Shell"
 msgstr "Consola de acceso"
@@ -746,8 +800,35 @@ msgstr "%s: aviso: %s no existe\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: aviso: %s no es un ejecutable\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "Modo de uso: expiry {-f|-c}\n"
+#, fuzzy
+#| msgid ""
+#| "  -u, --user                    which user's tcb shadow file to edit\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+"  -u, --user                    indica que fichero tcb de shadow del "
+"usuario\n"
+"                                editar\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -m, --md5                     encrypt the clear text password using\n"
+#| "                                the MD5 algorithm\n"
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr ""
+"  -m, --md5                     cifra la contraseña en claro utilizando\n"
+"                                el algoritmo MD5\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: las opciones %s y %s están en conflicto\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: argumento inesperado: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -791,9 +872,10 @@ msgstr ""
 "USUARIO\n"
 "                                indicado\n"
 
-#, c-format
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr "faillog: se produjo un fallo al conseguir la entrada para el UID %lu\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "lastlog: Se produjo un fallo al conseguir la entrada para el UID %lu\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Usuario     Fallos Máximo Último                   Activo\n"
@@ -806,33 +888,34 @@ msgstr " [faltan %lus]"
 msgid " [%lds lock]"
 msgstr "[bloqueados %lds]"
 
-#, c-format
-msgid "faillog: Failed to reset fail count for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to reset fail count for UID %lu\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr ""
 "faillog: se produjo un fallo al reiniciar el contador de fallos para el UID "
 "%lu\n"
 
-#, c-format
-msgid "faillog: Failed to set max for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set max for UID %lu\n"
+msgid "%s: Failed to set max for UID %lu\n"
 msgstr "faillog: se produjo un fallo al establecer max para el UID %lu\n"
 
-#, c-format
-msgid "faillog: Failed to set locktime for UID %lu\n"
+#, fuzzy, c-format
+#| msgid "faillog: Failed to set locktime for UID %lu\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr ""
 "faillog: se produjo un fallo al establecer el tiempo de bloqueo para el UID "
 "%lu\n"
 
-#, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Unknown user or range: %s\n"
+msgid "%s: Unknown user or range: %s\n"
 msgstr "lastlog: usuario o rango desconocido: %s\n"
 
-#, c-format
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "faillog: no se pudo abrir %s: %s\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr "faillog: no se pudo conseguir el tamaño de %s: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "lastlog: no se pudo conseguir el tamaño de %s: %s\n"
 
 #, c-format
 msgid ""
@@ -849,6 +932,12 @@ msgstr "  -a, --add USUARIO             añade USUARIO al GRUPO\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr "  -d, --delete USUARIO          elimina USUARIO del GRUPO\n"
+
+#, fuzzy
+#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
+msgstr ""
+"  -d, --home-dir DIR_PERSONAL   directorio personal de la nueva cuenta\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr "  -r, --remove-password         elimina la contraseña de GRUPO\n"
@@ -985,8 +1074,10 @@ msgstr "%s: el grupo «%s» ya existe\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: el GID «%lu» ya existe\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "Modo de uso: groupdel grupo\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: no se pudo determinar su nombre de usuario.\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1099,16 +1190,52 @@ msgstr "%s: el grupo %s es un grupo NIS\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: usuario desconocido %s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Modo de uso: %s [-r] [-s] [grupo [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] [action]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Modo de uso: %s [opciones] [acción]\n"
+"\n"
+"Opciones:\n"
+
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] [action]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Modo de uso: %s [opciones] [acción]\n"
+"\n"
+"Opciones:\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr ""
+"  -s, --sha-rounds              número de rondas SHA para los algoritmos\n"
+"                                de cifrado SHA*\n"
+
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr "  -l, --list                    lista los miembros del grupo\n"
 
 #, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Modo de uso: %s [-r] [-s] [grupo]\n"
-
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s y -r son incompatibles\n"
 
 msgid "invalid group file entry"
@@ -1178,12 +1305,6 @@ msgstr "%s: los ficheros se han actualizado\n"
 msgid "%s: no changes\n"
 msgstr "%s: sin cambios\n"
 
-msgid "Usage: grpconv\n"
-msgstr "Modo de uso: grpconv\n"
-
-msgid "Usage: grpunconv\n"
-msgstr "Modo de uso: grpunconv\n"
-
 #, c-format
 msgid "%s: cannot delete %s\n"
 msgstr "%s: no se pudo borrar %s\n"
@@ -1197,33 +1318,32 @@ msgstr "Modo de uso: id\n"
 msgid " groups="
 msgstr "grupos="
 
+#, fuzzy
+#| msgid ""
+#| "  -t, --time DAYS               display faillog records more recent than "
+#| "DAYS\n"
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+"  -t, --time DÍAS               muestra los registros de faillog más "
+"recientes\n"
+"                                que DÍAS\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -t, --time DAYS               display faillog records more recent than "
+#| "DAYS\n"
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"Modo de uso: lastlog [opciones]\n"
-"\n"
-"Opciones:\n"
-"  -b, --before DÍAS             muestra los registros de «lastlog» "
-"anteriores\n"
-"                                a DÍAS\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -t, --time DÍAS               muestra sólo los registros de «lastlog» más\n"
-"                                recientes que DÍAS\n"
-"  -u, --user USUARIO            muestra el registro de «lastlog» del "
-"USUARIO\n"
-"\n"
+"  -t, --time DÍAS               muestra los registros de faillog más "
+"recientes\n"
+"                                que DÍAS\n"
 
-#, c-format
-msgid "lastlog: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: Se produjo un fallo al conseguir la entrada para el UID %lu\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
 
 msgid "Username         Port     From             Latest"
 msgstr "Nombre           Puerto   De               Último"
@@ -1233,14 +1353,6 @@ msgstr "Nombre                  Puerto   Último"
 
 msgid "**Never logged in**"
 msgstr "**Nunca ha accedido**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: argumento inesperado: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr "lastlog: no se pudo conseguir el tamaño de %s: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1310,6 +1422,11 @@ msgstr "login: petición abortada por PAM\n"
 
 msgid "Login incorrect"
 msgstr "Identificación incorrecta"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: línea %d: no se puede encontrar el usuario %s\n"
 
 #, c-format
 msgid ""
@@ -1429,57 +1546,98 @@ msgstr "%s: línea %d: chown %s falló: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: línea %d: no se puede actualizar la entrada\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+"  -a, --all                     muestra los registros de faillog para\n"
+"                                todos los usuarios\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr "  -r, --system                  crea una cuenta del sistema\n"
+
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr "  -r, --system                  crea una cuenta del sistema\n"
+
+#, fuzzy
+#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+"  -e, --encrypted               se cifran las contraseñas proporcionadas\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
+#| "                                PASSWORD\n"
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr ""
+"  -p, --password CONTRASEÑA     cambia la contraseña a CONTRASEÑA (cifrada)\n"
+
+#, fuzzy
+#| msgid "  -u, --uid UID                 user ID of the new account\n"
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+"  -u, --uid UID                 identificador del usuario de la nueva "
+"cuenta\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr ""
+"  -s, --sha-rounds              número de rondas SHA para los algoritmos\n"
+"                                de cifrado SHA*\n"
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr "  -q, --quiet                   modo silencioso\n"
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -r, --system                  create a system account\n"
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr "  -r, --system                  crea una cuenta del sistema\n"
+
+#, fuzzy
+#| msgid "  -u, --uid UID                 user ID of the new account\n"
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+"  -u, --uid UID                 identificador del usuario de la nueva "
+"cuenta\n"
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
 msgstr ""
-"Modo de uso: passwd [opciones] [USUARIO]\n"
-"\n"
-"Options:\n"
-"  -a, --all                     informa del estado de las contraseñas de\n"
-"                                todas las cuentas\n"
-"  -d, --delete                  borra la contraseña para la cuenta indicada\n"
-"  -e, --expire                  fuerza a que la contraseña de la cuenta\n"
-"                                caduque\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -k, --keep-tokens             cambia la contraseña sólo si ha caducado\n"
-"  -i, --inactive INACTIVO       establece la contraseña inactiva después de\n"
-"                                caducar a INACTIVO\n"
-"  -l, --lock                    bloquea la contraseña de la cuenta indicada\n"
-"  -n, --mindays DÍAS_MIN        establece el número mínimo de días antes\n"
-"                                de que se cambie la contraseña a DÍAS_MIN\n"
-"  -q, --quiet                   modo silencioso\n"
-"  -r, --repository REP          cambia la contraseña en el repositorio REP\n"
-"  -S, --status                  informa del estado de la contraseña la "
-"cuenta\n"
-"                                indicada\n"
-"  -u, --unlock                  desbloquea la contraseña de la cuenta "
-"indicada\n"
-"  -w, --warndays DÍAS_AVISO     establece el aviso de caducidad a "
-"DÍAS_AVISO\n"
-"  -x, --maxdays DÍAS_MAX        establece el número máximo de días antes de\n"
-"                                cambiar la contraseña a DÍAS_MAX\n"
-"\n"
+"  -s, --sha-rounds              número de rondas SHA para los algoritmos\n"
+"                                de cifrado SHA*\n"
 
 msgid "Old password: "
 msgstr "Contraseña antigua: "
@@ -1563,17 +1721,38 @@ msgstr "%s: contraseña cambiada.\n"
 msgid "%s: password expiry information changed.\n"
 msgstr "%s: información de caducidad de la contraseña cambiada.\n"
 
-#, c-format
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "Modo de uso: %s [-q] [-r] [passwd]\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] [action]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Modo de uso: %s [opciones] [acción]\n"
+"\n"
+"Opciones:\n"
 
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Modo de uso: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] [action]\n"
+#| "\n"
+#| "Options:\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr ""
+"Modo de uso: %s [opciones] [acción]\n"
+"\n"
+"Opciones:\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s y -r son incompatibles\n"
+#, fuzzy
+#| msgid "  -q, --quiet                   quiet mode\n"
+msgid "  -q, --quiet                   report errors only\n"
+msgstr "  -q, --quiet                   modo silencioso\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1635,8 +1814,8 @@ msgstr "¿desea añadir el usuario «%s» a «%s»?"
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"el usuario %s tiene una entrada en %s, pero su campo de la contraseña en %s no "
-"está establecido a «x»\n"
+"el usuario %s tiene una entrada en %s, pero su campo de la contraseña en %s "
+"no está establecido a «x»\n"
 
 msgid "invalid shadow password file entry"
 msgstr "entrada del fichero shadow de contraseñas incorrecta"
@@ -1653,9 +1832,6 @@ msgstr ""
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: no se pudieron ordenar las entradas en %s\n"
 
-msgid "Usage: pwconv\n"
-msgstr "Modo de uso: pwconv\n"
-
 #, c-format
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: no puede funcionar con tcb activado\n"
@@ -1663,9 +1839,6 @@ msgstr "%s: no puede funcionar con tcb activado\n"
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: se produjo un fallo al cambiar el modo de %s a 0600\n"
-
-msgid "Usage: pwunconv\n"
-msgstr "Modo de uso: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "El acceso a «su» en esa cuenta se ha DENEGADO.\n"
@@ -1732,16 +1905,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: debe ejecutarse desde un terminal\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: error %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "Id desconocido: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Ignorado)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1751,14 +1920,6 @@ msgid "(Enter your own password)"
 msgstr "(Introduzca su propia contraseña)"
 
 #, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(Ignorado)\n"
-
-#, c-format
 msgid "%s: Authentication failure\n"
 msgstr "%s: se produjo un fallo en la autenticación\n"
 
@@ -1766,8 +1927,28 @@ msgstr "%s: se produjo un fallo en la autenticación\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: no está autorizado a usar su en este momento\n"
 
-msgid "No shell\n"
-msgstr "Sin consola\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "Sin entrada de contraseña para el administrador («root»)"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: debe ejecutarse desde un terminal\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: error %d\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot remove the content of %s: %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "%s: no se pudo eliminar el contenido de %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "No se puede ejecutar %s"
 
 msgid "No password file"
 msgstr "Sin fichero de contraseñas"
@@ -1813,8 +1994,9 @@ msgstr ""
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: línea demasiado larga en %s: %s..."
 
-#, c-format
-msgid "%s: rename: %s: %s"
+#, fuzzy, c-format
+#| msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: renombrar: %s: %s"
 
 #, c-format
@@ -1825,9 +2007,15 @@ msgstr "%s: el grupo «%s» es un grupo NIS.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: demasiados grupos especificados (el máximo es %d).\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] LOGIN\n"
+#| "\n"
+#| "Options:\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1979,10 +2167,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z necesita que el núcleo tenga activado SELinux\n"
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: las opciones %s y %s están en conflicto\n"
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 "%s: se produjo un fallo al reiniciar la entrada de faillog del UID %lu: %s\n"
@@ -2048,30 +2232,43 @@ msgstr ""
 "%s: aviso: el directorio personal ya existe.\n"
 "No se va a copiar ningún fichero del directorio «skel» en él.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -f, --force                   exit successfully if the group already "
+#| "exists,\n"
+#| "                                and cancel -g if the GID is already used\n"
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
 msgstr ""
-"Modo de uso: userdel [opciones] USUARIO\n"
-"\n"
-"Opciones:\n"
-"  -f, --force                   forzar la eliminación de los ficheros,\n"
-"                                incluso si no pertenecen al usuario\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -r, --remove                  elimina el directorio personal y el buzón "
-"de\n"
-"                                correo\n"
-"\n"
+"  -f, --force                   termina si el grupo ya existe, y cancela -g\n"
+"                                si el GID ya se está en uso\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+"  -r, --reset                   reinicia el contador de accesos fallidos\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove the primary group of user '%s'\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: no se pudo eliminar el grupo primario del usuario «%s»\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s: grupo %s es el grupo primario de otro usuario y no se eliminará.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s home directory (%s) not found\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: %s directorio personal (%s) no encontrado\n"
 
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
@@ -2102,10 +2299,6 @@ msgid "%s: user %s is a NIS user\n"
 msgstr "%s: el usuario %s es un usuario NIS\n"
 
 #, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: el usuario %s está actualmente identificado en el sistema\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s directorio personal (%s) no encontrado\n"
 
@@ -2119,61 +2312,108 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: error eliminando el directorio %s\n"
 
-#, c-format
+#, fuzzy
+#| msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr "  -c, --comment COMENTARIO      campo GECOS de la nueva cuenta\n"
+
+#, fuzzy
+#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+"  -d, --home-dir DIR_PERSONAL   directorio personal de la nueva cuenta\n"
+
+#, fuzzy
+#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+"  -e, --expiredate FECHA_CADUCIDAD  fecha de caducidad de la nueva cuenta\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
+#| "                                PASSWORD\n"
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -p, --password CONTRASEÑA     cambia la contraseña a CONTRASEÑA (cifrada)\n"
+
+#, fuzzy
+#| msgid "  -g, --gid GID                 use GID for the new group\n"
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr "  -g, --gid GID                 utiliza GID para el nuevo grupo\n"
+
+#, fuzzy
+#| msgid "  -M, --members USER,...        set the list of members of GROUP\n"
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr ""
+"  -M, --members USUARIO,...     establece la lista de miembros de GRUPO\n"
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -u, --uid UID                 user ID of the new account\n"
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+"  -u, --uid UID                 identificador del usuario de la nueva "
+"cuenta\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -b, --base-dir BASE_DIR       base directory for the home directory of "
+#| "the\n"
+#| "                                new account\n"
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
-"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-"  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"Modo de uso: usermod [opciones] USUARIO\n"
-"\n"
-"Opciones:\n"
-"  -c, --comment COMENTARIO      nuevo valor del campo GECOS\n"
-"  -d, --home DIR_PERSONAL       nuevo directorio personal del nuevo usuario\n"
-"  -e, --expiredate FECHA_EXPIR  establece la fecha de caducidad de la\n"
-"                                cuenta a FECHA_EXPIR\n"
-"  -f, --inactive INACTIVO       establece el tiempo de inactividad después\n"
-"                                de que caduque la cuenta a INACTIVO\n"
-"  -g, --gid GRUPO               fuerza el uso de GRUPO para la nueva cuenta\n"
-"                                de usuario\n"
-"  -G, --groups GRUPOS           lista de grupos suplementarios\n"
-"  -h, --help                    muestra este mensaje de ayuda y termina\n"
-"  -l, --login NOMBRE            nuevo nombre para el usuario\n"
-"  -L, --lock                    bloquea la cuenta de usuario\n"
-"  -m, --move-home               mueve los contenidos del directorio\n"
-"                                personal al directorio nuevo (usar sólo\n"
-"                                junto con -d)\n"
-"  -o, --non-unique              permite usar UID duplicados (no únicos)\n"
-"  -p, --password CONTRASEÑA     usar la contraseña cifrada para la nueva "
+"  -b, --base-dir DIR_BASE       directorio base para el directorio personal\n"
+"                                de la nueva cuenta\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -o, --non-unique              allow to use a duplicate (non-unique) "
+#| "GID\n"
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+"  -o, --non-unique              permite utilizar un GID duplicado (no "
+"único)\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -p, --password PASSWORD       use this encrypted password for the new "
+#| "group\n"
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+"  -p, --password CONTRASEÑA     utiliza esta contraseña cifrada para el "
+"nuevo\n"
+"                                grupo\n"
+
+#, fuzzy
+#| msgid "  -u, --uid UID                 user ID of the new account\n"
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+"  -u, --uid UID                 identificador del usuario de la nueva "
 "cuenta\n"
-"  -s, --shell CONSOLA           la consola de acceso para la nueva cuenta "
-"de\n"
-"                                usuario\n"
-"  -u, --uid UID                 fuerza el uso del UID para la nueva cuenta\n"
-"                                de usuario\n"
-"  -U, --unlock                  desbloquea la cuenta de usuario\n"
-"%s\n"
+
+#, fuzzy
+#| msgid "  -u, --uid UID                 user ID of the new account\n"
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
+"  -u, --uid UID                 identificador del usuario de la nueva "
+"cuenta\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2195,17 +2435,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: el usuario «%s» ya existe en %s\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: no se ha proporcionado ninguna opción\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: se necesitan contraseñas de shadow para -e y -f\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: no options\n"
+msgstr "%s: no se pudo abrir %s\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: las opciones -L, -p y -U son exclusivas\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: se necesitan contraseñas de shadow para -e y -f\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2283,9 +2524,6 @@ msgstr "  -g, --group                   edita la base de datos del grupo\n"
 msgid "  -p, --passwd                  edit passwd database\n"
 msgstr "  -p, --passwd                  edita la base de datos de «passwd»\n"
 
-msgid "  -q, --quiet                   quiet mode\n"
-msgstr "  -q, --quiet                   modo silencioso\n"
-
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr ""
 "  -s, --shadow                  edita la base de datos shadow o gshadow\n"
@@ -2347,6 +2585,339 @@ msgstr "%s: no se puede restaurar %s: %s (sus cambios están en %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: se produjo un fallo al buscar el directorio tcb de %s\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d) falló\n"
+
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Modo de uso: chage [opciones] [USUARIO]\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -d, --lastday ÚLTIMO_DÍA      establece el día del último cambio de la\n"
+#~ "                                contraseña a ÚLTIMO_DÍA\n"
+#~ "  -E, --expiredate FECHA_CAD    establece la fecha de caducidad a "
+#~ "FECHA_CAD\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -I, --inactive INACTIVA       deshabilita la cuenta después de "
+#~ "INACTIVA\n"
+#~ "                                días de la fecha de caducidad\n"
+#~ "  -l, --list                    muestra la información de la edad de la "
+#~ "cuenta\n"
+#~ "  -m, --mindays DÍAS_MIN        establece el número mínimo de días antes "
+#~ "de\n"
+#~ "                                cambiar la contraseña a DÍAS_MIN\n"
+#~ "  -M, --maxdays DÍAS_MAX        establece el número máximo de días antes "
+#~ "de\n"
+#~ "                                cambiar la contraseña a DÍAS_MAX\n"
+#~ "  -W, --warndays DÍAS_AVISO     establece los días de aviso de expiración "
+#~ "a\n"
+#~ "                                DÍAS_AVISO\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: la autenticación PAM falló\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "Modo de uso: %s [-f nombre_completo] [-r num_habitación] [-w "
+#~ "telf_trabajo]\n"
+#~ "\t[-h telf_casa] [-o otro] [usuario]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr ""
+#~ "Modo de uso: %s [-f nombre_completo] [-r num_habitación] [-w "
+#~ "telf_trabajo]\n"
+#~ "\t[-h telf_casa]\n"
+
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Modo de uso: %s [opciones]\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -c, --crypt-method            el método de cifrado (uno de %s)\n"
+#~ "  -e, --encrypted               las contraseñas proporcionadas están "
+#~ "cifradas\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -m, --md5                     usa el algoritmo MD5 para cifrar las\n"
+#~ "                                contraseñas\n"
+#~ "%s\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Modo de uso: chsh [opciones] [USUARIO]\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -s, --shell CONSOLA           nueva consola de acceso para la cuenta "
+#~ "del\n"
+#~ "                                usuario\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "Modo de uso: expiry {-f|-c}\n"
+
+#~ msgid "faillog: Failed to get the entry for UID %lu\n"
+#~ msgstr ""
+#~ "faillog: se produjo un fallo al conseguir la entrada para el UID %lu\n"
+
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "faillog: no se pudo abrir %s: %s\n"
+
+#~ msgid "faillog: Cannot get the size of %s: %s\n"
+#~ msgstr "faillog: no se pudo conseguir el tamaño de %s: %s\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "Modo de uso: groupdel grupo\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#~ msgstr "Modo de uso: %s [-r] [-s] [grupo [gshadow]]\n"
+
+#~ msgid "Usage: %s [-r] [-s] [group]\n"
+#~ msgstr "Modo de uso: %s [-r] [-s] [grupo]\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s y -r son incompatibles\n"
+
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "Modo de uso: grpconv\n"
+
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "Modo de uso: grpunconv\n"
+
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Modo de uso: lastlog [opciones]\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -b, --before DÍAS             muestra los registros de «lastlog» "
+#~ "anteriores\n"
+#~ "                                a DÍAS\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -t, --time DÍAS               muestra sólo los registros de «lastlog» "
+#~ "más\n"
+#~ "                                recientes que DÍAS\n"
+#~ "  -u, --user USUARIO            muestra el registro de «lastlog» del "
+#~ "USUARIO\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Modo de uso: passwd [opciones] [USUARIO]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     informa del estado de las contraseñas de\n"
+#~ "                                todas las cuentas\n"
+#~ "  -d, --delete                  borra la contraseña para la cuenta "
+#~ "indicada\n"
+#~ "  -e, --expire                  fuerza a que la contraseña de la cuenta\n"
+#~ "                                caduque\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -k, --keep-tokens             cambia la contraseña sólo si ha caducado\n"
+#~ "  -i, --inactive INACTIVO       establece la contraseña inactiva después "
+#~ "de\n"
+#~ "                                caducar a INACTIVO\n"
+#~ "  -l, --lock                    bloquea la contraseña de la cuenta "
+#~ "indicada\n"
+#~ "  -n, --mindays DÍAS_MIN        establece el número mínimo de días antes\n"
+#~ "                                de que se cambie la contraseña a "
+#~ "DÍAS_MIN\n"
+#~ "  -q, --quiet                   modo silencioso\n"
+#~ "  -r, --repository REP          cambia la contraseña en el repositorio "
+#~ "REP\n"
+#~ "  -S, --status                  informa del estado de la contraseña la "
+#~ "cuenta\n"
+#~ "                                indicada\n"
+#~ "  -u, --unlock                  desbloquea la contraseña de la cuenta "
+#~ "indicada\n"
+#~ "  -w, --warndays DÍAS_AVISO     establece el aviso de caducidad a "
+#~ "DÍAS_AVISO\n"
+#~ "  -x, --maxdays DÍAS_MAX        establece el número máximo de días antes "
+#~ "de\n"
+#~ "                                cambiar la contraseña a DÍAS_MAX\n"
+#~ "\n"
+
+#~ msgid "Usage: %s [-q] [-r] [passwd]\n"
+#~ msgstr "Modo de uso: %s [-q] [-r] [passwd]\n"
+
+#~ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+#~ msgstr "Modo de uso: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "Modo de uso: pwconv\n"
+
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "Modo de uso: pwunconv\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "Id desconocido: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "Sin consola\n"
+
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Modo de uso: userdel [opciones] USUARIO\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -f, --force                   forzar la eliminación de los ficheros,\n"
+#~ "                                incluso si no pertenecen al usuario\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -r, --remove                  elimina el directorio personal y el buzón "
+#~ "de\n"
+#~ "                                correo\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: el usuario %s está actualmente identificado en el sistema\n"
+
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "Modo de uso: usermod [opciones] USUARIO\n"
+#~ "\n"
+#~ "Opciones:\n"
+#~ "  -c, --comment COMENTARIO      nuevo valor del campo GECOS\n"
+#~ "  -d, --home DIR_PERSONAL       nuevo directorio personal del nuevo "
+#~ "usuario\n"
+#~ "  -e, --expiredate FECHA_EXPIR  establece la fecha de caducidad de la\n"
+#~ "                                cuenta a FECHA_EXPIR\n"
+#~ "  -f, --inactive INACTIVO       establece el tiempo de inactividad "
+#~ "después\n"
+#~ "                                de que caduque la cuenta a INACTIVO\n"
+#~ "  -g, --gid GRUPO               fuerza el uso de GRUPO para la nueva "
+#~ "cuenta\n"
+#~ "                                de usuario\n"
+#~ "  -G, --groups GRUPOS           lista de grupos suplementarios\n"
+#~ "  -h, --help                    muestra este mensaje de ayuda y termina\n"
+#~ "  -l, --login NOMBRE            nuevo nombre para el usuario\n"
+#~ "  -L, --lock                    bloquea la cuenta de usuario\n"
+#~ "  -m, --move-home               mueve los contenidos del directorio\n"
+#~ "                                personal al directorio nuevo (usar sólo\n"
+#~ "                                junto con -d)\n"
+#~ "  -o, --non-unique              permite usar UID duplicados (no únicos)\n"
+#~ "  -p, --password CONTRASEÑA     usar la contraseña cifrada para la nueva "
+#~ "cuenta\n"
+#~ "  -s, --shell CONSOLA           la consola de acceso para la nueva cuenta "
+#~ "de\n"
+#~ "                                usuario\n"
+#~ "  -u, --uid UID                 fuerza el uso del UID para la nueva "
+#~ "cuenta\n"
+#~ "                                de usuario\n"
+#~ "  -U, --unlock                  desbloquea la cuenta de usuario\n"
+#~ "%s\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: no se ha proporcionado ninguna opción\n"
 
 #~| msgid ""
 #~| "Usage: vipw [options]\n"
@@ -2885,9 +3456,6 @@ msgstr "%s: se produjo un fallo al buscar el directorio tcb de %s\n"
 
 #~ msgid "%s: error updating files\n"
 #~ msgstr "%s: error actualizando los ficheros\n"
-
-#~ msgid "%s: line %d: cannot find user %s\n"
-#~ msgstr "%s: línea %d: no se puede encontrar el usuario %s\n"
 
 #~ msgid "%s: can't update passwd entry for %s\n"
 #~ msgstr "%s: no se puede actualizar la entrada de la contraseña para %s\n"

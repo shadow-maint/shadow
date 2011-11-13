@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2010-08-29 17:53+0200\n"
+"POT-Creation-Date: 2011-11-13 18:42+0100\n"
 "PO-Revision-Date: 2009-04-19 21:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -39,6 +39,14 @@ msgstr "설정 정보를 위한 공간을 확보할 수 없습니다.\n"
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "설정 오류 - 알 수 없는 항목 '%s'(관리자에게 알리시기 바랍니다)\n"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d"
+msgstr ""
 
 msgid "Password: "
 msgstr "암호: "
@@ -224,6 +232,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+#| msgid "failed to change mailbox owner"
+msgid "%s: failed to allocate memory: %s\n"
+msgstr "메일함 소유자를 바꾸는 데 실패했습니다"
+
+#, fuzzy, c-format
 #| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr "%s: 유일한 UID를 얻을 수 없습니다 (UID가 남아 있지 않습니다)\n"
@@ -307,6 +320,33 @@ msgid "Incorrect password for %s.\n"
 msgstr "'%s'의 암호가 맞지 않습니다.\n"
 
 #, c-format
+msgid "%s: multiple --root options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: option '%s' requires an argument\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: 관리자 권한을 버릴 수 없습니다 (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home phone: '%s'\n"
+msgid "%s: invalid chroot path '%s'\n"
+msgstr "%s: 잘못된 집 전화번호: '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot access chroot directory %s: %s\n"
+msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: unable to chroot to directory %s: %s\n"
+msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
@@ -336,70 +376,64 @@ msgstr "루트 디렉터리를 '%s'(으)로 바꿀 수 없습니다\n"
 msgid "Unable to determine your tty name."
 msgstr "TTY 이름을 확인할 수 없습니다."
 
-#, c-format
-msgid "malloc(%d) failed\n"
-msgstr "malloc(%d)에 실패\n"
-
 msgid "No"
 msgstr "아니오"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: chage [options] [LOGIN]\n"
-#| "\n"
-#| "Options:\n"
-#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -l, --list                    show account aging information\n"
-#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
-#| "password\n"
-#| "                                change to MIN_DAYS\n"
-#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
-#| "password\n"
-#| "                                change to MAX_DAYS\n"
-#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#| "\n"
+#, c-format
 msgid ""
-"Usage: chage [options] [LOGIN]\n"
+"Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
+msgstr ""
+
+msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
+msgstr ""
+
+msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --list                    show account aging information\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -l, --list                    show account aging information\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
-"사용법: chage [옵션] [로그인]\n"
-"\n"
-"옵션:\n"
-"  -d, --lastday <최근날짜>       최근 암호를 바꾼 날짜를 <최근날짜>로 합니"
-"다.\n"
-"  -E, --expiredate <만료날짜>    계정 만료날짜를 <만료날짜>로 합니다.\n"
-"  -h, --help                     이 도움말을 표시하고 끝냅니다.\n"
-"  -I, --inactive <비활성화기간>  만료된 후 비활성화 기간을 <비활성화기간>으"
-"로\n"
-"                                 합니다\n"
-"  -l, --list                     계정의 사용기한 정보를 표시합니다.\n"
-"  -m, --mindays <최소날수>       암호를 바꾸기 전의 최소 날짜 수를 <최소날수>"
-"로\n"
-"                                 합니다.\n"
-"  -M, --maxdays <최대날수>       암호를 바꾸기 전의 최대 날짜 수를 <최대날수>"
-"로\n"
-"                                 합니다.\n"
-"  -W, --warndays <경고날수>      만료 경고 기간을 <경고날수>으로 합니다.\n"
-"\n"
+
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "새로운 값을 넣거나, 기본값을 원하시면 엔터를 치세요"
@@ -472,9 +506,10 @@ msgstr "%s: 권한이 거부되었습니다.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
 
-#, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM 인증이 실패했습니다\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid "%s: cannot lock %s; try again later.\n"
@@ -497,10 +532,6 @@ msgid "%s: the shadow password file is not present\n"
 msgstr "%s: 셰도우 암호 파일이 없습니다\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: 관리자 권한을 버릴 수 없습니다 (%s)\n"
-
-#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "%s: '%s' 사용자가 %s에 없습니다\n"
 
@@ -514,16 +545,28 @@ msgstr "%s: 항목을 변경하는 도중 오류가 발생했습니다\n"
 
 #, c-format
 msgid ""
-"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [user]\n"
+"Usage: %s [options] [LOGIN]\n"
+"\n"
+"Options:\n"
 msgstr ""
-"사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호]\n"
-"\t[-h 집_전화번호] [-o 기타] [사용자]\n"
 
-#, c-format
-msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
-"사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호] [-h 집_전화번호]\n"
+
+msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
+msgstr ""
+
+msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
+msgstr ""
+
+msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
+msgstr ""
+
+msgid "  -u, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
+msgstr ""
 
 msgid "Full Name"
 msgstr "이름"
@@ -604,22 +647,23 @@ msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-"  -c, --crypt-method            the crypt method (one of %s)\n"
-"  -e, --encrypted               supplied passwords are encrypted\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+#, c-format
+msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgstr ""
+
+msgid "  -e, --encrypted               supplied passwords are encrypted\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
-"%s\n"
-msgstr ""
-"사용법: %s [옵션]\n"
-"\n"
-"옵션:\n"
-"  -c, --crypt-method            암호화 방법 (다음 중 하나: %s)\n"
-"  -e, --encrypted               입력하는 암호가 암호화되어 있습니다\n"
-"  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -m, --md5                     일반 텍스트 암호를 MD5 알고리즘을 사용해\n"
-"                                암호화합니다\n"
-"%s\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
@@ -658,32 +702,6 @@ msgstr "%s: %d번 줄: 새 %s 항목 '%s'을(를) 준비하는 데 실패했습�
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: 오류 발견, 바뀐 내역은 무시합니다\n"
 
-#, c-format
-msgid ""
-"Usage: %s [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
-msgstr ""
-
-msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
-
-msgid "  -h, --help                    display this help message and exit\n"
-msgstr ""
-
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
-msgid ""
-"  -m, --md5                     encrypt the clear text password using\n"
-"                                the MD5 algorithm\n"
-msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
-
 #, fuzzy, c-format
 #| msgid "%s: line %d: user '%s' does not exist\n"
 msgid "%s: (line %d, user %s) password not changed\n"
@@ -693,20 +711,8 @@ msgstr "%s: %d번 줄: '%s' 사용자가 없습니다\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: %d번 줄: '%s' 사용자가 없습니다\n"
 
-msgid ""
-"Usage: chsh [options] [LOGIN]\n"
-"\n"
-"Options:\n"
-"  -h, --help                    display this help message and exit\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"\n"
+msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"사용법: chsh [옵션] [<로그인>]\n"
-"\n"
-"옵션:\n"
-"  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -s, --shelll <쉘>             사용자 계정의 새 로그인 쉘\n"
-"\n"
 
 msgid "Login Shell"
 msgstr "로그인 쉘"
@@ -738,8 +744,27 @@ msgstr "%s: '%s' 사용자가 없습니다\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: 경고: %s은(는) %s이(가) 소유하고 있지 않습니다\n"
 
-msgid "Usage: expiry {-f|-c}\n"
-msgstr "사용법: expiry {-f|-c}\n"
+msgid "  -c, --check                   check the user's password expiration\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -f, --force                   force password change if the user's "
+"password\n"
+"                                is expired\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: %s 옵션 및 %s 충돌\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: unexpected argument: %s\n"
+msgid "%s: unexpected argument: %s\n"
+msgstr "lastlog: 올 수 없는 인자입니다: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -768,9 +793,9 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "faillog: Failed to get the entry for UID %d\n"
-msgid "faillog: Failed to get the entry for UID %lu\n"
-msgstr "faillog: UID %d번의 항목을 읽는데 실패했습니다\n"
+#| msgid "lastlog: Failed to get the entry for UID %d\n"
+msgid "%s: Failed to get the entry for UID %lu\n"
+msgstr "lastlog: UID %d번의 항목을 읽는데 실패했습니다\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "로그인       실패     최대값  최근                     사용\n"
@@ -785,30 +810,28 @@ msgstr " [%ld초 잠금]"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to reset fail count for UID %d\n"
-msgid "faillog: Failed to reset fail count for UID %lu\n"
+msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "faillog: UID %d의 실패 횟수를 초기화하는데 실패했습니다\n"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to set max for UID %d\n"
-msgid "faillog: Failed to set max for UID %lu\n"
+msgid "%s: Failed to set max for UID %lu\n"
 msgstr "faillog: UID %d의 최대값을 설정하는데 실패했습니다\n"
 
 #, fuzzy, c-format
 #| msgid "faillog: Failed to set locktime for UID %d\n"
-msgid "faillog: Failed to set locktime for UID %lu\n"
+msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "faillog: UID %d의 잠금시각을 설정하는데 실패했습니다\n"
 
-#, c-format
-msgid "lastlog: Unknown user or range: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Unknown user or range: %s\n"
+msgid "%s: Unknown user or range: %s\n"
 msgstr "lastlog: 알 수 없는 사용자 혹은 범위: %s\n"
 
-#, c-format
-msgid "faillog: Cannot open %s: %s\n"
-msgstr "faillog: %s을(를) 열 수 없습니다: %s\n"
-
-#, c-format
-msgid "faillog: Cannot get the size of %s: %s\n"
-msgstr "faillog: %s의 크기를 얻을 수 없습니다: %s\n"
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot get the size of %s: %s\n"
+msgstr "lastlog: %s의 크기를 읽을 수 없습니다: %s\n"
 
 #, c-format
 msgid ""
@@ -821,6 +844,9 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr ""
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
+msgstr ""
+
+msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
@@ -959,8 +985,10 @@ msgstr "%s: '%s' 그룹이 이미 있습니다\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: '%lu' GID가 이미 있습니다\n"
 
-msgid "Usage: groupdel group\n"
-msgstr "사용법: groupdel 그룹\n"
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "%s: Cannot setup cleanup service.\n"
+msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1063,16 +1091,37 @@ msgstr "%s: %s 그룹은 NIS 그룹입니다\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: 알 수 없는 사용자 %s\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+msgid ""
+"Usage: %s [options] [group [gshadow]]\n"
+"\n"
+"Options:\n"
 msgstr "사용법: %s [-r] [-s] [그룹 [gshadow]]\n"
 
-#, c-format
-msgid "Usage: %s [-r] [-s] [group]\n"
+#, fuzzy, c-format
+#| msgid "Usage: %s [-r] [-s] [group]\n"
+msgid ""
+"Usage: %s [options] [group]\n"
+"\n"
+"Options:\n"
 msgstr "사용법: %s [-r] [-s] [그룹]\n"
 
-#, c-format
-msgid "%s: -s and -r are incompatibile\n"
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
+"  -r, --read-only               display errors and warnings\n"
+"                                but do not change files\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: -s and -r are incompatibile\n"
+msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s 옵션과 -r 옵션을 동시에 쓸 수 없습니다\n"
 
 msgid "invalid group file entry"
@@ -1140,12 +1189,6 @@ msgstr "%s: 파일이 업데이트 되었습니다\n"
 msgid "%s: no changes\n"
 msgstr "%s: 바뀐 점이 없음\n"
 
-msgid "Usage: grpconv\n"
-msgstr "사용법: grpconv\n"
-
-msgid "Usage: grpunconv\n"
-msgstr "사용법: grpunconv\n"
-
 #, c-format
 msgid "%s: cannot delete %s\n"
 msgstr "%s: '%s'을(를) 삭제할 수 없습니다\n"
@@ -1160,29 +1203,17 @@ msgid " groups="
 msgstr " 그룹 목록="
 
 msgid ""
-"Usage: lastlog [options]\n"
-"\n"
-"Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-"  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
-"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-"\n"
 msgstr ""
-"사용법: lastlog [옵션]\n"
-"\n"
-"옵션:\n"
-"  -b, --before <날짜>           <날짜>일 이전의 최근 기록을 표시합니다\n"
-"  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -t, --time <날짜>             <날짜>일 내의 최근 기록만 표시합니다\n"
-"  -u, --user <로그인>           <로그인> 사용자의 최근 기록만 표시합니다\n"
-"\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Failed to get the entry for UID %d\n"
-msgid "lastlog: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: UID %d번의 항목을 읽는데 실패했습니다\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
 
 msgid "Username         Port     From             Latest"
 msgstr "사용자이름       포트     어디서           최근정보"
@@ -1192,14 +1223,6 @@ msgstr "사용자이름              포트     최근정보"
 
 msgid "**Never logged in**"
 msgstr "**한번도 로그인한 적이 없습니다**"
-
-#, c-format
-msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: 올 수 없는 인자입니다: %s\n"
-
-#, c-format
-msgid "lastlog: Cannot get the size of %s: %s\n"
-msgstr "lastlog: %s의 크기를 읽을 수 없습니다: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1274,6 +1297,11 @@ msgstr "login: PAM에서 종료를 요청했습니다\n"
 
 msgid "Login incorrect"
 msgstr "로그인이 맞지 않습니다"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot find user (%s)\n"
+msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
 
 #, c-format
 msgid ""
@@ -1396,50 +1424,70 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d번 줄: 입력값을 업데이트 할 수 없습니다\n"
 
 msgid ""
-"Usage: passwd [options] [LOGIN]\n"
-"\n"
-"Options:\n"
 "  -a, --all                     report password status on all accounts\n"
+msgstr ""
+
+msgid ""
 "  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-"  -h, --help                    display this help message and exit\n"
-"  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+msgid "  -k, --keep-tokens             change password only if expired\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid ""
 "  -l, --lock                    lock the password of the named account\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
-"  -q, --quiet                   quiet mode\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -q, --quiet                   quiet mode\n"
+msgstr ""
+
+msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+
+msgid ""
 "  -S, --status                  report password status on the named account\n"
+msgstr ""
+
+msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+
+msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
-"\n"
-msgstr ""
-"사용법: passwd [옵션] [<로그인>]\n"
-"\n"
-"옵션:\n"
-"  -a, --all                     모든 계정의 암호 상태를 보고합니다\n"
-"  -d, --delete                  지정된 계정의 암호를 지웁니다\n"
-"  -e, --expire                  지정된 계정 암호를 강제로 만료시킵니다\n"
-"  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -k, --keep-tokens             암호가 만료했을 때만 바꿉니다\n"
-"  -i, --inactive <비활성화기간> 만료된 후 비활성화 기간을 \n"
-"                                <비활성화기간>으로 합니다\n"
-"  -l, --lock                    지정된 계정의 암호를 잠급니다\n"
-"  -n, --mindays <최소날수>      암호를 다시 바꿀 수 있는 최소 일\n"
-"                                수를 <최소날수>로 합니다\n"
-"  -q, --quiet                   조용한 모드\n"
-"  -r, --repository <저장소>     <저장소> 저장소에 있는 암호를 바꿉니다\n"
-"  -S, --status                  지정된 계정의 암호 상태를 보고합니다\n"
-"  -u, --unlock                  지정된 계정의 암호 잠금을 해제합니다\n"
-"  -w, --warndays <경고날수>     암호 만료 예고를 <경고날수> 이전부터 합니다\n"
-"  -x, --maxdays <최대날수>      암호를 바꾸지 않을 수 있는 최대 일\n"
-"                                수를 <최대날수>로 합니다\n"
-"\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 msgid "Old password: "
 msgstr "예전 암호: "
@@ -1525,17 +1573,22 @@ msgstr "암호 사용만료 예고"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgid "Usage: %s [-q] [-r] [passwd]\n"
-msgstr "사용법: %s [-q] [-r] [-s] [암호 [shadow]]\n"
-
-#, c-format
-msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid ""
+"Usage: %s [options] [passwd]\n"
+"\n"
+"Options:\n"
 msgstr "사용법: %s [-q] [-r] [-s] [암호 [shadow]]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
-msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s 옵션과 -r 옵션을 동시에 쓸 수 없습니다\n"
+#| msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgid ""
+"Usage: %s [options] [passwd [shadow]]\n"
+"\n"
+"Options:\n"
+msgstr "사용법: %s [-q] [-r] [-s] [암호 [shadow]]\n"
+
+msgid "  -q, --quiet                   report errors only\n"
+msgstr ""
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1614,9 +1667,6 @@ msgstr "사용자 %s: 마지막 암호 바꾼 때가 미래입니다\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: %s 안의 항목을 정렬할 수 없습니다\n"
 
-msgid "Usage: pwconv\n"
-msgstr "사용법: pwconv\n"
-
 #, c-format
 msgid "%s: can't work with tcb enabled\n"
 msgstr ""
@@ -1624,9 +1674,6 @@ msgstr ""
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
 msgstr "%s: %s의 모드를 0600으로 바꾸는데 실패했습니다\n"
-
-msgid "Usage: pwunconv\n"
-msgstr "사용법: pwunconv\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "su를 통해 이 계정으로 접근하는 것이 거부되었습니다.\n"
@@ -1692,16 +1739,12 @@ msgstr ""
 "\n"
 
 #, c-format
-msgid "%s: must be run from a terminal\n"
-msgstr "%s: 터미널에서 받드시 실행되어야 합니다\n"
-
-#, c-format
-msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: 오류 %d\n"
-
-#, c-format
-msgid "Unknown id: %s\n"
-msgstr "알 수 없는 아이디: %s\n"
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(무시됨)\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1711,14 +1754,6 @@ msgid "(Enter your own password)"
 msgstr "(본인의 암호를 입력하십시오)"
 
 #, c-format
-msgid ""
-"%s: %s\n"
-"(Ignored)\n"
-msgstr ""
-"%s: %s\n"
-"(무시됨)\n"
-
-#, c-format
 msgid "%s: Authentication failure\n"
 msgstr "%s: 인증이 실패했습니다\n"
 
@@ -1726,8 +1761,28 @@ msgstr "%s: 인증이 실패했습니다\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: 현재 su 명령을 실행할 권한이 없습니다\n"
 
-msgid "No shell\n"
-msgstr "쉘이 없음\n"
+#, fuzzy, c-format
+#| msgid "No password entry for 'root'"
+msgid "No passwd entry for user '%s'\n"
+msgstr "'루트'에 대한 암호 파일 입력값이 없음"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: 터미널에서 받드시 실행되어야 합니다\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: 오류 %d\n"
+
+#, fuzzy, c-format
+#| msgid "lastlog: Cannot get the size of %s: %s\n"
+msgid "%s: Cannot drop the controlling terminal\n"
+msgstr "lastlog: %s의 크기를 읽을 수 없습니다: %s\n"
+
+#, fuzzy, c-format
+#| msgid "Cannot execute %s"
+msgid "Cannot execute %s\n"
+msgstr "%s을(를) 실행할 수 없습니다"
 
 msgid "No password file"
 msgstr "암호 파일 없음"
@@ -1773,7 +1828,7 @@ msgstr "%s: %d번 줄: chown 실패했습니다\n"
 
 #, fuzzy, c-format
 #| msgid "%s: rename: %s"
-msgid "%s: rename: %s: %s"
+msgid "%s: rename: %s: %s\n"
 msgstr "%s: 이름 다시 설정: %s"
 
 #, c-format
@@ -1787,6 +1842,8 @@ msgstr "%s: 그룹이 너무 많이 명시되었습니다 (최대 %d).\n"
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
+"       %s -D\n"
+"       %s -D [options]\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1928,10 +1985,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: options %s and %s conflict\n"
-msgstr "%s: %s 옵션 및 %s 충돌\n"
-
-#, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 "%s: UID %lu번의 로그인 실패 기록 항목을 초기화하는데 실패했습니다: %s\n"
@@ -1994,28 +2047,36 @@ msgstr ""
 "%s: 경고: 홈디렉터리가 이미 있습니다.\n"
 "skel 디렉터리에서 파일을 복사하지 않습니다.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
 msgid ""
-"Usage: userdel [options] LOGIN\n"
-"\n"
-"Options:\n"
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
-"  -h, --help                    display this help message and exit\n"
-"  -r, --remove                  remove home directory and mail spool\n"
-"\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
-"사용법: userdel [옵션] <로그인>\n"
-"\n"
-"옵션:\n"
-"  -f, --force                   파일이 사용자 소유자가 아니더라도 강제로\n"
-"                                지웁니다\n"
-"  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -r, --remove                  홈 디렉터리와 메일 저장소을 지웁니다\n"
-"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove the primary group of user '%s'\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
+msgstr "%s: '%s' 사용자의 주요 그룹을 제거할 수 없습니다\n"
+
+#, c-format
+msgid "%s: group %s not removed because it has other members.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s: %s 그룹은 다른 사용자의 주요 그룹이므로 제거하지 않습니다.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid home directory '%s'\n"
+msgid "%s: %s mail spool (%s) not found\n"
+msgstr "%s: 홈 디렉터리 '%s'은(는) 잘못되었습니다\n"
 
 #, fuzzy, c-format
 #| msgid "%s: warning: can't remove %s: %s"
@@ -2049,10 +2110,6 @@ msgstr "%s: '%s' 항목을 %s에서 제거할 수 없습니다\n"
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: %s 사용자는 NIS 사용자 입니다\n"
 
-#, c-format
-msgid "%s: user %s is currently logged in\n"
-msgstr "%s: %s 사용자는 현재 로그인한 상태 입니다\n"
-
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
@@ -2068,91 +2125,74 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: 디렉터리 %s을(를) 제거하는 데 오류가 발생했습니다\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: usermod [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
-#| "  -c, --comment COMMENT         new value of the GECOS field\n"
-#| "  -d, --home HOME_DIR           new home directory for the user account\n"
-#| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
-#| "EXPIRE_DATE\n"
-#| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
-#| "                                to INACTIVE\n"
-#| "  -g, --gid GROUP               force use GROUP as new primary group\n"
-#| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-#| "  -a, --append                  append the user to the supplemental "
-#| "GROUPS\n"
-#| "                                mentioned by the -G option without "
-#| "removing\n"
-#| "                                him/her from other groups\n"
-#| "  -h, --help                    display this help message and exit\n"
-#| "  -l, --login NEW_LOGIN         new value of the login name\n"
-#| "  -L, --lock                    lock the user account\n"
-#| "  -m, --move-home               move contents of the home directory to "
-#| "the\n"
-#| "                                new location (use only with -d)\n"
-#| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-#| "  -p, --password PASSWORD       use encrypted password for the new "
-#| "password\n"
-#| "  -s, --shell SHELL             new login shell for the user account\n"
-#| "  -u, --uid UID                 new UID for the user account\n"
-#| "  -U, --unlock                  unlock the user account\n"
-#| "\n"
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr ""
+
 msgid ""
-"Usage: usermod [options] LOGIN\n"
-"\n"
-"Options:\n"
-"  -c, --comment COMMENT         new value of the GECOS field\n"
 "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+
+msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -g, --gid GROUP               force use GROUP as new primary group\n"
-"  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
-"  -h, --help                    display this help message and exit\n"
-"  -l, --login NEW_LOGIN         new value of the login name\n"
-"  -L, --lock                    lock the user account\n"
+msgstr ""
+
+msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
+msgstr ""
+
+msgid "  -L, --lock                    lock the user account\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
+msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
-"  -s, --shell SHELL             new login shell for the user account\n"
-"  -u, --uid UID                 new UID for the user account\n"
-"  -U, --unlock                  unlock the user account\n"
-"%s\n"
 msgstr ""
-"사용법: usermod [옵션] <로그인>\n"
-"\n"
-"옵션:\n"
-"  -c, --comment <설명>          GECOS필드의 값을 새로 설정합니다\n"
-"  -d, --home <홈디렉터리>       지정된 사용자 계정의 새 홈 디렉터리를\n"
-"                                지정합니다\n"
-"  -e, --expiredate <만료날짜>   계정 만료 날짜를 <만료날짜>로 합니다\n"
-"  -f, --inactive <비활성화기간> 만료된 후 비활성화 기간을 <비활성화기간>으"
-"로\n"
-"                                합니다\n"
-"  -g, --gid <그룹>              새 주요 그룹을 <그룹>으로 강제로 지정합니다\n"
-"  -G, --groups <그룹목록>       보조 그룹의 목록을 새로 지정합니다\n"
-"  -a, --append                  사용자를 보조 그룹 <그룹>에 추가합니다\n"
-"                                (그룹 목록은 -G 옵션에 나타나고 다른\n"
-"                                그룹의 추가 삭제 상태는 변하지 않습니다)\n"
-"  -h, --help                    이 도움말을 표시하고 끝냅니다\n"
-"  -l, --login <새로그인>        로그인 이름을 새로 지정합니다\n"
-"  -L, --lock                    지정된 사용자 계정을 잠급니다\n"
-"  -m, --move-home               홈 디렉터리의 내용을 새 홈 디렉터리로 옮깁니"
-"다\n"
-"                                (-d 옵션과 함께 사용해야 합니다)\n"
-"  -o, --non-unique              중복되는 UID도 허용합니다\n"
-"  -p, --password <암호>         새로 사용할 암호를 암호화하여 사용합니다\n"
-"  -s, --shell <쉘>              지정된 사용자 계정의 로그인 쉘을 지정합니다\n"
-"  -u, --uid <UID>               지정된 사용자 계정의 새 <UID> 값을 지정합니"
-"다\n"
-"  -U, --unlock                  사용자 계정의 잠금을 해제합니다\n"
-"\n"
+
+msgid "  -u, --uid UID                 new UID for the user account\n"
+msgstr ""
+
+msgid "  -U, --unlock                  unlock the user account\n"
+msgstr ""
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2171,17 +2211,18 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' 사용자가 이미 %s 안에 있습니다\n"
 
-#, c-format
-msgid "%s: no flags given\n"
-msgstr "%s: 주어진 플래그가 없습니다\n"
-
-#, c-format
-msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: -e 옵션과 -f 옵션은 셰도우 암호가 필요합니다\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open %s\n"
+msgid "%s: no options\n"
+msgstr "%s: %s을(를) 열 수 없습니다\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr "%s: -L, -p, -U 옵션은 한 번에 하나만 쓸 수 있습니다\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: -e 옵션과 -f 옵션은 셰도우 암호가 필요합니다\n"
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
@@ -2251,9 +2292,6 @@ msgid "  -g, --group                   edit group database\n"
 msgstr ""
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-
-msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
@@ -2332,6 +2370,350 @@ msgstr "%s: %s을(를) 복구할 수 없습니다: %s (바뀐 사항은 %s에 �
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
+
+#~ msgid "malloc(%d) failed\n"
+#~ msgstr "malloc(%d)에 실패\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: chage [options] [LOGIN]\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+#~| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -l, --list                    show account aging information\n"
+#~| "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~| "password\n"
+#~| "                                change to MIN_DAYS\n"
+#~| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~| "password\n"
+#~| "                                change to MAX_DAYS\n"
+#~| "  -W, --warndays WARN_DAYS      set expiration warning days to "
+#~| "WARN_DAYS\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: chage [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --list                    show account aging information\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: chage [옵션] [로그인]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -d, --lastday <최근날짜>       최근 암호를 바꾼 날짜를 <최근날짜>로 합니"
+#~ "다.\n"
+#~ "  -E, --expiredate <만료날짜>    계정 만료날짜를 <만료날짜>로 합니다.\n"
+#~ "  -h, --help                     이 도움말을 표시하고 끝냅니다.\n"
+#~ "  -I, --inactive <비활성화기간>  만료된 후 비활성화 기간을 <비활성화기간>"
+#~ "으로\n"
+#~ "                                 합니다\n"
+#~ "  -l, --list                     계정의 사용기한 정보를 표시합니다.\n"
+#~ "  -m, --mindays <최소날수>       암호를 바꾸기 전의 최소 날짜 수를 <최소날"
+#~ "수>로\n"
+#~ "                                 합니다.\n"
+#~ "  -M, --maxdays <최대날수>       암호를 바꾸기 전의 최대 날짜 수를 <최대날"
+#~ "수>로\n"
+#~ "                                 합니다.\n"
+#~ "  -W, --warndays <경고날수>      만료 경고 기간을 <경고날수>으로 합니다.\n"
+#~ "\n"
+
+#~ msgid "%s: PAM authentication failed\n"
+#~ msgstr "%s: PAM 인증이 실패했습니다\n"
+
+#~ msgid ""
+#~ "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+#~ "\t[-h home_ph] [-o other] [user]\n"
+#~ msgstr ""
+#~ "사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호]\n"
+#~ "\t[-h 집_전화번호] [-o 기타] [사용자]\n"
+
+#~ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+#~ msgstr ""
+#~ "사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호] [-h 집_전화번호]\n"
+
+#~ msgid ""
+#~ "Usage: %s [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ "  -e, --encrypted               supplied passwords are encrypted\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -m, --md5                     encrypt the clear text password using\n"
+#~ "                                the MD5 algorithm\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "사용법: %s [옵션]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -c, --crypt-method            암호화 방법 (다음 중 하나: %s)\n"
+#~ "  -e, --encrypted               입력하는 암호가 암호화되어 있습니다\n"
+#~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
+#~ "  -m, --md5                     일반 텍스트 암호를 MD5 알고리즘을 사용해\n"
+#~ "                                암호화합니다\n"
+#~ "%s\n"
+
+#~ msgid ""
+#~ "Usage: chsh [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: chsh [옵션] [<로그인>]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
+#~ "  -s, --shelll <쉘>             사용자 계정의 새 로그인 쉘\n"
+#~ "\n"
+
+#~ msgid "Usage: expiry {-f|-c}\n"
+#~ msgstr "사용법: expiry {-f|-c}\n"
+
+#, fuzzy
+#~| msgid "faillog: Failed to get the entry for UID %d\n"
+#~ msgid "faillog: Failed to get the entry for UID %lu\n"
+#~ msgstr "faillog: UID %d번의 항목을 읽는데 실패했습니다\n"
+
+#~ msgid "faillog: Cannot open %s: %s\n"
+#~ msgstr "faillog: %s을(를) 열 수 없습니다: %s\n"
+
+#~ msgid "faillog: Cannot get the size of %s: %s\n"
+#~ msgstr "faillog: %s의 크기를 얻을 수 없습니다: %s\n"
+
+#~ msgid "Usage: groupdel group\n"
+#~ msgstr "사용법: groupdel 그룹\n"
+
+#~ msgid "%s: -s and -r are incompatibile\n"
+#~ msgstr "%s: -s 옵션과 -r 옵션을 동시에 쓸 수 없습니다\n"
+
+#~ msgid "Usage: grpconv\n"
+#~ msgstr "사용법: grpconv\n"
+
+#~ msgid "Usage: grpunconv\n"
+#~ msgstr "사용법: grpunconv\n"
+
+#~ msgid ""
+#~ "Usage: lastlog [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -b, --before DAYS             print only lastlog records older than "
+#~ "DAYS\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: lastlog [옵션]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -b, --before <날짜>           <날짜>일 이전의 최근 기록을 표시합니다\n"
+#~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
+#~ "  -t, --time <날짜>             <날짜>일 내의 최근 기록만 표시합니다\n"
+#~ "  -u, --user <로그인>           <로그인> 사용자의 최근 기록만 표시합니다\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Usage: passwd [options] [LOGIN]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -a, --all                     report password status on all accounts\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
+#~ "  -e, --expire                  force expire the password for the named "
+#~ "account\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -k, --keep-tokens             change password only if expired\n"
+#~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -l, --lock                    lock the password of the named account\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
+#~ "                                change to MIN_DAYS\n"
+#~ "  -q, --quiet                   quiet mode\n"
+#~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
+#~ "  -u, --unlock                  unlock the password of the named account\n"
+#~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
+#~ "                                change to MAX_DAYS\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: passwd [옵션] [<로그인>]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -a, --all                     모든 계정의 암호 상태를 보고합니다\n"
+#~ "  -d, --delete                  지정된 계정의 암호를 지웁니다\n"
+#~ "  -e, --expire                  지정된 계정 암호를 강제로 만료시킵니다\n"
+#~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
+#~ "  -k, --keep-tokens             암호가 만료했을 때만 바꿉니다\n"
+#~ "  -i, --inactive <비활성화기간> 만료된 후 비활성화 기간을 \n"
+#~ "                                <비활성화기간>으로 합니다\n"
+#~ "  -l, --lock                    지정된 계정의 암호를 잠급니다\n"
+#~ "  -n, --mindays <최소날수>      암호를 다시 바꿀 수 있는 최소 일\n"
+#~ "                                수를 <최소날수>로 합니다\n"
+#~ "  -q, --quiet                   조용한 모드\n"
+#~ "  -r, --repository <저장소>     <저장소> 저장소에 있는 암호를 바꿉니다\n"
+#~ "  -S, --status                  지정된 계정의 암호 상태를 보고합니다\n"
+#~ "  -u, --unlock                  지정된 계정의 암호 잠금을 해제합니다\n"
+#~ "  -w, --warndays <경고날수>     암호 만료 예고를 <경고날수> 이전부터 합니"
+#~ "다\n"
+#~ "  -x, --maxdays <최대날수>      암호를 바꾸지 않을 수 있는 최대 일\n"
+#~ "                                수를 <최대날수>로 합니다\n"
+#~ "\n"
+
+#~ msgid "Usage: pwconv\n"
+#~ msgstr "사용법: pwconv\n"
+
+#~ msgid "Usage: pwunconv\n"
+#~ msgstr "사용법: pwunconv\n"
+
+#~ msgid "Unknown id: %s\n"
+#~ msgstr "알 수 없는 아이디: %s\n"
+
+#~ msgid "No shell\n"
+#~ msgstr "쉘이 없음\n"
+
+#~ msgid ""
+#~ "Usage: userdel [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -f, --force                   force removal of files,\n"
+#~ "                                even if not owned by user\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -r, --remove                  remove home directory and mail spool\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: userdel [옵션] <로그인>\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -f, --force                   파일이 사용자 소유자가 아니더라도 강제로\n"
+#~ "                                지웁니다\n"
+#~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
+#~ "  -r, --remove                  홈 디렉터리와 메일 저장소을 지웁니다\n"
+#~ "\n"
+
+#~ msgid "%s: user %s is currently logged in\n"
+#~ msgstr "%s: %s 사용자는 현재 로그인한 상태 입니다\n"
+
+#, fuzzy
+#~| msgid ""
+#~| "Usage: usermod [options] LOGIN\n"
+#~| "\n"
+#~| "Options:\n"
+#~| "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~| "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~| "EXPIRE_DATE\n"
+#~| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~| "                                to INACTIVE\n"
+#~| "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~| "  -a, --append                  append the user to the supplemental "
+#~| "GROUPS\n"
+#~| "                                mentioned by the -G option without "
+#~| "removing\n"
+#~| "                                him/her from other groups\n"
+#~| "  -h, --help                    display this help message and exit\n"
+#~| "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~| "  -L, --lock                    lock the user account\n"
+#~| "  -m, --move-home               move contents of the home directory to "
+#~| "the\n"
+#~| "                                new location (use only with -d)\n"
+#~| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~| "  -p, --password PASSWORD       use encrypted password for the new "
+#~| "password\n"
+#~| "  -s, --shell SHELL             new login shell for the user account\n"
+#~| "  -u, --uid UID                 new UID for the user account\n"
+#~| "  -U, --unlock                  unlock the user account\n"
+#~| "\n"
+#~ msgid ""
+#~ "Usage: usermod [options] LOGIN\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -c, --comment COMMENT         new value of the GECOS field\n"
+#~ "  -d, --home HOME_DIR           new home directory for the user account\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
+#~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#~ "                                to INACTIVE\n"
+#~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
+#~ "                                him/her from other groups\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -l, --login NEW_LOGIN         new value of the login name\n"
+#~ "  -L, --lock                    lock the user account\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
+#~ "                                new location (use only with -d)\n"
+#~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
+#~ "  -s, --shell SHELL             new login shell for the user account\n"
+#~ "  -u, --uid UID                 new UID for the user account\n"
+#~ "  -U, --unlock                  unlock the user account\n"
+#~ "%s\n"
+#~ msgstr ""
+#~ "사용법: usermod [옵션] <로그인>\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -c, --comment <설명>          GECOS필드의 값을 새로 설정합니다\n"
+#~ "  -d, --home <홈디렉터리>       지정된 사용자 계정의 새 홈 디렉터리를\n"
+#~ "                                지정합니다\n"
+#~ "  -e, --expiredate <만료날짜>   계정 만료 날짜를 <만료날짜>로 합니다\n"
+#~ "  -f, --inactive <비활성화기간> 만료된 후 비활성화 기간을 <비활성화기간>으"
+#~ "로\n"
+#~ "                                합니다\n"
+#~ "  -g, --gid <그룹>              새 주요 그룹을 <그룹>으로 강제로 지정합니"
+#~ "다\n"
+#~ "  -G, --groups <그룹목록>       보조 그룹의 목록을 새로 지정합니다\n"
+#~ "  -a, --append                  사용자를 보조 그룹 <그룹>에 추가합니다\n"
+#~ "                                (그룹 목록은 -G 옵션에 나타나고 다른\n"
+#~ "                                그룹의 추가 삭제 상태는 변하지 않습니다)\n"
+#~ "  -h, --help                    이 도움말을 표시하고 끝냅니다\n"
+#~ "  -l, --login <새로그인>        로그인 이름을 새로 지정합니다\n"
+#~ "  -L, --lock                    지정된 사용자 계정을 잠급니다\n"
+#~ "  -m, --move-home               홈 디렉터리의 내용을 새 홈 디렉터리로 옮깁"
+#~ "니다\n"
+#~ "                                (-d 옵션과 함께 사용해야 합니다)\n"
+#~ "  -o, --non-unique              중복되는 UID도 허용합니다\n"
+#~ "  -p, --password <암호>         새로 사용할 암호를 암호화하여 사용합니다\n"
+#~ "  -s, --shell <쉘>              지정된 사용자 계정의 로그인 쉘을 지정합니"
+#~ "다\n"
+#~ "  -u, --uid <UID>               지정된 사용자 계정의 새 <UID> 값을 지정합"
+#~ "니다\n"
+#~ "  -U, --unlock                  사용자 계정의 잠금을 해제합니다\n"
+#~ "\n"
+
+#~ msgid "%s: no flags given\n"
+#~ msgstr "%s: 주어진 플래그가 없습니다\n"
 
 #, fuzzy
 #~| msgid ""
