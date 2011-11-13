@@ -84,8 +84,8 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 static void change_root (const char* newroot)
 {
 	/* Drop privileges */
-	if (   (setregid (rgid, rgid) != 0)
-	    || (setreuid (ruid, ruid) != 0)) {
+	if (   (setregid (getgid (), getgid ()) != 0)
+	    || (setreuid (getuid (), getuid ()) != 0)) {
 		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
 		         Prog, strerror (errno));
 		exit (EXIT_FAILURE);
