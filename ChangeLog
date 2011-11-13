@@ -1,5 +1,15 @@
 2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Removed pw_opened.
+	* src/pwck.c: optind cannot be greater than argc.
+	* src/pwck.c: If spw_opened, then is_shadow is implicitly set.
+	* src/pwck.c: Do not report passwd entry without x password and a
+	shadow entry in --quiet mode (no interaction with the caller)
+	* src/pwck.c: Do not check if the last password change is in the
+	future if the time is set to 0.
+
+2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/root_flag.c: Drop privileges before changing root. The
 	--root option should not be used by regular users for suid utils.
 	* libmisc/root_flag.c: Improve error messages.

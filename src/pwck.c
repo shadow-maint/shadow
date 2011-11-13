@@ -75,7 +75,6 @@ static bool use_system_spw_file = true;
 
 static bool is_shadow = false;
 
-static bool pw_opened  = false;
 static bool spw_opened = false;
 
 static bool pw_locked  = false;
@@ -214,7 +213,7 @@ static void process_flags (int argc, char **argv)
 	/*
 	 * Make certain we have the right number of arguments
 	 */
-	if ((argc < optind) || (argc > (optind + 2))) {
+	if (argc > (optind + 2)) {
 		usage (E_USAGE);
 	}
 
@@ -290,7 +289,6 @@ static void open_files (void)
 		}
 		fail_exit (E_CANTOPEN);
 	}
-	pw_opened = true;
 	if (is_shadow && !use_tcb) {
 		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
@@ -319,7 +317,7 @@ static void close_files (bool changed)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (pw_opened && pw_close () == 0) {
+		if (pw_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
@@ -330,8 +328,7 @@ static void close_files (bool changed)
 			}
 			fail_exit (E_CANTUPDATE);
 		}
-		pw_opened = false;
-		if (is_shadow && spw_opened && (spw_close () == 0)) {
+		if (spw_opened && (spw_close () == 0)) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
@@ -640,7 +637,9 @@ static void check_pw_file (int *errors, bool *changed)
 				/* The passwd entry has a shadow counterpart.
 				 * Make sure no passwords are in passwd.
 				 */
-				if (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) != 0) {
+				if (   !quiet
+				    && (strcmp (pwd->pw_passwd,
+				                SHADOW_PASSWD_STRING) != 0)) {
 					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        pwd->pw_name, spw_dbname (), pw_dbname ());
 					*errors += 1;
@@ -813,11 +812,14 @@ static void check_spw_file (int *errors, bool *changed)
 		/*
 		 * Warn if last password change in the future.  --marekm
 		 */
-		if (   !quiet
-		    && (spw->sp_lstchg > (long) time ((time_t *) 0) / SCALE)) {
-			printf (_("user %s: last password change in the future\n"),
-			        spw->sp_namp);
-			*errors += 1;
+		if (!quiet) {
+			time_t t = time ((time_t *) 0);
+			if (   (t != 0)
+			    && (spw->sp_lstchg > (long) t / SCALE)) {
+				printf (_("user %s: last password change in the future\n"),
+			                spw->sp_namp);
+				*errors += 1;
+			}
 		}
 	}
 }
