@@ -1,3 +1,17 @@
+2011-11-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chage.c, src/chfn.c, src/chgpasswd.c, src/chpasswd.c,
+	src/chsh.c, src/groupadd.c, src/groupdel.c, src/groupmems.c,
+	src/groupmod.c, src/newusers.c, src/useradd.c, src/userdel.c,
+	src/usermod.c: Provide the PAM error
+	message instead of our own, and log error to syslog.
+	* src/groupmems.c: Exit with exit rather than fail_exit in usage().
+	* src/newusers.c: Check the number of arguments.
+	* src/newusers.c: Do not create the home directory when it is not
+	changed.
+	* src/useradd.c: Set the group password to "!" rather "x" if there
+	are no gshadow file.
+
 2011-11-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwck.c: Removed pw_opened.

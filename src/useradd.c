@@ -1519,7 +1519,11 @@ static void new_grent (struct group *grent)
 {
 	memzero (grent, sizeof *grent);
 	grent->gr_name = (char *) user_name;
-	grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	if (is_shadow_grp) {
+		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	} else {
+		grent->gr_passwd = "!";	/* XXX warning: const */
+	}
 	grent->gr_gid = user_gid;
 	grent->gr_mem = &empty_list;
 }
@@ -1929,13 +1933,16 @@ int main (int argc, char **argv)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (NULL != pamh) {
-		(void) pam_end (pamh, retval);
-	}
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		fprintf (stderr, _("%s: PAM: %s\n"),
+		         Prog, pam_strerror (pamh, retval));
+		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		if (NULL != pamh) {
+			(void) pam_end (pamh, retval);
+		}
 		fail_exit (1);
 	}
+	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 

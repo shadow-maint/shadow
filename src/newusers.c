@@ -584,6 +584,11 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
+	if (   (optind != argc)
+	    && (optind + 1 != argc)) {
+		usage (EXIT_FAILURE);
+	}
+
 	if (argv[optind] != NULL) {
 		if (freopen (argv[optind], "r", stdin) == NULL) {
 			char buf[BUFSIZ];
@@ -668,13 +673,16 @@ static void check_perms (void)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (NULL != pamh) {
-		(void) pam_end (pamh, retval);
-	}
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		fprintf (stderr, _("%s: PAM: %s\n"),
+		         Prog, pam_strerror (pamh, retval));
+		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		if (NULL != pamh) {
+			(void) pam_end (pamh, retval);
+		}
 		fail_exit (EXIT_FAILURE);
 	}
+	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 }
@@ -1006,7 +1014,7 @@ int main (int argc, char **argv)
 			newpw.pw_shell = fields[6];
 		}
 
-		if (   ('\0' != newpw.pw_dir[0])
+		if (   ('\0' != fields[5][0])
 		    && (access (newpw.pw_dir, F_OK) != 0)) {
 /* FIXME: should check for directory */
 			mode_t msk = 0777 & ~getdef_num ("UMASK",

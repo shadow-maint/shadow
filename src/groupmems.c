@@ -379,7 +379,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -p, --purge                   purge all members from the group\n"), usageout);
 	(void) fputs (_("  -l, --list                    list the members of the group\n"), usageout);
-	fail_exit (status);
+	exit (status);
 }
 
 /*
@@ -471,13 +471,16 @@ static void check_perms (void)
 			retval = pam_acct_mgmt (pamh, 0);
 		}
 
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
 		if (PAM_SUCCESS != retval) {
-			fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+			fprintf (stderr, _("%s: PAM: %s\n"),
+			         Prog, pam_strerror (pamh, retval));
+			SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+			if (NULL != pamh) {
+				(void) pam_end (pamh, retval);
+			}
 			fail_exit (1);
 		}
+		(void) pam_end (pamh, retval);
 #endif
 	}
 }
