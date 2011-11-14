@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2011-11-13 18:43+0100\n"
-"PO-Revision-Date: 2011-07-14 16:13+0200\n"
+"PO-Revision-Date: 2011-11-13 19:35+0100\n"
 "Last-Translator: Thomas Blein <tblein@tblein.eu>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -2566,11 +2566,6 @@ msgstr ""
 "    "
 
 #: suauth.5.xml:82(para)
-#, fuzzy
-#| msgid ""
-#| "Where to-id is either the word <emphasis>ALL</emphasis>, a list of "
-#| "usernames delimited by \",\" or the words <emphasis>ALL EXCEPT</emphasis> "
-#| "followed by a list of usernames delimited by \",\""
 msgid ""
 "Where to-id is either the word <emphasis>ALL</emphasis>, a list of usernames "
 "delimited by \",\" or the words <emphasis>ALL EXCEPT</emphasis> followed by "
@@ -3243,11 +3238,6 @@ msgstr "<option>LOGIN_STRING</option> (chaîne ce caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 #: chsh.1.xml:34(para) chfn.1.xml:34(para)
-#, fuzzy
-#| msgid ""
-#| "The string used for prompting a password. The default is to use "
-#| "\"Password: \", or a translation of that string. If you set this "
-#| "variable, the prompt will no be translated."
 msgid ""
 "The string used for prompting a password. The default is to use \"Password: "
 "\", or a translation of that string. If you set this variable, the prompt "
@@ -4250,17 +4240,14 @@ msgstr ""
 "convertit que ce qu'il peut."
 
 #: pwconv.8.xml:169(para)
-#, fuzzy
-#| msgid ""
-#| "The options which apply to the <command>vipw</command> and <command>vigr</"
-#| "command> commands are:"
 msgid ""
 "The options which apply to the <command>pwconv</command>, <command>pwunconv</"
 "command>, <command>grpconv</command>, and <command>grpunconv</command> "
 "commands are:"
 msgstr ""
-"Les options applicables aux commandes <command>vipw</command> et "
-"<command>vigr</command> sont :"
+"Les options applicables aux commandes <command>pwconv</command>, "
+"<command>pwunconv</command>, <command>grpconv</command> et "
+"<command>grpunconv</command> sont :"
 
 #: pwconv.8.xml:199(para)
 msgid ""
@@ -4468,20 +4455,16 @@ msgstr ""
 "action de la part de l'utilisateur ne seront pas affichés."
 
 #: pwck.8.xml:182(term) grpck.8.xml:144(term)
-#, fuzzy
-#| msgid "<option>-r</option>, <option>--remove</option>"
 msgid "<option>-r</option>, <option>--read-only</option>"
-msgstr "<option>-r</option>, <option>--remove</option>"
+msgstr "<option>-r</option>, <option>--read-only</option>"
 
 #: pwck.8.xml:184(para)
 msgid "Execute the <command>pwck</command> command in read-only mode."
 msgstr "Permet d'exécuter <command>pwck</command> dans le mode lecture seule."
 
 #: pwck.8.xml:203(term) grpck.8.xml:167(term)
-#, fuzzy
-#| msgid "<option>-s</option>, <option>--shadow</option>"
 msgid "<option>-s</option>, <option>--sort</option>"
-msgstr "<option>-s</option>, <option>--shadow</option>"
+msgstr "<option>-s</option>, <option>--sort</option>"
 
 #: pwck.8.xml:205(para)
 msgid ""
@@ -5305,11 +5288,6 @@ msgstr ""
 
 #: passwd.1.xml:44(para) newusers.8.xml:44(para) login.defs.5.xml:44(para)
 #: gpasswd.1.xml:44(para) chpasswd.8.xml:44(para) chgpasswd.8.xml:44(para)
-#, fuzzy
-#| msgid ""
-#| "This variable is superceded by the <option>ENCRYPT_METHOD</option> "
-#| "variable or by any command line option used to configure the encryption "
-#| "algorithm."
 msgid ""
 "This variable is superseded by the <option>ENCRYPT_METHOD</option> variable "
 "or by any command line option used to configure the encryption algorithm."
@@ -5482,16 +5460,6 @@ msgstr ""
 "quittant : <placeholder-1/>"
 
 #: passwd.1.xml:472(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>grpck</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>chpasswd</refentrytitle><manvolnum>8</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
@@ -5502,14 +5470,14 @@ msgid ""
 "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>grpck</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>shadow</"
+"<citerefentry><refentrytitle>chpasswd</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>."
+"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <phrase condition=\"no_pam"
+"\"><citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: nologin.8.xml:38(refentrytitle) nologin.8.xml:45(refname)
 #: nologin.8.xml:51(command)
@@ -6332,12 +6300,6 @@ msgstr ""
 "Le nombre maximum de tentatives de connexion en cas de mauvais mot de passe."
 
 #: login.defs.5.xml:37(para) login.1.xml:37(para)
-#, fuzzy
-#| msgid ""
-#| "This will most likely be overridden by PAM, since the default pam_unix "
-#| "module has it's own built in of 3 retries. However, this is a safe "
-#| "fallback in case you are using an authentication module that does not "
-#| "enforce PAM_MAXTRIES."
 msgid ""
 "This will most likely be overridden by PAM, since the default pam_unix "
 "module has its own built in of 3 retries. However, this is a safe fallback "
@@ -6399,14 +6361,12 @@ msgid "<option>PORTTIME_CHECKS_ENAB</option> (boolean)"
 msgstr "<option>PORTTIME_CHECKS_ENAB</option> (booléen)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
-#| msgid "Enable checking of time restrictions specified in /etc/porttime."
 msgid ""
 "Enable checking of time restrictions specified in <filename>/etc/porttime</"
 "filename>."
 msgstr ""
-"Activer la vérification des restrictions de temps précisées dans /etc/"
-"porttime."
+"Activer la vérification des restrictions de temps précisées dans "
+"<filename>/etc/porttime</filename>."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 msgid "<option>TTYGROUP</option> (string)"
@@ -7359,12 +7319,6 @@ msgstr ""
 "ligne pour cet utilisateur sera prise en compte."
 
 #: limits.5.xml:150(para)
-#, fuzzy
-#| msgid ""
-#| "If no lines are specified for an user, the last <replaceable>@group</"
-#| "replaceable> line matching a group whose the user is a member of will be "
-#| "conisdered, or the last line with default limits if no groups contain the "
-#| "user)."
 msgid ""
 "If no lines are specified for an user, the last <replaceable>@group</"
 "replaceable> line matching a group whose the user is a member of will be "
@@ -7903,12 +7857,6 @@ msgstr ""
 "groupes pour cet utilisateur."
 
 #: groups.1.xml:72(para)
-#, fuzzy
-#| msgid ""
-#| "Systems which do not support concurrent group sets will have the "
-#| "information from <filename>/etc/group</filename> reported. The user must "
-#| "use <command>newgrp</command> or <command>sg</command> to change their "
-#| "current real and effective group ID."
 msgid ""
 "Systems which do not support concurrent group sets will have the information "
 "from <filename>/etc/group</filename> reported. The user must use "
@@ -8269,11 +8217,6 @@ msgid "delete a group"
 msgstr "Supprimer un groupe"
 
 #: groupdel.8.xml:62(para)
-#, fuzzy
-#| msgid ""
-#| "The <command>groupdel</command> command modifies the system account "
-#| "files, deleting all entries that refer to <emphasis remap=\"I\">group</"
-#| "emphasis>. The named group must exist."
 msgid ""
 "The <command>groupdel</command> command modifies the system account files, "
 "deleting all entries that refer to <replaceable>GROUP</replaceable>. The "
@@ -8281,16 +8224,13 @@ msgid ""
 msgstr ""
 "La commande <command>groupdel</command> modifie les fichiers "
 "d'administration des comptes du système, en supprimant les entrées qui se "
-"réfèrent à <emphasis remap=\"I\">groupe</emphasis>. Le groupe indiqué doit "
+"réfèrent à <replaceable>groupe</replaceable>. Le groupe indiqué doit "
 "exister."
 
 #: groupdel.8.xml:70(para)
-#, fuzzy
-#| msgid ""
-#| "The options which apply to the <command>groupmod</command> command are:"
 msgid "The options which apply to the <command>groupdel</command> command are:"
 msgstr ""
-"Les options disponibles pour la commande <command>groupmod</command> sont :"
+"Les options disponibles pour la commande <command>groupdel</command> sont :"
 
 #: groupdel.8.xml:99(para)
 msgid ""
@@ -8366,7 +8306,7 @@ msgstr ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>"
+"manvolnum></citerefentry>."
 
 #: groupadd.8.xml:49(refpurpose)
 msgid "create a new group"
@@ -8978,14 +8918,6 @@ msgstr ""
 "connexion et les limites pour chaque compte."
 
 #: faillog.5.xml:55(para)
-#, fuzzy
-#| msgid ""
-#| "The file contains fixed length records, indexed by numerical UID. Each "
-#| "record contains the count of login failures since the last successful "
-#| "login; the maximum number of failures before the account is disabled; the "
-#| "line on whiche the last login failure occurred; the date of the last "
-#| "login failure; and the duration (in seconds) during which the account "
-#| "will be locked after a failure."
 msgid ""
 "The file contains fixed length records, indexed by numerical UID. Each "
 "record contains the count of login failures since the last successful login; "
@@ -9047,17 +8979,13 @@ msgstr ""
 "par un utilisateur normal."
 
 #: expiry.1.xml:73(para)
-#, fuzzy
-#| msgid "The options which apply to the <command>pwck</command> command are:"
 msgid "The options which apply to the <command>expiry</command> command are:"
 msgstr ""
-"Les options disponibles pour la commande <command>pwck</command> sont :"
+"Les options disponibles pour la commande <command>expiry</command> sont :"
 
 #: expiry.1.xml:78(term)
-#, fuzzy
-#| msgid "<option>-L</option>, <option>--lock</option>"
 msgid "<option>-c</option>, <option>--check</option>"
-msgstr "<option>-L</option>, <option>--lock</option>"
+msgstr "<option>-c</option>, <option>--check</option>"
 
 #: expiry.1.xml:80(para)
 #, fuzzy
@@ -9389,12 +9317,6 @@ msgstr ""
 "<command>chgpasswd</command>."
 
 #: chgpasswd.8.xml:78(para)
-#, fuzzy
-#| msgid ""
-#| "The default encryption algorithm can be defined for the system with the "
-#| "ENCRYPT_METHOD variable of <filename>/etc/login.defs</filename>, and can "
-#| "be overwiten with the <option>-e</option>, <option>-m</option>, or "
-#| "<option>-c</option> options."
 msgid ""
 "The default encryption algorithm can be defined for the system with the "
 "<option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</"
@@ -9402,7 +9324,7 @@ msgid ""
 "option>, or <option>-c</option> options."
 msgstr ""
 "L'algorithme de chiffrement peut être défini pour le système avec la "
-"variable ENCRYPT_METHOD de <filename>/etc/login.defs</filename> et peut être "
+"variable <option>ENCRYPT_METHOD</option> de <filename>/etc/login.defs</filename> et peut être "
 "surchargé avec les options <option>-e</option>, <option>-m</option> ou "
 "<option>-c</option>."
 
@@ -9484,10 +9406,8 @@ msgstr ""
 "informations de compte utilisées par d'autres applications."
 
 #: chfn.1.xml:93(para)
-#, fuzzy
-#| msgid "The options which apply to the <command>chsh</command> command are:"
 msgid "The options which apply to the <command>chfn</command> command are:"
-msgstr "Les options applicables à la commande <command>chsh</command> sont :"
+msgstr "Les options applicables à la commande <command>chfn</command> sont :"
 
 #: chfn.1.xml:98(term)
 #, fuzzy
@@ -9558,10 +9478,8 @@ msgid "Change the user's room number."
 msgstr ""
 
 #: chfn.1.xml:147(term)
-#, fuzzy
-#| msgid "<option>-h</option>, <option>--help</option>"
 msgid "<option>-u</option>, <option>--help</option>"
-msgstr "<option>-h</option>, <option>--help</option>"
+msgstr "<option>-u</option>, <option>--help</option>"
 
 #: chfn.1.xml:155(term)
 #, fuzzy
