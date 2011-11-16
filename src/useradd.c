@@ -1519,9 +1519,12 @@ static void new_grent (struct group *grent)
 {
 	memzero (grent, sizeof *grent);
 	grent->gr_name = (char *) user_name;
+#ifdef  SHADOWGRP
 	if (is_shadow_grp) {
 		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-	} else {
+	} else
+#endif				/* SHADOWGRP */
+	{
 		grent->gr_passwd = "!";	/* XXX warning: const */
 	}
 	grent->gr_gid = user_gid;

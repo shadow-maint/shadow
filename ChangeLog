@@ -1,3 +1,7 @@
+2011-11-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Compil fix when SHADOWGRP is not enabled.
+
 2011-11-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
