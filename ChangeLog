@@ -1,6 +1,7 @@
 2011-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/useradd.c: Compil fix when SHADOWGRP is not enabled.
+	* src/useradd.c: Compilation fix when SHADOWGRP is not enabled.
+	* libmisc/root_flag.c: Add missing #include <stdio.h>
 
 2011-11-13  Nicolas François  <nicolas.francois@centraliens.net>
 
