@@ -1,3 +1,8 @@
+2011-11-16  Peter Vrabec  <pvrabec@redhat.com>
+
+	* libmisc/copydir.c: Ignore perm_copy_file() errors with errno set
+	to ENOTSUP.
+
 2011-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Compilation fix when SHADOWGRP is not enabled.

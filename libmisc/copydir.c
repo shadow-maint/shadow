@@ -180,6 +180,12 @@ static void error_acl (struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
 
+	/* ignore the case when destination does not support ACLs 
+	 * or extended attributes */
+	if (ENOTSUP == errno) {
+		return;
+	}
+
 	va_start (ap, fmt);
 	(void) fprintf (stderr, _("%s: "), Prog);
 	if (vfprintf (stderr, fmt, ap) != 0) {
@@ -548,7 +554,8 @@ static int copy_dir (const char *src, const char *dst,
 	    || (chown_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
-	    || (perm_copy_file (src, dst, &ctx) != 0)
+	    || (   (perm_copy_file (src, dst, &ctx) != 0)
+	        && (errno != ENOTSUP))
 #else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode) != 0)
 #endif				/* !WITH_ACL */
@@ -746,7 +753,8 @@ static int copy_special (const char *src, const char *dst,
 	    || (chown_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
-	    || (perm_copy_file (src, dst, &ctx) != 0)
+	    || (   (perm_copy_file (src, dst, &ctx) != 0)
+	        && (errno != ENOTSUP))
 #else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode & 07777) != 0)
 #endif				/* !WITH_ACL */
@@ -803,7 +811,8 @@ static int copy_file (const char *src, const char *dst,
 	    || (fchown_if_needed (ofd, statp,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
-	    || (perm_copy_fd (src, ifd, dst, ofd, &ctx) != 0)
+	    || (   (perm_copy_fd (src, ifd, dst, ofd, &ctx) != 0)
+	        && (errno != ENOTSUP))
 #else				/* !WITH_ACL */
 	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
 #endif				/* !WITH_ACL */
