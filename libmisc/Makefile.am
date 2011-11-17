@@ -50,7 +50,6 @@ libmisc_a_SOURCES = \
 	setugid.c \
 	setupenv.c \
 	shell.c \
-	system.c \
 	strtoday.c \
 	sub.c \
 	sulog.c \

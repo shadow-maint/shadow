@@ -37,7 +37,7 @@ S/Key support:
 Authors and contributors
 ========================
 
-Thanks to at least the following people for sending me patches, bug
+Thanks to at least the following people for sending patches, bug
 reports and various comments.  This list may be incomplete, I received
 a lot of mail...
 
@@ -69,6 +69,7 @@ Greg Mortensen <loki@world.std.com>
 Guido van Rooij
 Guy Maor <maor@debian.org>
 Hrvoje Dogan <hdogan@bjesomar.srce.hr>
+Jakub Hrozek <jhrozek@redhat.com>
 Janos Farkas <chexum@bankinf.banki.hu>
 Jay Soffian <jay@lw.net>
 Jesse Thilo <Jesse.Thilo@pobox.com>
@@ -96,6 +97,7 @@ Mike Pakovic <mpakovic@users.southeast.net>
 Nicolas François <nicolas.francois@centraliens.net>
 Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>
 Pavel Machek <pavel@bug.ucw.cz>
+Peter Vrabec <pvrabec@redhat.com>
 Phillip Street
 Rafał Maszkowski <rzm@icm.edu.pl>
 Rani Chouha <ranibey@smartec.com>

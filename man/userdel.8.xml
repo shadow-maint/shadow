@@ -136,6 +136,16 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-Z</option>, <option>--selinux-user</option>
+	</term>
+	<listitem>
+	  <para>
+	    Remove any SELinux user mapping for the user's login.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 

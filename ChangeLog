@@ -1,5 +1,15 @@
 2011-11-16  Peter Vrabec  <pvrabec@redhat.com>
 
+	* NEWS, src/userdel.c, man/userdel.8.xml: Add option -Z/--selinux-user.
+	* libmisc/system.c, lib/prototypes.h, libmisc/Makefile.am: Removed
+	safe_system().
+	* lib/selinux.c, po/POTFILES.in, lib/prototypes.h,
+	lib/Makefile.am: Added helper functions for semanage.
+	* README, src/useradd.c, src/usermod.c, src/userdel.c,
+	configure.in: Use libsemanage instead of semanage.
+
+2011-11-16  Peter Vrabec  <pvrabec@redhat.com>
+
 	* src/Makefile.am: useradd may need the LIBATTR library.
 
 2011-11-16  Peter Vrabec  <pvrabec@redhat.com>

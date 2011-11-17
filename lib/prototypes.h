@@ -297,6 +297,10 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv);
 /* salt.c */
 extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
 
+/* selinux.c */
+int set_seuser(const char *login_name, const char *seuser_name);
+int del_seuser(const char *login_name);
+
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);
 extern int change_uid (const struct passwd *info);
@@ -344,12 +348,6 @@ extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[
 /* spawn.c */
 extern int run_command (const char *cmd, const char *argv[],
                         /*@null@*/const char *envp[], /*@out@*/int *status);
-
-/* system.c */
-extern int safe_system (const char *command,
-                        const char *argv[],
-                        /*@null@*/const char *env[],
-                        bool ignore_stderr);
 
 /* strtoday.c */
 extern long strtoday (const char *);

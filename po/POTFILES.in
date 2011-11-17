@@ -17,6 +17,7 @@ lib/port.c
 lib/pwauth.c
 lib/pwio.c
 lib/pwmem.c
+lib/selinux.c
 lib/sgetgrent.c
 lib/sgetpwent.c
 lib/sgetspent.c

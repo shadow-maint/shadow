@@ -74,6 +74,7 @@
 #define E_USER_BUSY	8	/* user currently logged in */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't remove home directory */
+#define E_SE_UPDATE	14	/* can't update SELinux user mapping */
 
 /*
  * Global variables
@@ -87,6 +88,7 @@ static char *user_home;
 
 static bool fflg = false;
 static bool rflg = false;
+static bool Zflg = false;
 
 static bool is_shadow_pwd;
 
@@ -134,6 +136,9 @@ static void usage (int status)
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --remove                  remove home directory and mail spool\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+#ifdef WITH_SELINUX
+	(void) fputs (_("  -Z, --selinux-user            remove any SELinux user mapping for the user\n"), usageout);
+#endif				/* WITH_SELINUX */
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -870,13 +875,21 @@ int main (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"force",  no_argument,       NULL, 'f'},
-			{"help",   no_argument,       NULL, 'h'},
-			{"remove", no_argument,       NULL, 'r'},
-			{"root",   required_argument, NULL, 'R'},
+			{"force",        no_argument,       NULL, 'f'},
+			{"help",         no_argument,       NULL, 'h'},
+			{"remove",       no_argument,       NULL, 'r'},
+			{"root",         required_argument, NULL, 'R'},
+#ifdef WITH_SELINUX
+			{"selinux-user", no_argument,       NULL, 'Z'},
+#endif				/* WITH_SELINUX */
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c = getopt_long (argc, argv, "fhrR:",
+		while ((c = getopt_long (argc, argv,
+#ifdef WITH_SELINUX             
+		                         "fhrR:Z",
+#else				/* !WITH_SELINUX */
+		                         "fhrR:",
+#endif				/* !WITH_SELINUX */
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'f':	/* force remove even if not owned by user */
@@ -890,6 +903,19 @@ int main (int argc, char **argv)
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
+#ifdef WITH_SELINUX             
+			case 'Z':
+				if (is_selinux_enabled () > 0) {
+					Zflg = true;
+				} else {
+					fprintf (stderr,
+					         _("%s: -Z requires SELinux enabled kernel\n"),
+					         Prog);
+
+					exit (E_BAD_ARG);
+				}
+				break;
+#endif				/* WITH_SELINUX */
 			default:
 				usage (E_USAGE);
 			}
@@ -1091,14 +1117,18 @@ int main (int argc, char **argv)
 #endif				/* WITH_AUDIT */
 
 #ifdef WITH_SELINUX
-	if (is_selinux_enabled () > 0) {
-		const char *args[5];
-		args[0] = "/usr/sbin/semanage";
-		args[1] = "login";
-		args[2] = "-d";
-		args[3] = user_name;
-		args[4] = NULL;
-		safe_system (args[0], args, NULL, true);
+	if (Zflg) {
+		if (del_seuser (user_name) != 0) {
+			fprintf (stderr,
+			         _("%s: warning: the user name %s to SELinux user mapping removal failed.\n"),
+			         Prog, user_name);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "removing SELinux user mapping",
+			              user_name, (unsigned int) user_id, 0);
+#endif				/* WITH_AUDIT */
+			fail_exit (E_SE_UPDATE);
+		}
 	}
 #endif				/* WITH_SELINUX */
 

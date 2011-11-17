@@ -85,6 +85,7 @@
 #define E_GRP_UPDATE	10	/* can't update group file */
 /* #define E_NOSPACE	11	   insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
+#define E_SE_UPDATE	13	/* can't update SELinux user mapping */
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 /*
  * Global variables
@@ -105,7 +106,7 @@ static char *user_newhome;
 static char *user_shell;
 #ifdef WITH_SELINUX
 static const char *user_selinux = "";
-#endif
+#endif				/* WITH_SELINUX */
 static char *user_newshell;
 static long user_expire;
 static long user_newexpire;
@@ -154,10 +155,6 @@ static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
 static int get_groups (char *);
 static /*@noreturn@*/void usage (int status);
 static void new_pwent (struct passwd *);
-#ifdef WITH_SELINUX
-static void selinux_update_mapping (void);
-#endif
-
 static void new_spent (struct spwd *);
 static /*@noreturn@*/void fail_exit (int);
 static void update_group (void);
@@ -338,8 +335,8 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -u, --uid UID                 new UID for the user account\n"), usageout);
 	(void) fputs (_("  -U, --unlock                  unlock the user account\n"), usageout);
 #ifdef WITH_SELINUX
-	(void) fputs (_("  -Z, --selinux-user            new SELinux user mapping for the user account\n"), usageout);
-#endif
+	(void) fputs (_("  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"), usageout);
+#endif				/* WITH_SELINUX */
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -894,15 +891,15 @@ static void process_flags (int argc, char **argv)
 			{"unlock",       no_argument,       NULL, 'U'},
 #ifdef WITH_SELINUX
 			{"selinux-user", required_argument, NULL, 'Z'},
-#endif
+#endif				/* WITH_SELINUX */
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
 			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:UZ:",
-#else
+#else				/* !WITH_SELINUX */
 			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:U",
-#endif
+#endif				/* !WITH_SELINUX */
 			                 long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
@@ -1033,7 +1030,7 @@ static void process_flags (int argc, char **argv)
 					exit (E_BAD_ARG);
 				}
 				break;
-#endif
+#endif				/* WITH_SELINUX */
 			default:
 				usage (E_USAGE);
 			}
@@ -1175,7 +1172,7 @@ static void process_flags (int argc, char **argv)
 	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg
 #ifdef WITH_SELINUX
 	      || Zflg
-#endif
+#endif				/* WITH_SELINUX */
 	)) {
 		fprintf (stderr, _("%s: no changes\n"), Prog);
 		exit (E_SUCCESS);
@@ -1893,10 +1890,20 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef WITH_SELINUX
-	if (Zflg) {
-		selinux_update_mapping ();
+	if (Zflg && *user_selinux) {
+		if (set_seuser (user_name, user_selinux) != 0) {
+			fprintf (stderr,
+			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
+			         Prog, user_name, user_selinux);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "modifying User mapping ",
+			              user_name, (unsigned int) user_id, 0);
+#endif				/* WITH_AUDIT */
+			fail_exit (E_SE_UPDATE);
+		}
 	}
-#endif
+#endif				/* WITH_SELINUX */
 
 	if (mflg) {
 		move_home ();
@@ -1906,7 +1913,7 @@ int main (int argc, char **argv)
 	if (lflg || uflg) {
 		move_mailbox ();
 	}
-#endif
+#endif				/* NO_MOVE_MAILBOX */
 
 	if (uflg) {
 		update_lastlog ();
@@ -1939,37 +1946,4 @@ int main (int argc, char **argv)
 
 	return E_SUCCESS;
 }
-
-#ifdef WITH_SELINUX
-static void selinux_update_mapping (void) {
-	const char *argv[7];
-
-	if (is_selinux_enabled () <= 0) {
-		return;
-	}
-
-	if ('\0' != *user_selinux) {
-		argv[0] = "/usr/sbin/semanage";
-		argv[1] = "login";
-		argv[2] = "-m";
-		argv[3] = "-s";
-		argv[4] = user_selinux;
-		argv[5] = user_name;
-		argv[6] = NULL;
-		if (safe_system (argv[0], argv, NULL, true) != 0) {
-			argv[2] = "-a";
-			if (safe_system (argv[0], argv, NULL, false) != 0) {
-				fprintf (stderr,
-				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
-				         Prog, user_name, user_selinux);
-#ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "modifying User mapping ",
-				              user_name, (unsigned int) user_id, 0);
-#endif
-			}
-		}
-	}
-}
-#endif
 

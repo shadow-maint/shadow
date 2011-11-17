@@ -112,7 +112,7 @@ static const char *user_shell = "";
 static const char *create_mail_spool = "";
 #ifdef WITH_SELINUX
 static const char *user_selinux = "";
-#endif
+#endif				/* WITH_SELINUX */
 
 static long user_expire = -1;
 static bool is_shadow_pwd;
@@ -145,6 +145,9 @@ static bool
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     rflg = false,		/* create a system account */
     sflg = false,		/* shell program for new account */
+#ifdef WITH_SELINUX
+    Zflg = false,		/* new selinux user */
+#endif				/* WITH_SELINUX */
     uflg = false,		/* specify user ID for new account */
     Uflg = false;		/* create a group having the same name as the user */
 
@@ -164,6 +167,7 @@ static bool home_added = false;
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
 #define	E_MAIL_SPOOL	13	/* can't create mail spool */
+#define E_SE_UPDATE     14      /* can't update SELinux user mapping */
 
 #define DGROUP			"GROUP="
 #define DHOME			"HOME="
@@ -181,9 +185,6 @@ static int set_defaults (void);
 static int get_groups (char *);
 static void usage (int status);
 static void new_pwent (struct passwd *);
-#ifdef WITH_SELINUX
-static void selinux_update_mapping (void);
-#endif
 
 static long scale_age (long);
 static void new_spent (struct spwd *);
@@ -730,7 +731,7 @@ static void usage (int status)
 	(void) fputs (_("  -U, --user-group              create a group with the same name as the user\n"), usageout);
 #ifdef WITH_SELINUX
 	(void) fputs (_("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"), usageout);
-#endif
+#endif				/* WITH_SELINUX */
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -1004,15 +1005,15 @@ static void process_flags (int argc, char **argv)
 			{"user-group",     no_argument,       NULL, 'U'},
 #ifdef WITH_SELINUX
 			{"selinux-user",   required_argument, NULL, 'Z'},
-#endif
+#endif				/* WITH_SELINUX */
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
 		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:UZ:",
-#else
+#else				/* !WITH_SELINUX */
 		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:U",
-#endif
+#endif				/* !WITH_SELINUX */
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -1213,6 +1214,7 @@ static void process_flags (int argc, char **argv)
 			case 'Z':
 				if (is_selinux_enabled () > 0) {
 					user_selinux = optarg;
+					Zflg = true;
 				} else {
 					fprintf (stderr,
 					         _("%s: -Z requires SELinux enabled kernel\n"),
@@ -1221,7 +1223,7 @@ static void process_flags (int argc, char **argv)
 					exit (E_BAD_ARG);
 				}
 				break;
-#endif
+#endif				/* WITH_SELINUX */
 			default:
 				usage (E_USAGE);
 			}
@@ -1745,32 +1747,6 @@ static void usr_update (void)
 	}
 }
 
-#ifdef WITH_SELINUX
-static void selinux_update_mapping (void) {
-	if (is_selinux_enabled () <= 0) return;
-
-	if ('\0' != *user_selinux) { /* must be done after passwd write() */
-		const char *argv[7];
-		argv[0] = "/usr/sbin/semanage";
-		argv[1] = "login";
-		argv[2] = "-a";
-		argv[3] = "-s";
-		argv[4] = user_selinux;
-		argv[5] = user_name;
-		argv[6] = NULL;
-		if (safe_system (argv[0], argv, NULL, false) != 0) {
-			fprintf (stderr,
-			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
-			         Prog, user_name, user_selinux);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "adding SELinux user mapping",
-			              user_name, (unsigned int) user_id, 0);
-#endif
-		}
-	}
-}
-#endif
 /*
  * create_home - create the user's home directory
  *
@@ -2082,8 +2058,20 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_SELINUX
-	selinux_update_mapping ();
-#endif
+	if (Zflg && ('\0' != *user_selinux)) {
+		if (set_seuser (user_name, user_selinux) != 0) {
+			fprintf (stderr,
+			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
+			         Prog, user_name, user_selinux);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding SELinux user mapping",
+			              user_name, (unsigned int) user_id, 0);
+#endif				/* WITH_AUDIT */
+			fail_exit (E_SE_UPDATE);
+		}
+	}
+#endif				/* WITH_SELINUX */
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
