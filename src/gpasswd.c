@@ -941,6 +941,7 @@ static void change_passwd (struct group *gr)
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
+		gr->gr_passwd = SHADOW_PASSWD_STRING;
 		sg->sg_passwd = cp;
 	} else
 #endif
@@ -1041,20 +1042,30 @@ int main (int argc, char **argv)
 	 * field to a "".
 	 */
 	if (rflg) {
-		grent.gr_passwd = "";	/* XXX warning: const */
 #ifdef SHADOWGRP
-		sgent.sg_passwd = "";	/* XXX warning: const */
-#endif
+		if (is_shadowgrp) {
+			grent.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+			sgent.sg_passwd = "";	/* XXX warning: const */
+		} else
+#endif				/* SHADOWGRP */
+		{
+			grent.gr_passwd = "";	/* XXX warning: const */
+		}
 		goto output;
 	} else if (Rflg) {
 		/*
 		 * Same thing for restricting the group. Set the password
 		 * field to "!".
 		 */
-		grent.gr_passwd = "!";	/* XXX warning: const */
 #ifdef SHADOWGRP
-		sgent.sg_passwd = "!";	/* XXX warning: const */
-#endif
+		if (is_shadowgrp) {
+			grent.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+			sgent.sg_passwd = "!";	/* XXX warning: const */
+		} else
+#endif				/* SHADOWGRP */
+		{
+			grent.gr_passwd = "!";	/* XXX warning: const */
+		}
 		goto output;
 	}
 
