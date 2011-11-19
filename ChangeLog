@@ -12,6 +12,8 @@
 	parameter.
 	* src/userdel.c: Last audit_logger parameter is a
 	shadow_audit_result, use SHADOW_AUDIT_FAILURE instead of 0.
+	* lib/selinux.c: vasprintf requires _GNU_SOURCE to be defined
+	before including stdio.h.
 
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 

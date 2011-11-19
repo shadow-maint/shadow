@@ -34,6 +34,7 @@
 
 #include "defines.h"
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdarg.h>
 #include <selinux/selinux.h>
