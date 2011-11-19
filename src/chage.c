@@ -208,7 +208,7 @@ static int new_fields (void)
 	if (-1 == lstchgdate) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, lstchgdate * SCALE);
+		date_to_str (buf, sizeof buf, (time_t) lstchgdate * SCALE);
 	}
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
@@ -239,7 +239,7 @@ static int new_fields (void)
 	if (-1 == expdate) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, expdate * SCALE);
+		date_to_str (buf, sizeof buf, (time_t) expdate * SCALE);
 	}
 
 	change_field (buf, sizeof buf,
@@ -679,8 +679,8 @@ static void update_age (/*@null@*/const struct spwd *sp,
 		struct passwd pwent = *pw;
 
 		memzero (&spwent, sizeof spwent);
-		spwent.sp_namp = xstrdup (pw->pw_name);
-		spwent.sp_pwdp = xstrdup (pw->pw_passwd);
+		spwent.sp_namp = xstrdup (pwent.pw_name);
+		spwent.sp_pwdp = xstrdup (pwent.pw_passwd);
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
