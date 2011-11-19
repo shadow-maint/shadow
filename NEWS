@@ -456,7 +456,7 @@ shadow-4.1.0 -> shadow-4.1.1						02-04-2008
     faillog faster.
 - gpasswd
   * Fix failures when the gshadow file is not present.
-  * When a password is moved to the gshadow file, use "x" instead of "x"
+  * When a password is moved to the gshadow file, use "x" instead of "!"
     to indicate that the password is shadowed (consistency with grpconv).
   * Make sure the group and gshadow files are unlocked on exit.
 - groupadd
