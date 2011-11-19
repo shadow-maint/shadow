@@ -15,6 +15,11 @@
 	* lib/selinux.c: vasprintf requires _GNU_SOURCE to be defined
 	before including stdio.h.
 	* src/chage.c: Cast 3rd date_to_str parameter to a time_t
+	* src/passwd.c: Add missing cast.
+	* lib/commonio.c: Avoid multiple statements per line.
+	* lib/commonio.c: Ignore fclose return value when the file was
+	open read only or was not changed, or if an error is already
+	reported.
 
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 

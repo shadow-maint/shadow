@@ -611,7 +611,8 @@ int commonio_open (struct commonio_db *db, int mode)
 		return 0;
 	}
 
-	db->head = db->tail = NULL;
+	db->head = NULL;
+	db->tail = NULL;
 	db->cursor = NULL;
 	db->changed = false;
 
@@ -942,7 +943,7 @@ int commonio_close (struct commonio_db *db)
 	db->isopen = false;
 
 	if (!db->changed || db->readonly) {
-		fclose (db->fp);
+		(void) fclose (db->fp);
 		db->fp = NULL;
 		goto success;
 	}
@@ -954,7 +955,7 @@ int commonio_close (struct commonio_db *db)
 	memzero (&sb, sizeof sb);
 	if (NULL != db->fp) {
 		if (fstat (fileno (db->fp), &sb) != 0) {
-			fclose (db->fp);
+			(void) fclose (db->fp);
 			db->fp = NULL;
 			goto fail;
 		}

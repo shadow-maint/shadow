@@ -410,9 +410,11 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * Passwords may only be changed after sp_min time is up.
 	 */
 	if (sp->sp_lstchg > 0) {
-		time_t last, ok;
-		last = sp->sp_lstchg * SCALE;
-		ok = last + (sp->sp_min > 0 ? sp->sp_min * SCALE : 0);
+		time_t ok;
+		ok = (time_t) sp->sp_lstchg * SCALE;
+		if (sp->sp_min > 0) {
+			ok += (time_t) sp->sp_min * SCALE;
+		}
 
 		if (now < ok) {
 			(void) fprintf (stderr,
