@@ -71,8 +71,8 @@ static bool pw_locked = false;
 /* external identifiers */
 
 /* local function prototypes */
-static void fail_exit (int code);
-static void usage (int status);
+static /*@noreturn@*/void fail_exit (int code);
+static /*@noreturn@*/void usage (int status);
 static void new_fields (void);
 static bool shell_is_listed (const char *);
 static bool is_restricted_shell (const char *);
@@ -83,7 +83,7 @@ static void update_shell (const char *user, char *loginsh);
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static void fail_exit (int code)
+static /*@noreturn@*/void fail_exit (int code)
 {
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
@@ -101,7 +101,7 @@ static void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static void usage (int status)
+static /*@noreturn@*/void usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -217,7 +217,7 @@ static void process_flags (int argc, char **argv)
 		switch (c) {
 		case 'h':
 			usage (E_SUCCESS);
-			break;
+			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 's':

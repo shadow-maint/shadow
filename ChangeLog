@@ -1,5 +1,20 @@
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/root_flag.c, src/gpasswd.c, src/chsh.c: Add splint
+	annotations.
+	* src/pwconv.c, src/pwunconv.c, src/grpconv.c, src/grpunconv.c:
+	Ignore return value of spw_rewind, pw_rewind, sgr_rewind, and
+	gr_rewind.
+	* lib/commonio.h: Both head and tail cannot be owned. Set tail as
+	dependent.
+	* src/expiry.c: Ignore return value of expire ().
+	* src/expiry.c: The catch_signals function does not use its sig
+	parameter.
+	* src/userdel.c: Last audit_logger parameter is a
+	shadow_audit_result, use SHADOW_AUDIT_FAILURE instead of 0.
+
+2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: The fail_max field is a short, use a short also
 	for the max argument of setmax / setmax_one.
 	* src/faillog.c: Fail with an error message when faillog fails to

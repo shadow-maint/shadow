@@ -1125,7 +1125,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "removing SELinux user mapping",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
 			fail_exit (E_SE_UPDATE);
 		}

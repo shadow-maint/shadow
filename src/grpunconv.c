@@ -188,7 +188,7 @@ int main (int argc, char **argv)
 	/*
 	 * Update group passwords if non-shadow password is "x".
 	 */
-	gr_rewind ();
+	(void) gr_rewind ();
 	while ((gr = gr_next ()) != NULL) {
 		sg = sgr_locate (gr->gr_name);
 		if (   (NULL != sg)

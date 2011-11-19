@@ -187,7 +187,7 @@ int main (int argc, char **argv)
 		fail_exit (1);
 	}
 
-	pw_rewind ();
+	(void) pw_rewind ();
 	while ((pw = pw_next ()) != NULL) {
 		spwd = spw_locate (pw->pw_name);
 		if (NULL == spwd) {

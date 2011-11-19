@@ -36,6 +36,7 @@
 #include <assert.h>
 #include "defines.h"
 #include "prototypes.h"
+/*@-exitarg@*/
 #include "exitcodes.h"
 
 static void change_root (const char* newroot);

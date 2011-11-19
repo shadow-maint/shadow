@@ -49,7 +49,7 @@ const char *Prog;
 static bool cflg = false;
 
 /* local function prototypes */
-static RETSIGTYPE catch_signals (int);
+static RETSIGTYPE catch_signals (unused int sig);
 static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 
@@ -203,7 +203,7 @@ int main (int argc, char **argv)
 	 * do.
 	 * It won't return unless the account is unexpired.
 	 */
-	expire (pwd, spwd);
+	(void) expire (pwd, spwd);
 
 	return E_SUCCESS;
 }

@@ -222,7 +222,7 @@ int main (int argc, char **argv)
 	/*
 	 * Remove /etc/shadow entries for users not in /etc/passwd.
 	 */
-	spw_rewind ();
+	(void) spw_rewind ();
 	while ((sp = spw_next ()) != NULL) {
 		if (pw_locate (sp->sp_namp) != NULL) {
 			continue;
@@ -243,7 +243,7 @@ int main (int argc, char **argv)
 	 * Update shadow entries which don't have "x" as pw_passwd. Add any
 	 * missing shadow entries.
 	 */
-	pw_rewind ();
+	(void) pw_rewind ();
 	while ((pw = pw_next ()) != NULL) {
 		sp = spw_locate (pw->pw_name);
 		if (NULL != sp) {

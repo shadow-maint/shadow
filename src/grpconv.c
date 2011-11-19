@@ -183,7 +183,7 @@ int main (int argc, char **argv)
 	/*
 	 * Remove /etc/gshadow entries for groups not in /etc/group.
 	 */
-	sgr_rewind ();
+	(void) sgr_rewind ();
 	while ((sg = sgr_next ()) != NULL) {
 		if (gr_locate (sg->sg_name) != NULL) {
 			continue;
@@ -204,7 +204,7 @@ int main (int argc, char **argv)
 	 * Update shadow group passwords if non-shadow password is not "x".
 	 * Add any missing shadow group entries.
 	 */
-	gr_rewind ();
+	(void) gr_rewind ();
 	while ((gr = gr_next ()) != NULL) {
 		sg = sgr_locate (gr->gr_name);
 		if (NULL != sg) {

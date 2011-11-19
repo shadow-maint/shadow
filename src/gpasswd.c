@@ -113,14 +113,14 @@ static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
 static void log_gpasswd_failure (const char *suffix);
-static void log_gpasswd_failure_system (unused void *arg);
-static void log_gpasswd_failure_group (unused void *arg);
+static void log_gpasswd_failure_system (/*@null@*/unused void *arg);
+static void log_gpasswd_failure_group (/*@null@*/unused void *arg);
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (unused void *arg);
+static void log_gpasswd_failure_gshadow (/*@null@*/unused void *arg);
 #endif
 static void log_gpasswd_success (const char *suffix);
-static void log_gpasswd_success_system (unused void *arg);
-static void log_gpasswd_success_group (unused void *arg);
+static void log_gpasswd_success_system (/*@null@*/unused void *arg);
+static void log_gpasswd_success_group (/*@null@*/unused void *arg);
 
 /*
  * usage - display usage message
@@ -185,9 +185,10 @@ static RETSIGTYPE catch_signals (int killed)
  */
 static bool is_valid_user_list (const char *users)
 {
-	char *username, *end;
+	const char *username;
+	char *end;
 	bool is_valid = true;
-	char *tmpusers = xstrdup (users);
+	/*@owned@*/char *tmpusers = xstrdup (users);
 
 	for (username = tmpusers;
 	     (NULL != username) && ('\0' != *username);
