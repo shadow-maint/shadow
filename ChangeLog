@@ -1,5 +1,12 @@
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: The fail_max field is a short, use a short also
+	for the max argument of setmax / setmax_one.
+	* src/faillog.c: Fail with an error message when faillog fails to
+	write to the faillog database.
+
+2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/gpasswd.1.xml: Document the difference between the -r and -R
 	options.
 

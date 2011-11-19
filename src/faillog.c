@@ -52,8 +52,8 @@ static /*@noreturn@*/void usage (int status);
 static void print_one (/*@null@*/const struct passwd *pw, bool force);
 static void set_locktime (long locktime);
 static bool set_locktime_one (uid_t uid, long locktime);
-static void setmax (int max);
-static bool setmax_one (uid_t uid, int max);
+static void setmax (short max);
+static bool setmax_one (uid_t uid, short max);
 static void print (void);
 static bool reset_one (uid_t uid);
 static void reset (void);
@@ -329,7 +329,7 @@ static void reset (void)
  *
  * This returns a boolean indicating if an error occurred.
  */
-static bool setmax_one (uid_t uid, int max)
+static bool setmax_one (uid_t uid, short max)
 {
 	off_t offset;
 	struct faillog fl;
@@ -381,7 +381,7 @@ static bool setmax_one (uid_t uid, int max)
 	return true;
 }
 
-static void setmax (int max)
+static void setmax (short max)
 {
 	if (uflg && has_umin && has_umax && (umin==umax)) {
 		if (setmax_one ((uid_t)umin, max)) {
@@ -476,10 +476,10 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	}
 
 	if (locktime == fl.fail_locktime) {
-		/* If the max is already set to the right value, do not
+		/* If the locktime is already set to the right value, do not
 		 * write in the file.
 		 * This avoids writing 0 when no entries were present for
-		 * the user and the max argument is 0.
+		 * the user and the locktime argument is 0.
 		 */
 		return false;
 	}
@@ -561,7 +561,7 @@ static void set_locktime (long locktime)
 int main (int argc, char **argv)
 {
 	long fail_locktime;
-	long fail_max;
+	short fail_max;
 	long days;
 
 	/*
@@ -608,14 +608,19 @@ int main (int argc, char **argv)
 				lflg = true;
 				break;
 			case 'm':
-				if (getlong (optarg, &fail_max) == 0) {
+			{
+				long int lmax;
+				if (   (getlong (optarg, &lmax) == 0)
+				    || ((long int)(short) lmax != lmax)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
+				fail_max = (short) lmax;
 				mflg = true;
 				break;
+			}
 			case 'r':
 				rflg = true;
 				break;
@@ -716,7 +721,20 @@ int main (int argc, char **argv)
 		print ();
 	}
 
-	fclose (fail);
+	if (lflg || mflg || rflg) {
+		if (   (ferror (fail) != 0)
+		    || (fflush (fail) != 0)
+		    || (fsync  (fileno (fail)) != 0)
+		    || (fclose (fail) != 0)) {
+			fprintf (stderr,
+			         _("%s: Failed to write %s: %s\n"),
+			         Prog, FAILLOG_FILE, strerror (errno));
+			(void) fclose (fail);
+			errors = true;
+		}
+	} else {
+		(void) fclose (fail);
+	}
 
 	exit (errors ? E_NOPERM : E_SUCCESS);
 }
