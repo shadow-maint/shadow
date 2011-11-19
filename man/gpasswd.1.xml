@@ -180,6 +180,7 @@
 	<listitem>
 	  <para>
 	    Remove the password from the named <replaceable>group</replaceable>.
+	    The group password will be empty.
 	    Only group members will be allowed to use
 	    <command>newgrp</command> to join the named
 	    <replaceable>group</replaceable>.
@@ -195,7 +196,8 @@
 	<listitem>
 	  <para>
 	    Restrict the access to the named <replaceable>group</replaceable>.
-	    Only group members will be allowed to use
+	    The group password is set to "!".
+	    Only group members with a password will be allowed to use
 	    <command>newgrp</command> to join the named
 	    <replaceable>group</replaceable>.
 	  </para>

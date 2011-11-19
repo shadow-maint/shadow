@@ -1,5 +1,10 @@
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gpasswd.1.xml: Document the difference between the -r and -R
+	options.
+
+2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/useradd.8.xml, man/groupadd.8.xml, man/usermod.8.xml,
 	man/groupmod.8.xml: Avoid hardcoded values, and reference instead
 	the configuration options (e.g. UID_MIN)
