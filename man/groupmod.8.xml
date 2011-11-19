@@ -86,8 +86,7 @@
 	    The value of
 	    <replaceable>GID</replaceable> must be a non-negative decimal
 	    integer. This value must be unique, unless the
-	    <option>-o</option> option is used. Values between 0 and 999 are
-	    typically reserved for system groups.
+	    <option>-o</option> option is used.
 	  </para>
 	  <para>
 	    Users who use the group as primary group will be updated to
@@ -98,6 +97,12 @@
 	    old group ID and must continue to belong to
 	    <replaceable>GROUP</replaceable>, must have their group ID
 	    changed manually.
+	  </para>
+	  <para>
+	    No checks will be performed with regard to the
+	    <option>GID_MIN</option>, <option>GID_MAX</option>,
+	    <option>SYS_GID_MIN</option>, or <option>SYS_GID_MAX</option>
+	    from <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -196,6 +201,12 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
 	  <para>User account information.</para>
@@ -275,6 +286,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>

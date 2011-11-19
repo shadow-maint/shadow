@@ -34,5 +34,9 @@
       Range of user IDs used for the creation of system users by
       <command>useradd</command> or <command>newusers</command>.
     </para>
+    <para>
+      The default value for <option>SYS_UID_MIN</option> (resp.
+      <option>SYS_UID_MAX</option>) is 101 (resp. <option>UID_MIN</option>-1).
+    </para>
   </listitem>
 </varlistentry>

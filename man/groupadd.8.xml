@@ -99,9 +99,12 @@
 	  <para>The numerical value of the group's ID. This value must be
 	    unique, unless the <option>-o</option> option is used. The value
 	    must be non-negative. The default is to use the smallest ID
-	    value greater than 999 and greater than every other group.
-	    Values between 0 and 999 are typically reserved for system
-	    accounts.
+	    value greater than or equal to <option>GID_MIN</option> and
+	    greater than every other group.
+	  </para>
+	  <para>
+	    See also the <option>-r</option> option and the
+	    <option>GID_MAX</option> description.
 	  </para>
 	</listitem>
       </varlistentry>

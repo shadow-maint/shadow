@@ -1,4 +1,15 @@
-2011-11-16  Nicolas François  <nicolas.francois@centraliens.net>
+2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/useradd.8.xml, man/groupadd.8.xml, man/usermod.8.xml,
+	man/groupmod.8.xml: Avoid hardcoded values, and reference instead
+	the configuration options (e.g. UID_MIN)
+	* man/groupmod.8.xml, man/usermod.8.xml: Add missing reference to
+	login.defs
+	* man/login.defs.d/UID_MAX.xml, man/login.defs.d/SYS_UID_MAX.xml,
+	man/login.defs.d/GID_MAX.xml, man/login.defs.d/SYS_GID_MAX.xml:
+	Document the default values.
+
+2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/gpasswd.c: Change of group password enforces gshadow
 	password. Set /etc/group password to "x".
