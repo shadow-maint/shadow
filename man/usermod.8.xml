@@ -377,9 +377,12 @@
 	</term>
 	<listitem>
 	  <para>
-	    The SELinux user for the user's login. The default is to leave
-	    this field the blank, which causes the system to select the
-	    default SELinux user.
+	    The new SELinux user for the user's login.
+	  </para>
+	  <para>
+	    A blank <replaceable>SEUSER</replaceable> will remove the
+	    SELinux user mapping for user <replaceable>LOGIN</replaceable>
+	    (if any).
 	  </para>
 	</listitem>
       </varlistentry>

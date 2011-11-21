@@ -111,7 +111,7 @@ static const char *user_home = "";
 static const char *user_shell = "";
 static const char *create_mail_spool = "";
 #ifdef WITH_SELINUX
-static const char *user_selinux = "";
+static /*@notnull@*/const char *user_selinux = "";
 #endif				/* WITH_SELINUX */
 
 static long user_expire = -1;
@@ -145,11 +145,12 @@ static bool
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     rflg = false,		/* create a system account */
     sflg = false,		/* shell program for new account */
-#ifdef WITH_SELINUX
-    Zflg = false,		/* new selinux user */
-#endif				/* WITH_SELINUX */
     uflg = false,		/* specify user ID for new account */
     Uflg = false;		/* create a group having the same name as the user */
+
+#ifdef WITH_SELINUX
+#define Zflg ('\0' != *user_selinux)
+#endif				/* WITH_SELINUX */
 
 static bool home_added = false;
 
@@ -1214,7 +1215,6 @@ static void process_flags (int argc, char **argv)
 			case 'Z':
 				if (is_selinux_enabled () > 0) {
 					user_selinux = optarg;
-					Zflg = true;
 				} else {
 					fprintf (stderr,
 					         _("%s: -Z requires SELinux enabled kernel\n"),
@@ -2058,7 +2058,7 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_SELINUX
-	if (Zflg && ('\0' != *user_selinux)) {
+	if (Zflg) {
 		if (set_seuser (user_name, user_selinux) != 0) {
 			fprintf (stderr,
 			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),

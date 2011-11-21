@@ -1,3 +1,9 @@
+2011-11-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/usermod.c, man/usermod.8.xml: usermod -Z "" removes the
+	SELinux user mapping for the modified user.
+	* src/useradd.c: Zflg is #defined as user_selinux non empty.
+
 2011-11-21  Peter Vrabec  <pvrabec@redhat.com>
 
 	* libmisc/copydir.c: Ignore errors to copy ACLs if the operation

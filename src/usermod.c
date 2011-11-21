@@ -1890,17 +1890,33 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef WITH_SELINUX
-	if (Zflg && *user_selinux) {
-		if (set_seuser (user_name, user_selinux) != 0) {
-			fprintf (stderr,
-			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
-			         Prog, user_name, user_selinux);
+	if (Zflg) {
+		if ('\0' != *user_selinux) {
+			if (set_seuser (user_name, user_selinux) != 0) {
+				fprintf (stderr,
+				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
+				         Prog, user_name, user_selinux);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "modifying User mapping ",
-			              user_name, (unsigned int) user_id, 0);
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "modifying User mapping ",
+				              user_name, (unsigned int) user_id,
+				              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
-			fail_exit (E_SE_UPDATE);
+				fail_exit (E_SE_UPDATE);
+			}
+		} else {
+			if (del_seuser (user_name) != 0) {
+				fprintf (stderr,
+				         _("%s: warning: the user name %s to SELinux user mapping removal failed.\n"),
+				         Prog, user_name);
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_ADD_USER, Prog,
+				              "removing SELinux user mapping",
+				              user_name, (unsigned int) user_id,
+				              SHADOW_AUDIT_FAILURE);
+#endif				/* WITH_AUDIT */
+				fail_exit (E_SE_UPDATE);
+			}
 		}
 	}
 #endif				/* WITH_SELINUX */

@@ -507,7 +507,7 @@
 	  <para>
 	    The SELinux user for the user's login. The default is to leave this
 	    field blank, which causes the system to select the default SELinux
-	     user.
+	    user.
 	  </para>
 	</listitem>
       </varlistentry>
