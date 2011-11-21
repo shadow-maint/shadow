@@ -1,3 +1,8 @@
+2011-11-21  Peter Vrabec  <pvrabec@redhat.com>
+
+	* libmisc/copydir.c: Ignore errors to copy ACLs if the operation
+	is not supported.
+
 2011-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/root_flag.c, src/gpasswd.c, src/chsh.c: Add splint

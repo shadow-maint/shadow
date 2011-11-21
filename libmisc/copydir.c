@@ -183,6 +183,7 @@ static void error_acl (struct error_context *ctx, const char *fmt, ...)
 	/* ignore the case when destination does not support ACLs 
 	 * or extended attributes */
 	if (ENOTSUP == errno) {
+		errno = 0;
 		return;
 	}
 
@@ -555,7 +556,7 @@ static int copy_dir (const char *src, const char *dst,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_file (src, dst, &ctx) != 0)
-	        && (errno != ENOTSUP))
+	        && (errno != 0))
 #else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode) != 0)
 #endif				/* !WITH_ACL */
@@ -567,7 +568,9 @@ static int copy_dir (const char *src, const char *dst,
 	 * file systems with and without ACL support needs some
 	 * additional logic so that no unexpected permissions result.
 	 */
-	    || (!reset_selinux && (attr_copy_file (src, dst, NULL, &ctx) != 0))
+	    || (   !reset_selinux
+	        && (attr_copy_file (src, dst, NULL, &ctx) != 0)
+	        && (errno != 0))
 #endif				/* WITH_ATTR */
 	    || (copy_tree (src, dst, false, reset_selinux,
 	                   old_uid, new_uid, old_gid, new_gid) != 0)
@@ -754,7 +757,7 @@ static int copy_special (const char *src, const char *dst,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_file (src, dst, &ctx) != 0)
-	        && (errno != ENOTSUP))
+	        && (errno != 0))
 #else				/* !WITH_ACL */
 	    || (chmod (dst, statp->st_mode & 07777) != 0)
 #endif				/* !WITH_ACL */
@@ -766,7 +769,9 @@ static int copy_special (const char *src, const char *dst,
 	 * file systems with and without ACL support needs some
 	 * additional logic so that no unexpected permissions result.
 	 */
-	    || (!reset_selinux && (attr_copy_file (src, dst, NULL, &ctx) != 0))
+	    || (   !reset_selinux
+	        && (attr_copy_file (src, dst, NULL, &ctx) != 0)
+	        && (errno != 0))
 #endif				/* WITH_ATTR */
 	    || (utimes (dst, mt) != 0)) {
 		err = -1;
@@ -812,7 +817,7 @@ static int copy_file (const char *src, const char *dst,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_fd (src, ifd, dst, ofd, &ctx) != 0)
-	        && (errno != ENOTSUP))
+	        && (errno != 0))
 #else				/* !WITH_ACL */
 	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
 #endif				/* !WITH_ACL */
@@ -824,7 +829,9 @@ static int copy_file (const char *src, const char *dst,
 	 * file systems with and without ACL support needs some
 	 * additional logic so that no unexpected permissions result.
 	 */
-	    || (!reset_selinux && (attr_copy_fd (src, ifd, dst, ofd, NULL, &ctx) != 0))
+	    || (   !reset_selinux
+	        && (attr_copy_fd (src, ifd, dst, ofd, NULL, &ctx) != 0)
+	        && (errno != 0))
 #endif				/* WITH_ATTR */
 	   ) {
 		(void) close (ifd);
