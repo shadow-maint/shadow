@@ -86,9 +86,11 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
 static void usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fputs (_("Usage: vipw [options]\n"
-	                "\n"
-	                "Options:\n"), usageout);
+	(void) fprintf (stderr,
+	                _("Usage: %s [options]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
 	(void) fputs (_("  -g, --group                   edit group database\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -p, --passwd                  edit passwd database\n"), usageout);
