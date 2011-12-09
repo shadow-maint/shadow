@@ -55,10 +55,6 @@
 #include <attr/libattr.h>
 #endif				/* WITH_ATTR */
 
-#ifdef WITH_SELINUX
-static bool selinux_checked = false;
-static bool selinux_enabled;
-#endif				/* WITH_SELINUX */
 
 static /*@null@*/const char *src_orig;
 static /*@null@*/const char *dst_orig;
@@ -111,66 +107,6 @@ static int lchown_if_needed (const char *dst, const struct stat *statp,
 static int fchown_if_needed (int fdst, const struct stat *statp,
                              uid_t old_uid, uid_t new_uid,
                              gid_t old_gid, gid_t new_gid);
-
-#ifdef WITH_SELINUX
-/*
- * set_selinux_file_context - Set the security context before any file or
- *                            directory creation.
- *
- *	set_selinux_file_context () should be called before any creation
- *	of file, symlink, directory, ...
- *
- *	Callers may have to Reset SELinux to create files with default
- *	contexts with reset_selinux_file_context
- */
-int set_selinux_file_context (const char *dst_name)
-{
-	/*@null@*/security_context_t scontext = NULL;
-
-	if (!selinux_checked) {
-		selinux_enabled = is_selinux_enabled () > 0;
-		selinux_checked = true;
-	}
-
-	if (selinux_enabled) {
-		/* Get the default security context for this file */
-		if (matchpathcon (dst_name, 0, &scontext) < 0) {
-			if (security_getenforce () != 0) {
-				return 1;
-			}
-		}
-		/* Set the security context for the next created file */
-		if (setfscreatecon (scontext) < 0) {
-			if (security_getenforce () != 0) {
-				return 1;
-			}
-		}
-		freecon (scontext);
-	}
-	return 0;
-}
-
-/*
- * reset_selinux_file_context - Reset the security context to the default
- *                              policy behavior
- *
- *	reset_selinux_file_context () should be called after the context
- *	was changed with set_selinux_file_context ()
- */
-int reset_selinux_file_context (void)
-{
-	if (!selinux_checked) {
-		selinux_enabled = is_selinux_enabled () > 0;
-		selinux_checked = true;
-	}
-	if (selinux_enabled) {
-		if (setfscreatecon (NULL) != 0) {
-			return 1;
-		}
-	}
-	return 0;
-}
-#endif				/* WITH_SELINUX */
 
 #if defined(WITH_ACL) || defined(WITH_ATTR)
 /*

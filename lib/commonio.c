@@ -45,9 +45,6 @@
 #include <stdio.h>
 #include <signal.h>
 #include "nscd.h"
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#endif				/* WITH_SELINUX */
 #ifdef WITH_TCB
 #include <tcb.h>
 #endif				/* WITH_TCB */
@@ -652,15 +649,6 @@ int commonio_open (struct commonio_db *db, int mode)
 	/* Do not inherit fd in spawned processes (e.g. nscd) */
 	fcntl (fileno (db->fp), F_SETFD, FD_CLOEXEC);
 
-#ifdef WITH_SELINUX
-	db->scontext = NULL;
-	if ((is_selinux_enabled () > 0) && (!db->readonly)) {
-		if (fgetfilecon (fileno (db->fp), &db->scontext) < 0) {
-			goto cleanup_errno;
-		}
-	}
-#endif				/* WITH_SELINUX */
-
 	buflen = BUFLEN;
 	buf = (char *) malloc (buflen);
 	if (NULL == buf) {
@@ -745,12 +733,6 @@ int commonio_open (struct commonio_db *db, int mode)
       cleanup_errno:
 	saved_errno = errno;
 	free_linked_list (db);
-#ifdef WITH_SELINUX
-	if (db->scontext != NULL) {
-		freecon (db->scontext);
-		db->scontext = NULL;
-	}
-#endif				/* WITH_SELINUX */
 	fclose (db->fp);
 	db->fp = NULL;
 	errno = saved_errno;
@@ -932,10 +914,6 @@ int commonio_close (struct commonio_db *db)
 	int errors = 0;
 	struct stat sb;
 
-#ifdef WITH_SELINUX
-	/*@null@*/security_context_t old_context = NULL;
-#endif				/* WITH_SELINUX */
-
 	if (!db->isopen) {
 		errno = EINVAL;
 		return 0;
@@ -959,23 +937,17 @@ int commonio_close (struct commonio_db *db)
 			db->fp = NULL;
 			goto fail;
 		}
-#ifdef WITH_SELINUX
-		if (db->scontext != NULL) {
-			if (getfscreatecon (&old_context) < 0) {
-				errors++;
-				goto fail;
-			}
-			if (setfscreatecon (db->scontext) < 0) {
-				errors++;
-				goto fail;
-			}
-		}
-#endif				/* WITH_SELINUX */
+
 		/*
 		 * Create backup file.
 		 */
 		snprintf (buf, sizeof buf, "%s-", db->filename);
 
+#ifdef WITH_SELINUX
+		if (set_selinux_file_context (buf) != 0) {
+			errors++;
+		}
+#endif
 		if (create_backup (buf, db->fp) != 0) {
 			errors++;
 		}
@@ -984,6 +956,11 @@ int commonio_close (struct commonio_db *db)
 			errors++;
 		}
 
+#ifdef WITH_SELINUX
+		if (reset_selinux_file_context () != 0) {
+			errors++;
+		}
+#endif
 		if (errors != 0) {
 			db->fp = NULL;
 			goto fail;
@@ -1040,19 +1017,6 @@ int commonio_close (struct commonio_db *db)
 	errors++;
       success:
 
-#ifdef WITH_SELINUX
-	if (db->scontext != NULL) {
-		if (NULL != old_context) {
-		if (setfscreatecon (old_context) < 0) {
-			errors++;
-		}
-			freecon (old_context);
-			old_context = NULL;
-		}
-		freecon (db->scontext);
-		db->scontext = NULL;
-	}
-#endif				/* WITH_SELINUX */
 	free_linked_list (db);
 	return errors == 0;
 }

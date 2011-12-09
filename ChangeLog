@@ -1,3 +1,14 @@
+2011-12-09  Peter Vrabec  <pvrabec@redhat.com>
+
+	* lib/prototypes.h, lib/Makefile.am, po/POTFILES.in,
+	libmisc/copydir.c, lib/selinux.c: Move set_selinux_file_context()
+	and reset_selinux_file_context() from libmisc/copydir.c to
+	lib/selinux.c.
+	* lib/commonio.c: Use set_selinux_file_context() and
+	reset_selinux_file_context() instead of using the existing
+	database SELinux context to set the context for the newly created
+	files.
+
 2011-12-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/vipw.c: Do not use a hardcoded program name in the usage
