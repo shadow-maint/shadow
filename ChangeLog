@@ -1,5 +1,10 @@
 2011-12-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c, src/chpasswd.c, src/chgpasswd.c: Harmonize
+	usage messages.
+
+2011-12-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/Makefile.am, lib/prototypes.h, lib/selinux.c,
 	lib/semanage.c, po/POTFILES.in: Move lib/selinux.c to
 	lib/semanage.c.

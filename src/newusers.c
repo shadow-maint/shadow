@@ -120,7 +120,7 @@ static void usage (int status)
 	                Prog);
 #ifndef USE_PAM
 	(void) fprintf (usageout,
-	                _("  -c, --crypt-method            the crypt method (one of %s)\n"),
+	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
 #ifndef USE_SHA_CRYPT
 	                "NONE DES MD5"
 #else				/* USE_SHA_CRYPT */
