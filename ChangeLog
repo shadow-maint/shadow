@@ -1,5 +1,11 @@
 2011-12-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/es.po, po/eu.po,
+	po/fr.po, po/ja.po, po/kk.po, po/pt.po, po/pt_BR.po, po/ru.po,
+	po/sk.po, po/sv.po, po/vi.po, po/zh_CN.po: Quick unfuzzy.
+
+2011-12-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c, src/chpasswd.c, src/chgpasswd.c: Harmonize
 	usage messages.
 

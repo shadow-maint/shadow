@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2011-11-13 18:42+0100\n"
-"PO-Revision-Date: 2011-11-13 20:15+0100\n"
+"PO-Revision-Date: 2011-11-22 18:11+0100\n"
 "Last-Translator: Thomas Blein <tblein@tblein.eu>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -235,7 +235,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to allocate memory: %s\n"
-msgstr "%s: impossible d'allouer la mémoire: %s\n"
+msgstr "%s : impossible d'allouer la mémoire: %s\n"
 
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"

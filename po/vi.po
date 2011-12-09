@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2011-11-13 18:42+0100\n"
-"PO-Revision-Date: 2009-09-29 22:09+0930\n"
+"PO-Revision-Date: 2011-11-22 23:18+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "Language: vi\n"
@@ -379,17 +379,13 @@ msgstr "Không thể quyết định tên TTY của bạn."
 msgid "No"
 msgstr "Không"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Sử dụng: %s [tuỳ_chọn ...]\n"
+"Sử dụng: %s [tuỳ_chọn ...] [ĐĂNG_NHẬP]\n"
 "\n"
 "Tuỳ chọn:\n"
 
@@ -397,62 +393,46 @@ msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
+"  -d, --lastday NGÀY_CUỐI       đặt ngày thay đổi mật khẩu cuối cùng thành ngày này\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate NGÀY      ngày hết hạn sử dụng tài khoản mới\n"
+msgstr ""
+"  -E, --expiredate NGÀY_HẾT_HẠN đặt ngày hết hạn dùng tài khoản thành ngày này\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    hiển thị trợ giúp này, sau đó thoát\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password MẬT_KHẨU       thay đổi mật khẩu thành MẬT_KHẨU (đã mật mã) "
-"này\n"
+"  -I, --inactive INACTIVE       đặt mật khẩu không còn hoạt động lại sau khi hết hạn dùng,\n"
+"                                thành INACTIVE\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -l, --list                    show account aging information\n"
 msgstr ""
-"  -r, --reset                   đặt lại các bộ đếm lần không đăng nhập được\n"
+"  -l, --list                    hiển thị thông tin về khoảng thời gian sử dụng tài khoản\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              số vòng SHA cho thuật toán mã hoá SHA*\n"
+"  -m, --mindays SỐ              đặt thành số này số tối thiểu các ngày trước khi thay đổi mật khẩu\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              số vòng SHA cho thuật toán mã hoá SHA*\n"
+"  -M, --maxdays SỐ              đặt thành số này số tối đa các ngày trước khi thay đổi mật khẩu\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -d, --home-dir THƯ_MỤC       thư mục chính của tài khoản mới\n"
+msgstr ""
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -W, --warndays SỐ             đặt thành số này số các ngày gây ra cảnh báo về hết hạn dùng\n"
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Nhập giá trị mới, hoạc bấm phím Enter đặt chọn giá trị mặc định"
@@ -588,10 +568,8 @@ msgstr ""
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
 
-#, fuzzy
-#| msgid "  -h, --help                    display this help message and exit\n"
 msgid "  -u, --help                    display this help message and exit\n"
-msgstr "  -h, --help                    hiển thị trợ giúp này, sau đó thoát\n"
+msgstr "  -u, --help                    hiển thị trợ giúp này, sau đó thoát\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
@@ -742,11 +720,10 @@ msgstr "%s: (dòng %d, người dùng %s) mật khẩu chưa thay đổi\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: dòng %d: người dùng « %s » không tồn tại\n"
 
-#, fuzzy
-#| msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"  -s, --shell TRÌNH_BAO             trình bao đăng nhập của tài khoản mới\n"
+"  -s, --shell TRÌNH_BAO         trình bao đăng nhập mới\n"
+"                                cho tài khoản người dùng\n"
 
 msgid "Login Shell"
 msgstr "Trình bao Đăng nhập"
@@ -778,52 +755,39 @@ msgstr "%s: người dùng « %s » không tồn tại\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: cảnh báo : %s không phải được %s sở hữu\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -c, --check                   check the user's password expiration\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
-"  -m, --md5                     mật mã hoá mật khẩu chữ thô, dùng thuật toán "
-"MD5\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr "%s: hai tùy chọn %s và %s xung đột với nhau\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
+#, c-format
 msgid "%s: unexpected argument: %s\n"
-msgstr "lastlog: đối số bất thường: %s\n"
+msgstr "%s: đối số bất thường: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
 "  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
 "dùng\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -l, --lock-time SEC           after failed login lock account for SEC "
-#| "seconds\n"
 msgid ""
 "  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
-"  -l, --lock-time GIÂY           sau khi không đăng nhập được thì khoá tài "
+"  -l, --lock-secs GIÂY          sau khi không đăng nhập được thì khoá tài "
 "khoản trong vòng số GIÂY này\n"
 
 msgid ""
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 msgstr ""
-"  -m, --maximum SỐ             đặt thành SỐ này số tối đa các bộ đếm lần "
+"  -m, --maximum SỐ              đặt thành SỐ này số tối đa các bộ đếm lần "
 "không đăng nhập được\n"
 
 msgid "  -r, --reset                   reset the counters of login failures\n"
@@ -842,16 +806,14 @@ msgid ""
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
-"  -u, --user ĐĂNG_NHẬP/PHẠM_VI        hiển thị mục ghi faillog hoặc duy trì "
-"các bộ đếm\n"
-"\t\t\tlần không đăng nhập được và các giới hạn như thế\n"
-"\t\t\t(nếu dùng với cờ « -r », « -m » hay « -l » riêng từng cái)\n"
-"\t\t\tchỉ cho mỗi tên đăng nhập đưa ra\n"
+"  -u, --user ĐĂNG_NHẬP/PHẠM_VI  hiển thị mục ghi faillog hoặc duy trì các bộ đếm\n"
+"                                lần không đăng nhập được và các giới hạn như thế\n"
+"                                (nếu dùng với cờ « -r », « -m » hay « -l » riêng từng cái)\n"
+"                                chỉ cho mỗi tên đăng nhập đưa ra\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Failed to get the entry for UID %lu\n"
+#, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: Không lấy được mục nhập cho UID %lu\n"
+msgstr "%s: Không lấy được mục nhập cho UID %lu\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Đăng nhập\t\tBị lỗi\tTối đa\tMới nhất        Vào\n"
@@ -864,89 +826,69 @@ msgstr " [%lus còn lại]"
 msgid " [%lds lock]"
 msgstr " [%lds khóa]"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to reset fail count for UID %lu\n"
+#, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "faillog: không đặt lại được hàm đếm cho UID %lu\n"
+msgstr "%s: không đặt lại được hàm đếm cho UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set max for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set max for UID %lu\n"
-msgstr "faillog: không đặt được số tối đa cho UID %lu\n"
+msgstr "%s: không đặt được số tối đa cho UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set locktime for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "faillog: không đặt được thời gian khoá cho UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Unknown user or range: %s\n"
+#, c-format
 msgid "%s: Unknown user or range: %s\n"
-msgstr "lastlog: không nhận ra người dùng hay phạm vi: %s\n"
+msgstr "%s: không nhận ra người dùng hay phạm vi: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
-msgstr "lastlog: Không thể lấy kích cỡ của %s: %s\n"
+msgstr "%s: Không thể lấy kích cỡ của %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] GROUP\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Sử dụng: %s [tuỳ_chọn ...] NHÓM\n"
+"Sử dụng: %s [tuỳ_chọn] NHÓM\n"
 "\n"
 "Tuỳ chọn:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgid "  -a, --add USER                add USER to GROUP\n"
-msgstr "  -g, --gid GID                 thay đổi mã số nhóm sang GID này\n"
+msgstr ""
+"  -a, --add NGƯỜI_DÙNG          thêm người dùng này vào NHÓM\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr ""
+"  -d, --delete NGƯỜI_DÙNG       gỡ bỏ người dùng này khỏi NHÓM\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -d, --home-dir THƯ_MỤC       thư mục chính của tài khoản mới\n"
+msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr ""
+"  -r, --remove-password         gỡ bỏ mật khẩu của NHÓM\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
 msgstr ""
-"  -r, --reset                   đặt lại các bộ đếm lần không đăng nhập được\n"
+"  -R, --restrict                hạn chế truy cập đến NHÓM thành các thành viên của nó\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
+"  -M, --members NGƯỜI_DÙNG,...  đặt danh sách các thành viên của NHÓM\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -A, --administrators ADMIN,...\n"
-#| "                                set the list of administrators for GROUP\n"
-#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 msgstr ""
-"  -A, --administrators QUẢN_TRỊ,...\tđặt danh sách các quản trị cho NHÓM\n"
-"\n"
-"Trừ hai tuỳ chọn « -A » và « -M », không thể tổ hợp các tuỳ chọn.\n"
+"  -A, --administrators QUẢN_TRỊ,...\n"
+"                                đặt danh sách các quản trị cho NHÓM\n"
 
-#, fuzzy
-#| msgid "The options cannot be combined.\n"
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr "Không thể tổ hợp các tuỳ chọn.\n"
+msgstr "Trừ hai tuỳ chọn « -A » và « -M », không thể tổ hợp các tuỳ chọn.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "Không thể tổ hợp các tuỳ chọn.\n"
@@ -1019,7 +961,7 @@ msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
-"  -K, --key KHOÁ=GIÁ_TRỊ           ghi đè lên các giá trị mặc định « /etc/"
+"  -K, --key KHOÁ=GIÁ_TRỊ        ghi đè lên các giá trị mặc định « /etc/"
 "login.defs »\n"
 
 msgid ""
@@ -1091,58 +1033,47 @@ msgstr "%s: người dùng « %s » đã thuộc về « %s »\n"
 msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: Không đủ bộ nhớ. Không thể cập nhật %s.\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Sử dụng: %s [tuỳ_chọn ...]\n"
+"Sử dụng: %s [tuỳ_chọn ...] [hành_vi]\n"
 "\n"
 "Tuỳ chọn:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -N, --no-user-group           do not create a group with the same name "
-#| "as\n"
-#| "                                the user\n"
 msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
 msgstr ""
-"  -N, --no-user-group           đừng tạo một nhóm cùng tên với người dùng\n"
+"  -g, --group TÊN_NHÓM          thay đổi tên của nhóm này thay cho nhóm của người dùng (chỉ người chủ)\n"
 
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 msgid "Actions:\n"
-msgstr ""
+msgstr "Hành vi:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid ""
 "  -a, --add username            add username to the members of the group\n"
-msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+msgstr ""
+"  -a, --add TÊN                 thêm tên người dùng này vào nhóm\n"
 
 msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
 msgstr ""
+"  -d, --delete TÊN              gỡ bỏ tên này khỏi nhóm\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -p, --purge                   purge all members from the group\n"
-msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+msgstr ""
+"  -p, --purge                   tẩy mọi người ra nhóm\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -l, --list                    list the members of the group\n"
-msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+msgstr ""
+"  -l, --list                    liệt kê những người trong nhóm\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1156,7 +1087,7 @@ msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr "  -g, --gid GID                 thay đổi mã số nhóm sang GID này\n"
 
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
-msgstr "  -n, --new-name NHÓM_MỚI      thay đổi tên sang tên này\n"
+msgstr "  -n, --new-name NHÓM_MỚI       thay đổi tên sang tên này\n"
 
 msgid ""
 "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
@@ -1310,30 +1241,23 @@ msgstr "Sử dụng: id\n"
 msgid " groups="
 msgstr " nhóm="
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
-"  -t, --time NGÀY               hiển thị các mục ghi faillog mới hơn số NGÀY "
-"này\n"
+"  -b, --before SỐ               hiển thị chỉ những bản ghi lastlog\n"
+"                                cũ hơn số ngày này (_trước_)\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
-"  -t, --time NGÀY               hiển thị các mục ghi faillog mới hơn số NGÀY "
-"này\n"
+"  -t, --time SỐ                 hiển thị chỉ những mục ghi lastlog\n"
+"                                mới hơn số ngày này (_thời gian_)\n"
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
+"  -u, --user ĐĂNG_NHẬP          hiển thị mục ghi lastlog cho _người dùng_ tên này\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Tên dùng\t\t Cổng    Từ\t\tMới nhất"
@@ -1543,95 +1467,73 @@ msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: dòng %d: không thể cập nhật mục nhập\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
 msgstr ""
-"  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
-"dùng\n"
+"  -a, --all                     thông báo trạng thái mật khẩu về mọi tài khoản\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
-msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
+msgstr ""
+"  -d, --delete                  xoá mật khẩu cho tài khoản đặt tên\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
+msgstr ""
+"  -e, --expire                  ép buộc hết hạn dùng mật khẩu cho tài khoản đặt tên\n"
 
-#, fuzzy
-#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
-"  -e, --encrypted               các mật khẩu đã cung cấp cũng được mật mã\n"
+"  -k, --keep-tokens             thay đổi mật khẩu chỉ nếu bị hết hạn dùng\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password MẬT_KHẨU       thay đổi mật khẩu thành MẬT_KHẨU (đã mật mã) "
-"này\n"
+"  -i, --inactive INACTIVE       đặt thành INACTIVE mật khẩu không còn hoạt động lại\n"
+"                                sau khi hết hạn dùng\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
+"  -l, --lock                    khoá mật khẩu của tài khoản đặt tên\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              số vòng SHA cho thuật toán mã hoá SHA*\n"
+"  -n, --mindays SỐ              đặt thành số này số tối thiểu các ngày trước khi mật khẩu thay đổi được\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -q, --quiet                   quiet mode\n"
-msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+msgstr ""
+"  -q, --quiet                   chế độ không xuất chi tiết\n"
 
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr ""
+"  -r, --repository KHO          thay đổi mật khẩu trong kho lưu này\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -S, --status                  report password status on the named account\n"
-msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
+msgstr ""
+"  -S, --status                  thông báo trạng thái mật khẩu về tài khoản đặt tên\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
+"  -u, --unlock                  mở khoá mật khẩu của tài khoản đặt tên\n"
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -w, --warndays NGÀY           đặt thành số này số các ngày cảnh báo về hết hạn dùng\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              số vòng SHA cho thuật toán mã hoá SHA*\n"
+"  -x, --maxdays NGÀY            đặt thành số này số tối đa các ngày trước khi thay đổi được mật khẩu\n"
 
 msgid "Old password: "
 msgstr "Mật khẩu cũ : "
@@ -1891,12 +1793,12 @@ msgstr ""
 "[su: siêu người dùng]\n"
 "\n"
 "Tùy chọn:\n"
-"  -c, --command LỆNH        gởi lệnh này qua cho trình bao đã gọi\n"
-"  -h, --help                hiển thị _trợ giúp_ này rồi thoát\n"
-"  -, -l, --login            lập trình bao là trình bao _đăng nhập_\n"
+"  -c, --command LỆNH            gởi lệnh này qua cho trình bao đã gọi\n"
+"  -h, --help                    hiển thị _trợ giúp_ này rồi thoát\n"
+"  -, -l, --login                lập trình bao là trình bao _đăng nhập_\n"
 "  -m, -p,\n"
-"  --preserve-environment    đừng lập lại các biến _môi trường_, và _giữ_\n"
-"                            trình bao hiện có\n"
+"  --preserve-environment        đừng lập lại các biến _môi trường_, và _giữ_\n"
+"                                trình bao hiện có\n"
 "  -s, --shell TRÌNH_BAO         sử dụng trình bao này thay cho trình mặc "
 "định trong passwd\n"
 "\n"
@@ -1989,10 +1891,9 @@ msgstr "%s: không thể mở tập tin mặc định mới\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: dòng quá dài trong %s: %s..."
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s: %s"
+#, c-format
 msgid "%s: rename: %s: %s\n"
-msgstr "%s: thay tên: %s: %s"
+msgstr "%s: thay tên: %s: %s\n"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -2213,24 +2114,16 @@ msgstr ""
 "%s: cảnh báo : thư mục chính đã có.\n"
 "Vì vậy không sao chép vào nó tập tin nào từ thư mục « skel ».\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -f, --force                   exit successfully if the group already "
-#| "exists,\n"
-#| "                                and cancel -g if the GID is already used\n"
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
 msgstr ""
-"  -f, --force                   thoát thành công nếu nhóm đã có, và hủy bỏ « "
-"-g » nếu GID đã được dùng\n"
+"  -f, --force                   ép buộc gỡ bỏ tập tin, thậm chí nếu không\n"
+"                                được sở hữu bởi người dùng\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
-"  -r, --reset                   đặt lại các bộ đếm lần không đăng nhập được\n"
+"  -r, --remove                  gỡ bỏ thư mục chính và ống chỉ thư tín\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2297,101 +2190,75 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: gặp lỗi khi gỡ bỏ thư mục %s\n"
 
-#, fuzzy
-#| msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
-msgstr "  -c, --comment GHI_CHÚ         trường GECOS của tài khoản mới\n"
+msgstr ""
+"  -c, --comment GHI_LƯU         giá trị mới của trường GECOS\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr "  -d, --home-dir THƯ_MỤC       thư mục chính của tài khoản mới\n"
+msgstr ""
+"  -d, --home THƯ_MỤC            thư mục chính mới cho tài khoản người dùng\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate NGÀY      ngày hết hạn sử dụng tài khoản mới\n"
+msgstr ""
+"  -e, --expiredate NGÀY         đặt thành ngày này ngày hết hạn dùng tài khoản\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password MẬT_KHẨU       thay đổi mật khẩu thành MẬT_KHẨU (đã mật mã) "
-"này\n"
+"  -f, --inactive INACTIVE       đặt thành INACTIVE mật khẩu không còn hoạt động lại\n"
+"                                sau khi hết hạn dùng\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
-msgstr "  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+msgstr ""
+"  -g, --gid NHÓM                ép buộc sử dụng nhóm này làm nhóm chính mới\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -G, --groups GROUPS           list of supplementary groups of the new\n"
-#| "                                account\n"
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr ""
-"  -G, --groups NHÓM           danh sách các nhóm phụ của tài khoản mới\n"
+"  -G, --groups NHÓM             danh sách mới chứa các nhóm phụ\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
 msgstr ""
+"  -a, --append                  phụ thêm người dùng vào các nhóm phụ\n"
+"                                đưa ra bởi tuỳ chọn « -G » mà không gỡ bỏ ta khỏi nhóm khác\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
+"  -l, --login ĐĂNG_NHẬP         giá trị mới của tên đăng nhập\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -L, --lock                    lock the user account\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
+"  -L, --lock                    khoá tài khoản người dùng\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -b, --base-dir BASE_DIR       base directory for the home directory of "
-#| "the\n"
-#| "                                new account\n"
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
-"  -b, --base-dir THƯ_MỤC       đặt thư mục cơ bản cho thư mục chính của tài "
-"khoản mới\n"
+"  -m, --move-home               di chuyển nội dung của thư mục chính sang vị trí mới\n"
+"                                (chỉ dùng cùng với « -d »)\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -o, --non-unique              allow to use a duplicate (non-unique) "
-#| "GID\n"
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
-"  -o, --non-unique              cho phép sử dụng một GID trùng (không duy "
-"nhất)\n"
+"  -o, --non-unique              cho phép sử dụng UID trùng (không duy nhất)\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       use this encrypted password for the new "
-#| "group\n"
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
-"  -p, --password MẬT_KHẨU       dùng mật khẩu đã mật mã này cho nhóm mới\n"
+"  -p, --password MẬT_KHẨU       mật mã hoá mật khẩu mới\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -u, --uid UID                 new UID for the user account\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
+"  -u, --uid UID                 UID mới cho tài khoản người dùng\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr "  -u, --uid UID                 mã số người dùng của tài khoản mới\n"
+msgstr ""
+"  -U, --unlock                  mở khoá tài khoản người dùng\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2486,37 +2353,23 @@ msgstr ""
 "Để thống nhất thì bạn cũng có thể cần sửa đổi %s.\n"
 "Hãy sử dụng câu lệnh « %s » để làm như thế.\n"
 
-#, fuzzy
-#| msgid ""
-#| "Usage: %s [options]\n"
-#| "\n"
-#| "Options:\n"
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Sử dụng: %s [tuỳ_chọn ...]\n"
+"Sử dụng: vipw [tuỳ_chọn ...]\n"
 "\n"
 "Tuỳ chọn:\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgid "  -g, --group                   edit group database\n"
-msgstr "  -g, --gid GID                 thay đổi mã số nhóm sang GID này\n"
+msgstr "  -g, --group                   sửa đổi cơ sở dữ liệu nhóm\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create system accounts\n"
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr "  -r, --system                  tạo các tài khoản hệ thống\n"
+msgstr "  -p, --passwd                  sửa đổi cơ sở dữ liệu passwd\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
-msgstr ""
-"  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
-"dùng\n"
+msgstr "  -s, --shadow                  sửa đổi cơ sở dữ liệu shadow hay gshadow\n"
 
 #, fuzzy
 #| msgid "  -u, --uid UID                 user ID of the new account\n"

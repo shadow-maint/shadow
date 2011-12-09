@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: shadow request\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2011-11-13 18:42+0100\n"
-"PO-Revision-Date: 2011-04-10 13:45+0400\n"
+"PO-Revision-Date: 2011-11-24 21:30+0100\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -230,10 +230,9 @@ msgid ""
 msgstr ""
 "%s: неверная настройка: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
-#, fuzzy, c-format
-#| msgid "failed to allocate memory"
+#, c-format
 msgid "%s: failed to allocate memory: %s\n"
-msgstr "не удалось выделить память"
+msgstr "%s: не удалось выделить память: %s\n"
 
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -397,68 +396,53 @@ msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
+"  -d, --lastday LAST_DAY        установить последний день смены пароля\n"
+"                                в LAST_DAY\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
-"  -e, --expiredate ДАТА_УСТ     дата устаревания новой учётной записи\n"
+"  -E, --expiredate EXPIRE_DATE  установить дату окончания действия\n"
+"                                учётной записи в EXPIRE_DATE\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr ""
 "  -h, --help                    показать данное сообщение и закончить "
 "работу\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password ПАРОЛЬ         изменить пароль на заданный (шифрованный)\n"
-"                                ПАРОЛЬ\n"
+"  -I, --inactive INACTIVE       установить неактивность пароля после\n"
+"                                устаревания в значение INACTIVE\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -l, --list                    show account aging information\n"
 msgstr ""
-"  -r, --reset                   сбросить счётчик неудачных попыток входа\n"
+"  -l, --list                    показать «возраст» учётной записи\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds      количество раундов SHA для алгоритмов\n"
-"                        шифрования SHA*\n"
+"  -m, --mindays MIN_DAYS        установить минимальное число дней перед\n"
+"                                сменой пароля в MIN_DAYS\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds      количество раундов SHA для алгоритмов\n"
-"                        шифрования SHA*\n"
+"  -M, --maxdays MAX_DAYS        установить максимальное число дней перед\n"
+"                                сменой пароля в MAX_DAYS\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
-"  -d, --home-dir ДОМ_КАТ        домашний каталог новой учётной записи\n"
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -W, --warndays WARN_DAYS      установить количество дней с выдачей\n"
+"                                предупреждения в WARN_DAYS\n"
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
@@ -569,17 +553,13 @@ msgstr "Изменение информации о сроках действия
 msgid "%s: error changing fields\n"
 msgstr "%s: ошибка при изменении полей\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Использование: %s [параметры] ПОЛЬЗОВАТЕЛЬ\n"
+"Использование: %s [параметры] [ПОЛЬЗОВАТЕЛЬ]\n"
 "\n"
 "Параметры:\n"
 
@@ -595,11 +575,9 @@ msgstr ""
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
 
-#, fuzzy
-#| msgid "  -h, --help                    display this help message and exit\n"
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
-"  -h, --help                    показать данное сообщение и закончить "
+"  -u, --help                    показать данное сообщение и закончить "
 "работу\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
@@ -750,12 +728,10 @@ msgstr "%s: (строка %d, пользователь %s) пароль не и�
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: строка %d: пользователь «%s» не существует\n"
 
-#, fuzzy
-#| msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"  -s, --shell ОБОЛОЧКА          регистрационная оболочка новой\n"
-"                                учётной записи\n"
+"  -s, --shell SHELL             новая регистрационная оболочка для учётной\n"
+"                                записи\n"
 
 msgid "Login Shell"
 msgstr "Командная оболочка"
@@ -784,34 +760,22 @@ msgstr "%s: предупреждение: %s не существует\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: предупреждение: %s не является исполняемым\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -u, --user                    which user's tcb shadow file to edit\n"
 msgid "  -c, --check                   check the user's password expiration\n"
 msgstr ""
-"  -u, --user                    редактировать пользовательский файл\n"
-"                                shadow структуры tcb\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
-"  -m, --md5                     шифровать видимые пароли с помощью \n"
-"                                алгоритма MD5\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr "%s: конфликт параметров %s и %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
+#, c-format
 msgid "%s: unexpected argument: %s\n"
-msgstr "lastlog: неожиданный параметр: %s\n"
+msgstr "%s: неожиданный параметр: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
@@ -855,10 +819,9 @@ msgstr ""
 "                                с -r, -m или -l) только для указанного\n"
 "                                ПОЛЬЗОВАТЕЛЯ(ЕЙ)\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Failed to get the entry for UID %lu\n"
+#, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: не удалось получить запись для UID %lu\n"
+msgstr "%s: не удалось получить запись для UID %lu\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Уч.запись      Неуд. попыток  Максимум  Последний раз\n"
@@ -871,31 +834,26 @@ msgstr " [осталось %lu]"
 msgid " [%lds lock]"
 msgstr " [%ld блокировок]"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to reset fail count for UID %lu\n"
+#, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "faillog: не удалось сбросить счётчик неудачных попыток для UID %lu\n"
+msgstr "%s: не удалось сбросить счётчик неудачных попыток для UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set max for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr ""
-"faillog: не удалось установить максимальное число попыток для UID %lu\n"
+"%s: не удалось установить максимальное число попыток для UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set locktime for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
-msgstr "faillog: не удалось установить время блокировки для UID %lu\n"
+msgstr "%s: не удалось установить время блокировки для UID %lu\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Unknown user or range: %s\n"
+#, c-format
 msgid "%s: Unknown user or range: %s\n"
-msgstr "lastlog: неизвестный пользователь или диапазон: %s\n"
+msgstr "%s: неизвестный пользователь или диапазон: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
-msgstr "lastlog: не удалось получить размер %s: %s\n"
+msgstr "%s: не удалось получить размер %s: %s\n"
 
 #, c-format
 msgid ""
@@ -913,11 +871,8 @@ msgstr "  -a, --add ПОЛЬЗ               добавить ПОЛЬЗОВАТ
 msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr "  -d, --delete ПОЛЬЗ            удалить ПОЛЬЗОВАТЕЛЯ из ГРУППЫ\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
-"  -d, --home-dir ДОМ_КАТ        домашний каталог новой учётной записи\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr "  -r, --remove-password         удалить пароль ГРУППЫ\n"
@@ -1167,27 +1122,19 @@ msgstr "%s: группа %s является группой NIS\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: неизвестный пользователь %s\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Использование: %s [параметры] [действие]\n"
+"Использование: %s [параметры] [файл_group [файл_gshadow]]\n"
 "\n"
 "Параметры:\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
-"Usage: %s [options] [group]\n"
+"Usage: %s [options] [файл_group]\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1195,21 +1142,13 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
-"  -s, --sha-rounds      количество раундов SHA для алгоритмов\n"
-"                        шифрования SHA*\n"
 
-#, fuzzy
-#| msgid "  -l, --list                    list the members of the group\n"
 msgid "  -s, --sort                    sort entries by UID\n"
-msgstr "  -l, --list                    перечислить всех членов группы\n"
+msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1293,30 +1232,21 @@ msgstr "Использование: id\n"
 msgid " groups="
 msgstr " группы="
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
-"  -t, --time ДНЕЙ               показать записи faillog за последнее\n"
-"                                количество ДНЕЙ\n"
+"  -b, --before ДНЕЙ             показать записи lastlog за последние ДНЕЙ дней\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
-"  -t, --time ДНЕЙ               показать записи faillog за последнее\n"
-"                                количество ДНЕЙ\n"
+"  -t, --time ДНЕЙ               показать записи lastlog за последние ДНЕЙ дней\n"
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
+"  -u, --user ИМЯ                показать запись lastlog для учётной записи ИМЯ\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Пользователь     Порт     С                Последний раз"
@@ -1522,61 +1452,46 @@ msgstr "%s: строка %d: вызов chown %s завершился неуда
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: строка %d: не удалось обновить запись\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
 msgstr ""
-"  -a, --all                     показать записи faillog для всех "
-"пользователей\n"
+"  -a, --all                     показать состояние паролей всех учётных\n"
+"                                записей\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
-msgstr "  -r, --system                  создать системную учётную запись\n"
+msgstr ""
+"  -d, --delete                  удалить пароль заданной учётной записи\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-msgstr "  -r, --system                  создать системную учётную запись\n"
+msgstr ""
+"  -e, --expire                  просрочить пароль заданной учётной записи\n"
 
-#, fuzzy
-#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -e, --encrypted               пароли передаются зашифрованными\n"
+msgstr ""
+"  -k, --keep-tokens             изменять пароль только с истёкшим сроком\n"
+"                                действия\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password ПАРОЛЬ         изменить пароль на заданный (шифрованный)\n"
-"                                ПАРОЛЬ\n"
+"  -i, --inactive INACTIVE       установить неактивность пароля после\n"
+"                                истечения срока в значение INACTIVE\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr ""
-"  -u, --uid UID                 пользовательский ID новой учётной записи\n"
+"  -l, --lock                    заблокировать заданную учётную запись\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds      количество раундов SHA для алгоритмов\n"
-"                        шифрования SHA*\n"
+"  -n, --mindays MIN_DAYS        установить минимальное число дней перед\n"
+"                                сменой пароля в MIN_DAYS\n"
 
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
@@ -1585,34 +1500,31 @@ msgstr ""
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr ""
+"  -r, --repository REPOSITORY   изменить пароль в репозитории REPOSITORY\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -S, --status                  report password status on the named account\n"
-msgstr "  -r, --system                  создать системную учётную запись\n"
+msgstr ""
+"  -S, --status                  показать состояние пароля заданной учётной\n"
+"                                записи\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
 msgstr ""
-"  -u, --uid UID                 пользовательский ID новой учётной записи\n"
+"  -u, --unlock                  разблокировать заданную учётную запись\n"
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -w, --warndays WARN_DAYS      установить количество дней с\n"
+"                                выдачей предупреждения в WARN_DAYS\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds      количество раундов SHA для алгоритмов\n"
-"                        шифрования SHA*\n"
+"  -x, --maxdays MAX_DAYS        установить максимальное число дней перед\n"
+"                                сменой пароля в MAX_DAYS\n"
 
 msgid "Old password: "
 msgstr "Старый пароль: "
@@ -1696,31 +1608,23 @@ msgstr "%s: пароль изменён.\n"
 msgid "%s: password expiry information changed.\n"
 msgstr "%s: информация об истечении срока действия пароля изменена.\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Использование: %s [параметры] [действие]\n"
+"Использование: %s [параметры] [passwd]\n"
 "\n"
 "Параметры:\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Использование: %s [параметры] [действие]\n"
+"Использование: %s [параметры] [passwd [shadow]]\n"
 "\n"
 "Параметры:\n"
 
@@ -1918,10 +1822,9 @@ msgstr "%s: pam_start: ошибка %d\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: не удалось удалить содержимое %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid "Cannot execute %s"
+#, c-format
 msgid "Cannot execute %s\n"
-msgstr "Не удалось выполнить %s"
+msgstr "Не удалось выполнить %s\n"
 
 msgid "No password file"
 msgstr "Отсутствует файл паролей"
@@ -1964,10 +1867,9 @@ msgstr "%s: не удалось открыть новый файл значен�
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: слишком длинная строка в %s: %s…"
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s: %s"
+#, c-format
 msgid "%s: rename: %s: %s\n"
-msgstr "%s: rename: %s: %s"
+msgstr "%s: rename: %s: %s\n"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -1977,11 +1879,7 @@ msgstr "%s: группа «%s» является группой NIS.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: указано слишком много групп (максимум %d).\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -1990,6 +1888,8 @@ msgid ""
 "Options:\n"
 msgstr ""
 "Использование: %s [параметры] ПОЛЬЗОВАТЕЛЬ\n"
+"               %s -D\n"
+"               %s -D [параметры]\n"
 "\n"
 "Параметры:\n"
 
@@ -2202,25 +2102,16 @@ msgstr ""
 "%s: предупреждение: домашний каталог уже существует.\n"
 "Никакие файлы из каталога шаблонов копироваться не будут.\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -f, --force                   exit successfully if the group already "
-#| "exists,\n"
-#| "                                and cancel -g if the GID is already used\n"
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
 msgstr ""
-"  -f, --force                   закончить работу без ошибки, если группа\n"
-"                                существует и отменить -g, если GID уже\n"
-"                                используется\n"
+"  -f, --force                   удалять файлы, даже если они\n"
+"                                не принадлежат пользователю\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
-"  -r, --reset                   сбросить счётчик неудачных попыток входа\n"
+"  -r, --remove                  удалить домашний каталог и почтовый ящик\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2284,105 +2175,78 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: ошибка удаления каталога %s\n"
 
-#, fuzzy
-#| msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
-msgstr "  -c, --comment КОММЕНТАРИЙ     поле GECOS новой учётной записи\n"
+msgstr "  -c, --comment КОММЕНТАРИЙ     новое значение поля GECOS\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
-"  -d, --home-dir ДОМ_КАТ        домашний каталог новой учётной записи\n"
+"  -d, --home ДОМ_КАТ            новый домашний каталог учётной записи\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
-"  -e, --expiredate ДАТА_УСТ     дата устаревания новой учётной записи\n"
+"  -e, --expiredate ДАТА_УСТ     установить дату окончания действия\n"
+"                                учётной записи в ДАТА_УСТ\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password ПАРОЛЬ         изменить пароль на заданный (шифрованный)\n"
-"                                ПАРОЛЬ\n"
+"  -f, --inactive НЕАКТИВНОСТЬ   установить период неактивности пароля после\n"
+"                                устаревания учётной записи равным НЕАКТИВНОСТЬ\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr ""
-"  -g, --gid GID                 для новой группы использовать указанный GID\n"
+"  -g, --gid ГРУППА              принудительно назначить первичную ГРУППУ\n"
 
-#, fuzzy
-#| msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr "  -M, --members ПОЛЬЗ,…         задать список членов ГРУППЫ\n"
+msgstr ""
+"  -G, --groups ГРУППЫ           список дополнительных ГРУПП\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
 msgstr ""
+"  -a, --append                  добавить пользователя в дополнительные\n"
+"                                ГРУППЫ, указанные в параметре -G не удаляя\n"
+"                                пользователя из других групп\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
+"  -l, --login НОВОЕ_ИМЯ         новое значение имени учётной записи\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -L, --lock                    lock the user account\n"
 msgstr ""
-"  -u, --uid UID                 пользовательский ID новой учётной записи\n"
+"  -L, --lock                    заблокировать учётную запись\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -b, --base-dir BASE_DIR       base directory for the home directory of "
-#| "the\n"
-#| "                                new account\n"
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
-"  -b, --base-dir БАЗ_КАТ        базовый каталог для домашнего каталога "
-"новой\n"
-"                                учётной записи\n"
+"  -m, --move-home               переместить содержимое домашнего каталога в\n"
+"                                новое место (использовать только вместе с -d)\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -o, --non-unique              allow to use a duplicate (non-unique) "
-#| "GID\n"
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
-"  -o, --non-unique              разрешить повторяющиеся (не уникальные) GID\n"
+"  -o, --non-unique              разрешить создание учётной записи с уже\n"
+"                                имеющимся (не уникальным) UID\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       use this encrypted password for the new "
-#| "group\n"
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
-"  -p, --password ПАРОЛЬ         использовать этот шифрованный пароль для\n"
-"                                новой группы\n"
+"  -p, --password ПАРОЛЬ         задать новый шифрованный пароль для\n"
+"                                учётной записи\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr ""
-"  -u, --uid UID                 пользовательский ID новой учётной записи\n"
+"  -u, --uid UID                 новый UID для учётной записи\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
-"  -u, --uid UID                 пользовательский ID новой учётной записи\n"
+"  -U, --unlock                  разблокировать учётную запись\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "

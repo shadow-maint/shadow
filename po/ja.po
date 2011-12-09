@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2011-11-13 18:42+0100\n"
-"PO-Revision-Date: 2011-04-06 11:18+0900\n"
+"PO-Revision-Date: 2011-11-24 21:02+0100\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
 "Language: \n"
@@ -215,10 +215,9 @@ msgid ""
 "(%lu)\n"
 msgstr "%s: 設定が不正: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
-#, fuzzy, c-format
-#| msgid "failed to allocate memory"
+#, c-format
 msgid "%s: failed to allocate memory: %s\n"
-msgstr "メモリ割当に失敗しました"
+msgstr "%s: メモリ割当に失敗しました: %s\n"
 
 #, c-format
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
@@ -382,61 +381,48 @@ msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
+"  -d, --lastday LAST_DAY        パスワードの最終変更日を LAST_DAY にする\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate EXPIRE_DATE  新アカウントの期限切れ日付\n"
+msgstr ""
+"  -E, --expiredate EXPIRE_DATE  アカウント期限切れの日を EXPIRE_DATE にする\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    このヘルプを表示して終了する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password PASSWORD       パスワードをこの (暗号化された) PASSWORD\n"
-"                                に変更する\n"
+"  -I, --inactive INACTIVE       パスワードを期限切れ後に無効化する日数を\n"
+"                                INACTIVEにする\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -l, --list                    show account aging information\n"
-msgstr "  -r, --reset                   ログイン失敗のカウンタをリセットする\n"
+msgstr ""
+"  -l, --list                    アカウントの経時情報を表示する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
+"  -m, --mindays MIN_DAYS        パスワードが変更できるまでの最短日数を\n"
+"                                MIN_DAYS に変更する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
+"  -M, --maxdays MAX_DAYS        パスワードが変更できる期間の最長日数を\n"
+"                                MAX_DAYS に変更する\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -d, --home-dir HOME_DIR       新アカウントのホームディレクトリ\n"
+msgstr ""
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -W, --warndays WARN_DAYS      期限切れ警告の日数を WARN_DAYS にする\n"
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
@@ -547,17 +533,13 @@ msgstr "%s の期限情報を変更中\n"
 msgid "%s: error changing fields\n"
 msgstr "%s: フィールド変更の際にエラーが起きました\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"使い方: %s [オプション] LOGIN\n"
+"使い方: %s [オプション] [LOGIN]\n"
 "\n"
 "オプション:\n"
 
@@ -573,10 +555,8 @@ msgstr ""
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
 
-#, fuzzy
-#| msgid "  -h, --help                    display this help message and exit\n"
 msgid "  -u, --help                    display this help message and exit\n"
-msgstr "  -h, --help                    このヘルプを表示して終了する\n"
+msgstr "  -u, --help                    このヘルプを表示して終了する\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
@@ -725,10 +705,9 @@ msgstr "%s: (%d 行目, ユーザ %s) パスワードは変更されませんで
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: %d 行目: ユーザ '%s' は存在しません\n"
 
-#, fuzzy
-#| msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
-msgstr "  -s, --shell SHELL             新アカウントのログインシェル\n"
+msgstr ""
+"  -s, --shell SHELL             ユーザのシェルを新たに SHELL にする\n"
 
 msgid "Login Shell"
 msgstr "ログインシェル"
@@ -757,32 +736,22 @@ msgstr "%s: 警告: %s は存在しません\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: 警告: %s は実行可能ではありません\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -u, --user                    which user's tcb shadow file to edit\n"
 msgid "  -c, --check                   check the user's password expiration\n"
-msgstr "  -u, --user                    編集する tcb shadow ファイルのユーザ\n"
+msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "  -m, --md5                     encrypt the clear text password using\n"
-#| "                                the MD5 algorithm\n"
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
-"  -m, --md5                     平文テキストのパスワードを\n"
-"                                MD5 アルゴリズムで暗号化する\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr "%s: オプション %s と %s は同時に指定できません\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
+#, c-format
 msgid "%s: unexpected argument: %s\n"
-msgstr "lastlog: この引き数は不正です: %s\n"
+msgstr "%s: この引き数は不正です: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr "  -a, --all                     全ユーザの faillog 記録を表示する\n"
@@ -818,10 +787,9 @@ msgstr ""
 "                                -m, -l などを指定した場合は、指定 LOGIN\n"
 "                                についてのみ失敗カウンタや制限値を変更する\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Failed to get the entry for UID %lu\n"
+#, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
-msgstr "lastlog: UID %lu のエントリを取得できませんでした\n"
+msgstr "%s: UID %lu のエントリを取得できませんでした\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "ログイン名  失敗     最大    最新                     場所\n"
@@ -834,30 +802,25 @@ msgstr "[残り %lu 秒]"
 msgid " [%lds lock]"
 msgstr "[ロック %ld 秒]"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to reset fail count for UID %lu\n"
+#, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "faillog: UID %lu の失敗回数をリセットできませんでした\n"
+msgstr "%s: UID %lu の失敗回数をリセットできませんでした\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set max for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set max for UID %lu\n"
-msgstr "faillog: UID %lu の最大回数を設定できませんでした\n"
+msgstr "%s: UID %lu の最大回数を設定できませんでした\n"
 
-#, fuzzy, c-format
-#| msgid "faillog: Failed to set locktime for UID %lu\n"
+#, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
-msgstr "faillog: UID %lu のロック時間を設定できませんでした\n"
+msgstr "%s: UID %lu のロック時間を設定できませんでした\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Unknown user or range: %s\n"
+#, c-format
 msgid "%s: Unknown user or range: %s\n"
-msgstr "lastlog: 不明なユーザまたは範囲です: %s\n"
+msgstr "%s: 不明なユーザまたは範囲です: %s\n"
 
-#, fuzzy, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
+#, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
-msgstr "lastlog: %s のサイズを取得できませんでした: %s\n"
+msgstr "%s: %s のサイズを取得できませんでした: %s\n"
 
 #, c-format
 msgid ""
@@ -873,12 +836,10 @@ msgid "  -a, --add USER                add USER to GROUP\n"
 msgstr "  -a, --add USER                USER を GROUP に追加する\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
-msgstr "  --d, --delete USER            USER を GROUP から削除する\n"
+msgstr "  -d, --delete USER             USER を GROUP から削除する\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -d, --home-dir HOME_DIR       新アカウントのホームディレクトリ\n"
+msgstr ""
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr "  -r, --remove-password         GROUP のパスワードを削除する\n"
@@ -1127,48 +1088,33 @@ msgstr "%s: グループ %s は NIS のグループです\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: ユーザ %s は不明です\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"使い方: %s [オプション] [アクション]\n"
+"使い方: %s [オプション] [group [gshadow]]\n"
 "\n"
 "オプション:\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"使い方: %s [オプション] [アクション]\n"
+"使い方: %s [オプション] [group]\n"
 "\n"
 "オプション:\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
 
-#, fuzzy
-#| msgid "  -l, --list                    list the members of the group\n"
 msgid "  -s, --sort                    sort entries by UID\n"
-msgstr "  -l, --list                    グループのメンバーを表示します。\n"
+msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1254,28 +1200,21 @@ msgstr "使い方: id\n"
 msgid " groups="
 msgstr " グループ="
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
-"  -t, --time DAYS               ここ DAYS 日分の faillog 記録を表示する\n"
+"  -b, --before DAYS             DAYS 日より以前の lastlog 記録だけを表示する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -t, --time DAYS               display faillog records more recent than "
-#| "DAYS\n"
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
-"  -t, --time DAYS               ここ DAYS 日分の faillog 記録を表示する\n"
+"  -t, --time DAYS               DAYS 日前以降の lastlog 記録だけを表示する\n"
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
+"  -u, --user LOGIN              指定ユーザ LOGIN の lastlog 記録を表示する\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "ユーザ名         ポート   場所             最近のログイン"
@@ -1482,57 +1421,44 @@ msgstr "%s: %d 行: chown %s が失敗しました: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d 行: エントリを更新できません\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
-msgstr "  -a, --all                     全ユーザの faillog 記録を表示する\n"
+msgstr ""
+"  -a, --all                     全アカウントのパスワード状態をレポートする\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
-msgstr "  -r, --system                  システムアカウントを作成します\n"
+msgstr ""
+"  -d, --delete                  指定アカウントのパスワードを削除する\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
-msgstr "  -r, --system                  システムアカウントを作成します\n"
+msgstr ""
+"  -e, --expire                  指定アカウントのパスワードを期限切れにする\n"
 
-#, fuzzy
-#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -e, --encrypted               与えたパスワードを暗号化する\n"
+msgstr ""
+"  -k, --keep-tokens             期限切れの場合にのみパスワードを変更する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password PASSWORD       パスワードをこの (暗号化された) PASSWORD\n"
-"                                に変更する\n"
+"  -i, --inactive INACTIVE       期限切れ後のパスワード無効化日数を\n"
+"                                INACTIVE にする\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr ""
+"  -l, --lock                    指定アカウントをロックする\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
+"  -n, --mindays MIN_DAYS        パスワードが変更できるまでの最短日数を\n"
+"                                MIN_DAYS に変更する\n"
 
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr "  -q, --quiet                   表示抑制モード\n"
@@ -1540,32 +1466,29 @@ msgstr "  -q, --quiet                   表示抑制モード\n"
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr ""
+"  -r, --repository REPOSITORY   リポジトリ REPOSITORY のパスワードを変更する\n"
 
-#, fuzzy
-#| msgid "  -r, --system                  create a system account\n"
 msgid ""
 "  -S, --status                  report password status on the named account\n"
-msgstr "  -r, --system                  システムアカウントを作成します\n"
+msgstr ""
+"  -S, --status                  指定アカウントのパスワードの状態を報告する\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr ""
+"  -u, --unlock                  指定アカウントのロックを解除する\n"
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -w, --warndays WARN_DAYS      期限切れ警告の日数を WARN_DAYS にする\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -s, --sha-rounds              SHA* 暗号化アルゴリズムの SHA ラウンド回数\n"
+"  -x, --maxdays MAX_DAYS        パスワードが変更できる期間の最長日数を\n"
+"                                MAX_DAYS に変更する\n"
 
 msgid "Old password: "
 msgstr "古いパスワード: "
@@ -1648,31 +1571,23 @@ msgstr "%s: パスワードは変更されました。\n"
 msgid "%s: password expiry information changed.\n"
 msgstr "%s: パスワード期限切れ情報を変更しました\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"使い方: %s [オプション] [アクション]\n"
+"使い方: %s [オプション] [passwd]\n"
 "\n"
 "オプション:\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [action]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"使い方: %s [オプション] [アクション]\n"
+"使い方: %s [オプション] [passwd [shadow]]\n"
 "\n"
 "オプション:\n"
 
@@ -1867,10 +1782,9 @@ msgstr "%s: pam_start: エラー %d\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: %s の内容を削除できませんでした: %s\n"
 
-#, fuzzy, c-format
-#| msgid "Cannot execute %s"
+#, c-format
 msgid "Cannot execute %s\n"
-msgstr "%s を実行できません"
+msgstr "%s を実行できません\n"
 
 msgid "No password file"
 msgstr "パスワードファイルがありません"
@@ -1913,10 +1827,9 @@ msgstr "%s: 新しいデフォルトファイルを開けません\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: %s の行が長すぎます: %s..."
 
-#, fuzzy, c-format
-#| msgid "%s: rename: %s: %s"
+#, c-format
 msgid "%s: rename: %s: %s\n"
-msgstr "%s: ファイル名変更: %s: %s"
+msgstr "%s: ファイル名変更: %s: %s\n"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -1926,11 +1839,7 @@ msgstr "%s: グループ '%s' は NIS グループです。\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: 指定したグループ数が多すぎます (最大 %d 個)。\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] LOGIN\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -1939,6 +1848,8 @@ msgid ""
 "Options:\n"
 msgstr ""
 "使い方: %s [オプション] LOGIN\n"
+"        %s -D\n"
+"        %s -D [オプション]\n"
 "\n"
 "オプション:\n"
 
@@ -2127,26 +2038,15 @@ msgstr ""
 "%s: 警告: ホームディレクトリが既に存在します。\n"
 "skel ディレクトリからのコピーは行いません。\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -f, --force                   exit successfully if the group already "
-#| "exists,\n"
-#| "                                and cancel -g if the GID is already used\n"
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
 msgstr ""
-"  -f, --force                   グループがすでに存在していたら正常終了しま"
-"す。\n"
-"                                また GID が既に用いられていたら -g をキャンセ"
-"ル\n"
-"                                します\n"
+"  -f, --force                   当該ユーザの所有でないファイルも削除する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid "  -r, --remove                  remove home directory and mail spool\n"
-msgstr "  -r, --reset                   ログイン失敗のカウンタをリセットする\n"
+msgstr ""
+"  -r, --remove                  ホームディレクトリとメールスプールを削除する\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2208,97 +2108,78 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: ディレクトリ %s の削除でエラーが起きました\n"
 
-#, fuzzy
-#| msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
-msgstr "  -c, --comment COMMENT         新アカウントの GECOS フィールド\n"
+msgstr ""
+"  -c, --comment COMMENT         GECOS フィールドの値を再設定する\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr "  -d, --home-dir HOME_DIR       新アカウントのホームディレクトリ\n"
+msgstr ""
+"  -d, --home HOME_DIR           ユーザアカウントのホームディレクトリを\n"
+"                                再設定する\n"
 
-#, fuzzy
-#| msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate EXPIRE_DATE  新アカウントの期限切れ日付\n"
+msgstr ""
+"  -e, --expiredate EXPIRE_DATE  アカウント期限切れの日を EXPIRE_DATE にする\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       change the password to this (encrypted)\n"
-#| "                                PASSWORD\n"
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -p, --password PASSWORD       パスワードをこの (暗号化された) PASSWORD\n"
-"                                に変更する\n"
+"  -f, --inactive INACTIVE       パスワードを期限切れ後に無効化する日数を\n"
+"                                INACTIVEにする\n"
 
-#, fuzzy
-#| msgid "  -g, --gid GID                 use GID for the new group\n"
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
-msgstr "  -g, --gid GID                 この新規グループに GID を用います\n"
+msgstr ""
+"  -g, --gid GROUP               主グループを GROUP に変更する\n"
 
-#, fuzzy
-#| msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr "  -M, --members USER,...        GROUP のメンバーのリストを設定する\n"
+msgstr ""
+"  -G, --groups GROUPS           新たな補助グループのリストを与える\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
 msgstr ""
+"  -a, --append                  ユーザを (-G で指定された) 補助グループ群\n"
+"                                GROUPS に追加する。他のグループからの削除は\n"
+"                                行わない。\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
+"  -l, --login NEW_LOGIN         ログイン名を変更する\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -L, --lock                    lock the user account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr ""
+"  -L, --lock                    このユーザアカウントをロックする\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -b, --base-dir BASE_DIR       base directory for the home directory of "
-#| "the\n"
-#| "                                new account\n"
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
-"  -b, --base-dir BASE_DIR       新アカウントのホームディクトリの\n"
-"                                ベースディレクトリ\n"
+"  -m, --move-home               現ホームディレクトリの内容を新たな場所に\n"
+"                                移動する (-d が指定された場合のみ)\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -o, --non-unique              allow to use a duplicate (non-unique) "
-#| "GID\n"
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-msgstr "  -o, --non-unique              他と重なる GID を許可する\n"
+msgstr ""
+"  -o, --non-unique              一意でないユーザ (UID の重なるユーザ) を\n"
+"                                許可する\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -p, --password PASSWORD       use this encrypted password for the new "
-#| "group\n"
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
-"  -p, --password PASSWORD       新規グループにこの暗号化済パスワードを用い"
-"る\n"
+"  -p, --password PASSWORD       新たな暗号化済みパスワードを与える\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -u, --uid UID                 new UID for the user account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr ""
+"  -u, --uid UID                 このユーザの UID を変更する\n"
 
-#, fuzzy
-#| msgid "  -u, --uid UID                 user ID of the new account\n"
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr ""
+"  -U, --unlock                  このユーザアカウントのロックを解除する\n"
 
 msgid ""
 "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2492,18 +2373,6 @@ msgstr "%s: %s の tcb ディレクトリが見付かりませんでした\n"
 #~ "使い方: chage [オプション] [ログイン名]\n"
 #~ "\n"
 #~ "オプション\n"
-#~ "  -d, --lastday LAST_DAY        パスワードの最終変更日を LAST_DAY にする\n"
-#~ "  -E, --expiredate EXPIRE_DATE  アカウント期限切れの日を EXPIRE_DATE にす"
-#~ "る\n"
-#~ "  -h, --help                    このヘルプを表示して終了する\n"
-#~ "  -I, --inactive INACTIVE       パスワードを期限切れ後に無効化する日数を\n"
-#~ "                                INACTIVEにする\n"
-#~ "  -l, --list                    アカウントの経時情報を表示する\n"
-#~ "  -m, --mindays MIN_DAYS        パスワードが変更できるまでの最短日数を\n"
-#~ "                                MIN_DAYS に変更する\n"
-#~ "  -M, --maxdays MAX_DAYS        パスワードが変更できる期間の最長日数を\n"
-#~ "                                MAX_DAYS に変更する\n"
-#~ "  -W, --warndays WARN_DAYS      期限切れ警告の日数を WARN_DAYS にする\n"
 #~ "\n"
 
 #~ msgid "%s: PAM authentication failed\n"
