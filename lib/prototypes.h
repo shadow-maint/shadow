@@ -297,9 +297,9 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv);
 /* salt.c */
 extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
 
-/* selinux.c */
-int set_seuser(const char *login_name, const char *seuser_name);
-int del_seuser(const char *login_name);
+/* semanage.c */
+extern int set_seuser(const char *login_name, const char *seuser_name);
+extern int del_seuser(const char *login_name);
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);

@@ -39,7 +39,7 @@ libshadow_la_SOURCES = \
 	pwio.c \
 	pwio.h \
 	pwmem.c \
-	selinux.c \
+	semanage.c \
 	sgetgrent.c \
 	sgetpwent.c \
 	sgetspent.c \
