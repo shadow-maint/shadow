@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2011-11-13 18:42+0100\n"
+"POT-Creation-Date: 2012-01-08 18:12+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -54,6 +54,102 @@ msgstr "密碼："
 #, c-format
 msgid "%s's Password: "
 msgstr "%s 的密碼："
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set serange for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not allocate space for config info.\n"
+msgid "Could not set sename for %s\n"
+msgstr "無法為設定訊息配置空間。\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Changing the aging information for %s\n"
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "正在為 %s 修改年齡訊息\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot create SELinux user key\n"
+msgstr "%s：無法確定您的使用者名稱。\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s：第 %d 行：無法找到使用者 %s\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -642,7 +738,7 @@ msgid ""
 msgstr "用法：%s [輸入]\n"
 
 #, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -817,6 +913,10 @@ msgstr "未知使用者：%s\n"
 #| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s：無法將目錄 %s 改名為 %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Failed to write %s: %s\n"
+msgstr "%s：無效的工作電話：“%s”\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -1340,10 +1440,6 @@ msgstr "%s：使用者 %s 不存在\n"
 
 msgid "too many groups\n"
 msgstr "使用者群組過多\n"
-
-#, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr ""
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
@@ -1929,10 +2025,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-
-#, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s：無法建立目錄 %s\n"
 
@@ -1980,12 +2072,21 @@ msgid ""
 "Not copying any file from skel directory into it.\n"
 msgstr ""
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
 msgstr ""
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2049,6 +2150,10 @@ msgstr "%s：不能刪除目錄 %s (因為這將刪除使用者 %s 的主目錄)
 msgid "%s: error removing directory %s\n"
 msgstr "%s：刪除目錄 %s 時出錯\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
+msgstr ""
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
@@ -2103,7 +2208,7 @@ msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
 msgid ""
-"  -Z, --selinux-user            new SELinux user mapping for the user "
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 
@@ -2182,14 +2287,6 @@ msgid ""
 "You may need to modify %s for consistency.\n"
 "Please use the command '%s' to do so.\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: vipw [options]\n"
-"\n"
-"Options:\n"
-msgstr "用法：%s [輸入]\n"
 
 msgid "  -g, --group                   edit group database\n"
 msgstr ""
@@ -2273,6 +2370,14 @@ msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s：無效的主目錄“%s”\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "用法：%s [輸入]\n"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "malloc(%d) 失敗\n"

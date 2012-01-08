@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2011-11-13 18:42+0100\n"
+"POT-Creation-Date: 2012-01-08 18:12+0100\n"
 "PO-Revision-Date: 2011-11-26 19:42+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
@@ -56,6 +56,102 @@ msgstr "Pasahitza: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s (r)en pasahitza: "
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set serange for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not allocate space for config info.\n"
+msgid "Could not set sename for %s\n"
+msgstr "Ezin izan da lekua esleitu, konfigurazioaren informaziorako.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Changing the aging information for %s\n"
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "%s(r)en data informazioa aldatzen\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -397,8 +493,7 @@ msgstr ""
 msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
-msgstr ""
-"  -d, --lastday AZKEN_EGUNA     ezarri pasahitz aldaketa AZKEN_EGUNA\n"
+msgstr "  -d, --lastday AZKEN_EGUNA     ezarri pasahitz aldaketa AZKEN_EGUNA\n"
 
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
@@ -419,8 +514,7 @@ msgstr ""
 "                                -INACTIVE iraungitzean\n"
 
 msgid "  -l, --list                    show account aging information\n"
-msgstr ""
-"  -l, --list                    kontu denbora informazioa bistarazi\n"
+msgstr "  -l, --list                    kontu denbora informazioa bistarazi\n"
 
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
@@ -666,7 +760,7 @@ msgstr ""
 
 #, fuzzy, c-format
 #| msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -785,7 +879,8 @@ msgid ""
 "  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
-"  -l, --lock-secs SEG           saio-hasieran hutsegin ondoren kontua zenbat\n"
+"  -l, --lock-secs SEG           saio-hasieran hutsegin ondoren kontua "
+"zenbat\n"
 "                                segundutan blokeatuta egongo den\n"
 
 msgid ""
@@ -851,6 +946,11 @@ msgstr "%s: Eremu edo erabiltzaile ezezaguna: %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: Ezinda %s-ren tamaina eskuratu: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: Failed to write %s: %s\n"
+msgstr "%s: huts %s kentzerakoan\n"
+
 #, c-format
 msgid ""
 "Usage: %s [option] GROUP\n"
@@ -862,16 +962,13 @@ msgstr ""
 "Aukerak:\n"
 
 msgid "  -a, --add USER                add USER to GROUP\n"
-msgstr ""
-"  -a, --add ERAB                Gehitu ERABiltzailea TALDEra\n"
+msgstr "  -a, --add ERAB                Gehitu ERABiltzailea TALDEra\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
-msgstr ""
-"  -d, --delete ERAB             kendu ERABiltzailea TALDEtik\n"
+msgstr "  -d, --delete ERAB             kendu ERABiltzailea TALDEtik\n"
 
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
-"  -r, --remove-password         TALDEaren pasahitaz kendu\n"
+msgstr "  -r, --remove-password         TALDEaren pasahitaz kendu\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr ""
@@ -882,8 +979,7 @@ msgstr ""
 "  -R, --restrict                mugatu sarrera TALDEra bere partaideetara\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
-msgstr ""
-"  -M, --members ERAB,...        ezarri TALDEaren partaideen zerrenda\n"
+msgstr "  -M, --members ERAB,...        ezarri TALDEaren partaideen zerrenda\n"
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
@@ -893,8 +989,7 @@ msgstr ""
 "                                ezarri TALDEaren kudeatzaile zerrenda\n"
 
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr ""
-"-A eta -M auekrekin kenduta, aukerak ezin dira nahastu.\n"
+msgstr "-A eta -M auekrekin kenduta, aukerak ezin dira nahastu.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "Aukera hauek ezin dira nahastu.\n"
@@ -967,8 +1062,7 @@ msgstr ""
 "                                ezarritako taldea aurretik egon\n"
 
 msgid "  -g, --gid GID                 use GID for the new group\n"
-msgstr ""
-"  -g, --gid GID                 GID erabili talde berrirako\n"
+msgstr "  -g, --gid GID                 GID erabili talde berrirako\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
@@ -985,11 +1079,11 @@ msgid ""
 "  -p, --password PASSWORD       use this encrypted password for the new "
 "group\n"
 msgstr ""
-"  -p, --password PASSWORD       enkriptatutako pasahitza erabili talde berrirako\n"
+"  -p, --password PASSWORD       enkriptatutako pasahitza erabili talde "
+"berrirako\n"
 
 msgid "  -r, --system                  create a system account\n"
-msgstr ""
-"  -r, --system                  sistema kontu bat sortu\n"
+msgstr "  -r, --system                  sistema kontu bat sortu\n"
 
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
@@ -1059,7 +1153,8 @@ msgid ""
 "group\n"
 "                                (root only)\n"
 msgstr ""
-"  -g, --group groupname         aldatu talde-izena erabiltzailearen taldea ordez\n"
+"  -g, --group groupname         aldatu talde-izena erabiltzailearen taldea "
+"ordez\n"
 "                                (root bakarrik)\n"
 
 msgid "\n"
@@ -1071,21 +1166,21 @@ msgstr "Ekintzak:\n"
 msgid ""
 "  -a, --add username            add username to the members of the group\n"
 msgstr ""
-"  -a, --add erabiltzailea       gehitu erabiltzaile-izena taldearen partaideetara\n"
+"  -a, --add erabiltzailea       gehitu erabiltzaile-izena taldearen "
+"partaideetara\n"
 
 msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
 msgstr ""
-"  -d, --delete erabiltzailea    kendu erabiltzaile-izena taldearen partaideetatik\n"
+"  -d, --delete erabiltzailea    kendu erabiltzaile-izena taldearen "
+"partaideetatik\n"
 
 msgid "  -p, --purge                   purge all members from the group\n"
-msgstr ""
-"  -p, --purge                   garbitu talde baten partaide guztiak\n"
+msgstr "  -p, --purge                   garbitu talde baten partaide guztiak\n"
 
 msgid "  -l, --list                    list the members of the group\n"
-msgstr ""
-"  -l, --list                    taldearen partaideak zerrendatu\n"
+msgstr "  -l, --list                    taldearen partaideak zerrendatu\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
@@ -1402,10 +1497,6 @@ msgstr "%s: `%lu' GIDa ez da existitzen\n"
 msgid "too many groups\n"
 msgstr "talde gehiegi\n"
 
-#, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
-
 msgid "  -r, --system                  create system accounts\n"
 msgstr "  -r, --system                  sortu sistema kontuak\n"
 
@@ -1466,8 +1557,7 @@ msgstr ""
 
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
-msgstr ""
-"  -d, --delete                  emandako kontuaren pasahitza ezabatu\n"
+msgstr "  -d, --delete                  emandako kontuaren pasahitza ezabatu\n"
 
 msgid ""
 "  -e, --expire                  force expire the password for the named "
@@ -1490,8 +1580,7 @@ msgstr ""
 
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
-msgstr ""
-"  -l, --lock                    emandako kontua blokeatu\n"
+msgstr "  -l, --lock                    emandako kontua blokeatu\n"
 
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
@@ -1518,8 +1607,7 @@ msgstr ""
 
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
-msgstr ""
-"  -u, --unlock                  emandako kontuaren blokeoa kendu\n"
+msgstr "  -u, --unlock                  emandako kontuaren blokeoa kendu\n"
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
@@ -2035,12 +2123,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: huts %lu UIDaren lastlog sarrera berrezartzean: %s\n"
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
-"egin du.\n"
-
-#, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: ezin da %s direktorioa sortu\n"
 
@@ -2091,6 +2173,12 @@ msgstr ""
 "%s: abisua: etxe direktorioa badago dagoeneko.\n"
 "Ez da bertara skel direktorioko fitxategirik kopiatuko.\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
+"egin du.\n"
+
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
@@ -2101,6 +2189,17 @@ msgstr ""
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 "  -r, --remove                  etxe direktorioa eta posta hilara ezabatu\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
+msgstr ""
+"  -Z, --selinux-user            SELinux erabiltzaile mapatze berria "
+"erabiltzailearen kontuarentzat\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2166,19 +2265,25 @@ msgstr "%s: ez da %s direktorioa ezabatuko (%s(r)en etxea ezabatuko luke)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: errorea %s direktorioa ezabatzean\n"
 
-msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+#, fuzzy, c-format
+#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
-"  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
+"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
+"egin du.\n"
+
+msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
+msgstr "  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
 
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
-"  -d, --home-dir ETXE_DIR       erabiltzaile kontu berriaren etxe direktorioa\n"
+"  -d, --home-dir ETXE_DIR       erabiltzaile kontu berriaren etxe "
+"direktorioa\n"
 
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr ""
-"  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
+msgstr "  -e, --expiredate IRAUNG_DATA  kontu iraungitze data ezarri\n"
 
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
@@ -2202,16 +2307,15 @@ msgid ""
 "                                mentioned by the -G option without removing\n"
 "                                him/her from other groups\n"
 msgstr ""
-"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako talde\n"
+"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
+"talde\n"
 "                                gehigarrietara beste taldeetatik kendu gabe\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
-msgstr ""
-"  -l, --login IZENA             saio hasiera izenaren balio berria\n"
+msgstr "  -l, --login IZENA             saio hasiera izenaren balio berria\n"
 
 msgid "  -L, --lock                    lock the user account\n"
-msgstr ""
-"  -L, --lock                    erabiltzaile kontua blokeatu\n"
+msgstr "  -L, --lock                    erabiltzaile kontua blokeatu\n"
 
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
@@ -2223,7 +2327,8 @@ msgstr ""
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
-"  -o, --non-unique              onartu UID bikoiztuak (ez bakarrak) erabiltzea\n"
+"  -o, --non-unique              onartu UID bikoiztuak (ez bakarrak) "
+"erabiltzea\n"
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
@@ -2232,15 +2337,17 @@ msgstr ""
 "                                berriarentzat\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
-msgstr ""
-"  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
+msgstr "  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
 
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr ""
-"  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
+msgstr "  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
 msgid ""
-"  -Z, --selinux-user            new SELinux user mapping for the user "
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 "  -Z, --selinux-user            SELinux erabiltzaile mapatze berria "
@@ -2332,26 +2439,14 @@ msgstr ""
 "Konsistetziagatik %s eraldatu behar duzu.\n"
 "Mesedez erabili '%s' komandoa horretarako.\n"
 
-msgid ""
-"Usage: vipw [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Erabilera: vipw [aukerak]\n"
-"\n"
-"Aukerak:\n"
-
 msgid "  -g, --group                   edit group database\n"
-msgstr ""
-"  -g, --group                   talde datu-basea editatu\n"
+msgstr "  -g, --group                   talde datu-basea editatu\n"
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
-"  -p, --passwd                  pasahitz datu-basea editatu\n"
+msgstr "  -p, --passwd                  pasahitz datu-basea editatu\n"
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
-msgstr ""
-"  -s, --shadow                  shadow edo gshadow datubasea editatu\n"
+msgstr "  -s, --shadow                  shadow edo gshadow datubasea editatu\n"
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
@@ -2422,6 +2517,18 @@ msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
 #| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: oinarrizko '%s' direktorio baliogabea\n"
+
+#~ msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ msgstr "  -c, --crypt-method            zifratze metodoa (%s-etako bat)\n"
+
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Erabilera: vipw [aukerak]\n"
+#~ "\n"
+#~ "Aukerak:\n"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "malloc(%d) huts egin du\n"

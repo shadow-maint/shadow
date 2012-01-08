@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2011-11-13 18:42+0100\n"
+"POT-Creation-Date: 2012-01-08 18:12+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -51,6 +51,102 @@ msgstr "Passord: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s sitt passord: "
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set serange for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not allocate space for config info.\n"
+msgid "Could not set sename for %s\n"
+msgstr "Klarte ikkje finna plass for oppsettsinformasjon.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Changing the aging information for %s\n"
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Endrar aldringsformasjonen for %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: Klarer ikkje avgjere brukarnamnet ditt.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: cannot find user %s\n"
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: linje %d: klarer ikkje finne brukar %s\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -643,7 +739,7 @@ msgid ""
 msgstr "Bruk: %s [inndata]\n"
 
 #, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr ""
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -818,6 +914,10 @@ msgstr "Ukjent brukar: %s\n"
 #| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: klarte ikkje endra namn på mappa %s til %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Failed to write %s: %s\n"
+msgstr "%s: ugyldig telefonnummer, arbeid: «%s»\n"
 
 #, fuzzy, c-format
 #| msgid "Usage: %s [input]\n"
@@ -1341,10 +1441,6 @@ msgstr "%s: brukar %s finst ikkje\n"
 
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
-
-#, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr ""
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
@@ -1930,10 +2026,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-
-#, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: kan ikkje oppretta mappa %s\n"
 
@@ -1982,12 +2074,21 @@ msgid ""
 "Not copying any file from skel directory into it.\n"
 msgstr ""
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
 msgstr ""
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2052,6 +2153,10 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: feil ved fjerning av mappe %s\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
+msgstr ""
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
@@ -2106,7 +2211,7 @@ msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
 msgid ""
-"  -Z, --selinux-user            new SELinux user mapping for the user "
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 
@@ -2185,14 +2290,6 @@ msgid ""
 "You may need to modify %s for consistency.\n"
 "Please use the command '%s' to do so.\n"
 msgstr ""
-
-#, fuzzy
-#| msgid "Usage: %s [input]\n"
-msgid ""
-"Usage: vipw [options]\n"
-"\n"
-"Options:\n"
-msgstr "Bruk: %s [inndata]\n"
 
 msgid "  -g, --group                   edit group database\n"
 msgstr ""
@@ -2276,6 +2373,14 @@ msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: ugyldig startmappe «%s»\n"
+
+#, fuzzy
+#~| msgid "Usage: %s [input]\n"
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr "Bruk: %s [inndata]\n"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "malloc(%d) feila\n"

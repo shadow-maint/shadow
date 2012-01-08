@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2011-11-13 18:42+0100\n"
+"POT-Creation-Date: 2012-01-08 18:12+0100\n"
 "PO-Revision-Date: 2011-11-23 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -65,6 +65,102 @@ msgstr "Adgangskode: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s's adgangskode: "
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set serange for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not allocate space for config info.\n"
+msgid "Could not set sename for %s\n"
+msgstr "Kunne ikke frigøre plads til opsætningsoplysninger.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Changing the aging information for %s\n"
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Ændrer forældelsesoplysninger for %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot fork user shell\n"
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: Kan ikke forgrene brugerskal\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -393,7 +489,8 @@ msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
-"  -d, --lastday SIDSTE_DAG      sæt seneste adgangskodeændring til SIDSTE_DAG\n"
+"  -d, --lastday SIDSTE_DAG      sæt seneste adgangskodeændring til "
+"SIDSTE_DAG\n"
 
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
@@ -411,8 +508,7 @@ msgstr ""
 "                                INAKTIVT\n"
 
 msgid "  -l, --list                    show account aging information\n"
-msgstr ""
-"  -l, --list                    vis forældelsesoplysninger for konto\n"
+msgstr "  -l, --list                    vis forældelsesoplysninger for konto\n"
 
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
@@ -657,8 +753,9 @@ msgstr ""
 "\n"
 "Tilvalg:\n"
 
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+#, fuzzy, c-format
+#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method <METODE>   crypt-metoden (en af %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -836,6 +933,11 @@ msgstr "%s: Ukendt bruger eller interval: %s\n"
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: Kan ikke indhente størrelsen for %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: Failed to write %s: %s\n"
+msgstr "%s: Kunne ikke fjerne %s\n"
 
 #, c-format
 msgid ""
@@ -1378,10 +1480,6 @@ msgstr "%s: GID »%lu« findes ikke\n"
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
 
-#, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method            crypt-metoden (en af %s)\n"
-
 msgid "  -r, --system                  create system accounts\n"
 msgstr "  -r, --system                  opret systemkontoer\n"
 
@@ -1463,8 +1561,7 @@ msgstr ""
 
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
-msgstr ""
-"  -l, --lock                    læs den navngivne konto\n"
+msgstr "  -l, --lock                    læs den navngivne konto\n"
 
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
@@ -1494,8 +1591,7 @@ msgstr ""
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr ""
-"  -w, --warndays ADVAR_DAGE     advar om udløb i ADVAR_DAGE dage\n"
+msgstr "  -w, --warndays ADVAR_DAGE     advar om udløb i ADVAR_DAGE dage\n"
 
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
@@ -2011,11 +2107,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: Kunne ikke nulstille lastlog-punktet for UID %lu: %s\n"
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: Advarsel: Brugernavnet %s til %s SELinux-brugerkortlægning mislykkedes.\n"
-
-#, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: Kan ikke oprette mappen %s\n"
 
@@ -2066,6 +2157,11 @@ msgstr ""
 "%s: Advarsel: Hjemmemappen findes allerede.\n"
 "Kopierer ikke nogen filer til den fra skelet-mappen.\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: Advarsel: Brugernavnet %s til %s SELinux-brugerkortlægning mislykkedes.\n"
+
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
@@ -2074,8 +2170,18 @@ msgstr ""
 "                                selvom de ikke ejers af brugeren\n"
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
+msgstr "  -r, --remove                  fjern home-mappen og postkøen\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
 msgstr ""
-"  -r, --remove                  fjern home-mappen og postkøen\n"
+"  -Z, --selinux-user            ny SELinux-brugerkortlægning for "
+"brugerkontoen\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2139,13 +2245,18 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: Fejl under fjernelse af mappen %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
+msgstr ""
+"%s: Advarsel: Brugernavnet %s til %s SELinux-brugerkortlægning mislykkedes.\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment KOMMENTAR       ny værdi til GECOS-feltet\n"
 
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr ""
-"  -d, --home-dir HJEMMEMAPPE    den nye brugerkontos hjemmemappe\n"
+msgstr "  -d, --home-dir HJEMMEMAPPE    den nye brugerkontos hjemmemappe\n"
 
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
@@ -2165,8 +2276,7 @@ msgstr ""
 "                                primære gruppe\n"
 
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr ""
-"  -G, --groups GRUPPER          ny liste med supplerende grupper\n"
+msgstr "  -G, --groups GRUPPER          ny liste med supplerende grupper\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
@@ -2175,12 +2285,10 @@ msgid ""
 msgstr ""
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
-msgstr ""
-"  -l, --login NYT_LOGIND        ny værdi til logindnavnet\n"
+msgstr "  -l, --login NYT_LOGIND        ny værdi til logindnavnet\n"
 
 msgid "  -L, --lock                    lock the user account\n"
-msgstr ""
-"  -L, --lock                    lås brugerkontoen\n"
+msgstr "  -L, --lock                    lås brugerkontoen\n"
 
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
@@ -2192,7 +2300,8 @@ msgstr ""
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
-"  -o, --non-unique              tillad oprettelse af ens (der ikke er unik) UID\n"
+"  -o, --non-unique              tillad oprettelse af ens (der ikke er unik) "
+"UID\n"
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
@@ -2201,15 +2310,17 @@ msgstr ""
 "                                adgangskode\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
-msgstr ""
-"  -u, --uid UID                 ny UID til brugerkontoen\n"
+msgstr "  -u, --uid UID                 ny UID til brugerkontoen\n"
 
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr ""
-"  -U, --unlock                  åbn brugerkontoen\n"
+msgstr "  -U, --unlock                  åbn brugerkontoen\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
 msgid ""
-"  -Z, --selinux-user            new SELinux user mapping for the user "
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 "  -Z, --selinux-user            ny SELinux-brugerkortlægning for "
@@ -2300,15 +2411,6 @@ msgstr ""
 "Du skal måske ændre %s for konsistens.\n"
 "Brug venligst kommandoen »%s« til dette.\n"
 
-msgid ""
-"Usage: vipw [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Brug: vipw [tilvalg]\n"
-"\n"
-"Tilvalg:\n"
-
 msgid "  -g, --group                   edit group database\n"
 msgstr "  -g, --group                   rediger gruppedatabase\n"
 
@@ -2374,6 +2476,18 @@ msgstr "%s: Kan ikke gendanne %s: %s (dine ændringer er i %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: Kunne ikke finde tcb-mappe for %s\n"
+
+#~ msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ msgstr "  -c, --crypt-method            crypt-metoden (en af %s)\n"
+
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Brug: vipw [tilvalg]\n"
+#~ "\n"
+#~ "Tilvalg:\n"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "malloc(%d) mislykkedes\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow request\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2011-11-13 18:42+0100\n"
+"POT-Creation-Date: 2012-01-08 18:12+0100\n"
 "PO-Revision-Date: 2011-11-24 21:30+0100\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -58,6 +58,102 @@ msgstr "Пароль: "
 #, c-format
 msgid "%s's Password: "
 msgstr "Пароль пользователя %s: "
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set serange for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not allocate space for config info.\n"
+msgid "Could not set sename for %s\n"
+msgstr "Не удалось выделить память для загрузки настроек.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Changing the aging information for %s\n"
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Изменение информации о сроках действия для %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot determine your user name.\n"
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: не удалось определить имя пользователя.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot fork user shell\n"
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: невозможно выполнить fork пользовательской оболочки\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -418,8 +514,7 @@ msgstr ""
 "                                устаревания в значение INACTIVE\n"
 
 msgid "  -l, --list                    show account aging information\n"
-msgstr ""
-"  -l, --list                    показать «возраст» учётной записи\n"
+msgstr "  -l, --list                    показать «возраст» учётной записи\n"
 
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
@@ -667,8 +762,9 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, c-format
-msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+#, fuzzy, c-format
+#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method <АЛГОРИТМ> алгоритм шифрования (один из: %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
@@ -840,8 +936,7 @@ msgstr "%s: не удалось сбросить счётчик неудачны
 
 #, c-format
 msgid "%s: Failed to set max for UID %lu\n"
-msgstr ""
-"%s: не удалось установить максимальное число попыток для UID %lu\n"
+msgstr "%s: не удалось установить максимальное число попыток для UID %lu\n"
 
 #, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
@@ -854,6 +949,11 @@ msgstr "%s: неизвестный пользователь или диапаз�
 #, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: не удалось получить размер %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: Failed to write %s: %s\n"
+msgstr "%s: не удалось удалить %s\n"
 
 #, c-format
 msgid ""
@@ -1132,9 +1232,13 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: %s [options] [файл_group]\n"
+#| "\n"
+#| "Options:\n"
 msgid ""
-"Usage: %s [options] [файл_group]\n"
+"Usage: %s [options] [group]\n"
 "\n"
 "Options:\n"
 msgstr ""
@@ -1235,18 +1339,21 @@ msgstr " группы="
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
-"  -b, --before ДНЕЙ             показать записи lastlog за последние ДНЕЙ дней\n"
+"  -b, --before ДНЕЙ             показать записи lastlog за последние ДНЕЙ "
+"дней\n"
 
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
-"  -t, --time ДНЕЙ               показать записи lastlog за последние ДНЕЙ дней\n"
+"  -t, --time ДНЕЙ               показать записи lastlog за последние ДНЕЙ "
+"дней\n"
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
-"  -u, --user ИМЯ                показать запись lastlog для учётной записи ИМЯ\n"
+"  -u, --user ИМЯ                показать запись lastlog для учётной записи "
+"ИМЯ\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Пользователь     Порт     С                Последний раз"
@@ -1393,10 +1500,6 @@ msgstr "%s: GID «%lu» не существует\n"
 
 msgid "too many groups\n"
 msgstr "слишком много групп\n"
-
-#, c-format
-msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method            алгоритм шифрования (один из: %s)\n"
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr "  -r, --system                  создать системные учётные записи\n"
@@ -2046,12 +2149,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: не удалось сбросить запись в lastlog для UID %lu: %s\n"
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: предупреждение: не удалось отобразить имя пользователя %s в %s из "
-"SELinux.\n"
-
-#, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: не удалось создать каталог %s\n"
 
@@ -2102,6 +2199,12 @@ msgstr ""
 "%s: предупреждение: домашний каталог уже существует.\n"
 "Никакие файлы из каталога шаблонов копироваться не будут.\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: предупреждение: не удалось отобразить имя пользователя %s в %s из "
+"SELinux.\n"
+
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
@@ -2112,6 +2215,16 @@ msgstr ""
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 "  -r, --remove                  удалить домашний каталог и почтовый ящик\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
+msgstr ""
+"  -Z, --selinux-user            новое SELinux-отображение учётной записи\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot remove the primary group of user '%s'\n"
@@ -2175,6 +2288,13 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: ошибка удаления каталога %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
+msgstr ""
+"%s: предупреждение: не удалось отобразить имя пользователя %s в %s из "
+"SELinux.\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment КОММЕНТАРИЙ     новое значение поля GECOS\n"
 
@@ -2194,15 +2314,15 @@ msgid ""
 "                                to INACTIVE\n"
 msgstr ""
 "  -f, --inactive НЕАКТИВНОСТЬ   установить период неактивности пароля после\n"
-"                                устаревания учётной записи равным НЕАКТИВНОСТЬ\n"
+"                                устаревания учётной записи равным "
+"НЕАКТИВНОСТЬ\n"
 
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr ""
 "  -g, --gid ГРУППА              принудительно назначить первичную ГРУППУ\n"
 
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr ""
-"  -G, --groups ГРУППЫ           список дополнительных ГРУПП\n"
+msgstr "  -G, --groups ГРУППЫ           список дополнительных ГРУПП\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
@@ -2214,19 +2334,18 @@ msgstr ""
 "                                пользователя из других групп\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
-msgstr ""
-"  -l, --login НОВОЕ_ИМЯ         новое значение имени учётной записи\n"
+msgstr "  -l, --login НОВОЕ_ИМЯ         новое значение имени учётной записи\n"
 
 msgid "  -L, --lock                    lock the user account\n"
-msgstr ""
-"  -L, --lock                    заблокировать учётную запись\n"
+msgstr "  -L, --lock                    заблокировать учётную запись\n"
 
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
 "  -m, --move-home               переместить содержимое домашнего каталога в\n"
-"                                новое место (использовать только вместе с -d)\n"
+"                                новое место (использовать только вместе с -"
+"d)\n"
 
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
@@ -2241,15 +2360,17 @@ msgstr ""
 "                                учётной записи\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
-msgstr ""
-"  -u, --uid UID                 новый UID для учётной записи\n"
+msgstr "  -u, --uid UID                 новый UID для учётной записи\n"
 
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr ""
-"  -U, --unlock                  разблокировать учётную запись\n"
+msgstr "  -U, --unlock                  разблокировать учётную запись\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user            new SELinux user mapping for the user "
+#| "account\n"
 msgid ""
-"  -Z, --selinux-user            new SELinux user mapping for the user "
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
 "  -Z, --selinux-user            новое SELinux-отображение учётной записи\n"
@@ -2342,15 +2463,6 @@ msgstr ""
 "Для обеспечения согласованности вам может потребоваться изменить %s.\n"
 "Для этого используйте команду «%s».\n"
 
-msgid ""
-"Usage: vipw [options]\n"
-"\n"
-"Options:\n"
-msgstr ""
-"Использование: vipw [параметры]\n"
-"\n"
-"Параметры:\n"
-
 msgid "  -g, --group                   edit group database\n"
 msgstr "  -g, --group                   редактировать базу данных групп\n"
 
@@ -2419,6 +2531,18 @@ msgstr "%s: не удалось восстановить %s: %s (ваши изм
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: не удалось найти каталог tcb для %s\n"
+
+#~ msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
+#~ msgstr "  -c, --crypt-method            алгоритм шифрования (один из: %s)\n"
+
+#~ msgid ""
+#~ "Usage: vipw [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ msgstr ""
+#~ "Использование: vipw [параметры]\n"
+#~ "\n"
+#~ "Параметры:\n"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "не удалось выполнить malloc(%d)\n"
