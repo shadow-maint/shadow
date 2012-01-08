@@ -34,11 +34,14 @@
 
 #include "defines.h"
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <stdio.h>
 #include <stdarg.h>
 #include <selinux/selinux.h>
 #include <semanage/semanage.h>
+#include "prototypes.h"
 
 
 #ifndef DEFAULT_SERANGE
@@ -46,7 +49,7 @@
 #endif
 
 
-static void semanage_error_callback (void *varg,
+static void semanage_error_callback (unused void *varg,
                                      semanage_handle_t *handle,
                                      const char *fmt, ...)
 {

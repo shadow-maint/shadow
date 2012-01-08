@@ -34,6 +34,7 @@
 #include "defines.h"
 
 #include <selinux/selinux.h>
+#include "prototypes.h"
 
 
 static bool selinux_checked = false;
