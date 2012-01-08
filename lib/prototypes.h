@@ -122,10 +122,6 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       bool reset_selinux,
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid);
-#ifdef WITH_SELINUX
-extern int set_selinux_file_context (const char *dst_name);
-extern int reset_selinux_file_context (void);
-#endif
 
 /* encrypt.c */
 extern /*@exposed@*/char *pw_encrypt (const char *, const char *);
@@ -298,12 +294,16 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv);
 extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg);
 
 /* selinux.c */
+#ifdef WITH_SELINUX
 extern int set_selinux_file_context (const char *dst_name);
 extern int reset_selinux_file_context (void);
+#endif
 
 /* semanage.c */
+#ifdef WITH_SELINUX
 extern int set_seuser(const char *login_name, const char *seuser_name);
 extern int del_seuser(const char *login_name);
+#endif
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);

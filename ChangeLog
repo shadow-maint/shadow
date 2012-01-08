@@ -1,3 +1,7 @@
+2012-01-08  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h: Cleanup.
+
 2011-12-09  Peter Vrabec  <pvrabec@redhat.com>
 
 	* lib/prototypes.h, lib/Makefile.am, po/POTFILES.in,
