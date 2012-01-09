@@ -5,13 +5,13 @@
 # Eugene Konev <ejka@imfi.kspu.ru>, 2004.
 # alyoshin.s@gmail.com <alyoshin.s@gmail.com>, 2008.
 # Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006, 2007, 2008.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2011.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow request\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2012-01-08 18:12+0100\n"
-"PO-Revision-Date: 2011-11-24 21:30+0100\n"
+"PO-Revision-Date: 2012-01-09 10:42+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -46,11 +46,11 @@ msgstr "ошибка настройки: неизвестный элемент �
 
 #, c-format
 msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
+msgstr "%s: nscd завершился с ошибкой (по сигналу %d)\n"
 
 #, c-format
 msgid "%s: nscd exited with status %d"
-msgstr ""
+msgstr "%s: nscd завершился с кодом выхода %d"
 
 msgid "Password: "
 msgstr "Пароль: "
@@ -61,99 +61,98 @@ msgstr "Пароль пользователя %s: "
 
 #, c-format
 msgid "[libsemanage]: %s\n"
-msgstr ""
+msgstr "[libsemanage]: %s\n"
 
 #, c-format
 msgid "Cannot create SELinux management handle\n"
-msgstr ""
+msgstr "Невозможно создать управляющий описатель SELinux\n"
 
 #, c-format
 msgid "SELinux policy not managed\n"
-msgstr ""
+msgstr "Политика SELinux не управляема\n"
 
 #, c-format
 msgid "Cannot read SELinux policy store\n"
-msgstr ""
+msgstr "Невозможно прочитать хранилище политики SELinux\n"
 
 #, c-format
 msgid "Cannot establish SELinux management connection\n"
-msgstr ""
+msgstr "Невозможно установить управляющее подключение SELinux\n"
 
 #, c-format
 msgid "Cannot begin SELinux transaction\n"
-msgstr ""
+msgstr "Невозможно начать транзакцию SELinux\n"
 
 #, c-format
 msgid "Could not query seuser for %s\n"
-msgstr ""
+msgstr "Не удалось запросить seuser для %s\n"
 
 #, c-format
 msgid "Could not set serange for %s\n"
-msgstr ""
+msgstr "Не удалось назначить serange для %s\n"
 
-#, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
+#, c-format
 msgid "Could not set sename for %s\n"
-msgstr "Не удалось выделить память для загрузки настроек.\n"
+msgstr "Не удалось назначить sename для %s\n"
 
 #, c-format
 msgid "Could not modify login mapping for %s\n"
-msgstr ""
+msgstr "Не удалось изменить сопоставление входа для %s\n"
 
-#, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
+#, c-format
 msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Изменение информации о сроках действия для %s\n"
+msgstr "Невозможно создать сопоставление входа SELinux для %s\n"
 
 #, c-format
 msgid "Could not set name for %s\n"
-msgstr ""
+msgstr "Невозможно задать имя для %s\n"
 
 #, c-format
 msgid "Could not set SELinux user for %s\n"
-msgstr ""
+msgstr "Невозможно задать пользователя SELinux для %s\n"
 
 #, c-format
 msgid "Could not add login mapping for %s\n"
-msgstr ""
+msgstr "Невозможно добавить сопоставление входа для %s\n"
 
 #, c-format
 msgid "Cannot init SELinux management\n"
-msgstr ""
+msgstr "Невозможно инициализировать управление SELinux\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
+#, c-format
 msgid "Cannot create SELinux user key\n"
-msgstr "%s: не удалось определить имя пользователя.\n"
+msgstr "Невозможно создать ключ пользователя SELinux\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
+#, c-format
 msgid "Cannot verify the SELinux user\n"
-msgstr "%s: невозможно выполнить fork пользовательской оболочки\n"
+msgstr "Невозможно проверить пользователя SELinux\n"
 
 #, c-format
 msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
+msgstr "Невозможно изменить пользовательское сопоставление SELinux\n"
 
 #, c-format
 msgid "Cannot add SELinux user mapping\n"
-msgstr ""
+msgstr "Невозможно добавить пользовательское сопоставление SELinux\n"
 
 #, c-format
 msgid "Cannot commit SELinux transaction\n"
-msgstr ""
+msgstr "Невозможно зафиксировать транзакцию SELinux\n"
 
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
 msgstr ""
+"Сопоставление входа для %s не определено; нормально, если использовалось "
+"сопоставление по умолчанию\n"
 
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
 msgstr ""
+"Сопоставление входа для %s определено в политике и не может быть удалено\n"
 
 #, c-format
 msgid "Could not delete login mapping for %s"
-msgstr ""
+msgstr "Невозможно удалить сопоставление входа для %s"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -309,7 +308,7 @@ msgstr[0] ""
 "%d неудачная попытка входа в систему.\n"
 "Последняя была %s на %s.\n"
 msgstr[1] ""
-"%d неудачных попыток входа в систему.\n"
+"%d неудачных попытки входа в систему.\n"
 "Последняя была %s на %s.\n"
 msgstr[2] ""
 "%d неудачных попыток входа в систему.\n"
@@ -419,30 +418,27 @@ msgstr "Неверный пароль для %s.\n"
 
 #, c-format
 msgid "%s: multiple --root options\n"
-msgstr ""
+msgstr "%s: несколько параметров --root\n"
 
 #, c-format
 msgid "%s: option '%s' requires an argument\n"
-msgstr ""
+msgstr "%s: для параметра «%s» требуется аргумент\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: не удалось снизить уровень привилегий (%s)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
+#, c-format
 msgid "%s: invalid chroot path '%s'\n"
-msgstr "%s: некорректное значение номера домашнего телефона «%s»\n"
+msgstr "%s: некорректное значение пути chroot «%s»\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot create directory %s: %s\n"
+#, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"
-msgstr "%s: не удалось создать каталог %s: %s\n"
+msgstr "%s: нет доступа к каталогу chroot %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
+#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
-msgstr "%s: не удалось создать tcb-каталог для %s\n"
+msgstr "%s: не удалось выполнить chroot в каталог %s: %s\n"
 
 #, c-format
 msgid ""
@@ -492,14 +488,14 @@ msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
-"  -d, --lastday LAST_DAY        установить последний день смены пароля\n"
-"                                в LAST_DAY\n"
+"  -d, --lastday ПОСЛ_ДЕНЬ       установить последний день смены пароля\n"
+"                                в ПОСЛ_ДЕНЬ\n"
 
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
-"  -E, --expiredate EXPIRE_DATE  установить дату окончания действия\n"
-"                                учётной записи в EXPIRE_DATE\n"
+"  -E, --expiredate ДАТА_УСТ     установить дату окончания действия\n"
+"                                учётной записи в ДАТА_УСТ\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr ""
@@ -510,8 +506,8 @@ msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -I, --inactive INACTIVE       установить неактивность пароля после\n"
-"                                устаревания в значение INACTIVE\n"
+"  -I, --inactive НЕАКТИВНОСТЬ   установить неактивность пароля после\n"
+"                                устаревания в значение НЕАКТИВНОСТЬ\n"
 
 msgid "  -l, --list                    show account aging information\n"
 msgstr "  -l, --list                    показать «возраст» учётной записи\n"
@@ -520,24 +516,25 @@ msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -m, --mindays MIN_DAYS        установить минимальное число дней перед\n"
-"                                сменой пароля в MIN_DAYS\n"
+"  -m, --mindays МИН_ДНЕЙ        установить минимальное число дней перед\n"
+"                                сменой пароля в МИН_ДНЕЙ\n"
 
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -M, --maxdays MAX_DAYS        установить максимальное число дней перед\n"
-"                                сменой пароля в MAX_DAYS\n"
+"  -M, --maxdays МАКС_ДНЕЙ       установить максимальное число дней перед\n"
+"                                сменой пароля в МАКС_ДНЕЙ\n"
 
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
+"  -R, --root КАТ_CHROOT         каталог, в который выполняется chroot\n"
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
-"  -W, --warndays WARN_DAYS      установить количество дней с выдачей\n"
-"                                предупреждения в WARN_DAYS\n"
+"  -W, --warndays ПРЕДУП_ДНЕЙ    установить количество дней с выдачей\n"
+"                                предупреждения в ПРЕДУП_ДНЕЙ\n"
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
@@ -611,10 +608,9 @@ msgstr "%s: доступ запрещён.\n"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: не удалось определить имя пользователя.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s\n"
+#, c-format
 msgid "%s: PAM: %s\n"
-msgstr "%s: %s\n"
+msgstr "%s: PAM: %s\n"
 
 #, c-format
 msgid "%s: cannot lock %s; try again later.\n"
@@ -659,16 +655,17 @@ msgstr ""
 "Параметры:\n"
 
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
-msgstr ""
+msgstr "  -f, --full-name ПОЛН_ИМЯ      смена полного имени пользователя\n"
 
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
-msgstr ""
+msgstr "  -h, --home-phone ДОМ_ТЕЛЕФОН  смена домашнего тел. пользователя\n"
 
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
 msgstr ""
+"  -o, --other ДРУГАЯ_ИНФ        смена другой инф. GECOS о пользователе\n"
 
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
-msgstr ""
+msgstr "  -r, --room НОМЕР_КОМНАТЫ      смена номера комнаты пользователя\n"
 
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
@@ -677,6 +674,7 @@ msgstr ""
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
+"  -w, --work-phone РАБОЧИЙ_ТЕЛ  смена офисного номера тел. пользователя\n"
 
 msgid "Full Name"
 msgstr "Полное имя"
@@ -762,10 +760,9 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, fuzzy, c-format
-#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+#, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
-msgstr "  -c, --crypt-method <АЛГОРИТМ> алгоритм шифрования (один из: %s)\n"
+msgstr "  -c, --crypt-method МЕТОД      алгоритм шифрования (один из: %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr "  -e, --encrypted               пароли передаются зашифрованными\n"
@@ -826,7 +823,7 @@ msgstr "%s: строка %d: пользователь «%s» не существ
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"  -s, --shell SHELL             новая регистрационная оболочка для учётной\n"
+"  -s, --shell ОБОЛОЧКА          новая регистрационная оболочка для учётной\n"
 "                                записи\n"
 
 msgid "Login Shell"
@@ -858,12 +855,15 @@ msgstr "%s: предупреждение: %s не является исполн�
 
 msgid "  -c, --check                   check the user's password expiration\n"
 msgstr ""
+"  -c, --check                   проверить срок действия пароля пользователя\n"
 
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
+"  -f, --force                   принудительно сменить пароль, если срок\n"
+"                                действия пароля истёк\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
@@ -950,10 +950,9 @@ msgstr "%s: неизвестный пользователь или диапаз�
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: не удалось получить размер %s: %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to remove %s\n"
+#, c-format
 msgid "%s: Failed to write %s: %s\n"
-msgstr "%s: не удалось удалить %s\n"
+msgstr "%s: не удалось записать %s: %s\n"
 
 #, c-format
 msgid ""
@@ -972,7 +971,7 @@ msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr "  -d, --delete ПОЛЬЗ            удалить ПОЛЬЗОВАТЕЛЯ из ГРУППЫ\n"
 
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
+msgstr "  -Q, --root КАТ_CHROOT         каталог, который выполняется chroot\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr "  -r, --remove-password         удалить пароль ГРУППЫ\n"
@@ -1111,10 +1110,9 @@ msgstr "%s: группа «%s» уже существует\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: GID «%lu» уже существует\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
+#, c-format
 msgid "%s: Cannot setup cleanup service.\n"
-msgstr "%s: не удалось определить имя пользователя.\n"
+msgstr "%s: не удалось настроить службу очистки.\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1232,17 +1230,13 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, fuzzy, c-format
-#| msgid ""
-#| "Usage: %s [options] [файл_group]\n"
-#| "\n"
-#| "Options:\n"
+#, c-format
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
 "Options:\n"
 msgstr ""
-"Использование: %s [параметры] [действие]\n"
+"Использование: %s [параметры] [группа]\n"
 "\n"
 "Параметры:\n"
 
@@ -1250,9 +1244,11 @@ msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
+"  -r, --read-only               показывать ошибки и предупреждения,\n"
+"                                но не изменять файлы\n"
 
 msgid "  -s, --sort                    sort entries by UID\n"
-msgstr ""
+msgstr "  -s, --sort                    сортировать записи по UID\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1395,7 +1391,7 @@ msgid ""
 "[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Отключение не выполнено -- вход в систему для суперпользователя разрешён.]"
+"[Отключение не выполнено — вход в систему для суперпользователя разрешён.]"
 
 #, c-format
 msgid ""
@@ -1434,10 +1430,9 @@ msgstr "login: аварийное завершение работы по зап�
 msgid "Login incorrect"
 msgstr "Неверное имя пользователя"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
+#, c-format
 msgid "Cannot find user (%s)\n"
-msgstr "%s: невозможно выполнить fork пользовательской оболочки\n"
+msgstr "Невозможно найти пользователя (%s)\n"
 
 #, c-format
 msgid ""
@@ -1581,8 +1576,8 @@ msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -i, --inactive INACTIVE       установить неактивность пароля после\n"
-"                                истечения срока в значение INACTIVE\n"
+"  -i, --inactive НЕАКТИВНОСТЬ   установить неактивность пароля после\n"
+"                                истечения срока в значение НЕАКТИВНОСТЬ\n"
 
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
@@ -1593,8 +1588,8 @@ msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -n, --mindays MIN_DAYS        установить минимальное число дней перед\n"
-"                                сменой пароля в MIN_DAYS\n"
+"  -n, --mindays МИН_ДНЕЙ        установить минимальное число дней перед\n"
+"                                сменой пароля в МИН_ДНЕЙ\n"
 
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr ""
@@ -1602,8 +1597,7 @@ msgstr ""
 
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-msgstr ""
-"  -r, --repository REPOSITORY   изменить пароль в репозитории REPOSITORY\n"
+msgstr "  -r, --repository РЕПОЗИТОРИЙ  изменить пароль в РЕПОЗИТОРИИ\n"
 
 msgid ""
 "  -S, --status                  report password status on the named account\n"
@@ -1619,15 +1613,15 @@ msgstr ""
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
-"  -w, --warndays WARN_DAYS      установить количество дней с\n"
-"                                выдачей предупреждения в WARN_DAYS\n"
+"  -w, --warndays ПРЕДУП_ДНЕЙ    установить количество дней с\n"
+"                                выдачей предупреждения в ПРЕДУП_ДНЕЙ\n"
 
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -x, --maxdays MAX_DAYS        установить максимальное число дней перед\n"
-"                                сменой пароля в MAX_DAYS\n"
+"  -x, --maxdays МАКС_ДНЕЙ       установить максимальное число дней перед\n"
+"                                сменой пароля в МАКС_ДНЕЙ\n"
 
 msgid "Old password: "
 msgstr "Старый пароль: "
@@ -1731,11 +1725,9 @@ msgstr ""
 "\n"
 "Параметры:\n"
 
-#, fuzzy
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -q, --quiet                   report errors only\n"
 msgstr ""
-"  -q, --quiet                   сократить количество выводимых сообщений\n"
+"  -q, --quiet                   показывать только сообщения об ошибках\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1907,10 +1899,9 @@ msgstr "%s: не удалось пройти проверку подлиннос
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: у вас нет прав выполнять su в данный момент\n"
 
-#, fuzzy, c-format
-#| msgid "No password entry for 'root'"
+#, c-format
 msgid "No passwd entry for user '%s'\n"
-msgstr "Отсутствует запись для «root»"
+msgstr "Отсутствует passwd-запись для пользователя «%s»\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1920,10 +1911,9 @@ msgstr "%s: должен запускаться из терминала\n"
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: ошибка %d\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot remove the content of %s: %s\n"
+#, c-format
 msgid "%s: Cannot drop the controlling terminal\n"
-msgstr "%s: не удалось удалить содержимое %s: %s\n"
+msgstr "%s: не удалось сбросить управляющий терминал\n"
 
 #, c-format
 msgid "Cannot execute %s\n"
@@ -2106,7 +2096,7 @@ msgid ""
 "mapping\n"
 msgstr ""
 "  -Z, --selinux-user SEUSER     использовать указанного SEUSER для\n"
-"                                отображения в пользователя SELinux\n"
+"                                пользовательского сопоставления SELinux\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -2202,8 +2192,8 @@ msgstr ""
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
-"%s: предупреждение: не удалось отобразить имя пользователя %s в %s из "
-"SELinux.\n"
+"%s: предупреждение: не удалось сопоставить имя пользователя %s с "
+"пользователем SELinux %s.\n"
 
 msgid ""
 "  -f, --force                   force removal of files,\n"
@@ -2216,25 +2206,22 @@ msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 "  -r, --remove                  удалить домашний каталог и почтовый ящик\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
-"  -Z, --selinux-user            новое SELinux-отображение учётной записи\n"
+"  -Z, --selinux-user            удалить все пользовательские сопоставления\n"
+"                                SELinux для пользователя\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot remove the primary group of user '%s'\n"
+#, c-format
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
-msgstr "%s: не удалось удалить первичную группу пользователя «%s»\n"
+msgstr ""
+"%s: группа %s не удалена, так как это не первичная группа пользователя %s.\n"
 
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
-msgstr ""
+msgstr "%s: группа %s не удалена, так как в ней есть другие члены.\n"
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
@@ -2242,10 +2229,9 @@ msgstr ""
 "%s: группа %s является первичной для другого пользователя и не может быть "
 "удалена.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
+#, c-format
 msgid "%s: %s mail spool (%s) not found\n"
-msgstr "%s: домашний каталог пользователя %s (%s) не найден\n"
+msgstr "%s: почтовый ящик %s (%s) не найден\n"
 
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
@@ -2288,12 +2274,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: ошибка удаления каталога %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+#, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
-"%s: предупреждение: не удалось отобразить имя пользователя %s в %s из "
-"SELinux.\n"
+"%s: предупреждение: не удалось удалить пользовательское сопоставление "
+"SELinux в имя пользователя %s.\n"
 
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment КОММЕНТАРИЙ     новое значение поля GECOS\n"
@@ -2365,15 +2350,12 @@ msgstr "  -u, --uid UID                 новый UID для учётной з�
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  разблокировать учётную запись\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
-"  -Z, --selinux-user            новое SELinux-отображение учётной записи\n"
+"  -Z, --selinux-user SEUSER     новое пользовательское сопоставление\n"
+"                                SELinux для учётной записи\n"
 
 #, c-format
 msgid ""
@@ -2388,14 +2370,13 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: пользователь «%s» уже существует в %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open %s\n"
+#, c-format
 msgid "%s: no options\n"
-msgstr "%s: не удалось открыть %s\n"
+msgstr "%s: не указаны параметры\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
-msgstr "%s: параметры -L, -p и -U взаимоисключающие\n"
+msgstr "%s: параметры -L, -p и -U являются взаимоисключающими\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
