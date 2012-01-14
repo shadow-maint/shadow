@@ -1,17 +1,17 @@
 #
-# YunQiang Su <wzssyqa@gmail.com>, 2010, 2011.
+# YunQiang Su <wzssyqa@gmail.com>, 2010, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages VERSION\n"
 "POT-Creation-Date: 2012-01-08 18:14+0100\n"
-"PO-Revision-Date: 2011-06-03 22:36+0200\n"
+"PO-Revision-Date: 2012-01-13 23:45+0800\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: vipw.8.xml:40(refentrytitle) vipw.8.xml:47(refname) vipw.8.xml:56(command)
@@ -65,10 +65,8 @@ msgstr "系统管理命令"
 #: chsh.1.xml:44(refmiscinfo) chpasswd.8.xml:45(refmiscinfo)
 #: chgpasswd.8.xml:46(refmiscinfo) chfn.1.xml:44(refmiscinfo)
 #: chage.1.xml:42(refmiscinfo)
-#, fuzzy
-#| msgid "shadow"
 msgid "shadow-utils"
-msgstr "shadow"
+msgstr "shadow-utils"
 
 #: vipw.8.xml:48(refname) vipw.8.xml:62(command)
 msgid "vigr"
@@ -202,15 +200,11 @@ msgstr "安静模式。"
 #: groupdel.8.xml:82(term) groupadd.8.xml:187(term) faillog.8.xml:163(term)
 #: chsh.1.xml:88(term) chpasswd.8.xml:170(term) chgpasswd.8.xml:132(term)
 #: chfn.1.xml:134(term) chage.1.xml:178(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
 "replaceable>"
 
 #: vipw.8.xml:124(para) usermod.8.xml:303(para) userdel.8.xml:132(para)
@@ -551,19 +545,15 @@ msgstr ""
 msgid ""
 "An empty <replaceable>EXPIRE_DATE</replaceable> argument will disable the "
 "expiration of the account."
-msgstr ""
+msgstr "空 <replaceable>EXPIRE_DATE</replaceable> 参数将禁用账户过期。"
 
 #: usermod.8.xml:134(para) usermod.8.xml:156(para)
-#, fuzzy
-#| msgid ""
-#| "Sort entries in <filename>/etc/passwd</filename> and <filename>/etc/"
-#| "shadow</filename> by UID."
 msgid ""
 "This option requires a <filename>/etc/shadow</filename> file. A <filename>/"
 "etc/shadow</filename> entry will be created if there were none."
 msgstr ""
-"根据 UID 在 <filename>/etc/passwd</filename> 和 <filename>/etc/shadow</"
-"filename> 对项目进行排序。"
+"此选项需要一个 <filename>/etc/passwd</filename> 文件。如果没有，将会创建一条 "
+"<filename>/etc/shadow</filename> 项目。"
 
 #: usermod.8.xml:142(term) useradd.8.xml:189(term) useradd.8.xml:559(term)
 msgid ""
@@ -649,12 +639,6 @@ msgstr ""
 "replaceable>"
 
 #: usermod.8.xml:210(para)
-#, fuzzy
-#| msgid ""
-#| "The name of the user will be changed from <replaceable>LOGIN</"
-#| "replaceable> to <replaceable>NEW_LOGIN</replaceable>. Nothing else is "
-#| "changed. In particular, the user's home directory name should probably be "
-#| "changed manually to reflect the new login name."
 msgid ""
 "The name of the user will be changed from <replaceable>LOGIN</replaceable> "
 "to <replaceable>NEW_LOGIN</replaceable>. Nothing else is changed. In "
@@ -663,7 +647,7 @@ msgid ""
 msgstr ""
 "用户的名称将会从 <replaceable>LOGIN</replaceable> 修改为 "
 "<replaceable>NEW_LOGIN</replaceable>。不会更改别的任何东西。特别是，用户的主"
-"目录名也需要手动修改以和新登录名对应。"
+"目录名和邮件池也需要手动修改以和新登录名对应。"
 
 #: usermod.8.xml:220(term)
 msgid "<option>-L</option>, <option>--lock</option>"
@@ -791,17 +775,11 @@ msgid "The new numerical value of the user's ID."
 msgstr "用户 ID 的新数值。"
 
 #: usermod.8.xml:331(para)
-#, fuzzy
-#| msgid ""
-#| "This value must be unique, unless the <option>-o</option> option is used. "
-#| "The value must be non-negative. Values between 0 and 999 are typically "
-#| "reserved for system accounts."
 msgid ""
 "This value must be unique, unless the <option>-o</option> option is used. "
 "The value must be non-negative."
 msgstr ""
-"这个值必须是唯一的，除非使用了 <option>-o</option> 选项，必须是非负值。 0 到 "
-"99 的值一般保留做系统账户。"
+"这个值必须是唯一的，除非使用了 <option>-o</option> 选项，必须是非负值。"
 
 #: usermod.8.xml:336(para)
 msgid ""
@@ -817,20 +795,14 @@ msgid ""
 msgstr "用户主目录之外文件所有权必须手动修复。"
 
 #: usermod.8.xml:345(para)
-#, fuzzy
-#| msgid ""
-#| "The default behavior (if the <option>-g</option>, <option>-N</option>, "
-#| "and <option>-U</option> options are not specified) is defined by the "
-#| "<option>USERGROUPS_ENAB</option> variable in <filename>/etc/login.defs</"
-#| "filename>."
 msgid ""
 "No checks will be performed with regard to the <option>UID_MIN</option>, "
 "<option>UID_MAX</option>, <option>SYS_UID_MIN</option>, or "
 "<option>SYS_UID_MAX</option> from <filename>/etc/login.defs</filename>."
 msgstr ""
-"如果没有指定 <option>-g</option>, <option>-N</option> 和 <option>-U</option> "
-"选项，默认行为由 <filename>/etc/login.defs</filename> 中的 "
-"<option>USERGROUPS_ENAB</option> 变量指定。"
+"不会对 <filename>/etc/login.defs</filename> 中的 <option>UID_MIN</option>, "
+"<option>UID_MAX</option>, <option>SYS_UID_MIN</option> 和 "
+"<option>SYS_UID_MAX</option> 进行检查。"
 
 #: usermod.8.xml:354(term)
 msgid "<option>-U</option>, <option>--unlock</option>"
@@ -866,22 +838,16 @@ msgstr ""
 "replaceable>"
 
 #: usermod.8.xml:379(para)
-#, fuzzy
-#| msgid "The new numerical value of the user's ID."
 msgid "The new SELinux user for the user's login."
-msgstr "用户 ID 的新数值。"
+msgstr "用户登陆的 SELinux 用户。"
 
 #: usermod.8.xml:382(para)
-#, fuzzy
-#| msgid ""
-#| "Add the <replaceable>user</replaceable> to the named <replaceable>group</"
-#| "replaceable>."
 msgid ""
 "A blank <replaceable>SEUSER</replaceable> will remove the SELinux user "
 "mapping for user <replaceable>LOGIN</replaceable> (if any)."
 msgstr ""
-"向名为 <replaceable>group</replaceable> 的组中添加用户 <replaceable>user</"
-"replaceable>。"
+"空的 <replaceable>SEUSER</replaceable> 将移除用户 <replaceable>LOGIN</"
+"replaceable> 的 SELinux 用户映射(如果有)。"
 
 #: usermod.8.xml:393(title) userdel.8.xml:251(title) useradd.8.xml:625(title)
 #: su.1.xml:312(title) shadow.3.xml:199(title) passwd.1.xml:354(title)
@@ -1211,14 +1177,12 @@ msgstr ""
 "量中定义。"
 
 #: userdel.8.xml:140(term)
-#, fuzzy
-#| msgid "<option>-u</option>, <option>--user</option>"
 msgid "<option>-Z</option>, <option>--selinux-user</option>"
-msgstr "<option>-u</option>, <option>--user</option>"
+msgstr "<option>-Z</option>, <option>--selinux-user</option>"
 
 #: userdel.8.xml:144(para)
 msgid "Remove any SELinux user mapping for the user's login."
-msgstr ""
+msgstr "移除用户登录的所有 SELinux 用户映射。"
 
 #: userdel.8.xml:33(term) login.defs.5.xml:33(term)
 msgid "<option>USERDEL_CMD</option> (string)"
@@ -1826,6 +1790,7 @@ msgid "Create a system account."
 msgstr "创建一个系统账户。"
 
 #: useradd.8.xml:418(para)
+#, fuzzy
 msgid ""
 "System users will be created with no aging information in <filename>/etc/"
 "shadow</filename>, and their numeric identifiers are chosen in the "
@@ -1834,6 +1799,11 @@ msgid ""
 "<option>UID_MAX</option> (and their <option>GID</option> counterparts for "
 "the creation of groups)."
 msgstr ""
+"系统用户创建时，不会在 <filename>/etc/shadow</filename> 中有年龄信息，数字标"
+"识符会在 <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option> 之间选取，"
+"这两个值在 <filename>/etc/login.defs</filename> 中定义，而不是普通用户的 "
+"<option>UID_MIN</option>-<option>UID_MAX</option> (and their <option>GID</"
+"option> counterparts for the creation of groups)。"
 
 #: useradd.8.xml:427(para)
 msgid ""
@@ -1859,33 +1829,21 @@ msgstr ""
 "串。"
 
 #: useradd.8.xml:471(para)
-#, fuzzy
-#| msgid ""
-#| "The numerical value of the user's ID. This value must be unique, unless "
-#| "the <option>-o</option> option is used. The value must be non-negative. "
-#| "The default is to use the smallest ID value greater than 999 and greater "
-#| "than every other user. Values between 0 and 999 are typically reserved "
-#| "for system accounts."
 msgid ""
 "The numerical value of the user's ID. This value must be unique, unless the "
 "<option>-o</option> option is used. The value must be non-negative. The "
 "default is to use the smallest ID value greater than or equal to "
 "<option>UID_MIN</option> and greater than every other user."
 msgstr ""
-"用户 ID 的数字值。此值必须为唯一的，出发使用了 <option>-o</option> 选项。此值"
-"必须非负，默认使用大于 999，且大于任何其他用户 ID 最小值。0 到 999 之间的值一"
-"般保留做系统账户。"
+"用户 ID 的数字值。此值必须为唯一的，除非使用了 <option>-o</option> 选项。此值"
+"必须非负，默认使用大于等于 <option>UID_MIN</option>，且大于任何其他用户 ID 最"
+"小值。"
 
 #: useradd.8.xml:478(para)
-#, fuzzy
-#| msgid ""
-#| "Except for the <option>-A</option> and <option>-M</option> options, the "
-#| "options cannot be combined."
 msgid ""
 "See also the <option>-r</option> option and the <option>UID_MAX</option> "
 "description."
-msgstr ""
-"除了 <option>-A</option> 和 <option>-M</option> 选项，其它选项不能联合使用。"
+msgstr "请参考 <option>-r</option> 选项和 <option>UID_MAX</option> 的描述。"
 
 #: useradd.8.xml:485(term)
 msgid "<option>-U</option>, <option>--user-group</option>"
@@ -2080,6 +2038,8 @@ msgid ""
 "The default value for <option>GID_MIN</option> (resp. <option>GID_MAX</"
 "option>) is 1000 (resp. 60000)."
 msgstr ""
+"<option>GID_MIN</option> 和 <option>GID_MAX</option> 的默认值分别是 1000 和 "
+"60000。"
 
 #: useradd.8.xml:32(term) pwconv.8.xml:32(term) pwck.8.xml:32(term)
 #: newusers.8.xml:32(term) login.defs.5.xml:32(term)
@@ -2152,6 +2112,8 @@ msgid ""
 "The default value for <option>SYS_GID_MIN</option> (resp. "
 "<option>SYS_GID_MAX</option>) is 101 (resp. <option>GID_MIN</option>-1)."
 msgstr ""
+"<option>SYS_GID_MIN</option> 和 <option>SYS_GID_MAX</option> 的默认值分别是 "
+"101 和 <option>GID_MIN</option>-1。"
 
 #: useradd.8.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
 msgid "<option>SYS_UID_MAX</option> (number)"
@@ -2174,6 +2136,8 @@ msgid ""
 "The default value for <option>SYS_UID_MIN</option> (resp. "
 "<option>SYS_UID_MAX</option>) is 101 (resp. <option>UID_MIN</option>-1)."
 msgstr ""
+"<option>SYS_UID_MIN</option> 和 <option>SYS_UID_MAX</option> 的默认值分别是 "
+"101 和 <option>UID_MIN</option>-1。"
 
 #: useradd.8.xml:30(term) pwck.8.xml:30(term) login.defs.5.xml:30(term)
 msgid "<option>TCB_AUTH_GROUP</option> (boolean)"
@@ -2208,6 +2172,8 @@ msgid ""
 "The default value for <option>UID_MIN</option> (resp. <option>UID_MAX</"
 "option>) is 1000 (resp. 60000)."
 msgstr ""
+"<option>UID_MIN</option> 和 <option>UID_MAX</option> 的默认值分别是 1000 和 "
+"60000。"
 
 #: useradd.8.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: login.1.xml:32(term)
@@ -2432,11 +2398,6 @@ msgstr ""
 "    "
 
 #: suauth.5.xml:82(para)
-#, fuzzy
-#| msgid ""
-#| "Where to-id is either the word <emphasis>ALL</emphasis>, a list of "
-#| "usernames delimited by \",\" or the words <emphasis>ALL EXCEPT</emphasis> "
-#| "followed by a list of usernames delimited by \",\""
 msgid ""
 "Where to-id is either the word <emphasis>ALL</emphasis>, a list of usernames "
 "delimited by \",\" or the words <emphasis>ALL EXCEPT</emphasis> followed by "
@@ -2446,7 +2407,6 @@ msgstr ""
 "<emphasis>ALL EXCEPT</emphasis> 后跟逗号分隔的用户名列表。"
 
 #: suauth.5.xml:88(para)
-#, fuzzy
 msgid ""
 "from-id is formatted the same as to-id except the extra word "
 "<emphasis>GROUP</emphasis> is recognised. <emphasis>ALL EXCEPT GROUP</"
@@ -2701,6 +2661,7 @@ msgid ""
 "The executed command will have no controlling terminal. This option cannot "
 "be used to execute interractive programs which need a controlling TTY."
 msgstr ""
+"执行的命令将不会拥有控制终端。此选项不能用于执行需要控制 TTY 的交互程序。"
 
 #: su.1.xml:150(term)
 msgid "<option>-</option>, <option>-l</option>, <option>--login</option>"
@@ -2917,14 +2878,10 @@ msgid "<option>DEFAULT_HOME</option> (boolean)"
 msgstr "<option>DEFAULT_HOME</option> (boolean)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
-#| msgid ""
-#| "Indicate if login is allowed if we can't cd to the home directory. "
-#| "Default in no."
 msgid ""
 "Indicate if login is allowed if we can't cd to the home directory. Default "
 "is no."
-msgstr "如果不能 cd 到主目录时，说明是否允许登录。默认是不说明。"
+msgstr "如果不能 cd 到主目录时，说明是否允许登录。默认是否。"
 
 #: su.1.xml:38(para) login.defs.5.xml:38(para) login.1.xml:38(para)
 msgid ""
@@ -3040,11 +2997,6 @@ msgstr "<option>LOGIN_STRING</option> (string)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 #: chsh.1.xml:34(para) chfn.1.xml:34(para)
-#, fuzzy
-#| msgid ""
-#| "The string used for prompting a password. The default is to use "
-#| "\"Password: \", or a translation of that string. If you set this "
-#| "variable, the prompt will no be translated."
 msgid ""
 "The string used for prompting a password. The default is to use \"Password: "
 "\", or a translation of that string. If you set this variable, the prompt "
@@ -3642,7 +3594,7 @@ msgstr ""
 "结构是："
 
 #: shadow.3.xml:105(programlisting)
-#, no-wrap
+#, fuzzy, no-wrap
 msgid ""
 "struct spwd {\n"
 "      char\t\t*sp_namp; /* user login name */\n"
@@ -3657,6 +3609,18 @@ msgid ""
 "}\n"
 "    "
 msgstr ""
+"struct spwd {\n"
+"      char\t\t*sp_namp; /* 用户登录名 */\n"
+"      char\t\t*sp_pwdp; /* 加密过的密码 */\n"
+"      long int\t\tsp_lstchg; /* 最近密码更改日期 */\n"
+"      long int\t\tsp_min; /* 到允许更改密码还有多少天 */\n"
+"      long int\t\tsp_max; /* 到要求更改密码还有多少天 */\n"
+"      long int\t\tsp_warn; /* 警告过期的天数 */\n"
+"      long int\t\tsp_inact; /* 账户非活动之前的天数 */\n"
+"      long int\t\tsp_expire; /* 账户过期的日期 */\n"
+"      unsigned long int\tsp_flag; /* 保留做以后使用 */\n"
+"}\n"
+"    "
 
 #: shadow.3.xml:117(para)
 msgid "The meanings of each field are:"
@@ -3672,7 +3636,7 @@ msgstr "sp_pwdp - 指向 null 结束的密码的指针"
 
 #: shadow.3.xml:126(para)
 msgid "sp_lstchg - days since Jan 1, 1970 password was last changed"
-msgstr ""
+msgstr "sp_lstchg - 最近更改密码的日期(日期计算方法是从1970年1月1日开始的天数)"
 
 #: shadow.3.xml:129(para)
 msgid "sp_min - days before which password may not be changed"
@@ -3913,16 +3877,13 @@ msgstr ""
 "失。它只转换它可以转换的。"
 
 #: pwconv.8.xml:169(para)
-#, fuzzy
-#| msgid ""
-#| "The options which apply to the <command>vipw</command> and <command>vigr</"
-#| "command> commands are:"
 msgid ""
 "The options which apply to the <command>pwconv</command>, <command>pwunconv</"
 "command>, <command>grpconv</command>, and <command>grpunconv</command> "
 "commands are:"
 msgstr ""
-"<command>vipw</command> 和 <command>vigr</command> 命令可以接受的选项有："
+"<command>pwconv</command>, <command>pwunconv</command>, <command>grpconv</"
+"command> 和 <command>grpunconv</command> 命令可以接受的选项有："
 
 #: pwconv.8.xml:199(para)
 msgid ""
@@ -4087,14 +4048,9 @@ msgstr ""
 "目，这些情况下，应该使用 <command>pwck</command> 来移除这写有问题的条目。"
 
 #: pwck.8.xml:158(para) grpck.8.xml:129(para)
-#, fuzzy
-#| msgid ""
-#| "Except for the <option>-A</option> and <option>-M</option> options, the "
-#| "options cannot be combined."
 msgid ""
 "The <option>-r</option> and <option>-s</option> options cannot be combined."
-msgstr ""
-"除了 <option>-A</option> 和 <option>-M</option> 选项，其它选项不能联合使用。"
+msgstr "<option>-r</option> 和 <option>-s</option> 选项不能联合使用。"
 
 #: pwck.8.xml:162(para)
 msgid "The options which apply to the <command>pwck</command> command are:"
@@ -4107,20 +4063,16 @@ msgid ""
 msgstr "只报告错误。不显示那些不需要用户操作的警告。"
 
 #: pwck.8.xml:182(term) grpck.8.xml:144(term)
-#, fuzzy
-#| msgid "<option>-r</option>, <option>--remove</option>"
 msgid "<option>-r</option>, <option>--read-only</option>"
-msgstr "<option>-r</option>, <option>--remove</option>"
+msgstr "<option>-r</option>, <option>--read-only</option>"
 
 #: pwck.8.xml:184(para)
 msgid "Execute the <command>pwck</command> command in read-only mode."
 msgstr "在只读模式下执行 <command>pwck</command>。"
 
 #: pwck.8.xml:203(term) grpck.8.xml:167(term)
-#, fuzzy
-#| msgid "<option>-s</option>, <option>--shadow</option>"
 msgid "<option>-s</option>, <option>--sort</option>"
-msgstr "<option>-s</option>, <option>--shadow</option>"
+msgstr "<option>-s</option>, <option>--sort</option>"
 
 #: pwck.8.xml:205(para)
 msgid ""
@@ -4952,10 +4904,8 @@ msgstr "如果没有指定，libc 会选择默认的轮转数(5000)。"
 
 #: passwd.1.xml:49(para) newusers.8.xml:49(para) login.defs.5.xml:49(para)
 #: gpasswd.1.xml:49(para) chpasswd.8.xml:49(para) chgpasswd.8.xml:49(para)
-#, fuzzy
-#| msgid "The values must be inside the 1000-999999999 range."
 msgid "The values must be inside the 1000-999,999,999 range."
-msgstr "值必须在 1000 - 999999999 之间。"
+msgstr "值必须在 1000 - 999,999,999 之间。"
 
 #: passwd.1.xml:52(para) newusers.8.xml:52(para) login.defs.5.xml:52(para)
 #: gpasswd.1.xml:52(para) chpasswd.8.xml:52(para) chgpasswd.8.xml:52(para)
@@ -5011,16 +4961,6 @@ msgid ""
 msgstr "<command>passwd</command> 命令退出，并返回如下值：<placeholder-1/>"
 
 #: passwd.1.xml:472(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>grpck</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#| "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>chpasswd</refentrytitle><manvolnum>8</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
@@ -5031,14 +4971,14 @@ msgid ""
 "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
-"<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>grpck</"
-"refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum></"
-"citerefentry>, <citerefentry><refentrytitle>shadow</"
+"<citerefentry><refentrytitle>chpasswd</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>."
+"<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum></"
+"citerefentry>, <phrase condition=\"no_pam"
+"\"><citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+"manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
+"refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: nologin.8.xml:38(refentrytitle) nologin.8.xml:45(refname)
 #: nologin.8.xml:51(command)
@@ -5095,7 +5035,7 @@ msgstr "批量更新和创建新用户"
 
 #: newusers.8.xml:69(replaceable)
 msgid "file"
-msgstr ""
+msgstr "文件"
 
 #: newusers.8.xml:76(para)
 #, fuzzy
@@ -5221,13 +5161,6 @@ msgstr ""
 "的一个 GID 作为主组 ID 来创建一个新组。"
 
 #: newusers.8.xml:169(para)
-#, fuzzy
-#| msgid ""
-#| "If this field contains the name of a group which does not exist (and was "
-#| "not created earlier wbefore by <command>newusers</command>), a new group "
-#| "will be created with the specified name and a GID will be automatically "
-#| "defined by <command>newusers</command> to be used as the primary group ID "
-#| "for the user and Gs the ID for the new group."
 msgid ""
 "If this field contains the name of a group which does not exist (and was not "
 "created before by <command>newusers</command>), a new group will be created "
@@ -5235,9 +5168,9 @@ msgid ""
 "<command>newusers</command> to be used as the primary group ID for the user "
 "and GID for the new group."
 msgstr ""
-"如果此字段包含一个不存在的组的名字(也没有由 <command>newusers</command>)，在"
-"前边创建，将使用指定的组名和 <command>newusers</command> 自动确定的 GID 创建"
-"一个组，并作为用户的主组。"
+"如果此字段包含一个不存在的组的名字(也没有由 <command>newusers</command> 在前"
+"边创建)，将使用指定的组名和 <command>newusers</command> 自动确定的 GID 创建一"
+"个组，并作为用户的主组。"
 
 #: newusers.8.xml:181(emphasis)
 msgid "pw_gecos"
@@ -5479,10 +5412,8 @@ msgid "logoutd"
 msgstr "logoutd"
 
 #: logoutd.8.xml:46(refpurpose)
-#, fuzzy
-#| msgid "Enforce login time restrictions"
 msgid "enforce login time restrictions"
-msgstr "强制开启登录时间限制"
+msgstr "强制登录时间限制"
 
 #: logoutd.8.xml:57(para)
 msgid ""
@@ -7120,23 +7051,6 @@ msgid ""
 msgstr "<command>groupmod</command> 命令可以返回如下值：<placeholder-1/>"
 
 #: groupmod.8.xml:271(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -7160,8 +7074,8 @@ msgstr ""
 "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>gpasswd</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-"<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
+"<citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</"
+"manvolnum></citerefentry>, <citerefentry><refentrytitle>groupdel</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</"
@@ -7352,25 +7266,17 @@ msgid "delete a group"
 msgstr "删除一个组"
 
 #: groupdel.8.xml:62(para)
-#, fuzzy
-#| msgid ""
-#| "The <command>userdel</command> command modifies the system account files, "
-#| "deleting all entries that refer to the user name <emphasis remap=\"I"
-#| "\">LOGIN</emphasis>. The named user must exist."
 msgid ""
 "The <command>groupdel</command> command modifies the system account files, "
 "deleting all entries that refer to <replaceable>GROUP</replaceable>. The "
 "named group must exist."
 msgstr ""
-"<command>userdel</command> 修改系统账户文件，删除与用户名 <emphasis remap=\"I"
-"\">LOGIN</emphasis> 相关的所以项目。给出的用户名必须存在。"
+"<command>userdel</command> 修改系统账户文件，删除与 <replaceable>GROUP</"
+"replaceable> 相关的所有项目。给出的组名必须存在。"
 
 #: groupdel.8.xml:70(para)
-#, fuzzy
-#| msgid ""
-#| "The options which apply to the <command>groupmod</command> command are:"
 msgid "The options which apply to the <command>groupdel</command> command are:"
-msgstr "<command>groupmod</command> 命令可以接受的选项有："
+msgstr "<command>groupdel</command> 命令可以接受的选项有："
 
 #: groupdel.8.xml:99(para)
 msgid ""
@@ -7395,22 +7301,6 @@ msgid ""
 msgstr "<command>groupdel</command> 命令以如下值退出：<placeholder-1/>"
 
 #: groupdel.8.xml:180(para)
-#, fuzzy
-#| msgid ""
-#| "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
-#| "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
-#| "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
-#| "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-#| "manvolnum></citerefentry>"
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -7440,7 +7330,7 @@ msgstr ""
 "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
-"manvolnum></citerefentry>"
+"manvolnum></citerefentry>."
 
 #: groupadd.8.xml:49(refpurpose)
 msgid "create a new group"
@@ -7516,6 +7406,9 @@ msgid ""
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
+"注意：<option>-K </option><replaceable>GID_MIN</"
+"replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
+"replaceable>=<replaceable>499</replaceable> 尚不能工作。"
 
 #: groupadd.8.xml:143(para)
 msgid "This option permits to add a group with a non-unique GID."
@@ -7539,6 +7432,8 @@ msgid ""
 "lower case letters, digits, underscores, or dashes. They can end with a "
 "dollar sign. In regular expression terms: [a-z_][a-z0-9_-]*[$]?"
 msgstr ""
+"组名必须以小写字母或者下划线开头，跟随小写字母、下划线或短横线。可以由美元符"
+"号结束。用正则表达式就是：[a-z_][a-z0-9_-]*[$]?"
 
 #: groupadd.8.xml:248(para)
 msgid "Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long."
@@ -7701,15 +7596,11 @@ msgstr ""
 "replaceable>。"
 
 #: gpasswd.1.xml:162(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
 "replaceable>"
 
 #: gpasswd.1.xml:177(term)
@@ -8001,28 +7892,20 @@ msgid ""
 msgstr ""
 
 #: expiry.1.xml:73(para)
-#, fuzzy
-#| msgid "The options which apply to the <command>pwck</command> command are:"
 msgid "The options which apply to the <command>expiry</command> command are:"
-msgstr "<command>pwck</command> 选项可以接受的选项有："
+msgstr "<command>expiry</command> 选项可以接受的选项有："
 
 #: expiry.1.xml:78(term)
-#, fuzzy
-#| msgid "<option>-L</option>, <option>--lock</option>"
 msgid "<option>-c</option>, <option>--check</option>"
-msgstr "<option>-L</option>, <option>--lock</option>"
+msgstr "<option>-c</option>, <option>--check</option>"
 
 #: expiry.1.xml:80(para)
 msgid "Check the password expiration of the current user."
 msgstr ""
 
 #: expiry.1.xml:86(para)
-#, fuzzy
-#| msgid ""
-#| "The maximum password age is the number of days after which the user will "
-#| "have to change her password."
 msgid "Force a password change if the current user has an expired password."
-msgstr "最大密码年龄是指，这写天之后，用户必须更改密码。"
+msgstr "如果用户密码过期，则强制用户修改密码。"
 
 #: expiry.1.xml:121(para) chage.1.xml:294(para)
 msgid ""
@@ -8340,39 +8223,27 @@ msgid ""
 msgstr ""
 
 #: chfn.1.xml:93(para)
-#, fuzzy
-#| msgid "The options which apply to the <command>chsh</command> command are:"
 msgid "The options which apply to the <command>chfn</command> command are:"
-msgstr "<command>chsh</command> 命令可以接受的选项有："
+msgstr "<command>chfn</command> 命令可以接受的选项有："
 
 #: chfn.1.xml:98(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
-#| "replaceable>"
 msgid ""
 "<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
 "replaceable>"
 
 #: chfn.1.xml:102(para)
-#, fuzzy
-#| msgid "Changing the default values"
 msgid "Change the user's full name."
-msgstr "更改默认值"
+msgstr "更改用户的全名"
 
 #: chfn.1.xml:106(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
 "replaceable>"
 
 #: chfn.1.xml:110(para)
@@ -8380,15 +8251,10 @@ msgid "Change the user's home phone number."
 msgstr ""
 
 #: chfn.1.xml:114(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-"replaceable>"
+"<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
 
 #: chfn.1.xml:118(para)
 msgid ""
@@ -8398,15 +8264,11 @@ msgid ""
 msgstr ""
 
 #: chfn.1.xml:126(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
 "replaceable>"
 
 #: chfn.1.xml:130(para)
@@ -8414,21 +8276,15 @@ msgid "Change the user's room number."
 msgstr ""
 
 #: chfn.1.xml:147(term)
-#, fuzzy
-#| msgid "<option>-h</option>, <option>--help</option>"
 msgid "<option>-u</option>, <option>--help</option>"
-msgstr "<option>-h</option>, <option>--help</option>"
+msgstr "<option>-u</option>, <option>--help</option>"
 
 #: chfn.1.xml:155(term)
-#, fuzzy
-#| msgid ""
-#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
-#| "replaceable>"
 msgid ""
 "<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
 "replaceable>"
 
 #: chfn.1.xml:159(para)
