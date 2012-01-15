@@ -4,7 +4,7 @@ shadow-4.1.4.3 -> shadow-4.1.5					UNRELEASED
 
 *** security
   * su -c could be abused by the executed command to invoke commands with
-    the caller privileges. See below.
+    the caller privileges. See below. (CVE-2005-4890)
 
 *** general
   * report usage error to stderr, but report usage help to stdout (and return
