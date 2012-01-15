@@ -124,3 +124,4 @@ ALL:
 
 - vipw
   - set ACLs and XATTRs on the temporary file (and backups?)
+  - vipw + selinux -> use lib/selinux.c
