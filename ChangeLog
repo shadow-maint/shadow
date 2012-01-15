@@ -1,3 +1,12 @@
+2012-01-14  YunQiang Su  <wzssyqa@gmail.com>
+
+	* po/zh_CN.po: Updated to 551t2f4u
+	* man/po/zh_CN.po: Updated to 1026t15f132u
+
+2012-01-09  Yuri Kozlov  <yuray@komyakino.ru>
+
+	* po/ru.po: Updated to 557t.
+
 2012-01-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
