@@ -1,19 +1,19 @@
-# translation of fr.po to French
-# shadow fr.po
+# Translation of shadow messages to French
 # Copyright (C) 1999, 2004, 2005, 2006, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2011, 2012  Debian French l10n team <debian-l10n-french@lists.debian.org>
 # Patches, suggestions, etc welcome.
 #
 # Vincent Renardias <vincent@ldsol.com>, 1999, 2005.
 # Jean-Luc Coulon <jean.luc.coulon@wanadoo.fr>, 2005, 2006, 2008.
 # Christian Perrier <bubulle@debian.org>, 2005, 2006, 2008, 2009.
 # Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>, 2009.
-# Thomas Blein <tblein@tblein.eu>, 2011.
+# Thomas Blein <tblein@tblein.eu>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2012-01-08 18:12+0100\n"
-"PO-Revision-Date: 2011-11-22 18:11+0100\n"
+"PO-Revision-Date: 2012-01-13 17:09+0100\n"
 "Last-Translator: Thomas Blein <tblein@tblein.eu>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -52,11 +52,11 @@ msgstr ""
 
 #, c-format
 msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
+msgstr "%s : nscd ne s'est pas terminé normalement (signal %d).\n"
 
 #, c-format
 msgid "%s: nscd exited with status %d"
-msgstr ""
+msgstr "%s : nscd s'est terminé avec le statut %d."
 
 msgid "Password: "
 msgstr "Mot de passe : "
@@ -67,102 +67,99 @@ msgstr "Mot de passe de %s : "
 
 #, c-format
 msgid "[libsemanage]: %s\n"
-msgstr ""
+msgstr "[libsemanage]: %s\n"
 
 #, c-format
 msgid "Cannot create SELinux management handle\n"
-msgstr ""
+msgstr "Impossible de créer le gestionnaire SELinux.\n"
 
 #, c-format
 msgid "SELinux policy not managed\n"
-msgstr ""
+msgstr "Politique SELinux non gérée.\n"
 
 #, c-format
 msgid "Cannot read SELinux policy store\n"
-msgstr ""
+msgstr "Impossible de lire le magasin de politique SELinux.\n"
 
 #, c-format
 msgid "Cannot establish SELinux management connection\n"
-msgstr ""
+msgstr "Impossible d'établir une connexion avec le gestionnaire SELinux.\n"
 
 #, c-format
 msgid "Cannot begin SELinux transaction\n"
-msgstr ""
+msgstr "Impossible de débuter une transaction SELinux.\n"
 
 #, c-format
 msgid "Could not query seuser for %s\n"
-msgstr ""
+msgstr "Impossible de demander le seuser pour %s.\n"
 
 #, c-format
 msgid "Could not set serange for %s\n"
-msgstr ""
+msgstr "Impossible de définir serange pour %s.\n"
 
-#, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
+#, c-format
 msgid "Could not set sename for %s\n"
-msgstr ""
-"Impossible d'allouer l'espace pour l'information sur la configuration.\n"
+msgstr "Impossible de définir sename pour %s.\n"
 
 #, c-format
 msgid "Could not modify login mapping for %s\n"
-msgstr ""
+msgstr "Impossible de modifier la correspondance de connexion pour %s.\n"
 
-#, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
+#, c-format
 msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Changement des informations sur la limite de validité pour %s\n"
+msgstr "Impossible de créer la correspondance de connexion SELinux pour %s.\n"
 
 #, c-format
 msgid "Could not set name for %s\n"
-msgstr ""
+msgstr "Impossible de définir le nom pour %s.\n"
 
 #, c-format
 msgid "Could not set SELinux user for %s\n"
-msgstr ""
+msgstr "Impossible de définir l'utilisateur SELinux pour %s.\n"
 
 #, c-format
 msgid "Could not add login mapping for %s\n"
-msgstr ""
+msgstr "Impossible d'ajouter la correspondance de connexion pour %s.\n"
 
 #, c-format
 msgid "Cannot init SELinux management\n"
-msgstr ""
+msgstr "Impossible d'initier la gestion SELinux.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
+#, c-format
 msgid "Cannot create SELinux user key\n"
-msgstr "%s : Impossible de déterminer votre nom d'utilisateur.\n"
+msgstr "Impossible de créer la clé de l'utilisateur SELinux.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
+#, c-format
 msgid "Cannot verify the SELinux user\n"
-msgstr ""
-"%s : Impossible de cloner (« fork ») l'interpréteur de commandes de "
-"l'utilisateur\n"
+msgstr "Impossible de vérifier l'utilisateur SELinux.\n"
 
 #, c-format
 msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
+msgstr "Impossible de modifier la correspondance d'utilisateur SELinux.\n"
 
 #, c-format
 msgid "Cannot add SELinux user mapping\n"
-msgstr ""
+msgstr "Impossible d'ajouter la correspondance d'utilisateur SELinux.\n"
 
 #, c-format
 msgid "Cannot commit SELinux transaction\n"
-msgstr ""
+msgstr "Impossible d'enregistrer la transaction SELinux.\n"
 
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
 msgstr ""
+"La correspondance de connexion pour %s n'est pas définie. Aucun problème si "
+"la correspondance par défaut était utilisée.\n"
 
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
 msgstr ""
+"La correspondance de connexion pour %s est définie dans la politique. Elle "
+"ne peut pas être supprimée.\n"
 
 #, c-format
 msgid "Could not delete login mapping for %s"
-msgstr ""
+msgstr "Impossible de supprimer la correspondance de connexion pour %s."
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -430,30 +427,27 @@ msgstr "Mot de passe incorrect pour %s.\n"
 
 #, c-format
 msgid "%s: multiple --root options\n"
-msgstr ""
+msgstr "%s : options --root multiple.\n"
 
 #, c-format
 msgid "%s: option '%s' requires an argument\n"
-msgstr ""
+msgstr "%s : l'option « %s » nécessite un argument.\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s : échec lors de l'abandon des privilèges (%s)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
+#, c-format
 msgid "%s: invalid chroot path '%s'\n"
-msgstr "%s : téléphone personnel non valable : « %s »\n"
+msgstr "%s : chemin de chroot « %s » incorrect.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot create directory %s: %s\n"
+#, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"
-msgstr "%s : impossible de créer le répertoire %s : %s\n"
+msgstr "%s : impossible d'accéder au répertoire %s : %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
+#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
-msgstr "%s : impossible de créer le répertoire tcb pour %s\n"
+msgstr "%s : impossible de « chrooter » dans le répertoire %s : %s\n"
 
 #, c-format
 msgid ""
@@ -541,12 +535,8 @@ msgstr ""
 "  -M, --maxdays JOURS_MAX       fixer le nombre maximum de jours avant la\n"
 "                                modification du mot de passe à JOURS_MAX\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
-"  -d, --home-dir REP_PERS       répertoire personnel pour le compte du\n"
-"                                nouvel utilisateur\n"
+msgstr "  -R, --root RÉP_CHROOT       répertoire dans lequel chrooter\n"
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
@@ -678,15 +668,21 @@ msgstr ""
 
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
+"  -f, --full-name NAME_COMPLET     changer le nom complet de l'utilisateur\n"
 
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr ""
+"  -h, --home-phone TEL_PERSO     changer le numéro de téléphone personnel.\n"
 
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
 msgstr ""
+"  -o, --other AUTRE_INFO        changer les autres informations GECOS de "
+"l'utilisateur\n"
 
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr ""
+"  -r, --room NUMÉRO_DE_BUREAU     changer le numéro de bureau de "
+"l'utilisateur\n"
 
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
@@ -694,6 +690,8 @@ msgstr ""
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
+"  -w, --work-phone TEL_PRO        changer le numéro de téléphone "
+"professionnel de l'utilisateur\n"
 
 msgid "Full Name"
 msgstr "Nom complet"
@@ -779,12 +777,9 @@ msgstr ""
 "\n"
 "Options:\n"
 
-#, fuzzy, c-format
-#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
+#, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
-msgstr ""
-"  -c, --crypt-method <METHODE>  méthode de chiffrement\n"
-"                               (parmi %s)\n"
+msgstr "  -c, --crypt-method METHODE  méthode de chiffrement (parmi %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
@@ -879,12 +874,16 @@ msgstr "%s : attention : %s n'est pas exécutable\n"
 
 msgid "  -c, --check                   check the user's password expiration\n"
 msgstr ""
+"  -c, --check                  vérifier l'expiration du mot de passe de "
+"l'utilisateur\n"
 
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
+"  -f, --force                   forcer le changement de mot de passe si "
+"celui de l'utilisateur a expiré\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
@@ -980,10 +979,9 @@ msgstr "%s : utilisateur inconnu ou plage inconnue : %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s : impossible d'obtenir la taille de %s : %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: failed to remove %s\n"
+#, c-format
 msgid "%s: Failed to write %s: %s\n"
-msgstr "%s : échec lors de la suppression de %s\n"
+msgstr "%s : échec lors de l'écriture %s : %s\n"
 
 #, c-format
 msgid ""
@@ -1001,12 +999,8 @@ msgstr "  -a, --ADD UTILISATEUR      ajouter UTILISATEUR au groupe GROUPE\n"
 msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr "  -d, --delete UTILISATEUR   supprimer UTILISATEUR du groupe GROUPE\n"
 
-#, fuzzy
-#| msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
-"  -d, --home-dir REP_PERS       répertoire personnel pour le compte du\n"
-"                                nouvel utilisateur\n"
+msgstr "  -Q, --root REP_CHROOT       répertoire dans lequel chrooter\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr ""
@@ -1154,10 +1148,9 @@ msgstr "%s : le groupe « %s » existe déjà\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "%s : l'identifiant de groupe (GID) « %lu » existe déjà\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
+#, c-format
 msgid "%s: Cannot setup cleanup service.\n"
-msgstr "%s : Impossible de déterminer votre nom d'utilisateur.\n"
+msgstr "%s : Impossible de mettre en place un service de nettoyage.\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1294,9 +1287,11 @@ msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
+"  -r, --read-only               afficher les erreurs et avertissements mais "
+"ne changer aucun fichier.\n"
 
 msgid "  -s, --sort                    sort entries by UID\n"
-msgstr ""
+msgstr "  -s, --sort                    trier les entrées par UID.\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1484,12 +1479,9 @@ msgstr "login : interruption requise par PAM\n"
 msgid "Login incorrect"
 msgstr "Identifiant de connexion incorrect"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
+#, c-format
 msgid "Cannot find user (%s)\n"
-msgstr ""
-"%s : Impossible de cloner (« fork ») l'interpréteur de commandes de "
-"l'utilisateur\n"
+msgstr "Impossible de trouver l'utilisateur (%s)\n"
 
 #, c-format
 msgid ""
@@ -1787,10 +1779,8 @@ msgstr ""
 "\n"
 "Options :\n"
 
-#, fuzzy
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -q, --quiet                   report errors only\n"
-msgstr "  -q, --quiet                 mode silencieux\n"
+msgstr "  -q, --quiet                 affiche uniquement les erreurs\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
@@ -1969,10 +1959,9 @@ msgstr "%s : échec de l'authentification\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s : vous n'êtes pas autorisé à utiliser « su » cet instant\n"
 
-#, fuzzy, c-format
-#| msgid "No password entry for 'root'"
+#, c-format
 msgid "No passwd entry for user '%s'\n"
-msgstr "Pas de mot de passe pour « root »"
+msgstr "Pas de mot de passe pour l'utilisateur « %s »\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1982,10 +1971,9 @@ msgstr "%s : doit être lancé à partir d'un terminal\n"
 msgid "%s: pam_start: error %d\n"
 msgstr "%s : pam_start : erreur %d\n"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot remove the content of %s: %s\n"
+#, c-format
 msgid "%s: Cannot drop the controlling terminal\n"
-msgstr "%s : impossible de supprimer le contenu de %s : %s\n"
+msgstr "%s : impossible d'abandonner le terminal de contrôle\n"
 
 #, c-format
 msgid "Cannot execute %s\n"
@@ -2290,27 +2278,24 @@ msgstr ""
 "  -r, --remove                  supprimer le répertoire personnel et le\n"
 "                                spool du courrier\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
-"  -Z, --selinux-user            nouvelle corespondance de l'utilisateur "
+"  -Z, --selinux-user            supprimer toute correspondance d'utilisateur "
 "SELinux pour le compte d'utilisateur\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot remove the primary group of user '%s'\n"
+#, c-format
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr ""
-"%s : impossible de supprimer le groupe primaire de l'utilisateur « %s »\n"
+"%s : le groupe %s n'a pas été supprimé car ce n'est pas le groupe primaire "
+"de l'utilisateur %s\n"
 
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
+"%s : le groupe %s n'a pas été supprimé car il contient d'autres membres.\n"
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
@@ -2318,10 +2303,10 @@ msgstr ""
 "%s : le groupe %s est le groupe primaire d'un autre utilisateur et il ne "
 "sera pas supprimé.\n"
 
-#, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
+#, c-format
 msgid "%s: %s mail spool (%s) not found\n"
-msgstr "%s : le répertoire personnel de %s (%s) n'a pas été trouvé\n"
+msgstr ""
+"%s : l'emplacement de boîte aux lettres de %s (%s) n'a pas été trouvé\n"
 
 #, c-format
 msgid "%s: warning: can't remove %s: %s\n"
@@ -2367,12 +2352,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s : erreur lors de l'effacement du répertoire %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+#, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
-"%s : attention, la correspondance (mapping) du nom d'utilisateur %s avec %s "
-"l'utilisateur SELinux a échoué.\n"
+"%s : attention, la suppression de la correspondance du nom d'utilisateur %s "
+"avec l'utilisateur SELinux a échoué.\n"
 
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
@@ -2454,15 +2438,11 @@ msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 "  -U, --unlock                  déverrouiller le compte de l'utilisateur\n"
 
-#, fuzzy
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
-"  -Z, --selinux-user            nouvelle corespondance de l'utilisateur "
+"  -Z, --selinux-user            nouvelle correspondance de l'utilisateur "
 "SELinux pour le compte d'utilisateur\n"
 
 #, c-format
@@ -2479,10 +2459,9 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s : l'utilisateur « %s » existe déjà dans %s\n"
 
-#, fuzzy, c-format
-#| msgid "%s: cannot open %s\n"
+#, c-format
 msgid "%s: no options\n"
-msgstr "%s : impossible d'ouvrir %s\n"
+msgstr "%s : aucune option\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
