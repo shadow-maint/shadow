@@ -1,3 +1,7 @@
+2012-01-28  Innocent De Marchi  <tangram.peces@gmail.com>
+
+	* po/ca.po: Updated to 557t.
+
 2012-01-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in, man/da/Makefile.am, man/Makefile.am: Build
@@ -24,12 +28,12 @@
 
 2012-01-27  Thomas Blein  <tblein@tblein.eu>
 
-	* po/fr.po: Updated to 553t.
+	* po/fr.po: Updated to 557t.
 	* man/po/fr.po: Updated to 1173t.
 
 2012-01-26  Joe Hansen  <joedalton2@yahoo.dk>
 
-	* po/da.po: Updated to 553t.
+	* po/da.po: Updated to 557t.
 	* man/po/da.po: Updated to 294t879u.
 
 2012-01-23  Thomas Vasileiou  <thomas-v@wildmail.com>
