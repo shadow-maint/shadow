@@ -4,6 +4,7 @@ mandir = @mandir@/zh_CN
 man_MANS = \
 	chage.1 \
 	chfn.1 \
+	chgpasswd.8 \
 	chpasswd.8 \
 	chsh.1 \
 	expiry.1 \
@@ -13,6 +14,7 @@ man_MANS = \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
+	groupmems.8 \
 	groupmod.8 \
 	groups.1 \
 	grpck.8 \
@@ -25,6 +27,7 @@ man_MANS = \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
+	nologin.8 \
 	passwd.1 \
 	passwd.5 \
 	pwck.8 \
@@ -52,7 +55,8 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	id.1
+	id.1 \
+	sulogin.8
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)

@@ -603,6 +603,7 @@ AC_CONFIG_FILES([
 	man/config.xml
 	man/po/Makefile
 	man/cs/Makefile
+	man/da/Makefile
 	man/de/Makefile
 	man/es/Makefile
 	man/fi/Makefile

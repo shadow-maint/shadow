@@ -1,3 +1,4 @@
+
 mandir = @mandir@/ru
 
 man_MANS = \

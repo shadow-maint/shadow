@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man\n"
 "POT-Creation-Date: 2012-01-08 18:14+0100\n"
-"PO-Revision-Date: 2012-01-26 18:50+0100\n"
+"PO-Revision-Date: 2012-01-26 23:12+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
 "Language: \n"
@@ -4313,7 +4313,7 @@ msgstr "Kommandoen <command>nologin</command> fremkom i BSD 4.4."
 #: newusers.8.xml:51(refentrytitle) newusers.8.xml:58(refname)
 #: newusers.8.xml:64(command) login.defs.5.xml:368(term)
 msgid "newusers"
-msgstr "newusers (nye brugere)"
+msgstr "newusers"
 
 #: newusers.8.xml:59(refpurpose)
 msgid "update and create new users in batch"
@@ -5549,7 +5549,7 @@ msgstr ""
 
 #: limits.5.xml:39(refentrytitle) limits.5.xml:46(refname)
 msgid "limits"
-msgstr "begrænsninger"
+msgstr "limits"
 
 #: limits.5.xml:47(refpurpose)
 msgid "resource limits definition"
@@ -6074,7 +6074,7 @@ msgstr ""
 #: groups.1.xml:38(refentrytitle) groups.1.xml:45(refname)
 #: groups.1.xml:51(command)
 msgid "groups"
-msgstr "grupper"
+msgstr "groups"
 
 #: groups.1.xml:46(refpurpose)
 msgid "display current group names"

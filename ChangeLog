@@ -1,3 +1,23 @@
+2012-01-28  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, configure.in, man/da/Makefile.am, man/Makefile.am: Build
+	manpages with more than 50% translated messages.
+	* man/fr/Makefile.am: Add missing manpages: chgpasswd.8,
+	groupmems.8, nologin.8, sulogin.8.
+	* man/de/Makefile.am: Add missing manpages: chage.1, chgpasswd.8,
+	chpasswd.8, expiry.1, faillog.5, faillog.8, getspnam.3, gpasswd.1,
+	groupadd.8, groupdel.8, groupmems.8, groupmod.8, grpck.8,
+	grpconv.8, grpunconv.8, gshadow.5, lastlog.8, login.defs.5,
+	logoutd.8, newusers.8, nologin.8, pwck.8, pwconv.8, pwunconv.8,
+	sg.1, shadow.3, shadow.5, suauth.5, useradd.8, userdel.8,
+	usermod.8, limits.5, login.access.5, porttime.5, id.1, sulogin.8
+	* man/zh_CN/Makefile.am: Add missing manpages: chgpasswd.8,
+	groupmems.8, nologin.8, sulogin.8
+	* man/pl/Makefile.am, man/sv/Makefile.am, man/it/Makefile.am:
+	Translate only manpages with more than 50% translated messages.
+	* man/po/da.po: Do not translate names of manpages (newusers,
+	limits, groups)
+
 2012-01-28  Yuri Kozlov  <yuray@komyakino.ru>
 
 	* man/po/ru.po: Updated to 1173t.
