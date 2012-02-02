@@ -92,7 +92,6 @@ msgid "Could not set serange for %s\n"
 msgstr "Klarte ikke oppgi serange for %s\n"
 
 #, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "Klarte ikke oppgi sename for %s\n"
 
@@ -101,7 +100,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr "Klarte ikke endre login-avbildning for %s\n"
 
 #, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Kan ikke opprette SELinux login-avbildning for %s\n"
 
@@ -122,12 +120,10 @@ msgid "Cannot init SELinux management\n"
 msgstr "Kan ikke klargjøre SELinux-styring\n"
 
 #, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "Kan ikke opprette SELinux brukernøkkel\n"
 
 #, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "Kan ikke verifisere SELinux-brukeren\n"
 
@@ -164,18 +160,15 @@ msgstr "%s: slapp opp for minne\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot delete %s\n"
 msgid "%s: Cannot stat %s: %s\n"
 msgstr "%s: Kan ikke kjøre stat for %s: %s\n"
 
 #, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s is neither a directory, nor a symlink.\n"
 msgstr "%s: %s er verken en mappe eller en symlenke.\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: Kan ikke lese symbolsk lenke %s: %s\n"
 
@@ -184,60 +177,49 @@ msgid "%s: Suspiciously long symlink: %s\n"
 msgstr "%s: Mistenkelig lang symlenke: %s\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: Kan ikke opprette mappa %s: %s\n"
 
 #, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
 msgid "%s: Cannot change owner of %s: %s\n"
 msgstr "%s: Kan ikke endre eier for %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: warning: can't remove %s: %s"
 msgid "%s: Cannot change mode of %s: %s\n"
 msgstr "%s: Kan ikke endre modus for %s: %s\n"
 
 #, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: unlink: %s: %s\n"
 msgstr "%s: avlenk: %s: %s\n"
 
 #, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove directory %s: %s\n"
 msgstr "%s: Kan ikke slette mappa %s: %s\n"
 
 #, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot rename %s to %s: %s\n"
 msgstr "%s: Kan ikke endre navn på  %s til %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: warning: can't remove %s: %s"
 msgid "%s: Cannot remove %s: %s\n"
 msgstr "%s: Kan ikke fjerne %s: %s\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create symbolic link %s: %s\n"
 msgstr "%s: Kan ikke opprette symbolsk lenke %s: %s\n"
 
 #, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
 msgid "%s: Cannot change owners of %s: %s\n"
 msgstr "%s: Kan ikke endre eiere for %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot delete %s\n"
 msgid "%s: Cannot lstat %s: %s\n"
 msgstr "%s: Kan ikke kjøre lstat for %s: %s\n"
 
 #, c-format
-#| msgid "%s: can't update shadow file\n"
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: Advarsel, bruker %s har ingen tcb skyggefil.\n"
 
@@ -250,13 +232,11 @@ msgstr ""
 "Kontoen forblir låst.\n"
 
 #, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: mkdir: %s: %s\n"
 msgstr "%s: mkdir: %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot open %s\n"
 msgid "%s: Cannot open %s: %s\n"
 msgstr "%s: Kan ikke åpne %s: %s\n"
 
@@ -309,7 +289,6 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s: klarte ikke å låse opp %s\n"
 
 #, c-format
-#| msgid "%s: %s\n"
 msgid "%s: "
 msgstr "%s: "
 
@@ -350,13 +329,11 @@ msgstr ""
 "(%lu)\n"
 
 #, c-format
-#| msgid "failed to change mailbox owner"
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "%s: klarte ikke å tilordne minne: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system GID (no more available GIDs)\n"
 msgstr ""
 "%s: Klarer ikke å få entydig system-GID (ingen flere GID-er tilgjengelig)\n"
@@ -380,7 +357,6 @@ msgstr ""
 
 # , c-format
 #, c-format
-#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgstr ""
 "%s: Klarer ikke å få entydig system-UID (ingen flere UID-er tilgjengelig)\n"
@@ -458,17 +434,14 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: klarte ikke minske privilegier (%s)\n"
 
 #, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
 msgid "%s: invalid chroot path '%s'\n"
 msgstr "%s: ugyldig chroot-sti «%s»\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: kan ikke få tilgang til chroot-mappa %s: %s\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: kan ikke chroot til mappa %s: %s\n"
 
@@ -506,7 +479,6 @@ msgid "No"
 msgstr "Nei"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
@@ -530,9 +502,6 @@ msgstr " -E --expiredate UTLØPSDATO sett kontoens utløpsdato til UTLØPSDATO\n
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    vis denne hjelpen og avslutt\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -543,9 +512,6 @@ msgstr ""
 msgid "  -l, --list                    show account aging information\n"
 msgstr "  -l, --list                    vis aldringsinformasjon for kontoen\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
@@ -553,9 +519,6 @@ msgstr ""
 "  -m, --mindays MIN_DAGER     sett minste antall dager før passord\n"
 "                                må endres til MIN_DAGER\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
@@ -646,7 +609,6 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan ikke avgjøre ditt brukernavn.\n"
 
 #, c-format
-#| msgid "%s: %s\n"
 msgid "%s: PAM: %s\n"
 msgstr "%s: PAM: %s\n"
 
@@ -688,7 +650,6 @@ msgid "%s: error changing fields\n"
 msgstr "%s: feil ved endring i feltene\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
@@ -795,7 +756,6 @@ msgid "%s: fields too long\n"
 msgstr "%s: feltene er for lange\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -813,9 +773,6 @@ msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 "  -e, --encrypted               passord som blir oppgitt er krypterte\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
@@ -867,7 +824,6 @@ msgstr "%s: feil funnet, endringer er ikke utført\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: line %d: user '%s' does not exist\n"
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: (linje %d: bruker %s) passordet er ikke endret\n"
 
@@ -898,17 +854,14 @@ msgstr "%s: Ugyldig inntasting: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: %s is an invalid shell.\n"
 msgid "%s: %s is an invalid shell\n"
 msgstr "%s: %s er et ugyldig skall\n"
 
 #, c-format
-#| msgid "%s: user %s does not exist\n"
 msgid "%s: Warning: %s does not exist\n"
 msgstr "%s: Advarsel: %s finnes ikke\n"
 
 #, c-format
-#| msgid "%s: warning: %s not owned by %s\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: Advarsel: %s er ikke kjørbar\n"
 
@@ -916,9 +869,6 @@ msgid "  -c, --check                   check the user's password expiration\n"
 msgstr ""
 "  -c, --check                   kontroller foreldelse for brukerens passord\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
@@ -933,7 +883,6 @@ msgid "%s: options %s and %s conflict\n"
 msgstr "%s: konflikt mellom valgene %s og %s\n"
 
 #, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
 msgid "%s: unexpected argument: %s\n"
 msgstr "%s: uventet argument: %s\n"
 
@@ -970,12 +919,11 @@ msgid ""
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
 "  -u, --user LOGIN/OMRÅDE  vis faillog-poster eller behandle tellere og \n"
-"                                grenser for innloggingsfeil (hvis brukt med "
-"-r,\n"
+"                                grenser for innloggingsfeil (hvis brukt med -"
+"r,\n"
 "                                -m eller -l ) bare for oppgitte LOGIN(er)\n"
 
 #, c-format
-#| msgid "lastlog: Failed to get the entry for UID %d\n"
 msgid "%s: Failed to get the entry for UID %lu\n"
 msgstr "%s: Klarte ikke hente innslag for UID %lu\n"
 
@@ -992,39 +940,32 @@ msgid " [%lds lock]"
 msgstr " [%lds lås]"
 
 #, c-format
-#| msgid "faillog: Failed to reset fail count for UID %d\n"
 msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "%s: Klarte ikke tilbakestille mislykt-telling for UID %lu\n"
 
 #, c-format
-#| msgid "faillog: Failed to set max for UID %d\n"
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr "%s: Klarte ikke sette maksimum for UID %lu\n"
 
 #, c-format
-#| msgid "faillog: Failed to set locktime for UID %d\n"
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "%s: Klarte ikke sette låsetid for UID %lu\n"
 
 # , c-format
 #, c-format
-#| msgid "lastlog: Unknown user or range: %s\n"
 msgid "%s: Unknown user or range: %s\n"
 msgstr "%s: Ukjent bruker eller område: %s\n"
 
 #, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: Kan ikke finne størrelse på %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: failed to remove %s\n"
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: Klarte ikke skrive %s: %s\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
@@ -1054,10 +995,6 @@ msgstr ""
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr "  -M, --members BRUKER,...      sett liste over medlemmer av GRUPPE\n"
 
-#| msgid ""
-#| "  -A, --administrators ADMIN,...\n"
-#| "                                set the list of administrators for GROUP\n"
-#| "Except for the -A and -M options, the options cannot be combined.\n"
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
@@ -1065,7 +1002,6 @@ msgstr ""
 "  -A, --administrators ADMIN,...\n"
 "                                oppgi liste over administratorer for GRUPPE\n"
 
-#| msgid "The options cannot be combined.\n"
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr "Valgene kan ikke kombineres, unntatt -A og -M.\n"
 
@@ -1121,7 +1057,6 @@ msgid "%s: Not a tty\n"
 msgstr "%s: Ikke en tty\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] GROUP\n"
 "\n"
@@ -1131,9 +1066,6 @@ msgstr ""
 "\n"
 "Valg:\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -f, --force                   exit successfully if the group already "
 "exists,\n"
@@ -1150,9 +1082,6 @@ msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
 " -K. --key NØKKEL=VERDI     overstyr standarverdier fra /etc/login.defs\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
 "                                (non-unique) GID\n"
@@ -1194,7 +1123,6 @@ msgid "%s: GID '%lu' already exists\n"
 msgstr "%s; GID «%lu» finnes fra før.\n"
 
 #, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Kan ikke sette opp oppryddingstjeneste.\n"
 
@@ -1233,7 +1161,6 @@ msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: slapp opp for minne. Kan ikke oppdatere %s.\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
@@ -1243,9 +1170,6 @@ msgstr ""
 "\n"
 "Valg:\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
@@ -1319,7 +1243,6 @@ msgid "%s: unknown user %s\n"
 msgstr "%s: ukjent bruker %s\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
@@ -1330,7 +1253,6 @@ msgstr ""
 "Valg:\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
@@ -1340,9 +1262,6 @@ msgstr ""
 "\n"
 "Valg:\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
@@ -1354,7 +1273,6 @@ msgid "  -s, --sort                    sort entries by UID\n"
 msgstr "  -s, --sort                    sorter oppføringer etter UID\n"
 
 #, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s og -r passer ikke sammen\n"
 
@@ -1398,7 +1316,8 @@ msgstr "legg til gruppe «%s» i %s? "
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"gruppe %s har en oppføring i %s, men passordfeltet i %s er ikke satt til «x»\n"
+"gruppe %s har en oppføring i %s, men passordfeltet i %s er ikke satt til "
+"«x»\n"
 
 msgid "invalid shadow group file entry"
 msgstr "ugyldig oppføring i skygge-gruppefila"
@@ -1443,7 +1362,8 @@ msgstr " grupper="
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
-"  -b, --before DAGER            skriv ut bare lastlog-poster eldre enn DAGER\n"
+"  -b, --before DAGER            skriv ut bare lastlog-poster eldre enn "
+"DAGER\n"
 
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
@@ -1499,9 +1419,6 @@ msgstr ""
 "[Frakobling omgått - root-innlogging tillatt.]"
 
 #, c-format
-#| msgid ""
-#| "\n"
-#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
@@ -1528,7 +1445,6 @@ msgid "login: "
 msgstr "login: "
 
 #, c-format
-#| msgid "Maximum number of tries exceeded (%d)\n"
 msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Maks. antall forsøk er overskredet (%u)\n"
 
@@ -1539,7 +1455,6 @@ msgid "Login incorrect"
 msgstr "Ugyldig innlogging"
 
 #, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot find user (%s)\n"
 msgstr "Kan ikke finne bruker (%s)\n"
 
@@ -1654,12 +1569,10 @@ msgid "%s: line %d: can't update password\n"
 msgstr "%s: linje %d: kan ikke oppdatere passord\n"
 
 #, c-format
-#| msgid "%s: line %d: mkdir failed\n"
 msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s: linje %d: mkdir %s mislyktes: %s\n"
 
 #, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s: linje %d: chown %s mislyktes: %s\n"
 
@@ -1681,15 +1594,13 @@ msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
 msgstr ""
-"  -e, --expire                  la passordet for den oppgitte kontoen utløpe\n"
+"  -e, --expire                  la passordet for den oppgitte kontoen "
+"utløpe\n"
 
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
 "  -k, --keep-tokens             endre passord bare hvis det er utløpt\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -1701,9 +1612,6 @@ msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr "  -L, --lock                  lås passordet for den oppgitte kontoen\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
@@ -1735,9 +1643,6 @@ msgstr ""
 "  -w, --warndays VARSLE_DGR     varsle om at kontoen går ut på dato når det "
 "er VARSLE_DGR igjen\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
@@ -1821,17 +1726,14 @@ msgid "The password for %s is unchanged.\n"
 msgstr "Passordet for %s er uendret.\n"
 
 #, c-format
-#| msgid "Password changed."
 msgid "%s: password changed.\n"
 msgstr "%s: passordet er endret.\n"
 
 #, c-format
-#| msgid "Password Expiration Warning"
 msgid "%s: password expiry information changed.\n"
 msgstr "%s: informasjon om utløp av passord er endret.\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1842,7 +1744,6 @@ msgstr ""
 "Valg:\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
@@ -1891,22 +1792,18 @@ msgid "user '%s': program '%s' does not exist\n"
 msgstr "bruker «%s»: programmet «%s» finnes ikke\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "no tcb directory for %s\n"
 msgstr "ingen tcb-mappe for %s\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "create tcb directory for %s?"
 msgstr "opprette tcb-mappe for %s?"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "failed to create tcb directory for %s\n"
 msgstr "klarte ikke opprette tcb-mappe for %s\n"
 
 #, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: kan ikke låse %s.\n"
 
@@ -1922,7 +1819,8 @@ msgstr "legg til bruker «%s» i %s? "
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"bruker %s har en oppføring i %s, men passordfeltet i %s er ikke satt til «x»\n"
+"bruker %s har en oppføring i %s, men passordfeltet i %s er ikke satt til "
+"«x»\n"
 
 msgid "invalid shadow password file entry"
 msgstr "ugyldig oppføring i skygge-passordfila"
@@ -1940,7 +1838,6 @@ msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: kan ikke sortere oppføringer i %s\n"
 
 #, c-format
-#| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: kan ikke virke med tcb slått på\n"
 
@@ -1964,7 +1861,6 @@ msgid " ...waiting for child to terminate.\n"
 msgstr " ... venter på at barneprosess avslutter.\n"
 
 #, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Kan ikke spalte ut brukerskall\n"
 
@@ -2038,7 +1934,6 @@ msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Du har ikke adgang til å su på den tiden\n"
 
 #, c-format
-#| msgid "No password entry for 'root'"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Ingen oppføring for bruker «%s» i passordfila\n"
 
@@ -2051,12 +1946,10 @@ msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: feil %d\n"
 
 #, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: Kan ikke slippe den styrende terminalen\n"
 
 #, c-format
-#| msgid "Cannot execute %s"
 msgid "Cannot execute %s\n"
 msgstr "Kan ikke kjøre %s\n"
 
@@ -2098,12 +1991,10 @@ msgid "%s: cannot open new defaults file\n"
 msgstr "%s: klarer ikke å åpne ny «defaults»-fil\n"
 
 #, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: for lang linje i %s: %s ..."
 
 #, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: gi nytt navn: %s: %s\n"
 
@@ -2116,7 +2007,6 @@ msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: for mange grupper oppgitt (maks %d).\n"
 
 #, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -2130,9 +2020,6 @@ msgstr ""
 "\n"
 "Valg:\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
@@ -2164,9 +2051,6 @@ msgstr ""
 "  -f, --inactive INAKTIVE        hvor lenge etter utløp kan passordet ennå "
 "brukes\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
@@ -2174,9 +2058,6 @@ msgstr ""
 "  -g, --gid GRUPPE              navn eller ID for primærgruppe for den nye "
 "kontoen\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
@@ -2188,9 +2069,6 @@ msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr "  -k, --skel SKEL_DIR           bruk denne alternative skjelettmappa\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
@@ -2205,9 +2083,6 @@ msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr "  -M, --no-create-home          ikke opprett brukerens hjemmemappe\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
@@ -2215,9 +2090,6 @@ msgstr ""
 "  -N, --no-user-group           ikke opprett en gruppe med samme navn som "
 "brukeren\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
@@ -2327,7 +2199,6 @@ msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %lu er ikke entydig\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr "%s: Klarte ikke opprette tcb-mappe for %s\n"
 
@@ -2349,9 +2220,6 @@ msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 "%s: advarsel: klarte ikke å avbilde brukernavn %s til %s SELinux-bruker.\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -f, --force                   force removal of files,\n"
 "                                even if not owned by user\n"
@@ -2370,7 +2238,6 @@ msgstr ""
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot remove the primary group of user '%s'\n"
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr ""
@@ -2387,13 +2254,11 @@ msgstr ""
 "%s: gruppa %s er en primærgruppe for en annen bruker og blir ikke fjernet.\n"
 
 #, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: %s e-postlager (%s) ikke funnet.\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: warning: can't remove %s: %s"
 msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: advarsel: kan ikke fjerne %s: %s\n"
 
@@ -2406,18 +2271,15 @@ msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr "%s: Kan ikke tilordne minne, tcb-oppføring for %s er ikke fjernet.\n"
 
 #, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Cannot drop privileges: %s\n"
 msgstr "%s: Kan ikke minske privilegier: %s\n"
 
 #, c-format
-#| msgid "lastlog: Cannot get the size of %s: %s\n"
 msgid "%s: Cannot remove the content of %s: %s\n"
 msgstr "%s: Kan ikke fjerne innholdet i %s: %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: Kan ikke fjerne tcb-filer for %s:  %s\n"
 
@@ -2426,7 +2288,6 @@ msgid "%s: user %s is a NIS user\n"
 msgstr "%s: bruker %s er en NIS bruker\n"
 
 #, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: fant ikke hjemmemappe for %s (%s)\n"
 
@@ -2457,9 +2318,6 @@ msgid ""
 msgstr ""
 "  -e, --expiredate UTLØPSDATO  sett kontoens utløpsdato til UTLØPSDATO\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
@@ -2470,9 +2328,6 @@ msgstr ""
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr "  -g, --gid GRUPPE              bruk GRUPPE som ny primærgruppe\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups GRUPPER          ny liste over ekstra GRUPPEr\n"
 
@@ -2492,9 +2347,6 @@ msgstr "  -l, --login NY_LOGIN         ny verdi for login-navnet\n"
 msgid "  -L, --lock                    lock the user account\n"
 msgstr "  -L, --lock                    lås brukerkontoen\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
@@ -2502,9 +2354,6 @@ msgstr ""
 "  -m, --move-home      flytt innholdet i hjemmemappa til det nye stedet\n"
 "                                  (brukes bare med -d)\n"
 
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
@@ -2544,7 +2393,6 @@ msgstr "%s: bruker «%s» finnes fra før i %s\n"
 
 # , c-format
 #, c-format
-#| msgid "%s: cannot open %s\n"
 msgid "%s: no options\n"
 msgstr "%s: ingen valg\n"
 
@@ -2573,7 +2421,6 @@ msgstr ""
 "hjemmemaper er opprettet.\n"
 
 #, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: Klarte ikke å endre eierskap til hjemmemappa"
 
@@ -2640,22 +2487,18 @@ msgstr "%s: klarte ikke fjerne %s\n"
 msgid "%s: %s is unchanged\n"
 msgstr "%s: %s er ikke endret\n"
 
-#| msgid "failed to rename mailbox"
 msgid "failed to create scratch directory"
 msgstr "klarte ikke å opprette kladdemappe"
 
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to drop privileges"
 msgstr "klarte ikke minske privilegier"
 
-#| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Klarte ikke finne kontekst for fil"
 
 msgid "setfscreatecon () failed"
 msgstr "setfscreatecon () mislyktes"
 
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to gain privileges"
 msgstr "klarte ikke skaffe privile"
 
@@ -2669,19 +2512,15 @@ msgid "failed to open scratch file"
 msgstr "klarte ikke å åpne kladdefil"
 
 # , c-format
-#| msgid "%s: failed to unlock %s\n"
 msgid "failed to unlink scratch file"
 msgstr "klarte ikke å avlenke kladdefila"
 
-#| msgid "failed to rename mailbox"
 msgid "failed to stat edited file"
 msgstr "klarte ikke å kjøre «stat» på redigert fil"
 
-#| msgid "failed to change mailbox owner"
 msgid "failed to allocate memory"
 msgstr "klarte ikke å tilordne minne"
 
-#| msgid "failed to rename mailbox"
 msgid "failed to create backup file"
 msgstr "klarte ikke å opprette sikringskopi-fil"
 
@@ -2690,7 +2529,6 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
 
 #, c-format
-#| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: klarte ikke å finne tcb-mappe for %s\n"
 

@@ -201,7 +201,7 @@
 	  <para>
 	    If the target user has a restricted shell (i.e. the shell field of
 	    this user's entry in <filename>/etc/passwd</filename> is not
-	    listed in <filename>/etc/shell</filename>), then the
+	    listed in <filename>/etc/shells</filename>), then the
 	    <option>--shell</option> option or the <envar>$SHELL</envar>
 	    environment variable won't be taken into account, unless
 	    <command>su</command> is called by root.

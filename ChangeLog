@@ -1,3 +1,13 @@
+2012-01-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/useradd.8.xml, man/su.1.xml, man/po/da.po, man/po/ru.po,
+	man/po/fr.po, man/po/de.po, man/po/sv.po, man/po/pl.po,
+	man/po/it.po, man/po/shadow-man-pages.pot, man/po/zh_CN.po: Fix
+	two typos. Thanks to Giuseppe Sacco. Unfuzzy translations
+	* po/kk.po, po/nb.po, po/el.po, po/ca.po, po/ja.po: Re-generate.
+	* man/login.defs.d/ENV_PATH.xml, man/login.defs.d/ENV_SUPATH.xml:
+	Fix typo.
+
 2012-01-28  Innocent De Marchi  <tangram.peces@gmail.com>
 
 	* po/ca.po: Updated to 557t.

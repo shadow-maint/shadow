@@ -582,7 +582,7 @@
 	      the <option>-N/--no-user-group</option> is used or when the
 	      <option>USERGROUPS_ENAB</option> variable is set to
 	      <replaceable>no</replaceable> in
-	      <filename>/etc/login.defs</filename>. The named
+	      <filename>/etc/login.defs</filename>). The named
 	      group must exist, and a numerical group ID must have an
 	      existing entry.
 	    </para>

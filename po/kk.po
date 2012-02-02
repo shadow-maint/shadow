@@ -18,8 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #, c-format
-msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr "'%s' атындағы %s ішінде бірнеше жазба бар. Оны pwck не grpck көмегімен дұрыстаңыз.\n"
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"'%s' атындағы %s ішінде бірнеше жазба бар. Оны pwck не grpck көмегімен "
+"дұрыстаңыз.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
@@ -84,7 +87,6 @@ msgid "Could not set serange for %s\n"
 msgstr "%s үшін serange орнату мүмкін емес\n"
 
 #, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "%s үшін sename орнату мүмкін емес\n"
 
@@ -93,7 +95,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr "%s үшін тіркелгі сәйкестігін түзету мүмкін емес\n"
 
 #, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "%s үшін SELinux тіркелгі сәйкестігін жасау мүмкін емес\n"
 
@@ -114,12 +115,10 @@ msgid "Cannot init SELinux management\n"
 msgstr "SELinux басқаруын іске қосу мүмкін емес\n"
 
 #, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "SELinux пайд.-шы кілтін жасау мүмкін емес\n"
 
 #, c-format
-#| msgid "%s: Cannot fork user shell\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "SELinux пайдаланушысын тексеру мүмкін емес\n"
 
@@ -137,7 +136,9 @@ msgstr "SELinux әрекетін іске асыру мүмкін емес\n"
 
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr "%s үшін тіркелгі сәйкестігі анықталмаған, бастапқы сәйкестк қолданылған болса ОК\n"
+msgstr ""
+"%s үшін тіркелгі сәйкестігі анықталмаған, бастапқы сәйкестк қолданылған "
+"болса ОК\n"
 
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
@@ -303,8 +304,11 @@ msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr "%s: Қате баптаулар: GID_MIN (%lu), GID_MAX (%lu)\n"
 
 #, c-format
-msgid "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
-msgstr "%s: Қате баптаулар: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+msgstr ""
+"%s: Қате баптаулар: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: failed to allocate memory: %s\n"
@@ -323,8 +327,11 @@ msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
 msgstr "%s: Қате баптаулар: UID_MIN (%lu), UID_MAX (%lu)\n"
 
 #, c-format
-msgid "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
-msgstr "%s: Қате баптаулар: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
+msgid ""
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
+msgstr ""
+"%s: Қате баптаулар: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Can't get unique system UID (no more available UIDs)\n"
@@ -402,17 +409,14 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: привилегиялар деңгейін төмендету мүмкін емес (%s)\n"
 
 #, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
 msgid "%s: invalid chroot path '%s'\n"
 msgstr "%s: '%s' chroot жолы қате\n"
 
 #, c-format
-#| msgid "%s: Cannot create directory %s: %s\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: %s chroot бумасына қатынау мүмкін емес: %s\n"
 
 #, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: %s бумасына chroot жасау мүмкін емес: %s\n"
 
@@ -459,11 +463,18 @@ msgstr ""
 "\n"
 "Опциялар:\n"
 
-msgid "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
-msgstr "  -d, --lastday LAST_DAY        парольдің аяқталу мерзімін LAST_DAY күніне орнату\n"
+msgid ""
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
+msgstr ""
+"  -d, --lastday LAST_DAY        парольдің аяқталу мерзімін LAST_DAY күніне "
+"орнату\n"
 
-msgid "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -E, --expiredate EXPIRE_DATE  тіркелгінің аяқталу мерзімі EXPIRE_DATE күніне орнату\n"
+msgid ""
+"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+"  -E, --expiredate EXPIRE_DATE  тіркелгінің аяқталу мерзімі EXPIRE_DATE "
+"күніне орнату\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    осы көмек ақпаратын көрсету мен шығу\n"
@@ -472,31 +483,38 @@ msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -I, --inactive INACTIVE       парольдің мерзімі біткен соң оны INACTIVE болып\n"
+"  -I, --inactive INACTIVE       парольдің мерзімі біткен соң оны INACTIVE "
+"болып\n"
 "                                орнату үшін өтетін күн саны\n"
 
 msgid "  -l, --list                    show account aging information\n"
-msgstr "  -l, --list                    тіркелгінің жұмыс уақыты ақпаратын көрсету\n"
+msgstr ""
+"  -l, --list                    тіркелгінің жұмыс уақыты ақпаратын көрсету\n"
 
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -m, --mindays MIN_DAYS        парольді ауыстыру арасында өту керек ең аз күн санын\n"
+"  -m, --mindays MIN_DAYS        парольді ауыстыру арасында өту керек ең аз "
+"күн санын\n"
 "                                MIN_DAYS мәніне орнату\n"
 
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -M, --maxdays MAX_DAYS        парольді ауыстыру арасында өту керек ең көп сүн санын\n"
+"  -M, --maxdays MAX_DAYS        парольді ауыстыру арасында өту керек ең көп "
+"сүн санын\n"
 "                                MAX_DAYS мәніне орнату\n"
 
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr "  -R, --root CHROOT_DIR         chroot үшін бума\n"
 
-msgid "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -W, --warndays WARN_DAYS      мерзімі аяқталу туралы хабарламаны WARN_DAYS күн қалғанда көрсете бастау\n"
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+"  -W, --warndays WARN_DAYS      мерзімі аяқталу туралы хабарламаны WARN_DAYS "
+"күн қалғанда көрсете бастау\n"
 
 msgid "Enter the new value, or press ENTER for the default"
 msgstr "Жаңа мәнді енгізіңіз, немесе ұсынылатынды қабылдау үшін ENTER басыңыз"
@@ -570,7 +588,6 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Сіздің пайдаланушы атын анықтау мүмкін емес.\n"
 
 #, c-format
-#| msgid "%s: %s\n"
 msgid "%s: PAM: %s\n"
 msgstr "%s: PAM: %s\n"
 
@@ -620,10 +637,12 @@ msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr "  -f, --full-name FULL_NAME     пайд.-ның толық атын ауыстыру\n"
 
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
-msgstr "  -h, --home-phone HOME_PHONE   пайд.-ның үй телефон нөмірін ауыстыру\n"
+msgstr ""
+"  -h, --home-phone HOME_PHONE   пайд.-ның үй телефон нөмірін ауыстыру\n"
 
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
-msgstr "  -o, --other OTHER_INFO        пайд.-ның басқа GECOS ақпаратын өзгерту\n"
+msgstr ""
+"  -o, --other OTHER_INFO        пайд.-ның басқа GECOS ақпаратын өзгерту\n"
 
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
 msgstr "  -r, --room ROOM_NUMBER        пайд.-ның бөлме нөмірін ауыстыру\n"
@@ -632,7 +651,8 @@ msgid "  -u, --help                    display this help message and exit\n"
 msgstr "  -u, --help                    осы көмек ақпаратын көрсету мен шығу\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
-msgstr "  -w, --work-phone WORK_PHONE   пайд.-ның жұмыс телефон нөмірін ауыстыру\n"
+msgstr ""
+"  -w, --work-phone WORK_PHONE   пайд.-ның жұмыс телефон нөмірін ауыстыру\n"
 
 msgid "Full Name"
 msgstr "Толық аты"
@@ -719,7 +739,6 @@ msgstr ""
 "Опциялар:\n"
 
 #, c-format
-#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method METHOD     шифрлеу тәсілі (келесіден біреу: %s)\n"
 
@@ -781,7 +800,8 @@ msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: жол %d: пайдаланушы '%s' жоқ болып тұр\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
-msgstr "  -s, --shell SHELL             пайдаланушы тіркелгісі үшін жаңа қоршам\n"
+msgstr ""
+"  -s, --shell SHELL             пайдаланушы тіркелгісі үшін жаңа қоршам\n"
 
 msgid "Login Shell"
 msgstr "Қоршам"
@@ -811,10 +831,12 @@ msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: Ескерту: %s орындалатын емес\n"
 
 msgid "  -c, --check                   check the user's password expiration\n"
-msgstr "  -c, --check                   пайд.-шы паролінің аяқталу мерзімін тексеру\n"
+msgstr ""
+"  -c, --check                   пайд.-шы паролінің аяқталу мерзімін тексеру\n"
 
 msgid ""
-"  -f, --force                   force password change if the user's password\n"
+"  -f, --force                   force password change if the user's "
+"password\n"
 "                                is expired\n"
 msgstr ""
 "  -f, --force                   пайд.-шы паролінің мерзімі бітсе, парольді\n"
@@ -829,27 +851,42 @@ msgid "%s: unexpected argument: %s\n"
 msgstr "%s: күтпеген аргумент: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
-msgstr "  -a, --all                     барлық пайдаланушылар үшін faillog жазбаларын көрсету\n"
+msgstr ""
+"  -a, --all                     барлық пайдаланушылар үшін faillog "
+"жазбаларын көрсету\n"
 
-msgid "  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"
-msgstr "  -l, --lock-secs СЕК           сәтсіз кіру талабынан кейін тіркелгіні СЕК секундқа блоктау\n"
+msgid ""
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
+"seconds\n"
+msgstr ""
+"  -l, --lock-secs СЕК           сәтсіз кіру талабынан кейін тіркелгіні СЕК "
+"секундқа блоктау\n"
 
-msgid "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-msgstr "  -m, --maximum МАКС            сәтсіз кіру талап сан максимумын МАКС етіп орнату\n"
+msgid ""
+"  -m, --maximum MAX             set maximum failed login counters to MAX\n"
+msgstr ""
+"  -m, --maximum МАКС            сәтсіз кіру талап сан максимумын МАКС етіп "
+"орнату\n"
 
 msgid "  -r, --reset                   reset the counters of login failures\n"
 msgstr "  -r, --reset                   сәтсіз кіру талап санағышын нөлдеу\n"
 
-msgid "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-msgstr "  -t, --time КҮН                КҮНнен кейін болған faillog жазбаларын көрсету\n"
+msgid ""
+"  -t, --time DAYS               display faillog records more recent than "
+"DAYS\n"
+msgstr ""
+"  -t, --time КҮН                КҮНнен кейін болған faillog жазбаларын "
+"көрсету\n"
 
 msgid ""
 "  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
-"  -u, --user ТІРКЕЛГІ/АРАЛЫҚ    тек көрсетілген ТІРКЕЛГІ(лер) үшін faillog жазбасын\n"
-"                                көрсету не санағыштарды мен лимиттерді (егер -r, -m,\n"
+"  -u, --user ТІРКЕЛГІ/АРАЛЫҚ    тек көрсетілген ТІРКЕЛГІ(лер) үшін faillog "
+"жазбасын\n"
+"                                көрсету не санағыштарды мен лимиттерді (егер "
+"-r, -m,\n"
 "                                не -l бірге көрсетілсе) басқару\n"
 
 #, c-format
@@ -869,7 +906,8 @@ msgstr " [%lds оқшаулар саны]"
 
 #, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "%s: UID %lu үшін сәтсіз кіру талаптар санағышын нөлдеу сәтсіз аяқталды\n"
+msgstr ""
+"%s: UID %lu үшін сәтсіз кіру талаптар санағышын нөлдеу сәтсіз аяқталды\n"
 
 #, c-format
 msgid "%s: Failed to set max for UID %lu\n"
@@ -888,7 +926,6 @@ msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: %s өлшемін алу мүмкін емес: %s\n"
 
 #, c-format
-#| msgid "%s: failed to remove %s\n"
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: %s жазу сәтсіз: %s\n"
 
@@ -914,8 +951,10 @@ msgstr "  -Q, --root CHROOT_DIR         chroot үшін бума\n"
 msgid "  -r, --remove-password         remove the GROUP's password\n"
 msgstr "  -r, --remove-password         ТОП паролін өшіру\n"
 
-msgid "  -R, --restrict                restrict access to GROUP to its members\n"
-msgstr "  -R, --restrict                ТОПқа қатынауды тек оның мүшелерімен шектеу\n"
+msgid ""
+"  -R, --restrict                restrict access to GROUP to its members\n"
+msgstr ""
+"  -R, --restrict                ТОПқа қатынауды тек оның мүшелерімен шектеу\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr "  -M, --members ПАЙД,...        ТОП мүшелерін орнату\n"
@@ -928,7 +967,8 @@ msgstr ""
 "                                ТОП үшін әкімшілер тізімін орнату\n"
 
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr "Бұл опцияларды, -A және -M опцияларынан басқа, бірге қолдануға болмайды.\n"
+msgstr ""
+"Бұл опцияларды, -A және -M опцияларынан басқа, бірге қолдануға болмайды.\n"
 
 msgid "The options cannot be combined.\n"
 msgstr "Бұл опцияларды бірге қолдануға болмайды.\n"
@@ -989,17 +1029,20 @@ msgstr ""
 "Опциялар:\n"
 
 msgid ""
-"  -f, --force                   exit successfully if the group already exists,\n"
+"  -f, --force                   exit successfully if the group already "
+"exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
-"  -f, --force                   топ бар болса сәтті шығу, ал GID қолдануда болса,\n"
+"  -f, --force                   топ бар болса сәтті шығу, ал GID қолдануда "
+"болса,\n"
 "                                -g опциясынан бас тарту\n"
 
 msgid "  -g, --gid GID                 use GID for the new group\n"
 msgstr "  -g, --gid GID                 жаңа топ үшін GID қолдану\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
-msgstr "  -K, --key KEY=VALUE           /etc/login.defs бастапқы мәндерін алмастыру\n"
+msgstr ""
+"  -K, --key KEY=VALUE           /etc/login.defs бастапқы мәндерін алмастыру\n"
 
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
@@ -1008,8 +1051,12 @@ msgstr ""
 "  -o, --non-unique              қайталанатын (ерекше емес) GID бар топтарды\n"
 "                                жасауға рұқсат ету\n"
 
-msgid "  -p, --password PASSWORD       use this encrypted password for the new group\n"
-msgstr "  -p, --password ПАРОЛЬ         бұл шифрленген парольді жаңа топ үшін қолдану\n"
+msgid ""
+"  -p, --password PASSWORD       use this encrypted password for the new "
+"group\n"
+msgstr ""
+"  -p, --password ПАРОЛЬ         бұл шифрленген парольді жаңа топ үшін "
+"қолдану\n"
 
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  жүйелік тіркелгіні жасау\n"
@@ -1035,7 +1082,6 @@ msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: GID '%lu' бар болып тұр\n"
 
 #, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Тазарту қызметін орнату мүмкін емес.\n"
 
@@ -1078,7 +1124,8 @@ msgstr ""
 "Опциялар:\n"
 
 msgid ""
-"  -g, --group groupname         change groupname instead of the user's group\n"
+"  -g, --group groupname         change groupname instead of the user's "
+"group\n"
 "                                (root only)\n"
 msgstr ""
 "  -g, --group топ_аты           пайд. тобы орнына топты көрсету\n"
@@ -1090,10 +1137,14 @@ msgstr "\n"
 msgid "Actions:\n"
 msgstr "Әрекеттер:\n"
 
-msgid "  -a, --add username            add username to the members of the group\n"
-msgstr "  -a, --add пайд_аты            пайдаланушыны топтың мүшелер тізіміне қосу\n"
+msgid ""
+"  -a, --add username            add username to the members of the group\n"
+msgstr ""
+"  -a, --add пайд_аты            пайдаланушыны топтың мүшелер тізіміне қосу\n"
 
-msgid "  -d, --delete username         remove username from the members of the group\n"
+msgid ""
+"  -d, --delete username         remove username from the members of the "
+"group\n"
 msgstr "  -d, --delete пайд_аты         пайдаланушыны топтан өшіру\n"
 
 msgid "  -p, --purge                   purge all members from the group\n"
@@ -1116,13 +1167,17 @@ msgstr "  -g, --gid GID                 топ ID-ін GID мәніне орна
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
 msgstr "  -n, --new-name ЖАҢА_ТОП       атын жаңа ЖАҢА_ТОП атына орнату\n"
 
-msgid "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
-msgstr "  -o, --non-unique              қайталанатын (ерекше емес) GID қолдануға рұқсат ету\n"
+msgid ""
+"  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
+msgstr ""
+"  -o, --non-unique              қайталанатын (ерекше емес) GID қолдануға "
+"рұқсат ету\n"
 
 msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
-msgstr "  -p, --password ПАРОЛЬ         парольді осы ПАРОЛЬге (шифрленген) оранту\n"
+msgstr ""
+"  -p, --password ПАРОЛЬ         парольді осы ПАРОЛЬге (шифрленген) оранту\n"
 
 #, c-format
 msgid "%s: invalid group name '%s'\n"
@@ -1205,8 +1260,11 @@ msgid "add group '%s' in %s? "
 msgstr "'%s' тобын %s ішіне қосу керек пе?"
 
 #, c-format
-msgid "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
-msgstr "%s тобының %s ішінде жазбасы бар, бірақ оның %s ішіндегі пароль жазбасы 'x' етіп орнатылмаған\n"
+msgid ""
+"group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+"%s тобының %s ішінде жазбасы бар, бірақ оның %s ішіндегі пароль жазбасы 'x' "
+"етіп орнатылмаған\n"
 
 msgid "invalid shadow group file entry"
 msgstr "көлеңкелі топтар файлының қате жазбасы"
@@ -1247,14 +1305,24 @@ msgstr "Қолданылуы: id\n"
 msgid " groups="
 msgstr " топтар="
 
-msgid "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-msgstr "  -b, --before КҮН              мерзімі КҮНнен үлкен ғана lastlog жазбаларын көрсету\n"
+msgid ""
+"  -b, --before DAYS             print only lastlog records older than DAYS\n"
+msgstr ""
+"  -b, --before КҮН              мерзімі КҮНнен үлкен ғана lastlog жазбаларын "
+"көрсету\n"
 
-msgid "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
-msgstr "  -t, --time КҮН                мерзімі КҮНнен кіші ғана lastlog жазбаларын көрсету\n"
+msgid ""
+"  -t, --time DAYS               print only lastlog records more recent than "
+"DAYS\n"
+msgstr ""
+"  -t, --time КҮН                мерзімі КҮНнен кіші ғана lastlog жазбаларын "
+"көрсету\n"
 
-msgid "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-msgstr "  -u, --user ТІРКЕЛГІ           көрсетілген ТІРКЕЛГІ үшін lastlog жазбаларын көрсету\n"
+msgid ""
+"  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
+"  -u, --user ТІРКЕЛГІ           көрсетілген ТІРКЕЛГІ үшін lastlog жазбаларын "
+"көрсету\n"
 
 msgid "Username         Port     From             Latest"
 msgstr "Пайдаланушы      Порт     Қайдан           Соңғы"
@@ -1296,7 +1364,8 @@ msgid ""
 "[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Жүйеден мәжбүрлі шығу орындалмады -- root үшін жүйеге кіруге рұқсат етілген.]"
+"[Жүйеден мәжбүрлі шығу орындалмады -- root үшін жүйеге кіруге рұқсат "
+"етілген.]"
 
 #, c-format
 msgid ""
@@ -1311,7 +1380,9 @@ msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Эффективті root-сыз жұмыс істемеуі мүмкін\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Utmp жазбасы жоқ. Сізге exec \"login\" командасын бірінші деңгейден \"sh\" қосу керек"
+msgstr ""
+"Utmp жазбасы жоқ. Сізге exec \"login\" командасын бірінші деңгейден \"sh\" "
+"қосу керек"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1335,7 +1406,6 @@ msgid "Login incorrect"
 msgstr "Жүйеге кіру орындалмады"
 
 #, c-format
-#| msgid "%s: Cannot fork user shell\n"
 msgid "Cannot find user (%s)\n"
 msgstr "Пайдаланушыны табу мүмкін емес (%s)\n"
 
@@ -1405,7 +1475,8 @@ msgstr "  -r, --system                  жүйелік тіркелгіні жа
 
 #, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: топ '%s' shadow тобы болып тұр, бірақ /etc/group ішінен табылмады\n"
+msgstr ""
+"%s: топ '%s' shadow тобы болып тұр, бірақ /etc/group ішінен табылмады\n"
 
 #, c-format
 msgid "%s: invalid user ID '%s'\n"
@@ -1421,7 +1492,8 @@ msgstr "%s: жол %d: жол қате\n"
 
 #, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
-msgstr "%s: %s пайдаланушы жазбасын жаңарту мүмкін емес (passwd дерекқорында жоқ)\n"
+msgstr ""
+"%s: %s пайдаланушы жазбасын жаңарту мүмкін емес (passwd дерекқорында жоқ)\n"
 
 #, c-format
 msgid "%s: line %d: can't create user\n"
@@ -1451,55 +1523,79 @@ msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: жол %d: жазбаны жаңарту мүмкін емес\n"
 
-msgid "  -a, --all                     report password status on all accounts\n"
-msgstr "  -a, --all                     барлық тіркелгілер үшін парольдер күйін шығару\n"
+msgid ""
+"  -a, --all                     report password status on all accounts\n"
+msgstr ""
+"  -a, --all                     барлық тіркелгілер үшін парольдер күйін "
+"шығару\n"
 
-msgid "  -d, --delete                  delete the password for the named account\n"
-msgstr "  -d, --delete                  көрсетілген тіркелгі үшін парольді өшіру\n"
+msgid ""
+"  -d, --delete                  delete the password for the named account\n"
+msgstr ""
+"  -d, --delete                  көрсетілген тіркелгі үшін парольді өшіру\n"
 
-msgid "  -e, --expire                  force expire the password for the named account\n"
-msgstr "  -e, --expire                  көрсетілген тіркелгі үшін пароль мерзімінің аяқталуын мәжбүрлету\n"
+msgid ""
+"  -e, --expire                  force expire the password for the named "
+"account\n"
+msgstr ""
+"  -e, --expire                  көрсетілген тіркелгі үшін пароль мерзімінің "
+"аяқталуын мәжбүрлету\n"
 
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -k, --keep-tokens             парольді тек мерзімі аяқталса ғана өзгерту\n"
+msgstr ""
+"  -k, --keep-tokens             парольді тек мерзімі аяқталса ғана өзгерту\n"
 
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -i, --inactive INACTIVE       мерзімі аяқталғаннан кейін тіркелгіні сөндіру үшін\n"
+"  -i, --inactive INACTIVE       мерзімі аяқталғаннан кейін тіркелгіні "
+"сөндіру үшін\n"
 "                                керек күн санын INACTIVE мәніне орнату\n"
 
-msgid "  -l, --lock                    lock the password of the named account\n"
+msgid ""
+"  -l, --lock                    lock the password of the named account\n"
 msgstr "  -l, --lock                    көрсетілген тіркелгіні оқшаулау\n"
 
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
-"  -n, --mindays MIN_DAYS        парольді өзгерту арасында ең аз рұқсат етілген күн санын\n"
+"  -n, --mindays MIN_DAYS        парольді өзгерту арасында ең аз рұқсат "
+"етілген күн санын\n"
 "                                MIN_DAYS мәніне орнату\n"
 
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr "  -q, --quiet                   тыныш режимі\n"
 
-msgid "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-msgstr "  -r, --repository REPOSITORY   REPOSITORY репозиторийінде парольді өзгерту\n"
+msgid ""
+"  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgstr ""
+"  -r, --repository REPOSITORY   REPOSITORY репозиторийінде парольді өзгерту\n"
 
-msgid "  -S, --status                  report password status on the named account\n"
-msgstr "  -S, --status                  көрсетілген тіркелгі үшін пароль күйін шығару\n"
+msgid ""
+"  -S, --status                  report password status on the named account\n"
+msgstr ""
+"  -S, --status                  көрсетілген тіркелгі үшін пароль күйін "
+"шығару\n"
 
-msgid "  -u, --unlock                  unlock the password of the named account\n"
-msgstr "  -u, --unlock                  көрсетілген тіркелгіні оқшаулаудан босату\n"
+msgid ""
+"  -u, --unlock                  unlock the password of the named account\n"
+msgstr ""
+"  -u, --unlock                  көрсетілген тіркелгіні оқшаулаудан босату\n"
 
-msgid "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-msgstr "  -w, --warndays WARN_DAYS      мерзімі аяқталуы туралы WARN_DAYS қалғанда ескерте бастау\n"
+msgid ""
+"  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgstr ""
+"  -w, --warndays WARN_DAYS      мерзімі аяқталуы туралы WARN_DAYS қалғанда "
+"ескерте бастау\n"
 
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -x, --maxdays MAX_DAYS        парольді өзгерту арасында ең көп рұқсат етілген күн санын\n"
+"  -x, --maxdays MAX_DAYS        парольді өзгерту арасында ең көп рұқсат "
+"етілген күн санын\n"
 "                                MAX_DAYS мәніне орнату\n"
 
 msgid "Old password: "
@@ -1548,7 +1644,8 @@ msgstr "%s үшін парольді қазір өзгертуге болмай�
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
-"You should set a password with usermod -p to unlock the password of this account.\n"
+"You should set a password with usermod -p to unlock the password of this "
+"account.\n"
 msgstr ""
 "%s: пайдаланушыны оқшаулаудан босату парольсіз тіркелгіге әкелуі мүмкін.\n"
 "Осыны жасау үшін сіз оған парольді usermod -p қолданып орнатуыңыз керек.\n"
@@ -1601,13 +1698,13 @@ msgstr ""
 "\n"
 "Опциялар:\n"
 
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -q, --quiet                   report errors only\n"
 msgstr "  -q, --quiet                   тек қателерді хабарлау\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
-msgstr "%s: USE_TCB іске қосулы болса, альтернативті shadow файлына рұқсат жоқ.\n"
+msgstr ""
+"%s: USE_TCB іске қосулы болса, альтернативті shadow файлына рұқсат жоқ.\n"
 
 msgid "invalid password file entry"
 msgstr "парольдер файлының қате жазбасы"
@@ -1660,8 +1757,11 @@ msgid "add user '%s' in %s? "
 msgstr "'%s' пайдаланушыны %s ішіне қосу керек пе? "
 
 #, c-format
-msgid "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
-msgstr "%s пайдаланушысының %s ішінде жазбасы бар, бірақ оның %s ішіндегі пароль жазбасы 'x' етіп орнатылмаған\n"
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgstr ""
+"%s пайдаланушысының %s ішінде жазбасы бар, бірақ оның %s ішіндегі пароль "
+"жазбасы 'x' етіп орнатылмаған\n"
 
 msgid "invalid shadow password file entry"
 msgstr "көлеңкелі парольдер файлының қате жазбасы"
@@ -1738,12 +1838,15 @@ msgstr ""
 "Қолданылуы: su [опциялар] [ТІРКЕЛГІ]\n"
 "\n"
 "Опциялары:\n"
-"  -c, --command COMMAND         шақырылатын қоршамға COMMAND командасын беру\n"
+"  -c, --command COMMAND         шақырылатын қоршамға COMMAND командасын "
+"беру\n"
 "  -h, --help                    осы көмек ақпаратын көрсету және шығу\n"
 "  -, -l, --login                қоршамды тіркелгі қоршамына ауыстыру\n"
 "  -m, -p,\n"
-"  --preserve-environment        орта айнымалыларының мәндерін мен қоршамды сақтау\n"
-"  -s, --shell SHELL             passwd-да көрсетілгеннің орнына SHELL қоршамын қолдану\n"
+"  --preserve-environment        орта айнымалыларының мәндерін мен қоршамды "
+"сақтау\n"
+"  -s, --shell SHELL             passwd-да көрсетілгеннің орнына SHELL "
+"қоршамын қолдану\n"
 "\n"
 
 #, c-format
@@ -1770,7 +1873,6 @@ msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Сізде қазір su жасау үшін құқығыңыз жоқ\n"
 
 #, c-format
-#| msgid "No password entry for 'root'"
 msgid "No passwd entry for user '%s'\n"
 msgstr "'%s' пайд.-сы үшін passwd жазбасы жоқ\n"
 
@@ -1783,7 +1885,6 @@ msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: қате %d\n"
 
 #, c-format
-#| msgid "%s: Cannot remove the content of %s: %s\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: Басқару терминалын тастау мүмкін емес\n"
 
@@ -1859,7 +1960,8 @@ msgstr ""
 "Опциялар:\n"
 
 msgid ""
-"  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
+"  -b, --base-dir BASE_DIR       base directory for the home directory of "
+"the\n"
 "                                new account\n"
 msgstr ""
 "  -b, --base-dir НЕГ_БУМА       жаңа тіркелгінің үй бумасы орналасатын\n"
@@ -1871,26 +1973,38 @@ msgstr "  -c, --comment COMMENT         жаңа тіркелгінің GECOS ө
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr "  -d, --home-dir ҮЙ_БУМАСЫ      жаңа тіркелгі үшін үй бумасы\n"
 
-msgid "  -D, --defaults                print or change default useradd configuration\n"
-msgstr "  -D, --defaults                useradd-ң бастапқы баптауларын шығару не өзгерту\n"
+msgid ""
+"  -D, --defaults                print or change default useradd "
+"configuration\n"
+msgstr ""
+"  -D, --defaults                useradd-ң бастапқы баптауларын шығару не "
+"өзгерту\n"
 
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
-msgstr "  -e, --expiredate АЯҚТАЛУ_КҮНІ жаңа тіркелгінің мерзімі аяқталатын күні\n"
+msgstr ""
+"  -e, --expiredate АЯҚТАЛУ_КҮНІ жаңа тіркелгінің мерзімі аяқталатын күні\n"
 
-msgid "  -f, --inactive INACTIVE       password inactivity period of the new account\n"
-msgstr "  -f, --inactive INACTIVE       жаңа тіркелгі паролінің белсенді емес уақыт аралығы\n"
+msgid ""
+"  -f, --inactive INACTIVE       password inactivity period of the new "
+"account\n"
+msgstr ""
+"  -f, --inactive INACTIVE       жаңа тіркелгі паролінің белсенді емес уақыт "
+"аралығы\n"
 
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
-msgstr "  -g, --gid ТОП                 жаңа тіркелгі үшін басты топтың аты не ID-і\n"
+msgstr ""
+"  -g, --gid ТОП                 жаңа тіркелгі үшін басты топтың аты не ID-і\n"
 
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
-msgstr "  -G, --groups ТОПТАР           жаңа тіркелгі үшін қосымша топтар тізімі\n"
+msgstr ""
+"  -G, --groups ТОПТАР           жаңа тіркелгі үшін қосымша топтар тізімі\n"
 
-msgid "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
+msgid ""
+"  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr "  -k, --skel SKEL_DIR          басқа үлгілер бумасын қолдану\n"
 
 msgid ""
@@ -1903,7 +2017,8 @@ msgstr ""
 msgid "  -m, --create-home             create the user's home directory\n"
 msgstr "  -m, --create-home             пайдаланушы үй бумасын жасау\n"
 
-msgid "  -M, --no-create-home          do not create the user's home directory\n"
+msgid ""
+"  -M, --no-create-home          do not create the user's home directory\n"
 msgstr "  -M, --no-create-home          пайдаланушы үй бумасын жасамау\n"
 
 msgid ""
@@ -1927,11 +2042,17 @@ msgstr "  -s, --shell ҚОРШАМ            жаңа тіркелгі үшін
 msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr "  -u, --uid UID                 жаңа тіркелгі үшін пайдаланушы ID-і\n"
 
-msgid "  -U, --user-group              create a group with the same name as the user\n"
+msgid ""
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 msgstr "  -U, --user-group              пайдаланушымен аттас топты жасау\n"
 
-msgid "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"
-msgstr "  -Z, --selinux-user SEUSER     SELinux пайдаланушы сәйкестігі үшін көрсетілген SEUSER қолдану\n"
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     SELinux пайдаланушы сәйкестігі үшін "
+"көрсетілген SEUSER қолдану\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1980,8 +2101,10 @@ msgstr "%s: %s бумасын жасау мүкін емес\n"
 msgid "Creating mailbox file"
 msgstr "Пошта файлын құру"
 
-msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
-msgstr "'mail' тобы табылмады. Пайдаланушының пошта файлы 0600 түрінде құрылады.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+"'mail' тобы табылмады. Пайдаланушының пошта файлы 0600 түрінде құрылады.\n"
 
 msgid "Setting mailbox file permissions"
 msgstr "Пошта файлына рұқсаттарды орнату"
@@ -1991,8 +2114,11 @@ msgid "%s: user '%s' already exists\n"
 msgstr "%s: '%s' пайдаланушысы бар болып тұр\n"
 
 #, c-format
-msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
-msgstr "%s: %s тобы бар болып тұр - егер оған жаңа пайдаланушыны қосқыңыз келсе, -g қолданыңыз.\n"
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr ""
+"%s: %s тобы бар болып тұр - егер оған жаңа пайдаланушыны қосқыңыз келсе, -g "
+"қолданыңыз.\n"
 
 #, c-format
 msgid "%s: can't create user\n"
@@ -2032,15 +2158,16 @@ msgstr ""
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr "  -r, --remove                  үй бумасын мен поштасын өшіру\n"
 
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
-msgid "  -Z, --selinux-user            remove any SELinux user mapping for the user\n"
-msgstr "  -Z, --selinux-user            пайд.-ның барлық SELinux пайд. сәйкестіктерін жою\n"
+msgid ""
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
+msgstr ""
+"  -Z, --selinux-user            пайд.-ның барлық SELinux пайд. "
+"сәйкестіктерін жою\n"
 
 #, c-format
-#| msgid "%s: cannot remove the primary group of user '%s'\n"
-msgid "%s: group %s not removed because it is not the primary group of user %s.\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr "%s: %s тобы өшірілмейді, өйткені ол %s пайд.-ның негізгі тобы емес.\n"
 
 #, c-format
@@ -2049,10 +2176,11 @@ msgstr "%s: %s тобы өшірілмейді, өйткені онда басқ
 
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
-msgstr "%s: %s тобын өшіру мүмкін емес, ол басқа пайдаланушы үшін басыңқы топ болып табылады.\n"
+msgstr ""
+"%s: %s тобын өшіру мүмкін емес, ол басқа пайдаланушы үшін басыңқы топ болып "
+"табылады.\n"
 
 #, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: %s пошта спулы (%s) табылмады\n"
 
@@ -2097,28 +2225,37 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: %s бумасын өшіру қатемен аяқталды\n"
 
 #, c-format
-#| msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
-msgstr "%s: ескерту: %s пайдаланушы атына SELinux пайд. сәйкестендіруін өшіру сәтсіз.\n"
+msgstr ""
+"%s: ескерту: %s пайдаланушы атына SELinux пайд. сәйкестендіруін өшіру "
+"сәтсіз.\n"
 
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment COMMENT         GECOS жазбасы үшін жаңа мәні\n"
 
-msgid "  -d, --home HOME_DIR           new home directory for the user account\n"
-msgstr "  -d, --home HOME_DIR           пайдаланушы тіркелгісі үшін жаңа үй бумасы\n"
+msgid ""
+"  -d, --home HOME_DIR           new home directory for the user account\n"
+msgstr ""
+"  -d, --home HOME_DIR           пайдаланушы тіркелгісі үшін жаңа үй бумасы\n"
 
-msgid "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-msgstr "  -e, --expiredate EXPIRE_DATE  тіркелгінің аяқталу мерзімін EXPIRE_DATE күніне орнату\n"
+msgid ""
+"  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgstr ""
+"  -e, --expiredate EXPIRE_DATE  тіркелгінің аяқталу мерзімін EXPIRE_DATE "
+"күніне орнату\n"
 
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -f, --inactive INACTIVE       мерзімі аяқталғаннан кейін пароль сөндірілетін күн\n"
+"  -f, --inactive INACTIVE       мерзімі аяқталғаннан кейін пароль "
+"сөндірілетін күн\n"
 "                                санын INACTIVE мәніне орнату\n"
 
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
-msgstr "  -g, --gid ТОП                 жаңа басыңқы топ ретінде ТОПты қолдануды мәжбүрлету\n"
+msgstr ""
+"  -g, --gid ТОП                 жаңа басыңқы топ ретінде ТОПты қолдануды "
+"мәжбүрлету\n"
 
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups ТОПТАР           пайдаланушыны қосымша ТОПТАРға қосу\n"
@@ -2129,7 +2266,8 @@ msgid ""
 "                                him/her from other groups\n"
 msgstr ""
 "  -a, --append                  пайдаланушыны қосымша ТОПТАР ішіне қосу\n"
-"                                -G опциясы сияқты, пайдаланушыны басқа топтардан\n"
+"                                -G опциясы сияқты, пайдаланушыны басқа "
+"топтардан\n"
 "                                өшірмейді\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
@@ -2145,11 +2283,17 @@ msgstr ""
 "  -m, --move-home               үй бумасының құрамасын жаңа жерге ауыстыру\n"
 "                                (тек -d опциясымен бірге қолданыңыз)\n"
 
-msgid "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-msgstr "  -o, --non-unique              қайталанатын (ерекше емес) UID-тарды қолдануды рұқсат ету\n"
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgstr ""
+"  -o, --non-unique              қайталанатын (ерекше емес) UID-тарды "
+"қолдануды рұқсат ету\n"
 
-msgid "  -p, --password PASSWORD       use encrypted password for the new password\n"
-msgstr "  -p, --password PASSWORD       жаңа пароль ретінде шифрленген парольді қолдану\n"
+msgid ""
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+"  -p, --password PASSWORD       жаңа пароль ретінде шифрленген парольді "
+"қолдану\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr ""
@@ -2157,13 +2301,15 @@ msgstr ""
 "  -u, --uid UID                 пайдаланушы тіркелгісі үшін жаңа UID\n"
 
 msgid "  -U, --unlock                  unlock the user account\n"
-msgstr "  -U, --unlock                  пайдаланушы тіркелгісін оқшаулаудан босату\n"
+msgstr ""
+"  -U, --unlock                  пайдаланушы тіркелгісін оқшаулаудан босату\n"
 
-#| msgid ""
-#| "  -Z, --selinux-user            new SELinux user mapping for the user "
-#| "account\n"
-msgid "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"
-msgstr "  -Z, --selinux-user SEUSER     пайдаланушы тіркелгісі үшін жаңа SELinux сәйкестігі\n"
+msgid ""
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+"account\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     пайдаланушы тіркелгісі үшін жаңа SELinux "
+"сәйкестігі\n"
 
 #, c-format
 msgid ""
@@ -2178,7 +2324,6 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' пайдаланушысы %s ішінде бар болып тұр\n"
 
 #, c-format
-#| msgid "%s: cannot open %s\n"
 msgid "%s: no options\n"
 msgstr "%s: опциялар жоқ\n"
 
@@ -2199,8 +2344,12 @@ msgid "%s: directory %s exists\n"
 msgstr "%s: %s бумасы бар болып тұр\n"
 
 #, c-format
-msgid "%s: The previous home directory (%s) was not a directory. It is not removed and no home directories are created.\n"
-msgstr "%s: Алдыңғы үй бумасы (%s) бума емес болған. Ол өшірілмеді де, ешбір үй бумасы жасалмады.\n"
+msgid ""
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
+msgstr ""
+"%s: Алдыңғы үй бумасы (%s) бума емес болған. Ол өшірілмеді де, ешбір үй "
+"бумасы жасалмады.\n"
 
 #, c-format
 msgid "%s: Failed to change ownership of the home directory"
@@ -2216,11 +2365,13 @@ msgstr "%s: %s бумасының атын %s атына ауыстыру мүм
 
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
-msgstr "%s: %lu пайд.-нан %lu пайдаланушысына lastlog жазбасын көшіру сәтсіз: %s\n"
+msgstr ""
+"%s: %lu пайд.-нан %lu пайдаланушысына lastlog жазбасын көшіру сәтсіз: %s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
-msgstr "%s: %lu пайд.-нан %lu пайдаланушысына faillog жазбасын көшіру сәтсіз: %s\n"
+msgstr ""
+"%s: %lu пайд.-нан %lu пайдаланушысына faillog жазбасын көшіру сәтсіз: %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2252,7 +2403,9 @@ msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr "  -s, --shadow                  shadow не gshadow дерекқорын түзету\n"
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
-msgstr "  -u, --user                    қай пайдаланушының tcb shadow файлын түзету керек\n"
+msgstr ""
+"  -u, --user                    қай пайдаланушының tcb shadow файлын түзету "
+"керек\n"
 
 #, c-format
 msgid "%s: failed to remove %s\n"
