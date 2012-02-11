@@ -1,5 +1,14 @@
 2012-02-11  Giuseppe Sacco  <eppesuig@debian.org>
 
+	* man/po/it.po: Updated after review.
+
+2012-02-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/it/Makefile.am: Activate all manpages.
+	* man/po/it.po: Fix formal issues (end of lines).
+
+2012-02-11  Giuseppe Sacco  <eppesuig@debian.org>
+
 	* man/po/it.po: Updated to 1173t.
 
 2012-01-30  Nicolas François  <nicolas.francois@centraliens.net>
