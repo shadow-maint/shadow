@@ -1,3 +1,7 @@
+2012-02-11  Giuseppe Sacco  <eppesuig@debian.org>
+
+	* man/po/it.po: Updated to 1173t.
+
 2012-01-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/useradd.8.xml, man/su.1.xml, man/po/da.po, man/po/ru.po,
