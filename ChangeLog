@@ -1,3 +1,8 @@
+2012-02-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
 2012-02-11  Giuseppe Sacco  <eppesuig@debian.org>
 
 	* man/po/it.po: Updated after review.
