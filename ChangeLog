@@ -1,5 +1,9 @@
 2012-02-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Set release date.
+
+2012-02-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.
 
