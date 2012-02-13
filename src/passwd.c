@@ -1057,6 +1057,12 @@ int main (int argc, char **argv)
 	 */
 	sp = getspnam (name); /* !USE_PAM, no need for xgetspnam */
 	if (NULL == sp) {
+		if (errno == EACCES) {
+			(void) fprintf (stderr,
+			                _("%s: Permission denied.\n"),
+			                Prog);
+			exit (E_NOPERM);
+		}
 		sp = pwd_to_spwd (pw);
 	}
 

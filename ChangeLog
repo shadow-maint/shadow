@@ -1,5 +1,10 @@
 2012-02-13  Mike Frysinger  <vapier@gentoo.org>
 
+	* src/passwd.c: (non PAM flavour) Report permission denied when
+	access to /etc/shadow fails with EACCES.
+
+2012-02-13  Mike Frysinger  <vapier@gentoo.org>
+
 	* lib/nscd.c: Add missing newline to error message.
 	* lib/nscd.c: If nscd is installed but not in use, then running
 	`nscd -i` will exit(1). We shouldn't warn in this case since this
