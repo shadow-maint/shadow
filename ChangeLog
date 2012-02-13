@@ -1,3 +1,7 @@
+2012-02-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS: New placeholder for the next release (4.1.5.1 expected)
+
 2012-02-13  Mike Frysinger  <vapier@gentoo.org>
 
 	* src/passwd.c: (non PAM flavour) Report permission denied when
