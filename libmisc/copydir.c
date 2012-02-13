@@ -46,6 +46,7 @@
 #include <selinux/selinux.h>
 #endif				/* WITH_SELINUX */
 #if defined(WITH_ACL) || defined(WITH_ATTR)
+#include <stdarg.h>
 #include <attr/error_context.h>
 #endif				/* WITH_ACL || WITH_ATTR */
 #ifdef WITH_ACL
