@@ -1,5 +1,12 @@
 2012-02-13  Mike Frysinger  <vapier@gentoo.org>
 
+	* lib/nscd.c: Add missing newline to error message.
+	* lib/nscd.c: If nscd is installed but not in use, then running
+	`nscd -i` will exit(1). We shouldn't warn in this case since this
+	is not abnormal behavior.
+
+2012-02-13  Mike Frysinger  <vapier@gentoo.org>
+
 	* man/.gitignore: Add generate_mans.deps
 
 2012-02-13  Mike Frysinger  <vapier@gentoo.org>

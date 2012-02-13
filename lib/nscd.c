@@ -39,8 +39,11 @@ int nscd_flush_cache (const char *service)
 		/* nscd is not installed, or it is installed but uses an
 		   interpreter that is missing.  Probably the former. */
 		return 0;
+	} else if (code == 1) {
+		/* nscd is installed, but it isn't active. */
+		return 0;
 	} else if (code != 0) {
-		(void) fprintf (stderr, _("%s: nscd exited with status %d"),
+		(void) fprintf (stderr, _("%s: nscd exited with status %d\n"),
 		                Prog, code);
 		(void) fprintf (stderr, _(MSG_NSCD_FLUSH_CACHE_FAILED), Prog);
 		return -1;
