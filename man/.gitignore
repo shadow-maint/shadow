@@ -1,5 +1,6 @@
 .xml2po.mo
 config.xml
+generate_mans.deps
 
 *.[0-9]
 
