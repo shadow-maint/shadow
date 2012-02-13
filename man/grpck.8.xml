@@ -177,7 +177,7 @@
     </variablelist>
     <para>
       By default, <command>grpck</command> operates on
-      <filename>/etc/group</filename><phrase condition="gshadow"> and
+      <filename>/etc/group</filename> <phrase condition="gshadow">and
       <filename>/etc/gshadow</filename></phrase>.
       The user may select alternate files with the <emphasis
       remap='I'>group</emphasis>
