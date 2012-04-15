@@ -4002,7 +4002,7 @@ msgstr "/etc/porttime"
 
 #: porttime.5.xml:116(para) logoutd.8.xml:75(para)
 msgid "File containing port access."
-msgstr ""
+msgstr "Plik zawierający ustawienia dostępu do portów."
 
 #: porttime.5.xml:124(para) login.access.5.xml:115(para)
 msgid ""
@@ -5098,7 +5098,7 @@ msgstr "logoutd"
 
 #: logoutd.8.xml:46(refpurpose)
 msgid "enforce login time restrictions"
-msgstr ""
+msgstr "wymuszenie ograniczeń czasu logowania"
 
 #: logoutd.8.xml:57(para)
 msgid ""
@@ -5110,6 +5110,13 @@ msgid ""
 "Any login session which is violating the restrictions in <filename>/etc/"
 "porttime</filename> is terminated."
 msgstr ""
+"<command>logoutd</command> wymusza ograniczenia portów i czasów logowania "
+"podane w <filename>/etc/porttime</filename>. <command>logoutd</command> powinno "
+"być uruchamiane z <filename>/etc/rc</filename>.  Okresowo przeglądany jest plik "
+"<filename>/var/run/utmp</filename>. Sprawdzana jest każda nazwa  użytkownika, "
+"aby stwierdzić, czy użytkownik ma zezwolenie na pracę w bieżącym czasie na "
+"danym porcie. Każda sesja pracy (logowania) naruszająca ograniczenia zawarte w "
+"<filename>/etc/porttime</filename> jest kończona."
 
 #: logoutd.8.xml:79(filename) login.1.xml:322(filename)
 msgid "/var/run/utmp"
@@ -5117,7 +5124,7 @@ msgstr "/var/run/utmp"
 
 #: logoutd.8.xml:81(para) login.1.xml:324(para)
 msgid "List of current login sessions."
-msgstr ""
+msgstr "List bieżących sesji pracy."
 
 #: login.defs.5.xml:101(refentrytitle) login.defs.5.xml:108(refname)
 msgid "login.defs"
@@ -7123,7 +7130,7 @@ msgstr ""
 
 #: groupadd.8.xml:49(refpurpose)
 msgid "create a new group"
-msgstr "twółrz nową grupę"
+msgstr "utwórz nową grupę"
 
 #: groupadd.8.xml:66(para)
 msgid ""
