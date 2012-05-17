@@ -15,20 +15,20 @@
 #       gpasswd: Maxime Mastin, 2001.
 #       shadow(5): Thierry Vignaud <tvignaud@mandrakesoft.com>, 1999.
 #       useradd: Frédéric Delanoy, 2000.
-# Christian Perrier <bubulle@debian.org>, 2009.
+# Christian Perrier <bubulle@debian.org>, 2009, 2012.
 # Thomas Blein <tblein@tblein.eu>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2012-02-11 19:37+0100\n"
-"PO-Revision-Date: 2012-01-29 16:57+0100\n"
+"PO-Revision-Date: 2012-05-17 11:16+0200\n"
 "Last-Translator: Thomas Blein <tblein@tblein.eu>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -3219,7 +3219,6 @@ msgid "<option>ENV_PATH</option> (string)"
 msgstr "<option>ENV_PATH</option> (chaîne de caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
 #| msgid ""
 #| "If set, it will be used to define the PATH environment variable when a "
 #| "regular user login. The value can be preceded by <replaceable>PATH=</"
@@ -3234,9 +3233,11 @@ msgid ""
 "bin:/usr/bin</replaceable>."
 msgstr ""
 "Si définie, sera utilisée pour définir la variable d'environnement PATH "
-"quand un utilisateur ordinaire se connecte. La valeur peut être précédée par "
-"<replaceable>PATH=</replaceable>, ou une liste de chemins séparés par des "
-"deux points (par exemple <replaceable>/bin:/usr/bin</replaceable>). La "
+"quand un utilisateur ordinaire se connecte. La valeur est une liste de "
+"chemins séparés par des "
+"deux points (par exemple <replaceable>/bin:/usr/bin</replaceable>) et peut "
+"être précédée par "
+"<replaceable>PATH=</replaceable>. La "
 "valeur par défaut est <replaceable>PATH=/bin:/usr/bin</replaceable>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
@@ -3244,7 +3245,6 @@ msgid "<option>ENV_SUPATH</option> (string)"
 msgstr "<option>ENV_SUPATH</option> (chaîne de caractères)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#, fuzzy
 #| msgid ""
 #| "If set, it will be used to define the PATH environment variable when the "
 #| "superuser login. The value can be preceded by <replaceable>PATH=</"
@@ -3259,10 +3259,12 @@ msgid ""
 "<replaceable>PATH=/sbin:/bin:/usr/sbin:/usr/bin</replaceable>."
 msgstr ""
 "Si définie, sera utilisée pour définir la variable d'environnement PATH "
-"quand le super-utilisateur se connecte. La valeur peut être précédée par "
-"<replaceable>PATH=</replaceable> ou une liste de chemins séparés par deux "
+"quand le super-utilisateur se connecte. La valeur est une liste de chemins "
+"séparés par deux "
 "points (par exemple <replaceable>/sbin:/bin:/usr/sbin:/usr/bin</"
-"replaceable>). La valeur par défaut est <replaceable>PATH=/sbin:/bin:/usr/"
+"replaceable>) et peut être précédée par "
+"<replaceable>PATH=</replaceable>. La valeur par défaut est <replaceable>"
+"PATH=/sbin:/bin:/usr/"
 "sbin:/usr/bin</replaceable>."
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
@@ -3986,9 +3988,12 @@ msgstr ""
 "      char\t\t*sp_namp; /* nom de connexion de l'utilisateur */\n"
 "      char\t\t*sp_pwdp; /* mot de passe chiffré */\n"
 "      long int\t\tsp_lstchg; /* dernier changement de mot de passe */\n"
-"      long int\t\tsp_min; /* jours avant de pouvoir changer de mot de passe */\n"
-"      long int\t\tsp_max; /* jours avant l'obligation de changer de mot de passe */\n"
-"      long int\t\tsp_warn; /* jours d'avertissement avant la fin de validité */\n"
+"      long int\t\tsp_min; /* jours avant de pouvoir changer de mot de passe "
+"*/\n"
+"      long int\t\tsp_max; /* jours avant l'obligation de changer de mot de "
+"passe */\n"
+"      long int\t\tsp_warn; /* jours d'avertissement avant la fin de validité "
+"*/\n"
 "      long int\t\tsp_inact; /* jours avant que le compte soit inactif */\n"
 "      long int\t\tsp_expire; /* date de fin de validité du compte */\n"
 "      unsigned long int\tsp_flag; /* réservé pour une utilisation future */\n"
