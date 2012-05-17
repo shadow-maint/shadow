@@ -1,6 +1,7 @@
 2012-05-17  Simon Brandmair  <sbrandmair@gmx.net>
 
 	* man/po/de.po: German translation of manpages completed
+          Closes: #673234
 
 2012-02-12  Nicolas François  <nicolas.francois@centraliens.net>
 
