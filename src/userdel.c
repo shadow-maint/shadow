@@ -333,22 +333,22 @@ static void remove_usergroup (void)
 		 * We can remove this group, it is not the primary
 		 * group of any remaining user.
 		 */
-		if (gr_remove (grp->gr_name) == 0) {
+		if (gr_remove (user_name) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, grp->gr_name, gr_dbname ());
+			         Prog, user_name, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "deleting group",
-		              grp->gr_name, AUDIT_NO_ID,
+		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
 #endif				/* WITH_AUDIT */
 		SYSLOG ((LOG_INFO,
 		         "removed group '%s' owned by '%s'\n",
-		         grp->gr_name, user_name));
+		         user_name, user_name));
 
 #ifdef	SHADOWGRP
 		if (sgr_locate (user_name) != NULL) {
@@ -361,12 +361,12 @@ static void remove_usergroup (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "deleting shadow group",
-			              grp->gr_name, AUDIT_NO_ID,
+			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
 #endif				/* WITH_AUDIT */
 			SYSLOG ((LOG_INFO,
 			         "removed shadow group '%s' owned by '%s'\n",
-			         grp->gr_name, user_name));
+			         user_name, user_name));
 
 		}
 #endif				/* SHADOWGRP */

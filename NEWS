@@ -5,6 +5,8 @@ shadow-4.1.5 -> shadow-4.1.5.1					UNRELEASED
 - login
   * Log into utmp(x) when PAM is enabled, but do not log into wtmp.
     This complete pam_lastlog which logs into wtmp and in into utmp(x).
+- userdel
+  * Fix segfault when userdel removes the user's group.
 
 shadow-4.1.4.3 -> shadow-4.1.5					2012-02-12
 

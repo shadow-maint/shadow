@@ -1,3 +1,8 @@
+2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/userdel.c: Fix segfault when userdel removes the
+	user's group.
+
 2012-05-17  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/login.c: Log in utmp / utmpx / wtmp also when PAM is
