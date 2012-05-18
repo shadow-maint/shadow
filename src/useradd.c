@@ -557,11 +557,12 @@ static int set_defaults (void)
 	 */
 	wlen = snprintf (buf, sizeof buf, "%s-", USER_DEFAULTS_FILE);
 	assert (wlen < (int) sizeof buf);
-	if ((rename (USER_DEFAULTS_FILE, buf) != 0) && (ENOENT != errno)) {
+	unlink (buf);
+	if ((link (USER_DEFAULTS_FILE, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;
 		fprintf (stderr,
-		         _("%s: rename: %s: %s\n"),
-		         Prog, USER_DEFAULTS_FILE, strerror (err));
+		         _("%s: Cannot create backup file (%s): %s\n"),
+		         Prog, buf, strerror (err));
 		unlink (new_file);
 		return -1;
 	}

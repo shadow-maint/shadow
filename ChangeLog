@@ -1,3 +1,8 @@
+2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Keep the default file as much as possible to
+	avoid issue in case of crash. Use link instead of rename.
+
 2012-05-18  Peter Vrabec  <pvrabec@redhat.com>
 
 	* lib/commonio.c: Fix labeling of /etc/{passwd,shadow,group,gshadow}.
