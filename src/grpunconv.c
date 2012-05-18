@@ -205,13 +205,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (sgr_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
-		         Prog, sgr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-		fail_exit (3);
-	}
+	(void) sgr_close (); /* was only open O_RDONLY */
 
 	if (gr_close () == 0) {
 		fprintf (stderr,

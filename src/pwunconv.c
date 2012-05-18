@@ -221,13 +221,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (spw_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
-		         Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
-		fail_exit (3);
-	}
+	(void) spw_close (); /* was only open O_RDONLY */
 
 	if (pw_close () == 0) {
 		fprintf (stderr,

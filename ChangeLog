@@ -1,5 +1,12 @@
 2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwunconv.c: Do not check spw_close() return value (file is
+	opened readonly).
+	* src/grpunconv.c: Do not check sgr_close() return value (file is
+	opened readonly).
+
+2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/userdel.c: Fix segfault when userdel removes the
 	user's group.
 
