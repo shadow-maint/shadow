@@ -1,3 +1,9 @@
+2012-05-18  Peter Vrabec  <pvrabec@redhat.com>
+
+	* lib/commonio.c: Fix labeling of /etc/{passwd,shadow,group,gshadow}.
+	It will basically label them with same context as
+	/etc/{passwd+,shadow+,group+,gshadow+}
+
 2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwunconv.c: Do not check spw_close() return value (file is

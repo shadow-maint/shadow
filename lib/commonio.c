@@ -977,6 +977,12 @@ int commonio_close (struct commonio_db *db)
 
 	snprintf (buf, sizeof buf, "%s+", db->filename);
 
+#ifdef WITH_SELINUX
+	if (set_selinux_file_context (buf) != 0) {
+		errors++;
+	}
+#endif
+
 	db->fp = fopen_set_perms (buf, "w", &sb);
 	if (NULL == db->fp) {
 		goto fail;
@@ -1010,6 +1016,12 @@ int commonio_close (struct commonio_db *db)
 	if (lrename (buf, db->filename) != 0) {
 		goto fail;
 	}
+
+#ifdef WITH_SELINUX
+	if (reset_selinux_file_context () != 0) {
+		goto fail;
+	}
+#endif
 
 	nscd_need_reload = true;
 	goto success;
