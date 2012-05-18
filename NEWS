@@ -8,6 +8,11 @@ shadow-4.1.5 -> shadow-4.1.5.1					UNRELEASED
 - userdel
   * Fix segfault when userdel removes the user's group.
 
+*** translation
+  * Updated French man pages translation.
+  * Updated German man pages translation.
+  * Updated Polish man pages translation. (logoutd.8)
+
 shadow-4.1.4.3 -> shadow-4.1.5					2012-02-12
 
 *** security
