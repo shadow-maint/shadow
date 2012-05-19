@@ -1,3 +1,8 @@
+2012-05-19  Nitin A Kamble  <nitin.a.kamble@intel.com>
+
+	* configure.in: Remove deprecated AM_C_PROTOTYPES (no more
+	supported in automake 1.12).
+
 2012-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Keep the default file as much as possible to
