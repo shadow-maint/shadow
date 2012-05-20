@@ -1092,6 +1092,9 @@ int main (int argc, char **argv)
 		if (fd >= 0) {
 			err = ioctl (fd, TIOCNOTTY, (char *) 0);
 			(void) close (fd);
+		} else if (ENXIO == errno) {
+			/* There are no controlling terminal already */
+			err = 0;
 		}
 #endif				/* USE_PAM */
 

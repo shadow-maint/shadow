@@ -1,5 +1,17 @@
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: non PAM enabled versions: do not fail if su is called
+	without a controlling terminal. Ignore ENXIO errors when opening
+	/dev/tty.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Cleanup, return code 13 no more used.
+	* man/useradd.8.xml: Document return code 14, and remove return
+	code 13.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, man/generate_mans.mak: Generate manpages in man1, man3,
 	man5, man8 subdirectories. This fix the generation of .so links
 	which did not point to a path relative to the top-level manual
