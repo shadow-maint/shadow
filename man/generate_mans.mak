@@ -30,9 +30,14 @@ if ENABLE_REGENERATE_MAN
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
 	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND)" \
+	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
 	            --param "man.output.in.separate.dir" "1" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
+
+clean-local:
+	for d in man1 man3 man5 man8; do [ -d $$d ] && rmdir $$d; done
+
 else
 $(man_MANS):
 	@echo you need to run configure with --enable-man to generate man pages

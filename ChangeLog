@@ -1,5 +1,10 @@
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/Makefile.am, man/generate_mans.mak: Update clean targets,
+	due to the generation in separate sub folders.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/su.1.xml: Document author to avoid warnings during
 	generation. This needs to be rolled out to other manpages.
 	* man/generate_mans.mak: Do not add a AUTHOR section in the man

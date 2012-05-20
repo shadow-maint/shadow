@@ -187,7 +187,7 @@ if ENABLE_REGENERATE_MAN
 
 include generate_mans.mak
 
-CLEANFILES = $(man_MANS)
+CLEANFILES = $(man_MANS) man1/id.1 man8/sulogin.8
 
 else
 $(man_MANS):
