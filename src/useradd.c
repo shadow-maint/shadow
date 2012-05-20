@@ -167,8 +167,7 @@ static bool home_added = false;
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
-#define	E_MAIL_SPOOL	13	/* can't create mail spool */
-#define E_SE_UPDATE     14      /* can't update SELinux user mapping */
+#define E_SE_UPDATE	14	/* can't update SELinux user mapping */
 
 #define DGROUP			"GROUP="
 #define DHOME			"HOME="

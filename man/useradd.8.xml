@@ -779,9 +779,9 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term><replaceable>13</replaceable></term>
+	  <term><replaceable>14</replaceable></term>
 	  <listitem>
-	    <para>can't create mail spool</para>
+	    <para>can't update SELinux user mapping</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
