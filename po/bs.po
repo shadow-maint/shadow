@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -42,7 +42,7 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 msgid "Password: "
@@ -1783,6 +1783,10 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: line too long in %s: %s..."
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format

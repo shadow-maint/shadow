@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1:4.0.18.2-1\n"
-"POT-Creation-Date: 2012-02-11 19:37+0100\n"
+"POT-Creation-Date: 2012-05-20 19:54+0200\n"
 "PO-Revision-Date: 2012-01-29 16:57+0100\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -53,7 +53,7 @@ msgstr "Команды управления системой"
 # type: Content of: <refentry><refsect1><para><emphasis>
 #: vipw.8.xml:43(refmiscinfo) usermod.8.xml:45(refmiscinfo)
 #: userdel.8.xml:47(refmiscinfo) useradd.8.xml:56(refmiscinfo)
-#: suauth.5.xml:41(refmiscinfo) su.1.xml:58(refmiscinfo)
+#: suauth.5.xml:41(refmiscinfo) su.1.xml:66(refmiscinfo)
 #: sg.1.xml:42(refmiscinfo) shadow.5.xml:41(refmiscinfo)
 #: shadow.3.xml:41(refmiscinfo) pwconv.8.xml:47(refmiscinfo)
 #: pwck.8.xml:47(refmiscinfo) porttime.5.xml:41(refmiscinfo)
@@ -90,7 +90,7 @@ msgstr ""
 #: vipw.8.xml:58(replaceable) vipw.8.xml:64(replaceable)
 #: usermod.8.xml:57(replaceable) userdel.8.xml:57(arg)
 #: useradd.8.xml:67(replaceable) useradd.8.xml:79(replaceable)
-#: su.1.xml:69(replaceable) pwconv.8.xml:62(replaceable)
+#: su.1.xml:77(replaceable) pwconv.8.xml:62(replaceable)
 #: pwconv.8.xml:68(replaceable) pwconv.8.xml:74(replaceable)
 #: pwconv.8.xml:80(replaceable) pwck.8.xml:58(arg)
 #: passwd.1.xml:60(replaceable) newusers.8.xml:66(replaceable)
@@ -105,7 +105,7 @@ msgstr "параметры"
 
 # type: Content of: <refentry><refsect1><title>
 #: vipw.8.xml:70(title) usermod.8.xml:64(title) userdel.8.xml:65(title)
-#: useradd.8.xml:85(title) suauth.5.xml:56(title) su.1.xml:80(title)
+#: useradd.8.xml:85(title) suauth.5.xml:56(title) su.1.xml:88(title)
 #: sg.1.xml:62(title) shadow.5.xml:50(title) shadow.3.xml:99(title)
 #: shadow.3.xml:155(title) pwconv.8.xml:86(title) pwck.8.xml:73(title)
 #: porttime.5.xml:50(title) passwd.5.xml:50(title) passwd.1.xml:69(title)
@@ -147,7 +147,7 @@ msgstr ""
 
 # type: Content of: <refentry><refsect1><title>
 #: vipw.8.xml:88(title) usermod.8.xml:72(title) userdel.8.xml:74(title)
-#: useradd.8.xml:103(title) su.1.xml:126(title) pwconv.8.xml:168(title)
+#: useradd.8.xml:103(title) su.1.xml:134(title) pwconv.8.xml:168(title)
 #: pwck.8.xml:157(title) passwd.1.xml:155(title) newusers.8.xml:244(title)
 #: login.1.xml:191(title) lastlog.8.xml:72(title) grpck.8.xml:128(title)
 #: groupmod.8.xml:70(title) groupmems.8.xml:78(title) groupdel.8.xml:69(title)
@@ -259,7 +259,7 @@ msgid "Indicates which user's tcb shadow file to edit."
 msgstr "Указать какой пользовательский теневой файл tcb редактировать."
 
 #: vipw.8.xml:147(title) usermod.8.xml:412(title) userdel.8.xml:153(title)
-#: useradd.8.xml:649(title) su.1.xml:320(title) sg.1.xml:79(title)
+#: useradd.8.xml:649(title) su.1.xml:328(title) sg.1.xml:79(title)
 #: pwconv.8.xml:209(title) pwck.8.xml:234(title) passwd.1.xml:372(title)
 #: newusers.8.xml:342(title) newgrp.1.xml:90(title) login.1.xml:275(title)
 #: grpck.8.xml:191(title) groupmod.8.xml:177(title) groupmems.8.xml:178(title)
@@ -270,7 +270,7 @@ msgid "CONFIGURATION"
 msgstr "НАСТРОЙКА"
 
 #: vipw.8.xml:148(para) usermod.8.xml:413(para) userdel.8.xml:154(para)
-#: useradd.8.xml:650(para) su.1.xml:321(para) sg.1.xml:80(para)
+#: useradd.8.xml:650(para) su.1.xml:329(para) sg.1.xml:80(para)
 #: pwck.8.xml:235(para) passwd.1.xml:373(para) newusers.8.xml:343(para)
 #: newgrp.1.xml:91(para) login.1.xml:276(para) grpck.8.xml:192(para)
 #: groupmod.8.xml:178(para) groupmems.8.xml:179(para) groupdel.8.xml:111(para)
@@ -328,7 +328,7 @@ msgstr ""
 
 # type: Content of: <refentry><refsect1><title>
 #: vipw.8.xml:177(title) usermod.8.xml:427(title) userdel.8.xml:170(title)
-#: useradd.8.xml:675(title) suauth.5.xml:174(title) su.1.xml:348(title)
+#: useradd.8.xml:675(title) suauth.5.xml:174(title) su.1.xml:356(title)
 #: sg.1.xml:91(title) shadow.5.xml:236(title) shadow.3.xml:207(title)
 #: pwconv.8.xml:232(title) pwck.8.xml:251(title) porttime.5.xml:111(title)
 #: passwd.5.xml:122(title) passwd.1.xml:390(title) newusers.8.xml:375(title)
@@ -392,7 +392,7 @@ msgstr "содержит защищаемую информацию о групп
 # type: Content of: <refentry><refsect1><para><filename>
 #: vipw.8.xml:192(filename) usermod.8.xml:448(filename)
 #: userdel.8.xml:185(filename) useradd.8.xml:678(filename)
-#: su.1.xml:351(filename) sg.1.xml:94(filename) shadow.5.xml:239(filename)
+#: su.1.xml:359(filename) sg.1.xml:94(filename) shadow.5.xml:239(filename)
 #: pwck.8.xml:260(filename) passwd.5.xml:125(filename)
 #: passwd.1.xml:393(filename) newusers.8.xml:378(filename)
 #: newgrp.1.xml:105(filename) login.1.xml:334(filename)
@@ -405,7 +405,7 @@ msgstr "/etc/passwd"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: vipw.8.xml:194(para) usermod.8.xml:450(para) userdel.8.xml:187(para)
-#: useradd.8.xml:680(para) su.1.xml:353(para) sg.1.xml:96(para)
+#: useradd.8.xml:680(para) su.1.xml:361(para) sg.1.xml:96(para)
 #: shadow.5.xml:241(para) pwck.8.xml:262(para) passwd.5.xml:127(para)
 #: passwd.1.xml:395(para) newusers.8.xml:380(para) newgrp.1.xml:107(para)
 #: login.1.xml:336(para) grpck.8.xml:220(para) groupmod.8.xml:212(para)
@@ -417,7 +417,7 @@ msgstr "содержит информацию о пользователях"
 # type: Content of: <refentry><refsect1><para><filename>
 #: vipw.8.xml:198(filename) usermod.8.xml:454(filename)
 #: userdel.8.xml:191(filename) useradd.8.xml:684(filename)
-#: su.1.xml:357(filename) sg.1.xml:100(filename) shadow.5.xml:245(filename)
+#: su.1.xml:365(filename) sg.1.xml:100(filename) shadow.5.xml:245(filename)
 #: shadow.3.xml:210(filename) pwck.8.xml:266(filename)
 #: passwd.5.xml:131(filename) passwd.1.xml:399(filename)
 #: newusers.8.xml:384(filename) newgrp.1.xml:111(filename)
@@ -428,7 +428,7 @@ msgstr "/etc/shadow"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: vipw.8.xml:200(para) usermod.8.xml:456(para) userdel.8.xml:193(para)
-#: useradd.8.xml:686(para) su.1.xml:359(para) sg.1.xml:102(para)
+#: useradd.8.xml:686(para) su.1.xml:367(para) sg.1.xml:102(para)
 #: shadow.5.xml:247(para) shadow.3.xml:212(para) pwck.8.xml:268(para)
 #: passwd.1.xml:401(para) newusers.8.xml:386(para) newgrp.1.xml:113(para)
 #: login.1.xml:342(para) expiry.1.xml:113(para) chpasswd.8.xml:250(para)
@@ -438,7 +438,7 @@ msgstr "содержит защищаемую информацию о польз
 
 # type: Content of: <refentry><refsect1><title>
 #: vipw.8.xml:207(title) usermod.8.xml:463(title) userdel.8.xml:278(title)
-#: useradd.8.xml:792(title) suauth.5.xml:203(title) su.1.xml:419(title)
+#: useradd.8.xml:792(title) suauth.5.xml:203(title) su.1.xml:427(title)
 #: sg.1.xml:121(title) shadow.5.xml:264(title) shadow.3.xml:219(title)
 #: pwconv.8.xml:244(title) pwck.8.xml:326(title) porttime.5.xml:123(title)
 #: passwd.5.xml:150(title) passwd.1.xml:471(title) nologin.8.xml:70(title)
@@ -829,7 +829,7 @@ msgstr ""
 "Вы должны проверить, что пароль соответствует политике системных паролей."
 
 #: usermod.8.xml:311(term) useradd.8.xml:451(term) useradd.8.xml:596(term)
-#: su.1.xml:167(term) chsh.1.xml:101(term)
+#: su.1.xml:175(term) chsh.1.xml:101(term)
 msgid ""
 "<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
 msgstr ""
@@ -943,7 +943,7 @@ msgstr ""
 
 # type: Content of: <refentry><refsect1><title>
 #: usermod.8.xml:393(title) userdel.8.xml:251(title) useradd.8.xml:625(title)
-#: su.1.xml:312(title) shadow.3.xml:199(title) passwd.1.xml:354(title)
+#: su.1.xml:320(title) shadow.3.xml:199(title) passwd.1.xml:354(title)
 #: newusers.8.xml:330(title) login.1.xml:241(title) lastlog.8.xml:178(title)
 #: groupdel.8.xml:98(title) groupadd.8.xml:241(title) gpasswd.1.xml:234(title)
 #: faillog.8.xml:218(title) chpasswd.8.xml:215(title)
@@ -1162,7 +1162,7 @@ msgstr ""
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><term><filename>
 #: usermod.8.xml:442(filename) userdel.8.xml:179(filename)
-#: useradd.8.xml:714(filename) su.1.xml:363(filename)
+#: useradd.8.xml:714(filename) su.1.xml:371(filename)
 #: pwconv.8.xml:235(filename) passwd.1.xml:405(filename)
 #: newusers.8.xml:402(filename) login.access.5.xml:105(filename)
 #: login.1.xml:370(filename) groupmod.8.xml:204(filename)
@@ -1174,7 +1174,7 @@ msgstr "/etc/login.defs"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: usermod.8.xml:444(para) userdel.8.xml:181(para) useradd.8.xml:716(para)
-#: su.1.xml:365(para) pwconv.8.xml:237(para) passwd.1.xml:407(para)
+#: su.1.xml:373(para) pwconv.8.xml:237(para) passwd.1.xml:407(para)
 #: newusers.8.xml:404(para) login.access.5.xml:107(para) login.1.xml:372(para)
 #: groupmod.8.xml:206(para) groupadd.8.xml:234(para) chsh.1.xml:166(para)
 #: chpasswd.8.xml:256(para) chgpasswd.8.xml:217(para) chfn.1.xml:194(para)
@@ -1424,7 +1424,7 @@ msgstr ""
 "<command>useradd</command> по умолчанию создаёт группу с именем пользователя."
 
 # type: Content of: <refentry><refsect1><title>
-#: userdel.8.xml:200(title) useradd.8.xml:723(title) su.1.xml:372(title)
+#: userdel.8.xml:200(title) useradd.8.xml:723(title) su.1.xml:380(title)
 #: pwck.8.xml:275(title) passwd.1.xml:420(title) grpck.8.xml:227(title)
 #: groupmod.8.xml:219(title) groupdel.8.xml:140(title)
 #: groupadd.8.xml:263(title) chage.1.xml:260(title)
@@ -1433,7 +1433,7 @@ msgstr "ВОЗВРАЩАЕМЫЕ ЗНАЧЕНИЯ"
 
 # type: Content of: <refentry><refsect1><para><variablelist><varlistentry><term><replaceable>
 #: userdel.8.xml:205(replaceable) useradd.8.xml:728(replaceable)
-#: su.1.xml:391(replaceable) pwck.8.xml:280(replaceable)
+#: su.1.xml:399(replaceable) pwck.8.xml:280(replaceable)
 #: passwd.1.xml:425(replaceable) grpck.8.xml:232(replaceable)
 #: groupmod.8.xml:224(replaceable) groupdel.8.xml:145(replaceable)
 #: groupadd.8.xml:268(replaceable) chage.1.xml:265(replaceable)
@@ -1449,7 +1449,7 @@ msgstr "успешное выполнение"
 
 # type: Content of: <refentry><refmeta><manvolnum>
 #: userdel.8.xml:211(replaceable) useradd.8.xml:734(replaceable)
-#: su.1.xml:56(manvolnum) su.1.xml:397(replaceable) sg.1.xml:40(manvolnum)
+#: su.1.xml:64(manvolnum) su.1.xml:405(replaceable) sg.1.xml:40(manvolnum)
 #: pwck.8.xml:286(replaceable) passwd.1.xml:46(manvolnum)
 #: passwd.1.xml:431(replaceable) newgrp.1.xml:40(manvolnum)
 #: login.1.xml:72(manvolnum) grpck.8.xml:238(replaceable)
@@ -2570,15 +2570,16 @@ msgstr "имя пользователя уже существует"
 msgid "can't create home directory"
 msgstr "не удалось создать домашний каталог"
 
-# type: Content of: <refentry><refsect1><para><variablelist><varlistentry><term><replaceable>
+# type: Content of: <refentry><refmeta><manvolnum>
 #: useradd.8.xml:782(replaceable)
-msgid "13"
-msgstr "13"
+#, fuzzy
+#| msgid "1"
+msgid "14"
+msgstr "1"
 
-# type: Content of: <refentry><refsect1><para><variablelist><varlistentry><listitem><para>
 #: useradd.8.xml:784(para)
-msgid "can't create mail spool"
-msgstr "не удалось создать почтовый ящик"
+msgid "can't update SELinux user mapping"
+msgstr ""
 
 # type: Content of: <refentry><refsect1><para>
 #: useradd.8.xml:724(para)
@@ -2891,14 +2892,30 @@ msgstr ""
 "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>."
 
+#: su.1.xml:56(firstname)
+msgid "Nicolas"
+msgstr ""
+
+#: su.1.xml:57(surname)
+msgid "François"
+msgstr ""
+
+#: su.1.xml:58(email)
+msgid "nicolas.francois@centraliens.net"
+msgstr ""
+
+#: su.1.xml:59(contrib)
+msgid "shadow-utils maintainer, 2007 - now"
+msgstr ""
+
 # type: Content of: <refentry><refsect1><para><citerefentry><refentrytitle>
-#: su.1.xml:55(refentrytitle) su.1.xml:62(refname) su.1.xml:67(command)
+#: su.1.xml:63(refentrytitle) su.1.xml:70(refname) su.1.xml:75(command)
 #: login.defs.5.xml:421(term)
 msgid "su"
 msgstr "su"
 
 # type: Content of: <refentry><refmeta><refmiscinfo>
-#: su.1.xml:57(refmiscinfo) sg.1.xml:41(refmiscinfo)
+#: su.1.xml:65(refmiscinfo) sg.1.xml:41(refmiscinfo)
 #: passwd.1.xml:47(refmiscinfo) newgrp.1.xml:41(refmiscinfo)
 #: login.1.xml:73(refmiscinfo) groups.1.xml:40(refmiscinfo)
 #: gpasswd.1.xml:45(refmiscinfo) expiry.1.xml:44(refmiscinfo)
@@ -2908,17 +2925,17 @@ msgid "User Commands"
 msgstr "Пользовательские команды"
 
 # type: Content of: <refentry><refnamediv><refpurpose>
-#: su.1.xml:63(refpurpose)
+#: su.1.xml:71(refpurpose)
 msgid "change user ID or become superuser"
 msgstr "изменяет ID пользователя или делает его суперпользователем"
 
 # type: Content of: <refentry><refsynopsisdiv><cmdsynopsis><arg><arg><replaceable>
-#: su.1.xml:73(replaceable) login.1.xml:88(replaceable)
+#: su.1.xml:81(replaceable) login.1.xml:88(replaceable)
 #: login.1.xml:96(replaceable)
 msgid "username"
 msgstr "имя_пользователя"
 
-#: su.1.xml:81(para)
+#: su.1.xml:89(para)
 msgid ""
 "The <command>su</command> command is used to become another user during a "
 "login session. Invoked without a <option>username</option>, <command>su</"
@@ -2933,7 +2950,7 @@ msgstr ""
 "option> можно использовать для воссоздания окружения, такого же как если бы "
 "настоящий пользователь выполнял вход в систему."
 
-#: su.1.xml:90(para)
+#: su.1.xml:98(para)
 msgid ""
 "Additional arguments may be provided after the username, in which case they "
 "are supplied to the user's login shell. In particular, an argument of "
@@ -2948,7 +2965,7 @@ msgstr ""
 "etc/passwd</filename>, которая является регистрационной для указываемого "
 "пользователя."
 
-#: su.1.xml:99(para)
+#: su.1.xml:107(para)
 msgid ""
 "You can use the <option>--</option> argument to separate <command>su</"
 "command> options from the arguments supplied to the shell."
@@ -2957,7 +2974,7 @@ msgstr ""
 "<command>su</command> от параметров, которые передаются оболочке."
 
 # type: Content of: <refentry><refsect1><para>
-#: su.1.xml:104(para)
+#: su.1.xml:112(para)
 msgid ""
 "The user will be prompted for a password, if appropriate. Invalid passwords "
 "will produce an error message. All attempts, both valid and invalid, are "
@@ -2967,7 +2984,7 @@ msgstr ""
 "возникает сообщение об ошибке. Все попытки, удачные и неудачные, "
 "протоколируются системой с целью обнаружения злоупотреблений."
 
-#: su.1.xml:109(para)
+#: su.1.xml:117(para)
 msgid ""
 "The current environment is passed to the new shell. The value of <envar>"
 "$PATH</envar> is reset to <filename>/bin:/usr/bin</filename> for normal "
@@ -2984,7 +3001,7 @@ msgstr ""
 "etc/login.defs</filename>."
 
 # type: Content of: <refentry><refsect1><para>
-#: su.1.xml:118(para) login.1.xml:169(para)
+#: su.1.xml:126(para) login.1.xml:169(para)
 msgid ""
 "A subsystem login is indicated by the presence of a \"*\" as the first "
 "character of the login shell. The given home directory will be used as the "
@@ -2995,11 +3012,11 @@ msgstr ""
 "корень новой файловой системы, в которой регистрируется пользователь."
 
 # type: Content of: <refentry><refsect1><para>
-#: su.1.xml:127(para)
+#: su.1.xml:135(para)
 msgid "The options which apply to the <command>su</command> command are:"
 msgstr "Параметры команды <command>su</command>:"
 
-#: su.1.xml:131(term)
+#: su.1.xml:139(term)
 msgid ""
 "<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
 "replaceable>"
@@ -3008,7 +3025,7 @@ msgstr ""
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:136(para)
+#: su.1.xml:144(para)
 msgid ""
 "Specify a command that will be invoked by the shell using its <option>-c</"
 "option>."
@@ -3016,7 +3033,7 @@ msgstr ""
 "Указать команду, которая будет запущена оболочкой в виде параметра для "
 "<option>-c</option>."
 
-#: su.1.xml:140(para)
+#: su.1.xml:148(para)
 msgid ""
 "The executed command will have no controlling terminal. This option cannot "
 "be used to execute interractive programs which need a controlling TTY."
@@ -3025,12 +3042,12 @@ msgstr ""
 "не может быть использован для запуска интерактивных программ, которым "
 "требуется управляющий TTY."
 
-#: su.1.xml:150(term)
+#: su.1.xml:158(term)
 msgid "<option>-</option>, <option>-l</option>, <option>--login</option>"
 msgstr "<option>-</option>, <option>-l</option>, <option>--login</option>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:154(para)
+#: su.1.xml:162(para)
 msgid ""
 "Provide an environment similar to what the user would expect had the user "
 "logged in directly."
@@ -3038,7 +3055,7 @@ msgstr ""
 "Предоставляет окружение, как если бы пользователь непосредственно "
 "регистрировался в системе."
 
-#: su.1.xml:158(para)
+#: su.1.xml:166(para)
 msgid ""
 "When <option>-</option> is used, it must be specified as the last "
 "<command>su</command> option. The other forms (<option>-l</option> and "
@@ -3049,16 +3066,16 @@ msgstr ""
 "<option>--login</option>) не имеют этого ограничения."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:172(para)
+#: su.1.xml:180(para)
 msgid "The shell that will be invoked."
 msgstr "Оболочка, которая будет запущена."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: su.1.xml:180(para)
+#: su.1.xml:188(para)
 msgid "The shell specified with --shell."
 msgstr "Оболочка указанная в параметре --shell."
 
-#: su.1.xml:183(para)
+#: su.1.xml:191(para)
 msgid ""
 "If <option>--preserve-environment</option> is used, the shell specified by "
 "the <envar>$SHELL</envar> environment variable."
@@ -3067,7 +3084,7 @@ msgstr ""
 "задаётся переменной окружения <envar>$SHELL</envar>."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: su.1.xml:190(para)
+#: su.1.xml:198(para)
 msgid ""
 "The shell indicated in the <filename>/etc/passwd</filename> entry for the "
 "target user."
@@ -3076,7 +3093,7 @@ msgstr ""
 "заданного пользователя."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: su.1.xml:196(para)
+#: su.1.xml:204(para)
 msgid ""
 "<filename>/bin/sh</filename> if a shell could not be found by any above "
 "method."
@@ -3085,14 +3102,14 @@ msgstr ""
 "помощью методов, указанных выше."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:173(para)
+#: su.1.xml:181(para)
 msgid ""
 "The invoked shell is chosen from (highest priority first): <placeholder-1/>"
 msgstr ""
 "Запущенная оболочка выбирается из (в порядке убывания приоритета): "
 "<placeholder-1/>"
 
-#: su.1.xml:201(para)
+#: su.1.xml:209(para)
 msgid ""
 "If the target user has a restricted shell (i.e. the shell field of this "
 "user's entry in <filename>/etc/passwd</filename> is not listed in <filename>/"
@@ -3106,7 +3123,7 @@ msgstr ""
 "shell</option> или переменная окружения <envar>$SHELL</envar> не будут "
 "учтены, если <command>su</command> не была запущена суперпользователем."
 
-#: su.1.xml:212(term)
+#: su.1.xml:220(term)
 msgid ""
 "<option>-m</option>, <option>-p</option>, <option>--preserve-environment</"
 "option>"
@@ -3114,11 +3131,11 @@ msgstr ""
 "<option>-m</option>, <option>-p</option>, <option>--preserve-environment</"
 "option>"
 
-#: su.1.xml:221(envar)
+#: su.1.xml:229(envar)
 msgid "$PATH"
 msgstr "$PATH"
 
-#: su.1.xml:223(para)
+#: su.1.xml:231(para)
 msgid ""
 "reset according to the <filename>/etc/login.defs</filename> options "
 "<option>ENV_PATH</option> or <option>ENV_SUPATH</option> (see below);"
@@ -3126,11 +3143,11 @@ msgstr ""
 "сбрасывается в значение <option>ENV_PATH</option> или <option>ENV_SUPATH</"
 "option> (смотрите далее) из <filename>/etc/login.defs</filename>;"
 
-#: su.1.xml:232(envar)
+#: su.1.xml:240(envar)
 msgid "$IFS"
 msgstr "$IFS"
 
-#: su.1.xml:234(para)
+#: su.1.xml:242(para)
 msgid ""
 "reset to <quote>&lt;space&gt;&lt;tab&gt;&lt;newline&gt;</quote>, if it was "
 "set."
@@ -3139,12 +3156,12 @@ msgstr ""
 "quote>, если она установлена."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:217(para)
+#: su.1.xml:225(para)
 msgid "Preserve the current environment, except for: <placeholder-1/>"
 msgstr "Сохранить текущее окружение за исключением: <placeholder-1/>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
-#: su.1.xml:243(para)
+#: su.1.xml:251(para)
 msgid ""
 "If the target user has a restricted shell, this option has no effect (unless "
 "<command>su</command> is called by root)."
@@ -3152,7 +3169,7 @@ msgstr ""
 "Если заданный пользователь имеет ограниченную оболочку, то этот параметр не "
 "сработает (если <command>su</command> не запускается суперпользователем)."
 
-#: su.1.xml:252(para)
+#: su.1.xml:260(para)
 msgid ""
 "The <envar>$HOME</envar>, <envar>$SHELL</envar>, <envar>$USER</envar>, "
 "<envar>$LOGNAME</envar>, <envar>$PATH</envar>, and <envar>$IFS</envar> "
@@ -3162,7 +3179,7 @@ msgstr ""
 "$USER</envar>, <envar>$LOGNAME</envar>, <envar>$PATH</envar> и <envar>$IFS</"
 "envar> сбрасываются."
 
-#: su.1.xml:261(para)
+#: su.1.xml:269(para)
 msgid ""
 "If <option>--login</option> is not used, the environment is copied, except "
 "for the variables above."
@@ -3170,7 +3187,7 @@ msgstr ""
 "Если параметр <option>--login</option> не указан, то окружение копируется, "
 "за исключением переменных, перечисленных выше."
 
-#: su.1.xml:268(para)
+#: su.1.xml:276(para)
 msgid ""
 "If <option>--login</option> is used, the <envar>$TERM</envar>, <envar>"
 "$COLORTERM</envar>, <envar>$DISPLAY</envar>, and <envar>$XAUTHORITY</envar> "
@@ -3180,7 +3197,7 @@ msgstr ""
 "<envar>$TERM</envar>, <envar>$COLORTERM</envar>, <envar>$DISPLAY</envar> и "
 "<envar>$XAUTHORITY</envar> копируются (если они установлены)."
 
-#: su.1.xml:278(para)
+#: su.1.xml:286(para)
 msgid ""
 "If <option>--login</option> is used, the <envar>$TZ</envar>, <envar>$HZ</"
 "envar>, and <envar>$MAIL</envar> environment variables are set according to "
@@ -3194,7 +3211,7 @@ msgstr ""
 "filename>: <option>ENV_TZ</option>, <option>ENV_HZ</option>, "
 "<option>MAIL_DIR</option> и <option>MAIL_FILE</option> (смотрите далее)."
 
-#: su.1.xml:291(para)
+#: su.1.xml:299(para)
 msgid ""
 "If <option>--login</option> is used, other environment variables might be "
 "set by the <option>ENVIRON_FILE</option> file (see below)."
@@ -3203,19 +3220,19 @@ msgstr ""
 "окружения могут быть установлены из файла <option>ENVIRON_FILE</option> "
 "(смотрите далее)."
 
-#: su.1.xml:299(para)
+#: su.1.xml:307(para)
 msgid "Other environments might be set by PAM modules."
 msgstr ""
 "Дополнительные переменные окружения могут быть установлены из модулей PAM."
 
-#: su.1.xml:247(para)
+#: su.1.xml:255(para)
 msgid ""
 "Note that the default behavior for the environment is the following: "
 "<placeholder-1/>"
 msgstr "Заметим, что поведение окружения по умолчанию таково: <placeholder-1/>"
 
 # type: Content of: <refentry><refsect1><para>
-#: su.1.xml:313(para)
+#: su.1.xml:321(para)
 msgid ""
 "This version of <command>su</command> has many compilation options, only "
 "some of which may be in use at any particular site."
@@ -3529,7 +3546,7 @@ msgstr ""
 "Включить протоколирование «syslog» действий <command>su</command> — "
 "дополнительно к протоколированию в файле sulog."
 
-#: su.1.xml:373(para)
+#: su.1.xml:381(para)
 msgid ""
 "On success, <command>su</command> returns the exit value of the command it "
 "executed."
@@ -3537,7 +3554,7 @@ msgstr ""
 "При успешном выполнении <command>su</command> возвращает код выхода команды, "
 "которая была выполнена."
 
-#: su.1.xml:377(para)
+#: su.1.xml:385(para)
 msgid ""
 "If this command was terminated by a signal, <command>su</command> returns "
 "the number of this signal plus 128."
@@ -3545,7 +3562,7 @@ msgstr ""
 "Если выполнение команды завершилось по сигналу, то <command>su</command> "
 "возвращает номер этого сигнала плюс 128."
 
-#: su.1.xml:381(para)
+#: su.1.xml:389(para)
 msgid ""
 "If su has to kill the command (because it was asked to terminate, and the "
 "command did not terminate in time), <command>su</command> returns 255."
@@ -3554,34 +3571,34 @@ msgstr ""
 "завершилась в положенное время), то <command>su</command> завершается с "
 "кодом 255."
 
-#: su.1.xml:393(para)
+#: su.1.xml:401(para)
 msgid "success (<option>--help</option> only)"
 msgstr "Успешно (только для <option>--help</option>)"
 
-#: su.1.xml:399(para)
+#: su.1.xml:407(para)
 msgid "System or authentication failure"
 msgstr "Сбой аутентификации или системы"
 
 # type: Content of: <refentry><refsect1><para><variablelist><varlistentry><term><replaceable>
-#: su.1.xml:403(replaceable)
+#: su.1.xml:411(replaceable)
 msgid "126"
 msgstr "126"
 
 # type: Content of: <refentry><refnamediv><refpurpose>
-#: su.1.xml:405(para)
+#: su.1.xml:413(para)
 msgid "The requested command was not found"
 msgstr "Запрошенная команда не найдена"
 
 # type: Content of: <refentry><refsect1><para><variablelist><varlistentry><term><replaceable>
-#: su.1.xml:409(replaceable)
+#: su.1.xml:417(replaceable)
 msgid "127"
 msgstr "127"
 
-#: su.1.xml:411(para)
+#: su.1.xml:419(para)
 msgid "The requested command could not be executed"
 msgstr "Запрошенная команда не может быть выполнена"
 
-#: su.1.xml:386(para)
+#: su.1.xml:394(para)
 msgid ""
 "Some exit values from <command>su</command> are independent from the "
 "executed command: <placeholder-1/>"
@@ -3589,7 +3606,7 @@ msgstr ""
 "Некоторые коды выхода <command>su</command> не зависят от запускаемой "
 "команды: <placeholder-1/>"
 
-#: su.1.xml:420(para)
+#: su.1.xml:428(para)
 msgid ""
 "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login.defs</"
@@ -8117,9 +8134,17 @@ msgstr ""
 "числовому идентификатору группы (GID)."
 
 #: grpck.8.xml:178(para)
+#, fuzzy
+#| msgid ""
+#| "By default, <command>grpck</command> operates on <filename>/etc/group</"
+#| "filename><phrase condition=\"gshadow\"> and <filename>/etc/gshadow</"
+#| "filename></phrase>. The user may select alternate files with the "
+#| "<emphasis remap=\"I\">group</emphasis><phrase condition=\"no_gshadow"
+#| "\">parameter.</phrase><phrase condition=\"gshadow\">and <emphasis remap="
+#| "\"I\">shadow</emphasis> parameters.</phrase>"
 msgid ""
 "By default, <command>grpck</command> operates on <filename>/etc/group</"
-"filename><phrase condition=\"gshadow\"> and <filename>/etc/gshadow</"
+"filename><phrase condition=\"gshadow\">and <filename>/etc/gshadow</"
 "filename></phrase>. The user may select alternate files with the <emphasis "
 "remap=\"I\">group</emphasis><phrase condition=\"no_gshadow\">parameter.</"
 "phrase><phrase condition=\"gshadow\">and <emphasis remap=\"I\">shadow</"
@@ -10123,6 +10148,14 @@ msgid "translator-credits"
 msgstr ""
 "Yuri Kozlov <yuray@komyakino.ru>, 2005, 2006, 2012 Sergey Alyoshin <alyoshin."
 "s@gmail.com>, 2012 "
+
+# type: Content of: <refentry><refsect1><para><variablelist><varlistentry><term><replaceable>
+#~ msgid "13"
+#~ msgstr "13"
+
+# type: Content of: <refentry><refsect1><para><variablelist><varlistentry><listitem><para>
+#~ msgid "can't create mail spool"
+#~ msgstr "не удалось создать почтовый ящик"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #, fuzzy

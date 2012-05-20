@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2011-11-26 19:42+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
@@ -47,7 +47,7 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 msgid "Password: "
@@ -1967,6 +1967,11 @@ msgstr "%s: ezin da lehenespen fitxategi berria ireki\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: lerro luzeegia %s-n: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: ezin da %s direktorioa sortu\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

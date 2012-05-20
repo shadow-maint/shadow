@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2012-01-08 18:13+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -44,7 +44,7 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 msgid "Password: "
@@ -1997,6 +1997,11 @@ msgstr "%s: không thể mở tập tin mặc định mới\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: dòng quá dài trong %s: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: không thể tạo thư mục %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

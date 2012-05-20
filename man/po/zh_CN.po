@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages VERSION\n"
-"POT-Creation-Date: 2012-02-11 19:37+0100\n"
+"POT-Creation-Date: 2012-05-20 19:54+0200\n"
 "PO-Revision-Date: 2012-01-29 16:58+0100\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -47,7 +47,7 @@ msgstr "系统管理命令"
 
 #: vipw.8.xml:43(refmiscinfo) usermod.8.xml:45(refmiscinfo)
 #: userdel.8.xml:47(refmiscinfo) useradd.8.xml:56(refmiscinfo)
-#: suauth.5.xml:41(refmiscinfo) su.1.xml:58(refmiscinfo)
+#: suauth.5.xml:41(refmiscinfo) su.1.xml:66(refmiscinfo)
 #: sg.1.xml:42(refmiscinfo) shadow.5.xml:41(refmiscinfo)
 #: shadow.3.xml:41(refmiscinfo) pwconv.8.xml:47(refmiscinfo)
 #: pwck.8.xml:47(refmiscinfo) porttime.5.xml:41(refmiscinfo)
@@ -79,7 +79,7 @@ msgstr "编辑密码、组、影子密码或影子组文件。"
 #: vipw.8.xml:58(replaceable) vipw.8.xml:64(replaceable)
 #: usermod.8.xml:57(replaceable) userdel.8.xml:57(arg)
 #: useradd.8.xml:67(replaceable) useradd.8.xml:79(replaceable)
-#: su.1.xml:69(replaceable) pwconv.8.xml:62(replaceable)
+#: su.1.xml:77(replaceable) pwconv.8.xml:62(replaceable)
 #: pwconv.8.xml:68(replaceable) pwconv.8.xml:74(replaceable)
 #: pwconv.8.xml:80(replaceable) pwck.8.xml:58(arg)
 #: passwd.1.xml:60(replaceable) newusers.8.xml:66(replaceable)
@@ -93,7 +93,7 @@ msgid "options"
 msgstr "选项"
 
 #: vipw.8.xml:70(title) usermod.8.xml:64(title) userdel.8.xml:65(title)
-#: useradd.8.xml:85(title) suauth.5.xml:56(title) su.1.xml:80(title)
+#: useradd.8.xml:85(title) suauth.5.xml:56(title) su.1.xml:88(title)
 #: sg.1.xml:62(title) shadow.5.xml:50(title) shadow.3.xml:99(title)
 #: shadow.3.xml:155(title) pwconv.8.xml:86(title) pwck.8.xml:73(title)
 #: porttime.5.xml:50(title) passwd.5.xml:50(title) passwd.1.xml:69(title)
@@ -132,7 +132,7 @@ msgstr ""
 "citerefentry>。"
 
 #: vipw.8.xml:88(title) usermod.8.xml:72(title) userdel.8.xml:74(title)
-#: useradd.8.xml:103(title) su.1.xml:126(title) pwconv.8.xml:168(title)
+#: useradd.8.xml:103(title) su.1.xml:134(title) pwconv.8.xml:168(title)
 #: pwck.8.xml:157(title) passwd.1.xml:155(title) newusers.8.xml:244(title)
 #: login.1.xml:191(title) lastlog.8.xml:72(title) grpck.8.xml:128(title)
 #: groupmod.8.xml:70(title) groupmems.8.xml:78(title) groupdel.8.xml:69(title)
@@ -243,7 +243,7 @@ msgid "Indicates which user's tcb shadow file to edit."
 msgstr "指定要编辑哪个用户的 tcb 影子文件。"
 
 #: vipw.8.xml:147(title) usermod.8.xml:412(title) userdel.8.xml:153(title)
-#: useradd.8.xml:649(title) su.1.xml:320(title) sg.1.xml:79(title)
+#: useradd.8.xml:649(title) su.1.xml:328(title) sg.1.xml:79(title)
 #: pwconv.8.xml:209(title) pwck.8.xml:234(title) passwd.1.xml:372(title)
 #: newusers.8.xml:342(title) newgrp.1.xml:90(title) login.1.xml:275(title)
 #: grpck.8.xml:191(title) groupmod.8.xml:177(title) groupmems.8.xml:178(title)
@@ -254,7 +254,7 @@ msgid "CONFIGURATION"
 msgstr "配置文件"
 
 #: vipw.8.xml:148(para) usermod.8.xml:413(para) userdel.8.xml:154(para)
-#: useradd.8.xml:650(para) su.1.xml:321(para) sg.1.xml:80(para)
+#: useradd.8.xml:650(para) su.1.xml:329(para) sg.1.xml:80(para)
 #: pwck.8.xml:235(para) passwd.1.xml:373(para) newusers.8.xml:343(para)
 #: newgrp.1.xml:91(para) login.1.xml:276(para) grpck.8.xml:192(para)
 #: groupmod.8.xml:178(para) groupmems.8.xml:179(para) groupdel.8.xml:111(para)
@@ -307,7 +307,7 @@ msgid "Editor to be used if <option>VISUAL</option> is not set."
 msgstr "<option>VISUAL</option> 没有设置的情况下，使用的编辑器。"
 
 #: vipw.8.xml:177(title) usermod.8.xml:427(title) userdel.8.xml:170(title)
-#: useradd.8.xml:675(title) suauth.5.xml:174(title) su.1.xml:348(title)
+#: useradd.8.xml:675(title) suauth.5.xml:174(title) su.1.xml:356(title)
 #: sg.1.xml:91(title) shadow.5.xml:236(title) shadow.3.xml:207(title)
 #: pwconv.8.xml:232(title) pwck.8.xml:251(title) porttime.5.xml:111(title)
 #: passwd.5.xml:122(title) passwd.1.xml:390(title) newusers.8.xml:375(title)
@@ -366,7 +366,7 @@ msgstr "安全组账户信息。"
 
 #: vipw.8.xml:192(filename) usermod.8.xml:448(filename)
 #: userdel.8.xml:185(filename) useradd.8.xml:678(filename)
-#: su.1.xml:351(filename) sg.1.xml:94(filename) shadow.5.xml:239(filename)
+#: su.1.xml:359(filename) sg.1.xml:94(filename) shadow.5.xml:239(filename)
 #: pwck.8.xml:260(filename) passwd.5.xml:125(filename)
 #: passwd.1.xml:393(filename) newusers.8.xml:378(filename)
 #: newgrp.1.xml:105(filename) login.1.xml:334(filename)
@@ -378,7 +378,7 @@ msgid "/etc/passwd"
 msgstr "/etc/passwd"
 
 #: vipw.8.xml:194(para) usermod.8.xml:450(para) userdel.8.xml:187(para)
-#: useradd.8.xml:680(para) su.1.xml:353(para) sg.1.xml:96(para)
+#: useradd.8.xml:680(para) su.1.xml:361(para) sg.1.xml:96(para)
 #: shadow.5.xml:241(para) pwck.8.xml:262(para) passwd.5.xml:127(para)
 #: passwd.1.xml:395(para) newusers.8.xml:380(para) newgrp.1.xml:107(para)
 #: login.1.xml:336(para) grpck.8.xml:220(para) groupmod.8.xml:212(para)
@@ -389,7 +389,7 @@ msgstr "用户账户信息。"
 
 #: vipw.8.xml:198(filename) usermod.8.xml:454(filename)
 #: userdel.8.xml:191(filename) useradd.8.xml:684(filename)
-#: su.1.xml:357(filename) sg.1.xml:100(filename) shadow.5.xml:245(filename)
+#: su.1.xml:365(filename) sg.1.xml:100(filename) shadow.5.xml:245(filename)
 #: shadow.3.xml:210(filename) pwck.8.xml:266(filename)
 #: passwd.5.xml:131(filename) passwd.1.xml:399(filename)
 #: newusers.8.xml:384(filename) newgrp.1.xml:111(filename)
@@ -399,7 +399,7 @@ msgid "/etc/shadow"
 msgstr "/etc/shadow"
 
 #: vipw.8.xml:200(para) usermod.8.xml:456(para) userdel.8.xml:193(para)
-#: useradd.8.xml:686(para) su.1.xml:359(para) sg.1.xml:102(para)
+#: useradd.8.xml:686(para) su.1.xml:367(para) sg.1.xml:102(para)
 #: shadow.5.xml:247(para) shadow.3.xml:212(para) pwck.8.xml:268(para)
 #: passwd.1.xml:401(para) newusers.8.xml:386(para) newgrp.1.xml:113(para)
 #: login.1.xml:342(para) expiry.1.xml:113(para) chpasswd.8.xml:250(para)
@@ -408,7 +408,7 @@ msgid "Secure user account information."
 msgstr "安全用户账户信息。"
 
 #: vipw.8.xml:207(title) usermod.8.xml:463(title) userdel.8.xml:278(title)
-#: useradd.8.xml:792(title) suauth.5.xml:203(title) su.1.xml:419(title)
+#: useradd.8.xml:792(title) suauth.5.xml:203(title) su.1.xml:427(title)
 #: sg.1.xml:121(title) shadow.5.xml:264(title) shadow.3.xml:219(title)
 #: pwconv.8.xml:244(title) pwck.8.xml:326(title) porttime.5.xml:123(title)
 #: passwd.5.xml:150(title) passwd.1.xml:471(title) nologin.8.xml:70(title)
@@ -751,7 +751,7 @@ msgid ""
 msgstr "您应该确保密码符合系统的密码政策。"
 
 #: usermod.8.xml:311(term) useradd.8.xml:451(term) useradd.8.xml:596(term)
-#: su.1.xml:167(term) chsh.1.xml:101(term)
+#: su.1.xml:175(term) chsh.1.xml:101(term)
 msgid ""
 "<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
 msgstr ""
@@ -850,7 +850,7 @@ msgstr ""
 "replaceable> 的 SELinux 用户映射(如果有)。"
 
 #: usermod.8.xml:393(title) userdel.8.xml:251(title) useradd.8.xml:625(title)
-#: su.1.xml:312(title) shadow.3.xml:199(title) passwd.1.xml:354(title)
+#: su.1.xml:320(title) shadow.3.xml:199(title) passwd.1.xml:354(title)
 #: newusers.8.xml:330(title) login.1.xml:241(title) lastlog.8.xml:178(title)
 #: groupdel.8.xml:98(title) groupadd.8.xml:241(title) gpasswd.1.xml:234(title)
 #: faillog.8.xml:218(title) chpasswd.8.xml:215(title)
@@ -1049,7 +1049,7 @@ msgstr ""
 "etc/tcb/user，但是会根据用户的 UID 计算，根据的算法如下：<placeholder-1/>"
 
 #: usermod.8.xml:442(filename) userdel.8.xml:179(filename)
-#: useradd.8.xml:714(filename) su.1.xml:363(filename)
+#: useradd.8.xml:714(filename) su.1.xml:371(filename)
 #: pwconv.8.xml:235(filename) passwd.1.xml:405(filename)
 #: newusers.8.xml:402(filename) login.access.5.xml:105(filename)
 #: login.1.xml:370(filename) groupmod.8.xml:204(filename)
@@ -1060,7 +1060,7 @@ msgid "/etc/login.defs"
 msgstr "/etc/login.defs"
 
 #: usermod.8.xml:444(para) userdel.8.xml:181(para) useradd.8.xml:716(para)
-#: su.1.xml:365(para) pwconv.8.xml:237(para) passwd.1.xml:407(para)
+#: su.1.xml:373(para) pwconv.8.xml:237(para) passwd.1.xml:407(para)
 #: newusers.8.xml:404(para) login.access.5.xml:107(para) login.1.xml:372(para)
 #: groupmod.8.xml:206(para) groupadd.8.xml:234(para) chsh.1.xml:166(para)
 #: chpasswd.8.xml:256(para) chgpasswd.8.xml:217(para) chfn.1.xml:194(para)
@@ -1288,7 +1288,7 @@ msgstr ""
 "<command>userdel</command> 将移除此用户组，<command>useradd</command> 创建用"
 "户时，也会创建一个同名的默认组。"
 
-#: userdel.8.xml:200(title) useradd.8.xml:723(title) su.1.xml:372(title)
+#: userdel.8.xml:200(title) useradd.8.xml:723(title) su.1.xml:380(title)
 #: pwck.8.xml:275(title) passwd.1.xml:420(title) grpck.8.xml:227(title)
 #: groupmod.8.xml:219(title) groupdel.8.xml:140(title)
 #: groupadd.8.xml:263(title) chage.1.xml:260(title)
@@ -1296,7 +1296,7 @@ msgid "EXIT VALUES"
 msgstr "退出值"
 
 #: userdel.8.xml:205(replaceable) useradd.8.xml:728(replaceable)
-#: su.1.xml:391(replaceable) pwck.8.xml:280(replaceable)
+#: su.1.xml:399(replaceable) pwck.8.xml:280(replaceable)
 #: passwd.1.xml:425(replaceable) grpck.8.xml:232(replaceable)
 #: groupmod.8.xml:224(replaceable) groupdel.8.xml:145(replaceable)
 #: groupadd.8.xml:268(replaceable) chage.1.xml:265(replaceable)
@@ -1310,7 +1310,7 @@ msgid "success"
 msgstr "成功"
 
 #: userdel.8.xml:211(replaceable) useradd.8.xml:734(replaceable)
-#: su.1.xml:56(manvolnum) su.1.xml:397(replaceable) sg.1.xml:40(manvolnum)
+#: su.1.xml:64(manvolnum) su.1.xml:405(replaceable) sg.1.xml:40(manvolnum)
 #: pwck.8.xml:286(replaceable) passwd.1.xml:46(manvolnum)
 #: passwd.1.xml:431(replaceable) newgrp.1.xml:40(manvolnum)
 #: login.1.xml:72(manvolnum) grpck.8.xml:238(replaceable)
@@ -2274,12 +2274,14 @@ msgid "can't create home directory"
 msgstr "无法创建主目录"
 
 #: useradd.8.xml:782(replaceable)
-msgid "13"
-msgstr "13"
+#, fuzzy
+#| msgid "1"
+msgid "14"
+msgstr "1"
 
 #: useradd.8.xml:784(para)
-msgid "can't create mail spool"
-msgstr "无法创建邮箱"
+msgid "can't update SELinux user mapping"
+msgstr ""
 
 #: useradd.8.xml:724(para)
 msgid ""
@@ -2550,12 +2552,28 @@ msgstr ""
 "<citerefentry><refentrytitle>su</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>."
 
-#: su.1.xml:55(refentrytitle) su.1.xml:62(refname) su.1.xml:67(command)
+#: su.1.xml:56(firstname)
+msgid "Nicolas"
+msgstr ""
+
+#: su.1.xml:57(surname)
+msgid "François"
+msgstr ""
+
+#: su.1.xml:58(email)
+msgid "nicolas.francois@centraliens.net"
+msgstr ""
+
+#: su.1.xml:59(contrib)
+msgid "shadow-utils maintainer, 2007 - now"
+msgstr ""
+
+#: su.1.xml:63(refentrytitle) su.1.xml:70(refname) su.1.xml:75(command)
 #: login.defs.5.xml:421(term)
 msgid "su"
 msgstr "su"
 
-#: su.1.xml:57(refmiscinfo) sg.1.xml:41(refmiscinfo)
+#: su.1.xml:65(refmiscinfo) sg.1.xml:41(refmiscinfo)
 #: passwd.1.xml:47(refmiscinfo) newgrp.1.xml:41(refmiscinfo)
 #: login.1.xml:73(refmiscinfo) groups.1.xml:40(refmiscinfo)
 #: gpasswd.1.xml:45(refmiscinfo) expiry.1.xml:44(refmiscinfo)
@@ -2564,16 +2582,16 @@ msgstr "su"
 msgid "User Commands"
 msgstr "用户命令"
 
-#: su.1.xml:63(refpurpose)
+#: su.1.xml:71(refpurpose)
 msgid "change user ID or become superuser"
 msgstr "更改用户 ID 或成为超级用户"
 
-#: su.1.xml:73(replaceable) login.1.xml:88(replaceable)
+#: su.1.xml:81(replaceable) login.1.xml:88(replaceable)
 #: login.1.xml:96(replaceable)
 msgid "username"
 msgstr "用户名"
 
-#: su.1.xml:81(para)
+#: su.1.xml:89(para)
 msgid ""
 "The <command>su</command> command is used to become another user during a "
 "login session. Invoked without a <option>username</option>, <command>su</"
@@ -2586,7 +2604,7 @@ msgstr ""
 "可选的选项 <option>-</option>，可以用于提供一个类似于用户直接登录的环境，用户"
 "可能期望是这样的。"
 
-#: su.1.xml:90(para)
+#: su.1.xml:98(para)
 msgid ""
 "Additional arguments may be provided after the username, in which case they "
 "are supplied to the user's login shell. In particular, an argument of "
@@ -2598,7 +2616,7 @@ msgstr ""
 "地，参数 <option>-c</option> 将会使下一个参数被多数命令解释器视为命令。这个命"
 "令会被 <filename>/etc/passwd</filename> 中为目标用户指定的 shell 执行。"
 
-#: su.1.xml:99(para)
+#: su.1.xml:107(para)
 msgid ""
 "You can use the <option>--</option> argument to separate <command>su</"
 "command> options from the arguments supplied to the shell."
@@ -2606,7 +2624,7 @@ msgstr ""
 "您可以使用 <option>--</option> 参数将 <command>su</command> 选项和提供给 "
 "shell 的参数分隔开来。"
 
-#: su.1.xml:104(para)
+#: su.1.xml:112(para)
 msgid ""
 "The user will be prompted for a password, if appropriate. Invalid passwords "
 "will produce an error message. All attempts, both valid and invalid, are "
@@ -2615,7 +2633,7 @@ msgstr ""
 "如果合适，将提示用户输入一个密码。输入无效的密码会产生一个错误消息。所有的尝"
 "试，无论成功还是失败，都会被记录，以检测对系统的滥用。"
 
-#: su.1.xml:109(para)
+#: su.1.xml:117(para)
 msgid ""
 "The current environment is passed to the new shell. The value of <envar>"
 "$PATH</envar> is reset to <filename>/bin:/usr/bin</filename> for normal "
@@ -2629,7 +2647,7 @@ msgstr ""
 "usr/sbin:/usr/bin</filename>。这会随 <filename>/etc/login.defs</filename> 中"
 "的 <option>ENV_PATH</option> 和 <option>ENV_SUPATH</option> 值改变。"
 
-#: su.1.xml:118(para) login.1.xml:169(para)
+#: su.1.xml:126(para) login.1.xml:169(para)
 msgid ""
 "A subsystem login is indicated by the presence of a \"*\" as the first "
 "character of the login shell. The given home directory will be used as the "
@@ -2638,11 +2656,11 @@ msgstr ""
 "在登录 shell 中以第一个字符是“*”标注的是子系统登录。给定的主目录将被用于用户"
 "实际登录的新文件系统的根。"
 
-#: su.1.xml:127(para)
+#: su.1.xml:135(para)
 msgid "The options which apply to the <command>su</command> command are:"
 msgstr "<command>su</command> 命令可以接受的选项有："
 
-#: su.1.xml:131(term)
+#: su.1.xml:139(term)
 msgid ""
 "<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
 "replaceable>"
@@ -2650,30 +2668,30 @@ msgstr ""
 "<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
 "replaceable>"
 
-#: su.1.xml:136(para)
+#: su.1.xml:144(para)
 msgid ""
 "Specify a command that will be invoked by the shell using its <option>-c</"
 "option>."
 msgstr "通过使用其 <option>-c</option> 选项，指定一个由 shell 运行的命令。"
 
-#: su.1.xml:140(para)
+#: su.1.xml:148(para)
 msgid ""
 "The executed command will have no controlling terminal. This option cannot "
 "be used to execute interractive programs which need a controlling TTY."
 msgstr ""
 "执行的命令将不会拥有控制终端。此选项不能用于执行需要控制 TTY 的交互程序。"
 
-#: su.1.xml:150(term)
+#: su.1.xml:158(term)
 msgid "<option>-</option>, <option>-l</option>, <option>--login</option>"
 msgstr "<option>-</option>, <option>-l</option>, <option>--login</option>"
 
-#: su.1.xml:154(para)
+#: su.1.xml:162(para)
 msgid ""
 "Provide an environment similar to what the user would expect had the user "
 "logged in directly."
 msgstr "提供一个类似于用户直接登录的环境，用户可能会希望这样。"
 
-#: su.1.xml:158(para)
+#: su.1.xml:166(para)
 msgid ""
 "When <option>-</option> is used, it must be specified as the last "
 "<command>su</command> option. The other forms (<option>-l</option> and "
@@ -2682,15 +2700,15 @@ msgstr ""
 "使用了 <option>-</option> 时，它必须是 <command>su</command> 的最后一个参数。"
 "其它形式(<option>-l</option> 和 <option>--login</option>) 没有这个限制。"
 
-#: su.1.xml:172(para)
+#: su.1.xml:180(para)
 msgid "The shell that will be invoked."
 msgstr "将使用的 shell。"
 
-#: su.1.xml:180(para)
+#: su.1.xml:188(para)
 msgid "The shell specified with --shell."
 msgstr "通过 --shell 指定的 shell。"
 
-#: su.1.xml:183(para)
+#: su.1.xml:191(para)
 msgid ""
 "If <option>--preserve-environment</option> is used, the shell specified by "
 "the <envar>$SHELL</envar> environment variable."
@@ -2698,25 +2716,25 @@ msgstr ""
 "如果使用了 <option>--preserve-environment</option>，shell 将由 <envar>"
 "$SHELL</envar> 环境变量指定。"
 
-#: su.1.xml:190(para)
+#: su.1.xml:198(para)
 msgid ""
 "The shell indicated in the <filename>/etc/passwd</filename> entry for the "
 "target user."
 msgstr "在 <filename>/etc/passwd</filename> 的相应项中为目标用户指定的 shell。"
 
-#: su.1.xml:196(para)
+#: su.1.xml:204(para)
 msgid ""
 "<filename>/bin/sh</filename> if a shell could not be found by any above "
 "method."
 msgstr ""
 "如果无法通过以上办法找到一个 shell，则使用 <filename>/bin/sh</filename>。"
 
-#: su.1.xml:173(para)
+#: su.1.xml:181(para)
 msgid ""
 "The invoked shell is chosen from (highest priority first): <placeholder-1/>"
 msgstr "使用的 shell 在如下中选择(高优先级在前)：<placeholder-1/>"
 
-#: su.1.xml:201(para)
+#: su.1.xml:209(para)
 msgid ""
 "If the target user has a restricted shell (i.e. the shell field of this "
 "user's entry in <filename>/etc/passwd</filename> is not listed in <filename>/"
@@ -2729,7 +2747,7 @@ msgstr ""
 "<option>--shell</option> 选项或 <envar>$SHELL</envar> 环境变量不会带入账户，"
 "除非 <command>su</command> 是被 root 调用的。"
 
-#: su.1.xml:212(term)
+#: su.1.xml:220(term)
 msgid ""
 "<option>-m</option>, <option>-p</option>, <option>--preserve-environment</"
 "option>"
@@ -2737,11 +2755,11 @@ msgstr ""
 "<option>-m</option>, <option>-p</option>, <option>--preserve-environment</"
 "option>"
 
-#: su.1.xml:221(envar)
+#: su.1.xml:229(envar)
 msgid "$PATH"
 msgstr "$PATH"
 
-#: su.1.xml:223(para)
+#: su.1.xml:231(para)
 msgid ""
 "reset according to the <filename>/etc/login.defs</filename> options "
 "<option>ENV_PATH</option> or <option>ENV_SUPATH</option> (see below);"
@@ -2749,22 +2767,22 @@ msgstr ""
 "根据 <filename>/etc/login.defs</filename> 中的 <option>ENV_PATH</option> or "
 "<option>ENV_SUPATH</option> 选项重设 (请往下看)"
 
-#: su.1.xml:232(envar)
+#: su.1.xml:240(envar)
 msgid "$IFS"
 msgstr "$IFS"
 
-#: su.1.xml:234(para)
+#: su.1.xml:242(para)
 msgid ""
 "reset to <quote>&lt;space&gt;&lt;tab&gt;&lt;newline&gt;</quote>, if it was "
 "set."
 msgstr ""
 "如果已经设置了，重设 <quote>&lt;space&gt;&lt;tab&gt;&lt;newline&gt;</quote>。"
 
-#: su.1.xml:217(para)
+#: su.1.xml:225(para)
 msgid "Preserve the current environment, except for: <placeholder-1/>"
 msgstr "保留当前环境，除非：<placeholder-1/>"
 
-#: su.1.xml:243(para)
+#: su.1.xml:251(para)
 msgid ""
 "If the target user has a restricted shell, this option has no effect (unless "
 "<command>su</command> is called by root)."
@@ -2772,7 +2790,7 @@ msgstr ""
 "如果用户的 shell 受限，此选项无效 (除非是 root 调用的 <command>su</"
 "command>)。"
 
-#: su.1.xml:252(para)
+#: su.1.xml:260(para)
 msgid ""
 "The <envar>$HOME</envar>, <envar>$SHELL</envar>, <envar>$USER</envar>, "
 "<envar>$LOGNAME</envar>, <envar>$PATH</envar>, and <envar>$IFS</envar> "
@@ -2782,13 +2800,13 @@ msgstr ""
 "<envar>$LOGNAME</envar>, <envar>$PATH</envar>, 和 <envar>$IFS</envar> 这些环"
 "境变量会被重置。"
 
-#: su.1.xml:261(para)
+#: su.1.xml:269(para)
 msgid ""
 "If <option>--login</option> is not used, the environment is copied, except "
 "for the variables above."
 msgstr "如果没有使用 <option>--login</option>，复制环境，上述几个变量除外。"
 
-#: su.1.xml:268(para)
+#: su.1.xml:276(para)
 msgid ""
 "If <option>--login</option> is used, the <envar>$TERM</envar>, <envar>"
 "$COLORTERM</envar>, <envar>$DISPLAY</envar>, and <envar>$XAUTHORITY</envar> "
@@ -2798,7 +2816,7 @@ msgstr ""
 "$COLORTERM</envar>, <envar>$DISPLAY</envar> 和 <envar>$XAUTHORITY</envar>，这"
 "些环境变量也会被重置。"
 
-#: su.1.xml:278(para)
+#: su.1.xml:286(para)
 msgid ""
 "If <option>--login</option> is used, the <envar>$TZ</envar>, <envar>$HZ</"
 "envar>, and <envar>$MAIL</envar> environment variables are set according to "
@@ -2811,7 +2829,7 @@ msgstr ""
 "filename> 中的选项 <option>ENV_TZ</option>, <option>ENV_HZ</option>, "
 "<option>MAIL_DIR</option> 和 <option>MAIL_FILE</option> 重置 (请看下边)。"
 
-#: su.1.xml:291(para)
+#: su.1.xml:299(para)
 msgid ""
 "If <option>--login</option> is used, other environment variables might be "
 "set by the <option>ENVIRON_FILE</option> file (see below)."
@@ -2819,17 +2837,17 @@ msgstr ""
 "如果使用了 <option>--login</option>，其它环境变量可能会根据 "
 "<option>ENVIRON_FILE</option> 文件来设置(请看下边)。"
 
-#: su.1.xml:299(para)
+#: su.1.xml:307(para)
 msgid "Other environments might be set by PAM modules."
 msgstr "其它环境可能由 PAM 模块设置。"
 
-#: su.1.xml:247(para)
+#: su.1.xml:255(para)
 msgid ""
 "Note that the default behavior for the environment is the following: "
 "<placeholder-1/>"
 msgstr "注意，环境的默认行为如下：<placeholder-1/>"
 
-#: su.1.xml:313(para)
+#: su.1.xml:321(para)
 msgid ""
 "This version of <command>su</command> has many compilation options, only "
 "some of which may be in use at any particular site."
@@ -3104,19 +3122,19 @@ msgid ""
 "sulog file logging."
 msgstr "除了 sulog 文件日志，也为 <command>su</command> 活动启用“syslog”日志。"
 
-#: su.1.xml:373(para)
+#: su.1.xml:381(para)
 msgid ""
 "On success, <command>su</command> returns the exit value of the command it "
 "executed."
 msgstr "成功时，<command>su</command> 返回执行的命令的退出值。"
 
-#: su.1.xml:377(para)
+#: su.1.xml:385(para)
 msgid ""
 "If this command was terminated by a signal, <command>su</command> returns "
 "the number of this signal plus 128."
 msgstr "如果命令被信号结束，<command>su</command> 返回此信号的编号加 128。"
 
-#: su.1.xml:381(para)
+#: su.1.xml:389(para)
 msgid ""
 "If su has to kill the command (because it was asked to terminate, and the "
 "command did not terminate in time), <command>su</command> returns 255."
@@ -3124,37 +3142,37 @@ msgstr ""
 "如果 su 必须要杀死此命令(因为已经要求它结束，可是却没有及时结束)，"
 "<command>su</command> 返回 255。"
 
-#: su.1.xml:393(para)
+#: su.1.xml:401(para)
 msgid "success (<option>--help</option> only)"
 msgstr "成功 (只有 <option>--help</option>)"
 
-#: su.1.xml:399(para)
+#: su.1.xml:407(para)
 msgid "System or authentication failure"
 msgstr "系统或者认证失败"
 
-#: su.1.xml:403(replaceable)
+#: su.1.xml:411(replaceable)
 msgid "126"
 msgstr "126"
 
-#: su.1.xml:405(para)
+#: su.1.xml:413(para)
 msgid "The requested command was not found"
 msgstr "要求的命令不存在"
 
-#: su.1.xml:409(replaceable)
+#: su.1.xml:417(replaceable)
 msgid "127"
 msgstr "127"
 
-#: su.1.xml:411(para)
+#: su.1.xml:419(para)
 msgid "The requested command could not be executed"
 msgstr "请求的命令不能执行"
 
-#: su.1.xml:386(para)
+#: su.1.xml:394(para)
 msgid ""
 "Some exit values from <command>su</command> are independent from the "
 "executed command: <placeholder-1/>"
 msgstr "<command>su</command> 中的某些退出值与执行的命令无关：<placeholder-1/>"
 
-#: su.1.xml:420(para)
+#: su.1.xml:428(para)
 msgid ""
 "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>login.defs</"
@@ -6867,14 +6885,26 @@ msgstr ""
 "<filename>/etc/gshadow</filename></phrase> 中进行排序。"
 
 #: grpck.8.xml:178(para)
+#, fuzzy
+#| msgid ""
+#| "By default, <command>pwck</command> operates on the files <filename>/etc/"
+#| "passwd</filename> and <filename>/etc/shadow</filename><phrase condition="
+#| "\"tcb\"> (or the files in <filename>/etc/tcb</filename>)</phrase>. The "
+#| "user may select alternate files with the <replaceable>passwd</"
+#| "replaceable> and <replaceable>shadow</replaceable> parameters."
 msgid ""
 "By default, <command>grpck</command> operates on <filename>/etc/group</"
-"filename><phrase condition=\"gshadow\"> and <filename>/etc/gshadow</"
+"filename><phrase condition=\"gshadow\">and <filename>/etc/gshadow</"
 "filename></phrase>. The user may select alternate files with the <emphasis "
 "remap=\"I\">group</emphasis><phrase condition=\"no_gshadow\">parameter.</"
 "phrase><phrase condition=\"gshadow\">and <emphasis remap=\"I\">shadow</"
 "emphasis> parameters.</phrase>"
 msgstr ""
+"默认上，<command>pwck</command> 操作文件 <filename>/etc/passwd</filename> 和 "
+"<filename>/etc/shadow</filename><phrase condition=\"tcb\"> (或者在 "
+"<filename>/etc/tcb</filename> 中的文件)</phrase>。用户也可以使用 "
+"<replaceable>passwd</replaceable> 和 <replaceable>shadow</replaceable> 参数来"
+"选择替代文件。"
 
 #: grpck.8.xml:246(para)
 msgid "one or more bad group entries"
@@ -8515,6 +8545,12 @@ msgstr "<command>chage</command> 命令有如下退出值：<placeholder-1/>"
 #: chage.1.xml:0(None)
 msgid "translator-credits"
 msgstr "YunQiang Su <wzssyqa@gmail.com>, 2010."
+
+#~ msgid "13"
+#~ msgstr "13"
+
+#~ msgid "can't create mail spool"
+#~ msgstr "无法创建邮箱"
 
 #~ msgid ""
 #~ "The SELinux user for the user's login. The default is to leave this field "

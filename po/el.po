@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2012-01-21 00:22+0200\n"
 "Last-Translator: Thomas Vasileiou <thomas-v@wildmail.com>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -46,8 +46,9 @@ msgstr ""
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: το nscd δεν τερμάτισε κανονικά (σήμα %d)\n"
 
-#, c-format
-msgid "%s: nscd exited with status %d"
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr "%s: το ncsd τερμάτισε με κατάσταση εξόδου %d"
 
 msgid "Password: "
@@ -1987,6 +1988,11 @@ msgstr "%s: αδυναμία ανοίγματος νέου αρχείου προ
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: πολύ μακριά γραμμή στο %s: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: Αδυναμία δημιουργίας συμβολικού συνδέσμου %s: %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

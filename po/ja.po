@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2012-01-16 15:14+0900\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -42,8 +42,9 @@ msgstr "設定エラー: 不明な項目 '%s' (管理者に連絡してくださ
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd は正常に終了しませんでした (シグナル %d)\n"
 
-#, c-format
-msgid "%s: nscd exited with status %d"
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr "%s: nscd はステータス %d で終了しました"
 
 msgid "Password: "
@@ -1911,6 +1912,11 @@ msgstr "%s: 新しいデフォルトファイルを開けません\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: %s の行が長すぎます: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: シンボリックリンク %s を作成できません: %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

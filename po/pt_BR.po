@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2011-11-25 20:20+0100\n"
 "Last-Translator: Fred Ulisses Maranhão <fred.maranhao@gmail.com>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -44,7 +44,7 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 msgid "Password: "
@@ -1941,6 +1941,11 @@ msgstr "%s: não foi possível abrir novo arquivo de padrões\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: linha muito longa em %s: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: não foi possível criar link simbólico %s: %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

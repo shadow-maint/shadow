@@ -1,5 +1,10 @@
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/Makefile.am, man/generate_mans.mak: Update clean targets,
 	due to the generation in separate sub folders.
 

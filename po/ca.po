@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2012-01-22 18:25+0100\n"
 "Last-Translator: Innocent De Marchi <tangram.peces@gmail.com>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -45,8 +45,9 @@ msgstr ""
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd no ha acabat correctament (senyal %d)\n"
 
-#, c-format
-msgid "%s: nscd exited with status %d"
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr "%s: «nscd» ha sortit amb l'estat %d"
 
 msgid "Password: "
@@ -1970,6 +1971,11 @@ msgstr "%s: no es pot obrir un fitxer nou de preferències predeterminades\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: línia massa llarga a %s: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: no es pot generar l'enllaç simbòlic %s: %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

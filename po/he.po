@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -43,7 +43,7 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 msgid "Password: "
@@ -1803,6 +1803,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
 
 #, fuzzy, c-format
 msgid "%s: rename: %s: %s\n"

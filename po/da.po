@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-01-08 18:12+0100\n"
+"POT-Creation-Date: 2012-05-20 19:52+0200\n"
 "PO-Revision-Date: 2012-01-26 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -56,8 +56,9 @@ msgstr "opsætningsfejl - ukendt punkt »%s« (informer administrator)\n"
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd afsluttedes ikke normalt (signal %d)\n"
 
-#, c-format
-msgid "%s: nscd exited with status %d"
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: nscd exited with status %d\n"
 msgstr "%s: nscd afsluttede med status %d"
 
 msgid "Password: "
@@ -1931,6 +1932,11 @@ msgstr "%s: Kan ikke åbne ny standardværdifil\n"
 #, c-format
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: Linje for lang i %s: %s..."
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot create symbolic link %s: %s\n"
+msgid "%s: Cannot create backup file (%s): %s\n"
+msgstr "%s: Kan ikke oprette symbolsk henvisning %s: %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"
