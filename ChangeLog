@@ -1,5 +1,12 @@
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/su.1.xml: Document author to avoid warnings during
+	generation. This needs to be rolled out to other manpages.
+	* man/generate_mans.mak: Do not add a AUTHOR section in the man
+	pages.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: non PAM enabled versions: do not fail if su is called
 	without a controlling terminal. Ignore ENXIO errors when opening
 	/dev/tty.

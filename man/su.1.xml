@@ -51,6 +51,14 @@
 ]>
 <refentry id='su.1'>
   <!--  $Id$ -->
+  <refentryinfo>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>François</surname>
+      <email>nicolas.francois@centraliens.net</email>
+      <contrib>shadow-utils maintainer, 2007 - now</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
