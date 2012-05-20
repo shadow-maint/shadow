@@ -3,16 +3,16 @@ mandir = @mandir@/da
 
 # 2012.01.28 - activate manpages with more than 50% translated messages
 man_MANS = \
-	chfn.1 \
-	groupdel.8 \
-	groups.1 \
-	gshadow.5 \
-	logoutd.8 \
-	newgrp.1 \
-	nologin.8 \
-	sg.1 \
-	vigr.8 \
-	vipw.8
+	man1/chfn.1 \
+	man8/groupdel.8 \
+	man1/groups.1 \
+	man5/gshadow.5 \
+	man8/logoutd.8 \
+	man1/newgrp.1 \
+	man8/nologin.8 \
+	man1/sg.1 \
+	man8/vigr.8 \
+	man8/vipw.8
 
 man_nopam = 
 
@@ -22,7 +22,7 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	id.1
+	man1/id.1
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)

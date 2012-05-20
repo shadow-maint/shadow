@@ -28,8 +28,10 @@ if ENABLE_REGENERATE_MAN
 		sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $< > $@; \
 	fi
 
-%: %.xml-config Makefile config.xml
+man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
 	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND)" \
+	            --stringparam "man.output.base.dir" "" \
+	            --param "man.output.in.separate.dir" "1" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 else
 $(man_MANS):
@@ -37,8 +39,8 @@ $(man_MANS):
 	@false
 endif
 
-grpconv.8 grpunconv.8 pwunconv.8: pwconv.8
+man8/grpconv.8 man8/grpunconv.8 man8/pwunconv.8: man8/pwconv.8
 
-getspnam.3: shadow.3
+man3/getspnam.3: man3/shadow.3
 
-vigr.8: vipw.8
+man8/vigr.8: man8/vipw.8

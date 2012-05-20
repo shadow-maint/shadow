@@ -8,6 +8,9 @@ shadow-4.1.5 -> shadow-4.1.5.1					UNRELEASED
 - userdel
   * Fix segfault when userdel removes the user's group.
 
+*** documentation
+  * .so links now point to paths relative to the top-level manual hierarchy
+
 *** translation
   * Updated French man pages translation.
   * Updated German man pages translation.

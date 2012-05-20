@@ -1,5 +1,22 @@
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, man/generate_mans.mak: Generate manpages in man1, man3,
+	man5, man8 subdirectories. This fix the generation of .so links
+	which did not point to a path relative to the top-level manual
+	hierarchy.
+	* man/generate_mans.mak: Update man paths accordingly.
+	* man/Makefile.am: Likewise.
+	* man/da/Makefile.am: Likewise.
+	* man/de/Makefile.am: Likewise.
+	* man/fr/Makefile.am: Likewise.
+	* man/it/Makefile.am: Likewise.
+	* man/pl/Makefile.am: Likewise.
+	* man/ru/Makefile.am: Likewise.
+	* man/sv/Makefile.am: Likewise.
+	* man/zh_CN/Makefile.am: Likewise.
+
+2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: Prepare for next point release 4.1.5.1.
 
 2012-05-19  Nitin A Kamble  <nitin.a.kamble@intel.com>
