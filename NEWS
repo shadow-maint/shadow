@@ -1,6 +1,6 @@
 $Id$
 
-shadow-4.1.5 -> shadow-4.1.5.1					UNRELEASED
+shadow-4.1.5 -> shadow-4.1.5.1					2012-05-25
 
 - login
   * Log into utmp(x) when PAM is enabled, but do not log into wtmp.

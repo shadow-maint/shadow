@@ -1,5 +1,9 @@
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Set release date.
+
+2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/*.xml: Add author based on copyright statement.
 	* man/<ll>/*.[1358], man/<ll>/man[1358]/*.[1358],
 	man/<ll>/Makefile.am: Sort manpages per section as the generated
