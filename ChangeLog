@@ -1,6 +1,8 @@
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS: Set release date.
+	* man/po/shadow-man-pages.pot: Regenerated.
+	* man/po/*.po: Updated PO files.
 
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
