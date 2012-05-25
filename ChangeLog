@@ -1,3 +1,10 @@
+2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/*.xml: Add author based on copyright statement.
+	* man/<ll>/*.[1358], man/<ll>/man[1358]/*.[1358],
+	man/<ll>/Makefile.am: Sort manpages per section as the generated
+	manpages.
+
 2012-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.

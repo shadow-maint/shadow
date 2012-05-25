@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+   Copyright (c) 2000       , International Business Machines
+                              George Kraft IV, gk4@us.ibm.com, 03/23/2000
    Copyright (c) 2005       , Tomasz Kłoczko
    Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
@@ -35,6 +37,26 @@
 ]>
 <refentry id='groupmems.8'>
   <!-- $Id$ -->
+  <refentryinfo>
+    <author>
+      <firstname>George</firstname>
+      <surname>Kraft</surname>
+      <lineage>IV</lineage>
+      <contrib>Creation, 2000</contrib>
+    </author>
+    <author>
+      <firstname>Thomas</firstname>
+      <surname>Kłoczko</surname>
+      <email>kloczek@pld.org.pl</email>
+      <contrib>shadow-utils maintainer, 2000 - 2007</contrib>
+    </author>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>François</surname>
+      <email>nicolas.francois@centraliens.net</email>
+      <contrib>shadow-utils maintainer, 2007 - now</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>

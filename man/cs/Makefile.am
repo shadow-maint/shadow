@@ -2,24 +2,25 @@
 mandir = @mandir@/cs
 
 man_MANS = \
-	expiry.1 \
-	faillog.5 \
-	faillog.8 \
-	gpasswd.1 \
-	groupadd.8 \
-	groupdel.8 \
-	groupmod.8 \
-	groups.1 \
-	grpck.8 \
-	gshadow.5 \
-	lastlog.8 \
-	nologin.8 \
-	passwd.5 \
-	shadow.5 \
-	su.1 \
-	vipw.8
+	man1/expiry.1 \
+	man5/faillog.5 \
+	man8/faillog.8 \
+	man1/gpasswd.1 \
+	man8/groupadd.8 \
+	man8/groupdel.8 \
+	man8/groupmod.8 \
+	man1/groups.1 \
+	man8/grpck.8 \
+	man5/gshadow.5 \
+	man8/lastlog.8 \
+	man8/nologin.8 \
+	man5/passwd.5 \
+	man5/shadow.5 \
+	man1/su.1 \
+	man8/vipw.8
 
 EXTRA_DIST = $(man_MANS) \
-	id.1 \
-	groupmems.8 \
-	logoutd.8
+	man1/id.1 \
+	man8/groupmems.8 \
+	man8/logoutd.8
+

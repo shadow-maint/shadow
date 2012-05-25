@@ -39,6 +39,20 @@
 
 <refentry id='chgpasswd.8'>
   <!-- $Id$ -->
+  <refentryinfo>
+    <author>
+      <firstname>Thomas</firstname>
+      <surname>Kłoczko</surname>
+      <email>kloczek@pld.org.pl</email>
+      <contrib>Creation, 2006</contrib>
+    </author>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>François</surname>
+      <email>nicolas.francois@centraliens.net</email>
+      <contrib>shadow-utils maintainer, 2007 - now</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>chgpasswd</refentrytitle>
     <manvolnum>8</manvolnum>

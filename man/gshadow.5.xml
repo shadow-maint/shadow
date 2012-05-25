@@ -33,6 +33,15 @@
 ]>
 <refentry id='gshadow.5'>
   <!-- $Id$ -->
+  <refentryinfo>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>François</surname>
+      <email>nicolas.francois@centraliens.net</email>
+      <contrib>Creation, 2005</contrib>
+      <contrib>shadow-utils maintainer, 2007 - now</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>gshadow</refentrytitle>
     <manvolnum>5</manvolnum>

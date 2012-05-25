@@ -53,6 +53,17 @@
   <!--  $Id$ -->
   <refentryinfo>
     <author>
+      <firstname>Julianne Frances</firstname>
+      <surname>Haugh</surname>
+      <contrib>Creation, 1989</contrib>
+    </author>
+    <author>
+      <firstname>Thomas</firstname>
+      <surname>Kłoczko</surname>
+      <email>kloczek@pld.org.pl</email>
+      <contrib>shadow-utils maintainer, 2000 - 2007</contrib>
+    </author>
+    <author>
       <firstname>Nicolas</firstname>
       <surname>François</surname>
       <email>nicolas.francois@centraliens.net</email>
