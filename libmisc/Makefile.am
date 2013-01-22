@@ -32,6 +32,8 @@ libmisc_a_SOURCES = \
 	getgr_nam_gid.c \
 	getrange.c \
 	hushed.c \
+	idmapping.h \
+	idmapping.c \
 	isexpired.c \
 	limits.c \
 	list.c log.c \

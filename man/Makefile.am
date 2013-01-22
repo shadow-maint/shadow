@@ -30,7 +30,9 @@ man_MANS = \
 	man1/login.1 \
 	man5/login.defs.5 \
 	man8/logoutd.8 \
+	man1/newgidmap.1 \
 	man1/newgrp.1 \
+	man1/newuidmap.1 \
 	man8/newusers.8 \
 	man8/nologin.8 \
 	man1/passwd.1 \
@@ -83,7 +85,9 @@ man_XMANS = \
 	login.access.5.xml \
 	login.defs.5.xml \
 	logoutd.8.xml \
+	newgidmap.1.xml \
 	newgrp.1.xml \
+	newuidmap.1.xml \
 	newusers.8.xml \
 	nologin.8.xml \
 	passwd.1.xml \
