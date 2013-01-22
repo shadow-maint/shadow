@@ -24,7 +24,8 @@ INCLUDES = \
 
 bin_PROGRAMS   = groups login su
 sbin_PROGRAMS  = nologin
-ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd \
+	newgidmap newuidmap
 usbin_PROGRAMS = \
 	chgpasswd \
 	chpasswd \
@@ -49,7 +50,7 @@ usbin_PROGRAMS = \
 noinst_PROGRAMS = id sulogin
 
 suidbins       = su
-suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
+suidubins      = chage chfn chsh expiry gpasswd newgrp passwd newuidmap newgidmap
 if ACCT_TOOLS_SETUID
 	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
