@@ -78,6 +78,8 @@
 <!ENTITY SULOG_FILE            SYSTEM "login.defs.d/SULOG_FILE.xml">
 <!ENTITY SU_NAME               SYSTEM "login.defs.d/SU_NAME.xml">
 <!ENTITY SU_WHEEL_ONLY         SYSTEM "login.defs.d/SU_WHEEL_ONLY.xml">
+<!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
+<!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
 <!ENTITY SYSLOG_SG_ENAB        SYSTEM "login.defs.d/SYSLOG_SG_ENAB.xml">
 <!ENTITY SYSLOG_SU_ENAB        SYSTEM "login.defs.d/SYSLOG_SU_ENAB.xml">
@@ -216,6 +218,8 @@
       &SULOG_FILE;
       &SU_NAME;
       &SU_WHEEL_ONLY;
+      &SUB_GID_COUNT; <!-- documents also SUB_GID_MIN SUB_GID_MAX -->
+      &SUB_UID_COUNT; <!-- documents also SUB_UID_MIN SUB_UID_MAX -->
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
       &SYSLOG_SG_ENAB;
@@ -393,6 +397,8 @@
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
 	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
+	    SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN
 	    SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN
 	    UMASK
 	  </para>
@@ -470,6 +476,8 @@
 	    GID_MAX GID_MIN
 	    MAIL_DIR MAX_MEMBERS_PER_GROUP
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
+	    SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN
 	    SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN
 	    UMASK
 	    <phrase condition="tcb">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>
