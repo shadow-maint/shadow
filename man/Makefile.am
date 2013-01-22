@@ -163,6 +163,8 @@ login_defs_v = \
 	USERDEL_CMD.xml \
 	USERGROUPS_ENAB.xml \
 	USE_TCB.xml \
+	SUB_GID_COUNT.xml \
+	SUB_UID_COUNT.xml \
 	SYS_GID_MAX.xml \
 	SYS_UID_MAX.xml
 
