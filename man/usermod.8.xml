@@ -391,6 +391,86 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-v</option>, <option>--add-sub-uids</option>
+	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Add a range of subordinate uids to the users account. 
+	  </para>
+	  <para>
+	    This option may be specified multiple times to add multiple ranges to a users account.
+	  </para>
+	  <para>
+	     No checks will be performed with regard to
+	     <option>SUB_UID_MIN</option>, <option>SUB_UID_MAX</option>, or
+	     <option>SUB_UID_COUNT</option> from /etc/login.defs.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-V</option>, <option>--del-sub-uids</option>
+	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Remove a range of subordinate uids from the users account.
+	  </para>
+	  <para>
+	    This option may be specified multiple times to remove multiple ranges to a users account.
+	    When both <option>--del-sub-uids</option> and <option>--add-sub-uids</option> are specified
+	    remove of all subordinate uid ranges happens before any subordinate uid ranges are added.
+	  </para>
+	  <para>
+	     No checks will be performed with regard to
+	     <option>SUB_UID_MIN</option>, <option>SUB_UID_MAX</option>, or
+	     <option>SUB_UID_COUNT</option> from /etc/login.defs.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-w</option>, <option>--add-sub-gids</option>
+	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Add a range of subordinate gids to the users account.
+	  </para>
+	  <para>
+	    This option may be specified multiple times to add multiple ranges to a users account.
+	  </para>
+	  <para>
+	     No checks will be performed with regard to
+	     <option>SUB_GID_MIN</option>, <option>SUB_GID_MAX</option>, or
+	     <option>SUB_GID_COUNT</option> from /etc/login.defs.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-W</option>, <option>--del-sub-gids</option>
+	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Remove a range of subordinate gids from the users account.
+	  </para>
+	  <para>
+	    This option may be specified multiple times to remove multiple ranges to a users account.
+	    When both <option>--del-sub-gids</option> and <option>--add-sub-gids</option> are specified
+	    remove of all subordinate gid ranges happens before any subordinate gid ranges are added.
+	  </para>
+	  <para>
+	     No checks will be performed with regard to
+	     <option>SUB_GID_MIN</option>, <option>SUB_GID_MAX</option>, or
+	     <option>SUB_GID_COUNT</option> from /etc/login.defs.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-Z</option>, <option>--selinux-user</option>
 	  <replaceable>SEUSER</replaceable>
 	</term>
