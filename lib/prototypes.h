@@ -149,6 +149,15 @@ extern int find_new_uid (bool sys_user,
                          uid_t *uid,
                          /*@null@*/uid_t const *preferred_uid);
 
+/* find_new_sub_gids.c */
+extern int find_new_sub_gids (const char *owner,
+			      gid_t *range_start, unsigned long *range_count);
+
+/* find_new_sub_uids.c */
+extern int find_new_sub_uids (const char *owner,
+			      uid_t *range_start, unsigned long *range_count);
+
+
 /* get_gid.c */
 extern int get_gid (const char *gidstr, gid_t *gid);
 

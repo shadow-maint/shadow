@@ -25,6 +25,8 @@ libmisc_a_SOURCES = \
 	failure.h \
 	find_new_gid.c \
 	find_new_uid.c \
+	find_new_sub_gids.c \
+	find_new_sub_uids.c \
 	getdate.h \
 	getdate.y \
 	getgr_nam_gid.c \
