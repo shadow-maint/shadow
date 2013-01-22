@@ -226,6 +226,10 @@ UID_MAX			60000
 # System accounts
 SYS_UID_MIN		  101
 SYS_UID_MAX		  999
+# Extra per user uids
+SUB_UID_MIN		   100000
+SUB_UID_MAX		600100000
+SUB_UID_COUNT		    10000
 
 #
 # Min/max values for automatic gid selection in groupadd(8)
@@ -235,6 +239,10 @@ GID_MAX			60000
 # System accounts
 SYS_GID_MIN		  101
 SYS_GID_MAX		  999
+# Extra per user group ids
+SUB_GID_MIN		   100000
+SUB_GID_MAX		600100000
+SUB_GID_COUNT		    10000
 
 #
 # Max number of login(1) retries if password is bad
