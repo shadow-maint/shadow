@@ -43,6 +43,8 @@ man_MANS = \
 	man5/shadow.5 \
 	man1/su.1 \
 	man5/suauth.5 \
+	man5/subgid.5 \
+	man5/subuid.5 \
 	man8/useradd.8 \
 	man8/userdel.8 \
 	man8/usermod.8 \
@@ -94,6 +96,8 @@ man_XMANS = \
 	sg.1.xml \
 	su.1.xml \
 	suauth.5.xml \
+	subgid.5.xml \
+	subuid.5.xml \
 	useradd.8.xml \
 	userdel.8.xml \
 	usermod.8.xml \
