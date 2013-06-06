@@ -993,9 +993,9 @@ static void process_flags (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX
-			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:UZ:",
+			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:UZ:v:w:V:W:",
 #else				/* !WITH_SELINUX */
-			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:U",
+			                 "ac:d:e:f:g:G:hl:Lmop:R:s:u:Uv:w:V:W:",
 #endif				/* !WITH_SELINUX */
 			                 long_options, NULL)) != -1) {
 			switch (c) {
@@ -1141,6 +1141,7 @@ static void process_flags (int argc, char **argv)
 					exit(E_BAD_ARG);
 				}
 				wflg = true;
+                break;
 			case 'W':
 				if (prepend_range (optarg, &del_sub_gids) == 0) {
 					fprintf (stderr,
