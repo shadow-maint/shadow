@@ -48,7 +48,7 @@ static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 static void *subordinate_parse (const char *line)
 {
 	static struct subordinate_range range;
-	char rangebuf[1024];
+	static char rangebuf[1024];
 	int i;
 	char *cp;
 	char *fields[NFIELDS];
