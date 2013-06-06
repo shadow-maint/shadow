@@ -104,7 +104,7 @@
 	<refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>logindefs</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>newuidmap</refentrytitle><manvolnum>1</manvolnum>
