@@ -41,6 +41,16 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	struct map_range *mappings, *mapping;
 	int idx, argidx;
 
+	if (ranges < 0 || argc < 0) {
+		fprintf(stderr, "%s: error calculating number of arguments\n", Prog);
+		return NULL;
+	}
+
+	if (ranges != ((argc - 2) + 2) / 3) {
+		fprintf(stderr, "%s: ranges: %u is wrong for argc: %d\n", Prog, ranges, argc);
+		return NULL;
+	}
+
 	if ((ranges * 3) > argc) {
 		fprintf(stderr, "ranges: %u argc: %d\n",
 			ranges, argc);

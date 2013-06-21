@@ -58,6 +58,14 @@ int find_new_sub_gids (const char *owner,
 	max = getdef_ulong ("SUB_GID_MAX", 600100000UL);
 	count = getdef_ulong ("SUB_GID_COUNT", 10000);
 
+	if (min >= max || count >= max || (min + count) >= max) {
+		(void) fprintf (stderr,
+				_("%s: Invalid configuration: SUB_GID_MIN (%lu),"
+				  " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
+			Prog, min, max, count);
+		return -1;
+	}
+
 	/* Is there a preferred range that works? */
 	if ((*range_count != 0) &&
 	    (*range_start >= min) &&
