@@ -228,7 +228,7 @@ void setup_env (struct passwd *info)
 			exit (EXIT_FAILURE);
 		}
 		(void) puts (_("No directory, logging in with HOME=/"));
-		info->pw_dir = temp_pw_dir;
+		info->pw_dir = strdup(temp_pw_dir);
 	}
 
 	/*

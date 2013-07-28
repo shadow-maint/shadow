@@ -1,6 +1,8 @@
 2012-05-20  Christian Perrier  <christian@perrier.eu.org>
 
 	* configure.in: Prepare for next point release 4.2.
+	* if using the static char* for pw_dir, strdup it so
+	  pw_free() can be used. (Closes: Debian#691459) 
 
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
