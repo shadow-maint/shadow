@@ -73,6 +73,7 @@ int pw_auth (const char *cipher,
 	char prompt[1024];
 	char *clear = NULL;
 	const char *cp;
+	const char *encrypted;
 	int retval;
 
 #ifdef	SKEY
@@ -177,7 +178,11 @@ int pw_auth (const char *cipher,
 	 * the results there as well.
 	 */
 
-	retval = strcmp (pw_encrypt (input, cipher), cipher);
+	encrypted = pw_encrypt (input, cipher);
+	if (encrypted!=NULL)
+		retval = strcmp (encrypted, cipher);
+	else
+		retval = -1;
 
 #ifdef  SKEY
 	/*

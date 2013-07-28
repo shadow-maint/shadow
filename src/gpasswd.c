@@ -939,6 +939,10 @@ static void change_passwd (struct group *gr)
 	}
 
 	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
+	if (cp==NULL) {
+		perror ("crypt");
+		exit (EXIT_FAILURE);
+	}
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {

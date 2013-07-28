@@ -387,6 +387,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 static void update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
+	char *cp;
 	if (crypt_method != NULL) {
 #ifdef USE_SHA_CRYPT
 		if (sflg) {
@@ -398,9 +399,13 @@ static void update_passwd (struct passwd *pwd, const char *password)
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
 		pwd->pw_passwd = (char *)password;
 	} else {
-		pwd->pw_passwd = pw_encrypt (password,
-		                             crypt_make_salt (crypt_method,
-		                                              crypt_arg));
+		cp=pw_encrypt (password, crypt_make_salt (crypt_method, 
+		                                          crypt_arg));
+		if (cp == NULL) {
+			perror ("crypt");
+			exit (EXIT_FAILURE);
+		}
+		pwd->pw_passwd = cp;
 	}
 }
 #endif				/* !USE_PAM */
@@ -412,6 +417,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 {
 	const struct spwd *sp;
 	struct spwd spent;
+	char *cp;
 
 #ifndef USE_PAM
 	void *crypt_arg = NULL;
@@ -448,7 +454,12 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		} else {
 			const char *salt = crypt_make_salt (crypt_method,
 			                                    crypt_arg);
-			spent.sp_pwdp = pw_encrypt (password, salt);
+			cp = pw_encrypt (password, salt);
+			if (cp == NULL) {
+				perror ("crypt");
+				exit (EXIT_FAILURE);
+			}
+			spent.sp_pwdp = cp;
 		}
 		spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 		if (0 == spent.sp_lstchg) {
@@ -492,7 +503,12 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		spent.sp_pwdp = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
-		spent.sp_pwdp = pw_encrypt (password, salt);
+		cp = pw_encrypt (password, salt);
+		if (cp == NULL) {
+			perror ("crypt");
+			exit (EXIT_FAILURE);
+		}
+		spent.sp_pwdp = cp;
 	}
 #else
 	/*

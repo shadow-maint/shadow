@@ -49,11 +49,10 @@
 	if (!cp) {
 		/*
 		 * Single Unix Spec: crypt() may return a null pointer,
-		 * and set errno to indicate an error.  The caller doesn't
-		 * expect us to return NULL, so...
+		 * and set errno to indicate an error. In this case return
+		 * the NULL so the caller can handle appropriately.
 		 */
-		perror ("crypt");
-		exit (EXIT_FAILURE);
+		return cp;
 	}
 
 	/* The GNU crypt does not return NULL if the algorithm is not

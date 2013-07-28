@@ -1,3 +1,18 @@
+2013-07-28  mancha <mancha1@hush.com>
+
+        * lib/encrypt.c: crypt() in glibc/eglibc 2.17 now fails if passed
+          a salt that violates specs. On Linux, crypt() also fails with
+          DES/MD5 salts in FIPS140 mode. Rather than exit() on NULL returns
+          we send them back to the caller for appropriate handling.
+        * lib/pwauth.c: Handle NULL return from crypt().
+        * libmisc/valid.c: Likewise.
+        * src/chgpasswd.c: Likewise.
+        * src/chpasswd.c: Likewise.
+        * src/gpasswd.c: Likewise.
+        * src/newgrp.c: Likewise.
+        * src/newusers.c: Likewise.
+        * src/passwd.c: Likewise.
+
 2013-07-28  Christian Perrier  <christian@perrier.eu.org>
 
 	* configure.in: Prepare for next point release 4.2.

@@ -469,6 +469,10 @@ int main (int argc, char **argv)
 #endif
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt (crypt_method, arg));
+			if (cp == NULL) {
+				perror ("crypt");
+				exit (EXIT_FAILURE);
+			}	
 		}
 
 		/*

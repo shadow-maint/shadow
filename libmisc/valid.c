@@ -95,6 +95,7 @@ bool valid (const char *password, const struct passwd *ent)
 	 */
 
 	if (   (NULL != ent->pw_name)
+	    && (NULL != encrypted)
 	    && (strcmp (encrypted, ent->pw_passwd) == 0)) {
 		return true;
 	} else {

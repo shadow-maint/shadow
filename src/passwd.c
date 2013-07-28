@@ -242,7 +242,7 @@ static int new_password (const struct passwd *pw)
 		}
 
 		cipher = pw_encrypt (clear, crypt_passwd);
-		if (strcmp (cipher, crypt_passwd) != 0) {
+		if ((cipher == NULL) || (strcmp (cipher, crypt_passwd) != 0)) {
 			strzero (clear);
 			strzero (cipher);
 			SYSLOG ((LOG_WARN, "incorrect password for %s",
@@ -349,6 +349,10 @@ static int new_password (const struct passwd *pw)
 	 * Encrypt the password, then wipe the cleartext password.
 	 */
 	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
+	if (cp == NULL) {
+		perror ("crypt");
+		exit (EXIT_FAILURE);
+	}
 	memzero (pass, sizeof pass);
 
 #ifdef HAVE_LIBCRACK_HIST

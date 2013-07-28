@@ -184,7 +184,8 @@ static void check_perms (const struct group *grp,
 		cpasswd = pw_encrypt (cp, grp->gr_passwd);
 		strzero (cp);
 
-		if (grp->gr_passwd[0] == '\0' ||
+		if (cpasswd == NULL ||
+		    grp->gr_passwd[0] == '\0' ||
 		    strcmp (cpasswd, grp->gr_passwd) != 0) {
 #ifdef WITH_AUDIT
 			snprintf (audit_buf, sizeof(audit_buf),
