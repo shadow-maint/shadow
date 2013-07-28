@@ -1,6 +1,12 @@
+2013-07-28  Guido Trentalancia  <guido@trentalancia.com>
+
+        * etc/login.defs: fix typographic errors and use a better format
+	  Closes: Debian#685415
+
 2013-07-28  Simon Brandmair  <sbrandmair@gmx.net>
 
         * man/po/de.po: translation completed : 1203 translated messages
+	  Closes: Debian#679152
 
 2013-07-28  mancha  <mancha1@hush.com>
 
