@@ -181,7 +181,7 @@ static bool iswheel (const char *username)
 static RETSIGTYPE kill_child (int unused(s))
 {
 	if (0 != pid_child) {
-		(void) kill (pid_child, SIGKILL);
+		(void) kill (-pid_child, SIGKILL);
 		(void) fputs (_(" ...killed.\n"), stderr);
 	} else {
 		(void) fputs (_(" ...waiting for child to terminate.\n"),
@@ -370,7 +370,7 @@ static void prepare_pam_close_session (void)
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
-		(void) kill (pid_child, caught);
+		(void) kill (-pid_child, caught);
 	}
 
 	ret = pam_close_session (pamh, 0);
