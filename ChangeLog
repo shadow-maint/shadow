@@ -1,3 +1,7 @@
+2012-05-20  Christian Perrier  <christian@perrier.eu.org>
+
+	* configure.in: Prepare for next point release 4.2.
+
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS: Set release date.
