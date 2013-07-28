@@ -1,4 +1,8 @@
-2013-07-28  mancha <mancha1@hush.com>
+2013-07-28  Simon Brandmair  <sbrandmair@gmx.net>
+
+        * man/po/de.po: translation completed : 1203 translated messages
+
+2013-07-28  mancha  <mancha1@hush.com>
 
         * lib/encrypt.c: crypt() in glibc/eglibc 2.17 now fails if passed
           a salt that violates specs. On Linux, crypt() also fails with
