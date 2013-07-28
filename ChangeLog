@@ -1,4 +1,4 @@
-2012-05-20  Christian Perrier  <christian@perrier.eu.org>
+2013-07-28  Christian Perrier  <christian@perrier.eu.org>
 
 	* configure.in: Prepare for next point release 4.2.
 	* if using the static char* for pw_dir, strdup it so
