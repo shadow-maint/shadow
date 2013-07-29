@@ -1,3 +1,9 @@
+2013-07-29  Brad Hubbard  <badone-guest@alioth.debian.org>
+
+        * lib/groupio.c: add newline char when two lines
+          are concatenated
+	  Closes: alioth#313942
+
 2013-07-28  Guido Trentalancia  <guido@trentalancia.com>
 
         * etc/login.defs: fix typographic errors and use a better format
