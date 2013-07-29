@@ -353,7 +353,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 			members++;
 		}
 	}
-	new_members = (char **)malloc ( (members+1) * sizeof(char*) );
+	new_members = (char **)calloc ( (members+1), sizeof(char*) );
 	if (NULL == new_members) {
 		free (new_line);
 		errno = ENOMEM;
