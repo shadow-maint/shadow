@@ -161,7 +161,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-d</option>, <option>--home</option>
+	  <option>-d</option>, <option>--home-dir</option>
 	  <replaceable>HOME_DIR</replaceable>
 	</term>
 	<listitem>

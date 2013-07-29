@@ -1,3 +1,10 @@
+2013-07-29  Christian Perrier  <christian@perrier.eu.org>
+
+        * man/useradd.xml: use "--home-dir" instead of "--home"
+	  Fix translations too.
+	  Thanks to Ville Skyttä
+	  Closes: alioth#313880
+
 2013-07-29  Ville Skyttä  <scop-guest@alioth.debian.org>
 
         * man/ja/man8/groupmod.8: Syntax fix

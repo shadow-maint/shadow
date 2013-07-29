@@ -751,7 +751,7 @@ msgstr ""
 
 #: usermod.8.xml:123(term) useradd.8.xml:163(term)
 msgid ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
 "<option>-d</option>, <option>--home</option> <replaceable>ДОМАШНИЙ_КАТАЛОГ</"

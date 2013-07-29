@@ -282,7 +282,7 @@ msgid "The new value of the user's password file comment field. It is normally m
 msgstr ""
 
 #: usermod.8.xml:123(term) useradd.8.xml:163(term)
-msgid "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</replaceable>"
+msgid "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</replaceable>"
 msgstr ""
 
 #: usermod.8.xml:128(para)
