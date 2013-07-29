@@ -14,6 +14,7 @@
           a salt that violates specs. On Linux, crypt() also fails with
           DES/MD5 salts in FIPS140 mode. Rather than exit() on NULL returns
           we send them back to the caller for appropriate handling.
+          Closes: alioth#314234
         * lib/pwauth.c: Handle NULL return from crypt().
         * libmisc/valid.c: Likewise.
         * src/chgpasswd.c: Likewise.
@@ -27,7 +28,7 @@
 
 	* configure.in: Prepare for next point release 4.2.
 	* if using the static char* for pw_dir, strdup it so
-	  pw_free() can be used. (Closes: Debian#691459) 
+	  pw_free() can be used. (Closes: Debian#691459, alioth#313957) 
 	* Kill the child process group, rather than just the 
 	  immediate child; this is needed now that su no
 	  longer starts a controlling terminal when not running an
