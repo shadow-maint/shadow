@@ -1,3 +1,10 @@
+2013-07-29  Michael Scherer <misc-guest@alioth.debian.org>
+
+        * libmisc/root_flag.c: use chdir() before calling chroot() to
+	  avoid potential security issue (see
+	  http://www.bpfh.net/simes/computing/chroot-break.html)
+	  Closes: alioth#313962
+
 2013-07-29  Christian Perrier  <christian@perrier.eu.org>
 
         * man/useradd.xml: use "--home-dir" instead of "--home"

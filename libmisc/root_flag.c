@@ -106,6 +106,14 @@ static void change_root (const char* newroot)
 		        Prog, newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
+
+	if (chdir (newroot) != 0) {
+		fprintf(stderr,
+				_("%s: cannot chdir to chroot directory %s: %s\n"),
+				Prog, newroot, strerror (errno));
+		exit (E_BAD_ARG);
+	}
+
 	if (chroot (newroot) != 0) {
 		fprintf(stderr,
 		        _("%s: unable to chroot to directory %s: %s\n"),
