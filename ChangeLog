@@ -1,3 +1,8 @@
+2013-07-29  Ville Skyttä  <scop-guest@alioth.debian.org>
+
+        * man/ja/man8/groupmod.8: Syntax fix
+	  Closes: alioth#313785
+
 2013-07-29  Brad Hubbard  <badone-guest@alioth.debian.org>
 
         * lib/groupio.c: add newline char when two lines
