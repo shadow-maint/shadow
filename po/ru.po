@@ -8,10 +8,10 @@
 # Yuri Kozlov <yuray@komyakino.ru>, 2009, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow request\n"
+"Project-Id-Version: shadow 4.1.5.1-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2012-05-20 19:52+0200\n"
-"PO-Revision-Date: 2012-01-09 10:42+0400\n"
+"PO-Revision-Date: 2013-07-29 10:42+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -48,10 +48,9 @@ msgstr "ошибка настройки: неизвестный элемент �
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd завершился с ошибкой (по сигналу %d)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
+#, c-format
 msgid "%s: nscd exited with status %d\n"
-msgstr "%s: nscd завершился с кодом выхода %d"
+msgstr "%s: nscd завершился с кодом выхода %d\n"
 
 msgid "Password: "
 msgstr "Пароль: "
@@ -560,7 +559,7 @@ msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Дата истечения срока действия учётной записи (ГГГГ-ММ-ДД)"
 
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Последний раз пароль был изменён\t\t\t\t\t: "
+msgstr "Последний раз пароль был изменён\t\t\t\t: "
 
 msgid "never"
 msgstr "никогда"
@@ -572,14 +571,14 @@ msgid "Password expires\t\t\t\t\t: "
 msgstr "Срок действия пароля истекает\t\t\t\t\t: "
 
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Пароль будет деактивирован через\t\t\t\t\t: "
+msgstr "Пароль будет деактивирован через\t\t\t\t: "
 
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Срок действия учётной записи истекает\t\t\t\t\t\t: "
+msgstr "Срок действия учётной записи истекает\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr "Минимальное количество дней между сменой пароля\t\t: %ld\n"
+msgstr "Минимальное количество дней между сменой пароля\t\t\t: %ld\n"
 
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
@@ -1961,10 +1960,9 @@ msgstr "%s: не удалось открыть новый файл значен�
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: слишком длинная строка в %s: %s…"
 
-#, fuzzy, c-format
-#| msgid "%s: Cannot create symbolic link %s: %s\n"
+#, c-format
 msgid "%s: Cannot create backup file (%s): %s\n"
-msgstr "%s: не удалось создать символьную ссылку %s: %s\n"
+msgstr "%s: не удалось создать резервную копию файла (%s): %s\n"
 
 #, c-format
 msgid "%s: rename: %s: %s\n"

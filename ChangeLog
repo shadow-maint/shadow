@@ -1,3 +1,8 @@
+2013-08-01  Yuri Kozlov  <yuray@komyakino.ru>
+
+        * po/ru.po: completed translation
+	  Closes: Debian#718356
+
 2013-07-29  Michael Scherer <misc-guest@alioth.debian.org>
 
         * libmisc/root_flag.c: use chdir() before calling chroot() to
