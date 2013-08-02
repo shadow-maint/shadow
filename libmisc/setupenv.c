@@ -228,7 +228,7 @@ void setup_env (struct passwd *info)
 			exit (EXIT_FAILURE);
 		}
 		(void) puts (_("No directory, logging in with HOME=/"));
-		info->pw_dir = strdup(temp_pw_dir);
+		info->pw_dir = xstrdup (temp_pw_dir);
 	}
 
 	/*
@@ -244,7 +244,7 @@ void setup_env (struct passwd *info)
 	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
 		static char temp_pw_shell[] = SHELL;
 
-		info->pw_shell = temp_pw_shell;
+		info->pw_shell = xstrdup (temp_pw_shell);
 	}
 
 	addenv ("SHELL", info->pw_shell);

@@ -1,3 +1,9 @@
+2013-08-02  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/setupenv.c: xstrdup the static char* temp_pw_dir /
+	temp_pw_shell. That way we can continue to use pw_free() without
+	segving. Thanks to Serge Hallyn for the patch.
+
 2013-08-01  Yuri Kozlov  <yuray@komyakino.ru>
 
         * po/ru.po: completed translation
