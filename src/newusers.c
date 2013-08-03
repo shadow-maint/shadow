@@ -98,7 +98,7 @@ static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_user_id (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
 #ifndef USE_PAM
-static void update_passwd (struct passwd *, const char *);
+static int update_passwd (struct passwd *, const char *);
 #endif				/* !USE_PAM */
 static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv);
@@ -384,7 +384,12 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 }
 
 #ifndef USE_PAM
-static void update_passwd (struct passwd *pwd, const char *password)
+/* 
+ * update_passwd - update the password in the passwd entry
+ *
+ * Return 0 if successful.
+ */
+static int update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
 	char *cp;
@@ -399,14 +404,18 @@ static void update_passwd (struct passwd *pwd, const char *password)
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
 		pwd->pw_passwd = (char *)password;
 	} else {
-		cp=pw_encrypt (password, crypt_make_salt (crypt_method, 
-		                                          crypt_arg));
-		if (cp == NULL) {
-			perror ("crypt");
-			exit (EXIT_FAILURE);
+		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
+		cp = pw_encrypt (password, salt);
+		if (NULL == cp) {
+			fprintf (stderr,
+			         _("%s: failed to crypt password with salt '%s': %s\n"),
+			         Prog, salt, strerror (errno));
+			return 1;
 		}
 		pwd->pw_passwd = cp;
 	}
+
+	return 0;
 }
 #endif				/* !USE_PAM */
 
@@ -435,8 +444,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 * harder since there are zillions of things to do ...
 	 */
 	if (!is_shadow) {
-		update_passwd (pwd, password);
-		return 0;
+		return update_passwd (pwd, password);
 	}
 #endif				/* USE_PAM */
 
@@ -455,9 +463,11 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			const char *salt = crypt_make_salt (crypt_method,
 			                                    crypt_arg);
 			cp = pw_encrypt (password, salt);
-			if (cp == NULL) {
-				perror ("crypt");
-				exit (EXIT_FAILURE);
+			if (NULL == cp) {
+				fprintf (stderr,
+				         _("%s: failed to crypt password with salt '%s': %s\n"),
+				         Prog, salt, strerror (errno));
+				return 1;
 			}
 			spent.sp_pwdp = cp;
 		}
@@ -477,8 +487,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 * the password set someplace else.
 	 */
 	if (strcmp (pwd->pw_passwd, "x") != 0) {
-		update_passwd (pwd, password);
-		return 0;
+		return update_passwd (pwd, password);
 	}
 #else				/* USE_PAM */
 	/*
@@ -504,9 +513,11 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
-		if (cp == NULL) {
-			perror ("crypt");
-			exit (EXIT_FAILURE);
+		if (NULL == cp) {
+			fprintf (stderr,
+			         _("%s: failed to crypt password with salt '%s': %s\n"),
+			         Prog, salt, strerror (errno));
+			return 1;
 		}
 		spent.sp_pwdp = cp;
 	}

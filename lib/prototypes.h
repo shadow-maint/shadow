@@ -124,7 +124,7 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       gid_t old_gid, gid_t new_gid);
 
 /* encrypt.c */
-extern /*@exposed@*/char *pw_encrypt (const char *, const char *);
+extern /*@exposed@*//*@null@*/char *pw_encrypt (const char *, const char *);
 
 /* entry.c */
 extern void pw_entry (const char *, struct passwd *);

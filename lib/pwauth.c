@@ -179,10 +179,11 @@ int pw_auth (const char *cipher,
 	 */
 
 	encrypted = pw_encrypt (input, cipher);
-	if (encrypted!=NULL)
+	if (NULL != encrypted) {
 		retval = strcmp (encrypted, cipher);
-	else
+	} else {
 		retval = -1;
+	}
 
 #ifdef  SKEY
 	/*

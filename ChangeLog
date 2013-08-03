@@ -1,3 +1,19 @@
+2013-08-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* Changelog: Update documentation of 2013-07-28  mancha entry.
+	* lib/prototypes.h, lib/encrypt.c: Update splint marker,
+	pw_encrypt can return NULL.
+	* lib/encrypt.c: Fix outdated statement on GNU crypt.
+	* src/chgpasswd.c: Improve diagnostic to user when pw_encrypt
+	fails and use fail_exit() instead of exit().
+	* src/chpasswd.c: Likewise.
+	* src/newusers.c: Likewise.
+	* src/passwd.c: Likewise when new password is encrypted.
+	* src/newgrp.c: Improve diagnostic to user and syslog when
+	pw_encrypt fails.  Do not apply 1s penalty as this is not an
+	invalid password issue.
+	* src/passwd.c: Likewise when password is checked.
+
 2013-08-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/setupenv.c: xstrdup the static char* temp_pw_dir /
@@ -52,19 +68,24 @@
 
 2013-07-28  mancha  <mancha1@hush.com>
 
-        * lib/encrypt.c: crypt() in glibc/eglibc 2.17 now fails if passed
-          a salt that violates specs. On Linux, crypt() also fails with
-          DES/MD5 salts in FIPS140 mode. Rather than exit() on NULL returns
-          we send them back to the caller for appropriate handling.
-          Closes: alioth#314234
-        * lib/pwauth.c: Handle NULL return from crypt().
-        * libmisc/valid.c: Likewise.
-        * src/chgpasswd.c: Likewise.
-        * src/chpasswd.c: Likewise.
-        * src/gpasswd.c: Likewise.
-        * src/newgrp.c: Likewise.
-        * src/newusers.c: Likewise.
-        * src/passwd.c: Likewise.
+	* lib/encrypt.c (pw_encrypt): crypt() in glibc/eglibc 2.17 now
+	fails if passed a salt that violates specs. On Linux, crypt() also
+	fails with DES/MD5 salts in FIPS140 mode. Rather than exit() on
+	NULL returns we send them back to the caller for appropriate
+	handling (instead of exiting).  Closes: alioth#314234
+	* lib/pwauth.c: Handle NULL return from pw_crypt(), return non
+	zero (as in case of failure).
+	* libmisc/valid.c: Likewise.
+	* src/chgpasswd.c: Handle NULL return from pw_crypt(), report
+	crypt error to stderr and exit.
+	* src/chpasswd.c: Likewise.
+	* src/gpasswd.c: Likewise.
+	* src/newusers.c: Likewise.
+	* src/passwd.c: Likewise when new password is encrypted.
+	* src/newgrp.c: Handle NULL return from pw_crypt(), report crypt
+	error to stderr and syslog and return to report unchanged
+	password.
+	* src/passwd.c: Likewise when password is checked.
 
 2013-07-28  Christian Perrier  <christian@perrier.eu.org>
 

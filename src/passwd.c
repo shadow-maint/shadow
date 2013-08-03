@@ -218,6 +218,7 @@ static int new_password (const struct passwd *pw)
 {
 	char *clear;		/* Pointer to clear text */
 	char *cipher;		/* Pointer to cipher text */
+	const char *salt;	/* Pointer to new salt */
 	char *cp;		/* Pointer to getpass() response */
 	char orig[200];		/* Original password */
 	char pass[200];		/* New password */
@@ -242,7 +243,19 @@ static int new_password (const struct passwd *pw)
 		}
 
 		cipher = pw_encrypt (clear, crypt_passwd);
-		if ((cipher == NULL) || (strcmp (cipher, crypt_passwd) != 0)) {
+
+		if (NULL == cipher) {
+			strzero (clear);
+			fprintf (stderr,
+			         _("%s: failed to crypt password with previous salt: %s\n"),
+			         Prog, strerror (errno));
+			SYSLOG ((LOG_INFO,
+			         "Failed to crypt password with previous salt of user '%s'",
+			         pw->pw_name));
+			return -1;
+		}
+
+		if (strcmp (cipher, crypt_passwd) != 0) {
 			strzero (clear);
 			strzero (cipher);
 			SYSLOG ((LOG_WARN, "incorrect password for %s",
@@ -348,12 +361,16 @@ static int new_password (const struct passwd *pw)
 	/*
 	 * Encrypt the password, then wipe the cleartext password.
 	 */
-	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
-	if (cp == NULL) {
-		perror ("crypt");
-		exit (EXIT_FAILURE);
-	}
+	salt = crypt_make_salt (NULL, NULL);
+	cp = pw_encrypt (pass, salt);
 	memzero (pass, sizeof pass);
+
+	if (NULL == cp) {
+		fprintf (stderr,
+		         _("%s: failed to crypt password with salt '%s': %s\n"),
+		         Prog, salt, strerror (errno));
+		return -1;
+	}
 
 #ifdef HAVE_LIBCRACK_HIST
 	HistUpdate (pw->pw_name, crypt_passwd);

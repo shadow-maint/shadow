@@ -898,6 +898,7 @@ static void change_passwd (struct group *gr)
 	char *cp;
 	static char pass[BUFSIZ];
 	int retries;
+	const char *salt;
 
 	/*
 	 * A new password is to be entered and it must be encrypted, etc.
@@ -938,10 +939,13 @@ static void change_passwd (struct group *gr)
 		exit (1);
 	}
 
-	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
-	if (cp==NULL) {
-		perror ("crypt");
-		exit (EXIT_FAILURE);
+	salt = crypt_make_salt (NULL, NULL);
+	cp = pw_encrypt (pass, salt);
+	if (NULL == cp) {
+		fprintf (stderr,
+		         _("%s: failed to crypt password with salt '%s': %s\n"),
+		         Prog, salt, strerror (errno));
+		exit (1);
 	}
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
