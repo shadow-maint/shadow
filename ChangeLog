@@ -1,5 +1,9 @@
 2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Add NEWS entries.
+
+2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/da.po: Fix translation (--home became --home-dir).
 	* man/po/de.po: Likewise.
 	* man/po/fr.po: Likewise.

@@ -1,5 +1,37 @@
 $Id$
 
+shadow-4.1.5.1 -> shadow-4.2					UNRELEASED
+
+*** general
+  * Handle libc whose crypt() returns NULL when passed a salt that
+    violates specs or system requirements (e.g. FIPS140). This is needed
+    with glibc/eglibc 2.17 for tools checking passwords (passwd (non PAM
+    enabled) or newgrp), and for tools generating encrypted passwords
+    (chgpasswd, chpasswd, or gpasswd when non PAM enabled or when a fixed
+    crypt method is requested on the command line, and newusers, or passwd
+    in their non PAM enabled versions)
+  * Fix segfault when reading groups split on multiple lines. This impacts
+    most user/group management tools when MAX_MEMBERS_PER_GROUP is set.
+
+- su
+  * When su receives a signal (SIGTERM, or SIGINT/SIGQUIT in non
+    interactive mode), kill the child process group, rather than just the 
+    immediate child.
+  * Fix segmentation faults for users without a proper home or shell in
+    their passwd entries.
+
+- login
+  * Fix segmentation faults for users without a proper home or shell in
+    their passwd entries.
+
+*** documentation
+  * Fixed useradd man page (--home-dir option, instead of --home).
+
+*** translation
+  * Updated Russian translation.
+  * Updated German man pages translation.
+  * Fixed gshadow Japanese man page translation.
+
 shadow-4.1.5 -> shadow-4.1.5.1					2012-05-25
 
 - login
