@@ -330,7 +330,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 
 	/* Concatenate the 2 lines */
 	new_line_len = strlen (gr1->line) + strlen (gr2->line) +2;
-	new_line = (char *)malloc ((new_line_len + 1) * sizeof(char*));
+	new_line = (char *)malloc (new_line_len + 1);
 	if (NULL == new_line) {
 		errno = ENOMEM;
 		return NULL;
@@ -362,6 +362,8 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	for (i=0; NULL != gptr1->gr_mem[i]; i++) {
 		new_members[i] = gptr1->gr_mem[i];
 	}
+	/* NULL termination enforced by above calloc */
+
 	members = i;
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = new_members;

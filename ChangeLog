@@ -1,3 +1,11 @@
+2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/groupio.c (merge_group_entries): Do not allocate more than
+	necessary (sizeof char* instead of char).
+	Thanks for Tomáš Mráz (alioth#313962)
+	* lib/groupio.c (merge_group_entries): Document that new_members
+	is correctly NULL terminated. (alioth:#313940)
+
 2013-08-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* Changelog: Update documentation of 2013-07-28  mancha entry.
@@ -48,13 +56,13 @@
 
 2013-07-29  Brad Hubbard  <badone-guest@alioth.debian.org>
 
-        * lib/groupio.c: add newline char when two lines
-          are concatenated
-	  Closes: alioth#313942
+	* lib/groupio.c: add newline char when two lines
+	are concatenated
+	Closes: alioth#313942
 	* lib/groupio.c: fix uninitialised memory in
-          merge_group_entries causes segfault in useradd by changing
-	  a call to malloc to a call to calloc
-	  Closes: alioth:#313940
+	merge_group_entries causes segfault in useradd by changing
+	a call to malloc to a call to calloc
+	Closes: alioth:#313940
 
 2013-07-28  Guido Trentalancia  <guido@trentalancia.com>
 
