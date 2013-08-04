@@ -1,5 +1,11 @@
 2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/su.1.xml: With getopt, '-' does not need to be the last
+	option, but it is recommended for portability.
+	Closes https://bugs.launchpad.net/bugs/1100775
+
+2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS: Add NEWS entries.
 
 2013-08-04  Nicolas François  <nicolas.francois@centraliens.net>

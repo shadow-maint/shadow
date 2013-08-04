@@ -175,9 +175,11 @@
 	    the user logged in directly.
 	  </para>
 	  <para>
-	    When <option>-</option> is used, it must be specified as the last
-	    <command>su</command> option.
-	    The other forms (<option>-l</option> and <option>--login</option>)
+	    When <option>-</option> is used, it must be specified before any
+	    <option>username</option>.  For portability it is recommended
+	    to use it as last option, before any
+	    <option>username</option>.  The other forms
+	    (<option>-l</option> and <option>--login</option>)
 	    do not have this restriction.
 	  </para>
 	</listitem>
