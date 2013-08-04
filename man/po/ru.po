@@ -754,7 +754,7 @@ msgid ""
 "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option> <replaceable>ДОМАШНИЙ_КАТАЛОГ</"
+"<option>-d</option>, <option>--home-dir</option> <replaceable>ДОМАШНИЙ_КАТАЛОГ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><itemizedlist><listitem><para>

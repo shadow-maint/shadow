@@ -735,7 +735,7 @@ msgid ""
 "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>HJEMMEMAPPE</"
+"<option>-d</option>, <option>--home-dir</option><replaceable>HJEMMEMAPPE</"
 "replaceable>"
 
 #: usermod.8.xml:128(para)

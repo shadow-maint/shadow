@@ -740,7 +740,7 @@ msgid ""
 "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option> <replaceable>RÉP_PERSO</"
+"<option>-d</option>, <option>--home-dir</option> <replaceable>RÉP_PERSO</"
 "replaceable>"
 
 #: usermod.8.xml:128(para)

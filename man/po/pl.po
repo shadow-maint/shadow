@@ -370,7 +370,7 @@ msgstr "Cichy tryb pracy."
 #: chfn.1.xml:153(term) chage.1.xml:197(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
@@ -741,7 +741,7 @@ msgid ""
 "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home</option><replaceable>KAT_DOMOWY</"
+"<option>-d</option>, <option>--home-dir</option><replaceable>KAT_DOMOWY</"
 "replaceable>"
 
 #: usermod.8.xml:128(para)
@@ -7667,7 +7667,7 @@ msgstr ""
 #: gpasswd.1.xml:181(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
@@ -8403,7 +8403,7 @@ msgstr ""
 #: chfn.1.xml:125(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
@@ -8419,7 +8419,7 @@ msgstr ""
 #: chfn.1.xml:133(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
@@ -8437,7 +8437,7 @@ msgstr ""
 #: chfn.1.xml:145(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
@@ -8459,7 +8459,7 @@ msgstr "<option>-h</option>, <option>--help</option>"
 #: chfn.1.xml:174(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
 "<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
