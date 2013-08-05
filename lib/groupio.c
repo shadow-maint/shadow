@@ -329,7 +329,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	}
 
 	/* Concatenate the 2 lines */
-	new_line_len = strlen (gr1->line) + strlen (gr2->line) +2;
+	new_line_len = strlen (gr1->line) + strlen (gr2->line) +1;
 	new_line = (char *)malloc (new_line_len + 1);
 	if (NULL == new_line) {
 		errno = ENOMEM;

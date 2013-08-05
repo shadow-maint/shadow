@@ -1,5 +1,10 @@
 2013-08-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Revert change from 2013-07-29. The length of the
+	concatenated 2 lines was correct.
+
+2013-08-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: random() max value is 2^31-1 (same as RAND_MAX
 	on GNU). As it is not clear whether on some systems the max value
 	can exceed this number and whether some systems have max values
