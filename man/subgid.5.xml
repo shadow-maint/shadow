@@ -48,7 +48,7 @@
     <title>DESCRIPTION</title>
     <para>
       Each line in <filename>/etc/subgid</filename> contains
-      a user id and a range of suboridinate user ids that user
+      a user name and a range of subordinate group ids that user
       is allowed to use.
 
       This is specified with three fields delimited by colons
@@ -60,10 +60,10 @@
 	<para>login name</para>
       </listitem>
       <listitem>
-	<para>numerical subordinate user ID</para>
+	<para>numerical subordinate group ID</para>
       </listitem>
       <listitem>
-	<para>numerical subordinate user ID count</para>
+	<para>numerical subordinate group ID count</para>
       </listitem>
     </itemizedlist>
 
@@ -74,7 +74,7 @@
     </para>
 
     <para>
-      Multiple ranges may be specified per user ID.
+      Multiple ranges may be specified per user.
     </para>
 
   </refsect1>

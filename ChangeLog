@@ -1,5 +1,11 @@
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/subgid.5.xml: Fix typos.
+	* man/subuid.5.xml: Likewise.
+	* man/subgid.5.xml: Fix copy-paste errors from subuid.5.xml.
+
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newgidmap.1.xml: Remove copy-pasted NOTE.
 	* man/newuidmap.1.xml: Likewise.
 

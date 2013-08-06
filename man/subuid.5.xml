@@ -48,7 +48,7 @@
     <title>DESCRIPTION</title>
     <para>
       Each line in <filename>/etc/subuid</filename> contains
-      a user id and a range of suboridinate user ids that user
+      a user name and a range of subordinate user ids that user
       is allowed to use.
 
       This is specified with three fields delimited by colons
@@ -74,7 +74,7 @@
     </para>
 
     <para>
-      Multiple ranges may be specified per user ID.
+      Multiple ranges may be specified per user.
     </para>
 
   </refsect1>
