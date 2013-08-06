@@ -48,6 +48,8 @@
 	if (NULL == pw) {
 		return NULL;
 	}
+	/* The libc might define other fields. They won't be copied. */
+	memset (pw, 0, sizeof *pw);
 	pw->pw_uid = pwent->pw_uid;
 	pw->pw_gid = pwent->pw_gid;
 	pw->pw_name = strdup (pwent->pw_name);

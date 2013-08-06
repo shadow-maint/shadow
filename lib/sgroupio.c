@@ -51,6 +51,9 @@
 	if (NULL == sg) {
 		return NULL;
 	}
+	/* Do the same as the other _dup function, even if we know the
+	 * structure. */
+	memset (sg, 0, sizeof *sg);
 	sg->sg_name = strdup (sgent->sg_name);
 	if (NULL == sg->sg_name) {
 		free (sg);

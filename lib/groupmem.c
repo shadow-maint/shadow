@@ -48,6 +48,8 @@
 	if (NULL == gr) {
 		return NULL;
 	}
+	/* The libc might define other fields. They won't be copied. */
+	memset (gr, 0, sizeof *gr);
 	gr->gr_gid = grent->gr_gid;
 	gr->gr_name = strdup (grent->gr_name);
 	if (NULL == gr->gr_name) {

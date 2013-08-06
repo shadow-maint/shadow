@@ -1,3 +1,13 @@
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Fix Debian bug #675824
+	* lib/groupmem.c (__gr_dup): Support libc which define other
+	fields in struct group.
+	* lib/pwmem.c: Likewise for struct passwd.
+	* lib/shadowmem.c: Likewise for struct spwd.
+	* lib/sgroupio.c: Apply same logic, even if this structure is
+	defined internally.
+
 2013-08-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/groupio.c: Revert change from 2013-07-29. The length of the

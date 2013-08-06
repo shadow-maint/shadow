@@ -49,6 +49,8 @@
 	if (NULL == sp) {
 		return NULL;
 	}
+	/* The libc might define other fields. They won't be copied. */
+	memset (sp, 0, sizeof *sp);
 	sp->sp_lstchg = spent->sp_lstchg;
 	sp->sp_min    = spent->sp_min;
 	sp->sp_max    = spent->sp_max;
