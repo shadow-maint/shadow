@@ -1,5 +1,10 @@
 2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/usermod.8.xml: Fix typos and wording.
+	* man/usermod.8.xml: Add references to subgid(5) and subuid(5).
+
+2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_sub_gids.c: Fix wording: secondary ->
 	subordinate.
 	* libmisc/find_new_sub_uids.c: Likewise.

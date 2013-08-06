@@ -396,7 +396,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Add a range of subordinate uids to the users account. 
+	    Add a range of subordinate uids to the user's account. 
 	  </para>
 	  <para>
 	    This option may be specified multiple times to add multiple ranges to a users account.
@@ -415,12 +415,12 @@
 	</term>
 	<listitem>
 	  <para>
-	    Remove a range of subordinate uids from the users account.
+	    Remove a range of subordinate uids from the user's account.
 	  </para>
 	  <para>
 	    This option may be specified multiple times to remove multiple ranges to a users account.
-	    When both <option>--del-sub-uids</option> and <option>--add-sub-uids</option> are specified
-	    remove of all subordinate uid ranges happens before any subordinate uid ranges are added.
+	    When both <option>--del-sub-uids</option> and <option>--add-sub-uids</option> are specified,
+	    the removal of all subordinate uid ranges happens before any subordinate uid range is added.
 	  </para>
 	  <para>
 	     No checks will be performed with regard to
@@ -436,7 +436,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Add a range of subordinate gids to the users account.
+	    Add a range of subordinate gids to the user's account.
 	  </para>
 	  <para>
 	    This option may be specified multiple times to add multiple ranges to a users account.
@@ -455,12 +455,12 @@
 	</term>
 	<listitem>
 	  <para>
-	    Remove a range of subordinate gids from the users account.
+	    Remove a range of subordinate gids from the user's account.
 	  </para>
 	  <para>
 	    This option may be specified multiple times to remove multiple ranges to a users account.
-	    When both <option>--del-sub-gids</option> and <option>--add-sub-gids</option> are specified
-	    remove of all subordinate gid ranges happens before any subordinate gid ranges are added.
+	    When both <option>--del-sub-gids</option> and <option>--add-sub-gids</option> are specified,
+	    the removal of all subordinate gid ranges happens before any subordinate gid range is added.
 	  </para>
 	  <para>
 	     No checks will be performed with regard to
@@ -587,6 +587,12 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
