@@ -1,3 +1,8 @@
+2013-08-07  Mike Frysinger  <vapier@gentoo.org>
+
+	* configure.in: Check at configure time whether libc supports
+	ruserok (support dropped by newer C libraries).
+
 2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/usermod.8.xml: Fix typos and wording.
