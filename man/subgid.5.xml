@@ -68,9 +68,9 @@
     </itemizedlist>
 
     <para>
-      This file specifies the group IDs to be that each user may use
-      with the <command>newgidmap</command> command that ordinary users can use to
-      configure gid mapping in a user namespace.
+      This file specifies the group IDs that ordinary users can use, with
+      the <command>newgidmap</command> command, to configure gid mapping
+      in a user namespace.
     </para>
 
     <para>

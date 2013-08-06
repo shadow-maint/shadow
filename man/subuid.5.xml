@@ -68,9 +68,9 @@
     </itemizedlist>
 
     <para>
-      This file specifies the user IDs to be that each user may use
-      with the <command>newuidmap</command> command that ordinary users can use to
-      configure uid mapping in a user namespace.
+      This file specifies the user IDs that ordinary users can use, with
+      the <command>newuidmap</command> command, to configure uid mapping
+      in a user namespace.
     </para>
 
     <para>
