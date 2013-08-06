@@ -1,5 +1,10 @@
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newgidmap.1.xml: Remove copy-pasted NOTE.
+	* man/newuidmap.1.xml: Likewise.
+
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/subordinateio.c: Remove unused variables.
 
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>

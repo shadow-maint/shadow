@@ -95,21 +95,6 @@
     </variablelist>
   </refsect1>
 
-  <refsect1 id='note'>
-    <title>NOTE</title>
-    <para>
-      The only restriction placed on the login shell is that the command
-      name must be listed in <filename>/etc/shells</filename>, unless the
-      invoker is the superuser, and then any value may be added. An
-      account with a restricted login shell may not change her login shell.
-      For this reason, placing <filename>/bin/rsh</filename> in
-      <filename>/etc/shells</filename> is discouraged since accidentally
-      changing to a restricted shell would prevent the user from ever
-      changing her login shell back to its original value.
-    </para>
-  </refsect1>
-
-
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
