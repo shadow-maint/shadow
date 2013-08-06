@@ -119,7 +119,7 @@
       <varlistentry>
 	<term><filename>/etc/subgid</filename></term>
 	<listitem>
-	  <para>List of users subordinate user IDs.</para>
+	  <para>List of users subordinate group IDs.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

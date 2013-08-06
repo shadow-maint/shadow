@@ -285,7 +285,7 @@ static void fail_exit (int code)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking subodinate user file",
+			              "unlocking subordinate user file",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
 #endif
@@ -298,7 +298,7 @@ static void fail_exit (int code)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking subodinate group file",
+			              "unlocking subordinate group file",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
 #endif

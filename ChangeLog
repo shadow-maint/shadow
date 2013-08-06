@@ -1,5 +1,15 @@
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/SUB_GID_COUNT.xml: Fix typo.
+	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise.
+	* man/login.defs.d/SUB_UID_COUNT.xml: Fix copy-paste issue from
+	SUB_GID_COUNT.
+	* man/newgidmap.1.xml: Fix Typo.
+	* src/useradd.c: Fix typos.
+	* lib/subordinateio.c: Fix typos.
+
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Fix Debian bug #675824
 	* lib/groupmem.c (__gr_dup): Support libc which define other
 	fields in struct group.

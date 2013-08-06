@@ -231,7 +231,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 	if ((count == 0) || (max <= min))
 		goto fail;
 
-	/* Sort by range than by owner */
+	/* Sort by range then by owner */
 	commonio_sort (db, subordinate_range_cmp);
 	commonio_rewind(db);
 
@@ -275,7 +275,7 @@ static int add_range(struct commonio_db *db,
 	if (have_range(db, owner, start, count))
 		return 1;
 
-	/* Oterwise append the range */
+	/* Otherwise append the range */
 	return commonio_append(db, &range);
 }
 

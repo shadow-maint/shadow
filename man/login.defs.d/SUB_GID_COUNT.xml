@@ -38,7 +38,7 @@
       new user.
     </para>
     <para>
-      The default values for <option>SUB_GID_MAN</option>,
+      The default values for <option>SUB_GID_MAX</option>,
       <option>SUB_GID_MIN</option>, <option>SUB_GID_COUNT</option>
       are respectively 100000, 600100000 and 10000.
     </para>
