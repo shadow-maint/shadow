@@ -144,9 +144,6 @@ static const bool range_exists(struct commonio_db *db, const char *owner)
 	const struct subordinate_range *range;
 	commonio_rewind(db);
 	while ((range = commonio_next(db)) != NULL) {
-		unsigned long first = range->start;
-		unsigned long last = first + range->count - 1;
-
 		if (0 == strcmp(range->owner, owner))
 			return true;
 	}

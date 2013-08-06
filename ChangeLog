@@ -1,5 +1,9 @@
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/subordinateio.c: Remove unused variables.
+
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/SUB_GID_COUNT.xml: Fix typo.
 	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise.
 	* man/login.defs.d/SUB_UID_COUNT.xml: Fix copy-paste issue from
