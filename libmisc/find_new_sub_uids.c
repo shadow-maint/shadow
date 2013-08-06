@@ -77,9 +77,9 @@ int find_new_sub_uids (const char *owner,
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == (uid_t)-1) {
 		fprintf (stderr,
-		         _("%s: Can't get unique secondary UID range\n"),
+		         _("%s: Can't get unique subordinate UID range\n"),
 		         Prog);
-		SYSLOG ((LOG_WARN, "no more available secondary UIDs on the system"));
+		SYSLOG ((LOG_WARN, "no more available subordinate UIDs on the system"));
 		return -1;
 	}
 	*range_start = start;

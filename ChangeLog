@@ -1,3 +1,9 @@
+2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/find_new_sub_gids.c: Fix wording: secondary ->
+	subordinate.
+	* libmisc/find_new_sub_uids.c: Likewise.
+
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/find_new_sub_gids.c: Remove duplicate check (duplicate

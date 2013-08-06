@@ -77,9 +77,9 @@ int find_new_sub_gids (const char *owner,
 	start = sub_gid_find_free_range(min, max, count);
 	if (start == (gid_t)-1) {
 		fprintf (stderr,
-		         _("%s: Can't get unique secondary GID range\n"),
+		         _("%s: Can't get unique subordinate GID range\n"),
 		         Prog);
-		SYSLOG ((LOG_WARN, "no more available secondary GIDs on the system"));
+		SYSLOG ((LOG_WARN, "no more available subordinate GIDs on the system"));
 		return -1;
 	}
 	*range_start = start;
