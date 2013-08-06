@@ -74,12 +74,6 @@ int find_new_sub_uids (const char *owner,
 		return 0;
 	}
 
-	if (max < (min + count)) {
-		(void) fprintf (stderr,
-				_("%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu)\n"),
-			Prog, min, max);
-		return -1;
-	}
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == (uid_t)-1) {
 		fprintf (stderr,

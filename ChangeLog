@@ -1,5 +1,11 @@
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_sub_gids.c: Remove duplicate check (duplicate
+	at least in its intent).
+	* libmisc/find_new_sub_uids.c: Likewise.
+
+2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Fix typos.
 
 2013-08-06  Nicolas François  <nicolas.francois@centraliens.net>

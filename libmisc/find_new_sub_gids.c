@@ -74,12 +74,6 @@ int find_new_sub_gids (const char *owner,
 		return 0;
 	}
 
-	if (max < (min + count)) {
-		(void) fprintf (stderr,
-				_("%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu)\n"),
-			Prog, min, max);
-		return -1;
-	}
 	start = sub_gid_find_free_range(min, max, count);
 	if (start == (gid_t)-1) {
 		fprintf (stderr,
