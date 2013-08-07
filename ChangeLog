@@ -1,3 +1,8 @@
+2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/utmp.c: Add include files needed for getaddrinfo().
+	See Alioth#314271
+
 2013-08-07  Mike Frysinger  <vapier@gentoo.org>
 
 	* configure.in: Check at configure time whether libc supports
