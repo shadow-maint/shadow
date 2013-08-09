@@ -1,3 +1,7 @@
+2013-08-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/salt.c: Remove unused variable.
+
 2013-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/utmp.c: Add include files needed for getaddrinfo().

@@ -124,7 +124,6 @@ static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds
 	if (NULL == prefered_rounds) {
 		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
 		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
-		double rand_rounds;
 
 		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			return "";
