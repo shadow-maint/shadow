@@ -212,6 +212,18 @@
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subgid</filename></term>
+	<listitem>
+	  <para>Per user subordinate group IDs.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subuid</filename></term>
+	<listitem>
+	  <para>Per user subordinate user IDs.</para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
@@ -319,6 +331,14 @@
       <citerefentry>
 	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
+      <phrase condition="subids">
+	<citerefentry>
+	  <refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+	<citerefentry>
+	  <refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,

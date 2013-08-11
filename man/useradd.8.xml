@@ -37,6 +37,8 @@
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
+<!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
@@ -679,6 +681,8 @@
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
+      &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->
+      &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
       &TCB_AUTH_GROUP;
@@ -727,6 +731,18 @@
 	<term><filename>/etc/skel/</filename></term>
 	<listitem>
 	  <para>Directory containing default files.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subgid</filename></term>
+	<listitem>
+	  <para>Per user subordinate group IDs.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subuid</filename></term>
+	<listitem>
+	  <para>Per user subordinate user IDs.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -837,6 +853,14 @@
       <citerefentry>
 	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
+      <phrase condition="subids">
+	<citerefentry>
+	  <refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+	<citerefentry>
+	  <refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,

@@ -1,5 +1,25 @@
 2013-08-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newusers.8.xml: Include documentation of SUB_GID_MIN,
+	SUB_GID_MAX, SUB_GID_COUNT, SUB_UID_MIN, SUB_UID_MAX,
+	SUB_UID_COUNT.
+	* man/useradd.8.xml: Likewise.
+	* man/usermod.8.xml: Likewise.
+	* man/newusers.8.xml: Document usage of /etc/subgid /etc/subuid.
+	* man/useradd.8.xml: Likewise.
+	* man/userdel.8.xml: Likewise.
+	* man/usermod.8.xml: Likewise.
+	* man/newusers.8.xml: Add references to subgid(5) and subuid(5).
+	* man/useradd.8.xml: Likewise.
+	* man/userdel.8.xml: Likewise.
+	* man/subgid.5.xml: Sort references alphabetically.
+	* man/subuid.5.xml: Likewise.
+	* man/subgid.5.xml: Add references to newusers(8), useradd(8),
+	userdel(8), usermod(8), user_namespaces(7).
+	* man/subuid.5.xml: Likewise.
+
+2013-08-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newgidmap.1.xml: Sort references alphabetically.
 	* man/newuidmap.1.xml: Likewise.
 

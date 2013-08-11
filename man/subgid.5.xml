@@ -101,20 +101,32 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
-	<refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
 	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>newuidmap</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>newgidmap</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
+	<refentrytitle>newuidmap</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
+      <citerefentry>
+	<refentrytitle>user_namespaces</refentrytitle><manvolnum>7</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
 </refentry>

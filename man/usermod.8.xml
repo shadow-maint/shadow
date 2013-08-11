@@ -32,6 +32,8 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
+<!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
 <!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!-- SHADOW-CONFIG-HERE -->
@@ -517,6 +519,8 @@
     <variablelist>
       &MAIL_DIR; <!-- documents also MAIL_FILE -->
       &MAX_MEMBERS_PER_GROUP;
+      &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->
+      &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->
       &TCB_SYMLINKS;
       &USE_TCB;
     </variablelist>
@@ -553,6 +557,18 @@
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
 	  <para>Secure user account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subgid</filename></term>
+	<listitem>
+	  <para>Per user subordinate group IDs.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="subids">
+	<term><filename>/etc/subuid</filename></term>
+	<listitem>
+	  <para>Per user subordinate user IDs.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
