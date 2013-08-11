@@ -28,6 +28,8 @@
 
 #include <config.h>
 
+#ifdef ENABLE_SUBIDS
+
 #include <assert.h>
 #include <stdio.h>
 #include <errno.h>
@@ -86,4 +88,7 @@ int find_new_sub_gids (const char *owner,
 	*range_count = count;
 	return 0;
 }
+#else				/* !ENABLE_SUBIDS */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* !ENABLE_SUBIDS */
 

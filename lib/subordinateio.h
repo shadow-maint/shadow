@@ -5,6 +5,10 @@
 #ifndef _SUBORDINATEIO_H
 #define _SUBORDINATEIO_H
 
+#include <config.h>
+
+#ifdef ENABLE_SUBIDS
+
 #include <sys/types.h>
 
 extern int sub_uid_close(void);
@@ -34,5 +38,6 @@ extern int sub_gid_unlock (void);
 extern int sub_gid_add (const char *owner, gid_t start, unsigned long count);
 extern int sub_gid_remove (const char *owner, gid_t start, unsigned long count);
 extern uid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count);
+#endif				/* ENABLE_SUBIDS */
 
 #endif

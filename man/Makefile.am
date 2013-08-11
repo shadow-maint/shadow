@@ -30,9 +30,7 @@ man_MANS = \
 	man1/login.1 \
 	man5/login.defs.5 \
 	man8/logoutd.8 \
-	man1/newgidmap.1 \
 	man1/newgrp.1 \
-	man1/newuidmap.1 \
 	man8/newusers.8 \
 	man8/nologin.8 \
 	man1/passwd.1 \
@@ -45,8 +43,6 @@ man_MANS = \
 	man5/shadow.5 \
 	man1/su.1 \
 	man5/suauth.5 \
-	man5/subgid.5 \
-	man5/subuid.5 \
 	man8/useradd.8 \
 	man8/userdel.8 \
 	man8/usermod.8 \
@@ -60,6 +56,16 @@ man_nopam = \
 
 if !USE_PAM
 man_MANS += $(man_nopam)
+endif
+
+man_subids = \
+	man1/newgidmap.1 \
+	man1/newuidmap.1 \
+	man5/subgid.5 \
+	man5/subuid.5
+
+if ENABLE_SUBIDS
+man_MANS += $(man_subids)
 endif
 
 man_XMANS = \
@@ -185,6 +191,10 @@ EXTRA_DIST = \
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)
+endif
+
+if !ENABLE_SUBIDS
+EXTRA_DIST += $(man_subids)
 endif
 
 generate_mans.deps: *.xml

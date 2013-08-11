@@ -41,7 +41,9 @@
 #include <fcntl.h>
 #include "defines.h"
 #include "prototypes.h"
+#ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
+#endif				/* ENABLE_SUBIDS */
 
 #ifdef __linux__
 static int check_status (const char *name, const char *sname, uid_t uid);
@@ -128,9 +130,12 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 				if (   (ruid == (unsigned long) uid)
 				    || (euid == (unsigned long) uid)
 				    || (suid == (unsigned long) uid)
+#ifdef ENABLE_SUBIDS
 				    || have_sub_uids(name, ruid, 1)
 				    || have_sub_uids(name, euid, 1)
-				    || have_sub_uids(name, suid, 1)) {
+				    || have_sub_uids(name, suid, 1)
+#endif				/* ENABLE_SUBIDS */
+				   ) {
 					(void) fclose (sfile);
 					return 1;
 				}
@@ -158,7 +163,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 	struct stat sbroot;
 	struct stat sbroot_process;
 
+#ifdef ENABLE_SUBIDS
 	sub_uid_open (O_RDONLY);
+#endif				/* ENABLE_SUBIDS */
 
 	proc = opendir ("/proc");
 	if (proc == NULL) {
@@ -238,7 +245,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 	}
 
 	(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
 	sub_uid_close();
+#endif				/* ENABLE_SUBIDS */
 	return 0;
 }
 #endif				/* __linux__ */

@@ -240,6 +240,13 @@ AC_ARG_ENABLE(utmpx,
 	[enable_utmpx="no"]
 )
 
+AC_ARG_ENABLE(subordinate-ids,
+	[AC_HELP_STRING([--enable-subordinate-ids],
+		[support subordinate ids @<:@default=yes@:>@])],
+	[enable_subids="${enableval}"],
+	[enable_subids="yes"]
+)
+
 AC_ARG_WITH(audit, 
 	[AC_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
 	[with_audit=$withval], [with_audit=maybe])
@@ -323,6 +330,15 @@ if test "$enable_man" = "yes"; then
 		[DocBook XSL Stylesheets >= 1.70.1], [], enable_man=no)
 fi
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test "x$enable_man" != "xno")
+
+if test "$enable_subids" = "yes"; then
+	dnl
+	dnl FIXME: check if 32 bit UIDs/GIDs are supported by libc
+	dnl
+	AC_DEFINE(ENABLE_SUBIDS, 1, [Define to support the subordinate IDs.])
+	enable_subids="yes"
+fi
+AM_CONDITIONAL(ENABLE_SUBIDS, test "x$enable_subids" != "xno")
 
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
@@ -649,4 +665,5 @@ echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"
 echo "	nscd support:			$with_nscd"
+echo "	subordinate IDs support:	$enable_subids"
 echo

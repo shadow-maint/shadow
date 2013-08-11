@@ -24,8 +24,10 @@ INCLUDES = \
 
 bin_PROGRAMS   = groups login su
 sbin_PROGRAMS  = nologin
-ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd \
-	newgidmap newuidmap
+ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+if ENABLE_SUBIDS
+ubin_PROGRAMS += newgidmap newuidmap
+endif
 usbin_PROGRAMS = \
 	chgpasswd \
 	chpasswd \

@@ -3,6 +3,9 @@
  */
 
 #include <config.h>
+
+#ifdef ENABLE_SUBIDS
+
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
@@ -507,3 +510,7 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 	start = find_free_range (&subordinate_gid_db, min, max, count);
 	return start == ULONG_MAX ? (gid_t) -1 : start;
 }
+#else				/* !ENABLE_SUBIDS */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* !ENABLE_SUBIDS */
+

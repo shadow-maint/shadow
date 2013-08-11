@@ -65,7 +65,9 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+#ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
+#endif				/* ENABLE_SUBIDS */
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
@@ -122,20 +124,22 @@ static bool is_shadow_pwd;
 static bool is_shadow_grp;
 static bool sgr_locked = false;
 #endif
+#ifdef ENABLE_SUBIDS
 static bool is_sub_uid = false;
 static bool is_sub_gid = false;
-static bool pw_locked = false;
-static bool gr_locked = false;
-static bool spw_locked = false;
 static bool sub_uid_locked = false;
 static bool sub_gid_locked = false;
-static char **user_groups;	/* NULL-terminated list */
-static long sys_ngroups;
-static bool do_grp_update = false;	/* group files need to be updated */
 static uid_t sub_uid_start;	/* New subordinate uid range */
 static unsigned long sub_uid_count;
 static gid_t sub_gid_start;	/* New subordinate gid range */
 static unsigned long sub_gid_count;
+#endif				/* ENABLE_SUBIDS */
+static bool pw_locked = false;
+static bool gr_locked = false;
+static bool spw_locked = false;
+static char **user_groups;	/* NULL-terminated list */
+static long sys_ngroups;
+static bool do_grp_update = false;	/* group files need to be updated */
 
 static bool
     bflg = false,		/* new default root of home directory */
@@ -177,8 +181,10 @@ static bool home_added = false;
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
 #define E_SE_UPDATE	14	/* can't update SELinux user mapping */
+#ifdef ENABLE_SUBIDS
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
+#endif				/* ENABLE_SUBIDS */
 
 #define DGROUP			"GROUP="
 #define DHOME			"HOME="
@@ -279,6 +285,7 @@ static void fail_exit (int code)
 		}
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
 		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
@@ -305,6 +312,7 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, Prog,
@@ -1415,6 +1423,7 @@ static void close_files (void)
 		}
 #endif
 	}
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid  && (sub_uid_close () == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
@@ -1427,6 +1436,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 		fail_exit (E_SUB_GID_UPDATE);
 	}
+#endif				/* ENABLE_SUBIDS */
 	if (is_shadow_pwd) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
@@ -1481,6 +1491,7 @@ static void close_files (void)
 		sgr_locked = false;
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
@@ -1509,6 +1520,7 @@ static void close_files (void)
 		}
 		sub_gid_locked = false;
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 /*
@@ -1563,6 +1575,7 @@ static void open_files (void)
 		}
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_lock () == 0) {
 			fprintf (stderr,
@@ -1593,6 +1606,7 @@ static void open_files (void)
 			fail_exit (E_SUB_GID_UPDATE);
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 static void open_shadow (void)
@@ -1839,6 +1853,7 @@ static void usr_update (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid &&
 	    (sub_uid_add(user_name, sub_uid_start, sub_uid_count) == 0)) {
 		fprintf (stderr,
@@ -1853,6 +1868,7 @@ static void usr_update (void)
 		         Prog, sub_uid_dbname ());
 		fail_exit (E_SUB_GID_UPDATE);
 	}
+#endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, Prog,
@@ -2005,8 +2021,10 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
+#ifdef ENABLE_SUBIDS
 	is_sub_uid = sub_uid_file_present ();
 	is_sub_gid = sub_gid_file_present ();
+#endif				/* ENABLE_SUBIDS */
 
 	get_defaults ();
 
@@ -2157,6 +2175,7 @@ int main (int argc, char **argv)
 		grp_add ();
 	}
 
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (find_new_sub_uids(user_name, &sub_uid_start, &sub_uid_count) < 0) {
 			fprintf (stderr,
@@ -2173,6 +2192,8 @@ int main (int argc, char **argv)
 			fail_exit(E_SUB_GID_UPDATE);
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
+
 	usr_update ();
 
 	if (mflg) {

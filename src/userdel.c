@@ -65,7 +65,9 @@
 #endif				/* WITH_TCB */
 /*@-exitarg@*/
 #include "exitcodes.h"
+#ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
+#endif				/* ENABLE_SUBIDS */
 
 /*
  * exit status values
@@ -76,8 +78,10 @@
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't remove home directory */
 #define E_SE_UPDATE	14	/* can't update SELinux user mapping */
+#ifdef ENABLE_SUBIDS
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
+#endif				/* ENABLE_SUBIDS */
 
 /*
  * Global variables
@@ -99,13 +103,15 @@ static bool is_shadow_pwd;
 static bool is_shadow_grp;
 static bool sgr_locked = false;
 #endif				/* SHADOWGRP */
-static bool is_sub_uid;
-static bool is_sub_gid;
 static bool pw_locked  = false;
 static bool gr_locked   = false;
 static bool spw_locked  = false;
+#ifdef ENABLE_SUBIDS
+static bool is_sub_uid;
+static bool is_sub_gid;
 static bool sub_uid_locked = false;
 static bool sub_gid_locked = false;
+#endif				/* ENABLE_SUBIDS */
 
 /* local function prototypes */
 static void usage (int status);
@@ -445,6 +451,7 @@ static void close_files (void)
 	}
 #endif				/* SHADOWGRP */
 
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_close () == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
@@ -472,6 +479,7 @@ static void close_files (void)
 		}
 		sub_gid_locked = false;
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 /*
@@ -509,6 +517,7 @@ static void fail_exit (int code)
 		}
 	}
 #endif				/* SHADOWGRP */
+#ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
 		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
@@ -523,6 +532,7 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_USER, Prog,
@@ -644,6 +654,7 @@ static void open_files (void)
 		}
 	}
 #endif				/* SHADOWGRP */
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_lock () == 0) {
 			fprintf (stderr,
@@ -696,6 +707,7 @@ static void open_files (void)
 			fail_exit (E_SUB_GID_UPDATE);
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 /*
@@ -720,6 +732,7 @@ static void update_user (void)
 		         Prog, user_name, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid && sub_uid_remove(user_name, 0, ULONG_MAX) == 0) {
 		fprintf (stderr,
 			_("%s: cannot remove entry %lu from %s\n"),
@@ -732,6 +745,7 @@ static void update_user (void)
 			Prog, (unsigned long)user_id, sub_gid_dbname ());
 		fail_exit (E_SUB_GID_UPDATE);
 	}
+#endif				/* ENABLE_SUBIDS */
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_USER, Prog,
 	              "deleting user entries",
@@ -1079,8 +1093,10 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif				/* SHADOWGRP */
+#ifdef ENABLE_SUBIDS
 	is_sub_uid = sub_uid_file_present ();
 	is_sub_gid = sub_gid_file_present ();
+#endif				/* ENABLE_SUBIDS */
 
 	/*
 	 * Start with a quick check to see if the user exists.

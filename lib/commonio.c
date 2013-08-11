@@ -1113,6 +1113,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	return 1;
 }
 
+#ifdef ENABLE_SUBIDS
 int commonio_append (struct commonio_db *db, const void *eptr)
 {
 	struct commonio_entry *p;
@@ -1143,6 +1144,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 	db->changed = true;
 	return 1;
 }
+#endif				/* ENABLE_SUBIDS */
 
 void commonio_del_entry (struct commonio_db *db, const struct commonio_entry *p)
 {

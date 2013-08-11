@@ -53,6 +53,16 @@ if !USE_PAM
 man_MANS += $(man_nopam)
 endif
 
+man_subids = \
+	man1/newgidmap.1 \
+	man1/newuidmap.1 \
+	man5/subgid.5 \
+	man5/subuid.5
+
+if ENABLE_SUBIDS
+man_MANS += $(man_subids)
+endif
+
 EXTRA_DIST = \
 	$(man_MANS) \
 	man1/id.1 \
@@ -60,6 +70,10 @@ EXTRA_DIST = \
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)
+endif
+
+if !ENABLE_SUBIDS
+EXTRA_DIST += $(man_subids)
 endif
 
 include ../generate_translations.mak

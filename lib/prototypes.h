@@ -42,6 +42,8 @@
 #ifndef _PROTOTYPES_H
 #define _PROTOTYPES_H
 
+#include <config.h>
+
 #include <sys/stat.h>
 #ifdef USE_UTMPX
 #include <utmpx.h>
@@ -149,6 +151,7 @@ extern int find_new_uid (bool sys_user,
                          uid_t *uid,
                          /*@null@*/uid_t const *preferred_uid);
 
+#ifdef ENABLE_SUBIDS
 /* find_new_sub_gids.c */
 extern int find_new_sub_gids (const char *owner,
 			      gid_t *range_start, unsigned long *range_count);
@@ -156,6 +159,7 @@ extern int find_new_sub_gids (const char *owner,
 /* find_new_sub_uids.c */
 extern int find_new_sub_uids (const char *owner,
 			      uid_t *range_start, unsigned long *range_count);
+#endif				/* ENABLE_SUBIDS */
 
 
 /* get_gid.c */

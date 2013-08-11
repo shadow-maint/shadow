@@ -65,7 +65,9 @@
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
+#ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
+#endif				/* ENABLE_SUBIDS */
 #include "chkname.h"
 
 /*
@@ -83,8 +85,6 @@ static long sha_rounds = 5000;
 #endif				/* USE_SHA_CRYPT */
 #endif				/* !USE_PAM */
 
-static bool is_sub_uid = false;
-static bool is_sub_gid = false;
 static bool is_shadow;
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
@@ -93,8 +93,12 @@ static bool sgr_locked = false;
 static bool pw_locked = false;
 static bool gr_locked = false;
 static bool spw_locked = false;
+#ifdef ENABLE_SUBIDS
+static bool is_sub_uid = false;
+static bool is_sub_gid = false;
 static bool sub_uid_locked = false;
 static bool sub_gid_locked = false;
+#endif				/* ENABLE_SUBIDS */
 
 /* local function prototypes */
 static void usage (int status);
@@ -183,6 +187,7 @@ static void fail_exit (int code)
 		}
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
 		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
@@ -197,6 +202,7 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 
 	exit (code);
 }
@@ -778,6 +784,7 @@ static void open_files (void)
 		sgr_locked = true;
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_lock () == 0) {
 			fprintf (stderr,
@@ -796,6 +803,7 @@ static void open_files (void)
 		}
 		sub_gid_locked = true;
 	}
+#endif				/* ENABLE_SUBIDS */
 
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
@@ -815,6 +823,7 @@ static void open_files (void)
 		fail_exit (EXIT_FAILURE);
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_open (O_RDWR) == 0) {
 			fprintf (stderr,
@@ -831,6 +840,7 @@ static void open_files (void)
 			fail_exit (EXIT_FAILURE);
 		}
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 /*
@@ -875,6 +885,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (EXIT_FAILURE);
 	}
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid  && (sub_uid_close () == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
@@ -887,6 +898,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 		fail_exit (EXIT_FAILURE);
 	}
+#endif				/* ENABLE_SUBIDS */
 
 	if (gr_unlock () == 0) {
 		fprintf (stderr,
@@ -916,6 +928,7 @@ static void close_files (void)
 		sgr_locked = false;
 	}
 #endif
+#ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
 		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
@@ -932,6 +945,7 @@ static void close_files (void)
 		}
 		sub_gid_locked = false;
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 int main (int argc, char **argv)
@@ -973,8 +987,10 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
+#ifdef ENABLE_SUBIDS
 	is_sub_uid = sub_uid_file_present ();
 	is_sub_gid = sub_gid_file_present ();
+#endif				/* ENABLE_SUBIDS */
 
 	open_files ();
 
@@ -1156,6 +1172,7 @@ int main (int argc, char **argv)
 			continue;
 		}
 
+#ifdef ENABLE_SUBIDS
 		/*
 		 * Add subordinate uids if the user does not have them.
 		 */
@@ -1175,7 +1192,7 @@ int main (int argc, char **argv)
 				errors++;
 			}
 		}
-	
+
 		/*
 		 * Add subordinate gids if the user does not have them.
 		 */
@@ -1195,6 +1212,7 @@ int main (int argc, char **argv)
 				errors++;
 			}
 		}
+#endif				/* ENABLE_SUBIDS */
 	}
 
 	/*

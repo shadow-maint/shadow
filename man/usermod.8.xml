@@ -389,7 +389,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="subids">
 	<term>
 	  <option>-v</option>, <option>--add-sub-uids</option>
 	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
@@ -408,7 +408,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="subids">
 	<term>
 	  <option>-V</option>, <option>--del-sub-uids</option>
 	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
@@ -429,7 +429,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="subids">
 	<term>
 	  <option>-w</option>, <option>--add-sub-gids</option>
 	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
@@ -448,7 +448,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="subids">
 	<term>
 	  <option>-W</option>, <option>--del-sub-gids</option>
 	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
@@ -588,12 +588,14 @@
       <citerefentry>
 	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
-      <citerefentry>
-	<refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
+      <phrase condition="subids">
+	<citerefentry>
+	  <refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+	<citerefentry>
+	  <refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
+	</citerefentry>,
+      </phrase>
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,

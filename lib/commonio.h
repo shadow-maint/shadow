@@ -146,7 +146,9 @@ extern int commonio_lock_nowait (struct commonio_db *, bool log);
 extern int commonio_open (struct commonio_db *, int);
 extern /*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);
+#ifdef ENABLE_SUBIDS
 extern int commonio_append (struct commonio_db *, const void *);
+#endif				/* ENABLE_SUBIDS */
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
 extern /*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *);

@@ -20,6 +20,12 @@ else
 SHA_CRYPT_COND=no_sha_crypt
 endif
 
+if ENABLE_SUBIDS
+SUBIDS_COND=subids
+else
+SUBIDS_COND=no_subids
+endif
+
 if ENABLE_REGENERATE_MAN
 %.xml-config: %.xml
 	if grep -q SHADOW-CONFIG-HERE $<; then \
@@ -29,7 +35,7 @@ if ENABLE_REGENERATE_MAN
 	fi
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND)" \
 	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
 	            --param "man.output.in.separate.dir" "1" \
