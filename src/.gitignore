@@ -19,6 +19,8 @@
 /login
 /logoutd
 /newgrp
+/newgidmap
+/newuidmap
 /newusers
 /nologin
 /passwd
