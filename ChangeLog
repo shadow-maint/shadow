@@ -1,5 +1,10 @@
 2013-08-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newgidmap.1.xml: Sort references alphabetically.
+	* man/newuidmap.1.xml: Likewise.
+
+2013-08-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: Add configure options --enable-subordinate-ids /
 	--disable-subordinate-ids. Enabled by default.
 	* lib/prototypes.h: Include <config.h> before using its macros.
