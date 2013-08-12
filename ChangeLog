@@ -1,3 +1,9 @@
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/subordinateio.c: Fix handling of boundaries.
+	* libmisc/find_new_sub_uids.c: Likewise.
+	* libmisc/find_new_sub_gids.c: Likewise.
+
 2013-08-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/subordinateio.c: Fix removal of ranges. The database needs

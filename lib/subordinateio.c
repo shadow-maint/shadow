@@ -228,7 +228,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 	unsigned long low, high;
 
 	/* When given invalid parameters fail */
-	if ((count == 0) || (max <= min))
+	if ((count == 0) || (max < min))
 		goto fail;
 
 	/* Sort by range then by owner */
@@ -246,7 +246,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 			high = max;
 
 		/* Is the hole before this range large enough? */
-		if ((high > low) && (((high - low) + 1) >= count))
+		if ((high > low) && ((high - low) >= count))
 			return low;
 
 		/* Compute the low end of the next hole */

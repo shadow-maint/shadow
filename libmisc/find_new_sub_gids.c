@@ -60,7 +60,7 @@ int find_new_sub_gids (const char *owner,
 	max = getdef_ulong ("SUB_GID_MAX", 600100000UL);
 	count = getdef_ulong ("SUB_GID_COUNT", 10000);
 
-	if (min >= max || count >= max || (min + count) >= max) {
+	if (min > max || count >= max || (min + count - 1) > max) {
 		(void) fprintf (stderr,
 				_("%s: Invalid configuration: SUB_GID_MIN (%lu),"
 				  " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
