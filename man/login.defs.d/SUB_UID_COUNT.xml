@@ -32,8 +32,9 @@
   <term><option>SUB_UID_COUNT</option> (number)</term>
   <listitem>
     <para>
-      The commands <command>useradd</command> and <command>newusers</command>
-      allocate <option>SUB_UID_COUNT</option> unused user IDs from the range
+      If <filename>/etc/subuid</filename> exists, the commands
+      <command>useradd</command> and <command>newusers</command> allocate
+      <option>SUB_UID_COUNT</option> unused user IDs from the range
       <option>SUB_UID_MIN</option> to <option>SUB_UID_MAX</option> for each
       new user.
     </para>

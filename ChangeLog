@@ -1,5 +1,11 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/SUB_GID_COUNT.xml: Document that the behavior
+	of useradd and newusers depends on the existence of /etc/subgid.
+	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise for /etc/subuid.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Change message in case of find_new_sub_uids /
 	find_new_sub_gids failure. This complements the messages already
 	provided by these APIs.
