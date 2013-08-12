@@ -2179,16 +2179,16 @@ int main (int argc, char **argv)
 	if (is_sub_uid) {
 		if (find_new_sub_uids(user_name, &sub_uid_start, &sub_uid_count) < 0) {
 			fprintf (stderr,
-				_("%s: can't find subordinate user range\n"),
-				Prog);
+			         _("%s: can't create subordinate user IDs\n"),
+			         Prog);
 			fail_exit(E_SUB_UID_UPDATE);
 		}
 	}
 	if (is_sub_gid) {
 		if (find_new_sub_gids(user_name, &sub_gid_start, &sub_gid_count) < 0) {
 			fprintf (stderr,
-				_("%s: can't find subordinate group range\n"),
-				Prog);
+			         _("%s: can't create subordinate group IDs\n"),
+			         Prog);
 			fail_exit(E_SUB_GID_UPDATE);
 		}
 	}

@@ -1,5 +1,11 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Change message in case of find_new_sub_uids /
+	find_new_sub_gids failure. This complements the messages already
+	provided by these APIs.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/subordinateio.c: Fix handling of boundaries.
 	* libmisc/find_new_sub_uids.c: Likewise.
 	* libmisc/find_new_sub_gids.c: Likewise.
