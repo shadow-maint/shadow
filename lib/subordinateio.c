@@ -319,12 +319,14 @@ static int remove_range(struct commonio_db *db,
 			range->count = (last - range->start) + 1;
 
 			ent->changed = true;
+			db->changed = true;
 		}
 		/* Is just the end of the entry removed? */
 		else if ((start > first) && (end >= last)) {
 			range->count = (start - range->start) + 1;
 
 			ent->changed = true;
+			db->changed = true;
 		}
 		/* The middle of the range is removed */
 		else {
@@ -339,6 +341,7 @@ static int remove_range(struct commonio_db *db,
 			range->count = (start - range->start) + 1;
 
 			ent->changed = true;
+			db->changed = true;
 		}
 	}
 
