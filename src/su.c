@@ -372,6 +372,12 @@ static void prepare_pam_close_session (void)
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
 		(void) kill (-pid_child, caught);
+
+		(void) signal (SIGALRM, kill_child);
+		(void) alarm (2);
+
+		(void) wait (&status);
+		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
 
 	ret = pam_close_session (pamh, 0);
@@ -383,14 +389,6 @@ static void prepare_pam_close_session (void)
 
 	(void) pam_setcred (pamh, PAM_DELETE_CRED);
 	(void) pam_end (pamh, PAM_SUCCESS);
-
-	if (0 != caught) {
-		(void) signal (SIGALRM, kill_child);
-		(void) alarm (2);
-
-		(void) wait (&status);
-		(void) fputs (_(" ...terminated.\n"), stderr);
-	}
 
 	exit ((0 != WIFEXITED (status)) ? WEXITSTATUS (status)
 	                                : WTERMSIG (status) + 128);

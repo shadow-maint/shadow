@@ -1,5 +1,12 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Terminate the child (if needed) before closing the PAM
+	session. This is probably more correct, and avoid reporting
+	termination from signals possibly sent by PAM modules (e.g. former
+	versions of pam_systemd). Debian#670132
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: When a SIGTSTP is caught, reset caught to 0. There is
 	no need to kill the child in such case after su is resumed. This
 	remove the "Session terminated, terminating shell...
