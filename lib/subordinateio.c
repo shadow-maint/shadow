@@ -309,39 +309,43 @@ static int remove_range(struct commonio_db *db,
 		if ((end < first) || (start > last))
 			continue;
 
-		/* Is entry completely contained in the range to remove? */
-		if ((start <= first) && (end >= last)) {
-			commonio_del_entry (db, ent);
-		} 
-		/* Is just the start of the entry removed? */
-		else if ((start <= first) && (end < last)) {
-			range->start = end + 1;
-			range->count = (last - range->start) + 1;
+		if (start <= first) {
+			if (end >= last) {
+				/* entry completely contained in the
+				 * range to remove */
+				commonio_del_entry (db, ent);
+			} else {
+				/* Remove only the start of the entry */
+				range->start = end + 1;
+				range->count = (last - range->start) + 1;
 
-			ent->changed = true;
-			db->changed = true;
-		}
-		/* Is just the end of the entry removed? */
-		else if ((start > first) && (end >= last)) {
-			range->count = start - range->start;
+				ent->changed = true;
+				db->changed = true;
+			}
+		} else {
+			if (end >= last) {
+				/* Remove only the end of the entry */
+				range->count = start - range->start;
 
-			ent->changed = true;
-			db->changed = true;
-		}
-		/* The middle of the range is removed */
-		else {
-			struct subordinate_range tail;
-			tail.owner = range->owner;
-			tail.start = end + 1;
-			tail.count = (last - tail.start) + 1;
+				ent->changed = true;
+				db->changed = true;
+			} else {
+				/* Remove the middle of the range
+				 * This requires to create a new range */
+				struct subordinate_range tail;
+				tail.owner = range->owner;
+				tail.start = end + 1;
+				tail.count = (last - tail.start) + 1;
 
-			if (!commonio_append(db, &tail))
-				return 0;
+				if (commonio_append(db, &tail) == 0) {
+					return 0;
+				}
 
-			range->count = start - range->start;
+				range->count = start - range->start;
 
-			ent->changed = true;
-			db->changed = true;
+				ent->changed = true;
+				db->changed = true;
+			}
 		}
 	}
 
