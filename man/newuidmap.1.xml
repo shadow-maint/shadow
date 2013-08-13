@@ -113,6 +113,15 @@
 	</varlistentry>
       </variablelist>
     </para>
+
+    <para>
+      <command>newuidmap</command> verifies that the caller is the owner
+      of the process indicated by <option>pid</option> and that for each
+      of the above sets, each of the UIDs in the range [loweruid,
+      loweruid+count] is allowed to the caller according to
+      <filename>/etc/subuid</filename> before setting
+      <filename>/proc/[pid]/uid_map</filename>.
+    </para>
   </refsect1>
 
   <refsect1 id='options'>

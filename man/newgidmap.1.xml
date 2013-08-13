@@ -116,6 +116,16 @@
 	</varlistentry>
       </variablelist>
     </para>
+
+    <para>
+      <command>newgidmap</command> verifies that the caller is the owner
+      of the process indicated by <option>pid</option> and that for each
+      of the above sets, each of the GIDs in the range [lowergid,
+      lowergid+count] is allowed to the caller according to
+      <filename>/etc/subgid</filename> before setting
+      <filename>/proc/[pid]/gid_map</filename>.
+    </para>
+
   </refsect1>
 
   <refsect1 id='options'>

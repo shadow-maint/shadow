@@ -1,5 +1,11 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newgidmap.1.xml: Document the checks performed before
+	setting the mapping in /proc.
+	* man/newuidmap.1.xml: Likewise.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/idmapping.h: Document what the upper and lower fields
 	are in struct map_range.
 	* man/newgidmap.1.xml: Document when the gid, gidlower and count
