@@ -311,10 +311,14 @@ static int remove_range(struct commonio_db *db,
 
 		if (start <= first) {
 			if (end >= last) {
+				/* to be removed: [start,      end]
+				 * range:           [first, last] */
 				/* entry completely contained in the
 				 * range to remove */
 				commonio_del_entry (db, ent);
 			} else {
+				/* to be removed: [start,  end]
+				 * range:           [first, last] */
 				/* Remove only the start of the entry */
 				range->start = end + 1;
 				range->count = (last - range->start) + 1;
@@ -324,12 +328,16 @@ static int remove_range(struct commonio_db *db,
 			}
 		} else {
 			if (end >= last) {
+				/* to be removed:   [start,  end]
+				 * range:         [first, last] */
 				/* Remove only the end of the entry */
 				range->count = start - range->start;
 
 				ent->changed = true;
 				db->changed = true;
 			} else {
+				/* to be removed:   [start, end]
+				 * range:         [first,    last] */
 				/* Remove the middle of the range
 				 * This requires to create a new range */
 				struct subordinate_range tail;

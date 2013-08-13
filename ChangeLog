@@ -1,6 +1,7 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/subordinateio.c: Avoid dead branches.
+	* lib/subordinateio.c: Add schematics with ranges to help reviews.
 
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
