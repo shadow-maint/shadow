@@ -347,6 +347,7 @@ static void prepare_pam_close_session (void)
 			if (   ((pid_t)-1 == pid)
 			    && (EINTR == errno)
 			    && (SIGTSTP == caught)) {
+				caught = 0;
 				/* Except for SIGTSTP, which request to
 				 * stop the child.
 				 * We will SIGSTOP ourself on the next

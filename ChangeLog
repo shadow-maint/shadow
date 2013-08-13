@@ -1,5 +1,12 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: When a SIGTSTP is caught, reset caught to 0. There is
+	no need to kill the child in such case after su is resumed. This
+	remove the "Session terminated, terminating shell...
+	...terminated." messages in such case.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newgidmap.1.xml: Document the checks performed before
 	setting the mapping in /proc.
 	* man/newuidmap.1.xml: Likewise.
