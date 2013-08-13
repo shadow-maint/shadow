@@ -279,35 +279,40 @@ static int add_range(struct commonio_db *db,
 	return commonio_append(db, &range);
 }
 
-static int remove_range(struct commonio_db *db,
-	const char *owner, unsigned long start, unsigned long count)
+static int remove_range (struct commonio_db *db,
+                         const char *owner,
+                         unsigned long start, unsigned long count)
 {
 	struct commonio_entry *ent;
 	unsigned long end;
 
-	if (count == 0)
+	if (count == 0) {
 		return 1;
+	}
 
 	end = start + count - 1;
-	for (ent = db->head; ent; ent = ent->next) {
+	for (ent = db->head; NULL != ent; ent = ent->next) {
 		struct subordinate_range *range = ent->eptr;
 		unsigned long first;
 		unsigned long last;
 
 		/* Skip unparsed entries */
-		if (!range)
+		if (NULL == range) {
 			continue;
+		}
 
 		first = range->start;
 		last = first + range->count - 1;
 
 		/* Skip entries with a different owner */
-		if (0 != strcmp(range->owner, owner))
+		if (0 != strcmp (range->owner, owner)) {
 			continue;
+		}
 
 		/* Skip entries outside of the range to remove */
-		if ((end < first) || (start > last))
+		if ((end < first) || (start > last)) {
 			continue;
+		}
 
 		if (start <= first) {
 			if (end >= last) {
@@ -345,7 +350,7 @@ static int remove_range(struct commonio_db *db,
 				tail.start = end + 1;
 				tail.count = (last - tail.start) + 1;
 
-				if (commonio_append(db, &tail) == 0) {
+				if (commonio_append (db, &tail) == 0) {
 					return 0;
 				}
 

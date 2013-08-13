@@ -2,6 +2,9 @@
 
 	* lib/subordinateio.c: Avoid dead branches.
 	* lib/subordinateio.c: Add schematics with ranges to help reviews.
+	* lib/subordinateio.c: Avoid implicit conversion of pointers and
+	integers to booleans.
+	* lib/subordinateio.c: Added brackets.
 
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
