@@ -1,5 +1,11 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c (shadow_random): Use long instead of size_t.
+	Compatibility with size_t is easier to check since it's used for
+	smaller numbers (salt size).
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupmem.c: Add splint annotations. The added memset makes
 	splint think data was allocated.
 	* lib/pwmem.c: Likewise.

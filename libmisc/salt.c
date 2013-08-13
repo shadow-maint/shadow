@@ -23,7 +23,7 @@
 static void seedRNG (void);
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #ifdef USE_SHA_CRYPT
-static size_t shadow_random (size_t min, size_t max);
+static long shadow_random (long min, long max);
 static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds);
 #endif /* USE_SHA_CRYPT */
 
@@ -90,15 +90,15 @@ static void seedRNG (void)
  *
  * It favors slightly the higher numbers.
  */
-static size_t shadow_random (size_t min, size_t max)
+static long shadow_random (long min, long max)
 {
 	double drand;
-	size_t ret;
+	long ret;
 	seedRNG ();
 	drand = (double) (max - min + 1) * random () / RANDOM_MAX;
 	/* On systems were this is not random() range is lower, we favor
 	 * higher numbers of salt. */
-	ret = (size_t) (max + 1 - drand);
+	ret = (long) (max + 1 - drand);
 	/* And we catch limits, and use the highest number */
 	if ((ret < min) || (ret > max)) {
 		ret = max;
@@ -234,11 +234,11 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		strcat(result, SHA_salt_rounds((int *)arg));
-		salt_len = shadow_random (8, 16);
+		salt_len = (size_t) shadow_random (8, 16);
 	} else if (0 == strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		strcat(result, SHA_salt_rounds((int *)arg));
-		salt_len = shadow_random (8, 16);
+		salt_len = (size_t) shadow_random (8, 16);
 #endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {
 		fprintf (stderr,
