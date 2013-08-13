@@ -323,7 +323,7 @@ static int remove_range(struct commonio_db *db,
 		}
 		/* Is just the end of the entry removed? */
 		else if ((start > first) && (end >= last)) {
-			range->count = (start - range->start) + 1;
+			range->count = start - range->start;
 
 			ent->changed = true;
 			db->changed = true;
@@ -338,7 +338,7 @@ static int remove_range(struct commonio_db *db,
 			if (!commonio_append(db, &tail))
 				return 0;
 
-			range->count = (start - range->start) + 1;
+			range->count = start - range->start;
 
 			ent->changed = true;
 			db->changed = true;
