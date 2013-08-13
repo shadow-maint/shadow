@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2013, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,12 +58,16 @@
 	sp->sp_inact  = spent->sp_inact;
 	sp->sp_expire = spent->sp_expire;
 	sp->sp_flag   = spent->sp_flag;
+	/*@-mustfreeonly@*/
 	sp->sp_namp   = strdup (spent->sp_namp);
+	/*@=mustfreeonly@*/
 	if (NULL == sp->sp_namp) {
 		free(sp);
 		return NULL;
 	}
+	/*@-mustfreeonly@*/
 	sp->sp_pwdp = strdup (spent->sp_pwdp);
+	/*@=mustfreeonly@*/
 	if (NULL == sp->sp_pwdp) {
 		free(sp->sp_namp);
 		free(sp);

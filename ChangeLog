@@ -1,5 +1,13 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupmem.c: Add splint annotations. The added memset makes
+	splint think data was allocated.
+	* lib/pwmem.c: Likewise.
+	* lib/sgroupio.c: Likewise.
+	* lib/shadowmem.c: Likewise.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/SUB_GID_COUNT.xml: Document that the behavior
 	of useradd and newusers depends on the existence of /etc/subgid.
 	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise for /etc/subuid.

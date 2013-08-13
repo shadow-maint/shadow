@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2013, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,25 +52,33 @@
 	memset (pw, 0, sizeof *pw);
 	pw->pw_uid = pwent->pw_uid;
 	pw->pw_gid = pwent->pw_gid;
+	/*@-mustfreeonly@*/
 	pw->pw_name = strdup (pwent->pw_name);
+	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_name) {
 		free(pw);
 		return NULL;
 	}
+	/*@-mustfreeonly@*/
 	pw->pw_passwd = strdup (pwent->pw_passwd);
+	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_passwd) {
 		free(pw->pw_name);
 		free(pw);
 		return NULL;
 	}
+	/*@-mustfreeonly@*/
 	pw->pw_gecos = strdup (pwent->pw_gecos);
+	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_gecos) {
 		free(pw->pw_passwd);
 		free(pw->pw_name);
 		free(pw);
 		return NULL;
 	}
+	/*@-mustfreeonly@*/
 	pw->pw_dir = strdup (pwent->pw_dir);
+	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_dir) {
 		free(pw->pw_gecos);
 		free(pw->pw_passwd);
@@ -78,7 +86,9 @@
 		free(pw);
 		return NULL;
 	}
+	/*@-mustfreeonly@*/
 	pw->pw_shell = strdup (pwent->pw_shell);
+	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_shell) {
 		free(pw->pw_dir);
 		free(pw->pw_gecos);
