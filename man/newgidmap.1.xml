@@ -87,6 +87,35 @@
       command line arguments and the gids allowed in <filename>/etc/subgid</filename>.
     </para>
 
+    <para>
+      After the pid argument, <command>newgidmap</command> expects sets of 3 integers:
+      <variablelist>
+	<varlistentry>
+	  <term>gid</term>
+	  <listitem>
+	    <para>
+	      Begining of the range of GIDs inside the user namespace.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>lowergid</term>
+	  <listitem>
+	    <para>
+	      Begining of the range of GIDs outside the user namespace.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>count</term>
+	  <listitem>
+	    <para>
+	      Length of the ranges (both inside and outside the user namespace).
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
 
   <refsect1 id='options'>

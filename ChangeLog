@@ -1,5 +1,13 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/idmapping.h: Document what the upper and lower fields
+	are in struct map_range.
+	* man/newgidmap.1.xml: Document when the gid, gidlower and count
+	argument are.
+	* man/newuidmap.1.xml: Likewise for uid, uidlower and count.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c (shadow_random): Use long instead of size_t.
 	Compatibility with size_t is easier to check since it's used for
 	smaller numbers (salt size).

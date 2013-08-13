@@ -31,9 +31,9 @@
 #define _IDMAPPING_H_
 
 struct map_range {
-	unsigned long upper;
-	unsigned long lower;
-	unsigned long count;
+	unsigned long upper; /* first ID inside the namespace */
+	unsigned long lower; /* first ID outside the namespace */
+	unsigned long count; /* Length of the inside and outside ranges */
 };
 
 extern struct map_range *get_map_ranges(int ranges, int argc, char **argv);
