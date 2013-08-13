@@ -1,5 +1,10 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Fail in case arguments are provided after options.
+	Debian#677812
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/subordinateio.c: Fix count for ranges truncated in
 	remove_range().
 
