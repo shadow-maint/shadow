@@ -1,5 +1,10 @@
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Check if sizeof uid_t and gid_t is larger than 32
+	bit to support subordinate IDs.
+
+2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/subordinateio.c: Avoid dead branches.
 	* lib/subordinateio.c: Add schematics with ranges to help reviews.
 	* lib/subordinateio.c: Avoid implicit conversion of pointers and
