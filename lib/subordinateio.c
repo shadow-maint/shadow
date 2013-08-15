@@ -125,23 +125,6 @@ static /*@observer@*/ /*@null*/const struct subordinate_range *subordinate_next(
 	commonio_next (db);
 }
 
-static bool is_range_free(struct commonio_db *db, unsigned long start,
-			  unsigned long count)
-{
-	const struct subordinate_range *range;
-	unsigned long end = start + count - 1;
-
-	commonio_rewind(db);
-	while ((range = commonio_next(db)) != NULL) {
-		unsigned long first = range->start;
-		unsigned long last = first + range->count - 1;
-
-		if ((end >= first) && (start <= last))
-			return false;
-	}
-	return true;
-}
-
 static const bool range_exists(struct commonio_db *db, const char *owner)
 {
 	const struct subordinate_range *range;
@@ -406,11 +389,6 @@ int sub_uid_open (int mode)
 	return commonio_open (&subordinate_uid_db, mode);
 }
 
-bool is_sub_uid_range_free(uid_t start, unsigned long count)
-{
-	return is_range_free (&subordinate_uid_db, start, count);
-}
-
 bool sub_uid_assigned(const char *owner)
 {
 	return range_exists (&subordinate_uid_db, owner);
@@ -487,11 +465,6 @@ int sub_gid_lock (void)
 int sub_gid_open (int mode)
 {
 	return commonio_open (&subordinate_gid_db, mode);
-}
-
-bool is_sub_gid_range_free(gid_t start, unsigned long count)
-{
-	return is_range_free (&subordinate_gid_db, start, count);
 }
 
 bool have_sub_gids(const char *owner, gid_t start, unsigned long count)

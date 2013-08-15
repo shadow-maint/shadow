@@ -12,7 +12,6 @@
 #include <sys/types.h>
 
 extern int sub_uid_close(void);
-extern bool is_sub_uid_range_free(uid_t start, unsigned long count);
 extern bool have_sub_uids(const char *owner, uid_t start, unsigned long count);
 extern bool sub_uid_file_present (void);
 extern bool sub_uid_assigned(const char *owner);
@@ -26,7 +25,6 @@ extern int sub_uid_remove (const char *owner, uid_t start, unsigned long count);
 extern uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count);
 
 extern int sub_gid_close(void);
-extern bool is_sub_gid_range_free(gid_t start, unsigned long count);
 extern bool have_sub_gids(const char *owner, gid_t start, unsigned long count);
 extern bool sub_gid_file_present (void);
 extern bool sub_gid_assigned(const char *owner);

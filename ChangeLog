@@ -1,3 +1,15 @@
+2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/find_new_sub_gids.c: Remove dead code.
+	find_new_sub_gids() is always called with *range_count set to 0.
+	It's more difficult to keep the subordinate GIDs and UIDs
+	synchronized, than for the user's UID/GId because the count of
+	subordinate IDs may differ.
+	* libmisc/find_new_sub_uids.c: Likewise.
+	* lib/subordinateio.h, lib/subordinateio.c: Remove APIs that are
+	no more needed: is_sub_uid_range_free(), is_sub_gid_range_free(),
+	is_range_free().
+
 2013-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* configure.in: Check if sizeof uid_t and gid_t is larger than 32

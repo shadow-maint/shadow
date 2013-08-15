@@ -68,14 +68,6 @@ int find_new_sub_uids (const char *owner,
 		return -1;
 	}
 
-	/* Is there a preferred range that works? */
-	if ((*range_count != 0) &&
-	    (*range_start >= min) &&
-	    (((*range_start) + (*range_count) - 1) <= max) &&
-	    is_sub_uid_range_free(*range_start, *range_count)) {
-		return 0;
-	}
-
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == (uid_t)-1) {
 		fprintf (stderr,

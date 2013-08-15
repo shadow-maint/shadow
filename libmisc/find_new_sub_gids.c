@@ -68,14 +68,6 @@ int find_new_sub_gids (const char *owner,
 		return -1;
 	}
 
-	/* Is there a preferred range that works? */
-	if ((*range_count != 0) &&
-	    (*range_start >= min) &&
-	    (((*range_start) + (*range_count) - 1) <= max) &&
-	    is_sub_gid_range_free(*range_start, *range_count)) {
-		return 0;
-	}
-
 	start = sub_gid_find_free_range(min, max, count);
 	if (start == (gid_t)-1) {
 		fprintf (stderr,
