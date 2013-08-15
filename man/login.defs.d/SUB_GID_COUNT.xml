@@ -33,14 +33,15 @@
   <listitem>
     <para>
       If <filename>/etc/subuid</filename> exists, the commands
-      <command>useradd</command> and <command>newusers</command> allocate
+      <command>useradd</command> and <command>newusers</command> (unless
+      the user already have subordinate group IDs) allocate
       <option>SUB_GID_COUNT</option> unused group IDs from the range
       <option>SUB_GID_MIN</option> to <option>SUB_GID_MAX</option> for each
       new user.
     </para>
     <para>
-      The default values for <option>SUB_GID_MAX</option>,
-      <option>SUB_GID_MIN</option>, <option>SUB_GID_COUNT</option>
+      The default values for <option>SUB_GID_MIN</option>,
+      <option>SUB_GID_MAX</option>, <option>SUB_GID_COUNT</option>
       are respectively 100000, 600100000 and 10000.
     </para>
   </listitem>

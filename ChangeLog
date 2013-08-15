@@ -1,5 +1,13 @@
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/SUB_GID_COUNT.xml: Document newusers behavior
+	when the user already have subordinate group IDs.
+	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise.
+	* man/login.defs.d/SUB_GID_COUNT.xml: Fix typo (MAX<->MIN).
+	* man/login.defs.d/SUB_UID_COUNT.xml: Likewise.
+
+2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Check early if /etc/subuid (/etc/subgid) exists
 	when option -v/-V (-w/-W) are provided. 
 
