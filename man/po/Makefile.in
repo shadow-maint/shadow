@@ -73,7 +73,6 @@ all-no:
 # $(POFILES) has been designed to not touch files that don't need to be
 # changed.
 stamp-po: $(srcdir)/$(DOMAIN).pot
-	echo "TOTO 0"
 	@test ! -f $(srcdir)/$(DOMAIN).pot || { \
 	  echo "touch stamp-po" && \
 	  echo timestamp > stamp-poT && \
