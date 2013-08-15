@@ -225,8 +225,11 @@ static unsigned long find_free_range(struct commonio_db *db,
 
 		/* Find the top end of the hole before this range */
 		high = first;
-		if (high > max)
-			high = max;
+
+		/* Don't allocate IDs after max (included) */
+		if (high > max + 1) {
+			high = max + 1;
+		}
 
 		/* Is the hole before this range large enough? */
 		if ((high > low) && ((high - low) >= count))

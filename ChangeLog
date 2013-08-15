@@ -1,5 +1,10 @@
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/subordinateio.c (find_free_range): max is allowed for new
+	ranges.
+
+2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_sub_gids.c: Remove dead code.
 	find_new_sub_gids() is always called with *range_count set to 0.
 	It's more difficult to keep the subordinate GIDs and UIDs
