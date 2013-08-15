@@ -1,3 +1,8 @@
+2013-08-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/idmapping.c: Include <stdio.h> needed for fprintf() and
+	stderr.
+
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/SUB_GID_COUNT.xml: Document newusers behavior
