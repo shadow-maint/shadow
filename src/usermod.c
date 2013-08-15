@@ -1361,6 +1361,21 @@ static void process_flags (int argc, char **argv)
 		exit (E_UID_IN_USE);
 	}
 
+	if (   (vflg || Vflg)
+	    && !is_sub_uid) {
+		fprintf (stderr,
+		         _("%s: %s does not exist, you cannot use the flags %s or %s\n"),
+		         Prog, sub_uid_dbname (), "-v", "-V");
+		exit (E_USAGE);
+	}
+
+	if (   (wflg || Wflg)
+	    && !is_sub_gid) {
+		fprintf (stderr,
+		         _("%s: %s does not exist, you cannot use the flags %s or %s\n"),
+		         Prog, sub_gid_dbname (), "-w", "-W");
+		exit (E_USAGE);
+	}
 }
 
 /*
@@ -1463,12 +1478,12 @@ static void close_files (void)
 
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
-		if (!is_sub_uid || (sub_uid_close () == 0)) {
+		if (sub_uid_close () == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 			fail_exit (E_SUB_UID_UPDATE);
 		}
-		if (!is_sub_uid || (sub_uid_unlock () == 0)) {
+		if (sub_uid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -1476,12 +1491,12 @@ static void close_files (void)
 		sub_uid_locked = false;
 	}
 	if (wflg || Wflg) {
-		if (!is_sub_gid || (sub_gid_close () == 0)) {
+		if (sub_gid_close () == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);
 		}
-		if (!is_sub_gid || (sub_gid_unlock () == 0)) {
+		if (sub_gid_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -1571,14 +1586,14 @@ static void open_files (void)
 	}
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
-		if (!is_sub_uid || (sub_uid_lock () == 0)) {
+		if (sub_uid_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sub_uid_dbname ());
 			fail_exit (E_SUB_UID_UPDATE);
 		}
 		sub_uid_locked = true;
-		if (!is_sub_uid || (sub_uid_open (O_RDWR) == 0)) {
+		if (sub_uid_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_uid_dbname ());
@@ -1586,14 +1601,14 @@ static void open_files (void)
 		}
 	}
 	if (wflg || Wflg) {
-		if (!is_sub_gid || (sub_gid_lock () == 0)) {
+		if (sub_gid_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sub_gid_dbname ());
 			fail_exit (E_SUB_GID_UPDATE);
 		}
 		sub_gid_locked = true;
-		if (!is_sub_gid || (sub_gid_open (O_RDWR) == 0)) {
+		if (sub_gid_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_gid_dbname ());
