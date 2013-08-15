@@ -1,5 +1,10 @@
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Fix parse of ranges. The hyphen might be followed
+	by a negative integer.
+
+2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/subordinateio.c (find_free_range): max is allowed for new
 	ranges.
 

@@ -336,7 +336,7 @@ struct ulong_range
 static struct ulong_range getulong_range(const char *str)
 {
 	struct ulong_range result = { .first = ULONG_MAX, .last = 0 };
-	unsigned long long first, last;
+	long long first, last;
 	char *pos;
 
 	errno = 0;
@@ -346,7 +346,7 @@ static struct ulong_range getulong_range(const char *str)
 		goto out;
 
 	errno = 0;
-	last = strtoul(pos + 1, &pos, 10);
+	last = strtoll(pos + 1, &pos, 10);
 	if (('\0' != *pos ) || (ERANGE == errno) ||
 	    (last != (unsigned long int)last))
 		goto out;
