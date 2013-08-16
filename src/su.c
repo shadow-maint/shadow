@@ -63,9 +63,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
