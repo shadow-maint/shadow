@@ -1,3 +1,8 @@
+2013-08-15  Wolfgang Zarre  <lkdev@essax.com>
+
+	* src/su.c: Create a pseudo TTY to avoid character injection from
+	the child to the caller's TTY.
+
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/SUB_GID_COUNT.xml: Document newusers behavior

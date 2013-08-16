@@ -62,12 +62,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#ifndef USE_PAM
 #include <sys/ioctl.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#endif				/* !USE_PAM */
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
@@ -85,6 +83,7 @@ const char *Prog;
 static /*@observer@*/const char *caller_tty = NULL;	/* Name of tty SU is run from */
 static bool caller_is_root = false;
 static uid_t caller_uid;
+static bool have_tty = false;
 #ifndef USE_PAM
 static bool caller_on_console = false;
 #ifdef SU_ACCESS
@@ -106,10 +105,10 @@ static bool change_environment = true;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
+#endif
 static int caught = 0;
 /* PID of the child, in case it needs to be killed */
 static pid_t pid_child = 0;
-#endif
 
 /*
  * External identifiers
@@ -123,10 +122,9 @@ extern size_t newenvc; /* libmisc/env.c */
 static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
-#ifdef USE_PAM
 static RETSIGTYPE kill_child (int unused(s));
-static void prepare_pam_close_session (void);
-#else				/* !USE_PAM */
+static void handle_session (void);
+#ifndef USE_PAM
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
@@ -177,7 +175,7 @@ static bool iswheel (const char *username)
 	}
 	return is_on_list (grp->gr_mem, username);
 }
-#else				/* USE_PAM */
+#endif				/* USE_PAM */
 static RETSIGTYPE kill_child (int unused(s))
 {
 	if (0 != pid_child) {
@@ -189,7 +187,6 @@ static RETSIGTYPE kill_child (int unused(s))
 	}
 	exit (255);
 }
-#endif				/* USE_PAM */
 
 /* borrowed from GNU sh-utils' "su.c" */
 static bool restricted_shell (const char *shellname)
@@ -260,7 +257,6 @@ static void execve_shell (const char *shellname,
 	}
 }
 
-#ifdef USE_PAM
 /* Signal handler for parent process later */
 static void catch_signals (int sig)
 {
@@ -268,19 +264,108 @@ static void catch_signals (int sig)
 }
 
 /*
- * prepare_pam_close_session - Fork and wait for the child to close the session
+ * handle_session - Fork and handle the session
  *
- *	Only the child returns. The parent will wait for the child to
+ *	Only the child returns. The parent will handle the session
+ *	or if not a controlling terminal then wait for the child to
  *	terminate and exit.
  */
-static void prepare_pam_close_session (void)
+static void handle_session (void)
 {
 	sigset_t ourset;
 	int status;
 	int ret;
+	int fd_ptmx = -1;
+	int fd_pts = -1;
+	char *pts_name = NULL;	
+	struct termios termset_save;
+	struct termios termset_new;
+	fd_set inp_fds;
+	struct timeval sel_to;
+	char trbuf[BUFSIZ];
+	ssize_t bytes_r;
+	struct winsize winsz;
+	bool winsz_set = false;
+
+
+
+	if( isatty( 0) == 1) {
+		have_tty = true;
+
+		if( tcgetattr( STDIN_FILENO, &termset_save) == -1) {
+			fprintf( stderr, _("%s: Cannot get termios attributes\n"), Prog);
+			exit( 1);
+		}
+
+		if( ioctl( STDIN_FILENO, TIOCGWINSZ, &winsz) == -1 )
+			fprintf( stderr, _("%s: Cannot get window size\n"), Prog);
+		else
+			winsz_set = true;
+		
+		/*
+		 * Open and prepare pseudo terminal master
+		 */
+		if( (fd_ptmx = open( "/dev/ptmx", O_RDWR)) == -1) {
+			fprintf( stderr, _("%s: Cannot open pt master\n"), Prog);
+			exit( 1);
+		}
+
+		if( grantpt( fd_ptmx) == -1) {
+			fprintf( stderr, _("%s: Cannot grant pt master permissions\n"), Prog);
+			close( fd_ptmx);
+			exit( 1);
+		}
+		if( unlockpt( fd_ptmx) == -1) {
+			fprintf( stderr, _("%s: Cannot unlock pt master\n"), Prog);
+			close( fd_ptmx);
+			exit( 1);
+		}
+
+		if( (pts_name = ptsname( fd_ptmx)) == NULL) {
+			fprintf( stderr, _("%s: Cannot get pt slave name\n"), Prog);
+			close( fd_ptmx);
+			exit( 1);
+		}
+
+		if( (fd_pts = open( pts_name, O_RDWR )) == -1) {
+			fprintf( stderr, _("%s: Cannot open pt slave\n"), Prog);
+			close( fd_ptmx);
+			exit( 1);
+		}
+	}
+
+
 
 	pid_child = fork ();
 	if (pid_child == 0) {	/* child shell */
+
+		if( have_tty == true) {
+			close( fd_ptmx);
+			
+			if( tcsetattr( fd_pts, TCSANOW, &termset_save) == -1) {
+				fprintf( stderr, _("%s: Cannot set set termios attributes of sessiont\n"), Prog);
+				close( fd_pts);
+				exit (1);
+			}
+
+			if( winsz_set == true && ioctl( fd_pts, TIOCSWINSZ, &winsz) == -1)
+				fprintf( stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
+
+			dup2( fd_pts, STDIN_FILENO);
+			dup2( fd_pts, STDOUT_FILENO);
+			dup2( fd_pts, STDERR_FILENO);
+
+			if( STDIN_FILENO != fd_pts && STDOUT_FILENO != fd_pts
+					&& STDERR_FILENO != fd_pts)
+				close( fd_pts);
+
+			if( setsid() == -1)
+				fprintf( stderr, _("%s: Cannot set process group leader\n"), Prog);
+			else
+				if( ioctl( STDIN_FILENO, TIOCSCTTY, 1) == -1)
+					fprintf( stderr, _("%s: Cannot set controlling terminal\n"), Prog);
+
+		}
 		return; /* Only the child will return from pam_create_session */
 	} else if ((pid_t)-1 == pid_child) {
 		(void) fprintf (stderr,
@@ -310,18 +395,9 @@ static void prepare_pam_close_session (void)
 
 		if (   (sigaddset (&ourset, SIGTERM) != 0)
 		    || (sigaddset (&ourset, SIGALRM) != 0)
+		    || (sigaddset (&ourset, SIGWINCH) != 0)
 		    || (sigaction (SIGTERM, &action, NULL) != 0)
-		    || (   !doshell /* handle SIGINT (Ctrl-C), SIGQUIT
-		                     * (Ctrl-\), and SIGTSTP (Ctrl-Z)
-		                     * since the child will not control
-		                     * the tty.
-		                     */
-		        && (   (sigaddset (&ourset, SIGINT)  != 0)
-		            || (sigaddset (&ourset, SIGQUIT) != 0)
-		            || (sigaddset (&ourset, SIGTSTP) != 0)
-		            || (sigaction (SIGINT,  &action, NULL) != 0)
-		            || (sigaction (SIGQUIT, &action, NULL) != 0)
-		            || (sigaction (SIGTSTP,  &action, NULL) != 0)))
+		    || (sigaction (SIGWINCH, &action, NULL) != 0)
 		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
 			fprintf (stderr,
@@ -331,6 +407,13 @@ static void prepare_pam_close_session (void)
 		}
 	}
 
+	if( have_tty == true) {
+		/* Set RAW mode  */
+		termset_new = termset_save;
+		cfmakeraw( &termset_new);
+		tcsetattr( STDIN_FILENO, TCSANOW, &termset_new);
+	}
+
 	if (0 == caught) {
 		bool stop = true;
 
@@ -338,7 +421,10 @@ static void prepare_pam_close_session (void)
 			pid_t pid;
 			stop = true;
 
-			pid = waitpid (-1, &status, WUNTRACED);
+			if( have_tty == true)
+				pid = waitpid (-1, &status, WUNTRACED |WNOHANG);
+			else
+				pid = waitpid (-1, &status, WUNTRACED);
 
 			/* When interrupted by signal, the signal will be
 			 * forwarded to the child, and termination will be
@@ -355,7 +441,7 @@ static void prepare_pam_close_session (void)
 				 */
 				kill (pid_child, SIGSTOP);
 				stop = false;
-			} else if (   ((pid_t)-1 != pid)
+			} else if (   ((pid_t)-1 != pid && have_tty == false)
 			           && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
@@ -363,8 +449,66 @@ static void prepare_pam_close_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
+			} else if( pid == (pid_t)0 && have_tty == true) {
+				stop = false;
+
+				if( caught == SIGWINCH) {
+					caught = 0;
+					if( ioctl( STDIN_FILENO, TIOCGWINSZ, &winsz) != -1)
+						ioctl( fd_pts, TIOCSWINSZ, &winsz);
+				}
+
+	            FD_ZERO( &inp_fds);
+    	        FD_SET( STDIN_FILENO, &inp_fds);
+        	    FD_SET( fd_ptmx, &inp_fds);
+				sel_to = (struct timeval){ 0, 10000};
+				
+	            if( select( fd_ptmx + 1, &inp_fds, NULL, NULL, &sel_to) == -1) {
+					if( errno == EINTR)
+						continue;
+					stop = true;
+				}
+            	if( FD_ISSET( STDIN_FILENO, &inp_fds)) {
+                	bytes_r = read( STDIN_FILENO, trbuf, BUFSIZ);
+                	if(	bytes_r <= 0) {
+						if( errno == EINTR)
+							continue;
+						fprintf( stderr, _("%s: Failure in reading from stdin\r\n"), Prog);
+                    	stop = true;
+					}
+
+                	if( bytes_r > 0 && write( fd_ptmx, trbuf, bytes_r) != bytes_r) {
+						if( errno == EINTR || errno == EIO)
+							continue;						
+						fprintf( stderr, _("%s: Failure in writing to session\r\n"), Prog);
+						stop = true;
+					}
+            	}
+
+            	if( FD_ISSET( fd_ptmx, &inp_fds)) {
+                	bytes_r = read( fd_ptmx, trbuf, BUFSIZ);
+                	if( bytes_r <= 0) {
+						if( errno == EINTR || errno == EIO)
+							continue;
+						fprintf( stderr, _("%s: Failure in reading from session %d %ld\r\n"), Prog, errno, bytes_r);
+                    	stop = true;
+					}
+
+                	if( bytes_r > 0 && write( STDOUT_FILENO, trbuf, bytes_r) != bytes_r) {
+						fprintf( stderr, _("%s: Failure in writing to stdout\r\n"), Prog);
+						stop = true;
+					}
+            	}			
 			}
 		} while (!stop);
+	}
+
+
+	if( have_tty == true) {
+		close( fd_pts);
+		/* Reset RAW mode  */
+		if( tcsetattr( STDIN_FILENO, TCSANOW, &termset_save) == -1)
+			fprintf( stderr, _("%s: Cannot reset termios attributes\n"), Prog);
 	}
 
 	if (0 != caught) {
@@ -380,6 +524,7 @@ static void prepare_pam_close_session (void)
 		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
 
+#ifdef USE_PAM
 	ret = pam_close_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_close_session: %s",
@@ -389,12 +534,12 @@ static void prepare_pam_close_session (void)
 
 	(void) pam_setcred (pamh, PAM_DELETE_CRED);
 	(void) pam_end (pamh, PAM_SUCCESS);
+#endif				/* USE_PAM */
 
 	exit ((0 != WIFEXITED (status)) ? WEXITSTATUS (status)
 	                                : WTERMSIG (status) + 128);
 	/* Only the child returns. See above. */
 }
-#endif				/* USE_PAM */
 
 /*
  * usage - print command line syntax and exit
@@ -1056,12 +1201,12 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	prepare_pam_close_session ();
-
 	/* become the new user */
 	if (change_uid (pw) != 0) {
 		exit (1);
 	}
+
+	handle_session ();
 #else				/* !USE_PAM */
 	/* no limits if su from root (unless su must fake login's behavior) */
 	if (!caller_is_root || fakelogin) {
@@ -1071,39 +1216,12 @@ int main (int argc, char **argv)
 	if (setup_uid_gid (pw, caller_on_console) != 0) {
 		exit (1);
 	}
+
+	handle_session ();
 #endif				/* !USE_PAM */
 
+
 	set_environment (pw);
-
-	if (!doshell) {
-		/* There is no need for a controlling terminal.
-		 * This avoids the callee to inject commands on
-		 * the caller's tty. */
-		int err = -1;
-
-#ifdef USE_PAM
-		/* When PAM is used, we are on the child */
-		err = setsid ();
-#else
-		/* Otherwise, we cannot use setsid */
-		int fd = open ("/dev/tty", O_RDWR);
-
-		if (fd >= 0) {
-			err = ioctl (fd, TIOCNOTTY, (char *) 0);
-			(void) close (fd);
-		} else if (ENXIO == errno) {
-			/* There are no controlling terminal already */
-			err = 0;
-		}
-#endif				/* USE_PAM */
-
-		if (-1 == err) {
-			(void) fprintf (stderr,
-			                _("%s: Cannot drop the controlling terminal\n"),
-			                Prog);
-			exit (1);
-		}
-	}
 
 	/*
 	 * PAM_DATA_SILENT is not supported by some modules, and
