@@ -289,48 +289,48 @@ static void handle_session (void)
 
 
 
-	if( isatty( 0) == 1) {
+	if (isatty (0) == 1) {
 		have_tty = true;
 
-		if( tcgetattr( STDIN_FILENO, &termset_save) == -1) {
-			fprintf( stderr, _("%s: Cannot get termios attributes\n"), Prog);
-			exit( 1);
+		if (tcgetattr (STDIN_FILENO, &termset_save) == -1) {
+			fprintf (stderr, _("%s: Cannot get termios attributes\n"), Prog);
+			exit (1);
 		}
 
-		if( ioctl( STDIN_FILENO, TIOCGWINSZ, &winsz) == -1 )
-			fprintf( stderr, _("%s: Cannot get window size\n"), Prog);
+		if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) == -1 )
+			fprintf (stderr, _("%s: Cannot get window size\n"), Prog);
 		else
 			winsz_set = true;
 		
 		/*
 		 * Open and prepare pseudo terminal master
 		 */
-		if( (fd_ptmx = open( "/dev/ptmx", O_RDWR)) == -1) {
-			fprintf( stderr, _("%s: Cannot open pt master\n"), Prog);
-			exit( 1);
+		if ((fd_ptmx = open ("/dev/ptmx", O_RDWR)) == -1) {
+			fprintf (stderr, _("%s: Cannot open pt master\n"), Prog);
+			exit (1);
 		}
 
-		if( grantpt( fd_ptmx) == -1) {
-			fprintf( stderr, _("%s: Cannot grant pt master permissions\n"), Prog);
-			close( fd_ptmx);
-			exit( 1);
+		if (grantpt (fd_ptmx) == -1) {
+			fprintf (stderr, _("%s: Cannot grant pt master permissions\n"), Prog);
+			close (fd_ptmx);
+			exit (1);
 		}
-		if( unlockpt( fd_ptmx) == -1) {
-			fprintf( stderr, _("%s: Cannot unlock pt master\n"), Prog);
-			close( fd_ptmx);
-			exit( 1);
-		}
-
-		if( (pts_name = ptsname( fd_ptmx)) == NULL) {
-			fprintf( stderr, _("%s: Cannot get pt slave name\n"), Prog);
-			close( fd_ptmx);
-			exit( 1);
+		if (unlockpt (fd_ptmx) == -1) {
+			fprintf (stderr, _("%s: Cannot unlock pt master\n"), Prog);
+			close (fd_ptmx);
+			exit (1);
 		}
 
-		if( (fd_pts = open( pts_name, O_RDWR )) == -1) {
-			fprintf( stderr, _("%s: Cannot open pt slave\n"), Prog);
-			close( fd_ptmx);
-			exit( 1);
+		if ((pts_name = ptsname (fd_ptmx)) == NULL) {
+			fprintf (stderr, _("%s: Cannot get pt slave name\n"), Prog);
+			close (fd_ptmx);
+			exit (1);
+		}
+
+		if ((fd_pts = open (pts_name, O_RDWR )) == -1) {
+			fprintf (stderr, _("%s: Cannot open pt slave\n"), Prog);
+			close (fd_ptmx);
+			exit (1);
 		}
 	}
 
@@ -339,31 +339,31 @@ static void handle_session (void)
 	pid_child = fork ();
 	if (pid_child == 0) {	/* child shell */
 
-		if( have_tty == true) {
-			close( fd_ptmx);
+		if (have_tty == true) {
+			close (fd_ptmx);
 			
-			if( tcsetattr( fd_pts, TCSANOW, &termset_save) == -1) {
-				fprintf( stderr, _("%s: Cannot set set termios attributes of sessiont\n"), Prog);
-				close( fd_pts);
+			if (tcsetattr (fd_pts, TCSANOW, &termset_save) == -1) {
+				fprintf (stderr, _("%s: Cannot set set termios attributes of sessiont\n"), Prog);
+				close (fd_pts);
 				exit (1);
 			}
 
-			if( winsz_set == true && ioctl( fd_pts, TIOCSWINSZ, &winsz) == -1)
-				fprintf( stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
+			if (winsz_set == true && ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)
+				fprintf (stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
 
-			dup2( fd_pts, STDIN_FILENO);
-			dup2( fd_pts, STDOUT_FILENO);
-			dup2( fd_pts, STDERR_FILENO);
+			dup2 (fd_pts, STDIN_FILENO);
+			dup2 (fd_pts, STDOUT_FILENO);
+			dup2 (fd_pts, STDERR_FILENO);
 
-			if( STDIN_FILENO != fd_pts && STDOUT_FILENO != fd_pts
+			if (STDIN_FILENO != fd_pts && STDOUT_FILENO != fd_pts
 					&& STDERR_FILENO != fd_pts)
-				close( fd_pts);
+				close (fd_pts);
 
-			if( setsid() == -1)
-				fprintf( stderr, _("%s: Cannot set process group leader\n"), Prog);
+			if (setsid() == -1)
+				fprintf (stderr, _("%s: Cannot set process group leader\n"), Prog);
 			else
-				if( ioctl( STDIN_FILENO, TIOCSCTTY, 1) == -1)
-					fprintf( stderr, _("%s: Cannot set controlling terminal\n"), Prog);
+				if (ioctl (STDIN_FILENO, TIOCSCTTY, 1) == -1)
+					fprintf (stderr, _("%s: Cannot set controlling terminal\n"), Prog);
 
 		}
 		return; /* Only the child will return from pam_create_session */
@@ -407,11 +407,11 @@ static void handle_session (void)
 		}
 	}
 
-	if( have_tty == true) {
+	if (have_tty == true) {
 		/* Set RAW mode  */
 		termset_new = termset_save;
-		cfmakeraw( &termset_new);
-		tcsetattr( STDIN_FILENO, TCSANOW, &termset_new);
+		cfmakeraw (&termset_new);
+		tcsetattr (STDIN_FILENO, TCSANOW, &termset_new);
 	}
 
 	if (0 == caught) {
@@ -421,8 +421,8 @@ static void handle_session (void)
 			pid_t pid;
 			stop = true;
 
-			if( have_tty == true)
-				pid = waitpid (-1, &status, WUNTRACED |WNOHANG);
+			if (have_tty == true)
+				pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
 			else
 				pid = waitpid (-1, &status, WUNTRACED);
 
@@ -449,66 +449,66 @@ static void handle_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
-			} else if( pid == (pid_t)0 && have_tty == true) {
+			} else if (pid == (pid_t)0 && have_tty == true) {
 				stop = false;
 
-				if( caught == SIGWINCH) {
+				if (caught == SIGWINCH) {
 					caught = 0;
-					if( ioctl( STDIN_FILENO, TIOCGWINSZ, &winsz) != -1)
-						ioctl( fd_pts, TIOCSWINSZ, &winsz);
+					if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) != -1)
+						ioctl (fd_pts, TIOCSWINSZ, &winsz);
 				}
 
-	            FD_ZERO( &inp_fds);
-    	        FD_SET( STDIN_FILENO, &inp_fds);
-        	    FD_SET( fd_ptmx, &inp_fds);
+				FD_ZERO (&inp_fds);
+				FD_SET (STDIN_FILENO, &inp_fds);
+				FD_SET (fd_ptmx, &inp_fds);
 				sel_to = (struct timeval){ 0, 10000};
-				
-	            if( select( fd_ptmx + 1, &inp_fds, NULL, NULL, &sel_to) == -1) {
-					if( errno == EINTR)
+
+				if (select (fd_ptmx + 1, &inp_fds, NULL, NULL, &sel_to) == -1) {
+					if (errno == EINTR)
 						continue;
 					stop = true;
 				}
-            	if( FD_ISSET( STDIN_FILENO, &inp_fds)) {
-                	bytes_r = read( STDIN_FILENO, trbuf, BUFSIZ);
-                	if(	bytes_r <= 0) {
-						if( errno == EINTR)
+				if (FD_ISSET (STDIN_FILENO, &inp_fds)) {
+					bytes_r = read (STDIN_FILENO, trbuf, BUFSIZ);
+					if (bytes_r <= 0) {
+						if (errno == EINTR)
 							continue;
-						fprintf( stderr, _("%s: Failure in reading from stdin\r\n"), Prog);
-                    	stop = true;
-					}
-
-                	if( bytes_r > 0 && write( fd_ptmx, trbuf, bytes_r) != bytes_r) {
-						if( errno == EINTR || errno == EIO)
-							continue;						
-						fprintf( stderr, _("%s: Failure in writing to session\r\n"), Prog);
+						fprintf (stderr, _("%s: Failure in reading from stdin\r\n"), Prog);
 						stop = true;
 					}
-            	}
 
-            	if( FD_ISSET( fd_ptmx, &inp_fds)) {
-                	bytes_r = read( fd_ptmx, trbuf, BUFSIZ);
-                	if( bytes_r <= 0) {
-						if( errno == EINTR || errno == EIO)
+					if (bytes_r > 0 && write (fd_ptmx, trbuf, bytes_r) != bytes_r) {
+						if (errno == EINTR || errno == EIO)
 							continue;
-						fprintf( stderr, _("%s: Failure in reading from session %d %ld\r\n"), Prog, errno, bytes_r);
-                    	stop = true;
-					}
-
-                	if( bytes_r > 0 && write( STDOUT_FILENO, trbuf, bytes_r) != bytes_r) {
-						fprintf( stderr, _("%s: Failure in writing to stdout\r\n"), Prog);
+						fprintf (stderr, _("%s: Failure in writing to session\r\n"), Prog);
 						stop = true;
 					}
-            	}			
+				}
+
+				if (FD_ISSET (fd_ptmx, &inp_fds)) {
+					bytes_r = read (fd_ptmx, trbuf, BUFSIZ);
+					if (bytes_r <= 0) {
+						if (errno == EINTR || errno == EIO)
+							continue;
+						fprintf (stderr, _("%s: Failure in reading from session %d %ld\r\n"), Prog, errno, bytes_r);
+						stop = true;
+					}
+
+					if (bytes_r > 0 && write (STDOUT_FILENO, trbuf, bytes_r) != bytes_r) {
+						fprintf (stderr, _("%s: Failure in writing to stdout\r\n"), Prog);
+						stop = true;
+					}
+				}
 			}
 		} while (!stop);
 	}
 
 
-	if( have_tty == true) {
-		close( fd_pts);
+	if (have_tty == true) {
+		close (fd_pts);
 		/* Reset RAW mode  */
-		if( tcsetattr( STDIN_FILENO, TCSANOW, &termset_save) == -1)
-			fprintf( stderr, _("%s: Cannot reset termios attributes\n"), Prog);
+		if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1)
+			fprintf (stderr, _("%s: Cannot reset termios attributes\n"), Prog);
 	}
 
 	if (0 != caught) {
