@@ -1,5 +1,9 @@
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Remove duplicate include of sys/types.h
+
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Fail if the process group leader or the controlling
 	terminal cannot be set.
 	* src/su.c: Do not set terminal in RAW mode in case of earlier
