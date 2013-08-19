@@ -346,7 +346,7 @@ static void handle_session (void)
 			close (fd_ptmx);
 			
 			if (tcsetattr (fd_pts, TCSANOW, &termset_save) == -1) {
-				fprintf (stderr, _("%s: Cannot set set termios attributes of sessiont\n"), Prog);
+				fprintf (stderr, _("%s: Cannot set termios attributes of session\n"), Prog);
 				(void) close (fd_pts);
 				exit (1);
 			}
@@ -382,7 +382,7 @@ static void handle_session (void)
 			}
 
 		}
-		return; /* Only the child will return from pam_create_session */
+		return; /* Only the child will return from handle_session */
 	} else if ((pid_t)-1 == pid_child) {
 		(void) fprintf (stderr,
 		                _("%s: Cannot fork user shell\n"),
