@@ -1,5 +1,9 @@
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Ignore close() failure before exiting.
+
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Remove duplicate include of sys/types.h
 	* src/su.c: Add missing includes for select()
 

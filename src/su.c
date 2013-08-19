@@ -313,24 +313,24 @@ static void handle_session (void)
 
 		if (grantpt (fd_ptmx) == -1) {
 			fprintf (stderr, _("%s: Cannot grant pt master permissions\n"), Prog);
-			close (fd_ptmx);
+			(void) close (fd_ptmx);
 			exit (1);
 		}
 		if (unlockpt (fd_ptmx) == -1) {
 			fprintf (stderr, _("%s: Cannot unlock pt master\n"), Prog);
-			close (fd_ptmx);
+			(void) close (fd_ptmx);
 			exit (1);
 		}
 
 		if ((pts_name = ptsname (fd_ptmx)) == NULL) {
 			fprintf (stderr, _("%s: Cannot get pt slave name\n"), Prog);
-			close (fd_ptmx);
+			(void) close (fd_ptmx);
 			exit (1);
 		}
 
 		if ((fd_pts = open (pts_name, O_RDWR )) == -1) {
 			fprintf (stderr, _("%s: Cannot open pt slave\n"), Prog);
-			close (fd_ptmx);
+			(void) close (fd_ptmx);
 			exit (1);
 		}
 	}
@@ -345,7 +345,7 @@ static void handle_session (void)
 			
 			if (tcsetattr (fd_pts, TCSANOW, &termset_save) == -1) {
 				fprintf (stderr, _("%s: Cannot set set termios attributes of sessiont\n"), Prog);
-				close (fd_pts);
+				(void) close (fd_pts);
 				exit (1);
 			}
 
@@ -524,7 +524,7 @@ static void handle_session (void)
 		} while (!stop);
 
 		if (have_tty == true) {
-			close (fd_pts);
+			(void) close (fd_pts);
 			/* Reset RAW mode  */
 			if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1) {
 				fprintf (stderr,
