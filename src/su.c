@@ -424,7 +424,14 @@ static void handle_session (void)
 		/* Set RAW mode  */
 		termset_new = termset_save;
 		cfmakeraw (&termset_new);
-		tcsetattr (STDIN_FILENO, TCSANOW, &termset_new);
+		if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_new) != 0) {
+			/* FIXME: At least one change was successful. 
+			 * Success should be checked with tcsetattr */
+			fprintf (stderr,
+			         _("%s: Cannot set terminal attributes: %s\n"),
+			         Prog, strerror (errno));
+			caught = -1;
+		}
 	}
 
 	if (0 == caught) {

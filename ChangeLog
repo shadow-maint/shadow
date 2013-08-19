@@ -4,6 +4,7 @@
 	terminal cannot be set.
 	* src/su.c: Do not set terminal in RAW mode in case of earlier
 	failure.
+	* src/su.c: Do not continue in case of tcsetattr failure.
 
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
