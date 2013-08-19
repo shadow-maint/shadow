@@ -515,12 +515,16 @@ static void handle_session (void)
 			}
 		} while (!stop);
 
-	if (have_tty == true) {
-		close (fd_pts);
-		/* Reset RAW mode  */
-		if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1)
-			fprintf (stderr, _("%s: Cannot reset termios attributes\n"), Prog);
-	}
+		if (have_tty == true) {
+			close (fd_pts);
+			/* Reset RAW mode  */
+			if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1) {
+				fprintf (stderr,
+				         _("%s: Cannot reset termios attributes\n"),
+				         Prog);
+				/* caught not set */
+			}
+		}
 	}
 
 	if (0 != caught) {
