@@ -2,6 +2,8 @@
 
 	* src/su.c: Fail if the process group leader or the controlling
 	terminal cannot be set.
+	* src/su.c: Do not set terminal in RAW mode in case of earlier
+	failure.
 
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 

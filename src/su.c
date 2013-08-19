@@ -420,7 +420,7 @@ static void handle_session (void)
 		}
 	}
 
-	if (have_tty == true) {
+	if ((0 == caught) && (have_tty == true)) {
 		/* Set RAW mode  */
 		termset_new = termset_save;
 		cfmakeraw (&termset_new);
@@ -514,14 +514,13 @@ static void handle_session (void)
 				}
 			}
 		} while (!stop);
-	}
-
 
 	if (have_tty == true) {
 		close (fd_pts);
 		/* Reset RAW mode  */
 		if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1)
 			fprintf (stderr, _("%s: Cannot reset termios attributes\n"), Prog);
+	}
 	}
 
 	if (0 != caught) {
