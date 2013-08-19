@@ -275,7 +275,9 @@ static void handle_session (void)
 {
 	sigset_t ourset;
 	int status;
+#ifdef USE_PAM
 	int ret;
+#endif				/* USE_PAM */
 	int fd_ptmx = -1;
 	int fd_pts = -1;
 	char *pts_name = NULL;	
