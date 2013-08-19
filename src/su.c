@@ -296,7 +296,9 @@ static void handle_session (void)
 		have_tty = true;
 
 		if (tcgetattr (STDIN_FILENO, &termset_save) == -1) {
-			fprintf (stderr, _("%s: Cannot get termios attributes\n"), Prog);
+			fprintf (stderr,
+			         _("%s: Cannot get termios attributes\n"),
+			         Prog);
 			exit (1);
 		}
 
@@ -316,7 +318,9 @@ static void handle_session (void)
 		}
 
 		if (grantpt (fd_ptmx) == -1) {
-			fprintf (stderr, _("%s: Cannot grant pt master permissions\n"), Prog);
+			fprintf (stderr,
+			         _("%s: Cannot grant pt master permissions\n"),
+			         Prog);
 			(void) close (fd_ptmx);
 			exit (1);
 		}
@@ -348,16 +352,20 @@ static void handle_session (void)
 
 		if (have_tty) {
 			close (fd_ptmx);
-			
+
 			if (tcsetattr (fd_pts, TCSANOW, &termset_save) == -1) {
-				fprintf (stderr, _("%s: Cannot set termios attributes of session\n"), Prog);
+				fprintf (stderr,
+				         _("%s: Cannot set termios attributes of session\n"),
+				         Prog);
 				(void) close (fd_pts);
 				exit (1);
 			}
 
 			if (   winsz_set
 			    && (ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)) {
-				fprintf (stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
+				fprintf (stderr,
+				         _("%s: Cannot set window size of session %d\n"),
+				         Prog, errno);
 			}
 
 			if (   (dup2 (fd_pts, STDIN_FILENO) == -1)
@@ -375,7 +383,7 @@ static void handle_session (void)
 				close (fd_pts);
 			}
 
-			if (setsid() == -1) {
+			if (setsid () == -1) {
 				fprintf (stderr,
 				         _("%s: Cannot set process group leader\n"),
 				         Prog);
@@ -422,8 +430,7 @@ static void handle_session (void)
 		    || (sigaddset (&ourset, SIGWINCH) != 0)
 		    || (sigaction (SIGTERM, &action, NULL) != 0)
 		    || (sigaction (SIGWINCH, &action, NULL) != 0)
-		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
-		    ) {
+		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)) {
 			fprintf (stderr,
 			         _("%s: signal masking malfunction\n"),
 			         Prog);
@@ -508,11 +515,14 @@ static void handle_session (void)
 						if (errno == EINTR) {
 							continue;
 						}
-						fprintf (stderr, _("%s: Failure in reading from stdin\r\n"), Prog);
+						fprintf (stderr,
+						         _("%s: Failure in reading from stdin\r\n"),
+						         Prog);
 						stop = true;
 					}
 
-					if (bytes_r > 0 && write (fd_ptmx, trbuf, bytes_r) != bytes_r) {
+					if (   (bytes_r > 0)
+					    && (write (fd_ptmx, trbuf, bytes_r) != bytes_r)) {
 						if (errno == EINTR || errno == EIO) {
 							continue;
 						}
@@ -527,12 +537,16 @@ static void handle_session (void)
 						if (errno == EINTR || errno == EIO) {
 							continue;
 						}
-						fprintf (stderr, _("%s: Failure in reading from session %d %ld\r\n"), Prog, errno, bytes_r);
+						fprintf (stderr,
+						         _("%s: Failure in reading from session %d %ld\r\n"),
+						         Prog, errno, bytes_r);
 						stop = true;
 					}
 
 					if (bytes_r > 0 && write (STDOUT_FILENO, trbuf, bytes_r) != bytes_r) {
-						fprintf (stderr, _("%s: Failure in writing to stdout\r\n"), Prog);
+						fprintf (stderr,
+						         _("%s: Failure in writing to stdout\r\n"),
+						         Prog);
 						stop = true;
 					}
 				}

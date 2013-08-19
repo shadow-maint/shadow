@@ -2,6 +2,7 @@
 
 	* src/su.c: Avoid multiple statements per line.
 	* src/su.c: Add brackets and parenthesis.
+	* src/su.c: Reindent.
 
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
