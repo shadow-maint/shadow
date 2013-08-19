@@ -308,7 +308,8 @@ static void handle_session (void)
 		/*
 		 * Open and prepare pseudo terminal master
 		 */
-		if ((fd_ptmx = open ("/dev/ptmx", O_RDWR)) == -1) {
+		fd_ptmx = open ("/dev/ptmx", O_RDWR);
+		if (-1 == fd_ptmx) {
 			fprintf (stderr, _("%s: Cannot open pt master\n"), Prog);
 			exit (1);
 		}
@@ -324,13 +325,15 @@ static void handle_session (void)
 			exit (1);
 		}
 
-		if ((pts_name = ptsname (fd_ptmx)) == NULL) {
+		pts_name = ptsname (fd_ptmx);
+		if (NULL == pts_name) {
 			fprintf (stderr, _("%s: Cannot get pt slave name\n"), Prog);
 			(void) close (fd_ptmx);
 			exit (1);
 		}
 
-		if ((fd_pts = open (pts_name, O_RDWR )) == -1) {
+		fd_pts = open (pts_name, O_RDWR );
+		if (-1 == fd_pts) {
 			fprintf (stderr, _("%s: Cannot open pt slave\n"), Prog);
 			(void) close (fd_ptmx);
 			exit (1);
