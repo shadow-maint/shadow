@@ -476,7 +476,7 @@ static void handle_session (void)
 				if (caught == SIGWINCH) {
 					caught = 0;
 					if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) != -1)
-						ioctl (fd_pts, TIOCSWINSZ, &winsz);
+						(void) ioctl (fd_pts, TIOCSWINSZ, &winsz);
 				}
 
 				FD_ZERO (&inp_fds);

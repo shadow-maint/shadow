@@ -1,6 +1,7 @@
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: Ignore close() failure before exiting.
+	* src/su.c: Ignore failure to set window size in case of SIGWINCH.
 
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
