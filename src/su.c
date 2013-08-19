@@ -364,8 +364,8 @@ static void handle_session (void)
 			if (   winsz_set
 			    && (ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)) {
 				fprintf (stderr,
-				         _("%s: Cannot set window size of session %d\n"),
-				         Prog, errno);
+				         _("%s: Cannot set window size of session: %s\n"),
+				         Prog, strerror (errno));
 			}
 
 			if (   (dup2 (fd_pts, STDIN_FILENO) == -1)
@@ -538,8 +538,8 @@ static void handle_session (void)
 							continue;
 						}
 						fprintf (stderr,
-						         _("%s: Failure in reading from session %d %ld\r\n"),
-						         Prog, errno, bytes_r);
+						         _("%s: Failure in reading from session: %s\r\n"),
+						         Prog, strerror (errno));
 						stop = true;
 					}
 
