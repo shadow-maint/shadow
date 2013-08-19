@@ -60,11 +60,13 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/select.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
