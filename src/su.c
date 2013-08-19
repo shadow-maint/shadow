@@ -300,11 +300,12 @@ static void handle_session (void)
 			exit (1);
 		}
 
-		if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) == -1 )
+		if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) == -1 ) {
 			fprintf (stderr, _("%s: Cannot get window size\n"), Prog);
-		else
+		} else {
 			winsz_set = true;
-		
+		}
+
 		/*
 		 * Open and prepare pseudo terminal master
 		 */
@@ -354,8 +355,10 @@ static void handle_session (void)
 				exit (1);
 			}
 
-			if (winsz_set && ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)
+			if (   winsz_set
+			    && (ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)) {
 				fprintf (stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
+			}
 
 			if (   (dup2 (fd_pts, STDIN_FILENO) == -1)
 			    || (dup2 (fd_pts, STDOUT_FILENO) == -1)
@@ -366,9 +369,11 @@ static void handle_session (void)
 				exit (1);
 			}
 
-			if (STDIN_FILENO != fd_pts && STDOUT_FILENO != fd_pts
-					&& STDERR_FILENO != fd_pts)
+			if (   (STDIN_FILENO  != fd_pts)
+			    && (STDOUT_FILENO != fd_pts)
+			    && (STDERR_FILENO != fd_pts)) {
 				close (fd_pts);
+			}
 
 			if (setsid() == -1) {
 				fprintf (stderr,
@@ -447,10 +452,11 @@ static void handle_session (void)
 			pid_t pid;
 			stop = true;
 
-			if (have_tty)
+			if (have_tty) {
 				pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
-			else
+			} else {
 				pid = waitpid (-1, &status, WUNTRACED);
+			}
 
 			/* When interrupted by signal, the signal will be
 			 * forwarded to the child, and termination will be
@@ -480,8 +486,9 @@ static void handle_session (void)
 
 				if (caught == SIGWINCH) {
 					caught = 0;
-					if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) != -1)
+					if (ioctl (STDIN_FILENO, TIOCGWINSZ, &winsz) != -1) {
 						(void) ioctl (fd_pts, TIOCSWINSZ, &winsz);
+					}
 				}
 
 				FD_ZERO (&inp_fds);
@@ -490,22 +497,25 @@ static void handle_session (void)
 				sel_to = (struct timeval){ 0, 10000};
 
 				if (select (fd_ptmx + 1, &inp_fds, NULL, NULL, &sel_to) == -1) {
-					if (errno == EINTR)
+					if (errno == EINTR) {
 						continue;
+					}
 					stop = true;
 				}
 				if (FD_ISSET (STDIN_FILENO, &inp_fds)) {
 					bytes_r = read (STDIN_FILENO, trbuf, BUFSIZ);
 					if (bytes_r <= 0) {
-						if (errno == EINTR)
+						if (errno == EINTR) {
 							continue;
+						}
 						fprintf (stderr, _("%s: Failure in reading from stdin\r\n"), Prog);
 						stop = true;
 					}
 
 					if (bytes_r > 0 && write (fd_ptmx, trbuf, bytes_r) != bytes_r) {
-						if (errno == EINTR || errno == EIO)
+						if (errno == EINTR || errno == EIO) {
 							continue;
+						}
 						fprintf (stderr, _("%s: Failure in writing to session\r\n"), Prog);
 						stop = true;
 					}
@@ -514,8 +524,9 @@ static void handle_session (void)
 				if (FD_ISSET (fd_ptmx, &inp_fds)) {
 					bytes_r = read (fd_ptmx, trbuf, BUFSIZ);
 					if (bytes_r <= 0) {
-						if (errno == EINTR || errno == EIO)
+						if (errno == EINTR || errno == EIO) {
 							continue;
+						}
 						fprintf (stderr, _("%s: Failure in reading from session %d %ld\r\n"), Prog, errno, bytes_r);
 						stop = true;
 					}
