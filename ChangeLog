@@ -1,3 +1,7 @@
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/su.c: Check dup2 return values.
+
 2013-08-15  Wolfgang Zarre  <lkdev@essax.com>
 
 	* src/su.c: Create a pseudo TTY to avoid character injection from

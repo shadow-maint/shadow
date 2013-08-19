@@ -351,9 +351,14 @@ static void handle_session (void)
 			if (winsz_set == true && ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)
 				fprintf (stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
 
-			dup2 (fd_pts, STDIN_FILENO);
-			dup2 (fd_pts, STDOUT_FILENO);
-			dup2 (fd_pts, STDERR_FILENO);
+			if (   (dup2 (fd_pts, STDIN_FILENO) == -1)
+			    || (dup2 (fd_pts, STDOUT_FILENO) == -1)
+			    || (dup2 (fd_pts, STDERR_FILENO) == -1)) {
+				fprintf (stderr,
+				         _("%s: Cannot prepare new terminal\n"),
+				         Prog);
+				exit (1);
+			}
 
 			if (STDIN_FILENO != fd_pts && STDOUT_FILENO != fd_pts
 					&& STDERR_FILENO != fd_pts)
