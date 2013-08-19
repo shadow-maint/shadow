@@ -364,11 +364,19 @@ static void handle_session (void)
 					&& STDERR_FILENO != fd_pts)
 				close (fd_pts);
 
-			if (setsid() == -1)
-				fprintf (stderr, _("%s: Cannot set process group leader\n"), Prog);
-			else
-				if (ioctl (STDIN_FILENO, TIOCSCTTY, 1) == -1)
-					fprintf (stderr, _("%s: Cannot set controlling terminal\n"), Prog);
+			if (setsid() == -1) {
+				fprintf (stderr,
+				         _("%s: Cannot set process group leader\n"),
+				         Prog);
+				exit (1);
+			}
+
+			if (ioctl (STDIN_FILENO, TIOCSCTTY, 1) == -1) {
+				fprintf (stderr,
+				         _("%s: Cannot set controlling terminal\n"),
+				         Prog);
+				exit (1);
+			}
 
 		}
 		return; /* Only the child will return from pam_create_session */

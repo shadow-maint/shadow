@@ -1,5 +1,10 @@
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Fail if the process group leader or the controlling
+	terminal cannot be set.
+
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Check dup2 return values.
 
 2013-08-15  Wolfgang Zarre  <lkdev@essax.com>
