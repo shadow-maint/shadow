@@ -524,6 +524,9 @@ static void handle_session (void)
 					if (   (bytes_r > 0)
 					    && (write (fd_ptmx, trbuf, bytes_r) != bytes_r)) {
 						if (errno == EINTR || errno == EIO) {
+							/* FIXME: are we
+							 * loosing some
+							 * bytes here? */
 							continue;
 						}
 						fprintf (stderr, _("%s: Failure in writing to session\r\n"), Prog);
