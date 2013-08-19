@@ -342,7 +342,7 @@ static void handle_session (void)
 	pid_child = fork ();
 	if (pid_child == 0) {	/* child shell */
 
-		if (have_tty == true) {
+		if (have_tty) {
 			close (fd_ptmx);
 			
 			if (tcsetattr (fd_pts, TCSANOW, &termset_save) == -1) {
@@ -351,7 +351,7 @@ static void handle_session (void)
 				exit (1);
 			}
 
-			if (winsz_set == true && ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)
+			if (winsz_set && ioctl (fd_pts, TIOCSWINSZ, &winsz) == -1)
 				fprintf (stderr, _("%s: Cannot set window size of session %d\n"), Prog, errno);
 
 			if (   (dup2 (fd_pts, STDIN_FILENO) == -1)
@@ -423,7 +423,7 @@ static void handle_session (void)
 		}
 	}
 
-	if ((0 == caught) && (have_tty == true)) {
+	if ((0 == caught) && have_tty) {
 		/* Set RAW mode  */
 		termset_new = termset_save;
 		cfmakeraw (&termset_new);
@@ -444,7 +444,7 @@ static void handle_session (void)
 			pid_t pid;
 			stop = true;
 
-			if (have_tty == true)
+			if (have_tty)
 				pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
 			else
 				pid = waitpid (-1, &status, WUNTRACED);
@@ -464,7 +464,7 @@ static void handle_session (void)
 				 */
 				kill (pid_child, SIGSTOP);
 				stop = false;
-			} else if (   ((pid_t)-1 != pid && have_tty == false)
+			} else if (   ((pid_t)-1 != pid && !have_tty)
 			           && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
@@ -472,7 +472,7 @@ static void handle_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
-			} else if (pid == (pid_t)0 && have_tty == true) {
+			} else if (pid == (pid_t)0 && have_tty) {
 				stop = false;
 
 				if (caught == SIGWINCH) {
@@ -525,7 +525,7 @@ static void handle_session (void)
 			}
 		} while (!stop);
 
-		if (have_tty == true) {
+		if (have_tty) {
 			(void) close (fd_pts);
 			/* Reset RAW mode  */
 			if (tcsetattr (STDIN_FILENO, TCSANOW, &termset_save) == -1) {

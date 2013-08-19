@@ -1,5 +1,9 @@
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: have_tty and winsz_set are booleans.
+
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Fix typos.
 
 2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
