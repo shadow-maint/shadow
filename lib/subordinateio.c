@@ -122,7 +122,7 @@ static struct commonio_ops subordinate_ops = {
 
 static /*@observer@*/ /*@null*/const struct subordinate_range *subordinate_next(struct commonio_db *db)
 {
-	commonio_next (db);
+	return (const struct subordinate_range *)commonio_next (db);
 }
 
 static const bool range_exists(struct commonio_db *db, const char *owner)

@@ -1,3 +1,7 @@
+2013-08-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/subordinateio.c (subordinate_next): Fix return value.
+
 2013-08-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/idmapping.c: Include <stdio.h> needed for fprintf() and
