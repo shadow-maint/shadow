@@ -404,6 +404,7 @@ static void handle_session (const struct passwd *pw)
 				exit (1);
 			}
 
+			/* FIXME: create UTMP entry? */
 		}
 		return; /* Only the child will return from handle_session */
 	} else if ((pid_t)-1 == pid_child) {
@@ -572,6 +573,8 @@ static void handle_session (const struct passwd *pw)
 		(void) wait (&status);
 		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
+
+	/* FIXME: clear UTMP entry? */
 
 #ifdef USE_PAM
 	ret = pam_close_session (pamh, 0);
