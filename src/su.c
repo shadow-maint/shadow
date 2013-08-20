@@ -410,8 +410,8 @@ static void handle_session (void)
 	}
 
 	/* parent only */
-	sigfillset (&ourset);
-	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
+	if (   (sigfillset (&ourset) != 0)
+	    || (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0)) {
 		(void) fprintf (stderr,
 		                _("%s: signal malfunction\n"),
 		                Prog);
