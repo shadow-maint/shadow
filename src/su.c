@@ -465,22 +465,7 @@ static void handle_session (void)
 				pid = waitpid (-1, &status, WUNTRACED);
 			}
 
-			/* When interrupted by signal, the signal will be
-			 * forwarded to the child, and termination will be
-			 * forced later.
-			 */
-			if (   ((pid_t)-1 == pid)
-			    && (EINTR == errno)
-			    && (SIGTSTP == caught)) {
-				caught = 0;
-				/* Except for SIGTSTP, which request to
-				 * stop the child.
-				 * We will SIGSTOP ourself on the next
-				 * waitpid round.
-				 */
-				kill (pid_child, SIGSTOP);
-				stop = false;
-			} else if (   ((pid_t)-1 != pid && !have_tty)
+			if (   ((pid_t)-1 != pid && !have_tty)
 			           && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
