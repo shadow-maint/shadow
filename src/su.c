@@ -477,7 +477,7 @@ static void handle_session (const struct passwd *pw)
 			           && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
-				kill (getpid (), SIGSTOP);
+				kill (getpid (), WSTOPSIG (status));
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
