@@ -124,7 +124,7 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 static RETSIGTYPE kill_child (int unused(s));
-static void handle_session (void);
+static void handle_session (const struct passwd *pw);
 #ifndef USE_PAM
 static RETSIGTYPE die (int);
 static bool iswheel (const char *);
@@ -271,7 +271,7 @@ static void catch_signals (int sig)
  *	or if not a controlling terminal then wait for the child to
  *	terminate and exit.
  */
-static void handle_session (void)
+static void handle_session (const struct passwd *pw)
 {
 	sigset_t ourset;
 	int status;
@@ -340,6 +340,13 @@ static void handle_session (void)
 		fd_pts = open (pts_name, O_RDWR );
 		if (-1 == fd_pts) {
 			fprintf (stderr, _("%s: Cannot open pt slave\n"), Prog);
+			(void) close (fd_ptmx);
+			exit (1);
+		}
+
+		if (fchown (fd_pts, pw->pw_uid, -1) != 0) {
+			fprintf (stderr, _("%s: Cannot set ownership of pt slave\n"), Prog);
+			(void) close (fd_pts);
 			(void) close (fd_ptmx);
 			exit (1);
 		}
@@ -1243,23 +1250,23 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
+	handle_session (pw);
+
 	/* become the new user */
 	if (change_uid (pw) != 0) {
 		exit (1);
 	}
-
-	handle_session ();
 #else				/* !USE_PAM */
 	/* no limits if su from root (unless su must fake login's behavior) */
 	if (!caller_is_root || fakelogin) {
 		setup_limits (pw);
 	}
 
+	handle_session (pw);
+
 	if (setup_uid_gid (pw, caller_on_console) != 0) {
 		exit (1);
 	}
-
-	handle_session ();
 #endif				/* !USE_PAM */
 
 
