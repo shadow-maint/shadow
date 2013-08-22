@@ -218,7 +218,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-i</option>, <option>--inactive</option> <replaceable>INACTIVE</replaceable>
+	  <option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -267,7 +267,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-n</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
+	  <option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -289,7 +289,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-r</option>, <option>--repository</option> <replaceable>REPOSITORY</replaceable>
+	  <option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -299,8 +299,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -343,7 +342,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-w</option>, <option>--warndays</option> <replaceable>WARN_DAYS</replaceable>
+	  <option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -356,7 +355,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-x</option>, <option>--maxdays</option> <replaceable>MAX_DAYS</replaceable>
+	  <option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>

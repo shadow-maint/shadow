@@ -94,7 +94,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-g</option>, <option>--gid</option> <replaceable>GID</replaceable>
+	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -133,8 +133,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-n</option>, <option>--new-name</option>
-	  <replaceable>NEW_GROUP</replaceable>
+	  <option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</replaceable>
 	</term>
 	<listitem>
 	  <para> 
@@ -156,8 +155,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-p</option>, <option>--password</option>
-	  <replaceable>PASSWORD</replaceable>
+	  <option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -178,8 +176,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>

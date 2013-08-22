@@ -148,8 +148,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--command</option>
-	  <replaceable>COMMAND</replaceable>
+	  <option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -186,8 +185,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-s</option>, <option>--shell</option>
-	  <replaceable>SHELL</replaceable>
+	  <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	</term>
 	<listitem>
 	  <para>The shell that will be invoked.</para>

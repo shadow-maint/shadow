@@ -135,8 +135,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--crypt-method</option>
-	  <replaceable>METHOD</replaceable>
+	  <option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METHOD</replaceable>
 	</term>
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
@@ -187,8 +186,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -200,8 +198,7 @@
       </varlistentry>
       <varlistentry condition="sha_crypt">
 	<term>
-	  <option>-s</option>, <option>--sha-rounds</option>
-	  <replaceable>ROUNDS</replaceable>
+	  <option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</replaceable>
 	</term>
 	<listitem>
 	  <para>

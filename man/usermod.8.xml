@@ -109,8 +109,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--comment</option>
-	  <replaceable>COMMENT</replaceable>
+	  <option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -123,8 +122,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-d</option>, <option>--home</option>
-	  <replaceable>HOME_DIR</replaceable>
+	  <option>-d</option>, <option>--home</option>&nbsp;<replaceable>HOME_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -140,8 +138,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-e</option>, <option>--expiredate</option>
-	  <replaceable>EXPIRE_DATE</replaceable>
+	  <option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -161,8 +158,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--inactive</option>
-	  <replaceable>INACTIVE</replaceable>
+	  <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -183,8 +179,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-g</option>, <option>--gid</option>
-	  <replaceable>GROUP</replaceable>
+	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -203,8 +198,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-G</option>, <option>--groups</option>
-	  <replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
+	  <option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
 	</term>
 	<listitem>
 	  <para>
@@ -224,8 +218,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-l</option>, <option>--login</option>
-	  <replaceable>NEW_LOGIN</replaceable>
+	  <option>-l</option>, <option>--login</option>&nbsp;<replaceable>NEW_LOGIN</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -289,8 +282,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-p</option>, <option>--password</option>
-	  <replaceable>PASSWORD</replaceable>
+	  <option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -317,8 +309,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -330,8 +321,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-s</option>, <option>--shell</option>
-	  <replaceable>SHELL</replaceable>
+	  <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -342,8 +332,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-u</option>, <option>--uid</option>
-	  <replaceable>UID</replaceable>
+	  <option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -393,8 +382,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-v</option>, <option>--add-sub-uids</option>
-	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -412,8 +400,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-V</option>, <option>--del-sub-uids</option>
-	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -433,8 +420,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-w</option>, <option>--add-sub-gids</option>
-	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -452,8 +438,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-W</option>, <option>--del-sub-gids</option>
-	  <replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -473,8 +458,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-Z</option>, <option>--selinux-user</option>
-	  <replaceable>SEUSER</replaceable>
+	  <option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</replaceable>
 	</term>
 	<listitem>
 	  <para>

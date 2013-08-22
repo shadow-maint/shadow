@@ -127,13 +127,11 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-b</option>, <option>--base-dir</option>
-	  <replaceable>BASE_DIR</replaceable>
+	  <option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    The default base directory for the system if <option>-d</option>
-	    <replaceable>HOME_DIR</replaceable> is not specified.
+	    The default base directory for the system if <option>-d</option>&nbsp;<replaceable>HOME_DIR</replaceable> is not specified.
 	    <replaceable>BASE_DIR</replaceable> is
 	    concatenated with the account name to define the home directory. 
 	    If the <option>-m</option> option is not used,
@@ -150,8 +148,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--comment</option>
-	  <replaceable>COMMENT</replaceable>
+	  <option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -163,8 +160,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-d</option>, <option>--home-dir</option>
-	  <replaceable>HOME_DIR</replaceable>
+	  <option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -190,8 +186,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-e</option>, <option>--expiredate</option>
-	  <replaceable>EXPIRE_DATE</replaceable>
+	  <option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -208,8 +203,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--inactive</option>
-	  <replaceable>INACTIVE</replaceable>
+	  <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -228,8 +222,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-g</option>, <option>--gid</option>
-	  <replaceable>GROUP</replaceable>
+	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -256,8 +249,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-G</option>, <option>--groups</option>
-	  <replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
+	  <option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
 	</term>
 	<listitem>
 	  <para>
@@ -278,8 +270,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-k</option>, <option>--skel</option>
-	  <replaceable>SKEL_DIR</replaceable>
+	  <option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -304,8 +295,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-K</option>, <option>--key</option>
-	  <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable>
+	  <option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -315,18 +305,15 @@
 	    and others).
 	  <para>
 	  </para>
-	    Example: <option>-K </option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
+	    Example: <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
 	    can be used when creating system account to turn off password
 	    ageing, even though system account has no password at all.
 	    Multiple <option>-K</option> options can be specified, e.g.:
-	    <option>-K </option>
-	    <replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>
-	    <option>-K </option>
-	    <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>&nbsp;
+	    <option>-K</option>&nbsp;<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
 	  <!--para>
-	    Note: <option>-K </option>
-	    <replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	    Note: <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	    doesn't work yet.
 	  </para-->
 	</listitem>
@@ -408,8 +395,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-p</option>, <option>--password</option>
-	  <replaceable>PASSWORD</replaceable>
+	  <option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -457,8 +443,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -470,8 +455,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-s</option>, <option>--shell</option>
-	  <replaceable>SHELL</replaceable>
+	  <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -485,8 +469,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-u</option>, <option>--uid</option>
-	  <replaceable>UID</replaceable>
+	  <option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -521,8 +504,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-Z</option>, <option>--selinux-user</option>
-	  <replaceable>SEUSER</replaceable>
+	  <option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -546,8 +528,7 @@
       <variablelist remap='IP'>
 	<varlistentry>
 	  <term>
-	    <option>-b</option>, <option>--base-dir</option>
-	    <replaceable>BASE_DIR</replaceable>
+	    <option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</replaceable>
 	  </term>
 	  <listitem>
 	    <para>
@@ -565,8 +546,7 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-e</option>, <option>--expiredate</option>
-	    <replaceable>EXPIRE_DATE</replaceable>
+	    <option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</replaceable>
 	  </term>
 	  <listitem>
 	    <para>The date on which the user account is disabled.</para>
@@ -578,8 +558,7 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-f</option>, <option>--inactive</option>
-	    <replaceable>INACTIVE</replaceable>
+	    <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	  </term>
 	  <listitem>
 	    <para>
@@ -594,8 +573,7 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-g</option>, <option>--gid</option>
-	    <replaceable>GROUP</replaceable>
+	    <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	  </term>
 	  <listitem>
 	    <para>
@@ -615,8 +593,7 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-s</option>, <option>--shell</option>
-	    <replaceable>SHELL</replaceable>
+	    <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	  </term>
 	  <listitem>
 	    <para>

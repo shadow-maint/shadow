@@ -115,7 +115,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--full-name</option> <replaceable>FULL_NAME</replaceable>
+	  <option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>FULL_NAME</replaceable>
 	</term>
 	<listitem>
 	  <para>Change the user's full name.</para>
@@ -123,7 +123,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-h</option>, <option>--home-phone</option> <replaceable>HOME_PHONE</replaceable>
+	  <option>-h</option>, <option>--home-phone</option>&nbsp;<replaceable>HOME_PHONE</replaceable>
 	</term>
 	<listitem>
 	  <para>Change the user's home phone number.</para>
@@ -131,7 +131,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-o</option>, <option>--other</option> <replaceable>OTHER</replaceable>
+	  <option>-o</option>, <option>--other</option>&nbsp;<replaceable>OTHER</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -143,7 +143,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-r</option>, <option>--room</option> <replaceable>ROOM_NUMBER</replaceable>
+	  <option>-r</option>, <option>--room</option>&nbsp;<replaceable>ROOM_NUMBER</replaceable>
 	</term>
 	<listitem>
 	  <para>Change the user's room number.</para>
@@ -151,8 +151,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -172,7 +171,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-w</option>, <option>--work-phone</option> <replaceable>WORK_PHONE</replaceable>
+	  <option>-w</option>, <option>--work-phone</option>&nbsp;<replaceable>WORK_PHONE</replaceable>
 	</term>
 	<listitem>
 	  <para>Change the user's office phone number.</para>

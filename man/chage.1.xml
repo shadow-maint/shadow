@@ -95,7 +95,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-d</option>, <option>--lastday</option> <replaceable>LAST_DAY</replaceable>
+	  <option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>LAST_DAY</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -107,7 +107,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-E</option>, <option>--expiredate</option> <replaceable>EXPIRE_DATE</replaceable>
+	  <option>-E</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -133,7 +133,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-I</option>, <option>--inactive</option> <replaceable>INACTIVE</replaceable>
+	  <option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -162,7 +162,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-m</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
+	  <option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -174,7 +174,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-M</option>, <option>--maxdays</option> <replaceable>MAX_DAYS</replaceable>
+	  <option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -195,8 +195,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -208,7 +207,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-W</option>, <option>--warndays</option> <replaceable>WARN_DAYS</replaceable>
+	  <option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>

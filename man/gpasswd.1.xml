@@ -145,7 +145,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-a</option>, <option>--add</option> <replaceable>user</replaceable>
+	  <option>-a</option>, <option>--add</option>&nbsp;<replaceable>user</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -158,7 +158,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-d</option>, <option>--delete</option> <replaceable>user</replaceable>
+	  <option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -179,8 +179,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-Q</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -226,7 +225,7 @@
     <variablelist remap='IP' condition="gshadow">
       <varlistentry>
 	<term>
-	  <option>-A</option>, <option>--administrators</option> <replaceable>user</replaceable>,...
+	  <option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>user</replaceable>,...
 	</term>
 	<listitem>
 	  <para>
@@ -238,7 +237,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-M</option>, <option>--members</option> <replaceable>user</replaceable>,...
+	  <option>-M</option>, <option>--members</option>&nbsp;<replaceable>user</replaceable>,...
 	</term>
 	<listitem>
 	  <para>

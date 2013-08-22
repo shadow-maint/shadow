@@ -95,7 +95,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-b</option>, <option>--before</option> <replaceable>DAYS</replaceable>
+	  <option>-b</option>, <option>--before</option>&nbsp;<replaceable>DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -113,8 +113,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -126,8 +125,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-t</option>, <option>--time</option>
-	  <replaceable>DAYS</replaceable>
+	  <option>-t</option>, <option>--time</option>&nbsp;<replaceable>DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -138,8 +136,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-u</option>, <option>--user</option>
-	  <replaceable>LOGIN</replaceable>|<replaceable>RANGE</replaceable>
+	  <option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|<replaceable>RANGE</replaceable>
 	</term>
 	<listitem>
 	  <para>

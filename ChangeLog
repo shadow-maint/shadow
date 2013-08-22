@@ -1,5 +1,31 @@
 2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chage.1.xml: Add a non breaking space between options and
+	their parameter because xml2po removes those spaces. Alioth#314401
+	* man/chfn.1.xml: Likewise.
+	* man/chgpasswd.8.xml: Likewise.
+	* man/chpasswd.8.xml: Likewise.
+	* man/chsh.1.xml: Likewise.
+	* man/faillog.8.xml: Likewise.
+	* man/gpasswd.1.xml: Likewise.
+	* man/groupadd.8.xml: Likewise.
+	* man/groupdel.8.xml: Likewise.
+	* man/groupmems.8.xml: Likewise.
+	* man/groupmod.8.xml: Likewise.
+	* man/grpck.8.xml: Likewise.
+	* man/lastlog.8.xml: Likewise.
+	* man/newusers.8.xml: Likewise.
+	* man/passwd.1.xml: Likewise.
+	* man/pwck.8.xml: Likewise.
+	* man/pwconv.8.xml: Likewise.
+	* man/su.1.xml: Likewise.
+	* man/useradd.8.xml: Likewise.
+	* man/userdel.8.xml: Likewise.
+	* man/usermod.8.xml: Likewise.
+	* man/vipw.8.xml: Likewise.
+
+2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/shadow-man-pages.pot: Regenerated.
 	* man/po/*.po: Updated PO files.
 
