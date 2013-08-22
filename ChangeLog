@@ -1,5 +1,16 @@
 2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/da.po: Unfuzzy according to previous change.
+	* man/po/de.po: Likewise.
+	* man/po/fr.po: Likewise.
+	* man/po/it.po: Likewise.
+	* man/po/pl.po: Likewise.
+	* man/po/ru.po: Likewise.
+	* man/po/sv.po: Likewise.
+	* man/po/zh_CN.po: Likewise.
+
+2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chage.1.xml: Add a non breaking space between options and
 	their parameter because xml2po removes those spaces. Alioth#314401
 	* man/chfn.1.xml: Likewise.

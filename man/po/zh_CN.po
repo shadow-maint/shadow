@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages VERSION\n"
 "POT-Creation-Date: 2013-08-22 22:50+0200\n"
-"PO-Revision-Date: 2012-01-29 16:58+0100\n"
+"PO-Revision-Date: 2013-08-23 01:42+0200\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -364,10 +364,10 @@ msgstr "安静模式。"
 #: chsh.1.xml:107(term) chpasswd.8.xml:189(term) chgpasswd.8.xml:146(term)
 #: chfn.1.xml:153(term) chage.1.xml:197(term)
 msgid ""
-"<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 
 #: vipw.8.xml:143(para) usermod.8.xml:324(para) userdel.8.xml:151(para)
@@ -693,10 +693,10 @@ msgstr "将用户添加到附加组。只能和 <option>-G</option> 选项一起
 
 #: usermod.8.xml:111(term) useradd.8.xml:152(term)
 msgid ""
-"<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</"
 "replaceable>"
 
 #: usermod.8.xml:116(para)
@@ -711,13 +711,13 @@ msgstr ""
 #: usermod.8.xml:125(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 
 #: usermod.8.xml:130(para)
@@ -735,10 +735,10 @@ msgstr ""
 
 #: usermod.8.xml:142(term) useradd.8.xml:192(term) useradd.8.xml:567(term)
 msgid ""
-"<option>-e</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
-"<option>-e</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 
 #: usermod.8.xml:147(para) useradd.8.xml:197(para)
@@ -765,10 +765,10 @@ msgstr ""
 
 #: usermod.8.xml:163(term) useradd.8.xml:210(term) useradd.8.xml:580(term)
 msgid ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 
 #: usermod.8.xml:168(para)
@@ -785,9 +785,9 @@ msgstr "0 表示密码过期时，立即禁用账户；-1 表示不使用这个�
 
 #: usermod.8.xml:185(term) useradd.8.xml:230(term) useradd.8.xml:596(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GROUP</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option><replaceable>GROUP</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>"
 
 #: usermod.8.xml:190(para)
 msgid ""
@@ -809,11 +809,11 @@ msgstr "主目录之外的文件所属的组必须手动修改。"
 
 #: usermod.8.xml:205(term) useradd.8.xml:258(term)
 msgid ""
-"<option>-G</option>, <option>--groups</option><replaceable>GROUP1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</"
 "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap=\"I"
 "\">,GROUPN</emphasis>]]]"
 msgstr ""
-"<option>-G</option>, <option>--groups</option><replaceable>GROUP1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</"
 "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap=\"I"
 "\">,GROUPN</emphasis>]]]"
 
@@ -840,10 +840,10 @@ msgstr ""
 
 #: usermod.8.xml:226(term)
 msgid ""
-"<option>-l</option>, <option>--login</option><replaceable>NEW_LOGIN</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>NEW_LOGIN</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--login</option><replaceable>NEW_LOGIN</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>NEW_LOGIN</"
 "replaceable>"
 
 #: usermod.8.xml:231(para)
@@ -918,10 +918,10 @@ msgstr "使用 <option>-u</option> 选项时，可以将用户 ID 改为非唯�
 #: usermod.8.xml:291(term) useradd.8.xml:410(term) groupmod.8.xml:158(term)
 #: groupadd.8.xml:168(term)
 msgid ""
-"<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</"
 "replaceable>"
 msgstr ""
-"<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</"
 "replaceable>"
 
 #: usermod.8.xml:296(para) groupmod.8.xml:163(para)
@@ -961,9 +961,9 @@ msgstr "您应该确保密码符合系统的密码政策。"
 #: usermod.8.xml:332(term) useradd.8.xml:472(term) useradd.8.xml:617(term)
 #: su.1.xml:188(term) chsh.1.xml:120(term)
 msgid ""
-"<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>"
 
 #: usermod.8.xml:337(para) chsh.1.xml:124(para)
 msgid ""
@@ -974,9 +974,9 @@ msgstr ""
 
 #: usermod.8.xml:344(term) useradd.8.xml:487(term)
 msgid ""
-"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 
 #: usermod.8.xml:349(para)
 msgid "The new numerical value of the user's ID."
@@ -1040,13 +1040,13 @@ msgstr ""
 #: usermod.8.xml:395(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-v</option>, <option>--add-sub-uids</option><replaceable>FIRST</"
+"<option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 
 #: usermod.8.xml:400(para)
@@ -1077,13 +1077,13 @@ msgstr ""
 #: usermod.8.xml:414(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-V</option>, <option>--del-sub-uids</option><replaceable>FIRST</"
+"<option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 
 #: usermod.8.xml:419(para)
@@ -1101,13 +1101,13 @@ msgstr ""
 #: usermod.8.xml:435(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-w</option>, <option>--add-sub-gids</option><replaceable>FIRST</"
+"<option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 
 #: usermod.8.xml:440(para)
@@ -1133,13 +1133,13 @@ msgstr ""
 #: usermod.8.xml:454(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-W</option>, <option>--del-sub-gids</option><replaceable>FIRST</"
+"<option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 
 #: usermod.8.xml:459(para)
@@ -1158,10 +1158,10 @@ msgstr ""
 
 #: usermod.8.xml:475(term) useradd.8.xml:523(term)
 msgid ""
-"<option>-Z</option>, <option>--selinux-user</option><replaceable>SEUSER</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</"
 "replaceable>"
 msgstr ""
-"<option>-Z</option>, <option>--selinux-user</option><replaceable>SEUSER</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</"
 "replaceable>"
 
 #: usermod.8.xml:480(para)
@@ -1982,21 +1982,21 @@ msgstr "<command>useradd</command> 可以使用的选项有："
 
 #: useradd.8.xml:129(term) useradd.8.xml:548(term)
 msgid ""
-"<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
+"<option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
+"<option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</"
 "replaceable>"
 
 #: useradd.8.xml:134(para)
 msgid ""
 "The default base directory for the system if <option>-d</"
-"option><replaceable>HOME_DIR</replaceable> is not specified. "
+"option>&nbsp;<replaceable>HOME_DIR</replaceable> is not specified. "
 "<replaceable>BASE_DIR</replaceable> is concatenated with the account name to "
 "define the home directory. If the <option>-m</option> option is not used, "
 "<replaceable>BASE_DIR</replaceable> must exist."
 msgstr ""
-"如果没有使用 <option>-d</option><replaceable>HOME_DIR</replaceable>，则使用默"
+"如果没有使用 <option>-d</option>&nbsp;<replaceable>HOME_DIR</replaceable>，则使用默"
 "认的基目录。<replaceable>BASE_DIR</replaceable> 加上账户名就是主目录。如果没"
 "有使用 <option>-m</option> 选项，<replaceable>BASE_DIR</replaceable> 必须已经"
 "存在。"
@@ -2019,10 +2019,10 @@ msgstr "任何字符串。通常是关于登录的简短描述，当前用于用
 
 #: useradd.8.xml:165(term)
 msgid ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 
 #: useradd.8.xml:170(para)
@@ -2116,10 +2116,10 @@ msgstr ""
 
 #: useradd.8.xml:280(term)
 msgid ""
-"<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</"
 "replaceable>"
 
 #: useradd.8.xml:285(para)
@@ -2154,10 +2154,10 @@ msgstr "如果可以，也复制 ACL 和扩展属性。"
 
 #: useradd.8.xml:306(term) groupadd.8.xml:137(term)
 msgid ""
-"<option>-K</option>, <option>--key</option><replaceable>KEY</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>"
 msgstr ""
-"<option>-K</option>, <option>--key</option><replaceable>KEY</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>"
 
 #: useradd.8.xml:311(para)
@@ -2165,22 +2165,22 @@ msgid ""
 "Overrides <filename>/etc/login.defs</filename> defaults (<option>UID_MIN</"
 "option>, <option>UID_MAX</option>, <option>UMASK</option>, "
 "<option>PASS_MAX_DAYS</option> and others). <placeholder-1/> Example: "
-"<option>-K </option><replaceable>PASS_MAX_DAYS</"
+"<option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</"
 "replaceable>=<replaceable>-1</replaceable> can be used when creating system "
 "account to turn off password ageing, even though system account has no "
 "password at all. Multiple <option>-K</option> options can be specified, e."
-"g.: <option>-K </option><replaceable>UID_MIN</replaceable>=<replaceable>100</"
-"replaceable><option>-K </option><replaceable>UID_MAX</"
+"g.: <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</"
+"replaceable>&nbsp;<option>-K</option>&nbsp;<replaceable>UID_MAX</"
 "replaceable>=<replaceable>499</replaceable>"
 msgstr ""
 "默认覆盖 <filename>/etc/login.defs</filename> (<option>UID_MIN</option>, "
 "<option>UID_MAX</option>, <option>UMASK</option>, <option>PASS_MAX_DAYS</"
-"option> 及其它)。<placeholder-1/> 例如：<option>-K </"
-"option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</"
+"option> 及其它)。<placeholder-1/> 例如：<option>-K</"
+"option>&nbsp;<replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</"
 "replaceable> 可以用于创建一个密码不会过期的系统账户，即使系统账户没有密码。可"
-"以指定多个 <option>-K</option> 选项，如：<option>-K </"
-"option><replaceable>UID_MIN</replaceable>=<replaceable>100</"
-"replaceable><option>-K </option><replaceable>UID_MAX</"
+"以指定多个 <option>-K</option> 选项，如：<option>-K</"
+"option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</"
+"replaceable>&nbsp;<option>-K</option>&nbsp;<replaceable>UID_MAX</"
 "replaceable>=<replaceable>499</replaceable>"
 
 #: useradd.8.xml:335(term)
@@ -3175,10 +3175,10 @@ msgstr "<command>su</command> 命令可以接受的选项有："
 
 #: su.1.xml:150(term)
 msgid ""
-"<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</"
 "replaceable>"
 
 #: su.1.xml:155(para)
@@ -5127,10 +5127,10 @@ msgstr "让一个账户的密码立即过期。这可以强制一个用户下次
 
 #: passwd.1.xml:220(term)
 msgid ""
-"<option>-i</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-i</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 
 #: passwd.1.xml:224(para)
@@ -5186,10 +5186,10 @@ msgstr "被锁定了密码的用户不允许更改密码。"
 
 #: passwd.1.xml:269(term)
 msgid ""
-"<option>-n</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 
 #: passwd.1.xml:273(para) chage.1.xml:168(para)
@@ -5203,10 +5203,10 @@ msgstr ""
 
 #: passwd.1.xml:291(term)
 msgid ""
-"<option>-r</option>, <option>--repository</option><replaceable>REPOSITORY</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--repository</option><replaceable>REPOSITORY</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</"
 "replaceable>"
 
 #: passwd.1.xml:295(para)
@@ -5247,10 +5247,10 @@ msgstr ""
 
 #: passwd.1.xml:345(term)
 msgid ""
-"<option>-w</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-w</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 
 #: passwd.1.xml:349(para)
@@ -5265,10 +5265,10 @@ msgstr ""
 
 #: passwd.1.xml:358(term)
 msgid ""
-"<option>-x</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-x</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 
 #: passwd.1.xml:362(para)
@@ -7182,9 +7182,9 @@ msgstr "<command>lastlog</command> 命令可以接受的选项有："
 
 #: lastlog.8.xml:97(term)
 msgid ""
-"<option>-b</option>, <option>--before</option><replaceable>DAYS</replaceable>"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-b</option>, <option>--before</option><replaceable>DAYS</replaceable>"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>DAYS</replaceable>"
 
 #: lastlog.8.xml:101(para)
 msgid ""
@@ -7193,9 +7193,9 @@ msgstr "只显示老于 <emphasis remap=\"I\">DAYS</emphasis> 的最近登录记
 
 #: lastlog.8.xml:128(term) faillog.8.xml:195(term)
 msgid ""
-"<option>-t</option>, <option>--time</option><replaceable>DAYS</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-t</option>, <option>--time</option><replaceable>DAYS</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>DAYS</replaceable>"
 
 #: lastlog.8.xml:133(para)
 msgid ""
@@ -7205,10 +7205,10 @@ msgstr "只现实新于 <emphasis remap=\"I\">DAYS</emphasis> 的最近登录记
 
 #: lastlog.8.xml:140(term) faillog.8.xml:206(term)
 msgid ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 
 #: lastlog.8.xml:145(para)
@@ -7592,9 +7592,9 @@ msgstr "<command>groupmod</command> 命令可以接受的选项有："
 
 #: groupmod.8.xml:96(term) groupadd.8.xml:114(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 
 #: groupmod.8.xml:100(para)
 msgid ""
@@ -7639,10 +7639,10 @@ msgstr ""
 
 #: groupmod.8.xml:135(term)
 msgid ""
-"<option>-n</option>, <option>--new-name</option><replaceable>NEW_GROUP</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--new-name</option><replaceable>NEW_GROUP</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</"
 "replaceable>"
 
 #: groupmod.8.xml:140(para)
@@ -7766,10 +7766,10 @@ msgstr "<command>groupmems</command> 命令可以接受的选项有："
 
 #: groupmems.8.xml:107(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user_name</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>user_name</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 
 #: groupmems.8.xml:109(para)
@@ -7786,10 +7786,10 @@ msgstr ""
 
 #: groupmems.8.xml:118(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user_name</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>user_name</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 
 #: groupmems.8.xml:120(para)
@@ -7806,10 +7806,10 @@ msgstr ""
 
 #: groupmems.8.xml:134(term)
 msgid ""
-"<option>-g</option>, <option>--group</option><replaceable>group_name</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</"
 "replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--group</option><replaceable>group_name</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</"
 "replaceable>"
 
 #: groupmems.8.xml:136(para)
@@ -8025,21 +8025,21 @@ msgstr ""
 
 #: groupadd.8.xml:146(para)
 msgid ""
-"Example: <option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Example: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 msgstr ""
-"示例：<option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"示例：<option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 
 #: groupadd.8.xml:150(para)
 msgid ""
-"Note: <option>-K </option><replaceable>GID_MIN</"
+"Note: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
-"注意：<option>-K </option><replaceable>GID_MIN</"
+"注意：<option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> 尚不能工作。"
 
@@ -8210,9 +8210,9 @@ msgstr "<command>gpasswd</command> 可以接受的选项有："
 
 #: gpasswd.1.xml:147(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user</replaceable>"
 
 #: gpasswd.1.xml:151(para)
 msgid ""
@@ -8224,9 +8224,9 @@ msgstr ""
 
 #: gpasswd.1.xml:160(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user</replaceable>"
 
 #: gpasswd.1.xml:164(para)
 msgid ""
@@ -8238,10 +8238,10 @@ msgstr ""
 
 #: gpasswd.1.xml:181(term)
 msgid ""
-"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 
 #: gpasswd.1.xml:196(term)
@@ -8269,10 +8269,10 @@ msgstr ""
 
 #: gpasswd.1.xml:228(term)
 msgid ""
-"<option>-A</option>, <option>--administrators</option><replaceable>user</"
+"<option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-A</option>, <option>--administrators</option><replaceable>user</"
+"<option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 
 #: gpasswd.1.xml:232(para)
@@ -8281,10 +8281,10 @@ msgstr "设置有管理权限的用户列表。"
 
 #: gpasswd.1.xml:240(term)
 msgid ""
-"<option>-M</option>, <option>--members</option><replaceable>user</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-M</option>, <option>--members</option><replaceable>user</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 
 #: gpasswd.1.xml:244(para)
@@ -8376,10 +8376,10 @@ msgstr ""
 
 #: faillog.8.xml:128(term)
 msgid ""
-"<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>SEC</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>SEC</"
 "replaceable>"
 
 #: faillog.8.xml:133(para)
@@ -8395,9 +8395,9 @@ msgstr "此选项要求对 <filename>/var/log/faillog</filename> 有写入权限
 
 #: faillog.8.xml:144(term)
 msgid ""
-"<option>-m</option>, <option>--maximum</option><replaceable>MAX</replaceable>"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>MAX</replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--maximum</option><replaceable>MAX</replaceable>"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>MAX</replaceable>"
 
 #: faillog.8.xml:149(para)
 msgid ""
@@ -8692,10 +8692,10 @@ msgstr "<command>chpasswd</command> 可以接受的选项有："
 
 #: chpasswd.8.xml:137(term)
 msgid ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>METHOD</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METHOD</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>METHOD</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METHOD</"
 "replaceable>"
 
 #: chpasswd.8.xml:143(para) chgpasswd.8.xml:115(para)
@@ -8734,10 +8734,10 @@ msgstr "如果提供的密码没有加密，则使用 MD5 加密而不是 DES。
 
 #: chpasswd.8.xml:202(term)
 msgid ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>ROUNDS</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</"
 "replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>ROUNDS</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</"
 "replaceable>"
 
 #: chpasswd.8.xml:222(para)
@@ -8878,10 +8878,10 @@ msgstr "<command>chfn</command> 命令可以接受的选项有："
 
 #: chfn.1.xml:117(term)
 msgid ""
-"<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>FULL_NAME</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>FULL_NAME</"
 "replaceable>"
 
 #: chfn.1.xml:121(para)
@@ -8890,10 +8890,10 @@ msgstr "更改用户的全名"
 
 #: chfn.1.xml:125(term)
 msgid ""
-"<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
+"<option>-h</option>, <option>--home-phone</option>&nbsp;<replaceable>HOME_PHONE</"
 "replaceable>"
 msgstr ""
-"<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
+"<option>-h</option>, <option>--home-phone</option>&nbsp;<replaceable>HOME_PHONE</"
 "replaceable>"
 
 #: chfn.1.xml:129(para)
@@ -8902,9 +8902,9 @@ msgstr ""
 
 #: chfn.1.xml:133(term)
 msgid ""
-"<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>OTHER</replaceable>"
 msgstr ""
-"<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>OTHER</replaceable>"
 
 #: chfn.1.xml:137(para)
 msgid ""
@@ -8915,10 +8915,10 @@ msgstr ""
 
 #: chfn.1.xml:145(term)
 msgid ""
-"<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>ROOM_NUMBER</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>ROOM_NUMBER</"
 "replaceable>"
 
 #: chfn.1.xml:149(para)
@@ -8931,10 +8931,10 @@ msgstr "<option>-u</option>, <option>--help</option>"
 
 #: chfn.1.xml:174(term)
 msgid ""
-"<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
+"<option>-w</option>, <option>--work-phone</option>&nbsp;<replaceable>WORK_PHONE</"
 "replaceable>"
 msgstr ""
-"<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
+"<option>-w</option>, <option>--work-phone</option>&nbsp;<replaceable>WORK_PHONE</"
 "replaceable>"
 
 #: chfn.1.xml:178(para)
@@ -8982,10 +8982,10 @@ msgstr "<command>chage</command> 命令可以接受的选项有："
 
 #: chage.1.xml:97(term)
 msgid ""
-"<option>-d</option>, <option>--lastday</option><replaceable>LAST_DAY</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>LAST_DAY</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--lastday</option><replaceable>LAST_DAY</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>LAST_DAY</"
 "replaceable>"
 
 #: chage.1.xml:101(para)
@@ -8997,10 +8997,10 @@ msgstr ""
 
 #: chage.1.xml:109(term)
 msgid ""
-"<option>-E</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-E</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
-"<option>-E</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-E</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 
 #: chage.1.xml:113(para)
@@ -9023,10 +9023,10 @@ msgstr ""
 
 #: chage.1.xml:135(term)
 msgid ""
-"<option>-I</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-I</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 
 #: chage.1.xml:139(para)
@@ -9051,18 +9051,18 @@ msgstr "现实账户年龄信息。"
 
 #: chage.1.xml:164(term)
 msgid ""
-"<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 
 #: chage.1.xml:176(term)
 msgid ""
-"<option>-M</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-M</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 
 #: chage.1.xml:180(para)
@@ -9090,10 +9090,10 @@ msgstr ""
 
 #: chage.1.xml:210(term)
 msgid ""
-"<option>-W</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-W</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 
 #: chage.1.xml:214(para)

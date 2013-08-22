@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1:4.0.18.2-1\n"
 "POT-Creation-Date: 2013-08-22 22:50+0200\n"
-"PO-Revision-Date: 2012-01-29 16:57+0100\n"
+"PO-Revision-Date: 2013-08-23 01:39+0200\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
@@ -382,10 +382,10 @@ msgstr "Не выводить сообщений при работе."
 #: chsh.1.xml:107(term) chpasswd.8.xml:189(term) chgpasswd.8.xml:146(term)
 #: chfn.1.xml:153(term) chage.1.xml:197(term)
 msgid ""
-"<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-R</option>, <option>--root</option> <replaceable>КАТ_CHROOT</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>КАТ_CHROOT</"
 "replaceable>"
 
 #: vipw.8.xml:143(para) usermod.8.xml:324(para) userdel.8.xml:151(para)
@@ -732,10 +732,10 @@ msgstr ""
 
 #: usermod.8.xml:111(term) useradd.8.xml:152(term)
 msgid ""
-"<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--comment</option> <replaceable>КОММЕНТАРИЙ</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>КОММЕНТАРИЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -752,10 +752,10 @@ msgstr ""
 #: usermod.8.xml:125(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
 "<option>-d</option>, <option>--home-dir</option> "
@@ -779,7 +779,7 @@ msgstr ""
 
 #: usermod.8.xml:142(term) useradd.8.xml:192(term) useradd.8.xml:567(term)
 msgid ""
-"<option>-e</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
 "<option>-e</option>, <option>--expiredate</option> "
@@ -812,10 +812,10 @@ msgstr ""
 
 #: usermod.8.xml:163(term) useradd.8.xml:210(term) useradd.8.xml:580(term)
 msgid ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--inactive</option> <replaceable>ДНЕЙ</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -838,9 +838,9 @@ msgstr ""
 
 #: usermod.8.xml:185(term) useradd.8.xml:230(term) useradd.8.xml:596(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GROUP</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option> <replaceable>ГРУППА</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>ГРУППА</replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: usermod.8.xml:190(para)
@@ -868,11 +868,11 @@ msgstr ""
 
 #: usermod.8.xml:205(term) useradd.8.xml:258(term)
 msgid ""
-"<option>-G</option>, <option>--groups</option><replaceable>GROUP1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</"
 "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap=\"I"
 "\">,GROUPN</emphasis>]]]"
 msgstr ""
-"<option>-G</option>, <option>--groups</option> <replaceable>ГРУППА1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>ГРУППА1</"
 "replaceable>[<emphasis remap=\"I\">,ГРУППА2,…</emphasis>[<emphasis remap=\"I"
 "\">,ГРУППАN</emphasis>]]]"
 
@@ -905,10 +905,10 @@ msgstr ""
 
 #: usermod.8.xml:226(term)
 msgid ""
-"<option>-l</option>, <option>--login</option><replaceable>NEW_LOGIN</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>NEW_LOGIN</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--login</option> <replaceable>НОВОЕ_ИМЯ</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>НОВОЕ_ИМЯ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -993,10 +993,10 @@ msgstr ""
 #: usermod.8.xml:291(term) useradd.8.xml:410(term) groupmod.8.xml:158(term)
 #: groupadd.8.xml:168(term)
 msgid ""
-"<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</"
 "replaceable>"
 msgstr ""
-"<option>-p</option>, <option>--password</option> <replaceable>ПАРОЛЬ</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>ПАРОЛЬ</"
 "replaceable>"
 
 #: usermod.8.xml:296(para) groupmod.8.xml:163(para)
@@ -1039,9 +1039,9 @@ msgstr ""
 #: usermod.8.xml:332(term) useradd.8.xml:472(term) useradd.8.xml:617(term)
 #: su.1.xml:188(term) chsh.1.xml:120(term)
 msgid ""
-"<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--shell</option> <replaceable>ОБОЛОЧКА</"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>ОБОЛОЧКА</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -1055,9 +1055,9 @@ msgstr ""
 
 #: usermod.8.xml:344(term) useradd.8.xml:487(term)
 msgid ""
-"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--uid</option> <replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 
 #: usermod.8.xml:349(para)
 msgid "The new numerical value of the user's ID."
@@ -1131,13 +1131,13 @@ msgstr ""
 #: usermod.8.xml:395(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-v</option>, <option>--add-sub-uids</option><replaceable>FIRST</"
+"<option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>УЧЁТНАЯ ЗАПИСЬ</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>УЧЁТНАЯ ЗАПИСЬ</"
 "replaceable>|<replaceable>ДИАПАЗОН</replaceable>"
 
 #: usermod.8.xml:400(para)
@@ -1168,13 +1168,13 @@ msgstr ""
 #: usermod.8.xml:414(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-V</option>, <option>--del-sub-uids</option><replaceable>FIRST</"
+"<option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>УЧЁТНАЯ ЗАПИСЬ</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>УЧЁТНАЯ ЗАПИСЬ</"
 "replaceable>|<replaceable>ДИАПАЗОН</replaceable>"
 
 #: usermod.8.xml:419(para)
@@ -1192,13 +1192,13 @@ msgstr ""
 #: usermod.8.xml:435(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-w</option>, <option>--add-sub-gids</option><replaceable>FIRST</"
+"<option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>УЧЁТНАЯ ЗАПИСЬ</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>УЧЁТНАЯ ЗАПИСЬ</"
 "replaceable>|<replaceable>ДИАПАЗОН</replaceable>"
 
 #: usermod.8.xml:440(para)
@@ -1223,13 +1223,13 @@ msgstr ""
 #: usermod.8.xml:454(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-W</option>, <option>--del-sub-gids</option><replaceable>FIRST</"
+"<option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>УЧЁТНАЯ ЗАПИСЬ</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>УЧЁТНАЯ ЗАПИСЬ</"
 "replaceable>|<replaceable>ДИАПАЗОН</replaceable>"
 
 #: usermod.8.xml:459(para)
@@ -1250,10 +1250,10 @@ msgstr ""
 
 #: usermod.8.xml:475(term) useradd.8.xml:523(term)
 msgid ""
-"<option>-Z</option>, <option>--selinux-user</option><replaceable>SEUSER</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</"
 "replaceable>"
 msgstr ""
-"<option>-Z</option>, <option>--selinux-user</option> <replaceable>SEUSER</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</"
 "replaceable>"
 
 #: usermod.8.xml:480(para)
@@ -2164,7 +2164,7 @@ msgstr "Параметры команды <command>useradd</command>:"
 
 #: useradd.8.xml:129(term) useradd.8.xml:548(term)
 msgid ""
-"<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
+"<option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</"
 "replaceable>"
 msgstr ""
 "<option>-b</option>, <option>--base-dir</option> "
@@ -2173,7 +2173,7 @@ msgstr ""
 #: useradd.8.xml:134(para)
 msgid ""
 "The default base directory for the system if <option>-d</"
-"option><replaceable>HOME_DIR</replaceable> is not specified. "
+"option>&nbsp;<replaceable>HOME_DIR</replaceable> is not specified. "
 "<replaceable>BASE_DIR</replaceable> is concatenated with the account name to "
 "define the home directory. If the <option>-m</option> option is not used, "
 "<replaceable>BASE_DIR</replaceable> must exist."
@@ -2207,7 +2207,7 @@ msgstr ""
 
 #: useradd.8.xml:165(term)
 msgid ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
 "<option>-d</option>, <option>--home-dir</option> "
@@ -2323,10 +2323,10 @@ msgstr ""
 
 #: useradd.8.xml:280(term)
 msgid ""
-"<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-k</option>, <option>--skel</option> <replaceable>КАТАЛОГ_ШАБЛОНОВ</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>КАТАЛОГ_ШАБЛОНОВ</"
 "replaceable>"
 
 #: useradd.8.xml:285(para)
@@ -2363,10 +2363,10 @@ msgstr "Если возможно, выполняется копирование
 
 #: useradd.8.xml:306(term) groupadd.8.xml:137(term)
 msgid ""
-"<option>-K</option>, <option>--key</option><replaceable>KEY</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>"
 msgstr ""
-"<option>-K</option>, <option>--key</option> <replaceable>КЛЮЧ</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>КЛЮЧ</"
 "replaceable>=<replaceable>ЗНАЧЕНИЕ</replaceable>"
 
 #: useradd.8.xml:311(para)
@@ -2374,24 +2374,24 @@ msgid ""
 "Overrides <filename>/etc/login.defs</filename> defaults (<option>UID_MIN</"
 "option>, <option>UID_MAX</option>, <option>UMASK</option>, "
 "<option>PASS_MAX_DAYS</option> and others). <placeholder-1/> Example: "
-"<option>-K </option><replaceable>PASS_MAX_DAYS</"
+"<option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</"
 "replaceable>=<replaceable>-1</replaceable> can be used when creating system "
 "account to turn off password ageing, even though system account has no "
 "password at all. Multiple <option>-K</option> options can be specified, e."
-"g.: <option>-K </option><replaceable>UID_MIN</replaceable>=<replaceable>100</"
-"replaceable><option>-K </option><replaceable>UID_MAX</"
+"g.: <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</"
+"replaceable>&nbsp;<option>-K</option>&nbsp;<replaceable>UID_MAX</"
 "replaceable>=<replaceable>499</replaceable>"
 msgstr ""
 "Заменяет значения по умолчанию из файла <filename>/etc/login.defs</filename> "
 "(<option>UID_MIN</option>, <option>UID_MAX</option>, <option>UMASK</option>, "
 "<option>PASS_MAX_DAYS</option> и других). <placeholder-1/> Пример: <option>-"
-"K </option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</"
+"K</option>&nbsp;<replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</"
 "replaceable> можно использовать при создании системной учётной записи, чтобы "
 "выключить устаревание пароля, даже если системная учётная запись вообще не "
 "имеет пароля. Можно указывать параметр <option>-K</option> несколько раз, "
-"например: <option>-K </option><replaceable>UID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option> -K </"
-"option><replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>"
+"например: <option>-K</option>&nbsp;<replaceable>UID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>"
 
 #: useradd.8.xml:335(term)
 msgid "<option>-l</option>, <option>--no-log-init</option>"
@@ -3540,10 +3540,10 @@ msgstr "Параметры команды <command>su</command>:"
 
 #: su.1.xml:150(term)
 msgid ""
-"<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--command</option> <replaceable>КОМАНДА</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>КОМАНДА</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -5825,10 +5825,10 @@ msgstr ""
 
 #: passwd.1.xml:220(term)
 msgid ""
-"<option>-i</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-i</option>, <option>--inactive</option> <replaceable>ДНЕЙ</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -5893,10 +5893,10 @@ msgstr "Посетитель с заблокированным паролем н
 
 #: passwd.1.xml:269(term)
 msgid ""
-"<option>-n</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--mindays</option> <replaceable>МИН_ДНЕЙ</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>МИН_ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -5912,10 +5912,10 @@ msgstr ""
 
 #: passwd.1.xml:291(term)
 msgid ""
-"<option>-r</option>, <option>--repository</option><replaceable>REPOSITORY</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--repository</option> <replaceable>РЕПОЗИТОРИЙ</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>РЕПОЗИТОРИЙ</"
 "replaceable>"
 
 #: passwd.1.xml:295(para)
@@ -5961,10 +5961,10 @@ msgstr ""
 
 #: passwd.1.xml:345(term)
 msgid ""
-"<option>-w</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-w</option>, <option>--warndays</option> <replaceable>ПРЕД_ДНЕЙ</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>ПРЕД_ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -5982,10 +5982,10 @@ msgstr ""
 
 #: passwd.1.xml:358(term)
 msgid ""
-"<option>-x</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-x</option>, <option>--maxdays</option> <replaceable>МАКС_ДНЕЙ</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>МАКС_ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -8355,9 +8355,9 @@ msgstr "Параметры команды <command>lastlog</command>:"
 
 #: lastlog.8.xml:97(term)
 msgid ""
-"<option>-b</option>, <option>--before</option><replaceable>DAYS</replaceable>"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-b</option>, <option>--before</option> <replaceable>ДНЕЙ</"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -8369,9 +8369,9 @@ msgstr ""
 
 #: lastlog.8.xml:128(term) faillog.8.xml:195(term)
 msgid ""
-"<option>-t</option>, <option>--time</option><replaceable>DAYS</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-t</option>, <option>--time</option> <replaceable>ДНЕЙ</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>ДНЕЙ</replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: lastlog.8.xml:133(para)
@@ -8383,10 +8383,10 @@ msgstr ""
 
 #: lastlog.8.xml:140(term) faillog.8.xml:206(term)
 msgid ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>УЧЁТНАЯ ЗАПИСЬ</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>УЧЁТНАЯ ЗАПИСЬ</"
 "replaceable>|<replaceable>ДИАПАЗОН</replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -8876,9 +8876,9 @@ msgstr "Параметры команды <command>groupmod</command>:"
 
 #: groupmod.8.xml:96(term) groupadd.8.xml:114(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option> <replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 
 #: groupmod.8.xml:100(para)
 msgid ""
@@ -8927,10 +8927,10 @@ msgstr ""
 
 #: groupmod.8.xml:135(term)
 msgid ""
-"<option>-n</option>, <option>--new-name</option><replaceable>NEW_GROUP</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--new-name</option> <replaceable>НОВАЯ_ГРУППА</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>НОВАЯ_ГРУППА</"
 "replaceable>"
 
 #: groupmod.8.xml:140(para)
@@ -9074,10 +9074,10 @@ msgstr "Параметры команды <command>groupmems</command>:"
 
 #: groupmems.8.xml:107(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user_name</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>имя_пользователя</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>имя_пользователя</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -9097,10 +9097,10 @@ msgstr ""
 
 #: groupmems.8.xml:118(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user_name</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>имя_пользователя</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>имя_пользователя</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -9118,10 +9118,10 @@ msgstr ""
 
 #: groupmems.8.xml:134(term)
 msgid ""
-"<option>-g</option>, <option>--group</option><replaceable>group_name</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</"
 "replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--group</option><replaceable>имя_группы</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>имя_группы</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -9367,21 +9367,21 @@ msgstr ""
 
 #: groupadd.8.xml:146(para)
 msgid ""
-"Example: <option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Example: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 msgstr ""
-"Пример: <option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Пример: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 
 #: groupadd.8.xml:150(para)
 msgid ""
-"Note: <option>-K </option><replaceable>GID_MIN</"
+"Note: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
-"Замечание: запись вида <option>-K </option><replaceable>GID_MIN</"
+"Замечание: запись вида <option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> пока не работает."
 
@@ -9596,9 +9596,9 @@ msgstr "Параметры команды <command>gpasswd</command>:"
 
 #: gpasswd.1.xml:147(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option> <replaceable>пользователь</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>пользователь</"
 "replaceable>"
 
 #: gpasswd.1.xml:151(para)
@@ -9611,9 +9611,9 @@ msgstr ""
 
 #: gpasswd.1.xml:160(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option> <replaceable>пользователь</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>пользователь</"
 "replaceable>"
 
 #: gpasswd.1.xml:164(para)
@@ -9626,10 +9626,10 @@ msgstr ""
 
 #: gpasswd.1.xml:181(term)
 msgid ""
-"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-Q</option>, <option>--root</option><replaceable>КАТ_CHROOT</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>КАТ_CHROOT</"
 "replaceable>"
 
 #: gpasswd.1.xml:196(term)
@@ -9664,7 +9664,7 @@ msgstr ""
 
 #: gpasswd.1.xml:228(term)
 msgid ""
-"<option>-A</option>, <option>--administrators</option><replaceable>user</"
+"<option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
 "<option>-A</option>, <option>--administrators</option> "
@@ -9677,10 +9677,10 @@ msgstr "Задать список администраторов группы."
 
 #: gpasswd.1.xml:240(term)
 msgid ""
-"<option>-M</option>, <option>--members</option><replaceable>user</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-M</option>, <option>--members</option> <replaceable>пользователь</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>пользователь</"
 "replaceable>, …"
 
 # type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
@@ -9799,10 +9799,10 @@ msgstr ""
 
 #: faillog.8.xml:128(term)
 msgid ""
-"<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>SEC</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--lock-secs</option> <replaceable>СЕКУНД</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>СЕКУНД</"
 "replaceable>"
 
 #: faillog.8.xml:133(para)
@@ -9822,9 +9822,9 @@ msgstr ""
 
 #: faillog.8.xml:144(term)
 msgid ""
-"<option>-m</option>, <option>--maximum</option><replaceable>MAX</replaceable>"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>MAX</replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--maximum</option> <replaceable>МАКС_ЧИСЛО</"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>МАКС_ЧИСЛО</"
 "replaceable>"
 
 #: faillog.8.xml:149(para)
@@ -10211,10 +10211,10 @@ msgstr "Параметры команды <command>chpasswd</command>:"
 
 #: chpasswd.8.xml:137(term)
 msgid ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>METHOD</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METHOD</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>МЕТОД</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>МЕТОД</"
 "replaceable>"
 
 #: chpasswd.8.xml:143(para) chgpasswd.8.xml:115(para)
@@ -10261,10 +10261,10 @@ msgstr ""
 
 #: chpasswd.8.xml:202(term)
 msgid ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>ROUNDS</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</"
 "replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>РАУНДОВ</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>РАУНДОВ</"
 "replaceable>"
 
 #: chpasswd.8.xml:222(para)
@@ -10431,10 +10431,10 @@ msgstr "Параметры команды <command>chfn</command>:"
 
 #: chfn.1.xml:117(term)
 msgid ""
-"<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>FULL_NAME</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--full-name</option><replaceable>ФИО</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>ФИО</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><refsect2><title>
@@ -10444,11 +10444,11 @@ msgstr "Изменяет ФИО пользователя."
 
 #: chfn.1.xml:125(term)
 msgid ""
-"<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
+"<option>-h</option>, <option>--home-phone</option>&nbsp;<replaceable>HOME_PHONE</"
 "replaceable>"
 msgstr ""
 "<option>-h</option>, <option>--home-phone</"
-"option><replaceable>ДОМАШНИЙ_ТЕЛЕФОН</replaceable>"
+"option>&nbsp;<replaceable>ДОМАШНИЙ_ТЕЛЕФОН</replaceable>"
 
 #: chfn.1.xml:129(para)
 msgid "Change the user's home phone number."
@@ -10456,9 +10456,9 @@ msgstr "Изменяет номер домашнего телефона поль
 
 #: chfn.1.xml:133(term)
 msgid ""
-"<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>OTHER</replaceable>"
 msgstr ""
-"<option>-o</option>, <option>--other</option><replaceable>ДРУГАЯ</"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>ДРУГАЯ</"
 "replaceable>"
 
 #: chfn.1.xml:137(para)
@@ -10473,10 +10473,10 @@ msgstr ""
 
 #: chfn.1.xml:145(term)
 msgid ""
-"<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>ROOM_NUMBER</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--room</option><replaceable>НОМЕР_КОМНАТЫ</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>НОМЕР_КОМНАТЫ</"
 "replaceable>"
 
 #: chfn.1.xml:149(para)
@@ -10489,11 +10489,11 @@ msgstr "<option>-u</option>, <option>--help</option>"
 
 #: chfn.1.xml:174(term)
 msgid ""
-"<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
+"<option>-w</option>, <option>--work-phone</option>&nbsp;<replaceable>WORK_PHONE</"
 "replaceable>"
 msgstr ""
 "<option>-w</option>, <option>--work-phone</"
-"option><replaceable>РАБОЧИЙ_ТЕЛЕФОН</replaceable>"
+"option>&nbsp;<replaceable>РАБОЧИЙ_ТЕЛЕФОН</replaceable>"
 
 #: chfn.1.xml:178(para)
 msgid "Change the user's office phone number."
@@ -10555,10 +10555,10 @@ msgstr "Параметры команды <command>chage</command>:"
 
 #: chage.1.xml:97(term)
 msgid ""
-"<option>-d</option>, <option>--lastday</option><replaceable>LAST_DAY</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>LAST_DAY</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--lastday</option> <replaceable>ПОСЛ_ДЕНЬ</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>ПОСЛ_ДЕНЬ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -10574,7 +10574,7 @@ msgstr ""
 
 #: chage.1.xml:109(term)
 msgid ""
-"<option>-E</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-E</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
 "<option>-E</option>, <option>--expiredate</option> "
@@ -10607,10 +10607,10 @@ msgstr ""
 
 #: chage.1.xml:135(term)
 msgid ""
-"<option>-I</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-I</option>, <option>--inactive</option> <replaceable>ДНЕЙ</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -10642,18 +10642,18 @@ msgstr "Показать информацию об устаревании учё
 
 #: chage.1.xml:164(term)
 msgid ""
-"<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--mindays</option> <replaceable>МИН_ДНЕЙ</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>МИН_ДНЕЙ</"
 "replaceable>"
 
 #: chage.1.xml:176(term)
 msgid ""
-"<option>-M</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-M</option>, <option>--maxdays</option> <replaceable>МАКС_ДНЕЙ</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>МАКС_ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -10684,10 +10684,10 @@ msgstr ""
 
 #: chage.1.xml:210(term)
 msgid ""
-"<option>-W</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-W</option>, <option>--warndays</option> <replaceable>ПРЕДУП_ДНЕЙ</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>ПРЕДУП_ДНЕЙ</"
 "replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
@@ -10978,11 +10978,11 @@ msgstr ""
 #~ "manvolnum></citerefentry>."
 
 #~ msgid ""
-#~ "Note: <option>-K </option><replaceable>UID_MIN</"
+#~ "Note: <option>-K</option>&nbsp;<replaceable>UID_MIN</"
 #~ "replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</"
 #~ "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 #~ msgstr ""
-#~ "Замечание: запись вида <option>-K </option><replaceable>UID_MIN</"
+#~ "Замечание: запись вида <option>-K</option>&nbsp;<replaceable>UID_MIN</"
 #~ "replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</"
 #~ "replaceable>=<replaceable>499</replaceable> пока не работает."
 
@@ -11365,14 +11365,14 @@ msgstr ""
 #~ msgstr "-"
 
 #, fuzzy
-#~ msgid "<option>-A</option><replaceable>user</replaceable>,..."
+#~ msgid "<option>-A</option>&nbsp;<replaceable>user</replaceable>,..."
 #~ msgstr ""
-#~ "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+#~ "<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 
 #, fuzzy
-#~ msgid "<option>-M</option><replaceable>user</replaceable>,..."
+#~ msgid "<option>-M</option>&nbsp;<replaceable>user</replaceable>,..."
 #~ msgstr ""
-#~ "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+#~ "<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #~ msgid "Display faillog records for all users."

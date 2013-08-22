@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.5\n"
 "POT-Creation-Date: 2013-08-22 22:50+0200\n"
-"PO-Revision-Date: 2012-02-11 21:45+0100\n"
+"PO-Revision-Date: 2013-08-23 01:38+0200\n"
 "Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -384,10 +384,10 @@ msgstr "Modalità silenziosa."
 #: chsh.1.xml:107(term) chpasswd.8.xml:189(term) chgpasswd.8.xml:146(term)
 #: chfn.1.xml:153(term) chage.1.xml:197(term)
 msgid ""
-"<option>-R</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-R</option>, <option>--root</option> <replaceable>CHROOT_DIR</"
+"<option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 
 # type: Plain text
@@ -733,10 +733,10 @@ msgstr ""
 # type: TP
 #: usermod.8.xml:111(term) useradd.8.xml:152(term)
 msgid ""
-"<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--comment</option><replaceable>COMMENTO</"
+"<option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENTO</"
 "replaceable>"
 
 # type: Plain text
@@ -755,13 +755,13 @@ msgstr ""
 #: usermod.8.xml:125(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+#| "<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 #| "replaceable>"
 msgid ""
-"<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 
 # type: Plain text
@@ -783,11 +783,11 @@ msgstr ""
 # type: TP
 #: usermod.8.xml:142(term) useradd.8.xml:192(term) useradd.8.xml:567(term)
 msgid ""
-"<option>-e</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
 "<option>-e</option>, <option>--expiredate</"
-"option><replaceable>DATA_SCADENZA</replaceable>"
+"option>&nbsp;<replaceable>DATA_SCADENZA</replaceable>"
 
 # type: Plain text
 #: usermod.8.xml:147(para) useradd.8.xml:197(para)
@@ -818,10 +818,10 @@ msgstr ""
 # type: TP
 #: usermod.8.xml:163(term) useradd.8.xml:210(term) useradd.8.xml:580(term)
 msgid ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--inactive</option><replaceable>INATTIVO</"
+"<option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INATTIVO</"
 "replaceable>"
 
 # type: Plain text
@@ -845,9 +845,9 @@ msgstr ""
 # type: IP
 #: usermod.8.xml:185(term) useradd.8.xml:230(term) useradd.8.xml:596(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GROUP</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--gid</option><replaceable>GRUPPO</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GRUPPO</replaceable>"
 
 # type: Plain text
 #: usermod.8.xml:190(para)
@@ -877,11 +877,11 @@ msgstr ""
 
 #: usermod.8.xml:205(term) useradd.8.xml:258(term)
 msgid ""
-"<option>-G</option>, <option>--groups</option><replaceable>GROUP1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</"
 "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap=\"I"
 "\">,GROUPN</emphasis>]]]"
 msgstr ""
-"<option>-G</option>, <option>--groups</option><replaceable>GRUPPO1</"
+"<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GRUPPO1</"
 "replaceable>[<emphasis remap=\"I\">,GRUPPO2,...</emphasis>[<emphasis remap="
 "\"I\">,GRUPPON</emphasis>]]]"
 
@@ -914,10 +914,10 @@ msgstr ""
 # type: IP
 #: usermod.8.xml:226(term)
 msgid ""
-"<option>-l</option>, <option>--login</option><replaceable>NEW_LOGIN</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>NEW_LOGIN</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--login</option><replaceable>NUOVO_LOGIN</"
+"<option>-l</option>, <option>--login</option>&nbsp;<replaceable>NUOVO_LOGIN</"
 "replaceable>"
 
 # type: Plain text
@@ -1006,10 +1006,10 @@ msgstr ""
 #: usermod.8.xml:291(term) useradd.8.xml:410(term) groupmod.8.xml:158(term)
 #: groupadd.8.xml:168(term)
 msgid ""
-"<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</"
 "replaceable>"
 msgstr ""
-"<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
+"<option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</"
 "replaceable>"
 
 # type: Plain text
@@ -1055,9 +1055,9 @@ msgstr ""
 #: usermod.8.xml:332(term) useradd.8.xml:472(term) useradd.8.xml:617(term)
 #: su.1.xml:188(term) chsh.1.xml:120(term)
 msgid ""
-"<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
+"<option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>"
 
 # type: Plain text
 #: usermod.8.xml:337(para) chsh.1.xml:124(para)
@@ -1071,9 +1071,9 @@ msgstr ""
 # type: TP
 #: usermod.8.xml:344(term) useradd.8.xml:487(term)
 msgid ""
-"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+"<option>-u</option>, <option>--uid</option>&nbsp;<replaceable>UID</replaceable>"
 
 #: usermod.8.xml:349(para)
 msgid "The new numerical value of the user's ID."
@@ -1148,13 +1148,13 @@ msgstr ""
 #: usermod.8.xml:395(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-v</option>, <option>--add-sub-uids</option><replaceable>FIRST</"
+"<option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 "replaceable>|<replaceable>INTERVALLO</replaceable>"
 
 #: usermod.8.xml:400(para)
@@ -1186,13 +1186,13 @@ msgstr ""
 #: usermod.8.xml:414(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-V</option>, <option>--del-sub-uids</option><replaceable>FIRST</"
+"<option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 "replaceable>|<replaceable>INTERVALLO</replaceable>"
 
 #: usermod.8.xml:419(para)
@@ -1211,13 +1211,13 @@ msgstr ""
 #: usermod.8.xml:435(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-w</option>, <option>--add-sub-gids</option><replaceable>FIRST</"
+"<option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 "replaceable>|<replaceable>INTERVALLO</replaceable>"
 
 #: usermod.8.xml:440(para)
@@ -1244,13 +1244,13 @@ msgstr ""
 #: usermod.8.xml:454(term)
 #, fuzzy
 #| msgid ""
-#| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
+#| "<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 #| "replaceable>|<replaceable>RANGE</replaceable>"
 msgid ""
-"<option>-W</option>, <option>--del-sub-gids</option><replaceable>FIRST</"
+"<option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</"
 "replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 "replaceable>|<replaceable>INTERVALLO</replaceable>"
 
 #: usermod.8.xml:459(para)
@@ -1270,10 +1270,10 @@ msgstr ""
 # type: IP
 #: usermod.8.xml:475(term) useradd.8.xml:523(term)
 msgid ""
-"<option>-Z</option>, <option>--selinux-user</option><replaceable>SEUSER</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</"
 "replaceable>"
 msgstr ""
-"<option>-Z</option>, <option>--selinux-user</option><replaceable>UTENTESE</"
+"<option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>UTENTESE</"
 "replaceable>"
 
 #: usermod.8.xml:480(para)
@@ -2179,22 +2179,22 @@ msgstr "Il comando <command>useradd</command> accetta le seguenti opzioni:"
 # type: TP
 #: useradd.8.xml:129(term) useradd.8.xml:548(term)
 msgid ""
-"<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
+"<option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
+"<option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</"
 "replaceable>"
 
 #: useradd.8.xml:134(para)
 msgid ""
 "The default base directory for the system if <option>-d</"
-"option><replaceable>HOME_DIR</replaceable> is not specified. "
+"option>&nbsp;<replaceable>HOME_DIR</replaceable> is not specified. "
 "<replaceable>BASE_DIR</replaceable> is concatenated with the account name to "
 "define the home directory. If the <option>-m</option> option is not used, "
 "<replaceable>BASE_DIR</replaceable> must exist."
 msgstr ""
 "La directory base predefinita, nel caso che l'opzione <option>-d</"
-"option><replaceable>HOME_DIR</replaceable> non sia specificata. "
+"option>&nbsp;<replaceable>HOME_DIR</replaceable> non sia specificata. "
 "<replaceable>BASE_DIR</replaceable> viene concatenata con il nome "
 "dell'account per definire la directory home. Se l'opzione <option>-m</"
 "option> non è usata, <replaceable>BASE_DIR</replaceable> deve esistere."
@@ -2221,10 +2221,10 @@ msgstr ""
 # type: TP
 #: useradd.8.xml:165(term)
 msgid ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--home-dir</option><replaceable>HOME_DIR</"
+"<option>-d</option>, <option>--home-dir</option>&nbsp;<replaceable>HOME_DIR</"
 "replaceable>"
 
 # type: Plain text
@@ -2342,10 +2342,10 @@ msgstr ""
 # type: IP
 #: useradd.8.xml:280(term)
 msgid ""
-"<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-k</option>, <option>--skel</option><replaceable>SKEL_DIR</"
+"<option>-k</option>, <option>--skel</option>&nbsp;<replaceable>SKEL_DIR</"
 "replaceable>"
 
 #: useradd.8.xml:285(para)
@@ -2382,10 +2382,10 @@ msgstr "Se possibile vengono copiate le ACL e gli attributi estesi."
 
 #: useradd.8.xml:306(term) groupadd.8.xml:137(term)
 msgid ""
-"<option>-K</option>, <option>--key</option><replaceable>KEY</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>"
 msgstr ""
-"<option>-K</option>, <option>--key</option><replaceable>KEY</"
+"<option>-K</option>, <option>--key</option>&nbsp;<replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>."
 
 #: useradd.8.xml:311(para)
@@ -2393,24 +2393,24 @@ msgid ""
 "Overrides <filename>/etc/login.defs</filename> defaults (<option>UID_MIN</"
 "option>, <option>UID_MAX</option>, <option>UMASK</option>, "
 "<option>PASS_MAX_DAYS</option> and others). <placeholder-1/> Example: "
-"<option>-K </option><replaceable>PASS_MAX_DAYS</"
+"<option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</"
 "replaceable>=<replaceable>-1</replaceable> can be used when creating system "
 "account to turn off password ageing, even though system account has no "
 "password at all. Multiple <option>-K</option> options can be specified, e."
-"g.: <option>-K </option><replaceable>UID_MIN</replaceable>=<replaceable>100</"
-"replaceable><option>-K </option><replaceable>UID_MAX</"
+"g.: <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</"
+"replaceable>&nbsp;<option>-K</option>&nbsp;<replaceable>UID_MAX</"
 "replaceable>=<replaceable>499</replaceable>"
 msgstr ""
 "Forza l'impostazione al di là di quanto specificato in <filename>/etc/login."
 "defs</filename> (<option>UID_MIN</option>, <option>UID_MAX</option>, "
 "<option>UMASK</option>, <option>PASS_MAX_DAYS</option> e altri). "
-"<placeholder-1/> Esempio: <option>-K</option> <replaceable>PASS_MAX_DAYS</"
+"<placeholder-1/> Esempio: <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</"
 "replaceable>=<replaceable>-1</replaceable> può essere usato durante la "
 "creazione di account di sistema per disabilitare la scadenza della password "
 "anche se l'account di sistema non ha affatto la password. Possono essere "
-"specificate più opzioni <option>-K</option>, come in: <option>-K</option> "
-"<replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable> <option>-"
-"K</option> <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>"
+"specificate più opzioni <option>-K</option>, come in: <option>-K</option>&nbsp;"
+"<replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>&nbsp;<option>-"
+"K</option>&nbsp;<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>"
 
 # type: IP
 #: useradd.8.xml:335(term)
@@ -3541,10 +3541,10 @@ msgstr "Il comando <command>su</command> accetta le seguenti opzioni:"
 # type: IP
 #: su.1.xml:150(term)
 msgid ""
-"<option>-c</option>, <option>--command</option><replaceable>COMMAND</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--command</option><replaceable>COMANDO</"
+"<option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMANDO</"
 "replaceable>"
 
 #: su.1.xml:155(para)
@@ -5838,10 +5838,10 @@ msgstr ""
 # type: TP
 #: passwd.1.xml:220(term)
 msgid ""
-"<option>-i</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-i</option>, <option>--inactive</option><replaceable>INATTIVO</"
+"<option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INATTIVO</"
 "replaceable>"
 
 #: passwd.1.xml:224(para)
@@ -5905,10 +5905,10 @@ msgstr "Gli utenti con password bloccata non la possono cambiare."
 # type: IP
 #: passwd.1.xml:269(term)
 msgid ""
-"<option>-n</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--mindays</option><replaceable>MIN_GIORNI</"
+"<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_GIORNI</"
 "replaceable>"
 
 # type: Plain text
@@ -5925,10 +5925,10 @@ msgstr ""
 # type: IP
 #: passwd.1.xml:291(term)
 msgid ""
-"<option>-r</option>, <option>--repository</option><replaceable>REPOSITORY</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--repository</option><replaceable>REPOSITORY</"
+"<option>-r</option>, <option>--repository</option>&nbsp;<replaceable>REPOSITORY</"
 "replaceable>"
 
 #: passwd.1.xml:295(para)
@@ -5977,10 +5977,10 @@ msgstr ""
 # type: IP
 #: passwd.1.xml:345(term)
 msgid ""
-"<option>-w</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-w</option>, <option>--warndays</option><replaceable>AVVISO_GIORNI</"
+"<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>AVVISO_GIORNI</"
 "replaceable>"
 
 # type: Plain text
@@ -5999,10 +5999,10 @@ msgstr ""
 # type: IP
 #: passwd.1.xml:358(term)
 msgid ""
-"<option>-x</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-x</option>, <option>--maxdays</option><replaceable>MAX_GIORNI</"
+"<option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_GIORNI</"
 "replaceable>"
 
 #: passwd.1.xml:362(para)
@@ -8294,9 +8294,9 @@ msgstr "Il comando <command>lastlog</command> accetta le seguenti opzioni:"
 # type: IP
 #: lastlog.8.xml:97(term)
 msgid ""
-"<option>-b</option>, <option>--before</option><replaceable>DAYS</replaceable>"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-b</option>, <option>--before</option><replaceable>GIORNI</"
+"<option>-b</option>, <option>--before</option>&nbsp;<replaceable>GIORNI</"
 "replaceable>"
 
 # type: Plain text
@@ -8310,9 +8310,9 @@ msgstr ""
 # type: IP
 #: lastlog.8.xml:128(term) faillog.8.xml:195(term)
 msgid ""
-"<option>-t</option>, <option>--time</option><replaceable>DAYS</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>DAYS</replaceable>"
 msgstr ""
-"<option>-t</option>, <option>--time</option><replaceable>GIORNI</replaceable>"
+"<option>-t</option>, <option>--time</option>&nbsp;<replaceable>GIORNI</replaceable>"
 
 # type: Plain text
 #: lastlog.8.xml:133(para)
@@ -8326,10 +8326,10 @@ msgstr ""
 # type: IP
 #: lastlog.8.xml:140(term) faillog.8.xml:206(term)
 msgid ""
-"<option>-u</option>, <option>--user</option><replaceable>LOGIN</replaceable>|"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</replaceable>|"
 "<replaceable>RANGE</replaceable>"
 msgstr ""
-"<option>-u</option>, <option>--user</option> <replaceable>LOGIN</"
+"<option>-u</option>, <option>--user</option>&nbsp;<replaceable>LOGIN</"
 "replaceable>|<replaceable>INTERVALLO</replaceable>"
 
 # type: Plain text
@@ -8832,9 +8832,9 @@ msgstr "Il comando <command>groupmod</command> accetta le seguenti opzioni:"
 # type: TP
 #: groupmod.8.xml:96(term) groupadd.8.xml:114(term)
 msgid ""
-"<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
+"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 msgstr ""
-"\"<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
+"\"<option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>"
 
 # type: Plain text
 #: groupmod.8.xml:100(para)
@@ -8887,10 +8887,10 @@ msgstr ""
 # type: TP
 #: groupmod.8.xml:135(term)
 msgid ""
-"<option>-n</option>, <option>--new-name</option><replaceable>NEW_GROUP</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</"
 "replaceable>"
 msgstr ""
-"<option>-n</option>, <option>--new-name</option><replaceable>NUOVO_GRUPPO</"
+"<option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NUOVO_GRUPPO</"
 "replaceable>"
 
 # type: Plain text
@@ -9032,10 +9032,10 @@ msgstr "Il comando <command>groupmems</command> accetta le seguenti opzioni:"
 # type: IP
 #: groupmems.8.xml:107(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user_name</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option> <replaceable>user_name</"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 
 #: groupmems.8.xml:109(para)
@@ -9055,10 +9055,10 @@ msgstr ""
 # type: IP
 #: groupmems.8.xml:118(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user_name</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>user_name</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</"
 "replaceable>"
 
 #: groupmems.8.xml:120(para)
@@ -9076,10 +9076,10 @@ msgstr ""
 # type: IP
 #: groupmems.8.xml:134(term)
 msgid ""
-"<option>-g</option>, <option>--group</option><replaceable>group_name</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</"
 "replaceable>"
 msgstr ""
-"<option>-g</option>, <option>--group</option> <replaceable>group_name</"
+"<option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</"
 "replaceable>"
 
 #: groupmems.8.xml:136(para)
@@ -9330,21 +9330,21 @@ msgstr ""
 # type: IP
 #: groupadd.8.xml:146(para)
 msgid ""
-"Example: <option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Example: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 msgstr ""
-"Esempio: <option>-K </option><replaceable>GID_MIN</"
-"replaceable>=<replaceable>100</replaceable><option>-K </"
-"option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
+"Esempio: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
+"replaceable>=<replaceable>100</replaceable>&nbsp;<option>-K</"
+"option>&nbsp;<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 
 #: groupadd.8.xml:150(para)
 msgid ""
-"Note: <option>-K </option><replaceable>GID_MIN</"
+"Note: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
-"Nota: <option>-K </option><replaceable>GID_MIN</"
+"Nota: <option>-K</option>&nbsp;<replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> non funziona ancora."
 
@@ -9559,9 +9559,9 @@ msgstr "Il comando <command>gpasswd</command> accetta le seguenti opzioni:"
 # type: IP
 #: gpasswd.1.xml:147(term)
 msgid ""
-"<option>-a</option>, <option>--add</option><replaceable>user</replaceable>"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-a</option>, <option>--add</option><replaceable>utente</replaceable>"
+"<option>-a</option>, <option>--add</option>&nbsp;<replaceable>utente</replaceable>"
 
 # type: Plain text
 #: gpasswd.1.xml:151(para)
@@ -9575,9 +9575,9 @@ msgstr ""
 # type: IP
 #: gpasswd.1.xml:160(term)
 msgid ""
-"<option>-d</option>, <option>--delete</option><replaceable>user</replaceable>"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user</replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--delete</option><replaceable>utente</"
+"<option>-d</option>, <option>--delete</option>&nbsp;<replaceable>utente</"
 "replaceable>"
 
 # type: Plain text
@@ -9592,10 +9592,10 @@ msgstr ""
 # type: IP
 #: gpasswd.1.xml:181(term)
 msgid ""
-"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 msgstr ""
-"<option>-Q</option>, <option>--root</option><replaceable>CHROOT_DIR</"
+"<option>-Q</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</"
 "replaceable>"
 
 # type: IP
@@ -9634,10 +9634,10 @@ msgstr ""
 # type: IP
 #: gpasswd.1.xml:228(term)
 msgid ""
-"<option>-A</option>, <option>--administrators</option><replaceable>user</"
+"<option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-A</option>, <option>--administrators</option><replaceable>utente</"
+"<option>-A</option>, <option>--administrators</option>&nbsp;<replaceable>utente</"
 "replaceable>,..."
 
 # type: Plain text
@@ -9648,10 +9648,10 @@ msgstr "Imposta l'elenco degli utenti amministratori."
 # type: IP
 #: gpasswd.1.xml:240(term)
 msgid ""
-"<option>-M</option>, <option>--members</option><replaceable>user</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>user</"
 "replaceable>,..."
 msgstr ""
-"<option>-M</option>, <option>--members</option><replaceable>utente</"
+"<option>-M</option>, <option>--members</option>&nbsp;<replaceable>utente</"
 "replaceable>,..."
 
 #: gpasswd.1.xml:244(para)
@@ -9769,10 +9769,10 @@ msgstr ""
 # type: IP
 #: faillog.8.xml:128(term)
 msgid ""
-"<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>SEC</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--lock-secs</option><replaceable>SEC</"
+"<option>-l</option>, <option>--lock-secs</option>&nbsp;<replaceable>SEC</"
 "replaceable>"
 
 # type: Plain text
@@ -9794,9 +9794,9 @@ msgstr ""
 # type: IP
 #: faillog.8.xml:144(term)
 msgid ""
-"<option>-m</option>, <option>--maximum</option><replaceable>MAX</replaceable>"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>MAX</replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--maximum</option><replaceable>MAX</replaceable>"
+"<option>-m</option>, <option>--maximum</option>&nbsp;<replaceable>MAX</replaceable>"
 
 # type: Plain text
 #: faillog.8.xml:149(para)
@@ -10196,10 +10196,10 @@ msgstr "Il comando <command>chpasswd</command> accetta le seguenti opzioni:"
 # type: IP
 #: chpasswd.8.xml:137(term)
 msgid ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>METHOD</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METHOD</"
 "replaceable>"
 msgstr ""
-"<option>-c</option>, <option>--crypt-method</option><replaceable>METODO</"
+"<option>-c</option>, <option>--crypt-method</option>&nbsp;<replaceable>METODO</"
 "replaceable>"
 
 #: chpasswd.8.xml:143(para) chgpasswd.8.xml:115(para)
@@ -10248,10 +10248,10 @@ msgstr ""
 # type: IP
 #: chpasswd.8.xml:202(term)
 msgid ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>ROUNDS</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</"
 "replaceable>"
 msgstr ""
-"<option>-s</option>, <option>--sha-rounds</option><replaceable>CICLI</"
+"<option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>CICLI</"
 "replaceable>"
 
 #: chpasswd.8.xml:222(para)
@@ -10424,10 +10424,10 @@ msgstr "Il comando <command>chfn</command> accetta le seguenti opzioni:"
 # type: IP
 #: chfn.1.xml:117(term)
 msgid ""
-"<option>-f</option>, <option>--full-name</option><replaceable>FULL_NAME</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>FULL_NAME</"
 "replaceable>"
 msgstr ""
-"<option>-f</option>, <option>--full-name</option><replaceable>NOME_COMPLETO</"
+"<option>-f</option>, <option>--full-name</option>&nbsp;<replaceable>NOME_COMPLETO</"
 "replaceable>"
 
 # type: SS
@@ -10438,11 +10438,11 @@ msgstr "Cambia il nome completo dell'utente."
 # type: IP
 #: chfn.1.xml:125(term)
 msgid ""
-"<option>-h</option>, <option>--home-phone</option><replaceable>HOME_PHONE</"
+"<option>-h</option>, <option>--home-phone</option>&nbsp;<replaceable>HOME_PHONE</"
 "replaceable>"
 msgstr ""
 "<option>-h</option>, <option>--home-phone</"
-"option><replaceable>TELEFONO_CASA</replaceable>"
+"option>&nbsp;<replaceable>TELEFONO_CASA</replaceable>"
 
 #: chfn.1.xml:129(para)
 msgid "Change the user's home phone number."
@@ -10451,9 +10451,9 @@ msgstr "Cambia il numero di telefono di casa dell'utente."
 # type: IP
 #: chfn.1.xml:133(term)
 msgid ""
-"<option>-o</option>, <option>--other</option><replaceable>OTHER</replaceable>"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>OTHER</replaceable>"
 msgstr ""
-"<option>-o</option>, <option>--other</option><replaceable>ALTRO</replaceable>"
+"<option>-o</option>, <option>--other</option>&nbsp;<replaceable>ALTRO</replaceable>"
 
 #: chfn.1.xml:137(para)
 msgid ""
@@ -10468,10 +10468,10 @@ msgstr ""
 # type: IP
 #: chfn.1.xml:145(term)
 msgid ""
-"<option>-r</option>, <option>--room</option><replaceable>ROOM_NUMBER</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>ROOM_NUMBER</"
 "replaceable>"
 msgstr ""
-"<option>-r</option>, <option>--room</option><replaceable>NUMERO_STANZA</"
+"<option>-r</option>, <option>--room</option>&nbsp;<replaceable>NUMERO_STANZA</"
 "replaceable>"
 
 #: chfn.1.xml:149(para)
@@ -10486,11 +10486,11 @@ msgstr "<option>-u</option>, <option>--help</option>"
 # type: IP
 #: chfn.1.xml:174(term)
 msgid ""
-"<option>-w</option>, <option>--work-phone</option><replaceable>WORK_PHONE</"
+"<option>-w</option>, <option>--work-phone</option>&nbsp;<replaceable>WORK_PHONE</"
 "replaceable>"
 msgstr ""
 "<option>-w</option>, <option>--work-phone</"
-"option><replaceable>TELEFONO_LAVORO</replaceable>"
+"option>&nbsp;<replaceable>TELEFONO_LAVORO</replaceable>"
 
 #: chfn.1.xml:178(para)
 msgid "Change the user's office phone number."
@@ -10552,10 +10552,10 @@ msgstr "Il comando <command>chage</command> accetta le seguenti opzioni:"
 # type: IP
 #: chage.1.xml:97(term)
 msgid ""
-"<option>-d</option>, <option>--lastday</option><replaceable>LAST_DAY</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>LAST_DAY</"
 "replaceable>"
 msgstr ""
-"<option>-d</option>, <option>--lastday</option><replaceable>ULTIMO_GIORNO</"
+"<option>-d</option>, <option>--lastday</option>&nbsp;<replaceable>ULTIMO_GIORNO</"
 "replaceable>"
 
 # type: Plain text
@@ -10572,11 +10572,11 @@ msgstr ""
 # type: TP
 #: chage.1.xml:109(term)
 msgid ""
-"<option>-E</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
+"<option>-E</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</"
 "replaceable>"
 msgstr ""
 "<option>-E</option>, <option>--expiredate</"
-"option><replaceable>DATA_SCADENZA</replaceable>"
+"option>&nbsp;<replaceable>DATA_SCADENZA</replaceable>"
 
 # type: Plain text
 #: chage.1.xml:113(para)
@@ -10606,10 +10606,10 @@ msgstr ""
 # type: TP
 #: chage.1.xml:135(term)
 msgid ""
-"<option>-I</option>, <option>--inactive</option><replaceable>INACTIVE</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</"
 "replaceable>"
 msgstr ""
-"<option>-I</option>, <option>--inactive</option><replaceable>INATTIVO</"
+"<option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INATTIVO</"
 "replaceable>"
 
 # type: Plain text
@@ -10643,19 +10643,19 @@ msgstr "Visualizza le informazioni sulla scadenza dell'account."
 # type: IP
 #: chage.1.xml:164(term)
 msgid ""
-"<option>-m</option>, <option>--mindays</option><replaceable>MIN_DAYS</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-m</option>, <option>--mindays</option><replaceable>MIN_GIORNI</"
+"<option>-m</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_GIORNI</"
 "replaceable>"
 
 # type: IP
 #: chage.1.xml:176(term)
 msgid ""
-"<option>-M</option>, <option>--maxdays</option><replaceable>MAX_DAYS</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-M</option>, <option>--maxdays</option><replaceable>MAX_GIORNI</"
+"<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_GIORNI</"
 "replaceable>"
 
 # type: Plain text
@@ -10688,10 +10688,10 @@ msgstr ""
 # type: IP
 #: chage.1.xml:210(term)
 msgid ""
-"<option>-W</option>, <option>--warndays</option><replaceable>WARN_DAYS</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</"
 "replaceable>"
 msgstr ""
-"<option>-W</option>, <option>--warndays</option><replaceable>AVVISO_GIORNI</"
+"<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>AVVISO_GIORNI</"
 "replaceable>"
 
 # type: Plain text
