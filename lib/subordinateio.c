@@ -20,6 +20,14 @@ struct subordinate_range {
 
 #define NFIELDS 3
 
+/*
+ * subordinate_dup: create a duplicate range
+ *
+ * @ent: a pointer to a subordinate_range struct
+ *
+ * Returns a pointer to a newly allocated duplicate subordinate_range struct
+ * or NULL on failure
+ */
 static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 {
 	const struct subordinate_range *rangeent = ent;
@@ -40,6 +48,11 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 	return range;
 }
 
+/*
+ * subordinate_free: free a subordinate_range struct
+ *
+ * @ent: pointer to a subordinate_range struct to free.
+ */
 static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct subordinate_range *rangeent = ent;
@@ -48,6 +61,15 @@ static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 	free (rangeent);
 }
 
+/*
+ * subordinate_parse:
+ *
+ * @line: a line to parse
+ *
+ * Returns a pointer to a subordinate_range struct representing the values
+ * in @line, or NULL on failure.  Note that the returned value should not
+ * be freed by the caller.
+ */
 static void *subordinate_parse (const char *line)
 {
 	static struct subordinate_range range;
@@ -98,6 +120,14 @@ static void *subordinate_parse (const char *line)
 	return &range;
 }
 
+/*
+ * subordinate_put: print a subordinate_range value to a file
+ *
+ * @ent: a pointer to a subordinate_range struct to print out.
+ * @file: file to which to print.
+ *
+ * Returns 0 on success, -1 on error.
+ */
 static int subordinate_put (const void *ent, FILE * file)
 {
 	const struct subordinate_range *range = ent;
@@ -125,6 +155,14 @@ static /*@observer@*/ /*@null*/const struct subordinate_range *subordinate_next(
 	return (const struct subordinate_range *)commonio_next (db);
 }
 
+/*
+ * range_exists: Check whether @owner owns any ranges
+ *
+ * @db: database to query
+ * @owner: owner being queried
+ *
+ * Returns true if @owner owns any subuid ranges, false otherwise.
+ */
 static const bool range_exists(struct commonio_db *db, const char *owner)
 {
 	const struct subordinate_range *range;
@@ -136,6 +174,17 @@ static const bool range_exists(struct commonio_db *db, const char *owner)
 	return false;
 }
 
+/*
+ * find_range: find a range which @owner is authorized to use which includes
+ *             subuid @val.
+ *
+ * @db: database to query
+ * @owner: owning uid being queuried
+ * @val: subuid being searched for.
+ *
+ * Returns a range of subuids belonging to @owner and including the subuid
+ * @val, or NULL if no such range exists.
+ */
 static const struct subordinate_range *find_range(struct commonio_db *db,
 						  const char *owner, unsigned long val)
 {
@@ -154,6 +203,16 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 	return NULL;
 }
 
+/*
+ * have_range: check whether @owner is authorized to use the range
+ *             (@start .. @start+@count-1).
+ * @db: database to check
+ * @owner: owning uid being queried
+ * @start: start of range
+ * @count: number of uids in range
+ *
+ * Returns true if @owner is authorized to use the range, false otherwise.
+ */
 static bool have_range(struct commonio_db *db,
 		       const char *owner, unsigned long start, unsigned long count)
 {
@@ -179,6 +238,17 @@ static bool have_range(struct commonio_db *db,
 	return false;
 }
 
+/*
+ * subordinate_range_cmp: compare uid ranges
+ *
+ * @p1: pointer to a commonio_entry struct to compare
+ * @p2: pointer to second commonio_entry struct to compare
+ *
+ * Returns 0 if the entries are the same.  Otherwise return -1
+ * if the range in p1 is lower than that in p2, or (if the ranges are
+ * equal) if the owning uid in p1 is lower than p2's.  Return 1 if p1's
+ * range or owning uid is great than p2's.
+ */
 static int subordinate_range_cmp (const void *p1, const void *p2)
 {
 	struct subordinate_range *range1, *range2;
@@ -203,6 +273,16 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
 		return strcmp(range1->owner, range2->owner);
 }
 
+/*
+ * find_free_range: find an unused consecutive sequence of ids to allocate
+ *                  to a user.
+ * @db: database to search
+ * @min: the first uid in the range to find
+ * @max: the highest uid to find
+ * @count: the number of uids needed
+ *
+ * Return the lowest new uid, or ULONG_MAX on failure.
+ */
 static unsigned long find_free_range(struct commonio_db *db,
 				     unsigned long min, unsigned long max,
 				     unsigned long count)
@@ -249,6 +329,17 @@ fail:
 	return ULONG_MAX;
 }
 
+/*
+ * add_range: add a subuid range to an owning uid's list of authorized
+ *            subuids.
+ * @db: database to which to add
+ * @owner: uid which owns the subuid
+ * @start: the first uid in the owned range
+ * @count: the number of uids in the range
+ *
+ * Return 1 if the range is already present or on succcess.  On error
+ * return 0 and set errno appropriately.
+ */
 static int add_range(struct commonio_db *db,
 	const char *owner, unsigned long start, unsigned long count)
 {
@@ -265,6 +356,17 @@ static int add_range(struct commonio_db *db,
 	return commonio_append(db, &range);
 }
 
+/*
+ * remove_range:  remove a range of subuids from an owning uid's list
+ *                of authorized subuids.
+ * @db: database to work on
+ * @owner: owning uid whose range is being removed
+ * @start: start of the range to be removed
+ * @count: number of uids in the range.
+ *
+ * Returns 0 on failure, 1 on success.  Failure means that we needed to
+ * create a new range to represent the new limits, and failed doing so.
+ */
 static int remove_range (struct commonio_db *db,
                          const char *owner,
                          unsigned long start, unsigned long count)
