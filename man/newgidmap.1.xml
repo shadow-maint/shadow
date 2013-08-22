@@ -125,6 +125,9 @@
       <filename>/etc/subgid</filename> before setting
       <filename>/proc/[pid]/gid_map</filename>.
     </para>
+    <para>
+      Note that newgidmap may be used only once for a given process.
+    </para>
 
   </refsect1>
 

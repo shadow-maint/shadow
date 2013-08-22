@@ -122,6 +122,9 @@
       <filename>/etc/subuid</filename> before setting
       <filename>/proc/[pid]/uid_map</filename>.
     </para>
+    <para>
+      Note that newuidmap may be used only once for a given process.
+    </para>
   </refsect1>
 
   <refsect1 id='options'>
