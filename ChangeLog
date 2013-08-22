@@ -1,5 +1,10 @@
 2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newgrp.1.xml: Fix encoding.
+	* man/sg.1.xml: Likewise.
+
+2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/da.po: Unfuzzy according to previous change.
 	* man/po/de.po: Likewise.
 	* man/po/fr.po: Likewise.
