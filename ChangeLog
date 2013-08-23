@@ -1,5 +1,10 @@
 2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/shadow-man-pages.pot: Regenerated.
+	* man/po/*.po: Updated PO files.
+
+2013-08-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newgrp.1.xml: Fix encoding.
 	* man/sg.1.xml: Likewise.
 
