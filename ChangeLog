@@ -1,3 +1,9 @@
+2013-08-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/vipw.c: After waitpid(), use errno only if waitpid returned
+	-1. Debian#688260
+	* src/vipw.c: Likewise for system().
+
 2013-08-23  victory  <victory.deb@gmail.com>
 
 	* po/ja.po: Updated to 558t

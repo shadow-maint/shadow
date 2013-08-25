@@ -180,7 +180,10 @@ static void vipwexit (const char *msg, int syserr, int ret)
 	if (0 != syserr) {
 		fprintf (stderr, ": %s", strerror (err));
 	}
-	(void) fputs ("\n", stderr);
+	if (   (NULL != msg)
+	    || (0 != syserr)) {
+		(void) fputs ("\n", stderr);
+	}
 	if (!quiet) {
 		fprintf (stdout, _("%s: %s is unchanged\n"), Prog,
 			 filename);
@@ -297,13 +300,24 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		/* use the system() call to invoke the editor so that it accepts
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
+		int status;
 
 		buf = (char *) malloc (strlen (editor) + strlen (fileedit) + 2);
 		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
-			  "%s %s", editor, fileedit);
-		if (system (buf) != 0) {
-			fprintf (stderr, "%s: %s: %s\n", Prog, editor,
+		          "%s %s", editor, fileedit);
+		status = system (buf);
+		if (-1 == status) {
+			fprintf (stderr, _("%s: %s: %s\n"), Prog, editor,
 			         strerror (errno));
+			exit (1);
+		} else if (   WIFEXITED (status)
+		           && (WEXITSTATUS (status) != 0)) {
+			fprintf (stderr, _("%s: %s returned with status %d\n"),
+			         Prog, editor, WEXITSTATUS (status));
+			exit (WEXITSTATUS (status));
+		} else if (WIFSIGNALED (status)) {
+			fprintf (stderr, _("%s: %s killed by signal %d\n"),
+			         Prog, editor, WTERMSIG (status));
 			exit (1);
 		} else {
 			exit (0);
@@ -323,10 +337,15 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		}
 	}
 
-	if (   (-1 == pid)
-	    || (WIFEXITED (status) == 0)
-	    || (WEXITSTATUS (status) != 0)) {
+	if (-1 == pid) {
 		vipwexit (editor, 1, 1);
+	} else if (   WIFEXITED (status)
+	           && (WEXITSTATUS (status) != 0)) {
+		vipwexit (NULL, 0, WEXITSTATUS (status));
+	} else if (WIFSIGNALED (status)) {
+		fprintf (stderr, _("%s: %s killed by signal %d\n"),
+		         Prog, editor, WTERMSIG(status));
+		vipwexit (NULL, 0, 1);
 	}
 
 	if (stat (fileedit, &st2) != 0) {
