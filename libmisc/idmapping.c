@@ -47,7 +47,7 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 		return NULL;
 	}
 
-	if (ranges != ((argc - 2) + 2) / 3) {
+	if (ranges != ((argc + 2) / 3)) {
 		fprintf(stderr, "%s: ranges: %u is wrong for argc: %d\n", Prog, ranges, argc);
 		return NULL;
 	}
