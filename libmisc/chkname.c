@@ -56,8 +56,10 @@ static bool is_valid_name (const char *name)
 	    !((('a' <= *name) && ('z' >= *name)) || ('_' == *name))) {
 		return false;
 	}
-	/*
- *  The following usernames have been retired.
+
+/*
+ *  To recognize their contributions to the art, science and practice 
+ *  of computing, the following usernames have been retired.
  *
  *  dmr - Dennis MacAlistair Ritchie (September 9, 1941 - October 12, 2011)
  *  mrc - Mark Reed Crispin (July 19, 1956 - December 28, 2012)
