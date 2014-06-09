@@ -82,6 +82,8 @@
     <para>
       The <command>newuidmap</command> sets <filename>/proc/[pid]/uid_map</filename> based on it's
       command line arguments and the uids allowed in <filename>/etc/subuid</filename>.
+      Note that the root user is not exempted from the requirement for a valid
+      <filename>/etc/subuid</filename> entry.
     </para>
 
     <para>
