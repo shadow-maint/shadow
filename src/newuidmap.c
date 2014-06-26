@@ -94,7 +94,7 @@ void usage(void)
  */
 int main(int argc, char **argv)
 {
-	char proc_dir_name[PATH_MAX];
+	char proc_dir_name[32];
 	char *target_str;
 	pid_t target, parent;
 	int proc_dir_fd;
@@ -120,6 +120,7 @@ int main(int argc, char **argv)
 	if (!get_pid(target_str, &target))
 		usage();
 
+	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
 	written = snprintf(proc_dir_name, sizeof(proc_dir_name), "/proc/%u/",
 		target);
 	if ((written <= 0) || (written >= sizeof(proc_dir_name))) {
