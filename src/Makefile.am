@@ -52,9 +52,12 @@ usbin_PROGRAMS = \
 noinst_PROGRAMS = id sulogin
 
 suidbins       = su
-suidubins      = chage chfn chsh expiry gpasswd newgrp passwd newuidmap newgidmap
+suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
 if ACCT_TOOLS_SETUID
 	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
+endif
+if ENABLE_SUBIDS
+	suidubins += newgidmap newuidmap
 endif
 
 if WITH_TCB

@@ -1361,6 +1361,7 @@ static void process_flags (int argc, char **argv)
 		exit (E_UID_IN_USE);
 	}
 
+#ifdef ENABLE_SUBIDS
 	if (   (vflg || Vflg)
 	    && !is_sub_uid) {
 		fprintf (stderr,
@@ -1376,6 +1377,7 @@ static void process_flags (int argc, char **argv)
 		         Prog, sub_gid_dbname (), "-w", "-W");
 		exit (E_USAGE);
 	}
+#endif				/* ENABLE_SUBIDS */
 }
 
 /*
