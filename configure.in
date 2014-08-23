@@ -335,16 +335,10 @@ if test "$enable_subids" != "no"; then
 	dnl
 	dnl FIXME: check if 32 bit UIDs/GIDs are supported by libc
 	dnl
-	AC_RUN_IFELSE([AC_LANG_SOURCE([
-#include <sys/types.h>
-int main(void) {
-	uid_t u;
-	gid_t g;
-	return (sizeof u < 4) || (sizeof g < 4);
-}
-	])], [id32bit="yes"], [id32bit="no"])
+	AC_CHECK_SIZEOF([uid_t],, [#include "sys/types.h"])
+	AC_CHECK_SIZEOF([gid_t],, [#include "sys/types.h"])
 
-	if test "x$id32bit" = "xyes"; then
+	if test "$ac_cv_sizeof_uid_t" -ge 4 && test "$ac_cv_sizeof_gid_t" -ge 4; then
 		AC_DEFINE(ENABLE_SUBIDS, 1, [Define to support the subordinate IDs.])
 		enable_subids="yes"
 	else
