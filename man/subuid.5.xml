@@ -57,7 +57,7 @@
     </para>
     <itemizedlist mark='bullet'>
       <listitem>
-	<para>login name</para>
+	<para>login name or UID</para>
       </listitem>
       <listitem>
 	<para>numerical subordinate user ID</para>

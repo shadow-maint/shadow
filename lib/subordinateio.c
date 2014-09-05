@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include "commonio.h"
 #include "subordinateio.h"
+#include <sys/types.h>
+#include <pwd.h>
 
 struct subordinate_range {
 	const char *owner;
@@ -189,6 +191,15 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 						  const char *owner, unsigned long val)
 {
 	const struct subordinate_range *range;
+
+	/*
+	 * Search for exact username/group specification
+	 *
+	 * This is the original method - go fast through the db, doing only
+	 * exact username/group string comparison. Therefore we leave it as-is
+	 * for the time being, in order to keep it equally fast as it was
+	 * before.
+	 */
 	commonio_rewind(db);
 	while ((range = commonio_next(db)) != NULL) {
 		unsigned long first = range->start;
@@ -200,6 +211,74 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 		if ((val >= first) && (val <= last))
 			return range;
 	}
+
+
+        /*
+         * We only do special handling for these two files
+         */
+        if ((0 != strcmp(db->filename, "/etc/subuid")) && (0 != strcmp(db->filename, "/etc/subgid")))
+                return NULL;
+
+        /*
+         * Search loop above did not produce any result. Let's rerun it,
+         * but this time try to matcha actual UIDs. The first entry that
+         * matches is considered a success.
+         * (It may be specified as literal UID or as another username which
+         * has the same UID as the username we are looking for.)
+         */
+        struct passwd *pwd;
+        uid_t          owner_uid;
+        char           owner_uid_string[33] = "";
+
+
+        /* Get UID of the username we are looking for */
+        pwd = getpwnam(owner);
+        if (NULL == pwd) {
+                /* Username not defined in /etc/passwd, or error occured during lookup */
+                return NULL;
+        }
+        owner_uid = pwd->pw_uid;
+        sprintf(owner_uid_string, "%lu", (unsigned long int)owner_uid);
+
+        commonio_rewind(db);
+        while ((range = commonio_next(db)) != NULL) {
+                unsigned long first = range->start;
+                unsigned long last = first + range->count - 1;
+
+                /*
+                 * First check if range owner is specified as numeric UID
+                 * and if it matches.
+                 */
+                if (0 != strcmp(range->owner, owner_uid_string)) {
+                        /*
+                         * Ok, this range owner is not specified as numeric UID
+                         * we are looking for. It may be specified as another
+                         * UID or as a literal username.
+                         *
+                         * If specified as another UID, the call to getpwnam()
+                         * will return NULL.
+                         *
+                         * If specified as literal username, we will get its
+                         * UID and compare that to UID we are looking for.
+                         */
+                        const struct passwd *range_owner_pwd;
+
+                        range_owner_pwd = getpwnam(range->owner);
+                        if (NULL == range_owner_pwd) {
+                                continue;
+                        }
+
+                        if (owner_uid != range_owner_pwd->pw_uid) {
+                                continue;
+                        }
+                }
+
+                /* Owner matches, now let us check this UID/GID range */
+                if ((val >= first) && (val <= last)) {
+                        return range;
+                }
+        }
+
 	return NULL;
 }
 
