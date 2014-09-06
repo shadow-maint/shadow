@@ -245,36 +245,38 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                 unsigned long first = range->start;
                 unsigned long last = first + range->count - 1;
 
-                /*
-                 * First check if range owner is specified as numeric UID
-                 * and if it matches.
-                 */
-                if (0 != strcmp(range->owner, owner_uid_string)) {
-                        /*
-                         * Ok, this range owner is not specified as numeric UID
-                         * we are looking for. It may be specified as another
-                         * UID or as a literal username.
-                         *
-                         * If specified as another UID, the call to getpwnam()
-                         * will return NULL.
-                         *
-                         * If specified as literal username, we will get its
-                         * UID and compare that to UID we are looking for.
-                         */
-                        const struct passwd *range_owner_pwd;
-
-                        range_owner_pwd = getpwnam(range->owner);
-                        if (NULL == range_owner_pwd) {
-                                continue;
-                        }
-
-                        if (owner_uid != range_owner_pwd->pw_uid) {
-                                continue;
-                        }
+                /* For performance reasons check range before using getpwnam() */
+                if ((val < first) || (val > last)) {
+                        continue;
                 }
 
-                /* Owner matches, now let us check this UID/GID range */
-                if ((val >= first) && (val <= last)) {
+                /*
+                 * Range matches. Check if range owner is specified
+                 * as numeric UID and if it matches.
+                 */
+                if (0 == strcmp(range->owner, owner_uid_string)) {
+                        return range;
+                }
+
+                /*
+                 * Ok, this range owner is not specified as numeric UID
+                 * we are looking for. It may be specified as another
+                 * UID or as a literal username.
+                 *
+                 * If specified as another UID, the call to getpwnam()
+                 * will return NULL.
+                 *
+                 * If specified as literal username, we will get its
+                 * UID and compare that to UID we are looking for.
+                 */
+                const struct passwd *range_owner_pwd;
+
+                range_owner_pwd = getpwnam(range->owner);
+                if (NULL == range_owner_pwd) {
+                        continue;
+                }
+
+                if (owner_uid == range_owner_pwd->pw_uid) {
                         return range;
                 }
         }
