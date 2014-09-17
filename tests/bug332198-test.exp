@@ -1,0 +1,61 @@
+#!/usr/bin/expect -f
+
+# This is a script for repeatedly logging into the localhost
+# using `rlogin` in order to apparently see a symptoms described
+# in bug #332198.
+# As described in the bug log, sometimes `rlogind` will fail to
+# establish a connection, because it starts "login" process and
+# the latter fails with "unable to determine TTY name, got /dev/pts/1"
+# message.
+# 
+# BUGS
+# 
+# * the script rlogins to localhost
+# * the script doesn't handle passwdord prompt, because it's intended
+#   to use .rhosts auth and expects shell prompt immediately after
+#   `rlogin`
+# * the regexp for shell prompt is hardcoded
+
+log_user 0
+match_max 8192
+
+while {1} {
+    set rlogin_spawn [spawn rlogin localhost]
+    if { $rlogin_spawn == 0 } { exit 1 }
+    expect {
+	-timeout 10 -re "^.*(Last login\[^\r\n\]*).*\n(\[^\r\n\]*\[#$\] )$" {
+	    send_error "$expect_out(1,string)\n"
+	    send_error "$expect_out(2,string)\n"
+#	    send_error "$expect_out(0,string)\n"
+	}
+	timeout {
+	    send_error "TIMEOUT/prompt\n"
+	    send_error "$expect_out(buffer)\n"
+	    send_error "RETRYING\n"
+	    log_user 1
+	    send "tty /\r"
+	    expect -timeout 2 -re "^.*\r?\n(\[^\r\n\]*# )$" {}
+	    send "tty /\r"
+	    expect -timeout 2 -re "^.*\r?\n(\[^\r\n\]*# )$" {}
+	    send_error "\n"
+	    exit 2
+	}
+    }
+    send "tty\r"
+    expect {
+	-timeout 4 -re "tty\r?\n(\[^\r\n\]*)\r?\n(\[^\r\n\]*\[#$\] )$" {
+	    send_error "$expect_out(2,string)$expect_out(1,string)\n"
+#	    send_error "$expect_out(0,string)\n"
+	}
+	timeout { send_error "TIMEOUT/tty\n" ; exit 3 }
+    }
+    send "exit\r"
+    expect {
+	-timeout 2 eof {
+#	    send_error "OK4: EOF\n"
+	}
+	timeout { send_error "TIMEOUT/eof\n" ; exit 4 }
+    }
+    wait
+}
+# vi: set sw=4:

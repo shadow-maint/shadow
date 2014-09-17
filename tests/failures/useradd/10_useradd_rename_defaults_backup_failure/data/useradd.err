@@ -1,0 +1,2 @@
+rename FAILURE /etc/default/useradd /etc/default/useradd-
+useradd: rename: /etc/default/useradd: Input/output error
