@@ -18,7 +18,11 @@ change_config
 
 mkdir /home/foo
 echo toto > /home/foo/toto
+echo root > /home/foo/uroot
+echo root > /home/foo/groot
 chown -R foo:foo /home/foo
+chown root /home/foo/uroot
+chgrp root /home/foo/groot
 
 echo -n "Change the user's home directory (usermod -m -d /home/foo2 -u 1001 foo)..."
 usermod -m -d /home/foo2 -u 1001 foo
