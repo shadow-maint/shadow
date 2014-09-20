@@ -37,7 +37,7 @@ restore_config ()
 			cp -dp "tmp/$file" "/$file"
 			rm "tmp/$file"
 		else
-			rm "/$file"
+			rm -f "/$file"
 		fi
 		d="$(dirname "tmp/$file")"
 		while [ -n "$d" ] && [ "$d" != "." ]
