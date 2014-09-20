@@ -5,6 +5,7 @@ set -e
 export LC_ALL=C
 unset LANG
 unset LANGUAGE
+. common/config.sh
 
 USE_PAM="yes"
 
@@ -49,10 +50,10 @@ echo "-: test failed"
 # Empty the complete log.
 > testsuite.log
 
-find /root/build/shadow-4.1.5 -name "*.gcda" -delete
+find ${build_path} -name "*.gcda" -delete
 run_test ./su/01/su_root.test
 run_test ./su/01/su_user.test
-find /root/build/shadow-4.1.5 -name "*.gcda" -exec chmod a+rw {} \;
+find ${build_path} -name "*.gcda" -exec chmod a+rw {} \;
 run_test ./su/02/env_FOO-options_--login
 run_test ./su/02/env_FOO-options_--login_bash
 run_test ./su/02/env_FOO-options_--preserve-environment
@@ -119,7 +120,7 @@ run_test ./su/11_su_sulog_failure/su.test
 run_test ./su/12_su_child_failure/su.test
 run_test ./su/13_su_child_success/su.test
 run_test ./chage/01/run
-find /root/build/shadow-4.1.5 -name "*.gcda" -exec chmod a+rw {} \;
+find ${build_path} -name "*.gcda" -exec chmod a+rw {} \;
 run_test ./chage/02/run
 run_test ./chage/03_chsh_usage/chage.test
 run_test ./chage/04_chsh_usage_invalid_option/chage.test
@@ -1201,7 +1202,7 @@ run_test ./passwd/22_passwd_usage/passwd.test
 run_test ./login/01_login_prompt/login.test
 run_test ./login/02_login_user/login.test
 run_test ./login/03_login_check_tty/login.test
-find /root/build/shadow-4.1.5 -name "*.gcda" -exec chmod a+rw {} \;
+find ${build_path} -name "*.gcda" -exec chmod a+rw {} \;
 
 echo
 echo "$succeded test(s) passed"
