@@ -791,6 +791,7 @@ run_test ./usertools/userdel/06_userdel_no_usergroup/userdel.test
 run_test ./usertools/userdel/07_userdel_usergroup_not_primary/userdel.test
 run_test ./usertools/userdel/08_userdel_usergroup_with_other_members/userdel.test
 run_test ./usertools/userdel/09_userdel_usergroup_no_other_members_in_gshadow/userdel.test
+run_test ./usertools/userdel/10_userdel_del_homedir_symlink/userdel.test
 run_test ./usertools/usermod/01_usermod-p_no_shadow_file/usermod.test
 run_test ./usertools/usermod/02_usermod-p_no_shadow_entry/usermod.test
 run_test ./usertools/usermod/03_usermod-p_no_shadow_entry_but_shadow_enabled/usermod.test
@@ -842,6 +843,7 @@ run_test ./usertools/usermod/48_usermod-u_MAIL_FILE/usermod.test
 run_test ./usertools/usermod/49_usermod_change_gid+move_homedir_other_device/usermod.test
 run_test ./usertools/usermod/50_usermod_change_uid+move_homedir/usermod.test
 run_test ./usertools/usermod/51_usermod_change_gid+move_homedir/usermod.test
+run_test ./usertools/usermod/52_usermod_move_homedir_symlink/usermod.test
 run_test ./cptools/01/run1
 run_test ./cptools/01/run2
 run_test ./cptools/01/run3
