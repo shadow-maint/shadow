@@ -22,5 +22,9 @@ Options:
   -s, --shell SHELL             new login shell for the user account
   -u, --uid UID                 new UID for the user account
   -U, --unlock                  unlock the user account
+  -v, --add-subuids FIRST-LAST  add range of subordinate uids
+  -V, --del-subuids FIRST-LAST  remove range of subordinate uids
+  -w, --add-subgids FIRST-LAST  add range of subordinate gids
+  -W, --del-subgids FIRST-LAST  remove range of subordinate gids
   -Z, --selinux-user SEUSER     new SELinux user mapping for the user account
 
