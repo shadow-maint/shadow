@@ -8,6 +8,7 @@ unset LANGUAGE
 . common/config.sh
 
 USE_PAM="yes"
+FAILURE_TESTS="yes"
 
 succeded=0
 failed=0
@@ -1036,6 +1037,7 @@ run_test ./split_groups/07_useradd_split_group_already_split_user_in_both_lines/
 run_test ./split_groups/08_useradd_no_split_group_already_split/useradd.test
 run_test ./split_groups/09_groupdel_split_group_already_split/groupdel.test
 run_test ./split_groups/10_groupdel_no_split_group_already_split/groupdel.test
+if [ "$FAILURE_TESTS" = "yes" ]; then
 run_test ./failures/chage/01_chage_openRW_passwd_failure/chage.test
 run_test ./failures/chage/02_chage_openRO_passwd_failure/chage.test
 run_test ./failures/chage/03_chage_openRW_shadow_failure/chage.test
@@ -1178,6 +1180,7 @@ run_test ./failures/usermod/15_usermod_-w_open_subgid_failure/usermod.test
 run_test ./failures/usermod/16_usermod_-W_open_subgid_failure/usermod.test
 run_test ./failures/usermod/17_usermod_-v_rename_subuid_failure/usermod.test
 run_test ./failures/usermod/18_usermod_-w_rename_subgid_failure/usermod.test
+fi
 run_test ./expiry/01_expiry_-c_no_expiry/expiry.test
 run_test ./expiry/02_expiry_-c_expired/expiry.test
 run_test ./expiry/03_expiry_-f_expired/expiry.test
