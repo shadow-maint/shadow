@@ -305,7 +305,8 @@ int main (int argc, char **argv)
 	}
 
 	/* /etc/passwd- (backup file) */
-	if (chmod (PASSWD_FILE "-", 0600) != 0) {
+	errno = 0;
+	if ((chmod (PASSWD_FILE "-", 0600) != 0) && (errno != ENOENT)) {
 		fprintf (stderr,
 		         _("%s: failed to change the mode of %s to 0600\n"),
 		         Prog, PASSWD_FILE "-");
