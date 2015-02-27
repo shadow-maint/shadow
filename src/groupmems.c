@@ -536,14 +536,14 @@ static void open_files (void)
 #endif
 	}
 
-	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
+	if (gr_open (list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_open (list ? O_RDONLY : O_RDWR) == 0) {
+		if (sgr_open (list ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 			fail_exit (EXIT_GROUP_FILE);
 		}

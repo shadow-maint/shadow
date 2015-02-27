@@ -373,7 +373,7 @@ static void update_shell (const char *user, char *newshell)
 		fail_exit (1);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		fail_exit (1);

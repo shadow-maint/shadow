@@ -313,7 +313,7 @@ static void open_files (void)
 		fail_exit (1);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (1);
@@ -328,7 +328,7 @@ static void open_files (void)
 			fail_exit (1);
 		}
 		spw_locked = true;
-		if (spw_open (O_RDWR) == 0) {
+		if (spw_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());

@@ -663,7 +663,7 @@ static void lock_files (void)
  */
 static void open_files (void)
 {
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 		exit (E_GRP_UPDATE);
@@ -672,7 +672,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
 	    && (pflg || nflg)) {
-		if (sgr_open (O_RDWR) == 0) {
+		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
@@ -683,7 +683,7 @@ static void open_files (void)
 #endif				/* SHADOWGRP */
 
 	if (gflg) {
-		if (pw_open (O_RDWR) == 0) {
+		if (pw_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, pw_dbname ());

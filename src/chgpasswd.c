@@ -316,7 +316,7 @@ static void open_files (void)
 		fail_exit (1);
 	}
 	gr_locked = true;
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
@@ -332,7 +332,7 @@ static void open_files (void)
 			fail_exit (1);
 		}
 		sgr_locked = true;
-		if (sgr_open (O_RDWR) == 0) {
+		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (1);

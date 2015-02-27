@@ -281,7 +281,7 @@ static void open_files (void)
 	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
 	 * otherwise.
 	 */
-	if (pw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
+	if (pw_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
 		if (use_system_pw_file) {
@@ -290,7 +290,7 @@ static void open_files (void)
 		fail_exit (E_CANTOPEN);
 	}
 	if (is_shadow && !use_tcb) {
-		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
+		if (spw_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());
 			if (use_system_spw_file) {
@@ -566,7 +566,7 @@ static void check_pw_file (int *errors, bool *changed)
 					continue;
 				}
 				spw_locked = true;
-				if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
+				if (spw_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 					fprintf (stderr,
 					         _("%s: cannot open %s\n"),
 					         Prog, spw_dbname ());
