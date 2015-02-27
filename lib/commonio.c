@@ -968,11 +968,10 @@ int commonio_close (struct commonio_db *db)
 	} else {
 		/*
 		 * Default permissions for new [g]shadow files.
-		 * (passwd and group always exist...)
 		 */
-		sb.st_mode = 0400;
-		sb.st_uid = 0;
-		sb.st_gid = 0;
+		sb.st_mode = db->st_mode;
+		sb.st_uid = db->st_uid;
+		sb.st_gid = db->st_gid;
 	}
 
 	snprintf (buf, sizeof buf, "%s+", db->filename);
