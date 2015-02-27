@@ -49,6 +49,32 @@ struct itemdef {
 	/*@null@*/char *value;		/* value given, or NULL if no value     */
 };
 
+#define PAMDEFS					\
+	{"CHFN_AUTH", NULL},			\
+	{"CHSH_AUTH", NULL},			\
+	{"CRACKLIB_DICTPATH", NULL},		\
+	{"ENV_HZ", NULL},			\
+	{"ENVIRON_FILE", NULL},			\
+	{"ENV_TZ", NULL},			\
+	{"FAILLOG_ENAB", NULL},			\
+	{"FTMP_FILE", NULL},			\
+	{"ISSUE_FILE", NULL},			\
+	{"LASTLOG_ENAB", NULL},			\
+	{"LOGIN_STRING", NULL},			\
+	{"MAIL_CHECK_ENAB", NULL},		\
+	{"MOTD_FILE", NULL},			\
+	{"NOLOGINS_FILE", NULL},		\
+	{"OBSCURE_CHECKS_ENAB", NULL},		\
+	{"PASS_ALWAYS_WARN", NULL},		\
+	{"PASS_CHANGE_TRIES", NULL},		\
+	{"PASS_MAX_LEN", NULL},			\
+	{"PASS_MIN_LEN", NULL},			\
+	{"PORTTIME_CHECKS_ENAB", NULL},		\
+	{"QUOTAS_ENAB", NULL},			\
+	{"SU_WHEEL_ONLY", NULL},		\
+	{"ULIMIT", NULL},
+
+
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
 	{"CHFN_RESTRICT", NULL},
@@ -102,29 +128,7 @@ static struct itemdef def_table[] = {
 	{"USERDEL_CMD", NULL},
 	{"USERGROUPS_ENAB", NULL},
 #ifndef USE_PAM
-	{"CHFN_AUTH", NULL},
-	{"CHSH_AUTH", NULL},
-	{"CRACKLIB_DICTPATH", NULL},
-	{"ENV_HZ", NULL},
-	{"ENVIRON_FILE", NULL},
-	{"ENV_TZ", NULL},
-	{"FAILLOG_ENAB", NULL},
-	{"FTMP_FILE", NULL},
-	{"ISSUE_FILE", NULL},
-	{"LASTLOG_ENAB", NULL},
-	{"LOGIN_STRING", NULL},
-	{"MAIL_CHECK_ENAB", NULL},
-	{"MOTD_FILE", NULL},
-	{"NOLOGINS_FILE", NULL},
-	{"OBSCURE_CHECKS_ENAB", NULL},
-	{"PASS_ALWAYS_WARN", NULL},
-	{"PASS_CHANGE_TRIES", NULL},
-	{"PASS_MAX_LEN", NULL},
-	{"PASS_MIN_LEN", NULL},
-	{"PORTTIME_CHECKS_ENAB", NULL},
-	{"QUOTAS_ENAB", NULL},
-	{"SU_WHEEL_ONLY", NULL},
-	{"ULIMIT", NULL},
+	PAMDEFS
 #endif
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
@@ -136,6 +140,13 @@ static struct itemdef def_table[] = {
 	{"USE_TCB", NULL},
 #endif
 	{NULL, NULL}
+};
+
+#define NUMKNOWNDEFS	(sizeof(knowndef_table)/sizeof(knowndef_table[0]))
+static struct itemdef knowndef_table[] = {
+#ifdef USE_PAM
+	PAMDEFS
+#endif
 };
 
 #ifndef LOGINDEFS
@@ -397,10 +408,17 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 	 * Item was never found.
 	 */
 
+	for (ptr = knowndef_table; NULL != ptr->name; ptr++) {
+		if (strcmp (ptr->name, name) == 0) {
+			goto out;
+		}
+	}
 	fprintf (stderr,
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
 	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));
+
+out:
 	return (struct itemdef *) NULL;
 }
 
