@@ -417,21 +417,24 @@ static void def_load (void)
 	char buf[1024], *name, *value, *s;
 
 	/*
+	 * Set the initialized flag.
+	 * (do it early to prevent recursion in putdef_str())
+	 */
+	def_loaded = true;
+
+	/*
 	 * Open the configuration definitions file.
 	 */
 	fp = fopen (def_fname, "r");
 	if (NULL == fp) {
+		if (errno == ENOENT)
+			return;
+
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
 		         def_fname, strerror (err)));
 		exit (EXIT_FAILURE);
 	}
-
-	/*
-	 * Set the initialized flag.
-	 * (do it early to prevent recursion in putdef_str())
-	 */
-	def_loaded = true;
 
 	/*
 	 * Go through all of the lines in the file.
