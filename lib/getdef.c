@@ -139,6 +139,7 @@ static struct itemdef def_table[] = {
 	{"TCB_SYMLINKS", NULL},
 	{"USE_TCB", NULL},
 #endif
+	{"FORCE_SHADOW", NULL},
 	{NULL, NULL}
 };
 

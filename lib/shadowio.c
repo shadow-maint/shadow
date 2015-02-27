@@ -125,6 +125,8 @@ int spw_setdbname (const char *filename)
 
 bool spw_file_present (void)
 {
+	if (getdef_bool ("FORCE_SHADOW"))
+		return true;
 	return commonio_present (&shadow_db);
 }
 
