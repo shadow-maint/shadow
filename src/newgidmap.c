@@ -161,8 +161,10 @@ int main(int argc, char **argv)
 	    (getgid() != pw->pw_gid) ||
 	    (pw->pw_uid != st.st_uid) ||
 	    (pw->pw_gid != st.st_gid)) {
-		fprintf(stderr, _( "%s: Target %u is owned by a different user\n" ),
-			Prog, target);
+		fprintf(stderr, _( "%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
+			Prog, target,
+			(unsigned long int)getuid(), (unsigned long int)pw->pw_uid, (unsigned long int)st.st_uid,
+			(unsigned long int)getgid(), (unsigned long int)pw->pw_gid, (unsigned long int)st.st_gid);
 		return EXIT_FAILURE;
 	}
 
