@@ -55,15 +55,14 @@
 	gr->gr_name = strdup (grent->gr_name);
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_name) {
-		free(gr);
+		gr_free(gr);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	gr->gr_passwd = strdup (grent->gr_passwd);
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_passwd) {
-		free(gr->gr_name);
-		free(gr);
+		gr_free(gr);
 		return NULL;
 	}
 
@@ -73,21 +72,13 @@
 	gr->gr_mem = (char **) malloc ((i + 1) * sizeof (char *));
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_mem) {
-		free(gr->gr_passwd);
-		free(gr->gr_name);
-		free(gr);
+		gr_free(gr);
 		return NULL;
 	}
 	for (i = 0; grent->gr_mem[i]; i++) {
 		gr->gr_mem[i] = strdup (grent->gr_mem[i]);
 		if (NULL == gr->gr_mem[i]) {
-			int j;
-			for (j=0; j<i; j++)
-				free(gr->gr_mem[j]);
-			free(gr->gr_mem);
-			free(gr->gr_passwd);
-			free(gr->gr_name);
-			free(gr);
+			gr_free(gr);
 			return NULL;
 		}
 	}

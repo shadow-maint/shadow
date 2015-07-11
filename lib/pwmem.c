@@ -56,45 +56,35 @@
 	pw->pw_name = strdup (pwent->pw_name);
 	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_name) {
-		free(pw);
+		pw_free(pw);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	pw->pw_passwd = strdup (pwent->pw_passwd);
 	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_passwd) {
-		free(pw->pw_name);
-		free(pw);
+		pw_free(pw);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	pw->pw_gecos = strdup (pwent->pw_gecos);
 	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_gecos) {
-		free(pw->pw_passwd);
-		free(pw->pw_name);
-		free(pw);
+		pw_free(pw);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	pw->pw_dir = strdup (pwent->pw_dir);
 	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_dir) {
-		free(pw->pw_gecos);
-		free(pw->pw_passwd);
-		free(pw->pw_name);
-		free(pw);
+		pw_free(pw);
 		return NULL;
 	}
 	/*@-mustfreeonly@*/
 	pw->pw_shell = strdup (pwent->pw_shell);
 	/*@=mustfreeonly@*/
 	if (NULL == pw->pw_shell) {
-		free(pw->pw_dir);
-		free(pw->pw_gecos);
-		free(pw->pw_passwd);
-		free(pw->pw_name);
-		free(pw);
+		pw_free(pw);
 		return NULL;
 	}
 
