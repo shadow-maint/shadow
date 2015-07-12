@@ -1081,6 +1081,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	if (NULL != p) {
 		if (next_entry_by_name (db, p->next, db->ops->getname (eptr)) != NULL) {
 			fprintf (stderr, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->getname (eptr), db->filename);
+			db->ops->free (nentry);
 			return 0;
 		}
 		db->ops->free (p->eptr);
