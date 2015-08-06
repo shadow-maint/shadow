@@ -255,12 +255,15 @@ static void syslog_sg (const char *name, const char *group)
 {
 	const char *loginname = getlogin ();
 	const char *tty = ttyname (0);
+	char *free_login = NULL, *free_tty = NULL;
 
 	if (loginname != NULL) {
-		loginname = xstrdup (loginname);
+		free_login = xstrdup (loginname);
+		loginname = free_login;
 	}
 	if (tty != NULL) {
-		tty = xstrdup (tty);
+		free_tty = xstrdup (tty);
+		tty = free_tty;
 	}
 
 	if (loginname == NULL) {
@@ -372,6 +375,8 @@ static void syslog_sg (const char *name, const char *group)
 		(void) signal (SIGTTOU, SIG_DFL);
 	}
 #endif				/* USE_PAM */
+	free(free_login);
+	free(free_tty);
 }
 #endif				/* USE_SYSLOG */
 
