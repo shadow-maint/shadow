@@ -71,12 +71,18 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	/* Gather up the ranges from the command line */
 	mapping = mappings;
 	for (idx = 0; idx < ranges; idx++, argidx += 3, mapping++) {
-		if (!getulong(argv[argidx + 0], &mapping->upper))
+		if (!getulong(argv[argidx + 0], &mapping->upper)) {
+			free(mappings);
 			return NULL;
-		if (!getulong(argv[argidx + 1], &mapping->lower))
+		}
+		if (!getulong(argv[argidx + 1], &mapping->lower)) {
+			free(mappings);
 			return NULL;
-		if (!getulong(argv[argidx + 2], &mapping->count))
+		}
+		if (!getulong(argv[argidx + 2], &mapping->count)) {
+			free(mappings);
 			return NULL;
+		}
 	}
 	return mappings;
 }
