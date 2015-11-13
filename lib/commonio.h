@@ -124,6 +124,12 @@ struct commonio_db {
 	/*@null@*/security_context_t scontext;
 #endif
 	/*
+	 * Default permissions and owner for newly created data file.
+         */
+	mode_t st_mode;
+	uid_t st_uid;
+	gid_t st_gid;
+	/*
 	 * Head, tail, current position in linked list.
 	 */
 	/*@owned@*/ /*@null@*/struct commonio_entry *head;

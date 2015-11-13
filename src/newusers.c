@@ -805,27 +805,27 @@ static void open_files (void)
 	}
 #endif				/* ENABLE_SUBIDS */
 
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (EXIT_FAILURE);
 	}
-	if (is_shadow && (spw_open (O_RDWR) == 0)) {
+	if (is_shadow && (spw_open (O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
 		fail_exit (EXIT_FAILURE);
 	}
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (EXIT_FAILURE);
 	}
 #ifdef SHADOWGRP
-	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
+	if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 		fail_exit (EXIT_FAILURE);
 	}
 #endif
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
-		if (sub_uid_open (O_RDWR) == 0) {
+		if (sub_uid_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_uid_dbname ());
@@ -833,7 +833,7 @@ static void open_files (void)
 		}
 	}
 	if (is_sub_gid) {
-		if (sub_gid_open (O_RDWR) == 0) {
+		if (sub_gid_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_gid_dbname ());

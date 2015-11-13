@@ -228,6 +228,9 @@ static struct commonio_db gshadow_db = {
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
 #endif
+	0400,                   /* st_mode */
+	0,                      /* st_uid */
+	0,                      /* st_gid */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
@@ -249,6 +252,8 @@ int sgr_setdbname (const char *filename)
 
 bool sgr_file_present (void)
 {
+	if (getdef_bool ("FORCE_SHADOW"))
+		return true;
 	return commonio_present (&gshadow_db);
 }
 

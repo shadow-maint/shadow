@@ -130,6 +130,9 @@ static /*@owned@*/struct commonio_db group_db = {
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
 #endif
+	0644,                   /* st_mode */
+	0,                      /* st_uid */
+	0,                      /* st_gid */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */

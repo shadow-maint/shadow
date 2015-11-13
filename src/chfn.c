@@ -463,7 +463,7 @@ static void update_gecos (const char *user, char *gecos)
 		fail_exit (E_NOPERM);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_NOPERM);

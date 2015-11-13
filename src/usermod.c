@@ -1532,7 +1532,7 @@ static void open_files (void)
 		fail_exit (E_PW_UPDATE);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
@@ -1545,7 +1545,7 @@ static void open_files (void)
 		fail_exit (E_PW_UPDATE);
 	}
 	spw_locked = true;
-	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
+	if (is_shadow_pwd && (spw_open (O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, spw_dbname ());
@@ -1564,7 +1564,7 @@ static void open_files (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 		gr_locked = true;
-		if (gr_open (O_RDWR) == 0) {
+		if (gr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, gr_dbname ());
@@ -1578,7 +1578,7 @@ static void open_files (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 		sgr_locked = true;
-		if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
+		if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
@@ -1595,7 +1595,7 @@ static void open_files (void)
 			fail_exit (E_SUB_UID_UPDATE);
 		}
 		sub_uid_locked = true;
-		if (sub_uid_open (O_RDWR) == 0) {
+		if (sub_uid_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_uid_dbname ());
@@ -1610,7 +1610,7 @@ static void open_files (void)
 			fail_exit (E_SUB_GID_UPDATE);
 		}
 		sub_gid_locked = true;
-		if (sub_gid_open (O_RDWR) == 0) {
+		if (sub_gid_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_gid_dbname ());

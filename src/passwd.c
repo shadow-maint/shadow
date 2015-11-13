@@ -573,7 +573,7 @@ static void update_noshadow (void)
 		exit (E_PWDBUSY);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, pw_dbname ());
@@ -627,7 +627,7 @@ static void update_shadow (void)
 		exit (E_PWDBUSY);
 	}
 	spw_locked = true;
-	if (spw_open (O_RDWR) == 0) {
+	if (spw_open (O_CREAT | O_RDWR) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, spw_dbname ());

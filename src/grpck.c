@@ -299,7 +299,7 @@ static void open_files (void)
 	 * Open the files. Use O_RDONLY if we are in read_only mode,
 	 * O_RDWR otherwise.
 	 */
-	if (gr_open (read_only ? O_RDONLY : O_RDWR) == 0) {
+	if (gr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
 		         grp_file);
 		if (use_system_grp_file) {
@@ -308,7 +308,7 @@ static void open_files (void)
 		fail_exit (E_CANT_OPEN);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
+	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
 		         sgr_file);
 		if (use_system_sgr_file) {

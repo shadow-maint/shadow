@@ -248,7 +248,7 @@ static void open_files (void)
 	add_cleanup (cleanup_report_del_group, group_name);
 
 	/* An now open the databases */
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
@@ -257,7 +257,7 @@ static void open_files (void)
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_open (O_RDWR) == 0) {
+		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
