@@ -175,6 +175,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 	if (stat ("/", &sbroot) != 0) {
 		perror ("stat (\"/\")");
 		(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+		sub_uid_close();
+#endif
 		return 0;
 	}
 
@@ -212,6 +215,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 
 		if (check_status (name, tmp_d_name, uid) != 0) {
 			(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+			sub_uid_close();
+#endif
 			fprintf (stderr,
 			         _("%s: user %s is currently used by process %d\n"),
 			         Prog, name, pid);
@@ -232,6 +238,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 				}
 				if (check_status (name, task_path+6, uid) != 0) {
 					(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+					sub_uid_close();
+#endif
 					fprintf (stderr,
 					         _("%s: user %s is currently used by process %d\n"),
 					         Prog, name, pid);
