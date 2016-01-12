@@ -2017,7 +2017,7 @@ msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr "  -s, --shell SHELL             新アカウントのログインシェル\n"
 
 msgid "  -u, --uid UID                 user ID of the new account\n"
-msgstr "  -u, --iud UID                 新アカウントのユーザ ID\n"
+msgstr "  -u, --uid UID                 新アカウントのユーザ ID\n"
 
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
