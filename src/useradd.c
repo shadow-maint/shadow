@@ -1993,6 +1993,11 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
+#ifdef ENABLE_SUBIDS
+	uid_t uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
+	uid_t uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
+#endif
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -2022,8 +2027,10 @@ int main (int argc, char **argv)
 	is_shadow_grp = sgr_file_present ();
 #endif
 #ifdef ENABLE_SUBIDS
-	is_sub_uid = sub_uid_file_present ();
-	is_sub_gid = sub_gid_file_present ();
+	is_sub_uid = sub_uid_file_present () && !rflg &&
+	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	is_sub_gid = sub_gid_file_present () && !rflg &&
+	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
 #endif				/* ENABLE_SUBIDS */
 
 	get_defaults ();
