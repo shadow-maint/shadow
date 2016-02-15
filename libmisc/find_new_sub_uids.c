@@ -58,7 +58,7 @@ int find_new_sub_uids (const char *owner,
 
 	min = getdef_ulong ("SUB_UID_MIN", 100000UL);
 	max = getdef_ulong ("SUB_UID_MAX", 600100000UL);
-	count = getdef_ulong ("SUB_UID_COUNT", 10000);
+	count = getdef_ulong ("SUB_UID_COUNT", 65536);
 
 	if (min > max || count >= max || (min + count - 1) > max) {
 		(void) fprintf (stderr,
