@@ -105,6 +105,17 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-C</option>, <option>--clear</option>
+	</term>
+	<listitem>
+	  <para>
+	    Clear lastlog record of an user. This option can be used only together
+	    with <option>-u</option> (<option>--user</option>)).
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-h</option>, <option>--help</option>
 	</term>
 	<listitem>
@@ -120,6 +131,17 @@
 	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
 	    directory and use the configuration files from the
 	    <replaceable>CHROOT_DIR</replaceable> directory.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-S</option>, <option>--set</option>
+	</term>
+	<listitem>
+	  <para>
+	    Set lastlog record of an user to the current time. This option can be
+	    used only together with <option>-u</option> (<option>--user</option>)).
 	  </para>
 	</listitem>
       </varlistentry>

@@ -71,6 +71,8 @@ static struct stat statbuf;	/* fstat buffer for file size */
 static bool uflg = false;	/* print only an user of range of users */
 static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
+static bool Cflg = false;	/* clear record for user */
+static bool Sflg = false;	/* set record for user */
 
 #define	NOW	(time ((time_t *) 0))
 
@@ -83,8 +85,10 @@ static /*@noreturn@*/void usage (int status)
 	                  "Options:\n"),
 	                Prog);
 	(void) fputs (_("  -b, --before DAYS             print only lastlog records older than DAYS\n"), usageout);
+	(void) fputs (_("  -C, --clear                   clear lastlog record of an user (usable only with -u)\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -S, --set                     set lastlog record to current time (usable only with -u)\n"), usageout);
 	(void) fputs (_("  -t, --time DAYS               print only lastlog records more recent than DAYS\n"), usageout);
 	(void) fputs (_("  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"), usageout);
 	(void) fputs ("\n", usageout);
@@ -194,6 +198,80 @@ static void print (void)
 	}
 }
 
+static void update_one (/*@null@*/const struct passwd *pw)
+{
+	off_t offset;
+	struct lastlog ll;
+	int err;
+
+	if (NULL == pw) {
+		return;
+	}
+
+	offset = (off_t) pw->pw_uid * sizeof (ll);
+	/* fseeko errors are not really relevant for us. */
+	err = fseeko (lastlogfile, offset, SEEK_SET);
+	assert (0 == err);
+
+	memzero (&ll, sizeof (ll));
+
+	if (Sflg) {
+		ll.ll_time = NOW;
+#ifdef HAVE_LL_HOST
+		strcpy (ll.ll_host, "localhost");
+#endif
+		strcpy (ll.ll_line, "lastlog");
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
+			"clearing-lastlog",
+			pw->pw_name, (unsigned int) pw->pw_uid, SHADOW_AUDIT_SUCCESS);
+#endif
+	}
+#ifdef WITH_AUDIT
+	else {
+		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
+			"refreshing-lastlog",
+			pw->pw_name, (unsigned int) pw->pw_uid, SHADOW_AUDIT_SUCCESS);
+	}
+#endif
+
+	if (fwrite (&ll, sizeof(ll), 1, lastlogfile) != 1) {
+			fprintf (stderr,
+			         _("%s: Failed to update the entry for UID %lu\n"),
+			         Prog, (unsigned long int)pw->pw_uid);
+			exit (EXIT_FAILURE);
+	}
+}
+
+static void update (void)
+{
+	const struct passwd *pwent;
+
+	if (!uflg) /* safety measure */
+		return;
+
+	if (has_umin && has_umax && (umin == umax)) {
+		update_one (getpwuid ((uid_t)umin));
+	} else {
+		setpwent ();
+		while ( (pwent = getpwent ()) != NULL ) {
+			if ((has_umin && (pwent->pw_uid < (uid_t)umin))
+				|| (has_umax && (pwent->pw_uid > (uid_t)umax))) {
+				continue;
+			}
+			update_one (pwent);
+		}
+		endpwent ();
+	}
+
+	if (fflush (lastlogfile) != 0 || fsync (fileno (lastlogfile)) != 0) {
+			fprintf (stderr,
+			         _("%s: Failed to update the lastlog file\n"),
+			         Prog);
+			exit (EXIT_FAILURE);
+	}
+}
+
 int main (int argc, char **argv)
 {
 	/*
@@ -208,18 +286,24 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	{
 		int c;
 		static struct option const longopts[] = {
 			{"before", required_argument, NULL, 'b'},
+			{"clear",  no_argument,       NULL, 'C'},
 			{"help",   no_argument,       NULL, 'h'},
 			{"root",   required_argument, NULL, 'R'},
+			{"set",    no_argument,       NULL, 'S'},
 			{"time",   required_argument, NULL, 't'},
 			{"user",   required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "b:hR:t:u:", longopts,
+		while ((c = getopt_long (argc, argv, "b:ChR:St:u:", longopts,
 		                         NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -235,11 +319,21 @@ int main (int argc, char **argv)
 				bflg = true;
 				break;
 			}
+			case 'C':
+			{
+				Cflg = true;
+				break;
+			}
 			case 'h':
 				usage (EXIT_SUCCESS);
 				/*@notreached@*/break;
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
+			case 'S':
+			{
+				Sflg = true;
+				break;
+			}
 			case 't':
 			{
 				unsigned long days;
@@ -294,9 +388,21 @@ int main (int argc, char **argv)
 			         Prog, argv[optind]);
 			usage (EXIT_FAILURE);
 		}
+		if (Cflg && Sflg) {
+			fprintf (stderr,
+			         _("%s: Option -C cannot be used together with option -S\n"),
+			         Prog);
+			usage (EXIT_FAILURE);
+		}
+		if ((Cflg || Sflg) && !uflg) {
+			fprintf (stderr,
+			         _("%s: Options -C and -S require option -u to specify the user\n"),
+			         Prog);
+			usage (EXIT_FAILURE);
+		}
 	}
 
-	lastlogfile = fopen (LASTLOG_FILE, "r");
+	lastlogfile = fopen (LASTLOG_FILE, (Cflg || Sflg)?"r+":"r");
 	if (NULL == lastlogfile) {
 		perror (LASTLOG_FILE);
 		exit (EXIT_FAILURE);
@@ -310,7 +416,10 @@ int main (int argc, char **argv)
 		exit (EXIT_FAILURE);
 	}
 
-	print ();
+	if (Cflg || Sflg)
+		update ();
+	else
+		print ();
 
 	(void) fclose (lastlogfile);
 

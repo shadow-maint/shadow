@@ -98,6 +98,7 @@ groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD    = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD  = $(LDADD) $(LIBSELINUX)
 grpunconv_LDADD = $(LDADD) $(LIBSELINUX)
+lastlog_LDADD   = $(LDADD) $(LIBAUDIT)
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
