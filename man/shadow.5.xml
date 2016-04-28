@@ -133,7 +133,7 @@
 	  </para>
 	  <para>
 	    The value 0 has a special meaning, which is that the user
-	    should change her pasword the next time she will log in the
+	    should change her password the next time she will log in the
 	    system.
 	  </para>
 	  <para>
@@ -228,7 +228,7 @@
 	  </para>
 	  <para>
 	    Note that an account expiration differs from a password
-	    expiration.  In case of an acount expiration, the user shall
+	    expiration.  In case of an account expiration, the user shall
 	    not be allowed to login.  In case of a password expiration,
 	    the user is not allowed to login using her password.
 	  </para>

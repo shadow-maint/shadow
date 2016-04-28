@@ -81,7 +81,7 @@
 
     <!-- .RS -->
     <literallayout remap='.nf'>
-      1) the user su is targetting
+      1) the user su is targeting
     </literallayout>
     <!-- .fi -->
     <para>
@@ -106,13 +106,13 @@
 
     <para>
       from-id is formatted the same as to-id except the extra word
-      <emphasis>GROUP</emphasis> is recognised. <emphasis>ALL EXCEPT
+      <emphasis>GROUP</emphasis> is recognized. <emphasis>ALL EXCEPT
       GROUP</emphasis> is perfectly valid too. Following
       <emphasis>GROUP</emphasis> appears one or more group names, delimited
       by ",". It is not sufficient to have primary group id of the relevant
       group, an entry in
       <citerefentry><refentrytitle>/etc/group</refentrytitle>
-      <manvolnum>5</manvolnum></citerefentry> is neccessary.
+      <manvolnum>5</manvolnum></citerefentry> is necessary.
     </para>
 
     <para> 

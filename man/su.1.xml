@@ -157,7 +157,7 @@
 	  </para>
 	  <para>
 	    The executed command will have no controlling terminal. This
-	    option cannot be used to execute interractive programs which
+	    option cannot be used to execute interactive programs which
 	    need a controlling TTY.
 	    <!-- This avoids TTY hijacking when su is used to lower
 	         privileges -->
@@ -191,7 +191,7 @@
 	  <para>The shell that will be invoked.</para>
 	  <para>
 	    The invoked shell is chosen from (highest priority first):
-	    <!--This should be an orderedlist, but lists inside another
+	    <!--This should be an ordered list, but lists inside another
 	        list does not work well with current docbook.
 	        - nekral - 2009.06.03 -->
 	    <variablelist>

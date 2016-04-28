@@ -93,7 +93,7 @@
 	  <term>gid</term>
 	  <listitem>
 	    <para>
-	      Begining of the range of GIDs inside the user namespace.
+	      Beginning of the range of GIDs inside the user namespace.
 	    </para>
 	  </listitem>
 	</varlistentry>

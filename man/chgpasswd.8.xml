@@ -92,7 +92,7 @@
     <para>
       The default encryption algorithm can be defined for the system with
       the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>,
-      and can be overwiten with the <option>-e</option>,
+      and can be overwritten with the <option>-e</option>,
       <option>-m</option>, or <option>-c</option> options.
     </para>
     <para>
