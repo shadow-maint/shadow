@@ -136,7 +136,7 @@ static int check_uid(const uid_t uid,
 	}
 	/* Check if the UID exists according to NSS */
 	errno = 0;
-	if (getpwuid(uid) != NULL) {
+	if (prefix_getpwuid(uid) != NULL) {
 		return EEXIST;
 	} else {
 		/* getpwuid() was NULL

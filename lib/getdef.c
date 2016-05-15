@@ -155,7 +155,7 @@ static struct itemdef knowndef_table[] = {
 #define LOGINDEFS "/etc/login.defs"
 #endif
 
-static char def_fname[] = LOGINDEFS;	/* login config defs file       */
+static const char* def_fname = LOGINDEFS;	/* login config defs file       */
 static bool def_loaded = false;		/* are defs already loaded?     */
 
 /* local function prototypes */
@@ -422,6 +422,17 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 
 out:
 	return (struct itemdef *) NULL;
+}
+
+/*
+ * setdef_config_file - set the default configuration file path
+ *
+ * must be called prior to any def* calls.
+ */
+
+void setdef_config_file (const char* file)
+{
+	def_fname = file;
 }
 
 /*

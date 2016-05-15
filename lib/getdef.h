@@ -40,6 +40,7 @@ extern unsigned long getdef_ulong (const char *, unsigned long);
 extern unsigned int getdef_unum (const char *, unsigned int);
 extern /*@observer@*/ /*@null@*/const char *getdef_str (const char *);
 extern int putdef_str (const char *, const char *);
+extern void setdef_config_file (const char* file);
 
 /* default UMASK value if not specified in /etc/login.defs */
 #define		GETDEF_DEFAULT_UMASK	022

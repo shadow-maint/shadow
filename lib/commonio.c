@@ -375,21 +375,30 @@ bool commonio_present (const struct commonio_db *db)
 
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
-	char file[1024];
-	char lock[1024];
+	char* file;
+	char* lock;
+	size_t lock_file_len;
+	size_t file_len;
 
 	if (db->locked) {
 		return 1;
 	}
-
-	snprintf (file, sizeof file, "%s.%lu",
+	file_len = strlen(db->filename) + 11;/* %lu max size */
+	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
+	file = (char*)malloc(file_len);
+	lock = (char*)malloc(lock_file_len);
+	snprintf (file, file_len, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
-	snprintf (lock, sizeof lock, "%s.lock", db->filename);
+	snprintf (lock, lock_file_len, "%s.lock", db->filename);
 	if (do_lock_file (file, lock, log) != 0) {
 		db->locked = true;
 		lock_count++;
+		free(file);
+		free(lock);
 		return 1;
 	}
+	free(file);
+	free(lock);
 	return 0;
 }
 
