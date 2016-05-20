@@ -243,7 +243,7 @@
     <para condition="tcb">
       Note that when <option>USE_TCB</option> is enabled, you cannot
       specify an alternative <replaceable>shadow</replaceable> file. In
-      future releases, this paramater could be replaced by an alternate
+      future releases, this parameter could be replaced by an alternate
       TCB directory.
     </para>
   </refsect1>

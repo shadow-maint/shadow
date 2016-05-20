@@ -98,7 +98,7 @@
       The default encryption algorithm can be defined for the system with
       the <option>ENCRYPT_METHOD</option> or
       <option>MD5_CRYPT_ENAB</option> variables of
-      <filename>/etc/login.defs</filename>, and can be overwitten with the
+      <filename>/etc/login.defs</filename>, and can be overwritten with the
       <option>-e</option>, <option>-m</option>, or <option>-c</option>
       options.
     </para>
@@ -112,7 +112,7 @@
       <phrase condition="pam">Except when PAM is used to encrypt the
       passwords,</phrase> <command>chpasswd</command> first updates all the
       passwords in memory, and then commits all the changes to disk if no
-      errors occured for any user.
+      errors occurred for any user.
     </para>
     <para condition="pam">
       When PAM is used to encrypt the passwords (and update the passwords in

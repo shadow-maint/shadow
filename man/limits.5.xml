@@ -108,7 +108,7 @@
       <listitem><para>A: max address space (KB)</para></listitem>
       <listitem><para>C: max core file size (KB)</para></listitem>
       <listitem><para>D: max data size (KB)</para></listitem>
-      <listitem><para>F: maximum filesize (KB)</para></listitem>
+      <listitem><para>F: maximum file size (KB)</para></listitem>
       <listitem><para>K: file creation mask, set by
 	<citerefentry>
 	  <refentrytitle>umask</refentrytitle><manvolnum>2</manvolnum>

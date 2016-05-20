@@ -307,7 +307,7 @@
 	  </para>
 	    Example: <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
 	    can be used when creating system account to turn off password
-	    ageing, even though system account has no password at all.
+	    aging, even though system account has no password at all.
 	    Multiple <option>-K</option> options can be specified, e.g.:
 	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>&nbsp;
 	    <option>-K</option>&nbsp;<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
@@ -326,7 +326,7 @@
 	  </para>
 	  <para>
 	    By default, the user's entries in the lastlog and faillog
-	    databases are resetted to avoid reusing the entry from a previously
+	    databases are reset to avoid reusing the entry from a previously
 	    deleted user.
 	  </para>
 	</listitem>

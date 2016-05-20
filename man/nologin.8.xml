@@ -89,7 +89,7 @@
   <refsect1 id='history'>
     <title>HISTORY</title>
     <para>
-      The <command>nologin</command> command appearred in BSD 4.4.
+      The <command>nologin</command> command appeared in BSD 4.4.
     </para>
   </refsect1>
 </refentry>
