@@ -80,7 +80,7 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>newgidmap</command> sets <filename>/proc/[pid]/gid_map</filename> based on it's
+      The <command>newgidmap</command> sets <filename>/proc/[pid]/gid_map</filename> based on its
       command line arguments and the gids allowed in <filename>/etc/subgid</filename>.
       Note that the root user is not exempted from the requirement for a valid
       <filename>/etc/subgid</filename> entry.
@@ -101,7 +101,7 @@
 	  <term>lowergid</term>
 	  <listitem>
 	    <para>
-	      Begining of the range of GIDs outside the user namespace.
+	      Beginning of the range of GIDs outside the user namespace.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -145,7 +145,7 @@
       <varlistentry>
 	<term><filename>/etc/subgid</filename></term>
 	<listitem>
-	  <para>List of users subordinate group IDs.</para>
+	  <para>List of user's subordinate group IDs.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

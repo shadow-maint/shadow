@@ -56,7 +56,7 @@ static bool verify_range(struct passwd *pw, struct map_range *range)
 	if (have_sub_gids(pw->pw_name, range->lower, range->count))
 		return true;
 
-	/* Allow a process to map it's own gid */
+	/* Allow a process to map its own gid */
 	if ((range->count == 1) && (pw->pw_gid == range->lower))
 		return true;
 
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 	if (argc < 2)
 		usage();
 
-	/* Find the process that needs it's user namespace
+	/* Find the process that needs its user namespace
 	 * gid mapping set.
 	 */
 	target_str = argv[1];
