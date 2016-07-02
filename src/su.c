@@ -105,6 +105,8 @@ static char caller_name[BUFSIZ];
 static bool change_environment = true;
 
 #ifdef USE_PAM
+static char kill_msg[256];
+static char wait_msg[256];
 static pam_handle_t *pamh = NULL;
 static int caught = 0;
 /* PID of the child, in case it needs to be killed */
@@ -161,8 +163,7 @@ static RETSIGTYPE die (int killed)
 	}
 
 	if (killed != 0) {
-		closelog ();
-		exit (128+killed);
+		_exit (128+killed);
 	}
 }
 
@@ -182,12 +183,11 @@ static RETSIGTYPE kill_child (int unused(s))
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);
-		(void) fputs (_(" ...killed.\n"), stderr);
+		(void) write (STDERR_FILENO, kill_msg, strlen (kill_msg));
 	} else {
-		(void) fputs (_(" ...waiting for child to terminate.\n"),
-		              stderr);
+		(void) write (STDERR_FILENO, wait_msg, strlen (wait_msg));
 	}
-	exit (255);
+	_exit (255);
 }
 #endif				/* USE_PAM */
 
@@ -372,6 +372,9 @@ static void prepare_pam_close_session (void)
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
 		(void) kill (-pid_child, caught);
+
+		snprintf (kill_msg, _(" ...killed.\n"));
+		snprintf (wait_msg, _(" ...waiting for child to terminate.\n"));
 
 		(void) signal (SIGALRM, kill_child);
 		(void) alarm (2);

@@ -58,7 +58,7 @@ static void process_flags (int argc, char **argv);
  */
 static RETSIGTYPE catch_signals (unused int sig)
 {
-	exit (10);
+	_exit (10);
 }
 
 /*

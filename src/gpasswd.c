@@ -169,9 +169,8 @@ static RETSIGTYPE catch_signals (int killed)
 	}
 
 	if (0 != killed) {
-		(void) putchar ('\n');
-		(void) fflush (stdout);
-		exit (killed);
+		(void) write (STDOUT_FILENO, "\n", 1);
+		_exit (killed);
 	}
 }
 
