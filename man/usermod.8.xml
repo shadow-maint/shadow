@@ -481,8 +481,7 @@
       not executing any processes when this command is being executed if the
       user's numerical user ID, the user's name, or the user's home
       directory is being changed. <command>usermod</command> checks this
-      on Linux, but only check if the user is logged in according to utmp
-      on other architectures.
+      on Linux. On other platforms it only uses utmp to check if the user is logged in.
     </para>
     <para>
       You must change the owner of any <command>crontab</command> files or
