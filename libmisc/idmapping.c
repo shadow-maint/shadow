@@ -83,6 +83,16 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			free(mappings);
 			return NULL;
 		}
+		if (mapping->upper > UINT_MAX ||
+			mapping->lower > UINT_MAX ||
+			mapping->count > UINT_MAX)  {
+			free(mappings);
+			return NULL;
+		}
+		if (mapping->lower + mapping->count < mapping->lower) {
+			free(mapping);
+			return NULL;
+		}
 	}
 	return mappings;
 }
