@@ -422,7 +422,7 @@ static void check_perms_pam (const struct passwd *pw)
 	int ret;
 	ret = pam_authenticate (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
+		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
@@ -585,7 +585,7 @@ static /*@only@*/struct passwd * check_perms (void)
 	if (NULL == pw) {
 		(void) fprintf (stderr,
 		                _("No passwd entry for user '%s'\n"), name);
-		SYSLOG ((LOG_ERR, "No passwd entry for user '%s'", name));
+		SYSLOG ((LOG_NOTICE, "No passwd entry for user '%s'", name));
 		su_failure (caller_tty, true);
 	}
 
@@ -615,7 +615,7 @@ static /*@only@*/struct passwd * check_perms (void)
 			(void) fprintf (stderr,
 			                _("No passwd entry for user '%s'\n"),
 			                name);
-			SYSLOG ((LOG_ERR,
+			SYSLOG ((LOG_NOTICE,
 			         "No passwd entry for user '%s'", name));
 			su_failure (caller_tty, true);
 		}
