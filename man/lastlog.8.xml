@@ -109,7 +109,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Clear lastlog record of an user. This option can be used only together
+	    Clear lastlog record of a user. This option can be used only together
 	    with <option>-u</option> (<option>--user</option>)).
 	  </para>
 	</listitem>
@@ -140,7 +140,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set lastlog record of an user to the current time. This option can be
+	    Set lastlog record of a user to the current time. This option can be
 	    used only together with <option>-u</option> (<option>--user</option>)).
 	  </para>
 	</listitem>

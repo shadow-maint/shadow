@@ -433,7 +433,7 @@
 	  </para>
 	  <para>
 	    Note that <command>useradd</command> will not create a home
-	    directory for such an user, regardless of the default setting
+	    directory for such a user, regardless of the default setting
 	    in <filename>/etc/login.defs</filename>
 	    (<option>CREATE_HOME</option>). You have to specify the
 	    <option>-m</option> options if you want a home directory for a

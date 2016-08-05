@@ -115,7 +115,7 @@
 	  </para>
 	  <para>
 	    It can be the name of a new user or the name of an existing
-	    user (or an user created before by
+	    user (or a user created before by
 	    <command>newusers</command>).  In case of an existing user,
 	    the user's information will be changed, otherwise a new user
 	    will be created.
@@ -142,7 +142,7 @@
 	    This field is used to define the UID of the user.
 	  </para>
 	  <para>
-	    If the field is empty, an new (unused) UID will be defined
+	    If the field is empty, a new (unused) UID will be defined
 	    automatically by <command>newusers</command>.
 	  </para>
 	  <para>
@@ -151,7 +151,7 @@
 	  </para>
 	  <para>
 	    If this field contains the name of an existing user (or the
-	    name of an user created before by
+	    name of a user created before by
 	    <command>newusers</command>), the UID of the specified user
 	    will be used.
 	  </para>

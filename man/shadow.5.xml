@@ -115,7 +115,7 @@
 	    any access at all if the password field is empty.
 	  </para>
 	  <para>
-	    A password field which starts with a exclamation mark means
+	    A password field which starts with an exclamation mark means
 	    that the password is locked.  The remaining characters on the
 	    line represent the password field before the password was
 	    locked.
