@@ -89,7 +89,8 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			free(mappings);
 			return NULL;
 		}
-		if (mapping->lower + mapping->count < mapping->lower) {
+		if (mapping->lower + mapping->count < mapping->lower ||
+				mapping->upper + mapping->count < mapping->upper) {
 			free(mapping);
 			return NULL;
 		}
