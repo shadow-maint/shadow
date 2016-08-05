@@ -95,7 +95,7 @@
 	    group (but group members do not need the password).
 	  </para>
 	  <para>
-	    The password is used when an user who is not a member of the
+	    The password is used when a user who is not a member of the
 	    group wants to gain the permissions of this group (see
 	    <citerefentry><refentrytitle>newgrp</refentrytitle>
 	    <manvolnum>1</manvolnum></citerefentry>).
@@ -105,7 +105,7 @@
 	    can gain the group permissions.
 	  </para>
 	  <para>
-	    A password field which starts with a exclamation mark means
+	    A password field which starts with an exclamation mark means
 	    that the password is locked.  The remaining characters on the
 	    line represent the password field before the password was
 	    locked.
