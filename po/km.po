@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -449,6 +449,11 @@ msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s ប
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
 
@@ -792,6 +797,11 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ បាត់បង់​ពាក្យ​សម្ងាត់​ថ្មី​\n"
 
 #, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
 #| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s ៖ មិនមានក្រុម​ %sឡើយ​\n"
@@ -1085,6 +1095,11 @@ msgstr ""
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s ៖ មិន​អាចកំណត់​ឈ្មោះ​អ្នកប្រើ​របស់​អ្នក​បាន​ទេ ។\n"
 
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1306,6 +1321,16 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
@@ -1324,6 +1349,24 @@ msgstr "ឈ្មោះ​អ្នក​ប្រើ                ច្រ�
 
 msgid "**Never logged in**"
 msgstr "**មិន​ដែល​ចូល​សោះ**"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update password file\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារ​ពាក្យ​សម្ងាត់​ទាន់សម័យ​បានទេ\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1361,6 +1404,13 @@ msgstr ""
 "\n"
 "[បាន​វៀង​ការ​ផ្ដាច់ -- បាន​អនុញ្ញាត​ការ​ចូល​ជា root ។]\n"
 
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr "គ្មាន​ធាតុ​ utmp ឡើយ ។ អ្នក​ត្រូវ​ប្រតិបត្តិ​ \"login\" ពី​កម្រិត​ទាប​បំផុត​ \"sh\""
+
 #, fuzzy, c-format
 #| msgid ""
 #| "\n"
@@ -1371,13 +1421,6 @@ msgid ""
 msgstr ""
 "\n"
 "អស់​ពេល​ចូល​បន្ទាប់ពី %d វិនាទី ។\n"
-
-#, c-format
-msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "គ្មាន​ធាតុ​ utmp ឡើយ ។ អ្នក​ត្រូវ​ប្រតិបត្តិ​ \"login\" ពី​កម្រិត​ទាប​បំផុត​ \"sh\""
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1456,6 +1499,11 @@ msgstr "របៀបប្រើ ៖ newgrp [-] [group]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "របៀបប្រើ​ ៖ ក្រុម sg [[-c] command]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
@@ -1524,6 +1572,20 @@ msgstr "%s ៖ បន្ទាត់​ %d ៖ chown បានបរាជ័�
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនអាចធ្វើឲ្យ​ធាតុបញ្ចូល​ទាន់សម័យបានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update group file\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារក្រុម​ទាន់សម័យបានទេ​\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1783,12 +1845,6 @@ msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹ
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់ផ្ទាល់ខ្លួន​របស់អ្នក​ ជា​ការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ​ ។\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1805,12 +1861,18 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s ៖ %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s ៖ %s\n"
 
 #, fuzzy
 msgid ""
@@ -2078,6 +2140,11 @@ msgstr ""
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
@@ -2120,6 +2187,14 @@ msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s ប
 msgid "%s: can't create group\n"
 msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create subordinate group IDs\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -2159,6 +2234,11 @@ msgstr ""
 #| "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s ៖ មិនអាច​យកក្រុម %s ដែលជា​ក្រុម​ចម្បង​សម្រាប់​អ្នកប្រើដទៃទៀតចេញបានទេ ។\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s ៖ មិនអាចប្ដូរឈ្មោះ​ថត​ %s ទៅ​ជា​ %s បានឡើយ\n"
 
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
@@ -2267,6 +2347,18 @@ msgstr ""
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2284,6 +2376,16 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s ៖ អ្នក​ប្រើ​ %s មាន​រួច​ហើយ​\n"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s ៖ កាលបរិច្ឆទ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s ៖ កាលបរិច្ឆទ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, fuzzy, c-format
 #| msgid "%s: cannot open file %s\n"
 msgid "%s: no options\n"
 msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
@@ -2298,6 +2400,10 @@ msgstr "%s ៖ ពាក្យ​សម្ងាត់​ស្រមោល​�
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 
 #, c-format
@@ -2340,6 +2446,26 @@ msgstr "បរាជ័យ​ក្នុងការ​ផ្លាស់ប្
 
 msgid "failed to rename mailbox"
 msgstr "​បរាជ័យ​ក្នុងការប្ដូរឈ្មោះប្រអប់"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
 
 #, c-format
 msgid ""
@@ -2402,6 +2528,20 @@ msgstr "មិនអាច​ចាក់សោ​ឯកសារបានឡើ
 
 msgid "Couldn't make backup"
 msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម្រុងទុក​បានឡើយ"
+
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s ៖ %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s not found in /etc/passwd\n"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s ៖ %s រក​មិន​ឃើញ​ក្នុង​ /etc/passwd ទេ\n"
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 msgid "failed to open scratch file"
@@ -2964,9 +3104,6 @@ msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹ�
 #~ msgid "%s: can't rewrite password file\n"
 #~ msgstr "%s ៖ មិនអាច​សរសេរ​ឯកសារពាក្យសម្ងាត់​ឡើងវិញបានទេ​\n"
 
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារ​ពាក្យ​សម្ងាត់​ទាន់សម័យ​បានទេ\n"
-
 #~ msgid "%s: can't update shadow password file\n"
 #~ msgstr "%s ៖ មិនអាច​ធ្វើ​ឲ្យ​ឯកសារពាក្យសម្ងាត់​ស្រមោលទាន់សម័យបានទេ\n"
 
@@ -2987,9 +3124,6 @@ msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹ�
 
 #~ msgid "Cannot open the password file.\n"
 #~ msgstr "មិនអាច​បើក​ឯកសារ​ពាក្យសម្ងាត់​បានឡើយ ។\n"
-
-#~ msgid "%s: %s not found in /etc/passwd\n"
-#~ msgstr "%s ៖ %s រក​មិន​ឃើញ​ក្នុង​ /etc/passwd ទេ\n"
 
 #~ msgid "Error updating the password entry.\n"
 #~ msgstr "មានកំហុស​ក្នុងការ​ធ្វើ​ឲ្យ​​ធាតុបញ្ចូល​​ពាក្យសម្ងាត់ទាន់សម័យ ។\n"
@@ -3182,9 +3316,6 @@ msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹ�
 
 #~ msgid "%s: can't update shadow group file\n"
 #~ msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារ​ក្រុម​ស្រមោល​ទាន់សម័យ​បានទេ​\n"
-
-#~ msgid "%s: can't update group file\n"
-#~ msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារក្រុម​ទាន់សម័យបានទេ​\n"
 
 #~ msgid "%s: can't delete shadow group file\n"
 #~ msgstr "%s ៖ មិនអាច​លុប​ឯកសារក្រុម​ស្រមោលបានទេ​\n"

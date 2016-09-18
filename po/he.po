@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -419,6 +419,10 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, fuzzy, c-format
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
@@ -756,6 +760,10 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: שורה %d: חסרה סיסמה חדשה\n"
 
 #, fuzzy, c-format
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
 
@@ -1031,6 +1039,11 @@ msgstr ""
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
@@ -1241,6 +1254,16 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
@@ -1256,6 +1279,23 @@ msgid "Username                Port     Latest"
 msgstr ""
 
 msgid "**Never logged in**"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update password file\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: לא יכול לעדכן קובץ סיסמאות\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1288,16 +1328,16 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"\n"
-"Login timed out after %u seconds.\n"
-msgstr ""
-
-#, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %u seconds.\n"
 msgstr ""
 
 #, c-format
@@ -1371,6 +1411,10 @@ msgstr ""
 msgid "Usage: sg group [[-c] command]\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
+
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "סיסמה לא טובה: %s.  "
@@ -1438,6 +1482,18 @@ msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1679,12 +1735,6 @@ msgstr ""
 msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1701,12 +1751,18 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: %s\n"
-msgstr "passwd: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: %s\n"
+msgstr "passwd: %s\n"
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -1949,6 +2005,10 @@ msgstr ""
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr ""
@@ -1988,6 +2048,14 @@ msgstr "ספרית שורש לא חוקית \"%s\"\n"
 msgid "%s: can't create group\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create subordinate group IDs\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -2023,6 +2091,10 @@ msgstr ""
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, fuzzy, c-format
 msgid "%s: %s mail spool (%s) not found\n"
@@ -2125,6 +2197,18 @@ msgstr ""
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2141,6 +2225,14 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr ""
 
 #, fuzzy, c-format
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
 #| msgid "%s: can't open shadow file\n"
 msgid "%s: no options\n"
 msgstr "%s: לא יכול לפתוח קובץ צל\n"
@@ -2155,6 +2247,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 
 #, c-format
@@ -2196,6 +2292,23 @@ msgstr ""
 
 msgid "failed to rename mailbox"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s: שדות ארוכים מידי\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, c-format
 msgid ""
@@ -2244,6 +2357,18 @@ msgid "Couldn't lock file"
 msgstr ""
 
 msgid "Couldn't make backup"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: %s: %s\n"
+msgstr "passwd: %s\n"
+
+#, c-format
+msgid "%s: %s returned with status %d\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
 msgstr ""
 
 msgid "failed to open scratch file"
@@ -2316,9 +2441,6 @@ msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #~ msgid "%s: can't rewrite password file\n"
 #~ msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
-
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s: לא יכול לעדכן קובץ סיסמאות\n"
 
 #~ msgid "%s: can't update shadow password file\n"
 #~ msgstr "%s: לא יכול לעדכן קובץ סיסמאות צל\n"

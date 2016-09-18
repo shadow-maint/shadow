@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2012-01-13 17:09+0100\n"
 "Last-Translator: Thomas Blein <tblein@tblein.eu>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -446,6 +446,11 @@ msgstr "%s : chemin de chroot « %s » incorrect.\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s : impossible d'accéder au répertoire %s : %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot access chroot directory %s: %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s : impossible d'accéder au répertoire %s : %s\n"
+
 #, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s : impossible de « chrooter » dans le répertoire %s : %s\n"
@@ -820,6 +825,11 @@ msgstr "%s : ligne %d : ligne trop longue\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s : ligne %d : nouveau mot de passe manquant\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Failed to write %s: %s\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s : échec lors de l'écriture %s : %s\n"
+
 #, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s : ligne %d : le groupe %s n'existe pas\n"
@@ -1153,6 +1163,16 @@ msgstr "%s : l'identifiant de groupe (GID) « %lu » existe déjà\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s : Impossible de mettre en place un service de nettoyage.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+"  -r, --reset                   réinitialiser les compteurs d'échecs de "
+"connexion\n"
+
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s : impossible de supprimer l'entrée « %s » de %s\n"
@@ -1385,6 +1405,28 @@ msgstr ""
 "   b, --before JOURS            n'afficher que les enregistrements de\n"
 "                                « lastlog » plus anciens que JOURS\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+"  -a, --all                     afficher les enregistrements d'échec "
+"(« faillog »)\n"
+"                                pour tous les utilisateurs\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+"  -a, --all                     afficher les enregistrements d'échec "
+"(« faillog »)\n"
+"                                pour tous les utilisateurs\n"
+
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
@@ -1406,6 +1448,28 @@ msgstr "Utilisateur             Port     Dernière"
 
 msgid "**Never logged in**"
 msgstr "**Jamais connecté**"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr ""
+"%s : échec de l'obtention de l'entrée pour l'identifiant d'utilisateur (UID) "
+"%lu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr ""
+"%s : impossible de réinitialiser l'entrée lastlog de l'identifiant "
+"d'utilisateur (UID) %lu : %s\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1442,14 +1506,6 @@ msgstr ""
 "[Déconnexion court-circuitée -- accès superutilisateur autorisé]."
 
 #, c-format
-msgid ""
-"\n"
-"Login timed out after %u seconds.\n"
-msgstr ""
-"\n"
-"Tentative de connexion : délai de %u secondes dépassé.\n"
-
-#, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 "%s : fonctionnement impossible sans être réellement le superutilisateur\n"
@@ -1458,6 +1514,14 @@ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
 "Pas d'entrée utmp. Vous devez exécuter « login » depuis l'interpréteur de "
 "commandes de plus bas niveau (« sh »)"
+
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %u seconds.\n"
+msgstr ""
+"\n"
+"Tentative de connexion : délai de %u secondes dépassé.\n"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1534,6 +1598,11 @@ msgstr "Syntaxe : newgrp [-] [groupe]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Syntaxe : sg groupe [[-c] commande]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Failed to write %s: %s\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s : échec lors de l'écriture %s : %s\n"
+
 msgid "Invalid password.\n"
 msgstr "Mot de passe non valable.\n"
 
@@ -1602,6 +1671,21 @@ msgstr "%s : ligne %d : échec de chown %s : %s\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s : ligne %d : impossible de mettre l'entrée à jour\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s : impossible de créer l'utilisateur\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s : impossible de créer le groupe\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1877,12 +1961,6 @@ msgstr "Authentification par mot de passe court-circuitée.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Entrez votre PROPRE mot de passe pour vous authentifier.\n"
 
-msgid " ...killed.\n"
-msgstr "… Tué.\n"
-
-msgid " ...waiting for child to terminate.\n"
-msgstr "… en attente que les processus fils se terminent.\n"
-
 #, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr ""
@@ -1900,12 +1978,18 @@ msgstr "%s : défaut de fonctionnement de masquage du signal\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Session terminée, arrêt de l'interpréteur de commandes…"
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s : %s\n"
+msgid " ...killed.\n"
+msgstr "… Tué.\n"
+
+msgid " ...waiting for child to terminate.\n"
+msgstr "… en attente que les processus fils se terminent.\n"
 
 msgid " ...terminated.\n"
 msgstr "… terminé.\n"
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s : %s\n"
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -2215,6 +2299,11 @@ msgstr ""
 "%s : impossible de réinitialiser l'entrée lastlog de l'identifiant "
 "d'utilisateur (UID) %lu : %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s : impossible de créer le répertoire %s\n"
@@ -2256,6 +2345,16 @@ msgstr "%s : impossible de créer le répertoire tcb pour %s\n"
 
 #, c-format
 msgid "%s: can't create group\n"
+msgstr "%s : impossible de créer le groupe\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s : impossible de créer l'utilisateur\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s : impossible de créer le groupe\n"
 
 #, c-format
@@ -2308,6 +2407,11 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s : le groupe %s est le groupe primaire d'un autre utilisateur et il ne "
 "sera pas supprimé.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s : impossible de supprimer l'entrée « %s » de %s\n"
 
 #, c-format
 msgid "%s: %s mail spool (%s) not found\n"
@@ -2444,6 +2548,18 @@ msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 "  -U, --unlock                  déverrouiller le compte de l'utilisateur\n"
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2465,6 +2581,16 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s : l'utilisateur « %s » existe déjà dans %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s : date « %s » non valable\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s : date « %s » non valable\n"
+
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s : aucune option\n"
@@ -2480,6 +2606,11 @@ msgstr "%s : les mots de passe cachés sont nécessaires avec -e ou -f\n"
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s : l'identifiant d'utilisateur (UID) « %lu » existe déjà\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
+msgstr "%s : %s n'est pas autorisé à modifier le mot de passe de %s\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2527,6 +2658,26 @@ msgstr "échec du changement de propriétaire de la boîte à lettres"
 
 msgid "failed to rename mailbox"
 msgstr "échec du changement de nom de la boîte à lettres"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s : échec lors de la préparation de la nouvelle entrée de %s « %s »\n"
 
 #, c-format
 msgid ""
@@ -2581,6 +2732,20 @@ msgstr "Impossible de verrouiller le fichier"
 
 msgid "Couldn't make backup"
 msgstr "Impossible d'effectuer une sauvegarde"
+
+#, fuzzy, c-format
+#| msgid "%s: PAM: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s : PAM : %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s : nscd s'est terminé avec le statut %d."
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 msgid "failed to open scratch file"
 msgstr "impossible d'ouvrir le fichier initial"

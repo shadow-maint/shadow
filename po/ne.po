@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2006-06-16 14:30+0545\n"
 "Last-Translator: Shiva Pokharel <pokharelshiva@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -443,6 +443,11 @@ msgstr "%s: डाइरेकट्री सिर्जना गर्न �
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: डाइरेकट्री सिर्जना गर्न सकिएन %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: डाइरेकट्री सिर्जना गर्न सकिएन %s\n"
 
@@ -783,6 +788,11 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: रेखा %d: नयाँ पासवर्ड हराइरहेको छ\n"
 
 #, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, fuzzy, c-format
 #| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: समूह %s अवस्थित छैन\n"
@@ -1076,6 +1086,11 @@ msgstr ""
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: तपाईँको प्रयोगकर्ता नाम निर्धारण गर्न सकिएन ।\n"
 
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1293,6 +1308,16 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
@@ -1309,6 +1334,24 @@ msgstr "सबैभन्दा पछिल्लो              पोर्
 
 msgid "**Never logged in**"
 msgstr "**Never logged in**"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: डाइरेकट्री सिर्जना गर्न सकिएन %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update password file\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: पासवर्ड फाइल अद्यावधिक गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1343,6 +1386,15 @@ msgstr ""
 "\n"
 "[बाइपास जडान विच्छेदन भयो --मूल लगइनलाई अनुमति छ । ]"
 
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"utmp प्रविष्टि भएन । तपाईँले \"login\" गर्दा ज्यादै न्यून तह \"sh\" बाट कार्यन्वयन "
+"गर्नुपर्छ"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "\n"
@@ -1353,15 +1405,6 @@ msgid ""
 msgstr ""
 "\n"
 "%d सेकेण्ड पछि लगइन समय समाप्त भयो ।\n"
-
-#, c-format
-msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"utmp प्रविष्टि भएन । तपाईँले \"login\" गर्दा ज्यादै न्यून तह \"sh\" बाट कार्यन्वयन "
-"गर्नुपर्छ"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1439,6 +1482,11 @@ msgstr "उपयोग: newgrp [-] [group]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "उपयोग: sg group [[-c] आदेश]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "पुरानो पासवर्ड: "
@@ -1507,6 +1555,20 @@ msgstr "%s: रेखा %d: chown असफल भयो\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: रेखा %d: प्रविष्टि अद्यावधिक गर्न सकिएन\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: यो %s सिर्जना गर्न सकिदैन\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update group file\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: समूह फाइल अद्यावधिक गर्न सकिएन\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1762,12 +1824,6 @@ msgstr "पासवर्ड प्रमाणीकरण बाइपास 
 msgid "Please enter your OWN password as authentication.\n"
 msgstr " कृपया प्रमाणीकरणको रुपमा तपाईँको आफ्नो पासवर्ड प्रविष्ट गर्नुहोस् ।\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1784,12 +1840,18 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
 
 #, fuzzy
 msgid ""
@@ -2055,6 +2117,11 @@ msgstr ""
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: डाइरेकट्री सिर्जना गर्न सकिएन %s\n"
@@ -2099,6 +2166,14 @@ msgstr "%s: डाइरेकट्री सिर्जना गर्न �
 msgid "%s: can't create group\n"
 msgstr "%s: यो %s सिर्जना गर्न सकिदैन\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: यो %s सिर्जना गर्न सकिदैन\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create subordinate group IDs\n"
+msgstr "%s: यो %s सिर्जना गर्न सकिदैन\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -2138,6 +2213,11 @@ msgstr ""
 #| "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s: समूह %s हटाउन सकिदैन जुन अर्को प्रयोगकर्ताको लागि प्राथमिक समूह हो ।\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: डाइरेक्ट्री %s लाई %s मा पुन:नामकरण गर्न सकिदैन\n"
 
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
@@ -2246,6 +2326,18 @@ msgstr ""
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2263,6 +2355,16 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: प्रयोगकर्ता %s अवस्थित छ\n"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: अवैध मिति '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: अवैध मिति '%s'\n"
+
+#, fuzzy, c-format
 #| msgid "%s: cannot open file %s\n"
 msgid "%s: no options\n"
 msgstr "%s: फाइल %s खोल्न सकिएन\n"
@@ -2277,6 +2379,10 @@ msgstr "%s: -e र -f को लागि स्याडो पासवर्�
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 
 #, c-format
@@ -2319,6 +2425,26 @@ msgstr "मेलबक्स प्रापक परिवर्तन गर
 
 msgid "failed to rename mailbox"
 msgstr "मेल बक्सलाई पुन:नामकरण गर्न असफल भयो"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
 
 #, c-format
 msgid ""
@@ -2381,6 +2507,20 @@ msgstr "फाइल ताल्चा मार्न सकिदैन"
 
 msgid "Couldn't make backup"
 msgstr "जगेडा बनाउँन सकिदैन"
+
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s not found in /etc/passwd\n"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s: %s /etc/passwd मा फेला परेन\n"
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 msgid "failed to open scratch file"
@@ -2955,9 +3095,6 @@ msgstr "%s: अवैध डाइरेक्ट्री '%s'\n"
 #~ msgid "%s: can't rewrite password file\n"
 #~ msgstr "%s: पासवर्ड फाइल पुन:लेखन गर्न सकिएन\n"
 
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s: पासवर्ड फाइल अद्यावधिक गर्न सकिएन\n"
-
 #~ msgid "%s: can't update shadow password file\n"
 #~ msgstr "%s: स्याडो पासवर्ड फाइल अद्यावधिक गर्न सकिएन\n"
 
@@ -2978,9 +3115,6 @@ msgstr "%s: अवैध डाइरेक्ट्री '%s'\n"
 
 #~ msgid "Cannot open the password file.\n"
 #~ msgstr "पासवर्ड फाइल खोल्न सकिएन ।\n"
-
-#~ msgid "%s: %s not found in /etc/passwd\n"
-#~ msgstr "%s: %s /etc/passwd मा फेला परेन\n"
 
 #~ msgid "Error updating the password entry.\n"
 #~ msgstr "पासवर्ड प्रविष्टिमा त्रुटि अद्यावधिक गरिदैछ ।\n"
@@ -3173,9 +3307,6 @@ msgstr "%s: अवैध डाइरेक्ट्री '%s'\n"
 
 #~ msgid "%s: can't update shadow group file\n"
 #~ msgstr "%s: स्याडो समूह फाइल अद्यावधिक गर्न सकिएन\n"
-
-#~ msgid "%s: can't update group file\n"
-#~ msgstr "%s: समूह फाइल अद्यावधिक गर्न सकिएन\n"
 
 #~ msgid "%s: can't delete shadow group file\n"
 #~ msgstr "%s: स्याडो समूह फाइल मेट्न सकिएन\n"

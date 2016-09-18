@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2012-01-26 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -435,6 +435,11 @@ msgstr "%s: Ugyldig chroot-sti »%s«\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: Kan ikke tilgå chroot-mappe %s: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot access chroot directory %s: %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: Kan ikke tilgå chroot-mappe %s: %s\n"
+
 #, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: Kan ikke chroot til mappe %s: %s\n"
@@ -792,6 +797,11 @@ msgstr "%s: Linje %d: Linjen er for lang\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: Linje %d: Mangler ny adgangskode\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Failed to write %s: %s\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: Kunne ikke skrive %s: %s\n"
+
 #, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: Linje %d: Gruppe »%s« findes ikke\n"
@@ -1093,6 +1103,15 @@ msgstr "%s: GID »%lu« findes allerede\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Kan ikke opsætte tjenesten cleanup.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+"  -r, --reset                   nulstil tælleren for mislykkede logind\n"
+
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: Kan ikke fjerne punkt »%s« fra %s\n"
@@ -1323,6 +1342,22 @@ msgstr ""
 "  -b, --before DAGE             vis kun lastlog-poster, der er ældre\n"
 "                                end DAGE\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr "  -a, --all                     vis faillog-poster for alle brugere\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr "  -a, --all                     vis faillog-poster for alle brugere\n"
+
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
@@ -1344,6 +1379,24 @@ msgstr "Brugernavn              Port     Seneste"
 
 msgid "**Never logged in**"
 msgstr "**Har aldrig logget på**"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: Kunne ikke indhente punktet for UID %lu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: Kunne ikke nulstille lastlog-punktet for UID %lu: %s\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1379,19 +1432,19 @@ msgstr ""
 "[Afbrød ikke forbindelsen - root-logind er tilladt.]"
 
 #, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr "%s: Kan umuligt arbejde uden effektiv root\n"
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr "Intet utmp-punkt. Du skal køre »login« fra det laveste »sh-niveau«"
+
+#, c-format
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
 "Logind udløb efter %u sekunder.\n"
-
-#, c-format
-msgid "%s: Cannot possibly work without effective root\n"
-msgstr "%s: Kan umuligt arbejde uden effektiv root\n"
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Intet utmp-punkt. Du skal køre »login« fra det laveste »sh-niveau«"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1465,6 +1518,11 @@ msgstr "Brug: newgrp [-] [gruppe]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Brug: sg gruppe [[-c] kommando]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Failed to write %s: %s\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: Kunne ikke skrive %s: %s\n"
+
 msgid "Invalid password.\n"
 msgstr "Ugyldig adgangskode.\n"
 
@@ -1530,6 +1588,21 @@ msgstr "%s: Linje %d: chown %s fejlede: %s\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: Linje %d: Kan ikke opdatere punktet\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: Kan ikke oprette bruger\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: Kan ikke oprette gruppe\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1795,12 +1868,6 @@ msgstr "Gik uden om adgangskodegodkendelse.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Angiv din EGEN adgangskode som godkendelse.\n"
 
-msgid " ...killed.\n"
-msgstr " ...dræbt.\n"
-
-msgid " ...waiting for child to terminate.\n"
-msgstr " ...venter på at underproces termineres.\n"
-
 #, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Kan ikke forgrene brugerskal\n"
@@ -1816,12 +1883,18 @@ msgstr "%s: Forkert signalmasking\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Session termineret, terminerer skal..."
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr " ...dræbt.\n"
+
+msgid " ...waiting for child to terminate.\n"
+msgstr " ...venter på at underproces termineres.\n"
 
 msgid " ...terminated.\n"
 msgstr " ...termineret.\n"
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -2106,6 +2179,11 @@ msgstr "%s: Kunne ikke nulstille faillog-punktet for UID %lu: %s\n"
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: Kunne ikke nulstille lastlog-punktet for UID %lu: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: Kan ikke oprette mappen %s\n"
@@ -2147,6 +2225,16 @@ msgstr "%s: Kan ikke oprette tcv-mappe for %s\n"
 
 #, c-format
 msgid "%s: can't create group\n"
+msgstr "%s: Kan ikke oprette gruppe\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: Kan ikke oprette bruger\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: Kan ikke oprette gruppe\n"
 
 #, c-format
@@ -2194,6 +2282,11 @@ msgstr "%s: Gruppe %s er ikke fjernet da gruppen har andre medlemmer.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Gruppe %s er den primære gruppe for en anden bruger og fjernes ikke.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: Kan ikke fjerne punkt »%s« fra %s\n"
 
 #, c-format
 msgid "%s: %s mail spool (%s) not found\n"
@@ -2316,6 +2409,18 @@ msgstr "  -u, --uid UID                 ny UID til brugerkontoen\n"
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  åbn brugerkontoen\n"
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2337,6 +2442,16 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: Brugeren »%s« findes allerede i %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: Ugyldig dato »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: Ugyldig dato »%s«\n"
+
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: Ingen tilvalg\n"
@@ -2352,6 +2467,11 @@ msgstr "%s: Skyggeadgangskoder kræves for -e og -f\n"
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID »%lu« findes allerede\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
+msgstr "%s: %s er ikke godkendt til at ændre adgangskoden på %s\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2396,6 +2516,26 @@ msgstr "kunne ikke ændre postkassens ejer"
 
 msgid "failed to rename mailbox"
 msgstr "kunne ikke omdøbe postkasse"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, c-format
 msgid ""
@@ -2449,6 +2589,20 @@ msgstr "Kunne ikke låse filen"
 
 msgid "Couldn't make backup"
 msgstr "Kunne ikke lave sikkerhedskopi"
+
+#, fuzzy, c-format
+#| msgid "%s: PAM: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: PAM: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: nscd exited with status %d"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s: nscd afsluttede med status %d"
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 msgid "failed to open scratch file"
 msgstr "kunne ikke åbne scratch-fil"

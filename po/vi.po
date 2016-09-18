@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2012-01-08 18:13+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -439,6 +439,11 @@ msgstr "%s: không thể tạo thư mục %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: không thể tạo thư mục %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: không thể tạo thư mục %s\n"
 
@@ -803,6 +808,11 @@ msgstr "%s: dòng %d: dòng quá dài\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: dòng %d: thiếu mật khẩu mới\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: không gỡ bỏ được %s\n"
+
 #, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: dòng %d, nhóm « %s » không tồn tại\n"
@@ -1114,6 +1124,15 @@ msgstr "%s: GID « %lu » đã có\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: không thể quyết định tên người dùng của bạn.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+"  -r, --reset                   đặt lại các bộ đếm lần không đăng nhập được\n"
+
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: không thể gỡ bỏ mục nhập « %s » khỏi %s\n"
@@ -1353,6 +1372,26 @@ msgstr ""
 "  -b, --before SỐ               hiển thị chỉ những bản ghi lastlog\n"
 "                                cũ hơn số ngày này (_trước_)\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+"  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
+"dùng\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+"  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
+"dùng\n"
+
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
@@ -1374,6 +1413,24 @@ msgstr "Tên dùng\t\t\t Cổng   Mới nhất"
 
 msgid "**Never logged in**"
 msgstr "**Chưa bao giờ đăng nhập**"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: Không lấy được mục nhập cho UID %lu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: không đặt lại được mục nhập lastlog của UID %lu: %s\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1409,14 +1466,6 @@ msgstr ""
 "[Chức năng ngắt kết nối đã bị vòng: cho phép người chủ đăng nhập.]"
 
 #, c-format
-msgid ""
-"\n"
-"Login timed out after %u seconds.\n"
-msgstr ""
-"\n"
-"Đăng nhập đã quá hạn sau %u giây.\n"
-
-#, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Không thể làm việc mà không có gốc có hiệu lực\n"
 
@@ -1424,6 +1473,14 @@ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
 "Không có mục nhập utmp. Vì thế bạn cần phải thực hiện « login » (đăng nhập) "
 "từ « sh » (trình bao) cấp dưới cùng."
+
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %u seconds.\n"
+msgstr ""
+"\n"
+"Đăng nhập đã quá hạn sau %u giây.\n"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1502,6 +1559,11 @@ msgstr ""
 "Sử dụng: sg group [[-c] lệnh]\n"
 "[group: nhóm]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: không gỡ bỏ được %s\n"
+
 msgid "Invalid password.\n"
 msgstr "Mật khẩu không hợp lệ.\n"
 
@@ -1569,6 +1631,21 @@ msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: dòng %d: không thể cập nhật mục nhập\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: không thể tạo người dùng\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: không thể tạo nhóm\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1852,12 +1929,6 @@ msgstr "Xác thực mật khẩu bị đi vòng.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Hãy nhập mật khẩu của MÌNH để xác thực.\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1874,12 +1945,18 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
 
 msgid ""
 "Usage: su [options] [LOGIN]\n"
@@ -2170,6 +2247,11 @@ msgstr "%s: không đặt lại được mục nhập faillog của UID %lu: %s\
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: không đặt lại được mục nhập lastlog của UID %lu: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: không thể tạo thư mục %s\n"
@@ -2211,6 +2293,16 @@ msgstr "%s: không thể tạo thư mục %s\n"
 
 #, c-format
 msgid "%s: can't create group\n"
+msgstr "%s: không thể tạo nhóm\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: không thể tạo người dùng\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: không thể tạo nhóm\n"
 
 #, c-format
@@ -2262,6 +2354,11 @@ msgstr ""
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: nhóm %s là nhóm chính của một người dùng khác thì không bị gỡ bỏ.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: không thể gỡ bỏ mục nhập « %s » khỏi %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s home directory (%s) not found\n"
@@ -2386,6 +2483,18 @@ msgstr "  -u, --uid UID                 UID mới cho tài khoản người dùn
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  mở khoá tài khoản người dùng\n"
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2412,6 +2521,16 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: người dùng « %s » đã có trong %s\n"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: ngày không hợp lệ « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: ngày không hợp lệ « %s »\n"
+
+#, fuzzy, c-format
 #| msgid "%s: cannot open %s\n"
 msgid "%s: no options\n"
 msgstr "%s: không thể mở %s\n"
@@ -2427,6 +2546,11 @@ msgstr "%s: mật khẩu bóng cần thiết cho hai tùy chọn « -e » và «
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID « %lu » đã có\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
+msgstr "%s: %s không có quyền thay đổi mật khẩu của %s\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2472,6 +2596,26 @@ msgstr "lỗi thay đổi chủ hộp thư"
 
 msgid "failed to rename mailbox"
 msgstr "lỗi thay đổi tên của hộp thư"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s: lỗi chuẩn bị mục nhập %s mới « %s »\n"
 
 #, c-format
 msgid ""
@@ -2532,6 +2676,19 @@ msgstr "Không thể khoá tập tin"
 
 msgid "Couldn't make backup"
 msgstr "Không thể sao lưu"
+
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: %s\n"
+
+#, c-format
+msgid "%s: %s returned with status %d\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 #| msgid "failed to rename mailbox"

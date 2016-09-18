@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2016-09-18 14:03-0500\n"
 "PO-Revision-Date: 2006-06-01 15:28+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -446,6 +446,11 @@ msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབ�
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
@@ -786,6 +791,11 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཆོག་ཡིག་གསརཔ་ བརླག་སྟོར་ཞུགས་པ།\n"
 
 #, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
 #| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
@@ -1079,6 +1089,11 @@ msgstr ""
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: ཁྱོད་ཀྱི་ལག་ལེན་པའི་མིང་ གཏན་འབེབས་བཟོ་མི་ཚུགས།\n"
 
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1296,6 +1311,16 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
@@ -1312,6 +1337,24 @@ msgstr "ལག་ལེན་པའི་མིང་                འདྲ�
 
 msgid "**Never logged in**"
 msgstr "**ནམ་ཡང་ནང་བསྐྱོད་མ་འབད་**"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update password file\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1346,6 +1389,14 @@ msgstr ""
 "\n"
 "[མཐུད་བཏོག་ཟུར་ཏེ་འགྱོ་ཡོདཔ་ --རྩ་བའི་ནང་བསྐྱོད་མི་ཆོག]"
 
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"utmpཐོ་བཀོད་མིན་འདུག ཁྱོད་ཀྱིས་ གནས་རིམ་དམའ་ཤོས་\"sh\"གི་ནང་ལས་ \"login\"ལག་ལེན་འཐབ་དགོ"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "\n"
@@ -1356,14 +1407,6 @@ msgid ""
 msgstr ""
 "\n"
 "%d སྐར་ཆག་གི་ཤུལ་མར་ ནང་བསྐྱོད་ངལ་མཚམས་བྱུང་ཡོདཔ།\n"
-
-#, c-format
-msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"utmpཐོ་བཀོད་མིན་འདུག ཁྱོད་ཀྱིས་ གནས་རིམ་དམའ་ཤོས་\"sh\"གི་ནང་ལས་ \"login\"ལག་ལེན་འཐབ་དགོ"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1441,6 +1484,11 @@ msgstr "ལག་ལེན་: newgrp [-][ སྡེ་ཚན་]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "ལག་ལེན་: sg group [[-c]བརྡ་བཀོད་ ]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "ཆོག་ཡིག་རྙིངམ་:"
@@ -1509,6 +1557,20 @@ msgstr "%s: གྲལ་ཐིག་ %d: chown འཐུས་ཤོར་བྱ
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update group file\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1760,12 +1822,6 @@ msgstr "ཆོག་ཡིག་བདེན་བཤད་ཟུར་ལས་
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "ཁྱོད་རའི་ཆོག་ཡིག་འདི་ བདེན་བཤད་སྦེ་བཙུགས།\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1782,12 +1838,18 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
 
 #, fuzzy
 msgid ""
@@ -2053,6 +2115,11 @@ msgstr ""
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
@@ -2098,6 +2165,14 @@ msgstr "%s: སྣོད་ཐོ་ %s གསར་བསྐྲུན་འབ�
 msgid "%s: can't create group\n"
 msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create subordinate group IDs\n"
+msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -2138,6 +2213,11 @@ msgstr ""
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ལག་ལེན་པ་གཞན་གྱི་དོན་ལུ་ གཞི་རིམ་སྡེ་ཚན་ཅིག་ཨིན་མི་སྡེ་ཚན་ %sའདི་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱར་མིང་བཏགས་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
@@ -2246,6 +2326,18 @@ msgstr ""
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2263,6 +2355,16 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: ལག་ལེན་པ་ %sཡོདཔ་ཨིན།\n"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: ནུས་མེད་ཚེས་གྲངས་  '%s'།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: ནུས་མེད་ཚེས་གྲངས་  '%s'།\n"
+
+#, fuzzy, c-format
 #| msgid "%s: cannot open file %s\n"
 msgid "%s: no options\n"
 msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
@@ -2277,6 +2379,10 @@ msgstr "%s: -e aདང་ -f གཉིས་ལུ་དངོས་མཁོ་
 
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 
 #, c-format
@@ -2320,6 +2426,26 @@ msgstr "ཡིག་སྒྲོམ་བདག་པོ་སོར་ནི་
 
 msgid "failed to rename mailbox"
 msgstr "ཡིག་སྒྲོམ་གྱི་བསྐྱར་མིང་བཏགས་ནི་ལུ་ འཛོལ་བ།"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
 #, c-format
 msgid ""
@@ -2382,6 +2508,20 @@ msgstr "ཡིག་སྣོད་ལྡེ་མིག་བརྐྱབས་
 
 msgid "Couldn't make backup"
 msgstr "རྒྱབ་ཐག་བཟོ་མ་ཚུགས།"
+
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s not found in /etc/passwd\n"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s:  /etc/passwd ནང་ལུ་ %s མ་ཐོབ།\n"
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 msgid "failed to open scratch file"
@@ -2959,9 +3099,6 @@ msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་�
 #~ msgid "%s: can't rewrite password file\n"
 #~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལོག་འབྲི་མ་ཚུགས།\n"
 
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
-
 #~ msgid "%s: can't update shadow password file\n"
 #~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
 
@@ -2982,9 +3119,6 @@ msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་�
 
 #~ msgid "Cannot open the password file.\n"
 #~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#~ msgid "%s: %s not found in /etc/passwd\n"
-#~ msgstr "%s:  /etc/passwd ནང་ལུ་ %s མ་ཐོབ།\n"
 
 #~ msgid "Error updating the password entry.\n"
 #~ msgstr "ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་འབདཝ་ད་ལུ་ འཛོལ་བ།\n"
@@ -3177,9 +3311,6 @@ msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་�
 
 #~ msgid "%s: can't update shadow group file\n"
 #~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#~ msgid "%s: can't update group file\n"
-#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 #~ msgid "%s: can't delete shadow group file\n"
 #~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ བཏོན་གཏང་མི་ཚུགས།\n"
