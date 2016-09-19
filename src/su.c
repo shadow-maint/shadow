@@ -373,8 +373,8 @@ static void prepare_pam_close_session (void)
 		              stderr);
 		(void) kill (-pid_child, caught);
 
-		snprintf (kill_msg, _(" ...killed.\n"));
-		snprintf (wait_msg, _(" ...waiting for child to terminate.\n"));
+		snprintf (kill_msg, 256, _(" ...killed.\n"));
+		snprintf (wait_msg, 256, _(" ...waiting for child to terminate.\n"));
 
 		(void) signal (SIGALRM, kill_child);
 		(void) alarm (2);
