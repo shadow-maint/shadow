@@ -458,7 +458,7 @@ msgid "Note: if you wish to unlock the account (not only access with a password)
 msgstr ""
 
 #: usermod.8.xml:384(term)
-msgid "<option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
+msgid "<option>-v</option>, <option>--add-subuids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
 
 #: usermod.8.xml:388(para)
@@ -474,7 +474,7 @@ msgid "No checks will be performed with regard to <option>SUB_UID_MIN</option>, 
 msgstr ""
 
 #: usermod.8.xml:402(term)
-msgid "<option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
+msgid "<option>-V</option>, <option>--del-subuids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
 
 #: usermod.8.xml:406(para)
@@ -482,11 +482,11 @@ msgid "Remove a range of subordinate uids from the user's account."
 msgstr ""
 
 #: usermod.8.xml:409(para)
-msgid "This option may be specified multiple times to remove multiple ranges to a users account. When both <option>--del-sub-uids</option> and <option>--add-sub-uids</option> are specified, the removal of all subordinate uid ranges happens before any subordinate uid range is added."
+msgid "This option may be specified multiple times to remove multiple ranges to a users account. When both <option>--del-subuids</option> and <option>--add-subuids</option> are specified, the removal of all subordinate uid ranges happens before any subordinate uid range is added."
 msgstr ""
 
 #: usermod.8.xml:422(term)
-msgid "<option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
+msgid "<option>-w</option>, <option>--add-subgids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
 
 #: usermod.8.xml:426(para)
@@ -498,7 +498,7 @@ msgid "No checks will be performed with regard to <option>SUB_GID_MIN</option>, 
 msgstr ""
 
 #: usermod.8.xml:440(term)
-msgid "<option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
+msgid "<option>-W</option>, <option>--del-subgids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>"
 msgstr ""
 
 #: usermod.8.xml:444(para)
@@ -506,7 +506,7 @@ msgid "Remove a range of subordinate gids from the user's account."
 msgstr ""
 
 #: usermod.8.xml:447(para)
-msgid "This option may be specified multiple times to remove multiple ranges to a users account. When both <option>--del-sub-gids</option> and <option>--add-sub-gids</option> are specified, the removal of all subordinate gid ranges happens before any subordinate gid range is added."
+msgid "This option may be specified multiple times to remove multiple ranges to a users account. When both <option>--del-subgids</option> and <option>--add-subgids</option> are specified, the removal of all subordinate gid ranges happens before any subordinate gid range is added."
 msgstr ""
 
 #: usermod.8.xml:460(term) useradd.8.xml:506(term)

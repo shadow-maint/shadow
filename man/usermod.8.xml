@@ -382,7 +382,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-v</option>, <option>--add-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-v</option>, <option>--add-subuids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -400,7 +400,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-V</option>, <option>--del-sub-uids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-V</option>, <option>--del-subuids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -408,7 +408,7 @@
 	  </para>
 	  <para>
 	    This option may be specified multiple times to remove multiple ranges to a users account.
-	    When both <option>--del-sub-uids</option> and <option>--add-sub-uids</option> are specified,
+	    When both <option>--del-subuids</option> and <option>--add-subuids</option> are specified,
 	    the removal of all subordinate uid ranges happens before any subordinate uid range is added.
 	  </para>
 	  <para>
@@ -420,7 +420,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-w</option>, <option>--add-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-w</option>, <option>--add-subgids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -438,7 +438,7 @@
       </varlistentry>
       <varlistentry condition="subids">
 	<term>
-	  <option>-W</option>, <option>--del-sub-gids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
+	  <option>-W</option>, <option>--del-subgids</option>&nbsp;<replaceable>FIRST</replaceable>-<replaceable>LAST</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -446,7 +446,7 @@
 	  </para>
 	  <para>
 	    This option may be specified multiple times to remove multiple ranges to a users account.
-	    When both <option>--del-sub-gids</option> and <option>--add-sub-gids</option> are specified,
+	    When both <option>--del-subgids</option> and <option>--add-subgids</option> are specified,
 	    the removal of all subordinate gid ranges happens before any subordinate gid range is added.
 	  </para>
 	  <para>
