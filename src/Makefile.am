@@ -57,7 +57,7 @@ if ACCT_TOOLS_SETUID
 	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
 if ENABLE_SUBIDS
-	suidubins += newgidmap newuidmap
+suidubins += newgidmap newuidmap
 endif
 
 if WITH_TCB
