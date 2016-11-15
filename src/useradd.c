@@ -1896,6 +1896,9 @@ static void create_home (void)
 	if (access (user_home, F_OK) != 0) {
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (user_home) != 0) {
+			fprintf (stderr,
+			         _("%s: cannot set SELinux context for home directory %s\n"),
+			         Prog, user_home);
 			fail_exit (E_HOMEDIR);
 		}
 #endif
@@ -1925,6 +1928,9 @@ static void create_home (void)
 #ifdef WITH_SELINUX
 		/* Reset SELinux to create files with default contexts */
 		if (reset_selinux_file_context () != 0) {
+			fprintf (stderr,
+			         _("%s: cannot reset SELinux file creation context\n"),
+			         Prog);
 			fail_exit (E_HOMEDIR);
 		}
 #endif
