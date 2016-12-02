@@ -8,6 +8,9 @@
 	  - Remove non-POSIX chmod option in Makefile
 	  - Fix suidubins assignments
 	  - Fix --add-subuids etc spelling in manpages
+	  - Audit homedir ownership change.
+	  - Print error on selinux file context update failure
+	  - Keep original file perms when creating a backup
 
 	* (henceforth we'll update Changelog with each commit
 	  and proper credit)
