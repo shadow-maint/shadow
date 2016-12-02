@@ -1756,6 +1756,14 @@ static void move_home (void)
 			fail_exit (E_HOMEDIR);
 		}
 
+#ifdef WITH_AUDIT
+		if (uflg || gflg) {
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "changing home directory owner",
+				      user_newname, (unsigned int) user_newid, 1);
+		}
+#endif
+
 		if (rename (user_home, user_newhome) == 0) {
 			/* FIXME: rename above may have broken symlinks
 			 *        pointing to the user's home directory
@@ -2252,6 +2260,13 @@ int main (int argc, char **argv)
 			 * ownership.
 			 *
 			 */
+#ifdef WITH_AUDIT
+			if (uflg || gflg) {
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					      "changing home directory owner",
+					      user_newname, (unsigned int) user_newid, 1);
+			}
+#endif
 			if (chown_tree (dflg ? user_newhome : user_home,
 			                user_id,
 			                uflg ? user_newid  : (uid_t)-1,

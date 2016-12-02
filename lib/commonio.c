@@ -301,15 +301,12 @@ static int create_backup (const char *backup, FILE * fp)
 	struct utimbuf ub;
 	FILE *bkfp;
 	int c;
-	mode_t mask;
 
 	if (fstat (fileno (fp), &sb) != 0) {
 		return -1;
 	}
 
-	mask = umask (077);
-	bkfp = fopen (backup, "w");
-	(void) umask (mask);
+	bkfp = fopen_set_perms (backup, "w", &sb);
 	if (NULL == bkfp) {
 		return -1;
 	}

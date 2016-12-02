@@ -338,8 +338,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 		errno = ENOMEM;
 		return NULL;
 	}
-	snprintf(new_line, new_line_len, "%s\n%s", gr1->line, gr2->line);
-	new_line[new_line_len] = '\0';
+	snprintf(new_line, new_line_len + 1, "%s\n%s", gr1->line, gr2->line);
 
 	/* Concatenate the 2 list of members */
 	for (i=0; NULL != gptr1->gr_mem[i]; i++);
