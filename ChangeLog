@@ -1,3 +1,45 @@
+2016-12-02  Serge Hallyn <serge@hallyn.com>
+
+	* changes since 4.4
+	  - Use sizeof rather than hardcoding snprintf args
+	  - Fix useradd improper default loading
+	  - Update Vietnamese translations
+	  - Update Polish translations
+	  - Remove non-POSIX chmod option in Makefile
+	  - Fix suidubins assignments
+	  - Fix --add-subuids etc spelling in manpages
+
+	* (henceforth we'll update Changelog with each commit
+	  and proper credit)
+
+2016-12-02  Serge Hallyn <serge@hallyn.com>
+
+	* Changes since 4.2.1:
+	  - Documentation, error report and translations updates
+	  - Replace path_max with 32
+	  - User namespace support fixes/updates including:
+	    - Correct sanity checks in newXidmap
+	    - Fix building without subuid support
+	    - Add /etc/subuid support for UID matching
+	    - Support subuid for nonlocal users
+	    - Default to 65536 subuid allocations
+	    - Respect -r
+	    - Check for range overflows
+	  - Add tests from svn tree
+	  - Use AC_CHECK_SIZEOF for uid_t size checks
+	  - Accomodate missing /etc and login.defs
+	  - Support FORCE_SHADOW
+	  - Be more robust in hostile environment
+	  - Allow removing a primary group
+	  - Clear passwords on __pw_dup errors
+	  - Memory leak fix in commonio_update and get_map_ranges
+	  - Fix resource leak in syslog_sg
+	  - Fix user busy error at userdel
+	  - Support set/clear lastlog record via lastlog command
+	  - Add --no-create-home as longopt for -M
+	  - Fix signal races
+	  - Reduce syslog priority of common usage events
+
 2013-08-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/vipw.c: After waitpid(), use errno only if waitpid returned
