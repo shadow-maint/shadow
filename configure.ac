@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.64])
 AC_INIT([shadow], [4.4], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([1.11 foreign dist-xz])
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
