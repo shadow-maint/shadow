@@ -40,6 +40,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
+#include "getdef.h"
 #include "sgroupio.h"
 
 /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent)
