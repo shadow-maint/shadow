@@ -47,7 +47,6 @@ clean-local:
 else
 $(man_MANS):
 	@echo you need to run configure with --enable-man to generate man pages
-	@false
 endif
 
 man8/grpconv.8 man8/grpunconv.8 man8/pwunconv.8: man8/pwconv.8
