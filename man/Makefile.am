@@ -215,5 +215,4 @@ $(man_MANS):
 	@echo "Error: you need to run configure with '--enable-man'"
 	@echo "       in order to regenerate man pages."
 	@echo ""
-	@false
 endif

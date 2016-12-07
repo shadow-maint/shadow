@@ -1,0 +1,20 @@
+sudo: false
+
+language: c
+
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+      - autopoint
+      - xsltproc
+
+script:
+ - ./autogen.sh --without-selinux --disable-man
+ - grep ENABLE_ config.status
+ - make
+
+# vim:et:ts=2:sw=2
