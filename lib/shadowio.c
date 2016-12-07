@@ -40,6 +40,7 @@
 #include <shadow.h>
 #include <stdio.h>
 #include "commonio.h"
+#include "getdef.h"
 #include "shadowio.h"
 #ifdef WITH_TCB
 #include <tcb.h>
