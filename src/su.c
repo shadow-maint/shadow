@@ -219,6 +219,22 @@ static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root)
 	}
 	closelog ();
 #endif
+
+#ifdef WITH_AUDIT
+	audit_fd = audit_open ();
+	audit_log_acct_message (audit_fd,
+				AUDIT_USER_ROLE_CHANGE,
+				NULL,    /* Prog. name */
+				"su",
+				('\0' != caller_name[0]) ? caller_name : "???",
+				AUDIT_NO_ID,
+				"localhost",
+				NULL,    /* addr */
+				tty,
+				0);      /* result */
+	close (audit_fd);
+#endif				/* WITH_AUDIT */
+
 	exit (1);
 }
 
@@ -1075,6 +1091,21 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* !USE_PAM */
+
+#ifdef WITH_AUDIT
+	audit_fd = audit_open ();
+	audit_log_acct_message (audit_fd,
+				AUDIT_USER_ROLE_CHANGE,
+				NULL,    /* Prog. name */
+				"su",
+				('\0' != caller_name[0]) ? caller_name : "???",
+				AUDIT_NO_ID,
+				"localhost",
+				NULL,    /* addr */
+				caller_tty,
+				1);      /* result */
+	close (audit_fd);
+#endif				/* WITH_AUDIT */
 
 	set_environment (pw);
 
