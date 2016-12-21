@@ -1,3 +1,10 @@
+2016-12-21  Serge Hallyn <serge@hallyn.com>
+
+	* Drop leading underscore from _COMMONIO_H and _SHADOWIO_H
+	* Fix readability in usermod error messages.
+	* Reset user in tallylog
+	* Add audit support to su
+
 2016-12-02  Serge Hallyn <serge@hallyn.com>
 
 	* changes since 4.4
