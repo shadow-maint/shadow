@@ -2156,7 +2156,7 @@ int main (int argc, char **argv)
 			unsigned long count = ptr->range.last - ptr->range.first + 1;
 			if (sub_uid_add(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
-					_("%s: failed to add uid range %lu-%lu from '%s'\n"),
+					_("%s: failed to add uid range %lu-%lu to '%s'\n"),
 					Prog, ptr->range.first, ptr->range.last, 
 					sub_uid_dbname ());
 				fail_exit (E_SUB_UID_UPDATE);
@@ -2182,7 +2182,7 @@ int main (int argc, char **argv)
 			unsigned long count = ptr->range.last - ptr->range.first + 1;
 			if (sub_gid_add(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
-					_("%s: failed to add gid range %lu-%lu from '%s'\n"),
+					_("%s: failed to add gid range %lu-%lu to '%s'\n"),
 					Prog, ptr->range.first, ptr->range.last, 
 					sub_gid_dbname ());
 				fail_exit (E_SUB_GID_UPDATE);
