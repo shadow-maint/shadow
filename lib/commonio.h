@@ -31,8 +31,8 @@
  */
 
 /* $Id$ */
-#ifndef _COMMONIO_H
-#define _COMMONIO_H
+#ifndef COMMONIO_H
+#define COMMONIO_H
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>

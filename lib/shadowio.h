@@ -31,8 +31,8 @@
  */
 
 /* $Id$ */
-#ifndef _SHADOWIO_H
-#define _SHADOWIO_H
+#ifndef SHADOWIO_H
+#define SHADOWIO_H
 
 #include "defines.h"
 
