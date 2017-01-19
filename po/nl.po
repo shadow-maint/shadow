@@ -745,7 +745,7 @@ msgstr "%s: ongeldige naam: '%s'\n"
 
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
-msgstr "%s: kamernummer bevat niet-ASCII tekens: '%s'"
+msgstr "%s: kamernummer bevat niet-ASCII tekens: '%s'\n"
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -1571,7 +1571,7 @@ msgstr "Ongeldig wachtwoord.\n"
 
 #, c-format
 msgid "%s: failure forking: %s\n"
-msgstr "%s: nieuw proces beginnen is mislukt: %s"
+msgstr "%s: nieuw proces beginnen is mislukt: %s\n"
 
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
@@ -2633,8 +2633,8 @@ msgstr "Kon bestand niet vergrendelen"
 msgid "Couldn't make backup"
 msgstr "Kon geen reservekopie maken"
 
-#| msgid "Unable to open group file\n"
-msgid "failed to open scratch file"
+#| msgid "Unable to open group file"
+msgid "failed to open scratch file\n"
 msgstr "initieel bestand openen is mislukt\n"
 
 #| msgid "%s: fields too long\n"
