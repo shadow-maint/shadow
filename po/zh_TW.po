@@ -18,7 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: TAIWAN\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #, c-format
 msgid ""
