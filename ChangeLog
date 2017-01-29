@@ -1,7 +1,8 @@
 2016-01-29  Serge Hallyn <serge@hallyn.com>
 
 	* Patch from Fedora to improve performance with SSSD, Winbind,
-	  or nss_ldap.
+	  or nss_ldap. (Tomas Mraz)
+	* Make sure knowndef_table is NULL-terminated.  (Bernhard Rosenkränzer)
 
 2016-12-21  Serge Hallyn <serge@hallyn.com>
 
