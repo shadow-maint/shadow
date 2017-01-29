@@ -1,3 +1,8 @@
+2016-01-29  Serge Hallyn <serge@hallyn.com>
+
+	* Patch from Fedora to improve performance with SSSD, Winbind,
+	  or nss_ldap.
+
 2016-12-21  Serge Hallyn <serge@hallyn.com>
 
 	* Drop leading underscore from _COMMONIO_H and _SHADOWIO_H
