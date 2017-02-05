@@ -7,12 +7,13 @@
 # Bjørn Steensrud <bjornst@powertech.no>, 2006.
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2009, 2012.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2012.
+# Lars Bahner <bahner@debian.org>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2016-09-18 14:03-0500\n"
-"PO-Revision-Date: 2012-01-18 17:19+0100\n"
+"PO-Revision-Date: 2015-09-30 18:15+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #, c-format
 msgid ""
@@ -48,10 +49,9 @@ msgstr "feil med oppsettet - ukjent element «%s» (kontakt administrator)\n"
 msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd avsluttet ikke normallt (signal %d)\n"
 
-#, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
+#, c-format
 msgid "%s: nscd exited with status %d\n"
-msgstr "%s: nscd avsluttet med status %d"
+msgstr "%s: nscd avsluttet med status %d\n"
 
 msgid "Password: "
 msgstr "Passord: "
@@ -415,8 +415,9 @@ msgstr "passwd: %s\n"
 msgid "passwd: password unchanged\n"
 msgstr "passwd: passordet er uendret\n"
 
+#, fuzzy
 msgid "passwd: password updated successfully\n"
-msgstr "passwd: passorder ble oppdatert\n"
+msgstr "passwd: passordet ble oppdatert\n"
 
 #, c-format
 msgid "Incorrect password for %s.\n"

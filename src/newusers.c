@@ -988,8 +988,8 @@ int main (int argc, char **argv)
 	is_shadow_grp = sgr_file_present ();
 #endif
 #ifdef ENABLE_SUBIDS
-	is_sub_uid = sub_uid_file_present ();
-	is_sub_gid = sub_gid_file_present ();
+	is_sub_uid = sub_uid_file_present () && !rflg;
+	is_sub_gid = sub_gid_file_present () && !rflg;
 #endif				/* ENABLE_SUBIDS */
 
 	open_files ();

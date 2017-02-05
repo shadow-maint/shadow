@@ -217,7 +217,7 @@ DEFAULT_HOME	yes
 #USERDEL_CMD	/usr/sbin/userdel_local
 
 #
-# If set to yes, userdel will remove the user´s group if it contains no
+# If set to yes, userdel will remove the user's group if it contains no
 # more members, and useradd will create by default a group with the name
 # of the user.
 #
