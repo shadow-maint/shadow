@@ -1825,7 +1825,7 @@ static void tallylog_reset (char *user_name)
 		break;
 	}
 
-	if (failed);
+	if (failed)
 	{
 		fprintf (stderr,
 		         _("%s: failed to reset the tallylog entry of user \"%s\"\n"),
