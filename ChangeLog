@@ -1,3 +1,9 @@
+2016-02-08  Serge Hallyn <serge@hallyn.com>
+
+	* Update Kazakh translations
+	* Consult configuration before calculating subuids
+	* Remove misplaced semicolon
+
 2016-01-29  Serge Hallyn <serge@hallyn.com>
 
 	* Patch from Fedora to improve performance with SSSD, Winbind,
