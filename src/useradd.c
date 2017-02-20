@@ -1817,7 +1817,9 @@ static void tallylog_reset (char *user_name)
 			pname++;        /* Skip the '/' */
 		execl(pam_tally2, pname, "--user", user_name, "--reset", "--quiet", NULL);
 		/* If we come here, something has gone terribly wrong */
-		failed = 1;
+		perror(pam_tally2);
+		exit(42);       /* don't continue, we now have 2 processes running! */
+		/* NOTREACHED */
 		break;
 	default: /* parent */
 		if (waitpid(childpid, &status, 0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status) != 0)
