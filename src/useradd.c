@@ -1794,7 +1794,7 @@ static void lastlog_reset (uid_t uid)
 
 static void tallylog_reset (char *user_name)
 {
-	static const char pam_tally2[] = "/sbin/pam_tally2";
+	const char pam_tally2[] = "/sbin/pam_tally2";
 	const char *pname;
 	pid_t childpid;
 	int failed;
