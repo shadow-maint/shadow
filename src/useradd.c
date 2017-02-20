@@ -2287,7 +2287,7 @@ int main (int argc, char **argv)
 	 * a valid existing user name,
 	 * so we canot call it before close_files()
 	 */
-	if ((!lflg) && (getpwuid (user_id) != NULL)) {
+	if (!lflg && getpwuid (user_id) != NULL) {
 		tallylog_reset (user_name);
 	}
 
