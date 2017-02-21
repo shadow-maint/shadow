@@ -1794,7 +1794,7 @@ static void lastlog_reset (uid_t uid)
 
 static void tallylog_reset (char *user_name)
 {
-	static const char pam_tally2[] = "/sbin/pam_tally2";
+	const char pam_tally2[] = "/sbin/pam_tally2";
 	const char *pname;
 	pid_t childpid;
 	int failed;
@@ -1817,7 +1817,9 @@ static void tallylog_reset (char *user_name)
 			pname++;        /* Skip the '/' */
 		execl(pam_tally2, pname, "--user", user_name, "--reset", "--quiet", NULL);
 		/* If we come here, something has gone terribly wrong */
-		failed = 1;
+		perror(pam_tally2);
+		exit(42);       /* don't continue, we now have 2 processes running! */
+		/* NOTREACHED */
 		break;
 	default: /* parent */
 		if (waitpid(childpid, &status, 0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status) != 0)
@@ -2285,7 +2287,7 @@ int main (int argc, char **argv)
 	 * a valid existing user name,
 	 * so we canot call it before close_files()
 	 */
-	if ((!lflg) && (getpwuid (user_id) != NULL)) {
+	if (!lflg && getpwuid (user_id) != NULL) {
 		tallylog_reset (user_name);
 	}
 
