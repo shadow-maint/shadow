@@ -1,3 +1,8 @@
+2016-02-23  Serge Hallyn <serge@hallyn.com>
+
+	* Merge patch by Tobias Stoeckmann <tobias@stoeckmann.org> to fix
+	  the equivalent of util-linux CVE-2017-2616.
+
 2016-02-08  Serge Hallyn <serge@hallyn.com>
 
 	* Update Kazakh translations
