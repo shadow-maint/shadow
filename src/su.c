@@ -379,11 +379,13 @@ static void prepare_pam_close_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
+			} else {
+				pid_child = 0;
 			}
 		} while (!stop);
 	}
 
-	if (0 != caught) {
+	if (0 != caught && 0 != pid_child) {
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
@@ -393,9 +395,22 @@ static void prepare_pam_close_session (void)
 		snprintf (wait_msg, sizeof wait_msg, _(" ...waiting for child to terminate.\n"));
 
 		(void) signal (SIGALRM, kill_child);
+		(void) signal (SIGCHLD, catch_signals);
 		(void) alarm (2);
 
-		(void) wait (&status);
+		sigemptyset (&ourset);
+		if ((sigaddset (&ourset, SIGALRM) != 0)
+		    || (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0)) {
+			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
+			kill_child (0);
+		} else {
+			while (0 == waitpid (pid_child, &status, WNOHANG)) {
+				sigsuspend (&ourset);
+			}
+			pid_child = 0;
+			(void) sigprocmask (SIG_UNBLOCK, &ourset, NULL);
+		}
+
 		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
 
