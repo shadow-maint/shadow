@@ -42,6 +42,7 @@
 
 #ident "$Id$"
 
+#include <string.h>
 #include <ctype.h>
 #include "defines.h"
 #include "chkname.h"
@@ -54,6 +55,22 @@ static bool is_valid_name (const char *name)
 	if (('\0' == *name) ||
 	    !((('a' <= *name) && ('z' >= *name)) || ('_' == *name))) {
 		return false;
+	}
+
+/*
+ *  To recognize their contributions to the art, science and practice 
+ *  of computing, the following usernames have been retired.
+ *
+ *  dmr - Dennis MacAlistair Ritchie (September 9, 1941 - October 12, 2011)
+ *  mrc - Mark Reed Crispin (July 19, 1956 - December 28, 2012)
+ *  jmc - John McCarthy (September 4, 1927 – October 24, 2011)
+ *
+ */
+
+	if (strcmp(name, "dmr") ||
+	    strcmp(name, "mcr") ||
+	    strcmp(name, "jmc")) {
+        return false;
 	}
 
 	while ('\0' != *++name) {
