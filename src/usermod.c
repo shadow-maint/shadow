@@ -641,7 +641,7 @@ static void new_spent (struct spwd *spent)
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 
 	if (pflg) {
-		spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		spent->sp_lstchg = (long) gettime () / SCALE;
 		if (0 == spent->sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change. */
@@ -1673,7 +1673,7 @@ static void usr_update (void)
 			spent.sp_pwdp   = xstrdup (pwent.pw_passwd);
 			pwent.pw_passwd = xstrdup (SHADOW_PASSWD_STRING);
 
-			spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+			spent.sp_lstchg = (long) gettime () / SCALE;
 			if (0 == spent.sp_lstchg) {
 				/* Better disable aging than
 				 * requiring a password change */
