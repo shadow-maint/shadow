@@ -1130,7 +1130,7 @@ msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
 msgstr ""
-"  -f, --force                   удалить группу даже если она является"
+"  -f, --force                   удалить группу даже, если она является"
 " первичной\n"
 "                                группой пользователя\n"
 
