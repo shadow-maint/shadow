@@ -828,7 +828,7 @@ static void new_spent (struct spwd *spent)
 	memzero (spent, sizeof *spent);
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+	spent->sp_lstchg = (long) gettime () / SCALE;
 	if (0 == spent->sp_lstchg) {
 		/* Better disable aging than requiring a password change */
 		spent->sp_lstchg = -1;
