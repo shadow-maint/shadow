@@ -1,5 +1,9 @@
 2016-05-17  Serge Hallyn <serge@hallyn.com>
 
+	* Release 4.5
+
+2016-05-17  Serge Hallyn <serge@hallyn.com>
+
 	* Patch from Tobias Stoeckmann fixing regression in previous CVE fix
 	  preventing SIGTERM to su from being propagated to the job.
 	* Patch from Chris Lamb making sp_lstchg shadow field reproducible.
