@@ -1,3 +1,11 @@
+2016-05-17  Serge Hallyn <serge@hallyn.com>
+
+	* Patch from Tobias Stoeckmann fixing regression in previous CVE fix
+	  preventing SIGTERM to su from being propagated to the job.
+	* Patch from Chris Lamb making sp_lstchg shadow field reproducible.
+	* Merge Russian translation updates from Yuri Kozlov
+	* Fix missing close of subuid file on error
+
 2016-02-23  Serge Hallyn <serge@hallyn.com>
 
 	* Merge patch by Tobias Stoeckmann <tobias@stoeckmann.org> to fix
