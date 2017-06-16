@@ -387,6 +387,7 @@ int main (int argc, char **argv)
 {
 	bool initflag = false;
 	int i;
+	bool is_member = false;
 	bool cflag = false;
 	int err = 0;
 	gid_t gid;
@@ -625,6 +626,18 @@ int main (int argc, char **argv)
 		goto failure;
 	}
 
+#ifdef HAVE_SETGROUPS
+	/* when using pam_group, she will not be listed in the groups
+	 * database. However getgroups() will return the group. So
+	 * if she is listed there already it is ok to grant membership.
+	 */
+	for (i = 0; i < ngroups; i++) {
+		if (grp->gr_gid == grouplist[i]) {
+			is_member = true;
+			break;
+		}
+	}
+#endif                          /* HAVE_SETGROUPS */
 	/*
 	 * For splitted groups (due to limitations of NIS), check all 
 	 * groups of the same GID like the requested group for
@@ -653,7 +666,9 @@ int main (int argc, char **argv)
 	/*
 	 * Check if the user is allowed to access this group.
 	 */
-	check_perms (grp, pwd, group);
+	if (!is_member) {
+		check_perms (grp, pwd, group);
+	}
 
 	/*
 	 * all successful validations pass through this point. The group id
