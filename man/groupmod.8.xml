@@ -239,43 +239,58 @@
 	<varlistentry>
 	  <term><replaceable>0</replaceable></term>
 	  <listitem>
-	    <para>success</para>
+	    <para>E_SUCCESS: success</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>2</replaceable></term>
 	  <listitem>
-	    <para>invalid command syntax</para>
+	    <para>E_USAGE: invalid command syntax</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>3</replaceable></term>
 	  <listitem>
-	    <para>invalid argument to option</para>
+	    <para>E_BAD_ARG: invalid argument to option</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>4</replaceable></term>
 	  <listitem>
-	    <para>specified group doesn't exist</para>
+	    <para>E_GID_IN_USE: specified group doesn't exist</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>6</replaceable></term>
 	  <listitem>
-	    <para>specified group doesn't exist</para>
+	    <para>E_NOTFOUND: specified group doesn't exist</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>9</replaceable></term>
 	  <listitem>
-	    <para>group name already in use</para>
+	    <para>E_NAME_IN_USE: group name already in use</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>10</replaceable></term>
 	  <listitem>
-	    <para>can't update group file</para>
+	    <para>E_GRP_UPDATE: can't update group file</para>
+	  </listitem>
+	</varlistentry>
+	  <term><replaceable>11</replaceable></term>
+	  <listitem>
+	    <para>E_CLEANUP_SERVICE: can't setup cleanup service</para>
+	  </listitem>
+	</varlistentry>
+	  <term><replaceable>12</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_USERNAME: can't determin your username for use with pam</para>
+	  </listitem>
+	</varlistentry>
+	  <term><replaceable>13</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>

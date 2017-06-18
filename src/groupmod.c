@@ -66,6 +66,11 @@
 #define E_NOTFOUND	6	/* specified group doesn't exist */
 #define E_NAME_IN_USE	9	/* group name already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
+#define E_CLEANUP_SERVICE	11	/* can't setup cleanup service */
+#define E_PAM_USERNAME	12	/* can't determin your username for use with pam */
+#define E_PAM_ERROR	13	/* pam returned an error, see Syslog facility id groupmod */
+
+
 /*
  * Global variables
  */
@@ -756,7 +761,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (1);
+		exit (E_CLEANUP_SERVICE);
 	}
 
 	process_flags (argc, argv);
@@ -770,7 +775,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (1);
+			exit (E_PAM_USERNAME);
 		}
 
 		retval = pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
@@ -791,7 +796,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (1);
+		exit (E_PAM_ERROR);
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
