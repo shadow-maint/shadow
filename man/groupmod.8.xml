@@ -278,6 +278,21 @@
 	    <para>can't update group file</para>
 	  </listitem>
 	</varlistentry>
+	  <term><replaceable>11</replaceable></term>
+	  <listitem>
+	    <para>E_CLEANUP_SERVICE: can't setup cleanup service</para>
+	  </listitem>
+	</varlistentry>
+	  <term><replaceable>12</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_USERNAME: can't determin your username for use with pam</para>
+	  </listitem>
+	</varlistentry>
+	  <term><replaceable>13</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
