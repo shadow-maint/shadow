@@ -1544,7 +1544,7 @@ msgstr "Ongeldig wachtwoord.\n"
 
 #, c-format
 msgid "%s: failure forking: %s\n"
-msgstr "%s: nieuw proces beginnen is mislukt: %s"
+msgstr "%s: nieuw proces beginnen is mislukt: %s\n"
 
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
@@ -2636,7 +2636,7 @@ msgstr "%s: %s sloot af met status %d\n"
 msgid "%s: %s killed by signal %d\n"
 msgstr "%s: %s werd vernietigd door signaal %d\n"
 
-msgid "failed to open scratch file"
+msgid "failed to open scratch file\n"
 msgstr "initieel bestand openen is mislukt\n"
 
 msgid "failed to unlink scratch file"
