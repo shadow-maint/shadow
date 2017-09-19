@@ -411,7 +411,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -G, --groups GROUPS           new list of supplementary GROUPS\n"), usageout);
 	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
 	                "                                mentioned by the -G option without removing\n"
-	                "                                him/her from other groups\n"), usageout);
+	                "                                the user from other groups\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -l, --login NEW_LOGIN         new value of the login name\n"), usageout);
 	(void) fputs (_("  -L, --lock                    lock the user account\n"), usageout);

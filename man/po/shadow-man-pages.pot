@@ -2492,7 +2492,7 @@ msgid "change user password"
 msgstr ""
 
 #: passwd.1.xml:89(para)
-msgid "The <command>passwd</command> command changes passwords for user accounts. A normal user may only change the password for his/her own account, while the superuser may change the password for any account. <command>passwd</command> also changes the account or associated password validity period."
+msgid "The <command>passwd</command> command changes passwords for user accounts. A normal user may only change the password for their own account, while the superuser may change the password for any account. <command>passwd</command> also changes the account or associated password validity period."
 msgstr ""
 
 #: passwd.1.xml:98(title)
@@ -2500,7 +2500,7 @@ msgid "Password Changes"
 msgstr ""
 
 #: passwd.1.xml:99(para)
-msgid "The user is first prompted for his/her old password, if one is present. This password is then encrypted and compared against the stored password. The user has only one chance to enter the correct password. The superuser is permitted to bypass this step so that forgotten passwords may be changed."
+msgid "The user is first prompted for their old password, if one is present. This password is then encrypted and compared against the stored password. The user has only one chance to enter the correct password. The superuser is permitted to bypass this step so that forgotten passwords may be changed."
 msgstr ""
 
 #: passwd.1.xml:107(para)
@@ -2572,7 +2572,7 @@ msgid "<option>-e</option>, <option>--expire</option>"
 msgstr ""
 
 #: passwd.1.xml:207(para)
-msgid "Immediately expire an account's password. This in effect can force a user to change his/her password at the user's next login."
+msgid "Immediately expire an account's password. This in effect can force a user to change their password at the user's next login."
 msgstr ""
 
 #: passwd.1.xml:220(term)
@@ -2612,7 +2612,7 @@ msgid "<option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAY
 msgstr ""
 
 #: passwd.1.xml:273(para) chage.1.xml:168(para)
-msgid "Set the minimum number of days between password changes to <replaceable>MIN_DAYS</replaceable>. A value of zero for this field indicates that the user may change his/her password at any time."
+msgid "Set the minimum number of days between password changes to <replaceable>MIN_DAYS</replaceable>. A value of zero for this field indicates that the user may change their password at any time."
 msgstr ""
 
 #: passwd.1.xml:291(term)
@@ -2644,7 +2644,7 @@ msgid "<option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_D
 msgstr ""
 
 #: passwd.1.xml:348(para)
-msgid "Set the number of days of warning before a password change is required. The <replaceable>WARN_DAYS</replaceable> option is the number of days prior to the password expiring that a user will be warned that his/her password is about to expire."
+msgid "Set the number of days of warning before a password change is required. The <replaceable>WARN_DAYS</replaceable> option is the number of days prior to the password expiring that a user will be warned that their password is about to expire."
 msgstr ""
 
 #: passwd.1.xml:357(term)
@@ -4169,7 +4169,7 @@ msgid "-l"
 msgstr ""
 
 #: groupmems.8.xml:86(para)
-msgid "The <command>groupmems</command> command allows a user to administer his/her own group membership list without the requirement of superuser privileges. The <command>groupmems</command> utility is for systems that configure its users to be in their own name sake primary group (i.e., guest / guest)."
+msgid "The <command>groupmems</command> command allows a user to administer their own group membership list without the requirement of superuser privileges. The <command>groupmems</command> utility is for systems that configure its users to be in their own name sake primary group (i.e., guest / guest)."
 msgstr ""
 
 #: groupmems.8.xml:94(para)
@@ -4863,7 +4863,7 @@ msgid "change user password expiry information"
 msgstr ""
 
 #: chage.1.xml:82(para)
-msgid "The <command>chage</command> command changes the number of days between password changes and the date of the last password change. This information is used by the system to determine when a user must change his/her password."
+msgid "The <command>chage</command> command changes the number of days between password changes and the date of the last password change. This information is used by the system to determine when a user must change their password."
 msgstr ""
 
 #: chage.1.xml:92(para)
@@ -4915,7 +4915,7 @@ msgid "<option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAY
 msgstr ""
 
 #: chage.1.xml:180(para)
-msgid "Set the maximum number of days during which a password is valid. When <replaceable>MAX_DAYS</replaceable> plus <replaceable>LAST_DAY</replaceable> is less than the current day, the user will be required to change his/her password before being able to use his/her account. This occurrence can be planned for in advance by use of the <option>-W</option> option, which provides the user with advance warning."
+msgid "Set the maximum number of days during which a password is valid. When <replaceable>MAX_DAYS</replaceable> plus <replaceable>LAST_DAY</replaceable> is less than the current day, the user will be required to change their password before being able to use their account. This occurrence can be planned for in advance by use of the <option>-W</option> option, which provides the user with advance warning."
 msgstr ""
 
 #: chage.1.xml:189(para)
@@ -4927,7 +4927,7 @@ msgid "<option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_D
 msgstr ""
 
 #: chage.1.xml:213(para)
-msgid "Set the number of days of warning before a password change is required. The <replaceable>WARN_DAYS</replaceable> option is the number of days prior to the password expiring that a user will be warned his/her password is about to expire."
+msgid "Set the number of days of warning before a password change is required. The <replaceable>WARN_DAYS</replaceable> option is the number of days prior to the password expiring that a user will be warned their password is about to expire."
 msgstr ""
 
 #: chage.1.xml:222(para)
@@ -4939,7 +4939,7 @@ msgid "The <command>chage</command> program requires a shadow password file to b
 msgstr ""
 
 #: chage.1.xml:236(para)
-msgid "The <command>chage</command> command is restricted to the root user, except for the <option>-l</option> option, which may be used by an unprivileged user to determine when his/her password or account is due to expire."
+msgid "The <command>chage</command> command is restricted to the root user, except for the <option>-l</option> option, which may be used by an unprivileged user to determine when their password or account is due to expire."
 msgstr ""
 
 #: chage.1.xml:301(replaceable)

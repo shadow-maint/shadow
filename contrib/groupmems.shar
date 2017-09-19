@@ -480,7 +480,7 @@ X.B groupmems
 \fB-D\fR |
 [\fB-g\fI group_name \fR]
 X.SH DESCRIPTION
-The \fBgroupmems\fR utility allows a user to administer his/her own
+The \fBgroupmems\fR utility allows a user to administer their own
 group membership list without the requirement of superuser privileges.
 The \fBgroupmems\fR utility is for systems that configure its users to
 be in their own name sake primary group (i.e., guest / guest).
