@@ -324,6 +324,7 @@ if test "$enable_man" = "yes"; then
 	AC_PATH_PROG([XSLTPROC], [xsltproc])
 	if test -z "$XSLTPROC"; then
 		enable_man=no
+		AC_MSG_ERROR([xsltproc is missing.])
 	fi
 
 	dnl check for DocBook DTD and stylesheets in the local catalog.
