@@ -83,15 +83,29 @@ static void usage (void)
 	}
 }
 
-/*
- * find_matching_group - search all groups of a given group id for
- *                       membership of a given username
- */
-static /*@null@*/struct group *find_matching_group (const char *name, gid_t gid)
+static bool ingroup(const char *name, struct group *gr)
 {
-	struct group *gr;
 	char **look;
 	bool notfound = true;
+
+	look = gr->gr_mem;
+	while (*look && notfound)
+		notfound = strcmp (*look++, name);
+
+	return !notfound;
+}
+
+/*
+ * find_matching_group - search all groups of a gr's group id for
+ *                       membership of a given username
+ *                       but check gr itself first
+ */
+static /*@null@*/struct group *find_matching_group (const char *name, struct group *gr)
+{
+	gid_t gid = gr->gr_gid;
+
+	if (ingroup(name, gr))
+		return gr;
 
 	setgrent ();
 	while ((gr = getgrent ()) != NULL) {
@@ -103,14 +117,8 @@ static /*@null@*/struct group *find_matching_group (const char *name, gid_t gid)
 		 * A group with matching GID was found.
 		 * Test for membership of 'name'.
 		 */
-		look = gr->gr_mem;
-		while ((NULL != *look) && notfound) {
-			notfound = (strcmp (*look, name) != 0);
-			look++;
-		}
-		if (!notfound) {
+		if (ingroup(name, gr))
 			break;
-		}
 	}
 	endgrent ();
 	return gr;
@@ -643,17 +651,19 @@ int main (int argc, char **argv)
 	 * groups of the same GID like the requested group for
 	 * membership of the current user.
 	 */
-	grp = find_matching_group (name, grp->gr_gid);
-	if (NULL == grp) {
-		/*
-		 * No matching group found. As we already know that
-		 * the group exists, this happens only in the case
-		 * of a requested group where the user is not member.
-		 *
-		 * Re-read the group entry for further processing.
-		 */
-		grp = xgetgrnam (group);
-		assert (NULL != grp);
+	if (!is_member) {
+		grp = find_matching_group (name, grp);
+		if (NULL == grp) {
+			/*
+			 * No matching group found. As we already know that
+			 * the group exists, this happens only in the case
+			 * of a requested group where the user is not member.
+			 *
+			 * Re-read the group entry for further processing.
+			 */
+			grp = xgetgrnam (group);
+			assert (NULL != grp);
+		}
 	}
 #ifdef SHADOWGRP
 	sgrp = getsgnam (group);
