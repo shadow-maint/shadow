@@ -83,7 +83,7 @@
       The <command>chage</command> command changes the number of days between
       password changes and the date of the last password change. This
       information is used by the system to determine when a user must change
-      his/her password.
+      their password.
     </para>
   </refsect1>
 
@@ -168,7 +168,7 @@
 	  <para>
 	    Set the minimum number of days between password changes to
 	    <replaceable>MIN_DAYS</replaceable>. A value of zero for this field
-	    indicates that the user may change his/her password at any time.
+	    indicates that the user may change their password at any time.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -181,8 +181,8 @@
 	    Set the maximum number of days during which a password is valid. 
 	    When <replaceable>MAX_DAYS</replaceable> plus
 	    <replaceable>LAST_DAY</replaceable> is less than the current
-	    day, the user will be required to change his/her password before
-	    being able to use his/her account. This occurrence can be planned for
+	    day, the user will be required to change their password before
+	    being able to use their account. This occurrence can be planned for
 	    in advance by use of the <option>-W</option> option, which
 	    provides the user with advance warning.
 	  </para>
@@ -214,7 +214,7 @@
 	    Set the number of days of warning before a password change is
 	    required. The <replaceable>WARN_DAYS</replaceable> option is the
 	    number of days prior to the password expiring that a user will
-	    be warned his/her password is about to expire.
+	    be warned their password is about to expire.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -235,7 +235,7 @@
     </para>
     <para>The <command>chage</command> command is restricted to the root
       user, except for the <option>-l</option> option, which may be used by
-      an unprivileged user to determine when his/her password or account is due
+      an unprivileged user to determine when their password or account is due
       to expire.
     </para>
   </refsect1>

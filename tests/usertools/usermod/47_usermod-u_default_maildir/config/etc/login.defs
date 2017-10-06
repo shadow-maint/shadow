@@ -136,7 +136,7 @@ TTYPERM		0600
 # useradd and newusers to set the mode of the new home directories.
 # 022 is the "historical" value in Debian for UMASK
 # 027, or even 077, could be considered better for privacy
-# There is no One True Answer here : each sysadmin must make up his/her
+# There is no One True Answer here : each sysadmin must make up their
 # mind.
 #
 # Prefix these values with "0" to get octal, "0x" to get hexadecimal.

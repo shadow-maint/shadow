@@ -156,7 +156,7 @@ ERASECHAR	0177
 KILLCHAR	025
 # 022 is the "historical" value in Debian for UMASK when it was used
 # 027, or even 077, could be considered better for privacy
-# There is no One True Answer here : each sysadmin must make up his/her
+# There is no One True Answer here : each sysadmin must make up their
 # mind.
 #UMASK		022
 
