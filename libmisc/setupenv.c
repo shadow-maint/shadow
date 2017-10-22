@@ -171,7 +171,7 @@ static void read_env_file (const char *filename)
 				cp++;
 			goto d_quote;
 		}
-		eise if (*cp == '\0') {
+		else if (*cp == '\0') {
 			/* end of string */
 			goto finished;
 		} else {
