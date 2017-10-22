@@ -418,7 +418,7 @@ fail:
  * @start: the first uid in the owned range
  * @count: the number of uids in the range
  *
- * Return 1 if the range is already present or on succcess.  On error
+ * Return 1 if the range is already present or on success.  On error
  * return 0 and set errno appropriately.
  */
 static int add_range(struct commonio_db *db,
