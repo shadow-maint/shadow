@@ -66,7 +66,7 @@
 #endif
 
 /* Remap normal yacc parser interface names (yyparse, yylex, yyerror, etc),
-   as well as gratuitiously global symbol names, so we can have multiple
+   as well as gratuitously global symbol names, so we can have multiple
    yacc generated parsers in the same program.  Note that these are only
    the variables produced by yacc.  If other parser generators (bison,
    byacc, etc) produce additional global names that conflict at link time,
