@@ -14737,7 +14737,7 @@
 
 	* src/.indent.pro, lib/.indent.pro, libmisc/.indent.pro:
 	directory indent config file is -kr -i8 -bad (indent open this file and
-	read options if options not specyfied in command line).
+	read options if options not specified in command line).
 
 	* autogen.sh (conf_flags): added --with-pam.
 
