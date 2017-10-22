@@ -9497,7 +9497,7 @@
 	cleanups in groupmod(8).
 
 	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/usermod.8.xml, src/usermod.c, NEWS:
-	back to previous usermod -a option sematics and clarify -a behavior
+	back to previous usermod -a option semantics and clarify -a behavior
 	on documentation level (by Greg Schafer <gschafer@zip.com.au>).
 
 	* man/fr/fr.po, man/groupmod.8.xml, man/pl/pl.po, man/ru/ru.po:
