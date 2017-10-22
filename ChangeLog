@@ -13112,7 +13112,7 @@
 2004-12-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
-	added checing is fseeko() function is available in system: added fseeko to
+	added checking is fseeko() function is available in system: added fseeko to
 	AC_CHECK_FUNCS parameters.
 
 	* lib/Makefile.am:
@@ -14347,7 +14347,7 @@
 
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
-	nitialize PAM and checkin is chage is runed by root or not - now chage can be
+	nitialize PAM and checking is chage is runed by root or not - now chage can be
 	runed from non-root account for checking by user own account information.
 
 	* src/pwck.c: indent source.
@@ -14668,7 +14668,7 @@
 
 	* configure.in:
 	- check pam directly by AC_CHECK_LIB() (PAM from PLD is now fixed an also other
-	  PAM implementation must be fixed for this method checkin is libpam is available;
+	  PAM implementation must be fixed for this method checking is libpam is available;
 	  sorry .. no way this is plain linking procedure bug),
 	- use AC_DEFINE(LOGIN_ACCES) only when PAM isn't used.
 

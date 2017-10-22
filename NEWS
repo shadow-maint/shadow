@@ -1402,7 +1402,7 @@ shadow-4.0.0 => shadow-4.0.1
     probably _POSIX_LOGIN_NAME_MAX from <bits/posix1_lim.h>,
   shadow-4.0.0-owl-chage-drop-priv.diff
   shadow-4.0.0-owl-pam-auth.diff
-    Merge part with reorder initialize PAM and checkin is chage is runed by
+    Merge part with reorder initialize PAM and checking is chage is runed by
     root or not - now chage can be runed from non-root account for checking
     by user own account information (if PAM enabled).
 - fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>),
