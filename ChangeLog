@@ -14343,7 +14343,7 @@
 	removed duplicated man page text.
 
 	* src/chage.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po:
-	standarize usage meissages syntax.
+	standarize usage messages syntax.
 
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
