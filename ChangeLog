@@ -14347,7 +14347,7 @@
 
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
-	nitialize PAM and checking is chage is runed by root or not - now chage can be
+	nitialize PAM and checking if chage is runed by root or not - now chage can be
 	runed from non-root account for checking by user own account information.
 
 	* src/pwck.c: indent source.
