@@ -152,7 +152,7 @@ int check_su_auth (const char *actual_id,
 			return OWNPWORD;
 		} else {
 			SYSLOG ((LOG_ERR,
-				 "%s, line %d: unrecognised action!\n",
+				 "%s, line %d: unrecognized action!\n",
 				 SUAUTHFILE, lines));
 		}
 	}
