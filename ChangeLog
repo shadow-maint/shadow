@@ -13054,7 +13054,7 @@
 	* src/Attic/mkpasswd.c, src/passwd.c, src/userdel.c, src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c, src/groups.c, src/login.c:
 	"less means better" added fixes which makes english texts more consistent
 	especially with capitalization issues. Based on fixes by Tommi Vainikainen
-	<thv+debian@iki.fi> (make all text begining from lower case .. not upper).
+	<thv+debian@iki.fi> (make all text beginning from lower case .. not upper).
 	This patch cuts i18n entries in each po/*po file from 420 to 402.
 
 2005-01-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
