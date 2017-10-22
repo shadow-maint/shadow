@@ -13976,7 +13976,7 @@
 
 	* man/hu/groups.1, man/hu/login.1:
 	Remove info about $HOME/.profile from FILES section (this does not depend
-	stricte on shadow).
+	strictly on shadow).
 
 	* configure.in, man/Makefile.am, man/es/Makefile.am:
 	Added es man pages to ac/am suit.
