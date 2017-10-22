@@ -9814,7 +9814,7 @@
 
 	* NEWS: fixed last usermod changes comment. Current is:
 	better fix for old CERT VU#312962 (which was fixed in shadow 4.0.8):
-	fixed forgoten checking of the return value from fchown() before
+	fixed forgotten checking of the return value from fchown() before
 	proceeding with the fchmod() (based on Owl patch prepared by
 	Rafal Wojtczuk <nergal@owl.openwall.com>)
 
@@ -9940,7 +9940,7 @@
 	run "make update-po".
 
 	* NEWS, src/useradd.c:
-	fixed userdel CERT VU#312962: fixed forgoten checking of the return
+	fixed userdel CERT VU#312962: fixed forgotten checking of the return
 	value from fchown() before proceeding with the fchmod() (prepared
 	based on OWL fix submited by Solar Designer <solar@openwall.com>),
 	Use in userdel login.defs::MAIL_DIR instead hardcoded /var/mail on created
@@ -10640,7 +10640,7 @@
 	call and may be more readable (Nicolas François <nicolas.francois@centraliens.net>).
 
 	* man/Attic/su.1, man/su.1.xml:
-	added forgoten the SHELL argument description (by Nicolas François <nicolas.francois@centraliens.net>).
+	added forgotten the SHELL argument description (by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* man/Attic/useradd.8, man/useradd.8.xml:
 	s/group/user/ (cached by Nicolas François).
