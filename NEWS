@@ -1140,7 +1140,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
 - chage: rewritten for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
 *** documentation:
-- most of the man pages now are generated from XML files so in case submiting any
+- most of the man pages now are generated from XML files so in case submitting any
   chages to this resources please make diff to XML files,
 - chfn: give more details about the influence of login.defs on what's allowed to
   users.

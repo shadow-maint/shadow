@@ -12146,7 +12146,7 @@
 	* libmisc/entry.c: removed extern for fgetpwent().
 
 	* NEWS, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/gshadow.5, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8:
-	now most of the man pages now are generated from XML files so in case any submiting
+	now most of the man pages now are generated from XML files so in case any submitting
 	any chages to this resources please make diff fies to XML files.
 
 	* man/Attic/pw_auth.3.xml: cleanups.
