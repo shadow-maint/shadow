@@ -9752,7 +9752,7 @@
 2006-06-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/Makefile.am:
-	reverte using docbook.sourceforge.net in XSLT url.
+	revert using docbook.sourceforge.net in XSLT url.
 
 	* po/pl.po: cleanups.
 
@@ -9928,7 +9928,7 @@
 	.pot files in dist tar ball.
 
 	* src/chgpasswd.c:
-	reverte struct group newgr declaration but use them only conditionally (#ifndef SHADOWGRP).
+	revert struct group newgr declaration but use them only conditionally (#ifndef SHADOWGRP).
 
 2006-05-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10064,7 +10064,7 @@
 	use '%s' citation instead `%s'.
 
 	* NEWS, src/su.c:
-	reverte http://bugs.debian.org/276419 (this is Debian specyfic).
+	revert http://bugs.debian.org/276419 (this is Debian specyfic).
 
 	* libmisc/setupenv.c, libmisc/sub.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chfn.c:
 	use '%s' citation instead \"%s\".
@@ -10563,7 +10563,7 @@
 
 	* NEWS: correct 4.0.14 release date (03-01-2006).
 
-	* src/Makefile.am: reverte install nologin in sbindir and use usbindir.
+	* src/Makefile.am: revert install nologin in sbindir and use usbindir.
 
 	* po/POTFILES.in: removed src/chsh_chkshell.c.
 
@@ -10768,7 +10768,7 @@
 
 	* man/ko/Makefile.am: added su.1 to man_MANS.
 
-	* man/Makefile.am: reverte incorrect commit.
+	* man/Makefile.am: revert incorrect commit.
 
 	* man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/vipw.8, man/Makefile.am, man/fr/Makefile.am, man/fr/chage.1, man/fr/chfn.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/expiry.1, man/fr/faillog.5, man/fr/faillog.8, man/fr/getspnam.3, man/fr/gpasswd.1, man/fr/groupadd.8, man/fr/groupdel.8, man/fr/groupmod.8, man/fr/groups.1, man/fr/grpck.8, man/fr/grpconv.8, man/fr/grpunconv.8, man/fr/gshadow.5, man/fr/lastlog.8, man/fr/limits.5, man/fr/login.1, man/fr/login.access.5, man/fr/login.defs.5, man/fr/logoutd.8, man/fr/newgrp.1, man/fr/newusers.8, man/fr/passwd.1, man/fr/passwd.5, man/fr/porttime.5, man/fr/pwck.8, man/fr/pwconv.8, man/fr/pwunconv.8, man/fr/sg.1, man/fr/shadow.3, man/fr/shadow.5, man/fr/su.1, man/fr/suauth.5, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/fr/vigr.8, man/fr/vipw.8, NEWS:
 	added full set (up to date) fr man pages (by Nicolas François <nicolas.francois@centraliens.net>).
@@ -12454,7 +12454,7 @@
 	* po/nl.po: kill fuzzy.
 
 	* man/Attic/chage.1:
-	reverte last commit (by mistake committed experimental version generated from XML file).
+	revert last commit (by mistake committed experimental version generated from XML file).
 
 	* NEWS, po/nl.po:
 	updated for 4.0.8 (by "cobaco (aka Bart Cornelis)" <cobaco@linux.be>).
@@ -13061,7 +13061,7 @@
 
 	* NEWS: added pt to updated translations.
 
-	* lib/defines.h: reverte last change (mistake).
+	* lib/defines.h: revert last change (mistake).
 
 	* po/pt.po:
 	updated translation by Miguel Figueiredo <elmig@debianpt.org>.
@@ -13262,7 +13262,7 @@
 	* man/pl/Attic/mkpasswd.8, man/pl/chage.1, man/pl/chsh.1, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/lastlog.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/Attic/chage.1, man/Attic/chsh.1, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/lastlog.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	separated OPTIONS section.
 
-	* lib/commonio.c: reverte last change.
+	* lib/commonio.c: revert last change.
 
 	* libmisc/pwdcheck.c:
 	one word fix .. omitted "else" was removed. Now security bug which allow
@@ -13331,7 +13331,7 @@
 	* po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po:
 	"make update-po".
 
-	* configure.in: reverte previous incorrect commit.
+	* configure.in: revert previous incorrect commit.
 
 	* NEWS, src/su.c:
 	add pam_open_session() support. If built without PAM support
@@ -14514,7 +14514,7 @@
 2001-10-06  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am (libshadow_la_SOURCES):
-	reverte last change and added rcsid.h,
+	revert last change and added rcsid.h,
 	(EXTRA_DIST): added missing "\".
 
 	* src/Makefile.am: (DEFS):
