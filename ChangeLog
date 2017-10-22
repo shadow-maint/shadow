@@ -9982,7 +9982,7 @@
 	* src/userdel.c (main): removed unused arg variable.
 
 	* libmisc/setupenv.c (setup_env):
-	move *cp varable to #ifndef PAM part (fixed compilation
+	move *cp variable to #ifndef PAM part (fixed compilation
 	warning about unused variable).
 
 	* lib/getdef.c: now GETPASS_ASTERISKS is SKEY #define dependent.
@@ -14157,7 +14157,7 @@
 	* src/Makefile.am: added su_SOURCES with "su.c suauth.c".
 
 	* libmisc/Makefile.am:
-	remove suauth.c from libmisc_la_SOURCES (varialbles and functions from
+	remove suauth.c from libmisc_la_SOURCES (variables and functions from
 	this file are used only in su).
 
 	* libmisc/Attic/suauth.c, src/suauth.c: move suauth.c o src/.
