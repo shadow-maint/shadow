@@ -13669,7 +13669,7 @@
 2003-07-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po, po/ru.po, po/sv.po, po/uk.po, libmisc/pam_pass.c, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
-	Output "passwd: password updated successfully\n" message on successfull
+	Output "passwd: password updated successfully\n" message on successful
 	password change (based on Debian changes).
 
 	* src/newgrp.c: Remove work around for unsecure gettext.
