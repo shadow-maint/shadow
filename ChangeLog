@@ -13176,7 +13176,7 @@
 2004-12-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/suauth.5, man/Attic/useradd.8:
-	Fixed varoiuse typos and misspeling based partialy on patch from Bug#141322
+	Fixed varoiuse typos and misspelling based partialy on patch from Bug#141322
 	from Debian (submited by Christian Perrier <bubulle@debian.org>).
 
 	* man/Attic/chpasswd.8: more cleanups.
