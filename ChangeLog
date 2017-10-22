@@ -13182,7 +13182,7 @@
 	* man/Attic/chpasswd.8: more cleanups.
 
 	* man/pl/faillog.8, man/Attic/faillog.8, man/ja/faillog.8:
-	remove from OPTIONS section information about avalaibability on some systems
+	remove from OPTIONS section information about availability on some systems
 	faillog database in other location thad listed in FILES section.
 
 	* man/Attic/chpasswd.8: updated.
