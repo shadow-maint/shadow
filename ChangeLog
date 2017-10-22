@@ -10110,7 +10110,7 @@
 2006-04-08  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/userdel.8.xml:
-	minior fixes for the note under the -f option (Mike Frysinger <vapier@gentoo.org>).
+	minor fixes for the note under the -f option (Mike Frysinger <vapier@gentoo.org>).
 
 2006-04-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
