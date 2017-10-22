@@ -1170,7 +1170,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - configure.in: add using AC_GNU_SOURCE macro for kill compilation warnings about
   implicit declaration of function `fseeko',
 - faillog: changed faillog record display format for allow fit in 80 columns all
-  faillog atributies,
+  faillog attributes,
 - removed NDBM code (unused),
 - fixed use of SU_WHEEL_ONLY in su. Now su realy is avalaible for wheel group
   members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
