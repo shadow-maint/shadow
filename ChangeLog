@@ -12037,7 +12037,7 @@
 	replace #ifdef USE_PAM .. #endif #ifndef USE_PAN .. #endif by
 	#ifdef USE_PAM .. #else .. #endif.
 
-	* src/su.c: conditiona code reorganization.
+	* src/su.c: conditional code reorganization.
 
 	* src/login.c: remove one #ifndef USE_PAM .. #endif.
 
@@ -14371,7 +14371,7 @@
 	* src/chage.c: - break usage comment line.
 
 	* lib/defines.h:
-	removed bunch spaces on end line in conditionale #include <errno.h>
+	removed bunch spaces on end line in conditional #include <errno.h>
 	which in some cases dissallow compile correctly shadow (thanks for
 	Silvan Minghetti <bullet@users.sourceforge.net>).
 
