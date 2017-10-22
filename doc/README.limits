@@ -15,7 +15,7 @@ Changes:
 		- code merged into lmain.c --cristiang
 
 TODO:	- support groups in the limits file
-	  (only usernames are supported at this momment :-( )
+	  (only usernames are supported at this moment :-( )
 
 Setting user limits for shadow login program
 
