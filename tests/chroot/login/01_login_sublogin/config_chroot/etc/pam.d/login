@@ -62,7 +62,7 @@ session       required   pam_env.so readenv=1 envfile=/etc/default/locale
 auth       optional   pam_group.so
 
 # Uncomment and edit /etc/security/time.conf if you need to set
-# time restrainst on logins.
+# time constraints on logins.
 # (Replaces the `PORTTIME_CHECKS_ENAB' option from login.defs
 # as well as /etc/porttime)
 # account    requisite  pam_time.so
