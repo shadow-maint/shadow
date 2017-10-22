@@ -14821,7 +14821,7 @@
 	added expiry(1) man page from Debian.
 
 	* man/pl/lastlog.8, man/Attic/lastlog.8:
-	updated man pages for whole dispaly syntax.
+	updated man pages for whole display syntax.
 
 	* src/lastlog.c (main): fixed command line syntax description.
 
@@ -14832,7 +14832,7 @@
 	* src/lastlog.c (main):
 	merge src_lastlogin.c patch from debian with use getopt_long()
 	instead getopt() for add handling --help, --user, --time switches and
-	dipslay useage message on -h, --help and as default action.
+	display useage message on -h, --help and as default action.
 
 2000-11-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
