@@ -840,7 +840,7 @@ shadow-4.0.14 -> shadow-4.0.15						13-03-2006
 - userdel: user's group is already removed by update_groups().
   remove_group() is not needed (bug introduced in 4.0.14 on merge FC fixes).
   Fixed by Nicolas François <nicolas.francois@centraliens.net>,
-- useradd: allways remove group and gshadow databases lock, Fixed by Nicolas
+- useradd: always remove group and gshadow databases lock, Fixed by Nicolas
   François <nicolas.francois@centraliens.net>
   (http://bugs.debian.org/348250)
 - auditing fixes:
@@ -1001,7 +1001,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
 
 *** general:
-- newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and allways 
+- newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and always 
   close PAM session,
 - fixed configure.in: realy enable shadow group support by default (pointed by 
   Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>),
@@ -1135,7 +1135,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   http://bugs.debian.org/48002
 - login: fixed username on succesful login (was using the normal username,
   when it should have used pam_user) http://bugs.debian.org/47819
-- remove using SHADOWPWD #define so now shadow is allways builded with shadow
+- remove using SHADOWPWD #define so now shadow is always builded with shadow
   passwowd support,
 - chage: rewrited for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
@@ -1245,7 +1245,7 @@ shadow-4.0.5 -> shadow-4.0.6						08-11-2004
 - su: fixed adding of pam_env env variables to enviroment
   (Martin Schlemmer <azarah@nosferatu.za.org>),
 - autoconf: fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables
-  which was allways empty (Gregorio Guidi <g.guidi@sns.it>),
+  which was always empty (Gregorio Guidi <g.guidi@sns.it>),
 - realuy closse security bug in libmisc/pwdcheck.c,
 - added missing template/example PAM service config files for chfn, chsh and
   userdel,
@@ -1287,7 +1287,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
     Use constant strings rather than argv[0] for syslog ident in the user
     management commands,
   shadow-4.0.4.1-owl-tmp.diff:
-    Remove using mktemp() if mkstemp() prototype not found (use allways mkstemp()),
+    Remove using mktemp() if mkstemp() prototype not found (use always mkstemp()),
   shadow-4.0.4.1-owl-check-reads.diff:
     Add checking for read errors in commonio and vipw/vigr (not doing so could
     result in data loss when the records are written back),
