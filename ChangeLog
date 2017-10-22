@@ -14573,7 +14573,7 @@
 
 	* src/useradd.c (set_defaults):
 	handle correctly error open/create useradd default config
-	filei (based on orginal post to bugtraq).
+	filei (based on original post to bugtraq).
 
 	* TODO: document in pt_BR, ja man pages -s {pw,grp}ck option.
 
