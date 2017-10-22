@@ -9587,7 +9587,7 @@
 	* TODO: remove done things.
 
 	* NEWS, lib/Attic/getpass.c, lib/Makefile.am, lib/getdef.c, lib/pwauth.c, po/POTFILES.in:
-	removed using private implementatuon getpass() libc function (now getpass() is
+	removed using private implementation getpass() libc function (now getpass() is
 	used also when S/KEY support is enabled).
 
 	* NEWS, src/Makefile.am: move nologin do $(sbindir).
