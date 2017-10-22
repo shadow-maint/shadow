@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "groupmems reports usage if the -a and -d options are used atthe same time"
+log_start "$0" "groupmems reports usage if the -a and -d options are used at the same time"
 
 save_config
 
