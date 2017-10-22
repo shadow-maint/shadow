@@ -4044,7 +4044,7 @@
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c, src/useraddd.c: Fix the usage string so that it
+	* src/usermod.c, src/useradd.c: Fix the usage string so that it
 	does not change depending on the configure option. Use a format.
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
