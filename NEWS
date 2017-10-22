@@ -743,7 +743,7 @@ shadow-4.0.15 -> shadow-4.0.16						05-06-2006
 
 *** general:
 - userdel: better fix for old CERT VU#312962 (which was fixed in shadow 4.0.8):
-  fixed forgoten checking of the return value from fchown() before
+  fixed forgotten checking of the return value from fchown() before
   proceeding with the fchmod() (based on Owl patch prepared by
   Rafal Wojtczuk <nergal@owl.openwall.com>),
 - userdel: use login.defs::MAIL_DIR instead hardcoded /var/mail in created
