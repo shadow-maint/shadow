@@ -14191,7 +14191,7 @@
 	* NEWS: updated for 4.0.3.
 
 	* libmisc/Attic/suauth.c, libmisc/utmp.c, src/login.c, src/su.c:
-	swapped utent dnd pwent efinition/extern and now shadow source can be configured
+	swapped utent dnd pwent definition/extern and now shadow source can be configured
 	--with-shared (fix by Dimitar Zhekov <jimmy@is-vn.bg>).
 
 2002-03-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
