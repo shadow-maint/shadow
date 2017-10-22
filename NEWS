@@ -1452,7 +1452,7 @@ shadow-20001016 => shadow-4.0.0						 06-01-2002
   patch).
 
 shadow-20001012 -> shadow-20001016:
-- conditionaly disabled body reload_nscd() because not every
+- conditionally disabled body reload_nscd() because not every
   version of nscd can handle it (this can be enabled by define
   ENABLE_NSCD_SIGHUP) (Marek Michałkiewicz  <marekm@linux.org.pl>)
 - fixes on autoconf/automake level for dist target,
