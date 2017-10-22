@@ -12231,7 +12231,7 @@
 	fixed bug in usermod ad run "make -C po update-po".
 	When relocating a user's home directory, don't fail and remove the new
 	home directory if we can't remove the old home directory for some
-	reason; the results can be spectularly poort if, for instance, only
+	reason; the results can be spectularly poor if, for instance, only
 	the rmdir() fails. Patch prepared by Timo Lindfors <lindi-spamtrap@newmail.com>.
 	http://bugs.debian.org/166369
 
