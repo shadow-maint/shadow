@@ -14372,7 +14372,7 @@
 
 	* lib/defines.h:
 	removed bunch spaces on end line in conditional #include <errno.h>
-	which in some cases dissallow compile correctly shadow (thanks for
+	which in some cases disallow compile correctly shadow (thanks for
 	Silvan Minghetti <bullet@users.sourceforge.net>).
 
 2001-11-17  Michał Moskal  <malekith@pld.org.pl>
