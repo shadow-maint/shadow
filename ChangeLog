@@ -13000,7 +13000,7 @@
 
 	* NEWS, src/chage.c, src/chfn.c, src/chsh.c, src/passwd.c:
 	SELinux changes: added changes in chage, chfn, chsh, passwd for allow
-	construct more grained user password/accuunt properties on SELinux
+	construct more grained user password/account properties on SELinux
 	policies level. Patch originally based on RH changes (submited by Chris
 	PeBenito <pebenito@gentoo.org>)
 
@@ -14266,7 +14266,7 @@
 
 	* libmisc/chkname.c (good_name):
 	allow usernames ending with "$" for allow create machine
-	acounts for samba (thanks for point this problem in 4.0.1 by
+	accounts for samba (thanks for point this problem in 4.0.1 by
 	Jerome Borsboom <borsboom@tch.fgg.eur.nl>).
 
 	* src/pwck.c, src/useradd.c, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
@@ -14348,7 +14348,7 @@
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
 	nitialize PAM and checkin is chage is runed by root or not - now chage can be
-	runed from non-root account for checking by user own accout information.
+	runed from non-root account for checking by user own account information.
 
 	* src/pwck.c: indent source.
 
