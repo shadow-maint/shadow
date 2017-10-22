@@ -10293,7 +10293,7 @@
 	s/Unexpected/unexpected/
 
 	* po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/lastlog.c, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po:
-	print the usage and exit if an additional argument is profided to
+	print the usage and exit if an additional argument is provided to
 	lastlog (merge 488_laslog_verify_arguments Debian patch).
 
 2006-03-02  Tomasz Kłoczko  <kloczek@pld.org.pl>

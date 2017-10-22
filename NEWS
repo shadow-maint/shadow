@@ -816,7 +816,7 @@ shadow-4.0.14 -> shadow-4.0.15						13-03-2006
 - login: default UMASK if not specified in login.defs is 022 (pointed by
   Peter Vrabec <pvrabec@redhat.com>),
 - chgpasswd: new tool (by Jonas Meurer <mejo@debian.org>),
-- lastlog: print the usage and exit if an additional argument is profided to
+- lastlog: print the usage and exit if an additional argument is provided to
   lastlog (merge 488_laslog_verify_arguments Debian patch),
 - login, newgrp, nologin, su: do not link with libselinux (merge
   490_link_selinux_only_when_needed Debian patch),
