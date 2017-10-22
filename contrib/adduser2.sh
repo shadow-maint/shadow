@@ -32,7 +32,7 @@ def_home_dir=/home/users
 # default shell
 def_shell=/bin/tcsh
 
-# Defaul expiration date (mm/dd/yy)
+# Default expiration date (mm/dd/yy)
 def_expire=""
 
 # default dates

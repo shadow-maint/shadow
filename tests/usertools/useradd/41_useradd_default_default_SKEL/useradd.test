@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "useradd uses the defautl SKEL value is SKEL is set to empty"
+log_start "$0" "useradd uses the default SKEL value is SKEL is set to empty"
 
 save_config
 
