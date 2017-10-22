@@ -13206,7 +13206,7 @@
 	"make update-po" after rewrite lastlog.
 
 	* src/lastlog.c: Rewrite for use the same style as in chpasswd.c.
-	Move open lastlog file after commadline option parsing so now --help option
+	Move open lastlog file after commandline option parsing so now --help option
 	can be used by user without read access to lastlog file.
 
 	* src/chpasswd.c:
@@ -13994,7 +13994,7 @@
 
 	* man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/zh_CN/chpasswd.8, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8, man/ko/login.1, man/ko/su.1, man/pl/chage.1, man/pl/chfn.1, man/pl/chsh.1, man/pl/expiry.1, man/pl/gpasswd.1, man/pl/groupmems.8, man/pl/groups.1, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/pl/newgrp.1, man/pl/passwd.1, man/pl/su.1, man/pl/sulogin.8, man/pl/useradd.8, man/pl/usermod.8, man/ja/Attic/mkpasswd.8, man/ja/chage.1, man/ja/chfn.1, man/ja/chsh.1, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/logoutd.8, man/ja/newgrp.1, man/ja/passwd.1, man/ja/passwd.5, man/ja/porttime.5, man/ja/pwck.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/login.1, man/hu/newgrp.1, man/hu/passwd.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/grpck.8, man/it/lastlog.8, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/it/usermod.8, man/cs/shadow.5, man/es/su.1, man/fr/chage.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/shadow.5, man/fr/su.1, man/fr/userdel.8, man/fr/usermod.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	Fixes: correct utmp/wtmp paths.
-	Unifications: bold commnanda and italify other file names.
+	Unifications: bold command and italify other file names.
 	Other minor changes and cleanups and unifications.
 
 	* libmisc/limits.c: More utmpx/utmp fixes.
@@ -14737,7 +14737,7 @@
 
 	* src/.indent.pro, lib/.indent.pro, libmisc/.indent.pro:
 	directory indent config file is -kr -i8 -bad (indent open this file and
-	read options if options not specyfied in commnad line).
+	read options if options not specyfied in command line).
 
 	* autogen.sh (conf_flags): added --with-pam.
 
@@ -14826,7 +14826,7 @@
 	* src/lastlog.c (main): fixed command line syntax description.
 
 	* src/lastlog.c (main):
-	display correctly and full current commnad line lastlog syntax
+	display correctly and full current command line lastlog syntax
 	and also output this string using gettext.
 
 	* src/lastlog.c (main):

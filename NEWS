@@ -1230,7 +1230,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
    long.
 - lastlog:
 -- rewrited source code using the same style as in chpasswd.c,
--- open lastlog file after finish parse comman line optiomns
+-- open lastlog file after finish parse commandline optiomns
    (now --help otput can be displayd for users without lastlog
    file read permission),
 -- cleanups in lastlog(8) man page using the same style as in
