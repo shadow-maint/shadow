@@ -13867,7 +13867,7 @@
 
 	* src/su.c:
 	Removed dead code (#if 0 .. #endif) with call motd() and mailcheck()
-	(was commnted because GNU su doesn't do this).
+	(was commented because GNU su doesn't do this).
 
 2003-05-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
