@@ -10599,7 +10599,7 @@
 	* src/su.c:
 	This second patch changes the way options are handled by getopt. Once a
 	non-su option is found, the getopt processing is stopped.
-	Whithout this patch, "su root -c ls" won't work (getopt will complain that
+	Without this patch, "su root -c ls" won't work (getopt will complain that
 	-c is not an su option).
 	(by Nicolas François <nicolas.francois@centraliens.net>).
 
