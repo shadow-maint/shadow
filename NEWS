@@ -946,7 +946,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 
 *** general:
 - chage: removed duplicated pam_start(),
-- chfn, chsh: finished PAM support usin pam_start() and co.,
+- chfn, chsh: finished PAM support using pam_start() and co.,
 - userdel: userdel should not remove the group which is primary for someone else
   (fix by Nicolas François <nicolas.francois@centraliens.net>
   http://bugs.debian.org/295416),
