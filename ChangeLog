@@ -3476,7 +3476,7 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Check assumptions on snprintf().
-	* src/useradd.c: Replace peror by an strerror and avoid an
+	* src/useradd.c: Replace perror by an strerror and avoid an
 	intermediate buffer.
 	* src/useradd.c: Save errno between the failure and the report by
 	perror/strerror.
