@@ -9469,7 +9469,7 @@
 
 	* src/su.c (main):
 	move **envcp declaration to #ifdef USE_PAM (fixed warning about unused
-	variable when shadow is builded with PAM didabled).
+	variable when shadow is built with PAM didabled).
 
 	* man/pl/pl.po, NEWS, man/pl/chage.1: pl chage(1) translation finished.
 
@@ -9970,7 +9970,7 @@
 
 	* man/Makefile.am, man/fr/Makefile.am, man/it/Makefile.am, man/ja/Makefile.am, man/pl/Makefile.am, man/ru/Makefile.am, NEWS, autogen.sh:
 	install limits(5), login.access(5) and porttime(5) man pages only when
-	shadow is builded with PAM support disabled.
+	shadow is built with PAM support disabled.
 
 	* NEWS: cleanups.
 
@@ -12262,7 +12262,7 @@
 
 	* libmisc/failure.c, libmisc/failure.h, NEWS:
 	use also UTMPX API instead UTMP on failure (login was by affected this when shadow
-	was builded without PAM support).
+	was built without PAM support).
 
 	* NEWS, src/login.c:
 	the PAM session needs to be closed as root, thus before change_uid()
@@ -12332,7 +12332,7 @@
 	indent all.
 
 	* src/chage.c, src/chpasswd.c, src/expiry.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, lib/Attic/sppack.c, lib/defines.h, lib/lockpw.c, lib/prototypes.h, lib/sgetspent.c, lib/shadow.c, lib/shadowio.c, libmisc/age.c, libmisc/entry.c, libmisc/isexpired.c, libmisc/pwd2spwd.c, libmisc/pwdcheck.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, Attic/acconfig.h, NEWS, configure.in:
-	remove using SHADOWPWD #define so now shadow is always builded with shadow
+	remove using SHADOWPWD #define so now shadow is always built with shadow
 	password support.
 
 2005-05-24  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -13334,7 +13334,7 @@
 	* configure.in: reverte previous incorrect commit.
 
 	* NEWS, src/su.c:
-	add pam_open_session() support. If builded without PAM support
+	add pam_open_session() support. If built without PAM support
 	propagate $DISPLAY and $XAUTHORITY enviroment variables.
 	Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 
