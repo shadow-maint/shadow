@@ -1456,7 +1456,7 @@ shadow-20001012 -> shadow-20001016:
   version of nscd can handle it (this can be enabled by define
   ENABLE_NSCD_SIGHUP) (Marek Michałkiewicz  <marekm@linux.org.pl>)
 - fixes on autoconf/automake level for dist target,
-- Julianne F. Haugh new contact adress.
+- Julianne F. Haugh new contact address.
 
 shadow-20000902 => shadow-20001012
 
