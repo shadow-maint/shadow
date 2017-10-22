@@ -1467,7 +1467,7 @@ shadow-20000902 => shadow-20001012
 - added PAM support for chage (bind to "chage" PAM config file) also
   added PAM support for all other small tools like chpasswd, groupadd,
   groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common 
-  "shadow" PAM config file) - this modificaytions mainly based on
+  "shadow" PAM config file) - this modifications mainly based on
   modifications prepared by Janek Rękojarski <baggins@pld.org.pl>,
 - many small fixes and improvements in automake (mow "make dist"
   works correctly),
