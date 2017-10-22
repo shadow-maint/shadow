@@ -1312,7 +1312,7 @@ shadow-4.0.4 => shadow-4.0.4.1						14-01-2004
 shadow-4.0.3 => shadow-4.0.4						14-01-2004	
 
 *** general:
-- added missing information about -f options in groupadd usage mesage
+- added missing information about -f options in groupadd usage message
   (document this also in man page),
 - removed TCFS support (tcfs is dead),
 - convert all po/*.po files to utf-8,

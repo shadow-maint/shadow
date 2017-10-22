@@ -13593,7 +13593,7 @@
 2004-01-05  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sv.po, po/uk.po, po/ru.po, po/ko.po, po/pl.po, po/fr.po, po/ja.po, po/el.po, po/cs.po, po/de.po, man/zh_TW/groupadd.8, man/zh_CN/groupadd.8, man/pt_BR/groupadd.8, man/pl/groupadd.8, man/ja/groupadd.8, man/it/groupadd.8, man/Attic/groupadd.8, NEWS:
-	Added missing information about -f options in groupadd usage mesage (document
+	Added missing information about -f options in groupadd usage message (document
 	this also in man page).
 
 2003-12-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
