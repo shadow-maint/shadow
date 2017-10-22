@@ -14152,7 +14152,7 @@
 	* man/hu/Makefile.am, man/hu/login.1:
 	added login(1) man page from hu man pages translation project.
 
-	* po/POTFILES.in: updated (suath.c moved to src/).
+	* po/POTFILES.in: updated (suauth.c moved to src/).
 
 	* src/Makefile.am: added su_SOURCES with "su.c suauth.c".
 
