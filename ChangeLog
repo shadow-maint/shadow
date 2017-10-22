@@ -8872,7 +8872,7 @@
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/useradd.8.xml: -b documenation: Use the same notation for
+	* man/useradd.8.xml: -b documentation: Use the same notation for
 	the -d argument as in the -d documentation.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
