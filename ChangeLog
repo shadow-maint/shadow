@@ -14582,7 +14582,7 @@
 	patch).
 
 	* man/pl/Attic/shadowconfig.8, man/Attic/shadowconfig.8:
-	- aply 021_man_shadowconfig_usr_doc.diff debian patch.
+	- apply 021_man_shadowconfig_usr_doc.diff debian patch.
 
 	* src/Makefile.am, lib/Makefile.am:
 	use $(top_builddir) in .la files paths (for allow correct compile if
