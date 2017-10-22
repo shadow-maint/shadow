@@ -11903,7 +11903,7 @@
 	* po/zh_TW.po, po/vi.po, po/zh_CN.po, po/uk.po, po/tl.po, po/tr.po, po/sv.po, po/sq.po, po/sk.po, po/ro.po, po/ru.po, po/pt.po, po/pt_BR.po, po/pl.po, po/nb.po, po/nl.po, po/nn.po, po/ko.po, po/it.po, po/ja.po, po/he.po, po/id.po, po/fr.po, po/eu.po, po/fi.po, po/es.po, po/da.po, po/de.po, po/el.po, po/bs.po, po/ca.po, po/cs.po:
 	cleanups in usage() output.
 
-	* NEWS: release 4.0.11 is sheduled to 18-06-2005.
+	* NEWS: release 4.0.11 is scheduled to 18-06-2005.
 
 2005-07-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
