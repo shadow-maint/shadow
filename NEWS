@@ -991,7 +991,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
   http://bugs.debian.org/328113
 - login(1): added securetty(5) to SEE ALSO section
   (fixed Debian bug http://bugs.debian.org/325773),
-- groupadd(8), useradd(8): fix regular expression describing alloved login/group
+- groupadd(8), useradd(8): fix regular expression describing allowed login/group
   names (pointed by Nicolas François <nicolas.francois@centraliens.net>)
   (correct is [a-z_][a-z0-9_-]*[$]),
 - groupadd(8), useradd(8): documents in CAVEATS section the limitations shadow
