@@ -12442,7 +12442,7 @@
 	* man/Attic/login.defs.5: typo in bold.
 
 	* man/su.1.xml:
-	removed comment. Use <variablelist></variablelist> in Files secstion.
+	removed comment. Use <variablelist></variablelist> in Files section.
 	Fixed bold.
 
 	* man/Attic/pwconv.8, man/Attic/su.1: typo in bold.
@@ -13188,7 +13188,7 @@
 	* man/Attic/chpasswd.8: updated.
 
 	* man/fr/faillog.5:
-	fixed FICHIERS secttion: corrected change to italic on /var/log/faillog.
+	fixed FICHIERS section: corrected change to italic on /var/log/faillog.
 
 	* src/faillog.c:
 	move main() to the end of file and reorder rest functions. Now declaration
