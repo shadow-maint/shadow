@@ -656,7 +656,7 @@
 	* NEWS, libmisc/utmp.c: Do not log in wtmp when PAM is enabled.
 	This is done by pam_lastlog.
 
-2012-05-17  Christian Perrier  <bubulle@Êebian.org>
+2012-05-17  Christian Perrier  <bubulle@debian.org>
 
 	* man/po/fr.po: French translation of manpages completed
 
