@@ -10203,7 +10203,7 @@
 	for take a fourth argument in case BSD version
 	(patch submited by Mike Frysinger <vapier@gentoo.org>)
 
-	* README: added paragragraph about S/Key support.
+	* README: added paragraph about S/Key support.
 
 	* po/sk.po: updated for 4.0.15 (by Peter Mann <Peter.Mann@tuke.sk>).
 
