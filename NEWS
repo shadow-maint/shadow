@@ -855,7 +855,7 @@ shadow-4.0.14 -> shadow-4.0.15						13-03-2006
 - su: move exit() outside libmisc/shell.c::shell() for handle shell() errors
   on higher level (now is better visable where some programs exit with 126
   and 127 exit codes); added new shell() parameter (char *const envp[])
-  which allow fix preserving enviloment in su on using -p, (patch by
+  which allow fix preserving enviroment in su on using -p, (patch by
   Alexander Gattin <xrgtn@yandex.ru>),
 - su: added handle -c,--command option for GNU su compliance (merge
   437_su_-c_option Debian patch),
