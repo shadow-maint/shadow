@@ -2014,7 +2014,7 @@
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: spool is a constant string.
-	* src/useradd.c: Set the new copy_tree's paramater 'copy_root' to false 
+	* src/useradd.c: Set the new copy_tree's parameter 'copy_root' to false 
 
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
