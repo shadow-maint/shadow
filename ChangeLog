@@ -14794,7 +14794,7 @@
 
 2000-12-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* src/su.c: Based on Debian modyfications:
+	* src/su.c: Based on Debian modifications:
 	(main): #endif /* USE_PAM */ #ifdef USE_PAM replaced by #else,
 	(main): removed some dead code (scoped by #if 0 .. #endif).
 	(main): call to re-establish SIGINT to right place.
