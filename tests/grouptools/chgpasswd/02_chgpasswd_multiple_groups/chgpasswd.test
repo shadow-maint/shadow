@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "chgpasswd can change mulitple groups"
+log_start "$0" "chgpasswd can change multiple groups"
 
 save_config
 
