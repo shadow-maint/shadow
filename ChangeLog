@@ -11258,7 +11258,7 @@
 	spoted by Lasse Collin <lasse.collin@tukaani.org>
 	(fix for non-PAM case)
 
-	* configure.in: try find and use by default feactures:
+	* configure.in: try find and use by default features:
 	with_audit="yes"
 	with_libcrack="no"
 	with_libpam="yes"
