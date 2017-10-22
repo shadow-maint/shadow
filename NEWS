@@ -702,13 +702,13 @@ shadow-4.0.17 -> shadow-4.0.18						01-08-2006
   http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920)
 - passwd, useradd, usermod: fixed inactive/mindays/warndays/maxdays overflow
   (simillar to RH#198920),
-- groupmems: rewrited for use PAM and getopt_long() and now it is enabled
+- groupmems: rewritten for use PAM and getopt_long() and now it is enabled
   for build and install (patch by George Kraft <gk4@swbell.net>),
 - S/Key: removed assign getpass() to libshadow_getpass() on autoconf level
   (patch by Ulrich Mueller <ulm@kph.uni-mainz.de>; http://bugs.gentoo.org/139966),
 - usermod: back to previous -a option semantics and clarify -a behavior
   on documentation level (by Greg Schafer <gschafer@zip.com.au>),
-- chsh, groupmod: rewrited for use getopt_long().
+- chsh, groupmod: rewritten for use getopt_long().
 - updated translations: ca, cs, da, eu, fr, gl, hu, ko, pl, pt, ru, sv, tr, uk, vi.
 *** documentation:
 - fr and ru man pages are up to date,
@@ -755,7 +755,7 @@ shadow-4.0.15 -> shadow-4.0.16						05-06-2006
   passwords and libshadow_getpass() is used only because libc getpass()
   do not handles password prompting with echo enabled,
 - move login.defs::MD5_CRYPT_ENAB to non-PAM part,
-- userdel: rewrited for use getopt_log(),
+- userdel: rewritten for use getopt_log(),
 - install default/template configuration files:
 -- if shadow is configured with use PAM install /etc/pam.d/* files,
 -- if shadow do not uses PAM install /etc/{limits,login.acces} files,
@@ -903,7 +903,7 @@ shadow-4.0.13 -> shadow-4.0.14						03-01-2006
 - userdel: make the -f option force the removal of the user's group (even if it
   is the primary group of another user)
   (merge 453_userdel_-f_removes_group Debian patch),
-- usermod: rewrited for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>),
+- usermod: rewritten for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>),
 - grpck: fixed segmentation fault on using -s when /etc/gshadow is empty (fix by
   Tomasz Lemiech <szpajder@staszic.waw.pl>),
 - passwd: remove handle -f, -g and -s options.
@@ -912,7 +912,7 @@ shadow-4.0.13 -> shadow-4.0.14						03-01-2006
   Nicolas François <nicolas.francois@centraliens.net>)
 - su: export $USER and $SHELL as well as $HOME (http://bugs.debian.org/11003 and
   http://bugs.debian.org/11189),
-- su, vipw: rewrited for use getopt_long(),
+- su, vipw: rewritten for use getopt_long(),
 - su: log successful/failed through syslog (http://bugs.debian.org/190215),
 - updated translations: ca, cs, da, eu, fi, fr, it, pl, pt, ru, sv, tl, vi,
 - new translations: gl.
@@ -977,7 +977,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
   specified DAYS (fix by <miles@lubin.us>),
 - chpasswd, gpasswd, newusers: fixed libmisc/salt.c for use login.defs::MD5_CRYPT_ENAB
   only if PAM support is disabled (fix by John Gatewood Ham <zappaman@buraphalinux.org>),
-- passwd: rewrited for use getopt_long(),
+- passwd: rewritten for use getopt_long(),
 - newgrp: when newgrp process sits between parent and child shells, it should
   propagate STOPs from child to parent and CONTs from parent to child,
   otherwise e.g. bash's "suspend" command won't work
@@ -987,7 +987,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 - chsh(1), groupadd(8), newusers(8), pwconv(8), useradd(8), userdel(8), usermod(8):
   added missing references to /etc/login.defs and login.defs(5)
   (Christian Perrier <bubulle@kheops.frmug.org>),
-- passwd(5): rewrited based on work by Greg Wooledge <greg@wooledge.org>
+- passwd(5): rewritten based on work by Greg Wooledge <greg@wooledge.org>
   http://bugs.debian.org/328113
 - login(1): added securetty(5) to SEE ALSO section
   (fixed Debian bug http://bugs.debian.org/325773),
@@ -1030,7 +1030,7 @@ shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
   added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
   and stub prototype for ngettext() in lib/prototypes.h (necessary if shadow
   compiled with disabled NLS support)
-- groupadd: rewrited for use getopt_long(),
+- groupadd: rewritten for use getopt_long(),
 - groupadd, groupdel, groupmod, userdel: do OPENLOG() before pam_start(),
 - groupadd: fixed double OPENLOG(),
 - removed lib/{grpack,gspack,pwpack,sppack}.c and prototypes from lib/prototypes.h
@@ -1066,7 +1066,7 @@ shadow-4.0.10 -> shadow-4.0.11						18-07-2005
 - su: ignore SIGINT while authenticating. A ^C could defeat the waiting period and
   permit brute-force attacks. Also ignore SIGQUIT.
   Fixed: http://bugs.debian.org/52372 and http://bugs.debian.org/288827
-- useradd: rewrited for use getopt_long(),
+- useradd: rewritten for use getopt_long(),
 - newgrp: add fix for handle splitted NIS groups: extends the functionality that,
   if the requested group is given, all groups of the same GID are tested for
   membership of the requesting user.
@@ -1097,7 +1097,7 @@ shadow-4.0.10 -> shadow-4.0.11						18-07-2005
 - updated translations: cs, da, de, es, fi, pl, pt, ro, ru, sk.
 *** documentation:
 - pwck(8): document -q option (based on Debian patch for fix http://bugs.debian.org/309408)
-- pwck(8): rewrited OPTIONS section and better SYNOPSIS,
+- pwck(8): rewritten OPTIONS section and better SYNOPSIS,
 - lastlog(8): document that lastlog is a sparse file, and don't need to be rotated
   http://bugs.debian.org/219321
 - login(8): better explain the respective roles of login, init and getty with regards
@@ -1137,7 +1137,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   when it should have used pam_user) http://bugs.debian.org/47819
 - remove using SHADOWPWD #define so now shadow is always built with shadow
   password support,
-- chage: rewrited for use getopt_long(),
+- chage: rewritten for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
 *** documentation:
 - most of the man pages now are generated from XML files so in case submiting any
@@ -1178,7 +1178,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - drop never finished kerberos and des_rpc support (for kerberos support back firs
   must be prepared modularization),
 - fixed UTMP path detection (by Kelledin <kelledin@users.sf.net>),
-- useradd: rewrited group count to dynamic (by John Newbigin
+- useradd: rewritten group count to dynamic (by John Newbigin
   <jnewbigin@ict.swin.edu.au>),
 - login: fixed create lastlog entry fo users never loged in on non-PAM
   variant of login (fix by <oracular@ziplip.com>),
@@ -1211,7 +1211,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - newgrp(1): fix #251926, #166173, #113191 Debian bugs: explain why editing /etc/group   
   (without gshadow) doesn't permit to use newgrp,
 - newgrp(1): newgrp uses /bin/sh (not bash),
-- faillog(8): updated after rewrited faillog command for use getopt_long(),
+- faillog(8): updated after rewritten faillog command for use getopt_long(),
 - login(1): removed fragment about abilities pass enviroment variables in login prompt,
 - gshadow(5): new file (by Nicolas Nicolas François <nicolas.francois@centraliens.net>),
 - usermod(8): fixed #302388 Debian bug: added separated -o option description,
@@ -1229,7 +1229,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 -- use fseeko() instead fseek() and remove casting file offsets to unsigned
    long.
 - lastlog:
--- rewrited source code using the same style as in chpasswd.c,
+-- rewritten source code using the same style as in chpasswd.c,
 -- open lastlog file after finish parse commandline options
    (now --help output can be displayed for users without lastlog
    file read permission),
@@ -1238,7 +1238,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 - chpasswd:
 -- switch chpasswd to use getopt_long() and adds a --md5 option
    (by Ian Gulliver <ian@penguinhosting.net>),
--- rewrited chpasswd(8) man page.  
+-- rewritten chpasswd(8) man page.  
 
 shadow-4.0.5 -> shadow-4.0.6						08-11-2004
 
@@ -1460,7 +1460,7 @@ shadow-20001012 -> shadow-20001016:
 
 shadow-20000902 => shadow-20001012
 
-- removed /redhat directory with obsoleted files (partially rewrited spec
+- removed /redhat directory with obsoleted files (partially rewritten spec
   file is now in root directory),
 - applied shadow-19990827-group.patch patch from RH wich prevents adduser
   overwrite previously existing groups in adduser,

@@ -9423,7 +9423,7 @@
 	added src/groupmems.c to POTFILES.in.
 
 	* NEWS, etc/pam.d/Makefile.am, etc/pam.d/groupmems, man/Makefile.am, man/groupmems.8.xml, src/Makefile.am, src/groupmems.c:
-	groupmems rewrited for use PAM and getopt_long() nad now it is enabled
+	groupmems rewritten for use PAM and getopt_long() nad now it is enabled
 	for build and install (patch by George Kraft <gk4@swbell.net>).
 
 	* NEWS, configure.in: start prepare for 4.0.18.
@@ -9487,7 +9487,7 @@
 	* po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po:
 	updated.
 
-	* NEWS, src/chsh.c: chsh rewrited for use getopt_long().
+	* NEWS, src/chsh.c: chsh rewritten for use getopt_long().
 
 2006-07-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9519,7 +9519,7 @@
 
 	* src/passwd.c: s/\[login\]/\[LOGIN\]/ in help message.
 
-	* NEWS, src/groupmod.c: groupmod rewrited for use getopt_log().
+	* NEWS, src/groupmod.c: groupmod rewritten for use getopt_log().
 
 2006-07-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10018,7 +10018,7 @@
 	* po/pl.po: updated.
 
 	* po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/userdel.c, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po:
-	userdel rewrited for use getopt_log().
+	userdel rewritten for use getopt_log().
 
 	* po/pl.po: cleanups.
 
@@ -10807,7 +10807,7 @@
 2005-12-03  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/vipw.c, NEWS, man/Attic/vipw.8, man/vipw.8.xml, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po:
-	rewrited vipw for use getopt_long().
+	rewritten vipw for use getopt_long().
 
 	* man/Attic/passwd.1, man/passwd.1.xml: cleanups.
 
@@ -10885,7 +10885,7 @@
 
 	* NEWS, src/Makefile.am, src/nologin.c: added nologin program.
 
-	* NEWS, src/su.c: rewrited for use getopt_long().
+	* NEWS, src/su.c: rewritten for use getopt_long().
 
 2005-11-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10894,7 +10894,7 @@
 2005-11-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/usermod.8, man/usermod.8.xml:
-	rewrited for document long options.
+	rewritten for document long options.
 
 	* NEWS, src/vipw.c:
 	added a "quiet" mode (http://bugs.debian.org/190252.
@@ -10994,7 +10994,7 @@
 	* src/usermod.c: indent code.
 
 	* NEWS, src/usermod.c:
-	rewrited for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>).
+	rewritten for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>).
 
 2005-10-24  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11219,14 +11219,14 @@
 	added missing <para></para> inside <listitem> tags for pass correctly xmllint.
 
 	* man/Attic/login.access.5, man/login.access.5.xml:
-	rewrited FILES section.
+	rewritten FILES section.
 
 	* man/login.access.5.xml: cleanups.
 
 2005-09-15  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/passwd.5, man/passwd.5.xml:
-	rewrited based on work by Greg Wooledge <greg@wooledge.org>
+	rewritten based on work by Greg Wooledge <greg@wooledge.org>
 	http://bugs.debian.org/328113
 
 2005-09-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -11516,7 +11516,7 @@
 2005-08-23  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, src/passwd.c, NEWS:
-	passwd rewrited for use getopt_long().
+	passwd rewritten for use getopt_long().
 
 	* man/Attic/chage.1, man/chage.1.xml: /warndays/--warndays/
 
@@ -11703,7 +11703,7 @@
 2005-08-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, NEWS:
-	rewrited groupadd for use getopt_long().
+	rewritten groupadd for use getopt_long().
 
 	* src/chage.c: indent.
 
@@ -11869,7 +11869,7 @@
 
 	* NEWS, man/Attic/pwck.8, man/pwck.8.xml:
 	document -q option (based on Debian patch for fix http://bugs.debian.org/309408)
-	Rewrited OPTIONS section and better SYNOPSIS.
+	Rewritten OPTIONS section and better SYNOPSIS.
 
 	* NEWS, po/da.po:
 	- updated for 4.0.11 (by Claus Hindsgaul <claus_h@image.dk>).
@@ -11929,7 +11929,7 @@
 	idescription must be finished).
 
 	* src/useradd.c, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, NEWS:
-	rewrited for use getopt_long().
+	rewritten for use getopt_long().
 
 	* po/stats: more gsub().
 
@@ -12247,7 +12247,7 @@
 	* man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/faillog.5.xml:
 	cleanups.
 
-	* man/login.1.xml: rewrited FILES section.
+	* man/login.1.xml: rewritten FILES section.
 
 	* man/id.1.xml, man/lastlog.8.xml, man/gshadow.5.xml: cleanups.
 
@@ -12518,11 +12518,11 @@
 
 2005-04-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* man/chpasswd.8.xml: Rewrited by hand & xemacs.
+	* man/chpasswd.8.xml: Rewritten by hand & xemacs.
 
 	* man/chfn.1.xml: cleanups in <refentry> tag.
 
-	* man/chfn.1.xml: Rewrited by hand & xemacs.
+	* man/chfn.1.xml: Rewritten by hand & xemacs.
 
 	* NEWS, po/pt.po:
 	updated for 4.0.8 (by Miguel Figueiredo <elmig@debianpt.org>).
@@ -12778,7 +12778,7 @@
 	http://bugs.gentoo.org/show_bug.cgi?id=80345
 
 	* man/pl/Attic/chage.1.xml:
-	converted from roff using doclifter. Rewrited by hand. Probably will be
+	converted from roff using doclifter. Rewritten by hand. Probably will be
 	removed after prepare infrastructure for translate man pages using gettext
 	but temporary I need this for some experiments.
 
@@ -12802,7 +12802,7 @@
 	s/chage/chage command/ in DESCRIPTION.
 
 	* man/chage.1.xml:
-	converted from roff using doclifter. Rewrited by hand.
+	converted from roff using doclifter. Rewritten by hand.
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/faillog.8, man/Attic/groupmod.8, man/Attic/pwconv.8, man/Attic/useradd.8, man/Attic/usermod.8:
 	cleanups.
@@ -12866,7 +12866,7 @@
 	* libmisc/.indent.pro, src/.indent.pro, lib/.indent.pro: -l80 added.
 
 	* lib/gshadow.c, NEWS:
-	rewrited group count to dynamic (by John Newbigin <jnewbigin@ict.swin.edu.au >).
+	rewritten group count to dynamic (by John Newbigin <jnewbigin@ict.swin.edu.au >).
 
 	* po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po:
 	run "make update-po".
@@ -14748,7 +14748,7 @@
 	* shlib/Attic/Makefile.am, shlib/Attic/Makefile.in.saved: - removed.
 
 	* src/Makefile.am, libmisc/Makefile.am, lib/Makefile.am:
-	Rewrited automake suit for building lib, libmisc and src (now this look much
+	Rewritten automake suit for building lib, libmisc and src (now this look much
 	better). Also for all is now used libtool in proper way.
 
 	* configure.in:
@@ -14939,7 +14939,7 @@
 
 	* README: - added README with all shadow sites and resources details.
 
-	* Attic/shadow-utils.spec.in: - partially rewrited.
+	* Attic/shadow-utils.spec.in: - partially rewritten.
 
 	* configure.in: - change version to 20001010.
 
