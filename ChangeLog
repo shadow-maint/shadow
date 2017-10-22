@@ -7855,7 +7855,7 @@
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/chage.c: Fix typo: s/maximim/maximum/
+	* src/chage.c: Fix typo: s/maximum/maximum/
 	* src/chage.c: New function: fail_exit(). Change most of the exit()
 	to a fail_exit, which makes sure the files are unlocked (new global
 	variables: pw_locked, spw_locked), the PAM transaction is ended, and

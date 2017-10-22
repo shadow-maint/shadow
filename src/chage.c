@@ -154,7 +154,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
 	(void) fputs (_("  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 	                "                                change to MIN_DAYS\n"), usageout);
-	(void) fputs (_("  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+	(void) fputs (_("  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	                "                                change to MAX_DAYS\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
@@ -780,7 +780,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
  *	-E	set account expiration date (*)
  *	-I	set password inactive after expiration (*)
  *	-l	show account aging information
- *	-M	set maximim number of days before password change (*)
+ *	-M	set maximum number of days before password change (*)
  *	-m	set minimum number of days before password change (*)
  *	-W	set expiration warning days (*)
  *
