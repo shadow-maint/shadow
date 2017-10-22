@@ -9678,7 +9678,7 @@
 
 	* man/pl/vipw.8:
 	regenerated using fixed DocBook XSL Stylesheets v1.70.1 (I must submit my
-	fixes common/pl.xml do DocBook XSL Stylesheets mantainer).
+	fixes common/pl.xml do DocBook XSL Stylesheets maintainer).
 
 	* man/fr/fr.po, man/ru/ru.po: updated.
 
