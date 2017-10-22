@@ -14299,7 +14299,7 @@
 	next part fixes for handle long UID/GID (by Thorsten Kukuk <kukuk@suse.de>).
 
 	* lib/getdef.c, lib/getdef.h:
-	adeded getdef_unum(): get unsigned numerical value from table of
+	added getdef_unum(): get unsigned numerical value from table of
 	definitions (Thorsten Kukuk <kukuk@suse.de>).
 
 	* NEWS: updated.
