@@ -1394,7 +1394,7 @@ shadow-4.0.0 => shadow-4.0.1
     as root.  If root does read-only, there's no lock needed. Added missing
     "#include <errno.h>" for above (me).
   shadow-4.0.0-owl-warnings.diff
-    Olny one fix from this patch was aplayd because other was fixed few days
+    Olny one fix from this patch was applied because other was fixed few days
     before :)
   shadow-4.0.0-owl-check_names.diff
     Merge only prat this patch with checking login name matching; checking
@@ -1447,7 +1447,7 @@ shadow-20001016 => shadow-4.0.0						 06-01-2002
 - added pt_BR man pages for gpasswd(1), groupadd(8), groupdel(8),
   groupmod(8), shadow(5) (man pages for other nations also are welcome),
 - mamny small fixes and updates nad improvements in man pages,
-- aplayed Debian patch to man pages for shadowconfig,
+- applied Debian patch to man pages for shadowconfig,
 - remove limit to 6 chars logged tty name (012_libmisc_sulog.c.diff Debian
   patch).
 
@@ -1462,7 +1462,7 @@ shadow-20000902 => shadow-20001012
 
 - removed /redhat directory with obsoleted files (partialy rewrited spec
   file is now in root directory),
-- aplayed shadow-19990827-group.patch patch from RH wich prevents adduser
+- applied shadow-19990827-group.patch patch from RH wich prevents adduser
   overwrite previously existing groups in adduser,
 - added PAM support for chage (bind to "chage" PAM config file) also
   added PAM support for all other small tools like chpasswd, groupadd,
