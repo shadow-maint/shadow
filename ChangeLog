@@ -10957,7 +10957,7 @@
 	to the utmp file (merge 440_manpages-login.1 Debian patch).
 
 	* man/Attic/userdel.8, man/userdel.8.xml:
-	aphabetic order options description.
+	alphabetic order options description.
 
 	* NEWS, man/Attic/userdel.8, man/userdel.8.xml:
 	document the -f option; document the group removal behavior (merge
@@ -14785,7 +14785,7 @@
 	(userdel.1): remove commented obsoleted options.
 
 	* man/Makefile.am:
-	put all files in man_MANS and EXTRA_DIST in alphabethic order.
+	put all files in man_MANS and EXTRA_DIST in alphabetic order.
 
 	* src/chpasswd.c, src/pwunconv.c:
 	remove from comments program description and history logs.
