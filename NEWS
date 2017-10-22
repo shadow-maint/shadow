@@ -1172,7 +1172,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - faillog: changed faillog record display format for allow fit in 80 columns all
   faillog attributes,
 - removed NDBM code (unused),
-- fixed use of SU_WHEEL_ONLY in su. Now su realy is avalaible for wheel group
+- fixed use of SU_WHEEL_ONLY in su. Now su realy is available for wheel group
   members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
   http://bugs.gentoo.org/show_bug.cgi?id=80345
 - drop never finished kerberos and des_rpc support (for kerberos support back firs
@@ -1328,7 +1328,7 @@ shadow-4.0.3 => shadow-4.0.4						14-01-2004
 - ALL tools, libraries: remove old SVR4, SVR4_SI86_EUA BSD_QUOTA and ATT_AGE
   dependent code,
 - ALL: ready for gettext 0.11.5, automake 1.7.4, autoconf 2.57,
-- logoutd, userd: handle also utmpx if avalaile,
+- logoutd, userd: handle also utmpx if available,
 - newgrp: fix for non-PAM version
   Use CLOSE_SESSIONS depending code only when USE_PAM.
   The problem was reported by Mattias Webjorn Eriksson using Slackware
