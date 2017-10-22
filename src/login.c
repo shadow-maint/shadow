@@ -1163,7 +1163,7 @@ int main (int argc, char **argv)
 			 * entries.
 			 * Use the x variants because we need to keep the
 			 * entry for a long time, and there might be other
-			 * getxxyy in between.
+			 * getxxyyy in between.
 			 */
 			pw_free (pwd);
 			pwd = xgetpwnam (username);
