@@ -12621,7 +12621,7 @@
 2005-04-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/fi.po, NEWS:
-	updated translation (by Tommi Vainikainen <tvainikan@cc.hut.fi>).
+	updated translation (by Tommi Vainikainen <tvainika@cc.hut.fi>).
 
 	* man/hu/passwd.1, man/it/passwd.1, man/ja/passwd.1, man/pl/passwd.1, man/Attic/passwd.1, man/de/passwd.1, man/es/passwd.1:
 	cleanups and unifications in SEE ALSO section.
