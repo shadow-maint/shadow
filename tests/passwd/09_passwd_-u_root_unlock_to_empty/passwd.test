@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "Unlock foo's pasword (passwd -u foo)..."
+echo -n "Unlock foo's password (passwd -u foo)..."
 passwd -u foo 2> tmp/passwd.err && exit 1 || {
         status=$?
 }

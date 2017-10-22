@@ -19,7 +19,7 @@ change_config
 echo "remove the gshadow file"
 rm -f /etc/gshadow
 
-echo -n "Lock the pasword of group users (gpasswd -R users)..."
+echo -n "Lock the password of group users (gpasswd -R users)..."
 gpasswd -R users
 echo "OK"
 

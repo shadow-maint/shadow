@@ -13823,7 +13823,7 @@
 
 	* src/chage.c, NEWS:
 	Now all code depend on SHADOWPWD. If shadow will not be configured on
-	autoconf level for using shadow possword chage is olny stub which informs
+	autoconf level for using shadow password chage is olny stub which informs
 	"chage not configured for shadow password support."
 
 	* man/it/Makefile.am: Removed EXTRA_DIST (not necessary).
