@@ -1231,7 +1231,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 - lastlog:
 -- rewrited source code using the same style as in chpasswd.c,
 -- open lastlog file after finish parse commandline options
-   (now --help otput can be displayed for users without lastlog
+   (now --help output can be displayed for users without lastlog
    file read permission),
 -- cleanups in lastlog(8) man page using the same style as in
    chpasswd(8).
