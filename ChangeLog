@@ -9309,7 +9309,7 @@
 
 	* src/useradd.c, src/usermod.c:
 	fixed UID/GID overflow (fixed http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920).
-	Fixed expiredate/inactive/mindays/warndays/maxdays overflow (simillar to RH#198920).
+	Fixed expiredate/inactive/mindays/warndays/maxdays overflow (similar to RH#198920).
 
 	* src/passwd.c:
 	fixed inactive/mindays/warndays/maxdays overflow (similar to RH#198920).
