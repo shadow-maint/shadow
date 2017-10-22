@@ -12903,7 +12903,7 @@
 	* po/pl.po: put mine data in Last-Translator: field.
 
 	* src/newusers.c:
-	use the same as in useradd default UMASK (022 instead 077) if diffrent not
+	use the same as in useradd default UMASK (022 instead 077) if different not
 	defined in login.defs.
 
 	* NEWS, libmisc/copydir.c:
@@ -13794,7 +13794,7 @@
 
 	* TODO: ALL:
 	move base passwd/shadow/group/gshadow operation to module for allow write
-	diffrent backend modules for db, NIS, LDAP and others. Default backend it
+	different backend modules for db, NIS, LDAP and others. Default backend it
 	will be choose depending on /etc/nsswitch.conf and allow overrride this by
 	-r <repository> options (where the <repository> can be file, db, nis
 	nisplus, ldap .. like on /etc/nsswitch.conf in service column).
