@@ -955,7 +955,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 - fixedlib/commonio.c: don't assume selinux is enabled if is_selinux_enabled()
   returns -1 (merge isSelinuxEnabled FC patch by Jeremy Katz <katzj@redhat.com>),
 - login, su (non-PAM case): fixed setup max address space limits (added missing break
-  statement in case) spoted by Lasse Collin <lasse.collin@tukaani.org>,
+  statement in case) spotted by Lasse Collin <lasse.collin@tukaani.org>,
 - auditing support added. Patch prepared by Peter Vrabec <pvrabec@redhat.com> basing
   on work by Steve Grubb from http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=159215
   Now auditing support have commands: chage, gpasswd, groupadd, groupdel, groupmod,

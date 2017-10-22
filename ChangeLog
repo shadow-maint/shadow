@@ -11255,7 +11255,7 @@
 
 	* NEWS, libmisc/limits.c:
 	fixed setup max address space limits (added missing break statement in case)
-	spoted by Lasse Collin <lasse.collin@tukaani.org>
+	spotted by Lasse Collin <lasse.collin@tukaani.org>
 	(fix for non-PAM case)
 
 	* configure.in: try find and use by default features:
@@ -11676,7 +11676,7 @@
 2005-08-06  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c:
-	s/spoll/spool/ (spoted by Nicolas François <nicolas.francois@centraliens.net>).
+	s/spoll/spool/ (spotted by Nicolas François <nicolas.francois@centraliens.net>).
 
 2005-08-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
