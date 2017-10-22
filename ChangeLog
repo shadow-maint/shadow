@@ -14741,7 +14741,7 @@
 
 	* autogen.sh (conf_flags): added --with-pam.
 
-	* NEWS: start complette next release information.
+	* NEWS: start complete next release information.
 
 2001-02-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
