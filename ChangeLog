@@ -12944,7 +12944,7 @@
 	all functions from this file are "#ifndef USE_PAM" dependent.
 
 	* libmisc/setugid.c (change_uid):
-	removed dead code depndent on "#ifdef BSD".
+	removed dead code dependent on "#ifdef BSD".
 
 	* libmisc/ttytype.c (ttytype):
 	removed dead code depend on "defined(SUN) || defined(BSD) || defined(SUN4)".
