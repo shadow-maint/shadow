@@ -848,7 +848,7 @@ shadow-4.0.14 -> shadow-4.0.15						13-03-2006
     added audit_logger() prototype),
   - useradd: fixed excess audit_logger() argument,
 - chage: added missing \n on display password status if password must be
-  chaged,
+  changed,
 - useradd: fixed allow non-unique UID (http://bugs.debian.org/351281),
 - variouse code cleanups for make possible compilation of shadow with -Wall
   -Werror (by Alexander Gattin <xrgtn@yandex.ru>),
