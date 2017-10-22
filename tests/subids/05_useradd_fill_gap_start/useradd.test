@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
-log_start "$0" "useradd creates subids in /etc/sub[ug]id at the begining"
+log_start "$0" "useradd creates subids in /etc/sub[ug]id at the beginning"
 
 save_config
 
