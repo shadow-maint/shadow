@@ -6,7 +6,7 @@ cd $(dirname $0)
 
 . ../../common/config.sh
 . ../../common/log.sh
-log_start "$0" "expiry can displayits usage message"
+log_start "$0" "expiry can display its usage message"
 
 save_config
 
