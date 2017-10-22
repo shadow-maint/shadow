@@ -972,7 +972,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
   This will permit to adduser Debian script to detect if chage failed because the
   system doesn't have shadowed passwords (fix for http://bugs.debian.org/317012),
 - merge 010_more-i18ned-messages Debian patch which adds i18n support for few
-  more messages (orginaly patch was prepared by Guillem Jover <guillem@debian.org>),
+  more messages (originally patch was prepared by Guillem Jover <guillem@debian.org>),
 - lastlog: added handle -b option which allow print only lastlog records older than
   specified DAYS (fix by <miles@lubin.us>),
 - chpasswd, gpasswd, newusers: fixed libmisc/salt.c for use login.defs::MD5_CRYPT_ENAB

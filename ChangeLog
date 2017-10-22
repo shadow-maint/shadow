@@ -11418,7 +11418,7 @@
 
 	* libmisc/obscure.c, libmisc/utmp.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, src/chage.c, src/login.c, src/logoutd.c, src/newgrp.c, src/su.c, src/useradd.c, NEWS:
 	merge 010_more-i18ned-messages Debian patch which adds i18n support for few more messages
-	(orginaly patch was prepared by Guillem Jover <guillem@debian.org>).
+	(originally patch was prepared by Guillem Jover <guillem@debian.org>).
 
 	* man/id/chsh.1:
 	fix .SH (fix merged from 207_id-manpages debian patch).
