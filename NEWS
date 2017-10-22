@@ -1003,7 +1003,7 @@ shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
 *** general:
 - newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and always 
   close PAM session,
-- fixed configure.in: realy enable shadow group support by default (pointed by 
+- fixed configure.in: really enable shadow group support by default (pointed by 
   Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>),
 - login.defs: removed handle QMAIL_DIR variable,
 - login: allow regular user to login on read-only root file system (not only for root)
@@ -1172,7 +1172,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - faillog: changed faillog record display format for allow fit in 80 columns all
   faillog attributes,
 - removed NDBM code (unused),
-- fixed use of SU_WHEEL_ONLY in su. Now su realy is available for wheel group
+- fixed use of SU_WHEEL_ONLY in su. Now su really is available for wheel group
   members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
   http://bugs.gentoo.org/show_bug.cgi?id=80345
 - drop never finished kerberos and des_rpc support (for kerberos support back firs
@@ -1246,7 +1246,7 @@ shadow-4.0.5 -> shadow-4.0.6						08-11-2004
   (Martin Schlemmer <azarah@nosferatu.za.org>),
 - autoconf: fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables
   which was always empty (Gregorio Guidi <g.guidi@sns.it>),
-- realuy close security bug in libmisc/pwdcheck.c,
+- really close security bug in libmisc/pwdcheck.c,
 - added missing template/example PAM service config files for chfn, chsh and
   userdel,
 - do not translate variable names from /etc/default/useradd during

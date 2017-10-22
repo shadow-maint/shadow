@@ -11593,7 +11593,7 @@
 2005-08-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in:
-	realy enable shadow group support by default (pointed by
+	really enable shadow group support by default (pointed by
 	Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>).
 	Indentations in --help output.
 
@@ -12773,7 +12773,7 @@
 	* man/cs/groups.1: cleanups.
 
 	* NEWS, src/su.c:
-	fixed use of SU_WHEEL_ONLY in su. Now su realy is available for wheel group
+	fixed use of SU_WHEEL_ONLY in su. Now su really is available for wheel group
 	members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
 	http://bugs.gentoo.org/show_bug.cgi?id=80345
 
@@ -12937,7 +12937,7 @@
 	QUOTAS_ENAB, ULIMIT variables moved to code "#ifndef USE_PAM" dependent.
 
 	* configure.in:
-	fix important typo: added missing ",". Now LOGIN_ACCESS realy is defined only
+	fix important typo: added missing ",". Now LOGIN_ACCESS really is defined only
 	when PAM is not enabled.
 
 	* libmisc/obscure.c, libmisc/limits.c:
@@ -13123,7 +13123,7 @@
 	- final entry about fixed large file support in lastlog and faillog.
 
 	* src/vipw.c, lib/Attic/pwent.c, lib/Attic/grent.c:
-	use fseeko() instead fseek(). This not realuy necessary because in this
+	use fseeko() instead fseek(). This not really necessary because in this
 	cases fseek() was used for move to begin of file. This only for minimize
 	external functions count.
 
@@ -13266,7 +13266,7 @@
 
 	* libmisc/pwdcheck.c:
 	one word fix .. omitted "else" was removed. Now security bug which allow
-	unauthorized account properties modification is realy closed.
+	unauthorized account properties modification is really closed.
 
 2004-10-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
