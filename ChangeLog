@@ -9790,7 +9790,7 @@
 	* man/Makefile.am:
 	added temporary gen-xmls targed and dependencies between .pot and .po files.
 
-	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't neccessary).
+	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't necessary).
 
 2006-05-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10131,7 +10131,7 @@
 2006-03-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/pw_auth.3.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newgrp.1.xml, man/newusers.8.xml, man/nologin.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/sg.1.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
-	removed <!DOCTYPE> tag (require strict DocBook XML V4.3//EN DTD isn't neccessary).
+	removed <!DOCTYPE> tag (require strict DocBook XML V4.3//EN DTD isn't necessary).
 
 	* NEWS, src/login.c:
 	cancel login timeout after authentication so that patient people
@@ -11688,7 +11688,7 @@
 
 	* lib/defines.h, NEWS, configure.in:
 	added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
-	and stub prototype for ngettext() in lib/prototypes.h (neccessary if shadow
+	and stub prototype for ngettext() in lib/prototypes.h (necessary if shadow
 	compiled with disabled NLS support)
 	Based on fixes by Martin Schlemmer <azarah@nosferatu.za.org>.
 
@@ -13123,7 +13123,7 @@
 	- final entry about fixed large file support in lastlog and faillog.
 
 	* src/vipw.c, lib/Attic/pwent.c, lib/Attic/grent.c:
-	use fseeko() instead fseek(). This not realuy neccessary because in this
+	use fseeko() instead fseek(). This not realuy necessary because in this
 	cases fseek() was used for move to begin of file. This only for minimize
 	external functions count.
 
@@ -13377,7 +13377,7 @@
 
 	* src/Makefile.am, libmisc/Makefile.am, lib/Makefile.am, configure.in:
 	move LOCALEDIR to autoheader variables. Remove redefining DEFS in
-	Makefile.am (not neccessary now).
+	Makefile.am (not necessary now).
 
 	* src/chage.c, src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/logoutd.c, src/newusers.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, NEWS:
 	applied OWL shadow-4.0.4.1-owl-pam-auth.diff patch by Solar Designer
@@ -13625,7 +13625,7 @@
 2003-12-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am, libmisc/Makefile.am, src/Makefile.am:
-	Removed -I$(top_srcdir) from INCLUDES (isn't neccessary because this is in
+	Removed -I$(top_srcdir) from INCLUDES (isn't necessary because this is in
 	DEFAULT_INCLUDES) - slightly shorter compile output.
 
 	* Makefile.am, configure.in:
@@ -13826,13 +13826,13 @@
 	autoconf level for using shadow possword chage is olny stub which informs
 	"chage not configured for shadow password support."
 
-	* man/it/Makefile.am: Removed EXTRA_DIST (not neccessary).
+	* man/it/Makefile.am: Removed EXTRA_DIST (not necessary).
 
 	* man/es/Makefile.am: Removed groups.1 (doesn't exist es groups(1)).
 
 	* man/de/Makefile.am (man_MANS): added login.1.
 
-	* man/de/Makefile.am: Removed EXTRA_DIST (isn't neccessary now).
+	* man/de/Makefile.am: Removed EXTRA_DIST (isn't necessary now).
 
 	* man/hu/Makefile.am, man/ja/Makefile.am, man/ko/Makefile.am, man/pl/Makefile.am, man/de/Makefile.am, man/fr/Makefile.am, NEWS, man/Makefile.am:
 	Install groups(1) man page (moved from EXTRA_DIST to man_MANS).
@@ -14028,7 +14028,7 @@
 	* libmisc/Attic/getdate.c, libmisc/Attic/login_access.c, libmisc/Attic/login_desrpc.c, libmisc/Attic/login_krb.c, libmisc/Attic/nscd.c, libmisc/Attic/setup.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/pwdcheck.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/Attic/chkshell.c, libmisc/addgrps.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c:
 	Indent all using current .indent.pro settings.
 
-	* po/Makevars: New file neccessary for gettext >=0.11.5.
+	* po/Makevars: New file necessary for gettext >=0.11.5.
 
 	* man/Makefile.am: Removed getspnam.3 from man_MANS (dos not exist).
 

@@ -1028,7 +1028,7 @@ shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
   period and permit brute-force attacks (fixed http://bugs.debian.org/288827),
 - uClibc fixes (by Martin Schlemmer <azarah@nosferatu.za.org>):
   added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
-  and stub prototype for ngettext() in lib/prototypes.h (neccessary if shadow
+  and stub prototype for ngettext() in lib/prototypes.h (necessary if shadow
   compiled with disabled NLS support)
 - groupadd: rewrited for use getopt_long(),
 - groupadd, groupdel, groupmod, userdel: do OPENLOG() before pam_start(),
