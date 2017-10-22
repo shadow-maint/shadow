@@ -10471,7 +10471,7 @@
 2006-01-18  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/setupenv.c, src/chage.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/usermod.c, src/vipw.c:
-	variouse code cleanups for make possible compilation of shadow with
+	various code cleanups for make possible compilation of shadow with
 	-Wall -Werror (by Alexander Gattin <xrgtn@yandex.ru>).
 
 	* libmisc/age.c, libmisc/shell.c, src/login.c, src/newgrp.c, src/su.c, src/sulogin.c, src/userdel.c, NEWS, lib/prototypes.h:
@@ -13176,7 +13176,7 @@
 2004-12-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/suauth.5, man/Attic/useradd.8:
-	Fixed varoiuse typos and misspelling based partially on patch from Bug#141322
+	Fixed various typos and misspelling based partially on patch from Bug#141322
 	from Debian (submited by Christian Perrier <bubulle@debian.org>).
 
 	* man/Attic/chpasswd.8: more cleanups.
