@@ -10742,7 +10742,7 @@
 	* NEWS: updated.
 
 	* src/su.c:
-	added handle -s/--shell option like in GNU su (based on Debian patch sublmited
+	added handle -s/--shell option like in GNU su (based on Debian patch submitted
 	by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* src/su.c:
