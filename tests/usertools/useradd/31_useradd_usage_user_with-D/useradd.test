@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "Set defaulkt with useradd and specify an user (useradd -D nobody)..."
+echo -n "Set default with useradd and specify an user (useradd -D nobody)..."
 useradd -D nobody 2>tmp/usage.out && exit 1 || {
 	status=$?
 }
