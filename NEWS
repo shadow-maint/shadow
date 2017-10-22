@@ -1148,7 +1148,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
 shadow-4.0.8 -> shadow-4.0.9						23-05-2005
 
 *** general:
-- passwd: fixed segfault in non-PAM connfiguration
+- passwd: fixed segfault in non-PAM configuration
   (submited by Greg Schafer <gschafer@zip.com.au>),
 - newgrp: fixed NULL pointer dereference - getlogin() and ttyname() can
   return NULL which is not checked (http://bugs.debian.org/162303),

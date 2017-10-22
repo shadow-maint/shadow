@@ -12349,7 +12349,7 @@
 2005-05-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/encrypt.c, NEWS:
-	fixed passwd segfault in non-PAM connfiguration (submited by Greg Schafer <gschafer@zip.com.au>).
+	fixed passwd segfault in non-PAM configuration (submited by Greg Schafer <gschafer@zip.com.au>).
 
 	* po/sv.po: upsdate (by Christian Perrier <bubulle@debian.org>).
 
