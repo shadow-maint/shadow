@@ -14368,7 +14368,7 @@
 	* src/newgrp.c, src/pwck.c, src/su.c, src/useradd.c, src/usermod.c, src/groupadd.c, src/groupmod.c, src/id.c, NEWS:
 	fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>).
 
-	* src/chage.c: - break usage vomment line.
+	* src/chage.c: - break usage comment line.
 
 	* lib/defines.h:
 	removed bunch spaces on end line in conditionale #include <errno.h>
