@@ -11280,7 +11280,7 @@
 	* libmisc/audit_help.c: added shadow copyright text and indent file.
 
 	* libmisc/audit_help.c:
-	patr of auditing support not added on commiting audit changes.
+	patr of auditing support not added on committing audit changes.
 
 	* src/Makefile.am: s/AUDIT/LIBAUDIT/
 
