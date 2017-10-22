@@ -1373,7 +1373,7 @@ shadow-4.0.1 => shadow-4.0.2						 17-02-2002
 
 - resolve many fuzzy translations also all this which may cause problems on
   displaing long uid/gid,
-- allow use "$" on ending in cereated by useradd usermname accounts for allow
+- allow use "$" on ending in created by useradd usermname accounts for allow
   create machine accounts for samba (thanks to Jerome Borsboom
   <borsboom@tch.fgg.eur.nl> for point this problem in 4.0.1),
 - fix small but ugly bug in configure.in in libpam_mics library detection.
