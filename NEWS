@@ -1257,7 +1257,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
 - change libmisc to private static library,
 - added SELinux support (basing on patch from Gentoo),
 - chage: more verbose/human readable -l output. This output is much more
-  beter for send directly via email for each users as message with account
+  better for send directly via email for each users as message with account
   status (for example as message with warning about account/password expiration),
 - login: fixed handle -f option: now it works correctly without specify "-h
   <host>" if open login session localy is required (thanks for help

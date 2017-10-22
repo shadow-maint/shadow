@@ -13369,7 +13369,7 @@
 	* po/pl.po: added missing \n.
 
 	* src/chage.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po:
-	more verbose/human readable -l output. This output is much more beter for
+	more verbose/human readable -l output. This output is much more better for
 	send directly via email for each users as message with account status (for
 	example as message with warning about account/password expiration).
 
