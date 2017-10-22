@@ -12634,7 +12634,7 @@
 	avoid autoconf warnings.
 
 	* configure.in:
-	AC_SYS_LARGEFILE() performs checking is fseeko() is avalaible so "fseeko" can
+	AC_SYS_LARGEFILE() performs checking is fseeko() is available so "fseeko" can
 	be removed from AC_CHECK_FUNCS() parameters.
 
 	* NEWS, configure.in: Remove using AC_PROG_GCC_TRADITIONAL macro.
@@ -12773,7 +12773,7 @@
 	* man/cs/groups.1: cleanups.
 
 	* NEWS, src/su.c:
-	fixed use of SU_WHEEL_ONLY in su. Now su realy is avalaible for wheel group
+	fixed use of SU_WHEEL_ONLY in su. Now su realy is available for wheel group
 	members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
 	http://bugs.gentoo.org/show_bug.cgi?id=80345
 
@@ -13112,7 +13112,7 @@
 2004-12-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
-	added checing is fseeko() function is avalaibabe in system: added fseeko to
+	added checing is fseeko() function is available in system: added fseeko to
 	AC_CHECK_FUNCS parameters.
 
 	* lib/Makefile.am:
@@ -13574,7 +13574,7 @@
 	bug fixes in automake files for generate correct tar ball on "make dist":
 	added midsiing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
-	* configure.in: Fixed checking is avalaible st_rdev in struct stat.
+	* configure.in: Fixed checking is available st_rdev in struct stat.
 
 2004-01-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14005,7 +14005,7 @@
 	* TODO: Missing "are".
 
 	* src/logoutd.c, src/userdel.c, NEWS:
-	Handle also utmpx if avalaile in userdel and logoutd.
+	Handle also utmpx if available in userdel and logoutd.
 
 2003-04-25  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14645,7 +14645,7 @@
 	AC_CHECK_LIB().
 
 	* configure.in:
-	added checking for libpam_misc if libpam found and if libpam_misc is avalaible
+	added checking for libpam_misc if libpam found and if libpam_misc is available
 	add them to $LIBPAM. Othervise exit fron autoconf script with error message.
 	Now shadow compiles if pam support is enabled.
 
@@ -14668,7 +14668,7 @@
 
 	* configure.in:
 	- check pam directly by AC_CHECK_LIB() (PAM from PLD is now fixed an also other
-	  PAM implementation must be fixed for this method checkin is libpam is avalaible;
+	  PAM implementation must be fixed for this method checkin is libpam is available;
 	  sorry .. no way this is plain linking procedure bug),
 	- use AC_DEFINE(LOGIN_ACCES) only when PAM isn't used.
 
@@ -14840,7 +14840,7 @@
 	added i18n support for src/groupmems.c.
 
 	* src/useradd.c:
-	* (set_defaults): use mkstemp() if avalaible. Othereise use mktemp().
+	* (set_defaults): use mkstemp() if available. Othereise use mktemp().
 
 	* configure.in: * added checking for mkstemp().
 
