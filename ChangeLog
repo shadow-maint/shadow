@@ -10370,7 +10370,7 @@
 	- add special handling for PAM_ABORT
 	- add an entry to faillog, as when USE_PAM is not defined. (#53164)
 	- changed pam_end to PAM_END. This is certainly was a mistake.
-	  PAM_END is pam_close_seesion + pam_end. Here, the session is still not
+	  PAM_END is pam_close_session + pam_end. Here, the session is still not
 	  open, we don't have to close it.
 	- a HAVE_PAM_FAIL_DELAY is missing
 
