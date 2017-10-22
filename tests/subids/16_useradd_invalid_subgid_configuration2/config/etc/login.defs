@@ -300,7 +300,7 @@ ENCRYPT_METHOD SHA512
 #						#
 # These options are now handled by PAM. Please	#
 # edit the appropriate file in /etc/pam.d/ to	#
-# enable the equivelants of them.
+# enable the equivalents of them.
 #
 ###############
 
