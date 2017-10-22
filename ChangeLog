@@ -13918,7 +13918,7 @@
 2003-04-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* libmisc/limits.c, src/logoutd.c:
-	More utmp/utmpx fixes: use endutend() or endutxend() depending on HAVE_UTMPX_H.
+	More utmp/utmpx fixes: use endutent() or endutxend() depending on HAVE_UTMPX_H.
 
 	* po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po:
 	Run "make update-po" after remove SVR4 code and fix duplicated entries in sv.po.
