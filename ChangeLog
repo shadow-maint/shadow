@@ -1123,7 +1123,7 @@
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/su.1.xml: Document that su -c does not providea controlling
+	* man/su.1.xml: Document that su -c does not provide a controlling
 	terminal.
 
 2011-10-18  Nicolas François  <nicolas.francois@centraliens.net>
