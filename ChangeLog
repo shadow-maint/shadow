@@ -9997,7 +9997,7 @@
 	* src/sulogin.c: break long line.
 
 	* lib/pwauth.c:
-	added #include <unistd.h> and remove localy defined getpass() prototype.
+	added #include <unistd.h> and remove locally defined getpass() prototype.
 
 2006-05-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13518,7 +13518,7 @@
 
 	* src/login.c, NEWS:
 	Fixed handle -f option: now it works correctly without specify "-h
-	<host>" if open login session localy is required (thanks for help
+	<host>" if open login session locally is required (thanks for help
 	investigate bug for Krzysztof Kotlenga).
 
 	* po/es.po: Updated (by Ruben Porras <nahoo82@telefonica.net>).

@@ -1260,7 +1260,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
   better for send directly via email for each users as message with account
   status (for example as message with warning about account/password expiration),
 - login: fixed handle -f option: now it works correctly without specify "-h
-  <host>" if open login session localy is required (thanks for help
+  <host>" if open login session locally is required (thanks for help
   investigate bug for Krzysztof Kotlenga),
 - userdel: when removing a user with userdel, userdel was always exits with 1 (fixed).
   Based on http://bugs.gentoo.org/show_bug.cgi?id=66687,

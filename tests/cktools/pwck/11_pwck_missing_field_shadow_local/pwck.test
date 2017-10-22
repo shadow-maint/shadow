@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "copy passwd and shadow localy..."
+echo -n "copy passwd and shadow locally..."
 cp /etc/passwd /etc/shadow tmp/
 echo "OK"
 
