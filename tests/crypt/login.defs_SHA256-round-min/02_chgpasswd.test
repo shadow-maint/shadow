@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
-log_start "$0" "Changea group password"
+log_start "$0" "Change group password"
 
 save_config
 
