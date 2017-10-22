@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "Use cppw with a nonexistant file (cppw data/passwd)..."
+echo -n "Use cppw with a nonexistent file (cppw data/passwd)..."
 cppw data/passwd 2>tmp/usage.out && exit 1 || {
 	status=$?
 }
