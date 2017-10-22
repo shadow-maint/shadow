@@ -7776,7 +7776,7 @@
 	* src/lastlog.c: Remove statbuf, not used.
 	* src/lastlog.c: Fix types, cast umin and umax to uid_t.
 	* src/lastlog.c: (option -u) user needs to be a signed long, not
-	uid_t (to accept rangees like -<uid>
+	uid_t (to accept ranges like -<uid>
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
