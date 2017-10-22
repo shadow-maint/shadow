@@ -13828,7 +13828,7 @@
 
 	* man/it/Makefile.am: Removed EXTRA_DIST (not neccessary).
 
-	* man/es/Makefile.am: Removed groups.1 (doen't exist es groups(1)).
+	* man/es/Makefile.am: Removed groups.1 (doesn't exist es groups(1)).
 
 	* man/de/Makefile.am (man_MANS): added login.1.
 
