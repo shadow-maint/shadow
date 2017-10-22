@@ -14251,7 +14251,7 @@
 
 	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, NEWS:
 	resolve many fuzzy translations also all this which may cause problems on
-	displaing long uid/gid.
+	displaying long uid/gid.
 
 	* src/id.c, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po:
 	drop translate some messages in id output (about {,e}{u,g}id).

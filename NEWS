@@ -1372,7 +1372,7 @@ shadow-4.0.2 => shadow-4.0.3						 13-03-2002
 shadow-4.0.1 => shadow-4.0.2						 17-02-2002
 
 - resolve many fuzzy translations also all this which may cause problems on
-  displaing long uid/gid,
+  displaying long uid/gid,
 - allow use "$" on ending in created by useradd usermname accounts for allow
   create machine accounts for samba (thanks to Jerome Borsboom
   <borsboom@tch.fgg.eur.nl> for point this problem in 4.0.1),
