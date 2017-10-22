@@ -13026,7 +13026,7 @@
 
 2005-01-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* libmisc/rlogin.c: remove ruserok() prototyle and #include <unistd.h>.
+	* libmisc/rlogin.c: remove ruserok() prototype and #include <unistd.h>.
 
 	* lib/getdef.c: remove strtol() prototype (it comes with <stdlib.h>).
 
