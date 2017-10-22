@@ -14337,13 +14337,13 @@
 	cleanups.
 
 	* src/Attic/dpasswd.c, src/Attic/mkpasswd.c, src/expiry.c, src/grpck.c, src/id.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/chfn.c, src/chsh.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, man/Attic/useradd.8:
-	standarize usage messages syntax.
+	standardize usage messages syntax.
 
 	* man/pl/useradd.8, man/pl/usermod.8, man/pl/vipw.8, man/pl/userdel.8:
 	removed duplicated man page text.
 
 	* src/chage.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po:
-	standarize usage messages syntax.
+	standardize usage messages syntax.
 
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
