@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
-log_start "$0" "chage interractive session checks field validity"
+log_start "$0" "chage interactive session checks field validity"
 
 save_config
 
@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "chage interractive session as myuser1..."
+echo -n "chage interactive session as myuser1..."
 ./run.exp
 echo "OK"
 

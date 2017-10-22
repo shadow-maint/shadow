@@ -44,7 +44,7 @@ do
 	cp data/$i /etc
 done
 
-echo "interractive test"
+echo "interactive test"
 ./run.exp $(date "+%Y-%m-%d")
 
 echo "OK"

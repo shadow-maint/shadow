@@ -185,12 +185,12 @@ chage -d 2030-03-02 -E 1979-11-24 -I 10 -m 11 -M 12 --warndays 4 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:21975:11:12:4:10:3614:' ] || exit 1
 
-echo "interractive test"
+echo "interactive test"
 ./run1.exp
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:12990:13:14:9:35:15548:' ] || exit 1
 
-echo "interractive test (default)"
+echo "interactive test (default)"
 ./run2.exp
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:12990:13:14:9:35:15548:' ] || exit 1
