@@ -9788,7 +9788,7 @@
 	* man/.cvsignore: shadow-man-pages.pot added.
 
 	* man/Makefile.am:
-	added temporary gen-xmls targed and dependencies beetwen .pot and .po files.
+	added temporary gen-xmls targed and dependencies between .pot and .po files.
 
 	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't neccessary).
 
