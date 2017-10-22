@@ -14869,7 +14869,7 @@
 	* old/Attic/pwconv-old.8, old/Attic/pwconv.8, old/Attic/pwunconv-old.8, old/Attic/pwunconv.8, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/pwauth.8, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/porttime.5, man/pl/pwck.8, man/pl/shadow.3, man/pl/su.1, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/Attic/dpasswd.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, debian/Attic/login.copyright, debian/Attic/passwd.copyright, debian/Attic/secure-su.copyright, doc/Attic/ANNOUNCE, doc/Attic/LSM, doc/Attic/README, doc/Attic/README.linux:
 	Julianne F. Haugh new contact address.
 
-	* NEWS: - summary chanfes for 20001016.
+	* NEWS: - summary changes for 20001016.
 
 	* doc/Attic/README.shadow-paper, doc/Makefile.am:
 	- removed outdated README.shadow-paper.
