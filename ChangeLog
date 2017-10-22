@@ -7706,7 +7706,7 @@
 	* lib/gshadow.c: The prototypes of fgetsx() and fputsx() are
 	already defined in prototypes.h. Remove the declaration of these
 	functions.
-	* lib/gshdow.c: list() is an external function. DO not shadow it
+	* lib/gshadow.c: list() is an external function. DO not shadow it
 	with a static function. The internal list() was renamed
 	build_list().
 	* lib/commonio.c: stat shadows another stat variable. Remove this
@@ -12223,7 +12223,7 @@
 	place definition of struct spwd in <programlisting></programlisting>.
 
 	* NEWS, src/userdel.c:
-	userdel now deletes user groups from /etc/gshdow as well as /etc/group.
+	userdel now deletes user groups from /etc/gshadow as well as /etc/group.
 	Fix by Nicolas François <nicolas.francois@centraliens.net>.
 	http://bugs.debian.org/99442
 

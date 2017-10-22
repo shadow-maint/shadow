@@ -1111,7 +1111,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
 
 *** general:
 - mkpasswd: removed,
-- userdel: now deletes user groups from /etc/gshdow as well as /etc/group.
+- userdel: now deletes user groups from /etc/gshadow as well as /etc/group.
   Fix by Nicolas François <nicolas.francois@centraliens.net>.
   http://bugs.debian.org/99442
 - usermod: when relocating a user's home directory, don't fail and remove the new
