@@ -701,7 +701,7 @@ shadow-4.0.17 -> shadow-4.0.18						01-08-2006
 - groupadd, groupmod, useradd, usermod: fixed UID/GID overflow (fixed
   http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920)
 - passwd, useradd, usermod: fixed inactive/mindays/warndays/maxdays overflow
-  (simillar to RH#198920),
+  (similar to RH#198920),
 - groupmems: rewritten for use PAM and getopt_long() and now it is enabled
   for build and install (patch by George Kraft <gk4@swbell.net>),
 - S/Key: removed assign getpass() to libshadow_getpass() on autoconf level
