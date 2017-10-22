@@ -11361,7 +11361,7 @@
 	So "ident /usr/bin/passwd" will show again some useable informations.
 
 	* man/Makefile.am: added support for regenerate roff files from XML.
-	Added depeing shadow-man-pages.pot on $(man_XMANS).
+	Added dependency shadow-man-pages.pot on $(man_XMANS).
 
 2005-08-30  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
