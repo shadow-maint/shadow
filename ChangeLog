@@ -14619,7 +14619,7 @@
 	added uk translation (Roman Festchook <roma@polesye.net>).
 
 	* src/logoutd.c (mani):
-	s/ut->ut_libe/ut->ut_user/ on prepare strin with user name for syslog
+	s/ut->ut_libe/ut->ut_user/ on prepare string with user name for syslog
 	line (reported by Roman Festchook <roma@polesye.net>).
 
 2001-07-27  Tomasz Kłoczko  <kloczek@pld.org.pl>
