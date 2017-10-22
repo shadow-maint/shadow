@@ -14445,7 +14445,7 @@
 
 2001-11-14  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
 
-	* configure.in: - added hu directory antry
+	* configure.in: - added hu directory entry
 
 	* man/Makefile.am: - groups.1 moved to EXTRA_DIST
 	- added hu directory entry
