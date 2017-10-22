@@ -14033,7 +14033,7 @@
 	* man/Makefile.am: Removed getspnam.3 from man_MANS (dos not exist).
 
 	* po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po:
-	Fixes after filtering gettext 0.11.5 (missing headers elements, inforrect
+	Fixes after filtering gettext 0.11.5 (missing headers elements, incorrect
 	format strings).
 
 2003-04-21  Tomasz Kłoczko  <kloczek@pld.org.pl>
