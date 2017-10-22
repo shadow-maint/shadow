@@ -11444,7 +11444,7 @@
 	command (fixes by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* NEWS, libmisc/chkname.c, man/Attic/groupadd.8, man/Attic/useradd.8, man/groupadd.8.xml, man/useradd.8.xml:
-	fix regular expression describing alloved login/group names (pointed
+	fix regular expression describing allowed login/group names (pointed
 	by Nicolas François <nicolas.francois@centraliens.net>)
 	(correct is [a-z_][a-z0-9_-]*[$]).
 
