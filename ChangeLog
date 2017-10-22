@@ -10368,7 +10368,7 @@
 	  tries exceeded,
 	- always prints the number of tries in the syslog entry.
 	- add special handling for PAM_ABORT
-	- add an entry to failog, as when USE_PAM is not defined. (#53164)
+	- add an entry to faillog, as when USE_PAM is not defined. (#53164)
 	- changed pam_end to PAM_END. This is certainly was a mistake.
 	  PAM_END is pam_close_seesion + pam_end. Here, the session is still not
 	  open, we don't have to close it.
