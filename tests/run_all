@@ -485,7 +485,7 @@ run_test ./grouptools/groupmod/37_groupmod_invalid_option/groupmod.test
 run_test ./log/faillog/01_faillog_no_faillog/faillog.test
 run_test ./log/faillog/02_faillog_usage/faillog.test
 run_test ./log/faillog/03_faillog_format/faillog.test
-run_test ./log/faillog/04_faillog_mulitple/faillog.test
+run_test ./log/faillog/04_faillog_multiple/faillog.test
 run_test ./log/faillog/05_faillog-u_ID/faillog.test
 run_test ./log/faillog/06_faillog-u_name/faillog.test
 run_test ./log/faillog/07_faillog-u_ID_invalid/faillog.test
@@ -543,7 +543,7 @@ run_test ./log/faillog/58_faillog-l_no_failcount/faillog.test
 run_test ./log/lastlog/01_lastlog_no_lastlog/lastlog.test
 run_test ./log/lastlog/02_lastlog_usage/lastlog.test
 run_test ./log/lastlog/03_lastlog_format/lastlog.test
-run_test ./log/lastlog/04_lastlog_mulitple/lastlog.test
+run_test ./log/lastlog/04_lastlog_multiple/lastlog.test
 run_test ./log/lastlog/05_lastlog-u_ID/lastlog.test
 run_test ./log/lastlog/06_lastlog-u_name/lastlog.test
 run_test ./log/lastlog/07_lastlog-u_ID_invalid/lastlog.test
