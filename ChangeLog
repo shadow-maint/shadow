@@ -11798,7 +11798,7 @@
 2005-07-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, configure.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po:
-	4.0.11.1 will be released tmorrow (21-07-2005).
+	4.0.11.1 will be released tomorrow (21-07-2005).
 
 	* configure.in, NEWS:
 	fixed configure.in: now is possible build shadow with enabled/disabled shadow group
