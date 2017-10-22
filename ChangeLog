@@ -14245,7 +14245,7 @@
 	* man/pl/Attic/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/Attic/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/Attic/adduser.8, man/Attic/grpconv.8, man/Attic/grpunconv.8, man/Attic/pwunconv.8, man/Attic/sg.1, man/Attic/vigr.8:
 	placa ".so man<level>/<man_page>.<level>" in roff .so includes (seems some
 	man page viewers do not handles correctly man documents without subdirectory
-	name in roff .so incude).
+	name in roff .so include).
 
 2002-01-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
