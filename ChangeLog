@@ -10322,7 +10322,7 @@
 	patch Nicolas François <nicolas.francois@centraliens.net>)
 
 	* po/ro.po:
-	updated (commited http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347755).
+	updated (committed http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347755).
 
 	* NEWS, po/ca.po: updated (by Jordi Mallach <jordi@debian.org>).
 
@@ -12454,7 +12454,7 @@
 	* po/nl.po: kill fuzzy.
 
 	* man/Attic/chage.1:
-	reverte last commit (by mistake commited experimental version generated from XML file).
+	reverte last commit (by mistake committed experimental version generated from XML file).
 
 	* NEWS, po/nl.po:
 	updated for 4.0.8 (by "cobaco (aka Bart Cornelis)" <cobaco@linux.be>).
@@ -12763,7 +12763,7 @@
 
 	* man/Attic/gpasswd.1, man/Attic/newgrp.1:
 	fixes by Nicolas Nicolas François <nicolas.francois@centraliens.net> (not all
-	commited).
+	committed).
 
 2005-04-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
