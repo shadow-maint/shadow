@@ -654,9 +654,9 @@ shadow-4.0.18.2 -> shadow-4.1.0						09-12-2007
 - Use MD5_CRYPT_ENAB, ENCRYPT_METHOD, SHA_CRYPT_MIN_ROUNDS, and
   SHA_CRYPT_MAX_ROUNDS to define the default encryption algorithm for the
   passwords.
-- chpaswd, chgpasswd, newusers: New options -c/--crypt-method and
+- chpasswd, chgpasswd, newusers: New options -c/--crypt-method and
   -s/--sha-rounds to supersede the system default encryption algorithm.
-- chpaswd, chgpasswd, newusers: DES is no more the default algorithm. They
+- chpasswd, chgpasswd, newusers: DES is no more the default algorithm. They
   will respect the system default configured in /etc/login.defs
 
 *** documentation:
