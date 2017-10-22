@@ -13625,7 +13625,7 @@
 2003-12-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am, libmisc/Makefile.am, src/Makefile.am:
-	Removed -I$(top_srcdir) from INCLUDES (isn't neccessary becaus this is in
+	Removed -I$(top_srcdir) from INCLUDES (isn't neccessary because this is in
 	DEFAULT_INCLUDES) - slightly shorter compile output.
 
 	* Makefile.am, configure.in:
