@@ -14646,7 +14646,7 @@
 
 	* configure.in:
 	added checking for libpam_misc if libpam found and if libpam_misc is available
-	add them to $LIBPAM. Othervise exit fron autoconf script with error message.
+	add them to $LIBPAM. Otherwise exit fron autoconf script with error message.
 	Now shadow compiles if pam support is enabled.
 
 2001-06-28  Marek Michałkiewicz  <marekm@pld.org.pl>
@@ -14840,7 +14840,7 @@
 	added i18n support for src/groupmems.c.
 
 	* src/useradd.c:
-	* (set_defaults): use mkstemp() if available. Othereise use mktemp().
+	* (set_defaults): use mkstemp() if available. Otherwise use mktemp().
 
 	* configure.in: * added checking for mkstemp().
 
