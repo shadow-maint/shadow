@@ -1931,7 +1931,7 @@
 	* libmisc/console.c, libmisc/motd.c, libmisc/setupenv.c,
 	libmisc/sulog.c, libmisc/hushed.c, libmisc/failure.c,
 	libmisc/loginprompt.c, libmisc/ttytype.c, libmisc/obscure.c,
-	libmisc/pam_pass_non_interractive.c, src/userdel.c, src/login.c,
+	libmisc/pam_pass_non_interactive.c, src/userdel.c, src/login.c,
 	lib/commonio.c, lib/commonio.h, libmisc/setugid.c,
 	libmisc/setupenv.c: Fix some const issues.
 	* libmisc/motd.c: Avoid multi-statements lines.
@@ -3142,16 +3142,16 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/non_interactive_pam_conv.c,
-	libmisc/pam_pass_non_interractive.c, libmisc/Makefile.am: Renamed.
-	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
+	libmisc/pam_pass_non_interactive.c, libmisc/Makefile.am: Renamed.
+	* libmisc/pam_pass_non_interactive.c, lib/prototypes.h:
 	non_interactive_password and non_interactive_pam_conv do not need
 	to be externally visible.
-	* libmisc/pam_pass_non_interractive.c: Added declaration of
+	* libmisc/pam_pass_non_interactive.c: Added declaration of
 	ni_conv.
-	* libmisc/pam_pass_non_interractive.c: Only compile ifdef USE_PAM.
-	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
-	Added do_pam_passwd_non_interractive().
-	* src/chpasswd.c: Use do_pam_passwd_non_interractive().
+	* libmisc/pam_pass_non_interactive.c: Only compile ifdef USE_PAM.
+	* libmisc/pam_pass_non_interactive.c, lib/prototypes.h:
+	Added do_pam_passwd_non_interactive().
+	* src/chpasswd.c: Use do_pam_passwd_non_interactive().
 
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -134,7 +134,7 @@ failed_conversation:
  *
  * Return 0 on success, 1 on failure.
  */
-int do_pam_passwd_non_interractive (const char *pam_service,
+int do_pam_passwd_non_interactive (const char *pam_service,
                                     const char *username,
                                     const char* password)
 {

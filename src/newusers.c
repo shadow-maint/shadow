@@ -1237,7 +1237,7 @@ int main (int argc, char **argv)
 	unsigned int i;
 	/* Now update the passwords using PAM */
 	for (i = 0; i < nusers; i++) {
-		if (do_pam_passwd_non_interractive ("newusers", usernames[i], passwords[i]) != 0) {
+		if (do_pam_passwd_non_interactive ("newusers", usernames[i], passwords[i]) != 0) {
 			fprintf (stderr,
 			         _("%s: (line %d, user %s) password not changed\n"),
 			         Prog, lines[i], usernames[i]);

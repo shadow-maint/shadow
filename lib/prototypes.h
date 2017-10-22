@@ -254,9 +254,9 @@ extern void motd (void);
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
-/* pam_pass_non_interractive.c */
+/* pam_pass_non_interactive.c */
 #ifdef USE_PAM
-extern int do_pam_passwd_non_interractive (const char *pam_service,
+extern int do_pam_passwd_non_interactive (const char *pam_service,
                                            const char *username,
                                            const char* password);
 #endif				/* USE_PAM */
