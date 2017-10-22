@@ -12182,7 +12182,7 @@
 	* man/newusers.8.xml: cleanups.
 
 	* man/gshadow.5.xml:
-	use <itemizedlist mark='bullet'> for gshadow fields desscription.
+	use <itemizedlist mark='bullet'> for gshadow fields description.
 
 	* man/shadow.5.xml: cleanups.
 
