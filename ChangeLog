@@ -12722,7 +12722,7 @@
 	* src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/passwd.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, NEWS, lib/Attic/grdbm.c, lib/Attic/gsdbm.c, lib/Attic/pwdbm.c, lib/Attic/spdbm.c, lib/Makefile.am, lib/gshadow.c, lib/shadow.c:
 	next round of cleanups: removed NDBM code (unused).
 
-	* src/login.c: consilidate some !USE_PAM lines.
+	* src/login.c: consolidate some !USE_PAM lines.
 
 	* src/login.c, src/login_nopam.c:
 	move bad_time_notify() and check_nologin() to src/login_nopam.c.
