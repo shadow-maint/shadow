@@ -9138,7 +9138,7 @@
 
 	* NEWS, man/groupadd.8.xml, man/groupmod.8.xml, man/login.1.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml:
 	groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
-	mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>).
+	mistakes and other corrections (by Schulenberg <bensberg@justemail.net>).
 
 2007-01-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
