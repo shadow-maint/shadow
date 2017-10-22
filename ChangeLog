@@ -10788,7 +10788,7 @@
 	s/--delete /--delete/
 
 	* NEWS, po/ru.po:
-	updated ru translatios for 4.0.14 (by Yuri Kozlov <kozlov.y@gmail.com>).
+	updated ru translations for 4.0.14 (by Yuri Kozlov <kozlov.y@gmail.com>).
 
 	* po/eu.po: finish update for 4.0.14 (by pi <pi@beobide.net>).
 
