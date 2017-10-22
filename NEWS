@@ -1469,7 +1469,7 @@ shadow-20000902 => shadow-20001012
   groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common 
   "shadow" PAM config file) - this modificaytions mainly based on
   modifications prepared by Janek Rękojarski <baggins@pld.org.pl>,
-- many small fixes and improvments in automake (mow "make dist"
+- many small fixes and improvements in automake (mow "make dist"
   works correctly),
 - added cs translation (Jiri Pavlovsky <Jiri.Pavlovsky@ff.cuni.cz>).
 
