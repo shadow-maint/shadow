@@ -221,7 +221,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 
         /*
          * Search loop above did not produce any result. Let's rerun it,
-         * but this time try to matcha actual UIDs. The first entry that
+         * but this time try to match actual UIDs. The first entry that
          * matches is considered a success.
          * (It may be specified as literal UID or as another username which
          * has the same UID as the username we are looking for.)
