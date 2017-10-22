@@ -555,7 +555,7 @@
 	  immediate child; this is needed now that su no
 	  longer starts a controlling terminal when not running an
 	  interactive shell (closes: Debian#713979)
-	  Thansk to Colin Watson for the patch.
+	  Thanks to Colin Watson for the patch.
 
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -7148,7 +7148,7 @@
 
 	* src/newgrp.c: Add missing end of line in message.
 	* src/newgrp.c: Add audit events for the authentication
-	(AUDIT_GRP_AUTH). Thansk to Peter Vrabec.
+	(AUDIT_GRP_AUTH). Thanks to Peter Vrabec.
 
 2008-03-05  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -14059,7 +14059,7 @@
 2003-01-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/ja/shadow.3, man/pl/shadow.3, man/Attic/shadow.3:
-	sync spwd structure declaration with current glibc declaration (tahnks for
+	sync spwd structure declaration with current glibc declaration (thanks for
 	point this bug to Michael Kerrisk <michael.kerrisk@gmx.net>).
 
 	* man/pl/faillog.5: s/konsolę/terminal/
