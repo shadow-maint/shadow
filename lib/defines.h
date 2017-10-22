@@ -24,7 +24,7 @@ typedef unsigned char _Bool;
 
 /* Take care of NLS matters.  */
 #ifdef S_SPLINT_S
-extern char *setlocale(int categorie, const char *locale);
+extern char *setlocale(int categories, const char *locale);
 # define LC_ALL		(6)
 extern char * bindtextdomain (const char * domainname, const char * dirname);
 extern char * textdomain (const char * domainname);
