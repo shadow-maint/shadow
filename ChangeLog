@@ -9706,7 +9706,7 @@
 
 	* man/Makefile.am:
 	hack for generate translated xml files with lang="<lang> in <refentry> tag.
-	Now is possible testing correctnes of XSLT sheets languages definition.
+	Now is possible testing correctness of XSLT sheets languages definition.
 
 2006-06-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
