@@ -14158,7 +14158,7 @@
 
 	* libmisc/Makefile.am:
 	remove suauth.c from libmisc_la_SOURCES (varialbles and functions from
-	this file are usesd only in su).
+	this file are used only in su).
 
 	* libmisc/Attic/suauth.c, src/suauth.c: move suauth.c o src/.
 
