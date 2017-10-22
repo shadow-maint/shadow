@@ -13080,7 +13080,7 @@
 
 	* po/es.po: Updates from Ruben Porras <nahoo@inicia.es>.
 
-	* lib/defines.h: - remove usong shadow_.h.
+	* lib/defines.h: - remove using shadow_.h.
 
 	* po/pl.po: kill fuzzy.
 
@@ -14752,7 +14752,7 @@
 	better). Also for all is now used libtool in proper way.
 
 	* configure.in:
-	- added useing AM_DISABLE_SHARED, AM_ENABLE_STATIC for disable compile shared
+	- added using AM_DISABLE_SHARED, AM_ENABLE_STATIC for disable compile shared
 	  libraries and enable static,
 	- some cosmetics.
 
