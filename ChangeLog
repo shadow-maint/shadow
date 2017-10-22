@@ -9928,7 +9928,7 @@
 	.pot files in dist tar ball.
 
 	* src/chgpasswd.c:
-	reverte struct group newgr declaration but use them only conditionaly (#ifndef SHADOWGRP).
+	reverte struct group newgr declaration but use them only conditionally (#ifndef SHADOWGRP).
 
 2006-05-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10708,7 +10708,7 @@
 	* NEWS: set release day for 4.0.14 to 19-12-2005.
 
 	* src/login.c:
-	removed #include "libaudit.h" (it is conditionaly included in "defines.h").
+	removed #include "libaudit.h" (it is conditionally included in "defines.h").
 
 	* src/su.c:
 	replaced "shell" by "shellstr". "shell" is also the name of a function.
@@ -11936,7 +11936,7 @@
 2005-07-08  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/newgrp.c:
-	indent source code and use fix for handle splitted groups unconditionaly.
+	indent source code and use fix for handle splitted groups unconditionally.
 
 	* lib/nscd.c: indent.
 
@@ -13551,7 +13551,7 @@
 2004-03-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* libmisc/age.c:
-	Use endsgent() conditionaly depending on SHADOWGRP (fix submited by Gabor Z.
+	Use endsgent() conditionally depending on SHADOWGRP (fix submited by Gabor Z.
 	Papp <gzp@papp.hu>).
 
 	* po/LINGUAS, po/fi.po, NEWS:
@@ -14658,8 +14658,8 @@
 	* configure.in: remove intl/po2tbl.sed from AC_OUTPUT().
 
 	* configure.in:
-	removed add md5.o md5crypt.o conditionaly to $LIBOBJS (this is obsoleted).
-	In current version ndling md5 functionality is included conditionaly
+	removed add md5.o md5crypt.o conditionally to $LIBOBJS (this is obsoleted).
+	In current version ndling md5 functionality is included conditionally
 	inside md5.c and md5crypt.c source files.
 
 	* lib/Attic/md5.c: added comments for #endif.
