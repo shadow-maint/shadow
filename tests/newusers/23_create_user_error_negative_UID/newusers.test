@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
-log_start "$0" "newusers fails with negativ UID"
+log_start "$0" "newusers fails with negative UID"
 
 save_config
 
