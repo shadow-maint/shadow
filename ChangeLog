@@ -12324,7 +12324,7 @@
 	* NEWS, po/ca.po: updated (by Guillem Jover <guillem@debian.org>).
 
 	* man/de/passwd.1:
-	added small comment with marker usefull for translators.
+	added small comment with marker useful for translators.
 
 2005-05-25  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
