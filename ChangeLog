@@ -4705,7 +4705,7 @@
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/USERGROUPS_ENAB.xml: Fix typo: new <para> tag
-	before the previous one is closed. This caused a missng
+	before the previous one is closed. This caused a missing
 	explanation for USERGROUPS_ENAB.
 
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>

@@ -1307,7 +1307,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
 
 shadow-4.0.4 => shadow-4.0.4.1						14-01-2004
 - bug fixes in automake files for generate correct tar ball on "make dist":
-  added mising "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
+  added missing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
 shadow-4.0.3 => shadow-4.0.4						14-01-2004	
 
