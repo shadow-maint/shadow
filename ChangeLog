@@ -13210,14 +13210,14 @@
 	can be used by user without read access to lastlog file.
 
 	* src/chpasswd.c:
-	s/display this help and exit/display this help message and exit/ in ussage()
+	s/display this help and exit/display this help message and exit/ in usage()
 	output.
 
 	* po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po:
 	"make update-po".
 
 	* src/chpasswd.c:
-	Added handle -h|--help option. Improved and updated ussage() output.
+	Added handle -h|--help option. Improved and updated usage() output.
 
 2004-12-09  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14832,7 +14832,7 @@
 	* src/lastlog.c (main):
 	merge src_lastlogin.c patch from debian with use getopt_long()
 	instead getopt() for add handling --help, --user, --time switches and
-	display useage message on -h, --help and as default action.
+	display usage message on -h, --help and as default action.
 
 2000-11-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
