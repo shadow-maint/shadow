@@ -9924,7 +9924,7 @@
 	* man/pl/pl.po: initial version.
 
 	* man/Makefile.am:
-	implemet update-po target and dist, dist-check hooks for put .po and
+	implement update-po target and dist, dist-check hooks for put .po and
 	.pot files in dist tar ball.
 
 	* src/chgpasswd.c:
@@ -14478,7 +14478,7 @@
 	(Thorsten Kukuk <kukuk@suse.de>).
 
 	* libmisc/Attic/nscd.c, libmisc/Makefile.am, lib/commonio.c:
-	implemetn better reloading the nscd cache (per NSS map)
+	implement better reloading the nscd cache (per NSS map)
 	by Thorsten Kukuk <kukuk@suse.de>
 
 	* src/login.c, libmisc/setupenv.c:
