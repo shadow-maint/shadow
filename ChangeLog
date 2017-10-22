@@ -8907,7 +8907,7 @@
 	glibc socket to flush the nscd tables. This comes from the RedHat
 	patch shadow-4.0.16-nscd.c.
 	* lib/commonio.c: Forbid inheritance of the passwd and group files
-	to the spawed processes (like nscd). This comes from the RedHat
+	to the spawned processes (like nscd). This comes from the RedHat
 	patch shadow-4.0.17-notInheritFd.patch.
 	* lib/nscd.h: Update header.
 
