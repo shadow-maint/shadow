@@ -1136,7 +1136,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
 - login: fixed username on succesful login (was using the normal username,
   when it should have used pam_user) http://bugs.debian.org/47819
 - remove using SHADOWPWD #define so now shadow is always built with shadow
-  passwowd support,
+  password support,
 - chage: rewrited for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
 *** documentation:
@@ -1320,7 +1320,7 @@ shadow-4.0.3 => shadow-4.0.4						14-01-2004
   per service flushing method instead HUPing nscd process),
 - removed old AUTH_METHODS dependent code,
 - chage: now all code depend on SHADOWPWD. If shadow will not be configured
-  on autoconf level for using shadow possword chage is olny stub which
+  on autoconf level for using shadow password chage is olny stub which
   informs "chage not configured for shadow password support."
 - dpasswd: removed,
 - login: remove handle login.defs::DIALUPS_CHECK_ENAB code,
