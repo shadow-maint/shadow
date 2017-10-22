@@ -148,7 +148,7 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 		pos += written;
 	}
 
-	/* Write the mapping to the maping file */
+	/* Write the mapping to the mapping file */
 	fd = openat(proc_dir_fd, map_file, O_WRONLY);
 	if (fd < 0) {
 		fprintf(stderr, _("%s: open of %s failed: %s\n"),
