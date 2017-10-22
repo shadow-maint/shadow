@@ -9469,7 +9469,7 @@
 
 	* src/su.c (main):
 	move **envcp declaration to #ifdef USE_PAM (fixed warning about unused
-	variable when shadow is built with PAM didabled).
+	variable when shadow is built with PAM disabled).
 
 	* man/pl/pl.po, NEWS, man/pl/chage.1: pl chage(1) translation finished.
 
