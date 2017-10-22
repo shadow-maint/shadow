@@ -13975,7 +13975,7 @@
 	Updated ja man pages and added expiry(1).
 
 	* man/hu/groups.1, man/hu/login.1:
-	Remove info about $HOME/.profile from FILES section (this does not depends
+	Remove info about $HOME/.profile from FILES section (this does not depend
 	stricte on shadow).
 
 	* configure.in, man/Makefile.am, man/es/Makefile.am:
