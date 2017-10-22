@@ -9536,7 +9536,7 @@
 	be removed; for example when it is /dev/null (fixed http://bugs.gentoo.org/139148).
 
 	* src/login.c, src/logoutd.c, src/userdel.c, libmisc/limits.c:
-	remove USER_PROCESS conditionsi (code simplifications).
+	remove USER_PROCESS conditions (code simplifications).
 
 2006-07-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
