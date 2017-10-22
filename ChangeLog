@@ -13475,7 +13475,7 @@
 	Partially based on tmp OWL patch by Solar Designer <solar@openwall.com>.
 
 	* NEWS, libmisc/pwdcheck.c:
-	Fixed securirty bug which allow unauthorized account properties modification.
+	Fixed security bug which allow unauthorized account properties modification.
 	Affected tools: chfn and chsh.
 	Bug was discovered by Martin Schulze <joey@infodrom.org>.
 

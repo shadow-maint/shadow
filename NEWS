@@ -1291,7 +1291,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
   shadow-4.0.4.1-owl-check-reads.diff:
     Add checking for read errors in commonio and vipw/vigr (not doing so could
     result in data loss when the records are written back),
-- fixed securirty bug in libmisc/pwdcheck.c which allow unauthorized
+- fixed security bug in libmisc/pwdcheck.c which allow unauthorized
   account properties modification.
   Affected tools: chfn and chsh.
   Bug was discovered by Martin Schulze <joey@infodrom.org>.
