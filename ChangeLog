@@ -13616,7 +13616,7 @@
 	Added using AM_MAINTAINER_MODE. AC_INIT without parameters.
 
 	* Attic/acconfig.h, configure.in:
-	Cleanups on autoheadres level: use AC_DEFINE(VAR, VAL, [Comment]) for
+	Cleanups on autoheaders level: use AC_DEFINE(VAR, VAL, [Comment]) for
 	USE_PAM, HAVE_TCFS and TCFS_GDBM_SUPPORT.
 
 	* src/newusers.c, src/useradd.c, Attic/acconfig.h, autogen.sh, lib/Attic/pwpack.c, NEWS:
