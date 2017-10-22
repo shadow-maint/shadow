@@ -2,7 +2,7 @@ Hello Marek,
 
 I have created a diffile against the 980403 release that adds
 functionality to newusers for automatic handling of users with only
-anonomous ftp login (using the guestgroup feature in ftpaccess, which
+anonymous ftp login (using the guestgroup feature in ftpaccess, which
 means that the users home directory looks like '/home/user/./'). It also
 adds a commandline argument to specify an initial directory structure
 for such users, with a tarball normally containing the bin,lib,etc
