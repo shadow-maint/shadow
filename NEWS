@@ -793,7 +793,7 @@ shadow-4.0.15 -> shadow-4.0.16						05-06-2006
 - updated ru login.defs(5), passwd(1), userdel(8), usermod(8) man pages,
 - pw_auth(3) man page removed (outdated),
 - install limits(5), login.access(5) and porttime(5) man pages only when
-  shadow is builded with PAM support disabled,
+  shadow is built with PAM support disabled,
 - passwd(1): better document how password strength is checked
   (fixed http://bugs.debian.org/115380),
 - usermod(8): added missing -a option description
@@ -1124,7 +1124,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   http://bugs.debian.org/213592
 - removed not used now libmisc/setup.c,
 - login: use also UTMPX API instead UTMP on failure (login was affected for this
-  when shadow was builded without PAM support)
+  when shadow was built without PAM support)
   patch by Nicolas François <nicolas.francois@centraliens.net>
 - login: the PAM session needs to be closed as root, thus before change_uid()
   http://bugs.debian.org/53570 http://bugs.debian.org/195048 http://bugs.debian.org/211884
@@ -1135,7 +1135,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   http://bugs.debian.org/48002
 - login: fixed username on succesful login (was using the normal username,
   when it should have used pam_user) http://bugs.debian.org/47819
-- remove using SHADOWPWD #define so now shadow is always builded with shadow
+- remove using SHADOWPWD #define so now shadow is always built with shadow
   passwowd support,
 - chage: rewrited for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
@@ -1274,7 +1274,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
   makes httpd Option SymlinkIfOwnerMatch break for default weg pages
   including symlinks placed into /etc/skel/public_html for example.
   http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=66819
-- su: add pam_open_session() support. If builded without PAM support
+- su: add pam_open_session() support. If built without PAM support
   propagate $DISPLAY and $XAUTHORITY enviroment variables.
   Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 - applied 036_pam_access_with_preauth.patch Debian patch submited by Bjorn
