@@ -181,7 +181,7 @@ static const bool range_exists(struct commonio_db *db, const char *owner)
  *             subuid @val.
  *
  * @db: database to query
- * @owner: owning uid being queuried
+ * @owner: owning uid being queried
  * @val: subuid being searched for.
  *
  * Returns a range of subuids belonging to @owner and including the subuid
