@@ -9366,7 +9366,7 @@
 	updated for 4.0.18 (by Mehmet TURKER <mturker@innova.com.tr>).
 
 	* configure.in, man/Makefile.am, man/sv/Makefile.am:
-	fixes for "make {dist|distchec}" and sv man pages.
+	fixes for "make {dist|distcheck}" and sv man pages.
 
 	* man/sv/Attic/grupper.1, man/sv/groupmems.8, man/sv/groupmod.8, man/sv/grpck.8, man/sv/grpconv.8, man/sv/grpunconv.8, man/sv/gshadow.5, man/sv/lastlog.8, man/sv/limits.5, man/sv/login.1, man/sv/login.access.5, man/sv/login.defs.5, man/sv/logoutd.8, man/sv/newgrp.1, man/sv/newusers.8, man/sv/nologin.8, man/sv/passwd.1, man/sv/passwd.5, man/sv/porttime.5, man/sv/pwck.8, man/sv/pwconv.8, man/sv/pwunconv.8, man/sv/sg.1, man/sv/shadow.3, man/sv/shadow.5, man/sv/su.1, man/sv/suauth.5, man/sv/sv.po, man/sv/useradd.8, man/sv/userdel.8, man/sv/usermod.8, man/sv/vigr.8, man/sv/vipw.8, NEWS, man/Makefile.am, man/sv/Makefile.am, man/sv/chage.1, man/sv/chfn.1, man/sv/chgpasswd.8, man/sv/chpasswd.8, man/sv/chsh.1, man/sv/expiry.1, man/sv/faillog.5, man/sv/faillog.8, man/sv/getspnam.3, man/sv/gpasswd.1, man/sv/groupadd.8, man/sv/groupdel.8:
 	full sv man pages set added (by Daniel Nylander <info@danielnylander.se>).
