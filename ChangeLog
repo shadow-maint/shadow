@@ -9415,7 +9415,7 @@
 
 	* man/su.1.xml: fixes in <refsynopsisdiv>.
 
-	* src/groupmems.c: indent soutrce code.
+	* src/groupmems.c: indent source code.
 
 	* src/groupmems.c: use shadow Copyright.
 
