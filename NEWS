@@ -1460,7 +1460,7 @@ shadow-20001012 -> shadow-20001016:
 
 shadow-20000902 => shadow-20001012
 
-- removed /redhat directory with obsoleted files (partialy rewrited spec
+- removed /redhat directory with obsoleted files (partially rewrited spec
   file is now in root directory),
 - applied shadow-19990827-group.patch patch from RH wich prevents adduser
   overwrite previously existing groups in adduser,

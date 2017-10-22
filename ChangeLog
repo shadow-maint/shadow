@@ -10866,7 +10866,7 @@
 
 	* man/ru/Makefile.am: typo.
 
-	* po/pl.po: partialy updated.
+	* po/pl.po: partially updated.
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	run "make update-po".
@@ -11011,7 +11011,7 @@
 	Simplifications: move all per shadow tool declared struct pam_conv conv
 	from src/*c to lib/pam_defs.h. #include "pam_defs.h" instead <security/pam_appl.h>
 	and <security/pam_misc.h>.
-	Patch partialy based on openpam fixes by Rob Holland <rob@inversepath.com>.
+	Patch partially based on openpam fixes by Rob Holland <rob@inversepath.com>.
 
 	* NEWS, lib/commonio.c:
 	fixed grpck segmentation fault on using -s when /etc/gshadow is empty (fix by
@@ -11308,7 +11308,7 @@
 	long_options[] entry.
 
 	* po/fr.po, NEWS:
-	partialy updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
+	partially updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
 2005-09-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11393,7 +11393,7 @@
 	* src/login.c, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po:
 	s/login: failure forking: %s/%s: failure forking: %s/ (one phrase for translate less).
 
-	* po/pl.po: partialy updated.
+	* po/pl.po: partially updated.
 
 2005-08-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11460,7 +11460,7 @@
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	removed "Account maintenance" section.
 
-	* man/Attic/passwd.1, man/passwd.1.xml: partialy done rewrite.
+	* man/Attic/passwd.1, man/passwd.1.xml: partially done rewrite.
 
 	* po/ro.po:
 	some fixes after review of the translation (by Sorin Batariuc <sorin@bonbon.net>).
@@ -11806,7 +11806,7 @@
 
 	* po/sv.po, NEWS: update finished (by Per Olofsson <pelle@dsv.su.se>)
 
-	* po/sv.po: partialy updated (by Per Olofsson <pelle@dsv.su.se>).
+	* po/sv.po: partially updated (by Per Olofsson <pelle@dsv.su.se>).
 
 2005-07-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -12848,7 +12848,7 @@
 
 	* man/pl/useradd.8: cleanups: aded missing \fR.
 
-	* man/pl/usermod.8: partialy synced with english version.
+	* man/pl/usermod.8: partially synced with english version.
 
 	* man/Attic/usermod.8: typo.
 
@@ -13176,7 +13176,7 @@
 2004-12-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/suauth.5, man/Attic/useradd.8:
-	Fixed varoiuse typos and misspelling based partialy on patch from Bug#141322
+	Fixed varoiuse typos and misspelling based partially on patch from Bug#141322
 	from Debian (submited by Christian Perrier <bubulle@debian.org>).
 
 	* man/Attic/chpasswd.8: more cleanups.
@@ -13472,7 +13472,7 @@
 	* src/useradd.c, configure.in:
 	Remove looking for mkstemp() prototype and always use mkstemp() (removed
 	using mktemp if mkstemp() not found).
-	Partialy based on tmp OWL patch by Solar Designer <solar@openwall.com>.
+	Partially based on tmp OWL patch by Solar Designer <solar@openwall.com>.
 
 	* NEWS, libmisc/pwdcheck.c:
 	Fixed securirty bug which allow unauthorized account properties modification.
@@ -13600,7 +13600,7 @@
 
 	* lib/Attic/lastlog_.h, libmisc/log.c, libmisc/utmp.c, src/lastlog.c, src/login.c:
 	More time() or gettimeofday() prevention overwrite memory on 64bit arch
-	(partialy based on patch from MDK).
+	(partially based on patch from MDK).
 
 	* po/sv.po, po/uk.po, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po:
 	Post remove TCFS support "make update-po".
@@ -14939,7 +14939,7 @@
 
 	* README: - added README with all shadow sites and resources details.
 
-	* Attic/shadow-utils.spec.in: - partialy rewrited.
+	* Attic/shadow-utils.spec.in: - partially rewrited.
 
 	* configure.in: - change version to 20001010.
 
