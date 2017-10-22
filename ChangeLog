@@ -1216,7 +1216,7 @@
 
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c: date_to_str() is always called with negativ set
+	* src/usermod.c: date_to_str() is always called with negative set
 	to "never", remove this argument.
 	* src/usermod.c: Added missing cast for gr_free argument.
 
@@ -1279,7 +1279,7 @@
 
 	* src/usermod.c: Do not assign static to NULL.
 	* src/usermod.c (date_to_str): buf needs to be unique (e.g.
-	independent from negativ), and is an out buffer.
+	independent from negative), and is an out buffer.
 	* src/usermod.c: Ignore return value from snprintf, and force
 	nul-termination of buffer.
 	* src/usermod.c: Improve memory management.
