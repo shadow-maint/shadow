@@ -13787,7 +13787,7 @@
 	Minor cleanups.
 
 	* man/Attic/chage.1, man/pl/chage.1:
-	Rewrite for use claissic list form options descriptions.
+	Rewrite for use classic list form options descriptions.
 
 	* man/pl/groupadd.8:
 	s/Polecenie groupadd posiada opcje:/Polecenie groupadd posiada następujące opcje:/
