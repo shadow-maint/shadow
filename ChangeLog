@@ -14983,7 +14983,7 @@
 	* etc/pam.d/Makefile.am: - added shadow to EXTRA_DIST
 
 	* src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/newusers.c, src/useradd.c, src/userdel.c, src/usermod.c:
-	- bind to shadow PAM file instead userdb (mainly PAMimication all shadow
+	- bind to shadow PAM file instead userdb (mainly PAMification all shadow
 	  utils is used for proper updating db files but in real this can be used
 	  for perform many other tasks).
 
