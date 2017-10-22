@@ -1446,7 +1446,7 @@ shadow-20001016 => shadow-4.0.0						 06-01-2002
 - much better automake support,
 - added pt_BR man pages for gpasswd(1), groupadd(8), groupdel(8),
   groupmod(8), shadow(5) (man pages for other nations also are welcome),
-- mamny small fixes and updates nad improvements in man pages,
+- many small fixes and updates nad improvements in man pages,
 - applied Debian patch to man pages for shadowconfig,
 - remove limit to 6 chars logged tty name (012_libmisc_sulog.c.diff Debian
   patch).
