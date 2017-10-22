@@ -10001,7 +10001,7 @@
 
 2006-05-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* man/Makefile.am: removed dupplicated sulogin.8.xml from EXTRA_DIST.
+	* man/Makefile.am: removed duplicated sulogin.8.xml from EXTRA_DIST.
 
 	* man/Attic/pw_auth.3.xml, man/Makefile.am: remove pw_auth(3) man page.
 
@@ -11100,7 +11100,7 @@
 	* src/chfn.c: cleanups.
 
 	* src/chage.c:
-	removed duplicaded not moved PAM code) was introduced during merge
+	removed duplicated not moved PAM code) was introduced during merge
 	shadow-4.0.4.1-owl-pam-auth.diff patch).
 
 	* src/chfn.c: finish PAM support.
