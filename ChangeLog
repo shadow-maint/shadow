@@ -13265,7 +13265,7 @@
 	* lib/commonio.c: reverte last change.
 
 	* libmisc/pwdcheck.c:
-	one word fix .. ommited "else" was removed. Now security bug which allow
+	one word fix .. omitted "else" was removed. Now security bug which allow
 	unauthorized account properties modification is realy closed.
 
 2004-10-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
