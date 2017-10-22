@@ -12937,7 +12937,7 @@
 	QUOTAS_ENAB, ULIMIT variables moved to code "#ifndef USE_PAM" dependent.
 
 	* configure.in:
-	fix importand typo: added missing ",". Now LOGIN_ACCESS realy is defined only
+	fix important typo: added missing ",". Now LOGIN_ACCESS realy is defined only
 	when PAM is not enabled.
 
 	* libmisc/obscure.c, libmisc/limits.c:
@@ -13681,7 +13681,7 @@
 	and memory allocated for user_groups is not initialized (in both useradd and
 	usermod when -G options is used and in usermod when -l option is used).
 	That causing segfaults sometimes.
-	This fix is importand but not critical because usermod and usermod aren't suid
+	This fix is important but not critical because usermod and usermod aren't suid
 	root.
 	Problem reported and fixed by Alexey Voinov <voins@altlinux.ru>.
 
