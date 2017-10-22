@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "copy group and gshadow localy..."
+echo -n "copy group and gshadow locally..."
 cp /etc/group tmp/
 echo "OK"
 
