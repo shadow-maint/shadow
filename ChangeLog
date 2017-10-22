@@ -10040,7 +10040,7 @@
 	- install /etc/login.defs and /etc/default/useradd files.
 
 	COMMENT: it is possible to extend this for install above files for specified
-	distribution. For example: if exist /etc/fedora-release install Fedora specyfic
+	distribution. For example: if exist /etc/fedora-release install Fedora specific
 	default configuration files and this files can be distributed in dist tar ball.
 
 	* NEWS, po/gl.po: updated (by Jacobo Tarrio <jtarrio@trasno.net>).
@@ -10064,7 +10064,7 @@
 	use '%s' citation instead `%s'.
 
 	* NEWS, src/su.c:
-	revert http://bugs.debian.org/276419 (this is Debian specyfic).
+	revert http://bugs.debian.org/276419 (this is Debian specific).
 
 	* libmisc/setupenv.c, libmisc/sub.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chfn.c:
 	use '%s' citation instead \"%s\".
@@ -12787,7 +12787,7 @@
 	* configure.in, libmisc/Attic/login_access.c, libmisc/Makefile.am, src/Makefile.am, src/login.c, src/login_nopam.c:
 	move libmisc/login_access.c to src/login_mopam.c.
 	Remove using LOGIN_ACCESS #define. Now LOGIN_ACCESS is equal to !USE_PAM.
-	In src/login_nopam.c will be cumulated non-PAM specyfic login code.
+	In src/login_nopam.c will be cumulated non-PAM specific login code.
 
 	* src/lastlog.c, src/login.c, src/useradd.c, src/usermod.c, libmisc/log.c:
 	cleanups: remove using #include "lastlog_.h".
