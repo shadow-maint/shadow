@@ -10478,7 +10478,7 @@
 	move exit() outside libmisc/shell.c::shell() for handle shell() errors
 	on higher level (now is better visable where some programs exit with 126 and
 	127 exit codes); added new shell() parameter (char *const envp[]) which allow
-	fix preserving enviloment in su on using -p.
+	fix preserving enviroment in su on using -p.
 	(patch by Alexander Gattin <xrgtn@yandex.ru>)
 
 	* NEWS, po/el.po:
