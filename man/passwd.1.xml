@@ -363,6 +363,11 @@
 	    <replaceable>MAX_DAYS</replaceable>, the password is required
 	    to be changed.
 	  </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as
+	    <replaceable>MAX_DAYS</replaceable> will remove checking a
+	    password's validity.
+	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
