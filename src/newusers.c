@@ -291,7 +291,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		         _("%s: invalid group name '%s'\n"),
 		         Prog, grent.gr_name);
 		if (grent.gr_name)
-		free (grent.gr_name);
+			free (grent.gr_name);
 		return -1;
 	}
 
