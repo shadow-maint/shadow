@@ -189,7 +189,7 @@ KILLCHAR	025
 # home directories.
 # 022 is the default value, but 027, or even 077, could be considered
 # for increased privacy. There is no One True Answer here: each sysadmin
-# must make up his/her mind.
+# must make up their mind.
 UMASK		022
 
 #

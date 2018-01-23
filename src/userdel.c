@@ -97,6 +97,7 @@ static char *user_home;
 static bool fflg = false;
 static bool rflg = false;
 static bool Zflg = false;
+static bool Rflg = false;
 
 static bool is_shadow_pwd;
 
@@ -1048,6 +1049,7 @@ int main (int argc, char **argv)
 				rflg = true;
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
+				Rflg = true;
 				break;
 			case 'P': /* no-op, handled in process_prefix_flag () */
 				break;
@@ -1130,9 +1132,12 @@ int main (int argc, char **argv)
 	 */
 	user_name = argv[argc - 1];
 	{
-		struct passwd *pwd;
-		pwd = prefix_getpwnam (user_name); /* local, no need for xgetpwnam */
+		const struct passwd *pwd;
+
+		pw_open(O_RDONLY);
+		pwd = pw_locate (user_name); /* we care only about local users */
 		if (NULL == pwd) {
+			pw_close();
 			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
@@ -1157,6 +1162,7 @@ int main (int argc, char **argv)
 		else {
 			user_home = xstrdup (pwd->pw_dir);
 		}
+		pw_close();
 	}
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
@@ -1188,7 +1194,7 @@ int main (int argc, char **argv)
 	 * Note: This is a best effort basis. The user may log in between,
 	 * a cron job may be started on her behalf, etc.
 	 */
-	if ((prefix[0] == '\0') && user_busy (user_name, user_id) != 0) {
+	if ((prefix[0] == '\0') && !Rflg && user_busy (user_name, user_id) != 0) {
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,

@@ -2365,7 +2365,7 @@ msgstr "  -G, --groups NHÓM             danh sách mới chứa các nhóm ph�
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
-"                                him/her from other groups\n"
+"                                the user from other groups\n"
 msgstr ""
 "  -a, --append                  thêm người dùng vào các nhóm phụ\n"
 "                                đưa ra bởi tùy chọn “-G” mà không gỡ bỏ ta "

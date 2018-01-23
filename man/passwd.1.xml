@@ -88,7 +88,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>passwd</command> command changes passwords for user accounts.
-      A normal user may only change the password for his/her own account, while
+      A normal user may only change the password for their own account, while
       the superuser may change the password for any account.
       <command>passwd</command> also changes the account or associated
       password validity period.
@@ -97,7 +97,7 @@
     <refsect2 id='password_changes'>
       <title>Password Changes</title>
       <para>
-	The user is first prompted for his/her old password, if one is
+	The user is first prompted for their old password, if one is
 	present. This password is then encrypted and compared against the
 	stored password. The user has only one chance to enter the correct
 	password. The superuser is permitted to bypass this step so that
@@ -206,7 +206,7 @@
 	<listitem>
 	  <para>
 	    Immediately expire an account's password. This in effect can
-	    force a user to change his/her password at the user's next login.
+	    force a user to change their password at the user's next login.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -273,7 +273,7 @@
 	  <para>
 	    Set the minimum number of days between password changes to
 	    <replaceable>MIN_DAYS</replaceable>. A value of zero for this field
-	    indicates that the user may change his/her password at any time.
+	    indicates that the user may change their password at any time.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -349,7 +349,7 @@
 	    Set the number of days of warning before a password change is
 	    required. The <replaceable>WARN_DAYS</replaceable> option is
 	    the number of days prior to the password expiring that a user
-	    will be warned that his/her password is about to expire.
+	    will be warned that their password is about to expire.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -362,6 +362,11 @@
 	    Set the maximum number of days a password remains valid. After
 	    <replaceable>MAX_DAYS</replaceable>, the password is required
 	    to be changed.
+	  </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as
+	    <replaceable>MAX_DAYS</replaceable> will remove checking a
+	    password's validity.
 	  </para>
 	</listitem>
       </varlistentry>

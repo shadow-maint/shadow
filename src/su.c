@@ -379,7 +379,7 @@ static void prepare_pam_close_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
-			} else {
+			} else if (   (pid_t)-1 != pid) {
 				pid_child = 0;
 			}
 		} while (!stop);

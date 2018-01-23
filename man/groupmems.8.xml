@@ -85,7 +85,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>groupmems</command> command allows a user to administer
-      his/her own group membership list without the requirement of
+      their own group membership list without the requirement of
       superuser privileges. The <command>groupmems</command> utility is for
       systems that configure its users to be in their own name sake primary
       group (i.e., guest / guest).

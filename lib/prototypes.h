@@ -179,6 +179,9 @@ extern int getrange (char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
 
+/* gettime.c */
+extern time_t gettime ();
+
 /* get_uid.c */
 extern int get_uid (const char *uidstr, uid_t *uid);
 

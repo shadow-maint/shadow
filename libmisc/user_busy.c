@@ -170,6 +170,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 	proc = opendir ("/proc");
 	if (proc == NULL) {
 		perror ("opendir /proc");
+#ifdef ENABLE_SUBIDS
+		sub_uid_close();
+#endif
 		return 0;
 	}
 	if (stat ("/", &sbroot) != 0) {

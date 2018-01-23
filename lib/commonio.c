@@ -760,16 +760,16 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	for (ptr = db->head;
 	        (NULL != ptr)
 #if KEEP_NIS_AT_END
-	     && (NULL != ptr->line)
-	     && (   ('+' != ptr->line[0])
-	         && ('-' != ptr->line[0]))
+	     && ((NULL == ptr->line)
+	         || (('+' != ptr->line[0])
+	             && ('-' != ptr->line[0])))
 #endif
 	     ;
 	     ptr = ptr->next) {
 		n++;
 	}
 #if KEEP_NIS_AT_END
-	if ((NULL != ptr) && (NULL != ptr->line)) {
+	if (NULL != ptr) {
 		nis = ptr;
 	}
 #endif

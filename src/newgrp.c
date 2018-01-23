@@ -83,15 +83,29 @@ static void usage (void)
 	}
 }
 
-/*
- * find_matching_group - search all groups of a given group id for
- *                       membership of a given username
- */
-static /*@null@*/struct group *find_matching_group (const char *name, gid_t gid)
+static bool ingroup(const char *name, struct group *gr)
 {
-	struct group *gr;
 	char **look;
 	bool notfound = true;
+
+	look = gr->gr_mem;
+	while (*look && notfound)
+		notfound = strcmp (*look++, name);
+
+	return !notfound;
+}
+
+/*
+ * find_matching_group - search all groups of a gr's group id for
+ *                       membership of a given username
+ *                       but check gr itself first
+ */
+static /*@null@*/struct group *find_matching_group (const char *name, struct group *gr)
+{
+	gid_t gid = gr->gr_gid;
+
+	if (ingroup(name, gr))
+		return gr;
 
 	setgrent ();
 	while ((gr = getgrent ()) != NULL) {
@@ -103,14 +117,8 @@ static /*@null@*/struct group *find_matching_group (const char *name, gid_t gid)
 		 * A group with matching GID was found.
 		 * Test for membership of 'name'.
 		 */
-		look = gr->gr_mem;
-		while ((NULL != *look) && notfound) {
-			notfound = (strcmp (*look, name) != 0);
-			look++;
-		}
-		if (!notfound) {
+		if (ingroup(name, gr))
 			break;
-		}
 	}
 	endgrent ();
 	return gr;
@@ -387,6 +395,7 @@ int main (int argc, char **argv)
 {
 	bool initflag = false;
 	int i;
+	bool is_member = false;
 	bool cflag = false;
 	int err = 0;
 	gid_t gid;
@@ -625,22 +634,36 @@ int main (int argc, char **argv)
 		goto failure;
 	}
 
+#ifdef HAVE_SETGROUPS
+	/* when using pam_group, she will not be listed in the groups
+	 * database. However getgroups() will return the group. So
+	 * if she is listed there already it is ok to grant membership.
+	 */
+	for (i = 0; i < ngroups; i++) {
+		if (grp->gr_gid == grouplist[i]) {
+			is_member = true;
+			break;
+		}
+	}
+#endif                          /* HAVE_SETGROUPS */
 	/*
 	 * For splitted groups (due to limitations of NIS), check all 
 	 * groups of the same GID like the requested group for
 	 * membership of the current user.
 	 */
-	grp = find_matching_group (name, grp->gr_gid);
-	if (NULL == grp) {
-		/*
-		 * No matching group found. As we already know that
-		 * the group exists, this happens only in the case
-		 * of a requested group where the user is not member.
-		 *
-		 * Re-read the group entry for further processing.
-		 */
-		grp = xgetgrnam (group);
-		assert (NULL != grp);
+	if (!is_member) {
+		grp = find_matching_group (name, grp);
+		if (NULL == grp) {
+			/*
+			 * No matching group found. As we already know that
+			 * the group exists, this happens only in the case
+			 * of a requested group where the user is not member.
+			 *
+			 * Re-read the group entry for further processing.
+			 */
+			grp = xgetgrnam (group);
+			assert (NULL != grp);
+		}
 	}
 #ifdef SHADOWGRP
 	sgrp = getsgnam (group);
@@ -653,7 +676,9 @@ int main (int argc, char **argv)
 	/*
 	 * Check if the user is allowed to access this group.
 	 */
-	check_perms (grp, pwd, group);
+	if (!is_member) {
+		check_perms (grp, pwd, group);
+	}
 
 	/*
 	 * all successful validations pass through this point. The group id

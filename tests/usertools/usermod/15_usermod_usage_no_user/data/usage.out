@@ -10,7 +10,7 @@ Options:
   -G, --groups GROUPS           new list of supplementary GROUPS
   -a, --append                  append the user to the supplemental GROUPS
                                 mentioned by the -G option without removing
-                                him/her from other groups
+                                the user from other groups
   -h, --help                    display this help message and exit
   -l, --login NEW_LOGIN         new value of the login name
   -L, --lock                    lock the user account

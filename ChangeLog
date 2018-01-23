@@ -1,15 +1,35 @@
-2016-02-23  Serge Hallyn <serge@hallyn.com>
+2017-07-16  Serge Hallyn <serge@hallyn.com>
+
+	* Import new Dutch translations.
+
+2017-07-10  Serge Hallyn <serge@hallyn.com>
+
+	* Expand error codes for groupmod.
+
+2017-05-17  Serge Hallyn <serge@hallyn.com>
+
+	* Release 4.5
+
+2017-05-17  Serge Hallyn <serge@hallyn.com>
+
+	* Patch from Tobias Stoeckmann fixing regression in previous CVE fix
+	  preventing SIGTERM to su from being propagated to the job.
+	* Patch from Chris Lamb making sp_lstchg shadow field reproducible.
+	* Merge Russian translation updates from Yuri Kozlov
+	* Fix missing close of subuid file on error
+
+2017-02-23  Serge Hallyn <serge@hallyn.com>
 
 	* Merge patch by Tobias Stoeckmann <tobias@stoeckmann.org> to fix
 	  the equivalent of util-linux CVE-2017-2616.
 
-2016-02-08  Serge Hallyn <serge@hallyn.com>
+2017-02-08  Serge Hallyn <serge@hallyn.com>
 
 	* Update Kazakh translations
 	* Consult configuration before calculating subuids
 	* Remove misplaced semicolon
 
-2016-01-29  Serge Hallyn <serge@hallyn.com>
+2017-01-29  Serge Hallyn <serge@hallyn.com>
 
 	* Patch from Fedora to improve performance with SSSD, Winbind,
 	  or nss_ldap. (Tomas Mraz)

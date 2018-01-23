@@ -5,20 +5,20 @@
 # Eugene Konev <ejka@imfi.kspu.ru>, 2004.
 # alyoshin.s@gmail.com <alyoshin.s@gmail.com>, 2008.
 # Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006, 2007, 2008.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2011, 2012.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2011, 2012, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.5.1-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2016-09-18 14:03-0500\n"
-"PO-Revision-Date: 2013-07-29 10:42+0400\n"
+"PO-Revision-Date: 2017-03-05 11:14+0300\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 2.0\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -436,10 +436,10 @@ msgstr "%s: некорректное значение пути chroot «%s»\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: нет доступа к каталогу chroot %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot access chroot directory %s: %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: нет доступа к каталогу chroot %s: %s\n"
+msgstr "%s: не удалось выполнить chdir в chroot-каталог %s: %s\n"
 
 #, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
@@ -806,10 +806,10 @@ msgstr "%s: строка %d: слишком длинная строка\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: строка %d: отсутствует новый пароль\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
-msgstr "%s: не удалось записать %s: %s\n"
+msgstr "%s: не удалось зашифровать пароль с солью «%s»: %s\n"
 
 #, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
@@ -1098,7 +1098,7 @@ msgstr ""
 "                                новой группы\n"
 
 msgid "  -r, --system                  create a system account\n"
-msgstr "  -r, --system                  создать системную учётную запись\n"
+msgstr "  -r, --system                  создавать системную группу\n"
 
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
@@ -1124,14 +1124,15 @@ msgstr "%s: GID «%lu» уже существует\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: не удалось настроить службу очистки.\n"
 
-#, fuzzy
 #| msgid ""
 #| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
 msgstr ""
-"  -r, --reset                   сбросить счётчик неудачных попыток входа\n"
+"  -f, --force                   удалить группу, даже если она является"
+" первичной\n"
+"                                группой пользователя\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1357,25 +1358,23 @@ msgstr ""
 "  -b, --before ДНЕЙ             показать записи lastlog за последние ДНЕЙ "
 "дней\n"
 
-#, fuzzy
 #| msgid ""
 #| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
 msgstr ""
-"  -a, --all                     показать записи faillog для всех "
-"пользователей\n"
+"  -C, --clear                   очистить запись lastlog пользователя\n"
+"                                (только вместе с -u)\n"
 
-#, fuzzy
 #| msgid ""
 #| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
 msgstr ""
-"  -a, --all                     показать записи faillog для всех "
-"пользователей\n"
+"  -S, --set                     поставить в записи lastlog текущее время\n"
+"                                (только вместе с -u)\n"
 
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
@@ -1399,23 +1398,24 @@ msgstr "Пользователь            Порт     Последний ра
 msgid "**Never logged in**"
 msgstr "**Никогда не входил в систему**"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
-msgstr "%s: не удалось получить запись для UID %lu\n"
+msgstr "%s: не удалось обновить запись для UID %lu\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgid "%s: Failed to update the lastlog file\n"
-msgstr "%s: не удалось сбросить запись в lastlog для UID %lu: %s\n"
+msgstr "%s: не удалось обновить файл lastlog\n"
 
 #, c-format
 msgid "%s: Option -C cannot be used together with option -S\n"
-msgstr ""
+msgstr "%s: параметр -C нельзя использовать вместе с параметром -S\n"
 
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
 msgstr ""
+"%s: для параметров -C и -S требуется указать пользователя в параметре -u\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1539,10 +1539,10 @@ msgstr "Использование: newgrp [-] [группа]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Использование: sg группа [[-c] команда]\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
-msgstr "%s: не удалось записать %s: %s\n"
+msgstr "%s: не удалось зашифровать пароль с предыдущей солью: %s\n"
 
 msgid "Invalid password.\n"
 msgstr "Неправильный пароль.\n"
@@ -1612,20 +1612,20 @@ msgstr "%s: строка %d: вызов chown %s завершился неуда
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: строка %d: не удалось обновить запись\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось подготовить новую %s запись\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
-msgstr "%s: не удалось создать пользователя\n"
+msgstr "%s: не удалось найти подчинённый диапазон пользователей\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't create group\n"
 msgid "%s: can't find subordinate group range\n"
-msgstr "%s: не удалось создать группу\n"
+msgstr "%s: не удалось найти подчинённый диапазон групп\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -2219,10 +2219,10 @@ msgstr "%s: не удалось сбросить запись в faillog для 
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: не удалось сбросить запись в lastlog для UID %lu: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare the new %s entry\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось подготовить новую %s запись\n"
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
@@ -2267,15 +2267,15 @@ msgstr "%s: не удалось создать tcb-каталог для %s\n"
 msgid "%s: can't create group\n"
 msgstr "%s: не удалось создать группу\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
-msgstr "%s: не удалось создать пользователя\n"
+msgstr "%s: не удалось создать подчинённые пользовательские ID\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't create group\n"
 msgid "%s: can't create subordinate group IDs\n"
-msgstr "%s: не удалось создать группу\n"
+msgstr "%s: не удалось создать подчинённые групповые ID\n"
 
 #, c-format
 msgid ""
@@ -2325,10 +2325,10 @@ msgstr ""
 "%s: группа %s является первичной для другого пользователя и не может быть "
 "удалена.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
-msgstr "%s: не удалось удалить запись «%s» из %s\n"
+msgstr "%s: не удалось удалить запись %lu из %s\n"
 
 #, c-format
 msgid "%s: %s mail spool (%s) not found\n"
@@ -2413,7 +2413,7 @@ msgstr "  -G, --groups ГРУППЫ           список дополнител�
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
-"                                him/her from other groups\n"
+"                                the user from other groups\n"
 msgstr ""
 "  -a, --append                  добавить пользователя в дополнительные\n"
 "                                ГРУППЫ, указанные в параметре -G не удаляя\n"
@@ -2452,16 +2452,16 @@ msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  разблокировать учётную запись\n"
 
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
-msgstr ""
+msgstr "  -v, --add-subuids ПЕРВ-ПОСЛ   добавить диапазон подчинённых uid\n"
 
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
-msgstr ""
+msgstr "  -V, --del-subuids ПЕРВ-ПОСЛ   удалить диапазон подчинённых uid\n"
 
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
-msgstr ""
+msgstr "  -w, --add-subgids ПЕРВ-ПОСЛ   добавить диапазон подчинённых gid\n"
 
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
-msgstr ""
+msgstr "  -W, --del-subgids ПЕРВ-ПОСЛ   удалить диапазон подчинённых gid\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
@@ -2483,15 +2483,15 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: пользователь «%s» уже существует в %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
-msgstr "%s: неверная дата «%s»\n"
+msgstr "%s: некорректный диапазон подчинённых uid «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
-msgstr "%s: неверная дата «%s»\n"
+msgstr "%s: некорректный диапазон подчинённых gid «%s»\n"
 
 #, c-format
 msgid "%s: no options\n"
@@ -2510,10 +2510,10 @@ msgstr ""
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID «%lu» уже существует\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
-msgstr "%s: у %s нет прав изменять пароль %s\n"
+msgstr "%s: %s не существует, нельзя указывать флаги %s или %s\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2562,25 +2562,25 @@ msgstr "не удалось сменить владельца почтового
 msgid "failed to rename mailbox"
 msgstr "не удалось переименовать почтовый ящик"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось удалить диапазон uid %lu-%lu из «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось добавить диапазон uid %lu-%lu в «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось удалить диапазон gid %lu-%lu из «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
-msgstr "%s: не удалось подготовить новую %s запись «%s»\n"
+msgstr "%s: не удалось добавить диапазон gid %lu-%lu в «%s»\n"
 
 #, c-format
 msgid ""
@@ -2638,19 +2638,19 @@ msgstr "Не удалось заблокировать файл"
 msgid "Couldn't make backup"
 msgstr "Не удалось создать резервную копию"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: PAM: %s\n"
 msgid "%s: %s: %s\n"
-msgstr "%s: PAM: %s\n"
+msgstr "%s: %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: nscd exited with status %d\n"
 msgid "%s: %s returned with status %d\n"
-msgstr "%s: nscd завершился с кодом выхода %d\n"
+msgstr "%s: %s завершился с кодом выхода %d\n"
 
 #, c-format
 msgid "%s: %s killed by signal %d\n"
-msgstr ""
+msgstr "%s: %s убит по сигналу %d\n"
 
 msgid "failed to open scratch file"
 msgstr "не удалось открыть черновой файл"
@@ -2960,7 +2960,7 @@ msgstr "%s: не удалось найти каталог tcb для %s\n"
 #~ "GROUPS\n"
 #~ "                                mentioned by the -G option without "
 #~ "removing\n"
-#~ "                                him/her from other groups\n"
+#~ "                                the user from other groups\n"
 #~ "  -h, --help                    display this help message and exit\n"
 #~ "  -l, --login NEW_LOGIN         new value of the login name\n"
 #~ "  -L, --lock                    lock the user account\n"
