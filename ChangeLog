@@ -510,7 +510,7 @@
 	* lib/groupio.c: add newline char when two lines
 	are concatenated
 	Closes: alioth#313942
-	* lib/groupio.c: fix uninitialised memory in
+	* lib/groupio.c: fix uninitialized memory in
 	merge_group_entries causes segfault in useradd by changing
 	a call to malloc to a call to calloc
 	Closes: alioth:#313940
@@ -555,7 +555,7 @@
 	  immediate child; this is needed now that su no
 	  longer starts a controlling terminal when not running an
 	  interactive shell (closes: Debian#713979)
-	  Thansk to Colin Watson for the patch.
+	  Thanks to Colin Watson for the patch.
 
 2012-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -656,7 +656,7 @@
 	* NEWS, libmisc/utmp.c: Do not log in wtmp when PAM is enabled.
 	This is done by pam_lastlog.
 
-2012-05-17  Christian Perrier  <bubulle@Êebian.org>
+2012-05-17  Christian Perrier  <bubulle@debian.org>
 
 	* man/po/fr.po: French translation of manpages completed
 
@@ -1123,7 +1123,7 @@
 
 2011-10-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/su.1.xml: Document that su -c does not providea controlling
+	* man/su.1.xml: Document that su -c does not provide a controlling
 	terminal.
 
 2011-10-18  Nicolas François  <nicolas.francois@centraliens.net>
@@ -1216,7 +1216,7 @@
 
 2011-09-18  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c: date_to_str() is always called with negativ set
+	* src/usermod.c: date_to_str() is always called with negative set
 	to "never", remove this argument.
 	* src/usermod.c: Added missing cast for gr_free argument.
 
@@ -1279,7 +1279,7 @@
 
 	* src/usermod.c: Do not assign static to NULL.
 	* src/usermod.c (date_to_str): buf needs to be unique (e.g.
-	independent from negativ), and is an out buffer.
+	independent from negative), and is an out buffer.
 	* src/usermod.c: Ignore return value from snprintf, and force
 	nul-termination of buffer.
 	* src/usermod.c: Improve memory management.
@@ -1931,7 +1931,7 @@
 	* libmisc/console.c, libmisc/motd.c, libmisc/setupenv.c,
 	libmisc/sulog.c, libmisc/hushed.c, libmisc/failure.c,
 	libmisc/loginprompt.c, libmisc/ttytype.c, libmisc/obscure.c,
-	libmisc/pam_pass_non_interractive.c, src/userdel.c, src/login.c,
+	libmisc/pam_pass_non_interactive.c, src/userdel.c, src/login.c,
 	lib/commonio.c, lib/commonio.h, libmisc/setugid.c,
 	libmisc/setupenv.c: Fix some const issues.
 	* libmisc/motd.c: Avoid multi-statements lines.
@@ -1998,8 +1998,8 @@
 
 	* man/newusers.8.xml, man/useradd.8.xml, man/groupadd.8.xml,
 	man/login.defs.d/UMASK.xml, man/login.defs.d/CREATE_HOME.xml,
-	man/login.defs.d/LOGIN_RETRIES.xml: Fix typos: choosen, overriden,
-	bahavior.
+	man/login.defs.d/LOGIN_RETRIES.xml: Fix typos: choosen, overridden,
+	behavior.
 
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -2014,7 +2014,7 @@
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: spool is a constant string.
-	* src/useradd.c: Set the new copy_tree's paramater 'copy_root' to false 
+	* src/useradd.c: Set the new copy_tree's parameter 'copy_root' to false 
 
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -3142,16 +3142,16 @@
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/non_interactive_pam_conv.c,
-	libmisc/pam_pass_non_interractive.c, libmisc/Makefile.am: Renamed.
-	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
+	libmisc/pam_pass_non_interactive.c, libmisc/Makefile.am: Renamed.
+	* libmisc/pam_pass_non_interactive.c, lib/prototypes.h:
 	non_interactive_password and non_interactive_pam_conv do not need
 	to be externally visible.
-	* libmisc/pam_pass_non_interractive.c: Added declaration of
+	* libmisc/pam_pass_non_interactive.c: Added declaration of
 	ni_conv.
-	* libmisc/pam_pass_non_interractive.c: Only compile ifdef USE_PAM.
-	* libmisc/pam_pass_non_interractive.c, lib/prototypes.h:
-	Added do_pam_passwd_non_interractive().
-	* src/chpasswd.c: Use do_pam_passwd_non_interractive().
+	* libmisc/pam_pass_non_interactive.c: Only compile ifdef USE_PAM.
+	* libmisc/pam_pass_non_interactive.c, lib/prototypes.h:
+	Added do_pam_passwd_non_interactive().
+	* src/chpasswd.c: Use do_pam_passwd_non_interactive().
 
 2009-05-07  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -3476,7 +3476,7 @@
 2009-04-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Check assumptions on snprintf().
-	* src/useradd.c: Replace peror by an strerror and avoid an
+	* src/useradd.c: Replace perror by an strerror and avoid an
 	intermediate buffer.
 	* src/useradd.c: Save errno between the failure and the report by
 	perror/strerror.
@@ -4044,7 +4044,7 @@
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c, src/useraddd.c: Fix the usage string so that it
+	* src/usermod.c, src/useradd.c: Fix the usage string so that it
 	does not change depending on the configure option. Use a format.
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
@@ -4705,7 +4705,7 @@
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/USERGROUPS_ENAB.xml: Fix typo: new <para> tag
-	before the previous one is closed. This caused a missng
+	before the previous one is closed. This caused a missing
 	explanation for USERGROUPS_ENAB.
 
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
@@ -7148,7 +7148,7 @@
 
 	* src/newgrp.c: Add missing end of line in message.
 	* src/newgrp.c: Add audit events for the authentication
-	(AUDIT_GRP_AUTH). Thansk to Peter Vrabec.
+	(AUDIT_GRP_AUTH). Thanks to Peter Vrabec.
 
 2008-03-05  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -7706,7 +7706,7 @@
 	* lib/gshadow.c: The prototypes of fgetsx() and fputsx() are
 	already defined in prototypes.h. Remove the declaration of these
 	functions.
-	* lib/gshdow.c: list() is an external function. DO not shadow it
+	* lib/gshadow.c: list() is an external function. DO not shadow it
 	with a static function. The internal list() was renamed
 	build_list().
 	* lib/commonio.c: stat shadows another stat variable. Remove this
@@ -7776,7 +7776,7 @@
 	* src/lastlog.c: Remove statbuf, not used.
 	* src/lastlog.c: Fix types, cast umin and umax to uid_t.
 	* src/lastlog.c: (option -u) user needs to be a signed long, not
-	uid_t (to accept rangees like -<uid>
+	uid_t (to accept ranges like -<uid>
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -7855,7 +7855,7 @@
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/chage.c: Fix typo: s/maximim/maximum/
+	* src/chage.c: Fix typo: s/maximum/maximum/
 	* src/chage.c: New function: fail_exit(). Change most of the exit()
 	to a fail_exit, which makes sure the files are unlocked (new global
 	variables: pw_locked, spw_locked), the PAM transaction is ended, and
@@ -8872,7 +8872,7 @@
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* man/useradd.8.xml: -b documenation: Use the same notation for
+	* man/useradd.8.xml: -b documentation: Use the same notation for
 	the -d argument as in the -d documentation.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
@@ -8907,7 +8907,7 @@
 	glibc socket to flush the nscd tables. This comes from the RedHat
 	patch shadow-4.0.16-nscd.c.
 	* lib/commonio.c: Forbid inheritance of the passwd and group files
-	to the spawed processes (like nscd). This comes from the RedHat
+	to the spawned processes (like nscd). This comes from the RedHat
 	patch shadow-4.0.17-notInheritFd.patch.
 	* lib/nscd.h: Update header.
 
@@ -9138,7 +9138,7 @@
 
 	* NEWS, man/groupadd.8.xml, man/groupmod.8.xml, man/login.1.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml:
 	groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
-	mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>).
+	mistakes and other corrections (by Schulenberg <bensberg@justemail.net>).
 
 2007-01-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9309,7 +9309,7 @@
 
 	* src/useradd.c, src/usermod.c:
 	fixed UID/GID overflow (fixed http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920).
-	Fixed expiredate/inactive/mindays/warndays/maxdays overflow (simillar to RH#198920).
+	Fixed expiredate/inactive/mindays/warndays/maxdays overflow (similar to RH#198920).
 
 	* src/passwd.c:
 	fixed inactive/mindays/warndays/maxdays overflow (similar to RH#198920).
@@ -9366,7 +9366,7 @@
 	updated for 4.0.18 (by Mehmet TURKER <mturker@innova.com.tr>).
 
 	* configure.in, man/Makefile.am, man/sv/Makefile.am:
-	fixes for "make {dist|distchec}" and sv man pages.
+	fixes for "make {dist|distcheck}" and sv man pages.
 
 	* man/sv/Attic/grupper.1, man/sv/groupmems.8, man/sv/groupmod.8, man/sv/grpck.8, man/sv/grpconv.8, man/sv/grpunconv.8, man/sv/gshadow.5, man/sv/lastlog.8, man/sv/limits.5, man/sv/login.1, man/sv/login.access.5, man/sv/login.defs.5, man/sv/logoutd.8, man/sv/newgrp.1, man/sv/newusers.8, man/sv/nologin.8, man/sv/passwd.1, man/sv/passwd.5, man/sv/porttime.5, man/sv/pwck.8, man/sv/pwconv.8, man/sv/pwunconv.8, man/sv/sg.1, man/sv/shadow.3, man/sv/shadow.5, man/sv/su.1, man/sv/suauth.5, man/sv/sv.po, man/sv/useradd.8, man/sv/userdel.8, man/sv/usermod.8, man/sv/vigr.8, man/sv/vipw.8, NEWS, man/Makefile.am, man/sv/Makefile.am, man/sv/chage.1, man/sv/chfn.1, man/sv/chgpasswd.8, man/sv/chpasswd.8, man/sv/chsh.1, man/sv/expiry.1, man/sv/faillog.5, man/sv/faillog.8, man/sv/getspnam.3, man/sv/gpasswd.1, man/sv/groupadd.8, man/sv/groupdel.8:
 	full sv man pages set added (by Daniel Nylander <info@danielnylander.se>).
@@ -9415,7 +9415,7 @@
 
 	* man/su.1.xml: fixes in <refsynopsisdiv>.
 
-	* src/groupmems.c: indent soutrce code.
+	* src/groupmems.c: indent source code.
 
 	* src/groupmems.c: use shadow Copyright.
 
@@ -9423,7 +9423,7 @@
 	added src/groupmems.c to POTFILES.in.
 
 	* NEWS, etc/pam.d/Makefile.am, etc/pam.d/groupmems, man/Makefile.am, man/groupmems.8.xml, src/Makefile.am, src/groupmems.c:
-	groupmems rewrited for use PAM and getopt_long() nad now it is enabled
+	groupmems rewritten for use PAM and getopt_long() nad now it is enabled
 	for build and install (patch by George Kraft <gk4@swbell.net>).
 
 	* NEWS, configure.in: start prepare for 4.0.18.
@@ -9469,7 +9469,7 @@
 
 	* src/su.c (main):
 	move **envcp declaration to #ifdef USE_PAM (fixed warning about unused
-	variable when shadow is builded with PAM didabled).
+	variable when shadow is built with PAM disabled).
 
 	* man/pl/pl.po, NEWS, man/pl/chage.1: pl chage(1) translation finished.
 
@@ -9487,7 +9487,7 @@
 	* po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po:
 	updated.
 
-	* NEWS, src/chsh.c: chsh rewrited for use getopt_long().
+	* NEWS, src/chsh.c: chsh rewritten for use getopt_long().
 
 2006-07-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9497,7 +9497,7 @@
 	cleanups in groupmod(8).
 
 	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/usermod.8.xml, src/usermod.c, NEWS:
-	back to previouse usermod -a option sematics and clarify -a behavior
+	back to previous usermod -a option semantics and clarify -a behavior
 	on documentation level (by Greg Schafer <gschafer@zip.com.au>).
 
 	* man/fr/fr.po, man/groupmod.8.xml, man/pl/pl.po, man/ru/ru.po:
@@ -9513,13 +9513,13 @@
 	* po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po:
 	run "make update-po".
 
-	* src/groupmod.c: cleunps in help message.
+	* src/groupmod.c: cleanups in help message.
 
 	* src/chage.c: s/user/\[LOGIN\]/ in help message.
 
 	* src/passwd.c: s/\[login\]/\[LOGIN\]/ in help message.
 
-	* NEWS, src/groupmod.c: groupmod rewrited for use getopt_log().
+	* NEWS, src/groupmod.c: groupmod rewritten for use getopt_log().
 
 2006-07-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9536,7 +9536,7 @@
 	be removed; for example when it is /dev/null (fixed http://bugs.gentoo.org/139148).
 
 	* src/login.c, src/logoutd.c, src/userdel.c, libmisc/limits.c:
-	remove USER_PROCESS conditionsi (code simplifications).
+	remove USER_PROCESS conditions (code simplifications).
 
 2006-07-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9587,7 +9587,7 @@
 	* TODO: remove done things.
 
 	* NEWS, lib/Attic/getpass.c, lib/Makefile.am, lib/getdef.c, lib/pwauth.c, po/POTFILES.in:
-	removed using private implementatuon getpass() libc function (now getpass() is
+	removed using private implementation getpass() libc function (now getpass() is
 	used also when S/KEY support is enabled).
 
 	* NEWS, src/Makefile.am: move nologin do $(sbindir).
@@ -9678,7 +9678,7 @@
 
 	* man/pl/vipw.8:
 	regenerated using fixed DocBook XSL Stylesheets v1.70.1 (I must submit my
-	fixes common/pl.xml do DocBook XSL Stylesheets mantainer).
+	fixes common/pl.xml do DocBook XSL Stylesheets maintainer).
 
 	* man/fr/fr.po, man/ru/ru.po: updated.
 
@@ -9706,7 +9706,7 @@
 
 	* man/Makefile.am:
 	hack for generate translated xml files with lang="<lang> in <refentry> tag.
-	Now is possible testing correctnes of XSLT sheets languages definition.
+	Now is possible testing correctness of XSLT sheets languages definition.
 
 2006-06-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9752,7 +9752,7 @@
 2006-06-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/Makefile.am:
-	reverte using docbook.sourceforge.net in XSLT url.
+	revert using docbook.sourceforge.net in XSLT url.
 
 	* po/pl.po: cleanups.
 
@@ -9788,9 +9788,9 @@
 	* man/.cvsignore: shadow-man-pages.pot added.
 
 	* man/Makefile.am:
-	added temporary gen-xmls targed and dependencies beetwen .pot and .po files.
+	added temporary gen-xmls targed and dependencies between .pot and .po files.
 
-	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't neccessary).
+	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't necessary).
 
 2006-05-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9814,7 +9814,7 @@
 
 	* NEWS: fixed last usermod changes comment. Current is:
 	better fix for old CERT VU#312962 (which was fixed in shadow 4.0.8):
-	fixed forgoten checking of the return value from fchown() before
+	fixed forgotten checking of the return value from fchown() before
 	proceeding with the fchmod() (based on Owl patch prepared by
 	Rafal Wojtczuk <nergal@owl.openwall.com>)
 
@@ -9924,11 +9924,11 @@
 	* man/pl/pl.po: initial version.
 
 	* man/Makefile.am:
-	implemet update-po target and dist, dist-check hooks for put .po and
+	implement update-po target and dist, dist-check hooks for put .po and
 	.pot files in dist tar ball.
 
 	* src/chgpasswd.c:
-	reverte struct group newgr declaration but use them only conditionaly (#ifndef SHADOWGRP).
+	revert struct group newgr declaration but use them only conditionally (#ifndef SHADOWGRP).
 
 2006-05-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -9940,7 +9940,7 @@
 	run "make update-po".
 
 	* NEWS, src/useradd.c:
-	fixed userdel CERT VU#312962: fixed forgoten checking of the return
+	fixed userdel CERT VU#312962: fixed forgotten checking of the return
 	value from fchown() before proceeding with the fchmod() (prepared
 	based on OWL fix submited by Solar Designer <solar@openwall.com>),
 	Use in userdel login.defs::MAIL_DIR instead hardcoded /var/mail on created
@@ -9970,7 +9970,7 @@
 
 	* man/Makefile.am, man/fr/Makefile.am, man/it/Makefile.am, man/ja/Makefile.am, man/pl/Makefile.am, man/ru/Makefile.am, NEWS, autogen.sh:
 	install limits(5), login.access(5) and porttime(5) man pages only when
-	shadow is builded with PAM support disabled.
+	shadow is built with PAM support disabled.
 
 	* NEWS: cleanups.
 
@@ -9982,7 +9982,7 @@
 	* src/userdel.c (main): removed unused arg variable.
 
 	* libmisc/setupenv.c (setup_env):
-	move *cp varable to #ifndef PAM part (fixed compilation
+	move *cp variable to #ifndef PAM part (fixed compilation
 	warning about unused variable).
 
 	* lib/getdef.c: now GETPASS_ASTERISKS is SKEY #define dependent.
@@ -9997,11 +9997,11 @@
 	* src/sulogin.c: break long line.
 
 	* lib/pwauth.c:
-	added #include <unistd.h> and remove localy defined getpass() prototype.
+	added #include <unistd.h> and remove locally defined getpass() prototype.
 
 2006-05-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* man/Makefile.am: removed dupplicated sulogin.8.xml from EXTRA_DIST.
+	* man/Makefile.am: removed duplicated sulogin.8.xml from EXTRA_DIST.
 
 	* man/Attic/pw_auth.3.xml, man/Makefile.am: remove pw_auth(3) man page.
 
@@ -10018,7 +10018,7 @@
 	* po/pl.po: updated.
 
 	* po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/userdel.c, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po:
-	userdel rewrited for use getopt_log().
+	userdel rewritten for use getopt_log().
 
 	* po/pl.po: cleanups.
 
@@ -10040,7 +10040,7 @@
 	- install /etc/login.defs and /etc/default/useradd files.
 
 	COMMENT: it is possible to extend this for install above files for specified
-	distribution. For example: if exist /etc/fedora-release install Fedora specyfic
+	distribution. For example: if exist /etc/fedora-release install Fedora specific
 	default configuration files and this files can be distributed in dist tar ball.
 
 	* NEWS, po/gl.po: updated (by Jacobo Tarrio <jtarrio@trasno.net>).
@@ -10061,13 +10061,13 @@
 	on copy files (merge 482_libmisc_copydir_check_return_values Debian patch).
 
 	* po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chfn.c, src/chsh.c, src/grpck.c, src/login.c, src/pwck.c, src/useradd.c, src/usermod.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po:
-	use '%s' cytation instead `%s'.
+	use '%s' citation instead `%s'.
 
 	* NEWS, src/su.c:
-	reverte http://bugs.debian.org/276419 (this is Debian specyfic).
+	revert http://bugs.debian.org/276419 (this is Debian specific).
 
 	* libmisc/setupenv.c, libmisc/sub.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chfn.c:
-	use '%s' cytation instead \"%s\".
+	use '%s' citation instead \"%s\".
 
 	* po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, src/grpck.c:
 	typo.
@@ -10110,7 +10110,7 @@
 2006-04-08  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/userdel.8.xml:
-	minior fixes for the note under the -f option (Mike Frysinger <vapier@gentoo.org>).
+	minor fixes for the note under the -f option (Mike Frysinger <vapier@gentoo.org>).
 
 2006-04-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10131,7 +10131,7 @@
 2006-03-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/pw_auth.3.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newgrp.1.xml, man/newusers.8.xml, man/nologin.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/sg.1.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
-	removed <!DOCTYPE> tag (require strict DocBook XML V4.3//EN DTD isn't neccessary).
+	removed <!DOCTYPE> tag (require strict DocBook XML V4.3//EN DTD isn't necessary).
 
 	* NEWS, src/login.c:
 	cancel login timeout after authentication so that patient people
@@ -10203,7 +10203,7 @@
 	for take a fourth argument in case BSD version
 	(patch submited by Mike Frysinger <vapier@gentoo.org>)
 
-	* README: added paragragraph about S/Key support.
+	* README: added paragraph about S/Key support.
 
 	* po/sk.po: updated for 4.0.15 (by Peter Mann <Peter.Mann@tuke.sk>).
 
@@ -10293,7 +10293,7 @@
 	s/Unexpected/unexpected/
 
 	* po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/lastlog.c, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po:
-	print the usage and exit if an additional argument is profided to
+	print the usage and exit if an additional argument is provided to
 	lastlog (merge 488_laslog_verify_arguments Debian patch).
 
 2006-03-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -10322,7 +10322,7 @@
 	patch Nicolas François <nicolas.francois@centraliens.net>)
 
 	* po/ro.po:
-	updated (commited http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347755).
+	updated (committed http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347755).
 
 	* NEWS, po/ca.po: updated (by Jordi Mallach <jordi@debian.org>).
 
@@ -10368,9 +10368,9 @@
 	  tries exceeded,
 	- always prints the number of tries in the syslog entry.
 	- add special handling for PAM_ABORT
-	- add an entry to failog, as when USE_PAM is not defined. (#53164)
+	- add an entry to faillog, as when USE_PAM is not defined. (#53164)
 	- changed pam_end to PAM_END. This is certainly was a mistake.
-	  PAM_END is pam_close_seesion + pam_end. Here, the session is still not
+	  PAM_END is pam_close_session + pam_end. Here, the session is still not
 	  open, we don't have to close it.
 	- a HAVE_PAM_FAIL_DELAY is missing
 
@@ -10401,7 +10401,7 @@
 	is not needed (bug introduced in 4.0.14 on merge FC fixes). Fixed by Nicolas
 	François <nicolas.francois@centraliens.net>
 
-	* NEWS, src/useradd.c: allways remove group and gshadow databases lock,
+	* NEWS, src/useradd.c: always remove group and gshadow databases lock,
 	Fixed by Nicolas François <nicolas.francois@centraliens.net>
 	(http://bugs.debian.org/348250)
 
@@ -10419,7 +10419,7 @@
 2006-02-06  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chage.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po:
-	added missing \n on display password status if password must be chaged.
+	added missing \n on display password status if password must be changed.
 
 2006-02-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10471,14 +10471,14 @@
 2006-01-18  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/setupenv.c, src/chage.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/usermod.c, src/vipw.c:
-	variouse code cleanups for make possible compilation of shadow with
+	various code cleanups for make possible compilation of shadow with
 	-Wall -Werror (by Alexander Gattin <xrgtn@yandex.ru>).
 
 	* libmisc/age.c, libmisc/shell.c, src/login.c, src/newgrp.c, src/su.c, src/sulogin.c, src/userdel.c, NEWS, lib/prototypes.h:
 	move exit() outside libmisc/shell.c::shell() for handle shell() errors
 	on higher level (now is better visable where some programs exit with 126 and
 	127 exit codes); added new shell() parameter (char *const envp[]) which allow
-	fix preserving enviloment in su on using -p.
+	fix preserving enviroment in su on using -p.
 	(patch by Alexander Gattin <xrgtn@yandex.ru>)
 
 	* NEWS, po/el.po:
@@ -10563,7 +10563,7 @@
 
 	* NEWS: correct 4.0.14 release date (03-01-2006).
 
-	* src/Makefile.am: reverte install nologin in sbindir and use usbindir.
+	* src/Makefile.am: revert install nologin in sbindir and use usbindir.
 
 	* po/POTFILES.in: removed src/chsh_chkshell.c.
 
@@ -10599,7 +10599,7 @@
 	* src/su.c:
 	This second patch changes the way options are handled by getopt. Once a
 	non-su option is found, the getopt processing is stopped.
-	Whithout this patch, "su root -c ls" won't work (getopt will complain that
+	Without this patch, "su root -c ls" won't work (getopt will complain that
 	-c is not an su option).
 	(by Nicolas François <nicolas.francois@centraliens.net>).
 
@@ -10640,7 +10640,7 @@
 	call and may be more readable (Nicolas François <nicolas.francois@centraliens.net>).
 
 	* man/Attic/su.1, man/su.1.xml:
-	added forgoten the SHELL argument description (by Nicolas François <nicolas.francois@centraliens.net>).
+	added forgotten the SHELL argument description (by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* man/Attic/useradd.8, man/useradd.8.xml:
 	s/group/user/ (cached by Nicolas François).
@@ -10708,7 +10708,7 @@
 	* NEWS: set release day for 4.0.14 to 19-12-2005.
 
 	* src/login.c:
-	removed #include "libaudit.h" (it is conditionaly included in "defines.h").
+	removed #include "libaudit.h" (it is conditionally included in "defines.h").
 
 	* src/su.c:
 	replaced "shell" by "shellstr". "shell" is also the name of a function.
@@ -10742,7 +10742,7 @@
 	* NEWS: updated.
 
 	* src/su.c:
-	added handle -s/--shell option like in GNU su (based on Debian patch sublmited
+	added handle -s/--shell option like in GNU su (based on Debian patch submitted
 	by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* src/su.c:
@@ -10768,7 +10768,7 @@
 
 	* man/ko/Makefile.am: added su.1 to man_MANS.
 
-	* man/Makefile.am: reverte incorrect commit.
+	* man/Makefile.am: revert incorrect commit.
 
 	* man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/vipw.8, man/Makefile.am, man/fr/Makefile.am, man/fr/chage.1, man/fr/chfn.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/expiry.1, man/fr/faillog.5, man/fr/faillog.8, man/fr/getspnam.3, man/fr/gpasswd.1, man/fr/groupadd.8, man/fr/groupdel.8, man/fr/groupmod.8, man/fr/groups.1, man/fr/grpck.8, man/fr/grpconv.8, man/fr/grpunconv.8, man/fr/gshadow.5, man/fr/lastlog.8, man/fr/limits.5, man/fr/login.1, man/fr/login.access.5, man/fr/login.defs.5, man/fr/logoutd.8, man/fr/newgrp.1, man/fr/newusers.8, man/fr/passwd.1, man/fr/passwd.5, man/fr/porttime.5, man/fr/pwck.8, man/fr/pwconv.8, man/fr/pwunconv.8, man/fr/sg.1, man/fr/shadow.3, man/fr/shadow.5, man/fr/su.1, man/fr/suauth.5, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/fr/vigr.8, man/fr/vipw.8, NEWS:
 	added full set (up to date) fr man pages (by Nicolas François <nicolas.francois@centraliens.net>).
@@ -10788,7 +10788,7 @@
 	s/--delete /--delete/
 
 	* NEWS, po/ru.po:
-	updated ru translatios for 4.0.14 (by Yuri Kozlov <kozlov.y@gmail.com>).
+	updated ru translations for 4.0.14 (by Yuri Kozlov <kozlov.y@gmail.com>).
 
 	* po/eu.po: finish update for 4.0.14 (by pi <pi@beobide.net>).
 
@@ -10807,7 +10807,7 @@
 2005-12-03  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/vipw.c, NEWS, man/Attic/vipw.8, man/vipw.8.xml, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po:
-	rewrited vipw for use getopt_long().
+	rewritten vipw for use getopt_long().
 
 	* man/Attic/passwd.1, man/passwd.1.xml: cleanups.
 
@@ -10866,7 +10866,7 @@
 
 	* man/ru/Makefile.am: typo.
 
-	* po/pl.po: partialy updated.
+	* po/pl.po: partially updated.
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	run "make update-po".
@@ -10885,7 +10885,7 @@
 
 	* NEWS, src/Makefile.am, src/nologin.c: added nologin program.
 
-	* NEWS, src/su.c: rewrited for use getopt_long().
+	* NEWS, src/su.c: rewritten for use getopt_long().
 
 2005-11-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -10894,7 +10894,7 @@
 2005-11-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/usermod.8, man/usermod.8.xml:
-	rewrited for document long options.
+	rewritten for document long options.
 
 	* NEWS, src/vipw.c:
 	added a "quiet" mode (http://bugs.debian.org/190252.
@@ -10957,7 +10957,7 @@
 	to the utmp file (merge 440_manpages-login.1 Debian patch).
 
 	* man/Attic/userdel.8, man/userdel.8.xml:
-	aphabetic order options description.
+	alphabetic order options description.
 
 	* NEWS, man/Attic/userdel.8, man/userdel.8.xml:
 	document the -f option; document the group removal behavior (merge
@@ -10994,7 +10994,7 @@
 	* src/usermod.c: indent code.
 
 	* NEWS, src/usermod.c:
-	rewrited for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>).
+	rewritten for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>).
 
 2005-10-24  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11011,7 +11011,7 @@
 	Simplifications: move all per shadow tool declared struct pam_conv conv
 	from src/*c to lib/pam_defs.h. #include "pam_defs.h" instead <security/pam_appl.h>
 	and <security/pam_misc.h>.
-	Patch partialy based on openpam fixes by Rob Holland <rob@inversepath.com>.
+	Patch partially based on openpam fixes by Rob Holland <rob@inversepath.com>.
 
 	* NEWS, lib/commonio.c:
 	fixed grpck segmentation fault on using -s when /etc/gshadow is empty (fix by
@@ -11100,7 +11100,7 @@
 	* src/chfn.c: cleanups.
 
 	* src/chage.c:
-	removed duplicaded not moved PAM code) was introduced during merge
+	removed duplicated not moved PAM code) was introduced during merge
 	shadow-4.0.4.1-owl-pam-auth.diff patch).
 
 	* src/chfn.c: finish PAM support.
@@ -11219,14 +11219,14 @@
 	added missing <para></para> inside <listitem> tags for pass correctly xmllint.
 
 	* man/Attic/login.access.5, man/login.access.5.xml:
-	rewrited FILES section.
+	rewritten FILES section.
 
 	* man/login.access.5.xml: cleanups.
 
 2005-09-15  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/passwd.5, man/passwd.5.xml:
-	rewrited based on work by Greg Wooledge <greg@wooledge.org>
+	rewritten based on work by Greg Wooledge <greg@wooledge.org>
 	http://bugs.debian.org/328113
 
 2005-09-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -11255,10 +11255,10 @@
 
 	* NEWS, libmisc/limits.c:
 	fixed setup max address space limits (added missing break statement in case)
-	spoted by Lasse Collin <lasse.collin@tukaani.org>
+	spotted by Lasse Collin <lasse.collin@tukaani.org>
 	(fix for non-PAM case)
 
-	* configure.in: try find and use by default feactures:
+	* configure.in: try find and use by default features:
 	with_audit="yes"
 	with_libcrack="no"
 	with_libpam="yes"
@@ -11280,7 +11280,7 @@
 	* libmisc/audit_help.c: added shadow copyright text and indent file.
 
 	* libmisc/audit_help.c:
-	patr of auditing support not added on commiting audit changes.
+	patr of auditing support not added on committing audit changes.
 
 	* src/Makefile.am: s/AUDIT/LIBAUDIT/
 
@@ -11308,7 +11308,7 @@
 	long_options[] entry.
 
 	* po/fr.po, NEWS:
-	partialy updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
+	partially updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
 2005-09-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11361,7 +11361,7 @@
 	So "ident /usr/bin/passwd" will show again some useable informations.
 
 	* man/Makefile.am: added support for regenerate roff files from XML.
-	Added depeing shadow-man-pages.pot on $(man_XMANS).
+	Added dependency shadow-man-pages.pot on $(man_XMANS).
 
 2005-08-30  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11393,7 +11393,7 @@
 	* src/login.c, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po:
 	s/login: failure forking: %s/%s: failure forking: %s/ (one phrase for translate less).
 
-	* po/pl.po: partialy updated.
+	* po/pl.po: partially updated.
 
 2005-08-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11418,7 +11418,7 @@
 
 	* libmisc/obscure.c, libmisc/utmp.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, src/chage.c, src/login.c, src/logoutd.c, src/newgrp.c, src/su.c, src/useradd.c, NEWS:
 	merge 010_more-i18ned-messages Debian patch which adds i18n support for few more messages
-	(orginaly patch was prepared by Guillem Jover <guillem@debian.org>).
+	(originally patch was prepared by Guillem Jover <guillem@debian.org>).
 
 	* man/id/chsh.1:
 	fix .SH (fix merged from 207_id-manpages debian patch).
@@ -11444,7 +11444,7 @@
 	command (fixes by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* NEWS, libmisc/chkname.c, man/Attic/groupadd.8, man/Attic/useradd.8, man/groupadd.8.xml, man/useradd.8.xml:
-	fix regular expression describing alloved login/group names (pointed
+	fix regular expression describing allowed login/group names (pointed
 	by Nicolas François <nicolas.francois@centraliens.net>)
 	(correct is [a-z_][a-z0-9_-]*[$]).
 
@@ -11460,7 +11460,7 @@
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	removed "Account maintenance" section.
 
-	* man/Attic/passwd.1, man/passwd.1.xml: partialy done rewrite.
+	* man/Attic/passwd.1, man/passwd.1.xml: partially done rewrite.
 
 	* po/ro.po:
 	some fixes after review of the translation (by Sorin Batariuc <sorin@bonbon.net>).
@@ -11484,7 +11484,7 @@
 	s/lastlog results/lastlog records/ in lastlog usage output.
 
 	* man/Attic/lastlog.8, man/lastlog.8.xml:
-	add "" aroud <command></command>.
+	add "" around <command></command>.
 
 	* po/vi.po, po/zh_CN.po, po/zh_TW.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, src/lastlog.c:
 	alphabetic order options in lastlog usage output. Run "make -C po update-po".
@@ -11516,7 +11516,7 @@
 2005-08-23  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, src/passwd.c, NEWS:
-	passwd rewrited for use getopt_long().
+	passwd rewritten for use getopt_long().
 
 	* man/Attic/chage.1, man/chage.1.xml: /warndays/--warndays/
 
@@ -11588,12 +11588,12 @@
 	fixed missing \n in usage() output.
 
 	* lib/getdef.c, src/login.c, src/newgrp.c, NEWS:
-	remove using login.defs::CLOSE_SESSIONS variable and allways close PAM session.
+	remove using login.defs::CLOSE_SESSIONS variable and always close PAM session.
 
 2005-08-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in:
-	realy enable shadow group support by default (pointed by
+	really enable shadow group support by default (pointed by
 	Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>).
 	Indentations in --help output.
 
@@ -11676,7 +11676,7 @@
 2005-08-06  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c:
-	s/spoll/spool/ (spoted by Nicolas François <nicolas.francois@centraliens.net>).
+	s/spoll/spool/ (spotted by Nicolas François <nicolas.francois@centraliens.net>).
 
 2005-08-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11688,7 +11688,7 @@
 
 	* lib/defines.h, NEWS, configure.in:
 	added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
-	and stub prototype for ngettext() in lib/prototypes.h (neccessary if shadow
+	and stub prototype for ngettext() in lib/prototypes.h (necessary if shadow
 	compiled with disabled NLS support)
 	Based on fixes by Martin Schlemmer <azarah@nosferatu.za.org>.
 
@@ -11703,7 +11703,7 @@
 2005-08-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, NEWS:
-	rewrited groupadd for use getopt_long().
+	rewritten groupadd for use getopt_long().
 
 	* src/chage.c: indent.
 
@@ -11798,7 +11798,7 @@
 2005-07-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, configure.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po:
-	4.0.11.1 will be released tmorrow (21-07-2005).
+	4.0.11.1 will be released tomorrow (21-07-2005).
 
 	* configure.in, NEWS:
 	fixed configure.in: now is possible build shadow with enabled/disabled shadow group
@@ -11806,7 +11806,7 @@
 
 	* po/sv.po, NEWS: update finished (by Per Olofsson <pelle@dsv.su.se>)
 
-	* po/sv.po: partialy updated (by Per Olofsson <pelle@dsv.su.se>).
+	* po/sv.po: partially updated (by Per Olofsson <pelle@dsv.su.se>).
 
 2005-07-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11869,7 +11869,7 @@
 
 	* NEWS, man/Attic/pwck.8, man/pwck.8.xml:
 	document -q option (based on Debian patch for fix http://bugs.debian.org/309408)
-	Rewrited OPTIONS section and better SYNOPSIS.
+	Rewritten OPTIONS section and better SYNOPSIS.
 
 	* NEWS, po/da.po:
 	- updated for 4.0.11 (by Claus Hindsgaul <claus_h@image.dk>).
@@ -11898,12 +11898,12 @@
 	* NEWS, po/es.po:
 	updated for 4.0.11 (by Ruben Porras <nahoo82@telefonica.net>).
 
-	* src/useradd.c: cleanups in usage() oyput.
+	* src/useradd.c: cleanups in usage() output.
 
 	* po/zh_TW.po, po/vi.po, po/zh_CN.po, po/uk.po, po/tl.po, po/tr.po, po/sv.po, po/sq.po, po/sk.po, po/ro.po, po/ru.po, po/pt.po, po/pt_BR.po, po/pl.po, po/nb.po, po/nl.po, po/nn.po, po/ko.po, po/it.po, po/ja.po, po/he.po, po/id.po, po/fr.po, po/eu.po, po/fi.po, po/es.po, po/da.po, po/de.po, po/el.po, po/bs.po, po/ca.po, po/cs.po:
 	cleanups in usage() output.
 
-	* NEWS: release 4.0.11 is sheduled to 18-06-2005.
+	* NEWS: release 4.0.11 is scheduled to 18-06-2005.
 
 2005-07-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -11929,14 +11929,14 @@
 	idescription must be finished).
 
 	* src/useradd.c, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, NEWS:
-	rewrited for use getopt_long().
+	rewritten for use getopt_long().
 
 	* po/stats: more gsub().
 
 2005-07-08  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/newgrp.c:
-	indent source code and use fix for handle splitted groups unconditionaly.
+	indent source code and use fix for handle splitted groups unconditionally.
 
 	* lib/nscd.c: indent.
 
@@ -12037,7 +12037,7 @@
 	replace #ifdef USE_PAM .. #endif #ifndef USE_PAN .. #endif by
 	#ifdef USE_PAM .. #else .. #endif.
 
-	* src/su.c: conditiona code reorganization.
+	* src/su.c: conditional code reorganization.
 
 	* src/login.c: remove one #ifndef USE_PAM .. #endif.
 
@@ -12128,7 +12128,7 @@
 	* po/pl.po: start update for 4.0.10.
 
 	* src/usermod.c, src/useradd.c, src/userdel.c, src/id.c, src/newgrp.c, src/su.c, po/zh_TW.po, po/zh_CN.po, po/vi.po, po/uk.po, po/tr.po, po/tl.po, po/sv.po, po/sq.po, po/sk.po, po/ru.po, po/pt_BR.po, po/ro.po, po/pt.po, po/pl.po, po/nn.po, po/nl.po, po/nb.po, po/ko.po, po/ja.po, po/it.po, po/id.po, po/he.po, po/fr.po, po/eu.po, po/fi.po, po/es.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po:
-	s/uid/UID/ in all commnets and messages.
+	s/uid/UID/ in all comments and messages.
 
 	* libmisc/failure.c, libmisc/limits.c, lib/pwio.c:
 	s/uid/UID/ in comments.
@@ -12146,7 +12146,7 @@
 	* libmisc/entry.c: removed extern for fgetpwent().
 
 	* NEWS, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/gshadow.5, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8:
-	now most of the man pages now are generated from XML files so in case any submiting
+	now most of the man pages now are generated from XML files so in case any submitting
 	any chages to this resources please make diff fies to XML files.
 
 	* man/Attic/pw_auth.3.xml: cleanups.
@@ -12182,7 +12182,7 @@
 	* man/newusers.8.xml: cleanups.
 
 	* man/gshadow.5.xml:
-	use <itemizedlist mark='bullet'> for gshadow fields desscription.
+	use <itemizedlist mark='bullet'> for gshadow fields description.
 
 	* man/shadow.5.xml: cleanups.
 
@@ -12223,7 +12223,7 @@
 	place definition of struct spwd in <programlisting></programlisting>.
 
 	* NEWS, src/userdel.c:
-	userdel now deletes user groups from /etc/gshdow as well as /etc/group.
+	userdel now deletes user groups from /etc/gshadow as well as /etc/group.
 	Fix by Nicolas François <nicolas.francois@centraliens.net>.
 	http://bugs.debian.org/99442
 
@@ -12231,7 +12231,7 @@
 	fixed bug in usermod ad run "make -C po update-po".
 	When relocating a user's home directory, don't fail and remove the new
 	home directory if we can't remove the old home directory for some
-	reason; the results can be spectularly poort if, for instance, only
+	reason; the results can be spectacularly poor if, for instance, only
 	the rmdir() fails. Patch prepared by Timo Lindfors <lindi-spamtrap@newmail.com>.
 	http://bugs.debian.org/166369
 
@@ -12247,7 +12247,7 @@
 	* man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/faillog.5.xml:
 	cleanups.
 
-	* man/login.1.xml: rewrited FILES section.
+	* man/login.1.xml: rewritten FILES section.
 
 	* man/id.1.xml, man/lastlog.8.xml, man/gshadow.5.xml: cleanups.
 
@@ -12262,7 +12262,7 @@
 
 	* libmisc/failure.c, libmisc/failure.h, NEWS:
 	use also UTMPX API instead UTMP on failure (login was by affected this when shadow
-	was builded without PAM support).
+	was built without PAM support).
 
 	* NEWS, src/login.c:
 	the PAM session needs to be closed as root, thus before change_uid()
@@ -12324,7 +12324,7 @@
 	* NEWS, po/ca.po: updated (by Guillem Jover <guillem@debian.org>).
 
 	* man/de/passwd.1:
-	added small comment with marker usefull for translators.
+	added small comment with marker useful for translators.
 
 2005-05-25  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -12332,7 +12332,7 @@
 	indent all.
 
 	* src/chage.c, src/chpasswd.c, src/expiry.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, lib/Attic/sppack.c, lib/defines.h, lib/lockpw.c, lib/prototypes.h, lib/sgetspent.c, lib/shadow.c, lib/shadowio.c, libmisc/age.c, libmisc/entry.c, libmisc/isexpired.c, libmisc/pwd2spwd.c, libmisc/pwdcheck.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, Attic/acconfig.h, NEWS, configure.in:
-	remove using SHADOWPWD #define so now shadow is allways builded with shadow
+	remove using SHADOWPWD #define so now shadow is always built with shadow
 	password support.
 
 2005-05-24  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -12349,7 +12349,7 @@
 2005-05-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/encrypt.c, NEWS:
-	fixed passwd segfault in non-PAM connfiguration (submited by Greg Schafer <gschafer@zip.com.au>).
+	fixed passwd segfault in non-PAM configuration (submited by Greg Schafer <gschafer@zip.com.au>).
 
 	* po/sv.po: upsdate (by Christian Perrier <bubulle@debian.org>).
 
@@ -12442,7 +12442,7 @@
 	* man/Attic/login.defs.5: typo in bold.
 
 	* man/su.1.xml:
-	removed comment. Use <variablelist></variablelist> in Files secstion.
+	removed comment. Use <variablelist></variablelist> in Files section.
 	Fixed bold.
 
 	* man/Attic/pwconv.8, man/Attic/su.1: typo in bold.
@@ -12454,7 +12454,7 @@
 	* po/nl.po: kill fuzzy.
 
 	* man/Attic/chage.1:
-	reverte last commit (by mistake commited experimental version generated from XML file).
+	revert last commit (by mistake committed experimental version generated from XML file).
 
 	* NEWS, po/nl.po:
 	updated for 4.0.8 (by "cobaco (aka Bart Cornelis)" <cobaco@linux.be>).
@@ -12518,11 +12518,11 @@
 
 2005-04-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* man/chpasswd.8.xml: Rewrited by hand & xemacs.
+	* man/chpasswd.8.xml: Rewritten by hand & xemacs.
 
 	* man/chfn.1.xml: cleanups in <refentry> tag.
 
-	* man/chfn.1.xml: Rewrited by hand & xemacs.
+	* man/chfn.1.xml: Rewritten by hand & xemacs.
 
 	* NEWS, po/pt.po:
 	updated for 4.0.8 (by Miguel Figueiredo <elmig@debianpt.org>).
@@ -12590,7 +12590,7 @@
 
 	* src/passwd.c:
 	adjust also syslog message on usage -S option without permission.
-	Consolidate SELinix and non-SELinux code.
+	Consolidate SELinux and non-SELinux code.
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, NEWS, src/passwd.c:
 	fix #61313 Debian bug: "passwd -S root" (as a normal user) should not
@@ -12621,7 +12621,7 @@
 2005-04-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/fi.po, NEWS:
-	updated translation (by Tommi Vainikainen <tvainikan@cc.hut.fi>).
+	updated translation (by Tommi Vainikainen <tvainika@cc.hut.fi>).
 
 	* man/hu/passwd.1, man/it/passwd.1, man/ja/passwd.1, man/pl/passwd.1, man/Attic/passwd.1, man/de/passwd.1, man/es/passwd.1:
 	cleanups and unifications in SEE ALSO section.
@@ -12634,7 +12634,7 @@
 	avoid autoconf warnings.
 
 	* configure.in:
-	AC_SYS_LARGEFILE() performs checking is fseeko() is avalaible so "fseeko" can
+	AC_SYS_LARGEFILE() performs checking is fseeko() is available so "fseeko" can
 	be removed from AC_CHECK_FUNCS() parameters.
 
 	* NEWS, configure.in: Remove using AC_PROG_GCC_TRADITIONAL macro.
@@ -12693,7 +12693,7 @@
 
 	* po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, src/faillog.c:
 	changed faillog records display format for allow fit in 80 columns all
-	faillog atributies.
+	faillog attributes.
 
 	* po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po:
 	run "make update-po". Updated pl.po.
@@ -12722,7 +12722,7 @@
 	* src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/passwd.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, NEWS, lib/Attic/grdbm.c, lib/Attic/gsdbm.c, lib/Attic/pwdbm.c, lib/Attic/spdbm.c, lib/Makefile.am, lib/gshadow.c, lib/shadow.c:
 	next round of cleanups: removed NDBM code (unused).
 
-	* src/login.c: consilidate some !USE_PAM lines.
+	* src/login.c: consolidate some !USE_PAM lines.
 
 	* src/login.c, src/login_nopam.c:
 	move bad_time_notify() and check_nologin() to src/login_nopam.c.
@@ -12763,7 +12763,7 @@
 
 	* man/Attic/gpasswd.1, man/Attic/newgrp.1:
 	fixes by Nicolas Nicolas François <nicolas.francois@centraliens.net> (not all
-	commited).
+	committed).
 
 2005-04-02  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -12773,12 +12773,12 @@
 	* man/cs/groups.1: cleanups.
 
 	* NEWS, src/su.c:
-	fixed use of SU_WHEEL_ONLY in su. Now su realy is avalaible for wheel group
+	fixed use of SU_WHEEL_ONLY in su. Now su really is available for wheel group
 	members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
 	http://bugs.gentoo.org/show_bug.cgi?id=80345
 
 	* man/pl/Attic/chage.1.xml:
-	converted from roff using doclifter. Rewrited by hand. Probably will be
+	converted from roff using doclifter. Rewritten by hand. Probably will be
 	removed after prepare infrastructure for translate man pages using gettext
 	but temporary I need this for some experiments.
 
@@ -12787,7 +12787,7 @@
 	* configure.in, libmisc/Attic/login_access.c, libmisc/Makefile.am, src/Makefile.am, src/login.c, src/login_nopam.c:
 	move libmisc/login_access.c to src/login_mopam.c.
 	Remove using LOGIN_ACCESS #define. Now LOGIN_ACCESS is equal to !USE_PAM.
-	In src/login_nopam.c will be cumulated non-PAM specyfic login code.
+	In src/login_nopam.c will be cumulated non-PAM specific login code.
 
 	* src/lastlog.c, src/login.c, src/useradd.c, src/usermod.c, libmisc/log.c:
 	cleanups: remove using #include "lastlog_.h".
@@ -12802,7 +12802,7 @@
 	s/chage/chage command/ in DESCRIPTION.
 
 	* man/chage.1.xml:
-	converted from roff using doclifter. Rewrited by hand.
+	converted from roff using doclifter. Rewritten by hand.
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/faillog.8, man/Attic/groupmod.8, man/Attic/pwconv.8, man/Attic/useradd.8, man/Attic/usermod.8:
 	cleanups.
@@ -12848,7 +12848,7 @@
 
 	* man/pl/useradd.8: cleanups: aded missing \fR.
 
-	* man/pl/usermod.8: partialy synced with english version.
+	* man/pl/usermod.8: partially synced with english version.
 
 	* man/Attic/usermod.8: typo.
 
@@ -12866,12 +12866,12 @@
 	* libmisc/.indent.pro, src/.indent.pro, lib/.indent.pro: -l80 added.
 
 	* lib/gshadow.c, NEWS:
-	rewrited group count to dynamic (by John Newbigin <jnewbigin@ict.swin.edu.au >).
+	rewritten group count to dynamic (by John Newbigin <jnewbigin@ict.swin.edu.au >).
 
 	* po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po:
 	run "make update-po".
 
-	* src/login.c: use allways "\n%s login: " login prompt.
+	* src/login.c: use always "\n%s login: " login prompt.
 
 	* src/login.c: removed radius support (even not compiles).
 
@@ -12903,7 +12903,7 @@
 	* po/pl.po: put mine data in Last-Translator: field.
 
 	* src/newusers.c:
-	use the same as in useradd default UMASK (022 instead 077) if diffrent not
+	use the same as in useradd default UMASK (022 instead 077) if different not
 	defined in login.defs.
 
 	* NEWS, libmisc/copydir.c:
@@ -12937,14 +12937,14 @@
 	QUOTAS_ENAB, ULIMIT variables moved to code "#ifndef USE_PAM" dependent.
 
 	* configure.in:
-	fix importand typo: added missing ",". Now LOGIN_ACCESS realy is defined only
+	fix important typo: added missing ",". Now LOGIN_ACCESS really is defined only
 	when PAM is not enabled.
 
 	* libmisc/obscure.c, libmisc/limits.c:
 	all functions from this file are "#ifndef USE_PAM" dependent.
 
 	* libmisc/setugid.c (change_uid):
-	removed dead code depndent on "#ifdef BSD".
+	removed dead code dependent on "#ifdef BSD".
 
 	* libmisc/ttytype.c (ttytype):
 	removed dead code depend on "defined(SUN) || defined(BSD) || defined(SUN4)".
@@ -13000,7 +13000,7 @@
 
 	* NEWS, src/chage.c, src/chfn.c, src/chsh.c, src/passwd.c:
 	SELinux changes: added changes in chage, chfn, chsh, passwd for allow
-	construct more grained user password/accuunt properties on SELinux
+	construct more grained user password/account properties on SELinux
 	policies level. Patch originally based on RH changes (submited by Chris
 	PeBenito <pebenito@gentoo.org>)
 
@@ -13026,7 +13026,7 @@
 
 2005-01-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* libmisc/rlogin.c: remove ruserok() prototyle and #include <unistd.h>.
+	* libmisc/rlogin.c: remove ruserok() prototype and #include <unistd.h>.
 
 	* lib/getdef.c: remove strtol() prototype (it comes with <stdlib.h>).
 
@@ -13054,14 +13054,14 @@
 	* src/Attic/mkpasswd.c, src/passwd.c, src/userdel.c, src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c, src/groups.c, src/login.c:
 	"less means better" added fixes which makes english texts more consistent
 	especially with capitalization issues. Based on fixes by Tommi Vainikainen
-	<thv+debian@iki.fi> (make all text begining from lower case .. not upper).
+	<thv+debian@iki.fi> (make all text beginning from lower case .. not upper).
 	This patch cuts i18n entries in each po/*po file from 420 to 402.
 
 2005-01-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* NEWS: added pt to updated translations.
 
-	* lib/defines.h: reverte last change (mistake).
+	* lib/defines.h: revert last change (mistake).
 
 	* po/pt.po:
 	updated translation by Miguel Figueiredo <elmig@debianpt.org>.
@@ -13080,7 +13080,7 @@
 
 	* po/es.po: Updates from Ruben Porras <nahoo@inicia.es>.
 
-	* lib/defines.h: - remove usong shadow_.h.
+	* lib/defines.h: - remove using shadow_.h.
 
 	* po/pl.po: kill fuzzy.
 
@@ -13112,7 +13112,7 @@
 2004-12-20  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
-	added checing is fseeko() function is avalaibabe in system: added fseeko to
+	added checking is fseeko() function is available in system: added fseeko to
 	AC_CHECK_FUNCS parameters.
 
 	* lib/Makefile.am:
@@ -13123,7 +13123,7 @@
 	- final entry about fixed large file support in lastlog and faillog.
 
 	* src/vipw.c, lib/Attic/pwent.c, lib/Attic/grent.c:
-	use fseeko() instead fseek(). This not realuy neccessary because in this
+	use fseeko() instead fseek(). This not really necessary because in this
 	cases fseek() was used for move to begin of file. This only for minimize
 	external functions count.
 
@@ -13176,23 +13176,23 @@
 2004-12-11  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/suauth.5, man/Attic/useradd.8:
-	Fixed varoiuse typos and misspeling based partialy on patch from Bug#141322
+	Fixed various typos and misspelling based partially on patch from Bug#141322
 	from Debian (submited by Christian Perrier <bubulle@debian.org>).
 
 	* man/Attic/chpasswd.8: more cleanups.
 
 	* man/pl/faillog.8, man/Attic/faillog.8, man/ja/faillog.8:
-	remove from OPTIONS section information about avalaibability on some systems
+	remove from OPTIONS section information about availability on some systems
 	faillog database in other location thad listed in FILES section.
 
 	* man/Attic/chpasswd.8: updated.
 
 	* man/fr/faillog.5:
-	fixed FICHIERS secttion: corrected change to italic on /var/log/faillog.
+	fixed FICHIERS section: corrected change to italic on /var/log/faillog.
 
 	* src/faillog.c:
-	move main() to the end of file and reorder rest functions. Now declararion
-	finction prototypes can be removed.
+	move main() to the end of file and reorder rest functions. Now declaration
+	function prototypes can be removed.
 
 2004-12-10  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13206,18 +13206,18 @@
 	"make update-po" after rewrite lastlog.
 
 	* src/lastlog.c: Rewrite for use the same style as in chpasswd.c.
-	Move open lastlog file after commadline option parsing so now --help option
+	Move open lastlog file after commandline option parsing so now --help option
 	can be used by user without read access to lastlog file.
 
 	* src/chpasswd.c:
-	s/display this help and exit/display this help message and exit/ in ussage()
+	s/display this help and exit/display this help message and exit/ in usage()
 	output.
 
 	* po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po:
 	"make update-po".
 
 	* src/chpasswd.c:
-	Added handle -h|--help option. Improved and updated ussage() output.
+	Added handle -h|--help option. Improved and updated usage() output.
 
 2004-12-09  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13241,7 +13241,7 @@
 	fix adding of pam_env env variables to enviroment (Martin Schlemmer <azarah@nosferatu.za.org>).
 
 	* NEWS, configure.in:
-	fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables which was allways
+	fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables which was always
 	empty (Gregorio Guidi <g.guidi@sns.it>)
 
 	* NEWS: updated.
@@ -13262,11 +13262,11 @@
 	* man/pl/Attic/mkpasswd.8, man/pl/chage.1, man/pl/chsh.1, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/lastlog.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/Attic/chage.1, man/Attic/chsh.1, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/lastlog.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	separated OPTIONS section.
 
-	* lib/commonio.c: reverte last change.
+	* lib/commonio.c: revert last change.
 
 	* libmisc/pwdcheck.c:
-	one word fix .. ommited "else" was removed. Now security bug which allow
-	unauthorized account properties modification is realy closed.
+	one word fix .. omitted "else" was removed. Now security bug which allow
+	unauthorized account properties modification is really closed.
 
 2004-10-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13331,10 +13331,10 @@
 	* po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po:
 	"make update-po".
 
-	* configure.in: reverte previous incorrect commit.
+	* configure.in: revert previous incorrect commit.
 
 	* NEWS, src/su.c:
-	add pam_open_session() support. If builded without PAM support
+	add pam_open_session() support. If built without PAM support
 	propagate $DISPLAY and $XAUTHORITY enviroment variables.
 	Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 
@@ -13369,7 +13369,7 @@
 	* po/pl.po: added missing \n.
 
 	* src/chage.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po:
-	more verbose/human readable -l output. This output is much more beter for
+	more verbose/human readable -l output. This output is much more better for
 	send directly via email for each users as message with account status (for
 	example as message with warning about account/password expiration).
 
@@ -13377,7 +13377,7 @@
 
 	* src/Makefile.am, libmisc/Makefile.am, lib/Makefile.am, configure.in:
 	move LOCALEDIR to autoheader variables. Remove redefining DEFS in
-	Makefile.am (not neccessary now).
+	Makefile.am (not necessary now).
 
 	* src/chage.c, src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/logoutd.c, src/newusers.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, NEWS:
 	applied OWL shadow-4.0.4.1-owl-pam-auth.diff patch by Solar Designer
@@ -13470,12 +13470,12 @@
 	* NEWS: Add note about apply shadow-4.0.4.1-owl-tmp.diff OWL patch.
 
 	* src/useradd.c, configure.in:
-	Remove looking for mkstemp() prototype and allways use mkstemp() (removed
+	Remove looking for mkstemp() prototype and always use mkstemp() (removed
 	using mktemp if mkstemp() not found).
-	Partialy based on tmp OWL patch by Solar Designer <solar@openwall.com>.
+	Partially based on tmp OWL patch by Solar Designer <solar@openwall.com>.
 
 	* NEWS, libmisc/pwdcheck.c:
-	Fixed securirty bug which allow unauthorized account properties modification.
+	Fixed security bug which allow unauthorized account properties modification.
 	Affected tools: chfn and chsh.
 	Bug was discovered by Martin Schulze <joey@infodrom.org>.
 
@@ -13518,7 +13518,7 @@
 
 	* src/login.c, NEWS:
 	Fixed handle -f option: now it works correctly without specify "-h
-	<host>" if open login session localy is required (thanks for help
+	<host>" if open login session locally is required (thanks for help
 	investigate bug for Krzysztof Kotlenga).
 
 	* po/es.po: Updated (by Ruben Porras <nahoo82@telefonica.net>).
@@ -13551,7 +13551,7 @@
 2004-03-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* libmisc/age.c:
-	Use endsgent() conditionaly depending on SHADOWGRP (fix submited by Gabor Z.
+	Use endsgent() conditionally depending on SHADOWGRP (fix submited by Gabor Z.
 	Papp <gzp@papp.hu>).
 
 	* po/LINGUAS, po/fi.po, NEWS:
@@ -13574,7 +13574,7 @@
 	bug fixes in automake files for generate correct tar ball on "make dist":
 	added midsiing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
-	* configure.in: Fixed checking is avalaible st_rdev in struct stat.
+	* configure.in: Fixed checking is available st_rdev in struct stat.
 
 2004-01-13  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13593,14 +13593,14 @@
 2004-01-05  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sv.po, po/uk.po, po/ru.po, po/ko.po, po/pl.po, po/fr.po, po/ja.po, po/el.po, po/cs.po, po/de.po, man/zh_TW/groupadd.8, man/zh_CN/groupadd.8, man/pt_BR/groupadd.8, man/pl/groupadd.8, man/ja/groupadd.8, man/it/groupadd.8, man/Attic/groupadd.8, NEWS:
-	Added missing information about -f options in groupadd usage mesage (document
+	Added missing information about -f options in groupadd usage message (document
 	this also in man page).
 
 2003-12-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Attic/lastlog_.h, libmisc/log.c, libmisc/utmp.c, src/lastlog.c, src/login.c:
 	More time() or gettimeofday() prevention overwrite memory on 64bit arch
-	(partialy based on patch from MDK).
+	(partially based on patch from MDK).
 
 	* po/sv.po, po/uk.po, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po:
 	Post remove TCFS support "make update-po".
@@ -13616,7 +13616,7 @@
 	Added using AM_MAINTAINER_MODE. AC_INIT without parameters.
 
 	* Attic/acconfig.h, configure.in:
-	Cleanups on autoheadres level: use AC_DEFINE(VAR, VAL, [Comment]) for
+	Cleanups on autoheaders level: use AC_DEFINE(VAR, VAL, [Comment]) for
 	USE_PAM, HAVE_TCFS and TCFS_GDBM_SUPPORT.
 
 	* src/newusers.c, src/useradd.c, Attic/acconfig.h, autogen.sh, lib/Attic/pwpack.c, NEWS:
@@ -13625,7 +13625,7 @@
 2003-12-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am, libmisc/Makefile.am, src/Makefile.am:
-	Removed -I$(top_srcdir) from INCLUDES (isn't neccessary becaus this is in
+	Removed -I$(top_srcdir) from INCLUDES (isn't necessary because this is in
 	DEFAULT_INCLUDES) - slightly shorter compile output.
 
 	* Makefile.am, configure.in:
@@ -13669,7 +13669,7 @@
 2003-07-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po, po/ru.po, po/sv.po, po/uk.po, libmisc/pam_pass.c, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
-	Otput "passwd: password updated successfully\n" message on successfull
+	Output "passwd: password updated successfully\n" message on successful
 	password change (based on Debian changes).
 
 	* src/newgrp.c: Remove work around for unsecure gettext.
@@ -13681,7 +13681,7 @@
 	and memory allocated for user_groups is not initialized (in both useradd and
 	usermod when -G options is used and in usermod when -l option is used).
 	That causing segfaults sometimes.
-	This fix is importand but not critical because usermod and usermod aren't suid
+	This fix is important but not critical because usermod and usermod aren't suid
 	root.
 	Problem reported and fixed by Alexey Voinov <voins@altlinux.ru>.
 
@@ -13787,15 +13787,15 @@
 	Minor cleanups.
 
 	* man/Attic/chage.1, man/pl/chage.1:
-	Rewrite for use claissic list form options descriptions.
+	Rewrite for use classic list form options descriptions.
 
 	* man/pl/groupadd.8:
 	s/Polecenie groupadd posiada opcje:/Polecenie groupadd posiada następujące opcje:/
 
 	* TODO: ALL:
 	move base passwd/shadow/group/gshadow operation to module for allow write
-	diffrent backend modules for db, NIS, LDAP and others. Default backend it
-	will be choose depending on /etc/nsswitch.conf and allow overrride this by
+	different backend modules for db, NIS, LDAP and others. Default backend it
+	will be choose depending on /etc/nsswitch.conf and allow override this by
 	-r <repository> options (where the <repository> can be file, db, nis
 	nisplus, ldap .. like on /etc/nsswitch.conf in service column).
 	passwd have old piece of code with handling -r option and it will be good
@@ -13823,16 +13823,16 @@
 
 	* src/chage.c, NEWS:
 	Now all code depend on SHADOWPWD. If shadow will not be configured on
-	autoconf level for using shadow possword chage is olny stub which informs
+	autoconf level for using shadow password chage is olny stub which informs
 	"chage not configured for shadow password support."
 
-	* man/it/Makefile.am: Removed EXTRA_DIST (not neccessary).
+	* man/it/Makefile.am: Removed EXTRA_DIST (not necessary).
 
-	* man/es/Makefile.am: Removed groups.1 (doen't exist es groups(1)).
+	* man/es/Makefile.am: Removed groups.1 (doesn't exist es groups(1)).
 
 	* man/de/Makefile.am (man_MANS): added login.1.
 
-	* man/de/Makefile.am: Removed EXTRA_DIST (isn't neccessary now).
+	* man/de/Makefile.am: Removed EXTRA_DIST (isn't necessary now).
 
 	* man/hu/Makefile.am, man/ja/Makefile.am, man/ko/Makefile.am, man/pl/Makefile.am, man/de/Makefile.am, man/fr/Makefile.am, NEWS, man/Makefile.am:
 	Install groups(1) man page (moved from EXTRA_DIST to man_MANS).
@@ -13867,7 +13867,7 @@
 
 	* src/su.c:
 	Removed dead code (#if 0 .. #endif) with call motd() and mailcheck()
-	(was commnted because GNU su doesn't do this).
+	(was commented because GNU su doesn't do this).
 
 2003-05-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -13918,7 +13918,7 @@
 2003-04-29  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* libmisc/limits.c, src/logoutd.c:
-	More utmp/utmpx fixes: use endutend() or endutxend() depending on HAVE_UTMPX_H.
+	More utmp/utmpx fixes: use endutent() or endutxent() depending on HAVE_UTMPX_H.
 
 	* po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po:
 	Run "make update-po" after remove SVR4 code and fix duplicated entries in sv.po.
@@ -13975,8 +13975,8 @@
 	Updated ja man pages and added expiry(1).
 
 	* man/hu/groups.1, man/hu/login.1:
-	Remove info about $HOME/.profile from FILES section (this does not depends
-	stricte on shadow).
+	Remove info about $HOME/.profile from FILES section (this does not depend
+	strictly on shadow).
 
 	* configure.in, man/Makefile.am, man/es/Makefile.am:
 	Added es man pages to ac/am suit.
@@ -13994,7 +13994,7 @@
 
 	* man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/zh_CN/chpasswd.8, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8, man/ko/login.1, man/ko/su.1, man/pl/chage.1, man/pl/chfn.1, man/pl/chsh.1, man/pl/expiry.1, man/pl/gpasswd.1, man/pl/groupmems.8, man/pl/groups.1, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/pl/newgrp.1, man/pl/passwd.1, man/pl/su.1, man/pl/sulogin.8, man/pl/useradd.8, man/pl/usermod.8, man/ja/Attic/mkpasswd.8, man/ja/chage.1, man/ja/chfn.1, man/ja/chsh.1, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/logoutd.8, man/ja/newgrp.1, man/ja/passwd.1, man/ja/passwd.5, man/ja/porttime.5, man/ja/pwck.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/login.1, man/hu/newgrp.1, man/hu/passwd.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/grpck.8, man/it/lastlog.8, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/it/usermod.8, man/cs/shadow.5, man/es/su.1, man/fr/chage.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/shadow.5, man/fr/su.1, man/fr/userdel.8, man/fr/usermod.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	Fixes: correct utmp/wtmp paths.
-	Unifications: bold commnanda and italify other file names.
+	Unifications: bold command and italify other file names.
 	Other minor changes and cleanups and unifications.
 
 	* libmisc/limits.c: More utmpx/utmp fixes.
@@ -14005,7 +14005,7 @@
 	* TODO: Missing "are".
 
 	* src/logoutd.c, src/userdel.c, NEWS:
-	Handle also utmpx if avalaile in userdel and logoutd.
+	Handle also utmpx if available in userdel and logoutd.
 
 2003-04-25  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14028,12 +14028,12 @@
 	* libmisc/Attic/getdate.c, libmisc/Attic/login_access.c, libmisc/Attic/login_desrpc.c, libmisc/Attic/login_krb.c, libmisc/Attic/nscd.c, libmisc/Attic/setup.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/pwdcheck.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/Attic/chkshell.c, libmisc/addgrps.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c:
 	Indent all using current .indent.pro settings.
 
-	* po/Makevars: New file neccessary for gettext >=0.11.5.
+	* po/Makevars: New file necessary for gettext >=0.11.5.
 
 	* man/Makefile.am: Removed getspnam.3 from man_MANS (dos not exist).
 
 	* po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po:
-	Fixes after filtering gettext 0.11.5 (missing headers elements, inforrect
+	Fixes after filtering gettext 0.11.5 (missing headers elements, incorrect
 	format strings).
 
 2003-04-21  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -14059,7 +14059,7 @@
 2003-01-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* man/ja/shadow.3, man/pl/shadow.3, man/Attic/shadow.3:
-	sync spwd structure declaration with current glibc declaration (tahnks for
+	sync spwd structure declaration with current glibc declaration (thanks for
 	point this bug to Michael Kerrisk <michael.kerrisk@gmx.net>).
 
 	* man/pl/faillog.5: s/konsolę/terminal/
@@ -14152,13 +14152,13 @@
 	* man/hu/Makefile.am, man/hu/login.1:
 	added login(1) man page from hu man pages translation project.
 
-	* po/POTFILES.in: updated (suath.c moved to src/).
+	* po/POTFILES.in: updated (suauth.c moved to src/).
 
 	* src/Makefile.am: added su_SOURCES with "su.c suauth.c".
 
 	* libmisc/Makefile.am:
-	remove suauth.c from libmisc_la_SOURCES (varialbles and functions from
-	this file are usesd only in su).
+	remove suauth.c from libmisc_la_SOURCES (variables and functions from
+	this file are used only in su).
 
 	* libmisc/Attic/suauth.c, src/suauth.c: move suauth.c o src/.
 
@@ -14191,7 +14191,7 @@
 	* NEWS: updated for 4.0.3.
 
 	* libmisc/Attic/suauth.c, libmisc/utmp.c, src/login.c, src/su.c:
-	swapped utent dnd pwent efinition/extern and now shadow source can be configured
+	swapped utent dnd pwent definition/extern and now shadow source can be configured
 	--with-shared (fix by Dimitar Zhekov <jimmy@is-vn.bg>).
 
 2002-03-07  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -14245,13 +14245,13 @@
 	* man/pl/Attic/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/Attic/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/Attic/adduser.8, man/Attic/grpconv.8, man/Attic/grpunconv.8, man/Attic/pwunconv.8, man/Attic/sg.1, man/Attic/vigr.8:
 	placa ".so man<level>/<man_page>.<level>" in roff .so includes (seems some
 	man page viewers do not handles correctly man documents without subdirectory
-	name in roff .so incude).
+	name in roff .so include).
 
 2002-01-31  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, NEWS:
 	resolve many fuzzy translations also all this which may cause problems on
-	displaing long uid/gid.
+	displaying long uid/gid.
 
 	* src/id.c, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po:
 	drop translate some messages in id output (about {,e}{u,g}id).
@@ -14266,7 +14266,7 @@
 
 	* libmisc/chkname.c (good_name):
 	allow usernames ending with "$" for allow create machine
-	acounts for samba (thanks for point this problem in 4.0.1 by
+	accounts for samba (thanks for point this problem in 4.0.1 by
 	Jerome Borsboom <borsboom@tch.fgg.eur.nl>).
 
 	* src/pwck.c, src/useradd.c, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
@@ -14299,7 +14299,7 @@
 	next part fixes for handle long UID/GID (by Thorsten Kukuk <kukuk@suse.de>).
 
 	* lib/getdef.c, lib/getdef.h:
-	adeded getdef_unum(): get unsigned numerical value from table of
+	added getdef_unum(): get unsigned numerical value from table of
 	definitions (Thorsten Kukuk <kukuk@suse.de>).
 
 	* NEWS: updated.
@@ -14322,7 +14322,7 @@
 
 2001-12-22  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* man/pl/useradd.8, man/Attic/useradd.8: documment -o option.
+	* man/pl/useradd.8, man/Attic/useradd.8: document -o option.
 
 	* man/pl/usermod.8, man/pl/chfn.1, man/pl/chsh.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/id.1, man/pl/login.1, man/pl/newgrp.1, man/pl/passwd.1, man/pl/su.1, man/pl/useradd.8, man/pl/userdel.8:
 	correct package name (s/shadow-password/shadow/).
@@ -14337,18 +14337,18 @@
 	cleanups.
 
 	* src/Attic/dpasswd.c, src/Attic/mkpasswd.c, src/expiry.c, src/grpck.c, src/id.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/chfn.c, src/chsh.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, man/Attic/useradd.8:
-	standarize usage messages syntax.
+	standardize usage messages syntax.
 
 	* man/pl/useradd.8, man/pl/usermod.8, man/pl/vipw.8, man/pl/userdel.8:
 	removed duplicated man page text.
 
 	* src/chage.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po:
-	standarize usage meissages syntax.
+	standardize usage messages syntax.
 
 	* src/chage.c, NEWS (main):
 	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
-	nitialize PAM and checkin is chage is runed by root or not - now chage can be
-	runed from non-root account for checking by user own accout information.
+	initialize PAM and checking if chage is runed by root or not - now chage can be
+	runed from non-root account for checking by user own account information.
 
 	* src/pwck.c: indent source.
 
@@ -14368,11 +14368,11 @@
 	* src/newgrp.c, src/pwck.c, src/su.c, src/useradd.c, src/usermod.c, src/groupadd.c, src/groupmod.c, src/id.c, NEWS:
 	fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>).
 
-	* src/chage.c: - break usage vomment line.
+	* src/chage.c: - break usage comment line.
 
 	* lib/defines.h:
-	removed bunch spaces on end line in conditionale #include <errno.h>
-	which in some cases dissallow compile correctly shadow (thanks for
+	removed bunch spaces on end line in conditional #include <errno.h>
+	which in some cases disallow compile correctly shadow (thanks for
 	Silvan Minghetti <bullet@users.sourceforge.net>).
 
 2001-11-17  Michał Moskal  <malekith@pld.org.pl>
@@ -14445,7 +14445,7 @@
 
 2001-11-14  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
 
-	* configure.in: - added hu directory antry
+	* configure.in: - added hu directory entry
 
 	* man/Makefile.am: - groups.1 moved to EXTRA_DIST
 	- added hu directory entry
@@ -14478,7 +14478,7 @@
 	(Thorsten Kukuk <kukuk@suse.de>).
 
 	* libmisc/Attic/nscd.c, libmisc/Makefile.am, lib/commonio.c:
-	implemetn better reloading the nscd cache (per NSS map)
+	implement better reloading the nscd cache (per NSS map)
 	by Thorsten Kukuk <kukuk@suse.de>
 
 	* src/login.c, libmisc/setupenv.c:
@@ -14514,7 +14514,7 @@
 2001-10-06  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am (libshadow_la_SOURCES):
-	reverte last change and added rcsid.h,
+	revert last change and added rcsid.h,
 	(EXTRA_DIST): added missing "\".
 
 	* src/Makefile.am: (DEFS):
@@ -14573,16 +14573,16 @@
 
 	* src/useradd.c (set_defaults):
 	handle correctly error open/create useradd default config
-	filei (based on orginal post to bugtraq).
+	filei (based on original post to bugtraq).
 
-	* TODO: documment in pt_BR, ja man pages -s {pw,grp}ck option.
+	* TODO: document in pt_BR, ja man pages -s {pw,grp}ck option.
 
 	* libmisc/sulog.c, NEWS:
 	remove limit to 6 chars logged tty name (apply 012_libmisc_sulog.c.diff Debian
 	patch).
 
 	* man/pl/Attic/shadowconfig.8, man/Attic/shadowconfig.8:
-	- aply 021_man_shadowconfig_usr_doc.diff debian patch.
+	- apply 021_man_shadowconfig_usr_doc.diff debian patch.
 
 	* src/Makefile.am, lib/Makefile.am:
 	use $(top_builddir) in .la files paths (for allow correct compile if
@@ -14619,7 +14619,7 @@
 	added uk translation (Roman Festchook <roma@polesye.net>).
 
 	* src/logoutd.c (mani):
-	s/ut->ut_libe/ut->ut_user/ on prepare strin with user name for syslog
+	s/ut->ut_libe/ut->ut_user/ on prepare string with user name for syslog
 	line (reported by Roman Festchook <roma@polesye.net>).
 
 2001-07-27  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -14645,8 +14645,8 @@
 	AC_CHECK_LIB().
 
 	* configure.in:
-	added checking for libpam_misc if libpam found and if libpam_misc is avalaible
-	add them to $LIBPAM. Othervise exit fron autoconf script with error message.
+	added checking for libpam_misc if libpam found and if libpam_misc is available
+	add them to $LIBPAM. Otherwise exit fron autoconf script with error message.
 	Now shadow compiles if pam support is enabled.
 
 2001-06-28  Marek Michałkiewicz  <marekm@pld.org.pl>
@@ -14658,8 +14658,8 @@
 	* configure.in: remove intl/po2tbl.sed from AC_OUTPUT().
 
 	* configure.in:
-	removed add md5.o md5crypt.o conditionaly to $LIBOBJS (this is obsoleted).
-	In current version ndling md5 functionality is included conditionaly
+	removed add md5.o md5crypt.o conditionally to $LIBOBJS (this is obsoleted).
+	In current version ndling md5 functionality is included conditionally
 	inside md5.c and md5crypt.c source files.
 
 	* lib/Attic/md5.c: added comments for #endif.
@@ -14668,7 +14668,7 @@
 
 	* configure.in:
 	- check pam directly by AC_CHECK_LIB() (PAM from PLD is now fixed an also other
-	  PAM implementation must be fixed for this method checkin is libpam is avalaible;
+	  PAM implementation must be fixed for this method checking is libpam is available;
 	  sorry .. no way this is plain linking procedure bug),
 	- use AC_DEFINE(LOGIN_ACCES) only when PAM isn't used.
 
@@ -14737,22 +14737,22 @@
 
 	* src/.indent.pro, lib/.indent.pro, libmisc/.indent.pro:
 	directory indent config file is -kr -i8 -bad (indent open this file and
-	read options if options not specyfied in commnad line).
+	read options if options not specified in command line).
 
 	* autogen.sh (conf_flags): added --with-pam.
 
-	* NEWS: start complette next release information.
+	* NEWS: start complete next release information.
 
 2001-02-04  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* shlib/Attic/Makefile.am, shlib/Attic/Makefile.in.saved: - removed.
 
 	* src/Makefile.am, libmisc/Makefile.am, lib/Makefile.am:
-	Rewrited automake suit for building lib, libmisc and src (now this look much
+	Rewritten automake suit for building lib, libmisc and src (now this look much
 	better). Also for all is now used libtool in proper way.
 
 	* configure.in:
-	- added useing AM_DISABLE_SHARED, AM_ENABLE_STATIC for disable compile shared
+	- added using AM_DISABLE_SHARED, AM_ENABLE_STATIC for disable compile shared
 	  libraries and enable static,
 	- some cosmetics.
 
@@ -14780,12 +14780,12 @@
 	* autogen.sh: add to conf_flags --disable-shared.
 
 	* man/pl/Attic/d_passwd.5, man/pl/Attic/dialups.5, man/pl/Attic/dpasswd.8, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/pwauth.8, man/pl/Attic/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/vipw.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/shadowconfig.8, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/login.defs.5, man/Attic/logoutd.8:
-	put or move to top cemmented Id cvs keyword,
-	(passwd.1): documment -e option (patch from Debian),
+	put or move to top cemented Id cvs keyword,
+	(passwd.1): document -e option (patch from Debian),
 	(userdel.1): remove commented obsoleted options.
 
 	* man/Makefile.am:
-	put all files in man_MANS and EXTRA_DIST in alphabethic order.
+	put all files in man_MANS and EXTRA_DIST in alphabetic order.
 
 	* src/chpasswd.c, src/pwunconv.c:
 	remove from comments program description and history logs.
@@ -14794,7 +14794,7 @@
 
 2000-12-19  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
-	* src/su.c: Based on Debian modyfications:
+	* src/su.c: Based on Debian modifications:
 	(main): #endif /* USE_PAM */ #ifdef USE_PAM replaced by #else,
 	(main): removed some dead code (scoped by #if 0 .. #endif).
 	(main): call to re-establish SIGINT to right place.
@@ -14821,18 +14821,18 @@
 	added expiry(1) man page from Debian.
 
 	* man/pl/lastlog.8, man/Attic/lastlog.8:
-	updated man pages for whole dispaly syntax.
+	updated man pages for whole display syntax.
 
 	* src/lastlog.c (main): fixed command line syntax description.
 
 	* src/lastlog.c (main):
-	display correctly and full current commnad line lastlog syntax
+	display correctly and full current command line lastlog syntax
 	and also output this string using gettext.
 
 	* src/lastlog.c (main):
 	merge src_lastlogin.c patch from debian with use getopt_long()
 	instead getopt() for add handling --help, --user, --time switches and
-	dipslay useage message on -h, --help and as default action.
+	display usage message on -h, --help and as default action.
 
 2000-11-17  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14840,12 +14840,12 @@
 	added i18n support for src/groupmems.c.
 
 	* src/useradd.c:
-	* (set_defaults): use mkstemp() if avalaible. Othereise use mktemp().
+	* (set_defaults): use mkstemp() if available. Otherwise use mktemp().
 
 	* configure.in: * added checking for mkstemp().
 
 	* src/useradd.c: * (set_defaults): use mkstemp() instead mktemp(),
-	* (mani): fix compilation error in previouse RH patch (removed using nflg).
+	* (mani): fix compilation error in previous RH patch (removed using nflg).
 
 2000-11-12  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
@@ -14867,9 +14867,9 @@
 2000-10-16  Tomasz Kłoczko  <kloczek@pld.org.pl>
 
 	* old/Attic/pwconv-old.8, old/Attic/pwconv.8, old/Attic/pwunconv-old.8, old/Attic/pwunconv.8, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/pwauth.8, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/porttime.5, man/pl/pwck.8, man/pl/shadow.3, man/pl/su.1, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/Attic/dpasswd.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, debian/Attic/login.copyright, debian/Attic/passwd.copyright, debian/Attic/secure-su.copyright, doc/Attic/ANNOUNCE, doc/Attic/LSM, doc/Attic/README, doc/Attic/README.linux:
-	Julianne F. Haugh new contact adress.
+	Julianne F. Haugh new contact address.
 
-	* NEWS: - summary chanfes for 20001016.
+	* NEWS: - summary changes for 20001016.
 
 	* doc/Attic/README.shadow-paper, doc/Makefile.am:
 	- removed outdated README.shadow-paper.
@@ -14939,7 +14939,7 @@
 
 	* README: - added README with all shadow sites and resources details.
 
-	* Attic/shadow-utils.spec.in: - partialy rewrited.
+	* Attic/shadow-utils.spec.in: - partially rewritten.
 
 	* configure.in: - change version to 20001010.
 
@@ -14983,7 +14983,7 @@
 	* etc/pam.d/Makefile.am: - added shadow to EXTRA_DIST
 
 	* src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/newusers.c, src/useradd.c, src/userdel.c, src/usermod.c:
-	- bind to shadow PAM file instead userdb (mainly PAMimication all shadow
+	- bind to shadow PAM file instead userdb (mainly PAMification all shadow
 	  utils is used for proper updating db files but in real this can be used
 	  for perform many other tasks).
 

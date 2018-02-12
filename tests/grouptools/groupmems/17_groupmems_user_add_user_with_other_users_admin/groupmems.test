@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "groupmems (called by a regular user) can add an user to a group with muyltiple users (even gshadow admins)"
+log_start "$0" "groupmems (called by a regular user) can add an user to a group with multiple users (even gshadow admins)"
 
 save_config
 

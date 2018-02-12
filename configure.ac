@@ -567,7 +567,7 @@ if test "$with_libpam" = "yes"; then
 	LIBS=$save_libs
 
 	AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
-	AC_DEFINE_UNQUOTED(SHADOW_PAM_CONVERSATION, [$pam_conv_function],[PAM converstation to use])
+	AC_DEFINE_UNQUOTED(SHADOW_PAM_CONVERSATION, [$pam_conv_function],[PAM conversation to use])
 	AM_CONDITIONAL(USE_PAM, [true])
 
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)

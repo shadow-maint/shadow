@@ -44,7 +44,7 @@ libmisc_a_SOURCES = \
 	myname.c \
 	obscure.c \
 	pam_pass.c \
-	pam_pass_non_interractive.c \
+	pam_pass_non_interactive.c \
 	pwd2spwd.c \
 	pwdcheck.c \
 	pwd_init.c \

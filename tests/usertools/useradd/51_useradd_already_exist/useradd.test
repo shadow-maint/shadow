@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "useradd checks ifthe requested new user already exist"
+log_start "$0" "useradd checks if the requested new user already exist"
 
 save_config
 

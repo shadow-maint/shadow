@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "Lock the pasword of group users (gpasswd -R users)..."
+echo -n "Lock the password of group users (gpasswd -R users)..."
 gpasswd -R users
 echo "OK"
 

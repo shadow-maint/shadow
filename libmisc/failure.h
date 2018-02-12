@@ -69,7 +69,7 @@ extern int failcheck (uid_t uid, struct faillog *fl, bool failed);
 extern void failprint (const struct faillog *);
 
 /*
- * failtmp - update the cummulative failure log
+ * failtmp - update the cumulative failure log
  *
  *	failtmp updates the (struct utmp) formatted failure log which
  *	maintains a record of all login failures.
