@@ -1,10 +1,11 @@
 
 AUTOMAKE_OPTIONS = 1.0 foreign
 
-DEFS = 
+DEFS =
 
 noinst_LTLIBRARIES = libshadow.la
 
+libshadow_la_LIBADD = ../libmisc/libmisc.la
 libshadow_la_LDFLAGS = -version-info 0:0:0
 
 libshadow_la_SOURCES = \

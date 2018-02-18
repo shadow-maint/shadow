@@ -13,6 +13,7 @@
 
 extern int sub_uid_close(void);
 extern bool have_sub_uids(const char *owner, uid_t start, unsigned long count);
+extern char **sub_uid_options(const char *owner, uid_t start, unsigned long count);
 extern bool sub_uid_file_present (void);
 extern bool sub_uid_assigned(const char *owner);
 extern int sub_uid_lock (void);
@@ -26,6 +27,7 @@ extern uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count);
 
 extern int sub_gid_close(void);
 extern bool have_sub_gids(const char *owner, gid_t start, unsigned long count);
+extern char **sub_gid_options(const char *owner, uid_t start, unsigned long count);
 extern bool sub_gid_file_present (void);
 extern bool sub_gid_assigned(const char *owner);
 extern int sub_gid_lock (void);
