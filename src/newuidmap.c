@@ -46,6 +46,28 @@
  */
 const char *Prog;
 
+static void parse_uid_options(char **options)
+{
+	int i;
+
+	if (NULL == options)
+		return;
+
+	for (i = 0; NULL != options[i]; i++) {
+		char *option = options[i];
+
+		if (strlen(option) < 1)
+			continue;
+
+		/* No options are currently valid for /etc/subuid, so error out. */
+
+		fprintf(stderr, _("%s: option '%s' is not understood\n"),
+			Prog,
+			option);
+		exit(EXIT_FAILURE);
+	}
+}
+
 static bool verify_range(struct passwd *pw, struct map_range *range)
 {
 	/* An empty range is invalid */
@@ -53,8 +75,13 @@ static bool verify_range(struct passwd *pw, struct map_range *range)
 		return false;
 
 	/* Test /etc/subuid */
-	if (have_sub_uids(pw->pw_name, range->lower, range->count))
+	if (have_sub_uids(pw->pw_name, range->lower, range->count)) {
+		char **options = sub_uid_options(pw->pw_name, range->lower, range->count);
+
+		parse_uid_options(options);
+		free_list(options);
 		return true;
+	}
 
 	/* Allow a process to map its own uid */
 	if ((range->count == 1) && (pw->pw_uid == range->lower))
@@ -145,7 +172,7 @@ int main(int argc, char **argv)
 				(unsigned long) getuid ()));
 		return EXIT_FAILURE;
 	}
-	
+
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
 		fprintf(stderr, _("%s: Could not stat directory for target %u\n"),

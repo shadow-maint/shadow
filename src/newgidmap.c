@@ -46,6 +46,27 @@
  */
 const char *Prog;
 
+static void parse_gid_options(char **options)
+{
+	int i;
+
+	if (NULL == options)
+		return;
+
+	for (i = 0; NULL != options[i]; i++) {
+		char *option = options[i];
+
+		if (strlen(option) < 1)
+			continue;
+
+		/* No options are currently valid for /etc/subgid, so error out. */
+
+		fprintf(stderr, _("%s: option '%s' is not understood\n"),
+			Prog,
+			option);
+		exit(EXIT_FAILURE);
+	}
+}
 
 static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow_setgroups)
 {
@@ -55,7 +76,11 @@ static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow
 
 	/* Test /etc/subgid. If the mapping is valid then we allow setgroups. */
 	if (have_sub_gids(pw->pw_name, range->lower, range->count)) {
+		char **options = sub_gid_options(pw->pw_name, range->lower, range->count);
+
 		*allow_setgroups = true;
+		parse_gid_options(options);
+		free_list(options);
 		return true;
 	}
 
