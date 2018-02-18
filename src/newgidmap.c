@@ -46,41 +46,98 @@
  */
 const char *Prog;
 
-static void parse_gid_options(char **options)
+typedef enum {
+	DEFAULT = -1,
+	FALSE   =  0,
+	TRUE    =  1,
+} autobool_t;
+
+/* Returns @arg, unless it's DEFAULT in that case @value is returned instead. */
+static inline autobool_t auto_or_else(autobool_t arg, autobool_t value)
+{
+	return (arg == DEFAULT) ? value : arg;
+}
+
+/* Converts @arg to a bool, using @dfl is @arg == DEFAULT. */
+static inline bool auto_bool(autobool_t arg, bool dfl)
+{
+	return TRUE == auto_or_else(arg, dfl ? TRUE : FALSE);
+}
+
+static void parse_gid_options(char **options, autobool_t *allow_setgroups)
 {
 	int i;
+	autobool_t new_allow_setgroups = DEFAULT;
 
 	if (NULL == options)
 		return;
 
+	/*
+	 * Iterate over each option, and make sure it's in the valid option
+	 * set. We first just accumulate which options are specified for each
+	 * option-set, so that "deny_setgroups,allow_setgroups" doesn't end up
+	 * with weird semantics.
+	 */
 	for (i = 0; NULL != options[i]; i++) {
 		char *option = options[i];
+		bool is_valid = false;
 
 		if (strlen(option) < 1)
 			continue;
 
-		/* No options are currently valid for /etc/subgid, so error out. */
+		/* {allow,deny}_setgroups option-set -- default is allow_setgroups */
+		else if (!strcmp(option, "allow_setgroups"))
+			new_allow_setgroups = TRUE;
+		else if (!strcmp(option, "deny_setgroups"))
+			new_allow_setgroups = FALSE;
 
-		fprintf(stderr, _("%s: option '%s' is not understood\n"),
-			Prog,
-			option);
-		exit(EXIT_FAILURE);
+		/* Catch-all. */
+		else {
+			fprintf(stderr, _("%s: option '%s' is not understood\n"),
+				Prog,
+				option);
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	/*
+	 * We only change allow_setgroups to TRUE if it is still the default.
+	 * But we always override the value for deny_setgroups, for security
+	 * reasons (adding more mappings won't make setgroups(2) safer in the
+	 * old ones).
+	 */
+	switch (new_allow_setgroups) {
+		case TRUE:
+			*allow_setgroups = auto_or_else(*allow_setgroups, TRUE);
+			break;
+		case FALSE:
+			*allow_setgroups = FALSE;
+			break;
+		case DEFAULT:
+			/* noop */
+		default:
+			break;
 	}
 }
 
-static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow_setgroups)
+static bool verify_range(struct passwd *pw, struct map_range *range,
+			 autobool_t *allow_setgroups)
 {
 	/* An empty range is invalid */
 	if (range->count == 0)
 		return false;
 
-	/* Test /etc/subgid. If the mapping is valid then we allow setgroups. */
+	/*
+	 * Test /etc/subgid. We only allow setgroups if none of the mapping
+	 * options have deny_setgroups set.
+	 */
 	if (have_sub_gids(pw->pw_name, range->lower, range->count)) {
 		char **options = sub_gid_options(pw->pw_name, range->lower, range->count);
 
-		*allow_setgroups = true;
-		parse_gid_options(options);
+		parse_gid_options(options, allow_setgroups);
 		free_list(options);
+
+		*allow_setgroups = auto_or_else(*allow_setgroups, TRUE);
 		return true;
 	}
 
@@ -94,7 +151,8 @@ static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow
 }
 
 static void verify_ranges(struct passwd *pw, int ranges,
-	struct map_range *mappings, bool *allow_setgroups)
+			  struct map_range *mappings,
+			  autobool_t *allow_setgroups)
 {
 	struct map_range *mapping;
 	int idx;
@@ -197,7 +255,7 @@ int main(int argc, char **argv)
 	struct stat st;
 	struct passwd *pw;
 	int written;
-	bool allow_setgroups = false;
+	autobool_t allow_setgroups = DEFAULT;
 
 	Prog = Basename (argv[0]);
 
@@ -274,7 +332,7 @@ int main(int argc, char **argv)
 
 	verify_ranges(pw, ranges, mappings, &allow_setgroups);
 
-	write_setgroups(proc_dir_fd, allow_setgroups);
+	write_setgroups(proc_dir_fd, auto_bool(allow_setgroups, FALSE));
 	write_mapping(proc_dir_fd, ranges, mappings, "gid_map");
 	sub_gid_close();
 
