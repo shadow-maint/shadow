@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "characters insterted in range (usermod -w 100000a-110000 foo)..."
+echo -n "characters inserted in range (usermod -w 100000a-110000 foo)..."
 usermod -w 100000a-110000 foo 2>tmp/usermod.err && exit 1 || {
 	status=$?
 }

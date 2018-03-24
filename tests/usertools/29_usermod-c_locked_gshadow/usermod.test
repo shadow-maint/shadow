@@ -20,7 +20,7 @@ echo -n "Create lock file for /etc/gshadow..."
 touch /etc/gshadow.lock
 echo "done"
 
-echo -n "Change the user's comment (usermod -c \"new coment\" foo)..."
+echo -n "Change the user's comment (usermod -c \"new comment\" foo)..."
 usermod -c "new comment" foo
 echo "OK"
 

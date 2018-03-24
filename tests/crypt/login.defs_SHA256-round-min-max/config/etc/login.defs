@@ -185,7 +185,7 @@ GID_MAX			60000
 
 #
 # Max number of login retries if password is bad. This will most likely be
-# overriden by PAM, since the default pam_unix module has it's own built
+# overridden by PAM, since the default pam_unix module has it's own built
 # in of 3 retries. However, this is a safe fallback in case you are using
 # an authentication module that does not enforce PAM_MAXTRIES.
 #
@@ -275,7 +275,7 @@ SHA_CRYPT_MAX_ROUNDS 10000
 #						#
 # These options are now handled by PAM. Please	#
 # edit the appropriate file in /etc/pam.d/ to	#
-# enable the equivelants of them.
+# enable the equivalents of them.
 #
 ###############
 

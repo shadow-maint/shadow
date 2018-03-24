@@ -278,7 +278,7 @@ static void remove_user (const char *user,
 }
 
 /*
- * purge_members - Rmeove every members of the specified group
+ * purge_members - Remove every members of the specified group
  */
 static void purge_members (const struct group *grp)
 {

@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "groupmodd can delete a group in a chroot"
+log_start "$0" "groupmod can delete a group in a chroot"
 
 save_config
 
