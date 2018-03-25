@@ -53,7 +53,10 @@ usbin_PROGRAMS = \
 noinst_PROGRAMS = id sulogin
 
 suidbins       = su
-suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
+suidubins      = chage chfn chsh expiry gpasswd newgrp
+if !WITH_TCB
+suidubins += passwd
+endif
 if ACCT_TOOLS_SETUID
 suidubins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
@@ -62,14 +65,13 @@ suidubins += newgidmap newuidmap
 endif
 
 if WITH_TCB
-suidubins -= passwd
 shadowsgidubins = passwd
 endif
 
 LDADD          = $(INTLLIBS) \
-		 $(LIBTCB) \
 		 $(top_builddir)/libmisc/libmisc.a \
-		 $(top_builddir)/lib/libshadow.la
+		 $(top_builddir)/lib/libshadow.la \
+		 $(LIBTCB)
 
 if ACCT_TOOLS_SETUID
 LIBPAM_SUID  = $(LIBPAM)
