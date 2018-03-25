@@ -237,6 +237,7 @@ int main (int argc, char **argv)
 			         Prog, sp->sp_namp, spw_dbname ());
 			fail_exit (E_FAILURE);
 		}
+		(void) spw_rewind();
 	}
 
 	/*
