@@ -152,7 +152,8 @@
 	int i;
 	char **tmp;
 
-	assert (NULL != list);
+	if (NULL == list)
+		return NULL;
 
 	for (i = 0; NULL != list[i]; i++);
 
@@ -168,6 +169,23 @@
 	tmp[i] = (char *) 0;
 	return tmp;
 }
+
+/*
+ * Free a list.
+ * The output list isn't modified, but the memory is freed.
+ */
+void free_list (char *const *list)
+{
+	int i;
+
+	if (NULL == list)
+		return;
+
+	for (i = 0; NULL != list[i]; i++)
+		free(list[i]);
+	free((void *)list);
+}
+
 
 /*
  * Check if member is part of the input list
@@ -269,3 +287,30 @@ bool is_on_list (char *const *list, const char *member)
 	return array;
 }
 
+/*
+ * comma_from_list - inverse of comma_to_list
+ */
+
+/*@only@*/char *comma_from_list (char *const *list)
+{
+	char *comma;
+	int i, commalen = 0;
+
+	if (NULL == list)
+		return NULL;
+
+	for (i = 0; NULL != list[i]; i++)
+		commalen += strlen(list[i]) + 1;
+
+	comma = xmalloc(commalen + 1);
+	memset(comma, '\0', commalen + 1);
+
+	for (i = 0; NULL != list[i]; i++) {
+		int j = strlen(comma);
+		if (j > 0)
+			comma[j++] = ',';
+		strncat(comma, list[i], commalen - j);
+	}
+
+	return comma;
+}

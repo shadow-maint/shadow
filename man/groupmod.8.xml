@@ -3,7 +3,7 @@
    Copyright (c) 1991       , Julianne Frances Haugh
    Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
-  
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
    are met:
@@ -15,7 +15,7 @@
    3. The name of the copyright holders or contributors may not be used to
       endorse or promote products derived from this software without
       specific prior written permission.
-  
+
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -136,7 +136,7 @@
 	  <option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</replaceable>
 	</term>
 	<listitem>
-	  <para> 
+	  <para>
 	    The name of the group will be changed from <replaceable>GROUP</replaceable>
 	    to <replaceable>NEW_GROUP</replaceable> name.
 	  </para>
@@ -278,16 +278,19 @@
 	    <para>E_GRP_UPDATE: can't update group file</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>11</replaceable></term>
 	  <listitem>
 	    <para>E_CLEANUP_SERVICE: can't setup cleanup service</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>12</replaceable></term>
 	  <listitem>
 	    <para>E_PAM_USERNAME: can't determine your username for use with pam</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>13</replaceable></term>
 	  <listitem>
 	    <para>E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message</para>

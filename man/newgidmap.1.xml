@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 2013 Eric W. Biederman
    All rights reserved.
-  
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
    are met:
@@ -14,7 +14,7 @@
    3. The name of the copyright holders or contributors may not be used to
       endorse or promote products derived from this software without
       specific prior written permission.
-  
+
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -122,10 +122,27 @@
       of the above sets, each of the GIDs in the range [lowergid,
       lowergid+count] is allowed to the caller according to
       <filename>/etc/subgid</filename> before setting
+      <filename>/proc/[pid]/setgroups</filename> and
       <filename>/proc/[pid]/gid_map</filename>.
     </para>
+
     <para>
       Note that newgidmap may be used only once for a given process.
+    </para>
+
+    <para>
+      <command>newgidmap</command> also allows you to map a user's own
+      effective group ID without it being specified in
+      <filename>/etc/subgid</filename> (in order to match the "unprivileged
+      user namespaces" feature in Linux 3.8). If this is the only mapping
+      requested (in order to match the security protections from Linux 3.19),
+      <command>newgidmap</command> will ensure that
+      <filename>/proc/[pid]/setgroups</filename> is set to "deny" (either by
+      writing "deny" itself or seeing that it is already set to "deny"), and
+      will fail if writing "deny" failed. This restriction is also applied if
+      any of the mappings given to <command>newgidmap</command> has the
+      <option>deny_setgroups</option> option set in
+      <filename>/etc/subgid</filename>.
     </para>
 
   </refsect1>

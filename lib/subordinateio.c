@@ -18,9 +18,11 @@ struct subordinate_range {
 	const char *owner;
 	unsigned long start;
 	unsigned long count;
+	char **options;
 };
 
-#define NFIELDS 3
+#define NFIELDS_MIN 3
+#define NFIELDS_MAX 4
 
 /*
  * subordinate_dup: create a duplicate range
@@ -46,6 +48,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 	}
 	range->start = rangeent->start;
 	range->count = rangeent->count;
+	range->options = dup_list(rangeent->options);
 
 	return range;
 }
@@ -58,8 +61,9 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct subordinate_range *rangeent = ent;
-	
+
 	free ((void *)(rangeent->owner));
+	free_list(rangeent->options);
 	free (rangeent);
 }
 
@@ -76,9 +80,9 @@ static void *subordinate_parse (const char *line)
 {
 	static struct subordinate_range range;
 	static char rangebuf[1024];
-	int i;
+	int i, j;
 	char *cp;
-	char *fields[NFIELDS];
+	char *fields[NFIELDS_MAX];
 
 	/*
 	 * Copy the string to a temporary buffer so the substrings can
@@ -93,7 +97,7 @@ static void *subordinate_parse (const char *line)
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = rangebuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
+	for (cp = rangebuf, i = 0; (i < NFIELDS_MAX) && (NULL != cp); i++) {
 		fields[i] = cp;
 		while (('\0' != *cp) && (':' != *cp)) {
 			cp++;
@@ -108,16 +112,23 @@ static void *subordinate_parse (const char *line)
 	}
 
 	/*
-	 * There must be exactly NFIELDS colon separated fields or
-	 * the entry is invalid.  Also, fields must be non-blank.
+	 * There must be at least NFIELDS_MIN and at most NFIELDS_MAX colon
+	 * separated fields or the entry is invalid. The first NFIELDS_MIN fields
+	 * must be non-blank.
 	 */
-	if (i != NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
+	if (i < NFIELDS_MIN || i > NFIELDS_MAX)
 		return NULL;
+	for (j = 0; j < NFIELDS_MIN; j++)
+		if (*fields[j] == '\0')
+			return NULL;
+
 	range.owner = fields[0];
 	if (getulong (fields[1], &range.start) == 0)
 		return NULL;
 	if (getulong (fields[2], &range.count) == 0)
 		return NULL;
+	if (i >= 4)
+		range.options = comma_to_list(fields[3]);
 
 	return &range;
 }
@@ -133,11 +144,15 @@ static void *subordinate_parse (const char *line)
 static int subordinate_put (const void *ent, FILE * file)
 {
 	const struct subordinate_range *range = ent;
+	char *options = comma_from_list(range->options);
 
-	return fprintf(file, "%s:%lu:%lu\n",
-			       range->owner,
-			       range->start,
-			       range->count) < 0 ? -1  : 0;
+	int n = fprintf(file, "%s:%lu:%lu:%s\n",
+			      range->owner,
+			      range->start,
+			      range->count,
+			      options ?: "");
+	free(options);
+	return n < 0 ? -1 : 0;
 }
 
 static struct commonio_ops subordinate_ops = {
@@ -285,38 +300,41 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 }
 
 /*
- * have_range: check whether @owner is authorized to use the range
- *             (@start .. @start+@count-1).
+ * get_range: check whether @owner is authorized to use the range
+ *             (@start .. @start+@count-1) and return the first matching range.
  * @db: database to check
  * @owner: owning uid being queried
  * @start: start of range
  * @count: number of uids in range
  *
- * Returns true if @owner is authorized to use the range, false otherwise.
+ * Returns the corresponding subordinate_range if @owner is authorized to use
+ * the range, NULL otherwise.
  */
-static bool have_range(struct commonio_db *db,
-		       const char *owner, unsigned long start, unsigned long count)
+static const struct subordinate_range *get_range(struct commonio_db *db,
+						 const char *owner,
+						 unsigned long start,
+						 unsigned long count)
 {
 	const struct subordinate_range *range;
 	unsigned long end;
 
 	if (count == 0)
-		return false;
+		return NULL;
 
 	end = start + count - 1;
 	range = find_range (db, owner, start);
 	while (range) {
-		unsigned long last; 
+		unsigned long last;
 
 		last = range->start + range->count - 1;
 		if (last >= (start + count - 1))
-			return true;
+			return range;
 
 		count = end - last;
 		start = last + 1;
 		range = find_range(db, owner, start);
 	}
-	return false;
+	return NULL;
 }
 
 /*
@@ -430,7 +448,7 @@ static int add_range(struct commonio_db *db,
 	range.count = count;
 
 	/* See if the range is already present */
-	if (have_range(db, owner, start, count))
+	if (get_range(db, owner, start, count))
 		return 1;
 
 	/* Otherwise append the range */
@@ -585,7 +603,12 @@ bool sub_uid_assigned(const char *owner)
 
 bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
 {
-	return have_range (&subordinate_uid_db, owner, start, count);
+	return NULL != get_range (&subordinate_uid_db, owner, start, count);
+}
+
+char **sub_uid_options(const char *owner, uid_t start, unsigned long count)
+{
+	return dup_list(get_range(&subordinate_uid_db, owner, start, count)->options);
 }
 
 int sub_uid_add (const char *owner, uid_t start, unsigned long count)
@@ -661,7 +684,12 @@ int sub_gid_open (int mode)
 
 bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 {
-	return have_range(&subordinate_gid_db, owner, start, count);
+	return NULL != get_range (&subordinate_gid_db, owner, start, count);
+}
+
+char **sub_gid_options(const char *owner, gid_t start, unsigned long count)
+{
+	return dup_list(get_range(&subordinate_gid_db, owner, start, count)->options);
 }
 
 bool sub_gid_assigned(const char *owner)

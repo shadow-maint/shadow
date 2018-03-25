@@ -68,7 +68,7 @@ endif
 
 LDADD          = $(INTLLIBS) \
 		 $(LIBTCB) \
-		 $(top_builddir)/libmisc/libmisc.a \
+		 $(top_builddir)/libmisc/libmisc.la \
 		 $(top_builddir)/lib/libshadow.la
 
 if ACCT_TOOLS_SETUID

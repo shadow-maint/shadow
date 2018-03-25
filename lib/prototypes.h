@@ -229,8 +229,10 @@ extern void setup_limits (const struct passwd *);
 extern /*@only@*/ /*@out@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/ /*@out@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/ /*@out@*/char **dup_list (char *const *);
+extern /*@only@*/ /*@out@*/void free_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
+extern /*@only@*/char *comma_from_list (char *const *);
 
 /* log.c */
 extern void dolastlog (

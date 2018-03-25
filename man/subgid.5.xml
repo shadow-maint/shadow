@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 2013 Eric W. Biederman
    All rights reserved.
-  
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
    are met:
@@ -14,7 +14,7 @@
    3. The name of the copyright holders or contributors may not be used to
       endorse or promote products derived from this software without
       specific prior written permission.
-  
+
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -51,7 +51,7 @@
       a user name and a range of subordinate group ids that user
       is allowed to use.
 
-      This is specified with three fields delimited by colons
+      This is specified with four fields delimited by colons
       (<quote>:</quote>).
       These fields are:
     </para>
@@ -64,6 +64,9 @@
       </listitem>
       <listitem>
 	<para>numerical subordinate group ID count</para>
+      </listitem>
+      <listitem>
+	<para>comma-separated list of options (optional)</para>
       </listitem>
     </itemizedlist>
 
@@ -83,6 +86,42 @@
       become noticeable. In this case it is recommended to use UIDs
       instead of login names. Benchmarks have shown speed-ups up to 20x.
     </para>
+
+  </refsect1>
+
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+
+    <para>
+      Options are comma-separated. Empty options are ignored, and if the
+      field is missing entirely it is treated as an empty string. Attempting
+      to use an unknown option will cause <command>newgidmap</command> to emit
+      an error. Setting options from the same option-set multiple times in a
+      single entry will result in the last option specified taking precedence.
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term><option>allow_setgroups</option> (default),
+              <option>deny_setgroups</option></term>
+        <listitem>
+          <para>
+            Specify whether
+            <citerefentry>
+              <refentrytitle>setgroups</refentrytitle><manvolnum>2</manvolnum>
+            </citerefentry>
+            will be disabled by <command>newgidmap</command>. If more than one
+            mapping is given to <command>newgidmap</command>, and they have
+            different <option>*_setgroups</option> options set,
+            <option>deny_setgroups</option> always takes precedence. See
+            <citerefentry>
+              <refentrytitle>newgidmap</refentrytitle><manvolnum>1</manvolnum>
+            </citerefentry>
+            for more details.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
 
   </refsect1>
 

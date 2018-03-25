@@ -3,9 +3,9 @@ EXTRA_DIST = .indent.pro xgetXXbyYY.c
 
 AM_CPPFLAGS = -I$(top_srcdir)/lib
 
-noinst_LIBRARIES = libmisc.a
+noinst_LTLIBRARIES = libmisc.la
 
-libmisc_a_SOURCES = \
+libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
 	audit_help.c \
