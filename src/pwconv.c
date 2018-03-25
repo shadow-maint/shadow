@@ -223,8 +223,10 @@ int main (int argc, char **argv)
 	 * Remove /etc/shadow entries for users not in /etc/passwd.
 	 */
 	(void) spw_rewind ();
-	while ((sp = spw_next ()) != NULL) {
+	sp = spw_next ();
+	while (sp != NULL) {
 		if (pw_locate (sp->sp_namp) != NULL) {
+			sp = spw_next ();
 			continue;
 		}
 
