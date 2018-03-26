@@ -85,12 +85,16 @@
     <cmdsynopsis>
       <command>su</command>
       <arg choice='opt'>
-	<replaceable>options</replaceable>
+          <replaceable>options</replaceable>
       </arg>
       <arg choice='opt'>
-	<arg choice='plain'>
-	  <replaceable>username</replaceable>
-	</arg>
+          <replaceable>-</replaceable>
+      </arg>
+      <arg choice='opt'>
+          <replaceable>username</replaceable>
+          <arg choice='opt'>
+              <replaceable>args</replaceable>
+          </arg>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -98,26 +102,21 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>su</command> command is used to become another user during
-      a login session. Invoked without a <option>username</option>, 
-      <command>su</command> defaults to
-      becoming the superuser. The optional argument <option>-</option> may
-      be used to provide an environment similar to what the user would
-      expect had the user logged in directly.
+      The <command>su</command> command is used to become another user during a
+      login session. Invoked without a <option>username</option>,
+      <command>su</command> defaults to becoming the superuser. The
+      <option>-</option> option may be used to provide an environment similar
+      to what the user would expect had the user logged in directly. The
+      <option>-c</option> option may be used to treat the next argument as a
+      command by most shells.
     </para>
 
     <para>
-      Additional arguments may be provided after the username, in which case
-      they are supplied to the user's login shell. In particular, an
-      argument of <option>-c</option> will cause the next argument to be
-      treated as a command by most command interpreters. The command will be
-      executed by the shell specified in <filename>/etc/passwd</filename>
-      for the target user.
-    </para>
-
-    <para>
-      You can use the <option>--</option> argument to separate
-      <command>su</command> options from the arguments supplied to the shell.
+      Options are recognized everywhere in the argument list. You can use the
+      <option>--</option> argument to stop option parsing. The
+      <option>-</option> option is special: it is also recognized after
+      <option>--</option>, but has to be placed before
+      <option>username</option>.
     </para>
 
     <para>The user will be prompted for a password, if appropriate. Invalid

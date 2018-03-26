@@ -436,7 +436,7 @@ static void prepare_pam_close_session (void)
 static void usage (int status)
 {
 	(void)
-	fputs (_("Usage: su [options] [LOGIN]\n"
+	fputs (_("Usage: su [options] [-] [username [args]]\n"
 	         "\n"
 	         "Options:\n"
 	         "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -446,7 +446,8 @@ static void usage (int status)
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	         "\n"
+	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 
@@ -815,13 +816,7 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	/*
-	 * The next argument must be either a user ID, or some flag to a
-	 * subshell. Pretty sticky since you can't have an argument which
-	 * doesn't start with a "-" unless you specify the new user name.
-	 * Any remaining arguments will be passed to the user's login shell.
-	 */
-	if ((optind < argc) && ('-' != argv[optind][0])) {
+	if (optind < argc) {
 		STRFCPY (name, argv[optind++]);	/* use this login id */
 		if ((optind < argc) && (strcmp (argv[optind], "--") == 0)) {
 			optind++;
