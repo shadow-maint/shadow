@@ -168,9 +168,8 @@ extern struct group *prefix_getgrnam(const char *name)
 		fclose(fg);
 		return grp;
 	}
-	else {
-		return getgrnam(name);
-	}
+	
+	return getgrnam(name);
 }
 
 extern struct group *prefix_getgrgid(gid_t gid)
@@ -189,9 +188,8 @@ extern struct group *prefix_getgrgid(gid_t gid)
 		fclose(fg);
 		return grp;
 	}
-	else {
-		return getgrgid(gid);
-	}
+
+	return getgrgid(gid);
 }
 
 extern struct passwd *prefix_getpwuid(uid_t uid)

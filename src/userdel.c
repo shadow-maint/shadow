@@ -835,7 +835,7 @@ static int remove_mailbox (void)
 	}
 
 	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
-	mailfile = alloca (len);
+	mailfile = xmalloc (len);
 
 	if (prefix[0]) {
 		(void) snprintf (mailfile, len, "%s/%s/%s",
@@ -852,6 +852,7 @@ static int remove_mailbox (void)
 			fprintf (stderr,
 			         _("%s: %s mail spool (%s) not found\n"),
 			         Prog, user_name, mailfile);
+			free(mailfile);
 			return 0;
 		} else {
 			fprintf (stderr,
@@ -864,6 +865,7 @@ static int remove_mailbox (void)
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
+			free(mailfile);
 			return -1;
 		}
 	}
@@ -892,6 +894,7 @@ static int remove_mailbox (void)
 			              SHADOW_AUDIT_SUCCESS);
 		}
 #endif				/* WITH_AUDIT */
+		free(mailfile);
 		return errors;
 	}
 	i = is_owner (user_id, mailfile);
@@ -908,8 +911,10 @@ static int remove_mailbox (void)
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
+		free(mailfile);
 		return 1;
 	} else if (i == -1) {
+		free(mailfile);
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
@@ -935,6 +940,7 @@ static int remove_mailbox (void)
 		              SHADOW_AUDIT_SUCCESS);
 	}
 #endif				/* WITH_AUDIT */
+	free(mailfile);
 	return errors;
 }
 
