@@ -362,7 +362,7 @@ static void list_fields (void)
 	/*
 	 * Start with the easy numbers - the number of days before the
 	 * password can be changed, the number of days after which the
-	 * password must be chaged, the number of days before the password
+	 * password must be changed, the number of days before the password
 	 * expires that the user is told, and the number of days after the
 	 * password expires that the account becomes unusable.
 	 */

@@ -21,7 +21,7 @@ set timeout 2
 
 # user switching command, by default `sudo su -`
 set swcmd $conf(s)
-# ending of typicall shell prompt (zsh/sh):
+# ending of typical shell prompt (zsh/sh):
 set shpmt "(%|#|\\$) \\Z"
 catch {set shpmt $env(EXPECT_PROMPT)}
 # initial username:

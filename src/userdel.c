@@ -943,7 +943,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 {
 	char *buf;
 	int ret = 0;
-	size_t bufsize = (sizeof TCB_DIR) + strlen (user_name) + 2;
+	size_t buflen = (sizeof TCB_DIR) + strlen (user_name) + 2;
 
 	if (!getdef_bool ("USE_TCB")) {
 		return 0;

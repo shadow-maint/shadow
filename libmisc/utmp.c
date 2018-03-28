@@ -88,7 +88,7 @@ static bool is_my_tty (const char *tty)
  *                    session
  *
  *	The utmp file is scanned for an entry with the same process ID.
- *	The line enterred by the *getty / telnetd, etc. should also match
+ *	The line entered by the *getty / telnetd, etc. should also match
  *	the current terminal.
  *
  *	When an entry is returned by get_current_utmp, and if the utmp

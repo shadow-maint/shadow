@@ -290,7 +290,8 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		fprintf (stderr,
 		         _("%s: invalid group name '%s'\n"),
 		         Prog, grent.gr_name);
-		free (grent.gr_name);
+		if (grent.gr_name)
+			free (grent.gr_name);
 		return -1;
 	}
 
@@ -1237,7 +1238,7 @@ int main (int argc, char **argv)
 	unsigned int i;
 	/* Now update the passwords using PAM */
 	for (i = 0; i < nusers; i++) {
-		if (do_pam_passwd_non_interractive ("newusers", usernames[i], passwords[i]) != 0) {
+		if (do_pam_passwd_non_interactive ("newusers", usernames[i], passwords[i]) != 0) {
 			fprintf (stderr,
 			         _("%s: (line %d, user %s) password not changed\n"),
 			         Prog, lines[i], usernames[i]);

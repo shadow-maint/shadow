@@ -256,7 +256,7 @@ failure:
 /*
  * syslog_sg - log the change of group to syslog
  *
- *	The loggout will also be logged when the user will quit the
+ *	The logout will also be logged when the user will quit the
  *	sg/newgrp session.
  */
 static void syslog_sg (const char *name, const char *group)

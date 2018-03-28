@@ -46,32 +46,37 @@
  */
 const char *Prog;
 
-static bool verify_range(struct passwd *pw, struct map_range *range)
+
+static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow_setgroups)
 {
 	/* An empty range is invalid */
 	if (range->count == 0)
 		return false;
 
-	/* Test /etc/subgid */
-	if (have_sub_gids(pw->pw_name, range->lower, range->count))
+	/* Test /etc/subgid. If the mapping is valid then we allow setgroups. */
+	if (have_sub_gids(pw->pw_name, range->lower, range->count)) {
+		*allow_setgroups = true;
 		return true;
+	}
 
-	/* Allow a process to map its own gid */
-	if ((range->count == 1) && (pw->pw_gid == range->lower))
+	/* Allow a process to map its own gid. */
+	if ((range->count == 1) && (pw->pw_gid == range->lower)) {
+		/* noop -- if setgroups is enabled already we won't disable it. */
 		return true;
+	}
 
 	return false;
 }
 
 static void verify_ranges(struct passwd *pw, int ranges,
-	struct map_range *mappings)
+	struct map_range *mappings, bool *allow_setgroups)
 {
 	struct map_range *mapping;
 	int idx;
 
 	mapping = mappings;
 	for (idx = 0; idx < ranges; idx++, mapping++) {
-		if (!verify_range(pw, mapping)) {
+		if (!verify_range(pw, mapping, allow_setgroups)) {
 			fprintf(stderr, _( "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"),
 				Prog,
 				mapping->upper,
@@ -89,6 +94,70 @@ static void usage(void)
 	exit(EXIT_FAILURE);
 }
 
+void write_setgroups(int proc_dir_fd, bool allow_setgroups)
+{
+	int setgroups_fd;
+	char *policy, policy_buffer[4096];
+
+	/*
+	 * Default is "deny", and any "allow" will out-rank a "deny". We don't
+	 * forcefully write an "allow" here because the process we are writing
+	 * mappings for may have already set themselves to "deny" (and "allow"
+	 * is the default anyway). So allow_setgroups == true is a noop.
+	 */
+	policy = "deny\n";
+	if (allow_setgroups)
+		return;
+
+	setgroups_fd = openat(proc_dir_fd, "setgroups", O_RDWR|O_CLOEXEC);
+	if (setgroups_fd < 0) {
+		/*
+		 * If it's an ENOENT then we are on too old a kernel for the setgroups
+		 * code to exist. Emit a warning and bail on this.
+		 */
+		if (ENOENT == errno) {
+			fprintf(stderr, _("%s: kernel doesn't support setgroups restrictions\n"), Prog);
+			goto out;
+		}
+		fprintf(stderr, _("%s: couldn't open process setgroups: %s\n"),
+			Prog,
+			strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+
+	/*
+	 * Check whether the policy is already what we want. /proc/self/setgroups
+	 * is write-once, so attempting to write after it's already written to will
+	 * fail.
+	 */
+	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
+		fprintf(stderr, _("%s: failed to read setgroups: %s\n"),
+			Prog,
+			strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	if (!strncmp(policy_buffer, policy, strlen(policy)))
+		goto out;
+
+	/* Write the policy. */
+	if (lseek(setgroups_fd, 0, SEEK_SET) < 0) {
+		fprintf(stderr, _("%s: failed to seek setgroups: %s\n"),
+			Prog,
+			strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	if (dprintf(setgroups_fd, "%s", policy) < 0) {
+		fprintf(stderr, _("%s: failed to setgroups %s policy: %s\n"),
+			Prog,
+			policy,
+			strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+
+out:
+	close(setgroups_fd);
+}
+
 /*
  * newgidmap - Set the gid_map for the specified process
  */
@@ -103,6 +172,7 @@ int main(int argc, char **argv)
 	struct stat st;
 	struct passwd *pw;
 	int written;
+	bool allow_setgroups = false;
 
 	Prog = Basename (argv[0]);
 
@@ -145,7 +215,7 @@ int main(int argc, char **argv)
 				(unsigned long) getuid ()));
 		return EXIT_FAILURE;
 	}
-	
+
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
 		fprintf(stderr, _("%s: Could not stat directory for target %u\n"),
@@ -177,8 +247,9 @@ int main(int argc, char **argv)
 	if (!mappings)
 		usage();
 
-	verify_ranges(pw, ranges, mappings);
+	verify_ranges(pw, ranges, mappings, &allow_setgroups);
 
+	write_setgroups(proc_dir_fd, allow_setgroups);
 	write_mapping(proc_dir_fd, ranges, mappings, "gid_map");
 	sub_gid_close();
 

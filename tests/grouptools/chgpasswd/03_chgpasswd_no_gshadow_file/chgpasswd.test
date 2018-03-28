@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "chgpasswd changes the pasword in group if gshadow does not exist"
+log_start "$0" "chgpasswd changes the password in group if gshadow does not exist"
 
 save_config
 

@@ -20,7 +20,7 @@
 ** 1/28/95
 ** shadow-adduser 1.3:
 ** 
-** Basically a bug-fix on my additions in 1.2.  Thanx to Terry Stewart 
+** Basically a bug-fix on my additions in 1.2.  Thanks to Terry Stewart 
 ** (stew@texas.net) for pointing out one of the many idiotic bugs I introduced.
 ** It was such a stupid bug that I would have never seen it myself.
 **
