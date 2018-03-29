@@ -809,10 +809,6 @@ static void process_flags (int argc, char **argv)
 	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
 		fakelogin = true;
 		optind++;
-		if (   (optind < argc)
-		    && (strcmp (argv[optind], "--") == 0)) {
-			optind++;
-		}
 	}
 
 	/*
@@ -823,9 +819,6 @@ static void process_flags (int argc, char **argv)
 	 */
 	if ((optind < argc) && ('-' != argv[optind][0])) {
 		STRFCPY (name, argv[optind++]);	/* use this login id */
-		if ((optind < argc) && (strcmp (argv[optind], "--") == 0)) {
-			optind++;
-		}
 	}
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
