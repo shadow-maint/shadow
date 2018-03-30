@@ -34,6 +34,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -114,6 +115,8 @@ static bool sub_uid_locked = false;
 static bool sub_gid_locked = false;
 #endif				/* ENABLE_SUBIDS */
 
+static const char* prefix = "";
+
 /* local function prototypes */
 static void usage (int status);
 static void update_groups (void);
@@ -150,6 +153,7 @@ static void usage (int status)
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --remove                  remove home directory and mail spool\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"), usageout);
 #ifdef WITH_SELINUX
 	(void) fputs (_("  -Z, --selinux-user            remove any SELinux user mapping for the user\n"), usageout);
 #endif				/* WITH_SELINUX */
@@ -327,8 +331,8 @@ static void remove_usergroup (void)
 		 * Scan the passwd file to check if this group is still
 		 * used as a primary group.
 		 */
-		setpwent ();
-		while ((pwd = getpwent ()) != NULL) {
+		prefix_setpwent ();
+		while ((pwd = prefix_getpwent ()) != NULL) {
 			if (strcmp (pwd->pw_name, user_name) == 0) {
 				continue;
 			}
@@ -339,7 +343,7 @@ static void remove_usergroup (void)
 				break;
 			}
 		}
-		endpwent ();
+		prefix_endpwent ();
 	}
 
 	if (NULL == pwd) {
@@ -815,9 +819,10 @@ static int is_owner (uid_t uid, const char *path)
 static int remove_mailbox (void)
 {
 	const char *maildir;
-	char mailfile[1024];
+	char* mailfile;
 	int i;
 	int errors = 0;
+	size_t len;
 
 	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
@@ -828,13 +833,26 @@ static int remove_mailbox (void)
 	if (NULL == maildir) {
 		return 0;
 	}
-	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
+
+	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
+	mailfile = xmalloc (len);
+
+	if (prefix[0]) {
+		(void) snprintf (mailfile, len, "%s/%s/%s",
+	    	             prefix, maildir, user_name);
+	}
+	else {
+		(void) snprintf (mailfile, len, "%s/%s",
+	    	             maildir, user_name);
+	}
+	mailfile[len-1] = '\0';
 
 	if (access (mailfile, F_OK) != 0) {
 		if (ENOENT == errno) {
 			fprintf (stderr,
 			         _("%s: %s mail spool (%s) not found\n"),
 			         Prog, user_name, mailfile);
+			free(mailfile);
 			return 0;
 		} else {
 			fprintf (stderr,
@@ -847,6 +865,7 @@ static int remove_mailbox (void)
 			              user_name, (unsigned int) user_id,
 			              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
+			free(mailfile);
 			return -1;
 		}
 	}
@@ -875,6 +894,7 @@ static int remove_mailbox (void)
 			              SHADOW_AUDIT_SUCCESS);
 		}
 #endif				/* WITH_AUDIT */
+		free(mailfile);
 		return errors;
 	}
 	i = is_owner (user_id, mailfile);
@@ -891,8 +911,10 @@ static int remove_mailbox (void)
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
+		free(mailfile);
 		return 1;
 	} else if (i == -1) {
+		free(mailfile);
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
@@ -918,6 +940,7 @@ static int remove_mailbox (void)
 		              SHADOW_AUDIT_SUCCESS);
 	}
 #endif				/* WITH_AUDIT */
+	free(mailfile);
 	return errors;
 }
 
@@ -991,6 +1014,7 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_root_flag ("-R", argc, argv);
+	prefix = process_prefix_flag ("-P", argc, argv);
 
 	OPENLOG ("userdel");
 #ifdef WITH_AUDIT
@@ -1007,6 +1031,7 @@ int main (int argc, char **argv)
 			{"help",         no_argument,       NULL, 'h'},
 			{"remove",       no_argument,       NULL, 'r'},
 			{"root",         required_argument, NULL, 'R'},
+			{"prefix",       required_argument, NULL, 'P'},
 #ifdef WITH_SELINUX
 			{"selinux-user", no_argument,       NULL, 'Z'},
 #endif				/* WITH_SELINUX */
@@ -1014,9 +1039,9 @@ int main (int argc, char **argv)
 		};
 		while ((c = getopt_long (argc, argv,
 #ifdef WITH_SELINUX             
-		                         "fhrR:Z",
+		                         "fhrR:P:Z",
 #else				/* !WITH_SELINUX */
-		                         "fhrR:",
+		                         "fhrR:P:",
 #endif				/* !WITH_SELINUX */
 		                         long_options, NULL)) != -1) {
 			switch (c) {
@@ -1032,8 +1057,16 @@ int main (int argc, char **argv)
 			case 'R': /* no-op, handled in process_root_flag () */
 				Rflg = true;
 				break;
+			case 'P': /* no-op, handled in process_prefix_flag () */
+				break;
 #ifdef WITH_SELINUX             
 			case 'Z':
+				if (prefix[0]) {
+					fprintf (stderr,
+					         _("%s: -Z cannot be used with --prefix\n"),
+					         Prog);
+					exit (E_BAD_ARG);
+				}
 				if (is_selinux_enabled () > 0) {
 					Zflg = true;
 				} else {
@@ -1123,7 +1156,18 @@ int main (int argc, char **argv)
 		}
 		user_id = pwd->pw_uid;
 		user_gid = pwd->pw_gid;
-		user_home = xstrdup (pwd->pw_dir);
+		
+		if(prefix[0]) {
+		
+			size_t len = strlen(prefix) + strlen(pwd->pw_dir) + 2;
+			int wlen;
+			user_home = xmalloc(len);
+			wlen = snprintf(user_home, len, "%s/%s", prefix, pwd->pw_dir);
+			assert (wlen == (int) len -1);
+		}
+		else {
+			user_home = xstrdup (pwd->pw_dir);
+		}
 		pw_close();
 	}
 #ifdef WITH_TCB
@@ -1156,7 +1200,7 @@ int main (int argc, char **argv)
 	 * Note: This is a best effort basis. The user may log in between,
 	 * a cron job may be started on her behalf, etc.
 	 */
-	if (!Rflg && user_busy (user_name, user_id) != 0) {
+	if ((prefix[0] == '\0') && !Rflg && user_busy (user_name, user_id) != 0) {
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
@@ -1207,8 +1251,8 @@ int main (int argc, char **argv)
 		 * prevent accidents if someone has /home or / as home
 		 * directory...  --marekm
 		 */
-		setpwent ();
-		while ((pwd = getpwent ())) {
+		prefix_setpwent ();
+		while ((pwd = prefix_getpwent ())) {
 			if (strcmp (pwd->pw_name, user_name) == 0) {
 				continue;
 			}
@@ -1222,7 +1266,7 @@ int main (int argc, char **argv)
 				break;
 			}
 		}
-		endpwent ();
+		prefix_endpwent ();
 	}
 #endif				/* EXTRA_CHECK_HOME_DIR */
 
@@ -1274,7 +1318,8 @@ int main (int argc, char **argv)
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
 	 * the entry from /etc/passwd.
 	 */
-	user_cancel (user_name);
+	if(prefix[0] == '\0')
+		user_cancel (user_name);
 	close_files ();
 
 #ifdef WITH_TCB

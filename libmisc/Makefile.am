@@ -45,6 +45,7 @@ libmisc_a_SOURCES = \
 	obscure.c \
 	pam_pass.c \
 	pam_pass_non_interactive.c \
+	prefix_flag.c \
 	pwd2spwd.c \
 	pwdcheck.c \
 	pwd_init.c \

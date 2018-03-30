@@ -186,6 +186,23 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-P</option>, <option>--prefix</option>&nbsp;<replaceable>PREFIX_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>PREFIX_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>PREFIX_DIR</replaceable> directory.
+		This option does not chroot and is intended for preparing 
+		a cross-compilation target.
+		Some limitations: NIS and LDAP users/groups are not verified.
+		PAM authentication is using the host files.
+		No SELINUX support.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
@@ -278,16 +295,19 @@
 	    <para>E_GRP_UPDATE: can't update group file</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>11</replaceable></term>
 	  <listitem>
 	    <para>E_CLEANUP_SERVICE: can't setup cleanup service</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>12</replaceable></term>
 	  <listitem>
 	    <para>E_PAM_USERNAME: can't determine your username for use with pam</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
 	  <term><replaceable>13</replaceable></term>
 	  <listitem>
 	    <para>E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message</para>

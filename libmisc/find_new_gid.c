@@ -136,7 +136,7 @@ static int check_gid (const gid_t gid,
 	}
 	/* Check if the GID exists according to NSS */
 	errno = 0;
-	if (getgrgid (gid) != NULL) {
+	if (prefix_getgrgid (gid) != NULL) {
 		return EEXIST;
 	} else {
 		/* getgrgid() was NULL

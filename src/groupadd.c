@@ -77,6 +77,8 @@ static gid_t group_id;
 static /*@null@*/char *group_passwd;
 static /*@null@*/char *empty_list = NULL;
 
+static const char *prefix = "";
+
 static bool oflg = false;	/* permit non-unique group ID to be specified with -g */
 static bool gflg = false;	/* ID value for the new group */
 static bool fflg = false;	/* if group already exists, do nothing and exit(0) */
@@ -123,6 +125,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
 	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -386,10 +389,11 @@ static void process_flags (int argc, char **argv)
 		{"password",   required_argument, NULL, 'p'},
 		{"system",     no_argument,       NULL, 'r'},
 		{"root",       required_argument, NULL, 'R'},
+		{"prefix",     required_argument, NULL, 'P'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:",
+	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:P:",
 		                 long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
@@ -446,6 +450,8 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
+		case 'P': /* no-op, handled in process_prefix_flag () */
+			break;
 		default:
 			usage (E_USAGE);
 		}
@@ -480,7 +486,7 @@ static void check_flags (void)
 	 * Check if the group already exist.
 	 */
 	/* local, no need for xgetgrnam */
-	if (getgrnam (group_name) != NULL) {
+	if (prefix_getgrnam (group_name) != NULL) {
 		/* The group already exist */
 		if (fflg) {
 			/* OK, no need to do anything */
@@ -492,7 +498,7 @@ static void check_flags (void)
 		exit (E_NAME_IN_USE);
 	}
 
-	if (gflg && (getgrgid (group_id) != NULL)) {
+	if (gflg && (prefix_getgrgid (group_id) != NULL)) {
 		/* A GID was specified, and a group already exist with that GID
 		 *  - either we will use this GID anyway (-o)
 		 *  - either we ignore the specified GID and
@@ -578,6 +584,7 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_root_flag ("-R", argc, argv);
+	prefix = process_prefix_flag ("-P", argc, argv);
 
 	OPENLOG ("groupadd");
 #ifdef WITH_AUDIT

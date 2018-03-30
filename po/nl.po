@@ -2636,7 +2636,9 @@ msgstr "%s: %s sloot af met status %d\n"
 msgid "%s: %s killed by signal %d\n"
 msgstr "%s: %s werd vernietigd door signaal %d\n"
 
-msgid "failed to open scratch file\n"
+#, fuzzy
+#| msgid "failed to open scratch file\n"
+msgid "failed to open scratch file"
 msgstr "initieel bestand openen is mislukt\n"
 
 msgid "failed to unlink scratch file"

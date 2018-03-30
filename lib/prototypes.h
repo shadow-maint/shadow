@@ -274,6 +274,21 @@ extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 /* port.c */
 extern bool isttytime (const char *, const char *, time_t);
 
+/* prefix_flag.c */
+extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv);
+extern struct group *prefix_getgrnam(const char *name);
+extern struct group *prefix_getgrgid(gid_t gid);
+extern struct passwd *prefix_getpwuid(uid_t uid);
+extern struct passwd *prefix_getpwnam(const char* name);
+extern struct spwd *prefix_getspnam(const char* name);
+extern struct group *prefix_getgr_nam_gid(const char *grname);
+extern void prefix_setpwent();
+extern struct passwd* prefix_getpwent();
+extern void prefix_endpwent();
+extern void prefix_setgrent();
+extern struct group* prefix_getgrent();
+extern void prefix_endgrent();
+
 /* pwd2spwd.c */
 #ifndef USE_PAM
 extern struct spwd *pwd_to_spwd (const struct passwd *);

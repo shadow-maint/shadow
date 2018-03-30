@@ -455,6 +455,23 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-P</option>, <option>--prefix</option>&nbsp;<replaceable>PREFIX_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>PREFIX_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>PREFIX_DIR</replaceable> directory.
+		This option does not chroot and is intended for preparing 
+		a cross-compilation target.
+		Some limitations: NIS and LDAP users/groups are not verified.
+		PAM authentication is using the host files.
+		No SELINUX support.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	</term>
 	<listitem>

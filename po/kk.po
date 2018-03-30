@@ -785,7 +785,6 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: жол %d: жаңа пароль жоқ\n"
 
 #, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: парольді '%s' тұзымен шифрлеу сәтсіз аяқталды: %s\n"
 
@@ -1095,8 +1094,6 @@ msgstr "%s: GID '%lu' бар болып тұр\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Тазарту қызметін орнату мүмкін емес.\n"
 
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
@@ -1330,8 +1327,6 @@ msgstr ""
 "  -b, --before КҮН              мерзімі КҮНнен үлкен ғана lastlog жазбаларын "
 "көрсету\n"
 
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1339,8 +1334,6 @@ msgstr ""
 "  -C, --clear                   пайдаланушының lastlog жазбасын тазарту (тек "
 "-u опциясымен бірге пайдаланылады)\n"
 
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1511,7 +1504,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Қолданылуы: sg топ [[-c] командасы]\n"
 
 #, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: парольді алдыңғы тұзбен шифрлеу сәтсіз аяқталды: %s\n"
 
@@ -1587,7 +1579,6 @@ msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: жаңа %s жазбасын дайындау сәтсіз аяқталды\n"
 
 #, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: бағынышты пайдаланушы ауқымын табу мүмкін емес\n"
 
@@ -2006,7 +1997,6 @@ msgid "%s: line too long in %s: %s..."
 msgstr "%s: %s ішіндегі жол тым ұзын: %s..."
 
 #, c-format
-#| msgid "%s: Cannot create symbolic link %s: %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: Қор көшірме файлын жасау мүмкін емес (%s): %s\n"
 
@@ -2218,7 +2208,6 @@ msgid "%s: can't create group\n"
 msgstr "%s: топты құру мүмкін емес\n"
 
 #, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "%s: бағынышты пайдаланушы ID-ын жасау мүмкін емес\n"
 
@@ -2430,7 +2419,6 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' пайдаланушысы %s ішінде бар болып тұр\n"
 
 #, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: жарамсыз бағынышты uid ауқымы '%s'\n"
 
@@ -2455,7 +2443,6 @@ msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: '%lu' UID-і бар болып тұр\n"
 
 #, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr "%s: %s жоқ болып тұр, %s немесе %s жалаушаларын қолдануға болмайды\n"
 
@@ -2504,7 +2491,6 @@ msgid "failed to rename mailbox"
 msgstr "mailbox атын ауыстыру қатемен аяқталды"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: %lu-%lu uid-тар ауқымын '%s' ішінен өшіру сәтсіз аяқталды\n"
 
@@ -2574,7 +2560,6 @@ msgid "Couldn't make backup"
 msgstr "Қор көшірмені жасау мүмкін емес"
 
 #, c-format
-#| msgid "%s: PAM: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: %s: %s\n"
 

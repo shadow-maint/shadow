@@ -375,28 +375,48 @@ bool commonio_present (const struct commonio_db *db)
 
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
-	char file[1024];
-	char lock[1024];
+	char* file = NULL;
+	char* lock = NULL;
+	size_t lock_file_len;
+	size_t file_len;
+	int err;
 
 	if (db->locked) {
 		return 1;
 	}
-
-	snprintf (file, sizeof file, "%s.%lu",
+	file_len = strlen(db->filename) + 11;/* %lu max size */
+	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
+	file = (char*)malloc(file_len);
+	if(file == NULL) {
+		err = ENOMEM;
+		goto cleanup_ENOMEM;
+	}
+	lock = (char*)malloc(lock_file_len);
+	if(lock == NULL) {
+		err = ENOMEM;
+		goto cleanup_ENOMEM;
+	}
+	snprintf (file, file_len, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
-	snprintf (lock, sizeof lock, "%s.lock", db->filename);
+	snprintf (lock, lock_file_len, "%s.lock", db->filename);
 	if (do_lock_file (file, lock, log) != 0) {
 		db->locked = true;
 		lock_count++;
-		return 1;
+		err = 1;
 	}
-	return 0;
+cleanup_ENOMEM:
+	if(file)
+		free(file);
+	if(lock)
+		free(lock);
+	return err;
 }
 
 
 int commonio_lock (struct commonio_db *db)
 {
-#ifdef HAVE_LCKPWDF
+/*#ifdef HAVE_LCKPWDF*/ /* not compatible with prefix option*/
+#if 0
 	/*
 	 * only if the system libc has a real lckpwdf() - the one from
 	 * lockpw.c calls us and would cause infinite recursion!
