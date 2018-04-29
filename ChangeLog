@@ -1,3 +1,19 @@
+2018-04-29  Serge Hallyn <serge@hallyn.com>
+
+	* Release 4.6
+	* Newgrp: avoid unnecessary lookups
+	* Make language less binary
+	* Add error when turning off man switch
+	* Spelling fixes
+	* Make userdel work with -R
+	* newgidmap: enforce setgroups=deny if self-mapping a group
+	* Norwegian bokmål translation
+	* pwck: prevent crash by not passing O_CREAT
+	* WITH_TCB fixes from Mandriva
+	* Fix pwconv and grpconv entry skips
+	* Fix -- slurping in su
+	* add --prefix option
+
 2017-07-16  Serge Hallyn <serge@hallyn.com>
 
 	* Import new Dutch translations.
