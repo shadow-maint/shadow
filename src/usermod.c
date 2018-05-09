@@ -1251,11 +1251,13 @@ static void process_flags (int argc, char **argv)
 		prefix_user_home = xmalloc(len);
 		wlen = snprintf(prefix_user_home, len, "%s/%s", prefix, user_home);
 		assert (wlen == (int) len -1);
+		if (user_newhome) {
+			len = strlen(prefix) + strlen(user_newhome) + 2;
+			prefix_user_newhome = xmalloc(len);
+			wlen = snprintf(prefix_user_newhome, len, "%s/%s", prefix, user_newhome);
+			assert (wlen == (int) len -1);
+		}
 
-		len = strlen(prefix) + strlen(user_newhome) + 2;
-		prefix_user_newhome = xmalloc(len);
-		wlen = snprintf(prefix_user_newhome, len, "%s/%s", prefix, user_newhome);
-		assert (wlen == (int) len -1);
 	}
 	else {
 		prefix_user_home = user_home;

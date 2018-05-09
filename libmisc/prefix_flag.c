@@ -333,7 +333,7 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 	    	&& (gid == (gid_t)gid)) {
 			return prefix_getgrgid ((gid_t) gid);
 		}
-		return prefix_getgrnam (grname);
+		return __gr_dup(prefix_getgrnam (grname));
 	}
 	else
 		return getgr_nam_gid(grname);
