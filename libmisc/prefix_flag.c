@@ -319,6 +319,7 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 {
 	long long int gid;
 	char *endptr;
+	struct group *g;
 
 	if (NULL == grname) {
 		return NULL;
@@ -333,7 +334,8 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 	    	&& (gid == (gid_t)gid)) {
 			return prefix_getgrgid ((gid_t) gid);
 		}
-		return __gr_dup(prefix_getgrnam (grname));
+		g = prefix_getgrnam (grname);
+		return g ? __gr_dup(g) : NULL;
 	}
 	else
 		return getgr_nam_gid(grname);
