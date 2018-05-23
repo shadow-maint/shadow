@@ -2018,6 +2018,19 @@ static void usr_update (void)
 static void create_home (void)
 {
 	if (access (prefix_user_home, F_OK) != 0) {
+		char path[strlen (prefix_user_home) + 2];
+		char *bhome, *cp;
+
+		path[0] = '\0';
+		bhome = strdup (prefix_user_home);
+		if (!bhome) {
+			fprintf (stderr,
+							_("%s: error while duplicating string %s\n"),
+							Prog, user_home);
+			fail_exit (E_HOMEDIR);
+		}
+		++bhome;
+
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (prefix_user_home) != 0) {
 			fprintf (stderr,
@@ -2026,19 +2039,42 @@ static void create_home (void)
 			fail_exit (E_HOMEDIR);
 		}
 #endif
-		/* XXX - create missing parent directories.  --marekm */
-		if (mkdir (prefix_user_home, 0) != 0) {
+
+		/* Check for every part of the path, if the directory
+		   exists. If not, create it with permissions 755 and
+		   owner root:root.
+		 */
+		cp = strtok (bhome, "/");
+		while (cp) {
+			strcat (path, "/");
+			strcat (path, cp);
+			if (access (path, F_OK) != 0) {
+				if (mkdir (path, 0) != 0) {
 			fprintf (stderr,
-			         _("%s: cannot create directory %s\n"),
-			         Prog, prefix_user_home);
+							_("%s: cannot create directory %s\n"),
+							Prog, path);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
-			              "adding home directory",
-			              user_name, (unsigned int) user_id,
-			              SHADOW_AUDIT_FAILURE);
+										"adding home directory",
+										user_name, (unsigned int) user_id,
+										SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_HOMEDIR);
 		}
+				if (chown (path, 0, 0) < 0) {
+					fprintf (stderr,
+									_("%s: warning: chown on `%s' failed: %m\n"),
+									Prog, path);
+				}
+				if (chmod (path, 0755) < 0) {
+					fprintf (stderr,
+									_("%s: warning: chmod on `%s' failed: %m\n"),
+									Prog, path);
+				}
+			}
+			cp = strtok (NULL, "/");
+		}
+
 		(void) chown (prefix_user_home, user_id, user_gid);
 		chmod (prefix_user_home,
 		       0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
