@@ -129,7 +129,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		snprintf(spw_db_file, len, "%s/%s", prefix, SHADOW_FILE);
 		spw_setdbname(spw_db_file);
 		
-
+#ifdef ENABLE_SUBIDS
 		len = strlen(prefix) + strlen("/etc/subuid") + 2;
 		suid_db_file = xmalloc(len);
 		snprintf(suid_db_file, len, "%s/%s", prefix, "/etc/subuid");
@@ -139,6 +139,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		sgid_db_file = xmalloc(len);
 		snprintf(sgid_db_file, len, "%s/%s", prefix, "/etc/subgid");
 		sub_gid_setdbname(sgid_db_file);
+#endif
 
 		len = strlen(prefix) + strlen("/etc/login.defs") + 2;
 		def_conf_file = xmalloc(len);
