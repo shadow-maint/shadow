@@ -416,17 +416,19 @@ extern int set_filesize_limit (int blocks);
 extern int user_busy (const char *name, uid_t uid);
 
 /* utmp.c */
+#ifndef USE_UTMPX
 extern /*@null@*/struct utmp *get_current_utmp (void);
 extern struct utmp *prepare_utmp (const char *name,
                                   const char *line,
                                   const char *host,
                                   /*@null@*/const struct utmp *ut);
 extern int setutmp (struct utmp *ut);
-#ifdef USE_UTMPX
+#else
+extern /*@null@*/struct utmpx *get_current_utmp (void);
 extern struct utmpx *prepare_utmpx (const char *name,
                                     const char *line,
                                     const char *host,
-                                    /*@null@*/const struct utmp *ut);
+                                    /*@null@*/const struct utmpx *ut);
 extern int setutmpx (struct utmpx *utx);
 #endif				/* USE_UTMPX */
 
