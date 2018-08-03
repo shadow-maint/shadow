@@ -24,7 +24,6 @@
  * SUCH DAMAGE.
  */
 
-#include <config.h>
 
 #ident "$Id$"
 
@@ -36,6 +35,7 @@
 int main (void)
 {
 	const char *user, *tty;
+	uid_t uid;
 
 	tty = ttyname (0);
 	if (NULL == tty) {
@@ -45,8 +45,9 @@ int main (void)
 	if (NULL == user) {
 		user = "UNKNOWN";
 	}
+	uid = getuid (); /* getuid() is always successful */
 	openlog ("nologin", LOG_CONS, LOG_AUTH);
-	syslog (LOG_CRIT, "Attempted login by %s on %s", user, tty);
+	syslog (LOG_CRIT, "Attempted login by %s (UID: %d) on %s", user, uid, tty);
 	closelog ();
 
 	printf ("%s", "This account is currently not available.\n");
