@@ -913,27 +913,7 @@ static void set_environment (struct passwd *pw)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-#ifdef USE_PAM
-	/* we need to setup the environment *after* pam_open_session(),
-	 * else the UID is changed before stuff like pam_xauth could
-	 * run, and we cannot access /etc/shadow and co
-	 */
 	environ = newenvp;	/* make new environment active */
-
-	if (change_environment) {
-		/* update environment with all pam set variables */
-		char **envcp = pam_getenvlist (pamh);
-		if (NULL != envcp) {
-			while (NULL != *envcp) {
-				addenv (*envcp, NULL);
-				envcp++;
-			}
-		}
-	}
-
-#else				/* !USE_PAM */
-	environ = newenvp;	/* make new environment active */
-#endif				/* !USE_PAM */
 
 	if (change_environment) {
 		if (fakelogin) {
@@ -948,6 +928,21 @@ static void set_environment (struct passwd *pw)
 			addenv ("LOGNAME", pw->pw_name);
 			addenv ("SHELL", shellstr);
 		}
+
+#ifdef USE_PAM
+	        /* we need to setup the environment *after* pam_open_session(),
+                 * else the UID is changed before stuff like pam_xauth could
+                 * run, and we cannot access /etc/shadow and co
+                 */
+		/* update environment with all pam set variables */
+		char **envcp = pam_getenvlist (pamh);
+		if (NULL != envcp) {
+			while (NULL != *envcp) {
+				addenv (*envcp, NULL);
+				envcp++;
+			}
+		}
+#endif				/* !USE_PAM */
 	}
 
 }
