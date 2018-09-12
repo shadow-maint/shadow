@@ -72,6 +72,7 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "nscd.h"
+#include "sssd.h"
 
 /*
  * exit status values
@@ -328,6 +329,7 @@ int main (int argc, char **argv)
 	}
 
 	nscd_flush_cache ("passwd");
+	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	return E_SUCCESS;
 }

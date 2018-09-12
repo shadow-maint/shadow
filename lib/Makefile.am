@@ -30,6 +30,8 @@ libshadow_la_SOURCES = \
 	lockpw.c \
 	nscd.c \
 	nscd.h \
+	sssd.c \
+	sssd.h \
 	pam_defs.h \
 	port.c \
 	port.h \

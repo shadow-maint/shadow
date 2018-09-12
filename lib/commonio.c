@@ -45,6 +45,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include "nscd.h"
+#include "sssd.h"
 #ifdef WITH_TCB
 #include <tcb.h>
 #endif				/* WITH_TCB */
@@ -485,6 +486,7 @@ static void dec_lock_count (void)
 			if (nscd_need_reload) {
 				nscd_flush_cache ("passwd");
 				nscd_flush_cache ("group");
+				sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 				nscd_need_reload = false;
 			}
 #ifdef HAVE_LCKPWDF

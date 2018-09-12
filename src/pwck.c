@@ -48,6 +48,7 @@
 #include "shadowio.h"
 #include "getdef.h"
 #include "nscd.h"
+#include "sssd.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
@@ -877,6 +878,7 @@ int main (int argc, char **argv)
 	close_files (changed);
 
 	nscd_flush_cache ("passwd");
+	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	/*
 	 * Tell the user what we did and exit.

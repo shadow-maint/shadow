@@ -280,6 +280,9 @@ AC_ARG_WITH(sha-crypt,
 AC_ARG_WITH(nscd,
 	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
+AC_ARG_WITH(sssd,
+	[AC_HELP_STRING([--with-sssd], [enable support for flushing sssd caches @<:@default=yes@:>@])],
+	[with_sssd=$withval], [with_sssd=yes])
 AC_ARG_WITH(group-name-max-length,
 	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=16@:>@])],
 	[with_group_name_max_length=$withval], [with_group_name_max_length=yes])
@@ -302,6 +305,12 @@ if test "$with_nscd" = "yes"; then
 	AC_CHECK_FUNC(posix_spawn,
 	              [AC_DEFINE(USE_NSCD, 1, [Define to support flushing of nscd caches])],
 	              [AC_MSG_ERROR([posix_spawn is needed for nscd support])])
+fi
+
+if test "$with_sssd" = "yes"; then
+	AC_CHECK_FUNC(posix_spawn,
+	              [AC_DEFINE(USE_SSSD, 1, [Define to support flushing of sssd caches])],
+	              [AC_MSG_ERROR([posix_spawn is needed for sssd support])])
 fi
 
 dnl Check for some functions in libc first, only if not found check for
@@ -679,5 +688,6 @@ echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"
 echo "	nscd support:			$with_nscd"
+echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
 echo

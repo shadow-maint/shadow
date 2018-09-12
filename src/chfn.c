@@ -47,6 +47,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
+#include "sssd.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
@@ -746,6 +747,7 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
 
 	nscd_flush_cache ("passwd");
+	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	closelog ();
 	exit (E_SUCCESS);
