@@ -34,7 +34,7 @@ AC_HEADER_STDBOOL
 
 AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utmpx.h termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
-	utime.h ulimit.h sys/resource.h gshadow.h lastlog.h \
+	utime.h ulimit.h sys/capability.h sys/resource.h gshadow.h lastlog.h \
 	locale.h rpc/key_prot.h netdb.h acl/libacl.h attr/libattr.h \
 	attr/error_context.h)
 

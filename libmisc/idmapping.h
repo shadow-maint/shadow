@@ -38,7 +38,7 @@ struct map_range {
 
 extern struct map_range *get_map_ranges(int ranges, int argc, char **argv);
 extern void write_mapping(int proc_dir_fd, int ranges,
-	struct map_range *mappings, const char *map_file);
+	struct map_range *mappings, const char *map_file, uid_t uid);
 
 #endif /* _ID_MAPPING_H_ */
 
