@@ -379,7 +379,7 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 	char* lock = NULL;
 	size_t lock_file_len;
 	size_t file_len;
-	int err;
+	int err = 0;
 
 	if (db->locked) {
 		return 1;
@@ -388,12 +388,10 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
 	file = (char*)malloc(file_len);
 	if(file == NULL) {
-		err = ENOMEM;
 		goto cleanup_ENOMEM;
 	}
 	lock = (char*)malloc(lock_file_len);
 	if(lock == NULL) {
-		err = ENOMEM;
 		goto cleanup_ENOMEM;
 	}
 	snprintf (file, file_len, "%s.%lu",

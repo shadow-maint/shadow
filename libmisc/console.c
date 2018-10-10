@@ -50,7 +50,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def);
 static bool is_listed (const char *cfgin, const char *tty, bool def)
 {
 	FILE *fp;
-	char buf[200], *s;
+	char buf[1024], *s;
 	const char *cons;
 
 	/*
@@ -70,7 +70,8 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 
 	if (*cons != '/') {
 		char *pbuf;
-		strcpy (buf, cons);
+		strncpy (buf, cons, sizeof (buf));
+		buf[sizeof (buf) - 1] = '\0';
 		pbuf = &buf[0];
 		while ((s = strtok (pbuf, ":")) != NULL) {
 			if (strcmp (s, tty) == 0) {
