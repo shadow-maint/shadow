@@ -42,6 +42,7 @@
 #include <getopt.h>
 #include "defines.h"
 #include "nscd.h"
+#include "sssd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -250,6 +251,7 @@ int main (int argc, char **argv)
 	}
 
 	nscd_flush_cache ("passwd");
+	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	return 0;
 }

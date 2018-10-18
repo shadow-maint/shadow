@@ -62,6 +62,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "sssd.h"
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
@@ -1233,6 +1234,7 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
+	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
 #ifdef USE_PAM
 	unsigned int i;

@@ -45,6 +45,7 @@
 #include "defines.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "sssd.h"
 #include "prototypes.h"
 
 #ifdef SHADOWGRP
@@ -870,6 +871,7 @@ int main (int argc, char **argv)
 	close_files (changed);
 
 	nscd_flush_cache ("group");
+	sssd_flush_cache (SSSD_DB_GROUP);
 
 	/*
 	 * Tell the user what we did and exit.

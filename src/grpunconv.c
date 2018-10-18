@@ -48,6 +48,7 @@
 #include <grp.h>
 #include <getopt.h>
 #include "nscd.h"
+#include "sssd.h"
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -236,6 +237,7 @@ int main (int argc, char **argv)
 	}
 
 	nscd_flush_cache ("group");
+	sssd_flush_cache (SSSD_DB_GROUP);
 
 	return 0;
 }
