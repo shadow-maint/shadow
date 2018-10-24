@@ -600,6 +600,19 @@ if test "$enable_acct_tools_setuid" != "no"; then
 fi
 AM_CONDITIONAL(ACCT_TOOLS_SETUID, test "x$enable_acct_tools_setuid" = "xyes")
 
+
+AC_ARG_WITH(fcaps,
+	[AC_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries for newuidmap/newgidmap @<:@default=no@:>@])],
+	[with_fcaps=$withval], [with_fcaps=no])
+AM_CONDITIONAL(FCAPS, test "x$with_fcaps" = "xyes")
+
+if test "x$with_fcaps" = "xyes"; then
+	AC_CHECK_PROGS(capcmd, "setcap")
+	if test "x$capcmd" = "x" ; then
+		AC_MSG_ERROR([setcap command not available])
+	fi
+fi
+
 AC_SUBST(LIBSKEY)
 AC_SUBST(LIBMD)
 if test "$with_skey" = "yes"; then
@@ -684,4 +697,5 @@ echo "	SHA passwords encryption:	$with_sha_crypt"
 echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
+echo "	use file caps:			$with_fcaps"
 echo
