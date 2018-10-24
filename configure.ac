@@ -74,12 +74,6 @@ AC_CHECK_MEMBERS([struct utmp.ut_type,
                   struct utmp.ut_time,
                   struct utmp.ut_xtime,
                   struct utmp.ut_tv],,,[[#include <utmp.h>]])
-dnl There are dependencies:
-dnl If UTMPX has to be used, the utmp structure shall have a ut_id field.
-if test "$ac_cv_header_utmpx_h" = "yes" &&
-   test "$ac_cv_member_struct_utmp_ut_id" != "yes"; then
-	AC_MSG_ERROR(Systems with UTMPX and no ut_id field in the utmp structure are not supported)
-fi
 
 AC_CHECK_MEMBERS([struct utmpx.ut_name,
                   struct utmpx.ut_host,

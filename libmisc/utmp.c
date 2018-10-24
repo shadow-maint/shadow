@@ -35,10 +35,10 @@
 #include "defines.h"
 #include "prototypes.h"
 
-#include <utmp.h>
-
 #ifdef USE_UTMPX
 #include <utmpx.h>
+#else
+#include <utmp.h>
 #endif
 
 #include <assert.h>
@@ -97,6 +97,7 @@ static bool is_my_tty (const char *tty)
  *
  *	Return NULL if no entries exist in utmp for the current process.
  */
+#ifndef USE_UTMPX
 /*@null@*/ /*@only@*/struct utmp *get_current_utmp (void)
 {
 	struct utmp *ut;
@@ -130,6 +131,36 @@ static bool is_my_tty (const char *tty)
 
 	return ret;
 }
+#else
+/*@null@*/ /*@only*/struct utmpx *get_current_utmp(void)
+{
+	struct utmpx *ut;
+	struct utmpx *ret = NULL;
+
+	setutxent ();
+
+	/* Find the utmpx entry for this PID. */
+	while ((ut = getutxent ()) != NULL) {
+		if (   (ut->ut_pid == getpid ())
+		    && ('\0' != ut->ut_id[0])
+		    && (   (LOGIN_PROCESS == ut->ut_type)
+			|| (USER_PROCESS == ut->ut_type))
+		    && is_my_tty (ut->ut_line)) {
+			break;
+		}
+	}
+
+	if (NULL != ut) {
+		ret = (struct utmpx *) xmalloc (sizeof (*ret));
+		memcpy (ret, ut, sizeof (*ret));
+	}
+
+	endutxent ();
+
+	return ret;
+}
+#endif
+
 
 #ifndef USE_PAM
 /*
@@ -166,6 +197,7 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 #endif				/* ! USE_PAM */
 
 
+#ifndef USE_UTMPX
 /*
  * prepare_utmp - prepare an utmp entry so that it can be logged in a
  *                utmp/wtmp file.
@@ -325,14 +357,14 @@ int setutmp (struct utmp *ut)
 	return err;
 }
 
-#ifdef USE_UTMPX
+#else
 /*
  * prepare_utmpx - the UTMPX version for prepare_utmp
  */
 /*@only@*/struct utmpx *prepare_utmpx (const char *name,
                                        const char *line,
                                        const char *host,
-                                       /*@null@*/const struct utmp *ut)
+                                       /*@null@*/const struct utmpx *ut)
 {
 	struct timeval tv;
 	char *hostname = NULL;
@@ -398,7 +430,7 @@ int setutmp (struct utmp *ut)
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
 #ifdef HAVE_STRUCT_UTMPX_UT_ADDR
-				memcpy (utxent->ut_addr,
+				memcpy (&utxent->ut_addr,
 				        &(sa->sin_addr),
 				        MIN (sizeof (utxent->ut_addr),
 				             sizeof (sa->sin_addr)));
