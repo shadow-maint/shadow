@@ -344,7 +344,7 @@ static void fail_exit (int code)
 static void get_defaults (void)
 {
 	FILE *fp;
-	char* default_file = USER_DEFAULTS_FILE;
+	char *default_file = USER_DEFAULTS_FILE;
 	char buf[1024];
 	char *cp;
 
@@ -354,6 +354,8 @@ static void get_defaults (void)
 
 		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
 		default_file = malloc(len);
+                if (default_file == NULL)
+                       return;
 		wlen = snprintf(default_file, len, "%s/%s", prefix, USER_DEFAULTS_FILE);
 		assert (wlen == (int) len -1);
 	}
@@ -364,7 +366,7 @@ static void get_defaults (void)
 
 	fp = fopen (default_file, "r");
 	if (NULL == fp) {
-		return;
+		goto getdef_err;
 	}
 
 	/*
@@ -475,7 +477,7 @@ static void get_defaults (void)
 		}
 	}
 	(void) fclose (fp);
-
+     getdef_err:
 	if(prefix[0]) {
 		free(default_file);
 	}
@@ -510,8 +512,8 @@ static int set_defaults (void)
 	FILE *ifp;
 	FILE *ofp;
 	char buf[1024];
-	char* new_file = NEW_USER_FILE;
-	char* default_file = USER_DEFAULTS_FILE;
+	char *new_file = NULL;
+	char *default_file = USER_DEFAULTS_FILE;
 	char *cp;
 	int ofd;
 	int wlen;
@@ -522,17 +524,30 @@ static int set_defaults (void)
 	bool out_shell = false;
 	bool out_skel = false;
 	bool out_create_mail_spool = false;
+	size_t len;
+	int ret = -1;
+
+
+	len = strlen(prefix) + strlen(NEW_USER_FILE) + 2;
+	new_file = malloc(len);
+        if (new_file == NULL) {
+		fprintf (stderr,
+		         _("%s: cannot create new defaults file: %s\n"),
+		         Prog, strerror(errno));
+		return -1;
+        }
+	wlen = snprintf(new_file, len, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
+	assert (wlen <= (int) len -1);
 
 	if(prefix[0]) {
-		size_t len;
-
-		len = strlen(prefix) + strlen(NEW_USER_FILE) + 2;
-		new_file = malloc(len);
-		wlen = snprintf(new_file, len, "%s/%s", prefix, NEW_USER_FILE);
-		assert (wlen == (int) len -1);
-
 		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
 		default_file = malloc(len);
+		if (default_file == NULL) {
+			fprintf (stderr,
+			         _("%s: cannot create new defaults file: %s\n"),
+			         Prog, strerror(errno));
+			goto setdef_err;
+		}
 		wlen = snprintf(default_file, len, "%s/%s", prefix, USER_DEFAULTS_FILE);
 		assert (wlen == (int) len -1);
 	}
@@ -545,7 +560,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: cannot create new defaults file\n"),
 		         Prog);
-		return -1;
+		goto setdef_err;
 	}
 
 	ofp = fdopen (ofd, "w");
@@ -553,7 +568,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: cannot open new defaults file\n"),
 		         Prog);
-		return -1;
+		goto setdef_err;
 	}
 
 	/*
@@ -580,7 +595,7 @@ static int set_defaults (void)
 				         _("%s: line too long in %s: %s..."),
 				         Prog, default_file, buf);
 				(void) fclose (ifp);
-				return -1;
+				goto setdef_err;
 			}
 		}
 
@@ -644,7 +659,7 @@ static int set_defaults (void)
 	    || (fsync (fileno (ofp)) != 0)
 	    || (fclose (ofp) != 0)) {
 		unlink (new_file);
-		return -1;
+		goto setdef_err;
 	}
 
 	/*
@@ -659,7 +674,7 @@ static int set_defaults (void)
 		         _("%s: Cannot create backup file (%s): %s\n"),
 		         Prog, buf, strerror (err));
 		unlink (new_file);
-		return -1;
+		goto setdef_err;
 	}
 
 	/*
@@ -670,7 +685,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: rename: %s: %s\n"),
 		         Prog, new_file, strerror (err));
-		return -1;
+		goto setdef_err;
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USYS_CONFIG, Prog,
@@ -684,13 +699,14 @@ static int set_defaults (void)
 	         (unsigned int) def_group, def_home, def_shell,
 	         def_inactive, def_expire, def_template,
 	         def_create_mail_spool));
-
+	ret = 0;
+    setdef_err:
+	free(new_file);
 	if(prefix[0]) {
-		free(new_file);
 		free(default_file);
 	}
 
-	return 0;
+	return ret;
 }
 
 /*
