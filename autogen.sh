@@ -9,4 +9,5 @@ autoreconf -v -f --install || exit 1
 	--disable-shared \
 	--without-libpam \
 	--with-selinux \
+        --enable-fcaps=auto \
 	"$@"

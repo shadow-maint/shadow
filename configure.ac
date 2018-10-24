@@ -357,6 +357,24 @@ if test "$enable_subids" != "no"; then
 fi
 AM_CONDITIONAL(ENABLE_SUBIDS, test "x$enable_subids" != "xno")
 
+AC_ARG_ENABLE(fcaps,
+	[AC_HELP_STRING([--enable-fcaps],
+		[use file capabilities for newuidmap@<:@default=yes@:>@])],
+	[enable_fcaps="${enableval}"],
+	[enable_fcaps="maybe"]
+)
+
+if test "$enable_fcaps" != "no"; then
+	AC_CHECK_PROGS(capcmd, "setcap")
+	if test "x$capcmd" = "x" ; then
+		if test "x$enable_fcaps" = "xyes" ; then
+			AC_MSG_ERROR([setcap command not available])
+		fi
+		enable_fcaps="no"
+	fi
+fi
+AM_CONDITIONAL(ENABLE_FCAPS, test "x$enable_fcaps" != "xno")
+
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])

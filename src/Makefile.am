@@ -52,6 +52,7 @@ usbin_PROGRAMS = \
 # id and groups are from gnu, sulogin from sysvinit
 noinst_PROGRAMS = id sulogin
 
+fcapubins      =
 suidbins       = su
 suidubins      = chage chfn chsh expiry gpasswd newgrp
 if !WITH_TCB
@@ -61,7 +62,11 @@ if ACCT_TOOLS_SETUID
 suidubins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
 if ENABLE_SUBIDS
+if ENABLE_FCAPS
+fcapubins += newgidmap newuidmap
+else
 suidubins += newgidmap newuidmap
+endif
 endif
 
 if WITH_TCB
@@ -128,6 +133,9 @@ install-am: all-am
 	ln -sf vipw	$(DESTDIR)$(usbindir)/vigr
 	for i in $(suidbins); do \
 		chmod $(suidperms) $(DESTDIR)$(bindir)/$$i; \
+	done
+	for i in $(fcapubins); do \
+		setcap cap_setuid,cap_setgid=pe $(DESTDIR)$(ubindir)/$$i; \
 	done
 	for i in $(suidubins); do \
 		chmod $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
