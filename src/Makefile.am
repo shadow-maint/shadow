@@ -61,7 +61,9 @@ if ACCT_TOOLS_SETUID
 suidubins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
 if ENABLE_SUBIDS
+if !FCAPS
 suidubins += newgidmap newuidmap
+endif
 endif
 
 if WITH_TCB
@@ -137,4 +139,10 @@ if WITH_TCB
 		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
 		chmod $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
+endif
+if ENABLE_SUBIDS
+if FCAPS
+	setcap cap_setuid+ep $(DESTDIR)$(ubindir)/newuidmap
+	setcap cap_setgid+ep $(DESTDIR)$(ubindir)/newgidmap
+endif
 endif
