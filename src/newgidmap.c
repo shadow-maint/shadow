@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 	verify_ranges(pw, ranges, mappings, &allow_setgroups);
 
 	write_setgroups(proc_dir_fd, allow_setgroups);
-	write_mapping(proc_dir_fd, ranges, mappings, "gid_map");
+	write_mapping(proc_dir_fd, ranges, mappings, "gid_map", pw->pw_uid);
 	sub_gid_close();
 
 	return EXIT_SUCCESS;
