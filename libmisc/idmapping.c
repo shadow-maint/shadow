@@ -38,7 +38,7 @@
 #include "idmapping.h"
 #include <sys/prctl.h>
 #if HAVE_SYS_CAPABILITY_H
-# include <sys/capability.h>
+#include <sys/capability.h>
 #endif
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
@@ -123,57 +123,75 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
  */
 #define ULONG_DIGITS ((((sizeof(unsigned long) * CHAR_BIT) + 9)/10)*3)
 
-
+/*
+ * The ruid refers to the caller's uid and is used to reset the effective uid
+ * back to the callers real uid.
+ * This clutch mainly exists for setuid-based new{g,u}idmap binaries that are
+ * called in contexts where all capabilities other than the necessary
+ * CAP_SET{G,U}ID capabilities are dropped. Since the kernel will require
+ * assurance that the caller holds CAP_SYS_ADMIN over the target user namespace
+ * the only way it can confirm is in this case is if the effective uid is
+ * equivalent to the uid owning the target user namespace.
+ * Note, we only support this when a) new{g,u}idmap is not called by root and
+ * b) if the caller's uid and the uid retrieved via system appropriate means
+ * (shadow file or other) are identical. Specifically, this does not support
+ * when the root user calls the new{g,u}idmap binary for an unprivileged user.
+ * If this is wanted: use file capabilities!
+ */
 void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
-	const char *map_file, uid_t uid)
+	const char *map_file, uid_t ruid)
 {
 	int idx;
 	struct map_range *mapping;
 	size_t bufsize;
 	char *buf, *pos;
 	int fd;
-#if HAVE_SYS_CAPABILITY_H
-	struct __user_cap_header_struct hdr = { _LINUX_CAPABILITY_VERSION_3, 0 };
-	struct __user_cap_data_struct data[2] = { { 0 } };
-#endif
-
-	bufsize = ranges * ((ULONG_DIGITS  + 1) * 3);
-	pos = buf = xmalloc(bufsize);
 
 #if HAVE_SYS_CAPABILITY_H
+	int cap;
+	struct __user_cap_header_struct hdr = {_LINUX_CAPABILITY_VERSION_3, 0};
+	struct __user_cap_data_struct data[2] = {{0}};
+
+	if (strcmp(map_file, "uid_map") == 0) {
+		cap = CAP_SETUID;
+	} else if (strcmp(map_file, "gid_map") == 0) {
+		cap = CAP_SETGID;
+	} else {
+		fprintf(stderr, _("%s: Invalid map file %s specified\n"), Prog, map_file);
+		exit(EXIT_FAILURE);
+	}
+
 	if (capget(&hdr, data) < 0) {
 		fprintf(stderr, _("%s: Could not get capabilities\n"), Prog);
 		exit(EXIT_FAILURE);
 	}
-	if (!(data[0].effective & CAP_TO_MASK(CAP_SYS_ADMIN)) &&
-	    uid != geteuid()) {
-		bool uid_map;
 
-		if (strcmp(map_file, "uid_map") == 0) {
-			uid_map = true;
-		} else if (strcmp(map_file, "gid_map") == 0) {
-			uid_map = false;
-		} else {
-			fprintf(stderr, _("%s: Invalid map file %s specified\n"), Prog, map_file);
-			exit(EXIT_FAILURE);
-		}
+	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
+	if (!(data[0].effective & CAP_TO_MASK(CAP_SYS_ADMIN)) && ruid != 0 &&
+	    ruid == getuid() && ruid != geteuid()) {
 		if (prctl(PR_SET_KEEPCAPS, 1, 0, 0, 0) < 0) {
 			fprintf(stderr, _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), Prog);
 			exit(EXIT_FAILURE);
 		}
-		if (seteuid(uid) < 0) {
-			fprintf(stderr, _("%s: Could not seteuid to %d\n"), Prog, uid);
-			exit(EXIT_FAILURE);
-		}
 
-		memset(data, 0, sizeof(data));
-		data[0].effective = data[0].permitted = CAP_TO_MASK(uid_map ? CAP_SETUID : CAP_SETGID);
-		if (capset(&hdr, data) < 0) {
-			fprintf(stderr, _("%s: Could not set caps\n"), Prog);
+		if (seteuid(ruid) < 0) {
+			fprintf(stderr, _("%s: Could not seteuid to %d\n"), Prog, ruid);
 			exit(EXIT_FAILURE);
 		}
 	}
+
+	/* Lockdown new{g,u}idmap by dropping all unneeded capabilities. */
+	memset(data, 0, sizeof(data));
+	data[0].effective = CAP_TO_MASK(cap);
+	data[0].permitted = data[0].effective;
+	if (capset(&hdr, data) < 0) {
+		fprintf(stderr, _("%s: Could not set caps\n"), Prog);
+		exit(EXIT_FAILURE);
+	}
 #endif
+
+	bufsize = ranges * ((ULONG_DIGITS  + 1) * 3);
+	pos = buf = xmalloc(bufsize);
 
 	/* Build the mapping command */
 	mapping = mappings;
