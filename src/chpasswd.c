@@ -432,6 +432,15 @@ int main (int argc, char **argv)
 			*cp = '\0';
 		} else {
 			if (feof (stdin) == 0) {
+
+				// Drop all remaining characters on this line.
+				while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
+					cp = strchr (buf, '\n');
+					if (cp != NULL) {
+						break;
+					}
+				}
+
 				fprintf (stderr,
 				         _("%s: line %d: line too long\n"),
 				         Prog, line);
