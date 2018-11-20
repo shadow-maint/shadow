@@ -161,14 +161,8 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 		exit(EXIT_FAILURE);
 	}
 
-	if (capget(&hdr, data) < 0) {
-		fprintf(stderr, _("%s: Could not get capabilities\n"), Prog);
-		exit(EXIT_FAILURE);
-	}
-
 	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
-	if (!(data[0].effective & CAP_TO_MASK(CAP_SYS_ADMIN)) && ruid != 0 &&
-	    ruid == getuid() && ruid != geteuid()) {
+	if (geteuid() != ruid) {
 		if (prctl(PR_SET_KEEPCAPS, 1, 0, 0, 0) < 0) {
 			fprintf(stderr, _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), Prog);
 			exit(EXIT_FAILURE);
