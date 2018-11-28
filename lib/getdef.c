@@ -92,6 +92,7 @@ static struct itemdef def_table[] = {
 	{"GID_MIN", NULL},
 	{"HUSHLOGIN_FILE", NULL},
 	{"KILLCHAR", NULL},
+	{"LASTLOG_UID_MAX", NULL},
 	{"LOGIN_RETRIES", NULL},
 	{"LOGIN_TIMEOUT", NULL},
 	{"LOG_OK_LOGINS", NULL},

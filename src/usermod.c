@@ -1864,8 +1864,15 @@ static void update_lastlog (void)
 	int fd;
 	off_t off_uid = (off_t) user_id * sizeof ll;
 	off_t off_newuid = (off_t) user_newid * sizeof ll;
+	uid_t max_uid;
 
 	if (access (LASTLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
+	max_uid = (uid_t) getdef_ulong ("LASTLOG_MAX_UID", 99999UL);
+	if (user_newid > max_uid) {
+		/* do not touch lastlog for large uids */
 		return;
 	}
 

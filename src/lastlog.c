@@ -44,6 +44,7 @@
 #include <assert.h>
 #include "defines.h"
 #include "prototypes.h"
+#include "getdef.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 
@@ -182,6 +183,15 @@ static void print_one (/*@null@*/const struct passwd *pw)
 static void print (void)
 {
 	const struct passwd *pwent;
+	unsigned long lastlog_uid_max;
+
+	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 99999UL);
+	if (   (has_umin && umin > lastlog_uid_max)
+	    || (has_umax && umax > lastlog_uid_max)) {
+		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+				   "\tthe output might be incorrect.\n"), Prog, lastlog_uid_max);
+	}
+
 	if (uflg && has_umin && has_umax && (umin == umax)) {
 		print_one (getpwuid ((uid_t)umin));
 	} else {
@@ -190,6 +200,8 @@ static void print (void)
 			if (   uflg
 			    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
 			        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
+				continue;
+			} else if ( !uflg && pwent->pw_uid > (uid_t) lastlog_uid_max) {
 				continue;
 			}
 			print_one (pwent);
@@ -246,9 +258,18 @@ static void update_one (/*@null@*/const struct passwd *pw)
 static void update (void)
 {
 	const struct passwd *pwent;
+	unsigned long lastlog_uid_max;
 
 	if (!uflg) /* safety measure */
 		return;
+
+	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 99999UL);
+	if (   (has_umin && umin > lastlog_uid_max)
+	    || (has_umax && umax > lastlog_uid_max)) {
+		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+				   "\tthey will not be updated.\n"), Prog, lastlog_uid_max);
+		return;
+	}
 
 	if (has_umin && has_umax && (umin == umax)) {
 		update_one (getpwuid ((uid_t)umin));

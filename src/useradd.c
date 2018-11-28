@@ -1863,8 +1863,15 @@ static void lastlog_reset (uid_t uid)
 	struct lastlog ll;
 	int fd;
 	off_t offset_uid = (off_t) (sizeof ll) * uid;
+	uid_t max_uid;
 
 	if (access (LASTLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
+	max_uid = (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 99999UL);
+	if (uid > max_uid) {
+		/* do not touch lastlog for large uids */
 		return;
 	}
 

@@ -32,6 +32,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY CREATE_HOME           SYSTEM "login.defs.d/CREATE_HOME.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
@@ -670,6 +671,7 @@
     <variablelist>
       &CREATE_HOME;
       &GID_MAX; <!-- documents also GID_MIN -->
+      &LASTLOG_UID_MAX;
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
       &PASS_MAX_DAYS;

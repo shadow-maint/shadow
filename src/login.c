@@ -1162,7 +1162,9 @@ int main (int argc, char **argv)
 #endif				/* WITH_AUDIT */
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
-	if (getdef_bool ("LASTLOG_ENAB")) {	/* give last login and log this one */
+	if (   getdef_bool ("LASTLOG_ENAB")
+	    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 99999UL)) {
+		/* give last login and log this one */
 		dolastlog (&ll, pwd, tty, hostname);
 	}
 #endif
@@ -1298,6 +1300,7 @@ int main (int argc, char **argv)
 			}
 		}
 		if (   getdef_bool ("LASTLOG_ENAB")
+		    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 99999UL)
 		    && (ll.ll_time != 0)) {
 			time_t ll_time = ll.ll_time;
 
