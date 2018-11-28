@@ -31,6 +31,7 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='lastlog.8'>
@@ -198,6 +199,18 @@
       you have in <filename>passwd</filename> users with a high UID). You can
       display its real size with "<command>ls -s</command>".
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &LASTLOG_UID_MAX;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

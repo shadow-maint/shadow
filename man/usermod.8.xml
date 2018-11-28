@@ -30,6 +30,7 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
@@ -517,6 +518,7 @@
       tool:
     </para>
     <variablelist>
+      &LASTLOG_UID_MAX;
       &MAIL_DIR; <!-- documents also MAIL_FILE -->
       &MAX_MEMBERS_PER_GROUP;
       &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->

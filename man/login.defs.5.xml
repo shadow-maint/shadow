@@ -54,6 +54,7 @@
 <!ENTITY ISSUE_FILE            SYSTEM "login.defs.d/ISSUE_FILE.xml">
 <!ENTITY KILLCHAR              SYSTEM "login.defs.d/KILLCHAR.xml">
 <!ENTITY LASTLOG_ENAB          SYSTEM "login.defs.d/LASTLOG_ENAB.xml">
+<!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY LOG_OK_LOGINS         SYSTEM "login.defs.d/LOG_OK_LOGINS.xml">
 <!ENTITY LOG_UNKFAIL_ENAB      SYSTEM "login.defs.d/LOG_UNKFAIL_ENAB.xml">
 <!ENTITY LOGIN_RETRIES         SYSTEM "login.defs.d/LOGIN_RETRIES.xml">
@@ -188,6 +189,7 @@
       &ISSUE_FILE;
       &KILLCHAR;
       &LASTLOG_ENAB;
+      &LASTLOG_UID_MAX;
       &LOG_OK_LOGINS;
       &LOG_UNKFAIL_ENAB;
       &LOGIN_RETRIES;
@@ -349,7 +351,12 @@
 	</listitem>
       </varlistentry>
       <!-- id: no variables -->
-      <!-- lastlog: no variables -->
+      <varlistentry>
+	<term>lastlog</term>
+	<listitem>
+	  <para>LASTLOG_UID_MAX</para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>login</term>
 	<listitem>
@@ -365,7 +372,7 @@
 	    HUSHLOGIN_FILE
 	    <phrase condition="no_pam">ISSUE_FILE</phrase>
 	    KILLCHAR
-	    <phrase condition="no_pam">LASTLOG_ENAB</phrase>
+	    <phrase condition="no_pam">LASTLOG_ENAB LASTLOG_UID_MAX</phrase>
 	    LOGIN_RETRIES
 	    <phrase condition="no_pam">LOGIN_STRING</phrase>
 	    LOGIN_TIMEOUT LOG_OK_LOGINS LOG_UNKFAIL_ENAB
@@ -474,6 +481,7 @@
 	  <para>
 	    CREATE_HOME
 	    GID_MAX GID_MIN
+	    LASTLOG_UID_MAX
 	    MAIL_DIR MAX_MEMBERS_PER_GROUP
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
@@ -498,6 +506,7 @@
 	<term>usermod</term>
 	<listitem>
 	  <para>
+	    LASTLOG_UID_MAX
 	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
 	    <phrase condition="tcb">TCB_SYMLINKS USE_TCB</phrase>
 	  </para>

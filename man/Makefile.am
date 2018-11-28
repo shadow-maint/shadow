@@ -137,6 +137,7 @@ login_defs_v = \
 	ISSUE_FILE.xml \
 	KILLCHAR.xml \
 	LASTLOG_ENAB.xml \
+	LASTLOG_UID_MAX.xml \
 	LOGIN_RETRIES.xml \
 	LOGIN_STRING.xml \
 	LOGIN_TIMEOUT.xml \
