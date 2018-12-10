@@ -185,7 +185,7 @@ static void print (void)
 	const struct passwd *pwent;
 	unsigned long lastlog_uid_max;
 
-	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 99999UL);
+	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (   (has_umin && umin > lastlog_uid_max)
 	    || (has_umax && umax > lastlog_uid_max)) {
 		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
@@ -263,7 +263,7 @@ static void update (void)
 	if (!uflg) /* safety measure */
 		return;
 
-	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 99999UL);
+	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (   (has_umin && umin > lastlog_uid_max)
 	    || (has_umax && umax > lastlog_uid_max)) {
 		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"

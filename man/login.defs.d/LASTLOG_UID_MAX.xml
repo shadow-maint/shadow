@@ -39,7 +39,8 @@
       a huge sparse lastlog file for them.
     </para>
     <para>
-      The default value for <option>LASTLOG_UID_MAX</option> is 99999.
+      No <option>LASTLOG_UID_MAX</option> option present in the configuration
+      means that there is no user ID limit for writing lastlog entries.
     </para>
   </listitem>
 </varlistentry>
