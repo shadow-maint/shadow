@@ -2313,7 +2313,10 @@ int main (int argc, char **argv)
 	}
 
 	if (!mflg && (uflg || gflg)) {
-		if (access (dflg ? prefix_user_newhome : prefix_user_home, F_OK) == 0) {
+		struct stat sb;
+
+		if (stat (dflg ? prefix_user_newhome : prefix_user_home, &sb) == 0 &&
+			((uflg && sb.st_uid == user_newid) || sb.st_uid == user_id)) {
 			/*
 			 * Change the UID on all of the files owned by
 			 * `user_id' to `user_newid' in the user's home
