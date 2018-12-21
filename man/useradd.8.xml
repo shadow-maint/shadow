@@ -34,6 +34,7 @@
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY MAX_ID_HOLE_SIZE      SYSTEM "login.defs.d/MAX_ID_HOLE_SIZE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
@@ -673,6 +674,7 @@
       &GID_MAX; <!-- documents also GID_MIN -->
       &LASTLOG_UID_MAX;
       &MAIL_DIR;
+      &MAX_ID_HOLE_SIZE;
       &MAX_MEMBERS_PER_GROUP;
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;

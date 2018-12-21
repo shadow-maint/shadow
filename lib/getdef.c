@@ -100,6 +100,7 @@ static struct itemdef def_table[] = {
 	{"MAIL_DIR", NULL},
 	{"MAIL_FILE", NULL},
 	{"MAX_MEMBERS_PER_GROUP", NULL},
+	{"MAX_ID_HOLE_SIZE", NULL},
 	{"MD5_CRYPT_ENAB", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},

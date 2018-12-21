@@ -32,6 +32,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY MAX_ID_HOLE_SIZE      SYSTEM "login.defs.d/MAX_ID_HOLE_SIZE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
@@ -370,6 +371,7 @@
     </variablelist>
     <variablelist>
       &GID_MAX; <!-- documents also GID_MIN -->
+      &MAX_ID_HOLE_SIZE;
       &MAX_MEMBERS_PER_GROUP;
     </variablelist>
     <variablelist condition="no_pam">

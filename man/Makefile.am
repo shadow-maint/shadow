@@ -145,6 +145,7 @@ login_defs_v = \
 	LOG_UNKFAIL_ENAB.xml \
 	MAIL_CHECK_ENAB.xml \
 	MAIL_DIR.xml \
+	MAX_ID_HOLE_SIZE.xml \
 	MAX_MEMBERS_PER_GROUP.xml \
 	MD5_CRYPT_ENAB.xml \
 	MOTD_FILE.xml \

@@ -31,6 +31,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY MAX_ID_HOLE_SIZE      SYSTEM "login.defs.d/MAX_ID_HOLE_SIZE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
 <!-- SHADOW-CONFIG-HERE -->
@@ -241,6 +242,7 @@
     </para>
     <variablelist>
       &GID_MAX; <!-- documents also GID_MIN -->
+      &MAX_ID_HOLE_SIZE;
       &MAX_MEMBERS_PER_GROUP;
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
     </variablelist>
