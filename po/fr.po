@@ -63,7 +63,6 @@ msgid "%s: nscd exited with status %d\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Password Changes"
 msgid "Password: "
 msgstr "Modifications du mot de passe"
 
@@ -112,7 +111,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't update SELinux user mapping"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Impossible de mettre à jour la correspondance d'utilisateur SELinux"
 
@@ -133,7 +131,6 @@ msgid "Cannot init SELinux management\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't update SELinux user mapping"
 msgid "Cannot create SELinux user key\n"
 msgstr "Impossible de mettre à jour la correspondance d'utilisateur SELinux"
 
@@ -142,12 +139,10 @@ msgid "Cannot verify the SELinux user\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't update SELinux user mapping"
 msgid "Cannot modify SELinux user mapping\n"
 msgstr "Impossible de mettre à jour la correspondance d'utilisateur SELinux"
 
 #, fuzzy, c-format
-#| msgid "can't update SELinux user mapping"
 msgid "Cannot add SELinux user mapping\n"
 msgstr "Impossible de mettre à jour la correspondance d'utilisateur SELinux"
 
@@ -188,7 +183,6 @@ msgid "%s: Suspiciously long symlink: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -205,7 +199,6 @@ msgid "%s: unlink: %s: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't remove home directory"
 msgid "%s: Cannot remove directory %s: %s\n"
 msgstr "impossible de supprimer le répertoire personnel"
 
@@ -252,7 +245,6 @@ msgid "Warning: unknown group %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "log in to a new group"
 msgid "Warning: too many groups\n"
 msgstr "se connecter avec un nouveau groupe"
 
@@ -260,7 +252,6 @@ msgid "Your password has expired."
 msgstr ""
 
 #, fuzzy
-#| msgid "password inactivity period"
 msgid "Your password is inactive."
 msgstr "période d'inactivité du mot de passe"
 
@@ -268,7 +259,6 @@ msgid "Your login has expired."
 msgstr ""
 
 #, fuzzy
-#| msgid "Set the list of administrative users."
 msgid "  Contact the system administrator."
 msgstr "Configurer la liste des administrateurs."
 
@@ -276,7 +266,6 @@ msgid "  Choose a new password."
 msgstr ""
 
 #, fuzzy
-#| msgid "change user password"
 msgid "You must change your password."
 msgstr "Modifier le mot de passe d'un utilisateur"
 
@@ -407,12 +396,10 @@ msgid "passwd: pam_start() failed, error %d\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "passwd"
 msgid "passwd: %s\n"
 msgstr "passwd"
 
 #, fuzzy
-#| msgid "date of last password change"
 msgid "passwd: password unchanged\n"
 msgstr "date du dernier changement de mot de passe"
 
@@ -420,7 +407,6 @@ msgid "passwd: password updated successfully\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't sort password files"
 msgid "Incorrect password for %s.\n"
 msgstr "impossible de trier les fichiers de mots de passe"
 
@@ -470,12 +456,10 @@ msgid "Cannot execute %s"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a valid home directory"
 msgid "Invalid root directory '%s'\n"
 msgstr "validité du répertoire personnel ;"
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "Can't change root directory to '%s'\n"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -510,7 +494,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Show account aging information."
 msgid "  -l, --list                    show account aging information\n"
 msgstr "Afficher les informations sur l'âge des comptes."
 
@@ -520,7 +503,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
@@ -535,17 +518,14 @@ msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
 
 #, fuzzy
-#| msgid "minimum password age"
 msgid "Minimum Password Age"
 msgstr "âge minimum du mot de passe"
 
 #, fuzzy
-#| msgid "maximum password age"
 msgid "Maximum Password Age"
 msgstr "âge maximum du mot de passe"
 
 #, fuzzy
-#| msgid "Password Changes"
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Modifications du mot de passe"
 
@@ -553,17 +533,14 @@ msgid "Password Expiration Warning"
 msgstr ""
 
 #, fuzzy
-#| msgid "password inactivity period"
 msgid "Password Inactive"
 msgstr "période d'inactivité du mot de passe"
 
 #, fuzzy
-#| msgid "account expiration date"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "date de fin de validité du compte"
 
 #, fuzzy
-#| msgid "date of last password change"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "date du dernier changement de mot de passe"
 
@@ -571,7 +548,6 @@ msgid "never"
 msgstr ""
 
 #, fuzzy
-#| msgid "days after which password must be changed"
 msgid "password must be changed"
 msgstr "nombre de jours après lesquels le mot de passe doit être changé"
 
@@ -579,7 +555,6 @@ msgid "Password expires\t\t\t\t\t: "
 msgstr ""
 
 #, fuzzy
-#| msgid "password inactivity period"
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "période d'inactivité du mot de passe"
 
@@ -591,7 +566,6 @@ msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "date of last password change"
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "date du dernier changement de mot de passe"
 
@@ -612,7 +586,6 @@ msgid "%s: do not include \"l\" with other flags\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "permission denied"
 msgid "%s: Permission denied.\n"
 msgstr "permission refusée"
 
@@ -641,17 +614,14 @@ msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't find the shadow password file"
 msgid "%s: the shadow password file is not present\n"
 msgstr "impossible de trouver le fichier des mots de passe cachés"
 
 #, fuzzy, c-format
-#| msgid "specified user doesn't exist"
 msgid "%s: user '%s' does not exist in %s\n"
 msgstr "l'utilisateur indiqué n'existe pas"
 
 #, fuzzy, c-format
-#| msgid "Show account aging information."
 msgid "Changing the aging information for %s\n"
 msgstr "Afficher les informations sur l'âge des comptes."
 
@@ -670,7 +640,6 @@ msgid "  -f, --full-name FULL_NAME     change user's full name\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Change the user's home phone number."
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr "Modifier le numéro de téléphone personnel de l'utilisateur."
 
@@ -684,7 +653,6 @@ msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Change the user's office phone number."
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr "Modifier le numéro de téléphone professionnel de l'utilisateur."
 
@@ -705,7 +673,6 @@ msgid "Home Phone"
 msgstr ""
 
 #, fuzzy
-#| msgid "other"
 msgid "Other"
 msgstr "autre"
 
@@ -745,7 +712,6 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "specified user doesn't exist"
 msgid "%s: user '%s' does not exist\n"
 msgstr "l'utilisateur indiqué n'existe pas"
 
@@ -758,7 +724,6 @@ msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "change real user name and information"
 msgid "Changing the user information for %s\n"
 msgstr "Modifier le nom complet et les informations associées à un utilisateur"
 
@@ -778,9 +743,6 @@ msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr ""
 
 #, fuzzy
-#| msgid ""
-#| "Use MD5 encryption instead of DES when the supplied passwords are not "
-#| "encrypted."
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
 "Permettre d'utiliser le chiffrement MD5, plutôt que DES, lorsque les mots de "
@@ -821,7 +783,6 @@ msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "specified group doesn't exist"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "le groupe spécifié n'existe pas"
 
@@ -834,14 +795,12 @@ msgid "%s: error detected, changes ignored\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "sp_min - days before which password may not be changed"
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr ""
 "sp_min - nombre de jours pendant lesquels le mot de passe ne peut pas être "
 "changé"
 
 #, fuzzy, c-format
-#| msgid "specified user doesn't exist"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "l'utilisateur indiqué n'existe pas"
 
@@ -849,7 +808,6 @@ msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "change login shell"
 msgid "Login Shell"
 msgstr "Changer l'interpréteur de commandes initial"
 
@@ -858,7 +816,6 @@ msgid "You may not change the shell for '%s'.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "change login shell"
 msgid "Changing the login shell for %s\n"
 msgstr "Changer l'interpréteur de commandes initial"
 
@@ -896,7 +853,6 @@ msgid "%s: unexpected argument: %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Display faillog records for all users."
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr "Afficher les échecs de tous les utilisateurs."
 
@@ -910,7 +866,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Reset the counters of login failures."
 msgid "  -r, --reset                   reset the counters of login failures\n"
 msgstr "Remettre à zéro le compteur d'échecs de connexion."
 
@@ -996,16 +951,12 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid ""
-#| "Except for the <option>-A</option> and <option>-M</option> options, the "
-#| "options cannot be combined."
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
 "À part les options <option>-A</option> et <option>-M</option>, les options "
 "ne peuvent pas être combinées."
 
 #, fuzzy
-#| msgid "The options cannot be combined."
 msgid "The options cannot be combined.\n"
 msgstr "Les options ne peuvent pas être combinées."
 
@@ -1014,7 +965,6 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "specified group doesn't exist"
 msgid "%s: group '%s' does not exist in %s\n"
 msgstr "le groupe spécifié n'existe pas"
 
@@ -1027,12 +977,10 @@ msgid "Changing the password for group %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "the password file"
 msgid "New Password: "
 msgstr "fichier des mots de passe"
 
 #, fuzzy
-#| msgid "encrypted password"
 msgid "Re-enter new password: "
 msgstr "mot de passe chiffré"
 
@@ -1092,7 +1040,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a unique and valid group name"
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "unicité et validité des noms de groupe ;"
 
@@ -1105,7 +1052,6 @@ msgid "%s: -K requires KEY=VALUE\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "group name already in use"
 msgid "%s: group '%s' already exists\n"
 msgstr "nom de groupe déjà utilisé"
 
@@ -1127,12 +1073,10 @@ msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't remove user's primary group"
 msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr "impossible de supprimer le groupe primaire d'un utilisateur existant"
 
 #, fuzzy, c-format
-#| msgid "specified group doesn't exist"
 msgid "%s: group '%s' does not exist\n"
 msgstr "le groupe spécifié n'existe pas"
 
@@ -1169,7 +1113,6 @@ msgid "\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "options"
 msgid "Actions:\n"
 msgstr "options"
 
@@ -1212,7 +1155,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a unique and valid group name"
 msgid "%s: invalid group name '%s'\n"
 msgstr "unicité et validité des noms de groupe ;"
 
@@ -1251,7 +1193,6 @@ msgid "%s: -s and -r are incompatible\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "shadowed group file"
 msgid "invalid group file entry"
 msgstr "informations cachées sur les groupes"
 
@@ -1263,7 +1204,6 @@ msgid "duplicate group entry"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a unique and valid group name"
 msgid "invalid group name '%s'\n"
 msgstr "unicité et validité des noms de groupe ;"
 
@@ -1293,7 +1233,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "shadowed group file"
 msgid "invalid shadow group file entry"
 msgstr "informations cachées sur les groupes"
 
@@ -1301,12 +1240,10 @@ msgid "duplicate shadow group entry"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Set the list of administrative users."
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "Configurer la liste des administrateurs."
 
 #, fuzzy, c-format
-#| msgid "Set the list of administrative users."
 msgid "delete administrative member '%s'? "
 msgstr "Configurer la liste des administrateurs."
 
@@ -1333,7 +1270,6 @@ msgid "Usage: id\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "groups"
 msgid " groups="
 msgstr "groups"
 
@@ -1402,7 +1338,6 @@ msgid "configuration error - cannot parse %s value: '%d'"
 msgstr ""
 
 #, fuzzy
-#| msgid "a valid login shell"
 msgid "Invalid login time"
 msgstr "validité de l'interpréteur de commandes initial (« login shell »)."
 
@@ -1430,17 +1365,14 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "login failure logging file"
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "journal des échecs de connexion"
 
 #, fuzzy, c-format
-#| msgid "sulogin"
 msgid "%s login: "
 msgstr "sulogin"
 
 #, fuzzy
-#| msgid "login"
 msgid "login: "
 msgstr "login"
 
@@ -1459,7 +1391,6 @@ msgid "Cannot find user (%s)\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "sulogin"
 msgid ""
 "\n"
 "%s login: "
@@ -1494,7 +1425,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "logoutd"
 msgid "Usage: logoutd\n"
 msgstr "logoutd"
 
@@ -1509,7 +1439,6 @@ msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "encrypted password"
 msgid "Invalid password.\n"
 msgstr "mot de passe chiffré"
 
@@ -1522,7 +1451,6 @@ msgid "%s: GID '%lu' does not exist\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "delete a group"
 msgid "too many groups\n"
 msgstr "Supprimer un groupe"
 
@@ -1538,7 +1466,6 @@ msgid "%s: invalid user ID '%s'\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a unique and valid user name"
 msgid "%s: invalid user name '%s'\n"
 msgstr "unicité et validité des noms d'utilisateur ;"
 
@@ -1559,12 +1486,10 @@ msgid "%s: line %d: can't create group\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "specified user doesn't exist"
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "l'utilisateur indiqué n'existe pas"
 
 #, fuzzy, c-format
-#| msgid "can't update password file"
 msgid "%s: line %d: can't update password\n"
 msgstr "impossible de mettre à jour le fichier des mots de passe"
 
@@ -1589,7 +1514,6 @@ msgid "%s: can't find subordinate user range\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't update group file"
 msgid "%s: can't find subordinate group range\n"
 msgstr "impossible de mettre à jour le fichier des groupes"
 
@@ -1648,7 +1572,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "the password file"
 msgid "Old password: "
 msgstr "fichier des mots de passe"
 
@@ -1665,7 +1588,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "the password file"
 msgid "New password: "
 msgstr "fichier des mots de passe"
 
@@ -1681,12 +1603,10 @@ msgid "They don't match; try again.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "The options cannot be combined."
 msgid "The password for %s cannot be changed.\n"
 msgstr "Les options ne peuvent pas être combinées."
 
 #, fuzzy, c-format
-#| msgid "The options cannot be combined."
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Les options ne peuvent pas être combinées."
 
@@ -1710,7 +1630,6 @@ msgid "%s: You may not view or modify password information for %s.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't open password files"
 msgid "Changing password for %s\n"
 msgstr "impossible d'ouvrir les fichiers de mots de passe"
 
@@ -1719,12 +1638,10 @@ msgid "The password for %s is unchanged.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Password Changes"
 msgid "%s: password changed.\n"
 msgstr "Modifications du mot de passe"
 
 #, fuzzy, c-format
-#| msgid "change user password expiry information"
 msgid "%s: password expiry information changed.\n"
 msgstr "Modifier les informations de validité d'un mot de passe"
 
@@ -1750,17 +1667,14 @@ msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "shadowed password file"
 msgid "invalid password file entry"
 msgstr "fichier des mots de passe cachés"
 
 #, fuzzy
-#| msgid "can't update password file"
 msgid "duplicate password entry"
 msgstr "impossible de mettre à jour le fichier des mots de passe"
 
 #, fuzzy, c-format
-#| msgid "a unique and valid user name"
 msgid "invalid user name '%s'\n"
 msgstr "unicité et validité des noms d'utilisateur ;"
 
@@ -1785,12 +1699,10 @@ msgid "no tcb directory for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "create tcb directory for %s?"
 msgstr "impossible de créer le répertoire personnel"
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "failed to create tcb directory for %s\n"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -1799,7 +1711,6 @@ msgid "%s: cannot lock %s.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "encrypted password file routines"
 msgid "no matching password file entry in %s\n"
 msgstr "routines d'utilisation des mots de passe cachés"
 
@@ -1813,17 +1724,14 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "shadowed password file"
 msgid "invalid shadow password file entry"
 msgstr "fichier des mots de passe cachés"
 
 #, fuzzy
-#| msgid "can't find the shadow password file"
 msgid "duplicate shadow password entry"
 msgstr "impossible de trouver le fichier des mots de passe cachés"
 
 #, fuzzy, c-format
-#| msgid "the last password changes are not in the future"
 msgid "user %s: last password change in the future\n"
 msgstr "la date du dernier changement de mot de passe n'est pas dans le futur."
 
@@ -1843,7 +1751,6 @@ msgid "Access to su to that account DENIED.\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "System or authentication failure"
 msgid "Password authentication bypassed.\n"
 msgstr "Échec système ou d'authentification"
 
@@ -1903,12 +1810,10 @@ msgid "You are not authorized to su %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "change user password"
 msgid "(Enter your own password)"
 msgstr "Modifier le mot de passe d'un utilisateur"
 
 #, fuzzy, c-format
-#| msgid "System or authentication failure"
 msgid "%s: Authentication failure\n"
 msgstr "Échec système ou d'authentification"
 
@@ -1937,7 +1842,6 @@ msgid "Cannot execute %s\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "the password file"
 msgid "No password file"
 msgstr "fichier des mots de passe"
 
@@ -2041,7 +1945,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Do not add the user to the lastlog and faillog databases."
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
@@ -2084,27 +1987,22 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "a valid home directory"
 msgid "%s: invalid base directory '%s'\n"
 msgstr "validité du répertoire personnel ;"
 
 #, fuzzy, c-format
-#| msgid "invalid command syntax"
 msgid "%s: invalid comment '%s'\n"
 msgstr "erreur de syntaxe"
 
 #, fuzzy, c-format
-#| msgid "a valid home directory"
 msgid "%s: invalid home directory '%s'\n"
 msgstr "validité du répertoire personnel ;"
 
 #, fuzzy, c-format
-#| msgid "shadow password suite configuration"
 msgid "%s: shadow passwords required for -e\n"
 msgstr "configuration de la suite des mots de passe cachés « shadow password »"
 
 #, fuzzy, c-format
-#| msgid "shadow password suite configuration"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "configuration de la suite des mots de passe cachés « shadow password »"
 
@@ -2133,7 +2031,6 @@ msgid "%s: failed to prepare the new %s entry\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "%s: cannot create directory %s\n"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -2157,7 +2054,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't create mail spool"
 msgid "%s: can't create user\n"
 msgstr "impossible de créer le répertoire d'attente des courriels"
 
@@ -2170,17 +2066,14 @@ msgid "%s: Failed to create tcb directory for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't update group file"
 msgid "%s: can't create group\n"
 msgstr "impossible de mettre à jour le fichier des groupes"
 
 #, fuzzy, c-format
-#| msgid "Per user subordinate user IDs."
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "Identifiants subordonnés par utilisateur."
 
 #, fuzzy, c-format
-#| msgid "Per user subordinate group IDs."
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "Identifiants de groupe subordonnés par utilisateur."
 
@@ -2203,7 +2096,6 @@ msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Remove any SELinux user mapping for the user's login."
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
@@ -2342,7 +2234,6 @@ msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Remove any SELinux user mapping for the user's login."
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2369,7 +2260,6 @@ msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "options"
 msgid "%s: no options\n"
 msgstr "options"
 
@@ -2378,7 +2268,6 @@ msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "shadow password suite configuration"
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "configuration de la suite des mots de passe cachés « shadow password »"
 
@@ -2409,7 +2298,6 @@ msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "can't create home directory"
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -2461,12 +2349,10 @@ msgid "  -p, --passwd                  edit passwd database\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit shadow or gshadow database."
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr "Éditer les bases de données shadow ou gshadow."
 
 #, fuzzy
-#| msgid "Indicates which user's tcb shadow file to edit."
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr "Indique l'utilisateur dont le fichier shadow de tcb doit être édité."
 
@@ -2479,7 +2365,6 @@ msgid "%s: %s is unchanged\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "can't create home directory"
 msgid "failed to create scratch directory"
 msgstr "impossible de créer le répertoire personnel"
 
@@ -2496,7 +2381,6 @@ msgid "failed to gain privileges"
 msgstr ""
 
 #, fuzzy
-#| msgid "can't lock group files"
 msgid "Couldn't lock file"
 msgstr "impossible de verrouiller les fichiers group"
 
@@ -2535,7 +2419,6 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "This field is used to define the home directory of the user."
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
 "Ce champ est utilisé pour définir le répertoire personnel de l'utilisateur."
@@ -6064,12 +5947,16 @@ msgstr ""
 #~ "      char\t\t*sp_namp; /* nom de connexion de l'utilisateur */\n"
 #~ "      char\t\t*sp_pwdp; /* mot de passe chiffré */\n"
 #~ "      long int\t\tsp_lstchg; /* dernier changement de mot de passe */\n"
-#~ "      long int\t\tsp_min; /* jours avant de pouvoir changer de mot de passe */\n"
-#~ "      long int\t\tsp_max; /* jours avant l'obligation de changer de mot de passe */\n"
-#~ "      long int\t\tsp_warn; /* jours d'avertissement avant la fin de validité */\n"
+#~ "      long int\t\tsp_min; /* jours avant de pouvoir changer de mot de "
+#~ "passe */\n"
+#~ "      long int\t\tsp_max; /* jours avant l'obligation de changer de mot "
+#~ "de passe */\n"
+#~ "      long int\t\tsp_warn; /* jours d'avertissement avant la fin de "
+#~ "validité */\n"
 #~ "      long int\t\tsp_inact; /* jours avant que le compte soit inactif */\n"
 #~ "      long int\t\tsp_expire; /* date de fin de validité du compte */\n"
-#~ "      unsigned long int\tsp_flag; /* réservé pour une utilisation future */\n"
+#~ "      unsigned long int\tsp_flag; /* réservé pour une utilisation future "
+#~ "*/\n"
 #~ "}\n"
 #~ "    "
 

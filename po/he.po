@@ -86,7 +86,6 @@ msgid "Could not set serange for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
 
@@ -95,7 +94,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "שנה מידע הזדקות בשביל %s\n"
 
@@ -116,12 +114,10 @@ msgid "Cannot init SELinux management\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
@@ -210,7 +206,6 @@ msgid "%s: Cannot lstat %s: %s\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't lock shadow file\n"
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
@@ -225,7 +220,6 @@ msgid "%s: mkdir: %s: %s\n"
 msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't open shadow file\n"
 msgid "%s: Cannot open %s: %s\n"
 msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
@@ -268,12 +262,10 @@ msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Unable to change tty %s"
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "לא יכול לשנות tty %s"
 
 #, fuzzy, c-format
-#| msgid "%s: fields too long\n"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
@@ -312,7 +304,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: fields too long\n"
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
@@ -491,7 +482,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
@@ -583,12 +574,10 @@ msgid "%s: PAM: %s\n"
 msgstr "passwd: %s\n"
 
 #, fuzzy, c-format
-#| msgid "Cannot lock the password file; try again later.\n"
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "לא יכול לנעול קובץ סיסמאות; נסה שוב מאוחר יותר\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't open shadow file\n"
 msgid "%s: cannot open %s\n"
 msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
@@ -776,12 +765,10 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: שגיאה זוהתה, מתעלם משינויים\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: unknown user %s\n"
 msgid "%s: (line %d, user %s) password not changed\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: unknown user %s\n"
 msgid "%s: line %d: user '%s' does not exist\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
 
@@ -792,7 +779,6 @@ msgid "Login Shell"
 msgstr "מעטפת כניסה למערכת"
 
 #, fuzzy, c-format
-#| msgid "You may not change the shell for %s.\n"
 msgid "You may not change the shell for '%s'.\n"
 msgstr "אינך רשאי לשנות את המעטפת בשביל %s.\n"
 
@@ -805,7 +791,6 @@ msgid "%s: Invalid entry: %s\n"
 msgstr "%s: רשומה לא חוקית: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s is an invalid shell.\n"
 msgid "%s: %s is an invalid shell\n"
 msgstr "%s היא מעטפת לא חוקית.\n"
 
@@ -1014,7 +999,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not a valid group name\n"
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
@@ -1035,7 +1019,6 @@ msgid "%s: GID '%lu' already exists\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
@@ -1286,7 +1269,6 @@ msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: לא יכול לעדכן קובץ סיסמאות\n"
 
@@ -1362,7 +1344,6 @@ msgid "Login incorrect"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot find user (%s)\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
@@ -1401,7 +1382,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: logoutd\n"
 msgstr "שימוש: id\n"
 
@@ -1462,7 +1442,6 @@ msgid "%s: line %d: can't create group\n"
 msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: unknown user %s\n"
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
 
@@ -1471,7 +1450,6 @@ msgid "%s: line %d: can't update password\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: missing new password\n"
 msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s: שורה %d: חסרה סיסמה חדשה\n"
 
@@ -1618,7 +1596,6 @@ msgid "%s: password changed.\n"
 msgstr "סיסמה: "
 
 #, fuzzy, c-format
-#| msgid "Password Expiration Warning"
 msgid "%s: password expiry information changed.\n"
 msgstr "אזהרת תוקף סיסמה"
 
@@ -1684,7 +1661,6 @@ msgid "failed to create tcb directory for %s\n"
 msgstr "לא יכול לשנות ספרית שורש ל-\"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't open shadow file\n"
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
@@ -1718,7 +1694,6 @@ msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't lock shadow file\n"
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
@@ -1736,7 +1711,6 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
 
@@ -1792,7 +1766,6 @@ msgid "(Enter your own password)"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: PAM authentication failed\n"
 msgid "%s: Authentication failure\n"
 msgstr "%s: זיהוי PAM נכשל\n"
 
@@ -1817,7 +1790,6 @@ msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, fuzzy, c-format
-#| msgid "Cannot execute %s"
 msgid "Cannot execute %s\n"
 msgstr "לא יכול להריץ %s"
 
@@ -2233,7 +2205,6 @@ msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't open shadow file\n"
 msgid "%s: no options\n"
 msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
@@ -2298,7 +2269,6 @@ msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: fields too long\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
@@ -2375,7 +2345,6 @@ msgid "failed to open scratch file"
 msgstr ""
 
 #, fuzzy
-#| msgid "%s: fields too long\n"
 msgid "failed to unlink scratch file"
 msgstr "%s: שדות ארוכים מידי\n"
 

@@ -84,7 +84,6 @@ msgid "Could not set serange for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "Asetustiedoille ei voi varata tilaa.\n"
 
@@ -93,7 +92,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Muutetaan käyttäjän %s vanhenemistietoja\n"
 
@@ -114,12 +112,10 @@ msgid "Cannot init SELinux management\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "%s: Käyttäjätunnusta ei voi selvittää.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "%s: rivi %d: käyttäjää %s ei löydy\n"
 
@@ -152,17 +148,14 @@ msgid "%s: out of memory\n"
 msgstr "%s: muisti loppui\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: Cannot stat %s: %s\n"
 msgstr "%s: tiedostoa %s ei voi päivittää\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s is neither a directory, nor a symlink.\n"
 msgstr "%s: virheellinen kotihakemisto \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
@@ -171,58 +164,47 @@ msgid "%s: Suspiciously long symlink: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change owner of %s: %s\n"
 msgstr "%s: varoitus: ei voi poistaa tiedostoa "
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change mode of %s: %s\n"
 msgstr "%s: varoitus: ei voi poistaa tiedostoa "
 
 # Kannattaako tuota kääntää, siinä viitataan rename()-funktioon...
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: unlink: %s: %s\n"
 msgstr "%s: rename: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove directory %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot rename %s to %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot remove %s: %s\n"
 msgstr "%s: varoitus: ei voi poistaa tiedostoa "
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create symbolic link %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change owners of %s: %s\n"
 msgstr "%s: varoitus: ei voi poistaa tiedostoa "
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: Cannot lstat %s: %s\n"
 msgstr "%s: tiedostoa %s ei voi päivittää\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update shadow file\n"
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: varjotiedostoa ei voi päivittää\n"
 
@@ -234,12 +216,10 @@ msgstr ""
 
 # Kannattaako tuota kääntää, siinä viitataan rename()-funktioon...
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: mkdir: %s: %s\n"
 msgstr "%s: rename: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: Cannot open %s: %s\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
@@ -282,17 +262,14 @@ msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Unable to change tty %s"
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "Päätettä %s ei voi vaihtaa"
 
 #, fuzzy, c-format
-#| msgid "%s: fields too long\n"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: kentät liian pitkiä\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: "
 msgstr "%s: %s\n"
 
@@ -331,7 +308,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "failed to change mailbox owner"
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "postilaatikon omistajan vaihtaminen epäonnistui"
 
@@ -407,7 +383,6 @@ msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
 #, fuzzy
-#| msgid "Password changed."
 msgid "passwd: password unchanged\n"
 msgstr "Salasana vaihdettu."
 
@@ -431,22 +406,18 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
 msgid "%s: invalid chroot path '%s'\n"
 msgstr "%s: virheellinen kotipuhelin: \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
@@ -479,12 +450,10 @@ msgid "Unable to determine your tty name."
 msgstr "Tty-päätteesi nimeä ei voi selvittää."
 
 #, fuzzy
-#| msgid "No\n"
 msgid "No"
 msgstr "Ei\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
@@ -517,7 +486,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
@@ -600,17 +569,14 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Käyttäjätunnusta ei voi selvittää.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: PAM: %s\n"
 msgstr "%s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't lock files, try again later\n"
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: tiedostoja ei voi lukita, yritä myöhemmin uudelleen\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: cannot open %s\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
@@ -619,7 +585,6 @@ msgid "%s: failure while writing changes to %s\n"
 msgstr "%s: fork-kutsu epäonnistui: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -640,7 +605,6 @@ msgid "%s: error changing fields\n"
 msgstr "%s: virhe muutettaessa kenttiä\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
@@ -669,7 +633,6 @@ msgid "Full Name"
 msgstr "Koko nimi"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "\t%s: %s\n"
 msgstr "%s: %s\n"
 
@@ -713,7 +676,6 @@ msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: virheellinen kotipuhelin: \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: '%s' contains illegal characters\n"
 msgid "%s: '%s' contains non-ASCII characters\n"
 msgstr "%s: \"%s\" sisältää ei-sallittuja merkkejä\n"
 
@@ -742,7 +704,6 @@ msgid "%s: fields too long\n"
 msgstr "%s: kentät liian pitkiä\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -787,17 +748,14 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: rivi %d: uusi salasana puuttuu\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: ryhmää %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: can't update entry\n"
 msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: rivi %d: tietuetta ei voi päivittää\n"
 
@@ -820,7 +778,6 @@ msgid "Login Shell"
 msgstr "Sisäänkirjautumiskuori"
 
 #, fuzzy, c-format
-#| msgid "You may not change the shell for %s.\n"
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Et voi muuttaa käyttäjän %s kuorta.\n"
 
@@ -833,17 +790,14 @@ msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Virheellinen tietue: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s is an invalid shell.\n"
 msgid "%s: %s is an invalid shell\n"
 msgstr "%s on virheellinen kuori.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s does not exist\n"
 msgid "%s: Warning: %s does not exist\n"
 msgstr "%s: käyttäjää %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: %s not owned by %s\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: varoitus: tiedoston %s omistaja ei ole %s\n"
 
@@ -861,7 +815,6 @@ msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
 msgid "%s: unexpected argument: %s\n"
 msgstr "lastlog: odottamaton argumentti: %s\n"
 
@@ -892,7 +845,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to get the entry for UID %lu\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
@@ -900,7 +852,6 @@ msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Tunnus      Epäonn.  Enint.  Edellinen                Päätteellä\n"
 
 #, fuzzy, c-format
-#| msgid " [%lds left]"
 msgid " [%lus left]"
 msgstr " [%lds jäljellä]"
 
@@ -909,17 +860,14 @@ msgid " [%lds lock]"
 msgstr " [%lds lukittu]"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
@@ -928,17 +876,14 @@ msgid "%s: Unknown user or range: %s\n"
 msgstr "Tuntematon käyttäjä: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
@@ -970,12 +915,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr "Käyttäjän %s salasanaa ei voi vaihtaa.\n"
 
 #, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "The options cannot be combined.\n"
 msgstr "Käyttäjän %s salasanaa ei voi vaihtaa.\n"
 
@@ -984,7 +927,6 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: varjoryhmäsalanat vaaditaan valitsimelle -A\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: group '%s' does not exist in %s\n"
 msgstr "%s: ryhmää %s ei ole olemassa\n"
 
@@ -1026,7 +968,6 @@ msgid "%s: Not a tty\n"
 msgstr "%s: Ei ole pääte\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] GROUP\n"
 "\n"
@@ -1059,7 +1000,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not a valid group name\n"
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: %s ei ole kelpo ryhmänimi\n"
 
@@ -1072,17 +1012,14 @@ msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: -K vaatii AVAIN=ARVO\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s exists\n"
 msgid "%s: group '%s' already exists\n"
 msgstr "%s: ryhmä %s on olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "Member already exists\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "Jäsen on jo olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Käyttäjätunnusta ei voi selvittää.\n"
 
@@ -1092,7 +1029,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
@@ -1101,12 +1037,10 @@ msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr "%s: ei voi vaihtaa käyttäjää \"%s\" NIS-asiakkaalla.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: ryhmää %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group '%s' is a NIS group.\n"
 msgid "%s: group '%s' is a NIS group\n"
 msgstr "%s: ryhmä \"%s\" on NIS-ryhmä.\n"
 
@@ -1115,7 +1049,6 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: isäntä %s on NIS-palvelin\n"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s is a NIS user\n"
 msgid "%s: user '%s' is already a member of '%s'\n"
 msgstr "%s: käyttäjä %s on NIS-käyttäjä\n"
 
@@ -1124,7 +1057,6 @@ msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: muisti loppui funktiossa update_group\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
@@ -1194,7 +1126,6 @@ msgid "%s: unknown user %s\n"
 msgstr "%s: Tuntematon käyttäjä %s\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
@@ -1202,7 +1133,6 @@ msgid ""
 msgstr "Käyttö: %s [syöte]\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
@@ -1218,7 +1148,6 @@ msgid "  -s, --sort                    sort entries by UID\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: valitsimet -s ja -r eivät sovi yhteen\n"
 
@@ -1237,7 +1166,6 @@ msgid "invalid group name '%s'\n"
 msgstr "virheellinen ryhmänimi \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "invalid group name '%s'\n"
 msgid "invalid group ID '%lu'\n"
 msgstr "virheellinen ryhmänimi \"%s\"\n"
 
@@ -1254,7 +1182,6 @@ msgid "no matching group file entry in %s\n"
 msgstr "ei täsmäävää ryhmätiedostotietuetta tiedostossa %s\n"
 
 #, fuzzy, c-format
-#| msgid "add group '%s' in %s ?"
 msgid "add group '%s' in %s? "
 msgstr "lisää ryhmä \"%s\" tiedostoon %s?"
 
@@ -1290,7 +1217,6 @@ msgid "%s: no changes\n"
 msgstr "%s: ei muutoksia\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: tiedostoa %s ei voi päivittää\n"
 
@@ -1336,12 +1262,10 @@ msgid "**Never logged in**"
 msgstr "**Ei koskaan kirjautunut sisään**"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: salasanatiedostoa ei voi päivittää\n"
 
@@ -1394,9 +1318,6 @@ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr "Ei utmp-tietuetta. Suorita \"login\" alimman tason kuoresta"
 
 #, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
@@ -1416,7 +1337,6 @@ msgid "login: "
 msgstr "tunnus: "
 
 #, fuzzy, c-format
-#| msgid "Maximum number of tries exceeded (%d)\n"
 msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Suurin sallittu määrä yrityksiä ylitetty (%d)\n"
 
@@ -1427,7 +1347,6 @@ msgid "Login incorrect"
 msgstr "Sisäänkirjautuminen epäonnistui"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot find user (%s)\n"
 msgstr "%s: rivi %d: käyttäjää %s ei löydy\n"
 
@@ -1471,7 +1390,6 @@ msgstr ""
 "\n"
 
 #, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: logoutd\n"
 msgstr "Käyttö: id\n"
 
@@ -1482,7 +1400,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Käyttö: sg ryhmä [[-c] komento]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -1509,7 +1426,6 @@ msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: ryhmää %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: virheellinen käyttäjätunnus \"%s\"\n"
 
@@ -1542,12 +1458,10 @@ msgid "%s: line %d: can't update password\n"
 msgstr "%s: rivi %d: salasanaa ei voi päivittää\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: mkdir failed\n"
 msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s: rivi %d: mkdir epäonnistui\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s: rivi %d: chown epäonnistui\n"
 
@@ -1556,7 +1470,6 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: rivi %d: tietuetta ei voi päivittää\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -1565,7 +1478,6 @@ msgid "%s: can't find subordinate user range\n"
 msgstr "%s: tiedostoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update group file\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: ryhmätiedostoa ei voi päivittää\n"
 
@@ -1694,17 +1606,14 @@ msgid "The password for %s is unchanged.\n"
 msgstr "Käyttäjän %s salasanaa ei vaihdettu.\n"
 
 #, fuzzy, c-format
-#| msgid "Password changed."
 msgid "%s: password changed.\n"
 msgstr "Salasana vaihdettu."
 
 #, fuzzy, c-format
-#| msgid "Password Expiration Warning"
 msgid "%s: password expiry information changed.\n"
 msgstr "Salasanan vanhenemisvaroitus"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1712,7 +1621,6 @@ msgid ""
 msgstr "Käyttö: %s [syöte]\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
@@ -1737,42 +1645,34 @@ msgid "invalid user name '%s'\n"
 msgstr "virheellinen käyttäjätunnus \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "invalid user name '%s'\n"
 msgid "invalid user ID '%lu'\n"
 msgstr "virheellinen käyttäjätunnus \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: no group %u\n"
 msgid "user '%s': no group %lu\n"
 msgstr "käyttäjä %s: ei ryhmää %u\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: directory %s does not exist\n"
 msgid "user '%s': directory '%s' does not exist\n"
 msgstr "käyttäjä %s: hakemistoa %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: program %s does not exist\n"
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "käyttäjä %s: kuorta %s ei ole olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "no tcb directory for %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "create tcb directory for %s?"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "failed to create tcb directory for %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
@@ -1800,12 +1700,10 @@ msgid "user %s: last password change in the future\n"
 msgstr "käyttäjä %s: viimeisin salasanan vaihto tapahtunut tulevaisuudessa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: tiedostoa ei voi uudelleenkirjoittaa\n"
 
@@ -1823,7 +1721,6 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Syötä OMA salasanasi todennukseksi.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
@@ -1893,17 +1790,14 @@ msgid "(Enter your own password)"
 msgstr "(Syötä oma salasanasi)"
 
 #, fuzzy, c-format
-#| msgid "%s: PAM authentication failed\n"
 msgid "%s: Authentication failure\n"
 msgstr "%s: PAM-todennus epäonnistui\n"
 
 #, fuzzy, c-format
-#| msgid "You are not authorized to su %s\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "Sinulla ei ole lupaa asettua käyttäjäksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "No password entry for 'root'"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Ei salasanatietuetta pääkäyttäjälle (\"root\")"
 
@@ -1916,12 +1810,10 @@ msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: virhe %d\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "Cannot execute %s"
 msgid "Cannot execute %s\n"
 msgstr "Ei voi suorittaa %s"
 
@@ -1963,18 +1855,15 @@ msgid "%s: cannot open new defaults file\n"
 msgstr "%s: uutta defaults-tiedostoa ei voi avata\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: rivi %d: chown epäonnistui\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
 # Kannattaako tuota kääntää, siinä viitataan rename()-funktioon...
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: rename: %s"
 
@@ -1987,7 +1876,6 @@ msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: liian monta ryhmää määritelty (korkeintaan %d).\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -2117,7 +2005,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -2138,7 +2025,6 @@ msgid "Setting mailbox file permissions"
 msgstr "Asetetaan postilaatikkotiedoston oikeudet"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
 msgid "%s: user '%s' already exists\n"
 msgstr "%s: käyttäjä %s on olemassa\n"
 
@@ -2154,12 +2040,10 @@ msgid "%s: can't create user\n"
 msgstr "%s: tiedostoa %s ei voi luoda\n"
 
 #, fuzzy, c-format
-#| msgid "%s: UID %u is not unique\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %u ei ole ainutkertainen\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
@@ -2210,25 +2094,20 @@ msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid ""
-#| "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Ryhmää %s ei voi poistaa, koska se on toisen käyttäjän ensisijainen "
 "ryhmä.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: virheellinen kotihakemisto \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: varoitus: ei voi poistaa tiedostoa "
 
@@ -2241,17 +2120,14 @@ msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Cannot drop privileges: %s\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove the content of %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: hakemistoa %s ei voi uudelleennimetä hakemistoksi %s\n"
 
@@ -2260,7 +2136,6 @@ msgid "%s: user %s is a NIS user\n"
 msgstr "%s: käyttäjä %s on NIS-käyttäjä\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: virheellinen kotihakemisto \"%s\"\n"
 
@@ -2354,22 +2229,18 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: käyttäjä %s on olemassa\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: virheellinen päiväys \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: virheellinen päiväys \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: no options\n"
 msgstr "%s: tiedostoa %s ei voi lukita\n"
 
@@ -2382,7 +2253,6 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: varjosalasanat vaaditaan valitsimille -e ja -f\n"
 
 #, fuzzy, c-format
-#| msgid "Member already exists\n"
 msgid "%s: UID '%lu' already exists\n"
 msgstr "Jäsen on jo olemassa\n"
 
@@ -2401,7 +2271,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: hakemistoa %s ei voi luoda\n"
 
@@ -2433,22 +2302,18 @@ msgid "failed to rename mailbox"
 msgstr "postilaatikon uudelleennimeäminen epäonnistui"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -2472,31 +2337,24 @@ msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove %s\n"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "%s: %s is unchanged\n"
 msgid "%s: %s is unchanged\n"
 msgstr ""
 "\n"
 "%s: tiedostoa %s ei muutettu\n"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create scratch directory"
 msgstr "postilaatikon uudelleennimeäminen epäonnistui"
 
 #, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to drop privileges"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
 #, fuzzy
-#| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Tiedostoa ei voi lukita"
 
@@ -2504,7 +2362,6 @@ msgid "setfscreatecon () failed"
 msgstr ""
 
 #, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to gain privileges"
 msgstr "%s: Oikeuksien pudottaminen epäonnistui (%s)\n"
 
@@ -2515,12 +2372,10 @@ msgid "Couldn't make backup"
 msgstr "Tiedostoa ei voi varmuuskopioida"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s not found in /etc/passwd\n"
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: Käyttäjää %s ei löydy tiedostosta /etc/passwd\n"
 
@@ -2529,27 +2384,22 @@ msgid "%s: %s killed by signal %d\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Unable to open group file\n"
 msgid "failed to open scratch file"
 msgstr "Ryhmätiedostoa ei voi avata\n"
 
 #, fuzzy
-#| msgid "%s: fields too long\n"
 msgid "failed to unlink scratch file"
 msgstr "%s: kentät liian pitkiä\n"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to stat edited file"
 msgstr "postilaatikon uudelleennimeäminen epäonnistui"
 
 #, fuzzy
-#| msgid "failed to change mailbox owner"
 msgid "failed to allocate memory"
 msgstr "postilaatikon omistajan vaihtaminen epäonnistui"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create backup file"
 msgstr "postilaatikon uudelleennimeäminen epäonnistui"
 
@@ -2559,7 +2409,6 @@ msgstr ""
 "%s: tiedostoa %s ei voi palauttaa: %s (muutoksesi ovat tiedostossa %s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: virheellinen perushakemisto \"%s\"\n"
 

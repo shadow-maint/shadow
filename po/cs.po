@@ -507,8 +507,9 @@ msgstr ""
 "  -m, --mindays MIN_DNŮ         nastaví minimální počet dnů před změnou\n"
 "                                hesla na MIN_DNŮ\n"
 
+#, fuzzy
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays MAX_DNŮ         nastaví maximální počet dnů před změnou\n"
@@ -1086,8 +1087,6 @@ msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: nelze nastavit úklidovou službu.\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
@@ -1320,8 +1319,6 @@ msgstr ""
 "  -b, --before DNŮ              zobrazí záznamy lastlogu starší než DNŮ\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1330,8 +1327,6 @@ msgstr ""
 "uživatelích\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1360,12 +1355,10 @@ msgid "**Never logged in**"
 msgstr "**Nikdy nebyl přihlášen**"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: nepodařilo se získat záznam pro UID %lu\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: soubor s hesly nelze aktualizovat\n"
 
