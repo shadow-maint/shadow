@@ -1272,7 +1272,21 @@ int main (int argc, char **argv)
 #endif				/* EXTRA_CHECK_HOME_DIR */
 
 	if (rflg) {
-		if (remove_tree (user_home, true) != 0) {
+		int is_subvolume = btrfs_is_subvolume (user_home);
+		if (is_subvolume < 0) {
+		    errors++;
+		    /* continue */
+		}
+		else if (is_subvolume > 0) {
+			if (btrfs_remove_subvolume (user_home)) {
+				fprintf (stderr,
+				         _("%s: error removing subvolume %s\n"),
+				         Prog, user_home);
+				errors++;
+				/* continue */
+			}
+		}
+		else if (remove_tree (user_home, true) != 0) {
 			fprintf (stderr,
 			         _("%s: error removing directory %s\n"),
 			         Prog, user_home);
