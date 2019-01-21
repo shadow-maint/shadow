@@ -1819,6 +1819,13 @@ static void move_home (void)
 			return;
 		} else {
 			if (EXDEV == errno) {
+				if (btrfs_is_subvolume (prefix_user_home) > 0) {
+					fprintf (stderr,
+					        _("%s: error: cannot move subvolume from %s to %s - different device\n"),
+					        Prog, prefix_user_home, prefix_user_newhome);
+					fail_exit (E_HOMEDIR);
+				}
+
 				if (copy_tree (prefix_user_home, prefix_user_newhome, true,
 				               true,
 				               user_id,

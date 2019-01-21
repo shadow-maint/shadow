@@ -165,6 +165,7 @@ static bool
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     rflg = false,		/* create a system account */
     sflg = false,		/* shell program for new account */
+    subvolflg = false,		/* create subvolume home on BTRFS */
     uflg = false,		/* specify user ID for new account */
     Uflg = false;		/* create a group having the same name as the user */
 
@@ -822,6 +823,7 @@ static void usage (int status)
 	                Prog, Prog, Prog);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 	                "                                new account\n"), usageout);
+	(void) fputs (_("      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), usageout);
 	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), usageout);
 	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), usageout);
@@ -1102,6 +1104,7 @@ static void process_flags (int argc, char **argv)
 		int c;
 		static struct option long_options[] = {
 			{"base-dir",       required_argument, NULL, 'b'},
+			{"btrfs-subvolume-home", no_argument, NULL, 200},
 			{"comment",        required_argument, NULL, 'c'},
 			{"home-dir",       required_argument, NULL, 'd'},
 			{"defaults",       no_argument,       NULL, 'D'},
@@ -1147,6 +1150,9 @@ static void process_flags (int argc, char **argv)
 				}
 				def_home = optarg;
 				bflg = true;
+				break;
+			case 200:
+				subvolflg = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {
@@ -2073,7 +2079,35 @@ static void create_home (void)
 			strcat (path, "/");
 			strcat (path, cp);
 			if (access (path, F_OK) != 0) {
-				if (mkdir (path, 0) != 0) {
+				/* Check if parent directory is BTRFS, fail if requesting
+				   subvolume but no BTRFS. The paths cound be different by the
+				   trailing slash
+				 */
+				if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
+					char *btrfs_check = strdup(path);
+
+					if (!btrfs_check) {
+						fprintf (stderr,
+						         _("%s: error while duplicating string in BTRFS check %s\n"),
+						         Prog, path);
+						fail_exit (E_HOMEDIR);
+					}
+					btrfs_check[strlen(path) - strlen(cp) - 1] = '\0';
+					if (is_btrfs(btrfs_check) <= 0) {
+						fprintf (stderr,
+						         _("%s: home directory \"%s\" must be mounted on BTRFS\n"),
+						         Prog, path);
+						fail_exit (E_HOMEDIR);
+					}
+					// make subvolume to mount for user instead of directory
+					if (btrfs_create_subvolume(path)) {
+						fprintf (stderr,
+						         _("%s: failed to create BTRFS subvolume: %s\n"),
+						         Prog, path);
+						fail_exit (E_HOMEDIR);
+					}
+				}
+				else if (mkdir (path, 0) != 0) {
 			fprintf (stderr,
 							_("%s: cannot create directory %s\n"),
 							Prog, path);
