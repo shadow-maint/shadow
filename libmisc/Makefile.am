@@ -10,7 +10,6 @@ libmisc_a_SOURCES = \
 	age.c \
 	audit_help.c \
 	basename.c \
-	btrfs.c \
 	chkname.c \
 	chkname.h \
 	chowndir.c \
@@ -73,3 +72,8 @@ libmisc_a_SOURCES = \
 	xgetspnam.c \
 	xmalloc.c \
 	yesno.c
+
+if WITH_BTRFS
+libmisc_a_SOURCES += btrfs.c
+endif
+
