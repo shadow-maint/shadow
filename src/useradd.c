@@ -823,7 +823,9 @@ static void usage (int status)
 	                Prog, Prog, Prog);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 	                "                                new account\n"), usageout);
+#ifdef WITH_BTRFS
 	(void) fputs (_("      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"), usageout);
+#endif
 	(void) fputs (_("  -c, --comment COMMENT         GECOS field of the new account\n"), usageout);
 	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), usageout);
 	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), usageout);
@@ -1104,7 +1106,9 @@ static void process_flags (int argc, char **argv)
 		int c;
 		static struct option long_options[] = {
 			{"base-dir",       required_argument, NULL, 'b'},
+#ifdef WITH_BTRFS
 			{"btrfs-subvolume-home", no_argument, NULL, 200},
+#endif
 			{"comment",        required_argument, NULL, 'c'},
 			{"home-dir",       required_argument, NULL, 'd'},
 			{"defaults",       no_argument,       NULL, 'D'},
@@ -2083,6 +2087,7 @@ static void create_home (void)
 				   subvolume but no BTRFS. The paths cound be different by the
 				   trailing slash
 				 */
+#if WITH_BTRFS
 				if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
 					char *btrfs_check = strdup(path);
 
@@ -2107,7 +2112,9 @@ static void create_home (void)
 						fail_exit (E_HOMEDIR);
 					}
 				}
-				else if (mkdir (path, 0) != 0) {
+				else
+#endif
+				if (mkdir (path, 0) != 0) {
 			fprintf (stderr,
 							_("%s: cannot create directory %s\n"),
 							Prog, path);

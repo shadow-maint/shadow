@@ -253,6 +253,9 @@ AC_ARG_WITH(audit,
 AC_ARG_WITH(libpam,
 	[AC_HELP_STRING([--with-libpam], [use libpam for PAM support @<:@default=yes if found@:>@])],
 	[with_libpam=$withval], [with_libpam=maybe])
+AC_ARG_WITH(btrfs,
+	[AC_HELP_STRING([--with-btrfs], [add BtrFS support @<:@default=yes if found@:>@])],
+	[with_selinux=$withval], [with_selinux=maybe])
 AC_ARG_WITH(selinux,
 	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
 	[with_selinux=$withval], [with_selinux=maybe])
@@ -458,6 +461,20 @@ if test "$with_libcrack" = "yes"; then
 	AC_CHECK_LIB(crack, FascistHistoryPw,
 		AC_DEFINE(HAVE_LIBCRACK_PW, 1, [Defined if it includes *Pw functions.]))
 fi
+
+if test "$with_btrfs" != "no"; then
+	AC_CHECK_HEADERS([sys/statfs.h linux/magic.h linux/btrfs_tree.h], \
+		[btrfs_headers="yes"], [btrfs_headers="no"])
+	if test "$btrfs_headers$with_btrfs" = "noyes" ; then
+		AC_MSG_ERROR([One of sys/statfs.h linux/magic.h linux/btrfs_tree.h is missing])
+	fi
+
+	if test "$btrfs_headers" = "yes" ; then
+		AC_DEFINE(WITH_BTRFS, 1, [Build shadow with BtrFS support])
+		with_btrfs="yes"
+	fi
+fi
+AM_CONDITIONAL(WITH_BTRFS, test x$with_btrfs = xyes)
 
 AC_SUBST(LIBSELINUX)
 AC_SUBST(LIBSEMANAGE)
@@ -691,6 +708,7 @@ if test "$with_libpam" = "yes"; then
 echo "	suid account management tools:	$enable_acct_tools_setuid"
 fi
 echo "	SELinux support:		$with_selinux"
+echo "	BtrFS support:			$with_btrfs"
 echo "	ACL support:			$with_acl"
 echo "	Extended Attributes support:	$with_attr"
 echo "	tcb support (incomplete):	$with_tcb"
