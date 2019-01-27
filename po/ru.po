@@ -437,7 +437,6 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: нет доступа к каталогу chroot %s: %s\n"
 
 #, c-format
-#| msgid "%s: cannot access chroot directory %s: %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: не удалось выполнить chdir в chroot-каталог %s: %s\n"
 
@@ -524,8 +523,9 @@ msgstr ""
 "  -m, --mindays МИН_ДНЕЙ        установить минимальное число дней перед\n"
 "                                сменой пароля в МИН_ДНЕЙ\n"
 
+#, fuzzy
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays МАКС_ДНЕЙ       установить максимальное число дней перед\n"
@@ -807,7 +807,6 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: строка %d: отсутствует новый пароль\n"
 
 #, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: не удалось зашифровать пароль с солью «%s»: %s\n"
 
@@ -1124,14 +1123,12 @@ msgstr "%s: GID «%lu» уже существует\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: не удалось настроить службу очистки.\n"
 
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
 msgstr ""
-"  -f, --force                   удалить группу, даже если она является"
-" первичной\n"
+"  -f, --force                   удалить группу, даже если она является "
+"первичной\n"
 "                                группой пользователя\n"
 
 #, c-format
@@ -1358,8 +1355,6 @@ msgstr ""
 "  -b, --before ДНЕЙ             показать записи lastlog за последние ДНЕЙ "
 "дней\n"
 
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1367,8 +1362,6 @@ msgstr ""
 "  -C, --clear                   очистить запись lastlog пользователя\n"
 "                                (только вместе с -u)\n"
 
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1399,12 +1392,10 @@ msgid "**Never logged in**"
 msgstr "**Никогда не входил в систему**"
 
 #, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: не удалось обновить запись для UID %lu\n"
 
 #, c-format
-#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: не удалось обновить файл lastlog\n"
 
@@ -1540,7 +1531,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Использование: sg группа [[-c] команда]\n"
 
 #, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: не удалось зашифровать пароль с предыдущей солью: %s\n"
 
@@ -1613,17 +1603,14 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: строка %d: не удалось обновить запись\n"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: не удалось подготовить новую %s запись\n"
 
 #, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: не удалось найти подчинённый диапазон пользователей\n"
 
 #, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: не удалось найти подчинённый диапазон групп\n"
 
@@ -2220,7 +2207,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: не удалось сбросить запись в lastlog для UID %lu: %s\n"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: не удалось подготовить новую %s запись\n"
 
@@ -2268,12 +2254,10 @@ msgid "%s: can't create group\n"
 msgstr "%s: не удалось создать группу\n"
 
 #, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "%s: не удалось создать подчинённые пользовательские ID\n"
 
 #, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: не удалось создать подчинённые групповые ID\n"
 
@@ -2326,7 +2310,6 @@ msgstr ""
 "удалена.\n"
 
 #, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: не удалось удалить запись %lu из %s\n"
 
@@ -2484,12 +2467,10 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: пользователь «%s» уже существует в %s\n"
 
 #, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: некорректный диапазон подчинённых uid «%s»\n"
 
 #, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: некорректный диапазон подчинённых gid «%s»\n"
 
@@ -2511,7 +2492,6 @@ msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID «%lu» уже существует\n"
 
 #, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr "%s: %s не существует, нельзя указывать флаги %s или %s\n"
 
@@ -2563,22 +2543,18 @@ msgid "failed to rename mailbox"
 msgstr "не удалось переименовать почтовый ящик"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: не удалось удалить диапазон uid %lu-%lu из «%s»\n"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: не удалось добавить диапазон uid %lu-%lu в «%s»\n"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: не удалось удалить диапазон gid %lu-%lu из «%s»\n"
 
 #, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: не удалось добавить диапазон gid %lu-%lu в «%s»\n"
 
@@ -2639,12 +2615,10 @@ msgid "Couldn't make backup"
 msgstr "Не удалось создать резервную копию"
 
 #, c-format
-#| msgid "%s: PAM: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: %s: %s\n"
 
 #, c-format
-#| msgid "%s: nscd exited with status %d\n"
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: %s завершился с кодом выхода %d\n"
 

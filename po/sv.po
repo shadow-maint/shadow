@@ -87,7 +87,6 @@ msgid "Could not set serange for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
 
@@ -96,7 +95,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Ändrar åldersinformationen för %s\n"
 
@@ -117,12 +115,10 @@ msgid "Cannot init SELinux management\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "%s: Kan inte grena användarskal\n"
 
@@ -416,22 +412,18 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: misslyckades med att kasta rättigheterna (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
 msgid "%s: invalid chroot path '%s'\n"
 msgstr "%s: ogiltigt telefonnummer (hem): \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot create directory %s: %s\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: Kan inte skapa katalogen %s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot create directory %s: %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: Kan inte skapa katalogen %s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: Misslyckades med att skapa tcb-katalog för %s\n"
 
@@ -514,8 +506,9 @@ msgstr ""
 "lösenords-\n"
 "                                ändring till MIN_DAGAR\n"
 
+#, fuzzy
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays MAX_DAGAR       ställ in maximalt antal dagar innan "
@@ -603,7 +596,6 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: PAM: %s\n"
 msgstr "%s: %s\n"
 
@@ -753,7 +745,6 @@ msgstr ""
 "Flaggor:\n"
 
 #, fuzzy, c-format
-#| msgid "  -c, --crypt-method <METHOD>   the crypt method (one of %s)\n"
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr "  -c, --crypt-method <METOD>    krypteringsmetoden (en av %s)\n"
 
@@ -795,7 +786,6 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: rad %d: saknar nytt lösenord\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to remove %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: misslyckades med att ta bort %s\n"
 
@@ -935,7 +925,6 @@ msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: Kan inte få storleken för %s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to remove %s\n"
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: misslyckades med att ta bort %s\n"
 
@@ -1093,13 +1082,10 @@ msgid "%s: GID '%lu' already exists\n"
 msgstr "%s: GID \"%lu\" finns redan\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
@@ -1337,8 +1323,6 @@ msgstr ""
 "                                DAGAR\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1346,8 +1330,6 @@ msgstr ""
 "  -a, --all                     visa faillog-poster för alla användare\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1378,12 +1360,10 @@ msgid "**Never logged in**"
 msgstr "**Aldrig varit inloggad**"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: Misslyckades med att få posten för UID %lu\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: Misslyckades med att få posten för UID %lu\n"
 
@@ -1465,7 +1445,6 @@ msgid "Login incorrect"
 msgstr "Inloggning misslyckad"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot fork user shell\n"
 msgid "Cannot find user (%s)\n"
 msgstr "%s: Kan inte grena användarskal\n"
 
@@ -1517,7 +1496,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Användning: sg grupp [[-c] kommando]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to remove %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: misslyckades med att ta bort %s\n"
 
@@ -1589,17 +1567,14 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: rad %d: kan inte uppdatera post\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: kan inte skapa användare\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: kan inte skapa grupp\n"
 
@@ -1778,7 +1753,6 @@ msgstr ""
 "Flaggor:\n"
 
 #, fuzzy
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -q, --quiet                   report errors only\n"
 msgstr "  -q, --quiet                   tyst läge\n"
 
@@ -1952,7 +1926,6 @@ msgid "%s: You are not authorized to su at that time\n"
 msgstr "%s: Du är inte behörig att använda su för tillfället\n"
 
 #, fuzzy, c-format
-#| msgid "No password entry for 'root'"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Ingen lösenordspost för \"root\""
 
@@ -1965,7 +1938,6 @@ msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: fel %d\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot remove the content of %s: %s\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: Kan inte ta bort innehållet i %s: %s\n"
 
@@ -2015,7 +1987,6 @@ msgid "%s: line too long in %s: %s..."
 msgstr "%s: raden är för lång i %s: %s..."
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot create symbolic link %s: %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: Kan inte skapa symboliska länken %s: %s\n"
 
@@ -2186,7 +2157,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
@@ -2234,12 +2204,10 @@ msgid "%s: can't create group\n"
 msgstr "%s: kan inte skapa grupp\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "%s: kan inte skapa användare\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: kan inte skapa grupp\n"
 
@@ -2266,8 +2234,6 @@ msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr "  -r, --remove                  ta bort hemkatalog och postkö\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -s, --shell SHELL             new login shell for the user account\n"
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
@@ -2275,7 +2241,6 @@ msgstr ""
 "  -s, --shell SHELL             nytt inloggningsskal för användarkontot\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot remove the primary group of user '%s'\n"
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr "%s: kan inte ta bort primära gruppen för användaren \"%s\"\n"
@@ -2291,12 +2256,10 @@ msgstr ""
 "bort.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: kan inte ta bort posten \"%s\" från %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s home directory (%s) not found\n"
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: %s hemkatalogen (%s) hittades inte\n"
 
@@ -2426,8 +2389,6 @@ msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr ""
 
 #, fuzzy
-#| msgid ""
-#| "  -s, --shell SHELL             new login shell for the user account\n"
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2449,17 +2410,14 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: användaren \"%s\" finns redan i %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: ogiltigt datum \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: ogiltigt datum \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open %s\n"
 msgid "%s: no options\n"
 msgstr "%s: kan inte öppna %s\n"
 
@@ -2476,7 +2434,6 @@ msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID \"%lu\" finns redan\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr "%s: %s är inte behörig att ändra lösenordet för %s\n"
 
@@ -2528,22 +2485,18 @@ msgid "failed to rename mailbox"
 msgstr "misslyckades med att byta namn på postlåda"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
@@ -2602,7 +2555,6 @@ msgid "Couldn't make backup"
 msgstr "Kunde inte göra en säkerhetskopia"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: %s\n"
 

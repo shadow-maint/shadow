@@ -47,7 +47,6 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: το nscd δεν τερμάτισε κανονικά (σήμα %d)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
 msgid "%s: nscd exited with status %d\n"
 msgstr "%s: το ncsd τερμάτισε με κατάσταση εξόδου %d"
 
@@ -433,7 +432,6 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: αδυναμία προσπέλαση του καταλόγου chroot %s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot access chroot directory %s: %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: αδυναμία προσπέλαση του καταλόγου chroot %s: %s\n"
 
@@ -522,8 +520,9 @@ msgstr ""
 "συνθηματικό\n"
 "                                αλλάξει σε ΕΛΑΧ_ΗΜΕΡΕΣ\n"
 
+#, fuzzy
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays ΜΕΓ_ΗΜΕΡΕΣ        καθορίζει μέγιστο αριθμό ημερών πριν το "
@@ -812,7 +811,6 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: γραμμή %d: έλλειψη νέου συνθηματικού\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: Αποτυχία εγγραφής %s: %s\n"
 
@@ -1130,8 +1128,6 @@ msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Δεν ήταν δυνατή η ρύθμιση της υπηρεσίας εκκαθάρισης.\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
@@ -1369,8 +1365,6 @@ msgstr ""
 "παλαιότερες από ΗΜΕΡΕΣ\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1379,8 +1373,6 @@ msgstr ""
 "τους χρήστες\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1411,12 +1403,10 @@ msgid "**Never logged in**"
 msgstr "**Καμιά είσοδος στο σύστημα**"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: Aδυναμία ανάκτησης της εγγραφής UID %lu\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: αδυναμία ανανέωσης αρχείου συνθηματικών\n"
 
@@ -1552,7 +1542,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Χρήση: sg ομάδα [[-c] εντολή]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: Αποτυχία εγγραφής %s: %s\n"
 
@@ -1625,17 +1614,14 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: αδυναμία δημιουργίας του χρήστη\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update group file\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: αδυναμία ανανέωσης για το αρχείο ομάδων\n"
 
@@ -1659,7 +1645,6 @@ msgstr ""
 "ονομαζόμενου λογαριασμού\n"
 
 #, fuzzy
-#| msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
 "  -e, --encrypted               τα παρεχόμενα συνθηματικά είναι "
@@ -1828,7 +1813,6 @@ msgstr ""
 "Επιλογές:\n"
 
 #, fuzzy
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -q, --quiet                   report errors only\n"
 msgstr "  -q, --quiet                   σιωπηλή λειτουργία\n"
 
@@ -2067,7 +2051,6 @@ msgid "%s: line too long in %s: %s..."
 msgstr "%s: πολύ μακριά γραμμή στο %s: %s..."
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot create symbolic link %s: %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: Αδυναμία δημιουργίας συμβολικού συνδέσμου %s: %s\n"
 
@@ -2245,7 +2228,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: αποτυχία επαναφοράς της καταχώρησης στο lastlog του UID %lu: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
@@ -2292,12 +2274,10 @@ msgid "%s: can't create group\n"
 msgstr "%s: αδυναμία δημιουργίας ομάδας\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "%s: αδυναμία δημιουργίας του χρήστη\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: αδυναμία δημιουργίας ομάδας\n"
 
@@ -2352,7 +2332,6 @@ msgstr ""
 "%s: η ομάδα %s είναι πρωταρχική ομάδα για άλλο χρήστη και δεν διαγράφηκε.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: αδυναμία απομάκρυνσης της εγγραφής '%s' από το %s\n"
 
@@ -2517,12 +2496,10 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: Ο χρήστης %s υπάρχει ήδη στο %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: Μη έγκυρη ημερομηνία '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: Μη έγκυρη ημερομηνία '%s'\n"
 
@@ -2543,7 +2520,6 @@ msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: το UID '%lu' υπάρχει ήδη\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr ""
 "%s: ο χρήστης %s δεν είναι εξουσιοδοτημένος να αλλάξει το συνθηματικό του "
@@ -2598,22 +2574,18 @@ msgid "failed to rename mailbox"
 msgstr "αποτυχία μετονομασίας γραμματοκιβωτίου"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
@@ -2673,12 +2645,10 @@ msgid "Couldn't make backup"
 msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας "
 
 #, fuzzy, c-format
-#| msgid "%s: PAM: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: PAM: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: το ncsd τερμάτισε με κατάσταση εξόδου %d"
 

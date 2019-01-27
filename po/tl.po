@@ -90,7 +90,6 @@ msgid "Could not set serange for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Could not allocate space for config info.\n"
 msgid "Could not set sename for %s\n"
 msgstr "Hindi makapaglaan ng lugar para sa impormasyong pagsasaayos.\n"
 
@@ -99,7 +98,6 @@ msgid "Could not modify login mapping for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Changing the aging information for %s\n"
 msgid "Cannot create SELinux login mapping for %s\n"
 msgstr "Pinapalitan ang impormasyong pagtanda para kay %s\n"
 
@@ -120,12 +118,10 @@ msgid "Cannot init SELinux management\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "Cannot create SELinux user key\n"
 msgstr "%s: Hindi makilala ang inyong pangalan.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot verify the SELinux user\n"
 msgstr "%s: linya %d: hindi mahanap ang gumagamit %s\n"
 
@@ -158,17 +154,14 @@ msgid "%s: out of memory\n"
 msgstr "%s: nagkulang ng memory\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: Cannot stat %s: %s\n"
 msgstr "%s: hindi ma-apdeyt ang talaksang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s is neither a directory, nor a symlink.\n"
 msgstr "%s: hindi tanggap na directory na tahanan '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
@@ -177,57 +170,46 @@ msgid "%s: Suspiciously long symlink: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change owner of %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change mode of %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: unlink: %s: %s\n"
 msgstr "%s: baguhin ang pangalan: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove directory %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot rename %s to %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot remove %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create symbolic link %s: %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: Cannot change owners of %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: Cannot lstat %s: %s\n"
 msgstr "%s: hindi ma-apdeyt ang talaksang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update shadow file\n"
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
 msgstr "%s: hindi maapdeyt ang talaksang shadow\n"
 
@@ -238,12 +220,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: mkdir: %s: %s\n"
 msgstr "%s: baguhin ang pangalan: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: Cannot open %s: %s\n"
 msgstr "%s: hindi mabuksan ang talaksang %s\n"
 
@@ -286,17 +266,14 @@ msgid "Cannot open audit interface - aborting.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "Unable to change tty %s"
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "Hindi mabago ang tty %s"
 
 #, fuzzy, c-format
-#| msgid "%s: fields too long\n"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: mahaba masyado ang mga field\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: "
 msgstr "%s: %s\n"
 
@@ -339,7 +316,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "failed to change mailbox owner"
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "bigo sa pagpalit ng may-ari ng mailbox"
 
@@ -415,7 +391,6 @@ msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
 #, fuzzy
-#| msgid "Password changed."
 msgid "passwd: password unchanged\n"
 msgstr "Napalitan ang password."
 
@@ -439,22 +414,18 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home phone: '%s'\n"
 msgid "%s: invalid chroot path '%s'\n"
 msgstr "%s: hindi tanggap na telepono sa bahay: '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
@@ -487,12 +458,10 @@ msgid "Unable to determine your tty name."
 msgstr "Hindi malaman ang pangalan ng tty ninyo."
 
 #, fuzzy
-#| msgid "No\n"
 msgid "No"
 msgstr "Hindi\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
@@ -525,7 +494,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
@@ -608,17 +577,14 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Hindi makilala ang inyong pangalan.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: PAM: %s\n"
 msgstr "%s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't lock files, try again later\n"
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: hindi makapag-aldaba ng mga talaksan, subukan muli mamaya.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: cannot open %s\n"
 msgstr "%s: hindi mabuksan ang talaksang %s\n"
 
@@ -627,7 +593,6 @@ msgid "%s: failure while writing changes to %s\n"
 msgstr "%s: bigo sa pag-fork: %s"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -648,7 +613,6 @@ msgid "%s: error changing fields\n"
 msgstr "%s: error sa pagbabago ng mga field\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
@@ -677,7 +641,6 @@ msgid "Full Name"
 msgstr "Buong Pangalan"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "\t%s: %s\n"
 msgstr "%s: %s\n"
 
@@ -721,7 +684,6 @@ msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: hindi tanggap na telepono sa bahay: '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: '%s' contains illegal characters\n"
 msgid "%s: '%s' contains non-ASCII characters\n"
 msgstr "%s: '%s' ay may hindi legal na mga karakter\n"
 
@@ -750,7 +712,6 @@ msgid "%s: fields too long\n"
 msgstr "%s: mahaba masyado ang mga field\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -795,17 +756,14 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: linya %d: walang bagong password\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: walang grupong %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: can't update entry\n"
 msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: linya %d: hindi ma-apdeyt ang ipinasok\n"
 
@@ -828,7 +786,6 @@ msgid "Login Shell"
 msgstr "Login Shell"
 
 #, fuzzy, c-format
-#| msgid "You may not change the shell for %s.\n"
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Hindi niyo mapapalitan ang shell para kay %s.\n"
 
@@ -841,17 +798,14 @@ msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Hindi tanggap na entry: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s is an invalid shell.\n"
 msgid "%s: %s is an invalid shell\n"
 msgstr "Ang %s ay hindi tanggap na shell.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s does not exist\n"
 msgid "%s: Warning: %s does not exist\n"
 msgstr "%s: walang gumagamit na nagngangalang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: %s not owned by %s\n"
 msgid "%s: Warning: %s is not executable\n"
 msgstr "%s: babala: %s ay hindi pag-aari ni %s\n"
 
@@ -869,7 +823,6 @@ msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "lastlog: unexpected argument: %s\n"
 msgid "%s: unexpected argument: %s\n"
 msgstr "lastlog: hindi inaasahang argumento: %s\n"
 
@@ -900,7 +853,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to get the entry for UID %lu\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
@@ -908,7 +860,6 @@ msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Login       Kabiguan Maximum Pinakahuli               On\n"
 
 #, fuzzy, c-format
-#| msgid " [%lds left]"
 msgid " [%lus left]"
 msgstr " [%lds naiwan]"
 
@@ -917,17 +868,14 @@ msgid " [%lds lock]"
 msgstr " [%lds lock]"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to reset fail count for UID %lu\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Failed to set max for UID %lu\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to set locktime for UID %lu\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
@@ -936,17 +884,14 @@ msgid "%s: Unknown user or range: %s\n"
 msgstr "Di kilalang Gumagamit: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot get the size of %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Failed to write %s: %s\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
@@ -978,12 +923,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr "Ang password ni %s ay hindi mapapalitan.\n"
 
 #, fuzzy
-#| msgid "The password for %s cannot be changed.\n"
 msgid "The options cannot be combined.\n"
 msgstr "Ang password ni %s ay hindi mapapalitan.\n"
 
@@ -992,7 +935,6 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: kailangan ng password ng grupong shadow para sa -A\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: group '%s' does not exist in %s\n"
 msgstr "%s: walang grupong %s\n"
 
@@ -1034,7 +976,6 @@ msgid "%s: Not a tty\n"
 msgstr "%s: Hindi tty\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] GROUP\n"
 "\n"
@@ -1067,7 +1008,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not a valid group name\n"
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: hindi tanggap na pangalan ng grupo ang %s\n"
 
@@ -1080,17 +1020,14 @@ msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: kinakailangan ng -O ang PANGALAN=HALAGA\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s exists\n"
 msgid "%s: group '%s' already exists\n"
 msgstr "%s: mayroon nang grupong %s\n"
 
 #, fuzzy, c-format
-#| msgid "Member already exists\n"
 msgid "%s: GID '%lu' already exists\n"
 msgstr "Mayroon nang kasapi na ganito\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Hindi makilala ang inyong pangalan.\n"
 
@@ -1100,7 +1037,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry '%s' from %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
@@ -1109,12 +1045,10 @@ msgid "%s: cannot remove the primary group of user '%s'\n"
 msgstr "%s: hindi mapalitan ang gumagamit '%s' sa NIS client.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group %s does not exist\n"
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: walang grupong %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: group '%s' is a NIS group.\n"
 msgid "%s: group '%s' is a NIS group\n"
 msgstr "%s: ang grupong '%s' ay grupong NIS.\n"
 
@@ -1123,7 +1057,6 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s ay ang NIS master\n"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s is a NIS user\n"
 msgid "%s: user '%s' is already a member of '%s'\n"
 msgstr "%s: ang gumagamit na %s ay nasa NIS\n"
 
@@ -1132,7 +1065,6 @@ msgid "%s: Out of memory. Cannot update %s.\n"
 msgstr "%s: naubos ang memory sa update_group\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
@@ -1202,7 +1134,6 @@ msgid "%s: unknown user %s\n"
 msgstr "%s: di kilalang gumagamit %s\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
@@ -1210,7 +1141,6 @@ msgid ""
 msgstr "Pag-gamit: %s [input]\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
@@ -1226,7 +1156,6 @@ msgid "  -s, --sort                    sort entries by UID\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: -s and -r are incompatibile\n"
 msgid "%s: -s and -r are incompatible\n"
 msgstr "%s: -s at -r ay hindi maaring magkasabay\n"
 
@@ -1245,7 +1174,6 @@ msgid "invalid group name '%s'\n"
 msgstr "hindi tanggap na pangalan ng grupo '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "invalid group name '%s'\n"
 msgid "invalid group ID '%lu'\n"
 msgstr "hindi tanggap na pangalan ng grupo '%s'\n"
 
@@ -1262,7 +1190,6 @@ msgid "no matching group file entry in %s\n"
 msgstr "walang katumbas na entry sa talaksang grupo sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "add group '%s' in %s ?"
 msgid "add group '%s' in %s? "
 msgstr "idagdag ang grupong '%s' sa %s ?"
 
@@ -1298,7 +1225,6 @@ msgid "%s: no changes\n"
 msgstr "%s: walang pagbabago\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot update file %s\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: hindi ma-apdeyt ang talaksang %s\n"
 
@@ -1344,12 +1270,10 @@ msgid "**Never logged in**"
 msgstr "**Di pumasok kailanman**"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: hindi maapdeyt ang talaksang password\n"
 
@@ -1404,9 +1328,6 @@ msgstr ""
 "pinakamababang antas ng \"sh\""
 
 #, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "Login timed out after %d seconds.\n"
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
@@ -1426,7 +1347,6 @@ msgid "login: "
 msgstr "login: "
 
 #, fuzzy, c-format
-#| msgid "Maximum number of tries exceeded (%d)\n"
 msgid "Maximum number of tries exceeded (%u)\n"
 msgstr "Lumampas sa bilang ng maaaring pagsubok : (%d)\n"
 
@@ -1437,7 +1357,6 @@ msgid "Login incorrect"
 msgstr "Maling pagpasok"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: cannot find user %s\n"
 msgid "Cannot find user (%s)\n"
 msgstr "%s: linya %d: hindi mahanap ang gumagamit %s\n"
 
@@ -1480,7 +1399,6 @@ msgstr ""
 "\n"
 
 #, fuzzy
-#| msgid "Usage: id\n"
 msgid "Usage: logoutd\n"
 msgstr "Pag-gamit: id\n"
 
@@ -1491,7 +1409,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Pag-gamit: sg grupo [[-c] utos]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -1518,7 +1435,6 @@ msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: walang grupong %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: hindi tanggap na pangalan `%s'\n"
 
@@ -1551,12 +1467,10 @@ msgid "%s: line %d: can't update password\n"
 msgstr "%s: linya %d: hindi ma-apdeyt ang kontrasenyas\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: mkdir failed\n"
 msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s: linya %d: bigo ang mkdir\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s: linya %d: bigo ang chown\n"
 
@@ -1565,7 +1479,6 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linya %d: hindi ma-apdeyt ang ipinasok\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -1574,7 +1487,6 @@ msgid "%s: can't find subordinate user range\n"
 msgstr "%s: hindi malikha ang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update group file\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: hindi ma-apdeyt ang talaksang grupo\n"
 
@@ -1704,17 +1616,14 @@ msgid "The password for %s is unchanged.\n"
 msgstr "Ang password ni %s ay hindi napalitan.\n"
 
 #, fuzzy, c-format
-#| msgid "Password changed."
 msgid "%s: password changed.\n"
 msgstr "Napalitan ang password."
 
 #, fuzzy, c-format
-#| msgid "Password Expiration Warning"
 msgid "%s: password expiry information changed.\n"
 msgstr "Babala ng Paglipas ng Taning ng Password"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1722,7 +1631,6 @@ msgid ""
 msgstr "Pag-gamit: %s [input]\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
@@ -1747,42 +1655,34 @@ msgid "invalid user name '%s'\n"
 msgstr "hindi tanggap na pangalan '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "invalid user name '%s'\n"
 msgid "invalid user ID '%lu'\n"
 msgstr "hindi tanggap na pangalan '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: no group %u\n"
 msgid "user '%s': no group %lu\n"
 msgstr "gumagamit %s: walang grupo %u\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: directory %s does not exist\n"
 msgid "user '%s': directory '%s' does not exist\n"
 msgstr "gumagamit %s: walang directory na %s\n"
 
 #, fuzzy, c-format
-#| msgid "user %s: program %s does not exist\n"
 msgid "user '%s': program '%s' does not exist\n"
 msgstr "gumagamit %s: walang programang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "no tcb directory for %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "create tcb directory for %s?"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "failed to create tcb directory for %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: cannot lock %s.\n"
 msgstr "%s: hindi maaldaba ang talaksang %s\n"
 
@@ -1810,12 +1710,10 @@ msgid "user %s: last password change in the future\n"
 msgstr "gumagamit %s: huling pagpalit ng password ay nasa hinaharap\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: cannot sort entries in %s\n"
 msgstr "%s: hindi mabuksan ang talaksang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't re-write file\n"
 msgid "%s: can't work with tcb enabled\n"
 msgstr "%s: hindi maisulat muli ang talaksan\n"
 
@@ -1833,7 +1731,6 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Ibigay ang inyong SARILING kontrasenyas bilang authentication.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: hindi maaldaba ang talaksang %s\n"
 
@@ -1904,17 +1801,14 @@ msgid "(Enter your own password)"
 msgstr "(Ibigay ang sarili niyong password.)"
 
 #, fuzzy, c-format
-#| msgid "%s: PAM authentication failed\n"
 msgid "%s: Authentication failure\n"
 msgstr "%s: bigo ang pagpapakilalang PAM\n"
 
 #, fuzzy, c-format
-#| msgid "You are not authorized to su %s\n"
 msgid "%s: You are not authorized to su at that time\n"
 msgstr "Hindi kayo awtorisadong gumamit ng su %s\n"
 
 #, fuzzy, c-format
-#| msgid "No password entry for 'root'"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Walang ipinasok sa password para sa 'root'"
 
@@ -1927,12 +1821,10 @@ msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: error %d\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot drop the controlling terminal\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "Cannot execute %s"
 msgid "Cannot execute %s\n"
 msgstr "Hindi mapatakbo ang %s"
 
@@ -1974,17 +1866,14 @@ msgid "%s: cannot open new defaults file\n"
 msgstr "%s: hindi mabuksan ang bagong talaksan ng mga default\n"
 
 #, fuzzy, c-format
-#| msgid "%s: line %d: chown failed\n"
 msgid "%s: line too long in %s: %s..."
 msgstr "%s: linya %d: bigo ang chown\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: rename: %s"
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: baguhin ang pangalan: %s"
 
@@ -1997,7 +1886,6 @@ msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: sobrang dami ng grupo ang nakatakda (max %d).\n"
 
 #, fuzzy, c-format
-#| msgid "Usage: %s [input]\n"
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -2127,7 +2015,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -2148,7 +2035,6 @@ msgid "Setting mailbox file permissions"
 msgstr "Itinatakda ang pahintulot sa talaksang mailbox"
 
 #, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
 msgid "%s: user '%s' already exists\n"
 msgstr "%s: mayroon nang gumagamit na %s\n"
 
@@ -2164,12 +2050,10 @@ msgid "%s: can't create user\n"
 msgstr "%s: hindi malikha ang %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: UID %u is not unique\n"
 msgid "%s: UID %lu is not unique\n"
 msgstr "%s: hindi kakaiba ang UID %u\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to create tcb directory for %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
@@ -2220,25 +2104,20 @@ msgid "%s: group %s not removed because it has other members.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid ""
-#| "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: hindi matanggal ang grupong %s dahil ito'y pangunahing grupo ng ibang "
 "gumagamit.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s mail spool (%s) not found\n"
 msgstr "%s: hindi tanggap na directory na tahanan '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: warning: can't remove "
 msgid "%s: warning: can't remove %s: %s\n"
 msgstr "%s: babala: hindi matanggal "
 
@@ -2251,17 +2130,14 @@ msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: Cannot drop privileges: %s\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove the content of %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot rename directory %s to %s\n"
 msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: hindi mapalitan ng pangalan ang directory %s sa %s\n"
 
@@ -2270,7 +2146,6 @@ msgid "%s: user %s is a NIS user\n"
 msgstr "%s: ang gumagamit na %s ay nasa NIS\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid home directory '%s'\n"
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: hindi tanggap na directory na tahanan '%s'\n"
 
@@ -2363,22 +2238,18 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: user %s exists\n"
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: mayroon nang gumagamit na %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: hindi tanggap na petsa '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: hindi tanggap na petsa '%s'\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot open file %s\n"
 msgid "%s: no options\n"
 msgstr "%s: hindi mabuksan ang talaksang %s\n"
 
@@ -2391,7 +2262,6 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: kailangan ang shadow password para sa -e at -f\n"
 
 #, fuzzy, c-format
-#| msgid "Member already exists\n"
 msgid "%s: UID '%lu' already exists\n"
 msgstr "Mayroon nang kasapi na ganito\n"
 
@@ -2410,7 +2280,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: cannot create directory %s\n"
 msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: hindi malikha ang directory %s\n"
 
@@ -2442,22 +2311,18 @@ msgid "failed to rename mailbox"
 msgstr "bigo sa pagpalit ng pangalan ng mailbox"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -2481,31 +2346,24 @@ msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "%s: failed to remove %s\n"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy, c-format
-#| msgid ""
-#| "\n"
-#| "%s: %s is unchanged\n"
 msgid "%s: %s is unchanged\n"
 msgstr ""
 "\n"
 "%s: %s ay hindi binago\n"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create scratch directory"
 msgstr "bigo sa pagpalit ng pangalan ng mailbox"
 
 #, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to drop privileges"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, fuzzy
-#| msgid "Couldn't lock file"
 msgid "Couldn't get file context"
 msgstr "Hindi maaldaba ang talaksan"
 
@@ -2513,7 +2371,6 @@ msgid "setfscreatecon () failed"
 msgstr ""
 
 #, fuzzy
-#| msgid "%s: failed to drop privileges (%s)\n"
 msgid "failed to gain privileges"
 msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
@@ -2524,12 +2381,10 @@ msgid "Couldn't make backup"
 msgstr "Hindi makagawa ng backup"
 
 #, fuzzy, c-format
-#| msgid "%s: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s not found in /etc/passwd\n"
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: hindi nahanap ang %s sa /etc/passwd\n"
 
@@ -2538,27 +2393,22 @@ msgid "%s: %s killed by signal %d\n"
 msgstr ""
 
 #, fuzzy
-#| msgid "Unable to open group file\n"
 msgid "failed to open scratch file"
 msgstr "Hindi mabuksan ang talaksang grupo\n"
 
 #, fuzzy
-#| msgid "%s: fields too long\n"
 msgid "failed to unlink scratch file"
 msgstr "%s: mahaba masyado ang mga field\n"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to stat edited file"
 msgstr "bigo sa pagpalit ng pangalan ng mailbox"
 
 #, fuzzy
-#| msgid "failed to change mailbox owner"
 msgid "failed to allocate memory"
 msgstr "bigo sa pagpalit ng may-ari ng mailbox"
 
 #, fuzzy
-#| msgid "failed to rename mailbox"
 msgid "failed to create backup file"
 msgstr "bigo sa pagpalit ng pangalan ng mailbox"
 
@@ -2567,7 +2417,6 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid base directory '%s'\n"
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: hindi tanggap na batayang directory '%s'\n"
 

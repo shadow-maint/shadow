@@ -46,7 +46,6 @@ msgid "%s: nscd did not terminate normally (signal %d)\n"
 msgstr "%s: nscd no ha acabat correctament (senyal %d)\n"
 
 #, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
 msgid "%s: nscd exited with status %d\n"
 msgstr "%s: «nscd» ha sortit amb l'estat %d"
 
@@ -430,7 +429,6 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: no es pot accedir al directori «chroot» %s: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot access chroot directory %s: %s\n"
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
 msgstr "%s: no es pot accedir al directori «chroot» %s: %s\n"
 
@@ -518,8 +516,9 @@ msgstr ""
 "  -m, --mindays DIES_MÍN        estableix el número mínim de dies abans\n"
 "                                del canvi de contrasenya a DIES_MÍN\n"
 
+#, fuzzy
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays DIES_MÀX        estableix el número màxim de dies abans\n"
@@ -808,7 +807,6 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: línia %d: manca la nova contrasenya\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: Error en escriure %s: %s\n"
 
@@ -1131,8 +1129,6 @@ msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: no es pot configurar el servei de neteja.\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -r, --reset                   reset the counters of login failures\n"
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
@@ -1371,8 +1367,6 @@ msgstr ""
 "                                antics que DIES\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
@@ -1381,8 +1375,6 @@ msgstr ""
 "els usuaris\n"
 
 #, fuzzy
-#| msgid ""
-#| "  -a, --all                     display faillog records for all users\n"
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
@@ -1412,12 +1404,10 @@ msgid "**Never logged in**"
 msgstr "**No ha entrat mai**"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to get the entry for UID %lu\n"
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: No s'ha pogut obtenir l'entrada de la UID %lu\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update password file\n"
 msgid "%s: Failed to update the lastlog file\n"
 msgstr "%s: no es pot actualitzar el fitxer de contrasenyes\n"
 
@@ -1551,7 +1541,6 @@ msgid "Usage: sg group [[-c] command]\n"
 msgstr "Forma d'ús: sg grup [[-c] ordre]\n"
 
 #, fuzzy, c-format
-#| msgid "%s: Failed to write %s: %s\n"
 msgid "%s: failed to crypt password with previous salt: %s\n"
 msgstr "%s: Error en escriure %s: %s\n"
 
@@ -1625,17 +1614,14 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: línia %d: no es pot actualitzar l'entrada\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare new %s entry\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: no es pot generar l'usuari\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't update group file\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: no es pot actualitzar el fitxer de grups\n"
 
@@ -2051,7 +2037,6 @@ msgid "%s: line too long in %s: %s..."
 msgstr "%s: línia massa llarga a %s: %s..."
 
 #, fuzzy, c-format
-#| msgid "%s: Cannot create symbolic link %s: %s\n"
 msgid "%s: Cannot create backup file (%s): %s\n"
 msgstr "%s: no es pot generar l'enllaç simbòlic %s: %s\n"
 
@@ -2226,7 +2211,6 @@ msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: ha fallat el restabliment del darrer registre de UID %lu: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
@@ -2274,12 +2258,10 @@ msgid "%s: can't create group\n"
 msgstr "%s: no es pot generar el grup\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create user\n"
 msgid "%s: can't create subordinate user IDs\n"
 msgstr "%s: no es pot generar l'usuari\n"
 
 #, fuzzy, c-format
-#| msgid "%s: can't create group\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: no es pot generar el grup\n"
 
@@ -2333,7 +2315,6 @@ msgstr ""
 "usuari.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: cannot remove entry '%s' from %s\n"
 msgid "%s: cannot remove entry %lu from %s\n"
 msgstr "%s: no es pot eliminar l'entrada «%s» de %s\n"
 
@@ -2492,12 +2473,10 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: l'usuari «%s» ja existeix a %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: la data «%s» no és vàlida\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid date '%s'\n"
 msgid "%s: invalid subordinate gid range '%s'\n"
 msgstr "%s: la data «%s» no és vàlida\n"
 
@@ -2518,7 +2497,6 @@ msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: UID '%lu' ja existeix\n"
 
 #, fuzzy, c-format
-#| msgid "%s: %s is not authorized to change the password of %s\n"
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
 msgstr "%s: %s no està autoritzat per canviar la contrasenya de %s\n"
 
@@ -2570,22 +2548,18 @@ msgid "failed to rename mailbox"
 msgstr "no s'ha pogut reanomenar la bústia de correu"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to prepare the new %s entry '%s'\n"
 msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
 msgstr "%s: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
@@ -2645,12 +2619,10 @@ msgid "Couldn't make backup"
 msgstr "No s'ha pogut fer una còpia de seguretat"
 
 #, fuzzy, c-format
-#| msgid "%s: PAM: %s\n"
 msgid "%s: %s: %s\n"
 msgstr "%s: PAM: %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: nscd exited with status %d"
 msgid "%s: %s returned with status %d\n"
 msgstr "%s: «nscd» ha sortit amb l'estat %d"
 
