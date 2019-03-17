@@ -2,18 +2,13 @@ Shadow SITES
 ============
 
 Homepage
-	http://pkg-shadow.alioth.debian.org/
+	http://github.com/shadow-maint/shadow
 
-FTP site
-	ftp://pkg-shadow.alioth.debian.org/pub/pkg-shadow
+Issue tracker
+	http://github.com/shadow-maint/shadow/issues
 
-SVN repository
-	anonymous read only access: svn://svn.debian.org/pkg-shadow/upstream
-
-SVN web interface
-	http://svn.debian.org/wsvn/pkg-shadow/upstream
-	or
-	http://svn.debian.org/viewsvn/pkg-shadow/upstream
+Releases
+	https://github.com/shadow-maint/shadow/releases
 
 Mailing lists
 	for general discuss: pkg-shadow-devel@lists.alioth.debian.org
