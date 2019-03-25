@@ -925,7 +925,6 @@ static int write_all (const struct commonio_db *db)
 
 
 int commonio_close (struct commonio_db *db)
-	/*@requires notnull db->fp@*/
 {
 	char buf[1024];
 	int errors = 0;
@@ -938,8 +937,10 @@ int commonio_close (struct commonio_db *db)
 	db->isopen = false;
 
 	if (!db->changed || db->readonly) {
-		(void) fclose (db->fp);
-		db->fp = NULL;
+		if (NULL != db->fp) {
+			(void) fclose (db->fp);
+			db->fp = NULL;
+		}
 		goto success;
 	}
 
