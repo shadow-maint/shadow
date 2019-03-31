@@ -382,4 +382,10 @@ extern char *strerror ();
 # endif
 #endif
 
+#ifdef HAVE_SECURE_GETENV
+#  define shadow_getenv(name) secure_getenv(name)
+# else
+#  define shadow_getenv(name) getenv(name)
+#endif
+
 #endif				/* _DEFINES_H_ */

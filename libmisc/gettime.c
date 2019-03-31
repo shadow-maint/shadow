@@ -52,7 +52,7 @@
 	unsigned long long epoch;
 
 	fallback = time (NULL);
-	source_date_epoch = getenv ("SOURCE_DATE_EPOCH");
+	source_date_epoch = shadow_getenv ("SOURCE_DATE_EPOCH");
 
 	if (!source_date_epoch)
 		return fallback;
