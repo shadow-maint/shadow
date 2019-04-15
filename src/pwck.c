@@ -877,8 +877,10 @@ int main (int argc, char **argv)
 
 	close_files (changed);
 
-	nscd_flush_cache ("passwd");
-	sssd_flush_cache (SSSD_DB_PASSWD);
+	if (!read_only) {
+		nscd_flush_cache ("passwd");
+		sssd_flush_cache (SSSD_DB_PASSWD);
+	}
 
 	/*
 	 * Tell the user what we did and exit.
