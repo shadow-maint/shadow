@@ -110,6 +110,9 @@ AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
 AC_REPLACE_FUNCS(snprintf strcasecmp strdup strerror strstr)
 
 AC_CHECK_FUNC(setpgrp)
+AC_CHECK_FUNC(secure_getenv, [AC_DEFINE(HAS_SECURE_GETENV,
+                                        1,
+                                        [Defined to 1 if you have the declaration of 'secure_getenv'])])
 
 if test "$ac_cv_header_shadow_h" = "yes"; then
 	AC_CACHE_CHECK(for working shadow group support,

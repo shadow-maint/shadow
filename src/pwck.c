@@ -609,7 +609,7 @@ static void check_pw_file (int *errors, bool *changed)
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+					sp.sp_lstchg = (long) gettime () / SCALE;
 					if (0 == sp.sp_lstchg) {
 						/* Better disable aging than
 						 * requiring a password change

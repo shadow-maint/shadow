@@ -40,7 +40,6 @@
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-extern time_t time (time_t *);
 
 /*
  * pwd_to_spwd - create entries for new spwd structure
@@ -66,7 +65,7 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 		 */
 		sp.sp_min = 0;
 		sp.sp_max = (10000L * DAY) / SCALE;
-		sp.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		sp.sp_lstchg = (long) gettime () / SCALE;
 		if (0 == sp.sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */
