@@ -68,8 +68,9 @@ int run_command (const char *cmd, const char *argv[],
 
 	do {
 		wpid = waitpid (pid, status, 0);
-	} while (   ((pid_t)-1 == wpid && errno == EINTR)
-	         || ((pid_t)-1 != wpid && wpid != pid));
+	} while ( ((pid_t)-1 == wpid && errno != ECHILD)  
+	         && (((pid_t)-1 == wpid && errno == EINTR)
+	         || ((pid_t)-1 != wpid && wpid != pid)));
 
 	if ((pid_t)-1 == wpid) {
 		fprintf (stderr, "%s: waitpid (status: %d): %s\n",
