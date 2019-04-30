@@ -5,8 +5,9 @@ config.xml: ../config.xml.in
 	$(MAKE) -C .. config.xml
 	cp ../config.xml $@
 
-%.xml: ../%.xml ../po/$(LANG).po
-	xml2po --expand-all-entities -l $(LANG) -p ../po/$(LANG).po -o $@ ../$@
+%.xml: ../%.xml-config ../po/$(LANG).po
+	msgfmt -o $(LANG).mo ../po/$(LANG).po
+	itstool -l $(LANG) -m $(LANG).mo -o $@ $<
 	sed -i 's:\(^<refentry .*\)>:\1 lang="$(LANG)">:' $@
 
 include ../generate_mans.mak
@@ -16,4 +17,4 @@ $(man_MANS):
 	@echo you need to run configure with --enable-man to generate man pages
 endif
 
-CLEANFILES = .xml2po.mo $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST)) config.xml
+CLEANFILES = $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST)) config.xml
