@@ -143,6 +143,7 @@ struct commonio_db {
 	bool isopen:1;
 	bool locked:1;
 	bool readonly:1;
+	bool setname:1;
 };
 
 extern int commonio_setname (struct commonio_db *, const char *);

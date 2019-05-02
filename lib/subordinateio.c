@@ -550,7 +550,8 @@ static struct commonio_db subordinate_uid_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int sub_uid_setdbname (const char *filename)
@@ -631,7 +632,8 @@ static struct commonio_db subordinate_gid_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int sub_gid_setdbname (const char *filename)

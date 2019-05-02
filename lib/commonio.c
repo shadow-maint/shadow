@@ -364,6 +364,7 @@ static void free_linked_list (struct commonio_db *db)
 int commonio_setname (struct commonio_db *db, const char *name)
 {
 	snprintf (db->filename, sizeof (db->filename), "%s", name);
+	db->setname = true;
 	return 1;
 }
 
@@ -414,37 +415,39 @@ cleanup_ENOMEM:
 
 int commonio_lock (struct commonio_db *db)
 {
-/*#ifdef HAVE_LCKPWDF*/ /* not compatible with prefix option*/
-#if 0
-	/*
-	 * only if the system libc has a real lckpwdf() - the one from
-	 * lockpw.c calls us and would cause infinite recursion!
-	 */
-
-	/*
-	 * Call lckpwdf() on the first lock.
-	 * If it succeeds, call *_lock() only once
-	 * (no retries, it should always succeed).
-	 */
-	if (0 == lock_count) {
-		if (lckpwdf () == -1) {
-			if (geteuid () != 0) {
-				(void) fprintf (stderr,
-				                "%s: Permission denied.\n",
-				                Prog);
-			}
-			return 0;	/* failure */
-		}
-	}
-
-	if (commonio_lock_nowait (db, true) != 0) {
-		return 1;	/* success */
-	}
-
-	ulckpwdf ();
-	return 0;		/* failure */
-#else				/* !HAVE_LCKPWDF */
 	int i;
+
+#ifdef HAVE_LCKPWDF
+	/*
+	 * Only if the system libc has a real lckpwdf() - the one from
+	 * lockpw.c calls us and would cause infinite recursion!
+	 * It is also not used with the prefix option.
+	 */
+	if (!db->setname) {
+		/*
+		 * Call lckpwdf() on the first lock.
+		 * If it succeeds, call *_lock() only once
+		 * (no retries, it should always succeed).
+		 */
+		if (0 == lock_count) {
+			if (lckpwdf () == -1) {
+				if (geteuid () != 0) {
+					(void) fprintf (stderr,
+					                "%s: Permission denied.\n",
+					                Prog);
+				}
+				return 0;	/* failure */
+			}
+		}
+
+		if (commonio_lock_nowait (db, true) != 0) {
+			return 1;	/* success */
+		}
+
+		ulckpwdf ();
+		return 0;		/* failure */
+	}
+#endif				/* !HAVE_LCKPWDF */
 
 	/*
 	 * lckpwdf() not used - do it the old way.
@@ -471,7 +474,6 @@ int commonio_lock (struct commonio_db *db)
 		}
 	}
 	return 0;		/* failure */
-#endif				/* !HAVE_LCKPWDF */
 }
 
 static void dec_lock_count (void)

@@ -139,7 +139,8 @@ static /*@owned@*/struct commonio_db group_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int gr_setdbname (const char *filename)
