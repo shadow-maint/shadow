@@ -141,7 +141,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	int retval;
 	char buf[32];
 
-	fd = open (file, O_CREAT | O_EXCL | O_WRONLY, 0600);
+	fd = open (file, O_CREAT | O_TRUNC | O_WRONLY, 0600);
 	if (-1 == fd) {
 		if (log) {
 			(void) fprintf (stderr,
