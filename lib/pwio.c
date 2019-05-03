@@ -114,7 +114,8 @@ static struct commonio_db passwd_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int pw_setdbname (const char *filename)

@@ -238,7 +238,8 @@ static struct commonio_db gshadow_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int sgr_setdbname (const char *filename)

@@ -114,7 +114,8 @@ static struct commonio_db shadow_db = {
 	false,			/* changed */
 	false,			/* isopen */
 	false,			/* locked */
-	false			/* readonly */
+	false,			/* readonly */
+	false			/* setname */
 };
 
 int spw_setdbname (const char *filename)
