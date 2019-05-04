@@ -255,7 +255,7 @@ AC_ARG_WITH(libpam,
 	[with_libpam=$withval], [with_libpam=maybe])
 AC_ARG_WITH(btrfs,
 	[AC_HELP_STRING([--with-btrfs], [add BtrFS support @<:@default=yes if found@:>@])],
-	[with_selinux=$withval], [with_selinux=maybe])
+	[with_btrfs=$withval], [with_btrfs=maybe])
 AC_ARG_WITH(selinux,
 	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
 	[with_selinux=$withval], [with_selinux=maybe])
