@@ -32,18 +32,13 @@ static int run_btrfs_subvolume_cmd(const char *subcmd, const char *arg1, const c
 	int status = 0;
 	const char *cmd = btrfs_cmd();
 	const char *argv[] = {
-		strrchr(cmd, '/'),
+		"btrfs",
 		"subvolume",
 		subcmd,
 		arg1,
 		arg2,
 		NULL
 	};
-
-	if (argv[0] == NULL)
-		argv[0] = cmd;
-	else
-		argv[0] = argv[0] + 1;
 
 	if (access(cmd, X_OK)) {
 		return 1;
