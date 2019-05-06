@@ -68,6 +68,8 @@ int run_command (const char *cmd, const char *argv[],
 
 	do {
 		wpid = waitpid (pid, status, 0);
+		if ((pid_t)-1 == wpid && errno == ECHILD)
+			break;
 	} while (   ((pid_t)-1 == wpid && errno == EINTR)
 	         || ((pid_t)-1 != wpid && wpid != pid));
 
