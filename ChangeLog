@@ -1,3 +1,35 @@
+2019-06-13  Serge Hallyn <serge@hallyn.com>
+
+	* Release 4.7
+	* Spawn: don't loop forever on ECHILD
+	* Do not fail locking if there is a stale lockfile Tomas Mraz)
+	* Use lckpwdf if prefix not set (Tomas Mraz)
+	* Build: check correct DocBook version (Jan Tojnar)
+	* Usermod: Print 'no changes' to stdout, not stderr (Serge Hallyn)
+	* Add support for btrfs subvolumes for home (Adam Majer)
+	* Fix chpasswd long line handling (Nathan Ruiz)
+	* Use secure_getenv for gettime (Chris Lamb)
+	* Make sp_lstchg reproducible (Chris Lamb)
+	* Do not crash commonio_close if db file is not open (Tomas Mraz)
+	* Don't flush nscd and sssd cache in read-only mode (Charlie Vuillemez)
+	* French manpage update (Alban VIDAL)
+	* Fix manpage defaults for SUB_UID/GID_COUNT (Tomas Mraz)
+	* Sync po files from shadow.pot (Alban VIDAL)
+	* Usermod: guard against unsafe chown of homedir contents (Tomas Mraz)
+	* Add LASTLOG_UID_MAX to login.defs (Tomas Mraz)
+	* new[ug]idmap file capabilities support (Giuseppe Scrivano and Christian Brauner)
+	* Fix segfault in useradd (Tomas Mraz)
+	* Coverity issues (Tomas Mraz)
+	* Flush sssd caches (Jakub Hrozek)
+	* Log UID in nologin (Vladimir Ivanov)
+	* run pam_getenvlist after setup_env in su.c (Michael Vogt)
+	* Support systems with only utmpx (A. Wilcox)
+	* Fix unguarded ENABLE_SUBIDS code (Jan Chren (rindeal))
+	* Update po/zh_CN translation (Lion Yang)
+	* Create parent dirs for useradd -m (Michael Vetter)
+	* Prevent usermod segv
+	* Fix usermod crash (fariouche)
+
 2018-04-29  Serge Hallyn <serge@hallyn.com>
 
 	* Release 4.6
