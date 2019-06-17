@@ -500,7 +500,7 @@ if test "$with_selinux" != "no"; then
 			AC_MSG_ERROR([libsemanage not found])
 		fi
 
-		if test "$selinux_lib$semanage_lib" == "yesyes" ; then
+		if test "$selinux_lib$semanage_lib" = "yesyes" ; then
 			AC_DEFINE(WITH_SELINUX, 1,
 			          [Build shadow with SELinux support])
 			LIBSELINUX="-lselinux"
