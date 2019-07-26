@@ -341,8 +341,8 @@ CHFN_RESTRICT		rwh
 # If only one of the MIN or MAX values is set, then this value will be used.
 # If MIN > MAX, the highest value will be used.
 #
-# SHA_CRYPT_MIN_ROUNDS 5000
-# SHA_CRYPT_MAX_ROUNDS 5000
+#SHA_CRYPT_MIN_ROUNDS 5000
+#SHA_CRYPT_MAX_ROUNDS 5000
 
 #
 # List of groups to add to the user's supplementary group set
