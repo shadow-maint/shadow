@@ -1879,7 +1879,7 @@ static void update_lastlog (void)
 		return;
 	}
 
-	max_uid = (uid_t) getdef_ulong ("LASTLOG_MAX_UID", 0xFFFFFFFFUL);
+	max_uid = (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (user_newid > max_uid) {
 		/* do not touch lastlog for large uids */
 		return;
