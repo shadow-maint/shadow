@@ -32,6 +32,15 @@ LOG_OK_LOGINS		no
 LASTLOG_ENAB		yes
 
 #
+# Limit the highest user ID number for which the lastlog entries should
+# be updated.
+#
+# No LASTLOG_UID_MAX means that there is no user ID limit for writing
+# lastlog entries.
+#
+#LASTLOG_UID_MAX
+
+#
 # Enable checking and display of mailbox status upon login.
 #
 # Disable if the shell startup files already check for mail
