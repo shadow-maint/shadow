@@ -2,8 +2,8 @@
 EXTRA_DIST = \
 	.indent.pro
 
-ubindir = ${prefix}/bin
-usbindir = ${prefix}/sbin
+ubindir = ${bindir}
+usbindir = ${sbindir}
 suidperms = 4755
 sgidperms = 2755
 
@@ -52,13 +52,14 @@ usbin_PROGRAMS = \
 # id and groups are from gnu, sulogin from sysvinit
 noinst_PROGRAMS = id sulogin
 
+suidusbins     =
 suidbins       = su
 suidubins      = chage chfn chsh expiry gpasswd newgrp
 if !WITH_TCB
 suidubins += passwd
 endif
 if ACCT_TOOLS_SETUID
-suidubins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
+suidusbins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
 endif
 if ENABLE_SUBIDS
 if !FCAPS
@@ -133,6 +134,9 @@ install-am: all-am
 	done
 	for i in $(suidubins); do \
 		chmod $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
+	done
+	for i in $(suidusbins); do \
+		chmod $(suidperms) $(DESTDIR)$(usbindir)/$$i; \
 	done
 if WITH_TCB
 	for i in $(shadowsgidubins); do \
