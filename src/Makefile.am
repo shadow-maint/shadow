@@ -2,8 +2,8 @@
 EXTRA_DIST = \
 	.indent.pro
 
-ubindir = ${prefix}/bin
-usbindir = ${prefix}/sbin
+ubindir = ${bindir}
+usbindir = ${sbindir}
 suidperms = 4755
 sgidperms = 2755
 
