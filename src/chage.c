@@ -70,6 +70,7 @@ const char *Prog;
 static bool
     dflg = false,		/* set last password change date */
     Eflg = false,		/* set account expiration date */
+    iflg = false,		/* set iso8601 date formatting */
     Iflg = false,		/* set password inactive after expiration */
     lflg = false,		/* show account aging information */
     mflg = false,		/* set minimum number of days before password change */
@@ -149,6 +150,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"), usageout);
 	(void) fputs (_("  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
+	(void) fputs (_("  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"), usageout);
 	(void) fputs (_("  -I, --inactive INACTIVE       set password inactive after expiration\n"
 	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
@@ -262,12 +264,20 @@ static void print_date (time_t date)
 #ifdef HAVE_STRFTIME
 	struct tm *tp;
 	char buf[80];
+	char format[80];
+
+	if( iflg ) {
+		(void) snprintf (format, 80, "%%Y-%%m-%%d");
+	}
+	else {
+		(void) snprintf (format, 80, "%%b %%d, %%Y");
+	}
 
 	tp = gmtime (&date);
 	if (NULL == tp) {
 		(void) printf ("time_t: %lu\n", (unsigned long)date);
 	} else {
-		(void) strftime (buf, sizeof buf, "%b %d, %Y", tp);
+		(void) strftime (buf, sizeof buf, format, tp);
 		(void) puts (buf);
 	}
 #else
@@ -395,10 +405,11 @@ static void process_flags (int argc, char **argv)
 		{"maxdays",    required_argument, NULL, 'M'},
 		{"root",       required_argument, NULL, 'R'},
 		{"warndays",   required_argument, NULL, 'W'},
+		{"iso8601",    no_argument,       NULL, 'i'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "d:E:hI:lm:M:R:W:",
+	while ((c = getopt_long (argc, argv, "d:E:hiI:lm:M:R:W:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'd':
@@ -424,6 +435,9 @@ static void process_flags (int argc, char **argv)
 		case 'h':
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
+		case 'i':
+			iflg = true;
+			break;
 		case 'I':
 			Iflg = true;
 			if (   (getlong (optarg, &inactdays) == 0)
