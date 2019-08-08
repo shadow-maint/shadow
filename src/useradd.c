@@ -2449,9 +2449,9 @@ int main (int argc, char **argv)
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
 		} else {
 			fprintf (stderr,
-			         _("%s: warning: the home directory already exists.\n"
-			           "Not copying any file from skel directory into it.\n"),
-			         Prog);
+			         _("%s: warning: the home directory %s already exists.\n"
+			           "%s: Not copying any file from skel directory into it.\n"),
+			         Prog, user_home, Prog);
 		}
 
 	}
