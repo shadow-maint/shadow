@@ -90,6 +90,11 @@ struct passwd *sgetpwent (const char *buf)
 		}
 	}
 
+	/* something at the end, columns over shot */
+	if( cp != NULL ) {
+		return( NULL );
+	}
+
 	/*
 	 * There must be exactly NFIELDS colon separated fields or
 	 * the entry is invalid.  Also, the UID and GID must be non-blank.
