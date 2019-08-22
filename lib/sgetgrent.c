@@ -136,7 +136,7 @@ struct group *sgetgrent (const char *buf)
 			cp++;
 		}
 	}
-	if (i < (NFIELDS - 1) || *grpfields[2] == '\0') {
+	if (i < (NFIELDS - 1) || *grpfields[2] == '\0' || cp != NULL) {
 		return (struct group *) 0;
 	}
 	grent.gr_name = grpfields[0];
