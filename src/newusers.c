@@ -117,6 +117,8 @@ static void check_perms (void);
 static void open_files (void);
 static void close_files (void);
 
+extern int allow_bad_names;
+
 /*
  * usage - display usage message and exit
  */
@@ -128,6 +130,7 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
+	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
 #ifndef USE_PAM
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
@@ -580,6 +583,7 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
+		{"badnames",     no_argument,       NULL, 'b'},
 #ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
 #endif				/* !USE_PAM */
@@ -597,15 +601,18 @@ static void process_flags (int argc, char **argv)
 	while ((c = getopt_long (argc, argv,
 #ifndef USE_PAM
 #ifdef USE_SHA_CRYPT
-	                         "c:hrs:",
+	                         "c:bhrs:",
 #else				/* !USE_SHA_CRYPT */
-	                         "c:hr",
+	                         "c:bhr",
 #endif				/* !USE_SHA_CRYPT */
 #else				/* USE_PAM */
-	                         "hr",
+	                         "bhr",
 #endif
 	                         long_options, NULL)) != -1) {
 		switch (c) {
+		case 'b':
+			allow_bad_names = true;
+			break;
 #ifndef USE_PAM
 		case 'c':
 			crypt_method = optarg;

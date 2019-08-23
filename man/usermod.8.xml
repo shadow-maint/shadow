@@ -110,6 +110,26 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-b</option>, <option>--badnames</option>
+	</term>
+	<listitem>
+	  <para>
+	    Allow names that do not conform to standards.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-b</option>, <option>--badnames</option>
+	</term>
+	<listitem>
+	  <para>
+	    Allow names that do not conform to standards.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</replaceable>
 	</term>
 	<listitem>

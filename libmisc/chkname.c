@@ -46,11 +46,18 @@
 #include "defines.h"
 #include "chkname.h"
 
+int allow_bad_names = false;
+
 static bool is_valid_name (const char *name)
 {
+	if (allow_bad_names) {
+		return true;
+	}
+
 	/*
 	 * User/group names must match [a-z_][a-z0-9_-]*[$]
 	 */
+
 	if (('\0' == *name) ||
 	    !((('a' <= *name) && ('z' >= *name)) || ('_' == *name))) {
 		return false;

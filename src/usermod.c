@@ -206,6 +206,8 @@ static void update_faillog (void);
 static void move_mailbox (void);
 #endif
 
+extern int allow_bad_names;
+
 static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date)
 {
@@ -408,6 +410,7 @@ static /*@noreturn@*/void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
+	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
 	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
@@ -991,6 +994,7 @@ static void process_flags (int argc, char **argv)
 		int c;
 		static struct option long_options[] = {
 			{"append",       no_argument,       NULL, 'a'},
+			{"badnames",     no_argument,       NULL, 'b'},
 			{"comment",      required_argument, NULL, 'c'},
 			{"home",         required_argument, NULL, 'd'},
 			{"expiredate",   required_argument, NULL, 'e'},
@@ -1020,7 +1024,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
-		                         "ac:d:e:f:g:G:hl:Lmop:R:s:u:UP:"
+		                         "abc:d:e:f:g:G:hl:Lmop:R:s:u:UP:"
 #ifdef ENABLE_SUBIDS
 		                         "v:w:V:W:"
 #endif				/* ENABLE_SUBIDS */
@@ -1031,6 +1035,9 @@ static void process_flags (int argc, char **argv)
 			switch (c) {
 			case 'a':
 				aflg = true;
+				break;
+			case 'b':
+				allow_bad_names = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {

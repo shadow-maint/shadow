@@ -95,6 +95,8 @@ static void close_files (bool changed);
 static void check_pw_file (int *errors, bool *changed);
 static void check_spw_file (int *errors, bool *changed);
 
+extern int allow_bad_names;
+
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
@@ -148,6 +150,7 @@ static /*@noreturn@*/void usage (int status)
 		                  "Options:\n"),
 		                Prog);
 	}
+	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
 	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
@@ -172,6 +175,7 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
+		{"badnames",  no_argument,       NULL, 'b'},
 		{"help",      no_argument,       NULL, 'h'},
 		{"quiet",     no_argument,       NULL, 'q'},
 		{"read-only", no_argument,       NULL, 'r'},
@@ -183,9 +187,12 @@ static void process_flags (int argc, char **argv)
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((c = getopt_long (argc, argv, "ehqrR:s",
+	while ((c = getopt_long (argc, argv, "behqrR:s",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
+		case 'b':
+			allow_bad_names = true;
+			break;
 		case 'h':
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
@@ -481,6 +488,7 @@ static void check_pw_file (int *errors, bool *changed)
 		/*
 		 * Check for invalid usernames.  --marekm
 		 */
+
 		if (!is_valid_user_name (pwd->pw_name)) {
 			printf (_("invalid user name '%s'\n"), pwd->pw_name);
 			*errors += 1;
