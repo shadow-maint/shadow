@@ -382,6 +382,8 @@ static void check_pw_file (int *errors, bool *changed)
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
 	struct spwd *spw;
+	uid_t min_sys_id = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
+	uid_t max_sys_id = (uid_t) getdef_ulong ("SYS_UID_MAX", 999UL);
 
 	/*
 	 * Loop through the entire password file.
@@ -510,15 +512,20 @@ static void check_pw_file (int *errors, bool *changed)
 		}
 
 		/*
-		 * Make sure the home directory exists
+		 * If uid is system and has a home directory, then check
 		 */
-		if (!quiet && (access (pwd->pw_dir, F_OK) != 0)) {
+		if (!(pwd->pw_uid >= min_sys_id && pwd->pw_uid <= max_sys_id && pwd->pw_dir && pwd->pw_dir[0])) {
 			/*
-			 * Home directory doesn't exist, give a warning
+			 * Make sure the home directory exists
 			 */
-			printf (_("user '%s': directory '%s' does not exist\n"),
-			        pwd->pw_name, pwd->pw_dir);
-			*errors += 1;
+			if (!quiet && (access (pwd->pw_dir, F_OK) != 0)) {
+				/*
+				 * Home directory doesn't exist, give a warning
+				 */
+				printf (_("user '%s': directory '%s' does not exist\n"),
+						pwd->pw_name, pwd->pw_dir);
+				*errors += 1;
+			}
 		}
 
 		/*
