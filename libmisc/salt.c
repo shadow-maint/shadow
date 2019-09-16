@@ -22,10 +22,16 @@
 /* local function prototypes */
 static void seedRNG (void);
 static /*@observer@*/const char *gensalt (size_t salt_size);
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 static long shadow_random (long min, long max);
+#endif /* USE_SHA_CRYPT || USE_BCRYPT */
+#ifdef USE_SHA_CRYPT
 static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds);
 #endif /* USE_SHA_CRYPT */
+#ifdef USE_BCRYPT
+static /*@observer@*/const char *gensalt_bcrypt (void);
+static /*@observer@*/const char *BCRYPT_salt_rounds (/*@null@*/int *prefered_rounds);
+#endif /* USE_BCRYPT */
 
 #ifndef HAVE_L64A
 static /*@observer@*/char *l64a(long value)
@@ -79,8 +85,16 @@ static void seedRNG (void)
  * Add the salt prefix.
  */
 #define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
+#ifdef USE_BCRYPT
+/* 
+ * Using the Prefix $2a$ to enable an anti-collision safety measure in musl libc.
+ * Negatively affects a subset of passwords containing the '\xff' character,
+ * which is not valid UTF-8 (so "unlikely to cause much annoyance").
+ */
+#define BCRYPTMAGNUM(array)	(array)[0]=(array)[3]='$',(array)[1]='2',(array)[2]='a',(array)[4]='\0'
+#endif /* USE_BCRYPT */
 
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 /* It is not clear what is the maximum value of random().
  * We assume 2^31-1.*/
 #define RANDOM_MAX 0x7FFFFFFF
@@ -105,14 +119,15 @@ static long shadow_random (long min, long max)
 	}
 	return ret;
 }
+#endif /* USE_SHA_CRYPT || USE_BCRYPT */
 
+#ifdef USE_SHA_CRYPT
 /* Default number of rounds if not explicitly specified.  */
 #define ROUNDS_DEFAULT 5000
 /* Minimum number of rounds.  */
 #define ROUNDS_MIN 1000
 /* Maximum number of rounds.  */
 #define ROUNDS_MAX 999999999
-
 /*
  * Return a salt prefix specifying the rounds number for the SHA crypt methods.
  */
@@ -164,6 +179,89 @@ static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds
 	return rounds_prefix;
 }
 #endif /* USE_SHA_CRYPT */
+
+#ifdef USE_BCRYPT
+/* Default number of rounds if not explicitly specified.  */
+#define B_ROUNDS_DEFAULT 13
+/* Minimum number of rounds.  */
+#define B_ROUNDS_MIN 4
+/* Maximum number of rounds.  */
+#define B_ROUNDS_MAX 31
+/*
+ * Return a salt prefix specifying the rounds number for the BCRYPT method.
+ */
+static /*@observer@*/const char *BCRYPT_salt_rounds (/*@null@*/int *prefered_rounds)
+{
+	static char rounds_prefix[4]; /* Max size: 31$ */
+	long rounds;
+
+	if (NULL == prefered_rounds) {
+		long min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
+		long max_rounds = getdef_long ("BCRYPT_MAX_ROUNDS", -1);
+
+		if (((-1 == min_rounds) && (-1 == max_rounds)) || (0 == *prefered_rounds)) {
+			rounds = B_ROUNDS_DEFAULT;
+		}
+		else {
+			if (-1 == min_rounds) {
+				min_rounds = max_rounds;
+			}
+	
+			if (-1 == max_rounds) {
+				max_rounds = min_rounds;
+			}
+	
+			if (min_rounds > max_rounds) {
+				max_rounds = min_rounds;
+			}
+	
+			rounds = shadow_random (min_rounds, max_rounds);
+		}
+	} else {
+		rounds = *prefered_rounds;
+	}
+
+	/* 
+	 * Sanity checks. 
+	 * Use 19 as an upper bound for now,
+	 * because musl doesn't allow rounds >= 20.
+	 */
+	if (rounds < B_ROUNDS_MIN) {
+		rounds = B_ROUNDS_MIN;
+	}
+
+	if (rounds > 19) {
+		/* rounds = B_ROUNDS_MAX; */
+		rounds = 19;
+	}
+
+	(void) snprintf (rounds_prefix, sizeof rounds_prefix,
+	                 "%2.2ld$", rounds);
+
+	return rounds_prefix;
+}
+
+#define BCRYPT_SALT_SIZE 22
+/*
+ *  Generate a 22 character salt string for bcrypt.
+ */
+static /*@observer@*/const char *gensalt_bcrypt (void)
+{
+	static char salt[32];
+
+	salt[0] = '\0';
+
+	seedRNG ();
+	strcat (salt, l64a (random()));
+	do {
+		strcat (salt, l64a (random()));
+	} while (strlen (salt) < BCRYPT_SALT_SIZE);
+
+	salt[BCRYPT_SALT_SIZE] = '\0';
+
+	return salt;
+}
+#endif /* USE_BCRYPT */
 
 /*
  *  Generate salt of size salt_size.
@@ -230,6 +328,11 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	if (0 == strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
+#ifdef USE_BCRYPT
+	} else if (0 == strcmp (method, "BCRYPT")) {
+		BCRYPTMAGNUM(result);
+		strcat(result, BCRYPT_salt_rounds((int *)arg));
+#endif /* USE_BCRYPT */
 #ifdef USE_SHA_CRYPT
 	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
@@ -252,8 +355,18 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	 * Concatenate a pseudo random salt.
 	 */
 	assert (sizeof (result) > strlen (result) + salt_len);
-	strncat (result, gensalt (salt_len),
-		 sizeof (result) - strlen (result) - 1);
+#ifdef USE_BCRYPT
+	if (0 == strcmp (method, "BCRYPT")) {
+		strncat (result, gensalt_bcrypt (),
+				 sizeof (result) - strlen (result) - 1);
+		return result;
+	} else {
+#endif /* USE_BCRYPT */	
+		strncat (result, gensalt (salt_len),
+			 sizeof (result) - strlen (result) - 1);
+#ifdef USE_BCRYPT
+	}
+#endif /* USE_BCRYPT */	
 
 	return result;
 }

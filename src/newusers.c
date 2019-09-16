@@ -80,10 +80,15 @@ static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
 static /*@null@*//*@observer@*/char *crypt_method = NULL;
 #define cflg (NULL != crypt_method)
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 static bool sflg = false;
+#endif
+#ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
 #endif				/* USE_SHA_CRYPT */
+#ifdef USE_BCRYPT
+static long bcrypt_rounds = 13;
+#endif				/* USE_BCRYPT */
 #endif				/* !USE_PAM */
 
 static bool is_shadow;
@@ -134,22 +139,26 @@ static void usage (int status)
 #ifndef USE_PAM
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
-#ifndef USE_SHA_CRYPT
+#if !defined(USE_SHA_CRYPT) && !defined(USE_BCRYPT)
 	                "NONE DES MD5"
-#else				/* USE_SHA_CRYPT */
+#elif defined(USE_SHA_CRYPT) && defined(USE_BCRYPT)
+	                "NONE DES MD5 SHA256 SHA512 BCRYPT"
+#elif defined(USE_SHA_CRYPT)
 	                "NONE DES MD5 SHA256 SHA512"
-#endif				/* USE_SHA_CRYPT */
+#else
+	                "NONE DES MD5 BCRYPT"
+#endif
 	               );
 #endif				/* !USE_PAM */
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --system                  create system accounts\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 #ifndef USE_PAM
-#ifdef USE_SHA_CRYPT
-	(void) fputs (_("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
+	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
 	                "                                crypt algorithms\n"),
 	              usageout);
-#endif				/* USE_SHA_CRYPT */
+#endif				/* USE_SHA_CRYPT || USE_BCRYPT */
 #endif				/* !USE_PAM */
 	(void) fputs ("\n", usageout);
 
@@ -423,15 +432,29 @@ static int update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
 	char *cp;
-	if (crypt_method != NULL) {
-#ifdef USE_SHA_CRYPT
+	if (NULL != crypt_method) {
+#if defined(USE_SHA_CRYPT) && defined(USE_BCRYPT)
+		if (sflg) {
+			if (   (0 == strcmp (crypt_method, "SHA256"))
+				|| (0 == strcmp (crypt_method, "SHA512"))) {
+				crypt_arg = &sha_rounds;
+			}
+			else if (0 == strcmp (crypt_method, "BCRYPT")) {
+				crypt_arg = &bcrypt_rounds;
+			}
+		}
+#elif defined(USE_SHA_CRYPT)
 		if (sflg) {
 			crypt_arg = &sha_rounds;
+		}
+#elif defined(USE_BCRYPT)
+		if (sflg) {
+			crypt_arg = &bcrypt_rounds;
 		}
 #endif
 	}
 
-	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
+	if ((NULL != crypt_method) && (0 == strcmp(crypt_method, "NONE"))) {
 		pwd->pw_passwd = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
@@ -460,12 +483,26 @@ static int add_passwd (struct passwd *pwd, const char *password)
 
 #ifndef USE_PAM
 	void *crypt_arg = NULL;
-	if (crypt_method != NULL) {
-#ifdef USE_SHA_CRYPT
+	if (NULL != crypt_method) {
+#if defined(USE_SHA_CRYPT) && defined(USE_BCRYPT)
+		if (sflg) {
+			if (   (0 == strcmp (crypt_method, "SHA256"))
+				|| (0 == strcmp (crypt_method, "SHA512"))) {
+				crypt_arg = &sha_rounds;
+			}
+			else if (0 == strcmp (crypt_method, "BCRYPT")) {
+				crypt_arg = &bcrypt_rounds;
+			}
+		}
+#elif defined(USE_SHA_CRYPT)
 		if (sflg) {
 			crypt_arg = &sha_rounds;
 		}
-#endif				/* USE_SHA_CRYPT */
+#elif defined(USE_BCRYPT)
+		if (sflg) {
+			crypt_arg = &bcrypt_rounds;
+		}
+#endif
 	}
 
 	/*
@@ -591,20 +628,20 @@ static void process_flags (int argc, char **argv)
 		{"system",       no_argument,       NULL, 'r'},
 		{"root",         required_argument, NULL, 'R'},
 #ifndef USE_PAM
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 		{"sha-rounds",   required_argument, NULL, 's'},
-#endif				/* USE_SHA_CRYPT */
+#endif				/* USE_SHA_CRYPT || USE_BCRYPT */
 #endif				/* !USE_PAM */
 		{NULL, 0, NULL, '\0'}
 	};
 
 	while ((c = getopt_long (argc, argv,
 #ifndef USE_PAM
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 	                         "c:bhrs:",
-#else				/* !USE_SHA_CRYPT */
+#else				/* !USE_SHA_CRYPT && !USE_BCRYPT */
 	                         "c:bhr",
-#endif				/* !USE_SHA_CRYPT */
+#endif				/* USE_SHA_CRYPT || USE_BCRYPT */
 #else				/* USE_PAM */
 	                         "bhr",
 #endif
@@ -627,17 +664,40 @@ static void process_flags (int argc, char **argv)
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 #ifndef USE_PAM
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) && defined(USE_BCRYPT)
 		case 's':
 			sflg = true;
-			if (getlong(optarg, &sha_rounds) == 0) {
+			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
+			       && (0 == getlong(optarg, &sha_rounds))) 
+			   || (   (0 == strcmp (crypt_method, "BCRYPT"))
+			       && (0 == getlong(optarg, &bcrypt_rounds)))) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (EXIT_FAILURE);
 			}
 			break;
-#endif				/* USE_SHA_CRYPT */
+#elif defined(USE_SHA_CRYPT)
+		case 's':
+			sflg = true;
+			if (0 == getlong(optarg, &sha_rounds)) { 
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage (EXIT_FAILURE);
+			}
+			break;
+#elif defined(USE_BCRYPT)
+		case 's':
+			sflg = true;
+			if (0 == getlong(optarg, &bcrypt_rounds)) { 
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage (EXIT_FAILURE);
+			}
+			break;
+#endif
 #endif				/* !USE_PAM */
 		default:
 			usage (EXIT_FAILURE);
@@ -671,14 +731,14 @@ static void process_flags (int argc, char **argv)
 static void check_flags (void)
 {
 #ifndef USE_PAM
-#ifdef USE_SHA_CRYPT
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 	if (sflg && !cflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage (EXIT_FAILURE);
 	}
-#endif				/* USE_SHA_CRYPT */
+#endif
 
 	if (cflg) {
 		if (   (0 != strcmp (crypt_method, "DES"))
@@ -688,6 +748,9 @@ static void check_flags (void)
 		    && (0 != strcmp (crypt_method, "SHA256"))
 		    && (0 != strcmp (crypt_method, "SHA512"))
 #endif				/* USE_SHA_CRYPT */
+#ifdef USE_BCRYPT
+		    && (0 != strcmp (crypt_method, "BCRYPT"))
+#endif				/* USE_BCRYPT */
 		    ) {
 			fprintf (stderr,
 			         _("%s: unsupported crypt method: %s\n"),

@@ -65,6 +65,9 @@
 			case '1':
 				method = "MD5";
 				break;
+			case '2':
+				method = "BCRYPT";
+				break;
 			case '5':
 				method = "SHA256";
 				break;
