@@ -6,6 +6,10 @@ DEFS =
 noinst_LTLIBRARIES = libshadow.la
 
 libshadow_la_LDFLAGS = -version-info 0:0:0
+libshadow_la_CPPFLAGS = $(ECONF_CPPFLAGS)
+if HAVE_VENDORDIR
+libshadow_la_CPPFLAGS += -DVENDORDIR=\"$(VENDORDIR)\"
+endif
 
 libshadow_la_SOURCES = \
 	commonio.c \

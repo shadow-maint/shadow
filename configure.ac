@@ -247,7 +247,7 @@ AC_ARG_ENABLE(subordinate-ids,
 	[enable_subids="maybe"]
 )
 
-AC_ARG_WITH(audit, 
+AC_ARG_WITH(audit,
 	[AC_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
 	[with_audit=$withval], [with_audit=maybe])
 AC_ARG_WITH(libpam,
@@ -320,6 +320,17 @@ dnl needed (Linux glibc, Irix), but still link it if needed (Solaris).
 AC_SEARCH_LIBS(inet_ntoa, inet)
 AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(gethostbyname, nsl)
+
+AC_CHECK_LIB([econf],[econf_readDirs],[LIBECONF="-leconf"],[LIBECONF=""])
+if test -n "$LIBECONF"; then
+	ECONF_CPPFLAGS="-DUSE_ECONF=1"
+	AC_ARG_ENABLE([vendordir],
+		AS_HELP_STRING([--enable-vendordir=DIR], [Directory for distribution provided configuration files]),,[])
+fi
+AC_SUBST(ECONF_CPPFLAGS)
+AC_SUBST(LIBECONF)
+AC_SUBST([VENDORDIR], [$enable_vendordir])
+AM_CONDITIONAL([HAVE_VENDORDIR], [test "x$enable_vendordir" != x])
 
 if test "$enable_shadowgrp" = "yes"; then
 	AC_DEFINE(SHADOWGRP, 1, [Define to support the shadow group file.])
