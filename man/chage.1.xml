@@ -132,6 +132,12 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><option>-i</option>, <option>--iso8601</option></term>
+	<listitem>
+	  <para>When printing dates, use YYYY-MM-DD format.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>
 	  <option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
 	</term>

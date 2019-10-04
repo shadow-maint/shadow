@@ -32,6 +32,15 @@ LOG_OK_LOGINS		no
 LASTLOG_ENAB		yes
 
 #
+# Limit the highest user ID number for which the lastlog entries should
+# be updated.
+#
+# No LASTLOG_UID_MAX means that there is no user ID limit for writing
+# lastlog entries.
+#
+#LASTLOG_UID_MAX
+
+#
 # Enable checking and display of mailbox status upon login.
 #
 # Disable if the shell startup files already check for mail
@@ -332,8 +341,8 @@ CHFN_RESTRICT		rwh
 # If only one of the MIN or MAX values is set, then this value will be used.
 # If MIN > MAX, the highest value will be used.
 #
-# SHA_CRYPT_MIN_ROUNDS 5000
-# SHA_CRYPT_MAX_ROUNDS 5000
+#SHA_CRYPT_MIN_ROUNDS 5000
+#SHA_CRYPT_MAX_ROUNDS 5000
 
 #
 # List of groups to add to the user's supplementary group set
