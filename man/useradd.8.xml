@@ -128,6 +128,16 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
+	  <option>--badname</option>&nbsp;
+	</term>
+	<listitem>
+	  <para>
+        Allow names that do not conform to standards.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-b</option>, <option>--base-dir</option>&nbsp;<replaceable>BASE_DIR</replaceable>
 	</term>
 	<listitem>

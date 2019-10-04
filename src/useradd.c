@@ -148,6 +148,8 @@ static char **user_groups;	/* NULL-terminated list */
 static long sys_ngroups;
 static bool do_grp_update = false;	/* group files need to be updated */
 
+extern int allow_bad_names;
+
 static bool
     bflg = false,		/* new default root of home directory */
     cflg = false,		/* comment (GECOS) field for new account */
@@ -821,6 +823,7 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog, Prog, Prog);
+	(void) fputs (_("      --badnames                do not check for bad names\n"), usageout);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 	                "                                new account\n"), usageout);
 #ifdef WITH_BTRFS
@@ -1109,6 +1112,7 @@ static void process_flags (int argc, char **argv)
 #ifdef WITH_BTRFS
 			{"btrfs-subvolume-home", no_argument, NULL, 200},
 #endif
+			{"badnames",       no_argument,       NULL, 201},
 			{"comment",        required_argument, NULL, 'c'},
 			{"home-dir",       required_argument, NULL, 'd'},
 			{"defaults",       no_argument,       NULL, 'D'},
@@ -1157,6 +1161,9 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 200:
 				subvolflg = true;
+				break;
+			case 201:
+				allow_bad_names = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {

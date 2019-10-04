@@ -266,6 +266,18 @@
     <para>
       The options which apply to the <command>newusers</command> command are:
     </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>--badname</option>&nbsp;
+	</term>
+	<listitem>
+	  <para>
+        Allow names that do not conform to standards.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
     <variablelist remap='IP' condition="no_pam">
       <varlistentry>
 	<term><option>-c</option>, <option>--crypt-method</option></term>
