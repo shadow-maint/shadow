@@ -40,6 +40,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <errno.h>
+#ifdef USE_ECONF
+#include <libeconf.h>
+#endif
 #include "getdef.h"
 /*
  * A configuration item definition.
@@ -152,11 +155,20 @@ static struct itemdef knowndef_table[] = {
 	{NULL, NULL}
 };
 
+#ifdef USE_ECONF
+#ifdef VENDORDIR
+static const char* vendordir = VENDORDIR;
+#else
+static const char* vendordir = NULL;
+#endif
+static const char* sysconfdir = "/etc";
+#else
 #ifndef LOGINDEFS
 #define LOGINDEFS "/etc/login.defs"
 #endif
 
 static const char* def_fname = LOGINDEFS;	/* login config defs file       */
+#endif
 static bool def_loaded = false;		/* are defs already loaded?     */
 
 /* local function prototypes */
@@ -433,7 +445,27 @@ out:
 
 void setdef_config_file (const char* file)
 {
+#ifdef USE_ECONF
+	size_t len;
+	char* cp;
+
+	len = strlen(file) + strlen(sysconfdir) + 2;
+	cp = malloc(len);
+	if (cp == NULL)
+		exit (13);
+	snprintf(cp, len, "%s/%s", file, sysconfdir);
+	sysconfdir = cp;
+#ifdef VENDORDIR
+	len = strlen(file) + strlen(vendordir) + 2;
+	cp = malloc(len);
+	if (cp == NULL)
+		exit (13);
+	snprintf(cp, len, "%s/%s", file, vendordir);
+	vendordir = cp;
+#endif
+#else
 	def_fname = file;
+#endif
 }
 
 /*
@@ -444,9 +476,16 @@ void setdef_config_file (const char* file)
 
 static void def_load (void)
 {
+#ifdef USE_ECONF
+	econf_file *defs_file = NULL;
+	econf_err error;
+	char **keys;
+	size_t key_number;
+#else
 	int i;
 	FILE *fp;
 	char buf[1024], *name, *value, *s;
+#endif
 
 	/*
 	 * Set the initialized flag.
@@ -454,6 +493,42 @@ static void def_load (void)
 	 */
 	def_loaded = true;
 
+#ifdef USE_ECONF
+
+	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", " \t", "#");
+	if (error) {
+		if (error == ECONF_NOFILE)
+			return;
+
+		SYSLOG ((LOG_CRIT, "cannot open login definitions [%s]",
+			econf_errString(error)));
+		exit (EXIT_FAILURE);
+	}
+
+	if ((error = econf_getKeys(defs_file, NULL, &key_number, &keys))) {
+		SYSLOG ((LOG_CRIT, "cannot read login definitions [%s]",
+			econf_errString(error)));
+		exit (EXIT_FAILURE);
+	}
+
+	for (size_t i = 0; i < key_number; i++) {
+		char *value;
+
+		econf_getStringValue(defs_file, NULL, keys[i], &value);
+
+		/*
+		 * Store the value in def_table.
+		 *
+		 * Ignore failures to load the login.defs file.
+		 * The error was already reported to the user and to
+		 * syslog. The tools will just use their default values.
+		 */
+		(void)putdef_str (keys[i], value);
+	}
+
+	econf_free (keys);
+	econf_free (defs_file);
+#else
 	/*
 	 * Open the configuration definitions file.
 	 */
@@ -517,6 +592,7 @@ static void def_load (void)
 	}
 
 	(void) fclose (fp);
+#endif
 }
 
 

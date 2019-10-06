@@ -96,7 +96,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		}
 	}
 
-	
+
 
 	if (prefix != NULL) {
 		if ( prefix[0] == '\0' || !strcmp(prefix, "/"))
@@ -113,7 +113,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		group_db_file = xmalloc(len);
 		snprintf(group_db_file, len, "%s/%s", prefix, GROUP_FILE);
 		gr_setdbname(group_db_file);
-	
+
 #ifdef  SHADOWGRP
 		len = strlen(prefix) + strlen(SGROUP_FILE) + 2;
 		sgroup_db_file = xmalloc(len);
@@ -128,7 +128,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		spw_db_file = xmalloc(len);
 		snprintf(spw_db_file, len, "%s/%s", prefix, SHADOW_FILE);
 		spw_setdbname(spw_db_file);
-		
+
 #ifdef ENABLE_SUBIDS
 		len = strlen(prefix) + strlen("/etc/subuid") + 2;
 		suid_db_file = xmalloc(len);
@@ -141,11 +141,15 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		sub_gid_setdbname(sgid_db_file);
 #endif
 
+#ifdef USE_ECONF
+		setdef_config_file(prefix);
+#else
 		len = strlen(prefix) + strlen("/etc/login.defs") + 2;
 		def_conf_file = xmalloc(len);
 		snprintf(def_conf_file, len, "%s/%s", prefix, "/etc/login.defs");
 		setdef_config_file(def_conf_file);
-	}	
+#endif
+	}
 
 	if (prefix == NULL)
 		return "";
@@ -169,7 +173,7 @@ extern struct group *prefix_getgrnam(const char *name)
 		fclose(fg);
 		return grp;
 	}
-	
+
 	return getgrnam(name);
 }
 
@@ -262,7 +266,7 @@ extern void prefix_setpwent()
 	}
 	if (fp_pwent)
 		fclose (fp_pwent);
-	
+
 	fp_pwent = fopen(passwd_db_file, "rt");
 	if(!fp_pwent)
 		return;
@@ -293,7 +297,7 @@ extern void prefix_setgrent()
 	}
 	if (fp_grent)
 		fclose (fp_grent);
-	
+
 	fp_grent = fopen(group_db_file, "rt");
 	if(!fp_grent)
 		return;
