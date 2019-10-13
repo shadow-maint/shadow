@@ -97,7 +97,9 @@ static char *user_home;
 
 static bool fflg = false;
 static bool rflg = false;
+#ifdef WITH_SELINUX
 static bool Zflg = false;
+#endif
 static bool Rflg = false;
 
 static bool is_shadow_pwd;
