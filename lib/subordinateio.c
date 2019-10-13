@@ -152,11 +152,6 @@ static struct commonio_ops subordinate_ops = {
 	NULL,			/* close_hook */
 };
 
-static /*@observer@*/ /*@null*/const struct subordinate_range *subordinate_next(struct commonio_db *db)
-{
-	return (const struct subordinate_range *)commonio_next (db);
-}
-
 /*
  * range_exists: Check whether @owner owns any ranges
  *
