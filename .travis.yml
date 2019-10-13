@@ -13,7 +13,7 @@ addons:
       - xsltproc
 
 script:
- - ./autogen.sh --without-selinux --disable-man
+ - ./autogen.sh --without-selinux
  - grep ENABLE_ config.status
  - make
  - make install
