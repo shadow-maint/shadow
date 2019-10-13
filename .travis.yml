@@ -16,5 +16,7 @@ script:
  - ./autogen.sh --without-selinux --disable-man
  - grep ENABLE_ config.status
  - make
+ - make install
+ - ./tests/run_all
 
 # vim:et:ts=2:sw=2
