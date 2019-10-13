@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 {
 	char proc_dir_name[32];
 	char *target_str;
-	pid_t target, parent;
+	pid_t target;
 	int proc_dir_fd;
 	int ranges;
 	struct map_range *mappings;
