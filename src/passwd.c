@@ -41,12 +41,6 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#include <selinux/flask.h>
-#include <selinux/av_permissions.h>
-#include <selinux/context.h>
-#endif				/* WITH_SELINUX */
 #include <time.h>
 #include "defines.h"
 #include "getdef.h"
@@ -149,11 +143,6 @@ static char *update_crypt_pw (char *);
 static void update_noshadow (void);
 
 static void update_shadow (void);
-#ifdef WITH_SELINUX
-static int check_selinux_access (const char *changed_user,
-                                 uid_t changed_uid,
-                                 access_vector_t requested_access);
-#endif				/* WITH_SELINUX */
 
 /*
  * usage - print command usage and exit
@@ -710,55 +699,6 @@ static void update_shadow (void)
 	spw_locked = false;
 }
 
-#ifdef WITH_SELINUX
-static int check_selinux_access (const char *changed_user,
-                                 uid_t changed_uid,
-                                 access_vector_t requested_access)
-{
-	int status = -1;
-	security_context_t user_context;
-	context_t c;
-	const char *user;
-
-	/* if in permissive mode then allow the operation */
-	if (security_getenforce() == 0) {
-		return 0;
-	}
-
-	/* get the context of the process which executed passwd */
-	if (getprevcon(&user_context) != 0) {
-		return -1;
-	}
-
-	/* get the "user" portion of the context (the part before the first
-	   colon) */
-	c = context_new(user_context);
-	user = context_user_get(c);
-
-	/* if changing a password for an account with UID==0 or for an account
-	   where the identity matches then return success */
-	if (changed_uid != 0 && strcmp(changed_user, user) == 0) {
-		status = 0;
-	} else {
-		struct av_decision avd;
-		int retval;
-		retval = security_compute_av(user_context,
-		                             user_context,
-		                             SECCLASS_PASSWD,
-		                             requested_access,
-		                             &avd);
-		if ((retval == 0) &&
-		    ((requested_access & avd.allowed) == requested_access)) {
-			status = 0;
-		}
-	}
-	context_free(c);
-	freecon(user_context);
-	return status;
-}
-
-#endif				/* WITH_SELINUX */
-
 /*
  * passwd - change a user's password file information
  *
@@ -1034,22 +974,13 @@ int main (int argc, char **argv)
 #ifdef WITH_SELINUX
 	/* only do this check when getuid()==0 because it's a pre-condition for
 	   changing a password without entering the old one */
-	if ((is_selinux_enabled() > 0) && (getuid() == 0) &&
-	    (check_selinux_access (name, pw->pw_uid, PASSWD__PASSWD) != 0)) {
-		security_context_t user_context = NULL;
-		const char *user = "Unknown user context";
-		if (getprevcon (&user_context) == 0) {
-			user = user_context; /* FIXME: use context_user_get? */
-		}
+	if (amroot && (check_selinux_permit ("passwd") != 0)) {
 		SYSLOG ((LOG_ALERT,
-		         "%s is not authorized to change the password of %s",
-		         user, name));
+		         "root is not authorized by SELinux to change the password of %s",
+		         name));
 		(void) fprintf(stderr,
-		               _("%s: %s is not authorized to change the password of %s\n"),
-		               Prog, user, name);
-		if (NULL != user_context) {
-			freecon (user_context);
-		}
+		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
+		               Prog, name);
 		exit (E_NOPERM);
 	}
 #endif				/* WITH_SELINUX */

@@ -336,6 +336,7 @@ extern /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const 
 #ifdef WITH_SELINUX
 extern int set_selinux_file_context (const char *dst_name);
 extern int reset_selinux_file_context (void);
+extern int check_selinux_permit (const char *perm_name);
 #endif
 
 /* semanage.c */

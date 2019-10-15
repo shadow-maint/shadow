@@ -40,10 +40,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <getopt.h>
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#include <selinux/av_permissions.h>
-#endif
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -379,8 +375,7 @@ static void check_perms (const struct passwd *pw)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
-	    && (is_selinux_enabled () > 0)
-	    && (selinux_check_passwd_access (PASSWD__CHFN) != 0)) {
+	    && (check_selinux_permit ("chfn") != 0)) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
 		exit (E_NOPERM);
