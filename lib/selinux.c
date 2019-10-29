@@ -34,6 +34,7 @@
 #include "defines.h"
 
 #include <selinux/selinux.h>
+#include <selinux/context.h>
 #include "prototypes.h"
 
 
@@ -96,6 +97,105 @@ int reset_selinux_file_context (void)
 		}
 	}
 	return 0;
+}
+
+/*
+ *  Log callback for libselinux internal error reporting.
+ */
+__attribute__((__format__ (printf, 2, 3)))
+static int selinux_log_cb (int type, const char *fmt, ...) {
+	va_list ap;
+	char *buf;
+	int r;
+#ifdef WITH_AUDIT
+	static int selinux_audit_fd = -2;
+#endif
+
+	va_start (ap, fmt);
+	r = vasprintf (&buf, fmt, ap);
+	va_end (ap);
+
+	if (r < 0) {
+		return 0;
+	}
+
+#ifdef WITH_AUDIT
+	if (-2 == selinux_audit_fd) {
+		selinux_audit_fd = audit_open ();
+
+		if (-1 == selinux_audit_fd) {
+			/* You get these only when the kernel doesn't have
+			 * audit compiled in. */
+			if (   (errno != EINVAL)
+			    && (errno != EPROTONOSUPPORT)
+			    && (errno != EAFNOSUPPORT)) {
+
+			    (void) fputs (_("Cannot open audit interface.\n"),
+			              stderr);
+			    SYSLOG ((LOG_WARN, "Cannot open audit interface."));
+			}
+		}
+	}
+
+	if (-1 != selinux_audit_fd) {
+		if (SELINUX_AVC == type) {
+			if (audit_log_user_avc_message (selinux_audit_fd,
+			    AUDIT_USER_AVC, buf, NULL, NULL,
+			    NULL, 0) > 0) {
+				goto skip_syslog;
+			}
+		} else if (SELINUX_ERROR == type) {
+			if (audit_log_user_avc_message (selinux_audit_fd,
+			    AUDIT_USER_SELINUX_ERR, buf, NULL, NULL,
+			    NULL, 0) > 0) {
+				goto skip_syslog;
+			}
+		}
+	}
+#endif
+
+	SYSLOG ((LOG_WARN, "libselinux: %s", buf));
+
+skip_syslog:
+	free (buf);
+
+	return 0;
+}
+
+/*
+ * check_selinux_permit - Check whether SELinux grants the given
+ *                        operation
+ *
+ *   Parameter is the SELinux permission name, e.g. rootok
+ *
+ *   Returns 0 when permission is granted
+ *                  or something failed but running in
+ *                  permissive mode
+ */
+int check_selinux_permit (const char *perm_name)
+{
+	char *user_context_str;
+	int r;
+
+	if (0 == is_selinux_enabled ()) {
+		return 0;
+	}
+
+	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) selinux_log_cb);
+
+	if (getprevcon (&user_context_str) != 0) {
+		fprintf (stderr,
+		    _("%s: can not get previous SELinux process context: %s\n"),
+		    Prog, strerror (errno));
+		SYSLOG ((LOG_WARN,
+		    "can not get previous SELinux process context: %s",
+		    strerror (errno)));
+		return (security_getenforce () != 0);
+	}
+
+	r = selinux_check_access (user_context_str, user_context_str, "passwd", perm_name, NULL);
+	freecon (user_context_str);
+	return r;
 }
 
 #else				/* !WITH_SELINUX */

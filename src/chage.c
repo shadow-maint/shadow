@@ -48,10 +48,6 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#include <selinux/av_permissions.h>
-#endif
 #include "prototypes.h"
 #include "defines.h"
 #include "pwio.h"
@@ -832,8 +828,8 @@ int main (int argc, char **argv)
 	rgid = getgid ();
 	amroot = (ruid == 0);
 #ifdef WITH_SELINUX
-	if (amroot && (is_selinux_enabled () > 0)) {
-		amroot = (selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
+	if (amroot) {
+		amroot = (check_selinux_permit ("rootok") == 0);
 	}
 #endif
 
