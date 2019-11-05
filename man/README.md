@@ -7,4 +7,4 @@ pre-built ones might not fit your version of shadow.  To build them yourself use
 - xsltproc
 - docbook 4
 - docbook stylesheets
-- xml2po
+- itstool

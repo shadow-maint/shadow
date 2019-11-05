@@ -5,8 +5,19 @@ config.xml: ../config.xml.in
 	$(MAKE) -C .. config.xml
 	cp ../config.xml $@
 
-%.xml: ../%.xml ../po/$(LANG).po
-	xml2po --expand-all-entities -l $(LANG) -p ../po/$(LANG).po -o $@ ../$@
+messages.mo: ../po/$(LANG).po
+	msgfmt ../po/$(LANG).po -o messages.mo
+
+login.defs.d:
+	ln -sf ../login.defs.d login.defs.d
+
+%.xml: ../%.xml messages.mo login.defs.d
+	if grep -q SHADOW-CONFIG-HERE $< ; then \
+	    sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $< > $@; \
+	else \
+	    sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $< > $@; \
+	fi
+	itstool -d -l $(LANG) -m messages.mo -o . $@
 	sed -i 's:\(^<refentry .*\)>:\1 lang="$(LANG)">:' $@
 
 include ../generate_mans.mak
@@ -16,4 +27,4 @@ $(man_MANS):
 	@echo you need to run configure with --enable-man to generate man pages
 endif
 
-CLEANFILES = .xml2po.mo $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST)) config.xml
+CLEANFILES = messages.mo login.defs.d $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST)) config.xml
