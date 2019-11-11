@@ -1094,6 +1094,7 @@ static void process_flags (int argc, char **argv)
 	const struct group *grp;
 	bool anyflag = false;
 	char *cp;
+	struct stat st;
 
 	{
 		/*
@@ -1310,7 +1311,10 @@ static void process_flags (int argc, char **argv)
 				if (   ( !VALID (optarg) )
 				    || (   ('\0' != optarg[0])
 				        && ('/'  != optarg[0])
-				        && ('*'  != optarg[0]) )) {
+				        && ('*'  != optarg[0]) )
+				    || (stat(optarg, &st) != 0)
+				    || (S_ISDIR(st.st_mode))
+				    || (access(optarg, X_OK != 0))) {
 					fprintf (stderr,
 					         _("%s: invalid shell '%s'\n"),
 					         Prog, optarg);
