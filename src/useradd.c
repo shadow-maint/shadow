@@ -1331,7 +1331,7 @@ static void process_flags (int argc, char **argv)
 				        && ('*'  != optarg[0]) )
 				    || (stat(optarg, &st) != 0)
 				    || (S_ISDIR(st.st_mode))
-				    || (access(optarg, X_OK != 0))) {
+				    || (access(optarg, X_OK) != 0)) {
 					fprintf (stderr,
 					         _("%s: invalid shell '%s'\n"),
 					         Prog, optarg);
