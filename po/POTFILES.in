@@ -45,10 +45,13 @@ libmisc/entry.c
 libmisc/env.c
 libmisc/failure.c
 libmisc/find_new_gid.c
+libmisc/find_new_sub_gids.c
+libmisc/find_new_sub_uids.c
 libmisc/find_new_uid.c
 libmisc/getgr_nam_gid.c
 libmisc/getrange.c
 libmisc/hushed.c
+libmisc/idmapping.c
 libmisc/isexpired.c
 libmisc/limits.c
 libmisc/list.c
@@ -59,6 +62,7 @@ libmisc/motd.c
 libmisc/myname.c
 libmisc/obscure.c
 libmisc/pam_pass.c
+libmisc/pam_pass_non_interractive.c
 libmisc/pwd2spwd.c
 libmisc/pwdcheck.c
 libmisc/pwd_init.c
@@ -75,6 +79,7 @@ libmisc/sulog.c
 libmisc/ttytype.c
 libmisc/tz.c
 libmisc/ulimit.c
+libmisc/user_busy.c
 libmisc/utmp.c
 libmisc/valid.c
 libmisc/xgetXXbyYY.c
@@ -101,7 +106,9 @@ src/lastlog.c
 src/login.c
 src/login_nopam.c
 src/logoutd.c
+src/newgidmap.c
 src/newgrp.c
+src/newuidmap.c
 src/newusers.c
 src/passwd.c
 src/pwck.c
