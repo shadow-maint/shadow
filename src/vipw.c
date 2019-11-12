@@ -207,6 +207,8 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	struct stat st1, st2;
 	int status;
 	FILE *f;
+	pid_t orig_pgrp, editor_pgrp = -1;
+	sigset_t mask, omask;
 	/* FIXME: the following should have variable sizes */
 	char filebackup[1024], fileedit[1024];
 	char *to_rename;
@@ -294,6 +296,8 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		editor = DEFAULT_EDITOR;
 	}
 
+	orig_pgrp = tcgetpgrp(STDIN_FILENO);
+
 	pid = fork ();
 	if (-1 == pid) {
 		vipwexit ("fork", 1, 1);
@@ -302,6 +306,14 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
 		int status;
+
+		/* Wait for parent to make us the foreground pgrp. */
+		if (orig_pgrp != -1) {
+			pid = getpid();
+			setpgid(0, 0);
+			while (tcgetpgrp(STDIN_FILENO) != pid)
+				continue;
+		}
 
 		buf = (char *) malloc (strlen (editor) + strlen (fileedit) + 2);
 		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
@@ -325,18 +337,49 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		}
 	}
 
+	/* Run child in a new pgrp and make it the foreground pgrp. */
+	if (orig_pgrp != -1) {
+		setpgid(pid, pid);
+		tcsetpgrp(STDIN_FILENO, pid);
+
+		/* Avoid SIGTTOU when changing foreground pgrp below. */
+		sigemptyset(&mask);
+		sigaddset(&mask, SIGTTOU);
+		sigprocmask(SIG_BLOCK, &mask, &omask);
+	}
+
 	for (;;) {
 		pid = waitpid (pid, &status, WUNTRACED);
 		if ((pid != -1) && (WIFSTOPPED (status) != 0)) {
 			/* The child (editor) was suspended.
-			 * Suspend vipw. */
+			 * Restore terminal pgrp and suspend vipw. */
+			if (orig_pgrp != -1) {
+				editor_pgrp = tcgetpgrp(STDIN_FILENO);
+				if (editor_pgrp == -1) {
+					fprintf (stderr, "%s: %s: %s", Prog,
+						 "tcgetpgrp", strerror (errno));
+				}
+				if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
+					fprintf (stderr, "%s: %s: %s", Prog,
+						 "tcsetpgrp", strerror (errno));
+				}
+			}
 			kill (getpid (), SIGSTOP);
 			/* wake child when resumed */
-			kill (pid, SIGCONT);
+			if (editor_pgrp != -1) {
+				if (tcsetpgrp(STDIN_FILENO, editor_pgrp) == -1) {
+					fprintf (stderr, "%s: %s: %s", Prog,
+						 "tcsetpgrp", strerror (errno));
+				}
+			}
+			killpg (pid, SIGCONT);
 		} else {
 			break;
 		}
 	}
+
+	if (orig_pgrp != -1)
+		sigprocmask(SIG_SETMASK, &omask, NULL);
 
 	if (-1 == pid) {
 		vipwexit (editor, 1, 1);
