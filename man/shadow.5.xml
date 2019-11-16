@@ -96,18 +96,6 @@
 	<term><emphasis role="bold">encrypted password</emphasis></term>
 	<listitem>
 	  <para>
-	    Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
-	    <manvolnum>3</manvolnum></citerefentry> for details on how
-	    this string is interpreted.
-	  </para>
-	  <para>
-	    If the password field contains some string that is not a valid
-	    result of <citerefentry><refentrytitle>crypt</refentrytitle>
-	    <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
-	    the user will not be able to use a unix password to log in
-	    (but the user may log in the system by other means).
-	  </para>
-	  <para>
 	    This field may be empty, in which case no passwords are
 	    required to authenticate as the specified login name.
 	    However, some applications which read the
@@ -119,6 +107,18 @@
 	    that the password is locked.  The remaining characters on the
 	    line represent the password field before the password was
 	    locked.
+	  </para>
+	  <para>
+	    Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry> for details on how
+	    this string is interpreted.
+	  </para>
+	  <para>
+	    If the password field contains some string that is not a valid
+	    result of <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
+	    the user will not be able to use a unix password to log in
+	    (but the user may log in the system by other means).
 	  </para>
 	</listitem>
       </varlistentry>

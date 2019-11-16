@@ -98,24 +98,43 @@
     </itemizedlist>
 
     <para>
-      The encrypted password field may be blank, in which case no password
-      is required to authenticate as the specified login name. However,
-      some applications which read the <filename>/etc/passwd</filename> file
-      may decide not to permit <emphasis>any</emphasis> access at all if the
-      <emphasis>password</emphasis> field is blank. If the
-      <emphasis>password</emphasis> field is a lower-case <quote>x</quote>,
-      then the encrypted password is actually stored in the
+      If the <emphasis>password</emphasis> field is a lower-case
+      <quote>x</quote>, then the encrypted password is actually stored in the
       <citerefentry><refentrytitle>shadow</refentrytitle>
       <manvolnum>5</manvolnum></citerefentry> file instead; there
       <emphasis>must</emphasis> be a corresponding line in the
       <filename>/etc/shadow</filename> file, or else the user account is invalid. 
-      If the <emphasis>password</emphasis> field is any other string, then
-      it will be treated as an encrypted password, as specified by
-      <citerefentry><refentrytitle>crypt</refentrytitle>
-      <manvolnum>3</manvolnum></citerefentry>.
-
     </para>
 
+    <para>
+      The encrypted <emphasis>password</emphasis> field may be empty,
+      in which case no password is required to authenticate as the
+      specified login name. However, some applications which read the
+      <filename>/etc/passwd</filename> file may decide not to permit
+      <emphasis>any</emphasis> access at all if the
+      <emphasis>password</emphasis> field is blank.
+    </para>
+
+    <para>
+      A <emphasis>password</emphasis> field which starts with an
+      exclamation mark means that the password is locked.  The
+      remaining characters on the line represent the
+      <emphasis>password</emphasis> field before the password was
+      locked.
+    </para>
+
+    <para>
+      Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
+      <manvolnum>3</manvolnum></citerefentry> for details on how
+      this string is interpreted.
+    </para>
+    <para>
+      If the password field contains some string that is not a valid
+      result of <citerefentry><refentrytitle>crypt</refentrytitle>
+      <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
+      the user will not be able to use a unix password to log in
+      (but the user may log in the system by other means).
+    </para>
     <para>
       The comment field is used by various system utilities, such as
       <citerefentry><refentrytitle>finger</refentrytitle>
