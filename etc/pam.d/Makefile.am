@@ -6,8 +6,7 @@ pamd_files = \
 	chsh \
 	groupmems \
 	login \
-	passwd \
-	su
+	passwd
 
 pamd_acct_tools_files = \
 	chage \
@@ -27,6 +26,10 @@ pamd_DATA = $(pamd_files)
 if ACCT_TOOLS_SETUID
 pamd_DATA += $(pamd_acct_tools_files)
 endif
+endif
+
+if WITH_SU
+pamd_files += su
 endif
 
 EXTRA_DIST = $(pamd_files) $(pamd_acct_tools_files)

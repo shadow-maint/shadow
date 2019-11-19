@@ -286,6 +286,9 @@ AC_ARG_WITH(sssd,
 AC_ARG_WITH(group-name-max-length,
 	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=16@:>@])],
 	[with_group_name_max_length=$withval], [with_group_name_max_length=yes])
+AC_ARG_WITH(su,
+	[AC_HELP_STRING([--with-su], [build and install su program and man page @<:@default=yes@:>@])],
+	[with_su=$withval], [with_su=yes])
 
 if test "$with_group_name_max_length" = "no" ; then
 	with_group_name_max_length=0
@@ -312,6 +315,9 @@ if test "$with_sssd" = "yes"; then
 	              [AC_DEFINE(USE_SSSD, 1, [Define to support flushing of sssd caches])],
 	              [AC_MSG_ERROR([posix_spawn is needed for sssd support])])
 fi
+
+AS_IF([test "$with_su" != "no"], AC_DEFINE(WITH_SU, 1, [Build with su])])
+AM_CONDITIONAL([WITH_SU], [test "x$with_su" != "xno"])
 
 dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
@@ -730,4 +736,5 @@ echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
 echo "	use file caps:			$with_fcaps"
+echo "	install su:			$with_su"
 echo

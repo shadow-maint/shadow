@@ -41,7 +41,6 @@ man_MANS = \
 	man1/sg.1 \
 	man3/shadow.3 \
 	man5/shadow.5 \
-	man1/su.1 \
 	man5/suauth.5 \
 	man8/useradd.8 \
 	man8/userdel.8 \
@@ -53,6 +52,10 @@ man_nopam = \
 	man5/limits.5 \
 	man5/login.access.5 \
 	man5/porttime.5
+
+if WITH_SU
+man_MANS += man1/su.1
+endif
 
 if !USE_PAM
 man_MANS += $(man_nopam)

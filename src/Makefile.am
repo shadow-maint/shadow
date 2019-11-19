@@ -23,11 +23,14 @@ AM_CPPFLAGS = \
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS   = groups login su
+bin_PROGRAMS   = groups login
 sbin_PROGRAMS  = nologin
 ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
 if ENABLE_SUBIDS
 ubin_PROGRAMS += newgidmap newuidmap
+endif
+if WITH_SU
+bin_PROGRAMS  += su
 endif
 usbin_PROGRAMS = \
 	chgpasswd \
@@ -53,8 +56,11 @@ usbin_PROGRAMS = \
 noinst_PROGRAMS = id sulogin
 
 suidusbins     =
-suidbins       = su
+suidbins       =
 suidubins      = chage chfn chsh expiry gpasswd newgrp
+if WITH_SU
+suidbins      += su
+endif
 if !WITH_TCB
 suidubins += passwd
 endif
