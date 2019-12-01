@@ -111,6 +111,10 @@ static struct itemdef def_table[] = {
 	{"SHA_CRYPT_MAX_ROUNDS", NULL},
 	{"SHA_CRYPT_MIN_ROUNDS", NULL},
 #endif
+#ifdef USE_BCRYPT
+	{"BCRYPT_MAX_ROUNDS", NULL},
+	{"BCRYPT_MIN_ROUNDS", NULL},
+#endif
 	{"SUB_GID_COUNT", NULL},
 	{"SUB_GID_MAX", NULL},
 	{"SUB_GID_MIN", NULL},

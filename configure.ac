@@ -277,6 +277,9 @@ AC_ARG_WITH(libcrack,
 AC_ARG_WITH(sha-crypt,
 	[AC_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
 	[with_sha_crypt=$withval], [with_sha_crypt=yes])
+AC_ARG_WITH(bcrypt,
+	[AC_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
+	[with_bcrypt=$withval], [with_bcrypt=no])
 AC_ARG_WITH(nscd,
 	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
@@ -302,6 +305,11 @@ GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
 if test "$with_sha_crypt" = "yes"; then
 	AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
+fi
+
+AM_CONDITIONAL(USE_BCRYPT, test "x$with_bcrypt" = "xyes")
+if test "$with_bcrypt" = "yes"; then
+	AC_DEFINE(USE_BCRYPT, 1, [Define to allow the bcrypt password encryption algorithm])
 fi
 
 if test "$with_nscd" = "yes"; then
@@ -732,6 +740,7 @@ echo "	tcb support (incomplete):	$with_tcb"
 echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"
+echo "	bcrypt passwords encryption:	$with_bcrypt"
 echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"

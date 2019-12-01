@@ -320,6 +320,7 @@ CHFN_RESTRICT		rwh
 # If set to MD5, MD5-based algorithm will be used for encrypting password
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
+# If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
 # If set to DES, DES-based algorithm will be used for encrypting password (default)
 # Overrides the MD5_CRYPT_ENAB option
 #
@@ -343,6 +344,21 @@ CHFN_RESTRICT		rwh
 #
 #SHA_CRYPT_MIN_ROUNDS 5000
 #SHA_CRYPT_MAX_ROUNDS 5000
+
+#
+# Only works if ENCRYPT_METHOD is set to BCRYPT.
+#
+# Define the number of BCRYPT rounds.
+# With a lot of rounds, it is more difficult to brute-force the password.
+# However, more CPU resources will be needed to authenticate users if
+# this value is increased.
+#
+# If not specified, 13 rounds will be attempted.
+# If only one of the MIN or MAX values is set, then this value will be used.
+# If MIN > MAX, the highest value will be used.
+#
+#BCRYPT_MIN_ROUNDS 13
+#BCRYPT_MAX_ROUNDS 13
 
 #
 # List of groups to add to the user's supplementary group set
