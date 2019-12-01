@@ -62,7 +62,7 @@ libmisc/motd.c
 libmisc/myname.c
 libmisc/obscure.c
 libmisc/pam_pass.c
-libmisc/pam_pass_non_interractive.c
+libmisc/pam_pass_non_interactive.c
 libmisc/pwd2spwd.c
 libmisc/pwdcheck.c
 libmisc/pwd_init.c
