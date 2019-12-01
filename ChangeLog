@@ -1,3 +1,24 @@
+2019-12-01  Serge Hallyn <serge@hallyn.com>
+
+	* Release 4.8
+	* Initial optional bcrypt support.
+	* Make build/install of 'su' optional.
+	* Fix for vipw not resuming correctly when suspended
+	* Sync password field descriptions in manpages
+	* Check for valid shell argument in useradd
+	* Allow translation of new strings through POTFILES.in
+	* Migrate to itstool for translations
+	* Migrate to new SELinux api
+	* Support --enable-vendordir
+	* pwck: Only check homedir if set and not a system user
+	* Support nonstandard usernames
+	* sget{pw,gr}ent: check for data at EOL
+	* Add YYY-MM-DD support in chage
+	* Fix failing chmod calls for suidubins
+	* Fix --sbindir and --bindir for binary installations
+	* Fix LASTLOG_UID_MAX in login.defs
+	* Fix configure error with dash
+
 2019-06-13  Serge Hallyn <serge@hallyn.com>
 
 	* Release 4.7
