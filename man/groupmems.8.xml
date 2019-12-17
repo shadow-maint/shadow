@@ -180,7 +180,7 @@
     <title>SETUP</title>
     <para>
       The <command>groupmems</command> executable should be in mode
-      <literal>2770</literal> as user <emphasis>root</emphasis> and in group
+      <literal>2710</literal> as user <emphasis>root</emphasis> and in group
       <emphasis>groups</emphasis>. The system administrator can add users to
       group <emphasis>groups</emphasis> to allow or disallow them using the
       <command>groupmems</command> utility to manage their own group
@@ -189,7 +189,7 @@
 
     <programlisting>
 	$ groupadd -r groups
-	$ chmod 2770 groupmems
+	$ chmod 2710 groupmems
 	$ chown root.groups groupmems
 	$ groupmems -g groups -a gk4
     </programlisting>
