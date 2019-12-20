@@ -226,7 +226,7 @@ AC_ARG_ENABLE(account-tools-setuid,
 	   *) AC_MSG_ERROR(bad value ${enableval} for --enable-account-tools-setuid)
 	   ;;
 	 esac],
-	[enable_acct_tools_setuid="maybe"]
+	[enable_acct_tools_setuid="no"]
 )
 
 AC_ARG_ENABLE(utmpx,
