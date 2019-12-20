@@ -136,17 +136,17 @@ install-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 	ln -sf newgrp	$(DESTDIR)$(ubindir)/sg
 	ln -sf vipw	$(DESTDIR)$(usbindir)/vigr
-	for i in $(suidbins); do \
+	set -e; for i in $(suidbins); do \
 		chmod $(suidperms) $(DESTDIR)$(bindir)/$$i; \
 	done
-	for i in $(suidubins); do \
+	set -e; for i in $(suidubins); do \
 		chmod $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
-	for i in $(suidusbins); do \
+	set -e; for i in $(suidusbins); do \
 		chmod $(suidperms) $(DESTDIR)$(usbindir)/$$i; \
 	done
 if WITH_TCB
-	for i in $(shadowsgidubins); do \
+	set -e; for i in $(shadowsgidubins); do \
 		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
 		chmod $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
