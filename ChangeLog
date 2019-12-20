@@ -1,3 +1,10 @@
+2019-12-20  Dave Reisner <dreisner@archlinux.org>
+
+	* Do not auto-enable acct_tools_setuid just because
+	  pam is enabled.  NOTE - any distros which are relying
+	  on this behavior will need to switch to configure
+	  --enable-account-tools-setuid
+
 2019-12-01  Serge Hallyn <serge@hallyn.com>
 
 	* Release 4.8
