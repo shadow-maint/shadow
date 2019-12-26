@@ -72,6 +72,9 @@
       <citerefentry><refentrytitle>nologin</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
+    <para>
+      If <command>SSH_ORIGINAL_COMMAND</command> is populated it will be logged.
+    </para>
   </refsect1>
 
   <refsect1 id='see_also'>
