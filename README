@@ -11,16 +11,16 @@ Releases
 	https://github.com/shadow-maint/shadow/releases
 
 Mailing lists
-	for general discuss: pkg-shadow-devel@lists.alioth.debian.org
-	commit list: pkg-shadow-commits@lists.alioth.debian.org
+	for general discuss: pkg-shadow-devel@alioth-lists.debian.net
+	commit list: pkg-shadow-commits@alioth-lists.debian.net
 
 Mailing lists subscription
-	http://lists.alioth.debian.org/mailman/listinfo/pkg-shadow-devel
-	http://lists.alioth.debian.org/mailman/listinfo/pkg-shadow-commits
+	http://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-devel
+	http://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-commits
 
 Mailing lists archives:
-	http://lists.alioth.debian.org/pipermail/pkg-shadow-devel/
-	http://lists.alioth.debian.org/pipermail/pkg-shadow-commits/
+	http://alioth-lists.debian.net/pipermail/pkg-shadow-devel/
+	http://alioth-lists.debian.net/pipermail/pkg-shadow-commits/
 
 S/Key support:
 	Shadow can be built with S/Key support using the S/Key package from:
