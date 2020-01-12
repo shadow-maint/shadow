@@ -50,6 +50,7 @@
 <!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
 <!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
 <!ENTITY HUSHLOGIN_FILE        SYSTEM "login.defs.d/HUSHLOGIN_FILE.xml">
 <!ENTITY ISSUE_FILE            SYSTEM "login.defs.d/ISSUE_FILE.xml">
 <!ENTITY KILLCHAR              SYSTEM "login.defs.d/KILLCHAR.xml">
@@ -185,6 +186,7 @@
       &FAKE_SHELL;
       &FTMP_FILE;
       &GID_MAX; <!-- documents also GID_MIN -->
+      &HOME_MODE;
       &HUSHLOGIN_FILE;
       &ISSUE_FILE;
       &KILLCHAR;
@@ -401,6 +403,7 @@
 	    ENCRYPT_METHOD
 	    GID_MAX GID_MIN
 	    MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    HOME_MODE
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
 	    SHA_CRYPT_MIN_ROUNDS</phrase>
@@ -481,6 +484,7 @@
 	  <para>
 	    CREATE_HOME
 	    GID_MAX GID_MIN
+	    HOME_MODE
 	    LASTLOG_UID_MAX
 	    MAIL_DIR MAX_MEMBERS_PER_GROUP
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
