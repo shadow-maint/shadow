@@ -7,7 +7,6 @@
 
 static bool path_exists(const char *p)
 {
-	int ret;
 	struct stat sb;
 
 	return stat(p, &sb) == 0;

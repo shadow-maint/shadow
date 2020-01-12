@@ -166,7 +166,7 @@ extern struct group *prefix_getgrnam(const char *name)
 		fg = fopen(group_db_file, "rt");
 		if(!fg)
 			return NULL;
-		while(grp = fgetgrent(fg)) {
+		while((grp = fgetgrent(fg)) != NULL) {
 			if(!strcmp(name, grp->gr_name))
 				break;
 		}
@@ -186,7 +186,7 @@ extern struct group *prefix_getgrgid(gid_t gid)
 		fg = fopen(group_db_file, "rt");
 		if(!fg)
 			return NULL;
-		while(grp = fgetgrent(fg)) {
+		while((grp = fgetgrent(fg)) != NULL) {
 			if(gid == grp->gr_gid)
 				break;
 		}
@@ -206,7 +206,7 @@ extern struct passwd *prefix_getpwuid(uid_t uid)
 		fg = fopen(passwd_db_file, "rt");
 		if(!fg)
 			return NULL;
-		while(pwd = fgetpwent(fg)) {
+		while((pwd = fgetpwent(fg)) != NULL) {
 			if(uid == pwd->pw_uid)
 				break;
 		}
@@ -226,7 +226,7 @@ extern struct passwd *prefix_getpwnam(const char* name)
 		fg = fopen(passwd_db_file, "rt");
 		if(!fg)
 			return NULL;
-		while(pwd = fgetpwent(fg)) {
+		while((pwd = fgetpwent(fg)) != NULL) {
 			if(!strcmp(name, pwd->pw_name))
 				break;
 		}
@@ -246,7 +246,7 @@ extern struct spwd *prefix_getspnam(const char* name)
 		fg = fopen(spw_db_file, "rt");
 		if(!fg)
 			return NULL;
-		while(sp = fgetspent(fg)) {
+		while((sp = fgetspent(fg)) != NULL) {
 			if(!strcmp(name, sp->sp_namp))
 				break;
 		}
