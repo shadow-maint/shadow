@@ -32,6 +32,13 @@
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='subgid.5'>
+  <refentryinfo>
+    <author>
+      <firstname>Eric</firstname>
+      <surname>Biederman</surname>
+      <contrib>Creation, 2013</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>subgid</refentrytitle>
     <manvolnum>5</manvolnum>

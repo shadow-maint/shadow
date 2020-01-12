@@ -33,6 +33,13 @@
 ]>
 
 <refentry id='newuidmap.1'>
+  <refentryinfo>
+    <author>
+      <firstname>Eric</firstname>
+      <surname>Biederman</surname>
+      <contrib>Creation, 2013</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>newuidmap</refentrytitle>
     <manvolnum>1</manvolnum>
