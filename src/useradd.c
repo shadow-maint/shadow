@@ -2155,9 +2155,8 @@ static void create_home (void)
 		}
 
 		(void) chown (prefix_user_home, user_id, user_gid);
-		mode_t mode = getdef_num ("HOME_MODE",
-		                          0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
-		chmod (prefix_user_home, mode);
+		chmod (prefix_user_home,
+		       0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 		home_added = true;
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,

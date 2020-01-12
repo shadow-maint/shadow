@@ -93,7 +93,6 @@ static struct itemdef def_table[] = {
 	{"FAKE_SHELL", NULL},
 	{"GID_MAX", NULL},
 	{"GID_MIN", NULL},
-	{"HOME_MODE", NULL},
 	{"HUSHLOGIN_FILE", NULL},
 	{"KILLCHAR", NULL},
 	{"LASTLOG_UID_MAX", NULL},

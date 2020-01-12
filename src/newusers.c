@@ -1216,9 +1216,9 @@ int main (int argc, char **argv)
 		if (   ('\0' != fields[5][0])
 		    && (access (newpw.pw_dir, F_OK) != 0)) {
 /* FIXME: should check for directory */
-			mode_t mode = getdef_num ("HOME_MODE",
-			                          0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
-			if (mkdir (newpw.pw_dir, mode) != 0) {
+			mode_t msk = 0777 & ~getdef_num ("UMASK",
+			                                 GETDEF_DEFAULT_UMASK);
+			if (mkdir (newpw.pw_dir, msk) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: mkdir %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,

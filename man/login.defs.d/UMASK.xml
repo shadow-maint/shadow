@@ -37,8 +37,7 @@
     </para>
     <para>
       <command>useradd</command> and <command>newusers</command> use this
-      mask to set the mode of the home directory they create if
-      <option>HOME_MODE</option> is not set.
+      mask to set the mode of the home directory they create
     </para>
     <para condition="no_pam">
       It is also used by <command>login</command> to define users' initial
