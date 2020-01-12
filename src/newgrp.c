@@ -400,6 +400,7 @@ int main (int argc, char **argv)
 	int err = 0;
 	gid_t gid;
 	char *cp;
+	char *progbase;
 	const char *name, *prog;
 	char *group = NULL;
 	char *command = NULL;
@@ -806,7 +807,7 @@ int main (int argc, char **argv)
 	 * Now I try to find the basename of the login shell. This will
 	 * become argv[0] of the spawned command.
 	 */
-	cp = Basename ((char *) prog);
+	progbase = (char *) Basename ((char *) prog);
 
 	/*
 	 * Switch back to her home directory if i am doing login
@@ -844,7 +845,7 @@ int main (int argc, char **argv)
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
 	 */
-	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
+	err = shell (prog, initflag ? (char *) 0 : progbase, newenvp);
 	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/*@notreached@*/
       failure:

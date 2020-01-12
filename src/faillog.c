@@ -561,7 +561,7 @@ static void set_locktime (long locktime)
 int main (int argc, char **argv)
 {
 	long fail_locktime;
-	short fail_max;
+	short fail_max = 0; // initialize to silence compiler warning
 	long days;
 
 	/*

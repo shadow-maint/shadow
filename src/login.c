@@ -235,7 +235,7 @@ static void bad_time_notify (void)
 
 static void check_nologin (bool login_to_root)
 {
-	char *fname;
+	const char *fname;
 
 	/*
 	 * Check to see if system is turned off for non-root users.
@@ -375,7 +375,7 @@ static void process_flags (int argc, char *const *argv)
 static void init_env (void)
 {
 #ifndef USE_PAM
-	char *cp;
+	const char *cp;
 #endif
 	char *tmp;
 
