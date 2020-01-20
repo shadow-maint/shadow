@@ -39,6 +39,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "defines.h"
 #include "prototypes.h"
 #ifdef ENABLE_SUBIDS
@@ -106,6 +107,31 @@ static int user_busy_utmp (const char *name)
 #endif				/* !__linux__ */
 
 #ifdef __linux__
+#ifdef ENABLE_SUBIDS
+#define in_parentuid_range(uid) ((uid) >= parentuid && (uid) < parentuid + range)
+static int different_namespace (const char *sname)
+{
+	/* 41: /proc/xxxxxxxxxx/task/xxxxxxxxxx/ns/user + \0 */
+	char path[41];
+	char buf[512], buf2[512];
+	ssize_t llen1, llen2;
+
+	snprintf (path, 41, "/proc/%s/ns/user", sname);
+
+	if ((llen1 = readlink (path, buf, sizeof(buf))) == -1)
+		return 0;
+
+	if ((llen2 = readlink ("/proc/self/ns/user", buf2, sizeof(buf2))) == -1)
+		return 0;
+
+	if (llen1 == llen2 && memcmp (buf, buf2, llen1) == 0)
+		return 0; /* same namespace */
+
+	return 1;
+}
+#endif                          /* ENABLE_SUBIDS */
+
+
 static int check_status (const char *name, const char *sname, uid_t uid)
 {
 	/* 40: /proc/xxxxxxxxxx/task/xxxxxxxxxx/status + \0 */
@@ -114,7 +140,6 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	FILE *sfile;
 
 	snprintf (status, 40, "/proc/%s/status", sname);
-	status[39] = '\0';
 
 	sfile = fopen (status, "r");
 	if (NULL == sfile) {
@@ -123,26 +148,29 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	while (fgets (line, sizeof (line), sfile) == line) {
 		if (strncmp (line, "Uid:\t", 5) == 0) {
 			unsigned long ruid, euid, suid;
+
 			assert (uid == (unsigned long) uid);
+			(void) fclose (sfile);
 			if (sscanf (line,
 			            "Uid:\t%lu\t%lu\t%lu\n",
 			            &ruid, &euid, &suid) == 3) {
 				if (   (ruid == (unsigned long) uid)
 				    || (euid == (unsigned long) uid)
-				    || (suid == (unsigned long) uid)
-#ifdef ENABLE_SUBIDS
-				    || have_sub_uids(name, ruid, 1)
-				    || have_sub_uids(name, euid, 1)
-				    || have_sub_uids(name, suid, 1)
-#endif				/* ENABLE_SUBIDS */
-				   ) {
-					(void) fclose (sfile);
+				    || (suid == (unsigned long) uid) ) {
 					return 1;
 				}
+#ifdef ENABLE_SUBIDS
+				if (    different_namespace (sname)
+				     && (   have_sub_uids(name, ruid, 1)
+				         || have_sub_uids(name, euid, 1)
+				         || have_sub_uids(name, suid, 1))
+				   ) {
+					return 1;
+				}
+#endif				/* ENABLE_SUBIDS */
 			} else {
 				/* Ignore errors. This is just a best effort. */
 			}
-			(void) fclose (sfile);
 			return 0;
 		}
 	}
