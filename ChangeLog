@@ -9,6 +9,7 @@
 	* Useradd: make non-executable shell check only a warning (Tomas Mraz)
 	* Update Dutch translation (Frans-Spiesschaert)
 	* user_busy: Do not mistake a regular user process for a namespaced one (Tomas Mraz)
+	* Revert "Honor --sbindir and --bindir for binary installation" Patrick McLean)
 
 2019-12-20  Dave Reisner <dreisner@archlinux.org>
 
