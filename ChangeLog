@@ -1,3 +1,15 @@
+2020-01-23  Serge Hallyn <serge@hallyn.com>
+
+	* selinux: inclue stdio (Michael Vetter)
+	* man: don't suggest making groupmems user-writeable (Michael Weiser)
+	* Makefile: bail out on error in for loops (Wolfgang Bumiller)
+	* Adding logging of SSH_ORIGINAL_COMMAND to nologin. (ed@s5h.net)
+	* add new HOME_MODE login.defs option (Duncan Overbruck)
+	* Add tty logging to useradd (ed@s5h.net)
+	* Useradd: make non-executable shell check only a warning (Tomas Mraz)
+	* Update Dutch translation (Frans-Spiesschaert)
+	* user_busy: Do not mistake a regular user process for a namespaced one (Tomas Mraz)
+
 2019-12-20  Dave Reisner <dreisner@archlinux.org>
 
 	* Do not auto-enable acct_tools_setuid just because
