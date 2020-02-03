@@ -334,7 +334,7 @@ msgstr "<option>-h</option>, <option>--help</option>"
 #: expiry.1.xml:114(para) chsh.1.xml:103(para) chpasswd.8.xml:173(para)
 #: chgpasswd.8.xml:133(para) chfn.1.xml:169(para) chage.1.xml:131(para)
 msgid "Display help message and exit."
-msgstr "现实帮助信息并退出。"
+msgstr "显示帮助信息并退出。"
 
 #: vipw.8.xml:126(term)
 msgid "<option>-p</option>, <option>--passwd</option>"
@@ -3616,7 +3616,7 @@ msgstr "<option>MAIL_CHECK_ENAB</option> (boolean)"
 
 #: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable checking and display of mailbox status upon login."
-msgstr "启用登录时检查和现实邮箱状态。"
+msgstr "启用登录时检查和显示邮箱状态。"
 
 #: su.1.xml:37(para) login.defs.5.xml:37(para) login.1.xml:37(para)
 msgid ""
@@ -6254,7 +6254,7 @@ msgstr "<option>ISSUE_FILE</option> (string)"
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "If defined, this file will be displayed before each login prompt."
-msgstr "如果定义了，此文件将在每次的登录提示之前现实。"
+msgstr "如果定义了，此文件将在每次的登录提示之前显示。"
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 msgid "<option>KILLCHAR</option> (number)"
@@ -6980,7 +6980,7 @@ msgstr "$HOME/.hushlogin"
 
 #: login.1.xml:385(para)
 msgid "Suppress printing of system messages."
-msgstr "阻止现实系统信息。"
+msgstr "阻止显示系统信息。"
 
 #: login.1.xml:399(para)
 msgid ""
@@ -7313,7 +7313,7 @@ msgstr ""
 msgid ""
 "Print the lastlog records more recent than <emphasis remap=\"I\">DAYS</"
 "emphasis>."
-msgstr "只现实新于 <emphasis remap=\"I\">DAYS</emphasis> 的最近登录记录。"
+msgstr "只显示新于 <emphasis remap=\"I\">DAYS</emphasis> 的最近登录记录。"
 
 #: lastlog.8.xml:160(term) faillog.8.xml:202(term)
 msgid ""
@@ -7325,7 +7325,7 @@ msgstr ""
 
 #: lastlog.8.xml:164(para)
 msgid "Print the lastlog record of the specified user(s)."
-msgstr "现实指定用户的最近登录记录。"
+msgstr "显示指定用户的最近登录记录。"
 
 #: lastlog.8.xml:167(para) faillog.8.xml:211(para)
 msgid ""
@@ -7650,7 +7650,7 @@ msgstr "groups"
 
 #: groups.1.xml:65(refpurpose)
 msgid "display current group names"
-msgstr "现实当前组名"
+msgstr "显示当前组名"
 
 #: groups.1.xml:72(replaceable)
 msgid "user"
@@ -9186,7 +9186,7 @@ msgstr ""
 
 #: chage.1.xml:158(para)
 msgid "Show account aging information."
-msgstr "现实账户年龄信息。"
+msgstr "显示账户年龄信息。"
 
 #: chage.1.xml:164(term)
 msgid ""
