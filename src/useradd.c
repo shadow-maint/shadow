@@ -190,6 +190,7 @@ static bool home_added = false;
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
+#define E_MAILBOXFILE	13	/* can't create mailbox file */
 #define E_SE_UPDATE	14	/* can't update SELinux user mapping */
 #ifdef ENABLE_SUBIDS
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
@@ -2210,6 +2211,16 @@ static void create_mail (void)
 			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
 		else
 			sprintf (file, "%s/%s", spool, user_name);
+
+#ifdef WITH_SELINUX
+		if (set_selinux_file_context (file) != 0) {
+			fprintf (stderr,
+			         _("%s: cannot set SELinux context for mailbox file %s\n"),
+			         Prog, file);
+			fail_exit (E_MAILBOXFILE);
+		}
+#endif
+
 		fd = open (file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);
 		if (fd < 0) {
 			perror (_("Creating mailbox file"));
@@ -2234,6 +2245,15 @@ static void create_mail (void)
 
 		fsync (fd);
 		close (fd);
+#ifdef WITH_SELINUX
+		/* Reset SELinux to create files with default contexts */
+		if (reset_selinux_file_context () != 0) {
+			fprintf (stderr,
+			         _("%s: cannot reset SELinux file creation context\n"),
+			         Prog);
+			fail_exit (E_MAILBOXFILE);
+		}
+#endif
 	}
 }
 
