@@ -74,10 +74,13 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 	 * Parse the command line options.
 	 */
 	int i;
-	const char *prefix = NULL;
+	const char *prefix = NULL, *val;
 
 	for (i = 0; i < argc; i++) {
+		val = NULL;
 		if (   (strcmp (argv[i], "--prefix") == 0)
+		    || ((strncmp (argv[i], "--prefix=", 9) == 0)
+			&& (val = argv[i] + 9))
 		    || (strcmp (argv[i], short_opt) == 0)) {
 			if (NULL != prefix) {
 				fprintf (stderr,
@@ -86,13 +89,16 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 				exit (E_BAD_ARG);
 			}
 
-			if (i + 1 == argc) {
+			if (val) {
+				prefix = val;
+			} else if (i + 1 == argc) {
 				fprintf (stderr,
 				         _("%s: option '%s' requires an argument\n"),
 				         Prog, argv[i]);
 				exit (E_BAD_ARG);
+			} else {
+				prefix = argv[++ i];
 			}
-			prefix = argv[i + 1];
 		}
 	}
 
