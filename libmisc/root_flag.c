@@ -56,10 +56,13 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 	 * Parse the command line options.
 	 */
 	int i;
-	const char *newroot = NULL;
+	const char *newroot = NULL, *val;
 
 	for (i = 0; i < argc; i++) {
+		val = NULL;
 		if (   (strcmp (argv[i], "--root") == 0)
+		    || ((strncmp (argv[i], "--root=", 7) == 0)
+			&& (val = argv[i] + 7))
 		    || (strcmp (argv[i], short_opt) == 0)) {
 			if (NULL != newroot) {
 				fprintf (stderr,
@@ -68,13 +71,16 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 				exit (E_BAD_ARG);
 			}
 
-			if (i + 1 == argc) {
+			if (val) {
+				newroot = val;
+			} else if (i + 1 == argc) {
 				fprintf (stderr,
 				         _("%s: option '%s' requires an argument\n"),
 				         Prog, argv[i]);
 				exit (E_BAD_ARG);
+			} else {
+				newroot = argv[++ i];
 			}
-			newroot = argv[i + 1];
 		}
 	}
 
