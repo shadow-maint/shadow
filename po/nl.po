@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_1_4.8\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2019-12-01 11:37-0600\n"
-"PO-Revision-Date: 2019-12-23 23:33+0100\n"
+"POT-Creation-Date: 2020-01-23 14:59-0600\n"
+"PO-Revision-Date: 2020-02-13 15:17+0100\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 3.30.1\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, c-format
@@ -2436,6 +2436,10 @@ msgstr "%s: ongeldig veld '%s'\n"
 #, c-format
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: ongeldige shell '%s'\n"
+
+#, c-format
+msgid "%s: Warning: missing or non-executable shell '%s'\n"
+msgstr "%s: waarschuwing: ontbrekende of onuitvoerbare shell '%s'\n"
 
 #, c-format
 msgid "%s: -Z cannot be used with --prefix\n"
