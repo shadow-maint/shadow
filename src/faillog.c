@@ -165,7 +165,7 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 	tm = localtime (&fl.fail_time);
 	if (!tm) {
 		fprintf (stderr, "Cannot read time from faillog.\n");
-		exit (EXIT_FAILURE);
+		return;
 	}
 #ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
