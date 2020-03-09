@@ -282,7 +282,7 @@ static int new_password (const struct passwd *pw)
 #endif /* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
 		    || (strcmp (method, "BCRYPT") == 0)
-#endif /* USE_SHA_CRYPT */
+#endif /* USE_BCRYPT*/
 
 		    ) {
 			pass_max_len = -1;
