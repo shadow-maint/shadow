@@ -45,6 +45,8 @@ libshadow_la_SOURCES = \
 	pwio.c \
 	pwio.h \
 	pwmem.c \
+	run_part.h \
+	run_part.c \
 	subordinateio.h \
 	subordinateio.c \
 	selinux.c \

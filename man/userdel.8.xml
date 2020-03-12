@@ -228,6 +228,12 @@
 	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
+    <varlistentry>
+	<term><filename>/etc/shadow-maint/userdel-pre.d/*</filename>, <filename>/etc/shadow-maint/userdel-post.d/*</filename></term>
+	<listitem>
+	  <para>Run-part files to execute during user deletion. The environment variable <command>ACTION</command> will be populated with <command>userdel</command> and <command>SUBJECT</command> with the username. <filename>userdel-pre.d</filename> will be executed prior to any user deletion. <filename>userdel-post.d</filename> will execute after user deletion. If a script exits non-zero then execution will terminate.</para>
+	</listitem>
+      </varlistentry>
       <varlistentry condition="subids">
 	<term><filename>/etc/subgid</filename></term>
 	<listitem>

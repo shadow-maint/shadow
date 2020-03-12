@@ -736,6 +736,12 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><filename>/etc/shadow-maint/useradd-pre.d/*</filename>, <filename>/etc/shadow-maint/useradd-post.d/*</filename></term>
+	<listitem>
+	  <para>Run-part files to execute during user addition. The environment variable <command>ACTION</command> will be populated with useradd and <command>SUBJECT</command> with the <command>username</command>. <filename>useradd-pre.d</filename> will be executed prior to any user addition. <filename>useradd-post.d</filename> will execute after user addition. If a script exits non-zero then execution will terminate.</para>
+	</listitem>
+      </varlistentry>
+  <varlistentry>
 	<term><filename>/etc/skel/</filename></term>
 	<listitem>
 	  <para>Directory containing default files.</para>
