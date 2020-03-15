@@ -236,7 +236,7 @@ CRACKLIB_DICTPATH	/var/cache/cracklib/cracklib_dict
 # Min/max values for automatic uid selection in useradd(8)
 #
 UID_MIN			 1000
-UID_MAX			60000
+UID_MAX			65000
 # System accounts
 SYS_UID_MIN		  101
 SYS_UID_MAX		  999
