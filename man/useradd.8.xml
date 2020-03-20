@@ -181,8 +181,10 @@
 	    login directory. The default is to append the
 	    <replaceable>LOGIN</replaceable> name to
 	    <replaceable>BASE_DIR</replaceable> and use that as the login
-	    directory name. The directory <replaceable>HOME_DIR</replaceable>
-	    does not have to exist but will not be created if it is missing.
+	    directory name.  If the directory
+	    <replaceable>HOME_DIR</replaceable> does not exist, then it
+	    will be created unless the <option>-M</option> option is
+	    specified.
 	  </para>
 	</listitem>
       </varlistentry>
