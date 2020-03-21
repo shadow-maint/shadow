@@ -7,7 +7,7 @@ cd $(dirname $0)
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "grpck reports usage when called within invalid option"
+log_start "$0" "grpck reports usage when called with an invalid option"
 
 save_config
 
