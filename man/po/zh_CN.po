@@ -1166,7 +1166,7 @@ msgstr ""
 
 #: usermod.8.xml:464(para)
 msgid "The new SELinux user for the user's login."
-msgstr "用户登陆的 SELinux 用户。"
+msgstr "用户登录的 SELinux 用户。"
 
 #: usermod.8.xml:467(para)
 msgid ""
@@ -2040,9 +2040,9 @@ msgid ""
 "<replaceable>HOME_DIR</replaceable> does not have to exist but will not be "
 "created if it is missing."
 msgstr ""
-"将创建新用户，并使用 <replaceable>HOME_DIR</replaceable> 作为用户登陆目录的"
+"将创建新用户，并使用 <replaceable>HOME_DIR</replaceable> 作为用户登录目录的"
 "值。默认值是将 <replaceable>LOGIN</replaceable> 名附加到 "
-"<replaceable>BASE_DIR</replaceable> 后面，并使用这作为登陆目录。目录不一定必"
+"<replaceable>BASE_DIR</replaceable> 后面，并使用这作为登录目录。目录不一定必"
 "须已经存在 <replaceable>HOME_DIR</replaceable>，但是会在需要时创建。"
 
 #: useradd.8.xml:178(term)
@@ -2086,7 +2086,7 @@ msgid ""
 "The group name or number of the user's initial login group. The group name "
 "must exist. A group number must refer to an already existing group."
 msgstr ""
-"用户初始登陆组的组名或号码。组名必须已经存在。组号码必须指代已经存在的组。"
+"用户初始登录组的组名或号码。组名必须已经存在。组号码必须指代已经存在的组。"
 
 #: useradd.8.xml:233(para)
 msgid ""
@@ -2385,7 +2385,7 @@ msgid ""
 "The SELinux user for the user's login. The default is to leave this field "
 "blank, which causes the system to select the default SELinux user."
 msgstr ""
-"用户登陆的 SELinux 用户。默认为留空，这会造成系统选择默认的 SELinux 用户。"
+"用户登录的 SELinux 用户。默认为留空，这会造成系统选择默认的 SELinux 用户。"
 
 #: useradd.8.xml:520(title)
 msgid "Changing the default values"
