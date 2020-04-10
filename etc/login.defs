@@ -327,6 +327,7 @@ CHFN_RESTRICT		rwh
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
 # If set to DES, DES-based algorithm will be used for encrypting password (default)
+# MD5 and DES should not be used for new hashes, see crypt(5) for recommendations.
 # Overrides the MD5_CRYPT_ENAB option
 #
 # Note: If you use PAM, it is recommended to use a value consistent with
@@ -342,7 +343,8 @@ CHFN_RESTRICT		rwh
 # However, more CPU resources will be needed to authenticate users if
 # this value is increased.
 #
-# If not specified, the libc will choose the default number of rounds (5000).
+# If not specified, the libc will choose the default number of rounds (5000),
+# which is orders of magnitude too low for modern hardware.
 # The values must be within the 1000-999999999 range.
 # If only one of the MIN or MAX values is set, then this value will be used.
 # If MIN > MAX, the highest value will be used.

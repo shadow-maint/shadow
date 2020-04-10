@@ -39,6 +39,9 @@
       <replaceable>MD5</replaceable><phrase condition="sha_crypt">,
       <replaceable>SHA256</replaceable>,
       <replaceable>SHA512</replaceable></phrase>.
+      MD5 and DES should not be used for new hashes, see
+      <refentrytitle>crypt</refentrytitle><manvolnum>5</manvolnum>
+      for recommendations.
     </para>
     <para>
       Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option>
