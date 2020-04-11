@@ -228,6 +228,7 @@ static void tallylog_reset (const char *);
 static void usr_update (void);
 static void create_home (void);
 static void create_mail (void);
+static void check_uid_range(int rflg, uid_t user_id);
 
 /*
  * fail_exit - undo as much as possible
@@ -2257,6 +2258,27 @@ static void create_mail (void)
 	}
 }
 
+static void check_uid_range(int rflg, uid_t user_id)
+{
+	uid_t uid_min ;
+	uid_t uid_max ;
+	if(rflg){
+		uid_min = (uid_t)getdef_ulong("SYS_UID_MIN",101UL);
+		uid_max = (uid_t)getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
+		if(uid_min <= uid_max){
+			if(user_id < uid_min || user_id >uid_max)
+				printf(_("warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d range.\n"),user_name, user_id, uid_min, uid_max);
+		}
+	}else{
+		uid_min = (uid_t)getdef_ulong("UID_MIN", 1000UL);
+		uid_max = (uid_t)getdef_ulong("UID_MAX", 6000UL);
+		if(uid_min <= uid_max){
+			if(user_id < uid_min || user_id >uid_max)
+				printf(_("warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"),user_name, user_id, uid_min, uid_max);
+		}
+	}
+
+}
 /*
  * main - useradd command
  */
@@ -2439,6 +2461,8 @@ int main (int argc, char **argv)
 		}
 	}
 
+	if(uflg)
+	   check_uid_range(rflg,user_id);
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {
 		if (shadowtcb_create (user_name, user_id) == SHADOWTCB_FAILURE) {
