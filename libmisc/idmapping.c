@@ -36,8 +36,8 @@
 #include <stdio.h>
 #include "prototypes.h"
 #include "idmapping.h"
-#include <sys/prctl.h>
 #if HAVE_SYS_CAPABILITY_H
+#include <sys/prctl.h>
 #include <sys/capability.h>
 #endif
 
