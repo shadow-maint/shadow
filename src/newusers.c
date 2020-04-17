@@ -1251,7 +1251,7 @@ int main (int argc, char **argv)
 		if (is_sub_uid && !sub_uid_assigned(fields[0])) {
 			uid_t sub_uid_start = 0;
 			unsigned long sub_uid_count = 0;
-			if (find_new_sub_uids(fields[0], &sub_uid_start, &sub_uid_count) == 0) {
+			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) == 0) {
 				if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0) {
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
@@ -1271,7 +1271,7 @@ int main (int argc, char **argv)
 		if (is_sub_gid && !sub_gid_assigned(fields[0])) {
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
-			if (find_new_sub_gids(fields[0], &sub_gid_start, &sub_gid_count) == 0) {
+			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) == 0) {
 				if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
