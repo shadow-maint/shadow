@@ -46,8 +46,7 @@
  * 
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_sub_gids (const char *owner,
-		       gid_t *range_start, unsigned long *range_count)
+int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 {
 	unsigned long min, max;
 	unsigned long count;

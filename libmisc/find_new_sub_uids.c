@@ -46,8 +46,7 @@
  * 
  * Return 0 on success, -1 if no unused UIDs are available.
  */
-int find_new_sub_uids (const char *owner,
-		       uid_t *range_start, unsigned long *range_count)
+int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
 {
 	unsigned long min, max;
 	unsigned long count;
