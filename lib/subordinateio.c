@@ -13,14 +13,7 @@
 #include "subordinateio.h"
 #include <sys/types.h>
 #include <pwd.h>
-
-struct subordinate_range {
-	const char *owner;
-	unsigned long start;
-	unsigned long count;
-};
-
-#define NFIELDS 3
+#include <ctype.h>
 
 /*
  * subordinate_dup: create a duplicate range
@@ -78,7 +71,7 @@ static void *subordinate_parse (const char *line)
 	static char rangebuf[1024];
 	int i;
 	char *cp;
-	char *fields[NFIELDS];
+	char *fields[SUBID_NFIELDS];
 
 	/*
 	 * Copy the string to a temporary buffer so the substrings can
@@ -93,7 +86,7 @@ static void *subordinate_parse (const char *line)
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = rangebuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
+	for (cp = rangebuf, i = 0; (i < SUBID_NFIELDS) && (NULL != cp); i++) {
 		fields[i] = cp;
 		while (('\0' != *cp) && (':' != *cp)) {
 			cp++;
@@ -108,10 +101,10 @@ static void *subordinate_parse (const char *line)
 	}
 
 	/*
-	 * There must be exactly NFIELDS colon separated fields or
+	 * There must be exactly SUBID_NFIELDS colon separated fields or
 	 * the entry is invalid.  Also, fields must be non-blank.
 	 */
-	if (i != NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
+	if (i != SUBID_NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
 		return NULL;
 	range.owner = fields[0];
 	if (getulong (fields[1], &range.start) == 0)
@@ -312,6 +305,39 @@ static bool have_range(struct commonio_db *db,
 		range = find_range(db, owner, start);
 	}
 	return false;
+}
+
+static bool append_range(struct subordinate_range ***ranges, const struct subordinate_range *new, int n)
+{
+	struct subordinate_range *tmp;
+	if (!*ranges) {
+		*ranges = malloc(2 * sizeof(struct subordinate_range **));
+		if (!*ranges)
+			return false;
+	} else {
+		struct subordinate_range **new;
+		new = realloc(*ranges, (n + 2) * (sizeof(struct subordinate_range **)));
+		if (!new)
+			return false;
+		*ranges = new;
+	}
+	(*ranges)[n] = (*ranges)[n+1] = NULL;
+	tmp = subordinate_dup(new);
+	if (!tmp)
+		return false;
+	(*ranges)[n] = tmp;
+	return true;
+}
+
+void free_subordinate_ranges(struct subordinate_range **ranges)
+{
+	int i;
+
+	if (!ranges)
+		return;
+	for (i = 0; ranges[i]; i++)
+		subordinate_free(ranges[i]);
+	free(ranges);
 }
 
 /*
@@ -692,6 +718,160 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 	start = find_free_range (&subordinate_gid_db, min, max, count);
 	return start == ULONG_MAX ? (gid_t) -1 : start;
 }
+
+/*
+ struct subordinate_range **list_owner_ranges(const char *owner, enum subid_type id_type)
+ *
+ * @owner: username
+ * @id_type: UID or GUID
+ *
+ * Returns the subuid or subgid ranges which are owned by the specified
+ * user.  Username may be a username or a string representation of a
+ * UID number.  If id_type is UID, then subuids are returned, else
+ * subgids are returned.  If there is an error, < 0 is returned.
+ *
+ * The caller must free the subordinate range list.
+ */
+struct subordinate_range **list_owner_ranges(const char *owner, enum subid_type id_type)
+{
+	// TODO - need to handle owner being either uid or username
+	const struct subordinate_range *range;
+	struct subordinate_range **ranges = NULL;
+	struct commonio_db *db;
+	int size = 0;
+
+	if (id_type == ID_TYPE_UID)
+		db = &subordinate_uid_db;
+	else
+		db = &subordinate_gid_db;
+
+	commonio_rewind(db);
+	while ((range = commonio_next(db)) != NULL) {
+		if (0 == strcmp(range->owner, owner)) {
+			if (!append_range(&ranges, range, size++)) {
+				free_subordinate_ranges(ranges);
+				return NULL;
+			}
+		}
+	}
+
+	return ranges;
+}
+
+static bool all_digits(const char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+		if (!isdigit(str[i]))
+			return false;
+	return true;
+}
+
+static int append_uids(uid_t **uids, const char *owner, int n)
+{
+	uid_t owner_uid;
+	uid_t *ret;
+	int i;
+
+	if (all_digits(owner)) {
+		i = sscanf(owner, "%d", &owner_uid);
+		if (i != 1) {
+			// should not happen
+			free(*uids);
+			*uids = NULL;
+			return -1;
+		}
+	} else {
+		struct passwd *pwd = getpwnam(owner);
+		if (NULL == pwd) {
+			/* Username not defined in /etc/passwd, or error occured during lookup */
+			free(*uids);
+			*uids = NULL;
+			return -1;
+		}
+		owner_uid = pwd->pw_uid;
+	}
+
+	for (i = 0; i < n; i++) {
+		if (owner_uid == (*uids)[i])
+			return n;
+	}
+
+	ret = realloc(*uids, (n + 1) * sizeof(uid_t));
+	if (!ret) {
+		free(*uids);
+		return -1;
+	}
+	ret[n] = owner_uid;
+	*uids = ret;
+	return n+1;
+}
+
+int find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)
+{
+	const struct subordinate_range *range;
+	struct commonio_db *db;
+	int n = 0;
+
+	*uids = NULL;
+	if (id_type == ID_TYPE_UID)
+		db = &subordinate_uid_db;
+	else
+		db = &subordinate_gid_db;
+
+	commonio_rewind(db);
+	while ((range = commonio_next(db)) != NULL) {
+		if (id >= range->start && id < range->start + range-> count) {
+			n = append_uids(uids, range->owner, n);
+			if (n < 0)
+				break;
+		}
+	}
+
+	return n;
+}
+
+bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse)
+{
+	struct commonio_db *db;
+	const struct subordinate_range *r;
+
+	if (id_type == ID_TYPE_UID)
+		db = &subordinate_uid_db;
+	else
+		db = &subordinate_gid_db;
+	commonio_rewind(db);
+	if (reuse) {
+		while ((r = commonio_next(db)) != NULL) {
+			// TODO account for username vs uid_t
+			if (0 != strcmp(r->owner, range->owner))
+				continue;
+			if (r->count >= range->count) {
+				range->count = r->count;
+				range->start = r->start;
+				return true;
+			}
+		}
+	}
+
+	range->start = find_free_range(db, range->start, ULONG_MAX, range->count);
+	if (range->start == ULONG_MAX)
+		return false;
+
+	return add_range(db, range->owner, range->start, range->count) == 1;
+}
+
+bool release_subid_range(struct subordinate_range *range, enum subid_type id_type)
+{
+	struct commonio_db *db;
+	if (id_type == ID_TYPE_UID)
+		db = &subordinate_uid_db;
+	else
+		db = &subordinate_gid_db;
+	return remove_range(db, range->owner, range->start, range->count) == 1;
+}
+
 #else				/* !ENABLE_SUBIDS */
 extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif				/* !ENABLE_SUBIDS */

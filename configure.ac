@@ -22,8 +22,8 @@ test "$prefix" = "/usr" && exec_prefix=""
 
 AC_GNU_SOURCE
 
-AM_DISABLE_SHARED
 AM_ENABLE_STATIC
+AM_ENABLE_SHARED
 
 AM_MAINTAINER_MODE
 
@@ -725,6 +725,7 @@ AC_CONFIG_FILES([
 	man/zh_TW/Makefile
 	libmisc/Makefile
 	lib/Makefile
+	libsubid/Makefile
 	src/Makefile
 	contrib/Makefile
 	etc/Makefile

@@ -156,4 +156,64 @@ if FCAPS
 	setcap cap_setuid+ep $(DESTDIR)$(ubindir)/newuidmap
 	setcap cap_setgid+ep $(DESTDIR)$(ubindir)/newgidmap
 endif
+
+noinst_PROGRAMS += list_subid_ranges  \
+					get_subid_owners \
+					new_subid_range \
+					free_subid_range
+
+MISCLIBS = \
+	$(LIBAUDIT) \
+	$(LIBSELINUX) \
+	$(LIBSEMANAGE) \
+	$(LIBCRYPT_NOPAM) \
+	$(LIBSKEY) \
+	$(LIBMD) \
+	$(LIBECONF) \
+	$(LIBCRYPT) \
+	$(LIBTCB)
+
+list_subid_ranges_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libsubid/libsubid.la \
+	$(MISCLIBS)
+
+list_subid_ranges_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir)/libsubid
+
+get_subid_owners_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libsubid/libsubid.la \
+	$(MISCLIBS)
+
+get_subid_owners_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir)/libsubid
+
+new_subid_range_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir)/libsubid
+
+new_subid_range_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libsubid/libsubid.la \
+	$(MISCLIBS)
+
+free_subid_range_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir)/libsubid
+
+free_subid_range_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libsubid/libsubid.la \
+	$(MISCLIBS)
 endif

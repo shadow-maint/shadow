@@ -6,7 +6,7 @@ autoreconf -v -f --install || exit 1
 	CFLAGS="-O2 -Wall" \
 	--enable-man \
 	--enable-maintainer-mode \
-	--disable-shared \
+	--enable-shared \
 	--without-libpam \
 	--with-selinux \
 	"$@"
