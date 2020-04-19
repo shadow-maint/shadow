@@ -2,7 +2,7 @@
 
 set -e
 
-build_path=/root/build/shadow-4.1.5/
+build_path=$(git rev-parse --show-toplevel)
 
 # Save the configuration files in tmp.
 save_config ()
