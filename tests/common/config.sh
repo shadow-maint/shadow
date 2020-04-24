@@ -8,7 +8,7 @@ build_path=$(git rev-parse --show-toplevel)
 save_config ()
 {
 	[ ! -d tmp ] && mkdir tmp
-	find config -depth -path "*/.svn/*" -prune -o -type f -print | sed -e 's/config\///' |
+	find config -depth -type f -print | sed -e 's/config\///' |
 	while read file
 	do
 		mkdir -p "tmp/$(dirname "$file")"
@@ -19,7 +19,7 @@ save_config ()
 # Copy the config files from config to the system
 change_config ()
 {
-	find config -depth -path "*/.svn/*" -prune -o -type f -print | sed -e 's/config\///' |
+	find config -depth -type f -print | sed -e 's/config\///' |
 	while read file
 	do
 		cp -f "config/$file" "/$file"
@@ -30,7 +30,7 @@ change_config ()
 # The config files must be saved before with save_config ().
 restore_config ()
 {
-	find config -depth -path "*/.svn/*" -prune -o -type f -print | sed -e 's/config\///' |
+	find config -depth -type f -print | sed -e 's/config\///' |
 	while read file
 	do
 		if [ -f "tmp/$file" ]; then
@@ -54,7 +54,6 @@ prepare_chroot ()
 {
 	mkdir tmp/root
 	cp -rfdp config_chroot/* tmp/root/
-	find tmp/root/ -name .svn -type d -print0 | xargs -0 rm -rf
 
 	lists=/root/tests/common/config_chroot.list
 	[ -f config_chroot.list ] && lists="$lists config_chroot.list"
