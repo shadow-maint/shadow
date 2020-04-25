@@ -130,7 +130,6 @@ static struct spwd *my_sgetspent (const char *string)
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
-	char *cpp;
 	int i;
 
 	/*
@@ -389,7 +388,6 @@ struct spwd *getspent (void)
 #ifdef	USE_NIS
 	int nis_1_user = 0;
 	struct spwd *val;
-	char buf[BUFSIZ];
 #endif
 	if (NULL == shadow) {
 		setspent ();
@@ -484,7 +482,6 @@ struct spwd *getspnam (const char *name)
 	struct spwd *sp;
 
 #ifdef	USE_NIS
-	char buf[BUFSIZ];
 	static char save_name[16];
 	bool nis_disabled = false;
 #endif
