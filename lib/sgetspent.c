@@ -52,7 +52,6 @@ struct spwd *sgetspent (const char *string)
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
-	char *cpp;
 	int i;
 
 	/*

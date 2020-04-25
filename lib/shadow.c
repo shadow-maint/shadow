@@ -130,7 +130,6 @@ static struct spwd *my_sgetspent (const char *string)
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
-	char *cpp;
 	int i;
 
 	/*
