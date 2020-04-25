@@ -1,16 +1,38 @@
+dist: bionic
 sudo: false
 
 language: c
 
 compiler:
-  - gcc
-  - clang
+ - gcc
+ - clang
+
+arch:
+ - amd64
+ - arm64
+ - ppc64le
+ - s390x
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "D3C+O5UjN8Oe0FROMk5yPRU0he4UNAaHdxwSVG2373ImzYIs3pIvre1kXzeQSajbXCRKiKE8p2U0TooIRZAo/JeaZDgb4dBhij4c4/Qv8MpFCTC1W7cgo6UeOQeZwdfqp7v9Zz5ubh6RW68bmSM2naqQim1zuD1vDSGy4Wir7z4="
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get -y install -qq automake autopoint xsltproc libselinux1-dev gettext
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 addons:
-  apt:
-    packages:
-      - autopoint
-      - xsltproc
+  coverity_scan:
+    project:
+      name: "shadow-maint/shadow"
+      description: "Upstream shadow utils tree"
+    notification_email: christian.brauner@ubuntu.com,serge@hallyn.com
+    build_command_prepend: "./autogen.sh --without-selinux --disable-man"
+    build_command: "make -j4"
+    branch_pattern: master
 
 script:
  - ./autogen.sh --without-selinux --disable-man
