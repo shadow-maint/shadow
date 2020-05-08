@@ -30,6 +30,7 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY NONEXISTENT           SYSTEM "login.defs.d/NONEXISTENT.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
@@ -266,6 +267,7 @@
       tool:
     </para>
     <variablelist>
+      &NONEXISTENT;
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
