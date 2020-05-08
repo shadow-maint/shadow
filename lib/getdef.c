@@ -105,6 +105,7 @@ static struct itemdef def_table[] = {
 	{"MAIL_FILE", NULL},
 	{"MAX_MEMBERS_PER_GROUP", NULL},
 	{"MD5_CRYPT_ENAB", NULL},
+	{"NONEXISTENT", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},
 	{"PASS_WARN_AGE", NULL},
