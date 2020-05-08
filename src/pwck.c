@@ -527,12 +527,16 @@ static void check_pw_file (int *errors, bool *changed)
 			 * Make sure the home directory exists
 			 */
 			if (!quiet && (access (pwd->pw_dir, F_OK) != 0)) {
+				const char *nonexistent = getdef_str("NONEXISTENT");
+
 				/*
-				 * Home directory doesn't exist, give a warning
+				 * Home directory does not exist, give a warning (unless intentional)
 				 */
-				printf (_("user '%s': directory '%s' does not exist\n"),
-						pwd->pw_name, pwd->pw_dir);
-				*errors += 1;
+				if (NULL == nonexistent || strcmp (pwd->pw_dir, nonexistent) != 0) {
+					printf (_("user '%s': directory '%s' does not exist\n"),
+							pwd->pw_name, pwd->pw_dir);
+					*errors += 1;
+				}
 			}
 		}
 
