@@ -153,6 +153,7 @@ login_defs_v = \
 	MD5_CRYPT_ENAB.xml \
 	MOTD_FILE.xml \
 	NOLOGINS_FILE.xml \
+	NONEXISTENT.xml \
 	OBSCURE_CHECKS_ENAB.xml \
 	PASS_ALWAYS_WARN.xml \
 	PASS_CHANGE_TRIES.xml \

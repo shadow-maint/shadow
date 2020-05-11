@@ -295,7 +295,7 @@ CHFN_AUTH		yes
 # any combination of letters "frwh" (full name, room number, work
 # phone, home phone).  If not defined, no changes are allowed.
 # For backward compatibility, "yes" = "rwh" and "no" = "frwh".
-# 
+#
 CHFN_RESTRICT		rwh
 
 #
@@ -383,6 +383,14 @@ CHFN_RESTRICT		rwh
 # Default is no.
 #
 DEFAULT_HOME	yes
+
+#
+# The pwck(8) utility emits a warning for any system account with a home
+# directory that does not exist.  Some system accounts intentionally do
+# not have a home directory.  Such accounts may have this string as
+# their home directory in /etc/passwd to avoid a spurious warning.
+#
+NONEXISTENT	/nonexistent
 
 #
 # If this file exists and is readable, login environment will be
