@@ -760,6 +760,20 @@ static void save_caller_context (char **argv)
 	pw_free (pw);
 }
 
+static void choose_default_user(void) {
+	struct passwd *root_pw = getpwnam ("root");
+	if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
+		(void) strcpy (name, "root");
+	} else {
+		root_pw = getpwuid (0);
+		if (NULL == root_pw) {
+			SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
+			su_failure (caller_tty, true);
+		}
+		(void) strcpy (name, root_pw->pw_name);
+	}
+}
+
 /*
  * process_flags - Process the command line arguments
  *
@@ -807,25 +821,20 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
+	if (strcmp(argv[optind - 1], "--") == 0) {
+		// if getopt_long runs into -- , it will leave optind at the
+		// next word.  In that case, use default user
+		choose_default_user();
+	} else if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
 		fakelogin = true;
 		optind++;
 	}
 
-	if (optind < argc) {
-		STRFCPY (name, argv[optind++]);	/* use this login id */
-	}
 	if ('\0' == name[0]) {		/* use default user */
-		struct passwd *root_pw = getpwnam ("root");
-		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
-			(void) strcpy (name, "root");
+		if (optind < argc && strcmp(argv[optind], "--") != 0) {
+			STRFCPY (name, argv[optind++]);	/* use this login id */
 		} else {
-			root_pw = getpwuid (0);
-			if (NULL == root_pw) {
-				SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
-				su_failure (caller_tty, true);
-			}
-			(void) strcpy (name, root_pw->pw_name);
+			choose_default_user();
 		}
 	}
 
