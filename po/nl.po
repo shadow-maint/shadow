@@ -1,14 +1,14 @@
 # dutch po-file for shadow
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # Bart Cornelis <cobaco@linux.be>, 2004, 2006.
-# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014-2019.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014-2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow_1_4.8\n"
+"Project-Id-Version: shadow_1_4.8.1-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2020-01-23 14:59-0600\n"
-"PO-Revision-Date: 2020-02-13 15:17+0100\n"
+"PO-Revision-Date: 2020-05-24 15:20+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
 "Language: nl\n"
@@ -2439,7 +2439,7 @@ msgstr "%s: ongeldige shell '%s'\n"
 
 #, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
-msgstr "%s: waarschuwing: ontbrekende of onuitvoerbare shell '%s'\n"
+msgstr "%s: waarschuwing: ontbrekende of niet-uitvoerbare shell '%s'\n"
 
 #, c-format
 msgid "%s: -Z cannot be used with --prefix\n"
