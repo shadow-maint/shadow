@@ -73,6 +73,7 @@ static bool uflg = false;	/* print only an user of range of users */
 static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
 static bool Cflg = false;	/* clear record for user */
+static bool Fflg = false;	/* print From column as last column */
 static bool Sflg = false;	/* set record for user */
 
 #define	NOW	(time ((time_t *) 0))
@@ -87,6 +88,7 @@ static /*@noreturn@*/void usage (int status)
 	                Prog);
 	(void) fputs (_("  -b, --before DAYS             print only lastlog records older than DAYS\n"), usageout);
 	(void) fputs (_("  -C, --clear                   clear lastlog record of an user (usable only with -u)\n"), usageout);
+	(void) fputs (_("  -F, --fromlast                display From in the last column\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -S, --set                     set lastlog record to current time (usable only with -u)\n"), usageout);
@@ -150,7 +152,11 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	/* Print the header only once */
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		puts (_("Username         Port     From             Latest"));
+		if (Fflg) {
+			puts (_("Username         Port     Latest                         From"));
+		} else {
+			puts (_("Username         Port     From             Latest"));
+		}
 #else
 		puts (_("Username                Port     Latest"));
 #endif
@@ -172,8 +178,13 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	}
 
 #ifdef HAVE_LL_HOST
-	printf ("%-16s %-8.8s %-16.16s %s\n",
-	        pw->pw_name, ll.ll_line, ll.ll_host, cp);
+	if (Fflg) {
+		printf ("%-16s %-8.8s %-30.30s %s\n",
+		        pw->pw_name, ll.ll_line, cp, ll.ll_host);
+	} else {
+		printf ("%-16s %-8.8s %-16.16s %s\n",
+		        pw->pw_name, ll.ll_line, ll.ll_host, cp);
+	}
 #else
 	printf ("%-16s\t%-8.8s %s\n",
 	        pw->pw_name, ll.ll_line, cp);
@@ -316,6 +327,7 @@ int main (int argc, char **argv)
 		static struct option const longopts[] = {
 			{"before", required_argument, NULL, 'b'},
 			{"clear",  no_argument,       NULL, 'C'},
+			{"from",   no_argument,       NULL, },
 			{"help",   no_argument,       NULL, 'h'},
 			{"root",   required_argument, NULL, 'R'},
 			{"set",    no_argument,       NULL, 'S'},
@@ -324,7 +336,7 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "b:ChR:St:u:", longopts,
+		while ((c = getopt_long (argc, argv, "b:CFhR:St:u:", longopts,
 		                         NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -343,6 +355,11 @@ int main (int argc, char **argv)
 			case 'C':
 			{
 				Cflg = true;
+				break;
+			}
+			case 'F':
+			{
+				Fflg = true;
 				break;
 			}
 			case 'h':

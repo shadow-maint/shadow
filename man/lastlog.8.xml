@@ -4,7 +4,7 @@
    Copyright (c) 1992       , Phillip Street
    Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
-  
+
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
    are met:
@@ -16,7 +16,7 @@
    3. The name of the copyright holders or contributors may not be used to
       endorse or promote products derived from this software without
       specific prior written permission.
-  
+
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -113,6 +113,14 @@
 	    Clear lastlog record of a user. This option can be used only together
 	    with <option>-u</option> (<option>--user</option>)).
 	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-F</option>, <option>--fromlast</option>
+	</term>
+	<listitem>
+	  <para>Display From in the last column</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
