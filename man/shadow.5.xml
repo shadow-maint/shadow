@@ -151,7 +151,7 @@
 	    again.
 	  </para>
 	  <para>
-	    An empty field and value 0 mean that there are no minimum
+	    An empty field and value 0 mean that there is no minimum
 	    password age.
 	  </para>
 	</listitem>
