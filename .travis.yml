@@ -15,7 +15,7 @@ arch:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get -y install -qq automake autopoint xsltproc libselinux1-dev gettext
+  - sudo apt-get -y install -qq automake autopoint xsltproc libselinux1-dev gettext expect
 script:
  - ./autogen.sh --without-selinux --disable-man
  - grep ENABLE_ config.status
@@ -37,5 +37,15 @@ addons:
     build_command_prepend: "./autogen.sh --without-selinux --disable-man"
     build_command: "make -j4"
     branch_pattern: master
+
+script:
+ - cat /proc/self/uid_map
+ - cat /proc/self/status
+ - systemd-detect-virt
+ - ./autogen.sh --without-selinux --disable-man
+ - grep ENABLE_ config.status
+ - make
+ - sudo make install
+ - (cd tests; sudo ./run_some; cat testsuite.log)
 
 # vim:et:ts=2:sw=2

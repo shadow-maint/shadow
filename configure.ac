@@ -1,10 +1,20 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_PREREQ([2.64])
+AC_PREREQ([2.69])
+m4_define([libsubid_abi_major], 1)
+m4_define([libsubid_abi_minor], 0)
+m4_define([libsubid_abi_micro], 0)
+m4_define([libsubid_abi], [libsubid_abi_major.libsubid_abi_minor.libsubid_abi_micro])
 AC_INIT([shadow], [4.8.1], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz])
+AC_CONFIG_MACRO_DIRS([m4])
 AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS([config.h])
+
+AC_SUBST([LIBSUBID_ABI_MAJOR], [libsubid_abi_major])
+AC_SUBST([LIBSUBID_ABI_MINOR], [libsubid_abi_minor])
+AC_SUBST([LIBSUBID_ABI_MICRO], [libsubid_abi_micro])
+AC_SUBST([LIBSUBID_ABI], [libsubid_abi])
 
 dnl Some hacks...
 test "$prefix" = "NONE" && prefix="/usr"
@@ -12,8 +22,8 @@ test "$prefix" = "/usr" && exec_prefix=""
 
 AC_GNU_SOURCE
 
-AM_DISABLE_SHARED
 AM_ENABLE_STATIC
+AM_ENABLE_SHARED
 
 AM_MAINTAINER_MODE
 
@@ -715,6 +725,7 @@ AC_CONFIG_FILES([
 	man/zh_TW/Makefile
 	libmisc/Makefile
 	lib/Makefile
+	libsubid/Makefile
 	src/Makefile
 	contrib/Makefile
 	etc/Makefile

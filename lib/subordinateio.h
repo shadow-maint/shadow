@@ -11,6 +11,8 @@
 
 #include <sys/types.h>
 
+#include "../libsubid/subid.h"
+
 extern int sub_uid_close(void);
 extern bool have_sub_uids(const char *owner, uid_t start, unsigned long count);
 extern bool sub_uid_file_present (void);
@@ -23,6 +25,11 @@ extern int sub_uid_unlock (void);
 extern int sub_uid_add (const char *owner, uid_t start, unsigned long count);
 extern int sub_uid_remove (const char *owner, uid_t start, unsigned long count);
 extern uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count);
+extern struct subordinate_range **list_owner_ranges(const char *owner, enum subid_type id_type);
+extern bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse);
+extern bool release_subid_range(struct subordinate_range *range, enum subid_type id_type);
+extern int find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type);
+extern void free_subordinate_ranges(struct subordinate_range **ranges);
 
 extern int sub_gid_close(void);
 extern bool have_sub_gids(const char *owner, gid_t start, unsigned long count);
