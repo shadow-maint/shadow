@@ -64,6 +64,7 @@
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
+#include "run_part.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
@@ -2420,6 +2421,11 @@ int main (int argc, char **argv)
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
 #endif				/* ENABLE_SUBIDS */
 
+	if (run_parts ("/etc/shadow-maint/useradd-pre.d", (char*)user_name,
+			"useradd")) {
+		exit(1);
+	}
+
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	{
@@ -2633,6 +2639,11 @@ int main (int argc, char **argv)
 		}
 	}
 #endif				/* WITH_SELINUX */
+
+	if (run_parts ("/etc/shadow-maint/useradd-post.d", (char*)user_name,
+			"useradd")) {
+		exit(1);
+	}
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

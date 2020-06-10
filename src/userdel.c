@@ -31,19 +31,17 @@
  */
 
 #include <config.h>
-
-#ident "$Id$"
-
 #include <assert.h>
+#include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <stdio.h>
 #include <sys/stat.h>
-#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -65,6 +63,7 @@
 #include <tcb.h>
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
+#include "run_part.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #ifdef ENABLE_SUBIDS
@@ -1143,6 +1142,10 @@ int main (int argc, char **argv)
 	{
 		const struct passwd *pwd;
 
+		if (run_parts ("/etc/shadow-maint/userdel-pre.d", user_name,
+				"userdel")) {
+			exit(1);
+		}
 		pw_open(O_RDONLY);
 		pwd = pw_locate (user_name); /* we care only about local users */
 		if (NULL == pwd) {
@@ -1341,6 +1344,10 @@ int main (int argc, char **argv)
 	if(prefix[0] == '\0')
 		user_cancel (user_name);
 	close_files ();
+
+	if (run_parts ("/etc/shadow-maint/userdel-post.d", user_name, "userdel")) {
+		exit(1);
+	}
 
 #ifdef WITH_TCB
 	errors += remove_tcbdir (user_name, user_id);
