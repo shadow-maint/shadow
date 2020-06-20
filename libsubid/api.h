@@ -6,7 +6,7 @@ struct subordinate_range **get_subgid_ranges(const char *owner);
 void subid_free_ranges(struct subordinate_range **ranges);
 
 int get_subuid_owners(uid_t uid, uid_t **owner);
-int get_subgid_owners(uid_t uid, uid_t **owner);
+int get_subgid_owners(gid_t gid, uid_t **owner);
 
 /* range should be pre-allocated with owner and count filled in, start is
  * ignored, can be 0 */
