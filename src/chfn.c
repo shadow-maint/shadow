@@ -61,7 +61,7 @@ static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
 static char homeph[BUFSIZ];
-static char slop[BUFSIZ];
+static char slop[BUFSIZ + 1 + 80];
 static bool amroot;
 /* Flags */
 static bool fflg = false;		/* -f - set full name                */
@@ -311,6 +311,11 @@ static void process_flags (int argc, char **argv)
 				exit (E_NOPERM);
 			}
 			oflg = true;
+			if (strlen (optarg) > (unsigned int) 80) {
+				fprintf (stderr,
+				         _("%s: fields too long\n"), Prog);
+				exit (E_NOPERM);
+			}
 			STRFCPY (slop, optarg);
 			break;
 		case 'r':
