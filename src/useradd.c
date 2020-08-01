@@ -1500,7 +1500,7 @@ static void process_flags (int argc, char **argv)
 		user_name = argv[optind];
 		if (!is_valid_user_name (user_name)) {
 			fprintf (stderr,
-			         _("%s: invalid user name '%s'\n"),
+			         _("%s: invalid user name '%s': use --badname to ignore\n"),
 			         Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
