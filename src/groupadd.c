@@ -79,6 +79,7 @@ static /*@null@*/char *group_passwd;
 static /*@null@*/char *empty_list = NULL;
 
 static const char *prefix = "";
+static char *user_list;
 
 static bool oflg = false;	/* permit non-unique group ID to be specified with -g */
 static bool gflg = false;	/* ID value for the new group */
@@ -126,7 +127,8 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -p, --password PASSWORD       use this encrypted password for the new group\n"), usageout);
 	(void) fputs (_("  -r, --system                  create a system account\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DI        directory prefix\n"), usageout);
+	(void) fputs (_("  -U, --users USERS             list of user members of this group\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -206,6 +208,19 @@ static void grp_update (void)
 		grp.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 	}
 #endif				/* SHADOWGRP */
+
+	if (user_list) {
+		char *token;
+		token = strtok(user_list, ",");
+		while (token) {
+			if (prefix_getpwnam (token) == NULL) {
+				fprintf (stderr, _("Invalid member username %s\n"), token);
+				exit (E_GRP_UPDATE);
+			}
+			grp.gr_mem = add_list(grp.gr_mem, token);
+			token = strtok(NULL, ",");
+		}
+	}
 
 	/*
 	 * Write out the new group file entry.
@@ -391,10 +406,11 @@ static void process_flags (int argc, char **argv)
 		{"system",     no_argument,       NULL, 'r'},
 		{"root",       required_argument, NULL, 'R'},
 		{"prefix",     required_argument, NULL, 'P'},
+		{"users",      required_argument, NULL, 'U'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:P:",
+	while ((c = getopt_long (argc, argv, "fg:hK:op:rR:P:U:",
 		                 long_options, NULL)) != -1) {
 		switch (c) {
 		case 'f':
@@ -452,6 +468,9 @@ static void process_flags (int argc, char **argv)
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 'P': /* no-op, handled in process_prefix_flag () */
+			break;
+		case 'U':
+			user_list = optarg;
 			break;
 		default:
 			usage (E_USAGE);

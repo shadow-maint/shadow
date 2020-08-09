@@ -94,6 +94,15 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
+	  <option>-a</option>, <option>--append</option>&nbsp;<replaceable>GID</replaceable>
+	</term>
+	<listitem>
+      <para>If group members are specified with -U, append them to the existing
+            member list, rather than replacing it.</para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+	<term>
 	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>
 	</term>
 	<listitem>
@@ -200,6 +209,22 @@
 		Some limitations: NIS and LDAP users/groups are not verified.
 		PAM authentication is using the host files.
 		No SELINUX support.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-U</option>, <option>--users</option>
+	</term>
+	<listitem>
+	  <para>
+	    A list of usernames to add as members of the group.
+	  </para>
+	  <para>
+	    The default behavior (if the <option>-g</option>,
+	    <option>-N</option>, and <option>-U</option> options are not
+	    specified) is defined by the <option>USERGROUPS_ENAB</option>
+	    variable in <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>

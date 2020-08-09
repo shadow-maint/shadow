@@ -206,7 +206,9 @@ extern void __gr_set_changed (void);
 
 /* groupmem.c */
 extern /*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent);
+extern void gr_free_members (struct group *grent);
 extern void gr_free (/*@out@*/ /*@only@*/struct group *grent);
+extern bool gr_append_member (struct group *grp, char *member);
 
 /* hushed.c */
 extern bool hushed (const char *username);
