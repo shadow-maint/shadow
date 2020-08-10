@@ -87,6 +87,7 @@ static gid_t group_id;
 static gid_t group_newid;
 
 static const char* prefix = "";
+static char *user_list;
 
 static struct cleanup_info_mod info_passwd;
 static struct cleanup_info_mod info_group;
@@ -95,6 +96,7 @@ static struct cleanup_info_mod info_gshadow;
 #endif
 
 static bool
+    aflg = false,               /* append -U members rather than replace them */
     oflg = false,		/* permit non-unique group ID to be specified with -g */
     gflg = false,		/* new ID value for the group */
     nflg = false,		/* a new name has been specified for the group */
@@ -117,6 +119,7 @@ static void open_files (void);
 static void close_files (void);
 static void update_primary_groups (gid_t ogid, gid_t ngid);
 
+
 /*
  * usage - display usage message and exit
  */
@@ -129,6 +132,8 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
+	(void) fputs (_("  -a, --append                  append the users mentioned by -U option to the group \n"
+	                "                                without removing existing user members\n"), usageout);
 	(void) fputs (_("  -g, --gid GID                 change the group ID to GID\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"), usageout);
@@ -137,6 +142,7 @@ static void usage (int status)
 	                "                                PASSWORD\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"), usageout);
+	(void) fputs (_("  -U, --users USERS             list of user members of this group\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -253,6 +259,32 @@ static void grp_update (void)
 
 	if (gflg) {
 		update_primary_groups (ogrp->gr_gid, group_newid);
+	}
+
+	if (user_list) {
+		char *token;
+
+		if (!aflg) {
+			// requested to replace the existing groups
+			if (NULL != grp.gr_mem[0])
+				gr_free_members(&grp);
+			grp.gr_mem = (char **)xmalloc(sizeof(char *));
+			grp.gr_mem[0] = (char *)0;
+		} else {
+			// append to existing groups
+			if (NULL != grp.gr_mem[0])
+				grp.gr_mem = dup_list (grp.gr_mem);
+		}
+
+		token = strtok(user_list, ",");
+		while (token) {
+			if (prefix_getpwnam (token) == NULL) {
+				fprintf (stderr, _("Invalid member username %s\n"), token);
+				exit (E_GRP_UPDATE);
+			}
+			grp.gr_mem = add_list(grp.gr_mem, token);
+			token = strtok(NULL, ",");
+		}
 	}
 
 	/*
@@ -379,6 +411,7 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
+		{"append",     no_argument,       NULL, 'a'},
 		{"gid",        required_argument, NULL, 'g'},
 		{"help",       no_argument,       NULL, 'h'},
 		{"new-name",   required_argument, NULL, 'n'},
@@ -386,11 +419,15 @@ static void process_flags (int argc, char **argv)
 		{"password",   required_argument, NULL, 'p'},
 		{"root",       required_argument, NULL, 'R'},
 		{"prefix",     required_argument, NULL, 'P'},
+		{"users",      required_argument, NULL, 'U'},
 		{NULL, 0, NULL, '\0'}
 	};
-	while ((c = getopt_long (argc, argv, "g:hn:op:R:P:",
+	while ((c = getopt_long (argc, argv, "ag:hn:op:R:P:U:",
 		                 long_options, NULL)) != -1) {
 		switch (c) {
+		case 'a':
+			aflg = true;
+			break;
 		case 'g':
 			gflg = true;
 			if (   (get_gid (optarg, &group_newid) == 0)
@@ -418,6 +455,9 @@ static void process_flags (int argc, char **argv)
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
 		case 'P': /* no-op, handled in process_prefix_flag () */
+			break;
+		case 'U':
+			user_list = optarg;
 			break;
 		default:
 			usage (E_USAGE);
