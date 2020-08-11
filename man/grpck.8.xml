@@ -34,7 +34,6 @@
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='grpck.8'>
-  <!-- $Id$ -->
   <refentryinfo>
     <author>
       <firstname>Julianne Frances</firstname>
@@ -191,6 +190,17 @@
 	    by GID.
 	  </para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-S</option>, <option>--silence-warnings</option></term>
+        <listitem>
+          <para>
+            Suppress more controversial warnings, in particular warnings about
+            inconsistency between group members listed in
+            <filename>/etc/group</filename> and
+            <filename>/etc/ghadow</filename>.
+          </para>
+        </listitem>
       </varlistentry>
     </variablelist>
     <para>

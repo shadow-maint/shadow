@@ -33,8 +33,6 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <grp.h>
 #include <pwd.h>
@@ -82,6 +80,7 @@ static bool gr_locked = false;
 /* Options */
 static bool read_only = false;
 static bool sort_mode = false;
+static bool silence_warnings = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
@@ -158,6 +157,7 @@ static /*@noreturn@*/void usage (int status)
 	                "                                but do not change files\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
+	(void) fputs (_("  -S, --silence-warnings        silence controversial/paranoid warnings\nn"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -193,18 +193,19 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
-		{"help",      no_argument,       NULL, 'h'},
-		{"quiet",     no_argument,       NULL, 'q'},
-		{"read-only", no_argument,       NULL, 'r'},
-		{"root",      required_argument, NULL, 'R'},
-		{"sort",      no_argument,       NULL, 's'},
+		{"help",             no_argument,       NULL, 'h'},
+		{"quiet",            no_argument,       NULL, 'q'},
+		{"read-only",        no_argument,       NULL, 'r'},
+		{"root",             required_argument, NULL, 'R'},
+		{"silence-warnings", no_argument,       NULL, 'S'},
+		{"sort",             no_argument,       NULL, 's'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	/*
 	 * Parse the command line arguments
 	 */
-	while ((c = getopt_long (argc, argv, "hqrR:s",
+	while ((c = getopt_long (argc, argv, "hqrR:sS",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'h':
@@ -220,6 +221,9 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 's':
 			sort_mode = true;
+			break;
+		case 'S':
+			silence_warnings = true;
 			break;
 		default:
 			usage (E_USAGE);
@@ -456,7 +460,7 @@ static void compare_members_lists (const char *groupname,
 				break;
 			}
 		}
-		if (*other_pmem == NULL) {
+		if (!silence_warnings && *other_pmem == NULL) {
 			printf
 			    ("'%s' is a member of the '%s' group in %s but not in %s\n",
 			     *pmem, groupname, file, other_file);
