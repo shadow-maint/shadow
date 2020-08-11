@@ -70,6 +70,7 @@ int set_selinux_file_context (const char *dst_name)
 		/* Set the security context for the next created file */
 		if (setfscreatecon (scontext) < 0) {
 			if (security_getenforce () != 0) {
+				freecon (scontext);
 				return 1;
 			}
 		}
