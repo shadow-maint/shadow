@@ -203,10 +203,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == lstchgdate) {
+	if (-1 == lstchgdate || lstchgdate > LONG_MAX / SCALE) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, (time_t) lstchgdate * SCALE);
+		date_to_str (buf, sizeof buf, (time_t) (lstchgdate * SCALE));
 	}
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
@@ -234,10 +234,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == expdate) {
+	if (-1 == expdate || LONG_MAX / SCALE < expdate) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, (time_t) expdate * SCALE);
+		date_to_str (buf, sizeof buf, (time_t) (expdate * SCALE));
 	}
 
 	change_field (buf, sizeof buf,
@@ -309,7 +309,7 @@ static void list_fields (void)
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
 	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
-	if (lstchgdate < 0) {
+	if (lstchgdate < 0 || lstchgdate > LONG_MAX / SCALE) {
 		(void) puts (_("never"));
 	} else if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
@@ -327,7 +327,8 @@ static void list_fields (void)
 		(void) puts (_("password must be changed"));
 	} else if (   (lstchgdate < 0)
 	           || (maxdays >= (10000 * (DAY / SCALE)))
-	           || (maxdays < 0)) {
+	           || (maxdays < 0)
+	           || ((LONG_MAX - changed) / SCALE < maxdays)) {
 		(void) puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
@@ -346,7 +347,9 @@ static void list_fields (void)
 	} else if (   (lstchgdate < 0)
 	           || (inactdays < 0)
 	           || (maxdays >= (10000 * (DAY / SCALE)))
-	           || (maxdays < 0)) {
+	           || (maxdays < 0)
+	           || (maxdays > LONG_MAX - inactdays)
+	           || ((LONG_MAX - changed) / SCALE < maxdays + inactdays)) {
 		(void) puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
@@ -358,7 +361,7 @@ static void list_fields (void)
 	 * password expiring or not.
 	 */
 	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
-	if (expdate < 0) {
+	if (expdate < 0 || LONG_MAX / SCALE < expdate) {
 		(void) puts (_("never"));
 	} else {
 		expires = expdate * SCALE;
