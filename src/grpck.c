@@ -157,7 +157,7 @@ static /*@noreturn@*/void usage (int status)
 	                "                                but do not change files\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
-	(void) fputs (_("  -S, --silence-warnings        silence controversial/paranoid warnings\nn"), usageout);
+	(void) fputs (_("  -S, --silence-warnings        silence controversial/paranoid warnings\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
