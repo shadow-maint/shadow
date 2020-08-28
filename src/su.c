@@ -770,6 +770,8 @@ static void save_caller_context (char **argv)
 static void process_flags (int argc, char **argv)
 {
 	int c;
+	bool doubledash = false;
+
 	static struct option long_options[] = {
 		{"command",              required_argument, NULL, 'c'},
 		{"help",                 no_argument,       NULL, 'h'},
@@ -807,14 +809,23 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
+	if (strcmp(argv[optind-1], "--") == 0)
+		doubledash = true;
+
 	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
 		fakelogin = true;
 		optind++;
 	}
 
-	if (optind < argc) {
+	if ((optind < argc) && (strcmp (argv[optind], "--") == 0)) {
+		doubledash = true;
+		optind++;
+	}
+
+	if (optind < argc && !doubledash) {
 		STRFCPY (name, argv[optind++]);	/* use this login id */
 	}
+
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
 		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
@@ -1178,7 +1189,7 @@ int main (int argc, char **argv)
 	if (!doshell) {
 		int err;
 		/* Position argv to the remaining arguments */
-		argv += optind;
+		argv += optind - 1;
 		if (NULL != command) {
 			argv -= 2;
 			argv[0] = "-c";
