@@ -90,7 +90,7 @@ static bool caller_on_console = false;
 static /*@only@*/char *caller_pass;
 #endif
 #endif				/* !USE_PAM */
-static bool do_interactive_shell = false;
+static bool doshell = false;
 static bool fakelogin = false;
 static /*@observer@*/const char *shellstr;
 static /*@null@*/char *command = NULL;
@@ -327,11 +327,11 @@ static void prepare_pam_close_session (void)
 		if (   (sigaddset (&ourset, SIGTERM) != 0)
 		    || (sigaddset (&ourset, SIGALRM) != 0)
 		    || (sigaction (SIGTERM, &action, NULL) != 0)
-		    || (!do_interactive_shell /* handle SIGINT (Ctrl-C), SIGQUIT
-		                               * (Ctrl-\), and SIGTSTP (Ctrl-Z)
-		                               * since the child will not control
-		                               * the tty.
-		                               */
+		    || (   !doshell /* handle SIGINT (Ctrl-C), SIGQUIT
+		                     * (Ctrl-\), and SIGTSTP (Ctrl-Z)
+		                     * since the child will not control
+		                     * the tty.
+		                     */
 		        && (   (sigaddset (&ourset, SIGINT)  != 0)
 		            || (sigaddset (&ourset, SIGQUIT) != 0)
 		            || (sigaddset (&ourset, SIGTSTP) != 0)
@@ -866,9 +866,9 @@ static void process_flags (int argc, char **argv)
 		optidx++;
 	}
 
-	do_interactive_shell = (argc == optidx);	/* any arguments remaining? */
+	doshell = (argc == optidx);	/* any arguments remaining? */
 	if (NULL != command) {
-		do_interactive_shell = false;
+		doshell = false;
 	}
 }
 
@@ -1144,7 +1144,7 @@ int main (int argc, char **argv)
 
 	set_environment (pw);
 
-	if (!do_interactive_shell) {
+	if (!doshell) {
 		/* There is no need for a controlling terminal.
 		 * This avoids the callee to inject commands on
 		 * the caller's tty. */
@@ -1212,7 +1212,7 @@ int main (int argc, char **argv)
 		cp = Basename (shellstr);
 	}
 
-	if (!do_interactive_shell) {
+	if (!doshell) {
 		int err;
 		/* Position argv to the remaining arguments */
 		argv += optidx;
