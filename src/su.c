@@ -55,6 +55,7 @@
 
 #ident "$Id$"
 
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
@@ -94,7 +95,6 @@ static bool doshell = false;
 static bool fakelogin = false;
 static /*@observer@*/const char *shellstr;
 static /*@null@*/char *command = NULL;
-static int optidx;
 
 
 /* not needed by sulog.c anymore */
@@ -761,48 +761,6 @@ static void save_caller_context (char **argv)
 }
 
 /*
- * flags_match - test arg against flag candidates
- */
-static bool flags_match(const char *arg, const char *a, const char *b, const char *c)
-{
-	return	(a != NULL && strcmp (arg, a) == 0) ||
-		(b != NULL && strcmp (arg, b) == 0) ||
-		(c != NULL && strcmp (arg, c) == 0);
-}
-
-/* is_flag_like - test if arg resembles a flag
- *
- *	lone "--" and bare leading-hyphen-less words are not flag-like,
- *	everything else is considered a probable flag.
- */
-static bool is_flag_like(const char *arg)
-{
-	if (arg[0] != '-')
-		return false;
-
-	if (strcmp (arg, "--") == 0)
-		return false;
-
-	return true;
-}
-
-static void flag_arg_required(const char *arg)
-{
-	fprintf (stderr,
-	         _("%s: option \'%s\' requires an argument\n"),
-		 Prog, arg);
-	usage (E_USAGE);
-}
-
-static void flag_unknown(const char *arg)
-{
-	fprintf (stderr,
-	         _("%s: unrecognized option \'%s\'\n"),
-		 Prog, arg);
-	usage (E_BAD_ARG);
-}
-
-/*
  * process_flags - Process the command line arguments
  *
  *	process_flags() interprets the command line arguments and sets
@@ -811,41 +769,51 @@ static void flag_unknown(const char *arg)
  */
 static void process_flags (int argc, char **argv)
 {
-	for (optidx = 1; optidx < argc; optidx++) {
-		const char *arg = argv[optidx];
+	int c;
+	static struct option long_options[] = {
+		{"command",              required_argument, NULL, 'c'},
+		{"help",                 no_argument,       NULL, 'h'},
+		{"login",                no_argument,       NULL, 'l'},
+		{"preserve-environment", no_argument,       NULL, 'p'},
+		{"shell",                required_argument, NULL, 's'},
+		{NULL, 0, NULL, '\0'}
+	};
 
-		if (flags_match (arg, "--command", "-c", NULL)) {
-			if (optidx == argc - 1) {
-				flag_arg_required (arg);
-			}
-
-			command = argv[++optidx];
-		} else if (flags_match (arg, "--help", "-h", NULL)) {
+	while ((c = getopt_long (argc, argv, "c:hlmps:",
+	                         long_options, NULL)) != -1) {
+		switch (c) {
+		case 'c':
+			command = optarg;
+			break;
+		case 'h':
 			usage (E_SUCCESS);
-		} else if (flags_match (arg, "--login", "-l", "-")) {
+			break;
+		case 'l':
 			fakelogin = true;
-		} else if (flags_match (arg, "--preserve-environment", "-p", "-m")) {
+			break;
+		case 'm':
+		case 'p':
 			/* This will only have an effect if the target
 			 * user do not have a restricted shell, or if
 			 * su is called by root.
 			 */
 			change_environment = false;
-		} else if (flags_match (arg, "--shell", "-s", NULL)) {
-			if (optidx == argc - 1) {
-				flag_arg_required (arg);
-			}
-
-			shellstr = argv[++optidx];
-		} else if (is_flag_like (arg)) {
-			flag_unknown (arg);
-		} else {
 			break;
+		case 's':
+			shellstr = optarg;
+			break;
+		default:
+			usage (E_USAGE);	/* NOT REACHED */
 		}
 	}
 
-	/* if next arg is not "--", treat as USER */
-	if (optidx < argc && strcmp (argv[optidx], "--")) {
-		STRFCPY (name, argv[optidx++]);	/* use this login id */
+	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
+		fakelogin = true;
+		optind++;
+	}
+
+	if (optind < argc) {
+		STRFCPY (name, argv[optind++]);	/* use this login id */
 	}
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
@@ -861,12 +829,7 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	/* if more and next arg is "--", skip it and leave rest as-is */
-	if (optidx < argc && strcmp (argv[optidx], "--") == 0) {
-		optidx++;
-	}
-
-	doshell = (argc == optidx);	/* any arguments remaining? */
+	doshell = (argc == optind);	/* any arguments remaining? */
 	if (NULL != command) {
 		doshell = false;
 	}
@@ -1215,7 +1178,7 @@ int main (int argc, char **argv)
 	if (!doshell) {
 		int err;
 		/* Position argv to the remaining arguments */
-		argv += optidx;
+		argv += optind;
 		if (NULL != command) {
 			argv -= 2;
 			argv[0] = "-c";
