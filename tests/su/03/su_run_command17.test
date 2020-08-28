@@ -7,6 +7,8 @@ cd $(dirname $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
+# FIXME
+# su: ignoring --preserve-environment, it's mutually exclusive with --login
 
 log_start "$0" "Running commands (check working directory): su -c pwd - myuser -p"
 
