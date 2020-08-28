@@ -94,7 +94,6 @@ static bool do_interactive_shell = false;
 static bool fakelogin = false;
 static /*@observer@*/const char *shellstr;
 static /*@null@*/char *command = NULL;
-static /*@null@*/char *exec_command = NULL;
 static int optidx;
 
 
@@ -441,14 +440,12 @@ static void usage (int status)
 	         "\n"
 	         "Options:\n"
 	         "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
-	         "  -e, --exec PATH               run PATH without shell, follow -- with args\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -, -l, --login                make the shell a login shell\n"
 	         "  -m, -p,\n"
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "  --                            pass all subsequent arguments on as-is\n"
 	         "\n"
 	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
@@ -823,12 +820,6 @@ static void process_flags (int argc, char **argv)
 			}
 
 			command = argv[++optidx];
-		} else if (flags_match (arg, "--exec", "-e", NULL)) {
-			if (optidx == argc - 1) {
-				flag_arg_required (arg);
-			}
-
-			exec_command = argv[++optidx];
 		} else if (flags_match (arg, "--help", "-h", NULL)) {
 			usage (E_SUCCESS);
 		} else if (flags_match (arg, "--login", "-l", "-")) {
@@ -850,17 +841,6 @@ static void process_flags (int argc, char **argv)
 		} else {
 			break;
 		}
-	}
-
-	if (NULL != exec_command && NULL != command) {
-		fprintf (stderr,
-		         _("%s: COMMAND and PATH are mutually exclusive\n"),
-		         argv[0]);
-		usage (E_USAGE);
-	}
-
-	if (NULL != exec_command) {
-		command = exec_command;
 	}
 
 	/* if next arg is not "--", treat as USER */
@@ -1246,18 +1226,10 @@ int main (int argc, char **argv)
 		 * with the rest of the command line included.
 		 */
 		argv[-1] = cp;
-
-		if (NULL != exec_command) {
-			(void) execve (command, &argv[1], environ);
-			err = errno;
-			(void) fprintf (stderr,
-					_("Cannot execute \'%s\'\n"), command);
-		} else {
-			execve_shell (shellstr, &argv[-1], environ);
-			err = errno;
-			(void) fprintf (stderr,
-					_("Cannot execute \'%s\'\n"), shellstr);
-		}
+		execve_shell (shellstr, &argv[-1], environ);
+		err = errno;
+		(void) fprintf (stderr,
+		                _("Cannot execute %s\n"), shellstr);
 		errno = err;
 	} else {
 		(void) shell (shellstr, cp, environ);
