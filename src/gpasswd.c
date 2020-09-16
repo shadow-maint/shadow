@@ -1204,6 +1204,17 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_GROUP);
 
+#ifdef SHADOWGRP
+	if (sgent.sg_adm) {
+		xfree(sgent.sg_adm);
+	}
+	if (sgent.sg_mem) {
+		xfree(sgent.sg_mem);
+	}
+#endif
+	if (grent.gr_mem) {
+		xfree(grent.gr_mem);
+	}
 	exit (E_SUCCESS);
 }
 
