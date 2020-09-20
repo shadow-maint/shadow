@@ -354,7 +354,9 @@ static void prepare_pam_close_session (void)
 			pid_t pid;
 			stop = true;
 
-			pid = waitpid (-1, &status, WUNTRACED);
+			do {
+				pid = waitpid (-1, &status, WUNTRACED);
+			} while (pid != -1 && pid != pid_child);
 
 			/* When interrupted by signal, the signal will be
 			 * forwarded to the child, and termination will be
