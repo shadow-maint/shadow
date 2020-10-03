@@ -124,8 +124,9 @@ static void log_gpasswd_success_system (/*@null@*/unused void *arg);
 static void log_gpasswd_success_group (/*@null@*/unused void *arg);
 
 static void xfree(void* p) {
-	if (p)
+	if (p) {
 		free(p);
+	}
 }
 
 /*
