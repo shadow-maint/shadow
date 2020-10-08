@@ -77,6 +77,16 @@ struct itemdef {
 	{"SU_WHEEL_ONLY", NULL},		\
 	{"ULIMIT", NULL},
 
+/*
+ * Items used in other tools (util-linux, etc.)
+ */
+#define FOREIGNDEFS				\
+	{"ALWAYS_SET_PATH", NULL},		\
+	{"ENV_ROOTPATH", NULL},			\
+	{"LOGIN_KEEP_USERNAME", NULL},		\
+	{"LOGIN_PLAIN_PROMPT", NULL},		\
+	{"MOTD_FIRSTONLY", NULL},		\
+
 
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
@@ -158,6 +168,7 @@ static struct itemdef knowndef_table[] = {
 #ifdef USE_PAM
 	PAMDEFS
 #endif
+	FOREIGNDEFS
 	{NULL, NULL}
 };
 
@@ -413,7 +424,6 @@ int putdef_str (const char *name, const char *value)
 static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 {
 	struct itemdef *ptr;
-
 
 	/*
 	 * Search into the table.
