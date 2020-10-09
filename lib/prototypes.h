@@ -449,6 +449,8 @@ extern /*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/char *xmalloc (size_t 
   /*@ensures MaxSet(result) == (size - 1); @*/;
 extern /*@maynotreturn@*/ /*@only@*//*@notnull@*/char *xstrdup (const char *);
 
+extern /*@null@*/void xfree(void *);
+
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);
 /* xgetpwuid.c */

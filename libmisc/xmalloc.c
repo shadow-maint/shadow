@@ -66,3 +66,7 @@
 {
 	return strcpy (xmalloc (strlen (str) + 1), str);
 }
+/*@null@*/void xfree (void *ap)
+{
+	free(ap);
+}
