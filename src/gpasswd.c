@@ -123,6 +123,12 @@ static void log_gpasswd_success (const char *suffix);
 static void log_gpasswd_success_system (/*@null@*/unused void *arg);
 static void log_gpasswd_success_group (/*@null@*/unused void *arg);
 
+static void xfree(void* p) {
+	if (p) {
+		free(p);
+	}
+}
+
 /*
  * usage - display usage message
  */
