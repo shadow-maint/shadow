@@ -448,6 +448,7 @@ extern bool valid (const char *, const struct passwd *);
 extern /*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/char *xmalloc (size_t size)
   /*@ensures MaxSet(result) == (size - 1); @*/;
 extern /*@maynotreturn@*/ /*@only@*//*@notnull@*/char *xstrdup (const char *);
+extern void xfree(void *ap);
 
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);
