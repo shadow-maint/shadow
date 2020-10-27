@@ -445,7 +445,6 @@ int main (int argc, char **argv)
 	Prog = Basename (argv[0]);
 	is_newgrp = (strcmp (Prog, "newgrp") == 0);
 	OPENLOG (is_newgrp ? "newgrp" : "sg");
-	gid = getgid ();
 	argc--;
 	argv++;
 
