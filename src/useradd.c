@@ -729,7 +729,7 @@ static int set_defaults (void)
 static int get_groups (char *list)
 {
 	char *cp;
-	const struct group *grp;
+	struct group *grp;
 	int errors = 0;
 	int ngroups = 0;
 
@@ -808,6 +808,7 @@ static int get_groups (char *list)
 		 * Add the group name to the user's list of groups.
 		 */
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
+		free (grp);
 	} while (NULL != list);
 
 	close_group_files ();
