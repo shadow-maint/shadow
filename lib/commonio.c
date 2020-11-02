@@ -157,7 +157,17 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	if (write (fd, buf, (size_t) len) != len) {
 		if (log) {
 			(void) fprintf (stderr,
-			                "%s: %s: %s\n",
+			                "%s: %s file write error: %s\n",
+			                Prog, file, strerror (errno));
+		}
+		(void) close (fd);
+		unlink (file);
+		return 0;
+	}
+	if (fdatasync (fd) == -1) {
+		if (log) {
+			(void) fprintf (stderr,
+			                "%s: %s file sync error: %s\n",
 			                Prog, file, strerror (errno));
 		}
 		(void) close (fd);
