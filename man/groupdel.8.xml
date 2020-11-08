@@ -92,6 +92,17 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
+	<term>
+	  <option>-f</option>, <option>--force</option>
+	</term>
+	<listitem>
+	  <para>
+      This option forces the removal of the group, even if there's some user
+      having the group as the primary one.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term><option>-h</option>, <option>--help</option></term>
 	<listitem>
 	  <para>Display help message and exit.</para>
