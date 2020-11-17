@@ -338,7 +338,7 @@ static void fail_exit (int code)
 	              user_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
-	SYSLOG ((LOG_INFO, "failed adding user '%s', data deleted", user_name));
+	SYSLOG ((LOG_INFO, "failed adding user '%s', exit code: %d", user_name, code));
 	exit (code);
 }
 
