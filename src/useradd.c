@@ -411,6 +411,7 @@ static void get_defaults (void)
 			} else {
 				def_group = grp->gr_gid;
 				def_gname = xstrdup (grp->gr_name);
+				gr_free(grp);
 			}
 		}
 
