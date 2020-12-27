@@ -219,7 +219,15 @@
 	  <para>
 	    If this field does not specify an existing directory, the
 	    specified directory is created, with ownership set to the
-	    user being created or updated and its primary group.
+	    user being created or updated and its primary group. Note
+	    that <emphasis>newusers does not create parent directories
+	    </emphasis> of the new user's home directory. The newusers
+	    command will fail to create the home directory if the parent
+	    directories do not exist, and will send a message to stderr
+	    informing the user of the failure. The newusers command will
+	    not halt or return a failure to the calling shell if it fails
+	    to create the home directory, it will continue to process the
+	    batch of new users specified.
 	  </para>
 	  <para>
 	    If the home directory of an existing user is changed,
