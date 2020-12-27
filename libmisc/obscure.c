@@ -272,6 +272,9 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 #ifdef USE_BCRYPT
 		    || (strcmp (result, "BCRYPT") == 0)
 #endif
+#ifdef USE_YESCRYPT
+		    || (strcmp (result, "YESCRYPT") == 0)
+#endif
 		    ) {
 			return NULL;
 		}

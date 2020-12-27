@@ -74,6 +74,9 @@
 			case '6':
 				method = "SHA512";
 				break;
+			case 'y':
+				method = "YESCRYPT";
+				break;
 			default:
 			{
 				static char nummethod[4] = "$x$";

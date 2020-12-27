@@ -283,6 +283,9 @@ static int new_password (const struct passwd *pw)
 #ifdef USE_BCRYPT
 		    || (strcmp (method, "BCRYPT") == 0)
 #endif /* USE_BCRYPT*/
+#ifdef USE_YESCRYPT
+		    || (strcmp (method, "YESCRYPT") == 0)
+#endif /* USE_YESCRYPT*/
 
 		    ) {
 			pass_max_len = -1;

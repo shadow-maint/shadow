@@ -326,6 +326,7 @@ CHFN_RESTRICT		rwh
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
+# If set to YESCRYPT, YESCRYPT-based algorithm will be used for encrypting password
 # If set to DES, DES-based algorithm will be used for encrypting password (default)
 # MD5 and DES should not be used for new hashes, see crypt(5) for recommendations.
 # Overrides the MD5_CRYPT_ENAB option
@@ -366,6 +367,19 @@ CHFN_RESTRICT		rwh
 #
 #BCRYPT_MIN_ROUNDS 13
 #BCRYPT_MAX_ROUNDS 13
+
+#
+# Only works if ENCRYPT_METHOD is set to YESCRYPT.
+#
+# Define the YESCRYPT cost factor.
+# With a higher cost factor, it is more difficult to brute-force the password.
+# However, more CPU time and more memory will be needed to authenticate users
+# if this value is increased.
+#
+# If not specified, a cost factor of 5 will be used.
+# The value must be within the 1-11 range.
+#
+#YESCRYPT_COST_FACTOR 5
 
 #
 # List of groups to add to the user's supplementary group set

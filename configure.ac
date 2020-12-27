@@ -290,6 +290,9 @@ AC_ARG_WITH(sha-crypt,
 AC_ARG_WITH(bcrypt,
 	[AC_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
 	[with_bcrypt=$withval], [with_bcrypt=no])
+AC_ARG_WITH(yescrypt,
+	[AC_HELP_STRING([--with-yescrypt], [allow the yescrypt password encryption algorithm @<:@default=no@:>@])],
+	[with_yescrypt=$withval], [with_yescrypt=no])
 AC_ARG_WITH(nscd,
 	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
@@ -320,6 +323,11 @@ fi
 AM_CONDITIONAL(USE_BCRYPT, test "x$with_bcrypt" = "xyes")
 if test "$with_bcrypt" = "yes"; then
 	AC_DEFINE(USE_BCRYPT, 1, [Define to allow the bcrypt password encryption algorithm])
+fi
+
+AM_CONDITIONAL(USE_YESCRYPT, test "x$with_yescrypt" = "xyes")
+if test "$with_yescrypt" = "yes"; then
+	AC_DEFINE(USE_YESCRYPT, 1, [Define to allow the yescrypt password encryption algorithm])
 fi
 
 if test "$with_nscd" = "yes"; then
@@ -400,6 +408,10 @@ AM_CONDITIONAL(ENABLE_SUBIDS, test "x$enable_subids" != "xno")
 
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
+	[AC_MSG_ERROR([crypt() not found])])
+
+AC_SUBST(LIYESCRYPT)
+AC_CHECK_LIB(crypt, crypt, [LIYESCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
 
 AC_SUBST(LIBACL)
@@ -752,6 +764,7 @@ echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"
 echo "	bcrypt passwords encryption:	$with_bcrypt"
+echo "	yescrypt passwords encryption:	$with_yescrypt"
 echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
