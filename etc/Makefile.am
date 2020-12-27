@@ -4,8 +4,7 @@
 sysconf_DATA = login.defs
 
 defaultdir = $(sysconfdir)/default
-default_DATA = \
-	useradd
+default_DATA =
 
 nonpam_files = \
 	limits \
