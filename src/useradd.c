@@ -793,6 +793,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: group '%s' is a NIS group.\n"),
 			         Prog, grp->gr_name);
+			gr_free(grp);
 			continue;
 		}
 #endif
@@ -801,6 +802,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: too many groups specified (max %d).\n"),
 			         Prog, ngroups);
+			gr_free(grp);
 			break;
 		}
 
@@ -808,7 +810,7 @@ static int get_groups (char *list)
 		 * Add the group name to the user's list of groups.
 		 */
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
-		free (grp);
+		gr_free (grp);
 	} while (NULL != list);
 
 	close_group_files ();
