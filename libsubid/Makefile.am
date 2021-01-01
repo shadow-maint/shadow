@@ -16,8 +16,8 @@ MISCLIBS = \
 
 libsubid_la_LIBADD = \
 	$(top_srcdir)/lib/libshadow.la \
-	$(top_srcdir)/libmisc/libmisc.a \
-	$(MISCLIBS)
+	$(MISCLIBS) \
+	$(top_srcdir)/libmisc/libmisc.a
 
 AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
