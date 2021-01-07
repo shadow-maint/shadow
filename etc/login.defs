@@ -438,3 +438,9 @@ USERGROUPS_ENAB yes
 # missing.
 #
 #FORCE_SHADOW    yes
+
+#
+# Allow newuidmap and newgidmap when running under an alternative
+# primary group.
+#
+#GRANT_AUX_GROUP_SUBIDS yes
