@@ -16,6 +16,7 @@ arch:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get -y install -qq automake autopoint xsltproc libselinux1-dev gettext expect
+  - sudo apt-get -y install -qq byacc libtool
 script:
  - ./autogen.sh --without-selinux --disable-man
  - grep ENABLE_ config.status

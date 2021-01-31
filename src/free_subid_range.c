@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 	range.start = atoi(argv[1]);
 	range.count = atoi(argv[2]);
 	if (group)
-		ok = free_subgid_range(&range);
+		ok = ungrant_subgid_range(&range);
 	else
-		ok = free_subuid_range(&range);
+		ok = ungrant_subuid_range(&range);
 
 	if (!ok) {
 		fprintf(stderr, "Failed freeing id range\n");

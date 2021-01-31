@@ -15,7 +15,7 @@ void usage(void)
 
 int main(int argc, char *argv[])
 {
-	int i;
+	int i, count=0;
 	struct subordinate_range **ranges;
 
 	Prog = Basename (argv[0]);
@@ -23,19 +23,19 @@ int main(int argc, char *argv[])
 		usage();
 	}
 	if (argc == 3 && strcmp(argv[1], "-g") == 0)
-		ranges = get_subgid_ranges(argv[2]);
+		count = get_subgid_ranges(argv[2], &ranges);
 	else if (argc == 2 && strcmp(argv[1], "-h") == 0)
 		usage();
 	else
-		ranges = get_subuid_ranges(argv[1]);
+		count = get_subuid_ranges(argv[1], &ranges);
 	if (!ranges) {
 		fprintf(stderr, "Error fetching ranges\n");
 		exit(1);
 	}
-	for (i = 0; ranges[i]; i++) {
+	for (i = 0; i < count; i++) {
 		printf("%d: %s %lu %lu\n", i, ranges[i]->owner,
 			ranges[i]->start, ranges[i]->count);
 	}
-	subid_free_ranges(ranges);
+	subid_free_ranges(ranges, count);
 	return 0;
 }

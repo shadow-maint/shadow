@@ -262,6 +262,75 @@ extern void motd (void);
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
+/* nss.c */
+#include <libsubid/subid.h>
+extern void nss_init(char *nsswitch_path);
+extern bool nss_is_initialized();
+
+struct subid_nss_ops {
+	/*
+	 * nss_has_any_range: does a user own any subid range
+	 *
+	 * @owner: username
+	 * @idtype: subuid or subgid
+	 * @result: true if a subid allocation was found for @owner
+	 *
+	 * returns success if the module was able to determine an answer (true or false),
+	 * else an error status.
+	 */
+	enum subid_status (*has_any_range)(const char *owner, enum subid_type idtype, bool *result);
+
+	/*
+	 * nss_has_range: does a user own a given subid range
+	 *
+	 * @owner: username
+	 * @start: first subid in queried range
+	 * @count: number of subids in queried range
+	 * @idtype: subuid or subgid
+	 * @result: true if @owner has been allocated the subid range.
+	 *
+	 * returns success if the module was able to determine an answer (true or false),
+	 * else an error status.
+	 */
+	enum subid_status (*has_range)(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype, bool *result);
+
+	/*
+	 * nss_list_owner_ranges: list the subid ranges delegated to a user.
+	 *
+	 * @owner - string representing username being queried
+	 * @id_type - subuid or subgid
+	 * @ranges - pointer to an array of struct subordinate_range pointers, or
+	 *           NULL.  The returned array of struct subordinate_range and its
+	 *           members must be freed by the caller.
+	 * @count - pointer to an integer into which the number of returned ranges
+	 *          is written.
+
+	 * returns success if the module was able to determine an answer,
+	 * else an error status.
+	 */
+	enum subid_status (*list_owner_ranges)(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges, int *count);
+
+	/*
+	 * nss_find_subid_owners: find uids who own a given subuid or subgid.
+	 *
+	 * @id - the delegated id (subuid or subgid) being queried
+	 * @id_type - subuid or subgid
+	 * @uids - pointer to an array of uids which will be allocated by
+	 *         nss_find_subid_owners()
+	 * @count - number of uids found
+	 *
+	 * returns success if the module was able to determine an answer,
+	 * else an error status.
+	 */
+	enum subid_status (*find_subid_owners)(unsigned long id, enum subid_type id_type, uid_t **uids, int *count);
+
+	/* The dlsym handle to close */
+	void *handle;
+};
+
+extern struct subid_nss_ops *get_subid_nss_handle();
+
+
 /* pam_pass_non_interactive.c */
 #ifdef USE_PAM
 extern int do_pam_passwd_non_interactive (const char *pam_service,

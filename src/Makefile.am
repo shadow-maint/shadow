@@ -111,15 +111,6 @@ grpck_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpconv_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpunconv_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 lastlog_LDADD   = $(LDADD) $(LIBAUDIT) $(LIBECONF)
-newuidmap_SOURCES = newuidmap.c ../libmisc/nss.c
-newgidmap_SOURCES = newgidmap.c ../libmisc/nss.c
-groupadd_SOURCES = groupadd.c ../libmisc/nss.c
-groupmod_SOURCES = groupmod.c ../libmisc/nss.c
-groupdel_SOURCES = groupdel.c ../libmisc/nss.c
-newusers_SOURCES = newusers.c ../libmisc/nss.c
-useradd_SOURCES = useradd.c ../libmisc/nss.c
-usermod_SOURCES = usermod.c ../libmisc/nss.c
-userdel_SOURCES = userdel.c ../libmisc/nss.c
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
@@ -169,7 +160,8 @@ endif
 noinst_PROGRAMS += list_subid_ranges  \
 					get_subid_owners \
 					new_subid_range \
-					free_subid_range
+					free_subid_range \
+					check_subid_range
 
 MISCLIBS = \
 	$(LIBAUDIT) \
@@ -186,7 +178,7 @@ list_subid_ranges_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 list_subid_ranges_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -197,7 +189,7 @@ get_subid_owners_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 get_subid_owners_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -213,7 +205,7 @@ new_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 free_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -224,5 +216,14 @@ free_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
+
+check_subid_range_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc
+
+check_subid_range_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.la \
+	$(MISCLIBS) -ldl
 endif

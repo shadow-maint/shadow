@@ -127,6 +127,7 @@ run_test ./newuidmap/01_newuidmap/newuidmap.test
 run_test ./newuidmap/02_newuidmap_relaxed_gid_check/newuidmap.test
 run_test ./newgidmap/01_newgidmap/newgidmap.test
 run_test ./newgidmap/02_newgidmap_relaxed_gid_check/newgidmap.test
+run_test ./libsubid/04_nss/subidnss.test
 
 echo
 echo "$succeeded test(s) passed"
