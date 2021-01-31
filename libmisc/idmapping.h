@@ -40,5 +40,11 @@ extern struct map_range *get_map_ranges(int ranges, int argc, char **argv);
 extern void write_mapping(int proc_dir_fd, int ranges,
 	struct map_range *mappings, const char *map_file, uid_t ruid);
 
+extern void nss_init(char *nsswitch_path);
+extern bool nss_has_any_range(const char *owner, enum subid_type idtype);
+extern bool nss_has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype);
+extern struct subordinate_range **nss_list_owner_ranges(const char *owner, enum subid_type id_type);
+extern int nss_find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type);
+
 #endif /* _ID_MAPPING_H_ */
 

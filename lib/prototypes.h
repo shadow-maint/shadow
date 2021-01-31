@@ -262,6 +262,17 @@ extern void motd (void);
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
+/* nss.c */
+#include <libsubid/subid.h>
+extern void nss_init(char *nsswitch_path);
+extern bool nss_is_initialized();
+extern void *get_subid_nss_handle();
+extern bool nss_has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype);
+extern bool nss_has_any_range(const char *owner, enum subid_type idtype);
+extern struct subordinate_range **nss_list_owner_ranges(const char *owner, enum subid_type id_type);
+extern int nss_find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type);
+
+
 /* pam_pass_non_interactive.c */
 #ifdef USE_PAM
 extern int do_pam_passwd_non_interactive (const char *pam_service,

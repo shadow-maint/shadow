@@ -111,15 +111,6 @@ grpck_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpconv_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpunconv_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 lastlog_LDADD   = $(LDADD) $(LIBAUDIT) $(LIBECONF)
-newuidmap_SOURCES = newuidmap.c ../libmisc/nss.c
-newgidmap_SOURCES = newgidmap.c ../libmisc/nss.c
-groupadd_SOURCES = groupadd.c ../libmisc/nss.c
-groupmod_SOURCES = groupmod.c ../libmisc/nss.c
-groupdel_SOURCES = groupdel.c ../libmisc/nss.c
-newusers_SOURCES = newusers.c ../libmisc/nss.c
-useradd_SOURCES = useradd.c ../libmisc/nss.c
-usermod_SOURCES = usermod.c ../libmisc/nss.c
-userdel_SOURCES = userdel.c ../libmisc/nss.c
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
@@ -169,7 +160,14 @@ endif
 noinst_PROGRAMS += list_subid_ranges  \
 					get_subid_owners \
 					new_subid_range \
-					free_subid_range
+					free_subid_range \
+					check_subid_range
+
+list_subid_ranges_LDADD = -ldl
+get_subid_owners_LDADD = -ldl
+new_subid_range_LDADD = -ldl
+free_subid_range_LDADD = -ldl
+check_subid_range_LDADD = -ldl
 
 MISCLIBS = \
 	$(LIBAUDIT) \
@@ -225,4 +223,13 @@ free_subid_range_LDADD = \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS)
+
+check_subid_range_CPPFLAGS = \
+	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/libmisc
+
+check_subid_range_LDADD = \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.la \
+	$(MISCLIBS) -ldl
 endif

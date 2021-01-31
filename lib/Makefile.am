@@ -31,6 +31,7 @@ libshadow_la_SOURCES = \
 	groupio.h \
 	gshadow.c \
 	lockpw.c \
+	nss.c \
 	nscd.c \
 	nscd.h \
 	sssd.c \
