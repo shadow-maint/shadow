@@ -12,12 +12,14 @@ MISCLIBS = \
 	$(LIBMD) \
 	$(LIBECONF) \
 	$(LIBCRYPT) \
+	$(LIBACL) \
+	$(LIBATTR) \
 	$(LIBTCB)
 
 libsubid_la_LIBADD = \
 	$(top_srcdir)/lib/libshadow.la \
-	$(MISCLIBS) \
-	$(top_srcdir)/libmisc/libmisc.a
+	$(top_srcdir)/libmisc/libmisc.la \
+	$(MISCLIBS)
 
 AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \

@@ -78,7 +78,7 @@ shadowsgidubins = passwd
 endif
 
 LDADD          = $(INTLLIBS) \
-		 $(top_builddir)/libmisc/libmisc.a \
+		 $(top_builddir)/libmisc/libmisc.la \
 		 $(top_builddir)/lib/libshadow.la \
 		 $(LIBTCB)
 
@@ -95,28 +95,37 @@ LIBCRYPT_NOPAM = $(LIBCRYPT)
 endif
 
 chage_LDADD    = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
-newuidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP)
-newgidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP)
+newuidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP) -ldl
+newgidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP) -ldl
 chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 chgpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
 chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
 expiry_LDADD = $(LDADD) $(LIBECONF)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
-groupadd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
-groupdel_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
+groupadd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
+groupdel_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
-groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
+groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 grpck_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpconv_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpunconv_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 lastlog_LDADD   = $(LDADD) $(LIBAUDIT) $(LIBECONF)
+newuidmap_SOURCES = newuidmap.c ../libmisc/nss.c
+newgidmap_SOURCES = newgidmap.c ../libmisc/nss.c
+groupadd_SOURCES = groupadd.c ../libmisc/nss.c
+groupmod_SOURCES = groupmod.c ../libmisc/nss.c
+groupdel_SOURCES = groupdel.c ../libmisc/nss.c
+newusers_SOURCES = newusers.c ../libmisc/nss.c
+useradd_SOURCES = useradd.c ../libmisc/nss.c
+usermod_SOURCES = usermod.c ../libmisc/nss.c
+userdel_SOURCES = userdel.c ../libmisc/nss.c
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
 login_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 newgrp_LDADD   = $(LDADD) $(LIBAUDIT) $(LIBCRYPT) $(LIBECONF)
-newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
+newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF) -ldl
 nologin_LDADD  =
 passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBECONF)
 pwck_LDADD     = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
@@ -127,9 +136,9 @@ su_SOURCES     = \
 	suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 sulogin_LDADD  = $(LDADD) $(LIBCRYPT) $(LIBECONF)
-useradd_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBATTR) $(LIBECONF)
-userdel_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBECONF)
-usermod_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBATTR) $(LIBECONF)
+useradd_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBATTR) $(LIBECONF) -ldl
+userdel_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBECONF) -ldl
+usermod_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBATTR) $(LIBECONF) -ldl
 vipw_LDADD     = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 
 install-am: all-am
@@ -175,7 +184,7 @@ MISCLIBS = \
 
 list_subid_ranges_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS)
 
@@ -186,7 +195,7 @@ list_subid_ranges_CPPFLAGS = \
 
 get_subid_owners_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS)
 
@@ -202,7 +211,7 @@ new_subid_range_CPPFLAGS = \
 
 new_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS)
 
@@ -213,7 +222,7 @@ free_subid_range_CPPFLAGS = \
 
 free_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.a \
+	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS)
 endif
