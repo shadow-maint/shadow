@@ -55,7 +55,7 @@ AC_CHECK_FUNCS(l64a fchmod fchown fsync futimes getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
 	lutimes memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
 	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo \
-	ruserok)
+	ruserok dlopen)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
