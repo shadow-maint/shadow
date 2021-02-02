@@ -143,7 +143,8 @@
 	    If the <option>-m</option>
 	    option is given, the contents of the current home directory will
 	    be moved to the new home directory, which is created if it does
-	    not already exist.
+	    not already exist. If the current home directory does not exist
+	    the new home directory will not be created.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -204,6 +205,12 @@
 	  <para>
 	    The group ownership of files outside of the user's home directory
 	    must be fixed manually.
+	  </para>
+	  <para>
+	    The change of the group ownership of files inside of the user's
+	    home directory is also not done if the home dir owner uid is
+	    different from the current or new user id. This is a safety measure
+	    for special home directories such as <filename>/</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -267,7 +274,8 @@
 	<listitem>
 	  <para>
 	    Move the content of the user's home directory to the new
-	    location.
+	    location. If the current home directory does not exist
+	    the new home directory will not be created.
 	  </para>
 	  <para>
 	    This option is only valid in combination with the
@@ -379,6 +387,12 @@
 	  <para>
 	    The ownership of files outside of the user's home directory
 	    must be fixed manually.
+	  </para>
+	  <para>
+	    The change of the user ownership of files inside of the user's
+	    home directory is also not done if the home dir owner uid is
+	    different from the current or new user id. This is a safety measure
+	    for special home directories such as <filename>/</filename>.
 	  </para>
 	  <para>
 	    No checks will be performed with regard to the
