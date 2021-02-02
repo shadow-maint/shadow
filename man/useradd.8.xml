@@ -361,6 +361,11 @@
 	    <option>CREATE_HOME</option> is not enabled, no home
 	    directories are created.
 	  </para>
+	  <para>
+	    The directory where the user's home directory is created must
+	    exist and have proper SELinux context and permissions. Otherwise
+	    the user's home directory cannot be created or accessed.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
