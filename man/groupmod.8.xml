@@ -299,7 +299,7 @@
 	<varlistentry>
 	  <term><replaceable>4</replaceable></term>
 	  <listitem>
-	    <para>E_GID_IN_USE: specified group doesn't exist</para>
+	    <para>E_GID_IN_USE: group id already in use</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
