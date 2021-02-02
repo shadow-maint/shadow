@@ -102,6 +102,9 @@
 	    Set the number of days since January 1st, 1970 when the password
 	    was last changed. The date may also be expressed in the format
 	    YYYY-MM-DD (or the format more commonly used in your area).
+	    If the <replaceable>LAST_DAY</replaceable> is set to
+	    <emphasis>0</emphasis> the user is forced to change his password
+	    on the next log on.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -118,6 +121,13 @@
 	    contact the system administrator before being able to use the
 	    system again.
 	  </para>
+	  <para>
+	    For example the following can be used to set an account to expire
+	    in 180 days:
+	  </para>
+	  <programlisting>
+	    chage -E $(date -d +180days +%Y-%m-%d)
+	  </programlisting>
 	  <para>
 	    Passing the number <emphasis remap='I'>-1</emphasis> as the
 	    <replaceable>EXPIRE_DATE</replaceable> will remove an account
@@ -238,6 +248,18 @@
     <para>
       The <command>chage</command> program requires a shadow password file to
       be available.
+    </para>
+    <para>
+      The chage program will report only the information from the shadow
+      password file. This implies that configuration from other sources
+      (e.g. LDAP or empty password hash field from the passwd file) that
+      affect the user's login will not be shown in the chage output.
+    </para>
+    <para>
+      The <command>chage</command> program will also not report any
+      inconsistency between the shadow and passwd files (e.g. missing x in
+      the passwd file). The <command>pwck</command> can be used to check
+      for this kind of inconsistencies.
     </para>
     <para>The <command>chage</command> command is restricted to the root
       user, except for the <option>-l</option> option, which may be used by
