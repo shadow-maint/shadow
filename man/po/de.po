@@ -1005,10 +1005,10 @@ msgstr ""
 
 #: usermod.8.xml:327(para) chsh.1.xml:123(para)
 msgid ""
-"The name of the user's new login shell. Setting this field to blank causes "
+"The path of the user's new login shell. Setting this field to blank causes "
 "the system to select the default login shell."
 msgstr ""
-"Der Name der neuen Anmelde-Shell des Benutzers. Falls dieses Feld leer "
+"Der Pfad der neuen Anmelde-Shell des Benutzers. Falls dieses Feld leer "
 "gelassen wird, verwendet das System die Standard-Anmelde-Shell."
 
 #: usermod.8.xml:334(term) useradd.8.xml:471(term)

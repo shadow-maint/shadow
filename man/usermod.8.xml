@@ -353,7 +353,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    The name of the user's new login shell. Setting this field to
+	    The path of the user's new login shell. Setting this field to
 	    blank causes the system to select the default login shell.
 	  </para>
 	</listitem>
