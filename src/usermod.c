@@ -1032,7 +1032,7 @@ static void grp_update (void)
 static void process_flags (int argc, char **argv)
 {
 	const struct group *grp;
-
+	struct stat st;
 	bool anyflag = false;
 
 	{
@@ -1180,11 +1180,24 @@ static void process_flags (int argc, char **argv)
 			case 'P': /* no-op, handled in process_prefix_flag () */
 				break;
 			case 's':
-				if (!VALID (optarg)) {
+				if (   ( !VALID (optarg) )
+				    || (   ('\0' != optarg[0])
+				        && ('/'  != optarg[0])
+				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
-					         _("%s: invalid field '%s'\n"),
+					         _("%s: invalid shell '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
+				}
+				if (    '\0' != optarg[0]
+				     && '*'  != optarg[0]
+				     && strcmp(optarg, "/sbin/nologin") != 0
+				     && (   stat(optarg, &st) != 0
+				         || S_ISDIR(st.st_mode)
+				         || access(optarg, X_OK) != 0)) {
+					fprintf (stderr,
+					         _("%s: Warning: missing or non-executable shell '%s'\n"),
+					         Prog, optarg);
 				}
 				user_newshell = optarg;
 				sflg = true;
