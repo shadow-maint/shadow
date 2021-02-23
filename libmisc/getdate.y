@@ -152,6 +152,7 @@ static int	yyHaveDay;
 static int	yyHaveRel;
 static int	yyHaveTime;
 static int	yyHaveZone;
+static int	yyHaveYear;
 static int	yyTimezone;
 static int	yyDay;
 static int	yyHour;
@@ -293,18 +294,21 @@ date	: tUNUMBER '/' tUNUMBER {
 	      yyDay = $3;
 	      yyYear = $5;
 	    }
+	    yyHaveYear++;
 	}
 	| tUNUMBER tSNUMBER tSNUMBER {
 	    /* ISO 8601 format.  yyyy-mm-dd.  */
 	    yyYear = $1;
 	    yyMonth = -$2;
 	    yyDay = -$3;
+	    yyHaveYear++;
 	}
 	| tUNUMBER tMONTH tSNUMBER {
 	    /* e.g. 17-JUN-1992.  */
 	    yyDay = $1;
 	    yyMonth = $2;
 	    yyYear = -$3;
+	    yyHaveYear++;
 	}
 	| tMONTH tUNUMBER {
 	    yyMonth = $1;
@@ -314,6 +318,7 @@ date	: tUNUMBER '/' tUNUMBER {
 	    yyMonth = $1;
 	    yyDay = $2;
 	    yyYear = $4;
+	    yyHaveYear++;
 	}
 	| tUNUMBER tMONTH {
 	    yyMonth = $2;
@@ -323,6 +328,7 @@ date	: tUNUMBER '/' tUNUMBER {
 	    yyMonth = $2;
 	    yyDay = $1;
 	    yyYear = $3;
+	    yyHaveYear++;
 	}
 	;
 
@@ -395,7 +401,8 @@ relunit	: tUNUMBER tYEAR_UNIT {
 
 number	: tUNUMBER
           {
-	    if ((yyHaveTime != 0) && (yyHaveDate != 0) && (yyHaveRel == 0))
+	    if ((yyHaveTime != 0 || $1 >= 100) && !yyHaveYear &&
+	        (yyHaveDate != 0) && (yyHaveRel == 0))
 	      yyYear = $1;
 	    else
 	      {
