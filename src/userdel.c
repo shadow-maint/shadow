@@ -149,8 +149,9 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -f, --force                   force removal of files,\n"
-	                "                                even if not owned by user\n"),
+	(void) fputs (_("  -f, --force                   force some actions that would fail otherwise\n"
+	                "                                e.g. removal of user still logged in\n"
+	                "                                or files, even if not owned by the user\n"),
 	              usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -r, --remove                  remove home directory and mail spool\n"), usageout);
