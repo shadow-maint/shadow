@@ -129,7 +129,7 @@
 	<listitem>
 	  <para>
 	    The date of the last password change, expressed as the number
-	    of days since Jan 1, 1970.
+	    of days since Jan 1, 1970 00:00 UTC.
 	  </para>
 	  <para>
 	    The value 0 has a special meaning, which is that the user
@@ -208,8 +208,8 @@
 	  </para>
 	  <para>
 	    After expiration of the password and this expiration period is
-	    elapsed, no login is possible using the current user's
-	    password.  The user should contact her administrator.
+	    elapsed, no login is possible for the user. The user should contact
+	    her administrator.
 	  </para>
 	  <para>
 	    An empty field means that there are no enforcement of an
@@ -224,7 +224,7 @@
 	<listitem>
 	  <para>
 	    The date of expiration of the account, expressed as the number
-	    of days since Jan 1, 1970.
+	    of days since Jan 1, 1970 00:00 UTC.
 	  </para>
 	  <para>
 	    Note that an account expiration differs from a password
