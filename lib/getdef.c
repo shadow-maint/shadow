@@ -160,6 +160,7 @@ static struct itemdef def_table[] = {
 	{"USE_TCB", NULL},
 #endif
 	{"FORCE_SHADOW", NULL},
+	{"GRANT_AUX_GROUP_SUBIDS", NULL},
 	{NULL, NULL}
 };
 

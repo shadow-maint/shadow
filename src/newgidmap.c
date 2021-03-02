@@ -39,6 +39,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "subordinateio.h"
+#include "getdef.h"
 #include "idmapping.h"
 
 /*
@@ -60,7 +61,7 @@ static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow
 	}
 
 	/* Allow a process to map its own gid. */
-	if ((range->count == 1) && (pw->pw_gid == range->lower)) {
+	if ((range->count == 1) && (getgid() == range->lower)) {
 		/* noop -- if setgroups is enabled already we won't disable it. */
 		return true;
 	}
@@ -228,9 +229,9 @@ int main(int argc, char **argv)
 	 * mappings we have been asked to set.
 	 */
 	if ((getuid() != pw->pw_uid) ||
-	    (getgid() != pw->pw_gid) ||
+	    (!getdef_bool("GRANT_AUX_GROUP_SUBIDS") && (getgid() != pw->pw_gid)) ||
 	    (pw->pw_uid != st.st_uid) ||
-	    (pw->pw_gid != st.st_gid)) {
+	    (getgid() != st.st_gid)) {
 		fprintf(stderr, _( "%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
 			Prog, target,
 			(unsigned long int)getuid(), (unsigned long int)pw->pw_uid, (unsigned long int)st.st_uid,
