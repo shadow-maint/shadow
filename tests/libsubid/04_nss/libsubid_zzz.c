@@ -4,7 +4,7 @@
 #include <subid.h>
 #include <string.h>
 
-enum subid_retval has_any_range(const char *owner, enum subid_type t)
+enum subid_retval shadow_subid_has_any_range(const char *owner, enum subid_type t)
 {
 	if (strcmp(owner, "unknown") == 0)
 		return SUBID_RV_UNKOWN_USER;
@@ -15,7 +15,7 @@ enum subid_retval has_any_range(const char *owner, enum subid_type t)
 	return SUBID_RV_EPERM;
 }
 
-enum subid_retval has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type t)
+enum subid_retval shadow_subid_has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type t)
 {
 	if (strcmp(owner, "unknown") == 0)
 		return SUBID_RV_UNKOWN_USER;
@@ -32,7 +32,7 @@ enum subid_retval has_range(const char *owner, unsigned long start, unsigned lon
 	return SUBID_RV_SUCCESS;
 }
 
-int find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)
+int shadow_subid_find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)
 {
 	if (id < 100000 || id >= 165536)
 		return 0;
@@ -43,7 +43,7 @@ int find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)
 	return 1;
 }
 
-struct subordinate_range **nss_list_owner_ranges(const char *owner, enum subid_type id_type)
+struct subordinate_range **shadow_subid_nss_list_owner_ranges(const char *owner, enum subid_type id_type)
 {
 	struct subordinate_range **ranges;
 

@@ -92,28 +92,28 @@ void nss_init(char *nsswitch_path) {
 				subid_nss_handle = NULL;
 				goto done;
 			}
-			subid_nss_handle->has_range = dlsym(subid_nss_handle, "has_range");
+			subid_nss_handle->has_range = dlsym(subid_nss_handle, "shadow_subid_has_range");
 			if (!subid_nss_handle->has_range) {
 				fprintf(stderr, "%s did not provide @has_range@\n", libname);
 				dlclose(h);
 				subid_nss_handle = NULL;
 				goto done;
 			}
-			subid_nss_handle->list_owner_ranges = dlsym(subid_nss_handle, "list_owner_ranges");
+			subid_nss_handle->list_owner_ranges = dlsym(subid_nss_handle, "shadow_subid_list_owner_ranges");
 			if (!subid_nss_handle->list_owner_ranges) {
 				fprintf(stderr, "%s did not provide @list_owner_ranges@\n", libname);
 				dlclose(h);
 				subid_nss_handle = NULL;
 				goto done;
 			}
-			subid_nss_handle->has_any_range = dlsym(subid_nss_handle, "has_any_range");
+			subid_nss_handle->has_any_range = dlsym(subid_nss_handle, "shadow_subid_has_any_range");
 			if (!subid_nss_handle->has_any_range) {
 				fprintf(stderr, "%s did not provide @has_any_range@\n", libname);
 				dlclose(h);
 				subid_nss_handle = NULL;
 				goto done;
 			}
-			subid_nss_handle->find_subid_owners = dlsym(subid_nss_handle, "find_subid_owners");
+			subid_nss_handle->find_subid_owners = dlsym(subid_nss_handle, "shadow_subid_find_subid_owners");
 			if (!subid_nss_handle->find_subid_owners) {
 				fprintf(stderr, "%s did not provide @find_subid_owners@\n", libname);
 				dlclose(h);
