@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <subid.h>
-#include <idmapping.h>
 #include <string.h>
 
 bool has_any_range(const char *owner, enum subid_type t)
