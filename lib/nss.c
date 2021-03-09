@@ -74,6 +74,7 @@ void nss_init(char *nsswitch_path) {
 			if (strlen(token) > 50) {
 				fprintf(stderr, "Subid NSS module name too long: %s\n", token);
 				fprintf(stderr, "Using files\n");
+				subid_nss_handle = NULL;
 				goto done;
 			}
 			snprintf(libname, 64,  "libsubid_%s.so", token);
@@ -86,6 +87,7 @@ void nss_init(char *nsswitch_path) {
 			goto done;
 		}
 		fprintf(stderr, "No usable subid NSS module found, using files\n");
+		subid_nss_handle = NULL;
 		goto done;
 	}
 
