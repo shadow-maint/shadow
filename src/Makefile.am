@@ -163,12 +163,6 @@ noinst_PROGRAMS += list_subid_ranges  \
 					free_subid_range \
 					check_subid_range
 
-list_subid_ranges_LDADD = -ldl
-get_subid_owners_LDADD = -ldl
-new_subid_range_LDADD = -ldl
-free_subid_range_LDADD = -ldl
-check_subid_range_LDADD = -ldl
-
 MISCLIBS = \
 	$(LIBAUDIT) \
 	$(LIBSELINUX) \
@@ -184,7 +178,7 @@ list_subid_ranges_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 list_subid_ranges_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -195,7 +189,7 @@ get_subid_owners_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 get_subid_owners_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -211,7 +205,7 @@ new_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 free_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
@@ -222,7 +216,7 @@ free_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
-	$(MISCLIBS)
+	$(MISCLIBS) -ldl
 
 check_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \

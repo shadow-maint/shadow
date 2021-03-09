@@ -19,7 +19,58 @@
 // bound to step on any other allocations leading to insecure
 // conditions.
 static bool nss_initialized;
-static void *subid_nss_handle;
+
+struct subid_nss_ops {
+	/*
+	 * nss_has_any_range: does a user own any subid range
+	 *
+	 * @owner: username
+	 * @idtype: subuid or subgid
+	 *
+	 * returns true if @owner has been delegated a @idtype subid range.
+	 */
+	bool (*has_any_range)(const char *owner, enum subid_type idtype);
+
+	/*
+	 * nss_has_range: does a user own a given subid range
+	 *
+	 * @owner: username
+	 * @start: first subid in queried range
+	 * @count: number of subids in queried range
+	 * @idtype: subuid or subgid
+	 *
+	 * returns true if @owner has been delegated the @idtype subid range
+	 * from @start to @start+@count.
+	 */
+	bool (*has_range)(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype);
+
+	/*
+	 * nss_list_owner_ranges: list the subid ranges delegated to a user.
+	 *
+	 * @owner - string representing username being queried
+	 * @id_type - subuid or subgid
+	 *
+	 * Returns a NULL-terminated array of struct subordinate_range,
+	 * or NULL.  The returned array of struct subordinate_range must be
+	 * freed by the caller, if not NULL.
+	 */
+	struct subordinate_range **(*list_owner_ranges)(const char *owner, enum subid_type id_type);
+	/*
+	 * nss_find_subid_owners: find uids who own a given subuid or subgid.
+	 *
+	 * @owner - string representing username being queried
+	 * @uids - pointer to an array of uids which will be allocated by
+	 *         nss_find_subid_owners()
+	 * @id_type - subuid or subgid
+	 *
+	 * Returns the number of uids which own the subid.  @uids must be freed by
+	 * the caller.
+	 */
+	int (*find_subid_owners)(unsigned long id, uid_t **uids, enum subid_type id_type)
+	void *handle;
+};
+
+static subid_nss_ops *subid_nss_handle;
 
 void *get_subid_nss_handle() {
 	return subid_nss_handle;
@@ -31,7 +82,7 @@ bool nss_is_initialized() {
 
 void nss_exit() {
 	if (nss_initialized && subid_nss_handle) {
-		dlclose(subid_nss_handle);
+		dlclose(subid_nss_handle->handle);
 		subid_nss_handle = NULL;
 	}
 }
@@ -98,91 +149,4 @@ done:
 		atexit(nss_exit);
 		fclose(nssfp);
 	}
-}
-
-/*
- * nss_has_any_range: does a user own any subid range
- *
- * @owner: username
- * @idtype: subuid or subgid
- *
- * returns true if @owner has been delegated a @idtype subid range.
- */
-bool nss_has_any_range(const char *owner, enum subid_type idtype)
-{
-	bool (*f)(const char *, enum subid_type);
-	f = dlsym(subid_nss_handle, "has_any_range");
-	if (NULL == f) {
-		fprintf(stderr, "Error getting has_any_range function: %s", dlerror());
-		return false;
-	}
-	return f(owner, idtype);
-}
-
-/*
- * nss_has_range: does a user own a given subid range
- *
- * @owner: username
- * @start: first subid in queried range
- * @count: number of subids in queried range
- * @idtype: subuid or subgid
- *
- * returns true if @owner has been delegated the @idtype subid range
- * from @start to @start+@count.
- */
-bool nss_has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type idtype)
-{
-	bool (*f)(const char *, unsigned long, unsigned long, enum subid_type);
-	f = dlsym(subid_nss_handle, "has_range");
-	if (NULL == f) {
-		fprintf(stderr, "Error getting has_range function: %s", dlerror());
-		return false;
-	}
-
-	return f(owner, start, count, idtype);
-}
-
-/*
- * nss_list_owner_ranges: list the subid ranges delegated to a user.
- *
- * @owner - string representing username being queried
- * @id_type - subuid or subgid
- *
- * Returns a NULL-terminated array of struct subordinate_range,
- * or NULL.  The returned array of struct subordinate_range must be
- * freed by the caller, if not NULL.
- */
-struct subordinate_range **nss_list_owner_ranges(const char *owner, enum subid_type id_type)
-{
-	struct subordinate_range ** (*f)(const char *, enum subid_type);
-	f = dlsym(subid_nss_handle, "list_owner_ranges");
-	if (NULL == f) {
-		fprintf(stderr, "Error getting list_owner_ranges function: %s", dlerror());
-		return false;
-	}
-
-	return f(owner, id_type);
-}
-
-/*
- * nss_find_subid_owners: find uids who own a given subuid or subgid.
- *
- * @owner - string representing username being queried
- * @uids - pointer to an array of uids which will be allocated by
- *         nss_find_subid_owners()
- * @id_type - subuid or subgid
- *
- * Returns the number of uids which own the subid.  @uids must be freed by
- * the caller.
- */
-int nss_find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)
-{
-	int (*f)(unsigned long id, uid_t **uids, enum subid_type);
-	f = dlsym(subid_nss_handle, "find_subid_owners");
-	if (NULL == f) {
-		fprintf(stderr, "Error getting find_subid_owners function: %s", dlerror());
-		return false;
-	}
-
-	return f(id, uids, id_type);
 }
