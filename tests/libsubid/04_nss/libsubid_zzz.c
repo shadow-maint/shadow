@@ -4,26 +4,32 @@
 #include <subid.h>
 #include <string.h>
 
-bool has_any_range(const char *owner, enum subid_type t)
+enum subid_retval has_any_range(const char *owner, enum subid_type t)
 {
+	if (strcmp(owner, "unknown") == 0)
+		return SUBID_RV_UNKOWN_USER;
 	if (t == ID_TYPE_UID)
 		return strcmp(owner, "user1") == 0;
-	return strcmp(owner, "group1") == 0;
+	if (strcmp(owner, "group1") == 0)
+		return SUBID_RV_SUCCESS;
+	return SUBID_RV_EPERM;
 }
 
-bool has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type t)
+enum subid_retval has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type t)
 {
+	if (strcmp(owner, "unknown") == 0)
+		return SUBID_RV_UNKOWN_USER;
 	if (t == ID_TYPE_UID)
 		if (strcmp(owner, "user1") != 0)
-			return false;
+			return SUBID_RV_EPERM;
 	if (t == ID_TYPE_GID)
 		if (strcmp(owner, "group1") != 0)
-			return false;
+			return SUBID_RV_EPERM;
 	if (start < 100000)
-		return false;
+		return SUBID_RV_EPERM;
 	if (start +count >= 165536)
-		return false;
-	return true;
+		return SUBID_RV_EPERM;
+	return SUBID_RV_SUCCESS;
 }
 
 int find_subid_owners(unsigned long id, uid_t **uids, enum subid_type id_type)

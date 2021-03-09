@@ -266,7 +266,7 @@ extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 #include <libsubid/subid.h>
 extern void nss_init(char *nsswitch_path);
 extern bool nss_is_initialized();
-extern subid_nss_ops *get_subid_nss_handle();
+extern struct subid_nss_ops *get_subid_nss_handle();
 
 
 /* pam_pass_non_interactive.c */

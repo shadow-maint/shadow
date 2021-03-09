@@ -6,7 +6,7 @@
 #include <dlfcn.h>
 
 extern bool nss_is_initialized();
-extern void *get_subid_nss_handle();
+extern struct subid_nss_ops *get_subid_nss_handle();
 
 void test1() {
 	// nsswitch2 has no subid: entry

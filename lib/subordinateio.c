@@ -606,7 +606,7 @@ bool sub_uid_assigned(const char *owner)
 	nss_init(NULL);
 	h = get_subid_nss_handle();
 	if (h)
-		return h->has_any_range(owner, ID_TYPE_UID);
+		return h->has_any_range(owner, ID_TYPE_UID) == SUBID_RV_SUCCESS;
 
 	return range_exists (&subordinate_uid_db, owner);
 }
@@ -617,7 +617,7 @@ bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
 	nss_init(NULL);
 	h = get_subid_nss_handle();
 	if (h)
-		return h->has_range(owner, start, count, ID_TYPE_UID);
+		return h->has_range(owner, start, count, ID_TYPE_UID) == SUBID_RV_SUCCESS;
 	return have_range (&subordinate_uid_db, owner, start, count);
 }
 
@@ -705,7 +705,7 @@ bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 	nss_init(NULL);
 	h = get_subid_nss_handle();
 	if (h)
-		return h->has_range(owner, start, count, ID_TYPE_GID);
+		return h->has_range(owner, start, count, ID_TYPE_GID) == SUBID_RV_SUCCESS;
 	return have_range(&subordinate_gid_db, owner, start, count);
 }
 
@@ -715,7 +715,7 @@ bool sub_gid_assigned(const char *owner)
 	nss_init(NULL);
 	h = get_subid_nss_handle();
 	if (h)
-		return h->has_any_range(owner, ID_TYPE_GID);
+		return h->has_any_range(owner, ID_TYPE_GID) == SUBID_RV_SUCCESS;
 	return range_exists (&subordinate_gid_db, owner);
 }
 
