@@ -136,9 +136,12 @@
       (but the user may log in the system by other means).
     </para>
     <para>
-      The comment field is used by various system utilities, such as
+      The comment field, also known as the gecos field, is used by
+      various system utilities, such as
       <citerefentry><refentrytitle>finger</refentrytitle>
-      <manvolnum>1</manvolnum></citerefentry>.
+      <manvolnum>1</manvolnum></citerefentry>. The use of an ampersand
+      here will be replaced by the capitalised login name when the field
+      is used or displayed by such system utilities.
     </para>
 
     <para>
