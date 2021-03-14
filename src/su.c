@@ -501,6 +501,11 @@ static void check_perms_nopam (const struct passwd *pw)
 	/*@observer@*/const char *password = pw->pw_passwd;
 	RETSIGTYPE (*oldsig) (int);
 
+	if (strcmp (pw->pw_passwd, "") == 0) {
+		fprintf(stderr, _("Password field is empty, this is invalid.\n"));
+		exit(1);
+	}
+
 	if (caller_is_root) {
 		return;
 	}

@@ -978,6 +978,10 @@ int main (int argc, char **argv)
 			    || ('*' == user_passwd[0])) {
 				failed = true;
 			}
+			/* Treat empty password field as invalid */
+			if (strcmp (user_passwd, "") == 0) {
+				failed = true;
+			}
 		}
 
 		if (strcmp (user_passwd, SHADOW_PASSWD_STRING) == 0) {
