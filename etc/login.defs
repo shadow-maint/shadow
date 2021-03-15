@@ -444,3 +444,12 @@ USERGROUPS_ENAB yes
 # primary group.
 #
 #GRANT_AUX_GROUP_SUBIDS yes
+
+#
+# Prevents an empty password field to be interpreted as "no authentication
+# required".
+# Set to "yes" to prevent for all accounts
+# Set to "superuser" to prevent for UID 0 / root (default)
+# Set to "no" to not prevent for any account (dangerous, historical default)
+
+PREVENT_NO_AUTH superuser

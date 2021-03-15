@@ -161,6 +161,7 @@ static struct itemdef def_table[] = {
 #endif
 	{"FORCE_SHADOW", NULL},
 	{"GRANT_AUX_GROUP_SUBIDS", NULL},
+	{"PREVENT_NO_AUTH", NULL},
 	{NULL, NULL}
 };
 

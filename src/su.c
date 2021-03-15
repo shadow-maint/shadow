@@ -501,13 +501,23 @@ static void check_perms_nopam (const struct passwd *pw)
 	/*@observer@*/const char *password = pw->pw_passwd;
 	RETSIGTYPE (*oldsig) (int);
 
-	if (strcmp (pw->pw_passwd, "") == 0) {
-		fprintf(stderr, _("Password field is empty, this is invalid.\n"));
-		exit(1);
-	}
-
 	if (caller_is_root) {
 		return;
+	}
+
+	if (strcmp (pw->pw_passwd, "") == 0) {
+		char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+		if(prevent_no_auth == NULL) {
+			prevent_no_auth = "superuser";
+		}
+		if(strcmp(prevent_no_auth, "yes") == 0) {
+			fprintf(stderr, _("Password field is empty, this is forbidden for all accounts.\n"));
+			exit(1);
+		} else if( (pw->pw_uid == 0)
+				&& (strcmp(prevent_no_auth, "superuser") == 0)) {
+			fprintf(stderr, _("Password field is empty, this is forbidden for super-user.\n"));
+			exit(1);
+		}
 	}
 
 	/*
