@@ -233,5 +233,12 @@
       is no entries for users with UID between 170 and 800 lastlog will appear
       to hang as it processes entries with UIDs 171-799).
     </para>
+    <para>
+      Having high UIDs can create problems when handling the <term><filename>
+      /var/log/lastlog</filename></term> with external tools. Although the
+      actual file is sparse and does not use too much space, certain
+      applications are not designed to identify sparse files by default and may
+      require a specific option to handle them.
+    </para>
   </refsect1>
 </refentry>
