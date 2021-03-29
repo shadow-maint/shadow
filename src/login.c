@@ -978,6 +978,19 @@ int main (int argc, char **argv)
 			    || ('*' == user_passwd[0])) {
 				failed = true;
 			}
+
+			if (strcmp (user_passwd, "") == 0) {
+				char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+				if(prevent_no_auth == NULL) {
+					prevent_no_auth = "superuser";
+				}
+				if(strcmp(prevent_no_auth, "yes") == 0) {
+					failed = true;
+				} else if( (pwd->pw_uid == 0)
+					&& (strcmp(prevent_no_auth, "superuser") == 0)) {
+					failed = true;
+				}
+			}
 		}
 
 		if (strcmp (user_passwd, SHADOW_PASSWD_STRING) == 0) {
