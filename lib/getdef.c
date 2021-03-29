@@ -127,6 +127,9 @@ static struct itemdef def_table[] = {
 	{"BCRYPT_MAX_ROUNDS", NULL},
 	{"BCRYPT_MIN_ROUNDS", NULL},
 #endif
+#ifdef USE_YESCRYPT
+	{"YESCRYPT_COST_FACTOR", NULL},
+#endif
 	{"SUB_GID_COUNT", NULL},
 	{"SUB_GID_MAX", NULL},
 	{"SUB_GID_MIN", NULL},

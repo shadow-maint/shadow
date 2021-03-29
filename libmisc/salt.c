@@ -32,6 +32,10 @@ static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds
 static /*@observer@*/const char *gensalt_bcrypt (void);
 static /*@observer@*/const char *BCRYPT_salt_rounds (/*@null@*/int *prefered_rounds);
 #endif /* USE_BCRYPT */
+#ifdef USE_YESCRYPT
+static /*@observer@*/const char *gensalt_yescrypt (void);
+static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/long *prefered_rounds);
+#endif /* USE_YESCRYPT */
 
 #ifndef HAVE_L64A
 static /*@observer@*/char *l64a(long value)
@@ -263,6 +267,78 @@ static /*@observer@*/const char *gensalt_bcrypt (void)
 }
 #endif /* USE_BCRYPT */
 
+#ifdef USE_YESCRYPT
+/* Default cost if not explicitly specified.  */
+#define Y_COST_DEFAULT 5
+/* Minimum cost.  */
+#define Y_COST_MIN 1
+/* Maximum cost.  */
+#define Y_COST_MAX 11
+/*
+ * Return a salt prefix specifying the cost for the YESCRYPT method.
+ */
+static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/long *prefered_cost)
+{
+	static char cost_prefix[5];
+	long cost;
+
+	if (NULL == prefered_cost) {
+		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
+	} else {
+		cost = *prefered_cost;
+	}
+
+	if (cost < Y_COST_MIN) {
+		cost = Y_COST_MIN;
+	}
+	if (cost > Y_COST_MAX) {
+		cost = Y_COST_MAX;
+	}
+
+	cost_prefix[0] = 'j';
+	if (cost < 3) {
+		cost_prefix[1] = 0x36 + cost;
+	} else if (cost < 6) {
+		cost_prefix[1] = 0x34 + cost;
+	} else {
+		cost_prefix[1] = 0x3b + cost;
+	}
+	cost_prefix[2] = cost >= 3 ? 'T' : '5';
+	cost_prefix[3] = '$';
+	cost_prefix[4] = 0;
+
+	return cost_prefix;
+}
+
+/*
+ * Default number of base64 characters used for the salt.
+ * 24 characters gives a 144 bits (18 bytes) salt. Unlike the more
+ * traditional 128 bits (16 bytes) salt, this 144 bits salt is always
+ * represented by the same number of base64 characters without padding
+ * issue, even with a non-standard base64 encoding scheme.
+ */
+#define YESCRYPT_SALT_SIZE 24
+/*
+ *  Generate a 22 character salt string for yescrypt.
+ */
+static /*@observer@*/const char *gensalt_yescrypt (void)
+{
+	static char salt[32];
+
+	salt[0] = '\0';
+
+	seedRNG ();
+	strcat (salt, l64a (random()));
+	do {
+		strcat (salt, l64a (random()));
+	} while (strlen (salt) < YESCRYPT_SALT_SIZE);
+
+	salt[YESCRYPT_SALT_SIZE] = '\0';
+
+	return salt;
+}
+#endif /* USE_YESCRYPT */
+
 /*
  *  Generate salt of size salt_size.
  */
@@ -302,6 +378,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
  * If meth is specified, an additional parameter can be provided.
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
+ *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
  */
 /*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
 {
@@ -333,6 +410,11 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		BCRYPTMAGNUM(result);
 		strcat(result, BCRYPT_salt_rounds((int *)arg));
 #endif /* USE_BCRYPT */
+#ifdef USE_YESCRYPT
+	} else if (0 == strcmp (method, "YESCRYPT")) {
+		MAGNUM(result, 'y');
+		strcat(result, YESCRYPT_salt_cost((int *)arg));
+#endif /* USE_YESCRYPT */
 #ifdef USE_SHA_CRYPT
 	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
@@ -362,11 +444,21 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		return result;
 	} else {
 #endif /* USE_BCRYPT */	
+#ifdef USE_YESCRYPT
+	if (0 == strcmp (method, "YESCRYPT")) {
+		strncat (result, gensalt_yescrypt (),
+				 sizeof (result) - strlen (result) - 1);
+		return result;
+	} else {
+#endif /* USE_YESCRYPT */
 		strncat (result, gensalt (salt_len),
 			 sizeof (result) - strlen (result) - 1);
+#ifdef USE_YESCRYPT
+	}
+#endif /* USE_YESCRYPT */
 #ifdef USE_BCRYPT
 	}
-#endif /* USE_BCRYPT */	
+#endif /* USE_BCRYPT */
 
 	return result;
 }
