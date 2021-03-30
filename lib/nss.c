@@ -20,10 +20,10 @@
 // conditions.
 static bool nss_initialized;
 
-static struct subid_nss_ops *subid_nss_handle;
+static struct subid_nss_ops *subid_nss;
 
 struct subid_nss_ops *get_subid_nss_handle() {
-	return subid_nss_handle;
+	return subid_nss;
 }
 
 bool nss_is_initialized() {
@@ -31,9 +31,10 @@ bool nss_is_initialized() {
 }
 
 void nss_exit() {
-	if (nss_initialized && subid_nss_handle) {
-		dlclose(subid_nss_handle->handle);
-		subid_nss_handle = NULL;
+	if (nss_initialized && subid_nss) {
+		dlclose(subid_nss->handle);
+		free(subid_nss);
+		subid_nss = NULL;
 	}
 }
 
@@ -70,13 +71,13 @@ void nss_init(char *nsswitch_path) {
 			char libname[65];
 			void *h;
 			if (strcmp(token, "files") == 0) {
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
 				goto done;
 			}
 			if (strlen(token) > 50) {
 				fprintf(stderr, "Subid NSS module name too long: %s\n", token);
 				fprintf(stderr, "Using files\n");
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
 				goto done;
 			}
 			snprintf(libname, 64,  "libsubid_%s.so", token);
@@ -84,50 +85,51 @@ void nss_init(char *nsswitch_path) {
 			if (!h) {
 				fprintf(stderr, "Error opening %s: %s\n", libname, dlerror());
 				fprintf(stderr, "Using files\n");
+				subid_nss = NULL;
 				goto done;
 			}
-			subid_nss_handle = malloc(sizeof(*subid_nss_handle));
-			if (!subid_nss_handle) {
+			subid_nss = malloc(sizeof(*subid_nss));
+			if (!subid_nss) {
 				dlclose(h);
 				goto done;
 			}
-			subid_nss_handle->has_range = dlsym(subid_nss_handle, "shadow_subid_has_range");
-			if (!subid_nss_handle->has_range) {
+			subid_nss->has_range = dlsym(h, "shadow_subid_has_range");
+			if (!subid_nss->has_range) {
 				fprintf(stderr, "%s did not provide @has_range@\n", libname);
 				dlclose(h);
-				free(subid_nss_handle);
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
+				free(subid_nss);
 				goto done;
 			}
-			subid_nss_handle->list_owner_ranges = dlsym(subid_nss_handle, "shadow_subid_list_owner_ranges");
-			if (!subid_nss_handle->list_owner_ranges) {
+			subid_nss->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
+			if (!subid_nss->list_owner_ranges) {
 				fprintf(stderr, "%s did not provide @list_owner_ranges@\n", libname);
 				dlclose(h);
-				free(subid_nss_handle);
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
+				free(subid_nss);
 				goto done;
 			}
-			subid_nss_handle->has_any_range = dlsym(subid_nss_handle, "shadow_subid_has_any_range");
-			if (!subid_nss_handle->has_any_range) {
+			subid_nss->has_any_range = dlsym(h, "shadow_subid_has_any_range");
+			if (!subid_nss->has_any_range) {
 				fprintf(stderr, "%s did not provide @has_any_range@\n", libname);
 				dlclose(h);
-				free(subid_nss_handle);
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
+				free(subid_nss);
 				goto done;
 			}
-			subid_nss_handle->find_subid_owners = dlsym(subid_nss_handle, "shadow_subid_find_subid_owners");
-			if (!subid_nss_handle->find_subid_owners) {
+			subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
+			if (!subid_nss->find_subid_owners) {
 				fprintf(stderr, "%s did not provide @find_subid_owners@\n", libname);
 				dlclose(h);
-				free(subid_nss_handle);
-				subid_nss_handle = NULL;
+				subid_nss = NULL;
+				free(subid_nss);
 				goto done;
 			}
-			subid_nss_handle->handle = h;
+			subid_nss->handle = h;
 			goto done;
 		}
 		fprintf(stderr, "No usable subid NSS module found, using files\n");
-		subid_nss_handle = NULL;
+		subid_nss = NULL;
 		goto done;
 	}
 
