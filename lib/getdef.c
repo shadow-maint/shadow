@@ -188,8 +188,13 @@ static const char* sysconfdir = "/etc";
 #ifndef LOGINDEFS
 #define LOGINDEFS "/etc/login.defs"
 #endif
+#ifndef LOGINDEFSDIR
+#define LOGINDEFSDIR "/etc/login.defs.d"
+static const char* conf_file_suffix = ".defs";
+#endif
 
 static const char* def_fname = LOGINDEFS;	/* login config defs file       */
+static const char* def_dname = LOGINDEFSDIR;	/* login config defs directory  */
 #endif
 static bool def_loaded = false;		/* are defs already loaded?     */
 
@@ -490,77 +495,28 @@ void setdef_config_file (const char* file)
 }
 
 /*
- * def_load - load configuration table
+ * load_conig_file - read and parse configuration file
  *
- * Loads the user-configured options from the default configuration file
  */
 
-static void def_load (void)
+#ifndef USE_ECONF
+static void load_conig_file (const char *fname)
 {
-#ifdef USE_ECONF
-	econf_file *defs_file = NULL;
-	econf_err error;
-	char **keys;
-	size_t key_number;
-#else
 	int i;
-	FILE *fp;
 	char buf[1024], *name, *value, *s;
-#endif
+	FILE *fp;
 
-	/*
-	 * Set the initialized flag.
-	 * (do it early to prevent recursion in putdef_str())
-	 */
-	def_loaded = true;
-
-#ifdef USE_ECONF
-
-	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", " \t", "#");
-	if (error) {
-		if (error == ECONF_NOFILE)
-			return;
-
-		SYSLOG ((LOG_CRIT, "cannot open login definitions [%s]",
-			econf_errString(error)));
-		exit (EXIT_FAILURE);
-	}
-
-	if ((error = econf_getKeys(defs_file, NULL, &key_number, &keys))) {
-		SYSLOG ((LOG_CRIT, "cannot read login definitions [%s]",
-			econf_errString(error)));
-		exit (EXIT_FAILURE);
-	}
-
-	for (size_t i = 0; i < key_number; i++) {
-		char *value;
-
-		econf_getStringValue(defs_file, NULL, keys[i], &value);
-
-		/*
-		 * Store the value in def_table.
-		 *
-		 * Ignore failures to load the login.defs file.
-		 * The error was already reported to the user and to
-		 * syslog. The tools will just use their default values.
-		 */
-		(void)putdef_str (keys[i], value);
-	}
-
-	econf_free (keys);
-	econf_free (defs_file);
-#else
 	/*
 	 * Open the configuration definitions file.
 	 */
-	fp = fopen (def_fname, "r");
+	fp = fopen (fname, "r");
 	if (NULL == fp) {
 		if (errno == ENOENT)
 			return;
 
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
-		         def_fname, strerror (err)));
+		         fname, strerror (err)));
 		exit (EXIT_FAILURE);
 	}
 
@@ -608,11 +564,132 @@ static void def_load (void)
 	if (ferror (fp) != 0) {
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%s]",
-		         def_fname, strerror (err)));
+		         fname, strerror (err)));
 		exit (EXIT_FAILURE);
 	}
 
 	(void) fclose (fp);
+}
+#endif
+
+/*
+ * def_load - load configuration table
+ *
+ * Loads the user-configured options from the default configuration file
+ */
+
+static void def_load (void)
+{
+#ifdef USE_ECONF
+	econf_file *defs_file = NULL;
+	econf_err error;
+	char **keys;
+	size_t key_number;
+#else
+	DIR *dir;
+	struct DIRECT *ent;
+	int err = 0;
+#endif
+
+	/*
+	 * Set the initialized flag.
+	 * (do it early to prevent recursion in putdef_str())
+	 */
+	def_loaded = true;
+
+#ifdef USE_ECONF
+
+	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", " \t", "#");
+	if (error) {
+		if (error == ECONF_NOFILE)
+			return;
+
+		SYSLOG ((LOG_CRIT, "cannot open login definitions [%s]",
+			econf_errString(error)));
+		exit (EXIT_FAILURE);
+	}
+
+	if ((error = econf_getKeys(defs_file, NULL, &key_number, &keys))) {
+		SYSLOG ((LOG_CRIT, "cannot read login definitions [%s]",
+			econf_errString(error)));
+		exit (EXIT_FAILURE);
+	}
+
+	for (size_t i = 0; i < key_number; i++) {
+		char *value;
+
+		econf_getStringValue(defs_file, NULL, keys[i], &value);
+
+		/*
+		 * Store the value in def_table.
+		 *
+		 * Ignore failures to load the login.defs file.
+		 * The error was already reported to the user and to
+		 * syslog. The tools will just use their default values.
+		 */
+		(void)putdef_str (keys[i], value);
+	}
+
+	econf_free (keys);
+	econf_free (defs_file);
+#else
+	/*
+	 * Open and parse the configuration definitions file.
+	 */
+
+	load_conig_file(def_fname);
+
+	/*
+	 * Open the configuration directory and iterate over all files.
+	 */
+
+	dir = opendir (def_dname);
+	if (NULL == dir) {
+		/*
+		 * Directory exists, but another error occured.
+		 */
+		if (errno != ENOENT) {
+			err = errno;
+			SYSLOG ((LOG_CRIT, "cannot open login definitions directory %s [%s]",
+			         def_dname, strerror (err)));
+			exit (EXIT_FAILURE);
+		}
+	} else {
+		while ((0 == err) && (ent = readdir (dir)) != NULL) {
+			/*
+			 * Skip the "." and ".." entries and every entery without proper suffix
+			 */
+			int offset = strlen(ent->d_name) - strlen(conf_file_suffix);
+			if ((strcmp (ent->d_name, ".") != 0) &&
+			    (strcmp (ent->d_name, "..") != 0) &&
+			    offset > 0 &&
+			    strcmp(ent->d_name + offset, conf_file_suffix) == 0) {
+				char *defs_file_name;
+				size_t defs_file_len = strlen (ent->d_name) + 2;
+				defs_file_len += strlen (def_dname);
+				defs_file_name = (char *) malloc (defs_file_len);
+
+				if (NULL == defs_file_name) {
+					err = -1;
+				} else {
+					/*
+					 * Build the filename config files.
+					 */
+					(void) snprintf (defs_file_name, defs_file_len, "%s/%s",
+					                 def_dname, ent->d_name);
+					/*
+					 * Open the configuration definitions file.
+					 */
+					load_conig_file(defs_file_name);
+				}
+				if (NULL != defs_file_name) {
+					free (defs_file_name);
+				}
+			}
+		}
+		(void) closedir (dir);
+	}
+
 #endif
 }
 
