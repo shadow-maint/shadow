@@ -109,6 +109,7 @@
 	    owned by the specified user.  If
 	    <option>USERGROUPS_ENAB</option> is defined to <emphasis
 	    remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>
+      or <filename>/etc/login.defs.d/*.conf</filename>
 	    and if a group exists with the same name as the deleted user,
 	    then this group will be removed, even if it is still the primary
 	    group of another user.
@@ -188,8 +189,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.conf</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &MAIL_DIR; <!-- documents also MAIL_FILE -->
@@ -215,6 +217,12 @@
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+  <term><filename>/etc/login.defs.d/*.defs</filename></term>
+  <listitem>
+    <para>Additional shadow password suite configuration.</para>
+  </listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
@@ -317,7 +325,8 @@
       be performed on the NIS server.
     </para>
     <para>If <option>USERGROUPS_ENAB</option> is defined to <emphasis
-      remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>,
+      remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>
+      or <filename>/etc/login.defs.d/*.conf</filename>,
       <command>userdel</command> will delete the group with the same name
       as the user. To avoid inconsistencies in the passwd and group
       databases, <command>userdel</command> will check that this group is

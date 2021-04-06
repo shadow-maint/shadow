@@ -91,7 +91,8 @@
     </para>
     <para>
       The default encryption algorithm can be defined for the system with
-      the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>,
+      the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>
+      or <filename>/etc/login.defs.d/*.defs</filename>,
       and can be overwritten with the <option>-e</option>,
       <option>-m</option>, or <option>-c</option> options.
     </para>
@@ -175,7 +176,8 @@
 	  <para>
 	    By default, the number of rounds is defined by the
 	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
-	    <filename>/etc/login.defs</filename>.
+	    <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -198,8 +200,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &ENCRYPT_METHOD;
@@ -229,6 +232,12 @@
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+  <term><filename>/etc/login.defs.d/*.defs</filename></term>
+  <listitem>
+    <para>Additional shadow password suite configuration.</para>
+  </listitem>
       </varlistentry>
     </variablelist>
   </refsect1>

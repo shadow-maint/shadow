@@ -294,8 +294,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &CONSOLE;
@@ -390,6 +391,12 @@
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+  <term><filename>/etc/login.defs.d/*.defs</filename></term>
+  <listitem>
+    <para>Additional shadow password suite configuration.</para>
+  </listitem>
       </varlistentry>
     </variablelist>
   </refsect1>

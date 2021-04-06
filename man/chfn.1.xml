@@ -89,7 +89,9 @@
       <citerefentry><refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> and similar programs. A normal user may only change
       the fields for her own account, subject to the restrictions in
-      <filename>/etc/login.defs</filename>. (The default configuration is to
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>.
+      (The default configuration is to
       prevent users from changing their fullname.) The superuser may change
       any field for any account. Additionally, only the superuser may use
       the <option>-o</option> option to change the undefined portions of the
@@ -193,8 +195,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &CHFN_AUTH;
@@ -211,6 +214,12 @@
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+  <term><filename>/etc/login.defs.d/*.defs</filename></term>
+  <listitem>
+    <para>Additional shadow password suite configuration.</para>
+  </listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>

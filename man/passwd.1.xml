@@ -381,8 +381,8 @@
       complex as he or she feels comfortable with.
     </para>
     <para>
-      Users may not be able to 
-      change their password on a system if NIS is enabled and they are not 
+      Users may not be able to
+      change their password on a system if NIS is enabled and they are not
       logged into the NIS server.
     </para>
     <para condition="pam">
@@ -395,8 +395,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &ENCRYPT_METHOD;
@@ -428,6 +429,12 @@
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs.d/*.defs</filename></term>
+	<listitem>
+	  <para>Additional shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
       <varlistentry condition="pam">

@@ -398,7 +398,8 @@
 	    No checks will be performed with regard to the
 	    <option>UID_MIN</option>, <option>UID_MAX</option>,
 	    <option>SYS_UID_MIN</option>, or <option>SYS_UID_MAX</option>
-	    from <filename>/etc/login.defs</filename>.
+	    from <filename>/etc/login.defs</filename> or
+	     <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -436,7 +437,8 @@
 	  <para>
 	     No checks will be performed with regard to
 	     <option>SUB_UID_MIN</option>, <option>SUB_UID_MAX</option>, or
-	     <option>SUB_UID_COUNT</option> from /etc/login.defs.
+	     <option>SUB_UID_COUNT</option> from <filename>/etc/login.defs</filename> or
+	     <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -456,7 +458,8 @@
 	  <para>
 	     No checks will be performed with regard to
 	     <option>SUB_UID_MIN</option>, <option>SUB_UID_MAX</option>, or
-	     <option>SUB_UID_COUNT</option> from /etc/login.defs.
+	     <option>SUB_UID_COUNT</option> from <filename>/etc/login.defs</filename> or
+	     <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -474,7 +477,8 @@
 	  <para>
 	     No checks will be performed with regard to
 	     <option>SUB_GID_MIN</option>, <option>SUB_GID_MAX</option>, or
-	     <option>SUB_GID_COUNT</option> from /etc/login.defs.
+	     <option>SUB_GID_COUNT</option> from <filename>/etc/login.defs</filename> or
+	     <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -494,7 +498,8 @@
 	  <para>
 	     No checks will be performed with regard to
 	     <option>SUB_GID_MIN</option>, <option>SUB_GID_MAX</option>, or
-	     <option>SUB_GID_COUNT</option> from /etc/login.defs.
+	     <option>SUB_GID_COUNT</option> from <filename>/etc/login.defs</filename> or
+	     <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -538,8 +543,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &LASTLOG_UID_MAX;
@@ -571,6 +577,12 @@
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs.d/*.defs</filename></term>
+	<listitem>
+	  <para>Additional shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

@@ -139,7 +139,9 @@
       The <filename>/etc/login.defs</filename> file defines the
       site-specific configuration for the shadow password suite. This file
       is required. Absence of this file will not prevent system operation,
-      but will probably result in undesirable operation.
+      but will probably result in undesirable operation. Configuration of
+      above file can be overwritten with
+      <filename>/etc/login.defs.d/*.defs</filename> files.
     </para>
 
     <para>

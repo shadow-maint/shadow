@@ -247,7 +247,8 @@
 	  <para>
 	    If not specified, the behavior of <command>useradd</command>
 	    will depend on the <option>USERGROUPS_ENAB</option> variable
-	    in <filename>/etc/login.defs</filename>. If this variable is
+	    in <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>. If this variable is
 	    set to <replaceable>yes</replaceable> (or
 	    <option>-U/--user-group</option> is specified on the command
 	    line), a group will be created for the user, with the same
@@ -313,7 +314,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    Overrides <filename>/etc/login.defs</filename> defaults
+	    Overrides <filename>/etc/login.defs</filename> and
+	    <filename>/etc/login.defs.d/*.defs</filename> defaults
 	    (<option>UID_MIN</option>, <option>UID_MAX</option>,
 	    <option>UMASK</option>, <option>PASS_MAX_DAYS</option>
 	    and others).
@@ -375,7 +377,8 @@
 	<listitem>
 	  <para>
 	    Do no create the user's home directory, even if the system
-	    wide setting from <filename>/etc/login.defs</filename>
+	    wide setting from <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>
 	    (<option>CREATE_HOME</option>) is set to
 	    <replaceable>yes</replaceable>.
 	  </para>
@@ -396,7 +399,8 @@
 	    The default behavior (if the <option>-g</option>,
 	    <option>-N</option>, and <option>-U</option> options are not
 	    specified) is defined by the <option>USERGROUPS_ENAB</option>
-	    variable in <filename>/etc/login.defs</filename>.
+	    variable in <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -446,14 +450,16 @@
 	    <filename>/etc/shadow</filename>, and their numeric
 	    identifiers are chosen in the
 	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
-	    range, defined in <filename>/etc/login.defs</filename>, instead of
+	    range, defined in <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>, instead of
 	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
 	    <option>GID</option> counterparts for the creation of groups).
 	  </para>
 	  <para>
 	    Note that <command>useradd</command> will not create a home
 	    directory for such a user, regardless of the default setting
-	    in <filename>/etc/login.defs</filename>
+	    in <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>
 	    (<option>CREATE_HOME</option>). You have to specify the
 	    <option>-m</option> options if you want a home directory for a
 	    system account to be created.
@@ -534,7 +540,8 @@
 	    The default behavior (if the <option>-g</option>,
 	    <option>-N</option>, and <option>-U</option> options are not
 	    specified) is defined by the <option>USERGROUPS_ENAB</option>
-	    variable in <filename>/etc/login.defs</filename>.
+	    variable in <filename>/etc/login.defs</filename> or
+	    <filename>/etc/login.defs.d/*.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -617,7 +624,8 @@
 	      the <option>-N/--no-user-group</option> is used or when the
 	      <option>USERGROUPS_ENAB</option> variable is set to
 	      <replaceable>no</replaceable> in
-	      <filename>/etc/login.defs</filename>). The named
+	      <filename>/etc/login.defs</filename> or
+	      <filename>/etc/login.defs.d/*.defs</filename>). The named
 	      group must exist, and a numerical group ID must have an
 	      existing entry.
 	    </para>
@@ -683,8 +691,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &CREATE_HOME;
@@ -770,6 +779,12 @@
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs.d/*.defs</filename></term>
+	<listitem>
+	  <para>Additional shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

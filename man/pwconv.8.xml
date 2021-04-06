@@ -169,7 +169,9 @@
       remap='I'>PASS_MIN_DAYS</emphasis>, <emphasis
       remap='I'>PASS_MAX_DAYS</emphasis>, and <emphasis
       remap='I'>PASS_WARN_AGE</emphasis> from
-      <filename>/etc/login.defs</filename> when adding new entries to
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      when adding new entries to
       <filename>/etc/shadow</filename>.
     </para>
 
@@ -227,7 +229,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variable in
-      <filename>/etc/login.defs</filename> changes the behavior of
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      changes the behavior of
       <command>grpconv</command> and <command>grpunconv</command>:
     </para>
     <variablelist>
@@ -235,7 +239,9 @@
     </variablelist>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of
       <command>pwconv</command>:
     </para>
     <variablelist>
@@ -254,6 +260,12 @@
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
 	</listitem>
+      </varlistentry>
+      <varlistentry>
+  <term><filename>/etc/login.defs.d/*.defs</filename></term>
+  <listitem>
+    <para>Additional shadow password suite configuration.</para>
+  </listitem>
       </varlistentry>
     </variablelist>
   </refsect1>

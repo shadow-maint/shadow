@@ -130,7 +130,8 @@
       for normal users, or <filename>/sbin:/bin:/usr/sbin:/usr/bin</filename>
       for the superuser. This may be changed with the
       <option>ENV_PATH</option> and <option>ENV_SUPATH</option>
-      definitions in <filename>/etc/login.defs</filename>.
+      definitions in <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>.
     </para>
 
     <para>
@@ -240,7 +241,8 @@
 		<listitem>
 		  <para>
 		    reset according to the
-		    <filename>/etc/login.defs</filename> options
+		    <filename>/etc/login.defs</filename> or
+		    <filename>/etc/login.defs.d/*.defs</filename> options
 		    <option>ENV_PATH</option> or
 		    <option>ENV_SUPATH</option> (see below);
 		  </para>
@@ -297,8 +299,9 @@
 		    If <option>--login</option> is used, the
 		    <envar>$TZ</envar>, <envar>$HZ</envar>, and
 		    <envar>$MAIL</envar> environment
-		    variables are set according to the 
-		    <filename>/etc/login.defs</filename>
+		    variables are set according to the
+		    <filename>/etc/login.defs</filename> or
+		    <filename>/etc/login.defs.d/*.defs</filename>
 		    options <option>ENV_TZ</option>,
 		    <option>ENV_HZ</option>, <option>MAIL_DIR</option>, and
 		    <option>MAIL_FILE</option> (see below).
@@ -338,8 +341,9 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
+      <filename>/etc/login.defs</filename> or
+      <filename>/etc/login.defs.d/*.defs</filename>
+      change the behavior of this tool:
     </para>
     <variablelist>
       &CONSOLE;
@@ -381,6 +385,12 @@
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
 	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs.d/*.defs</filename></term>
+	<listitem>
+	  <para>Additional shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
