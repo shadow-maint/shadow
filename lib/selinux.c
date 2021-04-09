@@ -53,7 +53,7 @@ static bool selinux_enabled;
  */
 int set_selinux_file_context (const char *dst_name)
 {
-	/*@null@*/security_context_t scontext = NULL;
+	/*@null@*/char *scontext = NULL;
 
 	if (!selinux_checked) {
 		selinux_enabled = is_selinux_enabled () > 0;
@@ -93,7 +93,7 @@ int reset_selinux_file_context (void)
 		selinux_checked = true;
 	}
 	if (selinux_enabled) {
-		if (setfscreatecon (NULL) != 0) {
+		if (setfscreatecon_raw (NULL) != 0) {
 			return 1;
 		}
 	}
@@ -175,7 +175,7 @@ skip_syslog:
  */
 int check_selinux_permit (const char *perm_name)
 {
-	char *user_context_str;
+	char *user_context_raw;
 	int r;
 
 	if (0 == is_selinux_enabled ()) {
@@ -184,7 +184,7 @@ int check_selinux_permit (const char *perm_name)
 
 	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) selinux_log_cb);
 
-	if (getprevcon (&user_context_str) != 0) {
+	if (getprevcon_raw (&user_context_raw) != 0) {
 		fprintf (stderr,
 		    _("%s: can not get previous SELinux process context: %s\n"),
 		    Prog, strerror (errno));
@@ -194,8 +194,8 @@ int check_selinux_permit (const char *perm_name)
 		return (security_getenforce () != 0);
 	}
 
-	r = selinux_check_access (user_context_str, user_context_str, "passwd", perm_name, NULL);
-	freecon (user_context_str);
+	r = selinux_check_access (user_context_raw, user_context_raw, "passwd", perm_name, NULL);
+	freecon (user_context_raw);
 	return r;
 }
 
