@@ -94,7 +94,7 @@ int reset_selinux_file_context (void)
 	}
 	if (selinux_enabled) {
 		if (setfscreatecon_raw (NULL) != 0) {
-			return 1;
+			return security_getenforce () != 0;
 		}
 	}
 	return 0;
