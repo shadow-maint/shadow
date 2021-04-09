@@ -34,10 +34,6 @@
 #ifndef COMMONIO_H
 #define COMMONIO_H
 
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#endif
-
 #include "defines.h" /* bool */
 
 /*
@@ -121,7 +117,7 @@ struct commonio_db {
 	/*@dependent@*/ /*@null@*/FILE *fp;
 
 #ifdef WITH_SELINUX
-	/*@null@*/security_context_t scontext;
+	/*@null@*/char *scontext;
 #endif
 	/*
 	 * Default permissions and owner for newly created data file.

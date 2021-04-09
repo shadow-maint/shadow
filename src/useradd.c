@@ -69,6 +69,9 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif				/* WITH_SELINUX */
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */

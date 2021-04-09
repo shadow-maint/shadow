@@ -59,6 +59,9 @@
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif				/* SHADOWGRP */
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif				/* WITH_SELINUX */
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
