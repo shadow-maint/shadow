@@ -974,7 +974,7 @@ int commonio_close (struct commonio_db *db)
 		snprintf (buf, sizeof buf, "%s-", db->filename);
 
 #ifdef WITH_SELINUX
-		if (set_selinux_file_context (buf) != 0) {
+		if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
 			errors++;
 		}
 #endif
@@ -1007,7 +1007,7 @@ int commonio_close (struct commonio_db *db)
 	snprintf (buf, sizeof buf, "%s+", db->filename);
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (buf) != 0) {
+	if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
 		errors++;
 	}
 #endif

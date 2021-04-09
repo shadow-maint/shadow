@@ -51,7 +51,7 @@ static bool selinux_enabled;
  *	Callers may have to Reset SELinux to create files with default
  *	contexts with reset_selinux_file_context
  */
-int set_selinux_file_context (const char *dst_name)
+int set_selinux_file_context (const char *dst_name, mode_t mode)
 {
 	if (!selinux_checked) {
 		selinux_enabled = is_selinux_enabled () > 0;
@@ -70,7 +70,7 @@ int set_selinux_file_context (const char *dst_name)
 			return security_getenforce () != 0;
 		}
 
-		r = selabel_lookup_raw(hnd, &fcontext_raw, dst_name, 0);
+		r = selabel_lookup_raw(hnd, &fcontext_raw, dst_name, mode);
 		selabel_close(hnd);
 		if (r < 0) {
 			/* No context specified for the searched path */

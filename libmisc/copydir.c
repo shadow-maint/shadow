@@ -484,7 +484,7 @@ static int copy_dir (const char *src, const char *dst,
 	 */
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst, S_IFDIR) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -605,7 +605,7 @@ static int copy_symlink (const char *src, const char *dst,
 	}
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst, S_IFLNK) != 0) {
 		free (oldlink);
 		return -1;
 	}
@@ -684,7 +684,7 @@ static int copy_special (const char *src, const char *dst,
 	int err = 0;
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst, statp->st_mode & S_IFMT) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -744,7 +744,7 @@ static int copy_file (const char *src, const char *dst,
 		return -1;
 	}
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst) != 0) {
+	if (set_selinux_file_context (dst, S_IFREG) != 0) {
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
