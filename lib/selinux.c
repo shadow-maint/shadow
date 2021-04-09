@@ -35,7 +35,7 @@
 #include "defines.h"
 
 #include <selinux/selinux.h>
-#include <selinux/context.h>
+#include <selinux/label.h>
 #include "prototypes.h"
 
 static bool selinux_checked = false;
@@ -53,8 +53,6 @@ static bool selinux_enabled;
  */
 int set_selinux_file_context (const char *dst_name)
 {
-	/*@null@*/char *scontext = NULL;
-
 	if (!selinux_checked) {
 		selinux_enabled = is_selinux_enabled () > 0;
 		selinux_checked = true;
@@ -62,19 +60,33 @@ int set_selinux_file_context (const char *dst_name)
 
 	if (selinux_enabled) {
 		/* Get the default security context for this file */
-		if (matchpathcon (dst_name, 0, &scontext) < 0) {
-			if (security_getenforce () != 0) {
-				return 1;
-			}
+
+		/*@null@*/char *fcontext_raw = NULL;
+		struct selabel_handle *hnd;
+		int r;
+
+		hnd = selabel_open(SELABEL_CTX_FILE, NULL, 0);
+		if (hnd == NULL) {
+			return security_getenforce () != 0;
 		}
+
+		r = selabel_lookup_raw(hnd, &fcontext_raw, dst_name, 0);
+		selabel_close(hnd);
+		if (r < 0) {
+			/* No context specified for the searched path */
+			if (errno == ENOENT) {
+				return 0;
+			}
+
+			return security_getenforce () != 0;
+		}
+
 		/* Set the security context for the next created file */
-		if (setfscreatecon (scontext) < 0) {
-			if (security_getenforce () != 0) {
-				freecon (scontext);
-				return 1;
-			}
+		r = setfscreatecon_raw (fcontext_raw);
+		freecon (fcontext_raw);
+		if (r < 0) {
+			return security_getenforce () != 0;
 		}
-		freecon (scontext);
 	}
 	return 0;
 }
