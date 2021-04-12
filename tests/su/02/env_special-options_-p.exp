@@ -44,8 +44,8 @@ send "echo \"PATH=\\\"\$PATH\\\"\"\r"
 expect "PATH=\"/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games\"\r"
 expect "$ "
 
-send "echo \"'\$HOME'\$USER'\$LOGNAME'\$SHELL'\"\r"
-expect "'/root'root'root'/bin/bash'\r"
+send "echo \"'\$USER'\$LOGNAME'\$SHELL'\"\r"
+expect "'root'root'/bin/bash'\r"
 expect "$ "
 
 send "exit\r"
