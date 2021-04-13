@@ -40,6 +40,15 @@
 
 static bool selinux_checked = false;
 static bool selinux_enabled;
+static /*@null@*/struct selabel_handle *selabel_hnd = NULL;
+
+static void cleanup(void)
+{
+	if (selabel_hnd) {
+		selabel_close(selabel_hnd);
+		selabel_hnd = NULL;
+	}
+}
 
 /*
  * set_selinux_file_context - Set the security context before any file or
@@ -62,16 +71,17 @@ int set_selinux_file_context (const char *dst_name, mode_t mode)
 		/* Get the default security context for this file */
 
 		/*@null@*/char *fcontext_raw = NULL;
-		struct selabel_handle *hnd;
 		int r;
 
-		hnd = selabel_open(SELABEL_CTX_FILE, NULL, 0);
-		if (hnd == NULL) {
-			return security_getenforce () != 0;
+		if (selabel_hnd == NULL) {
+			selabel_hnd = selabel_open(SELABEL_CTX_FILE, NULL, 0);
+			if (selabel_hnd == NULL) {
+				return security_getenforce () != 0;
+			}
+			(void) atexit(cleanup);
 		}
 
-		r = selabel_lookup_raw(hnd, &fcontext_raw, dst_name, mode);
-		selabel_close(hnd);
+		r = selabel_lookup_raw(selabel_hnd, &fcontext_raw, dst_name, mode);
 		if (r < 0) {
 			/* No context specified for the searched path */
 			if (errno == ENOENT) {
