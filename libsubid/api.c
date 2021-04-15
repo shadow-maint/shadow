@@ -36,7 +36,7 @@
 #include <stdbool.h>
 #include "subordinateio.h"
 #include "idmapping.h"
-#include "api.h"
+#include "subid.h"
 
 static
 int get_subid_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
