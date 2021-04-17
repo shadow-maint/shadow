@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
-m4_define([libsubid_abi_major], 1)
+m4_define([libsubid_abi_major], 2)
 m4_define([libsubid_abi_minor], 0)
 m4_define([libsubid_abi_micro], 0)
 m4_define([libsubid_abi], [libsubid_abi_major.libsubid_abi_minor.libsubid_abi_micro])
@@ -55,7 +55,7 @@ AC_CHECK_FUNCS(l64a fchmod fchown fsync futimes getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
 	lutimes memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
 	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo \
-	ruserok)
+	ruserok dlopen)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.

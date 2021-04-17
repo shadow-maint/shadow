@@ -9,6 +9,8 @@ testname=$(basename $0)
 . ../../common/config.sh
 . ../../common/log.sh
 
+export HOME=/root  # seems to be set to /home/travis, breaking some tests
+
 command=""
 
 case  "$testname" in

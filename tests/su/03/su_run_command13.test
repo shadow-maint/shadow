@@ -17,6 +17,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
+export SHELL=/bin/sh
 echo "/bin/su -p -c pwd -- - myuser> tmp/out 2> tmp/err"
 /bin/su -p -c pwd -- - myuser> tmp/out 2> tmp/err
 
