@@ -3,6 +3,8 @@ libsubid_la_LDFLAGS = -Wl,-soname,libsubid.so.@LIBSUBID_ABI@ \
 	-shared -version-info @LIBSUBID_ABI_MAJOR@
 libsubid_la_SOURCES = api.c
 
+pkginclude_HEADERS = subid.h
+
 MISCLIBS = \
 	$(LIBAUDIT) \
 	$(LIBSELINUX) \
