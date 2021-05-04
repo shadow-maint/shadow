@@ -88,7 +88,8 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>newgidmap</command> sets <filename>/proc/[pid]/gid_map</filename> based on its
-      command line arguments and the gids allowed in <filename>/etc/subgid</filename>.
+      command line arguments and the gids allowed (either in <filename>/etc/subgid</filename> or
+      through the configured NSS subid module).
       Note that the root user is not exempted from the requirement for a valid
       <filename>/etc/subgid</filename> entry.
     </para>
