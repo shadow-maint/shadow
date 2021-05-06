@@ -61,6 +61,7 @@ struct itemdef {
 	{"ENV_TZ", NULL},			\
 	{"FAILLOG_ENAB", NULL},			\
 	{"FTMP_FILE", NULL},			\
+	{"HMAC_CRYPTO_ALGO", NULL},		\
 	{"ISSUE_FILE", NULL},			\
 	{"LASTLOG_ENAB", NULL},			\
 	{"LOGIN_STRING", NULL},			\

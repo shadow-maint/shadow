@@ -467,3 +467,13 @@ USERGROUPS_ENAB yes
 # Set to "no" to not prevent for any account (dangerous, historical default)
 
 PREVENT_NO_AUTH superuser
+
+#
+# Select the HMAC cryptography algorithm.
+# Used in pam_timestamp module to calculate the keyed-hash message
+# authentication code.
+#
+# Note: It is recommended to check hmac(3) to see the possible algorithms
+# that are available in your system.
+#
+#HMAC_CRYPTO_ALGO SHA512

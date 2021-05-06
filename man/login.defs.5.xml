@@ -50,6 +50,7 @@
 <!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
 <!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY HMAC_CRYPTO_ALGO      SYSTEM "login.defs.d/HMAC_CRYPTO_ALGO.xml">
 <!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
 <!ENTITY HUSHLOGIN_FILE        SYSTEM "login.defs.d/HUSHLOGIN_FILE.xml">
 <!ENTITY ISSUE_FILE            SYSTEM "login.defs.d/ISSUE_FILE.xml">
@@ -187,6 +188,7 @@
       &FAKE_SHELL;
       &FTMP_FILE;
       &GID_MAX; <!-- documents also GID_MIN -->
+      &HMAC_CRYPTO_ALGO;
       &HOME_MODE;
       &HUSHLOGIN_FILE;
       &ISSUE_FILE;
