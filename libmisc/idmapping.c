@@ -123,6 +123,25 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
  */
 #define ULONG_DIGITS ((((sizeof(unsigned long) * CHAR_BIT) + 9)/10)*3)
 
+#if HAVE_SYS_CAPABILITY_H
+static inline bool maps_lower_root(int cap, int ranges, struct map_range *mappings)
+{
+	int idx;
+	struct map_range *mapping;
+
+	if (cap != CAP_SETUID)
+		return false;
+
+	mapping = mappings;
+	for (idx = 0; idx < ranges; idx++, mapping++) {
+		if (mapping->lower == 0)
+			return true;
+	}
+
+	return false;
+}
+#endif
+
 /*
  * The ruid refers to the caller's uid and is used to reset the effective uid
  * back to the callers real uid.
@@ -177,6 +196,12 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 	/* Lockdown new{g,u}idmap by dropping all unneeded capabilities. */
 	memset(data, 0, sizeof(data));
 	data[0].effective = CAP_TO_MASK(cap);
+	/*
+	 * When uid 0 from the ancestor userns is supposed to be mapped into
+	 * the child userns we need to retain CAP_SETFCAP.
+	 */
+	if (maps_lower_root(cap, ranges, mappings))
+		data[0].effective |= CAP_TO_MASK(CAP_SETFCAP);
 	data[0].permitted = data[0].effective;
 	if (capset(&hdr, data) < 0) {
 		fprintf(stderr, _("%s: Could not set caps\n"), Prog);
