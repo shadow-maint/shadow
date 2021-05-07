@@ -69,6 +69,9 @@
 #include "sgroupio.h"
 #endif
 #include "shadowio.h"
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif				/* WITH_SELINUX */
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
@@ -2174,7 +2177,7 @@ static void create_home (void)
 		++bhome;
 
 #ifdef WITH_SELINUX
-		if (set_selinux_file_context (prefix_user_home) != 0) {
+		if (set_selinux_file_context (prefix_user_home, S_IFDIR) != 0) {
 			fprintf (stderr,
 			         _("%s: cannot set SELinux context for home directory %s\n"),
 			         Prog, user_home);
@@ -2302,7 +2305,7 @@ static void create_mail (void)
 			sprintf (file, "%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
-		if (set_selinux_file_context (file) != 0) {
+		if (set_selinux_file_context (file, S_IFREG) != 0) {
 			fprintf (stderr,
 			         _("%s: cannot set SELinux context for mailbox file %s\n"),
 			         Prog, file);
