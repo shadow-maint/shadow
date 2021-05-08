@@ -75,6 +75,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
@@ -1052,6 +1053,7 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

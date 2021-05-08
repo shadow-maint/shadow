@@ -58,6 +58,7 @@
  */
 /* The name of this command, as it is invoked */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 #ifdef SHADOWGRP
 /* Indicate if shadow groups are enabled on the system
@@ -988,6 +989,7 @@ int main (int argc, char **argv)
 	 */
 	bywho = getuid ();
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	OPENLOG ("gpasswd");
 	setbuf (stdout, NULL);

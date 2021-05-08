@@ -62,6 +62,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static bool
     dflg = false,		/* set last password change date */
@@ -814,6 +815,7 @@ int main (int argc, char **argv)
 	 * Get the program name so that error messages can use it.
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");

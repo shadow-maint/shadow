@@ -83,6 +83,7 @@ static pam_handle_t *pamh = NULL;
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static const char *hostname = "";
 static /*@null@*/ /*@only@*/char *username = NULL;
@@ -577,6 +578,7 @@ int main (int argc, char **argv)
 
 	amroot = (getuid () == 0);
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	if (geteuid() != 0) {
 		fprintf (stderr, _("%s: Cannot possibly work without effective root\n"), Prog);

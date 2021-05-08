@@ -120,7 +120,7 @@ void cleanup_report_add_user_shadow (void *user_name)
 void cleanup_unlock_passwd (unused void *arg)
 {
 	if (pw_unlock () == 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
@@ -139,7 +139,7 @@ void cleanup_unlock_passwd (unused void *arg)
 void cleanup_unlock_shadow (unused void *arg)
 {
 	if (spw_unlock () == 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));

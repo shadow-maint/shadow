@@ -22,6 +22,22 @@ enum subid_status {
 };
 
 /*
+ * libsubid_init: initialize libsubid
+ *
+ * @progname: Name to display as program.  If NULL, then "(libsubid)" will be
+ *            shown in error messages.
+ * @logfd:    Open file pointer to pass error messages to.  If NULL, then
+ *            /dev/null will be opened and messages will be sent there.  The
+ *            default if libsubid_init() is not called is stderr (2).
+ *
+ * This function does not need to be called.  If not called, then the defaults
+ * will be used.
+ *
+ * Returns false if an error occurred.
+ */
+bool libsubid_init(const char *progname, FILE *logfd);
+
+/*
  * get_subuid_ranges: return a list of UID ranges for a user
  *
  * @owner: username being queried

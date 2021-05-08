@@ -70,6 +70,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static bool use_system_pw_file = true;
 static bool use_system_spw_file = true;

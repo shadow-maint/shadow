@@ -46,6 +46,7 @@
 
 /* Global variables */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 static bool cflg = false;
 
 /* local function prototypes */
@@ -144,6 +145,7 @@ int main (int argc, char **argv)
 	struct spwd *spwd;
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	sanitize_env ();
 

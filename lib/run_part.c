@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <lib/prototypes.h>
 
 int run_part (char *script_path, char *name, char *action)
 {
@@ -83,7 +84,7 @@ int run_parts (char *directory, char *name, char *action)
 		free (s);
 
 		if (execute_result!=0) {
-			fprintf (stderr,
+			fprintf (shadow_logfd,
 				"%s: did not exit cleanly.\n",
 			    namelist[n]->d_name);
 			for (; n<scanlist; n++) {

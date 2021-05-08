@@ -44,6 +44,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 #ifndef DEFAULT_HUP_MESG
 #define DEFAULT_HUP_MESG _("login time exceeded\n\n")
@@ -187,6 +188,7 @@ int main (int argc, char **argv)
 	 * Start syslogging everything
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	OPENLOG ("logoutd");
 

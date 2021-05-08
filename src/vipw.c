@@ -63,6 +63,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static const char *filename, *fileeditname;
 static bool filelocked = false;
@@ -481,6 +482,7 @@ int main (int argc, char **argv)
 	bool do_vipw;
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

@@ -203,7 +203,7 @@ void cleanup_report_del_group_gshadow (void *group_name)
 void cleanup_unlock_group (unused void *arg)
 {
 	if (gr_unlock () == 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
@@ -223,7 +223,7 @@ void cleanup_unlock_group (unused void *arg)
 void cleanup_unlock_gshadow (unused void *arg)
 {
 	if (sgr_unlock () == 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));

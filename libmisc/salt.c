@@ -426,7 +426,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		salt_len = (size_t) shadow_random (8, 16);
 #endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to DES.\n"),
 			 method);

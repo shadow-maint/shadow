@@ -219,7 +219,7 @@ void setup_env (struct passwd *info)
 		static char temp_pw_dir[] = "/";
 
 		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
-			fprintf (stderr, _("Unable to cd to '%s'\n"),
+			fprintf (shadow_logfd, _("Unable to cd to '%s'\n"),
 				 info->pw_dir);
 			SYSLOG ((LOG_WARN,
 				 "unable to cd to `%s' for user `%s'\n",

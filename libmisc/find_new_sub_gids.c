@@ -60,7 +60,7 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 	count = getdef_ulong ("SUB_GID_COUNT", 65536);
 
 	if (min > max || count >= max || (min + count - 1) > max) {
-		(void) fprintf (stderr,
+		(void) fprintf (shadow_logfd,
 				_("%s: Invalid configuration: SUB_GID_MIN (%lu),"
 				  " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
 			Prog, min, max, count);
@@ -69,7 +69,7 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 
 	start = sub_gid_find_free_range(min, max, count);
 	if (start == (gid_t)-1) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: Can't get unique subordinate GID range\n"),
 		         Prog);
 		SYSLOG ((LOG_WARN, "no more available subordinate GIDs on the system"));

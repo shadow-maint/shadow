@@ -171,7 +171,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 			}
 			newenvp = __newenvp;
 		} else {
-			(void) fputs (_("Environment overflow\n"), stderr);
+			(void) fputs (_("Environment overflow\n"), shadow_logfd);
 			newenvc--;
 			free (newenvp[newenvc]);
 		}

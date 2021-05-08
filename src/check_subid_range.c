@@ -18,6 +18,7 @@
 #include "idmapping.h"
 
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 int main(int argc, char **argv)
 {
@@ -25,6 +26,7 @@ int main(int argc, char **argv)
 	unsigned long start, count;
 	bool check_uids;
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	if (argc != 5)
 		exit(1);

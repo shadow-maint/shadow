@@ -59,7 +59,8 @@
 #include "defines.h"
 #include "commonio.h"
 
-extern /*@observer@*/ const char *Prog;
+extern /*@observer@*/ const char *Prog; /* Program name showed in error messages */
+extern FILE *shadow_logfd;  /* file descripter to which error messages are printed */
 
 /* addgrps.c */
 #if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)

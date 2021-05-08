@@ -4,6 +4,7 @@
 #include "prototypes.h"
 
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 void usage(void)
 {
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
 	struct subordinate_range **ranges;
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 	if (argc < 2) {
 		usage();
 	}

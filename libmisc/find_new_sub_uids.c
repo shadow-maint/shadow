@@ -60,7 +60,7 @@ int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
 	count = getdef_ulong ("SUB_UID_COUNT", 65536);
 
 	if (min > max || count >= max || (min + count - 1) > max) {
-		(void) fprintf (stderr,
+		(void) fprintf (shadow_logfd,
 				_("%s: Invalid configuration: SUB_UID_MIN (%lu),"
 				  " SUB_UID_MAX (%lu), SUB_UID_COUNT (%lu)\n"),
 			Prog, min, max, count);
@@ -69,7 +69,7 @@ int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
 
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == (uid_t)-1) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: Can't get unique subordinate UID range\n"),
 		         Prog);
 		SYSLOG ((LOG_WARN, "no more available subordinate UIDs on the system"));

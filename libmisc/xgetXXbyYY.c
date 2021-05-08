@@ -74,7 +74,7 @@
 
 	result = malloc(sizeof(LOOKUP_TYPE));
 	if (NULL == result) {
-		fprintf (stderr, _("%s: out of memory\n"),
+		fprintf (shadow_logfd, _("%s: out of memory\n"),
 		         "x" STRINGIZE(FUNCTION_NAME));
 		exit (13);
 	}
@@ -84,7 +84,7 @@
 		LOOKUP_TYPE *resbuf = NULL;
 		buffer = (char *)realloc (buffer, length);
 		if (NULL == buffer) {
-			fprintf (stderr, _("%s: out of memory\n"),
+			fprintf (shadow_logfd, _("%s: out of memory\n"),
 			         "x" STRINGIZE(FUNCTION_NAME));
 			exit (13);
 		}
@@ -132,7 +132,7 @@
 	if (result) {
 		result = DUP_FUNCTION(result);
 		if (NULL == result) {
-			fprintf (stderr, _("%s: out of memory\n"),
+			fprintf (shadow_logfd, _("%s: out of memory\n"),
 			         "x" STRINGIZE(FUNCTION_NAME));
 			exit (13);
 		}

@@ -96,7 +96,7 @@ static int user_busy_utmp (const char *name)
 			continue;
 		}
 
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: user %s is currently logged in\n"),
 		         Prog, name);
 		return 1;
@@ -249,7 +249,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 #ifdef ENABLE_SUBIDS
 			sub_uid_close();
 #endif
-			fprintf (stderr,
+			fprintf (shadow_logfd,
 			         _("%s: user %s is currently used by process %d\n"),
 			         Prog, name, pid);
 			return 1;
@@ -272,7 +272,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 #ifdef ENABLE_SUBIDS
 					sub_uid_close();
 #endif
-					fprintf (stderr,
+					fprintf (shadow_logfd,
 					         _("%s: user %s is currently used by process %d\n"),
 					         Prog, name, pid);
 					return 1;
