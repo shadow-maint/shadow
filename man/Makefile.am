@@ -136,6 +136,7 @@ login_defs_v = \
 	FAKE_SHELL.xml \
 	FTMP_FILE.xml \
 	GID_MAX.xml \
+	HMAC_CRYPTO_ALGO.xml \
 	HOME_MODE.xml \
 	HUSHLOGIN_FILE.xml \
 	ISSUE_FILE.xml \
