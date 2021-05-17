@@ -66,24 +66,19 @@ bool libsubid_init(const char *progname, FILE * logfd)
 }
 
 static
-int get_subid_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+int get_subid_ranges(const char *owner, enum subid_type id_type, struct subid_range ***ranges)
 {
 	return list_owner_ranges(owner, id_type, ranges);
 }
 
-int get_subuid_ranges(const char *owner, struct subordinate_range ***ranges)
+int get_subuid_ranges(const char *owner, struct subid_range ***ranges)
 {
 	return get_subid_ranges(owner, ID_TYPE_UID, ranges);
 }
 
-int get_subgid_ranges(const char *owner, struct subordinate_range ***ranges)
+int get_subgid_ranges(const char *owner, struct subid_range ***ranges)
 {
 	return get_subid_ranges(owner, ID_TYPE_GID, ranges);
-}
-
-void subid_free_ranges(struct subordinate_range **ranges, int count)
-{
-	return free_subordinate_ranges(ranges, count);
 }
 
 static

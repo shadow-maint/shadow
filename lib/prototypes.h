@@ -300,8 +300,8 @@ struct subid_nss_ops {
 	 *
 	 * @owner - string representing username being queried
 	 * @id_type - subuid or subgid
-	 * @ranges - pointer to an array of struct subordinate_range pointers, or
-	 *           NULL.  The returned array of struct subordinate_range and its
+	 * @ranges - pointer to an array of struct subid_range pointers, or
+	 *           NULL.  The returned array of struct subid_range and its
 	 *           members must be freed by the caller.
 	 * @count - pointer to an integer into which the number of returned ranges
 	 *          is written.
@@ -309,7 +309,7 @@ struct subid_nss_ops {
 	 * returns success if the module was able to determine an answer,
 	 * else an error status.
 	 */
-	enum subid_status (*list_owner_ranges)(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges, int *count);
+	enum subid_status (*list_owner_ranges)(const char *owner, enum subid_type id_type, struct subid_range ***ranges, int *count);
 
 	/*
 	 * nss_find_subid_owners: find uids who own a given subuid or subgid.

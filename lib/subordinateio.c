@@ -11,10 +11,28 @@
 #include <stdio.h>
 #include "commonio.h"
 #include "subordinateio.h"
+#include "../libsubid/subid.h"
 #include <sys/types.h>
 #include <pwd.h>
 #include <ctype.h>
 #include <fcntl.h>
+
+/* subid_free_ranges: free a subid_range
+ *
+ * @ranges: an array of subid_ranges to free
+ * @count: number of items in the array
+ *
+ * The subid_range is a subordinate_range without the owner field,
+ * defined in subid.h
+ */
+void subid_free_ranges(struct subid_range **ranges, int count)
+{
+	int i;
+
+	for (i = 0; i < count; i++)
+		free(ranges[i]);
+	free(ranges);
+}
 
 /*
  * subordinate_dup: create a duplicate range
@@ -308,24 +326,25 @@ static bool have_range(struct commonio_db *db,
 	return false;
 }
 
-static bool append_range(struct subordinate_range ***ranges, const struct subordinate_range *new, int n)
+static bool append_range(struct subid_range ***ranges, const struct subordinate_range *new, int n)
 {
-	struct subordinate_range *tmp;
+	struct subid_range *tmp;
 	if (!*ranges) {
-		*ranges = malloc(sizeof(struct subordinate_range *));
+		*ranges = malloc(sizeof(struct subid_range *));
 		if (!*ranges)
 			return false;
 	} else {
-		struct subordinate_range **new;
-		new = realloc(*ranges, (n + 1) * (sizeof(struct subordinate_range *)));
+		struct subid_range **new;
+		new = realloc(*ranges, (n + 1) * (sizeof(struct subid_range *)));
 		if (!new)
 			return false;
 		*ranges = new;
 	}
 	(*ranges)[n] = NULL;
-	tmp = subordinate_dup(new);
+	tmp = malloc(sizeof(*tmp));
 	if (!tmp)
 		return false;
+	memcpy(tmp, new, sizeof(*tmp));
 	(*ranges)[n] = tmp;
 	return true;
 }
@@ -785,10 +804,10 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
  *
  * The caller must free the subordinate range list.
  */
-int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***in_ranges)
+int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range ***in_ranges)
 {
 	// TODO - need to handle owner being either uid or username
-	struct subordinate_range **ranges = NULL;
+	struct subid_range **ranges = NULL;
 	const struct subordinate_range *range;
 	struct commonio_db *db;
 	enum subid_status status;
@@ -826,7 +845,7 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordi
 	while ((range = commonio_next(db)) != NULL) {
 		if (0 == strcmp(range->owner, owner)) {
 			if (!append_range(&ranges, range, count++)) {
-				free_subordinate_ranges(ranges, count-1);
+				subid_free_ranges(ranges, count-1);
 				ranges = NULL;
 				count = -1;
 				goto out;

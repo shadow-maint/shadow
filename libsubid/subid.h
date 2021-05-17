@@ -3,6 +3,15 @@
 
 #ifndef SUBID_RANGE_DEFINED
 #define SUBID_RANGE_DEFINED 1
+
+/* subid_range is just a starting point and size of a range */
+struct subid_range {
+	unsigned long start;
+	unsigned long count;
+};
+
+/* subordinage_range is a subid_range plus an owner, representing
+ * a range in /etc/subuid or /etc/subgid */
 struct subordinate_range {
 	const char *owner;
 	unsigned long start;
@@ -46,7 +55,7 @@ bool libsubid_init(const char *progname, FILE *logfd);
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subuid_ranges(const char *owner, struct subordinate_range ***ranges);
+int get_subuid_ranges(const char *owner, struct subid_range ***ranges);
 
 /*
  * get_subgid_ranges: return a list of GID ranges for a user
@@ -57,7 +66,7 @@ int get_subuid_ranges(const char *owner, struct subordinate_range ***ranges);
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subgid_ranges(const char *owner, struct subordinate_range ***ranges);
+int get_subgid_ranges(const char *owner, struct subid_range ***ranges);
 
 /*
  * subid_free_ranges: free an array of subordinate_ranges returned by either
@@ -66,7 +75,7 @@ int get_subgid_ranges(const char *owner, struct subordinate_range ***ranges);
  * @ranges: the ranges to free
  * @count: the number of ranges in @ranges
  */
-void subid_free_ranges(struct subordinate_range **ranges, int count);
+void subid_free_ranges(struct subid_range **ranges, int count);
 
 /*
  * get_subuid_owners: return a list of uids to which the given uid has been
