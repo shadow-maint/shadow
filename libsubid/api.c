@@ -46,10 +46,12 @@ bool libsubid_init(const char *progname, FILE * logfd)
 {
 	if (progname) {
 		progname = strdup(progname);
-		if (progname)
+		if (progname) {
 			Prog = progname;
-		else
+		} else {
 			fprintf(stderr, "Out of memory");
+			return false;
+		}
 	}
 
 	if (logfd) {
