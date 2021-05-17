@@ -1033,6 +1033,24 @@ static void close_files (void)
 #endif				/* ENABLE_SUBIDS */
 }
 
+static bool want_subuids(void)
+{
+	if (get_subid_nss_handle() != NULL)
+		return false;
+	if (getdef_ulong ("SUB_UID_COUNT", 65536) == 0)
+		return false;
+	return true;
+}
+
+static bool want_subgids(void)
+{
+	if (get_subid_nss_handle() != NULL)
+		return false;
+	if (getdef_ulong ("SUB_GID_COUNT", 65536) == 0)
+		return false;
+	return true;
+}
+
 int main (int argc, char **argv)
 {
 	char buf[BUFSIZ];
@@ -1262,7 +1280,7 @@ int main (int argc, char **argv)
 		/*
 		 * Add subordinate uids if the user does not have them.
 		 */
-		if (is_sub_uid && !sub_uid_assigned(fields[0])) {
+		if (is_sub_uid && want_subuids() && !local_sub_uid_assigned(fields[0])) {
 			uid_t sub_uid_start = 0;
 			unsigned long sub_uid_count = 0;
 			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) == 0) {
@@ -1282,7 +1300,7 @@ int main (int argc, char **argv)
 		/*
 		 * Add subordinate gids if the user does not have them.
 		 */
-		if (is_sub_gid && !sub_gid_assigned(fields[0])) {
+		if (is_sub_gid && want_subgids() && !local_sub_gid_assigned(fields[0])) {
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
 			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) == 0) {

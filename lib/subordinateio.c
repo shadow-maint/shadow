@@ -598,19 +598,8 @@ int sub_uid_open (int mode)
 	return commonio_open (&subordinate_uid_db, mode);
 }
 
-bool sub_uid_assigned(const char *owner)
+bool local_sub_uid_assigned(const char *owner)
 {
-	struct subid_nss_ops *h;
-	bool found;
-	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_any_range(owner, ID_TYPE_UID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
-	}
-
 	return range_exists (&subordinate_uid_db, owner);
 }
 
@@ -720,18 +709,8 @@ bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 	return have_range(&subordinate_gid_db, owner, start, count);
 }
 
-bool sub_gid_assigned(const char *owner)
+bool local_sub_gid_assigned(const char *owner)
 {
-	struct subid_nss_ops *h;
-	bool found;
-	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_any_range(owner, ID_TYPE_GID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
-	}
 	return range_exists (&subordinate_gid_db, owner);
 }
 

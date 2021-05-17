@@ -270,18 +270,6 @@ extern bool nss_is_initialized();
 
 struct subid_nss_ops {
 	/*
-	 * nss_has_any_range: does a user own any subid range
-	 *
-	 * @owner: username
-	 * @idtype: subuid or subgid
-	 * @result: true if a subid allocation was found for @owner
-	 *
-	 * returns success if the module was able to determine an answer (true or false),
-	 * else an error status.
-	 */
-	enum subid_status (*has_any_range)(const char *owner, enum subid_type idtype, bool *result);
-
-	/*
 	 * nss_has_range: does a user own a given subid range
 	 *
 	 * @owner: username

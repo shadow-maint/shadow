@@ -116,14 +116,6 @@ void nss_init(char *nsswitch_path) {
 				subid_nss = NULL;
 				goto done;
 			}
-			subid_nss->has_any_range = dlsym(h, "shadow_subid_has_any_range");
-			if (!subid_nss->has_any_range) {
-				fprintf(shadow_logfd, "%s did not provide @has_any_range@\n", libname);
-				dlclose(h);
-				free(subid_nss);
-				subid_nss = NULL;
-				goto done;
-			}
 			subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
 			if (!subid_nss->find_subid_owners) {
 				fprintf(shadow_logfd, "%s did not provide @find_subid_owners@\n", libname);
