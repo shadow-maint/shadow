@@ -59,6 +59,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 static bool gr_locked  = false;
 static bool sgr_locked = false;
@@ -146,6 +147,7 @@ int main (int argc, char **argv)
 	struct sgrp sgent;
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

@@ -62,6 +62,7 @@ static void reset (void);
  * Global variables
  */
 const char *Prog;		/* Program name */
+FILE *shadow_logfd = NULL;
 static FILE *fail;		/* failure file stream */
 static time_t seconds;		/* that number of days in seconds */
 static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
@@ -573,6 +574,7 @@ int main (int argc, char **argv)
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

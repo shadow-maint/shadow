@@ -75,7 +75,7 @@ void chown_tty (const struct passwd *info)
 	    || (fchmod (STDIN_FILENO, (mode_t)getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("Unable to change owner or mode of tty stdin: %s"),
 		         strerror (err));
 		SYSLOG ((LOG_WARN,

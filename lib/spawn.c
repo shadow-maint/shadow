@@ -48,7 +48,7 @@ int run_command (const char *cmd, const char *argv[],
 	}
 
 	(void) fflush (stdout);
-	(void) fflush (stderr);
+	(void) fflush (shadow_logfd);
 
 	pid = fork ();
 	if (0 == pid) {
@@ -57,11 +57,11 @@ int run_command (const char *cmd, const char *argv[],
 		if (ENOENT == errno) {
 			exit (E_CMD_NOTFOUND);
 		}
-		fprintf (stderr, "%s: cannot execute %s: %s\n",
+		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
 		         Prog, cmd, strerror (errno));
 		exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
-		fprintf (stderr, "%s: cannot execute %s: %s\n",
+		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
 		         Prog, cmd, strerror (errno));
 		return -1;
 	}
@@ -74,7 +74,7 @@ int run_command (const char *cmd, const char *argv[],
 	         || ((pid_t)-1 != wpid && wpid != pid));
 
 	if ((pid_t)-1 == wpid) {
-		fprintf (stderr, "%s: waitpid (status: %d): %s\n",
+		fprintf (shadow_logfd, "%s: waitpid (status: %d): %s\n",
 		         Prog, *status, strerror (errno));
 		return -1;
 	}

@@ -154,7 +154,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 			    && (errno != EAFNOSUPPORT)) {
 
 			    (void) fputs (_("Cannot open audit interface.\n"),
-			              stderr);
+			              shadow_logfd);
 			    SYSLOG ((LOG_WARN, "Cannot open audit interface."));
 			}
 		}
@@ -207,7 +207,7 @@ int check_selinux_permit (const char *perm_name)
 	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) selinux_log_cb);
 
 	if (getprevcon_raw (&user_context_raw) != 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		    _("%s: can not get previous SELinux process context: %s\n"),
 		    Prog, strerror (errno));
 		SYSLOG ((LOG_WARN,

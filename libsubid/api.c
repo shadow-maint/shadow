@@ -32,11 +32,38 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <string.h>
 #include <pwd.h>
 #include <stdbool.h>
 #include "subordinateio.h"
 #include "idmapping.h"
 #include "subid.h"
+
+const char *Prog = "(libsubid)";
+extern FILE * shadow_logfd;
+
+bool libsubid_init(const char *progname, FILE * logfd)
+{
+	if (progname) {
+		progname = strdup(progname);
+		if (progname)
+			Prog = progname;
+		else
+			fprintf(stderr, "Out of memory");
+	}
+
+	if (logfd) {
+		shadow_logfd = logfd;
+		return true;
+	}
+	shadow_logfd = fopen("/dev/null", "w");
+	if (!shadow_logfd) {
+		fprintf(stderr, "ERROR opening /dev/null for error messages.  Using stderr.");
+		shadow_logfd = stderr;
+		return false;
+	}
+	return true;
+}
 
 static
 int get_subid_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)

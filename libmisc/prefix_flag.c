@@ -83,7 +83,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			&& (val = argv[i] + 9))
 		    || (strcmp (argv[i], short_opt) == 0)) {
 			if (NULL != prefix) {
-				fprintf (stderr,
+				fprintf (shadow_logfd,
 				         _("%s: multiple --prefix options\n"),
 				         Prog);
 				exit (E_BAD_ARG);
@@ -92,7 +92,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			if (val) {
 				prefix = val;
 			} else if (i + 1 == argc) {
-				fprintf (stderr,
+				fprintf (shadow_logfd,
 				         _("%s: option '%s' requires an argument\n"),
 				         Prog, argv[i]);
 				exit (E_BAD_ARG);

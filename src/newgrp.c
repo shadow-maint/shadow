@@ -49,6 +49,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 extern char **newenvp;
 extern char **environ;
@@ -443,6 +444,7 @@ int main (int argc, char **argv)
 	 * don't need to re-exec anything.  -- JWP
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 	is_newgrp = (strcmp (Prog, "newgrp") == 0);
 	OPENLOG (is_newgrp ? "newgrp" : "sg");
 	argc--;

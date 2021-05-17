@@ -125,11 +125,11 @@ static void error_acl (struct error_context *ctx, const char *fmt, ...)
 	}
 
 	va_start (ap, fmt);
-	(void) fprintf (stderr, _("%s: "), Prog);
-	if (vfprintf (stderr, fmt, ap) != 0) {
-		(void) fputs (_(": "), stderr);
+	(void) fprintf (shadow_logfd, _("%s: "), Prog);
+	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
+		(void) fputs (_(": "), shadow_logfd);
 	}
-	(void) fprintf (stderr, "%s\n", strerror (errno));
+	(void) fprintf (shadow_logfd, "%s\n", strerror (errno));
 	va_end (ap);
 }
 
@@ -248,7 +248,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 		}
 
 		if (!S_ISDIR (sb.st_mode)) {
-			fprintf (stderr,
+			fprintf (shadow_logfd,
 			         "%s: %s is not a directory",
 			         Prog, src_root);
 			return -1;

@@ -59,7 +59,7 @@ void audit_help_open (void)
 			return;
 		}
 		(void) fputs (_("Cannot open audit interface - aborting.\n"),
-		              stderr);
+		              shadow_logfd);
 		exit (EXIT_FAILURE);
 	}
 }

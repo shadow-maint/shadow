@@ -61,23 +61,23 @@
 	epoch = strtoull (source_date_epoch, &endptr, 10);
 	if ((errno == ERANGE && (epoch == ULLONG_MAX || epoch == 0))
 			|| (errno != 0 && epoch == 0)) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
 			 strerror(errno));
 	} else if (endptr == source_date_epoch) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: No digits were found: %s\n"),
 			 endptr);
 	} else if (*endptr != '\0') {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: Trailing garbage: %s\n"),
 			 endptr);
 	} else if (epoch > ULONG_MAX) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to %lu but was found to be: %llu\n"),
 			 ULONG_MAX, epoch);
 	} else if (epoch > fallback) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to the current time (%lu) but was found to be: %llu\n"),
 			 fallback, epoch);
 	} else {

@@ -59,6 +59,7 @@
  * Global variables
  */
 const char *Prog;		/* Program name */
+FILE *shadow_logfd = NULL;
 static bool amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */
@@ -441,6 +442,7 @@ int main (int argc, char **argv)
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

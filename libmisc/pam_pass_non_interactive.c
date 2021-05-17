@@ -76,7 +76,7 @@ static int ni_conv (int num_msg,
 
 		switch (msg[count]->msg_style) {
 		case PAM_PROMPT_ECHO_ON:
-			fprintf (stderr,
+			fprintf (shadow_logfd,
 			         _("%s: PAM modules requesting echoing are not supported.\n"),
 			         Prog);
 			goto failed_conversation;
@@ -88,7 +88,7 @@ static int ni_conv (int num_msg,
 			break;
 		case PAM_ERROR_MSG:
 			if (   (NULL == msg[count]->msg)
-			    || (fprintf (stderr, "%s\n", msg[count]->msg) <0)) {
+			    || (fprintf (shadow_logfd, "%s\n", msg[count]->msg) <0)) {
 				goto failed_conversation;
 			}
 			responses[count].resp = NULL;
@@ -101,7 +101,7 @@ static int ni_conv (int num_msg,
 			responses[count].resp = NULL;
 			break;
 		default:
-			(void) fprintf (stderr,
+			(void) fprintf (shadow_logfd,
 			                _("%s: conversation type %d not supported.\n"),
 			                Prog, msg[count]->msg_style);
 			goto failed_conversation;
@@ -143,7 +143,7 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 
 	ret = pam_start (pam_service, username, &non_interactive_pam_conv, &pamh);
 	if (ret != PAM_SUCCESS) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: (user %s) pam_start failure %d\n"),
 		         Prog, username, ret);
 		return 1;
@@ -152,7 +152,7 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 	non_interactive_password = password;
 	ret = pam_chauthtok (pamh, 0);
 	if (ret != PAM_SUCCESS) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("%s: (user %s) pam_chauthtok() failed, error:\n"
 		           "%s\n"),
 		         Prog, username, pam_strerror (pamh, ret));

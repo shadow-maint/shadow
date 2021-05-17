@@ -57,6 +57,7 @@
  * Global variables.
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
@@ -639,6 +640,7 @@ int main (int argc, char **argv)
 	 * prefix to most error messages.
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");

@@ -25,13 +25,13 @@ int nscd_flush_cache (const char *service)
 
 	if (run_command (cmd, spawnedArgs, spawnedEnv, &status) != 0) {
 		/* run_command writes its own more detailed message. */
-		(void) fprintf (stderr, _(MSG_NSCD_FLUSH_CACHE_FAILED), Prog);
+		(void) fprintf (shadow_logfd, _(MSG_NSCD_FLUSH_CACHE_FAILED), Prog);
 		return -1;
 	}
 
 	code = WEXITSTATUS (status);
 	if (!WIFEXITED (status)) {
-		(void) fprintf (stderr,
+		(void) fprintf (shadow_logfd,
 		                _("%s: nscd did not terminate normally (signal %d)\n"),
 		                Prog, WTERMSIG (status));
 		return -1;
@@ -43,9 +43,9 @@ int nscd_flush_cache (const char *service)
 		/* nscd is installed, but it isn't active. */
 		return 0;
 	} else if (code != 0) {
-		(void) fprintf (stderr, _("%s: nscd exited with status %d\n"),
+		(void) fprintf (shadow_logfd, _("%s: nscd exited with status %d\n"),
 		                Prog, code);
-		(void) fprintf (stderr, _(MSG_NSCD_FLUSH_CACHE_FAILED), Prog);
+		(void) fprintf (shadow_logfd, _(MSG_NSCD_FLUSH_CACHE_FAILED), Prog);
 		return -1;
 	}
 

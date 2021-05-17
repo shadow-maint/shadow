@@ -43,6 +43,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 /* local function prototypes */
 static void print_groups (const char *member);
@@ -126,6 +127,7 @@ int main (int argc, char **argv)
 	 * Get the program name so that error messages can use it.
 	 */
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	if (argc == 1) {
 

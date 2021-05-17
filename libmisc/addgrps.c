@@ -93,7 +93,7 @@ int add_groups (const char *list)
 
 		grp = getgrnam (token); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr, _("Warning: unknown group %s\n"),
+			fprintf (shadow_logfd, _("Warning: unknown group %s\n"),
 				 token);
 			continue;
 		}
@@ -105,7 +105,7 @@ int add_groups (const char *list)
 		}
 
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fputs (_("Warning: too many groups\n"), stderr);
+			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
 		tmp = (gid_t *) realloc (grouplist, (size_t)(ngroups + 1) * sizeof (GETGROUPS_T));

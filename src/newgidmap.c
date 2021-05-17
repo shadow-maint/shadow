@@ -46,6 +46,7 @@
  * Global variables
  */
 const char *Prog;
+FILE *shadow_logfd = NULL;
 
 
 static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow_setgroups)
@@ -176,6 +177,7 @@ int main(int argc, char **argv)
 	bool allow_setgroups = false;
 
 	Prog = Basename (argv[0]);
+	shadow_logfd = stderr;
 
 	/*
 	 * The valid syntax are

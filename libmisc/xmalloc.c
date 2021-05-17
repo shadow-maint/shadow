@@ -54,7 +54,7 @@
 
 	ptr = (char *) malloc (size);
 	if (NULL == ptr) {
-		(void) fprintf (stderr,
+		(void) fprintf (shadow_logfd,
 		                _("%s: failed to allocate memory: %s\n"),
 		                Prog, strerror (errno));
 		exit (13);

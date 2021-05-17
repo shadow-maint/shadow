@@ -267,7 +267,7 @@ int getdef_num (const char *item, int dflt)
 	if (   (getlong (d->value, &val) == 0)
 	    || (val > INT_MAX)
 	    || (val < INT_MIN)) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -302,7 +302,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 	if (   (getlong (d->value, &val) == 0)
 	    || (val < 0)
 	    || (val > INT_MAX)) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -335,7 +335,7 @@ long getdef_long (const char *item, long dflt)
 	}
 
 	if (getlong (d->value, &val) == 0) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -368,7 +368,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 
 	if (getulong (d->value, &val) == 0) {
 		/* FIXME: we should have a getulong */
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -406,7 +406,7 @@ int putdef_str (const char *name, const char *value)
 	cp = strdup (value);
 	if (NULL == cp) {
 		(void) fputs (_("Could not allocate space for config info.\n"),
-		              stderr);
+		              shadow_logfd);
 		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
 		return -1;
 	}
@@ -450,7 +450,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 			goto out;
 		}
 	}
-	fprintf (stderr,
+	fprintf (shadow_logfd,
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
 	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));

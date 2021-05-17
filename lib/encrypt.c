@@ -84,7 +84,7 @@
 				method = &nummethod[0];
 			}
 		}
-		(void) fprintf (stderr,
+		(void) fprintf (shadow_logfd,
 		                _("crypt method not supported by libcrypt? (%s)\n"),
 		                method);
 		exit (EXIT_FAILURE);

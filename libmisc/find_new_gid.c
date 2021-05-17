@@ -74,7 +74,7 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (stderr,
+			(void) fprintf (shadow_logfd,
                             _("%s: Invalid configuration: SYS_GID_MIN (%lu), "
                               "GID_MIN (%lu), SYS_GID_MAX (%lu)\n"),
                             Prog, (unsigned long) *min_id,
@@ -97,7 +97,7 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (stderr,
+			(void) fprintf (shadow_logfd,
 					_("%s: Invalid configuration: GID_MIN (%lu), "
 					  "GID_MAX (%lu)\n"),
 					Prog, (unsigned long) *min_id,
@@ -213,7 +213,7 @@ int find_new_gid (bool sys_group,
 			 * more likely to want to stop and address the
 			 * issue.
 			 */
-			fprintf (stderr,
+			fprintf (shadow_logfd,
 				_("%s: Encountered error attempting to use "
 				  "preferred GID: %s\n"),
 				Prog, strerror (result));
@@ -243,7 +243,7 @@ int find_new_gid (bool sys_group,
 	/* Create an array to hold all of the discovered GIDs */
 	used_gids = malloc (sizeof (bool) * (gid_max +1));
 	if (NULL == used_gids) {
-		fprintf (stderr,
+		fprintf (shadow_logfd,
 			 _("%s: failed to allocate memory: %s\n"),
 			 Prog, strerror (errno));
 		return -1;
@@ -323,7 +323,7 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (stderr,
+					fprintf (shadow_logfd,
 						_("%s: Can't get unique system GID (%s). "
 						  "Suppressing additional messages.\n"),
 						Prog, strerror (result));
@@ -366,7 +366,7 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (stderr,
+						fprintf (shadow_logfd,
 							_("%s: Can't get unique system GID (%s). "
 							  "Suppressing additional messages.\n"),
 							Prog, strerror (result));
@@ -426,7 +426,7 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (stderr,
+					fprintf (shadow_logfd,
 						_("%s: Can't get unique GID (%s). "
 						  "Suppressing additional messages.\n"),
 						Prog, strerror (result));
@@ -469,7 +469,7 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (stderr,
+						fprintf (shadow_logfd,
 							_("%s: Can't get unique GID (%s). "
 							  "Suppressing additional messages.\n"),
 							Prog, strerror (result));
@@ -488,7 +488,7 @@ int find_new_gid (bool sys_group,
 	}
 
 	/* The code reached here and found no available IDs in the range */
-	fprintf (stderr,
+	fprintf (shadow_logfd,
 		_("%s: Can't get unique GID (no more available GIDs)\n"),
 		Prog);
 	SYSLOG ((LOG_WARN, "no more available GIDs on the system"));
