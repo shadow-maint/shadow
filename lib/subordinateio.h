@@ -25,7 +25,7 @@ extern int sub_uid_unlock (void);
 extern int sub_uid_add (const char *owner, uid_t start, unsigned long count);
 extern int sub_uid_remove (const char *owner, uid_t start, unsigned long count);
 extern uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count);
-extern int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range ***ranges);
+extern int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges);
 extern bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse);
 extern bool release_subid_range(struct subordinate_range *range, enum subid_type id_type);
 extern int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids);

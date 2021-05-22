@@ -17,7 +17,7 @@ void usage(void)
 int main(int argc, char *argv[])
 {
 	int i, count=0;
-	struct subid_range **ranges;
+	struct subid_range *ranges;
 	const char *owner;
 
 	Prog = Basename (argv[0]);
@@ -39,8 +39,7 @@ int main(int argc, char *argv[])
 	}
 	for (i = 0; i < count; i++) {
 		printf("%d: %s %lu %lu\n", i, owner,
-			ranges[i]->start, ranges[i]->count);
+			ranges[i].start, ranges[i].count);
 	}
-	subid_free_ranges(ranges, count);
 	return 0;
 }

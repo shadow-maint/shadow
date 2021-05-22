@@ -50,32 +50,27 @@ bool libsubid_init(const char *progname, FILE *logfd);
  * get_subuid_ranges: return a list of UID ranges for a user
  *
  * @owner: username being queried
- * @ranges: a pointer to a subordinate range ** in which the result will be
- *          returned.
+ * @ranges: a pointer to an array of subid_range structs in which the result
+ *          will be returned.
+ *
+ * The caller must free(ranges) when done.
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subuid_ranges(const char *owner, struct subid_range ***ranges);
+int get_subuid_ranges(const char *owner, struct subid_range **ranges);
 
 /*
  * get_subgid_ranges: return a list of GID ranges for a user
  *
  * @owner: username being queried
- * @ranges: a pointer to a subordinate range ** in which the result will be
- *          returned.
+ * @ranges: a pointer to an array of subid_range structs in which the result
+ *          will be returned.
+ *
+ * The caller must free(ranges) when done.
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subgid_ranges(const char *owner, struct subid_range ***ranges);
-
-/*
- * subid_free_ranges: free an array of subordinate_ranges returned by either
- *                    get_subuid_ranges() or get_subgid_ranges().
- *
- * @ranges: the ranges to free
- * @count: the number of ranges in @ranges
- */
-void subid_free_ranges(struct subid_range **ranges, int count);
+int get_subgid_ranges(const char *owner, struct subid_range **ranges);
 
 /*
  * get_subuid_owners: return a list of uids to which the given uid has been
