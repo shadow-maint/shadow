@@ -17,27 +17,29 @@ void usage(void)
 int main(int argc, char *argv[])
 {
 	int i, count=0;
-	struct subordinate_range **ranges;
+	struct subid_range *ranges;
+	const char *owner;
 
 	Prog = Basename (argv[0]);
 	shadow_logfd = stderr;
-	if (argc < 2) {
+	if (argc < 2)
 		usage();
+	owner = argv[1];
+	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
+		owner = argv[2];
+		count = get_subgid_ranges(owner, &ranges);
+	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
+		usage();
+	} else {
+		count = get_subuid_ranges(owner, &ranges);
 	}
-	if (argc == 3 && strcmp(argv[1], "-g") == 0)
-		count = get_subgid_ranges(argv[2], &ranges);
-	else if (argc == 2 && strcmp(argv[1], "-h") == 0)
-		usage();
-	else
-		count = get_subuid_ranges(argv[1], &ranges);
 	if (!ranges) {
 		fprintf(stderr, "Error fetching ranges\n");
 		exit(1);
 	}
 	for (i = 0; i < count; i++) {
-		printf("%d: %s %lu %lu\n", i, ranges[i]->owner,
-			ranges[i]->start, ranges[i]->count);
+		printf("%d: %s %lu %lu\n", i, owner,
+			ranges[i].start, ranges[i].count);
 	}
-	subid_free_ranges(ranges, count);
 	return 0;
 }
