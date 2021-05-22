@@ -2386,6 +2386,8 @@ int main (int argc, char **argv)
 #ifdef ENABLE_SUBIDS
 	uid_t uid_min;
 	uid_t uid_max;
+	unsigned long subuid_count;
+	unsigned long subgid_count;
 #endif
 
 	/*
@@ -2427,9 +2429,11 @@ int main (int argc, char **argv)
 #ifdef ENABLE_SUBIDS
 	uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
 	uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
-	is_sub_uid = sub_uid_file_present () && !rflg &&
+	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
+	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
+	is_sub_uid = subuid_count > 0 && sub_uid_file_present () && !rflg &&
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
-	is_sub_gid = sub_gid_file_present () && !rflg &&
+	is_sub_gid = subgid_count > 0 && sub_gid_file_present () && !rflg &&
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
 #endif				/* ENABLE_SUBIDS */
 
