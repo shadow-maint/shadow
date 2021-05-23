@@ -46,12 +46,10 @@ bool libsubid_init(const char *progname, FILE * logfd)
 {
 	if (progname) {
 		progname = strdup(progname);
-		if (progname) {
+		if (progname)
 			Prog = progname;
-		} else {
-			fprintf(stderr, "Out of memory");
+		else
 			return false;
-		}
 	}
 
 	if (logfd) {
@@ -60,7 +58,6 @@ bool libsubid_init(const char *progname, FILE * logfd)
 	}
 	shadow_logfd = fopen("/dev/null", "w");
 	if (!shadow_logfd) {
-		fprintf(stderr, "ERROR opening /dev/null for error messages.  Using stderr.");
 		shadow_logfd = stderr;
 		return false;
 	}
