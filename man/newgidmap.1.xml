@@ -88,9 +88,15 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>newgidmap</command> sets <filename>/proc/[pid]/gid_map</filename> based on its
-      command line arguments and the gids allowed (either in <filename>/etc/subgid</filename> or
-      through the configured NSS subid module).
-      Note that the root user is not exempted from the requirement for a valid
+      command line arguments and the gids allowed. The subid delegation can come either from files
+      (<filename>/etc/subgid</filename>) or from the configured NSS subid module. Only one of them
+      can be chosen at a time. So, for example, if the subid source is configured as NSS and
+      <command>groupadd</command> is executed, then the command will fail and the entry will not be
+      created in <filename>/etc/subgid</filename>.
+    </para>
+
+    <para>
+      Note that the root group is not exempted from the requirement for a valid
       <filename>/etc/subgid</filename> entry.
     </para>
 
