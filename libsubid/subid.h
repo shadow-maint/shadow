@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <stdio.h>
 #include <stdbool.h>
 
 #ifndef SUBID_RANGE_DEFINED
