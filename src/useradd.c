@@ -2175,7 +2175,6 @@ static void create_home (void)
 							Prog, user_home);
 			fail_exit (E_HOMEDIR);
 		}
-		++bhome;
 
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (prefix_user_home, S_IFDIR) != 0) {
@@ -2192,7 +2191,11 @@ static void create_home (void)
 		 */
 		cp = strtok (bhome, "/");
 		while (cp) {
-			strcat (path, "/");
+                        /* Avoid turning a relative path into an absolute path.
+                         */
+                        if (bhome[0] == '/' || strlen (path) != 0) {
+			        strcat (path, "/");
+                        }
 			strcat (path, cp);
 			if (access (path, F_OK) != 0) {
 				/* Check if parent directory is BTRFS, fail if requesting
