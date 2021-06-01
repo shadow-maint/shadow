@@ -40,7 +40,7 @@
 #include "subid.h"
 
 const char *Prog = "(libsubid)";
-extern FILE * shadow_logfd;
+FILE * shadow_logfd;
 
 bool libsubid_init(const char *progname, FILE * logfd)
 {
