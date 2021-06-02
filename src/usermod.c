@@ -1110,6 +1110,12 @@ static void process_flags (int argc, char **argv)
 				}
 				dflg = true;
 				user_newhome = optarg;
+				if (user_newhome[0] != '/') {
+					fprintf (stderr,
+					         _("%s: homedir must be an absolute path\n"),
+					         Prog);
+					exit (E_BAD_ARG);
+				}
 				break;
 			case 'e':
 				if ('\0' != *optarg) {

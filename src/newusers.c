@@ -1250,6 +1250,13 @@ int main (int argc, char **argv)
 /* FIXME: should check for directory */
 			mode_t mode = getdef_num ("HOME_MODE",
 			                          0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
+			if (newpw.pw_dir[0] != '/') {
+				fprintf(stderr,
+					_("%s: line %d: homedir must be an absolute path\n"),
+					Prog, line);
+				errors++;
+				continue;
+			};
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: mkdir %s failed: %s\n"),
