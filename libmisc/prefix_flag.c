@@ -109,6 +109,12 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
 
+		if ( prefix[0] != '/') {
+			fprintf (shadow_logfd,
+				 _("%s: prefix must be an absolute path\n"),
+				 Prog);
+			exit (E_BAD_ARG);
+		}
 		size_t len;
 		len = strlen(prefix) + strlen(PASSWD_FILE) + 2;
 		passwd_db_file = xmalloc(len);
