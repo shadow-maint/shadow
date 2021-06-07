@@ -87,12 +87,11 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>newuidmap</command> sets <filename>/proc/[pid]/uid_map</filename> based on its
-      command line arguments and the uids allowed. The subid delegation can come either from files
-      (<filename>/etc/subuid</filename>) or from the configured NSS subid module. Only one of them
-      can be chosen at a time. So, for example, if the subid source is configured as NSS and
-      <command>useradd</command> is executed, then the command will fail and the entry will not be
-      created in <filename>/etc/subuid</filename>.
+      The <command>newuidmap</command> sets <filename>/proc/[pid]/uid_map</filename>
+      based on its command line arguments and the uids allowed. Subuid
+      delegation can either be managed via <filename>/etc/subuid</filename> or
+      through the configured NSS subid module. These options are mutually
+      exclusive.
     </para>
 
     <para>
