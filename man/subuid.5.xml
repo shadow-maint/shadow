@@ -38,6 +38,11 @@
       <surname>Biederman</surname>
       <contrib>Creation, 2013</contrib>
     </author>
+    <author>
+      <firstname>Iker</firstname>
+      <surname>Pedrosa</surname>
+      <contrib>Developer, 2021</contrib>
+    </author>
   </refentryinfo>
   <refmeta>
     <refentrytitle>subuid</refentrytitle>
@@ -48,11 +53,36 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>subuid</refname>
-    <refpurpose>the subordinate uid file</refpurpose>
+    <refpurpose>the configuration for subordinate user ids</refpurpose>
   </refnamediv>
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
+    <para>
+      Subuid authorizes a user id to map ranges of user ids from its namespace
+      into child namespaces.
+    </para>
+    <para>
+      The delegation of the subordinate uids can be configured via the
+      <replaceable>subid</replaceable> field in
+      <filename>/etc/nsswitch.conf</filename> file. Only one value can be set
+      as the delegation source. Setting this field to
+      <replaceable>files</replaceable> configures the delegation of uids to
+      <filename>/etc/subuid</filename>. Setting any other value treats
+      the delegation as a plugin following with a name of the form
+      <replaceable>libsubid_$value.so</replaceable>. If the value or plugin is
+      missing, then the subordinate uid delegation falls back to
+      <replaceable>files</replaceable>.
+    </para>
+    <para>
+      Note, that <command>useradd</command> will only create entries in
+      <filename>/etc/subuid</filename> if subid delegation is managed via subid
+      files.
+    </para>
+  </refsect1>
+
+  <refsect1 id='local-subordinate-delegation'>
+    <title>LOCAL SUBORDINATE DELEGATION</title>
     <para>
       Each line in <filename>/etc/subuid</filename> contains
       a user name and a range of subordinate user ids that user
