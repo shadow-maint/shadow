@@ -871,6 +871,8 @@ static void update_group (void)
 			SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname (), ngrp->gr_name));
 			fail_exit (E_GRP_UPDATE);
 		}
+
+		gr_free(ngrp);
 	}
 }
 
@@ -1006,6 +1008,8 @@ static void update_gshadow (void)
 			         sgr_dbname (), nsgrp->sg_name));
 			fail_exit (E_GRP_UPDATE);
 		}
+
+		free (nsgrp);
 	}
 }
 #endif				/* SHADOWGRP */
@@ -1152,6 +1156,7 @@ static void process_flags (int argc, char **argv)
 				}
 				user_newgid = grp->gr_gid;
 				gflg = true;
+				gr_free (grp);
 				break;
 			case 'G':
 				if (get_groups (optarg) != 0) {
@@ -1995,8 +2000,7 @@ static void update_lastlog (void)
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
-		    || (fsync (fd) != 0)
-		    || (close (fd) != 0)) {
+		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
 			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
@@ -2012,16 +2016,15 @@ static void update_lastlog (void)
 			memzero (&ll, sizeof (ll));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
-			    || (fsync (fd) != 0)
-			    || (close (fd) != 0)) {
+			    || (fsync (fd) != 0)) {
 				fprintf (stderr,
 				         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
 				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
 			}
-		} else {
-			(void) close (fd);
 		}
 	}
+
+	(void) close (fd);
 }
 
 /*
@@ -2056,8 +2059,7 @@ static void update_faillog (void)
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
-		    || (fsync (fd) != 0)
-		    || (close (fd) != 0)) {
+		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
 			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
@@ -2072,16 +2074,15 @@ static void update_faillog (void)
 			/* Reset the new uid's faillog entry */
 			memzero (&fl, sizeof (fl));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-			    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
-			    || (close (fd) != 0)) {
+			    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)) {
 				fprintf (stderr,
 				         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
 				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
 			}
-		} else {
-			(void) close (fd);
 		}
 	}
+
+	(void) close (fd);
 }
 
 #ifndef NO_MOVE_MAILBOX
