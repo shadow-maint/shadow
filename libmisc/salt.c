@@ -90,12 +90,8 @@ static void seedRNG (void)
  */
 #define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
 #ifdef USE_BCRYPT
-/* 
- * Using the Prefix $2a$ to enable an anti-collision safety measure in musl libc.
- * Negatively affects a subset of passwords containing the '\xff' character,
- * which is not valid UTF-8 (so "unlikely to cause much annoyance").
- */
-#define BCRYPTMAGNUM(array)	(array)[0]=(array)[3]='$',(array)[1]='2',(array)[2]='a',(array)[4]='\0'
+/* Use $2b$ as prefix for compatibility with OpenBSD's bcrypt. */
+#define BCRYPTMAGNUM(array)	(array)[0]=(array)[3]='$',(array)[1]='2',(array)[2]='b',(array)[4]='\0'
 #endif /* USE_BCRYPT */
 
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
