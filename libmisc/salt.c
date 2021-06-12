@@ -34,7 +34,7 @@ static /*@observer@*/const char *BCRYPT_salt_rounds (/*@null@*/int *prefered_rou
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 static /*@observer@*/const char *gensalt_yescrypt (void);
-static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/long *prefered_rounds);
+static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/int *prefered_cost);
 #endif /* USE_YESCRYPT */
 
 #ifndef HAVE_L64A
@@ -277,7 +277,7 @@ static /*@observer@*/const char *gensalt_bcrypt (void)
 /*
  * Return a salt prefix specifying the cost for the YESCRYPT method.
  */
-static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/long *prefered_cost)
+static /*@observer@*/const char *YESCRYPT_salt_cost (/*@null@*/int *prefered_cost)
 {
 	static char cost_prefix[5];
 	long cost;
