@@ -62,6 +62,7 @@ void chown_tty (const struct passwd *info)
 	grent = getgr_nam_gid (getdef_str ("TTYGROUP"));
 	if (NULL != grent) {
 		gid = grent->gr_gid;
+		gr_free (grent);
 	} else {
 		gid = info->pw_gid;
 	}

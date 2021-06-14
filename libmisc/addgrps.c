@@ -57,6 +57,7 @@ int add_groups (const char *list)
 	bool added;
 	char *token;
 	char buf[1024];
+	int ret;
 
 	if (strlen (list) >= sizeof (buf)) {
 		errno = EINVAL;
@@ -120,9 +121,12 @@ int add_groups (const char *list)
 	}
 
 	if (added) {
-		return setgroups ((size_t)ngroups, grouplist);
+		ret = setgroups ((size_t)ngroups, grouplist);
+		free (grouplist);
+		return ret;
 	}
 
+	free (grouplist);
 	return 0;
 }
 #else				/* HAVE_SETGROUPS && !USE_PAM */

@@ -62,6 +62,9 @@
 		if ((NULL != pw) && (pw->pw_uid == ruid)) {
 			return pw;
 		}
+		if (NULL != pw) {
+			pw_free (pw);
+		}
 	}
 
 	return xgetpwuid (ruid);

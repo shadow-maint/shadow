@@ -241,6 +241,7 @@ bool is_on_list (char *const *list, const char *member)
 
 	if ('\0' == *members) {
 		*array = (char *) 0;
+		free (members);
 		return array;
 	}
 
@@ -261,6 +262,8 @@ bool is_on_list (char *const *list, const char *member)
 			break;
 		}
 	}
+
+	free (members);
 
 	/*
 	 * Return the new array of pointers

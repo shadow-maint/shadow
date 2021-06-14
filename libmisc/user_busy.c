@@ -269,6 +269,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 				}
 				if (check_status (name, task_path+6, uid) != 0) {
 					(void) closedir (proc);
+					(void) closedir (task_dir);
 #ifdef ENABLE_SUBIDS
 					sub_uid_close();
 #endif
