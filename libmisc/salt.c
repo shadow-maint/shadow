@@ -216,7 +216,14 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, /*@null@*/int *pref
 		return;
 	}
 
-	/* Check if the result buffer is long enough. */
+	/*
+	 * Check if the result buffer is long enough.
+	 * We are going to write a maximum of 17 bytes,
+	 * plus one byte for the terminator.
+	 *    rounds=XXXXXXXXX$
+	 *    00000000011111111
+	 *    12345678901234567
+	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 17);
 
 	(void) snprintf (buf + buf_begin, 18, "rounds=%lu$", rounds);
@@ -274,7 +281,14 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *p
 		rounds = 19;
 	}
 
-	/* Check if the result buffer is long enough. */
+	/*
+	 * Check if the result buffer is long enough.
+	 * We are going to write three bytes,
+	 * plus one byte for the terminator.
+	 *    XX$
+	 *    000
+	 *    123
+	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
 
 	(void) snprintf (buf + buf_begin, 4, "%2.2lu$", rounds);
@@ -308,8 +322,15 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, /*@null@*/int *p
 		cost = Y_COST_MAX;
 	}
 
-	/* Check if the result buffer is long enough. */
-	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
+	/*
+	 * Check if the result buffer is long enough.
+	 * We are going to write four bytes,
+	 * plus one byte for the terminator.
+	 *    jXX$
+	 *    0000
+	 *    1234
+	 */
+	assert (GENSALT_SETTING_SIZE > buf_begin + 4);
 
 	buf[buf_begin + 0] = 'j';
 	if (cost < 3) {
