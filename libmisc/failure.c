@@ -98,7 +98,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		fl->fail_cnt++;
 	}
 
-	strncpy (fl->fail_line, tty, sizeof fl->fail_line);
+	strncpy (fl->fail_line, tty, sizeof (fl->fail_line) - 1);
 	(void) time (&fl->fail_time);
 
 	/*
