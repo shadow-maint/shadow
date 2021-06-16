@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2016-09-18 14:03-0500\n"
+"POT-Creation-Date: 2021-07-04 12:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,13 @@ msgstr ""
 
 #, c-format
 msgid "%s's Password: "
+msgstr ""
+
+msgid "Cannot open audit interface.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
 msgstr ""
 
 #, c-format
@@ -294,13 +301,17 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
-"(%lu)\n"
+msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
 #, c-format
@@ -308,7 +319,12 @@ msgid "%s: failed to allocate memory: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
 msgstr ""
 
 #, c-format
@@ -316,7 +332,23 @@ msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgid ""
+"%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
+"SUB_GID_COUNT (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Can't get unique subordinate GID range\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
+"SUB_UID_COUNT (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Can't get unique subordinate UID range\n"
 msgstr ""
 
 #, c-format
@@ -326,11 +358,64 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred UID: %s\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr ""
 
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Not enough arguments to form %u mappings\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Memory allocation failure\n"
+msgstr ""
+
+#, c-format
+msgid "%s: subuid overflow detected.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Invalid map file %s specified\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Could not seteuid to %d\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Could not set caps\n"
+msgstr ""
+
+#, c-format
+msgid "%s: snprintf failed!\n"
+msgstr ""
+
+#, c-format
+msgid "%s: open of %s failed: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: write to %s failed: %s\n"
 msgstr ""
 
 msgid "Too many logins.\n"
@@ -385,6 +470,24 @@ msgid "passwd: password updated successfully\n"
 msgstr ""
 
 #, c-format
+msgid "%s: PAM modules requesting echoing are not supported.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: conversation type %d not supported.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: (user %s) pam_start failure %d\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: (user %s) pam_chauthtok() failed, error:\n"
+"%s\n"
+msgstr ""
+
+#, c-format
 msgid "Incorrect password for %s.\n"
 msgstr ""
 
@@ -417,9 +520,20 @@ msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr ""
 
 #, c-format
+msgid "Unable to obtain random bytes.\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to generate a salt from setting \"%s\", check your settings in "
+"ENCRYPT_METHOD and the corresponding configuration for your selected hash "
+"method.\n"
 msgstr ""
 
 #, c-format
@@ -439,6 +553,14 @@ msgstr ""
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
+msgstr ""
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr ""
+
+#, c-format
+msgid "%s: user %s is currently used by process %d\n"
 msgstr ""
 
 msgid "Unable to determine your tty name."
@@ -464,6 +586,9 @@ msgid ""
 msgstr ""
 
 msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
 msgstr ""
 
 msgid ""
@@ -642,6 +767,10 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
+#, c-format
+msgid "%s: fields too long\n"
+msgstr ""
+
 msgid "Cannot change ID to root.\n"
 msgstr ""
 
@@ -694,10 +823,6 @@ msgid "Changing the user information for %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: fields too long\n"
-msgstr ""
-
-#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -717,8 +842,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-"                                crypt algorithms\n"
+"  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
+"                                or YESCRYPT crypt algorithms\n"
 msgstr ""
 
 #, c-format
@@ -991,6 +1116,16 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
+msgstr ""
+
+msgid "  -U, --users USERS             list of user members of this group\n"
+msgstr ""
+
+#, c-format
+msgid "Invalid member username %s\n"
+msgstr ""
+
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr ""
@@ -1013,6 +1148,11 @@ msgstr ""
 
 #, c-format
 msgid "%s: Cannot setup cleanup service.\n"
+msgstr ""
+
+msgid ""
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
 msgstr ""
 
 msgid ""
@@ -1090,6 +1230,12 @@ msgstr ""
 msgid "%s: only root can use the -g/--group option\n"
 msgstr ""
 
+msgid ""
+"  -a, --append                  append the users mentioned by -U option to "
+"the group \n"
+"                                without removing existing user members\n"
+msgstr ""
+
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr ""
 
@@ -1137,6 +1283,10 @@ msgid ""
 msgstr ""
 
 msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+msgid ""
+"  -S, --silence-warnings        silence controversial/paranoid warnings\n"
 msgstr ""
 
 #, c-format
@@ -1244,7 +1394,8 @@ msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
-msgid "Username         Port     From             Latest"
+#, c-format
+msgid "Username         Port     From%*sLatest\n"
 msgstr ""
 
 msgid "Username                Port     Latest"
@@ -1254,7 +1405,19 @@ msgid "**Never logged in**"
 msgstr ""
 
 #, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthe output might be incorrect.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthey will not be updated.\n"
 msgstr ""
 
 #, c-format
@@ -1373,6 +1536,49 @@ msgstr ""
 msgid "Usage: logoutd\n"
 msgstr ""
 
+#, c-format
+msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid "%s: kernel doesn't support setgroups restrictions\n"
+msgstr ""
+
+#, c-format
+msgid "%s: couldn't open process setgroups: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to read setgroups: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to seek setgroups: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to setgroups %s policy: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Could not open proc directory for target %u\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Could not stat directory for target %u\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
+"gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr ""
 
@@ -1395,6 +1601,24 @@ msgid "%s: GID '%lu' does not exist\n"
 msgstr ""
 
 msgid "too many groups\n"
+msgstr ""
+
+#, c-format
+msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
+"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
+msgid "  -b, --badnames                allow bad names\n"
 msgstr ""
 
 msgid "  -r, --system                  create system accounts\n"
@@ -1434,6 +1658,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
+msgstr ""
+
+#, c-format
+msgid "%s: line %d: homedir must be an absolute path\n"
 msgstr ""
 
 #, c-format
@@ -1563,7 +1791,7 @@ msgid "%s: repository %s not supported\n"
 msgstr ""
 
 #, c-format
-msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: root is not authorized by SELinux to change the password of %s\n"
 msgstr ""
 
 #, c-format
@@ -1708,9 +1936,11 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
+#, c-format
 msgid " ...killed.\n"
 msgstr ""
 
+#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
@@ -1722,7 +1952,7 @@ msgid "%s: %s\n"
 msgstr ""
 
 msgid ""
-"Usage: su [options] [LOGIN]\n"
+"Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -1733,12 +1963,21 @@ msgid ""
 "                                keep the same shell\n"
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
+"If no username is given, assume root.\n"
 msgstr ""
 
 #, c-format
 msgid ""
 "%s: %s\n"
 "(Ignored)\n"
+msgstr ""
+
+#, c-format
+msgid "Password field is empty, this is forbidden for all accounts.\n"
+msgstr ""
+
+#, c-format
+msgid "Password field is empty, this is forbidden for super-user.\n"
 msgstr ""
 
 #, c-format
@@ -1803,6 +2042,10 @@ msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
 #, c-format
+msgid "%s: cannot create new defaults file: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr ""
 
@@ -1831,6 +2074,10 @@ msgid "%s: too many groups specified (max %d).\n"
 msgstr ""
 
 #, c-format
+msgid "%s: Out of memory. Cannot find group '%s'.\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
@@ -1839,10 +2086,17 @@ msgid ""
 "Options:\n"
 msgstr ""
 
+msgid "      --badnames                do not check for bad names\n"
+msgstr ""
+
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
+msgstr ""
+
+msgid ""
+"      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
 
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
@@ -1948,7 +2202,23 @@ msgid "%s: invalid shell '%s'\n"
 msgstr ""
 
 #, c-format
+msgid "%s: Warning: missing or non-executable shell '%s'\n"
+msgstr ""
+
+#, c-format
+msgid "%s: -Z cannot be used with --prefix\n"
+msgstr ""
+
+#, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr ""
 
 #, c-format
@@ -1956,7 +2226,23 @@ msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 
 #, c-format
+msgid "%s: failed to close the faillog file for UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
 msgstr ""
 
 #, c-format
@@ -1964,7 +2250,47 @@ msgid "%s: failed to prepare the new %s entry\n"
 msgstr ""
 
 #, c-format
+msgid "%s: error while duplicating string %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: cannot set SELinux context for home directory %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error while duplicating string in BTRFS check %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to create BTRFS subvolume: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create directory %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: chown on `%s' failed: %m\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: chmod on `%s' failed: %m\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: chown on '%s' failed: %m\n"
+msgstr ""
+
+#, c-format
+msgid "%s: cannot reset SELinux file creation context\n"
+msgstr ""
+
+#, c-format
+msgid "%s: cannot set SELinux context for mailbox file %s\n"
 msgstr ""
 
 msgid "Creating mailbox file"
@@ -1975,6 +2301,17 @@ msgid ""
 msgstr ""
 
 msgid "Setting mailbox file permissions"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
+"range.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
 
 #, c-format
@@ -2012,8 +2349,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"%s: warning: the home directory already exists.\n"
-"Not copying any file from skel directory into it.\n"
+"%s: warning: the home directory %s already exists.\n"
+"%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 
 #, c-format
@@ -2021,8 +2358,10 @@ msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 msgid ""
-"  -f, --force                   force removal of files,\n"
-"                                even if not owned by user\n"
+"  -f, --force                   force some actions that would fail "
+"otherwise\n"
+"                                e.g. removal of user still logged in\n"
+"                                or files, even if not owned by the user\n"
 msgstr ""
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
@@ -2088,6 +2427,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error removing subvolume %s\n"
 msgstr ""
 
 #, c-format
@@ -2179,6 +2522,10 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr ""
 
 #, c-format
+msgid "%s: homedir must be an absolute path\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr ""
 
@@ -2221,6 +2568,10 @@ msgid "%s: Failed to change ownership of the home directory"
 msgstr ""
 
 #, c-format
+msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 
@@ -2251,7 +2602,7 @@ msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
 msgstr ""
 
 #, c-format
@@ -2259,7 +2610,7 @@ msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
 msgstr ""
 
 #, c-format
