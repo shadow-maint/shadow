@@ -38,6 +38,11 @@
       <surname>Biederman</surname>
       <contrib>Creation, 2013</contrib>
     </author>
+    <author>
+      <firstname>Iker</firstname>
+      <surname>Pedrosa</surname>
+      <contrib>Developer, 2021</contrib>
+    </author>
   </refentryinfo>
   <refmeta>
     <refentrytitle>subgid</refentrytitle>
@@ -48,11 +53,36 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>subgid</refname>
-    <refpurpose>the subordinate gid file</refpurpose>
+    <refpurpose>the configuration for subordinate group ids</refpurpose>
   </refnamediv>
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
+    <para>
+      Subgid authorizes a group id to map ranges of group ids from its namespace
+      into child namespaces.
+    </para>
+    <para>
+      The delegation of the subordinate gids can be configured via the
+      <replaceable>subid</replaceable> field in
+      <filename>/etc/nsswitch.conf</filename> file. Only one value can be set
+      as the delegation source. Setting this field to
+      <replaceable>files</replaceable> configures the delegation of gids to
+      <filename>/etc/subgid</filename>. Setting any other value treats
+      the delegation as a plugin following with a name of the form
+      <replaceable>libsubid_$value.so</replaceable>. If the value or plugin is
+      missing, then the subordinate gid delegation falls back to
+      <replaceable>files</replaceable>.
+    </para>
+    <para>
+      Note, that <command>groupadd</command> will only create entries in
+      <filename>/etc/subgid</filename> if subid delegation is managed via subid
+      files.
+    </para>
+  </refsect1>
+
+  <refsect1 id='local-subordinate-delegation'>
+    <title>LOCAL SUBORDINATE DELEGATION</title>
     <para>
       Each line in <filename>/etc/subgid</filename> contains
       a user name and a range of subordinate group ids that user
