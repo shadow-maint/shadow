@@ -1964,16 +1964,26 @@ static void faillog_reset (uid_t uid)
 	memzero (&fl, sizeof (fl));
 
 	fd = open (FAILLOG_FILE, O_RDWR);
-	if (   (-1 == fd)
-	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	if (-1 == fd) {
+		fprintf (stderr,
+		         _("%s: failed to open the faillog file for UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to open the faillog file for UID %lu", (unsigned long) uid));
+		return;
+	}
+	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
 	    || (write (fd, &fl, sizeof (fl)) != (ssize_t) sizeof (fl))
-	    || (fsync (fd) != 0)
-	    || (close (fd) != 0)) {
+	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
 		SYSLOG ((LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid));
-		/* continue */
+	}
+	if (close (fd) != 0) {
+		fprintf (stderr,
+		         _("%s: failed to close the faillog file for UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to close the faillog file for UID %lu", (unsigned long) uid));
 	}
 }
 
@@ -1997,15 +2007,27 @@ static void lastlog_reset (uid_t uid)
 	memzero (&ll, sizeof (ll));
 
 	fd = open (LASTLOG_FILE, O_RDWR);
-	if (   (-1 == fd)
-	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	if (-1 == fd) {
+		fprintf (stderr,
+		         _("%s: failed to open the lastlog file for UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to open the lastlog file for UID %lu", (unsigned long) uid));
+		return;
+	}
+	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
 	    || (write (fd, &ll, sizeof (ll)) != (ssize_t) sizeof (ll))
-	    || (fsync (fd) != 0)
-	    || (close (fd) != 0)) {
+	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
 		SYSLOG ((LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid));
+		/* continue */
+	}
+	if (close (fd) != 0) {
+		fprintf (stderr,
+		         _("%s: failed to close the lastlog file for UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to close the lastlog file for UID %lu", (unsigned long) uid));
 		/* continue */
 	}
 }
@@ -2254,6 +2276,7 @@ static void create_home (void)
 			}
 			cp = strtok (NULL, "/");
 		}
+		free (bhome);
 
 		(void) chown (prefix_user_home, user_id, user_gid);
 		mode_t mode = getdef_num ("HOME_MODE",
