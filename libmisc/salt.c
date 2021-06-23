@@ -11,11 +11,10 @@
 
 #ident "$Id$"
 
-#include <sys/time.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -74,7 +73,7 @@
 #define GENSALT_SETTING_SIZE 100
 
 /* local function prototypes */
-static void seedRNG (void);
+static long read_random_bytes (void);
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 static long shadow_random (long min, long max);
@@ -125,23 +124,27 @@ static /*@observer@*/char *l64a (long value)
 }
 #endif /* !HAVE_L64A */
 
-static void seedRNG (void)
+/* Read sizeof (long) random bytes from /dev/urandom. */
+static long read_random_bytes (void)
 {
-	struct timeval tv;
-	static int seeded = 0;
+	long randval = 0;
+	FILE *f = fopen ("/dev/urandom", "r");
 
-	if (0 == seeded) {
-		(void) gettimeofday (&tv, NULL);
-		srandom (tv.tv_sec ^ tv.tv_usec ^ getpid ());
-		seeded = 1;
+	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval))
+	{
+		fprintf (shadow_logfd,
+			 _("Unable to read from /dev/urandom.\n"));
+
+		fclose(f);
+		exit (1);
 	}
+
+	fclose(f);
+
+	return randval;
 }
 
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
-/* It is not clear what is the maximum value of random().
- * We assume 2^31-1.*/
-#define RANDOM_MAX 0x7FFFFFFF
-
 /*
  * Return a random number between min and max (both included).
  *
@@ -151,8 +154,9 @@ static long shadow_random (long min, long max)
 {
 	double drand;
 	long ret;
-	seedRNG ();
-	drand = (double) (max - min + 1) * random () / RANDOM_MAX;
+
+	drand = (double) (read_random_bytes () & RAND_MAX) / (double) RAND_MAX;
+	drand *= (double) (max - min + 1);
 	/* On systems were this is not random() range is lower, we favor
 	 * higher numbers of salt. */
 	ret = (long) (max + 1 - drand);
@@ -354,10 +358,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
-	seedRNG ();
-	strcat (salt, l64a (random()));
+	strcat (salt, l64a (read_random_bytes ()));
 	do {
-		strcat (salt, l64a (random()));
+		strcat (salt, l64a (read_random_bytes ()));
 	} while (strlen (salt) < salt_size);
 
 	salt[salt_size] = '\0';
