@@ -4,6 +4,8 @@
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
+#include "config.h"
+
 #if HAVE_STDBOOL_H
 # include <stdbool.h>
 #else
@@ -92,6 +94,14 @@ char *strchr (), *strrchr (), *strtok ();
 
 #if HAVE_UNISTD_H
 # include <unistd.h>
+#endif
+
+/*
+ * crypt(3), crypt_gensalt(3), and their
+ * feature test macros may be defined in here.
+ */
+#if HAVE_CRYPT_H
+# include <crypt.h>
 #endif
 
 #if TIME_WITH_SYS_TIME

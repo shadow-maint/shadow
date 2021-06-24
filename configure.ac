@@ -42,7 +42,7 @@ AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_HEADER_STDBOOL
 
-AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
+AC_CHECK_HEADERS(crypt.h errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utmpx.h termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
 	utime.h ulimit.h sys/capability.h sys/random.h sys/resource.h \
 	gshadow.h lastlog.h locale.h rpc/key_prot.h netdb.h acl/libacl.h \
