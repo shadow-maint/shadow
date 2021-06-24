@@ -745,6 +745,7 @@ static int copy_file (const char *src, const char *dst,
 	}
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context (dst, S_IFREG) != 0) {
+		(void) close (ifd);
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
@@ -771,12 +772,16 @@ static int copy_file (const char *src, const char *dst,
 	        && (errno != 0))
 #endif				/* WITH_ATTR */
 	   ) {
+		if (ofd >= 0) {
+			(void) close (ofd);
+		}
 		(void) close (ifd);
 		return -1;
 	}
 
 	while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
 		if (write (ofd, buf, (size_t)cnt) != cnt) {
+			(void) close (ofd);
 			(void) close (ifd);
 			return -1;
 		}
@@ -786,6 +791,7 @@ static int copy_file (const char *src, const char *dst,
 
 #ifdef HAVE_FUTIMES
 	if (futimes (ofd, mt) != 0) {
+		(void) close (ofd);
 		return -1;
 	}
 #endif				/* HAVE_FUTIMES */

@@ -241,4 +241,5 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 		exit(EXIT_FAILURE);
 	}
 	close(fd);
+	free(buf);
 }

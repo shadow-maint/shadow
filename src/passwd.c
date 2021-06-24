@@ -553,6 +553,11 @@ static char *update_crypt_pw (char *cp)
 
 		strcpy (newpw, "!");
 		strcat (newpw, cp);
+#ifndef USE_PAM
+		if (do_update_pwd) {
+			free (cp);
+		}
+#endif /* USE_PAM */
 		cp = newpw;
 	}
 	return cp;

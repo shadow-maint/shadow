@@ -336,8 +336,12 @@ static int create_backup (const char *backup, FILE * fp)
 		/* FIXME: unlink the backup file? */
 		return -1;
 	}
-	if (   (fsync (fileno (bkfp)) != 0)
-	    || (fclose (bkfp) != 0)) {
+	if (fsync (fileno (bkfp)) != 0) {
+		(void) fclose (bkfp);
+		/* FIXME: unlink the backup file? */
+		return -1;
+	}
+	if (fclose (bkfp) != 0) {
 		/* FIXME: unlink the backup file? */
 		return -1;
 	}
