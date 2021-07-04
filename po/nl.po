@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_1_4.8.1-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2020-01-23 14:59-0600\n"
+"POT-Creation-Date: 2021-07-04 12:20+0200\n"
 "PO-Revision-Date: 2020-05-24 15:20+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
@@ -558,12 +558,23 @@ msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: chroot naar map %s lukt niet: %s\n"
 
 #, c-format
+msgid "Unable to obtain random bytes.\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
 msgstr ""
 "Ongeldige ENCRYPT_METHOD-waarde: '%s'.\n"
 "Terugvallen op standaard DES.\n"
+
+#, c-format
+msgid ""
+"Unable to generate a salt from setting \"%s\", check your settings in "
+"ENCRYPT_METHOD and the corresponding configuration for your selected hash "
+"method.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -824,6 +835,10 @@ msgstr "Telefoon thuis"
 msgid "Other"
 msgstr "Varia"
 
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: velden zijn te lang\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Kan ID niet veranderen naar root.\n"
 
@@ -876,10 +891,6 @@ msgid "Changing the user information for %s\n"
 msgstr "De gebruikersinformatie over %s wordt veranderd\n"
 
 #, c-format
-msgid "%s: fields too long\n"
-msgstr "%s: velden zijn te lang\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -904,9 +915,13 @@ msgstr ""
 "  -m, --md5                     het wachtwoord in klare tekst\n"
 "                                met het MD5-algoritme versleutelen\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
+#| "                                crypt algorithms\n"
 msgid ""
-"  -s, --sha-rounds              number of rounds for the SHA or BCRYPT\n"
-"                                crypt algorithms\n"
+"  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
+"                                or YESCRYPT crypt algorithms\n"
 msgstr ""
 "  -s, --sha-rounds              aantal rondes voor de SHA of BCRYPT\n"
 "                                encryptie-algoritmes\n"
@@ -1222,8 +1237,20 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  een systeem-account aanmaken\n"
 
-msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+#, fuzzy
+#| msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
 msgstr "  -P, --prefix PREFIX_MAP       map-prefix\n"
+
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid "  -U, --users USERS             list of user members of this group\n"
+msgstr "  -l, --list                    de leden van de groep weergeven\n"
+
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Invalid member username %s\n"
+msgstr "ongeldige gebruikersnaam '%s'\n"
 
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
@@ -1340,6 +1367,23 @@ msgstr "%s: uw groepsnaam komt niet overeen met uw gebruikersnaam\n"
 msgid "%s: only root can use the -g/--group option\n"
 msgstr "%s: enkel de systeembeheerder kan de optie -g/--group gebruiken\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -a, --append                  append the users mentioned by -U option to "
+"the group \n"
+"                                without removing existing user members\n"
+msgstr ""
+"  -a, --append                  gebruiker toevoegen aan de bijkomende "
+"GROEPEN,\n"
+"                                vermeld bij de optie -G, zonder hem/haar\n"
+"                                te verwijderen uit andere groepen\n"
+
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr "  -g, --gid GID                 het groeps-ID naar GID veranderen\n"
 
@@ -1401,6 +1445,10 @@ msgstr ""
 
 msgid "  -s, --sort                    sort entries by UID\n"
 msgstr "  -s, --sort                    elementen volgens UID sorteren\n"
+
+msgid ""
+"  -S, --silence-warnings        silence controversial/paranoid warnings\n"
+msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1517,8 +1565,10 @@ msgid ""
 msgstr ""
 "  -u, --user GEBRUIKER          lastlog-informatie over GEBRUIKER tonen\n"
 
-msgid "Username         Port     From             Latest"
-msgstr "Gebruikersnaam   Poort    Vanaf            Laatste"
+#, fuzzy, c-format
+#| msgid "Username                Port     Latest"
+msgid "Username         Port     From%*sLatest\n"
+msgstr "Gebruikersnaam          Poort    Laatste"
 
 msgid "Username                Port     Latest"
 msgstr "Gebruikersnaam          Poort    Laatste"
@@ -1810,6 +1860,11 @@ msgstr "%s: regel %d: gebruiker '%s' bestaat niet in %s\n"
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: regel %d: kan wachtwoord niet bijwerken\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %d: homedir must be an absolute path\n"
+msgstr "%s: regel %d: mkdir %s is mislukt: %s\n"
 
 #, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
@@ -2180,6 +2235,14 @@ msgstr ""
 "(Genegeerd)\n"
 
 #, c-format
+msgid "Password field is empty, this is forbidden for all accounts.\n"
+msgstr ""
+
+#, c-format
+msgid "Password field is empty, this is forbidden for super-user.\n"
+msgstr ""
+
+#, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "U bent niet gerechtigd om 'su %s' uit te voeren\n"
 
@@ -2274,6 +2337,11 @@ msgstr "%s: groep '%s' is een NIS-groep.\n"
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: te veel groepen gespecificeerd (max %d).\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Out of memory. Cannot update %s.\n"
+msgid "%s: Out of memory. Cannot find group '%s'.\n"
+msgstr "%s: onvoldoende geheugen. Kan %s niet bijwerken.\n"
 
 #, c-format
 msgid ""
@@ -2449,13 +2517,42 @@ msgstr "%s: -Z kan niet gebruikt worden met --prefix\n"
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z vereist dat SELinux geactiveerd is in de kernel\n"
 
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: ongeldige gebruikersnaam '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to open the faillog file for UID %lu: %s\n"
+msgstr ""
+"%s: opnieuw instellen van het faillog-item voor UID %lu is mislukt: %s\n"
+
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 "%s: opnieuw instellen van het faillog-item voor UID %lu is mislukt: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to close the faillog file for UID %lu: %s\n"
+msgstr ""
+"%s: opnieuw instellen van het faillog-item voor UID %lu is mislukt: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
+msgstr ""
+"%s: opnieuw instellen van de lastlog-item voor UID %lu is mislukt: %s\n"
+
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+"%s: opnieuw instellen van de lastlog-item voor UID %lu is mislukt: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
 msgstr ""
 "%s: opnieuw instellen van de lastlog-item voor UID %lu is mislukt: %s\n"
 
@@ -2501,9 +2598,19 @@ msgstr "%s: waarschuwing: chown uitvoeren op `%s' is mislukt: %m\n"
 msgid "%s: warning: chmod on `%s' failed: %m\n"
 msgstr "%s: waarschuwing: chmod uitvoeren op `%s' is mislukt: %m\n"
 
+#, fuzzy, c-format
+#| msgid "%s: warning: chown on `%s' failed: %m\n"
+msgid "%s: warning: chown on '%s' failed: %m\n"
+msgstr "%s: waarschuwing: chown uitvoeren op `%s' is mislukt: %m\n"
+
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
 msgstr "%s: kan SELinux-context voor bestandscreatie niet opnieuw instellen\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot set SELinux context for home directory %s\n"
+msgid "%s: cannot set SELinux context for mailbox file %s\n"
+msgstr "%s: kan SELinux-context voor persoonlijke map %s niet instellen\n"
 
 msgid "Creating mailbox file"
 msgstr "Postvak-bestand wordt aangemaakt"
@@ -2516,6 +2623,17 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "Bestandsrechten van postvak-bestand worden ingesteld"
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
+"range.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: user '%s' already exists\n"
@@ -2566,9 +2684,15 @@ msgstr ""
 "%s: waarschuwing: de koppeling van gebruikersnaam %s aan SELinux-gebruiker "
 "%s is mislukt.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -f, --force                   force removal of files,\n"
+#| "                                even if not owned by user\n"
 msgid ""
-"  -f, --force                   force removal of files,\n"
-"                                even if not owned by user\n"
+"  -f, --force                   force some actions that would fail "
+"otherwise\n"
+"                                e.g. removal of user still logged in\n"
+"                                or files, even if not owned by the user\n"
 msgstr ""
 "  -f, --force                   geforceerde verwijdering van bestanden,\n"
 "                                ook als ze geen eigendom van gebruiker zijn\n"
@@ -2769,6 +2893,11 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: gebruiker '%s' bestaat al in %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+msgid "%s: homedir must be an absolute path\n"
+msgstr "%s: persoonlijke map \"%s\" moet aangekoppeld zijn op BTRFS\n"
+
 #, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: ongeldig bereik '%s' van ondergeschikte UID's\n"
@@ -2954,3 +3083,6 @@ msgstr "%s: kan %s niet herstellen: %s (uw aanpassingen staan in %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: tcb-map van %s vinden is mislukt\n"
+
+#~ msgid "Username         Port     From             Latest"
+#~ msgstr "Gebruikersnaam   Poort    Vanaf            Laatste"
