@@ -2,6 +2,7 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Frank Schmid <frank@cs-schmid.de>, 2002
 # Holger Wansing <linux@wansing-online.de>, 2006, 2008, 2009, 2011, 2012, 2014.
+# Björn Esser <besser82@fedoraproject.org>, 2021.
 # Patches, suggestions, etc welcome.
 #
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2021-07-04 12:20+0200\n"
 "PO-Revision-Date: 2020-09-22 15:10+0200\n"
-"Last-Translator: Holger Wansing <hwansing@mailbox.org>\n"
+"Last-Translator: Björn Esser <besser82@fedoraproject.org>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -566,7 +567,7 @@ msgstr "%s: chroot-Wechsel in Verzeichnis %s nicht möglich: %s\n"
 
 #, c-format
 msgid "Unable to obtain random bytes.\n"
-msgstr ""
+msgstr "Kann keine zufälligen Bytes beziehen.\n"
 
 #, c-format
 msgid ""
@@ -582,6 +583,9 @@ msgid ""
 "ENCRYPT_METHOD and the corresponding configuration for your selected hash "
 "method.\n"
 msgstr ""
+"Kann kein Salt für das Präfix \"%s\" generieren. Bitte die Einstellungen "
+"für ENCRYPT_METHOD und den zugehörigen Konfigurationen der gewählten "
+"Hash-Methode überprüfen.\n"
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -936,8 +940,8 @@ msgid ""
 "  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 "                                or YESCRYPT crypt algorithms\n"
 msgstr ""
-"  -s, --sha-rounds              Anzahl der SHA-Runden für den SHA*-\n"
-"                                Verschlüsselungs-Algorithmus\n"
+"  -s, --sha-rounds              Anzahl der SHA-Runden für den SHA*-,\n"
+"                                BCRYPT oder YESCRYPT Hash-Methode.\n"
 
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
