@@ -15,6 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if HAVE_SYS_RANDOM_H
+#include <sys/random.h>
+#endif
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -128,19 +131,46 @@ static /*@observer@*/char *l64a (long value)
 static long read_random_bytes (void)
 {
 	long randval = 0;
+
+#ifdef HAVE_ARC4RANDOM_BUF
+	/* arc4random_buf, if it exists, can never fail.  */
+	arc4random_buf (&randval, sizeof (randval));
+	goto end;
+
+#elif defined(HAVE_GETENTROPY)
+	/* getentropy may exist but lack kernel support.  */
+	if (getentropy (&randval, sizeof (randval))) {
+		goto fail;
+	}
+
+	goto end;
+
+#elif defined(HAVE_GETRANDOM)
+	/* Likewise getrandom.  */
+	if ((size_t) getrandom (&randval, sizeof (randval), 0) != sizeof (randval)) {
+		goto fail;
+	}
+
+	goto end;
+
+#else
 	FILE *f = fopen ("/dev/urandom", "r");
 
-	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval))
-	{
-		fprintf (shadow_logfd,
-			 _("Unable to read from /dev/urandom.\n"));
-
+	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval)) {
 		fclose(f);
-		exit (1);
+		goto fail;
 	}
 
 	fclose(f);
+	goto end;
+#endif
 
+fail:
+	fprintf (shadow_logfd,
+		 _("Unable to obtain random bytes.\n"));
+	exit (1);
+
+end:
 	return randval;
 }
 
