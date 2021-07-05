@@ -15,9 +15,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if HAVE_SYS_RANDOM_H
+#include <sys/random.h>
+#endif
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+
+#if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
+     CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
+#define USE_XCRYPT_GENSALT 1
+#else
+#define USE_XCRYPT_GENSALT 0
+#endif
 
 /* Add the salt prefix. */
 #define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
@@ -74,21 +84,26 @@
 
 /* local function prototypes */
 static long read_random_bytes (void);
+#if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
+#endif /* !USE_XCRYPT_GENSALT */
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 static long shadow_random (long min, long max);
 #endif /* USE_SHA_CRYPT || USE_BCRYPT */
 #ifdef USE_SHA_CRYPT
-static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, /*@null@*/int *prefered_rounds);
+static /*@observer@*/const unsigned long SHA_get_salt_rounds (/*@null@*/int *prefered_rounds);
+static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds);
 #endif /* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *prefered_rounds);
+static /*@observer@*/const unsigned long BCRYPT_get_salt_rounds (/*@null@*/int *prefered_rounds);
+static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, /*@null@*/int *prefered_cost);
+static /*@observer@*/const unsigned long YESCRYPT_get_salt_cost (/*@null@*/int *prefered_cost);
+static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
 
-#ifndef HAVE_L64A
+#if !USE_XCRYPT_GENSALT && !defined(HAVE_L64A)
 static /*@observer@*/char *l64a (long value)
 {
 	static char buf[8];
@@ -122,25 +137,52 @@ static /*@observer@*/char *l64a (long value)
 
 	return buf;
 }
-#endif /* !HAVE_L64A */
+#endif /* !USE_XCRYPT_GENSALT && !defined(HAVE_L64A) */
 
 /* Read sizeof (long) random bytes from /dev/urandom. */
 static long read_random_bytes (void)
 {
 	long randval = 0;
+
+#ifdef HAVE_ARC4RANDOM_BUF
+	/* arc4random_buf, if it exists, can never fail.  */
+	arc4random_buf (&randval, sizeof (randval));
+	goto end;
+
+#elif defined(HAVE_GETENTROPY)
+	/* getentropy may exist but lack kernel support.  */
+	if (getentropy (&randval, sizeof (randval))) {
+		goto fail;
+	}
+
+	goto end;
+
+#elif defined(HAVE_GETRANDOM)
+	/* Likewise getrandom.  */
+	if ((size_t) getrandom (&randval, sizeof (randval), 0) != sizeof (randval)) {
+		goto fail;
+	}
+
+	goto end;
+
+#else
 	FILE *f = fopen ("/dev/urandom", "r");
 
-	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval))
-	{
-		fprintf (shadow_logfd,
-			 _("Unable to read from /dev/urandom.\n"));
-
+	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval)) {
 		fclose(f);
-		exit (1);
+		goto fail;
 	}
 
 	fclose(f);
+	goto end;
+#endif
 
+fail:
+	fprintf (shadow_logfd,
+		 _("Unable to obtain random bytes.\n"));
+	exit (1);
+
+end:
 	return randval;
 }
 
@@ -169,14 +211,10 @@ static long shadow_random (long min, long max)
 #endif /* USE_SHA_CRYPT || USE_BCRYPT */
 
 #ifdef USE_SHA_CRYPT
-/*
- * Fill a salt prefix specifying the rounds number for the SHA crypt methods
- * to a buffer.
- */
-static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, /*@null@*/int *prefered_rounds)
+/* Return the the rounds number for the SHA crypt methods. */
+static /*@observer@*/const unsigned long SHA_get_salt_rounds (/*@null@*/int *prefered_rounds)
 {
 	unsigned long rounds;
-	const size_t buf_begin = strlen (buf);
 
 	if (NULL == prefered_rounds) {
 		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
@@ -215,6 +253,17 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, /*@null@*/int *pref
 		rounds = SHA_ROUNDS_MAX;
 	}
 
+	return rounds;
+}
+
+/*
+ * Fill a salt prefix specifying the rounds number for the SHA crypt methods
+ * to a buffer.
+ */
+static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds)
+{
+	const size_t buf_begin = strlen (buf);
+
 	/* Nothing to do here if SHA_ROUNDS_DEFAULT is used. */
 	if (rounds == SHA_ROUNDS_DEFAULT) {
 		return;
@@ -235,14 +284,10 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, /*@null@*/int *pref
 #endif /* USE_SHA_CRYPT */
 
 #ifdef USE_BCRYPT
-/*
- * Fill a salt prefix specifying the rounds number for the BCRYPT method
- * to a buffer.
- */
-static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *prefered_rounds)
+/* Return the the rounds number for the BCRYPT method. */
+static /*@observer@*/const unsigned long BCRYPT_get_salt_rounds (/*@null@*/int *prefered_rounds)
 {
 	unsigned long rounds;
-	const size_t buf_begin = strlen (buf);
 
 	if (NULL == prefered_rounds) {
 		long min_rounds = getdef_long ("BCRYPT_MIN_ROUNDS", -1);
@@ -276,6 +321,11 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *p
 		rounds = B_ROUNDS_MIN;
 	}
 
+#if USE_XCRYPT_GENSALT
+	if (rounds > B_ROUNDS_MAX) {
+		rounds = B_ROUNDS_MAX;
+	}
+#else /* USE_XCRYPT_GENSALT */
 	/*
 	 * Use 19 as an upper bound for now,
 	 * because musl doesn't allow rounds >= 20.
@@ -284,6 +334,18 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *p
 		/* rounds = B_ROUNDS_MAX; */
 		rounds = 19;
 	}
+#endif /* USE_XCRYPT_GENSALT */
+
+	return rounds;
+}
+
+/*
+ * Fill a salt prefix specifying the rounds number for the BCRYPT method
+ * to a buffer.
+ */
+static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds)
+{
+	const size_t buf_begin = strlen (buf);
 
 	/*
 	 * Check if the result buffer is long enough.
@@ -300,14 +362,10 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, /*@null@*/int *p
 #endif /* USE_BCRYPT */
 
 #ifdef USE_YESCRYPT
-/*
- * Fill a salt prefix specifying the cost for the YESCRYPT method
- * to a buffer.
- */
-static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, /*@null@*/int *prefered_cost)
+/* Return the the cost number for the YESCRYPT method. */
+static /*@observer@*/const unsigned long YESCRYPT_get_salt_cost (/*@null@*/int *prefered_cost)
 {
 	unsigned long cost;
-	const size_t buf_begin = strlen (buf);
 
 	if (NULL == prefered_cost) {
 		cost = getdef_num ("YESCRYPT_COST_FACTOR", Y_COST_DEFAULT);
@@ -325,6 +383,17 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, /*@null@*/int *p
 	if (cost > Y_COST_MAX) {
 		cost = Y_COST_MAX;
 	}
+
+	return cost;
+}
+
+/*
+ * Fill a salt prefix specifying the cost for the YESCRYPT method
+ * to a buffer.
+ */
+static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost)
+{
+	const size_t buf_begin = strlen (buf);
 
 	/*
 	 * Check if the result buffer is long enough.
@@ -350,6 +419,7 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, /*@null@*/int *p
 }
 #endif /* USE_YESCRYPT */
 
+#if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
@@ -367,6 +437,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	return salt;
 }
+#endif /* !USE_XCRYPT_GENSALT */
 
 /*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
@@ -390,6 +461,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	static char result[GENSALT_SETTING_SIZE];
 	size_t salt_len = MAX_SALT_SIZE;
 	const char *method;
+	unsigned long rounds = 0;
 
 	memset (result, '\0', GENSALT_SETTING_SIZE);
 
@@ -405,27 +477,32 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	if (0 == strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
 		salt_len = MD5_CRYPT_SALT_SIZE;
+		rounds = 0;
 #ifdef USE_BCRYPT
 	} else if (0 == strcmp (method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
 		salt_len = BCRYPT_SALT_SIZE;
-		BCRYPT_salt_rounds_to_buf (result, (int *) arg);
+		rounds = BCRYPT_get_salt_rounds ((int *) arg);
+		BCRYPT_salt_rounds_to_buf (result, rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (0 == strcmp (method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
-		YESCRYPT_salt_cost_to_buf (result, (int *) arg);
+		rounds = YESCRYPT_get_salt_cost ((int *) arg);
+		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
 #ifdef USE_SHA_CRYPT
 	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		SHA_salt_rounds_to_buf (result, (int *) arg);
+		rounds = SHA_get_salt_rounds ((int *) arg);
+		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (0 == strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		SHA_salt_rounds_to_buf (result, (int *) arg);
+		rounds = SHA_get_salt_rounds ((int *) arg);
+		SHA_salt_rounds_to_buf (result, rounds);
 #endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {
 		fprintf (shadow_logfd,
@@ -433,9 +510,39 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 			   "Defaulting to DES.\n"),
 			 method);
 		salt_len = MAX_SALT_SIZE;
+		rounds = 0;
 		memset (result, '\0', GENSALT_SETTING_SIZE);
 	}
 
+#if USE_XCRYPT_GENSALT
+	/*
+	 * Prepare DES setting for crypt_gensalt(), if result
+	 * has not been filled with anything previously.
+	 */
+	if ('\0' == result[0]) {
+		/* Avoid -Wunused-but-set-variable. */
+		salt_len = GENSALT_SETTING_SIZE - 1;
+		rounds = 0;
+		memset (result, '.', salt_len);
+		result[salt_len] = '\0';
+	}
+
+	char *retval = crypt_gensalt (result, rounds, NULL, 0);
+
+	/* Should not happen, but... */
+	if (NULL == retval) {
+		fprintf (shadow_logfd,
+			 _("Unable to generate a salt from setting "
+			   "\"%s\", check your settings in "
+			   "ENCRYPT_METHOD and the corresponding "
+			   "configuration for your selected hash "
+			   "method.\n"), result);
+
+		exit (1);
+	}
+
+	return retval;
+#else /* USE_XCRYPT_GENSALT */
 	/* Check if the result buffer is long enough. */
 	assert (GENSALT_SETTING_SIZE > strlen (result) + salt_len);
 
@@ -444,4 +551,5 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		 GENSALT_SETTING_SIZE - strlen (result) - 1);
 
 	return result;
+#endif /* USE_XCRYPT_GENSALT */
 }

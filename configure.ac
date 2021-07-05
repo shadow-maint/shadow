@@ -42,20 +42,21 @@ AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_HEADER_STDBOOL
 
-AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
+AC_CHECK_HEADERS(crypt.h errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utmpx.h termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
-	utime.h ulimit.h sys/capability.h sys/resource.h gshadow.h lastlog.h \
-	locale.h rpc/key_prot.h netdb.h acl/libacl.h attr/libattr.h \
-	attr/error_context.h)
+	utime.h ulimit.h sys/capability.h sys/random.h sys/resource.h \
+	gshadow.h lastlog.h locale.h rpc/key_prot.h netdb.h acl/libacl.h \
+	attr/libattr.h attr/error_context.h)
 
 dnl shadow now uses the libc's shadow implementation
 AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
-AC_CHECK_FUNCS(l64a fchmod fchown fsync futimes getgroups gethostname getspnam \
-	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
-	lutimes memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
-	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo \
-	ruserok dlopen)
+AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes getgroups \
+	gethostname getentropy getrandom getspnam gettimeofday getusershell \
+	getutent initgroups lchown lckpwdf lstat lutimes memcpy memset \
+	setgroups sigaction strchr updwtmp updwtmpx innetgr getpwnam_r \
+	getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo ruserok \
+	dlopen)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
