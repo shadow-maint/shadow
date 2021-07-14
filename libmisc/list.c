@@ -263,8 +263,6 @@ bool is_on_list (char *const *list, const char *member)
 		}
 	}
 
-	free (members);
-
 	/*
 	 * Return the new array of pointers
 	 */
