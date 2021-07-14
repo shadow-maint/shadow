@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2016-09-18 14:03-0500\n"
+"POT-Creation-Date: 2021-07-04 12:20+0200\n"
 "PO-Revision-Date: 2017-02-07 17:09+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -54,6 +54,15 @@ msgstr "Пароль: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s пайдаланушының паролі: "
+
+#, fuzzy
+#| msgid "Cannot open audit interface - aborting.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "Аудит интерфейсін ашу мүмкін емес - шығу.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
 
 #, c-format
 msgid "[libsemanage]: %s\n"
@@ -301,10 +310,6 @@ msgstr[0] ""
 "Соңғысы %s болған, терминал %s.\n"
 
 #, c-format
-msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
-msgstr "%s: Қате баптаулар: GID_MIN (%lu), GID_MAX (%lu)\n"
-
-#, c-format
 msgid ""
 "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
@@ -312,20 +317,61 @@ msgstr ""
 "%s: Қате баптаулар: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
 
 #, c-format
+msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
+msgstr "%s: Қате баптаулар: GID_MIN (%lu), GID_MAX (%lu)\n"
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred GID: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to allocate memory: %s\n"
 msgstr "%s: жадыны бөлу сәтсіз: %s\n"
 
-#, c-format
-msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr "%s:  Ерекше жүйелік GID алу мүмкін емес (бос GID-тар қалмады)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
+msgstr "%s:  Ерекше GID алу мүмкін емес (бос GID-тар қалмады)\n"
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s:  Ерекше GID алу мүмкін емес (бос GID-тар қалмады)\n"
 
-#, c-format
-msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
-msgstr "%s: Қате баптаулар: UID_MIN (%lu), UID_MAX (%lu)\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
+"SUB_GID_COUNT (%lu)\n"
+msgstr ""
+"%s: Қате баптаулар: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't find subordinate user range\n"
+msgid "%s: Can't get unique subordinate GID range\n"
+msgstr "%s: бағынышты пайдаланушы ауқымын табу мүмкін емес\n"
+
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+#| "(%lu)\n"
+msgid ""
+"%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
+"SUB_UID_COUNT (%lu)\n"
+msgstr ""
+"%s: Қате баптаулар: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't find subordinate user range\n"
+msgid "%s: Can't get unique subordinate UID range\n"
+msgstr "%s: бағынышты пайдаланушы ауқымын табу мүмкін емес\n"
 
 #, c-format
 msgid ""
@@ -335,12 +381,73 @@ msgstr ""
 "%s: Қате баптаулар: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
 
 #, c-format
-msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr "%s: Қате баптаулар: UID_MIN (%lu), UID_MAX (%lu)\n"
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred UID: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
+msgstr "%s:  Ерекше жүйелік UID алу мүмкін емес (бос UID-тар қалмады)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr "%s:  Ерекше жүйелік UID алу мүмкін емес (бос UID-тар қалмады)\n"
 
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s:  Ерекше жүйелік UID алу мүмкін емес (бос UID-тар қалмады)\n"
+
+#, c-format
+msgid "%s: Not enough arguments to form %u mappings\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Authentication failure\n"
+msgid "%s: Memory allocation failure\n"
+msgstr "%s: Аутентификация қатесі\n"
+
+#, c-format
+msgid "%s: subuid overflow detected.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: invalid field '%s'\n"
+msgid "%s: Invalid map file %s specified\n"
+msgstr "%s: '%s' өрісі қате\n"
+
+#, c-format
+msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Could not set name for %s\n"
+msgid "%s: Could not seteuid to %d\n"
+msgstr "%s үшін атын орнату мүмкін емес\n"
+
+#, fuzzy, c-format
+#| msgid "Could not set name for %s\n"
+msgid "%s: Could not set caps\n"
+msgstr "%s үшін атын орнату мүмкін емес\n"
+
+#, c-format
+msgid "%s: snprintf failed!\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: open of %s failed: %s\n"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: write to %s failed: %s\n"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
 
 msgid "Too many logins.\n"
 msgstr "Жүйеге кірудің шектен көп талап саны.\n"
@@ -394,6 +501,27 @@ msgid "passwd: password updated successfully\n"
 msgstr "passwd: пароль сәтті жаңартылды\n"
 
 #, c-format
+msgid "%s: PAM modules requesting echoing are not supported.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: repository %s not supported\n"
+msgid "%s: conversation type %d not supported.\n"
+msgstr "%s: %s репозиторийіне қолдау жоқ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: pam_start: error %d\n"
+msgid "%s: (user %s) pam_start failure %d\n"
+msgstr "%s: pam_start: қате %d\n"
+
+#, fuzzy, c-format
+#| msgid "passwd: pam_start() failed, error %d\n"
+msgid ""
+"%s: (user %s) pam_chauthtok() failed, error:\n"
+"%s\n"
+msgstr "passwd: pam_start() ішіндегі %d қатесі\n"
+
+#, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "%s үшін қате пароль.\n"
 
@@ -426,12 +554,23 @@ msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: %s бумасына chroot жасау мүмкін емес: %s\n"
 
 #, c-format
+msgid "Unable to obtain random bytes.\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
 msgstr ""
 "Қате ENCRYPT_METHOD мәні: '%s'.\n"
 "Бастапқы DES мәні қолданылады.\n"
+
+#, c-format
+msgid ""
+"Unable to generate a salt from setting \"%s\", check your settings in "
+"ENCRYPT_METHOD and the corresponding configuration for your selected hash "
+"method.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -451,6 +590,15 @@ msgstr "'%s' түбірлік бумасы қате\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Түбірлік бумасын '%s' мәніне ауыстыру мүмкін емес\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: %s пайдаланушысы қазір жүйеге кіріп тұр\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s is currently logged in\n"
+msgid "%s: user %s is currently used by process %d\n"
+msgstr "%s: %s пайдаланушысы қазір жүйеге кіріп тұр\n"
 
 msgid "Unable to determine your tty name."
 msgstr "Терминалыңыздың атын анықтау мүмкін емес."
@@ -483,6 +631,11 @@ msgstr ""
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    осы көмек ақпаратын көрсету мен шығу\n"
+
+#, fuzzy
+#| msgid "  -g, --group                   edit group database\n"
+msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
+msgstr "  -g, --group                   топ дерекқорын түзету\n"
 
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -679,6 +832,10 @@ msgstr "Үй телефон нөмірі"
 msgid "Other"
 msgstr "Басқа"
 
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: жолдар өте ұзын\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Суперпайдаланушы (root) құқығын алу мүмкін емес.\n"
 
@@ -731,10 +888,6 @@ msgid "Changing the user information for %s\n"
 msgstr "%s үшін пайдаланушы ақпаратын өзгерту\n"
 
 #, c-format
-msgid "%s: fields too long\n"
-msgstr "%s: жолдар өте ұзын\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -758,9 +911,13 @@ msgstr ""
 "  -m, --md5                     MD5 алгоритмін пайдаланып, таза мәтінді\n"
 "                                парольді шифрлеу\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
 msgid ""
-"  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-"                                crypt algorithms\n"
+"  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
+"                                or YESCRYPT crypt algorithms\n"
 msgstr ""
 "  -s, --sha-rounds              SHA* тектес алгоритмдер үшін SHA\n"
 "                                раундтар саны\n"
@@ -1071,6 +1228,21 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  жүйелік тіркелгіні жасау\n"
 
+#, fuzzy
+#| msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
+msgstr "  -R, --root CHROOT_DIR         chroot үшін бума\n"
+
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid "  -U, --users USERS             list of user members of this group\n"
+msgstr "  -l, --list                    топ мүшелердің тізімін шығару\n"
+
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Invalid member username %s\n"
+msgstr "қате пайдаланушы аты '%s'\n"
+
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: '%s' дұрыс топ аты емес\n"
@@ -1094,6 +1266,11 @@ msgstr "%s: GID '%lu' бар болып тұр\n"
 #, c-format
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Тазарту қызметін орнату мүмкін емес.\n"
+
+msgid ""
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
+msgstr ""
 
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
@@ -1178,6 +1355,23 @@ msgstr "%s: сіздің топ атыңыз пайдаланушы атыңыз
 msgid "%s: only root can use the -g/--group option\n"
 msgstr "%s: тек root -g/--group опциясын қолдана алады\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -a, --append                  append the users mentioned by -U option to "
+"the group \n"
+"                                without removing existing user members\n"
+msgstr ""
+"  -a, --append                  пайдаланушыны қосымша ТОПТАР ішіне қосу\n"
+"                                -G опциясы сияқты, пайдаланушыны басқа "
+"топтардан\n"
+"                                өшірмейді\n"
+
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr "  -g, --gid GID                 топ ID-ін GID мәніне орнату\n"
 
@@ -1237,6 +1431,10 @@ msgstr ""
 
 msgid "  -s, --sort                    sort entries by UID\n"
 msgstr "  -s, --sort                    жазбаларды UID б/ша сұрыптау\n"
+
+msgid ""
+"  -S, --silence-warnings        silence controversial/paranoid warnings\n"
+msgstr ""
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1355,8 +1553,10 @@ msgstr ""
 "  -u, --user ТІРКЕЛГІ           көрсетілген ТІРКЕЛГІ үшін lastlog жазбаларын "
 "көрсету\n"
 
-msgid "Username         Port     From             Latest"
-msgstr "Пайдаланушы      Порт     Қайдан           Соңғы"
+#, fuzzy, c-format
+#| msgid "Username                Port     Latest"
+msgid "Username         Port     From%*sLatest\n"
+msgstr "Пайдаланушы             Порт     Соңғы"
 
 msgid "Username                Port     Latest"
 msgstr "Пайдаланушы             Порт     Соңғы"
@@ -1365,8 +1565,20 @@ msgid "**Never logged in**"
 msgstr "**Жүйеге ешқашан кірмеген**"
 
 #, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthe output might be incorrect.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "%s: UID %lu үшін жазбаны жаңарту сәтсіз аяқталды\n"
+
+#, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthey will not be updated.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: Failed to update the lastlog file\n"
@@ -1498,6 +1710,54 @@ msgstr ""
 msgid "Usage: logoutd\n"
 msgstr "Қолданылуы: logoutd\n"
 
+#, c-format
+msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid "%s: kernel doesn't support setgroups restrictions\n"
+msgstr ""
+
+#, c-format
+msgid "%s: couldn't open process setgroups: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to read setgroups: %s\n"
+msgstr "%s: %s өшіру сәтсіз аяқталды\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to seek setgroups: %s\n"
+msgstr "%s: %s өшіру сәтсіз аяқталды\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to unlock %s\n"
+msgid "%s: failed to setgroups %s policy: %s\n"
+msgstr "%s: %s босату сәтсіз\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to find tcb directory for %s\n"
+msgid "%s: Could not open proc directory for target %u\n"
+msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to create tcb directory for %s\n"
+msgid "%s: Could not stat directory for target %u\n"
+msgstr "%s: %s үшін tcb бумасын жасау мүмкін емес\n"
+
+#, c-format
+msgid ""
+"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
+"gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Қолданылуы: newgrp [-] [топ]\n"
 
@@ -1521,6 +1781,26 @@ msgstr "%s: '%lu' GID-і жоқ болып тұр\n"
 
 msgid "too many groups\n"
 msgstr "топ саны шектен тыс\n"
+
+#, c-format
+msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
+"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "  -q, --quiet                   quiet mode\n"
+msgid "  -b, --badnames                allow bad names\n"
+msgstr "  -q, --quiet                   тыныш режимі\n"
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr "  -r, --system                  жүйелік тіркелгіні жасау\n"
@@ -1562,6 +1842,11 @@ msgstr "%s: жол %d: '%s' пайдаланушысы %s ішінде жоқ\n"
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: жол %d: парольді жаңарту мүмкін емес\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %d: homedir must be an absolute path\n"
+msgstr "%s: жол %d: mkdir %s сәтсіз: %s\n"
 
 #, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
@@ -1718,8 +2003,9 @@ msgstr ""
 msgid "%s: repository %s not supported\n"
 msgstr "%s: %s репозиторийіне қолдау жоқ\n"
 
-#, c-format
-msgid "%s: %s is not authorized to change the password of %s\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: root is not authorized by SELinux to change the password of %s\n"
 msgstr "%s: %s пайдаланушының %s үшін паролді өзгертуге құқығы жоқ\n"
 
 #, c-format
@@ -1873,9 +2159,11 @@ msgstr "%s: сигналды басқару ақаулығы\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Сессия тоқтатылды, қоршамды тоқтату..."
 
+#, c-format
 msgid " ...killed.\n"
 msgstr " ...өлтірілді.\n"
 
+#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " ...ұрпақ үрдістің тоқтатылуын күту.\n"
 
@@ -1886,8 +2174,22 @@ msgstr " ...тоқтатылды.\n"
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: su [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -, -l, --login                make the shell a login shell\n"
+#| "  -m, -p,\n"
+#| "  --preserve-environment        do not reset environment variables, and\n"
+#| "                                keep the same shell\n"
+#| "  -s, --shell SHELL             use SHELL instead of the default in "
+#| "passwd\n"
+#| "\n"
 msgid ""
-"Usage: su [options] [LOGIN]\n"
+"Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -1898,6 +2200,7 @@ msgid ""
 "                                keep the same shell\n"
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
+"If no username is given, assume root.\n"
 msgstr ""
 "Қолданылуы: su [опциялар] [ТІРКЕЛГІ]\n"
 "\n"
@@ -1920,6 +2223,14 @@ msgid ""
 msgstr ""
 "%s: %s\n"
 "(Елемеу)\n"
+
+#, c-format
+msgid "Password field is empty, this is forbidden for all accounts.\n"
+msgstr ""
+
+#, c-format
+msgid "Password field is empty, this is forbidden for super-user.\n"
+msgstr ""
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1985,6 +2296,11 @@ msgstr "%s: %s жасалды, бірақ оны өшіру мүмкін еме�
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr "%s: %s баптауы,  ол %s ішінде, есепке алынбайды\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
+
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
@@ -2013,6 +2329,11 @@ msgstr "%s: '%s' тобы NIS тобы болып тұр.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: шектен көп топ саны көрсетілген (максимум %d).\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Out of memory. Cannot update %s.\n"
+msgid "%s: Out of memory. Cannot find group '%s'.\n"
+msgstr "%s: Жады жеткіліксіз. %s жаңарту мүмкін емес.\n"
+
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -2027,6 +2348,11 @@ msgstr ""
 "\n"
 "Опциялар:\n"
 
+#, fuzzy
+#| msgid "  -s, --shadow                  edit shadow or gshadow database\n"
+msgid "      --badnames                do not check for bad names\n"
+msgstr "  -s, --shadow                  shadow не gshadow дерекқорын түзету\n"
+
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
@@ -2034,6 +2360,10 @@ msgid ""
 msgstr ""
 "  -b, --base-dir НЕГ_БУМА       жаңа тіркелгінің үй бумасы орналасатын\n"
 "                                негізгі бума\n"
+
+msgid ""
+"      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
+msgstr ""
 
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr "  -c, --comment COMMENT         жаңа тіркелгінің GECOS өрісі\n"
@@ -2150,25 +2480,113 @@ msgstr "%s: '%s' өрісі қате\n"
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: '%s' қоршамы қате\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Warning: %s is not executable\n"
+msgid "%s: Warning: missing or non-executable shell '%s'\n"
+msgstr "%s: Ескерту: %s орындалатын емес\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Option -C cannot be used together with option -S\n"
+msgid "%s: -Z cannot be used with --prefix\n"
+msgstr "%s: -C опциясын -S опциясымен бірге қолдануға болмайды\n"
+
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z өз алдында SELinux қосулы ядроны талап етеді\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: '%s' пайдаланушы аты қате\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to open the faillog file for UID %lu: %s\n"
+msgstr "%s: %lu UID-і үшін faillog жазбасын нөлдеу сәтсіз: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr "%s: %lu UID-і үшін faillog жазбасын нөлдеу сәтсіз: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to close the faillog file for UID %lu: %s\n"
+msgstr "%s: %lu UID-і үшін faillog жазбасын нөлдеу сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
+msgstr "%s: %lu UID-і үшін lastlog жазбасын нөлдеу сәтсіз: %s\n"
+
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: %lu UID-і үшін lastlog жазбасын нөлдеу сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
+msgstr "%s: %lu UID-і үшін lastlog жазбасын нөлдеу сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
+msgstr "%s: %lu UID-і үшін faillog жазбасын нөлдеу сәтсіз: %s\n"
 
 #, c-format
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: жаңа %s жазбасын дайындау сәтсіз аяқталды\n"
 
+#, fuzzy, c-format
+#| msgid "%s: error changing fields\n"
+msgid "%s: error while duplicating string %s\n"
+msgstr "%s: жолдарды өзгерту қатесі\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot set SELinux context for home directory %s\n"
+msgstr "%s: %s бумасын жасау мүкін емес\n"
+
+#, c-format
+msgid "%s: error while duplicating string in BTRFS check %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: %s home directory (%s) not found\n"
+msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+msgstr "%s: %s үшін үй бумасы (%s) табылмады\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to allocate memory: %s\n"
+msgid "%s: failed to create BTRFS subvolume: %s\n"
+msgstr "%s: жадыны бөлу сәтсіз: %s\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: %s бумасын жасау мүкін емес\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: warning: chown on `%s' failed: %m\n"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: warning: chmod on `%s' failed: %m\n"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: warning: chown on '%s' failed: %m\n"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
+
+#, c-format
+msgid "%s: cannot reset SELinux file creation context\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Cannot create SELinux login mapping for %s\n"
+msgid "%s: cannot set SELinux context for mailbox file %s\n"
+msgstr "%s үшін SELinux тіркелгі сәйкестігін жасау мүмкін емес\n"
 
 msgid "Creating mailbox file"
 msgstr "Пошта файлын құру"
@@ -2180,6 +2598,17 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "Пошта файлына рұқсаттарды орнату"
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
+"range.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: user '%s' already exists\n"
@@ -2216,10 +2645,13 @@ msgstr "%s: бағынышты пайдаланушы ID-ын жасау мүм�
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: бағынышты топ ID-ын жасау мүмкін емес\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: warning: the home directory already exists.\n"
+#| "Not copying any file from skel directory into it.\n"
 msgid ""
-"%s: warning: the home directory already exists.\n"
-"Not copying any file from skel directory into it.\n"
+"%s: warning: the home directory %s already exists.\n"
+"%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 "%s: ескерту: үй бумасы бар болып тұр.\n"
 "Оның ішіне skel бумасынан бірде-бір файл көшірілмеді.\n"
@@ -2228,9 +2660,15 @@ msgstr ""
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr "%s: ескерту: %s пайдаланушы атын %s SELinux сәйкестендіру сәтсіз.\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -f, --force                   force removal of files,\n"
+#| "                                even if not owned by user\n"
 msgid ""
-"  -f, --force                   force removal of files,\n"
-"                                even if not owned by user\n"
+"  -f, --force                   force some actions that would fail "
+"otherwise\n"
+"                                e.g. removal of user still logged in\n"
+"                                or files, even if not owned by the user\n"
 msgstr ""
 "  -f, --force                   файлдарды өшіруді мәжбүрлеу,\n"
 "                                пайдаланушы иелігінде болмаса да\n"
@@ -2303,6 +2741,11 @@ msgstr "%s: %s үшін үй бумасы (%s) табылмады\n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr "%s: %s бумасы өшірілмеді (%s пайдаланушының үй бумасын өшіру талабы)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: error removing directory %s\n"
+msgid "%s: error removing subvolume %s\n"
+msgstr "%s: %s бумасын өшіру қатемен аяқталды\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
@@ -2420,6 +2863,10 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' пайдаланушысы %s ішінде бар болып тұр\n"
 
 #, c-format
+msgid "%s: homedir must be an absolute path\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: жарамсыз бағынышты uid ауқымы '%s'\n"
 
@@ -2464,6 +2911,10 @@ msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: Үй бумасының иелігін ауыстыру мүмкін емес"
 
 #, c-format
+msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr "%s: ескерту: %s ескі үй бумасын толығымен өшіру мүмкін емес"
 
@@ -2495,16 +2946,18 @@ msgstr "mailbox атын ауыстыру қатемен аяқталды"
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: %lu-%lu uid-тар ауқымын '%s' ішінен өшіру сәтсіз аяқталды\n"
 
-#, c-format
-msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
 msgstr "%s: %lu-%lu uid ауқымын '%s' ішіне қосу сәтсіз аяқталды\n"
 
 #, c-format
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: %lu-%lu gid-тар ауқымын '%s' ішінен өшіру сәтсіз аяқталды\n"
 
-#, c-format
-msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
 msgstr "%s: %lu-%lu gid ауқымын '%s' ішіне қосу сәтсіз аяқталды\n"
 
 #, c-format
@@ -2594,6 +3047,9 @@ msgstr "%s: %s қайтару мүмкін емес: %s (сіздің өзгер
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
+
+#~ msgid "Username         Port     From             Latest"
+#~ msgstr "Пайдаланушы      Порт     Қайдан           Соңғы"
 
 #~ msgid "  -c, --crypt-method            the crypt method (one of %s)\n"
 #~ msgstr "  -c, --crypt-method            шифрлеу тәсілі (%s ішінен біреу)\n"
@@ -2857,9 +3313,6 @@ msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
 #~ "  -h, --help                    осы көмек ақпаратын көрсету және шығу\n"
 #~ "  -r, --remove                  үй бумасын мен поштасын өшіру\n"
 #~ "\n"
-
-#~ msgid "%s: user %s is currently logged in\n"
-#~ msgstr "%s: %s пайдаланушысы қазір жүйеге кіріп тұр\n"
 
 #~ msgid ""
 #~ "Usage: usermod [options] LOGIN\n"

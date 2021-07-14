@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2016-09-18 14:03-0500\n"
+"POT-Creation-Date: 2021-07-04 12:20+0200\n"
 "PO-Revision-Date: 2009-04-19 21:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -54,6 +54,15 @@ msgstr "암호: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s의 암호: "
+
+#, fuzzy
+#| msgid "Cannot open audit interface - aborting.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "검증 인터페이스를 열 수 없습니다. 중지합니다.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
 
 #, c-format
 msgid "[libsemanage]: %s\n"
@@ -297,13 +306,17 @@ msgstr[0] ""
 "마지막 로그인은 %s, %s에서.\n"
 
 #, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
-"(%lu)\n"
+msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -311,16 +324,38 @@ msgid "%s: failed to allocate memory: %s\n"
 msgstr "메일함 소유자를 바꾸는 데 실패했습니다"
 
 #, fuzzy, c-format
-msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr "%s: 유일한 UID를 얻을 수 없습니다 (UID가 남아 있지 않습니다)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
+msgstr "%s: 유일한 GID를 얻을 수 없습니다 (GID가 남아 있지 않습니다)\n"
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: 유일한 GID를 얻을 수 없습니다 (GID가 남아 있지 않습니다)\n"
 
 #, c-format
-msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgid ""
+"%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
+"SUB_GID_COUNT (%lu)\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique subordinate GID range\n"
+msgstr "%s: 사용자를 만들 수 없습니다\n"
+
+#, c-format
+msgid ""
+"%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
+"SUB_UID_COUNT (%lu)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique subordinate UID range\n"
+msgstr "%s: 사용자를 만들 수 없습니다\n"
 
 #, c-format
 msgid ""
@@ -328,13 +363,69 @@ msgid ""
 "(%lu)\n"
 msgstr ""
 
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred UID: %s\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
+msgstr "%s: 유일한 UID를 얻을 수 없습니다 (UID가 남아 있지 않습니다)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr "%s: 유일한 UID를 얻을 수 없습니다 (UID가 남아 있지 않습니다)\n"
 
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: 유일한 UID를 얻을 수 없습니다 (UID가 남아 있지 않습니다)\n"
+
+#, c-format
+msgid "%s: Not enough arguments to form %u mappings\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Authentication failure\n"
+msgid "%s: Memory allocation failure\n"
+msgstr "%s: 인증이 실패했습니다\n"
+
+#, c-format
+msgid "%s: subuid overflow detected.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: invalid field '%s'\n"
+msgid "%s: Invalid map file %s specified\n"
+msgstr "%s: 올바르지 않은 필드 '%s'\n"
+
+#, c-format
+msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Could not seteuid to %d\n"
+msgstr "설정 정보를 위한 공간을 확보할 수 없습니다.\n"
+
+#, fuzzy, c-format
+msgid "%s: Could not set caps\n"
+msgstr "설정 정보를 위한 공간을 확보할 수 없습니다.\n"
+
+#, c-format
+msgid "%s: snprintf failed!\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: open of %s failed: %s\n"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: write to %s failed: %s\n"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
 
 msgid "Too many logins.\n"
 msgstr "로그인 횟수가 너무 많음.\n"
@@ -388,6 +479,27 @@ msgid "passwd: password updated successfully\n"
 msgstr "passwd: 암호를 성공적으로 업데이트했습니다\n"
 
 #, c-format
+msgid "%s: PAM modules requesting echoing are not supported.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: repository %s not supported\n"
+msgid "%s: conversation type %d not supported.\n"
+msgstr "%s: %s 저장소는 지원하지 않습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: pam_start: error %d\n"
+msgid "%s: (user %s) pam_start failure %d\n"
+msgstr "%s: pam_start: 오류 %d\n"
+
+#, fuzzy, c-format
+#| msgid "passwd: pam_start() failed, error %d\n"
+msgid ""
+"%s: (user %s) pam_chauthtok() failed, error:\n"
+"%s\n"
+msgstr "암호: pam_start() 실패했습니다, 오류 %d\n"
+
+#, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "'%s'의 암호가 맞지 않습니다.\n"
 
@@ -420,12 +532,23 @@ msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
 
 #, c-format
+msgid "Unable to obtain random bytes.\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
 msgstr ""
 "쓸 수 없는 ENCRYPT_METHOD 값: '%s'.\n"
 "기본값인 DES로 설정합니다.\n"
+
+#, c-format
+msgid ""
+"Unable to generate a salt from setting \"%s\", check your settings in "
+"ENCRYPT_METHOD and the corresponding configuration for your selected hash "
+"method.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -445,6 +568,15 @@ msgstr "루트 디렉터리 '%s'이(가) 잘못되었습니다\n"
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "루트 디렉터리를 '%s'(으)로 바꿀 수 없습니다\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: %s 사용자는 현재 로그인한 상태 입니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: user %s is currently logged in\n"
+msgid "%s: user %s is currently used by process %d\n"
+msgstr "%s: %s 사용자는 현재 로그인한 상태 입니다\n"
 
 msgid "Unable to determine your tty name."
 msgstr "TTY 이름을 확인할 수 없습니다."
@@ -469,6 +601,9 @@ msgid ""
 msgstr ""
 
 msgid "  -h, --help                    display this help message and exit\n"
+msgstr ""
+
+msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
 msgstr ""
 
 #, fuzzy
@@ -650,6 +785,10 @@ msgstr "집 전화번호"
 msgid "Other"
 msgstr "기타"
 
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: 입력범위가 너무 깁니다\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "아이디를 루트로 바꿀 수는 없습니다.\n"
 
@@ -702,10 +841,6 @@ msgid "Changing the user information for %s\n"
 msgstr "%s의 사용자의 정보를 바꿉니다\n"
 
 #, c-format
-msgid "%s: fields too long\n"
-msgstr "%s: 입력범위가 너무 깁니다\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -725,9 +860,13 @@ msgid ""
 "                                the MD5 algorithm\n"
 msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+#| "                                crypt algorithms\n"
 msgid ""
-"  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-"                                crypt algorithms\n"
+"  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
+"                                or YESCRYPT crypt algorithms\n"
 msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 #, c-format
@@ -1008,6 +1147,17 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
+msgstr ""
+
+msgid "  -U, --users USERS             list of user members of this group\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Invalid member username %s\n"
+msgstr "올바르지 않은 사용자 이름 '%s'\n"
+
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: '%s'은(는) 사용할 수 없는 그룹 이름입니다\n"
@@ -1031,6 +1181,11 @@ msgstr "%s: '%lu' GID가 이미 있습니다\n"
 #, fuzzy, c-format
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
+
+msgid ""
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
+msgstr ""
 
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
@@ -1108,6 +1263,13 @@ msgstr "%s: 그룹 이름이 사용자 이름과 맞지 않습니다\n"
 msgid "%s: only root can use the -g/--group option\n"
 msgstr "%s: root만 -g/--group 옵션을 쓸 수 있습니다\n"
 
+#, fuzzy
+msgid ""
+"  -a, --append                  append the users mentioned by -U option to "
+"the group \n"
+"                                without removing existing user members\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
 msgid "  -g, --gid GID                 change the group ID to GID\n"
 msgstr ""
 
@@ -1156,6 +1318,10 @@ msgid ""
 msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 msgid "  -s, --sort                    sort entries by UID\n"
+msgstr ""
+
+msgid ""
+"  -S, --silence-warnings        silence controversial/paranoid warnings\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1263,8 +1429,10 @@ msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 
-msgid "Username         Port     From             Latest"
-msgstr "사용자이름       포트     어디서           최근정보"
+#, fuzzy, c-format
+#| msgid "Username                Port     Latest"
+msgid "Username         Port     From%*sLatest\n"
+msgstr "사용자이름              포트     최근정보"
 
 msgid "Username                Port     Latest"
 msgstr "사용자이름              포트     최근정보"
@@ -1272,9 +1440,21 @@ msgstr "사용자이름              포트     최근정보"
 msgid "**Never logged in**"
 msgstr "**한번도 로그인한 적이 없습니다**"
 
+#, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthe output might be incorrect.\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
 msgstr "lastlog: UID %d번의 항목을 읽는데 실패했습니다\n"
+
+#, c-format
+msgid ""
+"%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+"\tthey will not be updated.\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Failed to update the lastlog file\n"
@@ -1403,6 +1583,52 @@ msgstr ""
 msgid "Usage: logoutd\n"
 msgstr "사용법: logoutd\n"
 
+#, c-format
+msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid "%s: kernel doesn't support setgroups restrictions\n"
+msgstr ""
+
+#, c-format
+msgid "%s: couldn't open process setgroups: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to read setgroups: %s\n"
+msgstr "%s: %s을(를) 제거하는데 실패했습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to seek setgroups: %s\n"
+msgstr "%s: %s을(를) 제거하는데 실패했습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to unlock %s\n"
+msgid "%s: failed to setgroups %s policy: %s\n"
+msgstr "%s: %s의 잠금을 푸는데 실패했습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: Could not open proc directory for target %u\n"
+msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: Could not stat directory for target %u\n"
+msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#, c-format
+msgid ""
+"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
+"gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "사용법: newgrp [-] [그룹]\n"
 
@@ -1426,6 +1652,24 @@ msgstr "%s: '%lu' GID가 없습니다\n"
 
 msgid "too many groups\n"
 msgstr "그룹이 너무 많습니다\n"
+
+#, c-format
+msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
+"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+msgstr ""
+
+msgid "  -b, --badnames                allow bad names\n"
+msgstr ""
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
@@ -1467,6 +1711,10 @@ msgstr "%s: %d번 줄: `%s' 사용자가 %s 안에 없습니다\n"
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: %d번 줄: 암호를 업데이트 할 수 없습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: homedir must be an absolute path\n"
+msgstr "%s: %d번 줄: 디렉터리 만들기에 실패했습니다\n"
 
 #, fuzzy, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
@@ -1605,8 +1853,9 @@ msgstr ""
 msgid "%s: repository %s not supported\n"
 msgstr "%s: %s 저장소는 지원하지 않습니다\n"
 
-#, c-format
-msgid "%s: %s is not authorized to change the password of %s\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: root is not authorized by SELinux to change the password of %s\n"
 msgstr "%s: %s 사용자는 %s의 암호를 바꿀 권한이 없습니다\n"
 
 #, c-format
@@ -1751,9 +2000,11 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
+#, c-format
 msgid " ...killed.\n"
 msgstr ""
 
+#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
@@ -1764,8 +2015,22 @@ msgstr ""
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: su [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -, -l, --login                make the shell a login shell\n"
+#| "  -m, -p,\n"
+#| "  --preserve-environment        do not reset environment variables, and\n"
+#| "                                keep the same shell\n"
+#| "  -s, --shell SHELL             use SHELL instead of the default in "
+#| "passwd\n"
+#| "\n"
 msgid ""
-"Usage: su [options] [LOGIN]\n"
+"Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -1776,6 +2041,7 @@ msgid ""
 "                                keep the same shell\n"
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
+"If no username is given, assume root.\n"
 msgstr ""
 "사용법: su [옵션] [<로그인>]\n"
 "\n"
@@ -1796,6 +2062,14 @@ msgid ""
 msgstr ""
 "%s: %s\n"
 "(무시됨)\n"
+
+#, c-format
+msgid "Password field is empty, this is forbidden for all accounts.\n"
+msgstr ""
+
+#, c-format
+msgid "Password field is empty, this is forbidden for super-user.\n"
+msgstr ""
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -1861,6 +2135,11 @@ msgstr ""
 msgid "%s: the %s configuration in %s will be ignored\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
+
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
@@ -1889,6 +2168,11 @@ msgstr "%s: '%s' 그룹은 NIS 그룹입니다.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: 그룹이 너무 많이 명시되었습니다 (최대 %d).\n"
 
+#, fuzzy, c-format
+#| msgid "%s: Out of memory. Cannot update %s.\n"
+msgid "%s: Out of memory. Cannot find group '%s'.\n"
+msgstr "%s: 메모리가 부족합니다. %s을(를) 업데이트할 수 없습니다.\n"
+
 #, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
@@ -1898,12 +2182,19 @@ msgid ""
 "Options:\n"
 msgstr ""
 
+msgid "      --badnames                do not check for bad names\n"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
+msgid ""
+"      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
+msgstr ""
 
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
 msgstr ""
@@ -2012,26 +2303,109 @@ msgstr "%s: 올바르지 않은 필드 '%s'\n"
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: 올바르지 않은 쉘 '%s'\n"
 
+#, fuzzy, c-format
+msgid "%s: Warning: missing or non-executable shell '%s'\n"
+msgstr "%s: 경고: %s은(는) %s이(가) 소유하고 있지 않습니다\n"
+
+#, c-format
+msgid "%s: -Z cannot be used with --prefix\n"
+msgstr ""
+
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to open the faillog file for UID %lu: %s\n"
+msgstr ""
+"%s: UID %lu번의 로그인 실패 기록 항목을 초기화하는데 실패했습니다: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
 "%s: UID %lu번의 로그인 실패 기록 항목을 초기화하는데 실패했습니다: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to close the faillog file for UID %lu: %s\n"
+msgstr ""
+"%s: UID %lu번의 로그인 실패 기록 항목을 초기화하는데 실패했습니다: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
+msgstr "%s: UID %lu번의 최근 기록 항목을 초기화하는데 실패했습니다: %s\n"
+
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: UID %lu번의 최근 기록 항목을 초기화하는데 실패했습니다: %s\n"
 
 #, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
+msgstr "%s: UID %lu번의 최근 기록 항목을 초기화하는데 실패했습니다: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
+msgstr ""
+"%s: UID %lu번의 로그인 실패 기록 항목을 초기화하는데 실패했습니다: %s\n"
+
+#, fuzzy, c-format
 msgid "%s: failed to prepare the new %s entry\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: error changing fields\n"
+msgid "%s: error while duplicating string %s\n"
+msgstr "%s: 항목을 변경하는 도중 오류가 발생했습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot set SELinux context for home directory %s\n"
+msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#, c-format
+msgid "%s: error while duplicating string in BTRFS check %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
+msgstr "%s: 홈 디렉터리 '%s'은(는) 잘못되었습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to create BTRFS subvolume: %s\n"
+msgstr "메일함 소유자를 바꾸는 데 실패했습니다"
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: warning: chown on `%s' failed: %m\n"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: warning: chmod on `%s' failed: %m\n"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: warning: chown on '%s' failed: %m\n"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
+
+#, c-format
+msgid "%s: cannot reset SELinux file creation context\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot set SELinux context for mailbox file %s\n"
+msgstr "%s의 사용기한 정보를 바꿉니다\n"
 
 msgid "Creating mailbox file"
 msgstr "메일함 파일을 만드는 중"
@@ -2042,6 +2416,17 @@ msgstr "'mail' 그룹이 없습니다. 사용자의 메일함 파일을 0600 모
 
 msgid "Setting mailbox file permissions"
 msgstr "메일함의 파일 권한을 설정 중"
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
+"range.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: user '%s' already exists\n"
@@ -2078,10 +2463,13 @@ msgstr "%s: 사용자를 만들 수 없습니다\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: 그룹을 만들 수 없습니다\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: warning: the home directory already exists.\n"
+#| "Not copying any file from skel directory into it.\n"
 msgid ""
-"%s: warning: the home directory already exists.\n"
-"Not copying any file from skel directory into it.\n"
+"%s: warning: the home directory %s already exists.\n"
+"%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 "%s: 경고: 홈디렉터리가 이미 있습니다.\n"
 "skel 디렉터리에서 파일을 복사하지 않습니다.\n"
@@ -2092,8 +2480,10 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"  -f, --force                   force removal of files,\n"
-"                                even if not owned by user\n"
+"  -f, --force                   force some actions that would fail "
+"otherwise\n"
+"                                e.g. removal of user still logged in\n"
+"                                or files, even if not owned by the user\n"
 msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
@@ -2162,6 +2552,11 @@ msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
 "%s: 디렉터리 %s은(는) 제거하지 않습니다 (사용자 %s의 홈 디렉터리를\n"
 "제거하게 됩니다)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: error removing directory %s\n"
+msgid "%s: error removing subvolume %s\n"
+msgstr "%s: 디렉터리 %s을(를) 제거하는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
@@ -2257,6 +2652,10 @@ msgstr ""
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' 사용자가 이미 %s 안에 있습니다\n"
 
+#, c-format
+msgid "%s: homedir must be an absolute path\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
 msgstr "%s: 날짜 '%s'은(는) 잘못되었습니다\n"
@@ -2300,6 +2699,10 @@ msgid "%s: Failed to change ownership of the home directory"
 msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
 
 #, c-format
+msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr "%s: 경고: 이전 홈 디렉터리 %s을(를) 완전히 제거하는 데 실패했습니다"
 
@@ -2333,7 +2736,7 @@ msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
@@ -2341,7 +2744,7 @@ msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, c-format
@@ -2438,6 +2841,9 @@ msgstr "%s: %s을(를) 복구할 수 없습니다: %s (바뀐 사항은 %s에 �
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
+
+#~ msgid "Username         Port     From             Latest"
+#~ msgstr "사용자이름       포트     어디서           최근정보"
 
 #~ msgid "malloc(%d) failed\n"
 #~ msgstr "malloc(%d)에 실패\n"
@@ -2683,9 +3089,6 @@ msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
 #~ "  -h, --help                    이 도움말 메시지를 표시하고 끝냅니다\n"
 #~ "  -r, --remove                  홈 디렉터리와 메일 저장소을 지웁니다\n"
 #~ "\n"
-
-#~ msgid "%s: user %s is currently logged in\n"
-#~ msgstr "%s: %s 사용자는 현재 로그인한 상태 입니다\n"
 
 #, fuzzy
 #~| msgid ""
