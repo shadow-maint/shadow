@@ -168,7 +168,7 @@ static long read_random_bytes (void)
 #else
 	FILE *f = fopen ("/dev/urandom", "r");
 
-	if (fread (&randval, sizeof (randval), 1, f) != sizeof (randval)) {
+	if (fread (&randval, sizeof (randval), 1, f) != 1) {
 		fclose(f);
 		goto fail;
 	}
