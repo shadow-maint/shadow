@@ -1,0 +1,19 @@
+Instructions on executing tests
+
+These are single-host tests, uses the pytest framework to execute test commands on local machines. You need a linux machine to run these tests. 
+
+Install requirements:
+
+pip3 install pytest
+
+
+Run the tests:
+
+You need to be on root to execute these tests. 
+
+sudo su Or su root
+
+pytest-3 test_module_name
+
+Ex : pytest-3 test_module_name.py
+
