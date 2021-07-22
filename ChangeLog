@@ -1,3 +1,26 @@
+2021-07-22  Serge Hallyn <serge@hallyn.com>
+
+	* Updated translations (Björn Esser, Juergen Hoetzel)
+	* Major salt updates (Björn Esser)
+	* Various coverity and cleanup fixes (Iker Pedrosa)
+	* Consistently use 0 to disable PASS_MIN_DAYS  in man (tzccinct)
+	* Implement NSS support for subids and a libsubid (Serge Hallyn)
+	* setfcap: retain setfcap when mapping uid 0 (Christian Brauner)
+	* login.defs: include HMAC_CRYPTO_ALGO key (Iker Pedrosa)
+	* selinux fixes (Christian Göttsche)
+	* Fix path prefix path handling (Lucas Servén Marín)
+	* Manpage updates (tzccinct, Sevan Janiyan, Iker Pedrosa, Geert Ijewski,
+		谭九鼎, Jamin W. Collins, towerpark, andydna, Frans Spiesschaert)
+	* Treat an empty passwd field as invalid (Haelwenn Monnier)
+	* newxidmap: allow running under alternative gid (Martijn de Gouw)
+	* usermod: check that  shell is executable (Geert Ijewski)
+	* Add yescript support (Rodolphe Bréard)
+	* useradd memleak fixes (whzhe)
+	* useradd: use built-in settings by default (Ludwig Nussel)
+	* getdefs: add foreign (non-shadow-utils) items (Karel Zak)
+	* buffer overflow fixes (Tobias Stoeckmann)
+	* Adding run-parts style for pre and post useradd/del (ed@s5h.net)
+
 2020-01-23  Serge Hallyn <serge@hallyn.com>
 
 	* selinux: inclue stdio (Michael Vetter)
