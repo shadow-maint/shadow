@@ -1,7 +1,7 @@
 
 EXTRA_DIST = .indent.pro xgetXXbyYY.c
 
-AM_CPPFLAGS = -I$(top_srcdir)/lib $(ECONF_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/lib -I$(top_srcdir) $(ECONF_CPPFLAGS)
 
 noinst_LTLIBRARIES = libmisc.la
 

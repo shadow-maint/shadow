@@ -10,6 +10,7 @@ sgidperms = 2755
 AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
 	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(datadir)/locale\"
 
 # XXX why are login and su in /bin anyway (other than for
@@ -183,6 +184,7 @@ list_subid_ranges_LDADD = \
 list_subid_ranges_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/libsubid
 
 get_subid_owners_LDADD = \
@@ -194,11 +196,13 @@ get_subid_owners_LDADD = \
 get_subid_owners_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/libsubid
 
 new_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/libsubid
 
 new_subid_range_LDADD = \
@@ -210,6 +214,7 @@ new_subid_range_LDADD = \
 free_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/libsubid
 
 free_subid_range_LDADD = \
@@ -220,6 +225,7 @@ free_subid_range_LDADD = \
 
 check_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/libmisc
 
 check_subid_range_LDADD = \
