@@ -10,6 +10,8 @@ if HAVE_VENDORDIR
 libshadow_la_CPPFLAGS += -DVENDORDIR=\"$(VENDORDIR)\"
 endif
 
+libshadow_la_CPPFLAGS += -I$(top_srcdir)
+
 libshadow_la_SOURCES = \
 	commonio.c \
 	commonio.h \

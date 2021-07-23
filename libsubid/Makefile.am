@@ -20,8 +20,8 @@ MISCLIBS = \
 	$(LIBPAM)
 
 libsubid_la_LIBADD = \
-	$(top_srcdir)/lib/libshadow.la \
-	$(top_srcdir)/libmisc/libmisc.la \
+	$(top_builddir)/lib/libshadow.la \
+	$(top_builddir)/libmisc/libmisc.la \
 	$(MISCLIBS) -ldl
 
 AM_CPPFLAGS = \
