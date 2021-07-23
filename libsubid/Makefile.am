@@ -16,7 +16,8 @@ MISCLIBS = \
 	$(LIBCRYPT) \
 	$(LIBACL) \
 	$(LIBATTR) \
-	$(LIBTCB)
+	$(LIBTCB) \
+	$(LIBPAM)
 
 libsubid_la_LIBADD = \
 	$(top_srcdir)/lib/libshadow.la \
