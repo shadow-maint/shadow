@@ -1,6 +1,8 @@
 lib_LTLIBRARIES = libsubid.la
+if ENABLE_SHARED
 libsubid_la_LDFLAGS = -Wl,-soname,libsubid.so.@LIBSUBID_ABI@ \
 	-shared -version-info @LIBSUBID_ABI_MAJOR@
+endif
 libsubid_la_SOURCES = api.c
 
 pkginclude_HEADERS = subid.h
