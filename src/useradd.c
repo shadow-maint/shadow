@@ -567,6 +567,14 @@ static int set_defaults (void)
 		assert (wlen == (int) len -1);
 	}
 
+	ret = mkdir(dirname(NEW_USER_FILE), 0755);
+	if (-1 == ret && EEXIST != errno) {
+		fprintf (stderr,
+			_("%s: cannot create directory for defaults file\n"),
+			Prog);
+		goto setdef_err;
+	}
+
 	/*
 	 * Create a temporary file to copy the new output to.
 	 */
