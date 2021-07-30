@@ -48,3 +48,8 @@ Makefile.in
 /shadow.spec
 /shadow-*.tar.*
 /libmisc/getdate.c
+
+
+# Added by cargo
+
+/target

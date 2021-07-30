@@ -1,0 +1,9 @@
+[package]
+name = "shadow"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+anyhow = "*"
+clap = "3.0.0-beta.2"
+nix = "*"
