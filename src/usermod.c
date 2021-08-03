@@ -187,7 +187,6 @@ static bool sub_gid_locked = false;
 static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date);
 static int get_groups (char *);
-static struct group * get_local_group (char * grp_name);
 static /*@noreturn@*/void usage (int status);
 static void new_pwent (struct passwd *);
 static void new_spent (struct spwd *);
@@ -201,9 +200,7 @@ static void grp_update (void);
 
 static void process_flags (int, char **);
 static void close_files (void);
-static void close_group_files (void);
 static void open_files (void);
-static void open_group_files (void);
 static void usr_update (void);
 static void move_home (void);
 static void update_lastlog (void);
@@ -261,11 +258,6 @@ static int get_groups (char *list)
 	}
 
 	/*
-	 * Open the group files
-	 */
-	open_group_files ();
-
-	/*
 	 * So long as there is some data to be converted, strip off each
 	 * name and look it up. A mix of numerical and string values for
 	 * group identifiers is permitted.
@@ -284,7 +276,7 @@ static int get_groups (char *list)
 		 * Names starting with digits are treated as numerical GID
 		 * values, otherwise the string is looked up as is.
 		 */
-		grp = get_local_group (list);
+		grp = prefix_getgr_nam_gid (list);
 
 		/*
 		 * There must be a match, either by GID value or by
@@ -334,8 +326,6 @@ static int get_groups (char *list)
 		gr_free ((struct group *)grp);
 	} while (NULL != list);
 
-	close_group_files ();
-
 	user_groups[ngroups] = (char *) 0;
 
 	/*
@@ -346,44 +336,6 @@ static int get_groups (char *list)
 	}
 
 	return 0;
-}
-
-/*
- * get_local_group - checks if a given group name exists locally
- *
- *	get_local_group() checks if a given group name exists locally.
- *	If the name exists the group information is returned, otherwise NULL is
- *	returned.
- */
-static struct group * get_local_group(char * grp_name)
-{
-	const struct group *grp;
-	struct group *result_grp = NULL;
-	long long int gid;
-	char *endptr;
-
-	gid = strtoll (grp_name, &endptr, 10);
-	if (   ('\0' != *grp_name)
-		&& ('\0' == *endptr)
-		&& (ERANGE != errno)
-		&& (gid == (gid_t)gid)) {
-		grp = gr_locate_gid ((gid_t) gid);
-	}
-	else {
-		grp = gr_locate(grp_name);
-	}
-
-	if (grp != NULL) {
-		result_grp = __gr_dup (grp);
-		if (NULL == result_grp) {
-			fprintf (stderr,
-					_("%s: Out of memory. Cannot find group '%s'.\n"),
-					Prog, grp_name);
-			fail_exit (E_GRP_UPDATE);
-		}
-	}
-
-	return result_grp;
 }
 
 #ifdef ENABLE_SUBIDS
@@ -1523,7 +1475,50 @@ static void close_files (void)
 	}
 
 	if (Gflg || lflg) {
-		close_group_files ();
+		if (gr_close () == 0) {
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR,
+			         "failure while writing changes to %s",
+			         gr_dbname ()));
+			fail_exit (E_GRP_UPDATE);
+		}
+#ifdef SHADOWGRP
+		if (is_shadow_grp) {
+			if (sgr_close () == 0) {
+				fprintf (stderr,
+				         _("%s: failure while writing changes to %s\n"),
+				         Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR,
+				         "failure while writing changes to %s",
+				         sgr_dbname ()));
+				fail_exit (E_GRP_UPDATE);
+			}
+		}
+#endif
+#ifdef SHADOWGRP
+		if (is_shadow_grp) {
+			if (sgr_unlock () == 0) {
+				fprintf (stderr,
+				         _("%s: failed to unlock %s\n"),
+				         Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR,
+				         "failed to unlock %s",
+				         sgr_dbname ()));
+				/* continue */
+			}
+		}
+#endif
+		if (gr_unlock () == 0) {
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR,
+			         "failed to unlock %s",
+			         gr_dbname ()));
+			/* continue */
+		}
 	}
 
 	if (is_shadow_pwd) {
@@ -1593,60 +1588,6 @@ static void close_files (void)
 }
 
 /*
- * close_group_files - close all of the files that were opened
- *
- *	close_group_files() closes all of the files that were opened related
- *  with groups. This causes any modified entries to be written out.
- */
-static void close_group_files (void)
-{
-	if (gr_close () == 0) {
-		fprintf (stderr,
-					_("%s: failure while writing changes to %s\n"),
-					Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR,
-					"failure while writing changes to %s",
-					gr_dbname ()));
-		fail_exit (E_GRP_UPDATE);
-	}
-#ifdef SHADOWGRP
-	if (is_shadow_grp) {
-		if (sgr_close () == 0) {
-			fprintf (stderr,
-						_("%s: failure while writing changes to %s\n"),
-						Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR,
-						"failure while writing changes to %s",
-						sgr_dbname ()));
-			fail_exit (E_GRP_UPDATE);
-		}
-	}
-#endif
-#ifdef SHADOWGRP
-	if (is_shadow_grp) {
-		if (sgr_unlock () == 0) {
-			fprintf (stderr,
-						_("%s: failed to unlock %s\n"),
-						Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR,
-						"failed to unlock %s",
-						sgr_dbname ()));
-			/* continue */
-		}
-	}
-#endif
-	if (gr_unlock () == 0) {
-		fprintf (stderr,
-					_("%s: failed to unlock %s\n"),
-					Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR,
-					"failed to unlock %s",
-					gr_dbname ()));
-		/* continue */
-	}
-}
-
-/*
  * open_files - lock and open the password files
  *
  *	open_files() opens the two password files.
@@ -1681,7 +1622,38 @@ static void open_files (void)
 	}
 
 	if (Gflg || lflg) {
-		open_group_files ();
+		/*
+		 * Lock and open the group file. This will load all of the
+		 * group entries.
+		 */
+		if (gr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, gr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+		gr_locked = true;
+		if (gr_open (O_CREAT | O_RDWR) == 0) {
+			fprintf (stderr,
+			         _("%s: cannot open %s\n"),
+			         Prog, gr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+#ifdef SHADOWGRP
+		if (is_shadow_grp && (sgr_lock () == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, sgr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+		sgr_locked = true;
+		if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+#endif
 	}
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
@@ -1715,44 +1687,6 @@ static void open_files (void)
 		}
 	}
 #endif				/* ENABLE_SUBIDS */
-}
-
-/*
- * open_group_files - lock and open the group files
- *
- *	open_group_files() loads all of the group entries.
- */
-static void open_group_files (void)
-{
-	if (gr_lock () == 0) {
-		fprintf (stderr,
-					_("%s: cannot lock %s; try again later.\n"),
-					Prog, gr_dbname ());
-		fail_exit (E_GRP_UPDATE);
-	}
-	gr_locked = true;
-	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-					_("%s: cannot open %s\n"),
-					Prog, gr_dbname ());
-		fail_exit (E_GRP_UPDATE);
-	}
-
-#ifdef SHADOWGRP
-	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr,
-					_("%s: cannot lock %s; try again later.\n"),
-					Prog, sgr_dbname ());
-		fail_exit (E_GRP_UPDATE);
-	}
-	sgr_locked = true;
-	if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
-		fprintf (stderr,
-					_("%s: cannot open %s\n"),
-					Prog, sgr_dbname ());
-		fail_exit (E_GRP_UPDATE);
-	}
-#endif
 }
 
 /*
