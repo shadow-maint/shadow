@@ -490,9 +490,12 @@ static void print_status (const struct passwd *pw)
 		               ((long long)sp->sp_max * SCALE) / DAY,
 		               ((long long)sp->sp_warn * SCALE) / DAY,
 		               ((long long)sp->sp_inact * SCALE) / DAY);
-	} else {
+	} else if (NULL != pw->pw_passwd) {
 		(void) printf ("%s %s\n",
 		               pw->pw_name, pw_status (pw->pw_passwd));
+	} else {
+		(void) fprintf(stderr, _("%s: malformed password data obtained for user %s\n"),
+		               Prog, pw->pw_name);
 	}
 }
 
