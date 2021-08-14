@@ -142,9 +142,7 @@ static bool is_sub_gid = false;
 static bool sub_uid_locked = false;
 static bool sub_gid_locked = false;
 static uid_t sub_uid_start;	/* New subordinate uid range */
-static unsigned long sub_uid_count;
 static gid_t sub_gid_start;	/* New subordinate gid range */
-static unsigned long sub_gid_count;
 #endif				/* ENABLE_SUBIDS */
 static bool pw_locked = false;
 static bool gr_locked = false;
@@ -234,7 +232,7 @@ static void open_shadow (void);
 static void faillog_reset (uid_t);
 static void lastlog_reset (uid_t);
 static void tallylog_reset (const char *);
-static void usr_update (void);
+static void usr_update (unsigned long subuid_count, unsigned long subgid_count);
 static void create_home (void);
 static void create_mail (void);
 static void check_uid_range(int rflg, uid_t user_id);
@@ -2092,7 +2090,7 @@ static void tallylog_reset (const char *user_name)
  *	usr_update() creates the password file entries for this user
  *	and will update the group entries if required.
  */
-static void usr_update (void)
+static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 {
 	struct passwd pwent;
 	struct spwd spent;
@@ -2155,14 +2153,14 @@ static void usr_update (void)
 	}
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid &&
-	    (sub_uid_add(user_name, sub_uid_start, sub_uid_count) == 0)) {
+	    (sub_uid_add(user_name, sub_uid_start, subuid_count) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry\n"),
 		         Prog, sub_uid_dbname ());
 		fail_exit (E_SUB_UID_UPDATE);
 	}
 	if (is_sub_gid &&
-	    (sub_gid_add(user_name, sub_gid_start, sub_gid_count) == 0)) {
+	    (sub_gid_add(user_name, sub_gid_start, subgid_count) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry\n"),
 		         Prog, sub_uid_dbname ());
@@ -2624,16 +2622,16 @@ int main (int argc, char **argv)
 	}
 
 #ifdef ENABLE_SUBIDS
-	if (is_sub_uid && sub_uid_count != 0) {
-		if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) < 0) {
+	if (is_sub_uid && subuid_count != 0) {
+		if (find_new_sub_uids(&sub_uid_start, &subuid_count) < 0) {
 			fprintf (stderr,
 			         _("%s: can't create subordinate user IDs\n"),
 			         Prog);
 			fail_exit(E_SUB_UID_UPDATE);
 		}
 	}
-	if (is_sub_gid && sub_gid_count != 0) {
-		if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) < 0) {
+	if (is_sub_gid && subgid_count != 0) {
+		if (find_new_sub_gids(&sub_gid_start, &subgid_count) < 0) {
 			fprintf (stderr,
 			         _("%s: can't create subordinate group IDs\n"),
 			         Prog);
@@ -2642,7 +2640,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* ENABLE_SUBIDS */
 
-	usr_update ();
+	usr_update (subuid_count, subgid_count);
 
 	if (mflg) {
 		create_home ();
