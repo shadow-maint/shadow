@@ -90,9 +90,17 @@ $(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
 	@set -e; tmpdir=`pwd`; \
 	echo "cd $(top_srcdir)/man"; \
 	cd $(top_srcdir)/man; \
-	echo "xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(XMLFILES))"; \
-	xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(XMLFILES)); \
-	cd $$tmpdir
+	files=""; \
+	for file in $(notdir $(XMLFILES)); do \
+		if grep -q SHADOW-CONFIG-HERE $$file ; then \
+			sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $$file > $$file.out; \
+		else \
+			sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $$file > $$file.out; \
+		fi; \
+		files="$$files $$file.out"; \
+	done; \
+	itstool -d -o $$tmpdir/$(DOMAIN).po $$files; \
+	cd $$tmpdir; \
 	test ! -f $(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \
 	    sed -f remove-potcdate.sed < $(srcdir)/$(DOMAIN).pot > $(DOMAIN).1po && \
