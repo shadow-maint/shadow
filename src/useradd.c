@@ -2418,9 +2418,9 @@ int main (int argc, char **argv)
 #ifdef ENABLE_SUBIDS
 	uid_t uid_min;
 	uid_t uid_max;
-	unsigned long subuid_count;
-	unsigned long subgid_count;
 #endif
+	unsigned long subuid_count = 0;
+	unsigned long subgid_count = 0;
 
 	/*
 	 * Get my name so that I can use it to report errors.
