@@ -223,20 +223,21 @@ static /*@observer@*/const unsigned long SHA_get_salt_rounds (/*@null@*/int *pre
 		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			rounds = SHA_ROUNDS_DEFAULT;
 		}
+		else {
+			if (-1 == min_rounds) {
+				min_rounds = max_rounds;
+			}
 
-		if (-1 == min_rounds) {
-			min_rounds = max_rounds;
+			if (-1 == max_rounds) {
+				max_rounds = min_rounds;
+			}
+
+			if (min_rounds > max_rounds) {
+				max_rounds = min_rounds;
+			}
+
+			rounds = (unsigned long) shadow_random (min_rounds, max_rounds);
 		}
-
-		if (-1 == max_rounds) {
-			max_rounds = min_rounds;
-		}
-
-		if (min_rounds > max_rounds) {
-			max_rounds = min_rounds;
-		}
-
-		rounds = (unsigned long) shadow_random (min_rounds, max_rounds);
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
 	} else {
