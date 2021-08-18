@@ -370,7 +370,6 @@ static struct ulong_range getulong_range(const char *str)
 	result.last = (unsigned long int)last;
 out:
 	return result;
-	
 }
 
 struct ulong_range_list_entry {
@@ -949,7 +948,7 @@ static void update_gshadow (void)
 
 		changed = false;
 
-		/* 
+		/*
 		 * Update the group entry to reflect the changes.
 		 */
 		if (sgr_update (nsgrp) == 0) {
@@ -1281,7 +1280,7 @@ static void process_flags (int argc, char **argv)
 	if (!gflg) {
 		user_newgid = user_gid;
 	}
-	if(prefix[0]) {
+	if (prefix[0]) {
 		size_t len = strlen(prefix) + strlen(user_home) + 2;
 		int wlen;
 		prefix_user_home = xmalloc(len);
@@ -2247,7 +2246,7 @@ int main (int argc, char **argv)
 			if (sub_uid_remove(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
 					_("%s: failed to remove uid range %lu-%lu from '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last, 
+					Prog, ptr->range.first, ptr->range.last,
 					sub_uid_dbname ());
 				fail_exit (E_SUB_UID_UPDATE);
 			}
@@ -2260,7 +2259,7 @@ int main (int argc, char **argv)
 			if (sub_uid_add(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
 					_("%s: failed to add uid range %lu-%lu to '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last, 
+					Prog, ptr->range.first, ptr->range.last,
 					sub_uid_dbname ());
 				fail_exit (E_SUB_UID_UPDATE);
 			}
@@ -2273,7 +2272,7 @@ int main (int argc, char **argv)
 			if (sub_gid_remove(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
 					_("%s: failed to remove gid range %lu-%lu from '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last, 
+					Prog, ptr->range.first, ptr->range.last,
 					sub_gid_dbname ());
 				fail_exit (E_SUB_GID_UPDATE);
 			}
@@ -2286,7 +2285,7 @@ int main (int argc, char **argv)
 			if (sub_gid_add(user_name, ptr->range.first, count) == 0) {
 				fprintf (stderr,
 					_("%s: failed to add gid range %lu-%lu to '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last, 
+					Prog, ptr->range.first, ptr->range.last,
 					sub_gid_dbname ());
 				fail_exit (E_SUB_GID_UPDATE);
 			}

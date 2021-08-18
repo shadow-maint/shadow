@@ -360,7 +360,7 @@ static void get_defaults (void)
 	char buf[1024];
 	char *cp;
 
-	if(prefix[0]) {
+	if (prefix[0]) {
 		size_t len;
 		int wlen;
 
@@ -460,8 +460,8 @@ static void get_defaults (void)
 			if ('\0' == *cp) {
 				cp = SKEL_DIR;	/* XXX warning: const */
 			}
-			
-			if(prefix[0]) {
+
+			if (prefix[0]) {
 				size_t len;
 				int wlen;
 				char* _def_template; /* avoid const warning */
@@ -490,7 +490,7 @@ static void get_defaults (void)
 	}
 	(void) fclose (fp);
      getdef_err:
-	if(prefix[0]) {
+	if (prefix[0]) {
 		free(default_file);
 	}
 }
@@ -551,7 +551,7 @@ static int set_defaults (void)
 	wlen = snprintf(new_file, len, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
 	assert (wlen <= (int) len -1);
 
-	if(prefix[0]) {
+	if (prefix[0]) {
 		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
 		default_file = malloc(len);
 		if (default_file == NULL) {
@@ -722,7 +722,7 @@ static int set_defaults (void)
 	ret = 0;
     setdef_err:
 	free(new_file);
-	if(prefix[0]) {
+	if (prefix[0]) {
 		free(default_file);
 	}
 
@@ -1049,7 +1049,7 @@ static void grp_update (void)
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
-		/* 
+		/*
 		 * Add the username to the list of group members and
 		 * update the group entry to reflect the change.
 		 */
@@ -1124,7 +1124,7 @@ static void grp_update (void)
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
-		/* 
+		/*
 		 * Add the username to the list of group members and
 		 * update the group entry to reflect the change.
 		 */
@@ -1534,7 +1534,7 @@ static void process_flags (int argc, char **argv)
 
 			user_home = uh;
 		}
-		if(prefix[0]) {
+		if (prefix[0]) {
 			size_t len = strlen(prefix) + strlen(user_home) + 2;
 			int wlen;
 			char* _prefix_user_home; /* to avoid const warning */
@@ -2331,7 +2331,7 @@ static void create_mail (void)
 			spool = "/var/mail";
 		}
 		file = alloca (strlen (prefix) + strlen (spool) + strlen (user_name) + 2);
-		if(prefix[0])
+		if (prefix[0])
 			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
 		else
 			sprintf (file, "%s/%s", spool, user_name);
@@ -2385,18 +2385,18 @@ static void check_uid_range(int rflg, uid_t user_id)
 {
 	uid_t uid_min ;
 	uid_t uid_max ;
-	if(rflg){
+	if (rflg) {
 		uid_min = (uid_t)getdef_ulong("SYS_UID_MIN",101UL);
 		uid_max = (uid_t)getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
-		if(uid_min <= uid_max){
-			if(user_id < uid_min || user_id >uid_max)
+		if (uid_min <= uid_max) {
+			if (user_id < uid_min || user_id >uid_max)
 				fprintf(stderr, _("%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
 		}
 	}else{
 		uid_min = (uid_t)getdef_ulong("UID_MIN", 1000UL);
 		uid_max = (uid_t)getdef_ulong("UID_MAX", 6000UL);
-		if(uid_min <= uid_max){
-			if(user_id < uid_min || user_id >uid_max)
+		if (uid_min <= uid_max) {
+			if (user_id < uid_min || user_id >uid_max)
 				fprintf(stderr, _("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
 		}
 	}
@@ -2594,7 +2594,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if(uflg)
+	if (uflg)
 	   check_uid_range(rflg,user_id);
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {

@@ -91,7 +91,7 @@ struct passwd *sgetpwent (const char *buf)
 	}
 
 	/* something at the end, columns over shot */
-	if( cp != NULL ) {
+	if ( cp != NULL ) {
 		return( NULL );
 	}
 

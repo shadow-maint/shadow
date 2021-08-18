@@ -127,7 +127,7 @@ int pw_auth (const char *cipher,
 #ifdef	SKEY
 	/*
 	 * If the user has an S/KEY entry show them the pertinent info
-	 * and then we can try validating the created cyphertext and the SKEY.
+	 * and then we can try validating the created ciphertext and the SKEY.
 	 * If there is no SKEY information we default to not using SKEY.
 	 */
 

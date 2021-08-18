@@ -37,4 +37,3 @@ New ideas to add to this list are welcome, too.  --marekm
   per-user configuration, to be executed with run-parts. Some hooks should
   be executed at package install time for existing users, likewise for
   package removal and possibly modification.  (Debian Bug#36019)
-

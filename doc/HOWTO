@@ -1311,7 +1311,7 @@
 
   This means that fred's password is valid, it was last changed on
   03/04/96, it can be changed at any time, it expires after 60 days,
-  fred will not be warned, and and the account won't be disabled when
+  fred will not be warned, and the account won't be disabled when
   the password expires.
 
   This simply means that if fred logs in after the password expires, he
@@ -1487,7 +1487,7 @@
 
   If a user logs into a line that is listed in /etc/dialups, and his
   shell is listed in the file /etc/d_passwd he will be allowed access
-  only by suppling the correct password.
+  only by supplying the correct password.
 
   Another useful purpose for using dial-up passwords might be to setup a
   line that only allows a certain type of connect (perhaps a PPP or UUCP

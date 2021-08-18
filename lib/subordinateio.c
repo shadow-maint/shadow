@@ -53,7 +53,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct subordinate_range *rangeent = ent;
-	
+
 	free ((void *)(rangeent->owner));
 	free (rangeent);
 }
@@ -296,7 +296,7 @@ static bool have_range(struct commonio_db *db,
 	end = start + count - 1;
 	range = find_range (db, owner, start);
 	while (range) {
-		unsigned long last; 
+		unsigned long last;
 
 		last = range->start + range->count - 1;
 		if (last >= (start + count - 1))

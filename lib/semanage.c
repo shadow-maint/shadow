@@ -331,7 +331,7 @@ int del_seuser (const char *login_name)
 
 	if (0 == exists) {
 		fprintf (shadow_logfd,
-		         _("Login mapping for %s is not defined, OK if default mapping was used\n"), 
+		         _("Login mapping for %s is not defined, OK if default mapping was used\n"),
 		         login_name);
 		ret = 0;  /* probably default mapping */
 		goto done;
@@ -346,7 +346,7 @@ int del_seuser (const char *login_name)
 
 	if (0 == exists) {
 		fprintf (shadow_logfd,
-		         _("Login mapping for %s is defined in policy, cannot be deleted\n"), 
+		         _("Login mapping for %s is defined in policy, cannot be deleted\n"),
 		         login_name);
 		ret = 0; /* Login mapping defined in policy can't be deleted */
 		goto done;

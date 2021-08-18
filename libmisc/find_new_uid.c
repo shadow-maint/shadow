@@ -157,7 +157,7 @@ static int check_uid(const uid_t uid,
  * [UID_MIN:UID_MAX] range.
  * This ID should be higher than all the used UID, but if not possible,
  * the lowest unused ID in the range will be returned.
- * 
+ *
  * Return 0 on success, -1 if no unused UIDs are available.
  */
 int find_new_uid(bool sys_user,

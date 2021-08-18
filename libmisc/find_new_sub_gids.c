@@ -43,7 +43,7 @@
  *
  * If successful, find_new_sub_gids provides a range of unused
  * user IDs in the [SUB_GID_MIN:SUB_GID_MAX] range.
- * 
+ *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
 int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)

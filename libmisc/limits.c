@@ -404,7 +404,7 @@ static bool user_in_group (const char *uname, const char *gname)
 {
 	struct group *groupdata;
 
-	if (uname == NULL || gname == NULL){ 
+	if (uname == NULL || gname == NULL) {
 		return false;
 	}
 

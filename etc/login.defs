@@ -465,7 +465,6 @@ USERGROUPS_ENAB yes
 # Set to "yes" to prevent for all accounts
 # Set to "superuser" to prevent for UID 0 / root (default)
 # Set to "no" to not prevent for any account (dangerous, historical default)
-
 PREVENT_NO_AUTH superuser
 
 #

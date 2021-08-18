@@ -3,7 +3,7 @@
 # This is the current (still incomplete) list of platforms this
 # package has been verified to work on.  Additions (preferably
 # in the format as described below) are welcome.  Thanks!
-# 
+#
 # V: last version reported to work
 # H: host type
 # L: Linux libc version

@@ -15,7 +15,7 @@ shadow-4.1.5.1 -> shadow-4.2					UNRELEASED
 
 - su
   * When su receives a signal (SIGTERM, or SIGINT/SIGQUIT in non
-    interactive mode), kill the child process group, rather than just the 
+    interactive mode), kill the child process group, rather than just the
     immediate child.
   * Fix segmentation faults for users without a proper home or shell in
     their passwd entries.
@@ -622,7 +622,7 @@ shadow-4.0.18.2 -> shadow-4.1.0						09-12-2007
 - Add support for uClibc with no l64a().
 - userdel, usermod: Fix infinite loop caused by erroneous group file
   containing two entries with the same name. (The fix strategy differs
-  from 
+  from
   (https://bugzilla.redhat.com/show_bug.cgi?id=240915)
 - userdel: Abort if an error is detected while updating the passwd or group
   databases. The passwd or group files will not be written.
@@ -1001,9 +1001,9 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
 
 *** general:
-- newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and always 
+- newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and always
   close PAM session,
-- fixed configure.in: really enable shadow group support by default (pointed by 
+- fixed configure.in: really enable shadow group support by default (pointed by
   Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>),
 - login.defs: removed handle QMAIL_DIR variable,
 - login: allow regular user to login on read-only root file system (not only for root)
@@ -1080,7 +1080,7 @@ shadow-4.0.10 -> shadow-4.0.11						18-07-2005
 - S/Key support is back,
 - usermod: added -a option. This flag can only be used in conjunction with the -G
   option. It cause usermod to append user to the current supplementary group list.
-  (patch by Peter Vrabec <pvrabec@redhat.com>) 
+  (patch by Peter Vrabec <pvrabec@redhat.com>)
 - chage: added missing \n in error messages,
 - useradd, groupadd: change -O option to -K and document it in man page,
 - su, sulogin, login: fixed erroneous warning messages when used with PAM about some
@@ -1130,7 +1130,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   http://bugs.debian.org/53570 http://bugs.debian.org/195048 http://bugs.debian.org/211884
 - login: made login's -f option also able to use the username after -- if none
   was passed as it's optarg
-  http://bugs.debian.org/53702 
+  http://bugs.debian.org/53702
 - login: check for hushed login and pass PAM_SILENT if true,
   http://bugs.debian.org/48002
 - login: fixed username on succesful login (was using the normal username,
@@ -1208,7 +1208,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 -- new: chage.1, chpasswd.8, expiry.1, faillog.5, faillog.8, getspnam.3,
    logoutd.8, porttime.5, pwck.8, shadow.3, shadowconfig.8, su.1,
 - passwd(1): fix #160477 Debian bug: improve -S output description,
-- newgrp(1): fix #251926, #166173, #113191 Debian bugs: explain why editing /etc/group   
+- newgrp(1): fix #251926, #166173, #113191 Debian bugs: explain why editing /etc/group
   (without gshadow) doesn't permit to use newgrp,
 - newgrp(1): newgrp uses /bin/sh (not bash),
 - faillog(8): updated after rewritten faillog command for use getopt_long(),
@@ -1238,7 +1238,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 - chpasswd:
 -- switch chpasswd to use getopt_long() and adds a --md5 option
    (by Ian Gulliver <ian@penguinhosting.net>),
--- rewritten chpasswd(8) man page.  
+-- rewritten chpasswd(8) man page.
 
 shadow-4.0.5 -> shadow-4.0.6						08-11-2004
 
@@ -1309,7 +1309,7 @@ shadow-4.0.4 => shadow-4.0.4.1						14-01-2004
 - bug fixes in automake files for generate correct tar ball on "make dist":
   added missing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
-shadow-4.0.3 => shadow-4.0.4						14-01-2004	
+shadow-4.0.3 => shadow-4.0.4						14-01-2004
 
 *** general:
 - added missing information about -f options in groupadd usage message
@@ -1408,7 +1408,7 @@ shadow-4.0.0 => shadow-4.0.1
 - fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>),
 - implemented functions for better reloading the nscd cache (per NSS map)
   (Thorsten Kukuk <kukuk@suse.de>),
-- fixed warnings "not used but defined" on compile using gcc 3.0.x 
+- fixed warnings "not used but defined" on compile using gcc 3.0.x
   (bulletpr00ph <bullet@users.sourceforge.net>),
 - added ja, ko translations found in SuSE,
 - added symlinks: newgrp -> sg, vipw -> vigr,
@@ -1416,7 +1416,7 @@ shadow-4.0.0 => shadow-4.0.1
 - added sg(1) man page as roff .so link to newgrp(1),
 - installed fix for SEGV when using pwck -s on /etc/passwd file with
   empty lines in it.
-  
+
 shadow-20001016 => shadow-4.0.0						 06-01-2002
 
 - fix bug discovered and fixed by Marcel Ritter
@@ -1466,7 +1466,7 @@ shadow-20000902 => shadow-20001012
   overwrite previously existing groups in adduser,
 - added PAM support for chage (bind to "chage" PAM config file) also
   added PAM support for all other small tools like chpasswd, groupadd,
-  groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common 
+  groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common
   "shadow" PAM config file) - this modifications mainly based on
   modifications prepared by Janek Rękojarski <baggins@pld.org.pl>,
 - many small fixes and improvements in automake (mow "make dist"

@@ -1046,7 +1046,7 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
-#ifdef WITH_SELINUX             
+#ifdef WITH_SELINUX
 		                         "fhrR:P:Z",
 #else				/* !WITH_SELINUX */
 		                         "fhrR:P:",
@@ -1067,7 +1067,7 @@ int main (int argc, char **argv)
 				break;
 			case 'P': /* no-op, handled in process_prefix_flag () */
 				break;
-#ifdef WITH_SELINUX             
+#ifdef WITH_SELINUX
 			case 'Z':
 				if (prefix[0]) {
 					fprintf (stderr,
@@ -1168,9 +1168,9 @@ int main (int argc, char **argv)
 		}
 		user_id = pwd->pw_uid;
 		user_gid = pwd->pw_gid;
-		
-		if(prefix[0]) {
-		
+
+		if (prefix[0]) {
+
 			size_t len = strlen(prefix) + strlen(pwd->pw_dir) + 2;
 			int wlen;
 			user_home = xmalloc(len);
@@ -1347,7 +1347,7 @@ int main (int argc, char **argv)
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
 	 * the entry from /etc/passwd.
 	 */
-	if(prefix[0] == '\0')
+	if (prefix[0] == '\0')
 		user_cancel (user_name);
 	close_files ();
 

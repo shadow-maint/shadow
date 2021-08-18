@@ -17,7 +17,7 @@ int run_part (char *script_path, char *name, char *action)
 	char *args[] = { script_path, NULL };
 
 	pid=fork();
-	if (pid==-1){
+	if (pid==-1) {
 		perror ("Could not fork");
 		return 1;
 	}

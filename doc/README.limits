@@ -63,4 +63,3 @@ To completely disable limits for a user, a single dash (-) will do.
 Also, please note that all limit settings are set PER LOGIN.  They are
 not global, nor are they permanent.  Perhaps global limits will come, but
 for now this will have to do ;)
-

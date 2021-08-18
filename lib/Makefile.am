@@ -1,7 +1,7 @@
 
 AUTOMAKE_OPTIONS = 1.0 foreign
 
-DEFS = 
+DEFS =
 
 noinst_LTLIBRARIES = libshadow.la
 

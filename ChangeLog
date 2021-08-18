@@ -285,7 +285,7 @@
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Check early if /etc/subuid (/etc/subgid) exists
-	when option -v/-V (-w/-W) are provided. 
+	when option -v/-V (-w/-W) are provided.
 
 2013-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -662,8 +662,8 @@
 
 	* configure.in: Prepare for next point release 4.2.
 	* if using the static char* for pw_dir, strdup it so
-	  pw_free() can be used. (Closes: Debian#691459, alioth#313957) 
-	* Kill the child process group, rather than just the 
+	  pw_free() can be used. (Closes: Debian#691459, alioth#313957)
+	* Kill the child process group, rather than just the
 	  immediate child; this is needed now that su no
 	  longer starts a controlling terminal when not running an
 	  interactive shell (closes: Debian#713979)
@@ -890,7 +890,7 @@
 
 	* po/pt.po: Updated to 557t.
 
-2012-01-19  Holger Wansing  <linux@wansing-online.de> 
+2012-01-19  Holger Wansing  <linux@wansing-online.de>
 
 	* po/de.po: Updated to 557t.
 
@@ -1477,8 +1477,8 @@
 	* NEWS, src/chpasswd.c: Create a shadow entry if the password is
 	set to 'x' in passwd and there are no entry in shadow for the
 	user.
-	* NEWS, src/chgpasswd.c: Create a gshadow entry if the password is 
-	set to 'x' in group and there are no entry in gshadow for the 
+	* NEWS, src/chgpasswd.c: Create a gshadow entry if the password is
+	set to 'x' in group and there are no entry in gshadow for the
 	group.
 
 2011-07-28  Nicolas François  <nicolas.francois@centraliens.net>
@@ -1550,7 +1550,7 @@
 2011-07-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Fail in case of
-	invalid configuration. 
+	invalid configuration.
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Updated
 	comments.
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Be more strict
@@ -1787,7 +1787,7 @@
 	  man/login.defs.d/DEFAULT_HOME.xml,
 	  man/login.defs.d/LOGIN_RETRIES.xml,
 	  man/login.defs.d/MD5_CRYPT_ENAB.xml,
-	  man/login.defs.d/PORTTIME_CHECKS_ENAB.xml, 
+	  man/login.defs.d/PORTTIME_CHECKS_ENAB.xml,
 	  man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml:
 	  Fix typos
 	* man/po/de.po: German translation of manpages completed
@@ -1834,7 +1834,7 @@
 
 2011-03-30  YunQiang Su  <wzssyqa@gmail.com>
 
-	* man/po/zh_CN.po: convert Simplified Chinese translation 
+	* man/po/zh_CN.po: convert Simplified Chinese translation
 	  of manpages to gettext
 	* po/zh_CN.po: Simplified Chinese translation completed
 
@@ -1973,7 +1973,7 @@
 	boolean. safe_system last argument is a boolean.
 	* libmisc/system.c: Check return value of dup2.
 	* libmisc/system.c: Do not check *printf/*puts return value.
-	* libmisc/system.c: Do not check execve return value. 
+	* libmisc/system.c: Do not check execve return value.
 	* libmisc/salt.c: Do not check *printf/*puts return value.
 	* libmisc/loginprompt.c: Do not check gethostname return value.
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Do not check
@@ -2126,7 +2126,7 @@
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: spool is a constant string.
-	* src/useradd.c: Set the new copy_tree's paramater 'copy_root' to false 
+	* src/useradd.c: Set the new copy_tree's paramater 'copy_root' to false
 
 2010-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -4975,7 +4975,7 @@
 	<sgrubb@redhat.com>
 	* src/groupadd.c: Log to audit with type AUDIT_ADD_GROUP instead
 	of AUDIT_USER_CHAUTHTOK.
-	* src/groupdel.c: Log to audit with type AUDIT_DEL_GROUP instead 
+	* src/groupdel.c: Log to audit with type AUDIT_DEL_GROUP instead
 	of AUDIT_USER_CHAUTHTOK.
 	* src/useradd.c: Log to audit with type AUDIT_ADD_USER /
 	AUDIT_ADD_GROUP / AUDIT_USYS_CONFIG instead of
@@ -5231,7 +5231,7 @@
 	* NEWS, src/gpasswd.c: Use getopt_long instead of getopt. Added
 	support for long options --add (-a), --delete (-d),
 	--remove-password (-r), --restrict (-R), --administrators (-A),
-	and --members (-M) 
+	and --members (-M)
 	* man/gpasswd.1.xml: Document the new long options.
 	* src/gpasswd.c: The sgrp structure is only used if SHADOWGRP is
 	defined.
@@ -7420,7 +7420,7 @@
 	to mimic useradd's behavior choices of UID and GID.
 	* src/newusers.c: Reuse the generic find_new_uid() and
 	find_new_gid() functions. This permits to respect the
-	UID_MIN/UID_MAX and GID_MIN/GID_MAX variables, should 
+	UID_MIN/UID_MAX and GID_MIN/GID_MAX variables, should
 	* src/newusers.c: Check if the user or group exist using the
 	external databases (with the libc getpwnam/getgrnam functions).
 	Refuse to update an user which exist in an external database but
@@ -9217,7 +9217,7 @@
 	Debian's patch 202_it_man_uses_gettext. Thanks to Giuseppe
 	Sacco who contributed the Italian translation.
 	* man/de/de.po: (nearly) complete German translation of man pages
-	Imported from Debian's patch 203_de-man-update. Thanks to 
+	Imported from Debian's patch 203_de-man-update. Thanks to
 	Simon Brandmair
 	* src/usermod.c: Clarify the online help of usermod for "-a"
 	Imported from Debian's patch 402-clarify_usermod_usage

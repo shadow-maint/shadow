@@ -403,11 +403,11 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 	file_len = strlen(db->filename) + 11;/* %lu max size */
 	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
 	file = (char*)malloc(file_len);
-	if(file == NULL) {
+	if (file == NULL) {
 		goto cleanup_ENOMEM;
 	}
 	lock = (char*)malloc(lock_file_len);
-	if(lock == NULL) {
+	if (lock == NULL) {
 		goto cleanup_ENOMEM;
 	}
 	snprintf (file, file_len, "%s.%lu",
@@ -419,9 +419,9 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 		err = 1;
 	}
 cleanup_ENOMEM:
-	if(file)
+	if (file)
 		free(file);
-	if(lock)
+	if (lock)
 		free(lock);
 	return err;
 }

@@ -515,7 +515,7 @@ int main (int argc, char **argv)
 		newpwd = cp;
 
 #ifdef USE_PAM
-		if (use_pam){
+		if (use_pam) {
 			if (do_pam_passwd_non_interactive ("chpasswd", name, newpwd) != 0) {
 				fprintf (stderr,
 				         _("%s: (line %d, user %s) password not changed\n"),
@@ -633,7 +633,7 @@ int main (int argc, char **argv)
 			newpw.pw_passwd = cp;
 		}
 
-		/* 
+		/*
 		 * The updated password file entry is then put back and will
 		 * be written to the password file later, after all the
 		 * other entries have been updated as well.

@@ -42,7 +42,7 @@
 #include <lastlog.h>
 #include "prototypes.h"
 
-/* 
+/*
  * dolastlog - create lastlog entry
  *
  *	A "last login" entry is created for the user being logged in.  The
