@@ -6,7 +6,7 @@ You should run it on a chroot, or on a secured dedicated system.
 
 To test a Debian system:
 	$ mkdir sid-chroot
-	$ sudo debootstrap sid sid-chroot/ http://ftp.fr.debian.org/debian/
+	$ sudo debootstrap sid sid-chroot/ http://deb.debian.org/debian/
 edit or copy a sources.list
 	$ sudo cp /etc/apt/sources.list sid-chroot/etc/apt/
 edit or copy a resolv.conf
@@ -17,5 +17,3 @@ edit or copy a resolv.conf
 	# aptitude update
 	# aptitude install expect
 	# cd /dev ; mknod --mode=666 /dev/ptmx c 5 2
-
-
