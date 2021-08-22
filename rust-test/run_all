@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+export LC_ALL=C
+unset LANG
+unset LANGUAGE
+. common/config.sh
+. common/test_run
+
+s=$(lxc-info -qsHn shadow-test)
+if [ $? -ne 0 ] || [ "$s" != "RUNNING" ]; then
+    echo "please run setup-for-tests.sh"
+    exit 1
+fi
+
+USE_PAM="yes"
+FAILURE_TESTS="yes"
+
+succeeded=0
+failed=0
+failed_tests=""
+
+echo "+: test passed"
+echo "-: test failed"
+
+# Empty the complete log.
+> testsuite.log
+
+lxc-attach -n shadow-test -- sh -c "cd $CONTAINER_GIT_TOP/rust-test; ./testrun.sh ./passwd/22_passwd_usage/passwd.test"
+record_test_result $? ./passwd/22_passwd_usage/passwd.test
+
+echo
+echo "$succeeded test(s) passed"
+echo "$failed test(s) failed"
+echo "log written in 'testsuite.log'"
+if [ "$failed" != "0" ]
+then
+	echo "the following tests failed:"
+	echo $failed_tests
+fi
+

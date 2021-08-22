@@ -1,0 +1,40 @@
+run_test()
+{
+    ret=0
+	[ -f RUN_TEST.STOP ] && exit 1
+
+	if $1 > $1.log
+	then
+		echo -n "+"
+	else
+		ret=1
+		echo -n "-"
+	fi
+	cat $1.log >> testsuite.log
+	[ -f /etc/passwd.lock ] && echo $1 /etc/passwd.lock || true
+	[ -f /etc/group.lock ] && echo $1 /etc/group.lock || true
+	[ -f /etc/shadow.lock ] && echo $1 /etc/shadow.lock || true
+	[ -f /etc/gshadow.lock ] && echo $1 /etc/gshadow.lock || true
+	if [ "$(stat -c"%G" /etc/shadow)" != "shadow" ]
+	then
+		echo $1
+		ls -l /etc/shadow
+		chgrp shadow /etc/shadow
+	fi
+	if [ -d /nonexistent ]
+	then
+		echo $1 /nonexistent
+		rmdir /nonexistent
+	fi
+    return $ret
+}
+
+record_test_result()
+{
+    if [ $1 -eq 0 ]; then
+        succeeded=$((succeedd + 1))
+    else
+        failed=$((failed + 1))
+        failed_tests="${failed_tests} $2"
+    fi
+}

@@ -15,8 +15,6 @@ const E_SUCCESS: i32 = 0; /* success */
 const E_NOPERM: i32 = 1; /* permission denied */
 const E_USAGE: i32 = 2; /* invalid combination of options */
 const E_FAILURE: i32 = 3; /* unexpected failure, nothing done */
-const E_MISSING: i32 = 4; /* unexpected failure, passwd file missing */
-const E_PWDBUSY: i32 = 5; /* passwd file busy, try again later */
 const E_BAD_ARG: i32 = 6; /* invalid argument to option */
 
 #[derive(Clap, Debug)]
