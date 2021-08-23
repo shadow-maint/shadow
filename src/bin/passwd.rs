@@ -60,6 +60,18 @@ struct Opts {
     login: Option<String>,
 }
 
+struct Shadow_entry {
+    sp_namp: String, // Login name
+    sp_pwdp: String, // Hashed passphrase
+    sp_lstchg: i64,  // Date of last change
+    sp_min: i64,     // Minimum number of days between changes
+    sp_max: i64,     // Maximum number of days between changes
+    sp_warn: i64,    // Number of days to warn user to change the password
+    sp_inact: i64,   // Number of days the account may be inactive
+    sp_expire: i64,  // Number of days since 1970-01-01 until account expires
+    sp_flag: u64,    // Reserved
+}
+
 fn do_chroot(newroot: &Path) -> anyhow::Result<()> {
     if !newroot.is_absolute() {
         bail!("{:?} is not an absolute path", newroot)
