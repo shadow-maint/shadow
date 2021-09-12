@@ -2,10 +2,10 @@ Shadow SITES
 ============
 
 Homepage
-	http://github.com/shadow-maint/shadow
+	https://github.com/shadow-maint/shadow
 
 Issue tracker
-	http://github.com/shadow-maint/shadow/issues
+	https://github.com/shadow-maint/shadow/issues
 
 Releases
 	https://github.com/shadow-maint/shadow/releases
@@ -15,19 +15,19 @@ Mailing lists
 	commit list: pkg-shadow-commits@alioth-lists.debian.net
 
 Mailing lists subscription
-	http://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-devel
-	http://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-commits
+	https://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-devel
+	https://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-commits
 
 Mailing lists archives:
-	http://alioth-lists.debian.net/pipermail/pkg-shadow-devel/
-	http://alioth-lists.debian.net/pipermail/pkg-shadow-commits/
+	https://alioth-lists.debian.net/pipermail/pkg-shadow-devel/
+	https://alioth-lists.debian.net/pipermail/pkg-shadow-commits/
 
 S/Key support:
 	Shadow can be built with S/Key support using the S/Key package from:
 
 	http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libskey/
 	or
-	http://gentoo.osuosl.org/distfiles/skey-1.1.5.tar.bz2
+	https://gentoo.osuosl.org/distfiles/skey-1.1.5.tar.bz2
 
 Authors and contributors
 ========================
