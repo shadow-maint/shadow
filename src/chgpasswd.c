@@ -593,7 +593,7 @@ int main (int argc, char **argv)
 			newgr.gr_passwd = cp;
 		}
 
-		/* 
+		/*
 		 * The updated group file entry is then put back and will
 		 * be written to the group file later, after all the
 		 * other entries have been updated as well.

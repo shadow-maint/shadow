@@ -277,7 +277,7 @@ static void process_flags (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	/* 
+	/*
 	 * The remaining arguments will be processed one by one and executed
 	 * by this command. The name is the last argument if it does not
 	 * begin with a "-", otherwise the name is determined from the
@@ -392,7 +392,7 @@ static void check_perms (const struct passwd *pw)
 	/*
 	 * Non-privileged users are optionally authenticated (must enter the
 	 * password of the user whose information is being changed) before
-	 * any changes can be made. Idea from util-linux chfn/chsh. 
+	 * any changes can be made. Idea from util-linux chfn/chsh.
 	 * --marekm
 	 */
 	if (!amroot && getdef_bool ("CHFN_AUTH")) {

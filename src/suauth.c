@@ -50,7 +50,7 @@
 
 #ifdef SU_ACCESS
 
-/* Really, I could do with a few const char's here defining all the 
+/* Really, I could do with a few const char's here defining all the
  * strings output to the user or the syslog. -- chris
  */
 static int applies (const char *, char *);

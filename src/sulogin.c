@@ -211,7 +211,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		/*
 		 * XXX - can't enter single user mode if root password is
 		 * empty.  I think this doesn't happen very often :-). But
-		 * it will work with standard getpass() (no NULL on EOF). 
+		 * it will work with standard getpass() (no NULL on EOF).
 		 * --marekm
 		 */
 		if ((NULL == cp) || ('\0' == *cp)) {

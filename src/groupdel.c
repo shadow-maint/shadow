@@ -358,7 +358,7 @@ static void process_flags (int argc, char **argv)
  * main - groupdel command
  *
  *	The syntax of the groupdel command is
- *	
+ *
  *	groupdel group
  *
  *	The named group will be deleted.

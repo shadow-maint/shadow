@@ -198,7 +198,7 @@ int main (int argc, char **argv)
 	 */
 	while (true) {
 
-		/* 
+		/*
 		 * Attempt to re-open the utmpx/utmp file. The file is only
 		 * open while it is being used.
 		 */
