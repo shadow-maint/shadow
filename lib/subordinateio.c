@@ -53,7 +53,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct subordinate_range *rangeent = ent;
-	
+
 	free ((void *)(rangeent->owner));
 	free (rangeent);
 }
@@ -224,7 +224,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
         /* Get UID of the username we are looking for */
         pwd = getpwnam(owner);
         if (NULL == pwd) {
-                /* Username not defined in /etc/passwd, or error occured during lookup */
+                /* Username not defined in /etc/passwd, or error occurred during lookup */
                 return NULL;
         }
         owner_uid = pwd->pw_uid;
@@ -296,7 +296,7 @@ static bool have_range(struct commonio_db *db,
 	end = start + count - 1;
 	range = find_range (db, owner, start);
 	while (range) {
-		unsigned long last; 
+		unsigned long last;
 
 		last = range->start + range->count - 1;
 		if (last >= (start + count - 1))
@@ -847,7 +847,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	} else {
 		struct passwd *pwd = getpwnam(owner);
 		if (NULL == pwd) {
-			/* Username not defined in /etc/passwd, or error occured during lookup */
+			/* Username not defined in /etc/passwd, or error occurred during lookup */
 			free(*uids);
 			*uids = NULL;
 			return -1;

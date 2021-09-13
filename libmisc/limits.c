@@ -202,7 +202,7 @@ static int check_logins (const char *name, const char *maxlogins)
 	return 0;
 }
 
-/* Function setup_user_limits - checks/set limits for the curent login
+/* Function setup_user_limits - checks/set limits for the current login
  * Original idea from Joel Katz's lshell. Ported to shadow-login
  * by Cristian Gafton - gafton@sorosis.ro
  *
@@ -404,7 +404,7 @@ static bool user_in_group (const char *uname, const char *gname)
 {
 	struct group *groupdata;
 
-	if (uname == NULL || gname == NULL){ 
+	if (uname == NULL || gname == NULL) {
 		return false;
 	}
 

@@ -103,7 +103,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 		(void) fflush (stdout);
 	}
 
-	/* 
+	/*
 	 * Read the user's response.  The trailing newline will be
 	 * removed.
 	 */

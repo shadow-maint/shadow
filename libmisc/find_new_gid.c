@@ -157,7 +157,7 @@ static int check_gid (const gid_t gid,
  * [GID_MIN:GID_MAX] range.
  * This ID should be higher than all the used GID, but if not possible,
  * the lowest unused ID in the range will be returned.
- * 
+ *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
 int find_new_gid (bool sys_group,

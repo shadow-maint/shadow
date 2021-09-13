@@ -4,14 +4,14 @@
 ** --marekm
 **
 ** 02/26/96
-** modified to call shadow utils (useradd,chage,passwd) on shadowed 
+** modified to call shadow utils (useradd,chage,passwd) on shadowed
 ** systems - Cristian Gafton, gafton@sorosis.ro
 **
 ** 6/27/95
 ** shadow-adduser 1.4:
 **
-** now it copies the /etc/skel dir into the person's dir, 
-** makes the mail folders, changed some defaults and made a 'make 
+** now it copies the /etc/skel dir into the person's dir,
+** makes the mail folders, changed some defaults and made a 'make
 ** install' just for the hell of it.
 **
 ** Greg Gallagher
@@ -19,20 +19,20 @@
 **
 ** 1/28/95
 ** shadow-adduser 1.3:
-** 
-** Basically a bug-fix on my additions in 1.2.  Thanks to Terry Stewart 
+**
+** Basically a bug-fix on my additions in 1.2.  Thanks to Terry Stewart
 ** (stew@texas.net) for pointing out one of the many idiotic bugs I introduced.
 ** It was such a stupid bug that I would have never seen it myself.
 **
 **                                Brandon
 *****
 ** 01/27/95
-** 
+**
 ** shadow-adduser 1.2:
 ** I took the C source from adduser-shadow (credits are below) and made
 ** it a little more worthwhile.  Many small changes... Here's
 ** the ones I can remember:
-** 
+**
 ** Removed support for non-shadowed systems (if you don't have shadow,
 **     use the original adduser, don't get this shadow version!)
 ** Added support for the correct /etc/shadow fields (Min days before
@@ -56,7 +56,7 @@
 **                               Brandon
 **                                  photon@usis.com
 **
-***** 
+*****
 ** adduser 1.0: add a new user account (For systems not using shadow)
 ** With a nice little interface and a will to do all the work for you.
 **
@@ -119,14 +119,14 @@
 
 void main()
 {
-	char foo[32];			
+	char foo[32];
 	char uname[9],person[32],dir[32],shell[32];
 	unsigned int group,min_pass,max_pass,warn_pass,user_die;
 	/* the group and uid of the new user */
 	int bad=0,done=0,correct=0,gets_warning=0;
 	char cmd[255];
 	struct group *grp;
-	
+
 	/* flags, in order:
 	* bad to see if the username is in /etc/passwd, or if strange stuff has
 	* been typed if the user might be put in group 0
@@ -137,24 +137,24 @@ void main()
 	*/
 
 	/* The real program starts HERE! */
-  
+
 	if(geteuid()!=0)
 	{
 		printf("It seems you don't have access to add a new user.  Try\n");
 		printf("logging in as root or su root to gain super-user access.\n");
 		exit(1);
 	}
-  
+
 	/* Sanity checks
 	*/
-	
+
 	if (!(grp=getgrgid(DEFAULT_GROUP))){
 		printf("Error: the default group %d does not exist on this system!\n",
 				DEFAULT_GROUP);
 		printf("adduser must be recompiled.\n");
 		exit(1);
-	}; 
- 
+	};
+
 	while(!correct) {		/* loop until a "good" uname is chosen */
 		while(!done) {
 			printf("\nLogin to add (^C to quit): ");
@@ -178,19 +178,19 @@ void main()
 			} else
 				done=1;
 		}; /* done, we have a valid new user name */
-		
+
 		/* all set, get the rest of the stuff */
 		printf("\nEditing information for new user [%s]\n",uname);
-  
+
 		printf("\nFull Name [%s]: ",uname);
 		gets(person);
 		if (!strlen(person)) {
 			bzero(person,sizeof(person));
 			strcpy(person,uname);
 		};
-      
+
 		do {
-			bad=0; 
+			bad=0;
 			printf("GID [%d]: ",DEFAULT_GROUP);
 			gets(foo);
 			if (!strlen(foo))
@@ -220,7 +220,7 @@ void main()
 
 
 		fflush(stdin);
-      
+
 		printf("\nIf home dir ends with a / then [%s] will be appended to it\n",uname);
 		printf("Home Directory [%s/%s]: ",DEFAULT_HOME,uname);
 		fflush(stdout);
@@ -237,30 +237,30 @@ void main()
 		gets(shell);
 		if (!strlen(shell))
 			sprintf(shell,"%s",DEFAULT_SHELL);
-      
+
 		printf("\nMin. Password Change Days [0]: ");
 		gets(foo);
 		min_pass=atoi(foo);
-            
+
 		printf("Max. Password Change Days [%d]: ",DEFAULT_MAX_PASS);
 		gets(foo);
 		if (strlen(foo) > 1)
 			max_pass = atoi(foo);
 		else
 			max_pass = DEFAULT_MAX_PASS;
-            
+
 		printf("Password Warning Days [%d]: ",DEFAULT_WARN_PASS);
 		gets(foo);
 		warn_pass = atoi(foo);
 		if (warn_pass==0)
 			warn_pass = DEFAULT_WARN_PASS;
-            
+
 		printf("Days after Password Expiry for Account Locking [%d]: ",DEFAULT_USER_DIE);
 		gets(foo);
 		user_die = atoi(foo);
 		if (user_die == 0)
 			user_die = DEFAULT_USER_DIE;
-      
+
 		printf("\nInformation for new user [%s] [%s]:\n",uname,person);
 		printf("Home directory: [%s] Shell: [%s]\n",dir,shell);
 		printf("GID: [%d]\n",group);
@@ -279,7 +279,7 @@ void main()
 	bzero(cmd,sizeof(cmd));
 	sprintf(cmd,"%s -g %d -d %s -s %s -c \"%s\" -m -k /etc/skel %s",
 			USERADD_PATH,group,dir,shell,person,uname);
-	printf("Calling useradd to add new user:\n%s\n",cmd);  
+	printf("Calling useradd to add new user:\n%s\n",cmd);
 	if(system(cmd)){
 		printf("User add failed!\n");
 		exit(errno);

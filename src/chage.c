@@ -263,7 +263,7 @@ static void print_date (time_t date)
 	char buf[80];
 	char format[80];
 
-	if( iflg ) {
+	if (iflg) {
 		(void) snprintf (format, 80, "%%Y-%%m-%%d");
 	}
 	else {

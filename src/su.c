@@ -508,13 +508,13 @@ static void check_perms_nopam (const struct passwd *pw)
 
 	if (strcmp (pw->pw_passwd, "") == 0) {
 		char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
-		if(prevent_no_auth == NULL) {
+		if (prevent_no_auth == NULL) {
 			prevent_no_auth = "superuser";
 		}
-		if(strcmp(prevent_no_auth, "yes") == 0) {
+		if (strcmp(prevent_no_auth, "yes") == 0) {
 			fprintf(stderr, _("Password field is empty, this is forbidden for all accounts.\n"));
 			exit(1);
-		} else if( (pw->pw_uid == 0)
+		} else if ((pw->pw_uid == 0)
 				&& (strcmp(prevent_no_auth, "superuser") == 0)) {
 			fprintf(stderr, _("Password field is empty, this is forbidden for super-user.\n"));
 			exit(1);
@@ -579,7 +579,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	oldsig = signal (SIGQUIT, die);
 
 	/*
-	 * See if the system defined authentication method is being used. 
+	 * See if the system defined authentication method is being used.
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */

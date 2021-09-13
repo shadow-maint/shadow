@@ -217,7 +217,7 @@ static void setup_tty (void)
 
 		/*
 		 * ttymon invocation prefers this, but these settings
-		 * won't come into effect after the first username login 
+		 * won't come into effect after the first username login
 		 */
 		(void) STTY (0, &termio);
 	}
@@ -401,7 +401,7 @@ static void init_env (void)
 		}
 	}
 #endif				/* !USE_PAM */
-	/* 
+	/*
 	 * Add the clock frequency so that profiling commands work
 	 * correctly.
 	 */
@@ -520,7 +520,7 @@ static void update_utmp (const char *user,
  *	of reasons, such as X servers or network logins.
  *
  *	the flags which login supports are
- *	
+ *
  *	-p - preserve the environment
  *	-r - perform autologin protocol for rlogin
  *	-f - do not perform authentication, user is preauthenticated
@@ -650,7 +650,7 @@ int main (int argc, char **argv)
 	(void) umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 
 	{
-		/* 
+		/*
 		 * Use the ULIMIT in the login.defs file, and if
 		 * there isn't one, use the default value. The
 		 * user may have one for themselves, but otherwise,
@@ -983,12 +983,12 @@ int main (int argc, char **argv)
 
 			if (strcmp (user_passwd, "") == 0) {
 				char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
-				if(prevent_no_auth == NULL) {
+				if (prevent_no_auth == NULL) {
 					prevent_no_auth = "superuser";
 				}
-				if(strcmp(prevent_no_auth, "yes") == 0) {
+				if (strcmp(prevent_no_auth, "yes") == 0) {
 					failed = true;
-				} else if( (pwd->pw_uid == 0)
+				} else if ((pwd->pw_uid == 0)
 					&& (strcmp(prevent_no_auth, "superuser") == 0)) {
 					failed = true;
 				}

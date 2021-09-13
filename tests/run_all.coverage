@@ -16,8 +16,8 @@ failed_tests=""
 
 run_test()
 {
-	find $build_path -name "*.gcda" -delete
-	find $build_path -name "*.gcno" | while read f
+	find "$build_path" -name "*.gcda" -delete
+	find "$build_path" -name "*.gcno" | while read f
 	do
 		g=${f%gcno}gcda
 		touch $g
@@ -1320,9 +1320,8 @@ echo
 echo "$succeeded test(s) passed"
 echo "$failed test(s) failed"
 echo "log written in 'testsuite.log'"
-if [ "$failed" != "0" ]
+if [ "$failed" != 0 ]
 then
 	echo "the following tests failed:"
-	echo $failed_tests
+	echo "$failed_tests"
 fi
-

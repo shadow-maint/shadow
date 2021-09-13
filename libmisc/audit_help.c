@@ -68,7 +68,7 @@ void audit_help_open (void)
  * This function will log a message to the audit system using a predefined
  * message format. Parameter usage is as follows:
  *
- * type - type of message: AUDIT_USER_CHAUTHTOK for changing any account 
+ * type - type of message: AUDIT_USER_CHAUTHTOK for changing any account
  *	  attributes.
  * pgname - program's name
  * op  -  operation. "adding user", "changing finger info", "deleting group"

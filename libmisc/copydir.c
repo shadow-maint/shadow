@@ -117,7 +117,7 @@ static void error_acl (struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
 
-	/* ignore the case when destination does not support ACLs 
+	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
 	if (ENOTSUP == errno) {
 		errno = 0;

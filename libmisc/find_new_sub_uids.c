@@ -43,7 +43,7 @@
  *
  * If successful, find_new_sub_uids provides a range of unused
  * user IDs in the [SUB_UID_MIN:SUB_UID_MAX] range.
- * 
+ *
  * Return 0 on success, -1 if no unused UIDs are available.
  */
 int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
