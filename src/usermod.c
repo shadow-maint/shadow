@@ -98,6 +98,7 @@
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
 #endif				/* ENABLE_SUBIDS */
+#define E_BAD_SWFILE	19	/* bad shadow entry */
 
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 
@@ -184,7 +185,7 @@ static bool sub_gid_locked = false;
 
 
 /* local function prototypes */
-static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
+static int date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date);
 static int get_groups (char *);
 static /*@noreturn@*/void usage (int status);
@@ -212,7 +213,7 @@ static void move_mailbox (void);
 
 extern int allow_bad_names;
 
-static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
+static int date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
                          long int date)
 {
 	struct tm *tp;
@@ -222,16 +223,21 @@ static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
 	} else {
 		time_t t = (time_t) date;
 		tp = gmtime (&t);
+		if (tp == NULL)
+		    return -1;
 #ifdef HAVE_STRFTIME
 		strftime (buf, maxsize, "%Y-%m-%d", tp);
 #else
-		(void) snprintf (buf, maxsize, "%04d-%02d-%02d",
+		int ret = snprintf (buf, maxsize, "%04d-%02d-%02d",
 		                 tp->tm_year + 1900,
 		                 tp->tm_mon + 1,
 		                 tp->tm_mday);
+		if(ret < 0)
+		    return -1;
 #endif				/* HAVE_STRFTIME */
 	}
 	buf[maxsize - 1] = '\0';
+	return 0;
 }
 
 /*
@@ -627,10 +633,26 @@ static void new_spent (struct spwd *spent)
 	if (eflg) {
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
-		date_to_str (new_exp, sizeof(new_exp),
+		int ret = date_to_str (new_exp, sizeof(new_exp),
 		             user_newexpire * DAY);
-		date_to_str (old_exp, sizeof(old_exp),
+		if (ret < 0)
+		{
+		    fprintf (stderr,
+			    _("%s: invalid new expiration date '%ld'\n"),
+			    Prog, user_newexpire
+			    );
+		    fail_exit (E_BAD_ARG);
+		}
+		ret = date_to_str (old_exp, sizeof(old_exp),
 		             user_expire * DAY);
+		if (ret < 0)
+		{
+		    fprintf (stderr,
+			    _("%s: invalid old expiration date '%ld'\n"),
+			    Prog, user_expire
+			    );
+		    fail_exit (E_BAD_SWFILE);
+		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "changing expiration date",
