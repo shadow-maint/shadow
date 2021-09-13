@@ -224,7 +224,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
         /* Get UID of the username we are looking for */
         pwd = getpwnam(owner);
         if (NULL == pwd) {
-                /* Username not defined in /etc/passwd, or error occured during lookup */
+                /* Username not defined in /etc/passwd, or error occurred during lookup */
                 return NULL;
         }
         owner_uid = pwd->pw_uid;
@@ -847,7 +847,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	} else {
 		struct passwd *pwd = getpwnam(owner);
 		if (NULL == pwd) {
-			/* Username not defined in /etc/passwd, or error occured during lookup */
+			/* Username not defined in /etc/passwd, or error occurred during lookup */
 			free(*uids);
 			*uids = NULL;
 			return -1;
