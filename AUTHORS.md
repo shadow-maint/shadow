@@ -15,6 +15,7 @@ Aleksa Sarai <cyphar@cyphar.com>
 Alexander O. Yuriev <alex@bach.cis.temple.edu>
 Algis Rudys <arudys@rice.edu>
 Andreas Jaeger <aj@arthur.rhein-neckar.de>
+Andy Zaugg <andy.zaugg@gmail.com>
 Aniello Del Sorbo <anidel@edu-gw.dia.unisa.it>
 Anton Gluck <gluc@midway.uchicago.edu>
 Arkadiusz Miskiewicz <misiek@pld.org.pl>
