@@ -343,6 +343,12 @@
 	    databases are reset to avoid reusing the entry from a previously
 	    deleted user.
 	  </para>
+	  <para>
+	    If this option is not specified, <command>useradd</command>
+	    will also consult the variable <option>LOG_INIT</option> in
+	    the <filename>/etc/default/useradd</filename> if set to no
+		the user will not be added to the lastlog and faillog databases.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

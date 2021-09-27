@@ -107,6 +107,7 @@ static const char *def_home = "/home";
 static const char *def_shell = "/bin/bash";
 static const char *def_template = SKEL_DIR;
 static const char *def_create_mail_spool = "yes";
+static const char *def_log_init = "yes";
 
 static long def_inactive = -1;
 static const char *def_expire = "";
@@ -207,6 +208,7 @@ static bool home_added = false;
 #define DEXPIRE			"EXPIRE="
 #define DSKEL			"SKEL="
 #define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
+#define DLOG_INIT	"LOG_INIT="
 
 /* local function prototypes */
 static void fail_exit (int);
@@ -487,6 +489,16 @@ static void get_defaults (void)
 
 			def_create_mail_spool = xstrdup (cp);
 		}
+
+		/*
+		 * By default do we add the user to the lastlog and faillog databases ?
+		 */
+		else if (MATCH (buf, DLOG_INIT)) {
+			if (*cp == '\0') {
+				cp = def_log_init;	/* XXX warning: const */
+			}
+			def_log_init = xstrdup (cp);
+		}
 	}
 	(void) fclose (fp);
      getdef_err:
@@ -510,6 +522,7 @@ static void show_defaults (void)
 	printf ("SHELL=%s\n", def_shell);
 	printf ("SKEL=%s\n", def_template);
 	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
+	printf ("LOG_INIT=%s\n", def_log_init);
 }
 
 /*
@@ -536,6 +549,7 @@ static int set_defaults (void)
 	bool out_shell = false;
 	bool out_skel = false;
 	bool out_create_mail_spool = false;
+	bool out_log_init = false;
 	size_t len;
 	int ret = -1;
 
@@ -643,6 +657,12 @@ static int set_defaults (void)
 			         DCREATE_MAIL_SPOOL "%s\n",
 			         def_create_mail_spool);
 			out_create_mail_spool = true;
+		} else if (!out_log_init
+			   && MATCH (buf, DLOG_INIT)) {
+			fprintf (ofp,
+			         DLOG_INIT "%s\n",
+			         def_log_init);
+			out_log_init = true;
 		} else
 			fprintf (ofp, "%s\n", buf);
 	}
@@ -669,7 +689,8 @@ static int set_defaults (void)
 
 	if (!out_create_mail_spool)
 		fprintf (ofp, DCREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
-
+	if (!out_log_init)
+		fprintf (ofp, DLOG_INIT "%s\n", def_log_init);
 	/*
 	 * Flush and close the file. Check for errors to make certain
 	 * the new file is intact.
@@ -715,10 +736,10 @@ static int set_defaults (void)
 #endif
 	SYSLOG ((LOG_INFO,
 	         "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
-	         "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
+	         "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s, LOG_INIT=%s",
 	         (unsigned int) def_group, def_home, def_shell,
 	         def_inactive, def_expire, def_template,
-	         def_create_mail_spool));
+	         def_create_mail_spool, def_log_init));
 	ret = 0;
     setdef_err:
 	free(new_file);
@@ -1561,6 +1582,14 @@ static void process_flags (int argc, char **argv)
 	}
 
 	create_mail_spool = def_create_mail_spool;
+
+	if (!lflg) {
+		/* If we are missing the flag lflg aka -l, check the defaults
+		* file to see if we need to disable it as a default*/
+		if (strcmp (def_log_init, "no") == 0) {
+			lflg = true;
+		}
+	}
 
 	if (!rflg) {
 		/* for system accounts defaults are ignored and we
