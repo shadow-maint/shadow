@@ -345,7 +345,7 @@ if test "$with_sssd" = "yes"; then
 	              [AC_MSG_ERROR([posix_spawn is needed for sssd support])])
 fi
 
-AS_IF([test "$with_su" != "no"], AC_DEFINE(WITH_SU, 1, [Build with su])])
+AS_IF([test "$with_su" != "no"], AC_DEFINE(WITH_SU, 1, [Build with su]))
 AM_CONDITIONAL([WITH_SU], [test "x$with_su" != "xno"])
 
 dnl Check for some functions in libc first, only if not found check for
