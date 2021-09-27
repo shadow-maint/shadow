@@ -133,7 +133,7 @@ static void process_flags (int argc, char **argv)
 	}
 }
 
-/* 
+/*
  * expiry - check and enforce password expiration policy
  *
  *	expiry checks (-c) the current password expiration and forces (-f)
@@ -149,7 +149,7 @@ int main (int argc, char **argv)
 
 	sanitize_env ();
 
-	/* 
+	/*
 	 * Start by disabling all of the keyboard signals.
 	 */
 	(void) signal (SIGHUP, catch_signals);

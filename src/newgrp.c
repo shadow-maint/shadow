@@ -494,7 +494,7 @@ int main (int argc, char **argv)
 		initflag = true;
 	}
 	if (!is_newgrp) {
-		/* 
+		/*
 		 * Do the command line for everything that is
 		 * not "newgrp".
 		 */
@@ -533,7 +533,7 @@ int main (int argc, char **argv)
 			group = argv[0];
 		} else {
 			/*
-			 * get the group file entry for her login group id. 
+			 * get the group file entry for her login group id.
 			 * the entry must exist, simply to be annoying.
 			 *
 			 * Perhaps in the past, but the default behavior now depends on the
@@ -595,17 +595,17 @@ int main (int argc, char **argv)
 	 * now we put her in the new group. The password file entry for her
 	 * current user id has been gotten. If there was no optional group
 	 * argument she will have her real and effective group id set to the
-	 * set to the value from her password file entry.  
+	 * set to the value from her password file entry.
 	 *
 	 * If run as newgrp, or as sg with no command, this process exec's
-	 * an interactive subshell with the effective GID of the new group. 
+	 * an interactive subshell with the effective GID of the new group.
 	 * If run as sg with a command, that command is exec'ed in this
 	 * subshell. When this process terminates, either because the user
 	 * exits, or the command completes, the parent of this process
 	 * resumes with the current GID.
 	 *
 	 * If a group is explicitly specified on the command line, the
-	 * interactive shell or command is run with that effective GID. 
+	 * interactive shell or command is run with that effective GID.
 	 * Access will be denied if no entry for that group can be found in
 	 * /etc/group. If the current user name appears in the members list
 	 * for that group, access will be granted immediately; if not, the
@@ -650,7 +650,7 @@ int main (int argc, char **argv)
 	}
 #endif                          /* HAVE_SETGROUPS */
 	/*
-	 * For splitted groups (due to limitations of NIS), check all 
+	 * For splitted groups (due to limitations of NIS), check all
 	 * groups of the same GID like the requested group for
 	 * membership of the current user.
 	 */
@@ -698,7 +698,7 @@ int main (int argc, char **argv)
 #ifdef HAVE_SETGROUPS
 	/*
 	 * I am going to try to add her new group id to her concurrent group
-	 * set. If the group id is already present i'll just skip this part. 
+	 * set. If the group id is already present i'll just skip this part.
 	 * If the group doesn't fit, i'll complain loudly and skip this
 	 * part.
 	 */
@@ -854,7 +854,7 @@ int main (int argc, char **argv)
 
 	/*
 	 * The previous code, when run as newgrp, re-exec'ed the shell in
-	 * the current process with the original gid on error conditions. 
+	 * the current process with the original gid on error conditions.
 	 * See the comment above. This historical behavior now has the
 	 * effect of creating unlogged extraneous shell layers when the
 	 * command line has an error or there is an authentication failure.
@@ -867,7 +867,7 @@ int main (int argc, char **argv)
 	if (NULL != group) {
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", group);
-		audit_logger (AUDIT_CHGRP_ID, Prog, 
+		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL,
 		              (unsigned int) getuid (), 0);
 	} else {

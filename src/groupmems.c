@@ -85,7 +85,7 @@ static bool sgr_locked = false;
 static char *whoami (void);
 static void add_user (const char *user,
                       const struct group *grp);
-static void remove_user (const char *user, 
+static void remove_user (const char *user,
                          const struct group *grp);
 static void purge_members (const struct group *grp);
 static void display_members (const char *const *members);
@@ -197,7 +197,7 @@ static void add_user (const char *user,
 /*
  * remove_user - Remove an user from a given group
  */
-static void remove_user (const char *user, 
+static void remove_user (const char *user,
                          const struct group *grp)
 {
 	struct group *newgrp;
@@ -587,7 +587,7 @@ static void close_files (void)
 #endif
 }
 
-int main (int argc, char **argv) 
+int main (int argc, char **argv)
 {
 	char *name;
 	const struct group *grp;

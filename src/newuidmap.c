@@ -148,7 +148,7 @@ int main(int argc, char **argv)
 				(unsigned long) getuid ()));
 		return EXIT_FAILURE;
 	}
-	
+
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
 		fprintf(stderr, _("%s: Could not stat directory for target %u\n"),

@@ -718,7 +718,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			}
 
 			/*
-			 * All shadow group file deletions wind up here. 
+			 * All shadow group file deletions wind up here.
 			 * This code removes the current entry from the
 			 * linked list. When done, it skips back to the top
 			 * of the loop to try out the next list element.

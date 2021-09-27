@@ -328,7 +328,7 @@ static int new_password (const struct passwd *pw)
 
 		/*
 		 * If enabled, warn about weak passwords even if you are
-		 * root (enter this password again to use it anyway). 
+		 * root (enter this password again to use it anyway).
 		 * --marekm
 		 */
 		if (amroot && !warned && getdef_bool ("PASS_ALWAYS_WARN")
@@ -1045,7 +1045,7 @@ int main (int argc, char **argv)
 		STRFCPY (crypt_passwd, cp);
 
 		/*
-		 * See if the user is permitted to change the password. 
+		 * See if the user is permitted to change the password.
 		 * Otherwise, go ahead and set a new password.
 		 */
 		check_password (pw, sp);

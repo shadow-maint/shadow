@@ -428,7 +428,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 }
 
 #ifndef USE_PAM
-/* 
+/*
  * update_passwd - update the password in the passwd entry
  *
  * Return 0 if successful.
