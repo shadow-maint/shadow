@@ -1207,11 +1207,13 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_GROUP);
 
 #ifdef SHADOWGRP
-	if (sgent.sg_adm) {
-		xfree(sgent.sg_adm);
-	}
-	if (sgent.sg_mem) {
-		xfree(sgent.sg_mem);
+	if (is_shadowgrp) {
+		if (sgent.sg_adm) {
+			xfree(sgent.sg_adm);
+		}
+		if (sgent.sg_mem) {
+			xfree(sgent.sg_mem);
+		}
 	}
 #endif
 	if (grent.gr_mem) {
