@@ -50,6 +50,11 @@ static void cleanup(void)
 	}
 }
 
+void reset_selinux_handle (void)
+{
+    cleanup();
+}
+
 /*
  * set_selinux_file_context - Set the security context before any file or
  *                            directory creation.
