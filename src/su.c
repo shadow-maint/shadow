@@ -397,22 +397,28 @@ static void prepare_pam_close_session (void)
 		snprintf (kill_msg, sizeof kill_msg, _(" ...killed.\n"));
 		snprintf (wait_msg, sizeof wait_msg, _(" ...waiting for child to terminate.\n"));
 
+		/* Any signals other than SIGCHLD and SIGALRM will no longer have any effect,
+		 * so it's time to block all of them. */
+		sigfillset (&ourset);
+		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
+			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
+			kill_child (0);
+			/* Never reach (_exit called). */
+		}
+
+		/* Send SIGKILL to the child if it doesn't
+		 * exit within 2 seconds (after SIGTERM) */
 		(void) signal (SIGALRM, kill_child);
 		(void) signal (SIGCHLD, catch_signals);
 		(void) alarm (2);
 
-		sigemptyset (&ourset);
-		if ((sigaddset (&ourset, SIGALRM) != 0)
-		    || (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0)) {
-			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
-			kill_child (0);
-		} else {
-			while (0 == waitpid (pid_child, &status, WNOHANG)) {
-				sigsuspend (&ourset);
-			}
-			pid_child = 0;
-			(void) sigprocmask (SIG_UNBLOCK, &ourset, NULL);
+		(void) sigdelset (&ourset, SIGALRM);
+		(void) sigdelset (&ourset, SIGCHLD);
+
+		while (0 == waitpid (pid_child, &status, WNOHANG)) {
+			sigsuspend (&ourset);
 		}
+		pid_child = 0;
 
 		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
