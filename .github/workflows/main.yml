@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: debug
+      run: |
+        id
+        whoami
+        ps -ef
+        pwd
+        cat /proc/self/uid_map
+        cat /proc/self/status
+        systemd-detect-virt
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install automake autopoint xsltproc gettext expect byacc libtool
+    - name: configure
+      run: |
+        ./autogen.sh --without-selinux --disable-man
+        grep ENABLE_ config.status
+    - name: make
+      run: make
+    - name: make install
+      run: sudo make install
+    - name: Run CI tests
+      run: (cd tests; sudo ./run_some; cat testsuite.log)
