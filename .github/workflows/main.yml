@@ -18,7 +18,9 @@ jobs:
     - name: debug
       run: |
         id
+        which bash
         whoami
+        env
         ps -ef
         pwd
         cat /proc/self/uid_map
@@ -32,9 +34,10 @@ jobs:
       run: |
         ./autogen.sh --without-selinux --disable-man
         grep ENABLE_ config.status
-    - name: make
-      run: make
-    - name: make install
-      run: sudo make install
-    - name: Run CI tests
-      run: (cd tests; sudo ./run_some; cat testsuite.log)
+    - run: make
+    - run: make install DESTDIR=${HOME}/rootfs
+    - run: sudo make install
+    - run: |
+        cd tests
+        sudo ./run_some
+        cat testsuite.log
