@@ -45,7 +45,7 @@
   <refmeta>
     <refentrytitle>gshadow</refentrytitle>
     <manvolnum>5</manvolnum>
-    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
+    <refmiscinfo class="sectdesc">File Formats and Configuration Files</refmiscinfo>
     <refmiscinfo class="source">shadow-utils</refmiscinfo>
     <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
