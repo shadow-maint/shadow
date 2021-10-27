@@ -293,6 +293,7 @@ int set_seuser (const char *login_name, const char *seuser_name)
 	}
 
 	ret = 0;
+	reset_selinux_handle();
 
 done:
 	semanage_seuser_key_free (key);

@@ -2670,26 +2670,11 @@ int main (int argc, char **argv)
 
 	usr_update (subuid_count, subgid_count);
 
-	if (mflg) {
-		create_home ();
-		if (home_added) {
-			copy_tree (def_template, prefix_user_home, false, false,
-			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
-		} else {
-			fprintf (stderr,
-			         _("%s: warning: the home directory %s already exists.\n"
-			           "%s: Not copying any file from skel directory into it.\n"),
-			         Prog, user_home, Prog);
-		}
-
-	}
-
-	/* Do not create mail directory for system accounts */
-	if (!rflg) {
-		create_mail ();
-	}
-
 	close_files ();
+
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
 	/*
 	 * tallylog_reset needs to be able to lookup
@@ -2716,14 +2701,29 @@ int main (int argc, char **argv)
 	}
 #endif				/* WITH_SELINUX */
 
+	if (mflg) {
+		create_home ();
+		if (home_added) {
+			copy_tree (def_template, prefix_user_home, false, false,
+			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+		} else {
+			fprintf (stderr,
+			         _("%s: warning: the home directory %s already exists.\n"
+			           "%s: Not copying any file from skel directory into it.\n"),
+			         Prog, user_home, Prog);
+		}
+
+	}
+
+	/* Do not create mail directory for system accounts */
+	if (!rflg) {
+		create_mail ();
+	}
+
 	if (run_parts ("/etc/shadow-maint/useradd-post.d", (char*)user_name,
 			"useradd")) {
 		exit(1);
 	}
-
-	nscd_flush_cache ("passwd");
-	nscd_flush_cache ("group");
-	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
 	return E_SUCCESS;
 }
