@@ -32,6 +32,8 @@ run_test()
 	[ -f /etc/group.lock ] && echo $1 /etc/group.lock || true
 	[ -f /etc/shadow.lock ] && echo $1 /etc/shadow.lock || true
 	[ -f /etc/gshadow.lock ] && echo $1 /etc/gshadow.lock || true
+	[ -f /etc/gshadow.lock ] && echo $1 /etc/gshadow.lock || true
+	rm -rf /tmp/test-uidmap
 	if [ "$(stat -c"%G" /etc/shadow)" != "shadow" ]
 	then
 		echo $1
@@ -137,4 +139,5 @@ if [ "$failed" != 0 ]
 then
 	echo "the following tests failed:"
 	echo "$failed_tests"
+	exit 1
 fi
