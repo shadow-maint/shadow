@@ -163,8 +163,8 @@ static void check_perms (const struct group *grp,
 	spwd = xgetspnam (pwd->pw_name);
 	if (NULL != spwd) {
 		pwd->pw_passwd = xstrdup (spwd->sp_pwdp);
+		spw_free (spwd);
 	}
-	spw_free (spwd);
 
 	if ((pwd->pw_passwd[0] == '\0') && (grp->gr_passwd[0] != '\0')) {
 		needspasswd = true;
