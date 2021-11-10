@@ -17,8 +17,8 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 change_config
 
 echo -n "list foo's ranges..."
-${build_path}/src/list_subid_ranges foo > /tmp/subuidlistout
-${build_path}/src/list_subid_ranges -g foo > /tmp/subgidlistout
+${build_path}/src/getsubids foo > /tmp/subuidlistout
+${build_path}/src/getsubids -g foo > /tmp/subgidlistout
 echo "OK"
 
 echo -n "Check the subuid ranges..."

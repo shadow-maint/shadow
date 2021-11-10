@@ -158,8 +158,8 @@ if FCAPS
 	setcap cap_setgid+ep $(DESTDIR)$(ubindir)/newgidmap
 endif
 
-noinst_PROGRAMS += list_subid_ranges  \
-					get_subid_owners \
+bin_PROGRAMS    +=  getsubids
+noinst_PROGRAMS +=  get_subid_owners \
 					new_subid_range \
 					free_subid_range \
 					check_subid_range
@@ -175,13 +175,13 @@ MISCLIBS = \
 	$(LIBCRYPT) \
 	$(LIBTCB)
 
-list_subid_ranges_LDADD = \
+getsubids_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
 	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS) -ldl
 
-list_subid_ranges_CPPFLAGS = \
+getsubids_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \

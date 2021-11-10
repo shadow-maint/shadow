@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2021 Iker Pedrosa
+   All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+   2. Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+   3. The name of the copyright holders or contributors may not be used to
+      endorse or promote products derived from this software without
+      specific prior written permission.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+   PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+   HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- SHADOW-CONFIG-HERE -->
+]>
+
+<refentry id='getsubids.1'>
+  <refentryinfo>
+    <author>
+      <firstname>Iker</firstname>
+      <surname>Pedrosa</surname>
+      <contrib>Creation, 2021</contrib>
+    </author>
+  </refentryinfo>
+  <refmeta>
+    <refentrytitle>getsubids</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>getsubids</refname>
+    <refpurpose>get the subordinate id ranges for a user</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>getsubids</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
+      <arg choice='plain'>
+        <replaceable>USER</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      The <command>getsubids</command> command lists the subordinate user ID
+      ranges for a given user. The subordinate group IDs can be listed using
+      the <option>-g</option> option.
+    </para>
+  </refsect1>
+
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>getsubids</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-g</option>
+        </term>
+        <listitem>
+          <para>
+            List the subordinate group ID ranges.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='example'>
+    <title>EXAMPLE</title>
+    <para>
+      For example, to obtain the subordinate UIDs of the testuser:
+    </para>
+    <para>
+<programlisting>
+$ getsubids testuser
+0: testuser 100000 65536
+</programlisting>
+    </para>
+    <para>
+      This command output provides (in order from left to right) the list
+      index, username, UID range start, and number of UIDs in range.
+    </para>
+  </refsect1>
+
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>newgidmap</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>newuidmap</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>subgid</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>subuid</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
+      <citerefentry>
+        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+    </para>
+  </refsect1>
+</refentry>
