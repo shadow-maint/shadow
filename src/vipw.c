@@ -349,6 +349,9 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		sigprocmask(SIG_BLOCK, &mask, &omask);
 	}
 
+	/* set SIGCHLD to default for waitpid */
+	signal(SIGCHLD, SIG_DFL);
+
 	for (;;) {
 		pid = waitpid (pid, &status, WUNTRACED);
 		if ((pid != -1) && (WIFSTOPPED (status) != 0)) {
