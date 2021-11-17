@@ -1964,7 +1964,7 @@ msgstr ""
 
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
-msgstr "  -L, --lock                  lås passord for den valgt konto\n"
+msgstr "  -l, --lock                  lås passord for den valgt konto\n"
 
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
