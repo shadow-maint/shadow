@@ -62,6 +62,7 @@ man_MANS += $(man_nopam)
 endif
 
 man_subids = \
+	man1/getsubids.1 \
 	man1/newgidmap.1 \
 	man1/newuidmap.1 \
 	man5/subgid.5 \
@@ -80,6 +81,7 @@ man_XMANS = \
 	expiry.1.xml \
 	faillog.5.xml \
 	faillog.8.xml \
+	getsubids.1.xml \
 	gpasswd.1.xml \
 	groupadd.8.xml \
 	groupdel.8.xml \

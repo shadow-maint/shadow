@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "subid.h"
-#include "stdlib.h"
 #include "prototypes.h"
 
 const char *Prog;
