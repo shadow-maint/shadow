@@ -288,6 +288,9 @@ extern struct passwd* prefix_getpwent()
 	if (!passwd_db_file) {
 		return getpwent();
 	}
+	if (!fp_pwent) {
+		return NULL;
+	}
 	return fgetpwent(fp_pwent);
 }
 extern void prefix_endpwent()
