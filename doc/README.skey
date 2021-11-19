@@ -1,0 +1,4 @@
+# S/Key support
+shadow-utils can be built with S/Key support using the S/Key package from:
+* http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libskey/ or
+* https://gentoo.osuosl.org/distfiles/skey-1.1.5.tar.bz2

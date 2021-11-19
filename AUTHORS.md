@@ -1,42 +1,14 @@
-Shadow SITES
-============
-
-Homepage
-	https://github.com/shadow-maint/shadow
-
-Issue tracker
-	https://github.com/shadow-maint/shadow/issues
-
-Releases
-	https://github.com/shadow-maint/shadow/releases
-
-Mailing lists
-	for general discuss: pkg-shadow-devel@alioth-lists.debian.net
-	commit list: pkg-shadow-commits@alioth-lists.debian.net
-
-Mailing lists subscription
-	https://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-devel
-	https://alioth-lists.debian.net/mailman/listinfo/pkg-shadow-commits
-
-Mailing lists archives:
-	https://alioth-lists.debian.net/pipermail/pkg-shadow-devel/
-	https://alioth-lists.debian.net/pipermail/pkg-shadow-commits/
-
-S/Key support:
-	Shadow can be built with S/Key support using the S/Key package from:
-
-	http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libskey/
-	or
-	https://gentoo.osuosl.org/distfiles/skey-1.1.5.tar.bz2
-
-Authors and contributors
-========================
-
 Thanks to at least the following people for sending patches, bug
-reports and various comments.  This list may be incomplete, I received
+reports and various comments. This list may be incomplete, I received
 a lot of mail...
 
+# Maintainers
+Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2007)
+Nicolas François <nicolas.francois@centraliens.net> (2007-2014)
+Serge E. Hallyn <serge@hallyn.com> (2014-now)
+Christian Brauner <christian@brauner.io> (2019-now)
 
+# Authors and contributors
 Adam Rudnicki <adam@v-lo.krakow.pl>
 Alan Curry <pacman@tardis.mars.net>
 Aleksa Sarai <cyphar@cyphar.com>
@@ -114,12 +86,3 @@ Tim Hockin <thockin@eagle.ais.net>
 Timo Karjalainen <timok@iki.fi>
 Ulisses Alonso Camaro <ulisses@pusa.eleinf.uv.es>
 Werner Fink <werner@suse.de>
-
-Maintainers
-===========
-
-Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2007)
-Nicolas François <nicolas.francois@centraliens.net> (2007-2014)
-Serge E. Hallyn <serge@hallyn.com> (2014-now)
-Christian Brauner <christian@brauner.io> (2019-now)
-
