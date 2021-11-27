@@ -45,9 +45,9 @@ int main(int argc, char *argv[])
 	if (argc > 1)
 		range.count = atoi(argv[1]);
 	if (group)
-		ok = grant_subgid_range(&range, !makenew);
+		ok = subid_grant_gid_range(&range, !makenew);
 	else
-		ok = grant_subuid_range(&range, !makenew);
+		ok = subid_grant_uid_range(&range, !makenew);
 
 	if (!ok) {
 		fprintf(stderr, "Failed creating new id range\n");

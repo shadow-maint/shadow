@@ -32,7 +32,7 @@ enum subid_status {
 };
 
 /*
- * libsubid_init: initialize libsubid
+ * subid_init: initialize libsubid
  *
  * @progname: Name to display as program.  If NULL, then "(libsubid)" will be
  *            shown in error messages.
@@ -45,10 +45,10 @@ enum subid_status {
  *
  * Returns false if an error occurred.
  */
-bool libsubid_init(const char *progname, FILE *logfd);
+bool subid_init(const char *progname, FILE *logfd);
 
 /*
- * get_subuid_ranges: return a list of UID ranges for a user
+ * subid_get_uid_ranges: return a list of UID ranges for a user
  *
  * @owner: username being queried
  * @ranges: a pointer to an array of subid_range structs in which the result
@@ -58,10 +58,10 @@ bool libsubid_init(const char *progname, FILE *logfd);
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subuid_ranges(const char *owner, struct subid_range **ranges);
+int subid_get_uid_ranges(const char *owner, struct subid_range **ranges);
 
 /*
- * get_subgid_ranges: return a list of GID ranges for a user
+ * subid_get_gid_ranges: return a list of GID ranges for a user
  *
  * @owner: username being queried
  * @ranges: a pointer to an array of subid_range structs in which the result
@@ -71,10 +71,10 @@ int get_subuid_ranges(const char *owner, struct subid_range **ranges);
  *
  * returns: number of ranges found, ir < 0 on error.
  */
-int get_subgid_ranges(const char *owner, struct subid_range **ranges);
+int subid_get_gid_ranges(const char *owner, struct subid_range **ranges);
 
 /*
- * get_subuid_owners: return a list of uids to which the given uid has been
+ * subid_get_uid_owners: return a list of uids to which the given uid has been
  *                    delegated.
  *
  * @uid: The subuid being queried
@@ -83,10 +83,10 @@ int get_subgid_ranges(const char *owner, struct subid_range **ranges);
  *
  * Returns the number of uids returned, or < 0 on error.
  */
-int get_subuid_owners(uid_t uid, uid_t **owner);
+int subid_get_uid_owners(uid_t uid, uid_t **owner);
 
 /*
- * get_subgid_owners: return a list of uids to which the given gid has been
+ * subid_get_gid_owners: return a list of uids to which the given gid has been
  *                    delegated.
  *
  * @uid: The subgid being queried
@@ -95,10 +95,10 @@ int get_subuid_owners(uid_t uid, uid_t **owner);
  *
  * Returns the number of uids returned, or < 0 on error.
  */
-int get_subgid_owners(gid_t gid, uid_t **owner);
+int subid_get_gid_owners(gid_t gid, uid_t **owner);
 
 /*
- * grant_subuid_range: assign a subuid range to a user
+ * subid_grant_uid_range: assign a subuid range to a user
  *
  * @range: pointer to a struct subordinate_range detailing the UID range
  *         to allocate.  ->owner must be the username, and ->count must be
@@ -109,10 +109,10 @@ int get_subgid_owners(gid_t gid, uid_t **owner);
  * then the range from (range->start, range->start + range->count) will
  * be delegated to range->owner.
  */
-bool grant_subuid_range(struct subordinate_range *range, bool reuse);
+bool subid_grant_uid_range(struct subordinate_range *range, bool reuse);
 
 /*
- * grant_subsid_range: assign a subgid range to a user
+ * subid_grant_gid_range: assign a subgid range to a user
  *
  * @range: pointer to a struct subordinate_range detailing the GID range
  *         to allocate.  ->owner must be the username, and ->count must be
@@ -123,10 +123,10 @@ bool grant_subuid_range(struct subordinate_range *range, bool reuse);
  * then the range from (range->start, range->start + range->count) will
  * be delegated to range->owner.
  */
-bool grant_subgid_range(struct subordinate_range *range, bool reuse);
+bool subid_grant_gid_range(struct subordinate_range *range, bool reuse);
 
 /*
- * ungrant_subuid_range: remove a subuid allocation.
+ * subid_ungrant_uid_range: remove a subuid allocation.
  *
  * @range: pointer to a struct subordinate_range detailing the UID allocation
  *         to remove.
@@ -134,10 +134,10 @@ bool grant_subgid_range(struct subordinate_range *range, bool reuse);
  * Returns true if successful, false if it failed, for instance if the
  * delegation did not exist.
  */
-bool ungrant_subuid_range(struct subordinate_range *range);
+bool subid_ungrant_uid_range(struct subordinate_range *range);
 
 /*
- * ungrant_subuid_range: remove a subgid allocation.
+ * subid_ungrant_gid_range: remove a subgid allocation.
  *
  * @range: pointer to a struct subordinate_range detailing the GID allocation
  *         to remove.
@@ -145,7 +145,7 @@ bool ungrant_subuid_range(struct subordinate_range *range);
  * Returns true if successful, false if it failed, for instance if the
  * delegation did not exist.
  */
-bool ungrant_subgid_range(struct subordinate_range *range);
+bool subid_ungrant_gid_range(struct subordinate_range *range);
 
 #define SUBID_NFIELDS 3
 #endif

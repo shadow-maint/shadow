@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
 		usage();
 	}
 	if (argc == 3 && strcmp(argv[1], "-g") == 0)
-		n = get_subgid_owners(atoi(argv[2]), &uids);
+		n = subid_get_gid_owners(atoi(argv[2]), &uids);
 	else if (argc == 2 && strcmp(argv[1], "-h") == 0)
 		usage();
 	else
-		n = get_subuid_owners(atoi(argv[1]), &uids);
+		n = subid_get_uid_owners(atoi(argv[1]), &uids);
 	if (n < 0) {
 		fprintf(stderr, "No owners found\n");
 		exit(1);

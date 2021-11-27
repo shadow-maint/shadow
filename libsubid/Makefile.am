@@ -4,6 +4,7 @@ libsubid_la_LDFLAGS = -Wl,-soname,libsubid.so.@LIBSUBID_ABI@ \
 	-shared -version-info @LIBSUBID_ABI_MAJOR@
 endif
 libsubid_la_SOURCES = api.c
+libsubid_la_LDFLAGS = -export-symbols-regex '^subid_'
 
 pkginclude_HEADERS = subid.h
 
