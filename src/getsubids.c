@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "subid.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 void usage(void)
 {
@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
 	const char *owner;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 	if (argc < 2)
 		usage();
 	owner = argv[1];

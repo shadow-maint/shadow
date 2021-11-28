@@ -50,6 +50,7 @@
 #include "getdef.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
@@ -62,7 +63,6 @@
  * Global variables
  */
 const char *Prog;		/* Program name */
-FILE *shadow_logfd = NULL;
 static FILE *lastlogfile;	/* lastlog file stream */
 static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
 static bool has_umin = false;
@@ -318,7 +318,8 @@ int main (int argc, char **argv)
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

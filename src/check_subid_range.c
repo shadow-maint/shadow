@@ -16,9 +16,9 @@
 #include "prototypes.h"
 #include "subordinateio.h"
 #include "idmapping.h"
+#include "shadowlog.h"
 
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 int main(int argc, char **argv)
 {
@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 	unsigned long start, count;
 	bool check_uids;
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	if (argc != 5)
 		exit(1);

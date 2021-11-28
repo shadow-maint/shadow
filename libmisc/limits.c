@@ -50,6 +50,7 @@
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
+#include "shadowlog.h"
 #ifdef HAVE_SYS_RESOURCE_H
 #include <sys/resource.h>
 #define LIMITS
@@ -548,7 +549,7 @@ void setup_limits (const struct passwd *info)
 #ifdef LIMITS
 		if (info->pw_uid != 0) {
 			if ((setup_user_limits (info->pw_name) & LOGIN_ERROR_LOGIN) != 0) {
-				(void) fputs (_("Too many logins.\n"), shadow_logfd);
+				(void) fputs (_("Too many logins.\n"), log_get_logfd());
 				(void) sleep (2); /* XXX: Should be FAIL_DELAY */
 				exit (EXIT_FAILURE);
 			}

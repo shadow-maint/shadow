@@ -38,6 +38,7 @@
 #include "prototypes.h"
 #include "groupio.h"
 #include "getdef.h"
+#include "shadowlog.h"
 
 /*
  * get_ranges - Get the minimum and maximum ID ranges for the search
@@ -74,10 +75,10 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (shadow_logfd,
+			(void) fprintf (log_get_logfd(),
                             _("%s: Invalid configuration: SYS_GID_MIN (%lu), "
                               "GID_MIN (%lu), SYS_GID_MAX (%lu)\n"),
-                            Prog, (unsigned long) *min_id,
+                            log_get_progname(), (unsigned long) *min_id,
                             getdef_ulong ("GID_MIN", 1000UL),
                             (unsigned long) *max_id);
 			return EINVAL;
@@ -97,10 +98,10 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (shadow_logfd,
+			(void) fprintf (log_get_logfd(),
 					_("%s: Invalid configuration: GID_MIN (%lu), "
 					  "GID_MAX (%lu)\n"),
-					Prog, (unsigned long) *min_id,
+					log_get_progname(), (unsigned long) *min_id,
 					(unsigned long) *max_id);
 			return EINVAL;
 		}
@@ -213,10 +214,10 @@ int find_new_gid (bool sys_group,
 			 * more likely to want to stop and address the
 			 * issue.
 			 */
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 				_("%s: Encountered error attempting to use "
 				  "preferred GID: %s\n"),
-				Prog, strerror (result));
+				log_get_progname(), strerror (result));
 			return -1;
 		}
 	}
@@ -243,9 +244,9 @@ int find_new_gid (bool sys_group,
 	/* Create an array to hold all of the discovered GIDs */
 	used_gids = malloc (sizeof (bool) * (gid_max +1));
 	if (NULL == used_gids) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),
-			 Prog, strerror (errno));
+			 log_get_progname(), strerror (errno));
 		return -1;
 	}
 	memset (used_gids, false, sizeof (bool) * (gid_max + 1));
@@ -323,10 +324,10 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (shadow_logfd,
+					fprintf (log_get_logfd(),
 						_("%s: Can't get unique system GID (%s). "
 						  "Suppressing additional messages.\n"),
-						Prog, strerror (result));
+						log_get_progname(), strerror (result));
 					SYSLOG ((LOG_ERR,
 						"Error checking available GIDs: %s",
 						strerror (result)));
@@ -366,10 +367,10 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (shadow_logfd,
+						fprintf (log_get_logfd(),
 							_("%s: Can't get unique system GID (%s). "
 							  "Suppressing additional messages.\n"),
-							Prog, strerror (result));
+							log_get_progname(), strerror (result));
 						SYSLOG ((LOG_ERR,
 							"Error checking available GIDs: %s",
 							strerror (result)));
@@ -426,10 +427,10 @@ int find_new_gid (bool sys_group,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (shadow_logfd,
+					fprintf (log_get_logfd(),
 						_("%s: Can't get unique GID (%s). "
 						  "Suppressing additional messages.\n"),
-						Prog, strerror (result));
+						log_get_progname(), strerror (result));
 					SYSLOG ((LOG_ERR,
 						"Error checking available GIDs: %s",
 						strerror (result)));
@@ -469,10 +470,10 @@ int find_new_gid (bool sys_group,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (shadow_logfd,
+						fprintf (log_get_logfd(),
 							_("%s: Can't get unique GID (%s). "
 							  "Suppressing additional messages.\n"),
-							Prog, strerror (result));
+							log_get_progname(), strerror (result));
 						SYSLOG ((LOG_ERR,
 							"Error checking available GIDs: %s",
 							strerror (result)));
@@ -488,9 +489,9 @@ int find_new_gid (bool sys_group,
 	}
 
 	/* The code reached here and found no available IDs in the range */
-	fprintf (shadow_logfd,
+	fprintf (log_get_logfd(),
 		_("%s: Can't get unique GID (no more available GIDs)\n"),
-		Prog);
+		log_get_progname());
 	SYSLOG ((LOG_WARN, "no more available GIDs on the system"));
 	free (used_gids);
 	return -1;

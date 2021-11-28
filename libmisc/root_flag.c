@@ -38,6 +38,7 @@
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 static void change_root (const char* newroot);
 
@@ -65,18 +66,18 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 			&& (val = argv[i] + 7))
 		    || (strcmp (argv[i], short_opt) == 0)) {
 			if (NULL != newroot) {
-				fprintf (shadow_logfd,
+				fprintf (log_get_logfd(),
 				         _("%s: multiple --root options\n"),
-				         Prog);
+				         log_get_progname());
 				exit (E_BAD_ARG);
 			}
 
 			if (val) {
 				newroot = val;
 			} else if (i + 1 == argc) {
-				fprintf (shadow_logfd,
+				fprintf (log_get_logfd(),
 				         _("%s: option '%s' requires an argument\n"),
-				         Prog, argv[i]);
+				         log_get_progname(), argv[i]);
 				exit (E_BAD_ARG);
 			} else {
 				newroot = argv[++ i];
@@ -94,36 +95,36 @@ static void change_root (const char* newroot)
 	/* Drop privileges */
 	if (   (setregid (getgid (), getgid ()) != 0)
 	    || (setreuid (getuid (), getuid ()) != 0)) {
-		fprintf (shadow_logfd, _("%s: failed to drop privileges (%s)\n"),
-		         Prog, strerror (errno));
+		fprintf (log_get_logfd(), _("%s: failed to drop privileges (%s)\n"),
+		         log_get_progname(), strerror (errno));
 		exit (EXIT_FAILURE);
 	}
 
 	if ('/' != newroot[0]) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: invalid chroot path '%s'\n"),
-		         Prog, newroot);
+		         log_get_progname(), newroot);
 		exit (E_BAD_ARG);
 	}
 
 	if (access (newroot, F_OK) != 0) {
-		fprintf(shadow_logfd,
+		fprintf(log_get_logfd(),
 		        _("%s: cannot access chroot directory %s: %s\n"),
-		        Prog, newroot, strerror (errno));
+		        log_get_progname(), newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 
 	if (chdir (newroot) != 0) {
-		fprintf(shadow_logfd,
+		fprintf(log_get_logfd(),
 				_("%s: cannot chdir to chroot directory %s: %s\n"),
-				Prog, newroot, strerror (errno));
+				log_get_progname(), newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 
 	if (chroot (newroot) != 0) {
-		fprintf(shadow_logfd,
+		fprintf(log_get_logfd(),
 		        _("%s: unable to chroot to directory %s: %s\n"),
-		        Prog, newroot, strerror (errno));
+		        log_get_progname(), newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 }

@@ -3,11 +3,11 @@
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /* Test program for the subid creation routine */
 
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 void usage(void)
 {
@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 	bool ok;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 	while ((c = getopt(argc, argv, "gn")) != EOF) {
 		switch(c) {
 		case 'n': makenew = true; break;

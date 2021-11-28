@@ -40,11 +40,11 @@
 #include <sys/types.h>
 #include "defines.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 /*
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 #ifndef DEFAULT_HUP_MESG
 #define DEFAULT_HUP_MESG _("login time exceeded\n\n")
@@ -188,7 +188,8 @@ int main (int argc, char **argv)
 	 * Start syslogging everything
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	OPENLOG ("logoutd");
 

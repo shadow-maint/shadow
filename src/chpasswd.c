@@ -51,12 +51,12 @@
 #include "shadowio.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 /*
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 static bool eflg   = false;
 static bool md5flg = false;
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
@@ -430,7 +430,8 @@ int main (int argc, char **argv)
 	int line = 0;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

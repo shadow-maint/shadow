@@ -45,6 +45,7 @@
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
+#include "shadowlog.h"
 
 #ifdef __linux__
 static int check_status (const char *name, const char *sname, uid_t uid);
@@ -96,9 +97,9 @@ static int user_busy_utmp (const char *name)
 			continue;
 		}
 
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: user %s is currently logged in\n"),
-		         Prog, name);
+		         log_get_progname(), name);
 		return 1;
 	}
 
@@ -249,9 +250,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 #ifdef ENABLE_SUBIDS
 			sub_uid_close();
 #endif
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 			         _("%s: user %s is currently used by process %d\n"),
-			         Prog, name, pid);
+			         log_get_progname(), name, pid);
 			return 1;
 		}
 
@@ -273,9 +274,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 #ifdef ENABLE_SUBIDS
 					sub_uid_close();
 #endif
-					fprintf (shadow_logfd,
+					fprintf (log_get_logfd(),
 					         _("%s: user %s is currently used by process %d\n"),
-					         Prog, name, pid);
+					         log_get_progname(), name, pid);
 					return 1;
 				}
 			}

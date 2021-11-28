@@ -39,6 +39,7 @@
 
 #include "prototypes.h"
 #include "defines.h"
+#include "shadowlog_internal.h"
 
 /*@exposed@*//*@null@*/char *pw_encrypt (const char *clear, const char *salt)
 {

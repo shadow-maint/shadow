@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include "defines.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /*
  * gettime() returns the time as the number of seconds since the Epoch
@@ -50,6 +51,7 @@
 	char *source_date_epoch;
 	time_t fallback;
 	unsigned long long epoch;
+	FILE *shadow_logfd = log_get_logfd();
 
 	fallback = time (NULL);
 	source_date_epoch = shadow_getenv ("SOURCE_DATE_EPOCH");

@@ -52,6 +52,7 @@
 #include "defines.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "shadowlog.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
@@ -62,7 +63,6 @@
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 static bool
     dflg = false,		/* set last password change date */
@@ -815,7 +815,8 @@ int main (int argc, char **argv)
 	 * Get the program name so that error messages can use it.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");

@@ -38,6 +38,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "getdef.h"
+#include "shadowlog.h"
 
 /*
  * get_ranges - Get the minimum and maximum ID ranges for the search
@@ -74,10 +75,10 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (shadow_logfd,
+			(void) fprintf (log_get_logfd(),
                             _("%s: Invalid configuration: SYS_UID_MIN (%lu), "
                               "UID_MIN (%lu), SYS_UID_MAX (%lu)\n"),
-                            Prog, (unsigned long) *min_id,
+                            log_get_progname(), (unsigned long) *min_id,
                             getdef_ulong ("UID_MIN", 1000UL),
                             (unsigned long) *max_id);
 			return EINVAL;
@@ -97,10 +98,10 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
-			(void) fprintf (shadow_logfd,
+			(void) fprintf (log_get_logfd(),
 					_("%s: Invalid configuration: UID_MIN (%lu), "
 					  "UID_MAX (%lu)\n"),
-					Prog, (unsigned long) *min_id,
+					log_get_progname(), (unsigned long) *min_id,
 					(unsigned long) *max_id);
 			return EINVAL;
 		}
@@ -213,10 +214,10 @@ int find_new_uid(bool sys_user,
 			 * more likely to want to stop and address the
 			 * issue.
 			 */
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 				_("%s: Encountered error attempting to use "
 				  "preferred UID: %s\n"),
-				Prog, strerror (result));
+				log_get_progname(), strerror (result));
 			return -1;
 		}
 	}
@@ -243,9 +244,9 @@ int find_new_uid(bool sys_user,
 	/* Create an array to hold all of the discovered UIDs */
 	used_uids = malloc (sizeof (bool) * (uid_max +1));
 	if (NULL == used_uids) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),
-			 Prog, strerror (errno));
+			 log_get_progname(), strerror (errno));
 		return -1;
 	}
 	memset (used_uids, false, sizeof (bool) * (uid_max + 1));
@@ -323,10 +324,10 @@ int find_new_uid(bool sys_user,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (shadow_logfd,
+					fprintf (log_get_logfd(),
 						_("%s: Can't get unique system UID (%s). "
 						  "Suppressing additional messages.\n"),
-						Prog, strerror (result));
+						log_get_progname(), strerror (result));
 					SYSLOG ((LOG_ERR,
 						"Error checking available UIDs: %s",
 						strerror (result)));
@@ -366,10 +367,10 @@ int find_new_uid(bool sys_user,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (shadow_logfd,
+						fprintf (log_get_logfd(),
 							_("%s: Can't get unique system UID (%s). "
 							  "Suppressing additional messages.\n"),
-							Prog, strerror (result));
+							log_get_progname(), strerror (result));
 						SYSLOG((LOG_ERR,
 							"Error checking available UIDs: %s",
 							strerror (result)));
@@ -426,10 +427,10 @@ int find_new_uid(bool sys_user,
 				 *
 				 */
 				if (!nospam) {
-					fprintf (shadow_logfd,
+					fprintf (log_get_logfd(),
 						_("%s: Can't get unique UID (%s). "
 						  "Suppressing additional messages.\n"),
-						Prog, strerror (result));
+						log_get_progname(), strerror (result));
 					SYSLOG ((LOG_ERR,
 						"Error checking available UIDs: %s",
 						strerror (result)));
@@ -469,10 +470,10 @@ int find_new_uid(bool sys_user,
 					 *
 					 */
 					if (!nospam) {
-						fprintf (shadow_logfd,
+						fprintf (log_get_logfd(),
 							_("%s: Can't get unique UID (%s). "
 							  "Suppressing additional messages.\n"),
-							Prog, strerror (result));
+							log_get_progname(), strerror (result));
 						SYSLOG ((LOG_ERR,
 							"Error checking available UIDs: %s",
 							strerror (result)));
@@ -488,9 +489,9 @@ int find_new_uid(bool sys_user,
 	}
 
 	/* The code reached here and found no available IDs in the range */
-	fprintf (shadow_logfd,
+	fprintf (log_get_logfd(),
 		_("%s: Can't get unique UID (no more available UIDs)\n"),
-		Prog);
+		log_get_progname());
 	SYSLOG ((LOG_WARN, "no more available UIDs on the system"));
 	free (used_uids);
 	return -1;

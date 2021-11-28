@@ -50,6 +50,7 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "shadowlog.h"
 
 /*
  * exit status values
@@ -66,7 +67,6 @@
  * Global variables
  */
 const char *Prog;		/* Program name */
-FILE *shadow_logfd = NULL;
 
 static char *name;		/* The name of user whose password is being changed */
 static char *myname;		/* The current user's name */
@@ -761,7 +761,8 @@ int main (int argc, char **argv)
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

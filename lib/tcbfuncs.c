@@ -38,6 +38,8 @@
 #include "shadowio.h"
 #include "tcbfuncs.h"
 
+#include "shadowlog_internal.h"
+
 #define SHADOWTCB_HASH_BY 1000
 #define SHADOWTCB_LOCK_SUFFIX ".lock"
 

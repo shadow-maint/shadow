@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <lib/prototypes.h>
+#include "shadowlog_internal.h"
 
 int run_part (char *script_path, char *name, char *action)
 {

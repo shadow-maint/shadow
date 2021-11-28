@@ -41,12 +41,12 @@
 #include "subordinateio.h"
 #include "getdef.h"
 #include "idmapping.h"
+#include "shadowlog.h"
 
 /*
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 static bool verify_range(struct passwd *pw, struct map_range *range)
 {
@@ -107,7 +107,8 @@ int main(int argc, char **argv)
 	int written;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	/*
 	 * The valid syntax are

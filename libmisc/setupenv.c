@@ -47,6 +47,7 @@
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
+#include "shadowlog.h"
 
 #ifndef USE_PAM
 static void
@@ -219,7 +220,7 @@ void setup_env (struct passwd *info)
 		static char temp_pw_dir[] = "/";
 
 		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
-			fprintf (shadow_logfd, _("Unable to cd to '%s'\n"),
+			fprintf (log_get_logfd(), _("Unable to cd to '%s'\n"),
 				 info->pw_dir);
 			SYSLOG ((LOG_WARN,
 				 "unable to cd to `%s' for user `%s'\n",

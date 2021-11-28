@@ -3,11 +3,11 @@
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /* Test program for the subid freeing routine */
 
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 void usage(void)
 {
@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
 	bool group = false;   // get subuids by default
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 	while ((c = getopt(argc, argv, "g")) != EOF) {
 		switch(c) {
 		case 'g': group = true; break;

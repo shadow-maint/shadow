@@ -40,6 +40,7 @@
 #include <sys/prctl.h>
 #include <sys/capability.h>
 #endif
+#include "shadowlog.h"
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 {
@@ -47,28 +48,28 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	int idx, argidx;
 
 	if (ranges < 0 || argc < 0) {
-		fprintf(shadow_logfd, "%s: error calculating number of arguments\n", Prog);
+		fprintf(log_get_logfd(), "%s: error calculating number of arguments\n", log_get_progname());
 		return NULL;
 	}
 
 	if (ranges != ((argc + 2) / 3)) {
-		fprintf(shadow_logfd, "%s: ranges: %u is wrong for argc: %d\n", Prog, ranges, argc);
+		fprintf(log_get_logfd(), "%s: ranges: %u is wrong for argc: %d\n", log_get_progname(), ranges, argc);
 		return NULL;
 	}
 
 	if ((ranges * 3) > argc) {
-		fprintf(shadow_logfd, "ranges: %u argc: %d\n",
+		fprintf(log_get_logfd(), "ranges: %u argc: %d\n",
 			ranges, argc);
-		fprintf(shadow_logfd,
+		fprintf(log_get_logfd(),
 			_( "%s: Not enough arguments to form %u mappings\n"),
-			Prog, ranges);
+			log_get_progname(), ranges);
 		return NULL;
 	}
 
 	mappings = calloc(ranges, sizeof(*mappings));
 	if (!mappings) {
-		fprintf(shadow_logfd, _( "%s: Memory allocation failure\n"),
-			Prog);
+		fprintf(log_get_logfd(), _( "%s: Memory allocation failure\n"),
+			log_get_progname());
 		exit(EXIT_FAILURE);
 	}
 
@@ -88,24 +89,24 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			return NULL;
 		}
 		if (ULONG_MAX - mapping->upper <= mapping->count || ULONG_MAX - mapping->lower <= mapping->count) {
-			fprintf(shadow_logfd, _( "%s: subuid overflow detected.\n"), Prog);
+			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 		if (mapping->upper > UINT_MAX ||
 			mapping->lower > UINT_MAX ||
 			mapping->count > UINT_MAX)  {
-			fprintf(shadow_logfd, _( "%s: subuid overflow detected.\n"), Prog);
+			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 		if (mapping->lower + mapping->count > UINT_MAX ||
 				mapping->upper + mapping->count > UINT_MAX) {
-			fprintf(shadow_logfd, _( "%s: subuid overflow detected.\n"), Prog);
+			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 		if (mapping->lower + mapping->count < mapping->lower ||
 				mapping->upper + mapping->count < mapping->upper) {
 			/* this one really shouldn't be possible given previous checks */
-			fprintf(shadow_logfd, _( "%s: subuid overflow detected.\n"), Prog);
+			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -176,19 +177,19 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 	} else if (strcmp(map_file, "gid_map") == 0) {
 		cap = CAP_SETGID;
 	} else {
-		fprintf(shadow_logfd, _("%s: Invalid map file %s specified\n"), Prog, map_file);
+		fprintf(log_get_logfd(), _("%s: Invalid map file %s specified\n"), log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 
 	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
 	if (geteuid() == 0 && geteuid() != ruid) {
 		if (prctl(PR_SET_KEEPCAPS, 1, 0, 0, 0) < 0) {
-			fprintf(shadow_logfd, _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), Prog);
+			fprintf(log_get_logfd(), _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 
 		if (seteuid(ruid) < 0) {
-			fprintf(shadow_logfd, _("%s: Could not seteuid to %d\n"), Prog, ruid);
+			fprintf(log_get_logfd(), _("%s: Could not seteuid to %d\n"), log_get_progname(), ruid);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -204,7 +205,7 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 		data[0].effective |= CAP_TO_MASK(CAP_SETFCAP);
 	data[0].permitted = data[0].effective;
 	if (capset(&hdr, data) < 0) {
-		fprintf(shadow_logfd, _("%s: Could not set caps\n"), Prog);
+		fprintf(log_get_logfd(), _("%s: Could not set caps\n"), log_get_progname());
 		exit(EXIT_FAILURE);
 	}
 #endif
@@ -222,7 +223,7 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 			mapping->lower,
 			mapping->count);
 		if ((written <= 0) || (written >= (bufsize - (pos - buf)))) {
-			fprintf(shadow_logfd, _("%s: snprintf failed!\n"), Prog);
+			fprintf(log_get_logfd(), _("%s: snprintf failed!\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 		pos += written;
@@ -231,13 +232,13 @@ void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
 	/* Write the mapping to the mapping file */
 	fd = openat(proc_dir_fd, map_file, O_WRONLY);
 	if (fd < 0) {
-		fprintf(shadow_logfd, _("%s: open of %s failed: %s\n"),
-			Prog, map_file, strerror(errno));
+		fprintf(log_get_logfd(), _("%s: open of %s failed: %s\n"),
+			log_get_progname(), map_file, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	if (write(fd, buf, pos - buf) != (pos - buf)) {
-		fprintf(shadow_logfd, _("%s: write to %s failed: %s\n"),
-			Prog, map_file, strerror(errno));
+		fprintf(log_get_logfd(), _("%s: write to %s failed: %s\n"),
+			log_get_progname(), map_file, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	close(fd);

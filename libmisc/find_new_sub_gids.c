@@ -37,6 +37,7 @@
 #include "prototypes.h"
 #include "subordinateio.h"
 #include "getdef.h"
+#include "shadowlog.h"
 
 /*
  * find_new_sub_gids - Find a new unused range of GIDs.
@@ -60,18 +61,18 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 	count = getdef_ulong ("SUB_GID_COUNT", 65536);
 
 	if (min > max || count >= max || (min + count - 1) > max) {
-		(void) fprintf (shadow_logfd,
+		(void) fprintf (log_get_logfd(),
 				_("%s: Invalid configuration: SUB_GID_MIN (%lu),"
 				  " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
-			Prog, min, max, count);
+			log_get_progname(), min, max, count);
 		return -1;
 	}
 
 	start = sub_gid_find_free_range(min, max, count);
 	if (start == (gid_t)-1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: Can't get unique subordinate GID range\n"),
-		         Prog);
+		         log_get_progname());
 		SYSLOG ((LOG_WARN, "no more available subordinate GIDs on the system"));
 		return -1;
 	}

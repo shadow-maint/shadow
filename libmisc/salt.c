@@ -21,6 +21,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "shadowlog.h"
 
 #if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
      CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
@@ -178,7 +179,7 @@ static long read_random_bytes (void)
 #endif
 
 fail:
-	fprintf (shadow_logfd,
+	fprintf (log_get_logfd(),
 		 _("Unable to obtain random bytes.\n"));
 	exit (1);
 
@@ -506,7 +507,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		SHA_salt_rounds_to_buf (result, rounds);
 #endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to DES.\n"),
 			 method);
@@ -532,7 +533,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	/* Should not happen, but... */
 	if (NULL == retval) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 			 _("Unable to generate a salt from setting "
 			   "\"%s\", check your settings in "
 			   "ENCRYPT_METHOD and the corresponding "

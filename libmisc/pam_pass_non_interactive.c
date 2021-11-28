@@ -38,6 +38,7 @@
 #include <stdlib.h>
 #include <security/pam_appl.h>
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /*@null@*/ /*@only@*/static const char *non_interactive_password = NULL;
 static int ni_conv (int num_msg,
@@ -76,9 +77,9 @@ static int ni_conv (int num_msg,
 
 		switch (msg[count]->msg_style) {
 		case PAM_PROMPT_ECHO_ON:
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 			         _("%s: PAM modules requesting echoing are not supported.\n"),
-			         Prog);
+			         log_get_progname());
 			goto failed_conversation;
 		case PAM_PROMPT_ECHO_OFF:
 			responses[count].resp = strdup (non_interactive_password);
@@ -88,7 +89,7 @@ static int ni_conv (int num_msg,
 			break;
 		case PAM_ERROR_MSG:
 			if (   (NULL == msg[count]->msg)
-			    || (fprintf (shadow_logfd, "%s\n", msg[count]->msg) <0)) {
+			    || (fprintf (log_get_logfd(), "%s\n", msg[count]->msg) <0)) {
 				goto failed_conversation;
 			}
 			responses[count].resp = NULL;
@@ -101,9 +102,9 @@ static int ni_conv (int num_msg,
 			responses[count].resp = NULL;
 			break;
 		default:
-			(void) fprintf (shadow_logfd,
+			(void) fprintf (log_get_logfd(),
 			                _("%s: conversation type %d not supported.\n"),
-			                Prog, msg[count]->msg_style);
+			                log_get_progname(), msg[count]->msg_style);
 			goto failed_conversation;
 		}
 	}
@@ -143,19 +144,19 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 
 	ret = pam_start (pam_service, username, &non_interactive_pam_conv, &pamh);
 	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: (user %s) pam_start failure %d\n"),
-		         Prog, username, ret);
+		         log_get_progname(), username, ret);
 		return 1;
 	}
 
 	non_interactive_password = password;
 	ret = pam_chauthtok (pamh, 0);
 	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: (user %s) pam_chauthtok() failed, error:\n"
 		           "%s\n"),
-		         Prog, username, pam_strerror (pamh, ret));
+		         log_get_progname(), username, pam_strerror (pamh, ret));
 	}
 
 	(void) pam_end (pamh, PAM_SUCCESS);
