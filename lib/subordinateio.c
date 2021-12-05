@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 - Eric Biederman
+ * SPDX-FileCopyrightText: 2012 - Eric Biederman
  */
 
 #include <config.h>

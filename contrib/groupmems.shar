@@ -76,36 +76,9 @@ else
   $echo 'x -' extracting 'Makefile' '(text)'
   sed 's/^X//' << 'SHAR_EOF' > 'Makefile' &&
 /*
-# Copyright 2000, International Business Machines, Inc.
-# All rights reserved.
-#
-# original author: George Kraft IV, gk4@us.ibm.com
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-# 1. Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of International Business Machines, Inc., nor the 
-#    names of its contributors may be used to endorse or promote products 
-#    derived from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY INTERNATIONAL BUSINESS MACHINES, INC. AND
-# CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
-# BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL 
-# INTERNATIONAL BUSINESS MACHINES, INC. OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-# SUCH DAMAGE.
+# SPDX-FileCopyrightText: 2000, International Business Machines, Inc.
+# SPDX-FileCopyrightText: 2000, George Kraft IV, gk4@us.ibm.com
+# SPDX-License-Identifier: BSD-3-Clause
 # 
 X
 all: groupmems
@@ -143,36 +116,9 @@ else
   $echo 'x -' extracting 'groupmems.c' '(text)'
   sed 's/^X//' << 'SHAR_EOF' > 'groupmems.c' &&
 /*
-X * Copyright 2000, International Business Machines, Inc.
-X * All rights reserved.
-X *
-X * original author: George Kraft IV, gk4@us.ibm.com
-X *
-X * Redistribution and use in source and binary forms, with or without
-X * modification, are permitted provided that the following conditions
-X * are met:
-X *
-X * 1. Redistributions of source code must retain the above copyright
-X *    notice, this list of conditions and the following disclaimer.
-X * 2. Redistributions in binary form must reproduce the above copyright
-X *    notice, this list of conditions and the following disclaimer in the
-X *    documentation and/or other materials provided with the distribution.
-X * 3. Neither the name of International Business Machines, Inc., nor the 
-X *    names of its contributors may be used to endorse or promote products 
-X *    derived from this software without specific prior written permission.
-X *
-X * THIS SOFTWARE IS PROVIDED BY INTERNATIONAL BUSINESS MACHINES, INC. AND
-X * CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
-X * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
-X * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL 
-X * INTERNATIONAL BUSINESS MACHINES, INC. OR CONTRIBUTORS BE LIABLE
-X * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-X * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-X * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-X * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-X * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-X * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-X * SUCH DAMAGE.
+X * SPDX-FileCopyrightText: 2000, International Business Machines, Inc.
+X * SPDX-FileCopyrightText: 2000, George Kraft IV, gk4@us.ibm.com
+X * SPDX-License-Identifier: BSD-3-Clause
 X */
 /*
 **
@@ -436,36 +382,9 @@ else
   $echo 'x -' extracting 'groupmems.8' '(text)'
   sed 's/^X//' << 'SHAR_EOF' > 'groupmems.8' &&
 X.\"
-X.\" Copyright 2000, International Business Machines, Inc.
-X.\" All rights reserved.
-X.\"
-X.\" original author: George Kraft IV, gk4@us.ibm.com
-X.\"
-X.\" Redistribution and use in source and binary forms, with or without
-X.\" modification, are permitted provided that the following conditions
-X.\" are met:
-X.\"
-X.\" 1. Redistributions of source code must retain the above copyright
-X.\"    notice, this list of conditions and the following disclaimer.
-X.\" 2. Redistributions in binary form must reproduce the above copyright
-X.\"    notice, this list of conditions and the following disclaimer in the
-X.\"    documentation and/or other materials provided with the distribution.
-X.\" 3. Neither the name of International Business Machines, Inc., nor the 
-X.\"    names of its contributors may be used to endorse or promote products 
-X.\"    derived from this software without specific prior written permission.
-X.\"
-X.\" THIS SOFTWARE IS PROVIDED BY INTERNATIONAL BUSINESS MACHINES, INC. AND
-X.\" CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
-X.\" BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
-X.\" FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL 
-X.\" INTERNATIONAL BUSINESS MACHINES, INC. OR CONTRIBUTORS BE LIABLE
-X.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-X.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-X.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-X.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-X.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-X.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-X.\" SUCH DAMAGE.
+X.\" SPDX-FileCopyrightText: 2000, International Business Machines, Inc.
+X.\" SPDX-FileCopyrightText: 2000, George Kraft IV, gk4@us.ibm.com
+X.\" SPDX-License-Identifier: BSD-3-Clause
 X.\"
 X.\" $Id$
 X.\"

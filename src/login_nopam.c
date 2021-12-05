@@ -1,4 +1,9 @@
 /* Taken from logdaemon-5.0, only minimal changes.  --marekm */
+/*
+ * SPDX-FileCopyrightText: 1990 - 1995, Wietse Venema.
+ *
+ * SPDX-License-Identifier: Unlicense
+ */
 
 /************************************************************************
 * Copyright 1995 by Wietse Venema.  All rights reserved. Individual files
