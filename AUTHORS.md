@@ -55,7 +55,7 @@ Judd Bourgeois <shagboy@bluesky.net>
 Juergen Heinzl <unicorn@noris.net>
 Juha Virtanen <jiivee@iki.fi>
 Julian Pidancet <julian.pidancet@gmail.com>
-Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+Julianne Frances Haugh <julie78787@gmail.com>
 Leonard N. Zubkoff <lnz@dandelion.com>
 Luca Berra <bluca@www.polimi.it>
 Lukáš Kuklínek <lkukline@redhat.com>
