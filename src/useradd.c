@@ -2507,14 +2507,14 @@ int main (int argc, char **argv)
 	{
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
+		if (pampw == NULL && getuid ()) {
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
 			fail_exit (1);
 		}
 
-		retval = pam_start ("useradd", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("useradd", pampw?pampw->pw_name:"root", &conv, &pamh);
 	}
 
 	if (PAM_SUCCESS == retval) {
