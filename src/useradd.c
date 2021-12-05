@@ -2356,8 +2356,13 @@ static void create_mail (void)
 		mode_t mode;
 
 		spool = getdef_str ("MAIL_DIR");
+#ifdef MAIL_SPOOL_DIR
+		if ((NULL == spool) && (getdef_str ("MAIL_FILE") == NULL)) {
+			spool = MAIL_SPOOL_DIR;
+		}
+#endif /* MAIL_SPOOL_DIR */
 		if (NULL == spool) {
-			spool = "/var/mail";
+			return;
 		}
 		file = alloca (strlen (prefix) + strlen (spool) + strlen (user_name) + 2);
 		if (prefix[0])
