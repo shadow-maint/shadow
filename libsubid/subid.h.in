@@ -4,6 +4,10 @@
 
 #ifndef SUBID_RANGE_DEFINED
 #define SUBID_RANGE_DEFINED 1
+#define SUBID_ABI_VERSION @LIBSUBID_ABI_MAJOR@.@LIBSUBID_ABI_MINOR@.@LIBSUBID_ABI_MICRO@
+#define SUBID_ABI_MAJOR @LIBSUBID_ABI_MAJOR@
+#define SUBID_ABI_MINOR @LIBSUBID_ABI_MINOR@
+#define SUBID_ABI_MICRO @LIBSUBID_ABI_MICRO@
 
 /* subid_range is just a starting point and size of a range */
 struct subid_range {

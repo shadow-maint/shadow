@@ -741,6 +741,7 @@ AC_CONFIG_FILES([
 	libmisc/Makefile
 	lib/Makefile
 	libsubid/Makefile
+	libsubid/subid.h
 	src/Makefile
 	contrib/Makefile
 	etc/Makefile
