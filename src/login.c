@@ -1288,6 +1288,7 @@ int main (int argc, char **argv)
 			env++;
 		}
 	}
+	(void) pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
 #endif
 
 	(void) setlocale (LC_ALL, "");

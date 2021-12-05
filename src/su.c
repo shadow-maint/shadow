@@ -1162,12 +1162,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	/*
-	 * PAM_DATA_SILENT is not supported by some modules, and
-	 * there is no strong need to clean up the process space's
-	 * memory since we will either call exec or exit.
-	pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
-	 */
+#ifdef USE_PAM
+	(void) pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
+#endif
 
 	endpwent ();
 	endspent ();
