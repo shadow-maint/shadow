@@ -42,7 +42,7 @@
 static const char *Prog = "(libsubid)";
 static FILE *shadow_logfd;
 
-bool libsubid_init(const char *progname, FILE * logfd)
+bool subid_init(const char *progname, FILE * logfd)
 {
 	if (progname) {
 		progname = strdup(progname);
@@ -70,12 +70,12 @@ int get_subid_ranges(const char *owner, enum subid_type id_type, struct subid_ra
 	return list_owner_ranges(owner, id_type, ranges);
 }
 
-int get_subuid_ranges(const char *owner, struct subid_range **ranges)
+int subid_get_uid_ranges(const char *owner, struct subid_range **ranges)
 {
 	return get_subid_ranges(owner, ID_TYPE_UID, ranges);
 }
 
-int get_subgid_ranges(const char *owner, struct subid_range **ranges)
+int subid_get_gid_ranges(const char *owner, struct subid_range **ranges)
 {
 	return get_subid_ranges(owner, ID_TYPE_GID, ranges);
 }
@@ -86,12 +86,12 @@ int get_subid_owner(unsigned long id, enum subid_type id_type, uid_t **owner)
 	return find_subid_owners(id, id_type, owner);
 }
 
-int get_subuid_owners(uid_t uid, uid_t **owner)
+int subid_get_uid_owners(uid_t uid, uid_t **owner)
 {
 	return get_subid_owner((unsigned long)uid, ID_TYPE_UID, owner);
 }
 
-int get_subgid_owners(gid_t gid, uid_t **owner)
+int subid_get_gid_owners(gid_t gid, uid_t **owner)
 {
 	return get_subid_owner((unsigned long)gid, ID_TYPE_GID, owner);
 }
@@ -103,12 +103,12 @@ bool grant_subid_range(struct subordinate_range *range, bool reuse,
 	return new_subid_range(range, id_type, reuse);
 }
 
-bool grant_subuid_range(struct subordinate_range *range, bool reuse)
+bool subid_grant_uid_range(struct subordinate_range *range, bool reuse)
 {
 	return grant_subid_range(range, reuse, ID_TYPE_UID);
 }
 
-bool grant_subgid_range(struct subordinate_range *range, bool reuse)
+bool subid_grant_gid_range(struct subordinate_range *range, bool reuse)
 {
 	return grant_subid_range(range, reuse, ID_TYPE_GID);
 }
@@ -119,12 +119,12 @@ bool ungrant_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	return release_subid_range(range, id_type);
 }
 
-bool ungrant_subuid_range(struct subordinate_range *range)
+bool subid_ungrant_uid_range(struct subordinate_range *range)
 {
 	return ungrant_subid_range(range, ID_TYPE_UID);
 }
 
-bool ungrant_subgid_range(struct subordinate_range *range)
+bool subid_ungrant_gid_range(struct subordinate_range *range)
 {
 	return ungrant_subid_range(range, ID_TYPE_GID);
 }
