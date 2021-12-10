@@ -197,7 +197,7 @@ CHFN_RESTRICT		rwh
 
 #
 # Should login be allowed if we can't cd to the home directory?
-# Default in no.
+# Default is no.
 #
 DEFAULT_HOME	yes
 
