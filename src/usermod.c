@@ -1073,18 +1073,14 @@ static void process_flags (int argc, char **argv)
 				}
 				break;
 			case 'e':
-				if ('\0' != *optarg) {
-					user_newexpire = strtoday (optarg);
-					if (user_newexpire < -1) {
-						fprintf (stderr,
-						         _("%s: invalid date '%s'\n"),
-						         Prog, optarg);
-						exit (E_BAD_ARG);
-					}
-					user_newexpire *= DAY / SCALE;
-				} else {
-					user_newexpire = -1;
+				user_newexpire = strtoday (optarg);
+				if (user_newexpire < -1) {
+					fprintf (stderr,
+						 _("%s: invalid date '%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
 				}
+				user_newexpire *= DAY / SCALE;
 				eflg = true;
 				break;
 			case 'f':
