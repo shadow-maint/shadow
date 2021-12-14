@@ -328,6 +328,17 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-r</option>, <option>--remove</option>
+	</term>
+	<listitem>
+	  <para>
+	    Remove the user from named supplementary group(s). Use only with the
+	    <option>-G</option> option.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>

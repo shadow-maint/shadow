@@ -147,6 +147,7 @@ static bool
     mflg = false,		/* create user's home directory if it doesn't exist */
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     pflg = false,		/* new encrypted password */
+    rflg = false,		/* remove a user from a single group */
     sflg = false,		/* new shell program */
 #ifdef WITH_SELINUX
     Zflg = false,		/* new selinux user */
@@ -422,6 +423,9 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -g, --gid GROUP               force use GROUP as new primary group\n"), usageout);
 	(void) fputs (_("  -G, --groups GROUPS           new list of supplementary GROUPS\n"), usageout);
 	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
+	                "                                mentioned by the -G option without removing\n"
+	                "                                the user from other groups\n"), usageout);
+	(void) fputs (_("  -r, --remove                  remove the user from only the supplemental GROUPS\n"
 	                "                                mentioned by the -G option without removing\n"
 	                "                                the user from other groups\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
@@ -751,6 +755,14 @@ static void update_group (void)
 			continue;
 		}
 
+		/*
+		* If rflg+Gflg  is passed in AKA -rG invert is_member flag, which removes
+		* mentioned groups while leaving the others.
+		*/
+		if (Gflg && rflg && was_member) {
+			is_member = !is_member;
+		}
+
 		ngrp = __gr_dup (grp);
 		if (NULL == ngrp) {
 			fprintf (stderr,
@@ -864,6 +876,14 @@ static void update_gshadow (void)
 
 		if (!was_member && !was_admin && !is_member) {
 			continue;
+		}
+
+		/*
+		* If rflg+Gflg  is passed in AKA -rG invert is_member, to remove targeted
+		* groups while leaving the user apart of groups not mentioned
+		*/
+		if (Gflg && rflg && was_member) {
+			is_member = !is_member;
 		}
 
 		nsgrp = __sgr_dup (sgrp);
@@ -1014,6 +1034,7 @@ static void process_flags (int argc, char **argv)
 			{"move-home",    no_argument,       NULL, 'm'},
 			{"non-unique",   no_argument,       NULL, 'o'},
 			{"password",     required_argument, NULL, 'p'},
+			{"remove",       no_argument,       NULL, 'r'},
 			{"root",         required_argument, NULL, 'R'},
 			{"prefix",       required_argument, NULL, 'P'},
 			{"shell",        required_argument, NULL, 's'},
@@ -1031,7 +1052,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
-		                         "abc:d:e:f:g:G:hl:Lmop:R:s:u:UP:"
+		                         "abc:d:e:f:g:G:hl:Lmop:rR:s:u:UP:"
 #ifdef ENABLE_SUBIDS
 		                         "v:w:V:W:"
 #endif				/* ENABLE_SUBIDS */
@@ -1140,6 +1161,9 @@ static void process_flags (int argc, char **argv)
 			case 'p':
 				user_pass = optarg;
 				pflg = true;
+				break;
+			case 'r':
+				rflg = true;
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
@@ -1339,6 +1363,20 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-a", "-G");
+		usage (E_USAGE);
+	}
+
+	if (rflg && (!Gflg)) {
+		fprintf (stderr,
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-r", "-G");
+		usage (E_USAGE);
+	}
+
+	if (rflg && aflg) {
+		fprintf (stderr,
+		         _("%s: %s and %s are mutually exclusive flags\n"),
+		         Prog, "-r", "-a");
 		usage (E_USAGE);
 	}
 
