@@ -295,6 +295,21 @@ static void prepare_pam_close_session (void)
 	sigset_t ourset;
 	int status;
 	int ret;
+	struct sigaction action;
+
+	/* reset SIGCHLD handling to default */
+	action.sa_handler = SIG_DFL;
+	sigemptyset (&action.sa_mask);
+	action.sa_flags = 0;
+	if (0 == caught && sigaction (SIGCHLD, &action, NULL) != 0) {
+		fprintf (stderr,
+		         _("%s: signal masking malfunction\n"),
+		         Prog);
+		SYSLOG ((LOG_WARN, "Will not execute %s", shellstr));
+		closelog ();
+		exit (1);
+		/* Only the child returns. See above. */
+	}
 
 	pid_child = fork ();
 	if (pid_child == 0) {	/* child shell */
@@ -318,11 +333,7 @@ static void prepare_pam_close_session (void)
 		caught = SIGTERM;
 	}
 	if (0 == caught) {
-		struct sigaction action;
-
 		action.sa_handler = catch_signals;
-		sigemptyset (&action.sa_mask);
-		action.sa_flags = 0;
 		sigemptyset (&ourset);
 
 		if (   (sigaddset (&ourset, SIGTERM) != 0)
