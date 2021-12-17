@@ -7,9 +7,12 @@ use std::env;
 use std::fs;
 use std::path::Path;
 use std::process::exit;
+use std::io::BufReader;
+use std::io::prelude::*;
+use std::fs::File;
 
 use clap::{Clap, ErrorKind, IntoApp};
-use nix::unistd::{chroot, Uid};
+use nix::unistd::{chroot, Uid, User};
 
 const E_SUCCESS: i32 = 0; /* success */
 const E_NOPERM: i32 = 1; /* permission denied */
@@ -116,7 +119,8 @@ struct Opts {
     login: Option<String>,
 }
 
-/*struct ShadowEntry {
+#[allow(dead_code)]
+struct ShadowEntry {
     sp_namp: String, // Login name
     sp_pwdp: String, // Hashed passphrase
     sp_lstchg: i64,  // Date of last change
@@ -126,7 +130,62 @@ struct Opts {
     sp_inact: i64,   // Number of days the account may be inactive
     sp_expire: i64,  // Number of days since 1970-01-01 until account expires
     sp_flag: u64,    // Reserved
-}*/
+}
+
+impl ShadowEntry {
+
+    fn new(line: String) -> Result<ShadowEntry, String> {
+        let fields: Vec<&str> = line.split(":").collect();
+        if fields.len() != 9 {
+            // TODO - actually erroring out on a corrupt entry is probably
+            // bad.
+            return Err(String::from("Corrupt entry"));
+        };
+        let sp_namp = String::from(fields[0]);
+        let sp_pwdp = String::from(fields[1]);
+        let sp_lstchg = fields[2].parse().unwrap_or(-1);
+        let sp_min = fields[3].parse().unwrap_or(-1);
+        let sp_max = fields[4].parse().unwrap_or(-1);
+        let sp_warn = fields[5].parse().unwrap_or(-1);
+        let sp_inact = fields[6].parse().unwrap_or(-1);
+        let sp_expire = fields[7].parse().unwrap_or(-1);
+        let sp_flag = fields[8].parse().unwrap_or(u64::MAX);
+        Ok(ShadowEntry{
+            sp_namp,
+            sp_pwdp,
+            sp_lstchg,
+            sp_min,
+            sp_max,
+            sp_warn,
+            sp_inact,
+            sp_expire,
+            sp_flag,
+        })
+    }
+}
+
+#[allow(dead_code)]
+struct ShadowFile {
+    entries: Vec<ShadowEntry>,
+    dirty: bool,
+}
+
+impl ShadowFile {
+    fn new(path: &str) -> Result<ShadowFile, String> {
+        let mut list: Vec<ShadowEntry> = Vec::new();
+        let f = File::open(&path);
+        let f = match f {
+            Ok(f) => f,
+            Err(e) => return Err(e.to_string()),
+        };
+        let f = BufReader::new(f);
+        for line in f.lines() {
+            let e = ShadowEntry::new(line.unwrap())?;
+            list.push(e);
+        }
+        Ok(ShadowFile{entries: list, dirty: false})
+    }
+}
 
 fn do_chroot(newroot: &Path) -> anyhow::Result<()> {
     if !newroot.is_absolute() {
@@ -139,6 +198,42 @@ fn do_chroot(newroot: &Path) -> anyhow::Result<()> {
 
     env::set_current_dir(newroot)?;
     Ok(chroot(newroot)?)
+}
+
+fn get_my_name() -> String {
+    // need to implement get_my_pwent(); or really just libc::getlogin(), but it sucks that
+    // it's unsafe...
+    // TODO: first try to libc:getlogin()
+    let myuid = Uid::current();
+    let res = User::from_uid(myuid).unwrap().unwrap();
+    return res.name;
+}
+
+fn passwd_lock_type(passwd: &str) -> &str {
+    match passwd {
+        "*" => "L",
+        "!" => "L",
+        "" => "NP",
+        _ => "P",
+    }
+}
+
+fn print_status(username: &str) {
+    let f = ShadowFile::new("/etc/shadow").expect("Failed opening shadow");
+    for e in f.entries {
+        if e.sp_namp == username {
+            println!("{} {} {} {} {} {} {}",
+                e.sp_namp,
+                passwd_lock_type(e.sp_pwdp.as_str()),
+                e.sp_lstchg,
+                e.sp_min,
+                e.sp_max,
+                e.sp_warn,
+                e.sp_inact);
+            return;
+        }
+    }
+    println!("No such user");
 }
 
 fn main() {
@@ -156,6 +251,10 @@ fn main() {
             _ => exit(E_USAGE),
         }
     });
+
+    /*println!("{:?}", opts);
+    let args: Vec<String> = env::args().collect();
+    println!("{:?}", args);*/
 
     if let Some(newroot) = opts.root {
         do_chroot(Path::new(&newroot)).unwrap_or_else(|e| {
@@ -175,14 +274,21 @@ fn main() {
             exit(E_NOPERM)
         }
 
-        todo!()
+        todo!();
+        //print_all_statuses();
+        //exit(E_SUCCESS);
     }
 
+    let myname = get_my_name();
+
     let _name = opts.login.unwrap_or_else(|| {
-        // need to implement get_my_pwent(); or really just libc::getlogin(), but it sucks that
-        // it's unsafe...
-        todo!()
+        myname
     });
+
+    if opts.status {
+        print_status(_name.as_str());
+        exit(E_SUCCESS);
+    }
 
     exit(E_SUCCESS)
 }
