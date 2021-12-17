@@ -584,6 +584,12 @@ static void new_pwent (struct passwd *pwent)
 		SYSLOG ((LOG_INFO,
 		         "change user '%s' home from '%s' to '%s'",
 		         pwent->pw_name, pwent->pw_dir, user_newhome));
+
+		if (strlen(user_newhome) > 1
+			&& '/' == user_newhome[strlen(user_newhome)-1]) {
+			user_newhome[strlen(user_newhome)-1]='\0';
+		}
+
 		pwent->pw_dir = user_newhome;
 	}
 	if (sflg) {
