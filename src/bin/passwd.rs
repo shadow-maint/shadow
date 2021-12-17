@@ -17,6 +17,62 @@ const E_USAGE: i32 = 2; /* invalid combination of options */
 const E_FAILURE: i32 = 3; /* unexpected failure, nothing done */
 const E_BAD_ARG: i32 = 6; /* invalid argument to option */
 
+const BAD_ENVIRONS: &'static [&'static str] = &[
+    "_RLD_",
+    "BASH_ENV",        /* GNU creeping featurism strikes again... */
+    "ENV",
+    "HOME",
+    "IFS",
+    "KRB_CONF",
+    "LIBPATH",
+    "MAIL",
+    "NLSPATH",
+    "PATH",
+    "SHELL",
+    "SHLIB_PATH",
+];
+const BAD_ENVIRONS_PREFIX: &'static [&'static str] = &[
+    "LD_",            /* anything with the LD_ prefix */
+];
+
+/* these are allowed, but with no slashes inside
+   (to work around security problems in GNU gettext) */
+const NO_SLASH_ENVIRONS: &'static [&'static str] = &[
+    "LANG",
+    "LANGUAGE",
+];
+const NO_SLASH_ENVIRONS_PREFIX: &'static [&'static str] = &[
+    "LC_",            /* anything with the LC_ prefix */
+];
+
+fn sanitize_environ() {
+    for (key, value) in env::vars() { // key and value are String
+        let key_str = key.as_str();
+        if BAD_ENVIRONS.contains(&key_str) {
+            env::remove_var(key_str);
+            continue;
+        }
+        if NO_SLASH_ENVIRONS.contains(&key_str) {
+            if value.contains("/") {
+                env::remove_var(key_str);
+            }
+            continue;
+        }
+        for prefix in BAD_ENVIRONS_PREFIX.iter() {
+            if key_str.starts_with(prefix) {
+                env::remove_var(key_str);
+            }
+        }
+        for prefix in NO_SLASH_ENVIRONS_PREFIX.iter() {
+            if key_str.starts_with(prefix) {
+                if value.contains("/") {
+                    env::remove_var(key_str);
+                }
+            }
+        }
+    }
+}
+
 #[derive(Clap, Debug)]
 #[clap(version = "0.0.0-rust")]
 struct Opts {
@@ -60,7 +116,7 @@ struct Opts {
     login: Option<String>,
 }
 
-struct Shadow_entry {
+/*struct ShadowEntry {
     sp_namp: String, // Login name
     sp_pwdp: String, // Hashed passphrase
     sp_lstchg: i64,  // Date of last change
@@ -70,7 +126,7 @@ struct Shadow_entry {
     sp_inact: i64,   // Number of days the account may be inactive
     sp_expire: i64,  // Number of days since 1970-01-01 until account expires
     sp_flag: u64,    // Reserved
-}
+}*/
 
 fn do_chroot(newroot: &Path) -> anyhow::Result<()> {
     if !newroot.is_absolute() {
@@ -109,7 +165,8 @@ fn main() {
     }
 
     // TODO: openlog()
-    // sanitize environment
+    
+    sanitize_environ();
 
     let amroot = Uid::effective().is_root();
 
@@ -128,4 +185,59 @@ fn main() {
     });
 
     exit(E_SUCCESS)
+}
+
+#[cfg(test)]
+pub mod tests {
+    use super::*;
+
+    fn clear_environ() {
+        for (key, _) in env::vars() {
+            env::remove_var(key);
+        }
+    }
+
+    fn verify_environ(wantlang: bool) {
+        let mut found_xxx = false;
+        let mut found_yyy = false;
+        let mut found_lang = false;
+        let mut found_lca = false;
+        let mut found_extra = false;
+
+        for (key, _) in env::vars() {
+            match key.as_str() {
+                "XXX" => found_xxx = true,
+                "YYY" => found_yyy = true,
+                "LANG" => found_lang = true,
+                "LC_A" => found_lca = true,
+                _ => found_extra = true,
+            } 
+        }
+        assert_eq!(found_xxx, true);
+        assert_eq!(found_yyy, true);
+        assert_eq!(found_extra, false);
+        assert_eq!(found_lang, wantlang);
+        assert_eq!(found_lca, wantlang);
+    }
+
+    #[test]
+    fn test_env() {
+        clear_environ();
+        env::set_var("XXX", "xxx");
+        env::set_var("YYY", "yyy");
+        env::set_var("ENV", "1"); // test bad_environs
+        env::set_var("LD_A", "1"); // test bad_environs_prefix
+        env::set_var("LANG", "1"); // test noslash without slash
+        env::set_var("LC_A", "1"); // test noslash without slash
+        sanitize_environ();
+        verify_environ(true);
+
+        clear_environ();
+        env::set_var("XXX", "xxx");
+        env::set_var("YYY", "yyy");
+        env::set_var("LANG", "./bad/wolf"); // test noslash with slash
+        env::set_var("LC_A", "./bad/wolf"); // test noslash with slash
+        sanitize_environ();
+        verify_environ(false);
+    }
 }
