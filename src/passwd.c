@@ -1109,7 +1109,7 @@ int main (int argc, char **argv)
 			(void) printf (_("%s: password changed.\n"), Prog);
 #endif				/* USE_PAM */
 		} else {
-			(void) printf (_("%s: password expiry information changed.\n"), Prog);
+			(void) printf (_("%s: password changed.\n"), Prog);
 		}
 	}
 
