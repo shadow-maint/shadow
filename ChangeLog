@@ -1,3 +1,46 @@
+2021-12-19  Serge Hallyn <serge@hallyn.com>
+
+	Note: From this release forward, su from this package should be
+	considered deprecated.  Please replace any users of it with su from
+	util-linux.  Please open an issue if there is a problem with that.
+	We intend to remove it in an upcoming release.
+
+	* libsubid fixes (Xi Ruoyao, Serge Hallyn, Iker Pedrosa, Mike Gilbert,
+	  GalaxyMaster, and Luís Ferreira)
+	* Rename the test program list_subid_ranges to getsubids, write
+	  a manpage, so distros can ship it. (Iker Pedrosa)
+	* Add libeconf dep for new*idmap (Iker Pedrosa)
+	* Allow all group types with usermod -G (Iker Pedrosa)
+	* Avoid useradd generating empty subid range (Iker Pedrosa)
+	* Handle NULL pw_passwd (Jaroslav Jindrak)
+	* Fix default value SHA_get_salt_rounds (Mike Gilbert)
+	* Use https where possible in README (Paul Menzel)
+	* Update content and format of README (Iker Pedrosa)
+	* Translation updates (Balint Reczey, Frans Spiesschaert)
+	* Switch from xml2po to itstool in 'make dist' (Serge Hallyn)
+	* Fix double frees (Michael Vetter)
+	* Add LOG_INIT configurable to useradd (Andy Zaugg)
+	* Add CREATE_MAIL_SPOOL documentation (Andy Zaugg)
+	* Create a security.md
+	* Fix su never being SIGKILLd when trapping TERM (Ruihan li)
+	* Fix wrong SELinux labels in several possible cases (Iker Pedrosa)
+	* Fix missing chmod in chadowtb_move (GalaxyMaster)
+	* Handle malformed hushlogins entries (Tobias Stoeckmann)
+	* Fix groupdel segv when passwd does not exist (François Rigault)
+	* Fix covscan-found newgrp segfault (Iker Pedrosa)
+	* Remove trailing slash on hoedir (Ed Neville)
+	* Fix passwd -l message - it does not change expirey (Ed Neville)
+	* Fix SIGCHLD handling bugs in su and vipw (Tobias Stoeckmann)
+	* Remove special case for "" in usermod (Alejandro Colomar)
+	* Implement usermod -rG to remove a specific group
+	  (Andy Zaugg)
+	* call pam_end() after fork in child path for su and login
+	  (Björn Fischer)
+	* useradd: In absence of /etc/passwd, assume 0 == root
+	  (Ludwig Nussel)
+	* lib: check NULL before freeing data (Iker Pedrosa)
+	* Fix pwck segfault (Iker Pedrosa)
+
 2021-07-22  Serge Hallyn <serge@hallyn.com>
 
 	* Updated translations (Björn Esser, Juergen Hoetzel)
