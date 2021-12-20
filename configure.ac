@@ -321,8 +321,6 @@ if test "$with_sha_crypt" = "yes"; then
 	AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
 fi
 
-AM_CONDITIONAL(ENABLE_SHARED, test "x$enable_shared" = "xyes")
-
 AM_CONDITIONAL(USE_BCRYPT, test "x$with_bcrypt" = "xyes")
 if test "$with_bcrypt" = "yes"; then
 	AC_DEFINE(USE_BCRYPT, 1, [Define to allow the bcrypt password encryption algorithm])
