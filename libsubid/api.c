@@ -39,8 +39,8 @@
 #include "idmapping.h"
 #include "subid.h"
 
-static const char *Prog = "(libsubid)";
-static FILE *shadow_logfd;
+const char *Prog = "(libsubid)";
+FILE *shadow_logfd;
 
 bool subid_init(const char *progname, FILE * logfd)
 {
