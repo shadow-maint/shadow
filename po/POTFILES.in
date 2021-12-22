@@ -41,6 +41,7 @@ libmisc/cleanup_group.c
 libmisc/cleanup_user.c
 libmisc/console.c
 libmisc/copydir.c
+libmisc/date_to_str.c
 libmisc/entry.c
 libmisc/env.c
 libmisc/failure.c

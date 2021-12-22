@@ -135,7 +135,6 @@ static int new_password (const struct passwd *);
 
 static void check_password (const struct passwd *, const struct spwd *);
 #endif				/* !USE_PAM */
-static /*@observer@*/const char *date_to_str (time_t);
 static /*@observer@*/const char *pw_status (const char *);
 static void print_status (const struct passwd *);
 static /*@noreturn@*/void fail_exit (int);
@@ -447,21 +446,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 }
 #endif				/* !USE_PAM */
 
-static /*@observer@*/const char *date_to_str (time_t t)
-{
-	static char buf[80];
-	struct tm *tm;
-
-	tm = gmtime (&t);
-#ifdef HAVE_STRFTIME
-	(void) strftime (buf, sizeof buf, "%m/%d/%Y", tm);
-#else				/* !HAVE_STRFTIME */
-	(void) snprintf (buf, sizeof buf, "%02d/%02d/%04d",
-	                 tm->tm_mon + 1, tm->tm_mday, tm->tm_year + 1900);
-#endif				/* !HAVE_STRFTIME */
-	return buf;
-}
-
 static /*@observer@*/const char *pw_status (const char *pass)
 {
 	if (*pass == '*' || *pass == '!') {
@@ -478,14 +462,16 @@ static /*@observer@*/const char *pw_status (const char *pass)
  */
 static void print_status (const struct passwd *pw)
 {
+	char         date[80];
 	struct spwd *sp;
 
 	sp = getspnam (pw->pw_name); /* local, no need for xgetspnam */
 	if (NULL != sp) {
+		date_to_str (sizeof(date), date, sp->sp_lstchg * SCALE),
 		(void) printf ("%s %s %s %lld %lld %lld %lld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),
-		               date_to_str (sp->sp_lstchg * SCALE),
+		               date,
 		               ((long long)sp->sp_min * SCALE) / DAY,
 		               ((long long)sp->sp_max * SCALE) / DAY,
 		               ((long long)sp->sp_warn * SCALE) / DAY,

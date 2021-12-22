@@ -185,8 +185,6 @@ static bool sub_gid_locked = false;
 
 
 /* local function prototypes */
-static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
-                         long int date);
 static int get_groups (char *);
 static /*@noreturn@*/void usage (int status);
 static void new_pwent (struct passwd *);
@@ -212,28 +210,6 @@ static void move_mailbox (void);
 #endif
 
 extern int allow_bad_names;
-
-static void date_to_str (/*@unique@*//*@out@*/char *buf, size_t maxsize,
-                         long int date)
-{
-	struct tm *tp;
-
-	if (date < 0) {
-		strncpy (buf, "never", maxsize);
-	} else {
-		time_t t = (time_t) date;
-		tp = gmtime (&t);
-#ifdef HAVE_STRFTIME
-		strftime (buf, maxsize, "%Y-%m-%d", tp);
-#else
-		(void) snprintf (buf, maxsize, "%04d-%02d-%02d",
-		                 tp->tm_year + 1900,
-		                 tp->tm_mon + 1,
-		                 tp->tm_mday);
-#endif				/* HAVE_STRFTIME */
-	}
-	buf[maxsize - 1] = '\0';
-}
 
 /*
  * get_groups - convert a list of group names to an array of group IDs
@@ -637,10 +613,8 @@ static void new_spent (struct spwd *spent)
 	if (eflg) {
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
-		date_to_str (new_exp, sizeof(new_exp),
-		             user_newexpire * DAY);
-		date_to_str (old_exp, sizeof(old_exp),
-		             user_expire * DAY);
+		date_to_str (sizeof(new_exp), new_exp, user_newexpire * DAY);
+		date_to_str (sizeof(old_exp), old_exp, user_expire * DAY);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "changing expiration date",
