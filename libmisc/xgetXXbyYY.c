@@ -54,6 +54,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include "prototypes.h"
+#include "shadowlog.h"
 
 #define XFUNCTION_NAME XPREFIX (FUNCTION_NAME)
 #define XPREFIX(name) XPREFIX1 (name)
@@ -74,7 +75,7 @@
 
 	result = malloc(sizeof(LOOKUP_TYPE));
 	if (NULL == result) {
-		fprintf (shadow_logfd, _("%s: out of memory\n"),
+		fprintf (log_get_logfd(), _("%s: out of memory\n"),
 		         "x" STRINGIZE(FUNCTION_NAME));
 		exit (13);
 	}
@@ -84,7 +85,7 @@
 		LOOKUP_TYPE *resbuf = NULL;
 		buffer = (char *)realloc (buffer, length);
 		if (NULL == buffer) {
-			fprintf (shadow_logfd, _("%s: out of memory\n"),
+			fprintf (log_get_logfd(), _("%s: out of memory\n"),
 			         "x" STRINGIZE(FUNCTION_NAME));
 			exit (13);
 		}
@@ -132,7 +133,7 @@
 	if (result) {
 		result = DUP_FUNCTION(result);
 		if (NULL == result) {
-			fprintf (shadow_logfd, _("%s: out of memory\n"),
+			fprintf (log_get_logfd(), _("%s: out of memory\n"),
 			         "x" STRINGIZE(FUNCTION_NAME));
 			exit (13);
 		}

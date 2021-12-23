@@ -77,12 +77,12 @@
 #endif				/* USE_PAM */
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 /*
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 static /*@observer@*/const char *caller_tty = NULL;	/* Name of tty SU is run from */
 static bool caller_is_root = false;
 static uid_t caller_uid;
@@ -734,7 +734,8 @@ static void save_caller_context (char **argv)
 	 * most error messages.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	caller_uid = getuid ();
 	caller_is_root = (caller_uid == 0);

@@ -8,6 +8,7 @@
 #include <stdatomic.h>
 #include "prototypes.h"
 #include "../libsubid/subid.h"
+#include "shadowlog_internal.h"
 
 #define NSSWITCH "/etc/nsswitch.conf"
 

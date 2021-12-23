@@ -37,6 +37,7 @@
 #include "prototypes.h"
 #include "subordinateio.h"
 #include "getdef.h"
+#include "shadowlog.h"
 
 /*
  * find_new_sub_uids - Find a new unused range of UIDs.
@@ -60,18 +61,18 @@ int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
 	count = getdef_ulong ("SUB_UID_COUNT", 65536);
 
 	if (min > max || count >= max || (min + count - 1) > max) {
-		(void) fprintf (shadow_logfd,
+		(void) fprintf (log_get_logfd(),
 				_("%s: Invalid configuration: SUB_UID_MIN (%lu),"
 				  " SUB_UID_MAX (%lu), SUB_UID_COUNT (%lu)\n"),
-			Prog, min, max, count);
+			log_get_progname(), min, max, count);
 		return -1;
 	}
 
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == (uid_t)-1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: Can't get unique subordinate UID range\n"),
-		         Prog);
+		         log_get_progname());
 		SYSLOG ((LOG_WARN, "no more available subordinate UIDs on the system"));
 		return -1;
 	}

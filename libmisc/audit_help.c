@@ -45,6 +45,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include "prototypes.h"
+#include "shadowlog.h"
 int audit_fd;
 
 void audit_help_open (void)
@@ -59,7 +60,7 @@ void audit_help_open (void)
 			return;
 		}
 		(void) fputs (_("Cannot open audit interface - aborting.\n"),
-		              shadow_logfd);
+		              log_get_logfd());
 		exit (EXIT_FAILURE);
 	}
 }

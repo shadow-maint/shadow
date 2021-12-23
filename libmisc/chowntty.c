@@ -43,6 +43,7 @@
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
+#include "shadowlog.h"
 
 /*
  *	chown_tty() sets the login tty to be owned by the new user ID
@@ -75,6 +76,7 @@ void chown_tty (const struct passwd *info)
 	if (   (fchown (STDIN_FILENO, info->pw_uid, gid) != 0)
 	    || (fchmod (STDIN_FILENO, (mode_t)getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
+		FILE *shadow_logfd = log_get_logfd();
 
 		fprintf (shadow_logfd,
 		         _("Unable to change owner or mode of tty stdin: %s"),

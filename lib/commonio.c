@@ -51,6 +51,7 @@
 #endif				/* WITH_TCB */
 #include "prototypes.h"
 #include "commonio.h"
+#include "shadowlog_internal.h"
 
 /* local function prototypes */
 static int lrename (const char *, const char *);

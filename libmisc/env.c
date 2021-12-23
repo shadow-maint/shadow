@@ -40,6 +40,7 @@
 #include <string.h>
 #include "prototypes.h"
 #include "defines.h"
+#include "shadowlog.h"
 /*
  * NEWENVP_STEP must be a power of two.  This is the number
  * of (char *) pointers to allocate at a time, to avoid using
@@ -171,7 +172,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 			}
 			newenvp = __newenvp;
 		} else {
-			(void) fputs (_("Environment overflow\n"), shadow_logfd);
+			(void) fputs (_("Environment overflow\n"), log_get_logfd());
 			newenvc--;
 			free (newenvp[newenvc]);
 		}

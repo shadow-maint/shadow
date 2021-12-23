@@ -55,6 +55,7 @@
 #ifdef WITH_ATTR
 #include <attr/libattr.h>
 #endif				/* WITH_ATTR */
+#include "shadowlog.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -116,6 +117,7 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
 static void error_acl (struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
+	FILE *shadow_logfd = log_get_logfd();
 
 	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
@@ -125,7 +127,7 @@ static void error_acl (struct error_context *ctx, const char *fmt, ...)
 	}
 
 	va_start (ap, fmt);
-	(void) fprintf (shadow_logfd, _("%s: "), Prog);
+	(void) fprintf (shadow_logfd, _("%s: "), log_get_progname());
 	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
 		(void) fputs (_(": "), shadow_logfd);
 	}
@@ -248,9 +250,9 @@ int copy_tree (const char *src_root, const char *dst_root,
 		}
 
 		if (!S_ISDIR (sb.st_mode)) {
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 			         "%s: %s is not a directory",
-			         Prog, src_root);
+			         log_get_progname(), src_root);
 			return -1;
 		}
 

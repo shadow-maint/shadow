@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 1997 - 1999, Marek Michałkiewicz
- * Copyright (c) 2001 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2021       , Serge Hallyn
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,54 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <config.h>
-
-#ifdef USE_PAM
-
-#ident "$Id$"
-
-
-/*
- * Change the user's password using PAM.
- */
+/* $Id$ */
+#ifndef _LOG_H
+#define _LOG_H
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include "defines.h"
-#include "pam_defs.h"
-#include "prototypes.h"
-#include "shadowlog.h"
 
-void do_pam_passwd (const char *user, bool silent, bool change_expired)
-{
-	pam_handle_t *pamh = NULL;
-	int flags = 0, ret;
-	FILE *shadow_logfd = log_get_logfd();
+extern void log_set_progname(const char *);
+extern const char *log_get_progname(void);
+extern void log_set_logfd(FILE *fd);
+extern FILE *log_get_logfd(void);
+extern void log_dolog(char *, ...);
 
-	if (silent)
-		flags |= PAM_SILENT;
-	if (change_expired)
-		flags |= PAM_CHANGE_EXPIRED_AUTHTOK;
-
-	ret = pam_start ("passwd", user, &conv, &pamh);
-	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd,
-			 _("passwd: pam_start() failed, error %d\n"), ret);
-		exit (10);	/* XXX */
-	}
-
-	ret = pam_chauthtok (pamh, flags);
-	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd, _("passwd: %s\n"), pam_strerror (pamh, ret));
-		fputs (_("passwd: password unchanged\n"), shadow_logfd);
-		pam_end (pamh, ret);
-		exit (10);	/* XXX */
-	}
-
-	fputs (_("passwd: password updated successfully\n"), shadow_logfd);
-	(void) pam_end (pamh, PAM_SUCCESS);
-}
-#else				/* !USE_PAM */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
-#endif				/* !USE_PAM */
+#endif

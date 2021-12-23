@@ -52,12 +52,12 @@
 #include "pwio.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 /*
  * Global variables.
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
@@ -640,7 +640,8 @@ int main (int argc, char **argv)
 	 * prefix to most error messages.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	sanitize_env ();
 	(void) setlocale (LC_ALL, "");

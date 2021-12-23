@@ -36,6 +36,7 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /*
  * cleanup_report_add_user - Report failure to add an user to the system
@@ -48,7 +49,7 @@ void cleanup_report_add_user (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s", name));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, Prog,
+	audit_logger (AUDIT_ADD_USER, log_get_progname(),
 	              "",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -65,7 +66,7 @@ void cleanup_report_mod_passwd (void *cleanup_info)
 	         pw_dbname (),
 	         info->action));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, Prog,
+	audit_logger (AUDIT_USER_ACCT, log_get_progname(),
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -85,7 +86,7 @@ void cleanup_report_add_user_passwd (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, pw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, Prog,
+	audit_logger (AUDIT_ADD_USER, log_get_progname(),
 	              "adding user to /etc/passwd",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -105,7 +106,7 @@ void cleanup_report_add_user_shadow (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, spw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, Prog,
+	audit_logger (AUDIT_ADD_USER, log_get_progname(),
 	              "adding user to /etc/shadow",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -120,9 +121,9 @@ void cleanup_report_add_user_shadow (void *user_name)
 void cleanup_unlock_passwd (unused void *arg)
 {
 	if (pw_unlock () == 0) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
-		         Prog, pw_dbname ());
+		         log_get_progname(), pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking passwd file",
@@ -139,9 +140,9 @@ void cleanup_unlock_passwd (unused void *arg)
 void cleanup_unlock_shadow (unused void *arg)
 {
 	if (spw_unlock () == 0) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
-		         Prog, spw_dbname ());
+		         log_get_progname(), spw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking shadow file",

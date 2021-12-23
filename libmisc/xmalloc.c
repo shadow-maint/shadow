@@ -47,6 +47,7 @@
 #include <errno.h>
 #include "defines.h"
 #include "prototypes.h"
+#include "shadowlog.h"
 
 /*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/char *xmalloc (size_t size)
 {
@@ -54,9 +55,9 @@
 
 	ptr = (char *) malloc (size);
 	if (NULL == ptr) {
-		(void) fprintf (shadow_logfd,
+		(void) fprintf (log_get_logfd(),
 		                _("%s: failed to allocate memory: %s\n"),
-		                Prog, strerror (errno));
+		                log_get_progname(), strerror (errno));
 		exit (13);
 	}
 	return ptr;

@@ -44,6 +44,7 @@
 #include <libeconf.h>
 #endif
 #include "getdef.h"
+#include "shadowlog_internal.h"
 /*
  * A configuration item definition.
  */

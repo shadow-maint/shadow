@@ -38,6 +38,8 @@
 #include "exitcodes.h"
 #include "prototypes.h"
 
+#include "shadowlog_internal.h"
+
 int run_command (const char *cmd, const char *argv[],
                  /*@null@*/const char *envp[], /*@out@*/int *status)
 {

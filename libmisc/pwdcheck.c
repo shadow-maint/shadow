@@ -39,6 +39,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
+#include "shadowlog.h"
 
 void passwd_check (const char *user, const char *passwd, unused const char *progname)
 {
@@ -51,7 +52,7 @@ void passwd_check (const char *user, const char *passwd, unused const char *prog
 	if (pw_auth (passwd, user, PW_LOGIN, (char *) 0) != 0) {
 		SYSLOG ((LOG_WARN, "incorrect password for `%s'", user));
 		(void) sleep (1);
-		fprintf (shadow_logfd, _("Incorrect password for %s.\n"), user);
+		fprintf (log_get_logfd(), _("Incorrect password for %s.\n"), user);
 		exit (EXIT_FAILURE);
 	}
 }

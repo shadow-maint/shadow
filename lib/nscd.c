@@ -10,6 +10,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "nscd.h"
+#include "shadowlog_internal.h"
 
 #define MSG_NSCD_FLUSH_CACHE_FAILED "%s: Failed to flush the nscd cache.\n"
 

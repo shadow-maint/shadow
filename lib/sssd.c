@@ -11,6 +11,8 @@
 #include "prototypes.h"
 #include "sssd.h"
 
+#include "shadowlog_internal.h"
+
 #define MSG_SSSD_FLUSH_CACHE_FAILED "%s: Failed to flush the sssd cache."
 
 int sssd_flush_cache (int dbflags)

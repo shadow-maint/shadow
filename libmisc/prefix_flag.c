@@ -48,6 +48,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "getdef.h"
+#include "shadowlog.h"
 
 static char *passwd_db_file = NULL;
 static char *spw_db_file = NULL;
@@ -83,18 +84,18 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			&& (val = argv[i] + 9))
 		    || (strcmp (argv[i], short_opt) == 0)) {
 			if (NULL != prefix) {
-				fprintf (shadow_logfd,
+				fprintf (log_get_logfd(),
 				         _("%s: multiple --prefix options\n"),
-				         Prog);
+				         log_get_progname());
 				exit (E_BAD_ARG);
 			}
 
 			if (val) {
 				prefix = val;
 			} else if (i + 1 == argc) {
-				fprintf (shadow_logfd,
+				fprintf (log_get_logfd(),
 				         _("%s: option '%s' requires an argument\n"),
-				         Prog, argv[i]);
+				         log_get_progname(), argv[i]);
 				exit (E_BAD_ARG);
 			} else {
 				prefix = argv[++ i];
@@ -110,9 +111,9 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		/* should we prevent symbolic link from being used as a prefix? */
 
 		if ( prefix[0] != '/') {
-			fprintf (shadow_logfd,
+			fprintf (log_get_logfd(),
 				 _("%s: prefix must be an absolute path\n"),
-				 Prog);
+				 log_get_progname());
 			exit (E_BAD_ARG);
 		}
 		size_t len;

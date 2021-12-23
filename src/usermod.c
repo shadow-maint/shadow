@@ -74,6 +74,7 @@
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
+#include "shadowlog.h"
 
 /*
  * exit status values
@@ -105,7 +106,6 @@
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 static char *user_name;
 static char *user_newname;
@@ -2181,7 +2181,8 @@ int main (int argc, char **argv)
 	 * Get my name so that I can use it to report errors.
 	 */
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

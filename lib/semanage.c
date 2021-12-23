@@ -43,6 +43,7 @@
 #include <semanage/semanage.h>
 #include "prototypes.h"
 
+#include "shadowlog_internal.h"
 
 #ifndef DEFAULT_SERANGE
 #define DEFAULT_SERANGE "s0"

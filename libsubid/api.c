@@ -38,12 +38,13 @@
 #include "subordinateio.h"
 #include "idmapping.h"
 #include "subid.h"
+#include "shadowlog.h"
 
 static const char *Prog = "(libsubid)";
-static FILE *shadow_logfd;
 
 bool subid_init(const char *progname, FILE * logfd)
 {
+	FILE *shadow_logfd;
 	if (progname) {
 		progname = strdup(progname);
 		if (progname)
@@ -53,14 +54,15 @@ bool subid_init(const char *progname, FILE * logfd)
 	}
 
 	if (logfd) {
-		shadow_logfd = logfd;
+		log_set_logfd(logfd);
 		return true;
 	}
 	shadow_logfd = fopen("/dev/null", "w");
 	if (!shadow_logfd) {
-		shadow_logfd = stderr;
+		log_set_logfd(stderr);
 		return false;
 	}
+	log_set_logfd(shadow_logfd);
 	return true;
 }
 

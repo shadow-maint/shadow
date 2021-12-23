@@ -48,12 +48,12 @@
 #include "shadowio.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadowlog.h"
 
 /*
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 static bool spw_locked = false;
 static bool pw_locked = false;
@@ -138,7 +138,8 @@ int main (int argc, char **argv)
 	const struct spwd *spwd;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

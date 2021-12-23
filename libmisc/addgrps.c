@@ -40,6 +40,7 @@
 #include <stdio.h>
 #include <grp.h>
 #include <errno.h>
+#include "shadowlog.h"
 
 #ident "$Id$"
 
@@ -58,6 +59,7 @@ int add_groups (const char *list)
 	char *token;
 	char buf[1024];
 	int ret;
+	FILE *shadow_logfd = log_get_logfd();
 
 	if (strlen (list) >= sizeof (buf)) {
 		errno = EINVAL;

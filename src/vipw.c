@@ -53,6 +53,7 @@
 #include <tcb.h>
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
+#include "shadowlog.h"
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \
 	"You have modified %s.\n"\
@@ -63,7 +64,6 @@
  * Global variables
  */
 const char *Prog;
-FILE *shadow_logfd = NULL;
 
 static const char *filename, *fileeditname;
 static bool filelocked = false;
@@ -485,7 +485,8 @@ int main (int argc, char **argv)
 	bool do_vipw;
 
 	Prog = Basename (argv[0]);
-	shadow_logfd = stderr;
+	log_set_progname(Prog);
+	log_set_logfd(stderr);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

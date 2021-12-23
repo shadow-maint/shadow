@@ -38,6 +38,8 @@
 #include <selinux/label.h>
 #include "prototypes.h"
 
+#include "shadowlog_internal.h"
+
 static bool selinux_checked = false;
 static bool selinux_enabled;
 static /*@null@*/struct selabel_handle *selabel_hnd = NULL;
