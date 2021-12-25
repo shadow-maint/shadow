@@ -2,14 +2,17 @@
 
 #include "lib/shadowlog_internal.h"
 
+const char *shadow_progname;
+FILE *shadow_logfd;
+
 void log_set_progname(const char *progname)
 {
-	Prog = progname;
+	shadow_progname = progname;
 }
 
 const char *log_get_progname(void)
 {
-	return Prog;
+	return shadow_progname;
 }
 
 void log_set_logfd(FILE *fd)

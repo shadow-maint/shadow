@@ -216,7 +216,7 @@ int check_selinux_permit (const char *perm_name)
 	if (getprevcon_raw (&user_context_raw) != 0) {
 		fprintf (shadow_logfd,
 		    _("%s: can not get previous SELinux process context: %s\n"),
-		    Prog, strerror (errno));
+		    shadow_progname, strerror (errno));
 		SYSLOG ((LOG_WARN,
 		    "can not get previous SELinux process context: %s",
 		    strerror (errno)));

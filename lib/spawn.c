@@ -60,11 +60,11 @@ int run_command (const char *cmd, const char *argv[],
 			exit (E_CMD_NOTFOUND);
 		}
 		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
-		         Prog, cmd, strerror (errno));
+		         shadow_progname, cmd, strerror (errno));
 		exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
 		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
-		         Prog, cmd, strerror (errno));
+		         shadow_progname, cmd, strerror (errno));
 		return -1;
 	}
 
@@ -77,7 +77,7 @@ int run_command (const char *cmd, const char *argv[],
 
 	if ((pid_t)-1 == wpid) {
 		fprintf (shadow_logfd, "%s: waitpid (status: %d): %s\n",
-		         Prog, *status, strerror (errno));
+		         shadow_progname, *status, strerror (errno));
 		return -1;
 	}
 
