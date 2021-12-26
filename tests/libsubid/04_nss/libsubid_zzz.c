@@ -122,7 +122,7 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 	if (id_type == ID_TYPE_UID && strcmp(owner, "group1") == 0)
 		return SUBID_STATUS_SUCCESS;
 	ranges = (struct subid_range *)malloc(sizeof(struct subid_range));
-	if (!*ranges)
+	if (!ranges)
 		return SUBID_STATUS_ERROR;
 	if (strcmp(owner, "user1") == 0 || strcmp(owner, "group1") == 0) {
 		ranges[0].start = 100000;
