@@ -1,0 +1,26 @@
+image: ubuntu/focal
+packages:
+  - automake
+  - autopoint
+  - xsltproc
+  - libselinux1-dev
+  - gettext
+  - expect
+  - byacc
+  - libtool
+sources:
+  - https://github.com/shadow-maint/shadow
+tasks:
+  - build: |
+      cd shadow
+      ./autogen.sh --without-selinux --disable-man
+      grep ENABLE_ config.status
+  - tasks: |
+      cd shadow
+      cat /proc/self/uid_map
+      cat /proc/self/status
+      systemd-detect-virt
+      make
+      make DESTDIR=/tmp/shadow-inst install
+      sudo make install
+      (cd tests; sudo ./run_some || { cat testsuite.log; false; })
