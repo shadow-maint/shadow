@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -ex
 
 cd $(dirname $0)
 
@@ -23,12 +23,14 @@ change_config
 sysctl -q kernel.unprivileged_userns_clone=1
 
 echo -n "Create world writable tmp directory..."
+rm -rf /tmp/test-uidmap
 mkdir -m 0777 /tmp/test-uidmap
 echo "OK"
 
 echo -n "setup uidmapping... "
+base=$(id -u foo)
 runuser foo -g foo -c "unshare -U sleep 10 & pid=\$!; \
-        newuidmap \$pid 0 1000 1 1 1000000 1000; ret=\$?; \
+        sleep 2; newuidmap \$pid 0 $base 1 1 1000000 1000; ret=\$?; \
 	cat /proc/\$pid/uid_map >/tmp/test-uidmap/uid_map;
         kill \$pid; exit \$ret"
 ../../common/compare_file.pl /tmp/test-uidmap/uid_map data/uid_map
@@ -36,7 +38,7 @@ echo "OK"
 
 echo -n "setup uidmapping with different primary group... "
 runuser foo -g bar -c "unshare -U sleep 10 & pid=\$!; \
-        newuidmap \$pid 0 1000 1 1 1000000 1000; ret=\$?; \
+        sleep 2; newuidmap \$pid 0 $base 1 1 1000000 1000; ret=\$?; \
 	cat /proc/\$pid/uid_map >/tmp/test-uidmap/uid_map;
         kill \$pid; exit \$ret"
 ../../common/compare_file.pl /tmp/test-uidmap/uid_map data/uid_map
