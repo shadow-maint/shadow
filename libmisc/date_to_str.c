@@ -38,9 +38,10 @@ void date_to_str (size_t size, char buf[size], long date)
 	time_t t;
 
 	t = date;
-	if (date < 0)
-		(void) strncpy (buf, "never", size);
-	else
+	if (date < 0) {
+		(void) strlcpy (buf, "never", size);
+	} else {
 		(void) strftime (buf, size, "%Y-%m-%d", gmtime (&t));
-	buf[size - 1] = '\0';
+		buf[size - 1] = '\0';
+	}
 }
