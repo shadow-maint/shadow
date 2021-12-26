@@ -147,7 +147,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: %s\n",
-			                Prog, file, strerror (errno));
+			                shadow_progname, file, strerror (errno));
 		}
 		return 0;
 	}
@@ -159,7 +159,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file write error: %s\n",
-			                Prog, file, strerror (errno));
+			                shadow_progname, file, strerror (errno));
 		}
 		(void) close (fd);
 		unlink (file);
@@ -169,7 +169,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file sync error: %s\n",
-			                Prog, file, strerror (errno));
+			                shadow_progname, file, strerror (errno));
 		}
 		(void) close (fd);
 		unlink (file);
@@ -182,7 +182,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if ((0==retval) && log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: lock file already used\n",
-			                Prog, file);
+			                shadow_progname, file);
 		}
 		unlink (file);
 		return retval;
@@ -193,7 +193,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: %s\n",
-			                Prog, lock, strerror (errno));
+			                shadow_progname, lock, strerror (errno));
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -205,7 +205,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: existing lock file %s without a PID\n",
-			                Prog, lock);
+			                shadow_progname, lock);
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -216,7 +216,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: existing lock file %s with an invalid PID '%s'\n",
-			                Prog, lock, buf);
+			                shadow_progname, lock, buf);
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -226,7 +226,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: lock %s already used by PID %lu\n",
-			                Prog, lock, (unsigned long) pid);
+			                shadow_progname, lock, (unsigned long) pid);
 		}
 		unlink (file);
 		errno = EEXIST;
@@ -236,7 +236,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: cannot get lock %s: %s\n",
-			                Prog, lock, strerror (errno));
+			                shadow_progname, lock, strerror (errno));
 		}
 		unlink (file);
 		return 0;
@@ -248,13 +248,13 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if ((0==retval) && log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: lock file already used\n",
-			                Prog, file);
+			                shadow_progname, file);
 		}
 	} else {
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: cannot get lock %s: %s\n",
-			                Prog, lock, strerror (errno));
+			                shadow_progname, lock, strerror (errno));
 		}
 	}
 
@@ -449,7 +449,7 @@ int commonio_lock (struct commonio_db *db)
 				if (geteuid () != 0) {
 					(void) fprintf (shadow_logfd,
 					                "%s: Permission denied.\n",
-					                Prog);
+					                shadow_progname);
 				}
 				return 0;	/* failure */
 			}
@@ -484,7 +484,7 @@ int commonio_lock (struct commonio_db *db)
 		/* no unnecessary retries on "permission denied" errors */
 		if (geteuid () != 0) {
 			(void) fprintf (shadow_logfd, "%s: Permission denied.\n",
-			                Prog);
+			                shadow_progname);
 			return 0;
 		}
 	}
