@@ -40,17 +40,16 @@
 #include "subid.h"
 #include "shadowlog.h"
 
-static const char *Prog = "(libsubid)";
-
 bool subid_init(const char *progname, FILE * logfd)
 {
 	FILE *shadow_logfd;
 	if (progname) {
 		progname = strdup(progname);
-		if (progname)
-			Prog = progname;
-		else
+		if (!progname)
 			return false;
+		log_set_progname(progname);
+	} else {
+		log_set_progname("(libsubid)");
 	}
 
 	if (logfd) {
