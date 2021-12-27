@@ -70,10 +70,6 @@ extern char * textdomain (const char * domainname);
 #  define strrchr rindex
 # endif
 char *strchr (), *strrchr (), *strtok ();
-
-# ifndef HAVE_MEMCPY
-#  define memcpy(d, s, n) bcopy((s), (d), (n))
-# endif
 #endif				/* not STDC_HEADERS */
 
 #if HAVE_ERRNO_H

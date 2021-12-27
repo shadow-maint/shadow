@@ -53,7 +53,7 @@ AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
 AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes getgroups \
 	gethostname getentropy getrandom getspnam gettimeofday getusershell \
-	getutent initgroups lchown lckpwdf lstat lutimes memcpy memset \
+	getutent initgroups lchown lckpwdf lstat lutimes memset \
 	setgroups sigaction strchr updwtmp updwtmpx innetgr getpwnam_r \
 	getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo ruserok \
 	dlopen)
