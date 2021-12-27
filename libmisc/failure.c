@@ -232,13 +232,8 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 void failprint (const struct faillog *fail)
 {
 	struct tm *tp;
-
-#if HAVE_STRFTIME
 	char lasttimeb[256];
 	char *lasttime = lasttimeb;
-#else
-	char *lasttime;
-#endif
 	time_t NOW;
 
 	if (0 == fail->fail_cnt) {
@@ -248,31 +243,11 @@ void failprint (const struct faillog *fail)
 	tp = localtime (&(fail->fail_time));
 	(void) time (&NOW);
 
-#if HAVE_STRFTIME
 	/*
 	 * Print all information we have.
 	 */
 	(void) strftime (lasttimeb, sizeof lasttimeb, "%c", tp);
-#else
 
-	/*
-	 * Do the same thing, but don't use strftime since it
-	 * probably doesn't exist on this system
-	 */
-	lasttime = asctime (tp);
-	lasttime[24] = '\0';
-
-	if ((NOW - fail->fail_time) < YEAR) {
-		lasttime[19] = '\0';
-	}
-	if ((NOW - fail->fail_time) < DAY) {
-		lasttime = lasttime + 11;
-	}
-
-	if (' ' == *lasttime) {
-		lasttime++;
-	}
-#endif
 	/*@-formatconst@*/
 	(void) printf (ngettext ("%d failure since last login.\n"
 	                         "Last was %s on %s.\n",

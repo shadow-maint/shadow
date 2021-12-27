@@ -244,7 +244,6 @@ static int new_fields (void)
 
 static void print_date (time_t date)
 {
-#ifdef HAVE_STRFTIME
 	struct tm *tp;
 	char buf[80];
 	char format[80];
@@ -263,20 +262,6 @@ static void print_date (time_t date)
 		(void) strftime (buf, sizeof buf, format, tp);
 		(void) puts (buf);
 	}
-#else
-	struct tm *tp;
-	char *cp = NULL;
-
-	tp = gmtime (&date);
-	if (NULL != tp) {
-		cp = asctime (tp);
-	}
-	if (NULL != cp) {
-		(void) printf ("%6.6s, %4.4s\n", cp + 4, cp + 20);
-	} else {
-		(void) printf ("time_t: %lu\n", date);
-	}
-#endif
 }
 
 /*
