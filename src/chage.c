@@ -90,7 +90,6 @@ static long expdate;
 
 /* local function prototypes */
 static /*@noreturn@*/void usage (int status);
-static void date_to_str (char *buf, size_t maxsize, time_t date);
 static int new_fields (void);
 static void print_date (time_t date);
 static void list_fields (void);
@@ -161,19 +160,6 @@ static /*@noreturn@*/void usage (int status)
 	exit (status);
 }
 
-static void date_to_str (char *buf, size_t maxsize, time_t date)
-{
-	struct tm *tp;
-
-	tp = gmtime (&date);
-#ifdef HAVE_STRFTIME
-	(void) strftime (buf, maxsize, "%Y-%m-%d", tp);
-#else
-	(void) snprintf (buf, maxsize, "%04d-%02d-%02d",
-	                 tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
-#endif				/* HAVE_STRFTIME */
-}
-
 /*
  * new_fields - change the user's password aging information interactively.
  *
@@ -207,7 +193,7 @@ static int new_fields (void)
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / SCALE) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, (time_t) (lstchgdate * SCALE));
+		date_to_str (sizeof(buf), buf, lstchgdate * SCALE);
 	}
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
@@ -238,7 +224,7 @@ static int new_fields (void)
 	if (-1 == expdate || LONG_MAX / SCALE < expdate) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (buf, sizeof buf, (time_t) (expdate * SCALE));
+		date_to_str (sizeof(buf), buf, expdate * SCALE);
 	}
 
 	change_field (buf, sizeof buf,

@@ -19,6 +19,7 @@ libmisc_la_SOURCES = \
 	cleanup_user.c \
 	console.c \
 	copydir.c \
+	date_to_str.c \
 	entry.c \
 	env.c \
 	failure.c \
