@@ -51,7 +51,7 @@ AC_CHECK_HEADERS(crypt.h errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 dnl shadow now uses the libc's shadow implementation
 AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
-AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes getgroups \
+AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes \
 	gethostname getentropy getrandom getspnam gettimeofday getusershell \
 	getutent initgroups lchown lckpwdf lstat lutimes memcpy memset \
 	setgroups sigaction strchr updwtmp updwtmpx innetgr getpwnam_r \

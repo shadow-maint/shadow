@@ -107,18 +107,12 @@ static void print_groups (const char *member)
  */
 int main (int argc, char **argv)
 {
-#ifdef HAVE_GETGROUPS
 	long sys_ngroups;
 	GETGROUPS_T *groups;
-#else
-	char *logname;
-	char *getlogin ();
-#endif
 
-#ifdef HAVE_GETGROUPS
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	groups = (GETGROUPS_T *) malloc (sizeof (GETGROUPS_T) * sys_ngroups);
-#endif
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
@@ -137,7 +131,6 @@ int main (int argc, char **argv)
 		 * current user.
 		 */
 
-#ifdef HAVE_GETGROUPS
 		int i;
 		int pri_grp; /* TODO: should be GETGROUPS_T */
 		/*
@@ -196,18 +189,6 @@ int main (int argc, char **argv)
 			}
 		}
 		(void) putchar ('\n');
-#else
-		/*
-		 * This system does not have the getgroups() system call, so
-		 * I must check the groups file directly.
-		 */
-		logname = getlogin ();
-		if (NULL != logname) {
-			print_groups (logname);
-		} else {
-			exit (EXIT_FAILURE);
-		}
-#endif
 	} else {
 
 		/*
