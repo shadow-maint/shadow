@@ -5,6 +5,7 @@ set -x
 echo "starting check_range tests"
 
 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+touch /etc/nsswitch.conf
 mount --bind ./nsswitch3.conf /etc/nsswitch.conf
 cleanup1() {
     umount /etc/nsswitch.conf
@@ -34,6 +35,7 @@ fi
 umount /etc/nsswitch.conf
 
 mount --bind ./nsswitch1.conf /etc/nsswitch.conf
+touch /etc/subuid /etc/subgid
 mount --bind ./empty /etc/subuid
 
 cleanup2() {
