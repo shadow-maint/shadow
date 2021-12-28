@@ -31,12 +31,10 @@
 #include <ctype.h>
 #include <time.h>
 
-#define IN_CTYPE_DOMAIN(c) 1
-
-#define ISSPACE(c) (IN_CTYPE_DOMAIN (c) && isspace (c))
-#define ISALPHA(c) (IN_CTYPE_DOMAIN (c) && isalpha (c))
-#define ISUPPER(c) (IN_CTYPE_DOMAIN (c) && isupper (c))
-#define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
+#define ISSPACE(c) isspace (c)
+#define ISALPHA(c) isalpha (c)
+#define ISUPPER(c) isupper (c)
+#define ISDIGIT_LOCALE(c) isdigit (c)
 
 /* ISDIGIT differs from ISDIGIT_LOCALE, as follows:
    - Its arg may be any int or unsigned int; it need not be an unsigned char.

@@ -22,7 +22,7 @@ typedef unsigned char _Bool;
 # define __bool_true_false_are_defined 1
 #endif
 
-#define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
+#define ISDIGIT_LOCALE(c) isdigit (c)
 
 /* Take care of NLS matters.  */
 #ifdef S_SPLINT_S
