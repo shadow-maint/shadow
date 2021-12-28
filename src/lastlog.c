@@ -108,10 +108,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	time_t ll_time;
 	off_t offset;
 	struct lastlog ll;
-
-#ifdef HAVE_STRFTIME
 	char ptime[80];
-#endif
 
 #ifdef HAVE_LL_HOST
 	int maxIPv6Addrlen;
@@ -177,13 +174,8 @@ static void print_one (/*@null@*/const struct passwd *pw)
 
 	ll_time = ll.ll_time;
 	tm = localtime (&ll_time);
-#ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
 	cp = ptime;
-#else
-	cp = asctime (tm);
-	cp[24] = '\0';
-#endif
 
 	if (ll.ll_time == (time_t) 0) {
 		cp = _("**Never logged in**\0");

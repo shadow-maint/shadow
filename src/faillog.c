@@ -111,11 +111,8 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 	off_t offset;
 	struct faillog fl;
 	time_t now;
-
-#ifdef HAVE_STRFTIME
 	char *cp;
 	char ptime[80];
-#endif
 
 	if (NULL == pw) {
 		return;
@@ -168,13 +165,11 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		fprintf (stderr, "Cannot read time from faillog.\n");
 		return;
 	}
-#ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
 	cp = ptime;
-#endif
+
 	printf ("%-9s   %5d    %5d   ",
 	        pw->pw_name, fl.fail_cnt, fl.fail_max);
-	/* FIXME: cp is not defined ifndef HAVE_STRFTIME */
 	printf ("%s  %s", cp, fl.fail_line);
 	if (0 != fl.fail_locktime) {
 		if (   ((fl.fail_time + fl.fail_locktime) > now)

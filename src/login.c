@@ -534,7 +534,7 @@ int main (int argc, char **argv)
 #ifdef RLOGIN
 	char term[128] = "";
 #endif				/* RLOGIN */
-#if defined(HAVE_STRFTIME) && !defined(USE_PAM)
+#if !defined(USE_PAM)
 	char ptime[80];
 #endif
 	unsigned int delay;
@@ -1321,16 +1321,11 @@ int main (int argc, char **argv)
 		    && (ll.ll_time != 0)) {
 			time_t ll_time = ll.ll_time;
 
-#ifdef HAVE_STRFTIME
 			(void) strftime (ptime, sizeof (ptime),
 			                 "%a %b %e %H:%M:%S %z %Y",
 			                 localtime (&ll_time));
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
-#else
-			printf (_("Last login: %.19s on %s"),
-			        ctime (&ll_time), ll.ll_line);
-#endif
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
 			if ('\0' != ll.ll_host[0]) {
 				printf (_(" from %.*s"),
