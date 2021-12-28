@@ -31,14 +31,11 @@
 #include <ctype.h>
 #include <time.h>
 
-#define ISDIGIT_LOCALE(c) isdigit (c)
-
-/* ISDIGIT differs from ISDIGIT_LOCALE, as follows:
+/* ISDIGIT differs from isdigit(3), as follows:
    - Its arg may be any int or unsigned int; it need not be an unsigned char.
-   - It's guaranteed to evaluate its argument exactly once.
    - It's typically faster.
    Posix 1003.2-1992 section 2.5.2.1 page 50 lines 1556-1558 says that
-   only '0' through '9' are digits.  Prefer ISDIGIT to ISDIGIT_LOCALE unless
+   only '0' through '9' are digits.  Prefer ISDIGIT to isdigit(3) unless
    it's important to use the locale's definition of `digit' even when the
    host does not conform to Posix.  */
 #define ISDIGIT(c) ((unsigned) (c) - '0' <= 9)
