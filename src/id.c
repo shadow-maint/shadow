@@ -52,11 +52,7 @@ static void usage (void);
 
 static void usage (void)
 {
-#ifdef HAVE_GETGROUPS
 	(void) fputs (_("Usage: id [-a]\n"), stderr);
-#else
-	(void) fputs (_("Usage: id\n"), stderr);
-#endif
 	exit (EXIT_FAILURE);
 }
 
@@ -73,11 +69,9 @@ static void usage (void)
  * gid_t for everything. Some systems have a small and fixed NGROUPS,
  * usually about 16 or 32. Others use bigger values.
  */
-#ifdef HAVE_GETGROUPS
 	GETGROUPS_T *groups;
 	int ngroups;
 	bool aflg = 0;
-#endif
 	struct passwd *pw;
 	struct group *gr;
 
@@ -92,8 +86,8 @@ static void usage (void)
 	 * work if the system library is recompiled.
 	 */
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-#ifdef HAVE_GETGROUPS
 	groups = (GETGROUPS_T *) malloc (sizeof (GETGROUPS_T) * sys_ngroups);
+
 	/*
 	 * See if the -a flag has been given to print out the concurrent
 	 * group set.
@@ -106,11 +100,6 @@ static void usage (void)
 			aflg = true;
 		}
 	}
-#else
-	if (argc > 1) {
-		usage ();
-	}
-#endif
 
 	ruid = getuid ();
 	euid = geteuid ();
@@ -161,7 +150,7 @@ static void usage (void)
 			(void) printf (" EGID=%lu", (unsigned long) egid);
 		}
 	}
-#ifdef HAVE_GETGROUPS
+
 	/*
 	 * Print out the concurrent group set if the user has requested it.
 	 * The group numbers will be printed followed by their names.
@@ -195,7 +184,6 @@ static void usage (void)
 		}
 	}
 	free (groups);
-#endif
 
 	/*
 	 * Finish off the line.
