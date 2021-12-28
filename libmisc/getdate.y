@@ -31,9 +31,6 @@
 #include <ctype.h>
 #include <time.h>
 
-#define ISSPACE(c) isspace (c)
-#define ISALPHA(c) isalpha (c)
-#define ISUPPER(c) isupper (c)
 #define ISDIGIT_LOCALE(c) isdigit (c)
 
 /* ISDIGIT differs from ISDIGIT_LOCALE, as follows:
@@ -643,7 +640,7 @@ static int LookupWord (char *buff)
 
   /* Make it lowercase. */
   for (p = buff; '\0' != *p; p++)
-    if (ISUPPER (*p))
+    if (isupper (*p))
       *p = tolower (*p);
 
   if (strcmp (buff, "am") == 0 || strcmp (buff, "a.m.") == 0)
@@ -724,7 +721,7 @@ static int LookupWord (char *buff)
       }
 
   /* Military timezones. */
-  if (buff[1] == '\0' && ISALPHA (*buff))
+  if (buff[1] == '\0' && isalpha (*buff))
     {
       for (tp = MilitaryTable; tp->name; tp++)
 	if (strcmp (buff, tp->name) == 0)
@@ -763,7 +760,7 @@ yylex (void)
 
   for (;;)
     {
-      while (ISSPACE (*yyInput))
+      while (isspace (*yyInput))
 	yyInput++;
 
       if (ISDIGIT (c = *yyInput) || c == '-' || c == '+')
@@ -784,9 +781,9 @@ yylex (void)
 	    yylval.Number = -yylval.Number;
 	  return (0 != sign) ? tSNUMBER : tUNUMBER;
 	}
-      if (ISALPHA (c))
+      if (isalpha (c))
 	{
-	  for (p = buff; (c = *yyInput++, ISALPHA (c)) || c == '.';)
+	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
 	    if (p < &buff[sizeof buff - 1])
 	      *p++ = c;
 	  *p = '\0';
