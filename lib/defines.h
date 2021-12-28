@@ -61,16 +61,8 @@ extern char * textdomain (const char * domainname);
 #endif
 #endif
 
-#if STDC_HEADERS
-# include <stdlib.h>
-# include <string.h>
-#else				/* not STDC_HEADERS */
-# ifndef HAVE_STRCHR
-#  define strchr index
-#  define strrchr rindex
-# endif
-char *strchr (), *strrchr (), *strtok ();
-#endif				/* not STDC_HEADERS */
+#include <stdlib.h>
+#include <string.h>
 
 #if HAVE_ERRNO_H
 # include <errno.h>

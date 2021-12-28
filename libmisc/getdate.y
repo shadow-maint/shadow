@@ -31,11 +31,7 @@
 #include <ctype.h>
 #include <time.h>
 
-#if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
-# define IN_CTYPE_DOMAIN(c) 1
-#else
-# define IN_CTYPE_DOMAIN(c) isascii(c)
-#endif
+#define IN_CTYPE_DOMAIN(c) 1
 
 #define ISSPACE(c) (IN_CTYPE_DOMAIN (c) && isspace (c))
 #define ISALPHA(c) (IN_CTYPE_DOMAIN (c) && isalpha (c))
@@ -54,9 +50,7 @@
 
 #include "getdate.h"
 
-#if defined (STDC_HEADERS)
-# include <string.h>
-#endif
+#include <string.h>
 
 /* Some old versions of bison generate parsers that use bcopy.
    That loses on systems that don't provide the function, so we have
