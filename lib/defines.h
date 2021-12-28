@@ -70,10 +70,6 @@ extern char * textdomain (const char * domainname);
 #  define strrchr rindex
 # endif
 char *strchr (), *strrchr (), *strtok ();
-
-# ifndef HAVE_MEMCPY
-#  define memcpy(d, s, n) bcopy((s), (d), (n))
-# endif
 #endif				/* not STDC_HEADERS */
 
 #if HAVE_ERRNO_H
@@ -115,11 +111,7 @@ char *strchr (), *strrchr (), *strtok ();
 # endif
 #endif				/* not TIME_WITH_SYS_TIME */
 
-#ifdef HAVE_MEMSET
-# define memzero(ptr, size) memset((void *)(ptr), 0, (size))
-#else
-# define memzero(ptr, size) bzero((char *)(ptr), (size))
-#endif
+#define memzero(ptr, size) memset((void *)(ptr), 0, (size))
 #define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
 #ifdef HAVE_DIRENT_H		/* DIR_SYSV */
