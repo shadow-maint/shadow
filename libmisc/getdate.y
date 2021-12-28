@@ -31,15 +31,6 @@
 #include <ctype.h>
 #include <time.h>
 
-/* ISDIGIT differs from isdigit(3), as follows:
-   - Its arg may be any int or unsigned int; it need not be an unsigned char.
-   - It's typically faster.
-   Posix 1003.2-1992 section 2.5.2.1 page 50 lines 1556-1558 says that
-   only '0' through '9' are digits.  Prefer ISDIGIT to isdigit(3) unless
-   it's important to use the locale's definition of `digit' even when the
-   host does not conform to Posix.  */
-#define ISDIGIT(c) ((unsigned) (c) - '0' <= 9)
-
 #include "getdate.h"
 
 #include <string.h>
@@ -760,18 +751,18 @@ yylex (void)
       while (isspace (*yyInput))
 	yyInput++;
 
-      if (ISDIGIT (c = *yyInput) || c == '-' || c == '+')
+      if (isdigit (c = *yyInput) || c == '-' || c == '+')
 	{
 	  if (c == '-' || c == '+')
 	    {
 	      sign = c == '-' ? -1 : 1;
-	      if (!ISDIGIT (*++yyInput))
+	      if (!isdigit (*++yyInput))
 		/* skip the '-' sign */
 		continue;
 	    }
 	  else
 	    sign = 0;
-	  for (yylval.Number = 0; ISDIGIT (c = *yyInput++);)
+	  for (yylval.Number = 0; isdigit (c = *yyInput++);)
 	    yylval.Number = 10 * yylval.Number + c - '0';
 	  yyInput--;
 	  if (sign < 0)
