@@ -41,6 +41,7 @@
 #include <getopt.h>
 #include <grp.h>
 #include <lastlog.h>
+#include <libgen.h>
 #include <pwd.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -538,6 +539,7 @@ static int set_defaults (void)
 	FILE *ofp;
 	char buf[1024];
 	char *new_file = NULL;
+	char *new_file_dup = NULL;
 	char *default_file = USER_DEFAULTS_FILE;
 	char *cp;
 	int ofd;
@@ -578,13 +580,23 @@ static int set_defaults (void)
 		assert (wlen == (int) len -1);
 	}
 
-	ret = mkdir(dirname(NEW_USER_FILE), 0755);
-	if (-1 == ret && EEXIST != errno) {
+	new_file_dup = strdup(new_file);
+	if (new_file_dup == NULL) {
 		fprintf (stderr,
 			_("%s: cannot create directory for defaults file\n"),
 			Prog);
 		goto setdef_err;
 	}
+
+	ret = mkdir(dirname(new_file_dup), 0755);
+	if (-1 == ret && EEXIST != errno) {
+		fprintf (stderr,
+			_("%s: cannot create directory for defaults file\n"),
+			Prog);
+		free(new_file_dup);
+		goto setdef_err;
+	}
+	free(new_file_dup);
 
 	/*
 	 * Create a temporary file to copy the new output to.
