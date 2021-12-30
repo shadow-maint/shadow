@@ -213,14 +213,6 @@ static inline void memzero(void *ptr, size_t size)
 # define SEEK_END 2
 #endif
 
-#ifdef STAT_MACROS_BROKEN
-# define S_ISDIR(x) ((x) & S_IFMT) == S_IFDIR)
-# define S_ISREG(x) ((x) & S_IFMT) == S_IFREG)
-# ifdef S_IFLNK
-#  define S_ISLNK(x) ((x) & S_IFMT) == S_IFLNK)
-# endif
-#endif
-
 #ifndef S_ISLNK
 #define S_ISLNK(x) (0)
 #endif

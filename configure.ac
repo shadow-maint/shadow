@@ -57,7 +57,6 @@ AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
-AC_HEADER_STAT
 AC_CHECK_MEMBERS([struct stat.st_rdev])
 AC_CHECK_MEMBERS([struct stat.st_atim])
 AC_CHECK_MEMBERS([struct stat.st_atimensec])
