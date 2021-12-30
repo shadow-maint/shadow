@@ -104,10 +104,10 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
-static RETSIGTYPE kill_child (int unused(s));
+static void kill_child (int unused(s));
 static void prepare_pam_close_session (void);
 #else				/* !USE_PAM */
-static RETSIGTYPE die (int);
+static void die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static bool restricted_shell (const char *shellname);
@@ -130,7 +130,7 @@ static void set_environment (struct passwd *pw);
  *	with die() as the signal handler. If signal later calls die() with a
  *	signal number, the terminal modes are then reset.
  */
-static RETSIGTYPE die (int killed)
+static void die (int killed)
 {
 	static TERMIO sgtty;
 
@@ -157,7 +157,7 @@ static bool iswheel (const char *username)
 	return is_on_list (grp->gr_mem, username);
 }
 #else				/* USE_PAM */
-static RETSIGTYPE kill_child (int unused(s))
+static void kill_child (int unused(s))
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);
@@ -494,7 +494,7 @@ static void check_perms_nopam (const struct passwd *pw)
 {
 	/*@observer@*/const struct spwd *spwd = NULL;
 	/*@observer@*/const char *password = pw->pw_passwd;
-	RETSIGTYPE (*oldsig) (int);
+	sighandler_t oldsig;
 
 	if (caller_is_root) {
 		return;

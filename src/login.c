@@ -124,7 +124,7 @@ static void get_pam_user (char **ptr_pam_user);
 #endif
 
 static void init_env (void);
-static RETSIGTYPE alarm_handler (int);
+static void alarm_handler (int);
 
 /*
  * usage - print login command usage and exit
@@ -397,7 +397,7 @@ static void init_env (void)
 }
 
 
-static RETSIGTYPE alarm_handler (unused int sig)
+static void alarm_handler (unused int sig)
 {
 	write (STDERR_FILENO, tmsg, strlen (tmsg));
 	_exit (0);

@@ -101,7 +101,6 @@ fi
 
 dnl Checks for library functions.
 AC_TYPE_GETGROUPS
-AC_TYPE_SIGNAL
 AC_FUNC_UTIME_NULL
 AC_REPLACE_FUNCS(mkdir putgrent putpwent putspent rename rmdir)
 AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
