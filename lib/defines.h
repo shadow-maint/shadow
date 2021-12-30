@@ -117,21 +117,8 @@ static inline void memzero(void *ptr, size_t size)
 
 #define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
-#ifdef HAVE_DIRENT_H		/* DIR_SYSV */
-# include <dirent.h>
-# define DIRECT dirent
-#else
-# ifdef HAVE_SYS_NDIR_H		/* DIR_XENIX */
-#  include <sys/ndir.h>
-# endif
-# ifdef HAVE_SYS_DIR_H		/* DIR_??? */
-#  include <sys/dir.h>
-# endif
-# ifdef HAVE_NDIR_H		/* DIR_BSD */
-#  include <ndir.h>
-# endif
-# define DIRECT direct
-#endif
+#include <dirent.h>
+#define DIRECT dirent
 
 /*
  * Possible cases:
