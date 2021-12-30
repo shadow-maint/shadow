@@ -82,16 +82,8 @@ extern char * textdomain (const char * domainname);
 # include <crypt.h>
 #endif
 
-#if TIME_WITH_SYS_TIME
-# include <sys/time.h>
-# include <time.h>
-#else				/* not TIME_WITH_SYS_TIME */
-# if HAVE_SYS_TIME_H
-#  include <sys/time.h>
-# else
-#  include <time.h>
-# endif
-#endif				/* not TIME_WITH_SYS_TIME */
+#include <sys/time.h>
+#include <time.h>
 
 #ifdef HAVE_MEMSET_S
 # define memzero(ptr, size) memset_s((ptr), 0, (size))
