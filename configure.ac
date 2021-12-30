@@ -56,7 +56,6 @@ AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes \
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
 AC_CHECK_MEMBERS([struct stat.st_rdev])
 AC_CHECK_MEMBERS([struct stat.st_atim])
 AC_CHECK_MEMBERS([struct stat.st_atimensec])
