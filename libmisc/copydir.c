@@ -213,7 +213,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 {
 	int err = 0;
 	bool set_orig = false;
-	struct DIRECT *ent;
+	struct dirent *ent;
 	DIR *dir;
 
 	if (copy_root) {

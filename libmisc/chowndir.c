@@ -39,7 +39,7 @@ int chown_tree (const char *root,
 	char *new_name;
 	size_t new_name_len;
 	int rc = 0;
-	struct DIRECT *ent;
+	struct dirent *ent;
 	struct stat sb;
 	DIR *dir;
 
