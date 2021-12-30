@@ -118,7 +118,6 @@ static inline void memzero(void *ptr, size_t size)
 #define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
 #include <dirent.h>
-#define DIRECT dirent
 
 /*
  * Possible cases:

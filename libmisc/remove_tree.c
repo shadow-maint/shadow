@@ -33,7 +33,7 @@ int remove_tree (const char *root, bool remove_root)
 {
 	char *new_name = NULL;
 	int err = 0;
-	struct DIRECT *ent;
+	struct dirent *ent;
 	struct stat sb;
 	DIR *dir;
 
