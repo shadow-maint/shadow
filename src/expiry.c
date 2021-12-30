@@ -27,14 +27,14 @@ const char *Prog;
 static bool cflg = false;
 
 /* local function prototypes */
-static RETSIGTYPE catch_signals (unused int sig);
+static void catch_signals (unused int sig);
 static /*@noreturn@*/void usage (int status);
 static void process_flags (int argc, char **argv);
 
 /*
  * catch_signals - signal catcher
  */
-static RETSIGTYPE catch_signals (unused int sig)
+static void catch_signals (unused int sig)
 {
 	_exit (10);
 }

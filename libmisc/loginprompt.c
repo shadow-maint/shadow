@@ -41,9 +41,9 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	int i;
 	FILE *fp;
 
-	RETSIGTYPE (*sigquit) (int);
+	sighandler_t sigquit;
 #ifdef	SIGTSTP
-	RETSIGTYPE (*sigtstp) (int);
+	sighandler_t sigtstp;
 #endif
 
 	/*
