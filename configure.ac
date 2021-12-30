@@ -37,7 +37,6 @@ AM_PROG_LIBTOOL
 dnl Checks for libraries.
 
 dnl Checks for header files.
-AC_HEADER_SYS_WAIT
 AC_HEADER_STDBOOL
 
 AC_CHECK_HEADERS(crypt.h errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
