@@ -60,7 +60,6 @@ AC_CHECK_MEMBERS([struct stat.st_atim])
 AC_CHECK_MEMBERS([struct stat.st_atimensec])
 AC_CHECK_MEMBERS([struct stat.st_mtim])
 AC_CHECK_MEMBERS([struct stat.st_mtimensec])
-AC_HEADER_TIME
 AC_STRUCT_TM
 
 AC_CHECK_MEMBERS([struct utmp.ut_type,
