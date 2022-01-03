@@ -366,7 +366,7 @@ static void check_pw_file (int *errors, bool *changed)
 {
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
-	struct spwd *spw;
+	const struct spwd *spw;
 	uid_t min_sys_id = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
 	uid_t max_sys_id = (uid_t) getdef_ulong ("SYS_UID_MAX", 999UL);
 
@@ -584,7 +584,7 @@ static void check_pw_file (int *errors, bool *changed)
 				spw_opened = true;
 			}
 #endif				/* WITH_TCB */
-			spw = (struct spwd *) spw_locate (pwd->pw_name);
+			spw = spw_locate (pwd->pw_name);
 			if (NULL == spw) {
 				printf (_("no matching password file entry in %s\n"),
 				        spw_dbname ());
