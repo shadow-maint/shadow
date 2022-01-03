@@ -38,6 +38,7 @@ libshadow_la_SOURCES = \
 	nscd.h \
 	shadowlog.c \
 	shadowlog.h \
+	shadowlog_internal.h \
 	sssd.c \
 	sssd.h \
 	pam_defs.h \
