@@ -48,7 +48,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 	int execute_result;
 
 	scanlist = scandir (directory, &namelist, 0, alphasort);
-	if (scanlist<0) {
+	if (scanlist<=0) {
 		return (0);
 	}
 
