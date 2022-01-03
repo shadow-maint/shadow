@@ -1,4 +1,11 @@
 /*
+ * SPDX-FileCopyrightText:  Marek Michalkiewicz <marekm@i17linuxb.ists.pwr.wroc.pl>
+ * SPDX-FileCopyrightText:  J.T. Conklin <jtc@netbsd.org>
+ *
+ * SPDX-License-Identifier: Unlicense
+ */
+
+/*
  * salt.c - generate a random salt string for crypt()
  *
  * Written by Marek Michalkiewicz <marekm@i17linuxb.ists.pwr.wroc.pl>,
