@@ -379,7 +379,7 @@ int main (int argc, char **argv)
 	int err = 0;
 	gid_t gid;
 	char *cp;
-	char *progbase;
+	const char *progbase;
 	const char *name, *prog;
 	char *group = NULL;
 	char *command = NULL;
@@ -787,7 +787,7 @@ int main (int argc, char **argv)
 	 * Now I try to find the basename of the login shell. This will
 	 * become argv[0] of the spawned command.
 	 */
-	progbase = (char *) Basename ((char *) prog);
+	progbase = Basename (prog);
 
 	/*
 	 * Switch back to her home directory if i am doing login
