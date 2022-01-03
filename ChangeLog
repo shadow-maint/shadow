@@ -1,5 +1,9 @@
 2022-01-02  Serge Hallyn <serge@hallyn.com>
 
+	* build: include lib/shadowlog_internal.h in dist tarballs (Sam James)
+
+2022-01-02  Serge Hallyn <serge@hallyn.com>
+
 	* Handle possible TOCTTOU issues in usermod/userdel (edneville)
 	  * (CVE-2013-4235)
 	  * Use O_NOFOLLOW when copying file
