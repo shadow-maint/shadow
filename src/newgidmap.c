@@ -76,7 +76,8 @@ static void usage(void)
 static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 {
 	int setgroups_fd;
-	char *policy, policy_buffer[4096];
+	const char *policy;
+	char policy_buffer[4096];
 
 	/*
 	 * Default is "deny", and any "allow" will out-rank a "deny". We don't
