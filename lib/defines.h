@@ -22,8 +22,6 @@ typedef unsigned char _Bool;
 # define __bool_true_false_are_defined 1
 #endif
 
-#define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
-
 /* Take care of NLS matters.  */
 #ifdef S_SPLINT_S
 extern char *setlocale(int categories, const char *locale);
@@ -61,16 +59,8 @@ extern char * textdomain (const char * domainname);
 #endif
 #endif
 
-#if STDC_HEADERS
-# include <stdlib.h>
-# include <string.h>
-#else				/* not STDC_HEADERS */
-# ifndef HAVE_STRCHR
-#  define strchr index
-#  define strrchr rindex
-# endif
-char *strchr (), *strrchr (), *strtok ();
-#endif				/* not STDC_HEADERS */
+#include <stdlib.h>
+#include <string.h>
 
 #if HAVE_ERRNO_H
 # include <errno.h>

@@ -31,32 +31,9 @@
 #include <ctype.h>
 #include <time.h>
 
-#if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
-# define IN_CTYPE_DOMAIN(c) 1
-#else
-# define IN_CTYPE_DOMAIN(c) isascii(c)
-#endif
-
-#define ISSPACE(c) (IN_CTYPE_DOMAIN (c) && isspace (c))
-#define ISALPHA(c) (IN_CTYPE_DOMAIN (c) && isalpha (c))
-#define ISUPPER(c) (IN_CTYPE_DOMAIN (c) && isupper (c))
-#define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
-
-/* ISDIGIT differs from ISDIGIT_LOCALE, as follows:
-   - Its arg may be any int or unsigned int; it need not be an unsigned char.
-   - It's guaranteed to evaluate its argument exactly once.
-   - It's typically faster.
-   Posix 1003.2-1992 section 2.5.2.1 page 50 lines 1556-1558 says that
-   only '0' through '9' are digits.  Prefer ISDIGIT to ISDIGIT_LOCALE unless
-   it's important to use the locale's definition of `digit' even when the
-   host does not conform to Posix.  */
-#define ISDIGIT(c) ((unsigned) (c) - '0' <= 9)
-
 #include "getdate.h"
 
-#if defined (STDC_HEADERS)
-# include <string.h>
-#endif
+#include <string.h>
 
 /* Some old versions of bison generate parsers that use bcopy.
    That loses on systems that don't provide the function, so we have
@@ -651,7 +628,7 @@ static int LookupWord (char *buff)
 
   /* Make it lowercase. */
   for (p = buff; '\0' != *p; p++)
-    if (ISUPPER (*p))
+    if (isupper (*p))
       *p = tolower (*p);
 
   if (strcmp (buff, "am") == 0 || strcmp (buff, "a.m.") == 0)
@@ -732,7 +709,7 @@ static int LookupWord (char *buff)
       }
 
   /* Military timezones. */
-  if (buff[1] == '\0' && ISALPHA (*buff))
+  if (buff[1] == '\0' && isalpha (*buff))
     {
       for (tp = MilitaryTable; tp->name; tp++)
 	if (strcmp (buff, tp->name) == 0)
@@ -771,30 +748,30 @@ yylex (void)
 
   for (;;)
     {
-      while (ISSPACE (*yyInput))
+      while (isspace (*yyInput))
 	yyInput++;
 
-      if (ISDIGIT (c = *yyInput) || c == '-' || c == '+')
+      if (isdigit (c = *yyInput) || c == '-' || c == '+')
 	{
 	  if (c == '-' || c == '+')
 	    {
 	      sign = c == '-' ? -1 : 1;
-	      if (!ISDIGIT (*++yyInput))
+	      if (!isdigit (*++yyInput))
 		/* skip the '-' sign */
 		continue;
 	    }
 	  else
 	    sign = 0;
-	  for (yylval.Number = 0; ISDIGIT (c = *yyInput++);)
+	  for (yylval.Number = 0; isdigit (c = *yyInput++);)
 	    yylval.Number = 10 * yylval.Number + c - '0';
 	  yyInput--;
 	  if (sign < 0)
 	    yylval.Number = -yylval.Number;
 	  return (0 != sign) ? tSNUMBER : tUNUMBER;
 	}
-      if (ISALPHA (c))
+      if (isalpha (c))
 	{
-	  for (p = buff; (c = *yyInput++, ISALPHA (c)) || c == '.';)
+	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
 	    if (p < &buff[sizeof buff - 1])
 	      *p++ = c;
 	  *p = '\0';
