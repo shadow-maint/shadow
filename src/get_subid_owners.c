@@ -8,7 +8,7 @@
 
 const char *Prog;
 
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, "Usage: [-g] %s subuid\n", Prog);
 	fprintf(stderr, "    list uids who own the given subuid\n");

@@ -11,7 +11,7 @@
 
 const char *Prog;
 
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, "Usage: %s [-g] user start count\n", Prog);
 	fprintf(stderr, "    Release a user's subuid (or with -g, subgid) range\n");

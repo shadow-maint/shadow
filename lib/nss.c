@@ -29,7 +29,7 @@ bool nss_is_initialized() {
 	return atomic_load(&nss_init_completed);
 }
 
-void nss_exit() {
+static void nss_exit() {
 	if (nss_is_initialized() && subid_nss) {
 		dlclose(subid_nss->handle);
 		free(subid_nss);

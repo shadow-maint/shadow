@@ -73,7 +73,7 @@ static void usage(void)
 	exit(EXIT_FAILURE);
 }
 
-void write_setgroups(int proc_dir_fd, bool allow_setgroups)
+static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 {
 	int setgroups_fd;
 	char *policy, policy_buffer[4096];
