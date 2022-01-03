@@ -56,7 +56,7 @@ AC_CHECK_FUNCS(arc4random_buf l64a fchmod fchown fsync futimes \
 	getutent initgroups lchown lckpwdf lstat lutimes \
 	setgroups sigaction strchr updwtmp updwtmpx innetgr getpwnam_r \
 	getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo ruserok \
-	dlopen)
+	dlopen memset_s explicit_bzero)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
