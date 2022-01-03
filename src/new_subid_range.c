@@ -11,7 +11,7 @@
 
 const char *Prog;
 
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, "Usage: %s [-g] [-n] user count\n", Prog);
 	fprintf(stderr, "    Find a subuid (or with -g, subgid) range for user\n");

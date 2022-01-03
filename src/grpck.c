@@ -455,7 +455,7 @@ static void check_grp_file (int *errors, bool *changed)
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
 #ifdef SHADOWGRP
-	struct sgrp *sgr;
+	const struct sgrp *sgr;
 #endif
 
 	/*
@@ -596,7 +596,7 @@ static void check_grp_file (int *errors, bool *changed)
 		 */
 
 		if (is_shadow) {
-			sgr = (struct sgrp *) sgr_locate (grp->gr_name);
+			sgr = sgr_locate (grp->gr_name);
 			if (sgr == NULL) {
 				printf (_("no matching group file entry in %s\n"),
 				        sgr_file);
@@ -663,7 +663,7 @@ static void check_grp_file (int *errors, bool *changed)
  */
 static void check_sgr_file (int *errors, bool *changed)
 {
-	struct group *grp;
+	const struct group *grp;
 	struct commonio_entry *sge, *tsge;
 	struct sgrp *sgr;
 
@@ -758,7 +758,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		/*
 		 * Make sure this entry exists in the /etc/group file.
 		 */
-		grp = (struct group *) gr_locate (sgr->sg_name);
+		grp = gr_locate (sgr->sg_name);
 		if (grp == NULL) {
 			printf (_("no matching group file entry in %s\n"),
 			        grp_file);

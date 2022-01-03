@@ -45,7 +45,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * don't want to tell us what it is themselves.
 	 */
 	if (arg == (char *) 0) {
-		(void) snprintf (arg0, sizeof arg0, "-%s", Basename ((char *) file));
+		(void) snprintf (arg0, sizeof arg0, "-%s", Basename (file));
 		arg0[sizeof arg0 - 1] = '\0';
 		arg = arg0;
 	}

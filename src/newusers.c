@@ -464,7 +464,9 @@ static int add_passwd (struct passwd *pwd, const char *password)
 {
 	const struct spwd *sp;
 	struct spwd spent;
+#ifndef USE_PAM
 	char *cp;
+#endif				/* !USE_PAM */
 
 #ifndef USE_PAM
 	void *crypt_arg = NULL;
@@ -607,9 +609,11 @@ static int add_passwd (struct passwd *pwd, const char *password)
 static void process_flags (int argc, char **argv)
 {
 	int c;
+#ifndef USE_PAM
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
         int bad_s;
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
+#endif 				/* !USE_PAM */
 	static struct option long_options[] = {
 		{"badnames",     no_argument,       NULL, 'b'},
 #ifndef USE_PAM

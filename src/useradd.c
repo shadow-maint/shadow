@@ -2492,7 +2492,7 @@ int main (int argc, char **argv)
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
 #endif				/* ENABLE_SUBIDS */
 
-	if (run_parts ("/etc/shadow-maint/useradd-pre.d", (char*)user_name,
+	if (run_parts ("/etc/shadow-maint/useradd-pre.d", user_name,
 			"useradd")) {
 		exit(1);
 	}
@@ -2715,7 +2715,7 @@ int main (int argc, char **argv)
 		create_mail ();
 	}
 
-	if (run_parts ("/etc/shadow-maint/useradd-post.d", (char*)user_name,
+	if (run_parts ("/etc/shadow-maint/useradd-post.d", user_name,
 			"useradd")) {
 		exit(1);
 	}

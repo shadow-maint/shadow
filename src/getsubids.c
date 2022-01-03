@@ -9,7 +9,7 @@
 
 const char *Prog;
 
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, "Usage: %s [-g] user\n", Prog);
 	fprintf(stderr, "    list subuid ranges for user\n");

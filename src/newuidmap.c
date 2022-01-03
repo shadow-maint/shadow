@@ -62,7 +62,7 @@ static void verify_ranges(struct passwd *pw, int ranges,
 	}
 }
 
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, _("usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"), Prog);
 	exit(EXIT_FAILURE);

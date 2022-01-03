@@ -248,7 +248,7 @@ extern struct spwd *prefix_getspnam(const char* name)
 	}
 }
 
-extern void prefix_setpwent()
+extern void prefix_setpwent(void)
 {
 	if (!passwd_db_file) {
 		setpwent();
@@ -261,7 +261,7 @@ extern void prefix_setpwent()
 	if (!fp_pwent)
 		return;
 }
-extern struct passwd* prefix_getpwent()
+extern struct passwd* prefix_getpwent(void)
 {
 	if (!passwd_db_file) {
 		return getpwent();
@@ -271,7 +271,7 @@ extern struct passwd* prefix_getpwent()
 	}
 	return fgetpwent(fp_pwent);
 }
-extern void prefix_endpwent()
+extern void prefix_endpwent(void)
 {
 	if (!passwd_db_file) {
 		endpwent();
@@ -282,7 +282,7 @@ extern void prefix_endpwent()
 	fp_pwent = NULL;
 }
 
-extern void prefix_setgrent()
+extern void prefix_setgrent(void)
 {
 	if (!group_db_file) {
 		setgrent();
@@ -295,14 +295,14 @@ extern void prefix_setgrent()
 	if (!fp_grent)
 		return;
 }
-extern struct group* prefix_getgrent()
+extern struct group* prefix_getgrent(void)
 {
 	if (!group_db_file) {
 		return getgrent();
 	}
 	return fgetgrent(fp_grent);
 }
-extern void prefix_endgrent()
+extern void prefix_endgrent(void)
 {
 	if (!group_db_file) {
 		endgrent();
