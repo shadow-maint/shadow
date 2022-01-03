@@ -242,7 +242,7 @@ extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
 /* nss.c */
 #include <libsubid/subid.h>
-extern void nss_init(char *nsswitch_path);
+extern void nss_init(const char *nsswitch_path);
 extern bool nss_is_initialized(void);
 
 struct subid_nss_ops {

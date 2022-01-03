@@ -38,7 +38,7 @@ static void nss_exit(void) {
 }
 
 // nsswitch_path is an argument only to support testing.
-void nss_init(char *nsswitch_path) {
+void nss_init(const char *nsswitch_path) {
 	FILE *nssfp = NULL;
 	char *line = NULL, *p, *token, *saveptr;
 	size_t len = 0;
