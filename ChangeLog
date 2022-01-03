@@ -1,3 +1,16 @@
+2022-01-02  Serge Hallyn <serge@hallyn.com>
+
+	* Handle possible TOCTTOU issues in usermod/userdel (edneville)
+	  * (CVE-2013-4235)
+	  * Use O_NOFOLLOW when copying file
+	  * Kill all user tasks in userdel
+	* Fix useradd -D segfault (Xi Ruoyao)
+	* Clean up obsolete libc feature-check ifdefs (Alejandro Colomar)
+	* Fix -fno-common build breaks due to duplicate Prog declarations
+	  (Adam Sampson)
+	* Have single date_to_str definition (Alejandro Colomar)
+	* Fix libsubid SONAME version (Sam James)
+
 2021-12-19  Serge Hallyn <serge@hallyn.com>
 
 	Note: From this release forward, su from this package should be
