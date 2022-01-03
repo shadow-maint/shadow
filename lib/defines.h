@@ -111,7 +111,20 @@ char *strchr (), *strrchr (), *strtok ();
 # endif
 #endif				/* not TIME_WITH_SYS_TIME */
 
-#define memzero(ptr, size) memset((void *)(ptr), 0, (size))
+#ifdef HAVE_MEMSET_S
+# define memzero(ptr, size) memset_s((ptr), 0, (size))
+#elif defined HAVE_EXPLICIT_BZERO	/* !HAVE_MEMSET_S */
+# define memzero(ptr, size) explicit_bzero((ptr), (size))
+#else					/* !HAVE_MEMSET_S && HAVE_EXPLICIT_BZERO */
+static inline void memzero(void *ptr, size_t size)
+{
+	volatile unsigned char * volatile p = ptr;
+	while (size--) {
+		*p++ = '\0';
+	}
+}
+#endif					/* !HAVE_MEMSET_S && !HAVE_EXPLICIT_BZERO */
+
 #define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
 #ifdef HAVE_DIRENT_H		/* DIR_SYSV */
