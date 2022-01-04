@@ -2409,11 +2409,9 @@ static void check_uid_range(int rflg, uid_t user_id)
 	uid_t uid_min ;
 	uid_t uid_max ;
 	if (rflg) {
-		uid_min = (uid_t)getdef_ulong("SYS_UID_MIN",101UL);
 		uid_max = (uid_t)getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
-		if (uid_min <= uid_max) {
-			if (user_id < uid_min || user_id >uid_max)
-				fprintf(stderr, _("%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
+		if (user_id > uid_max) {
+			fprintf(stderr, _("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, user_id, uid_max);
 		}
 	}else{
 		uid_min = (uid_t)getdef_ulong("UID_MIN", 1000UL);
