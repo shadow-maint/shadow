@@ -35,6 +35,10 @@ enum subid_status {
 	SUBID_STATUS_ERROR = 3,
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * subid_init: initialize libsubid
  *
@@ -150,6 +154,10 @@ bool subid_ungrant_uid_range(struct subordinate_range *range);
  * delegation did not exist.
  */
 bool subid_ungrant_gid_range(struct subordinate_range *range);
+
+#ifdef __cplusplus
+}
+#endif
 
 #define SUBID_NFIELDS 3
 #endif
