@@ -332,7 +332,7 @@ msgid_plural ""
 "Last was %s on %s.\n"
 msgstr[0] ""
 "%d échec depuis la denière connexion.\n"
-"Le dernier était %s le %s.\n "
+"Le dernier était %s le %s.\n"
 msgstr[1] ""
 "%d échecs depuis la dernière connexion.\n"
 "Les derniers étant %s le %s.\n"
@@ -441,7 +441,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr "%s : Pas assez d'arguments pour former %u mappages %u\n"
+msgstr "%s : Pas assez d'arguments pour former %u mappages\n"
 
 #, c-format
 msgid "%s: Memory allocation failure\n"
@@ -1872,8 +1872,7 @@ msgstr "%s : ligne %d : l'utilisateur '%s' n'existe pas dans %s\n"
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr ""
-"%s : ligne %d : impossible de mettre à jour le fichier des mots de passe - 
-password -\n"
+"%s : ligne %d : impossible de mettre à jour le fichier des mots de passe - password -\n"
 
 #, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
