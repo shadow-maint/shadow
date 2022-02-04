@@ -216,7 +216,7 @@ AC_ARG_ENABLE(man,
 
 AC_ARG_ENABLE(account-tools-setuid,
 	[AC_HELP_STRING([--enable-account-tools-setuid],
-		[Install the user and group management tools setuid and authenticate the callers. This requires --with-pam.])],
+		[Install the user and group management tools setuid and authenticate the callers. This requires --with-libpam.])],
 	[case "${enableval}" in
 	 yes) enable_acct_tools_setuid="yes" ;;
 	  no) enable_acct_tools_setuid="no" ;;
