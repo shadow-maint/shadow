@@ -287,7 +287,7 @@ AC_ARG_WITH(sssd,
 	[AC_HELP_STRING([--with-sssd], [enable support for flushing sssd caches @<:@default=yes@:>@])],
 	[with_sssd=$withval], [with_sssd=yes])
 AC_ARG_WITH(group-name-max-length,
-	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=16@:>@])],
+	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=32@:>@])],
 	[with_group_name_max_length=$withval], [with_group_name_max_length=yes])
 AC_ARG_WITH(su,
 	[AC_HELP_STRING([--with-su], [build and install su program and man page @<:@default=yes@:>@])],
@@ -296,7 +296,7 @@ AC_ARG_WITH(su,
 if test "$with_group_name_max_length" = "no" ; then
 	with_group_name_max_length=0
 elif test "$with_group_name_max_length" = "yes" ; then
-	with_group_name_max_length=16
+	with_group_name_max_length=32
 fi
 AC_DEFINE_UNQUOTED(GROUP_NAME_MAX_LENGTH, $with_group_name_max_length, [max group name length])
 AC_SUBST(GROUP_NAME_MAX_LENGTH)
