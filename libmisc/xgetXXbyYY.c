@@ -66,7 +66,6 @@
 			         "x" STRINGIZE(FUNCTION_NAME));
 			exit (13);
 		}
-		errno = 0;
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
 		if ((0 == status) && (resbuf == result)) {
@@ -78,7 +77,7 @@
 			return ret_result;
 		}
 
-		if (ERANGE != errno) {
+		if (ERANGE != status) {
 			free (buffer);
 			free (result);
 			return NULL;
