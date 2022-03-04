@@ -7,7 +7,7 @@ auth		required	pam_wheel.so use_uid
 auth		include		system-auth
 account		include		system-auth
 password	include		system-auth
-session		required	pam_selinux.so close
+session [success=ok ignore=ignore module_unknown=ignore default=bad] pam_selinux.so close
 session		include		system-auth
-session		required	pam_selinux.so open multiple
+session [success=ok ignore=ignore module_unknown=ignore default=bad] pam_selinux.so open
 session		optional	pam_xauth.so
