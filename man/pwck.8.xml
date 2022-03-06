@@ -45,7 +45,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>pwck</refname>
-    <refpurpose>verify integrity of password files</refpurpose>
+    <refpurpose>verify the integrity of password files</refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
@@ -54,11 +54,11 @@
       <arg choice='opt'>options</arg>
       <arg choice='opt'>
 	<arg choice='plain'>
-	  <replaceable>passwd</replaceable>
+	  <replaceable>PASSWORDFILE</replaceable>
 	</arg>
 	<arg choice='opt'>
 	  <arg choice='plain'>
-	    <replaceable>shadow</replaceable>
+	    <replaceable>SHADOWFILE</replaceable>
 	  </arg>
 	</arg>
       </arg>
@@ -102,9 +102,9 @@
     </itemizedlist>
 
     <para>
-      <filename>shadow</filename> checks are enabled when a second file
-      parameter is specified or when <filename>/etc/shadow</filename>
-      exists on the system.
+      Checks for shadowed password information are enabled when the second
+      file parameter <replaceable>SHADOWFILE</replaceable> is specified or
+      when <filename>/etc/shadow</filename> exists on the system.
     </para>
     <para>
       These checks are the following:
@@ -136,7 +136,7 @@
       prompted to delete the entire line. If the user does not answer
       affirmatively, all further checks are bypassed. An entry with a
       duplicated user name is prompted for deletion, but the remaining
-      checks will still be made. All other errors are warning and the user
+      checks will still be made. All other errors are warnings and the user
       is encouraged to run the <command>usermod</command> command to correct
       the error.
     </para>
