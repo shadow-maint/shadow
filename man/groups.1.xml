@@ -56,16 +56,17 @@
       The <command>groups</command> command displays the current group names
       or ID values. If the value does not have a corresponding entry in
       <filename>/etc/group</filename>, the value will be displayed as the
-      numerical group value. The optional <emphasis
-      remap='I'>user</emphasis> parameter will display the groups for the
-      named <emphasis remap='I'>user</emphasis>.
+      numerical group value. The optional <replaceable>user</replaceable>
+      parameter will display the groups for the named user.
     </para>
   </refsect1>
 
   <refsect1 id='note'>
     <title>NOTE</title>
     <para>
-      Systems which do not support concurrent group sets will have the
+      Systems which do not support supplementary groups (see <citerefentry>
+	<refentrytitle>initgroups</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry>) will have the
       information from <filename>/etc/group</filename> reported. The user
       must use <command>newgrp</command> or <command>sg</command> to change
       his current real and effective group ID.
@@ -98,6 +99,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>initgroups</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>

@@ -55,8 +55,9 @@
       have a corresponding entry in <filename>/etc/passwd</filename> or
       <filename>/etc/group</filename>, the value will be displayed without
       the corresponding name. The optional <option>-a</option> flag will
-      display the group set on systems which support multiple concurrent
-      group membership.
+      display the group set on systems which support supplementary groups
+      (see <citerefentry><refentrytitle>initgroups</refentrytitle>
+      <manvolnum>3</manvolnum></citerefentry>).
     </para>
   </refsect1>
 
@@ -89,6 +90,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>initgroups</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>
     </para>
   </refsect1>
