@@ -48,10 +48,10 @@
     <cmdsynopsis>
       <command>groupadd</command>
       <arg choice='opt'>
-	<replaceable>options</replaceable>
+	<replaceable>OPTIONS</replaceable>
       </arg>
       <arg choice='plain'>
-	<replaceable>group</replaceable>
+	<replaceable>NEWGROUP</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -63,6 +63,15 @@
       values from the system. The new group will be entered into the system
       files as needed.
     </para>
+     <para>
+       Groupnames must start with a lower case letter or an underscore,
+       followed by lower case letters, digits, underscores, or dashes.
+       They can end with a dollar sign.
+       In regular expression terms: [a-z_][a-z0-9_-]*[$]?
+     </para>
+     <para>
+       Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long.
+     </para>
   </refsect1>
 
   <refsect1 id='options'>
@@ -91,8 +100,8 @@
 	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>
 	</term>
 	<listitem>
-	  <para>The numerical value of the group's ID. This value must be
-	    unique, unless the <option>-o</option> option is used. The value
+	  <para>The numerical value of the group's ID. <replaceable>GID</replaceable> 
+	    must be unique, unless the <option>-o</option> option is used. The value
 	    must be non-negative. The default is to use the smallest ID
 	    value greater than or equal to <option>GID_MIN</option> and
 	    greater than every other group.
@@ -135,7 +144,10 @@
 	</term>
 	<listitem>
 	  <para>
-	    This option permits to add a group with a non-unique GID.
+	    permits the creation of a group with an already used
+	    numerical ID. As a result, for this
+	    <replaceable>GID</replaceable>, the mapping towards group
+	    <replaceable>NEWGROUP</replaceable> may not be unique.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -145,10 +157,16 @@
 	</term>
 	<listitem>
 	  <para>
-	    The encrypted password, as returned by <citerefentry>
-	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-	    </citerefentry>. The default is to disable the password.
+	    defines an initial password for the group account. PASSWORD is expected to
+            be encrypted, as returned by <citerefentry><refentrytitle>crypt
+            </refentrytitle><manvolnum>3</manvolnum></citerefentry>. 
 	  </para>
+	  <para>
+            Without this option, the group account will be locked and
+            with no password defined, i.e. a single exclamation mark
+            in the respective field of ths system account file 
+            <filename>/etc/group</filename> or <filename>/etc/gshadow</filename>.
+          </para>
 	  <para>
 	    <emphasis role="bold">Note:</emphasis> This option is not
 	    recommended because the password (or encrypted password) will
@@ -194,14 +212,12 @@
 	</term>
 	<listitem>
 	  <para>
-	    Apply changes in the <replaceable>PREFIX_DIR</replaceable>
-	    directory and use the configuration files from the
-	    <replaceable>PREFIX_DIR</replaceable> directory.
-		This option does not chroot and is intended for preparing 
-		a cross-compilation target.
-		Some limitations: NIS and LDAP users/groups are not verified.
-		PAM authentication is using the host files.
-		No SELINUX support.
+	    Apply changes to configuration files under the root filesystem
+	    found under the directory <replaceable>PREFIX_DIR</replaceable>.
+	    This option does not chroot and is intended for preparing a cross-compilation
+	    target.  Some limitations: NIS and LDAP users/groups are
+	    not verified.  PAM authentication is using the host files.
+	    No SELINUX support.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -264,15 +280,6 @@
 
    <refsect1 id='caveats'>
      <title>CAVEATS</title>
-     <para>
-       Groupnames must start with a lower case letter or an underscore,
-       followed by lower case letters, digits, underscores, or dashes.
-       They can end with a dollar sign.
-       In regular expression terms: [a-z_][a-z0-9_-]*[$]?
-     </para>
-     <para>
-       Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long.
-     </para>
      <para>
        You may not add a NIS or LDAP group. This must be performed on the
        corresponding server.
