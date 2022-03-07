@@ -119,11 +119,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    The default base directory for the system if <option>-d</option>&nbsp;<replaceable>HOME_DIR</replaceable> is not specified.
-	    <replaceable>BASE_DIR</replaceable> is
-	    concatenated with the account name to define the home directory. 
-	    If the <option>-m</option> option is not used,
-	    <replaceable>BASE_DIR</replaceable> must exist.
+	    The default base directory for the system if
+	    <option>-d</option>&nbsp;<replaceable>HOME_DIR</replaceable>
+	    is not specified.  <replaceable>BASE_DIR</replaceable> is
+	    concatenated with the account name to define the home
+	    directory.
 	  </para>
 	  <para>
 	    If this option is not specified, <command>useradd</command>
@@ -141,7 +141,7 @@
 	<listitem>
 	  <para>
 	    Any text string. It is generally a short description of the
-	    login, and is currently used as the field for the user's full
+	    account, and is currently used as the field for the user's full
 	    name.
 	  </para>
 	</listitem>
@@ -153,14 +153,14 @@
 	<listitem>
 	  <para>
 	    The new user will be created using
-	    <replaceable>HOME_DIR</replaceable> as the value for the user's
-	    login directory. The default is to append the
+	    <replaceable>HOME_DIR</replaceable> as the value for the
+	    user's login directory. The default is to append the
 	    <replaceable>LOGIN</replaceable> name to
-	    <replaceable>BASE_DIR</replaceable> and use that as the login
-	    directory name.  If the directory
-	    <replaceable>HOME_DIR</replaceable> does not exist, then it
-	    will be created unless the <option>-M</option> option is
-	    specified.
+	    <replaceable>BASE_DIR</replaceable> and use that as the
+	    login directory name.  If the directory
+	    <replaceable>HOME_DIR</replaceable> does not exist, then
+	    it will be created unless the <option>-M</option> option
+	    is specified.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -197,10 +197,13 @@
 	</term>
 	<listitem>
 	  <para>
-	    The number of days after a password expires until the account is
-	    permanently disabled. A value of 0 disables the account as soon
-	    as the password has expired, and a value of -1 disables the
-	    feature.
+            defines the number of days after the password exceeded its maximum
+            age where the user is expected to replace this password. The value
+            is stored in the shadow password file. An input of 0 will disable an
+            expired password with no delay. An input of -1 will blank the
+            respective field in the shadow password file. See <citerefentry>
+	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+            </citerefentry>for more information.
 	  </para>
 	  <para>
 	    If not specified, <command>useradd</command> will use the
@@ -216,7 +219,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    The group name or number of the user's initial login group. The
+	    The name or the number of the user's primary group. The
 	    group name must exist. A group number must refer to an already
 	    existing group.
 	  </para>
@@ -293,14 +296,17 @@
 	    (<option>UID_MIN</option>, <option>UID_MAX</option>,
 	    <option>UMASK</option>, <option>PASS_MAX_DAYS</option>
 	    and others).
-	  <para>
 	  </para>
-	    Example: <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
-	    can be used when creating system account to turn off password
-	    aging, even though system account has no password at all.
-	    Multiple <option>-K</option> options can be specified, e.g.:
-	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>&nbsp;
-	    <option>-K</option>&nbsp;<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	  <para>
+	    Example:
+	    <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS
+	    </replaceable>=<replaceable>-1</replaceable> can be used
+	    when creating an account to turn off password aging.
+	    Multiple <option>-K</option> options can be specified,
+	    e.g.:
+	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>
+	    =<replaceable>100</replaceable>&nbsp;<option>-K</option>&nbsp;
+	    <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
 	  <!--para>
 	    Note: <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
@@ -387,10 +393,18 @@
 	  <option>-o</option>, <option>--non-unique</option>
 	</term>
 	<listitem>
-	  <para>Allow the creation of a user account with a duplicate (non-unique) UID.</para>
+	  <para>
+	    allows the creation of an account with an already existing
+	    UID.
+	  </para>
 	  <para>
 	    This option is only valid in combination with the
-	    <option>-u</option> option.
+	    <option>-u</option> option. As a user identity
+	    serves as
+	    key to map between users on one hand and permissions, file
+	    ownerships and other aspects that determine the system's
+	    behavior on the other hand, more than one login name
+	    will access the account of the given UID.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -400,13 +414,23 @@
 	</term>
 	<listitem>
 	  <para>
-	    The encrypted password, as returned by <citerefentry>
-	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-	    </citerefentry>. The default is to disable the password.
+	    defines an initial password for the account. PASSWORD is expected to
+	    be encrypted, as returned by <citerefentry><refentrytitle>crypt
+	    </refentrytitle><manvolnum>3</manvolnum></citerefentry>. Within a
+	    shell script, this option allows to create efficiently
+	    batches of users.
 	  </para>
 	  <para>
-	    <emphasis role="bold">Note:</emphasis> This option is not
-	    recommended because the password (or encrypted password) will
+            Without this option, the new account will be locked and
+            with no password defined, i.e. a single exclamation mark
+            in the respective field of
+            <filename>/etc/shadow</filename>. This is a state where the
+            user won't be able to access the account or to define a
+            password himself.
+	  </para>
+	  <para>
+	    <emphasis role="bold">Note:</emphasis>Avoid this option on the command  
+	     line because the password (or encrypted password) will
 	    be visible by users listing the processes.
 	  </para>
 	  <para>
@@ -477,11 +501,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    The name of the user's login shell. The default is to leave this
-	    field blank, which causes the system to select the default login
-	    shell specified by the <option>SHELL</option> variable in
-	    <filename>/etc/default/useradd</filename>, or an empty string
-	    by default.
+            sets the path to the user's login shell. Without this option,
+            the system will use the <option>SHELL</option> variable specified
+	    in <filename>/etc/default/useradd</filename>, or, if that is as
+	    well not set, the field for the login shell in <filename>/etc/passwd
+	    </filename>remains empty.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -526,9 +550,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    The SELinux user for the user's login. The default is to leave this
-	    field blank, which causes the system to select the default SELinux
-	    user.
+	    defines the SELinux user for the new account. Without this
+	    option, a SELinux uses the default user. Note that the
+	    shadow system doesn't store the selinux-user, it uses
+	    <citerefentry><refentrytitle>semanage</refentrytitle>
+	    <manvolnum>8</manvolnum></citerefentry> for that.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -550,7 +576,7 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The path prefix for a new user's home directory. The
+	      sets the path prefix for a new user's home directory. The
 	      user's name will be affixed to the end of
 	      <replaceable>BASE_DIR</replaceable> to form the new user's
 	      home directory name, if the <option>-d</option> option is not used
@@ -567,7 +593,7 @@
 	    <option>-e</option>, <option>--expiredate</option>&nbsp;<replaceable>EXPIRE_DATE</replaceable>
 	  </term>
 	  <listitem>
-	    <para>The date on which the user account is disabled.</para>
+	    <para>sets the date on which newly created user accounts are disabled.</para>
 	    <para>
 	      This option sets the <option>EXPIRE</option> variable in
 	      <filename>/etc/default/useradd</filename>.
@@ -580,8 +606,10 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The number of days after a password has expired before the
-	      account will be disabled.
+              defines the number of days after the password exceeded its maximum
+              age where the user is expected to replace this password. See <citerefentry>
+	      <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+              </citerefentry>for more information.
 	    </para>
 	    <para>
 	      This option sets the <option>INACTIVE</option> variable in
@@ -594,13 +622,9 @@
 	    <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	  </term>
 	  <listitem>
-	    <para>
-	      The group name or ID for a new user's initial group (when
-	      the <option>-N/--no-user-group</option> is used or when the
-	      <option>USERGROUPS_ENAB</option> variable is set to
-	      <replaceable>no</replaceable> in
-	      <filename>/etc/login.defs</filename>). The named
-	      group must exist, and a numerical group ID must have an
+	    <para>sets the default primary group for newly created users,
+	      accepting group names or a numerical group ID. The named
+	      group must exist, and the GID must have an
 	      existing entry.
 	    </para>
 	    <para>
@@ -615,7 +639,7 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The name of a new user's login shell.
+	      defines the default login shell for new users.
 	    </para>
 	    <para>
 	      This option sets the <option>SHELL</option> variable in
