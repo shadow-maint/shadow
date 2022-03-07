@@ -62,7 +62,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>usermod</command> command modifies the system account
-      files to reflect the changes that are specified on the command line.
+      files.
     </para>
   </refsect1>
 
@@ -100,8 +100,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    The new value of the user's password file comment field. It is
-	    normally modified using the <citerefentry>
+	    update the comment field of the user in <filename>/etc/passwd
+	    </filename>, which is normally modified using the <citerefentry>
 	    <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
 	    </citerefentry> utility.
 	  </para>
@@ -130,12 +130,15 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date on which the user account will be disabled. The date is
-	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
+            The date on which the user account will be disabled. The
+            date is specified in the format 
+            <emphasis remap=\"I\">YYYY-MM-DD</emphasis>. Integers as input are
+            interpreted as days after 1970-01-01.
 	  </para>
 	  <para>
-	    An empty <replaceable>EXPIRE_DATE</replaceable> argument will
-	    disable the expiration of the account.
+	    An input of -1 or an empty string will blank the account
+	    expiration field in the shadow password file. The account
+	    will remain available with no date limit.
 	  </para>
 	  <para>
 	    This option requires a <filename>/etc/shadow</filename> file.
@@ -150,13 +153,14 @@
 	</term>
 	<listitem>
 	  <para>
-	    The number of days after a password expires until the account is
-	    permanently disabled.
-	  </para>
-	  <para>
-	    A value of 0 disables the account as soon
-	    as the password has expired, and a value of -1 disables the
-	    feature.
+	    defines the number of days after the password exceeded its maximum
+	    age during which the user may still login by immediately replacing
+	    the password. This grace period before the account becomes inactive
+	    is stored in the shadow password file. An input of 0 will disable an
+	    expired password with no delay. An input of -1 will blank the
+	    respective field in the shadow password file. See <citerefentry>
+	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	    </citerefentry> for more information.
 	  </para>
 	  <para>
 	    This option requires a <filename>/etc/shadow</filename> file.
@@ -171,7 +175,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    The group name or number of the user's new initial login group.
+	    The name or numerical ID of the user's new primary group.
 	    The group must exist.
 	  </para>
 	  <para>
@@ -198,9 +202,7 @@
 	  <para>
 	    A list of supplementary groups which the user is also a member
 	    of. Each group is separated from the next by a comma, with no
-	    intervening whitespace. The groups are subject to the same
-	    restrictions as the group given with the <option>-g</option>
-	    option.
+	    intervening whitespace. The groups must exist.
 	  </para>
 	  <para>
 	    If the user is currently a member of a group which is
@@ -249,7 +251,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Move the content of the user's home directory to the new
+	    moves the content of the user's home directory to the new
 	    location. If the current home directory does not exist
 	    the new home directory will not be created.
 	  </para>
@@ -270,8 +272,16 @@
 	</term>
 	<listitem>
 	  <para>
-	    When used with the <option>-u</option> option, this option
 	    allows to change the user ID to a non-unique value.
+	  </para>
+	  <para>
+            This option is only valid in combination with the
+            <option>-u</option> option. As a user identity
+            serves as
+            key to map between users on one hand and permissions, file
+            ownerships and other aspects that determine the system's
+            behavior on the other hand, more than one login name
+            will access the account of the given UID.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -281,13 +291,13 @@
 	</term>
 	<listitem>
 	  <para>
-	    The encrypted password, as returned by <citerefentry>
-	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-	    </citerefentry>.
+            defines a new password for the user. PASSWORD is expected to
+            be encrypted, as returned by <citerefentry><refentrytitle>crypt
+            </refentrytitle><manvolnum>3</manvolnum></citerefentry>.
 	  </para>
 	  <para>
-	    <emphasis role="bold">Note:</emphasis> This option is not
-	    recommended because the password (or encrypted password) will
+	    <emphasis role="bold">Note:</emphasis> Avoid this option on the  
+	    command  line because the password (or encrypted password) will
 	    be visible by users listing the processes.
 	  </para>
 	  <para condition="pam">
@@ -331,14 +341,13 @@
 	</term>
 	<listitem>
 	  <para>
-	    Apply changes in the <replaceable>PREFIX_DIR</replaceable>
-	    directory and use the configuration files from the
-	    <replaceable>PREFIX_DIR</replaceable> directory.
-		This option does not chroot and is intended for preparing 
-		a cross-compilation target.
-		Some limitations: NIS and LDAP users/groups are not verified.
-		PAM authentication is using the host files.
-		No SELINUX support.
+             Apply changes within the directory tree starting with
+             <replaceable>PREFIX_DIR</replaceable> and use as well the
+             configuration files located there.  This option does not
+             chroot and is intended for preparing a cross-compilation
+             target.  Some limitations: NIS and LDAP users/groups are
+             not verified.  PAM authentication is using the host
+             files.  No SELINUX support.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -348,8 +357,9 @@
 	</term>
 	<listitem>
 	  <para>
-	    The path of the user's new login shell. Setting this field to
-	    blank causes the system to select the default login shell.
+	    changes the user's login shell. An empty string for SHELL blanks the
+	    field in <filename>/etc/passwd</filename> and logs the user into the
+	    system's default shell.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -359,7 +369,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    The new numerical value of the user's ID.
+	    The new value of the user's ID.
 	  </para>
 	  <para>
 	    This value must be unique,
@@ -418,7 +428,7 @@
 	    Add a range of subordinate uids to the user's account. 
 	  </para>
 	  <para>
-	    This option may be specified multiple times to add multiple ranges to a users account.
+	    This option may be specified multiple times to add multiple ranges to a user's account.
 	  </para>
 	  <para>
 	     No checks will be performed with regard to
@@ -436,7 +446,7 @@
 	    Remove a range of subordinate uids from the user's account.
 	  </para>
 	  <para>
-	    This option may be specified multiple times to remove multiple ranges to a users account.
+	    This option may be specified multiple times to remove multiple ranges to a user's account.
 	    When both <option>--del-subuids</option> and <option>--add-subuids</option> are specified,
 	    the removal of all subordinate uid ranges happens before any subordinate uid range is added.
 	  </para>
@@ -456,7 +466,7 @@
 	    Add a range of subordinate gids to the user's account.
 	  </para>
 	  <para>
-	    This option may be specified multiple times to add multiple ranges to a users account.
+	    This option may be specified multiple times to add multiple ranges to a user's account.
 	  </para>
 	  <para>
 	     No checks will be performed with regard to
@@ -474,7 +484,7 @@
 	    Remove a range of subordinate gids from the user's account.
 	  </para>
 	  <para>
-	    This option may be specified multiple times to remove multiple ranges to a users account.
+	    This option may be specified multiple times to remove multiple ranges to a user's account.
 	    When both <option>--del-subgids</option> and <option>--add-subgids</option> are specified,
 	    the removal of all subordinate gid ranges happens before any subordinate gid range is added.
 	  </para>
@@ -491,12 +501,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    The new SELinux user for the user's login.
-	  </para>
-	  <para>
-	    A blank <replaceable>SEUSER</replaceable> will remove the
-	    SELinux user mapping for user <replaceable>LOGIN</replaceable>
-	    (if any).
+            defines the SELinux user to be mapped with
+            <replaceable>LOGIN</replaceable>.  An empty string ("")
+            will remove the respective entry (if any). Note that the
+            shadow system doesn't store the selinux-user, it uses
+            semanage(8) for that.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -510,7 +519,8 @@
       not executing any processes when this command is being executed if the
       user's numerical user ID, the user's name, or the user's home
       directory is being changed. <command>usermod</command> checks this
-      on Linux. On other platforms it only uses utmp to check if the user is logged in.
+      on Linux. On other operating systems it only uses utmp to check if 
+      the user is logged in.
     </para>
     <para>
       You must change the owner of any <command>crontab</command> files or
@@ -545,43 +555,43 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>Group account information.</para>
+	  <para>Group account information</para>
 	</listitem>
       </varlistentry>
       <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>Secure group account information.</para>
+	  <para>Secure group account informatio.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
-	  <para>Shadow password suite configuration.</para>
+	  <para>Shadow password suite configuration</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>User account information.</para>
+	  <para>User account information</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>Secure user account information.</para>
+	  <para>Secure user account information</para>
 	</listitem>
       </varlistentry>
       <varlistentry condition="subids">
 	<term><filename>/etc/subgid</filename></term>
 	<listitem>
-	  <para>Per user subordinate group IDs.</para>
+	  <para>Per user subordinate group IDs</para>
 	</listitem>
       </varlistentry>
       <varlistentry condition="subids">
 	<term><filename>/etc/subuid</filename></term>
 	<listitem>
-	  <para>Per user subordinate user IDs.</para>
+	  <para>Per user subordinate user IDs</para>
 	</listitem>
       </varlistentry>
     </variablelist>
