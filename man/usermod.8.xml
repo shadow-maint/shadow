@@ -132,7 +132,7 @@
 	  <para>
             The date on which the user account will be disabled. The
             date is specified in the format 
-            <emphasis remap=\"I\">YYYY-MM-DD</emphasis>. Integers as input are
+            <emphasis remap="I">YYYY-MM-DD</emphasis>. Integers as input are
             interpreted as days after 1970-01-01.
 	  </para>
 	  <para>
