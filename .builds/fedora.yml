@@ -1,0 +1,31 @@
+image: fedora/latest
+packages:
+  - autoconf
+  - automake
+  - byacc
+  - expect
+  - findutils
+  - gettext
+  - gettext-devel
+  - git
+  - libselinux-devel
+  - libsemanage-devel
+  - libtool
+  - libxslt
+sources:
+  - https://github.com/shadow-maint/shadow
+tasks:
+  - build: |
+      cd shadow
+      ./autogen.sh --with-selinux --enable-man
+      grep ENABLE_ config.status
+  - tasks: |
+      cd shadow
+      cat /proc/self/uid_map
+      cat /proc/self/status
+      make
+      make DESTDIR=/tmp/shadow-inst install
+      sudo make install
+      #TODO - fix up the tests.  Let's merge what's here now as it
+      #at least tests build.
+      #(cd tests; sudo ./run_some || { cat testsuite.log; false; })
