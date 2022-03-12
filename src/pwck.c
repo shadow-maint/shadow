@@ -498,9 +498,9 @@ static void check_pw_file (int *errors, bool *changed)
 		}
 
 		/*
-		 * If uid is system and has a home directory, then check
+		 * If uid is not system and has a home directory, then check
 		 */
-		if (!(pwd->pw_uid >= min_sys_id && pwd->pw_uid <= max_sys_id && pwd->pw_dir && pwd->pw_dir[0])) {
+		if (!(pwd->pw_uid >= min_sys_id && pwd->pw_uid <= max_sys_id ) && pwd->pw_dir && pwd->pw_dir[0]) {
 			/*
 			 * Make sure the home directory exists
 			 */
