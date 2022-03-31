@@ -451,9 +451,10 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	process_root_flag ("-R", argc, argv);
-
 	process_flags (argc, argv);
+
+	salt = get_salt();
+	process_root_flag ("-R", argc, argv);
 
 #ifdef USE_PAM
 	if (md5flg || eflg || cflg) {
@@ -545,7 +546,6 @@ int main (int argc, char **argv)
 		const struct passwd *pw;
 		struct passwd newpw;
 
-		salt = get_salt();
 		if (salt) {
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
