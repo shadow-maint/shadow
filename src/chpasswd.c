@@ -394,38 +394,36 @@ static void close_files (void)
 
 static const char *get_salt(void)
 {
-	if (   !eflg
-		&& (   (NULL == crypt_method)
-			|| (0 != strcmp (crypt_method, "NONE")))) {
-		void *arg = NULL;
+	void *arg = NULL;
 
-		if (md5flg) {
-			crypt_method = "MD5";
-		}
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
-		if (sflg) {
-#if defined(USE_SHA_CRYPT)
-			if (   (0 == strcmp (crypt_method, "SHA256"))
-				|| (0 == strcmp (crypt_method, "SHA512"))) {
-				arg = &sha_rounds;
-			}
-#endif				/* USE_SHA_CRYPT */
-#if defined(USE_BCRYPT)
-			if (0 == strcmp (crypt_method, "BCRYPT")) {
-				arg = &bcrypt_rounds;
-			}
-#endif				/* USE_BCRYPT */
-#if defined(USE_YESCRYPT)
-			if (0 == strcmp (crypt_method, "YESCRYPT")) {
-				arg = &yescrypt_cost;
-			}
-#endif				/* USE_YESCRYPT */
-		}
-#endif
-		return crypt_make_salt (crypt_method, arg);
+	if (eflg || ((NULL != crypt_method) && (0 == strcmp (crypt_method, "NONE")))) {
+		return NULL;
 	}
 
-	return NULL;
+	if (md5flg) {
+		crypt_method = "MD5";
+	}
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
+	if (sflg) {
+#if defined(USE_SHA_CRYPT)
+		if ((0 == strcmp (crypt_method, "SHA256"))
+		 || (0 == strcmp (crypt_method, "SHA512"))) {
+			arg = &sha_rounds;
+		}
+#endif				/* USE_SHA_CRYPT */
+#if defined(USE_BCRYPT)
+		if (0 == strcmp (crypt_method, "BCRYPT")) {
+			arg = &bcrypt_rounds;
+		}
+#endif				/* USE_BCRYPT */
+#if defined(USE_YESCRYPT)
+		if (0 == strcmp (crypt_method, "YESCRYPT")) {
+			arg = &yescrypt_cost;
+		}
+#endif				/* USE_YESCRYPT */
+	}
+#endif
+	return crypt_make_salt (crypt_method, arg);
 }
 
 int main (int argc, char **argv)
