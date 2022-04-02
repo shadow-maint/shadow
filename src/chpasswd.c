@@ -30,6 +30,8 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 
+#define IS_CRYPT_METHOD(str) ((crypt_method != NULL && strcmp(crypt_method, str) == 0) ? true : false)
+
 /*
  * Global variables
  */
@@ -179,20 +181,20 @@ static void process_flags (int argc, char **argv)
 			sflg = true;
                         bad_s = 0;
 #if defined(USE_SHA_CRYPT)
-			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
-			       && (0 == getlong(optarg, &sha_rounds)))) {
+			if ((IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512"))
+			    && (0 == getlong(optarg, &sha_rounds))) {
                             bad_s = 1;
                         }
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
-                        if ((   (0 == strcmp (crypt_method, "BCRYPT"))
-			       && (0 == getlong(optarg, &bcrypt_rounds)))) {
+                        if (IS_CRYPT_METHOD("BCRYPT")
+			    && (0 == getlong(optarg, &bcrypt_rounds))) {
                             bad_s = 1;
                         }
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-                        if ((   (0 == strcmp (crypt_method, "YESCRYPT"))
-			       && (0 == getlong(optarg, &yescrypt_cost)))) {
+                        if (IS_CRYPT_METHOD("YESCRYPT")
+			    && (0 == getlong(optarg, &yescrypt_cost))) {
                             bad_s = 1;
                         }
 #endif				/* USE_YESCRYPT */
@@ -240,18 +242,18 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (   (0 != strcmp (crypt_method, "DES"))
-		    && (0 != strcmp (crypt_method, "MD5"))
-		    && (0 != strcmp (crypt_method, "NONE"))
+		if ((!IS_CRYPT_METHOD("DES"))
+		    &&(!IS_CRYPT_METHOD("MD5"))
+		    &&(!IS_CRYPT_METHOD("NONE"))
 #ifdef USE_SHA_CRYPT
-		    && (0 != strcmp (crypt_method, "SHA256"))
-		    && (0 != strcmp (crypt_method, "SHA512"))
+		    &&(!IS_CRYPT_METHOD("SHA256"))
+		    &&(!IS_CRYPT_METHOD("SHA512"))
 #endif				/* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-		    && (0 != strcmp (crypt_method, "BCRYPT"))
+		    &&(!IS_CRYPT_METHOD("BCRYPT"))
 #endif				/* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-		    && (0 != strcmp (crypt_method, "YESCRYPT"))
+		    &&(!IS_CRYPT_METHOD("YESCRYPT"))
 #endif				/* USE_YESCRYPT */
 		    ) {
 			fprintf (stderr,
@@ -396,7 +398,7 @@ static const char *get_salt(void)
 {
 	void *arg = NULL;
 
-	if (eflg || ((NULL != crypt_method) && (0 == strcmp (crypt_method, "NONE")))) {
+	if (eflg || IS_CRYPT_METHOD("NONE")) {
 		return NULL;
 	}
 
@@ -406,18 +408,17 @@ static const char *get_salt(void)
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	if (sflg) {
 #if defined(USE_SHA_CRYPT)
-		if ((0 == strcmp (crypt_method, "SHA256"))
-		 || (0 == strcmp (crypt_method, "SHA512"))) {
+		if (IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512")) {
 			arg = &sha_rounds;
 		}
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
-		if (0 == strcmp (crypt_method, "BCRYPT")) {
+		if (IS_CRYPT_METHOD("BCRYPT")) {
 			arg = &bcrypt_rounds;
 		}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-		if (0 == strcmp (crypt_method, "YESCRYPT")) {
+		if (IS_CRYPT_METHOD("YESCRYPT")) {
 			arg = &yescrypt_cost;
 		}
 #endif				/* USE_YESCRYPT */
