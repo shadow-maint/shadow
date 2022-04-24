@@ -367,6 +367,9 @@ static /*@noreturn@*/void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
+	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
+	                "                                mentioned by the -G option without removing\n"
+	                "                                the user from other groups\n"), usageout);
 	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
 	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
@@ -375,12 +378,6 @@ static /*@noreturn@*/void usage (int status)
 	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -g, --gid GROUP               force use GROUP as new primary group\n"), usageout);
 	(void) fputs (_("  -G, --groups GROUPS           new list of supplementary GROUPS\n"), usageout);
-	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
-	                "                                mentioned by the -G option without removing\n"
-	                "                                the user from other groups\n"), usageout);
-	(void) fputs (_("  -r, --remove                  remove the user from only the supplemental GROUPS\n"
-	                "                                mentioned by the -G option without removing\n"
-	                "                                the user from other groups\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -l, --login NEW_LOGIN         new value of the login name\n"), usageout);
 	(void) fputs (_("  -L, --lock                    lock the user account\n"), usageout);
@@ -388,8 +385,11 @@ static /*@noreturn@*/void usage (int status)
 	                "                                new location (use only with -d)\n"), usageout);
 	(void) fputs (_("  -o, --non-unique              allow using duplicate (non-unique) UID\n"), usageout);
 	(void) fputs (_("  -p, --password PASSWORD       use encrypted password for the new password\n"), usageout);
-	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"), usageout);
+	(void) fputs (_("  -r, --remove                  remove the user from only the supplemental GROUPS\n"
+	                "                                mentioned by the -G option without removing\n"
+	                "                                the user from other groups\n"), usageout);
+	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --shell SHELL             new login shell for the user account\n"), usageout);
 	(void) fputs (_("  -u, --uid UID                 new UID for the user account\n"), usageout);
 	(void) fputs (_("  -U, --unlock                  unlock the user account\n"), usageout);
