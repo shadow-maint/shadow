@@ -289,6 +289,7 @@ static int new_password (const struct passwd *pw)
 		cp = getpass (_("New password: "));
 		if (NULL == cp) {
 			memzero (orig, sizeof orig);
+			memzero (pass, sizeof pass);
 			return -1;
 		}
 		if (warned && (strcmp (pass, cp) != 0)) {
@@ -316,6 +317,7 @@ static int new_password (const struct passwd *pw)
 		cp = getpass (_("Re-enter new password: "));
 		if (NULL == cp) {
 			memzero (orig, sizeof orig);
+			memzero (pass, sizeof pass);
 			return -1;
 		}
 		if (strcmp (cp, pass) != 0) {
