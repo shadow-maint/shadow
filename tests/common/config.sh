@@ -2,7 +2,14 @@
 
 set -e
 
-build_path=$(git rev-parse --show-toplevel)
+build_path=$(pwd)
+while [ "${build_path}" != "/" -a ! -d "${build_path}/.git" ]; do
+	build_path=$(dirname ${build_path})
+done
+if [ ! -d "${build_path}/.git" ]; then
+	echo "Not inside git directory" 1>&2
+	exit 1
+fi
 
 # Save the configuration files in tmp.
 save_config ()
