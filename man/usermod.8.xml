@@ -86,7 +86,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-b</option>, <option>--badnames</option>
+	  <option>-b</option>, <option>--badname</option>
 	</term>
 	<listitem>
 	  <para>

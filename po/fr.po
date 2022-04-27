@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:50+0200\n"
+"POT-Creation-Date: 2022-04-27 16:54+0200\n"
 "PO-Revision-Date: 2022-01-04 11:11+0100\n"
 "Last-Translator: bubu <bubub@no-log.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -1874,8 +1874,9 @@ msgstr ""
 "%s : Le processus cible %u appartient à un utilisateur différent : uid :%lu "
 "pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 
-msgid "  -b, --badnames                allow bad names\n"
-msgstr "  -b, --badnames                autoriser de mauvais noms\n"
+#, fuzzy
+msgid "  -b, --badname                 allow bad names\n"
+msgstr "  -b, --badname                autoriser de mauvais noms\n"
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr " -r, --system                    créer des comptes système\n"
@@ -2443,8 +2444,9 @@ msgstr ""
 "\n"
 "Options :\n"
 
-msgid "      --badnames                do not check for bad names\n"
-msgstr "      --badnames                ne pas vérifier les mauvais noms\n"
+#, fuzzy
+msgid "      --badname                 do not check for bad names\n"
+msgstr "      --badname                ne pas vérifier les mauvais noms\n"
 
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
