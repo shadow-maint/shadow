@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow master\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2016-10-04 07:07+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -1526,9 +1526,6 @@ msgstr "%s: không thể xóa %s\n"
 msgid "Usage: id [-a]\n"
 msgstr "Cách dùng: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Cách dùng: id\n"
-
 msgid " groups="
 msgstr " nhóm="
 
@@ -1704,10 +1701,6 @@ msgid "Last login: %s on %s"
 msgstr "Đang nhập cuối cùng: %s vào %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Đang nhập cuối cùng: %.19s vào %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " từ %.*s"
 
@@ -1829,8 +1822,9 @@ msgstr ""
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: mã số người dùng không hợp lệ “%s”\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
@@ -2003,6 +1997,11 @@ msgstr "Không thể thay đổi mật khẩu cho %s.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Chưa có thể thay đổi mật khẩu cho %s.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: cần mật khẩu shadow cho tùy chọn “-e”\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2040,10 +2039,6 @@ msgid "%s: password changed.\n"
 msgstr "%s: mật khẩu đã thay đổi.\n"
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: thông tin đã thay đổi về sự hết hạn sử dụng mật khẩu.\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -2077,9 +2072,10 @@ msgstr "mục tin tập tin mật khẩu không hợp lệ"
 msgid "duplicate password entry"
 msgstr "mục tin mật khẩu trùng"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "tên người dùng không hợp lệ “%s”\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2160,16 +2156,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Hãy nhập mật khẩu của MÌNH để xác thực.\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: trục trặc mặt nạ tín hiệu\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Không thể rẽ nhánh tiến trình hệ vỏ người dùng\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: tín hiệu trục trặc\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: trục trặc mặt nạ tín hiệu\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Phiên làm việc đã kết thúc, nên kết thúc hệ vỏ…"
@@ -2317,6 +2313,11 @@ msgstr "%s: cấu hình %s trong %s sẽ bị bỏ qua\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: không thể tạo tập tin mặc định mới\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: không thể tạo tập tin mặc định mới\n"
 
 #, c-format
@@ -2516,11 +2517,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: “-Z” yêu cầu hạt nhân bật tính năng hỗ trợ SELinux\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: tên dùng không hợp lệ “%s”\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: không đặt lại được mục tin faillog của UID %lu: %s\n"
@@ -2622,9 +2618,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Đang đặt quyền truy cập tập tin hộp thư"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2665,6 +2659,11 @@ msgstr "%s: không thể tạo mã số người dùng lệ thuộc\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: không thể tạo mã nhóm phụ thuộc\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: cảnh báo: lỗi ánh xạ tên người dùng %s tới người dùng SELinux %s.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2675,11 +2674,6 @@ msgid ""
 msgstr ""
 "%s: cảnh báo: thư mục riêng đã có.\n"
 "Vì vậy không sao chép vào nó tập tin nào từ thư mục “skel”.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: cảnh báo: lỗi ánh xạ tên người dùng %s tới người dùng SELinux %s.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2780,6 +2774,15 @@ msgstr "%s: gặp lỗi khi gỡ bỏ thư mục %s\n"
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr "%s: cảnh báo: gặp lỗi khi gỡ bỏ ánh xạ người dùng %s tới SELinux.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  thêm người dùng vào các nhóm phụ\n"
+"                                đưa ra bởi tùy chọn “-G” mà không gỡ bỏ ta "
+"khỏi nhóm khác\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment GHI_LƯU         giá trị mới của trường GECOS\n"
 
@@ -2809,15 +2812,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups NHÓM             danh sách mới chứa các nhóm phụ\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  thêm người dùng vào các nhóm phụ\n"
-"                                đưa ra bởi tùy chọn “-G” mà không gỡ bỏ ta "
-"khỏi nhóm khác\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login ĐĂNG_NHẬP         giá trị mới của tên đăng nhập\n"
 
@@ -2840,6 +2834,23 @@ msgstr ""
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr "  -p, --password MẬT_KHẨU       mật mã hóa mật khẩu mới\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  thêm người dùng vào các nhóm phụ\n"
+"                                đưa ra bởi tùy chọn “-G” mà không gỡ bỏ ta "
+"khỏi nhóm khác\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 UID mới cho tài khoản người dùng\n"
@@ -2894,6 +2905,10 @@ msgstr "%s: vùng mã số nhóm lệ thuộc không hợp lệ “%s”\n"
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: không tùy chọn\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3065,6 +3080,25 @@ msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn nằm
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Cách dùng: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Đang nhập cuối cùng: %.19s vào %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: tên dùng không hợp lệ “%s”\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: thông tin đã thay đổi về sự hết hạn sử dụng mật khẩu.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "tên người dùng không hợp lệ “%s”\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Tài_khoản        Cổng     Từ               Mới nhất"

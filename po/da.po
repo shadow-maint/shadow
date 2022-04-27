@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2012-01-26 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -1524,9 +1524,6 @@ msgstr "%s: Kan ikke slette %s\n"
 msgid "Usage: id [-a]\n"
 msgstr "Brug: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Brug: id\n"
-
 msgid " groups="
 msgstr " grupper="
 
@@ -1697,10 +1694,6 @@ msgid "Last login: %s on %s"
 msgstr "Sidst logget på: %s på %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Sidst logget på: %.19s på %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " fra %.*s"
 
@@ -1817,8 +1810,9 @@ msgstr "%s: gruppe »%s« er en skyggegruppe, men findes ikke i /etc/group\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: Ugyldigt bruger-id »%s«\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: Ugyldigt brugernavn »%s«\n"
 
 #, c-format
@@ -1986,6 +1980,11 @@ msgstr "Adgangskoden for %s kan ikke ændres.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Adgangskoden for %s kan endnu ikke ændres.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: Der kræves skyggeadgangskoder for -e\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2022,10 +2021,6 @@ msgid "%s: password changed.\n"
 msgstr "%s: Adgangskode ændret.\n"
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: Information om udløb af adgangskode blev ændret.\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -2058,9 +2053,10 @@ msgstr "ugyldig linje i adgangskodepunkt"
 msgid "duplicate password entry"
 msgstr "adgangskodepunkt er en dublet"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "ugyldigt brugernavn »%s«\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: Ugyldigt brugernavn »%s«\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2141,16 +2137,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Angiv din EGEN adgangskode som godkendelse.\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: Forkert signalmasking\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Kan ikke forgrene brugerskal\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: Forkert signal\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: Forkert signalmasking\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Session termineret, terminerer skal..."
@@ -2294,6 +2290,11 @@ msgstr "%s: Konfigurationen %s i %s vil blive ignoreret\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: Kan ikke oprette ny standardværdifil\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: Kan ikke oprette ny standardværdifil\n"
 
 #, c-format
@@ -2497,11 +2498,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z kræver SELinux-aktiveret kerne\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: Ugyldigt brugernavn »%s«\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: Kunne ikke nulstille faillog-punktet for UID %lu: %s\n"
@@ -2603,9 +2599,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Indstiller postboksfilens rettigheder"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2648,6 +2642,11 @@ msgstr "%s: Kan ikke oprette bruger\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: Kan ikke oprette gruppe\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: Advarsel: Brugernavnet %s til %s SELinux-brugerkortlægning mislykkedes.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2658,11 +2657,6 @@ msgid ""
 msgstr ""
 "%s: Advarsel: Hjemmemappen findes allerede.\n"
 "Kopierer ikke nogen filer til den fra skelet-mappen.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: Advarsel: Brugernavnet %s til %s SELinux-brugerkortlægning mislykkedes.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2764,6 +2758,17 @@ msgstr ""
 "%s: Advarsel: Brugernavnet %s for fjernelse af SELinux-brugerkortlægning "
 "mislykkedes.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  tilføj brugeren til de supplementære "
+"GRUPPER\n"
+"                                nævnt af tilvalget -G uden at fjerne "
+"personen\n"
+"                                fra andre grupper\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment KOMMENTAR       ny værdi til GECOS-feltet\n"
 
@@ -2791,17 +2796,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups GRUPPER          ny liste med supplerende grupper\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  tilføj brugeren til de supplementære "
-"GRUPPER\n"
-"                                nævnt af tilvalget -G uden at fjerne "
-"personen\n"
-"                                fra andre grupper\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login NYT_LOGIND        ny værdi til logindnavnet\n"
 
@@ -2826,6 +2820,25 @@ msgid ""
 msgstr ""
 "  -p, --password ADGANGSKODE    brug krypteret adgangskode til den nye\n"
 "                                adgangskode\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  tilføj brugeren til de supplementære "
+"GRUPPER\n"
+"                                nævnt af tilvalget -G uden at fjerne "
+"personen\n"
+"                                fra andre grupper\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 ny UID til brugerkontoen\n"
@@ -2881,6 +2894,10 @@ msgstr "%s: Ugyldig dato »%s«\n"
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: Ingen tilvalg\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3049,6 +3066,25 @@ msgstr "%s: Kan ikke gendanne %s: %s (dine ændringer er i %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: Kunne ikke finde tcb-mappe for %s\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Brug: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Sidst logget på: %.19s på %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: Ugyldigt brugernavn »%s«\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: Information om udløb af adgangskode blev ændret.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "ugyldigt brugernavn »%s«\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Brugernavn       Port     Fra              Seneste"

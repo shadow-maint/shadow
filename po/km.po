@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1397,9 +1397,6 @@ msgstr "%s ៖ មិនអាច​ធ្វើឲ្យឯកសារ %s ទ
 msgid "Usage: id [-a]\n"
 msgstr "របៀបប្រើ ៖ លេខសម្គាល់ [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
-
 msgid " groups="
 msgstr " ក្រុម​="
 
@@ -1566,10 +1563,6 @@ msgid "Last login: %s on %s"
 msgstr "ចូល​ចុងក្រោយ ៖​ %s លើ​ %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "ចូល​ចុងក្រោយ​ ៖ %.19s លើ​ %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr "ពី​ %.*s"
 
@@ -1682,8 +1675,9 @@ msgstr "%s ៖ មិនមានក្រុម​ %sឡើយ​\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
@@ -1837,6 +1831,11 @@ msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s បានឡើយ ។\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s ៖ បានទាមទារ​ពាក្យ​សម្ងាត់​ស្រមោល​​សម្រាប់​-e\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -1869,10 +1868,6 @@ msgid "%s: password changed.\n"
 msgstr "ពាក្យ​សម្ងាត់​បាន​ប្តូរ​ ។\n"
 
 #, fuzzy, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "ការព្រមាន​ការផុត​កំណត់​នៃ​ពាក្យ​សម្ងាត់​"
-
-#, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1901,9 +1896,10 @@ msgstr "ធាតុបញ្ចូល​ឯកសារ​ពាក្យសម
 msgid "duplicate password entry"
 msgstr "ធាតុបញ្ចូល​ពាក្យ​សម្ងាត់​ស្ទួន​\n"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, fuzzy, c-format
 msgid "invalid user ID '%lu'\n"
@@ -1983,16 +1979,16 @@ msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹ
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់ផ្ទាល់ខ្លួន​របស់អ្នក​ ជា​ការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ​ ។\n"
 
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s ៖ មិន​អាច​ចាក់សោ​ឯកសារ​ %s បានទេ\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
@@ -2126,6 +2122,11 @@ msgstr ""
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ឯកសារ​លំនាំ​ដើម​ថ្មី​បានឡើយ​\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s ៖ មិន​អាច​បង្កើត​ឯកសារ​លំនាំ​ដើម​ថ្មី​បានឡើយ​\n"
 
 #, c-format
@@ -2298,11 +2299,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
-
-#, fuzzy, c-format
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
 
@@ -2391,9 +2387,7 @@ msgid "Setting mailbox file permissions"
 msgstr "ការកំណត់​សិទ្ធ​លើ​ឯកសារ​ប្រអប់​សំបុត្រ​"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2434,6 +2428,10 @@ msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើ
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2444,10 +2442,6 @@ msgid ""
 msgstr ""
 "%s ៖ ការព្រមាន​ ៖ មានថតផ្ទះ​រួចហើយ ។\n"
 "មិនចម្លង​​ឯកសារណាមួយ​ពីថត​ skel ចូលក្នុង​វានោះទេ ។\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
 
 msgid ""
 "  -f, --force                   force some actions that would fail "
@@ -2534,6 +2528,12 @@ msgstr "%s ៖ មានកំហុស​ក្នុងការយក​ថ�
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
@@ -2556,12 +2556,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr ""
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
 
@@ -2579,6 +2573,13 @@ msgstr ""
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
 msgstr ""
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
@@ -2629,6 +2630,10 @@ msgstr "%s ៖ កាលបរិច្ឆទ​មិន​ត្រឹមត�
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -2799,6 +2804,25 @@ msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "ចូល​ចុងក្រោយ​ ៖ %.19s លើ​ %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "ការព្រមាន​ការផុត​កំណត់​នៃ​ពាក្យ​សម្ងាត់​"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, fuzzy
 #~ msgid "Username         Port     From             Latest"

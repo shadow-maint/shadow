@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -1383,9 +1383,6 @@ msgstr "%s: klarer ikkje oppdatere fila %s\n"
 msgid "Usage: id [-a]\n"
 msgstr "Bruk: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Bruk: id\n"
-
 msgid " groups="
 msgstr " grupper="
 
@@ -1553,10 +1550,6 @@ msgid "Last login: %s on %s"
 msgstr "Førre innlogging: %s på %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Førre inlogging: %.19s på %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " frå %.*s"
 
@@ -1667,8 +1660,9 @@ msgstr "%s: gruppe %s eksisterer ikkje\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: ugyldig brukarnamn «%s»\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: ugyldig brukarnamn «%s»\n"
 
 #, c-format
@@ -1820,6 +1814,11 @@ msgstr "Passordet for %s kan ikkje endrast.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Passordet for %s kan ikkje endrast.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: skuggepassord krevst for -e\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -1852,10 +1851,6 @@ msgid "%s: password changed.\n"
 msgstr "Passord er endra."
 
 #, fuzzy, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "Åtvaring for utgått passord"
-
-#, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1882,9 +1877,10 @@ msgstr "Ugyldig oppføring i passordfila"
 msgid "duplicate password entry"
 msgstr "duplisert oppføring i passordfila"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "ugyldig brukarnamn «%s»\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: ugyldig brukarnamn «%s»\n"
 
 #, fuzzy, c-format
 msgid "invalid user ID '%lu'\n"
@@ -1962,16 +1958,16 @@ msgstr "Passordautentisering er forbigått.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Oppgje ditt EIGE passord for autentisering.\n"
 
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: klarer ikkje låse fila %s\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
@@ -2090,6 +2086,11 @@ msgstr ""
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: klarer ikkje opprette fil for standardverdiar\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: klarer ikkje opprette fil for standardverdiar\n"
 
 #, c-format
@@ -2262,11 +2263,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: ugyldig brukarnamn «%s»\n"
-
-#, fuzzy, c-format
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: kan ikkje oppretta mappa %s\n"
 
@@ -2355,9 +2351,7 @@ msgid "Setting mailbox file permissions"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2401,13 +2395,13 @@ msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: kan ikkje oppretta %s\n"
 
 #, c-format
-msgid ""
-"%s: warning: the home directory %s already exists.\n"
-"%s: Not copying any file from skel directory into it.\n"
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgid ""
+"%s: warning: the home directory %s already exists.\n"
+"%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 
 msgid ""
@@ -2496,6 +2490,12 @@ msgstr "%s: feil ved fjerning av mappe %s\n"
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
@@ -2518,12 +2518,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr ""
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
 
@@ -2541,6 +2535,13 @@ msgstr ""
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
 msgstr ""
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
@@ -2591,6 +2592,10 @@ msgstr "%s: ugyldig dato «%s»\n"
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s: klarer ikkje opna fila %s\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -2760,6 +2765,25 @@ msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: ugyldig startmappe «%s»\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Bruk: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Førre inlogging: %.19s på %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: ugyldig brukarnamn «%s»\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "Åtvaring for utgått passord"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "ugyldig brukarnamn «%s»\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Brukarnamn       Port     Frå              Siste"
