@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:50+0200\n"
+"POT-Creation-Date: 2022-04-27 16:54+0200\n"
 "PO-Revision-Date: 2008-03-27 14:40+0100\n"
 "Last-Translator: Danilo Piazzalunga <danilopiazza@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1709,7 +1709,7 @@ msgid ""
 "st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
-msgid "  -b, --badnames                allow bad names\n"
+msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
 
 msgid "  -r, --system                  create system accounts\n"
@@ -2238,7 +2238,7 @@ msgid ""
 "Options:\n"
 msgstr ""
 
-msgid "      --badnames                do not check for bad names\n"
+msgid "      --badname                 do not check for bad names\n"
 msgstr ""
 
 #, fuzzy
