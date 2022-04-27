@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1365,9 +1365,6 @@ msgstr ""
 msgid "Usage: id [-a]\n"
 msgstr ""
 
-msgid "Usage: id\n"
-msgstr ""
-
 msgid " groups="
 msgstr ""
 
@@ -1521,10 +1518,6 @@ msgid "Last login: %s on %s"
 msgstr ""
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr ""
-
-#, c-format
 msgid " from %.*s"
 msgstr ""
 
@@ -1633,7 +1626,7 @@ msgid "%s: invalid user ID '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr ""
 
 #, c-format
@@ -1780,6 +1773,10 @@ msgid "The password for %s cannot be changed yet.\n"
 msgstr ""
 
 #, c-format
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock the password of this "
@@ -1811,10 +1808,6 @@ msgid "%s: password changed.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr ""
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -1842,7 +1835,7 @@ msgid "duplicate password entry"
 msgstr ""
 
 #, c-format
-msgid "invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr ""
 
 #, c-format
@@ -1922,15 +1915,15 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr ""
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
@@ -2043,6 +2036,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: cannot create directory for defaults file\n"
 msgstr ""
 
 #, c-format
@@ -2214,10 +2211,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr ""
-
-#, c-format
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr ""
 
@@ -2304,9 +2297,7 @@ msgid "Setting mailbox file permissions"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2348,13 +2339,13 @@ msgid "%s: can't create subordinate group IDs\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s: warning: the home directory %s already exists.\n"
-"%s: Not copying any file from skel directory into it.\n"
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgid ""
+"%s: warning: the home directory %s already exists.\n"
+"%s: Not copying any file from skel directory into it.\n"
 msgstr ""
 
 msgid ""
@@ -2441,6 +2432,12 @@ msgstr ""
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr ""
 
@@ -2463,12 +2460,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr ""
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
 
@@ -2486,6 +2477,13 @@ msgstr ""
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
+msgstr ""
+
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
 msgstr ""
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
@@ -2535,6 +2533,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: no options\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
 msgstr ""
 
 #, c-format

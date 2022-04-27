@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2011-11-25 20:20+0100\n"
 "Last-Translator: Fred Ulisses Maranhão <fred.maranhao@gmail.com>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -1508,9 +1508,6 @@ msgstr "%s: não é possível apagar %s\n"
 msgid "Usage: id [-a]\n"
 msgstr "Uso : id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Uso : id\n"
-
 msgid " groups="
 msgstr " grupos="
 
@@ -1687,10 +1684,6 @@ msgid "Last login: %s on %s"
 msgstr "Último login : %s em %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Último login : %.19s em %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " de %.*s"
 
@@ -1808,8 +1801,9 @@ msgstr "%s: grupo '%s' é um grupo shadow, mas não existe em /etc/group\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: ID de usuário '%s' inválido\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s : nome de usuário '%s' inválido\n"
 
 #, c-format
@@ -1981,6 +1975,11 @@ msgstr "A senha para %s não pode ser modificada.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "A senha para %s ainda não pode ser modificada.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s : senhas shadow necessárias para -e\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2015,10 +2014,6 @@ msgstr "A senha para %s não foi modificada.\n"
 #, c-format
 msgid "%s: password changed.\n"
 msgstr "%s: senha modificada.\n"
-
-#, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: informação de expiração de senha alterada.\n"
 
 #, c-format
 msgid ""
@@ -2056,9 +2051,10 @@ msgstr "entrada de arquivo de senha inválida"
 msgid "duplicate password entry"
 msgstr "entrada de senha duplicada"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "nome de usuário '%s' inválido\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s : nome de usuário '%s' inválido\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2139,16 +2135,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Por favor, informe sua PRÓPRIA senha como autenticação.\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: al funcionamento da máscara do sinal\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Não posso ramificar shell de usuário\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: mal funcionamento do sinal\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: al funcionamento da máscara do sinal\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Sessão terminada, encerrando o shell..."
@@ -2291,6 +2287,11 @@ msgstr "%s: a configuração %s em %s será ignorada\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: não foi possível criar novo arquivo de padrões\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: não foi possível criar novo arquivo de padrões\n"
 
 #, c-format
@@ -2497,11 +2498,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z precisa de um núcleo com o SELinux habilitado\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s : nome de usuário '%s' inválido\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: falha ao zerar a entrada do faillog de UID %lu: %s\n"
@@ -2602,9 +2598,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Configurando caixa-postal arquivos de permissao"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2647,6 +2641,12 @@ msgstr "%s: não foi possível criar usuário\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: não é possível criar grupo\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: atenção: o relacionamento do nome de usuário %s para o usuário SELinux "
+"%s falhou.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2657,12 +2657,6 @@ msgid ""
 msgstr ""
 "%s: aviso: o diretório pessoal já existe.\n"
 "Não copiando nenhum arquivo do diretótio skel.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: atenção: o relacionamento do nome de usuário %s para o usuário SELinux "
-"%s falhou.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2764,6 +2758,16 @@ msgstr ""
 "%s: atenção: o relacionamento do nome de usuário %s para o usuário SELinux "
 "%s falhou.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  anexa o usuário para os GRUPOS "
+"suplementares\n"
+"                                mencionados pela opção -G sem remove-lo de\n"
+"                                outros grupos\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment COMENTÁRIO      novo valor do campo GECOS\n"
 
@@ -2794,16 +2798,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups GRUPOS           nova lista de GRUPOS suplementares\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  anexa o usuário para os GRUPOS "
-"suplementares\n"
-"                                mencionados pela opção -G sem remove-lo de\n"
-"                                outros grupos\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login LOGIN             novo valor do nome de login\n"
 
@@ -2826,6 +2820,24 @@ msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
 "  -p, --password SENHA          usar senha criptografada para a nova senha\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  anexa o usuário para os GRUPOS "
+"suplementares\n"
+"                                mencionados pela opção -G sem remove-lo de\n"
+"                                outros grupos\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 novo UID para a conta de usuário\n"
@@ -2881,6 +2893,10 @@ msgstr "%s: data `%s' inválida\n"
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s: não consegui abrir %s\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3048,6 +3064,25 @@ msgstr "%s : não foi possível restaurar %s : %s (suas mudanças estão em %s)\
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: falha ao procurar o diretório tcb para %s\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Uso : id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Último login : %.19s em %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s : nome de usuário '%s' inválido\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: informação de expiração de senha alterada.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "nome de usuário '%s' inválido\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Nome de Usuário         Porta     De             Último"

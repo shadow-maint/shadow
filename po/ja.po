@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.5\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2012-05-21 02:52+0900\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -1500,9 +1500,6 @@ msgstr "%s: %s を削除できません\n"
 msgid "Usage: id [-a]\n"
 msgstr "使い方: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "使い方: id\n"
-
 msgid " groups="
 msgstr " グループ="
 
@@ -1674,10 +1671,6 @@ msgid "Last login: %s on %s"
 msgstr "最近のログイン: %s on %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "最近のログイン: %.19s on %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " from %.*s"
 
@@ -1795,8 +1788,9 @@ msgstr ""
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: '%s' はユ−ザ ID に使えません\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: '%s' はユーザ名に使えません\n"
 
 #, c-format
@@ -1964,6 +1958,11 @@ msgstr "%s のパスワードは変更できません。\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "%s のパスワードはまだ変更できません。\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: シャドウパスワードには -e が必要です\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2000,10 +1999,6 @@ msgid "%s: password changed.\n"
 msgstr "%s: パスワードは変更されました。\n"
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: パスワード期限切れ情報を変更しました\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -2036,9 +2031,10 @@ msgstr "パスワードファイルのエントリが不正です"
 msgid "duplicate password entry"
 msgstr "パスワードエントリが重複しています"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "ユーザ名 '%s' は不正です\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: '%s' はユーザ名に使えません\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2119,16 +2115,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "「あなた自身のパスワード」を入力して認証してください。\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: シグナルのマスキングが異常です\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: ユーザシェルを起動できません。\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: シグナルが異常です\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: シグナルのマスキングが異常です\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "セッションが終了しました。シェルを終了しています..."
@@ -2271,6 +2267,11 @@ msgstr "%1$s: %3$s 中の設定 %2$s は無視されます\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: 新しいデフォルトファイルを作れません\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: 新しいデフォルトファイルを作れません\n"
 
 #, c-format
@@ -2460,11 +2461,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z は SELinux カーネル以外では使えません\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: '%s' はユーザ名に使えません\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: UID %lu の faillog エントリをリセットできませんでした: %s\n"
@@ -2566,9 +2562,7 @@ msgid "Setting mailbox file permissions"
 msgstr "メールボックスファイルの許可属性を設定します"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2611,6 +2605,11 @@ msgstr "%s: ユーザを作成できません\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: グループを作成できません\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: 警告: ユーザ名 %s から %s への SELinux ユーザマッピングに失敗しました。\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2621,11 +2620,6 @@ msgid ""
 msgstr ""
 "%s: 警告: ホームディレクトリが既に存在します。\n"
 "skel ディレクトリからのコピーは行いません。\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: 警告: ユーザ名 %s から %s への SELinux ユーザマッピングに失敗しました。\n"
 
 #, fuzzy
 #| msgid ""
@@ -2725,6 +2719,15 @@ msgstr ""
 "%s: 警告: ユーザ名 %s から SELinux へのユーザマッピングの削除に失敗しまし"
 "た。\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  ユーザを (-G で指定された) 補助グループ群\n"
+"                                GROUPS に追加する。他のグループからの削除は\n"
+"                                行わない。\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment COMMENT         GECOS フィールドの値を再設定する\n"
 
@@ -2752,15 +2755,6 @@ msgstr "  -g, --gid GROUP               主グループを GROUP に変更する
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups GROUPS           新たな補助グループのリストを与える\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  ユーザを (-G で指定された) 補助グループ群\n"
-"                                GROUPS に追加する。他のグループからの削除は\n"
-"                                行わない。\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login NEW_LOGIN         ログイン名を変更する\n"
 
@@ -2783,6 +2777,23 @@ msgstr ""
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr "  -p, --password PASSWORD       新たな暗号化済みパスワードを与える\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  ユーザを (-G で指定された) 補助グループ群\n"
+"                                GROUPS に追加する。他のグループからの削除は\n"
+"                                行わない。\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 このユーザの UID を変更する\n"
@@ -2839,6 +2850,10 @@ msgstr "%s: 日付 '%s' は不正です\n"
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: オプションがありません\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3005,6 +3020,25 @@ msgstr "%s: %s を復旧できませんでした: %s (あなたの変更は %s �
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: %s の tcb ディレクトリが見付かりませんでした\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "使い方: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "最近のログイン: %.19s on %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: '%s' はユーザ名に使えません\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: パスワード期限切れ情報を変更しました\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "ユーザ名 '%s' は不正です\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "ユーザ名         ポート   場所             最近のログイン"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2011-11-26 19:42+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
@@ -1491,9 +1491,6 @@ msgstr "%s: ezin da %s ezabatu\n"
 msgid "Usage: id [-a]\n"
 msgstr "Erabilera: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Erabilera: id\n"
-
 msgid " groups="
 msgstr " taldeak="
 
@@ -1671,10 +1668,6 @@ msgid "Last login: %s on %s"
 msgstr "Azken saio-hasiera: %s %s(e)n"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Azken saio-hasiera: %.19s  %s(e)n"
-
-#, c-format
 msgid " from %.*s"
 msgstr " %.*s(e)tik"
 
@@ -1789,8 +1782,9 @@ msgstr "%s: '%s' taldea itzalpeko talde bat da, baina ez dago /etc/group-en\n"
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: '%s' erabiltzaile ID baliogabea\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: '%s' erabiltzaile-izen baliogabea\n"
 
 #, c-format
@@ -1962,6 +1956,11 @@ msgstr "%s(r)en pasahitzak ezin dira aldatu.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "%s(r)en pasahitza ezin dira aldatu oraindik.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: -e itzalpeko pasahitza eskatzen du\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -1997,10 +1996,6 @@ msgstr "%s(r)en pasahitza aldatu gabe dago.\n"
 msgid "%s: password changed.\n"
 msgstr "%s: pasahitza aldatuta.\n"
 
-#, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: pasahitz iraungitzea informazioa aldatua.\n"
-
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
@@ -2035,9 +2030,10 @@ msgstr "Baliogabeko pasahitzen fitxategiko sarrera"
 msgid "duplicate password entry"
 msgstr "bikoiztutako pasahitz sarrera"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "%s erabiltzaile-izen baliogabea\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: '%s' erabiltzaile-izen baliogabea\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2117,16 +2113,16 @@ msgstr "Pasahitz autentifikazioa saltatuta.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Sartu zure pasahitz PROPIOA autentifikazio gisa.\n"
 
+#, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
 msgstr ""
 
 msgid "Session terminated, terminating shell..."
@@ -2271,6 +2267,11 @@ msgstr "%s: %s konfigurazioa %s-n dagoena alde batetara utziko da\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: ezin da lehenespen fitxategi berria sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: ezin da lehenespen fitxategi berria sortu\n"
 
 #, c-format
@@ -2455,11 +2456,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z-ek  SELinux gaituriko kernel bat behar du\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: '%s' erabiltzaile-izen baliogabea\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: huts %lu UIDaren faillog erregistroa berrezartzean: %s\n"
@@ -2559,9 +2555,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Postakutxa fitxategi baimenak ezartzen"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2603,6 +2597,12 @@ msgstr "%s: ezin da erabiltzailea sortu\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: ezin da taldea sortu\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
+"egin du.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2613,12 +2613,6 @@ msgid ""
 msgstr ""
 "%s: abisua: etxe direktorioa badago dagoeneko.\n"
 "Ez da bertara skel direktorioko fitxategirik kopiatuko.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
-"egin du.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2719,6 +2713,15 @@ msgstr ""
 "%s: abisua: %s erabiltzaile izena %s SELinux erabiltzailera mapatzean huts "
 "egin du.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
+"talde\n"
+"                                gehigarrietara beste taldeetatik kendu gabe\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment IRUZKINA         GECOS eremuaren balio berria\n"
 
@@ -2749,15 +2752,6 @@ msgstr ""
 "  -G, --groups TALDEAK          erabiltzaile kontu berriaren talde\n"
 "                                gehigarriak bistarazi\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
-"talde\n"
-"                                gehigarrietara beste taldeetatik kendu gabe\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login IZENA             saio hasiera izenaren balio berria\n"
 
@@ -2782,6 +2776,23 @@ msgid ""
 msgstr ""
 "  -p, --password PASAHITZA      Enkriptaturiko pasahitza erabili pasahitz\n"
 "                                berriarentzat\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
+"talde\n"
+"                                gehigarrietara beste taldeetatik kendu gabe\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
@@ -2838,6 +2849,10 @@ msgstr "%s: '%s' data baliogabea\n"
 #, fuzzy, c-format
 msgid "%s: no options\n"
 msgstr "%s: ezin da %s ireki\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3011,6 +3026,25 @@ msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: oinarrizko '%s' direktorio baliogabea\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Erabilera: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Azken saio-hasiera: %.19s  %s(e)n"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: '%s' erabiltzaile-izen baliogabea\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: pasahitz iraungitzea informazioa aldatua.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "%s erabiltzaile-izen baliogabea\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Erabiltzaile-izena        Ataka      Nondik           Azkena"

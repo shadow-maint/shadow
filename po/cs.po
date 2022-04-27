@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2014-08-24 15:07+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -1493,9 +1493,6 @@ msgstr "%s: nelze smazat %s\n"
 msgid "Usage: id [-a]\n"
 msgstr "Použití: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Použití: id\n"
-
 msgid " groups="
 msgstr " skupiny="
 
@@ -1667,10 +1664,6 @@ msgid "Last login: %s on %s"
 msgstr "Poslední přihlášení: %s na %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Poslední přihlášení: %.19s na %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " z %.*s"
 
@@ -1790,8 +1783,9 @@ msgstr "%s: skupina „%s“ je stínovou skupinou, ale neexistuje v /etc/group\
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: chybné uživatelské ID „%s“\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: chybné uživatelské jméno „%s“\n"
 
 #, c-format
@@ -1955,6 +1949,11 @@ msgstr "Heslo uživatele %s nelze změnit.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Heslo uživatele %s nelze zatím změnit.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: přepínač -e vyžaduje stínová hesla\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -1991,10 +1990,6 @@ msgid "%s: password changed.\n"
 msgstr "%s: heslo bylo změněno.\n"
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: informace o vypršení platnosti hesla byly změněny.\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -2028,9 +2023,10 @@ msgstr "chybná položka v souboru s hesly"
 msgid "duplicate password entry"
 msgstr "duplikovaná položka v souboru s hesly"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "chybné uživatelské jméno „%s“\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: chybné uživatelské jméno „%s“\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2111,16 +2107,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Pro ověření zadejte VAŠE vlastní heslo.\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: chyba maskování signálu\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Nelze rozdvojit uživatelský shell\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: chyba signálu\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: chyba maskování signálu\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Sezení skončeno, ukončuji shell..."
@@ -2264,6 +2260,11 @@ msgstr "%s: nastavení %s v %s bude ignorováno\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: nelze vytvořit nový soubor s výchozími hodnotami\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: nelze vytvořit nový soubor s výchozími hodnotami\n"
 
 #, c-format
@@ -2464,11 +2465,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z vyžaduje jádro s povoleným SELinuxem\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: chybné uživatelské jméno „%s“\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: nepodařilo se vynulovat faillog záznam UID %lu: %s\n"
@@ -2570,9 +2566,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Nastavuji oprávnění k poštovní schránce"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2615,6 +2609,11 @@ msgstr "%s: nelze vytvořit podřízená uživatelská ID\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: nelze vytvořit podřízená skupinová ID\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: varování: mapování uživatele %s na uživatele SELinuxu %s selhalo.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2625,11 +2624,6 @@ msgid ""
 msgstr ""
 "%s: varování: domovský adresář již existuje.\n"
 "Nekopíruji do něj žádné soubory z adresáře skel.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: varování: mapování uživatele %s na uživatele SELinuxu %s selhalo.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2731,6 +2725,14 @@ msgstr ""
 "%s: varování: odstranění mapování uživatele %s na SELinuxového uživatele "
 "selhalo.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  přidá uživatele do dalších SKUPIN zadaných\n"
+"                                volbou -G; neruší členství v ostatních sk.\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment KOMENTÁŘ        nová hodnota pole GECOS\n"
 
@@ -2758,14 +2760,6 @@ msgstr ""
 "  -G, --groups SKUPINY          nový seznam dodatečných skupin, do kterých\n"
 "                                má účet patřit\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  přidá uživatele do dalších SKUPIN zadaných\n"
-"                                volbou -G; neruší členství v ostatních sk.\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr "  -l, --login NOVÝ_ÚČET         nová hodnota přihlašovacího jména\n"
 
@@ -2788,6 +2782,22 @@ msgstr ""
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr "  -p, --password HESLO          použije nové zašifrované heslo\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  přidá uživatele do dalších SKUPIN zadaných\n"
+"                                volbou -G; neruší členství v ostatních sk.\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 nové UID pro uživatelský účet\n"
@@ -2842,6 +2852,10 @@ msgstr "%s: neplatný rozsah podřízených gid „%s“\n"
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: žádné volby\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3012,6 +3026,25 @@ msgstr "%s: %s nelze obnovit: %s (změny jsou v %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: nepodařilo se nalézt tcb adresář uživatele %s\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Použití: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Poslední přihlášení: %.19s na %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: chybné uživatelské jméno „%s“\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: informace o vypršení platnosti hesla byly změněny.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "chybné uživatelské jméno „%s“\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Uživatel         Port     Z                Naposledy"

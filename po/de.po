@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.2-2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2021-07-04 12:20+0200\n"
+"POT-Creation-Date: 2022-04-27 16:50+0200\n"
 "PO-Revision-Date: 2020-09-22 15:10+0200\n"
 "Last-Translator: Björn Esser <besser82@fedoraproject.org>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -583,9 +583,9 @@ msgid ""
 "ENCRYPT_METHOD and the corresponding configuration for your selected hash "
 "method.\n"
 msgstr ""
-"Kann kein Salt für das Präfix \"%s\" generieren. Bitte die Einstellungen "
-"für ENCRYPT_METHOD und den zugehörigen Konfigurationen der gewählten "
-"Hash-Methode überprüfen.\n"
+"Kann kein Salt für das Präfix \"%s\" generieren. Bitte die Einstellungen für "
+"ENCRYPT_METHOD und den zugehörigen Konfigurationen der gewählten Hash-"
+"Methode überprüfen.\n"
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -1553,9 +1553,6 @@ msgstr "%s: %s kann nicht gelöscht werden.\n"
 msgid "Usage: id [-a]\n"
 msgstr "Aufruf: id [-a]\n"
 
-msgid "Usage: id\n"
-msgstr "Aufruf: id\n"
-
 msgid " groups="
 msgstr " Gruppen="
 
@@ -1733,10 +1730,6 @@ msgid "Last login: %s on %s"
 msgstr "Letztes Login: %s auf %s"
 
 #, c-format
-msgid "Last login: %.19s on %s"
-msgstr "Letztes Login: %.19s auf %s"
-
-#, c-format
 msgid " from %.*s"
 msgstr " von %.*s"
 
@@ -1854,8 +1847,9 @@ msgstr ""
 msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: Ungültige Benutzer-ID »%s«\n"
 
-#, c-format
-msgid "%s: invalid user name '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: Ungültiger Benutzername »%s«\n"
 
 #, c-format
@@ -2028,6 +2022,11 @@ msgstr "Das Passwort für %s kann nicht geändert werden.\n"
 msgid "The password for %s cannot be changed yet.\n"
 msgstr "Das Passwort für %s kann noch nicht geändert werden.\n"
 
+#, fuzzy, c-format
+#| msgid "%s: shadow passwords required for -e\n"
+msgid "%s: malformed password data obtained for user %s\n"
+msgstr "%s: shadow-Passwörter für -e erforderlich\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the password would result in a passwordless account.\n"
@@ -2065,10 +2064,6 @@ msgid "%s: password changed.\n"
 msgstr "%s: Passwort geändert.\n"
 
 #, c-format
-msgid "%s: password expiry information changed.\n"
-msgstr "%s: Passwortablauf-Informationen geändert.\n"
-
-#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
@@ -2102,9 +2097,10 @@ msgstr "Ungültiger Eintrag in Passwortdatei"
 msgid "duplicate password entry"
 msgstr "Doppelter Passworteintrag"
 
-#, c-format
-msgid "invalid user name '%s'\n"
-msgstr "Ungültiger Benutzername »%s«\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: Ungültiger Benutzername »%s«\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2185,16 +2181,16 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Bitte geben Sie Ihr EIGENES Passwort als Authentifizierung ein.\n"
 
 #, c-format
+msgid "%s: signal masking malfunction\n"
+msgstr "%s: Signalmaskierungs-Fehlfunktion\n"
+
+#, c-format
 msgid "%s: Cannot fork user shell\n"
 msgstr "%s: Prozessaufspaltung (fork) für Benutzer-Shell nicht möglich\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
 msgstr "%s: Signal-Fehlfunktion\n"
-
-#, c-format
-msgid "%s: signal masking malfunction\n"
-msgstr "%s: Signalmaskierungs-Fehlfunktion\n"
 
 msgid "Session terminated, terminating shell..."
 msgstr "Sitzung abgebrochen, Shell wird beendet ..."
@@ -2338,6 +2334,11 @@ msgstr "%s: die %s-Konfiguration in %s wird ignoriert.\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
+msgstr "%s: Neue defaults-Datei kann nicht erzeugt werden.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "%s: cannot create directory for defaults file\n"
 msgstr "%s: Neue defaults-Datei kann nicht erzeugt werden.\n"
 
 #, c-format
@@ -2553,11 +2554,6 @@ msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z erfordert einen Kernel, in dem SELinux aktiviert ist.\n"
 
 #, fuzzy, c-format
-#| msgid "%s: invalid user name '%s'\n"
-msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: Ungültiger Benutzername »%s«\n"
-
-#, fuzzy, c-format
 #| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
 msgstr "%s: Zurücksetzen des faillog-Eintrags für UID %lu fehlgeschlagen: %s\n"
@@ -2659,9 +2655,7 @@ msgid "Setting mailbox file permissions"
 msgstr "Zugriffsrechte der Mailboxdatei werden gesetzt"
 
 #, c-format
-msgid ""
-"%s warning: %s's uid %d outside of the SYS_UID_MIN %d and SYS_UID_MAX %d "
-"range.\n"
+msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr ""
 
 #, c-format
@@ -2704,6 +2698,12 @@ msgstr "%s: Benutzer kann nicht erstellt werden\n"
 msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: Gruppe kann nicht erzeugt werden\n"
 
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
+msgstr ""
+"%s: Warnung: Die SELinux-Benutzer-Zuordnung des Benutzernamens %s zu %s ist\n"
+"fehlgeschlagen.\n"
+
 #, fuzzy, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
@@ -2714,12 +2714,6 @@ msgid ""
 msgstr ""
 "%s: Warnung: Das Home-Verzeichnis existiert bereits.\n"
 "Es werden keine Dateien vom skel-Verzeichnis dorthin kopiert.\n"
-
-#, c-format
-msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
-msgstr ""
-"%s: Warnung: Die SELinux-Benutzer-Zuordnung des Benutzernamens %s zu %s ist\n"
-"fehlgeschlagen.\n"
 
 #, fuzzy
 #| msgid ""
@@ -2827,6 +2821,17 @@ msgstr ""
 "%s: Warnung: Die Löschung der SELinux-Benutzer-Zuordnung für Benutzername %s "
 "ist fehlgeschlagen.\n"
 
+msgid ""
+"  -a, --append                  append the user to the supplemental GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  Benutzer zu zusätzlichen Gruppen "
+"hinzufügen,\n"
+"                                die mit der Option -G angegeben werden, "
+"ohne\n"
+"                                ihn dabei aus anderen Gruppen zu entfernen\n"
+
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment KOMMENTAR       Neuer KOMMENTAR im GECOS-Feld\n"
 
@@ -2854,17 +2859,6 @@ msgstr ""
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
 msgstr "  -G, --groups GRUPPEN          Neue Liste zusätzlicher GRUPPEN\n"
 
-msgid ""
-"  -a, --append                  append the user to the supplemental GROUPS\n"
-"                                mentioned by the -G option without removing\n"
-"                                the user from other groups\n"
-msgstr ""
-"  -a, --append                  Benutzer zu zusätzlichen Gruppen "
-"hinzufügen,\n"
-"                                die mit der Option -G angegeben werden, "
-"ohne\n"
-"                                ihn dabei aus anderen Gruppen zu entfernen\n"
-
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
 "  -l, --login NEUER_NAME        Neuer Wert für den Namen des "
@@ -2891,6 +2885,25 @@ msgid ""
 msgstr ""
 "  -p, --password PASSWORD       Ein verschlüsseltes Passwort als neues\n"
 "                                Passwort verwenden\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                the user from other groups\n"
+msgid ""
+"  -r, --remove                  remove the user from only the supplemental "
+"GROUPS\n"
+"                                mentioned by the -G option without removing\n"
+"                                the user from other groups\n"
+msgstr ""
+"  -a, --append                  Benutzer zu zusätzlichen Gruppen "
+"hinzufügen,\n"
+"                                die mit der Option -G angegeben werden, "
+"ohne\n"
+"                                ihn dabei aus anderen Gruppen zu entfernen\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr "  -u, --uid UID                 Neue UID des Benutzerzugangs\n"
@@ -2946,6 +2959,10 @@ msgstr "%s: Ungültiges Datum »%s«\n"
 #, c-format
 msgid "%s: no options\n"
 msgstr "%s: keine Optionen\n"
+
+#, c-format
+msgid "%s: %s and %s are mutually exclusive flags\n"
+msgstr ""
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
@@ -3120,6 +3137,25 @@ msgstr ""
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: tcb-Verzeichnis für %s konnte nicht gefunden werden\n"
+
+#~ msgid "Usage: id\n"
+#~ msgstr "Aufruf: id\n"
+
+#, c-format
+#~ msgid "Last login: %.19s on %s"
+#~ msgstr "Letztes Login: %.19s auf %s"
+
+#, c-format
+#~ msgid "%s: invalid user name '%s'\n"
+#~ msgstr "%s: Ungültiger Benutzername »%s«\n"
+
+#, c-format
+#~ msgid "%s: password expiry information changed.\n"
+#~ msgstr "%s: Passwortablauf-Informationen geändert.\n"
+
+#, c-format
+#~ msgid "invalid user name '%s'\n"
+#~ msgstr "Ungültiger Benutzername »%s«\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Benutzername     Port     Von              Letzter"
