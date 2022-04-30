@@ -14,6 +14,14 @@ succeeded=0
 failed=0
 failed_tests=""
 
+unpriv_userns_supported=$(sysctl -n kernel.unprivileged_userns_clone)
+reset_unpriv_userns=0
+if [ "$unpriv_userns_supported" != "1" ]; then
+    sysctl -q kernel.unprivileged_userns_clone=1 || true  # We'll check in a minute, but let's not break the whole build
+    reset_unpriv_userns=1
+    unpriv_userns_supported=$(sysctl -n kernel.unprivileged_userns_clone)
+fi
+
 run_test()
 {
 	[ -f RUN_TEST.STOP ] && exit 1
@@ -125,12 +133,18 @@ run_test ./su/13_su_child_success/su.test
 run_test ./libsubid/01_list_ranges/list_ranges.test
 run_test ./libsubid/02_get_subid_owners/get_subid_owners.test
 run_test ./libsubid/03_add_remove/add_remove_subids.test
-run_test ./newuidmap/01_newuidmap/newuidmap.test
-run_test ./newuidmap/02_newuidmap_relaxed_gid_check/newuidmap.test
-run_test ./newgidmap/01_newgidmap/newgidmap.test
-run_test ./newgidmap/02_newgidmap_relaxed_gid_check/newgidmap.test
 run_test ./libsubid/04_nss/subidnss.test
 run_test ./usertools/62_usermod_remove_supplementary_groups/usermod.test
+
+if [ "$unpriv_userns_supported" = "1" ]; then
+    run_test ./newuidmap/01_newuidmap/newuidmap.test
+    run_test ./newuidmap/02_newuidmap_relaxed_gid_check/newuidmap.test
+    run_test ./newgidmap/01_newgidmap/newgidmap.test
+    run_test ./newgidmap/02_newgidmap_relaxed_gid_check/newgidmap.test
+    if [ "$reset_unpriv_userns" = "1" ]; then
+        sysctl -q kernel.unprivileged_userns_clone=0
+    fi
+fi
 
 echo
 echo "$succeeded test(s) passed"

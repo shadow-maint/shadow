@@ -1,0 +1,38 @@
+builder:
+  from:
+    type: docker
+    url: docker://ubuntu:22.04
+  build_only: true
+  run: |
+    export DEBIAN_PRIORITY=critical
+    export DEBIAN_FRONTEND=noninteractive
+    sed -i '/deb-src/d' /etc/apt/sources.list
+    sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+    apt-get update
+    apt-get -y dist-upgrade
+    apt-get -y install ubuntu-dev-tools \
+      automake autopoint xsltproc libbsd-dev libselinux1-dev \
+      gettext expect byacc libtool pkgconf
+    apt-get -y build-dep shadow
+
+build:
+  from:
+    type: built
+    tag: builder
+  binds:
+    - ./. -> /shadowcopy
+  run: |
+    cat /proc/self/uid_map /proc/self/gid_map
+    id
+    uname -a
+    cat /proc/self/status
+    cd /root
+    git clone /shadowcopy shadow
+    cd shadow
+    ./autogen.sh --without-selinux --enable-man
+    grep ENABLE_ config.status
+    make
+    make DESTDIR=/tmp/shadow-inst install
+    sudo make install
+    cd tests
+    ./run_some || { cat testsuite.log; false; }

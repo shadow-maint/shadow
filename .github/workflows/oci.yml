@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+name: build-test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: build
+        uses: project-stacker/stacker-build-push-action@main
+        with:
+          file: 'stacker.yaml'
+          build-args: |
+            IMAGE_TAG=${{ env.IMAGE_TAG }}
+            REVISION=${{ env.SHA }}
