@@ -116,7 +116,7 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
+	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 #ifndef USE_PAM
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
@@ -615,7 +615,7 @@ static void process_flags (int argc, char **argv)
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 #endif 				/* !USE_PAM */
 	static struct option long_options[] = {
-		{"badnames",     no_argument,       NULL, 'b'},
+		{"badname",      no_argument,       NULL, 'b'},
 #ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
 #endif				/* !USE_PAM */

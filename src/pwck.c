@@ -128,7 +128,7 @@ static /*@noreturn@*/void usage (int status)
 		                  "Options:\n"),
 		                Prog);
 	}
-	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
+	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
 	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
@@ -153,7 +153,7 @@ static void process_flags (int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
-		{"badnames",  no_argument,       NULL, 'b'},
+		{"badname",   no_argument,       NULL, 'b'},
 		{"help",      no_argument,       NULL, 'h'},
 		{"quiet",     no_argument,       NULL, 'q'},
 		{"read-only", no_argument,       NULL, 'r'},
