@@ -370,7 +370,7 @@ static /*@noreturn@*/void usage (int status)
 	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
 	                "                                mentioned by the -G option without removing\n"
 	                "                                the user from other groups\n"), usageout);
-	(void) fputs (_("  -b, --badnames                allow bad names\n"), usageout);
+	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
 	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);

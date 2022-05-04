@@ -899,7 +899,7 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog, Prog, Prog);
-	(void) fputs (_("      --badnames                do not check for bad names\n"), usageout);
+	(void) fputs (_("      --badname                 do not check for bad names\n"), usageout);
 	(void) fputs (_("  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
 	                "                                new account\n"), usageout);
 #ifdef WITH_BTRFS
@@ -1189,7 +1189,7 @@ static void process_flags (int argc, char **argv)
 #ifdef WITH_BTRFS
 			{"btrfs-subvolume-home", no_argument, NULL, 200},
 #endif
-			{"badnames",       no_argument,       NULL, 201},
+			{"badname",        no_argument,       NULL, 201},
 			{"comment",        required_argument, NULL, 'c'},
 			{"home-dir",       required_argument, NULL, 'd'},
 			{"defaults",       no_argument,       NULL, 'D'},
