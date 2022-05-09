@@ -20,7 +20,7 @@ dnl Some hacks...
 test "$prefix" = "NONE" && prefix="/usr"
 test "$prefix" = "/usr" && exec_prefix=""
 
-AC_GNU_SOURCE
+AC_USE_SYSTEM_EXTENSIONS
 
 AM_ENABLE_STATIC
 AM_ENABLE_SHARED
@@ -31,7 +31,7 @@ dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_LN_S
 AC_PROG_YACC
-AM_PROG_LIBTOOL
+LT_INIT
 
 dnl Checks for libraries.
 
@@ -198,7 +198,7 @@ if test "$ac_cv_func_ruserok" = "yes"; then
 fi
 
 AC_ARG_ENABLE(shadowgrp,
-	[AC_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
+	[AS_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
 	[case "${enableval}" in
 	 yes) enable_shadowgrp="yes" ;;
 	  no) enable_shadowgrp="no" ;;
@@ -208,14 +208,14 @@ AC_ARG_ENABLE(shadowgrp,
 )
 
 AC_ARG_ENABLE(man,
-	[AC_HELP_STRING([--enable-man],
+	[AS_HELP_STRING([--enable-man],
 		[regenerate roff man pages from Docbook @<:@default=no@:>@])],
 	[enable_man="${enableval}"],
 	[enable_man="no"]
 )
 
 AC_ARG_ENABLE(account-tools-setuid,
-	[AC_HELP_STRING([--enable-account-tools-setuid],
+	[AS_HELP_STRING([--enable-account-tools-setuid],
 		[Install the user and group management tools setuid and authenticate the callers. This requires --with-libpam.])],
 	[case "${enableval}" in
 	 yes) enable_acct_tools_setuid="yes" ;;
@@ -227,7 +227,7 @@ AC_ARG_ENABLE(account-tools-setuid,
 )
 
 AC_ARG_ENABLE(utmpx,
-	[AC_HELP_STRING([--enable-utmpx],
+	[AS_HELP_STRING([--enable-utmpx],
 	                [enable loggin in utmpx / wtmpx @<:@default=no@:>@])],
 	[case "${enableval}" in
 	 yes) enable_utmpx="yes" ;;
@@ -238,59 +238,59 @@ AC_ARG_ENABLE(utmpx,
 )
 
 AC_ARG_ENABLE(subordinate-ids,
-	[AC_HELP_STRING([--enable-subordinate-ids],
+	[AS_HELP_STRING([--enable-subordinate-ids],
 		[support subordinate ids @<:@default=yes@:>@])],
 	[enable_subids="${enableval}"],
 	[enable_subids="maybe"]
 )
 
 AC_ARG_WITH(audit,
-	[AC_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
 	[with_audit=$withval], [with_audit=maybe])
 AC_ARG_WITH(libpam,
-	[AC_HELP_STRING([--with-libpam], [use libpam for PAM support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-libpam], [use libpam for PAM support @<:@default=yes if found@:>@])],
 	[with_libpam=$withval], [with_libpam=maybe])
 AC_ARG_WITH(btrfs,
-	[AC_HELP_STRING([--with-btrfs], [add BtrFS support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-btrfs], [add BtrFS support @<:@default=yes if found@:>@])],
 	[with_btrfs=$withval], [with_btrfs=maybe])
 AC_ARG_WITH(selinux,
-	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
 	[with_selinux=$withval], [with_selinux=maybe])
 AC_ARG_WITH(acl,
-	[AC_HELP_STRING([--with-acl], [use ACL support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-acl], [use ACL support @<:@default=yes if found@:>@])],
 	[with_acl=$withval], [with_acl=maybe])
 AC_ARG_WITH(attr,
-	[AC_HELP_STRING([--with-attr], [use Extended Attribute support @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-attr], [use Extended Attribute support @<:@default=yes if found@:>@])],
 	[with_attr=$withval], [with_attr=maybe])
 AC_ARG_WITH(skey,
-	[AC_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
 	[with_skey=$withval], [with_skey=no])
 AC_ARG_WITH(tcb,
-	[AC_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
 	[with_tcb=$withval], [with_tcb=maybe])
 AC_ARG_WITH(libcrack,
-	[AC_HELP_STRING([--with-libcrack], [use libcrack @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-libcrack], [use libcrack @<:@default=no@:>@])],
 	[with_libcrack=$withval], [with_libcrack=no])
 AC_ARG_WITH(sha-crypt,
-	[AC_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
+	[AS_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
 	[with_sha_crypt=$withval], [with_sha_crypt=yes])
 AC_ARG_WITH(bcrypt,
-	[AC_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
 	[with_bcrypt=$withval], [with_bcrypt=no])
 AC_ARG_WITH(yescrypt,
-	[AC_HELP_STRING([--with-yescrypt], [allow the yescrypt password encryption algorithm @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-yescrypt], [allow the yescrypt password encryption algorithm @<:@default=no@:>@])],
 	[with_yescrypt=$withval], [with_yescrypt=no])
 AC_ARG_WITH(nscd,
-	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
+	[AS_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
 AC_ARG_WITH(sssd,
-	[AC_HELP_STRING([--with-sssd], [enable support for flushing sssd caches @<:@default=yes@:>@])],
+	[AS_HELP_STRING([--with-sssd], [enable support for flushing sssd caches @<:@default=yes@:>@])],
 	[with_sssd=$withval], [with_sssd=yes])
 AC_ARG_WITH(group-name-max-length,
-	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=32@:>@])],
+	[AS_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=32@:>@])],
 	[with_group_name_max_length=$withval], [with_group_name_max_length=yes])
 AC_ARG_WITH(su,
-	[AC_HELP_STRING([--with-su], [build and install su program and man page @<:@default=yes@:>@])],
+	[AS_HELP_STRING([--with-su], [build and install su program and man page @<:@default=yes@:>@])],
 	[with_su=$withval], [with_su=yes])
 
 if test "$with_group_name_max_length" = "no" ; then
@@ -656,7 +656,7 @@ AM_CONDITIONAL(ACCT_TOOLS_SETUID, test "x$enable_acct_tools_setuid" = "xyes")
 
 
 AC_ARG_WITH(fcaps,
-	[AC_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries for newuidmap/newgidmap @<:@default=no@:>@])],
+	[AS_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries for newuidmap/newgidmap @<:@default=no@:>@])],
 	[with_fcaps=$withval], [with_fcaps=no])
 AM_CONDITIONAL(FCAPS, test "x$with_fcaps" = "xyes")
 
@@ -674,12 +674,12 @@ if test "$with_skey" = "yes"; then
 	AC_CHECK_LIB(skey, skeychallenge, [LIBSKEY=-lskey],
 		[AC_MSG_ERROR([liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
 	AC_DEFINE(SKEY, 1, [Define to support S/Key logins.])
-	AC_TRY_COMPILE([
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 		#include <stdio.h>
 		#include <skey.h>
-	],[
+	]], [[
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
-	],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])])
+	]])],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])],[])
 fi
 
 if test "$enable_utmpx" = "yes"; then
