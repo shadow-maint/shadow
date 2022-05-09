@@ -1,0 +1,38 @@
+name: "Static code analysis"
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    # Everyday at midnight
+    - cron: '0 0 * * *'
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      id: dependencies
+      uses: ./.github/actions/install-dependencies
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: cpp
+        queries: +security-and-quality
+
+    - name: Configure shadow-utils
+      run: ./autogen.sh --without-selinux --disable-man
+
+    - name: Build shadow-utils
+      run: |
+        PROCESSORS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
+        make -j$PROCESSORS
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
