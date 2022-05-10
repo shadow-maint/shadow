@@ -345,7 +345,6 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 	}
 
 	if (getulong (d->value, &val) == 0) {
-		/* FIXME: we should have a getulong */
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);

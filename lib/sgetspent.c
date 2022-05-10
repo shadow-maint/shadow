@@ -171,8 +171,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	} else if (getlong (fields[8], &spwd.sp_flag) == 0) {
-		/* FIXME: add a getulong function */
+	} else if (getulong (fields[8], &spwd.sp_flag) == 0) {
 		return 0;
 	}
 
