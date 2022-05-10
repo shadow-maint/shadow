@@ -341,9 +341,10 @@ static /*@observer@*/const unsigned long BCRYPT_get_salt_rounds (/*@null@*/int *
 	/*
 	 * Use 19 as an upper bound for now,
 	 * because musl doesn't allow rounds >= 20.
+	 * If musl ever supports > 20 rounds,
+	 * rounds should be set to B_ROUNDS_MAX.
 	 */
 	if (rounds > 19) {
-		/* rounds = B_ROUNDS_MAX; */
 		rounds = 19;
 	}
 #endif /* USE_XCRYPT_GENSALT */
