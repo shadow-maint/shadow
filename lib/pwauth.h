@@ -11,6 +11,9 @@
  *	$Id$
  */
 
+#ifndef _PWAUTH_H
+#define _PWAUTH_H
+
 #ifndef USE_PAM
 int pw_auth (const char *cipher,
              const char *user,
@@ -41,3 +44,5 @@ int pw_auth (const char *cipher,
 #define	PW_RLOGIN	202
 #define	PW_FTP		203
 #define	PW_REXEC	204
+
+#endif /* _PWAUTH_H */
