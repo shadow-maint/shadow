@@ -293,7 +293,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		/* use the system() call to invoke the editor so that it accepts
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
-		int status;
 
 		/* Wait for parent to make us the foreground pgrp. */
 		if (orig_pgrp != -1) {
