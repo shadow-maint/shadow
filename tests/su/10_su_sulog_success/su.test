@@ -27,8 +27,8 @@ echo -n "Check /var/log/sulog..."
 wc -l /var/log/sulog > tmp/sulog
 d=$(date +"SU %m/%d %H:%M")
 cat /var/log/sulog | \
-    egrep -v "$d \+ /dev/pts/[0-9]* root-testsuite" | \
-    egrep -v "$d \+ /dev/pts/[0-9]* testsuite-myuser" \
+    grep -E -v "$d \+ /dev/pts/[0-9]* root-testsuite" | \
+    grep -E -v "$d \+ /dev/pts/[0-9]* testsuite-myuser" \
         >> tmp/sulog || true
 diff -auN tmp/sulog data/sulog
 echo "OK"
