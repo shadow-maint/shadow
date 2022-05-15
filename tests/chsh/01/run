@@ -105,7 +105,7 @@ echo $(pwd)/tmp/sh:ell >> /etc/shells
 chsh -s $(pwd)/tmp/sh:ell myuser 2> tmp/out && exit 1
 ent=$(getent passwd myuser)
 [ "$ent" = "myuser:x:424242:424242::/home:/bin/bash" ] || exit 1
-egrep "chsh: Invalid entry: .*/tmp/sh:ell" tmp/out > /dev/null
+grep -E "chsh: Invalid entry: .*/tmp/sh:ell" tmp/out > /dev/null
 [ $(wc -l tmp/out| cut -d" " -f1) = "1" ] || exit 1
 echo "OK"
 
@@ -136,7 +136,7 @@ echo "OK"
 echo "testing the interactive mode (4)..."
 rm -f tmp/out
 ./run.exp $(pwd)/tmp/sh:ell myuser && exit 1
-egrep "chsh: Invalid entry: .*/tmp/sh:ell" tmp/out > /dev/null
+grep -E "chsh: Invalid entry: .*/tmp/sh:ell" tmp/out > /dev/null
 ent=$(getent passwd myuser)
 [ "$ent" = "myuser:x:424242:424242::/home:/bin/sh" ] || exit 1
 echo "OK"

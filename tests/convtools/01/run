@@ -21,7 +21,7 @@ save()
 	done
 	DATE=$(date '+%s')
 	DATE=$(( DATE/3600/24 ))
-	WARN=$( egrep "^PASS_WARN_AGE" /etc/login.defs | { read var val ; echo $val; } )
+	WARN=$( grep -E "^PASS_WARN_AGE" /etc/login.defs | { read var val ; echo $val; } )
 	saveifs=$IFS
 	IFS=":"
 	cat data/2/shadow |
