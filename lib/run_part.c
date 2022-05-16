@@ -45,7 +45,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 	struct dirent **namelist;
 	int scanlist;
 	int n;
-	int execute_result;
+	int execute_result = 0;
 
 	scanlist = scandir (directory, &namelist, 0, alphasort);
 	if (scanlist<=0) {
