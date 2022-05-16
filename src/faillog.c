@@ -537,9 +537,9 @@ static void set_locktime (long locktime)
 
 int main (int argc, char **argv)
 {
-	long fail_locktime;
+	long fail_locktime = 0;
 	short fail_max = 0; // initialize to silence compiler warning
-	long days;
+	long days = 0;
 
 	/*
 	 * Get the program name. The program name is used as a prefix to

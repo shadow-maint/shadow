@@ -88,7 +88,16 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	char ptime[80];
 
 #ifdef HAVE_LL_HOST
-	int maxIPv6Addrlen;
+	/*
+	 * ll_host is in minimized form, thus the maximum IPv6 address possible is
+	 * 8*4+7 = 39 characters.
+	 * RFC 4291 2.5.6 states that for LL-addresses fe80+only the interface ID is set,
+	 * thus having a maximum size of 25+1+IFNAMSIZ.
+	 * POSIX says IFNAMSIZ should be 16 characters long including the null byte, thus
+	 * 25+1+IFNAMSIZ >= 42 > 39
+	 */
+	/* Link-Local address + % + Interfacename */
+	const int maxIPv6Addrlen = 25+1+IFNAMSIZ;
 #endif
 
 	if (NULL == pw) {
@@ -132,16 +141,6 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	/* Print the header only once */
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		/*
-		 * ll_host is in minimized form, thus the maximum IPv6 address possible is
-		 * 8*4+7 = 39 characters.
-		 * RFC 4291 2.5.6 states that for LL-addresses fe80+only the interface ID is set,
-		 * thus having a maximum size of 25+1+IFNAMSIZ.
-		 * POSIX says IFNAMSIZ should be 16 characters long including the null byte, thus
-		 * 25+1+IFNAMSIZ >= 42 > 39
-		 */
-		/* Link-Local address + % + Interfacename */
-		maxIPv6Addrlen = 25+1+IFNAMSIZ;
 		printf (_("Username         Port     From%*sLatest\n"), maxIPv6Addrlen-3, " ");
 #else
 		puts (_("Username                Port     Latest"));
