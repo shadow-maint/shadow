@@ -1,53 +1,54 @@
-# translation of uk.po to Ukrainian
-# Roman Festchook <linux@polesye.net>, 2001-2005.
-# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005, 2006.
-# translation of uk.po to
 # shadow.pot Ukrainian translation.
 # Comments and bug-reports are welcomed
+# Roman Festchook <linux@polesye.net>, 2001-2005.
+# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005, 2006.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2022-04-27 16:54+0200\n"
-"PO-Revision-Date: 2007-11-26 22:52+0100\n"
-"Last-Translator: Eugeniy Meshcheryakov <eugen@univ.kiev.ua>\n"
-"Language-Team: Ukrainian\n"
-"Language: \n"
+"PO-Revision-Date: 2022-05-16 19:32+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #, c-format
 msgid ""
 "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
 msgstr ""
+"Виявлено декілька записів із назвою «%s» у %s. Будь ласка, виправте це за"
+" допомогою pwck або grpck.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
+msgstr "Підтримку методу шифрування не передбачено у libcrypt? (%s)\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%s'"
-msgstr ""
+msgstr "помилка налаштувань - не вдалося обробити значення %s: «%s»"
 
 msgid "Could not allocate space for config info.\n"
-msgstr "Не можу виділити ресурси для конфігураційних даних.\n"
+msgstr "Не вдалося отримати пам'ять для даних налаштувань.\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
-"помилка у конфігурації - невідома позиція '%s' (повідомте адміністратора)\n"
+"помилка у налаштуваннях - невідомий запис «%s» (повідомте адміністратора)\n"
 
 #, c-format
 msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
+msgstr "%s: роботу nscd не завершено штатно (сигнал %d)\n"
 
 #, c-format
 msgid "%s: nscd exited with status %d\n"
-msgstr ""
+msgstr "%s: роботу nscd завершено зі станом %d\n"
 
 msgid "Password: "
 msgstr "Пароль: "
@@ -56,209 +57,212 @@ msgstr "Пароль: "
 msgid "%s's Password: "
 msgstr "Пароль користувача %s: "
 
-#, fuzzy
 #| msgid "Cannot open the password file.\n"
 msgid "Cannot open audit interface.\n"
-msgstr "Не можу відкрити файл паролів.\n"
+msgstr "Не вдалося відкрити інтерфейс рецензування.\n"
 
 #, c-format
 msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
+msgstr "%s: не вдалося отримати попередній контекст процесу SELinux: %s\n"
 
 #, c-format
 msgid "[libsemanage]: %s\n"
-msgstr ""
+msgstr "[libsemanage]: %s\n"
 
 #, c-format
 msgid "Cannot create SELinux management handle\n"
-msgstr ""
+msgstr "Не вдалося створити дескриптор керування SELinux\n"
 
 #, c-format
 msgid "SELinux policy not managed\n"
-msgstr ""
+msgstr "Правила SELinux не є керованими\n"
 
 #, c-format
 msgid "Cannot read SELinux policy store\n"
-msgstr ""
+msgstr "Не вдалося виконати читання правил SELinux зі сховища\n"
 
 #, c-format
 msgid "Cannot establish SELinux management connection\n"
-msgstr ""
+msgstr "Не вдалося встановити з'єднання керування SELinux\n"
 
 #, c-format
 msgid "Cannot begin SELinux transaction\n"
-msgstr ""
+msgstr "Не вдалося розпочати операцію SELinux\n"
 
 #, c-format
 msgid "Could not query seuser for %s\n"
-msgstr ""
+msgstr "Не вдалося опитати seuser для %s\n"
 
 #, c-format
 msgid "Could not set serange for %s\n"
-msgstr ""
+msgstr "Не вдалося встановити serange для %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Could not set sename for %s\n"
-msgstr "Не можу виділити ресурси для конфігураційних даних.\n"
+msgstr "Не вдалося встановити sename для %s\n"
 
 #, c-format
 msgid "Could not modify login mapping for %s\n"
-msgstr ""
+msgstr "Не вдалося змінити прив'язку облікового запису для %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Змінюю вікову інформацію для %s\n"
+msgstr "Не вдалося створити прив'язку облікового запису SELinux для %s\n"
 
 #, c-format
 msgid "Could not set name for %s\n"
-msgstr ""
+msgstr "Не вдалося вказати назву %s\n"
 
 #, c-format
 msgid "Could not set SELinux user for %s\n"
-msgstr ""
+msgstr "Не вдалося встановити користувача SELinux для %s\n"
 
 #, c-format
 msgid "Could not add login mapping for %s\n"
-msgstr ""
+msgstr "Не вдалося додати прив'язку входу для %s\n"
 
 #, c-format
 msgid "Cannot init SELinux management\n"
-msgstr ""
+msgstr "Не вдалося ініціалізувати керування SELinux\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create SELinux user key\n"
-msgstr "%s: Не можу визначити Ваше ім'я користувача.\n"
+msgstr "Не вдалося створити ключ користувача SELinux\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot verify the SELinux user\n"
-msgstr "%s: рядок %d: не можу знайти користувача %s\n"
+msgstr "Не вдалося пройти перевірку користувача SELinux\n"
 
 #, c-format
 msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
+msgstr "Не вдалося змінити прив'язку користувача SELinux\n"
 
 #, c-format
 msgid "Cannot add SELinux user mapping\n"
-msgstr ""
+msgstr "Не вдалося додати прив'язку користувача SELinux\n"
 
 #, c-format
 msgid "Cannot commit SELinux transaction\n"
-msgstr ""
+msgstr "Не вдалося внести операцію SELinux\n"
 
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
 msgstr ""
+"Прив'язку облікового запису для %s не визначено. Це нормально, якщо"
+" використано типову прив'язку\n"
 
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
+msgstr "Прив'язку входу для %s визначено у правилах, не вдалося вилучити\n"
 
 #, c-format
 msgid "Could not delete login mapping for %s"
-msgstr ""
+msgstr "Не вдалося вилучити mapping входу для %s"
 
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: брак пам'яті\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: неможливо оновити файл %s\n"
+msgstr "%s: не вдалося виконати stat %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: невірна домашня тека \"%s\"\n"
+msgstr "%s: %s не є ні каталогом, ні символічним посиланням.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося прочитати символічне посилання %s: %s\n"
 
 #, c-format
 msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
+msgstr "%s: підозріливо довге символічне посилання: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося створити каталог %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: не вдалося змінити власника %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: не вдалося змінити режим доступу до %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unlink: %s: %s\n"
-msgstr "%s: перейменування: %s"
+msgstr "%s: скасування посилання: %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося вилучити каталог %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося перейменувати %s на %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: не вдалося вилучити %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося створити символічне посилання %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: не вдалося змінити власників %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: неможливо оновити файл %s\n"
+msgstr "%s: не вдалося виконати lstat %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: не можу оновити файл прихованих паролів\n"
+msgstr "%s: попередження, у користувача %s немає файла shadow tcb.\n"
 
 #, c-format
 msgid ""
 "%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
 "The account is left locked.\n"
 msgstr ""
+"%s: критична ситуація: shadow tcb %s не є звичайним файлом з st_nlink=1.\n"
+"Обліковий запис залишився заблокованим.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: перейменування: %s"
+msgstr "%s: mkdir: %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: не можу відкрити файл %s\n"
+msgstr "%s: не вдалося відкрити %s: %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "Застереження: невідома група %s\n"
+msgstr "Попередження: невідома група %s\n"
 
 msgid "Warning: too many groups\n"
-msgstr "Застереження: забагато груп\n"
+msgstr "Попередження: забагато груп\n"
 
 msgid "Your password has expired."
-msgstr "Ваш пароль прострочено."
+msgstr "Термін дії вашого паролю вичерпано."
 
 msgid "Your password is inactive."
 msgstr "Ваш пароль є неактивним."
 
 msgid "Your login has expired."
-msgstr "Ваш логін прострочено."
+msgstr "Строк дії вашого облікового запису вичерпано."
 
 msgid "  Contact the system administrator."
 msgstr "  Зв'яжіться з системним адміністратором."
 
 msgid "  Choose a new password."
-msgstr "  Оберіть новий пароль."
+msgstr "  Виберіть новий пароль."
 
 msgid "You must change your password."
-msgstr ""
+msgstr "Вам слід змінити ваш пароль."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
@@ -271,25 +275,27 @@ msgid "Your password will expire today."
 msgstr "Ваш пароль буде прострочено сьогодні."
 
 msgid "Cannot open audit interface - aborting.\n"
-msgstr ""
+msgstr "Не вдалося відкрити інтерфейс рецензування - перериваємо обробку.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to change owner or mode of tty stdin: %s"
-msgstr "Не можу змінити tty %s"
+msgstr ""
+"Не вдалося змінити власника або режим доступу до стандартного джерела вхідних"
+" даних tty: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to unlock %s\n"
-msgstr "%s: поля занадто довгі\n"
+msgstr "%s: не вдалося розблокувати %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: "
-msgstr "%s: %s\n"
+msgstr "%s: "
 
 msgid ": "
-msgstr ""
+msgstr ": "
 
 msgid "Environment overflow\n"
-msgstr "Переповнення оточення\n"
+msgstr "Переповнення середовища\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -305,140 +311,160 @@ msgid_plural ""
 msgstr[0] ""
 "%d помилка з часу останнього входу.\n"
 "Останній вхід: %s з %s.\n"
-msgstr[1] "%d помилки з часу останнього входу. Останній вхід: %s з %s.\n"
-msgstr[2] "%d помилок з часу останнього входу. Останній вхід: %s з %s.\n"
+msgstr[1] ""
+"%d помилки з часу останнього входу.\n"
+"Останній вхід: %s з %s.\n"
+msgstr[2] ""
+"%d помилок з часу останнього входу.\n"
+"Останній вхід: %s з %s.\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
 "(%lu)\n"
 msgstr ""
+"%s: некоректні налаштування: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
 
 #, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
-msgstr ""
+msgstr "%s: некоректні налаштування: GID_MIN (%lu), GID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Encountered error attempting to use preferred GID: %s\n"
-msgstr ""
+msgstr "%s: під час спроби використання бажаного GID сталася помилка: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to allocate memory: %s\n"
-msgstr "не можу змінити власника поштової скриньки"
+msgstr "%s: не вдалося отримати пам'ять: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
-msgstr "%s: не можу отримати унікальний UID\n"
+msgstr ""
+"%s: не вдалося отримати унікальний загальносистемний GID (%s). Подальші"
+" повідомлення придушено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
-msgstr "%s: не можу отримати унікальний GID\n"
+msgstr ""
+"%s: не вдалося отримати унікальний GID (%s). Подальші"
+" повідомлення придушено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
-msgstr "%s: не можу отримати унікальний GID\n"
+msgstr "%s: не вдалося отримати унікальний GID (більше немає доступних GID)\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
 "SUB_GID_COUNT (%lu)\n"
 msgstr ""
+"%s: некоректні налаштування: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
+"SUB_GID_COUNT (%lu)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique subordinate GID range\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося отримати унікальний підлеглий діапазон GID\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
 "SUB_UID_COUNT (%lu)\n"
 msgstr ""
+"%s: некоректні налаштування: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
+"SUB_UID_COUNT (%lu)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique subordinate UID range\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося отримати унікальний підлеглий діапазон UID\n"
 
 #, c-format
 msgid ""
 "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
 "(%lu)\n"
 msgstr ""
+"%s: некоректні налаштування: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
 
 #, c-format
 msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
-msgstr ""
+msgstr "%s: некоректні налаштування: UID_MIN (%lu), UID_MAX (%lu)\n"
 
 #, c-format
 msgid "%s: Encountered error attempting to use preferred UID: %s\n"
-msgstr ""
+msgstr "%s: під час спроби використання бажаного UID сталася помилка: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
-msgstr "%s: не можу отримати унікальний UID\n"
+msgstr ""
+"%s: не вдалося отримати унікальний загальносистемний UID (%s). Подальші"
+" повідомлення придушено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
-msgstr "%s: не можу отримати унікальний UID\n"
+msgstr ""
+"%s: не вдалося отримати унікальний UID (%s). Подальші повідомлення"
+" придушено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
-msgstr "%s: не можу отримати унікальний UID\n"
+msgstr "%s: не вдалося отримати унікальний UID (більше немає доступних UID)\n"
 
 #, c-format
 msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr ""
+msgstr "%s: недостатньо аргументів для формування %u прив'язок\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Memory allocation failure\n"
-msgstr "%s: PAM автентифікація не пройшла\n"
+msgstr "%s: помилка під час отримання пам'яті\n"
 
 #, c-format
 msgid "%s: subuid overflow detected.\n"
-msgstr ""
+msgstr "%s: виявлено переповнення subuid.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: invalid field '%s'\n"
 msgid "%s: Invalid map file %s specified\n"
-msgstr "%s: невірне поле \"%s\"\n"
+msgstr "%s: вказано некоректний файл прив'язки %s\n"
 
 #, c-format
 msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
-msgstr ""
+msgstr "%s: не вдалося виконати prctl(PR_SET_KEEPCAPS)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Could not seteuid to %d\n"
-msgstr "Не можу виділити ресурси для конфігураційних даних.\n"
+msgstr "%s: не вдалося встановити для seteuid %d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Could not set caps\n"
-msgstr "Не можу виділити ресурси для конфігураційних даних.\n"
+msgstr "%s: не вдалося встановити можливості\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't open file\n"
 msgid "%s: snprintf failed!\n"
-msgstr "%s: не можу відкрити файл\n"
+msgstr "%s: помилка snprintf!\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: open of %s failed: %s\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: помилка під час спроби відкрити %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: write to %s failed: %s\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: помилка під час спроби записати %s: %s\n"
 
 msgid "Too many logins.\n"
 msgstr "Забагато входів.\n"
 
 msgid "You have new mail."
-msgstr "Ви маєте нову пошту."
+msgstr "Ви отримали нову пошту."
 
 msgid "No mail."
-msgstr "Пошти не має."
+msgstr "Пошти немає."
 
 msgid "You have mail."
-msgstr "Ви маєте пошту."
+msgstr "Для вас є пошта."
 
 msgid "no change"
 msgstr "без змін"
@@ -473,75 +499,78 @@ msgstr "passwd: pam_start() не виконано, помилка %d\n"
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#, fuzzy
 msgid "passwd: password unchanged\n"
-msgstr "Пароль змінено."
+msgstr "passwd: пароль не змінено\n"
 
 msgid "passwd: password updated successfully\n"
 msgstr "passwd: пароль вдало змінено\n"
 
 #, c-format
 msgid "%s: PAM modules requesting echoing are not supported.\n"
-msgstr ""
+msgstr "%s: підтримки відлуння запитів щодо модулів PAM не передбачено.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: repository %s not supported\n"
 msgid "%s: conversation type %d not supported.\n"
-msgstr "%s: сховище %s не підтримується\n"
+msgstr "%s: підтримки типу обміну даними %d не передбачено.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: pam_start: error %d\n"
 msgid "%s: (user %s) pam_start failure %d\n"
-msgstr "%s: pam_start: помилка %d\n"
+msgstr "%s: (користувач %s) помилка pam_start %d\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "passwd: pam_start() failed, error %d\n"
 msgid ""
 "%s: (user %s) pam_chauthtok() failed, error:\n"
 "%s\n"
-msgstr "passwd: pam_start() не виконано, помилка %d\n"
+msgstr ""
+"%s: (користувач %s) помилка pam_chauthtok(), повідомлення:\n"
+"%s\n"
 
 #, c-format
 msgid "Incorrect password for %s.\n"
-msgstr "Невірний пароль для %s.\n"
+msgstr "Помилковий пароль для %s.\n"
 
 #, c-format
 msgid "%s: multiple --root options\n"
-msgstr ""
+msgstr "%s: декілька параметрів --root\n"
 
 #, c-format
 msgid "%s: option '%s' requires an argument\n"
-msgstr ""
+msgstr "%s: до параметра «%s» слід додати аргумент\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: не вдалося скинути привілеї (%s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid chroot path '%s'\n"
-msgstr "%s: невірний домашній телефон: \"%s\"\n"
+msgstr "%s: некоректний шлях chroot «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося отримати доступ до каталогу chroot %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося змінити каталог на каталог chroot %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося виконати chroot до каталогу %s: %s\n"
 
 #, c-format
 msgid "Unable to obtain random bytes.\n"
-msgstr ""
+msgstr "Не вдалося отримати випадкові байти.\n"
 
 #, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
 msgstr ""
+"Некоректне значення ENCRYPT_METHOD: «%s».\n"
+"Типовим є значення DES.\n"
 
 #, c-format
 msgid ""
@@ -549,91 +578,112 @@ msgid ""
 "ENCRYPT_METHOD and the corresponding configuration for your selected hash "
 "method.\n"
 msgstr ""
+"Не вдалося створити базу випадковості з параметра «%s», перевірте параметри у"
+" ENCRYPT_METHOD і відповідні налаштування для вибраного вами методу"
+" хешування.\n"
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
-msgstr "Неможливо перейти до теки \"%s\"\n"
+msgstr "Не вдалося перейти до теки «%s»\n"
 
 msgid "No directory, logging in with HOME=/"
-msgstr "Немає теки, входимо з HOME=/"
+msgstr "Немає каталогу, входимо з HOME=/"
 
 #, c-format
 msgid "Cannot execute %s"
-msgstr "Не можу виконати %s"
+msgstr "Не вдалося виконати %s"
 
 #, c-format
 msgid "Invalid root directory '%s'\n"
-msgstr "Невірна коренева тека \"%s\"\n"
+msgstr "Некоректний кореневий каталог «%s»\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
-msgstr "Неможливо змінити кореневу теку на \"%s\"\n"
+msgstr "Не вдалося змінити кореневий каталог на «%s»\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: користувач %s на даний момент у системі\n"
+msgstr "%s: користувач %s зараз працює у системі\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: user %s is currently logged in\n"
 msgid "%s: user %s is currently used by process %d\n"
-msgstr "%s: користувач %s на даний момент у системі\n"
+msgstr "%s: користувача %s зараз використовує процес %d\n"
 
 msgid "Unable to determine your tty name."
-msgstr "Неможливо визначити назву вашого термінала."
+msgstr "Не вдалося визначити назву вашого термінала."
 
-#, fuzzy
 msgid "No"
-msgstr "Ні\n"
+msgstr "Ні"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] ОБЛІКОВИЙ_ЗАПИС\n"
+"\n"
+"Параметри:\n"
 
 msgid ""
 "  -d, --lastday LAST_DAY        set date of last password change to "
 "LAST_DAY\n"
 msgstr ""
+"  -d, --lastday ДЕНЬ            встановити дату останньої зміни пароля у"
+" ДЕНЬ\n"
 
 msgid ""
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
+"  -E, --expiredate ДАТА        встановити строк дії облікового запису у ДАТА\n"
 
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr ""
+"  -h, --help                    вивести це довідкове повідомлення і вийти\n"
 
 msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
 msgstr ""
+"  -i, --iso8601                 скористатися РРРР-ММ-ДД при виведенні дат\n"
 
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
+"  -I, --inactive НЕАКТИВНИЙ     встановити неактивність пароль після"
+" завершення\n"
+"                                строку дії у стан НЕАКТИВНИЙ\n"
 
 msgid "  -l, --list                    show account aging information\n"
 msgstr ""
+"  -l, --list                    показати дані щодо застарівання облікового"
+" запису\n"
 
 msgid ""
 "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
+"  -m, --mindays ДНІ             встановити мінімальну кількість днів до\n"
+"                                зміни пароля у ДНІ\n"
 
 msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
+"  -M, --maxdays ДНІ             встановити максимальну кількість днів до\n"
+"                                зміни пароля у ДНІ\n"
 
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
+msgstr "  -R, --root КАТ_CHROOT         каталог для зміни кореневого\n"
 
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -W, --warndays ДНІ           встановити темні попередження щодо строку дії"
+" у ДНІ\n"
 
 msgid "Enter the new value, or press ENTER for the default"
-msgstr "Введіть нове значення або натисніть ENTER для значення за замовчанням"
+msgstr "Введіть нове значення або натисніть ENTER для типового значення"
 
 msgid "Minimum Password Age"
 msgstr "Мінімальний вік пароля"
@@ -645,13 +695,13 @@ msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Остання зміна пароля (РРРР-ММ-ДД)"
 
 msgid "Password Expiration Warning"
-msgstr "Застереження про прострочення пароля"
+msgstr "Попередження про прострочення пароля"
 
 msgid "Password Inactive"
 msgstr "Пароль неактивний"
 
 msgid "Account Expiration Date (YYYY-MM-DD)"
-msgstr "Дата прострочення рахунку (РРРР-ММ-ДД)"
+msgstr "Дата прострочення облікового запису (РРРР-ММ-ДД)"
 
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Остання зміна пароля\t\t\t\t\t: "
@@ -669,7 +719,7 @@ msgid "Password inactive\t\t\t\t\t: "
 msgstr "Пароль неактивний\t\t\t\t\t: "
 
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Рахунок стає простроченим\t\t\t\t\t\t: "
+msgstr "Строк дії облікового запису завершується: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
@@ -681,101 +731,109 @@ msgstr "Максимальна кількість днів між змінами
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr "Кількість днів для застереження про прострочення паролю\t: %ld\n"
+msgstr "Кількість днів для попередження про прострочення паролю\t: %ld\n"
 
 #, c-format
 msgid "%s: invalid date '%s'\n"
-msgstr "%s: невірна дата \"%s\"\n"
+msgstr "%s: некоректна дата «%s»\n"
 
 #, c-format
 msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: невірний числовий аргумент \"%s\"\n"
+msgstr "%s: некоректний числовий аргумент «%s»\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: не використовуйте \"l\" з іншими прапорцями\n"
+msgstr "%s: не використовуйте «l» з іншими прапорцями\n"
 
 #, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: У доступі відмовлено.\n"
+msgstr "%s: у доступі відмовлено.\n"
 
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Не можу визначити Ваше ім'я користувача.\n"
+msgstr "%s: не вдалося визначити ваше ім'я користувача.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: PAM: %s\n"
-msgstr "%s: %s\n"
+msgstr "%s: PAM: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
-msgstr "%s: не можу блокувати файли, спробуйте пізніше\n"
+msgstr "%s: не вдалося заблокувати %s; повторіть пізніше.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot open %s\n"
-msgstr "%s: не можу відкрити файл %s\n"
+msgstr "%s: не вдалося відкрити %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failure while writing changes to %s\n"
-msgstr "%s: помилка відгалудження: %s"
+msgstr "%s: помилка під час спроби записати зміни до %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося приготувати новий запис %s «%s»\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: не можу відкрити файл прихованих паролів\n"
+msgstr "%s: не вдалося відкрити файл прихованих паролів\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' does not exist in %s\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: користувача «%s» у %s не існує\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Змінюю вікову інформацію для %s\n"
+msgstr "Змінюємо дані щодо застарівання для %s\n"
 
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: помилка зміни полів\n"
+msgstr "%s: помилка під час спроби змінити поля\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [ОБЛІКОВИЙ_ЗАПИС]\n"
+"\n"
+"Параметри:\n"
 
 msgid "  -f, --full-name FULL_NAME     change user's full name\n"
-msgstr ""
+msgstr "  -f, --full-name ІМ'Я         змінити повне ім'я користувача\n"
 
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr ""
+"  -h, --home-phone ДОМАШНІЙ_НОМЕР змінити домашній номер телефону"
+" користувача\n"
 
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
-msgstr ""
+msgstr "  -o, --other ІНШІ_ДАНІ         змінити інші дані GECOS користувача\n"
 
 msgid "  -r, --room ROOM_NUMBER        change user's room number\n"
-msgstr ""
+msgstr "  -r, --room НОМЕР_КІМНАТИ     змінити номер кімнати користувача\n"
 
 msgid "  -u, --help                    display this help message and exit\n"
 msgstr ""
+"  -u, --help                    вивести це довідкове повідомлення і вийти\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
+"  -w, --work-phone РОБОЧИЙ_ТЕЛЕФОН змінити робочий номер телефону"
+" користувача\n"
 
 msgid "Full Name"
-msgstr "Повне ім'я"
+msgstr "Ім'я повністю"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\t%s: %s\n"
-msgstr "%s: %s\n"
+msgstr "\t%s: %s\n"
 
 msgid "Room Number"
 msgstr "Номер кімнати"
 
 msgid "Work Phone"
-msgstr "Робочій телефон"
+msgstr "Робочий телефон"
 
 msgid "Home Phone"
 msgstr "Домашній телефон"
@@ -788,91 +846,99 @@ msgid "%s: fields too long\n"
 msgstr "%s: поля занадто довгі\n"
 
 msgid "Cannot change ID to root.\n"
-msgstr "Не можу змінити ID на root.\n"
+msgstr "Не вдалося змінити ідентифікатор на root.\n"
 
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
-msgstr ""
+msgstr "%s: ім'я з символами поза ASCII: «%s»\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
-msgstr "%s: невірне ім'я: \"%s\"\n"
+msgstr "%s: некоректне ім'я: «%s»\n"
 
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
-msgstr ""
+msgstr "%s: номер кімнати із символами поза ASCII: «%s»\n"
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
-msgstr "%s: невірний номер кімнати: \"%s\"\n"
+msgstr "%s: некоректний номер кімнати: «%s»\n"
 
 #, c-format
 msgid "%s: invalid work phone: '%s'\n"
-msgstr "%s: невірний робочий телефон: \"%s\"\n"
+msgstr "%s: некоректний робочий телефон: «%s»\n"
 
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
-msgstr "%s: невірний домашній телефон: \"%s\"\n"
+msgstr "%s: некоректний домашній телефон: «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' contains non-ASCII characters\n"
-msgstr "%s: \"%s\" містить заборонені символи\n"
+msgstr "%s: «%s» містить символи поза ASCII\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: \"%s\" містить заборонені символи\n"
+msgstr "%s: «%s» містить заборонені символи\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' does not exist\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: запису користувача «%s» не існує\n"
 
 #, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: неможливо змінити користувача \"%s\" у клієнті NIS.\n"
+msgstr "%s: не вдалося змінити користувача «%s» у клієнті NIS.\n"
 
 #, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: \"%s\" є NIS-сервером для цього клієнта.\n"
+msgstr "%s: «%s» є NIS-сервером для цього клієнта.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Зміна інформації про користувача %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри]\n"
+"\n"
+"Параметри:\n"
 
 #, c-format
 msgid "  -c, --crypt-method METHOD     the crypt method (one of %s)\n"
 msgstr ""
+"  -c, --crypt-method МЕТОД      метод шифрування (одне із значень %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
-msgstr ""
+msgstr "  -e, --encrypted               надані паролі зашифровано\n"
 
 msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
 "                                the MD5 algorithm\n"
 msgstr ""
+"  -m, --md5                     зашифрувати простий текстовий пароль за\n"
+"                                допомогою алгоритму MD5\n"
 
 msgid ""
 "  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 "                                or YESCRYPT crypt algorithms\n"
 msgstr ""
+"  -s, --sha-rounds              кількість проходів для алгоритмів\n"
+"                                шифрування SHA, BCRYPT та YESCRYPT\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
-msgstr "%s: прапорець -a можна використовувати ТІЛЬКИ з прапорцем -G\n"
+msgstr "%s: прапорець %s можна використовувати лише з прапорцем %s\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
-msgstr ""
+msgstr "%s: прапорці -c, -e і -m є взаємно виключними\n"
 
 #, c-format
 msgid "%s: unsupported crypt method: %s\n"
-msgstr ""
+msgstr "%s: непідтримуваний метод шифрування: %s\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
@@ -882,192 +948,215 @@ msgstr "%s: рядок %d: рядок занадто довгий\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: рядок %d: бракує нового пароля\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося зашифрувати пароль з базою «%s»: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
-msgstr "%s: група %s не існує\n"
+msgstr "%s: рядок %d: запису групи «%s» не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
-msgstr "%s: рядок %d: не можу оновити запис\n"
+msgstr "%s: рядок %d: не вдалося приготувати новий запис %s «%s»\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: виявлено помилку, зміни ігноруються\n"
+msgstr "%s: виявлено помилку, зміни проігноровано\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: (line %d, user %s) password not changed\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: (рядок %d, користувач %s) пароль не змінено\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: user '%s' does not exist\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: рядок %d: запису користувача «%s» не існує\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
+"  -s, --shell ОБОЛОНКА          нова оболонка для входу для облікового"
+" запису\n"
 
 msgid "Login Shell"
-msgstr "Логін-оболонка"
+msgstr "Оболонка входу"
 
-#, fuzzy, c-format
+#, c-format
 msgid "You may not change the shell for '%s'.\n"
-msgstr "Не можна змінити оболонку для %s.\n"
+msgstr "Ви не можете змінити оболонку для «%s».\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Змінюю оболонку для %s\n"
+msgstr "Змінюємо оболонку входу для %s\n"
 
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: Невірний запис: %s\n"
+msgstr "%s: некоректний запис: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s is an invalid shell\n"
-msgstr "%s є невірна оболонка.\n"
+msgstr "%s: %s є некоректною оболонкою\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: %s does not exist\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: попередження: %s не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: %s is not executable\n"
-msgstr "%s: застереження: %s не належить %s\n"
+msgstr "%s: попередження: %s не є виконуваним\n"
 
 msgid "  -c, --check                   check the user's password expiration\n"
 msgstr ""
+"  -c, --check                   перевірити строк дії пароля користувача\n"
 
 msgid ""
 "  -f, --force                   force password change if the user's "
 "password\n"
 "                                is expired\n"
 msgstr ""
+"  -f, --force                   примусова зміна пароля, якщо строк\n"
+"                                дії пароля користувача вичерпано\n"
 
 #, c-format
 msgid "%s: options %s and %s conflict\n"
-msgstr ""
+msgstr "%s: конфлікт параметрів %s і %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unexpected argument: %s\n"
-msgstr "lastlog: неочікуваний аргумент: %s\n"
+msgstr "%s: неочікуваний аргумент: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
+"  -a, --all                     показати записи журналу помилок для усіх"
+" користувачів\n"
 
 msgid ""
 "  -l, --lock-secs SEC           after failed login lock account for SEC "
 "seconds\n"
 msgstr ""
+"  -l, --lock-secs СЕК           після помилки під час входу заблокувати"
+" обліковий запис на СЕК секунд\n"
 
 msgid ""
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 msgstr ""
+"  -m, --maximum МАКСИМУМ        встановити максимальну кількість помилкових"
+" спроб увійти у МАКСИМУМ\n"
 
 msgid "  -r, --reset                   reset the counters of login failures\n"
-msgstr ""
+msgstr "  -r, --reset                   скинути лічильники помилок входу\n"
 
 msgid ""
 "  -t, --time DAYS               display faillog records more recent than "
 "DAYS\n"
 msgstr ""
+"  -t, --time ДНІ                вивести записи журналу помилок, які є"
+" свіжішими за ДНІ днів\n"
 
 msgid ""
 "  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
 "                                counters and limits (if used with -r, -m,\n"
 "                                or -l) only for the specified LOGIN(s)\n"
 msgstr ""
+"  -u, --user ЗАПИС/ДІАПАЗОН     вивести запис журналу помилок або"
+" лічильників\n"
+"                                помилок і обмежень на помилки (якщо"
+" використано з\n"
+"                                -r, -m або -l) лише для вказаних облікових"
+" ЗАПИСІВ\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to get the entry for UID %lu\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося отримати запис для UID %lu\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr "Логін       Помилок Максимум Останнє                 На\n"
+msgstr "Запис       Помилок Максимум Останнє                 На\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid " [%lus left]"
-msgstr " [%lds залишилось]"
+msgstr " [лишилося %lus]"
 
 #, c-format
 msgid " [%lds lock]"
 msgstr " [%lds блоковано]"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося скинути кількість помилок для UID %lu\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to set max for UID %lu\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося встановити максимум для UID %lu\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to set locktime for UID %lu\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося встановити час блокування для UID %lu\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown user or range: %s\n"
-msgstr "Невідомий користувач: %s\n"
+msgstr "%s: невідомий користувач або діапазон: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot get the size of %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося отримати розмір %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to write %s: %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося записати %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [option] GROUP\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметр] ГРУПА\n"
+"\n"
+"Параметри:\n"
 
 msgid "  -a, --add USER                add USER to GROUP\n"
-msgstr ""
+msgstr "  -a, --add КОРИСТУВАЧ          додати КОРИСТУВАЧА до ГРУПИ\n"
 
 msgid "  -d, --delete USER             remove USER from GROUP\n"
-msgstr ""
+msgstr "  -d, --delete КОРИСТУВАЧ       вилучити КОРИСТУВАЧА з ГРУПИ\n"
 
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr ""
+msgstr "  -Q, --root КАТ_CHROOT         каталог для зміни кореневого\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
-msgstr ""
+msgstr "  -r, --remove-password         вилучити пароль ГРУПИ\n"
 
 msgid ""
 "  -R, --restrict                restrict access to GROUP to its members\n"
 msgstr ""
+"  -R, --restrict                обмежити доступ до ГРУПИ її учасниками\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
-msgstr ""
+msgstr "  -M, --members КОРИСТУВАЧ,...  встановити список учасників ГРУПИ\n"
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 msgstr ""
+"  -A, --administrators АДМІНІСТРАТОР,...\n"
+"                                встановити список адміністраторів для ГРУПИ\n"
 
-#, fuzzy
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
-msgstr "Пароль для %s не може бути змінений.\n"
+msgstr "Окрім параметрів -A і -M, параметри не можна поєднувати.\n"
 
-#, fuzzy
 msgid "The options cannot be combined.\n"
-msgstr "Пароль для %s не може бути змінений.\n"
+msgstr "Ці параметри не можна поєднувати.\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: приховані паролі груп потрібні для -A\n"
+msgstr "%s: для -A слід вказати приховані паролі груп\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' does not exist in %s\n"
-msgstr "%s: група %s не існує\n"
+msgstr "%s: групи «%s» у %s не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failure while closing read-only %s\n"
-msgstr "%s: помилка відгалудження: %s"
+msgstr "%s: помилка під час спроби закрити придатний лише до читання %s\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -1080,199 +1169,232 @@ msgid "Re-enter new password: "
 msgstr "Повторіть новий пароль: "
 
 msgid "They don't match; try again"
-msgstr "не співпадає; спробуйте знову"
+msgstr "Паролі не збігаються; спробуйте знову"
 
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: Спробуйте знову пізніше\n"
+msgstr "%s: спробуйте знову пізніше\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "Додано нового користувача %s до групи %s\n"
+msgstr "Додаємо нового користувача %s до групи %s\n"
 
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "Видалено користувача %s з групи %s\n"
+msgstr "Вилучаємо користувача %s з групи %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' is not a member of '%s'\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: користувач «%s» не є учасником «%s»\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: Не є tty\n"
+msgstr "%s: не є терміналом\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] GROUP\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] ГРУПА\n"
+"\n"
+"Параметри:\n"
 
 msgid ""
 "  -f, --force                   exit successfully if the group already "
 "exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
+"  -f, --force                   вийти з кодом успіху, якщо група вже існує,\n"
+"                                і скасувати -g, якщо GID вже використано\n"
 
 msgid "  -g, --gid GID                 use GID for the new group\n"
-msgstr ""
+msgstr "  -g, --gid GID                 використати GID для нової групи\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
+"  -K, --key КЛЮЧ=ЗНАЧЕННЯ       перевизначити типові значення"
+" /etc/login.defs\n"
 
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
 "                                (non-unique) GID\n"
 msgstr ""
+"  -o, --non-unique              дозволити створювати групи з дубльованими\n"
+"                                (не унікальними) GID\n"
 
 msgid ""
 "  -p, --password PASSWORD       use this encrypted password for the new "
 "group\n"
 msgstr ""
+"  -p, --password ПАРОЛЬ         використати вказаний шифрований пароль для"
+" нової групи\n"
 
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
+"  -r, --system                  створити загальносистемний обліковий запис\n"
 
 msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr ""
+msgstr "  -P, --prefix ПРЕФІКС_КАТ      префікс каталогів\n"
 
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
+"  -U, --users КОРИСТУВАЧІ       список користувачів-учасників цієї групи\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "invalid user name '%s'\n"
 msgid "Invalid member username %s\n"
-msgstr "невірне ім'я користувача '%s'\n"
+msgstr "Некоректне ім'я користувача учасника, %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' is not a valid group name\n"
-msgstr "%s: %s: то не є вірне ім'я групи\n"
+msgstr "%s: «%s» є некоректною назвою групи\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid group ID '%s'\n"
-msgstr "невірна назва групи \"%s\"\n"
+msgstr "%s: некоректний ідентифікатор групи «%s»\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -K вимагає ЗМІННА=ЗНАЧЕННЯ\n"
+msgstr "%s: разом із -K слід вказати КЛЮЧ=ЗНАЧЕННЯ\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' already exists\n"
-msgstr "%s: група %s існує\n"
+msgstr "%s: група «%s» вже існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID '%lu' already exists\n"
-msgstr "Член вже існує\n"
+msgstr "%s: GID «%lu» вже існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot setup cleanup service.\n"
-msgstr "%s: Не можу визначити Ваше ім'я користувача.\n"
+msgstr "%s: не вдалося встановити службу чищення.\n"
 
 msgid ""
 "  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
 "* files\n"
 msgstr ""
+"  -P, --prefix КАТ_ПРЕФІКСА     каталог префікса, де зберігаються файли"
+" /etc/*\n"
 
 msgid ""
 "  -f, --force                   delete group even if it is the primary group "
 "of a user\n"
 msgstr ""
+"  -f, --force                   вилучити групу, навіть якщо це основна група"
+" користувача\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося вилучити запис «%s» з %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot remove the primary group of user '%s'\n"
-msgstr "%s: неможливо змінити користувача \"%s\" у клієнті NIS.\n"
+msgstr "%s: не можна вилучати основну групу користувача «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' does not exist\n"
-msgstr "%s: група %s не існує\n"
+msgstr "%s: групи «%s» не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: група \"%s\" є групою NIS.\n"
+msgstr "%s: група «%s» є групою NIS.\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s є сервер NIS\n"
+msgstr "%s: %s є сервером NIS\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
-msgstr "%s: користувач %s є користувачем NIS\n"
+msgstr "%s: користувач «%s» вже є учасником «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Out of memory. Cannot update %s.\n"
-msgstr "%s: бракує пам'яті у update_group\n"
+msgstr "%s: бракує пам'яті. Не вдалося оновити %s.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [action]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [дія]\n"
+"\n"
+"Параметри:\n"
 
 msgid ""
 "  -g, --group groupname         change groupname instead of the user's "
 "group\n"
 "                                (root only)\n"
 msgstr ""
+"  -g, --group назва_групи       змінити на вказану групу, а не на групу"
+" користувача\n"
+"                                (лише root)\n"
 
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 msgid "Actions:\n"
-msgstr ""
+msgstr "Дії:\n"
 
 msgid ""
 "  -a, --add username            add username to the members of the group\n"
 msgstr ""
+"  -a, --add користувач          додати користувача до учасників групи\n"
 
 msgid ""
 "  -d, --delete username         remove username from the members of the "
 "group\n"
 msgstr ""
+"  -d, --delete користувач       вилучити користувача з учасників групи\n"
 
 msgid "  -p, --purge                   purge all members from the group\n"
-msgstr ""
+msgstr "  -p, --purge                   вилучити усіх учасників з групи\n"
 
 msgid "  -l, --list                    list the members of the group\n"
-msgstr ""
+msgstr "  -l, --list                    вивести список учасників групи\n"
 
 #, c-format
 msgid "%s: your groupname does not match your username\n"
-msgstr ""
+msgstr "%s: ваша назва групи не відповідає вашому імені користувача\n"
 
 #, c-format
 msgid "%s: only root can use the -g/--group option\n"
-msgstr ""
+msgstr "%s: лише root може використовувати параметр -g/--group\n"
 
 msgid ""
 "  -a, --append                  append the users mentioned by -U option to "
 "the group \n"
 "                                without removing existing user members\n"
 msgstr ""
+"  -a, --append                  дописати користувачів, яких вказано за"
+" допомогою параметра -U\n"
+"                                до групи без вилучення наявних"
+" користувачів-учасників\n"
 
 msgid "  -g, --gid GID                 change the group ID to GID\n"
-msgstr ""
+msgstr "  -g, --gid GID                 змінити ідентифікатор групи на GID\n"
 
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
-msgstr ""
+msgstr "  -n, --new-name НОВА_ГРУПА     змінити назву на НОВА_ГРУПА\n"
 
 msgid ""
 "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
 msgstr ""
+"  -o, --non-unique              дозволити використання дублікатів"
+" (неунікальних) GID\n"
 
 msgid ""
 "  -p, --password PASSWORD       change the password to this (encrypted)\n"
 "                                PASSWORD\n"
 msgstr ""
+"  -p, --password ПАРОЛЬ         змінити пароль на цей (шифрований)\n"
+"                                ПАРОЛЬ\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid group name '%s'\n"
-msgstr "невірна назва групи \"%s\"\n"
+msgstr "%s: некоректна назва групи «%s»\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
@@ -1282,53 +1404,63 @@ msgstr "%s: група %s є групою NIS\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: невідомий користувач %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [group [gshadow]]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [група [gshadow]]\n"
+"\n"
+"Параметри:\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [group]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [група]\n"
+"\n"
+"Параметри:\n"
 
 msgid ""
 "  -r, --read-only               display errors and warnings\n"
 "                                but do not change files\n"
 msgstr ""
+"  -r, --read-only               виводити помилки та попередження,\n"
+"                                але не вносити зміни до файлів\n"
 
 msgid "  -s, --sort                    sort entries by UID\n"
-msgstr ""
+msgstr "  -s, --sort                    упорядкувати записи за UID\n"
 
 msgid ""
 "  -S, --silence-warnings        silence controversial/paranoid warnings\n"
 msgstr ""
+"  -S, --silence-warnings        придушити неоднозначні/параноїдальні"
+" попередження\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: -s and -r are incompatible\n"
-msgstr "%s: -s та -r несумісні\n"
+msgstr "%s: -s та -r є несумісними\n"
 
 msgid "invalid group file entry"
-msgstr "невірний запис у файлі груп"
+msgstr "некоректний запис у файлі груп"
 
 #, c-format
 msgid "delete line '%s'? "
-msgstr "видалити рядок \"%s\"? "
+msgstr "вилучити рядок «%s»? "
 
 msgid "duplicate group entry"
-msgstr "дублюючий запис у базі груп"
+msgstr "дублювання запису групи"
 
 #, c-format
 msgid "invalid group name '%s'\n"
-msgstr "невірна назва групи \"%s\"\n"
+msgstr "некоректна назва групи «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid group ID '%lu'\n"
-msgstr "невірна назва групи \"%s\"\n"
+msgstr "некоректний ідентифікатор групи «%lu»\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
@@ -1336,34 +1468,36 @@ msgstr "група %s: немає користувача %s\n"
 
 #, c-format
 msgid "delete member '%s'? "
-msgstr "видалити члена \"%s\"? "
+msgstr "вилучити учасника «%s»? "
 
 #, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "відповідний запис файлу груп відсутній у %s\n"
+msgstr "немає відповідного запису файла груп у %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add group '%s' in %s? "
-msgstr "додати групу \"%s\" у %s?"
+msgstr "додати групу «%s» до %s? "
 
 #, c-format
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"група %s містить запис у %s, але її поле пароля у %s не встановлено у"
+" значення «x»\n"
 
 msgid "invalid shadow group file entry"
-msgstr "невірний запис у файлі прихованих груп"
+msgstr "некоректний запис у файлі прихованих груп"
 
 msgid "duplicate shadow group entry"
-msgstr "дублюючий запис у файлі прихованих груп"
+msgstr "дублювання запису у файлі прихованих груп"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "прихована група %s: не має адміністратора %s\n"
+msgstr "прихована група %s: немає адміністратора %s\n"
 
 #, c-format
 msgid "delete administrative member '%s'? "
-msgstr "видалити адміністратора \"%s\"? "
+msgstr "вилучити адміністратора «%s»? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -1377,12 +1511,12 @@ msgstr "%s: файли було оновлено\n"
 msgid "%s: no changes\n"
 msgstr "%s: без змін\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot delete %s\n"
-msgstr "%s: неможливо оновити файл %s\n"
+msgstr "%s: не вдалося вилучити %s\n"
 
 msgid "Usage: id [-a]\n"
-msgstr "Використання: id [-a]\n"
+msgstr "Користування: id [-a]\n"
 
 msgid " groups="
 msgstr " групи="
@@ -1390,33 +1524,43 @@ msgstr " групи="
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
+"  -b, --before ДНІ              вивести лише ті записи lastlog, вік яких"
+" перевищує ДНІ\n"
 
 msgid ""
 "  -C, --clear                   clear lastlog record of an user (usable only "
 "with -u)\n"
 msgstr ""
+"  -C, --clear                   вилучити запис lastlog користувача (можна"
+" скористатися лише з -u)\n"
 
 msgid ""
 "  -S, --set                     set lastlog record to current time (usable "
 "only with -u)\n"
 msgstr ""
+"  -S, --set                     встановити для запису lastlog поточний час"
+" (можна скористатися лише з -u)\n"
 
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
+"  -t, --time ДНІ                вивести лише записи lastlog, які є свіжішими"
+" за ДНІ\n"
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
+"  -u, --user ЗАПИС              вивести запис lastlog для вказаного"
+" облікового ЗАПИСУ\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "Username                Port     Latest"
 msgid "Username         Port     From%*sLatest\n"
-msgstr "Користувач             Порт     Останній вхід"
+msgstr "Користувач       Порт     З%*sОстанній вхід\n"
 
 msgid "Username                Port     Latest"
-msgstr "Користувач             Порт     Останній вхід"
+msgstr "Користувач              Порт     Останній вхід"
 
 msgid "**Never logged in**"
 msgstr "**Ніколи не входив**"
@@ -1426,32 +1570,37 @@ msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthe output might be incorrect.\n"
 msgstr ""
+"%s: вибрані uid є більшими за LASTLOG_UID_MAX (%lu),\n"
+"\tвиведені дані можуть бути некоректними.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to update the entry for UID %lu\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося оновити запис для UID %lu\n"
 
 #, c-format
 msgid ""
 "%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
 "\tthey will not be updated.\n"
 msgstr ""
+"%s: вибрані uid є більшими за LASTLOG_UID_MAX (%lu),\n"
+"\tїх не буде оновлено\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to update the lastlog file\n"
-msgstr "%s: не можу оновити файл паролів\n"
+msgstr "%s: не вдалося оновити файл lastlog\n"
 
 #, c-format
 msgid "%s: Option -C cannot be used together with option -S\n"
-msgstr ""
+msgstr "%s: параметр -C не можна використовувати разом із параметром -S\n"
 
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
 msgstr ""
+"%s: параметри -C і -S потребують параметра -u для визначення користувача\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
-msgstr "Використання: %s [-p] [ім'я]\n"
+msgstr "Користування: %s [-p] [ім'я]\n"
 
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
@@ -1463,65 +1612,65 @@ msgstr "                %s [-p] -r вузол\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
-msgstr ""
+msgstr "помилка у налаштуваннях — не вдалося обробити значення %s: «%d»"
 
 msgid "Invalid login time"
-msgstr "Невірний час для входу"
+msgstr "Некоректний час для входу"
 
 msgid ""
 "\n"
 "System closed for routine maintenance"
 msgstr ""
 "\n"
-"Систему закрито для профілактики."
+"Систему закрито для регулярної профілактики"
 
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Сталося відключення -- дозволено лише вхід root-a.]"
+"[Здійснено обхід від'єднання -- дозволено вхід від імені root.]"
 
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
+msgstr "%s: робота неможлива без отримання ефективних прав root\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
-"Немає запису utmp.  Вам потрібно виконати \"login\" з \"sh\" найнижчого рівня"
+"Немає запису utmp. Вам слід виконати \"login\" з \"sh\" найнижчого рівня"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Login timed out after %u seconds.\n"
 msgstr ""
 "\n"
-"Час логіну буде вичерпано за %d секунд.\n"
+"Перевищено час очікування після очікування протягом %u секунд.\n"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr "login: Помилка PAM, перервано: %s\n"
+msgstr "login: помилка PAM, перервано: %s\n"
 
 #, c-format
 msgid "%s login: "
-msgstr "%s логін: "
+msgstr "Запис %s: "
 
 msgid "login: "
-msgstr "логін: "
+msgstr "запис: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of tries exceeded (%u)\n"
-msgstr "Перевищено максимальну кількість спроб (%d)\n"
+msgstr "Перевищено максимальну кількість спроб входу (%u)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: система PAM запросила переривання\n"
 
 msgid "Login incorrect"
-msgstr "Невірний логін"
+msgstr "Некоректний запис"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot find user (%s)\n"
-msgstr "%s: рядок %d: не можу знайти користувача %s\n"
+msgstr "Не вдалося знайти користувача (%s)\n"
 
 #, c-format
 msgid ""
@@ -1529,22 +1678,22 @@ msgid ""
 "%s login: "
 msgstr ""
 "\n"
-"%s логін: "
+"Запис %s: "
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr "%s: помилка відгалудження: %s"
+msgstr "%s: помилка відгалуження: %s"
 
 #, c-format
 msgid "TIOCSCTTY failed on %s"
-msgstr ""
+msgstr "Помилка TIOCSCTTY на %s"
 
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr "Застереження: login поновлено після тимчасового блокування."
+msgstr "Попередження: можливість входу поновлено після тимчасового блокування."
 
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "Останній вхід в систему: %s на %s"
+msgstr "Останній вхід до системи: %s на %s"
 
 #, c-format
 msgid " from %.*s"
@@ -1554,240 +1703,276 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
-"вичерпано час логіну\n"
+"вичерпано час для входу\n"
 "\n"
 
-#, fuzzy
 msgid "Usage: logoutd\n"
-msgstr "Використання: id\n"
+msgstr "Користування: logoutd\n"
 
 #, c-format
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
-msgstr ""
+msgstr "%s: діапазон gid [%lu-%lu) -> [%lu-%lu) заборонено\n"
 
 #, c-format
 msgid ""
 "usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
 msgstr ""
+"користування: %s <pid> <gid> <нижній_gid> <кількість> [ <gid> <нижній_gid> <"
+"кількість> ] ... \n"
 
 #, c-format
 msgid "%s: kernel doesn't support setgroups restrictions\n"
-msgstr ""
+msgstr "%s: у ядрі не передбачено підтримки обмежень setgroups\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: can't open group file\n"
 msgid "%s: couldn't open process setgroups: %s\n"
-msgstr "%s: не можу відкрити файл груп\n"
+msgstr "%s: не вдалося відкрити setgroups процесу: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to read setgroups: %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося прочитати setgroups: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to seek setgroups: %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося виконати позиціювання у setgroups: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to setgroups %s policy: %s\n"
-msgstr "%s: поля занадто довгі\n"
+msgstr "%s: не вдалося встановити правила setgroups %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s: невірна базова тека \"%s\"\n"
+msgstr "%s: не вдалося відкрити каталог proc для цілі %u\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Could not stat directory for target %u\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося отримати статистичні дані каталогу для цілі %u\n"
 
 #, c-format
 msgid ""
 "%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
 "gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
+"%s: власником цілі %u є інший користувач: uid:%lu pw_uid:%lu st_uid:%lu, "
+"gid:%lu pw_gid:%lu st_gid:%lu\n"
 
 msgid "Usage: newgrp [-] [group]\n"
-msgstr "Використання: newgrp [-] [група]\n"
+msgstr "Користування: newgrp [-] [група]\n"
 
 msgid "Usage: sg group [[-c] command]\n"
-msgstr "Використання: sg група [[-c] команда]\n"
+msgstr "Користування: sg група [[-c] команда]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to crypt password with previous salt: %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr ""
+"%s: не вдалося зашифрувати пароль за допомогою попереднього базового"
+" значення: %s\n"
 
-#, fuzzy
 msgid "Invalid password.\n"
-msgstr "Старий пароль: "
+msgstr "Некоректний пароль.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failure forking: %s\n"
-msgstr "%s: помилка відгалудження: %s"
+msgstr "%s: помилка відгалуження: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID '%lu' does not exist\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: GID «%lu» не існує\n"
 
 msgid "too many groups\n"
 msgstr "занадто багато груп\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
-msgstr ""
+msgstr "%s: діапазон uid [%lu-%lu) -> [%lu-%lu) заборонено\n"
 
 #, c-format
 msgid ""
 "usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
 msgstr ""
+"користування: %s <pid> <uid> <нижній_uid> <кількість> [ <uid> <нижній_uid> <"
+"кількість> ] ... \n"
 
 #, c-format
 msgid ""
 "%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
 "st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
+"%s: власником процесу призначення %u є інший користувач: uid:%lu pw_uid:%lu"
+" st_uid:%lu, "
+"gid:%lu pw_gid:%lu st_gid:%lu\n"
 
 msgid "  -b, --badname                 allow bad names\n"
-msgstr ""
+msgstr "  -b, --badname                 дозволити «погані» назви\n"
 
 msgid "  -r, --system                  create system accounts\n"
 msgstr ""
+"  -r, --system                  створити загальносистемні облікові записи\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: група %s не існує\n"
+msgstr "%s: група «%s» є прихованою групою, але її запису немає в /etc/group\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid user ID '%s'\n"
-msgstr "%s: невірне ім'я користувача '%s'\n"
+msgstr "%s: некоректний ідентифікатор користувача «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: невірне ім'я користувача '%s'\n"
+msgstr ""
+"%s: некоректне ім'я користувача «%s»: скористайтеся --badname, щоб"
+" проігнорувати\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
-msgstr "%s: рядок %d: невірний рядок\n"
+msgstr "%s: рядок %d: некоректний рядок\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
-msgstr "%s: не можу оновити запис для користувача %s\n"
+msgstr ""
+"%s: не вдалося оновити запис користувача %s (немає у базі даних passwd)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: can't create user\n"
-msgstr "%s: рядок %d: не можу створити GID\n"
+msgstr "%s: рядок %d: не вдалося створити запис користувача\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: can't create group\n"
-msgstr "%s: рядок %d: не можу створити GID\n"
+msgstr "%s: рядок %d: не вдалося створити групу\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
-msgstr "%s: користувач %s не існує\n"
+msgstr "%s: рядок %d: користувача «%s» не існує у %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: рядок %d: не можу оновити пароль\n"
+msgstr "%s: рядок %d: не вдалося оновити пароль\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: homedir must be an absolute path\n"
-msgstr "%s: рядок %d: mkdir не виконався\n"
+msgstr "%s: рядок %d: домашній каталог має бути вказано як абсолютний шлях\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: mkdir %s failed: %s\n"
-msgstr "%s: рядок %d: mkdir не виконався\n"
+msgstr "%s: рядок %d: помилка під час створення каталогу %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: chown %s failed: %s\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: рядок %d: помилка зміни власника %s: %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: рядок %d: не можу оновити запис\n"
+msgstr "%s: рядок %d: не вдалося оновити запис\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося приготувати новий запис %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't find subordinate user range\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося знайти підлеглий діапазон користувачів\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't find subordinate group range\n"
-msgstr "%s: не можу оновити файл груп\n"
+msgstr "%s: не вдалося знайти підлеглий діапазон груп\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
 msgstr ""
+"  -a, --all                     вивести звіт щодо стану паролів для усіх"
+" облікових записів\n"
 
 msgid ""
 "  -d, --delete                  delete the password for the named account\n"
 msgstr ""
+"  -d, --delete                  вилучити пароль для іменованого облікового"
+" запису\n"
 
 msgid ""
 "  -e, --expire                  force expire the password for the named "
 "account\n"
 msgstr ""
+"  -e, --expire                  примусово завершити строк дії пароля для"
+" вказаного за назвою облікового запису\n"
 
 msgid "  -k, --keep-tokens             change password only if expired\n"
 msgstr ""
+"  -k, --keep-tokens             змінити пароль, лише якщо строк дії"
+" вичерпано\n"
 
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
+"  -i, --inactive НЕАКТИВНИЙ     встановити неактивність пароль після"
+" завершення\n"
+"                                строку дії у стан НЕАКТИВНИЙ\n"
 
 msgid ""
 "  -l, --lock                    lock the password of the named account\n"
 msgstr ""
+"  -l, --lock                    заблокувати пароль вказаного за назвою"
+" облікового запису\n"
 
 msgid ""
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 msgstr ""
+"  -n, --mindays ДНІ             встановити мінімальну кількість днів до\n"
+"                                зміни пароля у ДНІ\n"
 
 msgid "  -q, --quiet                   quiet mode\n"
-msgstr ""
+msgstr "  -q, --quiet                   режим без повідомлень\n"
 
 msgid ""
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-msgstr ""
+msgstr "  -r, --repository СХОВИЩЕ      змінити пароль у сховищі СХОВИЩЕ\n"
 
 msgid ""
 "  -S, --status                  report password status on the named account\n"
 msgstr ""
+"  -S, --status                  вивести звіт щодо стану пароля для"
+" іменованого облікового запису\n"
 
 msgid ""
 "  -u, --unlock                  unlock the password of the named account\n"
 msgstr ""
+"  -u, --unlock                  розблокувати пароль іменованого облікового"
+" запису\n"
 
 msgid ""
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
+"  -w, --warndays ДНІ           встановити темні попередження щодо строку дії"
+" у ДНІ\n"
 
 msgid ""
 "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
+"  -x, --maxdays ДНІ             встановити максимальну кількість днів до\n"
+"                                зміни пароля у ДНІ\n"
 
 msgid "Old password: "
 msgstr "Старий пароль: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter the new password (minimum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Введіть новий пароль (від %d до %d знаків)\n"
-"Змішуйте великі та малі літери та цифри.\n"
+"Введіть новий пароль (мінімум %d символів)\n"
+"Будь ласка, скористайтеся комбінацією великих і малих літер та цифр.\n"
 
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Введіть новий пароль (від %d до %d знаків)\n"
-"Змішуйте великі та малі літери та цифри.\n"
+"Введіть новий пароль (від %d до %d символів)\n"
+"Будь ласка, скористайтеся комбінацією великих і малих літер та цифр.\n"
 
 msgid "New password: "
 msgstr "Новий пароль: "
@@ -1800,24 +1985,26 @@ msgid ""
 "Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Застереження: Поганий пароль (введіть його знову, якщо все одно бажаєте його "
+"Попередження: надто простий пароль (введіть його знову, якщо все одно бажаєте"
+" його "
 "використовувати)."
 
 msgid "They don't match; try again.\n"
-msgstr "Не співпадає; спробуйте знову.\n"
+msgstr "Паролі не збігаються; спробуйте знову.\n"
 
 #, c-format
 msgid "The password for %s cannot be changed.\n"
 msgstr "Пароль для %s не може бути змінений.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "The password for %s cannot be changed yet.\n"
-msgstr "Пароль для %s не може бути змінений.\n"
+msgstr "Пароль для %s ще не можна міняти.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: shadow passwords required for -e\n"
 msgid "%s: malformed password data obtained for user %s\n"
-msgstr "%s: приховані паролі потрібні для -e\n"
+msgstr ""
+"%s: помилкове форматування даних пароля, отриманих для користувача %s\n"
 
 #, c-format
 msgid ""
@@ -1825,18 +2012,21 @@ msgid ""
 "You should set a password with usermod -p to unlock the password of this "
 "account.\n"
 msgstr ""
+"%s: розблокування пароля призведе до отримання облікового запису без пароля.\n"
+"Вам слід встановити пароль за допомогою usermod -p, щоб розблокувати пароль"
+" для цього облікового запису.\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: сховище %s не підтримується\n"
+msgstr "%s: підтримки сховища %s не передбачено\n"
 
 #, c-format
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
-msgstr ""
+msgstr "%s: root не уповноважено SELinux не зміну пароля %s\n"
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s: Ви не можете дивитися та змінювати парольну інформацію для %s.\n"
+msgstr "%s: ви не можете переглядати та змінювати дані щодо паролів для %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1846,149 +2036,160 @@ msgstr "Зміна пароля для %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Пароль для %s не змінено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: password changed.\n"
-msgstr "Пароль змінено."
+msgstr "%s: пароль змінено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [пароль]\n"
+"\n"
+"Параметри:\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] [passwd [shadow]]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] [пароль [прихованість]]\n"
+"\n"
+"Параметри:\n"
 
 msgid "  -q, --quiet                   report errors only\n"
-msgstr ""
+msgstr "  -q, --quiet                   повідомляти лише про помилки\n"
 
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
+"%s: не можна використовувати файл прихованих паролів, якщо увімкнено"
+" USE_TCB.\n"
 
 msgid "invalid password file entry"
-msgstr "невірний запис у файлі паролів"
+msgstr "некоректний запис у файлі паролів"
 
 msgid "duplicate password entry"
-msgstr "дублюючий запис у файлі паролів"
+msgstr "дублювання запису у файлі паролів"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
-msgstr "%s: невірне ім'я користувача '%s'\n"
+msgstr ""
+"некоректне ім'я користувача «%s»: скористайтеся --badname, щоб ігнорувати\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid user ID '%lu'\n"
-msgstr "невірне ім'я користувача '%s'\n"
+msgstr "некоректний ідентифікатор користувача «%lu»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "user '%s': no group %lu\n"
-msgstr "користувач %s: не має групи %u\n"
+msgstr "користувач «%s»: немає групи %lu\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "user '%s': directory '%s' does not exist\n"
-msgstr "користувач %s: тека %s не існує\n"
+msgstr "користувач «%s»: каталогу «%s» не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "user '%s': program '%s' does not exist\n"
-msgstr "користувач %s: програма %s не існує\n"
+msgstr "користувач «%s»: програми «%s» не існує\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no tcb directory for %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "немає каталогу tcb для %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "create tcb directory for %s?"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "створити каталог tcb для %s?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "failed to create tcb directory for %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "не вдалося створити каталог tcb для %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot lock %s.\n"
-msgstr "%s: не можу заблокувати файл %s\n"
+msgstr "%s: не вдалося заблокувати %s.\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "відсутній відповідний запис у файлі паролів %s\n"
+msgstr "немає відповідного запису у файлі паролів %s\n"
 
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "додати користувача \"%s\" в %s? "
+msgstr "додати користувача «%s» до %s? "
 
 #, c-format
 msgid ""
 "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
+"запис користувача %s містить запис у %s, але її поле пароля у %s не"
+" встановлено у"
+" значення «x»\n"
 
 msgid "invalid shadow password file entry"
-msgstr "невірний запис у файлі прихованих паролів"
+msgstr "некоректний запис у файлі прихованих паролів"
 
 msgid "duplicate shadow password entry"
-msgstr "дублюючий запис у файлі прихованих паролів"
+msgstr "дублювання запису у файлі прихованих паролів"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
 msgstr "користувач %s: остання зміна пароля у майбутньому\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot sort entries in %s\n"
-msgstr "%s: не можу відкрити файл %s\n"
+msgstr "%s: не вдалося упорядкувати записи у %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't work with tcb enabled\n"
-msgstr "%s: не можу переписати файл\n"
+msgstr "%s: не можна працювати з увімкненим tcb\n"
 
 #, c-format
 msgid "%s: failed to change the mode of %s to 0600\n"
-msgstr ""
+msgstr "%s: не вдалося змінити режим доступу %s на 0600\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "Доступ цього користувача до su ЗАБОРОНЕНО.\n"
 
 msgid "Password authentication bypassed.\n"
-msgstr "Аутентифікацію пройдено.\n"
+msgstr "Розпізнавання за паролем обійдено.\n"
 
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Будь ласка введіть Ваш власний пароль для аутентифікації.\n"
+msgstr "Будь ласка, введіть ваш власний пароль для розпізнавання.\n"
 
 #, c-format
 msgid "%s: signal masking malfunction\n"
-msgstr ""
+msgstr "%s: помилкова робота маскування сигналу\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot fork user shell\n"
-msgstr "%s: не можу заблокувати файл %s\n"
+msgstr "%s: не вдалося виконати відгалуження оболонки користувача\n"
 
 #, c-format
 msgid "%s: signal malfunction\n"
-msgstr ""
+msgstr "%s: помилкова роботу сигналів\n"
 
 msgid "Session terminated, terminating shell..."
-msgstr ""
+msgstr "Сеанс перервано, перериваємо роботу оболонки..."
 
 #, c-format
 msgid " ...killed.\n"
-msgstr ""
+msgstr " ...завершено.\n"
 
 #, c-format
 msgid " ...waiting for child to terminate.\n"
-msgstr ""
+msgstr " ...очікуємо на завершення дочірнього процесу.\n"
 
 msgid " ...terminated.\n"
-msgstr ""
+msgstr " ...перервано.\n"
 
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy
 #| msgid ""
 #| "Usage: su [options] [LOGIN]\n"
 #| "\n"
@@ -2016,17 +2217,18 @@ msgid ""
 "\n"
 "If no username is given, assume root.\n"
 msgstr ""
-"Використання: su [параметри] [ЛОГІН]\n"
+"Користування: su [параметри] [-] [користувач [аргументи]]\n"
 "\n"
 "Параметри:\n"
 "  -c, --command КОМАНДА     передати КОМАНДУ запущеній оболонці\n"
 "  -h, --help                вивести це довідкове повідомлення та вийти\n"
 "  -, -l, --login            зробити оболонку вхідною\n"
 "  -m, -p,\n"
-"  --preserve-environment    не скидувати змінні оточення і залишити\n"
+"  --preserve-environment    не скидати змінні середовища і залишити\n"
 "                            таку саму оболонку\n"
-"  -s, --shell ОБОЛОНКА      використати ОБОЛОНКУ замість вказаної в passwd\n"
+"  -s, --shell ОБОЛОНКА      використати ОБОЛОНКУ замість вказаної у passwd\n"
 "\n"
+"Якщо не вказано імені користувача, буде використано користувача root.\n"
 
 #, c-format
 msgid ""
@@ -2034,59 +2236,59 @@ msgid ""
 "(Ignored)\n"
 msgstr ""
 "%s: %s\n"
-"(Ігнорую)\n"
+"(Проігноровано)\n"
 
 #, c-format
 msgid "Password field is empty, this is forbidden for all accounts.\n"
-msgstr ""
+msgstr "Поле пароля є порожнім. Це заборонено для усіх облікових записів.\n"
 
 #, c-format
 msgid "Password field is empty, this is forbidden for super-user.\n"
-msgstr ""
+msgstr "Поле пароля є порожнім Це заборонено для надкористувача.\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Ви не авторизовані для su %s\n"
+msgstr "Вас не уповноважено на використання su %s\n"
 
 msgid "(Enter your own password)"
 msgstr "(Введіть ваш пароль)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Authentication failure\n"
-msgstr "%s: PAM автентифікація не пройшла\n"
+msgstr "%s: помилка розпізнавання\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You are not authorized to su at that time\n"
-msgstr "Ви не авторизовані для su %s\n"
+msgstr "%s: вас не уповноважено на доступ до su цього разу\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "No passwd entry for user '%s'\n"
-msgstr "Бракує запису у базі паролів для 'root'"
+msgstr "Немає запису passwd для користувача «%s»\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: повинно бути запущено з терміналу\n"
+msgstr "%s: має бути запущено з термінала\n"
 
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: помилка %d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot drop the controlling terminal\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося скинути термінал керування\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot execute %s\n"
-msgstr "Не можу виконати %s"
+msgstr "Не вдалося виконати %s\n"
 
 msgid "No password file"
 msgstr "Немає файлу паролів"
 
 msgid "TIOCSCTTY failed"
-msgstr ""
+msgstr "Помилка TIOCSCTTY"
 
 msgid "No password entry for 'root'"
-msgstr "Бракує запису у базі паролів для 'root'"
+msgstr "Бракує запису пароля для «root»"
 
 msgid ""
 "\n"
@@ -2094,7 +2296,7 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Натисніть control-d для виконання звичайного завантаження,\n"
+"Натисніть Ctrl-d для виконання звичайного завантаження,\n"
 "(або введіть пароль адміністратора для відновлення системи):"
 
 msgid "Entering System Maintenance Mode"
@@ -2102,330 +2304,380 @@ msgstr "Входимо у режим відновлення системи"
 
 #, c-format
 msgid "%s: %s was created, but could not be removed\n"
-msgstr ""
+msgstr "%s: було створено %s, але його не вдалося вилучити\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
-msgstr ""
+msgstr "%s: налаштування %s у %s буде проігноровано\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create new defaults file: %s\n"
-msgstr "%s: не можу створити новий файл із значеннями по замовчуванню\n"
+msgstr "%s: не вдалося створити файл із типовими значеннями: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: не можу створити новий файл із значеннями по замовчуванню\n"
+msgstr "%s: не вдалося створити каталог для файла з типовими значеннями\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: не можу створити новий файл із значеннями по замовчуванню\n"
+msgstr "%s: не вдалося створити файл з типовими значеннями\n"
 
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: не можу відкрити новий файл із значеннями по замовчуванню\n"
+msgstr "%s: не вдалося відкрити новий файл із типовими значеннями\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line too long in %s: %s..."
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: надто довгий рядок у %s: %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot create backup file (%s): %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося створити файл резервної копії (%s): %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: rename: %s: %s\n"
-msgstr "%s: перейменування: %s"
+msgstr "%s: перейменування: %s: %s\n"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: група \"%s\" є групою NIS.\n"
+msgstr "%s: група «%s» є групою NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: вказано забагато груп (макс %d).\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Out of memory. Cannot find group '%s'.\n"
-msgstr "%s: бракує пам'яті у update_group\n"
+msgstr "%s: бракує пам'яті. Не вдалося знайти групу «%s».\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options] LOGIN\n"
 "       %s -D\n"
 "       %s -D [options]\n"
 "\n"
 "Options:\n"
-msgstr "Використання: %s [вхідні_данні]\n"
+msgstr ""
+"Користування: %s [параметри] ЗАПИС\n"
+"       %s -D\n"
+"       %s -D [параметри]\n"
+"\n"
+"Параметри:\n"
 
 msgid "      --badname                 do not check for bad names\n"
-msgstr ""
+msgstr "      --badname                 не перевіряти на «погані» назви\n"
 
 msgid ""
 "  -b, --base-dir BASE_DIR       base directory for the home directory of "
 "the\n"
 "                                new account\n"
 msgstr ""
+"  -b, --base-dir БАЗОВИЙ_КАТ    базовий каталог для домашнього каталогу\n"
+"                                нового облікового запису\n"
 
 msgid ""
 "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
+"      --btrfs-subvolume-home    використати підтом BTRFS для домашнього"
+" каталогу\n"
 
 msgid "  -c, --comment COMMENT         GECOS field of the new account\n"
-msgstr ""
+msgstr "  -c, --comment КОМЕНТАР         поле GECOS нового облікового запису\n"
 
 msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr ""
+"  -d, --home-dir ДОМАШНІЙ_КАТ  домашній каталог для нового облікового запису\n"
 
 msgid ""
 "  -D, --defaults                print or change default useradd "
 "configuration\n"
 msgstr ""
+"  -D, --defaults                вивести або змінити типові налаштування"
+" useradd\n"
 
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr ""
+"  -e, --expiredate ДАТА         дата вичерпання строку дії нового облікового"
+" запису\n"
 
 msgid ""
 "  -f, --inactive INACTIVE       password inactivity period of the new "
 "account\n"
 msgstr ""
+"  -f, --inactive НЕАКТИВНИЙ     період неактивності пароля для нового"
+" облікового запису\n"
 
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
+"  -g, --gid ГРУПА               назва або ідентифікатор основної групи"
+" нового\n"
+"                                облікового запису\n"
 
 msgid ""
 "  -G, --groups GROUPS           list of supplementary groups of the new\n"
 "                                account\n"
 msgstr ""
+"  -G, --groups ГРУПИ            список додаткових груп нового\n"
+"                                облікового запису\n"
 
 msgid ""
 "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr ""
+"  -k, --skel КАРКАСНИЙ_КАТАЛОГ  скористатися цим альтернативним каркасним"
+" каталогом\n"
 
 msgid ""
 "  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 msgstr ""
+"  -l, --no-log-init             не додавати користувача до баз даних lastlog"
+" і\n"
+"                                faillog\n"
 
 msgid "  -m, --create-home             create the user's home directory\n"
 msgstr ""
+"  -m, --create-home             створити домашній каталог користувача\n"
 
 msgid ""
 "  -M, --no-create-home          do not create the user's home directory\n"
 msgstr ""
+"  -M, --no-create-home          не створювати домашній каталог користувача\n"
 
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 msgstr ""
+"  -N, --no-user-group           не створювати групу із тією самою назвою, що"
+" і\n"
+"                                назва облікового запису користувача\n"
 
 msgid ""
 "  -o, --non-unique              allow to create users with duplicate\n"
 "                                (non-unique) UID\n"
 msgstr ""
+"  -o, --non-unique              дозволити створювати записи користувачів з\n"
+"                                дубльованими (не унікальними) UID\n"
 
 msgid "  -p, --password PASSWORD       encrypted password of the new account\n"
 msgstr ""
+"  -p, --password ПАРОЛЬ         шифрований пароль для нового облікового"
+" запису\n"
 
 msgid "  -s, --shell SHELL             login shell of the new account\n"
 msgstr ""
+"  -s, --shell ОБОЛОНКА          оболонка входу для нового облікового запису\n"
 
 msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr ""
+"  -u, --uid UID                 ідентифікатор користувача нового облікового"
+" запису\n"
 
 msgid ""
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
 msgstr ""
+"  -U, --user-group              створити групу із тією самою назвою, що і"
+" назва облікового запису\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
 msgstr ""
+"  -Z, --selinux-user SEКОР      використати вказаного SEКОР для прив'язки"
+" користувача SELinux\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
-msgstr "%s: невірна базова тека \"%s\"\n"
+msgstr "%s: некоректна базовий каталог «%s»\n"
 
 #, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s: невірний коментар \"%s\"\n"
+msgstr "%s: некоректний коментар «%s»\n"
 
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr "%s: невірна домашня тека \"%s\"\n"
+msgstr "%s: некоректна домашня тека «%s»\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: приховані паролі потрібні для -e\n"
+msgstr "%s: для -e слід вказати приховані паролі\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: приховані паролі потрібні для -f\n"
+msgstr "%s: для -f слід вказати приховані паролі\n"
 
 #, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s: невірне поле \"%s\"\n"
+msgstr "%s: некоректне поле «%s»\n"
 
 #, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s: невірна оболонка \"%s\"\n"
+msgstr "%s: некоректна оболонка «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Warning: missing or non-executable shell '%s'\n"
-msgstr "%s: застереження: %s не належить %s\n"
+msgstr ""
+"%s: попередження: не знайдено оболонку або вказано непридатну до виконання"
+" оболонку «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot rewrite password file\n"
 msgid "%s: -Z cannot be used with --prefix\n"
-msgstr "%s: не можу переписати файл паролів\n"
+msgstr "%s: -Z не можна використовувати разом із --prefix\n"
 
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
-msgstr ""
+msgstr "%s: -Z потребує ядра із увімкненим SELinux\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to open the faillog file for UID %lu: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося відкрити файл faillog для UID %lu: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: не вдалося скинути запис faillog UID %lu: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to close the faillog file for UID %lu: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося закрити файл faillog для UID %lu: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to open the lastlog file for UID %lu: %s\n"
-msgstr "%s: не можу оновити файл паролів\n"
+msgstr "%s: не вдалося відкрити файл lastlog для UID %lu: %s\n"
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
-msgstr ""
+msgstr "%s: не вдалося скинути запис lastlog UID %lu: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося закрити файл lastlog для UID %lu: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося скинути запис tallylog користувача «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to prepare the new %s entry\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося приготувати новий запис %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: error updating files\n"
 msgid "%s: error while duplicating string %s\n"
-msgstr "%s: помилка оновлення файлу\n"
+msgstr "%s: помилка під час спроби дублювати рядок %s\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: cannot create directory %s\n"
 msgid "%s: cannot set SELinux context for home directory %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr ""
+"%s: не вдалося встановити контекст SELinux для домашнього каталогу %s\n"
 
 #, c-format
 msgid "%s: error while duplicating string in BTRFS check %s\n"
-msgstr ""
+msgstr "%s: помилка під час дублювання рядка у перевірці BTRFS %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
-msgstr "%s: невірна домашня тека \"%s\"\n"
+msgstr "%s: домашній каталог «%s» має бути змонтовано на BTRFS\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to create BTRFS subvolume: %s\n"
-msgstr "не можу змінити власника поштової скриньки"
+msgstr "%s: не вдалося створити підтом BTRFS: %s\n"
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося створити каталог %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: chown on `%s' failed: %m\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: попередження: не вдалося змінити власника на «%s»: %m\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: chmod on `%s' failed: %m\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: попередження: не вдалося змінити режим доступу на «%s»: %m\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: chown on '%s' failed: %m\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: попередження: не вдалося змінити власника на «%s»: %m\n"
 
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
-msgstr ""
+msgstr "%s: не вдалося скинути контекст створення файла SELinux\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot set SELinux context for mailbox file %s\n"
-msgstr "Змінюю вікову інформацію для %s\n"
+msgstr ""
+"%s: не вдалося встановити контекст SELinux для файла поштової скриньки %s\n"
 
 msgid "Creating mailbox file"
-msgstr "Створюється файл поштової скриньки"
+msgstr "Створюємо файл поштової скриньки"
 
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
-"Групу \"mail\" не знайдено. Поштова скринька користувача створюється з "
+"Групу \"mail\" не знайдено. Поштова скринька користувача буде створено із "
 "правами доступу 0600\n"
 
 msgid "Setting mailbox file permissions"
-msgstr "Встановлюються права доступу на файл поштової скриньки"
+msgstr "Встановлюємо права доступу на файл поштової скриньки"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
-msgstr ""
+msgstr "%s попередження: UID %s %d перевищує SYS_UID_MAX %d\n"
 
 #, c-format
 msgid ""
 "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
+"%s попередження: UID %s %d лежить поза межами діапазону від UID_MIN %d до"
+" UID_MAX %d.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' already exists\n"
-msgstr "%s: користувач %s існує\n"
+msgstr "%s: запис користувача «%s» вже існує\n"
 
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: група %s існує - якщо ви бажаєте додати користувача до цієї групи, "
-"використовуйте -g.\n"
+"скористайтеся -g.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't create user\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося створити запис користувача\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: UID %lu is not unique\n"
-msgstr "%s: UID %u не є унікальним\n"
+msgstr "%s: UID %lu не є унікальним\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to create tcb directory for %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося створити каталог tcb для %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't create group\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося створити групу\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't create subordinate user IDs\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося створити ідентифікатори підлеглих користувачів\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't create subordinate group IDs\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: не вдалося створити ідентифікатори підлеглих груп\n"
 
 #, c-format
 msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
+"%s: попередження: не вдалося виконати прив'язку імені користувача %s до"
+" користувача %s.\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "%s: warning: the home directory already exists.\n"
 #| "Not copying any file from skel directory into it.\n"
@@ -2433,8 +2685,8 @@ msgid ""
 "%s: warning: the home directory %s already exists.\n"
 "%s: Not copying any file from skel directory into it.\n"
 msgstr ""
-"%s: увага: домашня тека вже існує.\n"
-"Жоден файл з директорії кістяка не копіюється.\n"
+"%s: попередження: домашній каталог %s вже існує.\n"
+"%s: файли із каталогу skel не буде скопійовано до домашнього каталогу.\n"
 
 msgid ""
 "  -f, --force                   force some actions that would fail "
@@ -2442,132 +2694,167 @@ msgid ""
 "                                e.g. removal of user still logged in\n"
 "                                or files, even if not owned by the user\n"
 msgstr ""
+"  -f, --force                   примусово виконати деякі дії, спроба"
+" виконання яких\n"
+"                                завершилася б помилкою, наприклад, вилучення"
+" користувача,\n"
+"                                який працює у системі, або файлів, навіть"
+" якщо їхнім\n"
+"                                власником не є користувач\n"
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
+"  -r, --remove                  вилучити домашній каталог і буфер поштових"
+" даних\n"
 
 msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
+"  -Z, --selinux-user            вилучити усі прив'язки SELinux для"
+" користувача\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s: group %s not removed because it is not the primary group of user %s.\n"
-msgstr "%s: неможливо змінити користувача \"%s\" у клієнті NIS.\n"
+msgstr ""
+"%s: групу %s не вилучено, оскільки вона не є основною групою користувача %s.\n"
 
 #, c-format
 msgid "%s: group %s not removed because it has other members.\n"
-msgstr ""
+msgstr "%s: групу %s не вилучено, оскільки у ній є інші учасники.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
-"%s: не можу видалити групу %s яка є первинною групою іншого користувача.\n"
+"%s: група %s є основною групою іншого користувача, її не буде вилучено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot remove entry %lu from %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося вилучити запис %lu з %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s mail spool (%s) not found\n"
-msgstr "%s: невірна домашня тека \"%s\"\n"
+msgstr "%s: не знайдено буфера пошти %s (%s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: can't remove %s: %s\n"
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: попередження: не вдалося вилучити %s: %s\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s не належить %s, не видалено\n"
+msgstr "%s: %s не належить %s, не вилучено\n"
 
 #, c-format
 msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
 msgstr ""
+"%s: не вдалося отримати оперативну пам'ять, запис tcb для %s не вилучено.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot drop privileges: %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося скинути привілеї: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove the content of %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося вилучити вміст %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove tcb files for %s: %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося вилучити файли tcb для %s: %s\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: користувач %s є користувачем NIS\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s home directory (%s) not found\n"
-msgstr "%s: невірна домашня тека \"%s\"\n"
+msgstr "%s: не знайдено домашнього каталогу %s (%s)\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: не видалено теку %s (можна видалити домашню теку користувача %s)\n"
+msgstr ""
+"%s: не видалено теку %s (можна вилучити домашній каталог користувача %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 #| msgid "%s: error removing directory %s\n"
 msgid "%s: error removing subvolume %s\n"
-msgstr "%s: помилка видалення теки %s\n"
+msgstr "%s: помилка під час спроби вилучення підтому %s\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: помилка видалення теки %s\n"
+msgstr "%s: помилка вилучення каталогу %s\n"
 
 #, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
+"%s: попередження: не вдалося вилучити прив'язку імені користувача %s до"
+" користувача SELinux.\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
+"  -a, --append                  дописати користувача до допоміжних ГРУП,\n"
+"                                які задано параметром -G, без вилучення\n"
+"                                користувача з інших груп\n"
 
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
-msgstr ""
+msgstr "  -c, --comment КОМЕНТАР        нове значення поля GECOS\n"
 
 msgid ""
 "  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
+"  -d, --home-dir ДОМАШНІЙ_КАТ  новий домашній каталог для облікового запису\n"
 
 msgid ""
 "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
+"  -e, --expiredate ДАТА        встановити строк дії облікового запису у ДАТА\n"
 
 msgid ""
 "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
+"  -f, --inactive НЕАКТИВНИЙ     встановити неактивність пароль після"
+" завершення\n"
+"                                строку дії у стан НЕАКТИВНИЙ\n"
 
 msgid "  -g, --gid GROUP               force use GROUP as new primary group\n"
 msgstr ""
+"  -g, --gid ГРУПА                примусово використати ГРУПУ як нову основну"
+" групу\n"
 
 msgid "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-msgstr ""
+msgstr "  -G, --groups ГРУПИ            новий список допоміжних ГРУП\n"
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
 msgstr ""
+"  -l, --login НОВИЙ_ЗАПИС       нове значення назви облікового запису\n"
 
 msgid "  -L, --lock                    lock the user account\n"
 msgstr ""
+"  -L, --lock                    заблокувати обліковий запис користувача\n"
 
 msgid ""
 "  -m, --move-home               move contents of the home directory to the\n"
 "                                new location (use only with -d)\n"
 msgstr ""
+"  -m, --move-home               пересунути вміст домашнього каталогу до"
+" нового\n"
+"                                місця (лише у поєднанні із -d)\n"
 
 msgid ""
 "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr ""
+"  -o, --non-unique              дозволити використання дублікатів"
+" (неунікальних) UID\n"
 
 msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 msgstr ""
+"  -p, --password ПАРОЛЬ         використати шифрований пароль для нового"
+" пароля\n"
 
 msgid ""
 "  -r, --remove                  remove the user from only the supplemental "
@@ -2575,135 +2862,153 @@ msgid ""
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
+"  -r, --remove                  вилучити користувача лише з допоміжних ГРУП,\n"
+"                                які згадано у параметрі -G, без вилучення\n"
+"                                користувача з інших груп\n"
 
 msgid "  -u, --uid UID                 new UID for the user account\n"
 msgstr ""
+"  -u, --uid UID                 новий UID для облікового запису користувача\n"
 
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
+"  -U, --unlock                  розблокувати обліковий запис користувача\n"
 
 msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
-msgstr ""
+msgstr "  -v, --add-subuids ПЕРШИЙ-ОСТАННІЙ додати діапазон підлеглих UID\n"
 
 msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
-msgstr ""
+msgstr "  -V, --del-subuids ПЕРШИЙ-ОСТАННІЙ вилучити діапазон підлеглих UID\n"
 
 msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
-msgstr ""
+msgstr "  -w, --add-subgids ПЕРШИЙ-ОСТАННІЙ додати діапазон підлеглих GID\n"
 
 msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
-msgstr ""
+msgstr "  -W, --del-subgids ПЕРШИЙ-ОСТАННІЙ вилучити діапазон підлеглих GID\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
 msgstr ""
+"  -Z, --selinux-user SEКОР      нова прив'язка користувача SELinux для"
+" облікового запису користувача\n"
 
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user's password.\n"
 msgstr ""
+"%s: розблокування пароля користувача призведе до отримання облікового запису"
+" без пароля\n"
+"Вам слід встановити пароль за допомогою usermod -p, щоб розблокувати пароль"
+" цього користувача.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: user '%s' already exists in %s\n"
-msgstr "%s: користувач %s існує\n"
+msgstr "%s: запис користувача «%s» вже існує у %s\n"
 
 #, c-format
 msgid "%s: homedir must be an absolute path\n"
-msgstr ""
+msgstr "%s: домашній каталог має бути абсолютним шляхом\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid subordinate uid range '%s'\n"
-msgstr "%s: невірна дата \"%s\"\n"
+msgstr "%s: некоректний діапазон підлеглих UID «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid subordinate gid range '%s'\n"
-msgstr "%s: невірна дата \"%s\"\n"
+msgstr "%s: некоректний діапазон підлеглих GID «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: no options\n"
-msgstr "%s: не можу відкрити файл %s\n"
+msgstr "%s: немає параметрів\n"
 
 #, c-format
 msgid "%s: %s and %s are mutually exclusive flags\n"
-msgstr ""
+msgstr "%s: %s і %s є взаємно виключними прапорцями\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
-msgstr ""
+msgstr "%s: прапорці -L, -p і -U є взаємно виключними\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: приховані паролі потрібні для -e і -f\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: UID '%lu' already exists\n"
-msgstr "Член вже існує\n"
+msgstr "%s: UID «%lu» вже існує\n"
 
 #, c-format
 msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
-msgstr ""
+msgstr "%s: %s не існує, ви не можете скористатися прапорцями %s і %s\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: тека %s існує\n"
+msgstr "%s: каталог %s вже існує\n"
 
 #, c-format
 msgid ""
 "%s: The previous home directory (%s) was not a directory. It is not removed "
 "and no home directories are created.\n"
 msgstr ""
+"%s: попередній домашній каталог (%s) не є каталогом. Його не вилучено, і не"
+" створено домашніх каталогів.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Failed to change ownership of the home directory"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: не вдалося змінити права власності на домашній каталог"
 
 #, c-format
 msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
 msgstr ""
+"%s: помилка: не вдалося пересунути підлеглий том з %s до %s — різні пристрої\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr "%s: увага: не вдалося повністю видалити стару домашню теку %s"
+msgstr "%s: увага: не вдалося повністю вилучити старий домашній каталог %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: не вдалося перейменувати каталог з %s на %s\n"
 
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
+"%s: не вдалося скопіювати запис lastlog користувача %lu до користувача %lu: "
+"%s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
+"%s: не вдалося скопіювати запис faillog користувача %lu до користувача %lu: "
+"%s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: застереження: %s не належить %s\n"
+msgstr "%s: попередження: %s не належить %s\n"
 
 msgid "failed to change mailbox owner"
-msgstr "не можу змінити власника поштової скриньки"
+msgstr "не вдалося змінити власника поштової скриньки"
 
 msgid "failed to rename mailbox"
-msgstr "не можу перейменувати поштову скриньку"
+msgstr "не вдалося перейменувати поштову скриньку"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося вилучити діапазон UID %lu-%lu з «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося додати діапазон UID %lu-%lu до «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося вилучити діапазон GID %lu-%lu з «%s»\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося додати діапазон GID %lu-%lu до «%s»\n"
 
 #, c-format
 msgid ""
@@ -2711,93 +3016,88 @@ msgid ""
 "You may need to modify %s for consistency.\n"
 "Please use the command '%s' to do so.\n"
 msgstr ""
+"У вас змінено %s.\n"
+"Можливо, вам слід внести зміни до %s для забезпечення однорідності.\n"
+"Будь ласка, скористайтеся для цього командою «%s».\n"
 
 msgid "  -g, --group                   edit group database\n"
-msgstr ""
+msgstr "  -g, --group                   редагувати базу даних груп\n"
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr ""
+msgstr "  -p, --passwd                  редагувати базу даних passwd\n"
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr ""
+"  -s, --shadow                  редагувати базу даних shadow або gshadow\n"
 
 msgid "  -u, --user                    which user's tcb shadow file to edit\n"
 msgstr ""
+"  -u, --user                    файл tcb shadow якого користувача слід"
+" редагувати\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to remove %s\n"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "%s: не вдалося вилучити %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s is unchanged\n"
-msgstr ""
-"\n"
-"%s: %s не змінено\n"
+msgstr "%s: %s не змінено\n"
 
-#, fuzzy
 msgid "failed to create scratch directory"
-msgstr "не можу перейменувати поштову скриньку"
+msgstr "не вдалося створити тимчасовий каталог"
 
-#, fuzzy
 msgid "failed to drop privileges"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "не вдалося скинути привілеї"
 
-#, fuzzy
 msgid "Couldn't get file context"
-msgstr "Не можу блокувати файл"
+msgstr "Не вдалося отримати контекст файла"
 
 msgid "setfscreatecon () failed"
-msgstr ""
+msgstr "помилка setfscreatecon ()"
 
-#, fuzzy
 msgid "failed to gain privileges"
-msgstr "%s: не вдалося скинути привілеї (%s)\n"
+msgstr "не вдалося набути привілеї"
 
 msgid "Couldn't lock file"
-msgstr "Не можу блокувати файл"
+msgstr "Не вдалося блокувати файл"
 
 msgid "Couldn't make backup"
-msgstr "Не можу зробити резервну копію"
+msgstr "Не вдалося зробити резервну копію"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s\n"
-msgstr "%s: %s\n"
+msgstr "%s: %s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s returned with status %d\n"
-msgstr "%s: %s не знайдено у /etc/passwd\n"
+msgstr "%s: %s повернуто керування зі станом %d\n"
 
 #, c-format
 msgid "%s: %s killed by signal %d\n"
-msgstr ""
+msgstr "%s: роботу %s завершено сигналом %d\n"
 
-#, fuzzy
 msgid "failed to open scratch file"
-msgstr "Неможливо відкрити файл груп\n"
+msgstr "не вдалося відкрити тимчасовий файл"
 
-#, fuzzy
 msgid "failed to unlink scratch file"
-msgstr "%s: поля занадто довгі\n"
+msgstr "не вдалося скасувати символічне посилання на тимчасовий файл"
 
-#, fuzzy
 msgid "failed to stat edited file"
-msgstr "не можу перейменувати поштову скриньку"
+msgstr "не вдалося отримати статистичні дані редагованого файла"
 
-#, fuzzy
 msgid "failed to allocate memory"
-msgstr "не можу змінити власника поштової скриньки"
+msgstr "не вдалося отримати пам'ять"
 
-#, fuzzy
 msgid "failed to create backup file"
-msgstr "не можу перейменувати поштову скриньку"
+msgstr "не вдалося створити файл резервної копії"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: не можу відновити %s: %s (ваші зміни у %s)\n"
+msgstr "%s: не вдалося відновити %s: %s (ваші зміни у %s)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failed to find tcb directory for %s\n"
-msgstr "%s: невірна базова тека \"%s\"\n"
+msgstr "%s: не вдалося знайти каталог tcb для %s\n"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Використання: id\n"
