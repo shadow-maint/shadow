@@ -1,6 +1,6 @@
 # LINGUAS
 
-LINGUAS = da de fr it pl ru sv zh_CN
+LINGUAS = da de fr it pl ru sv uk zh_CN
 
 # These variables are generated based on the LINGUAS list
 POFILES = $(patsubst %,$(srcdir)/%.po,$(LINGUAS))
