@@ -720,6 +720,7 @@ AC_CONFIG_FILES([
 	man/ru/Makefile
 	man/sv/Makefile
 	man/tr/Makefile
+	man/uk/Makefile
 	man/zh_CN/Makefile
 	man/zh_TW/Makefile
 	libmisc/Makefile
