@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2022-05-17 11:36+0300\n"
-"PO-Revision-Date: 2022-05-19 21:43+0300\n"
+"PO-Revision-Date: 2022-05-20 21:41+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1365,6 +1365,15 @@ msgid ""
 "any field for any account. Additionally, only the superuser may use the <_:"
 "option-4/> option to change the undefined portions of the GECOS field."
 msgstr ""
+"Команда <_:command-1/> змінює повне ім'я користувача, номер кімнати в офісі,"
+" номер телефону в офісі і дані щодо домашнього телефону для облікового запису"
+" користувача. Ці дані, зазвичай, виводить <_:citerefentry-2/> та подібні"
+" програми. Звичайні користувачі можуть змінювати значення полів лише для"
+" власного облікового запису, відповідно до обмежень у <_:filename-3/>."
+" (Типовими налаштуваннями користувачам заборонено змінювати власне повне"
+" ім'я.) Надкористувач може змінювати будь-яке поле будь-якого облікового"
+" запису. Крім того, лише надкористувач може використовувати параметр <"
+"_:option-4/> для зміни невизначених частин поля GECOS."
 
 #. (itstool) path: para/emphasis
 #: chfn.1.xml.out:77 chfn.1.xml.out:80
@@ -1380,6 +1389,11 @@ msgid ""
 "the phone numbers. The <_:emphasis-2/> field is used to store accounting "
 "information used by other applications."
 msgstr ""
+"Ці поля не повинні містити двокрапок. Окрім поля <_:emphasis-1/>, у полях не"
+" повинно міститися ком та знаків рівності. Також рекомендуємо уникати"
+" символів поза US-ASCII, втім, примусово це обмеження застосовується лише до"
+" номерів телефонів. Поле <_:emphasis-2/> використовують для зберігання"
+" облікових даних, які використовують інші програми."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -1439,6 +1453,9 @@ msgid ""
 "accounting information used by other applications, and can be changed only "
 "by a superuser."
 msgstr ""
+"Змінити інші відомості GECOS користувача. Це поле використовують для"
+" зберігання облікових даних, які використовують інші програми, його вміст"
+" може змінювати надкористувач."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -1528,6 +1545,9 @@ msgid ""
 "If <_:replaceable-1/>, the <_:command-2/> program will require "
 "authentication before making any changes, unless run by the superuser."
 msgstr ""
+"Якщо <_:replaceable-1/>, програма <_:command-2/> вимагатиме від користувача"
+" пройти розпізнавання до внесення будь-яких змін, якщо програму не запущено"
+" від імені надкористувача."
 
 #. (itstool) path: term/option
 #: chfn.1.xml.out:8 login.defs.5.xml.out:8
@@ -1609,6 +1629,15 @@ msgid ""
 "only the superuser can make any changes. The most restrictive setting is "
 "better achieved by not installing <_:command-12/> SUID."
 msgstr ""
+"Цей параметр вказує, які значення у полі <_:emphasis-1/> файла <_:filename-2/"
+"> може бути змінено звичайними користувачами за допомогою програми <"
+"_:command-3/>. Він може бути будь-якою комбінацією літер <_:replaceable-4/>,"
+" <_:replaceable-5/>, <_:replaceable-6/>, <_:replaceable-7/> для повного"
+" імені, номера кімнати, робочого телефону та домашнього телефону, відповідно."
+" Для зворотної сумісності <_:replaceable-8/> є еквівалентом <_:replaceable-9/"
+">, а <_:replaceable-10/> є еквівалентом <_:replaceable-11/>. Якщо не вказано,"
+" лише надкористувач зможе вносити зміни. Найбільш обмежену конфігурацію можна"
+" отримати, якщо не встановлювати SUID для <_:command-12/>."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/phrase
@@ -1626,6 +1655,9 @@ msgid ""
 "\", or a translation of that string. If you set this variable, the prompt "
 "will not be translated."
 msgstr ""
+"Рядок, який буде використано для запитів щодо пароля. Типовим є використання"
+" рядка «Password: » або перекладу цього рядка. Якщо ви встановите значення"
+" цієї змінної, запит не буде перекладено."
 
 #. (itstool) path: para/replaceable
 #: chfn.1.xml.out:16 chsh.1.xml.out:16 login.1.xml.out:16
@@ -1764,6 +1796,9 @@ msgid ""
 "from standard input and uses this information to update a set of existing "
 "groups. Each line is of the format:"
 msgstr ""
+"Команда <_:command-1/> читає список пар назва групи — пароль зі стандартного"
+" джерела вхідних даних і використовує ці дані для оновлення набору наявних"
+" груп. Кожен рядок записується у такому форматі:"
 
 #. (itstool) path: para/emphasis
 #. (itstool) path: arg/replaceable
@@ -1791,6 +1826,8 @@ msgid ""
 "By default the supplied password must be in clear-text, and is encrypted by "
 "<_:command-1/>."
 msgstr ""
+"Типово, наданий пароль має бути простим текстовим. Його буде зашифровано за"
+" допомогою <_:command-1/>."
 
 #. (itstool) path: para/option
 #. (itstool) path: term/option
@@ -1836,6 +1873,9 @@ msgid ""
 "option-1/> variable of <_:filename-2/>, and can be overwritten with the <_:"
 "option-3/>, <_:option-4/>, or <_:option-5/> options."
 msgstr ""
+"Типовий алгоритм шифрування може бути визначено для системи за допомогою"
+" змінної <_:option-1/> у <_:filename-2/>, і може бути перезаписано за"
+" допомогою параметрів <_:option-3/>, <_:option-4/> або <_:option-5/>."
 
 #. (itstool) path: refsect1/para
 #: chgpasswd.8.xml.out:74 chpasswd.8.xml.out:99
@@ -1843,6 +1883,8 @@ msgid ""
 "This command is intended to be used in a large system environment where many "
 "accounts are created at a single time."
 msgstr ""
+"Цю команду призначено для використання у великих системних середовищах, де"
+" одночасно створюють багато облікових записів."
 
 #. (itstool) path: term/option
 #: chgpasswd.8.xml.out:88 chpasswd.8.xml.out:114 newusers.8.xml.out:268
@@ -1919,6 +1961,8 @@ msgid ""
 "The value 0 means that the system will choose the default number of rounds "
 "for the crypt method (5000)."
 msgstr ""
+"Значення 0 означає, що система вибере типову кількість проходів для методу"
+" шифрування (5000)."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:143 chpasswd.8.xml.out:187 newusers.8.xml.out:328
@@ -1941,6 +1985,8 @@ msgid ""
 "By default, the number of rounds is defined by the SHA_CRYPT_MIN_ROUNDS and "
 "SHA_CRYPT_MAX_ROUNDS variables in <_:filename-1/>."
 msgstr ""
+"Типово, кількість проходів визначається за допомогою змінних"
+" SHA_CRYPT_MIN_ROUNDS і SHA_CRYPT_MAX_ROUNDS у <_:filename-1/>."
 
 #. (itstool) path: refsect1/title
 #: chgpasswd.8.xml.out:162 chpasswd.8.xml.out:207 faillog.8.xml.out:208
@@ -1957,6 +2003,8 @@ msgid ""
 "Remember to set permissions or umask to prevent readability of unencrypted "
 "files by other users."
 msgstr ""
+"Не забудьте встановити права доступу або umask, щоб запобігти доступності до"
+" читання нешифрованих файлів сторонніми користувачами."
 
 #. (itstool) path: refsect1/para
 #: chgpasswd.8.xml.out:167 newusers.8.xml.out:352
@@ -1964,6 +2012,8 @@ msgid ""
 "You should make sure the passwords and the encryption method respect the "
 "system's password policy."
 msgstr ""
+"Вам слід переконатися, що паролі і метод шифрування відповідає правилам"
+" поводження з паролями у системі."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:8 chpasswd.8.xml.out:8 gpasswd.1.xml.out:8
@@ -1972,6 +2022,8 @@ msgid ""
 "This defines the system default encryption algorithm for encrypting "
 "passwords (if no algorithm are specified on the command line)."
 msgstr ""
+"Визначає типовий алгоритм шифрування системи для шифрування паролів (якщо"
+" алгоритм не було вказано у рядку команди)."
 
 #. (itstool) path: para/replaceable
 #: chgpasswd.8.xml.out:14 chpasswd.8.xml.out:14 gpasswd.1.xml.out:14
@@ -2063,6 +2115,10 @@ msgid ""
 "user passwords is done by PAM and subject to the PAM configuration. It is "
 "recommended to set this variable consistently with the PAM configuration."
 msgstr ""
+"Зауваження: це стосується лише створення паролів груп. Створення паролів"
+" користувачів буде виконано PAM і визначається налаштуваннями PAM."
+" Рекомендуємо встановити для цієї змінної узгоджене із налаштуваннями PAM"
+" значення."
 
 #. (itstool) path: term/option
 #. (itstool) path: listitem/para
@@ -2197,6 +2253,15 @@ msgid ""
 "replaceable-2/> if you need to copy encrypted passwords to other systems "
 "which don't understand the new algorithm. Default is <_:replaceable-3/>."
 msgstr ""
+"Визначає, чи має бути зашифровано паролі за допомогою алгоритму на основі"
+" MD5. Якщо встановлено значення <_:replaceable-1/>, нові паролі буде"
+" зашифровано за допомогою алгоритму на основі MD5, який сумісний із"
+" алгоритмом, який використано у нещодавніх випусках FreeBSD. Передбачено"
+" підтримку паролів необмеженої довжини і довші рядки бази шифрування."
+" Встановіть значення <_:"
+"replaceable-2/>, якщо вам потрібно скопіювати зашифровані паролі до інших"
+" систем, які не розуміють нового алгоритму. Типовим є значення <"
+"_:replaceable-3/>."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:20 chpasswd.8.xml.out:20 gpasswd.1.xml.out:20
@@ -2205,6 +2270,8 @@ msgid ""
 "This variable is superseded by the <_:option-1/> variable or by any command "
 "line option used to configure the encryption algorithm."
 msgstr ""
+"Пріоритет над цією змінною має змінна <_:option-1/> або будь-який параметр"
+" рядка команди, який використано для налаштовування алгоритму шифрування."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:25 chpasswd.8.xml.out:25 gpasswd.1.xml.out:25
@@ -2246,6 +2313,10 @@ msgid ""
 "defines the number of SHA rounds used by the encryption algorithm by default "
 "(when the number of rounds is not specified on the command line)."
 msgstr ""
+"Якщо для <_:option-1/> встановлено значення <_:replaceable-2/> або <"
+"_:replaceable-3/>, визначає кількість проходів SHA, яку буде типово"
+" використано алгоритмом шифрування (якщо кількість проходів не встановлено у"
+" рядку команди)."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:16 chpasswd.8.xml.out:16 gpasswd.1.xml.out:16
@@ -2254,6 +2325,9 @@ msgid ""
 "With a lot of rounds, it is more difficult to brute forcing the password. "
 "But note also that more CPU resources will be needed to authenticate users."
 msgstr ""
+"Зі збільшенням числа проходів зростає складність визначення пароля простим"
+" перебиранням. Але, слід також зауважити, зростає і навантаження на процесор"
+" при розпізнаванні користувачів."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:21 chpasswd.8.xml.out:21 gpasswd.1.xml.out:21
@@ -2278,6 +2352,8 @@ msgid ""
 "If only one of the <_:option-1/> or <_:option-2/> values is set, then this "
 "value will be used."
 msgstr ""
+"Якщо встановлено лише одне зі значень, <_:option-1/> або <_:option-2/>, буде"
+" використано саме встановлене значення."
 
 #. (itstool) path: listitem/para
 #: chgpasswd.8.xml.out:33 chpasswd.8.xml.out:33 gpasswd.1.xml.out:33
@@ -2388,6 +2464,10 @@ msgid ""
 "standard input and uses this information to update a group of existing "
 "users. Each line is of the format:"
 msgstr ""
+"Команда <_:command-1/> читає список пар ім'я користувача — пароль зі"
+" стандартного джерела вхідних даних і використовує ці дані для оновлення"
+" набору наявних записів користувачів. Кожен рядок записується у такому"
+" форматі:"
 
 #. (itstool) path: para/emphasis
 #. (itstool) path: arg/replaceable
@@ -2403,6 +2483,9 @@ msgid ""
 "By default the passwords must be supplied in clear-text, and are encrypted "
 "by <_:command-1/>. Also the password age will be updated, if present."
 msgstr ""
+"Типово, паролі має бути надано простим текстом. Паролі буде зашифровано за"
+" допомогою <_:command-1/>. Також буде оновлено дані щодо віку пароля, якщо"
+" такі збережено."
 
 #. (itstool) path: refsect1/para
 #: chpasswd.8.xml.out:73
@@ -2411,6 +2494,10 @@ msgid ""
 "option-1/> or <_:option-2/> variables of <_:filename-3/>, and can be "
 "overwritten with the <_:option-4/>, <_:option-5/>, or <_:option-6/> options."
 msgstr ""
+"Типовий алгоритм шифрування може бути визначено для системи за допомогою"
+" змінної <_:option-1/> або <_:option-2/> у <_:filename-3/>, і може бути"
+" перезаписано за допомогою параметрів <_:option-4/>, <_:option-5/> або <"
+"_:option-6/>."
 
 #. (itstool) path: refsect1/para
 #: chpasswd.8.xml.out:81
@@ -2419,11 +2506,14 @@ msgid ""
 "you can select a different encryption method with the <_:option-1/>, <_:"
 "option-2/>, or <_:option-3/> options."
 msgstr ""
+"Типово, паролі шифрує PAM, але (навіть якщо це не рекомендовано) ви можете"
+" вибрати інший метод шифрування за допомогою параметрів <_:option-1/>, <"
+"_:option-2/> або <_:option-3/>."
 
 #. (itstool) path: para/phrase
 #: chpasswd.8.xml.out:88
 msgid "Except when PAM is used to encrypt the passwords,"
-msgstr ""
+msgstr "Окрім випадків, коли для шифрування паролів використано PAM,"
 
 #. (itstool) path: refsect1/para
 #: chpasswd.8.xml.out:87
@@ -2431,6 +2521,9 @@ msgid ""
 "<_:phrase-1/> <_:command-2/> first updates all the passwords in memory, and "
 "then commits all the changes to disk if no errors occurred for any user."
 msgstr ""
+"<_:phrase-1/> <_:command-2/> спершу оновлює усі паролі у пам'яті, а потім"
+" записує усі зміни на диск, якщо не сталося помилок для якогось з"
+" користувачів."
 
 #. (itstool) path: refsect1/para
 #: chpasswd.8.xml.out:93
@@ -2440,6 +2533,10 @@ msgid ""
 "continues updating the passwords of the next users, and will return an error "
 "code on exit."
 msgstr ""
+"Якщо для шифрування паролів використано PAM (і його ж використано для"
+" оновлення паролів у базі даних системи), тоді, якщо пароль не може бути"
+" оновлено, <_:command-1/> продовжить оновлення паролів наступних записів"
+" користувачів і поверне код помилки при виході з програми."
 
 #. (itstool) path: term/replaceable
 #: chpasswd.8.xml.out:114
@@ -2449,7 +2546,7 @@ msgstr "METHOD"
 #. (itstool) path: listitem/para
 #: chpasswd.8.xml.out:125
 msgid "By default, PAM is used to encrypt the passwords."
-msgstr ""
+msgstr "Типово, для шифрування паролів буде використано PAM."
 
 #. (itstool) path: listitem/para
 #: chpasswd.8.xml.out:128
@@ -2458,6 +2555,9 @@ msgid ""
 "options are specified), the encryption method is defined by the <_:option-4/"
 "> or <_:option-5/> variables of <_:filename-6/>."
 msgstr ""
+"Типово, (якщо не вказано жодного з параметрів <_:option-1/>, <_:option-2/>"
+" або <_:option-3/>), метод шифрування буде визначено змінною <_:option-4/>"
+" або <_:option-5/> у <_:filename-6/>."
 
 #. (itstool) path: term/replaceable
 #: chpasswd.8.xml.out:177
@@ -2470,6 +2570,8 @@ msgid ""
 "By default, the number of rounds is defined by the <_:option-1/> and <_:"
 "option-2/> variables in <_:filename-3/>."
 msgstr ""
+"Типово, кількість проходів визначено змінними <_:option-1/> і <_:option-2/> у"
+" <_:filename-3/>."
 
 #. (itstool) path: term/filename
 #: chpasswd.8.xml.out:252
@@ -2744,6 +2846,8 @@ msgid ""
 "<_:filename-1/> maintains a count of login failures and the limits for each "
 "account."
 msgstr ""
+"<_:filename-1/> зберігає кількість помилок під час входу і обмеження для"
+" кожного з облікових записів."
 
 #. (itstool) path: refsect1/para
 #: faillog.5.xml.out:50
@@ -2755,6 +2859,13 @@ msgid ""
 "and the duration (in seconds) during which the account will be locked after "
 "a failure."
 msgstr ""
+"У файлі містяться записи фіксованої довжини, індексовані за числовим UID."
+" Кожен запис містить кількість помилок при вході з моменту останнього"
+" успішного входу до системи; максимальну кількість помилок до вимикання"
+" облікового запису; рядок, на якому сталася помилка під час останньої спроби"
+" увійти до системи; дату останньої помилки під час спроби увійти до системи"
+" та період часу (у секундах), протягом якого обліковий запис буде заблоковано"
+" після помилки."
 
 #. (itstool) path: refsect1/para
 #: faillog.5.xml.out:60
@@ -2799,6 +2910,10 @@ msgid ""
 "command-3/> is run without arguments, it only displays the faillog records "
 "of the users who had a login failure."
 msgstr ""
+"<_:command-1/> показує вміст бази даних помилок під час входу до системи (<"
+"_:filename-2/>). Ця програма також може встановлювати лічильник і обмеження"
+" помилок. Якщо <_:command-3/> запущено без аргументів, програма покаже лише"
+" записи користувачів, при спробах входу до системи яких сталася помилка."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -2835,6 +2950,8 @@ msgid ""
 "In display mode, this is still restricted to existing users but forces the "
 "display of the faillog entries even if they are empty."
 msgstr ""
+"У режимі показу діапазон буде обмежено наявними користувачами, але буде"
+" примусово показано записи faillog, навіть якщо вони є порожніми."
 
 #. (itstool) path: para/option
 #. (itstool) path: term/option
@@ -2851,6 +2968,10 @@ msgid ""
 "system. This is useful to reset records of users that have been deleted or "
 "to set a policy in advance for a range of users."
 msgstr ""
+"З параметрами <_:option-1/>, <_:option-2/>, <_:option-3/>, <_:option-4/>"
+" записи користувачів буде змінено, навіть якщо запису користувача не існує у"
+" системі. Це корисно для скидання записів користувачів, облікові записи яких"
+" було вилучено, або встановлення наперед правил для діапазону користувачів."
 
 #. (itstool) path: term/option
 #: faillog.8.xml.out:105
@@ -2868,11 +2989,15 @@ msgstr "СЕК"
 #: faillog.8.xml.out:108
 msgid "Lock account for <_:replaceable-1/> seconds after failed login."
 msgstr ""
+"Заблокувати обліковий запис на <_:replaceable-1/> секунд після невдалої"
+" спроби увійти до системи."
 
 #. (itstool) path: listitem/para
 #: faillog.8.xml.out:112 faillog.8.xml.out:137 faillog.8.xml.out:149
 msgid "Write access to <_:filename-1/> is required for this option."
 msgstr ""
+"Для користування цим параметром потрібен доступ до запису для файла <"
+"_:filename-1/>."
 
 #. (itstool) path: term/option
 #: faillog.8.xml.out:120
@@ -2891,6 +3016,9 @@ msgid ""
 "Set the maximum number of login failures after the account is disabled to <_:"
 "replaceable-1/>."
 msgstr ""
+"Встановити максимальну кількість невдалих спроб, після якої обліковий запис"
+" буде вимкнено, у значення <_:"
+"replaceable-1/>."
 
 #. (itstool) path: listitem/para
 #: faillog.8.xml.out:127
@@ -2898,6 +3026,8 @@ msgid ""
 "Selecting a <_:replaceable-1/> value of 0 has the effect of not placing a "
 "limit on the number of failed logins."
 msgstr ""
+"Вибір для <_:replaceable-1/> значення 0 призведе до усування обмеження на"
+" кількість невдалих спроб увійти до системи."
 
 #. (itstool) path: para/emphasis
 #. (itstool) path: para/replaceable
@@ -2912,6 +3042,9 @@ msgid ""
 "The maximum failure count should always be 0 for <_:emphasis-1/> to prevent "
 "a denial of services attack against the system."
 msgstr ""
+"Для <_:emphasis-1/> максимальною кількістю невдалих спроб увійти до системи"
+" має завжди бути 0, щоб запобігти спробам атакувати систему, викликавши"
+" відмову в обслуговуванні."
 
 #. (itstool) path: term/option
 #: faillog.8.xml.out:144
@@ -2938,7 +3071,7 @@ msgstr "ДНІ"
 #. (itstool) path: listitem/para
 #: faillog.8.xml.out:171
 msgid "Display faillog records more recent than <_:replaceable-1/>."
-msgstr ""
+msgstr "Показати записи faillog, які є свіжішими за <_:replaceable-1/>."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -2970,6 +3103,9 @@ msgid ""
 "with <_:option-1/>, <_:option-2/> or <_:option-3/> options) only for the "
 "specified user(s)."
 msgstr ""
+"Вивести запис журналу помилок або лічильників помилок і обмежень на помилки"
+" (якщо використано з <_:option-1/>, <_:option-2/> або <_:option-3/>) лише для"
+" вказаних користувачів."
 
 #. (itstool) path: para/replaceable
 #: faillog.8.xml.out:192 lastlog.8.xml.out:148
@@ -3006,6 +3142,8 @@ msgid ""
 "When none of the <_:option-1/>, <_:option-2/>, or <_:option-3/> options are "
 "used, <_:command-4/> displays the faillog record of the specified user(s)."
 msgstr ""
+"Якщо не вказано жодного з параметрів <_:option-1/>, <_:option-2/> або <"
+"_:option-3/>, <_:command-4/> показує запис faillog вказаних користувачів."
 
 #. (itstool) path: refsect1/para
 #: faillog.8.xml.out:209
@@ -3015,6 +3153,12 @@ msgid ""
 "failure, you must explicitly request the user with the <_:option-2/> flag, "
 "or print out all users with the <_:option-3/> flag."
 msgstr ""
+"<_:command-1/> виводить дані лише користувачів, які не мали успішних входів"
+" до системи з моменту останньої помилки. Щоб було виведено запис користувача,"
+" який успішно входив до системи з часу останньої помилки, вам слід явним"
+" чином надіслати запит щодо користувача за допомогою прапорця <_:option-2/>"
+" або наказати програмі вивести дані усіх користувачів за допомогою прапорця <"
+"_:option-3/>."
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: para/command
@@ -3089,7 +3233,7 @@ msgstr " і <_:filename-1/>"
 #: gpasswd.1.xml.out:76
 #| msgid "administrators"
 msgid "administrators,"
-msgstr "адмністраторів,"
+msgstr "адміністраторів,"
 
 #. (itstool) path: refsect1/para
 #: gpasswd.1.xml.out:71
@@ -3097,6 +3241,9 @@ msgid ""
 "The <_:command-1/> command is used to administer <_:filename-2/><_:phrase-3/"
 ">. Every group can have <_:phrase-4/> members and a password."
 msgstr ""
+"Команду <_:command-1/> використовують для адміністрування <_:filename-2/><"
+"_:phrase-3/>. У кожної групи може складатися з <_:phrase-4/> учасників і мати"
+" пароль."
 
 #. (itstool) path: para/option
 #. (itstool) path: term/option
@@ -3112,6 +3259,9 @@ msgid ""
 "administrator(s) and the <_:option-2/> option to define members. They have "
 "all rights of group administrators and members."
 msgstr ""
+"Адміністратори системи можуть скористатися параметром <_:option-1/> для"
+" визначення адміністраторів групи і параметром <_:option-2/> для визначення"
+" учасників. Вони мають усі права адміністраторів і учасників груп."
 
 #. (itstool) path: para/phrase
 #: gpasswd.1.xml.out:86
@@ -3131,6 +3281,9 @@ msgid ""
 "<_:command-1/> called by <_:phrase-2/> <_:phrase-3/> with a group name only "
 "prompts for the new password of the <_:replaceable-4/>."
 msgstr ""
+"Виклик <_:command-1/>, якщо його здійснює <_:phrase-3/> групи «<_:phrase-2/>»"
+" лише із назвою групи, призведе до запиту щодо нового пароля для групи <"
+"_:replaceable-4/>."
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: para/command
@@ -3152,6 +3305,9 @@ msgid ""
 "If a password is set the members can still use <_:citerefentry-1/> without a "
 "password, and non-members must supply the password."
 msgstr ""
+"Якщо пароль встановлено, учасники зможуть продовжити користуватися <"
+"_:citerefentry-1/> без пароля, а тим, хто не є учасником, доведеться вказати"
+" пароль."
 
 #. (itstool) path: refsect2/title
 #: gpasswd.1.xml.out:99
@@ -3165,6 +3321,9 @@ msgid ""
 "is permitted to know the password. However, groups are a useful tool for "
 "permitting co-operation between different users."
 msgstr ""
+"Паролі груп мають неусувну проблему захисту, оскільки пароль знатимуть"
+" декілька осіб. Втім, групи є корисним інструментом для забезпечення"
+" взаємодії між різними користувачами."
 
 #. (itstool) path: refsect1/para
 #: gpasswd.1.xml.out:111
@@ -3226,6 +3385,9 @@ msgid ""
 "will be empty. Only group members will be allowed to use <_:command-2/> to "
 "join the named <_:replaceable-3/>."
 msgstr ""
+"Вилучити пароль із вказаної за назвою групи <_:replaceable-1/>. Пароль групи"
+" стане порожнім. Скористатися <_:command-2/> для долучення до іменованої"
+" групи <_:replaceable-3/> зможуть лише учасники групи."
 
 #. (itstool) path: term/option
 #: gpasswd.1.xml.out:188
@@ -3239,6 +3401,10 @@ msgid ""
 "set to \"!\". Only group members with a password will be allowed to use <_:"
 "command-2/> to join the named <_:replaceable-3/>."
 msgstr ""
+"Обмежити доступ до вказаної за назвою групи <_:replaceable-1/>. Для пароля"
+" групи буде встановлено значення «!». Скористатися <_:"
+"command-2/> для долучення до іменованої групи <_:replaceable-3/> зможуть лише"
+" учасники групи з паролем."
 
 #. (itstool) path: term/option
 #: gpasswd.1.xml.out:204
@@ -3270,13 +3436,13 @@ msgstr "Встановити список учасників групи."
 #. (itstool) path: para/phrase
 #: gpasswd.1.xml.out:231
 msgid "and <_:filename-1/> files."
-msgstr "і файли <_:filename-1/>."
+msgstr "і <_:filename-1/>."
 
 #. (itstool) path: para/phrase
 #: gpasswd.1.xml.out:233
 #| msgid "file"
 msgid "file."
-msgstr "файл."
+msgstr "."
 
 #. (itstool) path: refsect1/para
 #: gpasswd.1.xml.out:229
@@ -3285,6 +3451,9 @@ msgid ""
 "Thus you cannot change any NIS or LDAP group. This must be performed on the "
 "corresponding server."
 msgstr ""
+"Цей інструмент працює лише з файлами <_:filename-1/> <_:phrase-2/> <"
+"_:phrase-3/> Отже, за його допомогою ви не зможете внести зміни до груп NIS"
+" або LDAP. Зміни доведеться вносити на відповідному сервері."
 
 #. (itstool) path: citerefentry/refentrytitle
 #. (itstool) path: refmeta/refentrytitle
@@ -3967,6 +4136,8 @@ msgid ""
 "This option forces the removal of the group, even if there's some user "
 "having the group as the primary one."
 msgstr ""
+"Використання цього параметра призведе до вилучення групи, навіть якщо"
+" лишається якийсь користувач, для якого ця група є основною."
 
 #. (itstool) path: listitem/para
 #: groupdel.8.xml.out:104 groupmod.8.xml.out:179 userdel.8.xml.out:138
@@ -4093,6 +4264,12 @@ msgid ""
 "command-2/> utility is for systems that configure its users to be in their "
 "own name sake primary group (i.e., guest / guest)."
 msgstr ""
+"Команда <_:command-1/> надає змогу користувачеві адмініструвати список"
+" учасників власної групи без потреби у привілеях надкористувача. Допоміжну"
+" програму <_:"
+"command-2/> призначено для систем, у яких облікові запис користувачів"
+" налаштовують так, щоб основною групою для них була група із назвою, яка"
+" збігається із назвою облікового запису користувача (тобто guest / guest)."
 
 #. (itstool) path: refsect1/para
 #: groupmems.8.xml.out:70
@@ -4187,6 +4364,11 @@ msgid ""
 "users to group <_:emphasis-5/> to allow or disallow them using the <_:"
 "command-6/> utility to manage their own group membership list."
 msgstr ""
+"Режимом доступу до виконуваного файла <_:command-1/> має бути <_:literal-2/>"
+" із власником <_:emphasis-3/> і групою <_:emphasis-4/>. Адміністратор системи"
+" може додавати користувачів до групи <_:emphasis-5/>, щоб дозволити або"
+" заборонити їм користуватися програмою <_:command-6/> для керування списком"
+" учасників їхньої власної групи."
 
 #. (itstool) path: refsect1/programlisting
 #: groupmems.8.xml.out:166
@@ -4657,7 +4839,7 @@ msgstr ""
 #. (itstool) path: listitem/para
 #: grpck.8.xml.out:250
 msgid "one or more bad group entries"
-msgstr ""
+msgstr "один або декілька помилкових записів груп"
 
 #. (itstool) path: listitem/para
 #: grpck.8.xml.out:256
@@ -4750,6 +4932,10 @@ msgid ""
 "citerefentry-1/>, for instance ! or *, users will not be able to use a unix "
 "password to access the group (but group members do not need the password)."
 msgstr ""
+"Якщо у полі пароля міститься якийсь рядок, який не є коректним результатом"
+" виконання <_:citerefentry-1/>, наприклад, ! або *, користувачі не зможуть"
+" скористатися паролем unix для доступу до групи (але учасники групи пароля не"
+" потребуватимуть)."
 
 #. (itstool) path: listitem/para
 #: gshadow.5.xml.out:73
@@ -4757,6 +4943,8 @@ msgid ""
 "The password is used when a user who is not a member of the group wants to "
 "gain the permissions of this group (see <_:citerefentry-1/>)."
 msgstr ""
+"Пароль використовуватиметься, коли користувач, який не є учасником групи,"
+" захоче отримати права доступу до цієї групи (див. <_:citerefentry-1/>)."
 
 #. (itstool) path: listitem/para
 #: gshadow.5.xml.out:79
@@ -5130,7 +5318,7 @@ msgstr ""
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:63
 msgid "Each line describes a limit for a user in the form:"
-msgstr ""
+msgstr "Кожен рядок описує обмеження для користувача у такій формі:"
 
 #. (itstool) path: para/emphasis
 #: limits.5.xml.out:66
