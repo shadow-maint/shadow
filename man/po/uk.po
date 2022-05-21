@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2022-05-17 11:36+0300\n"
-"PO-Revision-Date: 2022-05-20 21:41+0300\n"
+"PO-Revision-Date: 2022-05-21 20:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -4683,6 +4683,11 @@ msgid ""
 "format and contain valid data. The user is prompted to delete entries that "
 "are improperly formatted or which have other uncorrectable errors."
 msgstr ""
+"Команду <_:command-1/> призначено для перевірки цілісності даних щодо груп."
+" Вона перевіряє, чи усі записи у <_:filename-2/> <_:phrase-3/> мають належне"
+" форматування і містять чинні дані. Програма попросить користувача вилучити"
+" записи із помилковим форматуванням або іншими непридатними до виправлення"
+" помилками."
 
 #. (itstool) path: refsect1/para
 #: grpck.8.xml.out:69 pwck.8.xml.out:82
@@ -4741,18 +4746,26 @@ msgid ""
 "warnings and the user is encouraged to run the <_:command-1/> command to "
 "correct the error."
 msgstr ""
+"Перевірки належної кількості полів та унікальності назв груп є критичними."
+" Якщо у записі помилкова кількість полів, програма попросить користувача"
+" вилучити увесь рядок. Якщо користувач не підтвердить дію з вилучення, усі"
+" наступні перевірки буде пропущено. Якщо буде виявлено запис із дублюванням"
+" групи, програма попросить вилучити його, але якщо у цьому буде відмовлено,"
+" виконає решту перевірок. Усі інші помилки вважатимуться незначними —"
+" користувачу буде рекомендовано віддати команду <_:command-1/>, щоб виправити"
+" помилку."
 
 #. (itstool) path: para/phrase
 #. (itstool) path: arg/replaceable
 #. (itstool) path: para/replaceable
 #: grpck.8.xml.out:113 newusers.8.xml.out:67 newusers.8.xml.out:75
 msgid "file"
-msgstr "file"
+msgstr "файл"
 
 #. (itstool) path: para/phrase
 #: grpck.8.xml.out:114
 msgid "and <_:filename-1/> files"
-msgstr "і файли <_:filename-1/>"
+msgstr "і <_:filename-1/>"
 
 #. (itstool) path: refsect1/para
 #: grpck.8.xml.out:111
@@ -4761,6 +4774,9 @@ msgid ""
 "are not able to alter corrupted or duplicated entries. <_:command-4/> should "
 "be used in those circumstances to remove the offending entries."
 msgstr ""
+"Команди, які мають справу з <_:filename-1/> <_:phrase-2/><_:phrase-3/>, не"
+" зможуть змінити пошкоджені або дубльовані записи. У цих випадках слід"
+" скористатися <_:command-4/> для вилучення помилкових записів."
 
 #. (itstool) path: refsect1/para
 #: grpck.8.xml.out:123 pwck.8.xml.out:154
@@ -4780,6 +4796,9 @@ msgid ""
 "questions regarding changes to be answered <_:emphasis-2/> without user "
 "intervention."
 msgstr ""
+"Виконати команду <_:command-1/> у режимі лише читання. Це призведе до того,"
+" що програма вважатиме відповідями на усі свої питання значення <"
+"_:emphasis-2/> і ні про що не запитуватиме користувача."
 
 #. (itstool) path: term/option
 #: grpck.8.xml.out:160 pwck.8.xml.out:208
@@ -4789,7 +4808,7 @@ msgstr "--sort"
 #. (itstool) path: listitem/para
 #: grpck.8.xml.out:162
 msgid "Sort entries in <_:filename-1/> <_:phrase-2/> by GID."
-msgstr ""
+msgstr "Упорядкувати записи у <_:filename-1/> <_:phrase-2/> за GID."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -4817,16 +4836,19 @@ msgid ""
 "inconsistency between group members listed in <_:filename-1/> and <_:"
 "filename-2/>."
 msgstr ""
+"Придушити сумнівні попередження, зокрема попередження щодо неузгодженості між"
+" списками учасників групи у <_:filename-1/> і <_:"
+"filename-2/>."
 
 #. (itstool) path: para/phrase
 #: grpck.8.xml.out:188
 msgid "parameter."
-msgstr "параметр."
+msgstr "."
 
 #. (itstool) path: para/phrase
 #: grpck.8.xml.out:189
 msgid "and <_:emphasis-1/> parameters."
-msgstr ""
+msgstr "і <_:emphasis-1/>."
 
 #. (itstool) path: refsect1/para
 #: grpck.8.xml.out:182
@@ -4835,6 +4857,10 @@ msgid ""
 "user may select alternate files with the <_:emphasis-4/> <_:phrase-5/> <_:"
 "phrase-6/>"
 msgstr ""
+"Типово, <_:command-1/> працює з <_:filename-2/> <_:phrase-3/>. Користувач"
+" може вибрати альтернативні файли за допомогою <_:emphasis-4/> <_:phrase-5/>"
+" <_:"
+"phrase-6/>"
 
 #. (itstool) path: listitem/para
 #: grpck.8.xml.out:250
@@ -5307,6 +5333,10 @@ msgid ""
 "<_:filename-3/>) describes the resource limits you wish to impose. It should "
 "be owned by root and readable by root account only."
 msgstr ""
+"Файл <_:emphasis-1/> (типово, <_:filename-2/> або LIMITS_FILE, який визначено"
+" <_:filename-3/>) описує обмеження на ресурси, які ви хочете накласти."
+" Власником файла має бути root. Доступ до читання даних з файла повинен мати"
+" лише користувач root."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:57
@@ -5314,6 +5344,9 @@ msgid ""
 "By default no quota is imposed on 'root'. In fact, there is no way to impose "
 "limits via this procedure to root-equiv accounts (accounts with UID 0)."
 msgstr ""
+"Типово, квота не накладатиметься на «root». Фактично, немає способу накласти"
+" обмеження за допомогою цієї процедури на еквівалентні root облікові записи"
+" (облікові записи із UID 0)."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:63
@@ -5328,7 +5361,7 @@ msgstr "user LIMITS_STRING"
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:69
 msgid "or in the form:"
-msgstr ""
+msgstr "або у такій формі:"
 
 #. (itstool) path: para/emphasis
 #: limits.5.xml.out:72
@@ -5346,6 +5379,9 @@ msgid ""
 "The <_:emphasis-1/> is a string of a concatenated list of resource limits. "
 "Each limit consists of a letter identifier followed by a numerical limit."
 msgstr ""
+"<_:emphasis-1/> є рядком об'єднаного списку обмежень ресурсів. Кожен запис"
+" обмеження складається з літери-ідентифікатора, за яким вказано числове"
+" обмеження."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:81
@@ -5355,12 +5391,12 @@ msgstr "Коректні ідентифікатори:"
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:84
 msgid "A: max address space (KB)"
-msgstr ""
+msgstr "A: максимальний простір адрес (у кБ)"
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:85
 msgid "C: max core file size (KB)"
-msgstr ""
+msgstr "C: максимальний розмір файла ядра (у кБ)"
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:86
@@ -5380,22 +5416,24 @@ msgstr "umask"
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:88
 msgid "K: file creation mask, set by <_:citerefentry-1/>."
-msgstr ""
+msgstr "K: маска створення файла, встановлена <_:citerefentry-1/>."
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:93
 msgid "I: max nice value (0..39 which translates to 20..-19)"
 msgstr ""
+"I: максимальне значення nice (у діапазоні 0..39, який відображається на"
+" значення 20..-19)"
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:95
 msgid "L: max number of logins for this user"
-msgstr ""
+msgstr "L: максимальна кількість входів для цього користувача"
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:96
 msgid "M: max locked-in-memory address space (KB)"
-msgstr ""
+msgstr "M: максимальний простір заблокований у пам'яті адрес (у кБ)"
 
 #. (itstool) path: listitem/para
 #: limits.5.xml.out:97
@@ -5475,6 +5513,9 @@ msgid ""
 "limit string, thus comments are not allowed. An invalid limits string will "
 "be rejected (not considered) by the <_:command-2/> program."
 msgstr ""
+"Зважайте на те, що після <_:emphasis-1/> решта рядка вважається рядком"
+" обмеження, тому коментарі там заборонено. Некоректний рядок обмежень буде"
+" відкинуто (не взято до уваги) програмою <_:command-2/>."
 
 #. (itstool) path: para/emphasis
 #: limits.5.xml.out:129
@@ -5484,7 +5525,7 @@ msgstr "*"
 #. (itstool) path: para/emphasis
 #: limits.5.xml.out:130
 msgid "default"
-msgstr ""
+msgstr "default"
 
 #. (itstool) path: para/emphasis
 #: limits.5.xml.out:131
@@ -5498,6 +5539,9 @@ msgid ""
 "multiple <_:emphasis-2/> entries in your <_:emphasis-3/>, then the last one "
 "will be used as the default entry."
 msgstr ""
+"Типовий запис буде позначено іменем користувача «<_:emphasis-1/>». Якщо у вас"
+" декілька записів <_:emphasis-2/> у вашому <_:emphasis-3/>, як типовий буде"
+" використано останній запис."
 
 #. (itstool) path: para/replaceable
 #: limits.5.xml.out:136 limits.5.xml.out:148
@@ -5511,6 +5555,8 @@ msgid ""
 "The limits specified in the form \"<_:replaceable-1/>\" apply to the members "
 "of the specified <_:replaceable-2/>."
 msgstr ""
+"Обмеження, які задано у формі «<_:replaceable-1/>», буде застосовано до"
+" учасників вказаної групи <_:replaceable-2/>."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:141
@@ -5518,6 +5564,8 @@ msgid ""
 "If more than one line with limits for a user exist, only the first line for "
 "this user will be considered."
 msgstr ""
+"Якщо існує декілька рядків із обмеженнями для користувача, враховано буде"
+" лише перший з рядків."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:146
@@ -5526,6 +5574,10 @@ msgid ""
 "matching a group whose the user is a member of will be considered, or the "
 "last line with default limits if no groups contain the user."
 msgstr ""
+"Якщо для користувача не вказано жодного рядка, буде враховано останній з"
+" рядків <_:replaceable-1/> для групи, учасником якої є користувач, або"
+" останній рядок із типовими обмеженнями, якщо немає груп, учасником яких є"
+" користувач."
 
 #. (itstool) path: para/emphasis
 #. (itstool) path: para/replaceable
@@ -5545,6 +5597,8 @@ msgid ""
 "To completely disable limits for a user, a single dash \"<_:emphasis-1/>\" "
 "will do."
 msgstr ""
+"Щоб повністю вимкнути обмеження для користувача, скористайтеся одинарним"
+" дефісом «<_:emphasis-1/>»."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:158
@@ -5552,6 +5606,8 @@ msgid ""
 "To disable a limit for a user, a single dash \"<_:replaceable-1/>\" can be "
 "used instead of the numerical value for this limit."
 msgstr ""
+"Щоб вимкнути якесь обмеження для користувача, скористайтеся замість числового"
+" значення цього обмеження одинарним дефісом «<_:replaceable-1/>»."
 
 #. (itstool) path: refsect1/para
 #: limits.5.xml.out:164
@@ -5560,6 +5616,9 @@ msgid ""
 "global, nor are they permanent. Perhaps global limits will come, but for now "
 "this will have to do ;)"
 msgstr ""
+"Також, будь ласка, зауважте, що усі параметри обмежень буде встановлено на"
+" період роботи у системі. Вони не є загальними і не є сталими. Можливо,"
+" колись загальні обмеження буде реалізовано, але поки усе ось так. ;)"
 
 #. (itstool) path: citerefentry/refentrytitle
 #: limits.5.xml.out:191
@@ -5618,6 +5677,16 @@ msgid ""
 "user to return to the session of the caller). Attempting to execute <_:"
 "command-6/> from any shell but the login shell will produce an error message."
 msgstr ""
+"Програму <_:command-1/> призначено для встановлення нового сеансу роботи з"
+" системою. Зазвичай, її виклик відбувається автоматично у відповідь на запит"
+" <_:emphasis-2/> у терміналі користувача. <_:command-3/> може бути"
+" спеціалізованою для оболонки і непридатною до виклику у форматі підлеглого"
+" процесу. Якщо програму викликано з оболонки, <_:command-4/> має бути"
+" виконано як <_:emphasis-5/>, що спричинить вихід користувача з поточної"
+" оболонки (і, таким чином, запобігатиме поверненню користувача, який увійшов"
+" до системи, до сеансу того, хто віддав команду). Спроба виконати <"
+"_:command-6/> з будь-якої командної оболонки, окрім оболонки входу, призведе"
+" до виведення повідомлення про помилку."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:116
@@ -5627,6 +5696,11 @@ msgid ""
 "failures are permitted before <_:command-1/> exits and the communications "
 "link is severed."
 msgstr ""
+"Після цього, користувачеві, якщо це потрібно, буде запропоновано ввести"
+" пароль. Відтворення пароля на екрані буде вимкнено, щоб запобігти розкриттю"
+" пароля. Кількість спроб буде суттєво обмежено. При перевищенні граничної"
+" кількості спроб ввести пароль <_:command-1/> завершить роботу і перерве"
+" зв'язок для обміну даними."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:123
@@ -5636,6 +5710,11 @@ msgid ""
 "password and the new password before continuing. Please refer to <_:"
 "citerefentry-1/> for more information."
 msgstr ""
+"Якщо для вашого облікового запису було увімкнено застарівання паролів,"
+" програма може попросити вас ввести новий пароль, перш ніж продовжити роботу."
+" Вам доведеться ввести старий і новий пароль, перш ніж продовжити роботу."
+" Будь ласка, зверніться до підручника з <_:citerefentry-1/>, щоб дізнатися"
+" більше."
 
 #. (itstool) path: para/filename
 #. (itstool) path: term/filename
@@ -5674,6 +5753,13 @@ msgid ""
 "\"<_:emphasis-4/>\", or \"<_:emphasis-5/>\" according to the condition of "
 "your mailbox."
 msgstr ""
+"Після успішного входу до системи вас буде проінформовано про усі повідомлення"
+" системи та наявність пошти. Ви можете вимкнути виведення даних до файла"
+" повідомлень системи, <_:filename-1/>, створенням файла нульового розміру <"
+"_:filename-2/> у вашому каталозі для входу. Повідомленням про пошту буде одне"
+" з таких повідомлень: «<_:emphasis-3/>», "
+"«<_:emphasis-4/>» або «<_:emphasis-5/>», відповідно до стану вашої поштової"
+" скриньки."
 
 #. (itstool) path: para/envar
 #: login.1.xml.out:146 passwd.5.xml.out:126 su.1.xml.out:247
@@ -5711,6 +5797,11 @@ msgid ""
 "in the password entry. Ulimit, umask and nice values may also be set "
 "according to entries in the GECOS field."
 msgstr ""
+"Ваші ідентифікатори користувача і групи буде встановлено відповідно до"
+" значень у файлі <_:filename-1/>. Значення <_:envar-2/>, <_:envar-3/>, <"
+"_:envar-4/>, <_:envar-5/> і <_:envar-6/> буде встановлено відповідно до"
+" відповідних полів у записі пароля. Значення ulimit, umask і nice також може"
+" бути встановлено  відповідно до записів у полі GECOS."
 
 #. (itstool) path: para/envar
 #: login.1.xml.out:154 su.1.xml.out:264
@@ -5730,6 +5821,10 @@ msgid ""
 "initialized to the terminal type on your tty line, as specified in <_:"
 "filename-2/>."
 msgstr ""
+"У деяких встановлених системах змінну середовища <_:envar-1/> буде"
+" ініціалізовано значенням типу термінала у вашому рядку tty, як це вказано у"
+" <_:"
+"filename-2/>."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:158
@@ -5738,6 +5833,9 @@ msgid ""
 "Please see the appropriate manual section for more information on this "
 "function."
 msgstr ""
+"Також може бути виконано скрипт ініціалізації для вашого інтерпретатора"
+" командного рядка. Будь ласка, зверніться до відповідного розділу підручника,"
+" щоб дізнатися більше про цю функціональну можливість."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:164 su.1.xml.out:112
@@ -5775,16 +5873,23 @@ msgid ""
 "user you use will continue to appear to be logged in even after you log out "
 "of the \"subsession\"."
 msgstr ""
+"Програма <_:command-1/> НЕ відповідає за вилучення записів користувачів з"
+" файла utmp. За чищення видимого власника сеансу термінала відповідають <"
+"_:citerefentry-2/> і <_:"
+"citerefentry-3/>. Якщо ви користуєтеся <_:command-4/> з запиту командної"
+" оболонки без <_:command-5/>, використаний вами обліковий запис користувача"
+" продовжуватиме «працювати» у системі, навіть після того, як ви вийдете з"
+" «підлеглого сеансу»."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:193
 msgid "Do not perform authentication, user is preauthenticated."
-msgstr ""
+msgstr "Не виконувати розпізнавання, користувача попередньо розпізнано."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:196
 msgid "Note: In that case, <_:replaceable-1/> is mandatory."
-msgstr ""
+msgstr "Зауваження: у цьому випадку обов'язковим є <_:replaceable-1/>."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:207
@@ -5799,7 +5904,7 @@ msgstr "Зберегти середовище."
 #. (itstool) path: listitem/para
 #: login.1.xml.out:223
 msgid "Perform autologin protocol for rlogin."
-msgstr ""
+msgstr "Виконати протокол автоматичного входу для rlogin."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:228
@@ -5807,6 +5912,8 @@ msgid ""
 "The <_:option-1/>, <_:option-2/> and <_:option-3/> options are only used "
 "when <_:command-4/> is invoked by root."
 msgstr ""
+"Параметри <_:option-1/>, <_:option-2/> і <_:option-3/> використовують, лише"
+" якщо <_:command-4/> викликано від імені користувача root."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:237 su.1.xml.out:307
@@ -5821,7 +5928,7 @@ msgstr ""
 #: login.1.xml.out:242
 msgid ""
 "The location of files is subject to differences in system configuration."
-msgstr ""
+msgstr "Розташування файлів є різним у різних конфігураціях системи."
 
 #. (itstool) path: refsect1/para
 #: login.1.xml.out:258
@@ -5832,6 +5939,11 @@ msgid ""
 "machine. Under Linux, the SAK mechanism can be used by users to initiate a "
 "trusted path and prevent this kind of attack."
 msgstr ""
+"Як і з будь-якою програмою, вигляд <_:command-1/> може бути підроблено. Якщо"
+" до комп'ютера мають фізичний доступ сторонні користувачі, зловмисник може"
+" скористатися цим для отримання пароля наступного за ним користувача"
+" комп'ютера. У Linux користувачі можуть скористатися механізмом SAK для"
+" ініціалізації надійного шляху і запобігання атакам цього типу."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/phrase
@@ -6132,6 +6244,8 @@ msgid ""
 "The value can be prefixed \"0\" for an octal value, or \"0x\" for an "
 "hexadecimal value."
 msgstr ""
+"До значення можна дописати префікс «0» для вісімкових чисел або «0x» для"
+" шістнадцяткових чисел."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6143,6 +6257,8 @@ msgstr "FAIL_DELAY"
 msgid ""
 "Delay in seconds before being allowed another attempt after a login failure."
 msgstr ""
+"Затримка у секундах, перш ніж буде дозволено повторну спробу після невдалої"
+" спроби увійти."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/phrase
@@ -6155,6 +6271,8 @@ msgstr "FAILLOG_ENAB"
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "Enable logging and display of <_:filename-1/> login failure info."
 msgstr ""
+"Увімкнути журналювання та показ відомостей щодо помилок при вході з <"
+"_:filename-1/>."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6167,6 +6285,8 @@ msgid ""
 "If set, <_:command-1/> will execute this shell instead of the users' shell "
 "specified in <_:filename-2/>."
 msgstr ""
+"Якщо встановлено, <_:command-1/> виконуватиме цю командну оболонку, замість"
+" командної оболонки користувача, яку вказано у <_:filename-2/>."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/phrase
@@ -6180,6 +6300,8 @@ msgstr "FTMP_FILE"
 msgid ""
 "If defined, login failures will be logged in this file in a utmp format."
 msgstr ""
+"Якщо визначено, невдалі спроби увійти буде записано до цього файла у форматі"
+" utmp."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6195,6 +6317,11 @@ msgid ""
 "then hushed mode will be enabled if the file exists in the user's home "
 "directory."
 msgstr ""
+"Якщо визначено, цей файл може прибрати увесь звичайний обмін повідомленнями"
+" під час послідовності входу до системи. Якщо вказано повний шлях до файла,"
+" тихий режим буде увімкнено, якщо у файлі буде знайдено ім'я або командну"
+" оболонку користувача. Якщо повний шлях вказано не буде, тихий режим буде"
+" увімкнено, якщо файл зберігається у домашньому каталозі користувача."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/phrase
@@ -6206,6 +6333,8 @@ msgstr "ISSUE_FILE"
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "If defined, this file will be displayed before each login prompt."
 msgstr ""
+"Якщо визначено, вміст цього файла буде показано перед кожним запитом щодо"
+" входу до системи."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6220,7 +6349,7 @@ msgstr "025"
 #. (itstool) path: listitem/para
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "Terminal KILL character (<_:replaceable-1/> = CTRL/U)."
-msgstr ""
+msgstr "Символ KILL термінала (<_:replaceable-1/> = CTRL/U)."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6244,6 +6373,8 @@ msgstr "LOGIN_RETRIES"
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "Maximum number of login retries in case of bad password."
 msgstr ""
+"Максимальна кількість можливих повторних спроб увійти, якщо пароль вказано"
+" неправильно."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:13 login.defs.5.xml.out:13
@@ -6253,6 +6384,10 @@ msgid ""
 "in case you are using an authentication module that does not enforce "
 "PAM_MAXTRIES."
 msgstr ""
+"Це значення, найімовірніше, буде перевизначено PAM, оскільки у типового"
+" модуля pam_unix є своє вбудоване значення — 3 спроби. Втім, це безпечне"
+" резервне значення, якщо ви використовуєте модуль розпізнавання, який не"
+" визначає примусово PAM_MAXTRIES."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6284,6 +6419,8 @@ msgstr "LOG_UNKFAIL_ENAB"
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "Enable display of unknown usernames when login failures are recorded."
 msgstr ""
+"Увімкнути показ невідомих імен користувачів, якщо ведеться запис невдалих"
+" спроб увійти до системи."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:14 login.defs.5.xml.out:14
@@ -6291,6 +6428,8 @@ msgid ""
 "Note: logging unknown usernames may be a security issue if an user enter her "
 "password instead of her login name."
 msgstr ""
+"Зауваження: записування до журналу невідомих імен користувачів може знизити"
+" рівень захисту системи: користувач може ввести пароль замість власного імені."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -6417,6 +6556,8 @@ msgid ""
 "If defined, \":\" delimited list of \"message of the day\" files to be "
 "displayed upon login."
 msgstr ""
+"Якщо визначено, під час входу до системи буде показано вміст файлів"
+" відокремлених двокрапками «повідомлень дня»."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6430,6 +6571,9 @@ msgid ""
 "contents of this file should be a message indicating why logins are "
 "inhibited."
 msgstr ""
+"Якщо визначено, назва файла, чия наявність заважатиме входити будь-кому,"
+" окрім root. Вмістом цього файла має бути повідомлення, яке пояснюватиме"
+" причину неможливості входу."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6447,7 +6591,7 @@ msgstr "/etc/porttime"
 #. (itstool) path: listitem/para
 #: login.1.xml.out:10 login.defs.5.xml.out:10
 msgid "Enable checking of time restrictions specified in <_:filename-1/>."
-msgstr ""
+msgstr "Увімкнути перевірку обмежень часу, які вказано у <_:filename-1/>."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -6487,6 +6631,8 @@ msgid ""
 "The terminal permissions: the login tty will be owned by the <_:option-1/> "
 "group, and the permissions will be set to <_:option-2/>."
 msgstr ""
+"Права доступу до термінала: власником термінала входу буде група <_:option-1/"
+">, а для прав доступу буде встановлено значення <_:option-2/>."
 
 #. (itstool) path: para/replaceable
 #: login.1.xml.out:19 login.defs.5.xml.out:19
@@ -6499,6 +6645,8 @@ msgid ""
 "By default, the ownership of the terminal is set to the user's primary group "
 "and the permissions are set to <_:replaceable-1/>."
 msgstr ""
+"Типово, власником термінала є основна група користувача, а типовими правами"
+" доступу є <_:replaceable-1/>."
 
 #. (itstool) path: listitem/para
 #: login.1.xml.out:21 login.defs.5.xml.out:21
@@ -6506,6 +6654,8 @@ msgid ""
 "<_:option-1/> can be either the name of a group or a numeric group "
 "identifier."
 msgstr ""
+"Значенням <_:option-1/> може бути або назва групи, або числовий ідентифікатор"
+" групи."
 
 #. (itstool) path: para/command
 #: login.1.xml.out:26 login.defs.5.xml.out:26
@@ -6520,6 +6670,11 @@ msgid ""
 "0620. Otherwise leave TTYGROUP commented out and assign TTYPERM to either "
 "622 or 600."
 msgstr ""
+"Якщо у вашій системі <_:command-1/> для «setgid» встановлено значення"
+" особливої групи, яка є власником терміналів, визначте для TTYGROUP значення"
+" номера групи, а для TTYPERM — "
+"0620. Якщо не хочете цього робити, лишіть запис TTYGROUP закоментованим і"
+" встановіть для TTYPERM значення 622 або 600."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6532,6 +6687,9 @@ msgid ""
 "If defined, file which maps tty line to TERM environment parameter. Each "
 "line of the file is in a format something like \"vt100 tty01\"."
 msgstr ""
+"Якщо визначено, файл, який пов'язує рядок термінала із параметром середовища"
+" TERM. Кожен рядок цього файла має бути записано у форматі, подібному до"
+" «vt100 tty01»."
 
 #. (itstool) path: term/option
 #: login.1.xml.out:8 login.defs.5.xml.out:8
@@ -6761,7 +6919,7 @@ msgstr "login.access"
 #. (itstool) path: refnamediv/refpurpose
 #: login.access.5.xml.out:42
 msgid "login access control table"
-msgstr ""
+msgstr "таблиця керування доступом до входу до системи"
 
 #. (itstool) path: refsect1/para
 #: login.access.5.xml.out:47
@@ -6769,6 +6927,9 @@ msgid ""
 "The <_:emphasis-1/> file specifies (user, host) combinations and/or (user, "
 "tty) combinations for which a login will be either accepted or refused."
 msgstr ""
+"У файлі <_:emphasis-1/> задають комбінації (користувач, вузол) і/або"
+" (користувач, термінал), для яких вхід до системи буде прийнятним або"
+" забороненим."
 
 #. (itstool) path: refsect1/para
 #: login.access.5.xml.out:53
@@ -6779,6 +6940,11 @@ msgid ""
 "permissions field of that table entry determines whether the login will be "
 "accepted or refused."
 msgstr ""
+"Коли хтось входить до системи, система виконує сканування <_:emphasis-1/> на"
+" перший запис, який відповідає комбінації (користувач, вузол), або, у випадку"
+" позамережевих входів, перший запис, який відповідає комбінації (користувач,"
+" термінал). Поле прав доступу у записі цієї таблиці визначає, буде вхід"
+" прийнято чи заборонено."
 
 #. (itstool) path: refsect1/para
 #: login.access.5.xml.out:61
@@ -6786,6 +6952,8 @@ msgid ""
 "Each line of the login access control table has three fields separated by a "
 "\":\" character:"
 msgstr ""
+"Кожен рядок таблиці керування доступом до входу до системи містить три поля,"
+" які відокремлено символом «:»:"
 
 #. (itstool) path: para/emphasis
 #: login.access.5.xml.out:67
@@ -6843,6 +7011,16 @@ msgid ""
 "does not contain a \"<_:literal-8/>\" character). If you run NIS you can use "
 "@netgroupname in host or user patterns."
 msgstr ""
+"Першим полем має бути символ «<_:emphasis-1/>» (доступ надано) або «<"
+"_:emphasis-2/>» (доступ заборонено). У другому полі має бути список одного"
+" або декількох назв облікових записів, назв груп або <_:emphasis-3/>"
+" (універсальний відповідник). У третьому полі має бути список одного або"
+" декількох терміналів (для немережевих входів), назв вузлів, назв доменів"
+" (починаються з «<_:literal-4/>»), адрес вузлів, мережевих чисел інтернету"
+" (завершуються «<_:literal-5/>»), <_:emphasis-6/> (універсальний відповідник)"
+" або <_:emphasis-7/> (відповідник будь-якого рядка, який не містить символу"
+" «<_:literal-8/>»). Якщо ви працюєте з NIS ви можете скористатися"
+" @netgroupname у взірцях вузла або користувача."
 
 #. (itstool) path: para/emphasis
 #: login.access.5.xml.out:85
@@ -6853,7 +7031,7 @@ msgstr "EXCEPT"
 #: login.access.5.xml.out:84
 msgid ""
 "The <_:emphasis-1/> operator makes it possible to write very compact rules."
-msgstr ""
+msgstr "Оператор <_:emphasis-1/> уможливлює написання дуже компактних правил."
 
 #. (itstool) path: refsect1/para
 #: login.access.5.xml.out:89
@@ -6862,6 +7040,10 @@ msgid ""
 "logged-in user. Only groups are matched in which users are explicitly "
 "listed: the program does not look at a user's primary group id value."
 msgstr ""
+"Пошук у файлі груп відбуватиметься, лише якщо ім'я не збігатиметься із іменем"
+" користувача, що увійшов до системи. Відповідними вважатимуться лише ті"
+" групи, користувачів яких вказано явно: програма не шукатиме у значення"
+" ідентифікаторів основної групи користувача."
 
 #. (itstool) path: refsect1/para
 #: login.access.5.xml.out:110 porttime.5.xml.out:119 suauth.5.xml.out:199
@@ -6880,6 +7062,10 @@ msgid ""
 "shadow password suite. This file is required. Absence of this file will not "
 "prevent system operation, but will probably result in undesirable operation."
 msgstr ""
+"Файл <_:filename-1/> визначає специфічні для системи налаштування для"
+" комплексу керування паролями shadow. Цей файл є необхідним. Якщо цього файла"
+" не завадить працездатності системи, але, ймовірно, призведе до небажаних"
+" наслідків."
 
 #. (itstool) path: refsect1/para
 #: login.defs.5.xml.out:122
@@ -6890,6 +7076,11 @@ msgid ""
 "Comments are introduced with a \"#\" pound sign and the pound sign must be "
 "the first non-white character of the line."
 msgstr ""
+"Цей файл є придатним до читання текстовим файлом, кожен з рядків якого описує"
+" один параметр налаштувань. Рядки складаються з назви налаштування та"
+" значення, які відокремлено пробілом. Порожні рядки і рядки коментарів буде"
+" проігноровано. Коментарі позначають символом «#», цей символ має бути першим"
+" непробільним символом рядка."
 
 #. (itstool) path: para/replaceable
 #: login.defs.5.xml.out:140
@@ -6909,11 +7100,22 @@ msgid ""
 "hexadecimal values (precede the value with <_:replaceable-5/>). The maximum "
 "value of the regular and long numeric parameters is machine-dependent."
 msgstr ""
+"Значення параметрів мають належати до чотирьох типів: рядки, булеві значення,"
+" числа та числа з подвійною точністю. Рядок складається з будь-яких"
+" друкованих символів. Булеве значення має бути одним з двох: <"
+"_:replaceable-1/> або <_:replaceable-2/>. Невизначеному булевому параметру"
+" або булевому параметру, значенням якого не є одне з цих двох значень, буде"
+" надано значення <_:replaceable-3/>. Числа (звичайні і з подвійною точністю)"
+" можуть бути десятковими, вісімковими (їхні записи починаються з <"
+"_:replaceable-4/>) або шістнадцятковими (їхні записи починаються з <"
+"_:replaceable-5/>). Максимальне значення звичайного числового параметра або"
+" числового параметра з подвійною точністю визначається характеристиками"
+" системи."
 
 #. (itstool) path: refsect1/para
 #: login.defs.5.xml.out:145
 msgid "The following configuration items are provided:"
-msgstr ""
+msgstr "У ваше розпорядження надано такі пункти налаштувань:"
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -6950,6 +7152,9 @@ msgid ""
 "Used to select the HMAC cryptography algorithm that the pam_timestamp module "
 "is going to use to calculate the keyed-hash message authentication code."
 msgstr ""
+"Використовують для вибору алгоритму шифрування HMAC, який використає модуль"
+" pam_timestamp для обчислення коду розпізнавання з шифрованим ключем"
+" повідомлення."
 
 #. (itstool) path: para/refentrytitle
 #: login.defs.5.xml.out:16
@@ -6962,6 +7167,8 @@ msgid ""
 "Note: Check <_:refentrytitle-1/><_:manvolnum-2/> to see the possible "
 "algorithms that are available in your system."
 msgstr ""
+"Зауваження: ознайомтеся із <_:refentrytitle-1/><_:manvolnum-2/>, щоб"
+" дізнатися більше про доступні у вашій системі алгоритми."
 
 #. (itstool) path: listitem/para
 #: login.defs.5.xml.out:10 newusers.8.xml.out:10 useradd.8.xml.out:10
@@ -6994,6 +7201,10 @@ msgid ""
 "to indicate this. The result is that pwck will not emit a spurious warning "
 "for this account."
 msgstr ""
+"Якщо у загальносистемного облікового запису спеціально немає домашнього"
+" каталогу, можна вказати цей рядок у записі /etc/passwd для відповідного"
+" облікового запису на позначення цього. У результаті перевірка pwck не"
+" призведе до попередження щодо цього облікового запису."
 
 #. (itstool) path: term/option
 #: login.defs.5.xml.out:8 passwd.1.xml.out:8
@@ -7100,6 +7311,9 @@ msgid ""
 "account creation. Any changes to these settings won't affect existing "
 "accounts."
 msgstr ""
+"<_:option-1/>, <_:option-2/> і <_:option-3/> буде використано лише у момент"
+" створення облікового запису. Будь-які зміни у цих параметрах не вплинуть на"
+" наявні облікові записи."
 
 #. (itstool) path: term/option
 #. (itstool) path: para/option
@@ -7448,22 +7662,22 @@ msgid ""
 "atjobs find $AT_SPOOL_DIR -name \"[^.]*\" -type f -user $1 -delete \\; # "
 "Remove print jobs. lprm $1 # All done. exit 0"
 msgstr ""
-"#! /bin/sh "
-"# Перевіряємо обов'язковий аргумент. "
-"if [ $# != 1 ]; then "
-"     echo \"Usage: $0 username\" "
-"     exit 1 "
-"fi "
-"# Вилучити завдання cron. "
-"crontab -r -u $1 "
-"# Вилучити завдання at. "
-"# Зауважте, що буде вилучено усі завдання, власником яких є той самий UID,"
-"# навіть якщо вони є спільними із іншим користувачем. "
-"AT_SPOOL_DIR=/var/spool/cron/atjobs "
-"find $AT_SPOOL_DIR -name \"[^.]*\" -type f -user $1 -delete \\; "
-"# Вилучити завдання друку. "
-"lprm $1 "
-"# Готово. "
+"#! /bin/sh\n"
+"# Перевіряємо обов'язковий аргумент.\n"
+"if [ $# != 1 ]; then\n"
+"     echo \"Usage: $0 username\"\n"
+"     exit 1\n"
+"fi\n"
+"# Вилучити завдання cron.\n"
+"crontab -r -u $1\n"
+"# Вилучити завдання at.\n"
+"# Зауважте, що буде вилучено усі завдання, власником яких є той самий UID,\n"
+"# навіть якщо вони є спільними із іншим користувачем.\n"
+"AT_SPOOL_DIR=/var/spool/cron/atjobs\n"
+"find $AT_SPOOL_DIR -name \"[^.]*\" -type f -user $1 -delete \\;\n"
+"# Вилучити завдання друку.\n"
+"lprm $1\n"
+"# Готово.\n"
 "exit 0"
 
 #. (itstool) path: listitem/para
@@ -7486,6 +7700,8 @@ msgid ""
 "The following cross references show which programs in the shadow password "
 "suite use which parameters."
 msgstr ""
+"Наведені нижче посилання показують, які програми комплексу для роботи з"
+" паролями shadow використовують відповідні параметри."
 
 #. (itstool) path: listitem/para
 #: login.defs.5.xml.out:241
@@ -7744,6 +7960,12 @@ msgid ""
 "citerefentry-2/>, or less used by <_:citerefentry-3/>, and <_:citerefentry-4/"
 ">. Please refer to the corresponding PAM configuration files instead."
 msgstr ""
+"Багато функціональних можливостей, роботу яких раніше забезпечував комплекс"
+" для роботи з паролями shadow, у сучасних системах реалізовано за допомогою"
+" PAM. Таким чином, <_:filename-1/> більше не використовується <"
+"_:citerefentry-2/> і менше використовується <_:citerefentry-3/> і <"
+"_:citerefentry-4/>. Будь ласка, зверніться до опису відповідних файлів"
+" налаштувань PAM."
 
 #. (itstool) path: citerefentry/refentrytitle
 #: login.defs.5.xml.out:545
@@ -7790,6 +8012,13 @@ msgid ""
 "Any login session which is violating the restrictions in <_:filename-6/> is "
 "terminated."
 msgstr ""
+"<_:command-1/> накладає обмеження на час входу та порт, які вказано у <"
+"_:filename-2/>. <_:command-3/> має бути запущено з <_:filename-4/>. Система"
+" виконуватиме регулярне сканування <_:"
+"filename-5/>. Буде виконано перевірку кожного користувача з метою визначення"
+" того, чи має доступ користувач до іменованого порту у поточний момент часу."
+" Усі сеанси роботи, які порушуватимуть обмеження у <_:filename-6/>, буде"
+" перервано."
 
 #. (itstool) path: listitem/para
 #: logoutd.8.xml.out:70 porttime.5.xml.out:111
@@ -7810,6 +8039,11 @@ msgid ""
 "otherwise the current environment, including current working directory, "
 "remains unchanged."
 msgstr ""
+"Команду <_:command-1/> призначено для зміни поточного ідентифікатора групи"
+" під час сеансу роботи у системі. Якщо вказано необов'язковий прапорець <"
+"_:option-2/>, середовища користувача буде повторно ініціалізовано так, наче"
+" користувач знову увійшов до системи. Якщо прапорець не вказано, лишиться"
+" незмінним поточне середовища, включно із поточним робочим каталогом."
 
 #. (itstool) path: refsect1/para
 #: newgrp.1.xml.out:62
@@ -7823,6 +8057,16 @@ msgid ""
 "listed as a member and the group has a password. The user will be denied "
 "access if the group password is empty and the user is not listed as a member."
 msgstr ""
+"<_:command-1/> змінює поточний справжній ідентифікатор групи на ідентифікатор"
+" іменованої групи або ідентифікатор типової групи зі списку у <_:filename-2/"
+">, якщо назву групи не вказано. <_:command-3/> також намагається додати групу"
+" до набору груп користувача. Якщо команду віддано не від імені root, система"
+" попросить користувача ввести пароль, якщо у нього немає пароля (у <"
+"_:filename-4/>, якщо цей користувач має запис у файлі прихованих паролів, або"
+" у <_:filename-5/>, якщо це не так), а у групи є, або якщо користувача немає"
+" у списку учасників, а групу захищено паролем. Користувачеві буде відмовлено"
+" у доступі, якщо пароль групи є порожнім, а користувача немає у списку її"
+" учасників."
 
 #. (itstool) path: refsect1/para
 #: newgrp.1.xml.out:76
@@ -7831,6 +8075,9 @@ msgid ""
 "members and the password of this group will be taken from this file, "
 "otherwise, the entry in <_:filename-2/> is considered."
 msgstr ""
+"Якщо у цієї групи є запис у <_:filename-1/>, список учасників і пароль до"
+" цієї групи буде взято з цього файла. Якщо запису немає, буде враховано запис"
+" у <_:filename-2/>."
 
 #. (itstool) path: citerefentry/refentrytitle
 #: newgrp.1.xml.out:130 sg.1.xml.out:119
@@ -7850,6 +8097,11 @@ msgid ""
 "to create new users. Each line is in the same format as the standard "
 "password file (see <_:citerefentry-3/>) with the exceptions explained below:"
 msgstr ""
+"Команда <_:command-1/> читає <_:replaceable-2/> (або, типово, стандартного"
+" джерела вхідних даних) і використовує ці дані для оновлення набору наявних"
+" записів користувачів або створення записів нових користувачів. Кожен рядок"
+" записано у тому самому форматі, що і стандартний файл паролів (див. <"
+"_:citerefentry-3/>). Винятки з цього правила описано нижче:"
 
 #. (itstool) path: refsect1/para
 #: newusers.8.xml.out:82
@@ -7873,6 +8125,10 @@ msgid ""
 "created before by <_:command-1/>). In case of an existing user, the user's "
 "information will be changed, otherwise a new user will be created."
 msgstr ""
+"Це може бути ім'я нового користувача або ім'я наявного користувача (або"
+" користувача, запис якого створено раніше за допомогою <_:command-1/>). У"
+" випадку наявного користувача буде змінено дані щодо користувача. Якщо запису"
+" користувача не існуватиме, його буде створено."
 
 #. (itstool) path: term/emphasis
 #: newusers.8.xml.out:104
@@ -7903,6 +8159,8 @@ msgid ""
 "If the field is empty, a new (unused) UID will be defined automatically by "
 "<_:command-1/>."
 msgstr ""
+"Якщо поле є порожнім, новий (невикористаний) UID буде визначено <_:command-1/"
+"> автоматично."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:125
@@ -7916,6 +8174,9 @@ msgid ""
 "created before by <_:command-1/>), the UID of the specified user will be "
 "used."
 msgstr ""
+"Якщо у цьому полі міститься ім'я наявного користувача (або ім'я користувача,"
+" запис якого було створено раніше за допомогою <_:command-1/>), буде"
+" використано UID вказаного користувача."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:135
@@ -7923,6 +8184,8 @@ msgid ""
 "If the UID of an existing user is changed, the files ownership of the user's "
 "file should be fixed manually."
 msgstr ""
+"Якщо буде змінено UID наявного користувача, власність на файли файла"
+" користувача має бути виправлено вручну."
 
 #. (itstool) path: term/emphasis
 #: newusers.8.xml.out:143
@@ -7943,6 +8206,9 @@ msgid ""
 "before by <_:command-1/>), the GID of this group will be used as the primary "
 "group ID for the user."
 msgstr ""
+"Якщо у цьому полі міститься ім'я наявної групи (або групи, яку раніше"
+" створено за допомогою <_:command-1/>), GID цієї групи буде використано як"
+" ідентифікатор основної групи користувача."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:155
@@ -7951,6 +8217,9 @@ msgid ""
 "of the user. If no groups exist with this GID, a new group will be created "
 "with this GID, and the name of the user."
 msgstr ""
+"Якщо у цьому полі записано число, це число буде використано як ідентифікатор"
+" основної групи користувача. Якщо груп із цим GID не існує, буде створено"
+" нову групу з цим GID і назвою, яка збігається із іменем користувача."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:161
@@ -7959,6 +8228,10 @@ msgid ""
 "user and a GID will be automatically defined by <_:command-1/> to be used as "
 "the primary group ID for the user and as the GID for the new group."
 msgstr ""
+"Якщо це поле є порожнім, буде створено нову групу із назвою, яка збігається"
+" із іменем користувача, а GID буде автоматично визначено за допомогою <"
+"_:command-1/> для використання як ідентифікатора основної групи для"
+" користувача і як GID для нової групи."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:167
@@ -7968,6 +8241,11 @@ msgid ""
 "specified name and a GID will be automatically defined by <_:command-2/> to "
 "be used as the primary group ID for the user and GID for the new group."
 msgstr ""
+"Якщо у цьому полі міститься назва групи, якої не існує (і її не було створено"
+" раніше за допомогою <_:command-1/>), буде створено нову групу із вказаною"
+" назвою, а GID буде автоматично визначено за допомогою <_:command-2/> для"
+" використання як ідентифікатора основної групи для користувача і GID для"
+" нової групи."
 
 #. (itstool) path: term/emphasis
 #: newusers.8.xml.out:179
@@ -8006,6 +8284,15 @@ msgid ""
 "return a failure to the calling shell if it fails to create the home "
 "directory, it will continue to process the batch of new users specified."
 msgstr ""
+"Якщо це поле не вказує на наявний каталог, вказаний каталог буде створено."
+" Власником буде користувач, обліковий запис якого буде створено або оновлено,"
+" та його основна група. Зауважте, що <_:emphasis-1/> домашнього каталогу"
+" нового користувача. Команда newusers не зможе створити домашній каталог,"
+" якщо не існує батьківських щодо нього каталогів, і надішле повідомлення до"
+" stderr із інформуванням користувача про помилку. Команда newusers не перерве"
+" роботу і не поверне помилку до оболонки, з якої її віддано, якщо їй не"
+" вдасться створити домашній каталог, а продовжить обробку пакета вказаних"
+" нових користувачів."
 
 #. (itstool) path: listitem/para
 #: newusers.8.xml.out:208
@@ -8014,6 +8301,9 @@ msgid ""
 "not move or copy the content of the old directory to the new location. This "
 "should be done manually."
 msgstr ""
+"Якщо буде змінено домашній каталог наявного користувача, <_:command-1/> не"
+" пересуватиме і не копіюватиме вміст старого каталогу до нового місця. Це"
+" доведеться зробити вручну."
 
 #. (itstool) path: term/emphasis
 #: newusers.8.xml.out:218
@@ -8026,6 +8316,8 @@ msgid ""
 "This field defines the shell of the user. No checks are performed on this "
 "field."
 msgstr ""
+"Це поле визначає командну оболонку користувача. Перевірки щодо вмісту цього"
+" поля не виконуються."
 
 #. (itstool) path: refsect1/para
 #: newusers.8.xml.out:229
@@ -8035,6 +8327,10 @@ msgid ""
 "(except in the final writes to the databases), no changes are committed to "
 "the databases."
 msgstr ""
+"<_:command-1/> спочатку намагається створити або змінити дані усіх вказаних"
+" користувачів, а потім записує ці зміни до баз даних користувачів або груп."
+" Якщо станеться помилка (окрім остаточного запису до баз даних), змін до баз"
+" даних не вноситимуться."
 
 #. (itstool) path: refsect1/para
 #: newusers.8.xml.out:235
@@ -8044,6 +8340,11 @@ msgid ""
 "pass is used to update the passwords using PAM. Failures to update a "
 "password are reported, but will not stop the other password updates."
 msgstr ""
+"Під час першого проходу програма створює записи користувачів із заблокованим"
+" паролем (і паролі не змінено для користувачів, записи яких не створено)."
+" Другий прохід буде використано для оновлення паролів за допомогою PAM. Про"
+" помилки при оновленні паролів буде повідомлено, але оновлення паролів не"
+" буде зупинено."
 
 #. (itstool) path: refsect1/para
 #: newusers.8.xml.out:243
@@ -8051,6 +8352,8 @@ msgid ""
 "This command is intended to be used in a large system environment where many "
 "accounts are updated at a single time."
 msgstr ""
+"Цю команду призначено для використання у великих системних середовищах, де"
+" одночасно оновлюють багато облікових записів."
 
 #. (itstool) path: term/option
 #: newusers.8.xml.out:257 pwck.8.xml.out:164 useradd.8.xml.out:108
@@ -8088,6 +8391,8 @@ msgstr ""
 msgid ""
 "The input file must be protected since it contains unencrypted passwords."
 msgstr ""
+"Файл вхідних даних має бути захищено, оскільки у ньому зберігаються"
+" незашифровані паролі."
 
 #. (itstool) path: term/filename
 #: newusers.8.xml.out:428
@@ -8142,11 +8447,16 @@ msgid ""
 "available and exits non-zero. It is intended as a replacement shell field "
 "for accounts that have been disabled."
 msgstr ""
+"Команда <_:command-1/> виводить повідомлення про те, що обліковий запис є"
+" недоступним, і завершує роботу із ненульовим станом. Команду призначено на"
+" заміну поля командної оболонки для облікових записів, які було вимкнено."
 
 #. (itstool) path: refsect1/para
 #: nologin.8.xml.out:46
 msgid "To disable all logins, investigate <_:citerefentry-1/>."
 msgstr ""
+"Щоб взагалі вимкнути можливість входу, ознайомтеся із документацією до <"
+"_:citerefentry-1/>."
 
 #. (itstool) path: para/command
 #: nologin.8.xml.out:52
@@ -8157,6 +8467,7 @@ msgstr "SSH_ORIGINAL_COMMAND"
 #: nologin.8.xml.out:51
 msgid "If <_:command-1/> is populated it will be logged."
 msgstr ""
+"Якщо встановлено значення <_:command-1/>, дані буде записано до журналу."
 
 #. (itstool) path: refsect1/title
 #: nologin.8.xml.out:69
@@ -8820,6 +9131,8 @@ msgid ""
 "<_:emphasis-1/> contains a list of tty devices, user names, and permitted "
 "login times."
 msgstr ""
+"<_:emphasis-1/> містить список пристроїв терміналів, імен користувачів та"
+" даних щодо дозволеного часу входу до системи."
 
 #. (itstool) path: refsect1/para
 #: porttime.5.xml.out:51
@@ -8831,6 +9144,12 @@ msgid ""
 "matched by this entry. The third field is a comma separated list of "
 "permitted access times."
 msgstr ""
+"Кожен запис складається з трьох відокремлених двокрапками полів. Перше поле є"
+" списком відокремлених комами пристроїв tty або зірочкою на позначення, що"
+" цьому запису відповідають усі пристрої tty. Друге поле є списком"
+" відокремлених комами імен користувачів або зірочкою на позначення, що цьому"
+" запису відповідають усі імена користувачів. Третє поле є списком"
+" відокремлених комами дозволених часів доступу."
 
 #. (itstool) path: para/emphasis
 #: porttime.5.xml.out:62
@@ -8887,6 +9206,13 @@ msgid ""
 "to represent Monday thru Friday, and <_:emphasis-9/> may be used to indicate "
 "every day. If no days are given, <_:emphasis-10/> is assumed."
 msgstr ""
+"Кожен запис часу доступу складається з нуля або більшої кількості скорочених"
+" записів днів тижня: <_:emphasis-1/>, <_:emphasis-2/>, <_:emphasis-3/>, <"
+"_:emphasis-4/>, <_:emphasis-5/>, <_:emphasis-6/> і <_:emphasis-7/>, після"
+" яких вказано проміжок часу з двох значень, які відокремлено дефісом. Можна"
+" скористатися скороченням <_:emphasis-8/> для позначення часу від понеділка"
+" до п'ятниці і скороченням <_:emphasis-9/> для позначення будь-якого дня."
+" Якщо дні не вказано, буде використано <_:emphasis-10/>."
 
 #. (itstool) path: refsect1/title
 #: porttime.5.xml.out:74
@@ -8904,6 +9230,8 @@ msgid ""
 "The following entry allows access to user <_:emphasis-1/> on every port "
 "during weekdays from 9am to 5pm."
 msgstr ""
+"Вказаний нижче запис дозволяє доступ до користувача <_:emphasis-1/> на"
+" будь-якому порту протягом робочого тижня з 9 ранку до 5 вечора."
 
 #. (itstool) path: refsect1/para
 #: porttime.5.xml.out:81
@@ -8928,6 +9256,11 @@ msgid ""
 "filename-4/> file is an ordered list of access times. Any other user would "
 "match the second entry which does not permit access at any time."
 msgstr ""
+"Вказані нижче записи дозволяють доступ лише до користувачів <_:emphasis-1/> і"
+" <_:emphasis-2/> на <_:filename-3/> будь-коли. Цей приклад ілюструє спосіб, у"
+" який файл <_:"
+"filename-4/> є упорядкованим списком часів доступу. Другому запису відповідає"
+" будь-який інший користувач, якому буде заборонено доступ будь-коли."
 
 #. (itstool) path: refsect1/programlisting
 #: porttime.5.xml.out:92
@@ -8942,7 +9275,7 @@ msgstr "console:root,oper:Al0000-2400 console:*:"
 #. (itstool) path: para/emphasis
 #: porttime.5.xml.out:99
 msgid "games"
-msgstr "ігри"
+msgstr "games"
 
 #. (itstool) path: refsect1/para
 #: porttime.5.xml.out:97
@@ -8950,6 +9283,8 @@ msgid ""
 "The following entry allows access for the user <_:emphasis-1/> on any port "
 "during non-working hours."
 msgstr ""
+"Наведений нижче запис дозволяє доступ для користувача <_:emphasis-1/> до"
+" будь-якого порту у неробочий час."
 
 #. (itstool) path: refsect1/para
 #: porttime.5.xml.out:102
@@ -8982,7 +9317,7 @@ msgstr "/etc/tcb"
 #. (itstool) path: para/phrase
 #: pwck.8.xml.out:74
 msgid "(or the files in <_:filename-1/>, when <_:option-2/> is enabled)"
-msgstr ""
+msgstr "(або файли у <_:filename-1/>, якщо увімкнено <_:option-2/>)"
 
 #. (itstool) path: refsect1/para
 #: pwck.8.xml.out:70
@@ -8993,6 +9328,13 @@ msgid ""
 "data. The user is prompted to delete entries that are improperly formatted "
 "or which have other uncorrectable errors."
 msgstr ""
+"Команду <_:command-1/> призначено для перевірки цілісності даних щодо"
+" користувачів і розпізнавання."
+" Вона перевіряє, чи усі записи у <_:filename-2/> і <_:filename-3/><"
+"_:phrase-4/>мають належне"
+" форматування і містять чинні дані. Програма попросить користувача вилучити"
+" записи із помилковим форматуванням або іншими непридатними до виправлення"
+" помилками."
 
 #. (itstool) path: listitem/para
 #: pwck.8.xml.out:88
@@ -9026,6 +9368,8 @@ msgid ""
 "parameter <_:replaceable-1/> is specified or when <_:filename-2/> exists on "
 "the system."
 msgstr ""
+"Перевірки для даних прихованих паролів буде увімкнено, якщо вказано другий"
+" параметр файла <_:replaceable-1/> або якщо у системі існує <_:filename-2/>."
 
 #. (itstool) path: refsect1/para
 #: pwck.8.xml.out:109
@@ -9059,7 +9403,7 @@ msgstr "Записи shadow є унікальними у shadow"
 #. (itstool) path: listitem/para
 #: pwck.8.xml.out:129
 msgid "the last password changes are not in the future"
-msgstr ""
+msgstr "останні зміни паролів не позначено часовими позначками у майбутньому"
 
 #. (itstool) path: refsect1/para
 #: pwck.8.xml.out:133
@@ -9072,6 +9416,17 @@ msgid ""
 "other errors are warnings and the user is encouraged to run the <_:command-1/"
 "> command to correct the error."
 msgstr ""
+"Перевірки належної кількості полів та унікальності імен користувачів є"
+" критичними."
+" Якщо у записі помилкова кількість полів, програма попросить користувача"
+" вилучити увесь рядок. Якщо користувач не підтвердить дію з вилучення, усі"
+" наступні перевірки буде пропущено. Якщо буде виявлено запис із дублюванням"
+" імені користувача, програма попросить вилучити його, але якщо у цьому буде"
+" відмовлено,"
+" виконає решту перевірок. Усі інші помилки вважатимуться незначними —"
+" користувачу буде рекомендовано віддати команду <_:command-1/"
+">, щоб виправити"
+" помилку."
 
 #. (itstool) path: refsect1/para
 #: pwck.8.xml.out:144
@@ -9080,6 +9435,9 @@ msgid ""
 "corrupted or duplicated entries. <_:command-2/> should be used in those "
 "circumstances to remove the offending entry."
 msgstr ""
+"Команди, які мають справу з файлом <_:filename-1 />, не"
+" зможуть змінити пошкоджені або дубльовані записи. У цих випадках слід"
+" скористатися <_:command-2/> для вилучення помилкового запису."
 
 #. (itstool) path: listitem/para
 #: pwck.8.xml.out:181
@@ -9117,6 +9475,9 @@ msgid ""
 "filename-3/><_:phrase-4/>. The user may select alternate files with the <_:"
 "replaceable-5/> and <_:replaceable-6/> parameters."
 msgstr ""
+"Типово, <_:command-1/> працює з файлами <_:filename-2/> і <_:filename-3/><"
+"_:phrase-4/>. Користувач може вибрати альтернативні файли за допомогою"
+" параметрів <_:replaceable-5/> і <_:replaceable-6/>."
 
 #. (itstool) path: refsect1/para
 #: pwck.8.xml.out:230
@@ -9125,6 +9486,9 @@ msgid ""
 "<_:replaceable-2/> file. In future releases, this parameter could be "
 "replaced by an alternate TCB directory."
 msgstr ""
+"Зауважте, що якщо увімкнено <_:option-1/>, ви не зможете вказати"
+" альтернативний файл <_:replaceable-2/>. У майбутніх випусках цей параметр"
+" може бути замінено на альтернативний каталог TCB."
 
 #. (itstool) path: listitem/para
 #: pwck.8.xml.out:300
@@ -9162,6 +9526,8 @@ msgid ""
 "The <_:command-1/> command creates <_:emphasis-2/> from <_:emphasis-3/> and "
 "an optionally existing <_:emphasis-4/>."
 msgstr ""
+"Команда <_:command-1/> створює <_:emphasis-2/> на основі <_:emphasis-3/> і,"
+" необов'язково, наявного <_:emphasis-4/>."
 
 #. (itstool) path: para/command
 #. (itstool) path: citerefentry/refentrytitle
@@ -9178,6 +9544,12 @@ msgid ""
 "tcb password using <_:command-6/> (and re-enable <_:option-7/> in <_:"
 "filename-8/>.)"
 msgstr ""
+"<_:command-1/> не працюватиме, якщо увімкнено <_:option-2/>. Щоб перетворити"
+" дані до паролів tcb, вам слід спочатку скористатися <_:command-3/> для"
+" перетворення даних до прихованих паролів вимиканням <_:option-4/> у <"
+"_:filename-5/>, а потім перетворити дані до паролів tcb за допомогою <"
+"_:command-6/> (і повторно увімкнути <_:option-7/> у <_:"
+"filename-8/>.)"
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:97 pwconv.8.xml.out:118
@@ -9185,6 +9557,8 @@ msgid ""
 "The <_:command-1/> command creates <_:emphasis-2/> from <_:emphasis-3/> and "
 "<_:emphasis-4/> and then removes <_:emphasis-5/>."
 msgstr ""
+"Команда <_:command-1/> створює <_:emphasis-2/> на основі <_:emphasis-3/> і <"
+"_:emphasis-4/>, а потім вилучає <_:emphasis-5/>."
 
 #. (itstool) path: para/command
 #. (itstool) path: citerefentry/refentrytitle
@@ -9199,6 +9573,10 @@ msgid ""
 "switch back from tcb to shadowed passwords using <_:command-3/>, and then "
 "disable <_:option-4/> in <_:filename-5/> before using <_:command-6/>."
 msgstr ""
+"<_:command-1/> не працюватиме, якщо увімкнено <_:option-2/>. Вам слід"
+" спочатку перемкнутися назад з паролів tcb на паролі shadow за допомогою <"
+"_:command-3/>, а потім вимкнути <_:option-4/> у <_:filename-5/>, перш ніж"
+" скористатися <_:command-6/>."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:125
@@ -9207,6 +9585,9 @@ msgid ""
 "files: <_:filename-1/>, <_:filename-2/>, <_:filename-3/>, and <_:filename-4/"
 ">."
 msgstr ""
+"Ці чотири програми працюють зі звичайними паролями та паролями shadow та"
+" файлами груп: <_:filename-1/>, <_:filename-2/>, <_:filename-3/> і <"
+"_:filename-4/>."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:132
@@ -9219,6 +9600,14 @@ msgid ""
 "`x'. These programs can be used for initial conversion as well to update the "
 "shadowed file if the main file is edited by hand."
 msgstr ""
+"Кожна програма виконує належні блокування перед перетворенням. Команди <"
+"_:command-1/> і <_:command-2/> є еквівалентними. Спочатку, буде вилучено"
+" записи у файлі shadow, яких немає в основному файлі. Потім буде оновлено"
+" записи shadow, у яких не вказано «x», як пароль, в основному файлі. Буде"
+" додано усі пропущені записи shadow. Нарешті, паролі в основному файлі буде"
+" замінено на «x». Цими програмами можна скористатися для початкового"
+" перетворення, а також для оновлення файла shadow, якщо до основного файла"
+" було внесено зміни вручну."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:143
@@ -9227,6 +9616,9 @@ msgid ""
 "<_:emphasis-4/> from <_:filename-5/> when adding new entries to <_:"
 "filename-6/>."
 msgstr ""
+"<_:command-1/> використає значення <_:emphasis-2/>, <_:emphasis-3/> і <"
+"_:emphasis-4/> з <_:filename-5/> при додаванні нових записів до <"
+"_:filename-6/>."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:152
@@ -9237,6 +9629,12 @@ msgid ""
 "file is removed. Some password aging information is lost by <_:command-3/>. "
 "It will convert what it can."
 msgstr ""
+"Так само, є подібними команди <_:command-1/> і <_:command-2/>. Паролі в"
+" основному файлі буде оновлено з файла shadow. Записи, які існують у"
+" основному файлі, але яких немає у файлі shadow, буде залишено. Нарешті, файл"
+" shadow буде вилучено. Робота <_:command-3/> призведе до втрати деяких даних"
+" щодо застарівання паролів. Програма виконає перетворення лише тих даних, які"
+" можна перетворити."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:164
@@ -9256,6 +9654,10 @@ msgid ""
 "Please run <_:command-1/> and <_:command-2/> to correct any such errors "
 "before converting to or from shadow passwords or groups."
 msgstr ""
+"Помилки у файлах паролів або груп (зокрема некоректні або дубльовані записи)"
+" можуть спричинити зависання або помилки у роботі цих програм. Будь ласка,"
+" запустіть <_:command-1/> і <_:command-2/> для виправлення таких помилок до"
+" перетворення паролів або груп shadow."
 
 #. (itstool) path: refsect1/para
 #: pwconv.8.xml.out:204
@@ -10350,7 +10752,7 @@ msgstr "suauth"
 #. (itstool) path: refnamediv/refpurpose
 #: suauth.5.xml.out:41
 msgid "detailed su control file"
-msgstr ""
+msgstr "докладний файл керування su"
 
 #. (itstool) path: cmdsynopsis/command
 #. (itstool) path: para/filename
@@ -10365,17 +10767,21 @@ msgid ""
 "The file <_:filename-1/> is referenced whenever the su command is called. It "
 "can change the behaviour of the su command, based upon:"
 msgstr ""
+"Файл <_:filename-1/> буде використано під час кожного виклику su. Він може"
+" змінити поведінку команди su на основі таких даних:"
 
 #. (itstool) path: refsect1/literallayout
 #: suauth.5.xml.out:59
 msgid "1) the user su is targeting"
-msgstr ""
+msgstr "1) користувача призначення su"
 
 #. (itstool) path: refsect1/para
 #: suauth.5.xml.out:63
 msgid ""
 "2) the user executing the su command (or any groups he might be a member of)"
 msgstr ""
+"2) користувача, від імені якого віддано команду su (або будь-яких груп,"
+" учасником яких він є)"
 
 #. (itstool) path: refsect1/para
 #: suauth.5.xml.out:68
@@ -10383,11 +10789,14 @@ msgid ""
 "The file is formatted like this, with lines starting with a # being treated "
 "as comment lines and ignored;"
 msgstr ""
+"Форматування файла описано нижче. Рядки, які починаються з символу #,"
+" вважатимуться коментарями. Такі рядки"
+" буде проігноровано;"
 
 #. (itstool) path: refsect1/literallayout
 #: suauth.5.xml.out:73
 msgid "to-id:from-id:ACTION"
-msgstr ""
+msgstr "ідентифікатор-призначення:похідний-ідентифікатор:ДІЯ"
 
 #. (itstool) path: para/emphasis
 #: suauth.5.xml.out:79
@@ -10401,6 +10810,9 @@ msgid ""
 "delimited by \",\" or the words <_:emphasis-2/> followed by a list of "
 "usernames delimited by \",\"."
 msgstr ""
+"Де «ідентифікатор-призначення» є словом <_:emphasis-1/>, списком"
+" відокремлених «,» імен користувачів або словами <_:emphasis-2/>, після яких"
+" вказано список відокремлених «,» імен користувачів."
 
 #. (itstool) path: para/emphasis
 #: suauth.5.xml.out:85
@@ -10416,11 +10828,19 @@ msgid ""
 "sufficient to have primary group id of the relevant group, an entry in <_:"
 "citerefentry-4/> is necessary."
 msgstr ""
+"Форматування запису «похідний-ідентифікатор» є таким самим, що і для запису"
+" «ідентифікатор-призначення», окрім розпізнавання додаткового слова <"
+"_:emphasis-1/>. Можна також без проблем користуватися <_:emphasis-2/>. Після"
+" <_:emphasis-3/> можна вказати назви однієї або декількох груп, відокремлених"
+" «,». Ідентифікатора основної групи відповідної групи недостатньо, потрібен"
+" запис у <_:citerefentry-4/>."
 
 #. (itstool) path: refsect1/para
 #: suauth.5.xml.out:94
 msgid "Action can be one only of the following currently supported options."
 msgstr ""
+"Дією може бути лише один із наведених нижче підтримуваних у поточній версії"
+" варіантів."
 
 #. (itstool) path: term/emphasis
 #: suauth.5.xml.out:100
@@ -10431,6 +10851,7 @@ msgstr "DENY"
 #: suauth.5.xml.out:103
 msgid "The attempt to su is stopped before a password is even asked for."
 msgstr ""
+"Спробу su буде зупинено навіть до того, як буде надіслано запит щодо пароля."
 
 #. (itstool) path: term/emphasis
 #: suauth.5.xml.out:110
@@ -10467,6 +10888,11 @@ msgid ""
 "file further. This makes it possible for a system administrator to exercise "
 "as fine control as he or she wishes."
 msgstr ""
+"Зауважте, що передбачено три окремих поля, які відокремлено двокрапками."
+" Ніяких пробілів навколо двокрапок не повинно бути. Також зауважте, що файл"
+" буде оброблено рядок за рядком. Бдуе використано перше придатне правило без"
+" вивчення решти. Це уможливлює для адміністратора встановлення бажаного рівня"
+" керування доступом."
 
 #. (itstool) path: refsect1/title
 #: suauth.5.xml.out:142
@@ -10483,6 +10909,25 @@ msgid ""
 "# owned by the same person. # Access can be arranged between them # with no "
 "password. # terry:birddog:NOPASS birddog:terry:NOPASS #"
 msgstr ""
+"# приклад файла /etc/suauth\n"
+"#\n"
+"# Двійко привілейованих користувачів можуть\n"
+"# виконувати su до root із власним паролем.\n"
+"#\n"
+"root:chris,birddog:OWNPASS\n"
+"#\n"
+"# Усі інші не можуть виконувати su до root, якщо\n"
+"# не у групі wheel. Так роблять у BSD.\n"
+"#\n"
+"root:ALL EXCEPT GROUP wheel:DENY\n"
+"#\n"
+"# Можливо, облікові записи terry і birddog належать\n"
+"# одній особі.\n"
+"# Можна налаштувати доступ між ними\n"
+"# без пароля.\n"
+"#\n"
+"terry:birddog:NOPASS birddog:terry:NOPASS\n"
+"#"
 
 #. (itstool) path: refsect1/para
 #: suauth.5.xml.out:180
@@ -10491,6 +10936,9 @@ msgid ""
 "about syntax errors, expecting no spurious whitespace (apart from beginning "
 "and end of lines), and a specific token delimiting different things."
 msgstr ""
+"Може бути доволі багато проблем. Зокрема, обробник файла не пробачає"
+" синтаксичних помилок, не дає додавати пробіли у довільні місця (окрім"
+" початку і кінця рядків) і має специфічні правила щодо розмежування записів."
 
 #. (itstool) path: citerefentry/refentrytitle
 #: suauth.5.xml.out:192
@@ -10503,6 +10951,8 @@ msgid ""
 "An error parsing the file is reported using <_:citerefentry-1/> as level ERR "
 "on facility AUTH."
 msgstr ""
+"Про помилку при обробці файла буде повідомлено за допомогою <"
+"_:citerefentry-1/> у формі рівня ERR для можливості AUTH."
 
 #. (itstool) path: refnamediv/refpurpose
 #: useradd.8.xml.out:60
@@ -12220,6 +12670,13 @@ msgid ""
 "environment variable <_:envar-8/>, then the environment variable <_:envar-9/"
 ">, and finally the default editor, <_:citerefentry-10/>."
 msgstr ""
+"Команди <_:command-1/> і <_:command-2/> призначено для редагування файлів <"
+"_:filename-3/> і <_:filename-4/>, відповідно. З прапорцем <_:option-5/> вони"
+" відкриватимуть shadow-версії цих файлів, <_:filename-6/> і <_:filename-7/>,"
+" відповідно. Ці програми встановлюють відповідні блокування для запобігання"
+" пошкодженню файлів. При пошуку редактора програми спочатку намагатимуться"
+" скористатися вмістом змінної середовища <_:envar-8/>, потім змінної"
+" середовища <_:envar-9/>, і нарешті, типовим редактором, <_:citerefentry-10/>."
 
 #. (itstool) path: refsect1/para
 #: vipw.8.xml.out:84
