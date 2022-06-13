@@ -156,24 +156,23 @@ static long read_random_bytes (void)
 	/* arc4random_buf, if it exists, can never fail.  */
 	arc4random_buf (&randval, sizeof (randval));
 	goto end;
+#endif
 
-#elif defined(HAVE_GETENTROPY)
+#ifdef HAVE_GETENTROPY
 	/* getentropy may exist but lack kernel support.  */
-	if (getentropy (&randval, sizeof (randval))) {
-		goto fail;
+	if (getentropy (&randval, sizeof (randval)) == 0) {
+		goto end;
 	}
+#endif
 
-	goto end;
-
-#elif defined(HAVE_GETRANDOM)
+#ifdef HAVE_GETRANDOM
 	/* Likewise getrandom.  */
-	if ((size_t) getrandom (&randval, sizeof (randval), 0) != sizeof (randval)) {
-		goto fail;
+	if ((size_t) getrandom (&randval, sizeof (randval), 0) == sizeof (randval)) {
+		goto end;
 	}
+#endif
 
-	goto end;
-
-#else
+	/* Use /dev/urandom as a last resort.  */
 	FILE *f = fopen ("/dev/urandom", "r");
 	if (NULL == f) {
 		goto fail;
@@ -186,7 +185,6 @@ static long read_random_bytes (void)
 
 	fclose(f);
 	goto end;
-#endif
 
 fail:
 	fprintf (log_get_logfd(),
