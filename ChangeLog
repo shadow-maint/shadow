@@ -1,3 +1,54 @@
+2022-07-04  Serge Hallyn <serge@hallyn.com>
+
+	* Declare file local functions static (Christian Göttsche)
+	* Use script prototypes (Christian Göttsche)
+	* Do not drop const qualifier for Basename (Christian Göttsche)
+	* Constify various pointers (Christian Göttsche)
+	* Don't return uninitialized memory (Christian Göttsche)
+	* Don't let compiler optimize away memory cleaning (Christian Göttsche)
+	* Remove many obsolete compatibility checks  and defines (Alejandro Colomar)
+	* Modify ID range check in useradd (Iker Pedrosa)
+	* Use "extern "C"" to make libsubid easier to use from C++ (Alois Wohlschlager)
+	* French translation updates (bubu)
+	* Fix s/with-pam/with-libpam/ (serge)
+	* Spanish translation updates (Fernando)
+	* French translation fixes (Balint Reczey)
+	* Default max group name length to 32 (Jami Kettunen)
+	* Fix PAM service files without-selinux (Ali Riza KESKIN)
+	* Improve manpages (Markus Hiereth)
+	  - groupadd, useradd, usermod
+	  - groups and id
+	  - pwck
+	* Add fedora to CI builds (Iker Pedrosa)
+	* Fix condition under which pw_dir check happens (Ed Neville)
+	* logoutd: switch to strncat (Steve Grubb)
+	* AUTHORS: improve markdown output (Iker Pedrosa)
+	* Handle ERANGE errors correctly (Niko)
+	* Check for fopen NULL return (juyin)
+	* Split get_salt() into its own fn juyin)
+	* Get salt before chroot to ensure /dev/urandom. (juyin)
+	* Chpasswd code cleanup (juyin)
+	* Work around git safe.directory enforcement (serge)
+	* Alphabetize order in usermod help (Matheus Marques)
+	* Erase password copy on error branches (Christian Göttsche)
+	* Suggest using --badname if needed (Iker Pedrosa)
+	* Update translation files (Iker Pedrosa)
+	* Correct badnames option to badname (Iker Pedrosa)
+	* configure: replace obsolete autoconf macros (Christian Göttsche)
+	* tests: replace egrep with grep -E (Sam James)
+	* Update Ukrainian translations (Yuri Chornoivan)
+	* Cleanups (Iker Pedrosa)
+	  - Remove redeclared variable
+	  - Remove commented out code and FIXMEs
+	  - Add header guards
+	  - Initialize local variables
+	* CI updates (Iker Pedrosa)
+	  - Create github workflow to install dependencies
+	  - Enable CodeQL
+	  - Update actions version
+	* libmisc: use /dev/urandom as fallback if other methods fail (Xi Ruoyao)
+
+
 2022-01-02  Serge Hallyn <serge@hallyn.com>
 
 	* build: include lib/shadowlog_internal.h in dist tarballs (Sam James)
