@@ -1,7 +1,7 @@
 2022-07-04  Serge Hallyn <serge@hallyn.com>
 
 	* Declare file local functions static (Christian Göttsche)
-	* Use script prototypes (Christian Göttsche)
+	* Use strict prototypes (Christian Göttsche)
 	* Do not drop const qualifier for Basename (Christian Göttsche)
 	* Constify various pointers (Christian Göttsche)
 	* Don't return uninitialized memory (Christian Göttsche)
