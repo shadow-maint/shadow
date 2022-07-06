@@ -362,7 +362,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Do no create the user's home directory, even if the system
+	    Do not create the user's home directory, even if the system
 	    wide setting from <filename>/etc/login.defs</filename>
 	    (<option>CREATE_HOME</option>) is set to
 	    <replaceable>yes</replaceable>.
