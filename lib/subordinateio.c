@@ -17,6 +17,8 @@
 #include <ctype.h>
 #include <fcntl.h>
 
+#define ID_SIZE 31
+
 /*
  * subordinate_dup: create a duplicate range
  *
@@ -745,6 +747,40 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 	return start == ULONG_MAX ? (gid_t) -1 : start;
 }
 
+static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
+{
+	struct passwd *pw;
+	struct group *gr;
+	int ret = 0;
+
+	switch (id_type) {
+	case ID_TYPE_UID:
+		pw = getpwnam(owner);
+		if (pw == NULL) {
+			return false;
+		}
+		ret = snprintf(id, ID_SIZE, "%u", pw->pw_uid);
+		if (ret < 0 || ret >= ID_SIZE) {
+			return false;
+		}
+		break;
+	case ID_TYPE_GID:
+		gr = getgrnam(owner);
+		if (gr == NULL) {
+			return false;
+		}
+		ret = snprintf(id, ID_SIZE, "%u", gr->gr_gid);
+		if (ret < 0 || ret >= ID_SIZE) {
+			return false;
+		}
+		break;
+	default:
+		return false;
+	}
+
+	return true;
+}
+
 /*
  * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
  *
@@ -770,6 +806,8 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 	enum subid_status status;
 	int count = 0;
 	struct subid_nss_ops *h;
+	char id[ID_SIZE];
+	bool have_owner_id;
 
 	*in_ranges = NULL;
 
@@ -798,9 +836,21 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		return -1;
 	}
 
+	have_owner_id = get_owner_id(owner, id_type, id);
+
 	commonio_rewind(db);
 	while ((range = commonio_next(db)) != NULL) {
 		if (0 == strcmp(range->owner, owner)) {
+			if (!append_range(&ranges, range, count++)) {
+				free(ranges);
+				ranges = NULL;
+				count = -1;
+				goto out;
+			}
+		}
+
+		// Let's also compare with the ID
+		if (have_owner_id == true && 0 == strcmp(range->owner, id)) {
 			if (!append_range(&ranges, range, count++)) {
 				free(ranges);
 				ranges = NULL;
