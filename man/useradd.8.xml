@@ -464,6 +464,10 @@
 	    <option>-m</option> options if you want a home directory for a
 	    system account to be created.
 	  </para>
+	  <para>
+	    Note that this option will not update <filename>/etc/subuid
+	    </filename> and <filename>/etc/subgid</filename>.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
