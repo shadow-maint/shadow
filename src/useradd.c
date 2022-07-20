@@ -1218,11 +1218,11 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
+					 "b:c:d:De:f:g:G:hk:K:lmMNop:rR:P:s:u:U"
 #ifdef WITH_SELINUX
-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:P:s:u:UZ:",
-#else				/* !WITH_SELINUX */
-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:P:s:u:U",
-#endif				/* !WITH_SELINUX */
+		                         "Z:"
+#endif				/* WITH_SELINUX */
+					 "",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
