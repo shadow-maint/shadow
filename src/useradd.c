@@ -139,6 +139,9 @@ static bool
     Dflg = false,		/* set/show new user default values */
     eflg = false,		/* days since 1970-01-01 when account is locked */
     fflg = false,		/* days until account with expired password is locked */
+#ifdef ENABLE_SUBIDS
+    Fflg = false,		/* update /etc/subuid and /etc/subgid even if -r option is given */
+#endif
     gflg = false,		/* primary group ID for new account */
     Gflg = false,		/* secondary group set for new account */
     kflg = false,		/* specify a directory to fill new user directory */
@@ -910,6 +913,9 @@ static void usage (int status)
 	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), usageout);
 	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), usageout);
+#ifdef ENABLE_SUBIDS
+	(void) fputs (_("  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a system user\n"), usageout);
+#endif
 	(void) fputs (_("  -g, --gid GROUP               name or ID of the primary group of the new\n"
 	                "                                account\n"), usageout);
 	(void) fputs (_("  -G, --groups GROUPS           list of supplementary groups of the new\n"
@@ -1195,6 +1201,9 @@ static void process_flags (int argc, char **argv)
 			{"defaults",       no_argument,       NULL, 'D'},
 			{"expiredate",     required_argument, NULL, 'e'},
 			{"inactive",       required_argument, NULL, 'f'},
+#ifdef ENABLE_SUBIDS
+			{"add-subids-for-system", no_argument,NULL, 'F'},
+#endif
 			{"gid",            required_argument, NULL, 'g'},
 			{"groups",         required_argument, NULL, 'G'},
 			{"help",           no_argument,       NULL, 'h'},
@@ -1222,6 +1231,9 @@ static void process_flags (int argc, char **argv)
 #ifdef WITH_SELINUX
 		                         "Z:"
 #endif				/* WITH_SELINUX */
+#ifdef ENABLE_SUBIDS
+		                         "F"
+#endif				/* ENABLE_SUBIDS */
 					 "",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
@@ -1317,6 +1329,11 @@ static void process_flags (int argc, char **argv)
 				}
 				fflg = true;
 				break;
+#ifdef ENABLE_SUBIDS
+			case 'F':
+				Fflg = true;
+				break;
+#endif
 			case 'g':
 				grp = prefix_getgr_nam_gid (optarg);
 				if (NULL == grp) {
@@ -2484,9 +2501,11 @@ int main (int argc, char **argv)
 	uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
 	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
 	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
-	is_sub_uid = subuid_count > 0 && sub_uid_file_present () && !rflg &&
+	is_sub_uid = subuid_count > 0 && sub_uid_file_present () &&
+	    (!rflg || Fflg) &&
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
-	is_sub_gid = subgid_count > 0 && sub_gid_file_present () && !rflg &&
+	is_sub_gid = subgid_count > 0 && sub_gid_file_present () &&
+	    (!rflg || Fflg) &&
 	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
 #endif				/* ENABLE_SUBIDS */
 
