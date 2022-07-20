@@ -1292,6 +1292,7 @@ run_test ./subids/67_invalid_subuid_file1/useradd.test
 run_test ./subids/68_invalid_subuid_file2/useradd.test
 run_test ./subids/69_invalid_subuid_file3/useradd.test
 run_test ./subids/70_invalid_subuid_file4/useradd.test
+run_test ./subids/71_useradd_subids_for_system/useradd.test
 run_test ./newuidmap/01_newuidmap/newuidmap.test
 run_test ./newuidmap/02_newuidmap_relaxed_gid_check/newuidmap.test
 run_test ./newgidmap/01_newgidmap/newgidmap.test
