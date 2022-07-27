@@ -194,6 +194,7 @@
 	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
 	    directory and use the configuration files from the
 	    <replaceable>CHROOT_DIR</replaceable> directory.
+	    Only absolute paths are supported.
 	  </para>
 	</listitem>
       </varlistentry>

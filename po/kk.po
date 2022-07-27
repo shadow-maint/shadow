@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
 "PO-Revision-Date: 2017-02-07 17:09+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -537,8 +537,9 @@ msgstr "%s: '%s' опциясы аргументті талап етеді\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: привилегиялар деңгейін төмендету мүмкін емес (%s)\n"
 
-#, c-format
-msgid "%s: invalid chroot path '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid chroot path '%s'\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: '%s' chroot жолы қате\n"
 
 #, c-format

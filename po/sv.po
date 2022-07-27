@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
 "PO-Revision-Date: 2011-11-25 22:08+0100\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -536,7 +536,7 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: misslyckades med att kasta rättigheterna (%s)\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid chroot path '%s'\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: ogiltigt telefonnummer (hem): \"%s\"\n"
 
 #, fuzzy, c-format

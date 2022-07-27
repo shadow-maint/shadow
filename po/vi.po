@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow master\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
 "PO-Revision-Date: 2016-10-04 07:07+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -547,8 +547,9 @@ msgstr "%s: tùy chọn “%s” cần một đối số\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: gặp lỗi khi xóa bỏ đặc quyền (%s)\n"
 
-#, c-format
-msgid "%s: invalid chroot path '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid chroot path '%s'\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: đường dẫn chroot không hợp lệ “%s”\n"
 
 #, c-format

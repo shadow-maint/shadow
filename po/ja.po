@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.5\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
 "PO-Revision-Date: 2012-05-21 02:52+0900\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -539,8 +539,9 @@ msgstr "%s: オプション '%s' には引き数を指定してください\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: 特権を落とせませんでした (%s)\n"
 
-#, c-format
-msgid "%s: invalid chroot path '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid chroot path '%s'\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: chroot のパス'%s' が不正です\n"
 
 #, c-format

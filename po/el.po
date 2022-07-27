@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
 "PO-Revision-Date: 2012-01-21 00:22+0200\n"
 "Last-Translator: Thomas Vasileiou <thomas-v@wildmail.com>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -552,8 +552,9 @@ msgstr "%s: η επιλογή '%s' απαιτεί μία τιμή\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
 
-#, c-format
-msgid "%s: invalid chroot path '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: invalid chroot path '%s'\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr "%s: διαδρομή chroot μη έγκυρη '%s'\n"
 
 #, c-format
