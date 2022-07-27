@@ -841,7 +841,7 @@
 	<varlistentry>
 	  <term><replaceable>9</replaceable></term>
 	  <listitem>
-	    <para>username already in use</para>
+	    <para>username or group name already in use</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>

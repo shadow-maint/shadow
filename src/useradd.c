@@ -172,7 +172,7 @@ static bool home_added = false;
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* UID already in use (and no -o) */
 #define E_NOTFOUND	6	/* specified group doesn't exist */
-#define E_NAME_IN_USE	9	/* username already in use */
+#define E_NAME_IN_USE	9	/* username or group name already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
 #define E_MAILBOXFILE	13	/* can't create mailbox file */

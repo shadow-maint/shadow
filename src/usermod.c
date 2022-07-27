@@ -67,7 +67,7 @@
 /* #define E_BAD_PWFILE	5	   passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
-#define E_NAME_IN_USE	9	/* username already in use */
+#define E_NAME_IN_USE	9	/* username or group name already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
 /* #define E_NOSPACE	11	   insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
