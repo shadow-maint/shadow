@@ -3,13 +3,14 @@
 #
 # Asho S.Y. Yeg <asho@debian.org.tw>, 2004.
 # pan93412 <pan93412@gmail.com>, 2019.
+# Celeste Liu <coelacanthus@outlook.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-04-27 16:54+0200\n"
-"PO-Revision-Date: 2019-09-23 21:29+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
+"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"PO-Revision-Date: 2022-07-27 23:04+0800\n"
+"Last-Translator: Celeste Liu <coelacanthus@outlook.com>\n"
 "Language-Team: Chinese <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -533,8 +534,8 @@ msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s：無法拋棄權限 (%s)\n"
 
 #, c-format
-msgid "%s: invalid chroot path '%s'\n"
-msgstr "%s：chroot 路徑「%s」無效\n"
+msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
+msgstr "%s：chroot 路徑「%s」無效，僅支持絕對路徑。\n"
 
 #, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"

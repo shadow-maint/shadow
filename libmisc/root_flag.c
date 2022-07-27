@@ -79,7 +79,7 @@ static void change_root (const char* newroot)
 
 	if ('/' != newroot[0]) {
 		fprintf (log_get_logfd(),
-		         _("%s: invalid chroot path '%s'\n"),
+		         _("%s: invalid chroot path '%s', only absolute paths are supported.\n"),
 		         log_get_progname(), newroot);
 		exit (E_BAD_ARG);
 	}
