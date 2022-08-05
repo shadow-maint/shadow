@@ -109,7 +109,7 @@ int reset_selinux_file_context (void)
 /*
  *  Log callback for libselinux internal error reporting.
  */
-__attribute__((__format__ (printf, 2, 3)))
+format_attr(printf, 2, 3)
 static int selinux_log_cb (int type, const char *fmt, ...) {
 	va_list ap;
 	char *buf;

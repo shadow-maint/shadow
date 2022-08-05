@@ -320,8 +320,10 @@ extern char *strerror ();
 /* To be used for verified unused parameters */
 #if defined(__GNUC__) && !defined(__STRICT_ANSI__)
 # define unused __attribute__((unused))
+# define format_attr(type, index, check) __attribute__((format (type, index, check)))
 #else
 # define unused
+# define format_attr(type, index, check)
 #endif
 
 /* ! Arguments evaluated twice ! */

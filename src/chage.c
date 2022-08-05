@@ -223,20 +223,12 @@ static void print_date (time_t date)
 {
 	struct tm *tp;
 	char buf[80];
-	char format[80];
-
-	if (iflg) {
-		(void) snprintf (format, 80, "%%Y-%%m-%%d");
-	}
-	else {
-		(void) snprintf (format, 80, "%%b %%d, %%Y");
-	}
 
 	tp = gmtime (&date);
 	if (NULL == tp) {
 		(void) printf ("time_t: %lu\n", (unsigned long)date);
 	} else {
-		(void) strftime (buf, sizeof buf, format, tp);
+		(void) strftime (buf, sizeof buf, iflg ? "%%Y-%%m-%%d" : "%%b %%d, %%Y", tp);
 		(void) puts (buf);
 	}
 }
