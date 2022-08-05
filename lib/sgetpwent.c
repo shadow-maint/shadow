@@ -35,8 +35,8 @@ struct passwd *sgetpwent (const char *buf)
 {
 	static struct passwd pwent;
 	static char pwdbuf[1024];
-	register int i;
-	register char *cp;
+	int i;
+	char *cp;
 	char *fields[NFIELDS];
 
 	/*
