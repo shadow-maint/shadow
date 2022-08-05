@@ -7,6 +7,8 @@
 #ifndef _IDMAPPING_H_
 #define _IDMAPPING_H_
 
+#include <sys/types.h>
+
 struct map_range {
 	unsigned long upper; /* first ID inside the namespace */
 	unsigned long lower; /* first ID outside the namespace */
