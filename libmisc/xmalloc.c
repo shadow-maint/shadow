@@ -26,11 +26,11 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 
-/*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/char *xmalloc (size_t size)
+/*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/void *xmalloc (size_t size)
 {
-	char *ptr;
+	void *ptr;
 
-	ptr = (char *) malloc (size);
+	ptr = malloc (size);
 	if (NULL == ptr) {
 		(void) fprintf (log_get_logfd(),
 		                _("%s: failed to allocate memory: %s\n"),
