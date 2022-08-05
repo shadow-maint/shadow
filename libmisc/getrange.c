@@ -25,7 +25,7 @@
  * If the range is valid, getrange returns 1.
  * If the range is not valid, getrange returns 0.
  */
-int getrange (char *range,
+int getrange (const char *range,
               unsigned long *min, bool *has_min,
               unsigned long *max, bool *has_max)
 {
