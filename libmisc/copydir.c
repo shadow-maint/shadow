@@ -723,7 +723,7 @@ static int copy_file (const char *src, const char *dst,
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC | O_NOFOLLOW, statp->st_mode & 07777);
+	ofd = open (dst, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC | O_NOFOLLOW | O_CLOEXEC, statp->st_mode & 07777);
 	if (   (ofd < 0)
 	    || (fchown_if_needed (ofd, statp,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)
