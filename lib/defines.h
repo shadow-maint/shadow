@@ -205,22 +205,6 @@ static inline void memzero(void *ptr, size_t size)
 # define SEEK_END 2
 #endif
 
-#ifndef S_ISLNK
-#define S_ISLNK(x) (0)
-#endif
-
-#if HAVE_LCHOWN
-#define LCHOWN lchown
-#else
-#define LCHOWN chown
-#endif
-
-#if HAVE_LSTAT
-#define LSTAT lstat
-#else
-#define LSTAT stat
-#endif
-
 #if HAVE_TERMIOS_H
 # include <termios.h>
 # define STTY(fd, termio) tcsetattr(fd, TCSANOW, termio)

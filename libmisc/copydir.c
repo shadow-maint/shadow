@@ -56,14 +56,12 @@ static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[],
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
-#ifdef	S_IFLNK
 static /*@null@*/char *readlink_malloc (const char *filename);
 static int copy_symlink (const char *src, const char *dst,
                          unused bool reset_selinux,
                          const struct stat *statp, const struct timeval mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
-#endif				/* S_IFLNK */
 static int copy_hardlink (const char *dst,
                           unused bool reset_selinux,
                           struct link_name *lp);
@@ -223,7 +221,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 			return -1;
 		}
 
-		if (LSTAT (src_root, &sb) == -1) {
+		if (lstat (src_root, &sb) == -1) {
 			return -1;
 		}
 
@@ -364,7 +362,7 @@ static int copy_entry (const char *src, const char *dst,
 	struct link_name *lp;
 	struct timeval mt[2];
 
-	if (LSTAT (src, &sb) == -1) {
+	if (lstat (src, &sb) == -1) {
 		/* If we cannot stat the file, do not care. */
 	} else {
 #ifdef HAVE_STRUCT_STAT_ST_ATIM
@@ -396,7 +394,6 @@ static int copy_entry (const char *src, const char *dst,
 			                old_uid, new_uid, old_gid, new_gid);
 		}
 
-#ifdef	S_IFLNK
 		/*
 		 * Copy any symbolic links
 		 */
@@ -405,7 +402,6 @@ static int copy_entry (const char *src, const char *dst,
 			err = copy_symlink (src, dst, reset_selinux, &sb, mt,
 			                    old_uid, new_uid, old_gid, new_gid);
 		}
-#endif				/* S_IFLNK */
 
 		/*
 		 * See if this is a previously copied link
@@ -498,7 +494,6 @@ static int copy_dir (const char *src, const char *dst,
 	return err;
 }
 
-#ifdef	S_IFLNK
 /*
  * readlink_malloc - wrapper for readlink
  *
@@ -616,7 +611,6 @@ static int copy_symlink (const char *src, const char *dst,
 
 	return 0;
 }
-#endif				/* S_IFLNK */
 
 /*
  * copy_hardlink - copy a hardlink
