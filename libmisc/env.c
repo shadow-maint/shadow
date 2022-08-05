@@ -28,7 +28,7 @@ size_t newenvc = 0;
 /*@null@*/char **newenvp = NULL;
 extern char **environ;
 
-static const char *forbid[] = {
+static const char *const forbid[] = {
 	"_RLD_=",
 	"BASH_ENV=",		/* GNU creeping featurism strikes again... */
 	"ENV=",
@@ -47,7 +47,7 @@ static const char *forbid[] = {
 
 /* these are allowed, but with no slashes inside
    (to work around security problems in GNU gettext) */
-static const char *noslash[] = {
+static const char *const noslash[] = {
 	"LANG=",
 	"LANGUAGE=",
 	"LC_",			/* anything with the LC_ prefix */
@@ -185,7 +185,7 @@ void set_env (int argc, char *const *argv)
 			noname++;
 			addenv (variable, *argv);
 		} else {
-			const char **p;
+			const char *const *p;
 
 			for (p = forbid; NULL != *p; p++) {
 				if (strncmp (*argv, *p, strlen (*p)) == 0) {
@@ -218,7 +218,7 @@ void set_env (int argc, char *const *argv)
 void sanitize_env (void)
 {
 	char **envp = environ;
-	const char **bad;
+	const char *const *bad;
 	char **cur;
 	char **move;
 

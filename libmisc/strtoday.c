@@ -96,7 +96,7 @@ long strtoday (const char *str)
  * for now we allow just one format, but we can define more later
  * (we try them all until one succeeds).  --marekm
  */
-static char *date_formats[] = {
+static const char *const date_formats[] = {
 	"%Y-%m-%d",
 	(char *) 0
 };
@@ -106,12 +106,12 @@ static char *date_formats[] = {
  * current month, and the cumulative number of days in the preceding
  * months.  they are declared so that january is 1, not 0.
  */
-static short days[13] = { 0,
+static const short days[13] = { 0,
 	31, 28, 31, 30, 31, 30,	/* JAN - JUN */
 	31, 31, 30, 31, 30, 31
 };				/* JUL - DEC */
 
-static short juldays[13] = { 0,
+static const short juldays[13] = { 0,
 	0, 31, 59, 90, 120, 151,	/* JAN - JUN */
 	181, 212, 243, 273, 304, 334
 };				/* JUL - DEC */
@@ -129,7 +129,7 @@ long strtoday (const char *str)
 {
 #ifdef HAVE_STRPTIME
 	struct tm tp;
-	char *const *fmt;
+	const char *const *fmt;
 	char *cp;
 	time_t result;
 

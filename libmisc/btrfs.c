@@ -14,7 +14,7 @@ static bool path_exists(const char *p)
 
 static const char *btrfs_cmd(void)
 {
-	const char *btrfs_paths[] = {"/sbin/btrfs",
+	const char *const btrfs_paths[] = {"/sbin/btrfs",
 		"/bin/btrfs", "/usr/sbin/btrfs", "/usr/bin/btrfs", NULL};
 	const char *p;
 	int i;
