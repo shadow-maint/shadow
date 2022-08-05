@@ -157,7 +157,7 @@ static struct commonio_ops subordinate_ops = {
  *
  * Returns true if @owner owns any subuid ranges, false otherwise.
  */
-static const bool range_exists(struct commonio_db *db, const char *owner)
+static bool range_exists(struct commonio_db *db, const char *owner)
 {
 	const struct subordinate_range *range;
 	commonio_rewind(db);
