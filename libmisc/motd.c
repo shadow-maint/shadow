@@ -28,7 +28,7 @@ void motd (void)
 	char *motdlist;
 	const char *motdfile;
 	char *mb;
-	register int c;
+	int c;
 
 	motdfile = getdef_str ("MOTD_FILE");
 	if (NULL == motdfile) {
