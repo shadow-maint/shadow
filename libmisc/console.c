@@ -16,9 +16,6 @@
 
 #ident "$Id$"
 
-/* local function prototypes */
-static bool is_listed (const char *cfgin, const char *tty, bool def);
-
 /*
  * This is now rather generic function which decides if "tty" is listed
  * under "cfgin" in config (directly or indirectly). Fallback to default if
