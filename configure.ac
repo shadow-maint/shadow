@@ -693,7 +693,7 @@ fi
 
 AC_DEFINE_UNQUOTED(SHELL, ["$SHELL"], [The default shell.])
 
-AM_GNU_GETTEXT_VERSION(0.16)
+AM_GNU_GETTEXT_VERSION([0.19])
 AM_GNU_GETTEXT([external], [need-ngettext])
 AM_CONDITIONAL(USE_NLS, test "x$USE_NLS" = "xyes")
 
