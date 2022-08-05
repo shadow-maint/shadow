@@ -159,7 +159,7 @@ extern int getlong (const char *numstr, /*@out@*/long int *result);
 extern int get_pid (const char *pidstr, pid_t *pid);
 
 /* getrange */
-extern int getrange (char *range,
+extern int getrange (const char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
 

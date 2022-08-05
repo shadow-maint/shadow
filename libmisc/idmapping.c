@@ -102,10 +102,10 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 #define ULONG_DIGITS ((((sizeof(unsigned long) * CHAR_BIT) + 9)/10)*3)
 
 #if HAVE_SYS_CAPABILITY_H
-static inline bool maps_lower_root(int cap, int ranges, struct map_range *mappings)
+static inline bool maps_lower_root(int cap, int ranges, const struct map_range *mappings)
 {
 	int idx;
-	struct map_range *mapping;
+	const struct map_range *mapping;
 
 	if (cap != CAP_SETUID)
 		return false;
@@ -135,11 +135,11 @@ static inline bool maps_lower_root(int cap, int ranges, struct map_range *mappin
  * when the root user calls the new{g,u}idmap binary for an unprivileged user.
  * If this is wanted: use file capabilities!
  */
-void write_mapping(int proc_dir_fd, int ranges, struct map_range *mappings,
+void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings,
 	const char *map_file, uid_t ruid)
 {
 	int idx;
-	struct map_range *mapping;
+	const struct map_range *mapping;
 	size_t bufsize;
 	char *buf, *pos;
 	int fd;

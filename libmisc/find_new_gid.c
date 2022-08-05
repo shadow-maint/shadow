@@ -98,7 +98,7 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 static int check_gid (const gid_t gid,
 		      const gid_t gid_min,
 		      const gid_t gid_max,
-		      bool *used_gids)
+		      const bool *used_gids)
 {
 	/* First test that the preferred ID is in the range */
 	if (gid < gid_min || gid > gid_max) {
