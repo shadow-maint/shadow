@@ -112,7 +112,7 @@ static void error_acl (unused struct error_context *ctx, const char *fmt, ...)
 }
 
 static struct error_context ctx = {
-	error_acl
+	error_acl, NULL, NULL
 };
 #endif				/* WITH_ACL || WITH_ATTR */
 
@@ -663,7 +663,7 @@ static int copy_special (const char *src, const char *dst,
 	}
 #endif				/* WITH_SELINUX */
 
-	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
+	if (   (mknod (dst, statp->st_mode & ~07777U, statp->st_rdev) != 0)
 	    || (chown_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
 #ifdef WITH_ACL
