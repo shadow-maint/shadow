@@ -36,6 +36,5 @@ extern void log_set_progname(const char *);
 extern const char *log_get_progname(void);
 extern void log_set_logfd(FILE *fd);
 extern FILE *log_get_logfd(void);
-extern void log_dolog(char *, ...);
 
 #endif
