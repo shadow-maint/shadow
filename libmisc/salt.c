@@ -99,15 +99,15 @@ static /*@observer@*/const char *gensalt (size_t salt_size);
 static long shadow_random (long min, long max);
 #endif /* USE_SHA_CRYPT || USE_BCRYPT */
 #ifdef USE_SHA_CRYPT
-static /*@observer@*/const unsigned long SHA_get_salt_rounds (/*@null@*/int *prefered_rounds);
+static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
 static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds);
 #endif /* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-static /*@observer@*/const unsigned long BCRYPT_get_salt_rounds (/*@null@*/int *prefered_rounds);
+static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds);
 static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-static /*@observer@*/const unsigned long YESCRYPT_get_salt_cost (/*@null@*/int *prefered_cost);
+static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
 static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
 
@@ -221,7 +221,7 @@ static long shadow_random (long min, long max)
 
 #ifdef USE_SHA_CRYPT
 /* Return the the rounds number for the SHA crypt methods. */
-static /*@observer@*/const unsigned long SHA_get_salt_rounds (/*@null@*/int *prefered_rounds)
+static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds)
 {
 	unsigned long rounds;
 
@@ -295,7 +295,7 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
-static /*@observer@*/const unsigned long BCRYPT_get_salt_rounds (/*@null@*/int *prefered_rounds)
+static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds)
 {
 	unsigned long rounds;
 
@@ -374,7 +374,7 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 
 #ifdef USE_YESCRYPT
 /* Return the the cost number for the YESCRYPT method. */
-static /*@observer@*/const unsigned long YESCRYPT_get_salt_cost (/*@null@*/int *prefered_cost)
+static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost)
 {
 	unsigned long cost;
 
