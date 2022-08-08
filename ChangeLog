@@ -1,3 +1,12 @@
+2022-08-08  Serge Hallyn <serge@hallyn.com>
+
+	* Add absolute path hint to --root (Celeste Liu)
+	* Various cleanups (Christian Göttsche)
+	* Fix Ubuntu release used in CI tests (Jeremy Whiting)
+	* add -F options to useradd (and tests) (Masatake YAMATO)
+	* useradd manpage updates (Masatake YAMATO and Alexander Zhang))
+	* Check for ownerid (not just username) in subid ranges (Iker Pedrosa)
+
 2022-07-04  Serge Hallyn <serge@hallyn.com>
 
 	* Declare file local functions static (Christian Göttsche)
