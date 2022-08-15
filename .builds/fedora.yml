@@ -26,6 +26,8 @@ tasks:
       make
       make DESTDIR=/tmp/shadow-inst install
       sudo make install
+      make installcheck
+      make distcheck DISTCHECK_CONFIGURE_FLAGS="--with-selinux --enable-man"
       #TODO - fix up the tests.  Let's merge what's here now as it
       #at least tests build.
       #(cd tests; sudo ./run_some || { cat testsuite.log; false; })
