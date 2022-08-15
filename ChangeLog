@@ -1,3 +1,7 @@
+2022-08-15  Serge Hallyn <serge@hallyn.com>
+
+	* Fix uk manpages
+
 2022-08-08  Serge Hallyn <serge@hallyn.com>
 
 	* Add absolute path hint to --root (Celeste Liu)
