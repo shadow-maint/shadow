@@ -64,10 +64,12 @@
       files as needed.
     </para>
      <para>
-       Groupnames must start with a lower case letter or an underscore,
-       followed by lower case letters, digits, underscores, or dashes.
-       They can end with a dollar sign.
-       In regular expression terms: [a-z_][a-z0-9_-]*[$]?
+       Groupnames may contain only lower and upper case letters, digits,
+       underscores, or dashes. They can end with a dollar sign.
+
+       Dashes are not allowed at the beginning of the groupname.
+       Fully numeric groupnames and groupnames . or .. are
+       also disallowed.
      </para>
      <para>
        Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long.

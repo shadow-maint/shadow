@@ -692,10 +692,14 @@
     </para>
 
     <para>
-      Usernames must start with a lower case letter or an underscore,
-      followed by lower case letters, digits, underscores, or dashes.
-      They can end with a dollar sign.
-      In regular expression terms: [a-z_][a-z0-9_-]*[$]?
+      Usernames may contain only lower and upper case letters, digits,
+      underscores, or dashes. They can end with a dollar sign.
+
+      Dashes are not allowed at the beginning of the username.
+      Fully numeric usernames and usernames . or .. are
+      also disallowed. It is not recommended to use usernames beginning
+      with . character as their home directories will be hidden in
+      the <command>ls</command> output.
     </para>
     <para>
       Usernames may only be up to 32 characters long.
