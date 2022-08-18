@@ -1,5 +1,10 @@
 2022-08-15  Serge Hallyn <serge@hallyn.com>
 
+	* Address CVE-2013-4235 (TOCTTOU when copying directories)
+	  (Christian Göttsche)
+
+2022-08-15  Serge Hallyn <serge@hallyn.com>
+
 	* Fix uk manpages
 
 2022-08-08  Serge Hallyn <serge@hallyn.com>
