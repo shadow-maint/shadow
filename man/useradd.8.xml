@@ -248,7 +248,7 @@
 	    command line), useradd will set the primary group of the new
 	    user to the value specified by the <option>GROUP</option>
 	    variable in <filename>/etc/default/useradd</filename>, or
-	    100 by default.
+	    1000 by default.
 	  </para>
 	</listitem>
       </varlistentry>
