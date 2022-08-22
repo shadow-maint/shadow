@@ -1,3 +1,7 @@
+2022-08-22  Serge Hallyn <serge@hallyn.com>
+
+	* Revert the removal of subid_init as pointed out by Balint.
+
 2022-08-15  Serge Hallyn <serge@hallyn.com>
 
 	* Address CVE-2013-4235 (TOCTTOU when copying directories)
