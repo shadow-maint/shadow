@@ -122,12 +122,14 @@ static int semanage_user_mod (semanage_handle_t *handle,
 		goto done;
 	}
 
-	ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
-	if (ret != 0) {
-		fprintf (shadow_logfd,
-		         _("Could not set serange for %s\n"), login_name);
-		ret = 1;
-		goto done;
+	if (semanage_mls_enabled(handle)) {
+		ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
+		if (ret != 0) {
+			fprintf (shadow_logfd,
+			         _("Could not set serange for %s\n"), login_name);
+			ret = 1;
+			goto done;
+		}
 	}
 
 	ret = semanage_seuser_set_sename (handle, seuser, seuser_name);
@@ -179,13 +181,14 @@ static int semanage_user_add (semanage_handle_t *handle,
 		goto done;
 	}
 
-	ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
-	if (ret != 0) {
-		fprintf (shadow_logfd,
-		         _("Could not set serange for %s\n"),
-		         login_name);
-		ret = 1;
-		goto done;
+	if (semanage_mls_enabled(handle)) {
+		ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
+		if (ret != 0) {
+			fprintf (shadow_logfd,
+			         _("Could not set serange for %s\n"), login_name);
+			ret = 1;
+			goto done;
+		}
 	}
 
 	ret = semanage_seuser_set_sename (handle, seuser, seuser_name);
