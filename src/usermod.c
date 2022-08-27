@@ -716,7 +716,7 @@ static void update_group (void)
 		* If rflg+Gflg  is passed in AKA -rG invert is_member flag, which removes
 		* mentioned groups while leaving the others.
 		*/
-		if (Gflg && rflg && was_member) {
+		if (Gflg && rflg) {
 			is_member = !is_member;
 		}
 
@@ -765,7 +765,7 @@ static void update_group (void)
 				         "delete '%s' from group '%s'",
 				         user_name, ngrp->gr_name));
 			}
-		} else {
+		} else if (is_member) {
 			/* User was not a member but is now a member this
 			 * group.
 			 */
@@ -839,7 +839,7 @@ static void update_gshadow (void)
 		* If rflg+Gflg  is passed in AKA -rG invert is_member, to remove targeted
 		* groups while leaving the user apart of groups not mentioned
 		*/
-		if (Gflg && rflg && was_member) {
+		if (Gflg && rflg) {
 			is_member = !is_member;
 		}
 
