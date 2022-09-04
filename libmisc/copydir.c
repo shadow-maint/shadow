@@ -126,12 +126,12 @@ static int perm_copy_path(const struct path_info *src,
 {
 	int src_fd, dst_fd, ret;
 
-	src_fd = openat(src->dirfd, src->name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	src_fd = openat(src->dirfd, src->name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
 	if (src_fd < 0) {
 		return -1;
 	}
 
-	dst_fd = openat(dst->dirfd, dst->name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	dst_fd = openat(dst->dirfd, dst->name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
 	if (dst_fd < 0) {
 		(void) close (src_fd);
 		return -1;
@@ -152,12 +152,12 @@ static int attr_copy_path(const struct path_info *src,
 {
 	int src_fd, dst_fd, ret;
 
-	src_fd = openat(src->dirfd, src->name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	src_fd = openat(src->dirfd, src->name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
 	if (src_fd < 0) {
 		return -1;
 	}
 
-	dst_fd = openat(dst->dirfd, dst->name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+	dst_fd = openat(dst->dirfd, dst->name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
 	if (dst_fd < 0) {
 		(void) close (src_fd);
 		return -1;
