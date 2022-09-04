@@ -529,7 +529,7 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 	    || (   (perm_copy_path (src, dst, &ctx) != 0)
 	        && (errno != 0))
 #else				/* !WITH_ACL */
-	    || (chmod (dst, statp->st_mode) != 0)
+	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
 #endif				/* !WITH_ACL */
 #ifdef WITH_ATTR
 	/*
