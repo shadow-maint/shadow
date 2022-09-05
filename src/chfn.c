@@ -271,7 +271,7 @@ static void process_flags (int argc, char **argv)
 				exit (E_NOPERM);
 			}
 			fflg = true;
-			STRFCPY (fullnm, optarg);
+			STRLCPY (fullnm, optarg);
 			break;
 		case 'h':
 			if (!may_change_field ('h')) {
@@ -280,7 +280,7 @@ static void process_flags (int argc, char **argv)
 				exit (E_NOPERM);
 			}
 			hflg = true;
-			STRFCPY (homeph, optarg);
+			STRLCPY (homeph, optarg);
 			break;
 		case 'o':
 			if (!amroot) {
@@ -294,7 +294,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: fields too long\n"), Prog);
 				exit (E_NOPERM);
 			}
-			STRFCPY (slop, optarg);
+			STRLCPY (slop, optarg);
 			break;
 		case 'r':
 			if (!may_change_field ('r')) {
@@ -303,7 +303,7 @@ static void process_flags (int argc, char **argv)
 				exit (E_NOPERM);
 			}
 			rflg = true;
-			STRFCPY (roomno, optarg);
+			STRLCPY (roomno, optarg);
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			break;
@@ -317,7 +317,7 @@ static void process_flags (int argc, char **argv)
 				exit (E_NOPERM);
 			}
 			wflg = true;
-			STRFCPY (workph, optarg);
+			STRLCPY (workph, optarg);
 			break;
 		default:
 			usage (E_USAGE);
@@ -504,7 +504,7 @@ static void get_old_fields (const char *gecos)
 {
 	char *cp;		/* temporary character pointer       */
 	char old_gecos[BUFSIZ];	/* buffer for old GECOS fields       */
-	STRFCPY (old_gecos, gecos);
+	STRLCPY (old_gecos, gecos);
 
 	/*
 	 * Now get the full name. It is the first comma separated field in

@@ -81,7 +81,7 @@ diff -uNr shadow-980403.orig/src/newusers.c shadow-980403/src/newusers.c
 +	while ((flag = getopt (argc, argv, "p:h")) != EOF) {
 +		switch (flag) {
 +		case 'p':
-+			STRFCPY(anonproto, optarg);
++			STRLCPY(anonproto, optarg);
 +			break;
 +		case 'h':
 +		default:

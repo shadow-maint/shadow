@@ -752,7 +752,7 @@ static void save_caller_context (char **argv)
 		         (unsigned long) caller_uid));
 		su_failure (caller_tty, true); /* unknown target UID*/
 	}
-	STRFCPY (caller_name, pw->pw_name);
+	STRLCPY (caller_name, pw->pw_name);
 
 #ifndef USE_PAM
 #ifdef SU_ACCESS
@@ -827,7 +827,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (optind < argc) {
-		STRFCPY (name, argv[optind++]);	/* use this login id */
+		STRLCPY (name, argv[optind++]);	/* use this login id */
 	}
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");

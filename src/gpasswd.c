@@ -892,7 +892,7 @@ static void change_passwd (struct group *gr)
 			exit (1);
 		}
 
-		STRFCPY (pass, cp);
+		STRLCPY (pass, cp);
 		strzero (cp);
 		cp = getpass (_("Re-enter new password: "));
 		if (NULL == cp) {

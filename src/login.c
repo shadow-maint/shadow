@@ -585,7 +585,7 @@ int main (int argc, char **argv)
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
-	STRFCPY (tty, tmptty);
+	STRLCPY (tty, tmptty);
 
 #ifndef USE_PAM
 	is_console = console (tty);

@@ -248,8 +248,6 @@ static inline void memzero(void *ptr, size_t size)
    very sloppy coding used to assume that BUFSIZ will always be enough...  */
 
 					/* danger - side effects */
-#define STRFCPY(A,B) \
-	(strncpy((A), (B), sizeof(A) - 1), (A)[sizeof(A) - 1] = '\0')
 #define STRLCPY(dst, src)  (strlcpy((dst), (src), NITEMS(dst)) >= NITEMS(src))
 #define USTR2STR(dst, src)  do \
 { \
