@@ -743,8 +743,7 @@ int main (int argc, char **argv)
 			          sizeof (loginprompt),
 			          _("%s login: "), hostn);
 		} else {
-			strncpy (loginprompt, _("login: "),
-			         sizeof (loginprompt));
+			STRLCPY (loginprompt, _("login: "));
 		}
 
 		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);

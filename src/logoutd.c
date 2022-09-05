@@ -54,8 +54,7 @@ static int check_login (const struct utmp *ut)
 	/*
 	 * ut_user may not have the terminating NUL.
 	 */
-	strncpy (user, ut->ut_user, sizeof (ut->ut_user));
-	user[sizeof (ut->ut_user)] = '\0';
+	USTR2STR (user, ut->ut_user);
 
 	(void) time (&now);
 
@@ -246,8 +245,7 @@ int main (int argc, char **argv)
 				kill (-ut->ut_pid, SIGKILL);
 			}
 
-			strncpy (user, ut->ut_user, sizeof (user) - 1);
-			user[sizeof (user) - 1] = '\0';
+			USTR2STR (user, ut->ut_user);
 
 			SYSLOG ((LOG_NOTICE,
 				 "logged off user '%s' on '%s'", user,

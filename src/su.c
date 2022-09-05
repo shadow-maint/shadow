@@ -655,8 +655,7 @@ static /*@only@*/struct passwd * check_perms (void)
 		SYSLOG ((LOG_INFO,
 		         "Change user from '%s' to '%s' as requested by PAM",
 		         name, tmp_name));
-		strncpy (name, tmp_name, sizeof(name) - 1);
-		name[sizeof(name) - 1] = '\0';
+		STRLCPY (name, tmp_name);
 		pw = xgetpwnam (name);
 		if (NULL == pw) {
 			(void) fprintf (stderr,

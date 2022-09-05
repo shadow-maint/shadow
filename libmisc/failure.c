@@ -18,6 +18,7 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "failure.h"
+#include "prototypes.h"
 #define	YEAR	(365L*DAY)
 /*
  * failure - make failure entry
@@ -75,7 +76,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		fl->fail_cnt++;
 	}
 
-	strncpy (fl->fail_line, tty, sizeof (fl->fail_line) - 1);
+	STRLCPY (fl->fail_line, tty);
 	(void) time (&fl->fail_time);
 
 	/*

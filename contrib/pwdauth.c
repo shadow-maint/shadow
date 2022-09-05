@@ -223,8 +223,7 @@ main(argc, argv)
 		fprintf(stderr, "Who are you?\n");
 		exit(2);
 	}
-	strncpy(myname, pw->pw_name, sizeof myname - 1);
-	myname[sizeof myname - 1] = '\0';
+	STRLCPY (myname, pw->pw_name);
 	name = myname;
 
 	if (argc > 1) {

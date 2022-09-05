@@ -15,6 +15,8 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <string.h>
+
 #include "prototypes.h"
 #include "defines.h"
 static /*@null@*/FILE *shadow;
@@ -124,8 +126,7 @@ void endsgent (void)
 		sgrbuflen = len;
 	}
 
-	strncpy (sgrbuf, string, len);
-	sgrbuf[len-1] = '\0';
+	strlcpy (sgrbuf, string, len);
 
 	cp = strrchr (sgrbuf, '\n');
 	if (NULL != cp) {

@@ -77,9 +77,9 @@ void dolastlog (
 	ll_time = newlog.ll_time;
 	(void) time (&ll_time);
 	newlog.ll_time = ll_time;
-	strncpy (newlog.ll_line, line, sizeof (newlog.ll_line) - 1);
+	STRLCPY (newlog.ll_line, line);
 #if HAVE_LL_HOST
-	strncpy (newlog.ll_host, host, sizeof (newlog.ll_host) - 1);
+	STRLCPY (newlog.ll_host, host);
 #endif
 	if (   (lseek (fd, offset, SEEK_SET) != offset)
 	    || (write (fd, (const void *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog)
@@ -90,4 +90,3 @@ void dolastlog (
 		(void) close (fd);
 	}
 }
-

@@ -46,8 +46,7 @@ static bool is_my_tty (const char *tty)
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname) {
-			(void) strncpy (tmptty, tname, sizeof tmptty);
-			tmptty[sizeof (tmptty) - 1] = '\0';
+			STRLCPY (tmptty, tname);
 		}
 	}
 
@@ -216,8 +215,7 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
-		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
-		hostname[sizeof (ut->ut_host)] = '\0';
+		USTR2STR (hostname, ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 	}
 
@@ -235,25 +233,25 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 	utent->ut_type = USER_PROCESS;
 #endif				/* HAVE_STRUCT_UTMP_UT_TYPE */
 	utent->ut_pid = getpid ();
-	strncpy (utent->ut_line, line,      sizeof (utent->ut_line) - 1);
+	STRLCPY (utent->ut_line, line);
 #ifdef HAVE_STRUCT_UTMP_UT_ID
 	if (NULL != ut) {
 		strncpy (utent->ut_id, ut->ut_id, sizeof (utent->ut_id));
 	} else {
 		/* XXX - assumes /dev/tty?? */
-		strncpy (utent->ut_id, line + 3, sizeof (utent->ut_id) - 1);
+		STRLCPY (utent->ut_id, line + 3);
 	}
 #endif				/* HAVE_STRUCT_UTMP_UT_ID */
 #ifdef HAVE_STRUCT_UTMP_UT_NAME
-	strncpy (utent->ut_name, name,      sizeof (utent->ut_name));
+	STRLCPY (utent->ut_name, name);
 #endif				/* HAVE_STRUCT_UTMP_UT_NAME */
 #ifdef HAVE_STRUCT_UTMP_UT_USER
-	strncpy (utent->ut_user, name,      sizeof (utent->ut_user) - 1);
+	STRLCPY (utent->ut_user, name);
 #endif				/* HAVE_STRUCT_UTMP_UT_USER */
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
-		strncpy (utent->ut_host, hostname, sizeof (utent->ut_host) - 1);
+		STRLCPY (utent->ut_host, hostname);
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 #ifdef HAVE_STRUCT_UTMP_UT_SYSLEN
 		utent->ut_syslen = MIN (strlen (hostname),
@@ -362,8 +360,7 @@ int setutmp (struct utmp *ut)
 	           && (NULL != ut->ut_host)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
-		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
-		hostname[sizeof (ut->ut_host)] = '\0';
+		USTR2STR (hostname, ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_TYPE */
 	}
 
@@ -378,22 +375,22 @@ int setutmp (struct utmp *ut)
 
 	utxent->ut_type = USER_PROCESS;
 	utxent->ut_pid = getpid ();
-	strncpy (utxent->ut_line, line,      sizeof (utxent->ut_line));
+	STRLCPY (utxent->ut_line, line);
 	/* existence of ut->ut_id is enforced by configure */
 	if (NULL != ut) {
 		strncpy (utxent->ut_id, ut->ut_id, sizeof (utxent->ut_id));
 	} else {
 		/* XXX - assumes /dev/tty?? */
-		strncpy (utxent->ut_id, line + 3, sizeof (utxent->ut_id));
+		STRLCPY (utxent->ut_id, line + 3);
 	}
 #ifdef HAVE_STRUCT_UTMPX_UT_NAME
-	strncpy (utxent->ut_name, name,      sizeof (utxent->ut_name));
+	STRLCPY (utxent->ut_name, name);
 #endif				/* HAVE_STRUCT_UTMPX_UT_NAME */
-	strncpy (utxent->ut_user, name,      sizeof (utxent->ut_user));
+	STRLCPY (utxent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #ifdef HAVE_STRUCT_UTMPX_UT_HOST
-		strncpy (utxent->ut_host, hostname, sizeof (utxent->ut_host));
+		STRLCPY (utxent->ut_host, hostname);
 #endif				/* HAVE_STRUCT_UTMPX_UT_HOST */
 #ifdef HAVE_STRUCT_UTMPX_UT_SYSLEN
 		utxent->ut_syslen = MIN (strlen (hostname),

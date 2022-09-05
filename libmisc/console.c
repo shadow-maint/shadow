@@ -44,8 +44,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 
 	if (*cons != '/') {
 		char *pbuf;
-		strncpy (buf, cons, sizeof (buf));
-		buf[sizeof (buf) - 1] = '\0';
+		STRLCPY (buf, cons);
 		pbuf = &buf[0];
 		while ((s = strtok (pbuf, ":")) != NULL) {
 			if (strcmp (s, tty) == 0) {
