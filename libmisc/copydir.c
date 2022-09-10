@@ -522,15 +522,14 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-	if (   (mkdirat (dst->dirfd, dst->name, statp->st_mode) != 0)
+	if (   (mkdirat (dst->dirfd, dst->name, 0700) != 0)
 	    || (chownat_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
+	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_path (src, dst, &ctx) != 0)
 	        && (errno != 0))
-#else				/* !WITH_ACL */
-	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
-#endif				/* !WITH_ACL */
+#endif				/* WITH_ACL */
 #ifdef WITH_ATTR
 	/*
 	 * If the third parameter is NULL, all extended attributes
@@ -719,12 +718,11 @@ static int copy_special (const struct path_info *src, const struct path_info *ds
 	if (   (mknodat (dst->dirfd, dst->name, statp->st_mode & ~07777U, statp->st_rdev) != 0)
 	    || (chownat_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
+	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_path (src, dst, &ctx) != 0)
 	        && (errno != 0))
-#else				/* !WITH_ACL */
-	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
-#endif				/* !WITH_ACL */
+#endif				/* WITH_ACL */
 #ifdef WITH_ATTR
 	/*
 	 * If the third parameter is NULL, all extended attributes
@@ -810,16 +808,15 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-	ofd = openat (dst->dirfd, dst->name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC | O_NOFOLLOW | O_CLOEXEC, statp->st_mode & 07777);
+	ofd = openat (dst->dirfd, dst->name, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC | O_NOFOLLOW | O_CLOEXEC, 0600);
 	if (   (ofd < 0)
 	    || (fchown_if_needed (ofd, statp,
 	                          old_uid, new_uid, old_gid, new_gid) != 0)
+	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
 #ifdef WITH_ACL
 	    || (   (perm_copy_fd (src->full_path, ifd, dst->full_path, ofd, &ctx) != 0)
 	        && (errno != 0))
-#else				/* !WITH_ACL */
-	    || (fchmod (ofd, statp->st_mode & 07777) != 0)
-#endif				/* !WITH_ACL */
+#endif				/* WITH_ACL */
 #ifdef WITH_ATTR
 	/*
 	 * If the third parameter is NULL, all extended attributes
