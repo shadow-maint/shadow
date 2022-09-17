@@ -73,7 +73,7 @@ void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent)
 	if (pwent != NULL) {
 		free (pwent->pw_name);
 		if (pwent->pw_passwd) {
-			memzero (pwent->pw_passwd, strlen (pwent->pw_passwd));
+			strzero (pwent->pw_passwd);
 			free (pwent->pw_passwd);
 		}
 		free (pwent->pw_gecos);

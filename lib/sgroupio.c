@@ -128,7 +128,7 @@ void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent)
 	size_t i;
 	free (sgent->sg_name);
 	if (NULL != sgent->sg_passwd) {
-		memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
+		strzero (sgent->sg_passwd);
 		free (sgent->sg_passwd);
 	}
 	for (i = 0; NULL != sgent->sg_adm[i]; i++) {

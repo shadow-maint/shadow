@@ -59,7 +59,7 @@ void spw_free (/*@out@*/ /*@only@*/struct spwd *spent)
 	if (spent != NULL) {
 		free (spent->sp_namp);
 		if (NULL != spent->sp_pwdp) {
-			memzero (spent->sp_pwdp, strlen (spent->sp_pwdp));
+			strzero (spent->sp_pwdp);
 			free (spent->sp_pwdp);
 		}
 		free (spent);

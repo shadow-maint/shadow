@@ -80,7 +80,7 @@ void gr_free (/*@out@*/ /*@only@*/struct group *grent)
 {
 	free (grent->gr_name);
 	if (NULL != grent->gr_passwd) {
-		memzero (grent->gr_passwd, strlen (grent->gr_passwd));
+		strzero (grent->gr_passwd);
 		free (grent->gr_passwd);
 	}
 	gr_free_members(grent);
