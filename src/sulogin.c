@@ -216,7 +216,7 @@ static void catch_signals (unused int sig)
 		sleep (2);
 		(void) puts (_("Login incorrect"));
 	}
-	strzero (pass);
+	memzero (pass, sizeof pass);
 	(void) alarm (0);
 	(void) signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
