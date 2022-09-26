@@ -8,6 +8,7 @@ noinst_LTLIBRARIES = libmisc.la
 libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
+	agetpass.c \
 	audit_help.c \
 	basename.c \
 	chkname.c \
