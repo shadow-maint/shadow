@@ -44,6 +44,12 @@ extern int add_groups (const char *);
 /* age.c */
 extern void agecheck (/*@null@*/const struct spwd *);
 extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
+
+/* agetpass.c */
+extern void erase_pass(char *pass);
+[[gnu::malloc(erase_pass)]]
+extern char *agetpass(const char *prompt);
+
 /* isexpired.c */
 extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
 
