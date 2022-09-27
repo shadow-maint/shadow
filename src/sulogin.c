@@ -182,7 +182,7 @@ static void catch_signals (unused int sig)
 		 */
 
 		/* get a password for root */
-		cp = getpass (_(
+		cp = agetpass (_(
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"));
@@ -193,6 +193,7 @@ static void catch_signals (unused int sig)
 		 * --marekm
 		 */
 		if ((NULL == cp) || ('\0' == *cp)) {
+			erase_pass (cp);
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_INFO, "Normal startup\n");
 			closelog ();
@@ -204,7 +205,8 @@ static void catch_signals (unused int sig)
 			exit (0);
 		}
 		STRFCPY (pass, cp);
-		strzero (cp);
+		erase_pass (cp);
+
 		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */
 			break;	/* ... encrypted passwords matched */
 		}
