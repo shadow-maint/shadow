@@ -887,24 +887,24 @@ static void change_passwd (struct group *gr)
 	printf (_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
-		cp = getpass (_("New Password: "));
+		cp = agetpass (_("New Password: "));
 		if (NULL == cp) {
 			exit (1);
 		}
 
 		STRFCPY (pass, cp);
-		strzero (cp);
-		cp = getpass (_("Re-enter new password: "));
+		erase_pass (cp);
+		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
 			exit (1);
 		}
 
 		if (strcmp (pass, cp) == 0) {
-			strzero (cp);
+			erase_pass (cp);
 			break;
 		}
 
-		strzero (cp);
+		erase_pass (cp);
 		memzero (pass, sizeof pass);
 
 		if (retries + 1 < RETRIES) {

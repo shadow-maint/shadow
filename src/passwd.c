@@ -186,7 +186,7 @@ static int new_password (const struct passwd *pw)
 	char *clear;		/* Pointer to clear text */
 	char *cipher;		/* Pointer to cipher text */
 	const char *salt;	/* Pointer to new salt */
-	char *cp;		/* Pointer to getpass() response */
+	char *cp;		/* Pointer to agetpass() response */
 	char orig[200];		/* Original password */
 	char pass[200];		/* New password */
 	int i;			/* Counter for retries */
@@ -204,7 +204,7 @@ static int new_password (const struct passwd *pw)
 	 */
 
 	if (!amroot && ('\0' != crypt_passwd[0])) {
-		clear = getpass (_("Old password: "));
+		clear = agetpass (_("Old password: "));
 		if (NULL == clear) {
 			return -1;
 		}
@@ -212,7 +212,7 @@ static int new_password (const struct passwd *pw)
 		cipher = pw_encrypt (clear, crypt_passwd);
 
 		if (NULL == cipher) {
-			strzero (clear);
+			erase_pass (clear);
 			fprintf (stderr,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			         Prog, strerror (errno));
@@ -223,7 +223,7 @@ static int new_password (const struct passwd *pw)
 		}
 
 		if (strcmp (cipher, crypt_passwd) != 0) {
-			strzero (clear);
+			erase_pass (clear);
 			strzero (cipher);
 			SYSLOG ((LOG_WARN, "incorrect password for %s",
 			         pw->pw_name));
@@ -234,7 +234,7 @@ static int new_password (const struct passwd *pw)
 			return -1;
 		}
 		STRFCPY (orig, clear);
-		strzero (clear);
+		erase_pass (clear);
 		strzero (cipher);
 	} else {
 		orig[0] = '\0';
@@ -286,7 +286,7 @@ static int new_password (const struct passwd *pw)
 
 	warned = false;
 	for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
-		cp = getpass (_("New password: "));
+		cp = agetpass (_("New password: "));
 		if (NULL == cp) {
 			memzero (orig, sizeof orig);
 			memzero (pass, sizeof pass);
@@ -296,7 +296,7 @@ static int new_password (const struct passwd *pw)
 			warned = false;
 		}
 		STRFCPY (pass, cp);
-		strzero (cp);
+		erase_pass (cp);
 
 		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
 			(void) puts (_("Try again."));
@@ -314,16 +314,17 @@ static int new_password (const struct passwd *pw)
 			warned = true;
 			continue;
 		}
-		cp = getpass (_("Re-enter new password: "));
+		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
 			memzero (orig, sizeof orig);
 			memzero (pass, sizeof pass);
 			return -1;
 		}
 		if (strcmp (cp, pass) != 0) {
+			erase_pass (cp);
 			(void) fputs (_("They don't match; try again.\n"), stderr);
 		} else {
-			strzero (cp);
+			erase_pass (cp);
 			break;
 		}
 	}

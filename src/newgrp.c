@@ -158,7 +158,7 @@ static void check_perms (const struct group *grp,
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
 		 */
-		cp = getpass (_("Password: "));
+		cp = agetpass (_("Password: "));
 		if (NULL == cp) {
 			goto failure;
 		}
@@ -169,7 +169,7 @@ static void check_perms (const struct group *grp,
 		 * must match the previously encrypted value in the file.
 		 */
 		cpasswd = pw_encrypt (cp, grp->gr_passwd);
-		strzero (cp);
+		erase_pass (cp);
 
 		if (NULL == cpasswd) {
 			fprintf (stderr,
