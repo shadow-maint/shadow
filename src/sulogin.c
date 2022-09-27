@@ -202,10 +202,9 @@ static void catch_signals (unused int sig)
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) 0);
 #endif
 			exit (0);
-		} else {
-			STRFCPY (pass, cp);
-			strzero (cp);
 		}
+		STRFCPY (pass, cp);
+		strzero (cp);
 		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */
 			break;	/* ... encrypted passwords matched */
 		}
