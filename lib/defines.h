@@ -310,14 +310,6 @@ extern char *strerror ();
 # define format_attr(type, index, check)
 #endif
 
-/* ! Arguments evaluated twice ! */
-#ifndef MIN
-#define MIN(a,b) (((a) < (b)) ? (a) : (b))
-#endif
-#ifndef MAX
-#define MAX(x,y) (((x) > (y)) ? (x) : (y))
-#endif
-
 /* Maximum length of usernames */
 #ifdef HAVE_UTMPX_H
 # include <utmpx.h>
