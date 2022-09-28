@@ -330,6 +330,12 @@ extern char *strerror ();
 /* Maximum length of passwd entry */
 #define PASSWD_ENTRY_MAX_LENGTH 32768
 
+#if (__GNUC__ >= 11) && !defined(__clang__)
+# define ATTR_MALLOC(deallocator)  [[gnu::malloc(deallocator)]]
+#else
+# define ATTR_MALLOC(deallocator)
+#endif
+
 #ifdef HAVE_SECURE_GETENV
 #  define shadow_getenv(name) secure_getenv(name)
 # else
