@@ -47,7 +47,7 @@ extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* agetpass.c */
 extern void erase_pass(char *pass);
-[[gnu::malloc(erase_pass)]]
+ATTR_MALLOC(erase_pass)
 extern char *agetpass(const char *prompt);
 
 /* isexpired.c */
