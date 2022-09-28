@@ -85,9 +85,7 @@ int lrename (const char *old, const char *new)
 	res = rename (old, new);
 
 #ifdef __GLIBC__
-	if (NULL != r) {
-		free (r);
-	}
+	free (r);
 #endif				/* __GLIBC__ */
 
 	return res;
@@ -337,9 +335,7 @@ static void free_linked_list (struct commonio_db *db)
 		p = db->head;
 		db->head = p->next;
 
-		if (NULL != p->line) {
-			free (p->line);
-		}
+		free (p->line);
 
 		if (NULL != p->eptr) {
 			db->ops->free (p->eptr);
@@ -395,10 +391,8 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 		err = 1;
 	}
 cleanup_ENOMEM:
-	if (file)
-		free(file);
-	if (lock)
-		free(lock);
+	free(file);
+	free(lock);
 	return err;
 }
 
@@ -1200,9 +1194,7 @@ int commonio_remove (struct commonio_db *db, const char *name)
 
 	commonio_del_entry (db, p);
 
-	if (NULL != p->line) {
-		free (p->line);
-	}
+	free (p->line);
 
 	if (NULL != p->eptr) {
 		db->ops->free (p->eptr);

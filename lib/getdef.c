@@ -388,10 +388,7 @@ int putdef_str (const char *name, const char *value)
 		return -1;
 	}
 
-	if (NULL != d->value) {
-		free (d->value);
-	}
-
+	free (d->value);
 	d->value = cp;
 	return 0;
 }

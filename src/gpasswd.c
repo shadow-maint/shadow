@@ -1186,17 +1186,11 @@ int main (int argc, char **argv)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgent.sg_adm) {
-			xfree(sgent.sg_adm);
-		}
-		if (sgent.sg_mem) {
-			xfree(sgent.sg_mem);
-		}
+		free(sgent.sg_adm);
+		free(sgent.sg_mem);
 	}
 #endif
-	if (grent.gr_mem) {
-		xfree(grent.gr_mem);
-	}
+	free(grent.gr_mem);
 	exit (E_SUCCESS);
 }
 
