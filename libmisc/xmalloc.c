@@ -44,10 +44,3 @@
 {
 	return strcpy (xmalloc (strlen (str) + 1), str);
 }
-
-void xfree(void *ap)
-{
-	if (ap) {
-		free(ap);
-	}
-}

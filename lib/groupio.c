@@ -418,9 +418,7 @@ static int split_groups (unsigned int max_members)
 		/* Shift all the members */
 		/* The number of members in new_gptr will be check later */
 		for (i = 0; NULL != new_gptr->gr_mem[i + max_members]; i++) {
-			if (NULL != new_gptr->gr_mem[i]) {
-				free (new_gptr->gr_mem[i]);
-			}
+			free (new_gptr->gr_mem[i]);
 			new_gptr->gr_mem[i] = new_gptr->gr_mem[i + max_members];
 			new_gptr->gr_mem[i + max_members] = NULL;
 		}

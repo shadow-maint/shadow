@@ -354,12 +354,8 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 				                  old_uid, new_uid,
 				                  old_gid, new_gid);
 			}
-			if (NULL != src_name) {
-				free (src_name);
-			}
-			if (NULL != dst_name) {
-				free (dst_name);
-			}
+			free (src_name);
+			free (dst_name);
 		}
 	}
 	(void) closedir (dir);

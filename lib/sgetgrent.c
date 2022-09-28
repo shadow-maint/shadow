@@ -54,8 +54,7 @@ static char **list (char *s)
 				rbuf = malloc (size * sizeof (char *));
 			}
 			if (!rbuf) {
-				if (members)
-					free (members);
+				free (members);
 				members = 0;
 				size = 0;
 				return (char **) 0;
@@ -89,8 +88,7 @@ struct group *sgetgrent (const char *buf)
 	if (strlen (buf) + 1 > size) {
 		/* no need to use realloc() here - just free it and
 		   allocate a larger block */
-		if (grpbuf)
-			free (grpbuf);
+		free (grpbuf);
 		size = strlen (buf) + 1000;	/* at least: strlen(buf) + 1 */
 		grpbuf = malloc (size);
 		if (!grpbuf) {
