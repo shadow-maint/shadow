@@ -209,13 +209,11 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 
 	if (   (NULL != host)
 	    && ('\0' != host[0])) {
-		hostname = (char *) xmalloc (strlen (host) + 1);
-		strcpy (hostname, host);
+		hostname = xstrdup (host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
-		USTR2STR (hostname, ut->ut_host);
+		hostname = xstrdup (ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 	}
 
@@ -353,14 +351,12 @@ int setutmp (struct utmp *ut)
 
 	if (   (NULL != host)
 	    && ('\0' != host[0])) {
-		hostname = (char *) xmalloc (strlen (host) + 1);
-		strcpy (hostname, host);
+		hostname = xstrdup (host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && (NULL != ut->ut_host)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
-		USTR2STR (hostname, ut->ut_host);
+		hostname = xstrdup (ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_TYPE */
 	}
 
