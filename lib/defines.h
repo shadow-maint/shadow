@@ -251,6 +251,11 @@ static inline void memzero(void *ptr, size_t size)
 #define STRFCPY(A,B) \
 	(strncpy((A), (B), sizeof(A) - 1), (A)[sizeof(A) - 1] = '\0')
 #define STRLCPY(dst, src)  (strlcpy((dst), (src), NITEMS(dst)) >= NITEMS(src))
+#define USTR2STR(dst, src)  do \
+{ \
+	static_assert(NITEMS(dst) > NITEMS(src), ""); \
+	ustr2str((dst), (src), NITEMS(src)); \
+} while (0)
 
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"
