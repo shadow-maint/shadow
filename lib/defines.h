@@ -250,6 +250,7 @@ static inline void memzero(void *ptr, size_t size)
 					/* danger - side effects */
 #define STRFCPY(A,B) \
 	(strncpy((A), (B), sizeof(A) - 1), (A)[sizeof(A) - 1] = '\0')
+#define STRLCPY(dst, src)  (strlcpy((dst), (src), NITEMS(dst)) >= NITEMS(src))
 
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"
