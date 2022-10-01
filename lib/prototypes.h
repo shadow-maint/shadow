@@ -459,6 +459,9 @@ extern int set_filesize_limit (int blocks);
 /* user_busy.c */
 extern int user_busy (const char *name, uid_t uid);
 
+/* ustr2str.c */
+extern void ustr2str (char *restrict dst, const u_char *restrict src, size_t n);
+
 /* utmp.c */
 #ifndef USE_UTMPX
 extern /*@null@*/struct utmp *get_current_utmp (void);
