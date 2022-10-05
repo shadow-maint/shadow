@@ -1882,6 +1882,11 @@ static void move_home (void)
 			         Prog, prefix_user_home, prefix_user_newhome);
 			fail_exit (E_HOMEDIR);
 		}
+	} else {
+		fprintf (stderr,
+		         _("%s: The previous home directory (%s) does not "
+		           "exist or is inaccessible. Move cannot be completed.\n"),
+		         Prog, prefix_user_home);
 	}
 }
 
