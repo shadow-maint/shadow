@@ -228,7 +228,7 @@ static void print_date (time_t date)
 	if (NULL == tp) {
 		(void) printf ("time_t: %lu\n", (unsigned long)date);
 	} else {
-		(void) strftime (buf, sizeof buf, iflg ? "%%Y-%%m-%%d" : "%%b %%d, %%Y", tp);
+		(void) strftime (buf, sizeof buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", tp);
 		(void) puts (buf);
 	}
 }
