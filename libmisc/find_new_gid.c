@@ -60,6 +60,13 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
                             (unsigned long) *max_id);
 			return EINVAL;
 		}
+		/*
+		 * Zero is reserved for root and the allocation algorithm does not
+		 * work right with it.
+		 */
+		if (*min_id == 0) {
+			*min_id = (gid_t) 1;
+		}
 	} else {
 		/* Non-system groups */
 
