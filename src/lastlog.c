@@ -150,9 +150,12 @@ static void print_one (/*@null@*/const struct passwd *pw)
 
 	ll_time = ll.ll_time;
 	tm = localtime (&ll_time);
-	strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
-	cp = ptime;
-
+	if (tm == NULL) {
+		cp = "(unknown)";
+	} else {
+		strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
+		cp = ptime;
+	}
 	if (ll.ll_time == (time_t) 0) {
 		cp = _("**Never logged in**\0");
 	}
