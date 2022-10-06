@@ -60,6 +60,13 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
                             (unsigned long) *max_id);
 			return EINVAL;
 		}
+		/*
+		 * Zero is reserved for root and the allocation algorithm does not
+		 * work right with it.
+		 */
+		if (*min_id == 0) {
+			*min_id = (uid_t) 1;
+		}
 	} else {
 		/* Non-system users */
 
