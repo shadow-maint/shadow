@@ -56,7 +56,10 @@ static int passwd_put (const void *ent, FILE * file)
 	    || (pw->pw_gid == (gid_t)-1)
 	    || (valid_field (pw->pw_gecos, ":\n") == -1)
 	    || (valid_field (pw->pw_dir, ":\n") == -1)
-	    || (valid_field (pw->pw_shell, ":\n") == -1)) {
+	    || (valid_field (pw->pw_shell, ":\n") == -1)
+	    || (strlen (pw->pw_name) + strlen (pw->pw_passwd) +
+	        strlen (pw->pw_gecos) + strlen (pw->pw_dir) +
+	        strlen (pw->pw_shell) + 100 > PASSWD_ENTRY_MAX_LENGTH)) {
 		return -1;
 	}
 
