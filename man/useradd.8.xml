@@ -522,7 +522,7 @@
             the system will use the <option>SHELL</option> variable specified
 	    in <filename>/etc/default/useradd</filename>, or, if that is as
 	    well not set, the field for the login shell in <filename>/etc/passwd
-	    </filename>remains empty.
+	    </filename> remains empty.
 	  </para>
 	</listitem>
       </varlistentry>
