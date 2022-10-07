@@ -16,6 +16,7 @@
 
 #include <sys/types.h>
 #include "prototypes.h"
+#include "shadowlog_internal.h"
 #include "defines.h"
 #include <stdio.h>
 #define	FIELDS	9
@@ -25,7 +26,7 @@
  */
 struct spwd *sgetspent (const char *string)
 {
-	static char spwbuf[1024];
+	static char spwbuf[PASSWD_ENTRY_MAX_LENGTH];
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
@@ -37,6 +38,9 @@ struct spwd *sgetspent (const char *string)
 	 */
 
 	if (strlen (string) >= sizeof spwbuf) {
+		fprintf (shadow_logfd,
+		         "%s: Too long passwd entry encountered, file corruption?\n",
+		         shadow_progname);
 		return 0;	/* fail if too long */
 	}
 	strcpy (spwbuf, string);

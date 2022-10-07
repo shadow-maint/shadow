@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <pwd.h>
 #include "prototypes.h"
+#include "shadowlog_internal.h"
 
 #define	NFIELDS	7
 
@@ -34,7 +35,7 @@
 struct passwd *sgetpwent (const char *buf)
 {
 	static struct passwd pwent;
-	static char pwdbuf[1024];
+	static char pwdbuf[PASSWD_ENTRY_MAX_LENGTH];
 	int i;
 	char *cp;
 	char *fields[NFIELDS];
@@ -44,8 +45,12 @@ struct passwd *sgetpwent (const char *buf)
 	 * the password structure remain valid.
 	 */
 
-	if (strlen (buf) >= sizeof pwdbuf)
+	if (strlen (buf) >= sizeof pwdbuf) {
+		fprintf (shadow_logfd,
+		         "%s: Too long passwd entry encountered, file corruption?\n",
+		         shadow_progname);
 		return 0;	/* fail if too long */
+	}
 	strcpy (pwdbuf, buf);
 
 	/*

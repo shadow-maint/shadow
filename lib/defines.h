@@ -327,6 +327,9 @@ extern char *strerror ();
 # endif
 #endif
 
+/* Maximum length of passwd entry */
+#define PASSWD_ENTRY_MAX_LENGTH 32768
+
 #ifdef HAVE_SECURE_GETENV
 #  define shadow_getenv(name) secure_getenv(name)
 # else
