@@ -80,6 +80,7 @@ const char *Prog;
  * These defaults are used if there is no defaults file.
  */
 static gid_t def_group = 1000;
+static const char *def_groups = "";
 static const char *def_gname = "other";
 static const char *def_home = "/home";
 static const char *def_shell = "/bin/bash";
@@ -183,6 +184,7 @@ static bool home_added = false;
 #endif				/* ENABLE_SUBIDS */
 
 #define DGROUP			"GROUP="
+#define DGROUPS			"GROUPS="
 #define DHOME			"HOME="
 #define DSHELL			"SHELL="
 #define DINACT			"INACTIVE="
@@ -399,6 +401,17 @@ static void get_defaults (void)
 			}
 		}
 
+		if (MATCH (buf, DGROUPS)) {
+			if (get_groups (cp) != 0) {
+				fprintf (stderr,
+				         _("%s: the '%s' configuraton in %s has an invalid group, ignoring the bad group\n"),
+				         Prog, DGROUPS, default_file);
+			}
+			if (user_groups[0] != NULL) {
+				do_grp_update = true;
+				def_groups = xstrdup (cp);
+			}
+		}
 		/*
 		 * Default HOME filesystem
 		 */
@@ -497,6 +510,7 @@ static void get_defaults (void)
 static void show_defaults (void)
 {
 	printf ("GROUP=%u\n", (unsigned int) def_group);
+	printf ("GROUPS=%s\n", def_groups);
 	printf ("HOME=%s\n", def_home);
 	printf ("INACTIVE=%ld\n", def_inactive);
 	printf ("EXPIRE=%s\n", def_expire);
@@ -525,6 +539,7 @@ static int set_defaults (void)
 	int ofd;
 	int wlen;
 	bool out_group = false;
+	bool out_groups = false;
 	bool out_home = false;
 	bool out_inactive = false;
 	bool out_expire = false;
@@ -628,6 +643,9 @@ static int set_defaults (void)
 		if (!out_group && MATCH (buf, DGROUP)) {
 			fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 			out_group = true;
+		} else if (!out_groups && MATCH (buf, DGROUPS)) {
+			fprintf (ofp, DGROUPS "%s\n", def_groups);
+			out_groups = true;
 		} else if (!out_home && MATCH (buf, DHOME)) {
 			fprintf (ofp, DHOME "%s\n", def_home);
 			out_home = true;
@@ -668,6 +686,8 @@ static int set_defaults (void)
 	 */
 	if (!out_group)
 		fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
+	if (!out_groups)
+		fprintf (ofp, DGROUPS "%s\n", def_groups);
 	if (!out_home)
 		fprintf (ofp, DHOME "%s\n", def_home);
 	if (!out_inactive)
