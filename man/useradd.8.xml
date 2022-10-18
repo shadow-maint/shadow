@@ -263,7 +263,9 @@
 	    intervening whitespace. The groups are subject to the same
 	    restrictions as the group given with the <option>-g</option>
 	    option. The default is for the user to belong only to the
-	    initial group.
+	    initial group. In addition to passing in the -G flag, you can
+		add the option <option>GROUPS</option> to the file <filename>/etc/default/useradd</filename>
+		which in turn will add all users to those supplementary groups.
 	  </para>
 	</listitem>
       </varlistentry>
