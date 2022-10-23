@@ -2372,7 +2372,7 @@ static void create_mail (void)
 		if (NULL == spool) {
 			return;
 		}
-		file = alloca (strlen (prefix) + strlen (spool) + strlen (user_name) + 2);
+		file = alloca (strlen (prefix) + strlen (spool) + strlen (user_name) + 3);
 		if (prefix[0])
 			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
 		else
