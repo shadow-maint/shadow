@@ -2188,14 +2188,14 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef ENABLE_SUBIDS
-	if (is_sub_uid &&
+	if (is_sub_uid && !local_sub_uid_assigned(user_name) &&
 	    (sub_uid_add(user_name, sub_uid_start, subuid_count) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry\n"),
 		         Prog, sub_uid_dbname ());
 		fail_exit (E_SUB_UID_UPDATE);
 	}
-	if (is_sub_gid &&
+	if (is_sub_gid && !local_sub_gid_assigned(user_name) &&
 	    (sub_gid_add(user_name, sub_gid_start, subgid_count) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry\n"),
