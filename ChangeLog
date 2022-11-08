@@ -1,3 +1,32 @@
+2022-11-08  Serge Hallyn <serge@hallyn.com>
+
+	* useradd.8: fix default group ID (Tim Biermann)
+	* Revert drop of subid_init() (Serge Hallyn)
+	* Georgian translation (NorwayFun)
+	* useradd: Avoid taking unneeded space: do not reset non-existent data
+	  in lastlog (David Kalnischkies)
+	* relax username restrictions (Alexander Kanavin)
+	* selinux: check MLS enabled before setting serange (genBTC)
+	* copy_tree: use fchmodat instead of chmod (Samanta Navarro)
+	* copy_tree: don't block on FIFOs (Samanta Navarro)
+	* add shell linter (Jan Macku)
+	* copy_tree: carefully treat permissions (Samanta Navarro)
+	* lib/commonio: make lock failures more detailed (Luca BRUNO)
+	* lib: use strzero and memzero where applicable (Christian Göttsche)
+	* Update Dutch translation (Frans Spiesschaert)
+	* Don't test for NULL before calling free (Alex Colomar)
+	* Use libc MAX() and MIN() (Alejandro Colomar)
+	* chage: Fix regression in print_date (Xiami)
+	* usermod: report error if homedir does not exist (Iker Pedrosa)
+	* libmisc: minimum id check for system accounts (Iker Pedrosa)
+	* fix usermod -rG x y wrongly adding a group (xyz)
+	* man: add missing space in useradd.8.xml (Iker Pedrosa)
+	* lastlog: check for localtime() return value (Iker Pedrosa)
+	* Raise limit for passwd and shadow entry length (Iker Pedrosa)
+	* Remove adduser-old.c (Alejandro Colomar)
+	* useradd: Fix buffer overflow when using a prefix (David Michael)
+	* Don't warn when failed to open /etc/nsswitch.conf (Serge Hallyn)
+
 2022-08-15  Serge Hallyn <serge@hallyn.com>
 
 	* Address CVE-2013-4235 (TOCTTOU when copying directories)
