@@ -61,6 +61,9 @@
 #ifndef SKEL_DIR
 #define SKEL_DIR "/etc/skel"
 #endif
+#ifndef USRSKELDIR
+#define USRSKELDIR "/usr/etc/skel"
+#endif
 #ifndef USER_DEFAULTS_FILE
 #define USER_DEFAULTS_FILE "/etc/default/useradd"
 #define NEW_USER_FILE "/etc/default/nuaddXXXXXX"
@@ -85,6 +88,7 @@ static const char *def_gname = "other";
 static const char *def_home = "/home";
 static const char *def_shell = "/bin/bash";
 static const char *def_template = SKEL_DIR;
+static const char *def_usrtemplate = USRSKELDIR;
 static const char *def_create_mail_spool = "yes";
 static const char *def_log_init = "yes";
 
@@ -190,6 +194,7 @@ static bool home_added = false;
 #define DINACT			"INACTIVE="
 #define DEXPIRE			"EXPIRE="
 #define DSKEL			"SKEL="
+#define DUSRSKEL		"USRSKEL="
 #define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
 #define DLOG_INIT	"LOG_INIT="
 
@@ -474,6 +479,29 @@ static void get_defaults (void)
 		}
 
 		/*
+		 * Default Usr Skeleton information
+		 */
+		else if (MATCH (buf, DUSRSKEL)) {
+			if ('\0' == *cp) {
+				cp = USRSKELDIR;	/* XXX warning: const */
+			}
+
+			if(prefix[0]) {
+				size_t len;
+				int wlen;
+				char* _def_usrtemplate; /* avoid const warning */
+
+				len = strlen(prefix) + strlen(cp) + 2;
+				_def_usrtemplate = xmalloc(len);
+				wlen = snprintf(_def_usrtemplate, len, "%s/%s", prefix, cp);
+				assert (wlen == (int) len -1);
+				def_usrtemplate = _def_usrtemplate;
+			}
+			else {
+				def_usrtemplate = xstrdup (cp);
+			}
+		}
+		/*
 		 * Create by default user mail spool or not ?
 		 */
 		else if (MATCH (buf, DCREATE_MAIL_SPOOL)) {
@@ -516,6 +544,7 @@ static void show_defaults (void)
 	printf ("EXPIRE=%s\n", def_expire);
 	printf ("SHELL=%s\n", def_shell);
 	printf ("SKEL=%s\n", def_template);
+	printf ("USRSKEL=%s\n", def_usrtemplate);
 	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
 	printf ("LOG_INIT=%s\n", def_log_init);
 }
@@ -545,6 +574,7 @@ static int set_defaults (void)
 	bool out_expire = false;
 	bool out_shell = false;
 	bool out_skel = false;
+	bool out_usrskel = false;
 	bool out_create_mail_spool = false;
 	bool out_log_init = false;
 	size_t len;
@@ -661,6 +691,9 @@ static int set_defaults (void)
 		} else if (!out_skel && MATCH (buf, DSKEL)) {
 			fprintf (ofp, DSKEL "%s\n", def_template);
 			out_skel = true;
+		} else if (!out_usrskel && MATCH (buf, DUSRSKEL)) {
+			fprintf (ofp, DUSRSKEL "%s\n", def_usrtemplate);
+			out_usrskel = true;
 		} else if (!out_create_mail_spool
 			   && MATCH (buf, DCREATE_MAIL_SPOOL)) {
 			fprintf (ofp,
@@ -698,6 +731,8 @@ static int set_defaults (void)
 		fprintf (ofp, DSHELL "%s\n", def_shell);
 	if (!out_skel)
 		fprintf (ofp, DSKEL "%s\n", def_template);
+	if (!out_usrskel)
+		fprintf (ofp, DUSRSKEL "%s\n", def_usrtemplate);
 
 	if (!out_create_mail_spool)
 		fprintf (ofp, DCREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
@@ -2744,6 +2779,8 @@ int main (int argc, char **argv)
 		create_home ();
 		if (home_added) {
 			copy_tree (def_template, prefix_user_home, false, true,
+			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
+			copy_tree (def_usrtemplate, prefix_user_home, false, false,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
 		} else {
 			fprintf (stderr,
