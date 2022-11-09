@@ -449,6 +449,14 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 		}
 
 		/*
+		 * If the destination already exists do nothing.
+		 * This is after the copy_dir above to still iterate into subdirectories.
+		 */
+		if (fstatat(dst->dirfd, dst->name, &sb, AT_SYMLINK_NOFOLLOW) != -1) {
+			return 0;
+		}
+
+		/*
 		 * Copy any symbolic links
 		 */
 
@@ -507,6 +515,7 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
                      gid_t old_gid, gid_t new_gid)
 {
 	int err = 0;
+	struct stat dst_sb;
 
 	/*
 	 * Create a new target directory, make it owned by
@@ -518,6 +527,15 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
+        /*
+         * If the destination is already a directory, don't change it
+         * but copy into it (recursively).
+        */
+        if (fstatat(dst->dirfd, dst->name, &dst_sb, AT_SYMLINK_NOFOLLOW) == 0 && S_ISDIR(dst_sb.st_mode)) {
+            return (copy_tree (src, dst, false, reset_selinux,
+                           old_uid, new_uid, old_gid, new_gid) != 0);
+        }
+
 	if (   (mkdirat (dst->dirfd, dst->name, 0700) != 0)
 	    || (chownat_if_needed (dst, statp,
 	                         old_uid, new_uid, old_gid, new_gid) != 0)
