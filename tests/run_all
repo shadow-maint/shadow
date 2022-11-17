@@ -664,6 +664,7 @@ run_test ./usertools/58_userdel_locked_shadow/userdel.test
 run_test ./usertools/59_userdel_locked_gshadow/userdel.test
 run_test ./usertools/60_userdel_invalid_user/userdel.test
 run_test ./usertools/61_userdel_del_homedir_with_symlinks/userdel.test
+run_test ./usertools/62_usermod_remove_supplementary_groups/usermod.test
 if [ "$USE_PAM" = "yes" ]; then
 	run_test ./usertools/chpasswd-PAM/01_chpasswd_invalid_user/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/02_chpasswd_multiple_users/chpasswd.test
