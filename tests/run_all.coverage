@@ -634,7 +634,7 @@ run_test ./usertools/12_usermod_move_homedir_dev_null/usermod.test
 run_test ./usertools/13_usermod_move_homedir_file/usermod.test
 run_test ./usertools/14_usermod_move_homedir_other_device/usermod.test
 run_test ./usertools/15_usermod_change_supplementary_groups/usermod.test
-run_test ./usertools/16_usermod_remove_supplementary_groups/usermod.test
+run_test ./usertools/16_usermod_clear_supplementary_groups/usermod.test
 run_test ./usertools/17_usermod_change_supplementary_groups_numerical/usermod.test
 run_test ./usertools/18_usermod_change_supplementary_groups-unknown_group/usermod.test
 run_test ./usertools/19_usermod_change_supplementary_groups-unknown_numerical_group/usermod.test
