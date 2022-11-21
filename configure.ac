@@ -116,6 +116,10 @@ if test "$ac_cv_header_shadow_h" = "yes"; then
 		ac_cv_libc_shadowgrp,
 		AC_RUN_IFELSE([AC_LANG_SOURCE([
 				#include <shadow.h>
+				#ifdef HAVE_GSHADOW_H
+				#include <gshadow.h>
+				#endif
+				int
 				main()
 				{
 					struct sgrp *sg = sgetsgent("test:x::");
