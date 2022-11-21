@@ -5,6 +5,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/lib -I$(top_srcdir) $(ECONF_CPPFLAGS)
 
 noinst_LTLIBRARIES = libmisc.la
 
+libmisc_la_CFLAGS = $(LIBBSD_CFLAGS)
 libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
