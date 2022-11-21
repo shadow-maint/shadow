@@ -405,6 +405,21 @@ AC_SUBST(LIYESCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIYESCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
 
+AC_SEARCH_LIBS([readpassphrase], [bsd], [], [
+	AC_MSG_ERROR([readpassphrase() is missing, either from libc or libbsd])
+])
+AS_IF([test "$ac_cv_search_readpassphrase" = "-lbsd"], [
+	PKG_CHECK_MODULES([LIBBSD], [libbsd-overlay])
+])
+dnl Make sure either the libc or libbsd provide the header.
+save_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS $LIBBSD_CFLAGS"
+AC_CHECK_HEADERS([readpassphrase.h])
+AS_IF([test "$ac_cv_header_readpassphrase_h" != "yes"], [
+	AC_MSG_ERROR([readpassphrase.h is missing])
+])
+CFLAGS="$save_CFLAGS"
+
 AC_SUBST(LIBACL)
 if test "$with_acl" != "no"; then
 	AC_CHECK_HEADERS(acl/libacl.h attr/error_context.h, [acl_header="yes"], [acl_header="no"])
