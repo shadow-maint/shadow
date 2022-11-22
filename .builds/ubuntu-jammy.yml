@@ -3,11 +3,13 @@ packages:
   - automake
   - autopoint
   - xsltproc
+  - libbsd-dev
   - libselinux1-dev
   - gettext
   - expect
   - byacc
   - libtool
+  - pkgconf
 sources:
   - https://github.com/shadow-maint/shadow
 tasks:
