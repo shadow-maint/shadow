@@ -8,10 +8,12 @@ packages:
   - gettext
   - gettext-devel
   - git
+  - libbsd-devel
   - libselinux-devel
   - libsemanage-devel
   - libtool
   - libxslt
+  - pkgconf
 sources:
   - https://github.com/shadow-maint/shadow
 tasks:
