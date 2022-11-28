@@ -11,7 +11,8 @@ AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
-	-DLOCALEDIR=\"$(datadir)/locale\"
+	-DLOCALEDIR=\"$(datadir)/locale\" \
+	$(ECONF_CPPFLAGS)
 
 AM_CFLAGS = $(LIBBSD_CFLAGS)
 
