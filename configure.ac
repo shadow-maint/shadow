@@ -342,6 +342,8 @@ AC_SEARCH_LIBS(gethostbyname, nsl)
 
 AC_CHECK_LIB([econf],[econf_readDirs],[LIBECONF="-leconf"],[LIBECONF=""])
 if test -n "$LIBECONF"; then
+        AC_DEFINE_UNQUOTED([VENDORDIR], ["$enable_vendordir"],
+					[Directory for distribution provided configuration files])
 	ECONF_CPPFLAGS="-DUSE_ECONF=1"
 	AC_ARG_ENABLE([vendordir],
 		AS_HELP_STRING([--enable-vendordir=DIR], [Directory for distribution provided configuration files]),,[])
@@ -349,6 +351,9 @@ fi
 AC_SUBST(ECONF_CPPFLAGS)
 AC_SUBST(LIBECONF)
 AC_SUBST([VENDORDIR], [$enable_vendordir])
+if test "x$enable_vendordir" != x; then
+	AC_DEFINE(HAVE_VENDORDIR, 1, [Define to support vendor settings.])
+fi
 AM_CONDITIONAL([HAVE_VENDORDIR], [test "x$enable_vendordir" != x])
 
 if test "$enable_shadowgrp" = "yes"; then
@@ -759,4 +764,5 @@ echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
 echo "	use file caps:			$with_fcaps"
 echo "	install su:			$with_su"
+echo "	enabled vendor dir:             $enable_vendordir"
 echo

@@ -1,3 +1,8 @@
+if HAVE_VENDORDIR
+VENDORDIR_COND=with_vendordir
+else
+VENDORDIR_COND=without_vendordir
+endif
 if USE_PAM
 PAM_COND=pam
 else
@@ -35,11 +40,12 @@ if ENABLE_REGENERATE_MAN
 	fi
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND)" \
 	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
+	            --stringparam vendordir "$(VENDORDIR)" \
 	            --param "man.output.in.separate.dir" "1" \
-	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
+	            -nonet $(top_builddir)/man/shadow-man.xsl $<
 
 clean-local:
 	rm -rf man1 man3 man5 man8
