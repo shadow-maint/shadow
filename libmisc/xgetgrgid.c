@@ -35,7 +35,7 @@
 #define ARG_TYPE	gid_t
 #define ARG_NAME	gid
 #define DUP_FUNCTION	__gr_dup
-#define HAVE_FUNCTION_R (defined HAVE_GETGRGID_R)
+#define HAVE_FUNCTION_R 1
 
 #include "xgetXXbyYY.c"
 
