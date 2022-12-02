@@ -28,10 +28,8 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
-#ifdef HAVE_SYS_RESOURCE_H
 #include <sys/resource.h>
 #define LIMITS
-#endif
 #ifdef LIMITS
 #ifndef LIMITS_FILE
 #define LIMITS_FILE "/etc/limits"
