@@ -11,11 +11,9 @@
 
 #ident "$Id$"
 
-#if HAVE_SYS_RESOURCE_H
-# include <sys/time.h>		/* for struct timeval on sunos4 */
+#include <sys/time.h>		/* for struct timeval on sunos4 */
 /* XXX - is the above ok or should it be <time.h> on ultrix? */
-# include <sys/resource.h>
-#endif
+#include <sys/resource.h>
 #include "prototypes.h"
 
 int set_filesize_limit (int blocks)
