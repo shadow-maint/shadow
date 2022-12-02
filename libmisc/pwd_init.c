@@ -31,32 +31,32 @@ void pwd_init (void)
 #ifdef HAVE_SYS_RESOURCE_H
 	struct rlimit rlim;
 
-#ifdef RLIMIT_CORE
+# ifdef RLIMIT_CORE
 	rlim.rlim_cur = rlim.rlim_max = 0;
 	setrlimit (RLIMIT_CORE, &rlim);
-#endif
+# endif
 	rlim.rlim_cur = rlim.rlim_max = RLIM_INFINITY;
-#ifdef RLIMIT_AS
+# ifdef RLIMIT_AS
 	setrlimit (RLIMIT_AS, &rlim);
-#endif
-#ifdef RLIMIT_CPU
+# endif
+# ifdef RLIMIT_CPU
 	setrlimit (RLIMIT_CPU, &rlim);
-#endif
-#ifdef RLIMIT_DATA
+# endif
+# ifdef RLIMIT_DATA
 	setrlimit (RLIMIT_DATA, &rlim);
-#endif
-#ifdef RLIMIT_FSIZE
+# endif
+# ifdef RLIMIT_FSIZE
 	setrlimit (RLIMIT_FSIZE, &rlim);
-#endif
-#ifdef RLIMIT_NOFILE
+# endif
+# ifdef RLIMIT_NOFILE
 	setrlimit (RLIMIT_NOFILE, &rlim);
-#endif
-#ifdef RLIMIT_RSS
+# endif
+# ifdef RLIMIT_RSS
 	setrlimit (RLIMIT_RSS, &rlim);
-#endif
-#ifdef RLIMIT_STACK
+# endif
+# ifdef RLIMIT_STACK
 	setrlimit (RLIMIT_STACK, &rlim);
-#endif
+# endif
 #else				/* !HAVE_SYS_RESOURCE_H */
 	set_filesize_limit (30000);
 	/* don't know how to set the other limits... */

@@ -12,18 +12,18 @@
 #ident "$Id$"
 
 #if HAVE_ULIMIT_H
-#include <ulimit.h>
-#ifndef UL_SETFSIZE
-#ifdef UL_SFILLIM
-#define UL_SETFSIZE UL_SFILLIM
-#else
-#define UL_SETFSIZE 2
-#endif
-#endif
+# include <ulimit.h>
+# ifndef UL_SETFSIZE
+#  ifdef UL_SFILLIM
+#   define UL_SETFSIZE UL_SFILLIM
+#  else
+#   define UL_SETFSIZE 2
+#  endif
+# endif
 #elif HAVE_SYS_RESOURCE_H
-#include <sys/time.h>		/* for struct timeval on sunos4 */
+# include <sys/time.h>		/* for struct timeval on sunos4 */
 /* XXX - is the above ok or should it be <time.h> on ultrix? */
-#include <sys/resource.h>
+# include <sys/resource.h>
 #endif
 #include "prototypes.h"
 
