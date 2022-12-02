@@ -179,20 +179,11 @@ static inline void memzero(void *ptr, size_t size)
 # define SEEK_END 2
 #endif
 
-#if HAVE_TERMIOS_H
-# include <termios.h>
-# define STTY(fd, termio) tcsetattr(fd, TCSANOW, termio)
-# define GTTY(fd, termio) tcgetattr(fd, termio)
-# define TERMIO struct termios
-# define USE_TERMIOS
-#else				/* assumed HAVE_TERMIO_H */
-# include <sys/ioctl.h>
-# include <termio.h>
-# define STTY(fd, termio) ioctl(fd, TCSETA, termio)
-# define GTTY(fd, termio) ioctl(fd, TCGETA, termio)
-# define TEMRIO struct termio
-# define USE_TERMIO
-#endif
+#include <termios.h>
+#define STTY(fd, termio) tcsetattr(fd, TCSANOW, termio)
+#define GTTY(fd, termio) tcgetattr(fd, termio)
+#define TERMIO struct termios
+#define USE_TERMIOS
 
 /*
  * Password aging constants
