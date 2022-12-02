@@ -28,10 +28,9 @@ void pwd_init (void)
 {
 	struct rlimit rlim;
 
-#ifdef RLIMIT_CORE
 	rlim.rlim_cur = rlim.rlim_max = 0;
 	setrlimit (RLIMIT_CORE, &rlim);
-#endif
+
 	rlim.rlim_cur = rlim.rlim_max = RLIM_INFINITY;
 #ifdef RLIMIT_AS
 	setrlimit (RLIMIT_AS, &rlim);
