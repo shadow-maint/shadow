@@ -23,68 +23,22 @@ static struct {
 	int spd_baud;
 } speed_table[] =
 {
-#ifdef B50
-	{
-	B50, 50},
-#endif
-#ifdef B75
-	{
-	B75, 75},
-#endif
-#ifdef B110
-	{
-	B110, 110},
-#endif
-#ifdef B134
-	{
-	B134, 134},
-#endif
-#ifdef B150
-	{
-	B150, 150},
-#endif
-#ifdef B200
-	{
-	B200, 200},
-#endif
-#ifdef B300
-	{
-	B300, 300},
-#endif
-#ifdef B600
-	{
-	B600, 600},
-#endif
-#ifdef B1200
-	{
-	B1200, 1200},
-#endif
-#ifdef B1800
-	{
-	B1800, 1800},
-#endif
-#ifdef B2400
-	{
-	B2400, 2400},
-#endif
-#ifdef B4800
-	{
-	B4800, 4800},
-#endif
-#ifdef B9600
-	{
-	B9600, 9600},
-#endif
-#ifdef B19200
-	{
-	B19200, 19200},
-#endif
-#ifdef B38400
-	{
-	B38400, 38400},
-#endif
-	{
-	-1, -1}
+	{ B50, 50},
+	{ B75, 75},
+	{ B110, 110},
+	{ B134, 134},
+	{ B150, 150},
+	{ B200, 200},
+	{ B300, 300},
+	{ B600, 600},
+	{ B1200, 1200},
+	{ B1800, 1800},
+	{ B2400, 2400},
+	{ B4800, 4800},
+	{ B9600, 9600},
+	{ B19200, 19200},
+	{ B38400, 38400},
+	{ -1, -1}
 };
 
 static void get_remote_string (char *buf, size_t size)
