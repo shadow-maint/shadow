@@ -282,13 +282,11 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_MEMLOCK, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_NOFILE
 		case 'n':
 		case 'N':
 			/* RLIMIT_NOFILE - max number of open files */
 			retval |= setrlimit_value (RLIMIT_NOFILE, pp, 1);
 			break;
-#endif
 #ifdef RLIMIT_RTPRIO
 		case 'o':
 		case 'O':
