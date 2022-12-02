@@ -48,9 +48,7 @@ extern char * textdomain (const char * domainname);
 #include <stdlib.h>
 #include <string.h>
 
-#if HAVE_ERRNO_H
-# include <errno.h>
-#endif
+#include <errno.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
