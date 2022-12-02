@@ -42,9 +42,7 @@
 #include <stdio.h>
 #include <syslog.h>
 #include <ctype.h>
-#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif
 #include <grp.h>
 #ifdef PRIMARY_GROUP_MATCH
 #include <pwd.h>
