@@ -29,8 +29,6 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include <sys/resource.h>
-#define LIMITS
-#ifdef LIMITS
 #ifndef LIMITS_FILE
 #define LIMITS_FILE "/etc/limits"
 #endif
@@ -477,7 +475,6 @@ static int setup_user_limits (const char *uname)
 	}
 	return do_user_limits (limits, uname);
 }
-#endif				/* LIMITS */
 
 
 static void setup_usergroups (const struct passwd *info)
@@ -521,7 +518,6 @@ void setup_limits (const struct passwd *info)
 	 */
 
 	if (getdef_bool ("QUOTAS_ENAB")) {
-#ifdef LIMITS
 		if (info->pw_uid != 0) {
 			if ((setup_user_limits (info->pw_name) & LOGIN_ERROR_LOGIN) != 0) {
 				(void) fputs (_("Too many logins.\n"), log_get_logfd());
@@ -529,7 +525,6 @@ void setup_limits (const struct passwd *info)
 				exit (EXIT_FAILURE);
 			}
 		}
-#endif
 		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
 			if (',' == *cp) {
 				cp++;
