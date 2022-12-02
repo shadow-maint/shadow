@@ -46,9 +46,7 @@ extern char * textdomain (const char * domainname);
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#if HAVE_UNISTD_H
-# include <unistd.h>
-#endif
+#include <unistd.h>
 
 /*
  * crypt(3), crypt_gensalt(3), and their
