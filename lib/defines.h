@@ -249,7 +249,6 @@ static inline void memzero(void *ptr, size_t size)
 
 #ifdef sun			/* hacks for compiling on SunOS */
 # ifndef SOLARIS
-extern int fputs ();
 extern char *strdup ();
 extern char *strerror ();
 # endif
