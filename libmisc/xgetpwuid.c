@@ -35,7 +35,7 @@
 #define ARG_TYPE	uid_t
 #define ARG_NAME	uid
 #define DUP_FUNCTION	__pw_dup
-#define HAVE_FUNCTION_R (defined HAVE_GETPWUID_R)
+#define HAVE_FUNCTION_R 1
 
 #include "xgetXXbyYY.c"
 
