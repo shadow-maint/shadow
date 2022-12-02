@@ -305,13 +305,11 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_RSS, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_STACK
 		case 's':
 		case 'S':
 			/* RLIMIT_STACK - max stack size (KB) */
 			retval |= setrlimit_value (RLIMIT_STACK, pp, 1024);
 			break;
-#endif
 		case 't':
 		case 'T':
 			/* RLIMIT_CPU - max CPU time (MIN) */

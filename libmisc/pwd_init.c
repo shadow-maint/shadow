@@ -41,9 +41,7 @@ void pwd_init (void)
 #ifdef RLIMIT_RSS
 	setrlimit (RLIMIT_RSS, &rlim);
 #endif
-#ifdef RLIMIT_STACK
 	setrlimit (RLIMIT_STACK, &rlim);
-#endif
 
 	signal (SIGALRM, SIG_IGN);
 	signal (SIGHUP, SIG_IGN);
