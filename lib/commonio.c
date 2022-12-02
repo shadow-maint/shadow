@@ -261,15 +261,10 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	}
 #endif				/* !HAVE_FCHOWN */
 
-#ifdef HAVE_FCHMOD
 	if (fchmod (fileno (fp), sb->st_mode & 0664) != 0) {
 		goto fail;
 	}
-#else				/* !HAVE_FCHMOD */
-	if (chmod (name, sb->st_mode & 0664) != 0) {
-		goto fail;
-	}
-#endif				/* !HAVE_FCHMOD */
+
 	return fp;
 
       fail:
