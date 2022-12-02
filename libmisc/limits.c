@@ -239,13 +239,11 @@ static int do_user_limits (const char *buf, const char *name)
 
 	while ('\0' != *pp) {
 		switch (*pp++) {
-#ifdef RLIMIT_AS
 		case 'a':
 		case 'A':
 			/* RLIMIT_AS - max address space (KB) */
 			retval |= setrlimit_value (RLIMIT_AS, pp, 1024);
 			break;
-#endif
 		case 'c':
 		case 'C':
 			/* RLIMIT_CORE - max core file size (KB) */
