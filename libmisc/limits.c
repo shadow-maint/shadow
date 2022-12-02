@@ -318,13 +318,11 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_STACK, pp, 1024);
 			break;
 #endif
-#ifdef RLIMIT_CPU
 		case 't':
 		case 'T':
 			/* RLIMIT_CPU - max CPU time (MIN) */
 			retval |= setrlimit_value (RLIMIT_CPU, pp, 60);
 			break;
-#endif
 #ifdef RLIMIT_NPROC
 		case 'u':
 		case 'U':
