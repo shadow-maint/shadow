@@ -36,9 +36,7 @@ void pwd_init (void)
 
 	setrlimit (RLIMIT_CPU, &rlim);
 	setrlimit (RLIMIT_DATA, &rlim);
-#ifdef RLIMIT_FSIZE
 	setrlimit (RLIMIT_FSIZE, &rlim);
-#endif
 #ifdef RLIMIT_NOFILE
 	setrlimit (RLIMIT_NOFILE, &rlim);
 #endif
