@@ -254,13 +254,11 @@ static int do_user_limits (const char *buf, const char *name)
 			/* RLIMIT_DATA - max data size (KB) */
 			retval |= setrlimit_value (RLIMIT_DATA, pp, 1024);
 			break;
-#ifdef RLIMIT_FSIZE
 		case 'f':
 		case 'F':
 			/* RLIMIT_FSIZE - Maximum filesize (KB) */
 			retval |= setrlimit_value (RLIMIT_FSIZE, pp, 1024);
 			break;
-#endif
 #ifdef RLIMIT_NICE
 		case 'i':
 		case 'I':
