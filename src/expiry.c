@@ -133,9 +133,7 @@ int main (int argc, char **argv)
 	(void) signal (SIGHUP, catch_signals);
 	(void) signal (SIGINT, catch_signals);
 	(void) signal (SIGQUIT, catch_signals);
-#ifdef	SIGTSTP
 	(void) signal (SIGTSTP, catch_signals);
-#endif
 
 	/*
 	 * expiry takes one of two arguments. The default action is to give

@@ -42,21 +42,16 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	FILE *fp;
 
 	sighandler_t sigquit;
-#ifdef	SIGTSTP
 	sighandler_t sigtstp;
-#endif
 
 	/*
 	 * There is a small chance that a QUIT character will be part of
 	 * some random noise during a prompt.  Deal with this by exiting
-	 * instead of core dumping.  If SIGTSTP is defined, do the same
-	 * thing for that signal.
+	 * instead of core dumping.  Do the same thing for SIGTSTP.
 	 */
 
 	sigquit = signal (SIGQUIT, login_exit);
-#ifdef	SIGTSTP
 	sigtstp = signal (SIGTSTP, login_exit);
-#endif
 
 	/*
 	 * See if the user has configured the issue file to
@@ -148,8 +143,6 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 */
 
 	(void) signal (SIGQUIT, sigquit);
-#ifdef	SIGTSTP
 	(void) signal (SIGTSTP, sigtstp);
-#endif
 }
 
