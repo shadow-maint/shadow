@@ -36,7 +36,7 @@ LT_INIT
 dnl Checks for libraries.
 
 dnl Checks for header files.
-AC_CHECK_HEADERS(crypt.h sys/time.h utmp.h \
+AC_CHECK_HEADERS(crypt.h utmp.h \
 	utmpx.h termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
 	utime.h ulimit.h sys/capability.h sys/random.h sys/resource.h \
 	gshadow.h lastlog.h rpc/key_prot.h netdb.h acl/libacl.h \
