@@ -986,13 +986,11 @@ int commonio_close (struct commonio_db *db)
 	if (fflush (db->fp) != 0) {
 		errors++;
 	}
-#ifdef HAVE_FSYNC
+
 	if (fsync (fileno (db->fp)) != 0) {
 		errors++;
 	}
-#else				/* !HAVE_FSYNC */
-	sync ();
-#endif				/* !HAVE_FSYNC */
+
 	if (fclose (db->fp) != 0) {
 		errors++;
 	}
