@@ -18,15 +18,7 @@ extern char * textdomain (const char * domainname);
 # define ngettext(Msgid1, Msgid2, N) \
     ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
 #else
-#ifdef HAVE_LOCALE_H
-# include <locale.h>
-#else
-# undef setlocale
-# define setlocale(category, locale)	(NULL)
-# ifndef LC_ALL
-#  define LC_ALL	6
-# endif
-#endif
+#include <locale.h>
 
 #define gettext_noop(String) (String)
 /* #define gettext_def(String) "#define String" */
