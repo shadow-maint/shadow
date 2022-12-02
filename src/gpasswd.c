@@ -1145,9 +1145,7 @@ int main (int argc, char **argv)
 	(void) signal (SIGINT, catch_signals);
 	(void) signal (SIGQUIT, catch_signals);
 	(void) signal (SIGTERM, catch_signals);
-#ifdef SIGTSTP
 	(void) signal (SIGTSTP, catch_signals);
-#endif
 
 	/* Prompt for the new password */
 #ifdef SHADOWGRP

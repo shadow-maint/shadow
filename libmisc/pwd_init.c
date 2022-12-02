@@ -49,9 +49,7 @@ void pwd_init (void)
 	signal (SIGPIPE, SIG_IGN);
 	signal (SIGQUIT, SIG_IGN);
 	signal (SIGTERM, SIG_IGN);
-#ifdef SIGTSTP
 	signal (SIGTSTP, SIG_IGN);
-#endif
 #ifdef SIGTTOU
 	signal (SIGTTOU, SIG_IGN);
 #endif
