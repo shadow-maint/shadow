@@ -50,9 +50,7 @@ void pwd_init (void)
 	signal (SIGQUIT, SIG_IGN);
 	signal (SIGTERM, SIG_IGN);
 	signal (SIGTSTP, SIG_IGN);
-#ifdef SIGTTOU
 	signal (SIGTTOU, SIG_IGN);
-#endif
 
 	umask (077);
 }
