@@ -49,7 +49,7 @@ AC_CHECK_FUNCS(arc4random_buf futimes \
 	getentropy getrandom getspnam getusershell \
 	getutent initgroups lckpwdf lutimes \
 	setgroups updwtmp updwtmpx innetgr \
-	getgrgid_r getspnam_r \
+	getspnam_r \
 	memset_s explicit_bzero)
 AC_SYS_LARGEFILE
 
