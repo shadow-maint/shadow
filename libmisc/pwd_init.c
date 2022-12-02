@@ -32,9 +32,8 @@ void pwd_init (void)
 	setrlimit (RLIMIT_CORE, &rlim);
 
 	rlim.rlim_cur = rlim.rlim_max = RLIM_INFINITY;
-#ifdef RLIMIT_AS
 	setrlimit (RLIMIT_AS, &rlim);
-#endif
+
 #ifdef RLIMIT_CPU
 	setrlimit (RLIMIT_CPU, &rlim);
 #endif
