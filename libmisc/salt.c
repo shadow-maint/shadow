@@ -10,8 +10,6 @@
  *
  * Written by Marek Michalkiewicz <marekm@i17linuxb.ists.pwr.wroc.pl>,
  * it is in the public domain.
- *
- * l64a was Written by J.T. Conklin <jtc@netbsd.org>. Public domain.
  */
 
 #include <config.h>
@@ -110,42 +108,6 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *prefered_cost);
 static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
-
-#if !USE_XCRYPT_GENSALT && !defined(HAVE_L64A)
-static /*@observer@*/char *l64a (long value)
-{
-	static char buf[8];
-	char *s = buf;
-	int digit;
-	int i;
-
-	if (value < 0) {
-		errno = EINVAL;
-		return(NULL);
-	}
-
-	for (i = 0; value != 0 && i < 6; i++) {
-		digit = value & 0x3f;
-
-		if (digit < 2) {
-			*s = digit + '.';
-		} else if (digit < 12) {
-			*s = digit + '0' - 2;
-		} else if (digit < 38) {
-			*s = digit + 'A' - 12;
-		} else {
-			*s = digit + 'a' - 38;
-		}
-
-		value >>= 6;
-		s++;
-	}
-
-	*s = '\0';
-
-	return buf;
-}
-#endif /* !USE_XCRYPT_GENSALT && !defined(HAVE_L64A) */
 
 /* Read sizeof (long) random bytes from /dev/urandom. */
 static long read_random_bytes (void)
