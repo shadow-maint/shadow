@@ -11,16 +11,7 @@
 
 #ident "$Id$"
 
-#if HAVE_ULIMIT_H
-# include <ulimit.h>
-# ifndef UL_SETFSIZE
-#  ifdef UL_SFILLIM
-#   define UL_SETFSIZE UL_SFILLIM
-#  else
-#   define UL_SETFSIZE 2
-#  endif
-# endif
-#elif HAVE_SYS_RESOURCE_H
+#if HAVE_SYS_RESOURCE_H
 # include <sys/time.h>		/* for struct timeval on sunos4 */
 /* XXX - is the above ok or should it be <time.h> on ultrix? */
 # include <sys/resource.h>
@@ -30,11 +21,7 @@
 int set_filesize_limit (int blocks)
 {
 	int ret = -1;
-#if HAVE_ULIMIT_H
-	if (ulimit (UL_SETFSIZE, blocks) != -1) {
-		ret = 0;
-	}
-#elif defined(RLIMIT_FSIZE)
+#if defined(RLIMIT_FSIZE)
 	struct rlimit rlimit_fsize;
 
 	rlimit_fsize.rlim_cur = 512L * blocks;
