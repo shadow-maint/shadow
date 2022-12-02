@@ -279,21 +279,8 @@ extern char *strdup ();
 #endif
 
 /* Maximum length of usernames */
-#ifdef HAVE_UTMPX_H
-# include <utmpx.h>
-# define USER_NAME_MAX_LENGTH (sizeof (((struct utmpx *)NULL)->ut_user))
-#else
-# include <utmp.h>
-# ifdef HAVE_STRUCT_UTMP_UT_USER
-#  define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_user))
-# else
-#  ifdef HAVE_STRUCT_UTMP_UT_NAME
-#   define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_name))
-#  else
-#   define USER_NAME_MAX_LENGTH 32
-#  endif
-# endif
-#endif
+#include <utmpx.h>
+#define USER_NAME_MAX_LENGTH (sizeof (((struct utmpx *)NULL)->ut_user))
 
 /* Maximum length of passwd entry */
 #define PASSWD_ENTRY_MAX_LENGTH 32768
