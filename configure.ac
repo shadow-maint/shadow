@@ -102,7 +102,7 @@ AC_TYPE_GETGROUPS
 AC_FUNC_UTIME_NULL
 AC_REPLACE_FUNCS(mkdir putgrent putpwent putspent rmdir)
 AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
-AC_REPLACE_FUNCS(snprintf strcasecmp strdup strstr)
+AC_REPLACE_FUNCS(strcasecmp strdup strstr)
 
 AC_CHECK_FUNC(setpgrp)
 AC_CHECK_FUNC(secure_getenv, [AC_DEFINE(HAS_SECURE_GETENV,
