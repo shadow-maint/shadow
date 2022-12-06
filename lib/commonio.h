@@ -123,6 +123,7 @@ extern int commonio_setname (struct commonio_db *, const char *);
 extern bool commonio_present (const struct commonio_db *db);
 extern int commonio_lock (struct commonio_db *);
 extern int commonio_lock_nowait (struct commonio_db *, bool log);
+extern int do_fcntl_lock (const char *file, bool log, short type);
 extern int commonio_open (struct commonio_db *, int);
 extern /*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);

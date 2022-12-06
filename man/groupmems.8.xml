@@ -167,7 +167,7 @@
     <programlisting>
 	$ groupadd -r groups
 	$ chmod 2710 groupmems
-	$ chown root.groups groupmems
+	$ chown root:groups groupmems
 	$ groupmems -g groups -a gk4
     </programlisting>
   </refsect1>
