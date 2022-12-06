@@ -32,8 +32,6 @@
 
 /* local function prototypes */
 static int lrename (const char *, const char *);
-static int check_link_count (const char *file, bool log);
-static int do_lock_file (const char *file, const char *lock, bool log);
 static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	const char *name,
 	const char *mode,
@@ -89,150 +87,6 @@ int lrename (const char *old, const char *new)
 #endif				/* __GLIBC__ */
 
 	return res;
-}
-
-static int check_link_count (const char *file, bool log)
-{
-	struct stat sb;
-
-	if (stat (file, &sb) != 0) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s file stat error: %s\n",
-			                shadow_progname, file, strerror (errno));
-		}
-		return 0;
-	}
-
-	if (sb.st_nlink != 2) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s: lock file already used (nlink: %u)\n",
-			                shadow_progname, file, sb.st_nlink);
-		}
-		return 0;
-	}
-
-	return 1;
-}
-
-
-static int do_lock_file (const char *file, const char *lock, bool log)
-{
-	int fd;
-	pid_t pid;
-	ssize_t len;
-	int retval;
-	char buf[32];
-
-	fd = open (file, O_CREAT | O_TRUNC | O_WRONLY, 0600);
-	if (-1 == fd) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s: %s\n",
-			                shadow_progname, file, strerror (errno));
-		}
-		return 0;
-	}
-
-	pid = getpid ();
-	snprintf (buf, sizeof buf, "%lu", (unsigned long) pid);
-	len = (ssize_t) strlen (buf) + 1;
-	if (write (fd, buf, (size_t) len) != len) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s file write error: %s\n",
-			                shadow_progname, file, strerror (errno));
-		}
-		(void) close (fd);
-		unlink (file);
-		return 0;
-	}
-	if (fdatasync (fd) == -1) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s file sync error: %s\n",
-			                shadow_progname, file, strerror (errno));
-		}
-		(void) close (fd);
-		unlink (file);
-		return 0;
-	}
-	close (fd);
-
-	if (link (file, lock) == 0) {
-		retval = check_link_count (file, log);
-		unlink (file);
-		return retval;
-	}
-
-	fd = open (lock, O_RDWR);
-	if (-1 == fd) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
-		}
-		unlink (file);
-		errno = EINVAL;
-		return 0;
-	}
-	len = read (fd, buf, sizeof (buf) - 1);
-	close (fd);
-	if (len <= 0) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: existing lock file %s without a PID\n",
-			                shadow_progname, lock);
-		}
-		unlink (file);
-		errno = EINVAL;
-		return 0;
-	}
-	buf[len] = '\0';
-	if (get_pid (buf, &pid) == 0) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: existing lock file %s with an invalid PID '%s'\n",
-			                shadow_progname, lock, buf);
-		}
-		unlink (file);
-		errno = EINVAL;
-		return 0;
-	}
-	if (kill (pid, 0) == 0) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: lock %s already used by PID %lu\n",
-			                shadow_progname, lock, (unsigned long) pid);
-		}
-		unlink (file);
-		errno = EEXIST;
-		return 0;
-	}
-	if (unlink (lock) != 0) {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
-		}
-		unlink (file);
-		return 0;
-	}
-
-	retval = 0;
-	if (link (file, lock) == 0) {
-		retval = check_link_count (file, log);
-	} else {
-		if (log) {
-			(void) fprintf (shadow_logfd,
-			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
-		}
-	}
-
-	unlink (file);
-	return retval;
 }
 
 
@@ -361,6 +215,30 @@ bool commonio_present (const struct commonio_db *db)
 }
 
 
+int do_fcntl_lock (const char *file, bool log, short type)
+{
+	int fd;
+	struct flock lck = {
+		.l_type = type,
+		.l_whence = SEEK_SET,
+		.l_start = 0,
+		.l_len = 0,
+	};
+
+	fd = open (file, O_WRONLY, 0600);
+	if (-1 == fd) {
+		if (log) {
+				(void) fprintf (shadow_logfd, "%s: %s: %s\n",
+				                shadow_progname, file, strerror (errno));
+		}
+		return 0;
+	}
+
+	fcntl (fd, F_OFD_SETLKW, &lck);
+	close(fd);
+	return(1);
+}
+
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
 	char* file = NULL;
@@ -384,8 +262,8 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 	}
 	snprintf (file, file_len, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
-	snprintf (lock, lock_file_len, "%s.lock", db->filename);
-	if (do_lock_file (file, lock, log) != 0) {
+
+	if (do_fcntl_lock (db->filename, log, F_WRLCK | F_RDLCK) != 0) {
 		db->locked = true;
 		lock_count++;
 		err = 1;
@@ -483,8 +361,6 @@ static void dec_lock_count (void)
 
 int commonio_unlock (struct commonio_db *db)
 {
-	char lock[1024];
-
 	if (db->isopen) {
 		db->readonly = true;
 		if (commonio_close (db) == 0) {
@@ -495,13 +371,9 @@ int commonio_unlock (struct commonio_db *db)
 		}
 	}
 	if (db->locked) {
-		/*
-		 * Unlock in reverse order: remove the lock file,
-		 * then call ulckpwdf() (if used) on last unlock.
-		 */
 		db->locked = false;
-		snprintf (lock, sizeof lock, "%s.lock", db->filename);
-		unlink (lock);
+
+		do_fcntl_lock (db->filename, false, F_UNLCK);
 		dec_lock_count ();
 		return 1;
 	}
