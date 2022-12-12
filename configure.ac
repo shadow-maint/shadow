@@ -102,7 +102,6 @@ AC_TYPE_GETGROUPS
 AC_FUNC_UTIME_NULL
 AC_REPLACE_FUNCS(putgrent putpwent putspent)
 AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
-AC_REPLACE_FUNCS(strdup)
 
 AC_CHECK_FUNC(setpgrp)
 AC_CHECK_FUNC(secure_getenv, [AC_DEFINE(HAS_SECURE_GETENV,
