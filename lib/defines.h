@@ -232,12 +232,6 @@ static inline void memzero(void *ptr, size_t size)
 #endif
 #endif
 
-#ifdef sun			/* hacks for compiling on SunOS */
-# ifndef SOLARIS
-extern char *strdup ();
-# endif
-#endif
-
 /*
  * string to use for the pw_passwd field in /etc/passwd when using
  * shadow passwords - most systems use "x" but there are a few
