@@ -154,19 +154,6 @@ static inline void memzero(void *ptr, size_t size)
 
 #define OPENLOG(progname) openlog(progname, SYSLOG_OPTIONS, SYSLOG_FACILITY)
 
-#ifndef F_OK
-# define F_OK 0
-# define X_OK 1
-# define W_OK 2
-# define R_OK 4
-#endif
-
-#ifndef SEEK_SET
-# define SEEK_SET 0
-# define SEEK_CUR 1
-# define SEEK_END 2
-#endif
-
 #include <termios.h>
 #define STTY(fd, termio) tcsetattr(fd, TCSANOW, termio)
 #define GTTY(fd, termio) tcgetattr(fd, termio)
