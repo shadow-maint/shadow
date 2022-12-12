@@ -7,17 +7,6 @@
 #include "config.h"
 
 #include <stdbool.h>
-
-/* Take care of NLS matters.  */
-#ifdef S_SPLINT_S
-extern char *setlocale(int categories, const char *locale);
-# define LC_ALL		(6)
-extern char * bindtextdomain (const char * domainname, const char * dirname);
-extern char * textdomain (const char * domainname);
-# define _(Text) Text
-# define ngettext(Msgid1, Msgid2, N) \
-    ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
-#else
 #include <locale.h>
 
 #define gettext_noop(String) (String)
@@ -34,7 +23,6 @@ extern char * textdomain (const char * domainname);
 # define _(Text) Text
 # define ngettext(Msgid1, Msgid2, N) \
     ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
-#endif
 #endif
 
 #include <stdlib.h>
