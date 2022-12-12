@@ -337,7 +337,6 @@ dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
 dnl needed (Linux glibc, Irix), but still link it if needed (Solaris).
 
-AC_SEARCH_LIBS(inet_ntoa, inet)
 AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(gethostbyname, nsl)
 
