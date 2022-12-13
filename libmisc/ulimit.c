@@ -11,8 +11,7 @@
 
 #ident "$Id$"
 
-#include <sys/time.h>		/* for struct timeval on sunos4 */
-/* XXX - is the above ok or should it be <time.h> on ultrix? */
+#include <sys/time.h>
 #include <sys/resource.h>
 #include "prototypes.h"
 
