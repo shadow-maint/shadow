@@ -67,13 +67,11 @@ static void catch_signals (unused int sig)
 	TERMIO termio;
 	int err = 0;
 
-#ifdef	USE_TERMIOS
 	tcgetattr (0, &termio);
 	termio.c_iflag |= (ICRNL | IXON);
 	termio.c_oflag |= (CREAD);
 	termio.c_lflag |= (ECHO | ECHOE | ECHOK | ICANON | ISIG);
 	tcsetattr (0, TCSANOW, &termio);
-#endif
 
 	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
