@@ -158,7 +158,6 @@ static inline void memzero(void *ptr, size_t size)
 #define STTY(fd, termio) tcsetattr(fd, TCSANOW, termio)
 #define GTTY(fd, termio) tcgetattr(fd, termio)
 #define TERMIO struct termios
-#define USE_TERMIOS
 
 /*
  * Password aging constants
