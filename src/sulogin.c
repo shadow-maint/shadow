@@ -67,14 +67,6 @@ static void catch_signals (unused int sig)
 	TERMIO termio;
 	int err = 0;
 
-#ifdef	USE_TERMIO
-	ioctl (0, TCGETA, &termio);
-	termio.c_iflag |= (ICRNL | IXON);
-	termio.c_oflag |= (OPOST | ONLCR);
-	termio.c_cflag |= (CREAD);
-	termio.c_lflag |= (ISIG | ICANON | ECHO | ECHOE | ECHOK);
-	ioctl (0, TCSETAF, &termio);
-#endif
 #ifdef	USE_TERMIOS
 	tcgetattr (0, &termio);
 	termio.c_iflag |= (ICRNL | IXON);
