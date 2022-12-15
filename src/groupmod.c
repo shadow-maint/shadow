@@ -554,13 +554,13 @@ static void prepare_failure_reports (void)
 #endif
 	info_passwd.audit_msg  = xmalloc (512);
 
-	(void) snprintf (info_group.audit_msg, 511,
+	(void) snprintf (info_group.audit_msg, 512,
 	                 "changing %s; ", gr_dbname ());
 #ifdef	SHADOWGRP
-	(void) snprintf (info_gshadow.audit_msg, 511,
+	(void) snprintf (info_gshadow.audit_msg, 512,
 	                 "changing %s; ", sgr_dbname ());
 #endif
-	(void) snprintf (info_passwd.audit_msg, 511,
+	(void) snprintf (info_passwd.audit_msg, 512,
 	                 "changing %s; ", pw_dbname ());
 
 	info_group.action   =   info_group.audit_msg
@@ -573,16 +573,16 @@ static void prepare_failure_reports (void)
 	                      + strlen (info_passwd.audit_msg);
 
 	(void) snprintf (info_group.action,
-	                 511 - strlen (info_group.audit_msg),
+	                 512 - strlen (info_group.audit_msg),
 	                 "group %s/%lu",
 	                 group_name, (unsigned long int) group_id);
 #ifdef	SHADOWGRP
 	(void) snprintf (info_gshadow.action,
-	                 511 - strlen (info_group.audit_msg),
+	                 512 - strlen (info_group.audit_msg),
 	                 "group %s", group_name);
 #endif
 	(void) snprintf (info_passwd.action,
-	                 511 - strlen (info_group.audit_msg),
+	                 512 - strlen (info_group.audit_msg),
 	                 "group %s/%lu",
 	                 group_name, (unsigned long int) group_id);
 
@@ -617,13 +617,13 @@ static void prepare_failure_reports (void)
 		strncat (info_group.action, ", new gid: ",
 		         511 - strlen (info_group.audit_msg));
 		(void) snprintf (info_group.action+strlen (info_group.action),
-		                 511 - strlen (info_group.audit_msg),
+		                 512 - strlen (info_group.audit_msg),
 		                 "%lu", (unsigned long int) group_newid);
 
 		strncat (info_passwd.action, ", new gid: ",
 		         511 - strlen (info_passwd.audit_msg));
 		(void) snprintf (info_passwd.action+strlen (info_passwd.action),
-		                 511 - strlen (info_passwd.audit_msg),
+		                 512 - strlen (info_passwd.audit_msg),
 		                 "%lu", (unsigned long int) group_newid);
 	}
 	info_group.audit_msg[511]   = '\0';
