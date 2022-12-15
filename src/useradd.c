@@ -2225,9 +2225,14 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 #endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
+	/*
+	 * Even though we have the ID of the user, we won't send it now
+	 * because its not written to disk yet. After close_files it is
+	 * and we can use the real ID thereafter.
+	 */
 	audit_logger (AUDIT_ADD_USER, Prog,
 	              "adding user",
-	              user_name, (unsigned int) user_id,
+	              user_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
 #endif
 	/*
