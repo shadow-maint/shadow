@@ -578,11 +578,11 @@ static void prepare_failure_reports (void)
 	                 "group %s/%ju", group_name, (uintmax_t) group_id);
 #ifdef	SHADOWGRP
 	(void) snprintf (info_gshadow.action,
-	                 512 - strlen (info_group.audit_msg),
+	                 512 - strlen (info_gshadow.audit_msg),
 	                 "group %s", group_name);
 #endif
 	(void) snprintf (info_passwd.action,
-	                 512 - strlen (info_group.audit_msg),
+	                 512 - strlen (info_passwd.audit_msg),
 	                 "group %s/%ju", group_name, (uintmax_t) group_id);
 
 	if (nflg) {
