@@ -40,10 +40,8 @@ static bool is_my_tty (const char *tty)
 
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);
-		if (NULL != tname) {
-			(void) strncpy (tmptty, tname, sizeof tmptty);
-			tmptty[sizeof (tmptty) - 1] = '\0';
-		}
+		if (NULL != tname)
+			(void) strlcpy (tmptty, tname, sizeof tmptty);
 	}
 
 	if ('\0' == tmptty[0]) {
