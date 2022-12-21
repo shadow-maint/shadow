@@ -698,9 +698,6 @@ if test "$with_skey" = "yes"; then
 fi
 
 if test "$enable_utmpx" = "yes"; then
-	if test "$ac_cv_header_utmpx_h" != "yes"; then
-		AC_MSG_ERROR([The utmpx.h header file is required for utmpx support.])
-	fi
 	AC_DEFINE(USE_UTMPX,
 	          1,
 	          [Define if utmpx should be used])
