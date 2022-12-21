@@ -1097,6 +1097,6 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 }
 
 #else				/* !ENABLE_SUBIDS */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
 

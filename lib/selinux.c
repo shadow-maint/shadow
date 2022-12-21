@@ -206,5 +206,5 @@ int check_selinux_permit (const char *perm_name)
 }
 
 #else				/* !WITH_SELINUX */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !WITH_SELINUX */

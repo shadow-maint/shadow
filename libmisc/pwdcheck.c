@@ -34,5 +34,5 @@ void passwd_check (const char *user, const char *passwd, unused const char *prog
 	}
 }
 #else			/* USE_PAM */
-extern int errno;	/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif			/* USE_PAM */

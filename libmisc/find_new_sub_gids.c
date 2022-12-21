@@ -59,6 +59,6 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 	return 0;
 }
 #else				/* !ENABLE_SUBIDS */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
 
