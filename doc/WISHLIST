@@ -26,7 +26,6 @@ New ideas to add to this list are welcome, too.  --marekm
 - vipw: check password files for errors after editing
 - add "maximum time users allowed to stay logged in" limit option to logoutd
 - handle quotes in /etc/environment like the shell does (but sshd doesn't...)
-- better utmpx support (logoutd, ...)
 - better OPIE support (report number of logins left, etc.)
 - new option for /etc/suauth: don't load user's environment (force "su -")
   suggested by Ulisses Alonso Camaro

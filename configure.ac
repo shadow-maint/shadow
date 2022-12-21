@@ -72,14 +72,6 @@ AC_CHECK_MEMBERS([struct utmp.ut_type,
                   struct utmp.ut_xtime,
                   struct utmp.ut_tv],,,[[#include <utmp.h>]])
 
-AC_CHECK_MEMBERS([struct utmpx.ut_name,
-                  struct utmpx.ut_host,
-                  struct utmpx.ut_syslen,
-                  struct utmpx.ut_addr,
-                  struct utmpx.ut_addr_v6,
-                  struct utmpx.ut_time,
-                  struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
-
 if test "$ac_cv_header_lastlog_h" = "yes"; then
 	AC_CACHE_CHECK(for ll_host in struct lastlog,
 		ac_cv_struct_lastlog_ll_host,
