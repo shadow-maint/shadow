@@ -188,7 +188,6 @@ static bool restricted_shell (const char *shellname)
 static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root)
 {
 	sulog (tty, false, caller_name, name);	/* log failed attempt */
-#ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
 		         "- %s %s:%s", tty,
@@ -196,7 +195,6 @@ static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root)
 		         ('\0' != name[0]) ? name : "???"));
 	}
 	closelog ();
-#endif
 
 #ifdef WITH_AUDIT
 	audit_fd = audit_open ();
@@ -1050,13 +1048,11 @@ int main (int argc, char **argv)
 	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
-#ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
 		         ('\0' != caller_name[0]) ? caller_name : "???",
 		         ('\0' != name[0]) ? name : "???"));
 	}
-#endif
 
 #ifdef USE_PAM
 	/* set primary group id and supplementary groups */

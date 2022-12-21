@@ -132,10 +132,8 @@ static struct itemdef def_table[] = {
 #ifndef USE_PAM
 	PAMDEFS
 #endif
-#ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
-#endif
 #ifdef WITH_TCB
 	{"TCB_AUTH_GROUP", NULL},
 	{"TCB_SYMLINKS", NULL},

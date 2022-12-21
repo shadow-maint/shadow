@@ -231,7 +231,6 @@ failure:
 	exit (EXIT_FAILURE);
 }
 
-#ifdef USE_SYSLOG
 /*
  * syslog_sg - log the change of group to syslog
  *
@@ -365,7 +364,6 @@ static void syslog_sg (const char *name, const char *group)
 	free(free_login);
 	free(free_tty);
 }
-#endif				/* USE_SYSLOG */
 
 /*
  * newgrp - change the invokers current real and effective group id
@@ -665,11 +663,9 @@ int main (int argc, char **argv)
 	 * all successful validations pass through this point. The group id
 	 * will be set, and the group added to the concurrent groupset.
 	 */
-#ifdef	USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
 		syslog_sg (name, group);
 	}
-#endif				/* USE_SYSLOG */
 
 	gid = grp->gr_gid;
 

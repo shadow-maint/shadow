@@ -85,7 +85,6 @@ static inline void memzero(void *ptr, size_t size)
 #endif
 #endif
 
-#ifdef USE_SYSLOG
 #include <syslog.h>
 
 #ifndef LOG_WARN
@@ -131,14 +130,6 @@ static inline void memzero(void *ptr, size_t size)
 #else				/* !ENABLE_NLS */
 #define SYSLOG(x) syslog x
 #endif				/* !ENABLE_NLS */
-
-#else				/* !USE_SYSLOG */
-
-#define SYSLOG(x)		/* empty */
-#define openlog(a,b,c)		/* empty */
-#define closelog()		/* empty */
-
-#endif				/* !USE_SYSLOG */
 
 /* The default syslog settings can now be changed here,
    in just one place.  */
