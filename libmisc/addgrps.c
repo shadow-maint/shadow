@@ -109,6 +109,6 @@ int add_groups (const char *list)
 	return 0;
 }
 #else				/* HAVE_SETGROUPS && !USE_PAM */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* HAVE_SETGROUPS && !USE_PAM */
 

@@ -502,5 +502,5 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	return 0;
 }
 #else
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/*} SHADOWGRP */

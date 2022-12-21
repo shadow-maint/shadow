@@ -70,6 +70,6 @@ int sssd_flush_cache (int dbflags)
 	return 0;
 }
 #else				/* USE_SSSD */
-extern int errno;		/* warning: ANSI C forbids an empty source file */
+extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* USE_SSSD */
 
