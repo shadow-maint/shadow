@@ -32,21 +32,13 @@ const char *Prog;
 #endif
 
 /* local function prototypes */
-#ifdef USE_UTMPX
-static int check_login (const struct utmpx *ut);
-#else				/* !USE_UTMPX */
 static int check_login (const struct utmp *ut);
-#endif				/* !USE_UTMPX */
 static void send_mesg_to_tty (int tty_fd);
 
 /*
- * check_login - check if user (struct utmpx/utmp) allowed to stay logged in
+ * check_login - check if user (struct utmp) allowed to stay logged in
  */
-#ifdef USE_UTMPX
-static int check_login (const struct utmpx *ut)
-#else				/* !USE_UTMPX */
 static int check_login (const struct utmp *ut)
-#endif				/* !USE_UTMPX */
 {
 	char user[sizeof (ut->ut_user) + 1];
 	time_t now;
@@ -116,7 +108,7 @@ static void send_mesg_to_tty (int tty_fd)
  *
  *	logoutd is started at system boot time and enforces the login
  *	time and port restrictions specified in /etc/porttime. The
- *	utmpx/utmp file is periodically scanned and offending users are logged
+ *	utmp file is periodically scanned and offending users are logged
  *	off from the system.
  */
 int main (int argc, char **argv)
@@ -125,11 +117,7 @@ int main (int argc, char **argv)
 	int status;
 	pid_t pid;
 
-#ifdef USE_UTMPX
-	struct utmpx *ut;
-#else				/* !USE_UTMPX */
 	struct utmp *ut;
-#endif				/* !USE_UTMPX */
 	char user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
 	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
 	int tty_fd;
@@ -171,31 +159,23 @@ int main (int argc, char **argv)
 	OPENLOG ("logoutd");
 
 	/*
-	 * Scan the utmpx/utmp file once per minute looking for users that
+	 * Scan the utmp file once per minute looking for users that
 	 * are not supposed to still be logged in.
 	 */
 	while (true) {
 
 		/*
-		 * Attempt to re-open the utmpx/utmp file. The file is only
+		 * Attempt to re-open the utmp file. The file is only
 		 * open while it is being used.
 		 */
-#ifdef USE_UTMPX
-		setutxent ();
-#else				/* !USE_UTMPX */
 		setutent ();
-#endif				/* !USE_UTMPX */
 
 		/*
-		 * Read all of the entries in the utmpx/utmp file. The entries
+		 * Read all of the entries in the utmp file. The entries
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-#ifdef USE_UTMPX
-		while ((ut = getutxent ()) != NULL)
-#else				/* !USE_UTMPX */
 		while ((ut = getutent ()) != NULL)
-#endif				/* !USE_UTMPX */
 		{
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
@@ -259,11 +239,7 @@ int main (int argc, char **argv)
 			exit (EXIT_SUCCESS);
 		}
 
-#ifdef USE_UTMPX
-		endutxent ();
-#else				/* !USE_UTMPX */
 		endutent ();
-#endif				/* !USE_UTMPX */
 
 #ifndef DEBUG
 		sleep (60);
