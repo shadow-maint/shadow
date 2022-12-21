@@ -228,17 +228,6 @@ AC_ARG_ENABLE(account-tools-setuid,
 	[enable_acct_tools_setuid="no"]
 )
 
-AC_ARG_ENABLE(utmpx,
-	[AS_HELP_STRING([--enable-utmpx],
-	                [enable loggin in utmpx / wtmpx @<:@default=no@:>@])],
-	[case "${enableval}" in
-	 yes) enable_utmpx="yes" ;;
-	  no) enable_utmpx="no" ;;
-	   *) AC_MSG_ERROR(bad value ${enableval} for --enable-utmpx) ;;
-	 esac],
-	[enable_utmpx="no"]
-)
-
 AC_ARG_ENABLE(subordinate-ids,
 	[AS_HELP_STRING([--enable-subordinate-ids],
 		[support subordinate ids @<:@default=yes@:>@])],
@@ -695,12 +684,6 @@ if test "$with_skey" = "yes"; then
 	]], [[
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
 	]])],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])],[])
-fi
-
-if test "$enable_utmpx" = "yes"; then
-	AC_DEFINE(USE_UTMPX,
-	          1,
-	          [Define if utmpx should be used])
 fi
 
 AC_DEFINE_UNQUOTED(SHELL, ["$SHELL"], [The default shell.])

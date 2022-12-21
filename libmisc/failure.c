@@ -243,11 +243,7 @@ void failprint (const struct faillog *fail)
  */
 
 void failtmp (const char *username,
-#ifdef USE_UTMPX
-		     const struct utmpx *failent
-#else				/* !USE_UTMPX */
 		     const struct utmp *failent
-#endif				/* !USE_UTMPX */
     )
 {
 	const char *ftmp;

@@ -107,11 +107,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 static void update_utmp (const char *user,
                          const char *tty,
                          const char *host,
-#ifdef USE_UTMPX
-                         /*@null@*/const struct utmpx *utent
-#else
                          /*@null@*/const struct utmp *utent
-#endif
 			);
 
 #ifndef USE_PAM
@@ -462,26 +458,13 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 static void update_utmp (const char *user,
                          const char *tty,
                          const char *host,
-#ifdef USE_UTMPX
-                         /*@null@*/const struct utmpx *utent
-#else
                          /*@null@*/const struct utmp *utent
-#endif
 			 )
 {
-#ifdef USE_UTMPX
-	struct utmpx *utx = prepare_utmpx (user, tty, host, utent);
-#else
 	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
-#endif				/* USE_UTMPX */
 
-#ifndef USE_UTMPX
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 	free (ut);
-#else
-	(void) setutmpx (utx);	/* make entry in the utmpx & wtmpx files */
-	free (utx);
-#endif				/* USE_UTMPX */
 }
 
 /*
@@ -526,11 +509,7 @@ int main (int argc, char **argv)
 	struct passwd *pwd = NULL;
 	char **envp = environ;
 	const char *failent_user;
-#ifdef USE_UTMPX
-	/*@null@*/struct utmpx *utent;
-#else
 	/*@null@*/struct utmp *utent;
-#endif
 
 #ifdef USE_PAM
 	int retcode;
@@ -674,7 +653,7 @@ int main (int argc, char **argv)
 
 	if (rflg || hflg) {
 		cp = hostname;
-#if defined(HAVE_STRUCT_UTMP_UT_HOST) || defined(USE_UTMPX)
+#if defined(HAVE_STRUCT_UTMP_UT_HOST)
 	} else if ((NULL != utent) && ('\0' != utent->ut_host[0])) {
 		cp = utent->ut_host;
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
@@ -1036,19 +1015,11 @@ int main (int argc, char **argv)
 			failure (pwd->pw_uid, tty, &faillog);
 		}
 		if (getdef_str ("FTMP_FILE") != NULL) {
-#ifdef USE_UTMPX
-			struct utmpx *failent =
-				prepare_utmpx (failent_user,
-				               tty,
-			/* FIXME: or fromhost? */hostname,
-				               utent);
-#else				/* !USE_UTMPX */
 			struct utmp *failent =
 				prepare_utmp (failent_user,
 				              tty,
 				              hostname,
 				              utent);
-#endif				/* !USE_UTMPX */
 			failtmp (failent_user, failent);
 			free (failent);
 		}

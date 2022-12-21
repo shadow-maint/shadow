@@ -22,11 +22,7 @@
 #include <config.h>
 
 #include <sys/stat.h>
-#ifdef USE_UTMPX
-#include <utmpx.h>
-#else
 #include <utmp.h>
-#endif
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
@@ -466,21 +462,12 @@ extern int set_filesize_limit (int blocks);
 extern int user_busy (const char *name, uid_t uid);
 
 /* utmp.c */
-#ifndef USE_UTMPX
 extern /*@null@*/struct utmp *get_current_utmp (void);
 extern struct utmp *prepare_utmp (const char *name,
                                   const char *line,
                                   const char *host,
                                   /*@null@*/const struct utmp *ut);
 extern int setutmp (struct utmp *ut);
-#else
-extern /*@null@*/struct utmpx *get_current_utmp (void);
-extern struct utmpx *prepare_utmpx (const char *name,
-                                    const char *line,
-                                    const char *host,
-                                    /*@null@*/const struct utmpx *ut);
-extern int setutmpx (struct utmpx *utx);
-#endif				/* USE_UTMPX */
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);

@@ -52,17 +52,10 @@ int user_busy (const char *name, uid_t uid)
 #ifndef __linux__
 static int user_busy_utmp (const char *name)
 {
-#ifdef USE_UTMPX
-	struct utmpx *utent;
-
-	setutxent ();
-	while ((utent = getutxent ()) != NULL)
-#else				/* !USE_UTMPX */
 	struct utmp *utent;
 
 	setutent ();
 	while ((utent = getutent ()) != NULL)
-#endif				/* !USE_UTMPX */
 	{
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
