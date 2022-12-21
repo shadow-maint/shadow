@@ -107,8 +107,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 static void update_utmp (const char *user,
                          const char *tty,
                          const char *host,
-                         /*@null@*/const struct utmp *utent
-			);
+                         /*@null@*/const struct utmp *utent);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -458,8 +457,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 static void update_utmp (const char *user,
                          const char *tty,
                          const char *host,
-                         /*@null@*/const struct utmp *utent
-			 )
+                         /*@null@*/const struct utmp *utent)
 {
 	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
 

@@ -242,9 +242,7 @@ void failprint (const struct faillog *fail)
  *	maintains a record of all login failures.
  */
 
-void failtmp (const char *username,
-		     const struct utmp *failent
-    )
+void failtmp (const char *username, const struct utmp *failent)
 {
 	const char *ftmp;
 	int fd;

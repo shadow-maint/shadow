@@ -175,8 +175,7 @@ int main (int argc, char **argv)
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-		while ((ut = getutent ()) != NULL)
-		{
+		while ((ut = getutent ()) != NULL) {
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
