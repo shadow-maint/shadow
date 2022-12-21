@@ -193,7 +193,6 @@ AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$shadow_cv_passwd_dir/passwd",
 
 dnl XXX - quick hack, should disappear before anyone notices :).
 dnl XXX - I just read the above message :).
-AC_DEFINE(USE_SYSLOG, 1, [Define to use syslog().])
 if test "$ac_cv_func_ruserok" = "yes"; then
 	AC_DEFINE(RLOGIN, 1, [Define if login should support the -r flag for rlogind.])
 	AC_DEFINE(RUSEROK, 0, [Define to the ruserok() "success" return value (0 or 1).])
