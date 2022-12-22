@@ -7,10 +7,6 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#if !defined(__GLIBC__)
-#define _XOPEN_SOURCE 500
-#endif
-
 #include <config.h>
 
 #include <ctype.h>
