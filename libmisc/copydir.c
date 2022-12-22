@@ -419,29 +419,11 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	if (fstatat(src->dirfd, src->name, &sb, AT_SYMLINK_NOFOLLOW) == -1) {
 		/* If we cannot stat the file, do not care. */
 	} else {
-#ifdef HAVE_STRUCT_STAT_ST_ATIM
 		mt[0].tv_sec  = sb.st_atim.tv_sec;
 		mt[0].tv_nsec = sb.st_atim.tv_nsec;
-#else				/* !HAVE_STRUCT_STAT_ST_ATIM */
-		mt[0].tv_sec  = sb.st_atime;
-# ifdef HAVE_STRUCT_STAT_ST_ATIMENSEC
-		mt[0].tv_nsec = sb.st_atimensec;
-# else				/* !HAVE_STRUCT_STAT_ST_ATIMENSEC */
-		mt[0].tv_nsec = 0;
-# endif				/* !HAVE_STRUCT_STAT_ST_ATIMENSEC */
-#endif				/* !HAVE_STRUCT_STAT_ST_ATIM */
 
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
 		mt[1].tv_sec  = sb.st_mtim.tv_sec;
 		mt[1].tv_nsec = sb.st_mtim.tv_nsec;
-#else				/* !HAVE_STRUCT_STAT_ST_MTIM */
-		mt[1].tv_sec  = sb.st_mtime;
-# ifdef HAVE_STRUCT_STAT_ST_MTIMENSEC
-		mt[1].tv_nsec = sb.st_mtimensec;
-# else				/* !HAVE_STRUCT_STAT_ST_MTIMENSEC */
-		mt[1].tv_nsec = 0;
-# endif				/* !HAVE_STRUCT_STAT_ST_MTIMENSEC */
-#endif				/* !HAVE_STRUCT_STAT_ST_MTIM */
 
 		if (S_ISDIR (sb.st_mode)) {
 			err = copy_dir (src, dst, reset_selinux, &sb, mt,
