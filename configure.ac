@@ -54,7 +54,6 @@ AC_CHECK_FUNCS(arc4random_buf futimes \
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_STRUCT_TM
 
 AC_CHECK_MEMBERS([struct utmp.ut_type,
                   struct utmp.ut_id,
