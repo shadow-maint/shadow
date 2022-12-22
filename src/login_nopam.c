@@ -52,7 +52,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-#include <sys/param.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>		/* for inet_ntoa() */
 
@@ -69,7 +68,6 @@
 /* Delimiters for fields and for lists of users, ttys or hosts. */
 static char fs[] = ":";		/* field separator */
 static char sep[] = ", \t";	/* list-element separator */
-static char inet_ntop_buffer[MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN)];
 
 static bool list_match (char *list, const char *item, bool (*match_fn) (const char *, const char *));
 static bool user_match (const char *tok, const char *string);
@@ -265,41 +263,25 @@ static bool user_match (const char *tok, const char *string)
 
 static const char *resolve_hostname (const char *string)
 {
-	int                  gai;
-	char                 *p;
-	struct addrinfo      *addrs;
-	struct sockaddr      *sa;
-	struct sockaddr_in   *sin;
-	struct sockaddr_in6  *sin6;
+	int              gai_err;
+	char             *addr_str;
+	struct addrinfo  *addrs;
 
-	gai = getaddrinfo(string, NULL, NULL, &addrs);
-	if (gai != 0)
+	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
+	if (gai_err != 0)
 		goto notfound;
 
-	sa = addrs[0].ai_addr;
-	switch (sa->sa_family) {
-	case AF_INET:
-		sin = (struct sockaddr_in *) sa;
-		inet_ntop(AF_INET, &sin->sin_addr,
-		          inet_ntop_buffer, NITEMS(inet_ntop_buffer));
-		p = inet_ntop_buffer;
-		break;
-	case AF_INET6:
-		sin6 = (struct sockaddr_in6 *) sa;
-		inet_ntop(AF_INET6, &sin6->sin6_addr,
-		          inet_ntop_buffer, NITEMS(inet_ntop_buffer));
-		p = inet_ntop_buffer;
-		break;
-	default:
-		SYSLOG ((LOG_ERR, "Hypothetical future IPv7?"));
+	addr_str = inet_sockaddr2str(addrs[0].ai_addr);
+	if (addr_str == NULL) {
+		SYSLOG ((LOG_ERR, "inet_sockaddr2str(): %s", strerror(errno)));
 		abort();
 	}
 
 	freeaddrinfo(addrs);
-	return p;
+	return addr_str;
 
 notfound:
-	SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai)));
+	SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err)));
 	return string;
 }
 
