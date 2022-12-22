@@ -13,7 +13,6 @@
 
 #ident "$Id$"
 
-#include "defines.h"
 #include "prototypes.h"
 #include "getdate.h"
 
