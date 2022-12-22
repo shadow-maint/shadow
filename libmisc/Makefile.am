@@ -38,6 +38,7 @@ libmisc_la_SOURCES = \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
+	inet_sockaddr2str.c \
 	isexpired.c \
 	limits.c \
 	list.c log.c \
