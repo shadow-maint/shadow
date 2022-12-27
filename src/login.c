@@ -120,6 +120,7 @@ static void get_pam_user (char **ptr_pam_user);
 
 static void init_env (void);
 static void alarm_handler (int);
+static void exit_handler (int);
 
 /*
  * usage - print login command usage and exit
@@ -391,11 +392,16 @@ static void init_env (void)
 #endif				/* !USE_PAM */
 }
 
+static void exit_handler (unused int sig)
+{
+	_exit (0);
+}
 
 static void alarm_handler (unused int sig)
 {
 	write (STDERR_FILENO, tmsg, strlen (tmsg));
-	_exit (0);
+	signal(SIGALRM, exit_handler);
+	alarm(2);
 }
 
 #ifdef USE_PAM
