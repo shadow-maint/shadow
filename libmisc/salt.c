@@ -94,7 +94,7 @@ static long read_random_bytes (void);
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
-static long shadow_random (long min, long max);
+static long csrand_interval (long min, long max);
 #endif /* USE_SHA_CRYPT || USE_BCRYPT */
 #ifdef USE_SHA_CRYPT
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
@@ -163,7 +163,7 @@ end:
  *
  * It favors slightly the higher numbers.
  */
-static long shadow_random (long min, long max)
+static long csrand_interval (long min, long max)
 {
 	double drand;
 	long ret;
@@ -207,7 +207,7 @@ static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *pre
 				max_rounds = min_rounds;
 			}
 
-			rounds = (unsigned long) shadow_random (min_rounds, max_rounds);
+			rounds = (unsigned long) csrand_interval (min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = SHA_ROUNDS_DEFAULT;
@@ -280,7 +280,7 @@ static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *
 				max_rounds = min_rounds;
 			}
 
-			rounds = (unsigned long) shadow_random (min_rounds, max_rounds);
+			rounds = (unsigned long) csrand_interval (min_rounds, max_rounds);
 		}
 	} else if (0 == *prefered_rounds) {
 		rounds = B_ROUNDS_DEFAULT;
