@@ -358,6 +358,7 @@ extern void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent);
 
 /* csrand.c */
 unsigned long csrand (void);
+unsigned long csrand_uniform (unsigned long n);
 
 /* remove_tree.c */
 extern int remove_tree (const char *root, bool remove_root);
