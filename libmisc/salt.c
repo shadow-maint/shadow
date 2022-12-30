@@ -20,9 +20,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#if HAVE_SYS_RANDOM_H
-#include <sys/random.h>
-#endif
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -89,7 +86,6 @@
 #define GENSALT_SETTING_SIZE 100
 
 /* local function prototypes */
-static long csrand (void);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
@@ -109,53 +105,6 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
 
-/* Read sizeof (long) random bytes from /dev/urandom. */
-static long csrand (void)
-{
-	long randval = 0;
-
-#ifdef HAVE_GETENTROPY
-	/* getentropy may exist but lack kernel support.  */
-	if (getentropy (&randval, sizeof (randval)) == 0) {
-		goto end;
-	}
-#endif
-
-#ifdef HAVE_GETRANDOM
-	/* Likewise getrandom.  */
-	if ((size_t) getrandom (&randval, sizeof (randval), 0) == sizeof (randval)) {
-		goto end;
-	}
-#endif
-
-#ifdef HAVE_ARC4RANDOM_BUF
-	/* arc4random_buf, if it exists, can never fail.  */
-	arc4random_buf (&randval, sizeof (randval));
-	goto end;
-#endif
-
-	/* Use /dev/urandom as a last resort.  */
-	FILE *f = fopen ("/dev/urandom", "r");
-	if (NULL == f) {
-		goto fail;
-	}
-
-	if (fread (&randval, sizeof (randval), 1, f) != 1) {
-		fclose(f);
-		goto fail;
-	}
-
-	fclose(f);
-	goto end;
-
-fail:
-	fprintf (log_get_logfd(),
-		 _("Unable to obtain random bytes.\n"));
-	exit (1);
-
-end:
-	return randval;
-}
 
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
 /*

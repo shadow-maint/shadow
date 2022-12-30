@@ -52,6 +52,7 @@ libmisc_la_SOURCES = \
 	pwd2spwd.c \
 	pwdcheck.c \
 	pwd_init.c \
+	csrand.c \
 	remove_tree.c \
 	rlogin.c \
 	root_flag.c \
