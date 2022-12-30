@@ -60,7 +60,7 @@
 ** Added in the password date field, which should always reflect the last
 **     date the password was changed, for expiry purposes.  "passwd" always
 **     updates this field, so the adduser program should set it up right
-**     initially (or a user could keep thier initial password forever ;)
+**     initially (or a user could keep their initial password forever ;)
 **     The number is in days since Jan 1st, 1970.
 **
 **                       Have fun with it, and someone please make

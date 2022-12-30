@@ -396,7 +396,7 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	/*
-	 * Save my name for error messages and save my real gid incase of
+	 * Save my name for error messages and save my real gid in case of
 	 * errors. If there is an error i have to exec a new login shell for
 	 * the user since her old shell won't have fork'd to create the
 	 * process. Skip over the program name to the next command line
@@ -625,7 +625,7 @@ int main (int argc, char **argv)
 	}
 #endif                          /* HAVE_SETGROUPS */
 	/*
-	 * For splitted groups (due to limitations of NIS), check all
+	 * For split groups (due to limitations of NIS), check all
 	 * groups of the same GID like the requested group for
 	 * membership of the current user.
 	 */
