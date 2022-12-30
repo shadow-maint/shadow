@@ -409,7 +409,7 @@ static void get_defaults (void)
 		if (MATCH (buf, DGROUPS)) {
 			if (get_groups (cp) != 0) {
 				fprintf (stderr,
-				         _("%s: the '%s' configuraton in %s has an invalid group, ignoring the bad group\n"),
+				         _("%s: the '%s' configuration in %s has an invalid group, ignoring the bad group\n"),
 				         Prog, DGROUPS, default_file);
 			}
 			if (user_groups[0] != NULL) {
@@ -2323,7 +2323,7 @@ static void create_home (void)
 			strcat (path, cp);
 			if (access (path, F_OK) != 0) {
 				/* Check if parent directory is BTRFS, fail if requesting
-				   subvolume but no BTRFS. The paths cound be different by the
+				   subvolume but no BTRFS. The paths could be different by the
 				   trailing slash
 				 */
 #if WITH_BTRFS

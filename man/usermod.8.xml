@@ -562,7 +562,7 @@
       <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>Secure group account informatio.</para>
+	  <para>Secure group account information</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

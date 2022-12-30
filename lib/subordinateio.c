@@ -985,7 +985,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_lock()) {
-			printf("Failed loging subuids (errno %d)\n", errno);
+			printf("Failed locking subuids (errno %d)\n", errno);
 			return false;
 		}
 		if (!sub_uid_open(O_CREAT | O_RDWR)) {
@@ -997,7 +997,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_lock()) {
-			printf("Failed loging subgids (errno %d)\n", errno);
+			printf("Failed locking subgids (errno %d)\n", errno);
 			return false;
 		}
 		if (!sub_gid_open(O_CREAT | O_RDWR)) {
@@ -1057,7 +1057,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	switch (id_type) {
 	case ID_TYPE_UID:
 		if (!sub_uid_lock()) {
-			printf("Failed loging subuids (errno %d)\n", errno);
+			printf("Failed locking subuids (errno %d)\n", errno);
 			return false;
 		}
 		if (!sub_uid_open(O_CREAT | O_RDWR)) {
@@ -1069,7 +1069,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 		break;
 	case ID_TYPE_GID:
 		if (!sub_gid_lock()) {
-			printf("Failed loging subgids (errno %d)\n", errno);
+			printf("Failed locking subgids (errno %d)\n", errno);
 			return false;
 		}
 		if (!sub_gid_open(O_CREAT | O_RDWR)) {
