@@ -89,9 +89,6 @@
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
-static unsigned long csrand_interval (unsigned long min, unsigned long max);
-#endif /* USE_SHA_CRYPT || USE_BCRYPT */
 #ifdef USE_SHA_CRYPT
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
 static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds);
@@ -105,30 +102,6 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost);
 #endif /* USE_YESCRYPT */
 
-
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
-/*
- * Return a random number between min and max (both included).
- *
- * It favors slightly the higher numbers.
- */
-static unsigned long csrand_interval (unsigned long min, unsigned long max)
-{
-	double drand;
-	long ret;
-
-	drand = (double) (csrand () & RAND_MAX) / (double) RAND_MAX;
-	drand *= (double) (max - min + 1);
-	/* On systems were this is not random() range is lower, we favor
-	 * higher numbers of salt. */
-	ret = (long) (max + 1 - drand);
-	/* And we catch limits, and use the highest number */
-	if ((ret < min) || (ret > max)) {
-		ret = max;
-	}
-	return ret;
-}
-#endif /* USE_SHA_CRYPT || USE_BCRYPT */
 
 #ifdef USE_SHA_CRYPT
 /* Return the the rounds number for the SHA crypt methods. */

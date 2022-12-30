@@ -85,3 +85,13 @@ csrand_uniform(unsigned long n)
 
 	return r;
 }
+
+
+/*
+ * Return a uniformly-distributed CS random value in the interval [min, max].
+ */
+unsigned long
+csrand_interval(unsigned long min, unsigned long max)
+{
+	return csrand_uniform(max - min + 1) + min;
+}
