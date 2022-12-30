@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText:  Alejandro Colomar <alx@kernel.org>
+ *
+ * SPDX-License-Identifier:  BSD-3-Clause
+ */
+
 #include <config.h>
 
 #ident "$Id$"
@@ -58,4 +64,24 @@ csrand(void)
 fail:
 	fprintf(log_get_logfd(), _("Unable to obtain random bytes.\n"));
 	exit(1);
+}
+
+
+/*
+ * Return a uniformly-distributed CS random value in the interval [0, n-1].
+ */
+unsigned long
+csrand_uniform(unsigned long n)
+{
+	unsigned long  r, max, mask;
+
+	max = n - 1;
+	mask = bit_ceil_wrapul(n) - 1;
+
+	do {
+		r = csrand();
+		r &= mask;  // optimization
+	} while (r > max);  // p = ((mask + 1) % n) / (mask + 1); W.C.: p=0.5
+
+	return r;
 }
