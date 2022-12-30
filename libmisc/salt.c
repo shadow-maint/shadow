@@ -89,7 +89,7 @@
 #define GENSALT_SETTING_SIZE 100
 
 /* local function prototypes */
-static long read_random_bytes (void);
+static long csrand (void);
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
@@ -110,7 +110,7 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 #endif /* USE_YESCRYPT */
 
 /* Read sizeof (long) random bytes from /dev/urandom. */
-static long read_random_bytes (void)
+static long csrand (void)
 {
 	long randval = 0;
 
@@ -168,7 +168,7 @@ static unsigned long csrand_interval (unsigned long min, unsigned long max)
 	double drand;
 	long ret;
 
-	drand = (double) (read_random_bytes () & RAND_MAX) / (double) RAND_MAX;
+	drand = (double) (csrand () & RAND_MAX) / (double) RAND_MAX;
 	drand *= (double) (max - min + 1);
 	/* On systems were this is not random() range is lower, we favor
 	 * higher numbers of salt. */
@@ -401,9 +401,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
-	strcat (salt, l64a (read_random_bytes ()));
+	strcat (salt, l64a (csrand ()));
 	do {
-		strcat (salt, l64a (read_random_bytes ()));
+		strcat (salt, l64a (csrand ()));
 	} while (strlen (salt) < salt_size);
 
 	salt[salt_size] = '\0';
