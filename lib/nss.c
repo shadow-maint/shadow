@@ -59,6 +59,9 @@ void nss_init(const char *nsswitch_path) {
 	//   subid:	files
 	nssfp = fopen(nsswitch_path, "r");
 	if (!nssfp) {
+		if (errno != ENOENT)
+			fprintf(shadow_logfd, "Failed opening %s: %m\n", nsswitch_path);
+
 		atomic_store(&nss_init_completed, true);
 		return;
 	}
