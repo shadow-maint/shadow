@@ -696,7 +696,7 @@ shadow-4.0.18 -> shadow-4.0.18.1					03-08-2006
 shadow-4.0.17 -> shadow-4.0.18						01-08-2006
 
 *** general:
-- su: fixed set enviroment too early when using PAM, so move it to !USE_PAM
+- su: fixed set environment too early when using PAM, so move it to !USE_PAM
   (patch submitted by Mike Frysinger <vapier@gentoo.org>),
 - groupadd, groupmod, useradd, usermod: fixed UID/GID overflow (fixed
   http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920)
@@ -855,7 +855,7 @@ shadow-4.0.14 -> shadow-4.0.15						13-03-2006
 - su: move exit() outside libmisc/shell.c::shell() for handle shell() errors
   on higher level (now is better visable where some programs exit with 126
   and 127 exit codes); added new shell() parameter (char *const envp[])
-  which allow fix preserving enviroment in su on using -p, (patch by
+  which allow fix preserving environment in su on using -p, (patch by
   Alexander Gattin <xrgtn@yandex.ru>),
 - su: added handle -c,--command option for GNU su compliance (merge
   437_su_-c_option Debian patch),
@@ -966,7 +966,7 @@ shadow-4.0.12 -> shadow-4.0.13						10-10-2005
   to example described in ident(1) man page (modern compilers like latest GCC
   removes not used functions by global optimization).
   So "ident /usr/bin/passwd" will show again some useable informations
-- su: fixed twice copy enviroment which causes auth problems
+- su: fixed twice copy environment which causes auth problems
   (bug was introduced in 4.0.12; fix by Nicolas François <nicolas.francois@centraliens.net>),
 - chage: differentiate the different failure causes by the exit value
   This will permit to adduser Debian script to detect if chage failed because the
@@ -1212,7 +1212,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
   (without gshadow) doesn't permit to use newgrp,
 - newgrp(1): newgrp uses /bin/sh (not bash),
 - faillog(8): updated after rewritten faillog command for use getopt_long(),
-- login(1): removed fragment about abilities pass enviroment variables in login prompt,
+- login(1): removed fragment about abilities pass environment variables in login prompt,
 - gshadow(5): new file (by Nicolas Nicolas François <nicolas.francois@centraliens.net>),
 - usermod(8): fixed #302388 Debian bug: added separated -o option description,
 
@@ -1242,7 +1242,7 @@ shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 
 shadow-4.0.5 -> shadow-4.0.6						08-11-2004
 
-- su: fixed adding of pam_env env variables to enviroment
+- su: fixed adding of pam_env env variables to environment
   (Martin Schlemmer <azarah@nosferatu.za.org>),
 - autoconf: fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables
   which was always empty (Gregorio Guidi <g.guidi@sns.it>),
@@ -1275,7 +1275,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
   including symlinks placed into /etc/skel/public_html for example.
   http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=66819
 - su: add pam_open_session() support. If built without PAM support
-  propagate $DISPLAY and $XAUTHORITY enviroment variables.
+  propagate $DISPLAY and $XAUTHORITY environment variables.
   Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 - applied 036_pam_access_with_preauth.patch Debian patch submited by Bjorn
   Torkelsson <Bjorn.Torkelsson@hpc2n.umu.se>: add support for PAM account
