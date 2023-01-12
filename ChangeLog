@@ -9558,7 +9558,7 @@
 	* NEWS: release date corrected.
 
 	* NEWS, src/su.c:
-	fixed set enviroment too early when using PAM, so move it to !USE_PAM
+	fixed set environment too early when using PAM, so move it to !USE_PAM
 	(patch submitted by Mike Frysinger <vapier@gentoo.org>).
 
 2006-07-30  Tomasz Kłoczko  <kloczek@pld.org.pl>
@@ -10245,7 +10245,7 @@
 	* NEWS: cleanups.
 
 	* autogen.sh:
-	by default in development enviroment use CFLAGS="-O2 -Wall".
+	by default in development environment use CFLAGS="-O2 -Wall".
 
 	* src/chgpasswd.c (main): remove two unused variables (newgr and now).
 
@@ -11654,7 +11654,7 @@
 	in OPTIONS section). Describe -a and -k options.
 
 	* NEWS, src/su.c:
-	fixed twice copy enviroment which causes auth problems (bug was introduced in 4.0.12;
+	fixed twice copy environment which causes auth problems (bug was introduced in 4.0.12;
 	fix by Nicolas François <nicolas.francois@centraliens.net>).
 
 	* src/passwd.c, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po:
@@ -13029,7 +13029,7 @@
 	* man/pl/usermod.8: finish sync with english version.
 
 	* man/hu/login.1, man/pl/login.1, NEWS, man/Attic/login.1, man/de/login.1:
-	removed fragment about abilities pass enviroment variables in login prompt.
+	removed fragment about abilities pass environment variables in login prompt.
 
 	* man/Attic/gpasswd.1, man/Attic/newgrp.1:
 	fixes by Nicolas Nicolas François <nicolas.francois@centraliens.net> (not all
@@ -13508,7 +13508,7 @@
 	removed not used translations.
 
 	* NEWS, src/su.c:
-	fix adding of pam_env env variables to enviroment (Martin Schlemmer <azarah@nosferatu.za.org>).
+	fix adding of pam_env env variables to environment (Martin Schlemmer <azarah@nosferatu.za.org>).
 
 	* NEWS, configure.in:
 	fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables which was allways
@@ -13605,7 +13605,7 @@
 
 	* NEWS, src/su.c:
 	add pam_open_session() support. If builded without PAM support
-	propagate $DISPLAY and $XAUTHORITY enviroment variables.
+	propagate $DISPLAY and $XAUTHORITY environment variables.
 	Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 
 2004-10-23  Tomasz Kłoczko  <kloczek@pld.org.pl>
