@@ -99,7 +99,7 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
  *  8bytes --> 21 ascii estimated -> 18446744073709551616 (20 real)
  * 16bytes --> 39 ascii estimated -> 340282366920938463463374607431768211456 (39 real)
  */
-#define ULONG_DIGITS ((((sizeof(unsigned long) * CHAR_BIT) + 9)/10)*3)
+#define ULONG_DIGITS (((WIDTHOF(unsigned long) + 9)/10)*3)
 
 #if HAVE_SYS_CAPABILITY_H
 static inline bool maps_lower_root(int cap, int ranges, const struct map_range *mappings)
