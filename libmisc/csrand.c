@@ -15,7 +15,7 @@
 #if HAVE_SYS_RANDOM_H
 #include <sys/random.h>
 #endif
-#include "bit.h"
+#include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -69,19 +69,29 @@ fail:
 
 /*
  * Return a uniformly-distributed CS random value in the interval [0, n-1].
+ *
+ * Fast Random Integer Generation in an Interval
+ * ACM Transactions on Modeling and Computer Simulation 29 (1), 2019
+ * <https://arxiv.org/abs/1805.10941>
  */
 unsigned long
 csrand_uniform(unsigned long n)
 {
-	unsigned long  r, max, mask;
+	unsigned long      bound, rem;
+	unsigned __int128  r, mult;
 
-	max = n - 1;
-	mask = bit_ceil_wrapul(n) - 1;
+	if (n == 0)
+		return csrand();
+
+	bound = -n % n;  // analogous to `2^64 % n`, since `x % y == (x-y) % y`
 
 	do {
 		r = csrand();
-		r &= mask;  // optimization
-	} while (r > max);  // p = ((mask + 1) % n) / (mask + 1); W.C.: p=0.5
+		mult = r * n;
+		rem = mult;  // analogous to `mult % 2^64`
+	} while (rem < bound);  // p = (2^64 % n) / 2^64;  W.C.: n=2^63+1, p=0.5
+
+	r = mult >> WIDTHOF(n);  // analogous to `mult / 2^64`
 
 	return r;
 }
