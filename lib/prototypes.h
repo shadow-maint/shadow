@@ -194,9 +194,6 @@ extern bool gr_append_member (struct group *grp, char *member);
 /* hushed.c */
 extern bool hushed (const char *username);
 
-/* inet_sockaddr2str.c */
-extern const char *inet_sockaddr2str(const struct sockaddr *sa);
-
 /* audit_help.c */
 #ifdef WITH_AUDIT
 extern int audit_fd;
