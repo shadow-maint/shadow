@@ -267,22 +267,24 @@ static const char *resolve_hostname (const char *string)
 	char             *addr_str;
 	struct addrinfo  *addrs;
 
-	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
-	if (gai_err != 0)
-		goto notfound;
+	static char      host[MAXHOSTNAMELEN];
 
-	addr_str = inet_sockaddr2str(addrs[0].ai_addr);
-	if (addr_str == NULL) {
-		SYSLOG ((LOG_ERR, "inet_sockaddr2str(): %s", strerror(errno)));
-		abort();
+	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
+	if (gai_err != 0) {
+		SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err)));
+		return string;
+	}
+
+	addr_str = host;
+	gai_err = getnameinfo(addrs[0].ai_addr, addrs[0].ai_addrlen,
+	                      host, NITEMS(host), NULL, 0, NI_NUMERICHOST);
+	if (gai_err != 0) {
+		SYSLOG ((LOG_ERR, "getnameinfo(%s): %s", string, gai_strerror(gai_err)));
+		addr_str = string;
 	}
 
 	freeaddrinfo(addrs);
 	return addr_str;
-
-notfound:
-	SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err)));
-	return string;
 }
 
 /* from_match - match a host or tty against a list of tokens */
