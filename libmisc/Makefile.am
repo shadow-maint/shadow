@@ -12,7 +12,6 @@ libmisc_la_SOURCES = \
 	agetpass.c \
 	audit_help.c \
 	basename.c \
-	bit.c \
 	chkname.c \
 	chkname.h \
 	chowndir.c \
