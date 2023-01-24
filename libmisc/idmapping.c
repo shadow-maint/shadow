@@ -199,7 +199,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 			mapping->upper,
 			mapping->lower,
 			mapping->count);
-		if ((written <= 0) || (written >= (bufsize - (pos - buf)))) {
+		if ((written <= 0) || ((size_t)written >= (bufsize - (pos - buf)))) {
 			fprintf(log_get_logfd(), _("%s: snprintf failed!\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
