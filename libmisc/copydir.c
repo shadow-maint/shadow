@@ -514,7 +514,7 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
          * but copy into it (recursively).
         */
         if (fstatat(dst->dirfd, dst->name, &dst_sb, AT_SYMLINK_NOFOLLOW) == 0 && S_ISDIR(dst_sb.st_mode)) {
-            return (copy_tree (src, dst, false, reset_selinux,
+            return (copy_tree_impl (src, dst, false, reset_selinux,
                            old_uid, new_uid, old_gid, new_gid) != 0);
         }
 
