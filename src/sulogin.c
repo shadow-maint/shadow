@@ -37,8 +37,6 @@ static struct passwd pwent;
 extern char **newenvp;
 extern size_t newenvc;
 
-extern char **environ;
-
 #ifndef	ALARM
 #define	ALARM	60
 #endif

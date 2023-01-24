@@ -26,7 +26,6 @@
 #define NEWENVP_STEP 16
 size_t newenvc = 0;
 /*@null@*/char **newenvp = NULL;
-extern char **environ;
 
 static const char *const forbid[] = {
 	"_RLD_=",
