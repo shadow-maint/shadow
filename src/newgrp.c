@@ -29,7 +29,6 @@
 const char *Prog;
 
 extern char **newenvp;
-extern char **environ;
 
 #ifdef HAVE_SETGROUPS
 static int ngroups;

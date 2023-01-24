@@ -89,7 +89,6 @@ static char tmsg[256];
 
 extern char **newenvp;
 extern size_t newenvc;
-extern char **environ;
 
 #ifndef	ALARM
 #define	ALARM	60
