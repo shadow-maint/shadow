@@ -50,7 +50,7 @@ AC_CHECK_FUNCS(arc4random_buf futimes \
 	getutent initgroups lckpwdf lutimes \
 	setgroups updwtmp updwtmpx innetgr \
 	getspnam_r \
-	memset_s explicit_bzero)
+	memset_explicit explicit_bzero)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
