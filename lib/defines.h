@@ -54,10 +54,8 @@
 #else					/* !HAVE_MEMSET_S && HAVE_EXPLICIT_BZERO */
 static inline void memzero(void *ptr, size_t size)
 {
-	volatile unsigned char * volatile p = ptr;
-	while (size--) {
-		*p++ = '\0';
-	}
+	ptr = memset(ptr, '\0', size);
+	__asm__ __volatile__ ("" : : "r"(ptr) : "memory");
 }
 #endif					/* !HAVE_MEMSET_S && !HAVE_EXPLICIT_BZERO */
 
