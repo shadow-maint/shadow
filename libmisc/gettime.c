@@ -55,7 +55,7 @@
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to %lu but was found to be: %llu\n"),
 			 ULONG_MAX, epoch);
-	} else if (epoch > fallback) {
+	} else if ((time_t)epoch > fallback) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to the current time (%lu) but was found to be: %llu\n"),
 			 fallback, epoch);

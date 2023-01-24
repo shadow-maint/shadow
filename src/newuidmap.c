@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
 	written = snprintf(proc_dir_name, sizeof(proc_dir_name), "/proc/%u/",
 		target);
-	if ((written <= 0) || (written >= sizeof(proc_dir_name))) {
+	if ((written <= 0) || ((size_t)written >= sizeof(proc_dir_name))) {
 		fprintf(stderr, "%s: snprintf of proc path failed: %s\n",
 			Prog, strerror(errno));
 	}
