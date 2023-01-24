@@ -11,6 +11,7 @@ libshadow_la_CPPFLAGS += -DVENDORDIR=\"$(VENDORDIR)\"
 endif
 
 libshadow_la_CPPFLAGS += -I$(top_srcdir)
+libshadow_la_CFLAGS = $(LIBBSD_CFLAGS)
 
 libshadow_la_SOURCES = \
 	commonio.c \

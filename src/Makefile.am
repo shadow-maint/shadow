@@ -13,6 +13,8 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(datadir)/locale\"
 
+AM_CFLAGS = $(LIBBSD_CFLAGS)
+
 # XXX why are login and su in /bin anyway (other than for
 # historical reasons)?
 #
