@@ -47,8 +47,8 @@
 #include <sys/time.h>
 #include <time.h>
 
-#ifdef HAVE_MEMSET_S
-# define memzero(ptr, size) memset_s((ptr), 0, (size))
+#ifdef HAVE_MEMSET_EXPLICIT
+# define memzero(ptr, size) memset_explicit((ptr), 0, (size))
 #elif defined HAVE_EXPLICIT_BZERO	/* !HAVE_MEMSET_S */
 # define memzero(ptr, size) explicit_bzero((ptr), (size))
 #else					/* !HAVE_MEMSET_S && HAVE_EXPLICIT_BZERO */
