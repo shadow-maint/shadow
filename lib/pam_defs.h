@@ -15,7 +15,7 @@
 #endif
 
 
-static struct pam_conv conv = {
+static const struct pam_conv conv = {
 	SHADOW_PAM_CONVERSATION,
 	NULL
 };
