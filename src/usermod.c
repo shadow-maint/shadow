@@ -310,13 +310,13 @@ static struct ulong_range getulong_range(const char *str)
 	errno = 0;
 	first = strtoll(str, &pos, 10);
 	if (('\0' == *str) || ('-' != *pos ) || (ERANGE == errno) ||
-	    (first != (unsigned long int)first))
+	    (first < 0) || (first != (long long)(unsigned long int)first))
 		goto out;
 
 	errno = 0;
 	last = strtoll(pos + 1, &pos, 10);
 	if (('\0' != *pos ) || (ERANGE == errno) ||
-	    (last != (unsigned long int)last))
+	    (last < 0) || (last != (long long)(unsigned long int)last))
 		goto out;
 
 	if (first > last)
