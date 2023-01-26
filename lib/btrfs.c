@@ -39,7 +39,7 @@ static int run_btrfs_subvolume_cmd(const char *subcmd, const char *arg1, const c
 		NULL
 	};
 
-	if (access(cmd, X_OK)) {
+	if (!cmd || access(cmd, X_OK)) {
 		return 1;
 	}
 
