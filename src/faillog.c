@@ -291,7 +291,7 @@ static void reset (void)
 			while ( (pwent = getpwent ()) != NULL ) {
 				if (   uflg
 				    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
-				        || (pwent->pw_uid > (uid_t)uidmax))) {
+				        || (pwent->pw_uid > uidmax))) {
 					continue;
 				}
 				if (reset_one (pwent->pw_uid)) {
