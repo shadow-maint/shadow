@@ -727,7 +727,7 @@ int main (int argc, char **argv)
 			          sizeof (loginprompt),
 			          _("%s login: "), hostn);
 		} else {
-			strncpy (loginprompt, _("login: "),
+			strlcpy (loginprompt, _("login: "),
 			         sizeof (loginprompt));
 		}
 
