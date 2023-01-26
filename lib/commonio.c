@@ -900,7 +900,7 @@ static int write_all (const struct commonio_db *db)
 int commonio_close (struct commonio_db *db)
 {
 	char buf[1024];
-	int errors = 0;
+	int errors = 0, r;
 	struct stat sb;
 
 	if (!db->isopen) {
@@ -932,7 +932,12 @@ int commonio_close (struct commonio_db *db)
 		/*
 		 * Create backup file.
 		 */
-		snprintf (buf, sizeof buf, "%s-", db->filename);
+		r = snprintf (buf, sizeof buf, "%s-", db->filename);
+		if (r < 0 || (size_t)r >= sizeof buf) {
+			(void) fclose (db->fp);
+			db->fp = NULL;
+			goto fail;
+		}
 
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
@@ -947,15 +952,15 @@ int commonio_close (struct commonio_db *db)
 			errors++;
 		}
 
+		db->fp = NULL;
+
 #ifdef WITH_SELINUX
 		if (reset_selinux_file_context () != 0) {
 			errors++;
 		}
 #endif
-		if (errors != 0) {
-			db->fp = NULL;
+		if (errors != 0)
 			goto fail;
-		}
 	} else {
 		/*
 		 * Default permissions for new [g]shadow files.
@@ -965,7 +970,9 @@ int commonio_close (struct commonio_db *db)
 		sb.st_gid = db->st_gid;
 	}
 
-	snprintf (buf, sizeof buf, "%s+", db->filename);
+	r = snprintf (buf, sizeof buf, "%s+", db->filename);
+	if (r < 0 || (size_t)r >= sizeof buf)
+		goto fail;
 
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
