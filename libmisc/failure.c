@@ -86,13 +86,26 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)
-	    || (close (fd) != 0)) {
-		SYSLOG ((LOG_WARN,
-		         "Can't write faillog entry for UID %lu in %s.",
-		         (unsigned long) uid, FAILLOG_FILE));
-		(void) close (fd);
+	    || (write (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+		goto err_write;
 	}
+
+	if (close (fd) != 0 && errno != EINTR) {
+		goto err_close;
+	}
+
+	return;
+
+err_write:
+	{
+		int saved_errno = errno;
+		(void) close (fd);
+		errno = saved_errno;
+	}
+err_close:
+	SYSLOG ((LOG_WARN,
+	         "Can't write faillog entry for UID %lu to %s: %m",
+	         (unsigned long) uid, FAILLOG_FILE));
 }
 
 static bool too_many_failures (const struct faillog *fl)
@@ -185,17 +198,29 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 		fail.fail_cnt = 0;
 
 		if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-		    || (write (fd, &fail, sizeof fail) != (ssize_t) sizeof fail)
-		    || (close (fd) != 0)) {
-			SYSLOG ((LOG_WARN,
-			         "Can't reset faillog entry for UID %lu in %s.",
-			         (unsigned long) uid, FAILLOG_FILE));
-			(void) close (fd);
+		    || (write (fd, &fail, sizeof fail) != (ssize_t) sizeof fail)) {
+			goto err_write;
+		}
+
+		if (close (fd) != 0 && errno != EINTR) {
+			goto err_close;
 		}
 	} else {
 		(void) close (fd);
 	}
 
+	return 1;
+
+err_write:
+	{
+		int saved_errno = errno;
+		(void) close (fd);
+		errno = saved_errno;
+	}
+err_close:
+	SYSLOG ((LOG_WARN,
+	         "Can't reset faillog entry for UID %lu in %s: %m",
+	         (unsigned long) uid, FAILLOG_FILE));
 	return 1;
 }
 
@@ -278,12 +303,25 @@ void failtmp (const char *username, const struct utmp *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (   (write (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)
-	    || (close (fd) != 0)) {
-		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
-		         username, ftmp));
-		(void) close (fd);
+	if (   (write (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)) {
+		goto err_write;
 	}
+
+	if (close (fd) != 0 && errno != EINTR) {
+		goto err_close;
+	}
+
+	return;
+
+err_write:
+	{
+		int saved_errno = errno;
+		(void) close (fd);
+		errno = saved_errno;
+	}
+err_close:
+	SYSLOG ((LOG_WARN,
+	         "Can't append failure of user %s to %s: %m",
+	         username, ftmp));
 }
 
