@@ -2344,6 +2344,7 @@ static void create_home (void)
 						         Prog, path);
 						fail_exit (E_HOMEDIR);
 					}
+					free(btrfs_check);
 					// make subvolume to mount for user instead of directory
 					if (btrfs_create_subvolume(path)) {
 						fprintf (stderr,
