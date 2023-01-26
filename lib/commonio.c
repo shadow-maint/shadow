@@ -646,7 +646,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 
 	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
-		while (   ((cp = strrchr (buf, '\n')) == NULL)
+		while (   (strrchr (buf, '\n') == NULL)
 		       && (feof (db->fp) == 0)) {
 			size_t len;
 
