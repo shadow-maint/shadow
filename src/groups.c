@@ -91,7 +91,7 @@ int main (int argc, char **argv)
 	GETGROUPS_T *groups;
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	groups = MALLOCARRAY (sys_ngroups, GETGROUPS_T);
+	groups = XMALLOCARRAY (sys_ngroups, GETGROUPS_T);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
