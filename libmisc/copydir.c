@@ -413,7 +413,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
                        uid_t old_uid, uid_t new_uid,
                        gid_t old_gid, gid_t new_gid)
 {
-	int err = 0;
+	int err = 0, err_dir = 0;
 	struct stat sb;
 	struct link_name *lp;
 	struct timespec mt[2];
@@ -428,8 +428,8 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 		mt[1].tv_nsec = sb.st_mtim.tv_nsec;
 
 		if (S_ISDIR (sb.st_mode)) {
-			err = copy_dir (src, dst, reset_selinux, &sb, mt,
-			                old_uid, new_uid, old_gid, new_gid);
+			err_dir = copy_dir (src, dst, reset_selinux, &sb, mt,
+			                    old_uid, new_uid, old_gid, new_gid);
 		}
 
 		/*
@@ -437,7 +437,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 		 * This is after the copy_dir above to still iterate into subdirectories.
 		 */
 		if (fstatat(dst->dirfd, dst->name, &sb, AT_SYMLINK_NOFOLLOW) != -1) {
-			return 0;
+			return err_dir;
 		}
 
 		/*
@@ -479,7 +479,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 		}
 	}
 
-	return err;
+	return err_dir ? err_dir : err;
 }
 
 /*
