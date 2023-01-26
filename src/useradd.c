@@ -2417,6 +2417,7 @@ static void create_mail (void)
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
 		const char *spool;
 		char *file;
+		size_t size;
 		int fd;
 		struct group *gr;
 		gid_t gid;
@@ -2431,11 +2432,12 @@ static void create_mail (void)
 		if (NULL == spool) {
 			return;
 		}
-		file = ALLOCARRAY (strlen (prefix) + strlen (spool) + strlen (user_name) + 3, char);
+		size = strlen (prefix) + strlen (spool) + strlen (user_name) + 3;
+		file = XMALLOCARRAY (size, char);
 		if (prefix[0])
-			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
+			snprintf (file, size, "%s/%s/%s", prefix, spool, user_name);
 		else
-			sprintf (file, "%s/%s", spool, user_name);
+			snprintf (file, size, "%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (file, S_IFREG) != 0) {
@@ -2451,6 +2453,8 @@ static void create_mail (void)
 			perror (_("Creating mailbox file"));
 			return;
 		}
+
+		free(file);
 
 		gr = prefix_getgrnam ("mail"); /* local, no need for xgetgrnam */
 		if (NULL == gr) {
