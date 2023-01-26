@@ -185,7 +185,13 @@ static void process_flags (int argc, char **argv)
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		case 's':
 			sflg = true;
-                        bad_s = 0;
+			bad_s = 0;
+			if (!crypt_method) {
+				fprintf (stderr,
+					 _("%s: --sha-rounds requires --crypt-method to be specified\n"),
+					 Prog);
+				usage (E_USAGE);
+			}
 #if defined(USE_SHA_CRYPT)
 			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
 			       && (0 == getlong(optarg, &sha_rounds)))) {
