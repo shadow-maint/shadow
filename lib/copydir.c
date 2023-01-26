@@ -404,63 +404,64 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 
 	if (fstatat(src->dirfd, src->name, &sb, AT_SYMLINK_NOFOLLOW) == -1) {
 		/* If we cannot stat the file, do not care. */
-	} else {
-		mt[0].tv_sec  = sb.st_atim.tv_sec;
-		mt[0].tv_nsec = sb.st_atim.tv_nsec;
+		return 0;
+	}
 
-		mt[1].tv_sec  = sb.st_mtim.tv_sec;
-		mt[1].tv_nsec = sb.st_mtim.tv_nsec;
+	mt[0].tv_sec  = sb.st_atim.tv_sec;
+	mt[0].tv_nsec = sb.st_atim.tv_nsec;
 
-		if (S_ISDIR (sb.st_mode)) {
-			err = copy_dir (src, dst, reset_selinux, &sb, mt,
-			                old_uid, new_uid, old_gid, new_gid);
-		}
+	mt[1].tv_sec  = sb.st_mtim.tv_sec;
+	mt[1].tv_nsec = sb.st_mtim.tv_nsec;
 
-		/*
-		 * If the destination already exists do nothing.
-		 * This is after the copy_dir above to still iterate into subdirectories.
-		 */
-		if (fstatat(dst->dirfd, dst->name, &sb, AT_SYMLINK_NOFOLLOW) != -1) {
-			return 0;
-		}
+	if (S_ISDIR (sb.st_mode)) {
+		err = copy_dir (src, dst, reset_selinux, &sb, mt,
+				old_uid, new_uid, old_gid, new_gid);
+	}
 
-		/*
-		 * Copy any symbolic links
-		 */
+	/*
+	* If the destination already exists do nothing.
+	* This is after the copy_dir above to still iterate into subdirectories.
+	*/
+	if (fstatat(dst->dirfd, dst->name, &sb, AT_SYMLINK_NOFOLLOW) != -1) {
+		return err;
+	}
 
-		else if (S_ISLNK (sb.st_mode)) {
-			err = copy_symlink (src, dst, reset_selinux, &sb, mt,
-			                    old_uid, new_uid, old_gid, new_gid);
-		}
+	/*
+	* Copy any symbolic links
+	*/
 
-		/*
-		 * See if this is a previously copied link
-		 */
+	else if (S_ISLNK (sb.st_mode)) {
+		err = copy_symlink (src, dst, reset_selinux, &sb, mt,
+				    old_uid, new_uid, old_gid, new_gid);
+	}
 
-		else if ((lp = check_link (src->full_path, &sb)) != NULL) {
-			err = copy_hardlink (dst, reset_selinux, lp);
-		}
+	/*
+	* See if this is a previously copied link
+	*/
 
-		/*
-		 * Deal with FIFOs and special files.  The user really
-		 * shouldn't have any of these, but it seems like it
-		 * would be nice to copy everything ...
-		 */
+	else if ((lp = check_link (src->full_path, &sb)) != NULL) {
+		err = copy_hardlink (dst, reset_selinux, lp);
+	}
 
-		else if (!S_ISREG (sb.st_mode)) {
-			err = copy_special (src, dst, reset_selinux, &sb, mt,
-			                    old_uid, new_uid, old_gid, new_gid);
-		}
+	/*
+	* Deal with FIFOs and special files.  The user really
+	* shouldn't have any of these, but it seems like it
+	* would be nice to copy everything ...
+	*/
 
-		/*
-		 * Create the new file and copy the contents.  The new
-		 * file will be owned by the provided UID and GID values.
-		 */
+	else if (!S_ISREG (sb.st_mode)) {
+		err = copy_special (src, dst, reset_selinux, &sb, mt,
+				    old_uid, new_uid, old_gid, new_gid);
+	}
 
-		else {
-			err = copy_file (src, dst, reset_selinux, &sb, mt,
-			                 old_uid, new_uid, old_gid, new_gid);
-		}
+	/*
+	* Create the new file and copy the contents.  The new
+	* file will be owned by the provided UID and GID values.
+	*/
+
+	else {
+		err = copy_file (src, dst, reset_selinux, &sb, mt,
+				 old_uid, new_uid, old_gid, new_gid);
 	}
 
 	return err;
