@@ -432,6 +432,7 @@ static void prepare_pam_close_session (void)
 /*
  * usage - print command line syntax and exit
  */
+NORETURN
 static void usage (int status)
 {
 	(void)
