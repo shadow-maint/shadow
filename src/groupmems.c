@@ -71,7 +71,7 @@ static void display_members (const char *const *members);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
-static void fail_exit (int code);
+NORETURN static void fail_exit (int code);
 #define isroot()		(getuid () == 0)
 
 static char *whoami (void)
