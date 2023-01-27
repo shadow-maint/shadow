@@ -42,7 +42,8 @@
 
 		strcpy (tzbuf, def_tz);
 	} else {
-		tzbuf[strlen (tzbuf) - 1] = '\0';
+		/* Remove optional trailing '\n'. */
+		tzbuf[strcspn (tzbuf, "\n")] = '\0';
 	}
 
 	if (NULL != fp) {
