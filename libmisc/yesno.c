@@ -28,7 +28,8 @@
  */
 bool yes_or_no (bool read_only)
 {
-	char buf[80];
+	int c;
+	bool result;
 
 	/*
 	 * In read-only mode all questions are answered "no".
@@ -46,11 +47,13 @@ bool yes_or_no (bool read_only)
 	/*
 	 * Get a line and see what the first character is.
 	 */
+	c = fgetc(stdin);
 	/* TODO: use gettext */
-	if (fgets (buf, sizeof buf, stdin) == buf) {
-		return buf[0] == 'y' || buf[0] == 'Y';
-	}
+	result = (c == 'y' || c == 'Y');
 
-	return false;
+	while (c != '\n' && c != EOF)
+		c = fgetc(stdin);
+
+	return result;
 }
 
