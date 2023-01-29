@@ -627,11 +627,6 @@ static void prepare_failure_reports (void)
 		stpeprintf(info_passwd.action+strlen (info_passwd.action),
 		                 pw_end, "%ju", (uintmax_t) group_newid);
 	}
-	info_group.audit_msg[511]   = '\0';
-#ifdef	SHADOWGRP
-	info_gshadow.audit_msg[511] = '\0';
-#endif
-	info_passwd.audit_msg[511]  = '\0';
 
 // FIXME: add a system cleanup
 	add_cleanup (cleanup_report_mod_group, &info_group);
