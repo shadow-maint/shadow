@@ -61,6 +61,7 @@ libmisc_la_SOURCES = \
 	setugid.c \
 	setupenv.c \
 	shell.c \
+	stpeprintf.c \
 	strtoday.c \
 	sub.c \
 	sulog.c \
