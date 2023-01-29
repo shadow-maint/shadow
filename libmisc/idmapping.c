@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "prototypes.h"
+#include "stpeprintf.h"
 #include "idmapping.h"
 #if HAVE_SYS_CAPABILITY_H
 #include <sys/prctl.h>
@@ -141,7 +142,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	int idx;
 	const struct map_range *mapping;
 	size_t bufsize;
-	char *buf, *pos;
+	char *buf, *pos, *end;
 	int fd;
 
 #if HAVE_SYS_CAPABILITY_H
@@ -189,21 +190,20 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 
 	bufsize = ranges * ((ULONG_DIGITS + 1) * 3);
 	pos = buf = xmalloc(bufsize);
+	end = buf + bufsize;
 
 	/* Build the mapping command */
 	mapping = mappings;
 	for (idx = 0; idx < ranges; idx++, mapping++) {
 		/* Append this range to the string that will be written */
-		int written = snprintf(pos, bufsize - (pos - buf),
-			"%lu %lu %lu\n",
-			mapping->upper,
-			mapping->lower,
-			mapping->count);
-		if ((written <= 0) || ((size_t)written >= (bufsize - (pos - buf)))) {
-			fprintf(log_get_logfd(), _("%s: snprintf failed!\n"), log_get_progname());
-			exit(EXIT_FAILURE);
-		}
-		pos += written;
+		pos = stpeprintf(pos, end, "%lu %lu %lu\n",
+		                 mapping->upper,
+		                 mapping->lower,
+		                 mapping->count);
+	}
+	if (pos == end || pos == NULL) {
+		fprintf(log_get_logfd(), _("%s: stpeprintf failed!\n"), log_get_progname());
+		exit(EXIT_FAILURE);
 	}
 
 	/* Write the mapping to the mapping file */
