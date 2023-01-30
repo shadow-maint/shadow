@@ -9,15 +9,21 @@
 #ident "$Id$"
 
 #include <limits.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #if HAVE_SYS_RANDOM_H
 #include <sys/random.h>
 #endif
+#include "bit.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
+
+static uint32_t csrand_uniform32(uint32_t n);
+static unsigned long csrand_uniform_slow(unsigned long n);
 
 
 /*
@@ -69,16 +75,37 @@ fail:
 
 /*
  * Return a uniformly-distributed CS random value in the interval [0, n-1].
- *
- * Fast Random Integer Generation in an Interval
- * ACM Transactions on Modeling and Computer Simulation 29 (1), 2019
- * <https://arxiv.org/abs/1805.10941>
  */
 unsigned long
 csrand_uniform(unsigned long n)
 {
-	unsigned long      bound, rem;
-	unsigned __int128  r, mult;
+	if (n == 0 || n > UINT32_MAX)
+		return csrand_uniform_slow(n);
+
+	return csrand_uniform32(n);
+}
+
+
+/*
+ * Return a uniformly-distributed CS random value in the interval [min, max].
+ */
+unsigned long
+csrand_interval(unsigned long min, unsigned long max)
+{
+	return csrand_uniform(max - min + 1) + min;
+}
+
+
+/*
+ * Fast Random Integer Generation in an Interval
+ * ACM Transactions on Modeling and Computer Simulation 29 (1), 2019
+ * <https://arxiv.org/abs/1805.10941>
+ */
+static uint32_t
+csrand_uniform32(uint32_t n)
+{
+	uint32_t  bound, rem;
+	uint64_t  r, mult;
 
 	if (n == 0)
 		return csrand();
@@ -97,11 +124,18 @@ csrand_uniform(unsigned long n)
 }
 
 
-/*
- * Return a uniformly-distributed CS random value in the interval [min, max].
- */
-unsigned long
-csrand_interval(unsigned long min, unsigned long max)
+static unsigned long
+csrand_uniform_slow(unsigned long n)
 {
-	return csrand_uniform(max - min + 1) + min;
+	unsigned long  r, max, mask;
+
+	max = n - 1;
+	mask = bit_ceil_wrapul(n) - 1;
+
+	do {
+		r = csrand();
+		r &= mask;  // optimization
+	} while (r > max);  // p = ((mask+1) % n) / (mask+1);  W.C.: p=0.5
+
+	return r;
 }
