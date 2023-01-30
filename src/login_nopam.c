@@ -100,7 +100,7 @@ int login_access (const char *user, const char *from)
 			int end;
 			lineno++;
 			end = (int) strlen (line) - 1;
-			if (line[end] != '\n') {
+			if (line[0] == '\0' || line[end] != '\n') {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: missing newline or line too long",
 					 TABLE, lineno));
@@ -320,7 +320,7 @@ static bool from_match (const char *tok, const char *string)
 		if (strchr (string, '.') == NULL) {
 			return true;
 		}
-	} else if (   (tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
+	} else if (   (tok[0] != '\0' && tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
 		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
 		return true;
 	}
