@@ -130,8 +130,8 @@ static struct port *getportent (void)
       again:
 
 	/*
-	 * Get the next line and remove the last character, which
-	 * is a '\n'.  Lines which begin with '#' are all ignored.
+	 * Get the next line and remove optional trailing '\n'.
+	 * Lines which begin with '#' are all ignored.
 	 */
 
 	if (fgets (buf, (int) sizeof buf, ports) == 0) {
@@ -149,7 +149,7 @@ static struct port *getportent (void)
 	 * TTY devices.
 	 */
 
-	buf[strlen (buf) - 1] = 0;
+	buf[strcspn (buf, "\n")] = 0;
 
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
