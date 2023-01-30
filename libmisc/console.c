@@ -71,7 +71,8 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 */
 
 	while (fgets (buf, (int) sizeof (buf), fp) != NULL) {
-		buf[strlen (buf) - 1] = '\0';
+		/* Remove optional trailing '\n'. */
+		buf[strcspn (buf, "\n")] = '\0';
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);
 			return true;
