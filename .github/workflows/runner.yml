@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: debug
+      run: |
+        id
+        which bash
+        whoami
+        env
+        ps -ef
+        pwd
+        cat /proc/self/uid_map
+        cat /proc/self/status
+        systemd-detect-virt
+    - name: Install dependencies
+      run: |
+        sudo cat /etc/apt/sources.list
+        sudo sed -i '/deb-src/d' /etc/apt/sources.list
+        sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+        export DEBIAN_PRIORITY=critical
+        export DEBIAN_FRONTEND=noninteractive
+        sudo apt-get update
+        sudo apt-get -y dist-upgrade
+        sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev pkgconf
+        sudo apt-get -y build-dep shadow
+    - name: configure
+      run: |
+        autoreconf -v -f --install
+        ./autogen.sh --without-selinux --disable-man --with-yescrypt
+    - run: make
+    - run: make install DESTDIR=${HOME}/rootfs
+    - run: sudo make install
+    - name: run tests in shell with tty
+      shell: 'script -q -e -c "bash {0}"'
+      run: |
+        cd tests
+        sudo ./run_some
+        cat testsuite.log
