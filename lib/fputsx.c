@@ -16,6 +16,55 @@
 #ident "$Id$"
 
 
+/*
+ * Similar to getline(3), but handle escaped newlines.
+ * Returns the length of the string, or -1 on error.
+ */
+ssize_t
+getlinex(char **restrict lineptr, size_t *restrict size,
+         FILE *restrict stream)
+{
+	char    *p;
+	size_t  len;
+
+	if (*lineptr == NULL || *size < BUFSIZ) {
+		*size = BUFSIZ;
+	} else if (*size > INT_MAX) {
+		*size = INT_MAX;
+	}
+
+	len = 0;
+	for (size_t sz = *size; sz < INT_MAX; sz <<= 1) {
+		*size = sz;
+		*lineptr = reallocf(*lineptr, sz);
+		if (*lineptr == NULL)
+			return -1;
+
+		p = fgetsnulx(*lineptr + len, sz, stream);
+		if (p == NULL)
+			return -1;
+
+		len = p - *lineptr;
+		if (p[-1] == '\n' && p[-2] != '\\')
+			return len;
+		if (p[-1] == '\n' && p[-2] == '\\')
+			len -= 2;
+	}
+
+	return -1;
+}
+
+
+/* Like fgetsx(), but returns a pointer to the terminating NUL byte.  */
+char *
+fgetsnulx(char *buf, int size, FILE *stream)
+{
+	if (fgetsx(buf, size, stream) == NULL)
+		return NULL;
+	return buf + strlen(buf);
+}
+
+
 /*@null@*/char *fgetsx (/*@returned@*/ /*@out@*/char *buf, int cnt, FILE * f)
 {
 	char *cp = buf;
