@@ -41,7 +41,7 @@ bit_ceil_wrapul(unsigned long x)
 inline int
 leading_zerosul(unsigned long x)
 {
-	return (x == 0) ? ULONG_WIDTH : __builtin_clz(x);
+	return (x == 0) ? ULONG_WIDTH : __builtin_clzl(x);
 }
 
 
