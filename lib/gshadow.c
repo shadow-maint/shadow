@@ -192,48 +192,16 @@ void endsgent (void)
 	static size_t buflen = 0;
 	static char *buf = NULL;
 
-	char *cp;
-
-	if (0 == buflen) {
-		buf = (char *) malloc (BUFSIZ);
-		if (NULL == buf) {
-			return NULL;
-		}
-		buflen = BUFSIZ;
-	}
-
 	if (NULL == fp) {
 		return NULL;
 	}
 
 #ifdef	USE_NIS
-	while (fgetsx (buf, (int) buflen, fp) == buf)
+	while (getlinex (&buf, &buflen, fp) != -1)
 #else
-	if (fgetsx (buf, (int) buflen, fp) == buf)
+	if (getlinex (&buf, &buflen, fp) != -1)
 #endif
 	{
-		while (   ((cp = strrchr (buf, '\n')) == NULL)
-		       && (feof (fp) == 0)) {
-			size_t len;
-
-			cp = (char *) realloc (buf, buflen*2);
-			if (NULL == cp) {
-				return NULL;
-			}
-			buf = cp;
-			buflen *= 2;
-
-			len = strlen (buf);
-			if (fgetsx (&buf[len],
-			            (int) (buflen - len),
-			            fp) != &buf[len]) {
-				return NULL;
-			}
-		}
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
 #ifdef	USE_NIS
 		if (nis_ignore && IS_NISCHAR (buf[0])) {
 			continue;
