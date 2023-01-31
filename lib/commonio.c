@@ -447,7 +447,7 @@ static void add_one_entry_nis (struct commonio_db *db,
 
 int commonio_open (struct commonio_db *db, int mode)
 {
-	char *buf;
+	char *buf = NULL;
 	char *cp;
 	char *line;
 	struct commonio_entry *p;
@@ -512,34 +512,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	/* Do not inherit fd in spawned processes (e.g. nscd) */
 	fcntl (fileno (db->fp), F_SETFD, FD_CLOEXEC);
 
-	buflen = BUFLEN;
-	buf = (char *) malloc (buflen);
-	if (NULL == buf) {
-		goto cleanup_ENOMEM;
-	}
-
-	while (db->ops->fgets (buf, (int) buflen, db->fp) == buf) {
-		while (   ((cp = strrchr (buf, '\n')) == NULL)
-		       && (feof (db->fp) == 0)) {
-			size_t len;
-
-			buflen += BUFLEN;
-			cp = (char *) realloc (buf, buflen);
-			if (NULL == cp) {
-				goto cleanup_buf;
-			}
-			buf = cp;
-			len = strlen (buf);
-			if (db->ops->fgets (buf + len,
-			                    (int) (buflen - len),
-			                    db->fp) == NULL) {
-				goto cleanup_buf;
-			}
-		}
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
+	while (db->ops->getline (&buf, &buflen, db->fp) != -1) {
 
 		line = strdup (buf);
 		if (NULL == line) {

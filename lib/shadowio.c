@@ -73,6 +73,7 @@ static struct commonio_ops shadow_ops = {
 	shadow_put,
 	fgets,
 	fputs,
+	getline,		/* getline */
 	NULL,			/* open_hook */
 	NULL			/* close_hook */
 };
