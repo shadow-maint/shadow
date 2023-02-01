@@ -50,7 +50,7 @@ static const char *group_getname (const void *ent)
 
 static void *group_parse (const char *line)
 {
-	return (void *) sgetgrent (line);
+	return sgetgrent (line);
 }
 
 static int group_put (const void *ent, FILE * file)

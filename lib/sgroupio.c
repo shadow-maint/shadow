@@ -151,7 +151,7 @@ static const char *gshadow_getname (const void *ent)
 
 static void *gshadow_parse (const char *line)
 {
-	return (void *) sgetsgent (line);
+	return sgetsgent (line);
 }
 
 static int gshadow_put (const void *ent, FILE * file)

@@ -67,7 +67,7 @@ void dolastlog (
 	 * the way we read the old one in.
 	 */
 
-	if (read (fd, (void *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
+	if (read (fd, &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
 		memzero (&newlog, sizeof newlog);
 	}
 	if (NULL != ll) {

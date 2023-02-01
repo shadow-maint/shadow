@@ -42,7 +42,7 @@ static const char *passwd_getname (const void *ent)
 
 static void *passwd_parse (const char *line)
 {
-	return (void *) sgetpwent (line);
+	return sgetpwent (line);
 }
 
 static int passwd_put (const void *ent, FILE * file)
