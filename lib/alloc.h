@@ -20,6 +20,46 @@
 #include "defines.h"
 
 
+#define ALLOCARRAY(n, type)    ((type *) alloca(sizeof(type) * (n)))
+#define CALLOC(n, type)        ((type *) calloc(n, sizeof(type)))
+#define XCALLOC(n, type)       ((type *) xcalloc(n, sizeof(type)))
+#define MALLOCARRAY(n, type)   ((type *) mallocarray(n, sizeof(type)))
+#define XMALLOCARRAY(n, type)  ((type *) xmallocarray(n, sizeof(type)))
+
+#define ALLOCA(type)           ALLOCARRAY(1, type)
+#define MALLOC(type)           MALLOCARRAY(1, type)
+#define XMALLOC(type)          XMALLOCARRAY(1, type)
+#define REALLOC(ptr, type)     REALLOCARRAY(ptr, 1, type)
+#define REALLOCF(ptr, type)    REALLOCARRAYF(ptr, 1, type)
+
+#define REALLOCARRAY(ptr, n, type)                                            \
+({                                                                            \
+	__auto_type  p_ = (ptr);                                              \
+                                                                              \
+	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
+                                                                              \
+	(type *) reallocarray(p_, n, sizeof(type));                           \
+})
+
+#define REALLOCARRAYF(ptr, n, type)                                           \
+({                                                                            \
+	__auto_type  p_ = (ptr);                                              \
+                                                                              \
+	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
+                                                                              \
+	(type *) reallocarrayf(p_, n, sizeof(type));                          \
+})
+
+#define XREALLOCARRAY(ptr, n, type)                                           \
+({                                                                            \
+	__auto_type  p_ = (ptr);                                              \
+                                                                              \
+	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
+                                                                              \
+	(type *) xreallocarray(p_, n, sizeof(type));                          \
+})
+
+
 ATTR_MALLOC(free)
 inline void *xmalloc(size_t size);
 ATTR_MALLOC(free)
