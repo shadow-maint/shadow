@@ -136,8 +136,7 @@ agetpass(const char *prompt)
 	return pass;
 
 fail:
-	memzero(pass, PASS_MAX);
-	free(pass);
+	freezero(pass, PASS_MAX);
 	return NULL;
 }
 
@@ -145,8 +144,5 @@ fail:
 void
 erase_pass(char *pass)
 {
-	if (pass == NULL)
-		return;
-	memzero(pass, PASS_MAX);
-	free(pass);
+	freezero(pass, PASS_MAX);
 }
