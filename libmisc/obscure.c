@@ -274,10 +274,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 
 	msg = password_check (old1, new1, pwdp);
 
-	memzero (new1, newlen);
-	memzero (old1, oldlen);
-	free (new1);
-	free (old1);
+	freezero (new1, newlen);
+	freezero (old1, oldlen);
 
 	return msg;
 }
