@@ -57,7 +57,7 @@ static bool rflg = false;	/* reset the counters of login failures */
 
 static struct stat statbuf;	/* fstat buffer for file size */
 
-#define	NOW	(time((time_t *) 0))
+#define	NOW	time(NULL)
 
 static /*@noreturn@*/void usage (int status)
 {

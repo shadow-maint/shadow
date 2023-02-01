@@ -205,7 +205,7 @@ static int get_groups (char *list)
 	/*
 	 * Initialize the list to be empty
 	 */
-	user_groups[0] = (char *) 0;
+	user_groups[0] = NULL;
 
 	if ('\0' == *list) {
 		return 0;
@@ -280,7 +280,7 @@ static int get_groups (char *list)
 		gr_free ((struct group *)grp);
 	} while (NULL != list);
 
-	user_groups[ngroups] = (char *) 0;
+	user_groups[ngroups] = NULL;
 
 	/*
 	 * Any errors in finding group names are fatal
@@ -2154,7 +2154,7 @@ int main (int argc, char **argv)
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = (char **) malloc (sizeof (char *) * (1 + sys_ngroups));
-	user_groups[0] = (char *) 0;
+	user_groups[0] = NULL;
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP

@@ -812,7 +812,7 @@ static void check_spw_file (int *errors, bool *changed)
 		 * Warn if last password change in the future.  --marekm
 		 */
 		if (!quiet) {
-			time_t t = time ((time_t *) 0);
+			time_t t = time (NULL);
 			if (   (t != 0)
 			    && (spw->sp_lstchg > (long) t / SCALE)) {
 				printf (_("user %s: last password change in the future\n"),

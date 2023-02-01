@@ -79,7 +79,7 @@ static void endportent (void)
 		(void) fclose (ports);
 	}
 
-	ports = (FILE *) 0;
+	ports = NULL;
 }
 
 /*
@@ -172,13 +172,13 @@ static struct port *getportent (void)
 	}
 	*cp = '\0';
 	cp++;
-	port.pt_names[j + 1] = (char *) 0;
+	port.pt_names[j + 1] = NULL;
 
 	/*
 	 * Get the list of user names.  It is the second colon
 	 * separated field, and is a comma separated list of user
 	 * names.  The entry '*' is used to specify all usernames.
-	 * The last entry in the list is a (char *) 0 pointer.
+	 * The last entry in the list is a NULL pointer.
 	 */
 
 	if (':' != *cp) {

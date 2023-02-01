@@ -1088,7 +1088,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
+	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {

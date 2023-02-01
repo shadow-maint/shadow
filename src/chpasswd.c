@@ -482,7 +482,7 @@ int main (int argc, char **argv)
 	 * last change date is set in the age only if aging information is
 	 * present.
 	 */
-	while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
+	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
@@ -491,7 +491,7 @@ int main (int argc, char **argv)
 			if (feof (stdin) == 0) {
 
 				// Drop all remaining characters on this line.
-				while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
+				while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
 					cp = strchr (buf, '\n');
 					if (cp != NULL) {
 						break;

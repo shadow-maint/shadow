@@ -64,7 +64,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		/* Do not return if the group permission were raised. */
 		exit (EXIT_FAILURE);
 	}
-	if (fp == (FILE *) 0) {
+	if (fp == NULL) {
 		return;		/* can't open or create logfile */
 	}
 

@@ -575,7 +575,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (pw_auth (password, name, PW_SU, (char *) 0) != 0) {
+	if (pw_auth (password, name, PW_SU, NULL) != 0) {
 		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
@@ -598,7 +598,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * there is a "SU" entry in the /etc/porttime file denying access to
 	 * the account.
 	 */
-	if (!isttytime (name, "SU", time ((time_t *) 0))) {
+	if (!isttytime (name, "SU", time (NULL))) {
 		SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
 		         "SU by %s to restricted account %s",
 		         caller_name, name));
@@ -1130,7 +1130,7 @@ int main (int argc, char **argv)
 		int fd = open ("/dev/tty", O_RDWR);
 
 		if (fd >= 0) {
-			err = ioctl (fd, TIOCNOTTY, (char *) 0);
+			err = ioctl (fd, TIOCNOTTY, (char *) NULL);
 			(void) close (fd);
 		} else if (ENXIO == errno) {
 			/* There are no controlling terminal already */

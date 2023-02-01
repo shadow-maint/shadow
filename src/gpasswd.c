@@ -721,7 +721,7 @@ static void check_perms (const struct group *gr)
 		 * --marekm
 		 */
 		if (!amroot) {
-			if (gr->gr_mem[0] == (char *) 0) {
+			if (gr->gr_mem[0] == NULL) {
 				failure ();
 			}
 

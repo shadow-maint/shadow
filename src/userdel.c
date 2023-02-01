@@ -763,7 +763,7 @@ static void user_cancel (const char *user)
 	}
 	argv[0] = cmd;
 	argv[1] = user;
-	argv[2] = (char *)0;
+	argv[2] = NULL;
 	(void) run_command (cmd, argv, NULL, &status);
 }
 

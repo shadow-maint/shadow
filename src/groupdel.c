@@ -275,7 +275,7 @@ static void group_busy (gid_t gid)
 	 * If pwd isn't NULL, it stopped because the gid's matched.
 	 */
 
-	if (pwd == (struct passwd *) 0) {
+	if (pwd == NULL) {
 		return;
 	}
 

@@ -248,7 +248,7 @@ static void grp_update (void)
 			if (NULL != grp.gr_mem[0])
 				gr_free_members(&grp);
 			grp.gr_mem = (char **)xmalloc(sizeof(char *));
-			grp.gr_mem[0] = (char *)0;
+			grp.gr_mem[0] = NULL;
 		} else {
 			// append to existing groups
 			if (NULL != grp.gr_mem[0])
