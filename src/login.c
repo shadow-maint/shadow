@@ -974,7 +974,7 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		if (pw_auth (user_passwd, username, reason, (char *) 0) == 0) {
+		if (pw_auth (user_passwd, username, reason, NULL) == 0) {
 			goto auth_ok;
 		}
 
@@ -1041,7 +1041,7 @@ int main (int argc, char **argv)
 		 * all).  --marekm
 		 */
 		if (user_passwd[0] == '\0') {
-			pw_auth ("!", username, reason, (char *) 0);
+			pw_auth ("!", username, reason, NULL);
 		}
 
 		/*
@@ -1081,7 +1081,7 @@ int main (int argc, char **argv)
 	 * by Ivan Nejgebauer <ian@unsux.ns.ac.yu>.  --marekm
 	 */
 	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
-	    && !isttytime (username, tty, time ((time_t *) 0))) {
+	    && !isttytime (username, tty, time (NULL))) {
 		SYSLOG ((LOG_WARN, "invalid login time for '%s'%s",
 		         username, fromhost));
 		closelog ();
@@ -1308,7 +1308,7 @@ int main (int argc, char **argv)
 		err = shell (tmp, pwd->pw_shell, newenvp); /* fake shell */
 	} else {
 		/* exec the shell finally */
-		err = shell (pwd->pw_shell, (char *) 0, newenvp);
+		err = shell (pwd->pw_shell, NULL, newenvp);
 	}
 
 	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);

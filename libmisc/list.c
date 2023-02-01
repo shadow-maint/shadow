@@ -33,7 +33,7 @@
 	 * pointer if it is present.
 	 */
 
-	for (i = 0; list[i] != (char *) 0; i++) {
+	for (i = 0; list[i] != NULL; i++) {
 		if (strcmp (list[i], member) == 0) {
 			return list;
 		}
@@ -52,12 +52,12 @@
 	 * is returned to the invoker.
 	 */
 
-	for (i = 0; list[i] != (char *) 0; i++) {
+	for (i = 0; list[i] != NULL; i++) {
 		tmp[i] = list[i];
 	}
 
 	tmp[i] = xstrdup (member);
-	tmp[i+1] = (char *) 0;
+	tmp[i+1] = NULL;
 
 	return tmp;
 }
@@ -83,7 +83,7 @@
 	 * pointer if it is not present.
 	 */
 
-	for (i = j = 0; list[i] != (char *) 0; i++) {
+	for (i = j = 0; list[i] != NULL; i++) {
 		if (strcmp (list[i], member) != 0) {
 			j++;
 		}
@@ -106,14 +106,14 @@
 	 * is returned to the invoker.
 	 */
 
-	for (i = j = 0; list[i] != (char *) 0; i++) {
+	for (i = j = 0; list[i] != NULL; i++) {
 		if (strcmp (list[i], member) != 0) {
 			tmp[j] = list[i];
 			j++;
 		}
 	}
 
-	tmp[j] = (char *) 0;
+	tmp[j] = NULL;
 
 	return tmp;
 }
@@ -142,7 +142,7 @@
 		list++;
 	}
 
-	tmp[i] = (char *) 0;
+	tmp[i] = NULL;
 	return tmp;
 }
 
@@ -217,7 +217,7 @@ bool is_on_list (char *const *list, const char *member)
 	 */
 
 	if ('\0' == *members) {
-		*array = (char *) 0;
+		*array = NULL;
 		free (members);
 		return array;
 	}
@@ -235,7 +235,7 @@ bool is_on_list (char *const *list, const char *member)
 			cp2++;
 			cp = cp2;
 		} else {
-			array[i + 1] = (char *) 0;
+			array[i + 1] = NULL;
 			break;
 		}
 	}

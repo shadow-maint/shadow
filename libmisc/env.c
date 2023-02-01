@@ -41,7 +41,7 @@ static const char *const forbid[] = {
 	"PATH=",
 	"SHELL=",
 	"SHLIB_PATH=",
-	(char *) 0
+	NULL
 };
 
 /* these are allowed, but with no slashes inside
@@ -50,7 +50,7 @@ static const char *const noslash[] = {
 	"LANG=",
 	"LANGUAGE=",
 	"LC_",			/* anything with the LC_ prefix */
-	(char *) 0
+	NULL
 };
 
 /*

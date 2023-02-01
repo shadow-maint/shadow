@@ -103,7 +103,7 @@ void endsgent (void)
 		(void) fclose (shadow);
 	}
 
-	shadow = (FILE *) 0;
+	shadow = NULL;
 }
 
 /*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *string)
@@ -399,7 +399,7 @@ void endsgent (void)
 		nis_disabled = true;
 	}
 #endif
-	while ((sgrp = getsgent ()) != (struct sgrp *) 0) {
+	while ((sgrp = getsgent ()) != NULL) {
 		if (strcmp (name, sgrp->sg_name) == 0) {
 			break;
 		}

@@ -33,7 +33,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	char arg0[1024];
 	int err;
 
-	if (file == (char *) 0) {
+	if (file == NULL) {
 		errno = EINVAL;
 		return errno;
 	}
@@ -44,7 +44,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * that.  So, we determine the 0'th entry only if they
 	 * don't want to tell us what it is themselves.
 	 */
-	if (arg == (char *) 0) {
+	if (arg == NULL) {
 		(void) snprintf (arg0, sizeof arg0, "-%s", Basename (file));
 		arg0[sizeof arg0 - 1] = '\0';
 		arg = arg0;
@@ -55,7 +55,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * able to figure out what we are up to without too much
 	 * grief.
 	 */
-	(void) execle (file, arg, (char *) 0, envp);
+	(void) execle (file, arg, (char *) NULL, envp);
 	err = errno;
 
 	if (access (file, R_OK|X_OK) == 0) {
@@ -63,7 +63,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
 		 */
-		(void) execle (SHELL, "sh", "-", file, (char *)0, envp);
+		(void) execle (SHELL, "sh", "-", file, (char *) NULL, envp);
 		err = errno;
 	}
 

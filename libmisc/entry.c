@@ -24,7 +24,7 @@ void pw_entry (const char *name, struct passwd *pwent)
 	struct spwd *spwd;
 
 	if (!(passwd = getpwnam (name))) { /* local, no need for xgetpwnam */
-		pwent->pw_name = (char *) 0;
+		pwent->pw_name = NULL;
 		return;
 	} else {
 		pwent->pw_name = xstrdup (passwd->pw_name);

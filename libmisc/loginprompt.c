@@ -122,7 +122,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 		int envc;
 
 		for (envc = 0; envc < MAX_ENV; envc++) {
-			nvar = strtok ((0 != envc) ? (char *) 0 : cp, " \t,");
+			nvar = strtok ((0 != envc) ? NULL : cp, " \t,");
 			if (NULL == nvar) {
 				break;
 			}

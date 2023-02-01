@@ -504,7 +504,7 @@ int main (int argc, char **argv)
 		if ((argc > 0) && (argv[0][0] == '-')) {
 			usage ();
 			goto failure;
-		} else if (argv[0] != (char *) 0) {
+		} else if (argv[0] != NULL) {
 			group = argv[0];
 		} else {
 			/*
@@ -740,7 +740,7 @@ int main (int argc, char **argv)
 	 */
 	if (cflag) {
 		closelog ();
-		execl (SHELL, "sh", "-c", command, (char *) 0);
+		execl (SHELL, "sh", "-c", command, (char *) NULL);
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-gid=%lu", (unsigned long) gid);
@@ -820,7 +820,7 @@ int main (int argc, char **argv)
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
 	 */
-	err = shell (prog, initflag ? (char *) 0 : progbase, newenvp);
+	err = shell (prog, initflag ? NULL : progbase, newenvp);
 	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/*@notreached@*/
       failure:

@@ -56,7 +56,7 @@ static bool bflg = false;	/* print excludes most recent days */
 static bool Cflg = false;	/* clear record for user */
 static bool Sflg = false;	/* set record for user */
 
-#define	NOW	(time ((time_t *) 0))
+#define	NOW	time(NULL)
 
 static /*@noreturn@*/void usage (int status)
 {

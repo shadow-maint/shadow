@@ -94,7 +94,7 @@ void endspent (void)
 		(void) fclose (shadow);
 	}
 
-	shadow = (FILE *) 0;
+	shadow = NULL;
 }
 
 /*
@@ -336,9 +336,9 @@ struct spwd *fgetspent (FILE * fp)
 	}
 
 #ifdef	USE_NIS
-	while (fgets (buf, (int) sizeof buf, fp) != (char *) 0)
+	while (fgets (buf, (int) sizeof buf, fp) != NULL)
 #else
-	if (fgets (buf, (int) sizeof buf, fp) != (char *) 0)
+	if (fgets (buf, (int) sizeof buf, fp) != NULL)
 #endif
 	{
 		cp = strchr (buf, '\n');
@@ -511,7 +511,7 @@ struct spwd *getspnam (const char *name)
 		nis_disabled = true;
 	}
 #endif
-	while ((sp = getspent ()) != (struct spwd *) 0) {
+	while ((sp = getspent ()) != NULL) {
 		if (strcmp (name, sp->sp_namp) == 0) {
 			break;
 		}

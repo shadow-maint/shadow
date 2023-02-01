@@ -894,7 +894,7 @@ static int get_groups (char *list)
 	close_group_files ();
 	unlock_group_files ();
 
-	user_groups[ngroups] = (char *) 0;
+	user_groups[ngroups] = NULL;
 
 	/*
 	 * Any errors in finding group names are fatal
@@ -2546,7 +2546,7 @@ int main (int argc, char **argv)
 	/*
 	 * Initialize the list to be empty
 	 */
-	user_groups[0] = (char *) 0;
+	user_groups[0] = NULL;
 
 
 	is_shadow_pwd = spw_file_present ();

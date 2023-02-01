@@ -510,28 +510,28 @@ static void get_old_fields (const char *gecos)
 	 * Now get the full name. It is the first comma separated field in
 	 * the GECOS field.
 	 */
-	cp = copy_field (old_gecos, fflg ? (char *) 0 : fullnm, slop);
+	cp = copy_field (old_gecos, fflg ? NULL : fullnm, slop);
 
 	/*
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
+		cp = copy_field (cp, rflg ? NULL : roomno, slop);
 	}
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
+		cp = copy_field (cp, wflg ? NULL : workph, slop);
 	}
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
+		cp = copy_field (cp, hflg ? NULL : homeph, slop);
 	}
 
 	/*

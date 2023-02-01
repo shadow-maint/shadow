@@ -127,7 +127,7 @@ static void catch_signals (unused int sig)
 	while (true) {		/* repeatedly get login/password pairs */
 		char *cp;
 		pw_entry (name, &pwent);	/* get entry from password file */
-		if (pwent.pw_name == (char *) 0) {
+		if (pwent.pw_name == NULL) {
 			/*
 			 * Fail secure
 			 */
@@ -155,7 +155,7 @@ static void catch_signals (unused int sig)
 			erase_pass (cp);
 			(void) puts ("");
 #ifdef	TELINIT
-			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) 0);
+			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
 #endif
 			exit (0);
 		}
@@ -177,7 +177,7 @@ static void catch_signals (unused int sig)
 	(void) puts (_("Entering System Maintenance Mode"));
 
 	/* exec the shell finally. */
-	err = shell (pwent.pw_shell, (char *) 0, environ);
+	err = shell (pwent.pw_shell, NULL, environ);
 
 	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }

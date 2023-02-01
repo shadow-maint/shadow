@@ -117,9 +117,9 @@ int login_access (const char *user, const char *from)
 				continue;
 			}
 			if (   ((perm = strtok (line, fs)) == NULL)
-			    || ((users = strtok ((char *) 0, fs)) == NULL)
-			    || ((froms = strtok ((char *) 0, fs)) == NULL)
-			    || (strtok ((char *) 0, fs) != NULL)) {
+			    || ((users = strtok (NULL, fs)) == NULL)
+			    || ((froms = strtok (NULL, fs)) == NULL)
+			    || (strtok (NULL, fs) != NULL)) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: bad field count",
 					 TABLE, lineno));
@@ -154,7 +154,7 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 	 * a match, look for an "EXCEPT" list and recurse to determine whether
 	 * the match is affected by any exceptions.
 	 */
-	for (tok = strtok (list, sep); tok != NULL; tok = strtok ((char *) 0, sep)) {
+	for (tok = strtok (list, sep); tok != NULL; tok = strtok (NULL, sep)) {
 		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
 			break;
 		}
@@ -166,10 +166,10 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 
 	/* Process exceptions to matches. */
 	if (match) {
-		while (   ((tok = strtok ((char *) 0, sep)) != NULL)
+		while (   ((tok = strtok (NULL, sep)) != NULL)
 		       && (strcasecmp (tok, "EXCEPT") != 0))
 			/* VOID */ ;
-		if (tok == 0 || !list_match ((char *) 0, item, match_fn)) {
+		if (tok == 0 || !list_match (NULL, item, match_fn)) {
 			return (match);
 		}
 	}
@@ -193,9 +193,9 @@ static char *myhostname (void)
 static bool
 netgroup_match (const char *group, const char *machine, const char *user)
 {
-	static char *mydomain = (char *)0;
+	static char *mydomain = NULL;
 
-	if (mydomain == (char *)0) {
+	if (mydomain == NULL) {
 		static char domain[MAXHOSTNAMELEN + 1];
 
 		getdomainname (domain, MAXHOSTNAMELEN);
@@ -228,7 +228,7 @@ static bool user_match (const char *tok, const char *string)
 		        && from_match (at + 1, myhostname ()));
 #if HAVE_INNETGR
 	} else if (tok[0] == '@') {	/* netgroup */
-		return (netgroup_match (tok + 1, (char *) 0, string));
+		return (netgroup_match (tok + 1, NULL, string));
 #endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
@@ -303,7 +303,7 @@ static bool from_match (const char *tok, const char *string)
 	 */
 #if HAVE_INNETGR
 	if (tok[0] == '@') {	/* netgroup */
-		return (netgroup_match (tok + 1, string, (char *) 0));
+		return (netgroup_match (tok + 1, string, NULL));
 	} else
 #endif
 	if (string_match (tok, string)) {	/* ALL or exact match */

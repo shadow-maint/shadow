@@ -112,7 +112,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 			_exit (126);
 		}
 
-		(void) execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
+		(void) execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) NULL);
 		err = errno;
 		perror ("Can't execute " PASSWD_PROGRAM);
 		_exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
@@ -139,7 +139,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 void agecheck (/*@null@*/const struct spwd *sp)
 {
-	long now = (long) time ((time_t *) 0) / SCALE;
+	long now = (long) time(NULL) / SCALE;
 	long remain;
 
 	if (NULL == sp) {

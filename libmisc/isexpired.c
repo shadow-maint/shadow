@@ -40,7 +40,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 {
 	long now;
 
-	now = (long) time ((time_t *) 0) / SCALE;
+	now = (long) time(NULL) / SCALE;
 
 	if (NULL == sp) {
 		return 0;
