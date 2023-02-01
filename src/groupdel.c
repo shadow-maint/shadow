@@ -149,8 +149,7 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP, Prog,
 	              "removing group from /etc/group",
-	              group_name, (unsigned int) group_id,
-	              SHADOW_AUDIT_SUCCESS);
+	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO,
 	         "group '%s' removed from %s",
@@ -174,8 +173,7 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "removing group from /etc/gshadow",
-		              group_name, (unsigned int) group_id,
-		              SHADOW_AUDIT_SUCCESS);
+		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO,
 		         "group '%s' removed from %s",
@@ -190,9 +188,7 @@ static void close_files (void)
 	/* Report success at the system level */
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP, Prog,
-	              "",
-	              group_name, (unsigned int) group_id,
-	              SHADOW_AUDIT_SUCCESS);
+	              "", group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));
 	del_cleanup (cleanup_report_del_group);

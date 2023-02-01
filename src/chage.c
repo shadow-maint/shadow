@@ -103,8 +103,7 @@ fail_exit (int code)
 #ifdef WITH_AUDIT
 	if (E_SUCCESS != code) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "change age",
-		              user_name, (unsigned int) user_uid, 0);
+		              "change age", user_name, user_uid, 0);
 	}
 #endif
 
@@ -260,7 +259,7 @@ static void list_fields (void)
 		(void) puts (_("password must be changed"));
 	} else {
 		changed = lstchgdate * SCALE;
-		print_date ((time_t) changed);
+		print_date (changed);
 	}
 
 	/*
@@ -277,7 +276,7 @@ static void list_fields (void)
 		(void) puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
-		print_date ((time_t) expires);
+		print_date (expires);
 	}
 
 	/*
@@ -298,7 +297,7 @@ static void list_fields (void)
 		(void) puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
-		print_date ((time_t) expires);
+		print_date (expires);
 	}
 
 	/*
@@ -310,7 +309,7 @@ static void list_fields (void)
 		(void) puts (_("never"));
 	} else {
 		expires = expdate * SCALE;
-		print_date ((time_t) expires);
+		print_date (expires);
 	}
 
 	/*
@@ -835,8 +834,7 @@ int main (int argc, char **argv)
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "display aging info",
-		              user_name, (unsigned int) user_uid, 1);
+		              "display aging info", user_name, user_uid, 1);
 #endif
 		list_fields ();
 		fail_exit (E_SUCCESS);
@@ -858,40 +856,38 @@ int main (int argc, char **argv)
 		else {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change all aging information",
-			              user_name, (unsigned int) user_uid, 1);
+			              user_name, user_uid, 1);
 		}
 #endif
 	} else {
 #ifdef WITH_AUDIT
 		if (Mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change max age",
-			              user_name, (unsigned int) user_uid, 1);
+			              "change max age", user_name, user_uid, 1);
 		}
 		if (mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change min age",
-			              user_name, (unsigned int) user_uid, 1);
+			              "change min age", user_name, user_uid, 1);
 		}
 		if (dflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change last change date",
-			              user_name, (unsigned int) user_uid, 1);
+			              user_name, user_uid, 1);
 		}
 		if (Wflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change passwd warning",
-			              user_name, (unsigned int) user_uid, 1);
+			              user_name, user_uid, 1);
 		}
 		if (Iflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change inactive days",
-			              user_name, (unsigned int) user_uid, 1);
+			              user_name, user_uid, 1);
 		}
 		if (Eflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change passwd expiration",
-			              user_name, (unsigned int) user_uid, 1);
+			              user_name, user_uid, 1);
 		}
 #endif
 	}

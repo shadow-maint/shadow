@@ -43,8 +43,7 @@ static int ni_conv (int num_msg,
 		return PAM_CONV_ERR;
 	}
 
-	responses = (struct pam_response *) calloc ((size_t) num_msg,
-	                                            sizeof (*responses));
+	responses = (struct pam_response *) calloc (num_msg, sizeof (*responses));
 	if (NULL == responses) {
 		return PAM_CONV_ERR;
 	}

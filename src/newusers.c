@@ -245,11 +245,11 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		/* Look in both the system database (getgrgid) and in the
 		 * internal database (gr_locate_gid), which may contain
 		 * uncommitted changes */
-		if (   (getgrgid ((gid_t) grent.gr_gid) != NULL)
-		    || (gr_locate_gid ((gid_t) grent.gr_gid) != NULL)) {
+		if (   (getgrgid (grent.gr_gid) != NULL)
+		    || (gr_locate_gid (grent.gr_gid) != NULL)) {
 			/* The user will use this ID for her
 			 * primary group */
-			*ngid = (gid_t) grent.gr_gid;
+			*ngid = grent.gr_gid;
 			return 0;
 		}
 
@@ -527,7 +527,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			}
 			spent.sp_pwdp = cp;
 		}
-		spent.sp_lstchg = (long) gettime () / SCALE;
+		spent.sp_lstchg = gettime () / SCALE;
 		if (0 == spent.sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */
@@ -584,7 +584,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 */
 	spent.sp_pwdp = "!";
 #endif
-	spent.sp_lstchg = (long) gettime () / SCALE;
+	spent.sp_lstchg = gettime () / SCALE;
 	if (0 == spent.sp_lstchg) {
 		/* Better disable aging than requiring a password change */
 		spent.sp_lstchg = -1;
@@ -1088,7 +1088,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
+	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {

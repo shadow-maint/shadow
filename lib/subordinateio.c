@@ -355,13 +355,14 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
 {
 	struct subordinate_range *range1, *range2;
 
-	if ((*(struct commonio_entry **) p1)->eptr == NULL)
-		return 1;
-	if ((*(struct commonio_entry **) p2)->eptr == NULL)
-		return -1;
 
-	range1 = ((struct subordinate_range *) (*(struct commonio_entry **) p1)->eptr);
-	range2 = ((struct subordinate_range *) (*(struct commonio_entry **) p2)->eptr);
+	range1 = (*(struct commonio_entry **) p1)->eptr;
+	if (range1 == NULL)
+		return 1;
+
+	range2 = (*(struct commonio_entry **) p2)->eptr;
+	if (range2 == NULL)
+		return -1;
 
 	if (range1->start < range2->start)
 		return -1;

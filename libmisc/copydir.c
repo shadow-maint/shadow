@@ -768,7 +768,7 @@ static ssize_t full_write(int fd, const void *buf, size_t count) {
 
 		written += res;
 		buf = (const unsigned char*)buf + res;
-		count -= (size_t)res;
+		count -= res;
 	}
 
 	return written;
@@ -850,7 +850,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 			break;
 		}
 
-		if (full_write (ofd, buf, (size_t)cnt) < 0) {
+		if (full_write (ofd, buf, cnt) < 0) {
 			(void) close (ofd);
 			(void) close (ifd);
 			return -1;

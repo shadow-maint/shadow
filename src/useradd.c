@@ -375,7 +375,7 @@ static void get_defaults (void)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets (buf, (int) sizeof buf, fp) == buf) {
+	while (fgets (buf, sizeof buf, fp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
@@ -653,7 +653,7 @@ static int set_defaults (void)
 		goto skip;
 	}
 
-	while (fgets (buf, (int) sizeof buf, ifp) == buf) {
+	while (fgets (buf, sizeof buf, ifp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
@@ -925,7 +925,7 @@ static struct group * get_local_group(char * grp_name)
 		&& ('\0' == *endptr)
 		&& (ERANGE != errno)
 		&& (gid == (gid_t)gid)) {
-		grp = gr_locate_gid ((gid_t) gid);
+		grp = gr_locate_gid (gid);
 	}
 	else {
 		grp = gr_locate(grp_name);
@@ -1043,7 +1043,7 @@ static void new_spent (struct spwd *spent)
 	memzero (spent, sizeof *spent);
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = (long) gettime () / SCALE;
+	spent->sp_lstchg = gettime () / SCALE;
 	if (0 == spent->sp_lstchg) {
 		/* Better disable aging than requiring a password change */
 		spent->sp_lstchg = -1;
@@ -2095,7 +2095,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 
-	max_uid = (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
+	max_uid = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (uid > max_uid) {
 		/* do not touch lastlog for large uids */
 		return;
@@ -2237,8 +2237,7 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding shadow password",
-		              user_name, (unsigned int) user_id,
-		              SHADOW_AUDIT_FAILURE);
+		              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -2359,9 +2358,8 @@ static void create_home (void)
 							Prog, path);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
-										"adding home directory",
-										user_name, (unsigned int) user_id,
-										SHADOW_AUDIT_FAILURE);
+				"adding home directory",
+				user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_HOMEDIR);
 		}
@@ -2391,8 +2389,7 @@ static void create_home (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding home directory",
-		              user_name, (unsigned int) user_id,
-		              SHADOW_AUDIT_SUCCESS);
+		              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif
 #ifdef WITH_SELINUX
 		/* Reset SELinux to create files with default contexts */
@@ -2488,13 +2485,13 @@ static void check_uid_range(int rflg, uid_t user_id)
 	uid_t uid_min ;
 	uid_t uid_max ;
 	if (rflg) {
-		uid_max = (uid_t)getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
+		uid_max = getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
 		if (user_id > uid_max) {
 			fprintf(stderr, _("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, user_id, uid_max);
 		}
 	}else{
-		uid_min = (uid_t)getdef_ulong("UID_MIN", 1000UL);
-		uid_max = (uid_t)getdef_ulong("UID_MAX", 6000UL);
+		uid_min = getdef_ulong("UID_MIN", 1000UL);
+		uid_max = getdef_ulong("UID_MAX", 6000UL);
 		if (uid_min <= uid_max) {
 			if (user_id < uid_min || user_id >uid_max)
 				fprintf(stderr, _("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
@@ -2559,8 +2556,8 @@ int main (int argc, char **argv)
 	process_flags (argc, argv);
 
 #ifdef ENABLE_SUBIDS
-	uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
-	uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
+	uid_min = getdef_ulong ("UID_MIN", 1000UL);
+	uid_max = getdef_ulong ("UID_MAX", 60000UL);
 	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
 	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
 	is_sub_uid = subuid_count > 0 && sub_uid_file_present () &&
@@ -2689,7 +2686,7 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_ADD_USER, Prog,
 				              "adding user",
-				              user_name, (unsigned int) user_id,
+				              user_name, user_id,
 				              SHADOW_AUDIT_FAILURE);
 #endif
 				fail_exit (E_UID_IN_USE);
@@ -2768,7 +2765,7 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding SELinux user mapping",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, user_id, 0);
 #endif				/* WITH_AUDIT */
 			fail_exit (E_SE_UPDATE);
 		}

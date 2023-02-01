@@ -253,7 +253,7 @@ int sgr_open (int mode)
 
 int sgr_update (const struct sgrp *sg)
 {
-	return commonio_update (&gshadow_db, (const void *) sg);
+	return commonio_update (&gshadow_db, sg);
 }
 
 int sgr_remove (const char *name)

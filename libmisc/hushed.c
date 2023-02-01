@@ -66,7 +66,7 @@ bool hushed (const char *username)
 	if (NULL == fp) {
 		return false;
 	}
-	for (found = false; !found && (fgets (buf, (int) sizeof buf, fp) == buf);) {
+	for (found = false; !found && (fgets (buf, sizeof buf, fp) == buf);) {
 		buf[strcspn (buf, "\n")] = '\0';
 		found = (strcmp (buf, pw->pw_shell) == 0) ||
 		        (strcmp (buf, pw->pw_name) == 0);

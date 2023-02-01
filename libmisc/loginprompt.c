@@ -81,7 +81,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 */
 
 	memzero (buf, sizeof buf);
-	if (fgets (buf, (int) sizeof buf, stdin) != buf) {
+	if (fgets (buf, sizeof buf, stdin) != buf) {
 		exit (EXIT_FAILURE);
 	}
 

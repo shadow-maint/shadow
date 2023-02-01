@@ -25,7 +25,7 @@ int get_gid (const char *gidstr, gid_t *gid)
 		return 0;
 	}
 
-	*gid = (gid_t)val;
+	*gid = val;
 	return 1;
 }
 

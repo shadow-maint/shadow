@@ -22,7 +22,7 @@
  */
 void cleanup_report_add_user (void *user_name)
 {
-	const char *name = (const char *)user_name;
+	const char *name = user_name;
 
 	SYSLOG ((LOG_ERR, "failed to add user %s", name));
 #ifdef WITH_AUDIT
@@ -59,7 +59,7 @@ void cleanup_report_mod_passwd (void *cleanup_info)
  */
 void cleanup_report_add_user_passwd (void *user_name)
 {
-	const char *name = (const char *)user_name;
+	const char *name = user_name;
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, pw_dbname ()));
 #ifdef WITH_AUDIT
@@ -79,7 +79,7 @@ void cleanup_report_add_user_passwd (void *user_name)
  */
 void cleanup_report_add_user_shadow (void *user_name)
 {
-	const char *name = (const char *)user_name;
+	const char *name = user_name;
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, spw_dbname ()));
 #ifdef WITH_AUDIT

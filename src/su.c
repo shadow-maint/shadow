@@ -225,7 +225,7 @@ static void execve_shell (const char *shellname,
                           char *const envp[])
 {
 	int err;
-	(void) execve (shellname, (char **) args, envp);
+	(void) execve (shellname, args, envp);
 	err = errno;
 
 	if (access (shellname, R_OK|X_OK) == 0) {
@@ -501,7 +501,8 @@ static void check_perms_nopam (const struct passwd *pw)
 	}
 
 	if (strcmp (pw->pw_passwd, "") == 0) {
-		char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+		const char  *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+
 		if (prevent_no_auth == NULL) {
 			prevent_no_auth = "superuser";
 		}
@@ -621,7 +622,7 @@ static void check_perms_nopam (const struct passwd *pw)
 static /*@only@*/struct passwd * check_perms (void)
 {
 #ifdef USE_PAM
-	const char *tmp_name;
+	const void *tmp_name;
 	int ret;
 #endif				/* !USE_PAM */
 	/*
@@ -642,7 +643,7 @@ static /*@only@*/struct passwd * check_perms (void)
 #ifdef USE_PAM
 	check_perms_pam (pw);
 	/* PAM authentication can request a change of account */
-	ret = pam_get_item(pamh, PAM_USER, (const void **) &tmp_name);
+	ret = pam_get_item(pamh, PAM_USER, &tmp_name);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG((LOG_ERR, "pam_get_item: internal PAM error\n"));
 		(void) fprintf (stderr,
@@ -1001,9 +1002,9 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	ret = pam_set_item (pamh, PAM_TTY, (const void *) caller_tty);
+	ret = pam_set_item (pamh, PAM_TTY, caller_tty);
 	if (PAM_SUCCESS == ret) {
-		ret = pam_set_item (pamh, PAM_RUSER, (const void *) caller_name);
+		ret = pam_set_item (pamh, PAM_RUSER, caller_name);
 	}
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_set_item: %s",

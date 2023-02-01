@@ -159,7 +159,7 @@ int gr_open (int mode)
 
 int gr_update (const struct group *gr)
 {
-	return commonio_update (&group_db, (const void *) gr);
+	return commonio_update (&group_db, gr);
 }
 
 int gr_remove (const char *name)
@@ -247,8 +247,8 @@ static int group_open_hook (void)
 
 	for (gr1 = group_db.head; NULL != gr1; gr1 = gr1->next) {
 		for (gr2 = gr1->next; NULL != gr2; gr2 = gr2->next) {
-			struct group *g1 = (struct group *)gr1->eptr;
-			struct group *g2 = (struct group *)gr2->eptr;
+			struct group *g1 = gr1->eptr;
+			struct group *g2 = gr2->eptr;
 			if (NULL != g1 &&
 			    NULL != g2 &&
 			    0 == strcmp (g1->gr_name, g2->gr_name) &&
@@ -302,8 +302,8 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 		return NULL;
 	}
 
-	gptr1 = (struct group *)gr1->eptr;
-	gptr2 = (struct group *)gr2->eptr;
+	gptr1 = gr1->eptr;
+	gptr2 = gr2->eptr;
 	if (NULL == gptr2 || NULL == gptr1) {
 		errno = EINVAL;
 		return NULL;
@@ -377,7 +377,7 @@ static int split_groups (unsigned int max_members)
 	struct commonio_entry *gr;
 
 	for (gr = group_db.head; NULL != gr; gr = gr->next) {
-		struct group *gptr = (struct group *)gr->eptr;
+		struct group *gptr = gr->eptr;
 		struct commonio_entry *new;
 		struct group *new_gptr;
 		unsigned int members = 0;
@@ -406,7 +406,7 @@ static int split_groups (unsigned int max_members)
 			errno = ENOMEM;
 			return 0;
 		}
-		new_gptr = (struct group *)new->eptr;
+		new_gptr = new->eptr;
 		new->line = NULL;
 		new->changed = true;
 

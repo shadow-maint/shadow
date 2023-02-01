@@ -167,10 +167,10 @@ static void setup_tty (void)
 #endif
 
 		/* leave these values unchanged if not specified in login.defs */
-		erasechar = getdef_num ("ERASECHAR", (int) termio.c_cc[VERASE]);
-		killchar = getdef_num ("KILLCHAR", (int) termio.c_cc[VKILL]);
-		termio.c_cc[VERASE] = (cc_t) erasechar;
-		termio.c_cc[VKILL] = (cc_t) killchar;
+		erasechar = getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
+		killchar = getdef_num ("KILLCHAR", termio.c_cc[VKILL]);
+		termio.c_cc[VERASE] = erasechar;
+		termio.c_cc[VKILL] = killchar;
 		/* Make sure the values were valid.
 		 * getdef_num cannot validate this.
 		 */
@@ -411,17 +411,17 @@ static void alarm_handler (unused int sig)
  */
 static void get_pam_user (char **ptr_pam_user)
 {
-	int retcode;
-	void *ptr_user;
+	int         retcode;
+	const void  *ptr_user;
 
 	assert (NULL != ptr_pam_user);
 
-	retcode = pam_get_item (pamh, PAM_USER, (const void **)&ptr_user);
+	retcode = pam_get_item (pamh, PAM_USER, &ptr_user);
 	PAM_FAIL_CHECK;
 
 	free (*ptr_pam_user);
 	if (NULL != ptr_user) {
-		*ptr_pam_user = xstrdup ((const char *)ptr_user);
+		*ptr_pam_user = xstrdup (ptr_user);
 	} else {
 		*ptr_pam_user = NULL;
 	}
@@ -938,7 +938,8 @@ int main (int argc, char **argv)
 			}
 
 			if (strcmp (user_passwd, "") == 0) {
-				char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+				const char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
+
 				if (prevent_no_auth == NULL) {
 					prevent_no_auth = "superuser";
 				}

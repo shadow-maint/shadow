@@ -369,8 +369,8 @@ static void check_pw_file (int *errors, bool *changed)
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
 	const struct spwd *spw;
-	uid_t min_sys_id = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
-	uid_t max_sys_id = (uid_t) getdef_ulong ("SYS_UID_MAX", 999UL);
+	uid_t min_sys_id = getdef_ulong ("SYS_UID_MIN", 101UL);
+	uid_t max_sys_id = getdef_ulong ("SYS_UID_MAX", 999UL);
 
 	/*
 	 * Loop through the entire password file.
@@ -609,7 +609,7 @@ static void check_pw_file (int *errors, bool *changed)
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = (long) gettime () / SCALE;
+					sp.sp_lstchg = gettime () / SCALE;
 					if (0 == sp.sp_lstchg) {
 						/* Better disable aging than
 						 * requiring a password change

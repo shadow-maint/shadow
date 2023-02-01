@@ -47,7 +47,7 @@ bool yes_or_no (bool read_only)
 	 * Get a line and see what the first character is.
 	 */
 	/* TODO: use gettext */
-	if (fgets (buf, (int) sizeof buf, stdin) == buf) {
+	if (fgets (buf, sizeof buf, stdin) == buf) {
 		return buf[0] == 'y' || buf[0] == 'Y';
 	}
 

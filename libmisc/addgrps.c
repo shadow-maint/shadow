@@ -100,7 +100,7 @@ int add_groups (const char *list)
 	}
 
 	if (added) {
-		ret = setgroups ((size_t)ngroups, grouplist);
+		ret = setgroups (ngroups, grouplist);
 		free (grouplist);
 		return ret;
 	}

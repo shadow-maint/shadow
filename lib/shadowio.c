@@ -164,7 +164,7 @@ int spw_open (int mode)
 
 int spw_update (const struct spwd *sp)
 {
-	return commonio_update (&shadow_db, (const void *) sp);
+	return commonio_update (&shadow_db, sp);
 }
 
 int spw_remove (const char *name)

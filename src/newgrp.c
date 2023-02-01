@@ -187,8 +187,7 @@ static void check_perms (const struct group *grp,
 			          "authentication new-gid=%lu",
 			          (unsigned long) grp->gr_gid);
 			audit_logger (AUDIT_GRP_AUTH, Prog,
-			              audit_buf, NULL,
-			              (unsigned int) getuid (), 0);
+			              audit_buf, NULL, getuid (), 0);
 #endif
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group '%s' from '%s'",
@@ -202,8 +201,7 @@ static void check_perms (const struct group *grp,
 		          "authentication new-gid=%lu",
 		          (unsigned long) grp->gr_gid);
 		audit_logger (AUDIT_GRP_AUTH, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 1);
+		              audit_buf, NULL, getuid (), 1);
 #endif
 	}
 
@@ -219,12 +217,10 @@ failure:
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", groupname);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 0);
+		              audit_buf, NULL, getuid (), 0);
 	} else {
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL,
-		              (unsigned int) getuid (), 0);
+		              "changing", NULL, getuid (), 0);
 	}
 #endif
 	exit (EXIT_FAILURE);
@@ -300,12 +296,10 @@ static void syslog_sg (const char *name, const char *group)
 				snprintf (audit_buf, sizeof(audit_buf),
 				          "changing new-group=%s", group);
 				audit_logger (AUDIT_CHGRP_ID, Prog,
-				              audit_buf, NULL,
-				              (unsigned int) getuid (), 0);
+				              audit_buf, NULL, getuid (), 0);
 			} else {
 				audit_logger (AUDIT_CHGRP_ID, Prog,
-				              "changing", NULL,
-				              (unsigned int) getuid (), 0);
+				              "changing", NULL, getuid (), 0);
 			}
 #endif
 			exit (EXIT_FAILURE);
@@ -434,8 +428,7 @@ int main (int argc, char **argv)
 		         Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL,
-		              (unsigned int) getuid (), 0);
+		              "changing", NULL, getuid (), 0);
 #endif
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
@@ -554,12 +547,10 @@ int main (int argc, char **argv)
 			snprintf (audit_buf, sizeof(audit_buf),
 			          "changing new-group=%s", group);
 			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              audit_buf, NULL,
-			              (unsigned int) getuid (), 0);
+			              audit_buf, NULL, getuid (), 0);
 		} else {
 			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              "changing", NULL,
-			              (unsigned int) getuid (), 0);
+			              "changing", NULL, getuid (), 0);
 		}
 #endif
 		exit (EXIT_FAILURE);
@@ -716,8 +707,7 @@ int main (int argc, char **argv)
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 0);
+		              audit_buf, NULL, getuid (), 0);
 #endif
 		exit (EXIT_FAILURE);
 	}
@@ -728,8 +718,7 @@ int main (int argc, char **argv)
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 0);
+		              audit_buf, NULL, getuid (), 0);
 #endif
 		exit (EXIT_FAILURE);
 	}
@@ -745,8 +734,7 @@ int main (int argc, char **argv)
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 0);
+		              audit_buf, NULL, getuid (), 0);
 #endif
 		perror (SHELL);
 		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
@@ -813,8 +801,7 @@ int main (int argc, char **argv)
 	snprintf (audit_buf, sizeof(audit_buf), "changing new-gid=%lu",
 	          (unsigned long) gid);
 	audit_logger (AUDIT_CHGRP_ID, Prog,
-	              audit_buf, NULL,
-	              (unsigned int) getuid (), 1);
+	              audit_buf, NULL, getuid (), 1);
 #endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
@@ -841,12 +828,10 @@ int main (int argc, char **argv)
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", group);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL,
-		              (unsigned int) getuid (), 0);
+		              audit_buf, NULL, getuid (), 0);
 	} else {
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL,
-		              (unsigned int) getuid (), 0);
+		              "changing", NULL, getuid (), 0);
 	}
 #endif
 	exit (EXIT_FAILURE);

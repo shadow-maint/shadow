@@ -61,7 +61,7 @@
 			 fallback, epoch);
 	} else {
 		/* Valid */
-		return (time_t)epoch;
+		return epoch;
 	}
 
 	return fallback;

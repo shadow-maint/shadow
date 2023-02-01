@@ -137,7 +137,7 @@ int pw_open (int mode)
 
 int pw_update (const struct passwd *pw)
 {
-	return commonio_update (&passwd_db, (const void *) pw);
+	return commonio_update (&passwd_db, pw);
 }
 
 int pw_remove (const char *name)

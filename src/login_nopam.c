@@ -39,6 +39,7 @@
      * Author: Wietse Venema, Eindhoven University of Technology, The Netherlands.
      */
 #include <sys/types.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <syslog.h>
 #include <ctype.h>
@@ -96,10 +97,10 @@ int login_access (const char *user, const char *from)
 	if (NULL != fp) {
 		int lineno = 0;	/* for diagnostics */
 		while (   !match
-		       && (fgets (line, (int) sizeof (line), fp) == line)) {
-			int end;
+		       && (fgets (line, sizeof (line), fp) == line)) {
+			ptrdiff_t  end;
 			lineno++;
-			end = (int) strlen (line) - 1;
+			end = strlen (line) - 1;
 			if (line[0] == '\0' || line[end] != '\n') {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: missing newline or line too long",

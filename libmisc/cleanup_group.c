@@ -22,7 +22,7 @@
  */
 void cleanup_report_add_group (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR, "failed to add group %s", name));
 #ifdef WITH_AUDIT
@@ -40,7 +40,7 @@ void cleanup_report_add_group (void *group_name)
  */
 void cleanup_report_del_group (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR, "failed to remove group %s", name));
 #ifdef WITH_AUDIT
@@ -95,7 +95,7 @@ void cleanup_report_mod_gshadow (void *cleanup_info)
  */
 void cleanup_report_add_group_group (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, gr_dbname ()));
 #ifdef WITH_AUDIT
@@ -115,7 +115,7 @@ void cleanup_report_add_group_group (void *group_name)
  */
 void cleanup_report_add_group_gshadow (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, sgr_dbname ()));
 #ifdef WITH_AUDIT
@@ -136,7 +136,7 @@ void cleanup_report_add_group_gshadow (void *group_name)
  */
 void cleanup_report_del_group_group (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR,
 	         "failed to remove group %s from %s",
@@ -159,7 +159,7 @@ void cleanup_report_del_group_group (void *group_name)
  */
 void cleanup_report_del_group_gshadow (void *group_name)
 {
-	const char *name = (const char *)group_name;
+	const char *name = group_name;
 
 	SYSLOG ((LOG_ERR,
 	         "failed to remove group %s from %s",
