@@ -98,6 +98,7 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
  *
  * On success, return 0
  * If the ID is in use, return EEXIST
+ * If the ID might clash with -1, return EINVAL
  * If the ID is outside the range, return ERANGE
  * In other cases, return errno from getpwuid()
  */
@@ -109,6 +110,11 @@ static int check_uid(const uid_t uid,
 	/* First test that the preferred ID is in the range */
 	if (uid < uid_min || uid > uid_max) {
 		return ERANGE;
+	}
+
+	/* Check for compatibility with 16b and 32b uid_t error codes */
+	if (uid == UINT16_MAX || uid == UINT32_MAX) {
+		return EINVAL;
 	}
 
 	/*
@@ -182,10 +188,10 @@ int find_new_uid(bool sys_user,
 			 * pw_locate_uid() found the UID in an as-yet uncommitted
 			 * entry. We'll proceed below and auto-set an UID.
 			 */
-		} else if (result == EEXIST || result == ERANGE) {
+		} else if (result == EEXIST || result == ERANGE || result == EINVAL) {
 			/*
 			 * Continue on below. At this time, we won't
-			 * treat these two cases differently.
+			 * treat these three cases differently.
 			 */
 		} else {
 			/*
@@ -296,8 +302,11 @@ int find_new_uid(bool sys_user,
 				*uid = id;
 				free (used_uids);
 				return 0;
-			} else if (result == EEXIST) {
-				/* This UID is in use, we'll continue to the next */
+			} else if (result == EEXIST || result == EINVAL) {
+				/*
+				 * This GID is in use or unusable, we'll
+				 * continue to the next.
+				 */
 			} else {
 				/*
 				 * An unexpected error occurred.
@@ -339,8 +348,11 @@ int find_new_uid(bool sys_user,
 					*uid = id;
 					free (used_uids);
 					return 0;
-				} else if (result == EEXIST) {
-					/* This UID is in use, we'll continue to the next */
+				} else if (result == EEXIST || result == EINVAL) {
+					/*
+					 * This GID is in use or unusable, we'll
+					 * continue to the next.
+					 */
 				} else {
 					/*
 					 * An unexpected error occurred.
@@ -399,8 +411,11 @@ int find_new_uid(bool sys_user,
 				*uid = id;
 				free (used_uids);
 				return 0;
-			} else if (result == EEXIST) {
-				/* This UID is in use, we'll continue to the next */
+			} else if (result == EEXIST || result == EINVAL) {
+				/*
+				 * This GID is in use or unusable, we'll
+				 * continue to the next.
+				 */
 			} else {
 				/*
 				 * An unexpected error occurred.
@@ -442,8 +457,11 @@ int find_new_uid(bool sys_user,
 					*uid = id;
 					free (used_uids);
 					return 0;
-				} else if (result == EEXIST) {
-					/* This UID is in use, we'll continue to the next */
+				} else if (result == EEXIST || result == EINVAL) {
+					/*
+					 * This GID is in use or unusable, we'll
+					 * continue to the next.
+					 */
 				} else {
 					/*
 					 * An unexpected error occurred.
