@@ -99,6 +99,7 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
  *
  * On success, return 0
  * If the ID is in use, return EEXIST
+ * If the ID might clash with -1, return EINVAL
  * If the ID is outside the range, return ERANGE
  * In other cases, return errno from getgrgid()
  */
@@ -110,6 +111,11 @@ static int check_gid (const gid_t gid,
 	/* First test that the preferred ID is in the range */
 	if (gid < gid_min || gid > gid_max) {
 		return ERANGE;
+	}
+
+	/* Check for compatibility with 16b and 32b gid_t error codes */
+	if (gid == UINT16_MAX || gid == UINT32_MAX) {
+		return EINVAL;
 	}
 
 	/*
@@ -183,10 +189,10 @@ int find_new_gid (bool sys_group,
 			 * gr_locate_gid() found the GID in an as-yet uncommitted
 			 * entry. We'll proceed below and auto-set a GID.
 			 */
-		} else if (result == EEXIST || result == ERANGE) {
+		} else if (result == EEXIST || result == ERANGE || result == EINVAL) {
 			/*
 			 * Continue on below. At this time, we won't
-			 * treat these two cases differently.
+			 * treat these three cases differently.
 			 */
 		} else {
 			/*
@@ -297,8 +303,11 @@ int find_new_gid (bool sys_group,
 				*gid = id;
 				free (used_gids);
 				return 0;
-			} else if (result == EEXIST) {
-				/* This GID is in use, we'll continue to the next */
+			} else if (result == EEXIST || result == EINVAL) {
+				/*
+				 * This GID is in use or unusable, we'll
+				 * continue to the next.
+				 */
 			} else {
 				/*
 				 * An unexpected error occurred.
@@ -340,8 +349,11 @@ int find_new_gid (bool sys_group,
 					*gid = id;
 					free (used_gids);
 					return 0;
-				} else if (result == EEXIST) {
-					/* This GID is in use, we'll continue to the next */
+				} else if (result == EEXIST || result == EINVAL) {
+					/*
+					 * This GID is in use or unusable, we'll
+					 * continue to the next.
+					 */
 				} else {
 					/*
 					 * An unexpected error occurred.
@@ -400,8 +412,11 @@ int find_new_gid (bool sys_group,
 				*gid = id;
 				free (used_gids);
 				return 0;
-			} else if (result == EEXIST) {
-				/* This GID is in use, we'll continue to the next */
+			} else if (result == EEXIST || result == EINVAL) {
+				/*
+				 * This GID is in use or unusable, we'll
+				 * continue to the next.
+				 */
 			} else {
 				/*
 				 * An unexpected error occurred.
@@ -443,8 +458,11 @@ int find_new_gid (bool sys_group,
 					*gid = id;
 					free (used_gids);
 					return 0;
-				} else if (result == EEXIST) {
-					/* This GID is in use, we'll continue to the next */
+				} else if (result == EEXIST || result == EINVAL) {
+					/*
+					 * This GID is in use or unusable, we'll
+					 * continue to the next.
+					 */
 				} else {
 					/*
 					 * An unexpected error occurred.
