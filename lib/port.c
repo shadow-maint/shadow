@@ -134,7 +134,7 @@ static struct port *getportent (void)
 	 * Lines which begin with '#' are all ignored.
 	 */
 
-	if (fgets (buf, (int) sizeof buf, ports) == 0) {
+	if (fgets (buf, sizeof buf, ports) == 0) {
 		errno = saveerr;
 		return 0;
 	}

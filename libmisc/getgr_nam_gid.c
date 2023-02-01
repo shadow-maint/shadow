@@ -36,7 +36,7 @@ extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *gr
 	    && ('\0' == *endptr)
 	    && (ERANGE != errno)
 	    && (/*@+longintegral@*/gid == (gid_t)gid)/*@=longintegral@*/) {
-		return xgetgrgid ((gid_t) gid);
+		return xgetgrgid (gid);
 	}
 	return xgetgrnam (grname);
 }

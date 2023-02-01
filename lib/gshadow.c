@@ -207,9 +207,9 @@ void endsgent (void)
 	}
 
 #ifdef	USE_NIS
-	while (fgetsx (buf, (int) buflen, fp) == buf)
+	while (fgetsx (buf, buflen, fp) == buf)
 #else
-	if (fgetsx (buf, (int) buflen, fp) == buf)
+	if (fgetsx (buf, buflen, fp) == buf)
 #endif
 	{
 		while (   ((cp = strrchr (buf, '\n')) == NULL)

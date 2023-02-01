@@ -68,7 +68,7 @@ static int setrlimit_value (unsigned int resource,
 			return 0;
 		}
 		longlimit *= multiplier;
-		limit = (rlim_t)longlimit;
+		limit = longlimit;
 		if (longlimit != limit)
 		{
 			/* FIXME: Again, silent error handling...
@@ -95,7 +95,7 @@ static int set_prio (const char *value)
 	    || (prio != (int) prio)) {
 		return 0;
 	}
-	if (setpriority (PRIO_PROCESS, 0, (int) prio) != 0) {
+	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
 	return 0;
@@ -111,7 +111,7 @@ static int set_umask (const char *value)
 		return 0;
 	}
 
-	(void) umask ((mode_t) mask);
+	(void) umask (mask);
 	return 0;
 }
 
@@ -508,7 +508,7 @@ void setup_limits (const struct passwd *info)
 				if (   (getlong (cp + 4, &inc) == 1)
 				    && (inc >= -20) && (inc <= 20)) {
 					errno = 0;
-					if (   (nice ((int) inc) != -1)
+					if (   (nice (inc) != -1)
 					    || (0 != errno)) {
 						continue;
 					}
@@ -525,7 +525,7 @@ void setup_limits (const struct passwd *info)
 				long int blocks;
 				if (   (getlong (cp + 7, &blocks) == 0)
 				    || (blocks != (int) blocks)
-				    || (set_filesize_limit ((int) blocks) != 0)) {
+				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
 					         info->pw_name));
@@ -540,7 +540,7 @@ void setup_limits (const struct passwd *info)
 					         "Can't set umask value for user %s",
 					         info->pw_name));
 				} else {
-					(void) umask ((mode_t) mask);
+					(void) umask (mask);
 				}
 
 				continue;

@@ -116,7 +116,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		 * entered for this user, which should be able to get the
 		 * empty entry in this case.
 		 */
-		if (fread ((char *) &ll, sizeof (ll), 1, lastlogfile) != 1) {
+		if (fread (&ll, sizeof (ll), 1, lastlogfile) != 1) {
 			fprintf (stderr,
 			         _("%s: Failed to get the entry for UID %lu\n"),
 			         Prog, (unsigned long int)pw->pw_uid);
@@ -184,7 +184,7 @@ static void print (void)
 	}
 
 	if (uflg && has_umin && has_umax && (umin == umax)) {
-		print_one (getpwuid ((uid_t)umin));
+		print_one (getpwuid (umin));
 	} else {
 		setpwent ();
 		while ( (pwent = getpwent ()) != NULL ) {
@@ -227,14 +227,14 @@ static void update_one (/*@null@*/const struct passwd *pw)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
 			"clearing-lastlog",
-			pw->pw_name, (unsigned int) pw->pw_uid, SHADOW_AUDIT_SUCCESS);
+			pw->pw_name, pw->pw_uid, SHADOW_AUDIT_SUCCESS);
 #endif
 	}
 #ifdef WITH_AUDIT
 	else {
 		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
 			"refreshing-lastlog",
-			pw->pw_name, (unsigned int) pw->pw_uid, SHADOW_AUDIT_SUCCESS);
+			pw->pw_name, pw->pw_uid, SHADOW_AUDIT_SUCCESS);
 	}
 #endif
 
@@ -263,7 +263,7 @@ static void update (void)
 	}
 
 	if (has_umin && has_umax && (umin == umax)) {
-		update_one (getpwuid ((uid_t)umin));
+		update_one (getpwuid (umin));
 	} else {
 		setpwent ();
 		while ( (pwent = getpwent ()) != NULL ) {
@@ -375,7 +375,7 @@ int main (int argc, char **argv)
 				/* local, no need for xgetpwnam */
 				pwent = getpwnam (optarg);
 				if (NULL != pwent) {
-					umin = (unsigned long) pwent->pw_uid;
+					umin = pwent->pw_uid;
 					has_umin = true;
 					umax = umin;
 					has_umax = true;

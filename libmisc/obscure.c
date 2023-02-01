@@ -257,7 +257,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		}
 
 	}
-	maxlen = (size_t) getdef_num ("PASS_MAX_LEN", 8);
+	maxlen = getdef_num ("PASS_MAX_LEN", 8);
 	if (   (oldlen <= maxlen)
 	    && (newlen <= maxlen)) {
 		return NULL;

@@ -25,7 +25,7 @@ int get_uid (const char *uidstr, uid_t *uid)
 		return 0;
 	}
 
-	*uid = (uid_t)val;
+	*uid = val;
 	return 1;
 }
 

@@ -484,7 +484,7 @@ int main (int argc, char **argv)
 	 * last change date is set in the age only if aging information is
 	 * present.
 	 */
-	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
+	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
@@ -493,7 +493,7 @@ int main (int argc, char **argv)
 			if (feof (stdin) == 0) {
 
 				// Drop all remaining characters on this line.
-				while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
+				while (fgets (buf, sizeof buf, stdin) != NULL) {
 					cp = strchr (buf, '\n');
 					if (cp != NULL) {
 						break;
@@ -608,7 +608,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = (long) gettime () / SCALE;
+			newsp.sp_lstchg = gettime () / SCALE;
 			if (0 == newsp.sp_lstchg) {
 				/* Better disable aging than requiring a
 				 * password change */

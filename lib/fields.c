@@ -74,7 +74,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 
 	printf ("\t%s [%s]: ", prompt, buf);
 	(void) fflush (stdout);
-	if (fgets (newf, (int) maxsize, stdin) != newf) {
+	if (fgets (newf, maxsize, stdin) != newf) {
 		return;
 	}
 

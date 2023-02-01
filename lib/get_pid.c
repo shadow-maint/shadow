@@ -25,7 +25,7 @@ int get_pid (const char *pidstr, pid_t *pid)
 		return 0;
 	}
 
-	*pid = (pid_t)val;
+	*pid = val;
 	return 1;
 }
 

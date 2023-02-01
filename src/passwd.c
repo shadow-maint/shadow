@@ -646,7 +646,7 @@ static void update_shadow (void)
 	}
 #ifndef USE_PAM
 	if (do_update_age) {
-		nsp->sp_lstchg = (long) gettime () / SCALE;
+		nsp->sp_lstchg = gettime () / SCALE;
 		if (0 == nsp->sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */

@@ -40,15 +40,14 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 		*preferred_min = (uid_t) 1;
 
 		/* Get the minimum ID range from login.defs or default to 101 */
-		*min_id = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
+		*min_id = getdef_ulong ("SYS_UID_MIN", 101UL);
 
 		/*
 		 * If SYS_UID_MAX is unspecified, we should assume it to be one
 		 * less than the UID_MIN (which is reserved for non-system accounts)
 		 */
-		uid_def_max = (uid_t) getdef_ulong ("UID_MIN", 1000UL) - 1;
-		*max_id = (uid_t) getdef_ulong ("SYS_UID_MAX",
-				(unsigned long) uid_def_max);
+		uid_def_max = getdef_ulong ("UID_MIN", 1000UL) - 1;
+		*max_id = getdef_ulong ("SYS_UID_MAX", uid_def_max);
 
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
@@ -71,8 +70,8 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 		/* Non-system users */
 
 		/* Get the values from login.defs or use reasonable defaults */
-		*min_id = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
-		*max_id = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
+		*min_id = getdef_ulong ("UID_MIN", 1000UL);
+		*max_id = getdef_ulong ("UID_MAX", 60000UL);
 
 		/*
 		 * The preferred minimum should match the standard ID minimum

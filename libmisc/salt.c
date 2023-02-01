@@ -377,26 +377,26 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	} else if (0 == strcmp (method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
 		salt_len = BCRYPT_SALT_SIZE;
-		rounds = BCRYPT_get_salt_rounds ((int *) arg);
+		rounds = BCRYPT_get_salt_rounds (arg);
 		BCRYPT_salt_rounds_to_buf (result, rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
 	} else if (0 == strcmp (method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
-		rounds = YESCRYPT_get_salt_cost ((int *) arg);
+		rounds = YESCRYPT_get_salt_cost (arg);
 		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
 #ifdef USE_SHA_CRYPT
 	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds ((int *) arg);
+		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (0 == strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds ((int *) arg);
+		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
 #endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {

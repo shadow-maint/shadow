@@ -330,7 +330,7 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 	    	&& ('\0' == *endptr)
 	    	&& (ERANGE != errno)
 	    	&& (gid == (gid_t)gid)) {
-			return prefix_getgrgid ((gid_t) gid);
+			return prefix_getgrgid (gid);
 		}
 		g = prefix_getgrnam (grname);
 		return g ? __gr_dup(g) : NULL;

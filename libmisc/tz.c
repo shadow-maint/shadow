@@ -34,7 +34,7 @@
 
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
-	    || (fgets (tzbuf, (int) sizeof (tzbuf), fp) == NULL)) {
+	    || (fgets (tzbuf, sizeof (tzbuf), fp) == NULL)) {
 		def_tz = getdef_str ("ENV_TZ");
 		if ((NULL == def_tz) || ('/' == def_tz[0])) {
 			def_tz = "TZ=CST6CDT";

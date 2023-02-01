@@ -62,7 +62,7 @@ void audit_logger (int type, unused const char *pgname, const char *op,
 		return;
 	} else {
 		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-		                        NULL, NULL, NULL, (int) result);
+		                        NULL, NULL, NULL, result);
 	}
 }
 
@@ -77,7 +77,7 @@ void audit_logger_message (const char *message, shadow_audit_result result)
 		                        NULL, /* hostname */
 		                        NULL, /* addr */
 		                        NULL, /* tty */
-		                        (int) result);
+		                        result);
 	}
 }
 

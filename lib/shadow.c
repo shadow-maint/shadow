@@ -336,9 +336,9 @@ struct spwd *fgetspent (FILE * fp)
 	}
 
 #ifdef	USE_NIS
-	while (fgets (buf, (int) sizeof buf, fp) != NULL)
+	while (fgets (buf, sizeof buf, fp) != NULL)
 #else
-	if (fgets (buf, (int) sizeof buf, fp) != NULL)
+	if (fgets (buf, sizeof buf, fp) != NULL)
 #endif
 	{
 		cp = strchr (buf, '\n');

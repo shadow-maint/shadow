@@ -489,7 +489,7 @@ safeget (char *buf, int maxlen)
   while ((c = getc (stdin)) != EOF && (c != '\n') && (++i < maxlen))
     {
       bad = (!isalnum (c) && (c != '_') && (c != ' '));
-      *(buf++) = (char) c;
+      *(buf++) = c;
     }
   *buf = '\0';
 

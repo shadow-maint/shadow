@@ -13,6 +13,7 @@
 
 #include "prototypes.h"
 #include "defines.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -191,7 +192,7 @@ static void def_load (void);
 	}
 
 	d = def_find (item);
-	return ((NULL == d)? (const char *) NULL : d->value);
+	return (NULL == d) ? NULL : d->value;
 }
 
 
@@ -249,7 +250,7 @@ int getdef_num (const char *item, int dflt)
 		return dflt;
 	}
 
-	return (int) val;
+	return val;
 }
 
 
@@ -284,7 +285,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	return (unsigned int) val;
+	return val;
 }
 
 
@@ -428,7 +429,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));
 
 out:
-	return (struct itemdef *) NULL;
+	return NULL;
 }
 
 /*
@@ -540,12 +541,12 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets (buf, (int) sizeof (buf), fp) != NULL) {
+	while (fgets (buf, sizeof (buf), fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.
 		 */
-		for (i = (int) strlen (buf) - 1; i >= 0; --i) {
+		for (i = (ptrdiff_t) strlen (buf) - 1; i >= 0; --i) {
 			if (!isspace (buf[i])) {
 				break;
 			}

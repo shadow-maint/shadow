@@ -216,8 +216,8 @@ int do_fcntl_lock (const char *file, bool log, short type)
 	fd = open (file, O_WRONLY, 0600);
 	if (-1 == fd) {
 		if (log) {
-				(void) fprintf (shadow_logfd, "%s: %s: %s\n",
-				                shadow_progname, file, strerror (errno));
+			(void) fprintf (shadow_logfd, "%s: %s: %s\n",
+			                shadow_progname, file, strerror (errno));
 		}
 		return 0;
 	}
@@ -518,7 +518,7 @@ int commonio_open (struct commonio_db *db, int mode)
 		goto cleanup_ENOMEM;
 	}
 
-	while (db->ops->fgets (buf, (int) buflen, db->fp) == buf) {
+	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
 		while (   ((cp = strrchr (buf, '\n')) == NULL)
 		       && (feof (db->fp) == 0)) {
 			size_t len;

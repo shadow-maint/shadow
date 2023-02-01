@@ -139,7 +139,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 void agecheck (/*@null@*/const struct spwd *sp)
 {
-	long now = (long) time(NULL) / SCALE;
+	long now = time(NULL) / SCALE;
 	long remain;
 
 	if (NULL == sp) {
