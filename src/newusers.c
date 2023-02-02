@@ -1203,6 +1203,13 @@ int main (int argc, char **argv)
 		lines     = reallocf (lines,     sizeof (lines[0])     * nusers);
 		usernames = reallocf (usernames, sizeof (usernames[0]) * nusers);
 		passwords = reallocf (passwords, sizeof (passwords[0]) * nusers);
+		if (lines == NULL || usernames == NULL || passwords == NULL) {
+			fprintf (stderr,
+			         _("%s: line %d: %s\n"),
+			         Prog, line, strerror(errno));
+			errors++;
+			continue;
+		}
 		lines[nusers-1]     = line;
 		usernames[nusers-1] = strdup (fields[0]);
 		passwords[nusers-1] = strdup (fields[1]);
