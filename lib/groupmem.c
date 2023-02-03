@@ -86,33 +86,3 @@ void gr_free (/*@out@*/ /*@only@*/struct group *grent)
 	gr_free_members(grent);
 	free (grent);
 }
-
-bool gr_append_member(struct group *grp, char *member)
-{
-	int i;
-
-	if (NULL == grp->gr_mem || grp->gr_mem[0] == NULL) {
-		grp->gr_mem = (char **)malloc(2 * sizeof(char *));
-		if (!grp->gr_mem) {
-			return false;
-		}
-		grp->gr_mem[0] = strdup(member);
-		if (!grp->gr_mem[0]) {
-			return false;
-		}
-		grp->gr_mem[1] = NULL;
-		return true;
-	}
-
-	for (i = 0; grp->gr_mem[i]; i++) ;
-	grp->gr_mem = realloc(grp->gr_mem, (i + 2) * sizeof(char *));
-	if (NULL == grp->gr_mem) {
-		return false;
-	}
-	grp->gr_mem[i] = strdup(member);
-	if (NULL == grp->gr_mem[i]) {
-		return false;
-	}
-	grp->gr_mem[i + 1] = NULL;
-	return true;
-}
