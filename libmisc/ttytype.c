@@ -34,13 +34,11 @@ void ttytype (const char *line)
 	if (NULL == typefile) {
 		return;
 	}
-	if (access (typefile, F_OK) != 0) {
-		return;
-	}
 
 	fp = fopen (typefile, "r");
 	if (NULL == fp) {
-		perror (typefile);
+		if (errno != ENOENT)
+			perror (typefile);
 		return;
 	}
 	while (fgets (buf, sizeof buf, fp) == buf) {
