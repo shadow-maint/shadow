@@ -1041,7 +1041,6 @@ int main (int argc, char **argv)
 	char *cp;
 	const struct passwd *pw;
 	struct passwd newpw;
-	int errors = 0;
 	int line = 0;
 	uid_t uid;
 	gid_t gid;
@@ -1100,8 +1099,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %d: line too long\n"),
 				         Prog, line);
-				errors++;
-				continue;
+				fail_exit (EXIT_FAILURE);
 			}
 		}
 
@@ -1123,8 +1121,7 @@ int main (int argc, char **argv)
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 
 		/*
@@ -1134,9 +1131,10 @@ int main (int argc, char **argv)
 		/* local, no need for xgetpwnam */
 		if (   (NULL == pw)
 		    && (getpwnam (fields[0]) != NULL)) {
-			fprintf (stderr, _("%s: cannot update the entry of user %s (not in the passwd database)\n"), Prog, fields[0]);
-			errors++;
-			continue;
+			fprintf (stderr,
+				 _("%s: cannot update the entry of user %s (not in the passwd database)\n"),
+				 Prog, fields[0]);
+			fail_exit (EXIT_FAILURE);
 		}
 
 		if (   (NULL == pw)
@@ -1144,8 +1142,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: can't create user\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 
 		/*
@@ -1165,8 +1162,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: can't create group\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 
 		/*
@@ -1181,8 +1177,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: can't create user\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 
 		/*
@@ -1194,8 +1189,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: user '%s' does not exist in %s\n"),
 			         Prog, line, fields[0], pw_dbname ());
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 		newpw = *pw;
 
@@ -1209,8 +1203,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: %s\n"),
 			         Prog, line, strerror(errno));
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 		lines[nusers-1]     = line;
 		usernames[nusers-1] = strdup (fields[0]);
@@ -1220,8 +1213,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: can't update password\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 		if ('\0' != fields[4][0]) {
 			newpw.pw_gecos = fields[4];
@@ -1244,8 +1236,7 @@ int main (int argc, char **argv)
 				fprintf(stderr,
 					_("%s: line %d: homedir must be an absolute path\n"),
 					Prog, line);
-				errors++;
-				continue;
+				fail_exit (EXIT_FAILURE);
 			};
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
@@ -1253,8 +1244,7 @@ int main (int argc, char **argv)
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
 				if (errno != EEXIST) {
-					errors++;
-					continue;
+					fail_exit (EXIT_FAILURE);
 				}
 			}
 			if (chown (newpw.pw_dir,
@@ -1264,8 +1254,7 @@ int main (int argc, char **argv)
 				         _("%s: line %d: chown %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
-				errors++;
-				continue;
+				fail_exit (EXIT_FAILURE);
 			}
 		}
 
@@ -1276,8 +1265,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %d: can't update entry\n"),
 			         Prog, line);
-			errors++;
-			continue;
+			fail_exit (EXIT_FAILURE);
 		}
 
 #ifdef ENABLE_SUBIDS
@@ -1292,15 +1280,13 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
 						Prog, sub_uid_dbname ());
-					errors++;
-					continue;
+					fail_exit (EXIT_FAILURE);
 				}
 			} else {
 				fprintf (stderr,
 					_("%s: can't find subordinate user range\n"),
 					Prog);
-				errors++;
-				continue;
+				fail_exit (EXIT_FAILURE);
 			}
 		}
 
@@ -1315,15 +1301,13 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
 						Prog, sub_uid_dbname ());
-					errors++;
-					continue;
+					fail_exit (EXIT_FAILURE);
 				}
 			} else {
 				fprintf (stderr,
 					_("%s: can't find subordinate group range\n"),
 					Prog);
-				errors++;
-				continue;
+				fail_exit (EXIT_FAILURE);
 			}
 		}
 #endif				/* ENABLE_SUBIDS */
@@ -1336,12 +1320,6 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	if (0 != errors) {
-		fprintf (stderr,
-		         _("%s: error detected, changes ignored\n"), Prog);
-		fail_exit (EXIT_FAILURE);
-	}
-
 	close_files ();
 
 	nscd_flush_cache ("passwd");
@@ -1356,11 +1334,11 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: (line %d, user %s) password not changed\n"),
 			         Prog, lines[i], usernames[i]);
-			errors++;
+			exit (EXIT_FAILURE);
 		}
 	}
 #endif				/* USE_PAM */
 
-	return ((0 == errors) ? EXIT_SUCCESS : EXIT_FAILURE);
+	exit (EXIT_SUCCESS);
 }
 
