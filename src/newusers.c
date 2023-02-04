@@ -29,6 +29,8 @@
 #include <ctype.h>
 #include <errno.h>
 #include <string.h>
+
+#include "alloc.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -1200,9 +1202,9 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 		/* keep the list of user/password for later update by PAM */
 		nusers++;
-		lines     = reallocf (lines,     nusers, sizeof (lines[0]));
-		usernames = reallocf (usernames, nusers, sizeof (usernames[0]));
-		passwords = reallocf (passwords, nusers, sizeof (passwords[0]));
+		lines     = REALLOCARRAYF(lines, nusers, int);
+		usernames = REALLOCARRAYF(usernames, nusers, char *);
+		passwords = REALLOCARRAYF(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
 			fprintf (stderr,
 			         _("%s: line %d: %s\n"),

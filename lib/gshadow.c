@@ -16,8 +16,11 @@
 
 #include <stdio.h>
 #include <string.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
+
 static /*@null@*/FILE *shadow;
 static /*@null@*//*@only@*/char **members = NULL;
 static size_t nmembers = 0;
@@ -63,7 +66,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 
 	while (s != NULL && *s != '\0') {
 		size = (nelem + 1) * sizeof (ptr);
-		ptr = realloc (*list, size);
+		ptr = REALLOCARRAY (*list, size, char *);
 		if (NULL != ptr) {
 			ptr[nelem] = s;
 			nelem++;
@@ -77,7 +80,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 		}
 	}
 	size = (nelem + 1) * sizeof (ptr);
-	ptr = realloc (*list, size);
+	ptr = REALLOCARRAY (*list, size, char *);
 	if (NULL != ptr) {
 		ptr[nelem] = NULL;
 		*list = ptr;
@@ -117,7 +120,7 @@ void endsgent (void)
 	size_t len = strlen (string) + 1;
 
 	if (len > sgrbuflen) {
-		char *buf = (char *) reallocarray (sgrbuf, len, sizeof (char));
+		char *buf = REALLOCARRAY (sgrbuf, len, char);
 		if (NULL == buf) {
 			return NULL;
 		}
@@ -195,7 +198,7 @@ void endsgent (void)
 	char *cp;
 
 	if (0 == buflen) {
-		buf = (char *) malloc (BUFSIZ);
+		buf = MALLOCARRAY (BUFSIZ, char);
 		if (NULL == buf) {
 			return NULL;
 		}
@@ -216,7 +219,7 @@ void endsgent (void)
 		       && (feof (fp) == 0)) {
 			size_t len;
 
-			cp = (char *) realloc (buf, buflen*2);
+			cp = REALLOCARRAY (buf, buflen * 2, char);
 			if (NULL == cp) {
 				return NULL;
 			}
@@ -437,7 +440,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 		size += strlen (sgrp->sg_mem[i]) + 1;
 	}
 
-	buf = malloc (size);
+	buf = MALLOCARRAY (size, char);
 	if (NULL == buf) {
 		return -1;
 	}

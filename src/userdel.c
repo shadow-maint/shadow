@@ -19,6 +19,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include "alloc.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -803,7 +805,7 @@ static int remove_mailbox (void)
 	}
 
 	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
-	mailfile = xmalloc (len);
+	mailfile = XMALLOCARRAY (len, char);
 
 	if (prefix[0]) {
 		(void) snprintf (mailfile, len, "%s/%s/%s",
@@ -917,7 +919,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 0;
 	}
 
-	buf = malloc (buflen);
+	buf = MALLOCARRAY (buflen, char);
 	if (NULL == buf) {
 		fprintf (stderr, _("%s: Can't allocate memory, "
 		                   "tcb entry for %s not removed.\n"),
@@ -1129,7 +1131,7 @@ int main (int argc, char **argv)
 
 			size_t len = strlen(prefix) + strlen(pwd->pw_dir) + 2;
 			int wlen;
-			user_home = xmalloc(len);
+			user_home = XMALLOCARRAY(len, char);
 			wlen = snprintf(user_home, len, "%s/%s", prefix, pwd->pw_dir);
 			assert (wlen == (int) len -1);
 		}

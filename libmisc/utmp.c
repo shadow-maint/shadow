@@ -20,6 +20,8 @@
 #include <netdb.h>
 #include <stdio.h>
 
+#include "alloc.h"
+
 #ident "$Id$"
 
 
@@ -93,7 +95,7 @@ static bool is_my_tty (const char *tty)
 	}
 
 	if (NULL != ut) {
-		ret = (struct utmp *) xmalloc (sizeof (*ret));
+		ret = XMALLOC (struct utmp);
 		memcpy (ret, ut, sizeof (*ret));
 	}
 
@@ -158,12 +160,12 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 
 	if (   (NULL != host)
 	    && ('\0' != host[0])) {
-		hostname = (char *) xmalloc (strlen (host) + 1);
+		hostname = XMALLOCARRAY (strlen (host) + 1, char);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
+		hostname = XMALLOCARRAY (sizeof (ut->ut_host) + 1, char);
 		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
 		hostname[sizeof (ut->ut_host)] = '\0';
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
@@ -174,7 +176,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 	}
 
 
-	utent = (struct utmp *) xcalloc (1, sizeof (*utent));
+	utent = XCALLOC (1, struct utmp);
 
 
 #ifdef HAVE_STRUCT_UTMP_UT_TYPE

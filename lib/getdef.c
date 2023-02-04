@@ -21,8 +21,11 @@
 #ifdef USE_ECONF
 #include <libeconf.h>
 #endif
+
+#include "alloc.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
+
 /*
  * A configuration item definition.
  */
@@ -445,14 +448,14 @@ void setdef_config_file (const char* file)
 	char* cp;
 
 	len = strlen(file) + strlen(sysconfdir) + 2;
-	cp = malloc(len);
+	cp = MALLOCARRAY(len, char);
 	if (cp == NULL)
 		exit (13);
 	snprintf(cp, len, "%s/%s", file, sysconfdir);
 	sysconfdir = cp;
 #ifdef VENDORDIR
 	len = strlen(file) + strlen(vendordir) + 2;
-	cp = malloc(len);
+	cp = MALLOCARRAY(len, char);
 	if (cp == NULL)
 		exit (13);
 	snprintf(cp, len, "%s/%s", file, vendordir);

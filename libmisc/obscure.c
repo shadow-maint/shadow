@@ -21,6 +21,8 @@
  */
 #include <ctype.h>
 #include <stdio.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -158,7 +160,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 	newmono = str_lower (xstrdup (new));
 	oldmono = str_lower (xstrdup (old));
-	wrapped = xmalloc (strlen (oldmono) * 2 + 1);
+	wrapped = XMALLOCARRAY (strlen (oldmono) * 2 + 1, char);
 	strcpy (wrapped, oldmono);
 	strcat (wrapped, oldmono);
 

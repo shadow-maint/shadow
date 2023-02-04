@@ -30,6 +30,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -50,7 +52,7 @@
 	/* we have to start with something */
 	size_t length = 0x100;
 
-	result = malloc(sizeof(LOOKUP_TYPE));
+	result = MALLOC(LOOKUP_TYPE);
 	if (NULL == result) {
 		fprintf (log_get_logfd(), _("%s: out of memory\n"),
 		         "x" STRINGIZE(FUNCTION_NAME));
@@ -60,7 +62,7 @@
 	while (true) {
 		int status;
 		LOOKUP_TYPE *resbuf = NULL;
-		buffer = (char *)xreallocarray (buffer, length, sizeof(char));
+		buffer = XREALLOCARRAY (buffer, length, char);
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
 		if ((0 == status) && (resbuf == result)) {

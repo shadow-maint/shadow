@@ -45,6 +45,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #endif				/* !USE_PAM */
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
@@ -238,7 +240,7 @@ static void execve_shell (const char *shellname,
 		while (NULL != args[n_args]) {
 			n_args++;
 		}
-		targs = (char **) xmallocarray (n_args + 3, sizeof (args[0]));
+		targs = XMALLOCARRAY (n_args + 3, char *);
 		targs[0] = "sh";
 		targs[1] = "-";
 		targs[2] = xstrdup (shellname);
@@ -1176,7 +1178,7 @@ int main (int argc, char **argv)
 			cp = Basename (shellstr);
 		}
 
-		arg0 = xmalloc (strlen (cp) + 2);
+		arg0 = XMALLOCARRAY (strlen (cp) + 2, char);
 		arg0[0] = '-';
 		strcpy (arg0 + 1, cp);
 		cp = arg0;

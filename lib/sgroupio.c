@@ -14,6 +14,7 @@
 
 #ident "$Id$"
 
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
@@ -25,7 +26,7 @@
 	struct sgrp *sg;
 	int i;
 
-	sg = (struct sgrp *) calloc (1, sizeof *sg);
+	sg = CALLOC (1, struct sgrp);
 	if (NULL == sg) {
 		return NULL;
 	}
@@ -49,7 +50,7 @@
 
 	for (i = 0; NULL != sgent->sg_adm[i]; i++);
 	/*@-mustfreeonly@*/
-	sg->sg_adm = (char **) mallocarray (i + 1, sizeof (char *));
+	sg->sg_adm = MALLOCARRAY (i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_adm) {
 		free (sg->sg_passwd);
@@ -74,7 +75,7 @@
 
 	for (i = 0; NULL != sgent->sg_mem[i]; i++);
 	/*@-mustfreeonly@*/
-	sg->sg_mem = (char **) mallocarray (i + 1, sizeof (char *));
+	sg->sg_mem = MALLOCARRAY (i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_mem) {
 		for (i = 0; NULL != sg->sg_adm[i]; i++) {

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <errno.h>
 
+#include "alloc.h"
 #include "prototypes.h"
 #include "groupio.h"
 #include "getdef.h"
@@ -231,7 +232,7 @@ int find_new_gid (bool sys_group,
 	 */
 
 	/* Create an array to hold all of the discovered GIDs */
-	used_gids = calloc (gid_max + 1, sizeof (bool));
+	used_gids = CALLOC (gid_max + 1, bool);
 	if (NULL == used_gids) {
 		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),

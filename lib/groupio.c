@@ -15,6 +15,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
@@ -311,7 +312,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 
 	/* Concatenate the 2 lines */
 	new_line_len = strlen (gr1->line) + strlen (gr2->line) +1;
-	new_line = (char *)malloc (new_line_len + 1);
+	new_line = MALLOCARRAY (new_line_len + 1, char);
 	if (NULL == new_line) {
 		return NULL;
 	}
@@ -332,7 +333,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 			members++;
 		}
 	}
-	new_members = (char **)calloc ( (members+1), sizeof(char*) );
+	new_members = CALLOC (members + 1, char *);
 	if (NULL == new_members) {
 		free (new_line);
 		return NULL;
@@ -393,7 +394,7 @@ static int split_groups (unsigned int max_members)
 			continue;
 		}
 
-		new = (struct commonio_entry *) malloc (sizeof *new);
+		new = MALLOC (struct commonio_entry);
 		if (NULL == new) {
 			return 0;
 		}
