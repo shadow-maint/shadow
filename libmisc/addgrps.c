@@ -29,7 +29,7 @@
  */
 int add_groups (const char *list)
 {
-	GETGROUPS_T *grouplist, *tmp;
+	GETGROUPS_T *grouplist;
 	size_t i;
 	int ngroups;
 	bool added;
@@ -88,14 +88,12 @@ int add_groups (const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		tmp = (gid_t *) reallocarray (grouplist, (size_t)ngroups + 1, sizeof (GETGROUPS_T));
-		if (NULL == tmp) {
-			free (grouplist);
+		grouplist = (gid_t *) reallocarrayf (grouplist, (size_t)ngroups + 1, sizeof (GETGROUPS_T));
+		if (grouplist == NULL) {
 			return -1;
 		}
-		tmp[ngroups] = grp->gr_gid;
+		grouplist[ngroups] = grp->gr_gid;
 		ngroups++;
-		grouplist = tmp;
 		added = true;
 	}
 
