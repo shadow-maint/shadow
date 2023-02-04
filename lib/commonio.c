@@ -21,6 +21,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <signal.h>
+
+#include "alloc.h"
 #include "nscd.h"
 #include "sssd.h"
 #ifdef WITH_TCB
@@ -240,11 +242,11 @@ int commonio_lock_nowait (struct commonio_db *db, bool log)
 	}
 	file_len = strlen(db->filename) + 11;/* %lu max size */
 	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
-	file = (char*)malloc(file_len);
+	file = MALLOCARRAY(file_len, char);
 	if (file == NULL) {
 		goto cleanup_ENOMEM;
 	}
-	lock = (char*)malloc(lock_file_len);
+	lock = MALLOCARRAY(lock_file_len, char);
 	if (lock == NULL) {
 		goto cleanup_ENOMEM;
 	}
@@ -513,7 +515,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	fcntl (fileno (db->fp), F_SETFD, FD_CLOEXEC);
 
 	buflen = BUFLEN;
-	buf = (char *) malloc (buflen);
+	buf = MALLOCARRAY (buflen, char);
 	if (NULL == buf) {
 		goto cleanup_ENOMEM;
 	}
@@ -524,7 +526,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			size_t len;
 
 			buflen += BUFLEN;
-			cp = (char *) realloc (buf, buflen);
+			cp = REALLOCARRAY (buf, buflen, char);
 			if (NULL == cp) {
 				goto cleanup_buf;
 			}
@@ -558,7 +560,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			}
 		}
 
-		p = (struct commonio_entry *) malloc (sizeof *p);
+		p = MALLOC (struct commonio_entry);
 		if (NULL == p) {
 			goto cleanup_entry;
 		}
@@ -635,7 +637,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		return 0;
 	}
 
-	entries = mallocarray (n, sizeof (struct commonio_entry *));
+	entries = MALLOCARRAY (n, struct commonio_entry *);
 	if (entries == NULL) {
 		return -1;
 	}
@@ -954,7 +956,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 		return 1;
 	}
 	/* not found, new entry */
-	p = (struct commonio_entry *) malloc (sizeof *p);
+	p = MALLOC (struct commonio_entry);
 	if (NULL == p) {
 		db->ops->free (nentry);
 		errno = ENOMEM;
@@ -991,7 +993,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 		return 0;
 	}
 	/* new entry */
-	p = (struct commonio_entry *) malloc (sizeof *p);
+	p = MALLOC (struct commonio_entry);
 	if (NULL == p) {
 		db->ops->free (nentry);
 		errno = ENOMEM;

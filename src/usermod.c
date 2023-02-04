@@ -28,6 +28,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
+
+#include "alloc.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -342,7 +344,7 @@ static int prepend_range(const char *str, struct ulong_range_list_entry **head)
 	if (range.first > range.last)
 		return 0;
 
-	entry = malloc(sizeof(*entry));
+	entry = MALLOC(struct ulong_range_list_entry);
 	if (!entry) {
 		fprintf (stderr,
 			_("%s: failed to allocate memory: %s\n"),
@@ -415,7 +417,7 @@ usage (int status)
 static char *new_pw_passwd (char *pw_pass)
 {
 	if (Lflg && ('!' != pw_pass[0])) {
-		char *buf = xmalloc (strlen (pw_pass) + 2);
+		char *buf = XMALLOCARRAY (strlen (pw_pass) + 2, char);
 
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -1258,12 +1260,12 @@ static void process_flags (int argc, char **argv)
 	if (prefix[0]) {
 		size_t len = strlen(prefix) + strlen(user_home) + 2;
 		int wlen;
-		prefix_user_home = xmalloc(len);
+		prefix_user_home = XMALLOCARRAY(len, char);
 		wlen = snprintf(prefix_user_home, len, "%s/%s", prefix, user_home);
 		assert (wlen == (int) len -1);
 		if (user_newhome) {
 			len = strlen(prefix) + strlen(user_newhome) + 2;
-			prefix_user_newhome = xmalloc(len);
+			prefix_user_newhome = XMALLOCARRAY(len, char);
 			wlen = snprintf(prefix_user_newhome, len, "%s/%s", prefix, user_newhome);
 			assert (wlen == (int) len -1);
 		}
@@ -2038,7 +2040,7 @@ static void move_mailbox (void)
 		return;
 	}
 	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
-	mailfile = alloca (len);
+	mailfile = ALLOCARRAY (len, char);
 
 	/*
 	 * O_NONBLOCK is to make sure open won't hang on mandatory locks.
@@ -2093,7 +2095,7 @@ static void move_mailbox (void)
 
 	if (lflg) {
 		len = strlen (prefix) + strlen (maildir) + strlen (user_newname) + 2;
-		newmailfile = alloca(len);
+		newmailfile = ALLOCARRAY(len, char);
 		if (prefix[0]) {
 			(void) snprintf (newmailfile, len, "%s/%s/%s",
 			                 prefix, maildir, user_newname);
@@ -2150,7 +2152,7 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = (char **) mallocarray (sys_ngroups + 1, sizeof (char *));
+	user_groups = MALLOCARRAY (sys_ngroups + 1, char *);
 	user_groups[0] = NULL;
 
 	is_shadow_pwd = spw_file_present ();

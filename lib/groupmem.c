@@ -12,6 +12,7 @@
 
 #ident "$Id$"
 
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "groupio.h"
@@ -21,7 +22,7 @@
 	struct group *gr;
 	int i;
 
-	gr = (struct group *) malloc (sizeof *gr);
+	gr = MALLOC (struct group);
 	if (NULL == gr) {
 		return NULL;
 	}
@@ -46,7 +47,7 @@
 	for (i = 0; grent->gr_mem[i]; i++);
 
 	/*@-mustfreeonly@*/
-	gr->gr_mem = (char **) mallocarray (i + 1, sizeof (char *));
+	gr->gr_mem = MALLOCARRAY (i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_mem) {
 		gr_free(gr);

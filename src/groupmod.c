@@ -24,6 +24,8 @@
 #include <pwd.h>
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+
+#include "alloc.h"
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
@@ -249,7 +251,7 @@ static void grp_update (void)
 			// requested to replace the existing groups
 			if (NULL != grp.gr_mem[0])
 				gr_free_members(&grp);
-			grp.gr_mem = (char **)xmalloc(sizeof(char *));
+			grp.gr_mem = XMALLOC(char *);
 			grp.gr_mem[0] = NULL;
 		} else {
 			// append to existing groups
@@ -557,15 +559,15 @@ static void prepare_failure_reports (void)
 #endif
 	info_passwd.name  = group_name;
 
-	gr                     = xmalloc (512);
+	gr                     = XMALLOCARRAY(512, char);
 	info_group.audit_msg   = gr;
 	gr_end                 = gr + 512;
 #ifdef	SHADOWGRP
-	sgr                    = xmalloc (512);
+	sgr                    = XMALLOCARRAY(512, char);
 	info_gshadow.audit_msg = sgr;
 	sgr_end                = sgr + 512;
 #endif
-	pw                     = xmalloc (512);
+	pw                     = XMALLOCARRAY(512, char);
 	info_passwd.audit_msg  = pw;
 	pw_end                 = pw + 512;
 

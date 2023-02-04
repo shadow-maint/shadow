@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <grp.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "prototypes.h"
 
@@ -44,7 +46,7 @@ static char **list (char *s)
 		   member name, or terminating NULL).  */
 		if (i >= size) {
 			size = i + 100;	/* at least: i + 1 */
-			members = reallocarrayf (members, size, sizeof(char *));
+			members = REALLOCARRAYF(members, size, char *);
 			if (!members)
 				return NULL;
 		}
@@ -77,7 +79,7 @@ struct group *sgetgrent (const char *buf)
 		   allocate a larger block */
 		free (grpbuf);
 		size = strlen (buf) + 1000;	/* at least: strlen(buf) + 1 */
-		grpbuf = malloc (size);
+		grpbuf = MALLOCARRAY (size, char);
 		if (grpbuf == NULL) {
 			size = 0;
 			return NULL;

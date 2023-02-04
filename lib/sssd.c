@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+
+#include "alloc.h"
 #include "exitcodes.h"
 #include "defines.h"
 #include "prototypes.h"
@@ -24,7 +26,7 @@ int sssd_flush_cache (int dbflags)
 	const char *spawnedEnv[] = {NULL};
 	int i = 0;
 
-	sss_cache_args = malloc(4);
+	sss_cache_args = MALLOCARRAY(4, char);
 	if (sss_cache_args == NULL) {
 	    return -1;
 	}

@@ -228,7 +228,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 		return NULL;
 	}
 
-	lp = (struct link_name *) xmalloc (sizeof *lp);
+	lp = XMALLOC (struct link_name);
 	src_len = strlen (src_orig);
 	dst_len = strlen (dst_orig);
 	name_len = strlen (name);
@@ -236,7 +236,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
 	len = name_len - src_len + dst_len + 1;
-	lp->ln_name = (char *) xmalloc (len);
+	lp->ln_name = XMALLOCARRAY (len, char);
 	(void) snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
 	lp->ln_next = links;
 	links = lp;
@@ -326,8 +326,8 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 			src_len += strlen (src->full_path);
 			dst_len += strlen (dst->full_path);
 
-			src_name = (char *) malloc (src_len);
-			dst_name = (char *) malloc (dst_len);
+			src_name = MALLOCARRAY (src_len, char);
+			dst_name = MALLOCARRAY (dst_len, char);
 
 			if ((NULL == src_name) || (NULL == dst_name)) {
 				err = -1;
@@ -561,7 +561,7 @@ static /*@null@*/char *readlink_malloc (const char *filename)
 
 	while (true) {
 		ssize_t nchars;
-		char *buffer = (char *) malloc (size);
+		char *buffer = MALLOCARRAY (size, char);
 		if (NULL == buffer) {
 			return NULL;
 		}
@@ -626,7 +626,7 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
 		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
-		char *dummy = (char *) xmalloc (len);
+		char *dummy = XMALLOCARRAY (len, char);
 		(void) snprintf (dummy, len, "%s%s",
 		                 dst_orig,
 		                 oldlink + strlen (src_orig));

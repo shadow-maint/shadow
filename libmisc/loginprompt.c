@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -130,7 +132,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 				envp[envc] = nvar;
 			} else {
 				size_t len = strlen (nvar) + 32;
-				envp[envc] = xmalloc (len);
+				envp[envc] = XMALLOCARRAY (len, char);
 				(void) snprintf (envp[envc], len,
 				                 "L%d=%s", count++, nvar);
 			}

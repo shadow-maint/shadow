@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "alloc.h"
 #include "getdef.h"
 
 #ident "$Id$"
@@ -38,7 +39,7 @@ void mailcheck (void)
 		size_t len = strlen (mailbox) + 5;
 		int wlen;
 
-		newmail = xmalloc (len);
+		newmail = XMALLOCARRAY (len, char);
 		wlen = snprintf (newmail, len, "%s/new", mailbox);
 		assert (wlen == (int) len - 1);
 

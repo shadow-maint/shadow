@@ -14,9 +14,12 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
 /*
  * Global variables
  */
@@ -88,7 +91,7 @@ int main (int argc, char **argv)
 	GETGROUPS_T *groups;
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	groups = (GETGROUPS_T *) mallocarray (sys_ngroups, sizeof (GETGROUPS_T));
+	groups = MALLOCARRAY (sys_ngroups, GETGROUPS_T);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

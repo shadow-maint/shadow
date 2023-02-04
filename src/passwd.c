@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <time.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -524,7 +526,7 @@ static char *update_crypt_pw (char *cp)
 	}
 
 	if (lflg && *cp != '!') {
-		char *newpw = xmalloc (strlen (cp) + 2);
+		char *newpw = XMALLOCARRAY (strlen (cp) + 2, char);
 
 		strcpy (newpw, "!");
 		strcat (newpw, cp);

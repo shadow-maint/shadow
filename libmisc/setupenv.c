@@ -20,6 +20,8 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <ctype.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -34,7 +36,7 @@ addenv_path (const char *varname, const char *dirname, const char *filename)
 	size_t len = strlen (dirname) + strlen (filename) + 2;
 	int wlen;
 
-	buf = xmalloc (len);
+	buf = XMALLOCARRAY (len, char);
 	wlen = snprintf (buf, len, "%s/%s", dirname, filename);
 	assert (wlen == (int) len - 1);
 

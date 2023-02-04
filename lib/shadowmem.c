@@ -16,13 +16,15 @@
 #include "defines.h"
 #include <shadow.h>
 #include <stdio.h>
+
+#include "alloc.h"
 #include "shadowio.h"
 
 /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent)
 {
 	struct spwd *sp;
 
-	sp = (struct spwd *) calloc (1, sizeof *sp);
+	sp = CALLOC (1, struct spwd);
 	if (NULL == sp) {
 		return NULL;
 	}

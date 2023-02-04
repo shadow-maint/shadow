@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <grp.h>
 #include <errno.h>
+
+#include "alloc.h"
 #include "shadowlog.h"
 
 #ident "$Id$"
@@ -46,7 +48,7 @@ int add_groups (const char *list)
 
 	i = 16;
 	for (;;) {
-		grouplist = (gid_t *) mallocarray (i, sizeof (GETGROUPS_T));
+		grouplist = MALLOCARRAY (i, GETGROUPS_T);
 		if (NULL == grouplist) {
 			return -1;
 		}
@@ -88,7 +90,7 @@ int add_groups (const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		grouplist = (gid_t *) reallocarrayf (grouplist, (size_t)ngroups + 1, sizeof (GETGROUPS_T));
+		grouplist = REALLOCARRAYF(grouplist, (size_t) ngroups + 1, GETGROUPS_T);
 		if (grouplist == NULL) {
 			return -1;
 		}

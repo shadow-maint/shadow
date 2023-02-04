@@ -17,6 +17,8 @@
 #include <ctype.h>
 #include <fcntl.h>
 
+#include "alloc.h"
+
 #define ID_SIZE 31
 
 /*
@@ -32,7 +34,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 	const struct subordinate_range *rangeent = ent;
 	struct subordinate_range *range;
 
-	range = (struct subordinate_range *) malloc (sizeof *range);
+	range = MALLOC (struct subordinate_range);
 	if (NULL == range) {
 		return NULL;
 	}
@@ -314,12 +316,12 @@ static bool have_range(struct commonio_db *db,
 static bool append_range(struct subid_range **ranges, const struct subordinate_range *new, int n)
 {
 	if (!*ranges) {
-		*ranges = malloc(sizeof(struct subid_range));
+		*ranges = MALLOC(struct subid_range);
 		if (!*ranges)
 			return false;
 	} else {
 		struct subid_range *alloced;
-		alloced = reallocarray(*ranges, n + 1, sizeof(struct subid_range));
+		alloced = REALLOCARRAY(*ranges, n + 1, struct subid_range);
 		if (!alloced)
 			return false;
 		*ranges = alloced;
@@ -911,7 +913,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			return n;
 	}
 
-	ret = reallocarray(*uids, n + 1, sizeof(uid_t));
+	ret = REALLOCARRAY(*uids, n + 1, uid_t);
 	if (!ret) {
 		free(*uids);
 		return -1;

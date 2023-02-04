@@ -11,6 +11,8 @@
 #ident "$Id$"
 
 #include <assert.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 /*
@@ -44,7 +46,7 @@
 	 * old entries, and the new entries as well.
 	 */
 
-	tmp = (char **) xmallocarray (i + 2, sizeof member);
+	tmp = XMALLOCARRAY (i + 2, char *);
 
 	/*
 	 * Copy the original list to the new list, then append the
@@ -98,7 +100,7 @@
 	 * old entries.
 	 */
 
-	tmp = (char **) xmallocarray (j + 1, sizeof member);
+	tmp = XMALLOCARRAY (j + 1, char *);
 
 	/*
 	 * Copy the original list except the deleted members to the
@@ -133,7 +135,7 @@
 
 	for (i = 0; NULL != list[i]; i++);
 
-	tmp = (char **) xmallocarray (i + 1, sizeof (char *));
+	tmp = XMALLOCARRAY (i + 1, char *);
 
 	i = 0;
 	while (NULL != *list) {
@@ -210,7 +212,7 @@ bool is_on_list (char *const *list, const char *member)
 	 * Allocate the array we're going to store the pointers into.
 	 */
 
-	array = (char **) xmallocarray (i, sizeof (char *));
+	array = XMALLOCARRAY (i, char *);
 
 	/*
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm

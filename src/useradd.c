@@ -32,6 +32,8 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
+
+#include "alloc.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -355,7 +357,7 @@ static void get_defaults (void)
 		int wlen;
 
 		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
-		default_file = malloc(len);
+		default_file = MALLOCARRAY(len, char);
                 if (default_file == NULL)
                        return;
 		wlen = snprintf(default_file, len, "%s/%s", prefix, USER_DEFAULTS_FILE);
@@ -468,7 +470,7 @@ static void get_defaults (void)
 				char* _def_template; /* avoid const warning */
 
 				len = strlen(prefix) + strlen(cp) + 2;
-				_def_template = xmalloc(len);
+				_def_template = XMALLOCARRAY(len, char);
 				wlen = snprintf(_def_template, len, "%s/%s", prefix, cp);
 				assert (wlen == (int) len -1);
 				def_template = _def_template;
@@ -492,7 +494,7 @@ static void get_defaults (void)
 				char* _def_usrtemplate; /* avoid const warning */
 
 				len = strlen(prefix) + strlen(cp) + 2;
-				_def_usrtemplate = xmalloc(len);
+				_def_usrtemplate = XMALLOCARRAY(len, char);
 				wlen = snprintf(_def_usrtemplate, len, "%s/%s", prefix, cp);
 				assert (wlen == (int) len -1);
 				def_usrtemplate = _def_usrtemplate;
@@ -582,7 +584,7 @@ static int set_defaults (void)
 
 
 	len = strlen(prefix) + strlen(NEW_USER_FILE) + 2;
-	new_file = malloc(len);
+	new_file = MALLOCARRAY(len, char);
         if (new_file == NULL) {
 		fprintf (stderr,
 		         _("%s: cannot create new defaults file: %s\n"),
@@ -594,7 +596,7 @@ static int set_defaults (void)
 
 	if (prefix[0]) {
 		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
-		default_file = malloc(len);
+		default_file = MALLOCARRAY(len, char);
 		if (default_file == NULL) {
 			fprintf (stderr,
 			         _("%s: cannot create new defaults file: %s\n"),
@@ -1610,7 +1612,7 @@ static void process_flags (int argc, char **argv)
 			size_t len = strlen (def_home) + strlen (user_name) + 2;
 			int wlen;
 
-			uh = xmalloc (len);
+			uh = XMALLOCARRAY (len, char);
 			wlen = snprintf (uh, len, "%s/%s", def_home, user_name);
 			assert (wlen == (int) len -1);
 
@@ -1620,7 +1622,7 @@ static void process_flags (int argc, char **argv)
 			size_t len = strlen(prefix) + strlen(user_home) + 2;
 			int wlen;
 			char* _prefix_user_home; /* to avoid const warning */
-			_prefix_user_home = xmalloc(len);
+			_prefix_user_home = XMALLOCARRAY(len, char);
 			wlen = snprintf(_prefix_user_home, len, "%s/%s", prefix, user_home);
 			assert (wlen == (int) len -1);
 			prefix_user_home = _prefix_user_home;
@@ -2429,7 +2431,7 @@ static void create_mail (void)
 		if (NULL == spool) {
 			return;
 		}
-		file = alloca (strlen (prefix) + strlen (spool) + strlen (user_name) + 3);
+		file = ALLOCARRAY (strlen (prefix) + strlen (spool) + strlen (user_name) + 3, char);
 		if (prefix[0])
 			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
 		else
@@ -2539,7 +2541,7 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = (char **) xmallocarray (1 + sys_ngroups, sizeof (char *));
+	user_groups = XMALLOCARRAY (1 + sys_ngroups, char *);
 	/*
 	 * Initialize the list to be empty
 	 */

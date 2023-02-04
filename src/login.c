@@ -22,6 +22,8 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <assert.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
@@ -589,7 +591,7 @@ int main (int argc, char **argv)
 #ifdef RLOGIN
 	if (rflg) {
 		assert (NULL == username);
-		username = xmalloc (USER_NAME_MAX_LENGTH + 1);
+		username = XMALLOCARRAY (USER_NAME_MAX_LENGTH + 1, char);
 		username[USER_NAME_MAX_LENGTH] = '\0';
 		if (do_rlogin (hostname, username, USER_NAME_MAX_LENGTH, term, sizeof term)) {
 			preauth_flag = true;
@@ -906,7 +908,7 @@ int main (int argc, char **argv)
 				exit (1);
 			}
 			preauth_flag = false;
-			username = xmalloc (USER_NAME_MAX_LENGTH + 1);
+			username = XMALLOCARRAY (USER_NAME_MAX_LENGTH + 1, char);
 			username[USER_NAME_MAX_LENGTH] = '\0';
 			login_prompt (_("\n%s login: "), username, USER_NAME_MAX_LENGTH);
 

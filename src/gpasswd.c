@@ -19,6 +19,8 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "groupio.h"
 #include "nscd.h"
@@ -834,7 +836,7 @@ static void get_group (struct group *gr)
 
 			sg->sg_mem = dup_list (gr->gr_mem);
 
-			sg->sg_adm = (char **) xmallocarray (2, sizeof (char *));
+			sg->sg_adm = XMALLOCARRAY (2, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sg->sg_mem[0]) {
 				sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);

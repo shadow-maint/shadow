@@ -6,6 +6,8 @@
 #include <strings.h>
 #include <ctype.h>
 #include <stdatomic.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "../libsubid/subid.h"
 #include "shadowlog_internal.h"
@@ -100,7 +102,7 @@ void nss_init(const char *nsswitch_path) {
 				subid_nss = NULL;
 				goto done;
 			}
-			subid_nss = malloc(sizeof(*subid_nss));
+			subid_nss = MALLOC(struct subid_nss_ops);
 			if (!subid_nss) {
 				dlclose(h);
 				goto done;

@@ -15,6 +15,7 @@
 
 #ident "$Id$"
 
+#include "alloc.h"
 #include "prototypes.h"
 
 
@@ -46,7 +47,7 @@
  *	  through malloc(3).  This makes the function thread-safe, and
  *	  also reduces the visibility of the buffer.
  *
- *	- agetpass() doesn't call realloc(3) internally.  Some
+ *	- agetpass() doesn't reallocate internally.  Some
  *	  implementations of getpass(3), such as glibc, do that, as a
  *	  consequence of calling getline(3).  That's a bug in glibc,
  *	  which allows leaking prefixes of passwords in freed memory.
@@ -101,7 +102,7 @@ agetpass(const char *prompt)
 	 * Let's add one more byte, and if the password uses it, it
 	 * means the introduced password was longer than PASS_MAX.
 	 */
-	pass = malloc(PASS_MAX + 2);
+	pass = MALLOCARRAY(PASS_MAX + 2, char);
 	if (pass == NULL)
 		return NULL;
 

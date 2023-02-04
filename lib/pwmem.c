@@ -13,6 +13,8 @@
 #ident "$Id$"
 
 #include <stdio.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -21,7 +23,7 @@
 {
 	struct passwd *pw;
 
-	pw = (struct passwd *) calloc (1, sizeof *pw);
+	pw = CALLOC (1, struct passwd);
 	if (NULL == pw) {
 		return NULL;
 	}

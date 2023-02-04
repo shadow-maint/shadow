@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <security/pam_appl.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -43,7 +45,7 @@ static int ni_conv (int num_msg,
 		return PAM_CONV_ERR;
 	}
 
-	responses = (struct pam_response *) calloc (num_msg, sizeof (*responses));
+	responses = CALLOC (num_msg, struct pam_response);
 	if (NULL == responses) {
 		return PAM_CONV_ERR;
 	}
