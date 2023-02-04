@@ -174,9 +174,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 	}
 
 
-	utent = (struct utmp *) xmalloc (sizeof (*utent));
-	memzero (utent, sizeof (*utent));
-
+	utent = (struct utmp *) xcalloc (1, sizeof (*utent));
 
 
 #ifdef HAVE_STRUCT_UTMP_UT_TYPE
