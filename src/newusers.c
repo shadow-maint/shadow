@@ -1252,13 +1252,20 @@ int main (int argc, char **argv)
 				         _("%s: line %d: mkdir %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
-			} else if (chown (newpw.pw_dir,
+				if (errno != EEXIST) {
+					errors++;
+					continue;
+				}
+			}
+			if (chown (newpw.pw_dir,
 			                  newpw.pw_uid,
 			                  newpw.pw_gid) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: chown %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
+				errors++;
+				continue;
 			}
 		}
 
@@ -1285,12 +1292,15 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
 						Prog, sub_uid_dbname ());
+					errors++;
+					continue;
 				}
 			} else {
 				fprintf (stderr,
 					_("%s: can't find subordinate user range\n"),
 					Prog);
 				errors++;
+				continue;
 			}
 		}
 
@@ -1305,12 +1315,15 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 						_("%s: failed to prepare new %s entry\n"),
 						Prog, sub_uid_dbname ());
+					errors++;
+					continue;
 				}
 			} else {
 				fprintf (stderr,
 					_("%s: can't find subordinate group range\n"),
 					Prog);
 				errors++;
+				continue;
 			}
 		}
 #endif				/* ENABLE_SUBIDS */
