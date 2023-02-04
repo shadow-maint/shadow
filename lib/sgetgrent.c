@@ -37,7 +37,6 @@ static char **list (char *s)
 	static char **members = NULL;
 	static int size = 0;	/* max members + 1 */
 	int i;
-	char **rbuf;
 
 	i = 0;
 	for (;;) {
@@ -45,14 +44,9 @@ static char **list (char *s)
 		   member name, or terminating NULL).  */
 		if (i >= size) {
 			size = i + 100;	/* at least: i + 1 */
-			rbuf = realloc (members, size * sizeof (char *));
-			if (!rbuf) {
-				free (members);
-				members = NULL;
-				size = 0;
+			members = reallocf (members, size * sizeof (char *));
+			if (!members)
 				return NULL;
-			}
-			members = rbuf;
 		}
 		if (!s || s[0] == '\0')
 			break;
