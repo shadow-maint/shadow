@@ -313,7 +313,6 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	new_line_len = strlen (gr1->line) + strlen (gr2->line) +1;
 	new_line = (char *)malloc (new_line_len + 1);
 	if (NULL == new_line) {
-		errno = ENOMEM;
 		return NULL;
 	}
 	snprintf(new_line, new_line_len + 1, "%s\n%s", gr1->line, gr2->line);
@@ -336,7 +335,6 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	new_members = (char **)calloc ( (members+1), sizeof(char*) );
 	if (NULL == new_members) {
 		free (new_line);
-		errno = ENOMEM;
 		return NULL;
 	}
 	for (i=0; NULL != gptr1->gr_mem[i]; i++) {
@@ -397,7 +395,6 @@ static int split_groups (unsigned int max_members)
 
 		new = (struct commonio_entry *) malloc (sizeof *new);
 		if (NULL == new) {
-			errno = ENOMEM;
 			return 0;
 		}
 		new->eptr = group_dup(gr->eptr);
