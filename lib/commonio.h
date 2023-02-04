@@ -58,11 +58,12 @@ struct commonio_ops {
 	int (*put) (const void *, FILE *);
 
 	/*
-	 * fgets and fputs (can be replaced by versions that
+	 * fgets, fputs, and getline (can be replaced by versions that
 	 * understand line continuation conventions).
 	 */
 	/*@null@*/char *(*fgets) (/*@returned@*/ /*@out@*/char *s, int n, FILE *stream);
 	int (*fputs) (const char *, FILE *);
+	ssize_t (*getline) (char **restrict lineptr, size_t *restrict size, FILE *restrict stream);
 
 	/*
 	 * open_hook and close_hook.

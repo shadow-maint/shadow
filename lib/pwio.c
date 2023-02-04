@@ -74,6 +74,7 @@ static struct commonio_ops passwd_ops = {
 	passwd_put,
 	fgets,
 	fputs,
+	getline,		/* getline */
 	NULL,			/* open_hook */
 	NULL			/* close_hook */
 };

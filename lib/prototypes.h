@@ -176,6 +176,9 @@ extern int get_uid (const char *uidstr, uid_t *uid);
 extern int getulong (const char *numstr, /*@out@*/unsigned long int *result);
 
 /* fputsx.c */
+extern ssize_t getlinex(char **restrict lineptr, size_t *restrict size,
+    FILE *restrict stream);
+extern char * fgetsnulx(char *buf, int size, FILE *stream);
 extern /*@null@*/char *fgetsx (/*@returned@*/ /*@out@*/char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
 
