@@ -45,14 +45,7 @@ static char **list (char *s)
 		   member name, or terminating NULL).  */
 		if (i >= size) {
 			size = i + 100;	/* at least: i + 1 */
-			if (members) {
-				rbuf =
-				    realloc (members, size * sizeof (char *));
-			} else {
-				/* for old (before ANSI C) implementations of
-				   realloc() that don't handle NULL properly */
-				rbuf = malloc (size * sizeof (char *));
-			}
+			rbuf = realloc (members, size * sizeof (char *));
 			if (!rbuf) {
 				free (members);
 				members = NULL;
