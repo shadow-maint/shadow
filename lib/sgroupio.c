@@ -25,13 +25,12 @@
 	struct sgrp *sg;
 	int i;
 
-	sg = (struct sgrp *) malloc (sizeof *sg);
+	sg = (struct sgrp *) calloc (1, sizeof *sg);
 	if (NULL == sg) {
 		return NULL;
 	}
 	/* Do the same as the other _dup function, even if we know the
 	 * structure. */
-	memset (sg, 0, sizeof *sg);
 	/*@-mustfreeonly@*/
 	sg->sg_name = strdup (sgent->sg_name);
 	/*@=mustfreeonly@*/

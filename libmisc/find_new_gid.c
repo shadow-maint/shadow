@@ -231,14 +231,13 @@ int find_new_gid (bool sys_group,
 	 */
 
 	/* Create an array to hold all of the discovered GIDs */
-	used_gids = malloc (sizeof (bool) * (gid_max +1));
+	used_gids = calloc (gid_max + 1, sizeof (bool));
 	if (NULL == used_gids) {
 		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),
 			 log_get_progname(), strerror (errno));
 		return -1;
 	}
-	memset (used_gids, false, sizeof (bool) * (gid_max + 1));
 
 	/* First look for the lowest and highest value in the local database */
 	(void) gr_rewind ();
