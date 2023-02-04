@@ -531,7 +531,7 @@ int main (int argc, char **argv)
 	/* don't use getgroups(0, 0) - it doesn't work on some systems */
 	i = 16;
 	for (;;) {
-		grouplist = (GETGROUPS_T *) xmalloc (i * sizeof (GETGROUPS_T));
+		grouplist = (GETGROUPS_T *) xmallocarray (i, sizeof (GETGROUPS_T));
 		ngroups = getgroups (i, grouplist);
 		if (i > ngroups && !(ngroups == -1 && errno == EINVAL)) {
 			break;

@@ -46,7 +46,7 @@ int add_groups (const char *list)
 
 	i = 16;
 	for (;;) {
-		grouplist = (gid_t *) malloc (i * sizeof (GETGROUPS_T));
+		grouplist = (gid_t *) mallocarray (i, sizeof (GETGROUPS_T));
 		if (NULL == grouplist) {
 			return -1;
 		}
@@ -88,7 +88,7 @@ int add_groups (const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		tmp = (gid_t *) realloc (grouplist, (size_t)(ngroups + 1) * sizeof (GETGROUPS_T));
+		tmp = (gid_t *) reallocarray (grouplist, (size_t)ngroups + 1, sizeof (GETGROUPS_T));
 		if (NULL == tmp) {
 			free (grouplist);
 			return -1;

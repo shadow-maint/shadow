@@ -44,7 +44,7 @@ static char **list (char *s)
 		   member name, or terminating NULL).  */
 		if (i >= size) {
 			size = i + 100;	/* at least: i + 1 */
-			members = reallocf (members, size * sizeof (char *));
+			members = reallocarrayf (members, size, sizeof(char *));
 			if (!members)
 				return NULL;
 		}

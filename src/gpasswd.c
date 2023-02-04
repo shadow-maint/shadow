@@ -834,7 +834,7 @@ static void get_group (struct group *gr)
 
 			sg->sg_mem = dup_list (gr->gr_mem);
 
-			sg->sg_adm = (char **) xmalloc (sizeof (char *) * 2);
+			sg->sg_adm = (char **) xmallocarray (2, sizeof (char *));
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sg->sg_mem[0]) {
 				sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);

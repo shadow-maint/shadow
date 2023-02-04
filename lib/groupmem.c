@@ -46,7 +46,7 @@
 	for (i = 0; grent->gr_mem[i]; i++);
 
 	/*@-mustfreeonly@*/
-	gr->gr_mem = (char **) malloc ((i + 1) * sizeof (char *));
+	gr->gr_mem = (char **) mallocarray (i + 1, sizeof (char *));
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_mem) {
 		gr_free(gr);

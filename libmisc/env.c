@@ -60,7 +60,7 @@ static const char *const noslash[] = {
  */
 void initenv (void)
 {
-	newenvp = (char **) xmalloc (NEWENVP_STEP * sizeof (char *));
+	newenvp = (char **) xmallocarray (NEWENVP_STEP, sizeof (char *));
 	*newenvp = NULL;
 }
 

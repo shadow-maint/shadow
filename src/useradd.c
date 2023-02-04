@@ -2539,7 +2539,7 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = (char **) xmalloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups = (char **) xmallocarray (1 + sys_ngroups, sizeof (char *));
 	/*
 	 * Initialize the list to be empty
 	 */

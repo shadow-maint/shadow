@@ -88,7 +88,7 @@ int main (int argc, char **argv)
 	GETGROUPS_T *groups;
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	groups = (GETGROUPS_T *) malloc (sizeof (GETGROUPS_T) * sys_ngroups);
+	groups = (GETGROUPS_T *) mallocarray (sys_ngroups, sizeof (GETGROUPS_T));
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
