@@ -60,12 +60,7 @@
 	while (true) {
 		int status;
 		LOOKUP_TYPE *resbuf = NULL;
-		buffer = (char *)realloc (buffer, length);
-		if (NULL == buffer) {
-			fprintf (log_get_logfd(), _("%s: out of memory\n"),
-			         "x" STRINGIZE(FUNCTION_NAME));
-			exit (13);
-		}
+		buffer = (char *)xreallocarray (buffer, length, sizeof(char));
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
 		if ((0 == status) && (resbuf == result)) {
