@@ -319,7 +319,7 @@ static bool append_range(struct subid_range **ranges, const struct subordinate_r
 			return false;
 	} else {
 		struct subid_range *alloced;
-		alloced = realloc(*ranges, (n + 1) * (sizeof(struct subid_range)));
+		alloced = reallocarray(*ranges, n + 1, sizeof(struct subid_range));
 		if (!alloced)
 			return false;
 		*ranges = alloced;
@@ -911,7 +911,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			return n;
 	}
 
-	ret = realloc(*uids, (n + 1) * sizeof(uid_t));
+	ret = reallocarray(*uids, n + 1, sizeof(uid_t));
 	if (!ret) {
 		free(*uids);
 		return -1;

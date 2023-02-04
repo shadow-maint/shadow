@@ -117,7 +117,7 @@ void endsgent (void)
 	size_t len = strlen (string) + 1;
 
 	if (len > sgrbuflen) {
-		char *buf = (char *) realloc (sgrbuf, sizeof (char) * len);
+		char *buf = (char *) reallocarray (sgrbuf, len, sizeof (char));
 		if (NULL == buf) {
 			return NULL;
 		}

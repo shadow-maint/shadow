@@ -1200,9 +1200,9 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 		/* keep the list of user/password for later update by PAM */
 		nusers++;
-		lines     = reallocf (lines,     sizeof (lines[0])     * nusers);
-		usernames = reallocf (usernames, sizeof (usernames[0]) * nusers);
-		passwords = reallocf (passwords, sizeof (passwords[0]) * nusers);
+		lines     = reallocf (lines,     nusers, sizeof (lines[0]));
+		usernames = reallocf (usernames, nusers, sizeof (usernames[0]));
+		passwords = reallocf (passwords, nusers, sizeof (passwords[0]));
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
 			fprintf (stderr,
 			         _("%s: line %d: %s\n"),

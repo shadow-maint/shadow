@@ -635,7 +635,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		return 0;
 	}
 
-	entries = malloc (n * sizeof (struct commonio_entry *));
+	entries = mallocarray (n, sizeof (struct commonio_entry *));
 	if (entries == NULL) {
 		return -1;
 	}
