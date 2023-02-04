@@ -127,15 +127,14 @@ void addenv (const char *string, /*@null@*/const char *value)
 
 	if ((newenvc & (NEWENVP_STEP - 1)) == 0) {
 		char **__newenvp;
-		size_t newsize;
 
 		/*
 		 * If the resize operation succeeds we can
 		 * happily go on, else print a message.
 		 */
 
-		newsize = (newenvc + NEWENVP_STEP) * sizeof (char *);
-		__newenvp = (char **) realloc (newenvp, newsize);
+		__newenvp = (char **) reallocarray (newenvp, newenvc + NEWENVP_STEP,
+		                                    sizeof (char *));
 
 		if (NULL != __newenvp) {
 			/*
