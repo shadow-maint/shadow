@@ -128,12 +128,14 @@ void addenv (const char *string, /*@null@*/const char *value)
 	 */
 
 	if ((newenvc & (NEWENVP_STEP - 1)) == 0) {
-		char **__newenvp;
+		bool  update_environ;
+		char  **__newenvp;
 
 		/*
 		 * If the resize operation succeeds we can
 		 * happily go on, else print a message.
 		 */
+		update_environ = (environ == newenvp);
 
 		__newenvp = REALLOCARRAY(newenvp, newenvc + NEWENVP_STEP, char *);
 
@@ -143,9 +145,8 @@ void addenv (const char *string, /*@null@*/const char *value)
 			 * environ so that it doesn't point to some
 			 * free memory area (realloc() could move it).
 			 */
-			if (environ == newenvp) {
+			if (update_environ)
 				environ = __newenvp;
-			}
 			newenvp = __newenvp;
 		} else {
 			(void) fputs (_("Environment overflow\n"), log_get_logfd());
