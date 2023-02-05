@@ -352,22 +352,20 @@ static int get_user_id (const char *uid, uid_t *nuid) {
 			const struct passwd *pwd;
 			/* local, no need for xgetpwnam */
 			pwd = getpwnam (uid);
-			if (NULL == pwd) {
+			if (pwd == NULL)
 				pwd = pw_locate (uid);
-			}
 
-			if (NULL != pwd) {
-				*nuid = pwd->pw_uid;
-			} else {
+			if (pwd == NULL) {
 				fprintf (stderr,
 				         _("%s: user '%s' does not exist\n"),
 				         Prog, uid);
 				return -1;
 			}
+
+			*nuid = pwd->pw_uid;
 		} else {
-			if (find_new_uid (rflg, nuid, NULL) < 0) {
+			if (find_new_uid (rflg, nuid, NULL) < 0)
 				return -1;
-			}
 		}
 	}
 
@@ -1092,15 +1090,13 @@ int main (int argc, char **argv)
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
 		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
+		if (cp == NULL && feof (stdin) == 0) {
+			fprintf (stderr, _("%s: line %d: line too long\n"),
+				 Prog, line);
+			fail_exit (EXIT_FAILURE);
+		}
+		if (cp != NULL) {
 			*cp = '\0';
-		} else {
-			if (feof (stdin) == 0) {
-				fprintf (stderr,
-				         _("%s: line %d: line too long\n"),
-				         Prog, line);
-				fail_exit (EXIT_FAILURE);
-			}
 		}
 
 		/*
@@ -1111,12 +1107,11 @@ int main (int argc, char **argv)
 		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
 			fields[nfields] = cp;
 			cp = strchr (cp, ':');
-			if (NULL != cp) {
-				*cp = '\0';
-				cp++;
-			} else {
+			if (cp == NULL)
 				break;
-			}
+
+			*cp = '\0';
+			cp++;
 		}
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
@@ -1129,16 +1124,14 @@ int main (int argc, char **argv)
 		 */
 		pw = pw_locate (fields[0]);
 		/* local, no need for xgetpwnam */
-		if (   (NULL == pw)
-		    && (getpwnam (fields[0]) != NULL)) {
+		if (NULL == pw && getpwnam(fields[0]) != NULL) {
 			fprintf (stderr,
 				 _("%s: cannot update the entry of user %s (not in the passwd database)\n"),
 				 Prog, fields[0]);
 			fail_exit (EXIT_FAILURE);
 		}
 
-		if (   (NULL == pw)
-		    && (get_user_id (fields[2], &uid) != 0)) {
+		if (NULL == pw && get_user_id(fields[2], &uid) != 0) {
 			fprintf (stderr,
 			         _("%s: line %d: can't create user\n"),
 			         Prog, line);
@@ -1237,7 +1230,7 @@ int main (int argc, char **argv)
 					_("%s: line %d: homedir must be an absolute path\n"),
 					Prog, line);
 				fail_exit (EXIT_FAILURE);
-			};
+			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: mkdir %s failed: %s\n"),
@@ -1247,9 +1240,8 @@ int main (int argc, char **argv)
 					fail_exit (EXIT_FAILURE);
 				}
 			}
-			if (chown (newpw.pw_dir,
-			                  newpw.pw_uid,
-			                  newpw.pw_gid) != 0) {
+			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
+			{
 				fprintf (stderr,
 				         _("%s: line %d: chown %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
@@ -1275,17 +1267,18 @@ int main (int argc, char **argv)
 		if (is_sub_uid && want_subuids() && !local_sub_uid_assigned(fields[0])) {
 			uid_t sub_uid_start = 0;
 			unsigned long sub_uid_count = 0;
-			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) == 0) {
-				if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0) {
-					fprintf (stderr,
-						_("%s: failed to prepare new %s entry\n"),
-						Prog, sub_uid_dbname ());
-					fail_exit (EXIT_FAILURE);
-				}
-			} else {
+			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) != 0)
+			{
 				fprintf (stderr,
 					_("%s: can't find subordinate user range\n"),
 					Prog);
+				fail_exit (EXIT_FAILURE);
+			}
+			if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0)
+			{
+				fprintf (stderr,
+					_("%s: failed to prepare new %s entry\n"),
+					Prog, sub_uid_dbname ());
 				fail_exit (EXIT_FAILURE);
 			}
 		}
@@ -1296,17 +1289,16 @@ int main (int argc, char **argv)
 		if (is_sub_gid && want_subgids() && !local_sub_gid_assigned(fields[0])) {
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
-			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) == 0) {
-				if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
-					fprintf (stderr,
-						_("%s: failed to prepare new %s entry\n"),
-						Prog, sub_uid_dbname ());
-					fail_exit (EXIT_FAILURE);
-				}
-			} else {
+			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) != 0) {
 				fprintf (stderr,
 					_("%s: can't find subordinate group range\n"),
 					Prog);
+				fail_exit (EXIT_FAILURE);
+			}
+			if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
+				fprintf (stderr,
+					_("%s: failed to prepare new %s entry\n"),
+					Prog, sub_uid_dbname ());
 				fail_exit (EXIT_FAILURE);
 			}
 		}
