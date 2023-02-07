@@ -188,7 +188,7 @@ getsubids_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/libsubid
+	-I$(top_builddir)/libsubid
 
 get_subid_owners_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
@@ -200,13 +200,13 @@ get_subid_owners_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/libsubid
+	-I$(top_builddir)/libsubid
 
 new_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/libsubid
+	-I$(top_builddir)/libsubid
 
 new_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
@@ -218,7 +218,7 @@ free_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
 	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/libsubid
+	-I$(top_builddir)/libsubid
 
 free_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \

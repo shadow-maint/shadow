@@ -6,10 +6,10 @@ config.xml: ../config.xml.in
 	cp ../config.xml $@
 
 messages.mo: ../po/$(LANG).po
-	msgfmt ../po/$(LANG).po -o messages.mo
+	msgfmt $< -o messages.mo
 
 login.defs.d:
-	ln -sf ../login.defs.d login.defs.d
+	ln -sf $(srcdir)/../login.defs.d login.defs.d
 
 %.xml: ../%.xml messages.mo login.defs.d
 	if grep -q SHADOW-CONFIG-HERE $< ; then \

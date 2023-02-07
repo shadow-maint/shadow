@@ -206,9 +206,9 @@ if !ENABLE_SUBIDS
 EXTRA_DIST += $(man_subids)
 endif
 
-generate_mans.deps: *.xml
+generate_mans.deps: $(man_XMANS)
 	echo "# This file is generated" > $@
-	awk 'BEGIN{FS="\"";} /^<!ENTITY .* * SYSTEM ".*">$$/{ f=FILENAME; sub(/.xml/,"",f); print "man" substr(f, length (f)) "/" f ": " $$2 }' $(man_XMANS) >> $@
+	awk 'BEGIN{FS="\"";} /^<!ENTITY .* * SYSTEM ".*">$$/{ f=FILENAME; sub(/.xml/,"",f); print "man" substr(f, length (f)) "/" f ": " $$2 }' $< >> $@
 
 if ENABLE_REGENERATE_MAN
 
