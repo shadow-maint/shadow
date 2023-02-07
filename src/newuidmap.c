@@ -64,7 +64,7 @@ static void verify_ranges(struct passwd *pw, int ranges,
 
 static void usage(void)
 {
-	fprintf(stderr, _("usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"), Prog);
+	fprintf(stderr, _("usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"), Prog);
 	exit(EXIT_FAILURE);
 }
 
@@ -73,15 +73,12 @@ static void usage(void)
  */
 int main(int argc, char **argv)
 {
-	char proc_dir_name[32];
 	char *target_str;
-	pid_t target;
 	int proc_dir_fd;
 	int ranges;
 	struct map_range *mappings;
 	struct stat st;
 	struct passwd *pw;
-	int written;
 
 	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
@@ -94,26 +91,20 @@ int main(int argc, char **argv)
 	if (argc < 2)
 		usage();
 
+	target_str = argv[1];
 	/* Find the process that needs its user namespace
 	 * uid mapping set.
 	 */
-	target_str = argv[1];
-	if (!get_pid(target_str, &target))
-		usage();
-
-	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
-	written = snprintf(proc_dir_name, sizeof(proc_dir_name), "/proc/%u/",
-		target);
-	if ((written <= 0) || ((size_t)written >= sizeof(proc_dir_name))) {
-		fprintf(stderr, "%s: snprintf of proc path failed: %s\n",
-			Prog, strerror(errno));
-	}
-
-	proc_dir_fd = open(proc_dir_name, O_DIRECTORY);
-	if (proc_dir_fd < 0) {
-		fprintf(stderr, _("%s: Could not open proc directory for target %u\n"),
-			Prog, target);
-		return EXIT_FAILURE;
+	if (strlen(target_str) > 3 && strncmp(target_str, "fd:", 3) == 0) {
+		/* the user passed in a /proc/pid fd for the process */
+		target_str = &target_str[3];
+		proc_dir_fd = get_pidfd_from_fd(target_str);
+		if (proc_dir_fd < 0)
+			usage();
+	} else {
+		proc_dir_fd = open_pidfd(target_str);
+		if (proc_dir_fd < 0)
+			usage();
 	}
 
 	/* Who am i? */
@@ -129,8 +120,7 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprintf(stderr, _("%s: Could not stat directory for target %u\n"),
-			Prog, target);
+		fprintf(stderr, _("%s: Could not stat directory for target process\n"), Prog);
 		return EXIT_FAILURE;
 	}
 
@@ -142,8 +132,8 @@ int main(int argc, char **argv)
 	    (!getdef_bool("GRANT_AUX_GROUP_SUBIDS") && (getgid() != pw->pw_gid)) ||
 	    (pw->pw_uid != st.st_uid) ||
 	    (getgid() != st.st_gid)) {
-		fprintf(stderr, _( "%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
-			Prog, target,
+		fprintf(stderr, _( "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
+			Prog,
 			(unsigned long int)getuid(), (unsigned long int)pw->pw_uid, (unsigned long int)st.st_uid,
 			(unsigned long int)getgid(), (unsigned long int)pw->pw_gid, (unsigned long int)st.st_gid);
 		return EXIT_FAILURE;
