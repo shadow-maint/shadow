@@ -66,7 +66,7 @@ static long inactdays;
 static long expdate;
 
 /* local function prototypes */
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static int new_fields (void);
 static void print_date (time_t date);
 static void list_fields (void);
@@ -75,12 +75,14 @@ static void check_flags (int argc, int opt_index);
 static void check_perms (void);
 static void open_files (bool readonly);
 static void close_files (void);
-static /*@noreturn@*/void fail_exit (int code);
+NORETURN static void fail_exit (int code);
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static /*@noreturn@*/void fail_exit (int code)
+NORETURN
+static void
+fail_exit (int code)
 {
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
@@ -112,7 +114,9 @@ static /*@noreturn@*/void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

@@ -111,7 +111,7 @@ static void die (int);
 static bool iswheel (const char *);
 #endif				/* !USE_PAM */
 static bool restricted_shell (const char *shellname);
-static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root);
+NORETURN static void su_failure (const char *tty, bool su_to_root);
 static /*@only@*/struct passwd * check_perms (void);
 #ifdef USE_PAM
 static void check_perms_pam (const struct passwd *pw);
@@ -185,7 +185,9 @@ static bool restricted_shell (const char *shellname)
 	return true;
 }
 
-static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root)
+NORETURN
+static void
+su_failure (const char *tty, bool su_to_root)
 {
 	sulog (tty, false, caller_name, name);	/* log failed attempt */
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {

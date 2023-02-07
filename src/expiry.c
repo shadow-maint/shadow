@@ -28,7 +28,7 @@ static bool cflg = false;
 
 /* local function prototypes */
 static void catch_signals (unused int sig);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 
 /*
@@ -42,7 +42,9 @@ static void catch_signals (unused int sig)
 /*
  * usage - print syntax message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

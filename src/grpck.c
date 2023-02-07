@@ -62,7 +62,7 @@ static bool silence_warnings = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void delete_member (char **, const char *);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
@@ -114,7 +114,9 @@ static void fail_exit (int status)
 /*
  * usage - print syntax message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 #ifdef	SHADOWGRP

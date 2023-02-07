@@ -58,7 +58,7 @@ static bool is_shadow_grp;
 #define E_GRP_UPDATE	10	/* can't update group file */
 
 /* local function prototypes */
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void grp_update (void);
 static void close_files (void);
 static void open_files (void);
@@ -68,7 +68,9 @@ static void process_flags (int argc, char **argv);
 /*
  * usage - display usage message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
