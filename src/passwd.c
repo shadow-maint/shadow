@@ -104,7 +104,7 @@ static bool do_update_pwd = false;
  */
 
 /* local function prototypes */
-static /*@noreturn@*/void usage (int);
+NORETURN static void usage (int);
 
 #ifndef USE_PAM
 static bool reuse (const char *, const struct passwd *);
@@ -114,8 +114,8 @@ static void check_password (const struct passwd *, const struct spwd *);
 #endif				/* !USE_PAM */
 static /*@observer@*/const char *pw_status (const char *);
 static void print_status (const struct passwd *);
-static /*@noreturn@*/void fail_exit (int);
-static /*@noreturn@*/void oom (void);
+NORETURN static void fail_exit (int);
+NORETURN static void oom (void);
 static char *update_crypt_pw (char *);
 static void update_noshadow (void);
 
@@ -124,7 +124,9 @@ static void update_shadow (void);
 /*
  * usage - print command usage and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -466,7 +468,9 @@ static void print_status (const struct passwd *pw)
 }
 
 
-static /*@noreturn@*/void fail_exit (int status)
+NORETURN
+static void
+fail_exit (int status)
 {
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
@@ -487,7 +491,9 @@ static /*@noreturn@*/void fail_exit (int status)
 	exit (status);
 }
 
-static /*@noreturn@*/void oom (void)
+NORETURN
+static void
+oom (void)
 {
 	(void) fprintf (stderr, _("%s: out of memory\n"), Prog);
 	fail_exit (E_FAILURE);

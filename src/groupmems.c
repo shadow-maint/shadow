@@ -66,7 +66,7 @@ static void remove_user (const char *user,
                          const struct group *grp);
 static void purge_members (const struct group *grp);
 static void display_members (const char *const *members);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
 static void fail_exit (int code);
@@ -339,7 +339,9 @@ static void display_members (const char *const *members)
 	}
 }
 
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (EXIT_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

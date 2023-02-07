@@ -66,7 +66,7 @@ static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
 static void fail_exit (int code);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (bool changed);
@@ -109,7 +109,9 @@ static void fail_exit (int code)
 /*
  * usage - print syntax message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 #ifdef WITH_TCB

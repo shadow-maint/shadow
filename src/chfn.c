@@ -55,7 +55,7 @@ static bool pw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
 static char *copy_field (char *, char *, char *);
@@ -86,7 +86,9 @@ static void fail_exit (int code)
 /*
  * usage - print command line syntax and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

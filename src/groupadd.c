@@ -70,7 +70,7 @@ static bool is_shadow_grp;
 #endif
 
 /* local function prototypes */
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void new_grent (struct group *grent);
 
 #ifdef SHADOWGRP
@@ -87,7 +87,9 @@ static void check_perms (void);
 /*
  * usage - display usage message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

@@ -163,10 +163,10 @@ static bool sub_gid_locked = false;
 
 /* local function prototypes */
 static int get_groups (char *);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void new_pwent (struct passwd *);
 static void new_spent (struct spwd *);
-static /*@noreturn@*/void fail_exit (int);
+NORETURN static void fail_exit (int);
 static void update_group (void);
 
 #ifdef SHADOWGRP
@@ -359,7 +359,9 @@ static int prepend_range(const char *str, struct ulong_range_list_entry **head)
 /*
  * usage - display usage message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -627,7 +629,9 @@ static void new_spent (struct spwd *spent)
 /*
  * fail_exit - exit with an error code after unlocking files
  */
-static /*@noreturn@*/void fail_exit (int code)
+NORETURN
+static void
+fail_exit (int code)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {

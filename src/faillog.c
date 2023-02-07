@@ -26,7 +26,7 @@
 #include "shadowlog.h"
 
 /* local function prototypes */
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void print_one (/*@null@*/const struct passwd *pw, bool force);
 static void set_locktime (long locktime);
 static bool set_locktime_one (uid_t uid, long locktime);
@@ -59,7 +59,9 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 #define	NOW	time(NULL)
 
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

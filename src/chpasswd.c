@@ -60,7 +60,7 @@ static bool spw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int code);
-static /*@noreturn@*/void usage (int status);
+NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
@@ -94,7 +94,9 @@ static void fail_exit (int code)
 /*
  * usage - display usage message and exit
  */
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,

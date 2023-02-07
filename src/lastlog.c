@@ -58,7 +58,9 @@ static bool Sflg = false;	/* set record for user */
 
 #define	NOW	time(NULL)
 
-static /*@noreturn@*/void usage (int status)
+NORETURN
+static void
+usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
