@@ -28,7 +28,6 @@ lib/shadowio.c
 lib/shadowmem.c
 lib/spawn.c
 lib/tcbfuncs.c
-lib/utent.c
 libmisc/addgrps.c
 libmisc/age.c
 libmisc/audit_help.c
