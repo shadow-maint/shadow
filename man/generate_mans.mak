@@ -45,6 +45,7 @@ man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
 	            --stringparam "man.output.base.dir" "" \
 	            --stringparam vendordir "$(VENDORDIR)" \
 	            --param "man.output.in.separate.dir" "1" \
+	            --path "$(srcdir)/login.defs.d" \
 	            -nonet $(top_builddir)/man/shadow-man.xsl $<
 
 clean-local:
