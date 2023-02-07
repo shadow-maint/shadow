@@ -160,6 +160,8 @@ extern int getlong (const char *numstr, /*@out@*/long int *result);
 
 /* get_pid.c */
 extern int get_pid (const char *pidstr, pid_t *pid);
+extern int get_pidfd_from_fd(const char *pidfdstr);
+extern int open_pidfd(const char *pidstr);
 
 /* getrange */
 extern int getrange (const char *range,

@@ -116,6 +116,17 @@
     <para>
       Note that newgidmap may be used only once for a given process.
     </para>
+    <para>
+      Instead of an integer process id, the first argument may be
+      specified as <replaceable>fd:N</replaceable>, where the integer N
+      is the file descriptor number for the calling process's opened
+      file for <filename>/proc/[pid[</filename>.  In this case,
+      <command>newgidmap</command> will use
+      <refentrytitle>openat</refentrytitle><manvolnum>2</manvolnum>
+      to open the <filename>gid_map</filename> file under that
+      directory, avoiding a TOCTTOU in case the process exits and
+      the pid is immediately reused.
+    </para>
 
   </refsect1>
 
