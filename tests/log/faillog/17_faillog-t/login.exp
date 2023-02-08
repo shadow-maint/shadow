@@ -7,10 +7,10 @@ if {$argc == 1} {
 }
 
 set timeout 2
-expect_after default {puts "\nFAIL"; exit 1}
+expect_after default {puts stderr "\nFAIL"; exit 1}
 
 set timeout 5
-expect_after default {puts "\nFAIL"; exit 1}
+expect_after default {puts stderr "\nFAIL"; exit 1}
 
 spawn /bin/bash
 expect "# "

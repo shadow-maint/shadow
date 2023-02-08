@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 set timeout 2
-expect_after default {puts "\nFAIL"; exit 1}
+expect_after default {puts stderr "\nFAIL"; exit 1}
 
 spawn /bin/sh
 send "if \[ \$(id -u) -eq 0 \]; then PS1='# '; else PS1='$ '; fi\r"
