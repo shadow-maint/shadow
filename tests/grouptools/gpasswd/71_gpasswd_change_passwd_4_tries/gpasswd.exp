@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 set timeout 2
-expect_after default {puts "\nFAIL"; exit 1}
+expect_after default {puts stderr "\nFAIL"; exit 1}
 
 if {$argc != 4} {
 	puts "usage: gpasswd.exp <run_user> <group> <g_password> <user_prompt>"

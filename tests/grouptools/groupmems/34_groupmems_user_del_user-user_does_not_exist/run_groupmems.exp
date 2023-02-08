@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 set timeout 2
-expect_after default {puts "\nFAIL"; exit 1}
+expect_after default {puts stderr "\nFAIL"; exit 1}
 
 if {$argc != 0} {
 	puts "usage: run_groupmems.exp"
