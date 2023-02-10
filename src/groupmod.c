@@ -35,6 +35,7 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "stpecpy.h"
 #include "stpeprintf.h"
 /*
  * exit status values
@@ -590,42 +591,27 @@ static void prepare_failure_reports (void)
 	                 "group %s/%ju", group_name, (uintmax_t) group_id);
 
 	if (nflg) {
-		strncat (info_group.action, ", new name: ",
-		         511 - strlen (info_group.audit_msg));
-		strncat (info_group.action, group_newname,
-		         511 - strlen (info_group.audit_msg));
-
+		gr = stpecpy(gr, gr_end, ", new name: ");
+		gr = stpecpy(gr, gr_end, group_newname);
 #ifdef	SHADOWGRP
-		strncat (info_gshadow.action, ", new name: ",
-		         511 - strlen (info_gshadow.audit_msg));
-		strncat (info_gshadow.action, group_newname,
-		         511 - strlen (info_gshadow.audit_msg));
+		sgr = stpecpy(sgr, sgr_end, ", new name: ");
+		sgr = stpecpy(sgr, sgr_end, group_newname);
 #endif
-
-		strncat (info_passwd.action, ", new name: ",
-		         511 - strlen (info_passwd.audit_msg));
-		strncat (info_passwd.action, group_newname,
-		         511 - strlen (info_passwd.audit_msg));
+		pw = stpecpy(pw, pw_end, ", new name: ");
+		pw = stpecpy(pw, pw_end, group_newname);
 	}
 	if (pflg) {
-		strncat (info_group.action, ", new password",
-		         511 - strlen (info_group.audit_msg));
-
+		gr = stpecpy(gr, gr_end, ", new password");
 #ifdef	SHADOWGRP
-		strncat (info_gshadow.action, ", new password",
-		         511 - strlen (info_gshadow.audit_msg));
+		sgr = stpecpy(sgr, sgr_end, ", new password");
 #endif
 	}
 	if (gflg) {
-		strncat (info_group.action, ", new gid: ",
-		         511 - strlen (info_group.audit_msg));
-		stpeprintf(info_group.action+strlen (info_group.action),
-		                 gr_end, "%ju", (uintmax_t) group_newid);
+		gr = stpecpy(gr, gr_end, ", new gid: ");
+		stpeprintf(gr, gr_end, "%ju", (uintmax_t) group_newid);
 
-		strncat (info_passwd.action, ", new gid: ",
-		         511 - strlen (info_passwd.audit_msg));
-		stpeprintf(info_passwd.action+strlen (info_passwd.action),
-		                 pw_end, "%ju", (uintmax_t) group_newid);
+		pw = stpecpy(pw, pw_end, ", new gid: ");
+		stpeprintf(pw, pw_end, "%ju", (uintmax_t) group_newid);
 	}
 
 // FIXME: add a system cleanup
