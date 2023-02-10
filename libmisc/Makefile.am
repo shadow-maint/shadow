@@ -44,6 +44,7 @@ libmisc_la_SOURCES = \
 	list.c log.c \
 	loginprompt.c \
 	mail.c \
+	mempcpy.c \
 	motd.c \
 	myname.c \
 	obscure.c \
