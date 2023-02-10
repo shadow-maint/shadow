@@ -62,6 +62,7 @@ libmisc_la_SOURCES = \
 	setugid.c \
 	setupenv.c \
 	shell.c \
+	stpecpy.c \
 	stpeprintf.c \
 	strtoday.c \
 	sub.c \
