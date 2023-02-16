@@ -1126,7 +1126,7 @@ int main (int argc, char **argv)
 		}
 
 		/*
-		 * First check if we have to create or update an user
+		 * First check if we have to create or update a user
 		 */
 		pw = pw_locate (fields[0]);
 		/* local, no need for xgetpwnam */

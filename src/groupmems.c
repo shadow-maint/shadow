@@ -89,7 +89,7 @@ static char *whoami (void)
 }
 
 /*
- * add_user - Add an user to the specified group
+ * add_user - Add a user to the specified group
  */
 static void add_user (const char *user,
                       const struct group *grp)
@@ -172,7 +172,7 @@ static void add_user (const char *user,
 }
 
 /*
- * remove_user - Remove an user from a given group
+ * remove_user - Remove a user from a given group
  */
 static void remove_user (const char *user,
                          const struct group *grp)

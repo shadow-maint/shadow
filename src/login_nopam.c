@@ -243,7 +243,7 @@ static bool user_match (const char *tok, const char *string)
 		}
 #ifdef PRIMARY_GROUP_MATCH
 		/*
-		 * If the string is an user whose initial GID matches the token,
+		 * If the string is a user whose initial GID matches the token,
 		 * accept it. May avoid excessively long lines in /etc/group.
 		 * Radu-Adrian Feurdean <raf@licj.soroscj.ro>
 		 *

@@ -50,7 +50,7 @@ static time_t inverse_seconds;	/* that number of days in seconds */
 static struct stat statbuf;	/* fstat buffer for file size */
 
 
-static bool uflg = false;	/* print only an user of range of users */
+static bool uflg = false;	/* print only a user of range of users */
 static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
 static bool Cflg = false;	/* clear record for user */
@@ -69,7 +69,7 @@ usage (int status)
 	                  "Options:\n"),
 	                Prog);
 	(void) fputs (_("  -b, --before DAYS             print only lastlog records older than DAYS\n"), usageout);
-	(void) fputs (_("  -C, --clear                   clear lastlog record of an user (usable only with -u)\n"), usageout);
+	(void) fputs (_("  -C, --clear                   clear lastlog record of a user (usable only with -u)\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -S, --set                     set lastlog record to current time (usable only with -u)\n"), usageout);
