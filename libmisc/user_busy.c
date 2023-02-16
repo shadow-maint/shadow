@@ -43,7 +43,7 @@ int user_busy (const char *name, uid_t uid)
 	/* On Linux, directly parse /proc */
 	return user_busy_processes (name, uid);
 #else				/* !__linux__ */
-	/* If we cannot rely on /proc, check is there is a record in utmp
+	/* If we cannot rely on /proc, check if there is a record in utmp
 	 * indicating that the user is still logged in */
 	return user_busy_utmp (name);
 #endif				/* !__linux__ */
