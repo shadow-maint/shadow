@@ -808,7 +808,7 @@ static void process_flags (int argc, char **argv)
 		case 'm':
 		case 'p':
 			/* This will only have an effect if the target
-			 * user do not have a restricted shell, or if
+			 * user does not have a restricted shell, or if
 			 * su is called by root.
 			 */
 			change_environment = false;
@@ -1017,7 +1017,7 @@ int main (int argc, char **argv)
 
 	pw = check_perms ();
 
-	/* If the user do not want to change the environment,
+	/* If the user does not want to change the environment,
 	 * use the current SHELL.
 	 * (unless another shell is required by the command line)
 	 */
