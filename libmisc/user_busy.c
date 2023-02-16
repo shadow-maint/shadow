@@ -32,7 +32,7 @@ static int user_busy_utmp (const char *name);
 #endif				/* !__linux__ */
 
 /*
- * user_busy - check if an user if currently running processes
+ * user_busy - check if a user is currently running processes
  */
 int user_busy (const char *name, uid_t uid)
 {

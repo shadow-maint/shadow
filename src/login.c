@@ -430,7 +430,7 @@ static void get_pam_user (char **ptr_pam_user)
 
 /*
  * get_failent_user - Return a string that can be used to log failure
- *                    from an user.
+ *                    from a user.
  *
  * This will be either the user argument, or "UNKNOWN".
  *
