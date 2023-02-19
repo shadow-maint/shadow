@@ -19,7 +19,7 @@
 
 
 #if !defined(PASS_MAX)
-#define PASS_MAX  BUFSIZ
+#define PASS_MAX  BUFSIZ - 1
 #endif
 
 
@@ -93,29 +93,31 @@ agetpass(const char *prompt)
 	char    *pass;
 	size_t  len;
 
-	pass = malloc(PASS_MAX);
+	/*
+	 * Since we want to support passwords upto PASS_MAX, we need
+	 * PASS_MAX bytes for the password itself, and one more byte for
+	 * the terminating '\0'.  We also want to detect truncation, and
+	 * readpassphrase(3) doesn't detect it, so we need some trick.
+	 * Let's add one more byte, and if the password uses it, it
+	 * means the introduced password was longer than PASS_MAX.
+	 */
+	pass = malloc(PASS_MAX + 2);
 	if (pass == NULL)
 		return NULL;
 
-	if (readpassphrase(prompt, pass, PASS_MAX, RPP_REQUIRE_TTY) == NULL)
+	if (readpassphrase(prompt, pass, PASS_MAX + 2, RPP_REQUIRE_TTY) == NULL)
 		goto fail;
 
 	len = strlen(pass);
-
-	if (len == 0)
-		return pass;
-
-	if (pass[len - 1] != '\n') {
+	if (len == PASS_MAX + 1) {
 		errno = ENOBUFS;
 		goto fail;
 	}
 
-	pass[len - 1] = '\0';
-
 	return pass;
 
 fail:
-	freezero(pass, PASS_MAX);
+	freezero(pass, PASS_MAX + 2);
 	return NULL;
 }
 
@@ -123,5 +125,5 @@ fail:
 void
 erase_pass(char *pass)
 {
-	freezero(pass, PASS_MAX);
+	freezero(pass, PASS_MAX + 2);
 }
