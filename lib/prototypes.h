@@ -477,11 +477,6 @@ extern int setutmp (struct utmp *ut);
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
 
-/* xmalloc.c */
-extern /*@maynotreturn@*/ /*@only@*//*@out@*//*@notnull@*/void *xmalloc (size_t size)
-  /*@ensures MaxSet(result) == (size - 1); @*/;
-extern /*@maynotreturn@*/ /*@only@*//*@notnull@*/char *xstrdup (const char *);
-
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);
 /* xgetpwuid.c */

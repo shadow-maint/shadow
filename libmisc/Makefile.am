@@ -10,6 +10,7 @@ libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
 	agetpass.c \
+	alloc.c \
 	audit_help.c \
 	basename.c \
 	bit.c \
@@ -78,7 +79,6 @@ libmisc_la_SOURCES = \
 	xgetgrnam.c \
 	xgetgrgid.c \
 	xgetspnam.c \
-	xmalloc.c \
 	yesno.c
 
 if WITH_BTRFS

@@ -17,6 +17,8 @@
 #include <sys/time.h>
 #include <fcntl.h>
 #include <stdio.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX

@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <getopt.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"

@@ -16,6 +16,8 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <sys/types.h>
+
+#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
