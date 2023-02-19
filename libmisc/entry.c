@@ -13,6 +13,8 @@
 
 #include <sys/types.h>
 #include <stdio.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>

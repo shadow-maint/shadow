@@ -12,9 +12,11 @@
 #ident "$Id$"
 
 #include <stdio.h>
-#include "prototypes.h"
+
+#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
+#include "prototypes.h"
 /*
  * motd -- output the /etc/motd file
  *

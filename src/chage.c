@@ -25,6 +25,8 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
+
+#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwio.h"
