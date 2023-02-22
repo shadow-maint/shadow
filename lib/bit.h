@@ -39,7 +39,7 @@ bit_ceil_wrapul(unsigned long x)
 	if (x == 0)
 		return 0;
 
-	return bit_ceil_wrapul(x);
+	return bit_ceilul(x);
 }
 
 /* stdc_leading_zerosul(3) */
