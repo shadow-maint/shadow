@@ -31,6 +31,8 @@ jobs:
         sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
         export DEBIAN_PRIORITY=critical
         export DEBIAN_FRONTEND=noninteractive
+        # let's try to work around upgrade breakage in a pkg we don't care about
+        sudo apt-mark hold grub-efi-amd64-bin grub-efi-amd64-signed
         sudo apt-get update
         sudo apt-get -y dist-upgrade
         sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev pkgconf
