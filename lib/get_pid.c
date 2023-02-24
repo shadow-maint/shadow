@@ -41,6 +41,8 @@ int get_pidfd_from_fd(const char *pidfdstr)
 {
 	long long int val;
 	char *endptr;
+	struct stat st;
+	dev_t proc_st_dev, proc_st_rdev;
 
 	errno = 0;
 	val = strtoll (pidfdstr, &endptr, 10);
@@ -48,6 +50,21 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
+		return -1;
+	}
+
+	if (stat("/proc/self/uid_map", &st) < 0) {
+		return -1;
+	}
+
+	proc_st_dev = st.st_dev;
+	proc_st_rdev = st.st_rdev;
+
+	if (fstat(proc_dir_fd, &st) < 0) {
+		return -1;
+	}
+
+	if (st.st_dev != proc_st_dev || st.st_rdev != proc_st_rdev) {
 		return -1;
 	}
 
