@@ -362,7 +362,7 @@ msgstr "%s：不能获得唯一的从属GID范围\n"
 msgid ""
 "%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
 "SUB_UID_COUNT (%lu)\n"
-msgstr "%s：无效的配置：SYS_UID_MIN (%lu), SUB_UID_MAX (%lu), SUB_UID_COUNT (%lu)\n "
+msgstr "%s：无效的配置：SYS_UID_MIN (%lu), SUB_UID_MAX (%lu), SUB_UID_COUNT (%lu)\n"
 
 #, c-format
 #| msgid "%s: can't find subordinate user range\n"
@@ -418,7 +418,7 @@ msgstr "%s：指定的映射文件“%s无效”\n"
 
 #, c-format
 msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
-msgstr "%s：无法执行prctl(PR_SET_KEEPCAPS)"
+msgstr "%s：无法执行prctl(PR_SET_KEEPCAPS)\n"
 
 #, c-format
 #| msgid "Could not set name for %s\n"
@@ -596,7 +596,7 @@ msgstr "%s：用户 %s 目前已登录\n"
 #, c-format
 #| msgid "%s: user %s is currently logged in\n"
 msgid "%s: user %s is currently used by process %d\n"
-msgstr "%s：用户 %s 当前被进程使用\n"
+msgstr "%s：用户 %s 当前被进程使用 %d\n"
 
 msgid "Unable to determine your tty name."
 msgstr "无法确定您的 tty 终端名。"
@@ -1484,7 +1484,7 @@ msgstr "  -u, --user LOGIN              打印 LOGIN 用户的最近登录记录
 #, c-format
 #| msgid "Username                Port     Latest"
 msgid "Username         Port     From%*sLatest\n"
-msgstr "用户名                  端口     从最近的%*s"
+msgstr "用户名                  端口     从最近的%*s\n"
 
 msgid "Username                Port     Latest"
 msgstr "用户名                  端口     最后登录时间"
@@ -2411,9 +2411,8 @@ msgid "%s: failed to close the lastlog file for UID %lu: %s\n"
 msgstr "%s：打开 UID %lu 的最近登录文件失败：%s\n"
 
 #, c-format
-#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
-msgstr "%s：重置 UID %lu 的记录认证失败条目失败：%s\n"
+msgstr "%s：重置 的记录认证失败条目失败：%s\n"
 
 #, c-format
 msgid "%s: failed to prepare the new %s entry\n"
@@ -2422,7 +2421,7 @@ msgstr "%s：准备新 %s 条目失败\n"
 #, c-format
 #| msgid "%s: error updating files\n"
 msgid "%s: error while duplicating string %s\n"
-msgstr "%s：复制字符串时出错\n"
+msgstr "%s：复制字符串时出错 %s\n"
 
 #, c-format
 #| msgid "%s: cannot create directory %s\n"
