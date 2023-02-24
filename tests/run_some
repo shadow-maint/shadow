@@ -18,7 +18,7 @@ run_test()
 {
 	[ -f RUN_TEST.STOP ] && exit 1
 
-	if $1 > $1.log
+	if $1 > $1.log 2>&1
 	then
 		succeeded=$((succeeded+1))
 		echo -n "+"
