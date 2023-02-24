@@ -35,6 +35,7 @@ int get_pid (const char *pidstr, pid_t *pid)
 /*
  * If use passed in fd:4 as an argument, then return the
  * value '4', the fd to use.
+ * On error, return -1.
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
@@ -47,7 +48,7 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
-		return 0;
+		return -1;
 	}
 
 	return (int)val;
