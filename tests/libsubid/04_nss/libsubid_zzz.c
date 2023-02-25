@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <subid.h>
 #include <string.h>
+#include "alloc.h"
 
 enum subid_status shadow_subid_has_any_range(const char *owner, enum subid_type t, bool *result)
 {
