@@ -51,7 +51,7 @@ test "status" != 0
 echo "OK"
 
 echo -n "Check that there were a failure message... "
-grep -q 'newuidmap: Target process [0-9]* is owned by a different' /tmp/test-uidmap/newuidmap.err
+grep -q 'newuidmap: Target process is owned by a different' /tmp/test-uidmap/newuidmap.err
 echo "error message OK."
 log_status "$0" "SUCCESS"
 
