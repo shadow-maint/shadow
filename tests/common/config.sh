@@ -21,6 +21,13 @@ save_config ()
 		mkdir -p "tmp/$(dirname "$file")"
 		[ -f "/$file" ] && cp -dp "/$file" "tmp/$file" || true
 	done
+	# remove some things which can mess up PATH for some of our tests
+	# on github runners
+	mkdir -p "tmp/root"
+	cp -dp /root/.bashrc tmp/root/.bashrc
+	cp -dp /root/.profile tmp/root/.profile
+	sed -i '/pipx/d' /root/.bashrc /root/.profile
+	sed -i '/etc\/skel\/.cargo\/env/d' /root/.bashrc /root/.profile
 }
 
 # Copy the config files from config to the system
