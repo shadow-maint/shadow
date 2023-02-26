@@ -3,10 +3,10 @@
 set -e
 
 build_path=$(pwd)
-while [ "${build_path}" != "/" -a ! -d "${build_path}/.git" ]; do
+while [ "${build_path}" != "/" -a ! -e "${build_path}/.git" ]; do
 	build_path=$(dirname ${build_path})
 done
-if [ ! -d "${build_path}/.git" ]; then
+if [ ! -e "${build_path}/.git" ]; then
 	echo "Not inside git directory" 1>&2
 	exit 1
 fi
