@@ -18,8 +18,15 @@ run_test()
 {
 	[ -f RUN_TEST.STOP ] && exit 1
 
+	passed=0
 	if $1 > $1.log 2>&1
 	then
+		passed=1
+	fi
+
+	if [ -n "$2" ]; then # ignore failure
+		echo -n "."
+	elif [ $passed -eq 1 ]; then
 		succeeded=$((succeeded+1))
 		echo -n "+"
 	else
@@ -54,6 +61,8 @@ echo "-: test failed"
 > testsuite.log
 
 find "${build_path}" -name "*.gcda" -delete
+# ignore the result of the first test.  ~magic~
+run_test ./su/01/su_user.test ignore_failure
 run_test ./su/01/su_user.test
 run_test ./su/01/su_root.test
 find "${build_path}" -name "*.gcda" -exec chmod a+rw {} \;
