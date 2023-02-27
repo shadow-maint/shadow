@@ -54,8 +54,8 @@ echo "-: test failed"
 > testsuite.log
 
 find "${build_path}" -name "*.gcda" -delete
-run_test ./su/01/su_root.test
 run_test ./su/01/su_user.test
+run_test ./su/01/su_root.test
 find "${build_path}" -name "*.gcda" -exec chmod a+rw {} \;
 run_test ./su/02/env_FOO-options_--login
 run_test ./su/02/env_FOO-options_--login_bash
