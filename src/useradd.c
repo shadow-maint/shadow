@@ -2077,7 +2077,7 @@ static void faillog_reset (uid_t uid)
 		         Prog, (unsigned long) uid, strerror (errno));
 		SYSLOG ((LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid));
 	}
-	if (close (fd) != 0) {
+	if (close (fd) != 0 && errno != EINTR) {
 		fprintf (stderr,
 		         _("%s: failed to close the faillog file for UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
@@ -2122,7 +2122,7 @@ static void lastlog_reset (uid_t uid)
 		SYSLOG ((LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid));
 		/* continue */
 	}
-	if (close (fd) != 0) {
+	if (close (fd) != 0 && errno != EINTR) {
 		fprintf (stderr,
 		         _("%s: failed to close the lastlog file for UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
@@ -2473,8 +2473,12 @@ static void create_mail (void)
 			perror (_("Setting mailbox file permissions"));
 		}
 
-		fsync (fd);
-		close (fd);
+		if (fsync (fd) != 0) {
+			perror (_("Synchronize mailbox file"));
+		}
+		if (close (fd) != 0 && errno != EINTR) {
+			perror (_("Closing mailbox file"));
+		}
 #ifdef WITH_SELINUX
 		/* Reset SELinux to create files with default contexts */
 		if (reset_selinux_file_context () != 0) {

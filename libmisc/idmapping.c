@@ -220,6 +220,10 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 			log_get_progname(), map_file, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
-	close(fd);
+	if (close(fd) != 0 && errno != EINTR) {
+		fprintf(log_get_logfd(), _("%s: closing %s failed: %s\n"),
+			log_get_progname(), map_file, strerror(errno));
+		exit(EXIT_FAILURE);
+	}
 	free(buf);
 }

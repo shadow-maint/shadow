@@ -860,7 +860,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 	}
 
 	(void) close (ifd);
-	if (close (ofd) != 0) {
+	if (close (ofd) != 0 && errno != EINTR) {
 		return -1;
 	}
 
