@@ -164,9 +164,9 @@ static void kill_child (int unused(s))
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);
-		(void) write (STDERR_FILENO, kill_msg, strlen (kill_msg));
+		(void) write_full (STDERR_FILENO, kill_msg, strlen (kill_msg));
 	} else {
-		(void) write (STDERR_FILENO, wait_msg, strlen (wait_msg));
+		(void) write_full (STDERR_FILENO, wait_msg, strlen (wait_msg));
 	}
 	_exit (255);
 }
