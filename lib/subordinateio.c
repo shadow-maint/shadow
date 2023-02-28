@@ -352,14 +352,17 @@ void free_subordinate_ranges(struct subordinate_range **ranges, int count)
  */
 static int subordinate_range_cmp (const void *p1, const void *p2)
 {
-	struct subordinate_range *range1, *range2;
+	const struct commonio_entry *const *ce1;
+	const struct commonio_entry *const *ce2;
+	const struct subordinate_range *range1, *range2;
 
-
-	range1 = (*(struct commonio_entry **) p1)->eptr;
+	ce1 = p1;
+	range1 = (*ce1)->eptr;
 	if (range1 == NULL)
 		return 1;
 
-	range2 = (*(struct commonio_entry **) p2)->eptr;
+	ce2 = p2;
+	range2 = (*ce2)->eptr;
 	if (range2 == NULL)
 		return -1;
 

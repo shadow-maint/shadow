@@ -182,15 +182,23 @@ struct commonio_db *__pw_get_db (void)
 
 static int pw_cmp (const void *p1, const void *p2)
 {
+	const struct commonio_entry *const *ce1;
+	const struct commonio_entry *const *ce2;
+	const struct passwd *pw1, *pw2;
 	uid_t u1, u2;
 
-	if ((*(struct commonio_entry **) p1)->eptr == NULL)
+	ce1 = p1;
+	pw1 = (*ce1)->eptr;
+	if (pw1 == NULL)
 		return 1;
-	if ((*(struct commonio_entry **) p2)->eptr == NULL)
+
+	ce2 = p2;
+	pw2 = (*ce2)->eptr;
+	if (pw2 == NULL)
 		return -1;
 
-	u1 = ((struct passwd *) (*(struct commonio_entry **) p1)->eptr)->pw_uid;
-	u2 = ((struct passwd *) (*(struct commonio_entry **) p2)->eptr)->pw_uid;
+	u1 = pw1->pw_uid;
+	u2 = pw2->pw_uid;
 
 	if (u1 < u2)
 		return -1;
