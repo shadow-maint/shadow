@@ -566,19 +566,21 @@ shadowtcb_status shadowtcb_create (const char *name, uid_t uid)
 		         shadow_progname, shadow, strerror (errno));
 		goto out_free;
 	}
-	close (fd);
-	if (chown (shadow, 0, authgid) != 0) {
+	if (fchown (fd, 0, authgid) != 0) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot change owner of %s: %s\n"),
 		         shadow_progname, shadow, strerror (errno));
+		close (fd);
 		goto out_free;
 	}
-	if (chmod (shadow, (mode_t) ((authgid == shadowgid) ? 0600 : 0640)) != 0) {
+	if (fchmod (fd, (mode_t) ((authgid == shadowgid) ? 0600 : 0640)) != 0) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot change mode of %s: %s\n"),
 		         shadow_progname, shadow, strerror (errno));
+		close (fd);
 		goto out_free;
 	}
+	close (fd);
 	if (chown (dir, 0, authgid) != 0) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot change owner of %s: %s\n"),
