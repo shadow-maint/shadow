@@ -20,13 +20,11 @@
 #include "defines.h"
 
 
-#define ALLOCARRAY(n, type)    ((type *) alloca(sizeof(type) * (n)))
 #define CALLOC(n, type)        ((type *) calloc(n, sizeof(type)))
 #define XCALLOC(n, type)       ((type *) xcalloc(n, sizeof(type)))
 #define MALLOCARRAY(n, type)   ((type *) mallocarray(n, sizeof(type)))
 #define XMALLOCARRAY(n, type)  ((type *) xmallocarray(n, sizeof(type)))
 
-#define ALLOCA(type)           ALLOCARRAY(1, type)
 #define MALLOC(type)           MALLOCARRAY(1, type)
 #define XMALLOC(type)          XMALLOCARRAY(1, type)
 #define REALLOC(ptr, type)     REALLOCARRAY(ptr, 1, type)

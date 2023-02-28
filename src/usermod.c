@@ -2025,10 +2025,9 @@ static void move_mailbox (void)
 {
 	const char *maildir;
 	char* mailfile;
-	char* newmailfile;
 	int fd;
 	struct stat st;
-	size_t len;
+	size_t size;
 
 	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
@@ -2039,8 +2038,8 @@ static void move_mailbox (void)
 	if (NULL == maildir) {
 		return;
 	}
-	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 3;
-	mailfile = ALLOCARRAY (len, char);
+	size = strlen (prefix) + strlen (maildir) + strlen (user_name) + 3;
+	mailfile = XMALLOCARRAY (size, char);
 
 	/*
 	 * O_NONBLOCK is to make sure open won't hang on mandatory locks.
@@ -2049,14 +2048,13 @@ static void move_mailbox (void)
 	 * between stat and chown).  --marekm
 	 */
 	if (prefix[0]) {
-		(void) snprintf (mailfile, len, "%s/%s/%s",
+		(void) snprintf (mailfile, size, "%s/%s/%s",
 	    	             prefix, maildir, user_name);
 	}
 	else {
-		(void) snprintf (mailfile, len, "%s/%s",
+		(void) snprintf (mailfile, size, "%s/%s",
 	    	             maildir, user_name);
 	}
-	mailfile[len-1] = '\0';
 
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
 	if (fd < 0) {
@@ -2064,11 +2062,13 @@ static void move_mailbox (void)
 		if (errno != ENOENT) {
 			perror (mailfile);
 		}
+		free(mailfile);
 		return;
 	}
 	if (fstat (fd, &st) < 0) {
 		perror ("fstat");
 		(void) close (fd);
+		free(mailfile);
 		return;
 	}
 	if (st.st_uid != user_id) {
@@ -2076,6 +2076,7 @@ static void move_mailbox (void)
 		fprintf (stderr, _("%s: warning: %s not owned by %s\n"),
 		         Prog, mailfile, user_name);
 		(void) close (fd);
+		free(mailfile);
 		return;
 	}
 	if (uflg) {
@@ -2094,17 +2095,19 @@ static void move_mailbox (void)
 	(void) close (fd);
 
 	if (lflg) {
-		len = strlen (prefix) + strlen (maildir) + strlen (user_newname) + 3;
-		newmailfile = ALLOCARRAY(len, char);
+		char* newmailfile;
+		size_t newsize;
+
+		newsize = strlen (prefix) + strlen (maildir) + strlen (user_newname) + 3;
+		newmailfile = XMALLOCARRAY(newsize, char);
 		if (prefix[0]) {
-			(void) snprintf (newmailfile, len, "%s/%s/%s",
+			(void) snprintf (newmailfile, newsize, "%s/%s/%s",
 			                 prefix, maildir, user_newname);
 		}
 		else {
-			(void) snprintf (newmailfile, len, "%s/%s",
+			(void) snprintf (newmailfile, newsize, "%s/%s",
 			                 maildir, user_newname);
 		}
-		newmailfile[len - 1] = '\0';
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {
 			perror (_("failed to rename mailbox"));
@@ -2115,8 +2118,12 @@ static void move_mailbox (void)
 			              "changing mail file name",
 			              user_newname, user_newid, 1);
 		}
+
+		free(newmailfile);
 #endif
 	}
+
+	free(mailfile);
 }
 #endif
 
