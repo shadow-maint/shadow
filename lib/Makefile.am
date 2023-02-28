@@ -66,7 +66,8 @@ libshadow_la_SOURCES = \
 	shadowio.c \
 	shadowio.h \
 	shadowmem.c \
-	spawn.c
+	spawn.c \
+	write_full.c
 
 if WITH_TCB
 libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h

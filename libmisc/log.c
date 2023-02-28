@@ -82,7 +82,7 @@ void dolastlog (
 	strncpy (newlog.ll_host, host, sizeof (newlog.ll_host) - 1);
 #endif
 	if (   (lseek (fd, offset, SEEK_SET) != offset)
-	    || (write (fd, &newlog, sizeof newlog) != (ssize_t) sizeof newlog)
+	    || (write_full (fd, &newlog, sizeof newlog) != (ssize_t) sizeof newlog)
 	    || (close (fd) != 0)) {
 		SYSLOG ((LOG_WARN,
 		         "Can't write lastlog entry for UID %lu in %s.",

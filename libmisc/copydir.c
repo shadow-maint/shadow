@@ -741,42 +741,6 @@ static int copy_special (const struct path_info *src, const struct path_info *ds
 }
 
 /*
- * full_write - write entire buffer
- *
- * Write up to count bytes from the buffer starting at buf to the
- * file referred to by the file descriptor fd.
- * Retry in case of a short write.
- *
- * Returns the number of bytes written on success, -1 on error.
- */
-static ssize_t full_write(int fd, const void *buf, size_t count) {
-	ssize_t written = 0;
-
-	while (count > 0) {
-		ssize_t res;
-
-		res = write(fd, buf, count);
-		if (res < 0) {
-			if (errno == EINTR) {
-				continue;
-			}
-
-			return res;
-		}
-
-		if (res == 0) {
-			break;
-		}
-
-		written += res;
-		buf = (const unsigned char*)buf + res;
-		count -= res;
-	}
-
-	return written;
-}
-
-/*
  * copy_file - copy a file
  *
  *	Copy a file from src to dst.
@@ -852,7 +816,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 			break;
 		}
 
-		if (full_write (ofd, buf, cnt) < 0) {
+		if (write_full (ofd, buf, cnt) < 0) {
 			(void) close (ofd);
 			(void) close (ifd);
 			return -1;
