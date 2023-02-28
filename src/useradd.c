@@ -2435,6 +2435,7 @@ static void create_mail (void)
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
 		const char *spool;
 		char *file;
+		size_t size;
 		int fd;
 		struct group *gr;
 		gid_t gid;
@@ -2449,7 +2450,8 @@ static void create_mail (void)
 		if (NULL == spool) {
 			return;
 		}
-		file = ALLOCARRAY (strlen (prefix) + strlen (spool) + strlen (user_name) + 3, char);
+		size = strlen(prefix) + strlen(spool) + strlen(user_name) + 3;
+		file = XMALLOCARRAY(size, char);
 		if (prefix[0])
 			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
 		else
@@ -2465,6 +2467,8 @@ static void create_mail (void)
 #endif
 
 		fd = open (file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);
+		free(file);
+
 		if (fd < 0) {
 			perror (_("Creating mailbox file"));
 			return;
