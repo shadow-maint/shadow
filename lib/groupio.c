@@ -210,17 +210,21 @@ void __gr_del_entry (const struct commonio_entry *ent)
 
 static int gr_cmp (const void *p1, const void *p2)
 {
+	const struct group *g1, *g2;
 	gid_t u1, u2;
 
-	if ((*(struct commonio_entry **) p1)->eptr == NULL) {
+	g1 = (*(const struct commonio_entry *const *) p1)->eptr;
+	if (g1 == NULL) {
 		return 1;
 	}
-	if ((*(struct commonio_entry **) p2)->eptr == NULL) {
+
+	g2 = (*(const struct commonio_entry *const *) p2)->eptr;
+	if (g2 == NULL) {
 		return -1;
 	}
 
-	u1 = ((struct group *) (*(struct commonio_entry **) p1)->eptr)->gr_gid;
-	u2 = ((struct group *) (*(struct commonio_entry **) p2)->eptr)->gr_gid;
+	u1 = g1->gr_gid;
+	u2 = g2->gr_gid;
 
 	if (u1 < u2) {
 		return -1;
