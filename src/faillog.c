@@ -97,8 +97,11 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		return;
 	}
 
-	offset = (off_t) pw->pw_uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
+	if (__builtin_mul_overflow(pw->pw_uid, sizeof (fl), &offset)) {
+		return;
+	}
+
+	if (statbuf.st_size >= (off_t) sizeof (fl) && offset <= statbuf.st_size - (off_t) sizeof (fl)) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -199,8 +202,11 @@ static bool reset_one (uid_t uid)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
+	if (__builtin_mul_overflow(uid, sizeof (fl), &offset)) {
+		return false;
+	}
+
+	if (statbuf.st_size >= (off_t) sizeof (fl) && offset <= statbuf.st_size - (off_t) sizeof (fl)) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -313,8 +319,11 @@ static bool setmax_one (uid_t uid, short max)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
+	if (__builtin_mul_overflow(uid, sizeof (fl), &offset)) {
+		return false;
+	}
+
+	if (statbuf.st_size >= (off_t) sizeof (fl) && offset <= statbuf.st_size - (off_t) sizeof (fl)) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
@@ -430,8 +439,11 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
+	if (__builtin_mul_overflow(uid, sizeof (fl), &offset)) {
+		return false;
+	}
+
+	if (statbuf.st_size >= (off_t) sizeof (fl) && offset <= statbuf.st_size - (off_t) sizeof (fl)) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (fail, offset, SEEK_SET);
 		assert (0 == err);
