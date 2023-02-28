@@ -18,6 +18,7 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "failure.h"
+#include "prototypes.h"
 #define	YEAR	(365L*DAY)
 /*
  * failure - make failure entry
@@ -86,7 +87,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+	    || (write_full (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
 		goto err_write;
 	}
 
@@ -198,7 +199,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 		fail.fail_cnt = 0;
 
 		if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-		    || (write (fd, &fail, sizeof fail) != (ssize_t) sizeof fail)) {
+		    || (write_full (fd, &fail, sizeof fail) != (ssize_t) sizeof fail)) {
 			goto err_write;
 		}
 
@@ -303,7 +304,7 @@ void failtmp (const char *username, const struct utmp *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (   (write (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)) {
+	if (   (write_full (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)) {
 		goto err_write;
 	}
 

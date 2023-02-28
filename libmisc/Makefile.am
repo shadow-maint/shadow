@@ -74,6 +74,7 @@ libmisc_la_SOURCES = \
 	user_busy.c \
 	utmp.c \
 	valid.c \
+	write_full.c \
 	xgetpwnam.c \
 	xgetpwuid.c \
 	xgetgrnam.c \

@@ -114,7 +114,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 
 	fd = open (filename, O_APPEND | O_WRONLY, 0);
 	if (fd >= 0) {
-		write (fd, ut, sizeof (*ut));
+		write_full (fd, ut, sizeof (*ut));
 		close (fd);
 	}
 }

@@ -479,6 +479,9 @@ extern int setutmp (struct utmp *ut);
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
 
+/* write_full.c */
+extern ssize_t write_full(int fd, const void *buf, size_t count);
+
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);
 /* xgetpwuid.c */

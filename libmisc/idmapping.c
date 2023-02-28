@@ -215,7 +215,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 			log_get_progname(), map_file, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
-	if (write(fd, buf, pos - buf) != (pos - buf)) {
+	if (write_full(fd, buf, pos - buf) != (pos - buf)) {
 		fprintf(log_get_logfd(), _("%s: write to %s failed: %s\n"),
 			log_get_progname(), map_file, strerror(errno));
 		exit(EXIT_FAILURE);
