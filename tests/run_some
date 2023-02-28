@@ -25,14 +25,14 @@ run_test()
 	fi
 
 	if [ -n "$2" ]; then # ignore failure
-		echo -n "."
+		printf '.'
 	elif [ $passed -eq 1 ]; then
 		succeeded=$((succeeded+1))
-		echo -n "+"
+		printf '+'
 	else
 		failed=$((failed+1))
 		failed_tests="$failed_tests $1"
-		echo -n "-"
+		printf '-'
 	fi
 	cat $1.log >> testsuite.log
 	[ -f /etc/passwd.lock ] && echo $1 /etc/passwd.lock || true
