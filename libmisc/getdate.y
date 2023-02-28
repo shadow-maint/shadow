@@ -12,9 +12,6 @@
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
-# ifdef FORCE_ALLOCA_H
-#  include <alloca.h>
-# endif
 #endif
 
 /* Since the code of getdate.y is not included in the Emacs executable
