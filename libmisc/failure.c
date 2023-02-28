@@ -42,7 +42,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (fd < 0) {
 		SYSLOG ((LOG_WARN,
-		         "Can't write faillog entry for UID %lu in %s.",
+		         "Can't write faillog entry for UID %lu to %s: %m",
 		         (unsigned long) uid, FAILLOG_FILE));
 		return;
 	}
@@ -158,8 +158,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 	fd = open (FAILLOG_FILE, failed?O_RDONLY:O_RDWR);
 	if (fd < 0) {
 		SYSLOG ((LOG_WARN,
-		         "Can't open the faillog file (%s) to check UID %lu. "
-		         "User access authorized.",
+		         "Can't open the faillog file (%s) to check UID %lu: %m",
 		         FAILLOG_FILE, (unsigned long) uid));
 		return 1;
 	}
@@ -295,7 +294,7 @@ void failtmp (const char *username, const struct utmp *failent)
 	fd = open (ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
 		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
+		         "Can't append failure of user %s to %s: %m",
 		         username, ftmp));
 		return;
 	}
