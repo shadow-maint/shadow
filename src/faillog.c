@@ -84,11 +84,53 @@ usage (int status)
 	exit (status);
 }
 
+/*
+ * Looks up the offset in the faillog file for the given uid.
+ * Returns -1 on error.
+ */
+static off_t lookup_faillog(struct faillog *fl, uid_t uid)
+{
+	off_t offset, size;
+
+	/* Ensure multiplication does not overflow and retrieving a wrong entry */
+	if (__builtin_mul_overflow(uid, sizeof(*fl), &offset)) {
+		fprintf(stderr,
+		        _("%s: Failed to get the entry for UID %lu\n"),
+		        Prog, (unsigned long int)uid);
+		return -1;
+	}
+
+	if (!__builtin_add_overflow(offset, sizeof(*fl), &size)
+	    && size <= statbuf.st_size) {
+		/* fseeko errors are not really relevant for us. */
+		int err = fseeko(fail, offset, SEEK_SET);
+		assert(0 == err);
+		/* faillog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread(fl, sizeof(*fl), 1, fail) != 1) {
+			fprintf(stderr,
+			        _("%s: Failed to get the entry for UID %lu\n"),
+			        Prog, (unsigned long int)uid);
+			return -1;
+		}
+	} else {
+		/* Outsize of the faillog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse faillog file).
+		 */
+		memzero(fl, sizeof(*fl));
+	}
+
+	return offset;
+}
+
 static void print_one (/*@null@*/const struct passwd *pw, bool force)
 {
 	static bool once = false;
 	struct tm *tm;
-	off_t offset;
 	struct faillog fl;
 	time_t now;
 	char *cp;
@@ -98,28 +140,8 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		return;
 	}
 
-	offset = (off_t) pw->pw_uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
-		/* fseeko errors are not really relevant for us. */
-		int err = fseeko (fail, offset, SEEK_SET);
-		assert (0 == err);
-		/* faillog is a sparse file. Even if no entries were
-		 * entered for this user, which should be able to get the
-		 * empty entry in this case.
-		 */
-		if (fread (&fl, sizeof (fl), 1, fail) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to get the entry for UID %lu\n"),
-			         Prog, (unsigned long int)pw->pw_uid);
-			return;
-		}
-	} else {
-		/* Outsize of the faillog file.
-		 * Behave as if there were a missing entry (same behavior
-		 * as if we were reading an non existing entry in the
-		 * sparse faillog file).
-		 */
-		memzero (&fl, sizeof (fl));
+	if (lookup_faillog(&fl, pw->pw_uid) < 0) {
+		return;
 	}
 
 	/* Nothing to report */
@@ -200,28 +222,10 @@ static bool reset_one (uid_t uid)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
-		/* fseeko errors are not really relevant for us. */
-		int err = fseeko (fail, offset, SEEK_SET);
-		assert (0 == err);
-		/* faillog is a sparse file. Even if no entries were
-		 * entered for this user, which should be able to get the
-		 * empty entry in this case.
-		 */
-		if (fread (&fl, sizeof (fl), 1, fail) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to get the entry for UID %lu\n"),
-			         Prog, (unsigned long int)uid);
-			return true;
-		}
-	} else {
-		/* Outsize of the faillog file.
-		 * Behave as if there were a missing entry (same behavior
-		 * as if we were reading an non existing entry in the
-		 * sparse faillog file).
-		 */
-		memzero (&fl, sizeof (fl));
+	offset = lookup_faillog(&fl, uid);
+	if (offset < 0) {
+		/* failure */
+		return true;
 	}
 
 	if (0 == fl.fail_cnt) {
@@ -314,28 +318,9 @@ static bool setmax_one (uid_t uid, short max)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
-		/* fseeko errors are not really relevant for us. */
-		int err = fseeko (fail, offset, SEEK_SET);
-		assert (0 == err);
-		/* faillog is a sparse file. Even if no entries were
-		 * entered for this user, which should be able to get the
-		 * empty entry in this case.
-		 */
-		if (fread (&fl, sizeof (fl), 1, fail) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to get the entry for UID %lu\n"),
-			         Prog, (unsigned long int)uid);
-			return true;
-		}
-	} else {
-		/* Outsize of the faillog file.
-		 * Behave as if there were a missing entry (same behavior
-		 * as if we were reading an non existing entry in the
-		 * sparse faillog file).
-		 */
-		memzero (&fl, sizeof (fl));
+	offset = lookup_faillog(&fl, uid);
+	if (offset < 0) {
+		return true;
 	}
 
 	if (max == fl.fail_max) {
@@ -431,28 +416,9 @@ static bool set_locktime_one (uid_t uid, long locktime)
 	off_t offset;
 	struct faillog fl;
 
-	offset = (off_t) uid * sizeof (fl);
-	if (offset + sizeof (fl) <= statbuf.st_size) {
-		/* fseeko errors are not really relevant for us. */
-		int err = fseeko (fail, offset, SEEK_SET);
-		assert (0 == err);
-		/* faillog is a sparse file. Even if no entries were
-		 * entered for this user, which should be able to get the
-		 * empty entry in this case.
-		 */
-		if (fread (&fl, sizeof (fl), 1, fail) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to get the entry for UID %lu\n"),
-			         Prog, (unsigned long int)uid);
-			return true;
-		}
-	} else {
-		/* Outsize of the faillog file.
-		 * Behave as if there were a missing entry (same behavior
-		 * as if we were reading an non existing entry in the
-		 * sparse faillog file).
-		 */
-		memzero (&fl, sizeof (fl));
+	offset = lookup_faillog(&fl, uid);
+	if (offset < 0) {
+		return true;
 	}
 
 	if (locktime == fl.fail_locktime) {
