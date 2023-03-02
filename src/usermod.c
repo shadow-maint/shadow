@@ -2048,7 +2048,7 @@ static void move_mailbox (void)
 	if (NULL == maildir) {
 		return;
 	}
-	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
+	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 3;
 	mailfile = ALLOCARRAY (len, char);
 
 	/*
@@ -2103,7 +2103,7 @@ static void move_mailbox (void)
 	(void) close (fd);
 
 	if (lflg) {
-		len = strlen (prefix) + strlen (maildir) + strlen (user_newname) + 2;
+		len = strlen (prefix) + strlen (maildir) + strlen (user_newname) + 3;
 		newmailfile = ALLOCARRAY(len, char);
 		if (prefix[0]) {
 			(void) snprintf (newmailfile, len, "%s/%s/%s",
