@@ -452,6 +452,12 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+#ifdef WITH_SELINUX
+	if (check_selinux_permit ("passwd") != 0) {
+		return (E_NOPERM);
+	}
+#endif				/* WITH_SELINUX */
+
 	process_flags (argc, argv);
 
 	salt = get_salt();
