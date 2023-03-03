@@ -430,8 +430,6 @@ static char *new_pw_passwd (char *pw_pass)
 		strcat (buf, pw_pass);
 		pw_pass = buf;
 	} else if (Uflg && pw_pass[0] == '!') {
-		char *s;
-
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
 			         _("%s: unlocking the user's password would result in a passwordless account.\n"
@@ -445,11 +443,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "updating password", user_newname, user_newid, 0);
 #endif
 		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
-		s = pw_pass;
-		while ('\0' != *s) {
-			*s = *(s + 1);
-			s++;
-		}
+		memmove(pw_pass, pw_pass + 1, strlen(pw_pass));
 	} else if (pflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
