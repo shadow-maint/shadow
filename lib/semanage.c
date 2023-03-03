@@ -22,10 +22,6 @@
 
 #include "shadowlog_internal.h"
 
-#ifndef DEFAULT_SERANGE
-#define DEFAULT_SERANGE "s0"
-#endif
-
 
 format_attr(printf, 3, 4)
 static void semanage_error_callback (unused void *varg,
@@ -122,16 +118,6 @@ static int semanage_user_mod (semanage_handle_t *handle,
 		goto done;
 	}
 
-	if (semanage_mls_enabled(handle)) {
-		ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
-		if (ret != 0) {
-			fprintf (shadow_logfd,
-			         _("Could not set serange for %s\n"), login_name);
-			ret = 1;
-			goto done;
-		}
-	}
-
 	ret = semanage_seuser_set_sename (handle, seuser, seuser_name);
 	if (ret != 0) {
 		fprintf (shadow_logfd,
@@ -179,16 +165,6 @@ static int semanage_user_add (semanage_handle_t *handle,
 		fprintf (shadow_logfd, _("Could not set name for %s\n"), login_name);
 		ret = 1;
 		goto done;
-	}
-
-	if (semanage_mls_enabled(handle)) {
-		ret = semanage_seuser_set_mlsrange (handle, seuser, DEFAULT_SERANGE);
-		if (ret != 0) {
-			fprintf (shadow_logfd,
-			         _("Could not set serange for %s\n"), login_name);
-			ret = 1;
-			goto done;
-		}
 	}
 
 	ret = semanage_seuser_set_sename (handle, seuser, seuser_name);
