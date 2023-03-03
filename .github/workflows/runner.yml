@@ -51,3 +51,26 @@ jobs:
         cd tests
         sudo ./run_some
         cat testsuite.log
+
+  container-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [alpine, debian, fedora]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build container
+      run: |
+        docker buildx build -f ./share/containers/${{ matrix.os }}.dockerfile . --output build-out
+
+    - name: Store artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.os }}-build
+        path: |
+          ./build-out/config.log
+          ./build-out/config.h
+        if-no-files-found: ignore
