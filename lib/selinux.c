@@ -188,7 +188,7 @@ int check_selinux_permit (const char *perm_name)
 		return 0;
 	}
 
-	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) selinux_log_cb);
+	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) { .func_log = selinux_log_cb });
 
 	if (getprevcon_raw (&user_context_raw) != 0) {
 		fprintf (shadow_logfd,
