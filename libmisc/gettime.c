@@ -22,7 +22,7 @@
  * Epoch, 1970-01-01 00:00:00 +0000 (UTC), except that if the SOURCE_DATE_EPOCH
  * environment variable is exported it will use that instead.
  */
-/*@observer@*/time_t gettime ()
+/*@observer@*/time_t gettime (void)
 {
 	char *endptr;
 	char *source_date_epoch;
