@@ -96,7 +96,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		*cp = '\0';
 
 		cp = newf;
-		while (('\0' != *cp) && isspace (*cp)) {
+		while (isspace (*cp)) {
 			cp++;
 		}
 
