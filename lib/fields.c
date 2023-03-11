@@ -91,8 +91,9 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * entering a space.  --marekm
 		 */
 
-		while (--cp >= newf && isspace (*cp));
-		cp++;
+		while (newf < cp && isspace (cp[-1])) {
+			cp--;
+		}
 		*cp = '\0';
 
 		cp = newf;
