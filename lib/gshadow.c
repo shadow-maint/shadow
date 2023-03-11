@@ -128,7 +128,7 @@ void endsgent (void)
 		sgrbuflen = len;
 	}
 
-	strlcpy (sgrbuf, string, len);
+	strcpy (sgrbuf, string);
 
 	cp = strrchr (sgrbuf, '\n');
 	if (NULL != cp) {
