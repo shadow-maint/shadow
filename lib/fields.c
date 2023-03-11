@@ -100,7 +100,6 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 			cp++;
 		}
 
-		strlcpy (buf, cp, maxsize);
+		strcpy (buf, cp);
 	}
 }
-
