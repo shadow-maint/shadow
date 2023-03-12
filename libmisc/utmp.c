@@ -32,7 +32,7 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 {
 	char         full_tty[STRLEN("/dev/") + UT_LINESIZE + 1];
 	/* tmptty shall be bigger than full_tty */
-	static char  tmptty[sizeof (full_tty)+1];
+	static char  tmptty[sizeof(full_tty) + 1];
 
 	full_tty[0] = '\0';
 	if (tty[0] != '/')
@@ -42,17 +42,15 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
-			(void) strlcpy (tmptty, tname, sizeof tmptty);
+			(void) strlcpy (tmptty, tname, sizeof(tmptty));
 	}
 
 	if ('\0' == tmptty[0]) {
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
-	} else if (strncmp (full_tty, tmptty, sizeof (tmptty)) != 0) {
-		return false;
-	} else {
-		return true;
 	}
+
+	return strcmp (full_tty, tmptty) == 0;
 }
 
 /*
