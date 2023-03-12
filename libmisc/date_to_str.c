@@ -33,15 +33,24 @@
 
 #include "prototypes.h"
 
-void date_to_str (size_t size, char buf[size], long date)
+void
+date_to_str(size_t size, char buf[size], long date)
 {
-	time_t t;
+	time_t           t;
+	const struct tm  *tm;
 
 	t = date;
 	if (date < 0) {
-		(void) strlcpy (buf, "never", size);
-	} else {
-		(void) strftime (buf, size, "%Y-%m-%d", gmtime (&t));
-		buf[size - 1] = '\0';
+		(void) strlcpy(buf, "never", size);
+		return;
 	}
+
+	tm = gmtime(&t);
+	if (tm == NULL) {
+		(void) strlcpy(buf, "future", size);
+		return;
+	}
+
+	(void) strftime(buf, size, "%Y-%m-%d", tm);
+	buf[size - 1] = '\0';
 }
