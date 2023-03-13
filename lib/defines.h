@@ -171,6 +171,7 @@ static inline void memzero(void *ptr, size_t size)
 
 #define WIDTHOF(x)   (sizeof(x) * CHAR_BIT)
 #define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
+#define STRLEN(s)    (NITEMS(s) - 1)
 
 /* Copy string pointed by B to array A with size checking.  It was originally
    in lmain.c but is _very_ useful elsewhere.  Some setuid root programs with
