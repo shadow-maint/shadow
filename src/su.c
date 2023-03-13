@@ -658,7 +658,13 @@ static /*@only@*/struct passwd * check_perms (void)
 		SYSLOG ((LOG_INFO,
 		         "Change user from '%s' to '%s' as requested by PAM",
 		         name, tmp_name));
-		strlcpy (name, tmp_name, sizeof(name));
+		if (strlcpy (name, tmp_name, sizeof(name)) >= sizeof(name)) {
+			fprintf (stderr, _("Overlong user name '%s'\n"),
+			         tmp_name);
+			SYSLOG ((LOG_NOTICE, "Overlong user name '%s'",
+			         tmp_name));
+			su_failure (caller_tty, true);
+		}
 		pw = xgetpwnam (name);
 		if (NULL == pw) {
 			(void) fprintf (stderr,
