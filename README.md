@@ -31,6 +31,11 @@ There are several ways to contact us:
   https://alioth-lists-archive.debian.net/pipermail/pkg-shadow-commits/),
   only used for historical purposes
 
+## Contributions
+
+Contributions are welcome. Follow the
+[guidelines](doc/contributions/introduction.md) before posting any patches.
+
 ## Authors and maintainers
 Authors and maintainers are listed in [AUTHORS.md](
 https://github.com/shadow-maint/shadow/blob/master/AUTHORS.md).
