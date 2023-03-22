@@ -21,6 +21,10 @@
 #include "prototypes.h"
 /*@observer@*/const char *Basename (const char *str)
 {
+	if (str == NULL) {
+		abort ();
+	}
+
 	char *cp = strrchr (str, '/');
 
 	return (NULL != cp) ? cp + 1 : str;
