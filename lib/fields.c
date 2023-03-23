@@ -21,9 +21,9 @@
  *
  * The supplied field is scanned for non-printable and other illegal
  * characters.
- *  + -1 is returned if an illegal character is present.
- *  +  1 is returned if no illegal characters are present, but the field
- *       contains a non-printable character.
+ *  + -1 is returned if an illegal or control character is present.
+ *  +  1 is returned if no illegal or control characters are present,
+ *       but the field contains a non-printable character.
  *  +  0 is returned otherwise.
  */
 int valid_field (const char *field, const char *illegal)
@@ -45,10 +45,13 @@ int valid_field (const char *field, const char *illegal)
 	}
 
 	if (0 == err) {
-		/* Search if there are some non-printable characters */
+		/* Search if there are non-printable or control characters */
 		for (cp = field; '\0' != *cp; cp++) {
 			if (!isprint (*cp)) {
 				err = 1;
+			}
+			if (!iscntrl (*cp)) {
+				err = -1;
 				break;
 			}
 		}
