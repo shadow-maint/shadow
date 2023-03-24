@@ -94,27 +94,10 @@
       </para>
 
       <para>
-	Then, the password is tested for complexity. As a general guideline,
-	passwords should consist of 6 to 8 characters including one or more
-	characters from each of the following sets:
-      </para>
-
-      <itemizedlist mark='bullet'>
-	<listitem>
-	  <para>lower case alphabetics</para>
-	</listitem>
-	<listitem>
-	  <para>digits 0 thru 9</para>
-	</listitem>
-	<listitem>
-	  <para>punctuation marks</para>
-	</listitem>
-      </itemizedlist>
-
-      <para>
-	Care must be taken not to include the system default erase or kill
-	characters. <command>passwd</command> will reject any password which
-	is not suitably complex.
+	Then, the password is tested for complexity.
+	<command>passwd</command> will reject any password which is not
+	suitably complex.  Care must be taken not to include the system
+	default erase or kill characters.
       </para>
 
     </refsect2>
@@ -137,6 +120,17 @@
 	written down. The password should also not be a proper name, your
 	license number, birth date, or street address. Any of these may be
 	used as guesses to violate system security.
+      </para>
+
+      <para>
+	As a general guideline, passwords should be long and random.  It's
+	fine to use simple character sets, such as passwords consisting
+	only of lowercase letters, if that helps memorizing longer
+	passwords.  For a password consisting only of lowercase English
+	letters randomly chosen, and a length of 32, there are 26^32
+	(approximately 2^150) different possible combinations.  Being an
+	exponential equation, it's apparent that the exponent (the length)
+	is more important than the base (the size of the character set).
       </para>
 
       <para>
@@ -474,6 +468,9 @@
 	<refentrytitle>chpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
+	<refentrytitle>makepasswd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
@@ -487,6 +484,12 @@
       <citerefentry>
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
+    </para>
+
+    <para>
+	The following web page comically (yet correctly) compares the
+	strength of two different methods for choosing a password:
+	"https://xkcd.com/936/"
     </para>
   </refsect1>
 </refentry>
