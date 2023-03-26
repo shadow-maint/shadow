@@ -1072,7 +1072,7 @@ static void process_flags (int argc, char **argv)
 				fflg = true;
 				break;
 			case 'g':
-				grp = getgr_nam_gid (optarg);
+				grp = prefix_getgr_nam_gid (optarg);
 				if (NULL == grp) {
 					fprintf (stderr,
 					         _("%s: group '%s' does not exist\n"),
