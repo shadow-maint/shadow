@@ -34,6 +34,7 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "run_part.h"
 
 /*
  * exit status values
@@ -603,6 +604,11 @@ int main (int argc, char **argv)
 
 	check_perms ();
 
+	if (run_parts ("/etc/shadow-maint/groupadd-pre.d", group_name,
+			"groupadd")) {
+		exit(1);
+	}
+
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
@@ -621,6 +627,11 @@ int main (int argc, char **argv)
 
 	grp_update ();
 	close_files ();
+	if (run_parts ("/etc/shadow-maint/groupadd-post.d", group_name,
+			"groupadd")) {
+		exit(1);
+	}
+
 
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_GROUP);
