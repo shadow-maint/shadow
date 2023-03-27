@@ -32,6 +32,7 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "run_part.h"
 /*
  * Global variables
  */
@@ -461,6 +462,11 @@ int main (int argc, char **argv)
 		group_busy (group_id);
 	}
 
+	if (run_parts ("/etc/shadow-maint/groupdel-pre.d", group_name,
+			"groupdel")) {
+		exit(1);
+	}
+
 	/*
 	 * Do the hard stuff - open the files, delete the group entries,
 	 * then close and update the files.
@@ -470,6 +476,11 @@ int main (int argc, char **argv)
 	grp_update ();
 
 	close_files ();
+
+	if (run_parts ("/etc/shadow-maint/groupdel-post.d", group_name,
+			"groupdel")) {
+		exit(1);
+	}
 
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_GROUP);
