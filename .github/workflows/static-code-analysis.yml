@@ -38,13 +38,11 @@ jobs:
       uses: github/codeql-action/analyze@v2
 
   differential-shellcheck:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
       security-events: write
-      pull-requests: write
 
     steps:
       - name: Checkout repository
