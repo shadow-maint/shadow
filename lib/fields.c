@@ -37,23 +37,19 @@ int valid_field (const char *field, const char *illegal)
 
 	/* For each character of field, search if it appears in the list
 	 * of illegal characters. */
-	for (cp = field; '\0' != *cp; cp++) {
-		if (strchr (illegal, *cp) != NULL) {
-			err = -1;
-			break;
-		}
+	if (illegal && NULL != strpbrk (field, illegal)) {
+		return -1;
 	}
 
-	if (0 == err) {
-		/* Search if there are non-printable or control characters */
-		for (cp = field; '\0' != *cp; cp++) {
-			if (!isprint (*cp)) {
-				err = 1;
-			}
-			if (!iscntrl (*cp)) {
-				err = -1;
-				break;
-			}
+	/* Search if there are non-printable or control characters */
+	for (cp = field; '\0' != *cp; cp++) {
+		unsigned char c = *cp;
+		if (!isprint (c)) {
+			err = 1;
+		}
+		if (iscntrl (c)) {
+			err = -1;
+			break;
 		}
 	}
 
