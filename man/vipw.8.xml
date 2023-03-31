@@ -64,7 +64,7 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>vipw</command> and <command>vigr</command> commands edits
+      The <command>vipw</command> and <command>vigr</command> commands edit
       the files <filename>/etc/passwd</filename> and
       <filename>/etc/group</filename>, respectively. With the
       <option>-s</option> flag, they will edit the shadow versions of those
