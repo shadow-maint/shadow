@@ -97,6 +97,8 @@ static semanage_handle_t *semanage_init (void)
 	return handle;
 
 fail:
+	if (handle)
+		semanage_disconnect (handle);
 	semanage_handle_destroy (handle);
 	return NULL;
 }
@@ -156,7 +158,7 @@ done:
 
 
 static int semanage_user_add (semanage_handle_t *handle,
-                             semanage_seuser_key_t *key,
+                             const semanage_seuser_key_t *key,
                              const char *login_name,
                              const char *seuser_name,
                              const char *serange)
@@ -279,6 +281,8 @@ int set_seuser (const char *login_name, const char *seuser_name, const char *ser
 
 done:
 	semanage_seuser_key_free (key);
+	if (handle)
+		semanage_disconnect (handle);
 	semanage_handle_destroy (handle);
 	return ret;
 }
@@ -353,6 +357,9 @@ int del_seuser (const char *login_name)
 
 	ret = 0;
 done:
+	semanage_seuser_key_free (key);
+	if (handle)
+		semanage_disconnect (handle);
 	semanage_handle_destroy (handle);
 	return ret;
 }
