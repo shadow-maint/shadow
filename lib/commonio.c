@@ -1060,6 +1060,8 @@ int commonio_remove (struct commonio_db *db, const char *name)
 		db->ops->free (p->eptr);
 	}
 
+	free(p);
+
 	return 1;
 }
 
