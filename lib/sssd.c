@@ -4,6 +4,7 @@
 #ifdef USE_SSSD
 
 #include <stdio.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 
@@ -21,10 +22,15 @@ int sssd_flush_cache (int dbflags)
 {
 	int status, code, rv;
 	const char *cmd = "/usr/sbin/sss_cache";
+	struct stat sb;
 	char *sss_cache_args = NULL;
 	const char *spawnedArgs[] = {"sss_cache", NULL, NULL};
 	const char *spawnedEnv[] = {NULL};
 	int i = 0;
+
+	rv = stat(cmd, &sb);
+	if (rv == -1 && errno == ENOENT)
+		return 0;
 
 	sss_cache_args = MALLOCARRAY(4, char);
 	if (sss_cache_args == NULL) {
