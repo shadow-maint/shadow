@@ -100,6 +100,7 @@ static char *user_newhome;
 static char *user_shell;
 #ifdef WITH_SELINUX
 static const char *user_selinux = "";
+static const char *user_selinux_range = NULL;
 #endif				/* WITH_SELINUX */
 static char *user_newshell;
 static long user_expire;
@@ -405,6 +406,7 @@ usage (int status)
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 	(void) fputs (_("  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"), usageout);
+	(void) fputs (_("      --selinux-range SERANGE   new SELinux MLS range for the user account\n"), usageout);
 #endif				/* WITH_SELINUX */
 	(void) fputs ("\n", usageout);
 	exit (status);
@@ -1004,7 +1006,8 @@ static void process_flags (int argc, char **argv)
  			{"del-subgids",  required_argument, NULL, 'W'},
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
-			{"selinux-user", required_argument, NULL, 'Z'},
+			{"selinux-user",  required_argument, NULL, 'Z'},
+			{"selinux-range", required_argument, NULL, 202},
 #endif				/* WITH_SELINUX */
 			{NULL, 0, NULL, '\0'}
 		};
@@ -1214,6 +1217,9 @@ static void process_flags (int argc, char **argv)
 					exit (E_BAD_ARG);
 				}
 				break;
+			case 202:
+				user_selinux_range = optarg;
+				break;
 #endif				/* WITH_SELINUX */
 			default:
 				usage (E_USAGE);
@@ -1353,6 +1359,15 @@ static void process_flags (int argc, char **argv)
 		         Prog, "-m", "-d");
 		usage (E_USAGE);
 	}
+
+#ifdef WITH_SELINUX
+	if (user_selinux_range && !Zflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "--selinux-range", "--selinux-user");
+		usage (E_USAGE);
+	}
+#endif				/* WITH_SELINUX */
 
 	if (user_newid == user_id) {
 		uflg = false;
@@ -2304,7 +2319,7 @@ int main (int argc, char **argv)
 #ifdef WITH_SELINUX
 	if (Zflg) {
 		if ('\0' != *user_selinux) {
-			if (set_seuser (user_name, user_selinux) != 0) {
+			if (set_seuser (user_name, user_selinux, user_selinux_range) != 0) {
 				fprintf (stderr,
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 				         Prog, user_name, user_selinux);

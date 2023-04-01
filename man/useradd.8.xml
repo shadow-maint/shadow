@@ -570,10 +570,28 @@
 	<listitem>
 	  <para>
 	    defines the SELinux user for the new account. Without this
-	    option, a SELinux uses the default user. Note that the
+	    option, SELinux uses the default user. Note that the
 	    shadow system doesn't store the selinux-user, it uses
 	    <citerefentry><refentrytitle>semanage</refentrytitle>
 	    <manvolnum>8</manvolnum></citerefentry> for that.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>--selinux-range</option>&nbsp;<replaceable>SERANGE</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    defines the SELinux MLS range for the new account. Without this
+	    option, SELinux uses the default range. Note that the
+	    shadow system doesn't store the selinux-range, it uses
+	    <citerefentry><refentrytitle>semanage</refentrytitle>
+	    <manvolnum>8</manvolnum></citerefentry> for that.
+	  </para>
+	  <para>
+	    This option is only valid if the <option>-Z</option> (or
+	    <option>--selinux-user</option>) option is specified.
 	  </para>
 	</listitem>
       </varlistentry>

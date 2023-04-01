@@ -385,7 +385,7 @@ extern int check_selinux_permit (const char *perm_name);
 
 /* semanage.c */
 #ifdef WITH_SELINUX
-extern int set_seuser(const char *login_name, const char *seuser_name);
+extern int set_seuser(const char *login_name, const char *seuser_name, const char *serange);
 extern int del_seuser(const char *login_name);
 #endif
 
