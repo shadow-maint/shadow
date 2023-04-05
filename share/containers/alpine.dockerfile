@@ -9,7 +9,8 @@ COPY ./ /usr/local/src/shadow/
 WORKDIR /usr/local/src/shadow/
 
 RUN ./autogen.sh --without-selinux --disable-man --disable-nls --with-yescrypt
-RUN make -j4
+RUN make -kj4 || true
+RUN make
 RUN make install
 
 FROM scratch AS export
