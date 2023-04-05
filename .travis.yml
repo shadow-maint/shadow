@@ -36,7 +36,7 @@ addons:
     notification_email: christian.brauner@ubuntu.com,serge@hallyn.com
 
     build_command_prepend: "./autogen.sh --without-selinux --disable-man"
-    build_command: "make -j4"
+    build_command: "make -kj4 || make"
     branch_pattern: master
 
 script:
