@@ -39,7 +39,7 @@ void mailcheck (void)
 		size_t len = strlen (mailbox) + 5;
 		int wlen;
 
-		newmail = XMALLOCARRAY (len, char);
+		newmail = XMALLOC(len, char);
 		wlen = snprintf (newmail, len, "%s/new", mailbox);
 		assert (wlen == (int) len - 1);
 

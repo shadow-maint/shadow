@@ -20,17 +20,12 @@
 #include "defines.h"
 
 
-#define CALLOC(n, type)        ((type *) calloc(n, sizeof(type)))
-#define XCALLOC(n, type)       ((type *) xcalloc(n, sizeof(type)))
-#define MALLOCARRAY(n, type)   ((type *) mallocarray(n, sizeof(type)))
-#define XMALLOCARRAY(n, type)  ((type *) xmallocarray(n, sizeof(type)))
+#define CALLOC(n, type)   ((type *) calloc(n, sizeof(type)))
+#define XCALLOC(n, type)  ((type *) xcalloc(n, sizeof(type)))
+#define MALLOC(n, type)   ((type *) mallocarray(n, sizeof(type)))
+#define XMALLOC(n, type)  ((type *) xmallocarray(n, sizeof(type)))
 
-#define MALLOC(type)           MALLOCARRAY(1, type)
-#define XMALLOC(type)          XMALLOCARRAY(1, type)
-#define REALLOC(ptr, type)     REALLOCARRAY(ptr, 1, type)
-#define REALLOCF(ptr, type)    REALLOCARRAYF(ptr, 1, type)
-
-#define REALLOCARRAY(ptr, n, type)                                            \
+#define REALLOC(ptr, n, type)                                                 \
 ({                                                                            \
 	__auto_type  p_ = (ptr);                                              \
                                                                               \
@@ -39,7 +34,7 @@
 	(type *) reallocarray(p_, n, sizeof(type));                           \
 })
 
-#define REALLOCARRAYF(ptr, n, type)                                           \
+#define REALLOCF(ptr, n, type)                                                \
 ({                                                                            \
 	__auto_type  p_ = (ptr);                                              \
                                                                               \
@@ -48,7 +43,7 @@
 	(type *) reallocarrayf(p_, n, sizeof(type));                          \
 })
 
-#define XREALLOCARRAY(ptr, n, type)                                           \
+#define XREALLOC(ptr, n, type)                                                \
 ({                                                                            \
 	__auto_type  p_ = (ptr);                                              \
                                                                               \
@@ -113,7 +108,7 @@ reallocarrayf(void *p, size_t nmemb, size_t size)
 inline char *
 xstrdup(const char *str)
 {
-	return strcpy(XMALLOCARRAY(strlen(str) + 1, char), str);
+	return strcpy(XMALLOC(strlen(str) + 1, char), str);
 }
 
 

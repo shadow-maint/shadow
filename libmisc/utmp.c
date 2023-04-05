@@ -92,7 +92,7 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 	}
 
 	if (NULL != ut) {
-		ret = XMALLOC (struct utmp);
+		ret = XMALLOC(1, struct utmp);
 		memcpy (ret, ut, sizeof (*ret));
 	}
 
@@ -157,12 +157,12 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 
 	if (   (NULL != host)
 	    && ('\0' != host[0])) {
-		hostname = XMALLOCARRAY (strlen (host) + 1, char);
+		hostname = XMALLOC(strlen(host) + 1, char);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = XMALLOCARRAY (sizeof (ut->ut_host) + 1, char);
+		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
 		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
 		hostname[sizeof (ut->ut_host)] = '\0';
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */

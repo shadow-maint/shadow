@@ -345,7 +345,7 @@ static int prepend_range(const char *str, struct ulong_range_list_entry **head)
 	if (range.first > range.last)
 		return 0;
 
-	entry = MALLOC(struct ulong_range_list_entry);
+	entry = MALLOC(1, struct ulong_range_list_entry);
 	if (!entry) {
 		fprintf (stderr,
 			_("%s: failed to allocate memory: %s\n"),
@@ -419,7 +419,7 @@ usage (int status)
 static char *new_pw_passwd (char *pw_pass)
 {
 	if (Lflg && ('!' != pw_pass[0])) {
-		char *buf = XMALLOCARRAY (strlen (pw_pass) + 2, char);
+		char *buf = XMALLOC(strlen(pw_pass) + 2, char);
 
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -1260,12 +1260,12 @@ static void process_flags (int argc, char **argv)
 	if (prefix[0]) {
 		size_t len = strlen(prefix) + strlen(user_home) + 2;
 		int wlen;
-		prefix_user_home = XMALLOCARRAY(len, char);
+		prefix_user_home = XMALLOC(len, char);
 		wlen = snprintf(prefix_user_home, len, "%s/%s", prefix, user_home);
 		assert (wlen == (int) len -1);
 		if (user_newhome) {
 			len = strlen(prefix) + strlen(user_newhome) + 2;
-			prefix_user_newhome = XMALLOCARRAY(len, char);
+			prefix_user_newhome = XMALLOC(len, char);
 			wlen = snprintf(prefix_user_newhome, len, "%s/%s", prefix, user_newhome);
 			assert (wlen == (int) len -1);
 		}
@@ -2048,7 +2048,7 @@ static void move_mailbox (void)
 		return;
 	}
 	size = strlen(prefix) + strlen(maildir) + strlen(user_name) + 3;
-	mailfile = XMALLOCARRAY(size, char);
+	mailfile = XMALLOC(size, char);
 
 	/*
 	 * O_NONBLOCK is to make sure open won't hang on mandatory locks.
@@ -2108,7 +2108,7 @@ static void move_mailbox (void)
 		size_t newsize;
 
 		newsize = strlen(prefix) + strlen(maildir) + strlen(user_newname) + 3;
-		newmailfile = XMALLOCARRAY(newsize, char);
+		newmailfile = XMALLOC(newsize, char);
 		if (prefix[0]) {
 			(void) snprintf (newmailfile, newsize, "%s/%s/%s",
 			                 prefix, maildir, user_newname);
@@ -2168,7 +2168,7 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = MALLOCARRAY (sys_ngroups + 1, char *);
+	user_groups = MALLOC(sys_ngroups + 1, char *);
 	user_groups[0] = NULL;
 
 	is_shadow_pwd = spw_file_present ();

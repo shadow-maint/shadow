@@ -448,14 +448,14 @@ void setdef_config_file (const char* file)
 	char* cp;
 
 	len = strlen(file) + strlen(sysconfdir) + 2;
-	cp = MALLOCARRAY(len, char);
+	cp = MALLOC(len, char);
 	if (cp == NULL)
 		exit (13);
 	snprintf(cp, len, "%s/%s", file, sysconfdir);
 	sysconfdir = cp;
 #ifdef VENDORDIR
 	len = strlen(file) + strlen(vendordir) + 2;
-	cp = MALLOCARRAY(len, char);
+	cp = MALLOC(len, char);
 	if (cp == NULL)
 		exit (13);
 	snprintf(cp, len, "%s/%s", file, vendordir);

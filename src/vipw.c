@@ -304,7 +304,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 				continue;
 		}
 
-		buf = MALLOCARRAY(strlen(editor) + strlen(fileedit) + 2, char);
+		buf = MALLOC(strlen(editor) + strlen(fileedit) + 2, char);
 		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
 		          "%s %s", editor, fileedit);
 		status = system (buf);
@@ -420,7 +420,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (stat (file, &st1) != 0) {
 			vipwexit (_("failed to stat edited file"), errno, 1);
 		}
-		to_rename = MALLOCARRAY (strlen (file) + 2, char);
+		to_rename = MALLOC(strlen(file) + 2, char);
 		if (NULL == to_rename) {
 			vipwexit (_("failed to allocate memory"), errno, 1);
 		}

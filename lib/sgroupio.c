@@ -50,7 +50,7 @@
 
 	for (i = 0; NULL != sgent->sg_adm[i]; i++);
 	/*@-mustfreeonly@*/
-	sg->sg_adm = MALLOCARRAY (i + 1, char *);
+	sg->sg_adm = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_adm) {
 		free (sg->sg_passwd);
@@ -75,7 +75,7 @@
 
 	for (i = 0; NULL != sgent->sg_mem[i]; i++);
 	/*@-mustfreeonly@*/
-	sg->sg_mem = MALLOCARRAY (i + 1, char *);
+	sg->sg_mem = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == sg->sg_mem) {
 		for (i = 0; NULL != sg->sg_adm[i]; i++) {

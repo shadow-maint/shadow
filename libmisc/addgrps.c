@@ -48,7 +48,7 @@ int add_groups (const char *list)
 
 	i = 16;
 	for (;;) {
-		grouplist = MALLOCARRAY (i, GETGROUPS_T);
+		grouplist = MALLOC(i, GETGROUPS_T);
 		if (NULL == grouplist) {
 			return -1;
 		}
@@ -90,7 +90,7 @@ int add_groups (const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		grouplist = REALLOCARRAYF(grouplist, (size_t) ngroups + 1, GETGROUPS_T);
+		grouplist = REALLOCF(grouplist, (size_t) ngroups + 1, GETGROUPS_T);
 		if (grouplist == NULL) {
 			return -1;
 		}

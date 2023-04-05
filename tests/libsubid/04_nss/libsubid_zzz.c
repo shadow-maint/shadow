@@ -77,7 +77,7 @@ static uid_t getnamuid(const char *name) {
 }
 
 static int alloc_uid(uid_t **uids, uid_t id) {
-	*uids = MALLOC(uid_t);
+	*uids = MALLOC(1, uid_t);
 	if (!*uids)
 		return -1;
 	*uids[0] = id;
@@ -122,7 +122,7 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 		return SUBID_STATUS_SUCCESS;
 	if (id_type == ID_TYPE_UID && strcmp(owner, "group1") == 0)
 		return SUBID_STATUS_SUCCESS;
-	ranges = MALLOC(struct subid_range);
+	ranges = MALLOC(1, struct subid_range);
 	if (!ranges)
 		return SUBID_STATUS_ERROR;
 	if (strcmp(owner, "user1") == 0 || strcmp(owner, "group1") == 0) {

@@ -59,7 +59,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 		struct stat sb;
 
 		path_length=strlen(directory) + strlen(namelist[n]->d_name) + 2;
-		char *s = MALLOCARRAY(path_length, char);
+		char *s = MALLOC(path_length, char);
 		if (!s) {
 			printf ("could not allocate memory\n");
 			for (; n<scanlist; n++) {

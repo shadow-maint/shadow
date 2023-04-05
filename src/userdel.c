@@ -805,7 +805,7 @@ static int remove_mailbox (void)
 	}
 
 	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
-	mailfile = XMALLOCARRAY (len, char);
+	mailfile = XMALLOC(len, char);
 
 	if (prefix[0]) {
 		(void) snprintf (mailfile, len, "%s/%s/%s",
@@ -919,7 +919,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 0;
 	}
 
-	buf = MALLOCARRAY (buflen, char);
+	buf = MALLOC(buflen, char);
 	if (NULL == buf) {
 		fprintf (stderr, _("%s: Can't allocate memory, "
 		                   "tcb entry for %s not removed.\n"),
@@ -1131,7 +1131,7 @@ int main (int argc, char **argv)
 
 			size_t len = strlen(prefix) + strlen(pwd->pw_dir) + 2;
 			int wlen;
-			user_home = XMALLOCARRAY(len, char);
+			user_home = XMALLOC(len, char);
 			wlen = snprintf(user_home, len, "%s/%s", prefix, pwd->pw_dir);
 			assert (wlen == (int) len -1);
 		}
