@@ -312,7 +312,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 
 	/* Concatenate the 2 lines */
 	new_line_len = strlen (gr1->line) + strlen (gr2->line) +1;
-	new_line = MALLOCARRAY (new_line_len + 1, char);
+	new_line = MALLOC(new_line_len + 1, char);
 	if (NULL == new_line) {
 		return NULL;
 	}
@@ -394,7 +394,7 @@ static int split_groups (unsigned int max_members)
 			continue;
 		}
 
-		new = MALLOC (struct commonio_entry);
+		new = MALLOC(1, struct commonio_entry);
 		if (NULL == new) {
 			return 0;
 		}

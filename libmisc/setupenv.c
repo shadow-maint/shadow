@@ -36,7 +36,7 @@ addenv_path (const char *varname, const char *dirname, const char *filename)
 	size_t len = strlen (dirname) + strlen (filename) + 2;
 	int wlen;
 
-	buf = XMALLOCARRAY (len, char);
+	buf = XMALLOC(len, char);
 	wlen = snprintf (buf, len, "%s/%s", dirname, filename);
 	assert (wlen == (int) len - 1);
 

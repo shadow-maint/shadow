@@ -66,7 +66,7 @@ static void usage (void)
 	 * work if the system library is recompiled.
 	 */
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	groups = MALLOCARRAY (sys_ngroups, GETGROUPS_T);
+	groups = MALLOC(sys_ngroups, GETGROUPS_T);
 
 	/*
 	 * See if the -a flag has been given to print out the concurrent

@@ -22,7 +22,7 @@
 	struct group *gr;
 	int i;
 
-	gr = MALLOC (struct group);
+	gr = MALLOC(1, struct group);
 	if (NULL == gr) {
 		return NULL;
 	}
@@ -47,7 +47,7 @@
 	for (i = 0; grent->gr_mem[i]; i++);
 
 	/*@-mustfreeonly@*/
-	gr->gr_mem = MALLOCARRAY (i + 1, char *);
+	gr->gr_mem = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_mem) {
 		gr_free(gr);

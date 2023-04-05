@@ -241,7 +241,7 @@ static void execve_shell (const char *shellname,
 		while (NULL != args[n_args]) {
 			n_args++;
 		}
-		targs = XMALLOCARRAY (n_args + 3, char *);
+		targs = XMALLOC(n_args + 3, char *);
 		targs[0] = "sh";
 		targs[1] = "-";
 		targs[2] = xstrdup (shellname);
@@ -1200,7 +1200,7 @@ int main (int argc, char **argv)
 			cp = Basename (shellstr);
 		}
 
-		arg0 = XMALLOCARRAY (strlen (cp) + 2, char);
+		arg0 = XMALLOC(strlen(cp) + 2, char);
 		arg0[0] = '-';
 		strcpy (arg0 + 1, cp);
 		cp = arg0;

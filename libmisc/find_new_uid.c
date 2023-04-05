@@ -232,7 +232,7 @@ int find_new_uid(bool sys_user,
 	 */
 
 	/* Create an array to hold all of the discovered UIDs */
-	used_uids = MALLOCARRAY (uid_max + 1, bool);
+	used_uids = MALLOC(uid_max + 1, bool);
 	if (NULL == used_uids) {
 		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),

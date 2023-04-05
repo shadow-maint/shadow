@@ -127,7 +127,7 @@ static void add_user (const char *user,
 			static struct sgrp sgrent;
 			sgrent.sg_name = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
-			sgrent.sg_adm = XMALLOC (char *);
+			sgrent.sg_adm = XMALLOC(1, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sgrent.sg_mem[0]) {
 				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
@@ -210,7 +210,7 @@ static void remove_user (const char *user,
 			static struct sgrp sgrent;
 			sgrent.sg_name = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
-			sgrent.sg_adm = XMALLOC (char *);
+			sgrent.sg_adm = XMALLOC(1, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sgrent.sg_mem[0]) {
 				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
@@ -283,9 +283,9 @@ static void purge_members (const struct group *grp)
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
 			sgrent.sg_name = xstrdup (newgrp->gr_name);
-			sgrent.sg_mem = XMALLOC (char *);
+			sgrent.sg_mem = XMALLOC(1, char *);
 			sgrent.sg_mem[0] = NULL;
-			sgrent.sg_adm = XMALLOC (char *);
+			sgrent.sg_adm = XMALLOC(1, char *);
 			sgrent.sg_adm[0] = NULL;
 
 			/* Move any password to gshadow */

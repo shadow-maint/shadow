@@ -60,7 +60,7 @@ static const char *const noslash[] = {
  */
 void initenv (void)
 {
-	newenvp = XMALLOCARRAY (NEWENVP_STEP, char *);
+	newenvp = XMALLOC(NEWENVP_STEP, char *);
 	*newenvp = NULL;
 }
 
@@ -74,7 +74,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	if (NULL != value) {
 		size_t len = strlen (string) + strlen (value) + 2;
 		int wlen;
-		newstring = XMALLOCARRAY (len, char);
+		newstring = XMALLOC(len, char);
 		wlen = snprintf (newstring, len, "%s=%s", string, value);
 		assert (wlen == (int) len -1);
 	} else {
@@ -137,7 +137,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 		 */
 		update_environ = (environ == newenvp);
 
-		__newenvp = REALLOCARRAY(newenvp, newenvc + NEWENVP_STEP, char *);
+		__newenvp = REALLOC(newenvp, newenvc + NEWENVP_STEP, char *);
 
 		if (NULL != __newenvp) {
 			/*

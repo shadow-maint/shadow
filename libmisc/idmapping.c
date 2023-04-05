@@ -191,7 +191,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 #endif
 
 	bufsize = ranges * ((ULONG_DIGITS + 1) * 3);
-	pos = buf = XMALLOCARRAY(bufsize, char);
+	pos = buf = XMALLOC(bufsize, char);
 	end = buf + bufsize;
 
 	/* Build the mapping command */

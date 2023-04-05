@@ -46,7 +46,7 @@
 	 * old entries, and the new entries as well.
 	 */
 
-	tmp = XMALLOCARRAY (i + 2, char *);
+	tmp = XMALLOC(i + 2, char *);
 
 	/*
 	 * Copy the original list to the new list, then append the
@@ -100,7 +100,7 @@
 	 * old entries.
 	 */
 
-	tmp = XMALLOCARRAY (j + 1, char *);
+	tmp = XMALLOC(j + 1, char *);
 
 	/*
 	 * Copy the original list except the deleted members to the
@@ -135,7 +135,7 @@
 
 	for (i = 0; NULL != list[i]; i++);
 
-	tmp = XMALLOCARRAY (i + 1, char *);
+	tmp = XMALLOC(i + 1, char *);
 
 	i = 0;
 	while (NULL != *list) {
@@ -212,7 +212,7 @@ bool is_on_list (char *const *list, const char *member)
 	 * Allocate the array we're going to store the pointers into.
 	 */
 
-	array = XMALLOCARRAY (i, char *);
+	array = XMALLOC(i, char *);
 
 	/*
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm

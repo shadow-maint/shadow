@@ -66,7 +66,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 
 	while (s != NULL && *s != '\0') {
 		size = (nelem + 1) * sizeof (ptr);
-		ptr = REALLOCARRAY (*list, size, char *);
+		ptr = REALLOC(*list, size, char *);
 		if (NULL != ptr) {
 			ptr[nelem] = s;
 			nelem++;
@@ -80,7 +80,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 		}
 	}
 	size = (nelem + 1) * sizeof (ptr);
-	ptr = REALLOCARRAY (*list, size, char *);
+	ptr = REALLOC(*list, size, char *);
 	if (NULL != ptr) {
 		ptr[nelem] = NULL;
 		*list = ptr;
@@ -120,7 +120,7 @@ void endsgent (void)
 	size_t len = strlen (string) + 1;
 
 	if (len > sgrbuflen) {
-		char *buf = REALLOCARRAY (sgrbuf, len, char);
+		char *buf = REALLOC(sgrbuf, len, char);
 		if (NULL == buf) {
 			return NULL;
 		}
@@ -198,7 +198,7 @@ void endsgent (void)
 	char *cp;
 
 	if (0 == buflen) {
-		buf = MALLOCARRAY (BUFSIZ, char);
+		buf = MALLOC(BUFSIZ, char);
 		if (NULL == buf) {
 			return NULL;
 		}
@@ -219,7 +219,7 @@ void endsgent (void)
 		       && (feof (fp) == 0)) {
 			size_t len;
 
-			cp = REALLOCARRAY (buf, buflen * 2, char);
+			cp = REALLOC(buf, buflen * 2, char);
 			if (NULL == cp) {
 				return NULL;
 			}
@@ -440,7 +440,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 		size += strlen (sgrp->sg_mem[i]) + 1;
 	}
 
-	buf = MALLOCARRAY (size, char);
+	buf = MALLOC(size, char);
 	if (NULL == buf) {
 		return -1;
 	}

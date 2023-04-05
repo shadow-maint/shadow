@@ -591,7 +591,7 @@ int main (int argc, char **argv)
 #ifdef RLOGIN
 	if (rflg) {
 		assert (NULL == username);
-		username = XMALLOCARRAY (USER_NAME_MAX_LENGTH + 1, char);
+		username = XMALLOC(USER_NAME_MAX_LENGTH + 1, char);
 		username[USER_NAME_MAX_LENGTH] = '\0';
 		if (do_rlogin (hostname, username, USER_NAME_MAX_LENGTH, term, sizeof term)) {
 			preauth_flag = true;
@@ -908,7 +908,7 @@ int main (int argc, char **argv)
 				exit (1);
 			}
 			preauth_flag = false;
-			username = XMALLOCARRAY (USER_NAME_MAX_LENGTH + 1, char);
+			username = XMALLOC(USER_NAME_MAX_LENGTH + 1, char);
 			username[USER_NAME_MAX_LENGTH] = '\0';
 			login_prompt (username, USER_NAME_MAX_LENGTH);
 
