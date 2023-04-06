@@ -12584,7 +12584,7 @@
 	http://bugs.debian.org/48002
 
 	* src/login.c, NEWS:
-	fixed loggin of username on succesful login (was using the normal username,
+	fixed loggin of username on successful login (was using the normal username,
 	when it should have used pam_user) http://bugs.debian.org/47819
 
 2005-06-02  Tomasz Kłoczko  <kloczek@pld.org.pl>

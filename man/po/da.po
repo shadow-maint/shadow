@@ -5471,7 +5471,7 @@ msgstr ""
 
 #: login.defs.5.xml:34(para) login.1.xml:34(para)
 msgid "Enable logging of successful logins."
-msgstr "Aktiver logning af succesfulde logind."
+msgstr "Aktiver logning af successfulde logind."
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 msgid "<option>LOG_UNKFAIL_ENAB</option> (boolean)"
