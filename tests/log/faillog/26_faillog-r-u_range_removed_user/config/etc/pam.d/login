@@ -80,15 +80,15 @@ auth       optional   pam_group.so
 # (Replaces the use of /etc/limits in old login)
 session    required   pam_limits.so
 
-# Prints the last login info upon succesful login
+# Prints the last login info upon successful login
 # (Replaces the `LASTLOG_ENAB' option from login.defs)
 session    optional   pam_lastlog.so
 
-# Prints the motd upon succesful login
+# Prints the motd upon successful login
 # (Replaces the `MOTD_FILE' option in login.defs)
 session    optional   pam_motd.so
 
-# Prints the status of the user's mailbox upon succesful login
+# Prints the status of the user's mailbox upon successful login
 # (Replaces the `MAIL_CHECK_ENAB' option from login.defs). 
 #
 # This also defines the MAIL environment variable

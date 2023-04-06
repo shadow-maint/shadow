@@ -1133,7 +1133,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   http://bugs.debian.org/53702
 - login: check for hushed login and pass PAM_SILENT if true,
   http://bugs.debian.org/48002
-- login: fixed username on succesful login (was using the normal username,
+- login: fixed username on successful login (was using the normal username,
   when it should have used pam_user) http://bugs.debian.org/47819
 - remove using SHADOWPWD #define so now shadow is always built with shadow
   password support,
