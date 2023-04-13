@@ -4,7 +4,6 @@ FROM "${OS_IMAGE}" AS build
 
 RUN dnf install -y dnf-plugins-core
 RUN dnf builddep -y shadow-utils
-RUN dnf install -y libbsd-devel libeconf-devel
 
 COPY ./ /usr/local/src/shadow/
 WORKDIR /usr/local/src/shadow/
