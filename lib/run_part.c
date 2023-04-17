@@ -80,7 +80,7 @@ int run_parts(const char *directory, const char *name, const char *action)
 			return (1);
 		}
 
-		if (S_ISREG(sb.st_mode) || S_ISLNK(sb.st_mode)) {
+		if (S_ISREG(sb.st_mode)) {
 			execute_result = run_part(s, name, action);
 		}
 
