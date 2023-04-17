@@ -51,6 +51,8 @@ static char *name;		/* The name of user whose password is being changed */
 static char *myname;		/* The current user's name */
 static bool amroot;		/* The caller's real UID was 0 */
 
+static const char *prefix = "";
+
 static bool
     aflg = false,			/* -a - show status for all users */
     dflg = false,			/* -d - delete password */
@@ -149,6 +151,7 @@ usage (int status)
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
 	(void) fputs (_("  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -S, --status                  report password status on the named account\n"), usageout);
 	(void) fputs (_("  -u, --unlock                  unlock the password of the named account\n"), usageout);
 	(void) fputs (_("  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
@@ -743,6 +746,7 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_root_flag ("-R", argc, argv);
+	prefix = process_prefix_flag ("-P", argc, argv);
 
 	/*
 	 * The program behaves differently when executed by root than when
@@ -769,6 +773,7 @@ int main (int argc, char **argv)
 			{"quiet",       no_argument,       NULL, 'q'},
 			{"repository",  required_argument, NULL, 'r'},
 			{"root",        required_argument, NULL, 'R'},
+			{"prefix",      required_argument, NULL, 'P'},
 			{"status",      no_argument,       NULL, 'S'},
 			{"unlock",      no_argument,       NULL, 'u'},
 			{"warndays",    required_argument, NULL, 'w'},
@@ -837,6 +842,8 @@ int main (int argc, char **argv)
 				}
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
+				break;
+			case 'P': /* no-op, handled in process_prefix_flag () */
 				break;
 			case 'S':
 				Sflg = true;	/* ok for users */
