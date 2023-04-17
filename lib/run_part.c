@@ -2,6 +2,7 @@
 
 #include <dirent.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,12 +16,12 @@
 #include "shadowlog_internal.h"
 
 
-static int run_part(char *script_path, const char *name, const char *action)
+static int run_part(int script_fd, const char *script_name, const char *name, const char *action)
 {
 	pid_t pid;
 	int wait_status;
 	pid_t pid_status;
-	char *args[] = { script_path, NULL };
+	char *args[] = { (char *) script_name, NULL };
 
 	pid=fork();
 	if (pid==-1) {
@@ -30,8 +31,8 @@ static int run_part(char *script_path, const char *name, const char *action)
 	if (pid==0) {
 		setenv("ACTION",action,1);
 		setenv("SUBJECT",name,1);
-		execv(script_path,args);
-		fprintf(shadow_logfd, "execv: %s\n", strerror(errno));
+		fexecve(script_fd, args, environ);
+		fprintf(shadow_logfd, "fexecve(%s): %s\n", script_name, strerror(errno));
 		exit(1);
 	}
 
@@ -40,7 +41,7 @@ static int run_part(char *script_path, const char *name, const char *action)
 		return (wait_status);
 	}
 
-	fprintf(shadow_logfd, "waitpid: %s\n", strerror(errno));
+	fprintf(shadow_logfd, "failed to wait for pid %d (%s): %s\n", pid, script_name, strerror(errno));
 	return (1);
 }
 
@@ -51,37 +52,51 @@ int run_parts(const char *directory, const char *name, const char *action)
 	int n;
 	int execute_result = 0;
 
+	int dfd = open(directory, O_PATH | O_DIRECTORY | O_CLOEXEC);
+	if (dfd == -1) {
+		fprintf(shadow_logfd, "failed open directory %s: %s\n", directory, strerror(errno));
+		return (1);
+	}
+
+#ifdef HAVE_SCANDIRAT
+	scanlist = scandirat(dfd, ".", &namelist, 0, alphasort);
+#else
 	scanlist = scandir(directory, &namelist, 0, alphasort);
+#endif
 	if (scanlist<=0) {
+		(void) close(dfd);
 		return (0);
 	}
 
 	for (n=0; n<scanlist; n++) {
-		char         *s;
-		struct stat  sb;
+		struct stat sb;
 
-		if (asprintf(&s, "%s/%s", directory, namelist[n]->d_name) == -1) {
-			fprintf(shadow_logfd, "asprintf: %s\n", strerror(errno));
-			for (; n<scanlist; n++) {
-				free(namelist[n]);
+		int fd = openat (dfd, namelist[n]->d_name, O_PATH | O_CLOEXEC);
+		if (fd == -1) {
+			fprintf(shadow_logfd, "failed to open %s/%s: %s\n",
+				directory, namelist[n]->d_name, strerror(errno));
+			for (int k = n; k < scanlist; k++) {
+				free(namelist[k]);
 			}
 			free(namelist);
+			(void) close(dfd);
 			return (1);
 		}
 
-		execute_result = 0;
-		if (stat(s, &sb) == -1) {
-			fprintf(shadow_logfd, "stat: %s\n", strerror(errno));
-			free(s);
-			for (; n<scanlist; n++) {
-				free(namelist[n]);
+		if (fstat (fd, &sb) == -1) {
+			fprintf(shadow_logfd, "failed to stat %s/%s: %s\n",
+				directory, namelist[n]->d_name, strerror(errno));
+			(void) close(fd);
+			(void) close(dfd);
+			for (int k = n; k < scanlist; k++) {
+				free(namelist[k]);
 			}
 			free(namelist);
 			return (1);
 		}
 
 		if (!S_ISREG(sb.st_mode)) {
-			free(s);
+			(void) close(fd);
 			free(namelist[n]);
 			continue;
 		}
@@ -89,30 +104,30 @@ int run_parts(const char *directory, const char *name, const char *action)
 		if ((sb.st_uid != 0 && sb.st_uid != getuid()) ||
 		    (sb.st_gid != 0 && sb.st_gid != getgid()) ||
 		    (sb.st_mode & 0002)) {
-			fprintf(shadow_logfd, "skipping %s due to insecure ownership/permission\n",
-			         s);
-			free(s);
+			fprintf(shadow_logfd, "skipping %s/%s due to insecure ownership/permission\n",
+			         directory, namelist[n]->d_name);
+			(void) close(fd);
 			free(namelist[n]);
 			continue;
 		}
 
-		execute_result = run_part(s, name, action);
+		execute_result = run_part(fd, namelist[n]->d_name, name, action);
+		(void) close(fd);
 		if (execute_result!=0) {
 			fprintf(shadow_logfd,
-				"%s: did not exit cleanly.\n",
-				s);
-			free(s);
-			for (; n<scanlist; n++) {
-				free(namelist[n]);
+				"%s/%s: did not exit cleanly.\n",
+				directory, namelist[n]->d_name);
+			for (int k = n; k < scanlist; k++) {
+				free(namelist[k]);
 			}
 			break;
 		}
 
-		free(s);
 		free(namelist[n]);
 	}
 	free(namelist);
 
+	(void) close(dfd);
+
 	return (execute_result);
 }
-
