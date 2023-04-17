@@ -80,22 +80,35 @@ int run_parts(const char *directory, const char *name, const char *action)
 			return (1);
 		}
 
-		if (S_ISREG(sb.st_mode)) {
-			execute_result = run_part(s, name, action);
+		if (!S_ISREG(sb.st_mode)) {
+			free(s);
+			free(namelist[n]);
+			continue;
 		}
 
-		free(s);
+		if ((sb.st_uid != 0 && sb.st_uid != getuid()) ||
+		    (sb.st_gid != 0 && sb.st_gid != getgid()) ||
+		    (sb.st_mode & 0002)) {
+			fprintf(shadow_logfd, "skipping %s due to insecure ownership/permission\n",
+			         s);
+			free(s);
+			free(namelist[n]);
+			continue;
+		}
 
+		execute_result = run_part(s, name, action);
 		if (execute_result!=0) {
 			fprintf(shadow_logfd,
 				"%s: did not exit cleanly.\n",
-			    namelist[n]->d_name);
+				s);
+			free(s);
 			for (; n<scanlist; n++) {
 				free(namelist[n]);
 			}
 			break;
 		}
 
+		free(s);
 		free(namelist[n]);
 	}
 	free(namelist);
