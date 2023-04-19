@@ -3,6 +3,7 @@ reports and various comments. This list may be incomplete, I received
 a lot of mail...
 
 # Maintainers
+* Marek Michałkiewicz <marekm72@gmail.com> (1995-2000)
 * Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2007)
 * Nicolas François <nicolas.francois@centraliens.net> (2007-2014)
 * Serge E. Hallyn <serge@hallyn.com> (2014-now)
