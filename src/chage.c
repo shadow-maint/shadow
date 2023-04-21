@@ -54,6 +54,8 @@ static bool
     Wflg = false;		/* set expiration warning days */
 static bool amroot = false;
 
+static const char *prefix = "";
+
 static bool pw_locked  = false;	/* Indicate if the password file is locked */
 static bool spw_locked = false;	/* Indicate if the shadow file is locked */
 /* The name and UID of the user being worked on */
@@ -137,6 +139,7 @@ usage (int status)
 	(void) fputs (_("  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	                "                                change to MAX_DAYS\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
@@ -349,12 +352,13 @@ static void process_flags (int argc, char **argv)
 		{"mindays",    required_argument, NULL, 'm'},
 		{"maxdays",    required_argument, NULL, 'M'},
 		{"root",       required_argument, NULL, 'R'},
+		{"prefix",     required_argument, NULL, 'P'},
 		{"warndays",   required_argument, NULL, 'W'},
 		{"iso8601",    no_argument,       NULL, 'i'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv, "d:E:hiI:lm:M:R:W:",
+	while ((c = getopt_long (argc, argv, "d:E:hiI:lm:M:R:P:W:",
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'd':
@@ -417,6 +421,8 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			break;
+		case 'P': /* no-op, handled in process_prefix_flag () */
 			break;
 		case 'W':
 			Wflg = true;
@@ -769,6 +775,7 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_root_flag ("-R", argc, argv);
+	prefix = process_prefix_flag ("-P", argc, argv);
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
