@@ -238,6 +238,27 @@ extern struct passwd *prefix_getpwnam(const char* name)
 		return getpwnam(name);
 	}
 }
+extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
+                             char* buf, size_t buflen, struct passwd** result)
+{
+	if (passwd_db_file) {
+		FILE* fg;
+		int ret = 0;
+
+		fg = fopen(passwd_db_file, "rt");
+		if (!fg)
+			return errno;
+		while ((ret = fgetpwent_r(fg, pwd, buf, buflen, result)) == 0) {
+			if (!strcmp(name, pwd->pw_name))
+				break;
+		}
+		fclose(fg);
+		return ret;
+	}
+	else {
+		return getpwnam_r(name, pwd, buf, buflen, result);
+	}
+}
 extern struct spwd *prefix_getspnam(const char* name)
 {
 	if (spw_db_file) {
