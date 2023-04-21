@@ -452,7 +452,7 @@ static void print_status (const struct passwd *pw)
 	char         date[80];
 	struct spwd *sp;
 
-	sp = getspnam (pw->pw_name); /* local, no need for xgetspnam */
+	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
 		date_to_str (sizeof(date), date, sp->sp_lstchg * SCALE),
 		(void) printf ("%s %s %s %lld %lld %lld %lld\n",
@@ -781,7 +781,7 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "adehi:kln:qr:R:Suw:x:",
+		while ((c = getopt_long (argc, argv, "adehi:kln:qr:R:P:Suw:x:",
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
@@ -922,11 +922,11 @@ int main (int argc, char **argv)
 			                Prog);
 			exit (E_NOPERM);
 		}
-		setpwent ();
-		while ( (pw = getpwent ()) != NULL ) {
+		prefix_setpwent ();
+		while ( (pw = prefix_getpwent ()) != NULL ) {
 			print_status (pw);
 		}
-		endpwent ();
+		prefix_endpwent ();
 		exit (E_SUCCESS);
 	}
 #if 0
@@ -963,7 +963,7 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 
-	pw = xgetpwnam (name);
+	pw = xprefix_getpwnam (name);
 	if (NULL == pw) {
 		(void) fprintf (stderr,
 		                _("%s: user '%s' does not exist\n"),
@@ -1007,7 +1007,7 @@ int main (int argc, char **argv)
 	/*
 	 * The user name is valid, so let's get the shadow file entry.
 	 */
-	sp = getspnam (name); /* !USE_PAM, no need for xgetspnam */
+	sp = prefix_getspnam (name); /* !USE_PAM, no need for xprefix_getspnam */
 	if (NULL == sp) {
 		if (errno == EACCES) {
 			(void) fprintf (stderr,

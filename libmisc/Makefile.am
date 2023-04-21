@@ -75,6 +75,7 @@ libmisc_la_SOURCES = \
 	utmp.c \
 	valid.c \
 	xgetpwnam.c \
+	xprefix_getpwnam.c \
 	xgetpwuid.c \
 	xgetgrnam.c \
 	xgetgrgid.c \
