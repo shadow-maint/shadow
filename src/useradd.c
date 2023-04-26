@@ -20,6 +20,7 @@
 #include <lastlog.h>
 #include <libgen.h>
 #include <pwd.h>
+#include <signal.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -2155,6 +2156,9 @@ static void tallylog_reset (const char *user_name)
 
 	if (access(pam_tally2, X_OK) == -1)
 		return;
+
+	/* set SIGCHLD to default for waitpid */
+	signal(SIGCHLD, SIG_DFL);
 
 	failed = 0;
 	switch (childpid = fork())
