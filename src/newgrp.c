@@ -288,6 +288,9 @@ static void syslog_sg (const char *name, const char *group)
 		(void) signal (SIGTSTP, SIG_IGN);
 		(void) signal (SIGTTIN, SIG_IGN);
 		(void) signal (SIGTTOU, SIG_IGN);
+		/* set SIGCHLD to default for waitpid */
+		(void) signal(SIGCHLD, SIG_DFL);
+
 		child = fork ();
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
