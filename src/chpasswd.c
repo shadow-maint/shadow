@@ -54,6 +54,8 @@ static long bcrypt_rounds = 13;
 static long yescrypt_cost = 5;
 #endif
 
+static const char *prefix = "";
+
 static bool is_shadow_pwd;
 static bool pw_locked = false;
 static bool spw_locked = false;
@@ -123,6 +125,7 @@ usage (int status)
 	                "                                the MD5 algorithm\n"),
 	              usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
+	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 	                "                                or YESCRYPT crypt algorithms\n"),
@@ -150,6 +153,7 @@ static void process_flags (int argc, char **argv)
 		{"help",         no_argument,       NULL, 'h'},
 		{"md5",          no_argument,       NULL, 'm'},
 		{"root",         required_argument, NULL, 'R'},
+		{"prefix",       required_argument, NULL, 'P'},
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		{"sha-rounds",   required_argument, NULL, 's'},
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
@@ -158,9 +162,9 @@ static void process_flags (int argc, char **argv)
 
 	while ((c = getopt_long (argc, argv,
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
-	                         "c:ehmR:s:",
+	                         "c:ehmR:P:s:",
 #else
-	                         "c:ehmR:",
+	                         "c:ehmR:P:",
 #endif
 	                         long_options, NULL)) != -1) {
 		switch (c) {
@@ -177,6 +181,8 @@ static void process_flags (int argc, char **argv)
 			md5flg = true;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			break;
+		case 'P': /* no-op, handled in process_prefix_flag () */
 			break;
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		case 's':
@@ -456,6 +462,7 @@ int main (int argc, char **argv)
 
 	salt = get_salt();
 	process_root_flag ("-R", argc, argv);
+	prefix = process_prefix_flag ("-P", argc, argv);
 
 #ifdef USE_PAM
 	if (md5flg || eflg || cflg) {
