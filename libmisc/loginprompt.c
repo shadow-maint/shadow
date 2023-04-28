@@ -22,7 +22,7 @@
 
 static void login_exit (unused int sig)
 {
-	exit (EXIT_FAILURE);
+	_exit (EXIT_FAILURE);
 }
 
 /*
