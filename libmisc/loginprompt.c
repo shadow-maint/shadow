@@ -32,7 +32,7 @@ static void login_exit (unused int sig)
  * is set in login.defs, this file is displayed before the prompt.
  */
 
-void login_prompt (const char *prompt, char *name, int namesize)
+void login_prompt (char *name, int namesize)
 {
 	char buf[1024];
 
@@ -41,6 +41,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	char *cp;
 	int i;
 	FILE *fp;
+	const char *fname = getdef_str ("ISSUE_FILE");
 
 	sighandler_t sigquit;
 	sighandler_t sigtstp;
@@ -59,22 +60,19 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 * be displayed and display it before the prompt.
 	 */
 
-	if (NULL != prompt) {
-		const char *fname = getdef_str ("ISSUE_FILE");
-		if (NULL != fname) {
-			fp = fopen (fname, "r");
-			if (NULL != fp) {
-				while ((i = getc (fp)) != EOF) {
-					(void) putc (i, stdout);
-				}
-
-				(void) fclose (fp);
+	if (NULL != fname) {
+		fp = fopen (fname, "r");
+		if (NULL != fp) {
+			while ((i = getc (fp)) != EOF) {
+				(void) putc (i, stdout);
 			}
+
+			(void) fclose (fp);
 		}
-		(void) gethostname (buf, sizeof buf);
-		printf (prompt, buf);
-		(void) fflush (stdout);
 	}
+	(void) gethostname (buf, sizeof buf);
+	printf (_("\n%s login: "), buf);
+	(void) fflush (stdout);
 
 	/*
 	 * Read the user's response.  The trailing newline will be
