@@ -910,7 +910,7 @@ int main (int argc, char **argv)
 			preauth_flag = false;
 			username = XMALLOCARRAY (USER_NAME_MAX_LENGTH + 1, char);
 			username[USER_NAME_MAX_LENGTH] = '\0';
-			login_prompt (_("\n%s login: "), username, USER_NAME_MAX_LENGTH);
+			login_prompt (username, USER_NAME_MAX_LENGTH);
 
 			if ('\0' == username[0]) {
 				/* Prompt for a new login */

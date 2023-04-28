@@ -233,7 +233,7 @@ extern void dolastlog (
 extern int login_access (const char *user, const char *from);
 
 /* loginprompt.c */
-extern void login_prompt (const char *, char *, int);
+extern void login_prompt (char *, int);
 
 /* mail.c */
 extern void mailcheck (void);
