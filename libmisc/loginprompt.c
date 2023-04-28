@@ -14,7 +14,6 @@
 #include <assert.h>
 #include <stdio.h>
 #include <signal.h>
-#include <ctype.h>
 
 #include "alloc.h"
 #include "prototypes.h"
@@ -95,50 +94,14 @@ void login_prompt (const char *prompt, char *name, int namesize)
 
 	/*
 	 * Skip leading whitespace.  This makes "  username" work right.
-	 * Then copy the rest (up to the end or the first "non-graphic"
-	 * character into the username.
+	 * Then copy the rest (up to the end) into the username.
 	 */
 
 	for (cp = buf; *cp == ' ' || *cp == '\t'; cp++);
 
-	for (i = 0; i < namesize - 1 && isgraph (*cp); name[i++] = *cp++);
-	while (isgraph (*cp)) {
-		cp++;
-	}
-
-	if ('\0' != *cp) {
-		cp++;
-	}
+	for (i = 0; i < namesize - 1 && *cp != '\0'; name[i++] = *cp++);
 
 	name[i] = '\0';
-
-	/*
-	 * This is a disaster, at best.  The user may have entered extra
-	 * environmental variables at the prompt.  There are several ways
-	 * to do this, and I just take the easy way out.
-	 */
-
-	if ('\0' != *cp) {	/* process new variables */
-		char *nvar;
-		int count = 1;
-		int envc;
-
-		for (envc = 0; envc < MAX_ENV; envc++) {
-			nvar = strtok ((0 != envc) ? NULL : cp, " \t,");
-			if (NULL == nvar) {
-				break;
-			}
-			if (strchr (nvar, '=') != NULL) {
-				envp[envc] = nvar;
-			} else {
-				size_t len = strlen (nvar) + 32;
-				envp[envc] = XMALLOCARRAY (len, char);
-				(void) snprintf (envp[envc], len,
-				                 "L%d=%s", count++, nvar);
-			}
-		}
-		set_env (envc, envp);
-	}
 
 	/*
 	 * Set the SIGQUIT handler back to its original value
