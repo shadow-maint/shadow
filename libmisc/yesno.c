@@ -50,8 +50,9 @@ static int rpmatch(const char *response);
 bool
 yes_or_no(bool read_only)
 {
-	bool  ret;
-	char  *buf;
+	bool   ret;
+	char   *buf;
+	size_t size;
 
 	if (read_only) {
 		puts(_("No"));
@@ -60,8 +61,10 @@ yes_or_no(bool read_only)
 
 	fflush(stdout);
 
+	buf = NULL;
 	ret = false;
-	if (getline(&buf, NULL, stdin) != NULL)
+	size = 0;
+	if (getline(&buf, &size, stdin) != -1)
 		ret = rpmatch(buf) == 1;
 
 	free(buf);
