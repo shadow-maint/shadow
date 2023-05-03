@@ -78,14 +78,16 @@ static long age_max = 0;	/* Maximum days until change     */
 static long warn = 0;		/* Warning days before change   */
 static long inact = 0;		/* Days without change before locked */
 
-#ifndef USE_PAM
 static bool do_update_age = false;
-#endif				/* ! USE_PAM */
+#ifdef USE_PAM
+static bool use_pam = true;
+#else
+static bool use_pam = false;
+#endif				/* USE_PAM */
 
 static bool pw_locked = false;
 static bool spw_locked = false;
 
-#ifndef USE_PAM
 /*
  * Size of the biggest passwd:
  *   $6$	3
@@ -101,7 +103,6 @@ static bool spw_locked = false;
  */
 static char crypt_passwd[256];
 static bool do_update_pwd = false;
-#endif				/* !USE_PAM */
 
 /*
  * External identifiers
@@ -110,12 +111,10 @@ static bool do_update_pwd = false;
 /* local function prototypes */
 NORETURN static void usage (int);
 
-#ifndef USE_PAM
 static bool reuse (const char *, const struct passwd *);
 static int new_password (const struct passwd *);
 
 static void check_password (const struct passwd *, const struct spwd *);
-#endif				/* !USE_PAM */
 static /*@observer@*/const char *pw_status (const char *);
 static void print_status (const struct passwd *);
 NORETURN static void fail_exit (int);
@@ -161,7 +160,6 @@ usage (int status)
 	exit (status);
 }
 
-#ifndef USE_PAM
 static bool reuse (const char *pass, const struct passwd *pw)
 {
 #ifdef HAVE_LIBCRACK_HIST
@@ -431,7 +429,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		}
 	}
 }
-#endif				/* !USE_PAM */
 
 static /*@observer@*/const char *pw_status (const char *pass)
 {
@@ -506,11 +503,12 @@ oom (void)
 
 static char *update_crypt_pw (char *cp)
 {
-#ifndef USE_PAM
-	if (do_update_pwd) {
-		cp = xstrdup (crypt_passwd);
+	if (!use_pam)
+	{
+		if (do_update_pwd) {
+			cp = xstrdup (crypt_passwd);
+		}
 	}
-#endif				/* !USE_PAM */
 
 	if (dflg) {
 		*cp = '\0';
@@ -533,11 +531,12 @@ static char *update_crypt_pw (char *cp)
 
 		strcpy (newpw, "!");
 		strcat (newpw, cp);
-#ifndef USE_PAM
-		if (do_update_pwd) {
-			free (cp);
+		if (!use_pam)
+		{
+			if (do_update_pwd) {
+				free (cp);
+			}
 		}
-#endif /* USE_PAM */
 		cp = newpw;
 	}
 	return cp;
@@ -649,16 +648,17 @@ static void update_shadow (void)
 	if (iflg) {
 		nsp->sp_inact = (inact * DAY) / SCALE;
 	}
-#ifndef USE_PAM
-	if (do_update_age) {
-		nsp->sp_lstchg = gettime () / SCALE;
-		if (0 == nsp->sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			nsp->sp_lstchg = -1;
+	if (!use_pam)
+	{
+		if (do_update_age) {
+			nsp->sp_lstchg = gettime () / SCALE;
+			if (0 == nsp->sp_lstchg) {
+				/* Better disable aging than requiring a password
+				 * change */
+				nsp->sp_lstchg = -1;
+			}
 		}
 	}
-#endif				/* !USE_PAM */
 
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris
@@ -725,11 +725,9 @@ int main (int argc, char **argv)
 {
 	const struct passwd *pw;	/* Password file entry for user      */
 
-#ifndef USE_PAM
 	char *cp;		/* Miscellaneous character pointing  */
 
 	const struct spwd *sp;	/* Shadow file entry for user   */
-#endif				/* !USE_PAM */
 
 	sanitize_env ();
 
@@ -747,6 +745,11 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 	prefix = process_prefix_flag ("-P", argc, argv);
+
+	if (prefix[0]) {
+		use_pam = false;
+		do_update_age = true;
+	}
 
 	/*
 	 * The program behaves differently when executed by root than when
@@ -1003,53 +1006,55 @@ int main (int argc, char **argv)
 		print_status (pw);
 		exit (E_SUCCESS);
 	}
-#ifndef USE_PAM
-	/*
-	 * The user name is valid, so let's get the shadow file entry.
-	 */
-	sp = prefix_getspnam (name); /* !USE_PAM, no need for xprefix_getspnam */
-	if (NULL == sp) {
-		if (errno == EACCES) {
-			(void) fprintf (stderr,
-			                _("%s: Permission denied.\n"),
-			                Prog);
-			exit (E_NOPERM);
+	if (!use_pam)
+	{
+		/*
+		 * The user name is valid, so let's get the shadow file entry.
+		 */
+		sp = prefix_getspnam (name); /* !use_pam, no need for xprefix_getspnam */
+		if (NULL == sp) {
+			if (errno == EACCES) {
+				(void) fprintf (stderr,
+				                _("%s: Permission denied.\n"),
+				                Prog);
+				exit (E_NOPERM);
+			}
+			sp = pwd_to_spwd (pw);
 		}
-		sp = pwd_to_spwd (pw);
-	}
 
-	cp = sp->sp_pwdp;
-
-	/*
-	 * If there are no other flags, just change the password.
-	 */
-	if (!anyflag) {
-		STRFCPY (crypt_passwd, cp);
+		cp = sp->sp_pwdp;
 
 		/*
-		 * See if the user is permitted to change the password.
-		 * Otherwise, go ahead and set a new password.
+		 * If there are no other flags, just change the password.
 		 */
-		check_password (pw, sp);
+		if (!anyflag) {
+			STRFCPY (crypt_passwd, cp);
 
-		/*
-		 * Let the user know whose password is being changed.
-		 */
-		if (!qflg) {
-			(void) printf (_("Changing password for %s\n"), name);
-		}
+			/*
+			 * See if the user is permitted to change the password.
+			 * Otherwise, go ahead and set a new password.
+			 */
+			check_password (pw, sp);
 
-		if (new_password (pw) != 0) {
-			(void) fprintf (stderr,
-			                _("The password for %s is unchanged.\n"),
-			                name);
-			closelog ();
-			exit (E_NOPERM);
+			/*
+			 * Let the user know whose password is being changed.
+			 */
+			if (!qflg) {
+				(void) printf (_("Changing password for %s\n"), name);
+			}
+
+			if (new_password (pw) != 0) {
+				(void) fprintf (stderr,
+				                _("The password for %s is unchanged.\n"),
+				                name);
+				closelog ();
+				exit (E_NOPERM);
+			}
+			do_update_pwd = true;
+			do_update_age = true;
 		}
-		do_update_pwd = true;
-		do_update_age = true;
 	}
-#endif				/* !USE_PAM */
+
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
 	 * into a lowered ulimit, and set the real UID to root to protect
@@ -1062,7 +1067,7 @@ int main (int argc, char **argv)
 	/*
 	 * Don't set the real UID for PAM...
 	 */
-	if (!anyflag) {
+	if (!anyflag && use_pam) {
 		do_pam_passwd (name, qflg, kflg);
 		exit (E_SUCCESS);
 	}

@@ -308,9 +308,7 @@ extern int do_pam_passwd_non_interactive (const char *pam_service,
 #endif				/* USE_PAM */
 
 /* obscure.c */
-#ifndef USE_PAM
 extern bool obscure (const char *, const char *, const struct passwd *);
-#endif
 
 /* pam_pass.c */
 #ifdef USE_PAM
@@ -338,9 +336,7 @@ extern struct group* prefix_getgrent(void);
 extern void prefix_endgrent(void);
 
 /* pwd2spwd.c */
-#ifndef USE_PAM
 extern struct spwd *pwd_to_spwd (const struct passwd *);
-#endif
 
 /* pwdcheck.c */
 #ifndef USE_PAM

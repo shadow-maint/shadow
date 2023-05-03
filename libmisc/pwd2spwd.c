@@ -11,8 +11,6 @@
 
 #ident "$Id$"
 
-#ifndef USE_PAM
-
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -61,7 +59,4 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 
 	return &sp;
 }
-#else				/* USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/* !USE_PAM */
 
