@@ -471,7 +471,7 @@ int main (int argc, char **argv)
 	prefix = process_prefix_flag ("-P", argc, argv);
 
 #ifdef USE_PAM
-	if (md5flg || eflg || cflg) {
+	if (md5flg || eflg || cflg || prefix[0]) {
 		use_pam = false;
 	}
 #endif				/* USE_PAM */
