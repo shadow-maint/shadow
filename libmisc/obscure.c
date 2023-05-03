@@ -9,8 +9,6 @@
 
 #include <config.h>
 
-#ifndef USE_PAM
-
 #ident "$Id$"
 
 
@@ -247,7 +245,3 @@ bool obscure (const char *old, const char *new, const struct passwd *pwdp)
 	}
 	return true;
 }
-
-#else				/* !USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/* !USE_PAM */
