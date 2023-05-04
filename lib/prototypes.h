@@ -324,8 +324,10 @@ extern struct group *prefix_getgrnam(const char *name);
 extern struct group *prefix_getgrgid(gid_t gid);
 extern struct passwd *prefix_getpwuid(uid_t uid);
 extern struct passwd *prefix_getpwnam(const char* name);
+#if HAVE_FGETPWENT_R
 extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
                              char* buf, size_t buflen, struct passwd** result);
+#endif
 extern struct spwd *prefix_getspnam(const char* name);
 extern struct group *prefix_getgr_nam_gid(const char *grname);
 extern void prefix_setpwent(void);

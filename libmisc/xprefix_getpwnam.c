@@ -35,7 +35,7 @@
 #define ARG_TYPE	const char *
 #define ARG_NAME	name
 #define DUP_FUNCTION	__pw_dup
-#define HAVE_FUNCTION_R 1
+#define HAVE_FUNCTION_R HAVE_FGETPWENT_R
 
 #include "xgetXXbyYY.c"
 
