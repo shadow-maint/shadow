@@ -229,6 +229,7 @@ extern struct passwd *prefix_getpwnam(const char* name)
 		return getpwnam(name);
 	}
 }
+#if HAVE_FGETPWENT_R
 extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
                              char* buf, size_t buflen, struct passwd** result)
 {
@@ -250,6 +251,7 @@ extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
 		return getpwnam_r(name, pwd, buf, buflen, result);
 	}
 }
+#endif
 extern struct spwd *prefix_getspnam(const char* name)
 {
 	if (spw_db_file) {
