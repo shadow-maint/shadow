@@ -462,7 +462,7 @@ int commonio_open (struct commonio_db *db, int mode)
 
 	fd = open (db->filename,
 	             (db->readonly ? O_RDONLY : O_RDWR)
-	           | O_NOCTTY | O_NONBLOCK | O_NOFOLLOW);
+	           | O_NOCTTY | O_NONBLOCK | O_NOFOLLOW | O_CLOEXEC);
 	saved_errno = errno;
 	db->fp = NULL;
 	if (fd >= 0) {
@@ -492,9 +492,6 @@ int commonio_open (struct commonio_db *db, int mode)
 		}
 		return 0;
 	}
-
-	/* Do not inherit fd in spawned processes (e.g. nscd) */
-	fcntl (fileno (db->fp), F_SETFD, FD_CLOEXEC);
 
 	buflen = BUFLEN;
 	buf = MALLOCARRAY (buflen, char);
