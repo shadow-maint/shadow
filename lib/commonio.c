@@ -231,36 +231,18 @@ int do_fcntl_lock (const char *file, bool log, short type)
 
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
-	char* file = NULL;
-	char* lock = NULL;
-	size_t lock_file_len;
-	size_t file_len;
 	int err = 0;
 
 	if (db->locked) {
 		return 1;
 	}
-	file_len = strlen(db->filename) + 11;/* %lu max size */
-	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
-	file = MALLOCARRAY(file_len, char);
-	if (file == NULL) {
-		goto cleanup_ENOMEM;
-	}
-	lock = MALLOCARRAY(lock_file_len, char);
-	if (lock == NULL) {
-		goto cleanup_ENOMEM;
-	}
-	snprintf (file, file_len, "%s.%lu",
-	          db->filename, (unsigned long) getpid ());
 
 	if (do_fcntl_lock (db->filename, log, F_WRLCK | F_RDLCK) != 0) {
 		db->locked = true;
 		lock_count++;
 		err = 1;
 	}
-cleanup_ENOMEM:
-	free(file);
-	free(lock);
+
 	return err;
 }
 
