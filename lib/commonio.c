@@ -215,7 +215,7 @@ int do_fcntl_lock (const char *file, bool log, short type)
 		.l_len = 0,
 	};
 
-	fd = open (file, O_WRONLY, 0600);
+	fd = open (file, O_WRONLY | O_CREAT, 0600);
 	if (-1 == fd) {
 		if (log) {
 			(void) fprintf (shadow_logfd, "%s: %s: %s\n",
@@ -224,8 +224,7 @@ int do_fcntl_lock (const char *file, bool log, short type)
 		return 0;
 	}
 
-	fcntl (fd, F_OFD_SETLKW, &lck);
-	close(fd);
+	fcntl (fd, F_SETLKW, &lck);
 	return(1);
 }
 
