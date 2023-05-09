@@ -29,7 +29,6 @@
  */
 const char *Prog;
 
-static char name[BUFSIZ];
 static char pass[BUFSIZ];
 
 static struct passwd pwent;
@@ -119,14 +118,12 @@ static void catch_signals (unused int sig)
 	}
 #endif				/* !USE_PAM */
 
-	(void) strcpy (name, "root");	/* KLUDGE!!! */
-
 	(void) signal (SIGALRM, catch_signals);	/* exit if the timer expires */
 	(void) alarm (ALARM);		/* only wait so long ... */
 
 	while (true) {		/* repeatedly get login/password pairs */
 		char *cp;
-		pw_entry (name, &pwent);	/* get entry from password file */
+		pw_entry ("root", &pwent);	/* get entry from password file */
 		if (pwent.pw_name == NULL) {
 			/*
 			 * Fail secure
