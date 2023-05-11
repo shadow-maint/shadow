@@ -1667,7 +1667,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Cannot possibly work without effective root\n"
-msgstr "%s: Arbeit ohne effektive root-Rechte eventuell nicht möglich\n"
+msgstr "%s: Arbeit ohne effektive root-Rechte unmöglich\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
