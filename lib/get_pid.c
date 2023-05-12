@@ -24,6 +24,7 @@ int get_pid (const char *pidstr, pid_t *pid)
 	if (   ('\0' == *pidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
+	    || (val < 1)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}
@@ -49,7 +50,8 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	if (   ('\0' == *pidfdstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
-	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
+	    || (val < 0)
+	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
 		return -1;
 	}
 
