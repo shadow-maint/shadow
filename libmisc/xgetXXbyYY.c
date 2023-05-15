@@ -81,9 +81,7 @@
 		}
 
 		if (ERANGE != status) {
-			free (buffer);
-			free (result);
-			return NULL;
+			break;
 		}
 
 		if (length <= ((size_t)-1 / 4)) {
