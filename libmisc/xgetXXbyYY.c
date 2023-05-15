@@ -69,6 +69,12 @@
 			/* Build a result structure that can be freed by
 			 * the shadow *_free functions. */
 			LOOKUP_TYPE *ret_result = DUP_FUNCTION(result);
+			if (NULL == result) {
+				fprintf (log_get_logfd(),
+				         _("%s: out of memory\n"),
+				         "x" STRINGIZE(FUNCTION_NAME));
+				exit (13);
+			}
 			free(buffer);
 			free(result);
 			return ret_result;
