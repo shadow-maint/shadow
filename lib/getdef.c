@@ -522,6 +522,8 @@ static void def_load (void)
 		 * syslog. The tools will just use their default values.
 		 */
 		(void)putdef_str (keys[i], value);
+
+		free(value);
 	}
 
 	econf_free (keys);
