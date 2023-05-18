@@ -180,6 +180,7 @@ static bool shell_is_listed (const char *sh)
 			break;
 		}
 	}
+	econf_free (keys);
 	econf_free (key_file);
 
 	return found;
