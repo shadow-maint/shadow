@@ -574,7 +574,8 @@ int main (int argc, char **argv)
 		fail_exit (1);
 	}
 	if (   !amroot
-	    && (   is_restricted_shell (loginsh)
+	    && (   loginsh[0] != '/'
+	        || is_restricted_shell (loginsh)
 	        || (access (loginsh, X_OK) != 0))) {
 		fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
 		fail_exit (1);
