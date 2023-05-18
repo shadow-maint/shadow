@@ -85,6 +85,15 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 
 
 	if (prefix != NULL) {
+		/* Drop privileges */
+		if (   (setregid (getgid (), getgid ()) != 0)
+		    || (setreuid (getuid (), getuid ()) != 0)) {
+			fprintf (log_get_logfd(),
+			         _("%s: failed to drop privileges (%s)\n"),
+			         log_get_progname(), strerror (errno));
+			exit (EXIT_FAILURE);
+		}
+
 		if ( prefix[0] == '\0' || !strcmp(prefix, "/"))
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
