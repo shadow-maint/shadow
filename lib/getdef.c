@@ -472,26 +472,19 @@ void setdef_config_file (const char* file)
  * Loads the user-configured options from the default configuration file
  */
 
+#ifdef USE_ECONF
 static void def_load (void)
 {
-#ifdef USE_ECONF
 	econf_file *defs_file = NULL;
 	econf_err error;
 	char **keys;
 	size_t key_number;
-#else
-	int i;
-	FILE *fp;
-	char buf[1024], *name, *value, *s;
-#endif
 
 	/*
 	 * Set the initialized flag.
 	 * (do it early to prevent recursion in putdef_str())
 	 */
 	def_loaded = true;
-
-#ifdef USE_ECONF
 
 	error = econf_readDirs (&defs_file, vendordir, sysconfdir, "login", "defs", " \t", "#");
 	if (error) {
@@ -528,7 +521,20 @@ static void def_load (void)
 
 	econf_free (keys);
 	econf_free (defs_file);
-#else
+}
+#else /* USE_ECONF */
+static void def_load (void)
+{
+	int i;
+	FILE *fp;
+	char buf[1024], *name, *value, *s;
+
+	/*
+	 * Set the initialized flag.
+	 * (do it early to prevent recursion in putdef_str())
+	 */
+	def_loaded = true;
+
 	/*
 	 * Open the configuration definitions file.
 	 */
@@ -592,8 +598,8 @@ static void def_load (void)
 	}
 
 	(void) fclose (fp);
-#endif
 }
+#endif /* USE_ECONF */
 
 
 #ifdef CKDEFS
