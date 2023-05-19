@@ -505,7 +505,12 @@ static void def_load (void)
 	for (size_t i = 0; i < key_number; i++) {
 		char *value;
 
-		econf_getStringValue(defs_file, NULL, keys[i], &value);
+		error = econf_getStringValue(defs_file, NULL, keys[i], &value);
+		if (error) {
+			SYSLOG ((LOG_CRIT, "failed reading key %zu from econf [%s]",
+				i, econf_errString(error)));
+			exit (EXIT_FAILURE);
+		}
 
 		/*
 		 * Store the value in def_table.
