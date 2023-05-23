@@ -15,8 +15,10 @@
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
+#define	MAX_SUBROOT2	"maximum subsystem depth reached\n"
 #define	BAD_SUBROOT2	"invalid root `%s' for user `%s'\n"
 #define	NO_SUBROOT2	"no subsystem root `%s' for user `%s'\n"
+#define	MAX_DEPTH	1024
 /*
  * subsystem - change to subsystem root
  *
@@ -27,6 +29,18 @@
  */
 void subsystem (const struct passwd *pw)
 {
+	static int depth = 0;
+
+	/*
+	 * Prevent endless loop on misconfigured systems.
+	 */
+	if (++depth > MAX_DEPTH) {
+		printf (_("Maximum subsystem depth reached\n"));
+		SYSLOG ((LOG_WARN, MAX_SUBROOT2));
+		closelog ();
+		exit (EXIT_FAILURE);
+	}
+
 	/*
 	 * The new root directory must begin with a "/" character.
 	 */
