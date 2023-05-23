@@ -91,16 +91,16 @@ static void change_root (const char* newroot)
 		exit (E_BAD_ARG);
 	}
 
-	if (chdir (newroot) != 0) {
+	if (chroot (newroot) != 0) {
 		fprintf(log_get_logfd(),
-				_("%s: cannot chdir to chroot directory %s: %s\n"),
+			        _("%s: unable to chroot to directory %s: %s\n"),
 				log_get_progname(), newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
 
-	if (chroot (newroot) != 0) {
+	if (chdir ("/") != 0) {
 		fprintf(log_get_logfd(),
-		        _("%s: unable to chroot to directory %s: %s\n"),
+			_("%s: cannot chdir in chroot directory %s: %s\n"),
 		        log_get_progname(), newroot, strerror (errno));
 		exit (E_BAD_ARG);
 	}
