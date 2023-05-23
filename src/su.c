@@ -115,6 +115,7 @@ static bool iswheel (const char *);
 static bool restricted_shell (const char *shellname);
 NORETURN static void su_failure (const char *tty, bool su_to_root);
 static /*@only@*/struct passwd * check_perms (void);
+static /*@only@*/struct passwd * do_check_perms (void);
 #ifdef USE_PAM
 static void check_perms_pam (const struct passwd *pw);
 #else				/* !USE_PAM */
@@ -618,10 +619,25 @@ static void check_perms_nopam (const struct passwd *pw)
 /*
  * check_perms - check permissions to switch to the user 'name'
  *
- *	In case of subsystem login, the user is first authenticated in the
- *	caller's root subsystem, and then in the user's target subsystem.
+ *	The user is authenticated in all subsystems iterately.
  */
 static /*@only@*/struct passwd * check_perms (void)
+{
+	struct passwd *pw = NULL;
+
+	while (pw == NULL)
+		pw = do_check_perms();
+	return pw;
+}
+
+/*
+ * do_check_perms - check permissions to switch to the user 'name'
+ *
+ *	The user is authenticated in current subsystem, if any. Returns
+ *	NULL if permissions have to be checked in next subsystem, in
+ *	which case the subsystem has already been entered.
+ */
+static /*@only@*/struct passwd * do_check_perms (void)
 {
 #ifdef USE_PAM
 	const void *tmp_name;
@@ -692,7 +708,7 @@ static /*@only@*/struct passwd * check_perms (void)
 		endpwent ();		/* close the old password databases */
 		endspent ();
 		pw_free (pw);
-		return check_perms ();	/* authenticate in the subsystem */
+		return NULL;	/* authenticate in the subsystem */
 	}
 
 	return pw;
