@@ -68,6 +68,9 @@ void nss_init(const char *nsswitch_path) {
 		return;
 	}
 	while ((getline(&line, &len, nssfp)) != -1) {
+		char libname[65];
+		void *h;
+
 		if (line[0] == '\0' || line[0] == '#')
 			continue;
 		if (strlen(line) < 8)
@@ -79,65 +82,62 @@ void nss_init(const char *nsswitch_path) {
 			p++;
 		if (!*p)
 			continue;
-		for (token = strtok_r(p, " \n\t", &saveptr);
-		     token;
-		     token = strtok_r(NULL, " \n\t", &saveptr)) {
-			char libname[65];
-			void *h;
-			if (strcmp(token, "files") == 0) {
-				subid_nss = NULL;
-				goto done;
-			}
-			if (strlen(token) > 50) {
-				fprintf(shadow_logfd, "Subid NSS module name too long (longer than 50 characters): %s\n", token);
-				fprintf(shadow_logfd, "Using files\n");
-				subid_nss = NULL;
-				goto done;
-			}
-			snprintf(libname, 64,  "libsubid_%s.so", token);
-			h = dlopen(libname, RTLD_LAZY);
-			if (!h) {
-				fprintf(shadow_logfd, "Error opening %s: %s\n", libname, dlerror());
-				fprintf(shadow_logfd, "Using files\n");
-				subid_nss = NULL;
-				goto done;
-			}
-			subid_nss = MALLOC(struct subid_nss_ops);
-			if (!subid_nss) {
-				dlclose(h);
-				goto done;
-			}
-			subid_nss->has_range = dlsym(h, "shadow_subid_has_range");
-			if (!subid_nss->has_range) {
-				fprintf(shadow_logfd, "%s did not provide @has_range@\n", libname);
-				dlclose(h);
-				free(subid_nss);
-				subid_nss = NULL;
-				goto done;
-			}
-			subid_nss->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
-			if (!subid_nss->list_owner_ranges) {
-				fprintf(shadow_logfd, "%s did not provide @list_owner_ranges@\n", libname);
-				dlclose(h);
-				free(subid_nss);
-				subid_nss = NULL;
-				goto done;
-			}
-			subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
-			if (!subid_nss->find_subid_owners) {
-				fprintf(shadow_logfd, "%s did not provide @find_subid_owners@\n", libname);
-				dlclose(h);
-				free(subid_nss);
-				subid_nss = NULL;
-				goto done;
-			}
-			subid_nss->handle = h;
+		token = strtok_r(p, " \n\t", &saveptr);
+		if (token == NULL) {
+			fprintf(shadow_logfd, "No usable subid NSS module found, using files\n");
+			// subid_nss has to be null here, but to ease reviews:
+			free(subid_nss);
+			subid_nss = NULL;
 			goto done;
 		}
-		fprintf(shadow_logfd, "No usable subid NSS module found, using files\n");
-		// subid_nss has to be null here, but to ease reviews:
-		free(subid_nss);
-		subid_nss = NULL;
+		if (strcmp(token, "files") == 0) {
+			subid_nss = NULL;
+			goto done;
+		}
+		if (strlen(token) > 50) {
+			fprintf(shadow_logfd, "Subid NSS module name too long (longer than 50 characters): %s\n", token);
+			fprintf(shadow_logfd, "Using files\n");
+			subid_nss = NULL;
+			goto done;
+		}
+		snprintf(libname, 64,  "libsubid_%s.so", token);
+		h = dlopen(libname, RTLD_LAZY);
+		if (!h) {
+			fprintf(shadow_logfd, "Error opening %s: %s\n", libname, dlerror());
+			fprintf(shadow_logfd, "Using files\n");
+			subid_nss = NULL;
+			goto done;
+		}
+		subid_nss = MALLOC(struct subid_nss_ops);
+		if (!subid_nss) {
+			dlclose(h);
+			goto done;
+		}
+		subid_nss->has_range = dlsym(h, "shadow_subid_has_range");
+		if (!subid_nss->has_range) {
+			fprintf(shadow_logfd, "%s did not provide @has_range@\n", libname);
+			dlclose(h);
+			free(subid_nss);
+			subid_nss = NULL;
+			goto done;
+		}
+		subid_nss->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
+		if (!subid_nss->list_owner_ranges) {
+			fprintf(shadow_logfd, "%s did not provide @list_owner_ranges@\n", libname);
+			dlclose(h);
+			free(subid_nss);
+			subid_nss = NULL;
+			goto done;
+		}
+		subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
+		if (!subid_nss->find_subid_owners) {
+			fprintf(shadow_logfd, "%s did not provide @find_subid_owners@\n", libname);
+			dlclose(h);
+			free(subid_nss);
+			subid_nss = NULL;
+			goto done;
+		}
+		subid_nss->handle = h;
 		goto done;
 	}
 
