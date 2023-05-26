@@ -70,14 +70,14 @@ void nss_init(const char *nsswitch_path) {
 		return;
 	}
 	while ((getline(&line, &len, nssfp)) != -1) {
-		if (line[0] == '\0' || line[0] == '#')
+		if (line[0] == '#')
 			continue;
 		if (strlen(line) < 8)
 			continue;
 		if (strncasecmp(line, "subid:", 6) != 0)
 			continue;
 		p = &line[6];
-		while ((*p) && isspace(*p))
+		while (isspace(*p))
 			p++;
 		if (*p != '\0')
 			break;
