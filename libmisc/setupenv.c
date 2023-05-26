@@ -63,7 +63,7 @@ static void read_env_file (const char *filename)
 
 		cp = buf;
 		/* ignore whitespace and comments */
-		while (('\0' != *cp) && isspace (*cp)) {
+		while (isspace (*cp)) {
 			cp++;
 		}
 		if (('\0' == *cp) || ('#' == *cp)) {

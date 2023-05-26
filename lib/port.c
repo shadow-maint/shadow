@@ -243,9 +243,7 @@ static struct port *getportent (void)
 		 * week or the other two values.
 		 */
 
-		for (i = 0;
-		     ('\0' != cp[i]) && ('\0' != cp[i + 1]) && isalpha (cp[i]);
-		     i += 2) {
+		for (i = 0; isalpha(cp[i]) && ('\0' != cp[i + 1]); i += 2) {
 			switch ((cp[i] << 8) | (cp[i + 1])) {
 			case ('S' << 8) | 'u':
 				port.pt_times[j].t_days |= 01;
@@ -294,7 +292,7 @@ static struct port *getportent (void)
 		 * representing the times of day.
 		 */
 
-		for (dtime = 0; ('\0' != cp[i]) && isdigit (cp[i]); i++) {
+		for (dtime = 0; isdigit (cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
@@ -304,9 +302,7 @@ static struct port *getportent (void)
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
 
-		for (dtime = 0, i = 0;
-		     ('\0' != cp[i]) && isdigit (cp[i]);
-		     i++) {
+		for (dtime = 0, i = 0; isdigit (cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
