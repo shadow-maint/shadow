@@ -79,13 +79,11 @@
 			break;
 		}
 
-		if (length <= ((size_t)-1 / 4)) {
-			length *= 4;
-		} else if (length == (size_t) -1) {
+		if (length == SIZE_MAX) {
 			break;
-		} else {
-			length = (size_t) -1;
 		}
+
+		length = (length <= SIZE_MAX / 4) ? length * 4 : SIZE_MAX;
 	}
 
 	free(buffer);
