@@ -54,9 +54,7 @@
 
 	result = MALLOC(LOOKUP_TYPE);
 	if (NULL == result) {
-		fprintf (log_get_logfd(), _("%s: out of memory\n"),
-		         "x" STRINGIZE(FUNCTION_NAME));
-		exit (13);
+		goto oom;
 	}
 
 	while (true) {
@@ -70,10 +68,7 @@
 			 * the shadow *_free functions. */
 			LOOKUP_TYPE *ret_result = DUP_FUNCTION(result);
 			if (NULL == ret_result) {
-				fprintf (log_get_logfd(),
-				         _("%s: out of memory\n"),
-				         "x" STRINGIZE(FUNCTION_NAME));
-				exit (13);
+				goto oom;
 			}
 			free(buffer);
 			free(result);
@@ -110,13 +105,16 @@
 	if (result) {
 		result = DUP_FUNCTION(result);
 		if (NULL == result) {
-			fprintf (log_get_logfd(), _("%s: out of memory\n"),
-			         "x" STRINGIZE(FUNCTION_NAME));
-			exit (13);
+			goto oom;
 		}
 	}
 
 	return result;
 #endif
+
+oom:
+	fprintf (log_get_logfd(), _("%s: out of memory\n"),
+		 "x" STRINGIZE(FUNCTION_NAME));
+	exit (13);
 }
 
