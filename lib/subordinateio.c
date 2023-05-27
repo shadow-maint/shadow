@@ -315,15 +315,16 @@ static bool have_range(struct commonio_db *db,
 
 static bool append_range(struct subid_range **ranges, const struct subordinate_range *new, int n)
 {
-	struct subid_range  *alloced;
+	struct subid_range  *sr;
 
-	alloced = REALLOC(*ranges, n + 1, struct subid_range);
-	if (!alloced)
+	sr = REALLOC(*ranges, n + 1, struct subid_range);
+	if (!sr)
 		return false;
-	*ranges = alloced;
 
-	(*ranges)[n].start = new->start;
-	(*ranges)[n].count = new->count;
+	sr[n].start = new->start;
+	sr[n].count = new->count;
+	*ranges = sr;
+
 	return true;
 }
 
