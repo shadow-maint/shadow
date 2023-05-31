@@ -82,6 +82,7 @@ void nss_init(const char *nsswitch_path) {
 			p++;
 		if (*p != '\0')
 			break;
+		p = NULL;
 	}
 	if (p == NULL) {
 		goto null_subid;
