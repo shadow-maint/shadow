@@ -69,7 +69,8 @@ void nss_init(const char *nsswitch_path) {
 		atomic_store(&nss_init_completed, true);
 		return;
 	}
-	while ((getline(&line, &len, nssfp)) != -1) {
+	p = NULL;
+	while (getline(&line, &len, nssfp) != -1) {
 		if (line[0] == '#')
 			continue;
 		if (strlen(line) < 8)
@@ -81,6 +82,9 @@ void nss_init(const char *nsswitch_path) {
 			p++;
 		if (*p != '\0')
 			break;
+	}
+	if (p == NULL) {
+		goto null_subid;
 	}
 	token = strtok_r(p, " \n\t", &saveptr);
 	if (token == NULL) {
