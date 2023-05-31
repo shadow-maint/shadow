@@ -665,7 +665,7 @@ static void process_flags (int argc, char **argv)
 
 			if (!crypt_method){
 				fprintf(stderr,
-						_("%s: Provide '--crypt-method'\n"),
+						_("%s: Provide '--crypt-method' before number of rounds\n"),
 						Prog);
 				usage (EXIT_FAILURE);
 			}
