@@ -110,15 +110,15 @@ csrand_uniform32(uint32_t n)
 	if (n == 0)
 		return csrand();
 
-	bound = -n % n;  // analogous to `2^64 % n`, since `x % y == (x-y) % y`
+	bound = -n % n;  // analogous to `2^32 % n`, since `x % y == (x-y) % y`
 
 	do {
 		r = csrand();
 		mult = r * n;
-		rem = mult;  // analogous to `mult % 2^64`
-	} while (rem < bound);  // p = (2^64 % n) / 2^64;  W.C.: n=2^63+1, p=0.5
+		rem = mult;  // analogous to `mult % 2^32`
+	} while (rem < bound);  // p = (2^32 % n) / 2^32;  W.C.: n=2^31+1, p=0.5
 
-	r = mult >> WIDTHOF(n);  // analogous to `mult / 2^64`
+	r = mult >> WIDTHOF(n);  // analogous to `mult / 2^32`
 
 	return r;
 }
