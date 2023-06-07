@@ -236,106 +236,80 @@ static void check_uid_range(int rflg, uid_t user_id);
  */
 static void fail_exit (int code)
 {
-	if (home_added) {
-		if (rmdir (prefix_user_home) != 0) {
-			fprintf (stderr,
-			         _("%s: %s was created, but could not be removed\n"),
-			         Prog, prefix_user_home);
-			SYSLOG ((LOG_ERR, "failed to remove %s", prefix_user_home));
-		}
+	if (home_added && rmdir(prefix_user_home) != 0) {
+		fprintf(stderr,
+		        _("%s: %s was created, but could not be removed\n"),
+		        Prog, prefix_user_home);
+		SYSLOG((LOG_ERR, "failed to remove %s", prefix_user_home));
 	}
 
-	if (spw_locked) {
-		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+	if (spw_locked && spw_unlock() == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
+		SYSLOG((LOG_ERR, "failed to unlock %s", spw_dbname()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking shadow file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_ADD_USER, Prog, "unlocking shadow file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-			/* continue */
-		}
+		/* continue */
 	}
-	if (pw_locked) {
-		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+	if (pw_locked && pw_unlock() == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
+		SYSLOG((LOG_ERR, "failed to unlock %s", pw_dbname()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking passwd file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_ADD_USER, Prog, "unlocking passwd file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-			/* continue */
-		}
+		/* continue */
 	}
-	if (gr_locked) {
-		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+	if (gr_locked && gr_unlock() == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
+		SYSLOG((LOG_ERR, "failed to unlock %s", gr_dbname()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking group file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
+		audit_logger(AUDIT_ADD_USER, Prog, "unlocking group file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-			/* continue */
-		}
+		/* continue */
 	}
-#ifdef	SHADOWGRP
-	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking gshadow file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			/* continue */
-		}
+#ifdef SHADOWGRP
+	if (sgr_locked && sgr_unlock() == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+		SYSLOG((LOG_ERR, "failed to unlock %s", sgr_dbname()));
+# ifdef WITH_AUDIT
+		audit_logger(AUDIT_ADD_USER, Prog, "unlocking gshadow file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+# endif
+		/* continue */
 	}
 #endif
 #ifdef ENABLE_SUBIDS
-	if (sub_uid_locked) {
-		if (sub_uid_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking subordinate user file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			/* continue */
-		}
+	if (sub_uid_locked && sub_uid_unlock() == 0) {
+		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
+		SYSLOG((LOG_ERR, "failed to unlock %s", sub_uid_dbname()));
+# ifdef WITH_AUDIT
+		audit_logger(AUDIT_ADD_USER, Prog,
+		             "unlocking subordinate user file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+# endif
+		/* continue */
 	}
-	if (sub_gid_locked) {
-		if (sub_gid_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-			              "unlocking subordinate group file",
-			              user_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			/* continue */
-		}
+	if (sub_gid_locked && sub_gid_unlock() == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname()));
+# ifdef WITH_AUDIT
+		audit_logger(AUDIT_ADD_USER, Prog,
+			     "unlocking subordinate group file",
+			     user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+# endif
+		/* continue */
 	}
-#endif				/* ENABLE_SUBIDS */
+#endif  /* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, Prog,
-	              "adding user",
-	              user_name, AUDIT_NO_ID,
-	              SHADOW_AUDIT_FAILURE);
+	audit_logger(AUDIT_ADD_USER, Prog, "adding user",
+	             user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-	SYSLOG ((LOG_INFO, "failed adding user '%s', exit code: %d", user_name, code));
-	exit (code);
+	SYSLOG((LOG_INFO, "failed adding user '%s', exit code: %d", user_name, code));
+	exit(code);
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
