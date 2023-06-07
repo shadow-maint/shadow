@@ -73,5 +73,5 @@ long strtoday (const char *str)
 		return -2;
 	}
 	/* convert seconds to days since 1970-01-01 */
-	return (long) (t + DAY / 2) / DAY;
+	return (t + DAY / 2) / DAY;
 }
