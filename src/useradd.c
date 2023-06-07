@@ -1762,23 +1762,25 @@ static void close_files (void)
  */
 static void close_group_files (void)
 {
-	if (do_grp_update) {
-		if (gr_close () == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
-			fail_exit (E_GRP_UPDATE);
-		}
-#ifdef	SHADOWGRP
-		if (is_shadow_grp && (sgr_close () == 0)) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
-			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-			fail_exit (E_GRP_UPDATE);
-		}
-#endif /* SHADOWGRP */
+	if (!do_grp_update)
+		return;
+
+	if (gr_close() == 0) {
+		fprintf(stderr,
+		        _("%s: failure while writing changes to %s\n"),
+		        Prog, gr_dbname());
+		SYSLOG((LOG_ERR, "failure while writing changes to %s", gr_dbname()));
+		fail_exit(E_GRP_UPDATE);
 	}
+#ifdef	SHADOWGRP
+	if (is_shadow_grp && sgr_close() == 0) {
+		fprintf(stderr,
+		        _("%s: failure while writing changes to %s\n"),
+		        Prog, sgr_dbname());
+		SYSLOG((LOG_ERR, "failure while writing changes to %s", sgr_dbname()));
+		fail_exit(E_GRP_UPDATE);
+	}
+#endif /* SHADOWGRP */
 }
 
 /*
