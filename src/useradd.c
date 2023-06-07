@@ -2283,24 +2283,25 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 static void create_home (void)
 {
 	if (access (prefix_user_home, F_OK) != 0) {
-		char path[strlen (prefix_user_home) + 2];
-		char *bhome, *cp;
+		char    path[strlen(prefix_user_home) + 2];
+		char    *bhome, *cp;
+		mode_t  mode;
 
 		path[0] = '\0';
-		bhome = strdup (prefix_user_home);
+		bhome = strdup(prefix_user_home);
 		if (!bhome) {
-			fprintf (stderr,
-							_("%s: error while duplicating string %s\n"),
-							Prog, user_home);
-			fail_exit (E_HOMEDIR);
+			fprintf(stderr,
+			        _("%s: error while duplicating string %s\n"),
+			        Prog, user_home);
+			fail_exit(E_HOMEDIR);
 		}
 
 #ifdef WITH_SELINUX
-		if (set_selinux_file_context (prefix_user_home, S_IFDIR) != 0) {
-			fprintf (stderr,
-			         _("%s: cannot set SELinux context for home directory %s\n"),
-			         Prog, user_home);
-			fail_exit (E_HOMEDIR);
+		if (set_selinux_file_context(prefix_user_home, S_IFDIR) != 0) {
+			fprintf(stderr,
+			        _("%s: cannot set SELinux context for home directory %s\n"),
+			        Prog, user_home);
+			fail_exit(E_HOMEDIR);
 		}
 #endif
 
@@ -2308,15 +2309,15 @@ static void create_home (void)
 		   exists. If not, create it with permissions 755 and
 		   owner root:root.
 		 */
-		cp = strtok (bhome, "/");
+		cp = strtok(bhome, "/");
 		while (cp) {
                         /* Avoid turning a relative path into an absolute path.
                          */
-                        if (bhome[0] == '/' || strlen (path) != 0) {
-			        strcat (path, "/");
+                        if (bhome[0] == '/' || strlen(path) != 0) {
+			        strcat(path, "/");
                         }
-			strcat (path, cp);
-			if (access (path, F_OK) != 0) {
+			strcat(path, cp);
+			if (access(path, F_OK) != 0) {
 				/* Check if parent directory is BTRFS, fail if requesting
 				   subvolume but no BTRFS. The paths could be different by the
 				   trailing slash
@@ -2326,74 +2327,71 @@ static void create_home (void)
 					char *btrfs_check = strdup(path);
 
 					if (!btrfs_check) {
-						fprintf (stderr,
-						         _("%s: error while duplicating string in BTRFS check %s\n"),
-						         Prog, path);
-						fail_exit (E_HOMEDIR);
+						fprintf(stderr,
+						        _("%s: error while duplicating string in BTRFS check %s\n"),
+						        Prog, path);
+						fail_exit(E_HOMEDIR);
 					}
 					btrfs_check[strlen(path) - strlen(cp) - 1] = '\0';
 					if (is_btrfs(btrfs_check) <= 0) {
-						fprintf (stderr,
-						         _("%s: home directory \"%s\" must be mounted on BTRFS\n"),
-						         Prog, path);
-						fail_exit (E_HOMEDIR);
+						fprintf(stderr,
+						        _("%s: home directory \"%s\" must be mounted on BTRFS\n"),
+						        Prog, path);
+						fail_exit(E_HOMEDIR);
 					}
 					// make subvolume to mount for user instead of directory
 					if (btrfs_create_subvolume(path)) {
-						fprintf (stderr,
-						         _("%s: failed to create BTRFS subvolume: %s\n"),
-						         Prog, path);
-						fail_exit (E_HOMEDIR);
+						fprintf(stderr,
+						        _("%s: failed to create BTRFS subvolume: %s\n"),
+						        Prog, path);
+						fail_exit(E_HOMEDIR);
 					}
 				}
 				else
 #endif
-				if (mkdir (path, 0) != 0) {
-			fprintf (stderr,
-							_("%s: cannot create directory %s\n"),
-							Prog, path);
+				if (mkdir(path, 0) != 0) {
+					fprintf(stderr, _("%s: cannot create directory %s\n"),
+					        Prog, path);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
-				"adding home directory",
-				user_name, user_id, SHADOW_AUDIT_FAILURE);
+					audit_logger(AUDIT_ADD_USER, Prog, "adding home directory",
+					             user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif
-			fail_exit (E_HOMEDIR);
-		}
-				if (chown (path, 0, 0) < 0) {
-					fprintf (stderr,
-									_("%s: warning: chown on `%s' failed: %m\n"),
-									Prog, path);
+					fail_exit(E_HOMEDIR);
 				}
-				if (chmod (path, 0755) < 0) {
-					fprintf (stderr,
-									_("%s: warning: chmod on `%s' failed: %m\n"),
-									Prog, path);
+				if (chown(path, 0, 0) < 0) {
+					fprintf(stderr,
+					        _("%s: warning: chown on `%s' failed: %m\n"),
+					        Prog, path);
+				}
+				if (chmod(path, 0755) < 0) {
+					fprintf(stderr,
+					        _("%s: warning: chmod on `%s' failed: %m\n"),
+					        Prog, path);
 				}
 			}
-			cp = strtok (NULL, "/");
+			cp = strtok(NULL, "/");
 		}
-		free (bhome);
+		free(bhome);
 
-		(void) chown (prefix_user_home, user_id, user_gid);
-		mode_t mode = getdef_num ("HOME_MODE",
-		                          0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
-		if (chmod (prefix_user_home, mode)) {
-			fprintf (stderr, _("%s: warning: chown on '%s' failed: %m\n"),
-			                 Prog, path);
+		(void) chown(prefix_user_home, user_id, user_gid);
+		mode = getdef_num("HOME_MODE",
+		                  0777 & ~getdef_num("UMASK", GETDEF_DEFAULT_UMASK));
+		if (chmod(prefix_user_home, mode)) {
+			fprintf(stderr, _("%s: warning: chown on '%s' failed: %m\n"),
+			        Prog, path);
 		}
 		home_added = true;
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_USER, Prog,
-		              "adding home directory",
-		              user_name, user_id, SHADOW_AUDIT_SUCCESS);
+		audit_logger(AUDIT_ADD_USER, Prog, "adding home directory",
+		             user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif
 #ifdef WITH_SELINUX
 		/* Reset SELinux to create files with default contexts */
-		if (reset_selinux_file_context () != 0) {
-			fprintf (stderr,
-			         _("%s: cannot reset SELinux file creation context\n"),
-			         Prog);
-			fail_exit (E_HOMEDIR);
+		if (reset_selinux_file_context() != 0) {
+			fprintf(stderr,
+			        _("%s: cannot reset SELinux file creation context\n"),
+			        Prog);
+			fail_exit(E_HOMEDIR);
 		}
 #endif
 	}
