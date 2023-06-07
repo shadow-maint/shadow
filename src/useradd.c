@@ -2317,57 +2317,59 @@ static void create_home (void)
 			strcat(path, "/");
 		}
 		strcat(path, cp);
-		if (access(path, F_OK) != 0) {
-			/* Check if parent directory is BTRFS, fail if requesting
-			   subvolume but no BTRFS. The paths could be different by the
-			   trailing slash
-			 */
-#if WITH_BTRFS
-			if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
-				char *btrfs_check = strdup(path);
+		if (access(path, F_OK) == 0) {
+			continue;
+		}
 
-				if (!btrfs_check) {
-					fprintf(stderr,
-						_("%s: error while duplicating string in BTRFS check %s\n"),
-						Prog, path);
-					fail_exit(E_HOMEDIR);
-				}
-				btrfs_check[strlen(path) - strlen(cp) - 1] = '\0';
-				if (is_btrfs(btrfs_check) <= 0) {
-					fprintf(stderr,
-						_("%s: home directory \"%s\" must be mounted on BTRFS\n"),
-						Prog, path);
-					fail_exit(E_HOMEDIR);
-				}
-				// make subvolume to mount for user instead of directory
-				if (btrfs_create_subvolume(path)) {
-					fprintf(stderr,
-						_("%s: failed to create BTRFS subvolume: %s\n"),
-						Prog, path);
-					fail_exit(E_HOMEDIR);
-				}
-			}
-			else
-#endif
-			if (mkdir(path, 0) != 0) {
-				fprintf(stderr, _("%s: cannot create directory %s\n"),
+		/* Check if parent directory is BTRFS, fail if requesting
+		   subvolume but no BTRFS. The paths could be different by the
+		   trailing slash
+		 */
+#if WITH_BTRFS
+		if (subvolflg && (strlen(prefix_user_home) - (int)strlen(path)) <= 1) {
+			char *btrfs_check = strdup(path);
+
+			if (!btrfs_check) {
+				fprintf(stderr,
+					_("%s: error while duplicating string in BTRFS check %s\n"),
 					Prog, path);
-#ifdef WITH_AUDIT
-				audit_logger(AUDIT_ADD_USER, Prog, "adding home directory",
-					     user_name, user_id, SHADOW_AUDIT_FAILURE);
-#endif
 				fail_exit(E_HOMEDIR);
 			}
-			if (chown(path, 0, 0) < 0) {
+			btrfs_check[strlen(path) - strlen(cp) - 1] = '\0';
+			if (is_btrfs(btrfs_check) <= 0) {
 				fprintf(stderr,
-					_("%s: warning: chown on `%s' failed: %m\n"),
+					_("%s: home directory \"%s\" must be mounted on BTRFS\n"),
 					Prog, path);
+				fail_exit(E_HOMEDIR);
 			}
-			if (chmod(path, 0755) < 0) {
+			// make subvolume to mount for user instead of directory
+			if (btrfs_create_subvolume(path)) {
 				fprintf(stderr,
-					_("%s: warning: chmod on `%s' failed: %m\n"),
+					_("%s: failed to create BTRFS subvolume: %s\n"),
 					Prog, path);
+				fail_exit(E_HOMEDIR);
 			}
+		}
+		else
+#endif
+		if (mkdir(path, 0) != 0) {
+			fprintf(stderr, _("%s: cannot create directory %s\n"),
+				Prog, path);
+#ifdef WITH_AUDIT
+			audit_logger(AUDIT_ADD_USER, Prog, "adding home directory",
+				     user_name, user_id, SHADOW_AUDIT_FAILURE);
+#endif
+			fail_exit(E_HOMEDIR);
+		}
+		if (chown(path, 0, 0) < 0) {
+			fprintf(stderr,
+				_("%s: warning: chown on `%s' failed: %m\n"),
+				Prog, path);
+		}
+		if (chmod(path, 0755) < 0) {
+			fprintf(stderr,
+				_("%s: warning: chmod on `%s' failed: %m\n"),
+				Prog, path);
 		}
 	}
 	free(bhome);
