@@ -2406,76 +2406,78 @@ static void create_home (void)
  */
 static void create_mail (void)
 {
-	if (strcasecmp (create_mail_spool, "yes") == 0) {
-		const char *spool;
-		char *file;
-		size_t size;
-		int fd;
-		struct group *gr;
-		gid_t gid;
-		mode_t mode;
+	int           fd;
+	char          *file;
+	gid_t         gid;
+	mode_t        mode;
+	size_t        size;
+	const char    *spool;
+	struct group  *gr;
 
-		spool = getdef_str ("MAIL_DIR");
+	if (strcasecmp(create_mail_spool, "yes") != 0)
+		return;
+
+	spool = getdef_str("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
-		if ((NULL == spool) && (getdef_str ("MAIL_FILE") == NULL)) {
-			spool = MAIL_SPOOL_DIR;
-		}
-#endif /* MAIL_SPOOL_DIR */
-		if (NULL == spool) {
-			return;
-		}
-		size = strlen(prefix) + strlen(spool) + strlen(user_name) + 3;
-		file = XMALLOC(size, char);
-		if (prefix[0])
-			sprintf (file, "%s/%s/%s", prefix, spool, user_name);
-		else
-			sprintf (file, "%s/%s", spool, user_name);
-
-#ifdef WITH_SELINUX
-		if (set_selinux_file_context (file, S_IFREG) != 0) {
-			fprintf (stderr,
-			         _("%s: cannot set SELinux context for mailbox file %s\n"),
-			         Prog, file);
-			fail_exit (E_MAILBOXFILE);
-		}
-#endif
-
-		fd = open (file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);
-		free(file);
-
-		if (fd < 0) {
-			perror (_("Creating mailbox file"));
-			return;
-		}
-
-		gr = prefix_getgrnam ("mail"); /* local, no need for xgetgrnam */
-		if (NULL == gr) {
-			fputs (_("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"),
-			       stderr);
-			gid = user_gid;
-			mode = 0600;
-		} else {
-			gid = gr->gr_gid;
-			mode = 0660;
-		}
-
-		if (   (fchown (fd, user_id, gid) != 0)
-		    || (fchmod (fd, mode) != 0)) {
-			perror (_("Setting mailbox file permissions"));
-		}
-
-		fsync (fd);
-		close (fd);
-#ifdef WITH_SELINUX
-		/* Reset SELinux to create files with default contexts */
-		if (reset_selinux_file_context () != 0) {
-			fprintf (stderr,
-			         _("%s: cannot reset SELinux file creation context\n"),
-			         Prog);
-			fail_exit (E_MAILBOXFILE);
-		}
-#endif
+	if ((NULL == spool) && (getdef_str("MAIL_FILE") == NULL)) {
+		spool = MAIL_SPOOL_DIR;
 	}
+#endif /* MAIL_SPOOL_DIR */
+	if (NULL == spool) {
+		return;
+	}
+	size = strlen(prefix) + strlen(spool) + strlen(user_name) + 3;
+	file = XMALLOC(size, char);
+	if (prefix[0])
+		sprintf(file, "%s/%s/%s", prefix, spool, user_name);
+	else
+		sprintf(file, "%s/%s", spool, user_name);
+
+#ifdef WITH_SELINUX
+	if (set_selinux_file_context(file, S_IFREG) != 0) {
+		fprintf(stderr,
+		        _("%s: cannot set SELinux context for mailbox file %s\n"),
+		        Prog, file);
+		fail_exit(E_MAILBOXFILE);
+	}
+#endif
+
+	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);
+	free(file);
+
+	if (fd < 0) {
+		perror(_("Creating mailbox file"));
+		return;
+	}
+
+	gr = prefix_getgrnam("mail"); /* local, no need for xgetgrnam */
+	if (NULL == gr) {
+		fputs(_("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"),
+		       stderr);
+		gid = user_gid;
+		mode = 0600;
+	} else {
+		gid = gr->gr_gid;
+		mode = 0660;
+	}
+
+	if (fchown(fd, user_id, gid) != 0
+	 || fchmod(fd, mode) != 0)
+	{
+		perror(_("Setting mailbox file permissions"));
+	}
+
+	fsync(fd);
+	close(fd);
+#ifdef WITH_SELINUX
+	/* Reset SELinux to create files with default contexts */
+	if (reset_selinux_file_context() != 0) {
+		fprintf(stderr,
+		        _("%s: cannot reset SELinux file creation context\n"),
+		        Prog);
+		fail_exit(E_MAILBOXFILE);
+	}
+#endif
 }
 
 static void check_uid_range(int rflg, uid_t user_id)
