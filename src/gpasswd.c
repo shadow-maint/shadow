@@ -898,6 +898,7 @@ static void change_passwd (struct group *gr)
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
+			memzero (pass, sizeof pass);
 			exit (1);
 		}
 
