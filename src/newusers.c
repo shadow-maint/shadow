@@ -60,7 +60,7 @@ static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
 static /*@null@*//*@observer@*/char *crypt_method = NULL;
 #define cflg (NULL != crypt_method)
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT)
+#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 static bool sflg = false;
 #endif
 #ifdef USE_SHA_CRYPT
