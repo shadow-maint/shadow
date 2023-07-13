@@ -15,7 +15,6 @@ man_MANS = \
 	man1/groups.1 \
 	man8/grpck.8 \
 	man5/gshadow.5 \
-	man8/lastlog.8 \
 	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man8/nologin.8 \
@@ -28,6 +27,10 @@ man_MANS = \
 	man8/userdel.8 \
 	man8/vigr.8 \
 	man8/vipw.8
+
+if ENABLE_LASTLOG
+man_MANS += man8/lastlog.8
+endif
 
 man_nopam = \
 	man5/limits.5 \

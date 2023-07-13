@@ -31,6 +31,16 @@ else
 SUBIDS_COND=no_subids
 endif
 
+if ENABLE_LASTLOG
+if !USE_PAM
+LASTLOG_COND=lastlog
+else
+LASTLOG_COND=no_lastlog
+endif
+else
+LASTLOG_COND=no_lastlog
+endif
+
 if ENABLE_REGENERATE_MAN
 %.xml-config: %.xml
 	if grep -q SHADOW-CONFIG-HERE $<; then \
@@ -40,7 +50,7 @@ if ENABLE_REGENERATE_MAN
 	fi
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND);$(LASTLOG_COND)" \
 	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
 	            --stringparam vendordir "$(VENDORDIR)" \
