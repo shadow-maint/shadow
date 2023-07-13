@@ -48,7 +48,7 @@ libmisc_la_SOURCES = \
 	idmapping.c \
 	isexpired.c \
 	limits.c \
-	list.c log.c \
+	list.c \
 	loginprompt.c \
 	mail.c \
 	mempcpy.c \
@@ -92,3 +92,6 @@ if WITH_BTRFS
 libmisc_la_SOURCES += btrfs.c
 endif
 
+if ENABLE_LASTLOG
+libmisc_la_SOURCES += log.c
+endif

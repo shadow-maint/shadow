@@ -28,7 +28,9 @@
 #include <pwd.h>
 #include <grp.h>
 #include <shadow.h>
+#ifdef ENABLE_LASTLOG
 #include <lastlog.h>
+#endif /* ENABLE_LASTLOG */
 
 #include "defines.h"
 #include "commonio.h"
@@ -222,12 +224,14 @@ extern /*@only@*/ /*@out@*/char **dup_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 
+#ifdef ENABLE_LASTLOG
 /* log.c */
 extern void dolastlog (
 	struct lastlog *ll,
 	const struct passwd *pw,
 	/*@unique@*/const char *line,
 	/*@unique@*/const char *host);
+#endif /* ENABLE_LASTLOG */
 
 /* login_nopam.c */
 extern int login_access (const char *user, const char *from);

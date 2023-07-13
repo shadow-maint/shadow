@@ -14,7 +14,9 @@
 #include <errno.h>
 #include <grp.h>
 #ifndef USE_PAM
+#ifdef ENABLE_LASTLOG
 #include <lastlog.h>
+#endif 				/* ENABLE_LASTLOG */
 #endif				/* !USE_PAM */
 #include <pwd.h>
 #include <signal.h>
@@ -69,7 +71,9 @@ static /*@null@*/ /*@only@*/char *username = NULL;
 static int reason = PW_LOGIN;
 
 #ifndef USE_PAM
+#ifdef ENABLE_LASTLOG
 static struct lastlog ll;
+#endif				/* ENABLE_LASTLOG */
 #endif				/* !USE_PAM */
 static bool pflg = false;
 static bool fflg = false;
@@ -498,7 +502,9 @@ int main (int argc, char **argv)
 	char term[128] = "";
 #endif				/* RLOGIN */
 #if !defined(USE_PAM)
+#ifdef ENABLE_LASTLOG
 	char ptime[80];
+#endif /* ENABLE_LASTLOG */
 #endif
 	unsigned int delay;
 	unsigned int retries;
@@ -1128,11 +1134,13 @@ int main (int argc, char **argv)
 #endif				/* WITH_AUDIT */
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
+#ifdef ENABLE_LASTLOG
 	if (   getdef_bool ("LASTLOG_ENAB")
 	    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)) {
 		/* give last login and log this one */
 		dolastlog (&ll, pwd, tty, hostname);
 	}
+#endif /* ENABLE_LASTLOG */
 #endif
 
 #ifndef USE_PAM			/* PAM handles this as well */
@@ -1266,6 +1274,7 @@ int main (int argc, char **argv)
 				         username, (int) faillog.fail_cnt));
 			}
 		}
+#ifdef ENABLE_LASTLOG
 		if (   getdef_bool ("LASTLOG_ENAB")
 		    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)
 		    && (ll.ll_time != 0)) {
@@ -1284,6 +1293,7 @@ int main (int argc, char **argv)
 #endif
 			printf (".\n");
 		}
+#endif /* ENABLE_LASTLOG */
 		agecheck (spwd);
 
 		mailcheck ();	/* report on the status of mail */
