@@ -68,23 +68,6 @@ AC_CHECK_MEMBERS([struct utmp.ut_type,
                   struct utmp.ut_xtime,
                   struct utmp.ut_tv],,,[[#include <utmp.h>]])
 
-if test "$ac_cv_header_lastlog_h" = "yes"; then
-	AC_CACHE_CHECK(for ll_host in struct lastlog,
-		ac_cv_struct_lastlog_ll_host,
-		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <lastlog.h>],
-					[struct lastlog ll; char *cp = ll.ll_host;]
-				)],
-			[ac_cv_struct_lastlog_ll_host=yes],
-			[ac_cv_struct_lastlog_ll_host=no]
-		)
-	)
-
-	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
-		AC_DEFINE(HAVE_LL_HOST, 1,
-			[Define if struct lastlog has ll_host])
-	fi
-fi
-
 dnl Checks for library functions.
 AC_TYPE_GETGROUPS
 AC_FUNC_UTIME_NULL
@@ -220,6 +203,13 @@ AC_ARG_ENABLE(subordinate-ids,
 		[support subordinate ids @<:@default=yes@:>@])],
 	[enable_subids="${enableval}"],
 	[enable_subids="maybe"]
+)
+
+AC_ARG_ENABLE(lastlog,
+	[AS_HELP_STRING([--enable-lastlog],
+		[enable lastlog @<:@default=no@:>@])],
+	[enable_lastlog="${enableval}"],
+	[enable_lastlog="no"]
 )
 
 AC_ARG_WITH(audit,
@@ -373,6 +363,28 @@ if test "$enable_subids" != "no"; then
 	fi
 fi
 AM_CONDITIONAL(ENABLE_SUBIDS, test "x$enable_subids" != "xno")
+
+if test "x$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; then
+	AC_CACHE_CHECK(for ll_host in struct lastlog,
+		ac_cv_struct_lastlog_ll_host,
+		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <lastlog.h>],
+					[struct lastlog ll; char *cp = ll.ll_host;]
+				)],
+			[ac_cv_struct_lastlog_ll_host=yes],
+			[ac_cv_struct_lastlog_ll_host=no]
+		)
+	)
+
+	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
+		AC_DEFINE(HAVE_LL_HOST, 1,
+			[Define if struct lastlog has ll_host])
+		enable_lastlog="yes"
+	else
+		AC_MSG_ERROR([Cannot enable support for lastlog on systems where the data structures aren't available])
+		enable_subids="no"
+	fi
+fi
+AM_CONDITIONAL(ENABLE_LASTLOG, test "x$enable_lastlog" != "xno")
 
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
@@ -746,6 +758,7 @@ echo "	yescrypt passwords encryption:	$with_yescrypt"
 echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
+echo "	enable lastlog:			$enable_lastlog"
 echo "	use file caps:			$with_fcaps"
 echo "	install su:			$with_su"
 echo "	enabled vendor dir:             $enable_vendordir"
