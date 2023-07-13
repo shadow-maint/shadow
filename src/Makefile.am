@@ -29,9 +29,12 @@ AM_CFLAGS = $(LIBBSD_CFLAGS)
 
 bin_PROGRAMS   = groups login
 sbin_PROGRAMS  = nologin
-ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+ubin_PROGRAMS  = faillog chage chfn chsh expiry gpasswd newgrp passwd
 if ENABLE_SUBIDS
 ubin_PROGRAMS += newgidmap newuidmap
+endif
+if ENABLE_LASTLOG
+ubin_PROGRAMS += lastlog
 endif
 if WITH_SU
 bin_PROGRAMS  += su
