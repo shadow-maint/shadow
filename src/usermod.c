@@ -17,7 +17,9 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
+#ifdef ENABLE_LASTLOG
 #include <lastlog.h>
+#endif /* ENABLE_LASTLOG */
 #include <pwd.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -182,7 +184,9 @@ static void close_files (void);
 static void open_files (void);
 static void usr_update (void);
 static void move_home (void);
+#ifdef ENABLE_LASTLOG
 static void update_lastlog (void);
+#endif /* ENABLE_LASTLOG */
 static void update_faillog (void);
 
 #ifndef NO_MOVE_MAILBOX
@@ -1905,6 +1909,7 @@ static void move_home (void)
  * left alone in case the UID was shared. It doesn't hurt anything
  * to just leave it be.
  */
+#ifdef ENABLE_LASTLOG
 static void update_lastlog (void)
 {
 	struct lastlog ll;
@@ -1963,6 +1968,7 @@ static void update_lastlog (void)
 
 	(void) close (fd);
 }
+#endif /* ENABLE_LASTLOG */
 
 /*
  * update_faillog - update the faillog file
@@ -2360,7 +2366,9 @@ int main (int argc, char **argv)
 #endif				/* NO_MOVE_MAILBOX */
 
 	if (uflg) {
+#ifdef ENABLE_LASTLOG
 		update_lastlog ();
+#endif /* ENABLE_LASTLOG */
 		update_faillog ();
 	}
 
