@@ -11,7 +11,7 @@ WORKDIR /usr/local/src/shadow/
 RUN ./autogen.sh --enable-shadowgrp --enable-man --with-audit \
         --with-sha-crypt --with-bcrypt --with-yescrypt --with-selinux \
         --without-libcrack --without-libpam --enable-shared \
-        --with-group-name-max-length=32
+        --with-group-name-max-length=32 --enable-lastlog
 RUN make -kj4 || true
 RUN make
 RUN make install
