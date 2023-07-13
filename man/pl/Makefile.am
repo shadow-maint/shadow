@@ -15,7 +15,6 @@ man_MANS = \
 	man8/groupmod.8 \
 	man1/groups.1 \
 	man8/grpck.8 \
-	man8/lastlog.8 \
 	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man1/sg.1 \
@@ -24,6 +23,10 @@ man_MANS = \
 	man8/usermod.8 \
 	man8/vigr.8 \
 	man8/vipw.8
+
+if ENABLE_LASTLOG
+man_MANS += man8/lastlog.8
+endif
 
 man_nopam = \
 	man5/porttime.5
