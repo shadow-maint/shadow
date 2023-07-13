@@ -17,7 +17,9 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
+#ifdef ENABLE_LASTLOG
 #include <lastlog.h>
+#endif /* ENABLE_LASTLOG */
 #include <libgen.h>
 #include <pwd.h>
 #include <signal.h>
@@ -224,7 +226,9 @@ static void open_files (void);
 static void open_group_files (void);
 static void open_shadow (void);
 static void faillog_reset (uid_t);
+#ifdef ENABLE_LASTLOG
 static void lastlog_reset (uid_t);
+#endif /* ENABLE_LASTLOG */
 static void tallylog_reset (const char *);
 static void usr_update (unsigned long subuid_count, unsigned long subgid_count);
 static void create_home (void);
@@ -956,8 +960,10 @@ static void usage (int status)
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"), usageout);
 	(void) fputs (_("  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"), usageout);
+#ifdef ENABLE_LASTLOG
 	(void) fputs (_("  -l, --no-log-init             do not add the user to the lastlog and\n"
 	                "                                faillog databases\n"), usageout);
+#endif /* ENABLE_LASTLOG */
 	(void) fputs (_("  -m, --create-home             create the user's home directory\n"), usageout);
 	(void) fputs (_("  -M, --no-create-home          do not create the user's home directory\n"), usageout);
 	(void) fputs (_("  -N, --no-user-group           do not create a group with the same name as\n"
@@ -2076,6 +2082,7 @@ static void faillog_reset (uid_t uid)
 	}
 }
 
+#ifdef ENABLE_LASTLOG
 static void lastlog_reset (uid_t uid)
 {
 	struct lastlog ll;
@@ -2121,6 +2128,7 @@ static void lastlog_reset (uid_t uid)
 		/* continue */
 	}
 }
+#endif /* ENABLE_LASTLOG */
 
 static void tallylog_reset (const char *user_name)
 {
@@ -2210,7 +2218,9 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 	/* local, no need for xgetpwuid */
 	if ((!lflg) && (prefix_getpwuid (user_id) == NULL)) {
 		faillog_reset (user_id);
+#ifdef ENABLE_LASTLOG
 		lastlog_reset (user_id);
+#endif /* ENABLE_LASTLOG */
 	}
 
 	/*
