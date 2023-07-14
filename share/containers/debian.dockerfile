@@ -2,9 +2,8 @@ ARG OS_IMAGE="debian:latest"
 
 FROM "${OS_IMAGE}" AS build
 
-RUN cat /etc/apt/sources.list
-RUN sed -i '/deb-src/d' /etc/apt/sources.list \
-    && sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+RUN cat /etc/apt/sources.list.d/debian.sources
+RUN sed -i 's/Types: deb/Types: deb deb-src/g' /etc/apt/sources.list.d/debian.sources
 RUN export DEBIAN_PRIORITY=critical \
     && export DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y \
