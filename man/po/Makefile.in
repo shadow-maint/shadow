@@ -114,6 +114,8 @@ $(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
 	  else \
 	    mv $(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
 	  fi; \
+	  sed -i '1i \
+# To re-generate, run "cd man/po; make update-po"' $(srcdir)/$(DOMAIN).pot; \
 	}
 
 # This rule has no dependencies: we don't need to update $(DOMAIN).pot at
