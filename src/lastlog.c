@@ -143,7 +143,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	/* Print the header only once */
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		printf (_("Username         Port     From%*sLatest\n"), maxIPv6Addrlen-3, " ");
+		printf (_("Username         Port     From%*sLatest\n"), maxIPv6Addrlen-4, " ");
 #else
 		puts (_("Username                Port     Latest"));
 #endif
