@@ -109,10 +109,6 @@ static void usage (void);
 static void setup_tty (void);
 static void process_flags (int argc, char *const *argv);
 static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *user);
-static void update_utmp (const char *user,
-                         const char *tty,
-                         const char *host,
-                         /*@null@*/const struct utmp *utent);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -456,24 +452,6 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 	}
 
 	return failent_user;
-}
-
-/*
- * update_utmp - Update or create an utmp entry in utmp, wtmp, utmpw, and
- *               wtmpx
- *
- *	utent should be the utmp entry returned by get_current_utmp (or
- *	NULL).
- */
-static void update_utmp (const char *user,
-                         const char *tty,
-                         const char *host,
-                         /*@null@*/const struct utmp *utent)
-{
-	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
-
-	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
-	free (ut);
 }
 
 /*

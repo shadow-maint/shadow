@@ -339,7 +339,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
  *
  *	Return 1 on failure and 0 on success.
  */
-int setutmp (struct utmp *ut)
+static int setutmp (struct utmp *ut)
 {
 	int err = 0;
 
@@ -357,4 +357,15 @@ int setutmp (struct utmp *ut)
 #endif				/* ! USE_PAM */
 
 	return err;
+}
+
+void update_utmp (const char *user,
+                  const char *tty,
+                  const char *host,
+                  /*@null@*/const struct utmp *utent)
+{
+	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
+
+	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
+	free (ut);
 }
