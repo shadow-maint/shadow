@@ -212,6 +212,13 @@ AC_ARG_ENABLE(lastlog,
 	[enable_lastlog="no"]
 )
 
+AC_ARG_ENABLE(logind,
+	[AS_HELP_STRING([--enable-logind],
+		[enable logind @<:@default=yes@:>@])],
+	[enable_logind="${enableval}"],
+	[enable_logind="yes"]
+)
+
 AC_ARG_WITH(audit,
 	[AS_HELP_STRING([--with-audit], [use auditing support @<:@default=yes if found@:>@])],
 	[with_audit=$withval], [with_audit=maybe])
@@ -386,6 +393,16 @@ if test "$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; the
 	fi
 fi
 AM_CONDITIONAL(ENABLE_LASTLOG, test "x$enable_lastlog" != "xno")
+
+AC_SUBST(LIBSYSTEMD)
+if test "$enable_logind" = "yes"; then
+	AC_CHECK_LIB(systemd, sd_session_get_remote_host,
+		[enable_logind="yes"; [LIBSYSTEMD=-lsystemd];
+		AC_DEFINE(ENABLE_LOGIND, 1,
+			[Define to manage session support with logind.])],
+		[enable_logind="no"])
+fi
+AM_CONDITIONAL(ENABLE_LOGIND, test "x$enable_logind" != "xno")
 
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
@@ -760,6 +777,7 @@ echo "	nscd support:			$with_nscd"
 echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
 echo "	enable lastlog:			$enable_lastlog"
+echo "	enable logind:			$enable_logind"
 echo "	use file caps:			$with_fcaps"
 echo "	install su:			$with_su"
 echo "	enabled vendor dir:             $enable_vendordir"
