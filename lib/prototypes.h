@@ -472,7 +472,19 @@ extern int set_filesize_limit (int blocks);
 /* user_busy.c */
 extern int user_busy (const char *name, uid_t uid);
 
-/* utmp.c */
+/*
+ * Session management: utmp.c or logind.c
+ */
+
+/**
+ * @brief Get host for the current session
+ *
+ * @param[out] out Host name
+ *
+ * @return 0 or a positive integer if the host was obtained properly,
+ *         another value on error.
+ */
+extern int get_session_host (char **out);
 extern /*@null@*/struct utmp *get_current_utmp (void);
 extern struct utmp *prepare_utmp (const char *name,
                                   const char *line,
