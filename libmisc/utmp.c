@@ -101,6 +101,32 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 	return ret;
 }
 
+int get_session_host (char **out)
+{
+	char *hostname = NULL;
+	struct utmp *ut = NULL;
+	int ret = 0;
+
+	ut = get_current_utmp();
+
+#ifdef HAVE_STRUCT_UTMP_UT_HOST
+	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
+		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
+		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
+		hostname[sizeof (ut->ut_host)] = '\0';
+		*out = hostname;
+		free (ut);
+	} else {
+		*out = NULL;
+		ret = -2;
+	}
+#else
+	*out = NULL;
+	ret = -2;
+#endif /* HAVE_STRUCT_UTMP_UT_HOST */
+
+	return ret;
+}
 
 #ifndef USE_PAM
 /*
