@@ -491,6 +491,13 @@ extern struct utmp *prepare_utmp (const char *name,
                                   const char *host,
                                   /*@null@*/const struct utmp *ut);
 extern int setutmp (struct utmp *ut);
+/*
+ * failtmp - update the cumulative failure log
+ *
+ *	failtmp updates the (struct utmp) formatted failure log which
+ *	maintains a record of all login failures.
+ */
+extern void failtmp (const char *username, const struct utmp *);
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
