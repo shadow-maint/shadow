@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include "defines.h"
 #include "faillog.h"
-#include "getdef.h"
 #include "failure.h"
 #define	YEAR	(365L*DAY)
 /*
@@ -234,56 +233,3 @@ void failprint (const struct faillog *fail)
 	               fail->fail_cnt, lasttime, fail->fail_line);
 	/*@=formatconst@*/
 }
-
-/*
- * failtmp - update the cumulative failure log
- *
- *	failtmp updates the (struct utmp) formatted failure log which
- *	maintains a record of all login failures.
- */
-
-void failtmp (const char *username, const struct utmp *failent)
-{
-	const char *ftmp;
-	int fd;
-
-	/*
-	 * Get the name of the failure file.  If no file has been defined
-	 * in login.defs, don't do this.
-	 */
-
-	ftmp = getdef_str ("FTMP_FILE");
-	if (NULL == ftmp) {
-		return;
-	}
-
-	/*
-	 * Open the file for append.  It must already exist for this
-	 * feature to be used.
-	 */
-
-	if (access (ftmp, F_OK) != 0) {
-		return;
-	}
-
-	fd = open (ftmp, O_WRONLY | O_APPEND);
-	if (-1 == fd) {
-		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
-		         username, ftmp));
-		return;
-	}
-
-	/*
-	 * Append the new failure record and close the log file.
-	 */
-
-	if (   (write (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)
-	    || (close (fd) != 0)) {
-		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
-		         username, ftmp));
-		(void) close (fd);
-	}
-}
-
