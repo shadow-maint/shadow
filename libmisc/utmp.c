@@ -395,3 +395,30 @@ void record_failure(const char *failent_user,
 		free (failent);
 	}
 }
+
+unsigned long active_sessions_count(const char *name, unsigned long limit)
+{
+	struct utmp *ut;
+	unsigned long count = 0;
+
+	setutent ();
+	while ((ut = getutent ()))
+	{
+		if (USER_PROCESS != ut->ut_type) {
+			continue;
+		}
+		if ('\0' == ut->ut_user[0]) {
+			continue;
+		}
+		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0) {
+			continue;
+		}
+		count++;
+		if (count > limit) {
+			break;
+		}
+	}
+	endutent ();
+
+	return count;
+}

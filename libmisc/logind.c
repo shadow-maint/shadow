@@ -34,3 +34,18 @@ done:
     free (session);
     return ret;
 }
+
+unsigned long active_sessions_count(const char *name, unsigned long unused)
+{
+    struct passwd *pw;
+    unsigned long count = 0;
+
+    pw = prefix_getpwnam(name);
+    if (pw == NULL) {
+        return 0;
+    }
+
+    count = sd_uid_get_sessions(pw->pw_uid, 0, NULL);
+
+    return count;
+}

@@ -511,6 +511,18 @@ extern void record_failure(const char *failent_user,
                            const char *hostname);
 #endif /* ENABLE_LOGIND */
 
+/**
+ * @brief Number of active user sessions
+ *
+ * @param[in] name username
+ * @param[in] limit maximum number of active sessions
+ *
+ * @return number of active sessions.
+ *
+ */
+extern unsigned long active_sessions_count(const char *name,
+                                           unsigned long limit);
+
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
 
