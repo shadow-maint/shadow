@@ -119,7 +119,6 @@ static int set_umask (const char *value)
 /* Counts the number of user logins and check against the limit */
 static int check_logins (const char *name, const char *maxlogins)
 {
-	struct utmp *ut;
 	unsigned long limit, count;
 
 	if (getulong (maxlogins, &limit) == 0) {
@@ -131,29 +130,8 @@ static int check_logins (const char *name, const char *maxlogins)
 		return LOGIN_ERROR_LOGIN;
 	}
 
-	count = 0;
-	setutent ();
-	while ((ut = getutent ()))
-	{
-		if (USER_PROCESS != ut->ut_type) {
-			continue;
-		}
-		if ('\0' == ut->ut_user[0]) {
-			continue;
-		}
-		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0) {
-			continue;
-		}
-		count++;
-		if (count > limit) {
-			break;
-		}
-	}
-	endutent ();
-	/*
-	 * This is called after setutmp(), so the number of logins counted
-	 * includes the user who is currently trying to log in.
-	 */
+	count = active_sessions_count(name, limit);
+
 	if (count > limit) {
 		SYSLOG ((LOG_WARN,
 		         "Too many logins (max %lu) for %s\n",
