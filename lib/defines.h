@@ -232,10 +232,6 @@ static inline void memzero(void *ptr, size_t size)
 # define format_attr(type, index, check)
 #endif
 
-/* Maximum length of usernames */
-#include <utmp.h>
-#define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_user))
-
 /* Maximum length of passwd entry */
 #define PASSWD_ENTRY_MAX_LENGTH 32768
 

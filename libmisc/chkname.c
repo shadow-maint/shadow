@@ -75,10 +75,9 @@ static bool is_valid_name (const char *name)
 bool is_valid_user_name (const char *name)
 {
 	/*
-	 * User names are limited by whatever utmp can
-	 * handle.
+	 * User names length are limited by the kernel
 	 */
-	if (strlen (name) > USER_NAME_MAX_LENGTH) {
+	if (strlen (name) > sysconf(_SC_LOGIN_NAME_MAX)) {
 		return false;
 	}
 
