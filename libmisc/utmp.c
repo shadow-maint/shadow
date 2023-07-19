@@ -61,7 +61,7 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
  *	failtmp updates the (struct utmp) formatted failure log which
  *	maintains a record of all login failures.
  */
-void failtmp (const char *username, const struct utmp *failent)
+static void failtmp (const char *username, const struct utmp *failent)
 {
 	const char *ftmp;
 	int fd;
@@ -120,6 +120,7 @@ void failtmp (const char *username, const struct utmp *failent)
  *
  *	Return NULL if no entries exist in utmp for the current process.
  */
+static
 /*@null@*/ /*@only@*/struct utmp *get_current_utmp (void)
 {
 	struct utmp *ut;
@@ -220,6 +221,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
  *
  *	The returned structure shall be freed by the caller.
  */
+static
 /*@only@*/struct utmp *prepare_utmp (const char *name,
                                      const char *line,
                                      const char *host,
@@ -359,13 +361,37 @@ static int setutmp (struct utmp *ut)
 	return err;
 }
 
-void update_utmp (const char *user,
-                  const char *tty,
-                  const char *host,
-                  /*@null@*/const struct utmp *utent)
+int update_utmp (const char *user,
+                 const char *tty,
+                 const char *host)
 {
-	struct utmp  *ut  = prepare_utmp  (user, tty, host, utent);
+	struct utmp *utent, *ut;
+
+	utent = get_current_utmp ();
+	if (utent == NULL) {
+		return -1;
+	}
+
+	ut = prepare_utmp  (user, tty, host, utent);
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
+	free (utent);
 	free (ut);
+
+	return 1;
+}
+
+void record_failure(const char *failent_user,
+                    const char *tty,
+                    const char *hostname)
+{
+	struct utmp *utent, *failent;
+
+	if (getdef_str ("FTMP_FILE") != NULL) {
+		utent = get_current_utmp ();
+		failent = prepare_utmp (failent_user, tty, hostname, utent);
+		failtmp (failent_user, failent);
+		free (utent);
+		free (failent);
+	}
 }
