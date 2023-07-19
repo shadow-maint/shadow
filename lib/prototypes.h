@@ -23,7 +23,6 @@
 
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <utmp.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
@@ -485,30 +484,32 @@ extern int user_busy (const char *name, uid_t uid);
  *         another value on error.
  */
 extern int get_session_host (char **out);
-extern /*@null@*/struct utmp *get_current_utmp (void);
-extern struct utmp *prepare_utmp (const char *name,
-                                  const char *line,
-                                  const char *host,
-                                  /*@null@*/const struct utmp *ut);
-/*
- * failtmp - update the cumulative failure log
- *
- *	failtmp updates the (struct utmp) formatted failure log which
- *	maintains a record of all login failures.
- */
-extern void failtmp (const char *username, const struct utmp *);
+#ifndef ENABLE_LOGIND
 /**
  * @brief Update or create an utmp entry in utmp, wtmp, utmpw, or wtmpx
  *
  * @param[in] user username
  * @param[in] tty tty
  * @param[in] host hostname
- * @param[in] utent utmp entry
+ *
+ * @return 0 if utmp was updated properly,
+ *         1 on error.
  */
-extern void update_utmp (const char *user,
-                         const char *tty,
-                         const char *host,
-                         /*@null@*/const struct utmp *utent);
+extern int update_utmp (const char *user,
+                        const char *tty,
+                        const char *host);
+/**
+ * @brief Update the cumulative failure log
+ *
+ * @param[in] failent_user username
+ * @param[in] tty tty
+ * @param[in] host hostname
+ *
+ */
+extern void record_failure(const char *failent_user,
+                           const char *tty,
+                           const char *hostname);
+#endif /* ENABLE_LOGIND */
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
