@@ -11,7 +11,7 @@ else
 LIBCRYPT_PAM =
 endif
 
-libmisc_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM)
+libmisc_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
 libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
@@ -78,7 +78,6 @@ libmisc_la_SOURCES = \
 	tz.c \
 	ulimit.c \
 	user_busy.c \
-	utmp.c \
 	valid.c \
 	xgetpwnam.c \
 	xprefix_getpwnam.c \
@@ -94,4 +93,10 @@ endif
 
 if ENABLE_LASTLOG
 libmisc_la_SOURCES += log.c
+endif
+
+if ENABLE_LOGIND
+libmisc_la_SOURCES += logind.c
+else
+libmisc_la_SOURCES += utmp.c
 endif
