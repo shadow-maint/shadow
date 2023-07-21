@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <utmp.h>
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
