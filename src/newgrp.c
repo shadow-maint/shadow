@@ -417,11 +417,18 @@ int main (int argc, char **argv)
 	 * but we do not need to restore the previous process persona and we
 	 * don't need to re-exec anything.  -- JWP
 	 */
-	Prog = Basename (argv[0]);
+
+	/*
+	 * Ensure that "Prog" is always either "newgrp" or "sg" to avoid
+	 * injecting arbitrary strings into our stderr/stdout, as this can
+	 * be an exploit vector.
+	 */
+	is_newgrp = (strcmp (Basename (argv[0]), "newgrp") == 0);
+	Prog = is_newgrp ? "newgrp" : "sg";
+
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
-	is_newgrp = (strcmp (Prog, "newgrp") == 0);
-	OPENLOG (is_newgrp ? "newgrp" : "sg");
+	OPENLOG (Prog);
 	argc--;
 	argv++;
 
