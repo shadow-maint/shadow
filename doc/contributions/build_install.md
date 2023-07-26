@@ -22,6 +22,11 @@ Fedora:
 dnf builddep shadow-utils
 ```
 
+An alternative would be to take a look at the CI workflow [file](../../.github/workflows/runner.yml)
+and get the package names from there. This has the advantage that it
+also includes new dependencies needed for the development version
+which might have not been present in the last release.
+
 ### Configure
 
 The first step is to configure it. You can use the
