@@ -574,12 +574,15 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		fail_exit (1);
 	}
-	if (   !amroot
-	    && (   loginsh[0] != '/'
-	        || is_restricted_shell (loginsh)
-	        || (access (loginsh, X_OK) != 0))) {
-		fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
-		fail_exit (1);
+	if (loginsh[0] != '/'
+			|| is_restricted_shell (loginsh)
+			|| (access (loginsh, X_OK) != 0)) {
+		if (amroot) {
+			fprintf (stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
+		} else {
+			fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
+			fail_exit (1);
+		}
 	}
 
 	/* Even for root, warn if an invalid shell is specified. */
