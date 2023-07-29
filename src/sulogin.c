@@ -24,6 +24,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "strlcpy.h"
 
 /*
  * Global variables
@@ -157,7 +158,7 @@ static void catch_signals (unused int sig)
 #endif
 			exit (0);
 		}
-		STRFCPY (pass, cp);
+		STRLCPY(pass, cp);
 		erase_pass (cp);
 
 		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */
