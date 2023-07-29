@@ -155,14 +155,6 @@
 #define SCALE DAY
 #endif
 
-/* Copy string pointed by B to array A with size checking.  It was originally
-   in lmain.c but is _very_ useful elsewhere.  Some setuid root programs with
-   very sloppy coding used to assume that BUFSIZ will always be enough...  */
-
-					/* danger - side effects */
-#define STRFCPY(A,B) \
-	(strncpy((A), (B), sizeof(A) - 1), (A)[sizeof(A) - 1] = '\0')
-
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"
 #endif
