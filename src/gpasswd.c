@@ -32,8 +32,9 @@
 #endif
 /*@-exitarg@*/
 #include "exitcodes.h"
-
 #include "shadowlog.h"
+#include "strlcpy.h"
+
 /*
  * Global variables
  */
@@ -895,7 +896,7 @@ static void change_passwd (struct group *gr)
 			exit (1);
 		}
 
-		STRFCPY (pass, cp);
+		STRLCPY(pass, cp);
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
