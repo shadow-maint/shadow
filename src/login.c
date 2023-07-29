@@ -36,6 +36,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "strlcpy.h"
 
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -552,7 +553,7 @@ int main (int argc, char **argv)
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
-	STRFCPY (tty, tmptty);
+	STRLCPY(tty, tmptty);
 
 #ifndef USE_PAM
 	is_console = console (tty);
