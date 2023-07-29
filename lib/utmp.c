@@ -24,6 +24,7 @@
 
 #include "alloc.h"
 #include "sizeof.h"
+#include "strlcpy.h"
 #include "zustr2stp.h"
 
 #ident "$Id$"
@@ -46,7 +47,7 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
-			(void) strlcpy (tmptty, tname, sizeof(tmptty));
+			STRLCPY(tmptty, tname);
 	}
 
 	if ('\0' == tmptty[0]) {
