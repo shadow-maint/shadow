@@ -24,6 +24,7 @@
 
 #include "alloc.h"
 #include "sizeof.h"
+#include "zustr2stp.h"
 
 #ident "$Id$"
 
@@ -244,9 +245,8 @@ static
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
-		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
-		hostname[sizeof (ut->ut_host)] = '\0';
+		hostname = XMALLOC(SIZEOF_ARRAY(ut->ut_host) + 1, char);
+		zustr2stp(hostname, ut->ut_host, SIZEOF_ARRAY(ut->ut_host));
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 	}
 
