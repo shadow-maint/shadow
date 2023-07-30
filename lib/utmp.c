@@ -23,6 +23,7 @@
 #include <fcntl.h>
 
 #include "alloc.h"
+#include "sizeof.h"
 
 #ident "$Id$"
 

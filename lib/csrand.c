@@ -20,6 +20,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 
 
 static uint32_t csrand_uniform32(uint32_t n);
