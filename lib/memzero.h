@@ -15,6 +15,11 @@
 #include <string.h>
 #include <strings.h>
 
+#include "sizeof.h"
+
+
+#define MEMZERO(arr)  memzero(arr, SIZEOF_ARRAY(arr))
+
 
 inline void memzero(void *ptr, size_t size);
 inline void strzero(char *s);
