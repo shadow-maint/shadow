@@ -17,15 +17,15 @@
 
 #ifdef HAVE_MEMSET_EXPLICIT
 # define memzero(ptr, size) memset_explicit((ptr), 0, (size))
-#elif defined HAVE_EXPLICIT_BZERO	/* !HAVE_MEMSET_S */
+#elif defined HAVE_EXPLICIT_BZERO
 # define memzero(ptr, size) explicit_bzero((ptr), (size))
-#else					/* !HAVE_MEMSET_S && HAVE_EXPLICIT_BZERO */
+#else
 static inline void memzero(void *ptr, size_t size)
 {
 	ptr = memset(ptr, '\0', size);
 	__asm__ __volatile__ ("" : : "r"(ptr) : "memory");
 }
-#endif					/* !HAVE_MEMSET_S && !HAVE_EXPLICIT_BZERO */
+#endif
 
 #define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
