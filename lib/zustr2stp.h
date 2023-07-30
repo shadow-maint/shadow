@@ -14,6 +14,10 @@
 #include <string.h>
 
 #include "mempcpy.h"
+#include "sizeof.h"
+
+
+#define ZUSTR2STP(dst, src)  zustr2stp(dst, src, SIZEOF_ARRAY(src))
 
 
 inline char *zustr2stp(char *restrict dst, const char *restrict src, size_t sz);
