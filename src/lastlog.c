@@ -25,6 +25,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
+#include "memzero.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"

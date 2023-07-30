@@ -29,6 +29,7 @@
 #include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
+#include "memzero.h"
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"

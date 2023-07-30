@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include "prototypes.h"
 #include "defines.h"
+#include "memzero.h"
 #include "pwauth.h"
 #include "getdef.h"
 #ifdef SKEY

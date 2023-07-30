@@ -23,6 +23,7 @@
 #include <signal.h>
 
 #include "alloc.h"
+#include "memzero.h"
 #include "nscd.h"
 #include "sssd.h"
 #ifdef WITH_TCB

@@ -30,6 +30,7 @@
 #include "faillog.h"
 #include "failure.h"
 #include "getdef.h"
+#include "memzero.h"
 #include "prototypes.h"
 #include "pwauth.h"
 /*@-exitarg@*/

@@ -29,6 +29,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include <sys/resource.h>
+#include "memzero.h"
 #ifndef LIMITS_FILE
 #define LIMITS_FILE "/etc/limits"
 #endif

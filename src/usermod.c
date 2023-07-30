@@ -37,6 +37,7 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "memzero.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

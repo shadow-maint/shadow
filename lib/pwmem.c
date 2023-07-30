@@ -16,6 +16,7 @@
 
 #include "alloc.h"
 #include "defines.h"
+#include "memzero.h"
 #include "prototypes.h"
 #include "pwio.h"
 

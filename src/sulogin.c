@@ -18,6 +18,7 @@
 #include <sys/ioctl.h>
 #include "defines.h"
 #include "getdef.h"
+#include "memzero.h"
 #include "prototypes.h"
 #include "pwauth.h"
 /*@-exitarg@*/

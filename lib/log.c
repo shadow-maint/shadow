@@ -17,6 +17,7 @@
 #include <time.h>
 #include "defines.h"
 #include <lastlog.h>
+#include "memzero.h"
 #include "prototypes.h"
 
 /*
