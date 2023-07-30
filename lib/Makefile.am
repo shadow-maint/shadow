@@ -157,7 +157,9 @@ libshadow_la_SOURCES = \
 	xgetgrnam.c \
 	xgetgrgid.c \
 	xgetspnam.c \
-	yesno.c
+	yesno.c \
+	zustr2stp.c \
+	zustr2stp.h
 
 if WITH_TCB
 libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
