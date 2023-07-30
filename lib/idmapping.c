@@ -21,6 +21,7 @@
 #include <sys/capability.h>
 #endif
 #include "shadowlog.h"
+#include "sizeof.h"
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 {

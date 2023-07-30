@@ -131,6 +131,7 @@ libshadow_la_SOURCES = \
 	shadowlog_internal.h \
 	shadowmem.c \
 	shell.c \
+	sizeof.h \
 	spawn.c \
 	sssd.c \
 	sssd.h \

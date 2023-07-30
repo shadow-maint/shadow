@@ -56,6 +56,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>		/* for inet_ntoa() */
 
+#include "sizeof.h"
+
 #if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
 #undef MAXHOSTNAMELEN
 #define MAXHOSTNAMELEN 256
