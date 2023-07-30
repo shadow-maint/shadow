@@ -246,7 +246,7 @@ static
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = XMALLOC(SIZEOF_ARRAY(ut->ut_host) + 1, char);
-		zustr2stp(hostname, ut->ut_host, SIZEOF_ARRAY(ut->ut_host));
+		ZUSTR2STP(hostname, ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 	}
 

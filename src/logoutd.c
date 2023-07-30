@@ -46,7 +46,7 @@ static int check_login (const struct utmp *ut)
 	char user[sizeof (ut->ut_user) + 1];
 	time_t now;
 
-	zustr2stp(user, ut->ut_user, SIZEOF_ARRAY(ut->ut_user));
+	ZUSTR2STP(user, ut->ut_user);
 
 	(void) time (&now);
 
@@ -224,7 +224,7 @@ int main (int argc, char **argv)
 				kill (-ut->ut_pid, SIGKILL);
 			}
 
-			zustr2stp(user, ut->ut_user, SIZEOF_ARRAY(ut->ut_user));
+			ZUSTR2STP(user, ut->ut_user);
 
 			SYSLOG ((LOG_NOTICE,
 				 "logged off user '%s' on '%s'", user,
