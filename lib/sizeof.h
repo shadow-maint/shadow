@@ -15,9 +15,10 @@
 #include "must_be.h"
 
 
-#define WIDTHOF(x)   (sizeof(x) * CHAR_BIT)
-#define NITEMS(a)    (sizeof((a)) / sizeof((a)[0]) + must_be_array(a))
-#define STRLEN(s)    (NITEMS(s) - 1)
+#define WIDTHOF(x)       (sizeof(x) * CHAR_BIT)
+#define SIZEOF_ARRAY(a)  (sizeof(a) + must_be_array(a))
+#define NITEMS(a)        (SIZEOF_ARRAY((a)) / sizeof((a)[0]))
+#define STRLEN(s)        (NITEMS(s) - 1)
 
 
 #endif  // include guard
