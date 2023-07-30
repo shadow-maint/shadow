@@ -17,7 +17,10 @@
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
+#include "memzero.h"
 #include "prototypes.h"
+
+
 #define	YEAR	(365L*DAY)
 /*
  * failure - make failure entry

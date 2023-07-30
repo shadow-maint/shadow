@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "alloc.h"
+#include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"

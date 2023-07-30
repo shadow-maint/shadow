@@ -23,6 +23,7 @@
 #include "alloc.h"
 #include "defines.h"
 #include "groupio.h"
+#include "memzero.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

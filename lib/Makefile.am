@@ -85,6 +85,7 @@ libshadow_la_SOURCES = \
 	mail.c \
 	mempcpy.c \
 	mempcpy.h \
+	memzero.h \
 	motd.c \
 	myname.c \
 	nss.c \

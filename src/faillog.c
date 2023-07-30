@@ -20,6 +20,7 @@
 #include <assert.h>
 #include "defines.h"
 #include "faillog.h"
+#include "memzero.h"
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
