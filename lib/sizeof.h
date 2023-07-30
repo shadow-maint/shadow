@@ -12,9 +12,11 @@
 
 #include <limits.h>
 
+#include "must_be.h"
+
 
 #define WIDTHOF(x)   (sizeof(x) * CHAR_BIT)
-#define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
+#define NITEMS(a)    (sizeof((a)) / sizeof((a)[0]) + must_be_array(a))
 #define STRLEN(s)    (NITEMS(s) - 1)
 
 
