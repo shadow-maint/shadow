@@ -19,6 +19,8 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
+#include "zustr2stp.h"
 /*
  * Global variables
  */
@@ -44,11 +46,7 @@ static int check_login (const struct utmp *ut)
 	char user[sizeof (ut->ut_user) + 1];
 	time_t now;
 
-	/*
-	 * ut_user may not have the terminating NUL.
-	 */
-	strncpy (user, ut->ut_user, sizeof (ut->ut_user));
-	user[sizeof (ut->ut_user)] = '\0';
+	zustr2stp(user, ut->ut_user, SIZEOF_ARRAY(ut->ut_user));
 
 	(void) time (&now);
 
@@ -226,8 +224,7 @@ int main (int argc, char **argv)
 				kill (-ut->ut_pid, SIGKILL);
 			}
 
-			strncpy (user, ut->ut_user, sizeof (user) - 1);
-			user[sizeof (user) - 1] = '\0';
+			zustr2stp(user, ut->ut_user, SIZEOF_ARRAY(ut->ut_user));
 
 			SYSLOG ((LOG_NOTICE,
 				 "logged off user '%s' on '%s'", user,
