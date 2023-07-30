@@ -88,6 +88,7 @@ libshadow_la_SOURCES = \
 	memzero.c \
 	memzero.h \
 	motd.c \
+	must_be.h \
 	myname.c \
 	nss.c \
 	nscd.c \
