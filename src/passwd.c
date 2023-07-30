@@ -294,8 +294,8 @@ static int new_password (const struct passwd *pw)
 	for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
 		cp = agetpass (_("New password: "));
 		if (NULL == cp) {
-			memzero (orig, sizeof orig);
-			memzero (pass, sizeof pass);
+			MEMZERO(orig);
+			MEMZERO(pass);
 			return -1;
 		}
 		if (warned && (strcmp (pass, cp) != 0)) {
@@ -322,8 +322,8 @@ static int new_password (const struct passwd *pw)
 		}
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
-			memzero (orig, sizeof orig);
-			memzero (pass, sizeof pass);
+			MEMZERO(orig);
+			MEMZERO(pass);
 			return -1;
 		}
 		if (strcmp (cp, pass) != 0) {
@@ -334,10 +334,10 @@ static int new_password (const struct passwd *pw)
 			break;
 		}
 	}
-	memzero (orig, sizeof orig);
+	MEMZERO(orig);
 
 	if (i == 0) {
-		memzero (pass, sizeof pass);
+		MEMZERO(pass);
 		return -1;
 	}
 
@@ -346,7 +346,7 @@ static int new_password (const struct passwd *pw)
 	 */
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
-	memzero (pass, sizeof pass);
+	MEMZERO(pass);
 
 	if (NULL == cp) {
 		fprintf (stderr,
