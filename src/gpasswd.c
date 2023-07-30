@@ -899,7 +899,7 @@ static void change_passwd (struct group *gr)
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
-			memzero (pass, sizeof pass);
+			MEMZERO(pass);
 			exit (1);
 		}
 
@@ -909,7 +909,7 @@ static void change_passwd (struct group *gr)
 		}
 
 		erase_pass (cp);
-		memzero (pass, sizeof pass);
+		MEMZERO(pass);
 
 		if (retries + 1 < RETRIES) {
 			puts (_("They don't match; try again"));
@@ -929,7 +929,7 @@ static void change_passwd (struct group *gr)
 		         Prog, salt, strerror (errno));
 		exit (1);
 	}
-	memzero (pass, sizeof pass);
+	MEMZERO(pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		gr->gr_passwd = SHADOW_PASSWD_STRING;
