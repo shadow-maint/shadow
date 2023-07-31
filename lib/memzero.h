@@ -28,7 +28,7 @@ memzero(void *ptr, size_t size)
 #elif defined(HAVE_EXPLICIT_BZERO)
 	explicit_bzero(ptr, size);
 #else
-	ptr = memset(ptr, '\0', size);
+	memset(ptr, '\0', size);
 	__asm__ __volatile__ ("" : : "r"(ptr) : "memory");
 #endif
 }
