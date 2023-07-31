@@ -232,14 +232,13 @@ int find_new_uid(bool sys_user,
 	 */
 
 	/* Create an array to hold all of the discovered UIDs */
-	used_uids = MALLOC(uid_max + 1, bool);
+	used_uids = CALLOC(uid_max + 1, bool);
 	if (NULL == used_uids) {
 		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),
 			 log_get_progname(), strerror (errno));
 		return -1;
 	}
-	memset (used_uids, false, sizeof (bool) * (uid_max + 1));
 
 	/* First look for the lowest and highest value in the local database */
 	(void) pw_rewind ();
