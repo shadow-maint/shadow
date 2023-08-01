@@ -21,9 +21,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <time.h>
 #include <unistd.h>
 #include <getopt.h>
+
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -198,7 +200,7 @@ int main (int argc, char **argv)
 			static char *empty = 0;
 
 			/* add new shadow group entry */
-			memset (&sgent, 0, sizeof sgent);
+			bzero(&sgent, sizeof sgent);
 			sgent.sg_name = gr->gr_name;
 			sgent.sg_passwd = gr->gr_passwd;
 			sgent.sg_adm = &empty;

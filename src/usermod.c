@@ -27,6 +27,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
+#include <strings.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
@@ -1737,7 +1738,7 @@ static void usr_update (void)
 			 *    a shadowed password
 			 *  + aging information is requested
 			 */
-			memset (&spent, 0, sizeof spent);
+			bzero(&spent, sizeof spent);
 			spent.sp_namp   = user_name;
 
 			/* The user explicitly asked for a shadow feature.

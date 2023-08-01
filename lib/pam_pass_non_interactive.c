@@ -13,6 +13,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
+
 #include <security/pam_appl.h>
 
 #include "alloc.h"
@@ -94,8 +96,8 @@ static int ni_conv (int num_msg,
 failed_conversation:
 	for (count=0; count < num_msg; count++) {
 		if (NULL != responses[count].resp) {
-			memset (responses[count].resp, 0,
-			        strlen (responses[count].resp));
+			bzero(responses[count].resp,
+			      strlen(responses[count].resp));
 			free (responses[count].resp);
 			responses[count].resp = NULL;
 		}
