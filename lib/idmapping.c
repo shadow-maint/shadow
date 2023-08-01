@@ -11,6 +11,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <strings.h>
 
 #include "alloc.h"
 #include "prototypes.h"
@@ -176,7 +177,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	}
 
 	/* Lockdown new{g,u}idmap by dropping all unneeded capabilities. */
-	memset(data, 0, sizeof(data));
+	bzero(data, sizeof(data));
 	data[0].effective = CAP_TO_MASK(cap);
 	/*
 	 * When uid 0 from the ancestor userns is supposed to be mapped into

@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
+
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -319,7 +321,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
 
-	memset (salt, '\0', MAX_SALT_SIZE + 6);
+	bzero(salt, MAX_SALT_SIZE + 6);
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
@@ -358,7 +360,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	const char *method;
 	unsigned long rounds = 0;
 
-	memset (result, '\0', GENSALT_SETTING_SIZE);
+	bzero(result, GENSALT_SETTING_SIZE);
 
 	if (NULL != meth)
 		method = meth;
@@ -406,7 +408,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 			 method);
 		salt_len = MAX_SALT_SIZE;
 		rounds = 0;
-		memset (result, '\0', GENSALT_SETTING_SIZE);
+		bzero(result, GENSALT_SETTING_SIZE);
 	}
 
 #if USE_XCRYPT_GENSALT
@@ -418,7 +420,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		/* Avoid -Wunused-but-set-variable. */
 		salt_len = GENSALT_SETTING_SIZE - 1;
 		rounds = 0;
-		memset (result, '.', salt_len);
+		memset(result, '.', salt_len);
 		result[salt_len] = '\0';
 	}
 

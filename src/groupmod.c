@@ -17,6 +17,7 @@
 #include <grp.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <strings.h>
 #include <sys/types.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -229,7 +230,7 @@ static void grp_update (void)
 			 * shadowed password, we force the creation of a
 			 * gshadow entry when a new password is requested.
 			 */
-			memset (&sgrp, 0, sizeof sgrp);
+			bzero(&sgrp, sizeof sgrp);
 			sgrp.sg_name   = xstrdup (grp.gr_name);
 			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
 			sgrp.sg_adm    = &empty;
