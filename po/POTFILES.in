@@ -83,7 +83,6 @@ libmisc/user_busy.c
 libmisc/utmp.c
 libmisc/valid.c
 libmisc/xgetXXbyYY.c
-libmisc/xmalloc.c
 libmisc/yesno.c
 src/chage.c
 src/chfn.c
