@@ -52,6 +52,38 @@ jobs:
         sudo ./run_some
         cat testsuite.log
 
+  # Make sure that 'make dist' makes a usable tarball with no missing files
+  dist-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo cat /etc/apt/sources.list
+        sudo sed -i '/deb-src/d' /etc/apt/sources.list
+        sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+        export DEBIAN_PRIORITY=critical
+        export DEBIAN_FRONTEND=noninteractive
+        # let's try to work around upgrade breakage in a pkg we don't care about
+        sudo apt-mark hold grub-efi-amd64-bin grub-efi-amd64-signed
+        sudo apt-get update
+        sudo apt-get -y dist-upgrade
+        sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev pkgconf
+        sudo apt-get -y build-dep shadow
+
+    - name: Test make dist
+      run: |
+        ./autogen.sh
+        make dist
+        f=shadow-*.tar.gz
+        tar -zxf $f
+        d=$(basename $f .tar.gz)
+        cd $d
+        ./configure
+        make -j5
+
   container-build:
     runs-on: ubuntu-latest
     strategy:
