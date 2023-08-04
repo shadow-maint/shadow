@@ -2067,7 +2067,7 @@ static void faillog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full (fd, &fl, sizeof (fl)) != (ssize_t) sizeof (fl))
+	    || (write_full(fd, &fl, sizeof (fl)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),

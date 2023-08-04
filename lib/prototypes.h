@@ -527,7 +527,7 @@ extern unsigned long active_sessions_count(const char *name,
 extern bool valid (const char *, const struct passwd *);
 
 /* write_full.c */
-extern ssize_t write_full(int fd, const void *buf, size_t count);
+extern int write_full(int fd, const void *buf, size_t count);
 
 /* xgetpwnam.c */
 extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);

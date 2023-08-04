@@ -1941,7 +1941,7 @@ static void update_lastlog (void)
 	    && (read (fd, &ll, sizeof ll) == (ssize_t) sizeof ll)) {
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-		    || (write_full (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
+		    || (write_full(fd, &ll, sizeof ll) == -1)
 		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
@@ -1957,7 +1957,7 @@ static void update_lastlog (void)
 			/* Reset the new uid's lastlog entry */
 			memzero (&ll, sizeof (ll));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-			    || (write_full (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
+			    || (write_full(fd, &ll, sizeof ll) == -1)
 			    || (fsync (fd) != 0)) {
 				fprintf (stderr,
 				         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
@@ -2001,7 +2001,7 @@ static void update_faillog (void)
 	    && (read (fd, &fl, sizeof fl) == (ssize_t) sizeof fl)) {
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-		    || (write_full (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
+		    || (write_full(fd, &fl, sizeof fl) == -1)
 		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
@@ -2017,7 +2017,8 @@ static void update_faillog (void)
 			/* Reset the new uid's faillog entry */
 			memzero (&fl, sizeof (fl));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-			    || (write_full (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)) {
+			    || (write_full(fd, &fl, sizeof fl) == -1))
+			{
 				fprintf (stderr,
 				         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
 				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
