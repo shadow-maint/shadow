@@ -17,9 +17,11 @@ libmisc_la_SOURCES = \
 	age.c \
 	agetpass.c \
 	alloc.c \
+	../lib/alloc.h \
 	audit_help.c \
 	basename.c \
 	bit.c \
+	../lib/bit.h \
 	chkname.c \
 	chkname.h \
 	chowndir.c \
@@ -70,7 +72,9 @@ libmisc_la_SOURCES = \
 	setupenv.c \
 	shell.c \
 	stpecpy.c \
+	../lib/stpecpy.h \
 	stpeprintf.c \
+	../lib/stpeprintf.h \
 	strtoday.c \
 	sub.c \
 	sulog.c \
