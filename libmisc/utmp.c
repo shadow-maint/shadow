@@ -97,7 +97,7 @@ static void failtmp (const char *username, const struct utmp *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (   (write_full (fd, failent, sizeof *failent) != (ssize_t) sizeof *failent)
+	if (   (write_full(fd, failent, sizeof *failent) == -1)
 	    || (close (fd) != 0)) {
 		SYSLOG ((LOG_WARN,
 		         "Can't append failure of user %s to %s.",
@@ -194,7 +194,7 @@ static void updwtmp (const char *filename, const struct utmp *ut)
 
 	fd = open (filename, O_APPEND | O_WRONLY, 0);
 	if (fd >= 0) {
-		write_full (fd, ut, sizeof (*ut));
+		write_full(fd, ut, sizeof(*ut));
 		close (fd);
 	}
 }

@@ -816,7 +816,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 			break;
 		}
 
-		if (write_full (ofd, buf, cnt) < 0) {
+		if (write_full(ofd, buf, cnt) == -1) {
 			(void) close (ofd);
 			(void) close (ifd);
 			return -1;

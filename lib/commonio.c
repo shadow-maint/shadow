@@ -140,7 +140,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	pid = getpid ();
 	snprintf (buf, sizeof buf, "%lu", (unsigned long) pid);
 	len = (ssize_t) strlen (buf) + 1;
-	if (write_full (fd, buf, (size_t) len) != len) {
+	if (write_full(fd, buf, len) == -1) {
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file write error: %s\n",

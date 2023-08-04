@@ -400,7 +400,7 @@ static void exit_handler (unused int sig)
 
 static void alarm_handler (unused int sig)
 {
-	write_full (STDERR_FILENO, tmsg, strlen (tmsg));
+	write_full(STDERR_FILENO, tmsg, strlen(tmsg));
 	signal(SIGALRM, exit_handler);
 	alarm(2);
 }
