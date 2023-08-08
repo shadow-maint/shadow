@@ -203,7 +203,8 @@ EXTRA_DIST = \
 	sulogin.8.xml \
 	generate_mans.mak \
 	generate_translations.mak \
-	its.rules
+	its.rules \
+	shadow-man.xsl
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)
