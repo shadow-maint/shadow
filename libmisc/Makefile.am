@@ -104,3 +104,9 @@ libmisc_la_SOURCES += logind.c
 else
 libmisc_la_SOURCES += utmp.c
 endif
+
+if !WITH_LIBBSD
+libmisc_la_SOURCES += \
+	readpassphrase.h \
+	readpassphrase.c
+endif
