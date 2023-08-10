@@ -107,6 +107,8 @@ endif
 
 if !WITH_LIBBSD
 libmisc_la_SOURCES += \
+	freezero.h \
+	freezero.c \
 	readpassphrase.h \
 	readpassphrase.c
 endif
