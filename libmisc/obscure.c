@@ -24,6 +24,11 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+
+#if WITH_LIBBSD == 0
+#include "freezero.h"
+#endif /* WITH_LIBBSD */
+
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
  */
