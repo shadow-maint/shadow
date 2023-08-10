@@ -267,6 +267,9 @@ AC_ARG_WITH(group-name-max-length,
 AC_ARG_WITH(su,
 	[AS_HELP_STRING([--with-su], [build and install su program and man page @<:@default=yes@:>@])],
 	[with_su=$withval], [with_su=yes])
+AC_ARG_WITH(libbsd,
+	[AS_HELP_STRING([--with-libbsd], [use libbsd support @<:@default=yes if found@:>@])],
+	[with_libbsd=$withval], [with_libbsd=yes])
 
 if test "$with_group_name_max_length" = "no" ; then
 	with_group_name_max_length=0
@@ -412,20 +415,27 @@ AC_SUBST(LIYESCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIYESCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
 
-AC_SEARCH_LIBS([readpassphrase], [bsd], [], [
-	AC_MSG_ERROR([readpassphrase() is missing, either from libc or libbsd])
-])
-AS_IF([test "$ac_cv_search_readpassphrase" = "-lbsd"], [
-	PKG_CHECK_MODULES([LIBBSD], [libbsd-overlay])
-])
-dnl Make sure either the libc or libbsd provide the header.
-save_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS $LIBBSD_CFLAGS"
-AC_CHECK_HEADERS([readpassphrase.h])
-AS_IF([test "$ac_cv_header_readpassphrase_h" != "yes"], [
-	AC_MSG_ERROR([readpassphrase.h is missing])
-])
-CFLAGS="$save_CFLAGS"
+AC_SUBST(LIBBSD)
+if test "$with_libbsd" != "no"; then
+	AC_SEARCH_LIBS([readpassphrase], [bsd], [], [
+		AC_MSG_ERROR([readpassphrase() is missing, either from libc or libbsd])
+	])
+	AS_IF([test "$ac_cv_search_readpassphrase" = "-lbsd"], [
+		PKG_CHECK_MODULES([LIBBSD], [libbsd-overlay])
+	])
+	dnl Make sure either the libc or libbsd provide the header.
+	save_CFLAGS="$CFLAGS"
+	CFLAGS="$CFLAGS $LIBBSD_CFLAGS"
+	AC_CHECK_HEADERS([readpassphrase.h])
+	AS_IF([test "$ac_cv_header_readpassphrase_h" != "yes"], [
+		AC_MSG_ERROR([readpassphrase.h is missing])
+	])
+	CFLAGS="$save_CFLAGS"
+	AC_DEFINE(WITH_LIBBSD, 1, [Build shadow with libbsd support])
+else
+	AC_DEFINE(WITH_LIBBSD, 0, [Build shadow without libbsd support])
+fi
+AM_CONDITIONAL(WITH_LIBBSD, test x$with_libbsd = xyes)
 
 AC_SUBST(LIBACL)
 if test "$with_acl" != "no"; then
