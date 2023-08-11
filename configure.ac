@@ -760,6 +760,7 @@ AC_CONFIG_FILES([
 	contrib/Makefile
 	etc/Makefile
 	etc/pam.d/Makefile
+	etc/shadow-maint/Makefile
 	shadow.spec
 ])
 AC_OUTPUT
