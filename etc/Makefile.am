@@ -20,4 +20,4 @@ EXTRA_DIST = \
 	$(sysconf_DATA) \
 	$(default_DATA)
 
-SUBDIRS = pam.d
+SUBDIRS = pam.d shadow-maint
