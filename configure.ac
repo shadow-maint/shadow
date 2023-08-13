@@ -4,7 +4,7 @@ m4_define([libsubid_abi_major], 4)
 m4_define([libsubid_abi_minor], 0)
 m4_define([libsubid_abi_micro], 0)
 m4_define([libsubid_abi], [libsubid_abi_major.libsubid_abi_minor.libsubid_abi_micro])
-AC_INIT([shadow], [4.14.0-rc3], [pkg-shadow-devel@lists.alioth.debian.org], [],
+AC_INIT([shadow], [4.14.0-rc4], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz])
 AC_CONFIG_MACRO_DIRS([m4])
