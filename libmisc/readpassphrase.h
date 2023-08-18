@@ -36,8 +36,12 @@
 #endif
 #include <sys/types.h>
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 char * readpassphrase(const char *, char *, size_t, int);
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* !LIBBSD_READPASSPHRASE_H */
