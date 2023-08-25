@@ -26,6 +26,7 @@
 #include "getdef.h"
 #include "shadowlog_internal.h"
 
+
 /*
  * A configuration item definition.
  */
@@ -444,21 +445,14 @@ out:
 void setdef_config_file (const char* file)
 {
 #ifdef USE_ECONF
-	size_t len;
-	char* cp;
+	char  *cp;
 
-	len = strlen(file) + strlen(sysconfdir) + 2;
-	cp = MALLOC(len, char);
-	if (cp == NULL)
-		exit (13);
-	snprintf(cp, len, "%s/%s", file, sysconfdir);
+	if (asprintf(&cp, "%s/%s", file, sysconfdir) == -1)
+		exit(13);
 	sysconfdir = cp;
 #ifdef VENDORDIR
-	len = strlen(file) + strlen(vendordir) + 2;
-	cp = MALLOC(len, char);
-	if (cp == NULL)
-		exit (13);
-	snprintf(cp, len, "%s/%s", file, vendordir);
+	if (asprintf(&cp, "%s/%s", file, vendordir) == -1)
+		exit(13);
 	vendordir = cp;
 #endif
 #else

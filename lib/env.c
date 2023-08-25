@@ -20,6 +20,8 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
+
+
 /*
  * NEWENVP_STEP must be a power of two.  This is the number
  * of (char *) pointers to allocate at a time, to avoid using
@@ -67,16 +69,12 @@ void initenv (void)
 
 void addenv (const char *string, /*@null@*/const char *value)
 {
-	char *cp, *newstring;
-	size_t i;
-	size_t n;
+	char    *cp, *newstring;
+	size_t  i, n;
 
 	if (NULL != value) {
-		size_t len = strlen (string) + strlen (value) + 2;
-		int wlen;
-		newstring = XMALLOC(len, char);
-		wlen = snprintf (newstring, len, "%s=%s", string, value);
-		assert (wlen == (int) len -1);
+		if (asprintf(&newstring, "%s=%s", string, value) == -1)
+			exit(EXIT_FAILURE);
 	} else {
 		newstring = xstrdup (string);
 	}
@@ -88,7 +86,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 
 	cp = strchr (newstring, '=');
 	if (NULL == cp) {
-		free (newstring);
+		free(newstring);
 		return;
 	}
 
@@ -105,7 +103,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	}
 
 	if (i < newenvc) {
-		free (newenvp[i]);
+		free(newenvp[i]);
 		newenvp[i] = newstring;
 		return;
 	}
