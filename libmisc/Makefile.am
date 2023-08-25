@@ -16,12 +16,8 @@ libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
 	agetpass.c \
-	alloc.c \
-	../lib/alloc.h \
 	audit_help.c \
 	basename.c \
-	bit.c \
-	../lib/bit.h \
 	chkname.c \
 	chkname.h \
 	chowndir.c \
@@ -53,7 +49,6 @@ libmisc_la_SOURCES = \
 	list.c \
 	loginprompt.c \
 	mail.c \
-	mempcpy.c \
 	motd.c \
 	myname.c \
 	obscure.c \
@@ -71,10 +66,6 @@ libmisc_la_SOURCES = \
 	setugid.c \
 	setupenv.c \
 	shell.c \
-	stpecpy.c \
-	../lib/stpecpy.h \
-	stpeprintf.c \
-	../lib/stpeprintf.h \
 	strtoday.c \
 	sub.c \
 	sulog.c \
