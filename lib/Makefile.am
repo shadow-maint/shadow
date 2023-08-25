@@ -14,6 +14,10 @@ libshadow_la_CPPFLAGS += -I$(top_srcdir)
 libshadow_la_CFLAGS = $(LIBBSD_CFLAGS)
 
 libshadow_la_SOURCES = \
+	alloc.c \
+	alloc.h \
+	bit.c \
+	bit.h \
 	commonio.c \
 	commonio.h \
 	defines.h \
@@ -34,6 +38,8 @@ libshadow_la_SOURCES = \
 	groupio.h \
 	gshadow.c \
 	lockpw.c \
+	mempcpy.c \
+	mempcpy.h \
 	nss.c \
 	nscd.c \
 	nscd.h \
@@ -67,6 +73,10 @@ libshadow_la_SOURCES = \
 	shadowio.h \
 	shadowmem.c \
 	spawn.c \
+	stpecpy.c \
+	stpecpy.h \
+	stpeprintf.c \
+	stpeprintf.h \
 	write_full.c
 
 if WITH_TCB
