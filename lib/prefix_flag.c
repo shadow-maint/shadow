@@ -29,6 +29,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 
+
 static char *passwd_db_file = NULL;
 static char *spw_db_file = NULL;
 static char *group_db_file = NULL;
@@ -104,50 +105,43 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 				 log_get_progname());
 			exit (E_BAD_ARG);
 		}
-		size_t len;
-		len = strlen(prefix) + strlen(PASSWD_FILE) + 2;
-		passwd_db_file = XMALLOC(len, char);
-		snprintf(passwd_db_file, len, "%s/%s", prefix, PASSWD_FILE);
+
+		if (asprintf(&passwd_db_file, "%s/%s", prefix, PASSWD_FILE) == -1)
+			exit(EXIT_FAILURE);
 		pw_setdbname(passwd_db_file);
 
-		len = strlen(prefix) + strlen(GROUP_FILE) + 2;
-		group_db_file = XMALLOC(len, char);
-		snprintf(group_db_file, len, "%s/%s", prefix, GROUP_FILE);
+		if (asprintf(&group_db_file, "%s/%s", prefix, GROUP_FILE) == -1)
+			exit(EXIT_FAILURE);
 		gr_setdbname(group_db_file);
 
 #ifdef  SHADOWGRP
-		len = strlen(prefix) + strlen(SGROUP_FILE) + 2;
-		sgroup_db_file = XMALLOC(len, char);
-		snprintf(sgroup_db_file, len, "%s/%s", prefix, SGROUP_FILE);
+		if (asprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE) == -1)
+			exit(EXIT_FAILURE);
 		sgr_setdbname(sgroup_db_file);
 #endif
 #ifdef	USE_NIS
 		__setspNIS(0); /* disable NIS for now, at least until it is properly supporting a "prefix" */
 #endif
 
-		len = strlen(prefix) + strlen(SHADOW_FILE) + 2;
-		spw_db_file = XMALLOC(len, char);
-		snprintf(spw_db_file, len, "%s/%s", prefix, SHADOW_FILE);
+		if (asprintf(&spw_db_file, "%s/%s", prefix, SHADOW_FILE) == -1)
+			exit(EXIT_FAILURE);
 		spw_setdbname(spw_db_file);
 
 #ifdef ENABLE_SUBIDS
-		len = strlen(prefix) + strlen("/etc/subuid") + 2;
-		suid_db_file = XMALLOC(len, char);
-		snprintf(suid_db_file, len, "%s/%s", prefix, "/etc/subuid");
+		if (asprintf(&suid_db_file, "%s/%s", prefix, "/etc/subuid") == -1)
+			exit(EXIT_FAILURE);
 		sub_uid_setdbname(suid_db_file);
 
-		len = strlen(prefix) + strlen("/etc/subgid") + 2;
-		sgid_db_file = XMALLOC(len, char);
-		snprintf(sgid_db_file, len, "%s/%s", prefix, "/etc/subgid");
+		if (asprintf(&sgid_db_file, "%s/%s", prefix, "/etc/subgid") == -1)
+			exit(EXIT_FAILURE);
 		sub_gid_setdbname(sgid_db_file);
 #endif
 
 #ifdef USE_ECONF
 		setdef_config_file(prefix);
 #else
-		len = strlen(prefix) + strlen("/etc/login.defs") + 2;
-		def_conf_file = XMALLOC(len, char);
-		snprintf(def_conf_file, len, "%s/%s", prefix, "/etc/login.defs");
+		if (asprintf(&def_conf_file, "%s/%s", prefix, "/etc/login.defs") == -1)
+			exit(EXIT_FAILURE);
 		setdef_config_file(def_conf_file);
 #endif
 	}

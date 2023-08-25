@@ -13,6 +13,7 @@
 #include "run_part.h"
 #include "shadowlog_internal.h"
 
+
 int run_part (char *script_path, const char *name, const char *action)
 {
 	int pid;
@@ -55,25 +56,22 @@ int run_parts (const char *directory, const char *name, const char *action)
 	}
 
 	for (n=0; n<scanlist; n++) {
-		int path_length;
-		struct stat sb;
+		char         *s;
+		struct stat  sb;
 
-		path_length=strlen(directory) + strlen(namelist[n]->d_name) + 2;
-		char *s = MALLOC(path_length, char);
-		if (!s) {
-			printf ("could not allocate memory\n");
+		if (asprintf(&s, "%s/%s", directory, namelist[n]->d_name) == -1) {
+			fprintf(stderr, "could not allocate memory\n");
 			for (; n<scanlist; n++) {
-				free (namelist[n]);
+				free(namelist[n]);
 			}
-			free (namelist);
+			free(namelist);
 			return (1);
 		}
-		snprintf (s, path_length, "%s/%s", directory, namelist[n]->d_name);
 
 		execute_result = 0;
 		if (stat (s, &sb) == -1) {
 			perror ("stat");
-			free (s);
+			free(s);
 			for (; n<scanlist; n++) {
 				free (namelist[n]);
 			}
@@ -85,7 +83,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 			execute_result = run_part (s, name, action);
 		}
 
-		free (s);
+		free(s);
 
 		if (execute_result!=0) {
 			fprintf (shadow_logfd,

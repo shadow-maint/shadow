@@ -53,6 +53,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 
+
 /*
  * exit status values
  */
@@ -788,11 +789,9 @@ static int is_owner (uid_t uid, const char *path)
 
 static int remove_mailbox (void)
 {
-	const char *maildir;
-	char* mailfile;
-	int i;
-	int errors = 0;
-	size_t len;
+	int         i, errors = 0;
+	char        *mailfile;
+	const char  *maildir;
 
 	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
@@ -804,18 +803,13 @@ static int remove_mailbox (void)
 		return 0;
 	}
 
-	len = strlen (prefix) + strlen (maildir) + strlen (user_name) + 2;
-	mailfile = XMALLOC(len, char);
-
 	if (prefix[0]) {
-		(void) snprintf (mailfile, len, "%s/%s/%s",
-	    	             prefix, maildir, user_name);
+		if (asprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name) == -1)
+			exit(EXIT_FAILURE);
+	} else {
+		if (asprintf(&mailfile, "%s/%s", maildir, user_name) == -1)
+			exit(EXIT_FAILURE);
 	}
-	else {
-		(void) snprintf (mailfile, len, "%s/%s",
-	    	             maildir, user_name);
-	}
-	mailfile[len-1] = '\0';
 
 	if (access (mailfile, F_OK) != 0) {
 		if (ENOENT == errno) {
@@ -911,22 +905,19 @@ static int remove_mailbox (void)
 #ifdef WITH_TCB
 static int remove_tcbdir (const char *user_name, uid_t user_id)
 {
-	char *buf;
-	int ret = 0;
-	size_t buflen = (sizeof TCB_DIR) + strlen (user_name) + 2;
+	int   ret = 0;
+	char  *buf;
 
 	if (!getdef_bool ("USE_TCB")) {
 		return 0;
 	}
 
-	buf = MALLOC(buflen, char);
-	if (NULL == buf) {
-		fprintf (stderr, _("%s: Can't allocate memory, "
-		                   "tcb entry for %s not removed.\n"),
-		         Prog, user_name);
+	if (asprintf(&buf, TCB_DIR "/%s", user_name) == -1) {
+		fprintf(stderr,
+		        _("%s: Can't allocate memory, tcb entry for %s not removed.\n"),
+		        Prog, user_name);
 		return 1;
 	}
-	snprintf (buf, buflen, TCB_DIR "/%s", user_name);
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 		fprintf (stderr, _("%s: Cannot drop privileges: %s\n"),
 		         Prog, strerror (errno));
@@ -1128,15 +1119,10 @@ int main (int argc, char **argv)
 		user_gid = pwd->pw_gid;
 
 		if (prefix[0]) {
-
-			size_t len = strlen(prefix) + strlen(pwd->pw_dir) + 2;
-			int wlen;
-			user_home = XMALLOC(len, char);
-			wlen = snprintf(user_home, len, "%s/%s", prefix, pwd->pw_dir);
-			assert (wlen == (int) len -1);
-		}
-		else {
-			user_home = xstrdup (pwd->pw_dir);
+			if (asprintf(&user_home, "%s/%s", prefix, pwd->pw_dir) == -1)
+				exit(EXIT_FAILURE);
+		} else {
+			user_home = xstrdup(pwd->pw_dir);
 		}
 		pw_close();
 	}

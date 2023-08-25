@@ -28,20 +28,18 @@
 #include "getdef.h"
 #include "shadowlog.h"
 
+
 #ifndef USE_PAM
 static void
 addenv_path (const char *varname, const char *dirname, const char *filename)
 {
-	char *buf;
-	size_t len = strlen (dirname) + strlen (filename) + 2;
-	int wlen;
+	char  *buf;
 
-	buf = XMALLOC(len, char);
-	wlen = snprintf (buf, len, "%s/%s", dirname, filename);
-	assert (wlen == (int) len - 1);
+	if (asprintf(&buf, "%s/%s", dirname, filename) == -1)
+		exit(EXIT_FAILURE);
 
 	addenv (varname, buf);
-	free (buf);
+	free(buf);
 }
 
 static void read_env_file (const char *filename)
