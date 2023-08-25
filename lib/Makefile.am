@@ -133,6 +133,8 @@ libshadow_la_SOURCES = \
 	shell.c \
 	sizeof.h \
 	spawn.c \
+	sprintf.c \
+	sprintf.h \
 	sssd.c \
 	sssd.h \
 	stpecpy.c \
