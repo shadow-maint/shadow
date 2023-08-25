@@ -33,6 +33,7 @@
 #include "commonio.h"
 #include "shadowlog_internal.h"
 
+
 /* local function prototypes */
 static int lrename (const char *, const char *);
 static int check_link_count (const char *file, bool log);
@@ -354,33 +355,25 @@ bool commonio_present (const struct commonio_db *db)
 
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
-	char* file = NULL;
-	char* lock = NULL;
-	size_t lock_file_len;
-	size_t file_len;
-	int err = 0;
+	int   err = 0;
+	char  *file = NULL;
+	char  *lock = NULL;
 
 	if (db->locked) {
 		return 1;
 	}
-	file_len = strlen(db->filename) + 11;/* %lu max size */
-	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
-	file = MALLOC(file_len, char);
-	if (file == NULL) {
+
+	if (asprintf(&file, "%s.%ju", db->filename, (uintmax_t) getpid()) == -1)
 		goto cleanup_ENOMEM;
-	}
-	lock = MALLOC(lock_file_len, char);
-	if (lock == NULL) {
+	if (asprintf(&lock, "%s.lock", db->filename) == -1)
 		goto cleanup_ENOMEM;
-	}
-	snprintf (file, file_len, "%s.%lu",
-	          db->filename, (unsigned long) getpid ());
-	snprintf (lock, lock_file_len, "%s.lock", db->filename);
+
 	if (do_lock_file (file, lock, log) != 0) {
 		db->locked = true;
 		lock_count++;
 		err = 1;
 	}
+
 cleanup_ENOMEM:
 	free(file);
 	free(lock);

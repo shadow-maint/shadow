@@ -208,11 +208,7 @@ static void remove_link (/*@only@*/struct link_name *ln)
 
 static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, const struct stat *sb)
 {
-	struct link_name *lp;
-	size_t src_len;
-	size_t dst_len;
-	size_t name_len;
-	size_t len;
+	struct link_name  *lp;
 
 	/* copy_tree () must be the entry point */
 	assert (NULL != src_orig);
@@ -229,15 +225,11 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	}
 
 	lp = XMALLOC(1, struct link_name);
-	src_len = strlen (src_orig);
-	dst_len = strlen (dst_orig);
-	name_len = strlen (name);
 	lp->ln_dev = sb->st_dev;
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
-	len = name_len - src_len + dst_len + 1;
-	lp->ln_name = XMALLOC(len, char);
-	(void) snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
+	if (asprintf(&lp->ln_name, "%s%s", dst_orig, name + strlen(src_orig)) == -1)
+		exit(EXIT_FAILURE);
 	lp->ln_next = links;
 	links = lp;
 
@@ -314,8 +306,9 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 		set_orig = true;
 	}
 	while ((0 == err) && (ent = readdir (dir)) != NULL) {
-		char    *src_name, *dst_name;
-		size_t  src_len, dst_len;
+		char              *src_name = NULL;
+		char              *dst_name;
+		struct path_info  src_entry, dst_entry;
 		/*
 		 * Skip the "." and ".." entries
 		 */
@@ -325,26 +318,16 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 			continue;
 		}
 
-		src_len = strlen (ent->d_name) + 2;
-		dst_len = strlen (ent->d_name) + 2;
-		src_len += strlen (src->full_path);
-		dst_len += strlen (dst->full_path);
-
-		src_name = MALLOC(src_len, char);
-		dst_name = MALLOC(dst_len, char);
-
-		if ((NULL == src_name) || (NULL == dst_name)) {
+		if (asprintf(&src_name, "%s/%s", src->full_path, ent->d_name) == -1)
+		{
+			err = -1;
+			continue;
+		}
+		if (asprintf(&dst_name, "%s/%s", dst->full_path, ent->d_name) == -1)
+		{
 			err = -1;
 			goto skip;
 		}
-		/*
-		 * Build the filename for both the source and
-		 * the destination files.
-		 */
-		struct path_info src_entry, dst_entry;
-
-		(void) snprintf (src_name, src_len, "%s/%s", src->full_path, ent->d_name);
-		(void) snprintf (dst_name, dst_len, "%s/%s", dst->full_path, ent->d_name);
 
 		src_entry.full_path = src_name;
 		src_entry.dirfd = dirfd(dir);
@@ -356,9 +339,10 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 
 		err = copy_entry(&src_entry, &dst_entry, reset_selinux,
 				 old_uid, new_uid, old_gid, new_gid);
+
+		free(dst_name);
 skip:
-		free (src_name);
-		free (dst_name);
+		free(src_name);
 	}
 	(void) closedir (dir);
 	(void) close (dst_fd);
@@ -625,12 +609,11 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	 * directory.
 	 */
 	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
-		size_t len = strlen (dst_orig) + strlen (oldlink) - strlen (src_orig) + 1;
-		char *dummy = XMALLOC(len, char);
-		(void) snprintf (dummy, len, "%s%s",
-		                 dst_orig,
-		                 oldlink + strlen (src_orig));
-		free (oldlink);
+		char  *dummy;
+
+		if (asprintf(&dummy, "%s%s", dst_orig, oldlink + strlen(src_orig)) == -1)
+			exit(EXIT_FAILURE);
+		free(oldlink);
 		oldlink = dummy;
 	}
 

@@ -44,6 +44,7 @@
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
 
+
 #define MSG_WARN_EDIT_OTHER_FILE _( \
 	"You have modified %s.\n"\
 	"You may need to modify %s for consistency.\n"\
@@ -192,16 +193,15 @@ static void vipwexit (const char *msg, int syserr, int ret)
 static void
 vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 {
-	const char *editor;
-	pid_t pid;
-	struct stat st1, st2;
-	int status;
-	FILE *f;
-	pid_t orig_pgrp, editor_pgrp = -1;
-	sigset_t mask, omask;
+	int          status;
+	char         *to_rename;
+	FILE         *f;
+	pid_t        pid, orig_pgrp, editor_pgrp = -1;
+	sigset_t     mask, omask;
+	const char   *editor;
+	struct stat  st1, st2;
 	/* FIXME: the following should have variable sizes */
-	char filebackup[1024], fileedit[1024];
-	char *to_rename;
+	char         filebackup[1024], fileedit[1024];
 
 	snprintf (filebackup, sizeof filebackup, "%s-", file);
 #ifdef WITH_TCB
@@ -294,7 +294,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	} else if (0 == pid) {
 		/* use the system() call to invoke the editor so that it accepts
 		   command line args in the EDITOR and VISUAL environment vars */
-		char *buf;
+		char  *buf;
 
 		/* Wait for parent to make us the foreground pgrp. */
 		if (orig_pgrp != -1) {
@@ -304,9 +304,9 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 				continue;
 		}
 
-		buf = MALLOC(strlen(editor) + strlen(fileedit) + 2, char);
-		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
-		          "%s %s", editor, fileedit);
+		if (asprintf(&buf, "%s %s", editor, fileedit) == -1)
+			exit(EXIT_FAILURE);
+
 		status = system (buf);
 		if (-1 == status) {
 			fprintf (stderr, _("%s: %s: %s\n"), Prog, editor,
@@ -420,13 +420,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (stat (file, &st1) != 0) {
 			vipwexit (_("failed to stat edited file"), errno, 1);
 		}
-		to_rename = MALLOC(strlen(file) + 2, char);
-		if (NULL == to_rename) {
-			vipwexit (_("failed to allocate memory"), errno, 1);
-		}
-		snprintf (to_rename, strlen (file) + 2, "%s+", file);
+		if (asprintf(&to_rename, "%s+", file) == -1)
+			vipwexit (_("asprintf(3) failed"), errno, 1);
+
 		if (create_backup_file (f, to_rename, &st1) != 0) {
-			free (to_rename);
+			free(to_rename);
 			vipwexit (_("failed to create backup file"), errno, 1);
 		}
 		(void) fclose (f);
@@ -444,7 +442,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		         Prog, file, strerror (errno), to_rename);
 #ifdef WITH_TCB
 		if (tcb_mode) {
-			free (to_rename);
+			free(to_rename);
 		}
 #endif				/* WITH_TCB */
 		vipwexit (0, 0, 1);
@@ -452,7 +450,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 #ifdef WITH_TCB
 	if (tcb_mode) {
-		free (to_rename);
+		free(to_rename);
 		if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to gain privileges"), errno, 1);
 		}

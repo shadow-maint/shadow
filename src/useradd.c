@@ -64,6 +64,7 @@
 #endif
 #include "shadowlog.h"
 
+
 #ifndef SKEL_DIR
 #define SKEL_DIR "/etc/skel"
 #endif
@@ -328,21 +329,14 @@ static void fail_exit (int code)
  */
 static void get_defaults (void)
 {
-	FILE *fp;
-	char *default_file = USER_DEFAULTS_FILE;
-	char buf[1024];
-	char *cp;
+	FILE  *fp;
+	char  *default_file = USER_DEFAULTS_FILE;
+	char  buf[1024];
+	char  *cp;
 
 	if (prefix[0]) {
-		size_t len;
-		int wlen;
-
-		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
-		default_file = MALLOC(len, char);
-                if (default_file == NULL)
-                       return;
-		wlen = snprintf(default_file, len, "%s/%s", prefix, USER_DEFAULTS_FILE);
-		assert (wlen == (int) len -1);
+		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
+			return;
 	}
 
 	/*
@@ -446,18 +440,13 @@ static void get_defaults (void)
 			}
 
 			if (prefix[0]) {
-				size_t len;
-				int wlen;
-				char* _def_template; /* avoid const warning */
+				char  *_def_template; /* avoid const warning */
 
-				len = strlen(prefix) + strlen(cp) + 2;
-				_def_template = XMALLOC(len, char);
-				wlen = snprintf(_def_template, len, "%s/%s", prefix, cp);
-				assert (wlen == (int) len -1);
+				if (asprintf(&_def_template, "%s/%s", prefix, cp) == -1)
+					exit(EXIT_FAILURE);
 				def_template = _def_template;
-			}
-			else {
-				def_template = xstrdup (cp);
+			} else {
+				def_template = xstrdup(cp);
 			}
 		}
 
@@ -469,19 +458,14 @@ static void get_defaults (void)
 				cp = USRSKELDIR;	/* XXX warning: const */
 			}
 
-			if(prefix[0]) {
-				size_t len;
-				int wlen;
-				char* _def_usrtemplate; /* avoid const warning */
+			if (prefix[0]) {
+				char  *_def_usrtemplate; /* avoid const warning */
 
-				len = strlen(prefix) + strlen(cp) + 2;
-				_def_usrtemplate = XMALLOC(len, char);
-				wlen = snprintf(_def_usrtemplate, len, "%s/%s", prefix, cp);
-				assert (wlen == (int) len -1);
+				if (asprintf(&_def_usrtemplate, "%s/%s", prefix, cp) == -1)
+					exit(EXIT_FAILURE);
 				def_usrtemplate = _def_usrtemplate;
-			}
-			else {
-				def_usrtemplate = xstrdup (cp);
+			} else {
+				def_usrtemplate = xstrdup(cp);
 			}
 		}
 		/*
@@ -560,32 +544,24 @@ static int set_defaults (void)
 	bool out_usrskel = false;
 	bool out_create_mail_spool = false;
 	bool out_log_init = false;
-	size_t len;
 	int ret = -1;
 
 
-	len = strlen(prefix) + strlen(NEW_USER_FILE) + 2;
-	new_file = MALLOC(len, char);
-        if (new_file == NULL) {
-		fprintf (stderr,
-		         _("%s: cannot create new defaults file: %s\n"),
-		         Prog, strerror(errno));
+	if (asprintf(&new_file, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE) == -1)
+	{
+		fprintf(stderr, _("%s: cannot create new defaults file: %s\n"),
+		        Prog, strerror(errno));
 		return -1;
         }
-	wlen = snprintf(new_file, len, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
-	assert (wlen <= (int) len -1);
 
 	if (prefix[0]) {
-		len = strlen(prefix) + strlen(USER_DEFAULTS_FILE) + 2;
-		default_file = MALLOC(len, char);
-		if (default_file == NULL) {
-			fprintf (stderr,
-			         _("%s: cannot create new defaults file: %s\n"),
-			         Prog, strerror(errno));
+		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
+		{
+			fprintf(stderr,
+			        _("%s: cannot create new defaults file: %s\n"),
+			        Prog, strerror(errno));
 			goto setdef_err;
 		}
-		wlen = snprintf(default_file, len, "%s/%s", prefix, USER_DEFAULTS_FILE);
-		assert (wlen == (int) len -1);
 	}
 
 	new_file_dup = strdup(new_file);
@@ -1604,26 +1580,19 @@ static void process_flags (int argc, char **argv)
 			exit (E_BAD_ARG);
 		}
 		if (!dflg) {
-			char *uh;
-			size_t len = strlen (def_home) + strlen (user_name) + 2;
-			int wlen;
+			char  *uh;
 
-			uh = XMALLOC(len, char);
-			wlen = snprintf (uh, len, "%s/%s", def_home, user_name);
-			assert (wlen == (int) len -1);
-
+			if (asprintf(&uh, "%s/%s", def_home, user_name) == -1)
+				exit(EXIT_FAILURE);
 			user_home = uh;
 		}
 		if (prefix[0]) {
-			size_t len = strlen(prefix) + strlen(user_home) + 2;
-			int wlen;
-			char* _prefix_user_home; /* to avoid const warning */
-			_prefix_user_home = XMALLOC(len, char);
-			wlen = snprintf(_prefix_user_home, len, "%s/%s", prefix, user_home);
-			assert (wlen == (int) len -1);
-			prefix_user_home = _prefix_user_home;
-		}
-		else {
+			char  *p_u_h; /* to avoid const warning */
+
+			if (asprintf(&p_u_h, "%s/%s", prefix, user_home) == -1)
+				exit(EXIT_FAILURE);
+			prefix_user_home = p_u_h;
+		} else {
 			prefix_user_home = user_home;
 		}
 	}

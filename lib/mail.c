@@ -35,22 +35,19 @@ void mailcheck (void)
 	 */
 	mailbox = getenv ("MAILDIR");
 	if (NULL != mailbox) {
-		char *newmail;
-		size_t len = strlen (mailbox) + 5;
-		int wlen;
+		char  *newmail;
 
-		newmail = XMALLOC(len, char);
-		wlen = snprintf (newmail, len, "%s/new", mailbox);
-		assert (wlen == (int) len - 1);
+		if (asprintf(&newmail, "%s/new", mailbox) == -1)
+			exit(EXIT_FAILURE);
 
 		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {
-				free (newmail);
+				free(newmail);
 				(void) puts (_("You have new mail."));
 				return;
 			}
 		}
-		free (newmail);
+		free(newmail);
 	}
 
 	mailbox = getenv ("MAIL");
