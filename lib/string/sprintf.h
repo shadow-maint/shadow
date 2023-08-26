@@ -16,6 +16,18 @@
 
 #include "attr.h"
 #include "defines.h"
+#include "sizeof.h"
+
+
+#define SNPRINTF(s, fmt, ...)                                                 \
+({                                                                            \
+	size_t  sz_, len_;                                                    \
+                                                                              \
+	sz_ = NITEMS(s);                                                      \
+	len_ = snprintf(s, sz_, fmt __VA_OPT__(,) __VA_ARGS__);               \
+                                                                              \
+	(len_ >= sz_) ? -1 : len_;                                            \
+})
 
 
 format_attr(printf, 2, 3)
