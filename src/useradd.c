@@ -524,26 +524,26 @@ static void show_defaults (void)
  */
 static int set_defaults (void)
 {
-	FILE *ifp;
-	FILE *ofp;
-	char buf[1024];
-	char *new_file = NULL;
-	char *new_file_dup = NULL;
-	char *default_file = USER_DEFAULTS_FILE;
-	char *cp;
-	int ofd;
-	int wlen;
-	bool out_group = false;
-	bool out_groups = false;
-	bool out_home = false;
-	bool out_inactive = false;
-	bool out_expire = false;
-	bool out_shell = false;
-	bool out_skel = false;
-	bool out_usrskel = false;
-	bool out_create_mail_spool = false;
-	bool out_log_init = false;
-	int ret = -1;
+	int   ofd;
+	int   wlen;
+	int   ret = -1;
+	bool  out_group = false;
+	bool  out_groups = false;
+	bool  out_home = false;
+	bool  out_inactive = false;
+	bool  out_expire = false;
+	bool  out_shell = false;
+	bool  out_skel = false;
+	bool  out_usrskel = false;
+	bool  out_create_mail_spool = false;
+	bool  out_log_init = false;
+	char  buf[1024];
+	char  *new_file = NULL;
+	char  *new_file_dup = NULL;
+	char  *default_file = USER_DEFAULTS_FILE;
+	char  *cp;
+	FILE  *ifp;
+	FILE  *ofp;
 
 
 	if (asprintf(&new_file, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE) == -1)
