@@ -32,7 +32,9 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/sprintf.h"
 #include "string/strtcpy.h"
+
 
 /*
  * Global variables.
@@ -614,9 +616,9 @@ static void check_fields (void)
  */
 int main (int argc, char **argv)
 {
-	const struct passwd *pw;	/* password file entry               */
-	char new_gecos[BUFSIZ];	/* buffer for new GECOS fields       */
-	char *user;
+	char                 new_gecos[BUFSIZ];
+	char                 *user;
+	const struct passwd  *pw;
 
 	/*
 	 * Get the program name. The program name is used as a
@@ -723,9 +725,9 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
-	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
-	          fullnm, roomno, workph, homeph,
-	          ('\0' != slop[0]) ? "," : "", slop);
+	SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
+	         fullnm, roomno, workph, homeph,
+	         ('\0' != slop[0]) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);

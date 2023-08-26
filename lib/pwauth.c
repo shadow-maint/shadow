@@ -25,6 +25,7 @@
 #include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
+#include "string/sprintf.h"
 
 #ifdef SKEY
 #include <skey.h>
@@ -51,16 +52,16 @@ int pw_auth (const char *cipher,
              int reason,
              /*@null@*/const char *input)
 {
-	char prompt[1024];
-	char *clear = NULL;
-	const char *cp;
-	const char *encrypted;
-	int retval;
+	int          retval;
+	char         prompt[1024];
+	char         *clear = NULL;
+	const char   *cp;
+	const char   *encrypted;
 
 #ifdef	SKEY
-	bool use_skey = false;
-	char challenge_info[40];
-	struct skey skey;
+	bool         use_skey = false;
+	char         challenge_info[40];
+	struct skey  skey;
 #endif
 
 	/*
@@ -141,7 +142,7 @@ int pw_auth (const char *cipher,
 		}
 #endif
 
-		snprintf (prompt, sizeof prompt, cp, user);
+		SNPRINTF(prompt, cp, user);
 		clear = agetpass(prompt);
 		input = (clear == NULL) ? "" : clear;
 	}

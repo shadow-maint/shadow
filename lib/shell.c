@@ -15,6 +15,9 @@
 #include <errno.h>
 #include "prototypes.h"
 #include "defines.h"
+#include "string/sprintf.h"
+
+
 extern char **newenvp;
 extern size_t newenvc;
 
@@ -45,7 +48,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * don't want to tell us what it is themselves.
 	 */
 	if (arg == NULL) {
-		snprintf(arg0, sizeof(arg0), "-%s", Basename(file));
+		SNPRINTF(arg0, "-%s", Basename(file));
 		arg = arg0;
 	}
 
@@ -71,7 +74,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * how to execute this stupid shell, so I might as well give
 	 * up in disgust ...
 	 */
-	(void) snprintf (arg0, sizeof arg0, _("Cannot execute %s"), file);
+	SNPRINTF(arg0, _("Cannot execute %s"), file);
 	errno = err;
 	perror (arg0);
 	return err;

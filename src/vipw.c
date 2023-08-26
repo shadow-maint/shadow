@@ -205,7 +205,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	/* FIXME: the following should have variable sizes */
 	char         filebackup[1024], fileedit[1024];
 
-	snprintf (filebackup, sizeof filebackup, "%s-", file);
+	SNPRINTF(filebackup, "%s-", file);
 #ifdef WITH_TCB
 	if (tcb_mode) {
 		if (   (mkdir (TCB_DIR "/" SHADOWTCB_SCRATCHDIR, 0700) != 0)
@@ -215,12 +215,12 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
-		snprintf (fileedit, sizeof fileedit,
-		          TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.vipw.shadow.%s",
-		          user);
+		SNPRINTF(fileedit,
+		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.vipw.shadow.%s",
+		         user);
 	} else {
 #endif				/* WITH_TCB */
-		snprintf (fileedit, sizeof fileedit, "%s.edit", file);
+		SNPRINTF(fileedit, "%s.edit", file);
 #ifdef WITH_TCB
 	}
 #endif				/* WITH_TCB */
