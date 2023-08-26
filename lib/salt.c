@@ -175,7 +175,7 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 17);
 
-	(void) snprintf (buf + buf_begin, 18, "rounds=%lu$", rounds);
+	snprintf(buf + buf_begin, 18, "rounds=%lu$", rounds);
 }
 #endif /* USE_SHA_CRYPT */
 
@@ -254,7 +254,7 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
 
-	(void) snprintf (buf + buf_begin, 4, "%2.2lu$", rounds);
+	snprintf(buf + buf_begin, 4, "%2.2lu$", rounds);
 }
 #endif /* USE_BCRYPT */
 

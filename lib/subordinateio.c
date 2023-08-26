@@ -777,9 +777,8 @@ gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 
 static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 {
-	struct passwd *pw;
-	struct group *gr;
-	int ret = 0;
+	struct group   *gr;
+	struct passwd  *pw;
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -787,20 +786,16 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 		if (pw == NULL) {
 			return false;
 		}
-		ret = snprintf(id, ID_SIZE, "%u", pw->pw_uid);
-		if (ret < 0 || ret >= ID_SIZE) {
+		if (snprintf_(id, ID_SIZE, "%u", pw->pw_uid) == -1)
 			return false;
-		}
 		break;
 	case ID_TYPE_GID:
 		gr = getgrnam(owner);
 		if (gr == NULL) {
 			return false;
 		}
-		ret = snprintf(id, ID_SIZE, "%u", gr->gr_gid);
-		if (ret < 0 || ret >= ID_SIZE) {
+		if (snprintf_(id, ID_SIZE, "%u", gr->gr_gid) == -1)
 			return false;
-		}
 		break;
 	default:
 		return false;
