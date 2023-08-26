@@ -151,16 +151,16 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 
 static int user_busy_processes (const char *name, uid_t uid)
 {
-	DIR *proc;
-	struct dirent *ent;
-	char *tmp_d_name;
-	pid_t pid;
-	DIR *task_dir;
+	DIR            *proc;
+	DIR            *task_dir;
+	char           *tmp_d_name;
 	/* 22: /proc/xxxxxxxxxx/task + \0 */
-	char task_path[22];
-	char root_path[22];
-	struct stat sbroot;
-	struct stat sbroot_process;
+	char           task_path[22];
+	char           root_path[22];
+	pid_t          pid;
+	struct stat    sbroot;
+	struct stat    sbroot_process;
+	struct dirent  *ent;
 
 #ifdef ENABLE_SUBIDS
 	sub_uid_open (O_RDONLY);
@@ -205,8 +205,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		}
 
 		/* Check if the process is in our chroot */
-		snprintf (root_path, 22, "/proc/%lu/root", (unsigned long) pid);
-		root_path[21] = '\0';
+		snprintf(root_path, sizeof(root_path), "/proc/%lu/root", (unsigned long) pid);
 		if (stat (root_path, &sbroot_process) != 0) {
 			continue;
 		}
@@ -226,8 +225,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 			return 1;
 		}
 
-		snprintf (task_path, 22, "/proc/%lu/task", (unsigned long) pid);
-		task_path[21] = '\0';
+		snprintf(task_path, sizeof(task_path), "/proc/%lu/task", (unsigned long) pid);
 		task_dir = opendir (task_path);
 		if (task_dir != NULL) {
 			while ((ent = readdir (task_dir)) != NULL) {
