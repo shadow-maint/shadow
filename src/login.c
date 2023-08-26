@@ -478,21 +478,9 @@ int main (int argc, char **argv)
 {
 	const char *tmptty;
 	char tty[BUFSIZ];
-
-#ifdef RLOGIN
-	char term[128] = "";
-#endif				/* RLOGIN */
-#if !defined(USE_PAM)
-#ifdef ENABLE_LASTLOG
-	char ptime[80];
-#endif /* ENABLE_LASTLOG */
-#endif
 	unsigned int delay;
 	unsigned int retries;
 	bool subroot = false;
-#ifndef USE_PAM
-	bool is_console;
-#endif
 	int err;
 	unsigned int timeout;
 	const char *cp;
@@ -503,13 +491,21 @@ int main (int argc, char **argv)
 	const char *failent_user;
 	char *host = NULL;
 
-#ifdef USE_PAM
+#if defined(USE_PAM)
 	int retcode;
 	pid_t child;
 	char *pam_user = NULL;
 #else
+# if defined(ENABLE_LASTLOG)
+	char ptime[80];
+# endif
+	bool is_console;
 	struct spwd *spwd = NULL;
 #endif
+#if defined(RLOGIN)
+	char term[128] = "";
+#endif
+
 	/*
 	 * Some quick initialization.
 	 */
