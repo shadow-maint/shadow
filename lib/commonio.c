@@ -893,9 +893,9 @@ static int write_all (const struct commonio_db *db)
 
 int commonio_close (struct commonio_db *db)
 {
-	char buf[1024];
-	int errors = 0, r;
-	struct stat sb;
+	int          errors = 0, r;
+	char         buf[1024];
+	struct stat  sb;
 
 	if (!db->isopen) {
 		errno = EINVAL;
