@@ -44,12 +44,12 @@ static void nss_exit(void) {
 
 // nsswitch_path is an argument only to support testing.
 void nss_init(const char *nsswitch_path) {
-	FILE *nssfp = NULL;
-	char *line = NULL, *p, *token, *saveptr;
-	size_t len = 0;
-	FILE *shadow_logfd = log_get_logfd();
-	char libname[65];
-	void *h;
+	char    *line = NULL, *p, *token, *saveptr;
+	char    libname[65];
+	FILE    *nssfp = NULL;
+	FILE    *shadow_logfd = log_get_logfd();
+	void    *h;
+	size_t  len = 0;
 
 	if (atomic_flag_test_and_set(&nss_init_started)) {
 		// Another thread has started nss_init, wait for it to complete

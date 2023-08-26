@@ -75,10 +75,10 @@ int get_pidfd_from_fd(const char *pidfdstr)
 
 int open_pidfd(const char *pidstr)
 {
-	int proc_dir_fd;
-	int written;
-	char proc_dir_name[32];
-	pid_t target;
+	int    proc_dir_fd;
+	int    written;
+	char   proc_dir_name[32];
+	pid_t  target;
 
 	if (get_pid(pidstr, &target) == 0)
 		return -ENOENT;
