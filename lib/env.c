@@ -177,7 +177,7 @@ void set_env (int argc, char *const *argv)
 
 		cp = strchr (*argv, '=');
 		if (NULL == cp) {
-			assert(SNPRINTF(variable, "L%d", noname) != -1);
+			XSNPRINTF(variable, "L%d", noname);
 			noname++;
 			addenv (variable, *argv);
 		} else {

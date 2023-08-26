@@ -710,7 +710,7 @@ static int set_defaults (void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	assert(SNPRINTF(buf, "%s-", default_file) != -1);
+	XSNPRINTF(buf, "%s-", default_file);
 	unlink (buf);
 	if ((link (default_file, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;
