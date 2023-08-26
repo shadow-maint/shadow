@@ -14,6 +14,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include "string/sprintf.h"
+
+
 int get_pid (const char *pidstr, pid_t *pid)
 {
 	long long  val;
@@ -76,7 +79,6 @@ int get_pidfd_from_fd(const char *pidfdstr)
 int open_pidfd(const char *pidstr)
 {
 	int    proc_dir_fd;
-	int    written;
 	char   proc_dir_name[32];
 	pid_t  target;
 
@@ -84,9 +86,7 @@ int open_pidfd(const char *pidstr)
 		return -ENOENT;
 
 	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
-	written = snprintf(proc_dir_name, sizeof(proc_dir_name), "/proc/%u/",
-		target);
-	if ((written <= 0) || ((size_t)written >= sizeof(proc_dir_name))) {
+	if (SNPRINTF(proc_dir_name, "/proc/%u/", target) == -1) {
 		fprintf(stderr, "snprintf of proc path failed for %u: %s\n",
 			target, strerror(errno));
 		return -EINVAL;

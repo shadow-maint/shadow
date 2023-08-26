@@ -18,6 +18,9 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
+#include "string/sprintf.h"
+
+
 /*
  * hushed - determine if a user receives login messages
  *
@@ -26,11 +29,11 @@
  */
 bool hushed (const char *username)
 {
-	struct passwd *pw;
-	const char *hushfile;
-	char buf[BUFSIZ];
-	bool found;
-	FILE *fp;
+	bool           found;
+	char           buf[BUFSIZ];
+	FILE           *fp;
+	const char     *hushfile;
+	struct passwd  *pw;
 
 	/*
 	 * Get the name of the file to use.  If this option is not
@@ -53,7 +56,7 @@ bool hushed (const char *username)
 	 */
 
 	if (hushfile[0] != '/') {
-		(void) snprintf (buf, sizeof (buf), "%s/%s", pw->pw_dir, hushfile);
+		SNPRINTF(buf, "%s/%s", pw->pw_dir, hushfile);
 		return (access (buf, F_OK) == 0);
 	}
 

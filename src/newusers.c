@@ -50,6 +50,8 @@
 #endif				/* ENABLE_SUBIDS */
 #include "chkname.h"
 #include "shadowlog.h"
+#include "string/sprintf.h"
+
 
 /*
  * Global variables
@@ -709,8 +711,9 @@ static void process_flags (int argc, char **argv)
 
 	if (argv[optind] != NULL) {
 		if (freopen (argv[optind], "r", stdin) == NULL) {
-			char buf[BUFSIZ];
-			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
+			char  buf[BUFSIZ];
+
+			SNPRINTF(buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
 			fail_exit (EXIT_FAILURE);
 		}
