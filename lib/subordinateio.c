@@ -18,6 +18,8 @@
 #include <fcntl.h>
 
 #include "alloc.h"
+#include "string/sprintf.h"
+
 
 #define ID_SIZE 31
 
@@ -220,10 +222,9 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
          * (It may be specified as literal UID or as another username which
          * has the same UID as the username we are looking for.)
          */
-        struct passwd *pwd;
-        uid_t          owner_uid;
         char           owner_uid_string[33];
-        int ret;
+        uid_t          owner_uid;
+        struct passwd  *pwd;
 
 
         /* Get UID of the username we are looking for */
@@ -233,8 +234,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                 return NULL;
         }
         owner_uid = pwd->pw_uid;
-        ret = snprintf(owner_uid_string, sizeof (owner_uid_string), "%lu", (unsigned long)owner_uid);
-        if (ret < 0 || (size_t)ret >= sizeof (owner_uid_string))
+        if (SNPRINTF(owner_uid_string, "%lu", (unsigned long) owner_uid) == -1)
                 return NULL;
 
         commonio_rewind(db);

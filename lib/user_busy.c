@@ -23,6 +23,8 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
+#include "string/sprintf.h"
+
 
 #ifdef __linux__
 static int check_status (const char *name, const char *sname, uid_t uid);
@@ -83,11 +85,11 @@ static int user_busy_utmp (const char *name)
 static int different_namespace (const char *sname)
 {
 	/* 41: /proc/xxxxxxxxxx/task/xxxxxxxxxx/ns/user + \0 */
-	char path[41];
-	char buf[512], buf2[512];
-	ssize_t llen1, llen2;
+	char     path[41];
+	char     buf[512], buf2[512];
+	ssize_t  llen1, llen2;
 
-	snprintf (path, 41, "/proc/%s/ns/user", sname);
+	SNPRINTF(path, "/proc/%s/ns/user", sname);
 
 	if ((llen1 = readlink (path, buf, sizeof(buf))) == -1)
 		return 0;
@@ -106,11 +108,11 @@ static int different_namespace (const char *sname)
 static int check_status (const char *name, const char *sname, uid_t uid)
 {
 	/* 40: /proc/xxxxxxxxxx/task/xxxxxxxxxx/status + \0 */
-	char status[40];
-	char line[1024];
-	FILE *sfile;
+	char  status[40];
+	char  line[1024];
+	FILE  *sfile;
 
-	snprintf (status, 40, "/proc/%s/status", sname);
+	SNPRINTF(status, "/proc/%s/status", sname);
 
 	sfile = fopen (status, "r");
 	if (NULL == sfile) {
@@ -205,7 +207,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		}
 
 		/* Check if the process is in our chroot */
-		snprintf(root_path, sizeof(root_path), "/proc/%lu/root", (unsigned long) pid);
+		SNPRINTF(root_path, "/proc/%lu/root", (unsigned long) pid);
 		if (stat (root_path, &sbroot_process) != 0) {
 			continue;
 		}
@@ -225,7 +227,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 			return 1;
 		}
 
-		snprintf(task_path, sizeof(task_path), "/proc/%lu/task", (unsigned long) pid);
+		SNPRINTF(task_path, "/proc/%lu/task", (unsigned long) pid);
 		task_dir = opendir (task_path);
 		if (task_dir != NULL) {
 			while ((ent = readdir (task_dir)) != NULL) {

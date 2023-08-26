@@ -525,7 +525,6 @@ static void show_defaults (void)
 static int set_defaults (void)
 {
 	int   ofd;
-	int   wlen;
 	int   ret = -1;
 	bool  out_group = false;
 	bool  out_groups = false;
@@ -711,8 +710,7 @@ static int set_defaults (void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	wlen = snprintf (buf, sizeof buf, "%s-", default_file);
-	assert (wlen < (int) sizeof buf);
+	assert(SNPRINTF(buf, "%s-", default_file) != -1);
 	unlink (buf);
 	if ((link (default_file, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;

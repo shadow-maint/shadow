@@ -58,7 +58,9 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/sprintf.h"
 #include "string/strtcpy.h"
+
 
 /*
  * Global variables
@@ -387,8 +389,8 @@ static void prepare_pam_close_session (void)
 		              stderr);
 		(void) kill (-pid_child, caught);
 
-		snprintf (kill_msg, sizeof kill_msg, _(" ...killed.\n"));
-		snprintf (wait_msg, sizeof wait_msg, _(" ...waiting for child to terminate.\n"));
+		SNPRINTF(kill_msg, _(" ...killed.\n"));
+		SNPRINTF(wait_msg, _(" ...waiting for child to terminate.\n"));
 
 		/* Any signals other than SIGCHLD and SIGALRM will no longer have any effect,
 		 * so it's time to block all of them. */

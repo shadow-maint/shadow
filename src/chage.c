@@ -33,12 +33,14 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
+#include "string/sprintf.h"
 #include "string/strtcpy.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
 /*@-exitarg@*/
 #include "exitcodes.h"
+
 
 /*
  * Global variables
@@ -158,19 +160,19 @@ usage (int status)
  */
 static int new_fields (void)
 {
-	char buf[200];
+	char  buf[200];
 
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	(void) snprintf (buf, sizeof buf, "%ld", mindays);
+	SNPRINTF(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
 	if (   (getlong (buf, &mindays) == 0)
 	    || (mindays < -1)) {
 		return 0;
 	}
 
-	(void) snprintf (buf, sizeof buf, "%ld", maxdays);
+	SNPRINTF(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
 	if (   (getlong (buf, &maxdays) == 0)
 	    || (maxdays < -1)) {
@@ -194,14 +196,14 @@ static int new_fields (void)
 		}
 	}
 
-	(void) snprintf (buf, sizeof buf, "%ld", warndays);
+	SNPRINTF(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
 	if (   (getlong (buf, &warndays) == 0)
 	    || (warndays < -1)) {
 		return 0;
 	}
 
-	(void) snprintf (buf, sizeof buf, "%ld", inactdays);
+	SNPRINTF(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
 	if (   (getlong (buf, &inactdays) == 0)
 	    || (inactdays < -1)) {

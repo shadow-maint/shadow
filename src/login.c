@@ -37,6 +37,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/sprintf.h"
 #include "string/strtcpy.h"
 
 #ifdef USE_PAM
@@ -476,34 +477,34 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  */
 int main (int argc, char **argv)
 {
-	const char *tmptty;
-	char tty[BUFSIZ];
-	unsigned int delay;
-	unsigned int retries;
-	bool subroot = false;
-	int err;
-	unsigned int timeout;
-	const char *cp;
-	const char *tmp;
-	char fromhost[512];
-	struct passwd *pwd = NULL;
-	char **envp = environ;
-	const char *failent_user;
-	char *host = NULL;
+	int            err;
+	bool           subroot = false;
+	char           **envp = environ;
+	char           *host = NULL;
+	char           tty[BUFSIZ];
+	char           fromhost[512];
+	const char     *failent_user;
+	const char     *tmptty;
+	const char     *cp;
+	const char     *tmp;
+	unsigned int   delay;
+	unsigned int   retries;
+	unsigned int   timeout;
+	struct passwd  *pwd = NULL;
 
 #if defined(USE_PAM)
-	int retcode;
-	pid_t child;
-	char *pam_user = NULL;
+	int            retcode;
+	char           *pam_user = NULL;
+	pid_t          child;
 #else
 # if defined(ENABLE_LASTLOG)
-	char ptime[80];
+	char           ptime[80];
 # endif
-	bool is_console;
-	struct spwd *spwd = NULL;
+	bool           is_console;
+	struct spwd    *spwd = NULL;
 #endif
 #if defined(RLOGIN)
-	char term[128] = "";
+	char           term[128] = "";
 #endif
 
 	/*
@@ -647,19 +648,16 @@ int main (int argc, char **argv)
 	}
 
 	if ('\0' != *cp) {
-		snprintf (fromhost, sizeof fromhost,
-		          " on '%.100s' from '%.200s'", tty, cp);
+		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
-		snprintf (fromhost, sizeof fromhost,
-		          " on '%.100s'", tty);
+		SNPRINTF(fromhost, " on '%.100s'", tty);
 	}
 	free(host);
 
       top:
 	/* only allow ALARM sec. for login */
 	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
-	snprintf (tmsg, sizeof tmsg,
-	          _("\nLogin timed out after %u seconds.\n"), timeout);
+	SNPRINTF(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
 	(void) signal (SIGALRM, alarm_handler);
 	if (timeout > 0) {
 		(void) alarm (timeout);
@@ -698,15 +696,13 @@ int main (int argc, char **argv)
 #endif
 	/* if fflg, then the user has already been authenticated */
 	if (!fflg) {
-		unsigned int failcount = 0;
-		char hostn[256];
-		char loginprompt[256];	/* That's one hell of a prompt :) */
+		char          hostn[256];
+		char          loginprompt[256]; //That's one hell of a prompt :)
+		unsigned int  failcount = 0;
 
 		/* Make the login prompt look like we want it */
 		if (gethostname (hostn, sizeof (hostn)) == 0) {
-			snprintf (loginprompt,
-			          sizeof (loginprompt),
-			          _("%s login: "), hostn);
+			SNPRINTF(loginprompt, _("%s login: "), hostn);
 		} else {
 			STRTCPY(loginprompt, _("login: "));
 		}

@@ -32,6 +32,7 @@
 #include "prototypes.h"
 #include "commonio.h"
 #include "shadowlog_internal.h"
+#include "string/sprintf.h"
 
 
 /* local function prototypes */
@@ -123,11 +124,11 @@ static int check_link_count (const char *file, bool log)
 
 static int do_lock_file (const char *file, const char *lock, bool log)
 {
-	int fd;
-	pid_t pid;
-	ssize_t len;
-	int retval;
-	char buf[32];
+	int      fd;
+	int      retval;
+	char     buf[32];
+	pid_t    pid;
+	ssize_t  len;
 
 	fd = open (file, O_CREAT | O_TRUNC | O_WRONLY, 0600);
 	if (-1 == fd) {
@@ -140,7 +141,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	}
 
 	pid = getpid ();
-	snprintf (buf, sizeof buf, "%lu", (unsigned long) pid);
+	SNPRINTF(buf, "%lu", (unsigned long) pid);
 	len = (ssize_t) strlen (buf) + 1;
 	if (write_full(fd, buf, len) == -1) {
 		if (log) {
@@ -341,7 +342,7 @@ static void free_linked_list (struct commonio_db *db)
 
 int commonio_setname (struct commonio_db *db, const char *name)
 {
-	snprintf (db->filename, sizeof (db->filename), "%s", name);
+	SNPRINTF(db->filename, "%s", name);
 	db->setname = true;
 	return 1;
 }
@@ -467,7 +468,7 @@ static void dec_lock_count (void)
 
 int commonio_unlock (struct commonio_db *db)
 {
-	char lock[1024];
+	char  lock[1024];
 
 	if (db->isopen) {
 		db->readonly = true;
@@ -484,7 +485,7 @@ int commonio_unlock (struct commonio_db *db)
 		 * then call ulckpwdf() (if used) on last unlock.
 		 */
 		db->locked = false;
-		snprintf (lock, sizeof lock, "%s.lock", db->filename);
+		SNPRINTF(lock, "%s.lock", db->filename);
 		unlink (lock);
 		dec_lock_count ();
 		return 1;
@@ -893,7 +894,7 @@ static int write_all (const struct commonio_db *db)
 
 int commonio_close (struct commonio_db *db)
 {
-	int          errors = 0, r;
+	int          errors = 0;
 	char         buf[1024];
 	struct stat  sb;
 
@@ -926,8 +927,7 @@ int commonio_close (struct commonio_db *db)
 		/*
 		 * Create backup file.
 		 */
-		r = snprintf (buf, sizeof buf, "%s-", db->filename);
-		if (r < 0 || (size_t)r >= sizeof buf) {
+		if (SNPRINTF(buf, "%s-", db->filename) == -1) {
 			(void) fclose (db->fp);
 			db->fp = NULL;
 			goto fail;
@@ -964,8 +964,7 @@ int commonio_close (struct commonio_db *db)
 		sb.st_gid = db->st_gid;
 	}
 
-	r = snprintf (buf, sizeof buf, "%s+", db->filename);
-	if (r < 0 || (size_t)r >= sizeof buf)
+	if (SNPRINTF(buf, "%s+", db->filename) == -1)
 		goto fail;
 
 #ifdef WITH_SELINUX
