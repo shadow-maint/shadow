@@ -18,6 +18,11 @@ extern inline int xasprintf(char **restrict s, const char *restrict fmt, ...);
 extern inline int xvasprintf(char **restrict s, const char *restrict fmt,
     va_list ap);
 
+extern inline int snprintf_(char *restrict s, int size,
+    const char *restrict fmt, ...);
+extern inline int vsnprintf_(char *restrict s, int size,
+    const char *restrict fmt, va_list ap);
+
 extern inline int xsnprintf(char *restrict s, int size,
     const char *restrict fmt, ...);
 extern inline int xvsnprintf(char *restrict s, int size,

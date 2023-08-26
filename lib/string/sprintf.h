@@ -20,14 +20,7 @@
 
 
 #define SNPRINTF(s, fmt, ...)                                                 \
-({                                                                            \
-	size_t  sz_, len_;                                                    \
-                                                                              \
-	sz_ = NITEMS(s);                                                      \
-	len_ = snprintf(s, sz_, fmt __VA_OPT__(,) __VA_ARGS__);               \
-                                                                              \
-	(len_ >= sz_) ? -1 : len_;                                            \
-})
+	snprintf_(s, NITEMS(s), fmt __VA_OPT__(,) __VA_ARGS__)
 
 #define XSNPRINTF(s, fmt, ...)                                                 \
 	xsnprintf(s, SIZEOF_ARRAY(s), fmt __VA_OPT__(,) __VA_ARGS__)
@@ -37,6 +30,12 @@ format_attr(printf, 2, 3)
 inline int xasprintf(char **restrict s, const char *restrict fmt, ...);
 format_attr(printf, 2, 0)
 inline int xvasprintf(char **restrict s, const char *restrict fmt, va_list ap);
+
+format_attr(printf, 3, 4)
+inline int snprintf_(char *restrict s, int size, const char *restrict fmt, ...);
+format_attr(printf, 3, 0)
+inline int vsnprintf_(char *restrict s, int size, const char *restrict fmt,
+    va_list ap);
 
 format_attr(printf, 3, 4)
 inline int xsnprintf(char *restrict s, int size, const char *restrict fmt, ...);
@@ -75,6 +74,33 @@ xvasprintf(char **restrict s, const char *restrict fmt, va_list ap)
 
 
 inline int
+snprintf_(char *restrict s, int size, const char *restrict fmt, ...)
+{
+	int      len;
+	va_list  ap;
+
+	va_start(ap, fmt);
+	len = vsnprintf_(s, size, fmt, ap);
+	va_end(ap);
+
+	return len;
+}
+
+
+inline int
+vsnprintf_(char *restrict s, int size, const char *restrict fmt, va_list ap)
+{
+	int  len;
+
+	len = vsnprintf(s, size, fmt, ap);
+	if (len >= size)
+		len = -1;
+
+	return len;
+}
+
+
+inline int
 xsnprintf(char *restrict s, int size, const char *restrict fmt, ...)
 {
 	int      len;
@@ -93,8 +119,8 @@ xvsnprintf(char *restrict s, int size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 
-	len = vsnprintf(s, size, fmt, ap);
-	if (len == -1 || len >= size) {
+	len = vsnprintf_(s, size, fmt, ap);
+	if (len == -1) {
 		perror("snprintf");
 		exit(EXIT_FAILURE);
 	}
