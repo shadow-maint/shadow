@@ -30,8 +30,8 @@ extern size_t newenvc;
 
 int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 {
-	char arg0[1024];
-	int err;
+	int   err;
+	char  arg0[1024];
 
 	if (file == NULL) {
 		errno = EINVAL;
@@ -45,8 +45,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 	 * don't want to tell us what it is themselves.
 	 */
 	if (arg == NULL) {
-		(void) snprintf (arg0, sizeof arg0, "-%s", Basename (file));
-		arg0[sizeof arg0 - 1] = '\0';
+		snprintf(arg0, sizeof(arg0), "-%s", Basename(file));
 		arg = arg0;
 	}
 
