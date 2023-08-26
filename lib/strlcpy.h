@@ -42,15 +42,22 @@
  */
 
 
-#define STRLCPY(dst, src)                                                     \
-({                                                                            \
-	size_t  sz_, len_;                                                    \
-                                                                              \
-	sz_ = SIZEOF_ARRAY(dst);                                              \
-	len_ = strlcpy(dst, src, sz_);                                        \
-                                                                              \
-	(len_ >= sz_) ? -1 : len_;                                            \
-})
+#define STRLCPY(dst, src)  strlcpy_(dst, src, SIZEOF_ARRAY(dst))
+
+
+inline size_t strlcpy_(char *restrict dst, const char *restrict src,
+    size_t size);
+
+
+inline size_t
+strlcpy_(char *restrict dst, const char *restrict src, size_t size)
+{
+	size_t  len;
+
+	len = strlcpy(dst, src, size);
+
+	return (len >= size) ? -1 : len;
+}
 
 
 #endif  // include guard
