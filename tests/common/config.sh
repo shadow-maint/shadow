@@ -82,7 +82,6 @@ prepare_chroot ()
 
 	# Copy existing gcda
 	mkdir -p tmp/root$build_path/lib
-	mkdir -p tmp/root$build_path/libmisc
 	mkdir -p tmp/root$build_path/src
 	find "$build_path" -name "*.gcda" | while read f
 	do
@@ -113,7 +112,6 @@ clean_chroot ()
 		mv "$f" "$g"
 	done
 	rmdir tmp/root$build_path/lib
-	rmdir tmp/root$build_path/libmisc
 	rmdir tmp/root$build_path/src
 	rmdir tmp/root$build_path
 	rmdir tmp/root/root/build

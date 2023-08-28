@@ -10,13 +10,13 @@
 
 Check when RLOGIN is enabled if ruserok() exists
 
-Move selinux_file_context out of libmisc/copydir.c
+Move selinux_file_context out of lib/copydir.c
 
 Review hardcoded root account?
 
 review all call to strto
 
-libmisc/cleanup_user.c
+lib/cleanup_user.c
 	cleanup needed (cleanup_report_add_user* not used)
 
 

@@ -9,7 +9,6 @@ sgidperms = 2755
 
 AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
-	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	$(ECONF_CPPFLAGS)
@@ -85,7 +84,6 @@ shadowsgidubins = passwd
 endif
 
 LDADD          = $(INTLLIBS) \
-		 $(top_builddir)/libmisc/libmisc.la \
 		 $(top_builddir)/lib/libshadow.la \
 		 $(LIBTCB)
 
@@ -183,59 +181,49 @@ MISCLIBS = \
 
 getsubids_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS) -ldl
 
 getsubids_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
-	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
 	-I$(top_builddir)/libsubid
 
 get_subid_owners_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS) -ldl
 
 get_subid_owners_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
-	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
 	-I$(top_builddir)/libsubid
 
 new_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
-	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
 	-I$(top_builddir)/libsubid
 
 new_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS) -ldl
 
 free_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
-	-I$(top_srcdir)/libmisc \
 	-I$(top_srcdir) \
 	-I$(top_builddir)/libsubid
 
 free_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/libsubid/libsubid.la \
 	$(MISCLIBS) -ldl
 
 check_subid_range_CPPFLAGS = \
 	-I$(top_srcdir)/lib \
-	-I$(top_srcdir) \
-	-I$(top_srcdir)/libmisc
+	-I$(top_srcdir)
 
 check_subid_range_LDADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(MISCLIBS) -ldl
 endif

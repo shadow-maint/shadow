@@ -97,8 +97,8 @@ static pid_t pid_child = 0;
  * External identifiers
  */
 
-extern char **newenvp; /* libmisc/env.c */
-extern size_t newenvc; /* libmisc/env.c */
+extern char **newenvp; /* lib/env.c */
+extern size_t newenvc; /* lib/env.c */
 
 /* local function prototypes */
 
