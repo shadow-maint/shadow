@@ -753,7 +753,6 @@ AC_CONFIG_FILES([
 	man/uk/Makefile
 	man/zh_CN/Makefile
 	man/zh_TW/Makefile
-	libmisc/Makefile
 	lib/Makefile
 	libsubid/Makefile
 	libsubid/subid.h

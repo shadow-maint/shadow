@@ -21,10 +21,8 @@ MISCLIBS = \
 
 libsubid_la_LIBADD = \
 	$(top_builddir)/lib/libshadow.la \
-	$(top_builddir)/libmisc/libmisc.la \
 	$(MISCLIBS) -ldl
 
 AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
-	-I${top_srcdir}/libmisc \
 	-DLOCALEDIR=\"$(datadir)/locale\"

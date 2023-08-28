@@ -10,7 +10,7 @@
 /*
  * prototypes.h
  *
- * prototypes of libmisc functions, and private lib functions.
+ * prototypes of some lib functions, and private lib functions.
  *
  * $Id$
  *

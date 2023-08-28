@@ -2,7 +2,7 @@
 
 EXTRA_DIST = NEWS README TODO shadow.spec.in
 
-SUBDIRS = libmisc lib
+SUBDIRS = lib
 
 if ENABLE_SUBIDS
 SUBDIRS += libsubid
