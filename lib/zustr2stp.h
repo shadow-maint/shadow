@@ -10,14 +10,21 @@
 
 #include <config.h>
 
+#include <assert.h>
 #include <stddef.h>
 #include <string.h>
 
 #include "mempcpy.h"
+#include "must_be.h"
 #include "sizeof.h"
 
 
-#define ZUSTR2STP(dst, src)  zustr2stp(dst, src, SIZEOF_ARRAY(src))
+#define ZUSTR2STP(dst, src)                                                   \
+({                                                                            \
+	static_assert(!is_array(dst) || sizeof(dst) > SIZEOF_ARRAY(src), ""); \
+                                                                              \
+	zustr2stp(dst, src, SIZEOF_ARRAY(src));                               \
+})
 
 
 inline char *zustr2stp(char *restrict dst, const char *restrict src, size_t sz);
