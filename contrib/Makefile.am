@@ -2,5 +2,5 @@
 # and also cooperate to make a distribution for `make dist'
 
 EXTRA_DIST = README adduser.c adduser.sh adduser2.sh \
- atudel groupmems.shar shadow-anonftp.patch \
+ groupmems.shar shadow-anonftp.patch \
  udbachk.tgz
