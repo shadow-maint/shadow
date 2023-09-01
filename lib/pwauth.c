@@ -202,7 +202,7 @@ int pw_auth (const char *cipher,
 	 */
 
 	clear_pass = clear;
-	if (wipe_clear_pass && (NULL != clear) && ('\0' != *clear)) {
+	if (wipe_clear_pass && (NULL != clear)) {
 		strzero (clear);
 	}
 	return retval;
