@@ -138,13 +138,7 @@ int pw_auth (const char *cipher,
 
 		snprintf (prompt, sizeof prompt, cp, user);
 		clear = getpass (prompt);
-		if (NULL == clear) {
-			static char c[1];
-
-			c[0] = '\0';
-			clear = c;
-		}
-		input = clear;
+		input = (clear == NULL) ? "" : clear;
 	}
 
 	/*
@@ -171,13 +165,7 @@ int pw_auth (const char *cipher,
 	 */
 	if ((0 != retval) && ('\0' == input[0]) && use_skey) {
 		clear = getpass (prompt);
-		if (NULL == clear) {
-			static char c[1];
-
-			c[0] = '\0';
-			clear = c;
-		}
-		input = clear;
+		input = (clear == NULL) ? "" : clear;
 	}
 
 	if ((0 != retval) && use_skey) {
