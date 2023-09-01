@@ -344,8 +344,8 @@ static void open_files (void)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		fprintf (stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname (), strerror(errno));
+		SYSLOG ((LOG_WARN, "cannot open %s: %s", gr_dbname (), strerror(errno)));
 		exit (E_GRP_UPDATE);
 	}
 
@@ -353,9 +353,9 @@ static void open_files (void)
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			         _("%s: cannot open %s: %s\n"),
+			         Prog, sgr_dbname (), strerror(errno));
+			SYSLOG ((LOG_WARN, "cannot open %s: %s", sgr_dbname (), strerror(errno)));
 			exit (E_GRP_UPDATE);
 		}
 	}
