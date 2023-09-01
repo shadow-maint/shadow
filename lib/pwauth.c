@@ -32,8 +32,6 @@ static const char *PROMPT = gettext_noop ("Password: ");
 static const char *PROMPT = gettext_noop ("%s's Password: ");
 #endif
 
-bool wipe_clear_pass = true;
-/*@null@*/char *clear_pass = NULL;
 
 /*
  * pw_auth - perform getpass/crypt authentication
@@ -194,15 +192,7 @@ int pw_auth (const char *cipher,
 	}
 #endif
 
-	/*
-	 * Things like RADIUS authentication may need the password -
-	 * if the external variable wipe_clear_pass is zero, we will
-	 * not wipe it (the caller should wipe clear_pass when it is
-	 * no longer needed).  --marekm
-	 */
-
-	clear_pass = clear;
-	if (wipe_clear_pass && (NULL != clear)) {
+	if (NULL != clear) {
 		strzero (clear);
 	}
 	return retval;
