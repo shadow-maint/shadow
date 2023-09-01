@@ -3,7 +3,7 @@
 autoreconf -v -f --install "$(dirname "$0")" || exit 1
 
 "$(dirname "$0")"/configure \
-	CFLAGS="-O2 -Wall" \
+	CFLAGS="-O2 -Wall -Werror=implicit-function-declaration" \
 	--enable-lastlog \
 	--enable-man \
 	--enable-maintainer-mode \
