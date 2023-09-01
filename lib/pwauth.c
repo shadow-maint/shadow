@@ -18,14 +18,19 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "prototypes.h"
+
+#include "agetpass.h"
 #include "defines.h"
 #include "memzero.h"
+#include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
+
 #ifdef SKEY
 #include <skey.h>
 #endif
+
+
 #ifdef __linux__		/* standard password prompt by default */
 static const char *PROMPT = gettext_noop ("Password: ");
 #else
@@ -137,7 +142,7 @@ int pw_auth (const char *cipher,
 #endif
 
 		snprintf (prompt, sizeof prompt, cp, user);
-		clear = getpass (prompt);
+		clear = agetpass(prompt);
 		input = (clear == NULL) ? "" : clear;
 	}
 
@@ -164,7 +169,8 @@ int pw_auth (const char *cipher,
 	 * -- AR 8/22/1999
 	 */
 	if ((0 != retval) && ('\0' == input[0]) && use_skey) {
-		clear = getpass (prompt);
+		erase_pass(clear);
+		clear = agetpass(prompt);
 		input = (clear == NULL) ? "" : clear;
 	}
 
@@ -179,10 +185,8 @@ int pw_auth (const char *cipher,
 		}
 	}
 #endif
+	erase_pass(clear);
 
-	if (NULL != clear) {
-		strzero (clear);
-	}
 	return retval;
 }
 #else				/* !USE_PAM */
