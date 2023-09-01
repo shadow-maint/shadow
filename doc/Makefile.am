@@ -2,4 +2,4 @@
 # and also cooperate to make a distribution for `make dist'
 
 EXTRA_DIST = HOWTO README.limits \
-    README.platforms WISHLIST cracklib26.diff
+    README.platforms WISHLIST
