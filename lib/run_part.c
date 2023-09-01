@@ -1,3 +1,5 @@
+#include <config.h>
+
 #include <dirent.h>
 #include <errno.h>
 #include <stdio.h>
