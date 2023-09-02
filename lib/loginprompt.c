@@ -38,8 +38,6 @@ void login_prompt (char *name, int namesize)
 {
 	char buf[1024];
 
-#define MAX_ENV 32
-	char *envp[MAX_ENV];
 	char *cp;
 	int i;
 	FILE *fp;
