@@ -25,6 +25,7 @@ libshadow_la_SOURCES = \
 	addgrps.c \
 	age.c \
 	agetpass.c \
+	agetpass.h \
 	alloc.c \
 	alloc.h \
 	audit_help.c \

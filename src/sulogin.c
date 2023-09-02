@@ -16,6 +16,8 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
+
+#include "agetpass.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"
