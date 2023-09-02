@@ -43,6 +43,7 @@
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \
@@ -304,8 +305,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 				continue;
 		}
 
-		if (asprintf(&buf, "%s %s", editor, fileedit) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&buf, "%s %s", editor, fileedit);
 
 		status = system (buf);
 		if (-1 == status) {

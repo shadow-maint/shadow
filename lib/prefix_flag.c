@@ -28,6 +28,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "getdef.h"
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 static char *passwd_db_file = NULL;
@@ -106,42 +107,35 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			exit (E_BAD_ARG);
 		}
 
-		if (asprintf(&passwd_db_file, "%s/%s", prefix, PASSWD_FILE) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&passwd_db_file, "%s/%s", prefix, PASSWD_FILE);
 		pw_setdbname(passwd_db_file);
 
-		if (asprintf(&group_db_file, "%s/%s", prefix, GROUP_FILE) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&group_db_file, "%s/%s", prefix, GROUP_FILE);
 		gr_setdbname(group_db_file);
 
 #ifdef  SHADOWGRP
-		if (asprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE);
 		sgr_setdbname(sgroup_db_file);
 #endif
 #ifdef	USE_NIS
 		__setspNIS(0); /* disable NIS for now, at least until it is properly supporting a "prefix" */
 #endif
 
-		if (asprintf(&spw_db_file, "%s/%s", prefix, SHADOW_FILE) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&spw_db_file, "%s/%s", prefix, SHADOW_FILE);
 		spw_setdbname(spw_db_file);
 
 #ifdef ENABLE_SUBIDS
-		if (asprintf(&suid_db_file, "%s/%s", prefix, "/etc/subuid") == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&suid_db_file, "%s/%s", prefix, "/etc/subuid");
 		sub_uid_setdbname(suid_db_file);
 
-		if (asprintf(&sgid_db_file, "%s/%s", prefix, "/etc/subgid") == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&sgid_db_file, "%s/%s", prefix, "/etc/subgid");
 		sub_gid_setdbname(sgid_db_file);
 #endif
 
 #ifdef USE_ECONF
 		setdef_config_file(prefix);
 #else
-		if (asprintf(&def_conf_file, "%s/%s", prefix, "/etc/login.defs") == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&def_conf_file, "%s/%s", prefix, "/etc/login.defs");
 		setdef_config_file(def_conf_file);
 #endif
 	}

@@ -27,18 +27,17 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 #ifndef USE_PAM
 static void
-addenv_path (const char *varname, const char *dirname, const char *filename)
+addenv_path(const char *varname, const char *dirname, const char *filename)
 {
 	char  *buf;
 
-	if (asprintf(&buf, "%s/%s", dirname, filename) == -1)
-		exit(EXIT_FAILURE);
-
-	addenv (varname, buf);
+	xasprintf(&buf, "%s/%s", dirname, filename);
+	addenv(varname, buf);
 	free(buf);
 }
 

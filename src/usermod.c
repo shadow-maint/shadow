@@ -58,6 +58,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 /*
@@ -1265,18 +1266,12 @@ static void process_flags (int argc, char **argv)
 		user_newgid = user_gid;
 	}
 	if (prefix[0]) {
-		if (asprintf(&prefix_user_home, "%s/%s", prefix, user_home) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&prefix_user_home, "%s/%s", prefix, user_home);
 		if (user_newhome) {
-			if (asprintf(&prefix_user_newhome, "%s/%s",
-			             prefix, user_newhome) == -1)
-			{
-				exit(EXIT_FAILURE);
-			}
+			xasprintf(&prefix_user_newhome, "%s/%s",
+			          prefix, user_newhome);
 		}
-
-	}
-	else {
+	} else {
 		prefix_user_home = user_home;
 		prefix_user_newhome = user_newhome;
 	}
@@ -2062,11 +2057,9 @@ static void move_mailbox (void)
 	 * between stat and chown).  --marekm
 	 */
 	if (prefix[0]) {
-		if (asprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name);
 	} else {
-		if (asprintf(&mailfile, "%s/%s", maildir, user_name) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&mailfile, "%s/%s", maildir, user_name);
 	}
 
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
@@ -2111,14 +2104,10 @@ static void move_mailbox (void)
 		char  *newmailfile;
 
 		if (prefix[0]) {
-			if (asprintf(&newmailfile, "%s/%s/%s",
-			             prefix, maildir, user_newname) == -1)
-			{
-				exit(EXIT_FAILURE);
-			}
+			xasprintf(&newmailfile, "%s/%s/%s",
+			          prefix, maildir, user_newname);
 		} else {
-			if (asprintf(&newmailfile, "%s/%s", maildir, user_newname) == -1)
-				exit(EXIT_FAILURE);
+			xasprintf(&newmailfile, "%s/%s", maildir, user_newname);
 		}
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {
