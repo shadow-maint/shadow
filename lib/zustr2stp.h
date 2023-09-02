@@ -14,7 +14,6 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "mempcpy.h"
 #include "must_be.h"
 #include "sizeof.h"
 

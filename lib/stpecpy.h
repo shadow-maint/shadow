@@ -17,8 +17,6 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "mempcpy.h"
-
 
 inline char *stpecpy(char *dst, char *end, const char *restrict src);
 
