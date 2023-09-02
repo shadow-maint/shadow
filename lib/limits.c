@@ -62,7 +62,8 @@ static int setrlimit_value (unsigned int resource,
 		 */
 		char *endptr;
 		long longlimit = strtol (value, &endptr, 10);
-		if ((0 == longlimit) && (value == endptr)) {
+
+		if (value == endptr) {
 			/* No argument at all. No-op.
 			 * FIXME: We could instead throw an error, though.
 			 */
