@@ -710,7 +710,7 @@ static void check_perms (const struct group *gr)
 		}
 	} else
 #endif				/* SHADOWGRP */
-	{
+	if (!amroot) {
 #ifdef FIRST_MEMBER_IS_ADMIN
 		/*
 		 * The policy here for changing a group is that
@@ -726,19 +726,13 @@ static void check_perms (const struct group *gr)
 		 * first group member might be just a normal user.
 		 * --marekm
 		 */
-		if (!amroot) {
-			if (gr->gr_mem[0] == NULL) {
-				failure ();
-			}
+		if (gr->gr_mem[0] == NULL)
+			failure();
 
-			if (strcmp (gr->gr_mem[0], myname) != 0) {
-				failure ();
-			}
-		}
+		if (strcmp(gr->gr_mem[0], myname) != 0)
+			failure();
 #else				/* ! FIRST_MEMBER_IS_ADMIN */
-		if (!amroot) {
-			failure ();
-		}
+		failure();
 #endif
 	}
 }
