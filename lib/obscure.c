@@ -88,7 +88,7 @@ static char *str_lower (/*@returned@*/char *string)
 static /*@observer@*//*@null@*/const char *password_check (
 	/*@notnull@*/const char *old,
 	/*@notnull@*/const char *new,
-	/*@notnull@*/const struct passwd *pwdp)
+	/*@notnull@*/unused const struct passwd *pwdp)
 {
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
