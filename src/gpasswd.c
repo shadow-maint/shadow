@@ -79,6 +79,7 @@ static uid_t bywho;
 #endif
 
 /* local function prototypes */
+NORETURN static void failure(void);
 static void usage (int status);
 static void catch_signals (int killed);
 static bool is_valid_user_list (const char *users);
@@ -200,11 +201,11 @@ static bool is_valid_user_list (const char *users)
 	return is_valid;
 }
 
-static void failure (void)
+static void failure(void)
 {
-	fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-	log_gpasswd_failure (": Permission denied");
-	exit (E_NOPERM);
+	fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+	log_gpasswd_failure(": Permission denied");
+	exit(E_NOPERM);
 }
 
 /*
