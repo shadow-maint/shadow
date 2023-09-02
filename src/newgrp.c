@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "agetpass.h"
 #include "alloc.h"
 #include "defines.h"
 #include "getdef.h"

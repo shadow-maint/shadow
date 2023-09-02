@@ -7,6 +7,8 @@
 
 #include <config.h>
 
+#include "agetpass.h"
+
 #include <limits.h>
 #include <readpassphrase.h>
 #include <stdio.h>
@@ -16,7 +18,6 @@
 #ident "$Id$"
 
 #include "alloc.h"
-#include "prototypes.h"
 
 #if WITH_LIBBSD == 0
 #include "freezero.h"
