@@ -726,15 +726,14 @@ static void check_perms (const struct group *gr)
 		 * first group member might be just a normal user.
 		 * --marekm
 		 */
-#if defined(FIRST_MEMBER_IS_ADMIN)
+#if !defined(FIRST_MEMBER_IS_ADMIN)
+		failure();
+#endif
 		if (gr->gr_mem[0] == NULL)
 			failure();
 
 		if (strcmp(gr->gr_mem[0], myname) != 0)
 			failure();
-#else				/* ! FIRST_MEMBER_IS_ADMIN */
-		failure();
-#endif
 	}
 }
 
