@@ -673,6 +673,7 @@ static int copy_hardlink (const struct path_info *dst,
 	return 0;
 }
 
+
 /*
  * copy_special - copy a special file
  *
@@ -683,29 +684,33 @@ static int copy_hardlink (const struct path_info *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_special (const struct path_info *src, const struct path_info *dst,
-                         bool reset_selinux,
-                         const struct stat *statp, const struct timespec mt[],
-                         uid_t old_uid, uid_t new_uid,
-                         gid_t old_gid, gid_t new_gid)
+static int
+copy_special(const struct path_info *src, const struct path_info *dst,
+             bool reset_selinux,
+             const struct stat *statp, const struct timespec mt[],
+             uid_t old_uid, uid_t new_uid,
+             gid_t old_gid, gid_t new_gid)
 {
-	int err = 0;
-
-#ifdef WITH_SELINUX
-	if (set_selinux_file_context (dst->full_path, statp->st_mode & S_IFMT) != 0) {
+#if defined(WITH_SELINUX)
+	if (set_selinux_file_context(dst->full_path, statp->st_mode & S_IFMT) != 0)
 		return -1;
-	}
-#endif				/* WITH_SELINUX */
+#endif
 
-	if (   (mknodat (dst->dirfd, dst->name, statp->st_mode & ~07777U, statp->st_rdev) != 0)
-	    || (chownat_if_needed (dst, statp,
-	                         old_uid, new_uid, old_gid, new_gid) != 0)
-	    || (fchmodat (dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) != 0)
-#ifdef WITH_ACL
-	    || (   (perm_copy_path (src, dst, &ctx) != 0)
-	        && (errno != 0))
-#endif				/* WITH_ACL */
-#ifdef WITH_ATTR
+	if (mknodat(dst->dirfd, dst->name, statp->st_mode & ~07777U, statp->st_rdev) == -1)
+		return -1;
+
+	if (chownat_if_needed(dst, statp, old_uid, new_uid, old_gid, new_gid) == -1)
+		return -1;
+
+	if (fchmodat(dst->dirfd, dst->name, statp->st_mode & 07777, AT_SYMLINK_NOFOLLOW) == -1)
+		return -1;
+
+#if defined(WITH_ACL)
+	if (perm_copy_path(src, dst, &ctx) == -1 && errno != 0)
+		return -1;
+#endif
+
+#if defined(WITH_ATTR)
 	/*
 	 * If the third parameter is NULL, all extended attributes
 	 * except those that define Access Control Lists are copied.
@@ -713,15 +718,16 @@ static int copy_special (const struct path_info *src, const struct path_info *ds
 	 * file systems with and without ACL support needs some
 	 * additional logic so that no unexpected permissions result.
 	 */
-	    || (   !reset_selinux
-	        && (attr_copy_path (src, dst, NULL, &ctx) != 0)
-	        && (errno != 0))
-#endif				/* WITH_ATTR */
-		|| (utimensat (dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) != 0)) {
-		err = -1;
+	if (!reset_selinux) {
+		if (attr_copy_path(src, dst, NULL, &ctx) == -1 && errno != 0)
+			return -1;
 	}
+#endif
 
-	return err;
+	if (utimensat(dst->dirfd, dst->name, mt, AT_SYMLINK_NOFOLLOW) == -1)
+		return -1;
+
+	return 0;
 }
 
 /*
