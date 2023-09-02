@@ -267,7 +267,7 @@ static bool user_match (const char *tok, const char *string)
 static const char *resolve_hostname (const char *string)
 {
 	int              gai_err;
-	char             *addr_str;
+	const char       *addr_str;
 	struct addrinfo  *addrs;
 
 	static char      host[MAXHOSTNAMELEN];
