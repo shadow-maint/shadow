@@ -68,7 +68,10 @@ strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 	p = mempcpy(dst, src, dlen);
 	*p = '\0';
 
-	return trunc ? -1 : slen;
+	if (trunc)
+		return -1;
+
+	return slen;
 }
 
 
