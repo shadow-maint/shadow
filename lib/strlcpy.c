@@ -6,10 +6,13 @@
 
 #include <config.h>
 
+#include <stddef.h>
+#include <sys/types.h>
+
 #ident "$Id$"
 
 #include "strlcpy.h"
 
 
-extern inline size_t strlcpy_(char *restrict dst, const char *restrict src,
+extern inline ssize_t strlcpy_(char *restrict dst, const char *restrict src,
     size_t size);

@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 #include <string.h>
+#include <sys/types.h>
 
 #include "sizeof.h"
 
@@ -45,11 +46,11 @@
 #define STRLCPY(dst, src)  strlcpy_(dst, src, SIZEOF_ARRAY(dst))
 
 
-inline size_t strlcpy_(char *restrict dst, const char *restrict src,
+inline ssize_t strlcpy_(char *restrict dst, const char *restrict src,
     size_t size);
 
 
-inline size_t
+inline ssize_t
 strlcpy_(char *restrict dst, const char *restrict src, size_t size)
 {
 	size_t  len;
