@@ -1,8 +1,8 @@
 #! /bin/sh
 
-autoreconf -v -f --install || exit 1
+autoreconf -v -f --install "$(dirname "$0")" || exit 1
 
-./configure \
+"$(dirname "$0")"/configure \
 	CFLAGS="-O2 -Wall" \
 	--enable-lastlog \
 	--enable-man \
