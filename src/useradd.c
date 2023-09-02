@@ -63,6 +63,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 #ifndef SKEL_DIR
@@ -440,11 +441,10 @@ static void get_defaults (void)
 			}
 
 			if (prefix[0]) {
-				char  *_def_template; /* avoid const warning */
+				char  *dt; /* avoid const warning */
 
-				if (asprintf(&_def_template, "%s/%s", prefix, cp) == -1)
-					exit(EXIT_FAILURE);
-				def_template = _def_template;
+				xasprintf(&dt, "%s/%s", prefix, cp);
+				def_template = dt;
 			} else {
 				def_template = xstrdup(cp);
 			}
@@ -459,11 +459,10 @@ static void get_defaults (void)
 			}
 
 			if (prefix[0]) {
-				char  *_def_usrtemplate; /* avoid const warning */
+				char  *dut; /* avoid const warning */
 
-				if (asprintf(&_def_usrtemplate, "%s/%s", prefix, cp) == -1)
-					exit(EXIT_FAILURE);
-				def_usrtemplate = _def_usrtemplate;
+				xasprintf(&dut, "%s/%s", prefix, cp);
+				def_usrtemplate = dut;
 			} else {
 				def_usrtemplate = xstrdup(cp);
 			}
@@ -1582,16 +1581,14 @@ static void process_flags (int argc, char **argv)
 		if (!dflg) {
 			char  *uh;
 
-			if (asprintf(&uh, "%s/%s", def_home, user_name) == -1)
-				exit(EXIT_FAILURE);
+			xasprintf(&uh, "%s/%s", def_home, user_name);
 			user_home = uh;
 		}
 		if (prefix[0]) {
-			char  *p_u_h; /* to avoid const warning */
+			char  *puh; /* to avoid const warning */
 
-			if (asprintf(&p_u_h, "%s/%s", prefix, user_home) == -1)
-				exit(EXIT_FAILURE);
-			prefix_user_home = p_u_h;
+			xasprintf(&puh, "%s/%s", prefix, user_home);
+			prefix_user_home = puh;
 		} else {
 			prefix_user_home = user_home;
 		}

@@ -20,6 +20,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 /*
@@ -73,8 +74,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	size_t  i, n;
 
 	if (NULL != value) {
-		if (asprintf(&newstring, "%s=%s", string, value) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&newstring, "%s=%s", string, value);
 	} else {
 		newstring = xstrdup (string);
 	}
