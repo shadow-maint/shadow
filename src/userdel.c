@@ -52,6 +52,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
+#include "sprintf.h"
 
 
 /*
@@ -804,11 +805,9 @@ static int remove_mailbox (void)
 	}
 
 	if (prefix[0]) {
-		if (asprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name);
 	} else {
-		if (asprintf(&mailfile, "%s/%s", maildir, user_name) == -1)
-			exit(EXIT_FAILURE);
+		xasprintf(&mailfile, "%s/%s", maildir, user_name);
 	}
 
 	if (access (mailfile, F_OK) != 0) {
@@ -1119,8 +1118,7 @@ int main (int argc, char **argv)
 		user_gid = pwd->pw_gid;
 
 		if (prefix[0]) {
-			if (asprintf(&user_home, "%s/%s", prefix, pwd->pw_dir) == -1)
-				exit(EXIT_FAILURE);
+			xasprintf(&user_home, "%s/%s", prefix, pwd->pw_dir);
 		} else {
 			user_home = xstrdup(pwd->pw_dir);
 		}
