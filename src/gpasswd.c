@@ -712,7 +712,6 @@ static void check_perms (const struct group *gr)
 	} else
 #endif				/* SHADOWGRP */
 	if (!amroot) {
-#ifdef FIRST_MEMBER_IS_ADMIN
 		/*
 		 * The policy here for changing a group is that
 		 * 1) you must be root or
@@ -727,6 +726,7 @@ static void check_perms (const struct group *gr)
 		 * first group member might be just a normal user.
 		 * --marekm
 		 */
+#if defined(FIRST_MEMBER_IS_ADMIN)
 		if (gr->gr_mem[0] == NULL)
 			failure();
 
