@@ -765,7 +765,6 @@ AC_CONFIG_FILES([
 	etc/Makefile
 	etc/pam.d/Makefile
 	etc/shadow-maint/Makefile
-	shadow.spec
 	tests/unit/Makefile
 ])
 AC_OUTPUT
