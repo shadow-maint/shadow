@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-EXTRA_DIST = NEWS README TODO
+EXTRA_DIST = NEWS README
 
 SUBDIRS = lib
 
