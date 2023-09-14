@@ -2,7 +2,7 @@ ARG OS_IMAGE="fedora:latest"
 
 FROM "${OS_IMAGE}" AS build
 
-RUN dnf install -y dnf-plugins-core
+RUN dnf install -y dnf-plugins-core libcmocka-devel systemd-devel
 RUN dnf builddep -y shadow-utils
 
 COPY ./ /usr/local/src/shadow/
@@ -14,6 +14,7 @@ RUN ./autogen.sh --enable-shadowgrp --enable-man --with-audit \
         --with-group-name-max-length=32 --enable-lastlog --enable-logind=no
 RUN make -kj4 || true
 RUN make
+RUN make check
 RUN make install
 
 FROM scratch AS export
