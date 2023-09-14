@@ -719,6 +719,10 @@ if test "$with_skey" = "yes"; then
 	]])],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])],[])
 fi
 
+PKG_CHECK_MODULES([CMOCKA], [cmocka], [have_cmocka="yes"],
+	[AC_MSG_WARN([libcmocka not found, cmocka tests will not be built])])
+AM_CONDITIONAL([HAVE_CMOCKA], [test x$have_cmocka = xyes])
+
 AC_CHECK_FUNC(fgetpwent_r, [AC_DEFINE(HAVE_FGETPWENT_R, 1, [Defined to 1 if you have the declaration of 'fgetpwent_r'])])
 
 AC_DEFINE_UNQUOTED(SHELL, ["$SHELL"], [The default shell.])
@@ -762,6 +766,7 @@ AC_CONFIG_FILES([
 	etc/pam.d/Makefile
 	etc/shadow-maint/Makefile
 	shadow.spec
+	tests/unit/Makefile
 ])
 AC_OUTPUT
 
