@@ -1,0 +1,6 @@
+# General files applicable to all test files
+*.log
+*.trs
+
+# Specific files to be added each time a new file is included
+test_logind
