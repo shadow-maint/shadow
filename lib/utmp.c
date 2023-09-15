@@ -368,17 +368,16 @@ int update_utmp (const char *user,
 	struct utmp *utent, *ut;
 
 	utent = get_current_utmp ();
-	if (utent == NULL) {
-		return -1;
-	}
-
 	ut = prepare_utmp  (user, tty, host, utent);
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
-	free (utent);
+
+	if (utent != NULL) {
+		free (utent);
+	}
 	free (ut);
 
-	return 1;
+	return 0;
 }
 
 void record_failure(const char *failent_user,
