@@ -1,6 +1,22 @@
 # Tests
 
-Currently, shadow only provides system tests.
+Currently, shadow provides unit and system tests.
+
+## Unit tests
+
+Unit testing is provided by the [cmocka](https://cmocka.org/) framework. It's
+recommended to read the
+[basics](https://cmocka.org/talks/cmocka_unit_testing_and_mocking.pdf) and
+[API](https://api.cmocka.org/) before writing any test case.
+
+In addition, you can check [test_logind.c](../../tests/unit/test_logind.c) to
+get a general idea on how to implement unit tests for shadow using cmocka.
+
+You can execute unit tests by running:
+
+```
+make check
+```
 
 ## System tests
 
