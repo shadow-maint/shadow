@@ -2788,7 +2788,7 @@ int main (int argc, char **argv)
 		if (home_added) {
 			copy_tree (def_template, prefix_user_home, false, true,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
-			copy_tree (def_usrtemplate, prefix_user_home, false, false,
+			copy_tree (def_usrtemplate, prefix_user_home, false, true,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
 		} else {
 			fprintf (stderr,
