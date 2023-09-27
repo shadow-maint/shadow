@@ -17,6 +17,12 @@ are used for managing group accounts.
 * [Issue tracker](https://github.com/shadow-maint/shadow/issues)
 * [Releases](https://github.com/shadow-maint/shadow/releases)
 
+## Code
+
+The main development branch is at [https://github.com/shadow-maint/shadow.git](https://github.com/shadow-maint/shadow)
+
+See [STABLE.md](https://github.com/shadow-maint/shadow/blob/master/STABLE.md) for a list of supported stable branches.
+
 ## Contacts
 There are several ways to contact us:
 * [the general discussion mailing list](
