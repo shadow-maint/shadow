@@ -361,7 +361,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
  * (also used when loading the initial defaults)
  */
 
-int putdef_str (const char *name, const char *value)
+int putdef_str (const char *name, const char *value, const char *srcfile)
 {
 	struct itemdef *d;
 	char *cp;
@@ -376,6 +376,8 @@ int putdef_str (const char *name, const char *value)
 	 */
 	d = def_find (name);
 	if (NULL == d) {
+		if (NULL != srcfile)
+			SYSLOG ((LOG_CRIT, "shadow: unknown configuration item '%s' in '%s'", name, srcfile));
 		return -1;
 	}
 
@@ -429,7 +431,6 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 	fprintf (shadow_logfd,
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
-	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));
 
 out:
 	return NULL;
@@ -519,7 +520,7 @@ static void def_load (void)
 		 * The error was already reported to the user and to
 		 * syslog. The tools will just use their default values.
 		 */
-		(void)putdef_str (keys[i], value);
+		(void)putdef_str (keys[i], value, econf_getPath(defs_file));
 
 		free(value);
 	}
@@ -592,7 +593,7 @@ static void def_load (void)
 		 * The error was already reported to the user and to
 		 * syslog. The tools will just use their default values.
 		 */
-		(void)putdef_str (name, value);
+		(void)putdef_str (name, value, def_fname);
 	}
 
 	if (ferror (fp) != 0) {

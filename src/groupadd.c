@@ -429,7 +429,7 @@ static void process_flags (int argc, char **argv)
 			}
 			/* terminate name, point to value */
 			*cp++ = '\0';
-			if (putdef_str (optarg, cp) < 0) {
+			if (putdef_str (optarg, cp, NULL) < 0) {
 				exit (E_BAD_ARG);
 			}
 			break;
