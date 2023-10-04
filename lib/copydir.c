@@ -335,27 +335,28 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 
 		if ((NULL == src_name) || (NULL == dst_name)) {
 			err = -1;
-		} else {
-			/*
-			 * Build the filename for both the source and
-			 * the destination files.
-			 */
-			struct path_info src_entry, dst_entry;
-
-			(void) snprintf (src_name, src_len, "%s/%s", src->full_path, ent->d_name);
-			(void) snprintf (dst_name, dst_len, "%s/%s", dst->full_path, ent->d_name);
-
-			src_entry.full_path = src_name;
-			src_entry.dirfd = dirfd(dir);
-			src_entry.name = ent->d_name;
-
-			dst_entry.full_path = dst_name;
-			dst_entry.dirfd = dst_fd;
-			dst_entry.name = ent->d_name;
-
-			err = copy_entry(&src_entry, &dst_entry, reset_selinux,
-			                 old_uid, new_uid, old_gid, new_gid);
+			goto skip;
 		}
+		/*
+		 * Build the filename for both the source and
+		 * the destination files.
+		 */
+		struct path_info src_entry, dst_entry;
+
+		(void) snprintf (src_name, src_len, "%s/%s", src->full_path, ent->d_name);
+		(void) snprintf (dst_name, dst_len, "%s/%s", dst->full_path, ent->d_name);
+
+		src_entry.full_path = src_name;
+		src_entry.dirfd = dirfd(dir);
+		src_entry.name = ent->d_name;
+
+		dst_entry.full_path = dst_name;
+		dst_entry.dirfd = dst_fd;
+		dst_entry.name = ent->d_name;
+
+		err = copy_entry(&src_entry, &dst_entry, reset_selinux,
+				 old_uid, new_uid, old_gid, new_gid);
+skip:
 		free (src_name);
 		free (dst_name);
 	}
