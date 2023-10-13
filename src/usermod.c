@@ -1002,8 +1002,8 @@ static void process_flags (int argc, char **argv)
 #ifdef ENABLE_SUBIDS
 			{"add-subuids",  required_argument, NULL, 'v'},
 			{"del-subuids",  required_argument, NULL, 'V'},
- 			{"add-subgids",  required_argument, NULL, 'w'},
- 			{"del-subgids",  required_argument, NULL, 'W'},
+			{"add-subgids",  required_argument, NULL, 'w'},
+			{"del-subgids",  required_argument, NULL, 'W'},
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 			{"selinux-user",  required_argument, NULL, 'Z'},
