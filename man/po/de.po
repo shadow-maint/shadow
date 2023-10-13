@@ -458,8 +458,8 @@ msgid "Add the user to the supplementary group(s). Use only with the <option>-G<
 msgstr "verleiht dem Benutzer zusätzliche, ergänzende Gruppenzugehörigkeiten. Kann nur zusammen mit der Option <option>-G</option> verwendet werden."
 
 #: usermod.8.xml:112(term)
-msgid "<option>-b</option>, <option>--badnames</option>"
-msgstr "<option>-b</option>, <option>--badnames</option>"
+msgid "<option>-b</option>, <option>--badname</option>"
+msgstr "<option>-b</option>, <option>--badname</option>"
 
 #: usermod.8.xml:116(para) useradd.8.xml:135(para) pwck.8.xml:190(para) newusers.8.xml:276(para)
 msgid "Allow names that do not conform to standards."
