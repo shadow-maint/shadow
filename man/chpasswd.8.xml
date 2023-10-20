@@ -173,6 +173,21 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-P</option>, <option>--prefix</option>&nbsp;<replaceable>PREFIX_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes to configuration files under the root filesystem
+	    found under the directory <replaceable>PREFIX_DIR</replaceable>.
+	    This option does not chroot and is intended for preparing a cross-compilation
+	    target.  Some limitations: NIS and LDAP users/groups are
+	    not verified.  PAM authentication is using the host files.
+	    No SELINUX support.
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry condition="sha_crypt">
 	<term>
 	  <option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</replaceable>
