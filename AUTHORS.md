@@ -9,6 +9,14 @@ a lot of mail...
 * Serge E. Hallyn <serge@hallyn.com> (2014-now)
 * Christian Brauner <christian@brauner.io> (2019-now)
 * Iker Pedrosa <ipedrosa@redhat.com> (2022-now)
+* Alejandro Colomar <alx@kernel.org> (2023-now) (4.14 stable)
+
+To verify signatures on releases, use the following keys under keys/ :
+
+Serge Hallyn: keys/66D0387DB85D320F8408166DB175CFA98F192AF2.asc
+Christian Brauner: keys/4880B8C9BD0E5106FC070F4F7B3C391EFEA93624.asc
+Iker Pedrosa: keys/4E80EF49C7987B6DE2F81F5005079C6C3A653E57.asc
+Alejandro Colomar: keys/A9348594CE31283A826FBDD8D57633D441E25BB5.asc
 
 # Authors and contributors
 * Adam Rudnicki <adam@v-lo.krakow.pl>
