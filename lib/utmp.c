@@ -374,10 +374,8 @@ int update_utmp (const char *user,
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 
-	if (utent != NULL) {
-		free (utent);
-	}
-	free (ut);
+	free(utent);
+	free(ut);
 
 	return 0;
 }
