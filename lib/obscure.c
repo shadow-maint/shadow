@@ -100,11 +100,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 #ifdef HAVE_LIBCRACK
 	char *dictpath;
 
-#ifdef HAVE_LIBCRACK_PW
-	char *FascistCheckPw ();
-#else
 	char *FascistCheck ();
-#endif
 #endif
 
 	if (strcmp (new, old) == 0) {
@@ -133,11 +129,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 		dictpath = getdef_str ("CRACKLIB_DICTPATH");
 		if (NULL != dictpath) {
-#ifdef HAVE_LIBCRACK_PW
-			msg = FascistCheckPw (new, dictpath, pwdp);
-#else
 			msg = FascistCheck (new, dictpath);
-#endif
 		}
 #endif
 	}

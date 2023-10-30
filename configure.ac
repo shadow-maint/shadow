@@ -526,10 +526,6 @@ if test "$with_libcrack" = "yes"; then
 	echo "checking cracklib flavour, don't be surprised by the results"
 	AC_CHECK_LIB(crack, FascistCheck,
 		[LIBCRACK=-lcrack AC_DEFINE(HAVE_LIBCRACK, 1, [Defined if you have libcrack.])])
-	AC_CHECK_LIB(crack, FascistHistory,
-		AC_DEFINE(HAVE_LIBCRACK_HIST, 1, [Defined if you have the ts&szs cracklib.]))
-	AC_CHECK_LIB(crack, FascistHistoryPw,
-		AC_DEFINE(HAVE_LIBCRACK_PW, 1, [Defined if it includes *Pw functions.]))
 fi
 
 if test "$with_btrfs" != "no"; then
