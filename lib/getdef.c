@@ -39,7 +39,6 @@ struct itemdef {
 #define PAMDEFS					\
 	{"CHFN_AUTH", NULL},			\
 	{"CHSH_AUTH", NULL},			\
-	{"CRACKLIB_DICTPATH", NULL},		\
 	{"ENV_HZ", NULL},			\
 	{"ENVIRON_FILE", NULL},			\
 	{"ENV_TZ", NULL},			\

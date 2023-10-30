@@ -228,11 +228,6 @@ PASS_WARN_AGE	7
 SU_WHEEL_ONLY	no
 
 #
-# If compiled with cracklib support, sets the path to the dictionaries
-#
-CRACKLIB_DICTPATH	/var/cache/cracklib/cracklib_dict
-
-#
 # Min/max values for automatic uid selection in useradd(8)
 #
 UID_MIN			 1000

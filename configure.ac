@@ -243,9 +243,6 @@ AC_ARG_WITH(skey,
 AC_ARG_WITH(tcb,
 	[AS_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
 	[with_tcb=$withval], [with_tcb=maybe])
-AC_ARG_WITH(libcrack,
-	[AS_HELP_STRING([--with-libcrack], [use libcrack @<:@default=no@:>@])],
-	[with_libcrack=$withval], [with_libcrack=no])
 AC_ARG_WITH(sha-crypt,
 	[AS_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
 	[with_sha_crypt=$withval], [with_sha_crypt=yes])
@@ -521,13 +518,6 @@ if test "$with_audit" != "no"; then
 	fi
 fi
 
-AC_SUBST(LIBCRACK)
-if test "$with_libcrack" = "yes"; then
-	echo "checking cracklib flavour, don't be surprised by the results"
-	AC_CHECK_LIB(crack, FascistCheck,
-		[LIBCRACK=-lcrack AC_DEFINE(HAVE_LIBCRACK, 1, [Defined if you have libcrack.])])
-fi
-
 if test "$with_btrfs" != "no"; then
 	AC_CHECK_HEADERS([sys/statfs.h linux/magic.h linux/btrfs_tree.h], \
 		[btrfs_headers="yes"], [btrfs_headers="no"])
@@ -768,7 +758,6 @@ echo
 echo "shadow will be compiled with the following features:"
 echo
 echo "	auditing support:		$with_audit"
-echo "	CrackLib support:		$with_libcrack"
 echo "	PAM support:			$with_libpam"
 if test "$with_libpam" = "yes"; then
 echo "	suid account management tools:	$enable_acct_tools_setuid"
