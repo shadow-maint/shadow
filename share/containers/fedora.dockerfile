@@ -10,7 +10,7 @@ WORKDIR /usr/local/src/shadow/
 
 RUN ./autogen.sh --enable-shadowgrp --enable-man --with-audit \
         --with-sha-crypt --with-bcrypt --with-yescrypt --with-selinux \
-        --without-libcrack --without-libpam --enable-shared --without-libbsd \
+        --without-libpam --enable-shared --without-libbsd \
         --with-group-name-max-length=32 --enable-lastlog --enable-logind=no
 RUN make -kj4 || true
 RUN make

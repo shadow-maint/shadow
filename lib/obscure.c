@@ -12,11 +12,6 @@
 #ident "$Id$"
 
 
-/*
- * This version of obscure.c contains modifications to support "cracklib"
- * by Alec Muffet (alec.muffett@uk.sun.com).  You must obtain the Cracklib
- * library source code for this function to operate.
- */
 #include <ctype.h>
 #include <stdio.h>
 
@@ -97,12 +92,6 @@ static /*@observer@*//*@null@*/const char *password_check (
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
 
-#ifdef HAVE_LIBCRACK
-	char *dictpath;
-
-	char *FascistCheck ();
-#endif
-
 	if (strcmp (new, old) == 0) {
 		return _("no change");
 	}
@@ -121,17 +110,6 @@ static /*@observer@*//*@null@*/const char *password_check (
 		msg = _("too similar");
 	} else if (strstr (wrapped, newmono) != NULL) {
 		msg = _("rotated");
-	} else {
-#ifdef HAVE_LIBCRACK
-		/*
-		 * Invoke Alec Muffett's cracklib routines.
-		 */
-
-		dictpath = getdef_str ("CRACKLIB_DICTPATH");
-		if (NULL != dictpath) {
-			msg = FascistCheck (new, dictpath);
-		}
-#endif
 	}
 	strzero (newmono);
 	strzero (oldmono);

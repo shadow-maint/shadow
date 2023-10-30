@@ -8,7 +8,6 @@ MISCLIBS = \
 	$(LIBAUDIT) \
 	$(LIBSELINUX) \
 	$(LIBSEMANAGE) \
-	$(LIBCRACK) \
 	$(LIBCRYPT_NOPAM) \
 	$(LIBSKEY) \
 	$(LIBMD) \
