@@ -114,7 +114,6 @@ static bool do_update_pwd = false;
 /* local function prototypes */
 NORETURN static void usage (int);
 
-static bool reuse (const char *, const struct passwd *);
 static int new_password (const struct passwd *);
 
 static void check_password (const struct passwd *, const struct spwd *);
@@ -163,27 +162,6 @@ usage (int status)
 	exit (status);
 }
 
-static bool reuse (const char *pass, const struct passwd *pw)
-{
-#ifdef HAVE_LIBCRACK_HIST
-	const char *reason;
-
-#ifdef HAVE_LIBCRACK_PW
-	const char *FascistHistoryPw (const char *, const struct passwd *);
-
-	reason = FascistHistory (pass, pw);
-#else				/* !HAVE_LIBCRACK_PW */
-	const char *FascistHistory (const char *, int);
-
-	reason = FascistHistory (pass, pw->pw_uid);
-#endif				/* !HAVE_LIBCRACK_PW */
-	if (NULL != reason) {
-		(void) printf (_("Bad password: %s.  "), reason);
-		return true;
-	}
-#endif				/* HAVE_LIBCRACK_HIST */
-	return false;
-}
 
 /*
  * new_password - validate old password and replace with new (both old and
@@ -201,10 +179,6 @@ static int new_password (const struct passwd *pw)
 	bool warned;
 	int pass_max_len = -1;
 	const char *method;
-
-#ifdef HAVE_LIBCRACK_HIST
-	int HistUpdate (const char *, const char *);
-#endif				/* HAVE_LIBCRACK_HIST */
 
 	/*
 	 * Authenticate the user. The user will be prompted for their own
@@ -306,7 +280,7 @@ static int new_password (const struct passwd *pw)
 		STRTCPY(pass, cp);
 		erase_pass (cp);
 
-		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
+		if (!amroot && !obscure(orig, pass, pw)) {
 			(void) puts (_("Try again."));
 			continue;
 		}
@@ -317,7 +291,7 @@ static int new_password (const struct passwd *pw)
 		 * --marekm
 		 */
 		if (amroot && !warned && getdef_bool ("PASS_ALWAYS_WARN")
-		    && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
+		    && !obscure(orig, pass, pw)) {
 			(void) puts (_("\nWarning: weak password (enter it again to use it anyway)."));
 			warned = true;
 			continue;
@@ -357,9 +331,6 @@ static int new_password (const struct passwd *pw)
 		return -1;
 	}
 
-#ifdef HAVE_LIBCRACK_HIST
-	HistUpdate (pw->pw_name, crypt_passwd);
-#endif				/* HAVE_LIBCRACK_HIST */
 	STRTCPY(crypt_passwd, cp);
 	return 0;
 }
