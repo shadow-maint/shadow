@@ -125,10 +125,10 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		spw_setdbname(spw_db_file);
 
 #ifdef ENABLE_SUBIDS
-		xasprintf(&suid_db_file, "%s/%s", prefix, "/etc/subuid");
+		xasprintf(&suid_db_file, "%s/%s", prefix, SUBUID_FILE);
 		sub_uid_setdbname(suid_db_file);
 
-		xasprintf(&sgid_db_file, "%s/%s", prefix, "/etc/subgid");
+		xasprintf(&sgid_db_file, "%s/%s", prefix, SUBGID_FILE);
 		sub_gid_setdbname(sgid_db_file);
 #endif
 

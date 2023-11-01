@@ -167,6 +167,14 @@
 #define SHADOW_FILE "/etc/shadow"
 #endif
 
+#ifndef SUBUID_FILE
+#define SUBUID_FILE "/etc/subuid"
+#endif
+
+#ifndef SUBGID_FILE
+#define SUBGID_FILE "/etc/subgid"
+#endif
+
 #ifdef SHADOWGRP
 #ifndef SGROUP_FILE
 #define SGROUP_FILE "/etc/gshadow"
