@@ -169,8 +169,7 @@ int get_session_host (char **out)
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
 		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
-		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
-		hostname[sizeof (ut->ut_host)] = '\0';
+		ZUSTR2STP(hostname, ut->ut_host);
 		*out = hostname;
 		free (ut);
 	} else {
