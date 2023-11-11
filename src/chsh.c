@@ -204,21 +204,17 @@ static bool shell_is_listed (const char *sh)
 	}
 	endusershell ();
 #else
-	char buf[BUFSIZ];
+	char *buf = NULL;
 	FILE *fp;
+	size_t n = 0;
 
 	fp = fopen (SHELLS_FILE, "r");
 	if (NULL == fp) {
 		return false;
 	}
 
-	while (fgets (buf, sizeof (buf), fp) == buf) {
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
-
-		if (buf[0] == '#') {
+	while (getline (&buf, &n, fp) != -1) {
+		if (buf[0] != '/') {
 			continue;
 		}
 
@@ -227,6 +223,8 @@ static bool shell_is_listed (const char *sh)
 			break;
 		}
 	}
+
+	free(buf);
 	fclose (fp);
 #endif
 	return found;
