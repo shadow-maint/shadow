@@ -160,7 +160,7 @@ static void catch_signals (unused int sig)
 #endif
 			exit (0);
 		}
-		STRLCPY(pass, cp);
+		STRTCPY(pass, cp);
 		erase_pass (cp);
 
 		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */

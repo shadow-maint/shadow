@@ -241,7 +241,7 @@ static int new_password (const struct passwd *pw)
 			                pw->pw_name);
 			return -1;
 		}
-		STRLCPY(orig, clear);
+		STRTCPY(orig, clear);
 		erase_pass (clear);
 		strzero (cipher);
 	} else {
@@ -303,7 +303,7 @@ static int new_password (const struct passwd *pw)
 		if (warned && (strcmp (pass, cp) != 0)) {
 			warned = false;
 		}
-		STRLCPY(pass, cp);
+		STRTCPY(pass, cp);
 		erase_pass (cp);
 
 		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
@@ -360,7 +360,7 @@ static int new_password (const struct passwd *pw)
 #ifdef HAVE_LIBCRACK_HIST
 	HistUpdate (pw->pw_name, crypt_passwd);
 #endif				/* HAVE_LIBCRACK_HIST */
-	STRLCPY(crypt_passwd, cp);
+	STRTCPY(crypt_passwd, cp);
 	return 0;
 }
 
@@ -1031,7 +1031,7 @@ int main (int argc, char **argv)
 		 * If there are no other flags, just change the password.
 		 */
 		if (!anyflag) {
-			STRLCPY(crypt_passwd, cp);
+			STRTCPY(crypt_passwd, cp);
 
 			/*
 			 * See if the user is permitted to change the password.

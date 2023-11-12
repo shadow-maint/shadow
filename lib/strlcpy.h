@@ -4,8 +4,8 @@
  */
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRLCPY_H_
-#define SHADOW_INCLUDE_LIB_STRLCPY_H_
+#ifndef SHADOW_INCLUDE_LIB_STRTCPY_H_
+#define SHADOW_INCLUDE_LIB_STRTCPY_H_
 
 
 #include <config.h>
@@ -20,7 +20,7 @@
 
 /*
  * SYNOPSIS
- *	int STRLCPY(char dst[restrict], const char *restrict src);
+ *	int STRTCPY(char dst[restrict], const char *restrict src);
  *
  * ARGUMENTS
  *	dst	Destination buffer where to copy a string.
@@ -44,7 +44,7 @@
  */
 
 
-#define STRLCPY(dst, src)  strtcpy(dst, src, SIZEOF_ARRAY(dst))
+#define STRTCPY(dst, src)  strtcpy(dst, src, SIZEOF_ARRAY(dst))
 
 
 inline ssize_t strtcpy(char *restrict dst, const char *restrict src,

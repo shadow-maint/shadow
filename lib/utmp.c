@@ -47,7 +47,7 @@ static bool is_my_tty (const char tty[UT_LINESIZE])
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
-			STRLCPY(tmptty, tname);
+			STRTCPY(tmptty, tname);
 	}
 
 	if ('\0' == tmptty[0]) {
