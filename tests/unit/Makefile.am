@@ -38,13 +38,11 @@ test_strlcpy_SOURCES = \
     $(NULL)
 test_strlcpy_CFLAGS = \
     $(AM_FLAGS) \
-    $(LIBBSD_CFLAGS) \
     $(NULL)
 test_strlcpy_LDFLAGS = \
     $(NULL)
 test_strlcpy_LDADD = \
     $(CMOCKA_LIBS) \
-    $(LIBBSD_LIBS) \
     $(NULL)
 
 test_xasprintf_SOURCES = \
