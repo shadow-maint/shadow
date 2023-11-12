@@ -11,7 +11,7 @@
 
 #ident "$Id$"
 
-#include "strlcpy.h"
+#include "strtcpy.h"
 
 
 extern inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
