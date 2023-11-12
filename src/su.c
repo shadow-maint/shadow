@@ -676,7 +676,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 		SYSLOG ((LOG_INFO,
 		         "Change user from '%s' to '%s' as requested by PAM",
 		         name, tmp_name));
-		if (STRLCPY(name, tmp_name) == -1) {
+		if (STRTCPY(name, tmp_name) == -1) {
 			fprintf (stderr, _("Overlong user name '%s'\n"),
 			         tmp_name);
 			SYSLOG ((LOG_NOTICE, "Overlong user name '%s'",
@@ -778,7 +778,7 @@ static void save_caller_context (char **argv)
 		         (unsigned long) caller_uid));
 		su_failure (caller_tty, true); /* unknown target UID*/
 	}
-	STRLCPY(caller_name, pw->pw_name);
+	STRTCPY(caller_name, pw->pw_name);
 
 #ifndef USE_PAM
 #ifdef SU_ACCESS
@@ -853,7 +853,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (optind < argc) {
-		STRLCPY(name, argv[optind++]);	/* use this login id */
+		STRTCPY(name, argv[optind++]);	/* use this login id */
 	}
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");

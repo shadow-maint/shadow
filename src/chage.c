@@ -823,7 +823,7 @@ int main (int argc, char **argv)
 		fail_exit (E_NOPERM);
 	}
 
-	STRLCPY(user_name, pw->pw_name);
+	STRTCPY(user_name, pw->pw_name);
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (pw->pw_name) == SHADOWTCB_FAILURE) {
 		fail_exit (E_NOPERM);

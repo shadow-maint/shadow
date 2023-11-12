@@ -553,7 +553,7 @@ int main (int argc, char **argv)
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
-	STRLCPY(tty, tmptty);
+	STRTCPY(tty, tmptty);
 
 #ifndef USE_PAM
 	is_console = console (tty);
@@ -711,7 +711,7 @@ int main (int argc, char **argv)
 			          sizeof (loginprompt),
 			          _("%s login: "), hostn);
 		} else {
-			STRLCPY(loginprompt, _("login: "));
+			STRTCPY(loginprompt, _("login: "));
 		}
 
 		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
