@@ -434,7 +434,6 @@ if test "$with_libbsd" != "no"; then
 	AC_DEFINE(WITH_LIBBSD, 1, [Build shadow with libbsd support])
 else
 	AC_DEFINE(WITH_LIBBSD, 0, [Build shadow without libbsd support])
-	AC_CHECK_FUNC(strlcpy, [], [AC_MSG_ERROR([strlcpy is required from glibc >= 2.38 or libbsd])])
 fi
 AM_CONDITIONAL(WITH_LIBBSD, test x$with_libbsd = xyes)
 
