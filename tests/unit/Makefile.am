@@ -4,7 +4,7 @@ if HAVE_CMOCKA
 TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
-    test_strlcpy \
+    test_strtcpy \
     test_xasprintf
 
 if ENABLE_LOGIND
@@ -32,16 +32,16 @@ test_logind_LDADD = \
     $(LIBSYSTEMD) \
     $(NULL)
 
-test_strlcpy_SOURCES = \
-    ../../lib/strlcpy.c \
-    test_strlcpy.c \
+test_strtcpy_SOURCES = \
+    ../../lib/strtcpy.c \
+    test_strtcpy.c \
     $(NULL)
-test_strlcpy_CFLAGS = \
+test_strtcpy_CFLAGS = \
     $(AM_FLAGS) \
     $(NULL)
-test_strlcpy_LDFLAGS = \
+test_strtcpy_LDFLAGS = \
     $(NULL)
-test_strlcpy_LDADD = \
+test_strtcpy_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 

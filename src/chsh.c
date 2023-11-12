@@ -31,7 +31,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
-#include "strlcpy.h"
+#include "strtcpy.h"
 
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
