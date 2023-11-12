@@ -141,6 +141,7 @@ libshadow_la_SOURCES = \
 	stpecpy.h \
 	stpeprintf.c \
 	stpeprintf.h \
+	strtcpy.c \
 	strtcpy.h \
 	strtoday.c \
 	sub.c \
