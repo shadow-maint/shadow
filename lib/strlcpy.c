@@ -14,5 +14,5 @@
 #include "strlcpy.h"
 
 
-extern inline ssize_t strlcpy_(char *restrict dst, const char *restrict src,
-    size_t size);
+extern inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
+    size_t dsize);
