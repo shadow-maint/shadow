@@ -33,6 +33,7 @@
 
 #ident "$Id$"
 
+#include "strtcpy.h"
 #include "prototypes.h"
 
 void
@@ -43,13 +44,13 @@ date_to_str(size_t size, char buf[size], long date)
 
 	t = date;
 	if (date < 0) {
-		(void) strlcpy(buf, "never", size);
+		(void) strtcpy(buf, "never", size);
 		return;
 	}
 
 	tm = gmtime(&t);
 	if (tm == NULL) {
-		(void) strlcpy(buf, "future", size);
+		(void) strtcpy(buf, "future", size);
 		return;
 	}
 
