@@ -32,8 +32,8 @@ static bool is_valid_name (const char *name)
 	}
 
 	/*
-         * User/group names must match gnu e-regex:
-         *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]{0,30}[a-zA-Z0-9_.$-]?
+         * User/group names must match BRE regex:
+         *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
          *
          * as a non-POSIX, extension, allow "$" as the last char for
          * sake of Samba 3.x "add machine script"
