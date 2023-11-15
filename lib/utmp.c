@@ -262,25 +262,25 @@ static
 	utent->ut_type = USER_PROCESS;
 #endif				/* HAVE_STRUCT_UTMP_UT_TYPE */
 	utent->ut_pid = getpid ();
-	strncpy (utent->ut_line, line,      sizeof (utent->ut_line) - 1);
+	strncpy(utent->ut_line, line, sizeof(utent->ut_line));
 #ifdef HAVE_STRUCT_UTMP_UT_ID
 	if (NULL != ut) {
 		strncpy (utent->ut_id, ut->ut_id, sizeof (utent->ut_id));
 	} else {
 		/* XXX - assumes /dev/tty?? */
-		strncpy (utent->ut_id, line + 3, sizeof (utent->ut_id) - 1);
+		strncpy(utent->ut_id, line + 3, sizeof(utent->ut_id));
 	}
 #endif				/* HAVE_STRUCT_UTMP_UT_ID */
 #ifdef HAVE_STRUCT_UTMP_UT_NAME
 	strncpy (utent->ut_name, name,      sizeof (utent->ut_name));
 #endif				/* HAVE_STRUCT_UTMP_UT_NAME */
 #ifdef HAVE_STRUCT_UTMP_UT_USER
-	strncpy (utent->ut_user, name,      sizeof (utent->ut_user) - 1);
+	strncpy(utent->ut_user, name, sizeof(utent->ut_user));
 #endif				/* HAVE_STRUCT_UTMP_UT_USER */
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
-		strncpy (utent->ut_host, hostname, sizeof (utent->ut_host) - 1);
+		strncpy(utent->ut_host, hostname, sizeof(utent->ut_host));
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 #ifdef HAVE_STRUCT_UTMP_UT_SYSLEN
 		utent->ut_syslen = MIN (strlen (hostname),
