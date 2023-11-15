@@ -43,17 +43,19 @@ static void send_mesg_to_tty (int tty_fd);
  */
 static int check_login (const struct utmp *ut)
 {
-	char user[sizeof (ut->ut_user) + 1];
-	time_t now;
+	char    user[sizeof(ut->ut_user) + 1];
+	char    line[sizeof(ut->ut_line) + 1];
+	time_t  now;
 
 	ZUSTR2STP(user, ut->ut_user);
+	ZUSTR2STP(line, ut->ut_line);
 
 	(void) time (&now);
 
 	/*
 	 * Check if they are allowed to be logged in right now.
 	 */
-	if (!isttytime (user, ut->ut_line, now)) {
+	if (!isttytime(user, line, now)) {
 		return 0;
 	}
 	return 1;
