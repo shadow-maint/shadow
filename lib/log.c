@@ -19,6 +19,7 @@
 #include <lastlog.h>
 #include "memzero.h"
 #include "prototypes.h"
+#include "strncpy.h"
 #include "strtcpy.h"
 
 
@@ -82,7 +83,7 @@ void dolastlog (
 	newlog.ll_time = ll_time;
 	STRTCPY(newlog.ll_line, line);
 #if HAVE_LL_HOST
-	strncpy(newlog.ll_host, host, sizeof(newlog.ll_host));
+	STRNCPY(newlog.ll_host, host);
 #endif
 	if (   (lseek (fd, offset, SEEK_SET) != offset)
 	    || (write_full(fd, &newlog, sizeof newlog) == -1)
