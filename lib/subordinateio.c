@@ -626,28 +626,17 @@ bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
 	return have_range (&subordinate_uid_db, owner, start, count);
 }
 
-/*
- * sub_uid_add: add a subuid range, perhaps through nss.
- *
- * Return 1 if the range is already present or on success.  On error
- * return 0 and set errno appropriately.
- */
 int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
-		errno = EOPNOTSUPP;
-		return 0;
-	}
+	if (get_subid_nss_handle())
+		return -EOPNOTSUPP;
 	return add_range (&subordinate_uid_db, owner, start, count);
 }
 
-/* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_uid_remove (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
-		errno = EOPNOTSUPP;
-		return 0;
-	}
+	if (get_subid_nss_handle())
+		return -EOPNOTSUPP;
 	return remove_range (&subordinate_uid_db, owner, start, count);
 }
 
@@ -733,28 +722,17 @@ bool local_sub_gid_assigned(const char *owner)
 	return range_exists (&subordinate_gid_db, owner);
 }
 
-/*
- * sub_gid_add: add a subgid range, perhaps through nss.
- *
- * Return 1 if the range is already present or on success.  On error
- * return 0 and set errno appropriately.
- */
 int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
-		errno = EOPNOTSUPP;
-		return 0;
-	}
+	if (get_subid_nss_handle())
+		return -EOPNOTSUPP;
 	return add_range (&subordinate_gid_db, owner, start, count);
 }
 
-/* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_gid_remove (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
-		errno = EOPNOTSUPP;
-		return 0;
-	}
+	if (get_subid_nss_handle())
+		return -EOPNOTSUPP;
 	return remove_range (&subordinate_gid_db, owner, start, count);
 }
 
