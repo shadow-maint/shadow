@@ -19,6 +19,8 @@
 #include <lastlog.h>
 #include "memzero.h"
 #include "prototypes.h"
+#include "strtcpy.h"
+
 
 /*
  * dolastlog - create lastlog entry
@@ -78,7 +80,7 @@ void dolastlog (
 	ll_time = newlog.ll_time;
 	(void) time (&ll_time);
 	newlog.ll_time = ll_time;
-	strncpy (newlog.ll_line, line, sizeof (newlog.ll_line) - 1);
+	STRTCPY(newlog.ll_line, line);
 #if HAVE_LL_HOST
 	strncpy (newlog.ll_host, host, sizeof (newlog.ll_host) - 1);
 #endif
