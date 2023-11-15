@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "string/ustr2stp.h"
 
 
 /*
@@ -192,8 +193,7 @@ void set_env (int argc, char *const *argv)
 			}
 
 			if (NULL != *p) {
-				strncpy (variable, *argv, (size_t)(cp - *argv));
-				variable[cp - *argv] = '\0';
+				ustr2stp(variable, *argv, (size_t)(cp - *argv));
 				printf (_("You may not change $%s\n"),
 					variable);
 				continue;
