@@ -4,6 +4,7 @@ if HAVE_CMOCKA
 TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
+    test_strncpy \
     test_strtcpy \
     test_xasprintf
 
@@ -30,6 +31,18 @@ test_logind_LDFLAGS = \
 test_logind_LDADD = \
     $(CMOCKA_LIBS) \
     $(LIBSYSTEMD) \
+    $(NULL)
+
+test_strncpy_SOURCES = \
+    test_strncpy.c \
+    $(NULL)
+test_strncpy_CFLAGS = \
+    $(AM_FLAGS) \
+    $(NULL)
+test_strncpy_LDFLAGS = \
+    $(NULL)
+test_strncpy_LDADD = \
+    $(CMOCKA_LIBS) \
     $(NULL)
 
 test_strtcpy_SOURCES = \
