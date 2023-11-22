@@ -5,6 +5,7 @@ TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
     test_chkname \
+    test_snprintf \
     test_strncpy \
     test_strtcpy \
     test_xasprintf
@@ -45,6 +46,19 @@ test_logind_LDFLAGS = \
 test_logind_LDADD = \
     $(CMOCKA_LIBS) \
     $(LIBSYSTEMD) \
+    $(NULL)
+
+test_snprintf_SOURCES = \
+    ../../lib/string/sprintf.c \
+    test_snprintf.c \
+    $(NULL)
+test_snprintf_CFLAGS = \
+    $(AM_FLAGS) \
+    $(NULL)
+test_snprintf_LDFLAGS = \
+    $(NULL)
+test_snprintf_LDADD = \
+    $(CMOCKA_LIBS) \
     $(NULL)
 
 test_strncpy_SOURCES = \
