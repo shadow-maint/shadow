@@ -22,7 +22,7 @@
 ({                                                                            \
 	static_assert(!is_array(dst) || sizeof(dst) > SIZEOF_ARRAY(src), ""); \
                                                                               \
-	zustr2stp(dst, src, SIZEOF_ARRAY(src));                               \
+	zustr2stp(dst, src, NITEMS(src));                                     \
 })
 
 
@@ -62,9 +62,9 @@ inline char *zustr2stp(char *restrict dst, const char *restrict src, size_t sz);
  *
  * EXAMPLES
  *	char  src[13] = "Hello, world!"  // No '\0' in this buffer!
- *	char  dst[SIZEOF_ARRAY(src) + 1];
+ *	char  dst[NITEMS(src) + 1];
  *
- *	zustr2stp(dst, src, SIZEOF_ARRAY(src));
+ *	zustr2stp(dst, src, NITEMS(src));
  *	puts(dst);
  */
 
