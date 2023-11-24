@@ -145,6 +145,8 @@ libshadow_la_SOURCES = \
 	string/strncpy.h \
 	string/strtcpy.c \
 	string/strtcpy.h \
+	string/ustr2stp.c \
+	string/ustr2stp.h \
 	string/zustr2stp.c \
 	string/zustr2stp.h \
 	strtoday.c \
