@@ -16,6 +16,7 @@
 
 #include "must_be.h"
 #include "sizeof.h"
+#include "string/ustr2stp.h"
 
 
 #define ZUSTR2STP(dst, src)                                                   \
@@ -72,12 +73,7 @@ inline char *zustr2stp(char *restrict dst, const char *restrict src, size_t sz);
 inline char *
 zustr2stp(char *restrict dst, const char *restrict src, size_t sz)
 {
-	char  *p;
-
-	p = mempcpy(dst, src, strnlen(src, sz));
-	*p = '\0';
-
-	return p;
+	return ustr2stp(dst, src, strnlen(src, sz));
 }
 
 
