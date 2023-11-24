@@ -72,12 +72,7 @@ inline char *zustr2stp(char *restrict dst, const char *restrict src, size_t sz);
 inline char *
 zustr2stp(char *restrict dst, const char *restrict src, size_t sz)
 {
-	char  *p;
-
-	p = mempcpy(dst, src, strnlen(src, sz));
-	*p = '\0';
-
-	return p;
+	return stpcpy(mempcpy(dst, src, strnlen(src, sz)), "");
 }
 
 
