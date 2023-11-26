@@ -7,6 +7,7 @@ check_PROGRAMS = \
     test_chkname \
     test_strncpy \
     test_strtcpy \
+    test_ustr2stp \
     test_xasprintf
 
 if ENABLE_LOGIND
@@ -69,6 +70,19 @@ test_strtcpy_CFLAGS = \
 test_strtcpy_LDFLAGS = \
     $(NULL)
 test_strtcpy_LDADD = \
+    $(CMOCKA_LIBS) \
+    $(NULL)
+
+test_ustr2stp_SOURCES = \
+    ../../lib/string/ustr2stp.c \
+    test_ustr2stp.c \
+    $(NULL)
+test_ustr2stp_CFLAGS = \
+    $(AM_FLAGS) \
+    $(NULL)
+test_ustr2stp_LDFLAGS = \
+    $(NULL)
+test_ustr2stp_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
