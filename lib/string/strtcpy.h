@@ -15,11 +15,14 @@
 #include <string.h>
 #include <sys/types.h>
 
+#include "attr.h"
+#include "defines.h"
 #include "sizeof.h"
 
 
 /*
  * SYNOPSIS
+ *	[[gnu::null_terminated_string_arg(2)]]
  *	int STRTCPY(char dst[restrict], const char *restrict src);
  *
  * ARGUMENTS
@@ -47,6 +50,7 @@
 #define STRTCPY(dst, src)  strtcpy(dst, src, NITEMS(dst))
 
 
+ATTR_STRING(2)
 inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
     size_t dsize);
 

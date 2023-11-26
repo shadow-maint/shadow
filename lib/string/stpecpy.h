@@ -17,12 +17,16 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "attr.h"
 
+
+ATTR_STRING(3)
 inline char *stpecpy(char *dst, char *end, const char *restrict src);
 
 
 /*
  * SYNOPSIS
+ *	[[gnu::null_terminated_string_arg(3)]]
  *	char *_Nullable stpecpy(char *_Nullable dst, char end[0],
  *	                        const char *restrict src);
  *
