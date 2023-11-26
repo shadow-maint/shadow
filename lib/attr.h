@@ -21,5 +21,11 @@
 # define ATTR_MALLOC(deallocator)
 #endif
 
+#if (__GNUC__ >= 14)
+# define ATTR_STRING(...)       [[gnu::null_terminated_string_arg(__VA_ARGS__)]]
+#else
+# define ATTR_STRING(...)
+#endif
+
 
 #endif  // include guard
