@@ -223,6 +223,12 @@
 # define ATTR_MALLOC(deallocator)
 #endif
 
+#if (__GNUC__ >= 14)
+# define ATTR_STRING(...)  [[gnu::null_terminated_string_arg(__VA_ARGS__)]]
+#else
+# define ATTR_STRING(...)
+#endif
+
 #ifdef HAVE_SECURE_GETENV
 #  define shadow_getenv(name) secure_getenv(name)
 # else
