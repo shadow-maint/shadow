@@ -15,6 +15,7 @@
 #include <string.h>
 #include <sys/types.h>
 
+#include "defines.h"
 #include "sizeof.h"
 
 
@@ -47,6 +48,7 @@
 #define STRTCPY(dst, src)  strtcpy(dst, src, SIZEOF_ARRAY(dst))
 
 
+ATTR_STRING(2)
 inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
     size_t dsize);
 
