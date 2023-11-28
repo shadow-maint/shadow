@@ -10,6 +10,7 @@
 
 #include <config.h>
 
+#include "attr.h"
 #include "defines.h"
 
 

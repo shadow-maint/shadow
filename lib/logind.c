@@ -8,6 +8,7 @@
 
 #ident "$Id$"
 
+#include "attr.h"
 #include "defines.h"
 #include "prototypes.h"
 

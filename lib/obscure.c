@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "alloc.h"
+#include "attr.h"
 #include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"

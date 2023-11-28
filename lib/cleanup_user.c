@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "attr.h"
 #include "defines.h"
 #include "pwio.h"
 #include "shadowio.h"

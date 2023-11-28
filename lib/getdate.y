@@ -28,6 +28,7 @@
 #include <ctype.h>
 #include <time.h>
 
+#include "attr.h"
 #include "getdate.h"
 
 #include <string.h>

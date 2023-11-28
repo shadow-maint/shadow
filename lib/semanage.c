@@ -16,8 +16,12 @@
 #endif
 #include <stdio.h>
 #include <stdarg.h>
+
 #include <selinux/selinux.h>
+
 #include <semanage/semanage.h>
+
+#include "attr.h"
 #include "prototypes.h"
 
 #include "shadowlog_internal.h"

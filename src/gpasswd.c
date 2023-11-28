@@ -22,6 +22,7 @@
 
 #include "agetpass.h"
 #include "alloc.h"
+#include "attr.h"
 #include "defines.h"
 #include "groupio.h"
 #include "memzero.h"

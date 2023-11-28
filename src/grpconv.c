@@ -26,6 +26,7 @@
 #include <unistd.h>
 #include <getopt.h>
 
+#include "attr.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

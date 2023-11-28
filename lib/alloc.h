@@ -17,6 +17,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "attr.h"
 #include "defines.h"
 
 

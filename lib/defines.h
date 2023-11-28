@@ -203,25 +203,8 @@
 #include <libaudit.h>
 #endif
 
-/* To be used for verified unused parameters */
-#if defined(__GNUC__)
-# define unused    __attribute__((unused))
-# define NORETURN  __attribute__((__noreturn__))
-# define format_attr(type, index, check) __attribute__((format (type, index, check)))
-#else
-# define unused
-# define NORETURN
-# define format_attr(type, index, check)
-#endif
-
 /* Maximum length of passwd entry */
 #define PASSWD_ENTRY_MAX_LENGTH 32768
-
-#if (__GNUC__ >= 11) && !defined(__clang__)
-# define ATTR_MALLOC(deallocator)  [[gnu::malloc(deallocator)]]
-#else
-# define ATTR_MALLOC(deallocator)
-#endif
 
 #ifdef HAVE_SECURE_GETENV
 #  define shadow_getenv(name) secure_getenv(name)

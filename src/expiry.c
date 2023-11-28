@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <getopt.h>
+
+#include "attr.h"
 #include "defines.h"
 #include "prototypes.h"
 /*@-exitarg@*/

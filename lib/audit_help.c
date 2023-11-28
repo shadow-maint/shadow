@@ -21,6 +21,8 @@
 #include <libaudit.h>
 #include <errno.h>
 #include <stdio.h>
+
+#include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 int audit_fd;

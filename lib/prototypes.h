@@ -31,6 +31,7 @@
 #include <lastlog.h>
 #endif /* ENABLE_LASTLOG */
 
+#include "attr.h"
 #include "defines.h"
 #include "commonio.h"
 
