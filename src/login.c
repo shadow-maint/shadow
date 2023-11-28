@@ -26,6 +26,7 @@
 #include <assert.h>
 
 #include "alloc.h"
+#include "attr.h"
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"

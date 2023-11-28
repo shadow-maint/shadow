@@ -24,6 +24,8 @@
 #include <unistd.h>
 #include <grp.h>
 #include <getopt.h>
+
+#include "attr.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

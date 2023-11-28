@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include <shadow.h>
+
+#include "attr.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"

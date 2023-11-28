@@ -18,6 +18,7 @@
 #include <sys/ioctl.h>
 
 #include "agetpass.h"
+#include "attr.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"

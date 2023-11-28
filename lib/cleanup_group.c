@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "attr.h"
 #include "defines.h"
 #include "groupio.h"
 #include "sgroupio.h"

@@ -47,6 +47,7 @@
 #endif				/* !USE_PAM */
 
 #include "alloc.h"
+#include "attr.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
