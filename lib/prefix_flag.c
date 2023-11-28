@@ -337,7 +337,7 @@ extern void prefix_endgrent(void)
 
 extern struct group *prefix_getgr_nam_gid(const char *grname)
 {
-	long long int gid;
+	long long  gid;
 	char *endptr;
 	struct group *g;
 

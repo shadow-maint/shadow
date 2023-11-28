@@ -19,9 +19,9 @@
  *
  * Returns 0 on failure, 1 on success.
  */
-int getulong (const char *numstr, /*@out@*/unsigned long int *result)
+int getulong (const char *numstr, /*@out@*/unsigned long *result)
 {
-	unsigned long int val;
+	unsigned long  val;
 	char *endptr;
 
 	errno = 0;

@@ -206,8 +206,8 @@ int main(int argc, char **argv)
 	    (getgid() != st.st_gid)) {
 		fprintf(stderr, _( "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
 			Prog,
-			(unsigned long int)getuid(), (unsigned long int)pw->pw_uid, (unsigned long int)st.st_uid,
-			(unsigned long int)getgid(), (unsigned long int)pw->pw_gid, (unsigned long int)st.st_gid);
+			(unsigned long)getuid(), (unsigned long)pw->pw_uid, (unsigned long)st.st_uid,
+			(unsigned long)getgid(), (unsigned long)pw->pw_gid, (unsigned long)st.st_gid);
 		return EXIT_FAILURE;
 	}
 

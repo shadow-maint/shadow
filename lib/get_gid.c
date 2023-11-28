@@ -13,7 +13,7 @@
 
 int get_gid (const char *gidstr, gid_t *gid)
 {
-	long long int val;
+	long long  val;
 	char *endptr;
 
 	errno = 0;

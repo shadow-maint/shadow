@@ -233,7 +233,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                 return NULL;
         }
         owner_uid = pwd->pw_uid;
-        ret = snprintf(owner_uid_string, sizeof (owner_uid_string), "%lu", (unsigned long int)owner_uid);
+        ret = snprintf(owner_uid_string, sizeof (owner_uid_string), "%lu", (unsigned long)owner_uid);
         if (ret < 0 || (size_t)ret >= sizeof (owner_uid_string))
                 return NULL;
 

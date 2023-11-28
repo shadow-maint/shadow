@@ -16,7 +16,7 @@
 
 int get_pid (const char *pidstr, pid_t *pid)
 {
-	long long int val;
+	long long  val;
 	char *endptr;
 
 	errno = 0;
@@ -40,7 +40,7 @@ int get_pid (const char *pidstr, pid_t *pid)
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
-	long long int val;
+	long long  val;
 	char *endptr;
 	struct stat st;
 	dev_t proc_st_dev, proc_st_rdev;

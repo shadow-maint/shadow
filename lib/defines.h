@@ -190,7 +190,7 @@
 #define SHADOW_PASSWD_STRING "x"
 #endif
 
-#define SHADOW_SP_FLAG_UNSET ((unsigned long int)-1)
+#define SHADOW_SP_FLAG_UNSET ((unsigned long)-1)
 
 #ifdef WITH_AUDIT
 #ifdef __u8			/* in case we use pam < 0.80 */
