@@ -15,7 +15,7 @@
 
 #include "alloc.h"
 #include "prototypes.h"
-#include "stpeprintf.h"
+#include "string/stpeprintf.h"
 #include "idmapping.h"
 #if HAVE_SYS_CAPABILITY_H
 #include <sys/prctl.h>

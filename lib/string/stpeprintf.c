@@ -11,7 +11,7 @@
 
 #ident "$Id$"
 
-#include "stpeprintf.h"
+#include "string/stpeprintf.h"
 
 #include <stdarg.h>
 

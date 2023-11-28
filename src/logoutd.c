@@ -20,7 +20,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
-#include "zustr2stp.h"
+#include "string/zustr2stp.h"
 /*
  * Global variables
  */

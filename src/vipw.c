@@ -44,7 +44,7 @@
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
-#include "sprintf.h"
+#include "string/sprintf.h"
 
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \

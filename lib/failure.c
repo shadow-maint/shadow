@@ -19,7 +19,7 @@
 #include "failure.h"
 #include "memzero.h"
 #include "prototypes.h"
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 
 
 #define	YEAR	(365L*DAY)

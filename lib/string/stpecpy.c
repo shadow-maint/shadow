@@ -11,7 +11,7 @@
 
 #ident "$Id$"
 
-#include "stpecpy.h"
+#include "string/stpecpy.h"
 
 
 extern inline char *stpecpy(char *dst, char *end, const char *restrict src);

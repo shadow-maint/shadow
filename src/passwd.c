@@ -32,7 +32,7 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 
 /*
  * exit status values

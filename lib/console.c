@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "getdef.h"
 #include "prototypes.h"
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 
 #ident "$Id$"
 

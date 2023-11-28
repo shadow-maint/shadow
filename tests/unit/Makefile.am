@@ -60,7 +60,7 @@ test_strncpy_LDADD = \
     $(NULL)
 
 test_strtcpy_SOURCES = \
-    ../../lib/strtcpy.c \
+    ../../lib/string/strtcpy.c \
     test_strtcpy.c \
     $(NULL)
 test_strtcpy_CFLAGS = \
@@ -73,7 +73,7 @@ test_strtcpy_LDADD = \
     $(NULL)
 
 test_xasprintf_SOURCES = \
-    ../../lib/sprintf.c \
+    ../../lib/string/sprintf.c \
     test_xasprintf.c \
     $(NULL)
 test_xasprintf_CFLAGS = \

@@ -134,17 +134,19 @@ libshadow_la_SOURCES = \
 	shell.c \
 	sizeof.h \
 	spawn.c \
-	sprintf.c \
-	sprintf.h \
 	sssd.c \
 	sssd.h \
-	stpecpy.c \
-	stpecpy.h \
-	stpeprintf.c \
-	stpeprintf.h \
-	strncpy.h \
-	strtcpy.c \
-	strtcpy.h \
+	string/sprintf.c \
+	string/sprintf.h \
+	string/stpecpy.c \
+	string/stpecpy.h \
+	string/stpeprintf.c \
+	string/stpeprintf.h \
+	string/strncpy.h \
+	string/strtcpy.c \
+	string/strtcpy.h \
+	string/zustr2stp.c \
+	string/zustr2stp.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \
@@ -162,9 +164,7 @@ libshadow_la_SOURCES = \
 	xgetgrnam.c \
 	xgetgrgid.c \
 	xgetspnam.c \
-	yesno.c \
-	zustr2stp.c \
-	zustr2stp.h
+	yesno.c
 
 if WITH_TCB
 libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
