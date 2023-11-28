@@ -7,7 +7,7 @@
 
 #ident "$Id$"
 
-#include "sprintf.h"
+#include "string/sprintf.h"
 
 #include <stdarg.h>
 #include <stddef.h>

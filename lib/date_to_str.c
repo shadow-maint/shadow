@@ -11,7 +11,7 @@
 
 #ident "$Id$"
 
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 #include "prototypes.h"
 
 

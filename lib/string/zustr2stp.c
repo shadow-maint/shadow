@@ -10,7 +10,7 @@
 
 #ident "$Id$"
 
-#include "zustr2stp.h"
+#include "string/zustr2stp.h"
 
 
 extern inline char *zustr2stp(char *restrict dst, const char *restrict src,

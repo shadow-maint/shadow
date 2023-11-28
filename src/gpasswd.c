@@ -35,7 +35,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 
 /*
  * Global variables

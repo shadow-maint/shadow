@@ -17,7 +17,7 @@
 
 #include "alloc.h"
 #include "getdef.h"
-#include "sprintf.h"
+#include "string/sprintf.h"
 
 #ident "$Id$"
 

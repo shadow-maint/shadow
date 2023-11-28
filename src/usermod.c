@@ -58,7 +58,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
-#include "sprintf.h"
+#include "string/sprintf.h"
 
 
 /*

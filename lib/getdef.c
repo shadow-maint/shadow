@@ -25,7 +25,7 @@
 #include "alloc.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
-#include "sprintf.h"
+#include "string/sprintf.h"
 
 
 /*

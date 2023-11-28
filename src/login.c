@@ -37,7 +37,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
-#include "strtcpy.h"
+#include "string/strtcpy.h"
 
 #ifdef USE_PAM
 #include "pam_defs.h"

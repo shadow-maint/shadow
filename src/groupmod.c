@@ -38,8 +38,8 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
-#include "stpecpy.h"
-#include "stpeprintf.h"
+#include "string/stpecpy.h"
+#include "string/stpeprintf.h"
 /*
  * exit status values
  */
