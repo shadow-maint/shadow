@@ -511,7 +511,7 @@ static void check_flags (void)
 		} else {
 			fprintf (stderr,
 			         _("%s: GID '%lu' already exists\n"),
-			         Prog, (unsigned long int) group_id);
+			         Prog, (unsigned long) group_id);
 			exit (E_GID_IN_USE);
 		}
 	}

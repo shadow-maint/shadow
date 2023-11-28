@@ -339,7 +339,7 @@ static void check_new_gid (void)
 	 */
 	fprintf (stderr,
 	         _("%s: GID '%lu' already exists\n"),
-	         Prog, (unsigned long int) group_newid);
+	         Prog, (unsigned long) group_newid);
 	exit (E_GID_IN_USE);
 }
 

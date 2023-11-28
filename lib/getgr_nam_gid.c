@@ -23,7 +23,7 @@
  */
 extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname)
 {
-	long long int gid;
+	long long  gid;
 	char *endptr;
 
 	if (NULL == grname) {

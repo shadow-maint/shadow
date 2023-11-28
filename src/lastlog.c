@@ -120,7 +120,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		if (fread (&ll, sizeof (ll), 1, lastlogfile) != 1) {
 			fprintf (stderr,
 			         _("%s: Failed to get the entry for UID %lu\n"),
-			         Prog, (unsigned long int)pw->pw_uid);
+			         Prog, (unsigned long)pw->pw_uid);
 			exit (EXIT_FAILURE);
 		}
 	} else {
@@ -242,7 +242,7 @@ static void update_one (/*@null@*/const struct passwd *pw)
 	if (fwrite (&ll, sizeof(ll), 1, lastlogfile) != 1) {
 			fprintf (stderr,
 			         _("%s: Failed to update the entry for UID %lu\n"),
-			         Prog, (unsigned long int)pw->pw_uid);
+			         Prog, (unsigned long)pw->pw_uid);
 			exit (EXIT_FAILURE);
 	}
 }

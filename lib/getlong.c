@@ -19,7 +19,7 @@
  *
  * Returns 0 on failure, 1 on success.
  */
-int getlong (const char *numstr, /*@out@*/long int *result)
+int getlong (const char *numstr, /*@out@*/long *result)
 {
 	long val;
 	char *endptr;

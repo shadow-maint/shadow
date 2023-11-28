@@ -13,7 +13,7 @@
 
 int get_uid (const char *uidstr, uid_t *uid)
 {
-	long long int val;
+	long long  val;
 	char *endptr;
 
 	errno = 0;

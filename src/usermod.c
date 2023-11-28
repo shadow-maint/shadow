@@ -319,20 +319,20 @@ static struct ulong_range getulong_range(const char *str)
 	errno = 0;
 	first = strtoll(str, &pos, 10);
 	if (('\0' == *str) || ('-' != *pos ) || (ERANGE == errno) ||
-	    (first != (unsigned long int)first))
+	    (first != (unsigned long)first))
 		goto out;
 
 	errno = 0;
 	last = strtoll(pos + 1, &pos, 10);
 	if (('\0' != *pos ) || (ERANGE == errno) ||
-	    (last != (unsigned long int)last))
+	    (last != (unsigned long)last))
 		goto out;
 
 	if (first > last)
 		goto out;
 
-	result.first = (unsigned long int)first;
-	result.last = (unsigned long int)last;
+	result.first = (unsigned long)first;
+	result.last = (unsigned long)last;
 out:
 	return result;
 }

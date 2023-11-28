@@ -96,7 +96,7 @@ static off_t lookup_faillog(struct faillog *fl, uid_t uid)
 	if (__builtin_mul_overflow(uid, sizeof(*fl), &offset)) {
 		fprintf(stderr,
 		        _("%s: Failed to get the entry for UID %lu\n"),
-		        Prog, (unsigned long int)uid);
+		        Prog, (unsigned long)uid);
 		return -1;
 	}
 
@@ -112,7 +112,7 @@ static off_t lookup_faillog(struct faillog *fl, uid_t uid)
 		if (fread(fl, sizeof(*fl), 1, fail) != 1) {
 			fprintf(stderr,
 			        _("%s: Failed to get the entry for UID %lu\n"),
-			        Prog, (unsigned long int)uid);
+			        Prog, (unsigned long)uid);
 			return -1;
 		}
 	} else {
@@ -246,7 +246,7 @@ static bool reset_one (uid_t uid)
 
 	fprintf (stderr,
 	         _("%s: Failed to reset fail count for UID %lu\n"),
-	         Prog, (unsigned long int)uid);
+	         Prog, (unsigned long)uid);
 	return true;
 }
 
@@ -342,7 +342,7 @@ static bool setmax_one (uid_t uid, short max)
 
 	fprintf (stderr,
 	         _("%s: Failed to set max for UID %lu\n"),
-	         Prog, (unsigned long int)uid);
+	         Prog, (unsigned long)uid);
 	return true;
 }
 
@@ -440,7 +440,7 @@ static bool set_locktime_one (uid_t uid, long locktime)
 
 	fprintf (stderr,
 	         _("%s: Failed to set locktime for UID %lu\n"),
-	         Prog, (unsigned long int)uid);
+	         Prog, (unsigned long)uid);
 	return true;
 }
 
@@ -557,9 +557,10 @@ int main (int argc, char **argv)
 				break;
 			case 'm':
 			{
-				long int lmax;
+				long  lmax;
+
 				if (   (getlong (optarg, &lmax) == 0)
-				    || ((long int)(short) lmax != lmax)) {
+				    || ((long)(short) lmax != lmax)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);

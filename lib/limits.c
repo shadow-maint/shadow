@@ -105,7 +105,7 @@ static int set_prio (const char *value)
 
 static int set_umask (const char *value)
 {
-	unsigned long int mask;
+	unsigned long  mask;
 
 	if (   (getulong (value, &mask) == 0)
 	    || (mask != (mode_t) mask)) {
@@ -483,7 +483,8 @@ void setup_limits (const struct passwd *info)
 			}
 
 			if (strncmp (cp, "pri=", 4) == 0) {
-				long int inc;
+				long  inc;
+
 				if (   (getlong (cp + 4, &inc) == 1)
 				    && (inc >= -20) && (inc <= 20)) {
 					errno = 0;
@@ -501,7 +502,8 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
-				long int blocks;
+				long  blocks;
+
 				if (   (getlong (cp + 7, &blocks) == 0)
 				    || (blocks != (int) blocks)
 				    || (set_filesize_limit (blocks) != 0)) {
@@ -512,7 +514,8 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "umask=", 6) == 0) {
-				unsigned long int mask;
+				unsigned long  mask;
+
 				if (   (getulong (cp + 6, &mask) == 0)
 				    || (mask != (mode_t) mask)) {
 					SYSLOG ((LOG_WARN,
