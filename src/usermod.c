@@ -1151,7 +1151,7 @@ static void process_flags (int argc, char **argv)
 				sflg = true;
 				break;
 			case 'u':
-				if (   (get_uid (optarg, &user_newid) ==0)
+				if (   (get_uid(optarg, &user_newid) == -1)
 				    || (user_newid == (uid_t)-1)) {
 					fprintf (stderr,
 					         _("%s: invalid user ID '%s'\n"),
