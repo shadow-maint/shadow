@@ -10,8 +10,12 @@
 #ident "$Id: $"
 
 #include <ctype.h>
+#include <errno.h>
+#include <inttypes.h>
+#include <limits.h>
 #include <stdlib.h>
 
+#include "atoi/strtoi.h"
 #include "defines.h"
 #include "prototypes.h"
 
@@ -29,8 +33,9 @@ getrange(const char *range,
          unsigned long *min, bool *has_min,
          unsigned long *max, bool *has_max)
 {
-	char *endptr;
-	unsigned long n;
+	int            status;
+	char           *endptr;
+	unsigned long  n;
 
 	if (NULL == range)
 		return -1;
@@ -39,9 +44,8 @@ getrange(const char *range,
 		if (!isdigit(range[1]))
 			return -1;
 
-		errno = 0;
-		n = strtoul(&range[1], &endptr, 10);
-		if (('\0' != *endptr) || (0 != errno))
+		n = strtou(&range[1], &endptr, 10, 0, ULONG_MAX, &status);
+		if (status != 0)
 			return -1;
 
 		/* -<long> */
@@ -49,9 +53,8 @@ getrange(const char *range,
 		*has_max = true;
 		*max = n;
 	} else {
-		errno = 0;
-		n = strtoul(range, &endptr, 10);
-		if (endptr == range || 0 != errno)
+		n = strtou(range, &endptr, 10, 0, ULONG_MAX, &status);
+		if (status != 0 && status != ENOTSUP)
 			return -1;
 
 		switch (*endptr) {
@@ -74,9 +77,8 @@ getrange(const char *range,
 			} else {
 				*has_min = true;
 				*min = n;
-				errno = 0;
-				n = strtoul(endptr, &endptr, 10);
-				if (('\0' != *endptr) || (0 != errno))
+				n = strtou(endptr, &endptr, 10, 0, ULONG_MAX, &status);
+				if (status != 0)
 					return -1;
 
 				/* <long>-<long> */
