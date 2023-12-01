@@ -28,6 +28,8 @@ libshadow_la_SOURCES = \
 	agetpass.h \
 	alloc.c \
 	alloc.h \
+	atoi/strtoi.c \
+	atoi/strtoi.h \
 	attr.h \
 	audit_help.c \
 	basename.c \
