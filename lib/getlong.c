@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2007 - 2009, Nicolas François
- *
+ * SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -9,9 +9,11 @@
 
 #ident "$Id$"
 
+#include <limits.h>
+#include <stddef.h>
 #include <stdlib.h>
-#include <errno.h>
 
+#include "atoi/strtoi.h"
 #include "prototypes.h"
 
 
@@ -23,12 +25,11 @@
 int
 getlong(const char *numstr, /*@out@*/long *result)
 {
-	char  *endptr;
+	int   status;
 	long  val;
 
-	errno = 0;
-	val = strtol(numstr, &endptr, 0);
-	if (('\0' == *numstr) || ('\0' != *endptr) || (0 != errno))
+	val = strtoi(numstr, NULL, 0, LONG_MIN, LONG_MAX, &status);
+	if (status != 0)
 		return -1;
 
 	*result = val;
