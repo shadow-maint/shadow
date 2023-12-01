@@ -164,6 +164,7 @@ libshadow_la_SOURCES = \
 	time/day_to_str.c \
 	time/day_to_str.h \
 	ttytype.c \
+	typetraits.h \
 	tz.c \
 	ulimit.c \
 	user_busy.c \
