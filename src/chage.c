@@ -167,14 +167,14 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	if (   (getlong (buf, &mindays) == 0)
+	if (   (getlong(buf, &mindays) == -1)
 	    || (mindays < -1)) {
 		return 0;
 	}
 
 	SNPRINTF(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	if (   (getlong (buf, &maxdays) == 0)
+	if (   (getlong(buf, &maxdays) == -1)
 	    || (maxdays < -1)) {
 		return 0;
 	}
@@ -198,14 +198,14 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	if (   (getlong (buf, &warndays) == 0)
+	if (   (getlong(buf, &warndays) == -1)
 	    || (warndays < -1)) {
 		return 0;
 	}
 
 	SNPRINTF(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	if (   (getlong (buf, &inactdays) == 0)
+	if (   (getlong(buf, &inactdays) == -1)
 	    || (inactdays < -1)) {
 		return 0;
 	}
@@ -393,7 +393,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'I':
 			Iflg = true;
-			if (   (getlong (optarg, &inactdays) == 0)
+			if (   (getlong(optarg, &inactdays) == -1)
 			    || (inactdays < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -406,7 +406,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'm':
 			mflg = true;
-			if (   (getlong (optarg, &mindays) == 0)
+			if (   (getlong(optarg, &mindays) == -1)
 			    || (mindays < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -416,7 +416,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'M':
 			Mflg = true;
-			if (   (getlong (optarg, &maxdays) == 0)
+			if (   (getlong(optarg, &maxdays) == -1)
 			    || (maxdays < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -430,7 +430,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'W':
 			Wflg = true;
-			if (   (getlong (optarg, &warndays) == 0)
+			if (   (getlong(optarg, &warndays) == -1)
 			    || (warndays < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
