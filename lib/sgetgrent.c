@@ -105,7 +105,7 @@ struct group *sgetgrent (const char *buf)
 	}
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
-	if (get_gid (grpfields[2], &grent.gr_gid) == 0) {
+	if (get_gid(grpfields[2], &grent.gr_gid) == -1) {
 		return NULL;
 	}
 	grent.gr_mem = list (grpfields[3]);
