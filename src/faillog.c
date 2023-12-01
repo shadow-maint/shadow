@@ -605,9 +605,9 @@ int main (int argc, char **argv)
 					umax = umin;
 					has_umax = true;
 				} else {
-					if (getrange (optarg,
-					              &umin, &has_umin,
-					              &umax, &has_umax) == 0) {
+					if (getrange(optarg,
+					             &umin, &has_umin,
+					             &umax, &has_umax) == -1) {
 						fprintf (stderr,
 						         _("%s: Unknown user or range: %s\n"),
 						         Prog, optarg);
