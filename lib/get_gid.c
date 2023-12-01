@@ -1,6 +1,6 @@
 /*
- * SPDX-FileCopyrightText: 2009       , Nicolas François
- *
+ * SPDX-FileCopyrightText: 2009, Nicolas François
+ * SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -9,26 +9,25 @@
 
 #ident "$Id$"
 
+#include <inttypes.h>
+#include <stddef.h>
+#include <sys/types.h>
+
+#include "atoi/strtoi.h"
 #include "prototypes.h"
-#include "defines.h"
+#include "types.h"
 
 
 int
 get_gid(const char *gidstr, gid_t *gid)
 {
-	long long  val;
-	char *endptr;
+	int    status;
+	gid_t  val;
 
-	errno = 0;
-	val = strtoll(gidstr, &endptr, 10);
-	if (   ('\0' == *gidstr)
-	    || ('\0' != *endptr)
-	    || (0 != errno)
-	    || (/*@+longintegral@*/val != (gid_t)val)/*@=longintegral@*/) {
+	val = strton(gidstr, NULL, 10, type_min(gid_t), type_max(gid_t), &status, gid_t);
+	if (status != 0)
 		return -1;
-	}
 
 	*gid = val;
 	return 0;
 }
-
