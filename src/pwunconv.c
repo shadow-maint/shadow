@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include "defines.h"
+#include "getdef.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"

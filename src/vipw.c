@@ -29,6 +29,7 @@
 
 #include "alloc.h"
 #include "defines.h"
+#include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
 #include "sssd.h"
