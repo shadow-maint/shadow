@@ -104,7 +104,7 @@ static int set_umask (const char *value)
 {
 	unsigned long  mask;
 
-	if (   (getulong (value, &mask) == 0)
+	if (   (getulong(value, &mask) == -1)
 	    || (mask != (mode_t) mask)) {
 		return 0;
 	}
@@ -119,7 +119,7 @@ static int check_logins (const char *name, const char *maxlogins)
 {
 	unsigned long limit, count;
 
-	if (getulong (maxlogins, &limit) == 0) {
+	if (getulong(maxlogins, &limit) == -1) {
 		return 0;
 	}
 
@@ -512,7 +512,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "umask=", 6) == 0) {
 				unsigned long  mask;
 
-				if (   (getulong (cp + 6, &mask) == 0)
+				if (   (getulong(cp + 6, &mask) == -1)
 				    || (mask != (mode_t) mask)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",
