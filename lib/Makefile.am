@@ -155,6 +155,7 @@ libshadow_la_SOURCES = \
 	subordinateio.c \
 	sulog.c \
 	ttytype.c \
+	types.h \
 	tz.c \
 	ulimit.c \
 	user_busy.c \
