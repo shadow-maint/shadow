@@ -62,14 +62,12 @@ static int setrlimit_value (unsigned int resource,
 		 * Also, we are limited to base 10 here (hex numbers will not
 		 * work with the limit string parser as is anyway)
 		 */
+		errno = 0;
 		l = strtol(value, &endptr, 10);
 
-		if (value == endptr) {
-			/* No argument at all. No-op.
-			 * FIXME: We could instead throw an error, though.
-			 */
-			return 0;
-		}
+		if (value == endptr || errno != 0)
+			return 0;  // FIXME: We could instead throw an error, though.
+
 		if (__builtin_mul_overflow(l, multiplier, &limit)) {
 			/* FIXME: Again, silent error handling...
 			 * Wouldn't screaming make more sense?

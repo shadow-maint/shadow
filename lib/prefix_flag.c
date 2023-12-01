@@ -352,7 +352,7 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 	gid = strtoll(grname, &endptr, 10);
 	if (   ('\0' != *grname)
 	    && ('\0' == *endptr)
-	    && (ERANGE != errno)
+	    && (0 == errno)
 	    && (gid == (gid_t)gid))
 	{
 		return prefix_getgrgid(gid);

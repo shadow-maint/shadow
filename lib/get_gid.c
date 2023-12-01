@@ -17,10 +17,10 @@ int get_gid (const char *gidstr, gid_t *gid)
 	char *endptr;
 
 	errno = 0;
-	val = strtoll (gidstr, &endptr, 10);
+	val = strtoll(gidstr, &endptr, 10);
 	if (   ('\0' == *gidstr)
 	    || ('\0' != *endptr)
-	    || (ERANGE == errno)
+	    || (0 != errno)
 	    || (/*@+longintegral@*/val != (gid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}
