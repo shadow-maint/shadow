@@ -25,10 +25,10 @@ int getulong (const char *numstr, /*@out@*/unsigned long *result)
 	char *endptr;
 
 	errno = 0;
-	val = strtoul (numstr, &endptr, 0);
+	val = strtoul(numstr, &endptr, 0);
 	if (    ('\0' == *numstr)
 	     || ('\0' != *endptr)
-	     || (ERANGE == errno)
+	     || (0 != errno)
 	   ) {
 		return 0;
 	}

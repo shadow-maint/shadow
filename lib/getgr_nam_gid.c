@@ -31,10 +31,10 @@ extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *gr
 	}
 
 	errno = 0;
-	gid = strtoll (grname, &endptr, 10);
+	gid = strtoll(grname, &endptr, 10);
 	if (   ('\0' != *grname)
 	    && ('\0' == *endptr)
-	    && (ERANGE != errno)
+	    && (0 == errno)
 	    && (/*@+longintegral@*/gid == (gid_t)gid)/*@=longintegral@*/) {
 		return xgetgrgid (gid);
 	}

@@ -20,10 +20,10 @@ int get_pid (const char *pidstr, pid_t *pid)
 	char *endptr;
 
 	errno = 0;
-	val = strtoll (pidstr, &endptr, 10);
+	val = strtoll(pidstr, &endptr, 10);
 	if (   ('\0' == *pidstr)
 	    || ('\0' != *endptr)
-	    || (ERANGE == errno)
+	    || (0 != errno)
 	    || (val < 1)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
 		return 0;
@@ -46,10 +46,10 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	dev_t proc_st_dev, proc_st_rdev;
 
 	errno = 0;
-	val = strtoll (pidfdstr, &endptr, 10);
+	val = strtoll(pidfdstr, &endptr, 10);
 	if (   ('\0' == *pidfdstr)
 	    || ('\0' != *endptr)
-	    || (ERANGE == errno)
+	    || (0 != errno)
 	    || (val < 0)
 	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
 		return -1;

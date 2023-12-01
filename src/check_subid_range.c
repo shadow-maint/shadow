@@ -34,11 +34,12 @@ int main(int argc, char **argv)
 
 	owner = argv[1];
 	check_uids = argv[2][0] == 'u';
+	errno = 0;
 	start = strtoul(argv[3], NULL, 10);
-	if (start == ULONG_MAX && errno == ERANGE)
+	if (errno != 0)
 		exit(1);
 	count = strtoul(argv[4], NULL, 10);
-	if (count == ULONG_MAX && errno == ERANGE)
+	if (errno != 0)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))

@@ -37,9 +37,8 @@
 		return fallback;
 
 	errno = 0;
-	epoch = strtoull (source_date_epoch, &endptr, 10);
-	if ((errno == ERANGE && (epoch == ULLONG_MAX || epoch == 0))
-			|| (errno != 0 && epoch == 0)) {
+	epoch = strtoull(source_date_epoch, &endptr, 10);
+	if (errno != 0) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
 			 strerror(errno));
