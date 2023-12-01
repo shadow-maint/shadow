@@ -3,28 +3,37 @@
 // Exits 0 if owner has subid range starting start, of size count
 // Exits 1 otherwise.
 
+
 #include <config.h>
+#include <inttypes.h>
+#include <limits.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+#include "atoi/strtoi.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "subordinateio.h"
 #include "idmapping.h"
 #include "shadowlog.h"
 
+
 const char *Prog;
+
 
 int main(int argc, char **argv)
 {
-	char *owner;
-	unsigned long start, count;
-	bool check_uids;
+	int            status;
+	bool           check_uids;
+	char           *owner;
+	unsigned long  start, count;
+
 	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -34,12 +43,11 @@ int main(int argc, char **argv)
 
 	owner = argv[1];
 	check_uids = argv[2][0] == 'u';
-	errno = 0;
-	start = strtoul(argv[3], NULL, 10);
-	if (errno != 0)
+	start = strtou(argv[3], NULL, 10, 0, ULONG_MAX, &status);
+	if (status != 0)
 		exit(1);
-	count = strtoul(argv[4], NULL, 10);
-	if (errno != 0)
+	count = strtou(argv[4], NULL, 10, 0, ULONG_MAX, &status);
+	if (status != 0)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))
