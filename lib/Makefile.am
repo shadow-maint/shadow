@@ -31,6 +31,8 @@ libshadow_la_SOURCES = \
 	agetpass.h \
 	alloc.c \
 	alloc.h \
+	atoi/strtoi.c \
+	atoi/strtoi.h \
 	atoi/strtou_noneg.c \
 	atoi/strtou_noneg.h \
 	attr.h \
