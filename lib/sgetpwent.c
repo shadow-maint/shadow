@@ -97,7 +97,7 @@ struct passwd *sgetpwent (const char *buf)
 	if (get_uid (fields[2], &pwent.pw_uid) == 0) {
 		return NULL;
 	}
-	if (get_gid (fields[3], &pwent.pw_gid) == 0) {
+	if (get_gid(fields[3], &pwent.pw_gid) == -1) {
 		return NULL;
 	}
 	pwent.pw_gecos = fields[4];

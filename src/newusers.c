@@ -237,7 +237,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		 * new group, or an existing group.
 		 */
 
-		if (get_gid (gid, &grent.gr_gid) == 0) {
+		if (get_gid(gid, &grent.gr_gid) == -1) {
 			fprintf (stderr,
 			         _("%s: invalid group ID '%s'\n"),
 			         Prog, gid);
