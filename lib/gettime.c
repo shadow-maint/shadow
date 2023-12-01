@@ -8,9 +8,14 @@
 
 #ident "$Id$"
 
-#include <errno.h>
+#include <inttypes.h>
 #include <limits.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+#include "atoi/strtoi.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -24,11 +29,9 @@
  */
 /*@observer@*/time_t gettime (void)
 {
-	char *endptr;
-	char *source_date_epoch;
-	time_t fallback;
-	unsigned long long epoch;
-	FILE *shadow_logfd = log_get_logfd();
+	int     status;
+	char    *source_date_epoch;
+	time_t  fallback, epoch;
 
 	fallback = time (NULL);
 	source_date_epoch = shadow_getenv ("SOURCE_DATE_EPOCH");
@@ -36,32 +39,13 @@
 	if (!source_date_epoch)
 		return fallback;
 
-	errno = 0;
-	epoch = strtoull(source_date_epoch, &endptr, 10);
-	if (errno != 0) {
-		fprintf (shadow_logfd,
-			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
-			 strerror(errno));
-	} else if (endptr == source_date_epoch) {
-		fprintf (shadow_logfd,
-			 _("Environment variable $SOURCE_DATE_EPOCH: No digits were found: %s\n"),
-			 endptr);
-	} else if (*endptr != '\0') {
-		fprintf (shadow_logfd,
-			 _("Environment variable $SOURCE_DATE_EPOCH: Trailing garbage: %s\n"),
-			 endptr);
-	} else if (epoch > ULONG_MAX) {
-		fprintf (shadow_logfd,
-			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to %lu but was found to be: %llu\n"),
-			 ULONG_MAX, epoch);
-	} else if ((time_t)epoch > fallback) {
-		fprintf (shadow_logfd,
-			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to the current time (%lu) but was found to be: %llu\n"),
-			 fallback, epoch);
-	} else {
-		/* Valid */
-		return epoch;
+	epoch = strton(source_date_epoch, NULL, 10, 0, fallback, &status, time_t);
+	if (status != 0) {
+		fprintf(log_get_logfd(),
+		        _("Environment variable $SOURCE_DATE_EPOCH: strtoi(\"%s\"): %s\n"),
+			source_date_epoch, strerror(status));
+		return fallback;
 	}
 
-	return fallback;
+	return epoch;
 }
