@@ -547,7 +547,7 @@ int main (int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'l':
-				if (getlong (optarg, &fail_locktime) == 0) {
+				if (getlong(optarg, &fail_locktime) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -559,7 +559,7 @@ int main (int argc, char **argv)
 			{
 				long  lmax;
 
-				if (   (getlong (optarg, &lmax) == 0)
+				if (   (getlong(optarg, &lmax) == -1)
 				    || ((long)(short) lmax != lmax)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
@@ -576,7 +576,7 @@ int main (int argc, char **argv)
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 't':
-				if (getlong (optarg, &days) == 0) {
+				if (getlong(optarg, &days) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);

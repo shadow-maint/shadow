@@ -92,7 +92,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[2][0] == '\0') {
 		spwd.sp_lstchg = -1;
-	} else if (   (getlong (fields[2], &spwd.sp_lstchg) == 0)
+	} else if (   (getlong(fields[2], &spwd.sp_lstchg) == -1)
 	           || (spwd.sp_lstchg < 0)) {
 		return 0;
 	}
@@ -103,7 +103,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[3][0] == '\0') {
 		spwd.sp_min = -1;
-	} else if (   (getlong (fields[3], &spwd.sp_min) == 0)
+	} else if (   (getlong(fields[3], &spwd.sp_min) == -1)
 	           || (spwd.sp_min < 0)) {
 		return 0;
 	}
@@ -114,7 +114,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[4][0] == '\0') {
 		spwd.sp_max = -1;
-	} else if (   (getlong (fields[4], &spwd.sp_max) == 0)
+	} else if (   (getlong(fields[4], &spwd.sp_max) == -1)
 	           || (spwd.sp_max < 0)) {
 		return 0;
 	}
@@ -139,7 +139,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[5][0] == '\0') {
 		spwd.sp_warn = -1;
-	} else if (   (getlong (fields[5], &spwd.sp_warn) == 0)
+	} else if (   (getlong(fields[5], &spwd.sp_warn) == -1)
 	           || (spwd.sp_warn < 0)) {
 		return 0;
 	}
@@ -151,7 +151,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[6][0] == '\0') {
 		spwd.sp_inact = -1;
-	} else if (   (getlong (fields[6], &spwd.sp_inact) == 0)
+	} else if (   (getlong(fields[6], &spwd.sp_inact) == -1)
 	           || (spwd.sp_inact < 0)) {
 		return 0;
 	}
@@ -163,7 +163,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
-	} else if (   (getlong (fields[7], &spwd.sp_expire) == 0)
+	} else if (   (getlong(fields[7], &spwd.sp_expire) == -1)
 	           || (spwd.sp_expire < 0)) {
 		return 0;
 	}

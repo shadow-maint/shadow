@@ -776,7 +776,7 @@ int main (int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'i':
-				if (   (getlong (optarg, &inact) == 0)
+				if (   (getlong(optarg, &inact) == -1)
 				    || (inact < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
@@ -795,7 +795,7 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'n':
-				if (   (getlong (optarg, &age_min) == 0)
+				if (   (getlong(optarg, &age_min) == -1)
 				    || (age_min < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
@@ -830,7 +830,7 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'w':
-				if (   (getlong (optarg, &warn) == 0)
+				if (   (getlong(optarg, &warn) == -1)
 				    || (warn < -1)) {
 					(void) fprintf (stderr,
 					                _("%s: invalid numeric argument '%s'\n"),
@@ -841,7 +841,7 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'x':
-				if (   (getlong (optarg, &age_max) == 0)
+				if (   (getlong(optarg, &age_max) == -1)
 				    || (age_max < -1)) {
 					(void) fprintf (stderr,
 					                _("%s: invalid numeric argument '%s'\n"),

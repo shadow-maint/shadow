@@ -89,7 +89,7 @@ static int set_prio (const char *value)
 {
 	long prio;
 
-	if (   (getlong (value, &prio) == 0)
+	if (   (getlong(value, &prio) == -1)
 	    || (prio != (int) prio)) {
 		return 0;
 	}
@@ -482,7 +482,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "pri=", 4) == 0) {
 				long  inc;
 
-				if (   (getlong (cp + 4, &inc) == 1)
+				if (   (getlong(cp + 4, &inc) == 0)
 				    && (inc >= -20) && (inc <= 20)) {
 					errno = 0;
 					if (   (nice (inc) != -1)
@@ -500,8 +500,7 @@ void setup_limits (const struct passwd *info)
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
 				long  blocks;
-
-				if (   (getlong (cp + 7, &blocks) == 0)
+				if (   (getlong(cp + 7, &blocks) == -1)
 				    || (blocks != (int) blocks)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,

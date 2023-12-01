@@ -62,7 +62,7 @@ long strtoday (const char *str)
 	}
 	if (isnum) {
 		long retdate;
-		if (getlong (str, &retdate) == 0) {
+		if (getlong(str, &retdate) == -1) {
 			return -2;
 		}
 		return retdate;
