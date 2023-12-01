@@ -414,7 +414,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'g':
 			gflg = true;
-			if (   (get_gid (optarg, &group_newid) == 0)
+			if (   (get_gid(optarg, &group_newid) == -1)
 			    || (group_newid == (gid_t)-1)) {
 				fprintf (stderr,
 				         _("%s: invalid group ID '%s'\n"),
