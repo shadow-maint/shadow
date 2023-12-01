@@ -341,7 +341,7 @@ static int get_user_id (const char *uid, uid_t *nuid) {
 	 * caller provided, or the next available UID.
 	 */
 	if (isdigit (uid[0])) {
-		if ((get_uid (uid, nuid) == 0) || (*nuid == (uid_t)-1)) {
+		if ((get_uid(uid, nuid) == -1) || (*nuid == (uid_t)-1)) {
 			fprintf (stderr,
 			         _("%s: invalid user ID '%s'\n"),
 			         Prog, uid);
