@@ -19,10 +19,14 @@
 
 #ident "$Id$"
 
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <ctype.h>
+
+#include "atoi/strtoi.h"
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -30,24 +34,28 @@
 #include "shadowlog.h"
 #include <sys/resource.h>
 #include "memzero.h"
+#include "types.h"
+
+
 #ifndef LIMITS_FILE
 #define LIMITS_FILE "/etc/limits"
 #endif
 #define LOGIN_ERROR_RLIMIT	1
 #define LOGIN_ERROR_LOGIN	2
+
+
 /* Set a limit on a resource */
 /*
  *	rlimit - RLIMIT_XXXX
  *	value - string value to be read
  *	multiplier - value*multiplier is the actual limit
  */
-static int setrlimit_value (unsigned int resource,
-                            const char *value,
-                            unsigned int multiplier)
+static int
+setrlimit_value(unsigned int resource, const char *value,
+                unsigned int multiplier)
 {
-	char           *endptr;
-	long           l;
-	rlim_t         limit;
+	int            status;
+	rlim_t         l, limit;
 	struct rlimit  rlim;
 
 	/* The "-" is special, not belonging to a strange negative limit.
@@ -55,25 +63,12 @@ static int setrlimit_value (unsigned int resource,
 	 */
 	if ('-' == value[0]) {
 		limit = RLIM_INFINITY;
-	}
-	else {
-		/* We cannot use getlong here because it fails when there
-		 * is more to the value than just this number!
-		 * Also, we are limited to base 10 here (hex numbers will not
-		 * work with the limit string parser as is anyway)
-		 */
-		errno = 0;
-		l = strtol(value, &endptr, 10);
-
-		if (value == endptr || errno != 0)
+	} else {
+		l = strton(value, NULL, 10, type_min(rlim_t), type_max(rlim_t), &status, rlim_t);
+		if (status != 0 && status != ENOTSUP)
 			return 0;  // FIXME: We could instead throw an error, though.
-
-		if (__builtin_mul_overflow(l, multiplier, &limit)) {
-			/* FIXME: Again, silent error handling...
-			 * Wouldn't screaming make more sense?
-			 */
-			return 0;
-		}
+		if (__builtin_mul_overflow(l, multiplier, &limit))
+			return 0;  // FIXME: Again, silent error handling...
 	}
 
 	rlim.rlim_cur = limit;
