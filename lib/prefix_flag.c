@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <sys/types.h>
 
 #include "defines.h"
 #include "alloc.h"
@@ -337,9 +338,8 @@ extern void prefix_endgrent(void)
 
 extern struct group *prefix_getgr_nam_gid(const char *grname)
 {
-	long long  gid;
-	char *endptr;
-	struct group *g;
+	gid_t         gid;
+	struct group  *g;
 
 	if (NULL == grname) {
 		return NULL;
@@ -348,15 +348,8 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 	if (!group_db_file)
 		return getgr_nam_gid(grname);
 
-	errno = 0;
-	gid = strtoll(grname, &endptr, 10);
-	if (   ('\0' != *grname)
-	    && ('\0' == *endptr)
-	    && (0 == errno)
-	    && (gid == (gid_t)gid))
-	{
+	if (get_gid(grname, &gid) == 0)
 		return prefix_getgrgid(gid);
-	}
 
 	g = prefix_getgrnam(grname);
 	return g ? __gr_dup(g) : NULL;
