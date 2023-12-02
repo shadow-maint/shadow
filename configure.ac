@@ -35,25 +35,6 @@ LT_INIT
 
 dnl Checks for libraries.
 
-dnl Checks for header files.
-AC_CHECK_HEADERS(crypt.h utmp.h \
-	termio.h sgtty.h sys/ioctl.h paths.h \
-	sys/capability.h sys/random.h \
-	gshadow.h lastlog.h rpc/key_prot.h acl/libacl.h \
-	attr/libattr.h attr/error_context.h)
-
-dnl shadow now uses the libc's shadow implementation
-AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
-
-AC_CHECK_FUNCS(arc4random_buf futimes \
-	getentropy getrandom getspnam getusershell \
-	initgroups lckpwdf lutimes \
-	setgroups updwtmp updwtmpx innetgr \
-	getspnam_r \
-	rpmatch \
-	memset_explicit explicit_bzero stpecpy stpeprintf strtoi)
-AC_SYS_LARGEFILE
-
 dnl Checks for typedefs, structures, and compiler characteristics.
 
 AC_CHECK_MEMBERS([struct utmp.ut_type,
@@ -703,6 +684,25 @@ if test "$with_skey" = "yes"; then
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
 	]])],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])],[])
 fi
+
+dnl Checks for header files.
+AC_CHECK_HEADERS(crypt.h utmp.h \
+	termio.h sgtty.h sys/ioctl.h paths.h \
+	sys/capability.h sys/random.h \
+	gshadow.h lastlog.h rpc/key_prot.h acl/libacl.h \
+	attr/libattr.h attr/error_context.h)
+
+dnl shadow now uses the libc's shadow implementation
+AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
+
+AC_CHECK_FUNCS(arc4random_buf futimes \
+	getentropy getrandom getspnam getusershell \
+	initgroups lckpwdf lutimes \
+	setgroups updwtmp updwtmpx innetgr \
+	getspnam_r \
+	rpmatch \
+	memset_explicit explicit_bzero stpecpy stpeprintf strtoi)
+AC_SYS_LARGEFILE
 
 PKG_CHECK_MODULES([CMOCKA], [cmocka], [have_cmocka="yes"],
 	[AC_MSG_WARN([libcmocka not found, cmocka tests will not be built])])
