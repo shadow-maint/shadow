@@ -12,8 +12,9 @@
 #ident "$Id$"
 
 #include <stdlib.h>
-#include <errno.h>
 #include <grp.h>
+#include <sys/types.h>
+
 #include "prototypes.h"
 
 /*
@@ -23,21 +24,14 @@
  */
 extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname)
 {
-	long long  gid;
-	char *endptr;
+	gid_t  gid;
 
 	if (NULL == grname) {
 		return NULL;
 	}
 
-	errno = 0;
-	gid = strtoll(grname, &endptr, 10);
-	if (   ('\0' != *grname)
-	    && ('\0' == *endptr)
-	    && (0 == errno)
-	    && (/*@+longintegral@*/gid == (gid_t)gid)/*@=longintegral@*/) {
-		return xgetgrgid (gid);
-	}
-	return xgetgrnam (grname);
+	if (get_gid(grname, &gid) == -1)
+		return xgetgrnam(grname);
+	return xgetgrgid(gid);
 }
 
