@@ -26,11 +26,11 @@ int get_pid (const char *pidstr, pid_t *pid)
 	    || (0 != errno)
 	    || (val < 1)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
-		return 0;
+		return -1;
 	}
 
 	*pid = val;
-	return 1;
+	return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ int open_pidfd(const char *pidstr)
 	char proc_dir_name[32];
 	pid_t target;
 
-	if (get_pid(pidstr, &target) == 0)
+	if (get_pid(pidstr, &target) == -1)
 		return -ENOENT;
 
 	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
