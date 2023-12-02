@@ -11,6 +11,7 @@
 
 #include <fcntl.h>
 #include <inttypes.h>
+#include <limits.h>
 #include <stddef.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -42,20 +43,13 @@ get_pid(const char *pidstr, pid_t *pid)
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
-	long long  val;
-	char *endptr;
-	struct stat st;
-	dev_t proc_st_dev, proc_st_rdev;
+	int          val, status;
+	dev_t        proc_st_dev, proc_st_rdev;
+	struct stat  st;
 
-	errno = 0;
-	val = strtoll(pidfdstr, &endptr, 10);
-	if (   ('\0' == *pidfdstr)
-	    || ('\0' != *endptr)
-	    || (0 != errno)
-	    || (val < 0)
-	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
+	val = strtoi(pidfdstr, NULL, 10, 0, INT_MAX, &status);
+	if (status != 0)
 		return -1;
-	}
 
 	if (stat("/proc/self/uid_map", &st) < 0) {
 		return -1;
