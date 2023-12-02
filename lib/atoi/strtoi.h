@@ -10,9 +10,19 @@
 
 #include <config.h>
 
+#include <inttypes.h>
 #include <stdint.h>
 
 #include "defines.h"
+#include "types.h"
+
+
+#define strton(str, end, base, min, max, status, TYPE)                        \
+(                                                                             \
+	__builtin_choose_expr(is_signed(TYPE),                                \
+	                      strtoi(str, end, base, min, max, status),       \
+	                      strtou(str, end, base, min, max, status))       \
+)
 
 
 ATTR_STRING(1)
