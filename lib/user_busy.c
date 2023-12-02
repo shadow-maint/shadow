@@ -202,7 +202,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		}
 
 		/* Check if this is a valid PID */
-		if (get_pid (tmp_d_name, &pid) == 0) {
+		if (get_pid(tmp_d_name, &pid) == -1) {
 			continue;
 		}
 
@@ -232,7 +232,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		if (task_dir != NULL) {
 			while ((ent = readdir (task_dir)) != NULL) {
 				pid_t tid;
-				if (get_pid (ent->d_name, &tid) == 0) {
+				if (get_pid(ent->d_name, &tid) == -1) {
 					continue;
 				}
 				if (tid == pid) {
