@@ -4,30 +4,32 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+
 #include <config.h>
 
 #ident "$Id$"
 
-#include "prototypes.h"
-#include "defines.h"
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <inttypes.h>
+#include <stddef.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
-int get_pid (const char *pidstr, pid_t *pid)
+#include "atoi/strtoi.h"
+#include "defines.h"
+#include "prototypes.h"
+#include "types.h"
+
+
+int
+get_pid(const char *pidstr, pid_t *pid)
 {
-	long long  val;
-	char *endptr;
+	int    status;
+	pid_t  val;
 
-	errno = 0;
-	val = strtoll(pidstr, &endptr, 10);
-	if (   ('\0' == *pidstr)
-	    || ('\0' != *endptr)
-	    || (0 != errno)
-	    || (val < 1)
-	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
+	val = strtoi(pidstr, NULL, 10, 1, type_max(pid_t), &status);
+	if (status != 0)
 		return -1;
-	}
 
 	*pid = val;
 	return 0;
