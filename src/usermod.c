@@ -17,6 +17,8 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
+#include <inttypes.h>
+#include <limits.h>
 #ifdef ENABLE_LASTLOG
 #include <lastlog.h>
 #endif /* ENABLE_LASTLOG */
@@ -26,6 +28,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <stddef.h>
 #include <stdio.h>
 #include <strings.h>
 #include <sys/stat.h>
@@ -33,6 +36,7 @@
 #include <time.h>
 
 #include "alloc.h"
+#include "atoi/strtoi.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -310,29 +314,24 @@ struct ulong_range
 	unsigned long last;
 };
 
-static struct ulong_range getulong_range(const char *str)
+static struct ulong_range
+getulong_range(const char *str)
 {
-	struct ulong_range result = { .first = ULONG_MAX, .last = 0 };
-	long long first, last;
-	char *pos;
+	int                 status;
+	char                *pos;
+	unsigned long       first, last;
+	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
-	errno = 0;
-	first = strtoll(str, &pos, 10);
-	if (('\0' == *str) || ('-' != *pos ) || (0 != errno) ||
-	    (first != (unsigned long)first))
+	first = strtou(str, &pos, 10, 0, ULONG_MAX, &status);
+	if (status != ENOTSUP || *pos != '-')
 		goto out;
 
-	errno = 0;
-	last = strtoll(pos + 1, &pos, 10);
-	if (('\0' != *pos ) || (0 != errno) ||
-	    (last != (unsigned long)last))
+	last = strtou(pos + 1, NULL, 10, first, ULONG_MAX, &status);
+	if (status != 0)
 		goto out;
 
-	if (first > last)
-		goto out;
-
-	result.first = (unsigned long)first;
-	result.last = (unsigned long)last;
+	result.first = first;
+	result.last = last;
 out:
 	return result;
 }
