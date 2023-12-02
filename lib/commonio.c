@@ -195,7 +195,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		return 0;
 	}
 	buf[len] = '\0';
-	if (get_pid (buf, &pid) == 0) {
+	if (get_pid(buf, &pid) == -1) {
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: existing lock file %s with an invalid PID '%s'\n",
