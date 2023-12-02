@@ -17,12 +17,20 @@
 #include "types.h"
 
 
+// strton() - select strtoi(3) or strtou(3) based on signedness of TYPE
 #define strton(str, end, base, min, max, status, TYPE)                        \
 (                                                                             \
 	__builtin_choose_expr(is_signed(TYPE),                                \
 	                      strtoi(str, end, base, min, max, status),       \
 	                      strtou(str, end, base, min, max, status))       \
 )
+
+
+// strtonl() - call strton() with the natural limits of TYPE
+#define strtonl(str, end, base, status, TYPE)                                 \
+(                                                                             \
+	strton(str, end, base, type_min(TYPE), type_max(TYPE), status, TYPE)  \
+)                                                                             \
 
 
 ATTR_STRING(1)
