@@ -64,7 +64,7 @@ setrlimit_value(unsigned int resource, const char *value,
 	if ('-' == value[0]) {
 		limit = RLIM_INFINITY;
 	} else {
-		l = strton(value, NULL, 10, type_min(rlim_t), type_max(rlim_t), &status, rlim_t);
+		l = strtonl(value, NULL, 10, &status, rlim_t);
 		if (status != 0 && status != ENOTSUP)
 			return 0;  // FIXME: We could instead throw an error, though.
 		if (__builtin_mul_overflow(l, multiplier, &limit))

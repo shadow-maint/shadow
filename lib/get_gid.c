@@ -24,7 +24,7 @@ get_gid(const char *gidstr, gid_t *gid)
 	int    status;
 	gid_t  val;
 
-	val = strton(gidstr, NULL, 10, type_min(gid_t), type_max(gid_t), &status, gid_t);
+	val = strtonl(gidstr, NULL, 10, &status, gid_t);
 	if (status != 0)
 		return -1;
 

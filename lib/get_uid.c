@@ -24,7 +24,7 @@ get_uid(const char *uidstr, uid_t *uid)
 	int    status;
 	uid_t  val;
 
-	val = strton(uidstr, NULL, 10, type_min(uid_t), type_max(uid_t), &status, uid_t);
+	val = strtonl(uidstr, NULL, 10, &status, uid_t);
 	if (status != 0)
 		return -1;
 

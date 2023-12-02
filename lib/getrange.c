@@ -44,7 +44,7 @@ getrange(const char *range,
 		if (!isdigit(range[1]))
 			return -1;
 
-		n = strtou(&range[1], &endptr, 10, 0, ULONG_MAX, &status);
+		n = strtonl(&range[1], &endptr, 10, &status, unsigned long);
 		if (status != 0)
 			return -1;
 
@@ -53,7 +53,7 @@ getrange(const char *range,
 		*has_max = true;
 		*max = n;
 	} else {
-		n = strtou(range, &endptr, 10, 0, ULONG_MAX, &status);
+		n = strtonl(range, &endptr, 10, &status, unsigned long);
 		if (status != 0 && status != ENOTSUP)
 			return -1;
 
@@ -77,7 +77,7 @@ getrange(const char *range,
 			} else {
 				*has_min = true;
 				*min = n;
-				n = strtou(endptr, &endptr, 10, 0, ULONG_MAX, &status);
+				n = strtonl(endptr, &endptr, 10, &status, unsigned long);
 				if (status != 0)
 					return -1;
 

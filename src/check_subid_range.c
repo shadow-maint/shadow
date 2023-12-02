@@ -43,10 +43,10 @@ int main(int argc, char **argv)
 
 	owner = argv[1];
 	check_uids = argv[2][0] == 'u';
-	start = strtou(argv[3], NULL, 10, 0, ULONG_MAX, &status);
+	start = strtonl(argv[3], NULL, 10, &status, unsigned long);
 	if (status != 0)
 		exit(1);
-	count = strtou(argv[4], NULL, 10, 0, ULONG_MAX, &status);
+	count = strtonl(argv[4], NULL, 10, &status, unsigned long);
 	if (status != 0)
 		exit(1);
 	if (check_uids) {

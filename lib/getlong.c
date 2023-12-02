@@ -28,7 +28,7 @@ getlong(const char *numstr, /*@out@*/long *result)
 	int   status;
 	long  val;
 
-	val = strtoi(numstr, NULL, 0, LONG_MIN, LONG_MAX, &status);
+	val = strtonl(numstr, NULL, 0, &status, long);
 	if (status != 0)
 		return -1;
 

@@ -28,7 +28,7 @@ getulong(const char *numstr, /*@out@*/unsigned long *result)
 	int            status;
 	unsigned long  val;
 
-	val = strtou(numstr, NULL, 0, 0, ULONG_MAX, &status);
+	val = strtonl(numstr, NULL, 0, &status, unsigned long);
 	if (status != 0)
 		return -1;
 
