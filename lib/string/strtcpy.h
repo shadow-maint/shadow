@@ -55,7 +55,6 @@ inline ssize_t
 strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 {
 	bool    trunc;
-	char    *p;
 	size_t  dlen, slen;
 
 	if (dsize == 0)
@@ -65,8 +64,7 @@ strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 	trunc = (slen == dsize);
 	dlen = slen - trunc;
 
-	p = mempcpy(dst, src, dlen);
-	*p = '\0';
+	strcpy(mempcpy(dst, src, dlen), "");
 
 	return trunc ? -1 : slen;
 }

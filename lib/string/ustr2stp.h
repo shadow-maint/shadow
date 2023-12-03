@@ -53,12 +53,7 @@ inline char *ustr2stp(char *restrict dst, const char *restrict src,
 inline char *
 ustr2stp(char *restrict dst, const char *restrict src, size_t ssize)
 {
-	char  *p;
-
-	p = mempcpy(dst, src, ssize);
-	*p = '\0';
-
-	return p;
+	return strcpy(mempcpy(dst, src, ssize), "");
 }
 
 

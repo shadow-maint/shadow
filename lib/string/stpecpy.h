@@ -66,7 +66,6 @@ inline char *
 stpecpy(char *dst, char *end, const char *restrict src)
 {
 	bool    trunc;
-	char    *p;
 	size_t  dsize, dlen, slen;
 
 	if (dst == end)
@@ -79,10 +78,7 @@ stpecpy(char *dst, char *end, const char *restrict src)
 	trunc = (slen == dsize);
 	dlen = slen - trunc;
 
-	p = mempcpy(dst, src, dlen);
-	*p = '\0';
-
-	return p + trunc;
+	return strcpy(mempcpy(dst, src, dlen), "") + trunc;
 }
 
 
