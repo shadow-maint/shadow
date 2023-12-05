@@ -90,6 +90,8 @@ libshadow_la_SOURCES = \
 	defines.h \
 	encrypt.c \
 	env.c \
+	exit_if_null.c \
+	exit_if_null.h \
 	exitcodes.h \
 	faillog.h \
 	failure.c \
