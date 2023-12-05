@@ -7,7 +7,7 @@ check_PROGRAMS = \
     test_chkname \
     test_strncpy \
     test_strtcpy \
-    test_xasprintf
+    test_x
 
 if ENABLE_LOGIND
 check_PROGRAMS += \
@@ -72,18 +72,17 @@ test_strtcpy_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
-test_xasprintf_SOURCES = \
-    ../../lib/string/sprintf.c \
-    test_xasprintf.c \
+test_x_SOURCES = \
+    ../../lib/shadowlog.c \
+    test_x.c \
     $(NULL)
-test_xasprintf_CFLAGS = \
+test_x_CFLAGS = \
     $(AM_FLAGS) \
     $(NULL)
-test_xasprintf_LDFLAGS = \
-    -Wl,-wrap,vasprintf \
+test_x_LDFLAGS = \
     -Wl,-wrap,exit \
     $(NULL)
-test_xasprintf_LDADD = \
+test_x_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 

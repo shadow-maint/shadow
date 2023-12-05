@@ -136,8 +136,6 @@ libshadow_la_SOURCES = \
 	spawn.c \
 	sssd.c \
 	sssd.h \
-	string/sprintf.c \
-	string/sprintf.h \
 	string/stpecpy.c \
 	string/stpecpy.h \
 	string/stpeprintf.c \
