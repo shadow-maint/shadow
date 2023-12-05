@@ -22,6 +22,11 @@
 #include "typetraits.h"
 
 
+/* Yeh, but.  Remember that bailing out might leave the system in some
+   bizarre state.  You really want to put in error checking, then add
+   some back-out failure recovery code. -- jfh */
+
+
 #define is_error(x)                                                           \
 ({                                                                            \
 	static_assert(is_pointer(x)                                           \
