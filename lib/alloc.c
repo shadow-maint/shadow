@@ -15,50 +15,8 @@
 
 #include "alloc.h"
 
-#include <errno.h>
 #include <stddef.h>
-#include <stdio.h>
-
-#include "defines.h"
-#include "prototypes.h"
-#include "shadowlog.h"
 
 
-extern inline void *xmalloc(size_t size);
-extern inline void *xmallocarray(size_t nmemb, size_t size);
 extern inline void *mallocarray(size_t nmemb, size_t size);
 extern inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
-
-
-void *
-xcalloc(size_t nmemb, size_t size)
-{
-	void  *p;
-
-	p = calloc(nmemb, size);
-	if (p == NULL)
-		goto x;
-
-	return p;
-
-x:
-	fprintf(log_get_logfd(), _("%s: %s\n"),
-	        log_get_progname(), strerror(errno));
-	exit(13);
-}
-
-
-void *
-xreallocarray(void *p, size_t nmemb, size_t size)
-{
-	p = reallocarrayf(p, nmemb, size);
-	if (p == NULL)
-		goto x;
-
-	return p;
-
-x:
-	fprintf(log_get_logfd(), _("%s: %s\n"),
-	        log_get_progname(), strerror(errno));
-	exit(13);
-}

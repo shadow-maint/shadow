@@ -19,12 +19,13 @@
 
 #include "attr.h"
 #include "defines.h"
+#include "x.h"
 
 
 #define CALLOC(n, type)   ((type *) calloc(n, sizeof(type)))
-#define XCALLOC(n, type)  ((type *) xcalloc(n, sizeof(type)))
+#define XCALLOC(n, type)  ((type *) x(calloc(n, sizeof(type))))
 #define MALLOC(n, type)   ((type *) mallocarray(n, sizeof(type)))
-#define XMALLOC(n, type)  ((type *) xmallocarray(n, sizeof(type)))
+#define XMALLOC(n, type)  ((type *) x(mallocarray(n, sizeof(type))))
 
 #define REALLOC(ptr, n, type)                                                 \
 ({                                                                            \
@@ -50,37 +51,13 @@
                                                                               \
 	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
                                                                               \
-	(type *) xreallocarray(p_, n, sizeof(type));                          \
+	(type *) x(reallocarray(p_, n, sizeof(type)));                        \
 })
 
 
-ATTR_MALLOC(free)
-inline void *xmalloc(size_t size);
-ATTR_MALLOC(free)
-inline void *xmallocarray(size_t nmemb, size_t size);
-ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
 ATTR_MALLOC(free)
 inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
-
-ATTR_MALLOC(free)
-void *xcalloc(size_t nmemb, size_t size);
-ATTR_MALLOC(free)
-void *xreallocarray(void *p, size_t nmemb, size_t size);
-
-
-inline void *
-xmalloc(size_t size)
-{
-	return xmallocarray(1, size);
-}
-
-
-inline void *
-xmallocarray(size_t nmemb, size_t size)
-{
-	return xreallocarray(NULL, nmemb, size);
-}
 
 
 inline void *
