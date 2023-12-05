@@ -17,7 +17,7 @@
 
 #include "alloc.h"
 #include "getdef.h"
-#include "string/sprintf.h"
+#include "x.h"
 
 #ident "$Id$"
 
@@ -38,7 +38,7 @@ void mailcheck (void)
 	if (NULL != mailbox) {
 		char  *newmail;
 
-		xasprintf(&newmail, "%s/new", mailbox);
+		x(asprintf(&newmail, "%s/new", mailbox));
 
 		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {

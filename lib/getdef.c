@@ -25,7 +25,7 @@
 #include "alloc.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
-#include "string/sprintf.h"
+#include "x.h"
 
 
 /*
@@ -448,10 +448,10 @@ void setdef_config_file (const char* file)
 #ifdef USE_ECONF
 	char  *cp;
 
-	xasprintf(&cp, "%s/%s", file, sysconfdir);
+	x(asprintf(&cp, "%s/%s", file, sysconfdir));
 	sysconfdir = cp;
 #ifdef VENDORDIR
-	xasprintf(&cp, "%s/%s", file, vendordir);
+	x(asprintf(&cp, "%s/%s", file, vendordir));
 	vendordir = cp;
 #endif
 #else

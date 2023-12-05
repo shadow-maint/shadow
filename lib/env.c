@@ -20,7 +20,6 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
 #include "x.h"
 
 
@@ -74,11 +73,10 @@ void addenv (const char *string, /*@null@*/const char *value)
 	char    *cp, *newstring;
 	size_t  i, n;
 
-	if (NULL != value) {
-		xasprintf(&newstring, "%s=%s", string, value);
-	} else {
+	if (NULL != value)
+		x(asprintf(&newstring, "%s=%s", string, value));
+	else
 		newstring = x(strdup(string));
-	}
 
 	/*
 	 * Search for a '=' character within the string and if none is found

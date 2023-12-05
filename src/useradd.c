@@ -63,7 +63,6 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
-#include "string/sprintf.h"
 #include "x.h"
 
 
@@ -444,7 +443,7 @@ static void get_defaults (void)
 			if (prefix[0]) {
 				char  *dt; /* avoid const warning */
 
-				xasprintf(&dt, "%s/%s", prefix, cp);
+				x(asprintf(&dt, "%s/%s", prefix, cp));
 				def_template = dt;
 			} else {
 				def_template = x(strdup(cp));
@@ -462,7 +461,7 @@ static void get_defaults (void)
 			if (prefix[0]) {
 				char  *dut; /* avoid const warning */
 
-				xasprintf(&dut, "%s/%s", prefix, cp);
+				x(asprintf(&dut, "%s/%s", prefix, cp));
 				def_usrtemplate = dut;
 			} else {
 				def_usrtemplate = x(strdup(cp));
@@ -1582,13 +1581,13 @@ static void process_flags (int argc, char **argv)
 		if (!dflg) {
 			char  *uh;
 
-			xasprintf(&uh, "%s/%s", def_home, user_name);
+			x(asprintf(&uh, "%s/%s", def_home, user_name));
 			user_home = uh;
 		}
 		if (prefix[0]) {
 			char  *puh; /* to avoid const warning */
 
-			xasprintf(&puh, "%s/%s", prefix, user_home);
+			x(asprintf(&puh, "%s/%s", prefix, user_home));
 			prefix_user_home = puh;
 		} else {
 			prefix_user_home = user_home;

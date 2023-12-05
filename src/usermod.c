@@ -58,7 +58,6 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
-#include "string/sprintf.h"
 #include "x.h"
 
 
@@ -1268,10 +1267,10 @@ static void process_flags (int argc, char **argv)
 		user_newgid = user_gid;
 	}
 	if (prefix[0]) {
-		xasprintf(&prefix_user_home, "%s/%s", prefix, user_home);
+		x(asprintf(&prefix_user_home, "%s/%s", prefix, user_home));
 		if (user_newhome) {
-			xasprintf(&prefix_user_newhome, "%s/%s",
-			          prefix, user_newhome);
+			x(asprintf(&prefix_user_newhome, "%s/%s",
+			           prefix, user_newhome));
 		}
 	} else {
 		prefix_user_home = user_home;
@@ -2058,11 +2057,10 @@ static void move_mailbox (void)
 	 * replacing /var/spool/mail/luser with a hard link to /etc/passwd
 	 * between stat and chown).  --marekm
 	 */
-	if (prefix[0]) {
-		xasprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name);
-	} else {
-		xasprintf(&mailfile, "%s/%s", maildir, user_name);
-	}
+	if (prefix[0])
+		x(asprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name));
+	else
+		x(asprintf(&mailfile, "%s/%s", maildir, user_name));
 
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
 	if (fd < 0) {
@@ -2106,10 +2104,10 @@ static void move_mailbox (void)
 		char  *newmailfile;
 
 		if (prefix[0]) {
-			xasprintf(&newmailfile, "%s/%s/%s",
-			          prefix, maildir, user_newname);
+			x(asprintf(&newmailfile, "%s/%s/%s",
+			           prefix, maildir, user_newname));
 		} else {
-			xasprintf(&newmailfile, "%s/%s", maildir, user_newname);
+			x(asprintf(&newmailfile, "%s/%s", maildir, user_newname));
 		}
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {

@@ -27,7 +27,6 @@
 #include "defines.h"
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
 #include "x.h"
 
 
@@ -37,7 +36,7 @@ addenv_path(const char *varname, const char *dirname, const char *filename)
 {
 	char  *buf;
 
-	xasprintf(&buf, "%s/%s", dirname, filename);
+	x(asprintf(&buf, "%s/%s", dirname, filename));
 	addenv(varname, buf);
 	free(buf);
 }
