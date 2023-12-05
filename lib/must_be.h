@@ -4,13 +4,15 @@
  */
 
 
-#ifndef SHADOW_INCLUDE_LIBMISC_MUST_BE_H_
-#define SHADOW_INCLUDE_LIBMISC_MUST_BE_H_
+#ifndef SHADOW_INCLUDE_LIB_MUST_BE_H_
+#define SHADOW_INCLUDE_LIB_MUST_BE_H_
 
 
 #include <config.h>
 
 #include <assert.h>
+
+#include "typetraits.h"
 
 
 /*
@@ -90,8 +92,6 @@
  */
 
 
-#define is_same_type(a, b)  __builtin_types_compatible_p(typeof(a), typeof(b))
-#define is_array(a)         (!is_same_type((a), &(a)[0]))
 #define must_be_array(a)    must_be(is_array(a))
 
 
