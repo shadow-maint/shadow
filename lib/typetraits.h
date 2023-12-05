@@ -31,8 +31,30 @@
 )
 
 
-#define is_pointer(p)  is_same_type(p, decay_array(p))
-#define is_array(a)    (is_pointer_or_array(a) && !is_pointer(a))
+#if (__GNUC__ >= 14)
+# define is_pointer(p)                                                        \
+(                                                                             \
+	__builtin_classify_type(typeof(p)) == 5                               \
+)
+#else
+# define is_pointer(p)                                                        \
+(                                                                             \
+	is_same_type(p, decay_array(p))                                       \
+)
+#endif
+
+
+#if (__GNUC__ >= 14)
+# define is_array(a)                                                          \
+(                                                                             \
+	__builtin_classify_type(typeof(a)) == 14                              \
+)
+#else
+# define is_array(a)                                                          \
+(                                                                             \
+	is_pointer_or_array(a) && !is_pointer(a)                              \
+)
+#endif
 
 
 #endif  // include guard
