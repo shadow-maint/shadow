@@ -19,13 +19,10 @@
 
 #include "attr.h"
 #include "defines.h"
-#include "x.h"
 
 
 #define CALLOC(n, type)   ((type *) calloc(n, sizeof(type)))
-#define XCALLOC(n, type)  ((type *) x(calloc(n, sizeof(type))))
 #define MALLOC(n, type)   ((type *) mallocarray(n, sizeof(type)))
-#define XMALLOC(n, type)  ((type *) x(mallocarray(n, sizeof(type))))
 
 #define REALLOC(ptr, n, type)                                                 \
 ({                                                                            \
@@ -43,15 +40,6 @@
 	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
                                                                               \
 	(type *) reallocarrayf(p_, n, sizeof(type));                          \
-})
-
-#define XREALLOC(ptr, n, type)                                                \
-({                                                                            \
-	__auto_type  p_ = (ptr);                                              \
-                                                                              \
-	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
-                                                                              \
-	(type *) x(reallocarray(p_, n, sizeof(type)));                        \
 })
 
 

@@ -579,7 +579,7 @@ int main (int argc, char **argv)
 	if (rflg) {
 		size_t max_size = sysconf(_SC_LOGIN_NAME_MAX);
 		assert (NULL == username);
-		username = XMALLOC(max_size + 1, char);
+		username = x(MALLOC(max_size + 1, char));
 		username[max_size] = '\0';
 		if (do_rlogin (hostname, username, max_size, term, sizeof term)) {
 			preauth_flag = true;
@@ -895,7 +895,7 @@ int main (int argc, char **argv)
 				exit (1);
 			}
 			preauth_flag = false;
-			username = XMALLOC(max_size + 1, char);
+			username = x(MALLOC(max_size + 1, char));
 			username[max_size] = '\0';
 			login_prompt (username, max_size);
 

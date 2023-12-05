@@ -2405,7 +2405,7 @@ static void create_mail (void)
 		return;
 	}
 	size = strlen(prefix) + strlen(spool) + strlen(user_name) + 3;
-	file = XMALLOC(size, char);
+	file = x(MALLOC(size, char));
 	if (prefix[0])
 		sprintf(file, "%s/%s/%s", prefix, spool, user_name);
 	else
@@ -2517,7 +2517,7 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = XMALLOC(1 + sys_ngroups, char *);
+	user_groups = x(MALLOC(1 + sys_ngroups, char *));
 	/*
 	 * Initialize the list to be empty
 	 */

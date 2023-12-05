@@ -503,7 +503,7 @@ static char *update_crypt_pw (char *cp)
 	}
 
 	if (lflg && *cp != '!') {
-		char *newpw = XMALLOC(strlen(cp) + 2, char);
+		char  *newpw = x(MALLOC(strlen(cp) + 2, char));
 
 		strcpy (newpw, "!");
 		strcat (newpw, cp);

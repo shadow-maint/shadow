@@ -101,7 +101,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 	newmono = str_lower(x(strdup(new)));
 	oldmono = str_lower(x(strdup(old)));
-	wrapped = XMALLOC(strlen(oldmono) * 2 + 1, char);
+	wrapped = x(MALLOC(strlen(oldmono) * 2 + 1, char));
 	strcpy (wrapped, oldmono);
 	strcat (wrapped, oldmono);
 

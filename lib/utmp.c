@@ -27,6 +27,7 @@
 #include "string/strncpy.h"
 #include "string/strtcpy.h"
 #include "string/zustr2stp.h"
+#include "x.h"
 
 #ident "$Id$"
 
@@ -150,7 +151,7 @@ static
 	}
 
 	if (NULL != ut) {
-		ret = XMALLOC(1, struct utmp);
+		ret = x(MALLOC(1, struct utmp));
 		memcpy (ret, ut, sizeof (*ret));
 	}
 
@@ -169,7 +170,7 @@ int get_session_host (char **out)
 
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
-		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
+		hostname = x(MALLOC(sizeof(ut->ut_host) + 1, char));
 		ZUSTR2STP(hostname, ut->ut_host);
 		*out = hostname;
 		free (ut);
@@ -237,16 +238,14 @@ static
 	assert (NULL != name);
 	assert (NULL != line);
 
-
-
 	if (   (NULL != host)
 	    && ('\0' != host[0])) {
-		hostname = XMALLOC(strlen(host) + 1, char);
+		hostname = x(MALLOC(strlen(host) + 1, char));
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = XMALLOC(NITEMS(ut->ut_host) + 1, char);
+		hostname = x(MALLOC(NITEMS(ut->ut_host) + 1, char));
 		ZUSTR2STP(hostname, ut->ut_host);
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 	}
@@ -255,9 +254,7 @@ static
 		line += 5;
 	}
 
-
-	utent = XCALLOC (1, struct utmp);
-
+	utent = x(CALLOC(1, struct utmp));
 
 #ifdef HAVE_STRUCT_UTMP_UT_TYPE
 	utent->ut_type = USER_PROCESS;

@@ -428,7 +428,7 @@ usage (int status)
 static char *new_pw_passwd (char *pw_pass)
 {
 	if (Lflg && ('!' != pw_pass[0])) {
-		char *buf = XMALLOC(strlen(pw_pass) + 2, char);
+		char  *buf = x(MALLOC(strlen(pw_pass) + 2, char));
 
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,

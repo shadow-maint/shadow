@@ -23,6 +23,8 @@
 #endif
 #include "shadowlog.h"
 #include "sizeof.h"
+#include "x.h"
+
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 {
@@ -193,7 +195,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 #endif
 
 	bufsize = ranges * ((ULONG_DIGITS + 1) * 3);
-	pos = buf = XMALLOC(bufsize, char);
+	pos = buf = x(MALLOC(bufsize, char));
 	end = buf + bufsize;
 
 	/* Build the mapping command */

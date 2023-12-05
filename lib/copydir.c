@@ -37,6 +37,7 @@
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -226,7 +227,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 		return NULL;
 	}
 
-	lp = XMALLOC(1, struct link_name);
+	lp = x(MALLOC(1, struct link_name));
 	lp->ln_dev = sb->st_dev;
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
