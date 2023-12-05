@@ -287,6 +287,8 @@ libshadow_la_SOURCES = \
 	user_busy.c \
 	valid.c \
 	write_full.c \
+	x.c \
+	x.h \
 	xgetpwnam.c \
 	xprefix_getpwnam.c \
 	xgetpwuid.c \
