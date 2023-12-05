@@ -27,6 +27,8 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "x.h"
+
 
 /* Exit Status Values */
 /*@-exitarg@*/
@@ -84,7 +86,7 @@ static char *whoami (void)
 	if (   (NULL != usr)
 	    && (NULL != grp)
 	    && (0 == strcmp (usr->pw_name, grp->gr_name))) {
-		return xstrdup (usr->pw_name);
+		return x(strdup(usr->pw_name));
 	} else {
 		return NULL;
 	}
@@ -125,12 +127,12 @@ static void add_user (const char *user,
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_name = x(strdup(newgrp->gr_name));
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
 			sgrent.sg_adm = XMALLOC(1, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sgrent.sg_mem[0]) {
-				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
+				sgrent.sg_adm[0] = x(strdup(sgrent.sg_mem[0]));
 				sgrent.sg_adm[1] = NULL;
 			} else
 #endif
@@ -208,12 +210,12 @@ static void remove_user (const char *user,
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_name = x(strdup(newgrp->gr_name));
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
 			sgrent.sg_adm = XMALLOC(1, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sgrent.sg_mem[0]) {
-				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
+				sgrent.sg_adm[0] = x(strdup(sgrent.sg_mem[0]));
 				sgrent.sg_adm[1] = NULL;
 			} else
 #endif
@@ -282,7 +284,7 @@ static void purge_members (const struct group *grp)
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_name = x(strdup(newgrp->gr_name));
 			sgrent.sg_mem = XMALLOC(1, char *);
 			sgrent.sg_mem[0] = NULL;
 			sgrent.sg_adm = XMALLOC(1, char *);
@@ -290,7 +292,7 @@ static void purge_members (const struct group *grp)
 
 			/* Move any password to gshadow */
 			sgrent.sg_passwd = newgrp->gr_passwd;
-			newgrp->gr_passwd = xstrdup(SHADOW_PASSWD_STRING);
+			newgrp->gr_passwd = x(strdup(SHADOW_PASSWD_STRING));
 
 			newsg = &sgrent;
 		} else {
@@ -385,15 +387,15 @@ static void process_flags (int argc, char **argv)
 	                         long_options, NULL)) != EOF) {
 		switch (c) {
 		case 'a':
-			adduser = xstrdup (optarg);
+			adduser = x(strdup(optarg));
 			++exclusive;
 			break;
 		case 'd':
-			deluser = xstrdup (optarg);
+			deluser = x(strdup(optarg));
 			++exclusive;
 			break;
 		case 'g':
-			thisgroup = xstrdup (optarg);
+			thisgroup = x(strdup(optarg));
 			break;
 		case 'h':
 			usage (EXIT_SUCCESS);

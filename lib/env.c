@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 /*
@@ -76,7 +77,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	if (NULL != value) {
 		xasprintf(&newstring, "%s=%s", string, value);
 	} else {
-		newstring = xstrdup (string);
+		newstring = x(strdup(string));
 	}
 
 	/*

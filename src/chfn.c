@@ -33,6 +33,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
 
 /*
  * Global variables.
@@ -666,7 +667,7 @@ int main (int argc, char **argv)
 			         (unsigned long) getuid ()));
 			fail_exit (E_NOPERM);
 		}
-		user = xstrdup (pw->pw_name);
+		user = x(strdup(pw->pw_name));
 	}
 
 #ifdef	USE_NIS

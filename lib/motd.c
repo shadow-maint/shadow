@@ -17,6 +17,9 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "x.h"
+
+
 /*
  * motd -- output the /etc/motd file
  *
@@ -37,7 +40,7 @@ void motd (void)
 		return;
 	}
 
-	motdlist = xstrdup (motdfile);
+	motdlist = x(strdup(motdfile));
 
 	for (mb = motdlist; ;mb = NULL) {
 		motdfile = strtok (mb, ":");

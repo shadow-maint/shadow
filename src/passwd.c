@@ -33,6 +33,8 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
+
 
 /*
  * exit status values
@@ -480,7 +482,7 @@ static char *update_crypt_pw (char *cp)
 	if (!use_pam)
 	{
 		if (do_update_pwd) {
-			cp = xstrdup (crypt_passwd);
+			cp = x(strdup(crypt_passwd));
 		}
 	}
 
@@ -871,7 +873,7 @@ int main (int argc, char **argv)
 		         (unsigned long) getuid ()));
 		exit (E_NOPERM);
 	}
-	myname = xstrdup (pw->pw_name);
+	myname = x(strdup(pw->pw_name));
 	if (optind < argc) {
 		name = argv[optind];
 	} else {

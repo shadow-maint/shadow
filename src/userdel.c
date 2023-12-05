@@ -53,6 +53,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 /*
@@ -1120,7 +1121,7 @@ int main (int argc, char **argv)
 		if (prefix[0]) {
 			xasprintf(&user_home, "%s/%s", prefix, pwd->pw_dir);
 		} else {
-			user_home = xstrdup(pwd->pw_dir);
+			user_home = x(strdup(pwd->pw_dir));
 		}
 		pw_close();
 	}

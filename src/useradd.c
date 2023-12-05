@@ -64,6 +64,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 #ifndef SKEL_DIR
@@ -380,7 +381,7 @@ static void get_defaults (void)
 				         Prog, DGROUP, default_file);
 			} else {
 				def_group = grp->gr_gid;
-				def_gname = xstrdup (grp->gr_name);
+				def_gname = x(strdup(grp->gr_name));
 			}
 		}
 
@@ -392,21 +393,21 @@ static void get_defaults (void)
 			}
 			if (user_groups[0] != NULL) {
 				do_grp_update = true;
-				def_groups = xstrdup (cp);
+				def_groups = x(strdup(cp));
 			}
 		}
 		/*
 		 * Default HOME filesystem
 		 */
 		else if (MATCH (buf, DHOME)) {
-			def_home = xstrdup (cp);
+			def_home = x(strdup(cp));
 		}
 
 		/*
 		 * Default Login Shell command
 		 */
 		else if (MATCH (buf, DSHELL)) {
-			def_shell = xstrdup (cp);
+			def_shell = x(strdup(cp));
 		}
 
 		/*
@@ -429,7 +430,7 @@ static void get_defaults (void)
 		 * Default account expiration date
 		 */
 		else if (MATCH (buf, DEXPIRE)) {
-			def_expire = xstrdup (cp);
+			def_expire = x(strdup(cp));
 		}
 
 		/*
@@ -446,7 +447,7 @@ static void get_defaults (void)
 				xasprintf(&dt, "%s/%s", prefix, cp);
 				def_template = dt;
 			} else {
-				def_template = xstrdup(cp);
+				def_template = x(strdup(cp));
 			}
 		}
 
@@ -464,7 +465,7 @@ static void get_defaults (void)
 				xasprintf(&dut, "%s/%s", prefix, cp);
 				def_usrtemplate = dut;
 			} else {
-				def_usrtemplate = xstrdup(cp);
+				def_usrtemplate = x(strdup(cp));
 			}
 		}
 		/*
@@ -475,7 +476,7 @@ static void get_defaults (void)
 				cp = "no";	/* XXX warning: const */
 			}
 
-			def_create_mail_spool = xstrdup (cp);
+			def_create_mail_spool = x(strdup(cp));
 		}
 
 		/*
@@ -485,7 +486,7 @@ static void get_defaults (void)
 			if (*cp == '\0') {
 				cp = def_log_init;	/* XXX warning: const */
 			}
-			def_log_init = xstrdup (cp);
+			def_log_init = x(strdup(cp));
 		}
 	}
 	(void) fclose (fp);
@@ -845,7 +846,7 @@ static int get_groups (char *list)
 		/*
 		 * Add the group name to the user's list of groups.
 		 */
-		user_groups[ngroups++] = xstrdup (grp->gr_name);
+		user_groups[ngroups++] = x(strdup(grp->gr_name));
 		gr_free (grp);
 	} while (NULL != list);
 

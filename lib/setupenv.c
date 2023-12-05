@@ -16,6 +16,7 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <pwd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -24,10 +25,10 @@
 #include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 #ifndef USE_PAM
@@ -204,7 +205,7 @@ void setup_env (struct passwd *info)
 		}
 		(void) puts (_("No directory, logging in with HOME=/"));
 		free (info->pw_dir);
-		info->pw_dir = xstrdup ("/");
+		info->pw_dir = x(strdup("/"));
 	}
 
 	/*
@@ -219,7 +220,7 @@ void setup_env (struct passwd *info)
 
 	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
 		free (info->pw_shell);
-		info->pw_shell = xstrdup (SHELL);
+		info->pw_shell = x(strdup(SHELL));
 	}
 
 	addenv ("SHELL", info->pw_shell);

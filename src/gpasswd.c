@@ -36,6 +36,8 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
+
 
 /*
  * Global variables
@@ -173,7 +175,7 @@ static bool is_valid_user_list (const char *users)
 	const char *username;
 	char *end;
 	bool is_valid = true;
-	/*@owned@*/char *tmpusers = xstrdup (users);
+	/*@owned@*/char  *tmpusers = x(strdup(users));
 
 	for (username = tmpusers;
 	     (NULL != username) && ('\0' != *username);
@@ -796,8 +798,8 @@ static void get_group (struct group *gr)
 	}
 
 	*gr = *tmpgr;
-	gr->gr_name = xstrdup (tmpgr->gr_name);
-	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
+	gr->gr_name = x(strdup(tmpgr->gr_name));
+	gr->gr_passwd = x(strdup(tmpgr->gr_passwd));
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
 	if (gr_close () == 0) {
@@ -822,13 +824,13 @@ static void get_group (struct group *gr)
 		tmpsg = sgr_locate (group);
 		if (NULL != tmpsg) {
 			*sg = *tmpsg;
-			sg->sg_name = xstrdup (tmpsg->sg_name);
-			sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
+			sg->sg_name = x(strdup(tmpsg->sg_name));
+			sg->sg_passwd = x(strdup(tmpsg->sg_passwd));
 
 			sg->sg_mem = dup_list (tmpsg->sg_mem);
 			sg->sg_adm = dup_list (tmpsg->sg_adm);
 		} else {
-			sg->sg_name = xstrdup (group);
+			sg->sg_name = x(strdup(group));
 			sg->sg_passwd = gr->gr_passwd;
 			gr->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 
@@ -837,7 +839,7 @@ static void get_group (struct group *gr)
 			sg->sg_adm = XMALLOC(2, char *);
 #ifdef FIRST_MEMBER_IS_ADMIN
 			if (sg->sg_mem[0]) {
-				sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
+				sg->sg_adm[0] = x(strdup(sg->sg_mem[0]));
 				sg->sg_adm[1] = NULL;
 			} else
 #endif
@@ -995,7 +997,7 @@ int main (int argc, char **argv)
 		         (unsigned long) getuid ()));
 		exit (E_NOPERM);
 	}
-	myname = xstrdup (pw->pw_name);
+	myname = x(strdup(pw->pw_name));
 
 	/*
 	 * Register an exit function to warn for any inconsistency that we

@@ -15,6 +15,9 @@
 #include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
+#include "x.h"
+
+
 /*
  * add_list - add a member to a list of group members
  *
@@ -58,7 +61,7 @@
 		tmp[i] = list[i];
 	}
 
-	tmp[i] = xstrdup (member);
+	tmp[i] = x(strdup(member));
 	tmp[i+1] = NULL;
 
 	return tmp;
@@ -139,7 +142,7 @@
 
 	i = 0;
 	while (NULL != *list) {
-		tmp[i] = xstrdup (*list);
+		tmp[i] = x(strdup(*list));
 		i++;
 		list++;
 	}
@@ -187,7 +190,7 @@ bool is_on_list (char *const *list, const char *member)
 	 * Make a copy since we are going to be modifying the list
 	 */
 
-	members = xstrdup (comma);
+	members = x(strdup(comma));
 
 	/*
 	 * Count the number of commas in the list

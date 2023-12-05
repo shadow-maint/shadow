@@ -11,13 +11,15 @@
 
 #ident "$Id$"
 
+#include <pwd.h>
 #include <sys/types.h>
 #include <stdio.h>
 
 #include "alloc.h"
-#include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
+#include "prototypes.h"
+#include "x.h"
+
 
 void pw_entry (const char *name, struct passwd *pwent)
 {
@@ -29,19 +31,19 @@ void pw_entry (const char *name, struct passwd *pwent)
 		pwent->pw_name = NULL;
 		return;
 	} else {
-		pwent->pw_name = xstrdup (passwd->pw_name);
+		pwent->pw_name = x(strdup(passwd->pw_name));
 		pwent->pw_uid = passwd->pw_uid;
 		pwent->pw_gid = passwd->pw_gid;
-		pwent->pw_gecos = xstrdup (passwd->pw_gecos);
-		pwent->pw_dir = xstrdup (passwd->pw_dir);
-		pwent->pw_shell = xstrdup (passwd->pw_shell);
+		pwent->pw_gecos = x(strdup(passwd->pw_gecos));
+		pwent->pw_dir = x(strdup(passwd->pw_dir));
+		pwent->pw_shell = x(strdup(passwd->pw_shell));
 #if !defined(AUTOSHADOW)
 		/* local, no need for xgetspnam */
 		if ((spwd = getspnam (name))) {
-			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);
+			pwent->pw_passwd = x(strdup(spwd->sp_pwdp));
 			return;
 		}
 #endif
-		pwent->pw_passwd = xstrdup (passwd->pw_passwd);
+		pwent->pw_passwd = x(strdup(passwd->pw_passwd));
 	}
 }

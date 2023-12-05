@@ -38,6 +38,8 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
+
 
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -333,7 +335,7 @@ static void process_flags (int argc, char *const *argv)
 	 */
 	if (optind < argc) {
 		assert (NULL == username);
-		username = xstrdup (argv[optind]);
+		username = x(strdup(argv[optind]));
 		strzero (argv[optind]);
 		++optind;
 	}
@@ -426,7 +428,7 @@ static void get_pam_user (char **ptr_pam_user)
 
 	free (*ptr_pam_user);
 	if (NULL != ptr_user) {
-		*ptr_pam_user = xstrdup (ptr_user);
+		*ptr_pam_user = x(strdup(ptr_user));
 	} else {
 		*ptr_pam_user = NULL;
 	}
@@ -839,7 +841,7 @@ int main (int argc, char **argv)
 	 */
 	get_pam_user (&pam_user);
 	free (username);
-	username = xstrdup (pam_user);
+	username = x(strdup(pam_user));
 	failent_user = get_failent_user (username);
 
 	pwd = xgetpwnam (username);

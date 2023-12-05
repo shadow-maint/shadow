@@ -39,6 +39,8 @@
 #endif
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "x.h"
+
 
 /*
  * Global variables
@@ -646,8 +648,8 @@ static void update_age (/*@null@*/const struct spwd *sp,
 		struct passwd pwent = *pw;
 
 		memzero (&spwent, sizeof spwent);
-		spwent.sp_namp = xstrdup (pwent.pw_name);
-		spwent.sp_pwdp = xstrdup (pwent.pw_passwd);
+		spwent.sp_namp = x(strdup(pwent.pw_name));
+		spwent.sp_pwdp = x(strdup(pwent.pw_passwd));
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
@@ -657,8 +659,8 @@ static void update_age (/*@null@*/const struct spwd *sp,
 			fail_exit (E_NOPERM);
 		}
 	} else {
-		spwent.sp_namp = xstrdup (sp->sp_namp);
-		spwent.sp_pwdp = xstrdup (sp->sp_pwdp);
+		spwent.sp_namp = x(strdup(sp->sp_namp));
+		spwent.sp_pwdp = x(strdup(sp->sp_pwdp));
 		spwent.sp_flag = sp->sp_flag;
 	}
 

@@ -59,6 +59,8 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
+
 
 /*
  * Global variables
@@ -246,7 +248,7 @@ static void execve_shell (const char *shellname,
 		targs = XMALLOC(n_args + 3, char *);
 		targs[0] = "sh";
 		targs[1] = "-";
-		targs[2] = xstrdup (shellname);
+		targs[2] = x(strdup(shellname));
 		targs[n_args+2] = NULL;
 		while (1 != n_args) {
 			targs[n_args+1] = args[n_args - 1];
@@ -795,7 +797,7 @@ static void save_caller_context (char **argv)
 		}
 	}
 	free (caller_pass);
-	caller_pass = xstrdup (password);
+	caller_pass = x(strdup(password));
 #endif				/* SU_ACCESS */
 #endif				/* !USE_PAM */
 	pw_free (pw);
@@ -960,7 +962,7 @@ static void set_environment (struct passwd *pw)
 		if (fakelogin) {
 			if (shellstr != pw->pw_shell) {
 				free (pw->pw_shell);
-				pw->pw_shell = xstrdup (shellstr);
+				pw->pw_shell = x(strdup(shellstr));
 			}
 			setup_env (pw);
 		} else {

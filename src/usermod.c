@@ -59,6 +59,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "x.h"
 
 
 /*
@@ -287,7 +288,7 @@ static int get_groups (char *list)
 		/*
 		 * Add the group name to the user's list of groups.
 		 */
-		user_groups[ngroups++] = xstrdup (grp->gr_name);
+		user_groups[ngroups++] = x(strdup(grp->gr_name));
 		gr_free (grp);
 	} while (NULL != list);
 
@@ -458,7 +459,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "changing password", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "change user '%s' password", user_newname));
-		pw_pass = xstrdup (user_pass);
+		pw_pass = x(strdup(user_pass));
 	}
 	return pw_pass;
 }
@@ -489,7 +490,7 @@ static void new_pwent (struct passwd *pwent)
 		SYSLOG ((LOG_INFO,
 		         "change user name '%s' to '%s'",
 		         pwent->pw_name, user_newname));
-		pwent->pw_name = xstrdup (user_newname);
+		pwent->pw_name = x(strdup(user_newname));
 	}
 	/* Update the password in passwd if there is no shadow file or if
 	 * the password is currently in passwd (pw_passwd != "x").
@@ -575,7 +576,7 @@ static void new_spent (struct spwd *spent)
 			         Prog, user_newname, spw_dbname ());
 			fail_exit (E_NAME_IN_USE);
 		}
-		spent->sp_namp = xstrdup (user_newname);
+		spent->sp_namp = x(strdup(user_newname));
 	}
 
 	if (fflg) {
@@ -1250,9 +1251,9 @@ static void process_flags (int argc, char **argv)
 
 		user_id = pwd->pw_uid;
 		user_gid = pwd->pw_gid;
-		user_comment = xstrdup (pwd->pw_gecos);
-		user_home = xstrdup (pwd->pw_dir);
-		user_shell = xstrdup (pwd->pw_shell);
+		user_comment = x(strdup(pwd->pw_gecos));
+		user_home = x(strdup(pwd->pw_dir));
+		user_shell = x(strdup(pwd->pw_shell));
 	}
 
 	/* user_newname, user_newid, user_newgid can be used even when the
@@ -1739,8 +1740,8 @@ static void usr_update (void)
 			/* The user explicitly asked for a shadow feature.
 			 * Enable shadowed passwords for this new account.
 			 */
-			spent.sp_pwdp   = xstrdup (pwent.pw_passwd);
-			pwent.pw_passwd = xstrdup (SHADOW_PASSWD_STRING);
+			spent.sp_pwdp   = x(strdup(pwent.pw_passwd));
+			pwent.pw_passwd = x(strdup(SHADOW_PASSWD_STRING));
 
 			spent.sp_lstchg = gettime () / SCALE;
 			if (0 == spent.sp_lstchg) {

@@ -32,6 +32,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "x.h"
 
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
@@ -42,6 +43,7 @@
 #define SHELLS "shells"
 #define ETCDIR "/etc"
 #endif
+
 
 /*
  * Global variables
@@ -519,7 +521,7 @@ int main (int argc, char **argv)
 			         (unsigned long) getuid ()));
 			fail_exit (1);
 		}
-		user = xstrdup (pw->pw_name);
+		user = x(strdup(pw->pw_name));
 	}
 
 #ifdef	USE_NIS

@@ -50,6 +50,8 @@
 #endif				/* ENABLE_SUBIDS */
 #include "chkname.h"
 #include "shadowlog.h"
+#include "x.h"
+
 
 /*
  * Global variables
@@ -276,9 +278,9 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	 * Now I have all of the fields required to create the new group.
 	 */
 	if (('\0' != gid[0]) && (!isdigit (gid[0]))) {
-		grent.gr_name = xstrdup (gid);
+		grent.gr_name = x(strdup(gid));
 	} else {
-		grent.gr_name = xstrdup (name);
+		grent.gr_name = x(strdup(name));
 /* FIXME: check if the group exists */
 	}
 
@@ -392,7 +394,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	 * JUST YET, since there is still more data to be added. So, I fill
 	 * in the parts that I have.
 	 */
-	pwent.pw_name = xstrdup (name);
+	pwent.pw_name = x(strdup(name));
 	pwent.pw_uid = uid;
 	pwent.pw_passwd = "x";	/* XXX warning: const */
 	pwent.pw_gid = gid;

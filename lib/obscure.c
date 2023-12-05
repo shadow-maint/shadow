@@ -21,10 +21,12 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "x.h"
 
 #if WITH_LIBBSD == 0
 #include "freezero.h"
 #endif /* WITH_LIBBSD */
+
 
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
@@ -97,8 +99,8 @@ static /*@observer@*//*@null@*/const char *password_check (
 		return _("no change");
 	}
 
-	newmono = str_lower (xstrdup (new));
-	oldmono = str_lower (xstrdup (old));
+	newmono = str_lower(x(strdup(new)));
+	oldmono = str_lower(x(strdup(old)));
 	wrapped = XMALLOC(strlen(oldmono) * 2 + 1, char);
 	strcpy (wrapped, oldmono);
 	strcat (wrapped, oldmono);
@@ -187,8 +189,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		return NULL;
 	}
 
-	new1 = xstrdup (new);
-	old1 = xstrdup (old);
+	new1 = x(strdup(new));
+	old1 = x(strdup(old));
 	if (newlen > maxlen) {
 		new1[maxlen] = '\0';
 	}

@@ -25,6 +25,8 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "x.h"
+
 
 /*
  * Global variables
@@ -141,7 +143,7 @@ static void check_perms (const struct group *grp,
 	 */
 	spwd = xgetspnam (pwd->pw_name);
 	if (NULL != spwd) {
-		pwd->pw_passwd = xstrdup (spwd->sp_pwdp);
+		pwd->pw_passwd = x(strdup(spwd->sp_pwdp));
 		spw_free (spwd);
 	}
 
@@ -242,11 +244,11 @@ static void syslog_sg (const char *name, const char *group)
 	char *free_login = NULL, *free_tty = NULL;
 
 	if (loginname != NULL) {
-		free_login = xstrdup (loginname);
+		free_login = x(strdup(loginname));
 		loginname = free_login;
 	}
 	if (tty != NULL) {
-		free_tty = xstrdup (tty);
+		free_tty = x(strdup(tty));
 		tty = free_tty;
 	}
 

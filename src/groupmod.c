@@ -40,6 +40,9 @@
 #include "shadowlog.h"
 #include "string/stpecpy.h"
 #include "string/stpeprintf.h"
+#include "x.h"
+
+
 /*
  * exit status values
  */
@@ -140,7 +143,7 @@ static void usage (int status)
 static void new_grent (struct group *grent)
 {
 	if (nflg) {
-		grent->gr_name = xstrdup (group_newname);
+		grent->gr_name = x(strdup(group_newname));
 	}
 
 	if (gflg) {
@@ -172,7 +175,7 @@ static void new_grent (struct group *grent)
 static void new_sgent (struct sgrp *sgent)
 {
 	if (nflg) {
-		sgent->sg_name = xstrdup (group_newname);
+		sgent->sg_name = x(strdup(group_newname));
 	}
 
 	/* Always update the shadowed password if there is a shadow entry
@@ -231,8 +234,8 @@ static void grp_update (void)
 			 * gshadow entry when a new password is requested.
 			 */
 			bzero(&sgrp, sizeof sgrp);
-			sgrp.sg_name   = xstrdup (grp.gr_name);
-			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
+			sgrp.sg_name   = x(strdup(grp.gr_name));
+			sgrp.sg_passwd = x(strdup(grp.gr_passwd));
 			sgrp.sg_adm    = &empty;
 			sgrp.sg_mem    = dup_list (grp.gr_mem);
 			new_sgent (&sgrp);
