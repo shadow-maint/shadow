@@ -36,10 +36,10 @@ int main(int argc, char **argv)
 	check_uids = argv[2][0] == 'u';
 	errno = 0;
 	start = strtoul(argv[3], NULL, 10);
-	if (errno != 0)
+	if (errno == ERANGE)
 		exit(1);
 	count = strtoul(argv[4], NULL, 10);
-	if (errno != 0)
+	if (errno == ERANGE)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))

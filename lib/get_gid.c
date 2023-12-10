@@ -20,7 +20,7 @@ int get_gid (const char *gidstr, gid_t *gid)
 	val = strtoll(gidstr, &endptr, 10);
 	if (   ('\0' == *gidstr)
 	    || ('\0' != *endptr)
-	    || (0 != errno)
+	    || (ERANGE == errno)
 	    || (/*@+longintegral@*/val != (gid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}

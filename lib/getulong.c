@@ -28,7 +28,7 @@ int getulong (const char *numstr, /*@out@*/unsigned long *result)
 	val = strtoul(numstr, &endptr, 0);
 	if (    ('\0' == *numstr)
 	     || ('\0' != *endptr)
-	     || (0 != errno)
+	     || (ERANGE == errno)
 	   ) {
 		return 0;
 	}

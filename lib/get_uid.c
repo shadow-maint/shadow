@@ -20,7 +20,7 @@ int get_uid (const char *uidstr, uid_t *uid)
 	val = strtoll(uidstr, &endptr, 10);
 	if (   ('\0' == *uidstr)
 	    || ('\0' != *endptr)
-	    || (0 != errno)
+	    || (ERANGE == errno)
 	    || (/*@+longintegral@*/val != (uid_t)val)/*@=longintegral@*/) {
 		return 0;
 	}

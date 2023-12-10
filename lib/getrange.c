@@ -43,7 +43,7 @@ int getrange (const char *range,
 		}
 		errno = 0;
 		n = strtoul(&range[1], &endptr, 10);
-		if (('\0' != *endptr) || (0 != errno)) {
+		if (('\0' != *endptr) || (ERANGE == errno)) {
 			/* invalid */
 			return 0;
 		}
@@ -54,7 +54,7 @@ int getrange (const char *range,
 	} else {
 		errno = 0;
 		n = strtoul(range, &endptr, 10);
-		if (endptr == range || 0 != errno) {
+		if (endptr == range || ERANGE == errno) {
 			/* invalid */
 			return 0;
 		}
@@ -82,7 +82,7 @@ int getrange (const char *range,
 					errno = 0;
 					n = strtoul(endptr, &endptr, 10);
 					if (   ('\0' != *endptr)
-					    || (0 != errno)) {
+					    || (ERANGE == errno)) {
 						/* invalid */
 						return 0;
 					}

@@ -38,7 +38,7 @@
 
 	errno = 0;
 	epoch = strtoull(source_date_epoch, &endptr, 10);
-	if (errno != 0) {
+	if (errno == ERANGE) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
 			 strerror(errno));

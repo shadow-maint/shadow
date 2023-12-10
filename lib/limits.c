@@ -65,7 +65,7 @@ static int setrlimit_value (unsigned int resource,
 		errno = 0;
 		l = strtol(value, &endptr, 10);
 
-		if (value == endptr || errno != 0)
+		if (value == endptr || errno == ERANGE)
 			return 0;  // FIXME: We could instead throw an error, though.
 
 		if (__builtin_mul_overflow(l, multiplier, &limit)) {
