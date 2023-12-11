@@ -214,9 +214,9 @@ extern void setup_limits (const struct passwd *);
 #endif
 
 /* list.c */
-extern /*@only@*/ /*@out@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
-extern /*@only@*/ /*@out@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
-extern /*@only@*/ /*@out@*/char **dup_list (char *const *);
+extern /*@only@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
+extern /*@only@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
+extern /*@only@*/char **dup_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 
