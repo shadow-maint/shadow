@@ -2,6 +2,7 @@
 
 lib/addgrps.c
 lib/age.c
+lib/atoi/getlong.c
 lib/audit_help.c
 lib/basename.c
 lib/chkname.c
@@ -27,7 +28,6 @@ lib/fputsx.c
 lib/get_gid.c
 lib/get_uid.c
 lib/getdef.c
-lib/getlong.c
 lib/getgr_nam_gid.c
 lib/getrange.c
 lib/groupio.c
