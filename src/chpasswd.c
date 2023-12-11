@@ -61,7 +61,7 @@ static bool pw_locked = false;
 static bool spw_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int code);
+NORETURN static void fail_exit (int code);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);

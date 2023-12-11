@@ -90,8 +90,8 @@ static bool sub_gid_locked = false;
 #endif				/* ENABLE_SUBIDS */
 
 /* local function prototypes */
-static void usage (int status);
-static void fail_exit (int);
+NORETURN static void usage (int status);
+NORETURN static void fail_exit (int);
 static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_user_id (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
