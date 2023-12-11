@@ -21,7 +21,7 @@
  * It supports decimal, hexadecimal or octal representations.
  */
 int
-getulong(const char *numstr, /*@out@*/unsigned long *result)
+getulong(const char *numstr, unsigned long *result)
 {
 	char           *endptr;
 	unsigned long  val;
