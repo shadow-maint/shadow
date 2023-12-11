@@ -153,7 +153,8 @@ extern int get_gid (const char *gidstr, gid_t *gid);
 extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
 
 /* getlong.c */
-extern int getlong (const char *numstr, /*@out@*/long *result);
+ATTR_ACCESS(write_only, 2)
+extern int getlong(const char *numstr, long *result);
 
 /* get_pid.c */
 extern int get_pid (const char *pidstr, pid_t *pid);
@@ -172,7 +173,8 @@ extern time_t gettime (void);
 extern int get_uid (const char *uidstr, uid_t *uid);
 
 /* getulong.c */
-extern int getulong (const char *numstr, /*@out@*/unsigned long *result);
+ATTR_ACCESS(write_only, 2)
+extern int getulong(const char *numstr, unsigned long *result);
 
 /* fputsx.c */
 ATTR_ACCESS(write_only, 1, 2)
