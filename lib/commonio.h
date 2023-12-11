@@ -11,7 +11,10 @@
 #ifndef COMMONIO_H
 #define COMMONIO_H
 
+
+#include "attr.h"
 #include "defines.h" /* bool */
+
 
 /*
  * Linked list entry.
@@ -61,7 +64,8 @@ struct commonio_ops {
 	 * fgets and fputs (can be replaced by versions that
 	 * understand line continuation conventions).
 	 */
-	/*@null@*/char *(*fgets) (/*@returned@*/ /*@out@*/char *s, int n, FILE *stream);
+	ATTR_ACCESS(write_only, 1, 2)
+	/*@null@*/char *(*fgets)(/*@returned@*/char *s, int n, FILE *stream);
 	int (*fputs) (const char *, FILE *);
 
 	/*
