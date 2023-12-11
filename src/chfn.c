@@ -57,7 +57,7 @@ static bool pw_locked = false;
  */
 
 /* local function prototypes */
-static void fail_exit (int code);
+NORETURN static void fail_exit (int code);
 NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
