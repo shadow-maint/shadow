@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "atoi/strtou_noneg.h"
 #include "prototypes.h"
 
 
@@ -27,7 +28,7 @@ getulong(const char *restrict numstr, unsigned long *restrict result)
 	unsigned long  val;
 
 	errno = 0;
-	val = strtoul(numstr, &endptr, 0);
+	val = strtoul_noneg(numstr, &endptr, 0);
 	if (('\0' == *numstr) || ('\0' != *endptr) || (0 != errno))
 		return -1;
 

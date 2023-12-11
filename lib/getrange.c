@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#include "atoi/strtou_noneg.h"
 #include "defines.h"
 #include "prototypes.h"
 
@@ -40,7 +41,7 @@ getrange(const char *range,
 			return -1;
 
 		errno = 0;
-		n = strtoul(&range[1], &endptr, 10);
+		n = strtoul_noneg(&range[1], &endptr, 10);
 		if (('\0' != *endptr) || (0 != errno))
 			return -1;
 
@@ -50,7 +51,7 @@ getrange(const char *range,
 		*max = n;
 	} else {
 		errno = 0;
-		n = strtoul(range, &endptr, 10);
+		n = strtoul_noneg(range, &endptr, 10);
 		if (endptr == range || 0 != errno)
 			return -1;
 
@@ -75,7 +76,7 @@ getrange(const char *range,
 				*has_min = true;
 				*min = n;
 				errno = 0;
-				n = strtoul(endptr, &endptr, 10);
+				n = strtoul_noneg(endptr, &endptr, 10);
 				if ('\0' != *endptr || 0 != errno)
 					return -1;
 
