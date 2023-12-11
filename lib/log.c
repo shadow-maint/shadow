@@ -86,12 +86,24 @@ void dolastlog (
 	STRNCPY(newlog.ll_host, host);
 #endif
 	if (   (lseek (fd, offset, SEEK_SET) != offset)
-	    || (write_full(fd, &newlog, sizeof newlog) == -1)
-	    || (close (fd) != 0)) {
-		SYSLOG ((LOG_WARN,
-		         "Can't write lastlog entry for UID %lu in %s.",
-		         (unsigned long) pw->pw_uid, LASTLOG_FILE));
-		(void) close (fd);
+	    || (write_full(fd, &newlog, sizeof newlog) == -1)) {
+		goto err_write;
 	}
-}
 
+	if (close (fd) != 0 && errno != EINTR) {
+		goto err_close;
+	}
+
+	return;
+
+err_write:
+	{
+		int saved_errno = errno;
+		(void) close (fd);
+		errno = saved_errno;
+	}
+err_close:
+	SYSLOG ((LOG_WARN,
+	         "Can't write lastlog entry for UID %lu in %s: %m",
+	         (unsigned long) pw->pw_uid, LASTLOG_FILE));
+}
