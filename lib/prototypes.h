@@ -175,7 +175,8 @@ extern int get_uid (const char *uidstr, uid_t *uid);
 extern int getulong (const char *numstr, /*@out@*/unsigned long *result);
 
 /* fputsx.c */
-extern /*@null@*/char *fgetsx (/*@returned@*/ /*@out@*/char *, int, FILE *);
+ATTR_ACCESS(write_only, 1, 2)
+extern /*@null@*/char *fgetsx(/*@returned@*/char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
 
 /* groupio.c */
