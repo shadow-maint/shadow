@@ -11,6 +11,8 @@
 #include <errno.h>
 #include <limits.h>
 #include <stdio.h>
+
+#include "atoi/strtou_noneg.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -37,7 +39,7 @@
 		return fallback;
 
 	errno = 0;
-	epoch = strtoull(source_date_epoch, &endptr, 10);
+	epoch = strtoull_noneg(source_date_epoch, &endptr, 10);
 	if (errno != 0) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
