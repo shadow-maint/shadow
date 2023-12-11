@@ -102,7 +102,7 @@ static void failtmp (const char *username, const struct utmp *failent)
 	if (   (write_full(fd, failent, sizeof *failent) == -1)
 	    || (close (fd) != 0)) {
 		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
+		         "Can't append failure of user %s to %s: %m",
 		         username, ftmp));
 		(void) close (fd);
 	}
