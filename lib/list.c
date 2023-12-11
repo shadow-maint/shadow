@@ -22,7 +22,8 @@
  *	name, and if not present it is added to a freshly allocated
  *	list of users.
  */
-/*@only@*/ /*@out@*/char **add_list (/*@returned@*/ /*@only@*/char **list, const char *member)
+/*@only@*/char **
+add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i;
 	char **tmp;
@@ -72,7 +73,8 @@
  *	list of users.
  */
 
-/*@only@*/ /*@out@*/char **del_list (/*@returned@*/ /*@only@*/char **list, const char *member)
+/*@only@*/char **
+del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i, j;
 	char **tmp;
@@ -126,7 +128,8 @@
  * function with list of members, the list elements are not enforced to be
  * constant strings here.
  */
-/*@only@*/ /*@out@*/char **dup_list (char *const *list)
+/*@only@*/char **
+dup_list(char *const *list)
 {
 	int i;
 	char **tmp;
