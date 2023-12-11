@@ -99,13 +99,26 @@ static void failtmp (const char *username, const struct utmp *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (   (write_full(fd, failent, sizeof *failent) == -1)
-	    || (close (fd) != 0)) {
-		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s: %m",
-		         username, ftmp));
-		(void) close (fd);
+	if (write_full(fd, failent, sizeof *failent) == -1) {
+		goto err_write;
 	}
+
+	if (close (fd) != 0 && errno != EINTR) {
+		goto err_close;
+	}
+
+	return;
+
+err_write:
+	{
+		int saved_errno = errno;
+		(void) close (fd);
+		errno = saved_errno;
+	}
+err_close:
+	SYSLOG ((LOG_WARN,
+	         "Can't append failure of user %s to %s: %m",
+	         username, ftmp));
 }
 
 /*
