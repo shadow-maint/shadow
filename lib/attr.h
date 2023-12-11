@@ -9,10 +9,12 @@
 # define unused                      __attribute__((unused))
 # define NORETURN                    __attribute__((__noreturn__))
 # define format_attr(type, fmt, va)  __attribute__((format(type, fmt, va)))
+# define ATTR_ACCESS(...)            __attribute__((access(__VA_ARGS__)))
 #else
 # define unused
 # define NORETURN
 # define format_attr(type, fmt, va)
+# define ATTR_ACCESS(...)
 #endif
 
 #if (__GNUC__ >= 11) && !defined(__clang__)
