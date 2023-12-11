@@ -70,7 +70,8 @@
 	return pw;
 }
 
-void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent)
+void
+pw_free(/*@only@*/struct passwd *pwent)
 {
 	if (pwent != NULL) {
 		free (pwent->pw_name);

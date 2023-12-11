@@ -188,7 +188,7 @@ extern void __gr_set_changed (void);
 /* groupmem.c */
 extern /*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent);
 extern void gr_free_members (struct group *grent);
-extern void gr_free (/*@out@*/ /*@only@*/struct group *grent);
+extern void gr_free(/*@only@*/struct group *grent);
 
 /* hushed.c */
 extern bool hushed (const char *username);
@@ -355,7 +355,7 @@ extern /*@dependent@*/ /*@null@*/struct commonio_entry *__pw_get_head (void);
 
 /* pwmem.c */
 extern /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent);
-extern void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent);
+extern void pw_free(/*@only@*/struct passwd *pwent);
 
 /* csrand.c */
 unsigned long csrand (void);
@@ -418,7 +418,7 @@ extern struct spwd *sgetspent (const char *string);
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent);
-extern void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent);
+extern void sgr_free(/*@only@*/struct sgrp *sgent);
 extern /*@dependent@*/ /*@null@*/struct commonio_entry *__sgr_get_head (void);
 extern void __sgr_set_changed (void);
 
@@ -428,7 +428,7 @@ extern void __spw_del_entry (const struct commonio_entry *ent);
 
 /* shadowmem.c */
 extern /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent);
-extern void spw_free (/*@out@*/ /*@only@*/struct spwd *spent);
+extern void spw_free(/*@only@*/struct spwd *spent);
 
 /* shell.c */
 extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[]);

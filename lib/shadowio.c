@@ -31,7 +31,8 @@ static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 	return __spw_dup (sp);
 }
 
-static void shadow_free (/*@out@*//*@only@*/void *ent)
+static void
+shadow_free(/*@only@*/void *ent)
 {
 	struct spwd *sp = ent;
 
