@@ -36,7 +36,8 @@ static /*@null@*/ /*@only@*/void *group_dup (const void *ent)
 	return __gr_dup (gr);
 }
 
-static void group_free (/*@out@*/ /*@only@*/void *ent)
+static void
+group_free(/*@only@*/void *ent)
 {
 	struct group *gr = ent;
 

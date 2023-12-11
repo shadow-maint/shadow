@@ -56,7 +56,8 @@
 	return sp;
 }
 
-void spw_free (/*@out@*/ /*@only@*/struct spwd *spent)
+void
+spw_free(/*@only@*/struct spwd *spent)
 {
 	if (spent != NULL) {
 		free (spent->sp_namp);

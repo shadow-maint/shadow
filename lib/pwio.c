@@ -26,7 +26,8 @@ static /*@null@*/ /*@only@*/void *passwd_dup (const void *ent)
 	return __pw_dup (pw);
 }
 
-static void passwd_free (/*@out@*/ /*@only@*/void *ent)
+static void
+passwd_free(/*@only@*/void *ent)
 {
 	struct passwd *pw = ent;
 

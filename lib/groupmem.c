@@ -77,7 +77,8 @@ void gr_free_members (struct group *grent)
 	}
 }
 
-void gr_free (/*@out@*/ /*@only@*/struct group *grent)
+void
+gr_free(/*@only@*/struct group *grent)
 {
 	free (grent->gr_name);
 	if (NULL != grent->gr_passwd) {

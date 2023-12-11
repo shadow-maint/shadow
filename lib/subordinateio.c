@@ -56,7 +56,8 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
  *
  * @ent: pointer to a subordinate_range struct to free.
  */
-static void subordinate_free (/*@out@*/ /*@only@*/void *ent)
+static void
+subordinate_free(/*@only@*/void *ent)
 {
 	struct subordinate_range *rangeent = ent;
 

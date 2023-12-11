@@ -37,7 +37,7 @@ struct commonio_ops {
 	/*
 	 * free() the object including any strings pointed by it.
 	 */
-	void (*free) (/*@out@*/ /*@only@*/void *);
+	void (*free)(/*@only@*/void *);
 
 	/*
 	 * Return the name of the object (for example, pw_name
