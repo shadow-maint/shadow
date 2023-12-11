@@ -1963,7 +1963,11 @@ static void update_lastlog (void)
 		}
 	}
 
-	(void) close (fd);
+	if (close (fd) != 0 && errno != EINTR) {
+		fprintf (stderr,
+		         _("%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"),
+		         Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerror (errno));
+	}
 }
 #endif /* ENABLE_LASTLOG */
 
@@ -2023,7 +2027,11 @@ static void update_faillog (void)
 		}
 	}
 
-	(void) close (fd);
+	if (close (fd) != 0 && errno != EINTR) {
+		fprintf (stderr,
+		         _("%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"),
+		         Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerror (errno));
+	}
 }
 
 #ifndef NO_MOVE_MAILBOX
