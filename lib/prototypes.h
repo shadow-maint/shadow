@@ -433,8 +433,9 @@ extern void spw_free (/*@out@*/ /*@only@*/struct spwd *spent);
 extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[]);
 
 /* spawn.c */
-extern int run_command (const char *cmd, const char *argv[],
-                        /*@null@*/const char *envp[], /*@out@*/int *status);
+ATTR_ACCESS(write_only, 4)
+extern int run_command(const char *cmd, const char *argv[],
+                       /*@null@*/const char *envp[], int *status);
 
 /* strtoday.c */
 extern long strtoday (const char *);
