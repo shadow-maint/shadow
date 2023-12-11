@@ -2387,7 +2387,6 @@ static void create_mail (void)
 	char          *file;
 	gid_t         gid;
 	mode_t        mode;
-	size_t        size;
 	const char    *spool;
 	struct group  *gr;
 
@@ -2403,12 +2402,10 @@ static void create_mail (void)
 	if (NULL == spool) {
 		return;
 	}
-	size = strlen(prefix) + strlen(spool) + strlen(user_name) + 3;
-	file = XMALLOC(size, char);
 	if (prefix[0])
-		sprintf(file, "%s/%s/%s", prefix, spool, user_name);
+		xasprintf(&file, "%s/%s/%s", prefix, spool, user_name);
 	else
-		sprintf(file, "%s/%s", spool, user_name);
+		xasprintf(&file, "%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context(file, S_IFREG) != 0) {
