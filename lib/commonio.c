@@ -467,7 +467,7 @@ static void dec_lock_count (void)
 
 int commonio_unlock (struct commonio_db *db)
 {
-	char lock[1024];
+	char lock[1029];
 
 	if (db->isopen) {
 		db->readonly = true;
