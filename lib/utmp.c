@@ -85,15 +85,13 @@ static void failtmp (const char *username, const struct utmp *failent)
 	 * feature to be used.
 	 */
 
-	if (access (ftmp, F_OK) != 0) {
-		return;
-	}
-
 	fd = open (ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
-		SYSLOG ((LOG_WARN,
-		         "Can't append failure of user %s to %s.",
-		         username, ftmp));
+		if (errno != ENOENT) {
+			SYSLOG ((LOG_WARN,
+			        "Can't append failure of user %s to %s: %m",
+			        username, ftmp));
+		}
 		return;
 	}
 
