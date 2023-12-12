@@ -163,11 +163,7 @@ static inline void memzero(void *ptr, size_t size)
 
 #define WEEK (7*DAY)
 
-#ifdef ITI_AGING
-#define SCALE 1
-#else
 #define SCALE DAY
-#endif
 
 #define WIDTHOF(x)   (sizeof(x) * CHAR_BIT)
 #define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
