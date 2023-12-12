@@ -149,11 +149,7 @@
 
 #define WEEK (7*DAY)
 
-#ifdef ITI_AGING
-#define SCALE 1
-#else
 #define SCALE DAY
-#endif
 
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"
