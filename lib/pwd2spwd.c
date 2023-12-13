@@ -39,8 +39,8 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 		 * Defaults used if there is no pw_age information.
 		 */
 		sp.sp_min = 0;
-		sp.sp_max = (10000L * DAY) / SCALE;
-		sp.sp_lstchg = gettime () / SCALE;
+		sp.sp_max = 10000;
+		sp.sp_lstchg = gettime () / DAY;
 		if (0 == sp.sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */
