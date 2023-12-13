@@ -643,8 +643,8 @@ static /*@only@*/struct passwd * check_perms (void)
 static /*@only@*/struct passwd * do_check_perms (void)
 {
 #ifdef USE_PAM
-	const void *tmp_name;
-	int ret;
+	int         ret;
+	const char  *tmp_name;
 #endif				/* !USE_PAM */
 	/*
 	 * The password file entries for the user is gotten and the account
