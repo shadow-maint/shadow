@@ -153,7 +153,6 @@ static inline void memzero(void *ptr, size_t size)
  *
  * DAY - seconds / day
  * WEEK - seconds / week
- * SCALE - seconds / aging unit
  */
 
 /* Solaris defines this in shadow.h */
@@ -162,8 +161,6 @@ static inline void memzero(void *ptr, size_t size)
 #endif
 
 #define WEEK (7*DAY)
-
-#define SCALE DAY
 
 #define WIDTHOF(x)   (sizeof(x) * CHAR_BIT)
 #define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))

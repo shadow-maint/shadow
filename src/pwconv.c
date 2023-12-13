@@ -247,7 +247,7 @@ int main (int argc, char **argv)
 			spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
 		}
 		spent.sp_pwdp = pw->pw_passwd;
-		spent.sp_lstchg = gettime () / SCALE;
+		spent.sp_lstchg = gettime () / DAY;
 		if (0 == spent.sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */

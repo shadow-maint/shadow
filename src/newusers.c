@@ -527,7 +527,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			}
 			spent.sp_pwdp = cp;
 		}
-		spent.sp_lstchg = gettime () / SCALE;
+		spent.sp_lstchg = gettime () / DAY;
 		if (0 == spent.sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */
@@ -584,7 +584,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 */
 	spent.sp_pwdp = "!";
 #endif
-	spent.sp_lstchg = gettime () / SCALE;
+	spent.sp_lstchg = gettime () / DAY;
 	if (0 == spent.sp_lstchg) {
 		/* Better disable aging than requiring a password change */
 		spent.sp_lstchg = -1;

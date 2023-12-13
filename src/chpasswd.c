@@ -621,7 +621,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = gettime () / SCALE;
+			newsp.sp_lstchg = gettime () / DAY;
 			if (0 == newsp.sp_lstchg) {
 				/* Better disable aging than requiring a
 				 * password change */

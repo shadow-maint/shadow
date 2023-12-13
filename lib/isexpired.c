@@ -40,7 +40,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 {
 	long now;
 
-	now = time(NULL) / SCALE;
+	now = time(NULL) / DAY;
 
 	if (NULL == sp) {
 		return 0;
@@ -84,7 +84,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 	if (   (-1 == sp->sp_lstchg)
 	    || (-1 == sp->sp_max)
-	    || (sp->sp_max >= ((10000L * DAY) / SCALE))) {
+	    || (sp->sp_max >= 10000)) {
 		return 0;
 	}
 

@@ -175,10 +175,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == lstchgdate || lstchgdate > LONG_MAX / SCALE) {
+	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (sizeof(buf), buf, lstchgdate * SCALE);
+		date_to_str (sizeof(buf), buf, lstchgdate * DAY);
 	}
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
@@ -206,10 +206,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == expdate || LONG_MAX / SCALE < expdate) {
+	if (-1 == expdate || LONG_MAX / DAY < expdate) {
 		strcpy (buf, "-1");
 	} else {
-		date_to_str (sizeof(buf), buf, expdate * SCALE);
+		date_to_str (sizeof(buf), buf, expdate * DAY);
 	}
 
 	change_field (buf, sizeof buf,
@@ -258,12 +258,12 @@ static void list_fields (void)
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
 	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
-	if (lstchgdate < 0 || lstchgdate > LONG_MAX / SCALE) {
+	if (lstchgdate < 0 || lstchgdate > LONG_MAX / DAY) {
 		(void) puts (_("never"));
 	} else if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
 	} else {
-		changed = lstchgdate * SCALE;
+		changed = lstchgdate * DAY;
 		print_date (changed);
 	}
 
@@ -275,12 +275,12 @@ static void list_fields (void)
 	if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
 	} else if (   (lstchgdate < 0)
-	           || (maxdays >= (10000 * (DAY / SCALE)))
+	           || (maxdays >= 10000)
 	           || (maxdays < 0)
-	           || ((LONG_MAX - changed) / SCALE < maxdays)) {
+	           || ((LONG_MAX - changed) / DAY < maxdays)) {
 		(void) puts (_("never"));
 	} else {
-		expires = changed + maxdays * SCALE;
+		expires = changed + maxdays * DAY;
 		print_date (expires);
 	}
 
@@ -295,13 +295,13 @@ static void list_fields (void)
 		(void) puts (_("password must be changed"));
 	} else if (   (lstchgdate < 0)
 	           || (inactdays < 0)
-	           || (maxdays >= (10000 * (DAY / SCALE)))
+	           || (maxdays >= 10000)
 	           || (maxdays < 0)
 	           || (maxdays > LONG_MAX - inactdays)
-	           || ((LONG_MAX - changed) / SCALE < maxdays + inactdays)) {
+	           || ((LONG_MAX - changed) / DAY < maxdays + inactdays)) {
 		(void) puts (_("never"));
 	} else {
-		expires = changed + (maxdays + inactdays) * SCALE;
+		expires = changed + (maxdays + inactdays) * DAY;
 		print_date (expires);
 	}
 
@@ -310,10 +310,10 @@ static void list_fields (void)
 	 * password expiring or not.
 	 */
 	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
-	if (expdate < 0 || LONG_MAX / SCALE < expdate) {
+	if (expdate < 0 || LONG_MAX / DAY < expdate) {
 		(void) puts (_("never"));
 	} else {
-		expires = expdate * SCALE;
+		expires = expdate * DAY;
 		print_date (expires);
 	}
 

@@ -609,7 +609,7 @@ static void check_pw_file (int *errors, bool *changed)
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = gettime () / SCALE;
+					sp.sp_lstchg = gettime () / DAY;
 					if (0 == sp.sp_lstchg) {
 						/* Better disable aging than
 						 * requiring a password change
@@ -816,7 +816,7 @@ static void check_spw_file (int *errors, bool *changed)
 		if (!quiet) {
 			time_t t = time (NULL);
 			if (   (t != 0)
-			    && (spw->sp_lstchg > (long) t / SCALE)) {
+			    && (spw->sp_lstchg > (long) t / DAY)) {
 				printf (_("user %s: last password change in the future\n"),
 			                spw->sp_namp);
 				*errors += 1;
