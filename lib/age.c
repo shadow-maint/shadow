@@ -139,7 +139,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 void agecheck (/*@null@*/const struct spwd *sp)
 {
-	long now = time(NULL) / SCALE;
+	long now = time(NULL) / DAY;
 	long remain;
 
 	if (NULL == sp) {
@@ -164,7 +164,6 @@ void agecheck (/*@null@*/const struct spwd *sp)
 
 	remain = sp->sp_lstchg + sp->sp_max - now;
 	if (remain <= sp->sp_warn) {
-		remain /= DAY / SCALE;
 		if (remain > 1) {
 			(void) printf (_("Your password will expire in %ld days.\n"),
 			               remain);

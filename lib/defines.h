@@ -139,7 +139,6 @@
  *
  * DAY - seconds / day
  * WEEK - seconds / week
- * SCALE - seconds / aging unit
  */
 
 /* Solaris defines this in shadow.h */
@@ -148,8 +147,6 @@
 #endif
 
 #define WEEK (7*DAY)
-
-#define SCALE DAY
 
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"

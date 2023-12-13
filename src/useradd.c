@@ -217,7 +217,6 @@ static struct group * get_local_group (char * grp_name);
 NORETURN static void usage (int status);
 static void new_pwent (struct passwd *);
 
-static long scale_age (long);
 static void new_spent (struct spwd *);
 static void grp_update (void);
 
@@ -982,15 +981,6 @@ static void new_pwent (struct passwd *pwent)
 	pwent->pw_shell = (char *) user_shell;
 }
 
-static long scale_age (long x)
-{
-	if (x <= 0) {
-		return x;
-	}
-
-	return x * (DAY / SCALE);
-}
-
 /*
  * new_spent - initialize the values in a shadow password file entry
  *
@@ -1002,17 +992,17 @@ static void new_spent (struct spwd *spent)
 	memzero (spent, sizeof *spent);
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = gettime () / SCALE;
+	spent->sp_lstchg = gettime () / DAY;
 	if (0 == spent->sp_lstchg) {
 		/* Better disable aging than requiring a password change */
 		spent->sp_lstchg = -1;
 	}
 	if (!rflg) {
-		spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
-		spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));
-		spent->sp_warn = scale_age (getdef_num ("PASS_WARN_AGE", -1));
-		spent->sp_inact = scale_age (def_inactive);
-		spent->sp_expire = scale_age (user_expire);
+		spent->sp_min = getdef_num ("PASS_MIN_DAYS", -1);
+		spent->sp_max = getdef_num ("PASS_MAX_DAYS", -1);
+		spent->sp_warn = getdef_num ("PASS_WARN_AGE", -1);
+		spent->sp_inact = def_inactive;
+		spent->sp_expire = user_expire;
 	} else {
 		spent->sp_min = -1;
 		spent->sp_max = -1;
