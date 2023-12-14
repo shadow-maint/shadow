@@ -343,7 +343,6 @@ static int new_password (const struct passwd *pw)
  */
 static void check_password (const struct passwd *pw, const struct spwd *sp)
 {
-	time_t now;
 	int exp_status;
 
 	exp_status = isexpired (pw, sp);
@@ -362,8 +361,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	if (amroot) {
 		return;
 	}
-
-	(void) time (&now);
 
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
@@ -387,10 +384,11 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * Passwords may only be changed after sp_min time is up.
 	 */
 	if (sp->sp_lstchg > 0) {
-		time_t ok;
-		ok = (time_t) sp->sp_lstchg * DAY;
+		long now, ok;
+		now = time(NULL) / DAY;
+		ok = sp->sp_lstchg;
 		if (sp->sp_min > 0) {
-			ok += (time_t) sp->sp_min * DAY;
+			ok += sp->sp_min;
 		}
 
 		if (now < ok) {
