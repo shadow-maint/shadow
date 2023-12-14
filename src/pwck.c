@@ -816,7 +816,7 @@ static void check_spw_file (int *errors, bool *changed)
 		if (!quiet) {
 			time_t t = time (NULL);
 			if (   (t != 0)
-			    && (spw->sp_lstchg > (long) t / DAY)) {
+			    && (spw->sp_lstchg > t / DAY)) {
 				printf (_("user %s: last password change in the future\n"),
 			                spw->sp_namp);
 				*errors += 1;
