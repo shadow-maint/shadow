@@ -6,6 +6,7 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY BCRYPT_MIN_ROUNDS     SYSTEM "login.defs.d/BCRYPT_MIN_ROUNDS.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
@@ -21,6 +22,7 @@
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 
@@ -316,28 +318,47 @@
       </varlistentry>
     </variablelist>
     <variablelist remap='IP' condition="no_pam">
-      <varlistentry condition="sha_crypt">
+      <varlistentry condition="bcrypt;sha_crypt;yescrypt">
 	<term><option>-s</option>, <option>--sha-rounds</option></term>
 	<listitem>
 	  <para>
 	    Use the specified number of rounds to encrypt the passwords.
 	  </para>
 	  <para>
-	    The value 0 means that the system will choose the default
-	    number of rounds for the crypt method (5000).
+	    You can only use this option with crypt method:
+	    <phrase condition="bcrypt">
+	    <replaceable>BCRYPT</replaceable></phrase>
+	    <phrase condition="sha_crypt">
+	    <replaceable>SHA256</replaceable>
+	    <replaceable>SHA512</replaceable></phrase>
+	    <phrase condition="yescrypt">
+	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
-	  <para>
-	    A minimal value of 1000 and a maximal value of 999,999,999
-	    will be enforced.
+	  <para condition="bcrypt">
+	    By default, the number of rounds for BCRYPT is defined by the
+	    BCRYPT_MIN_ROUNDS and BCRYPT_MAX_ROUNDS variables in
+	    <filename>/etc/login.defs</filename>.
 	  </para>
-	  <para>
-	    You can only use this option with the SHA256 or SHA512
-	    crypt method.
+	  <para condition="bcrypt">
+	    A minimal value of 4 and a maximal value of 31
+	    will be enforced for BCRYPT. The default is 13.
 	  </para>
-	  <para>
-	    By default, the number of rounds is defined by the
+	  <para condition="sha_crypt">
+	    By default, the number of rounds for SHA256 or SHA512 is defined by the
 	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
 	    <filename>/etc/login.defs</filename>.
+	  </para>
+	  <para condition="sha_crypt">
+	    A minimal value of 1000 and a maximal value of 999,999,999
+	    will be enforced for SHA256 and SHA512. The default is 5000.
+	  </para>
+	  <para condition="yescrypt">
+	    By default, the number of rounds for YESCRYPT is defined by the
+	    YESCRYPT_COST_FACTOR in <filename>/etc/login.defs</filename>.
+	  </para>
+	  <para condition="yescrypt">
+	    A minimal value of 1 and a maximal value of 11
+	    will be enforced for YESCRYPT. The default is 5.
 	  </para>
 	</listitem>
       </varlistentry>

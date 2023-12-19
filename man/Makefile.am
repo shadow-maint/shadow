@@ -125,6 +125,7 @@ man_XMANS += lastlog.8.xml
 endif
 
 login_defs_v = \
+	BCRYPT_MIN_ROUNDS.xml \
 	CHFN_AUTH.xml \
 	CHFN_RESTRICT.xml \
 	CHSH_AUTH.xml \
@@ -191,7 +192,8 @@ login_defs_v = \
 	SUB_GID_COUNT.xml \
 	SUB_UID_COUNT.xml \
 	SYS_GID_MAX.xml \
-	SYS_UID_MAX.xml
+	SYS_UID_MAX.xml \
+	YESCRYPT_COST_FACTOR.xml
 
 EXTRA_DIST = \
 	$(man_MANS) \

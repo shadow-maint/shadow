@@ -14,7 +14,7 @@
       of rounds is not specified on the command line).
     </para>
     <para>
-      With a lot of rounds, it is more difficult to brute forcing the
+      With a lot of rounds, it is more difficult to brute force the
       password. But note also that more CPU resources will be needed to
       authenticate users.
     </para>
