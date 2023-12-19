@@ -10,11 +10,13 @@
       passwords (if no algorithm are specified on the command line).
     </para>
     <para>
-      It can take one of these values:
+      It can take one of these values: <phrase condition="bcrypt">
+      <replaceable>BCRYPT</replaceable>,</phrase>
       <replaceable>DES</replaceable> (default),
       <replaceable>MD5</replaceable><phrase condition="sha_crypt">,
       <replaceable>SHA256</replaceable>,
-      <replaceable>SHA512</replaceable></phrase>.
+      <replaceable>SHA512</replaceable></phrase><phrase condition="yescrypt">,
+      <replaceable>YESCRYPT</replaceable></phrase>.
       MD5 and DES should not be used for new hashes, see
       <refentrytitle>crypt</refentrytitle><manvolnum>5</manvolnum>
       for recommendations.

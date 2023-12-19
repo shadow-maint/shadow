@@ -25,6 +25,18 @@ else
 SHA_CRYPT_COND=no_sha_crypt
 endif
 
+if USE_BCRYPT
+BCRYPT_COND=bcrypt
+else
+BCRYPT_COND=no_bcrypt
+endif
+
+if USE_YESCRYPT
+YESCRYPT_COND=yescrypt
+else
+YESCRYPT_COND=no_yescrypt
+endif
+
 if ENABLE_SUBIDS
 SUBIDS_COND=subids
 else
@@ -50,7 +62,7 @@ if ENABLE_REGENERATE_MAN
 	fi
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND);$(LASTLOG_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(BCRYPT_COND);$(YESCRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND);$(LASTLOG_COND)" \
 	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
 	            --stringparam vendordir "$(VENDORDIR)" \

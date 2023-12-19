@@ -6,9 +6,11 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY BCRYPT_MIN_ROUNDS     SYSTEM "login.defs.d/BCRYPT_MIN_ROUNDS.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 
@@ -115,12 +117,16 @@
 	</term>
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
-	  <para condition="no_sha_crypt">
-	    The available methods are DES, MD5, and NONE.
-	  </para>
-	  <para condition="sha_crypt">
-	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
-	    if your libc support these methods.
+	  <para>
+	    The available methods are <phrase condition="bcrypt">
+	    <replaceable>BCRYPT</replaceable>,</phrase>
+	    <replaceable>DES</replaceable>,
+	    <replaceable>MD5</replaceable><phrase condition="sha_crypt">,
+	    <replaceable>SHA256</replaceable>,
+	    <replaceable>SHA512</replaceable></phrase><phrase condition="yescrypt">,
+	    <replaceable>YESCRYPT</replaceable></phrase> and
+	    <replaceable>NONE</replaceable>
+	    if your libc supports these methods.
 	  </para>
 	  <para condition="pam">
 	    By default, PAM is used to encrypt the passwords.
@@ -188,7 +194,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="sha_crypt">
+      <varlistentry condition="bcrypt;sha_crypt;yescrypt">
 	<term>
 	  <option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</replaceable>
 	</term>
@@ -197,22 +203,41 @@
 	    Use the specified number of rounds to encrypt the passwords.
 	  </para>
 	  <para>
-	    The value 0 means that the system will choose the default
-	    number of rounds for the crypt method (5000).
+	    You can only use this option with crypt method:
+	    <phrase condition="bcrypt">
+	    <replaceable>BCRYPT</replaceable></phrase>
+	    <phrase condition="sha_crypt">
+	    <replaceable>SHA256</replaceable>
+	    <replaceable>SHA512</replaceable></phrase>
+	    <phrase condition="yescrypt">
+	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
-	  <para>
-	    A minimal value of 1000 and a maximal value of 999,999,999
-	    will be enforced.
-	  </para>
-	  <para>
-	    You can only use this option with the SHA256 or SHA512
-	    crypt method.
-	  </para>
-	  <para>
-	    By default, the number of rounds is defined by the
-	    <option>SHA_CRYPT_MIN_ROUNDS</option> and
-	    <option>SHA_CRYPT_MAX_ROUNDS</option> variables in
+	  <para condition="bcrypt">
+	    By default, the number of rounds for BCRYPT is defined by the
+	    BCRYPT_MIN_ROUNDS and BCRYPT_MAX_ROUNDS variables in
 	    <filename>/etc/login.defs</filename>.
+	  </para>
+	  <para condition="bcrypt">
+	    A minimal value of 4 and a maximal value of 31
+	    will be enforced for BCRYPT. The default number of rounds is 13.
+	  </para>
+	  <para condition="sha_crypt">
+	    By default, the number of rounds for SHA256 or SHA512 is defined by
+	    the SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
+	    <filename>/etc/login.defs</filename>.
+	  </para>
+	  <para condition="sha_crypt">
+	    A minimal value of 1000 and a maximal value of 999,999,999
+	    will be enforced for SHA256 and SHA512. The default number of rounds
+	    is 5000.
+	  </para>
+	  <para condition="yescrypt">
+	    By default, the number of rounds for YESCRYPT is defined by the
+	    YESCRYPT_COST_FACTOR in <filename>/etc/login.defs</filename>.
+	  </para>
+	  <para condition="yescrypt">
+	    A minimal value of 1 and a maximal value of 11
+	    will be enforced for YESCRYPT. The default number of rounds is 5.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -239,7 +264,9 @@
       &MD5_CRYPT_ENAB;
     </variablelist>
     <variablelist>
+      &BCRYPT_MIN_ROUNDS; <!--documents also BCRYPT_MAX_ROUNDS-->
       &SHA_CRYPT_MIN_ROUNDS; <!--documents also SHA_CRYPT_MAX_ROUNDS-->
+      &YESCRYPT_COST_FACTOR;
     </variablelist>
   </refsect1>
 
