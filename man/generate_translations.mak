@@ -17,7 +17,7 @@ login.defs.d:
 	else \
 	    sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $< > $@; \
 	fi
-	itstool -i ../its.rules -d -l $(LANG) -m messages.mo -o . $@
+	itstool -i $(srcdir)/../its.rules -d -l $(LANG) -m messages.mo -o . $@
 	sed -i 's:\(^<refentry .*\)>:\1 lang="$(LANG)">:' $@
 
 include ../generate_mans.mak
