@@ -247,7 +247,7 @@ int getdef_num (const char *item, int dflt)
 
 	if (   (getlong (d->value, &val) == 0)
 	    || (val > INT_MAX)
-	    || (val < INT_MIN)) {
+	    || (val < -1)) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -315,7 +315,8 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (getlong (d->value, &val) == 0) {
+	if (   (getlong (d->value, &val) == 0)
+	    || (val < -1)) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
