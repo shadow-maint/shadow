@@ -4,6 +4,7 @@ if HAVE_CMOCKA
 TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
+    test_adds \
     test_chkname \
     test_sprintf \
     test_strncpy \
@@ -16,6 +17,19 @@ check_PROGRAMS += \
 endif # ENABLE_LOGIND
 
 check_PROGRAMS += \
+    $(NULL)
+
+test_adds_SOURCES = \
+    ../../lib/adds.c \
+    test_adds.c \
+    $(NULL)
+test_adds_CFLAGS = \
+    $(AM_FLAGS) \
+    $(NULL)
+test_adds_LDFLAGS = \
+    $(NULL)
+test_adds_LDADD = \
+    $(CMOCKA_LIBS) \
     $(NULL)
 
 test_chkname_SOURCES = \
