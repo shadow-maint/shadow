@@ -9,8 +9,8 @@
   <listitem>
     <para>
       The number of days warning given before a password expires. A zero
-      means warning is given only upon the day of expiration, a negative
-      value means no warning is given. If not specified, no warning will
+      means warning is given only upon the day of expiration, a value of
+      -1 means no warning is given. If not specified, no warning will
       be provided.
     </para>
   </listitem>
