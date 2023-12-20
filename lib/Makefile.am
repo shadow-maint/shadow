@@ -23,6 +23,8 @@ libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
 
 libshadow_la_SOURCES = \
 	addgrps.c \
+	adds.c \
+	adds.h \
 	age.c \
 	agetpass.c \
 	agetpass.h \
