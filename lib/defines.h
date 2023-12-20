@@ -144,7 +144,7 @@
 
 /* Solaris defines this in shadow.h */
 #ifndef DAY
-#define DAY (24L*3600L)
+#define DAY  ((time_t) 24 * 3600)
 #endif
 
 #define WEEK (7*DAY)
