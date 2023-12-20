@@ -106,7 +106,7 @@
     </para>
   </refsect1>
 
-  <refsect1 id='configuration'>
+  <refsect1 condition="no_pam" id='configuration'>
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
