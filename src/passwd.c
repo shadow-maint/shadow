@@ -387,8 +387,9 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		long now, ok;
 		now = time(NULL) / DAY;
 		ok = sp->sp_lstchg;
-		if (sp->sp_min > 0) {
-			ok += sp->sp_min;
+		if (   (sp->sp_min > 0)
+		    && __builtin_add_overflow(ok, sp->sp_min, &ok)) {
+			ok = LONG_MAX;
 		}
 
 		if (now < ok) {
