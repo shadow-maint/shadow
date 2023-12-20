@@ -4,7 +4,7 @@
    SPDX-FileCopyrightText: 2007 - 2008, Nicolas François
    SPDX-License-Identifier: BSD-3-Clause
 -->
-<varlistentry>
+<varlistentry condition="no_pam">
   <term><option>CONSOLE_GROUPS</option> (string)</term>
   <listitem>
     <para>
