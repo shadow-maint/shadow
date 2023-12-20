@@ -4,8 +4,7 @@
    SPDX-FileCopyrightText: 2007 - 2008, Nicolas François
    SPDX-License-Identifier: BSD-3-Clause
 -->
-<varlistentry>
-  <!-- XXX: When compiled with PAM support, only sulogin uses ENV_HZ -->
+<varlistentry condition="no_pam">
   <term><option>ENV_HZ</option> (string)</term>
   <listitem>
     <para>
@@ -13,10 +12,6 @@
       a user login. The value must be preceded by
       <replaceable>HZ=</replaceable>. A common value on Linux is
       <replaceable>HZ=100</replaceable>.
-    </para>
-    <para condition="pam">
-      The <envar>HZ</envar> environment variable is only set when the user
-      (the superuser) logs in with <command>sulogin</command>.
     </para>
     <!-- TODO: it can in fact be used to set any other variable-->
   </listitem>

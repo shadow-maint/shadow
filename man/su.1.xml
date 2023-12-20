@@ -321,7 +321,7 @@
       &CONSOLE;
       &CONSOLE_GROUPS;
       &DEFAULT_HOME;
-      <phrase condition="no_pam">&ENV_HZ;</phrase>
+      &ENV_HZ;
       &ENVIRON_FILE;
       &ENV_PATH;
       &ENV_SUPATH;

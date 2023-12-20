@@ -449,12 +449,12 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term>sulogin</term>
 	<listitem>
 	  <para>
 	    ENV_HZ
-	    <phrase condition="no_pam">ENV_TZ</phrase>
+	    ENV_TZ
 	  </para>
 	</listitem>
       </varlistentry>

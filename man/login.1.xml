@@ -277,7 +277,7 @@
       &CONSOLE;
       &CONSOLE_GROUPS;
       &DEFAULT_HOME;
-      <phrase condition="no_pam">&ENV_HZ;</phrase>
+      &ENV_HZ;
       <phrase>&ENV_PATH;</phrase>
       <phrase>&ENV_SUPATH;</phrase>
       &ENV_TZ;
