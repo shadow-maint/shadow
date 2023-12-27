@@ -181,6 +181,26 @@ static void def_load (void);
 
 
 /*
+ * getlong_normalized - get long value and set all negative values to -1.
+ *
+ * Return getlong result and normalize all negative values to -1 if
+ * configuration file contains an even smaller number.
+ */
+static int getlong_normalized(const char *item, const char *str, long *val)
+{
+	int result;
+
+	result = getlong (str, val);
+	if (result && *val < -1) {
+		fprintf (shadow_logfd,
+		         _("normalizing %s value to -1: '%s'"),
+		         item, str);
+		*val = -1;
+	}
+	return result;
+}
+
+/*
  * getdef_str - get string value from table of definitions.
  *
  * Return point to static data for specified item, or NULL if item is not
@@ -245,7 +265,7 @@ int getdef_num (const char *item, int dflt)
 		return dflt;
 	}
 
-	if (   (getlong (d->value, &val) == 0)
+	if (   (getlong_normalized (item, d->value, &val) == 0)
 	    || (val > INT_MAX)
 	    || (val < -1)) {
 		fprintf (shadow_logfd,
@@ -315,7 +335,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (   (getlong (d->value, &val) == 0)
+	if (   (getlong_normalized (item, d->value, &val) == 0)
 	    || (val < -1)) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
