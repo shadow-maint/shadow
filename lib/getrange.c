@@ -59,40 +59,40 @@ int getrange (const char *range,
 			return 0;
 		}
 		switch (*endptr) {
-			case '\0':
-				/* <long> */
+		case '\0':
+			/* <long> */
+			*has_min = true;
+			*has_max = true;
+			*min = n;
+			*max = n;
+			break;
+		case '-':
+			endptr++;
+			if ('\0' == *endptr) {
+				/* <long>- */
 				*has_min = true;
-				*has_max = true;
+				*has_max = false;
 				*min = n;
-				*max = n;
-				break;
-			case '-':
-				endptr++;
-				if ('\0' == *endptr) {
-					/* <long>- */
-					*has_min = true;
-					*has_max = false;
-					*min = n;
-				} else if (!isdigit (*endptr)) {
+			} else if (!isdigit (*endptr)) {
+				/* invalid */
+				return 0;
+			} else {
+				*has_min = true;
+				*min = n;
+				errno = 0;
+				n = strtoul(endptr, &endptr, 10);
+				if (   ('\0' != *endptr)
+				    || (0 != errno)) {
 					/* invalid */
 					return 0;
-				} else {
-					*has_min = true;
-					*min = n;
-					errno = 0;
-					n = strtoul(endptr, &endptr, 10);
-					if (   ('\0' != *endptr)
-					    || (0 != errno)) {
-						/* invalid */
-						return 0;
-					}
-					/* <long>-<long> */
-					*has_max = true;
-					*max = n;
 				}
-				break;
-			default:
-				return 0;
+				/* <long>-<long> */
+				*has_max = true;
+				*max = n;
+			}
+			break;
+		default:
+			return 0;
 		}
 	}
 
