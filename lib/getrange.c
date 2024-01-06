@@ -56,7 +56,7 @@ getrange(const char *r,
 		if ('\0' == *r)
 			return 0;  /* <long>- */
 parse_max:
-		if (!isdigit(*r))
+		if (!isdigit((unsigned char) *r))
 			return -1;
 
 		if (getulong(r, max, NULL, 10, 0, ULONG_MAX) == -1)
