@@ -154,7 +154,7 @@ extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *gr
 
 /* getlong.c */
 ATTR_ACCESS(write_only, 2)
-extern int getlong(const char *numstr, long *result);
+extern int getlong(const char *restrict numstr, long *restrict result);
 
 /* get_pid.c */
 extern int get_pid (const char *pidstr, pid_t *pid);
@@ -174,11 +174,11 @@ extern int get_uid (const char *uidstr, uid_t *uid);
 
 /* getulong.c */
 ATTR_ACCESS(write_only, 2)
-extern int getulong(const char *numstr, unsigned long *result);
+extern int getulong(const char *restrict numstr, unsigned long *restrict result);
 
 /* fputsx.c */
 ATTR_ACCESS(write_only, 1, 2)
-extern /*@null@*/char *fgetsx(/*@returned@*/char *, int, FILE *);
+extern /*@null@*/char *fgetsx(/*@returned@*/char *restrict, int, FILE *restrict);
 extern int fputsx (const char *, FILE *);
 
 /* groupio.c */
@@ -438,7 +438,7 @@ extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[
 /* spawn.c */
 ATTR_ACCESS(write_only, 4)
 extern int run_command(const char *cmd, const char *argv[],
-                       /*@null@*/const char *envp[], int *status);
+                       /*@null@*/const char *envp[], int *restrict status);
 
 /* strtoday.c */
 extern long strtoday (const char *);
