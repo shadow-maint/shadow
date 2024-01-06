@@ -19,7 +19,7 @@
 
 int
 run_command(const char *cmd, const char *argv[],
-            /*@null@*/const char *envp[], int *status)
+            /*@null@*/const char *envp[], int *restrict status)
 {
 	pid_t pid, wpid;
 

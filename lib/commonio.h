@@ -65,7 +65,8 @@ struct commonio_ops {
 	 * understand line continuation conventions).
 	 */
 	ATTR_ACCESS(write_only, 1, 2)
-	/*@null@*/char *(*fgets)(/*@returned@*/char *s, int n, FILE *stream);
+	/*@null@*/char *(*fgets)(/*@returned@*/char *restrict s, int n,
+	                         FILE *restrict stream);
 	int (*fputs) (const char *, FILE *);
 
 	/*

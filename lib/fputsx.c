@@ -17,7 +17,7 @@
 
 
 /*@null@*/char *
-fgetsx(/*@returned@*/char *buf, int cnt, FILE * f)
+fgetsx(/*@returned@*/char *restrict buf, int cnt, FILE *restrict f)
 {
 	char *cp = buf;
 	char *ep;
