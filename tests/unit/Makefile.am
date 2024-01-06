@@ -5,6 +5,7 @@ TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
     test_adds \
+    test_atoi_strtoi \
     test_atoi_strtou_noneg \
     test_chkname \
     test_sprintf \
@@ -30,6 +31,19 @@ test_adds_CFLAGS = \
 test_adds_LDFLAGS = \
     $(NULL)
 test_adds_LDADD = \
+    $(CMOCKA_LIBS) \
+    $(NULL)
+
+test_atoi_strtoi_SOURCES = \
+    ../../lib/atoi/strtoi.c \
+    test_atoi_strtoi.c \
+    $(NULL)
+test_atoi_strtoi_CFLAGS = \
+    $(AM_FLAGS) \
+    $(NULL)
+test_atoi_strtoi_LDFLAGS = \
+    $(NULL)
+test_atoi_strtoi_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
