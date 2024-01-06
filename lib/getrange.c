@@ -55,7 +55,7 @@ getrange(const char *range,
 		if ('\0' == *end)
 			return 0;  /* <long>- */
 parse_max:
-		if (!isdigit(*end))
+		if (!isdigit((unsigned char) *end))
 			return -1;
 
 		if (a2ul(max, end, NULL, 10, 0, ULONG_MAX) == -1)
