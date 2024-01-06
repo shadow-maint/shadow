@@ -324,7 +324,7 @@ int main (int argc, char **argv)
 			case 'b':
 			{
 				unsigned long inverse_days;
-				if (getulong(optarg, &inverse_days) == -1) {
+				if (getul(optarg, &inverse_days) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -352,7 +352,7 @@ int main (int argc, char **argv)
 			case 't':
 			{
 				unsigned long days;
-				if (getulong(optarg, &days) == -1) {
+				if (getul(optarg, &days) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);

@@ -17,12 +17,12 @@
 
 
 /*
- * getulong - extract an unsigned long integer provided by the numstr string in *result
+ * getul - extract an unsigned long integer provided by the numstr string in *result
  *
  * It supports decimal, hexadecimal or octal representations.
  */
 int
-getulong(const char *restrict numstr, unsigned long *restrict result)
+getul(const char *restrict numstr, unsigned long *restrict result)
 {
 	char           *endptr;
 	unsigned long  val;

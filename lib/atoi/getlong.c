@@ -16,12 +16,12 @@
 
 
 /*
- * getlong - extract a long integer provided by the numstr string in *result
+ * getl - extract a long integer provided by the numstr string in *result
  *
  * It supports decimal, hexadecimal or octal representations.
  */
 int
-getlong(const char *restrict numstr, long *restrict result)
+getl(const char *restrict numstr, long *restrict result)
 {
 	char  *endptr;
 	long  val;

@@ -1067,7 +1067,7 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getlong(optarg, &user_newinactive) == -1)
+				if (   (getl(optarg, &user_newinactive) == -1)
 				    || (user_newinactive < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
