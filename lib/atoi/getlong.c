@@ -1,36 +1,12 @@
-/*
- * SPDX-FileCopyrightText: 2007 - 2009, Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2007-2009, Nicolas François
+// SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <config.h>
 
-#ident "$Id$"
-
-#include <stdlib.h>
-#include <errno.h>
-
-#include "prototypes.h"
+#include "atoi/getlong.h"
 
 
-/*
- * getl - extract a long integer provided by the numstr string in *result
- *
- * It supports decimal, hexadecimal or octal representations.
- */
-int
-getl(const char *restrict numstr, long *restrict result)
-{
-	char  *endptr;
-	long  val;
-
-	errno = 0;
-	val = strtol(numstr, &endptr, 0);
-	if (('\0' == *numstr) || ('\0' != *endptr) || (0 != errno))
-		return -1;
-
-	*result = val;
-	return 0;
-}
+extern inline int getl(const char *numstr, long *result);
+extern inline int getul(const char *numstr, unsigned long *result);
