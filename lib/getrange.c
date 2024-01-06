@@ -30,8 +30,7 @@ getrange(const char *range,
          unsigned long *min, bool *has_min,
          unsigned long *max, bool *has_max)
 {
-	char *endptr;
-	unsigned long n;
+	char  *endptr;
 
 	if (NULL == range)
 		return -1;
@@ -44,16 +43,15 @@ getrange(const char *range,
 			return -1;
 
 		errno = 0;
-		n = strtoul_noneg(&range[1], &endptr, 10);
+		*max = strtoul_noneg(&range[1], &endptr, 10);
 		if (('\0' != *endptr) || (0 != errno))
 			return -1;
 		*has_max = true;
 
 		/* -<long> */
-		*max = n;
 	} else {
 		errno = 0;
-		n = strtoul_noneg(range, &endptr, 10);
+		*min = strtoul_noneg(range, &endptr, 10);
 		if (endptr == range || 0 != errno)
 			return -1;
 		*has_min = true;
@@ -62,26 +60,22 @@ getrange(const char *range,
 		case '\0':
 			/* <long> */
 			*has_max = true;
-			*min = n;
-			*max = n;
+			*max = *min;
 			break;
 		case '-':
 			endptr++;
 			if ('\0' == *endptr) {
 				/* <long>- */
-				*min = n;
 			} else if (!isdigit (*endptr)) {
 				return -1;
 			} else {
-				*min = n;
 				errno = 0;
-				n = strtoul_noneg(endptr, &endptr, 10);
+				*max = strtoul_noneg(endptr, &endptr, 10);
 				if ('\0' != *endptr || 0 != errno)
 					return -1;
 				*has_max = true;
 
 				/* <long>-<long> */
-				*max = n;
 			}
 			break;
 		default:
