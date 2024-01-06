@@ -9,10 +9,16 @@
 #include <config.h>
 
 #include <errno.h>
+#include <stdint.h>
 #include <stdlib.h>
 
+#include "atoi/strtoi.h"
 #include "attr.h"
 
+
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 6)
+inline uintmax_t strtou_noneg(const char *nptr, char **restrict endptr,
+    int base, uintmax_t min, uintmax_t max, int *restrict status);
 
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline unsigned long strtoul_noneg(const char *nptr,
@@ -20,6 +26,21 @@ inline unsigned long strtoul_noneg(const char *nptr,
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline unsigned long long strtoull_noneg(const char *nptr,
     char **restrict endptr, int base);
+
+
+inline uintmax_t
+strtou_noneg(const char *nptr, char **restrict endptr, int base,
+    uintmax_t min, uintmax_t max, int *restrict status)
+{
+	int  st;
+
+	if (status == NULL)
+		status = &st;
+	if (strtoi_(nptr, endptr, base, 0, 1, status) == 0 && *status == ERANGE)
+		return min;
+
+	return strtou_(nptr, endptr, base, min, max, status);
+}
 
 
 inline unsigned long
