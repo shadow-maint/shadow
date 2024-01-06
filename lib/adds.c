@@ -7,7 +7,7 @@
 #include "adds.h"
 
 
-extern inline long addsl(long a, long b);
+extern inline long addsl2(long a, long b);
 extern inline long addsl3(long a, long b, long c);
 
 extern inline int cmpl(const void *p1, const void *p2);
