@@ -10,13 +10,22 @@
 
 #include <errno.h>
 #include <limits.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 #include "sizeof.h"
 
 
+#define addsl(a, b, ...)                                                      \
+({                                                                            \
+	long  addend_[] = {a, b, __VA_ARGS__};                                \
+                                                                              \
+	addslN(NITEMS(addend_), addend_);                                     \
+})
+
+
 inline long addsl2(long a, long b);
-inline long addsl3(long a, long b, long c);
+inline long addslN(size_t n, long addend[n]);
 
 inline int cmpl(const void *p1, const void *p2);
 
@@ -37,21 +46,26 @@ addsl2(long a, long b)
 
 
 inline long
-addsl3(long a, long b, long c)
+addslN(size_t n, long addend[n])
 {
 	int   e;
-	long  sum;
-	long  n[3] = {a, b, c};
+
+	if (n == 0) {
+		errno = EDOM;
+		return 0;
+	}
 
 	e = errno;
-	qsort(n, NITEMS(n), sizeof(n[0]), cmpl);
+	while (n > 1) {
+		qsort(addend, n, sizeof(addend[0]), cmpl);
 
-	errno = 0;
-	sum = addsl(n[0], n[2]);
-	if (errno == EOVERFLOW)
-		return sum;
+		errno = 0;
+		addend[0] = addsl2(addend[0], addend[--n]);
+		if (errno == EOVERFLOW)
+			return addend[0];
+	}
 	errno = e;
-	return addsl(sum, n[1]);
+	return addend[0];
 }
 
 
