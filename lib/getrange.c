@@ -30,59 +30,52 @@ getrange(const char *range,
          unsigned long *min, bool *has_min,
          unsigned long *max, bool *has_max)
 {
-	char *endptr;
-	unsigned long n;
+	char  *endptr;
 
 	if (NULL == range)
 		return -1;
+
+	*has_min = false;
+	*has_max = false;
 
 	if ('-' == range[0]) {
 		if (!isdigit(range[1]))
 			return -1;
 
 		errno = 0;
-		n = strtoul_noneg(&range[1], &endptr, 10);
+		*max = strtoul_noneg(&range[1], &endptr, 10);
 		if (('\0' != *endptr) || (0 != errno))
 			return -1;
+		*has_max = true;
 
 		/* -<long> */
-		*has_min = false;
-		*has_max = true;
-		*max = n;
 	} else {
 		errno = 0;
-		n = strtoul_noneg(range, &endptr, 10);
+		*min = strtoul_noneg(range, &endptr, 10);
 		if (endptr == range || 0 != errno)
 			return -1;
+		*has_min = true;
 
 		switch (*endptr) {
 		case '\0':
 			/* <long> */
-			*has_min = true;
 			*has_max = true;
-			*min = n;
-			*max = n;
+			*max = *min;
 			break;
 		case '-':
 			endptr++;
 			if ('\0' == *endptr) {
 				/* <long>- */
-				*has_min = true;
-				*has_max = false;
-				*min = n;
 			} else if (!isdigit (*endptr)) {
 				return -1;
 			} else {
-				*has_min = true;
-				*min = n;
 				errno = 0;
-				n = strtoul_noneg(endptr, &endptr, 10);
+				*max = strtoul_noneg(endptr, &endptr, 10);
 				if ('\0' != *endptr || 0 != errno)
 					return -1;
+				*has_max = true;
 
 				/* <long>-<long> */
-				*has_max = true;
-				*max = n;
 			}
 			break;
 		default:
