@@ -15,14 +15,14 @@
 #include "sizeof.h"
 
 
-inline long addsl(long a, long b);
+inline long addsl2(long a, long b);
 inline long addsl3(long a, long b, long c);
 
 inline int cmpl(const void *p1, const void *p2);
 
 
 inline long
-addsl(long a, long b)
+addsl2(long a, long b)
 {
 	if (a > 0 && b > LONG_MAX - a) {
 		errno = EOVERFLOW;
