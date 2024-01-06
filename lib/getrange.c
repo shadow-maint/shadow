@@ -1,8 +1,6 @@
-/*
- * SPDX-FileCopyrightText: 2008       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <config.h>
@@ -12,7 +10,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#include "atoi/strtou_noneg.h"
+#include "atoi/a2i.h"
 #include "defines.h"
 #include "prototypes.h"
 
@@ -43,9 +41,7 @@ getrange(const char *range,
 		goto parse_max;
 	}
 
-	errno = 0;
-	*min = strtoul_noneg(range, &end, 10);
-	if (end == range || 0 != errno)
+	if (a2ul(min, range, &end, 10, 0, ULONG_MAX) == -1 && errno != ENOTSUP)
 		return -1;
 	*has_min = true;
 
@@ -62,9 +58,7 @@ parse_max:
 		if (!isdigit(*end))
 			return -1;
 
-		errno = 0;
-		*max = strtoul_noneg(end, &end, 10);
-		if ('\0' != *end || 0 != errno)
+		if (a2ul(max, end, NULL, 10, 0, ULONG_MAX) == -1)
 			return -1;
 		*has_max = true;
 
