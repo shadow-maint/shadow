@@ -49,38 +49,39 @@ getrange(const char *range,
 		*has_max = true;
 
 		/* -<long> */
-	} else {
-		errno = 0;
-		*min = strtoul_noneg(range, &endptr, 10);
-		if (endptr == range || 0 != errno)
-			return -1;
-		*has_min = true;
+		return 0;
+	}
 
-		switch (*endptr) {
-		case '\0':
-			/* <long> */
-			*has_max = true;
-			*max = *min;
-			break;
-		case '-':
-			endptr++;
-			if ('\0' == *endptr) {
-				/* <long>- */
-			} else if (!isdigit (*endptr)) {
+	errno = 0;
+	*min = strtoul_noneg(range, &endptr, 10);
+	if (endptr == range || 0 != errno)
+		return -1;
+	*has_min = true;
+
+	switch (*endptr) {
+	case '\0':
+		/* <long> */
+		*has_max = true;
+		*max = *min;
+		break;
+	case '-':
+		endptr++;
+		if ('\0' == *endptr) {
+			/* <long>- */
+		} else if (!isdigit (*endptr)) {
+			return -1;
+		} else {
+			errno = 0;
+			*max = strtoul_noneg(endptr, &endptr, 10);
+			if ('\0' != *endptr || 0 != errno)
 				return -1;
-			} else {
-				errno = 0;
-				*max = strtoul_noneg(endptr, &endptr, 10);
-				if ('\0' != *endptr || 0 != errno)
-					return -1;
-				*has_max = true;
+			*has_max = true;
 
-				/* <long>-<long> */
-			}
-			break;
-		default:
-			return -1;
+			/* <long>-<long> */
 		}
+		break;
+	default:
+		return -1;
 	}
 
 	return 0;
