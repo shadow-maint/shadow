@@ -2,10 +2,13 @@
 
 #include <stdio.h>
 #include <unistd.h>
+
+#include "atoi/getlong.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
 
 /* Test program for the subid creation routine */
 
@@ -46,7 +49,7 @@ int main(int argc, char *argv[])
 	range.start = 0;
 	range.count = 65536;
 	if (argc > 1)
-		range.count = atoi(argv[1]);
+		getul(argv[1], &range.count);
 	if (group)
 		ok = subid_grant_gid_range(&range, !makenew);
 	else

@@ -1,10 +1,14 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
+
 #include <stdio.h>
+
+#include "atoi/getlong.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
 
 const char *Prog;
 
@@ -18,8 +22,9 @@ static void usage(void)
 
 int main(int argc, char *argv[])
 {
-	int i, n;
-	uid_t *uids;
+	int    i, n;
+	long   l;
+	uid_t  *uids;
 
 	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
@@ -27,12 +32,15 @@ int main(int argc, char *argv[])
 	if (argc < 2) {
 		usage();
 	}
-	if (argc == 3 && strcmp(argv[1], "-g") == 0)
-		n = subid_get_gid_owners(atoi(argv[2]), &uids);
-	else if (argc == 2 && strcmp(argv[1], "-h") == 0)
+	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
+		getl(argv[2], &l);
+		n = subid_get_gid_owners(l, &uids);
+	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
 		usage();
-	else
-		n = subid_get_uid_owners(atoi(argv[1]), &uids);
+	} else {
+		getl(argv[1], &l);
+		n = subid_get_uid_owners(l, &uids);
+	}
 	if (n < 0) {
 		fprintf(stderr, "No owners found\n");
 		exit(1);
