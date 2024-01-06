@@ -10,58 +10,69 @@
 #include <config.h>
 
 #include <errno.h>
-#include <stdlib.h>
+#include <inttypes.h>
+#include <limits.h>
+#include <stddef.h>
 
-#include "atoi/getlong.h"
+#include "atoi/strtoi.h"
 #include "atoi/strtou_noneg.h"
 #include "attr.h"
 
 
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
+inline int getlong(const char *s, long *restrict n,
+    char **restrict endptr, int base, long min, long max);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
+inline int getulong(const char *s, unsigned long *restrict n,
+    char **restrict endptr, int base, unsigned long min, unsigned long max);
+
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getl(const char *numstr, long *result);
+inline int getl(const char *restrict s, long *restrict n);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getul(const char *numstr, unsigned long *result);
+inline int getul(const char *restrict s, unsigned long *restrict n);
 
 
-/*
- * getl - extract a long integer provided by the numstr string in *result
- *
- * It supports decimal, hexadecimal or octal representations.
- */
 inline int
-getl(const char *numstr, long *result)
+getlong(const char *s, long *restrict n, char **restrict endptr,
+    int base, long min, long max)
 {
-	char  *endptr;
-	long  val;
+	int  status;
 
-	errno = 0;
-	val = strtol(numstr, &endptr, 0);
-	if (('\0' == *numstr) || ('\0' != *endptr) || (0 != errno))
+	*n = strtoi_(s, endptr, base, min, max, &status);
+	if (status != 0) {
+		errno = status;
 		return -1;
-
-	*result = val;
+	}
 	return 0;
 }
 
 
-/*
- * getul - extract an unsigned long integer provided by the numstr string in *result
- *
- * It supports decimal, hexadecimal or octal representations.
- */
 inline int
-getul(const char *numstr, unsigned long *result)
+getulong(const char *s, unsigned long *restrict n, char **restrict endptr,
+    int base, unsigned long min, unsigned long max)
 {
-	char           *endptr;
-	unsigned long  val;
+	int  status;
 
-	errno = 0;
-	val = strtoul_noneg(numstr, &endptr, 0);
-	if (('\0' == *numstr) || ('\0' != *endptr) || (0 != errno))
+	*n = strtou_noneg(s, endptr, base, min, max, &status);
+	if (status != 0) {
+		errno = status;
 		return -1;
-
-	*result = val;
+	}
 	return 0;
+}
+
+
+inline int
+getl(const char *restrict s, long *restrict n)
+{
+	return getlong(s, n, NULL, 0, LONG_MIN, LONG_MAX);
+}
+
+
+inline int
+getul(const char *restrict s, unsigned long *restrict n)
+{
+	return getulong(s, n, NULL, 0, 0, ULONG_MAX);
 }
 
 

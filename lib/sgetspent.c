@@ -188,4 +188,3 @@ struct spwd *sgetspent (const char *string)
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif
-
