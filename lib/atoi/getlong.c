@@ -10,8 +10,15 @@
 
 extern inline int getlong(const char *s, long *restrict n,
     char **restrict endptr, int base, long min, long max);
+extern inline int getllong(const char *s, long long *restrict n,
+    char **restrict endptr, int base, long long min, long long max);
 extern inline int getulong(const char *s, unsigned long *restrict n,
     char **restrict endptr, int base, unsigned long min, unsigned long max);
+extern inline int getullong(const char *s, unsigned long long *restrict n,
+    char **restrict endptr, int base, unsigned long long min,
+    unsigned long long max);
 
 extern inline int getl(const char *restrict s, long *restrict n);
+extern inline int getll(const char *restrict s, long long *restrict n);
 extern inline int getul(const char *restrict s, unsigned long *restrict n);
+extern inline int getull(const char *restrict s, unsigned long long *restrict n);

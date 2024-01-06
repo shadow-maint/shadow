@@ -23,18 +23,44 @@ ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
 inline int getlong(const char *s, long *restrict n,
     char **restrict endptr, int base, long min, long max);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
+inline int getllong(const char *s, long long *restrict n,
+    char **restrict endptr, int base, long long min, long long max);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
 inline int getulong(const char *s, unsigned long *restrict n,
     char **restrict endptr, int base, unsigned long min, unsigned long max);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
+inline int getullong(const char *s, unsigned long long *restrict n,
+    char **restrict endptr, int base, unsigned long long min,
+    unsigned long long max);
 
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int getl(const char *restrict s, long *restrict n);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
+inline int getll(const char *restrict s, long long *restrict n);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int getul(const char *restrict s, unsigned long *restrict n);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
+inline int getull(const char *restrict s, unsigned long long *restrict n);
 
 
 inline int
 getlong(const char *s, long *restrict n, char **restrict endptr,
     int base, long min, long max)
+{
+	int  status;
+
+	*n = strtoi_(s, endptr, base, min, max, &status);
+	if (status != 0) {
+		errno = status;
+		return -1;
+	}
+	return 0;
+}
+
+
+inline int
+getllong(const char *s, long long *restrict n, char **restrict endptr,
+    int base, long long min, long long max)
 {
 	int  status;
 
@@ -63,6 +89,21 @@ getulong(const char *s, unsigned long *restrict n, char **restrict endptr,
 
 
 inline int
+getullong(const char *s, unsigned long long *restrict n, char **restrict endptr,
+    int base, unsigned long long min, unsigned long long max)
+{
+	int  status;
+
+	*n = strtou_noneg(s, endptr, base, min, max, &status);
+	if (status != 0) {
+		errno = status;
+		return -1;
+	}
+	return 0;
+}
+
+
+inline int
 getl(const char *restrict s, long *restrict n)
 {
 	return getlong(s, n, NULL, 0, LONG_MIN, LONG_MAX);
@@ -70,9 +111,23 @@ getl(const char *restrict s, long *restrict n)
 
 
 inline int
+getll(const char *restrict s, long long *restrict n)
+{
+	return getllong(s, n, NULL, 0, LLONG_MIN, LLONG_MAX);
+}
+
+
+inline int
 getul(const char *restrict s, unsigned long *restrict n)
 {
 	return getulong(s, n, NULL, 0, 0, ULONG_MAX);
+}
+
+
+inline int
+getull(const char *restrict s, unsigned long long *restrict n)
+{
+	return getullong(s, n, NULL, 0, 0, ULLONG_MAX);
 }
 
 
