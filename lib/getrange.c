@@ -38,8 +38,8 @@ getrange(const char *range,
 	*has_min = false;
 	*has_max = false;
 
-	if ('-' == range[0]) {
-		end = range + 1;
+	if ('-' == *range) {
+		range++;
 		goto parse_max;
 	}
 
@@ -48,22 +48,23 @@ getrange(const char *range,
 	if (end == range || 0 != errno)
 		return -1;
 	*has_min = true;
+	range = end;
 
-	switch (*end++) {
+	switch (*range++) {
 	case '\0':
 		*has_max = true;
 		*max = *min;
 		return 0;  /* <long> */
 
 	case '-':
-		if ('\0' == *end)
+		if ('\0' == *range)
 			return 0;  /* <long>- */
 parse_max:
-		if (!isdigit(*end))
+		if (!isdigit(*range))
 			return -1;
 
 		errno = 0;
-		*max = strtoul_noneg(end, &end, 10);
+		*max = strtoul_noneg(range, &end, 10);
 		if ('\0' != *end || 0 != errno)
 			return -1;
 		*has_max = true;
