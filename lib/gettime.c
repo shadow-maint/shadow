@@ -26,7 +26,7 @@
  */
 /*@observer@*/time_t gettime (void)
 {
-	char *endptr;
+	char  *end;
 	char *source_date_epoch;
 	time_t fallback;
 	unsigned long long epoch;
@@ -39,19 +39,19 @@
 		return fallback;
 
 	errno = 0;
-	epoch = strtoull_noneg(source_date_epoch, &endptr, 10);
+	epoch = strtoull_noneg(source_date_epoch, &end, 10);
 	if (errno != 0) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: strtoull: %s\n"),
 			 strerror(errno));
-	} else if (endptr == source_date_epoch) {
+	} else if (end == source_date_epoch) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: No digits were found: %s\n"),
-			 endptr);
-	} else if (*endptr != '\0') {
+			 end);
+	} else if (*end != '\0') {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: Trailing garbage: %s\n"),
-			 endptr);
+			 end);
 	} else if (epoch > ULONG_MAX) {
 		fprintf (shadow_logfd,
 			 _("Environment variable $SOURCE_DATE_EPOCH: value must be smaller than or equal to %lu but was found to be: %llu\n"),
