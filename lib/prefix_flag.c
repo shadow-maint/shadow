@@ -337,9 +337,9 @@ extern void prefix_endgrent(void)
 
 extern struct group *prefix_getgr_nam_gid(const char *grname)
 {
-	long long  gid;
-	char *endptr;
-	struct group *g;
+	char          *end;
+	long long     gid;
+	struct group  *g;
 
 	if (NULL == grname) {
 		return NULL;
@@ -349,9 +349,9 @@ extern struct group *prefix_getgr_nam_gid(const char *grname)
 		return getgr_nam_gid(grname);
 
 	errno = 0;
-	gid = strtoll(grname, &endptr, 10);
+	gid = strtoll(grname, &end, 10);
 	if (   ('\0' != *grname)
-	    && ('\0' == *endptr)
+	    && ('\0' == *end)
 	    && (0 == errno)
 	    && (gid == (gid_t)gid))
 	{
