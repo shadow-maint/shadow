@@ -35,6 +35,7 @@ libshadow_la_SOURCES = \
 	basename.c \
 	bit.c \
 	bit.h \
+	cast.h \
 	chkname.c \
 	chkname.h \
 	chowndir.c \
