@@ -26,45 +26,45 @@
  *     <long1>-<long2> -> min=long1 max=long2  has_min  has_max
  */
 int
-getrange(const char *range,
+getrange(const char *r,
          unsigned long *min, bool *has_min,
          unsigned long *max, bool *has_max)
 {
 	char  *end;
 
-	if (NULL == range)
+	if (NULL == r)
 		return -1;
 
 	*has_min = false;
 	*has_max = false;
 
-	if ('-' == *range) {
-		range++;
+	if ('-' == *r) {
+		r++;
 		goto parse_max;
 	}
 
 	errno = 0;
-	*min = strtoul_noneg(range, &end, 10);
-	if (end == range || 0 != errno)
+	*min = strtoul_noneg(r, &end, 10);
+	if (end == r || 0 != errno)
 		return -1;
 	*has_min = true;
-	range = end;
+	r = end;
 
-	switch (*range++) {
+	switch (*r++) {
 	case '\0':
 		*has_max = true;
 		*max = *min;
 		return 0;  /* <long> */
 
 	case '-':
-		if ('\0' == *range)
+		if ('\0' == *r)
 			return 0;  /* <long>- */
 parse_max:
-		if (!isdigit(*range))
+		if (!isdigit(*r))
 			return -1;
 
 		errno = 0;
-		*max = strtoul_noneg(range, &end, 10);
+		*max = strtoul_noneg(r, &end, 10);
 		if ('\0' != *end || 0 != errno)
 			return -1;
 		*has_max = true;
