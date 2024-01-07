@@ -49,7 +49,7 @@ static int setrlimit_value (unsigned int resource,
                             const char *value,
                             unsigned int multiplier)
 {
-	char           *endptr;
+	char           *end;
 	long           l;
 	rlim_t         limit;
 	struct rlimit  rlim;
@@ -67,9 +67,9 @@ static int setrlimit_value (unsigned int resource,
 		 * work with the limit string parser as is anyway)
 		 */
 		errno = 0;
-		l = strtol(value, &endptr, 10);
+		l = strtol(value, &end, 10);
 
-		if (value == endptr || errno != 0)
+		if (value == end || errno != 0)
 			return 0;  // FIXME: We could instead throw an error, though.
 
 		if (__builtin_mul_overflow(l, multiplier, &limit)) {
