@@ -33,6 +33,7 @@ getrange(const char *range,
 	if (NULL == range)
 		return -1;
 
+	*min = 0;
 	*has_min = false;
 	*has_max = false;
 
@@ -58,7 +59,7 @@ parse_max:
 		if (!isdigit((unsigned char) *end))
 			return -1;
 
-		if (a2ul(max, end, NULL, 10, 0, ULONG_MAX) == -1)
+		if (a2ul(max, end, NULL, 10, *min, ULONG_MAX) == -1)
 			return -1;
 		*has_max = true;
 
