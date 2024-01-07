@@ -857,14 +857,14 @@ static int get_groups (char *list)
  */
 static struct group * get_local_group(char * grp_name)
 {
+	char  *end;
 	const struct group *grp;
 	struct group *result_grp = NULL;
 	long long  gid;
-	char *endptr;
 
-	gid = strtoll (grp_name, &endptr, 10);
+	gid = strtoll(grp_name, &end, 10);
 	if (   ('\0' != *grp_name)
-		&& ('\0' == *endptr)
+		&& ('\0' == *end)
 		&& (ERANGE != errno)
 		&& (gid == (gid_t)gid)) {
 		grp = gr_locate_gid (gid);

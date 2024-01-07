@@ -16,13 +16,13 @@
 int
 get_uid(const char *uidstr, uid_t *uid)
 {
+	char       *end;
 	long long  val;
-	char *endptr;
 
 	errno = 0;
-	val = strtoll(uidstr, &endptr, 10);
+	val = strtoll(uidstr, &end, 10);
 	if (   ('\0' == *uidstr)
-	    || ('\0' != *endptr)
+	    || ('\0' != *end)
 	    || (0 != errno)
 	    || (/*@+longintegral@*/val != (uid_t)val)/*@=longintegral@*/) {
 		return -1;
