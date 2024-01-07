@@ -39,7 +39,7 @@ test_atoi_strtoi_SOURCES = \
     test_atoi_strtoi.c \
     $(NULL)
 test_atoi_strtoi_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_atoi_strtoi_LDFLAGS = \
     $(NULL)
@@ -52,7 +52,7 @@ test_atoi_strtou_noneg_SOURCES = \
     test_atoi_strtou_noneg.c \
     $(NULL)
 test_atoi_strtou_noneg_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_atoi_strtou_noneg_LDFLAGS = \
     $(NULL)
@@ -65,7 +65,7 @@ test_chkname_SOURCES = \
     test_chkname.c \
     $(NULL)
 test_chkname_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_chkname_LDFLAGS = \
     $(NULL)
@@ -95,7 +95,7 @@ test_sprintf_SOURCES = \
     test_sprintf.c \
     $(NULL)
 test_sprintf_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_sprintf_LDFLAGS = \
     $(NULL)
@@ -107,7 +107,7 @@ test_strncpy_SOURCES = \
     test_strncpy.c \
     $(NULL)
 test_strncpy_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_strncpy_LDFLAGS = \
     $(NULL)
@@ -120,7 +120,7 @@ test_strtcpy_SOURCES = \
     test_strtcpy.c \
     $(NULL)
 test_strtcpy_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_strtcpy_LDFLAGS = \
     $(NULL)
@@ -133,7 +133,7 @@ test_xasprintf_SOURCES = \
     test_xasprintf.c \
     $(NULL)
 test_xasprintf_CFLAGS = \
-    $(AM_FLAGS) \
+    $(AM_CFLAGS) \
     $(NULL)
 test_xasprintf_LDFLAGS = \
     -Wl,-wrap,vasprintf \
