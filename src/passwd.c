@@ -22,6 +22,7 @@
 
 #include "agetpass.h"
 #include "alloc.h"
+#include "atoi/getlong.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"
@@ -33,6 +34,7 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+
 
 /*
  * exit status values

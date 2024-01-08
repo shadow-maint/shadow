@@ -13,8 +13,10 @@
 
 #ident "$Id$"
 
+#include "atoi/getlong.h"
 #include "prototypes.h"
 #include "getdate.h"
+
 
 /*
  * strtoday() now uses get_date() (borrowed from GNU shellutils)

@@ -18,6 +18,8 @@
 #include <sys/types.h>
 #include <time.h>
 #include <assert.h>
+
+#include "atoi/getlong.h"
 #include "defines.h"
 #include "faillog.h"
 #include "memzero.h"
@@ -25,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+
 
 /* local function prototypes */
 NORETURN static void usage (int status);

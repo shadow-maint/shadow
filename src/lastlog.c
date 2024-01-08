@@ -22,6 +22,8 @@
 #ifdef HAVE_LL_HOST
 #include <net/if.h>
 #endif
+
+#include "atoi/getlong.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
@@ -29,6 +31,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+
 
 /*
  * Needed for MkLinux DR1/2/2.1 - J.

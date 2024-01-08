@@ -18,6 +18,10 @@
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
+
+#include "atoi/getlong.h"
+
+
 #ifdef	USE_NIS
 static bool nis_used;
 static bool nis_ignore;

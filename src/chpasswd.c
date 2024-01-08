@@ -16,9 +16,11 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#include "atoi/getlong.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -29,6 +31,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+
 
 #define IS_CRYPT_METHOD(str) ((crypt_method != NULL && strcmp(crypt_method, str) == 0) ? true : false)
 

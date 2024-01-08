@@ -18,6 +18,7 @@
 #include <fcntl.h>
 
 #include "alloc.h"
+#include "atoi/getlong.h"
 #include "string/sprintf.h"
 
 

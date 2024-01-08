@@ -27,6 +27,7 @@
 #include <pwd.h>
 
 #include "alloc.h"
+#include "atoi/getlong.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "memzero.h"

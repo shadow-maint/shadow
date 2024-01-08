@@ -31,6 +31,7 @@ libshadow_la_SOURCES = \
 	alloc.c \
 	alloc.h \
 	atoi/getlong.c \
+	atoi/getlong.h \
 	atoi/getulong.c \
 	atoi/strtoi.c \
 	atoi/strtoi.h \

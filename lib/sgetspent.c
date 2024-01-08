@@ -19,6 +19,10 @@
 #include "shadowlog_internal.h"
 #include "defines.h"
 #include <stdio.h>
+
+#include "atoi/getlong.h"
+
+
 #define	FIELDS	9
 #define	OFIELDS	5
 /*
