@@ -84,14 +84,14 @@ static int setrlimit_value (unsigned int resource,
 }
 
 
-static int set_prio (const char *value)
+static int
+set_prio(const char *value)
 {
-	long prio;
+	int  prio;
 
-	if (   (getl(value, &prio) == -1)
-	    || (prio != (int) prio)) {
+	if (geti(value, &prio) == -1)
 		return 0;
-	}
+
 	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
