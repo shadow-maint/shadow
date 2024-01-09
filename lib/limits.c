@@ -99,14 +99,13 @@ set_prio(const char *value)
 }
 
 
-static int set_umask (const char *value)
+static int
+set_umask(const char *value)
 {
-	unsigned long  mask;
+	mode_t  mask;
 
-	if (   (getul(value, &mask) == -1)
-	    || (mask != (mode_t) mask)) {
+	if (getn(mode_t, value, &mask) == -1)
 		return 0;
-	}
 
 	(void) umask (mask);
 	return 0;
