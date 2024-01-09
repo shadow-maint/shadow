@@ -18,12 +18,6 @@
 #include "string/sprintf.h"
 
 
-int
-get_pid(const char *pidstr, pid_t *pid)
-{
-	return getnum(pid_t, pidstr, pid, NULL, 10, 1, type_max(pid_t));
-}
-
 /*
  * If use passed in fd:4 as an argument, then return the
  * value '4', the fd to use.
