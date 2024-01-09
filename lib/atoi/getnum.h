@@ -20,8 +20,10 @@
 #define getnum(TYPE, ...)                                                     \
 (                                                                             \
 	_Generic((TYPE) 0,                                                    \
+		int:                getint,                                   \
 		long:               getlong,                                  \
 		long long:          getllong,                                 \
+		unsigned int:       getuint,                                  \
 		unsigned long:      getulong,                                 \
 		unsigned long long: getullong                                 \
 	)(__VA_ARGS__)                                                        \
@@ -31,8 +33,10 @@
 #define getn(TYPE, ...)                                                       \
 (                                                                             \
 	_Generic((TYPE) 0,                                                    \
+		int:                geti,                                     \
 		long:               getl,                                     \
 		long long:          getll,                                    \
+		unsigned int:       getui,                                    \
 		unsigned long:      getul,                                    \
 		unsigned long long: getull                                    \
 	)(__VA_ARGS__)                                                        \
