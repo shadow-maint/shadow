@@ -557,16 +557,12 @@ int main (int argc, char **argv)
 				break;
 			case 'm':
 			{
-				long  lmax;
-
-				if (   (str2sl(&lmax, optarg) == -1)
-				    || ((long)(short) lmax != lmax)) {
+				if (str2sh(&fail_max, optarg) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				fail_max = lmax;
 				mflg = true;
 				break;
 			}
