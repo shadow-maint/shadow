@@ -9,6 +9,7 @@
 
 #include <config.h>
 
+#include <limits.h>
 #include <stddef.h>
 #include <sys/types.h>
 
@@ -18,9 +19,18 @@
 
 
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
+inline int get_fd(const char *restrict fdstr, int *restrict fd);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int get_gid(const char *restrict gidstr, gid_t *restrict gid);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int get_pid(const char *restrict pidstr, pid_t *restrict pid);
+
+
+inline int
+get_fd(const char *restrict fdstr, int *restrict fd)
+{
+	return a2si(fd, fdstr, NULL, 10, 0, INT_MAX);
+}
 
 
 inline int

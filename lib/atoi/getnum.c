@@ -10,5 +10,6 @@
 #include "atoi/getnum.h"
 
 
+extern inline int get_fd(const char *restrict fdstr, int *restrict fd);
 extern inline int get_gid(const char *restrict gidstr, gid_t *restrict gid);
 extern inline int get_pid(const char *restrict pidstr, pid_t *restrict pid);
