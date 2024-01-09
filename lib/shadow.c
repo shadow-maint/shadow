@@ -19,6 +19,7 @@
 #include "defines.h"
 #include <stdio.h>
 
+#include "atoi/a2i.h"
 #include "atoi/str2i.h"
 
 
@@ -117,9 +118,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[2][0] == '\0')
 		spwd.sp_lstchg = -1;
-	else if (str2sl(&spwd.sp_lstchg, fields[2]) == -1)
-		return 0;
-	else if (spwd.sp_lstchg < 0)
+	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -128,9 +127,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[3][0] == '\0')
 		spwd.sp_min = -1;
-	else if (str2sl(&spwd.sp_min, fields[3]) == -1)
-		return 0;
-	else if (spwd.sp_min < 0)
+	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -139,9 +136,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[4][0] == '\0')
 		spwd.sp_max = -1;
-	else if (str2sl(&spwd.sp_max, fields[4]) == -1)
-		return 0;
-	else if (spwd.sp_max < 0)
+	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -164,9 +159,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[5][0] == '\0')
 		spwd.sp_warn = -1;
-	else if (str2sl(&spwd.sp_warn, fields[5]) == -1)
-		return 0;
-	else if (spwd.sp_warn < 0)
+	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -176,9 +169,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[6][0] == '\0')
 		spwd.sp_inact = -1;
-	else if (str2sl(&spwd.sp_inact, fields[6]) == -1)
-		return 0;
-	else if (spwd.sp_inact < 0)
+	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -188,9 +179,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[7][0] == '\0')
 		spwd.sp_expire = -1;
-	else if (str2sl(&spwd.sp_expire, fields[7]) == -1)
-		return 0;
-	else if (spwd.sp_expire < 0)
+	else if (a2sl(&spwd.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
