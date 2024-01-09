@@ -316,7 +316,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (str2sl(&val, d->value) == -1 || val < -1) {
+	if (a2sl(&val, d->value, NULL, 0, -1, LONG_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
