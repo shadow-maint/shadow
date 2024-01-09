@@ -19,28 +19,6 @@
 #include "attr.h"
 
 
-#define getnum(TYPE, ...)                                                     \
-(                                                                             \
-	_Generic((TYPE) 0,                                                    \
-		long:               getlong,                                  \
-		long long:          getllong,                                 \
-		unsigned long:      getulong,                                 \
-		unsigned long long: getullong                                 \
-	)(__VA_ARGS__)                                                        \
-)
-
-
-#define getn(TYPE, ...)                                                       \
-(                                                                             \
-	_Generic((TYPE) 0,                                                    \
-		long:               getl,                                     \
-		long long:          getll,                                    \
-		unsigned long:      getul,                                    \
-		unsigned long long: getull                                    \
-	)(__VA_ARGS__)                                                        \
-)
-
-
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
 inline int getlong(const char *s, long *restrict n,
     char **restrict endptr, int base, long min, long max);

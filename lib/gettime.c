@@ -11,7 +11,7 @@
 #include <limits.h>
 #include <stdio.h>
 
-#include "atoi/getlong.h"
+#include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"

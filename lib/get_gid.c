@@ -10,7 +10,7 @@
 #include <sys/types.h>
 
 #include "prototypes.h"
-#include "atoi/getlong.h"
+#include "atoi/getnum.h"
 #include "typetraits.h"
 
 
