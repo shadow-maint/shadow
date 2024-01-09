@@ -50,6 +50,8 @@ ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int get_gid(const char *restrict gidstr, gid_t *restrict gid);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int get_pid(const char *restrict pidstr, pid_t *restrict pid);
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
+inline int get_uid(const char *restrict uidstr, uid_t *restrict uid);
 
 
 inline int
@@ -71,6 +73,14 @@ inline int
 get_pid(const char *restrict pidstr, pid_t *restrict pid)
 {
 	return getnum(pid_t, pidstr, pid, NULL, 10, 1, type_max(pid_t));
+}
+
+
+inline int
+get_uid(const char *restrict uidstr, uid_t *restrict uid)
+{
+	return getnum(uid_t, uidstr, uid,
+	              NULL, 10, type_min(uid_t), type_max(uid_t));
 }
 
 

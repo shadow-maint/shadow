@@ -25,7 +25,6 @@ lib/find_new_sub_gids.c
 lib/find_new_sub_uids.c
 lib/find_new_uid.c
 lib/fputsx.c
-lib/get_uid.c
 lib/getdef.c
 lib/getgr_nam_gid.c
 lib/getrange.c

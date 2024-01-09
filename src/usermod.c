@@ -34,6 +34,7 @@
 
 #include "alloc.h"
 #include "atoi/getlong.h"
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"

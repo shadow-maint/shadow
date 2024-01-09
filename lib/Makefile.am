@@ -71,7 +71,6 @@ libshadow_la_SOURCES = \
 	find_new_sub_uids.c \
 	fputsx.c \
 	get_pid.c \
-	get_uid.c \
 	getdate.h \
 	getdate.y \
 	getdef.c \
