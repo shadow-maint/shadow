@@ -21,9 +21,11 @@
 #define getnum(TYPE, ...)                                                     \
 (                                                                             \
 	_Generic((TYPE) 0,                                                    \
+		short:              getshort,                                 \
 		int:                getint,                                   \
 		long:               getlong,                                  \
 		long long:          getllong,                                 \
+		unsigned short:     getushort,                                \
 		unsigned int:       getuint,                                  \
 		unsigned long:      getulong,                                 \
 		unsigned long long: getullong                                 \
@@ -34,9 +36,11 @@
 #define getn(TYPE, ...)                                                       \
 (                                                                             \
 	_Generic((TYPE) 0,                                                    \
+		short:              geth,                                     \
 		int:                geti,                                     \
 		long:               getl,                                     \
 		long long:          getll,                                    \
+		unsigned short:     getuh,                                    \
 		unsigned int:       getui,                                    \
 		unsigned long:      getul,                                    \
 		unsigned long long: getull                                    \
