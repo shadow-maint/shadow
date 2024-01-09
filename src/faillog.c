@@ -560,16 +560,12 @@ int main (int argc, char **argv)
 				break;
 			case 'm':
 			{
-				long  lmax;
-
-				if (   (getl(optarg, &lmax) == -1)
-				    || ((long)(short) lmax != lmax)) {
+				if (geth(optarg, &fail_max) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				fail_max = lmax;
 				mflg = true;
 				break;
 			}
