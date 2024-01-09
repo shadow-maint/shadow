@@ -12,10 +12,12 @@
 #include <string.h>
 #include <pwd.h>
 #include <stdbool.h>
+
 #include "subordinateio.h"
 #include "idmapping.h"
 #include "subid.h"
 #include "shadowlog.h"
+
 
 bool subid_init(const char *progname, FILE * logfd)
 {

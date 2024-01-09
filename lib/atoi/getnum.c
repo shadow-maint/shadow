@@ -5,17 +5,9 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
 #include <sys/types.h>
 
-#include "prototypes.h"
-#include "atoi/a2i.h"
-#include "typetraits.h"
+#include "atoi/getnum.h"
 
 
-int
-get_gid(const char *gidstr, gid_t *gid)
-{
-	return a2i(gid_t, gid, gidstr, NULL, 10, type_min(gid_t), type_max(gid_t));
-}
+extern inline int get_gid(const char *restrict gidstr, gid_t *restrict gid);
