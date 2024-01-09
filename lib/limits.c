@@ -478,10 +478,9 @@ void setup_limits (const struct passwd *info)
 			}
 
 			if (strncmp (cp, "pri=", 4) == 0) {
-				long  inc;
+				int  inc;
 
-				if (   (str2sl(&inc, cp + 4) == 0)
-				    && (inc >= -20) && (inc <= 20)) {
+				if (a2si(&inc, cp + 4, NULL, 0, -20, 20) == 0) {
 					errno = 0;
 					if (   (nice (inc) != -1)
 					    || (0 != errno)) {
