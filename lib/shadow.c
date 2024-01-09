@@ -309,8 +309,6 @@ static struct spwd *my_sgetspent (const char *string)
 		{
 			return 0;
 		}
-	} else if (spwd.sp_flag < 0) {
-		return 0;
 	}
 
 	return (&spwd);
