@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#include "atoi/str2i.h"
+#include "atoi/getnum.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
@@ -33,12 +33,12 @@ int main(int argc, char *argv[])
 		usage();
 	}
 	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
-		str2i(uid_t, &u, argv[2]);
+		get_uid(argv[2], &u);
 		n = subid_get_gid_owners(u, &uids);
 	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
 		usage();
 	} else {
-		str2i(uid_t, &u, argv[1]);
+		get_gid(argv[1], &u);
 		n = subid_get_uid_owners(u, &uids);
 	}
 	if (n < 0) {
