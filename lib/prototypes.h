@@ -146,7 +146,6 @@ extern int find_new_sub_uids (uid_t *range_start, unsigned long *range_count);
 extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
 
 /* get_pid.c */
-extern int get_pid (const char *pidstr, pid_t *pid);
 extern int get_pidfd_from_fd(const char *pidfdstr);
 extern int open_pidfd(const char *pidstr);
 

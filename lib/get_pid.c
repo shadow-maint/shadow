@@ -14,15 +14,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "atoi/a2i.h"
+#include "atoi/getnum.h"
 #include "string/sprintf.h"
 
-
-int
-get_pid(const char *pidstr, pid_t *pid)
-{
-	return a2i(pid_t, pid, pidstr, NULL, 10, 1, type_max(pid_t));
-}
 
 /*
  * If use passed in fd:4 as an argument, then return the
