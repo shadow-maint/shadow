@@ -30,8 +30,10 @@
 #include "shadowlog.h"
 #include <sys/resource.h>
 
+#include "atoi/a2i.h"
 #include "atoi/str2i.h"
 #include "memzero.h"
+#include "typetraits.h"
 
 
 #ifndef LIMITS_FILE
@@ -49,9 +51,7 @@ static int setrlimit_value (unsigned int resource,
                             const char *value,
                             unsigned int multiplier)
 {
-	char           *end;
-	long           l;
-	rlim_t         limit;
+	rlim_t         l, limit;
 	struct rlimit  rlim;
 
 	/* The "-" is special, not belonging to a strange negative limit.
@@ -59,18 +59,13 @@ static int setrlimit_value (unsigned int resource,
 	 */
 	if ('-' == value[0]) {
 		limit = RLIM_INFINITY;
-	}
-	else {
-		/* We cannot use str2sl() here because it fails when there
-		 * is more to the value than just this number!
-		 * Also, we are limited to base 10 here (hex numbers will not
-		 * work with the limit string parser as is anyway)
-		 */
-		errno = 0;
-		l = strtol(value, &end, 10);
 
-		if (value == end || errno != 0)
+	} else {
+		if (a2i(rlim_t, &l, value, NULL, 10, 0, type_max(rlim_t)) == -1
+		    && errno != ENOTSUP)
+		{
 			return 0;  // FIXME: We could instead throw an error, though.
+		}
 
 		if (__builtin_mul_overflow(l, multiplier, &limit)) {
 			/* FIXME: Again, silent error handling...
