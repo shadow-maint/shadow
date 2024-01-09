@@ -414,8 +414,9 @@ static void get_defaults (void)
 		 * Default Password Inactive value
 		 */
 		else if (MATCH (buf, DINACT)) {
-			if (   (getl(cp, &def_inactive) == -1)
-			    || (def_inactive < -1)) {
+			if (getlong(cp, &def_inactive, NULL, 0, -1, LONG_MAX)
+			    == -1)
+			{
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, cp);
@@ -1310,8 +1311,9 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getl(optarg, &def_inactive) == -1)
-				    || (def_inactive < -1)) {
+				if (getlong(optarg, &def_inactive, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
