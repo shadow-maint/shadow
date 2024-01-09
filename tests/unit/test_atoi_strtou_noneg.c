@@ -17,7 +17,6 @@
 
 
 static void test_strtoul_noneg(void **state);
-static void test_strtoull_noneg(void **state);
 
 
 int
@@ -25,7 +24,6 @@ main(void)
 {
     const struct CMUnitTest  tests[] = {
         cmocka_unit_test(test_strtoul_noneg),
-        cmocka_unit_test(test_strtoull_noneg),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
@@ -50,27 +48,5 @@ test_strtoul_noneg(void **state)
 
 	errno = 0;
 	assert_true(strtoul_noneg("-0x10000000000000000", NULL, 0) == 0);
-	assert_true(errno == ERANGE);
-}
-
-
-static void
-test_strtoull_noneg(void **state)
-{
-	errno = 0;
-	assert_true(strtoull_noneg("42", NULL, 0) == 42);
-	assert_true(errno == 0);
-
-	assert_true(strtoull_noneg("-1", NULL, 0) == 0);
-	assert_true(errno == ERANGE);
-	errno = 0;
-	assert_true(strtoull_noneg("-3", NULL, 0) == 0);
-	assert_true(errno == ERANGE);
-	errno = 0;
-	assert_true(strtoull_noneg("-0xFFFFFFFFFFFFFFFF", NULL, 0) == 0);
-	assert_true(errno == ERANGE);
-
-	errno = 0;
-	assert_true(strtoull_noneg("-0x10000000000000000", NULL, 0) == 0);
 	assert_true(errno == ERANGE);
 }
