@@ -14,27 +14,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include "atoi/a2i.h"
 #include "string/sprintf.h"
 
 
 int
 get_pid(const char *pidstr, pid_t *pid)
 {
-	char       *end;
-	long long  val;
-
-	errno = 0;
-	val = strtoll(pidstr, &end, 10);
-	if (   ('\0' == *pidstr)
-	    || ('\0' != *end)
-	    || (0 != errno)
-	    || (val < 1)
-	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
-		return -1;
-	}
-
-	*pid = val;
-	return 0;
+	return a2i(pid_t, pid, pidstr, NULL, 10, 1, type_max(pid_t));
 }
 
 /*
