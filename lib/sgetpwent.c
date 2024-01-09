@@ -16,9 +16,11 @@
 #include <pwd.h>
 #include <string.h>
 
+#include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+
 
 #define	NFIELDS	7
 
