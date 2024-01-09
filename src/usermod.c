@@ -36,7 +36,6 @@
 #include "alloc/x/xmalloc.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
-#include "atoi/str2i.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -970,7 +969,8 @@ static void grp_update (void)
  *	values that the user will be created with accordingly. The values
  *	are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void
+process_flags(int argc, char **argv)
 {
 	struct stat st;
 	bool anyflag = false;
@@ -1067,8 +1067,9 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (str2sl(&user_newinactive, optarg) == -1)
-				    || (user_newinactive < -1)) {
+				if (a2sl(&user_newinactive, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
