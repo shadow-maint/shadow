@@ -232,10 +232,11 @@ bool getdef_bool (const char *item)
  * values are handled.
  */
 
-int getdef_num (const char *item, int dflt)
+int
+getdef_num(const char *item, int dflt)
 {
-	struct itemdef *d;
-	long val;
+	int             val;
+	struct itemdef  *d;
 
 	if (!def_loaded) {
 		def_load ();
@@ -246,9 +247,7 @@ int getdef_num (const char *item, int dflt)
 		return dflt;
 	}
 
-	if (   (getl(d->value, &val) == -1)
-	    || (val > INT_MAX)
-	    || (val < -1)) {
+	if (getint(d->value, &val, NULL, 0, -1, INT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
