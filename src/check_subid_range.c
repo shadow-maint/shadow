@@ -13,7 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "atoi/strtou_noneg.h"
+#include "atoi/getlong.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "subordinateio.h"
@@ -37,11 +37,9 @@ int main(int argc, char **argv)
 	owner = argv[1];
 	check_uids = argv[2][0] == 'u';
 	errno = 0;
-	start = strtoul_noneg(argv[3], NULL, 10);
-	if (errno != 0)
+	if (getul(argv[3], &start) == -1)
 		exit(1);
-	count = strtoul_noneg(argv[4], NULL, 10);
-	if (errno != 0)
+	if (getul(argv[4], &count) == -1)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))
