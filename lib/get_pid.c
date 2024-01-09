@@ -1,8 +1,7 @@
-/*
- * SPDX-FileCopyrightText: 2009       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2009, Nicolas François
+// SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -25,20 +24,12 @@
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
-	char         *end;
-	long long    val;
+	int          pidfd;
 	struct stat  st;
 	dev_t proc_st_dev, proc_st_rdev;
 
-	errno = 0;
-	val = strtoll(pidfdstr, &end, 10);
-	if (   ('\0' == *pidfdstr)
-	    || ('\0' != *end)
-	    || (0 != errno)
-	    || (val < 0)
-	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
+	if (get_fd(pidfdstr, &pidfd) == -1)
 		return -1;
-	}
 
 	if (stat("/proc/self/uid_map", &st) < 0) {
 		return -1;
@@ -47,7 +38,7 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	proc_st_dev = st.st_dev;
 	proc_st_rdev = st.st_rdev;
 
-	if (fstat(val, &st) < 0) {
+	if (fstat(pidfd, &st) < 0) {
 		return -1;
 	}
 
@@ -55,7 +46,7 @@ int get_pidfd_from_fd(const char *pidfdstr)
 		return -1;
 	}
 
-	return (int)val;
+	return pidfd;
 }
 
 int open_pidfd(const char *pidstr)
