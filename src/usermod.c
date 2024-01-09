@@ -313,28 +313,24 @@ struct ulong_range
 
 static struct ulong_range getulong_range(const char *str)
 {
-	struct ulong_range result = { .first = ULONG_MAX, .last = 0 };
-	long long first, last;
-	char *pos;
+	char                *pos;
+	unsigned long       first, last;
+	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
-	errno = 0;
-	first = strtoll(str, &pos, 10);
-	if (('\0' == *str) || ('-' != *pos ) || (0 != errno) ||
-	    (first != (unsigned long)first))
-		goto out;
+	if (getulong(str, &first, &pos, 10, 0, ULONG_MAX) == -1
+	    && errno != ENOTSUP)
+	{
+		return result;
+	}
 
-	errno = 0;
-	last = strtoll(pos + 1, &pos, 10);
-	if (('\0' != *pos ) || (0 != errno) ||
-	    (last != (unsigned long)last))
-		goto out;
+	if ('-' != *pos++)
+		return result;
 
-	if (first > last)
-		goto out;
+	if (getulong(pos, &last, NULL, 10, first, ULONG_MAX) == -1)
+		return result;
 
-	result.first = (unsigned long)first;
-	result.last = (unsigned long)last;
-out:
+	result.first = first;
+	result.last = last;
 	return result;
 }
 
