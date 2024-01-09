@@ -507,10 +507,9 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "umask=", 6) == 0) {
-				unsigned long  mask;
+				mode_t  mask;
 
-				if (   (getul(cp + 6, &mask) == -1)
-				    || (mask != (mode_t) mask)) {
+				if (getn(mode_t, cp + 6, &mask) == -1) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",
 					         info->pw_name));
