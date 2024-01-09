@@ -266,10 +266,11 @@ getdef_num(const char *item, int dflt)
  * values are handled.
  */
 
-unsigned int getdef_unum (const char *item, unsigned int dflt)
+unsigned int
+getdef_unum(const char *item, unsigned int dflt)
 {
-	struct itemdef *d;
-	long val;
+	unsigned int    val;
+	struct itemdef  *d;
 
 	if (!def_loaded) {
 		def_load ();
@@ -280,9 +281,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	if (   (getl(d->value, &val) == -1)
-	    || (val < 0)
-	    || (val > INT_MAX)) {
+	if (getuint(d->value, &val, NULL, 0, 0, UINT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
