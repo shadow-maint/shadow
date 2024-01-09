@@ -31,6 +31,7 @@
 #include <string.h>
 
 #include "alloc.h"
+#include "atoi/getnum.h"
 #include "atoi/str2i.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM

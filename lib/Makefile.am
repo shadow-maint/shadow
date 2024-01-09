@@ -33,6 +33,8 @@ libshadow_la_SOURCES = \
 	alloc.h \
 	atoi/a2i.c \
 	atoi/a2i.h \
+	atoi/getnum.c \
+	atoi/getnum.h \
 	atoi/str2i.c \
 	atoi/str2i.h \
 	atoi/strtoi.c \
@@ -71,7 +73,6 @@ libshadow_la_SOURCES = \
 	find_new_sub_gids.c \
 	find_new_sub_uids.c \
 	fputsx.c \
-	get_gid.c \
 	get_pid.c \
 	get_uid.c \
 	getdate.h \
