@@ -496,9 +496,9 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
-				long  blocks;
-				if (   (str2sl(&blocks, cp + 7) == -1)
-				    || (blocks != (int) blocks)
+				int  blocks;
+
+				if (   (str2si(&blocks, cp + 7) == -1)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
