@@ -16,8 +16,10 @@
 #include <grp.h>
 
 #include "alloc.h"
+#include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
+
 
 #define	NFIELDS	4
 

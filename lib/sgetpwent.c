@@ -15,8 +15,11 @@
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
+
+#include "atoi/getnum.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+
 
 #define	NFIELDS	7
 

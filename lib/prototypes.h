@@ -145,10 +145,6 @@ extern int find_new_sub_gids (gid_t *range_start, unsigned long *range_count);
 extern int find_new_sub_uids (uid_t *range_start, unsigned long *range_count);
 #endif				/* ENABLE_SUBIDS */
 
-
-/* get_gid.c */
-extern int get_gid (const char *gidstr, gid_t *gid);
-
 /* getgr_nam_gid.c */
 extern /*@only@*//*@null@*/struct group *getgr_nam_gid (/*@null@*/const char *grname);
 
