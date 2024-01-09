@@ -94,34 +94,28 @@ struct spwd *sgetspent (const char *string)
 	 * incorrectly formatted number.
 	 */
 
-	if (fields[2][0] == '\0') {
+	if (fields[2][0] == '\0')
 		spwd.sp_lstchg = -1;
-	} else if (   (getl(fields[2], &spwd.sp_lstchg) == -1)
-	           || (spwd.sp_lstchg < 0)) {
+	else if (getlong(fields[2], &spwd.sp_lstchg, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * Get the minimum period between password changes.
 	 */
 
-	if (fields[3][0] == '\0') {
+	if (fields[3][0] == '\0')
 		spwd.sp_min = -1;
-	} else if (   (getl(fields[3], &spwd.sp_min) == -1)
-	           || (spwd.sp_min < 0)) {
+	else if (getlong(fields[3], &spwd.sp_min, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * Get the maximum number of days a password is valid.
 	 */
 
-	if (fields[4][0] == '\0') {
+	if (fields[4][0] == '\0')
 		spwd.sp_max = -1;
-	} else if (   (getl(fields[4], &spwd.sp_max) == -1)
-	           || (spwd.sp_max < 0)) {
+	else if (getlong(fields[4], &spwd.sp_max, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * If there are only OFIELDS fields (this is a SVR3.2 /etc/shadow
@@ -141,47 +135,40 @@ struct spwd *sgetspent (const char *string)
 	 * Get the number of days of password expiry warning.
 	 */
 
-	if (fields[5][0] == '\0') {
+	if (fields[5][0] == '\0')
 		spwd.sp_warn = -1;
-	} else if (   (getl(fields[5], &spwd.sp_warn) == -1)
-	           || (spwd.sp_warn < 0)) {
+	else if (getlong(fields[5], &spwd.sp_warn, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * Get the number of days of inactivity before an account is
 	 * disabled.
 	 */
 
-	if (fields[6][0] == '\0') {
+	if (fields[6][0] == '\0')
 		spwd.sp_inact = -1;
-	} else if (   (getl(fields[6], &spwd.sp_inact) == -1)
-	           || (spwd.sp_inact < 0)) {
+	else if (getlong(fields[6], &spwd.sp_inact, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * Get the number of days after the epoch before the account is
 	 * set to expire.
 	 */
 
-	if (fields[7][0] == '\0') {
+	if (fields[7][0] == '\0')
 		spwd.sp_expire = -1;
-	} else if (   (getl(fields[7], &spwd.sp_expire) == -1)
-	           || (spwd.sp_expire < 0)) {
+	else if (getlong(fields[7], &spwd.sp_expire, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
-	}
 
 	/*
 	 * This field is reserved for future use.  But it isn't supposed
 	 * to have anything other than a valid integer in it.
 	 */
 
-	if (fields[8][0] == '\0') {
+	if (fields[8][0] == '\0')
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	} else if (getul(fields[8], &spwd.sp_flag) == -1) {
+	else if (getul(fields[8], &spwd.sp_flag) == -1)
 		return 0;
-	}
 
 	return (&spwd);
 }
