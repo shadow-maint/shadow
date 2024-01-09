@@ -14,5 +14,3 @@ extern inline uintmax_t strtou_noneg(const char *nptr, char **restrict endptr,
 
 extern inline unsigned long strtoul_noneg(const char *nptr,
     char **restrict endptr, int base);
-extern inline unsigned long long strtoull_noneg(const char *nptr,
-    char **restrict endptr, int base);

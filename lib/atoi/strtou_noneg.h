@@ -23,9 +23,6 @@ inline uintmax_t strtou_noneg(const char *nptr, char **restrict endptr,
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline unsigned long strtoul_noneg(const char *nptr,
     char **restrict endptr, int base);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline unsigned long long strtoull_noneg(const char *nptr,
-    char **restrict endptr, int base);
 
 
 inline uintmax_t
@@ -51,17 +48,6 @@ strtoul_noneg(const char *nptr, char **restrict endptr, int base)
 		return 0;
 	}
 	return strtoul(nptr, endptr, base);
-}
-
-
-inline unsigned long long
-strtoull_noneg(const char *nptr, char **restrict endptr, int base)
-{
-	if (strtol(nptr, endptr, base) < 0) {
-		errno = ERANGE;
-		return 0;
-	}
-	return strtoull(nptr, endptr, base);
 }
 
 
