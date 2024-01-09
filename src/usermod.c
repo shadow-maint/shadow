@@ -967,7 +967,8 @@ static void grp_update (void)
  *	values that the user will be created with accordingly. The values
  *	are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void
+process_flags(int argc, char **argv)
 {
 	const struct group *grp;
 	struct stat st;
@@ -1065,8 +1066,9 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getl(optarg, &user_newinactive) == -1)
-				    || (user_newinactive < -1)) {
+				if (getlong(optarg, &user_newinactive, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
