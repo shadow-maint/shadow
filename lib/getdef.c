@@ -314,7 +314,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (getl(d->value, &val) == -1 || val < -1) {
+	if (getlong(d->value, &val, NULL, 0, -1, LONG_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
