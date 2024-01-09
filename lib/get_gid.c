@@ -1,34 +1,21 @@
-/*
- * SPDX-FileCopyrightText: 2009       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2009, Nicolas François
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <config.h>
 
 #ident "$Id$"
 
+#include <sys/types.h>
+
 #include "prototypes.h"
-#include "defines.h"
+#include "atoi/a2i.h"
+#include "typetraits.h"
 
 
 int
 get_gid(const char *gidstr, gid_t *gid)
 {
-	char       *end;
-	long long  val;
-
-	errno = 0;
-	val = strtoll(gidstr, &end, 10);
-	if (   ('\0' == *gidstr)
-	    || ('\0' != *end)
-	    || (0 != errno)
-	    || (/*@+longintegral@*/val != (gid_t)val)/*@=longintegral@*/) {
-		return -1;
-	}
-
-	*gid = val;
-	return 0;
+	return a2i(gid_t, gid, gidstr, NULL, 10, type_min(gid_t), type_max(gid_t));
 }
-
