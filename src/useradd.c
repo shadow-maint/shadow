@@ -38,6 +38,7 @@
 
 #include "alloc.h"
 #include "atoi/str2i.h"
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -853,21 +854,14 @@ static int get_groups (char *list)
  */
 static struct group * get_local_group(char * grp_name)
 {
-	char  *end;
-	const struct group *grp;
-	struct group *result_grp = NULL;
-	long long  gid;
+	gid_t               gid;
+	struct group        *result_grp = NULL;
+	const struct group  *grp;
 
-	gid = strtoll(grp_name, &end, 10);
-	if (   ('\0' != *grp_name)
-		&& ('\0' == *end)
-		&& (ERANGE != errno)
-		&& (gid == (gid_t)gid)) {
-		grp = gr_locate_gid (gid);
-	}
-	else {
+	if (get_gid(grp_name, &gid) == 0)
+		grp = gr_locate_gid(gid);
+	else
 		grp = gr_locate(grp_name);
-	}
 
 	if (grp != NULL) {
 		result_grp = __gr_dup (grp);
