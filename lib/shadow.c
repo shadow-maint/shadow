@@ -195,8 +195,6 @@ static struct spwd *my_sgetspent (const char *string)
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 	else if (str2ul(&spwd.sp_flag, fields[8]) == -1)
 		return 0;
-	else if (spwd.sp_flag < 0)
-		return 0;
 
 	return (&spwd);
 }
