@@ -27,10 +27,10 @@
 #include "sizeof.h"
 
 
-struct map_range *get_map_ranges(int ranges, int argc, char **argv)
+struct map_range *
+get_map_ranges(int ranges, int argc, char **argv)
 {
-	struct map_range *mappings, *m;
-	int idx, argidx;
+	struct map_range  *mappings, *m;
 
 	if (ranges < 0 || argc < 0) {
 		fprintf(log_get_logfd(), "%s: error calculating number of arguments\n", log_get_progname());
@@ -51,8 +51,8 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 
 	/* Gather up the ranges from the command line */
 	m = mappings;
-	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, m++) {
-		if (a2ul(&m->upper, argv[argidx + 0], NULL, 0, 0, UINT_MAX) == -1) {
+	for (int i = 0; i < ranges * 3; i+=3, m++) {
+		if (a2ul(&m->upper, argv[i + 0], NULL, 0, 0, UINT_MAX) == -1) {
 			if (errno == ERANGE) {
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 				exit(EXIT_FAILURE);
@@ -60,7 +60,7 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			free(mappings);
 			return NULL;
 		}
-		if (a2ul(&m->lower, argv[argidx + 1], NULL, 0, 0, UINT_MAX) == -1) {
+		if (a2ul(&m->lower, argv[i + 1], NULL, 0, 0, UINT_MAX) == -1) {
 			if (errno == ERANGE) {
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 				exit(EXIT_FAILURE);
@@ -68,7 +68,7 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			free(mappings);
 			return NULL;
 		}
-		if (a2ul(&m->count, argv[argidx + 2], NULL, 0, 0,
+		if (a2ul(&m->count, argv[i + 2], NULL, 0, 0,
 		         MIN(MIN(UINT_MAX, ULONG_MAX - 1) - m->lower,
 		             MIN(UINT_MAX, ULONG_MAX - 1) - m->upper))
 		    == -1)
