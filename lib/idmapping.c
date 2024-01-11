@@ -15,7 +15,7 @@
 
 #include "alloc/calloc.h"
 #include "alloc/x/xmalloc.h"
-#include "atoi/str2i.h"
+#include "atoi/a2i.h"
 #include "prototypes.h"
 #include "string/sprintf/stpeprintf.h"
 #include "idmapping.h"
@@ -52,23 +52,31 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	/* Gather up the ranges from the command line */
 	m = mappings;
 	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, m++) {
-		if (str2ul(&m->upper, argv[argidx + 0]) == -1) {
+		if (a2ul(&m->upper, argv[argidx + 0], NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
-		if (str2ul(&m->lower, argv[argidx + 1]) == -1) {
+		if (a2ul(&m->lower, argv[argidx + 1], NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
-		if (str2ul(&m->count, argv[argidx + 2]) == -1) {
+		if (a2ul(&m->count, argv[argidx + 2], NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
 		if (ULONG_MAX - m->upper <= m->count || ULONG_MAX - m->lower <= m->count) {
-			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-			exit(EXIT_FAILURE);
-		}
-		if (m->upper > UINT_MAX || m->lower > UINT_MAX || m->count > UINT_MAX)  {
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
