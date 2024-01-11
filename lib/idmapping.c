@@ -192,7 +192,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	}
 #endif
 
-	bufsize = ranges * ((ULONG_DIGITS + 1) * 3);
+	bufsize = (ULONG_DIGITS + 1) * 3 * ranges + 1;
 	pos = buf = XMALLOC(bufsize, char);
 	end = buf + bufsize;
 
