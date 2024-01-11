@@ -60,23 +60,31 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	/* Gather up the ranges from the command line */
 	m = mappings;
 	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, m++) {
-		if (getul(argv[argidx + 0], &m->upper) == -1) {
+		if (getulong(argv[argidx + 0], &m->upper, NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
-		if (getul(argv[argidx + 1], &m->lower) == -1) {
+		if (getulong(argv[argidx + 1], &m->lower, NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
-		if (getul(argv[argidx + 2], &m->count) == -1) {
+		if (getulong(argv[argidx + 2], &m->count, NULL, 0, 0, UINT_MAX) == -1) {
+			if (errno == ERANGE) {
+				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
+				exit(EXIT_FAILURE);
+			}
 			free(mappings);
 			return NULL;
 		}
 		if (ULONG_MAX - m->upper <= m->count || ULONG_MAX - m->lower <= m->count) {
-			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-			exit(EXIT_FAILURE);
-		}
-		if (m->upper > UINT_MAX || m->lower > UINT_MAX || m->count > UINT_MAX)  {
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
