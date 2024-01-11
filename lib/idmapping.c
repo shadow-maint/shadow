@@ -36,17 +36,8 @@ get_map_ranges(int ranges, int argc, char **argv)
 		return NULL;
 	}
 
-	if (ranges != ((argc + 2) / 3)) {
+	if (ranges * 3 != argc) {
 		fprintf(log_get_logfd(), "%s: ranges: %u is wrong for argc: %d\n", log_get_progname(), ranges, argc);
-		return NULL;
-	}
-
-	if ((ranges * 3) > argc) {
-		fprintf(log_get_logfd(), "ranges: %u argc: %d\n",
-			ranges, argc);
-		fprintf(log_get_logfd(),
-			_( "%s: Not enough arguments to form %u mappings\n"),
-			log_get_progname(), ranges);
 		return NULL;
 	}
 
