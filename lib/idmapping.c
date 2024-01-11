@@ -69,7 +69,8 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			return NULL;
 		}
 		if (a2ul(&m->count, argv[argidx + 2], NULL, 0, 0,
-		         MIN(UINT_MAX - m->lower, UINT_MAX - m->upper))
+		         MIN(MIN(UINT_MAX, ULONG_MAX - 1) - m->lower,
+		             MIN(UINT_MAX, ULONG_MAX - 1) - m->upper))
 		    == -1)
 		{
 			if (errno == ERANGE) {
@@ -78,10 +79,6 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			}
 			free(mappings);
 			return NULL;
-		}
-		if (ULONG_MAX - m->upper <= m->count || ULONG_MAX - m->lower <= m->count) {
-			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-			exit(EXIT_FAILURE);
 		}
 		if (m->lower + m->count < m->lower || m->upper + m->count < m->upper) {
 			/* this one really shouldn't be possible given previous checks */
