@@ -88,11 +88,6 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 			free(mappings);
 			return NULL;
 		}
-		if (m->lower + m->count < m->lower || m->upper + m->count < m->upper) {
-			/* this one really shouldn't be possible given previous checks */
-			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-			exit(EXIT_FAILURE);
-		}
 	}
 	return mappings;
 }
