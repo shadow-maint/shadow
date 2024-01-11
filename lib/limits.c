@@ -118,6 +118,10 @@ static int check_logins (const char *name, const char *maxlogins)
 	unsigned long limit, count;
 
 	if (getul(maxlogins, &limit) == -1) {
+		if (errno == ERANGE) {
+			SYSLOG((LOG_WARN, "Invalid maxlogins value\n"));
+			return LOGIN_ERROR_LOGIN;
+		}
 		return 0;
 	}
 
