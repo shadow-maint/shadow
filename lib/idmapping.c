@@ -29,7 +29,7 @@
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 {
-	struct map_range *mappings, *mapping;
+	struct map_range *mappings, *m;
 	int idx, argidx;
 
 	if (ranges < 0 || argc < 0) {
@@ -50,37 +50,33 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	}
 
 	/* Gather up the ranges from the command line */
-	mapping = mappings;
-	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, mapping++) {
-		if (str2ul(&mapping->upper, argv[argidx + 0]) == -1) {
+	m = mappings;
+	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, m++) {
+		if (str2ul(&m->upper, argv[argidx + 0]) == -1) {
 			free(mappings);
 			return NULL;
 		}
-		if (str2ul(&mapping->lower, argv[argidx + 1]) == -1) {
+		if (str2ul(&m->lower, argv[argidx + 1]) == -1) {
 			free(mappings);
 			return NULL;
 		}
-		if (str2ul(&mapping->count, argv[argidx + 2]) == -1) {
+		if (str2ul(&m->count, argv[argidx + 2]) == -1) {
 			free(mappings);
 			return NULL;
 		}
-		if (ULONG_MAX - mapping->upper <= mapping->count || ULONG_MAX - mapping->lower <= mapping->count) {
+		if (ULONG_MAX - m->upper <= m->count || ULONG_MAX - m->lower <= m->count) {
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
-		if (mapping->upper > UINT_MAX ||
-			mapping->lower > UINT_MAX ||
-			mapping->count > UINT_MAX)  {
+		if (m->upper > UINT_MAX || m->lower > UINT_MAX || m->count > UINT_MAX)  {
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
-		if (mapping->lower + mapping->count > UINT_MAX ||
-				mapping->upper + mapping->count > UINT_MAX) {
+		if (m->lower + m->count > UINT_MAX || m->upper + m->count > UINT_MAX) {
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
-		if (mapping->lower + mapping->count < mapping->lower ||
-				mapping->upper + mapping->count < mapping->upper) {
+		if (m->lower + m->count < m->lower || m->upper + m->count < m->upper) {
 			/* this one really shouldn't be possible given previous checks */
 			fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			exit(EXIT_FAILURE);
