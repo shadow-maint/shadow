@@ -186,12 +186,9 @@
 #define SHADOW_SP_FLAG_UNSET ((unsigned long)-1)
 
 #ifdef WITH_AUDIT
-#ifdef __u8			/* in case we use pam < 0.80 */
+/* in case we use pam < 0.80 */
 #undef __u8
-#endif
-#ifdef __u32
 #undef __u32
-#endif
 
 #include <libaudit.h>
 #endif
