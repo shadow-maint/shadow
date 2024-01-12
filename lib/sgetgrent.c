@@ -37,8 +37,8 @@
 static char **list (char *s)
 {
 	static char **members = NULL;
-	static int size = 0;	/* max members + 1 */
-	int i;
+	static size_t size = 0;	/* max members + 1 */
+	size_t i;
 
 	i = 0;
 	for (;;) {
@@ -47,8 +47,10 @@ static char **list (char *s)
 		if (i >= size) {
 			size = i + 100;	/* at least: i + 1 */
 			members = REALLOCF(members, size, char *);
-			if (!members)
+			if (!members) {
+				size = 0;
 				return NULL;
+			}
 		}
 		if (!s || s[0] == '\0')
 			break;
