@@ -14,17 +14,24 @@
 
 #ident "$Id$"
 
+#include <stdio.h>
 #include <sys/types.h>
+#include <string.h>
+
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "defines.h"
-#include <stdio.h>
+
+
 #define	FIELDS	9
 #define	OFIELDS	5
+
+
 /*
  * sgetspent - convert string in shadow file format to (struct spwd *)
  */
-struct spwd *sgetspent (const char *string)
+struct spwd *
+sgetspent(const char *string)
 {
 	static char spwbuf[PASSWD_ENTRY_MAX_LENGTH];
 	static struct spwd spwd;
@@ -57,9 +64,7 @@ struct spwd *sgetspent (const char *string)
 
 	for (cp = spwbuf, i = 0; ('\0' != *cp) && (i < FIELDS); i++) {
 		fields[i] = cp;
-		while (('\0' != *cp) && (':' != *cp)) {
-			cp++;
-		}
+		cp = strchrnul(cp, ':');
 
 		if ('\0' != *cp) {
 			*cp = '\0';

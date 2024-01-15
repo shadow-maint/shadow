@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <grp.h>
+#include <string.h>
 
 #include "alloc.h"
 #include "defines.h"
@@ -27,14 +28,11 @@
  *	list() converts the comma-separated list of member names into
  *	an array of character pointers.
  *
- *	WARNING: I profiled this once with and without strchr() calls
- *	and found that using a register variable and an explicit loop
- *	works best.  For large /etc/group files, this is a major win.
- *
  * FINALLY added dynamic allocation.  Still need to fix sgetsgent().
  *  --marekm
  */
-static char **list (char *s)
+static char **
+list(char *s)
 {
 	static char **members = NULL;
 	static size_t size = 0;	/* max members + 1 */
@@ -55,9 +53,7 @@ static char **list (char *s)
 		if (!s || s[0] == '\0')
 			break;
 		members[i++] = s;
-		while (('\0' != *s) && (',' != *s)) {
-			s++;
-		}
+		s = strchrnul(s, ',');
 		if ('\0' != *s) {
 			*s++ = '\0';
 		}
