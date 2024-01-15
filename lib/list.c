@@ -234,11 +234,9 @@ bool is_on_list (char *const *list, const char *member)
 
 	for (cp = members, i = 0;; i++) {
 		array[i] = cp;
-		cp2 = strchr (cp, ',');
-		if (NULL != cp2) {
-			*cp2 = '\0';
-			cp2++;
-			cp = cp2;
+		cp = strchr(cp, ',');
+		if (NULL != cp) {
+			*cp++ = '\0';
 		} else {
 			array[i + 1] = NULL;
 			break;
