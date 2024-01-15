@@ -73,9 +73,8 @@ sgetspent(const char *string)
 		}
 	}
 
-	if (i == (FIELDS - 1)) {
-		fields[i++] = cp;
-	}
+	if (i == (FIELDS - 1))
+		fields[i++] = "";
 
 	if ( ((NULL != cp) && ('\0' != *cp)) ||
 	     ((i != FIELDS) && (i != OFIELDS)) ) {
