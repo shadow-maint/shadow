@@ -127,7 +127,7 @@ static struct port *getportent (void)
 	 *      - parse off a list of days and times
 	 */
 
-      again:
+again:
 
 	/*
 	 * Get the next line and remove optional trailing '\n'.
@@ -154,13 +154,9 @@ static struct port *getportent (void)
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
 		port.pt_names[j] = cp;
-		while (('\0' != *cp) && (':' != *cp) && (',' != *cp)) {
-			cp++;
-		}
-
-		if ('\0' == *cp) {
+		cp = strpbrk(cp, ":,");
+		if (cp == NULL)
 			goto again;	/* line format error */
-		}
 
 		if (':' == *cp) {	/* end of tty name list */
 			break;
