@@ -61,17 +61,8 @@ sgetpwent(const char *buf)
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = pwdbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
-		fields[i] = cp;
-		cp = strchrnul(cp, ':');
-
-		if ('\0' != *cp) {
-			*cp = '\0';
-			cp++;
-		} else {
-			cp = NULL;
-		}
-	}
+	for (cp = pwdbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
+		fields[i] = strsep(&cp, ":");
 
 	/* something at the end, columns over shot */
 	if ( cp != NULL ) {

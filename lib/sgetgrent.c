@@ -52,11 +52,7 @@ list(char *s)
 		}
 		if (!s || s[0] == '\0')
 			break;
-		members[i++] = s;
-		s = strchrnul(s, ',');
-		if ('\0' != *s) {
-			*s++ = '\0';
-		}
+		members[i++] = strsep(&s, ",");
 	}
 	members[i] = NULL;
 	return members;
@@ -90,14 +86,9 @@ struct group *sgetgrent (const char *buf)
 		*cp = '\0';
 	}
 
-	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
-		grpfields[i] = cp;
-		cp = strchr (cp, ':');
-		if (NULL != cp) {
-			*cp = '\0';
-			cp++;
-		}
-	}
+	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
+		grpfields[i] = strsep(&cp, ":");
+
 	if (i < (NFIELDS - 1) || *grpfields[2] == '\0' || cp != NULL) {
 		return NULL;
 	}
