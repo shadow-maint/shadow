@@ -16,6 +16,7 @@
 #include <pwd.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <string.h>
 
 #include "alloc.h"
 #include "string/sprintf.h"
@@ -74,7 +75,8 @@ subordinate_free(/*@only@*/void *ent)
  * in @line, or NULL on failure.  Note that the returned value should not
  * be freed by the caller.
  */
-static void *subordinate_parse (const char *line)
+static void *
+subordinate_parse(const char *line)
 {
 	static struct subordinate_range range;
 	static char rangebuf[1024];
@@ -97,9 +99,7 @@ static void *subordinate_parse (const char *line)
 
 	for (cp = rangebuf, i = 0; (i < SUBID_NFIELDS) && (NULL != cp); i++) {
 		fields[i] = cp;
-		while (('\0' != *cp) && (':' != *cp)) {
-			cp++;
-		}
+		cp = strchrnul(cp, ':');
 
 		if ('\0' != *cp) {
 			*cp = '\0';
