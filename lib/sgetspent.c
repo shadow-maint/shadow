@@ -14,6 +14,7 @@
 
 #ident "$Id$"
 
+#include <stddef.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <string.h>
@@ -48,7 +49,7 @@ sgetspent(const char *string)
 		fprintf (shadow_logfd,
 		         "%s: Too long passwd entry encountered, file corruption?\n",
 		         shadow_progname);
-		return 0;	/* fail if too long */
+		return NULL;	/* fail if too long */
 	}
 	strcpy (spwbuf, string);
 
@@ -78,7 +79,7 @@ sgetspent(const char *string)
 
 	if ( ((NULL != cp) && ('\0' != *cp)) ||
 	     ((i != FIELDS) && (i != OFIELDS)) ) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -99,7 +100,7 @@ sgetspent(const char *string)
 		spwd.sp_lstchg = -1;
 	} else if (   (getlong(fields[2], &spwd.sp_lstchg) == -1)
 	           || (spwd.sp_lstchg < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -110,7 +111,7 @@ sgetspent(const char *string)
 		spwd.sp_min = -1;
 	} else if (   (getlong(fields[3], &spwd.sp_min) == -1)
 	           || (spwd.sp_min < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -121,7 +122,7 @@ sgetspent(const char *string)
 		spwd.sp_max = -1;
 	} else if (   (getlong(fields[4], &spwd.sp_max) == -1)
 	           || (spwd.sp_max < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -146,7 +147,7 @@ sgetspent(const char *string)
 		spwd.sp_warn = -1;
 	} else if (   (getlong(fields[5], &spwd.sp_warn) == -1)
 	           || (spwd.sp_warn < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -158,7 +159,7 @@ sgetspent(const char *string)
 		spwd.sp_inact = -1;
 	} else if (   (getlong(fields[6], &spwd.sp_inact) == -1)
 	           || (spwd.sp_inact < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -170,7 +171,7 @@ sgetspent(const char *string)
 		spwd.sp_expire = -1;
 	} else if (   (getlong(fields[7], &spwd.sp_expire) == -1)
 	           || (spwd.sp_expire < 0)) {
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -181,7 +182,7 @@ sgetspent(const char *string)
 	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 	} else if (getulong(fields[8], &spwd.sp_flag) == -1) {
-		return 0;
+		return NULL;
 	}
 
 	return (&spwd);
@@ -189,4 +190,3 @@ sgetspent(const char *string)
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif
-
