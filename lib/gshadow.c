@@ -68,15 +68,10 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 		size = (nelem + 1) * sizeof (ptr);
 		ptr = REALLOC(*list, size, char *);
 		if (NULL != ptr) {
-			ptr[nelem] = s;
+			ptr[nelem] = strsep(&s, ",");
 			nelem++;
 			*list = ptr;
 			*nlist = nelem;
-			s = strchr (s, ',');
-			if (NULL != s) {
-				*s = '\0';
-				s++;
-			}
 		}
 	}
 	size = (nelem + 1) * sizeof (ptr);
@@ -140,13 +135,8 @@ void endsgent (void)
 	 * all 4 of them and save the starting addresses in fields[].
 	 */
 
-	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++) {
-		fields[i] = cp;
-		cp = strchr (cp, ':');
-		if (NULL != cp) {
-			*cp++ = '\0';
-		}
-	}
+	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++)
+		fields[i] = strsep(&cp, ":");
 
 	/*
 	 * If there was an extra field somehow, or perhaps not enough,
