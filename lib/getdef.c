@@ -23,7 +23,7 @@
 #endif
 
 #include "alloc.h"
-#include "atoi/getlong.h"
+#include "atoi/a2i.h"
 #include "atoi/str2i.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
@@ -248,7 +248,7 @@ getdef_num(const char *item, int dflt)
 		return dflt;
 	}
 
-	if (getint(d->value, &val, NULL, 0, -1, INT_MAX) == -1) {
+	if (a2si(d->value, &val, NULL, 0, -1, INT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -282,7 +282,7 @@ getdef_unum(const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	if (getuint(d->value, &val, NULL, 0, 0, UINT_MAX) == -1) {
+	if (a2ui(d->value, &val, NULL, 0, 0, UINT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -315,7 +315,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (getlong(d->value, &val, NULL, 0, -1, LONG_MAX) == -1) {
+	if (a2sl(d->value, &val, NULL, 0, -1, LONG_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);

@@ -20,7 +20,7 @@
 #include "defines.h"
 #include <stdio.h>
 
-#include "atoi/getlong.h"
+#include "atoi/a2i.h"
 #include "atoi/str2i.h"
 
 
@@ -97,7 +97,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[2][0] == '\0')
 		spwd.sp_lstchg = -1;
-	else if (getlong(fields[2], &spwd.sp_lstchg, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[2], &spwd.sp_lstchg, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -106,7 +106,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[3][0] == '\0')
 		spwd.sp_min = -1;
-	else if (getlong(fields[3], &spwd.sp_min, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[3], &spwd.sp_min, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -115,7 +115,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[4][0] == '\0')
 		spwd.sp_max = -1;
-	else if (getlong(fields[4], &spwd.sp_max, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[4], &spwd.sp_max, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -138,7 +138,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[5][0] == '\0')
 		spwd.sp_warn = -1;
-	else if (getlong(fields[5], &spwd.sp_warn, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[5], &spwd.sp_warn, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -148,7 +148,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[6][0] == '\0')
 		spwd.sp_inact = -1;
-	else if (getlong(fields[6], &spwd.sp_inact, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[6], &spwd.sp_inact, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*
@@ -158,7 +158,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[7][0] == '\0')
 		spwd.sp_expire = -1;
-	else if (getlong(fields[7], &spwd.sp_expire, NULL, 0, 0, LONG_MAX) == -1)
+	else if (a2sl(fields[7], &spwd.sp_expire, NULL, 0, 0, LONG_MAX) == -1)
 		return 0;
 
 	/*

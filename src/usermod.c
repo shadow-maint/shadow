@@ -33,7 +33,7 @@
 #include <time.h>
 
 #include "alloc.h"
-#include "atoi/getlong.h"
+#include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
@@ -318,16 +318,13 @@ static struct ulong_range getulong_range(const char *str)
 	unsigned long       first, last;
 	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
-	if (getulong(str, &first, &pos, 10, 0, ULONG_MAX) == -1
-	    && errno != ENOTSUP)
-	{
+	if (a2ul(str, &first, &pos, 10, 0, ULONG_MAX) == -1 && errno != ENOTSUP)
 		return result;
-	}
 
 	if ('-' != *pos++)
 		return result;
 
-	if (getulong(pos, &last, NULL, 10, first, ULONG_MAX) == -1)
+	if (a2ul(pos, &last, NULL, 10, first, ULONG_MAX) == -1)
 		return result;
 
 	result.first = first;
@@ -1066,7 +1063,7 @@ process_flags(int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (getlong(optarg, &user_newinactive, NULL, 0, -1, LONG_MAX)
+				if (a2sl(optarg, &user_newinactive, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					fprintf (stderr,

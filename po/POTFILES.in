@@ -2,7 +2,6 @@
 
 lib/addgrps.c
 lib/age.c
-lib/atoi/getlong.c
 lib/audit_help.c
 lib/basename.c
 lib/chkname.c

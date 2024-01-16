@@ -27,7 +27,7 @@
 #include <pwd.h>
 
 #include "alloc.h"
-#include "atoi/getlong.h"
+#include "atoi/a2i.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "memzero.h"
@@ -168,12 +168,12 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	if (getlong(buf, &mindays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(buf, &mindays, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	if (getlong(buf, &maxdays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(buf, &maxdays, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY) {
@@ -195,12 +195,12 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	if (getlong(buf, &warndays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(buf, &warndays, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	if (getlong(buf, &inactdays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(buf, &inactdays, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate) {
@@ -386,7 +386,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'I':
 			Iflg = true;
-			if (getlong(optarg, &inactdays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(optarg, &inactdays, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -400,7 +400,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'm':
 			mflg = true;
-			if (getlong(optarg, &mindays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(optarg, &mindays, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -411,7 +411,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'M':
 			Mflg = true;
-			if (getlong(optarg, &maxdays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(optarg, &maxdays, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -426,7 +426,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'W':
 			Wflg = true;
-			if (getlong(optarg, &warndays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(optarg, &warndays, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,

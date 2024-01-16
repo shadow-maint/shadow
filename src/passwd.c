@@ -22,7 +22,7 @@
 
 #include "agetpass.h"
 #include "alloc.h"
-#include "atoi/getlong.h"
+#include "atoi/a2i.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"
@@ -778,7 +778,7 @@ main(int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'i':
-				if (getlong(optarg, &inact, NULL, 0, -1, LONG_MAX)
+				if (a2sl(optarg, &inact, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					fprintf (stderr,
@@ -798,7 +798,7 @@ main(int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'n':
-				if (getlong(optarg, &age_min, NULL, 0, -1, LONG_MAX)
+				if (a2sl(optarg, &age_min, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					fprintf (stderr,
@@ -834,7 +834,7 @@ main(int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'w':
-				if (getlong(optarg, &warn, NULL, 0, -1, LONG_MAX)
+				if (a2sl(optarg, &warn, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					(void) fprintf (stderr,
@@ -846,7 +846,7 @@ main(int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'x':
-				if (getlong(optarg, &age_max, NULL, 0, -1, LONG_MAX)
+				if (a2sl(optarg, &age_max, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					(void) fprintf (stderr,

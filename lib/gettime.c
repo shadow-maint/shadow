@@ -11,7 +11,7 @@
 #include <limits.h>
 #include <stdio.h>
 
-#include "atoi/getnum.h"
+#include "atoi/a2i.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -37,9 +37,7 @@ gettime(void)
 	if (!source_date_epoch)
 		return fallback;
 
-	if (getnum(time_t, source_date_epoch, &epoch, NULL, 10, 0, fallback)
-	    == -1)
-	{
+	if (a2i(time_t, source_date_epoch, &epoch, NULL, 10, 0, fallback) == -1) {
 		fprintf(shadow_logfd,
 		        _("Environment variable $SOURCE_DATE_EPOCH: strtoi(\"%s\"): %s"),
 		        source_date_epoch, strerror(errno));

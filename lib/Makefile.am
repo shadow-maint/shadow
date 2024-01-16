@@ -30,8 +30,8 @@ libshadow_la_SOURCES = \
 	agetpass.h \
 	alloc.c \
 	alloc.h \
-	atoi/getlong.c \
-	atoi/getlong.h \
+	atoi/a2i.c \
+	atoi/a2i.h \
 	atoi/getnum.c \
 	atoi/getnum.h \
 	atoi/str2i.c \
