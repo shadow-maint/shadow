@@ -37,6 +37,7 @@
 #include <unistd.h>
 
 #include "alloc.h"
+#include "atoi/str2i.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"

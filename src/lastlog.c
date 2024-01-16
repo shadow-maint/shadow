@@ -23,6 +23,7 @@
 #include <net/if.h>
 #endif
 
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
@@ -31,6 +32,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strftime.h"
+
 
 
 /*

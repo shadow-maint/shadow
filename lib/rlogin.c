@@ -18,6 +18,10 @@
 #include <stdio.h>
 #include <pwd.h>
 #include <netdb.h>
+
+#include "atoi/str2i.h"
+
+
 static struct {
 	int spd_name;
 	int spd_baud;

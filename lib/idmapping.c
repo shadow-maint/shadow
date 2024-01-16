@@ -14,6 +14,7 @@
 #include <strings.h>
 
 #include "alloc.h"
+#include "atoi/str2i.h"
 #include "prototypes.h"
 #include "string/stpeprintf.h"
 #include "idmapping.h"
@@ -23,6 +24,7 @@
 #endif
 #include "shadowlog.h"
 #include "sizeof.h"
+
 
 struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 {

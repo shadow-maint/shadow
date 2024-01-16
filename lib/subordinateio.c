@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "alloc.h"
+#include "atoi/str2i.h"
 #include "string/sprintf.h"
 
 
