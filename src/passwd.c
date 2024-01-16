@@ -22,6 +22,7 @@
 
 #include "agetpass.h"
 #include "alloc.h"
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"
@@ -34,6 +35,7 @@
 #include "shadowlog.h"
 #include "string/strtcpy.h"
 #include "time/day_to_str.h"
+
 
 
 /*

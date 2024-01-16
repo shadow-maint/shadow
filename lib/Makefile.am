@@ -31,6 +31,8 @@ libshadow_la_SOURCES = \
 	agetpass.h \
 	alloc.c \
 	alloc.h \
+	atoi/str2i.c \
+	atoi/str2i.h \
 	atoi/strtoi.c \
 	atoi/strtoi.h \
 	atoi/strtou_noneg.c \
@@ -74,11 +76,9 @@ libshadow_la_SOURCES = \
 	getdate.y \
 	getdef.c \
 	getdef.h \
-	getlong.c \
 	getgr_nam_gid.c \
 	getrange.c \
 	gettime.c \
-	getulong.c \
 	groupio.c \
 	groupmem.c \
 	groupio.h \

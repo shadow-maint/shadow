@@ -19,6 +19,7 @@
 #include <time.h>
 #include <assert.h>
 
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "faillog.h"
 #include "memzero.h"
@@ -27,6 +28,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strftime.h"
+
 
 
 /* local function prototypes */

@@ -19,6 +19,8 @@
 #include "defines.h"
 #include <stdio.h>
 
+#include "atoi/str2i.h"
+
 
 static FILE *shadow;
 

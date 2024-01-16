@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <string.h>
 
+#include "atoi/str2i.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "defines.h"

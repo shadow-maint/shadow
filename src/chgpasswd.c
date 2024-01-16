@@ -16,11 +16,13 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -32,6 +34,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+
 
 /*
  * Global variables
