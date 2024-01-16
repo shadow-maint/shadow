@@ -45,25 +45,21 @@ get_map_ranges(int ranges, int argc, char **argv)
 	if (!mappings) {
 		fprintf(log_get_logfd(), _( "%s: Memory allocation failure\n"),
 			log_get_progname());
-		exit(EXIT_FAILURE);
+		return NULL;
 	}
 
 	/* Gather up the ranges from the command line */
 	m = mappings;
 	for (int i = 0; i < ranges * 3; i+=3, m++) {
 		if (getulong(argv[i + 0], &m->upper, NULL, 0, 0, UINT_MAX) == -1) {
-			if (errno == ERANGE) {
+			if (errno == ERANGE)
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-				exit(EXIT_FAILURE);
-			}
 			free(mappings);
 			return NULL;
 		}
 		if (getulong(argv[i + 1], &m->lower, NULL, 0, 0, UINT_MAX) == -1) {
-			if (errno == ERANGE) {
+			if (errno == ERANGE)
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-				exit(EXIT_FAILURE);
-			}
 			free(mappings);
 			return NULL;
 		}
@@ -72,10 +68,8 @@ get_map_ranges(int ranges, int argc, char **argv)
 		                 MIN(UINT_MAX, ULONG_MAX - 1) - m->upper))
 		    == -1)
 		{
-			if (errno == ERANGE) {
+			if (errno == ERANGE)
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
-				exit(EXIT_FAILURE);
-			}
 			free(mappings);
 			return NULL;
 		}
