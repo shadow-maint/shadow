@@ -45,23 +45,6 @@ inline int getullong(const char *s, unsigned long long *restrict n,
     char **restrict endptr, int base, unsigned long long min,
     unsigned long long max);
 
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int geth(const char *restrict s, short *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int geti(const char *restrict s, int *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getl(const char *restrict s, long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getll(const char *restrict s, long long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getuh(const char *restrict s, unsigned short *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getui(const char *restrict s, unsigned int *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getul(const char *restrict s, unsigned long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getull(const char *restrict s, unsigned long long *restrict n);
-
 
 inline int
 getshort(const char *s, short *restrict n, char **restrict endptr,
@@ -180,62 +163,6 @@ getullong(const char *s, unsigned long long *restrict n, char **restrict endptr,
 		return -1;
 	}
 	return 0;
-}
-
-
-inline int
-geth(const char *restrict s, short *restrict n)
-{
-	return getshort(s, n, NULL, 0, SHRT_MIN, SHRT_MAX);
-}
-
-
-inline int
-geti(const char *restrict s, int *restrict n)
-{
-	return getint(s, n, NULL, 0, INT_MIN, INT_MAX);
-}
-
-
-inline int
-getl(const char *restrict s, long *restrict n)
-{
-	return getlong(s, n, NULL, 0, LONG_MIN, LONG_MAX);
-}
-
-
-inline int
-getll(const char *restrict s, long long *restrict n)
-{
-	return getllong(s, n, NULL, 0, LLONG_MIN, LLONG_MAX);
-}
-
-
-inline int
-getuh(const char *restrict s, unsigned short *restrict n)
-{
-	return getushort(s, n, NULL, 0, 0, USHRT_MAX);
-}
-
-
-inline int
-getui(const char *restrict s, unsigned int *restrict n)
-{
-	return getuint(s, n, NULL, 0, 0, UINT_MAX);
-}
-
-
-inline int
-getul(const char *restrict s, unsigned long *restrict n)
-{
-	return getulong(s, n, NULL, 0, 0, ULONG_MAX);
-}
-
-
-inline int
-getull(const char *restrict s, unsigned long long *restrict n)
-{
-	return getullong(s, n, NULL, 0, 0, ULLONG_MAX);
 }
 
 

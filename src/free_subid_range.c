@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "atoi/getlong.h"
+#include "atoi/str2i.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 	if (argc < 3)
 		usage();
 	range.owner = argv[0];
-	getul(argv[1], &range.start);
-	getul(argv[2], &range.count);
+	str2ul(argv[1], &range.start);
+	str2ul(argv[2], &range.count);
 	if (group)
 		ok = subid_ungrant_gid_range(&range);
 	else

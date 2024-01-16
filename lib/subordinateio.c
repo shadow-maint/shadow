@@ -18,7 +18,7 @@
 #include <fcntl.h>
 
 #include "alloc.h"
-#include "atoi/getlong.h"
+#include "atoi/str2i.h"
 #include "string/sprintf.h"
 
 
@@ -117,9 +117,9 @@ static void *subordinate_parse (const char *line)
 	if (i != SUBID_NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
 		return NULL;
 	range.owner = fields[0];
-	if (getul(fields[1], &range.start) == -1)
+	if (str2ul(fields[1], &range.start) == -1)
 		return NULL;
-	if (getul(fields[2], &range.count) == -1)
+	if (str2ul(fields[2], &range.count) == -1)
 		return NULL;
 
 	return &range;

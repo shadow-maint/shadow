@@ -31,8 +31,8 @@
 #include <string.h>
 
 #include "alloc.h"
-#include "atoi/getlong.h"
 #include "atoi/getnum.h"
+#include "atoi/str2i.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -675,19 +675,19 @@ static void process_flags (int argc, char **argv)
 			}
 #if defined(USE_SHA_CRYPT)
 			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
-			       && (-1 == getl(optarg, &sha_rounds)))) {
+			       && (-1 == str2sl(optarg, &sha_rounds)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
                         if ((   (0 == strcmp (crypt_method, "BCRYPT"))
-			       && (-1 == getl(optarg, &bcrypt_rounds)))) {
+			       && (-1 == str2sl(optarg, &bcrypt_rounds)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
                         if ((   (0 == strcmp (crypt_method, "YESCRYPT"))
-			       && (-1 == getl(optarg, &yescrypt_cost)))) {
+			       && (-1 == str2sl(optarg, &yescrypt_cost)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_YESCRYPT */

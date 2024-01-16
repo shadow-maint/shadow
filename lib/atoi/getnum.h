@@ -33,21 +33,6 @@
 )
 
 
-#define getn(TYPE, ...)                                                       \
-(                                                                             \
-	_Generic((TYPE) 0,                                                    \
-		short:              geth,                                     \
-		int:                geti,                                     \
-		long:               getl,                                     \
-		long long:          getll,                                    \
-		unsigned short:     getuh,                                    \
-		unsigned int:       getui,                                    \
-		unsigned long:      getul,                                    \
-		unsigned long long: getull                                    \
-	)(__VA_ARGS__)                                                        \
-)
-
-
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int get_fd(const char *restrict fdstr, int *restrict fd);
 ATTR_STRING(1) ATTR_ACCESS(write_only, 2)

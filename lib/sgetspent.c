@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "atoi/getlong.h"
+#include "atoi/str2i.h"
 
 
 #define	FIELDS	9
@@ -167,7 +168,7 @@ struct spwd *sgetspent (const char *string)
 
 	if (fields[8][0] == '\0')
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	else if (getul(fields[8], &spwd.sp_flag) == -1)
+	else if (str2ul(fields[8], &spwd.sp_flag) == -1)
 		return 0;
 
 	return (&spwd);

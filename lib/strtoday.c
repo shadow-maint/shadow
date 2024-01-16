@@ -13,7 +13,7 @@
 
 #ident "$Id$"
 
-#include "atoi/getlong.h"
+#include "atoi/str2i.h"
 #include "prototypes.h"
 #include "getdate.h"
 
@@ -64,9 +64,8 @@ long strtoday (const char *str)
 	}
 	if (isnum) {
 		long retdate;
-		if (getl(str, &retdate) == -1) {
+		if (str2sl(str, &retdate) == -1)
 			return -2;
-		}
 		return retdate;
 	}
 

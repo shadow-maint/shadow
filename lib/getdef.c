@@ -24,6 +24,7 @@
 
 #include "alloc.h"
 #include "atoi/getlong.h"
+#include "atoi/str2i.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf.h"
@@ -346,7 +347,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 		return dflt;
 	}
 
-	if (getul(d->value, &val) == -1) {
+	if (str2ul(d->value, &val) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);

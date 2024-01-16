@@ -19,7 +19,7 @@
 #include <pwd.h>
 #include <netdb.h>
 
-#include "atoi/getlong.h"
+#include "atoi/str2i.h"
 
 
 static struct {
@@ -82,9 +82,8 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 		*cp = '\0';
 		cp++;
 
-		if (getul(cp, &remote_speed) == -1) {
+		if (str2ul(cp, &remote_speed) == -1)
 			remote_speed = 9600;
-		}
 	}
 	for (i = 0;
 	     (   (speed_table[i].spd_baud != remote_speed)
