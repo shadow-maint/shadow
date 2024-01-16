@@ -16,21 +16,21 @@
 #include "attr.h"
 
 
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getlong(const char *restrict s, long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int getulong(const char *restrict s, unsigned long *restrict n);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2sl(long *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2ul(unsigned long *restrict n, const char *restrict s);
 
 
 inline int
-getlong(const char *restrict s, long *restrict n)
+str2sl(long *restrict n, const char *restrict s)
 {
 	return a2sl(n, s, NULL, 0, LONG_MIN, LONG_MAX);
 }
 
 
 inline int
-getulong(const char *restrict s, unsigned long *restrict n)
+str2ul(unsigned long *restrict n, const char *restrict s)
 {
 	return a2ul(n, s, NULL, 0, 0, ULONG_MAX);
 }

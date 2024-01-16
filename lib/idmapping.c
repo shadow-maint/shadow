@@ -51,15 +51,15 @@ struct map_range *get_map_ranges(int ranges, int argc, char **argv)
 	/* Gather up the ranges from the command line */
 	mapping = mappings;
 	for (idx = 0, argidx = 0; idx < ranges; idx++, argidx += 3, mapping++) {
-		if (getulong(argv[argidx + 0], &mapping->upper) == -1) {
+		if (str2ul(&mapping->upper, argv[argidx + 0]) == -1) {
 			free(mappings);
 			return NULL;
 		}
-		if (getulong(argv[argidx + 1], &mapping->lower) == -1) {
+		if (str2ul(&mapping->lower, argv[argidx + 1]) == -1) {
 			free(mappings);
 			return NULL;
 		}
-		if (getulong(argv[argidx + 2], &mapping->count) == -1) {
+		if (str2ul(&mapping->count, argv[argidx + 2]) == -1) {
 			free(mappings);
 			return NULL;
 		}
