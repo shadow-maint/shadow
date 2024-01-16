@@ -31,28 +31,28 @@ inline int get_uid(const char *restrict uidstr, uid_t *restrict uid);
 inline int
 get_fd(const char *restrict fdstr, int *restrict fd)
 {
-	return a2si(fdstr, fd, NULL, 10, 0, INT_MAX);
+	return a2si(fd, fdstr, NULL, 10, 0, INT_MAX);
 }
 
 
 inline int
 get_gid(const char *restrict gidstr, gid_t *restrict gid)
 {
-	return a2i(gid_t, gidstr, gid, NULL, 10, type_min(gid_t), type_max(gid_t));
+	return a2i(gid_t, gid, gidstr, NULL, 10, type_min(gid_t), type_max(gid_t));
 }
 
 
 inline int
 get_pid(const char *restrict pidstr, pid_t *restrict pid)
 {
-	return a2i(pid_t, pidstr, pid, NULL, 10, 1, type_max(pid_t));
+	return a2i(pid_t, pid, pidstr, NULL, 10, 1, type_max(pid_t));
 }
 
 
 inline int
 get_uid(const char *restrict uidstr, uid_t *restrict uid)
 {
-	return a2i(uid_t, uidstr, uid, NULL, 10, type_min(uid_t), type_max(uid_t));
+	return a2i(uid_t, uid, uidstr, NULL, 10, type_min(uid_t), type_max(uid_t));
 }
 
 

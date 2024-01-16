@@ -31,35 +31,35 @@
 )
 
 
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2sh(const char *s, short *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2sh(short *restrict n, const char *s,
     char **restrict endptr, int base, short min, short max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2si(const char *s, int *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2si(int *restrict n, const char *s,
     char **restrict endptr, int base, int min, int max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2sl(const char *s, long *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2sl(long *restrict n, const char *s,
     char **restrict endptr, int base, long min, long max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2sll(const char *s, long long *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2sll(long long *restrict n, const char *s,
     char **restrict endptr, int base, long long min, long long max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2uh(const char *s, unsigned short *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2uh(unsigned short *restrict n, const char *s,
     char **restrict endptr, int base, unsigned short min, unsigned short max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2ui(const char *s, unsigned int *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2ui(unsigned int *restrict n, const char *s,
     char **restrict endptr, int base, unsigned int min, unsigned int max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2ul(const char *s, unsigned long *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2ul(unsigned long *restrict n, const char *s,
     char **restrict endptr, int base, unsigned long min, unsigned long max);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2) ATTR_ACCESS(write_only, 3)
-inline int a2ull(const char *s, unsigned long long *restrict n,
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1) ATTR_ACCESS(write_only, 3)
+inline int a2ull(unsigned long long *restrict n, const char *s,
     char **restrict endptr, int base, unsigned long long min,
     unsigned long long max);
 
 
 inline int
-a2sh(const char *s, short *restrict n, char **restrict endptr,
+a2sh(short *restrict n, const char *s, char **restrict endptr,
     int base, short min, short max)
 {
 	int  status;
@@ -74,7 +74,7 @@ a2sh(const char *s, short *restrict n, char **restrict endptr,
 
 
 inline int
-a2si(const char *s, int *restrict n, char **restrict endptr,
+a2si(int *restrict n, const char *s, char **restrict endptr,
     int base, int min, int max)
 {
 	int  status;
@@ -89,7 +89,7 @@ a2si(const char *s, int *restrict n, char **restrict endptr,
 
 
 inline int
-a2sl(const char *s, long *restrict n, char **restrict endptr,
+a2sl(long *restrict n, const char *s, char **restrict endptr,
     int base, long min, long max)
 {
 	int  status;
@@ -104,7 +104,7 @@ a2sl(const char *s, long *restrict n, char **restrict endptr,
 
 
 inline int
-a2sll(const char *s, long long *restrict n, char **restrict endptr,
+a2sll(long long *restrict n, const char *s, char **restrict endptr,
     int base, long long min, long long max)
 {
 	int  status;
@@ -119,7 +119,7 @@ a2sll(const char *s, long long *restrict n, char **restrict endptr,
 
 
 inline int
-a2uh(const char *s, unsigned short *restrict n, char **restrict endptr,
+a2uh(unsigned short *restrict n, const char *s, char **restrict endptr,
     int base, unsigned short min, unsigned short max)
 {
 	int  status;
@@ -134,7 +134,7 @@ a2uh(const char *s, unsigned short *restrict n, char **restrict endptr,
 
 
 inline int
-a2ui(const char *s, unsigned int *restrict n, char **restrict endptr,
+a2ui(unsigned int *restrict n, const char *s, char **restrict endptr,
     int base, unsigned int min, unsigned int max)
 {
 	int  status;
@@ -149,7 +149,7 @@ a2ui(const char *s, unsigned int *restrict n, char **restrict endptr,
 
 
 inline int
-a2ul(const char *s, unsigned long *restrict n, char **restrict endptr,
+a2ul(unsigned long *restrict n, const char *s, char **restrict endptr,
     int base, unsigned long min, unsigned long max)
 {
 	int  status;
@@ -164,7 +164,7 @@ a2ul(const char *s, unsigned long *restrict n, char **restrict endptr,
 
 
 inline int
-a2ull(const char *s, unsigned long long *restrict n, char **restrict endptr,
+a2ull(unsigned long long *restrict n, const char *s, char **restrict endptr,
     int base, unsigned long long min, unsigned long long max)
 {
 	int  status;

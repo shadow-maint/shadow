@@ -52,56 +52,56 @@ inline int str2ull(unsigned long long *restrict n, const char *restrict s);
 inline int
 str2sh(short *restrict n, const char *restrict s)
 {
-	return a2sh(s, n, NULL, 0, SHRT_MIN, SHRT_MAX);
+	return a2sh(n, s, NULL, 0, SHRT_MIN, SHRT_MAX);
 }
 
 
 inline int
 str2si(int *restrict n, const char *restrict s)
 {
-	return a2si(s, n, NULL, 0, INT_MIN, INT_MAX);
+	return a2si(n, s, NULL, 0, INT_MIN, INT_MAX);
 }
 
 
 inline int
 str2sl(long *restrict n, const char *restrict s)
 {
-	return a2sl(s, n, NULL, 0, LONG_MIN, LONG_MAX);
+	return a2sl(n, s, NULL, 0, LONG_MIN, LONG_MAX);
 }
 
 
 inline int
 str2sll(long long *restrict n, const char *restrict s)
 {
-	return a2sll(s, n, NULL, 0, LLONG_MIN, LLONG_MAX);
+	return a2sll(n, s, NULL, 0, LLONG_MIN, LLONG_MAX);
 }
 
 
 inline int
 str2uh(unsigned short *restrict n, const char *restrict s)
 {
-	return a2uh(s, n, NULL, 0, 0, USHRT_MAX);
+	return a2uh(n, s, NULL, 0, 0, USHRT_MAX);
 }
 
 
 inline int
 str2ui(unsigned int *restrict n, const char *restrict s)
 {
-	return a2ui(s, n, NULL, 0, 0, UINT_MAX);
+	return a2ui(n, s, NULL, 0, 0, UINT_MAX);
 }
 
 
 inline int
 str2ul(unsigned long *restrict n, const char *restrict s)
 {
-	return a2ul(s, n, NULL, 0, 0, ULONG_MAX);
+	return a2ul(n, s, NULL, 0, 0, ULONG_MAX);
 }
 
 
 inline int
 str2ull(unsigned long long *restrict n, const char *restrict s)
 {
-	return a2ull(s, n, NULL, 0, 0, ULLONG_MAX);
+	return a2ull(n, s, NULL, 0, 0, ULLONG_MAX);
 }
 
 

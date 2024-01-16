@@ -318,13 +318,13 @@ static struct ulong_range getulong_range(const char *str)
 	unsigned long       first, last;
 	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
-	if (a2ul(str, &first, &pos, 10, 0, ULONG_MAX) == -1 && errno != ENOTSUP)
+	if (a2ul(&first, str, &pos, 10, 0, ULONG_MAX) == -1 && errno != ENOTSUP)
 		return result;
 
 	if ('-' != *pos++)
 		return result;
 
-	if (a2ul(pos, &last, NULL, 10, first, ULONG_MAX) == -1)
+	if (a2ul(&last, pos, NULL, 10, first, ULONG_MAX) == -1)
 		return result;
 
 	result.first = first;
@@ -1063,7 +1063,7 @@ process_flags(int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (a2sl(optarg, &user_newinactive, NULL, 0, -1, LONG_MAX)
+				if (a2sl(&user_newinactive, optarg, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
 					fprintf (stderr,

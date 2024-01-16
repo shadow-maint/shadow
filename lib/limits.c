@@ -61,7 +61,7 @@ static int setrlimit_value (unsigned int resource,
 		limit = RLIM_INFINITY;
 
 	} else {
-		if (a2i(rlim_t, value, &l, NULL, 10, 0, type_max(rlim_t)) == -1
+		if (a2i(rlim_t, &l, value, NULL, 10, 0, type_max(rlim_t)) == -1
 		    && errno != ENOTSUP)
 		{
 			return 0;  // FIXME: We could instead throw an error, though.
@@ -484,7 +484,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "pri=", 4) == 0) {
 				int  inc;
 
-				if (a2si(cp + 4, &inc, NULL, 0, -20, 20) == 0) {
+				if (a2si(&inc, cp + 4, NULL, 0, -20, 20) == 0) {
 					errno = 0;
 					if (   (nice (inc) != -1)
 					    || (0 != errno)) {

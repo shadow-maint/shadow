@@ -51,19 +51,19 @@ get_map_ranges(int ranges, int argc, char **argv)
 	/* Gather up the ranges from the command line */
 	m = mappings;
 	for (int i = 0; i < ranges * 3; i+=3, m++) {
-		if (a2ul(argv[i + 0], &m->upper, NULL, 0, 0, UINT_MAX) == -1) {
+		if (a2ul(&m->upper, argv[i + 0], NULL, 0, 0, UINT_MAX) == -1) {
 			if (errno == ERANGE)
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			free(mappings);
 			return NULL;
 		}
-		if (a2ul(argv[i + 1], &m->lower, NULL, 0, 0, UINT_MAX) == -1) {
+		if (a2ul(&m->lower, argv[i + 1], NULL, 0, 0, UINT_MAX) == -1) {
 			if (errno == ERANGE)
 				fprintf(log_get_logfd(), _( "%s: subuid overflow detected.\n"), log_get_progname());
 			free(mappings);
 			return NULL;
 		}
-		if (a2ul(argv[i + 2], &m->count, NULL, 0, 0,
+		if (a2ul(&m->count, argv[i + 2], NULL, 0, 0,
 		         MIN(MIN(UINT_MAX, ULONG_MAX - 1) - m->lower,
 		             MIN(UINT_MAX, ULONG_MAX - 1) - m->upper))
 		    == -1)

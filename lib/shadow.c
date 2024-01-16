@@ -170,7 +170,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[2][0] == '\0') {
 		spwd.sp_lstchg = -1;
-	} else if (a2sl(fields[2], &spwd.sp_lstchg, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_lstchg = -1;
@@ -187,7 +187,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[3][0] == '\0') {
 		spwd.sp_min = -1;
-	} else if (a2sl(fields[3], &spwd.sp_min, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_min = -1;
@@ -204,7 +204,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[4][0] == '\0') {
 		spwd.sp_max = -1;
-	} else if (a2sl(fields[4], &spwd.sp_max, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_max = -1;
@@ -235,7 +235,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[5][0] == '\0') {
 		spwd.sp_warn = -1;
-	} else if (a2sl(fields[5], &spwd.sp_warn, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_warn = -1;
@@ -253,7 +253,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[6][0] == '\0') {
 		spwd.sp_inact = -1;
-	} else if (a2sl(fields[6], &spwd.sp_inact, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_inact = -1;
@@ -271,7 +271,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
-	} else if (a2sl(fields[7], &spwd.sp_expire, NULL, 0, 0, LONG_MAX) == -1) {
+	} else if (a2sl(&spwd.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_expire = -1;

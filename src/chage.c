@@ -168,12 +168,12 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	if (a2sl(buf, &mindays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	if (a2sl(buf, &maxdays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY) {
@@ -195,12 +195,12 @@ static int new_fields (void)
 
 	SNPRINTF(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	if (a2sl(buf, &warndays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	if (a2sl(buf, &inactdays, NULL, 0, -1, LONG_MAX) == -1)
+	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate) {
@@ -386,7 +386,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'I':
 			Iflg = true;
-			if (a2sl(optarg, &inactdays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(&inactdays, optarg, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -400,7 +400,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'm':
 			mflg = true;
-			if (a2sl(optarg, &mindays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(&mindays, optarg, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -411,7 +411,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'M':
 			Mflg = true;
-			if (a2sl(optarg, &maxdays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(&maxdays, optarg, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
@@ -426,7 +426,7 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'W':
 			Wflg = true;
-			if (a2sl(optarg, &warndays, NULL, 0, -1, LONG_MAX)
+			if (a2sl(&warndays, optarg, NULL, 0, -1, LONG_MAX)
 			    == -1)
 			{
 				fprintf (stderr,
