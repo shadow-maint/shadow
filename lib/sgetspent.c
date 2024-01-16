@@ -98,7 +98,7 @@ sgetspent(const char *string)
 
 	if (fields[2][0] == '\0') {
 		spwd.sp_lstchg = -1;
-	} else if (   (getlong(fields[2], &spwd.sp_lstchg) == -1)
+	} else if (   (str2sl(&spwd.sp_lstchg, fields[2]) == -1)
 	           || (spwd.sp_lstchg < 0)) {
 		return NULL;
 	}
@@ -109,7 +109,7 @@ sgetspent(const char *string)
 
 	if (fields[3][0] == '\0') {
 		spwd.sp_min = -1;
-	} else if (   (getlong(fields[3], &spwd.sp_min) == -1)
+	} else if (   (str2sl(&spwd.sp_min, fields[3]) == -1)
 	           || (spwd.sp_min < 0)) {
 		return NULL;
 	}
@@ -120,7 +120,7 @@ sgetspent(const char *string)
 
 	if (fields[4][0] == '\0') {
 		spwd.sp_max = -1;
-	} else if (   (getlong(fields[4], &spwd.sp_max) == -1)
+	} else if (   (str2sl(&spwd.sp_max, fields[4]) == -1)
 	           || (spwd.sp_max < 0)) {
 		return NULL;
 	}
@@ -145,7 +145,7 @@ sgetspent(const char *string)
 
 	if (fields[5][0] == '\0') {
 		spwd.sp_warn = -1;
-	} else if (   (getlong(fields[5], &spwd.sp_warn) == -1)
+	} else if (   (str2sl(&spwd.sp_warn, fields[5]) == -1)
 	           || (spwd.sp_warn < 0)) {
 		return NULL;
 	}
@@ -157,7 +157,7 @@ sgetspent(const char *string)
 
 	if (fields[6][0] == '\0') {
 		spwd.sp_inact = -1;
-	} else if (   (getlong(fields[6], &spwd.sp_inact) == -1)
+	} else if (   (str2sl(&spwd.sp_inact, fields[6]) == -1)
 	           || (spwd.sp_inact < 0)) {
 		return NULL;
 	}
@@ -169,7 +169,7 @@ sgetspent(const char *string)
 
 	if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
-	} else if (   (getlong(fields[7], &spwd.sp_expire) == -1)
+	} else if (   (str2sl(&spwd.sp_expire, fields[7]) == -1)
 	           || (spwd.sp_expire < 0)) {
 		return NULL;
 	}
@@ -181,7 +181,7 @@ sgetspent(const char *string)
 
 	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	} else if (getulong(fields[8], &spwd.sp_flag) == -1) {
+	} else if (str2ul(&spwd.sp_flag, fields[8]) == -1) {
 		return NULL;
 	}
 

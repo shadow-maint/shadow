@@ -8,5 +8,5 @@
 #include "atoi/str2i.h"
 
 
-extern inline int getlong(const char *restrict s, long *restrict n);
-extern inline int getulong(const char *restrict s, unsigned long *restrict n);
+extern inline int str2sl(long *restrict n, const char *restrict s);
+extern inline int str2ul(unsigned long *restrict n, const char *restrict s);

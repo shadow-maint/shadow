@@ -193,19 +193,19 @@ static void process_flags (int argc, char **argv)
                         bad_s = 0;
 #if defined(USE_SHA_CRYPT)
 			if ((IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512"))
-			    && (-1 == getlong(optarg, &sha_rounds))) {
+			    && (-1 == str2sl(&sha_rounds, optarg))) {
                             bad_s = 1;
                         }
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
                         if (IS_CRYPT_METHOD("BCRYPT")
-			    && (-1 == getlong(optarg, &bcrypt_rounds))) {
+			    && (-1 == str2sl(&bcrypt_rounds, optarg))) {
                             bad_s = 1;
                         }
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
                         if (IS_CRYPT_METHOD("YESCRYPT")
-			    && (-1 == getlong(optarg, &yescrypt_cost))) {
+			    && (-1 == str2sl(&yescrypt_cost, optarg))) {
                             bad_s = 1;
                         }
 #endif				/* USE_YESCRYPT */

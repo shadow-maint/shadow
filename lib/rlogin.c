@@ -86,9 +86,8 @@ do_rlogin(const char *remote_host, char *name, size_t namesize, char *term,
 		*cp = '\0';
 		cp++;
 
-		if (getulong(cp, &remote_speed) == -1) {
+		if (str2ul(&remote_speed, cp) == -1)
 			remote_speed = 9600;
-		}
 	}
 	for (i = 0;
 	     (   (speed_table[i].spd_baud != remote_speed)
