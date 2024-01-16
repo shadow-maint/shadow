@@ -9,49 +9,30 @@
 
 #include <config.h>
 
-#include <stdlib.h>
-#include <errno.h>
+#include <limits.h>
+#include <stddef.h>
 
-#include "atoi/str2i.h"
-#include "atoi/strtou_noneg.h"
+#include "atoi/a2i.h"
 #include "attr.h"
 
 
-ATTR_ACCESS(write_only, 2)
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int getlong(const char *restrict s, long *restrict n);
-ATTR_ACCESS(write_only, 2)
+ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
 inline int getulong(const char *restrict s, unsigned long *restrict n);
 
 
 inline int
 getlong(const char *restrict s, long *restrict n)
 {
-	char  *endp;
-	long  val;
-
-	errno = 0;
-	val = strtol(s, &endp, 0);
-	if (('\0' == *s) || ('\0' != *endp) || (0 != errno))
-		return -1;
-
-	*n = val;
-	return 0;
+	return a2sl(n, s, NULL, 0, LONG_MIN, LONG_MAX);
 }
 
 
 inline int
 getulong(const char *restrict s, unsigned long *restrict n)
 {
-	char           *endp;
-	unsigned long  val;
-
-	errno = 0;
-	val = strtoul_noneg(s, &endp, 0);
-	if (('\0' == *s) || ('\0' != *endp) || (0 != errno))
-		return -1;
-
-	*n = val;
-	return 0;
+	return a2ul(n, s, NULL, 0, 0, ULONG_MAX);
 }
 
 
