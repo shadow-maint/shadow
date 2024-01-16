@@ -8,11 +8,11 @@
 #include "atoi/str2i.h"
 
 
-extern inline int str2sh(const char *restrict s, short *restrict n);
-extern inline int str2si(const char *restrict s, int *restrict n);
-extern inline int str2sl(const char *restrict s, long *restrict n);
-extern inline int str2sll(const char *restrict s, long long *restrict n);
-extern inline int str2uh(const char *restrict s, unsigned short *restrict n);
-extern inline int str2ui(const char *restrict s, unsigned int *restrict n);
-extern inline int str2ul(const char *restrict s, unsigned long *restrict n);
-extern inline int str2ull(const char *restrict s, unsigned long long *restrict n);
+extern inline int str2sh(short *restrict n, const char *restrict s);
+extern inline int str2si(int *restrict n, const char *restrict s);
+extern inline int str2sl(long *restrict n, const char *restrict s);
+extern inline int str2sll(long long *restrict n, const char *restrict s);
+extern inline int str2uh(unsigned short *restrict n, const char *restrict s);
+extern inline int str2ui(unsigned int *restrict n, const char *restrict s);
+extern inline int str2ul(unsigned long *restrict n, const char *restrict s);
+extern inline int str2ull(unsigned long long *restrict n, const char *restrict s);

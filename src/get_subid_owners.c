@@ -33,12 +33,12 @@ int main(int argc, char *argv[])
 		usage();
 	}
 	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
-		str2sl(argv[2], &l);
+		str2sl(&l, argv[2]);
 		n = subid_get_gid_owners(l, &uids);
 	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
 		usage();
 	} else {
-		str2sl(argv[1], &l);
+		str2sl(&l, argv[1]);
 		n = subid_get_uid_owners(l, &uids);
 	}
 	if (n < 0) {

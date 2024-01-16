@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 	range.start = 0;
 	range.count = 65536;
 	if (argc > 1)
-		str2ul(argv[1], &range.count);
+		str2ul(&range.count, argv[1]);
 	if (group)
 		ok = subid_grant_gid_range(&range, !makenew);
 	else

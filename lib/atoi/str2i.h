@@ -31,75 +31,75 @@
 )
 
 
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2sh(const char *restrict s, short *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2si(const char *restrict s, int *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2sl(const char *restrict s, long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2sll(const char *restrict s, long long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2uh(const char *restrict s, unsigned short *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2ui(const char *restrict s, unsigned int *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2ul(const char *restrict s, unsigned long *restrict n);
-ATTR_STRING(1) ATTR_ACCESS(write_only, 2)
-inline int str2ull(const char *restrict s, unsigned long long *restrict n);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2sh(short *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2si(int *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2sl(long *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2sll(long long *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2uh(unsigned short *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2ui(unsigned int *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2ul(unsigned long *restrict n, const char *restrict s);
+ATTR_STRING(2) ATTR_ACCESS(write_only, 1)
+inline int str2ull(unsigned long long *restrict n, const char *restrict s);
 
 
 inline int
-str2sh(const char *restrict s, short *restrict n)
+str2sh(short *restrict n, const char *restrict s)
 {
 	return getshort(s, n, NULL, 0, SHRT_MIN, SHRT_MAX);
 }
 
 
 inline int
-str2si(const char *restrict s, int *restrict n)
+str2si(int *restrict n, const char *restrict s)
 {
 	return getint(s, n, NULL, 0, INT_MIN, INT_MAX);
 }
 
 
 inline int
-str2sl(const char *restrict s, long *restrict n)
+str2sl(long *restrict n, const char *restrict s)
 {
 	return getlong(s, n, NULL, 0, LONG_MIN, LONG_MAX);
 }
 
 
 inline int
-str2sll(const char *restrict s, long long *restrict n)
+str2sll(long long *restrict n, const char *restrict s)
 {
 	return getllong(s, n, NULL, 0, LLONG_MIN, LLONG_MAX);
 }
 
 
 inline int
-str2uh(const char *restrict s, unsigned short *restrict n)
+str2uh(unsigned short *restrict n, const char *restrict s)
 {
 	return getushort(s, n, NULL, 0, 0, USHRT_MAX);
 }
 
 
 inline int
-str2ui(const char *restrict s, unsigned int *restrict n)
+str2ui(unsigned int *restrict n, const char *restrict s)
 {
 	return getuint(s, n, NULL, 0, 0, UINT_MAX);
 }
 
 
 inline int
-str2ul(const char *restrict s, unsigned long *restrict n)
+str2ul(unsigned long *restrict n, const char *restrict s)
 {
 	return getulong(s, n, NULL, 0, 0, ULONG_MAX);
 }
 
 
 inline int
-str2ull(const char *restrict s, unsigned long long *restrict n)
+str2ull(unsigned long long *restrict n, const char *restrict s)
 {
 	return getullong(s, n, NULL, 0, 0, ULLONG_MAX);
 }

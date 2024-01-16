@@ -64,7 +64,7 @@ long strtoday (const char *str)
 	}
 	if (isnum) {
 		long retdate;
-		if (str2sl(str, &retdate) == -1)
+		if (str2sl(&retdate, str) == -1)
 			return -2;
 		return retdate;
 	}

@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	errno = 0;
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
-	if (str2ul(argv[4], &count) == -1)
+	if (str2ul(&count, argv[4]) == -1)
 		exit(1);
 	if (check_uids) {
 		if (have_sub_uids(owner, start, count))

@@ -289,7 +289,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	} else if (str2ul(fields[8], &spwd.sp_flag) == -1) {
+	} else if (str2ul(&spwd.sp_flag, fields[8]) == -1) {
 #ifdef	USE_NIS
 		if (nis_used) {
 			spwd.sp_flag = SHADOW_SP_FLAG_UNSET;

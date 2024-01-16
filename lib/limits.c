@@ -90,7 +90,7 @@ set_prio(const char *value)
 {
 	int  prio;
 
-	if (str2si(value, &prio) == -1)
+	if (str2si(&prio, value) == -1)
 		return 0;
 
 	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
@@ -105,7 +105,7 @@ set_umask(const char *value)
 {
 	mode_t  mask;
 
-	if (str2i(mode_t, value, &mask) == -1)
+	if (str2i(mode_t, &mask, value) == -1)
 		return 0;
 
 	(void) umask (mask);
@@ -118,7 +118,7 @@ static int check_logins (const char *name, const char *maxlogins)
 {
 	unsigned long limit, count;
 
-	if (str2ul(maxlogins, &limit) == -1) {
+	if (str2ul(&limit, maxlogins) == -1) {
 		if (errno == ERANGE) {
 			SYSLOG((LOG_WARN, "Invalid maxlogins value\n"));
 			return LOGIN_ERROR_LOGIN;
@@ -503,7 +503,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "ulimit=", 7) == 0) {
 				int  blocks;
 
-				if (   (str2si(cp + 7, &blocks) == -1)
+				if (   (str2si(&blocks, cp + 7) == -1)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
@@ -514,7 +514,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "umask=", 6) == 0) {
 				mode_t  mask;
 
-				if (str2i(mode_t, cp + 6, &mask) == -1) {
+				if (str2i(mode_t, &mask, cp + 6) == -1) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",
 					         info->pw_name));

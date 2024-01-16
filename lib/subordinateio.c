@@ -117,9 +117,9 @@ static void *subordinate_parse (const char *line)
 	if (i != SUBID_NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
 		return NULL;
 	range.owner = fields[0];
-	if (str2ul(fields[1], &range.start) == -1)
+	if (str2ul(&range.start, fields[1]) == -1)
 		return NULL;
-	if (str2ul(fields[2], &range.count) == -1)
+	if (str2ul(&range.count, fields[2]) == -1)
 		return NULL;
 
 	return &range;

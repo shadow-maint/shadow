@@ -82,7 +82,7 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 		*cp = '\0';
 		cp++;
 
-		if (str2ul(cp, &remote_speed) == -1)
+		if (str2ul(&remote_speed, cp) == -1)
 			remote_speed = 9600;
 	}
 	for (i = 0;
