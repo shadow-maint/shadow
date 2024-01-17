@@ -58,13 +58,13 @@ static void catch_signals (unused int sig)
 /*ARGSUSED*/ int main (int argc, char **argv)
 {
 	int            err = 0;
+	char           pass[BUFSIZ];
 	char           **envp = environ;
 	TERMIO         termio;
 #ifndef USE_PAM
 	const char     *env;
 #endif
 
-	static char           pass[BUFSIZ];
 	static struct passwd  pwent;
 
 	tcgetattr (0, &termio);
