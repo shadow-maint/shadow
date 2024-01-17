@@ -37,9 +37,6 @@
  */
 const char *Prog;
 
-static char pass[BUFSIZ];
-
-static struct passwd pwent;
 
 extern char **newenvp;
 extern size_t newenvc;
@@ -58,7 +55,7 @@ static void catch_signals (unused int sig)
 	_exit (1);
 }
 
- /*ARGSUSED*/ int main (int argc, char **argv)
+/*ARGSUSED*/ int main (int argc, char **argv)
 {
 #ifndef USE_PAM
 	const char *env;
@@ -66,6 +63,9 @@ static void catch_signals (unused int sig)
 	char **envp = environ;
 	TERMIO termio;
 	int err = 0;
+
+	static char           pass[BUFSIZ];
+	static struct passwd  pwent;
 
 	tcgetattr (0, &termio);
 	termio.c_iflag |= (ICRNL | IXON);
