@@ -830,28 +830,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-#ifdef	USE_NIS
-	/*
-	 * Now make sure it isn't an NIS group.
-	 */
-	if (__isgrNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: group %s is a NIS group\n"),
-		         Prog, group_name);
-
-		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "group.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: %s is the NIS master\n"),
-			         Prog, nis_master);
-		}
-		exit (E_NOTFOUND);
-	}
-#endif
-
 	if (gflg) {
 		check_new_gid ();
 	}

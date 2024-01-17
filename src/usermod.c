@@ -262,20 +262,6 @@ static int get_groups (char *list)
 			continue;
 		}
 
-#ifdef	USE_NIS
-		/*
-		 * Don't add this group if they are an NIS group. Tell the
-		 * user to go to the server for this group.
-		 */
-		if (__isgrNIS ()) {
-			fprintf (stderr,
-			         _("%s: group '%s' is a NIS group.\n"),
-			         Prog, grp->gr_name);
-			gr_free (grp);
-			continue;
-		}
-#endif
-
 		if (ngroups == sys_ngroups) {
 			fprintf (stderr,
 			         _("%s: too many groups specified (max %d).\n"),
@@ -1285,28 +1271,6 @@ static void process_flags (int argc, char **argv)
 		prefix_user_home = user_home;
 		prefix_user_newhome = user_newhome;
 	}
-
-#ifdef	USE_NIS
-	/*
-	 * Now make sure it isn't an NIS user.
-	 */
-	if (__ispwNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: user %s is a NIS user\n"),
-		         Prog, user_name);
-
-		if (   !yp_get_default_domain (&nis_domain)
-		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: %s is the NIS master\n"),
-			         Prog, nis_master);
-		}
-		exit (E_NOTFOUND);
-	}
-#endif
 
 	{
 		const struct spwd *spwd = NULL;

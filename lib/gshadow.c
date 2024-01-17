@@ -30,34 +30,6 @@ static struct sgrp sgroup;
 
 #define	FIELDS	4
 
-#ifdef	USE_NIS
-static bool nis_used;
-static bool nis_ignore;
-static enum { native, start, middle, native2 } nis_state;
-static bool nis_bound;
-static char *nis_domain;
-static char *nis_key;
-static int nis_keylen;
-static char *nis_val;
-static int nis_vallen;
-
-#define	IS_NISCHAR(c) ((c)=='+')
-#endif
-
-#ifdef	USE_NIS
-/*
- * bind_nis - bind to NIS server
- */
-
-static int bind_nis (void)
-{
-	if (yp_get_default_domain (&nis_domain))
-		return -1;
-
-	nis_bound = true;
-	return 0;
-}
-#endif
 
 static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 {
@@ -90,9 +62,6 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 
 void setsgent (void)
 {
-#ifdef	USE_NIS
-	nis_state = native;
-#endif
 	if (NULL != shadow) {
 		rewind (shadow);
 	} else {
@@ -154,15 +123,7 @@ void endsgent (void)
 	 */
 
 	if ((NULL != cp) || (i != FIELDS)) {
-#ifdef	USE_NIS
-		if (!IS_NISCHAR (fields[0][0])) {
-			return 0;
-		} else {
-			nis_used = true;
-		}
-#else
 		return 0;
-#endif
 	}
 
 	sgroup.sg_name = fields[0];
@@ -209,11 +170,7 @@ void endsgent (void)
 		return NULL;
 	}
 
-#ifdef	USE_NIS
-	while (fgetsx (buf, buflen, fp) == buf)
-#else
 	if (fgetsx (buf, buflen, fp) == buf)
-#endif
 	{
 		while (   ((cp = strrchr (buf, '\n')) == NULL)
 		       && (feof (fp) == 0)) {
@@ -237,11 +194,6 @@ void endsgent (void)
 		if (NULL != cp) {
 			*cp = '\0';
 		}
-#ifdef	USE_NIS
-		if (nis_ignore && IS_NISCHAR (buf[0])) {
-			continue;
-		}
-#endif
 		return (sgetsgent (buf));
 	}
 	return NULL;
@@ -253,96 +205,10 @@ void endsgent (void)
 
 /*@observer@*//*@null@*/struct sgrp *getsgent (void)
 {
-#ifdef	USE_NIS
-	bool nis_1_group = false;
-	struct sgrp *val;
-#endif
 	if (NULL == shadow) {
 		setsgent ();
 	}
-
-#ifdef	USE_NIS
-      again:
-	/*
-	 * See if we are reading from the local file.
-	 */
-
-	if (nis_state == native || nis_state == native2) {
-
-		/*
-		 * Get the next entry from the shadow group file.  Return
-		 * NULL right away if there is none.
-		 */
-
-		val = fgetsgent (shadow);
-		if (NULL == val) {
-			return 0;
-		}
-
-		/*
-		 * If this entry began with a NIS escape character, we have
-		 * to see if this is just a single group, or if the entire
-		 * map is being asked for.
-		 */
-
-		if (IS_NISCHAR (val->sg_name[0])) {
-			if ('\0' != val->sg_name[1]) {
-				nis_1_group = true;
-			} else {
-				nis_state = start;
-			}
-		}
-
-		/*
-		 * If this isn't a NIS group and this isn't an escape to go
-		 * use a NIS map, it must be a regular local group.
-		 */
-
-		if (!nis_1_group && (nis_state != start)) {
-			return val;
-		}
-
-		/*
-		 * If this is an escape to use an NIS map, switch over to
-		 * that bunch of code.
-		 */
-
-		if (nis_state == start) {
-			goto again;
-		}
-
-		/*
-		 * NEEDSWORK.  Here we substitute pieces-parts of this entry.
-		 */
-
-		return 0;
-	} else {
-		if (!nis_bound) {
-			if (bind_nis ()) {
-				nis_state = native2;
-				goto again;
-			}
-		}
-		if (nis_state == start) {
-			if (yp_first (nis_domain, "gshadow.byname", &nis_key,
-				      &nis_keylen, &nis_val, &nis_vallen)) {
-				nis_state = native2;
-				goto again;
-			}
-			nis_state = middle;
-		} else if (nis_state == middle) {
-			if (yp_next (nis_domain, "gshadow.byname", nis_key,
-				     nis_keylen, &nis_key, &nis_keylen,
-				     &nis_val, &nis_vallen)) {
-				nis_state = native2;
-				goto again;
-			}
-		}
-		return sgetsgent (nis_val);
-	}
-#else
 	return (fgetsgent (shadow));
-#endif
 }
 
 /*
@@ -353,63 +219,13 @@ void endsgent (void)
 {
 	struct sgrp *sgrp;
 
-#ifdef	USE_NIS
-	static char save_name[16];
-	int nis_disabled = 0;
-#endif
-
 	setsgent ();
 
-#ifdef	USE_NIS
-	if (nis_used) {
-	      again:
-
-		/*
-		 * Search the gshadow.byname map for this group.
-		 */
-
-		if (!nis_bound) {
-			bind_nis ();
-		}
-
-		if (nis_bound) {
-			char *cp;
-
-			if (yp_match (nis_domain, "gshadow.byname", name,
-				      strlen (name), &nis_val,
-				      &nis_vallen) == 0) {
-				cp = strchr (nis_val, '\n');
-				if (NULL != cp) {
-					*cp = '\0';
-				}
-
-				nis_state = middle;
-				sgrp = sgetsgent (nis_val);
-				if (NULL != sgrp) {
-					strcpy (save_name, sgrp->sg_name);
-					nis_key = save_name;
-					nis_keylen = strlen (save_name);
-				}
-				return sgrp;
-			}
-		}
-		nis_state = native2;
-	}
-#endif
-#ifdef	USE_NIS
-	if (nis_used) {
-		nis_ignore = true;
-		nis_disabled = true;
-	}
-#endif
 	while ((sgrp = getsgent ()) != NULL) {
 		if (strcmp (name, sgrp->sg_name) == 0) {
 			break;
 		}
 	}
-#ifdef	USE_NIS
-	nis_ignore = false;
-#endif
 	return sgrp;
 }
 

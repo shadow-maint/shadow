@@ -117,9 +117,6 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		xasprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE);
 		sgr_setdbname(sgroup_db_file);
 #endif
-#ifdef	USE_NIS
-		__setspNIS(0); /* disable NIS for now, at least until it is properly supporting a "prefix" */
-#endif
 
 		xasprintf(&spw_db_file, "%s/%s", prefix, SHADOW_FILE);
 		spw_setdbname(spw_db_file);

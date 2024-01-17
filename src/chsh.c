@@ -518,28 +518,6 @@ int main (int argc, char **argv)
 		user = xstrdup (pw->pw_name);
 	}
 
-#ifdef	USE_NIS
-	/*
-	 * Now we make sure this is a LOCAL password entry for this user ...
-	 */
-	if (__ispwNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: cannot change user '%s' on NIS client.\n"),
-		         Prog, user);
-
-		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: '%s' is the NIS master for this client.\n"),
-			         Prog, nis_master);
-		}
-		fail_exit (1);
-	}
-#endif
-
 	check_perms (pw);
 
 	/*
