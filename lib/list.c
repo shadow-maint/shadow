@@ -235,13 +235,12 @@ bool is_on_list (char *const *list, const char *member)
 	for (cp = members, i = 0;; i++) {
 		array[i] = cp;
 		cp = strchr(cp, ',');
-		if (NULL != cp) {
+		if (NULL != cp)
 			*cp++ = '\0';
-		} else {
-			array[i + 1] = NULL;
+		else
 			break;
-		}
 	}
+	array[i+1] = NULL;
 
 	/*
 	 * Return the new array of pointers
