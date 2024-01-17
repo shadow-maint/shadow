@@ -16,8 +16,10 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
+#include <sys/types.h>
 
 #include "agetpass.h"
+#include "alloc.h"
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
@@ -28,6 +30,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+
 
 /*
  * Global variables
@@ -45,8 +48,10 @@ extern size_t newenvc;
 #define	ALARM	60
 #endif
 
-/* local function prototypes */
+
 static void catch_signals (int);
+static void pw_entry(const char *name, struct passwd *pwent);
+
 
 static void catch_signals (unused int sig)
 {
@@ -184,3 +189,31 @@ static void catch_signals (unused int sig)
 	return ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 }
 
+
+static void
+pw_entry(const char *name, struct passwd *pwent)
+{
+	struct passwd *passwd;
+
+	struct spwd *spwd;
+
+	if (!(passwd = getpwnam (name))) { /* local, no need for xgetpwnam */
+		pwent->pw_name = NULL;
+		return;
+	} else {
+		pwent->pw_name = xstrdup (passwd->pw_name);
+		pwent->pw_uid = passwd->pw_uid;
+		pwent->pw_gid = passwd->pw_gid;
+		pwent->pw_gecos = xstrdup (passwd->pw_gecos);
+		pwent->pw_dir = xstrdup (passwd->pw_dir);
+		pwent->pw_shell = xstrdup (passwd->pw_shell);
+#if !defined(AUTOSHADOW)
+		/* local, no need for xgetspnam */
+		if ((spwd = getspnam (name))) {
+			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);
+			return;
+		}
+#endif
+		pwent->pw_passwd = xstrdup (passwd->pw_passwd);
+	}
+}

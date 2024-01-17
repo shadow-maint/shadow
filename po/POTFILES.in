@@ -15,7 +15,6 @@ lib/console.c
 lib/copydir.c
 lib/date_to_str.c
 lib/encrypt.c
-lib/entry.c
 lib/env.c
 lib/failure.c
 lib/fields.c
