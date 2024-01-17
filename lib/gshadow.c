@@ -122,9 +122,8 @@ void endsgent (void)
 	 * the line is invalid.
 	 */
 
-	if ((NULL != cp) || (i != FIELDS)) {
+	if (NULL != cp || i != FIELDS)
 		return 0;
-	}
 
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
@@ -170,8 +169,7 @@ void endsgent (void)
 		return NULL;
 	}
 
-	if (fgetsx (buf, buflen, fp) == buf)
-	{
+	if (fgetsx(buf, buflen, fp) == buf) {
 		while (   ((cp = strrchr (buf, '\n')) == NULL)
 		       && (feof (fp) == 0)) {
 			size_t len;
