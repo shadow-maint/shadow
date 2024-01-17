@@ -1125,26 +1125,6 @@ int main (int argc, char **argv)
 		exit (E_NOTFOUND);
 	}
 #endif				/* WITH_TCB */
-#ifdef	USE_NIS
-
-	/*
-	 * Now make sure it isn't an NIS user.
-	 */
-	if (__ispwNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: user %s is a NIS user\n"), Prog, user_name);
-		if (   !yp_get_default_domain (&nis_domain)
-		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: %s is the NIS master\n"),
-			         Prog, nis_master);
-		}
-		exit (E_NOTFOUND);
-	}
-#endif				/* USE_NIS */
 	/*
 	 * Check to make certain the user isn't logged in.
 	 * Note: This is a best effort basis. The user may log in between,

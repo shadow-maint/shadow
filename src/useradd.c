@@ -817,20 +817,6 @@ static int get_groups (char *list)
 			continue;
 		}
 
-#ifdef	USE_NIS
-		/*
-		 * Don't add this group if they are an NIS group. Tell
-		 * the user to go to the server for this group.
-		 */
-		if (__isgrNIS ()) {
-			fprintf (stderr,
-			         _("%s: group '%s' is a NIS group.\n"),
-			         Prog, grp->gr_name);
-			gr_free(grp);
-			continue;
-		}
-#endif
-
 		if (ngroups == sys_ngroups) {
 			fprintf (stderr,
 			         _("%s: too many groups specified (max %d).\n"),

@@ -429,28 +429,6 @@ int main (int argc, char **argv)
 		group_id = grp->gr_gid;
 	}
 
-#ifdef	USE_NIS
-	/*
-	 * Make sure this isn't a NIS group
-	 */
-	if (__isgrNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-		         _("%s: group '%s' is a NIS group\n"),
-		         Prog, group_name);
-
-		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "group.byname", &nis_master)) {
-			fprintf (stderr,
-			         _("%s: %s is the NIS master\n"),
-			         Prog, nis_master);
-		}
-		exit (E_NOTFOUND);
-	}
-#endif
-
 	/*
 	 * Make sure this isn't the primary group of anyone.
 	 */
