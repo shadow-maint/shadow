@@ -114,9 +114,6 @@ extern void date_to_str (size_t size, char buf[size], long date);
 /* encrypt.c */
 extern /*@exposed@*//*@null@*/char *pw_encrypt (const char *, const char *);
 
-/* entry.c */
-extern void pw_entry (const char *, struct passwd *);
-
 /* env.c */
 extern void addenv (const char *, /*@null@*/const char *);
 extern void initenv (void);

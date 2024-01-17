@@ -50,7 +50,6 @@ libshadow_la_SOURCES = \
 	date_to_str.c \
 	defines.h \
 	encrypt.c \
-	entry.c \
 	env.c \
 	exitcodes.h \
 	faillog.h \
