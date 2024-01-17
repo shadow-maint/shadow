@@ -57,12 +57,12 @@ static void catch_signals (unused int sig)
 
 /*ARGSUSED*/ int main (int argc, char **argv)
 {
+	int            err = 0;
+	char           **envp = environ;
+	TERMIO         termio;
 #ifndef USE_PAM
-	const char *env;
-#endif				/* !USE_PAM */
-	char **envp = environ;
-	TERMIO termio;
-	int err = 0;
+	const char     *env;
+#endif
 
 	static char           pass[BUFSIZ];
 	static struct passwd  pwent;
@@ -193,9 +193,8 @@ static void catch_signals (unused int sig)
 static void
 pw_entry(const char *name, struct passwd *pwent)
 {
-	struct passwd *passwd;
-
-	struct spwd *spwd;
+	struct spwd    *spwd;
+	struct passwd  *passwd;
 
 	if (!(passwd = getpwnam(name))) {  /* local, no need for xgetpwnam */
 		pwent->pw_name = NULL;
