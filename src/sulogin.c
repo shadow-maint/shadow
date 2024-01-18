@@ -84,12 +84,10 @@ main(int argc, char *argv[])
 		close(1);
 		close(2);
 
-		if (open(argv[1], O_RDWR) >= 0) {
-			dup (0);
-			dup (0);
-		} else {
-			exit (1);
-		}
+		if (open(argv[1], O_RDWR) == -1)
+			exit(1);
+		dup(0);
+		dup(0);
 	}
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
 		(void) puts (_("No password file"));
