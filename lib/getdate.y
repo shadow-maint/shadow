@@ -923,11 +923,8 @@ time_t get_date (const char *p, const time_t *now)
 
 #if	defined (TEST)
 
-/* ARGSUSED */
 int
-main (ac, av)
-     int ac;
-     char *av[];
+main(void)
 {
   char buff[MAX_BUFF_LEN + 1];
   time_t d;
