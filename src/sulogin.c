@@ -199,22 +199,29 @@ pw_entry(const char *name, struct passwd *pwent)
 	struct passwd  *passwd;
 
 	if (!(passwd = getpwnam(name))) {  /* local, no need for xgetpwnam */
+		free(pwent->pw_name);
 		pwent->pw_name = NULL;
 		return;
 	}
 
+	free(pwent->pw_name);
 	pwent->pw_name = xstrdup(passwd->pw_name);
 	pwent->pw_uid = passwd->pw_uid;
 	pwent->pw_gid = passwd->pw_gid;
+	free(pwent->pw_gecos);
 	pwent->pw_gecos = xstrdup(passwd->pw_gecos);
+	free(pwent->pw_dir);
 	pwent->pw_dir = xstrdup(passwd->pw_dir);
+	free(pwent->pw_shell);
 	pwent->pw_shell = xstrdup(passwd->pw_shell);
 #if !defined(AUTOSHADOW)
 	/* local, no need for xgetspnam */
 	if ((spwd = getspnam(name))) {
+		free(pwent->pw_passwd);
 		pwent->pw_passwd = xstrdup(spwd->sp_pwdp);
 		return;
 	}
 #endif
+	free(pwent->pw_passwd);
 	pwent->pw_passwd = xstrdup(passwd->pw_passwd);
 }
