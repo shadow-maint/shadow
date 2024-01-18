@@ -53,8 +53,8 @@ static void catch_signals (MAYBE_UNUSED int sig)
 }
 
 
-/*ARGSUSED*/ int
-main(int argc, char **argv)
+int
+main(int argc, char *argv[])
 {
 	int            err = 0;
 	char           **envp = environ;
@@ -78,13 +78,13 @@ main(int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	initenv ();
+	initenv();
 	if (argc > 1) {
-		close (0);
-		close (1);
-		close (2);
+		close(0);
+		close(1);
+		close(2);
 
-		if (open (argv[1], O_RDWR) >= 0) {
+		if (open(argv[1], O_RDWR) >= 0) {
 			dup (0);
 			dup (0);
 		} else {

@@ -36,7 +36,8 @@ static void usage (void)
 	exit (EXIT_FAILURE);
 }
 
- /*ARGSUSED*/ int main (int argc, char **argv)
+int
+main(int argc, char *argv[])
 {
 	uid_t ruid, euid;
 	gid_t rgid, egid;
@@ -74,11 +75,10 @@ static void usage (void)
 	 */
 
 	if (argc > 1) {
-		if ((argc > 2) || (strcmp (argv[1], "-a") != 0)) {
-			usage ();
-		} else {
+		if (argc > 2 || strcmp(argv[1], "-a") != 0)
+			usage();
+		else
 			aflg = true;
-		}
 	}
 
 	ruid = getuid ();
