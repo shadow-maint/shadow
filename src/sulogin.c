@@ -37,7 +37,6 @@ const char *Prog;
 
 
 extern char **newenvp;
-extern size_t newenvc;
 
 #ifndef	ALARM
 #define	ALARM	60
