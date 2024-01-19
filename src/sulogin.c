@@ -23,13 +23,11 @@
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "pwauth.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
-#include "string/strtcpy.h"
 
 
 /*
@@ -60,7 +58,6 @@ static void catch_signals (MAYBE_UNUSED int sig)
 main(int argc, char **argv)
 {
 	int            err = 0;
-	char           pass[BUFSIZ];
 	char           **envp = environ;
 	TERMIO         termio;
 	struct passwd  pwent = {};
@@ -135,7 +132,7 @@ main(int argc, char **argv)
 	(void) alarm (ALARM);		/* only wait so long ... */
 
 	do {			/* repeatedly get login/password pairs */
-		char *cp;
+		char *pass;
 		if (pw_entry("root", &pwent) == -1) {	/* get entry from password file */
 			/*
 			 * Fail secure
@@ -150,7 +147,7 @@ main(int argc, char **argv)
 		 */
 
 		/* get a password for root */
-		cp = agetpass (_(
+		pass = agetpass (_(
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"));
@@ -160,25 +157,24 @@ main(int argc, char **argv)
 		 * it will work with standard getpass() (no NULL on EOF).
 		 * --marekm
 		 */
-		if ((NULL == cp) || ('\0' == *cp)) {
-			erase_pass (cp);
+		if ((NULL == pass) || ('\0' == *pass)) {
+			erase_pass (pass);
 			(void) puts ("");
 #ifdef	TELINIT
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
 #endif
 			exit (0);
 		}
-		STRTCPY(pass, cp);
-		erase_pass (cp);
 
 		done = valid(pass, &pwent);
+		erase_pass (pass);
+
 		if (!done) {	/* check encrypted passwords ... */
 			/* ... encrypted passwords did not match */
 			sleep (2);
 			(void) puts (_("Login incorrect"));
 		}
 	} while (!done);
-	MEMZERO(pass);
 	(void) alarm (0);
 	(void) signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
