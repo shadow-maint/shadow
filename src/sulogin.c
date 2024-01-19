@@ -64,6 +64,7 @@ main(int argc, char **argv)
 	char           **envp = environ;
 	TERMIO         termio;
 	struct passwd  pwent = {};
+	bool           done;
 #ifndef USE_PAM
 	const char     *env;
 #endif
@@ -133,7 +134,7 @@ main(int argc, char **argv)
 	(void) signal (SIGALRM, catch_signals);	/* exit if the timer expires */
 	(void) alarm (ALARM);		/* only wait so long ... */
 
-	while (true) {		/* repeatedly get login/password pairs */
+	do {			/* repeatedly get login/password pairs */
 		char *cp;
 		if (pw_entry("root", &pwent) == -1) {	/* get entry from password file */
 			/*
@@ -170,13 +171,13 @@ main(int argc, char **argv)
 		STRTCPY(pass, cp);
 		erase_pass (cp);
 
-		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */
-			break;	/* ... encrypted passwords matched */
+		done = valid(pass, &pwent);
+		if (!done) {	/* check encrypted passwords ... */
+			/* ... encrypted passwords did not match */
+			sleep (2);
+			(void) puts (_("Login incorrect"));
 		}
-
-		sleep (2);
-		(void) puts (_("Login incorrect"));
-	}
+	} while (!done);
 	MEMZERO(pass);
 	(void) alarm (0);
 	(void) signal (SIGALRM, SIG_DFL);
