@@ -20,6 +20,7 @@ endif
 
 libshadow_la_CPPFLAGS += -I$(top_srcdir)
 libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
+libshadow_la_LIBADD = $(LIBADD_DLOPEN)
 
 libshadow_la_SOURCES = \
 	addgrps.c \
