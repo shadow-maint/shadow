@@ -32,6 +32,7 @@ AC_PROG_CC
 AC_PROG_LN_S
 AC_PROG_YACC
 LT_INIT
+LT_LIB_DLLOAD
 
 dnl Checks for libraries.
 

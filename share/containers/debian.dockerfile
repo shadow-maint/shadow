@@ -9,7 +9,7 @@ RUN export DEBIAN_PRIORITY=critical \
 RUN apt-get update -y \
     && apt-get dist-upgrade -y
 RUN apt-get build-dep shadow -y
-RUN apt-get install libbsd-dev libcmocka-dev pkgconf -y
+RUN apt-get install libltdl-dev libbsd-dev libcmocka-dev pkgconf -y
 
 COPY ./ /usr/local/src/shadow/
 WORKDIR /usr/local/src/shadow/
