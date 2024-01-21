@@ -9,6 +9,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <inttypes.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -29,10 +30,10 @@ strtou_noneg(const char *s, char **restrict endp, int base,
 
 	if (status == NULL)
 		status = &st;
-	if (strtoi_(s, endp, base, 0, 1, status) == 0 && *status == ERANGE)
+	if (strtoi(s, endp, base, 0, 1, status) == 0 && *status == ERANGE)
 		return min;
 
-	return strtou_(s, endp, base, min, max, status);
+	return strtou(s, endp, base, min, max, status);
 }
 
 

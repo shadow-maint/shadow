@@ -40,11 +40,13 @@ test_atoi_strtoi_SOURCES = \
     $(NULL)
 test_atoi_strtoi_CFLAGS = \
     $(AM_CFLAGS) \
+    $(LIBBSD_CFLAGS) \
     $(NULL)
 test_atoi_strtoi_LDFLAGS = \
     $(NULL)
 test_atoi_strtoi_LDADD = \
     $(CMOCKA_LIBS) \
+    $(LIBBSD_LIBS) \
     $(NULL)
 
 test_chkname_SOURCES = \

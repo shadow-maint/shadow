@@ -9,6 +9,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <inttypes.h>
 
 #include "atoi/strtoi.h"
 #include "atoi/strtou_noneg.h"
@@ -63,7 +64,7 @@ a2sh(short *restrict n, const char *s, char **restrict endp,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = strtoi(s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -78,7 +79,7 @@ a2si(int *restrict n, const char *s, char **restrict endp,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = strtoi(s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -93,7 +94,7 @@ a2sl(long *restrict n, const char *s, char **restrict endp,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = strtoi(s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -108,7 +109,7 @@ a2sll(long long *restrict n, const char *s, char **restrict endp,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = strtoi(s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
