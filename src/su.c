@@ -647,6 +647,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 #ifdef USE_PAM
 	int         ret;
 	const char  *tmp_name;
+	const void  *item;
 #endif				/* !USE_PAM */
 	/*
 	 * The password file entries for the user is gotten and the account
@@ -666,7 +667,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 #ifdef USE_PAM
 	check_perms_pam (pw);
 	/* PAM authentication can request a change of account */
-	ret = pam_get_item(pamh, PAM_USER, &tmp_name);
+	ret = pam_get_item(pamh, PAM_USER, &item);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG((LOG_ERR, "pam_get_item: internal PAM error\n"));
 		(void) fprintf (stderr,
@@ -675,6 +676,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 		(void) pam_end (pamh, ret);
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
+	tmp_name = item;
 	if (strcmp (name, tmp_name) != 0) {
 		SYSLOG ((LOG_INFO,
 		         "Change user from '%s' to '%s' as requested by PAM",
