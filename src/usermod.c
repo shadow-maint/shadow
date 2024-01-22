@@ -971,7 +971,6 @@ static void grp_update (void)
  */
 static void process_flags (int argc, char **argv)
 {
-	const struct group *grp;
 	struct stat st;
 	bool anyflag = false;
 
@@ -1077,6 +1076,9 @@ static void process_flags (int argc, char **argv)
 				fflg = true;
 				break;
 			case 'g':
+			{
+				struct group  *grp;
+
 				grp = prefix_getgr_nam_gid (optarg);
 				if (NULL == grp) {
 					fprintf (stderr,
@@ -1088,6 +1090,7 @@ static void process_flags (int argc, char **argv)
 				gflg = true;
 				gr_free (grp);
 				break;
+			}
 			case 'G':
 				if (get_groups (optarg) != 0) {
 					exit (E_NOTFOUND);
