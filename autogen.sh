@@ -10,6 +10,7 @@ CFLAGS="$CFLAGS -Werror=implicit-int"
 CFLAGS="$CFLAGS -Werror=incompatible-pointer-types"
 CFLAGS="$CFLAGS -Werror=int-conversion"
 CFLAGS="$CFLAGS -Wno-expansion-to-defined"
+CFLAGS="$CFLAGS -Wno-unknown-attributes"
 CFLAGS="$CFLAGS -Wno-unknown-warning-option"
 
 "$(dirname "$0")"/configure \
