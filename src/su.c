@@ -48,6 +48,7 @@
 
 #include "alloc.h"
 #include "attr.h"
+#include "cast.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
@@ -1226,7 +1227,7 @@ int main (int argc, char **argv)
 		 * Use the shell and create an argv
 		 * with the rest of the command line included.
 		 */
-		argv[-1] = cp;
+		argv[-1] = const_cast(char *, cp);
 		execve_shell (shellstr, &argv[-1], environ);
 		err = errno;
 		(void) fprintf (stderr,
