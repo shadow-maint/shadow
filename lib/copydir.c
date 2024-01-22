@@ -68,12 +68,12 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
                      gid_t old_gid, gid_t new_gid);
 static /*@null@*/char *readlink_malloc (const char *filename);
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         unused bool reset_selinux,
+                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
 static int copy_hardlink (const struct path_info *dst,
-                          unused bool reset_selinux,
+                          MAYBE_UNUSED bool reset_selinux,
                           struct link_name *lp);
 static int copy_special (const struct path_info *src, const struct path_info *dst,
                          bool reset_selinux,
@@ -97,7 +97,7 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
  * error_acl - format the error messages for the ACL and EQ libraries.
  */
 format_attr(printf, 2, 3)
-static void error_acl (unused struct error_context *ctx, const char *fmt, ...)
+static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, ...)
 {
 	va_list ap;
 	FILE *shadow_logfd = log_get_logfd();
@@ -582,7 +582,7 @@ static /*@null@*/char *readlink_malloc (const char *filename)
  *	Return 0 on success, -1 on error.
  */
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         unused bool reset_selinux,
+                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid)
@@ -654,7 +654,7 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
  *	Return 0 on success, -1 on error.
  */
 static int copy_hardlink (const struct path_info *dst,
-                          unused bool reset_selinux,
+                          MAYBE_UNUSED bool reset_selinux,
                           struct link_name *lp)
 {
 	/* FIXME: selinux, ACL, Extended Attributes needed? */

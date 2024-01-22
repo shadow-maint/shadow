@@ -101,14 +101,14 @@ static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
 static void log_gpasswd_failure (const char *suffix);
-static void log_gpasswd_failure_system (/*@null@*/unused void *arg);
-static void log_gpasswd_failure_group (/*@null@*/unused void *arg);
+static void log_gpasswd_failure_system (/*@null@*/MAYBE_UNUSED void *arg);
+static void log_gpasswd_failure_group (/*@null@*/MAYBE_UNUSED void *arg);
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (/*@null@*/unused void *arg);
+static void log_gpasswd_failure_gshadow (/*@null@*/MAYBE_UNUSED void *arg);
 #endif
 static void log_gpasswd_success (const char *suffix);
-static void log_gpasswd_success_system (/*@null@*/unused void *arg);
-static void log_gpasswd_success_group (/*@null@*/unused void *arg);
+static void log_gpasswd_success_system (/*@null@*/MAYBE_UNUSED void *arg);
+static void log_gpasswd_success_group (/*@null@*/MAYBE_UNUSED void *arg);
 
 /*
  * usage - display usage message
@@ -480,12 +480,12 @@ static void log_gpasswd_failure (const char *suffix)
 	}
 }
 
-static void log_gpasswd_failure_system (unused void *arg)
+static void log_gpasswd_failure_system (MAYBE_UNUSED void *arg)
 {
 	log_gpasswd_failure ("");
 }
 
-static void log_gpasswd_failure_group (unused void *arg)
+static void log_gpasswd_failure_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
@@ -494,7 +494,7 @@ static void log_gpasswd_failure_group (unused void *arg)
 }
 
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (unused void *arg)
+static void log_gpasswd_failure_gshadow (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
@@ -601,12 +601,12 @@ static void log_gpasswd_success (const char *suffix)
 	}
 }
 
-static void log_gpasswd_success_system (unused void *arg)
+static void log_gpasswd_success_system (MAYBE_UNUSED void *arg)
 {
 	log_gpasswd_success ("");
 }
 
-static void log_gpasswd_success_group (unused void *arg)
+static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
