@@ -22,7 +22,7 @@
 #include "defines.h"
 #include "getdef.h"
 
-static void login_exit (unused int sig)
+static void login_exit (MAYBE_UNUSED int sig)
 {
 	_exit (EXIT_FAILURE);
 }

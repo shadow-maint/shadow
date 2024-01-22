@@ -26,7 +26,7 @@
 static int ni_conv (int num_msg,
                     const struct pam_message **msg,
                     struct pam_response **resp,
-                    unused void *appdata_ptr);
+                    MAYBE_UNUSED void *appdata_ptr);
 static const struct pam_conv non_interactive_pam_conv = {
 	ni_conv,
 	NULL
@@ -37,7 +37,7 @@ static const struct pam_conv non_interactive_pam_conv = {
 static int ni_conv (int num_msg,
                     const struct pam_message **msg,
                     struct pam_response **resp,
-                    unused void *appdata_ptr)
+                    MAYBE_UNUSED void *appdata_ptr)
 {
 	struct pam_response *responses;
 	int count;

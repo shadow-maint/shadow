@@ -262,7 +262,7 @@ int main (int argc, char **argv)
 	return 0;
 }
 #else				/* !SHADOWGRP */
-int main (int unused(argc), char **argv)
+int main (int MAYBE_UNUSED(argc), char **argv)
 {
 	fprintf (stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);

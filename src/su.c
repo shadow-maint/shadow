@@ -111,7 +111,7 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
-static void kill_child (int unused(s));
+static void kill_child (int MAYBE_UNUSED(s));
 static void prepare_pam_close_session (void);
 #else				/* !USE_PAM */
 static void die (int);
@@ -165,7 +165,7 @@ static bool iswheel (const char *username)
 	return is_on_list (grp->gr_mem, username);
 }
 #else				/* USE_PAM */
-static void kill_child (int unused(s))
+static void kill_child (int MAYBE_UNUSED(s))
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);

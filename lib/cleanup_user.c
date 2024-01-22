@@ -96,7 +96,7 @@ void cleanup_report_add_user_shadow (void *user_name)
  *
  * It should be registered after the passwd database is successfully locked.
  */
-void cleanup_unlock_passwd (unused void *arg)
+void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
 {
 	if (pw_unlock () == 0) {
 		fprintf (log_get_logfd(),
@@ -115,7 +115,7 @@ void cleanup_unlock_passwd (unused void *arg)
  *
  * It should be registered after the shadow database is successfully locked.
  */
-void cleanup_unlock_shadow (unused void *arg)
+void cleanup_unlock_shadow (MAYBE_UNUSED void *arg)
 {
 	if (spw_unlock () == 0) {
 		fprintf (log_get_logfd(),

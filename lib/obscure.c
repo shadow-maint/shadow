@@ -29,7 +29,7 @@
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
  */
-static bool palindrome (unused const char *old, const char *new)
+static bool palindrome (MAYBE_UNUSED const char *old, const char *new)
 {
 	size_t i, j;
 
@@ -88,7 +88,7 @@ static char *str_lower (/*@returned@*/char *string)
 static /*@observer@*//*@null@*/const char *password_check (
 	/*@notnull@*/const char *old,
 	/*@notnull@*/const char *new,
-	/*@notnull@*/unused const struct passwd *pwdp)
+	/*@notnull@*/MAYBE_UNUSED const struct passwd *pwdp)
 {
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;

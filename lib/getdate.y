@@ -570,7 +570,7 @@ static TABLE const MilitaryTable[] = {
 
 
 
-static int yyerror (unused const char *s)
+static int yyerror (MAYBE_UNUSED const char *s)
 {
   return 0;
 }
