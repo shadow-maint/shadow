@@ -90,7 +90,8 @@
  */
 
 
-#define is_same_typeof(a, b)  __builtin_types_compatible_p(typeof(a), typeof(b))
+#define is_same_type(a, b)    __builtin_types_compatible_p(a, b)
+#define is_same_typeof(a, b)  is_same_type(typeof(a), typeof(b))
 #define is_array(a)           (!is_same_typeof((a), &(a)[0]))
 #define must_be_array(a)      must_be(is_array(a))
 
