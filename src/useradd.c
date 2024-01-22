@@ -329,10 +329,11 @@ static void fail_exit (int code)
  */
 static void get_defaults (void)
 {
-	FILE  *fp;
-	char  *default_file = USER_DEFAULTS_FILE;
-	char  buf[1024];
-	char  *cp;
+	FILE        *fp;
+	char        *default_file = USER_DEFAULTS_FILE;
+	char        buf[1024];
+	char        *cp;
+	const char  *ccp;
 
 	if (prefix[0]) {
 		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
@@ -383,6 +384,8 @@ static void get_defaults (void)
 			}
 		}
 
+		ccp = cp;
+
 		if (MATCH (buf, DGROUPS)) {
 			if (get_groups (cp) != 0) {
 				fprintf (stderr,
@@ -398,25 +401,25 @@ static void get_defaults (void)
 		 * Default HOME filesystem
 		 */
 		else if (MATCH (buf, DHOME)) {
-			def_home = xstrdup (cp);
+			def_home = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Login Shell command
 		 */
 		else if (MATCH (buf, DSHELL)) {
-			def_shell = xstrdup (cp);
+			def_shell = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Password Inactive value
 		 */
 		else if (MATCH (buf, DINACT)) {
-			if (   (getlong(cp, &def_inactive) == -1)
+			if (   (getlong(ccp, &def_inactive) == -1)
 			    || (def_inactive < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
-				         Prog, cp);
+				         Prog, ccp);
 				fprintf (stderr,
 				         _("%s: the %s configuration in %s will be ignored\n"),
 				         Prog, DINACT, default_file);
@@ -428,24 +431,23 @@ static void get_defaults (void)
 		 * Default account expiration date
 		 */
 		else if (MATCH (buf, DEXPIRE)) {
-			def_expire = xstrdup (cp);
+			def_expire = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Skeleton information
 		 */
 		else if (MATCH (buf, DSKEL)) {
-			if ('\0' == *cp) {
-				cp = SKEL_DIR;	/* XXX warning: const */
-			}
+			if ('\0' == *ccp)
+				ccp = SKEL_DIR;
 
 			if (prefix[0]) {
-				char  *dt; /* avoid const warning */
+				char  *dt;
 
-				xasprintf(&dt, "%s/%s", prefix, cp);
+				xasprintf(&dt, "%s/%s", prefix, ccp);
 				def_template = dt;
 			} else {
-				def_template = xstrdup(cp);
+				def_template = xstrdup(ccp);
 			}
 		}
 
@@ -453,38 +455,36 @@ static void get_defaults (void)
 		 * Default Usr Skeleton information
 		 */
 		else if (MATCH (buf, DUSRSKEL)) {
-			if ('\0' == *cp) {
-				cp = USRSKELDIR;	/* XXX warning: const */
-			}
+			if ('\0' == *ccp)
+				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
-				char  *dut; /* avoid const warning */
+				char  *dut;
 
-				xasprintf(&dut, "%s/%s", prefix, cp);
+				xasprintf(&dut, "%s/%s", prefix, ccp);
 				def_usrtemplate = dut;
 			} else {
-				def_usrtemplate = xstrdup(cp);
+				def_usrtemplate = xstrdup(ccp);
 			}
 		}
 		/*
 		 * Create by default user mail spool or not ?
 		 */
 		else if (MATCH (buf, DCREATE_MAIL_SPOOL)) {
-			if (*cp == '\0') {
-				cp = "no";	/* XXX warning: const */
-			}
+			if (*ccp == '\0')
+				ccp = "no";
 
-			def_create_mail_spool = xstrdup (cp);
+			def_create_mail_spool = xstrdup(ccp);
 		}
 
 		/*
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (MATCH (buf, DLOG_INIT)) {
-			if (*cp == '\0') {
-				cp = def_log_init;	/* XXX warning: const */
-			}
-			def_log_init = xstrdup (cp);
+			if (*ccp == '\0')
+				ccp = def_log_init;
+
+			def_log_init = xstrdup(ccp);
 		}
 	}
 	(void) fclose (fp);
