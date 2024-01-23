@@ -19,6 +19,7 @@
 
 #include "alloc.h"
 #include "attr.h"
+#include "memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -97,9 +98,8 @@ static int ni_conv (int num_msg,
 failed_conversation:
 	for (count=0; count < num_msg; count++) {
 		if (NULL != responses[count].resp) {
-			bzero(responses[count].resp,
-			      strlen(responses[count].resp));
-			free (responses[count].resp);
+			strzero(responses[count].resp);
+			free(responses[count].resp);
 			responses[count].resp = NULL;
 		}
 	}
