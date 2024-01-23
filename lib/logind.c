@@ -36,7 +36,7 @@ done:
     return ret;
 }
 
-unsigned long active_sessions_count(const char *name, unsigned long MAYBE_UNUSED(limit))
+unsigned long active_sessions_count(const char *name, MAYBE_UNUSED unsigned long limit)
 {
     struct passwd *pw;
     unsigned long count = 0;
