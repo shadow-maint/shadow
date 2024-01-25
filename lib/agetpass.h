@@ -17,6 +17,7 @@
 void erase_pass(char *pass);
 ATTR_MALLOC(erase_pass)
 char *agetpass(const char *prompt);
+char *agetpass_stdin();
 
 
 #endif  // include guard
