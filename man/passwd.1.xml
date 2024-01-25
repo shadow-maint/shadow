@@ -358,6 +358,17 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-s</option>, <option>--stdin</option>
+	</term>
+	<listitem>
+	  <para>
+	    This option is used to indicate that passwd should read the new password from standard
+	    input, which can be a pipe.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
