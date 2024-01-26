@@ -2,20 +2,20 @@
 # and also cooperate to make a distribution for `make dist'
 
 pamd_files = \
+	chpasswd \
 	chfn \
 	chsh \
 	groupmems \
 	login \
+	newusers \
 	passwd
 
 pamd_acct_tools_files = \
 	chage \
-	chgpasswd \
 	chpasswd \
 	groupadd \
 	groupdel \
 	groupmod \
-	newusers \
 	useradd \
 	userdel \
 	usermod
