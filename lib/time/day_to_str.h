@@ -25,8 +25,8 @@ inline void day_to_str(size_t size, char buf[size], long day);
 inline void
 day_to_str(size_t size, char buf[size], long day)
 {
-	time_t           date;
-	const struct tm  *tm;
+	time_t     date;
+	struct tm  tm;
 
 	if (day < 0) {
 		strtcpy(buf, "never", size);
@@ -38,13 +38,12 @@ day_to_str(size_t size, char buf[size], long day)
 		return;
 	}
 
-	tm = gmtime(&date);
-	if (tm == NULL) {
+	if (gmtime_r(&date, &tm) == NULL) {
 		strtcpy(buf, "future", size);
 		return;
 	}
 
-	if (strftime(buf, size, "%Y-%m-%d", tm) == 0)
+	if (strftime(buf, size, "%Y-%m-%d", &tm) == 0)
 		strtcpy(buf, "future", size);
 }
 

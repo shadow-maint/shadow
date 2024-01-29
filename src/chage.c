@@ -237,7 +237,7 @@ print_day_as_date(long day)
 {
 	char       buf[80];
 	time_t     date;
-	struct tm  *tp;
+	struct tm  tm;
 
 	if (day < 0) {
 		puts(_("never"));
@@ -248,13 +248,13 @@ print_day_as_date(long day)
 		return;
 	}
 
-	tp = gmtime (&date);
-	if (NULL == tp) {
+	if (gmtime_r(&date, &tm) == NULL) {
 		(void) printf ("time_t: %lu\n", (unsigned long)date);
-	} else {
-		(void) strftime (buf, sizeof buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", tp);
-		(void) puts (buf);
+		return;
 	}
+
+	(void) strftime (buf, sizeof buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", &tm);
+	(void) puts (buf);
 }
 
 
