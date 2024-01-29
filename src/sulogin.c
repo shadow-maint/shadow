@@ -47,7 +47,7 @@ extern size_t newenvc;
 
 
 static void catch_signals (int);
-static void pw_entry(const char *name, struct passwd *pwent);
+static int pw_entry(const char *name, struct passwd *pwent);
 
 
 static void catch_signals (unused int sig)
@@ -135,13 +135,12 @@ main(int argc, char **argv)
 
 	while (true) {		/* repeatedly get login/password pairs */
 		char *cp;
-		pw_entry ("root", &pwent);	/* get entry from password file */
-		if (pwent.pw_name == NULL) {
+		if (pw_entry("root", &pwent) == -1) {	/* get entry from password file */
 			/*
 			 * Fail secure
 			 */
-			(void) puts (_("No password entry for 'root'"));
-			exit (1);
+			(void) puts(_("No password entry for 'root'"));
+			exit(1);
 		}
 
 		/*
@@ -192,17 +191,14 @@ main(int argc, char **argv)
 }
 
 
-static void
+static int
 pw_entry(const char *name, struct passwd *pwent)
 {
 	struct spwd    *spwd;
 	struct passwd  *passwd;
 
-	if (!(passwd = getpwnam(name))) {  /* local, no need for xgetpwnam */
-		free(pwent->pw_name);
-		pwent->pw_name = NULL;
-		return;
-	}
+	if (!(passwd = getpwnam(name)))  /* local, no need for xgetpwnam */
+		return -1;
 
 	free(pwent->pw_name);
 	pwent->pw_name = xstrdup(passwd->pw_name);
@@ -219,9 +215,10 @@ pw_entry(const char *name, struct passwd *pwent)
 	if ((spwd = getspnam(name))) {
 		free(pwent->pw_passwd);
 		pwent->pw_passwd = xstrdup(spwd->sp_pwdp);
-		return;
+		return 0;
 	}
 #endif
 	free(pwent->pw_passwd);
 	pwent->pw_passwd = xstrdup(passwd->pw_passwd);
+	return 0;
 }
