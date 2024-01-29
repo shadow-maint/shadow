@@ -453,7 +453,7 @@ static void print_status (const struct passwd *pw)
 
 	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
-		date_to_str (sizeof(date), date, sp->sp_lstchg * DAY),
+		DAY_TO_STR(date, sp->sp_lstchg),
 		(void) printf ("%s %s %s %ld %ld %ld %ld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),

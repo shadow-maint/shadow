@@ -181,11 +181,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY) {
-		strcpy (buf, "-1");
-	} else {
-		date_to_str (sizeof(buf), buf, lstchgdate * DAY);
-	}
+	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
+		strcpy(buf, "-1");
+	else
+		DAY_TO_STR(buf, lstchgdate);
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
@@ -212,11 +211,10 @@ static int new_fields (void)
 		return 0;
 	}
 
-	if (-1 == expdate || LONG_MAX / DAY < expdate) {
-		strcpy (buf, "-1");
-	} else {
-		date_to_str (sizeof(buf), buf, expdate * DAY);
-	}
+	if (-1 == expdate || LONG_MAX / DAY < expdate)
+		strcpy(buf, "-1");
+	else
+		DAY_TO_STR(buf, expdate);
 
 	change_field (buf, sizeof buf,
 	              _("Account Expiration Date (YYYY-MM-DD)"));
