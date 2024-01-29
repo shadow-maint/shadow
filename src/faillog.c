@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <time.h>
 #include <assert.h>
+
 #include "defines.h"
 #include "faillog.h"
 #include "memzero.h"
@@ -25,6 +26,8 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strftime.h"
+
 
 /* local function prototypes */
 NORETURN static void usage (int status);
@@ -167,7 +170,7 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		fprintf (stderr, "Cannot read time from faillog.\n");
 		return;
 	}
-	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
+	STRFTIME(ptime, "%D %H:%M:%S %z", tm);
 	cp = ptime;
 
 	printf ("%-9s   %5d    %5d   ",

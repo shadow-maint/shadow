@@ -38,7 +38,9 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "string/strftime.h"
 #include "string/strtcpy.h"
+
 
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -1249,12 +1251,12 @@ int main (int argc, char **argv)
 #ifdef ENABLE_LASTLOG
 		if (   getdef_bool ("LASTLOG_ENAB")
 		    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)
-		    && (ll.ll_time != 0)) {
+		    && (ll.ll_time != 0))
+		{
 			time_t ll_time = ll.ll_time;
 
-			(void) strftime (ptime, sizeof (ptime),
-			                 "%a %b %e %H:%M:%S %z %Y",
-			                 localtime (&ll_time));
+			STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y",
+			                localtime(&ll_time));
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */

@@ -14,11 +14,13 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
 #include "memzero.h"
 #include "prototypes.h"
+#include "string/strftime.h"
 #include "string/strtcpy.h"
 
 
@@ -252,7 +254,7 @@ void failprint (const struct faillog *fail)
 	/*
 	 * Print all information we have.
 	 */
-	(void) strftime (lasttimeb, sizeof lasttimeb, "%c", tp);
+	STRFTIME(lasttimeb, "%c", tp);
 
 	/*@-formatconst@*/
 	(void) printf (ngettext ("%d failure since last login.\n"
