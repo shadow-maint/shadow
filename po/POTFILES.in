@@ -13,7 +13,6 @@ lib/cleanup_user.c
 lib/commonio.c
 lib/console.c
 lib/copydir.c
-lib/date_to_str.c
 lib/encrypt.c
 lib/env.c
 lib/failure.c

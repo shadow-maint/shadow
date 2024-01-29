@@ -4,18 +4,21 @@
  */
 
 
+#ifndef SHADOW_INCLUDE_LIB_TIME_DAY_TO_STR_H_
+#define SHADOW_INCLUDE_LIB_TIME_DAY_TO_STR_H_
+
+
 #include <config.h>
 
-#include <string.h>
 #include <time.h>
 
-#ident "$Id$"
-
 #include "string/strtcpy.h"
-#include "prototypes.h"
 
 
-void
+inline void date_to_str(size_t size, char buf[size], long date);
+
+
+inline void
 date_to_str(size_t size, char buf[size], long date)
 {
 	time_t           t;
@@ -36,3 +39,6 @@ date_to_str(size_t size, char buf[size], long date)
 	if (strftime(buf, size, "%Y-%m-%d", tm) == 0)
 		(void) strtcpy(buf, "future", size);
 }
+
+
+#endif  // include guard

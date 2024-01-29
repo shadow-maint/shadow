@@ -53,7 +53,6 @@ libshadow_la_SOURCES = \
 	console.c \
 	copydir.c \
 	csrand.c \
-	date_to_str.c \
 	defines.h \
 	encrypt.c \
 	env.c \
@@ -159,6 +158,8 @@ libshadow_la_SOURCES = \
 	subordinateio.h \
 	subordinateio.c \
 	sulog.c \
+	time/day_to_str.c \
+	time/day_to_str.h \
 	ttytype.c \
 	tz.c \
 	ulimit.c \

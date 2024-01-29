@@ -59,6 +59,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "time/day_to_str.h"
 
 
 /*
