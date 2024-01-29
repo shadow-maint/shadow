@@ -675,14 +675,11 @@ static void update_shadow (void)
  *
  *	-d	delete the password for the named account (*)
  *	-e	expire the password for the named account (*)
- *	-f	execute chfn command to interpret flags
- *	-g	execute gpasswd command to interpret flags
  *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
  *	-l	lock the password of the named account (*)
  *	-n #	set sp_min to # days (*)
  *	-r #	change password in # repository
- *	-s	execute chsh command to interpret flags
  *	-S	show password status of named account
  *	-u	unlock the password of the named account (*)
  *	-w #	set sp_warn to # days (*)
