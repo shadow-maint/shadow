@@ -1253,10 +1253,11 @@ int main (int argc, char **argv)
 		    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)
 		    && (ll.ll_time != 0))
 		{
-			time_t ll_time = ll.ll_time;
+			time_t     ll_time = ll.ll_time;
+			struct tm  tm;
 
-			STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y",
-			                localtime(&ll_time));
+			localtime_r(&ll_time, &tm);
+			STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y", &tm);
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
