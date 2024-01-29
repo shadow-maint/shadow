@@ -12,7 +12,12 @@
 
 #include <time.h>
 
+#include "defines.h"
+#include "sizeof.h"
 #include "string/strtcpy.h"
+
+
+#define DAY_TO_STR(str, day)   date_to_str(NITEMS(str), str, day * DAY)
 
 
 inline void date_to_str(size_t size, char buf[size], long date);
