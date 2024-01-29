@@ -1,7 +1,6 @@
-/*
- * SPDX-FileCopyrightText: 2021-2023, Alejandro Colomar <alx@kernel.org>
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2021-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024, Tobias Stoeckmann <tobias@stoeckmann.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #ifndef SHADOW_INCLUDE_LIB_TIME_DAY_TO_STR_H_
@@ -17,32 +16,36 @@
 #include "string/strtcpy.h"
 
 
-#define DAY_TO_STR(str, day)   date_to_str(NITEMS(str), str, day * DAY)
+#define DAY_TO_STR(str, day)   day_to_str(NITEMS(str), str, day)
 
 
-inline void date_to_str(size_t size, char buf[size], long date);
+inline void day_to_str(size_t size, char buf[size], long day);
 
 
 inline void
-date_to_str(size_t size, char buf[size], long date)
+day_to_str(size_t size, char buf[size], long day)
 {
-	time_t           t;
+	time_t           date;
 	const struct tm  *tm;
 
-	t = date;
-	if (date < 0) {
-		(void) strtcpy(buf, "never", size);
+	if (day < 0) {
+		strtcpy(buf, "never", size);
 		return;
 	}
 
-	tm = gmtime(&t);
+	if (__builtin_mul_overflow(day, DAY, &date)) {
+		strtcpy(buf, "future", size);
+		return;
+	}
+
+	tm = gmtime(&date);
 	if (tm == NULL) {
-		(void) strtcpy(buf, "future", size);
+		strtcpy(buf, "future", size);
 		return;
 	}
 
 	if (strftime(buf, size, "%Y-%m-%d", tm) == 0)
-		(void) strtcpy(buf, "future", size);
+		strtcpy(buf, "future", size);
 }
 
 
