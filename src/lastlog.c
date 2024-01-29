@@ -22,6 +22,7 @@
 #ifdef HAVE_LL_HOST
 #include <net/if.h>
 #endif
+
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
@@ -29,6 +30,8 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strftime.h"
+
 
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
@@ -156,7 +159,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	if (tm == NULL) {
 		cp = "(unknown)";
 	} else {
-		strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
+		STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y", tm);
 		cp = ptime;
 	}
 	if (ll.ll_time == (time_t) 0) {

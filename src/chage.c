@@ -34,6 +34,7 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
+#include "string/strftime.h"
 #include "string/strtcpy.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/
@@ -253,7 +254,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	(void) strftime (buf, sizeof buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", &tm);
+	STRFTIME(buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", &tm);
 	(void) puts (buf);
 }
 
