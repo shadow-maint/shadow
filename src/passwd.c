@@ -33,6 +33,8 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/strtcpy.h"
+#include "time/day_to_str.h"
+
 
 /*
  * exit status values

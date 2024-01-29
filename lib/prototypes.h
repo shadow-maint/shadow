@@ -108,9 +108,6 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid);
 
-/* date_to_str.c */
-extern void date_to_str (size_t size, char buf[size], long date);
-
 /* encrypt.c */
 extern /*@exposed@*//*@null@*/char *pw_encrypt (const char *, const char *);
 

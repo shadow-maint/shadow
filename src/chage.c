@@ -27,19 +27,21 @@
 #include <pwd.h>
 
 #include "alloc.h"
-#include "prototypes.h"
 #include "defines.h"
 #include "memzero.h"
+#include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
 #include "string/strtcpy.h"
+#include "time/day_to_str.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
+
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
-/*@-exitarg@*/
-#include "exitcodes.h"
 
 
 /*
