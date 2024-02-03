@@ -80,7 +80,7 @@ bool is_valid_user_name (const char *name)
 	 * User names length are limited by the kernel
 	 */
 	maxlen = sysconf(_SC_LOGIN_NAME_MAX);
-	if (strlen(name) > maxlen)
+	if (strlen(name) >= maxlen)
 		return false;
 
 	return is_valid_name (name);
