@@ -20,6 +20,8 @@
 #ident "$Id$"
 
 #include <ctype.h>
+#include <errno.h>
+#include <limits.h>
 #include "defines.h"
 #include "chkname.h"
 
@@ -74,13 +76,16 @@ static bool is_valid_name (const char *name)
 
 bool is_valid_user_name (const char *name)
 {
-	size_t  maxlen;
+	long  maxlen;
 
 	/*
 	 * User names length are limited by the kernel
 	 */
+	errno = 0;
 	maxlen = sysconf(_SC_LOGIN_NAME_MAX);
-	if (strlen(name) >= maxlen)
+	if (maxlen == -1 && errno != 0)
+		maxlen = LOGIN_NAME_MAX;
+	if (maxlen != -1 && strlen(name) >= (size_t)maxlen)
 		return false;
 
 	return is_valid_name (name);
