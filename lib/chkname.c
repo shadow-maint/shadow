@@ -76,17 +76,21 @@ static bool is_valid_name (const char *name)
 bool
 is_valid_user_name(const char *name)
 {
-	long  maxsize;
+	long    conf;
+	size_t  maxsize;
 
 	errno = 0;
-	maxsize = sysconf(_SC_LOGIN_NAME_MAX);
-	if (maxsize == -1 && errno != 0)
-		maxsize = LOGIN_NAME_MAX;
+	conf = sysconf(_SC_LOGIN_NAME_MAX);
 
-	if (strlen(name) >= (size_t)maxsize)
+	if (conf == -1 && errno != 0)
+		maxsize = LOGIN_NAME_MAX;
+	else
+		maxsize = conf;
+
+	if (strlen(name) >= maxsize)
 		return false;
 
-	return is_valid_name (name);
+	return is_valid_name(name);
 }
 
 
