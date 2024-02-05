@@ -577,7 +577,7 @@ int main (int argc, char **argv)
 		assert (NULL == username);
 		username = XMALLOC(max_size, char);
 		username[max_size - 1] = '\0';
-		if (do_rlogin(hostname, username, max_size - 1, term, sizeof(term)))
+		if (do_rlogin(hostname, username, max_size, term, sizeof(term)))
 		{
 			preauth_flag = true;
 		} else {
@@ -896,7 +896,7 @@ int main (int argc, char **argv)
 			preauth_flag = false;
 			username = XMALLOC(max_size, char);
 			username[max_size - 1] = '\0';
-			login_prompt(username, max_size - 1);
+			login_prompt(username, max_size);
 
 			if ('\0' == username[0]) {
 				/* Prompt for a new login */
