@@ -41,7 +41,9 @@ static struct {
 	{ -1, -1}
 };
 
-static void get_remote_string (char *buf, size_t size)
+
+static void
+get_remote_string(char *buf, size_t size)
 {
 	for (;;) {
 		if (read (0, buf, 1) != 1) {
@@ -55,11 +57,13 @@ static void get_remote_string (char *buf, size_t size)
 			++buf;
 		}
 	}
- /*NOTREACHED*/}
+	/*NOTREACHED*/
+}
+
 
 int
-do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
-           size_t termlen)
+do_rlogin(const char *remote_host, char *name, size_t namesize, char *term,
+          size_t termsize)
 {
 	struct passwd *pwd;
 	char remote_name[32];
@@ -69,9 +73,9 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 	int i;
 	TERMIO termio;
 
-	get_remote_string (remote_name, sizeof remote_name);
-	get_remote_string (name, namelen);
-	get_remote_string (term, termlen);
+	get_remote_string(remote_name, sizeof(remote_name));
+	get_remote_string(name, namesize);
+	get_remote_string(term, termsize);
 
 	cp = strchr (term, '/');
 	if (NULL != cp) {
@@ -126,4 +130,3 @@ do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
 #endif
 }
 #endif				/* RLOGIN */
-
