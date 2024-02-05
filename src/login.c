@@ -572,11 +572,13 @@ int main (int argc, char **argv)
 	}
 #ifdef RLOGIN
 	if (rflg) {
-		size_t max_size = sysconf(_SC_LOGIN_NAME_MAX);
+		size_t  max_size = sysconf(_SC_LOGIN_NAME_MAX);
+
 		assert (NULL == username);
-		username = XMALLOC(max_size + 1, char);
-		username[max_size] = '\0';
-		if (do_rlogin (hostname, username, max_size, term, sizeof term)) {
+		username = XMALLOC(max_size, char);
+		username[max_size - 1] = '\0';
+		if (do_rlogin(hostname, username, max_size - 1, term, sizeof(term)))
+		{
 			preauth_flag = true;
 		} else {
 			free (username);
@@ -879,15 +881,16 @@ int main (int argc, char **argv)
 
 		failed = false;	/* haven't failed authentication yet */
 		if (NULL == username) {	/* need to get a login id */
-			size_t max_size = sysconf(_SC_LOGIN_NAME_MAX);
+			size_t  max_size = sysconf(_SC_LOGIN_NAME_MAX);
+
 			if (subroot) {
 				closelog ();
 				exit (1);
 			}
 			preauth_flag = false;
-			username = XMALLOC(max_size + 1, char);
-			username[max_size] = '\0';
-			login_prompt (username, max_size);
+			username = XMALLOC(max_size, char);
+			username[max_size - 1] = '\0';
+			login_prompt(username, max_size - 1);
 
 			if ('\0' == username[0]) {
 				/* Prompt for a new login */
