@@ -68,10 +68,9 @@ long strtoday (const char *str)
 		return retdate;
 	}
 
-	t = get_date (str, NULL);
+	t = get_date(str, NULL);
 	if ((time_t) - 1 == t) {
 		return -2;
 	}
-	/* convert seconds to days since 1970-01-01 */
-	return (t + DAY / 2) / DAY;
+	return t / DAY;
 }
