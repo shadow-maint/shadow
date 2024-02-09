@@ -70,8 +70,6 @@ libshadow_la_SOURCES = \
 	get_gid.c \
 	get_pid.c \
 	get_uid.c \
-	getdate.h \
-	getdate.y \
 	getdef.c \
 	getdef.h \
 	getlong.c \

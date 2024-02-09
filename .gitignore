@@ -47,5 +47,4 @@ Makefile.in
 
 /shadow.spec
 /shadow-*.tar.*
-/lib/getdate.c
 /libsubid/subid.h
