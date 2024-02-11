@@ -204,7 +204,7 @@ UMASK		022
 # HOME_MODE is used by useradd(8) and newusers(8) to set the mode for new
 # home directories.
 # If HOME_MODE is not set, the value of UMASK is used to create the mode.
-#HOME_MODE	0700
+HOME_MODE	0700
 
 #
 # Password aging controls:
