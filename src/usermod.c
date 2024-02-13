@@ -331,6 +331,13 @@ static struct ulong_range getulong_range(const char *str)
 	if (first > last)
 		goto out;
 
+	/*
+	 * uid_t in linux is an unsigned int, anything over this is an invalid
+	 * range will be later refused anyway by get_map_ranges().
+	 */
+	if (first > UINT_MAX || last > UINT_MAX)
+		goto out;
+
 	result.first = (unsigned long)first;
 	result.last = (unsigned long)last;
 out:
