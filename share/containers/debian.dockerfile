@@ -23,8 +23,7 @@ RUN ./autogen.sh \
 	--without-selinux \
 	--enable-man \
 	--with-yescrypt
-RUN make -kj4 || true
-RUN make
+RUN make -Orecurse -j4
 RUN bash -c "trap 'cat <tests/unit/test-suite.log >&2' ERR; make check;"
 RUN make install
 

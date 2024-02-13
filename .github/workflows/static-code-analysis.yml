@@ -32,10 +32,7 @@ jobs:
     - name: Build shadow-utils
       run: |
         PROCESSORS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
-        make -kj$PROCESSORS || true
-
-    - name: Check build errors
-      run: make
+        make -Orecurse -j$PROCESSORS
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
