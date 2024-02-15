@@ -42,6 +42,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "memzero.h"
+#include "must_be.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -295,28 +296,36 @@ static int get_groups (char *list)
 #ifdef ENABLE_SUBIDS
 struct id_range
 {
-	unsigned long first;
-	unsigned long last;
+	id_t  first;
+	id_t  last;
 };
 
 static struct id_range
 getid_range(const char *str)
 {
+	id_t             first, last;
 	const char       *pos;
-	unsigned long    first, last;
-	struct id_range  result = { .first = ULONG_MAX, .last = 0 };
+	struct id_range  result = {
+		.first = type_max(id_t),
+		.last = type_min(id_t)
+	};
 
-	/*
-	 * uid_t in linux is an unsigned int, anything over this is an invalid
-	 * range will be later refused anyway by get_map_ranges().
-	 */
-	if (a2ul(&first, str, &pos, 10, 0, UINT_MAX) == -1 && errno != ENOTSUP)
+	static_assert(is_same_type(id_t, uid_t), "");
+	static_assert(is_same_type(id_t, gid_t), "");
+
+	first = type_min(id_t);
+	last = type_max(id_t);
+
+	if (a2i(id_t, &first, str, &pos, 10, first, last) == -1
+	    && errno != ENOTSUP)
+	{
 		return result;
+	}
 
 	if ('-' != *pos++)
 		return result;
 
-	if (a2ul(&last, pos, NULL, 10, first, UINT_MAX) == -1)
+	if (a2i(id_t, &last, pos, NULL, 10, first, last) == -1)
 		return result;
 
 	result.first = first;
@@ -2237,12 +2246,15 @@ int main (int argc, char **argv)
 		struct id_range_list_entry  *ptr;
 
 		for (ptr = del_sub_uids; ptr != NULL; ptr = ptr->next) {
-			unsigned long count = ptr->range.last - ptr->range.first + 1;
+			id_t  count = ptr->range.last - ptr->range.first + 1;
+
 			if (sub_uid_remove(user_name, ptr->range.first, count) == 0) {
-				fprintf (stderr,
-					_("%s: failed to remove uid range %lu-%lu from '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last,
-					sub_uid_dbname ());
+				fprintf(stderr,
+				        _("%s: failed to remove uid range %ju-%ju from '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_uid_dbname());
 				fail_exit (E_SUB_UID_UPDATE);
 			}
 		}
@@ -2251,13 +2263,15 @@ int main (int argc, char **argv)
 		struct id_range_list_entry  *ptr;
 
 		for (ptr = add_sub_uids; ptr != NULL; ptr = ptr->next) {
-			unsigned long  count = ptr->range.last - ptr->range.first + 1;
+			id_t  count = ptr->range.last - ptr->range.first + 1;
 
 			if (sub_uid_add(user_name, ptr->range.first, count) == 0) {
-				fprintf (stderr,
-					_("%s: failed to add uid range %lu-%lu to '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last,
-					sub_uid_dbname ());
+				fprintf(stderr,
+				        _("%s: failed to add uid range %ju-%ju to '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_uid_dbname());
 				fail_exit (E_SUB_UID_UPDATE);
 			}
 		}
@@ -2266,13 +2280,15 @@ int main (int argc, char **argv)
 		struct id_range_list_entry  *ptr;
 
 		for (ptr = del_sub_gids; ptr != NULL; ptr = ptr->next) {
-			unsigned long  count = ptr->range.last - ptr->range.first + 1;
+			id_t  count = ptr->range.last - ptr->range.first + 1;
 
 			if (sub_gid_remove(user_name, ptr->range.first, count) == 0) {
-				fprintf (stderr,
-					_("%s: failed to remove gid range %lu-%lu from '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last,
-					sub_gid_dbname ());
+				fprintf(stderr,
+				        _("%s: failed to remove gid range %ju-%ju from '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_gid_dbname());
 				fail_exit (E_SUB_GID_UPDATE);
 			}
 		}
@@ -2281,13 +2297,15 @@ int main (int argc, char **argv)
 		struct id_range_list_entry  *ptr;
 
 		for (ptr = add_sub_gids; ptr != NULL; ptr = ptr->next) {
-			unsigned long  count = ptr->range.last - ptr->range.first + 1;
+			id_t  count = ptr->range.last - ptr->range.first + 1;
 
 			if (sub_gid_add(user_name, ptr->range.first, count) == 0) {
-				fprintf (stderr,
-					_("%s: failed to add gid range %lu-%lu to '%s'\n"),
-					Prog, ptr->range.first, ptr->range.last,
-					sub_gid_dbname ());
+				fprintf(stderr,
+				        _("%s: failed to add gid range %ju-%ju to '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_gid_dbname());
 				fail_exit (E_SUB_GID_UPDATE);
 			}
 		}
