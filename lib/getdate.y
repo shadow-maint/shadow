@@ -318,7 +318,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelYear += $1 * $2;
 	}
 	| tYEAR_UNIT {
-	    yyRelYear++;
+	    yyRelYear += $1;
 	}
 	| tUNUMBER tMONTH_UNIT {
 	    yyRelMonth += $1 * $2;
@@ -327,7 +327,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelMonth += $1 * $2;
 	}
 	| tMONTH_UNIT {
-	    yyRelMonth++;
+	    yyRelMonth += $1;
 	}
 	| tUNUMBER tDAY_UNIT {
 	    yyRelDay += $1 * $2;
@@ -336,7 +336,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelDay += $1 * $2;
 	}
 	| tDAY_UNIT {
-	    yyRelDay++;
+	    yyRelDay += $1;
 	}
 	| tUNUMBER tHOUR_UNIT {
 	    yyRelHour += $1 * $2;
@@ -345,7 +345,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelHour += $1 * $2;
 	}
 	| tHOUR_UNIT {
-	    yyRelHour++;
+	    yyRelHour += $1;
 	}
 	| tUNUMBER tMINUTE_UNIT {
 	    yyRelMinutes += $1 * $2;
@@ -354,7 +354,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelMinutes += $1 * $2;
 	}
 	| tMINUTE_UNIT {
-	    yyRelMinutes++;
+	    yyRelMinutes += $1;
 	}
 	| tUNUMBER tSEC_UNIT {
 	    yyRelSeconds += $1 * $2;
@@ -363,7 +363,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	    yyRelSeconds += $1 * $2;
 	}
 	| tSEC_UNIT {
-	    yyRelSeconds++;
+	    yyRelSeconds += $1;
 	}
 	;
 
