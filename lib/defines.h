@@ -25,6 +25,7 @@
     ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
 #endif
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -238,6 +239,16 @@ static inline void memzero(void *ptr, size_t size)
 #  define shadow_getenv(name) secure_getenv(name)
 # else
 #  define shadow_getenv(name) getenv(name)
+#endif
+
+/*
+ * Maximum password length
+ *
+ * Consider that there is also limit in PAM (PAM_MAX_RESP_SIZE)
+ * currently set to 512.
+ */
+#if !defined(PASS_MAX)
+#define PASS_MAX  BUFSIZ - 1
 #endif
 
 #endif				/* _DEFINES_H_ */

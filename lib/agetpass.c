@@ -9,7 +9,6 @@
 
 #include <limits.h>
 #include <readpassphrase.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -21,11 +20,6 @@
 #if WITH_LIBBSD == 0
 #include "freezero.h"
 #endif /* WITH_LIBBSD */
-
-
-#if !defined(PASS_MAX)
-#define PASS_MAX  BUFSIZ - 1
-#endif
 
 
 /*
