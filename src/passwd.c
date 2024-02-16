@@ -175,8 +175,8 @@ static int new_password (const struct passwd *pw)
 	char *cipher;		/* Pointer to cipher text */
 	const char *salt;	/* Pointer to new salt */
 	char *cp;		/* Pointer to agetpass() response */
-	char orig[200];		/* Original password */
-	char pass[200];		/* New password */
+	char orig[PASS_MAX + 1];	/* Original password */
+	char pass[PASS_MAX + 1];	/* New password */
 	int i;			/* Counter for retries */
 	bool warned;
 	int pass_max_len = -1;
