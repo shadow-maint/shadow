@@ -49,7 +49,7 @@ AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 AC_CHECK_FUNCS(arc4random_buf futimes \
 	getentropy getrandom getspnam getusershell \
 	initgroups lckpwdf lutimes mempcpy \
-	setgroups updwtmp updwtmpx innetgr \
+	setgroups updwtmpx innetgr \
 	getspnam_r \
 	rpmatch \
 	memset_explicit explicit_bzero stpecpy stpeprintf)
@@ -57,17 +57,13 @@ AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 
-AC_CHECK_MEMBERS([struct utmp.ut_type,
-                  struct utmp.ut_id,
-                  struct utmp.ut_name,
-                  struct utmp.ut_user,
-                  struct utmp.ut_host,
-                  struct utmp.ut_syslen,
-                  struct utmp.ut_addr,
-                  struct utmp.ut_addr_v6,
-                  struct utmp.ut_time,
-                  struct utmp.ut_xtime,
-                  struct utmp.ut_tv],,,[[#include <utmp.h>]])
+AC_CHECK_MEMBERS([struct utmpx.ut_name,
+                  struct utmpx.ut_host,
+                  struct utmpx.ut_syslen,
+                  struct utmpx.ut_addr,
+                  struct utmpx.ut_addr_v6,
+                  struct utmpx.ut_time,
+                  struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
 
 dnl Checks for library functions.
 AC_TYPE_GETGROUPS
