@@ -28,7 +28,7 @@
  *
  *	A "last login" entry is created for the user being logged in.  The
  *	UID is extracted from the global (struct passwd) entry and the
- *	TTY information is gotten from the (struct utmp).
+ *	TTY information is gotten from the (struct utmpx).
  */
 void dolastlog (
 	struct lastlog *ll,
