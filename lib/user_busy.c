@@ -51,13 +51,15 @@ int user_busy (const char *name, uid_t uid)
 #endif				/* !__linux__ */
 }
 
-#ifndef __linux__
-static int user_busy_utmp (const char *name)
-{
-	struct utmp *utent;
 
-	setutent ();
-	while ((utent = getutent ()) != NULL)
+#ifndef __linux__
+static int
+user_busy_utmp(const char *name)
+{
+	struct utmpx  *utent;
+
+	setutxent();
+	while ((utent = getutxent()) != NULL)
 	{
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
@@ -78,6 +80,7 @@ static int user_busy_utmp (const char *name)
 	return 0;
 }
 #endif				/* !__linux__ */
+
 
 #ifdef __linux__
 #ifdef ENABLE_SUBIDS

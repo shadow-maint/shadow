@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <utmp.h>
+#include <utmpx.h>
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -34,14 +34,17 @@ const char *Prog;
 #define HUP_MESG_FILE "/etc/logoutd.mesg"
 #endif
 
+
 /* local function prototypes */
-static int check_login (const struct utmp *ut);
+static int check_login (const struct utmpx *ut);
 static void send_mesg_to_tty (int tty_fd);
 
+
 /*
- * check_login - check if user (struct utmp) allowed to stay logged in
+ * check_login - check if user (struct utmpx) allowed to stay logged in
  */
-static int check_login (const struct utmp *ut)
+static int
+check_login(const struct utmpx *ut)
 {
 	char    user[sizeof(ut->ut_user) + 1];
 	char    line[sizeof(ut->ut_line) + 1];
@@ -112,16 +115,17 @@ static void send_mesg_to_tty (int tty_fd)
  *	utmp file is periodically scanned and offending users are logged
  *	off from the system.
  */
-int main (int argc, char **argv)
+int
+main(int argc, char **argv)
 {
-	int i;
-	int status;
-	pid_t pid;
+	int    i;
+	int    status;
+	pid_t  pid;
 
-	struct utmp *ut;
-	char user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
-	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
-	int tty_fd;
+	struct utmpx  *ut;
+	char          user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
+	char          tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
+	int           tty_fd;
 
 	if (1 != argc) {
 		(void) fputs (_("Usage: logoutd\n"), stderr);
@@ -169,14 +173,14 @@ int main (int argc, char **argv)
 		 * Attempt to re-open the utmp file. The file is only
 		 * open while it is being used.
 		 */
-		setutent ();
+		setutxent();
 
 		/*
 		 * Read all of the entries in the utmp file. The entries
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-		while ((ut = getutent ()) != NULL) {
+		while ((ut = getutxent()) != NULL) {
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
@@ -238,7 +242,7 @@ int main (int argc, char **argv)
 			exit (EXIT_SUCCESS);
 		}
 
-		endutent ();
+		endutxent();
 
 #ifndef DEBUG
 		sleep (60);
