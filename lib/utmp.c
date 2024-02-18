@@ -27,19 +27,23 @@
 #ident "$Id$"
 
 
+#define UTX_LINESIZE  NITEMS((struct utmpx){}.ut_line)
+
+
 /*
  * is_my_tty -- determine if "tty" is the same TTY stdin is using
  */
-static bool is_my_tty (const char tty[UT_LINESIZE])
+static bool
+is_my_tty(const char tty[UTX_LINESIZE])
 {
-	char         full_tty[STRLEN("/dev/") + UT_LINESIZE + 1];
+	char         full_tty[STRLEN("/dev/") + UTX_LINESIZE + 1];
 	/* tmptty shall be bigger than full_tty */
 	static char  tmptty[sizeof(full_tty) + 1];
 
 	full_tty[0] = '\0';
 	if (tty[0] != '/')
 		strcpy (full_tty, "/dev/");
-	strncat (full_tty, tty, UT_LINESIZE);
+	strncat(full_tty, tty, UTX_LINESIZE);
 
 	if ('\0' == tmptty[0]) {
 		const char *tname = ttyname (STDIN_FILENO);

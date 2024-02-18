@@ -212,7 +212,7 @@ main(int argc, char **argv)
 				tty_name[0] = '\0';
 			}
 
-			strncat (tty_name, ut->ut_line, UT_LINESIZE);
+			strncat(tty_name, ut->ut_line, NITEMS(ut->ut_line));
 #ifndef O_NOCTTY
 #define O_NOCTTY 0
 #endif
