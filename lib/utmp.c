@@ -175,13 +175,14 @@ int
 get_session_host(char **out)
 {
 	int           ret = 0;
-	char          *hostname;
 	struct utmpx  *ut;
 
 	ut = get_current_utmp();
 
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
+		char  *hostname;
+
 		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
 		ZUSTR2STP(hostname, ut->ut_host);
 		*out = hostname;
