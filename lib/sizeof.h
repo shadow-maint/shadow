@@ -15,10 +15,11 @@
 #include "must_be.h"
 
 
-#define WIDTHOF(x)       (sizeof(x) * CHAR_BIT)
-#define SIZEOF_ARRAY(a)  (sizeof(a) + must_be_array(a))
-#define NITEMS(a)        (SIZEOF_ARRAY((a)) / sizeof((a)[0]))
-#define STRLEN(s)        (NITEMS(s) - 1)
+#define memberof(T, member)  ((T){}.member)
+#define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
+#define SIZEOF_ARRAY(a)      (sizeof(a) + must_be_array(a))
+#define NITEMS(a)            (SIZEOF_ARRAY((a)) / sizeof((a)[0]))
+#define STRLEN(s)            (NITEMS(s) - 1)
 
 
 #endif  // include guard
