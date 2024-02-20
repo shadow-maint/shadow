@@ -183,7 +183,7 @@ get_session_host(char **out)
 
 	ut = get_current_utmp();
 
-#ifdef HAVE_STRUCT_UTMP_UT_HOST
+#if defined(HAVE_STRUCT_UTMP_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
 		char  *hostname;
 
@@ -258,7 +258,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	    && ('\0' != host[0])) {
 		hostname = XMALLOC(strlen(host) + 1, char);
 		strcpy (hostname, host);
-#ifdef HAVE_STRUCT_UTMP_UT_HOST
+#if defined(HAVE_STRUCT_UTMP_UT_HOST)
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = XMALLOC(NITEMS(ut->ut_host) + 1, char);
@@ -283,16 +283,16 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		/* XXX - assumes /dev/tty?? */
 		STRNCPY(utent->ut_id, line + 3);
 	}
-#ifdef HAVE_STRUCT_UTMP_UT_NAME
+#if defined(HAVE_STRUCT_UTMP_UT_NAME)
 	STRNCPY(utent->ut_name, name);
 #endif
 	STRNCPY(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
-#ifdef HAVE_STRUCT_UTMP_UT_HOST
+#if defined(HAVE_STRUCT_UTMP_UT_HOST)
 		STRNCPY(utent->ut_host, hostname);
 #endif
-#ifdef HAVE_STRUCT_UTMP_UT_SYSLEN
+#if defined(HAVE_STRUCT_UTMP_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
 		                        sizeof (utent->ut_host));
 #endif
@@ -304,13 +304,13 @@ prepare_utmp(const char *name, const char *line, const char *host,
 			if (info->ai_family == AF_INET) {
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
-# ifdef HAVE_STRUCT_UTMP_UT_ADDR
+# if defined(HAVE_STRUCT_UTMP_UT_ADDR)
 				memcpy (&(utent->ut_addr),
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr),
 				             sizeof (sa->sin_addr)));
 # endif
-# ifdef HAVE_STRUCT_UTMP_UT_ADDR_V6
+# if defined(HAVE_STRUCT_UTMP_UT_ADDR_V6)
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr_v6),
@@ -332,10 +332,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	/* ut_exit is only for DEAD_PROCESS */
 	utent->ut_session = getsid (0);
 	if (gettimeofday (&tv, NULL) == 0) {
-#ifdef HAVE_STRUCT_UTMP_UT_TIME
+#if defined(HAVE_STRUCT_UTMP_UT_TIME)
 		utent->ut_time = tv.tv_sec;
 #endif
-#ifdef HAVE_STRUCT_UTMP_UT_XTIME
+#if defined(HAVE_STRUCT_UTMP_UT_XTIME)
 		utent->ut_xtime = tv.tv_usec;
 #endif
 		utent->ut_tv.tv_sec  = tv.tv_sec;
@@ -364,7 +364,7 @@ setutmp(struct utmpx *ut)
 	}
 	endutxent();
 
-#ifndef USE_PAM
+#if !defined(USE_PAM)
 	/* This is done by pam_lastlog */
 	updwtmpx(_WTMP_FILE, ut);
 #endif
