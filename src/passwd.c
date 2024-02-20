@@ -195,7 +195,6 @@ static int new_password (const struct passwd *pw)
 	char orig[PASS_MAX + 1];	/* Original password */
 	char pass[PASS_MAX + 1];	/* New password */
 	int i;			/* Counter for retries */
-	int ret;
 	bool warned;
 	int pass_max_len = -1;
 	const char *method;
@@ -301,14 +300,8 @@ static int new_password (const struct passwd *pw)
 		if (warned && (strcmp (pass, cp) != 0)) {
 			warned = false;
 		}
-		ret = STRTCPY (pass, cp);
+		STRFCPY (pass, cp);
 		erase_pass (cp);
-		if (ret == -1) {
-			(void) fputs (_("Password is too long.\n"), stderr);
-			memzero (orig, sizeof orig);
-			memzero (pass, sizeof pass);
-			return -1;
-		}
 
 		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
 			(void) puts (_("Try again."));

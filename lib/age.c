@@ -13,14 +13,11 @@
 #include <stdio.h>
 #include <time.h>
 #include <errno.h>
-#include <pwd.h>
-#include <grp.h>
-
-#include "adds.h"
+#include "prototypes.h"
 #include "defines.h"
 #include "exitcodes.h"
-#include "prototypes.h"
-
+#include <pwd.h>
+#include <grp.h>
 
 #ident "$Id$"
 
@@ -165,8 +162,7 @@ void agecheck (/*@null@*/const struct spwd *sp)
 		return;
 	}
 
-	remain = addsl(sp->sp_lstchg, sp->sp_max, -now);
-
+	remain = sp->sp_lstchg + sp->sp_max - now;
 	if (remain <= sp->sp_warn) {
 		if (remain > 1) {
 			(void) printf (_("Your password will expire in %ld days.\n"),

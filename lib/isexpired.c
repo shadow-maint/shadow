@@ -15,12 +15,10 @@
 #include <config.h>
 
 #include <sys/types.h>
+#include "prototypes.h"
+#include "defines.h"
 #include <pwd.h>
 #include <time.h>
-
-#include "adds.h"
-#include "defines.h"
-#include "prototypes.h"
 
 #ident "$Id$"
 
@@ -40,7 +38,7 @@
  */
 int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 {
-	long  now;
+	long now;
 
 	now = time(NULL) / DAY;
 
@@ -74,8 +72,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	if (   (sp->sp_lstchg > 0)
 	    && (sp->sp_max >= 0)
 	    && (sp->sp_inact >= 0)
-	    && (now >= addsl(sp->sp_lstchg, sp->sp_max, sp->sp_inact)))
-	{
+	    && (now >= (sp->sp_lstchg + sp->sp_max + sp->sp_inact))) {
 		return 2;
 	}
 
@@ -97,9 +94,9 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	 * the password has expired.
 	 */
 
-	if (now >= addsl(sp->sp_lstchg, sp->sp_max))
+	if (now >= (sp->sp_lstchg + sp->sp_max)) {
 		return 1;
-
+	}
 	return 0;
 }
 
