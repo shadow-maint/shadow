@@ -189,12 +189,11 @@ get_session_host(char **out)
 }
 
 
-#ifndef USE_PAM
+#if !defined(USE_PAM) && !defined(HAVE_UPDWTMPX)
 /*
  * Some systems already have updwtmpx().  Others
  * don't, so we re-implement these functions if necessary.
  */
-# ifndef HAVE_UPDWTMPX
 static void
 updwtmpx(const char *filename, const struct utmpx *ut)
 {
@@ -206,8 +205,7 @@ updwtmpx(const char *filename, const struct utmpx *ut)
 		close (fd);
 	}
 }
-# endif				/* ! HAVE_UPDWTMPX */
-#endif				/* ! USE_PAM */
+#endif
 
 
 /*
