@@ -194,7 +194,7 @@ get_session_host(char **out)
  * Some systems already have updwtmpx().  Others
  * don't, so we re-implement these functions if necessary.
  */
-#ifndef HAVE_UPDWTMPX
+# ifndef HAVE_UPDWTMPX
 static void
 updwtmpx(const char *filename, const struct utmpx *ut)
 {
@@ -206,7 +206,7 @@ updwtmpx(const char *filename, const struct utmpx *ut)
 		close (fd);
 	}
 }
-#endif				/* ! HAVE_UPDWTMPX */
+# endif				/* ! HAVE_UPDWTMPX */
 #endif				/* ! USE_PAM */
 
 
@@ -292,13 +292,13 @@ prepare_utmp(const char *name, const char *line, const char *host,
 			if (info->ai_family == AF_INET) {
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
-#ifdef HAVE_STRUCT_UTMP_UT_ADDR
+# ifdef HAVE_STRUCT_UTMP_UT_ADDR
 				memcpy (&(utent->ut_addr),
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr),
 				             sizeof (sa->sin_addr)));
-#endif				/* HAVE_STRUCT_UTMP_UT_ADDR */
-#ifdef HAVE_STRUCT_UTMP_UT_ADDR_V6
+# endif				/* HAVE_STRUCT_UTMP_UT_ADDR */
+# ifdef HAVE_STRUCT_UTMP_UT_ADDR_V6
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr_v6),
@@ -310,7 +310,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 				        &(sa->sin6_addr),
 				        MIN (sizeof (utent->ut_addr_v6),
 				             sizeof (sa->sin6_addr)));
-#endif				/* HAVE_STRUCT_UTMP_UT_ADDR_V6 */
+# endif				/* HAVE_STRUCT_UTMP_UT_ADDR_V6 */
 			}
 			freeaddrinfo (info);
 		}
