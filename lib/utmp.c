@@ -198,7 +198,7 @@ get_session_host(char **out)
 #else
 	*out = NULL;
 	ret = -2;
-#endif /* HAVE_STRUCT_UTMP_UT_HOST */
+#endif
 
 	return ret;
 }
@@ -263,7 +263,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = XMALLOC(NITEMS(ut->ut_host) + 1, char);
 		ZUSTR2STP(hostname, ut->ut_host);
-#endif				/* HAVE_STRUCT_UTMP_UT_HOST */
+#endif
 	}
 
 	if (strncmp(line, "/dev/", 5) == 0) {
@@ -285,17 +285,17 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	}
 #ifdef HAVE_STRUCT_UTMP_UT_NAME
 	STRNCPY(utent->ut_name, name);
-#endif				/* HAVE_STRUCT_UTMP_UT_NAME */
+#endif
 	STRNCPY(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
 		STRNCPY(utent->ut_host, hostname);
-#endif				/* HAVE_STRUCT_UTMP_UT_HOST */
+#endif
 #ifdef HAVE_STRUCT_UTMP_UT_SYSLEN
 		utent->ut_syslen = MIN (strlen (hostname),
 		                        sizeof (utent->ut_host));
-#endif				/* HAVE_STRUCT_UTMP_UT_SYSLEN */
+#endif
 #if defined(HAVE_STRUCT_UTMP_UT_ADDR) || defined(HAVE_STRUCT_UTMP_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
 			/* getaddrinfo might not be reliable.
@@ -309,7 +309,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr),
 				             sizeof (sa->sin_addr)));
-# endif				/* HAVE_STRUCT_UTMP_UT_ADDR */
+# endif
 # ifdef HAVE_STRUCT_UTMP_UT_ADDR_V6
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin_addr),
@@ -322,11 +322,11 @@ prepare_utmp(const char *name, const char *line, const char *host,
 				        &(sa->sin6_addr),
 				        MIN (sizeof (utent->ut_addr_v6),
 				             sizeof (sa->sin6_addr)));
-# endif				/* HAVE_STRUCT_UTMP_UT_ADDR_V6 */
+# endif
 			}
 			freeaddrinfo (info);
 		}
-#endif		/* HAVE_STRUCT_UTMP_UT_ADDR || HAVE_STRUCT_UTMP_UT_ADDR_V6 */
+#endif
 		free (hostname);
 	}
 	/* ut_exit is only for DEAD_PROCESS */
@@ -334,10 +334,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	if (gettimeofday (&tv, NULL) == 0) {
 #ifdef HAVE_STRUCT_UTMP_UT_TIME
 		utent->ut_time = tv.tv_sec;
-#endif				/* HAVE_STRUCT_UTMP_UT_TIME */
+#endif
 #ifdef HAVE_STRUCT_UTMP_UT_XTIME
 		utent->ut_xtime = tv.tv_usec;
-#endif				/* HAVE_STRUCT_UTMP_UT_XTIME */
+#endif
 		utent->ut_tv.tv_sec  = tv.tv_sec;
 		utent->ut_tv.tv_usec = tv.tv_usec;
 	}
@@ -367,7 +367,7 @@ setutmp(struct utmpx *ut)
 #ifndef USE_PAM
 	/* This is done by pam_lastlog */
 	updwtmpx(_WTMP_FILE, ut);
-#endif				/* ! USE_PAM */
+#endif
 
 	return err;
 }
