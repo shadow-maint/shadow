@@ -169,7 +169,7 @@ get_session_host(char **out)
 
 	ut = get_current_utmp();
 
-#if defined(HAVE_STRUCT_UTMP_UT_HOST)
+#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
 		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
 		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
@@ -243,7 +243,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	    && ('\0' != host[0])) {
 		hostname = XMALLOC(strlen(host) + 1, char);
 		strcpy (hostname, host);
-#if defined(HAVE_STRUCT_UTMP_UT_HOST)
+#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
@@ -269,20 +269,20 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		/* XXX - assumes /dev/tty?? */
 		strncpy (utent->ut_id, line + 3, sizeof (utent->ut_id) - 1);
 	}
-#if defined(HAVE_STRUCT_UTMP_UT_NAME)
+#if defined(HAVE_STRUCT_UTMPX_UT_NAME)
 	strncpy (utent->ut_name, name,      sizeof (utent->ut_name));
 #endif
 	strncpy (utent->ut_user, name,      sizeof (utent->ut_user) - 1);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
-#if defined(HAVE_STRUCT_UTMP_UT_HOST)
+#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 		strncpy (utent->ut_host, hostname, sizeof (utent->ut_host) - 1);
 #endif
-#if defined(HAVE_STRUCT_UTMP_UT_SYSLEN)
+#if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
 		                        sizeof (utent->ut_host));
 #endif
-#if defined(HAVE_STRUCT_UTMP_UT_ADDR) || defined(HAVE_STRUCT_UTMP_UT_ADDR_V6)
+#if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
 			/* getaddrinfo might not be reliable.
 			 * Just try to log what may be useful.
@@ -290,13 +290,13 @@ prepare_utmp(const char *name, const char *line, const char *host,
 			if (info->ai_family == AF_INET) {
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
-# if defined(HAVE_STRUCT_UTMP_UT_ADDR)
+# if defined(HAVE_STRUCT_UTMPX_UT_ADDR)
 				memcpy (&(utent->ut_addr),
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr),
 				             sizeof (sa->sin_addr)));
 # endif
-# if defined(HAVE_STRUCT_UTMP_UT_ADDR_V6)
+# if defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin_addr),
 				        MIN (sizeof (utent->ut_addr_v6),
@@ -318,10 +318,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	/* ut_exit is only for DEAD_PROCESS */
 	utent->ut_session = getsid (0);
 	if (gettimeofday (&tv, NULL) == 0) {
-#if defined(HAVE_STRUCT_UTMP_UT_TIME)
+#if defined(HAVE_STRUCT_UTMPX_UT_TIME)
 		utent->ut_time = tv.tv_sec;
 #endif
-#if defined(HAVE_STRUCT_UTMP_UT_XTIME)
+#if defined(HAVE_STRUCT_UTMPX_UT_XTIME)
 		utent->ut_xtime = tv.tv_usec;
 #endif
 		utent->ut_tv.tv_sec  = tv.tv_sec;
