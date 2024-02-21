@@ -49,8 +49,9 @@ jobs:
       run: |
         set -e
         cd tests
+        trap 'cat testsuite.log' ERR
         sudo ./run_some
-        cat testsuite.log
+        trap - ERR
 
   # Make sure that 'make dist' makes a usable tarball with no missing files
   dist-build:
