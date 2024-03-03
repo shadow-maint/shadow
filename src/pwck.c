@@ -47,7 +47,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "pwck";
 
 static bool use_system_pw_file = true;
 static bool use_system_spw_file = true;
@@ -833,10 +833,6 @@ int main (int argc, char **argv)
 	int errors = 0;
 	bool changed = false;
 
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -846,7 +842,7 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	OPENLOG ("pwck");
+	OPENLOG (Prog);
 
 	/* Parse the command line arguments */
 	process_flags (argc, argv);

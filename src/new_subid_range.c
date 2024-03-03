@@ -9,7 +9,7 @@
 
 /* Test program for the subid creation routine */
 
-const char *Prog;
+static const char Prog[] = "new_subid_range";
 
 static void usage(void)
 {
@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 	bool group = false;   // get subuids by default
 	bool ok;
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 	while ((c = getopt(argc, argv, "gn")) != EOF) {

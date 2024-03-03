@@ -28,7 +28,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char *Prog;
 
 extern char **newenvp;
 

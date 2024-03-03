@@ -82,7 +82,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "useradd";
 
 /*
  * These defaults are used if there is no defaults file.
@@ -2518,10 +2518,6 @@ int main (int argc, char **argv)
 	unsigned long subuid_count = 0;
 	unsigned long subgid_count = 0;
 
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -2533,7 +2529,7 @@ int main (int argc, char **argv)
 
 	prefix = process_prefix_flag("-P", argc, argv);
 
-	OPENLOG ("useradd");
+	OPENLOG (Prog);
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
@@ -2585,7 +2581,7 @@ int main (int argc, char **argv)
 			fail_exit (1);
 		}
 
-		retval = pam_start ("useradd", pampw?pampw->pw_name:"root", &conv, &pamh);
+		retval = pam_start (Prog, pampw?pampw->pw_name:"root", &conv, &pamh);
 	}
 
 	if (PAM_SUCCESS == retval) {

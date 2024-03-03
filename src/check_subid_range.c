@@ -18,14 +18,13 @@
 #include "idmapping.h"
 #include "shadowlog.h"
 
-const char *Prog;
+static const char Prog[] = "check_subid_range";
 
 int main(int argc, char **argv)
 {
 	char *owner;
 	unsigned long start, count;
 	bool check_uids;
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 

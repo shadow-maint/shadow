@@ -23,7 +23,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "newgidmap";
 
 
 static bool verify_range(struct passwd *pw, struct map_range *range, bool *allow_setgroups)
@@ -151,7 +151,6 @@ int main(int argc, char **argv)
 	struct passwd *pw;
 	bool allow_setgroups = false;
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 

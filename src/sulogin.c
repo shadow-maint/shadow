@@ -27,7 +27,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "sulogin";
 
 static char pass[BUFSIZ];
 
@@ -63,7 +63,6 @@ static void catch_signals (unused int sig)
 	termio.c_lflag |= (ECHO | ECHOE | ECHOK | ICANON | ISIG);
 	tcsetattr (0, TCSANOW, &termio);
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 	(void) setlocale (LC_ALL, "");
