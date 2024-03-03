@@ -45,7 +45,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "chage";
 
 static bool
     dflg = false,		/* set last password change date */
@@ -517,7 +517,7 @@ static void check_perms (void)
 		exit (E_NOPERM);
 	}
 
-	retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
+	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
@@ -771,7 +771,6 @@ int main (int argc, char **argv)
 	/*
 	 * Get the program name so that error messages can use it.
 	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -786,7 +785,7 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	OPENLOG ("chage");
+	OPENLOG (Prog);
 
 	ruid = getuid ();
 	rgid = getgid ();

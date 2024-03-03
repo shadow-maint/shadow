@@ -56,7 +56,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "newusers";
 
 static bool rflg = false;	/* create a system account */
 #ifndef USE_PAM
@@ -1059,7 +1059,6 @@ int main (int argc, char **argv)
 	unsigned int nusers = 0;
 #endif				/* USE_PAM */
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 

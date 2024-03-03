@@ -46,7 +46,7 @@
 /*
  * Global variables
  */
-const char *Prog;		/* Program name */
+static const char Prog[] = "chsh";	/* Program name */
 static bool amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */
@@ -319,7 +319,7 @@ static void check_perms (const struct passwd *pw)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
-	    && (check_selinux_permit("chsh") != 0)) {
+	    && (check_selinux_permit(Prog) != 0)) {
 		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
@@ -336,7 +336,7 @@ static void check_perms (const struct passwd *pw)
 	 * chfn/chsh.  --marekm
 	 */
 	if (!amroot && getdef_bool ("CHSH_AUTH")) {
-		passwd_check (pw->pw_name, pw->pw_passwd, "chsh");
+		passwd_check (pw->pw_name, pw->pw_passwd, Prog);
         }
 
 #else				/* !USE_PAM */
@@ -348,7 +348,7 @@ static void check_perms (const struct passwd *pw)
 		exit (E_NOPERM);
 	}
 
-	retval = pam_start ("chsh", pampw->pw_name, &conv, &pamh);
+	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
@@ -473,11 +473,6 @@ int main (int argc, char **argv)
 
 	sanitize_env ();
 
-	/*
-	 * Get the program name. The program name is used as a prefix to
-	 * most error messages.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -492,7 +487,7 @@ int main (int argc, char **argv)
 	 */
 	amroot = (getuid () == 0);
 
-	OPENLOG ("chsh");
+	OPENLOG (Prog);
 
 	/* parse the command line options */
 	process_flags (argc, argv);

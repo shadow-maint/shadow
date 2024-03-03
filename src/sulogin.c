@@ -33,7 +33,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "sulogin";
 
 
 extern char **newenvp;
@@ -72,7 +72,6 @@ main(int argc, char **argv)
 	termio.c_lflag |= (ECHO | ECHOE | ECHOK | ICANON | ISIG);
 	tcsetattr (0, TCSANOW, &termio);
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 	(void) setlocale (LC_ALL, "");
