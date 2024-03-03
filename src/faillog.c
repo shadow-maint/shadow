@@ -40,7 +40,7 @@ static void reset (void);
 /*
  * Global variables
  */
-const char *Prog;		/* Program name */
+static const char Prog[] = "faillog";	/* Program name */
 static FILE *fail;		/* failure file stream */
 static time_t seconds;		/* that number of days in seconds */
 static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
@@ -510,11 +510,6 @@ int main (int argc, char **argv)
 	short fail_max = 0; // initialize to silence compiler warning
 	long days = 0;
 
-	/*
-	 * Get the program name. The program name is used as a prefix to
-	 * most error messages.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 

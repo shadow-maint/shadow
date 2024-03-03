@@ -31,7 +31,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "pwunconv";
 
 static bool spw_locked = false;
 static bool pw_locked = false;
@@ -115,7 +115,6 @@ int main (int argc, char **argv)
 	struct passwd pwent;
 	const struct spwd *spwd;
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -125,7 +124,7 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	OPENLOG ("pwunconv");
+	OPENLOG (Prog);
 
 	process_flags (argc, argv);
 

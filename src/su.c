@@ -66,7 +66,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "su";
 static /*@observer@*/const char *caller_tty = NULL;	/* Name of tty SU is run from */
 static bool caller_is_root = false;
 static uid_t caller_uid;
@@ -738,11 +738,6 @@ static void save_caller_context (char **argv)
 	const char *password = NULL;
 #endif				/* SU_ACCESS */
 #endif				/* !USE_PAM */
-	/*
-	 * Get the program name. The program name is used as a prefix to
-	 * most error messages.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -1018,14 +1013,14 @@ int main (int argc, char **argv)
 
 	save_caller_context (argv);
 
-	OPENLOG ("su");
+	OPENLOG (Prog);
 
 	process_flags (argc, argv);
 
 	initenv ();
 
 #ifdef USE_PAM
-	ret = pam_start ("su", name, &conv, &pamh);
+	ret = pam_start (Prog, name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG ((LOG_ERR, "pam_start: error %d", ret);
 		fprintf (stderr,

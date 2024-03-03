@@ -43,7 +43,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "grpck";
 
 static const char *grp_file = GROUP_FILE;
 static bool use_system_grp_file = true;
@@ -816,10 +816,6 @@ int main (int argc, char **argv)
 	int errors = 0;
 	bool changed = false;
 
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -829,7 +825,7 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	OPENLOG ("grpck");
+	OPENLOG (Prog);
 
 	/* Parse the command line arguments */
 	process_flags (argc, argv);

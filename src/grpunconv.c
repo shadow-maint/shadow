@@ -38,7 +38,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "grpunconv";
 
 static bool gr_locked  = false;
 static bool sgr_locked = false;
@@ -124,7 +124,6 @@ int main (int argc, char **argv)
 	struct group grent;
 	const struct sgrp *sg;
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -134,7 +133,7 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	OPENLOG ("grpunconv");
+	OPENLOG (Prog);
 
 	process_flags (argc, argv);
 

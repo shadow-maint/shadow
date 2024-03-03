@@ -25,7 +25,7 @@
 #include "shadowlog.h"
 
 /* Global variables */
-const char *Prog;
+static const char Prog[] = "expiry";
 static bool cflg = false;
 
 /* local function prototypes */
@@ -125,7 +125,6 @@ int main (int argc, char **argv)
 	struct passwd *pwd;
 	struct spwd *spwd;
 
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -147,7 +146,7 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	OPENLOG ("expiry");
+	OPENLOG (Prog);
 
 	process_flags (argc, argv);
 

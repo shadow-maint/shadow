@@ -51,7 +51,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char Prog[] = "groupadd";
 
 static /*@null@*/char *group_name;
 static gid_t group_id;
@@ -543,7 +543,7 @@ static void check_perms (void)
 		exit (1);
 	}
 
-	retval = pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
+	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
@@ -572,10 +572,6 @@ static void check_perms (void)
  */
 int main (int argc, char **argv)
 {
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -586,7 +582,7 @@ int main (int argc, char **argv)
 	process_root_flag ("-R", argc, argv);
 	prefix = process_prefix_flag ("-P", argc, argv);
 
-	OPENLOG ("groupadd");
+	OPENLOG (Prog);
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
@@ -606,7 +602,7 @@ int main (int argc, char **argv)
 	check_perms ();
 
 	if (run_parts ("/etc/shadow-maint/groupadd-pre.d", group_name,
-			"groupadd")) {
+			Prog)) {
 		exit(1);
 	}
 
@@ -629,7 +625,7 @@ int main (int argc, char **argv)
 	grp_update ();
 	close_files ();
 	if (run_parts ("/etc/shadow-maint/groupadd-post.d", group_name,
-			"groupadd")) {
+			Prog)) {
 		exit(1);
 	}
 

@@ -40,7 +40,7 @@
 /*
  * Global variables
  */
-const char *Prog;		/* Program name */
+static const char Prog[] = "lastlog";	/* Program name */
 static FILE *lastlogfile;	/* lastlog file stream */
 static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
 static bool has_umin = false;
@@ -291,7 +291,6 @@ int main (int argc, char **argv)
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
 	 */
-	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
