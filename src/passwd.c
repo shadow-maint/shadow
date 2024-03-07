@@ -1000,8 +1000,8 @@ int main (int argc, char **argv)
 		                _("%s: You may not view or modify password information for %s.\n"),
 		                Prog, name);
 		SYSLOG ((LOG_WARN,
-		         "%s: can't view or modify password information for %s",
-		         Prog, name));
+		         "can't view or modify password information for %s",
+		         name));
 		closelog ();
 		exit (E_NOPERM);
 	}
