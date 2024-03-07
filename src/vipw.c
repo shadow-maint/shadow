@@ -55,7 +55,7 @@
 /*
  * Global variables
  */
-const char *Prog;
+static const char *Prog;
 
 static const char *filename, *fileeditname;
 static bool filelocked = false;
@@ -471,7 +471,9 @@ int main (int argc, char **argv)
 	bool  editshadow = false;
 	bool  do_vigr;
 
-	Prog = Basename (argv[0]);
+	do_vigr = (strcmp(Basename(argv[0]), "vigr") == 0);
+
+	Prog = do_vigr ? "vigr" : "vipw";
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
@@ -481,9 +483,7 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	do_vigr = (strcmp(Prog, "vigr") == 0);
-
-	OPENLOG(do_vigr ? "vigr" : "vipw");
+	OPENLOG(Prog);
 
 	{
 		/*
