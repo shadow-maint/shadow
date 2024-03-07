@@ -468,8 +468,8 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 int main (int argc, char **argv)
 {
-	bool editshadow = false;
-	bool do_vipw;
+	bool  editshadow = false;
+	bool  do_vigr;
 
 	Prog = Basename (argv[0]);
 	log_set_progname(Prog);
@@ -481,9 +481,9 @@ int main (int argc, char **argv)
 
 	process_root_flag ("-R", argc, argv);
 
-	do_vipw = (strcmp (Prog, "vigr") != 0);
+	do_vigr = (strcmp(Prog, "vigr") == 0);
 
-	OPENLOG (do_vipw ? "vipw" : "vigr");
+	OPENLOG(do_vigr ? "vigr" : "vipw");
 
 	{
 		/*
@@ -511,13 +511,13 @@ int main (int argc, char **argv)
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'g':
-				do_vipw = false;
+				do_vigr = true;
 				break;
 			case 'h':
 				usage (E_SUCCESS);
 				break;
 			case 'p':
-				do_vipw = true;
+				do_vigr = false;
 				break;
 			case 'q':
 				quiet = true;
@@ -542,7 +542,27 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (do_vipw) {
+	if (do_vigr) {
+#ifdef SHADOWGRP
+		if (editshadow) {
+			vipwedit (sgr_dbname (), sgr_lock, sgr_unlock);
+			printf (MSG_WARN_EDIT_OTHER_FILE,
+			        sgr_dbname (),
+			        gr_dbname (),
+			        "vigr");
+		} else {
+#endif				/* SHADOWGRP */
+			vipwedit (gr_dbname (), gr_lock, gr_unlock);
+#ifdef SHADOWGRP
+			if (sgr_file_present ()) {
+				printf (MSG_WARN_EDIT_OTHER_FILE,
+				        gr_dbname (),
+				        sgr_dbname (),
+				        "vigr -s");
+			}
+		}
+#endif				/* SHADOWGRP */
+	} else {
 		if (editshadow) {
 #ifdef WITH_TCB
 			if (getdef_bool ("USE_TCB") && (NULL != user)) {
@@ -569,26 +589,6 @@ int main (int argc, char **argv)
 				        "vipw -s");
 			}
 		}
-	} else {
-#ifdef SHADOWGRP
-		if (editshadow) {
-			vipwedit (sgr_dbname (), sgr_lock, sgr_unlock);
-			printf (MSG_WARN_EDIT_OTHER_FILE,
-			        sgr_dbname (),
-			        gr_dbname (),
-			        "vigr");
-		} else {
-#endif				/* SHADOWGRP */
-			vipwedit (gr_dbname (), gr_lock, gr_unlock);
-#ifdef SHADOWGRP
-			if (sgr_file_present ()) {
-				printf (MSG_WARN_EDIT_OTHER_FILE,
-				        gr_dbname (),
-				        sgr_dbname (),
-				        "vigr -s");
-			}
-		}
-#endif				/* SHADOWGRP */
 	}
 
 	nscd_flush_cache ("passwd");
