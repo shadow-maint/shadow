@@ -768,13 +768,12 @@ int main (int argc, char **argv)
 	gid_t rgid;
 	const struct passwd *pw;
 
-	/*
-	 * Get the program name so that error messages can use it.
-	 */
+	sanitize_env ();
+	check_fds ();
+
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	sanitize_env ();
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
