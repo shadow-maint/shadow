@@ -125,10 +125,11 @@ int main (int argc, char **argv)
 	struct passwd *pwd;
 	struct spwd *spwd;
 
+	sanitize_env ();
+	check_fds ();
+
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
-
-	sanitize_env ();
 
 	/*
 	 * Start by disabling all of the keyboard signals.

@@ -1007,6 +1007,8 @@ int main (int argc, char **argv)
 	int ret;
 #endif				/* USE_PAM */
 
+	check_fds ();
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
