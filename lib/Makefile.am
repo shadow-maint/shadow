@@ -53,6 +53,7 @@ libshadow_la_SOURCES = \
 	faillog.h \
 	failure.c \
 	failure.h \
+	fd.c \
 	fields.c \
 	find_new_gid.c \
 	find_new_uid.c \

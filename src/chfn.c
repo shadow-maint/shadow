@@ -616,10 +616,12 @@ int main (int argc, char **argv)
 	char new_gecos[BUFSIZ];	/* buffer for new GECOS fields       */
 	char *user;
 
+	sanitize_env ();
+	check_fds ();
+
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 
-	sanitize_env ();
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);

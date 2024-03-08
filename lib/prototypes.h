@@ -127,6 +127,9 @@ extern void initenv (void);
 extern void set_env (int, char *const *);
 extern void sanitize_env (void);
 
+/* fd.c */
+extern void check_fds (void);
+
 /* fields.c */
 extern void change_field (char *, size_t, const char *);
 extern int valid_field (const char *, const char *);

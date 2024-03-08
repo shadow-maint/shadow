@@ -730,6 +730,7 @@ int main (int argc, char **argv)
 	const struct spwd *sp;	/* Shadow file entry for user   */
 
 	sanitize_env ();
+	check_fds ();
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);

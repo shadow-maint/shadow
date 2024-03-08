@@ -956,6 +956,8 @@ int main (int argc, char **argv)
 #endif
 
 	sanitize_env ();
+	check_fds ();
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
