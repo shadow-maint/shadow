@@ -606,18 +606,6 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 		return -1;
 	}
 
-	/* If src was a link to an entry of the src_orig directory itself,
-	 * create a link to the corresponding entry in the dst_orig
-	 * directory.
-	 */
-	if (strncmp(oldlink, src_orig, strlen(src_orig)) == 0) {
-		char  *dummy;
-
-		xasprintf(&dummy, "%s%s", dst_orig, oldlink + strlen(src_orig));
-		free(oldlink);
-		oldlink = dummy;
-	}
-
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context (dst->full_path, S_IFLNK) != 0) {
 		free (oldlink);
