@@ -16,6 +16,8 @@ lib*.a
 Makefile
 Makefile.in
 
+test-driver
+
 /ABOUT-NLS
 /aclocal.m4
 /autom4te.cache
