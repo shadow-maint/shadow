@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-utils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-02-08 05:49+0100\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2024-02-08 06:13+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -209,10 +209,6 @@ msgstr ""
 "კონფიგურაციის შეცდომა - უცნობი ჩანაწერი '%s' (შეატყობინეთ ადმინისტრატორს)\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr "%s: არასაკმარისი არგუმენტები %u ბმის ჩამოსაყალიბებლად\n"
-
-#, c-format
 msgid "%s: Memory allocation failure\n"
 msgstr "%s: მეხსიერების გამოყოფის შეცდომა\n"
 
@@ -237,7 +233,6 @@ msgid "%s: Could not set caps\n"
 msgstr "%s: caps-ების დაყენების შედომა\n"
 
 #, c-format
-#| msgid "%s: snprintf failed!\n"
 msgid "%s: stpeprintf failed!\n"
 msgstr "%s: stpeprintf ჩავარდა!\n"
 
@@ -702,11 +697,14 @@ msgstr "პაროლი არააქტიურია"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "ანგარიშის ვადის თარიღი (წწწწ-თთ-დდ)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "პაროლის ბოლო ცვლილება\t\t\t\t\t: "
-
 msgid "never"
 msgstr "არასოდეს"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "პაროლის ბოლო ცვლილება\t\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "საჭიროა პაროლის შეცვლა"
@@ -983,7 +981,6 @@ msgid "Login Shell"
 msgstr "შესვლს გარსი"
 
 #, c-format
-#| msgid "%s: Cannot get the size of %s: %s\n"
 msgid "Cannot parse shell files: %s"
 msgstr "ვერ დავამუშავე გარსის ფაილები: %s"
 
@@ -1721,9 +1718,6 @@ msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s: gid -ის დიაპაზონი [%lu-%lu) -> [%lu-%lu) დაუშვებელია\n"
 
 #, c-format
-#| msgid ""
-#| "usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> "
-#| "<count> ] ... \n"
 msgid ""
 "usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
 "<count> ] ... \n"
@@ -1792,9 +1786,6 @@ msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s: uid -ის დიაპაზონი [%lu-%lu) -> [%lu-%lu) დაუშვებელია\n"
 
 #, c-format
-#| msgid ""
-#| "usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> "
-#| "<count> ] ... \n"
 msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
@@ -1852,7 +1843,6 @@ msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: ხაზი %d: მომხმარებელი '%s' %s-ში არ არსებობს\n"
 
 #, c-format
-#| msgid "%s: unlink: %s: %s\n"
 msgid "%s: line %d: %s\n"
 msgstr "%s: ხაზი %d: %s\n"
 
@@ -1982,6 +1972,11 @@ msgid ""
 msgstr ""
 "შეიყვანეთ ახალი პაროლი (მინიმუმ %d, მაქსიმუმ %d სიმბოლო)\n"
 "გამოიყენეთ დიდი და პატარა ასოებისა და რიცხვების კომბინაცია.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: ველები ძალიან გრძელია\n"
 
 msgid "New password: "
 msgstr "ახალი პაროლი: "
@@ -2263,7 +2258,6 @@ msgid "No passwd entry for user '%s'\n"
 msgstr "Passwd ფაილში მომხმარებლისთვის \"%s\" ჩანაწერი არ არსებობს\n"
 
 #, c-format
-#| msgid "Invalid member username %s\n"
 msgid "Overlong user name '%s'\n"
 msgstr "მეტისმეტად გრძელი მომხმარებლის სახელი '%s'\n"
 
@@ -3119,7 +3113,6 @@ msgstr "მონახაზის ფაილის წაშლის შე
 msgid "failed to stat edited file"
 msgstr "რედაქტირებული ფაილის აღმოჩენა შეუძლებელია"
 
-#| msgid "%s: snprintf failed!\n"
 msgid "asprintf(3) failed"
 msgstr "asprintf(3) ჩავარდა"
 
@@ -3133,6 +3126,10 @@ msgstr "%s: %s-ის აღდგენის შეცდომა: %s (თქ
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: %s-სთვის tcb საქაღალდის პოვნის შეცდომა\n"
+
+#, c-format
+#~ msgid "%s: Not enough arguments to form %u mappings\n"
+#~ msgstr "%s: არასაკმარისი არგუმენტები %u ბმის ჩამოსაყალიბებლად\n"
 
 #~ msgid "too simple"
 #~ msgstr "ძალიან მარტივია"

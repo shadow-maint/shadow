@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2022-07-27 23:04+0800\n"
 "Last-Translator: Celeste Liu <coelacanthus@outlook.com>\n"
 "Language-Team: Chinese <chinese-l10n@googlegroups.com>\n"
@@ -18,224 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 19.08.1\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr "%2$s 中有多個項目的名稱是「%1$s」。請使用 pwck 或 grpck 修復。\n"
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr "libcrypt 不支援該加密方法？(%s)\n"
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "組態設定錯誤 - 無法解析 %s 值：「%s」"
-
-msgid "Could not allocate space for config info.\n"
-msgstr "無法為組態設定資訊分配空間。\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "組態設定錯誤 - 項目「%s」未知（請通知管理員）\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr "%s：nscd 非正常終止（信號 %d）\n"
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr "%s：nscd 結束並回傳狀態碼 %d\n"
-
-msgid "Password: "
-msgstr "密碼："
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s 的密碼："
-
-#, fuzzy
-#| msgid "Cannot open audit interface - aborting.\n"
-msgid "Cannot open audit interface.\n"
-msgstr "無法開啟稽核介面 - 取消。\n"
-
-#, fuzzy, c-format
-#| msgid "%s: cannot reset SELinux file creation context\n"
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr "%s: 無法重設 SELinux 檔案建立上下文\n"
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr "[libsemanage]：%s\n"
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr "無法建立 SELinux 管理工具的處理器\n"
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr "SELinux 政策未受管理\n"
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr "無法讀取 SELinux 原則儲存區\n"
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr "無法建立 SELinux 管理工具的連線\n"
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr "無法開始 SELinux 交易\n"
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr "無法查詢 %s 的 seuser\n"
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr "無法設定 %s 的 serange\n"
-
-#, c-format
-msgid "Could not set sename for %s\n"
-msgstr "無法設定 %s 的 sename\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr "無法修改 %s 的登入映射\n"
-
-#, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "無法建立 %s 的 SELinux 登入映射\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr "無法設定 %s 的名稱\n"
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr "無法設定 %s 的 SELinux 使用者\n"
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr "無法新增 %s 的登入映射\n"
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr "無法初始化 SELinux 管理工具\n"
-
-#, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "無法建立 SELinux 使用者金鑰\n"
-
-#, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "無法驗證 SELinux 使用者\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr "無法修改 SELinux 使用者映射\n"
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr "無法新增 SELinux 使用者映射\n"
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr "無法提交 SELinux 交易。\n"
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr "未定義 %s 的登入映射。如果已使用預設映射，那就行\n"
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr "已在原則中定義 %s 的登入映射，不能刪除\n"
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr "無法刪除 %s 的登入映射"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s：記憶體不足\n"
-
-#, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s：無法取得 %s 檔案的資訊 (stat)：%s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s：%s 既不是目錄，也不是符號連結。\n"
-
-#, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s：無法讀取 %s 符號連結：%s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s：符號連結過長：%s\n"
-
-#, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s：無法建立 %s 目錄：%s\n"
-
-#, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s：無法變更 %s 的所有者：%s\n"
-
-#, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s：無法變更 %s 的模式：%s\n"
-
-#, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s：取消連結 (unlink)：%s：%s\n"
-
-#, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s：無法移除 %s 目錄：%s\n"
-
-#, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s：無法將 %s 重命名至 %s：%s\n"
-
-#, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s：無法移除 %s：%s\n"
-
-#, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s：無法建立 %s 符號連結：%s\n"
-
-#, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s：無法變更 %s 的所有者：%s\n"
-
-#, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s：無法執行 lstat %s：%s\n"
-
-#, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s：警告，使用者 %s 沒有 tcb 陰影檔案。\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-"%s：緊急情況：%s 的 tcb 陰影檔並非包含 st_nlink=1 的正常檔案。\n"
-"已鎖定帳戶。\n"
-"\n"
-
-#, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s：建立目錄 (mkdir)：%s：%s\n"
-
-#, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s：無法開啟 %s：%s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -284,11 +66,20 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s：無法解鎖 %s\n"
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr "%2$s 中有多個項目的名稱是「%1$s」。請使用 pwck 或 grpck 修復。\n"
+
+#, c-format
 msgid "%s: "
 msgstr "%s："
 
 msgid ": "
 msgstr "："
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr "libcrypt 不支援該加密方法？(%s)\n"
 
 msgid "Environment overflow\n"
 msgstr "環境溢位\n"
@@ -399,8 +190,15 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s：無法取得唯一 UID（沒有更多可用 UID）\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr ""
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr "組態設定錯誤 - 無法解析 %s 值：「%s」"
+
+msgid "Could not allocate space for config info.\n"
+msgstr "無法為組態設定資訊分配空間。\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "組態設定錯誤 - 項目「%s」未知（請通知管理員）\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Authentication failure\n"
@@ -432,7 +230,7 @@ msgstr "無法設定 %s 的名稱\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: snprintf failed!\n"
+msgid "%s: stpeprintf failed!\n"
 msgstr "%s：無法打開檔案\n"
 
 #, fuzzy, c-format
@@ -445,8 +243,21 @@ msgstr "%s：第 %d 行：變更 %s 的擁有權失敗：%s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s：第 %d 行：變更 %s 的擁有權失敗：%s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s：第 %d 行：變更 %s 的擁有權失敗：%s\n"
+
 msgid "Too many logins.\n"
 msgstr "登入次數過多。\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+" %s 使用者名稱："
 
 msgid "You have new mail."
 msgstr "您有新信件。"
@@ -456,6 +267,14 @@ msgstr "沒有信件。"
 
 msgid "You have mail."
 msgstr "您有信件。"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr "%s：nscd 非正常終止（信號 %d）\n"
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr "%s：nscd 結束並回傳狀態碼 %d\n"
 
 msgid "no change"
 msgstr "沒有變更"
@@ -468,9 +287,6 @@ msgstr "僅變更大小寫"
 
 msgid "too similar"
 msgstr "過於相似"
-
-msgid "too simple"
-msgstr "過於簡單"
 
 msgid "rotated"
 msgstr "已旋轉"
@@ -517,6 +333,13 @@ msgid ""
 "%s\n"
 msgstr "passwd: pam_start() 失敗，錯誤 %d\n"
 
+msgid "Password: "
+msgstr "密碼："
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s 的密碼："
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "%s 的密碼錯誤。\n"
@@ -542,16 +365,13 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s：無法存取 chroot 目錄 %s：%s\n"
 
 #, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s：無法切換至 chroot 目錄 %s：%s\n"
-
-#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s：無法 chroot 到 %s 目錄：%s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s：無法切換至 chroot 目錄 %s：%s\n"
 
 #, c-format
 msgid ""
@@ -568,6 +388,109 @@ msgid ""
 "method.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "Cannot open audit interface - aborting.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "無法開啟稽核介面 - 取消。\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot reset SELinux file creation context\n"
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr "%s: 無法重設 SELinux 檔案建立上下文\n"
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr "[libsemanage]：%s\n"
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr "無法建立 SELinux 管理工具的處理器\n"
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr "SELinux 政策未受管理\n"
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr "無法讀取 SELinux 原則儲存區\n"
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr "無法建立 SELinux 管理工具的連線\n"
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr "無法開始 SELinux 交易\n"
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr "無法查詢 %s 的 seuser\n"
+
+#, fuzzy, c-format
+#| msgid "Could not set serange for %s\n"
+msgid "Could not set serange for %s to %s\n"
+msgstr "無法設定 %s 的 serange\n"
+
+#, c-format
+msgid "Could not set sename for %s\n"
+msgstr "無法設定 %s 的 sename\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr "無法修改 %s 的登入映射\n"
+
+#, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "無法建立 %s 的 SELinux 登入映射\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr "無法設定 %s 的名稱\n"
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr "無法設定 %s 的 SELinux 使用者\n"
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr "無法新增 %s 的登入映射\n"
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr "無法初始化 SELinux 管理工具\n"
+
+#, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "無法建立 SELinux 使用者金鑰\n"
+
+#, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "無法驗證 SELinux 使用者\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr "無法修改 SELinux 使用者映射\n"
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr "無法新增 SELinux 使用者映射\n"
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr "無法提交 SELinux 交易。\n"
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr "未定義 %s 的登入映射。如果已使用預設映射，那就行\n"
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr "已在原則中定義 %s 的登入映射，不能刪除\n"
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr "無法刪除 %s 的登入映射"
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "無法切換至「%s」目錄\n"
@@ -580,12 +503,97 @@ msgid "Cannot execute %s"
 msgstr "無法執行 %s"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "根目錄「%s」無效\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "無法將根目錄變更至「%s」\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s：記憶體不足\n"
+
+#, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s：無法取得 %s 檔案的資訊 (stat)：%s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s：%s 既不是目錄，也不是符號連結。\n"
+
+#, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s：無法讀取 %s 符號連結：%s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr "%s：符號連結過長：%s\n"
+
+#, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s：無法建立 %s 目錄：%s\n"
+
+#, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s：無法變更 %s 的所有者：%s\n"
+
+#, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s：無法變更 %s 的模式：%s\n"
+
+#, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s：取消連結 (unlink)：%s：%s\n"
+
+#, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s：無法移除 %s 目錄：%s\n"
+
+#, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s：無法將 %s 重命名至 %s：%s\n"
+
+#, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s：無法移除 %s：%s\n"
+
+#, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s：無法建立 %s 符號連結：%s\n"
+
+#, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s：無法變更 %s 的所有者：%s\n"
+
+#, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s：無法執行 lstat %s：%s\n"
+
+#, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s：警告，使用者 %s 沒有 tcb 陰影檔案。\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+"%s：緊急情況：%s 的 tcb 陰影檔並非包含 st_nlink=1 的正常檔案。\n"
+"已鎖定帳戶。\n"
+"\n"
+
+#, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s：建立目錄 (mkdir)：%s：%s\n"
+
+#, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s：無法開啟 %s：%s\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -650,6 +658,11 @@ msgstr "  -M, --maxdays 最長天數       設定密碼變更的最長間隔天�
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr "  -R, --root CHROOT_目錄         要 chroot 進去的目錄\n"
 
+#, fuzzy
+#| msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr "  -P, --prefix 目錄前綴        目錄前綴\n"
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr "  -W, --warndays 警告天數      將過期警告天數設成 <警告天數>\n"
@@ -675,11 +688,14 @@ msgstr "密碼停用時間"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "帳戶過期時間 (YYYY-MM-DD)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "最近一次密碼變更時間\t\t\t\t："
-
 msgid "never"
 msgstr "永不"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "最近一次密碼變更時間\t\t\t\t："
 
 msgid "password must be changed"
 msgstr "必須變更密碼"
@@ -898,6 +914,11 @@ msgid ""
 "                                or YESCRYPT crypt algorithms\n"
 msgstr "  -s, --sha-rounds              SHA* 加密算法的 SHA 回數\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unsupported crypt method: %s\n"
+msgid "%s: no crypt method defined\n"
+msgstr "%s：加密方式不支援：%s\n"
+
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s：%s 旗標僅允許搭配 %s 旗標\n"
@@ -948,6 +969,16 @@ msgstr "  -s, --shell SHELL             用於此使用者帳號的新登入 She
 msgid "Login Shell"
 msgstr "登入 Shell"
 
+#, fuzzy, c-format
+#| msgid "%s: Cannot get the size of %s: %s\n"
+msgid "Cannot parse shell files: %s"
+msgstr "%s：無法取得 %s 的大小：%s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file: %s\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s：無法建立新的預設檔案：%s\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "您不能變更「%s」的 Shell。\n"
@@ -959,6 +990,11 @@ msgstr "正在變更 %s 的 shell\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s：項目無效：%s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell\n"
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s：%s 為無效 shell\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1184,11 +1220,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  建立系統帳號\n"
 
 #, fuzzy
-#| msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr "  -P, --prefix 目錄前綴        目錄前綴\n"
-
-#, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr "  -l, --list                    列出群組成員\n"
@@ -1201,6 +1232,11 @@ msgstr "無效的使用者名稱「%s」\n"
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s：「%s」非有效群組名稱\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot open %s: %s\n"
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s：無法開啟 %s：%s\n"
 
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1468,8 +1504,12 @@ msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr "  -b, --before DAYS             僅輸出舊於 DAYS 天的 lastlog 記錄\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -C, --clear                   clear lastlog record of an user (usable "
+#| "only with -u)\n"
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 "  -C, --clear                   清空某使用者的 lastlog 記錄 (僅在使用 -u 時有"
@@ -1571,9 +1611,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: 可能無法在無有效 root 時運作\n"
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "無 utmp 項目。您必須在最低階的 \"sh\" 執行 \"login\""
-
 #, c-format
 msgid ""
 "\n"
@@ -1606,14 +1643,6 @@ msgstr "登入錯誤"
 #, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "找不到使用者 (%s)\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-" %s 使用者名稱："
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1650,7 +1679,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1678,19 +1708,14 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s：無法解鎖 %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to find tcb directory for %s\n"
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s：找不到 %s 的 tcb 目錄\n"
-
-#, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s：無法對 %s 建立 tcb 目錄\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1723,14 +1748,14 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: Failed to create tcb directory for %s\n"
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s：無法對 %s 建立 tcb 目錄\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1754,6 +1779,10 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s：無效使用者名稱「%s」\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s：第 %d 行：無效行\n"
 
@@ -1772,6 +1801,11 @@ msgstr "%s：第 %d 行：無法建立群組\n"
 #, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s：第 %d 行：「%s」使用者不存在 %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: unlink: %s: %s\n"
+msgid "%s: line %d: %s\n"
+msgstr "%s：取消連結 (unlink)：%s：%s\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1795,12 +1829,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s：第 %d 行：無法更新項目\n"
 
 #, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s：無法準備新 %s 項目\n"
-
-#, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s：找不到次級使用者範圍\n"
+
+#, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s：無法準備新 %s 項目\n"
 
 #, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1862,6 +1896,11 @@ msgid ""
 "                                change to MAX_DAYS\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "  -l, --list                    show account aging information\n"
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr "  -l, --list                    顯示帳號的時效資訊\n"
+
 msgid "Old password: "
 msgstr "舊密碼："
 
@@ -1880,6 +1919,11 @@ msgid ""
 msgstr ""
 "請輸入新密碼(最少 %d 最多 %d 個字元)\n"
 "請混合使用大小寫字母和數字。\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s：欄位過長\n"
 
 msgid "New password: "
 msgstr "新密碼："
@@ -1922,6 +1966,11 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s：不支持 %s 套件存庫。\n"
+
+#, fuzzy, c-format
+#| msgid "%s: only root can use the -g/--group option\n"
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr "%s：只有 root 才能使用 -g/--group 選項\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s is not authorized to change the password of %s\n"
@@ -2073,11 +2122,9 @@ msgstr "%s: 訊號發生問題\n"
 msgid "Session terminated, terminating shell..."
 msgstr "已終止工作階段，正在終止 shell..."
 
-#, c-format
 msgid " ...killed.\n"
 msgstr " ...已強制結束。\n"
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " ...等待子處理程序終止。\n"
 
@@ -2149,6 +2196,11 @@ msgstr "%s：目前您尚未授權使用 su\n"
 msgid "No passwd entry for user '%s'\n"
 msgstr "沒有使用者「%s」的 passwd 項目\n"
 
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Overlong user name '%s'\n"
+msgstr "無效的使用者名稱「%s」\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s：必須從終端中執行\n"
@@ -2196,6 +2248,13 @@ msgstr "%s: %s 已經建立，但是無法移除\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr "%1$s: 會忽略 %3$s 中的 %2$s 組態設定檔\n"
+
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr "%1$s: 會忽略 %3$s 中的 %2$s 組態設定檔\n"
 
 #, c-format
@@ -2291,6 +2350,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr "  -g, --gid 群組               新帳號之主群組的名稱或 ID\n"
@@ -2347,6 +2411,16 @@ msgstr "  -U, --user-group              建立與使用者同名的群組\n"
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     使用指定的 SEUSER 來用於 SELinux 使用者映射\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux "
+#| "user mapping\n"
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 "  -Z, --selinux-user SEUSER     使用指定的 SEUSER 來用於 SELinux 使用者映射\n"
 
@@ -2482,6 +2556,16 @@ msgstr "找不到 'mail' 群組。將建立模式為 0600 的使用者 mailbox �
 
 msgid "Setting mailbox file permissions"
 msgstr "正在設定 mailbox 檔案的權限"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "正在建立 mailbox 檔案"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "正在建立 mailbox 檔案"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
@@ -2720,6 +2804,15 @@ msgid ""
 msgstr ""
 "  -Z, --selinux-user SEUSER     對使用者帳戶設定新 SELinux 使用者映射\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     對使用者帳戶設定新 SELinux 使用者映射\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2796,12 +2889,32 @@ msgstr "%s: 警告：無法完全移除 %s 舊家目錄"
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s：無法將目錄 %s 改名為 %s\n"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: The previous home directory (%s) was not a directory. It is not "
+#| "removed and no home directories are created.\n"
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+"%s: 上一個家目錄 (%s) 不是目錄。將不會移除該項目，且亦不建立任何家目錄。\n"
+
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr "%s: 無法複製使用者編號為 %lu 的 lastlog 項目至使用者 %lu：%s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr "%s: 無法複製使用者編號為 %lu 的 lastlog 項目至使用者 %lu：%s\n"
+
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr "%s: 無法複製使用者編號為 %lu 的 faillog 項目至使用者 %lu：%s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr "%s: 無法複製使用者編號為 %lu 的 faillog 項目至使用者 %lu：%s\n"
 
 #, c-format
@@ -2902,8 +3015,10 @@ msgstr "無法取消暫存檔的連結"
 msgid "failed to stat edited file"
 msgstr "無法取得編輯過檔案的資訊"
 
-msgid "failed to allocate memory"
-msgstr "無法配置記憶體"
+#, fuzzy
+#| msgid "%s: can't open file\n"
+msgid "asprintf(3) failed"
+msgstr "%s：無法打開檔案\n"
 
 msgid "failed to create backup file"
 msgstr "無法建立備份檔案"
@@ -2915,6 +3030,20 @@ msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s：找不到 %s 的 tcb 目錄\n"
+
+#~ msgid "too simple"
+#~ msgstr "過於簡單"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr "無 utmp 項目。您必須在最低階的 \"sh\" 執行 \"login\""
+
+#, fuzzy, c-format
+#~| msgid "%s: failed to find tcb directory for %s\n"
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s：找不到 %s 的 tcb 目錄\n"
+
+#~ msgid "failed to allocate memory"
+#~ msgstr "無法配置記憶體"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "用法：id\n"
@@ -2930,10 +3059,6 @@ msgstr "%s：找不到 %s 的 tcb 目錄\n"
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
 #~ msgstr "%s：已變更密碼過期資訊。\n"
-
-#, c-format
-#~ msgid "invalid user name '%s'\n"
-#~ msgstr "無效的使用者名稱「%s」\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "使用者名         埠號     來自             最後登入時間"

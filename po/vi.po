@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow master\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2016-10-04 07:07+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -18,228 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.7\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-"Có nhiều mục tin mang tên “%s” trong %s. Hãy sửa chữa trường hợp này, dùng "
-"pwck hoặc grpck.\n"
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr "Phương pháp mã hóa không được thư viện libcrypt hỗ trợ? (%s)\n"
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "lỗi cấu hình — không thể phân tích cú pháp của giá trị %s: “%s”"
-
-msgid "Could not allocate space for config info.\n"
-msgstr "Không thể cấp phát sức chứa cho thông tin cấu hình.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "lỗi cấu hình - không hiểu mục tin “%s” (báo cho người quản trị).\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr "%s: nscd đã kết thúc bất thường (tín hiệu %d)\n"
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr "%s: nscd đã thoát với mã là %d\n"
-
-msgid "Password: "
-msgstr "Mật khẩu: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "Mật khẩu của %s: "
-
-#, fuzzy
-#| msgid "Cannot open audit interface - aborting.\n"
-msgid "Cannot open audit interface.\n"
-msgstr "Không thể mở giao diện thử, kiểm nghiệm nên hủy bỏ.\n"
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr "[libsemanage]: %s\n"
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr "Không thể tạo bộ tiếp hợp quản lý SELinux\n"
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr "Chính sách cho SELinux chưa được quản lý\n"
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr "Không thể đọc kho lưu chính sách SELinux\n"
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr "Không thể thiết lập kết nối quản lý SELinux\n"
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr "Không thể bắt đầu phiên giao dịch SELinux\n"
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr "Không thể truy vấn seuser cho %s\n"
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr "Không thể đặt serange cho %s\n"
-
-#, c-format
-msgid "Could not set sename for %s\n"
-msgstr "Không thể đặt sename cho %s\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr "Không thể sửa đổi ánh xạ đăng nhập cho %s\n"
-
-#, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Không thể tạo ánh xạ đăng nhập SELinux cho %s\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr "Không thể đặt tên %s\n"
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr "Không thể đặt người dùng SELinux cho %s\n"
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr "Không thể thêm ánh xạ đăng nhập cho %s\n"
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr "Không thể khởi tạo bộ quản lý SELinux\n"
-
-#, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "Không thể tạo khóa người dùng SELinux\n"
-
-#, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "Không thể thẩm định người dùng SELinux\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr "Không thể sửa đổi ánh xạ người dùng SELinux\n"
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr "Không thể thêm ánh xạ người dùng SELinux\n"
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr "Không thể chuyển giao giao dịch SELinux\n"
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-"Ánh xạ đăng nhập cho %s chưa được định nghĩa, OK nếu ánh xạ mặc định được "
-"dùng\n"
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-"Ánh xạ đăng nhập cho %s được định nghĩa trong chính sách, không thể xóa đi\n"
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr "Không thể xóa ánh xạ đăng nhập cho %s"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: hết bộ nhớ\n"
-
-#, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: Không thể lấy thống kê về %s: %s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: %s không phải là thư mục mà cũng không phải là liên kết mềm.\n"
-
-#, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: Không thể đọc liên kết mềm %s: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Liên kết mềm dài một cách điên rồ: %s\n"
-
-#, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: Không thể tạo thư mục %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: Không thể thay đổi người sở hữu của %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: Không thể thay đổi chế độ của %s: %s\n"
-
-#, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s: unlink: %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: Không thể gỡ bỏ thư mục %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: Không thể đổi tên %s thành %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: Không thể gỡ bỏ %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: Không thể tạo liên kết mềm %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: Không thể thay đổi chủ sở hữu của %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: Không thể lstat %s: %s\n"
-
-#, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: Cảnh báo, người dùng  %s không có tập tin shadow tcb.\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-"%s: Khẩn cấp: shadow tcb của %s không phải là tập tin thường với "
-"st_nlink=1.\n"
-"Tài khoản vẫn bị khóa.\n"
-
-#, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: mkdir: %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: Không thể mở %s: %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -289,11 +67,22 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s: gặp lỗi khi mở khóa %s\n"
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"Có nhiều mục tin mang tên “%s” trong %s. Hãy sửa chữa trường hợp này, dùng "
+"pwck hoặc grpck.\n"
+
+#, c-format
 msgid "%s: "
 msgstr "%s: "
 
 msgid ": "
 msgstr ": "
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr "Phương pháp mã hóa không được thư viện libcrypt hỗ trợ? (%s)\n"
 
 msgid "Environment overflow\n"
 msgstr "Tràn môi trường\n"
@@ -414,8 +203,15 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: Không thể lấy UID duy nhất (không còn có sẵn UID thêm nữa)\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr ""
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr "lỗi cấu hình — không thể phân tích cú pháp của giá trị %s: “%s”"
+
+msgid "Could not allocate space for config info.\n"
+msgstr "Không thể cấp phát sức chứa cho thông tin cấu hình.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "lỗi cấu hình - không hiểu mục tin “%s” (báo cho người quản trị).\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Authentication failure\n"
@@ -445,9 +241,10 @@ msgstr "Không thể đặt tên %s\n"
 msgid "%s: Could not set caps\n"
 msgstr "Không thể đặt tên %s\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: stpeprintf failed!\n"
+msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
@@ -459,8 +256,21 @@ msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
+
 msgid "Too many logins.\n"
 msgstr "Quá nhiều lần đăng nhập.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s đăng nhập: "
 
 msgid "You have new mail."
 msgstr "Bạn có thư mới."
@@ -470,6 +280,14 @@ msgstr "Không có thư."
 
 msgid "You have mail."
 msgstr "Bạn có thư."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr "%s: nscd đã kết thúc bất thường (tín hiệu %d)\n"
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr "%s: nscd đã thoát với mã là %d\n"
 
 msgid "no change"
 msgstr "chưa thay đổi gì"
@@ -482,9 +300,6 @@ msgstr "chỉ thay đổi HOA/thường"
 
 msgid "too similar"
 msgstr "quá tương tự"
-
-msgid "too simple"
-msgstr "quá đơn giản"
 
 msgid "rotated"
 msgstr "đã xoay"
@@ -531,6 +346,13 @@ msgid ""
 "%s\n"
 msgstr "passwd: pam_start() (mật khẩu: bắt đầu pam) đã thất bại với lỗi %d\n"
 
+msgid "Password: "
+msgstr "Mật khẩu: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "Mật khẩu của %s: "
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Mật khẩu không đúng cho %s .\n"
@@ -557,16 +379,13 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: không thể truy cập thư mục chroot %s: %s\n"
 
 #, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: không thể chuyển sang thư mục chroot %s: %s\n"
-
-#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: không thể thay đổi thư mục gốc thành %s: %s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s: không thể chuyển sang thư mục chroot %s: %s\n"
 
 #, c-format
 msgid ""
@@ -583,6 +402,111 @@ msgid ""
 "method.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "Cannot open audit interface - aborting.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "Không thể mở giao diện thử, kiểm nghiệm nên hủy bỏ.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr "[libsemanage]: %s\n"
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr "Không thể tạo bộ tiếp hợp quản lý SELinux\n"
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr "Chính sách cho SELinux chưa được quản lý\n"
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr "Không thể đọc kho lưu chính sách SELinux\n"
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr "Không thể thiết lập kết nối quản lý SELinux\n"
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr "Không thể bắt đầu phiên giao dịch SELinux\n"
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr "Không thể truy vấn seuser cho %s\n"
+
+#, fuzzy, c-format
+#| msgid "Could not set serange for %s\n"
+msgid "Could not set serange for %s to %s\n"
+msgstr "Không thể đặt serange cho %s\n"
+
+#, c-format
+msgid "Could not set sename for %s\n"
+msgstr "Không thể đặt sename cho %s\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr "Không thể sửa đổi ánh xạ đăng nhập cho %s\n"
+
+#, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Không thể tạo ánh xạ đăng nhập SELinux cho %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr "Không thể đặt tên %s\n"
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr "Không thể đặt người dùng SELinux cho %s\n"
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr "Không thể thêm ánh xạ đăng nhập cho %s\n"
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr "Không thể khởi tạo bộ quản lý SELinux\n"
+
+#, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "Không thể tạo khóa người dùng SELinux\n"
+
+#, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "Không thể thẩm định người dùng SELinux\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr "Không thể sửa đổi ánh xạ người dùng SELinux\n"
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr "Không thể thêm ánh xạ người dùng SELinux\n"
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr "Không thể chuyển giao giao dịch SELinux\n"
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+"Ánh xạ đăng nhập cho %s chưa được định nghĩa, OK nếu ánh xạ mặc định được "
+"dùng\n"
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+"Ánh xạ đăng nhập cho %s được định nghĩa trong chính sách, không thể xóa đi\n"
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr "Không thể xóa ánh xạ đăng nhập cho %s"
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "Không thể cd (chuyển đổi thư mục) sang “%s”.\n"
@@ -595,12 +519,97 @@ msgid "Cannot execute %s"
 msgstr "Không thể thực hiện %s"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Thư mục gốc không hợp lệ “%s”\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Không thể thay đổi thư mục gốc thành “%s”\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: hết bộ nhớ\n"
+
+#, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: Không thể lấy thống kê về %s: %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: %s không phải là thư mục mà cũng không phải là liên kết mềm.\n"
+
+#, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: Không thể đọc liên kết mềm %s: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr "%s: Liên kết mềm dài một cách điên rồ: %s\n"
+
+#, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: Không thể tạo thư mục %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: Không thể thay đổi người sở hữu của %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: Không thể thay đổi chế độ của %s: %s\n"
+
+#, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: unlink: %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: Không thể gỡ bỏ thư mục %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: Không thể đổi tên %s thành %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: Không thể gỡ bỏ %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: Không thể tạo liên kết mềm %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: Không thể thay đổi chủ sở hữu của %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: Không thể lstat %s: %s\n"
+
+#, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: Cảnh báo, người dùng  %s không có tập tin shadow tcb.\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+"%s: Khẩn cấp: shadow tcb của %s không phải là tập tin thường với "
+"st_nlink=1.\n"
+"Tài khoản vẫn bị khóa.\n"
+
+#, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: mkdir: %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: Không thể mở %s: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: user '%s' does not exist in %s\n"
@@ -681,6 +690,11 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr "  -R, --root THƯ_MỤC_ĐỔI        thư mục để chuyển gốc đến\n"
 
+#, fuzzy
+#| msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr "  -R, --root THƯ_MỤC_ĐỔI        thư mục để chuyển gốc đến\n"
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -708,11 +722,14 @@ msgstr "Mật khẩu không hoạt động"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Ngày hết hạn dùng tài khoản (NNNN-TT-Ng)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "Thay đổi mặt khẩu cuối cùng\t\t\t\t\t: "
-
 msgid "never"
 msgstr "chưa bao giờ"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Thay đổi mặt khẩu cuối cùng\t\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "mật khẩu phải thay đổi"
@@ -933,6 +950,11 @@ msgid ""
 msgstr ""
 "  -s, --sha-rounds              số vòng SHA cho thuật toán mã hóa SHA*\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unsupported crypt method: %s\n"
+msgid "%s: no crypt method defined\n"
+msgstr "%s: phương pháp mã hóa không được hỗ trợ: %s\n"
+
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: cho phép cờ %s chỉ cùng với cờ %s\n"
@@ -985,6 +1007,16 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Hệ vỏ Đăng nhập"
 
+#, fuzzy, c-format
+#| msgid "%s: Cannot get the size of %s: %s\n"
+msgid "Cannot parse shell files: %s"
+msgstr "%s: Không thể lấy kích cỡ của %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s: không thể tạo tập tin mặc định mới\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Không cho phép bạn thay đổi hệ vỏ đối với “%s”.\n"
@@ -996,6 +1028,11 @@ msgstr "Đang thay đổi hệ vỏ đăng nhập đối với %s\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: mục tin không hợp lệ: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell\n"
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s: %s không phải là hệ vỏ hợp lệ\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1243,11 +1280,6 @@ msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
 
 #, fuzzy
-#| msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr "  -R, --root THƯ_MỤC_ĐỔI        thư mục để chuyển gốc đến\n"
-
-#, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr "  -l, --list                    liệt kê những người trong nhóm\n"
@@ -1260,6 +1292,11 @@ msgstr "tên người dùng không hợp lệ “%s”\n"
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: “%s” không phải là tên nhóm hợp lệ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot open %s: %s\n"
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: Không thể mở %s: %s\n"
 
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1537,8 +1574,12 @@ msgstr ""
 "ngày\n"
 "                                cũ hơn số ngày này (_trước_)\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -C, --clear                   clear lastlog record of an user (usable "
+#| "only with -u)\n"
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 "  -C, --clear                   xóa bản ghi lastlog của người dùng (chỉ dùng "
@@ -1640,11 +1681,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Không thể làm việc mà không có gốc có hiệu lực\n"
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Không có mục tin utmp. Vì thế bạn cần phải thực hiện “login” (đăng nhập) từ "
-"“sh” (hệ vỏ) cấp dưới cùng."
-
 #, c-format
 msgid ""
 "\n"
@@ -1677,14 +1713,6 @@ msgstr "Đăng nhập không đúng"
 #, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "Không thể tìm thấy người dùng (%s)\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-"%s đăng nhập: "
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1721,7 +1749,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1748,19 +1777,14 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: gặp lỗi khi mở khóa %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to find tcb directory for %s\n"
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
-
-#, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1797,14 +1821,14 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: Failed to create tcb directory for %s\n"
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1829,6 +1853,10 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: dòng %d: dòng không hợp lệ\n"
 
@@ -1849,6 +1877,11 @@ msgstr "%s: dòng %d: không thể tạo nhóm\n"
 #, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: dòng %d: người dùng “%s” không tồn tại trong %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: unlink: %s: %s\n"
+msgid "%s: line %d: %s\n"
+msgstr "%s: unlink: %s: %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1872,12 +1905,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: dòng %d: không thể cập nhật mục tin\n"
 
 #, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: gặp lỗi khi chuẩn bị mục tin mới “%s”\n"
-
-#, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: không thể tìm thấy vùng người dùng lệ thuộc\n"
+
+#, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: gặp lỗi khi chuẩn bị mục tin mới “%s”\n"
 
 #, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1955,6 +1988,13 @@ msgstr ""
 "khi\n"
 "                                        thay đổi được mật khẩu\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    show account aging information\n"
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+"  -l, --list                    hiển thị thông tin về khoảng thời gian sử "
+"dụng tài khoản\n"
+
 msgid "Old password: "
 msgstr "Mật khẩu cũ: "
 
@@ -1973,6 +2013,11 @@ msgid ""
 msgstr ""
 "Nhập mật khẩu mới (số ký tự tối thiểu %d, tối đa %d).\n"
 "Hãy tổ hợp các chữ hoa, chữ thường và chữ số để tạo một mật khẩu mạnh.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: trường quá dài\n"
 
 msgid "New password: "
 msgstr "Mật khẩu mới: "
@@ -2016,6 +2061,11 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: kho lưu %s không được hỗ trợ\n"
+
+#, fuzzy, c-format
+#| msgid "%s: only root can use the -g/--group option\n"
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr "%s: chỉ siêu quản trị có quyền sử dụng tùy chọn “-g/--group”\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s is not authorized to change the password of %s\n"
@@ -2171,11 +2221,9 @@ msgstr "%s: tín hiệu trục trặc\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Phiên làm việc đã kết thúc, nên kết thúc hệ vỏ…"
 
-#, c-format
 msgid " ...killed.\n"
 msgstr " …đã chết.\n"
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " …đang đợi tiến con chấm dứt.\n"
 
@@ -2266,6 +2314,11 @@ msgstr ""
 msgid "No passwd entry for user '%s'\n"
 msgstr "Không có mục tin mật khẩu cho tài khoản “%s”\n"
 
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Overlong user name '%s'\n"
+msgstr "tên người dùng không hợp lệ “%s”\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: phải chạy từ thiết bị cuối\n"
@@ -2309,6 +2362,13 @@ msgstr "%s: %s đã được tạo, nhưng không thể bị gỡ bỏ\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr "%s: cấu hình %s trong %s sẽ bị bỏ qua\n"
+
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr "%s: cấu hình %s trong %s sẽ bị bỏ qua\n"
 
 #, fuzzy, c-format
@@ -2409,6 +2469,11 @@ msgstr ""
 "khoản mới\n"
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2471,6 +2536,17 @@ msgstr "  -U, --user-group              tạo một nhóm cùng tên với ngư�
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     dùng một người dùng SE (SEUSER) riêng cho sự "
+"ánh xạ người dùng SELinux\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux "
+#| "user mapping\n"
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 "  -Z, --selinux-user SEUSER     dùng một người dùng SE (SEUSER) riêng cho sự "
 "ánh xạ người dùng SELinux\n"
@@ -2617,6 +2693,16 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "Đang đặt quyền truy cập tập tin hộp thư"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "Đang tạo tập tin hộp thư"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "Đang tạo tập tin hộp thư"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
@@ -2877,6 +2963,15 @@ msgid ""
 msgstr ""
 "  -Z, --selinux-user SEUSER     ánh xạ SELinux mới cho tài khoản người dùng\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     ánh xạ SELinux mới cho tài khoản người dùng\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2955,14 +3050,39 @@ msgstr "%s: cảnh báo: gặp lỗi khi gỡ bỏ hoàn toàn thư mục riêng
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: không thể thay đổi lại tên thư mục %s thành %s\n"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: The previous home directory (%s) was not a directory. It is not "
+#| "removed and no home directories are created.\n"
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+"%s: Thư mục riêng trước đó (%s) không là một thư mục. Nó chưa được gỡ bỏ và "
+"chưa tạo thư mục riêng (home).\n"
+
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
 "%s: gặp lỗi khi sao chép mục tin lastlog của người dùng %lu sang người dùng "
 "%lu: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr ""
+"%s: gặp lỗi khi sao chép mục tin lastlog của người dùng %lu sang người dùng "
+"%lu: %s\n"
+
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+"%s: không sao chép được mục tin faillog của người dùng %lu sang người dùng "
+"%lu: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
 "%s: không sao chép được mục tin faillog của người dùng %lu sang người dùng "
 "%lu: %s\n"
@@ -3068,8 +3188,8 @@ msgstr "gặp lỗi khi bỏ liên kết tập tin hỗn tạp"
 msgid "failed to stat edited file"
 msgstr "gặp lỗi khi lấy thống kê tập tin đã sửa"
 
-msgid "failed to allocate memory"
-msgstr "gặp lỗi khi phân bổ bộ nhớ"
+msgid "asprintf(3) failed"
+msgstr ""
 
 msgid "failed to create backup file"
 msgstr "không thể tạo tập tin sao lưu dự phòng"
@@ -3081,6 +3201,22 @@ msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn nằm
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
+
+#~ msgid "too simple"
+#~ msgstr "quá đơn giản"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr ""
+#~ "Không có mục tin utmp. Vì thế bạn cần phải thực hiện “login” (đăng nhập) "
+#~ "từ “sh” (hệ vỏ) cấp dưới cùng."
+
+#, fuzzy, c-format
+#~| msgid "%s: failed to find tcb directory for %s\n"
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
+
+#~ msgid "failed to allocate memory"
+#~ msgstr "gặp lỗi khi phân bổ bộ nhớ"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Cách dùng: id\n"
@@ -3096,10 +3232,6 @@ msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
 #~ msgstr "%s: thông tin đã thay đổi về sự hết hạn sử dụng mật khẩu.\n"
-
-#, c-format
-#~ msgid "invalid user name '%s'\n"
-#~ msgstr "tên người dùng không hợp lệ “%s”\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Tài_khoản        Cổng     Từ               Mới nhất"
