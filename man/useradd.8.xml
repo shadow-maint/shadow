@@ -296,6 +296,11 @@
 	    <filename>/etc/skel</filename>.
 	  </para>
 	  <para>
+	    Absolute symlinks that link back to the skel directory will have
+	    the <filename>/etc/skel</filename> prefix replaced with the user's
+	    home directory.
+	  </para>
+	  <para>
 	    If possible, the ACLs and extended attributes are copied.
 	  </para>
 	</listitem>
