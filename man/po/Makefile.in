@@ -86,37 +86,38 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 # This target rebuilds $(DOMAIN).pot; it is an expensive operation.
 # Note that $(DOMAIN).pot is not touched if it doesn't need to be changed.
 # TODO: set MSGID_BUGS_ADDRESS, COPYRIGHT_HOLDER
-$(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES remove-potcdate.sed
-	@set -e; tmpdir=`pwd`; \
-	echo "cd $(top_srcdir)/man"; \
+$(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES
+	@set -ex; tmpdir=`mktemp -d`; \
+	origdir=`pwd`; \
 	cd $(top_srcdir)/man; \
+	cp *.xml $$tmpdir/; \
 	files=""; \
 	for file in $(notdir $(XMLFILES)); do \
+		base=`basename $$file`; \
+		outfile=$$tmpdir/$$base.out; \
 		if grep -q SHADOW-CONFIG-HERE $$file ; then \
-			sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $$file > $$file.out; \
+			sed -e 's/^<!-- SHADOW-CONFIG-HERE -->/<!ENTITY % config SYSTEM "config.xml">%config;/' $$file > $$outfile; \
 		else \
-			sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $$file > $$file.out; \
+			sed -e 's/^\(<!DOCTYPE .*docbookx.dtd"\)>/\1 [<!ENTITY % config SYSTEM "config.xml">%config;]>/' $$file > $$outfile; \
 		fi; \
-		files="$$files $$file.out"; \
+		files="$$files $$outfile"; \
 	done; \
 	itstool -d -o $$tmpdir/$(DOMAIN).po $$files; \
-	cd $$tmpdir; \
-	test ! -f $(DOMAIN).po || { \
+	sed -i '1i \
+# To re-generate, run "cd man/po; make update-po"' $$tmpdir/$(DOMAIN).po; \
+	cd $$origdir; \
+	test ! -f $$tmpdir/$(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \
-	    sed -f remove-potcdate.sed < $(srcdir)/$(DOMAIN).pot > $(DOMAIN).1po && \
-	    sed -f remove-potcdate.sed < $(DOMAIN).po > $(DOMAIN).2po && \
-	    if cmp $(DOMAIN).1po $(DOMAIN).2po >/dev/null 2>&1; then \
-	      rm -f $(DOMAIN).1po $(DOMAIN).2po $(DOMAIN).po; \
-	    else \
-	      rm -f $(DOMAIN).1po $(DOMAIN).2po $(srcdir)/$(DOMAIN).pot && \
-	      mv $(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
+	    sed -f remove-potcdate.sed < $(srcdir)/$(DOMAIN).pot > $$tmpdir/$(DOMAIN).1po && \
+	    sed -f remove-potcdate.sed < $$tmpdir/$(DOMAIN).po > $$tmpdir/$(DOMAIN).2po && \
+	    if ! cmp $$tmpdir/$(DOMAIN).1po $$tmpdir/$(DOMAIN).2po >/dev/null 2>&1; then \
+	      rm -f $(srcdir)/$(DOMAIN).pot && \
+	      mv $$tmpdir/$(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
 	    fi; \
 	  else \
-	    mv $(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
+	    mv $$tmpdir/$(DOMAIN).po $(srcdir)/$(DOMAIN).pot; \
 	  fi; \
-	  sed -i '1i \
-# To re-generate, run "cd man/po; make update-po"' $(srcdir)/$(DOMAIN).pot; \
-	}
+	} ; rm -rf $$tmpdir
 
 # This rule has no dependencies: we don't need to update $(DOMAIN).pot at
 # every "make" invocation, only create it when it is missing.
@@ -214,26 +215,25 @@ update-po: Makefile
 
 .nop.po-update:
 	@lang=`echo $@ | sed -e 's/\.po-update$$//'`; \
-	tmpdir=`pwd`; \
+	ptmpdir=`mktemp -d`; \
 	echo "$$lang:"; \
 	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
 	echo "$${cdcmd}$(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
 	cd $(srcdir); \
-	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$tmpdir/$$lang.new.po; then \
-	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
-	    rm -f $$tmpdir/$$lang.new.po; \
-	  else \
-	    if mv -f $$tmpdir/$$lang.new.po $$lang.po; then \
+	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$ptmpdir/$$lang.new.po; then \
+	  sed -f remove-potcdate.sed < $$lang.po > $$ptmpdir/$$lang.1po; \
+	  sed -f remove-potcdate.sed < $$ptmpdir/$$lang.new.po > $$ptmpdir/$$lang.new.1po; \
+	  if ! cmp $$ptmpdir/$$lang.1po $$ptmpdir/$$lang.new.1po >/dev/null 2>&1; then \
+	    if mv -f $$ptmpdir/$$lang.new.po $$lang.po; then \
 	      :; \
 	    else \
-	      echo "msgmerge for $$lang.po failed: cannot move $$tmpdir/$$lang.new.po to $$lang.po" 1>&2; \
+	      echo "msgmerge for $$lang.po failed: cannot move $$ptmpdir/$$lang.new.po to $$lang.po" 1>&2; \
 	      exit 1; \
 	    fi; \
 	  fi; \
 	else \
 	  echo "msgmerge for $$lang.po failed!" 1>&2; \
-	  rm -f $$tmpdir/$$lang.new.po; \
-	fi
+	fi ; rm -rf $$ptmpdir
 
 $(DUMMYPOFILES):
 
