@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.12.2\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2022-09-27 17:08+0200\n"
 "Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
 "Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
@@ -17,230 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-"In %s staan meerdere regels met als naam '%s'. Gelieve dit met pwck of grpck "
-"te repareren.\n"
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr "niet door libcrypt ondersteunde encryptiemethode? (%s)\n"
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "configuratiefout - kan waarde %s niet ontleden: '%s'"
-
-msgid "Could not allocate space for config info.\n"
-msgstr "Kon geen ruimte toewijzen voor de configuratie-info.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-"configuratiefout - onbekend item '%s' (waarschuw een systeembeheerder)\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr "%s: nscd werd niet normaal beëindigd (signaal %d)\n"
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr "%s: nscd sloot af met status %d\n"
-
-msgid "Password: "
-msgstr "Wachtwoord: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "Wachtwoord van %s: "
-
-msgid "Cannot open audit interface.\n"
-msgstr "Kan auditinterface niet openen.\n"
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-"%s: kan context van vorige SELinux-proces niet verkrijgen: %s\n"
-"\n"
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr "[libsemanage]: %s\n"
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr "Kan geen instrument voor SELinux-beheer creëren\n"
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr "SELinux-beleid wordt niet beheerd\n"
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr "Kan het gebied met het SELinux-beleid niet lezen\n"
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr "Kan geen verbinding leggen om SELinux te beheren\n"
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr "Kan de SELinux-transactie niet beginnen\n"
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr "Kon de seuser van %s niet opvragen\n"
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr "Kon de serange van %s niet instellen\n"
-
-#, c-format
-msgid "Could not set sename for %s\n"
-msgstr "Kon de sename van %s niet instellen\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr "Kon de aanmeldkoppeling van %s niet veranderen\n"
-
-#, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Kan voor %s geen SELinux-aanmeldkoppeling maken\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr "Kon voor %s geen naam instellen\n"
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr "Kon voor %s geen SELinuxgebruiker instellen\n"
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr "Kon voor %s geen aanmeldkoppeling toevoegen\n"
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr "Kan SELinuxbeheer niet initialiseren\n"
-
-#, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "Kan de gebruikerssleutel voor SELinux niet aanmaken\n"
-
-#, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "Kan de SELinuxgebruiker niet verifiëren\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr "Kon de gebruikerskoppeling in SELinux niet veranderen\n"
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr "Kan in SELinux geen gebruikerskoppeling toevoegen\n"
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr "Kan de SELinux-transactie niet vastleggen\n"
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-"Geen aanmeldkoppeling gedefinieerd voor %s. OK als de standaardkoppeling "
-"gebruikt werd\n"
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-"Aanmeldkoppeling van %s werd in het beleid gedefinieerd en kan niet gewist "
-"worden\n"
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr "Kon de aanmeldkoppeling van %s niet wissen"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: onvoldoende geheugen\n"
-
-#, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: kan de status niet opvragen van %s: %s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: %s is geen map en ook geen symbolische koppeling.\n"
-
-#, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: kan symbolische koppeling %s niet lezen: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: verdacht lange symbolische koppeling: %s\n"
-
-#, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: kan map %s niet aanmaken: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: kan eigenaar van %s niet wijzigen: %s\n"
-
-#, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: kan modus van %s niet wijzigen: %s\n"
-
-#, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s: ontkoppelen: %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: kan map %s niet verwijderen: %s\n"
-
-#, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: kan %s niet hernoemen naar %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: kan %s niet verwijderen: %s\n"
-
-#, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: kan symbolische koppeling %s niet aanmaken: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: kan eigenaars van %s niet wijzigen: %s\n"
-
-#, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: kan status van symbolische koppeling %s niet opvragen: %s\n"
-
-#, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: waarschuwing: gebruiker %s heeft geen tcb-schaduwbestand.\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-"%s: noodsituatie: het tcb-schaduwbestand van %s is geen gewoon bestand met "
-"st_nlink=1.\n"
-"Het account is vergrendeld gebleven.\n"
-
-#, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: mkdir: %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: kan bestand %s niet openen: %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -289,11 +65,22 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s: ontgrendelen van %s is mislukt\n"
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"In %s staan meerdere regels met als naam '%s'. Gelieve dit met pwck of grpck "
+"te repareren.\n"
+
+#, c-format
 msgid "%s: "
 msgstr "%s: "
 
 msgid ": "
 msgstr ": "
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr "niet door libcrypt ondersteunde encryptiemethode? (%s)\n"
 
 msgid "Environment overflow\n"
 msgstr "Omgeving wordt te groot\n"
@@ -415,8 +202,16 @@ msgstr ""
 "%s: kan geen uniek UID verkrijgen (er zijn geen UID's meer beschikbaar)\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr "%s: Onvoldoende argumenten om %u-toewijzingen te vormen\n"
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr "configuratiefout - kan waarde %s niet ontleden: '%s'"
+
+msgid "Could not allocate space for config info.\n"
+msgstr "Kon geen ruimte toewijzen voor de configuratie-info.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr ""
+"configuratiefout - onbekend item '%s' (waarschuw een systeembeheerder)\n"
 
 #, c-format
 msgid "%s: Memory allocation failure\n"
@@ -442,8 +237,9 @@ msgstr "%s: Kon seteuid niet op %d instellen\n"
 msgid "%s: Could not set caps\n"
 msgstr "%s: Kon hoofdletters niet instellen\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
+#, fuzzy, c-format
+#| msgid "%s: snprintf failed!\n"
+msgid "%s: stpeprintf failed!\n"
 msgstr "%s: snprintf is mislukt!\n"
 
 #, c-format
@@ -454,8 +250,21 @@ msgstr "%s: openen van %s mislukte: %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: schrijven naar %s mislukte: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: open of %s failed: %s\n"
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s: openen van %s mislukte: %s\n"
+
 msgid "Too many logins.\n"
 msgstr "Te veel aanmeldingen.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s gebruikersnaam: "
 
 msgid "You have new mail."
 msgstr "U heeft nieuwe e-mail ontvangen."
@@ -465,6 +274,14 @@ msgstr "Geen e-mail."
 
 msgid "You have mail."
 msgstr "U heeft e-mail."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr "%s: nscd werd niet normaal beëindigd (signaal %d)\n"
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr "%s: nscd sloot af met status %d\n"
 
 msgid "no change"
 msgstr "geen veranderingen"
@@ -477,9 +294,6 @@ msgstr "enkel veranderingen van grote naar kleine letters (of omgekeerd)"
 
 msgid "too similar"
 msgstr "te gelijkaardig"
-
-msgid "too simple"
-msgstr "te simpel"
 
 msgid "rotated"
 msgstr "geroteerd"
@@ -525,6 +339,13 @@ msgstr ""
 "%s: (gebruiker %s) pam_chauthtok() is mislukt, fout:\n"
 "%s\n"
 
+msgid "Password: "
+msgstr "Wachtwoord: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "Wachtwoord van %s: "
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Onjuist wachtwoord voor %s.\n"
@@ -551,16 +372,13 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: krijg geen toegang tot chroot-map %s: %s\n"
 
 #, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: kan chdir naar chroot-map %s niet uitvoeren: %s\n"
-
-#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: chroot naar map %s lukt niet: %s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr "Kan geen willekeurige bytes verkrijgen.\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s: kan chdir naar chroot-map %s niet uitvoeren: %s\n"
 
 #, c-format
 msgid ""
@@ -580,6 +398,112 @@ msgstr ""
 "ENCRYPT_METHOD en de bijbehorende configuratie voor uw geselecteerde hash-"
 "methode.\n"
 
+msgid "Cannot open audit interface.\n"
+msgstr "Kan auditinterface niet openen.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+"%s: kan context van vorige SELinux-proces niet verkrijgen: %s\n"
+"\n"
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr "[libsemanage]: %s\n"
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr "Kan geen instrument voor SELinux-beheer creëren\n"
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr "SELinux-beleid wordt niet beheerd\n"
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr "Kan het gebied met het SELinux-beleid niet lezen\n"
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr "Kan geen verbinding leggen om SELinux te beheren\n"
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr "Kan de SELinux-transactie niet beginnen\n"
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr "Kon de seuser van %s niet opvragen\n"
+
+#, fuzzy, c-format
+#| msgid "Could not set serange for %s\n"
+msgid "Could not set serange for %s to %s\n"
+msgstr "Kon de serange van %s niet instellen\n"
+
+#, c-format
+msgid "Could not set sename for %s\n"
+msgstr "Kon de sename van %s niet instellen\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr "Kon de aanmeldkoppeling van %s niet veranderen\n"
+
+#, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Kan voor %s geen SELinux-aanmeldkoppeling maken\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr "Kon voor %s geen naam instellen\n"
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr "Kon voor %s geen SELinuxgebruiker instellen\n"
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr "Kon voor %s geen aanmeldkoppeling toevoegen\n"
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr "Kan SELinuxbeheer niet initialiseren\n"
+
+#, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "Kan de gebruikerssleutel voor SELinux niet aanmaken\n"
+
+#, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "Kan de SELinuxgebruiker niet verifiëren\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr "Kon de gebruikerskoppeling in SELinux niet veranderen\n"
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr "Kan in SELinux geen gebruikerskoppeling toevoegen\n"
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr "Kan de SELinux-transactie niet vastleggen\n"
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+"Geen aanmeldkoppeling gedefinieerd voor %s. OK als de standaardkoppeling "
+"gebruikt werd\n"
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+"Aanmeldkoppeling van %s werd in het beleid gedefinieerd en kan niet gewist "
+"worden\n"
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr "Kon de aanmeldkoppeling van %s niet wissen"
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "Kan niet van map veranderen (cd) naar '%s'\n"
@@ -592,12 +516,97 @@ msgid "Cannot execute %s"
 msgstr "Kan %s niet uitvoeren"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Ongeldige hoofdmap '%s'\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Kan de hoofdmap niet veranderen naar '%s'\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: onvoldoende geheugen\n"
+
+#, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: kan de status niet opvragen van %s: %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: %s is geen map en ook geen symbolische koppeling.\n"
+
+#, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: kan symbolische koppeling %s niet lezen: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr "%s: verdacht lange symbolische koppeling: %s\n"
+
+#, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: kan map %s niet aanmaken: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: kan eigenaar van %s niet wijzigen: %s\n"
+
+#, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: kan modus van %s niet wijzigen: %s\n"
+
+#, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: ontkoppelen: %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: kan map %s niet verwijderen: %s\n"
+
+#, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: kan %s niet hernoemen naar %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: kan %s niet verwijderen: %s\n"
+
+#, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: kan symbolische koppeling %s niet aanmaken: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: kan eigenaars van %s niet wijzigen: %s\n"
+
+#, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: kan status van symbolische koppeling %s niet opvragen: %s\n"
+
+#, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: waarschuwing: gebruiker %s heeft geen tcb-schaduwbestand.\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+"%s: noodsituatie: het tcb-schaduwbestand van %s is geen gewoon bestand met "
+"st_nlink=1.\n"
+"Het account is vergrendeld gebleven.\n"
+
+#, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: mkdir: %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: kan bestand %s niet openen: %s\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -671,6 +680,11 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr "  -R, --root CHROOT_MAP         basismap voor chroot\n"
 
+#, fuzzy
+#| msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr "  -P, --prefix PREFIX_MAP       map-prefix\n"
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -698,11 +712,14 @@ msgstr "Wachtwoord niet actief"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Vervaldatum van account (JJJJ-MM-DD)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "Laatste wachtwoordverandering\t\t\t\t: "
-
 msgid "never"
 msgstr "nooit"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Laatste wachtwoordverandering\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "wachtwoord moet veranderd worden"
@@ -926,6 +943,11 @@ msgstr ""
 "  -s, --sha-rounds              aantal rondes voor de SHA, BCRYPT\n"
 "                                of YESCRYPT encryptie-algoritmes\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unsupported crypt method: %s\n"
+msgid "%s: no crypt method defined\n"
+msgstr "%s: niet-ondersteunde encryptiemethode: %s\n"
+
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: vlag %s is enkel toegelaten in combinatie met vlag %s\n"
@@ -979,6 +1001,16 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Login-shell"
 
+#, fuzzy, c-format
+#| msgid "%s: Cannot get the size of %s: %s\n"
+msgid "Cannot parse shell files: %s"
+msgstr "%s: kan grootte van %s niet opvragen: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file: %s\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s: kan geen nieuw bestand met standaardwaarden aanmaken: %s\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "U mag de shell voor '%s' niet aanpassen.\n"
@@ -990,6 +1022,11 @@ msgstr "De login-shell voor %s wordt aangepast\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: ongeldig element: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell\n"
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s: %s is geen geldige shell\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1237,9 +1274,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  een systeem-account aanmaken\n"
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr "  -P, --prefix PREFIX_MAP       map-prefix\n"
-
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
 "  -U, --users GEBRUIKERS         lijst van leden-gebruikers van deze groep\n"
@@ -1251,6 +1285,11 @@ msgstr "Ongeldige lid-gebruikersnaam %s\n"
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: '%s' is geen geldige groepsnaam\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot open %s: %s\n"
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: kan bestand %s niet openen: %s\n"
 
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1527,8 +1566,12 @@ msgid ""
 msgstr ""
 "  -b, --before DAGEN            enkel lastlog-items ouder dan DAGEN tonen\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -C, --clear                   clear lastlog record of an user (usable "
+#| "only with -u)\n"
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 "  -C, --clear                   lastlog-informatie over een gebruiker\n"
@@ -1632,11 +1675,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Kan mogelijk niet functioneren zonder effectieve root\n"
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Er is geen utmp-item. U dient \"login\" uit te voeren vanaf het laagste "
-"niveau \"sh\""
-
 #, c-format
 msgid ""
 "\n"
@@ -1669,14 +1707,6 @@ msgstr "Gebruikersnaam is onjuist"
 #, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "Kan gebruiker (%s) niet vinden\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-"%s gebruikersnaam: "
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1712,9 +1742,13 @@ msgstr "Gebruik: logoutd\n"
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s: gid-bereik [%lu-%lu) -> [%lu-%lu) niet toegestaan\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> "
+#| "<count> ] ... \n"
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 "gebruik: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> "
 "<count> ] ... \n"
@@ -1739,21 +1773,21 @@ msgstr "%s: setgroups opzoeken mislukte: %s\n"
 msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: setgroups-beleid %s mislukte: %s\n"
 
-#, c-format
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s: Kon proc-map voor doel %u niet openen\n"
-
-#, c-format
-msgid "%s: Could not stat directory for target %u\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s: Kon status van map voor doel %u niet opvragen\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
+#| "st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
-"%s: Doel %u is van een andere gebruiker: uid:%lu pw_uid:%lu st_uid:%lu, gid:"
-"%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Doelproces %u is van een andere gebruiker: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Gebruik: newgrp [-] [groep]\n"
@@ -1785,20 +1819,21 @@ msgstr "te veel groepen\n"
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s: uid-bereik [%lu-%lu) -> [%lu-%lu) niet toegestaan\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> "
+#| "<count> ] ... \n"
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 "gebruik: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
-"%s: Doelproces %u is van een andere gebruiker: uid:%lu pw_uid:%lu st_uid:"
-"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s: Kon status van map voor doel %u niet opvragen\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr "  -b, --badname                 slechte namen toestaan\n"
@@ -1817,6 +1852,10 @@ msgstr "%s: ongeldig gebruikers-ID '%s'\n"
 #, c-format
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: ongeldige gebruikersnaam '%s': gebruik --badname om te negeren\n"
+
+#, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1840,6 +1879,11 @@ msgstr "%s: regel %d: kan de groep niet aanmaken\n"
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: regel %d: gebruiker '%s' bestaat niet in %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unlink: %s: %s\n"
+msgid "%s: line %d: %s\n"
+msgstr "%s: ontkoppelen: %s: %s\n"
+
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: regel %d: kan wachtwoord niet bijwerken\n"
@@ -1861,12 +1905,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: regel %d: kan element niet bijwerken\n"
 
 #, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: voorbereiden van het nieuwe %s-element is mislukt\n"
-
-#, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: kan ondergeschikt gebruikersbereik niet vinden\n"
+
+#, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: voorbereiden van het nieuwe %s-element is mislukt\n"
 
 #, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1948,6 +1992,12 @@ msgstr ""
 "wachtwoordwijziging\n"
 "                                instellen op MAX_DAGEN\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    show account aging information\n"
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+"  -l, --list                    verouderingsinformatie over accounts tonen\n"
+
 msgid "Old password: "
 msgstr "Oud wachtwoord: "
 
@@ -1966,6 +2016,11 @@ msgid ""
 msgstr ""
 "Voer het nieuwe wachtwoord in (minimaal %d en maximaal %d tekens)\n"
 "Gebruik een combinatie van grote en kleine letters en cijfers.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: velden zijn te lang\n"
 
 msgid "New password: "
 msgstr "Nieuw wachtwoord: "
@@ -2011,6 +2066,11 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: depot %s wordt niet ondersteund\n"
+
+#, fuzzy, c-format
+#| msgid "%s: only root can use the -g/--group option\n"
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr "%s: enkel de systeembeheerder kan de optie -g/--group gebruiken\n"
 
 #, c-format
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
@@ -2165,11 +2225,9 @@ msgstr "%s: signaal werkt slecht\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Sessie beëindigd, shell wordt afgesloten..."
 
-#, c-format
 msgid " ...killed.\n"
 msgstr " ...gedood.\n"
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " ...wachten op het beëindigen van kind-proces.\n"
 
@@ -2243,6 +2301,11 @@ msgstr "%s: U bent niet gerechtigd om op dat tijdstip 'su' uit te voeren\n"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Geen wachtwoordregel voor gebruiker '%s'\n"
 
+#, fuzzy, c-format
+#| msgid "Invalid member username %s\n"
+msgid "Overlong user name '%s'\n"
+msgstr "Ongeldige lid-gebruikersnaam %s\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: dient uitgevoerd te worden vanaf een terminal\n"
@@ -2286,6 +2349,13 @@ msgstr "%s: %s was aangemaakt, maar kon niet verwijderd worden\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr "%s: de %s-instellingen in %s zullen genegeerd worden\n"
+
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr "%s: de %s-instellingen in %s zullen genegeerd worden\n"
 
 #, c-format
@@ -2385,6 +2455,11 @@ msgstr ""
 "                                nieuwe account niet-actief kan zijn\n"
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2458,6 +2533,17 @@ msgstr ""
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     een specifieke SEUSER gebruiken om de\n"
+"                                gebruikerskoppeling voor SELinux te maken\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux "
+#| "user mapping\n"
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 "  -Z, --selinux-user SEUSER     een specifieke SEUSER gebruiken om de\n"
 "                                gebruikerskoppeling voor SELinux te maken\n"
@@ -2593,6 +2679,16 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "Bestandsrechten van postvak-bestand worden ingesteld"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "Postvak-bestand wordt aangemaakt"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "Postvak-bestand wordt aangemaakt"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
@@ -2858,6 +2954,16 @@ msgstr ""
 "  -Z, --selinux-user SEUSER     nieuwe koppeling met SELinux-gebruiker voor\n"
 "                                het gebruikersaccount\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+"  -Z, --selinux-user SEUSER     nieuwe koppeling met SELinux-gebruiker voor\n"
+"                                het gebruikersaccount\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2939,14 +3045,39 @@ msgstr ""
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: kan map %s niet hernoemen naar %s\n"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: The previous home directory (%s) was not a directory. It is not "
+#| "removed and no home directories are created.\n"
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+"%s: De vroegere persoonlijke map (%s) was geen map. Ze werd niet verwijderd "
+"en er werden geen persoonlijke mappen aangemaakt.\n"
+
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
 "%s: kopiëren van het lastlog-item van gebruiker %lu naar gebruiker %lu is "
 "mislukt: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr ""
+"%s: kopiëren van het lastlog-item van gebruiker %lu naar gebruiker %lu is "
+"mislukt: %s\n"
+
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+"%s: kopiëren van het faillog-item van gebruiker %lu naar gebruiker %lu is "
+"mislukt: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
 "%s: kopiëren van het faillog-item van gebruiker %lu naar gebruiker %lu is "
 "mislukt: %s\n"
@@ -3052,8 +3183,10 @@ msgstr "ontkoppelen van initieel bestand is mislukt"
 msgid "failed to stat edited file"
 msgstr "opvragen van status van bewerkt bestand is mislukt"
 
-msgid "failed to allocate memory"
-msgstr "geheugen toekennen is mislukt"
+#, fuzzy
+#| msgid "%s: snprintf failed!\n"
+msgid "asprintf(3) failed"
+msgstr "%s: snprintf is mislukt!\n"
 
 msgid "failed to create backup file"
 msgstr "maken van reservekopie is mislukt"
@@ -3065,3 +3198,34 @@ msgstr "%s: kan %s niet herstellen: %s (uw aanpassingen staan in %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: tcb-map van %s vinden is mislukt\n"
+
+#, c-format
+#~ msgid "%s: Not enough arguments to form %u mappings\n"
+#~ msgstr "%s: Onvoldoende argumenten om %u-toewijzingen te vormen\n"
+
+#~ msgid "too simple"
+#~ msgstr "te simpel"
+
+#, c-format
+#~ msgid "Unable to obtain random bytes.\n"
+#~ msgstr "Kan geen willekeurige bytes verkrijgen.\n"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr ""
+#~ "Er is geen utmp-item. U dient \"login\" uit te voeren vanaf het laagste "
+#~ "niveau \"sh\""
+
+#, c-format
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s: Kon proc-map voor doel %u niet openen\n"
+
+#, c-format
+#~ msgid ""
+#~ "%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+#~ "%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+#~ msgstr ""
+#~ "%s: Doel %u is van een andere gebruiker: uid:%lu pw_uid:%lu st_uid:%lu, "
+#~ "gid:%lu pw_gid:%lu st_gid:%lu\n"
+
+#~ msgid "failed to allocate memory"
+#~ msgstr "geheugen toekennen is mislukt"

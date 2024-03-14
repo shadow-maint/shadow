@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -17,220 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr ""
-
-msgid "Could not allocate space for config info.\n"
-msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "שגיאת הגדרות - רכיב לא ידוע '%s' (הודע למנהל)\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr ""
-
-msgid "Password: "
-msgstr "סיסמה: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "הסיסמה של %s: "
-
-#, fuzzy
-#| msgid "Cannot open the password file.\n"
-msgid "Cannot open audit interface.\n"
-msgstr "לא יכול לפתוח את קובץ הסיסמאות.\n"
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr ""
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Could not set sename for %s\n"
-msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "שנה מידע הזדקות בשביל %s\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
-
-#, fuzzy, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: לא יכול לנעול קובץ צל\n"
-
-#, fuzzy, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "ספרית שורש לא חוקית \"%s\"\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: לא יכול לנעול קובץ צל\n"
-
-#, fuzzy, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: לא יכול לנעול קובץ צל\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -278,11 +64,20 @@ msgstr "לא יכול לשנות tty %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: "
 msgstr "passwd: %s\n"
 
 msgid ": "
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
 msgid "Environment overflow\n"
@@ -381,8 +176,15 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
+msgid "configuration error - cannot parse %s value: '%s'"
 msgstr ""
+
+msgid "Could not allocate space for config info.\n"
+msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "שגיאת הגדרות - רכיב לא ידוע '%s' (הודע למנהל)\n"
 
 #, fuzzy, c-format
 msgid "%s: Memory allocation failure\n"
@@ -408,9 +210,9 @@ msgstr "לא יכול להקצות מקום בשביל מידע על הקונפ�
 msgid "%s: Could not set caps\n"
 msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: stpeprintf failed!\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, fuzzy, c-format
 msgid "%s: open of %s failed: %s\n"
@@ -420,8 +222,18 @@ msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
+#, fuzzy, c-format
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
 msgid "Too many logins.\n"
 msgstr "יותר מידי כניסות למערכת.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
 
 msgid "You have new mail."
 msgstr "יש לך דואר חדש."
@@ -431,6 +243,14 @@ msgstr "אין דואר."
 
 msgid "You have mail."
 msgstr "יש לך דואר."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr ""
 
 msgid "no change"
 msgstr ""
@@ -442,9 +262,6 @@ msgid "case changes only"
 msgstr ""
 
 msgid "too similar"
-msgstr ""
-
-msgid "too simple"
 msgstr ""
 
 msgid "rotated"
@@ -490,6 +307,13 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Password: "
+msgstr "סיסמה: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "הסיסמה של %s: "
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr ""
@@ -515,16 +339,12 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, fuzzy, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
-
-#, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
 
 #, c-format
 msgid ""
@@ -539,6 +359,107 @@ msgid ""
 "method.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "Cannot open the password file.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "לא יכול לפתוח את קובץ הסיסמאות.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Could not set serange for %s to %s\n"
+msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
+
+#, fuzzy, c-format
+msgid "Could not set sename for %s\n"
+msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "שנה מידע הזדקות בשביל %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
+
+#, fuzzy, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "לא יכול לבצע cd ל-\"%s\"\n"
@@ -550,6 +471,10 @@ msgstr "אין ספריה, נכנס למערכת עם HOME=/"
 msgid "Cannot execute %s"
 msgstr "לא יכול להריץ %s"
 
+#, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
@@ -557,6 +482,84 @@ msgstr "ספרית שורש לא חוקית \"%s\"\n"
 #, fuzzy, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "לא יכול לשנות ספרית שורש ל-\"%s\"\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, fuzzy, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -616,6 +619,9 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr ""
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -642,12 +648,15 @@ msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "תאריך תוקף חשבון (YYYY-MM-DD)"
 
 #, fuzzy
-msgid "Last password change\t\t\t\t\t: "
-msgstr "שינוי סיסמה אחרון (YYYY-MM-DD)"
-
-#, fuzzy
 msgid "never"
 msgstr "אף פעם"
+
+msgid "future"
+msgstr ""
+
+#, fuzzy
+msgid "Last password change\t\t\t\t\t: "
+msgstr "שינוי סיסמה אחרון (YYYY-MM-DD)"
 
 msgid "password must be changed"
 msgstr ""
@@ -856,6 +865,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "%s: no crypt method defined\n"
+msgstr ""
+
+#, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr ""
 
@@ -906,6 +919,14 @@ msgid "Login Shell"
 msgstr "מעטפת כניסה למערכת"
 
 #, fuzzy, c-format
+msgid "Cannot parse shell files: %s"
+msgstr "%s: לא יכול לשנות משתמש `%s' על לקוח NIS.\n"
+
+#, fuzzy, c-format
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s: לא יכול לכתוב מחדש קובץ סיסמאות\n"
+
+#, fuzzy, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "אינך רשאי לשנות את המעטפת בשביל %s.\n"
 
@@ -916,6 +937,10 @@ msgstr "משנה מעטפת כניסה למערכת בשביל %s\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: רשומה לא חוקית: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s היא מעטפת לא חוקית.\n"
 
 #, fuzzy, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1125,9 +1150,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr ""
-
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
 
@@ -1138,6 +1160,10 @@ msgstr "%s: שם לא חוקי: \"%s\"\n"
 #, fuzzy, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1386,7 +1412,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 
@@ -1475,9 +1501,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -1508,12 +1531,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: לא יכול לקבוע את שם המשתמש שלך.\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1549,7 +1566,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1573,17 +1591,13 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: שדות ארוכים מידי\n"
 
 #, fuzzy, c-format
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "ספרית שורש לא חוקית \"%s\"\n"
-
-#, fuzzy, c-format
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1617,14 +1631,13 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: Could not stat directory for target process\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
@@ -1645,6 +1658,10 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr ""
 
@@ -1663,6 +1680,10 @@ msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 #, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1685,12 +1706,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, fuzzy, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, fuzzy, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1750,6 +1771,9 @@ msgid ""
 "                                change to MAX_DAYS\n"
 msgstr ""
 
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+
 msgid "Old password: "
 msgstr ""
 
@@ -1764,6 +1788,11 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: שדות ארוכים מידי\n"
 
 msgid "New password: "
 msgstr ""
@@ -1800,6 +1829,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
+msgstr ""
+
+#, c-format
+msgid "%s: only root can use --stdin/-s option\n"
 msgstr ""
 
 #, c-format
@@ -1948,11 +1981,9 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
 msgid " ...killed.\n"
 msgstr ""
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
@@ -2011,6 +2042,10 @@ msgstr ""
 msgid "No passwd entry for user '%s'\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Overlong user name '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr ""
@@ -2052,6 +2087,12 @@ msgstr ""
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2136,6 +2177,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2188,6 +2234,11 @@ msgstr ""
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2315,6 +2366,12 @@ msgid ""
 msgstr ""
 
 msgid "Setting mailbox file permissions"
+msgstr ""
+
+msgid "Synchronize mailbox file"
+msgstr ""
+
+msgid "Closing mailbox file"
 msgstr ""
 
 #, c-format
@@ -2530,6 +2587,10 @@ msgid ""
 "account\n"
 msgstr ""
 
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2603,12 +2664,26 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr ""
 
 #, c-format
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr "%s: לא יכול לעדכן קובץ סיסמאות\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
+msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2707,7 +2782,7 @@ msgstr "%s: שדות ארוכים מידי\n"
 msgid "failed to stat edited file"
 msgstr ""
 
-msgid "failed to allocate memory"
+msgid "asprintf(3) failed"
 msgstr ""
 
 msgid "failed to create backup file"
@@ -2720,6 +2795,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "ספרית שורש לא חוקית \"%s\"\n"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "שימוש: id\n"

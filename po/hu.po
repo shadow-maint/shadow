@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -15,220 +15,6 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Generator: KBabel 1.11.2\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr ""
-
-msgid "Could not allocate space for config info.\n"
-msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "beállítási hiba - ismeretlen '%s' elem (értesítsd a rendszergazdát)\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr ""
-
-msgid "Password: "
-msgstr "Jelszó: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s jelszava: "
-
-#, fuzzy
-#| msgid "Cannot open the password file.\n"
-msgid "Cannot open audit interface.\n"
-msgstr "A jelszófájl nem nyitható meg.\n"
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr ""
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Could not set sename for %s\n"
-msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "%s elévülési információinak módosítása\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "%s: A felhasználóneved megállapítása sikertelen\n"
-
-#, fuzzy, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "%s: %d. sor: nem találom e felhasználót: %s\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: a memória elfogyott\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: %s fájl nem frissíthető\n"
-
-#, fuzzy, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: érvénytelen saját könyvtár: \"%s\"\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: %s könyvtár nem hozható létre\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: figyelem: nem törölhető: "
-
-#, fuzzy, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: figyelem: nem törölhető: "
-
-#, fuzzy, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s: átnevezés: %s"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: figyelem: nem törölhető: "
-
-#, fuzzy, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: %s könyvtár nem hozható létre\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: figyelem: nem törölhető: "
-
-#, fuzzy, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: %s fájl nem frissíthető\n"
-
-#, fuzzy, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: nem tudom frissíteni a \"shadow\" fájlt\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: átnevezés: %s"
-
-#, fuzzy, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: %s fájl nem nyitható meg\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -276,11 +62,20 @@ msgstr "Nem lehet a következő terminálra váltani: %s"
 msgid "%s: failed to unlock %s\n"
 msgstr "%s: túl hosszú mezők\n"
 
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: "
 msgstr "%s: %s\n"
 
 msgid ": "
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
 msgid "Environment overflow\n"
@@ -380,8 +175,15 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: nem kérhető le egyedi felhasználói azonosító\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
+msgid "configuration error - cannot parse %s value: '%s'"
 msgstr ""
+
+msgid "Could not allocate space for config info.\n"
+msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "beállítási hiba - ismeretlen '%s' elem (értesítsd a rendszergazdát)\n"
 
 #, fuzzy, c-format
 msgid "%s: Memory allocation failure\n"
@@ -410,7 +212,7 @@ msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: snprintf failed!\n"
+msgid "%s: stpeprintf failed!\n"
 msgstr "%s: nem tudom megnyitni a fájlt\n"
 
 #, fuzzy, c-format
@@ -421,8 +223,20 @@ msgstr "%s: %d. sor: chown sikertelen\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: %d. sor: chown sikertelen\n"
 
+#, fuzzy, c-format
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s: %d. sor: chown sikertelen\n"
+
 msgid "Too many logins.\n"
 msgstr "Túl sok bejelentkezés\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s bejelentkezés: "
 
 msgid "You have new mail."
 msgstr "Új leveled érkezett"
@@ -432,6 +246,14 @@ msgstr "Nincs leveled"
 
 msgid "You have mail."
 msgstr "Levelek kiolvasva"
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr ""
 
 msgid "no change"
 msgstr "nem változott"
@@ -444,9 +266,6 @@ msgstr "csak változások esetén"
 
 msgid "too similar"
 msgstr "túl hasonló"
-
-msgid "too simple"
-msgstr "túl egyszerű"
 
 msgid "rotated"
 msgstr "fordított"
@@ -494,6 +313,13 @@ msgid ""
 "%s\n"
 msgstr "passwd: pam_start() sikertelen, hibakód: %d\n"
 
+msgid "Password: "
+msgstr "Jelszó: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s jelszava: "
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Hibás jelszó ehhez: %s.\n"
@@ -519,16 +345,12 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, fuzzy, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: %s könyvtár nem hozható létre\n"
-
-#, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: %s könyvtár nem hozható létre\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, c-format
 msgid ""
@@ -543,6 +365,107 @@ msgid ""
 "method.\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "Cannot open the password file.\n"
+msgid "Cannot open audit interface.\n"
+msgstr "A jelszófájl nem nyitható meg.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Could not set serange for %s to %s\n"
+msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
+
+#, fuzzy, c-format
+msgid "Could not set sename for %s\n"
+msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "%s elévülési információinak módosítása\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: A felhasználóneved megállapítása sikertelen\n"
+
+#, fuzzy, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: %d. sor: nem találom e felhasználót: %s\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "nem lehet könyvtárat váltani ide: \"%s\"\n"
@@ -555,12 +478,94 @@ msgid "Cannot execute %s"
 msgstr "%s nem futtatható"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Érvénytelen gyökérkönyvtár: \"%s\"\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Nem lehet a gyökérkönyvtárba váltani: \"%s\"\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: a memória elfogyott\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: %s fájl nem frissíthető\n"
+
+#, fuzzy, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: érvénytelen saját könyvtár: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: figyelem: nem törölhető: "
+
+#, fuzzy, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: figyelem: nem törölhető: "
+
+#, fuzzy, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s: átnevezés: %s"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: figyelem: nem törölhető: "
+
+#, fuzzy, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: figyelem: nem törölhető: "
+
+#, fuzzy, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: %s fájl nem frissíthető\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: nem tudom frissíteni a \"shadow\" fájlt\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: átnevezés: %s"
+
+#, fuzzy, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: %s fájl nem nyitható meg\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -621,6 +626,9 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr ""
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -646,11 +654,14 @@ msgstr "Inaktív jelszó"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Hozzáférés elévülési dátum (ÉÉÉÉ-HH-NN)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "Utolsó jelszóváltás\t\t\t\t\t: "
-
 msgid "never"
 msgstr "soha"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Utolsó jelszóváltás\t\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "jelszóváltás kötelező"
@@ -855,6 +866,10 @@ msgid ""
 "                                or YESCRYPT crypt algorithms\n"
 msgstr ""
 
+#, c-format
+msgid "%s: no crypt method defined\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: -a kapcsoló CSAK -G-vel megy\n"
@@ -906,6 +921,15 @@ msgid "Login Shell"
 msgstr "Bejelentkező héj"
 
 #, fuzzy, c-format
+msgid "Cannot parse shell files: %s"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s: nem tudom létrehozni az új defaults fájlt\n"
+
+#, fuzzy, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Nem módosíthatod %s parancsértelmezőjét.\n"
 
@@ -916,6 +940,10 @@ msgstr "Bejelentkező héj ehhez: %s\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Érvénytelen bejegyzés: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s érvénytelen héj.\n"
 
 #, fuzzy, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1127,9 +1155,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr ""
-
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
 
@@ -1141,6 +1166,10 @@ msgstr "érvénytelen '%s' felhasználó név\n"
 #, fuzzy, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: %s rossz csoport név\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: %s fájl nem nyitható meg\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1385,7 +1414,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 
@@ -1479,11 +1508,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű \"sh\"-"
-"ból."
-
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -1516,14 +1540,6 @@ msgstr "Hibás bejelentkezés"
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: %d. sor: nem találom e felhasználót: %s\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-"%s bejelentkezés: "
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1561,7 +1577,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1586,17 +1603,13 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: túl hosszú mezők\n"
 
 #, fuzzy, c-format
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
-
-#, fuzzy, c-format
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1630,14 +1643,13 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
@@ -1659,6 +1671,10 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: érvénytelen '%s' felhasználónév\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: %d. sor: érvénytelen sor\n"
 
@@ -1677,6 +1693,10 @@ msgstr "%s: %d. sor: GID létrehozása sikertelen\n"
 #, fuzzy, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: %s felhasználó nem létezik\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: %s\n"
+msgstr "%s: átnevezés: %s"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1699,12 +1719,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d. sor: nem tudom frissíteni a bejegyzést\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
-
-#, fuzzy, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: %s létrehozása sikertelen\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
 
 #, fuzzy, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1764,6 +1784,9 @@ msgid ""
 "                                change to MAX_DAYS\n"
 msgstr ""
 
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+
 msgid "Old password: "
 msgstr "Régi jelszó: "
 
@@ -1782,6 +1805,11 @@ msgid ""
 msgstr ""
 "Add meg az új jelszót (minimum %d, maximum %d karakter)\n"
 "Biztonság: kérlek használj vegyesen Nagy és kisbetűket és számokat.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: túl hosszú mezők\n"
 
 msgid "New password: "
 msgstr "Új jelszó: "
@@ -1822,6 +1850,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: %s tár nem támogatott\n"
+
+#, c-format
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr ""
 
 #, c-format
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
@@ -1966,11 +1998,9 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
 msgid " ...killed.\n"
 msgstr ""
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
@@ -2058,6 +2088,11 @@ msgstr "Nem vagy jogosult ehhez: su %s\n"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Nincs 'root' jelszó bejegyzés"
 
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Overlong user name '%s'\n"
+msgstr "érvénytelen '%s' felhasználó név\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: terminálból kell futnia\n"
@@ -2101,6 +2136,12 @@ msgstr ""
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2187,6 +2228,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2239,6 +2285,11 @@ msgstr ""
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 
 #, c-format
@@ -2371,6 +2422,16 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "A postafiókfájl jogosultságainak beállítása"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "Postafiókfájl létrehozása"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "Postafiókfájl létrehozása"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
@@ -2595,6 +2656,10 @@ msgid ""
 "account\n"
 msgstr ""
 
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2668,12 +2733,26 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
 
 #, c-format
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr "%s: a jelszófájl frissítése sikertelen\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2780,8 +2859,9 @@ msgid "failed to stat edited file"
 msgstr "a postafiók átnevezése sikertelen"
 
 #, fuzzy
-msgid "failed to allocate memory"
-msgstr "a postafiók tulajdonosának váltása sikertelen"
+#| msgid "%s: can't open file\n"
+msgid "asprintf(3) failed"
+msgstr "%s: nem tudom megnyitni a fájlt\n"
 
 #, fuzzy
 msgid "failed to create backup file"
@@ -2794,6 +2874,22 @@ msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
+
+#~ msgid "too simple"
+#~ msgstr "túl egyszerű"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr ""
+#~ "Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű "
+#~ "\"sh\"-ból."
+
+#, fuzzy, c-format
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
+
+#, fuzzy
+#~ msgid "failed to allocate memory"
+#~ msgstr "a postafiók tulajdonosának váltása sikertelen"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Használat: id\n"
@@ -2809,10 +2905,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 #, fuzzy, c-format
 #~ msgid "%s: password expiry information changed.\n"
 #~ msgstr "Jelszó elévülési figyelmeztetés"
-
-#, c-format
-#~ msgid "invalid user name '%s'\n"
-#~ msgstr "érvénytelen '%s' felhasználó név\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Felhasználónév   Port     Innen            Legutóbb"

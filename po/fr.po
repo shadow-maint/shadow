@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-11-08 10:37-0600\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2023-04-26 20:04+0200\n"
 "Last-Translator: bubu <bubub@no-log.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -32,236 +32,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.2\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-"Plusieurs entrées nommées '%s' dans %s. Merci de réparer cela avec pwck ou "
-"grpck.\n"
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
-"la méthode de chiffrement n'est pas prise en charge par libcrypt ? (%s)\n"
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "erreur de paramétrage - imposible d'analyser la valeur de %s : '%s'"
-
-msgid "Could not allocate space for config info.\n"
-msgstr "Impossible d'allouer de l'espace pour l'information de paramétrage.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-"erreur de paramétrage - objet inconnu '%s' (avertir l'administrateur)\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr "%s : nscd ne s'est pas terminé normalement (signal %d)\n"
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr "%s : nscd a fini avec le statut %d\n"
-
-msgid "Password: "
-msgstr "Mot de passe :"
-
-#, c-format
-msgid "%s's Password: "
-msgstr "Mot de passe de %s :"
-
-msgid "Cannot open audit interface.\n"
-msgstr "Impossible d'ouvrir l'interface d'inspection.\n"
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-"%s : ne peut pas récupérer le contexte du processus SELinux précédent : %s\n"
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr "[libsemanage] : %s\n"
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr "Impossible de créer la prise en charge de la gestion par SELinux\n"
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr "La politique SELinux n'est pas prise en charge\n"
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr "Impossible de lire le dépot de politique de SELinux\n"
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr ""
-"Impossible d'établir la connexion avec la gestion de SELinux\n"
-" \n"
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr "Impossible de commencer la transaction SELinux\n"
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr "Impossible d'interroger seuser pour %s\n"
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr "Impossible de définir serange pour %s\n"
-
-#, c-format
-msgid "Could not set sename for %s\n"
-msgstr "Impossible de définir sename pour %s\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr "Impossible de modifier le mappage de connexion pour %s\n"
-
-#, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Impossible de créer de mappage de connexion SELinux pour %s\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr "Impossible de définir un nom pour %s\n"
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr "Impossible de définir un utilisateur SELinux pour %s\n"
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr "Impossible d'ajouter un mappage de connexion pour %s\n"
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr "Impossible d'initialiser la gestion SELinux\n"
-
-#, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "Impossible de créer la clé d'utilisateur SELinux\n"
-
-#, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "Impossible de vérifier l'utilisateur SELinux\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr "Impossible de modifier le mappage d'utilisateur SELinux\n"
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr "Impossible d'ajouter le mappage d'utilisateur SELinux\n"
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr ""
-"Impossible de valider une transaction SELinux\n"
-"\n"
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-"Le mappage de connexion n'est pas défini pour %s, OK si le mappage par "
-"défaut a été utilisé\n"
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-"Le mappage de connexion pour %s est défini dans la politique et ne peut pas "
-"être effacé\n"
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr "Impossible d'effacer le mappage de connexion pour %s"
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr ""
-"%s : plus de mémoire\n"
-"\n"
-
-#, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s : L'appel de stat sur %s a échoué : %s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s : %s n'est ni un répertoire, ni un lien symbolique.\n"
-
-#, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s : Impossible de lire le lien symbolique %s : %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s : Lien symbolique suspicieusement long : %s\n"
-
-#, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s : Impossible de créer le répertoire %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s : Impossible de changer le propriétaire de %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s : Impossible de changer le mode de %s : %s\n"
-
-#, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "%s : délier : %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s : Impossible de supprimer le répertoire %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s : Impossible de renommer %s en %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s : Impossible de supprimer %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s : Impossible de créer de lien symbolique %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s : Impossible de changer les propriétaires de %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s : lstat impossible %s : %s\n"
-
-#, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s : Attention, l'utilisateur %s n'a pas de fichier caché tcb.\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-"%s : Urgence : le fichier caché tcb de %s n'est pas un fichier régulier avec "
-"st_nlink=1\n"
-"Le compte est laissé vérouillé.\n"
-
-#, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s : mkdir : %s : %s\n"
-
-#, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s : Impossible d'ouvrir %s : %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -310,11 +80,23 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s : échec au déverrouillage de %s\n"
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"Plusieurs entrées nommées '%s' dans %s. Merci de réparer cela avec pwck ou "
+"grpck.\n"
+
+#, c-format
 msgid "%s: "
 msgstr "%s : "
 
 msgid ": "
 msgstr ": "
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
+"la méthode de chiffrement n'est pas prise en charge par libcrypt ? (%s)\n"
 
 msgid "Environment overflow\n"
 msgstr "Débordement de l'environnement\n"
@@ -440,8 +222,16 @@ msgstr ""
 "Utilisateur disponibles)\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr "%s : Pas assez d'arguments pour former %u mappages\n"
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr "erreur de paramétrage - imposible d'analyser la valeur de %s : '%s'"
+
+msgid "Could not allocate space for config info.\n"
+msgstr "Impossible d'allouer de l'espace pour l'information de paramétrage.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr ""
+"erreur de paramétrage - objet inconnu '%s' (avertir l'administrateur)\n"
 
 #, c-format
 msgid "%s: Memory allocation failure\n"
@@ -469,8 +259,9 @@ msgstr ""
 msgid "%s: Could not set caps\n"
 msgstr "%s : Impossible de définir les plafonds\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
+#, fuzzy, c-format
+#| msgid "%s: snprintf failed!\n"
+msgid "%s: stpeprintf failed!\n"
 msgstr "%s : échec de snprintf !\n"
 
 #, c-format
@@ -481,8 +272,21 @@ msgstr "%s : échec de l'ouverture de %s : %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s : échec de l'écriture sur %s : %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: open of %s failed: %s\n"
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s : échec de l'ouverture de %s : %s\n"
+
 msgid "Too many logins.\n"
 msgstr "Trop de connexions.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s login : "
 
 msgid "You have new mail."
 msgstr "Vous avez un nouveau courriel."
@@ -492,6 +296,14 @@ msgstr "Aucun courriel."
 
 msgid "You have mail."
 msgstr "Vous avez un courriel."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr "%s : nscd ne s'est pas terminé normalement (signal %d)\n"
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr "%s : nscd a fini avec le statut %d\n"
 
 msgid "no change"
 msgstr "aucun changement"
@@ -504,9 +316,6 @@ msgstr "changements de casse seulement"
 
 msgid "too similar"
 msgstr "trop similaire"
-
-msgid "too simple"
-msgstr "trop simple"
 
 msgid "rotated"
 msgstr "pivoté"
@@ -553,6 +362,13 @@ msgstr ""
 "%s : (utilisateur %s) pam_chauthtok() échec, erreur :\n"
 "%s\n"
 
+msgid "Password: "
+msgstr "Mot de passe :"
+
+#, c-format
+msgid "%s's Password: "
+msgstr "Mot de passe de %s :"
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Mot de passe incorrect pour %s.\n"
@@ -580,16 +396,13 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s : Impossible d'accéder au répertoire chroot %s : %s\n"
 
 #, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s : chdir impossible sur répertoire chroot %s : %s\n"
-
-#, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s : chroot impossible sur répertoire %s : %s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr "Impossible d'avoir des octets aléatoires.\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s : chdir impossible sur répertoire chroot %s : %s\n"
 
 #, c-format
 msgid ""
@@ -609,6 +422,115 @@ msgstr ""
 "réglages dans ENCRYPT_METHOD et la configuration correspondante à votre "
 "méthode de hachage choisie.\n"
 
+msgid "Cannot open audit interface.\n"
+msgstr "Impossible d'ouvrir l'interface d'inspection.\n"
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+"%s : ne peut pas récupérer le contexte du processus SELinux précédent : %s\n"
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr "[libsemanage] : %s\n"
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr "Impossible de créer la prise en charge de la gestion par SELinux\n"
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr "La politique SELinux n'est pas prise en charge\n"
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr "Impossible de lire le dépot de politique de SELinux\n"
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+"Impossible d'établir la connexion avec la gestion de SELinux\n"
+" \n"
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr "Impossible de commencer la transaction SELinux\n"
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr "Impossible d'interroger seuser pour %s\n"
+
+#, fuzzy, c-format
+#| msgid "Could not set serange for %s\n"
+msgid "Could not set serange for %s to %s\n"
+msgstr "Impossible de définir serange pour %s\n"
+
+#, c-format
+msgid "Could not set sename for %s\n"
+msgstr "Impossible de définir sename pour %s\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr "Impossible de modifier le mappage de connexion pour %s\n"
+
+#, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Impossible de créer de mappage de connexion SELinux pour %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr "Impossible de définir un nom pour %s\n"
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr "Impossible de définir un utilisateur SELinux pour %s\n"
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr "Impossible d'ajouter un mappage de connexion pour %s\n"
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr "Impossible d'initialiser la gestion SELinux\n"
+
+#, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "Impossible de créer la clé d'utilisateur SELinux\n"
+
+#, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "Impossible de vérifier l'utilisateur SELinux\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr "Impossible de modifier le mappage d'utilisateur SELinux\n"
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr "Impossible d'ajouter le mappage d'utilisateur SELinux\n"
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+"Impossible de valider une transaction SELinux\n"
+"\n"
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+"Le mappage de connexion n'est pas défini pour %s, OK si le mappage par "
+"défaut a été utilisé\n"
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+"Le mappage de connexion pour %s est défini dans la politique et ne peut pas "
+"être effacé\n"
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr "Impossible d'effacer le mappage de connexion pour %s"
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr ""
@@ -623,12 +545,99 @@ msgid "Cannot execute %s"
 msgstr "Impossible d'exécuter %s"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Répertoire root '%s' non valable\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Impossible de changer le répertoire root pour '%s'\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr ""
+"%s : plus de mémoire\n"
+"\n"
+
+#, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s : L'appel de stat sur %s a échoué : %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s : %s n'est ni un répertoire, ni un lien symbolique.\n"
+
+#, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s : Impossible de lire le lien symbolique %s : %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr "%s : Lien symbolique suspicieusement long : %s\n"
+
+#, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s : Impossible de créer le répertoire %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s : Impossible de changer le propriétaire de %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s : Impossible de changer le mode de %s : %s\n"
+
+#, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "%s : délier : %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s : Impossible de supprimer le répertoire %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s : Impossible de renommer %s en %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s : Impossible de supprimer %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s : Impossible de créer de lien symbolique %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s : Impossible de changer les propriétaires de %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s : lstat impossible %s : %s\n"
+
+#, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s : Attention, l'utilisateur %s n'a pas de fichier caché tcb.\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+"%s : Urgence : le fichier caché tcb de %s n'est pas un fichier régulier avec "
+"st_nlink=1\n"
+"Le compte est laissé vérouillé.\n"
+
+#, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s : mkdir : %s : %s\n"
+
+#, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s : Impossible d'ouvrir %s : %s\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -708,6 +717,11 @@ msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 " -R, --root CHROOT_DIR          répertoire dans lequel faire un chroot\n"
 
+#, fuzzy
+#| msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr "  -P, --prefix PREFIX_DI        préfixe de répertoire\n"
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -736,11 +750,14 @@ msgstr "Mot de passe inactif"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Date de fin de validité du compte (YYYY-MM-DD)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "Dernière modification du mot de passe\t\t\t\t\t :"
-
 msgid "never"
 msgstr "jamais"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Dernière modification du mot de passe\t\t\t\t\t :"
 
 msgid "password must be changed"
 msgstr "le mot de passe doit être changé"
@@ -971,6 +988,11 @@ msgstr ""
 "chiffrement\n"
 "                                   SHA ou BCRYPT ou YESCRYPT\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unsupported crypt method: %s\n"
+msgid "%s: no crypt method defined\n"
+msgstr "%s : la méthode de chiffrement n'est pas prise en charge : %s\n"
+
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s : le drapeau %s n'est autorisé qu'avec le drapeau %s\n"
@@ -1024,6 +1046,17 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Interpréteur de commandes de connexion"
 
+#, fuzzy, c-format
+#| msgid "%s: Cannot get the size of %s: %s\n"
+msgid "Cannot parse shell files: %s"
+msgstr "%s : Impossible d'obtenir la taille de %s : %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file: %s\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr ""
+"%s : impossible de créer le nouveau fichier des valeurs par défaut : %s\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Vous ne devriez pas changer le shell pour '%s'.\n"
@@ -1035,6 +1068,13 @@ msgstr "Changer l'interpréteur de commandes de connexion pour %s\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s : Entrée non valable : %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell\n"
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr ""
+"%s : %s est un interpréteur de commandes non valable\n"
+"\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1291,9 +1331,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  créer un compte système\n"
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr "  -P, --prefix PREFIX_DI        préfixe de répertoire\n"
-
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
 "  -U, --users USERS             liste des utilisateurs membres de ce groupe\n"
@@ -1305,6 +1342,11 @@ msgstr "Nom de membre utilisateur '%s' non valable\n"
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s : '%s' n'est pas un nom de groupe valable\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot open %s: %s\n"
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s : Impossible d'ouvrir %s : %s\n"
 
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1588,8 +1630,12 @@ msgstr ""
 "  -b, --before DAYS           afficher uniquement les enregistrements de "
 "journaux plus vieux que DAYS\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -C, --clear                   clear lastlog record of an user (usable "
+#| "only with -u)\n"
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 "  -C, --clear                   nettoyer l'enregistrement du dernier journal "
@@ -1697,11 +1743,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s : Ne pourra peut-être pas fonctionner sans racine effective\n"
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Pas d'entrée utmp. Vous devez exécuter (exec) \"login\" depuis le plus bas "
-"niveau \"sh\""
-
 #, c-format
 msgid ""
 "\n"
@@ -1736,14 +1777,6 @@ msgid "Cannot find user (%s)\n"
 msgstr "Impossible de trouver l'utilisateur (%s)\n"
 
 #, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-"%s login : "
-
-#, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s : échec de la création d'un processus enfant : %s"
 
@@ -1776,9 +1809,13 @@ msgstr "Utilisation : logoutd\n"
 msgid "%s: gid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s : éventail de GID [%lu-%lu)-> [%lu-%lu) non autorisé\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> "
+#| "<count> ] ... \n"
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 "utilisation : %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> "
 "<count> ] ... \n"
@@ -1805,21 +1842,21 @@ msgstr ""
 "%s : Echec de la politique %s setgroups : %s\n"
 " \n"
 
-#, c-format
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s : Impossible d'ouvrir le répertoire proc de la cible %u\n"
-
-#, c-format
-msgid "%s: Could not stat directory for target %u\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s : Impossible de statuer sur le répertoire de la cible %u\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
+#| "st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
-"%s : La cible %u appartient à un utilisateur différent : uid :%lu pw_uid :"
-"%lu st_uid :%lu, gid :%lu pw_gid :%lu st_gid :%lu\n"
+"%s : Le processus cible %u appartient à un utilisateur différent : uid :%lu "
+"pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Utilisation : newgrp [-] [group]\n"
@@ -1850,20 +1887,21 @@ msgstr "trop de groupes\n"
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
 msgstr "%s : gamme d'uid [%lu-%lu) -> [%lu-%lu) non autorisés\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> "
+#| "<count> ] ... \n"
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 "utilisation : %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
-"%s : Le processus cible %u appartient à un utilisateur différent : uid :%lu "
-"pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s : Impossible de statuer sur le répertoire de la cible %u\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr "  -b, --badname                autoriser les mauvais noms\n"
@@ -1886,6 +1924,10 @@ msgstr ""
 "%s : nom d'utilisateur '%s' non valable ; utilisez --badname pour l'ignorer\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s : ligne %d : ligne non valable\n"
 
@@ -1906,6 +1948,11 @@ msgstr "%s : ligne %d : impossible de créer le groupe\n"
 #, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s : ligne %d : l'utilisateur '%s' n'existe pas dans %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: unlink: %s: %s\n"
+msgid "%s: line %d: %s\n"
+msgstr "%s : délier : %s : %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1930,12 +1977,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s : ligne %d : impossible de mettre à jour l'entrée\n"
 
 #, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s : la préparation de la nouvelle entrée %s a échoué\n"
-
-#, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s : impossible de trouver une gamme utilisateur subordonnée\n"
+
+#, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s : la préparation de la nouvelle entrée %s a échoué\n"
 
 #, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -2022,6 +2069,13 @@ msgstr ""
 "de changer le mot de passe\n"
 "                                      à MAX_DAYS\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    show account aging information\n"
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+"  -l, --list                    afficher les informations sur l'âge des "
+"comptes\n"
+
 msgid "Old password: "
 msgstr "Ancien mot de passe :"
 
@@ -2043,6 +2097,11 @@ msgstr ""
 "caractères)\n"
 "Utilisez une combinaison de lettres minuscules et majuscules et des "
 "chiffres.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s : champs trop longs\n"
 
 msgid "New password: "
 msgstr "Nouveau mot de passe :"
@@ -2089,6 +2148,11 @@ msgid "%s: repository %s not supported\n"
 msgstr ""
 "%s : le dépot %s n'est pas pris en charge\n"
 " \n"
+
+#, fuzzy, c-format
+#| msgid "%s: only root can use the -g/--group option\n"
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr "%s : seul root peut utiliser l'option -g/--group\n"
 
 #, c-format
 msgid "%s: root is not authorized by SELinux to change the password of %s\n"
@@ -2250,11 +2314,9 @@ msgstr "%s : dysfonctionnement du signal\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Session terminée, fin de l'interpréteur de commande ...."
 
-#, c-format
 msgid " ...killed.\n"
 msgstr " ... tué.\n"
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " ... attente de la fin du processus enfant.\n"
 
@@ -2334,6 +2396,11 @@ msgstr "%s : Vous n'avez pas les autorisations superutilisateur\n"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Pas d'entrée de mot de passe pour l'utilisateur '%s'\n"
 
+#, fuzzy, c-format
+#| msgid "Invalid member username %s\n"
+msgid "Overlong user name '%s'\n"
+msgstr "Nom de membre utilisateur '%s' non valable\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s : doit être lancé depuis un terminal\n"
@@ -2377,6 +2444,13 @@ msgstr "%s : %s a été créé, mais n'a pas pu être supprimé\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr "%s : le paramétrage %s dans %s sera ignoré \n"
+
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr "%s : le paramétrage %s dans %s sera ignoré \n"
 
 #, c-format
@@ -2563,6 +2637,17 @@ msgstr ""
 " -Z, --selinux-user SEUSER      utiliser un SEUSER spécifique pour le "
 "mappage de l'utilisateur SELinux\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux "
+#| "user mapping\n"
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
+msgstr ""
+" -Z, --selinux-user SEUSER      utiliser un SEUSER spécifique pour le "
+"mappage de l'utilisateur SELinux\n"
+
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s : répertoire de base '%s' non valable\n"
@@ -2634,8 +2719,8 @@ msgstr "%s : échec de fermeture du fichier lastlog de l'UID %lu:%s\n"
 #, c-format
 msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
 msgstr ""
-"%s : impossible de réinitialiser l'entrée tallylog pour l'utilisateur \"%s"
-"\"\n"
+"%s : impossible de réinitialiser l'entrée tallylog pour l'utilisateur "
+"\"%s\"\n"
 
 #, c-format
 msgid "%s: failed to prepare the new %s entry\n"
@@ -2705,16 +2790,28 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr "Indiquez les permissions du fichier mailbox"
 
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "Création du fichier mailbox - boîte au lettres"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "Création du fichier mailbox - boîte au lettres"
+
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
-msgstr "%s attention: l'uid de %s, %d, est plus grand que SYS_UID_MAX %d\n\n"
+msgstr ""
+"%s attention: l'uid de %s, %d, est plus grand que SYS_UID_MAX %d\n"
+"\n"
 
 #, c-format
 msgid ""
 "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
-"%s attention: l'uid de %s, %d, est en dehors de la plage UID_MIN %d et UID_MAX "
-"%d .\n"
+"%s attention: l'uid de %s, %d, est en dehors de la plage UID_MIN %d et "
+"UID_MAX %d .\n"
 
 #, c-format
 msgid "%s: user '%s' already exists\n"
@@ -2982,6 +3079,16 @@ msgstr ""
 " -Z, --selinux-user SEUSER   nouveau mappage d'utilisateur SELinux pour le "
 "compte utilisateur\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+#| "account\n"
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+" -Z, --selinux-user SEUSER   nouveau mappage d'utilisateur SELinux pour le "
+"compte utilisateur\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -3081,8 +3188,22 @@ msgstr ""
 "%s : la copie de l'entrée lastlog de l'utilisateur %lu à l'utilisateur %lu a "
 "échoué : %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr ""
+"%s : la copie de l'entrée lastlog de l'utilisateur %lu à l'utilisateur %lu a "
+"échoué : %s\n"
+
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+"%s : échec à copier l'entrée de faillog de l'utilisateur %lu vers "
+"l'utilisateur %lu : %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
 "%s : échec à copier l'entrée de faillog de l'utilisateur %lu vers "
 "l'utilisateur %lu : %s\n"
@@ -3192,8 +3313,10 @@ msgstr "impossible de délier le fichier scratch"
 msgid "failed to stat edited file"
 msgstr "impossible de statuer sur le fichier édité"
 
-msgid "failed to allocate memory"
-msgstr "impossible d'allouer de la mémoire"
+#, fuzzy
+#| msgid "%s: snprintf failed!\n"
+msgid "asprintf(3) failed"
+msgstr "%s : échec de snprintf !\n"
 
 msgid "failed to create backup file"
 msgstr "échec à la création d'un fichier de sauvegarde"
@@ -3207,6 +3330,37 @@ msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
 "%s : impossible de trouver le répertoire tcb pour %s\n"
 "\n"
+
+#, c-format
+#~ msgid "%s: Not enough arguments to form %u mappings\n"
+#~ msgstr "%s : Pas assez d'arguments pour former %u mappages\n"
+
+#~ msgid "too simple"
+#~ msgstr "trop simple"
+
+#, c-format
+#~ msgid "Unable to obtain random bytes.\n"
+#~ msgstr "Impossible d'avoir des octets aléatoires.\n"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr ""
+#~ "Pas d'entrée utmp. Vous devez exécuter (exec) \"login\" depuis le plus "
+#~ "bas niveau \"sh\""
+
+#, c-format
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s : Impossible d'ouvrir le répertoire proc de la cible %u\n"
+
+#, c-format
+#~ msgid ""
+#~ "%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+#~ "%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+#~ msgstr ""
+#~ "%s : La cible %u appartient à un utilisateur différent : uid :%lu pw_uid :"
+#~ "%lu st_uid :%lu, gid :%lu pw_gid :%lu st_gid :%lu\n"
+
+#~ msgid "failed to allocate memory"
+#~ msgstr "impossible d'allouer de la mémoire"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Utilisation : id\n"
@@ -3283,9 +3437,9 @@ msgstr ""
 #~ "edit the shadow versions of those files, <filename>/etc/shadow</filename> "
 #~ "and <filename>/etc/gshadow</filename>, respectively. The programs will "
 #~ "set the appropriate locks to prevent file corruption. When looking for an "
-#~ "editor, the programs will first try the environment variable <envar>"
-#~ "$VISUAL</envar>, then the environment variable <envar>$EDITOR</envar>, "
-#~ "and finally the default editor, <citerefentry><refentrytitle>vi</"
+#~ "editor, the programs will first try the environment variable "
+#~ "<envar>$VISUAL</envar>, then the environment variable <envar>$EDITOR</"
+#~ "envar>, and finally the default editor, <citerefentry><refentrytitle>vi</"
 #~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>."
 #~ msgstr ""
 #~ "<command>vipw</command> et <command>vigr</command> permettent de modifier "
@@ -3431,9 +3585,9 @@ msgstr ""
 #~ "citerefentry>, <citerefentry><refentrytitle>group</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry><citerefentry condition=\"tcb"
-#~ "\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>passwd</"
+#~ "manvolnum></citerefentry><citerefentry "
+#~ "condition=\"tcb\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
 #~ "condition=\"tcb\"><refentrytitle>tcb</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
@@ -3443,9 +3597,9 @@ msgstr ""
 #~ "citerefentry>, <citerefentry><refentrytitle>group</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry><citerefentry condition=\"tcb"
-#~ "\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum></"
-#~ "citerefentry>, <citerefentry><refentrytitle>passwd</"
+#~ "manvolnum></citerefentry><citerefentry "
+#~ "condition=\"tcb\"><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry "
 #~ "condition=\"tcb\"><refentrytitle>tcb</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
@@ -3627,8 +3781,8 @@ msgstr ""
 #~| "remap=\"I\">,GROUPN</emphasis>]]]"
 #~ msgid ""
 #~ "<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUP1</"
-#~ "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap="
-#~ "\"I\">,GROUPN</emphasis>]]]"
+#~ "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis "
+#~ "remap=\"I\">,GROUPN</emphasis>]]]"
 #~ msgstr ""
 #~ "<option>-G</option>, <option>--groups</option>&nbsp;<replaceable>GROUPE1</"
 #~ "replaceable>[<emphasis remap=\"I\">,GROUPE2,...</emphasis>[<emphasis "
@@ -4287,13 +4441,14 @@ msgstr ""
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"subids"
-#~ "\"><citerefentry><refentrytitle>subgid</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>subuid</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
-#~ "phrase><citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -4308,13 +4463,14 @@ msgstr ""
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"subids"
-#~ "\"><citerefentry><refentrytitle>subgid</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>subuid</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
-#~ "phrase><citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 
 #~ msgid "userdel"
 #~ msgstr "userdel"
@@ -4324,8 +4480,8 @@ msgstr ""
 
 #~ msgid ""
 #~ "The <command>userdel</command> command modifies the system account files, "
-#~ "deleting all entries that refer to the user name <emphasis remap=\"I"
-#~ "\">LOGIN</emphasis>. The named user must exist."
+#~ "deleting all entries that refer to the user name <emphasis "
+#~ "remap=\"I\">LOGIN</emphasis>. The named user must exist."
 #~ msgstr ""
 #~ "La commande <command>userdel</command> modifie les fichiers "
 #~ "d'administration des comptes du système, en supprimant les entrées qui se "
@@ -4345,10 +4501,10 @@ msgstr ""
 #~ "still logged in. It also forces <command>userdel</command> to remove the "
 #~ "user's home directory and mail spool, even if another user uses the same "
 #~ "home directory or if the mail spool is not owned by the specified user. "
-#~ "If <option>USERGROUPS_ENAB</option> is defined to <emphasis remap=\"I"
-#~ "\">yes</emphasis> in <filename>/etc/login.defs</filename> and if a group "
-#~ "exists with the same name as the deleted user, then this group will be "
-#~ "removed, even if it is still the primary group of another user."
+#~ "If <option>USERGROUPS_ENAB</option> is defined to <emphasis "
+#~ "remap=\"I\">yes</emphasis> in <filename>/etc/login.defs</filename> and if "
+#~ "a group exists with the same name as the deleted user, then this group "
+#~ "will be removed, even if it is still the primary group of another user."
 #~ msgstr ""
 #~ "Cette option impose la suppression de l'utilisateur, même s'il est encore "
 #~ "connecté. Elle force également <command>userdel</command> à supprimer son "
@@ -4549,8 +4705,8 @@ msgstr ""
 #~ "être effectué sur le serveur NIS."
 
 #~ msgid ""
-#~ "If <option>USERGROUPS_ENAB</option> is defined to <emphasis remap=\"I"
-#~ "\">yes</emphasis> in <filename>/etc/login.defs</filename>, "
+#~ "If <option>USERGROUPS_ENAB</option> is defined to <emphasis "
+#~ "remap=\"I\">yes</emphasis> in <filename>/etc/login.defs</filename>, "
 #~ "<command>userdel</command> will delete the group with the same name as "
 #~ "the user. To avoid inconsistencies in the passwd and group databases, "
 #~ "<command>userdel</command> will check that this group is not used as a "
@@ -4597,8 +4753,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase condition="
-#~ "\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
@@ -4617,8 +4773,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase condition="
-#~ "\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
@@ -5477,13 +5633,14 @@ msgstr ""
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>newusers</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"subids"
-#~ "\"><citerefentry><refentrytitle>subgid</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>subuid</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
-#~ "phrase><citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>userdel</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -5498,13 +5655,14 @@ msgstr ""
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>newusers</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"subids"
-#~ "\"><citerefentry><refentrytitle>subgid</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>subuid</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
-#~ "phrase><citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</"
-#~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>usermod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>userdel</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
+#~ "<citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 
 #~ msgid "Creation, 1996"
 #~ msgstr "Création, 1996"
@@ -5781,10 +5939,10 @@ msgstr ""
 #~ "réussies ou non, sont enregistrées afin de détecter tout abus du système."
 
 #~ msgid ""
-#~ "The current environment is passed to the new shell. The value of <envar>"
-#~ "$PATH</envar> is reset to <filename>/bin:/usr/bin</filename> for normal "
-#~ "users, or <filename>/sbin:/bin:/usr/sbin:/usr/bin</filename> for the "
-#~ "superuser. This may be changed with the <option>ENV_PATH</option> and "
+#~ "The current environment is passed to the new shell. The value of "
+#~ "<envar>$PATH</envar> is reset to <filename>/bin:/usr/bin</filename> for "
+#~ "normal users, or <filename>/sbin:/bin:/usr/sbin:/usr/bin</filename> for "
+#~ "the superuser. This may be changed with the <option>ENV_PATH</option> and "
 #~ "<option>ENV_SUPATH</option> definitions in <filename>/etc/login.defs</"
 #~ "filename>."
 #~ msgstr ""
@@ -5971,9 +6129,10 @@ msgstr ""
 #~ "sauf pour les variables ci-dessus."
 
 #~ msgid ""
-#~ "If <option>--login</option> is used, the <envar>$TERM</envar>, <envar>"
-#~ "$COLORTERM</envar>, <envar>$DISPLAY</envar>, and <envar>$XAUTHORITY</"
-#~ "envar> environment variables are copied if they were set."
+#~ "If <option>--login</option> is used, the <envar>$TERM</envar>, "
+#~ "<envar>$COLORTERM</envar>, <envar>$DISPLAY</envar>, and "
+#~ "<envar>$XAUTHORITY</envar> environment variables are copied if they were "
+#~ "set."
 #~ msgstr ""
 #~ "Si <option>--login</option> est utilisée, les variables d'environnement "
 #~ "<envar>$TERM</envar>, <envar>$COLORTERM</envar>, <envar>$DISPLAY</envar> "
@@ -6383,8 +6542,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
@@ -6395,8 +6554,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 
 #~ msgid "shadow"
@@ -6898,14 +7057,15 @@ msgstr ""
 #~ "Convertir vers ou depuis les fichiers de mots de passe ou de groupe cachés"
 
 #~ msgid ""
-#~ "The <command>pwconv</command> command creates <emphasis remap=\"I"
-#~ "\">shadow</emphasis> from <emphasis remap=\"I\">passwd</emphasis> and an "
-#~ "optionally existing <emphasis remap=\"I\">shadow</emphasis>."
-#~ msgstr ""
-#~ "La commande <command>pwconv</command> crée le fichier <emphasis remap=\"I"
-#~ "\">shadow</emphasis> à partir du fichier <emphasis remap=\"I\">passwd</"
-#~ "emphasis> et d'un éventuel fichier <emphasis remap=\"I\">shadow</"
+#~ "The <command>pwconv</command> command creates <emphasis "
+#~ "remap=\"I\">shadow</emphasis> from <emphasis remap=\"I\">passwd</"
+#~ "emphasis> and an optionally existing <emphasis remap=\"I\">shadow</"
 #~ "emphasis>."
+#~ msgstr ""
+#~ "La commande <command>pwconv</command> crée le fichier <emphasis "
+#~ "remap=\"I\">shadow</emphasis> à partir du fichier <emphasis "
+#~ "remap=\"I\">passwd</emphasis> et d'un éventuel fichier <emphasis "
+#~ "remap=\"I\">shadow</emphasis>."
 
 #~ msgid ""
 #~ "<command>pwconv</command> does not work with <option>USE_TCB</option> "
@@ -6924,15 +7084,15 @@ msgstr ""
 #~ "dans <filename>login.defs</filename>)."
 
 #~ msgid ""
-#~ "The <command>pwunconv</command> command creates <emphasis remap=\"I"
-#~ "\">passwd</emphasis> from <emphasis remap=\"I\">passwd</emphasis> and "
-#~ "<emphasis remap=\"I\">shadow</emphasis> and then removes <emphasis remap="
-#~ "\"I\">shadow</emphasis>."
+#~ "The <command>pwunconv</command> command creates <emphasis "
+#~ "remap=\"I\">passwd</emphasis> from <emphasis remap=\"I\">passwd</"
+#~ "emphasis> and <emphasis remap=\"I\">shadow</emphasis> and then removes "
+#~ "<emphasis remap=\"I\">shadow</emphasis>."
 #~ msgstr ""
-#~ "La commande <command>pwunconv</command> crée le fichier <emphasis remap="
-#~ "\"I\">passwd</emphasis> à partir des fichiers <emphasis remap=\"I"
-#~ "\">passwd</emphasis> et <emphasis remap=\"I\">shadow</emphasis> puis "
-#~ "supprime <emphasis remap=\"I\">shadow</emphasis>."
+#~ "La commande <command>pwunconv</command> crée le fichier <emphasis "
+#~ "remap=\"I\">passwd</emphasis> à partir des fichiers <emphasis "
+#~ "remap=\"I\">passwd</emphasis> et <emphasis remap=\"I\">shadow</emphasis> "
+#~ "puis supprime <emphasis remap=\"I\">shadow</emphasis>."
 
 #~ msgid ""
 #~ "<command>pwunconv</command> does not work with <option>USE_TCB</option> "
@@ -6948,24 +7108,26 @@ msgstr ""
 #~ "defs</filename> avant d'utiliser <command>pwunconv</command>."
 
 #~ msgid ""
-#~ "The <command>grpconv</command> command creates <emphasis remap=\"I"
-#~ "\">gshadow</emphasis> from <emphasis remap=\"I\">group</emphasis> and an "
-#~ "optionally existing <emphasis remap=\"I\">gshadow</emphasis>."
+#~ "The <command>grpconv</command> command creates <emphasis "
+#~ "remap=\"I\">gshadow</emphasis> from <emphasis remap=\"I\">group</"
+#~ "emphasis> and an optionally existing <emphasis remap=\"I\">gshadow</"
+#~ "emphasis>."
 #~ msgstr ""
-#~ "La commande <command>grpconv</command> crée <emphasis remap=\"I"
-#~ "\">gshadow</emphasis> à partir de <emphasis remap=\"I\">group</emphasis> "
-#~ "et d'un éventuel fichier <emphasis remap=\"I\">gshadow</emphasis>."
+#~ "La commande <command>grpconv</command> crée <emphasis "
+#~ "remap=\"I\">gshadow</emphasis> à partir de <emphasis remap=\"I\">group</"
+#~ "emphasis> et d'un éventuel fichier <emphasis remap=\"I\">gshadow</"
+#~ "emphasis>."
 
 #~ msgid ""
-#~ "The <command>grpunconv</command> command creates <emphasis remap=\"I"
-#~ "\">group</emphasis> from <emphasis remap=\"I\">group</emphasis> and "
-#~ "<emphasis remap=\"I\">gshadow</emphasis> and then removes <emphasis remap="
-#~ "\"I\">gshadow</emphasis>."
+#~ "The <command>grpunconv</command> command creates <emphasis "
+#~ "remap=\"I\">group</emphasis> from <emphasis remap=\"I\">group</emphasis> "
+#~ "and <emphasis remap=\"I\">gshadow</emphasis> and then removes <emphasis "
+#~ "remap=\"I\">gshadow</emphasis>."
 #~ msgstr ""
-#~ "La commande <command>grpunconv</command> crée <emphasis remap=\"I"
-#~ "\">group</emphasis> à partir des fichiers <emphasis remap=\"I\">group</"
-#~ "emphasis> et <emphasis remap=\"I\">gshadow</emphasis> puis supprime "
-#~ "<emphasis remap=\"I\">gshadow</emphasis>."
+#~ "La commande <command>grpunconv</command> crée <emphasis "
+#~ "remap=\"I\">group</emphasis> à partir des fichiers <emphasis "
+#~ "remap=\"I\">group</emphasis> et <emphasis remap=\"I\">gshadow</emphasis> "
+#~ "puis supprime <emphasis remap=\"I\">gshadow</emphasis>."
 
 #~ msgid ""
 #~ "These four programs all operate on the normal and shadow password and "
@@ -7003,17 +7165,18 @@ msgstr ""
 #~ "la main."
 
 #~ msgid ""
-#~ "<command>pwconv</command> will use the values of <emphasis remap=\"I"
-#~ "\">PASS_MIN_DAYS</emphasis>, <emphasis remap=\"I\">PASS_MAX_DAYS</"
-#~ "emphasis>, and <emphasis remap=\"I\">PASS_WARN_AGE</emphasis> from "
-#~ "<filename>/etc/login.defs</filename> when adding new entries to "
-#~ "<filename>/etc/shadow</filename>."
+#~ "<command>pwconv</command> will use the values of <emphasis "
+#~ "remap=\"I\">PASS_MIN_DAYS</emphasis>, <emphasis "
+#~ "remap=\"I\">PASS_MAX_DAYS</emphasis>, and <emphasis "
+#~ "remap=\"I\">PASS_WARN_AGE</emphasis> from <filename>/etc/login.defs</"
+#~ "filename> when adding new entries to <filename>/etc/shadow</filename>."
 #~ msgstr ""
 #~ "Lors de l'ajout de nouvelles entrées dans <filename>/etc/shadow</"
 #~ "filename>, <command>pwconv</command> utilisera les valeurs de <emphasis "
-#~ "remap=\"I\">PASS_MIN_DAYS</emphasis>, <emphasis remap=\"I"
-#~ "\">PASS_MAX_DAYS</emphasis>, et <emphasis remap=\"I\">PASS_WARN_AGE</"
-#~ "emphasis> définies dans le fichier <filename>/etc/login.defs</filename>."
+#~ "remap=\"I\">PASS_MIN_DAYS</emphasis>, <emphasis "
+#~ "remap=\"I\">PASS_MAX_DAYS</emphasis>, et <emphasis "
+#~ "remap=\"I\">PASS_WARN_AGE</emphasis> définies dans le fichier <filename>/"
+#~ "etc/login.defs</filename>."
 
 #~ msgid ""
 #~ "Likewise <command>pwunconv</command> and <command>grpunconv</command> are "
@@ -7226,16 +7389,18 @@ msgstr ""
 
 #~ msgid ""
 #~ "By default, <command>pwck</command> operates on the files <filename>/etc/"
-#~ "passwd</filename> and <filename>/etc/shadow</filename><phrase condition="
-#~ "\"tcb\"> (or the files in <filename>/etc/tcb</filename>)</phrase>. The "
-#~ "user may select alternate files with the <replaceable>passwd</"
-#~ "replaceable> and <replaceable>shadow</replaceable> parameters."
+#~ "passwd</filename> and <filename>/etc/shadow</filename><phrase "
+#~ "condition=\"tcb\"> (or the files in <filename>/etc/tcb</filename>)</"
+#~ "phrase>. The user may select alternate files with the "
+#~ "<replaceable>passwd</replaceable> and <replaceable>shadow</replaceable> "
+#~ "parameters."
 #~ msgstr ""
 #~ "Par défaut, <command>pwck</command> opère sur les fichiers <filename>/etc/"
-#~ "passwd</filename> et <filename>/etc/shadow</filename><phrase condition="
-#~ "\"tcb> (ou les fichiers dans <filename>/etc/tcb</filename>)</phrase>. "
-#~ "L'utilisateur peut spécifier d'autres fichiers avec les paramètres "
-#~ "<replaceable>passwd</replaceable> et <replaceable>shadow</replaceable>."
+#~ "passwd</filename> et <filename>/etc/shadow</filename><phrase "
+#~ "condition=\"tcb> (ou les fichiers dans <filename>/etc/tcb</filename>)</"
+#~ "phrase>. L'utilisateur peut spécifier d'autres fichiers avec les "
+#~ "paramètres <replaceable>passwd</replaceable> et <replaceable>shadow</"
+#~ "replaceable>."
 
 #~ msgid ""
 #~ "Note that when <option>USE_TCB</option> is enabled, you cannot specify an "
@@ -7341,9 +7506,9 @@ msgstr ""
 #~ "The following entry allows access to user <emphasis remap=\"B\">jfh</"
 #~ "emphasis> on every port during weekdays from 9am to 5pm."
 #~ msgstr ""
-#~ "L'entrée suivante autorise l'accès à l'utilisateur <emphasis remap=\"B"
-#~ "\">jfh</emphasis> sur n'importe quel port pendant la semaine de 9 heures "
-#~ "à 17 heures."
+#~ "L'entrée suivante autorise l'accès à l'utilisateur <emphasis "
+#~ "remap=\"B\">jfh</emphasis> sur n'importe quel port pendant la semaine de "
+#~ "9 heures à 17 heures."
 
 #~ msgid "*:jfh:Wk0900-1700"
 #~ msgstr "*:jfh:Wk0900-1700"
@@ -7470,8 +7635,8 @@ msgstr ""
 #~ msgstr ""
 #~ "Le champ du répertoire personnel de l'utilisateur correspond au nom du "
 #~ "répertoire de travail initial. <command>login</command> utilise cette "
-#~ "information pour définir la valeur de la variable d'environnement <envar>"
-#~ "$HOME</envar>."
+#~ "information pour définir la valeur de la variable d'environnement "
+#~ "<envar>$HOME</envar>."
 
 #~ msgid ""
 #~ "The command interpreter field provides the name of the user's command "
@@ -7903,14 +8068,14 @@ msgstr ""
 
 #~ msgid ""
 #~ "It can take one of these values: <replaceable>DES</replaceable> "
-#~ "(default), <replaceable>MD5</replaceable><phrase condition=\"sha_crypt"
-#~ "\">, <replaceable>SHA256</replaceable>, <replaceable>SHA512</"
-#~ "replaceable></phrase>."
+#~ "(default), <replaceable>MD5</replaceable><phrase "
+#~ "condition=\"sha_crypt\">, <replaceable>SHA256</replaceable>, "
+#~ "<replaceable>SHA512</replaceable></phrase>."
 #~ msgstr ""
 #~ "Les valeurs suivantes sont acceptées : <replaceable>DES</replaceable> "
-#~ "(par défaut), <replaceable>MD5</replaceable><phrase condition=\"sha_crypt"
-#~ "\">, <replaceable>SHA256</replaceable>, <replaceable>SHA512</"
-#~ "replaceable></phrase>."
+#~ "(par défaut), <replaceable>MD5</replaceable><phrase "
+#~ "condition=\"sha_crypt\">, <replaceable>SHA256</replaceable>, "
+#~ "<replaceable>SHA512</replaceable></phrase>."
 
 #~ msgid ""
 #~ "Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option> "
@@ -8099,19 +8264,21 @@ msgstr ""
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"no_pam"
-#~ "\"><citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"no_pam\"><citerefentry><refentrytitle>login.defs</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
+#~ "phrase><citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>chpasswd</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>shadow</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, <phrase condition=\"no_pam"
-#~ "\"><citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
-#~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>usermod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
+#~ "manvolnum></citerefentry>, <phrase "
+#~ "condition=\"no_pam\"><citerefentry><refentrytitle>login.defs</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
+#~ "phrase><citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
+#~ "manvolnum></citerefentry>."
 
 #~ msgid "nologin"
 #~ msgstr "nologin"
@@ -8459,8 +8626,8 @@ msgstr ""
 #~ msgid ""
 #~ "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, <phrase condition="
-#~ "\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
@@ -8468,8 +8635,8 @@ msgstr ""
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</"
-#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, <phrase condition="
-#~ "\"subids\"><citerefentry><refentrytitle>subgid</"
+#~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"subids\"><citerefentry><refentrytitle>subgid</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>subuid</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, </phrase><citerefentry><refentrytitle>useradd</"
@@ -8540,9 +8707,10 @@ msgstr ""
 #~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry "
+#~ "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry></phrase>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>id</refentrytitle><manvolnum>1</manvolnum></"
 #~ "citerefentry>, <citerefentry><refentrytitle>login</"
@@ -8552,9 +8720,10 @@ msgstr ""
 #~ "refentrytitle><manvolnum>1</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry condition=\"gshadow\"><refentrytitle>gshadow</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry "
+#~ "condition=\"gshadow\"><refentrytitle>gshadow</refentrytitle><manvolnum>5</"
+#~ "manvolnum></citerefentry></phrase>."
 
 #~ msgid "enforce login time restrictions"
 #~ msgstr "Imposer les restrictions de connexion dans le temps"
@@ -8666,11 +8835,11 @@ msgstr ""
 #~ "The most restrictive setting is better achieved by not installing "
 #~ "<command>chfn</command> SUID."
 #~ msgstr ""
-#~ "Ce paramètre précise quelles valeurs du champ <emphasis remap=\"I"
-#~ "\">gecos</emphasis> du fichier <filename>passwd</filename> peuvent être "
-#~ "modifiées par les utilisateurs ordinaires à l'aide du programme "
-#~ "<command>chfn</command>. Il est constitué d'une combinaison de lettres "
-#~ "parmi <replaceable>f</replaceable>, <replaceable>r</replaceable>, "
+#~ "Ce paramètre précise quelles valeurs du champ <emphasis "
+#~ "remap=\"I\">gecos</emphasis> du fichier <filename>passwd</filename> "
+#~ "peuvent être modifiées par les utilisateurs ordinaires à l'aide du "
+#~ "programme <command>chfn</command>. Il est constitué d'une combinaison de "
+#~ "lettres parmi <replaceable>f</replaceable>, <replaceable>r</replaceable>, "
 #~ "<replaceable>w</replaceable> et <replaceable>h</replaceable>, "
 #~ "correspondant respectivement au nom complet, au numéro de bureau, au "
 #~ "numéro de téléphone professionnel et au numéro de téléphone personnel. "
@@ -8969,11 +9138,11 @@ msgstr ""
 #~ msgstr "chgpasswd"
 
 #~ msgid ""
-#~ "ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase condition="
-#~ "\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
+#~ "ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 #~ msgstr ""
-#~ "ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase condition="
-#~ "\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
+#~ "ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 
 #~ msgid "chpasswd"
 #~ msgstr "chpasswd"
@@ -9017,29 +9186,29 @@ msgstr ""
 #~ msgid ""
 #~ "<phrase condition=\"no_pam\">CONSOLE</phrase> CONSOLE_GROUPS DEFAULT_HOME "
 #~ "<phrase condition=\"no_pam\">ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ "
-#~ "ENVIRON_FILE</phrase> ERASECHAR FAIL_DELAY <phrase condition=\"no_pam"
-#~ "\">FAILLOG_ENAB</phrase> FAKE_SHELL <phrase condition=\"no_pam"
-#~ "\">FTMP_FILE</phrase> HUSHLOGIN_FILE <phrase condition=\"no_pam"
-#~ "\">ISSUE_FILE</phrase> KILLCHAR <phrase condition=\"no_pam"
-#~ "\">LASTLOG_ENAB</phrase> LOGIN_RETRIES <phrase condition=\"no_pam"
-#~ "\">LOGIN_STRING</phrase> LOGIN_TIMEOUT LOG_OK_LOGINS LOG_UNKFAIL_ENAB "
-#~ "<phrase condition=\"no_pam\">MAIL_CHECK_ENAB MAIL_DIR MAIL_FILE MOTD_FILE "
-#~ "NOLOGINS_FILE PORTTIME_CHECKS_ENAB QUOTAS_ENAB</phrase> TTYGROUP TTYPERM "
-#~ "TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT UMASK</phrase> "
-#~ "USERGROUPS_ENAB"
+#~ "ENVIRON_FILE</phrase> ERASECHAR FAIL_DELAY <phrase "
+#~ "condition=\"no_pam\">FAILLOG_ENAB</phrase> FAKE_SHELL <phrase "
+#~ "condition=\"no_pam\">FTMP_FILE</phrase> HUSHLOGIN_FILE <phrase "
+#~ "condition=\"no_pam\">ISSUE_FILE</phrase> KILLCHAR <phrase "
+#~ "condition=\"no_pam\">LASTLOG_ENAB</phrase> LOGIN_RETRIES <phrase "
+#~ "condition=\"no_pam\">LOGIN_STRING</phrase> LOGIN_TIMEOUT LOG_OK_LOGINS "
+#~ "LOG_UNKFAIL_ENAB <phrase condition=\"no_pam\">MAIL_CHECK_ENAB MAIL_DIR "
+#~ "MAIL_FILE MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB QUOTAS_ENAB</"
+#~ "phrase> TTYGROUP TTYPERM TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT "
+#~ "UMASK</phrase> USERGROUPS_ENAB"
 #~ msgstr ""
 #~ "<phrase condition=\"no_pam\">CONSOLE</phrase> CONSOLE_GROUPS DEFAULT_HOME "
 #~ "<phrase condition=\"no_pam\">ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ "
-#~ "ENVIRON_FILE</phrase> ERASECHAR FAIL_DELAY <phrase condition=\"no_pam"
-#~ "\">FAILLOG_ENAB</phrase> FAKE_SHELL <phrase condition=\"no_pam"
-#~ "\">FTMP_FILE</phrase> HUSHLOGIN_FILE <phrase condition=\"no_pam"
-#~ "\">ISSUE_FILE</phrase> KILLCHAR <phrase condition=\"no_pam"
-#~ "\">LASTLOG_ENAB</phrase> LOGIN_RETRIES <phrase condition=\"no_pam"
-#~ "\">LOGIN_STRING</phrase> LOGIN_TIMEOUT LOG_OK_LOGINS LOG_UNKFAIL_ENAB "
-#~ "<phrase condition=\"no_pam\">MAIL_CHECK_ENAB MAIL_DIR MAIL_FILE MOTD_FILE "
-#~ "NOLOGINS_FILE PORTTIME_CHECKS_ENAB QUOTAS_ENAB</phrase> TTYGROUP TTYPERM "
-#~ "TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT UMASK</phrase> "
-#~ "USERGROUPS_ENAB"
+#~ "ENVIRON_FILE</phrase> ERASECHAR FAIL_DELAY <phrase "
+#~ "condition=\"no_pam\">FAILLOG_ENAB</phrase> FAKE_SHELL <phrase "
+#~ "condition=\"no_pam\">FTMP_FILE</phrase> HUSHLOGIN_FILE <phrase "
+#~ "condition=\"no_pam\">ISSUE_FILE</phrase> KILLCHAR <phrase "
+#~ "condition=\"no_pam\">LASTLOG_ENAB</phrase> LOGIN_RETRIES <phrase "
+#~ "condition=\"no_pam\">LOGIN_STRING</phrase> LOGIN_TIMEOUT LOG_OK_LOGINS "
+#~ "LOG_UNKFAIL_ENAB <phrase condition=\"no_pam\">MAIL_CHECK_ENAB MAIL_DIR "
+#~ "MAIL_FILE MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB QUOTAS_ENAB</"
+#~ "phrase> TTYGROUP TTYPERM TTYTYPE_FILE <phrase condition=\"no_pam\">ULIMIT "
+#~ "UMASK</phrase> USERGROUPS_ENAB"
 
 #~ msgid "newgrp / sg"
 #~ msgstr "newgrp / sg"
@@ -9049,44 +9218,47 @@ msgstr ""
 
 #~| msgid ""
 #~| "ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB "
-#~| "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"sha_crypt"
-#~| "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase> SYS_GID_MAX "
-#~| "SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK"
+#~| "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~| "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</"
+#~| "phrase> SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN "
+#~| "UMASK"
 #~ msgid ""
 #~ "ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB "
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase> SUB_GID_COUNT "
-#~ "SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX "
-#~ "SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</"
+#~ "phrase> SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX "
+#~ "SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX "
+#~ "UID_MIN UMASK"
 #~ msgstr ""
 #~ "ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB "
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase> SUB_GID_COUNT "
-#~ "SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX "
-#~ "SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</"
+#~ "phrase> SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX "
+#~ "SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX "
+#~ "UID_MIN UMASK"
 
 #~ msgid ""
 #~ "ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB PASS_ALWAYS_WARN "
-#~ "PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
+#~ "PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 #~ msgstr ""
 #~ "ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB PASS_ALWAYS_WARN "
-#~ "PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase condition=\"sha_crypt"
-#~ "\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
+#~ "PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN <phrase "
+#~ "condition=\"sha_crypt\">SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS</phrase>"
 
 #~ msgid ""
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb"
-#~ "\">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>"
 #~ msgstr ""
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb"
-#~ "\">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>"
 
 #~ msgid ""
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb"
-#~ "\">USE_TCB</phrase>"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"tcb\">USE_TCB</phrase>"
 #~ msgstr ""
-#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase condition=\"tcb"
-#~ "\">USE_TCB</phrase>"
+#~ "PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE <phrase "
+#~ "condition=\"tcb\">USE_TCB</phrase>"
 
 #~ msgid ""
 #~ "<phrase condition=\"no_pam\">CONSOLE</phrase> CONSOLE_GROUPS DEFAULT_HOME "
@@ -9109,20 +9281,20 @@ msgstr ""
 #~| msgid ""
 #~| "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 #~| "PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX "
-#~| "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase condition=\"tcb"
-#~| "\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
+#~| "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase "
+#~| "condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
 #~ msgid ""
 #~ "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 #~ "PASS_MIN_DAYS PASS_WARN_AGE SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN "
 #~ "SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX "
-#~ "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase condition=\"tcb"
-#~ "\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
+#~ "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase "
+#~ "condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
 #~ msgstr ""
 #~ "CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS "
 #~ "PASS_MIN_DAYS PASS_WARN_AGE SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN "
 #~ "SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX "
-#~ "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase condition=\"tcb"
-#~ "\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
+#~ "SYS_UID_MIN UID_MAX UID_MIN UMASK <phrase "
+#~ "condition=\"tcb\">TCB_AUTH_GROUP TCB_SYMLINK USE_TCB</phrase>"
 
 #~ msgid ""
 #~ "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD USERGROUPS_ENAB "
@@ -9132,11 +9304,11 @@ msgstr ""
 #~ "<phrase condition=\"tcb\">TCB_SYMLINKS USE_TCB</phrase>"
 
 #~ msgid ""
-#~ "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase condition=\"tcb"
-#~ "\">TCB_SYMLINKS USE_TCB</phrase>"
+#~ "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase "
+#~ "condition=\"tcb\">TCB_SYMLINKS USE_TCB</phrase>"
 #~ msgstr ""
-#~ "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase condition=\"tcb"
-#~ "\">TCB_SYMLINKS USE_TCB</phrase>"
+#~ "MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP <phrase "
+#~ "condition=\"tcb\">TCB_SYMLINKS USE_TCB</phrase>"
 
 #~ msgid ""
 #~ "Much of the functionality that used to be provided by the shadow password "
@@ -9220,8 +9392,9 @@ msgstr ""
 #~ "<emphasis remap=\"I\">permission</emphasis>:<emphasis remap=\"I\">users</"
 #~ "emphasis>:<emphasis remap=\"I\">origins</emphasis>"
 #~ msgstr ""
-#~ "<emphasis remap=\"I\">permission</emphasis>:<emphasis remap=\"I"
-#~ "\">utilisateurs</emphasis>:<emphasis remap=\"I\">origines</emphasis>"
+#~ "<emphasis remap=\"I\">permission</emphasis>:<emphasis "
+#~ "remap=\"I\">utilisateurs</emphasis>:<emphasis remap=\"I\">origines</"
+#~ "emphasis>"
 
 #~ msgid ""
 #~ "The first field should be a \"<emphasis>+</emphasis>\" (access granted) "
@@ -9306,12 +9479,13 @@ msgstr ""
 #~ "terminal de l'utilisateur. <command>login</command> peut être spécifique "
 #~ "à l'interpréteur de commandes et ne devrait pas être invoqué comme un "
 #~ "sous-processus. Lorsqu'il est appelé depuis un interpréteur de commande, "
-#~ "<command>login</command> doit être exécuté comme <emphasis remap=\"B"
-#~ "\">>exec login</emphasis>, ce qui entraîne la sortie de l'interpréteur de "
-#~ "commandes en cours (et ainsi empêche le nouvel utilisateur connecté de "
-#~ "retourner à la session de l'appelant). L'exécution de <command>login</"
-#~ "command> depuis un interpréteur de commandes autre qu'un interpréteur de "
-#~ "commandes initial (« login shell ») produira un message d'erreur."
+#~ "<command>login</command> doit être exécuté comme <emphasis "
+#~ "remap=\"B\">>exec login</emphasis>, ce qui entraîne la sortie de "
+#~ "l'interpréteur de commandes en cours (et ainsi empêche le nouvel "
+#~ "utilisateur connecté de retourner à la session de l'appelant). "
+#~ "L'exécution de <command>login</command> depuis un interpréteur de "
+#~ "commandes autre qu'un interpréteur de commandes initial (« login shell ») "
+#~ "produira un message d'erreur."
 
 #~ msgid ""
 #~ "The user is then prompted for a password, where appropriate. Echoing is "
@@ -9366,11 +9540,11 @@ msgstr ""
 #~ "Vos identifiants d'utilisateur et de groupe seront définis en fonction "
 #~ "des valeurs spécifiées dans le fichier <filename>/etc/passwd</filename>. "
 #~ "Les valeurs des variables d'environnement <emphasis>$HOME</emphasis>, "
-#~ "<emphasis>$SHELL</emphasis>, <emphasis>$PATH</emphasis>, <emphasis>"
-#~ "$LOGNAME</emphasis>, et <emphasis>$MAIL</emphasis> seront définies en "
-#~ "fonction des champs appropriés de l'entrée qui vous correspond. Les "
-#~ "valeurs d'ulimit, d'umask et de nice pourront également être affectées en "
-#~ "fonction des entrées du champ GECOS."
+#~ "<emphasis>$SHELL</emphasis>, <emphasis>$PATH</emphasis>, "
+#~ "<emphasis>$LOGNAME</emphasis>, et <emphasis>$MAIL</emphasis> seront "
+#~ "définies en fonction des champs appropriés de l'entrée qui vous "
+#~ "correspond. Les valeurs d'ulimit, d'umask et de nice pourront également "
+#~ "être affectées en fonction des entrées du champ GECOS."
 
 #~ msgid ""
 #~ "On some installations, the environmental variable <envar>$TERM</envar> "
@@ -9823,8 +9997,8 @@ msgstr ""
 #~ "Print the lastlog records more recent than <emphasis remap=\"I\">DAYS</"
 #~ "emphasis>."
 #~ msgstr ""
-#~ "Afficher les entrées du fichier lastlog plus récentes que <emphasis remap="
-#~ "\"I\">JOURS</emphasis>."
+#~ "Afficher les entrées du fichier lastlog plus récentes que <emphasis "
+#~ "remap=\"I\">JOURS</emphasis>."
 
 #~| msgid ""
 #~| "<option>-u</option>, <option>--user</option><replaceable>LOGIN</"
@@ -10118,27 +10292,30 @@ msgstr ""
 #~ "répondu <emphasis>no</emphasis> sans l'intervention de l'utilisateur."
 
 #~ msgid ""
-#~ "Sort entries in <filename>/etc/group</filename><phrase condition=\"gshadow"
-#~ "\">and <filename>/etc/gshadow</filename></phrase> by GID."
+#~ "Sort entries in <filename>/etc/group</filename><phrase "
+#~ "condition=\"gshadow\">and <filename>/etc/gshadow</filename></phrase> by "
+#~ "GID."
 #~ msgstr ""
-#~ "Trie les entrées de <filename>/etc/group</filename> <phrase condition="
-#~ "\"gshadow\">et <filename>/etc/gshadow</filename></phrase> par GID."
+#~ "Trie les entrées de <filename>/etc/group</filename> <phrase "
+#~ "condition=\"gshadow\">et <filename>/etc/gshadow</filename></phrase> par "
+#~ "GID."
 
 #~ msgid ""
 #~ "By default, <command>grpck</command> operates on <filename>/etc/group</"
 #~ "filename><phrase condition=\"gshadow\">and <filename>/etc/gshadow</"
 #~ "filename></phrase>. The user may select alternate files with the "
-#~ "<emphasis remap=\"I\">group</emphasis><phrase condition=\"no_gshadow"
-#~ "\">parameter.</phrase><phrase condition=\"gshadow\">and <emphasis remap="
-#~ "\"I\">shadow</emphasis> parameters.</phrase>"
+#~ "<emphasis remap=\"I\">group</emphasis><phrase "
+#~ "condition=\"no_gshadow\">parameter.</phrase><phrase "
+#~ "condition=\"gshadow\">and <emphasis remap=\"I\">shadow</emphasis> "
+#~ "parameters.</phrase>"
 #~ msgstr ""
 #~ "Par défaut, <command>grpck</command> opère sur <filename>/etc/group</"
 #~ "filename> <phrase condition=\"gshadow\">et <filename>/etc/gshadow</"
 #~ "filename></phrase>. L'utilisateur peut préciser d'autres fichiers avec "
-#~ "<phrase condition=\"no_gshadow\">le paramètre</phrase><phrase condition="
-#~ "\"gshadow\">les paramètres</phrase> <emphasis remap=\"I\">group</"
-#~ "emphasis> <phrase condition=\"gshadow\"> et <emphasis remap=\"I\">shadow</"
-#~ "emphasis></phrase>."
+#~ "<phrase condition=\"no_gshadow\">le paramètre</phrase><phrase "
+#~ "condition=\"gshadow\">les paramètres</phrase> <emphasis "
+#~ "remap=\"I\">group</emphasis> <phrase condition=\"gshadow\"> et <emphasis "
+#~ "remap=\"I\">shadow</emphasis></phrase>."
 
 #~ msgid "one or more bad group entries"
 #~ msgstr "une entrée de groupe ou plus est incorrecte"
@@ -10159,8 +10336,8 @@ msgstr ""
 #~ msgid ""
 #~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase condition="
-#~ "\"gshadow\"><citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"gshadow\"><citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum>, </citerefentry>, </"
 #~ "phrase><citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwck</"
@@ -10170,8 +10347,8 @@ msgstr ""
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</"
-#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase condition="
-#~ "\"gshadow\"><citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"gshadow\"><citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum>, </citerefentry>, </"
 #~ "phrase><citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>pwck</"
@@ -10822,8 +10999,8 @@ msgstr ""
 #~ msgid ""
 #~ "The <command>gpasswd</command> command is used to administer <filename>/"
 #~ "etc/group</filename><phrase condition=\"gshadow\">, and <filename>/etc/"
-#~ "gshadow</filename></phrase>. Every group can have <phrase condition="
-#~ "\"gshadow\">administrators,</phrase> members and a password."
+#~ "gshadow</filename></phrase>. Every group can have <phrase "
+#~ "condition=\"gshadow\">administrators,</phrase> members and a password."
 #~ msgstr ""
 #~ "La commande <command>gpasswd</command> est utilisée pour administrer "
 #~ "<filename>/etc/group</filename><phrase condition=\"gshadow\"> et "
@@ -10999,8 +11176,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
@@ -11011,8 +11188,8 @@ msgstr ""
 #~ "refentrytitle><manvolnum>8</manvolnum></citerefentry>, "
 #~ "<citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>group</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase condition="
-#~ "\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry><phrase "
+#~ "condition=\"gshadow\">, <citerefentry><refentrytitle>gshadow</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry></phrase>."
 
 #~ msgid "faillog"
@@ -11365,11 +11542,11 @@ msgstr ""
 #~ "Chaque ligne est au format suivant :"
 
 #~ msgid ""
-#~ "<emphasis remap=\"I\">user_name</emphasis>:<emphasis remap=\"I"
-#~ "\">password</emphasis>"
+#~ "<emphasis remap=\"I\">user_name</emphasis>:<emphasis "
+#~ "remap=\"I\">password</emphasis>"
 #~ msgstr ""
-#~ "<emphasis remap=\"I\">nom_utilisateur</emphasis>:<emphasis remap=\"I"
-#~ "\">mot_de_passe</emphasis>"
+#~ "<emphasis remap=\"I\">nom_utilisateur</emphasis>:<emphasis "
+#~ "remap=\"I\">mot_de_passe</emphasis>"
 
 #~ msgid ""
 #~ "By default the passwords must be supplied in clear-text, and are "
@@ -11541,11 +11718,11 @@ msgstr ""
 #~ "ligne est au format suivant :"
 
 #~ msgid ""
-#~ "<emphasis remap=\"I\">group_name</emphasis>:<emphasis remap=\"I"
-#~ "\">password</emphasis>"
+#~ "<emphasis remap=\"I\">group_name</emphasis>:<emphasis "
+#~ "remap=\"I\">password</emphasis>"
 #~ msgstr ""
-#~ "<emphasis remap=\"I\">nom_utilisateur</emphasis>:<emphasis remap=\"I"
-#~ "\">mot_de_passe</emphasis>"
+#~ "<emphasis remap=\"I\">nom_utilisateur</emphasis>:<emphasis "
+#~ "remap=\"I\">mot_de_passe</emphasis>"
 
 #~ msgid ""
 #~ "By default the supplied password must be in clear-text, and is encrypted "
@@ -11611,12 +11788,12 @@ msgstr ""
 #~ "o</option> pour modifier les parties non précisées du champ GECOS."
 
 #~ msgid ""
-#~ "These fields must not contain any colons. Except for the <emphasis remap="
-#~ "\"I\">other</emphasis> field, they should not contain any comma or equal "
-#~ "sign. It is also recommended to avoid non-US-ASCII characters, but this "
-#~ "is only enforced for the phone numbers. The <emphasis remap=\"I\">other</"
-#~ "emphasis> field is used to store accounting information used by other "
-#~ "applications."
+#~ "These fields must not contain any colons. Except for the <emphasis "
+#~ "remap=\"I\">other</emphasis> field, they should not contain any comma or "
+#~ "equal sign. It is also recommended to avoid non-US-ASCII characters, but "
+#~ "this is only enforced for the phone numbers. The <emphasis "
+#~ "remap=\"I\">other</emphasis> field is used to store accounting "
+#~ "information used by other applications."
 #~ msgstr ""
 #~ "Ces champs ne doivent contenir aucun « : ». À l'exception du champ "
 #~ "<emphasis remap=\"I\">autre</emphasis>, ils ne doivent contenir aucune "
@@ -11710,9 +11887,9 @@ msgstr ""
 #~ "manière interactive, demandant à l'utilisateur d'entrer les valeurs "
 #~ "actuelles de chacun des champs. Entrer une nouvelle valeur pour la "
 #~ "modifier, ou de laisser une ligne blanche pour conserver la valeur "
-#~ "actuelle. La valeur actuelle est indiquée entre crochets (<emphasis remap="
-#~ "\"B\">[ ]</emphasis>). En l'absence d'option, <command>chfn</command> "
-#~ "opère sur l'utilisateur actuel."
+#~ "actuelle. La valeur actuelle est indiquée entre crochets (<emphasis "
+#~ "remap=\"B\">[ ]</emphasis>). En l'absence d'option, <command>chfn</"
+#~ "command> opère sur l'utilisateur actuel."
 
 #~ msgid ""
 #~ "<citerefentry><refentrytitle>chsh</refentrytitle><manvolnum>1</"
@@ -12044,16 +12221,16 @@ msgstr ""
 #~ msgid ""
 #~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <phrase condition="
-#~ "\"no_pam\"><citerefentry><refentrytitle>login.defs</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"no_pam\"><citerefentry><refentrytitle>login.defs</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
 #~ "phrase><citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>."
 #~ msgstr ""
 #~ "<citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</"
 #~ "manvolnum></citerefentry>, <citerefentry><refentrytitle>shadow</"
-#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <phrase condition="
-#~ "\"no_pam\"><citerefentry><refentrytitle>login.defs</"
+#~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, <phrase "
+#~ "condition=\"no_pam\"><citerefentry><refentrytitle>login.defs</"
 #~ "refentrytitle><manvolnum>5</manvolnum></citerefentry>, </"
 #~ "phrase><citerefentry><refentrytitle>usermod</refentrytitle><manvolnum>8</"
 #~ "manvolnum></citerefentry>."
@@ -12428,11 +12605,11 @@ msgstr ""
 #~ msgstr ""
 #~ "Par défaut, <command>grpck</command> opère sur les fichiers <filename>/"
 #~ "etc/group</filename> et <filename>/etc/gshadow</filename>. L'utilisateur "
-#~ "peut spécifier d'autres fichiers avec les paramètres <emphasis remap=\"I"
-#~ "\">group</emphasis> et <emphasis remap=\"I\">gshadow</emphasis>. De plus, "
-#~ "l'utilisateur peut exécuter les commandes en lecture seule en utilisant "
-#~ "l'option <option>-r</option>. Ceci aura pour conséquence de répondre "
-#~ "<emphasis>no</emphasis> à toutes les questions demandant des "
+#~ "peut spécifier d'autres fichiers avec les paramètres <emphasis "
+#~ "remap=\"I\">group</emphasis> et <emphasis remap=\"I\">gshadow</emphasis>. "
+#~ "De plus, l'utilisateur peut exécuter les commandes en lecture seule en "
+#~ "utilisant l'option <option>-r</option>. Ceci aura pour conséquence de "
+#~ "répondre <emphasis>no</emphasis> à toutes les questions demandant des "
 #~ "modifications, sans intervention de l'utilisateur. <command>Grpck</"
 #~ "command> permet aussi de trier les entrées de <filename>/etc/group</"
 #~ "filename> et <filename>/etc/gshadow</filename> par GID. Pour effectuer ce "

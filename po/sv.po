@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2011-11-25 22:08+0100\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -16,222 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-"Flera poster med namnet \"%s\" finns i %s. Rätta till detta med pwck eller "
-"grpck.\n"
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr "krypteringsmetoden stöds inte av libcrypt? (%s)\n"
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr "konfigurationsfel - kan inte tolka %s-värde: \"%s\""
-
-msgid "Could not allocate space for config info.\n"
-msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "konfigurationsfel - okänd post \"%s\" (informera administratören)\n"
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr ""
-
-msgid "Password: "
-msgstr "Lösenord: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s lösenord: "
-
-msgid "Cannot open audit interface.\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr ""
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Could not set sename for %s\n"
-msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr "Ändrar åldersinformationen för %s\n"
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
-
-#, fuzzy, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "%s: Kan inte grena användarskal\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: slut på minne\n"
-
-#, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: Kan inte ta status på %s: %s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr "%s: %s är varken en katalog eller symbolisk länk.\n"
-
-#, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "%s: Kan inte läsa symboliska länken %s: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Misstänkt lång symbolisk länk: %s\n"
-
-#, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "%s: Kan inte skapa katalogen %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "%s: Kan inte byta ägare för %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "%s: Kan inte ändra rättigheter för %s: %s\n"
-
-#, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr ""
-
-#, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "%s: Kan inte ta bort katalogen %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "%s: Kan inte byta namn på %s till %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "%s: Kan inte ta bort %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "%s: Kan inte skapa symboliska länken %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "%s: Kan inte byta ägare för %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: Kan inte lstat %s: %s\n"
-
-#, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: Varning, användaren %s har ingen tcb shadow-fil.\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-"%s: Nödläge:  tcb shadow för %s är inte en vanlig fil med st_nlink=1.\n"
-"Kontot lämnas kvar som låst.\n"
-
-#, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "%s: mkdir: %s: %s\n"
-
-#, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: Kan inte öppna %s: %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -280,11 +64,22 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s: misslyckades med att låsa upp %s\n"
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"Flera poster med namnet \"%s\" finns i %s. Rätta till detta med pwck eller "
+"grpck.\n"
+
+#, c-format
 msgid "%s: "
 msgstr "%s: "
 
 msgid ": "
 msgstr ": "
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr "krypteringsmetoden stöds inte av libcrypt? (%s)\n"
 
 msgid "Environment overflow\n"
 msgstr "Överskott av miljövariabler\n"
@@ -404,8 +199,15 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s: Kan inte få unikt UID (inga fler tillgängliga UID)\n"
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
-msgstr ""
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr "konfigurationsfel - kan inte tolka %s-värde: \"%s\""
+
+msgid "Could not allocate space for config info.\n"
+msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "konfigurationsfel - okänd post \"%s\" (informera administratören)\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Authentication failure\n"
@@ -433,9 +235,10 @@ msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
 msgid "%s: Could not set caps\n"
 msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: stpeprintf failed!\n"
+msgstr "%s: rad %d: chown %s misslyckades: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
@@ -447,8 +250,21 @@ msgstr "%s: rad %d: chown %s misslyckades: %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: rad %d: chown %s misslyckades: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: closing %s failed: %s\n"
+msgstr "%s: rad %d: chown %s misslyckades: %s\n"
+
 msgid "Too many logins.\n"
 msgstr "För många inloggningsförsök.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s inloggning: "
 
 msgid "You have new mail."
 msgstr "Du har ny post."
@@ -458,6 +274,14 @@ msgstr "Ingen post."
 
 msgid "You have mail."
 msgstr "Du har post."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr ""
 
 msgid "no change"
 msgstr "ingen ändring"
@@ -470,9 +294,6 @@ msgstr "endast ändring av gemener/versaler"
 
 msgid "too similar"
 msgstr "för likt"
-
-msgid "too simple"
-msgstr "för enkelt"
 
 msgid "rotated"
 msgstr "roterat"
@@ -519,6 +340,13 @@ msgid ""
 "%s\n"
 msgstr "passwd: pam_start() misslyckades, fel %d\n"
 
+msgid "Password: "
+msgstr "Lösenord: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s lösenord: "
+
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Felaktigt lösenord för %s.\n"
@@ -544,16 +372,12 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "%s: Kan inte skapa katalogen %s: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "%s: Kan inte skapa katalogen %s: %s\n"
-
-#, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: Misslyckades med att skapa tcb-katalog för %s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "%s: Kan inte skapa katalogen %s: %s\n"
 
 #, c-format
 msgid ""
@@ -570,6 +394,105 @@ msgid ""
 "method.\n"
 msgstr ""
 
+msgid "Cannot open audit interface.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Could not set serange for %s to %s\n"
+msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
+
+#, fuzzy, c-format
+msgid "Could not set sename for %s\n"
+msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr "Ändrar åldersinformationen för %s\n"
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
+
+#, fuzzy, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: Kan inte grena användarskal\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "Kunde inte byta katalog till \"%s\"\n"
@@ -582,12 +505,96 @@ msgid "Cannot execute %s"
 msgstr "Kunde inte starta %s"
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "Felaktig rotkatalog \"%s\"\n"
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "Kan inte ändra rotkatalog till \"%s\"\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: slut på minne\n"
+
+#, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: Kan inte ta status på %s: %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr "%s: %s är varken en katalog eller symbolisk länk.\n"
+
+#, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "%s: Kan inte läsa symboliska länken %s: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr "%s: Misstänkt lång symbolisk länk: %s\n"
+
+#, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "%s: Kan inte skapa katalogen %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "%s: Kan inte byta ägare för %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "%s: Kan inte ändra rättigheter för %s: %s\n"
+
+#, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "%s: Kan inte ta bort katalogen %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "%s: Kan inte byta namn på %s till %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "%s: Kan inte ta bort %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "%s: Kan inte skapa symboliska länken %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "%s: Kan inte byta ägare för %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: Kan inte lstat %s: %s\n"
+
+#, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: Varning, användaren %s har ingen tcb shadow-fil.\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+"%s: Nödläge:  tcb shadow för %s är inte en vanlig fil med st_nlink=1.\n"
+"Kontot lämnas kvar som låst.\n"
+
+#, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "%s: mkdir: %s: %s\n"
+
+#, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: Kan inte öppna %s: %s\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -667,6 +674,9 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr ""
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -694,11 +704,14 @@ msgstr "Lösenordet inaktivt"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Utlöpsdatum för kontot (ÅÅÅÅ-MM-DD)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr "Senaste lösenordsändringen\t\t\t\t: "
-
 msgid "never"
 msgstr "aldrig"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Senaste lösenordsändringen\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "lösenordet måste ändras"
@@ -918,6 +931,11 @@ msgstr ""
 "  -s, --sha-rounds              antal SHA-rundor för SHA*-\n"
 "                                krypteringsalgoritmerna\n"
 
+#, fuzzy, c-format
+#| msgid "%s: unsupported crypt method: %s\n"
+msgid "%s: no crypt method defined\n"
+msgstr "%s: krypteringsmetoden stöds inte: %s\n"
+
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: flaggan %s tillåts endast med flaggan %s\n"
@@ -969,6 +987,16 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Inloggningsskal"
 
+#, fuzzy, c-format
+#| msgid "%s: Cannot get the size of %s: %s\n"
+msgid "Cannot parse shell files: %s"
+msgstr "%s: Kan inte få storleken för %s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create new defaults file\n"
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "%s: kan inte skapa ny standardfil\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr "Du får inte ändra skalet för \"%s\".\n"
@@ -980,6 +1008,11 @@ msgstr "Ändrar inloggningsskal för %s\n"
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Ogiltig post: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is an invalid shell\n"
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s: %s är ett ogiltigt skal\n"
 
 #, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1214,9 +1247,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  skapa ett systemkonto\n"
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr ""
-
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
 msgid "  -U, --users USERS             list of user members of this group\n"
@@ -1230,6 +1260,11 @@ msgstr "ogiltigt användarnamn \"%s\"\n"
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: \"%s\" är inte ett giltigt gruppnamn\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Cannot open %s: %s\n"
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: Kan inte öppna %s: %s\n"
 
 #, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1513,7 +1548,7 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 "  -a, --all                     visa faillog-poster för alla användare\n"
@@ -1615,9 +1650,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Kan inte fungera utan en användbar root\n"
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Ingen utmp post.  Du måste köra \"login\" från den lägsta nivån \"sh\""
-
 #, c-format
 msgid ""
 "\n"
@@ -1650,14 +1682,6 @@ msgstr "Inloggning misslyckad"
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: Kan inte grena användarskal\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
-"\n"
-"%s inloggning: "
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1694,7 +1718,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1721,19 +1746,14 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: misslyckades med att låsa upp %s\n"
 
 #, fuzzy, c-format
-#| msgid "%s: failed to find tcb directory for %s\n"
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "%s: misslyckades med att hitta tcb-katalog för %s\n"
-
-#, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "%s: Misslyckades med att skapa tcb-katalog för %s\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1766,14 +1786,14 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: Failed to create tcb directory for %s\n"
+msgid "%s: Could not stat directory for target process\n"
+msgstr "%s: Misslyckades med att skapa tcb-katalog för %s\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1797,6 +1817,10 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: ogiltigt användarnamn \"%s\"\n"
 
 #, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
+msgstr ""
+
+#, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: rad %d: ogiltig rad\n"
 
@@ -1817,6 +1841,11 @@ msgstr "%s: rad %d: kan inte skapa grupp\n"
 #, c-format
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: rad %d: användaren \"%s\" finns inte i %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: rename: %s: %s\n"
+msgid "%s: line %d: %s\n"
+msgstr "%s: byt namn: %s: %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1840,12 +1869,12 @@ msgid "%s: line %d: can't update entry\n"
 msgstr "%s: rad %d: kan inte uppdatera post\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
-
-#, fuzzy, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr "%s: kan inte skapa användare\n"
+
+#, fuzzy, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: misslyckades med att förbereda den nya %s-posten \"%s\"\n"
 
 #, fuzzy, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1923,6 +1952,11 @@ msgstr ""
 "lösenords-\n"
 "                                ändring till MAX_DAGAR\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    show account aging information\n"
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr "  -l, --list                    visa åldringsinformation om kontot\n"
+
 msgid "Old password: "
 msgstr "Gammalt lösenord: "
 
@@ -1941,6 +1975,11 @@ msgid ""
 msgstr ""
 "Ange det nya lösenordet (minimum %d, maximum %d tecken)\n"
 "Använd en kombination av gemener, versaler och siffror.\n"
+
+#, fuzzy
+#| msgid "%s: fields too long\n"
+msgid "Password is too long.\n"
+msgstr "%s: fälten för långa\n"
 
 msgid "New password: "
 msgstr "Nytt lösenord: "
@@ -1985,6 +2024,11 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: repository %s stöds inte\n"
+
+#, fuzzy, c-format
+#| msgid "%s: only root can use the -g/--group option\n"
+msgid "%s: only root can use --stdin/-s option\n"
+msgstr "%s: endast root kan använda flaggan -g/--group\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s is not authorized to change the password of %s\n"
@@ -2139,11 +2183,9 @@ msgstr "%s: signalfel\n"
 msgid "Session terminated, terminating shell..."
 msgstr "Sessionen terminerad, terminerar skal..."
 
-#, c-format
 msgid " ...killed.\n"
 msgstr " ...dödad.\n"
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr " ...väntar på att barn ska termineras.\n"
 
@@ -2230,6 +2272,11 @@ msgstr "%s: Du är inte behörig att använda su för tillfället\n"
 msgid "No passwd entry for user '%s'\n"
 msgstr "Ingen lösenordspost för \"root\""
 
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "Overlong user name '%s'\n"
+msgstr "ogiltigt användarnamn \"%s\"\n"
+
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: måste köras från en terminal\n"
@@ -2273,6 +2320,13 @@ msgstr "%s: %s skapades men kunde inte tas bort\n"
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr "%s: %s-konfigurationen i %s kommer att ignoreras\n"
+
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr "%s: %s-konfigurationen i %s kommer att ignoreras\n"
 
 #, fuzzy, c-format
@@ -2374,6 +2428,11 @@ msgstr ""
 "kontot\n"
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2440,6 +2499,11 @@ msgstr ""
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 
 #, c-format
@@ -2588,6 +2652,16 @@ msgstr ""
 
 msgid "Setting mailbox file permissions"
 msgstr "Ställer in rättigheter för postlådefil"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Synchronize mailbox file"
+msgstr "Skapar postlådefil"
+
+#, fuzzy
+#| msgid "Creating mailbox file"
+msgid "Closing mailbox file"
+msgstr "Skapar postlådefil"
 
 #, c-format
 msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
@@ -2849,6 +2923,12 @@ msgid ""
 msgstr ""
 "  -s, --shell SHELL             nytt inloggningsskal för användarkontot\n"
 
+#, fuzzy
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+"  -s, --shell SHELL             nytt inloggningsskal för användarkontot\n"
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2928,14 +3008,39 @@ msgstr ""
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: kunde inte byta namn på katalogen %s till %s\n"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: The previous home directory (%s) was not a directory. It is not "
+#| "removed and no home directories are created.\n"
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+"%s: Tidigare hemkatalogen (%s) var inte en katalog. Den har inte tagits bort "
+"och inga hemkataloger har skapats.\n"
+
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
 "%s: misslyckades med att kopiera lastlog-posten för användaren %lu till "
 "användaren %lu: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr ""
+"%s: misslyckades med att kopiera lastlog-posten för användaren %lu till "
+"användaren %lu: %s\n"
+
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+"%s: misslyckades med att kopiera faillog-posten för användaren %lu till "
+"användaren %lu: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
 "%s: misslyckades med att kopiera faillog-posten för användaren %lu till "
 "användaren %lu: %s\n"
@@ -3041,8 +3146,8 @@ msgstr ""
 msgid "failed to stat edited file"
 msgstr "misslyckades med att ta status på redigerade filen"
 
-msgid "failed to allocate memory"
-msgstr "misslyckades att allokera minne"
+msgid "asprintf(3) failed"
+msgstr ""
 
 msgid "failed to create backup file"
 msgstr "misslyckades med att skapa säkerhetskopia"
@@ -3054,6 +3159,21 @@ msgstr "%s: kan inte återställa %s: %s (dina ändringar finns i %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: misslyckades med att hitta tcb-katalog för %s\n"
+
+#~ msgid "too simple"
+#~ msgstr "för enkelt"
+
+#~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+#~ msgstr ""
+#~ "Ingen utmp post.  Du måste köra \"login\" från den lägsta nivån \"sh\""
+
+#, fuzzy, c-format
+#~| msgid "%s: failed to find tcb directory for %s\n"
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "%s: misslyckades med att hitta tcb-katalog för %s\n"
+
+#~ msgid "failed to allocate memory"
+#~ msgstr "misslyckades att allokera minne"
 
 #~ msgid "Usage: id\n"
 #~ msgstr "Användning: id\n"
@@ -3069,10 +3189,6 @@ msgstr "%s: misslyckades med att hitta tcb-katalog för %s\n"
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
 #~ msgstr "%s: information om lösenordets utgång har ändrats.\n"
-
-#, c-format
-#~ msgid "invalid user name '%s'\n"
-#~ msgstr "ogiltigt användarnamn \"%s\"\n"
 
 #~ msgid "Username         Port     From             Latest"
 #~ msgstr "Användarnamn      Port     Från             Senast"

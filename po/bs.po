@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2022-07-27 22:49+0800\n"
+"POT-Creation-Date: 2024-03-14 18:23-0500\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -16,218 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
-
-#, c-format
-msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
-
-#, c-format
-msgid "configuration error - cannot parse %s value: '%s'"
-msgstr ""
-
-msgid "Could not allocate space for config info.\n"
-msgstr ""
-
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-
-#, c-format
-msgid "%s: nscd did not terminate normally (signal %d)\n"
-msgstr ""
-
-#, c-format
-msgid "%s: nscd exited with status %d\n"
-msgstr ""
-
-msgid "Password: "
-msgstr "Šifra:"
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s's Šifra: "
-
-msgid "Cannot open audit interface.\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can not get previous SELinux process context: %s\n"
-msgstr ""
-
-#, c-format
-msgid "[libsemanage]: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create SELinux management handle\n"
-msgstr ""
-
-#, c-format
-msgid "SELinux policy not managed\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot read SELinux policy store\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot establish SELinux management connection\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot begin SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Could not query seuser for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set serange for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set sename for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not modify login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create SELinux login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set name for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not set SELinux user for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Could not add login mapping for %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot init SELinux management\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot create SELinux user key\n"
-msgstr "%s: nepoznat član %s\n"
-
-#, fuzzy, c-format
-msgid "Cannot verify the SELinux user\n"
-msgstr "%s: nepoznat član %s\n"
-
-#, c-format
-msgid "Cannot modify SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot add SELinux user mapping\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot commit SELinux transaction\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
-msgstr ""
-
-#, c-format
-msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
-msgstr ""
-
-#, c-format
-msgid "Could not delete login mapping for %s"
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot stat %s: %s\n"
-msgstr "%s: nepoznat član %s\n"
-
-#, c-format
-msgid "%s: %s is neither a directory, nor a symlink.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot read symbolic link %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Cannot create directory %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owner of %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change mode of %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: unlink: %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove directory %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot rename %s to %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot remove %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot create symbolic link %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot change owners of %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot lstat %s: %s\n"
-msgstr "%s: nepoznat član %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Warning, user %s has no tcb shadow file.\n"
-msgstr "%s: grupa %s postoji\n"
-
-#, c-format
-msgid ""
-"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
-"The account is left locked.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: mkdir: %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Cannot open %s: %s\n"
-msgstr "%s: nepoznat član %s\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -276,10 +64,19 @@ msgid "%s: failed to unlock %s\n"
 msgstr ""
 
 #, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: "
 msgstr ""
 
 msgid ": "
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
 msgid "Environment overflow\n"
@@ -378,7 +175,14 @@ msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr ""
 
 #, c-format
-msgid "%s: Not enough arguments to form %u mappings\n"
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
+msgid "Could not allocate space for config info.\n"
+msgstr ""
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -406,9 +210,9 @@ msgstr ""
 msgid "%s: Could not set caps\n"
 msgstr "%s: nepoznat član %s\n"
 
-#, c-format
-msgid "%s: snprintf failed!\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: stpeprintf failed!\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
 msgid "%s: open of %s failed: %s\n"
@@ -418,8 +222,18 @@ msgstr "nepoznata grupa: %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
+#, fuzzy, c-format
+msgid "%s: closing %s failed: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
 msgid "Too many logins.\n"
 msgstr "Previše prijavljivanja.\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
 
 msgid "You have new mail."
 msgstr "Imate novu poštu."
@@ -429,6 +243,14 @@ msgstr "Nema pošte."
 
 msgid "You have mail."
 msgstr "Imate poštu."
+
+#, c-format
+msgid "%s: nscd did not terminate normally (signal %d)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: nscd exited with status %d\n"
+msgstr ""
 
 msgid "no change"
 msgstr ""
@@ -440,9 +262,6 @@ msgid "case changes only"
 msgstr ""
 
 msgid "too similar"
-msgstr ""
-
-msgid "too simple"
 msgstr ""
 
 msgid "rotated"
@@ -488,6 +307,13 @@ msgid ""
 "%s\n"
 msgstr ""
 
+msgid "Password: "
+msgstr "Šifra:"
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s's Šifra: "
+
 #, fuzzy, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Mijenjam šifru za grupu %s\n"
@@ -513,16 +339,12 @@ msgid "%s: cannot access chroot directory %s: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: cannot chdir to chroot directory %s: %s\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
-#, c-format
-msgid "Unable to obtain random bytes.\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: cannot chdir in chroot directory %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid ""
@@ -537,6 +359,105 @@ msgid ""
 "method.\n"
 msgstr ""
 
+msgid "Cannot open audit interface.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can not get previous SELinux process context: %s\n"
+msgstr ""
+
+#, c-format
+msgid "[libsemanage]: %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux management handle\n"
+msgstr ""
+
+#, c-format
+msgid "SELinux policy not managed\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot read SELinux policy store\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot establish SELinux management connection\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot begin SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Could not query seuser for %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Could not set serange for %s to %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, c-format
+msgid "Could not set sename for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not modify login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot create SELinux login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set name for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not set SELinux user for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Could not add login mapping for %s\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot init SELinux management\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot create SELinux user key\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, fuzzy, c-format
+msgid "Cannot verify the SELinux user\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, c-format
+msgid "Cannot modify SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot add SELinux user mapping\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot commit SELinux transaction\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
+msgstr ""
+
+#, c-format
+msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
+msgstr ""
+
+#, c-format
+msgid "Could not delete login mapping for %s"
+msgstr ""
+
 #, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr ""
@@ -549,12 +470,94 @@ msgid "Cannot execute %s"
 msgstr ""
 
 #, c-format
+msgid "Maximum subsystem depth reached\n"
+msgstr ""
+
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr ""
 
 #, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr ""
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot stat %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, c-format
+msgid "%s: %s is neither a directory, nor a symlink.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot read symbolic link %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, c-format
+msgid "%s: Suspiciously long symlink: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Cannot create directory %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owner of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change mode of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: unlink: %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove directory %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot rename %s to %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot remove %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot create symbolic link %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot change owners of %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot lstat %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Warning, user %s has no tcb shadow file.\n"
+msgstr "%s: grupa %s postoji\n"
+
+#, c-format
+msgid ""
+"%s: Emergency: %s's tcb shadow is not a regular file with st_nlink=1.\n"
+"The account is left locked.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: mkdir: %s: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: Cannot open %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
 
 #, fuzzy, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -613,6 +616,9 @@ msgstr ""
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr ""
+
 msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
@@ -638,12 +644,15 @@ msgstr "Šifra neaktivna"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Datum isteka računa (GGGG-MM-DD)"
 
-msgid "Last password change\t\t\t\t\t: "
-msgstr ""
-
 #, fuzzy
 msgid "never"
 msgstr "Nikad"
+
+msgid "future"
+msgstr ""
+
+msgid "Last password change\t\t\t\t\t: "
+msgstr ""
 
 msgid "password must be changed"
 msgstr ""
@@ -851,6 +860,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "%s: no crypt method defined\n"
+msgstr ""
+
+#, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr ""
 
@@ -900,6 +913,14 @@ msgstr ""
 msgid "Login Shell"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Cannot parse shell files: %s"
+msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
+msgid "Cannot evaluate entries in shell files: %s"
+msgstr "nepoznata grupa: %s\n"
+
 #, c-format
 msgid "You may not change the shell for '%s'.\n"
 msgstr ""
@@ -911,6 +932,10 @@ msgstr ""
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Warning: %s is an invalid shell\n"
+msgstr "%s: grupa %s postoji\n"
 
 #, fuzzy, c-format
 msgid "%s: %s is an invalid shell\n"
@@ -1120,9 +1145,6 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-msgid "  -P, --prefix PREFIX_DI        directory prefix\n"
-msgstr ""
-
 msgid "  -U, --users USERS             list of user members of this group\n"
 msgstr ""
 
@@ -1133,6 +1155,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: grupa %s postoji\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot open %s: %s\n"
+msgstr "%s: nepoznat član %s\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid group ID '%s'\n"
@@ -1378,7 +1404,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -C, --clear                   clear lastlog record of an user (usable only "
+"  -C, --clear                   clear lastlog record of a user (usable only "
 "with -u)\n"
 msgstr ""
 
@@ -1467,9 +1493,6 @@ msgstr ""
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr ""
 
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-
 #, c-format
 msgid ""
 "\n"
@@ -1500,12 +1523,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot find user (%s)\n"
 msgstr "%s: nepoznat član %s\n"
-
-#, c-format
-msgid ""
-"\n"
-"%s login: "
-msgstr ""
 
 #, c-format
 msgid "%s: failure forking: %s"
@@ -1540,7 +1557,8 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <gid> <lowergid> <count> [ <gid> <lowergid> <count> ] ... \n"
+"usage: %s [<pid|fd:<pidfd>] <gid> <lowergid> <count> [ <gid> <lowergid> "
+"<count> ] ... \n"
 msgstr ""
 
 #, c-format
@@ -1564,17 +1582,13 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
-msgid "%s: Could not open proc directory for target %u\n"
-msgstr "nepoznata grupa: %s\n"
-
-#, fuzzy, c-format
-msgid "%s: Could not stat directory for target %u\n"
+msgid "%s: Could not stat directory for process\n"
 msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid ""
-"%s: Target %u is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1608,14 +1622,13 @@ msgstr ""
 
 #, c-format
 msgid ""
-"usage: %s <pid> <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"
+"usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
+"<count> ] ... \n"
 msgstr ""
 
-#, c-format
-msgid ""
-"%s: Target process %u is owned by a different user: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: Could not stat directory for target process\n"
+msgstr "nepoznata grupa: %s\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
@@ -1633,6 +1646,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
 #, c-format
@@ -1655,6 +1672,10 @@ msgstr "nepoznata grupa: %s\n"
 msgid "%s: line %d: user '%s' does not exist in %s\n"
 msgstr "%s: grupa %s postoji\n"
 
+#, fuzzy, c-format
+msgid "%s: line %d: %s\n"
+msgstr "nepoznata grupa: %s\n"
+
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr ""
@@ -1675,13 +1696,13 @@ msgstr "nepoznata grupa: %s\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "%s: failed to prepare new %s entry\n"
-msgstr "nepoznata grupa: %s\n"
-
 #, c-format
 msgid "%s: can't find subordinate user range\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, fuzzy, c-format
 msgid "%s: can't find subordinate group range\n"
@@ -1741,6 +1762,9 @@ msgid ""
 "                                change to MAX_DAYS\n"
 msgstr ""
 
+msgid "  -s, --stdin                   read new token from stdin\n"
+msgstr ""
+
 msgid "Old password: "
 msgstr "Stara šifra:"
 
@@ -1755,6 +1779,10 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
+
+#, fuzzy
+msgid "Password is too long.\n"
+msgstr "Vaša šifra je istekla."
 
 msgid "New password: "
 msgstr "Nova šifra:"
@@ -1793,6 +1821,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
+msgstr ""
+
+#, c-format
+msgid "%s: only root can use --stdin/-s option\n"
 msgstr ""
 
 #, c-format
@@ -1938,11 +1970,9 @@ msgstr ""
 msgid "Session terminated, terminating shell..."
 msgstr ""
 
-#, c-format
 msgid " ...killed.\n"
 msgstr ""
 
-#, c-format
 msgid " ...waiting for child to terminate.\n"
 msgstr ""
 
@@ -2003,6 +2033,10 @@ msgid "No passwd entry for user '%s'\n"
 msgstr ""
 
 #, c-format
+msgid "Overlong user name '%s'\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr ""
 
@@ -2043,6 +2077,12 @@ msgstr ""
 
 #, c-format
 msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2127,6 +2167,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
+"system user\n"
+msgstr ""
+
+msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
 "                                account\n"
 msgstr ""
@@ -2179,6 +2224,11 @@ msgstr ""
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
 "mapping\n"
+msgstr ""
+
+msgid ""
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 
 #, c-format
@@ -2305,6 +2355,12 @@ msgid ""
 msgstr ""
 
 msgid "Setting mailbox file permissions"
+msgstr ""
+
+msgid "Synchronize mailbox file"
+msgstr ""
+
+msgid "Closing mailbox file"
 msgstr ""
 
 #, c-format
@@ -2520,6 +2576,10 @@ msgid ""
 "account\n"
 msgstr ""
 
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "%s: unlocking the user's password would result in a passwordless account.\n"
@@ -2593,12 +2653,26 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr ""
 
 #, c-format
+msgid ""
+"%s: The previous home directory (%s) does not exist or is inaccessible. Move "
+"cannot be completed.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2695,7 +2769,7 @@ msgstr ""
 msgid "failed to stat edited file"
 msgstr ""
 
-msgid "failed to allocate memory"
+msgid "asprintf(3) failed"
 msgstr ""
 
 msgid "failed to create backup file"
@@ -2710,12 +2784,12 @@ msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
 
 #, fuzzy, c-format
+#~ msgid "%s: Could not open proc directory for target %u\n"
+#~ msgstr "nepoznata grupa: %s\n"
+
+#, fuzzy, c-format
 #~ msgid "%s: password expiry information changed.\n"
 #~ msgstr "Upozorenje o isteku šifre"
-
-#, fuzzy
-#~ msgid "Password set to expire."
-#~ msgstr "Vaša šifra je istekla."
 
 #, fuzzy
 #~ msgid "\tRoom Number: %s\n"
