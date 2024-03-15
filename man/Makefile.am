@@ -198,6 +198,7 @@ login_defs_v = \
 EXTRA_DIST = \
 	$(man_MANS) \
 	$(man_XMANS) \
+	config.xml \
 	$(addprefix login.defs.d/,$(login_defs_v)) \
 	man1/id.1 \
 	id.1.xml \
