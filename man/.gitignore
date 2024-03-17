@@ -4,5 +4,8 @@ generate_mans.deps
 
 *.[0-9]
 
+# translation symlinks
+/*/login.defs.d
+
 /po/POTFILES
 /po/stamp-po

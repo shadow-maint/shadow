@@ -3,9 +3,11 @@ lib*.a
 *.o
 *.lo
 *.la
+*.mo
 *.gmo
 .deps
 .libs
+.dirstamp
 
 *.patch
 *.rej
@@ -34,6 +36,7 @@ Makefile.in
 /m4
 /missing
 /stamp-h1
+/test-driver
 /ylwrap
 
 /po/*.header
