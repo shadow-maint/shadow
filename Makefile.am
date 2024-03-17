@@ -12,4 +12,7 @@ SUBDIRS += src po contrib doc etc tests/unit
 
 if ENABLE_REGENERATE_MAN
 SUBDIRS += man
+
+install-man:
+	$(MAKE) -C man install-man
 endif
