@@ -415,6 +415,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 {
 	int err = 0;
 	struct stat sb;
+	struct stat tmp_sb;
 	struct link_name *lp;
 	struct timespec mt[2];
 
@@ -436,7 +437,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 		 * If the destination already exists do nothing.
 		 * This is after the copy_dir above to still iterate into subdirectories.
 		 */
-		if (fstatat(dst->dirfd, dst->name, &sb, AT_SYMLINK_NOFOLLOW) != -1) {
+		if (fstatat(dst->dirfd, dst->name, &tmp_sb, AT_SYMLINK_NOFOLLOW) != -1) {
 			return 0;
 		}
 
