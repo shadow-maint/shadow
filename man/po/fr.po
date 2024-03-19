@@ -2610,7 +2610,7 @@ msgstr ""
 
 #: useradd.8.xml:641(para)
 msgid "Usernames may only be up to 32 characters long."
-msgstr "Les noms d'utilisateur sont limités à 16 caractères."
+msgstr "Les noms d'utilisateur sont limités à 32 caractères."
 
 #: useradd.8.xml:30(term) login.defs.5.xml:30(term)
 msgid "<option>CREATE_HOME</option> (boolean)"
