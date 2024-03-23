@@ -37,6 +37,7 @@
 #include <unistd.h>
 
 #include "alloc.h"
+#include "atoi/str2i.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -415,7 +416,7 @@ static void get_defaults (void)
 		 * Default Password Inactive value
 		 */
 		else if (MATCH (buf, DINACT)) {
-			if (   (getlong(ccp, &def_inactive) == -1)
+			if (   (str2sl(&def_inactive, ccp) == -1)
 			    || (def_inactive < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -1301,7 +1302,7 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getlong(optarg, &def_inactive) == -1)
+				if (   (str2sl(&def_inactive, optarg) == -1)
 				    || (def_inactive < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),

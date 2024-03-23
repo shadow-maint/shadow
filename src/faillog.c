@@ -19,6 +19,7 @@
 #include <time.h>
 #include <assert.h>
 
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "faillog.h"
 #include "memzero.h"
@@ -27,6 +28,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strftime.h"
+
 
 
 /* local function prototypes */
@@ -545,7 +547,7 @@ int main (int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'l':
-				if (getlong(optarg, &fail_locktime) == -1) {
+				if (str2sl(&fail_locktime, optarg) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -557,7 +559,7 @@ int main (int argc, char **argv)
 			{
 				long  lmax;
 
-				if (   (getlong(optarg, &lmax) == -1)
+				if (   (str2sl(&lmax, optarg) == -1)
 				    || ((long)(short) lmax != lmax)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
@@ -574,7 +576,7 @@ int main (int argc, char **argv)
 			case 'R': /* no-op, handled in process_root_flag () */
 				break;
 			case 't':
-				if (getlong(optarg, &days) == -1) {
+				if (str2sl(&days, optarg) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
