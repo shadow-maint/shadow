@@ -37,6 +37,8 @@
 #include <unistd.h>
 
 #include "alloc.h"
+#include "atoi/str2i.h"
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -415,7 +417,7 @@ static void get_defaults (void)
 		 * Default Password Inactive value
 		 */
 		else if (MATCH (buf, DINACT)) {
-			if (   (getlong(ccp, &def_inactive) == -1)
+			if (   (str2sl(&def_inactive, ccp) == -1)
 			    || (def_inactive < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -856,21 +858,14 @@ static int get_groups (char *list)
  */
 static struct group * get_local_group(char * grp_name)
 {
-	const struct group *grp;
-	struct group *result_grp = NULL;
-	long long  gid;
-	char *endptr;
+	gid_t               gid;
+	struct group        *result_grp = NULL;
+	const struct group  *grp;
 
-	gid = strtoll (grp_name, &endptr, 10);
-	if (   ('\0' != *grp_name)
-		&& ('\0' == *endptr)
-		&& (ERANGE != errno)
-		&& (gid == (gid_t)gid)) {
-		grp = gr_locate_gid (gid);
-	}
-	else {
+	if (get_gid(grp_name, &gid) == 0)
+		grp = gr_locate_gid(gid);
+	else
 		grp = gr_locate(grp_name);
-	}
 
 	if (grp != NULL) {
 		result_grp = __gr_dup (grp);
@@ -1301,7 +1296,7 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getlong(optarg, &def_inactive) == -1)
+				if (   (str2sl(&def_inactive, optarg) == -1)
 				    || (def_inactive < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),

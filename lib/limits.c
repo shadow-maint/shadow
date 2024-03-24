@@ -29,7 +29,13 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include <sys/resource.h>
+
+#include "atoi/a2i.h"
+#include "atoi/str2i.h"
 #include "memzero.h"
+#include "typetraits.h"
+
+
 #ifndef LIMITS_FILE
 #define LIMITS_FILE "/etc/limits"
 #endif
@@ -45,9 +51,7 @@ static int setrlimit_value (unsigned int resource,
                             const char *value,
                             unsigned int multiplier)
 {
-	char           *endptr;
-	long           l;
-	rlim_t         limit;
+	rlim_t         l, limit;
 	struct rlimit  rlim;
 
 	/* The "-" is special, not belonging to a strange negative limit.
@@ -55,18 +59,13 @@ static int setrlimit_value (unsigned int resource,
 	 */
 	if ('-' == value[0]) {
 		limit = RLIM_INFINITY;
-	}
-	else {
-		/* We cannot use getlong here because it fails when there
-		 * is more to the value than just this number!
-		 * Also, we are limited to base 10 here (hex numbers will not
-		 * work with the limit string parser as is anyway)
-		 */
-		errno = 0;
-		l = strtol(value, &endptr, 10);
 
-		if (value == endptr || errno != 0)
+	} else {
+		if (a2i(rlim_t, &l, value, NULL, 10, 0, type_max(rlim_t)) == -1
+		    && errno != ENOTSUP)
+		{
 			return 0;  // FIXME: We could instead throw an error, though.
+		}
 
 		if (__builtin_mul_overflow(l, multiplier, &limit)) {
 			/* FIXME: Again, silent error handling...
@@ -89,7 +88,7 @@ static int set_prio (const char *value)
 {
 	long prio;
 
-	if (   (getlong(value, &prio) == -1)
+	if (   (str2sl(&prio, value) == -1)
 	    || (prio != (int) prio)) {
 		return 0;
 	}
@@ -104,7 +103,7 @@ static int set_umask (const char *value)
 {
 	unsigned long  mask;
 
-	if (   (getulong(value, &mask) == -1)
+	if (   (str2ul(&mask, value) == -1)
 	    || (mask != (mode_t) mask)) {
 		return 0;
 	}
@@ -119,7 +118,7 @@ static int check_logins (const char *name, const char *maxlogins)
 {
 	unsigned long limit, count;
 
-	if (getulong(maxlogins, &limit) == -1) {
+	if (str2ul(&limit, maxlogins) == -1) {
 		return 0;
 	}
 
@@ -482,7 +481,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "pri=", 4) == 0) {
 				long  inc;
 
-				if (   (getlong(cp + 4, &inc) == 0)
+				if (   (str2sl(&inc, cp + 4) == 0)
 				    && (inc >= -20) && (inc <= 20)) {
 					errno = 0;
 					if (   (nice (inc) != -1)
@@ -500,7 +499,7 @@ void setup_limits (const struct passwd *info)
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
 				long  blocks;
-				if (   (getlong(cp + 7, &blocks) == -1)
+				if (   (str2sl(&blocks, cp + 7) == -1)
 				    || (blocks != (int) blocks)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
@@ -512,7 +511,7 @@ void setup_limits (const struct passwd *info)
 			if (strncmp (cp, "umask=", 6) == 0) {
 				unsigned long  mask;
 
-				if (   (getulong(cp + 6, &mask) == -1)
+				if (   (str2ul(&mask, cp + 6) == -1)
 				    || (mask != (mode_t) mask)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",

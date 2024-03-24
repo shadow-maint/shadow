@@ -27,6 +27,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 
 #include "alloc.h"
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
@@ -40,6 +41,8 @@
 #include "shadowlog.h"
 #include "string/stpecpy.h"
 #include "string/stpeprintf.h"
+
+
 /*
  * exit status values
  */
