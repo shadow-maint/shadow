@@ -22,6 +22,7 @@
 
 #include "agetpass.h"
 #include "alloc.h"
+#include "atoi/a2i.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"
@@ -34,6 +35,7 @@
 #include "shadowlog.h"
 #include "string/strtcpy.h"
 #include "time/day_to_str.h"
+
 
 
 /*
@@ -721,7 +723,8 @@ static void update_shadow (void)
  * 	appropriate internal format. For finer resolute the chage
  *	command must be used.
  */
-int main (int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	const struct passwd *pw;	/* Password file entry for user      */
 
@@ -799,8 +802,9 @@ int main (int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'i':
-				if (   (getlong(optarg, &inact) == -1)
-				    || (inact < -1)) {
+				if (a2sl(&inact, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -818,8 +822,9 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'n':
-				if (   (getlong(optarg, &age_min) == -1)
-				    || (age_min < -1)) {
+				if (a2sl(&age_min, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -853,8 +858,9 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'w':
-				if (   (getlong(optarg, &warn) == -1)
-				    || (warn < -1)) {
+				if (a2sl(&warn, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					(void) fprintf (stderr,
 					                _("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);
@@ -864,8 +870,9 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'x':
-				if (   (getlong(optarg, &age_max) == -1)
-				    || (age_max < -1)) {
+				if (a2sl(&age_max, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					(void) fprintf (stderr,
 					                _("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);

@@ -6,7 +6,6 @@ TESTS = $(check_PROGRAMS)
 check_PROGRAMS = \
     test_adds \
     test_atoi_strtoi \
-    test_atoi_strtou_noneg \
     test_chkname \
     test_sprintf \
     test_strncpy \
@@ -41,24 +40,13 @@ test_atoi_strtoi_SOURCES = \
     $(NULL)
 test_atoi_strtoi_CFLAGS = \
     $(AM_CFLAGS) \
+    $(LIBBSD_CFLAGS) \
     $(NULL)
 test_atoi_strtoi_LDFLAGS = \
     $(NULL)
 test_atoi_strtoi_LDADD = \
     $(CMOCKA_LIBS) \
-    $(NULL)
-
-test_atoi_strtou_noneg_SOURCES = \
-    ../../lib/atoi/strtou_noneg.c \
-    test_atoi_strtou_noneg.c \
-    $(NULL)
-test_atoi_strtou_noneg_CFLAGS = \
-    $(AM_CFLAGS) \
-    $(NULL)
-test_atoi_strtou_noneg_LDFLAGS = \
-    $(NULL)
-test_atoi_strtou_noneg_LDADD = \
-    $(CMOCKA_LIBS) \
+    $(LIBBSD_LIBS) \
     $(NULL)
 
 test_chkname_SOURCES = \

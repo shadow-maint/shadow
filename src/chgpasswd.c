@@ -16,11 +16,13 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -32,6 +34,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+
 
 /*
  * Global variables
@@ -195,19 +198,19 @@ static void process_flags (int argc, char **argv)
 			}
 #if defined(USE_SHA_CRYPT)
 			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
-			       && (-1 == getlong(optarg, &sha_rounds)))) {
+			       && (-1 == str2sl(&sha_rounds, optarg)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
                         if ((   (0 == strcmp (crypt_method, "BCRYPT"))
-			       && (-1 == getlong(optarg, &bcrypt_rounds)))) {
+			       && (-1 == str2sl(&bcrypt_rounds, optarg)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
                         if ((   (0 == strcmp (crypt_method, "YESCRYPT"))
-			       && (-1 == getlong(optarg, &yescrypt_cost)))) {
+			       && (-1 == str2sl(&yescrypt_cost, optarg)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_YESCRYPT */

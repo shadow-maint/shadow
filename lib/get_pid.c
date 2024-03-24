@@ -1,8 +1,7 @@
-/*
- * SPDX-FileCopyrightText: 2009       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2009, Nicolas François
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -14,27 +13,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include "atoi/getnum.h"
 #include "string/sprintf.h"
 
-
-int get_pid (const char *pidstr, pid_t *pid)
-{
-	long long  val;
-	char *endptr;
-
-	errno = 0;
-	val = strtoll(pidstr, &endptr, 10);
-	if (   ('\0' == *pidstr)
-	    || ('\0' != *endptr)
-	    || (0 != errno)
-	    || (val < 1)
-	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
-		return -1;
-	}
-
-	*pid = val;
-	return 0;
-}
 
 /*
  * If use passed in fd:4 as an argument, then return the
@@ -43,20 +24,12 @@ int get_pid (const char *pidstr, pid_t *pid)
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
-	long long  val;
-	char *endptr;
-	struct stat st;
+	int          pidfd;
+	struct stat  st;
 	dev_t proc_st_dev, proc_st_rdev;
 
-	errno = 0;
-	val = strtoll(pidfdstr, &endptr, 10);
-	if (   ('\0' == *pidfdstr)
-	    || ('\0' != *endptr)
-	    || (0 != errno)
-	    || (val < 0)
-	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
+	if (get_fd(pidfdstr, &pidfd) == -1)
 		return -1;
-	}
 
 	if (stat("/proc/self/uid_map", &st) < 0) {
 		return -1;
@@ -65,7 +38,7 @@ int get_pidfd_from_fd(const char *pidfdstr)
 	proc_st_dev = st.st_dev;
 	proc_st_rdev = st.st_rdev;
 
-	if (fstat(val, &st) < 0) {
+	if (fstat(pidfd, &st) < 0) {
 		return -1;
 	}
 
@@ -73,7 +46,7 @@ int get_pidfd_from_fd(const char *pidfdstr)
 		return -1;
 	}
 
-	return (int)val;
+	return pidfd;
 }
 
 int open_pidfd(const char *pidstr)

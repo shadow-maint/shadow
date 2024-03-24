@@ -23,6 +23,8 @@
 #include <pwd.h>
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
@@ -36,6 +38,7 @@
 #endif
 #include "shadowlog.h"
 #include "run_part.h"
+
 
 /*
  * exit status values

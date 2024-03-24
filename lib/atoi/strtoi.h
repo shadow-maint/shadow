@@ -18,6 +18,12 @@
 #include "attr.h"
 
 
+#if (!WITH_LIBBSD)
+#define strtoi(...)  strtoi_(__VA_ARGS__)
+#define strtou(...)  strtou_(__VA_ARGS__)
+#endif
+
+
 #define strtoNmax(TYPE, ...)                                                  \
 (                                                                             \
 	_Generic((TYPE) 0,                                                    \
