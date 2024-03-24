@@ -33,6 +33,8 @@
 #include <time.h>
 
 #include "alloc.h"
+#include "atoi/a2i.h"
+#include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
@@ -299,35 +301,25 @@ struct ulong_range
 
 static struct ulong_range getulong_range(const char *str)
 {
-	struct ulong_range result = { .first = ULONG_MAX, .last = 0 };
-	long long first, last;
-	char *pos;
-
-	errno = 0;
-	first = strtoll(str, &pos, 10);
-	if (('\0' == *str) || ('-' != *pos ) || (0 != errno) ||
-	    (first != (unsigned long)first))
-		goto out;
-
-	errno = 0;
-	last = strtoll(pos + 1, &pos, 10);
-	if (('\0' != *pos ) || (0 != errno) ||
-	    (last != (unsigned long)last))
-		goto out;
-
-	if (first > last)
-		goto out;
+	char                *pos;
+	unsigned long       first, last;
+	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
 	/*
 	 * uid_t in linux is an unsigned int, anything over this is an invalid
 	 * range will be later refused anyway by get_map_ranges().
 	 */
-	if (first > UINT_MAX || last > UINT_MAX)
-		goto out;
+	if (a2ul(&first, str, &pos, 10, 0, UINT_MAX) == -1 && errno != ENOTSUP)
+		return result;
 
-	result.first = (unsigned long)first;
-	result.last = (unsigned long)last;
-out:
+	if ('-' != *pos++)
+		return result;
+
+	if (a2ul(&last, pos, NULL, 10, first, UINT_MAX) == -1)
+		return result;
+
+	result.first = first;
+	result.last = last;
 	return result;
 }
 
@@ -964,7 +956,8 @@ static void grp_update (void)
  *	values that the user will be created with accordingly. The values
  *	are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void
+process_flags(int argc, char **argv)
 {
 	struct stat st;
 	bool anyflag = false;
@@ -1061,8 +1054,9 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (   (getlong(optarg, &user_newinactive) == -1)
-				    || (user_newinactive < -1)) {
+				if (a2sl(&user_newinactive, optarg, NULL, 0, -1, LONG_MAX)
+				    == -1)
+				{
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);

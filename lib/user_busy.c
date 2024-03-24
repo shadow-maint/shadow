@@ -17,6 +17,8 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
+
+#include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
 #ifdef ENABLE_SUBIDS
