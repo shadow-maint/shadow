@@ -17,15 +17,16 @@
 #include "string/sprintf.h"
 
 
-int get_pid (const char *pidstr, pid_t *pid)
+int
+get_pid(const char *pidstr, pid_t *pid)
 {
+	char       *end;
 	long long  val;
-	char *endptr;
 
 	errno = 0;
-	val = strtoll(pidstr, &endptr, 10);
+	val = strtoll(pidstr, &end, 10);
 	if (   ('\0' == *pidstr)
-	    || ('\0' != *endptr)
+	    || ('\0' != *end)
 	    || (0 != errno)
 	    || (val < 1)
 	    || (/*@+longintegral@*/val != (pid_t)val)/*@=longintegral@*/) {
@@ -43,15 +44,15 @@ int get_pid (const char *pidstr, pid_t *pid)
  */
 int get_pidfd_from_fd(const char *pidfdstr)
 {
-	long long  val;
-	char *endptr;
-	struct stat st;
+	char         *end;
+	long long    val;
+	struct stat  st;
 	dev_t proc_st_dev, proc_st_rdev;
 
 	errno = 0;
-	val = strtoll(pidfdstr, &endptr, 10);
+	val = strtoll(pidfdstr, &end, 10);
 	if (   ('\0' == *pidfdstr)
-	    || ('\0' != *endptr)
+	    || ('\0' != *end)
 	    || (0 != errno)
 	    || (val < 0)
 	    || (/*@+longintegral@*/val != (int)val)/*@=longintegral@*/) {
