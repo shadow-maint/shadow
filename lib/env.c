@@ -127,30 +127,18 @@ void addenv (const char *string, /*@null@*/const char *value)
 
 	if ((newenvc & (NEWENVP_STEP - 1)) == 0) {
 		bool  update_environ;
-		char  **__newenvp;
 
-		/*
-		 * If the resize operation succeeds we can
-		 * happily go on, else print a message.
-		 */
 		update_environ = (environ == newenvp);
 
-		__newenvp = REALLOC(newenvp, newenvc + NEWENVP_STEP, char *);
+		newenvp = XREALLOC(newenvp, newenvc + NEWENVP_STEP, char *);
 
-		if (NULL != __newenvp) {
-			/*
-			 * If this is our current environment, update
-			 * environ so that it doesn't point to some
-			 * free memory area (realloc() could move it).
-			 */
-			if (update_environ)
-				environ = __newenvp;
-			newenvp = __newenvp;
-		} else {
-			(void) fputs (_("Environment overflow\n"), log_get_logfd());
-			newenvc--;
-			free (newenvp[newenvc]);
-		}
+		/*
+		 * If this is our current environment, update
+		 * environ so that it doesn't point to some
+		 * free memory area (realloc() could move it).
+		 */
+		if (update_environ)
+			environ = newenvp;
 	}
 
 	/*
