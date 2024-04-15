@@ -59,10 +59,10 @@ getrange(const char *range,
 
 	switch (*endptr) {
 	case '\0':
-		/* <long> */
 		*has_max = true;
 		*max = *min;
-		break;
+		return 0;  /* <long> */
+
 	case '-':
 		endptr++;
 		if ('\0' == *endptr)
@@ -76,11 +76,9 @@ getrange(const char *range,
 			return -1;
 		*has_max = true;
 
-		/* <long>-<long> */
-		break;
+		return 0;  /* <long>-<long> */
+
 	default:
 		return -1;
 	}
-
-	return 0;
 }
