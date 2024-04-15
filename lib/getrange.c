@@ -66,17 +66,16 @@ getrange(const char *range,
 			endptr++;
 			if ('\0' == *endptr)
 				return 0;  /* <long>- */
-			if (!isdigit (*endptr)) {
+			if (!isdigit(*endptr))
 				return -1;
-			} else {
-				errno = 0;
-				*max = strtoul_noneg(endptr, &endptr, 10);
-				if ('\0' != *endptr || 0 != errno)
-					return -1;
-				*has_max = true;
 
-				/* <long>-<long> */
-			}
+			errno = 0;
+			*max = strtoul_noneg(endptr, &endptr, 10);
+			if ('\0' != *endptr || 0 != errno)
+				return -1;
+			*has_max = true;
+
+			/* <long>-<long> */
 			break;
 		default:
 			return -1;
