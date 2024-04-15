@@ -48,38 +48,38 @@ getrange(const char *range,
 			return -1;
 		*has_max = true;
 
-		/* -<long> */
-	} else {
+		return 0;  /* -<long> */
+	}
+
+	errno = 0;
+	*min = strtoul_noneg(range, &endptr, 10);
+	if (endptr == range || 0 != errno)
+		return -1;
+	*has_min = true;
+
+	switch (*endptr) {
+	case '\0':
+		/* <long> */
+		*has_max = true;
+		*max = *min;
+		break;
+	case '-':
+		endptr++;
+		if ('\0' == *endptr)
+			return 0;  /* <long>- */
+		if (!isdigit(*endptr))
+			return -1;
+
 		errno = 0;
-		*min = strtoul_noneg(range, &endptr, 10);
-		if (endptr == range || 0 != errno)
+		*max = strtoul_noneg(endptr, &endptr, 10);
+		if ('\0' != *endptr || 0 != errno)
 			return -1;
-		*has_min = true;
+		*has_max = true;
 
-		switch (*endptr) {
-		case '\0':
-			/* <long> */
-			*has_max = true;
-			*max = *min;
-			break;
-		case '-':
-			endptr++;
-			if ('\0' == *endptr)
-				return 0;  /* <long>- */
-			if (!isdigit(*endptr))
-				return -1;
-
-			errno = 0;
-			*max = strtoul_noneg(endptr, &endptr, 10);
-			if ('\0' != *endptr || 0 != errno)
-				return -1;
-			*has_max = true;
-
-			/* <long>-<long> */
-			break;
-		default:
-			return -1;
-		}
+		/* <long>-<long> */
+		break;
+	default:
+		return -1;
 	}
 
 	return 0;
