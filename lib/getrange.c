@@ -28,7 +28,7 @@ getrange(const char *range,
          unsigned long *min, bool *has_min,
          unsigned long *max, bool *has_max)
 {
-	char  *end;
+	const char  *end;
 
 	if (NULL == range)
 		return -1;
