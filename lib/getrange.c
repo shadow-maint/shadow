@@ -64,9 +64,9 @@ getrange(const char *range,
 			break;
 		case '-':
 			endptr++;
-			if ('\0' == *endptr) {
-				/* <long>- */
-			} else if (!isdigit (*endptr)) {
+			if ('\0' == *endptr)
+				return 0;  /* <long>- */
+			if (!isdigit (*endptr)) {
 				return -1;
 			} else {
 				errno = 0;
