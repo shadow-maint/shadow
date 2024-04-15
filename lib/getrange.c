@@ -36,6 +36,9 @@ getrange(const char *range,
 	if (NULL == range)
 		return -1;
 
+	*has_min = false;
+	*has_max = false;
+
 	if ('-' == range[0]) {
 		if (!isdigit(range[1]))
 			return -1;
@@ -46,7 +49,6 @@ getrange(const char *range,
 			return -1;
 
 		/* -<long> */
-		*has_min = false;
 		*has_max = true;
 		*max = n;
 	} else {
@@ -68,7 +70,6 @@ getrange(const char *range,
 			if ('\0' == *endptr) {
 				/* <long>- */
 				*has_min = true;
-				*has_max = false;
 				*min = n;
 			} else if (!isdigit (*endptr)) {
 				return -1;
