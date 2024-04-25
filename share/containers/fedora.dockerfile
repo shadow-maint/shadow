@@ -15,14 +15,14 @@ RUN ./autogen.sh \
 	--enable-shadowgrp \
 	--enable-man \
 	--with-audit \
-        --with-sha-crypt \
+	--with-sha-crypt \
 	--with-bcrypt \
 	--with-yescrypt \
 	--with-selinux \
-        --without-libpam \
+	--without-libpam \
 	--enable-shared \
 	--without-libbsd \
-        --with-group-name-max-length=32 \
+	--with-group-name-max-length=32 \
 	--enable-lastlog \
 	--enable-logind=no
 RUN make -Orecurse -j4
