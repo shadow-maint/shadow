@@ -12,6 +12,7 @@ COPY ./ /usr/local/src/shadow/
 WORKDIR /usr/local/src/shadow/
 
 RUN ./autogen.sh \
+	--disable-account-tools-setuid \
 	--enable-lastlog \
 	--enable-logind=no \
 	--enable-man \
@@ -20,11 +21,13 @@ RUN ./autogen.sh \
 	--with-audit \
 	--with-bcrypt \
 	--with-group-name-max-length=32 \
+	--with-libpam \
 	--with-selinux \
 	--with-sha-crypt \
 	--with-yescrypt \
 	--without-libbsd \
-	--without-libpam
+	--without-libcrack \
+	--without-sssd
 RUN make -Orecurse -j4
 RUN bash -c "trap 'cat <tests/unit/test-suite.log >&2' ERR; make check;"
 RUN make install
