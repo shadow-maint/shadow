@@ -304,7 +304,7 @@ struct ulong_range
 
 static struct ulong_range getulong_range(const char *str)
 {
-	char                *pos;
+	const char          *pos;
 	unsigned long       first, last;
 	struct ulong_range  result = { .first = ULONG_MAX, .last = 0 };
 
