@@ -12335,8 +12335,8 @@ msgstr ""
 # type: Content of: <refentry><refsect1><para>
 #. (itstool) path: refsect1/para
 #: useradd.8.xml.out:724
-msgid "Usernames may only be up to 32 characters long."
-msgstr "Имена пользователей могут быть длиной не более 32 знаков."
+msgid "Usernames may only be up to 256 characters long."
+msgstr "Имена пользователей могут быть длиной не более 256 знаков."
 
 # type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #. (itstool) path: listitem/para

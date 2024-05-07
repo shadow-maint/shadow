@@ -10474,8 +10474,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 #: useradd.8.xml.out:724
-msgid "Usernames may only be up to 32 characters long."
-msgstr "用户名不能超过 32 个字符长。"
+msgid "Usernames may only be up to 256 characters long."
+msgstr "用户名不能超过 256 个字符长。"
 
 #. (itstool) path: listitem/para
 #: useradd.8.xml.out:789
