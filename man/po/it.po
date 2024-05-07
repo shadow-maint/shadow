@@ -12082,8 +12082,8 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 #: useradd.8.xml.out:724
-msgid "Usernames may only be up to 32 characters long."
-msgstr "I nomi utente non possono eccedere i 32 caratteri di lunghezza."
+msgid "Usernames may only be up to 256 characters long."
+msgstr "I nomi utente non possono eccedere i 256 caratteri di lunghezza."
 
 #. (itstool) path: listitem/para
 #: useradd.8.xml.out:789
