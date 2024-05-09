@@ -1,8 +1,5 @@
-/*
- * SPDX-FileCopyrightText:  2023, Alejandro Colomar <alx@kernel.org>
- *
- * SPDX-License-Identifier:  BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #ifndef SHADOW_INCLUDE_LIB_MALLOC_H_
@@ -27,31 +24,19 @@
 #define XMALLOC(n, type)  ((type *) xmallocarray(n, sizeof(type)))
 
 #define REALLOC(ptr, n, type)                                                 \
-({                                                                            \
-	__auto_type  p_ = (ptr);                                              \
-                                                                              \
-	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
-                                                                              \
-	(type *) reallocarray(p_, n, sizeof(type));                           \
-})
+(                                                                             \
+	_Generic(ptr, type *:  (type *) reallocarray(ptr, n, sizeof(type)))   \
+)
 
 #define REALLOCF(ptr, n, type)                                                \
-({                                                                            \
-	__auto_type  p_ = (ptr);                                              \
-                                                                              \
-	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
-                                                                              \
-	(type *) reallocarrayf(p_, n, sizeof(type));                          \
-})
+(                                                                             \
+	_Generic(ptr, type *:  (type *) reallocarrayf(ptr, n, sizeof(type)))  \
+)
 
 #define XREALLOC(ptr, n, type)                                                \
-({                                                                            \
-	__auto_type  p_ = (ptr);                                              \
-                                                                              \
-	static_assert(__builtin_types_compatible_p(typeof(p_), type *), "");  \
-                                                                              \
-	(type *) xreallocarray(p_, n, sizeof(type));                          \
-})
+(                                                                             \
+	_Generic(ptr, type *:  (type *) xreallocarray(ptr, n, sizeof(type)))  \
+)
 
 
 ATTR_MALLOC(free)
