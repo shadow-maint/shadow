@@ -24,8 +24,10 @@
 #include <config.h>
 
 #include <stdbool.h>
+#include <stddef.h>
 
 
+extern size_t login_name_max_size(void);
 extern bool is_valid_user_name (const char *name);
 extern bool is_valid_group_name (const char *name);
 

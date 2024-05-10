@@ -33,6 +33,20 @@
 int allow_bad_names = false;
 
 
+size_t
+login_name_max_size(void)
+{
+	long  conf;
+
+	errno = 0;
+	conf = sysconf(_SC_LOGIN_NAME_MAX);
+	if (conf == -1 && errno != 0)
+		return LOGIN_NAME_MAX;
+
+	return conf;
+}
+
+
 static bool is_valid_name (const char *name)
 {
 	if (allow_bad_names) {
@@ -84,18 +98,7 @@ static bool is_valid_name (const char *name)
 bool
 is_valid_user_name(const char *name)
 {
-	long    conf;
-	size_t  maxsize;
-
-	errno = 0;
-	conf = sysconf(_SC_LOGIN_NAME_MAX);
-
-	if (conf == -1 && errno != 0)
-		maxsize = LOGIN_NAME_MAX;
-	else
-		maxsize = conf;
-
-	if (strlen(name) >= maxsize)
+	if (strlen(name) >= login_name_max_size())
 		return false;
 
 	return is_valid_name(name);
