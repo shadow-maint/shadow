@@ -5,6 +5,7 @@
 // SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
+
 /*
  * is_valid_user_name(), is_valid_group_name() - check the new user/group
  * name for validity;
@@ -13,6 +14,7 @@
  *   false - bad name
  */
 
+
 #include <config.h>
 
 #ident "$Id$"
@@ -20,10 +22,16 @@
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <unistd.h>
+
 #include "defines.h"
 #include "chkname.h"
 
+
 int allow_bad_names = false;
+
 
 static bool is_valid_name (const char *name)
 {
