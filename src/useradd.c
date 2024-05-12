@@ -2081,11 +2081,7 @@ static void tallylog_reset (const char *user_name)
 		failed = 1;
 		break;
 	case 0: /* child */
-		pname = strrchr(pam_tally2, '/');
-		if (pname == NULL)
-			pname = pam_tally2;
-		else
-			pname++;        /* Skip the '/' */
+		pname = Basename(pam_tally2);
 		execl(pam_tally2, pname, "--user", user_name, "--reset", "--quiet", NULL);
 		/* If we come here, something has gone terribly wrong */
 		perror(pam_tally2);
