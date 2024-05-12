@@ -1116,13 +1116,9 @@ int main (int argc, char **argv)
 		 * values aren't that particular.
 		 */
 		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
-			fields[nfields] = cp;
-			cp = strchr (cp, ':');
+			fields[nfields] = strsep(&cp, ":");
 			if (cp == NULL)
 				break;
-
-			*cp = '\0';
-			cp++;
 		}
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),

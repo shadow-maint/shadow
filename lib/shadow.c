@@ -83,17 +83,13 @@ static struct spwd *my_sgetspent (const char *string)
 	 * FIELDS different fields.
 	 */
 
-	for (cp = spwbuf, i = 0; *cp && i < FIELDS; i++) {
-		fields[i] = cp;
-		cp = strchrnul(cp, ':');
-		if (*cp)
-			*cp++ = '\0';
-	}
+	for (cp = spwbuf, i = 0; cp != NULL && i < FIELDS; i++)
+		fields[i] = strsep(&cp, ":");
 
 	if (i == (FIELDS - 1))
 		fields[i++] = empty;
 
-	if ((cp && *cp) || (i != FIELDS && i != OFIELDS))
+	if (cp != NULL || (i != FIELDS && i != OFIELDS))
 		return 0;
 
 	/*

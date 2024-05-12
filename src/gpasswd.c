@@ -172,28 +172,22 @@ static void catch_signals (int killed)
  */
 static bool is_valid_user_list (const char *users)
 {
-	const char *username;
-	char *end;
 	bool is_valid = true;
 	/*@owned@*/char *tmpusers = xstrdup (users);
 
-	for (username = tmpusers;
-	     (NULL != username) && ('\0' != *username);
-	     username = end) {
-		end = strchr (username, ',');
-		if (NULL != end) {
-			*end = '\0';
-			end++;
-		}
+	while (NULL != tmpusers && '\0' != *tmpusers) {
+		const char  *u;
+
+		u = strsep(&tmpusers, ",");
 
 		/*
 		 * This user must exist.
 		 */
 
 		/* local, no need for xgetpwnam */
-		if (getpwnam (username) == NULL) {
+		if (getpwnam(u) == NULL) {
 			fprintf (stderr, _("%s: user '%s' does not exist\n"),
-			         Prog, username);
+			         Prog, u);
 			is_valid = false;
 		}
 	}
