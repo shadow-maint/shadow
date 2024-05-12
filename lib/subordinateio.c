@@ -929,9 +929,8 @@ static bool all_digits(const char *str)
 
 static int append_uids(uid_t **uids, const char *owner, int n)
 {
-	uid_t owner_uid;
-	uid_t *ret;
-	int i;
+	int    i;
+	uid_t  owner_uid;
 
 	if (all_digits(owner)) {
 		i = sscanf(owner, "%d", &owner_uid);
@@ -957,13 +956,11 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			return n;
 	}
 
-	ret = REALLOC(*uids, n + 1, uid_t);
-	if (!ret) {
-		free(*uids);
+	*uids = REALLOCF(*uids, n + 1, uid_t);
+	if (!*uids)
 		return -1;
-	}
-	ret[n] = owner_uid;
-	*uids = ret;
+
+	(*uids)[n] = owner_uid;
 	return n+1;
 }
 
