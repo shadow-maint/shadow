@@ -39,19 +39,23 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 	while (s != NULL && *s != '\0') {
 		size = (nelem + 1) * sizeof (ptr);
 		ptr = REALLOC(*list, size, char *);
-		if (NULL != ptr) {
-			ptr[nelem] = strsep(&s, ",");
-			nelem++;
-			*list = ptr;
-			*nlist = nelem;
-		}
+		if (ptr == NULL)
+			return NULL;
+
+		ptr[nelem] = strsep(&s, ",");
+		nelem++;
+		*list = ptr;
+		*nlist = nelem;
 	}
+
 	size = (nelem + 1) * sizeof (ptr);
 	ptr = REALLOC(*list, size, char *);
-	if (NULL != ptr) {
-		ptr[nelem] = NULL;
-		*list = ptr;
-	}
+	if (ptr == NULL)
+		return NULL;
+
+	ptr[nelem] = NULL;
+	*list = ptr;
+
 	return ptr;
 }
 
