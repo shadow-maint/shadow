@@ -635,9 +635,8 @@ int commonio_open (struct commonio_db *db, int mode)
 
 	buflen = BUFLEN;
 	buf = MALLOC(buflen, char);
-	if (NULL == buf) {
-		goto cleanup_ENOMEM;
-	}
+	if (NULL == buf)
+		goto cleanup_errno;
 
 	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
 		char                   *cp;
@@ -649,9 +648,9 @@ int commonio_open (struct commonio_db *db, int mode)
 
 			buflen += BUFLEN;
 			buf = REALLOCF(buf, buflen, char);
-			if (NULL == buf) {
-				goto cleanup_ENOMEM;
-			}
+			if (NULL == buf)
+				goto cleanup_errno;
+
 			len = strlen (buf);
 			if (db->ops->fgets (buf + len,
 			                    (int) (buflen - len),
@@ -714,7 +713,6 @@ int commonio_open (struct commonio_db *db, int mode)
 	free (line);
       cleanup_buf:
 	free (buf);
-      cleanup_ENOMEM:
 	errno = ENOMEM;
       cleanup_errno:
 	saved_errno = errno;
