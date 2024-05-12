@@ -53,11 +53,7 @@ sgetspent(const char *string)
 		return NULL;	/* fail if too long */
 	}
 	strcpy (spwbuf, string);
-
-	cp = strrchr (spwbuf, '\n');
-	if (NULL != cp) {
-		*cp = '\0';
-	}
+	*strchrnul(spwbuf, '\n') = '\0';
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to

@@ -11,28 +11,29 @@
 
 #ident "$Id$"
 
-#include "defines.h"
 #include <assert.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <signal.h>
+#include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <utime.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdio.h>
-#include <signal.h>
 
 #include "alloc.h"
 #include "atoi/getnum.h"
+#include "commonio.h"
+#include "defines.h"
 #include "memzero.h"
 #include "nscd.h"
-#include "sssd.h"
 #ifdef WITH_TCB
 #include <tcb.h>
 #endif				/* WITH_TCB */
 #include "prototypes.h"
-#include "commonio.h"
 #include "shadowlog_internal.h"
+#include "sssd.h"
 #include "string/sprintf/snprintf.h"
 
 
@@ -639,7 +640,6 @@ int commonio_open (struct commonio_db *db, int mode)
 		goto cleanup_errno;
 
 	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
-		char                   *cp;
 		struct commonio_entry  *p;
 
 		while (   (strrchr (buf, '\n') == NULL)
@@ -658,10 +658,7 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_buf;
 			}
 		}
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
+		*strchrnul(buf, '\n') = '\0';
 
 		line = strdup (buf);
 		if (NULL == line) {

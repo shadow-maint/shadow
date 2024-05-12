@@ -14,12 +14,13 @@
 
 #ident "$Id$"
 
-#include <sys/types.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
 
 #include "atoi/str2i.h"
+#include "defines.h"
+#include "prototypes.h"
 
 
 static FILE *shadow;
@@ -75,10 +76,7 @@ static struct spwd *my_sgetspent (const char *string)
 	if (strlen (string) >= sizeof spwbuf)
 		return 0;
 	strcpy (spwbuf, string);
-
-	cp = strrchr (spwbuf, '\n');
-	if (NULL != cp)
-		*cp = '\0';
+	*strchrnul(spwbuf, '\n') = '\0';
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to
@@ -87,9 +85,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	for (cp = spwbuf, i = 0; *cp && i < FIELDS; i++) {
 		fields[i] = cp;
-		while (*cp && *cp != ':')
-			cp++;
-
+		cp = strchrnul(cp, ':');
 		if (*cp)
 			*cp++ = '\0';
 	}
@@ -229,8 +225,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 struct spwd *fgetspent (FILE * fp)
 {
-	char buf[BUFSIZ];
-	char *cp;
+	char  buf[BUFSIZ];
 
 	if (NULL == fp) {
 		return (0);
@@ -238,10 +233,7 @@ struct spwd *fgetspent (FILE * fp)
 
 	if (fgets (buf, sizeof buf, fp) != NULL)
 	{
-		cp = strchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
+		*strchrnul(buf, '\n') = '\0';
 		return my_sgetspent (buf);
 	}
 	return 0;

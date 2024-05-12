@@ -82,11 +82,7 @@ struct group *sgetgrent (const char *buf)
 		}
 	}
 	strcpy (grpbuf, buf);
-
-	cp = strrchr (grpbuf, '\n');
-	if (NULL != cp) {
-		*cp = '\0';
-	}
+	*strchrnul(grpbuf, '\n') = '\0';
 
 	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
 		grpfields[i] = strsep(&cp, ":");

@@ -93,11 +93,7 @@ void endsgent (void)
 	}
 
 	strcpy (sgrbuf, string);
-
-	cp = strrchr (sgrbuf, '\n');
-	if (NULL != cp) {
-		*cp = '\0';
-	}
+	*strchrnul(sgrbuf, '\n') = '\0';
 
 	/*
 	 * There should be exactly 4 colon separated fields.  Find
@@ -178,10 +174,7 @@ void endsgent (void)
 				return NULL;
 			}
 		}
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
+		*strchrnul(buf, '\n') = '\0';
 		return (sgetsgent (buf));
 	}
 	return NULL;

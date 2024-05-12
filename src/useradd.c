@@ -360,10 +360,7 @@ static void get_defaults (void)
 	 * values are used, everything else can be ignored.
 	 */
 	while (fgets (buf, sizeof buf, fp) == buf) {
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			*cp = '\0';
-		}
+		*strchrnul(buf, '\n') = '\0';
 
 		cp = strchr (buf, '=');
 		if (NULL == cp) {

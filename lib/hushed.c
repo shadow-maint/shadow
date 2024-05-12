@@ -12,12 +12,14 @@
 
 #ident "$Id$"
 
-#include <sys/types.h>
-#include <stdio.h>
 #include <pwd.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+
 #include "defines.h"
-#include "prototypes.h"
 #include "getdef.h"
+#include "prototypes.h"
 #include "string/sprintf/snprintf.h"
 
 
@@ -70,7 +72,7 @@ bool hushed (const char *username)
 		return false;
 	}
 	for (found = false; !found && (fgets (buf, sizeof buf, fp) == buf);) {
-		buf[strcspn (buf, "\n")] = '\0';
+		*strchrnul(buf, '\n') = '\0';
 		found = (strcmp (buf, pw->pw_shell) == 0) ||
 		        (strcmp (buf, pw->pw_name) == 0);
 	}

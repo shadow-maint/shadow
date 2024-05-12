@@ -42,8 +42,7 @@
 
 		strcpy (tzbuf, def_tz);
 	} else {
-		/* Remove optional trailing '\n'. */
-		tzbuf[strcspn (tzbuf, "\n")] = '\0';
+		*strchrnul(tzbuf, '\n') = '\0';
 	}
 
 	if (NULL != fp) {

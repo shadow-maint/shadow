@@ -11,12 +11,15 @@
 
 #ident "$Id$"
 
-#include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "defines.h"
-#include "prototypes.h"
 #include "port.h"
+#include "prototypes.h"
+
 
 static FILE *ports;
 
@@ -149,7 +152,7 @@ again:
 	 * TTY devices.
 	 */
 
-	buf[strcspn (buf, "\n")] = 0;
+	*strchrnul(buf, '\n') = '\0';
 
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
