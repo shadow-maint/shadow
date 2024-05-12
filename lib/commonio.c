@@ -648,11 +648,10 @@ int commonio_open (struct commonio_db *db, int mode)
 			size_t len;
 
 			buflen += BUFLEN;
-			cp = REALLOC(buf, buflen, char);
-			if (NULL == cp) {
-				goto cleanup_buf;
+			buf = REALLOCF(buf, buflen, char);
+			if (NULL == buf) {
+				goto cleanup_ENOMEM;
 			}
-			buf = cp;
 			len = strlen (buf);
 			if (db->ops->fgets (buf + len,
 			                    (int) (buflen - len),
