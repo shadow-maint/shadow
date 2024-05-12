@@ -757,7 +757,6 @@ err_free_new:
  */
 static int get_groups (char *list)
 {
-	char *cp;
 	struct group *grp;
 	int errors = 0;
 	int ngroups = 0;
@@ -777,19 +776,18 @@ static int get_groups (char *list)
 	 * values for group identifiers is permitted.
 	 */
 	do {
+		char  *g;
+
 		/*
 		 * Strip off a single name from the list
 		 */
-		cp = strchr (list, ',');
-		if (NULL != cp) {
-			*cp++ = '\0';
-		}
+		g = strsep(&list, ",");
 
 		/*
 		 * Names starting with digits are treated as numerical
 		 * GID values, otherwise the string is looked up as is.
 		 */
-		grp = get_local_group (list);
+		grp = get_local_group(g);
 
 		/*
 		 * There must be a match, either by GID value or by
@@ -800,10 +798,9 @@ static int get_groups (char *list)
 		if (NULL == grp) {
 			fprintf (stderr,
 			         _("%s: group '%s' does not exist\n"),
-			         Prog, list);
+			         Prog, g);
 			errors++;
 		}
-		list = cp;
 
 		/*
 		 * If the group doesn't exist, don't dump core...

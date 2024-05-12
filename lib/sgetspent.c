@@ -60,23 +60,14 @@ sgetspent(const char *string)
 	 * FIELDS different fields.
 	 */
 
-	for (cp = spwbuf, i = 0; ('\0' != *cp) && (i < FIELDS); i++) {
-		fields[i] = cp;
-		cp = strchrnul(cp, ':');
-
-		if ('\0' != *cp) {
-			*cp = '\0';
-			cp++;
-		}
-	}
+	for (cp = spwbuf, i = 0; cp != NULL && i < FIELDS; i++)
+		fields[i] = strsep(&cp, ":");
 
 	if (i == (FIELDS - 1))
 		fields[i++] = "";
 
-	if ( ((NULL != cp) && ('\0' != *cp)) ||
-	     ((i != FIELDS) && (i != OFIELDS)) ) {
+	if (cp != NULL || (i != FIELDS && i != OFIELDS))
 		return NULL;
-	}
 
 	/*
 	 * Start populating the structure.  The fields are all in
