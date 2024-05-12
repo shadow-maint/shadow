@@ -9,13 +9,17 @@
  */
 
 #include <config.h>
-#include "defines.h"
+
 #include <stdio.h>
+#include <string.h>
+
+#include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/strcpy/strtcpy.h"
 
 #ident "$Id$"
+
 
 /*
  * This is now rather generic function which decides if "tty" is listed
@@ -72,8 +76,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 */
 
 	while (fgets (buf, sizeof (buf), fp) != NULL) {
-		/* Remove optional trailing '\n'. */
-		buf[strcspn (buf, "\n")] = '\0';
+		*strchrnul(buf, '\n') = '\0';
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);
 			return true;
