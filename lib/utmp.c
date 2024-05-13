@@ -250,16 +250,12 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 
-	if (   (NULL != host)
-	    && ('\0' != host[0])) {
-		hostname = XMALLOC(strlen(host) + 1, char);
-		strcpy (hostname, host);
+	if (NULL != host && '\0' != host[0])
+		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	} else if (   (NULL != ut)
-	           && ('\0' != ut->ut_host[0])) {
+	else if (NULL != ut && '\0' != ut->ut_host[0])
 		hostname = XSTRNDUP(ut->ut_host);
 #endif
-	}
 
 	if (strncmp(line, "/dev/", 5) == 0) {
 		line += 5;
