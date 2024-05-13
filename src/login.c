@@ -27,6 +27,7 @@
 
 #include "alloc.h"
 #include "attr.h"
+#include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
@@ -573,8 +574,9 @@ int main (int argc, char **argv)
 	}
 #ifdef RLOGIN
 	if (rflg) {
-		size_t  max_size = sysconf(_SC_LOGIN_NAME_MAX);
+		size_t  max_size;
 
+		max_size = login_name_max_size();
 		assert (NULL == username);
 		username = XMALLOC(max_size, char);
 		username[max_size - 1] = '\0';
@@ -882,8 +884,9 @@ int main (int argc, char **argv)
 
 		failed = false;	/* haven't failed authentication yet */
 		if (NULL == username) {	/* need to get a login id */
-			size_t  max_size = sysconf(_SC_LOGIN_NAME_MAX);
+			size_t  max_size;
 
+			max_size = login_name_max_size();
 			if (subroot) {
 				closelog ();
 				exit (1);
