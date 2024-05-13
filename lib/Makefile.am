@@ -160,6 +160,10 @@ libshadow_la_SOURCES = \
 	string/strcpy/strtcpy.h \
 	string/strcpy/zustr2stp.c \
 	string/strcpy/zustr2stp.h \
+	string/strdup/strndupa.c \
+	string/strdup/strndupa.h \
+	string/strdup/xstrndup.c \
+	string/strdup/xstrndup.h \
 	string/strftime.c \
 	string/strftime.h \
 	strtoday.c \
