@@ -574,9 +574,7 @@ static void add_one_entry_nis (struct commonio_db *db,
 int commonio_open (struct commonio_db *db, int mode)
 {
 	char *buf;
-	char *cp;
 	char *line;
-	struct commonio_entry *p;
 	void *eptr = NULL;
 	int flags = mode;
 	size_t buflen;
@@ -642,6 +640,9 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 
 	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
+		char                   *cp;
+		struct commonio_entry  *p;
+
 		while (   (strrchr (buf, '\n') == NULL)
 		       && (feof (db->fp) == 0)) {
 			size_t len;

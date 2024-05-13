@@ -120,13 +120,7 @@ static void send_mesg_to_tty (int tty_fd)
 int
 main(int argc, char **argv)
 {
-	int    i;
 	pid_t  pid;
-
-	struct utmpx  *ut;
-	char          user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
-	char          tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
-	int           tty_fd;
 
 	if (1 != argc) {
 		(void) fputs (_("Usage: logoutd\n"), stderr);
@@ -137,7 +131,7 @@ main(int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 #ifndef DEBUG
-	for (i = 0; close (i) == 0; i++);
+	for (int i = 0; close(i) == 0; i++);
 
 	setpgrp ();
 
@@ -168,6 +162,7 @@ main(int argc, char **argv)
 	 * are not supposed to still be logged in.
 	 */
 	while (true) {
+		struct utmpx  *ut;
 
 		/*
 		 * Attempt to re-open the utmp file. The file is only
@@ -181,6 +176,10 @@ main(int argc, char **argv)
 		 * is permitted to be signed on at this time.
 		 */
 		while ((ut = getutxent()) != NULL) {
+			int   tty_fd;
+			char  user[sizeof(ut->ut_user) + 1];      // NUL
+			char  tty_name[sizeof(ut->ut_line) + 6];  // /dev/ + NUL
+
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
