@@ -834,7 +834,6 @@ int main (int argc, char **argv)
 			}
 			preauth_flag = false;
 			username = XMALLOC(max_size, char);
-			username[max_size - 1] = '\0';
 			login_prompt(username, max_size);
 
 			if ('\0' == username[0]) {
