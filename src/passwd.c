@@ -22,7 +22,6 @@
 
 #include "alloc.h"
 #include "agetpass.h"
-#include "alloc.h"
 #include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"
@@ -34,6 +33,7 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
+#include "string/sprintf/xasprintf.h"
 #include "string/strcpy/strtcpy.h"
 #include "time/day_to_str.h"
 
@@ -532,10 +532,9 @@ static char *update_crypt_pw (char *cp)
 	}
 
 	if (lflg && *cp != '!') {
-		char *newpw = XMALLOC(strlen(cp) + 2, char);
+		char  *newpw;
 
-		strcpy (newpw, "!");
-		strcat (newpw, cp);
+		xasprintf(&newpw, "!%s", cp);
 		if (!use_pam)
 		{
 			if (do_update_pwd) {
