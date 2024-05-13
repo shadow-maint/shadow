@@ -37,8 +37,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 	size_t nelem = *nlist, size;
 
 	while (s != NULL && *s != '\0') {
-		size = (nelem + 1) * sizeof (ptr);
-		ptr = REALLOC(*list, size, char *);
+		ptr = REALLOC(*list, nelem + 1, char *);
 		if (ptr == NULL)
 			return NULL;
 
@@ -48,8 +47,7 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 		*nlist = nelem;
 	}
 
-	size = (nelem + 1) * sizeof (ptr);
-	ptr = REALLOC(*list, size, char *);
+	ptr = REALLOC(*list, nelem + 1, char *);
 	if (ptr == NULL)
 		return NULL;
 
