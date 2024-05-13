@@ -26,7 +26,7 @@
 #include "sizeof.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strcpy/zustr2stp.h"
+#include "string/strdup/xstrndup.h"
 
 #ident "$Id$"
 
@@ -185,11 +185,7 @@ get_session_host(char **out)
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
-		char  *hostname;
-
-		hostname = XMALLOC(sizeof(ut->ut_host) + 1, char);
-		ZUSTR2STP(hostname, ut->ut_host);
-		*out = hostname;
+		*out = XSTRNDUP(ut->ut_host);
 		free (ut);
 	} else {
 		*out = NULL;
@@ -261,8 +257,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	} else if (   (NULL != ut)
 	           && ('\0' != ut->ut_host[0])) {
-		hostname = XMALLOC(NITEMS(ut->ut_host) + 1, char);
-		ZUSTR2STP(hostname, ut->ut_host);
+		hostname = XSTRNDUP(ut->ut_host);
 #endif
 	}
 
