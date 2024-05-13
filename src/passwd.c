@@ -20,6 +20,7 @@
 #include <sys/types.h>
 #include <time.h>
 
+#include "alloc.h"
 #include "agetpass.h"
 #include "alloc.h"
 #include "atoi/str2i.h"
