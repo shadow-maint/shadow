@@ -121,7 +121,6 @@ int
 main(int argc, char **argv)
 {
 	int    i;
-	int    status;
 	pid_t  pid;
 
 	struct utmpx  *ut;
@@ -251,7 +250,7 @@ main(int argc, char **argv)
 		/*
 		 * Reap any dead babies ...
 		 */
-		while (wait (&status) != -1);
+		while (wait(NULL) != -1);
 	}
 
 	return EXIT_FAILURE;
