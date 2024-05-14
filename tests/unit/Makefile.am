@@ -11,8 +11,7 @@ check_PROGRAMS = \
     test_strncpy \
     test_strtcpy \
     test_typetraits \
-    test_xasprintf \
-    test_zustr2stp
+    test_xasprintf
 
 if ENABLE_LOGIND
 check_PROGRAMS += \
@@ -140,18 +139,6 @@ test_xasprintf_LDFLAGS = \
     -Wl,-wrap,exit \
     $(NULL)
 test_xasprintf_LDADD = \
-    $(CMOCKA_LIBS) \
-    $(NULL)
-
-test_zustr2stp_SOURCES = \
-    test_zustr2stp.c \
-    $(NULL)
-test_zustr2stp_CFLAGS = \
-    $(AM_CFLAGS) \
-    $(NULL)
-test_zustr2stp_LDFLAGS = \
-    $(NULL)
-test_zustr2stp_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
