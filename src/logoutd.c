@@ -16,11 +16,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <utmpx.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
-#include "string/strcpy/zustr2stp.h"
+#include "string/strdup/strndupa.h"
 
 
 /*
@@ -48,22 +49,16 @@ static void send_mesg_to_tty (int tty_fd);
 static int
 check_login(const struct utmpx *ut)
 {
-	char    user[sizeof(ut->ut_user) + 1];
-	char    line[sizeof(ut->ut_line) + 1];
+	char    *user;
+	char    *line;
 	time_t  now;
 
-	ZUSTR2STP(user, ut->ut_user);
-	ZUSTR2STP(line, ut->ut_line);
+	user = STRNDUPA(ut->ut_user);
+	line = STRNDUPA(ut->ut_line);
 
 	now = time(NULL);
 
-	/*
-	 * Check if they are allowed to be logged in right now.
-	 */
-	if (!isttytime(user, line, now)) {
-		return 0;
-	}
-	return 1;
+	return isttytime(user, line, now);
 }
 
 
@@ -177,7 +172,6 @@ main(int argc, char **argv)
 		 */
 		while ((ut = getutxent()) != NULL) {
 			int   tty_fd;
-			char  user[sizeof(ut->ut_user) + 1];      // NUL
 			char  tty_name[sizeof(ut->ut_line) + 6];  // /dev/ + NUL
 
 			if (ut->ut_type != USER_PROCESS) {
@@ -229,10 +223,9 @@ main(int argc, char **argv)
 				kill (-ut->ut_pid, SIGKILL);
 			}
 
-			ZUSTR2STP(user, ut->ut_user);
-
 			SYSLOG ((LOG_NOTICE,
-				 "logged off user '%s' on '%s'", user,
+				 "logged off user '%s' on '%s'",
+			         STRNDUPA(ut->ut_user),
 				 tty_name));
 
 			/*
