@@ -821,7 +821,7 @@ time_t get_date (const char *p, const time_t *now)
   time_t Start;
 
   yyInput = p;
-  Start = now ? *now : time ((time_t *) NULL);
+  Start = now ? *now : time(NULL);
   tmp = localtime (&Start);
   yyYear = tmp->tm_year + TM_YEAR_ORIGIN;
   yyMonth = tmp->tm_mon + 1;
@@ -935,7 +935,7 @@ main(void)
   buff[MAX_BUFF_LEN] = 0;
   while (fgets (buff, MAX_BUFF_LEN, stdin) && buff[0])
     {
-      d = get_date (buff, (time_t *) NULL);
+      d = get_date(buff, NULL);
       if (d == -1)
 	(void) printf ("Bad format - couldn't convert.\n");
       else
