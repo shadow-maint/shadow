@@ -154,7 +154,7 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		return;
 	}
 
-	(void) time(&now);
+	now = time(NULL);
 
 	/* Filter out entries that do not match with the -t option */
 	if (tflg && ((now - fl.fail_time) > seconds)) {
