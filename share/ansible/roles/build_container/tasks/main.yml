@@ -1,0 +1,20 @@
+---
+# tasks file for build_container
+- name: Pull container image
+  containers.podman.podman_image:
+    name: '{{ container_image }}'
+
+- name: Create and start container
+  containers.podman.podman_container:
+    name: builder
+    state: started
+    image: '{{ container_image }}'
+    command: "sleep 1d"
+
+- name: Create repo
+  ansible.builtin.shell:
+    podman exec builder mkdir -p /usr/local/src
+
+- name: Copy repo
+  ansible.builtin.shell:
+    podman cp ../../ builder:/usr/local/src/shadow
