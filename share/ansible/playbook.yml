@@ -1,89 +1,13 @@
 - name: Start build container
   hosts: localhost
-  tasks:
-    - name: Pull container image
-      containers.podman.podman_image:
-        name: registry.fedoraproject.org/fedora:latest
-
-    - name: Create and start container
-      containers.podman.podman_container:
-        name: builder
-        state: started
-        image: fedora:latest
-        command: "sleep 1d"
-
-    - name: Copy repo
-      ansible.builtin.shell:
-        podman cp ../../ builder:/usr/local/src
+  roles:
+    - role: build_container
+      vars:
+        container_image: registry.fedoraproject.org/fedora:latest
 
 - name: CI run
   hosts: builder
   connection: podman
-  tasks:
-    - name: Ensure dependencies are installed
-      ansible.builtin.dnf:
-        name:
-          - dnf-plugins-core
-          - libcmocka-devel
-          - systemd-devel
-        state: present
-
-    - name: Ensure build dependencies are installed
-      ansible.builtin.command:
-        dnf builddep -y shadow-utils
-      register: dnf_result
-      changed_when: '"Nothing to do" not in dnf_result.stdout'
-
-    - name: Build configuration
-      ansible.builtin.command: >
-        ./autogen.sh
-        --disable-account-tools-setuid
-        --enable-lastlog
-        --enable-logind=no
-        --enable-man
-        --enable-shadowgrp
-        --enable-shared
-        --with-audit
-        --with-bcrypt
-        --with-group-name-max-length=32
-        --with-libpam
-        --with-selinux
-        --with-sha-crypt
-        --with-yescrypt
-        --without-libbsd
-        --without-libcrack
-        --without-sssd
-      args:
-        chdir: /usr/local/src/shadow/
-      ignore_errors: true
-
-    - name: Build
-      ansible.builtin.shell:
-        make -Orecurse -j4 > build.log
-      args:
-        chdir: /usr/local/src/shadow/
-      ignore_errors: true
-
-    - name: Run unit-tests
-      ansible.builtin.command:
-        make check
-      args:
-        chdir: /usr/local/src/shadow/
-      ignore_errors: true
-
-    - name: Install
-      ansible.builtin.command:
-        make install
-      args:
-        chdir: /usr/local/src/shadow/
-      ignore_errors: true
-
-    - name: Copy shadow repo
-      ansible.builtin.fetch:
-        src: '{{ item }}'
-        dest: ./build-out/
-      with_items:
-        - "/usr/local/src/shadow/config.log"
-        - "/usr/local/src/shadow/config.h"
-        - "/usr/local/src/shadow/build.log"
-        - "/usr/local/src/shadow/tests/unit/test-suite.log"
+  gather_facts: false
+  roles:
+    - role: ci_run
