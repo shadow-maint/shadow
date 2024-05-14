@@ -68,7 +68,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		return;		/* can't open or create logfile */
 	}
 
-	(void) time (&now);
+	now = time(NULL);
 	tm = localtime (&now);
 
 	fprintf (fp, "SU %.02d/%.02d %.02d:%.02d %c %s %s-%s\n",

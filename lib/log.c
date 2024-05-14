@@ -79,7 +79,7 @@ void dolastlog (
 	}
 
 	ll_time = newlog.ll_time;
-	(void) time (&ll_time);
+	ll_time = time(NULL);
 	newlog.ll_time = ll_time;
 	STRTCPY(newlog.ll_line, line);
 #if HAVE_LL_HOST

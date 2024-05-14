@@ -82,7 +82,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	}
 
 	STRTCPY(fl->fail_line, tty);
-	(void) time (&fl->fail_time);
+	fl->fail_time = time(NULL);
 
 	/*
 	 * Seek back to the correct position in the file and write the
@@ -126,7 +126,7 @@ static bool too_many_failures (const struct faillog *fl)
 		return true;	/* locked until reset manually */
 	}
 
-	(void) time (&now);
+	now = time(NULL);
 	if ((fl->fail_time + fl->fail_locktime) < now) {
 		return false;	/* enough time since last failure */
 	}

@@ -55,7 +55,7 @@ check_login(const struct utmpx *ut)
 	ZUSTR2STP(user, ut->ut_user);
 	ZUSTR2STP(line, ut->ut_line);
 
-	(void) time (&now);
+	now = time(NULL);
 
 	/*
 	 * Check if they are allowed to be logged in right now.
