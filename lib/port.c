@@ -168,7 +168,7 @@ again:
 	}
 	*cp = '\0';
 	cp++;
-	port.pt_names[j + 1] = NULL;
+	port.pt_names[j] = NULL;
 
 	/*
 	 * Get the list of user names.  It is the second colon
