@@ -8,14 +8,8 @@
 
 #include <config.h>
 
-#include "must_be.h"
 
-
-#define const_cast(T, p)                                                      \
-({                                                                            \
-	static_assert(is_same_type(typeof(&*(p)), const T), "");              \
-	(T) (p);                                                              \
-})
+#define const_cast(T, p)  _Generic(p, const T:  (T) (p))
 
 
 #endif  // include guard
