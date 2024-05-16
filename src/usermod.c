@@ -687,11 +687,8 @@ fail_exit (int code)
 
 static void update_group (void)
 {
-	bool is_member;
-	bool was_member;
-	bool changed;
-	const struct group *grp;
-	struct group *ngrp;
+	bool                changed;
+	const struct group  *grp;
 
 	changed = false;
 
@@ -700,6 +697,9 @@ static void update_group (void)
 	 * the user is a member of.
 	 */
 	while ((grp = gr_next ()) != NULL) {
+		bool          is_member;
+		bool          was_member;
+		struct group  *ngrp;
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
@@ -799,12 +799,8 @@ static void update_group (void)
 #ifdef SHADOWGRP
 static void update_gshadow (void)
 {
-	bool is_member;
-	bool was_member;
-	bool was_admin;
-	bool changed;
-	const struct sgrp *sgrp;
-	struct sgrp *nsgrp;
+	bool               changed;
+	const struct sgrp  *sgrp;
 
 	changed = false;
 
@@ -813,6 +809,10 @@ static void update_gshadow (void)
 	 * that the user is a member of.
 	 */
 	while ((sgrp = sgr_next ()) != NULL) {
+		bool         is_member;
+		bool         was_member;
+		bool         was_admin;
+		struct sgrp  *nsgrp;
 
 		/*
 		 * See if the user was a member of this group
