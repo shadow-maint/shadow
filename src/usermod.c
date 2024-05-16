@@ -688,19 +688,20 @@ fail_exit (int code)
 static void
 update_group_file(void)
 {
-	bool                changed;
 	const struct group  *grp;
-
-	changed = false;
 
 	/*
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
 	while ((grp = gr_next ()) != NULL) {
+		bool          changed;
 		bool          is_member;
 		bool          was_member;
 		struct group  *ngrp;
+
+		changed = false;
+
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
@@ -783,7 +784,6 @@ update_group_file(void)
 		if (!changed)
 			goto free_ngrp;
 
-		changed = false;
 		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
