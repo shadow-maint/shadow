@@ -179,6 +179,7 @@ static void new_pwent (struct passwd *);
 static void new_spent (struct spwd *);
 NORETURN static void fail_exit (int);
 static void update_group_file(void);
+static void update_group(const struct group *grp);
 
 #ifdef SHADOWGRP
 static void update_gshadow_file(void);
@@ -694,108 +695,114 @@ update_group_file(void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-	while ((grp = gr_next ()) != NULL) {
-		bool          changed;
-		bool          is_member;
-		bool          was_member;
-		struct group  *ngrp;
+	while ((grp = gr_next()) != NULL)
+		update_group(grp);
+}
 
-		changed = false;
 
-		/*
-		 * See if the user specified this group as one of their
-		 * concurrent groups.
-		 */
-		was_member = is_on_list (grp->gr_mem, user_name);
-		is_member = Gflg && (   (was_member && aflg)
-		                     || is_on_list (user_groups, grp->gr_name));
+static void
+update_group(const struct group *grp)
+{
+	bool          changed;
+	bool          is_member;
+	bool          was_member;
+	struct group  *ngrp;
 
-		if (!was_member && !is_member) {
-			continue;
-		}
+	changed = false;
 
-		/*
-		* If rflg+Gflg  is passed in AKA -rG invert is_member flag, which removes
-		* mentioned groups while leaving the others.
-		*/
-		if (Gflg && rflg) {
-			is_member = !is_member;
-		}
+	/*
+	 * See if the user specified this group as one of their
+	 * concurrent groups.
+	 */
+	was_member = is_on_list (grp->gr_mem, user_name);
+	is_member = Gflg && (   (was_member && aflg)
+			     || is_on_list (user_groups, grp->gr_name));
 
-		ngrp = __gr_dup (grp);
-		if (NULL == ngrp) {
-			fprintf (stderr,
-			         _("%s: Out of memory. Cannot update %s.\n"),
-			         Prog, gr_dbname ());
-			fail_exit (E_GRP_UPDATE);
-		}
+	if (!was_member && !is_member)
+		return;
 
-		if (was_member) {
-			if ((!Gflg) || is_member) {
-				/* User was a member and is still a member
-				 * of this group.
-				 * But the user might have been renamed.
-				 */
-				if (lflg) {
-					ngrp->gr_mem = del_list (ngrp->gr_mem,
-					                         user_name);
-					ngrp->gr_mem = add_list (ngrp->gr_mem,
-					                         user_newname);
-					changed = true;
-#ifdef WITH_AUDIT
-					audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					              "changing group member",
-					              user_newname, AUDIT_NO_ID, 1);
-#endif
-					SYSLOG ((LOG_INFO,
-					         "change '%s' to '%s' in group '%s'",
-					         user_name, user_newname,
-					         ngrp->gr_name));
-				}
-			} else {
-				/* User was a member but is no more a
-				 * member of this group.
-				 */
-				ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
+	/*
+	* If rflg+Gflg  is passed in AKA -rG invert is_member flag, which removes
+	* mentioned groups while leaving the others.
+	*/
+	if (Gflg && rflg) {
+		is_member = !is_member;
+	}
+
+	ngrp = __gr_dup (grp);
+	if (NULL == ngrp) {
+		fprintf (stderr,
+			 _("%s: Out of memory. Cannot update %s.\n"),
+			 Prog, gr_dbname ());
+		fail_exit (E_GRP_UPDATE);
+	}
+
+	if (was_member) {
+		if ((!Gflg) || is_member) {
+			/* User was a member and is still a member
+			 * of this group.
+			 * But the user might have been renamed.
+			 */
+			if (lflg) {
+				ngrp->gr_mem = del_list (ngrp->gr_mem,
+							 user_name);
+				ngrp->gr_mem = add_list (ngrp->gr_mem,
+							 user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "removing group member",
-				              user_name, AUDIT_NO_ID, 1);
+					      "changing group member",
+					      user_newname, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-				         "delete '%s' from group '%s'",
-				         user_name, ngrp->gr_name));
+					 "change '%s' to '%s' in group '%s'",
+					 user_name, user_newname,
+					 ngrp->gr_name));
 			}
-		} else if (is_member) {
-			/* User was not a member but is now a member this
-			 * group.
+		} else {
+			/* User was a member but is no more a
+			 * member of this group.
 			 */
-			ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
+			ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 			changed = true;
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "adding user to group",
-			              user_name, AUDIT_NO_ID, 1);
+				      "removing group member",
+				      user_name, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
-			         user_newname, ngrp->gr_name));
+			SYSLOG ((LOG_INFO,
+				 "delete '%s' from group '%s'",
+				 user_name, ngrp->gr_name));
 		}
-		if (!changed)
-			goto free_ngrp;
+	} else if (is_member) {
+		/* User was not a member but is now a member this
+		 * group.
+		 */
+		ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
+		changed = true;
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding user to group",
+			      user_name, AUDIT_NO_ID, 1);
+#endif
+		SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
+			 user_newname, ngrp->gr_name));
+	}
+	if (!changed)
+		goto free_ngrp;
 
-		if (gr_update (ngrp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, gr_dbname (), ngrp->gr_name);
-			SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname (), ngrp->gr_name));
-			fail_exit (E_GRP_UPDATE);
-		}
+	if (gr_update (ngrp) == 0) {
+		fprintf (stderr,
+			 _("%s: failed to prepare the new %s entry '%s'\n"),
+			 Prog, gr_dbname (), ngrp->gr_name);
+		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname (), ngrp->gr_name));
+		fail_exit (E_GRP_UPDATE);
+	}
 
 free_ngrp:
-		gr_free(ngrp);
-	}
+	gr_free(ngrp);
 }
+
 
 #ifdef SHADOWGRP
 static void
