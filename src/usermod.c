@@ -178,7 +178,7 @@ NORETURN static void usage (int status);
 static void new_pwent (struct passwd *);
 static void new_spent (struct spwd *);
 NORETURN static void fail_exit (int);
-static void update_group (void);
+static void update_group_file(void);
 
 #ifdef SHADOWGRP
 static void update_gshadow (void);
@@ -685,7 +685,8 @@ fail_exit (int code)
 }
 
 
-static void update_group (void)
+static void
+update_group_file(void)
 {
 	bool                changed;
 	const struct group  *grp;
@@ -950,7 +951,7 @@ static void update_gshadow (void)
  */
 static void grp_update (void)
 {
-	update_group ();
+	update_group_file();
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
 		update_gshadow ();
