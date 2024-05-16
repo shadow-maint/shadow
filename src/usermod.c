@@ -780,9 +780,8 @@ update_group_file(void)
 			SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
 			         user_newname, ngrp->gr_name));
 		}
-		if (!changed) {
-			continue;
-		}
+		if (!changed)
+			goto free_ngrp;
 
 		changed = false;
 		if (gr_update (ngrp) == 0) {
@@ -793,6 +792,7 @@ update_group_file(void)
 			fail_exit (E_GRP_UPDATE);
 		}
 
+free_ngrp:
 		gr_free(ngrp);
 	}
 }
