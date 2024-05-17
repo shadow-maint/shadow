@@ -181,7 +181,7 @@ NORETURN static void fail_exit (int);
 static void update_group_file(void);
 
 #ifdef SHADOWGRP
-static void update_gshadow (void);
+static void update_gshadow_file(void);
 #endif
 static void grp_update (void);
 
@@ -798,7 +798,8 @@ update_group_file(void)
 }
 
 #ifdef SHADOWGRP
-static void update_gshadow (void)
+static void
+update_gshadow_file(void)
 {
 	bool               changed;
 	const struct sgrp  *sgrp;
@@ -954,7 +955,7 @@ static void grp_update (void)
 	update_group_file();
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
-		update_gshadow ();
+		update_gshadow_file();
 	}
 #endif
 }
