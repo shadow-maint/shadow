@@ -183,6 +183,7 @@ static void update_group(const struct group *grp);
 
 #ifdef SHADOWGRP
 static void update_gshadow_file(void);
+static void update_gshadow(const struct sgrp *sgrp);
 #endif
 static void grp_update (void);
 
@@ -814,140 +815,148 @@ update_gshadow_file(void)
 	 * Scan through the entire shadow group file looking for the groups
 	 * that the user is a member of.
 	 */
-	while ((sgrp = sgr_next ()) != NULL) {
-		bool         changed;
-		bool         is_member;
-		bool         was_member;
-		bool         was_admin;
-		struct sgrp  *nsgrp;
+	while ((sgrp = sgr_next()) != NULL)
+		update_gshadow(sgrp);
+}
+#endif				/* SHADOWGRP */
 
-		changed = false;
 
-		/*
-		 * See if the user was a member of this group
+#ifdef SHADOWGRP
+static void
+update_gshadow(const struct sgrp *sgrp)
+{
+	bool         changed;
+	bool         is_member;
+	bool         was_member;
+	bool         was_admin;
+	struct sgrp  *nsgrp;
+
+	changed = false;
+
+	/*
+	 * See if the user was a member of this group
+	 */
+	was_member = is_on_list (sgrp->sg_mem, user_name);
+
+	/*
+	 * See if the user was an administrator of this group
+	 */
+	was_admin = is_on_list (sgrp->sg_adm, user_name);
+
+	/*
+	 * See if the user specified this group as one of their
+	 * concurrent groups.
+	 */
+	is_member = Gflg && (   (was_member && aflg)
+			     || is_on_list (user_groups, sgrp->sg_name));
+
+	if (!was_member && !was_admin && !is_member)
+		return;
+
+	/*
+	* If rflg+Gflg  is passed in AKA -rG invert is_member, to remove targeted
+	* groups while leaving the user apart of groups not mentioned
+	*/
+	if (Gflg && rflg) {
+		is_member = !is_member;
+	}
+
+	nsgrp = __sgr_dup (sgrp);
+	if (NULL == nsgrp) {
+		fprintf (stderr,
+			 _("%s: Out of memory. Cannot update %s.\n"),
+			 Prog, sgr_dbname ());
+		fail_exit (E_GRP_UPDATE);
+	}
+
+	if (was_admin && lflg) {
+		/* User was an admin of this group but the user
+		 * has been renamed.
 		 */
-		was_member = is_on_list (sgrp->sg_mem, user_name);
+		nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
+		nsgrp->sg_adm = add_list (nsgrp->sg_adm, user_newname);
+		changed = true;
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "changing admin name in shadow group",
+			      user_name, AUDIT_NO_ID, 1);
+#endif
+		SYSLOG ((LOG_INFO,
+			 "change admin '%s' to '%s' in shadow group '%s'",
+			 user_name, user_newname, nsgrp->sg_name));
+	}
 
-		/*
-		 * See if the user was an administrator of this group
-		 */
-		was_admin = is_on_list (sgrp->sg_adm, user_name);
-
-		/*
-		 * See if the user specified this group as one of their
-		 * concurrent groups.
-		 */
-		is_member = Gflg && (   (was_member && aflg)
-		                     || is_on_list (user_groups, sgrp->sg_name));
-
-		if (!was_member && !was_admin && !is_member) {
-			continue;
-		}
-
-		/*
-		* If rflg+Gflg  is passed in AKA -rG invert is_member, to remove targeted
-		* groups while leaving the user apart of groups not mentioned
-		*/
-		if (Gflg && rflg) {
-			is_member = !is_member;
-		}
-
-		nsgrp = __sgr_dup (sgrp);
-		if (NULL == nsgrp) {
-			fprintf (stderr,
-			         _("%s: Out of memory. Cannot update %s.\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
-		}
-
-		if (was_admin && lflg) {
-			/* User was an admin of this group but the user
-			 * has been renamed.
+	if (was_member) {
+		if ((!Gflg) || is_member) {
+			/* User was a member and is still a member
+			 * of this group.
+			 * But the user might have been renamed.
 			 */
-			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
-			nsgrp->sg_adm = add_list (nsgrp->sg_adm, user_newname);
-			changed = true;
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "changing admin name in shadow group",
-			              user_name, AUDIT_NO_ID, 1);
-#endif
-			SYSLOG ((LOG_INFO,
-			         "change admin '%s' to '%s' in shadow group '%s'",
-			         user_name, user_newname, nsgrp->sg_name));
-		}
-
-		if (was_member) {
-			if ((!Gflg) || is_member) {
-				/* User was a member and is still a member
-				 * of this group.
-				 * But the user might have been renamed.
-				 */
-				if (lflg) {
-					nsgrp->sg_mem = del_list (nsgrp->sg_mem,
-					                          user_name);
-					nsgrp->sg_mem = add_list (nsgrp->sg_mem,
-					                          user_newname);
-					changed = true;
-#ifdef WITH_AUDIT
-					audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					              "changing member in shadow group",
-					              user_name, AUDIT_NO_ID, 1);
-#endif
-					SYSLOG ((LOG_INFO,
-					         "change '%s' to '%s' in shadow group '%s'",
-					         user_name, user_newname,
-					         nsgrp->sg_name));
-				}
-			} else {
-				/* User was a member but is no more a
-				 * member of this group.
-				 */
-				nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
+			if (lflg) {
+				nsgrp->sg_mem = del_list (nsgrp->sg_mem,
+							  user_name);
+				nsgrp->sg_mem = add_list (nsgrp->sg_mem,
+							  user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "removing user from shadow group",
-				              user_name, AUDIT_NO_ID, 1);
+					      "changing member in shadow group",
+					      user_name, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-				         "delete '%s' from shadow group '%s'",
-				         user_name, nsgrp->sg_name));
+					 "change '%s' to '%s' in shadow group '%s'",
+					 user_name, user_newname,
+					 nsgrp->sg_name));
 			}
-		} else if (is_member) {
-			/* User was not a member but is now a member this
-			 * group.
+		} else {
+			/* User was a member but is no more a
+			 * member of this group.
 			 */
-			nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
+			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 			changed = true;
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "adding user to shadow group",
-			              user_newname, AUDIT_NO_ID, 1);
+				      "removing user from shadow group",
+				      user_name, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
-			         user_newname, nsgrp->sg_name));
+			SYSLOG ((LOG_INFO,
+				 "delete '%s' from shadow group '%s'",
+				 user_name, nsgrp->sg_name));
 		}
-		if (!changed)
-			goto free_nsgrp;
-
-		/*
-		 * Update the group entry to reflect the changes.
+	} else if (is_member) {
+		/* User was not a member but is now a member this
+		 * group.
 		 */
-		if (sgr_update (nsgrp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), nsgrp->sg_name);
-			SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'",
-			         sgr_dbname (), nsgrp->sg_name));
-			fail_exit (E_GRP_UPDATE);
-		}
+		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
+		changed = true;
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding user to shadow group",
+			      user_newname, AUDIT_NO_ID, 1);
+#endif
+		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
+			 user_newname, nsgrp->sg_name));
+	}
+	if (!changed)
+		goto free_nsgrp;
+
+	/*
+	 * Update the group entry to reflect the changes.
+	 */
+	if (sgr_update (nsgrp) == 0) {
+		fprintf (stderr,
+			 _("%s: failed to prepare the new %s entry '%s'\n"),
+			 Prog, sgr_dbname (), nsgrp->sg_name);
+		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'",
+			 sgr_dbname (), nsgrp->sg_name));
+		fail_exit (E_GRP_UPDATE);
+	}
 
 free_nsgrp:
-		free (nsgrp);
-	}
+	free (nsgrp);
 }
 #endif				/* SHADOWGRP */
+
 
 /*
  * grp_update - add user to secondary group set
