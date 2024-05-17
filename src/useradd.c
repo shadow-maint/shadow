@@ -615,7 +615,8 @@ static int set_defaults (void)
 				fprintf (stderr,
 				         _("%s: line too long in %s: %s..."),
 				         Prog, default_file, buf);
-				(void) fclose (ifp);
+				fclose(ifp);
+				fclose(ofp);
 				goto err_free_def;
 			}
 		}
