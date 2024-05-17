@@ -801,20 +801,20 @@ free_ngrp:
 static void
 update_gshadow_file(void)
 {
-	bool               changed;
 	const struct sgrp  *sgrp;
-
-	changed = false;
 
 	/*
 	 * Scan through the entire shadow group file looking for the groups
 	 * that the user is a member of.
 	 */
 	while ((sgrp = sgr_next ()) != NULL) {
+		bool         changed;
 		bool         is_member;
 		bool         was_member;
 		bool         was_admin;
 		struct sgrp  *nsgrp;
+
+		changed = false;
 
 		/*
 		 * See if the user was a member of this group
@@ -923,8 +923,6 @@ update_gshadow_file(void)
 		}
 		if (!changed)
 			goto free_nsgrp;
-
-		changed = false;
 
 		/*
 		 * Update the group entry to reflect the changes.
