@@ -558,7 +558,7 @@ static int set_defaults (void)
 			fprintf(stderr,
 			        _("%s: cannot create new defaults file: %s\n"),
 			        Prog, strerror(errno));
-			goto setdef_err;
+			goto err_free_def;
 		}
 	}
 
@@ -567,7 +567,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 			_("%s: cannot create directory for defaults file\n"),
 			Prog);
-		goto setdef_err;
+		goto err_free_def;
 	}
 
 	ret = mkdir(dirname(new_file_dup), 0755);
@@ -576,7 +576,7 @@ static int set_defaults (void)
 			_("%s: cannot create directory for defaults file\n"),
 			Prog);
 		free(new_file_dup);
-		goto setdef_err;
+		goto err_free_def;
 	}
 	free(new_file_dup);
 
@@ -588,7 +588,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: cannot create new defaults file\n"),
 		         Prog);
-		goto setdef_err;
+		goto err_free_def;
 	}
 
 	ofp = fdopen (ofd, "w");
@@ -596,7 +596,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: cannot open new defaults file\n"),
 		         Prog);
-		goto setdef_err;
+		goto err_free_def;
 	}
 
 	/*
@@ -623,7 +623,7 @@ static int set_defaults (void)
 				         _("%s: line too long in %s: %s..."),
 				         Prog, default_file, buf);
 				(void) fclose (ifp);
-				goto setdef_err;
+				goto err_free_def;
 			}
 		}
 
@@ -702,9 +702,10 @@ static int set_defaults (void)
 	(void) fflush (ofp);
 	if (   (ferror (ofp) != 0)
 	    || (fsync (fileno (ofp)) != 0)
-	    || (fclose (ofp) != 0)) {
+	    || (fclose (ofp) != 0))
+	{
 		unlink (new_file);
-		goto setdef_err;
+		goto err_free_def;
 	}
 
 	/*
@@ -718,7 +719,7 @@ static int set_defaults (void)
 		         _("%s: Cannot create backup file (%s): %s\n"),
 		         Prog, buf, strerror (err));
 		unlink (new_file);
-		goto setdef_err;
+		goto err_free_def;
 	}
 
 	/*
@@ -729,7 +730,7 @@ static int set_defaults (void)
 		fprintf (stderr,
 		         _("%s: rename: %s: %s\n"),
 		         Prog, new_file, strerror (err));
-		goto setdef_err;
+		goto err_free_def;
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USYS_CONFIG, Prog,
@@ -744,7 +745,8 @@ static int set_defaults (void)
 	         def_inactive, def_expire, def_template,
 	         def_create_mail_spool, def_log_init));
 	ret = 0;
-    setdef_err:
+
+err_free_def:
 	if (prefix[0])
 		free(default_file);
 	free(new_file);
