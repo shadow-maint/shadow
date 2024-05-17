@@ -558,7 +558,7 @@ static int set_defaults (void)
 			fprintf(stderr,
 			        _("%s: cannot create new defaults file: %s\n"),
 			        Prog, strerror(errno));
-			goto err_free_def;
+			goto err_free_new;
 		}
 	}
 
@@ -749,6 +749,7 @@ static int set_defaults (void)
 err_free_def:
 	if (prefix[0])
 		free(default_file);
+err_free_new:
 	free(new_file);
 
 	return ret;
