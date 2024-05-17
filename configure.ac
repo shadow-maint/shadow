@@ -159,13 +159,6 @@ fi])
 AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$shadow_cv_passwd_dir/passwd",
 	[Path to passwd program.])
 
-dnl XXX - quick hack, should disappear before anyone notices :).
-dnl XXX - I just read the above message :).
-if test "$ac_cv_func_ruserok" = "yes"; then
-	AC_DEFINE(RLOGIN, 1, [Define if login should support the -r flag for rlogind.])
-	AC_DEFINE(RUSEROK, 0, [Define to the ruserok() "success" return value (0 or 1).])
-fi
-
 AC_ARG_ENABLE(shadowgrp,
 	[AS_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
 	[case "${enableval}" in

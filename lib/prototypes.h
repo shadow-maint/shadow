@@ -356,10 +356,6 @@ unsigned long csrand_interval (unsigned long min, unsigned long max);
 /* remove_tree.c */
 extern int remove_tree (const char *root, bool remove_root);
 
-/* rlogin.c */
-extern int do_rlogin(const char *remote_host, char *name, size_t namesize,
-                     char *term, size_t termsize);
-
 /* root_flag.c */
 extern void process_root_flag (const char* short_opt, int argc, char **argv);
 

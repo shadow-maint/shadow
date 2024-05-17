@@ -85,11 +85,6 @@ static struct lastlog ll;
 static bool pflg = false;
 static bool fflg = false;
 
-#ifdef RLOGIN
-static bool rflg = false;
-#else				/* RLOGIN */
-#define rflg false
-#endif				/* !RLOGIN */
 static bool hflg = false;
 static bool preauth_flag = false;
 
@@ -134,7 +129,6 @@ static void exit_handler (int);
  * usage - print login command usage and exit
  *
  * login [ name ]
- * login -r hostname	(for rlogind)
  * login -h hostname	(for telnetd, etc.)
  * login -f name	(for pre-authenticated login: datakit, xterm, etc.)
  */
@@ -145,9 +139,6 @@ static void usage (void)
 		exit (1);
 	}
 	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
-#ifdef RLOGIN
-	fprintf (stderr, _("       %s [-p] -r host\n"), Prog);
-#endif				/* RLOGIN */
 	exit (1);
 }
 
@@ -271,7 +262,7 @@ static void process_flags (int argc, char *const *argv)
 	/*
 	 * Check the flags for proper form. Every argument starting with
 	 * "-" must be exactly two characters long. This closes all the
-	 * clever rlogin, telnet, and getty holes.
+	 * clever telnet, and getty holes.
 	 */
 	for (arg = 1; arg < argc; arg++) {
 		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2) {
@@ -298,13 +289,6 @@ static void process_flags (int argc, char *const *argv)
 			hostname = optarg;
 			reason = PW_TELNET;
 			break;
-#ifdef	RLOGIN
-		case 'r':
-			rflg = true;
-			hostname = optarg;
-			reason = PW_RLOGIN;
-			break;
-#endif				/* RLOGIN */
 		case 'p':
 			pflg = true;
 			break;
@@ -313,21 +297,11 @@ static void process_flags (int argc, char *const *argv)
 		}
 	}
 
-#ifdef RLOGIN
-	/*
-	 * Neither -h nor -f should be combined with -r.
-	 */
-
-	if (rflg && (hflg || fflg)) {
-		usage ();
-	}
-#endif				/* RLOGIN */
-
 	/*
 	 * Allow authentication bypass only if real UID is zero.
 	 */
 
-	if ((rflg || fflg || hflg) && !amroot) {
+	if ((fflg || hflg) && !amroot) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (1);
 	}
@@ -342,11 +316,6 @@ static void process_flags (int argc, char *const *argv)
 		++optind;
 	}
 
-#ifdef	RLOGIN
-	if (rflg && (NULL != username)) {
-		usage ();
-	}
-#endif				/* RLOGIN */
 	if (fflg && (NULL == username)) {
 		usage ();
 	}
@@ -474,7 +443,6 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  *	the flags which login supports are
  *
  *	-p - preserve the environment
- *	-r - perform autologin protocol for rlogin
  *	-f - do not perform authentication, user is preauthenticated
  *	-h - the name of the remote host
  */
@@ -505,9 +473,6 @@ int main (int argc, char **argv)
 # if defined(ENABLE_LASTLOG)
 	char           ptime[80];
 # endif
-#endif
-#if defined(RLOGIN)
-	char           term[128] = "";
 #endif
 
 	/*
@@ -559,7 +524,7 @@ int main (int argc, char **argv)
 	is_console = console (tty);
 #endif
 
-	if (rflg || hflg) {
+	if (hflg) {
 		/*
 		 * Add remote hostname to the environment. I think
 		 * (not sure) I saw it once on Irix.  --marekm
@@ -572,23 +537,6 @@ int main (int argc, char **argv)
 	if (hflg) {
 		reason = PW_RLOGIN;
 	}
-#ifdef RLOGIN
-	if (rflg) {
-		size_t  max_size;
-
-		max_size = login_name_max_size();
-		assert (NULL == username);
-		username = XMALLOC(max_size, char);
-		username[max_size - 1] = '\0';
-		if (do_rlogin(hostname, username, max_size, term, sizeof(term)))
-		{
-			preauth_flag = true;
-		} else {
-			free (username);
-			username = NULL;
-		}
-	}
-#endif				/* RLOGIN */
 
 	OPENLOG (Prog);
 
@@ -623,18 +571,11 @@ int main (int argc, char **argv)
 		}
 	}
 
-#ifdef RLOGIN
-	if (term[0] != '\0') {
-		addenv ("TERM", term);
-	} else
-#endif				/* RLOGIN */
-	{
-		/* preserve TERM from getty */
-		if (!pflg) {
-			tmp = getenv ("TERM");
-			if (NULL != tmp) {
-				addenv ("TERM", tmp);
-			}
+	/* preserve TERM from getty */
+	if (!pflg) {
+		tmp = getenv ("TERM");
+		if (NULL != tmp) {
+			addenv ("TERM", tmp);
 		}
 	}
 
@@ -644,7 +585,7 @@ int main (int argc, char **argv)
 		set_env (argc - optind, &argv[optind]);
 	}
 
-	if (rflg || hflg) {
+	if (hflg) {
 		cp = hostname;
 	} else if ((host != NULL) && (host[0] != '\0')) {
 		cp = host;
@@ -954,7 +895,7 @@ int main (int argc, char **argv)
 		}
 
 		/*
-		 * The -r and -f flags provide a name which has already
+		 * The -f flag provides a name which has already
 		 * been authenticated by some server.
 		 */
 		if (preauth_flag) {
@@ -1043,8 +984,8 @@ int main (int argc, char **argv)
 
 		(void) puts (_("Login incorrect"));
 
-		/* allow only one attempt with -r or -f */
-		if (rflg || fflg || (retries <= 0)) {
+		/* allow only one attempt with -f */
+		if (fflg || (retries <= 0)) {
 			closelog ();
 			exit (1);
 		}

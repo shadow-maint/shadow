@@ -119,7 +119,6 @@ libshadow_la_SOURCES = \
 	pwdcheck.c \
 	pwmem.c \
 	remove_tree.c \
-	rlogin.c \
 	root_flag.c \
 	run_part.h \
 	run_part.c \

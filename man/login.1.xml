@@ -215,14 +215,6 @@
 	  <para>Preserve environment.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
-	<term>
-	  <option>-r</option>
-	</term>
-	<listitem>
-	  <para>Perform autologin protocol for rlogin.</para>
-	</listitem>
-      </varlistentry>
     </variablelist>
 
     <para>
