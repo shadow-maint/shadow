@@ -571,14 +571,13 @@ static int set_defaults (void)
 	}
 
 	ret = mkdir(dirname(new_file_dup), 0755);
+	free(new_file_dup);
 	if (-1 == ret && EEXIST != errno) {
 		fprintf (stderr,
 			_("%s: cannot create directory for defaults file\n"),
 			Prog);
-		free(new_file_dup);
 		goto err_free_def;
 	}
-	free(new_file_dup);
 
 	/*
 	 * Create a temporary file to copy the new output to.
