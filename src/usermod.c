@@ -921,9 +921,8 @@ update_gshadow_file(void)
 			SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
 			         user_newname, nsgrp->sg_name));
 		}
-		if (!changed) {
-			continue;
-		}
+		if (!changed)
+			goto free_nsgrp;
 
 		changed = false;
 
@@ -939,6 +938,7 @@ update_gshadow_file(void)
 			fail_exit (E_GRP_UPDATE);
 		}
 
+free_nsgrp:
 		free (nsgrp);
 	}
 }
