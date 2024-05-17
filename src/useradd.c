@@ -745,10 +745,9 @@ static int set_defaults (void)
 	         def_create_mail_spool, def_log_init));
 	ret = 0;
     setdef_err:
-	free(new_file);
-	if (prefix[0]) {
+	if (prefix[0])
 		free(default_file);
-	}
+	free(new_file);
 
 	return ret;
 }
