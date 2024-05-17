@@ -238,6 +238,9 @@ static void create_home (void);
 static void create_mail (void);
 static void check_uid_range(int rflg, uid_t user_id);
 
+static FILE *fmkstemp(char *template);
+
+
 /*
  * fail_exit - undo as much as possible
  */
@@ -524,7 +527,6 @@ static void show_defaults (void)
  */
 static int set_defaults (void)
 {
-	int   ofd;
 	int   ret = -1;
 	bool  out_group = false;
 	bool  out_groups = false;
@@ -582,15 +584,7 @@ static int set_defaults (void)
 	/*
 	 * Create a temporary file to copy the new output to.
 	 */
-	ofd = mkstemp (new_file);
-	if (-1 == ofd) {
-		fprintf (stderr,
-		         _("%s: cannot create new defaults file\n"),
-		         Prog);
-		goto err_free_def;
-	}
-
-	ofp = fdopen (ofd, "w");
+	ofp = fmkstemp(new_file);
 	if (NULL == ofp) {
 		fprintf (stderr,
 		         _("%s: cannot open new defaults file\n"),
@@ -2752,3 +2746,23 @@ int main (int argc, char **argv)
 	return E_SUCCESS;
 }
 
+
+static FILE *
+fmkstemp(char *template)
+{
+	int   fd;
+	FILE  *fp;
+
+	fd = mkstemp(template);
+	if (fd == -1)
+		return NULL;
+
+	fp = fdopen(fd, "w");
+	if (fp == NULL) {
+		close(fd);
+		unlink(template);
+		return NULL;
+	}
+
+	return fp;
+}
