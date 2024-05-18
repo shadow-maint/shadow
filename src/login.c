@@ -74,7 +74,6 @@ static pam_handle_t *pamh = NULL;
  */
 static const char Prog[] = "login";
 
-static const char hostname[] = "";
 static /*@null@*/ /*@only@*/char *username = NULL;
 
 #ifndef USE_PAM
@@ -612,7 +611,7 @@ int main (int argc, char **argv)
 	 * PAM_RHOST and PAM_TTY are used for authentication, only use
 	 * information coming from login or from the caller (e.g. no utmp)
 	 */
-	retcode = pam_set_item (pamh, PAM_RHOST, hostname);
+	retcode = pam_set_item (pamh, PAM_RHOST, "");
 	PAM_FAIL_CHECK;
 	retcode = pam_set_item (pamh, PAM_TTY, tty);
 	PAM_FAIL_CHECK;
@@ -703,7 +702,7 @@ int main (int argc, char **argv)
 			                        "login",
 			                        failent_user,
 			                        AUDIT_NO_ID,
-			                        hostname,
+			                        "",
 			                        NULL,    /* addr */
 			                        tty,
 			                        0);      /* result */
@@ -926,7 +925,7 @@ int main (int argc, char **argv)
 			failure (pwd->pw_uid, tty, &faillog);
 		}
 #ifndef ENABLE_LOGIND
-		record_failure(failent_user, tty, hostname);
+		record_failure(failent_user, tty);
 #endif /* ENABLE_LOGIND */
 
 		retries--;
@@ -1019,7 +1018,7 @@ int main (int argc, char **argv)
 	                        "login",
 	                        username,
 	                        AUDIT_NO_ID,
-	                        hostname,
+	                        "",
 	                        NULL,    /* addr */
 	                        tty,
 	                        1);      /* result */
@@ -1031,7 +1030,7 @@ int main (int argc, char **argv)
 	if (   getdef_bool ("LASTLOG_ENAB")
 	    && pwd->pw_uid <= (uid_t) getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL)) {
 		/* give last login and log this one */
-		dolastlog (&ll, pwd, tty, hostname);
+		dolastlog(&ll, pwd, tty);
 	}
 #endif /* ENABLE_LASTLOG */
 #endif
@@ -1103,7 +1102,7 @@ int main (int argc, char **argv)
 	 * The utmp entry needs to be updated to indicate the new status
 	 * of the session, the new PID and SID.
 	 */
-	err = update_utmp (username, tty, hostname);
+	err = update_utmp(username, tty);
 	if (err != 0) {
 		SYSLOG ((LOG_WARN, "Unable to update utmp entry for %s", username));
 	}

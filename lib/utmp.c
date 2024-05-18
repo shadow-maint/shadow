@@ -241,8 +241,7 @@ updwtmpx(const char *filename, const struct utmpx *ut)
  *	The returned structure shall be freed by the caller.
  */
 static /*@only@*/struct utmpx *
-prepare_utmp(const char *name, const char *line, const char *host,
-             /*@null@*/const struct utmpx *ut)
+prepare_utmp(const char *name, const char *line, /*@null@*/const struct utmpx *ut)
 {
 	char            *hostname = NULL;
 	struct utmpx    *utent;
@@ -253,10 +252,8 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 
-	if (NULL != host && '\0' != host[0])
-		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	else if (NULL != ut && '\0' != ut->ut_host[0])
+	if (NULL != ut && '\0' != ut->ut_host[0])
 		hostname = XSTRNDUP(ut->ut_host);
 #endif
 
@@ -368,12 +365,12 @@ setutmp(struct utmpx *ut)
 
 
 int
-update_utmp(const char *user, const char *tty, const char *host)
+update_utmp(const char *user, const char *tty)
 {
 	struct utmpx  *utent, *ut;
 
 	utent = get_current_utmp ();
-	ut = prepare_utmp  (user, tty, host, utent);
+	ut = prepare_utmp(user, tty, utent);
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 
@@ -385,13 +382,13 @@ update_utmp(const char *user, const char *tty, const char *host)
 
 
 void
-record_failure(const char *failent_user, const char *tty, const char *hostname)
+record_failure(const char *failent_user, const char *tty)
 {
 	struct utmpx  *utent, *failent;
 
 	if (getdef_str ("FTMP_FILE") != NULL) {
 		utent = get_current_utmp ();
-		failent = prepare_utmp (failent_user, tty, hostname, utent);
+		failent = prepare_utmp(failent_user, tty, utent);
 		failtmp (failent_user, failent);
 		free (utent);
 		free (failent);
