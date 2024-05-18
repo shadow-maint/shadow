@@ -29,6 +29,8 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strchr/stpcspn.h"
+#include "string/strchr/stpspn.h"
 
 
 /*
@@ -569,16 +571,16 @@ static void def_load (void)
 		/*
 		 * Break the line into two fields.
 		 */
-		name = buf + strspn (buf, " \t");	/* first nonwhite */
+		name = stpspn(buf, " \t");	/* first nonwhite */
 		if (*name == '\0' || *name == '#')
 			continue;	/* comment or empty */
 
-		s = name + strcspn (name, " \t");	/* end of field */
+		s = stpcspn(name, " \t");	/* end of field */
 		if (*s == '\0')
 			continue;	/* only 1 field?? */
 
 		*s++ = '\0';
-		value = s + strspn (s, " \"\t");	/* next nonwhite */
+		value = stpspn(s, " \"\t");	/* next nonwhite */
 		*strchrnul(value, '"') = '\0';
 
 		/*
