@@ -100,10 +100,8 @@ int login_access (const char *user, const char *from)
 		int lineno = 0;	/* for diagnostics */
 		while (   !match
 		       && (fgets (line, sizeof (line), fp) == line)) {
-			ptrdiff_t  end;
 			lineno++;
-			end = strlen (line) - 1;
-			if (line[0] == '\0' || line[end] != '\n') {
+			if (line[0] == '\0' || strchr(line, '\n') == NULL) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: missing newline or line too long",
 					 TABLE, lineno));
