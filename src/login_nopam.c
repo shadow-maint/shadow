@@ -189,23 +189,6 @@ static char *myhostname (void)
 	return (name);
 }
 
-#if HAVE_INNETGR
-/* netgroup_match - match group against machine or user */
-static bool
-netgroup_match (const char *group, const char *machine, const char *user)
-{
-	static char *mydomain = NULL;
-
-	if (mydomain == NULL) {
-		static char domain[MAXHOSTNAMELEN + 1];
-
-		getdomainname (domain, MAXHOSTNAMELEN);
-		mydomain = domain;
-	}
-
-	return (innetgr (group, machine, user, mydomain) != 0);
-}
-#endif
 
 /* user_match - match a username against one token */
 static bool user_match (const char *tok, const char *string)
@@ -225,10 +208,6 @@ static bool user_match (const char *tok, const char *string)
 	host = stpsep(tok + 1, "@");	/* split user@host pattern */
 	if (host != NULL) {
 		return user_match(tok, string) && from_match(host, myhostname());
-#if HAVE_INNETGR
-	} else if (tok[0] == '@') {	/* netgroup */
-		return (netgroup_match (tok + 1, NULL, string));
-#endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
 	/* local, no need for xgetgrnam */
@@ -300,11 +279,6 @@ static bool from_match (const char *tok, const char *string)
 	 * contain a "." character. If the token is a network number, return true
 	 * if it matches the head of the string.
 	 */
-#if HAVE_INNETGR
-	if (tok[0] == '@') {	/* netgroup */
-		return (netgroup_match (tok + 1, string, NULL));
-	} else
-#endif
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
 	} else if (tok[0] == '.') {	/* domain: match last fields */
