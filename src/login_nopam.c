@@ -1,13 +1,12 @@
 /* Taken from logdaemon-5.0, only minimal changes.  --marekm */
-/*
- * SPDX-FileCopyrightText: 1990 - 1995, Wietse Venema.
- *
- * SPDX-License-Identifier: Unlicense
- */
+// SPDX-FileCopyrightText: 1990 - 1995, Wietse Venema.
+// SPDX-FileCopyrightTest: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: Unlicense
 
 /************************************************************************
 * Copyright 1995 by Wietse Venema.  All rights reserved. Individual files
 * may be covered by other copyrights (as noted in the file itself.)
+* Copyright 2024, Alejandro Colomar <alx@kernel.org>
 *
 * This material was originally written and compiled by Wietse Venema at
 * Eindhoven University of Technology, The Netherlands, in 1990, 1991,
@@ -32,9 +31,8 @@
 #include "prototypes.h"
     /*
      * This module implements a simple but effective form of login access
-     * control based on login names and on host (or domain) names, internet
-     * addresses (or network numbers), or on terminal line names in case of
-     * non-networked logins. Diagnostics are reported through syslog(3).
+     * control based on login names and terminal line names.
+     * Diagnostics are reported through syslog(3).
      *
      * Author: Wietse Venema, Eindhoven University of Technology, The Netherlands.
      */
@@ -43,7 +41,6 @@
 #include <stdio.h>
 #include <syslog.h>
 #include <ctype.h>
-#include <netdb.h>
 #include <grp.h>
 #ifdef PRIMARY_GROUP_MATCH
 #include <pwd.h>
@@ -52,9 +49,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>		/* for inet_ntoa() */
 
 #include "sizeof.h"
 #include "string/strchr/strrspn.h"
@@ -79,16 +73,15 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 static bool user_match (const char *tok, const char *string);
 static bool from_match (const char *tok, const char *string);
 static bool string_match (const char *tok, const char *string);
-static const char *resolve_hostname (const char *string);
 
-/* login_access - match username/group and host/tty with access control file */
+/* login_access - match username/group and tty with access control file */
 int login_access (const char *user, const char *from)
 {
 	FILE *fp;
 	char line[BUFSIZ];
 	char *perm;		/* becomes permission field */
 	char *users;		/* becomes list of login names */
-	char *froms;		/* becomes list of terminals or hosts */
+	char *froms;		/* becomes list of terminals */
 	bool match = false;
 
 	/*
@@ -239,33 +232,8 @@ static bool user_match (const char *tok, const char *string)
 	return false;
 }
 
-static const char *resolve_hostname (const char *string)
-{
-	int              gai_err;
-	const char       *addr_str;
-	struct addrinfo  *addrs;
 
-	static char      host[MAXHOSTNAMELEN];
-
-	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
-	if (gai_err != 0) {
-		SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err)));
-		return string;
-	}
-
-	addr_str = host;
-	gai_err = getnameinfo(addrs[0].ai_addr, addrs[0].ai_addrlen,
-	                      host, NITEMS(host), NULL, 0, NI_NUMERICHOST);
-	if (gai_err != 0) {
-		SYSLOG ((LOG_ERR, "getnameinfo(%s): %s", string, gai_strerror(gai_err)));
-		addr_str = string;
-	}
-
-	freeaddrinfo(addrs);
-	return addr_str;
-}
-
-/* from_match - match a host or tty against a list of tokens */
+/* from_match - match a tty against a list of tokens */
 
 static bool from_match (const char *tok, const char *string)
 {
@@ -273,29 +241,17 @@ static bool from_match (const char *tok, const char *string)
 
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds. Return
-	 * true if the token fully matches the string. If the token is a domain
-	 * name, return true if it matches the last fields of the string. If the
+	 * true if the token fully matches the string.
+	 * If the
 	 * token has the magic value "LOCAL", return true if the string does not
-	 * contain a "." character. If the token is a network number, return true
-	 * if it matches the head of the string.
+	 * contain a "." character.
 	 */
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
-	} else if (tok[0] == '.') {	/* domain: match last fields */
-		size_t str_len;
-		str_len = strlen (string);
-		tok_len = strlen (tok);
-		if (   (str_len > tok_len)
-		    && (strcasecmp (tok, string + str_len - tok_len) == 0)) {
-			return true;
-		}
 	} else if (strcasecmp (tok, "LOCAL") == 0) {	/* local: no dots */
 		if (strchr (string, '.') == NULL) {
 			return true;
 		}
-	} else if (   (tok[0] != '\0' && tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
-		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
-		return true;
 	}
 	return false;
 }
