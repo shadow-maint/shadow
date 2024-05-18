@@ -76,7 +76,6 @@ static const char Prog[] = "login";
 
 static const char hostname[] = "";
 static /*@null@*/ /*@only@*/char *username = NULL;
-static int reason = PW_LOGIN;
 
 #ifndef USE_PAM
 #ifdef ENABLE_LASTLOG
@@ -882,7 +881,7 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		if (pw_auth (user_passwd, username, reason, NULL) == 0) {
+		if (pw_auth(user_passwd, username, PW_LOGIN, NULL) == 0) {
 			goto auth_ok;
 		}
 
@@ -944,7 +943,7 @@ int main (int argc, char **argv)
 		 * all).  --marekm
 		 */
 		if (user_passwd[0] == '\0') {
-			pw_auth ("!", username, reason, NULL);
+			pw_auth("!", username, PW_LOGIN, NULL);
 		}
 
 		/*
