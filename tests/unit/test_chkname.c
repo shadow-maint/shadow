@@ -139,10 +139,10 @@ test_is_valid_user_name_long(void **state)
 
 	memset(name, '_', max);
 
-	name[max] = '\0';
+	stpcpy(&name[max], "");
 	assert_true(false == is_valid_user_name(name));
 
-	name[max - 1] = '\0';
+	stpcpy(&name[max - 1], "");
 	assert_true(is_valid_user_name(name));
 
 	free(name);

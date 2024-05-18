@@ -24,7 +24,7 @@ int
 sssd_flush_cache(int dbflags)
 {
 	int          status, code, rv;
-	int          i = 0;
+	char         *p;
 	char         *sss_cache_args = NULL;
 	const char   *cmd = "/usr/sbin/sss_cache";
 	const char   *spawnedArgs[] = {"sss_cache", NULL, NULL};
@@ -40,15 +40,13 @@ sssd_flush_cache(int dbflags)
 	    return -1;
 	}
 
-	sss_cache_args[i++] = '-';
-	if (dbflags & SSSD_DB_PASSWD) {
-		sss_cache_args[i++] = 'U';
-	}
-	if (dbflags & SSSD_DB_GROUP) {
-		sss_cache_args[i++] = 'G';
-	}
-	sss_cache_args[i++] = '\0';
-	if (i == 2) {
+	p = stpcpy(sss_cache_args, "-");
+	if (dbflags & SSSD_DB_PASSWD)
+		stpcpy(p, "U");
+	if (dbflags & SSSD_DB_GROUP)
+		stpcpy(p, "G");
+
+	if (*p == '\0') {
 		/* Neither passwd nor group, nothing to do */
 		free(sss_cache_args);
 		return 0;

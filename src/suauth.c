@@ -81,7 +81,7 @@ int check_su_auth (const char *actual_id,
 			continue;
 		}
 
-		*strrspn(temp, " \t\n") = '\0';
+		stpcpy(strrspn(temp, " \t\n"), "");
 
 		posn = 0;
 		while (temp[posn] == ' ' || temp[posn] == '\t')

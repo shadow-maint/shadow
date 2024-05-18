@@ -76,7 +76,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 */
 
 	while (fgets (buf, sizeof (buf), fp) != NULL) {
-		*strchrnul(buf, '\n') = '\0';
+		stpcpy(strchrnul(buf, '\n'), "");
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);
 			return true;

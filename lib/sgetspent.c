@@ -54,7 +54,7 @@ sgetspent(const char *string)
 		return NULL;	/* fail if too long */
 	}
 	strcpy (spwbuf, string);
-	*strchrnul(spwbuf, '\n') = '\0';
+	stpcpy(strchrnul(spwbuf, '\n'), "");
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to

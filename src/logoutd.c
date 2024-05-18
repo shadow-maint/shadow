@@ -200,11 +200,10 @@ main(int argc, char **argv)
 			}
 			/* child */
 
-			if (strncmp (ut->ut_line, "/dev/", 5) != 0) {
-				strcpy (tty_name, "/dev/");
-			} else {
-				tty_name[0] = '\0';
-			}
+			if (strncmp(ut->ut_line, "/dev/", 5) != 0)
+				strcpy(tty_name, "/dev/");
+			else
+				strcpy(tty_name, "");
 
 			STRNCAT(tty_name, ut->ut_line);
 #ifndef O_NOCTTY

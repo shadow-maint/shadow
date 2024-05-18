@@ -197,7 +197,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		errno = EINVAL;
 		return 0;
 	}
-	buf[len] = '\0';
+	stpcpy(&buf[len], "");
 	if (get_pid(buf, &pid) == -1) {
 		if (log) {
 			(void) fprintf (shadow_logfd,
@@ -659,7 +659,7 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_buf;
 			}
 		}
-		*strchrnul(buf, '\n') = '\0';
+		stpcpy(strchrnul(buf, '\n'), "");
 
 		line = strdup (buf);
 		if (NULL == line) {

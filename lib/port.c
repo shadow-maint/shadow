@@ -152,7 +152,7 @@ again:
 	 * TTY devices.
 	 */
 
-	*strchrnul(buf, '\n') = '\0';
+	stpcpy(strchrnul(buf, '\n'), "");
 
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
@@ -165,12 +165,10 @@ again:
 			break;
 		}
 
-		if (',' == *cp) {	/* end of current tty name */
-			*cp++ = '\0';
-		}
+		if (',' == *cp)		/* end of current tty name */
+			stpcpy(cp++, "");
 	}
-	*cp = '\0';
-	cp++;
+	stpcpy(cp++, "");
 	port.pt_names[j] = NULL;
 
 	/*
@@ -186,8 +184,7 @@ again:
 
 		for (j = 1; ':' != *cp; cp++) {
 			if ((',' == *cp) && (j < PORT_IDS)) {
-				*cp = '\0';
-				cp++;
+				stpcpy(cp++, "");
 				port.pt_users[j] = cp;
 				j++;
 			}
@@ -201,8 +198,7 @@ again:
 		goto again;
 	}
 
-	*cp = '\0';
-	cp++;
+	stpcpy(cp++, "");
 
 	/*
 	 * Get the list of valid times.  The times field is the third

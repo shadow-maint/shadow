@@ -361,7 +361,7 @@ static void get_defaults (void)
 	 * values are used, everything else can be ignored.
 	 */
 	while (fgets (buf, sizeof buf, fp) == buf) {
-		*strchrnul(buf, '\n') = '\0';
+		stpcpy(strchrnul(buf, '\n'), "");
 
 		cp = strchr (buf, '=');
 		if (NULL == cp) {
@@ -605,7 +605,7 @@ static int set_defaults (void)
 	while (fgets (buf, sizeof buf, ifp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
-			*cp = '\0';
+			stpcpy(cp, "");
 		} else {
 			/* A line which does not end with \n is only valid
 			 * at the end of the file.
@@ -1358,8 +1358,7 @@ static void process_flags (int argc, char **argv)
 					exit (E_BAD_ARG);
 				}
 				/* terminate name, point to value */
-				*cp = '\0';
-				cp++;
+				stpcpy(cp++, "");
 				if (putdef_str (optarg, cp, NULL) < 0) {
 					exit (E_BAD_ARG);
 				}
@@ -2223,7 +2222,7 @@ static void create_home (void)
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
 
-	path[0] = '\0';
+	strcpy(path, "");
 	bhome = strdup(prefix_user_home);
 	if (!bhome) {
 		fprintf(stderr,
@@ -2269,7 +2268,7 @@ static void create_home (void)
 					Prog, path);
 				fail_exit(E_HOMEDIR);
 			}
-			btrfs_check[strlen(path) - strlen(cp) - 1] = '\0';
+			stpcpy(&btrfs_check[strlen(path) - strlen(cp) - 1], "");
 			if (is_btrfs(btrfs_check) <= 0) {
 				fprintf(stderr,
 					_("%s: home directory \"%s\" must be mounted on BTRFS\n"),

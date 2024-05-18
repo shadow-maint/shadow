@@ -491,12 +491,12 @@ safeget (char *buf, int maxlen)
       bad = (!isalnum (c) && (c != '_') && (c != ' '));
       *(buf++) = c;
     }
-  *buf = '\0';
+  stpcpy(buf, "");
 
   if (bad)
     {
       printf ("\nString contained banned character. Please stick to alphanumerics.\n");
-      *bstart = '\0';
+      stpcpy(bstart, "");
     }
 }
 

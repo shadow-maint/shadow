@@ -503,7 +503,7 @@ int main (int argc, char **argv)
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
-			*cp = '\0';
+			stpcpy(cp, "");
 		} else {
 			if (feof (stdin) == 0) {
 
@@ -535,8 +535,7 @@ int main (int argc, char **argv)
 		name = buf;
 		cp = strchr (name, ':');
 		if (NULL != cp) {
-			*cp = '\0';
-			cp++;
+			stpcpy(cp++, "");
 		} else {
 			fprintf (stderr,
 			         _("%s: line %d: missing new password\n"),
