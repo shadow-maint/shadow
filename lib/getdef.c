@@ -30,6 +30,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpcspn.h"
 #include "string/strchr/stpspn.h"
+#include "string/strchr/stprspn.h"
 
 
 /*
@@ -529,7 +530,6 @@ static void def_load (void)
 #else /* USE_ECONF */
 static void def_load (void)
 {
-	int i;
 	FILE *fp;
 	char buf[1024], *name, *value, *s;
 
@@ -561,13 +561,7 @@ static void def_load (void)
 		/*
 		 * Trim trailing whitespace.
 		 */
-		for (i = (ptrdiff_t) strlen (buf) - 1; i >= 0; --i) {
-			if (!isspace (buf[i])) {
-				break;
-			}
-		}
-		i++;
-		buf[i] = '\0';
+		*stprspn(buf, " \t\n") = '\0';
 
 		/*
 		 * Break the line into two fields.

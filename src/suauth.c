@@ -8,13 +8,17 @@
  */
 
 #include <config.h>
+
 #include <errno.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <sys/types.h>
+
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strchr/stprspn.h"
+
 
 #ifndef SUAUTHFILE
 #define SUAUTHFILE "/etc/suauth"
@@ -77,11 +81,7 @@ int check_su_auth (const char *actual_id,
 			continue;
 		}
 
-		while (endline > 0 && (temp[endline - 1] == ' '
-				       || temp[endline - 1] == '\t'
-				       || temp[endline - 1] == '\n'))
-			endline--;
-		temp[endline] = '\0';
+		*stprspn(temp, " \t\n") = '\0';
 
 		posn = 0;
 		while (temp[posn] == ' ' || temp[posn] == '\t')
