@@ -49,7 +49,7 @@ void ttytype (const char *line)
 			continue;
 		}
 
-		*strchrnul(buf, '\n') = '\0';
+		stpcpy(strchrnul(buf, '\n'), "");
 
 		if (   (sscanf (buf, "%1023s %1023s", type, port) == 2)
 		    && (strcmp (line, port) == 0)) {

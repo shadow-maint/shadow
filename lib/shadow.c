@@ -77,7 +77,7 @@ static struct spwd *my_sgetspent (const char *string)
 	if (strlen (string) >= sizeof spwbuf)
 		return 0;
 	strcpy (spwbuf, string);
-	*strchrnul(spwbuf, '\n') = '\0';
+	stpcpy(strchrnul(spwbuf, '\n'), "");
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to
@@ -202,7 +202,7 @@ struct spwd *fgetspent (FILE * fp)
 
 	if (fgets (buf, sizeof buf, fp) != NULL)
 	{
-		*strchrnul(buf, '\n') = '\0';
+		stpcpy(strchrnul(buf, '\n'), "");
 		return my_sgetspent (buf);
 	}
 	return 0;

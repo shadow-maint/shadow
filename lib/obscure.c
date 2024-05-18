@@ -189,12 +189,10 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 
 	new1 = xstrdup (new);
 	old1 = xstrdup (old);
-	if (newlen > maxlen) {
-		new1[maxlen] = '\0';
-	}
-	if (oldlen > maxlen) {
-		old1[maxlen] = '\0';
-	}
+	if (newlen > maxlen)
+		stpcpy(&new1[maxlen], "");
+	if (oldlen > maxlen)
+		stpcpy(&old1[maxlen], "");
 
 	msg = password_check (old1, new1, pwdp);
 

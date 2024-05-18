@@ -111,7 +111,7 @@ int login_access (const char *user, const char *from)
 			if (line[0] == '#') {
 				continue;	/* comment line */
 			}
-			*strrspn(line, " \t\n") = '\0';
+			stpcpy(strrspn(line, " \t\n"), "");
 			if (line[0] == '\0') {	/* skip blank lines */
 				continue;
 			}
@@ -182,7 +182,7 @@ static char *myhostname (void)
 
 	if (name[0] == '\0') {
 		gethostname (name, sizeof (name));
-		name[MAXHOSTNAMELEN] = '\0';
+		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
 	return (name);
 }
@@ -222,7 +222,7 @@ static bool user_match (const char *tok, const char *string)
 	 */
 	at = strchr (tok + 1, '@');
 	if (NULL != at) {	/* split user@host pattern */
-		*at = '\0';
+		stpcpy(at, "");
 		return (   user_match (tok, string)
 		        && from_match (at + 1, myhostname ()));
 #if HAVE_INNETGR

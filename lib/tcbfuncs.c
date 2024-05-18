@@ -135,13 +135,13 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 	}
 	free (path);
 	if ((size_t)ret >= sizeof(link) - 1) {
-		link[sizeof(link) - 1] = '\0';
+		stpcpy(&link[sizeof(link) - 1], "");
 		fprintf (shadow_logfd,
 		         _("%s: Suspiciously long symlink: %s\n"),
 		         shadow_progname, link);
 		return NULL;
 	}
-	link[ret] = '\0';
+	stpcpy(&link[ret], "");
 	rval = strdup (link);
 	if (NULL == rval) {
 		OUT_OF_MEMORY;
@@ -200,7 +200,7 @@ static shadowtcb_status mkdir_leading (const char *name, uid_t uid)
 		goto out_free_path;
 	}
 	while ((ind = strchr (ptr, '/'))) {
-		*ind = '\0';
+		stpcpy(ind, "");
 		if (asprintf (&dir, TCB_DIR "/%s", path) == -1) {
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;
@@ -266,7 +266,7 @@ static shadowtcb_status rmdir_leading (char *path)
 	char *ind, *dir;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 	while ((ind = strrchr (path, '/'))) {
-		*ind = '\0';
+		stpcpy(ind, "");
 		if (asprintf (&dir, TCB_DIR "/%s", path) == -1) {
 			OUT_OF_MEMORY;
 			return SHADOWTCB_FAILURE;

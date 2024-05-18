@@ -87,7 +87,7 @@ void login_prompt (char *name, int namesize)
 	if (NULL == cp) {
 		exit (EXIT_FAILURE);
 	}
-	*cp = '\0';		/* remove \n [ must be there ] */
+	stpcpy(cp, "");		/* remove \n [ must be there ] */
 
 	/*
 	 * Skip leading whitespace.  This makes "  username" work right.
@@ -98,7 +98,7 @@ void login_prompt (char *name, int namesize)
 
 	for (i = 0; i < namesize - 1 && *cp != '\0'; name[i++] = *cp++);
 
-	name[i] = '\0';
+	stpcpy(&name[i], "");
 
 	/*
 	 * Set the SIGQUIT handler back to its original value

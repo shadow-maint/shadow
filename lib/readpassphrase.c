@@ -141,7 +141,7 @@ restart:
 			*p++ = ch;
 		}
 	}
-	*p = '\0';
+	stpcpy(p, "");
 	save_errno = errno;
 	if (!(term.c_lflag & ECHO))
 		(void)write(output, "\n", 1);

@@ -84,7 +84,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 	if (NULL == cp) {
 		return;
 	}
-	*cp = '\0';
+	stpcpy(cp, "");
 
 	if ('\0' != newf[0]) {
 		/*
@@ -92,7 +92,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-		*strrspn(newf, " \t\n") = '\0';
+		stpcpy(strrspn(newf, " \t\n"), "");
 
 		cp = newf;
 		while (isspace (*cp)) {

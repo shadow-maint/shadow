@@ -560,7 +560,7 @@ static void def_load (void)
 		/*
 		 * Trim trailing whitespace.
 		 */
-		*strrspn(buf, " \t\n") = '\0';
+		stpcpy(strrspn(buf, " \t\n"), "");
 
 		/*
 		 * Break the line into two fields.
@@ -573,9 +573,9 @@ static void def_load (void)
 		if (*s == '\0')
 			continue;	/* only 1 field?? */
 
-		*s++ = '\0';
+		stpcpy(s++, "");
 		value = stpspn(s, " \"\t");	/* next nonwhite */
-		*strchrnul(value, '"') = '\0';
+		stpcpy(strchrnul(value, '"'), "");
 
 		/*
 		 * Store the value in def_table.

@@ -56,7 +56,7 @@ static void read_env_file (const char *filename)
 		if (NULL == cp) {
 			break;
 		}
-		*cp = '\0';
+		stpcpy(cp, "");
 
 		cp = buf;
 		/* ignore whitespace and comments */
@@ -78,8 +78,7 @@ static void read_env_file (const char *filename)
 			continue;
 		}
 		/* NUL-terminate the name */
-		*cp = '\0';
-		cp++;
+		stpcpy(cp++, "");
 		val = cp;
 #if 0				/* XXX untested, and needs rewrite with fewer goto's :-) */
 /*
@@ -112,7 +111,7 @@ static void read_env_file (const char *filename)
 			goto finished;
 		} else if (isspace (*cp)) {
 			/* unescaped whitespace - end of string */
-			*cp = '\0';
+			stpcpy(cp, "");
 			goto finished;
 		} else {
 			cp++;
