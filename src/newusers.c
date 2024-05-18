@@ -1107,9 +1107,8 @@ int main (int argc, char **argv)
 				 Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
-		if (cp != NULL) {
-			*cp = '\0';
-		}
+		if (cp != NULL)
+			stpcpy(cp, "");
 
 		/*
 		 * Break the string into fields and screw around with them.

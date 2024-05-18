@@ -10,6 +10,8 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <string.h>
+
 #include "defines.h"
 #include "prototypes.h"
 
@@ -33,10 +35,8 @@ fgetsx(/*@returned@*/char *restrict buf, int cnt, FILE *restrict f)
 		ep = strrchr (cp, '\\');
 		if ((NULL != ep) && (*(ep + 1) == '\n')) {
 			cnt -= ep - cp;
-			if (cnt > 0) {
-				cp = ep;
-				*cp = '\0';
-			}
+			if (cnt > 0)
+				cp = stpcpy(ep, "");
 		} else {
 			break;
 		}

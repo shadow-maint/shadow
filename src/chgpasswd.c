@@ -462,7 +462,7 @@ int main (int argc, char **argv)
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
-			*cp = '\0';
+			stpcpy(cp, "");
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
 			         Prog, line);
@@ -482,7 +482,7 @@ int main (int argc, char **argv)
 		name = buf;
 		cp = strchr (name, ':');
 		if (NULL != cp) {
-			*cp = '\0';
+			stpcpy(cp, "");
 			cp++;
 		} else {
 			fprintf (stderr,
