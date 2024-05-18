@@ -74,7 +74,7 @@ static pam_handle_t *pamh = NULL;
  */
 static const char Prog[] = "login";
 
-static const char *hostname = "";
+static const char hostname[] = "";
 static /*@null@*/ /*@only@*/char *username = NULL;
 static int reason = PW_LOGIN;
 
@@ -86,7 +86,6 @@ static struct lastlog ll;
 static bool pflg = false;
 static bool fflg = false;
 
-static bool hflg = false;
 static bool preauth_flag = false;
 
 static bool amroot;
@@ -130,7 +129,6 @@ static void exit_handler (int);
  * usage - print login command usage and exit
  *
  * login [ name ]
- * login -h hostname	(for telnetd, etc.)
  * login -f name	(for pre-authenticated login: datakit, xterm, etc.)
  */
 static void usage (void)
@@ -139,7 +137,7 @@ static void usage (void)
 	if (!amroot) {
 		exit (1);
 	}
-	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
+	fprintf (stderr, _("       %s [-p] [-f name]\n"), Prog);
 	exit (1);
 }
 
@@ -263,7 +261,7 @@ static void process_flags (int argc, char *const *argv)
 	/*
 	 * Check the flags for proper form. Every argument starting with
 	 * "-" must be exactly two characters long. This closes all the
-	 * clever telnet, and getty holes.
+	 * clever getty holes.
 	 */
 	for (arg = 1; arg < argc; arg++) {
 		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2) {
@@ -285,11 +283,6 @@ static void process_flags (int argc, char *const *argv)
 		case 'f':
 			fflg = true;
 			break;
-		case 'h':
-			hflg = true;
-			hostname = optarg;
-			reason = PW_TELNET;
-			break;
 		case 'p':
 			pflg = true;
 			break;
@@ -302,7 +295,7 @@ static void process_flags (int argc, char *const *argv)
 	 * Allow authentication bypass only if real UID is zero.
 	 */
 
-	if ((fflg || hflg) && !amroot) {
+	if (fflg && !amroot) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (1);
 	}
@@ -439,13 +432,12 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  *	characteristics to a reasonable set of values and getting
  *	the name of the user to be logged in. login may also be
  *	called to create a new user session on a pty for a variety
- *	of reasons, such as X servers or network logins.
+ *	of reasons, such as X servers.
  *
  *	the flags which login supports are
  *
  *	-p - preserve the environment
  *	-f - do not perform authentication, user is preauthenticated
- *	-h - the name of the remote host
  */
 int main (int argc, char **argv)
 {
@@ -525,18 +517,8 @@ int main (int argc, char **argv)
 	is_console = console (tty);
 #endif
 
-	if (hflg) {
-		/*
-		 * Add remote hostname to the environment. I think
-		 * (not sure) I saw it once on Irix.  --marekm
-		 */
-		addenv ("REMOTEHOST", hostname);
-	}
 	if (fflg) {
 		preauth_flag = true;
-	}
-	if (hflg) {
-		reason = PW_RLOGIN;
 	}
 
 	OPENLOG (Prog);
@@ -586,9 +568,7 @@ int main (int argc, char **argv)
 		set_env (argc - optind, &argv[optind]);
 	}
 
-	if (hflg) {
-		cp = hostname;
-	} else if ((host != NULL) && (host[0] != '\0')) {
+	if ((host != NULL) && (host[0] != '\0')) {
 		cp = host;
 	} else {
 		cp = "";
@@ -626,7 +606,7 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * hostname & tty are either set to NULL or their correct values,
+	 * tty is either set to NULL or its correct value,
 	 * depending on how much we know. We also set PAM's fail delay to
 	 * ours.
 	 *
@@ -924,7 +904,8 @@ int main (int argc, char **argv)
 			failed = true;
 		}
 		if (   !failed
-		    && !login_access (username, ('\0' != *hostname) ? hostname : tty)) {
+		    && !login_access(username, tty))
+		{
 			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
 			         username, fromhost));
 			failed = true;
