@@ -57,6 +57,7 @@
 #include <arpa/inet.h>		/* for inet_ntoa() */
 
 #include "sizeof.h"
+#include "string/strchr/strrspn.h"
 
 #if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
 #undef MAXHOSTNAMELEN
@@ -110,10 +111,7 @@ int login_access (const char *user, const char *from)
 			if (line[0] == '#') {
 				continue;	/* comment line */
 			}
-			while (end > 0 && isspace (line[end - 1])) {
-				end--;
-			}
-			line[end] = '\0';	/* strip trailing whitespace */
+			*strrspn(line, " \t\n") = '\0';
 			if (line[0] == '\0') {	/* skip blank lines */
 				continue;
 			}
