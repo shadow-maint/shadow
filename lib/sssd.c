@@ -16,17 +16,20 @@
 
 #include "shadowlog_internal.h"
 
+
 #define MSG_SSSD_FLUSH_CACHE_FAILED "%s: Failed to flush the sssd cache."
 
-int sssd_flush_cache (int dbflags)
+
+int
+sssd_flush_cache(int dbflags)
 {
-	int status, code, rv;
-	const char *cmd = "/usr/sbin/sss_cache";
-	struct stat sb;
-	char *sss_cache_args = NULL;
-	const char *spawnedArgs[] = {"sss_cache", NULL, NULL};
-	const char *spawnedEnv[] = {NULL};
-	int i = 0;
+	int          status, code, rv;
+	int          i = 0;
+	char         *sss_cache_args = NULL;
+	const char   *cmd = "/usr/sbin/sss_cache";
+	const char   *spawnedArgs[] = {"sss_cache", NULL, NULL};
+	const char   *spawnedEnv[] = {NULL};
+	struct stat  sb;
 
 	rv = stat(cmd, &sb);
 	if (rv == -1 && errno == ENOENT)
