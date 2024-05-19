@@ -118,6 +118,7 @@
 #include <sys/stat.h>
 #include <syslog.h>
 
+
 #define IMMEDIATE_CHANGE	/* Expire newly created password, must be changed
 				 * immediately upon next login */
 #define HAVE_QUOTAS		/* Obvious */
@@ -291,12 +292,10 @@ main (void)
 	  printf ("Home Directory [%s/%s]: ", DEFAULT_HOME, usrname);
 	  fflush (stdout);
 	  safeget (dir, sizeof (dir));
-	  if (!strlen (dir))
-	    {			/* hit return */
-	      sprintf (dir, "%s/%s", DEFAULT_HOME, usrname);
-	    }
+	  if (!strlen(dir))  /* hit return */
+	    sprintf(dir, "%s/%s", DEFAULT_HOME, usrname);
 	  else if (dir[strlen (dir) - 1] == '/')
-	    sprintf (dir+strlen(dir), "%s", usrname);
+	    strcat(dir, usrname);
 	}
       else
 	{
@@ -308,7 +307,7 @@ main (void)
       fflush (stdout);
       safeget (shell, sizeof (shell));
       if (!strlen (shell))
-	sprintf (shell, "%s", DEFAULT_SHELL);
+	strcpy(shell, DEFAULT_SHELL);
       else
 	{
 	  char *sh;
@@ -327,7 +326,7 @@ main (void)
 	      else
 		{
 		  printf ("Shell NOT in /etc/shells, DEFAULT used\n");
-		  sprintf (shell, "%s", DEFAULT_SHELL);
+		  strcpy(shell, DEFAULT_SHELL);
 		}
 	    }
 	}
