@@ -126,7 +126,7 @@ static void check_perms_pam (const struct passwd *pw);
 #else				/* !USE_PAM */
 static void check_perms_nopam (const struct passwd *pw);
 #endif				/* !USE_PAM */
-static void save_caller_context (char **argv);
+static void save_caller_context(void);
 static void process_flags (int argc, char **argv);
 static void set_environment (struct passwd *pw);
 
@@ -722,6 +722,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	return pw;
 }
 
+
 /*
  * save_caller_context - save information from the call context
  *
@@ -730,7 +731,8 @@ static /*@only@*/struct passwd * do_check_perms (void)
  *	the TTY (ttyp), and whether su was called from a console
  *	(is_console) for further processing and before they might change.
  */
-static void save_caller_context (char **argv)
+static void
+save_caller_context(void)
 {
 	struct passwd *pw = NULL;
 #ifndef USE_PAM
@@ -800,6 +802,7 @@ static void save_caller_context (char **argv)
 #endif				/* !USE_PAM */
 	pw_free (pw);
 }
+
 
 /*
  * process_flags - Process the command line arguments
@@ -1013,7 +1016,7 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	save_caller_context (argv);
+	save_caller_context();
 
 	OPENLOG (Prog);
 
