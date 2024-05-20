@@ -60,11 +60,12 @@ void endspent (void)
 
 static struct spwd *my_sgetspent (const char *string)
 {
-	static char spwbuf[BUFSIZ];
-	static struct spwd spwd;
-	char *fields[FIELDS];
-	char *cp;
-	int i;
+	int                 i;
+	char                *fields[FIELDS];
+	char                *cp;
+	static char         spwbuf[BUFSIZ];
+	static char         empty[] = "";
+	static struct spwd  spwd;
 
 	/*
 	 * Copy string to local buffer.  It has to be tokenized and we
@@ -94,7 +95,7 @@ static struct spwd *my_sgetspent (const char *string)
 	}
 
 	if (i == (FIELDS - 1))
-		fields[i++] = cp;
+		fields[i++] = empty;
 
 	if ((cp && *cp) || (i != FIELDS && i != OFIELDS))
 		return 0;
