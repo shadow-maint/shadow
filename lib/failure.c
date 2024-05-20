@@ -242,14 +242,12 @@ void failprint (const struct faillog *fail)
 	struct tm *tp;
 	char lasttimeb[256];
 	char *lasttime = lasttimeb;
-	time_t NOW;
 
 	if (0 == fail->fail_cnt) {
 		return;
 	}
 
 	tp = localtime (&(fail->fail_time));
-	(void) time (&NOW);
 
 	/*
 	 * Print all information we have.
