@@ -9,7 +9,7 @@ cd $(dirname $0)
 
 make
 
-export LD_LIBRARY_PATH=.:../../../lib/.libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=.:${build_path}/lib/.libs:$LD_LIBRARY_PATH
 
 ./test_nss 1
 ./test_nss 2

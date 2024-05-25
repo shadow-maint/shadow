@@ -11,23 +11,23 @@ cleanup1() {
     umount /etc/nsswitch.conf
 }
 trap cleanup1 EXIT HUP INT TERM
-../../../src/check_subid_range user1 u 100000 65535
+${build_path}/src/check_subid_range user1 u 100000 65535
 if [ $? -ne 0 ]; then
     exit 1
 fi
-../../../src/check_subid_range user2 u 100000 65535
+${build_path}/src/check_subid_range user2 u 100000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi
-../../../src/check_subid_range unknown u 100000 65535
+${build_path}/src/check_subid_range unknown u 100000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi
-../../../src/check_subid_range error u 100000 65535
+${build_path}/src/check_subid_range error u 100000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi
-../../../src/check_subid_range user1 u 1000 65535
+${build_path}/src/check_subid_range user1 u 1000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi
@@ -43,7 +43,7 @@ cleanup2() {
     umount /etc/nsswitch.conf
 }
 trap cleanup2 EXIT HUP INT TERM
-../../../src/check_subid_range user1 u 100000 65535
+${build_path}/src/check_subid_range user1 u 100000 65535
 if [ $? -eq 0 ]; then
     exit 1
 fi
