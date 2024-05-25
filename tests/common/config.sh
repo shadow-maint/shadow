@@ -2,14 +2,16 @@
 
 set -e
 
-build_path=$(pwd)
-while [ "${build_path}" != "/" -a ! -e "${build_path}/.git" ]; do
-	build_path=$(dirname ${build_path})
-done
-if [ ! -e "${build_path}/.git" ]; then
-	echo "Not inside git directory" 1>&2
-	exit 1
+if [ -n "${BUILD_BASE_DIR}" ]; then
+    build_path="${BUILD_BASE_DIR}"
+else
+    build_path=$(git rev-parse --show-toplevel)
 fi
+if [ -z "${build_path}" ]; then
+    echo "Failed to find build base path"
+    exit 1
+fi
+export build_path
 
 # Save the configuration files in tmp.
 save_config ()
