@@ -274,6 +274,7 @@ AC_DEFINE_UNQUOTED(GROUP_NAME_MAX_LENGTH, $with_group_name_max_length, [max grou
 AC_SUBST(GROUP_NAME_MAX_LENGTH)
 GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 
+
 AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
 if test "$with_sha_crypt" = "yes"; then
 	AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
@@ -309,6 +310,10 @@ dnl other libraries.  This should prevent linking libnsl if not really
 dnl needed (Linux glibc, Irix), but still link it if needed (Solaris).
 
 AC_SEARCH_LIBS(gethostbyname, nsl)
+
+PKG_CHECK_MODULES([CMOCKA], [cmocka], [have_cmocka="yes"],
+	[AC_MSG_WARN([libcmocka not found, cmocka tests will not be built])])
+AM_CONDITIONAL([HAVE_CMOCKA], [test x$have_cmocka = xyes])
 
 AC_CHECK_LIB([econf],[econf_readDirs],[LIBECONF="-leconf"],[LIBECONF=""])
 if test -n "$LIBECONF"; then
@@ -700,10 +705,6 @@ if test "$with_skey" = "yes"; then
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
 	]])],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])],[])
 fi
-
-PKG_CHECK_MODULES([CMOCKA], [cmocka], [have_cmocka="yes"],
-	[AC_MSG_WARN([libcmocka not found, cmocka tests will not be built])])
-AM_CONDITIONAL([HAVE_CMOCKA], [test x$have_cmocka = xyes])
 
 AC_CHECK_FUNC(fgetpwent_r, [AC_DEFINE(HAVE_FGETPWENT_R, 1, [Defined to 1 if you have the declaration of 'fgetpwent_r'])])
 
