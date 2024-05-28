@@ -15,3 +15,4 @@ SUBDIRS += man
 endif
 
 CLEANFILES = man/8.out man/po/remove-potcdate.* man/*/login.defs.d man/*/*.mo
+EXTRA_DIST = tests/
