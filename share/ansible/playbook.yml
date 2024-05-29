@@ -1,9 +1,13 @@
 - name: Start build container
   hosts: localhost
+  vars:
+    image:
+      fedora: registry.fedoraproject.org/fedora:latest
+      alpine: docker.io/library/alpine:latest
+      debian: docker.io/library/debian:latest
+
   roles:
     - role: build_container
-      vars:
-        container_image: registry.fedoraproject.org/fedora:latest
 
 - name: CI run
   hosts: builder

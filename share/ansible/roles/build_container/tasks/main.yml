@@ -2,13 +2,13 @@
 # tasks file for build_container
 - name: Pull container image
   containers.podman.podman_image:
-    name: '{{ container_image }}'
+    name: '{{ image[distribution] }}'
 
 - name: Create and start container
   containers.podman.podman_container:
     name: builder
     state: started
-    image: '{{ container_image }}'
+    image: '{{ image[distribution] }}'
     command: "sleep 1d"
 
 - name: Create repo
