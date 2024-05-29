@@ -58,8 +58,8 @@ usbin_PROGRAMS = \
 	usermod \
 	vipw
 
-# id and groups are from gnu, sulogin from sysvinit
-noinst_PROGRAMS = id sulogin
+# sulogin from sysvinit
+noinst_PROGRAMS = sulogin
 
 suidusbins     =
 suidbins       =

@@ -94,7 +94,6 @@ src/groups.c
 src/grpck.c
 src/grpconv.c
 src/grpunconv.c
-src/id.c
 src/lastlog.c
 src/login.c
 src/login_nopam.c
