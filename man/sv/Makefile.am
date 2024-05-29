@@ -41,8 +41,7 @@ man_MANS += $(man_nopam)
 endif
 
 EXTRA_DIST = \
-	$(man_MANS) \
-	man1/id.1
+	$(man_MANS)
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)

@@ -52,7 +52,6 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	man1/id.1 \
 	man3/shadow.3 \
 	man8/sulogin.8
 

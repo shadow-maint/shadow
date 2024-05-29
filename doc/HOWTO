@@ -471,7 +471,7 @@
 
   The Shadow Suite contains replacement programs for:
 
-  su, login, passwd, newgrp, chfn, chsh, and id
+  su, login, passwd, newgrp, chfn, chsh
 
   The package also contains the new programs:
 
@@ -586,8 +586,6 @@
 
   ·  /usr/bin/chsh
 
-  ·  /usr/bin/id
-
   The BETA package has a save target in the Makefile, but it's commented
   out because different distributions place the programs in different
   places.
@@ -636,8 +634,6 @@
   ·  /usr/man/man1/chfn.1.gz
 
   ·  /usr/man/man1/chsh.1.gz
-
-  ·  /usr/man/man1/id.1.gz
 
   ·  /usr/man/man1/login.1.gz
 

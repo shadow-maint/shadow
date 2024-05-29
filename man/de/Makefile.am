@@ -58,7 +58,6 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	man1/id.1 \
 	man8/sulogin.8
 
 if USE_PAM
