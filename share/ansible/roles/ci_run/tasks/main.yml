@@ -1,8 +1,4 @@
 ---
 # tasks file for ci_run
 - name: 'Include distribution specific ci_run tasks fedora'
-  include_tasks: '{{ include_file }}'
-  loop_control:
-    loop_var: include_file
-  with_first_found:
-  - files: fedora.yml
+  include_tasks: '{{ distribution }}.yml'
