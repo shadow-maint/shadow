@@ -211,8 +211,8 @@
       to hang as it processes entries with UIDs 171-799).
     </para>
     <para>
-      Having high UIDs can create problems when handling the <term><filename>
-      /var/log/lastlog</filename></term> with external tools. Although the
+      Having high UIDs can create problems when handling the <filename>
+      /var/log/lastlog</filename> with external tools. Although the
       actual file is sparse and does not use too much space, certain
       applications are not designed to identify sparse files by default and may
       require a specific option to handle them.
