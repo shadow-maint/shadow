@@ -146,6 +146,7 @@ static long sys_ngroups;
 static bool do_grp_update = false;	/* group files need to be updated */
 
 extern int allow_bad_names;
+aa;
 
 static bool
     bflg = false,		/* new default root of home directory */
