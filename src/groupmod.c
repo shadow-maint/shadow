@@ -250,8 +250,6 @@ static void grp_update (void)
 
 		if (!aflg) {
 			// requested to replace the existing groups
-			if (NULL != grp.gr_mem[0])
-				gr_free_members(&grp);
 			grp.gr_mem = XMALLOC(1, char *);
 			grp.gr_mem[0] = NULL;
 		} else {
