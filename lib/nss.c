@@ -131,6 +131,11 @@ void nss_init(const char *nsswitch_path) {
 		fprintf(shadow_logfd, "%s did not provide @find_subid_owners@\n", libname);
 		goto close_lib;
 	}
+	subid_nss->free= dlsym(h, "shadow_subid_free");
+	if (!subid_nss->free) {
+		// Fallback to default `free()` for backward compatibility.
+		subid_nss->free = free;
+	}
 	subid_nss->handle = h;
 	goto done;
 

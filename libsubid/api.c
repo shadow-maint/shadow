@@ -42,6 +42,10 @@ bool subid_init(const char *progname, FILE * logfd)
 	return true;
 }
 
+void subid_free(void *ptr) {
+	free_subid_pointer(ptr);
+}
+
 static
 int get_subid_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
 {

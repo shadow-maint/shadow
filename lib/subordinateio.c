@@ -1117,6 +1117,15 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	return ret;
 }
 
+void free_subid_pointer(void *ptr) {
+	struct subid_nss_ops *h = get_subid_nss_handle();
+	if (h) {
+		h->free(ptr);
+	} else {
+		free(ptr);
+	}
+}
+
 #else				/* !ENABLE_SUBIDS */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
