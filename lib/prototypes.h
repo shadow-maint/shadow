@@ -284,6 +284,19 @@ struct subid_nss_ops {
 	 */
 	enum subid_status (*find_subid_owners)(unsigned long id, enum subid_type id_type, uid_t **uids, int *count);
 
+	/*
+	 * nss_free: free a memory block allocated by a subid plugin.
+	 *
+	 * @ptr - a pointer to a memory block to deallocate
+	 *
+	 * Some routines of subid_nss_ops allocate memory which should be freed by
+	 * caller after use. In order to deallocate that memory block, one should
+	 * use this routine to release that memory. By default, this function
+	 * pointer is set to free() for backward compatibility. However, it is
+	 * strongly recommended to define this routine explicitly.
+	 */
+	void (*free)(void *ptr);
+
 	/* The dlsym handle to close */
 	void *handle;
 };

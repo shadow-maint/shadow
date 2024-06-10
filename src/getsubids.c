@@ -44,6 +44,6 @@ int main(int argc, char *argv[])
 		printf("%d: %s %lu %lu\n", i, owner,
 			ranges[i].start, ranges[i].count);
 	}
-	free(ranges);
+	subid_free(ranges);
 	return 0;
 }
