@@ -292,7 +292,7 @@ struct subid_nss_ops {
 	 * Some routines of subid_nss_ops allocate memory which should be freed by
 	 * caller after use. In order to deallocate that memory block, one should
 	 * use this routine to release that memory. By default, this function
-	 * pointer is set to free() for backward compatibility. However, it is
+	 * pointer is set to free(3) for backward compatibility. However, it is
 	 * strongly recommended to define this routine explicitly.
 	 */
 	void (*free)(void *ptr);
