@@ -133,8 +133,8 @@ void nss_init(const char *nsswitch_path) {
 	}
 	subid_nss->free = dlsym(h, "shadow_subid_free");
 	if (!subid_nss->free) {
-		// Fallback to free(3) for backward compatibility.
-		subid_nss->free = free;
+		fprintf(shadow_logfd, "%s did not provide @subid_free@\n", libname);
+		goto close_lib;
 	}
 	subid_nss->handle = h;
 	goto done;

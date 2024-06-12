@@ -138,3 +138,7 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 
 	return SUBID_STATUS_SUCCESS;
 }
+
+void shadow_subid_free(void *ptr) {
+	free(ptr);
+}
