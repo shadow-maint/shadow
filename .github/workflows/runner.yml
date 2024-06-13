@@ -96,15 +96,25 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install ansible
+
     - name: Build container
       run: |
-        docker buildx build -f ./share/containers/${{ matrix.os }}.dockerfile . --output build-out
+        pushd share/ansible/
+        ansible-playbook playbook.yml -i inventory.ini -e 'distribution=${{ matrix.os }}'
+        popd
 
     - name: Store artifacts
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.os }}-build
         path: |
-          ./build-out/config.log
-          ./build-out/config.h
+          ./share/ansible/build-out/config.log
+          ./share/ansible/build-out/config.h
+          ./share/ansible/build-out/build.log
+          ./share/ansible/build-out/test-suite.log
         if-no-files-found: ignore
