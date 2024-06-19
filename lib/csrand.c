@@ -22,6 +22,7 @@
 #include "shadowlog.h"
 
 
+static uint32_t csrand32(void);
 static uint32_t csrand_uniform32(uint32_t n);
 static unsigned long csrand_uniform_slow(unsigned long n);
 
@@ -96,6 +97,13 @@ csrand_interval(unsigned long min, unsigned long max)
 }
 
 
+static uint32_t
+csrand32(void)
+{
+	return csrand();
+}
+
+
 /*
  * Fast Random Integer Generation in an Interval
  * ACM Transactions on Modeling and Computer Simulation 29 (1), 2019
@@ -108,12 +116,12 @@ csrand_uniform32(uint32_t n)
 	uint64_t  r, mult;
 
 	if (n == 0)
-		return csrand();
+		return csrand32();
 
 	bound = -n % n;  // analogous to `2^32 % n`, since `x % y == (x-y) % y`
 
 	do {
-		r = csrand();
+		r = csrand32();
 		mult = r * n;
 		rem = mult;  // analogous to `mult % 2^32`
 	} while (rem < bound);  // p = (2^32 % n) / 2^32;  W.C.: n=2^31+1, p=0.5
