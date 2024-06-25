@@ -36,6 +36,7 @@
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
+#include "chkname.h"
 
 
 /*
@@ -910,6 +911,10 @@ main(int argc, char **argv)
 	}
 	myname = xstrdup (pw->pw_name);
 	if (optind < argc) {
+		if (!is_valid_user_name (argv[optind])) {
+			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fail_exit (E_NOPERM);
+		}
 		name = argv[optind];
 	} else {
 		name = myname;

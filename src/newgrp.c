@@ -27,6 +27,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strdup/xstrdup.h"
+#include "chkname.h"
 
 
 /*
@@ -483,6 +484,12 @@ int main (int argc, char **argv)
 		 * not "newgrp".
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
+			if (!is_valid_group_name (argv[0])) {
+				fprintf (
+					stderr, _("%s: provided group is not a valid group name\n"),
+					Prog);
+				goto failure;
+			}
 			group = argv[0];
 			argc--;
 			argv++;
@@ -514,6 +521,12 @@ int main (int argc, char **argv)
 			usage ();
 			goto failure;
 		} else if (argv[0] != NULL) {
+			if (!is_valid_group_name (argv[0])) {
+				fprintf (
+					stderr, _("%s: provided group is not a valid group name\n"),
+					Prog);
+				goto failure;
+			}
 			group = argv[0];
 		} else {
 			/*
