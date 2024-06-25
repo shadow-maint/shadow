@@ -26,7 +26,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/sprintf.h"
-
+#include "chkname.h"
 
 /*
  * Global variables
@@ -482,7 +482,13 @@ int main (int argc, char **argv)
 		 * not "newgrp".
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
-			group = argv[0];
+			if (!is_valid_group_name (argv[optind])) {
+				fprintf (
+					stderr, _("%s: provided group is not a valid group name\n"),
+					Prog);
+				goto failure;
+			}
+			group = xstrdup (argv[optind]);
 			argc--;
 			argv++;
 		} else {
@@ -513,7 +519,13 @@ int main (int argc, char **argv)
 			usage ();
 			goto failure;
 		} else if (argv[0] != NULL) {
-			group = argv[0];
+			if (!is_valid_group_name (argv[optind])) {
+				fprintf (
+					stderr, _("%s: provided group is not a valid group name\n"),
+					Prog);
+				goto failure;
+			}
+			group = xstrdup (argv[optind]);
 		} else {
 			/*
 			 * get the group file entry for her login group id.
@@ -531,7 +543,7 @@ int main (int argc, char **argv)
 				        (unsigned long) pwd->pw_gid));
 				goto failure;
 			} else {
-				group = grp->gr_name;
+				group = xstrdup (grp->gr_name);
 			}
 		}
 	}
@@ -567,6 +579,7 @@ int main (int argc, char **argv)
 			              "changing", NULL, getuid (), 0);
 		}
 #endif
+		free (group);
 		exit (EXIT_FAILURE);
 	}
 #endif				/* HAVE_SETGROUPS */
@@ -722,6 +735,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), 0);
 #endif
+		free (group);
 		exit (EXIT_FAILURE);
 	}
 
@@ -732,6 +746,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), 0);
 #endif
+		free (group);
 		exit (EXIT_FAILURE);
 	}
 
@@ -748,6 +763,7 @@ int main (int argc, char **argv)
 		              audit_buf, NULL, getuid (), 0);
 #endif
 		perror (SHELL);
+		free (group);
 		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
@@ -818,6 +834,7 @@ int main (int argc, char **argv)
 	 * the previous environment which should be the user's login shell.
 	 */
 	err = shell (prog, initflag ? NULL : progbase, newenvp);
+	free (group);
 	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/*@notreached@*/
       failure:
@@ -843,6 +860,7 @@ int main (int argc, char **argv)
 		              "changing", NULL, getuid (), 0);
 	}
 #endif
+	free (group);
 	exit (EXIT_FAILURE);
 }
 
