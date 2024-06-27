@@ -13,10 +13,12 @@
 
 #include <stdio.h>
 
-#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "string/strdup/xstrdup.h"
+
+
 /*
  * motd -- output the /etc/motd file
  *

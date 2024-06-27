@@ -26,6 +26,7 @@
 #include "sizeof.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
 
 #ident "$Id$"

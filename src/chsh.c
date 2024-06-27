@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -32,6 +31,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/xstrdup.h"
 
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"

@@ -62,6 +62,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*

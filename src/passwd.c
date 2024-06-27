@@ -20,7 +20,6 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "alloc.h"
 #include "agetpass.h"
 #include "atoi/str2i.h"
 #include "defines.h"
@@ -35,8 +34,8 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
-
 
 
 /*

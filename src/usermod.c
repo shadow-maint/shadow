@@ -62,6 +62,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
 
 

@@ -41,6 +41,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/stpeprintf.h"
 #include "string/strcpy/stpecpy.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*

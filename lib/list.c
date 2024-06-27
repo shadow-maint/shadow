@@ -15,6 +15,9 @@
 #include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
+#include "string/strdup/xstrdup.h"
+
+
 /*
  * add_list - add a member to a list of group members
  *

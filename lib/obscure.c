@@ -15,13 +15,14 @@
 #include <ctype.h>
 #include <stdio.h>
 
-#include "alloc.h"
 #include "attr.h"
 #include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strdup/xstrdup.h"
+
 
 #if WITH_LIBBSD == 0
 #include "freezero.h"

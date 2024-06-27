@@ -19,7 +19,6 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc.h"
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
@@ -28,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*

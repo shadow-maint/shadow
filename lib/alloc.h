@@ -15,7 +15,6 @@
 #include <stdlib.h>
 
 #include "attr.h"
-#include "defines.h"
 
 
 #define CALLOC(n, type)   ((type *) calloc(n, sizeof(type)))
@@ -47,8 +46,6 @@ ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
 ATTR_MALLOC(free)
 inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
-ATTR_MALLOC(free)
-inline char *xstrdup(const char *str);
 
 ATTR_MALLOC(free)
 void *xcalloc(size_t nmemb, size_t size);
@@ -88,13 +85,6 @@ reallocarrayf(void *p, size_t nmemb, size_t size)
 	if (q == NULL && nmemb != 0 && size != 0)
 		free(p);
 	return q;
-}
-
-
-inline char *
-xstrdup(const char *str)
-{
-	return strcpy(XMALLOC(strlen(str) + 1, char), str);
 }
 
 
