@@ -16,7 +16,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
+#include "alloc/x/xrealloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"

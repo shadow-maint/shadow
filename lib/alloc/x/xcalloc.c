@@ -6,27 +6,31 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_STRDUP_XSTRDUP_H_
-#define SHADOW_INCLUDE_LIB_STRING_STRDUP_XSTRDUP_H_
-
-
 #include <config.h>
 
+#include "alloc/x/xcalloc.h"
+
+#include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 
-#include "alloc/x/xmalloc.h"
-#include "attr.h"
+#include "defines.h"
+#include "shadowlog.h"
 
 
-ATTR_MALLOC(free)
-inline char *xstrdup(const char *str);
-
-
-inline char *
-xstrdup(const char *str)
+void *
+xcalloc(size_t nmemb, size_t size)
 {
-	return strcpy(XMALLOC(strlen(str) + 1, char), str);
+	void  *p;
+
+	p = calloc(nmemb, size);
+	if (p == NULL)
+		goto x;
+
+	return p;
+
+x:
+	fprintf(log_get_logfd(), _("%s: %s\n"),
+	        log_get_progname(), strerror(errno));
+	exit(13);
 }
-
-
-#endif  // include guard

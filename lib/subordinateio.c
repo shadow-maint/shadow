@@ -18,7 +18,9 @@
 #include <fcntl.h>
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/realloc.h"
+#include "alloc/reallocf.h"
 #include "atoi/str2i.h"
 #include "string/sprintf/snprintf.h"
 

@@ -12,7 +12,8 @@
 
 #ident "$Id$"
 
-#include "alloc.h"
+#include "alloc/calloc.h"
+#include "alloc/malloc.h"
 #include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"

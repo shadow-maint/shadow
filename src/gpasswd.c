@@ -21,7 +21,7 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "defines.h"
 #include "groupio.h"

@@ -14,7 +14,6 @@
 
 #include "atoi/getnum.h"
 #include "defines.h"
-#include "alloc.h"
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"

@@ -22,7 +22,8 @@
 #include <stdlib.h>
 #include <utime.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"

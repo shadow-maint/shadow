@@ -10,7 +10,7 @@
 
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "sizeof.h"
 #include "string/strcpy/strncat.h"
 

@@ -17,7 +17,7 @@
 
 #include <security/pam_appl.h>
 
-#include "alloc.h"
+#include "alloc/calloc.h"
 #include "attr.h"
 #include "memzero.h"
 #include "prototypes.h"

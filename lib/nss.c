@@ -9,7 +9,7 @@
 #include <ctype.h>
 #include <stdatomic.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
 #include "prototypes.h"
 #include "../libsubid/subid.h"
 #include "shadowlog_internal.h"

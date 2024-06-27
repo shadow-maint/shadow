@@ -11,7 +11,6 @@
 #include <unistd.h>
 #include <lib/prototypes.h>
 
-#include "alloc.h"
 #include "run_part.h"
 #include "shadowlog_internal.h"
 

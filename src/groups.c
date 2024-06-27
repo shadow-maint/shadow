@@ -15,7 +15,7 @@
 #include <pwd.h>
 #include <stdio.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"

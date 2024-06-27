@@ -36,7 +36,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "atoi/str2i.h"
 #include "atoi/getnum.h"
 #include "chkname.h"

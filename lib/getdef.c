@@ -22,7 +22,6 @@
 #include <libeconf.h>
 #endif
 
-#include "alloc.h"
 #include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"

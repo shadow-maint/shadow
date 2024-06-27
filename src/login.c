@@ -25,7 +25,7 @@
 #include <sys/ioctl.h>
 #include <assert.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "chkname.h"
 #include "defines.h"

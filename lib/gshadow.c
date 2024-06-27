@@ -17,7 +17,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/realloc.h"
 #include "prototypes.h"
 #include "defines.h"
 

@@ -22,7 +22,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-#include "alloc.h"
+#include "alloc/x/xcalloc.h"
+#include "alloc/x/xmalloc.h"
 #include "sizeof.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"

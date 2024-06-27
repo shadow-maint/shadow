@@ -13,7 +13,8 @@
 #include <stdio.h>
 #include <strings.h>
 
-#include "alloc.h"
+#include "alloc/calloc.h"
+#include "alloc/x/xmalloc.h"
 #include "atoi/str2i.h"
 #include "prototypes.h"
 #include "string/sprintf/stpeprintf.h"
