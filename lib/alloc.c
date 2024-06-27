@@ -27,7 +27,6 @@
 #include "shadowlog.h"
 
 
-extern inline void *xmalloc(size_t size);
 extern inline void *xmallocarray(size_t nmemb, size_t size);
 extern inline void *mallocarray(size_t nmemb, size_t size);
 extern inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
