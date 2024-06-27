@@ -20,7 +20,7 @@
 
 #include "alloc.h"
 #include "atoi/str2i.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 
 #define ID_SIZE 31

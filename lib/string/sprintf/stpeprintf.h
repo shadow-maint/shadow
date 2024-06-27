@@ -1,32 +1,27 @@
-/*
- * SPDX-FileCopyrightText:  2022 - 2023, Alejandro Colomar <alx@kernel.org>
- *
- * SPDX-License-Identifier:  BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STPEPRINTF_H_
-#define SHADOW_INCLUDE_LIB_STPEPRINTF_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPEPRINTF_H_
+#define SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPEPRINTF_H_
 
 
 #include <config.h>
-
-#if !defined(HAVE_STPEPRINTF)
 
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdio.h>
 
 #include "attr.h"
-#include "defines.h"
 
 
+#if !defined(HAVE_STPEPRINTF)
 format_attr(printf, 3, 4)
 inline char *stpeprintf(char *dst, char *end, const char *restrict fmt, ...);
-
 format_attr(printf, 3, 0)
 inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
     va_list ap);
+#endif
 
 
 /*
@@ -79,6 +74,7 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
  */
 
 
+#if !defined(HAVE_STPEPRINTF)
 inline char *
 stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
 {
@@ -91,8 +87,10 @@ stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
 
 	return p;
 }
+#endif
 
 
+#if !defined(HAVE_STPEPRINTF)
 inline char *
 vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 {
@@ -114,7 +112,7 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 
 	return dst + len;
 }
+#endif
 
 
-#endif  // !HAVE_STPEPRINTF
 #endif  // include guard

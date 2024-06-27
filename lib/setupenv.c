@@ -27,7 +27,7 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 #ifndef USE_PAM

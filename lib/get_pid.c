@@ -14,7 +14,7 @@
 #include <fcntl.h>
 
 #include "atoi/getnum.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 
 /*

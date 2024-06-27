@@ -36,7 +36,7 @@
 #include <attr/libattr.h>
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 static /*@null@*/const char *src_orig;

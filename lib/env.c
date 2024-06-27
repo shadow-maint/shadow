@@ -20,7 +20,8 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 /*

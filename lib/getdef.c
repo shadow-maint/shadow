@@ -26,7 +26,7 @@
 #include "atoi/str2i.h"
 #include "getdef.h"
 #include "shadowlog_internal.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 /*

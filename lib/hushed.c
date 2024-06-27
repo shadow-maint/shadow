@@ -18,7 +18,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 
 /*
