@@ -14,7 +14,7 @@
 #include "../libsubid/subid.h"
 #include "shadowlog_internal.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 
 #define NSSWITCH "/etc/nsswitch.conf"

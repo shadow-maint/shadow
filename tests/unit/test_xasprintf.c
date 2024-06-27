@@ -16,7 +16,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 #define assert_unreachable()  assert_true(0)

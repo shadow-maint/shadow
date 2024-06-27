@@ -61,7 +61,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 #include "time/day_to_str.h"
 
 

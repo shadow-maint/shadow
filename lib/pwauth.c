@@ -25,7 +25,7 @@
 #include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 #ifdef SKEY
 #include <skey.h>

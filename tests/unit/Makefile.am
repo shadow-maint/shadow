@@ -7,7 +7,7 @@ check_PROGRAMS = \
     test_adds \
     test_atoi_strtoi \
     test_chkname \
-    test_sprintf \
+    test_snprintf \
     test_strncpy \
     test_strtcpy \
     test_typetraits \
@@ -78,16 +78,16 @@ test_logind_LDADD = \
     $(LIBSYSTEMD) \
     $(NULL)
 
-test_sprintf_SOURCES = \
-    ../../lib/string/sprintf.c \
-    test_sprintf.c \
+test_snprintf_SOURCES = \
+    ../../lib/string/sprintf/snprintf.c \
+    test_snprintf.c \
     $(NULL)
-test_sprintf_CFLAGS = \
+test_snprintf_CFLAGS = \
     $(AM_CFLAGS) \
     $(NULL)
-test_sprintf_LDFLAGS = \
+test_snprintf_LDFLAGS = \
     $(NULL)
-test_sprintf_LDADD = \
+test_snprintf_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
@@ -129,7 +129,7 @@ test_typetraits_LDADD = \
     $(NULL)
 
 test_xasprintf_SOURCES = \
-    ../../lib/string/sprintf.c \
+    ../../lib/string/sprintf/xasprintf.c \
     test_xasprintf.c \
     $(NULL)
 test_xasprintf_CFLAGS = \

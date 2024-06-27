@@ -29,7 +29,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 static char *passwd_db_file = NULL;

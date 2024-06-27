@@ -33,7 +33,7 @@
 #include "prototypes.h"
 #include "commonio.h"
 #include "shadowlog_internal.h"
-#include "string/sprintf.h"
+#include "string/sprintf/snprintf.h"
 
 
 /* local function prototypes */

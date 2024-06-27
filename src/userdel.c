@@ -52,7 +52,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
-#include "string/sprintf.h"
+#include "string/sprintf/xasprintf.h"
 
 
 /*

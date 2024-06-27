@@ -16,7 +16,7 @@
 #include "alloc.h"
 #include "atoi/str2i.h"
 #include "prototypes.h"
-#include "string/stpeprintf.h"
+#include "string/sprintf/stpeprintf.h"
 #include "idmapping.h"
 #if HAVE_SYS_CAPABILITY_H
 #include <sys/prctl.h>
