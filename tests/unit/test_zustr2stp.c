@@ -13,7 +13,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "string/zustr2stp.h"
+#include "string/strcpy/zustr2stp.h"
 
 
 static void test_ZUSTR2STP(void **state);

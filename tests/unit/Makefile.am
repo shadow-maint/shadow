@@ -104,7 +104,7 @@ test_strncpy_LDADD = \
     $(NULL)
 
 test_strtcpy_SOURCES = \
-    ../../lib/string/strtcpy.c \
+    ../../lib/string/strcpy/strtcpy.c \
     test_strtcpy.c \
     $(NULL)
 test_strtcpy_CFLAGS = \

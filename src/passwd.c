@@ -33,7 +33,7 @@
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strtcpy.h"
 #include "time/day_to_str.h"
 
 

@@ -24,9 +24,9 @@
 
 #include "alloc.h"
 #include "sizeof.h"
-#include "string/strncpy.h"
-#include "string/strtcpy.h"
-#include "string/zustr2stp.h"
+#include "string/strcpy/strncpy.h"
+#include "string/strcpy/strtcpy.h"
+#include "string/strcpy/zustr2stp.h"
 
 #ident "$Id$"
 

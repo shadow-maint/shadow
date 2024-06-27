@@ -1,17 +1,12 @@
-/*
- * SPDX-FileCopyrightText:  2022 - 2023, Alejandro Colomar <alx@kernel.org>
- *
- * SPDX-License-Identifier:  BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STPECPY_H_
-#define SHADOW_INCLUDE_LIB_STPECPY_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_STRCPY_STPECPY_H_
+#define SHADOW_INCLUDE_LIB_STRING_STRCPY_STPECPY_H_
 
 
 #include <config.h>
-
-#if !defined(HAVE_STPECPY)
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -20,8 +15,10 @@
 #include "attr.h"
 
 
+#if !defined(HAVE_STPECPY)
 ATTR_STRING(3)
 inline char *stpecpy(char *dst, char *end, const char *restrict src);
+#endif
 
 
 /*
@@ -66,6 +63,7 @@ inline char *stpecpy(char *dst, char *end, const char *restrict src);
  */
 
 
+#if !defined(HAVE_STPECPY)
 inline char *
 stpecpy(char *dst, char *end, const char *restrict src)
 {
@@ -84,7 +82,7 @@ stpecpy(char *dst, char *end, const char *restrict src)
 
 	return stpcpy(mempcpy(dst, src, dlen), "") + trunc;
 }
+#endif
 
 
-#endif  // !HAVE_STPECPY
 #endif  // include guard
