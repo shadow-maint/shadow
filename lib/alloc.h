@@ -39,8 +39,6 @@
 
 
 ATTR_MALLOC(free)
-inline void *xmalloc(size_t size);
-ATTR_MALLOC(free)
 inline void *xmallocarray(size_t nmemb, size_t size);
 ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
@@ -51,13 +49,6 @@ ATTR_MALLOC(free)
 void *xcalloc(size_t nmemb, size_t size);
 ATTR_MALLOC(free)
 void *xreallocarray(void *p, size_t nmemb, size_t size);
-
-
-inline void *
-xmalloc(size_t size)
-{
-	return xmallocarray(1, size);
-}
 
 
 inline void *
