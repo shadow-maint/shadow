@@ -27,6 +27,8 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "string/strdup/xstrdup.h"
+
 
 /* Exit Status Values */
 /*@-exitarg@*/

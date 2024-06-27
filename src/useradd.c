@@ -67,6 +67,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strdup/xstrdup.h"
 
 
 #ifndef SKEL_DIR

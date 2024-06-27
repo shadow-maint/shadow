@@ -18,7 +18,6 @@
 #include <sys/types.h>
 #include <getopt.h>
 
-#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -34,6 +33,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*

@@ -20,7 +20,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "alloc.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -53,6 +52,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*

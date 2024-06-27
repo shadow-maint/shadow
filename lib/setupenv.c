@@ -21,13 +21,13 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#include "alloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strdup/xstrdup.h"
 
 
 #ifndef USE_PAM

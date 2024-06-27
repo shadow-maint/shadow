@@ -53,6 +53,7 @@
 #include "chkname.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strdup/xstrdup.h"
 
 
 /*
