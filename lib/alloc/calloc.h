@@ -11,7 +11,10 @@
 #include <stdlib.h>
 
 
-#define CALLOC(n, type)   ((type *) calloc(n, sizeof(type)))
+#define CALLOC(n, type)                                                       \
+(                                                                             \
+	(type *) calloc(n, sizeof(type))                                      \
+)
 
 
 #endif  // include guard

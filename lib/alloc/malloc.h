@@ -13,7 +13,10 @@
 #include "attr.h"
 
 
-#define MALLOC(n, type)   ((type *) mallocarray(n, sizeof(type)))
+#define MALLOC(n, type)                                                       \
+(                                                                             \
+	(type *) mallocarray(n, sizeof(type))                                 \
+)
 
 
 ATTR_MALLOC(free)
