@@ -19,8 +19,8 @@
 #include <lastlog.h>
 #include "memzero.h"
 #include "prototypes.h"
-#include "string/strncpy.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strncpy.h"
+#include "string/strcpy/strtcpy.h"
 
 
 /*

@@ -21,7 +21,7 @@
 #include "memzero.h"
 #include "prototypes.h"
 #include "string/strftime.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strtcpy.h"
 
 
 #define	YEAR	(365L*DAY)

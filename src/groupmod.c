@@ -40,7 +40,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/sprintf/stpeprintf.h"
-#include "string/stpecpy.h"
+#include "string/strcpy/stpecpy.h"
 
 
 /*

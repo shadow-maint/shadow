@@ -33,7 +33,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strtcpy.h"
 
 
 /*

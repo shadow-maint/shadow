@@ -4,4 +4,4 @@
 
 #include <config.h>
 
-#include "string/zustr2stp.h"
+#include "string/strcpy/zustr2stp.h"

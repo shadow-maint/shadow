@@ -31,7 +31,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strtcpy.h"
 
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
@@ -42,6 +42,7 @@
 #define SHELLS "shells"
 #define ETCDIR "/etc"
 #endif
+
 
 /*
  * Global variables

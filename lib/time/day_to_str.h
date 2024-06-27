@@ -13,7 +13,7 @@
 
 #include "defines.h"
 #include "sizeof.h"
-#include "string/strtcpy.h"
+#include "string/strcpy/strtcpy.h"
 
 
 #define DAY_TO_STR(str, day)   day_to_str(NITEMS(str), str, day)

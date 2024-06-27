@@ -35,8 +35,8 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcpy/strtcpy.h"
 #include "string/strftime.h"
-#include "string/strtcpy.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/
 #include "exitcodes.h"

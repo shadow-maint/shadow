@@ -150,14 +150,16 @@ libshadow_la_SOURCES = \
 	string/sprintf/stpeprintf.h \
 	string/sprintf/xasprintf.c \
 	string/sprintf/xasprintf.h \
-	string/stpecpy.c \
-	string/stpecpy.h \
+	string/strcpy/stpecpy.c \
+	string/strcpy/stpecpy.h \
+	string/strcpy/strncpy.c \
+	string/strcpy/strncpy.h \
+	string/strcpy/strtcpy.c \
+	string/strcpy/strtcpy.h \
+	string/strcpy/zustr2stp.c \
+	string/strcpy/zustr2stp.h \
 	string/strftime.c \
 	string/strftime.h \
-	string/strncpy.h \
-	string/strtcpy.c \
-	string/strtcpy.h \
-	string/zustr2stp.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \

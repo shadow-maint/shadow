@@ -15,7 +15,7 @@
 #include <cmocka.h>
 
 #include "sizeof.h"
-#include "string/strncpy.h"
+#include "string/strcpy/strncpy.h"
 
 
 static void test_STRNCPY_trunc(void **state);
