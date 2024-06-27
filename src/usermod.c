@@ -32,7 +32,8 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/x/xmalloc.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "atoi/str2i.h"

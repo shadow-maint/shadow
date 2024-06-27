@@ -17,7 +17,7 @@
 #include <shadow.h>
 #include <stdio.h>
 
-#include "alloc.h"
+#include "alloc/calloc.h"
 #include "memzero.h"
 #include "shadowio.h"
 

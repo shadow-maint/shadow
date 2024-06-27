@@ -6,27 +6,11 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_STRDUP_XSTRDUP_H_
-#define SHADOW_INCLUDE_LIB_STRING_STRDUP_XSTRDUP_H_
-
-
 #include <config.h>
 
-#include <string.h>
-
 #include "alloc/x/xmalloc.h"
-#include "attr.h"
+
+#include <stddef.h>
 
 
-ATTR_MALLOC(free)
-inline char *xstrdup(const char *str);
-
-
-inline char *
-xstrdup(const char *str)
-{
-	return strcpy(XMALLOC(strlen(str) + 1, char), str);
-}
-
-
-#endif  // include guard
+extern inline void *xmallocarray(size_t nmemb, size_t size);

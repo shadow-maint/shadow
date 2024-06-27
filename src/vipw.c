@@ -27,7 +27,6 @@
 #include <unistd.h>
 #include <utime.h>
 
-#include "alloc.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"

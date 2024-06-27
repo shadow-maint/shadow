@@ -26,7 +26,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"

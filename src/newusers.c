@@ -30,7 +30,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "atoi/str2i.h"
 #ifdef ACCT_TOOLS_SETUID

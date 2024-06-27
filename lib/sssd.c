@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
 #include "exitcodes.h"
 #include "defines.h"
 #include "prototypes.h"

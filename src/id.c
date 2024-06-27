@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
 #include "defines.h"
 
 /* local function prototypes */

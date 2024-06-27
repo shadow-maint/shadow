@@ -19,7 +19,7 @@
 #endif				/* USE_PAM */
 #include <pwd.h>
 
-#include "alloc.h"
+#include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "groupio.h"

@@ -18,7 +18,8 @@
 #include <grp.h>
 #include <errno.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/reallocf.h"
 #include "shadowlog.h"
 
 #ident "$Id$"

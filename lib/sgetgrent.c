@@ -16,7 +16,8 @@
 #include <grp.h>
 #include <string.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"

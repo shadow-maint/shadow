@@ -31,7 +31,8 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/x/xrealloc.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 

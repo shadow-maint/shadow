@@ -18,7 +18,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#include "alloc.h"
+#include "alloc/malloc.h"
+#include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "prototypes.h"
 #include "defines.h"
