@@ -14,7 +14,10 @@
 #include "attr.h"
 
 
-#define XCALLOC(n, type)  ((type *) xcalloc(n, sizeof(type)))
+#define XCALLOC(n, type)                                                      \
+(                                                                             \
+	(type *) xcalloc(n, sizeof(type))                                     \
+)
 
 
 ATTR_MALLOC(free)

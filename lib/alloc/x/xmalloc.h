@@ -14,7 +14,10 @@
 #include "attr.h"
 
 
-#define XMALLOC(n, type)  ((type *) xmallocarray(n, sizeof(type)))
+#define XMALLOC(n, type)                                                      \
+(                                                                             \
+	(type *) xmallocarray(n, sizeof(type))                                \
+)
 
 
 ATTR_MALLOC(free)
