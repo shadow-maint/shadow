@@ -5,6 +5,7 @@
 
 
 #include <setjmp.h>
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,6 +32,10 @@ static jmp_buf  jmpb;
 int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 void __wrap_exit(int status);
+
+[[gnu::noipa]]
+static int xasprintf_volatile(char *volatile *restrict s,
+    const char *restrict fmt, ...);
 
 static void test_xasprintf_exit(void **state);
 static void test_xasprintf_ok(void **state);
@@ -62,6 +67,18 @@ __wrap_exit(int status)
 }
 
 
+static int
+xasprintf_volatile(char *volatile *restrict s, const char *restrict fmt, ...)
+{
+	int      len;
+	va_list  ap;
+
+	va_start(ap, fmt);
+	len = xvasprintf((char **) s, fmt, ap);
+	va_end(ap);
+}
+
+
 static void
 test_xasprintf_exit(void **state)
 {
@@ -75,7 +92,7 @@ test_xasprintf_exit(void **state)
 	switch (setjmp(jmpb)) {
 	case 0:
 		len = XASPRINTF_CALLED;
-		len = xasprintf(&p, "foo%s", "bar");
+		len = xasprintf_volatile(&p, "foo%s", "bar");
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
