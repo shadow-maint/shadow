@@ -1,5 +1,7 @@
 # shadow-utils
 
+test
+
 ## Introduction
 The shadow-utils package includes the necessary programs for
 converting UNIX password files to the shadow password format, plus
