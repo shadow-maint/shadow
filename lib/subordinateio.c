@@ -274,40 +274,8 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 	return NULL;
 }
 
-/*
- * have_range: check whether @owner is authorized to use the range
- *             (@start .. @start+@count-1).
- * @db: database to check
- * @owner: owning uid being queried
- * @start: start of range
- * @count: number of uids in range
- *
- * Returns true if @owner is authorized to use the range, false otherwise.
- */
 static bool have_range(struct commonio_db *db,
-		       const char *owner, unsigned long start, unsigned long count)
-{
-	const struct subordinate_range *range;
-	unsigned long end;
-
-	if (count == 0)
-		return false;
-
-	end = start + count - 1;
-	range = find_range (db, owner, start);
-	while (range) {
-		unsigned long last;
-
-		last = range->start + range->count - 1;
-		if (last >= (start + count - 1))
-			return true;
-
-		count = end - last;
-		start = last + 1;
-		range = find_range(db, owner, start);
-	}
-	return false;
-}
+		       const char *owner, unsigned long start, unsigned long count);
 
 static bool append_range(struct subid_range **ranges, const struct subordinate_range *new, int n)
 {
@@ -573,6 +541,64 @@ static struct commonio_db subordinate_uid_db = {
 	false,			/* readonly */
 	false			/* setname */
 };
+
+/*
+ * have_range: check whether @owner is authorized to use the range
+ *             (@start .. @start+@count-1).
+ * @db: database to check
+ * @owner: owning uid being queried
+ * @start: start of range
+ * @count: number of uids in range
+ *
+ * Returns true if @owner is authorized to use the range, false otherwise.
+ */
+static bool have_range(struct commonio_db *db,
+		       const char *owner, unsigned long start, unsigned long count)
+{
+	const struct subordinate_range *range;
+	unsigned long end;
+	bool doclose = false;
+	bool ret = false;
+	int rc;
+
+	if (count == 0)
+		return false;
+
+	if (!db->isopen) {
+		doclose = true;
+		if (db == &subordinate_uid_db)
+			rc = sub_uid_open(O_RDONLY);
+		else
+			rc = sub_gid_open(O_RDONLY);
+		if (rc < 0)
+			return false;
+	}
+
+	end = start + count - 1;
+	range = find_range (db, owner, start);
+	while (range) {
+		unsigned long last;
+
+		last = range->start + range->count - 1;
+		if (last >= (start + count - 1)) {
+			ret = true;
+			break;
+		}
+
+		count = end - last;
+		start = last + 1;
+		range = find_range(db, owner, start);
+	}
+
+	if (doclose) {
+		if (db == &subordinate_uid_db)
+			sub_uid_close();
+		else
+			sub_gid_close();
+	}
+
+	return ret;
+}
 
 int sub_uid_setdbname (const char *filename)
 {
