@@ -7,6 +7,22 @@ unset LANG
 unset LANGUAGE
 . common/config.sh
 
+# When we unshare -Ur, we must be able to descend the build path.
+# But $HOME might not be world x.  Fix that.
+fixup_home_perms() {
+       p="${build_path}"
+       d=""
+       echo "$p" | tr '/' '\n' | while read f; do
+               if [ -z "$f" ]; then
+                       continue
+               fi
+               d="$d/$f"
+               chmod ugo+x "$d"
+       done
+}
+
+fixup_home_perms
+
 USE_PAM="yes"
 FAILURE_TESTS="yes"
 
