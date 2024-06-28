@@ -28,12 +28,24 @@
 static jmp_buf  jmpb;
 
 
-/**********************
- * WRAPPERS
- **********************/
 int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 void __wrap_exit(int status);
+
+static void test_xasprintf_exit(void **state);
+static void test_xasprintf_ok(void **state);
+
+
+int
+main(void)
+{
+	const struct CMUnitTest  tests[] = {
+		cmocka_unit_test(test_xasprintf_exit),
+		cmocka_unit_test(test_xasprintf_ok),
+	};
+
+	return cmocka_run_group_tests(tests, NULL, NULL);
+}
 
 
 int
@@ -48,13 +60,6 @@ __wrap_exit(int status)
 {
 	longjmp(jmpb, EXIT_CALLED);
 }
-
-
-/**********************
- * TEST
- **********************/
-static void test_xasprintf_exit(void **state);
-static void test_xasprintf_ok(void **state);
 
 
 static void
@@ -99,16 +104,4 @@ test_xasprintf_ok(void **state)
 	assert_int_equal(len, strlen("foo1bar"));
 	assert_string_equal(p, "foo1bar");
 	free(p);
-}
-
-
-int
-main(void)
-{
-    const struct CMUnitTest  tests[] = {
-        cmocka_unit_test(test_xasprintf_exit),
-        cmocka_unit_test(test_xasprintf_ok),
-    };
-
-    return cmocka_run_group_tests(tests, NULL, NULL);
 }
