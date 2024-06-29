@@ -19,6 +19,7 @@
 )
 
 
+ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
 
