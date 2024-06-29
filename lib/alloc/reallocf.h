@@ -20,6 +20,7 @@
 )
 
 
+ATTR_ALLOC_SIZE(2, 3)
 ATTR_MALLOC(free)
 inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
 

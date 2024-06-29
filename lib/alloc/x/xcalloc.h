@@ -20,6 +20,7 @@
 )
 
 
+ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
 void *xcalloc(size_t nmemb, size_t size);
 
