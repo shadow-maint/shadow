@@ -24,7 +24,7 @@ static void usage(void)
 int main(int argc, char *argv[])
 {
 	int    i, n;
-	long   l;
+	uid_t  u;
 	uid_t  *uids;
 
 	log_set_progname(Prog);
@@ -33,13 +33,13 @@ int main(int argc, char *argv[])
 		usage();
 	}
 	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
-		str2sl(&l, argv[2]);
-		n = subid_get_gid_owners(l, &uids);
+		str2i(uid_t, &u, argv[2]);
+		n = subid_get_gid_owners(u, &uids);
 	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
 		usage();
 	} else {
-		str2sl(&l, argv[1]);
-		n = subid_get_uid_owners(l, &uids);
+		str2i(uid_t, &u, argv[1]);
+		n = subid_get_uid_owners(u, &uids);
 	}
 	if (n < 0) {
 		fprintf(stderr, "No owners found\n");
