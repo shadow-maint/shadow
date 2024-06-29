@@ -10,6 +10,7 @@ check_PROGRAMS = \
     test_sprintf \
     test_strncpy \
     test_strtcpy \
+    test_typetraits \
     test_xasprintf \
     test_zustr2stp
 
@@ -112,6 +113,18 @@ test_strtcpy_CFLAGS = \
 test_strtcpy_LDFLAGS = \
     $(NULL)
 test_strtcpy_LDADD = \
+    $(CMOCKA_LIBS) \
+    $(NULL)
+
+test_typetraits_SOURCES = \
+    test_typetraits.c \
+    $(NULL)
+test_typetraits_CFLAGS = \
+    $(AM_CFLAGS) \
+    $(NULL)
+test_typetraits_LDFLAGS = \
+    $(NULL)
+test_typetraits_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
