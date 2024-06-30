@@ -46,6 +46,9 @@ test_strtoi(void **state)
 	assert_true(strtoi_("42", NULL, -1, 1, 2, &status) == 1);
 	assert_true(status == EINVAL);
 
+	assert_true(strtoi_("42", NULL, 1, 1, 2, &status) == 1);
+	assert_true(status == EINVAL);
+
 	assert_true(strtoi_("40", &end, 5, INTMAX_MIN, INTMAX_MAX, &status) == 20);
 	assert_true(status == 0);
 	assert_true(strcmp(end, "") == 0);
@@ -84,6 +87,9 @@ test_strtou(void **state)
 	assert_true(strtou_("42", NULL, -1, 1, 2, &status) == 1);
 	assert_true(status == EINVAL);
 
+	assert_true(strtou_("42", NULL, 1, 1, 2, &status) == 1);
+	assert_true(status == EINVAL);
+
 	assert_true(strtou_("40", &end, 5, 0, UINTMAX_MAX, &status) == 20);
 	assert_true(status == 0);
 	assert_true(strcmp(end, "") == 0);
@@ -120,6 +126,10 @@ test_strtou_noneg(void **state)
 
 	errno = 0;
 	assert_true(strtou_noneg("42", NULL, -1, 1, 2, &status)
+	            == 1);
+	assert_true(status == EINVAL);
+
+	assert_true(strtou_noneg("42", NULL, 1, 1, 2, &status)
 	            == 1);
 	assert_true(status == EINVAL);
 
