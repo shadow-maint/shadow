@@ -21,7 +21,7 @@
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
 #include "alloc/reallocf.h"
-#include "atoi/str2i.h"
+#include "atoi/str2i/str2u.h"
 #include "string/sprintf/snprintf.h"
 
 

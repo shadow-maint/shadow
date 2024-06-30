@@ -19,8 +19,8 @@
 #include <sys/types.h>
 #include <string.h>
 
-#include "atoi/a2i.h"
-#include "atoi/str2i.h"
+#include "atoi/a2i/a2s.h"
+#include "atoi/str2i/str2u.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
