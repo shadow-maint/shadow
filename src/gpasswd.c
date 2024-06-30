@@ -682,30 +682,8 @@ static void check_perms (const struct group *gr)
 		}
 	} else
 #endif				/* SHADOWGRP */
-	if (!amroot) {
-		/*
-		 * The policy here for changing a group is that
-		 * 1) you must be root or
-		 * 2) you must be the first listed member of the group.
-		 * The first listed member of a group can do anything to
-		 * that group that the root user can. The rationale for
-		 * this hack is that the FIRST user is probably the most
-		 * important user in this entire group.
-		 *
-		 * This feature enabled by default could be a security
-		 * problem when installed on existing systems where the
-		 * first group member might be just a normal user.
-		 * --marekm
-		 */
-#if !defined(FIRST_MEMBER_IS_ADMIN)
+	if (!amroot)
 		failure();
-#endif
-		if (gr->gr_mem[0] == NULL)
-			failure();
-
-		if (strcmp(gr->gr_mem[0], myname) != 0)
-			failure();
-	}
 }
 
 /*
@@ -805,16 +783,8 @@ static void get_group (struct group *gr)
 
 			sg->sg_mem = dup_list (gr->gr_mem);
 
-			sg->sg_adm = XMALLOC(2, char *);
-#ifdef FIRST_MEMBER_IS_ADMIN
-			if (sg->sg_mem[0]) {
-				sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
-				sg->sg_adm[1] = NULL;
-			} else
-#endif
-			{
-				sg->sg_adm[0] = NULL;
-			}
+			sg->sg_adm = XMALLOC(1, char *);
+			sg->sg_adm[0] = NULL;
 
 		}
 		if (sgr_close () == 0) {
