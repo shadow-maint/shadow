@@ -26,7 +26,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
 
-#include "atoi/a2i.h"
+#include "atoi/a2i/a2s.h"
 #include "defines.h"
 #include "memzero.h"
 #include "prototypes.h"

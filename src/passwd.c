@@ -21,7 +21,7 @@
 #include <time.h>
 
 #include "agetpass.h"
-#include "atoi/a2i.h"
+#include "atoi/a2i/a2s.h"
 #include "defines.h"
 #include "getdef.h"
 #include "memzero.h"

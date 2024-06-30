@@ -15,7 +15,7 @@
 
 #include "alloc/calloc.h"
 #include "alloc/x/xmalloc.h"
-#include "atoi/a2i.h"
+#include "atoi/a2i/a2u.h"
 #include "prototypes.h"
 #include "string/sprintf/stpeprintf.h"
 #include "idmapping.h"
