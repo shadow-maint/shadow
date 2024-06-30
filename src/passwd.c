@@ -35,8 +35,7 @@
 #include "shadowlog.h"
 #include "string/strtcpy.h"
 #include "time/day_to_str.h"
-
-
+#include "chkname.h"
 
 /*
  * exit status values
@@ -907,7 +906,11 @@ int main (int argc, char **argv)
 	}
 	myname = xstrdup (pw->pw_name);
 	if (optind < argc) {
-		name = argv[optind];
+		if (!is_valid_user_name (argv[optind])) {
+			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fail_exit (E_NOPERM);
+		}
+		name = xstrdup (argv[optind]);
 	} else {
 		name = myname;
 	}
@@ -931,6 +934,7 @@ int main (int argc, char **argv)
 			(void) fprintf (stderr,
 			                _("%s: Permission denied.\n"),
 			                Prog);
+			free (name);
 			exit (E_NOPERM);
 		}
 		prefix_setpwent ();
@@ -938,6 +942,7 @@ int main (int argc, char **argv)
 			print_status (pw);
 		}
 		prefix_endpwent ();
+		free (name);
 		exit (E_SUCCESS);
 	}
 #if 0
@@ -971,6 +976,7 @@ int main (int argc, char **argv)
 
 	if (anyflag && !amroot) {
 		(void) fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		free (name);
 		exit (E_NOPERM);
 	}
 
@@ -979,6 +985,7 @@ int main (int argc, char **argv)
 		(void) fprintf (stderr,
 		                _("%s: user '%s' does not exist\n"),
 		                Prog, name);
+		free (name);
 		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
@@ -991,6 +998,7 @@ int main (int argc, char **argv)
 		(void) fprintf(stderr,
 		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
 		               Prog, name);
+		free (name);
 		exit (E_NOPERM);
 	}
 #endif				/* WITH_SELINUX */
@@ -1007,11 +1015,13 @@ int main (int argc, char **argv)
 		         "can't view or modify password information for %s",
 		         name));
 		closelog ();
+		free (name);
 		exit (E_NOPERM);
 	}
 
 	if (Sflg) {
 		print_status (pw);
+		free (name);
 		exit (E_SUCCESS);
 	}
 	if (!use_pam)
@@ -1025,6 +1035,7 @@ int main (int argc, char **argv)
 				(void) fprintf (stderr,
 				                _("%s: Permission denied.\n"),
 				                Prog);
+				free (name);
 				exit (E_NOPERM);
 			}
 			sp = pwd_to_spwd (pw);
@@ -1056,6 +1067,7 @@ int main (int argc, char **argv)
 				                _("The password for %s is unchanged.\n"),
 				                name);
 				closelog ();
+				free (name);
 				exit (E_NOPERM);
 			}
 			do_update_pwd = true;
@@ -1079,6 +1091,7 @@ int main (int argc, char **argv)
 		if (sflg) {
 			cp = agetpass_stdin ();
 			if (cp == NULL) {
+				free (name);
 				exit (E_FAILURE);
 			}
 			do_pam_passwd_non_interactive ("passwd", name, cp);
@@ -1086,6 +1099,7 @@ int main (int argc, char **argv)
 		} else {
 			do_pam_passwd (name, qflg, kflg);
 		}
+		free (name);
 		exit (E_SUCCESS);
 	}
 #endif				/* USE_PAM */
@@ -1093,6 +1107,7 @@ int main (int argc, char **argv)
 		(void) fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
+		free (name);
 		exit (E_NOPERM);
 	}
 	if (spw_file_present ()) {
@@ -1106,6 +1121,8 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
 	SYSLOG ((LOG_INFO, "password for '%s' changed by '%s'", name, myname));
+
+	free (name);
 	closelog ();
 	if (!qflg) {
 		if (!anyflag) {

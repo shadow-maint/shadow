@@ -34,7 +34,7 @@
 #include "shadowlog.h"
 #include "string/sprintf.h"
 #include "string/strtcpy.h"
-
+#include "chkname.h"
 
 /*
  * Global variables.
@@ -648,11 +648,17 @@ int main (int argc, char **argv)
 	 * name, or the name getlogin() returns.
 	 */
 	if (optind < argc) {
-		user = argv[optind];
+		if (!is_valid_user_name (argv[optind])) {
+			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fail_exit (E_NOPERM);
+		}
+		user = xstrdup (argv[optind]);
+
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
 			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
 			         user);
+			free (user);
 			fail_exit (E_NOPERM);
 		}
 	} else {
@@ -665,6 +671,7 @@ int main (int argc, char **argv)
 			         (unsigned long) getuid ()));
 			fail_exit (E_NOPERM);
 		}
+
 		user = xstrdup (pw->pw_name);
 	}
 
@@ -707,6 +714,8 @@ int main (int argc, char **argv)
 	update_gecos (user, new_gecos);
 
 	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
+
+	free (user);
 
 	nscd_flush_cache ("passwd");
 	sssd_flush_cache (SSSD_DB_PASSWD);
