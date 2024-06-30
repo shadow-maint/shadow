@@ -90,7 +90,6 @@ src/groupadd.c
 src/groupdel.c
 src/groupmems.c
 src/groupmod.c
-src/groups.c
 src/grpck.c
 src/grpconv.c
 src/grpunconv.c

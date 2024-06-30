@@ -26,7 +26,7 @@ AM_CFLAGS = $(LIBBSD_CFLAGS)
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS   = groups login
+bin_PROGRAMS   = login
 sbin_PROGRAMS  = nologin
 ubin_PROGRAMS  = faillog chage chfn chsh expiry gpasswd newgrp passwd
 if ENABLE_SUBIDS

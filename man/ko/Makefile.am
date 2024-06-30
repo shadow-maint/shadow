@@ -4,7 +4,6 @@ mandir = @mandir@/ko
 man_MANS = \
 	man1/chfn.1 \
 	man1/chsh.1 \
-	man1/groups.1 \
 	man1/login.1 \
 	man5/passwd.5 \
 	man1/su.1 \
