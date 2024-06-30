@@ -19,6 +19,7 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
+#include "alloc/x/xrealloc.h"
 #include "prototypes.h"
 #include "defines.h"
 
@@ -38,20 +39,14 @@ static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 	size_t nelem = *nlist, size;
 
 	while (s != NULL && *s != '\0') {
-		ptr = REALLOC(*list, nelem + 1, char *);
-		if (ptr == NULL)
-			return NULL;
-
+		ptr = XREALLOC(*list, nelem + 1, char *);
 		ptr[nelem] = strsep(&s, ",");
 		nelem++;
 		*list = ptr;
 		*nlist = nelem;
 	}
 
-	ptr = REALLOC(*list, nelem + 1, char *);
-	if (ptr == NULL)
-		return NULL;
-
+	ptr = XREALLOC(*list, nelem + 1, char *);
 	ptr[nelem] = NULL;
 	*list = ptr;
 
