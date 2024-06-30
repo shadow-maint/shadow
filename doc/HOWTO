@@ -476,7 +476,7 @@
   The package also contains the new programs:
 
   chage, newusers, dpasswd, gpasswd, useradd, userdel, usermod,
-  groupadd, groupdel, groupmod, groups, pwck, grpck, lastlog, pwconv,
+  groupadd, groupdel, groupmod, pwck, grpck, lastlog, pwconv,
   and pwunconv
 
   Additionally, the library: libshadow.a is included for writing and/or
@@ -1373,7 +1373,7 @@
   users or changing the group password, the /etc/gshadow file will be
   changed.
 
-  The programs groups, groupadd, groupmod, and groupdel are provided as
+  The programs groupadd, groupmod, and groupdel are provided as
   part of the Shadow Suite to modify groups.
 
   The format of the /etc/group file is as follows:
