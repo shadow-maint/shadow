@@ -14,7 +14,7 @@
 #include <fcntl.h>
 
 #include "atoi/getnum.h"
-#include "atoi/str2i.h"
+#include "atoi/str2i/str2u.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "subordinateio.h"

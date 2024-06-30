@@ -1,9 +1,9 @@
-// SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_ATOI_STRTOU_NONEG_H_
-#define SHADOW_INCLUDE_LIB_ATOI_STRTOU_NONEG_H_
+#ifndef SHADOW_INCLUDE_LIB_ATOI_STRTOI_STRTOU_NONEG_H_
+#define SHADOW_INCLUDE_LIB_ATOI_STRTOI_STRTOU_NONEG_H_
 
 
 #include <config.h>
@@ -12,7 +12,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "atoi/strtoi.h"
+#include "atoi/strtoi/strtoi.h"
+#include "atoi/strtoi/strtou.h"
 #include "attr.h"
 
 

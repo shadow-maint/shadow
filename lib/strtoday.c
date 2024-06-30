@@ -13,7 +13,7 @@
 
 #ident "$Id$"
 
-#include "atoi/str2i.h"
+#include "atoi/str2i/str2s.h"
 #include "prototypes.h"
 #include "getdate.h"
 
