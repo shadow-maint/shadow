@@ -36,7 +36,7 @@ strtou_(const char *s, char **restrict endp, int base,
 	if (status == NULL)
 		status = &st;
 
-	if (base != 0 && (base < 0 || base > 36)) {
+	if (base != 0 && (base < 2 || base > 36)) {
 		*status = EINVAL;
 		return MAX(min, 0);
 	}
