@@ -1,0 +1,73 @@
+---
+# tasks file for ci_run
+- name: Ensure repos are updated
+  ansible.builtin.raw: apt update
+
+- name: Ensure python is installed
+  ansible.builtin.raw: apt install python3 -y
+
+- name: Ensure dependencies are installed
+  ansible.builtin.apt:
+    name:
+      - libbsd-dev
+      - libcmocka-dev
+      - libltdl-dev
+      - pkgconf
+    state: present
+
+- name: Gather selected facts
+  ansible.builtin.setup:
+    filter:
+      - 'ansible_distribution_release'
+
+- name: Add specified repository into sources list
+  ansible.builtin.apt_repository:
+    repo: deb-src http://deb.debian.org/debian {{ ansible_distribution_release }} main
+    state: present
+
+- name: Ensure build dependencies are installed
+  ansible.builtin.apt:
+    pkg: shadow
+    state: build-dep
+
+- name: Build configuration
+  ansible.builtin.command: >
+    ./autogen.sh
+    --enable-man
+    --with-yescrypt
+    --without-selinux
+  args:
+    chdir: /usr/local/src/shadow/
+  ignore_errors: true
+
+- name: Build
+  ansible.builtin.shell:
+    make -Orecurse -j4 > build.log
+  args:
+    chdir: /usr/local/src/shadow/
+  ignore_errors: true
+
+- name: Run unit-tests
+  ansible.builtin.command:
+    make check
+  args:
+    chdir: /usr/local/src/shadow/
+  ignore_errors: true
+
+- name: Install
+  ansible.builtin.command:
+    make install
+  args:
+    chdir: /usr/local/src/shadow/
+  ignore_errors: true
+
+- name: Copy logs
+  ansible.builtin.fetch:
+    src: '{{ item }}'
+    dest: ./build-out/
+    flat: yes
+  with_items:
+    - "/usr/local/src/shadow/config.log"
+    - "/usr/local/src/shadow/config.h"
+    - "/usr/local/src/shadow/build.log"
+    - "/usr/local/src/shadow/tests/unit/test-suite.log"

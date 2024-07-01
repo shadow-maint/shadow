@@ -62,8 +62,10 @@ You can either generate a single image by running the following command from
 the root folder of the project (i.e. Alpine):
 
 ```
-docker build -f share/containers/alpine.dockerfile . --output build-out/alpine
+ansible-playbook share/ansible/playbook.yml -i share/ansible/inventory.ini -e 'distribution=alpine'
 ```
+
+**Note**: you'll need to install ansible to run this automation.
 
 Or generate all of the images with the `container-build.sh` script, as if you
 were running some of the CI checks locally:
