@@ -320,33 +320,33 @@ next:
  *	entries are treated as an ordered list.
  */
 
-static struct port *getttyuser (const char *tty, const char *user)
+static struct port *
+getttyuser(const char *tty, const char *user)
 {
-	int i, j;
-	struct port *port;
+	struct port  *port;
 
-	setportent ();
+	setportent();
 
-	while ((port = getportent ()) != NULL) {
-		for (i = 0; NULL != port->pt_names[i]; i++) {
-			if (portcmp (port->pt_names[i], tty) == 0) {
+	while ((port = getportent()) != NULL) {
+		char  **ptn;
+		char  **ptu;
+
+		for (ptn = port->pt_names; *ptn != NULL; ptn++) {
+			if (portcmp(*ptn, tty) == 0)
 				break;
-			}
 		}
-		if (port->pt_names[i] == 0) {
+		if (*ptn == NULL)
 			continue;
-		}
 
-		for (j = 0; NULL != port->pt_users[j]; j++) {
-			if (   (strcmp (user, port->pt_users[j]) == 0)
-			    || (strcmp (port->pt_users[j], "*") == 0))
-			{
+		for (ptu = port->pt_users; *ptu != NULL; ptu++) {
+			if (strcmp(*ptu, user) == 0)
 				goto end;
-			}
+			if (strcmp(*ptu, "*") == 0)
+				goto end;
 		}
 	}
 end:
-	endportent ();
+	endportent();
 	return port;
 }
 
