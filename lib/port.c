@@ -130,7 +130,7 @@ static struct port *getportent (void)
 	 *      - parse off a list of days and times
 	 */
 
-again:
+next:
 
 	/*
 	 * Get the next line and remove optional trailing '\n'.
@@ -142,7 +142,7 @@ again:
 		return 0;
 	}
 	if ('#' == buf[0]) {
-		goto again;
+		goto next;
 	}
 
 	/*
@@ -159,7 +159,7 @@ again:
 		port.pt_names[j] = cp;
 		cp = strpbrk(cp, ":,");
 		if (cp == NULL)
-			goto again;	/* line format error */
+			goto next;	/* line format error */
 
 		if (':' == *cp) {	/* end of tty name list */
 			break;
@@ -195,7 +195,7 @@ again:
 	}
 
 	if (':' != *cp) {
-		goto again;
+		goto next;
 	}
 
 	stpcpy(cp++, "");
@@ -292,7 +292,7 @@ again:
 		}
 
 		if (('-' != cp[i]) || (dtime > 2400) || ((dtime % 100) > 59)) {
-			goto again;
+			goto next;
 		}
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
@@ -304,7 +304,7 @@ again:
 		if (   ((',' != cp[i]) && ('\0' != cp[i]))
 		    || (dtime > 2400)
 		    || ((dtime % 100) > 59)) {
-			goto again;
+			goto next;
 		}
 
 		port.pt_times[j].t_end = dtime;
