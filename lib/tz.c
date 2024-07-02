@@ -42,7 +42,7 @@
 
 		strcpy (tzbuf, def_tz);
 	} else {
-		*strchrnul(tzbuf, '\n') = '\0';
+		stpcpy(strchrnul(tzbuf, '\n'), "");
 	}
 
 	if (NULL != fp) {

@@ -431,7 +431,7 @@ static void process_flags (int argc, char **argv)
 				exit (E_BAD_ARG);
 			}
 			/* terminate name, point to value */
-			*cp++ = '\0';
+			stpcpy(cp++, "");
 			if (putdef_str (optarg, cp, NULL) < 0) {
 				exit (E_BAD_ARG);
 			}

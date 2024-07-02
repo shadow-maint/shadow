@@ -28,6 +28,9 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strchr/stpcspn.h"
+#include "string/strchr/stpspn.h"
+#include "string/strchr/stprspn.h"
 
 
 /*
@@ -527,7 +530,6 @@ static void def_load (void)
 #else /* USE_ECONF */
 static void def_load (void)
 {
-	int i;
 	FILE *fp;
 	char buf[1024], *name, *value, *s;
 
@@ -559,28 +561,22 @@ static void def_load (void)
 		/*
 		 * Trim trailing whitespace.
 		 */
-		for (i = (ptrdiff_t) strlen (buf) - 1; i >= 0; --i) {
-			if (!isspace (buf[i])) {
-				break;
-			}
-		}
-		i++;
-		buf[i] = '\0';
+		stpcpy(stprspn(buf, " \t\n"), "");
 
 		/*
 		 * Break the line into two fields.
 		 */
-		name = buf + strspn (buf, " \t");	/* first nonwhite */
+		name = stpspn(buf, " \t");	/* first nonwhite */
 		if (*name == '\0' || *name == '#')
 			continue;	/* comment or empty */
 
-		s = name + strcspn (name, " \t");	/* end of field */
+		s = stpcspn(name, " \t");	/* end of field */
 		if (*s == '\0')
 			continue;	/* only 1 field?? */
 
-		*s++ = '\0';
-		value = s + strspn (s, " \"\t");	/* next nonwhite */
-		*strchrnul(value, '"') = '\0';
+		stpcpy(s++, "");
+		value = stpspn(s, " \"\t");	/* next nonwhite */
+		stpcpy(strchrnul(value, '"'), "");
 
 		/*
 		 * Store the value in def_table.

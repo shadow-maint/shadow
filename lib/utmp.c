@@ -20,6 +20,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <stdio.h>
+#include <string.h>
 #include <fcntl.h>
 
 #include "alloc/x/xcalloc.h"
@@ -46,7 +47,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 	/* tmptty shall be bigger than full_tty */
 	static char  tmptty[sizeof(full_tty) + 1];
 
-	full_tty[0] = '\0';
+	stpcpy(full_tty, "");
 	if (tty[0] != '/')
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);

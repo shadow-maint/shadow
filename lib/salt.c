@@ -291,6 +291,7 @@ static /*@observer@*/unsigned long YESCRYPT_get_salt_cost (/*@null@*/const int *
 static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long cost)
 {
 	const size_t buf_begin = strlen (buf);
+	char  *p;
 
 	/*
 	 * Check if the result buffer is long enough.
@@ -302,17 +303,17 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 4);
 
-	buf[buf_begin + 0] = 'j';
+	p = &buf[buf_begin];
+	p = stpcpy(p, "j");
 	if (cost < 3) {
-		buf[buf_begin + 1] = 0x36 + cost;
+		*p++ = 0x36 + cost;
 	} else if (cost < 6) {
-		buf[buf_begin + 1] = 0x34 + cost;
+		*p++ = 0x34 + cost;
 	} else {
-		buf[buf_begin + 1] = 0x3b + cost;
+		*p++ = 0x3b + cost;
 	}
-	buf[buf_begin + 2] = cost >= 3 ? 'T' : '5';
-	buf[buf_begin + 3] = '$';
-	buf[buf_begin + 4] = '\0';
+	p = stpcpy(p, (cost >= 3) ? "T" : "5");
+	stpcpy(p, "$");
 }
 #endif /* USE_YESCRYPT */
 
@@ -330,7 +331,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		strcat (salt, l64a (csrand ()));
 	} while (strlen (salt) < salt_size);
 
-	salt[salt_size] = '\0';
+	stpcpy(&salt[salt_size], "");
 
 	return salt;
 }
@@ -421,7 +422,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		salt_len = GENSALT_SETTING_SIZE - 1;
 		rounds = 0;
 		memset(result, '.', salt_len);
-		result[salt_len] = '\0';
+		stpcpy(&result[salt_len], "");
 	}
 
 	char *retval = crypt_gensalt (result, rounds, NULL, 0);

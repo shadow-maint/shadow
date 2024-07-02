@@ -14,7 +14,10 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
+
 #include "prototypes.h"
+#include "string/strchr/stprspn.h"
+
 
 /*
  * valid_field - insure that a field contains all legal characters
@@ -81,7 +84,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 	if (NULL == cp) {
 		return;
 	}
-	*cp = '\0';
+	stpcpy(cp, "");
 
 	if ('\0' != newf[0]) {
 		/*
@@ -89,11 +92,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-
-		while (newf < cp && isspace (cp[-1])) {
-			cp--;
-		}
-		*cp = '\0';
+		stpcpy(stprspn(newf, " \t\n"), "");
 
 		cp = newf;
 		while (isspace (*cp)) {
