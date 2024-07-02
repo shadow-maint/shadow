@@ -159,7 +159,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 
 	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
 	if (geteuid() == 0 && geteuid() != ruid) {
-		if (prctl(PR_SET_KEEPCAPS, 1, 0, 0, 0) < 0) {
+		if (prctl(PR_SET_KEEPCAPS, 1L) == -1) {
 			fprintf(log_get_logfd(), _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), log_get_progname());
 			exit(EXIT_FAILURE);
 		}
