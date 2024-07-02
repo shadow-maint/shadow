@@ -22,6 +22,7 @@
 #include <libeconf.h>
 #endif
 
+#include "atoi/a2i.h"
 #include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"
@@ -233,10 +234,11 @@ bool getdef_bool (const char *item)
  * values are handled.
  */
 
-int getdef_num (const char *item, int dflt)
+int
+getdef_num(const char *item, int dflt)
 {
-	struct itemdef *d;
-	long val;
+	int             val;
+	struct itemdef  *d;
 
 	if (!def_loaded) {
 		def_load ();
@@ -247,9 +249,7 @@ int getdef_num (const char *item, int dflt)
 		return dflt;
 	}
 
-	if (   (str2sl(&val, d->value) == -1)
-	    || (val > INT_MAX)
-	    || (val < -1)) {
+	if (a2si(&val, d->value, NULL, 0, -1, INT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -268,10 +268,11 @@ int getdef_num (const char *item, int dflt)
  * values are handled.
  */
 
-unsigned int getdef_unum (const char *item, unsigned int dflt)
+unsigned int
+getdef_unum(const char *item, unsigned int dflt)
 {
-	struct itemdef *d;
-	long val;
+	unsigned int    val;
+	struct itemdef  *d;
 
 	if (!def_loaded) {
 		def_load ();
@@ -282,9 +283,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	if (   (str2sl(&val, d->value) == -1)
-	    || (val < 0)
-	    || (val > INT_MAX)) {
+	if (a2ui(&val, d->value, NULL, 0, 0, UINT_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
@@ -317,7 +316,7 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	if (str2sl(&val, d->value) == -1 || val < -1) {
+	if (a2sl(&val, d->value, NULL, 0, -1, LONG_MAX) == -1) {
 		fprintf (shadow_logfd,
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
