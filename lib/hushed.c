@@ -21,6 +21,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -72,7 +73,7 @@ bool hushed (const char *username)
 		return false;
 	}
 	for (found = false; !found && (fgets (buf, sizeof buf, fp) == buf);) {
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 		found = (strcmp (buf, pw->pw_shell) == 0) ||
 		        (strcmp (buf, pw->pw_name) == 0);
 	}

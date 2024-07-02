@@ -33,11 +33,12 @@
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
+#include "run_part.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
-#include "run_part.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -423,15 +424,13 @@ static void process_flags (int argc, char **argv)
 			 * example: -K GID_MIN=100 -K GID_MAX=499
 			 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
 			 */
-			cp = strchr (optarg, '=');
+			cp = stpsep(optarg, "=");
 			if (NULL == cp) {
 				fprintf (stderr,
 				         _("%s: -K requires KEY=VALUE\n"),
 				         Prog);
 				exit (E_BAD_ARG);
 			}
-			/* terminate name, point to value */
-			stpcpy(cp++, "");
 			if (putdef_str (optarg, cp, NULL) < 0) {
 				exit (E_BAD_ARG);
 			}

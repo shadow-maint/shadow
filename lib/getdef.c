@@ -29,9 +29,9 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/xasprintf.h"
-#include "string/strchr/stpcspn.h"
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -569,13 +569,12 @@ static void def_load (void)
 		if (*name == '\0' || *name == '#')
 			continue;	/* comment or empty */
 
-		s = stpcspn(name, " \t");	/* end of field */
-		if (*s == '\0')
+		s = stpsep(name, " \t");  /* next field */
+		if (s == NULL)
 			continue;	/* only 1 field?? */
 
-		stpcpy(s++, "");
 		value = stpspn(s, " \"\t");	/* next nonwhite */
-		stpcpy(strchrnul(value, '"'), "");
+		stpsep(value, "\"");
 
 		/*
 		 * Store the value in def_table.

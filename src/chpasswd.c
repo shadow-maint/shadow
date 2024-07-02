@@ -31,6 +31,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strtok/stpsep.h"
 
 
 #define IS_CRYPT_METHOD(str) ((crypt_method != NULL && strcmp(crypt_method, str) == 0) ? true : false)
@@ -501,12 +502,8 @@ int main (int argc, char **argv)
 	 */
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			stpcpy(cp, "");
-		} else {
+		if (stpsep(buf, "\n") == NULL) {
 			if (feof (stdin) == 0) {
-
 				// Drop all remaining characters on this line.
 				while (fgets (buf, sizeof buf, stdin) != NULL) {
 					cp = strchr (buf, '\n');
@@ -533,10 +530,8 @@ int main (int argc, char **argv)
 		 */
 
 		name = buf;
-		cp = strchr (name, ':');
-		if (NULL != cp) {
-			stpcpy(cp++, "");
-		} else {
+		cp = stpsep(name, ":");
+		if (cp == NULL) {
 			fprintf (stderr,
 			         _("%s: line %d: missing new password\n"),
 			         Prog, line);

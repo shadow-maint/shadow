@@ -21,9 +21,10 @@
 
 #include "atoi/a2i.h"
 #include "atoi/str2i.h"
+#include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
-#include "defines.h"
+#include "string/strtok/stpsep.h"
 
 
 #define	FIELDS	9
@@ -54,7 +55,7 @@ sgetspent(const char *string)
 		return NULL;	/* fail if too long */
 	}
 	strcpy (spwbuf, string);
-	stpcpy(strchrnul(spwbuf, '\n'), "");
+	stpsep(spwbuf, "\n");
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to

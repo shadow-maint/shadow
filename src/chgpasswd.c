@@ -34,6 +34,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -460,10 +461,7 @@ int main (int argc, char **argv)
 	 */
 	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
 		line++;
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			stpcpy(cp, "");
-		} else {
+		if (stpsep(buf, "\n") == NULL) {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
 			         Prog, line);
 			errors++;
@@ -480,11 +478,8 @@ int main (int argc, char **argv)
 		 */
 
 		name = buf;
-		cp = strchr (name, ':');
-		if (NULL != cp) {
-			stpcpy(cp, "");
-			cp++;
-		} else {
+		cp = stpsep(name, ":");
+		if (cp == NULL) {
 			fprintf (stderr,
 			         _("%s: line %d: missing new password\n"),
 			         Prog, line);

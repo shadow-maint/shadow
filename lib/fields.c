@@ -17,6 +17,7 @@
 
 #include "prototypes.h"
 #include "string/strchr/strrspn.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -80,11 +81,8 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		return;
 	}
 
-	cp = strchr (newf, '\n');
-	if (NULL == cp) {
+	if (stpsep(newf, "\n") == NULL)
 		return;
-	}
-	stpcpy(cp, "");
 
 	if ('\0' != newf[0]) {
 		/*

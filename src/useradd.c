@@ -68,6 +68,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strtok/stpsep.h"
 
 
 #ifndef SKEL_DIR
@@ -361,7 +362,7 @@ static void get_defaults (void)
 	 * values are used, everything else can be ignored.
 	 */
 	while (fgets (buf, sizeof buf, fp) == buf) {
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 
 		cp = strchr (buf, '=');
 		if (NULL == cp) {
@@ -603,10 +604,7 @@ static int set_defaults (void)
 	}
 
 	while (fgets (buf, sizeof buf, ifp) == buf) {
-		cp = strrchr (buf, '\n');
-		if (NULL != cp) {
-			stpcpy(cp, "");
-		} else {
+		if (stpsep(buf, "\n") == NULL) {
 			/* A line which does not end with \n is only valid
 			 * at the end of the file.
 			 */
@@ -1350,15 +1348,13 @@ static void process_flags (int argc, char **argv)
 				 * example: -K UID_MIN=100 -K UID_MAX=499
 				 * note: -K UID_MIN=10,UID_MAX=499 doesn't work yet
 				 */
-				cp = strchr (optarg, '=');
+				cp = stpsep(optarg, "=");
 				if (NULL == cp) {
 					fprintf (stderr,
 					         _("%s: -K requires KEY=VALUE\n"),
 					         Prog);
 					exit (E_BAD_ARG);
 				}
-				/* terminate name, point to value */
-				stpcpy(cp++, "");
 				if (putdef_str (optarg, cp, NULL) < 0) {
 					exit (E_BAD_ARG);
 				}

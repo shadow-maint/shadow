@@ -17,8 +17,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/strcpy/strtcpy.h"
-
-#ident "$Id$"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -76,7 +75,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 */
 
 	while (fgets (buf, sizeof (buf), fp) != NULL) {
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);
 			return true;

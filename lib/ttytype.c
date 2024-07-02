@@ -17,6 +17,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -49,7 +50,7 @@ void ttytype (const char *line)
 			continue;
 		}
 
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 
 		if (   (sscanf (buf, "%1023s %1023s", type, port) == 2)
 		    && (strcmp (line, port) == 0)) {

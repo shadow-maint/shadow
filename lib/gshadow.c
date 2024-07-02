@@ -20,8 +20,10 @@
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
 #include "alloc/x/xrealloc.h"
-#include "prototypes.h"
 #include "defines.h"
+#include "prototypes.h"
+#include "string/strtok/stpsep.h"
+
 
 static /*@null@*/FILE *shadow;
 static /*@null@*//*@only@*/char **members = NULL;
@@ -91,7 +93,7 @@ void endsgent (void)
 	}
 
 	strcpy (sgrbuf, string);
-	stpcpy(strchrnul(sgrbuf, '\n'), "");
+	stpsep(sgrbuf, "\n");
 
 	/*
 	 * There should be exactly 4 colon separated fields.  Find
@@ -172,7 +174,7 @@ void endsgent (void)
 				return NULL;
 			}
 		}
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 		return (sgetsgent (buf));
 	}
 	return NULL;
