@@ -159,6 +159,9 @@ next:
 		if (',' == *cp)		/* end of current tty name */
 			stpcpy(cp++, "");
 	}
+	if (':' != *cp)
+		goto next;
+
 	stpcpy(cp++, "");
 	port.pt_names[j] = NULL;
 
@@ -187,10 +190,8 @@ next:
 	} else {
 		port.pt_users = 0;
 	}
-
-	if (':' != *cp) {
+	if (':' != *cp)
 		goto next;
-	}
 
 	stpcpy(cp++, "");
 
