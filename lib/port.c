@@ -100,7 +100,7 @@ getportent(void)
 	int   dtime;
 	int   i, j;
 	int   saveerr;
-	char  *cp;
+	char  *cp, *field;
 
 	static char            buf[BUFSIZ];
 	static char            *ttys[PORT_TTY + 1];
@@ -144,6 +144,8 @@ next:
 
 	stpcpy(strchrnul(buf, '\n'), "");
 
+	field = buf;
+
 	/*
 	 * Get the name of the TTY device.  It is the first colon
 	 * separated field, and is the name of the TTY with no
@@ -151,23 +153,19 @@ next:
 	 * TTY devices.
 	 */
 
-	if (strchr(buf, ':') == NULL)
+	cp = strsep(&field, ":");
+	if (field == NULL)
 		goto next;
 
 	port.pt_names = ttys;
-	for (cp = buf, j = 0; j < PORT_TTY; j++) {
-		port.pt_names[j] = cp;
-		cp = strpbrk(cp, ":,");
-		if (':' == *cp)
+	for (j = 0; j < PORT_TTY; j++) {
+		port.pt_names[j] = strsep(&cp, ",");
+		if (cp == NULL)
 			break;
-		if (',' == *cp)
-			stpcpy(cp++, "");
 	}
 	port.pt_names[j] = NULL;
-	if (':' != *cp)
+	if (cp != NULL)
 		goto next;
-
-	stpcpy(cp++, "");
 
 	/*
 	 * Get the list of user names.  It is the second colon
@@ -176,23 +174,19 @@ next:
 	 * The last entry in the list is a NULL pointer.
 	 */
 
-	if (strchr(cp, ':') == NULL)
+	cp = strsep(&field, ":");
+	if (field == NULL)
 		goto next;
 
 	port.pt_users = users;
 	for (j = 0; j < PORT_IDS; j++) {
-		port.pt_users[j] = cp;
-		cp = strpbrk(cp, ":,");
-		if (':' == *cp)
+		port.pt_users[j] = strsep(&cp, ",");
+		if (cp == NULL)
 			break;
-		if (',' == *cp)
-			stpcpy(cp++, "");
 	}
 	port.pt_users[j] = NULL;
-	if (':' != *cp)
+	if (cp != NULL)
 		goto next;
-
-	stpcpy(cp++, "");
 
 	/*
 	 * Get the list of valid times.  The times field is the third
@@ -206,6 +200,8 @@ next:
 	 * Times are given as HHMM-HHMM.  The ending time may be before
 	 * the starting time.  Days are presumed to wrap at 0000.
 	 */
+
+	cp = field;
 
 	if ('\0' == *cp) {
 		port.pt_times = 0;
