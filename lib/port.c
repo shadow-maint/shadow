@@ -353,15 +353,13 @@ static struct port *getttyuser (const char *tty, const char *user)
 
 		for (j = 0; NULL != port->pt_users[j]; j++) {
 			if (   (strcmp (user, port->pt_users[j]) == 0)
-			    || (strcmp (port->pt_users[j], "*") == 0)) {
-				break;
+			    || (strcmp (port->pt_users[j], "*") == 0))
+			{
+				goto end;
 			}
 		}
-
-		if (port->pt_users[j] != 0) {
-			break;
-		}
 	}
+end:
 	endportent ();
 	return port;
 }
