@@ -147,17 +147,15 @@ next:
 	 * TTY devices.
 	 */
 
+	if (strchr(buf, ':') == NULL)
+		goto next;
+
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
 		port.pt_names[j] = cp;
 		cp = strpbrk(cp, ":,");
-		if (cp == NULL)
-			goto next;	/* line format error */
-
-		if (':' == *cp) {	/* end of tty name list */
+		if (':' == *cp)		/* end of tty name list */
 			break;
-		}
-
 		if (',' == *cp)		/* end of current tty name */
 			stpcpy(cp++, "");
 	}
@@ -170,6 +168,9 @@ next:
 	 * names.  The entry '*' is used to specify all usernames.
 	 * The last entry in the list is a NULL pointer.
 	 */
+
+	if (strchr(cp, ':') == NULL)
+		goto next;
 
 	if (':' != *cp) {
 		port.pt_users = users;
