@@ -154,16 +154,16 @@ next:
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
 		port.pt_names[j] = cp;
 		cp = strpbrk(cp, ":,");
-		if (':' == *cp)		/* end of tty name list */
+		if (':' == *cp)
 			break;
-		if (',' == *cp)		/* end of current tty name */
+		if (',' == *cp)
 			stpcpy(cp++, "");
 	}
+	port.pt_names[j] = NULL;
 	if (':' != *cp)
 		goto next;
 
 	stpcpy(cp++, "");
-	port.pt_names[j] = NULL;
 
 	/*
 	 * Get the list of user names.  It is the second colon
@@ -175,21 +175,16 @@ next:
 	if (strchr(cp, ':') == NULL)
 		goto next;
 
-	if (':' != *cp) {
-		port.pt_users = users;
-		port.pt_users[0] = cp;
-
-		for (j = 1; ':' != *cp; cp++) {
-			if ((',' == *cp) && (j < PORT_IDS)) {
-				stpcpy(cp++, "");
-				port.pt_users[j] = cp;
-				j++;
-			}
-		}
-		port.pt_users[j] = 0;
-	} else {
-		port.pt_users = 0;
+	port.pt_users = users;
+	for (j = 0; j < PORT_IDS; j++) {
+		port.pt_users[j] = cp;
+		cp = strpbrk(cp, ":,");
+		if (':' == *cp)
+			break;
+		if (',' == *cp)
+			stpcpy(cp++, "");
 	}
+	port.pt_users[j] = NULL;
 	if (':' != *cp)
 		goto next;
 
@@ -333,15 +328,11 @@ static struct port *getttyuser (const char *tty, const char *user)
 	setportent ();
 
 	while ((port = getportent ()) != NULL) {
-		if (NULL == port->pt_users)
-			continue;
-
 		for (i = 0; NULL != port->pt_names[i]; i++) {
 			if (portcmp (port->pt_names[i], tty) == 0) {
 				break;
 			}
 		}
-
 		if (port->pt_names[i] == 0) {
 			continue;
 		}
