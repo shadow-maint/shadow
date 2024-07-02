@@ -128,19 +128,14 @@ static struct port *getportent (void)
 	 */
 
 next:
-
-	/*
-	 * Get the next line and remove optional trailing '\n'.
-	 * Lines which begin with '#' are all ignored.
-	 */
-
-	if (fgets (buf, sizeof buf, ports) == 0) {
+	if (fgets(buf, sizeof(buf), ports) == NULL) {
 		errno = saveerr;
-		return 0;
+		return NULL;
 	}
-	if ('#' == buf[0]) {
+	if ('#' == buf[0])
 		goto next;
-	}
+
+	stpcpy(strchrnul(buf, '\n'), "");
 
 	/*
 	 * Get the name of the TTY device.  It is the first colon
@@ -148,8 +143,6 @@ next:
 	 * leading "/dev".  The entry '*' is used to specify all
 	 * TTY devices.
 	 */
-
-	buf[strcspn (buf, "\n")] = 0;
 
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
