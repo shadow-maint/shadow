@@ -94,17 +94,21 @@ static void endportent (void)
  *	set to EINVAL on error to distinguish the two conditions.
  */
 
-static struct port *getportent (void)
+static struct port *
+getportent(void)
 {
-	static struct port port;	/* static struct to point to         */
-	static char buf[BUFSIZ];	/* some space for stuff              */
-	static char *ttys[PORT_TTY + 1];	/* some pointers to tty names     */
-	static char *users[PORT_IDS + 1];	/* some pointers to user ids     */
-	static struct pt_time ptimes[PORT_TIMES + 1];	/* time ranges         */
-	char *cp;		/* pointer into line                 */
-	int dtime;		/* scratch time of day               */
-	int i, j;
-	int saveerr = errno;	/* errno value on entry              */
+	int   dtime;
+	int   i, j;
+	int   saveerr;
+	char  *cp;
+
+	static char            buf[BUFSIZ];
+	static char            *ttys[PORT_TTY + 1];
+	static char            *users[PORT_IDS + 1];
+	static struct port     port;
+	static struct pt_time  ptimes[PORT_TIMES + 1];
+
+	saveerr = errno;
 
 	/*
 	 * If the ports file is not open, open the file.  Do not rewind
