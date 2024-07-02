@@ -19,6 +19,7 @@
 #include "defines.h"
 #include "port.h"
 #include "prototypes.h"
+#include "string/strtok/stpsep.h"
 
 
 static FILE *ports;
@@ -142,7 +143,7 @@ next:
 	if ('#' == buf[0])
 		goto next;
 
-	stpcpy(strchrnul(buf, '\n'), "");
+	stpsep(buf, "\n");
 
 	field = buf;
 

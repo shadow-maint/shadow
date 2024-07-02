@@ -28,6 +28,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strtok/stpsep.h"
 
 
 #ifndef USE_PAM
@@ -52,11 +53,8 @@ static void read_env_file (const char *filename)
 		return;
 	}
 	while (fgets (buf, (int)(sizeof buf), fp) == buf) {
-		cp = strrchr (buf, '\n');
-		if (NULL == cp) {
+		if (stpsep(buf, "\n") == NULL)
 			break;
-		}
-		stpcpy(cp, "");
 
 		cp = buf;
 		/* ignore whitespace and comments */
@@ -71,15 +69,11 @@ static void read_env_file (const char *filename)
 		 * (for example, the "export NAME" shell commands)
 		 */
 		name = cp;
-		while (('\0' != *cp) && !isspace (*cp) && ('=' != *cp)) {
-			cp++;
-		}
-		if ('=' != *cp) {
+		val = stpsep(cp, "=");
+		if (val == NULL)
 			continue;
-		}
-		/* NUL-terminate the name */
-		stpcpy(cp++, "");
-		val = cp;
+		if (strpbrk(name, " \t") != NULL)
+			continue;
 #if 0				/* XXX untested, and needs rewrite with fewer goto's :-) */
 /*
  (state, char_type) -> (state, action)

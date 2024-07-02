@@ -36,6 +36,7 @@
 #include "shadowlog_internal.h"
 #include "sssd.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strtok/stpsep.h"
 
 
 /* local function prototypes */
@@ -659,7 +660,7 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_buf;
 			}
 		}
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 
 		line = strdup (buf);
 		if (NULL == line) {

@@ -21,6 +21,7 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strtok/stpsep.h"
 
 
 #define	NFIELDS	4
@@ -83,7 +84,7 @@ struct group *sgetgrent (const char *buf)
 		}
 	}
 	strcpy (grpbuf, buf);
-	stpcpy(strchrnul(grpbuf, '\n'), "");
+	stpsep(grpbuf, "\n");
 
 	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
 		grpfields[i] = strsep(&cp, ":");

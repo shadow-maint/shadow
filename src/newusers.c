@@ -54,6 +54,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strtok/stpsep.h"
 
 
 /*
@@ -1101,14 +1102,11 @@ int main (int argc, char **argv)
 	 */
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
-		cp = strrchr (buf, '\n');
-		if (cp == NULL && feof (stdin) == 0) {
+		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
 				 Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
-		if (cp != NULL)
-			stpcpy(cp, "");
 
 		/*
 		 * Break the string into fields and screw around with them.

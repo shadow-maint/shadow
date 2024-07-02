@@ -22,6 +22,7 @@
 #include "atoi/str2i.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strtok/stpsep.h"
 
 
 static FILE *shadow;
@@ -77,7 +78,7 @@ static struct spwd *my_sgetspent (const char *string)
 	if (strlen (string) >= sizeof spwbuf)
 		return 0;
 	strcpy (spwbuf, string);
-	stpcpy(strchrnul(spwbuf, '\n'), "");
+	stpsep(spwbuf, "\n");
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to
@@ -202,7 +203,7 @@ struct spwd *fgetspent (FILE * fp)
 
 	if (fgets (buf, sizeof buf, fp) != NULL)
 	{
-		stpcpy(strchrnul(buf, '\n'), "");
+		stpsep(buf, "\n");
 		return my_sgetspent (buf);
 	}
 	return 0;

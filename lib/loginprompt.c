@@ -16,10 +16,12 @@
 #include <signal.h>
 
 #include "attr.h"
-#include "memzero.h"
-#include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "memzero.h"
+#include "prototypes.h"
+#include "string/strtok/stpsep.h"
+
 
 static void login_exit (MAYBE_UNUSED int sig)
 {
@@ -83,11 +85,8 @@ void login_prompt (char *name, int namesize)
 		exit (EXIT_FAILURE);
 	}
 
-	cp = strchr (buf, '\n');
-	if (NULL == cp) {
-		exit (EXIT_FAILURE);
-	}
-	stpcpy(cp, "");		/* remove \n [ must be there ] */
+	if (stpsep(buf, "\n") == NULL)
+		exit(EXIT_FAILURE);
 
 	/*
 	 * Skip leading whitespace.  This makes "  username" work right.

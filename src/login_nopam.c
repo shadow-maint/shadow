@@ -58,6 +58,8 @@
 
 #include "sizeof.h"
 #include "string/strchr/strrspn.h"
+#include "string/strtok/stpsep.h"
+
 
 #if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
 #undef MAXHOSTNAMELEN
@@ -213,18 +215,16 @@ static bool user_match (const char *tok, const char *string)
 #ifdef PRIMARY_GROUP_MATCH
 	struct passwd *userinf;
 #endif
-	char *at;
+	char *host;
 
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds.
 	 * Otherwise, return true if the token fully matches the username, or if
 	 * the token is a group that contains the username.
 	 */
-	at = strchr (tok + 1, '@');
-	if (NULL != at) {	/* split user@host pattern */
-		stpcpy(at, "");
-		return (   user_match (tok, string)
-		        && from_match (at + 1, myhostname ()));
+	host = stpsep(tok + 1, "@");	/* split user@host pattern */
+	if (host != NULL) {
+		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
 	} else if (tok[0] == '@') {	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
