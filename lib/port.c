@@ -338,10 +338,8 @@ static struct port *getttyuser (const char *tty, const char *user)
 	setportent ();
 
 	while ((port = getportent ()) != NULL) {
-		if (   (0 == port->pt_names)
-		    || (0 == port->pt_users)) {
+		if (NULL == port->pt_users)
 			continue;
-		}
 
 		for (i = 0; NULL != port->pt_names[i]; i++) {
 			if (portcmp (port->pt_names[i], tty) == 0) {
