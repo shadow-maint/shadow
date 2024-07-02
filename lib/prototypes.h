@@ -205,11 +205,10 @@ extern /*@only@*/char **comma_to_list (const char *);
 
 #ifdef ENABLE_LASTLOG
 /* log.c */
-extern void dolastlog (
+extern void dolastlog(
 	struct lastlog *ll,
 	const struct passwd *pw,
-	/*@unique@*/const char *line,
-	/*@unique@*/const char *host);
+	/*@unique@*/const char *line);
 #endif /* ENABLE_LASTLOG */
 
 /* login_nopam.c */
@@ -480,25 +479,19 @@ extern int get_session_host (char **out);
  *
  * @param[in] user username
  * @param[in] tty tty
- * @param[in] host hostname
  *
  * @return 0 if utmp was updated properly,
  *         1 on error.
  */
-extern int update_utmp (const char *user,
-                        const char *tty,
-                        const char *host);
+extern int update_utmp(const char *user, const char *tty);
 /**
  * @brief Update the cumulative failure log
  *
  * @param[in] failent_user username
  * @param[in] tty tty
- * @param[in] host hostname
  *
  */
-extern void record_failure(const char *failent_user,
-                           const char *tty,
-                           const char *hostname);
+extern void record_failure(const char *failent_user, const char *tty);
 #endif /* ENABLE_LOGIND */
 
 /**
