@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "atoi/str2i.h"
+#include "atoi/str2i/str2u.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"

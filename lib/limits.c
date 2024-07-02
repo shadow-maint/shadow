@@ -30,8 +30,11 @@
 #include "shadowlog.h"
 #include <sys/resource.h>
 
-#include "atoi/a2i.h"
-#include "atoi/str2i.h"
+#include "atoi/a2i/a2i.h"
+#include "atoi/a2i/a2s.h"
+#include "atoi/str2i/str2i.h"
+#include "atoi/str2i/str2s.h"
+#include "atoi/str2i/str2u.h"
 #include "memzero.h"
 #include "typetraits.h"
 
@@ -84,14 +87,14 @@ static int setrlimit_value (unsigned int resource,
 }
 
 
-static int set_prio (const char *value)
+static int
+set_prio(const char *value)
 {
-	long prio;
+	int  prio;
 
-	if (   (str2sl(&prio, value) == -1)
-	    || (prio != (int) prio)) {
+	if (str2si(&prio, value) == -1)
 		return 0;
-	}
+
 	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
 	}
@@ -99,14 +102,13 @@ static int set_prio (const char *value)
 }
 
 
-static int set_umask (const char *value)
+static int
+set_umask(const char *value)
 {
-	unsigned long  mask;
+	mode_t  mask;
 
-	if (   (str2ul(&mask, value) == -1)
-	    || (mask != (mode_t) mask)) {
+	if (str2i(mode_t, &mask, value) == -1)
 		return 0;
-	}
 
 	(void) umask (mask);
 	return 0;
@@ -119,6 +121,10 @@ static int check_logins (const char *name, const char *maxlogins)
 	unsigned long limit, count;
 
 	if (str2ul(&limit, maxlogins) == -1) {
+		if (errno == ERANGE) {
+			SYSLOG((LOG_WARN, "Invalid maxlogins value\n"));
+			return LOGIN_ERROR_LOGIN;
+		}
 		return 0;
 	}
 
@@ -479,10 +485,9 @@ void setup_limits (const struct passwd *info)
 			}
 
 			if (strncmp (cp, "pri=", 4) == 0) {
-				long  inc;
+				int  inc;
 
-				if (   (str2sl(&inc, cp + 4) == 0)
-				    && (inc >= -20) && (inc <= 20)) {
+				if (a2si(&inc, cp + 4, NULL, 0, -20, 20) == 0) {
 					errno = 0;
 					if (   (nice (inc) != -1)
 					    || (0 != errno)) {
@@ -498,9 +503,9 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
-				long  blocks;
-				if (   (str2sl(&blocks, cp + 7) == -1)
-				    || (blocks != (int) blocks)
+				int  blocks;
+
+				if (   (str2si(&blocks, cp + 7) == -1)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
@@ -509,10 +514,9 @@ void setup_limits (const struct passwd *info)
 				continue;
 			}
 			if (strncmp (cp, "umask=", 6) == 0) {
-				unsigned long  mask;
+				mode_t  mask;
 
-				if (   (str2ul(&mask, cp + 6) == -1)
-				    || (mask != (mode_t) mask)) {
+				if (str2i(mode_t, &mask, cp + 6) == -1) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",
 					         info->pw_name));
