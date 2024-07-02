@@ -9,7 +9,6 @@ man_MANS = \
 	man8/groupadd.8 \
 	man8/groupdel.8 \
 	man8/groupmod.8 \
-	man1/groups.1 \
 	man8/grpck.8 \
 	man5/gshadow.5 \
 	man8/nologin.8 \
@@ -23,7 +22,6 @@ man_MANS += man8/lastlog.8
 endif
 
 EXTRA_DIST = $(man_MANS) \
-	man1/id.1 \
 	man8/groupmems.8 \
 	man8/logoutd.8
 

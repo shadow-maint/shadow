@@ -5,7 +5,6 @@ mandir = @mandir@/da
 man_MANS = \
 	man1/chfn.1 \
 	man8/groupdel.8 \
-	man1/groups.1 \
 	man5/gshadow.5 \
 	man8/logoutd.8 \
 	man1/newgrp.1 \
@@ -21,8 +20,7 @@ man_MANS += $(man_nopam)
 endif
 
 EXTRA_DIST = \
-	$(man_MANS) \
-	man1/id.1
+	$(man_MANS)
 
 if USE_PAM
 EXTRA_DIST += $(man_nopam)

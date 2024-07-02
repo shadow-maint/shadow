@@ -21,7 +21,6 @@ man_MANS = \
 	man8/groupdel.8 \
 	man8/groupmems.8 \
 	man8/groupmod.8 \
-	man1/groups.1 \
 	man8/grpck.8 \
 	man8/grpconv.8 \
 	man8/grpunconv.8 \
@@ -90,7 +89,6 @@ man_XMANS = \
 	groupdel.8.xml \
 	groupmems.8.xml \
 	groupmod.8.xml \
-	groups.1.xml \
 	grpck.8.xml \
 	gshadow.5.xml \
 	limits.5.xml \
@@ -200,8 +198,6 @@ EXTRA_DIST = \
 	$(man_XMANS) \
 	config.xml \
 	$(addprefix login.defs.d/,$(login_defs_v)) \
-	man1/id.1 \
-	id.1.xml \
 	man8/sulogin.8 \
 	sulogin.8.xml \
 	generate_mans.mak \
@@ -227,7 +223,7 @@ if ENABLE_REGENERATE_MAN
 
 include generate_mans.mak
 
-CLEANFILES = $(man_MANS) man1/id.1 man8/sulogin.8
+CLEANFILES = $(man_MANS) man8/sulogin.8
 
 else
 $(man_MANS):

@@ -326,7 +326,6 @@
 	  <para>MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
-      <!-- groups: no variables -->
       <varlistentry>
 	<term>grpck</term>
 	<listitem>
