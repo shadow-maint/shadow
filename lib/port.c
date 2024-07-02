@@ -94,17 +94,21 @@ static void endportent (void)
  *	set to EINVAL on error to distinguish the two conditions.
  */
 
-static struct port *getportent (void)
+static struct port *
+getportent(void)
 {
-	static struct port port;	/* static struct to point to         */
-	static char buf[BUFSIZ];	/* some space for stuff              */
-	static char *ttys[PORT_TTY + 1];	/* some pointers to tty names     */
-	static char *users[PORT_IDS + 1];	/* some pointers to user ids     */
-	static struct pt_time ptimes[PORT_TIMES + 1];	/* time ranges         */
-	char *cp;		/* pointer into line                 */
-	int dtime;		/* scratch time of day               */
-	int i, j;
-	int saveerr = errno;	/* errno value on entry              */
+	int   dtime;
+	int   i, j;
+	int   saveerr;
+	char  *cp, *field;
+
+	static char            buf[BUFSIZ];
+	static char            *ttys[PORT_TTY + 1];
+	static char            *users[PORT_IDS + 1];
+	static struct port     port;
+	static struct pt_time  ptimes[PORT_TIMES + 1];
+
+	saveerr = errno;
 
 	/*
 	 * If the ports file is not open, open the file.  Do not rewind
@@ -130,20 +134,17 @@ static struct port *getportent (void)
 	 *      - parse off a list of days and times
 	 */
 
-again:
-
-	/*
-	 * Get the next line and remove optional trailing '\n'.
-	 * Lines which begin with '#' are all ignored.
-	 */
-
-	if (fgets (buf, sizeof buf, ports) == 0) {
+next:
+	if (fgets(buf, sizeof(buf), ports) == NULL) {
 		errno = saveerr;
-		return 0;
+		return NULL;
 	}
-	if ('#' == buf[0]) {
-		goto again;
-	}
+	if ('#' == buf[0])
+		goto next;
+
+	stpcpy(strchrnul(buf, '\n'), "");
+
+	field = buf;
 
 	/*
 	 * Get the name of the TTY device.  It is the first colon
@@ -152,26 +153,19 @@ again:
 	 * TTY devices.
 	 */
 
-	*strchrnul(buf, '\n') = '\0';
+	cp = strsep(&field, ":");
+	if (field == NULL)
+		goto next;
 
 	port.pt_names = ttys;
-	for (cp = buf, j = 0; j < PORT_TTY; j++) {
-		port.pt_names[j] = cp;
-		cp = strpbrk(cp, ":,");
+	for (j = 0; j < PORT_TTY; j++) {
+		port.pt_names[j] = strsep(&cp, ",");
 		if (cp == NULL)
-			goto again;	/* line format error */
-
-		if (':' == *cp) {	/* end of tty name list */
 			break;
-		}
-
-		if (',' == *cp) {	/* end of current tty name */
-			*cp++ = '\0';
-		}
 	}
-	*cp = '\0';
-	cp++;
 	port.pt_names[j] = NULL;
+	if (cp != NULL)
+		goto next;
 
 	/*
 	 * Get the list of user names.  It is the second colon
@@ -180,29 +174,19 @@ again:
 	 * The last entry in the list is a NULL pointer.
 	 */
 
-	if (':' != *cp) {
-		port.pt_users = users;
-		port.pt_users[0] = cp;
+	cp = strsep(&field, ":");
+	if (field == NULL)
+		goto next;
 
-		for (j = 1; ':' != *cp; cp++) {
-			if ((',' == *cp) && (j < PORT_IDS)) {
-				*cp = '\0';
-				cp++;
-				port.pt_users[j] = cp;
-				j++;
-			}
-		}
-		port.pt_users[j] = 0;
-	} else {
-		port.pt_users = 0;
+	port.pt_users = users;
+	for (j = 0; j < PORT_IDS; j++) {
+		port.pt_users[j] = strsep(&cp, ",");
+		if (cp == NULL)
+			break;
 	}
-
-	if (':' != *cp) {
-		goto again;
-	}
-
-	*cp = '\0';
-	cp++;
+	port.pt_users[j] = NULL;
+	if (cp != NULL)
+		goto next;
 
 	/*
 	 * Get the list of valid times.  The times field is the third
@@ -216,6 +200,8 @@ again:
 	 * Times are given as HHMM-HHMM.  The ending time may be before
 	 * the starting time.  Days are presumed to wrap at 0000.
 	 */
+
+	cp = field;
 
 	if ('\0' == *cp) {
 		port.pt_times = 0;
@@ -296,7 +282,7 @@ again:
 		}
 
 		if (('-' != cp[i]) || (dtime > 2400) || ((dtime % 100) > 59)) {
-			goto again;
+			goto next;
 		}
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
@@ -308,7 +294,7 @@ again:
 		if (   ((',' != cp[i]) && ('\0' != cp[i]))
 		    || (dtime > 2400)
 		    || ((dtime % 100) > 59)) {
-			goto again;
+			goto next;
 		}
 
 		port.pt_times[j].t_end = dtime;
@@ -334,41 +320,33 @@ again:
  *	entries are treated as an ordered list.
  */
 
-static struct port *getttyuser (const char *tty, const char *user)
+static struct port *
+getttyuser(const char *tty, const char *user)
 {
-	int i, j;
-	struct port *port;
+	struct port  *port;
 
-	setportent ();
+	setportent();
 
-	while ((port = getportent ()) != NULL) {
-		if (   (0 == port->pt_names)
-		    || (0 == port->pt_users)) {
-			continue;
-		}
+	while ((port = getportent()) != NULL) {
+		char  **ptn;
+		char  **ptu;
 
-		for (i = 0; NULL != port->pt_names[i]; i++) {
-			if (portcmp (port->pt_names[i], tty) == 0) {
+		for (ptn = port->pt_names; *ptn != NULL; ptn++) {
+			if (portcmp(*ptn, tty) == 0)
 				break;
-			}
 		}
-
-		if (port->pt_names[i] == 0) {
+		if (*ptn == NULL)
 			continue;
-		}
 
-		for (j = 0; NULL != port->pt_users[j]; j++) {
-			if (   (strcmp (user, port->pt_users[j]) == 0)
-			    || (strcmp (port->pt_users[j], "*") == 0)) {
-				break;
-			}
-		}
-
-		if (port->pt_users[j] != 0) {
-			break;
+		for (ptu = port->pt_users; *ptu != NULL; ptu++) {
+			if (strcmp(*ptu, user) == 0)
+				goto end;
+			if (strcmp(*ptu, "*") == 0)
+				goto end;
 		}
 	}
-	endportent ();
+end:
+	endportent();
 	return port;
 }
 

@@ -646,7 +646,7 @@ static int LookupWord (char *buff)
   else if (strlen (buff) == 4 && buff[3] == '.')
     {
       abbrev = true;
-      buff[3] = '\0';
+      stpcpy(&buff[3], "");
     }
   else
     abbrev = false;
@@ -689,7 +689,7 @@ static int LookupWord (char *buff)
   i = strlen (buff) - 1;
   if (buff[i] == 's')
     {
-      buff[i] = '\0';
+      stpcpy(&buff[i], "");
       for (tp = UnitsTable; tp->name; tp++)
 	if (strcmp (buff, tp->name) == 0)
 	  {
@@ -723,7 +723,7 @@ static int LookupWord (char *buff)
       *p++ = *q;
     else
       i++;
-  *p = '\0';
+  stpcpy(p, "");
   if (0 != i)
     for (tp = TimezoneTable; NULL != tp->name; tp++)
       if (strcmp (buff, tp->name) == 0)
@@ -772,7 +772,7 @@ yylex (void)
 	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
 	    if (p < &buff[sizeof buff - 1])
 	      *p++ = c;
-	  *p = '\0';
+          stpcpy(p, "");
 	  yyInput--;
 	  return LookupWord (buff);
 	}

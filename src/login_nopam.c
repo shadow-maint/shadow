@@ -57,6 +57,7 @@
 #include <arpa/inet.h>		/* for inet_ntoa() */
 
 #include "sizeof.h"
+#include "string/strchr/stprspn.h"
 
 #if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
 #undef MAXHOSTNAMELEN
@@ -100,10 +101,8 @@ int login_access (const char *user, const char *from)
 		int lineno = 0;	/* for diagnostics */
 		while (   !match
 		       && (fgets (line, sizeof (line), fp) == line)) {
-			ptrdiff_t  end;
 			lineno++;
-			end = strlen (line) - 1;
-			if (line[0] == '\0' || line[end] != '\n') {
+			if (line[0] == '\0' || strchr(line, '\n') == NULL) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: missing newline or line too long",
 					 TABLE, lineno));
@@ -112,10 +111,7 @@ int login_access (const char *user, const char *from)
 			if (line[0] == '#') {
 				continue;	/* comment line */
 			}
-			while (end > 0 && isspace (line[end - 1])) {
-				end--;
-			}
-			line[end] = '\0';	/* strip trailing whitespace */
+			stpcpy(stprspn(line, " \t\n"), "");
 			if (line[0] == '\0') {	/* skip blank lines */
 				continue;
 			}
@@ -186,7 +182,7 @@ static char *myhostname (void)
 
 	if (name[0] == '\0') {
 		gethostname (name, sizeof (name));
-		name[MAXHOSTNAMELEN] = '\0';
+		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
 	return (name);
 }
@@ -226,7 +222,7 @@ static bool user_match (const char *tok, const char *string)
 	 */
 	at = strchr (tok + 1, '@');
 	if (NULL != at) {	/* split user@host pattern */
-		*at = '\0';
+		stpcpy(at, "");
 		return (   user_match (tok, string)
 		        && from_match (at + 1, myhostname ()));
 #if HAVE_INNETGR

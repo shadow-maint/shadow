@@ -226,7 +226,7 @@ static int new_password (const struct passwd *pw)
 		erase_pass (clear);
 		strzero (cipher);
 	} else {
-		orig[0] = '\0';
+		strcpy(orig, "");
 	}
 
 	/*
@@ -514,9 +514,8 @@ static char *update_crypt_pw (char *cp)
 		}
 	}
 
-	if (dflg) {
-		*cp = '\0';
-	}
+	if (dflg)
+		strcpy(cp, "");
 
 	if (uflg && *cp == '!') {
 		if (cp[1] == '\0') {
