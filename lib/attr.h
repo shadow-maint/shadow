@@ -26,9 +26,9 @@
 #endif
 
 #if (__GNUC__ >= 14)
-# define ATTR_STRING(...)       [[gnu::null_terminated_string_arg(__VA_ARGS__)]]
+# define ATTR_STRING(i)              [[gnu::null_terminated_string_arg(i)]]
 #else
-# define ATTR_STRING(...)
+# define ATTR_STRING(i)
 #endif
 
 
