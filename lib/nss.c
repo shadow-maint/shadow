@@ -16,6 +16,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strtok/stpsep.h"
+#include "string/strchr/stpspn.h"
 
 
 #define NSSWITCH "/etc/nsswitch.conf"
@@ -84,8 +85,7 @@ nss_init(const char *nsswitch_path) {
 		if (strncasecmp(line, "subid:", 6) != 0)
 			continue;
 		p = &line[6];
-		while (isspace(*p))
-			p++;
+		p = stpspn(p, " \t\n");
 		if (*p != '\0')
 			break;
 		p = NULL;

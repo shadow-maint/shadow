@@ -24,14 +24,15 @@
 # undef static
 #endif
 
-#include <stdio.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include <time.h>
 
 #include "attr.h"
 #include "getdate.h"
+#include "string/strchr/stpspn.h"
 
-#include <string.h>
 
 /* Some old versions of bison generate parsers that use bcopy.
    That loses on systems that don't provide the function, so we have
@@ -746,8 +747,7 @@ yylex (void)
 
   for (;;)
     {
-      while (isspace (*yyInput))
-	yyInput++;
+      yyInput = stpspn(yyInput, " \t");
 
       if (isdigit (c = *yyInput) || c == '-' || c == '+')
 	{
