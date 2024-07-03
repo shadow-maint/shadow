@@ -22,6 +22,7 @@
 #include "alloc/malloc.h"
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
+#include "fs/readlink/readlinknul.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX
@@ -549,27 +550,20 @@ static /*@null@*/char *readlink_malloc (const char *filename)
 	size_t size = 1024;
 
 	while (true) {
-		ssize_t nchars;
+		int  len;
 		char *buffer = MALLOC(size, char);
 		if (NULL == buffer) {
 			return NULL;
 		}
 
-		nchars = readlink (filename, buffer, size);
-
-		if (nchars < 0) {
-			free(buffer);
-			return NULL;
-		}
-
-		if ((size_t) nchars < size) { /* The buffer was large enough */
-			/* readlink does not nul-terminate */
-			stpcpy(&buffer[nchars], "");
+		len = readlinknul(filename, buffer, size);
+		if (len != -1)
 			return buffer;
-		}
 
-		/* Try again with a bigger buffer */
-		free (buffer);
+		free(buffer);
+		if (errno != E2BIG)
+			return NULL;
+
 		size *= 2;
 	}
 }
