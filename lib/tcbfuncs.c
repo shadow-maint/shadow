@@ -19,11 +19,12 @@
 
 #include "defines.h"
 #include "prototypes.h"
+#include "fs/readlink/readlinknul.h"
 #include "getdef.h"
 #include "shadowio.h"
 #include "tcbfuncs.h"
-
 #include "shadowlog_internal.h"
+
 
 #define SHADOWTCB_HASH_BY 1000
 #define SHADOWTCB_LOCK_SUFFIX ".lock"
@@ -96,7 +97,6 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 	char *path, *rval;
 	struct stat st;
 	char link[8192];
-	ssize_t ret;
 
 	if (asprintf (&path, TCB_DIR "/%s", name) == -1) {
 		OUT_OF_MEMORY;
@@ -125,8 +125,7 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 		free (path);
 		return NULL;
 	}
-	ret = readlink (path, link, sizeof (link) - 1);
-	if (-1 == ret) {
+	if (READLINKNUL(path, link) == -1) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot read symbolic link %s: %s\n"),
 		         shadow_progname, path, strerror (errno));
@@ -134,14 +133,6 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 		return NULL;
 	}
 	free (path);
-	if ((size_t)ret >= sizeof(link) - 1) {
-		stpcpy(&link[sizeof(link) - 1], "");
-		fprintf (shadow_logfd,
-		         _("%s: Suspiciously long symlink: %s\n"),
-		         shadow_progname, link);
-		return NULL;
-	}
-	stpcpy(&link[ret], "");
 	rval = strdup (link);
 	if (NULL == rval) {
 		OUT_OF_MEMORY;
