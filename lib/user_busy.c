@@ -21,6 +21,7 @@
 
 #include "atoi/getnum.h"
 #include "defines.h"
+#include "fs/readlink/readlinknul.h"
 #include "prototypes.h"
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
@@ -93,17 +94,16 @@ static int different_namespace (const char *sname)
 	/* 41: /proc/xxxxxxxxxx/task/xxxxxxxxxx/ns/user + \0 */
 	char     path[41];
 	char     buf[512], buf2[512];
-	ssize_t  llen1, llen2;
 
 	SNPRINTF(path, "/proc/%s/ns/user", sname);
 
-	if ((llen1 = readlink (path, buf, sizeof(buf))) == -1)
+	if (READLINKNUL(path, buf) == -1)
 		return 0;
 
-	if ((llen2 = readlink ("/proc/self/ns/user", buf2, sizeof(buf2))) == -1)
+	if (READLINKNUL("/proc/self/ns/user", buf2) == -1)
 		return 0;
 
-	if (llen1 == llen2 && memcmp (buf, buf2, llen1) == 0)
+	if (strcmp(buf, buf2) == 0)
 		return 0; /* same namespace */
 
 	return 1;
