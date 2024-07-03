@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "prototypes.h"
+#include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -91,12 +92,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * entering a space.  --marekm
 		 */
 		stpcpy(strrspn(newf, " \t\n"), "");
-
-		cp = newf;
-		while (isspace (*cp)) {
-			cp++;
-		}
-
+		cp = stpspn(newf, " \t");
 		strcpy (buf, cp);
 	}
 }

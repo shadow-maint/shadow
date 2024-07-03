@@ -14,8 +14,9 @@
 #ident "$Id$"
 
 #include "atoi/str2i/str2s.h"
-#include "prototypes.h"
 #include "getdate.h"
+#include "prototypes.h"
+#include "string/strchr/stpspn.h"
 
 
 /*
@@ -53,9 +54,7 @@ long strtoday (const char *str)
 	if ('-' == *s) {
 		s++;
 	}
-	while (' ' == *s) {
-		s++;
-	}
+	s = stpspn(s, " ");
 	while (isnum && ('\0' != *s)) {
 		if (!isdigit (*s)) {
 			isnum = false;
