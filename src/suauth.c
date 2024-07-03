@@ -140,13 +140,11 @@ int check_su_auth (const char *actual_id,
 
 static int applies (const char *single, char *list)
 {
-	const char split[] = ", ";
 	char *tok;
 
 	int state = 0;
 
-	for (tok = strtok (list, split); tok != NULL;
-	     tok = strtok (NULL, split)) {
+	for (tok = strtok(list, ","); tok != NULL; tok = strtok(NULL, ",")) {
 
 		if (!strcmp (tok, "ALL")) {
 			if (state != 0) {
