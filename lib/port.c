@@ -46,9 +46,8 @@ static int portcmp (const char *pattern, const char *port)
 	if (('\0' == *pattern) && ('\0' == *port)) {
 		return 0;
 	}
-	if (('S' == orig[0]) && ('U' == orig[1]) && ('\0' == orig[2])) {
+	if (strcmp(orig, "SU") == 0)
 		return 1;
-	}
 
 	return (*pattern == '*') ? 0 : 1;
 }
