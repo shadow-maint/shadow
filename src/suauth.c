@@ -18,6 +18,7 @@
 
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -47,7 +48,6 @@ int check_su_auth (const char *actual_id,
                    const char *wanted_id,
                    bool su_to_root)
 {
-	int posn;
 	const char field[] = ":";
 	FILE *authfile_fd;
 	char temp[1024];
@@ -73,6 +73,8 @@ int check_su_auth (const char *actual_id,
 	}
 
 	while (fgets (temp, sizeof (temp), authfile_fd) != NULL) {
+		char  *p;
+
 		lines++;
 
 		if (stpsep(temp, "\n") == NULL) {
@@ -84,12 +86,11 @@ int check_su_auth (const char *actual_id,
 
 		stpcpy(strrspn(temp, " \t"), "");
 
-		posn = strspn(temp, " \t");
-
-		if (temp[posn] == '#' || temp[posn] == '\0') {
+		p = stpspn(temp, " \t");
+		if (*p == '#' || *p == '\0')
 			continue;
-		}
-		if (!(to_users = strtok (temp + posn, field))
+
+		if (!(to_users = strtok(p, field))
 		    || !(from_users = strtok (NULL, field))
 		    || !(action = strtok (NULL, field))
 		    || strtok (NULL, field)) {
