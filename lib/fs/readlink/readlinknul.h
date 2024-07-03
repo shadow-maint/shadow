@@ -15,6 +15,10 @@
 #include <unistd.h>
 
 #include "attr.h"
+#include "sizeof.h"
+
+
+#define READLINKNUL(link, buf)  readlinknul(link, buf, NITEMS(buf))
 
 
 ATTR_STRING(1)
