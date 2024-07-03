@@ -19,10 +19,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
-#include "fs/readlink/readlinknul.h"
+#include "fs/readlink/areadlink.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX
@@ -69,7 +68,6 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
                      const struct stat *statp, const struct timespec mt[],
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
-static /*@null@*/char *readlink_malloc (const char *filename);
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
                          MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
@@ -540,35 +538,6 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 }
 
 /*
- * readlink_malloc - wrapper for readlink
- *
- * return NULL on error.
- * The return string shall be freed by the caller.
- */
-static /*@null@*/char *readlink_malloc (const char *filename)
-{
-	size_t size = 1024;
-
-	while (true) {
-		int  len;
-		char *buffer = MALLOC(size, char);
-		if (NULL == buffer) {
-			return NULL;
-		}
-
-		len = readlinknul(filename, buffer, size);
-		if (len != -1)
-			return buffer;
-
-		free(buffer);
-		if (errno != E2BIG)
-			return NULL;
-
-		size *= 2;
-	}
-}
-
-/*
  * copy_symlink - copy a symlink
  *
  *	Copy a symlink from src to dst.
@@ -598,10 +567,9 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	 * destination directory name.
 	 */
 
-	oldlink = readlink_malloc (src->full_path);
-	if (NULL == oldlink) {
+	oldlink = areadlink(src->full_path);
+	if (NULL == oldlink)
 		return -1;
-	}
 
 	/* If src was a link to an entry of the src_orig directory itself,
 	 * create a link to the corresponding entry in the dst_orig
