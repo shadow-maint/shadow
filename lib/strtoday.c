@@ -10,8 +10,7 @@
 #include <config.h>
 
 #include <ctype.h>
-
-#ident "$Id$"
+#include <string.h>
 
 #include "atoi/str2i/str2s.h"
 #include "getdate.h"
@@ -33,7 +32,8 @@
  *	24-sep-72
  *	24sep72
  */
-long strtoday (const char *str)
+long
+strtoday(const char *str)
 {
 	time_t t;
 	bool isnum = true;
@@ -44,9 +44,8 @@ long strtoday (const char *str)
 	 * which is not what we expect, unless you're a BOFH :-).
 	 * (useradd sets sp_expire = current date for new lusers)
 	 */
-	if ((NULL == str) || ('\0' == *str)) {
+	if (NULL == str || strcmp(str, "") == 0)
 		return -1;
-	}
 
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
