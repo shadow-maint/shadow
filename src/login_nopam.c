@@ -104,7 +104,7 @@ int login_access (const char *user, const char *from)
 		while (   !match
 		       && (fgets (line, sizeof (line), fp) == line)) {
 			lineno++;
-			if (line[0] == '\0' || strchr(line, '\n') == NULL) {
+			if (stpsep(line, "\n") == NULL) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: missing newline or line too long",
 					 TABLE, lineno));
@@ -113,7 +113,7 @@ int login_access (const char *user, const char *from)
 			if (line[0] == '#') {
 				continue;	/* comment line */
 			}
-			stpcpy(strrspn(line, " \t\n"), "");
+			stpcpy(strrspn(line, " \t"), "");
 			if (line[0] == '\0') {	/* skip blank lines */
 				continue;
 			}
