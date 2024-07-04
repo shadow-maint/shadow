@@ -210,7 +210,7 @@ get_session_host(char **out, pid_t main_pid)
 	ut = get_current_utmp(main_pid);
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
+	if ((ut != NULL) && strncmp(ut->ut_host, "", countof(ut->ut_host)) != 0) {
 		*out = XSTRNDUP(ut->ut_host);
 	} else {
 		*out = NULL;
@@ -281,7 +281,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	if (NULL != host && !streq(host, ""))
 		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	else if (NULL != ut && '\0' != ut->ut_host[0])
+	else if (NULL != ut && strncmp(ut->ut_host, "", countof(ut->ut_host)) != 0)
 		hostname = XSTRNDUP(ut->ut_host);
 #endif
 
@@ -436,12 +436,12 @@ active_sessions_count(const char *name, unsigned long limit)
 		if (USER_PROCESS != ut->ut_type) {
 			continue;
 		}
-		if ('\0' == ut->ut_user[0]) {
+		if (strncmp(ut->ut_user, "", countof(ut->ut_user)) == 0)
 			continue;
-		}
-		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0) {
+
+		if (strncmp(ut->ut_user, name, countof(ut->ut_user)) != 0)
 			continue;
-		}
+
 		count++;
 		if (count > limit) {
 			break;

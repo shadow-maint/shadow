@@ -1200,7 +1200,7 @@ int main (int argc, char **argv)
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
-			if ('\0' != ll.ll_host[0]) {
+			if (strncmp(ll.ll_host, "", countof(ll.ll_host)) != 0) {
 				printf (_(" from %.*s"),
 				        (int) sizeof ll.ll_host, ll.ll_host);
 			}
