@@ -71,10 +71,6 @@
 #define TABLE	"/etc/login.access"
 #endif
 
-/* Delimiters for fields and for lists of users, ttys or hosts. */
-static char fs[] = ":";		/* field separator */
-static char sep[] = ", \t";	/* list-element separator */
-
 static bool list_match (char *list, const char *item, bool (*match_fn) (const char *, const char *));
 static bool user_match (const char *tok, const char *string);
 static bool from_match (const char *tok, const char *string);
@@ -82,7 +78,8 @@ static bool string_match (const char *tok, const char *string);
 static const char *resolve_hostname (const char *string);
 
 /* login_access - match username/group and host/tty with access control file */
-int login_access (const char *user, const char *from)
+int
+login_access(const char *user, const char *from)
 {
 	FILE *fp;
 	char line[BUFSIZ];
@@ -102,7 +99,10 @@ int login_access (const char *user, const char *from)
 	if (NULL != fp) {
 		int lineno = 0;	/* for diagnostics */
 		while (   !match
-		       && (fgets (line, sizeof (line), fp) == line)) {
+		       && (fgets (line, sizeof (line), fp) == line))
+		{
+			char  *p;
+
 			lineno++;
 			if (stpsep(line, "\n") == NULL) {
 				SYSLOG ((LOG_ERR,
@@ -117,10 +117,11 @@ int login_access (const char *user, const char *from)
 			if (line[0] == '\0') {	/* skip blank lines */
 				continue;
 			}
-			if (   ((perm = strtok (line, fs)) == NULL)
-			    || ((users = strtok (NULL, fs)) == NULL)
-			    || ((froms = strtok (NULL, fs)) == NULL)
-			    || (strtok (NULL, fs) != NULL)) {
+			p = line;
+			perm = strsep(&p, ":");
+			users = strsep(&p, ":");
+			froms = strsep(&p, ":");
+			if (froms == NULL || p != NULL) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %d: bad field count",
 					 TABLE, lineno));
@@ -144,7 +145,8 @@ int login_access (const char *user, const char *from)
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
-static bool list_match (char *list, const char *item, bool (*match_fn) (const char *, const char*))
+static bool
+list_match(char *list, const char *item, bool (*match_fn)(const char *, const char*))
 {
 	char *tok;
 	bool match = false;
@@ -155,7 +157,7 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 	 * a match, look for an "EXCEPT" list and recurse to determine whether
 	 * the match is affected by any exceptions.
 	 */
-	for (tok = strtok (list, sep); tok != NULL; tok = strtok (NULL, sep)) {
+	while (NULL != (tok = strsep(&list, ", \t"))) {
 		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
 			break;
 		}
@@ -167,7 +169,7 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 
 	/* Process exceptions to matches. */
 	if (match) {
-		while (   ((tok = strtok (NULL, sep)) != NULL)
+		while (   (NULL != (tok = strsep(&list, ", \t")))
 		       && (strcasecmp (tok, "EXCEPT") != 0))
 			/* VOID */ ;
 		if (tok == 0 || !list_match (NULL, item, match_fn)) {
