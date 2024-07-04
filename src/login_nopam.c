@@ -317,9 +317,8 @@ static bool from_match (const char *tok, const char *string)
 			return true;
 		}
 	} else if (strcasecmp (tok, "LOCAL") == 0) {	/* local: no dots */
-		if (strchr (string, '.') == NULL) {
+		if (!strchr(string, '.'))
 			return true;
-		}
 	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
 		   && strprefix(resolve_hostname(string), tok)) {
 		return true;
