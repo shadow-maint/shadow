@@ -201,16 +201,16 @@ static bool home_added = false;
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
 #endif				/* ENABLE_SUBIDS */
 
-#define DGROUP			"GROUP="
-#define DGROUPS			"GROUPS="
-#define DHOME			"HOME="
-#define DSHELL			"SHELL="
-#define DINACT			"INACTIVE="
-#define DEXPIRE			"EXPIRE="
-#define DSKEL			"SKEL="
-#define DUSRSKEL		"USRSKEL="
-#define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
-#define DLOG_INIT	"LOG_INIT="
+#define DGROUP			"GROUP"
+#define DGROUPS			"GROUPS"
+#define DHOME			"HOME"
+#define DSHELL			"SHELL"
+#define DINACT			"INACTIVE"
+#define DEXPIRE			"EXPIRE"
+#define DSKEL			"SKEL"
+#define DUSRSKEL		"USRSKEL"
+#define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL"
+#define DLOG_INIT		"LOG_INIT"
 
 /* local function prototypes */
 NORETURN static void fail_exit (int);
@@ -326,8 +326,6 @@ static void fail_exit (int code)
 	exit(code);
 }
 
-#define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
-
 /*
  * get_defaults - read the defaults file
  *
@@ -335,7 +333,8 @@ static void fail_exit (int code)
  *	various values from the file, or uses built-in default values if the
  *	file does not exist.
  */
-static void get_defaults (void)
+static void
+get_defaults(void)
 {
 	FILE        *fp;
 	char        *default_file = USER_DEFAULTS_FILE;
@@ -364,24 +363,21 @@ static void get_defaults (void)
 	while (fgets (buf, sizeof buf, fp) == buf) {
 		stpsep(buf, "\n");
 
-		cp = strchr (buf, '=');
-		if (NULL == cp) {
+		cp = stpsep(buf, "=");
+		if (NULL == cp)
 			continue;
-		}
-
-		cp++;
 
 		/*
 		 * Primary GROUP identifier
 		 */
-		if (MATCH (buf, DGROUP)) {
+		if (strcmp(buf, DGROUP) == 0) {
 			const struct group *grp = prefix_getgr_nam_gid (cp);
 			if (NULL == grp) {
 				fprintf (stderr,
 				         _("%s: group '%s' does not exist\n"),
 				         Prog, cp);
 				fprintf (stderr,
-				         _("%s: the %s configuration in %s will be ignored\n"),
+				         _("%s: the %s= configuration in %s will be ignored\n"),
 				         Prog, DGROUP, default_file);
 			} else {
 				def_group = grp->gr_gid;
@@ -391,10 +387,10 @@ static void get_defaults (void)
 
 		ccp = cp;
 
-		if (MATCH (buf, DGROUPS)) {
+		if (strcmp(buf, DGROUPS) == 0) {
 			if (get_groups (cp) != 0) {
 				fprintf (stderr,
-				         _("%s: the '%s' configuration in %s has an invalid group, ignoring the bad group\n"),
+				         _("%s: the '%s=' configuration in %s has an invalid group, ignoring the bad group\n"),
 				         Prog, DGROUPS, default_file);
 			}
 			if (user_groups[0] != NULL) {
@@ -405,27 +401,27 @@ static void get_defaults (void)
 		/*
 		 * Default HOME filesystem
 		 */
-		else if (MATCH (buf, DHOME)) {
+		else if (strcmp(buf, DHOME) == 0) {
 			def_home = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Login Shell command
 		 */
-		else if (MATCH (buf, DSHELL)) {
+		else if (strcmp(buf, DSHELL) == 0) {
 			def_shell = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Password Inactive value
 		 */
-		else if (MATCH (buf, DINACT)) {
+		else if (strcmp(buf, DINACT) == 0) {
 			if (a2sl(&def_inactive, ccp, NULL, 0, -1, LONG_MAX) == -1) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, ccp);
 				fprintf (stderr,
-				         _("%s: the %s configuration in %s will be ignored\n"),
+				         _("%s: the %s= configuration in %s will be ignored\n"),
 				         Prog, DINACT, default_file);
 				def_inactive = -1;
 			}
@@ -434,14 +430,14 @@ static void get_defaults (void)
 		/*
 		 * Default account expiration date
 		 */
-		else if (MATCH (buf, DEXPIRE)) {
+		else if (strcmp(buf, DEXPIRE) == 0) {
 			def_expire = xstrdup(ccp);
 		}
 
 		/*
 		 * Default Skeleton information
 		 */
-		else if (MATCH (buf, DSKEL)) {
+		else if (strcmp(buf, DSKEL) == 0) {
 			if ('\0' == *ccp)
 				ccp = SKEL_DIR;
 
@@ -458,7 +454,7 @@ static void get_defaults (void)
 		/*
 		 * Default Usr Skeleton information
 		 */
-		else if (MATCH (buf, DUSRSKEL)) {
+		else if (strcmp(buf, DUSRSKEL) == 0) {
 			if ('\0' == *ccp)
 				ccp = USRSKELDIR;
 
@@ -474,7 +470,7 @@ static void get_defaults (void)
 		/*
 		 * Create by default user mail spool or not ?
 		 */
-		else if (MATCH (buf, DCREATE_MAIL_SPOOL)) {
+		else if (strcmp(buf, DCREATE_MAIL_SPOOL) == 0) {
 			if (*ccp == '\0')
 				ccp = "no";
 
@@ -484,7 +480,7 @@ static void get_defaults (void)
 		/*
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
-		else if (MATCH (buf, DLOG_INIT)) {
+		else if (strcmp(buf, DLOG_INIT) == 0) {
 			if (*ccp == '\0')
 				ccp = def_log_init;
 
@@ -525,7 +521,8 @@ static void show_defaults (void)
  *	are currently set. Duplicated lines are pruned, missing lines are
  *	added, and unrecognized lines are copied as is.
  */
-static int set_defaults (void)
+static int
+set_defaults(void)
 {
 	int   ret = -1;
 	bool  out_group = false;
@@ -604,6 +601,8 @@ static int set_defaults (void)
 	}
 
 	while (fgets (buf, sizeof buf, ifp) == buf) {
+		char  *val;
+
 		if (stpsep(buf, "\n") == NULL) {
 			/* A line which does not end with \n is only valid
 			 * at the end of the file.
@@ -618,44 +617,46 @@ static int set_defaults (void)
 			}
 		}
 
-		if (!out_group && MATCH (buf, DGROUP)) {
-			fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
+		val = stpsep(buf, "=");
+		if (val == NULL) {
+			fprintf(ofp, "%s\n", buf);
+		} else if (!out_group && strcmp(buf, DGROUP) == 0) {
+			fprintf(ofp, DGROUP "=%u\n", (unsigned int) def_group);
 			out_group = true;
-		} else if (!out_groups && MATCH (buf, DGROUPS)) {
-			fprintf (ofp, DGROUPS "%s\n", def_groups);
+		} else if (!out_groups && strcmp(buf, DGROUPS) == 0) {
+			fprintf(ofp, DGROUPS "=%s\n", def_groups);
 			out_groups = true;
-		} else if (!out_home && MATCH (buf, DHOME)) {
-			fprintf (ofp, DHOME "%s\n", def_home);
+		} else if (!out_home && strcmp(buf, DHOME) == 0) {
+			fprintf(ofp, DHOME "=%s\n", def_home);
 			out_home = true;
-		} else if (!out_inactive && MATCH (buf, DINACT)) {
-			fprintf (ofp, DINACT "%ld\n", def_inactive);
+		} else if (!out_inactive && strcmp(buf, DINACT) == 0) {
+			fprintf(ofp, DINACT "=%ld\n", def_inactive);
 			out_inactive = true;
-		} else if (!out_expire && MATCH (buf, DEXPIRE)) {
-			fprintf (ofp, DEXPIRE "%s\n", def_expire);
+		} else if (!out_expire && strcmp(buf, DEXPIRE) == 0) {
+			fprintf(ofp, DEXPIRE "=%s\n", def_expire);
 			out_expire = true;
-		} else if (!out_shell && MATCH (buf, DSHELL)) {
-			fprintf (ofp, DSHELL "%s\n", def_shell);
+		} else if (!out_shell && strcmp(buf, DSHELL) == 0) {
+			fprintf(ofp, DSHELL "=%s\n", def_shell);
 			out_shell = true;
-		} else if (!out_skel && MATCH (buf, DSKEL)) {
-			fprintf (ofp, DSKEL "%s\n", def_template);
+		} else if (!out_skel && strcmp(buf, DSKEL) == 0) {
+			fprintf(ofp, DSKEL "=%s\n", def_template);
 			out_skel = true;
-		} else if (!out_usrskel && MATCH (buf, DUSRSKEL)) {
-			fprintf (ofp, DUSRSKEL "%s\n", def_usrtemplate);
+		} else if (!out_usrskel && strcmp(buf, DUSRSKEL) == 0) {
+			fprintf(ofp, DUSRSKEL "=%s\n", def_usrtemplate);
 			out_usrskel = true;
 		} else if (!out_create_mail_spool
-			   && MATCH (buf, DCREATE_MAIL_SPOOL)) {
-			fprintf (ofp,
-			         DCREATE_MAIL_SPOOL "%s\n",
-			         def_create_mail_spool);
+			   && strcmp(buf, DCREATE_MAIL_SPOOL) == 0)
+		{
+			fprintf(ofp,
+			        DCREATE_MAIL_SPOOL "=%s\n",
+			        def_create_mail_spool);
 			out_create_mail_spool = true;
-		} else if (!out_log_init
-			   && MATCH (buf, DLOG_INIT)) {
-			fprintf (ofp,
-			         DLOG_INIT "%s\n",
-			         def_log_init);
+		} else if (!out_log_init && strcmp(buf, DLOG_INIT) == 0) {
+			fprintf(ofp, DLOG_INIT "=%s\n", def_log_init);
 			out_log_init = true;
-		} else
-			fprintf (ofp, "%s\n", buf);
+		} else {
+			fprintf(ofp, "%s=%s\n", buf, val);
+		}
 	}
 	(void) fclose (ifp);
 
