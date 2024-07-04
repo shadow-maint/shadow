@@ -114,9 +114,9 @@ login_access(const char *user, const char *from)
 				continue;	/* comment line */
 			}
 			stpcpy(strrspn(line, " \t"), "");
-			if (line[0] == '\0') {	/* skip blank lines */
+			if (strcmp(line, "") == 0)  /* skip blank lines */
 				continue;
-			}
+
 			p = line;
 			perm = strsep(&p, ":");
 			users = strsep(&p, ":");
@@ -180,11 +180,12 @@ list_match(char *list, const char *item, bool (*match_fn)(const char *, const ch
 }
 
 /* myhostname - figure out local machine name */
-static char *myhostname (void)
+static char *
+myhostname(void)
 {
 	static char name[MAXHOSTNAMELEN + 1] = "";
 
-	if (name[0] == '\0') {
+	if (strcmp(name, "") == 0) {
 		gethostname (name, sizeof (name));
 		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
@@ -290,7 +291,8 @@ static const char *resolve_hostname (const char *string)
 
 /* from_match - match a host or tty against a list of tokens */
 
-static bool from_match (const char *tok, const char *string)
+static bool
+from_match(const char *tok, const char *string)
 {
 	size_t tok_len;
 
@@ -321,7 +323,8 @@ static bool from_match (const char *tok, const char *string)
 		if (strchr (string, '.') == NULL) {
 			return true;
 		}
-	} else if (   (tok[0] != '\0' && tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
+	} else if (   (strcmp(tok, "") != 0)
+		   && (tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
 		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
 		return true;
 	}

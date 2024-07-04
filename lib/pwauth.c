@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -47,10 +48,9 @@ static const char *PROMPT = gettext_noop ("%s's Password: ");
  *	compared.
  */
 
-int pw_auth (const char *cipher,
-             const char *user,
-             int reason,
-             /*@null@*/const char *input)
+int
+pw_auth(const char *cipher, const char *user, int reason,
+        /*@null@*/const char *input)
 {
 	int          retval;
 	char         prompt[1024];
@@ -101,10 +101,8 @@ int pw_auth (const char *cipher,
 	 * the user could just hit <ENTER>, so it doesn't really
 	 * matter.
 	 */
-
-	if ((NULL == cipher) || ('\0' == *cipher)) {
+	if (NULL == cipher || strcmp(cipher, "") == 0)
 		return 0;
-	}
 
 #ifdef	SKEY
 	/*
@@ -169,7 +167,7 @@ int pw_auth (const char *cipher,
 	 * ...Re-prompt, with echo on.
 	 * -- AR 8/22/1999
 	 */
-	if ((0 != retval) && ('\0' == input[0]) && use_skey) {
+	if (0 != retval && strcmp(input, "") == 0 && use_skey) {
 		erase_pass(clear);
 		clear = agetpass(prompt);
 		input = (clear == NULL) ? "" : clear;

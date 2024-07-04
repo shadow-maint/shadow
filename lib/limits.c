@@ -19,6 +19,7 @@
 
 #ident "$Id$"
 
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -341,7 +342,8 @@ static bool user_in_group (const char *uname, const char *gname)
 	return is_on_list (groupdata->gr_mem, uname);
 }
 
-static int setup_user_limits (const char *uname)
+static int
+setup_user_limits(const char *uname)
 {
 	FILE *fil;
 	char buf[1024];
@@ -412,11 +414,11 @@ static int setup_user_limits (const char *uname)
 		}
 	}
 	(void) fclose (fil);
-	if (limits[0] == '\0') {
+	if (strcmp(limits, "") == 0) {
 		/* no user specific limits */
-		if (deflimits[0] == '\0') {	/* no default limits */
+		if (strcmp(deflimits, "") == 0)  /* no defaults limits */
 			return 0;
-		}
+
 		strcpy (limits, deflimits);	/* use the default limits */
 	}
 	return do_user_limits (limits, uname);

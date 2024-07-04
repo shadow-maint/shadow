@@ -16,10 +16,11 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <stdio.h>
-#include <ctype.h>
 
 #include "prototypes.h"
 #include "defines.h"
@@ -166,7 +167,8 @@ static void read_env_file (const char *filename)
  *	variables.
  */
 
-void setup_env (struct passwd *info)
+void
+setup_env(struct passwd *info)
 {
 #ifndef USE_PAM
 	const char *envf;
@@ -209,7 +211,7 @@ void setup_env (struct passwd *info)
 	 * Create the SHELL environmental variable and export it.
 	 */
 
-	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
+	if (NULL == info->pw_shell || strcmp(info->pw_shell, "") == 0) {
 		free (info->pw_shell);
 		info->pw_shell = xstrdup (SHELL);
 	}

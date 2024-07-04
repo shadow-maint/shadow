@@ -15,6 +15,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
 
 #include "agetpass.h"
@@ -114,9 +115,8 @@ static /*@null@*/struct group *find_matching_group (const char *name, struct gro
  *
  *	It will not return if the user could not be authenticated.
  */
-static void check_perms (const struct group *grp,
-                         struct passwd *pwd,
-                         const char *groupname)
+static void
+check_perms(const struct group *grp, struct passwd *pwd, const char *groupname)
 {
 	bool needspasswd = false;
 	struct spwd *spwd;
@@ -148,9 +148,8 @@ static void check_perms (const struct group *grp,
 		spw_free (spwd);
 	}
 
-	if ((pwd->pw_passwd[0] == '\0') && (grp->gr_passwd[0] != '\0')) {
+	if (strcmp(pwd->pw_passwd, "") == 0 && strcmp(grp->gr_passwd, "") != 0)
 		needspasswd = true;
-	}
 
 	/*
 	 * Now I see about letting her into the group she requested. If she
@@ -186,8 +185,9 @@ static void check_perms (const struct group *grp,
 			goto failure;
 		}
 
-		if (grp->gr_passwd[0] == '\0' ||
-		    strcmp (cpasswd, grp->gr_passwd) != 0) {
+		if (strcmp(grp->gr_passwd, "") == 0 ||
+		    strcmp(grp->gr_passwd, cpasswd) != 0)
+		{
 #ifdef WITH_AUDIT
 			SNPRINTF(audit_buf, "authentication new-gid=%lu",
 			         (unsigned long) grp->gr_gid);

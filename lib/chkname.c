@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
 #include <sys/param.h>
 #include <unistd.h>
 
@@ -49,7 +50,8 @@ login_name_max_size(void)
 }
 
 
-static bool is_valid_name (const char *name)
+static bool
+is_valid_name(const char *name)
 {
 	if (allow_bad_names) {
 		return true;
@@ -66,9 +68,9 @@ static bool is_valid_name (const char *name)
          */
 	int numeric;
 
-	if ('\0' == *name ||
-	    ('.' == *name && (('.' == name[1] && '\0' == name[2]) ||
-			      '\0' == name[1])) ||
+	if (strcmp(name, "") == 0 ||
+	    strcmp(name, ".") == 0 ||
+	    strcmp(name, "..") == 0 ||
 	    !((*name >= 'a' && *name <= 'z') ||
 	      (*name >= 'A' && *name <= 'Z') ||
 	      (*name >= '0' && *name <= '9') ||
@@ -86,7 +88,7 @@ static bool is_valid_name (const char *name)
 		      *name == '_' ||
 		      *name == '.' ||
 		      *name == '-' ||
-		      (*name == '$' && name[1] == '\0')
+		      strcmp(name, "$") == 0
 		     )) {
 			return false;
 		}
