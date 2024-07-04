@@ -410,12 +410,12 @@ active_sessions_count(const char *name, unsigned long limit)
 		if (USER_PROCESS != ut->ut_type) {
 			continue;
 		}
-		if ('\0' == ut->ut_user[0]) {
+		if (strncmp(ut->ut_user, "", NITEMS(ut->ut_user)) == 0)
 			continue;
-		}
-		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0) {
+
+		if (strncmp(ut->ut_user, name, NITEMS(ut->ut_user)) != 0)
 			continue;
-		}
+
 		count++;
 		if (count > limit) {
 			break;
