@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <utmpx.h>
@@ -178,9 +179,9 @@ main(int argc, char **argv)
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
-			if (ut->ut_user[0] == '\0') {
+			if (strncmp(ut->ut_user, "", countof(ut->ut_user)) == 0)
 				continue;
-			}
+
 			if (check_login (ut)) {
 				continue;
 			}
