@@ -17,6 +17,7 @@
 #include <grp.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/types.h>
 #ifdef ACCT_TOOLS_SETUID
@@ -198,7 +199,8 @@ static void new_sgent (struct sgrp *sgent)
  *
  *	grp_update() updates the new records in the memory databases.
  */
-static void grp_update (void)
+static void
+grp_update(void)
 {
 	struct group grp;
 	const struct group *ogrp;
@@ -251,7 +253,7 @@ static void grp_update (void)
 	}
 
 	if (user_list) {
-		char *token;
+		char  *u, *ul;
 
 		if (!aflg) {
 			// requested to replace the existing groups
@@ -274,18 +276,18 @@ static void grp_update (void)
 		}
 #endif				/* SHADOWGRP */
 
-		token = strtok(user_list, ",");
-		while (token) {
-			if (prefix_getpwnam (token) == NULL) {
-				fprintf (stderr, _("Invalid member username %s\n"), token);
+		ul = user_list;
+		while (NULL != (u = strsep(&ul, ","))) {
+			if (prefix_getpwnam(u) == NULL) {
+				fprintf(stderr, _("Invalid member username %s\n"), u);
 				exit (E_GRP_UPDATE);
 			}
-			grp.gr_mem = add_list(grp.gr_mem, token);
+
+			grp.gr_mem = add_list(grp.gr_mem, u);
 #ifdef	SHADOWGRP
 			if (NULL != osgrp)
-				sgrp.sg_mem = add_list(sgrp.sg_mem, token);
+				sgrp.sg_mem = add_list(sgrp.sg_mem, u);
 #endif				/* SHADOWGRP */
-			token = strtok(NULL, ",");
 		}
 	}
 
