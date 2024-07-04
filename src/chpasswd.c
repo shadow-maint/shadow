@@ -16,6 +16,7 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -440,12 +441,12 @@ static const char *get_salt(void)
 	return crypt_make_salt (crypt_method, arg);
 }
 
-int main (int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	char buf[BUFSIZ];
 	char *name;
 	char *newpwd;
-	char *cp;
 	const char *salt;
 
 #ifdef USE_PAM
@@ -502,15 +503,15 @@ int main (int argc, char **argv)
 	 * present.
 	 */
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
+		char  *cp;
+
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			if (feof (stdin) == 0) {
 				// Drop all remaining characters on this line.
 				while (fgets (buf, sizeof buf, stdin) != NULL) {
-					cp = strchr (buf, '\n');
-					if (cp != NULL) {
+					if (!!strchr(buf, '\n'))
 						break;
-					}
 				}
 
 				fprintf (stderr,
