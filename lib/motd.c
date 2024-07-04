@@ -12,6 +12,7 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <string.h>
 
 #include "defines.h"
 #include "getdef.h"
@@ -26,7 +27,8 @@
  * it to the user's terminal at login time.  The MOTD_FILE configuration
  * option is a colon-delimited list of filenames.
  */
-void motd (void)
+void
+motd(void)
 {
 	FILE *fp;
 	char *motdlist;
@@ -41,12 +43,8 @@ void motd (void)
 
 	motdlist = xstrdup (motdfile);
 
-	for (mb = motdlist; ;mb = NULL) {
-		motdfile = strtok (mb, ":");
-		if (NULL == motdfile) {
-			break;
-		}
-
+	mb = motdlist;
+	while (NULL != (motdfile = strsep(&mb, ":"))) {
 		fp = fopen (motdfile, "r");
 		if (NULL != fp) {
 			while ((c = getc (fp)) != EOF) {
