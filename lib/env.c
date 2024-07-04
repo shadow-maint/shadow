@@ -226,9 +226,9 @@ void sanitize_env (void)
 			if (!strprefix(*cur, *bad)) {
 				continue;
 			}
-			if (strchr (*cur, '/') == NULL) {
+			if (!strchr(*cur, '/'))
 				continue;	/* OK */
-			}
+
 			for (move = cur; NULL != *move; move++) {
 				*move = *(move + 1);
 			}

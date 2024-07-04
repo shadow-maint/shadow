@@ -951,7 +951,7 @@ static void set_environment (struct passwd *pw)
 	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
 		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
+	} else if (strchr(cp, '=')) {
 		addenv (cp, NULL);
 	} else {
 		addenv ("PATH", cp);

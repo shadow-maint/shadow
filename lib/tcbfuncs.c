@@ -189,7 +189,7 @@ static shadowtcb_status mkdir_leading (const char *name, uid_t uid)
 		         shadow_progname, TCB_DIR, strerror (errno));
 		goto out_free_path;
 	}
-	while ((ind = strchr (ptr, '/'))) {
+	while (NULL != (ind = strchr(ptr, '/'))) {
 		stpcpy(ind, "");
 		dir = aprintf(TCB_DIR "/%s", path);
 		if (dir == NULL) {
