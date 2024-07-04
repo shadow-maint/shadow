@@ -15,6 +15,7 @@
 #include "alloc/x/xmalloc.h"
 #include "prototypes.h"
 #include "defines.h"
+#include "string/strchr/strchrcnt.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -179,7 +180,8 @@ bool is_on_list (char *const *list, const char *member)
  * comma_to_list - convert comma-separated list to (char *) array
  */
 
-/*@only@*/char **comma_to_list (const char *comma)
+/*@only@*/char **
+comma_to_list(const char *comma)
 {
 	char *members;
 	char **array;
@@ -196,29 +198,11 @@ bool is_on_list (char *const *list, const char *member)
 	members = xstrdup (comma);
 
 	/*
-	 * Count the number of commas in the list
-	 */
-
-	for (cp = members, i = 0;; i++) {
-		cp2 = strchr (cp, ',');
-		if (NULL != cp2) {
-			cp = cp2 + 1;
-		} else {
-			break;
-		}
-	}
-
-	/*
-	 * Add 2 - one for the ending NULL, the other for the last item
-	 */
-
-	i += 2;
-
-	/*
 	 * Allocate the array we're going to store the pointers into.
+	 * n: number of delimiters + last element + NULL
 	 */
 
-	array = XMALLOC(i, char *);
+	array = XMALLOC(strchrcnt(members, ',') + 2, char *);
 
 	/*
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm
