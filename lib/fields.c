@@ -67,7 +67,8 @@ int valid_field (const char *field, const char *illegal)
  * prompt the user with the name of the field being changed and the
  * current value.
  */
-void change_field (char *buf, size_t maxsize, const char *prompt)
+void
+change_field(char *buf, size_t maxsize, const char *prompt)
 {
 	char newf[200];
 	char *cp;
@@ -91,7 +92,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-		stpcpy(strrspn(newf, " \t\n"), "");
+		stpcpy(strrspn(newf, " \t"), "");
 		cp = stpspn(newf, " \t");
 		strcpy (buf, cp);
 	}
