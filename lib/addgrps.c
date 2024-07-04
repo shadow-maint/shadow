@@ -14,9 +14,10 @@
 #include "prototypes.h"
 #include "defines.h"
 
-#include <stdio.h>
-#include <grp.h>
 #include <errno.h>
+#include <grp.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
@@ -24,19 +25,19 @@
 
 #ident "$Id$"
 
-#define SEP ",:"
 /*
  * Add groups with names from LIST (separated by commas or colons)
  * to the supplementary group set.  Silently ignore groups which are
- * already there.  Warning: uses strtok().
+ * already there.
  */
-int add_groups (const char *list)
+int
+add_groups(const char *list)
 {
 	GETGROUPS_T *grouplist;
 	size_t i;
 	int ngroups;
 	bool added;
-	char *token;
+	char *g, *p;
 	char buf[1024];
 	int ret;
 	FILE *shadow_logfd = log_get_logfd();
@@ -71,13 +72,13 @@ int add_groups (const char *list)
 	}
 
 	added = false;
-	for (token = strtok (buf, SEP); NULL != token; token = strtok (NULL, SEP)) {
+	p = buf;
+	while (NULL != (g = strsep(&p, ",:"))) {
 		struct group *grp;
 
-		grp = getgrnam (token); /* local, no need for xgetgrnam */
+		grp = getgrnam(g); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (shadow_logfd, _("Warning: unknown group %s\n"),
-				 token);
+			fprintf(shadow_logfd, _("Warning: unknown group %s\n"), g);
 			continue;
 		}
 
