@@ -14,6 +14,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "attr.h"
 #include "memzero.h"
@@ -50,7 +51,8 @@ static bool palindrome (MAYBE_UNUSED const char *old, const char *new)
  * more than half of the characters are different ones.
  */
 
-static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
+static bool
+similar(/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 {
 	int i, j;
 
@@ -65,9 +67,8 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 	}
 
 	for (i = j = 0; ('\0' != new[i]) && ('\0' != old[i]); i++) {
-		if (strchr (new, old[i]) != NULL) {
+		if (!!strchr(new, old[i]))
 			j++;
-		}
 	}
 
 	if (i >= j * 2) {

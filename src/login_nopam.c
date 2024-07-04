@@ -320,9 +320,9 @@ from_match(const char *tok, const char *string)
 			return true;
 		}
 	} else if (strcasecmp (tok, "LOCAL") == 0) {	/* local: no dots */
-		if (strchr (string, '.') == NULL) {
+		if (strchr(string, '.') == NULL)
 			return true;
-		}
+
 	} else if (   (strcmp(tok, "") != 0)
 		   && (tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
 		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
