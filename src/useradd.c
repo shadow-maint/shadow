@@ -438,7 +438,7 @@ get_defaults(void)
 		 * Default Skeleton information
 		 */
 		else if (strcmp(buf, DSKEL) == 0) {
-			if ('\0' == *ccp)
+			if (strcmp(ccp, "") == 0)
 				ccp = SKEL_DIR;
 
 			if (prefix[0]) {
@@ -455,7 +455,7 @@ get_defaults(void)
 		 * Default Usr Skeleton information
 		 */
 		else if (strcmp(buf, DUSRSKEL) == 0) {
-			if ('\0' == *ccp)
+			if (strcmp(ccp, "") == 0)
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
@@ -471,7 +471,7 @@ get_defaults(void)
 		 * Create by default user mail spool or not ?
 		 */
 		else if (strcmp(buf, DCREATE_MAIL_SPOOL) == 0) {
-			if (*ccp == '\0')
+			if (strcmp(ccp, "") == 0)
 				ccp = "no";
 
 			def_create_mail_spool = xstrdup(ccp);
@@ -481,7 +481,7 @@ get_defaults(void)
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (strcmp(buf, DLOG_INIT) == 0) {
-			if (*ccp == '\0')
+			if (strcmp(ccp, "") == 0)
 				ccp = def_log_init;
 
 			def_log_init = xstrdup(ccp);
@@ -754,15 +754,15 @@ err_free_new:
  *	converts it to a NULL-terminated array. Any unknown group
  *	names are reported as errors.
  */
-static int get_groups (char *list)
+static int
+get_groups(char *list)
 {
 	struct group *grp;
 	int errors = 0;
 	int ngroups = 0;
 
-	if ('\0' == *list) {
+	if (strcmp(list, "") == 0)
 		return 0;
-	}
 
 	/*
 	 * Open the group files
