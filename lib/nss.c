@@ -15,6 +15,7 @@
 #include "shadowlog_internal.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strtok/stpsep.h"
 
 
 #define NSSWITCH "/etc/nsswitch.conf"
@@ -45,8 +46,9 @@ static void nss_exit(void) {
 }
 
 // nsswitch_path is an argument only to support testing.
-void nss_init(const char *nsswitch_path) {
-	char    *line = NULL, *p, *token, *saveptr;
+void
+nss_init(const char *nsswitch_path) {
+	char    *line = NULL, *p;
 	char    libname[64];
 	FILE    *nssfp = NULL;
 	FILE    *shadow_logfd = log_get_logfd();
@@ -91,21 +93,20 @@ void nss_init(const char *nsswitch_path) {
 	if (p == NULL) {
 		goto null_subid;
 	}
-	token = strtok_r(p, " \n\t", &saveptr);
-	if (token == NULL) {
+	if (stpsep(p, " \t\n") == NULL) {
 		fprintf(shadow_logfd, "No usable subid NSS module found, using files\n");
 		// subid_nss has to be null here, but to ease reviews:
 		goto null_subid;
 	}
-	if (strcmp(token, "files") == 0) {
+	if (strcmp(p, "files") == 0) {
 		goto null_subid;
 	}
-	if (strlen(token) > 50) {
-		fprintf(shadow_logfd, "Subid NSS module name too long (longer than 50 characters): %s\n", token);
+	if (strlen(p) > 50) {
+		fprintf(shadow_logfd, "Subid NSS module name too long (longer than 50 characters): %s\n", p);
 		fprintf(shadow_logfd, "Using files\n");
 		goto null_subid;
 	}
-	SNPRINTF(libname, "libsubid_%s.so", token);
+	SNPRINTF(libname, "libsubid_%s.so", p);
 	h = dlopen(libname, RTLD_LAZY);
 	if (!h) {
 		fprintf(shadow_logfd, "Error opening %s: %s\n", libname, dlerror());
