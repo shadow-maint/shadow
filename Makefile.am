@@ -1,7 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-EXTRA_DIST = NEWS README
-
 SUBDIRS = lib
 
 if ENABLE_SUBIDS
@@ -16,7 +14,7 @@ endif
 
 CLEANFILES = man/8.out man/po/remove-potcdate.* man/*/login.defs.d man/*/*.mo
 
-EXTRA_DIST = tests/
+EXTRA_DIST = NEWS README tests/
 
 dist-hook:
 	chmod -R u+w $(distdir)/tests
