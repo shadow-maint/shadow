@@ -57,9 +57,6 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif				/* WITH_SELINUX */
-#ifdef WITH_TCB
-#include "tcbfuncs.h"
-#endif
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strdup/xstrdup.h"
@@ -2211,12 +2208,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#ifdef WITH_TCB
-	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
-		exit (E_PW_UPDATE);
-	}
-#endif
-
 	/*
 	 * Do the hard stuff - open the files, change the user entries,
 	 * change the home directory, then close and update the files.
@@ -2284,13 +2275,6 @@ int main (int argc, char **argv)
 	}
 #endif				/* ENABLE_SUBIDS */
 	close_files ();
-
-#ifdef WITH_TCB
-	if (   (lflg || uflg)
-	    && (shadowtcb_move (user_newname, user_newid) == SHADOWTCB_FAILURE) ) {
-		exit (E_PW_UPDATE);
-	}
-#endif
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

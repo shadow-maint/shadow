@@ -7,7 +7,6 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='vipw.8'>
@@ -129,24 +128,6 @@
 	  <para>Edit shadow or gshadow database.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="tcb">
-	<term><option>-u</option>, <option>--user</option></term>
-	<listitem>
-	  <para>Indicates which user's tcb shadow file to edit.</para>
-	</listitem>
-      </varlistentry>
-    </variablelist>
-  </refsect1>
-
-  <refsect1 id='configuration' condition="tcb">
-    <title>CONFIGURATION</title>
-    <para>
-      The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
-    </para>
-    <variablelist>
-      &USE_TCB;
     </variablelist>
   </refsect1>
 
@@ -209,15 +190,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
-      <citerefentry condition="tcb">
-	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry condition="tcb">
-	<refentrytitle>tcb</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>

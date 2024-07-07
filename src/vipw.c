@@ -38,10 +38,6 @@
 #include "shadowio.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
-#ifdef WITH_TCB
-#include <tcb.h>
-#include "tcbfuncs.h"
-#endif				/* WITH_TCB */
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
@@ -62,11 +58,6 @@ static bool filelocked = false;
 static bool createedit = false;
 static int (*unlock) (void);
 static bool quiet = false;
-#ifdef WITH_TCB
-static const char *user = NULL;
-static bool tcb_mode = false;
-#define SHADOWTCB_SCRATCHDIR ":tmp"
-#endif				/* WITH_TCB */
 
 /* local function prototypes */
 static void usage (int status);
@@ -91,9 +82,6 @@ static void usage (int status)
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -s, --shadow                  edit shadow or gshadow database\n"), usageout);
-#ifdef WITH_TCB
-	(void) fputs (_("  -u, --user                    which user's tcb shadow file to edit\n"), usageout);
-#endif				/* WITH_TCB */
 	(void) fputs (_("\n"), usageout);
 	exit (status);
 }
@@ -206,24 +194,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	char         filebackup[1024], fileedit[1024];
 
 	SNPRINTF(filebackup, "%s-", file);
-#ifdef WITH_TCB
-	if (tcb_mode) {
-		if (   (mkdir (TCB_DIR "/" SHADOWTCB_SCRATCHDIR, 0700) != 0)
-		    && (errno != EEXIST)) {
-			vipwexit (_("failed to create scratch directory"), errno, 1);
-		}
-		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-			vipwexit (_("failed to drop privileges"), errno, 1);
-		}
-		SNPRINTF(fileedit,
-		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.vipw.shadow.%s",
-		         user);
-	} else {
-#endif				/* WITH_TCB */
-		SNPRINTF(fileedit, "%s.edit", file);
-#ifdef WITH_TCB
-	}
-#endif				/* WITH_TCB */
+	SNPRINTF(fileedit, "%s.edit", file);
 	unlock = file_unlock;
 	filename = file;
 	fileeditname = fileedit;
@@ -247,20 +218,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		}
 	}
 #endif				/* WITH_SELINUX */
-#ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
-		vipwexit (_("failed to gain privileges"), errno, 1);
-	}
-#endif				/* WITH_TCB */
 	if (file_lock () == 0) {
 		vipwexit (_("Couldn't lock file"), errno, 5);
 	}
 	filelocked = true;
-#ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
-		vipwexit (_("failed to drop privileges"), errno, 1);
-	}
-#endif				/* WITH_TCB */
 
 	/* edited copy has same owners, perm */
 	if (stat (file, &st1) != 0) {
@@ -270,10 +231,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (NULL == f) {
 		vipwexit (file, 1, 1);
 	}
-#ifdef WITH_TCB
-	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE))
-		vipwexit (_("failed to gain privileges"), errno, 1);
-#endif				/* WITH_TCB */
 	if (create_backup_file (f, fileedit, &st1) != 0) {
 		vipwexit (_("Couldn't make backup"), errno, 1);
 	}
@@ -406,57 +363,16 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	 * without saving). Use pwck or grpck to do the check.  --marekm
 	 */
 	createedit = false;
-#ifdef WITH_TCB
-	if (tcb_mode) {
-		f = fopen (fileedit, "r");
-		if (NULL == f) {
-			vipwexit (_("failed to open scratch file"), errno, 1);
-		}
-		if (unlink (fileedit) != 0) {
-			vipwexit (_("failed to unlink scratch file"), errno, 1);
-		}
-		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-			vipwexit (_("failed to drop privileges"), errno, 1);
-		}
-		if (stat (file, &st1) != 0) {
-			vipwexit (_("failed to stat edited file"), errno, 1);
-		}
-		if (asprintf(&to_rename, "%s+", file) == -1)
-			vipwexit (_("asprintf(3) failed"), errno, 1);
-
-		if (create_backup_file (f, to_rename, &st1) != 0) {
-			free(to_rename);
-			vipwexit (_("failed to create backup file"), errno, 1);
-		}
-		(void) fclose (f);
-	} else {
-#endif				/* WITH_TCB */
-		to_rename = fileedit;
-#ifdef WITH_TCB
-	}
-#endif				/* WITH_TCB */
+	to_rename = fileedit;
 	unlink (filebackup);
 	link (file, filebackup);
 	if (rename (to_rename, file) == -1) {
 		fprintf (stderr,
 		         _("%s: can't restore %s: %s (your changes are in %s)\n"),
 		         Prog, file, strerror (errno), to_rename);
-#ifdef WITH_TCB
-		if (tcb_mode) {
-			free(to_rename);
-		}
-#endif				/* WITH_TCB */
 		vipwexit (0, 0, 1);
 	}
 
-#ifdef WITH_TCB
-	if (tcb_mode) {
-		free(to_rename);
-		if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
-			vipwexit (_("failed to gain privileges"), errno, 1);
-		}
-	}
-#endif				/* WITH_TCB */
 
 	if ((*file_unlock) () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
@@ -497,18 +413,9 @@ int main (int argc, char **argv)
 			{"quiet",  no_argument,       NULL, 'q'},
 			{"root",   required_argument, NULL, 'R'},
 			{"shadow", no_argument,       NULL, 's'},
-#ifdef WITH_TCB
-			{"user",   required_argument, NULL, 'u'},
-#endif				/* WITH_TCB */
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c = getopt_long (argc, argv,
-#ifdef WITH_TCB
-		                         "ghpqR:su:",
-#else				/* !WITH_TCB */
-		                         "ghpqR:s",
-#endif				/* !WITH_TCB */
-		                         long_options, NULL)) != -1) {
+		while ((c = getopt_long (argc, argv, "ghpqR:s", long_options, NULL)) != -1) {
 			switch (c) {
 			case 'g':
 				do_vigr = true;
@@ -527,11 +434,6 @@ int main (int argc, char **argv)
 			case 's':
 				editshadow = true;
 				break;
-#ifdef WITH_TCB
-			case 'u':
-				user = optarg;
-				break;
-#endif				/* WITH_TCB */
 			default:
 				usage (E_USAGE);
 			}
@@ -564,17 +466,6 @@ int main (int argc, char **argv)
 #endif				/* SHADOWGRP */
 	} else {
 		if (editshadow) {
-#ifdef WITH_TCB
-			if (getdef_bool ("USE_TCB") && (NULL != user)) {
-				if (shadowtcb_set_user (user) == SHADOWTCB_FAILURE) {
-					fprintf (stderr,
-					         _("%s: failed to find tcb directory for %s\n"),
-					         Prog, user);
-					return E_SHADOW_NOTFOUND;
-				}
-				tcb_mode = true;
-			}
-#endif				/* WITH_TCB */
 			vipwedit (spw_dbname (), spw_lock, spw_unlock);
 			printf (MSG_WARN_EDIT_OTHER_FILE,
 			        spw_dbname (),

@@ -230,9 +230,6 @@ AC_ARG_WITH(attr,
 AC_ARG_WITH(skey,
 	[AS_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
 	[with_skey=$withval], [with_skey=no])
-AC_ARG_WITH(tcb,
-	[AS_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
-	[with_tcb=$withval], [with_tcb=maybe])
 AC_ARG_WITH(sha-crypt,
 	[AS_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
 	[with_sha_crypt=$withval], [with_sha_crypt=yes])
@@ -565,28 +562,6 @@ if test "$with_selinux" != "no"; then
 	fi
 fi
 
-AC_SUBST(LIBTCB)
-if test "$with_tcb" != "no"; then
-	AC_CHECK_HEADERS(tcb.h, [tcb_header="yes"], [tcb_header="no"])
-	if test "$tcb_header$with_tcb" = "noyes" ; then
-		AC_MSG_ERROR([tcb.h is missing])
-	elif test "$tcb_header" = "yes" ; then
-		AC_CHECK_LIB(tcb, tcb_is_suspect, [tcb_lib="yes"], [tcb_lib="no"])
-		if test "$tcb_lib$with_tcb" = "noyes" ; then
-			AC_MSG_ERROR([libtcb not found])
-		elif test "$tcb_lib" = "no" ; then
-			with_tcb="no"
-		else
-			AC_DEFINE(WITH_TCB, 1, [Build shadow with tcb support (incomplete)])
-			LIBTCB="-ltcb"
-			with_tcb="yes"
-		fi
-	else
-		with_tcb="no"
-	fi
-fi
-AM_CONDITIONAL(WITH_TCB, test x$with_tcb = xyes)
-
 AC_SUBST(LIBPAM)
 if test "$with_libpam" != "no"; then
 	AC_CHECK_LIB(pam, pam_start,
@@ -757,7 +732,6 @@ echo "	SELinux support:		$with_selinux"
 echo "	BtrFS support:			$with_btrfs"
 echo "	ACL support:			$with_acl"
 echo "	Extended Attributes support:	$with_attr"
-echo "	tcb support (incomplete):	$with_tcb"
 echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"

@@ -29,9 +29,6 @@
 #include "defines.h"
 #include "memzero.h"
 #include "nscd.h"
-#ifdef WITH_TCB
-#include <tcb.h>
-#endif				/* WITH_TCB */
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sssd.h"
@@ -608,13 +605,6 @@ int commonio_open (struct commonio_db *db, int mode)
 	saved_errno = errno;
 	db->fp = NULL;
 	if (fd >= 0) {
-#ifdef WITH_TCB
-		if (tcb_is_suspect (fd) != 0) {
-			(void) close (fd);
-			errno = EINVAL;
-			return 0;
-		}
-#endif				/* WITH_TCB */
 		db->fp = fdopen (fd, db->readonly ? "r" : "r+");
 		saved_errno = errno;
 		if (NULL == db->fp) {

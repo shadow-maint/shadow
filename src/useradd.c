@@ -61,9 +61,6 @@
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
-#ifdef WITH_TCB
-#include "tcbfuncs.h"
-#endif
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
@@ -2627,16 +2624,6 @@ int main (int argc, char **argv)
 
 	if (uflg)
 	   check_uid_range(rflg,user_id);
-#ifdef WITH_TCB
-	if (getdef_bool ("USE_TCB")) {
-		if (shadowtcb_create (user_name, user_id) == SHADOWTCB_FAILURE) {
-			fprintf (stderr,
-			         _("%s: Failed to create tcb directory for %s\n"),
-			         Prog, user_name);
-			fail_exit (E_UID_IN_USE);
-		}
-	}
-#endif
 	open_shadow ();
 
 	/* do we have to add a group for that user? This is why we need to

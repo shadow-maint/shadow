@@ -128,13 +128,6 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
-#ifdef WITH_TCB
-	if (getdef_bool("USE_TCB")) {
-		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit (1);
-	}
-#endif				/* WITH_TCB */
-
 	if (!spw_file_present ()) {
 		/* shadow not installed, do nothing */
 		exit (0);

@@ -19,10 +19,6 @@
 #include "commonio.h"
 #include "getdef.h"
 #include "shadowio.h"
-#ifdef WITH_TCB
-#include <tcb.h>
-#include "tcbfuncs.h"
-#endif				/* WITH_TCB */
 
 static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {
@@ -117,45 +113,12 @@ bool spw_file_present (void)
 
 int spw_lock (void)
 {
-#ifdef WITH_TCB
-	int retval = 0;
-
-	if (!getdef_bool ("USE_TCB")) {
-#endif				/* WITH_TCB */
-		return commonio_lock (&shadow_db);
-#ifdef WITH_TCB
-	}
-	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		return 0;
-	}
-	if (lckpwdf_tcb (shadow_db.filename) == 0) {
-		shadow_db.locked = 1;
-		retval = 1;
-	}
-	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
-		return 0;
-	}
-	return retval;
-#endif				/* WITH_TCB */
+	return commonio_lock (&shadow_db);
 }
 
 int spw_open (int mode)
 {
-	int retval = 0;
-#ifdef WITH_TCB
-	bool use_tcb = getdef_bool ("USE_TCB");
-
-	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
-		return 0;
-	}
-#endif				/* WITH_TCB */
-	retval = commonio_open (&shadow_db, mode);
-#ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
-		return 0;
-	}
-#endif				/* WITH_TCB */
-	return retval;
+	return commonio_open (&shadow_db, mode);
 }
 
 /*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name)
@@ -185,45 +148,12 @@ int spw_rewind (void)
 
 int spw_close (void)
 {
-	int retval = 0;
-#ifdef WITH_TCB
-	bool use_tcb = getdef_bool ("USE_TCB");
-
-	if (use_tcb && (shadowtcb_drop_priv () == SHADOWTCB_FAILURE)) {
-		return 0;
-	}
-#endif				/* WITH_TCB */
-	retval = commonio_close (&shadow_db);
-#ifdef WITH_TCB
-	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
-		return 0;
-	}
-#endif				/* WITH_TCB */
-	return retval;
+	return commonio_close (&shadow_db);
 }
 
 int spw_unlock (void)
 {
-#ifdef WITH_TCB
-	int retval = 0;
-
-	if (!getdef_bool ("USE_TCB")) {
-#endif				/* WITH_TCB */
-		return commonio_unlock (&shadow_db);
-#ifdef WITH_TCB
-	}
-	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		return 0;
-	}
-	if (ulckpwdf_tcb () == 0) {
-		shadow_db.locked = 0;
-		retval = 1;
-	}
-	if (shadowtcb_gain_priv () == SHADOWTCB_FAILURE) {
-		return 0;
-	}
-	return retval;
-#endif				/* WITH_TCB */
+	return commonio_unlock (&shadow_db);
 }
 
 struct commonio_entry *__spw_get_head (void)
@@ -239,10 +169,5 @@ void __spw_del_entry (const struct commonio_entry *ent)
 /* Sort with respect to passwd ordering. */
 int spw_sort ()
 {
-#ifdef WITH_TCB
-	if (getdef_bool ("USE_TCB")) {
-		return 0;
-	}
-#endif				/* WITH_TCB */
 	return commonio_sort_wrt (&shadow_db, __pw_get_db ());
 }

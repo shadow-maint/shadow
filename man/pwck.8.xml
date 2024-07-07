@@ -10,9 +10,6 @@
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
-<!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
-<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
-<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='pwck.8'>
@@ -71,9 +68,6 @@
       The <command>pwck</command> command verifies the integrity of the
       users and authentication information. It checks that all entries in
       <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
-      <phrase condition="tcb">(or the files in
-      <filename>/etc/tcb</filename>, when <option>USE_TCB</option> is
-      enabled)</phrase>
       have the proper format and contain valid data.
       The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
@@ -212,9 +206,6 @@
 	    Sort entries in <filename>/etc/passwd</filename> and
 	    <filename>/etc/shadow</filename> by UID.
 	  </para>
-	  <para condition="tcb">
-	    This option has no effect when <option>USE_TCB</option> is enabled.
-	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -222,17 +213,10 @@
     <para>
       By default, <command>pwck</command> operates on the files
       <filename>/etc/passwd</filename> and
-      <filename>/etc/shadow</filename><phrase condition="tcb"> (or the
-      files in <filename>/etc/tcb</filename>)</phrase>.
+      <filename>/etc/shadow</filename>.
       The user may select alternate files with the
       <replaceable>passwd</replaceable> and
       <replaceable>shadow</replaceable> parameters.
-    </para>
-    <para condition="tcb">
-      Note that when <option>USE_TCB</option> is enabled, you cannot
-      specify an alternative <replaceable>shadow</replaceable> file. In
-      future releases, this parameter could be replaced by an alternate
-      TCB directory.
     </para>
   </refsect1>
 
@@ -248,9 +232,6 @@
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
-      &TCB_AUTH_GROUP;
-      &TCB_SYMLINKS;
-      &USE_TCB;
     </variablelist>
   </refsect1>
 

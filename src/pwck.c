@@ -26,9 +26,6 @@
 #include "getdef.h"
 #include "nscd.h"
 #include "sssd.h"
-#ifdef WITH_TCB
-#include "tcbfuncs.h"
-#endif				/* WITH_TCB */
 #include "shadowlog.h"
 
 /*
@@ -114,34 +111,18 @@ static void
 usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-#ifdef WITH_TCB
-	if (getdef_bool ("USE_TCB")) {
-		(void) fprintf (usageout,
-		                _("Usage: %s [options] [passwd]\n"
-		                  "\n"
-		                  "Options:\n"),
-		                Prog);
-	} else
-#endif				/* WITH_TCB */
-	{
-		(void) fprintf (usageout,
-		                _("Usage: %s [options] [passwd [shadow]]\n"
-		                  "\n"
-		                  "Options:\n"),
-		                Prog);
-	}
+	(void) fprintf (usageout,
+	                _("Usage: %s [options] [passwd [shadow]]\n"
+	                  "\n"
+	                  "Options:\n"),
+	                Prog);
 	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   report errors only\n"), usageout);
 	(void) fputs (_("  -r, --read-only               display errors and warnings\n"
 	                "                                but do not change files\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-#ifdef WITH_TCB
-	if (!getdef_bool ("USE_TCB"))
-#endif				/* !WITH_TCB */
-	{
-		(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
-	}
+	(void) fputs (_("  -s, --sort                    sort entries by UID\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -214,14 +195,6 @@ static void process_flags (int argc, char **argv)
 		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
-#ifdef WITH_TCB
-		if (getdef_bool ("USE_TCB")) {
-			fprintf (stderr,
-			         _("%s: no alternative shadow file allowed when USE_TCB is enabled.\n"),
-			         Prog);
-			usage (E_USAGE);
-		}
-#endif				/* WITH_TCB */
 		spw_setdbname (argv[optind + 1]);
 		is_shadow = true;
 		use_system_spw_file = false;
@@ -238,11 +211,6 @@ static void process_flags (int argc, char **argv)
  */
 static void open_files (void)
 {
-	bool use_tcb = false;
-#ifdef WITH_TCB
-	use_tcb = getdef_bool ("USE_TCB");
-#endif				/* WITH_TCB */
-
 	/*
 	 * Lock the files if we aren't in "read-only" mode
 	 */
@@ -254,7 +222,7 @@ static void open_files (void)
 			fail_exit (E_CANTLOCK);
 		}
 		pw_locked = true;
-		if (is_shadow && !use_tcb) {
+		if (is_shadow) {
 			if (spw_lock () == 0) {
 				fprintf (stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
@@ -277,7 +245,7 @@ static void open_files (void)
 		}
 		fail_exit (E_CANTOPEN);
 	}
-	if (is_shadow && !use_tcb) {
+	if (is_shadow) {
 		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());
@@ -541,52 +509,6 @@ static void check_pw_file (int *errors, bool *changed)
 		 */
 
 		if (is_shadow) {
-#ifdef WITH_TCB
-			if (getdef_bool ("USE_TCB")) {
-				if (shadowtcb_set_user (pwd->pw_name) == SHADOWTCB_FAILURE) {
-					printf (_("no tcb directory for %s\n"),
-					        pwd->pw_name);
-					printf (_("create tcb directory for %s?"),
-					        pwd->pw_name);
-					*errors += 1;
-					if (yes_or_no (read_only)) {
-						if (shadowtcb_create (pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
-							*errors += 1;
-							printf (_("failed to create tcb directory for %s\n"), pwd->pw_name);
-							continue;
-						}
-					} else {
-						continue;
-					}
-				}
-				if (spw_lock () == 0) {
-					*errors += 1;
-					fprintf (stderr,
-					         _("%s: cannot lock %s.\n"),
-					         Prog, spw_dbname ());
-					continue;
-				}
-				spw_locked = true;
-				if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-					fprintf (stderr,
-					         _("%s: cannot open %s\n"),
-					         Prog, spw_dbname ());
-					*errors += 1;
-					if (spw_unlock () == 0) {
-						fprintf (stderr,
-						         _("%s: failed to unlock %s\n"),
-						         Prog, spw_dbname ());
-						if (use_system_spw_file) {
-							SYSLOG ((LOG_ERR,
-							         "failed to unlock %s",
-							         spw_dbname ()));
-						}
-					}
-					continue;
-				}
-				spw_opened = true;
-			}
-#endif				/* WITH_TCB */
 			spw = spw_locate (pwd->pw_name);
 			if (NULL == spw) {
 				printf (_("no matching password file entry in %s\n"),
@@ -647,33 +569,6 @@ static void check_pw_file (int *errors, bool *changed)
 				}
 			}
 		}
-#ifdef WITH_TCB
-		if (getdef_bool ("USE_TCB") && spw_locked) {
-			if (spw_opened && (spw_close () == 0)) {
-				fprintf (stderr,
-				         _("%s: failure while writing changes to %s\n"),
-				         Prog, spw_dbname ());
-				if (use_system_spw_file) {
-					SYSLOG ((LOG_ERR,
-					         "failure while writing changes to %s",
-					         spw_dbname ()));
-				}
-			} else {
-				spw_opened = false;
-			}
-			if (spw_unlock () == 0) {
-				fprintf (stderr,
-				         _("%s: failed to unlock %s\n"),
-				         Prog, spw_dbname ());
-				if (use_system_spw_file) {
-					SYSLOG ((LOG_ERR, "failed to unlock %s",
-					         spw_dbname ()));
-				}
-			} else {
-				spw_locked = false;
-			}
-		}
-#endif				/* WITH_TCB */
 	}
 }
 

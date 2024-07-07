@@ -168,13 +168,6 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
-#ifdef WITH_TCB
-	if (getdef_bool("USE_TCB")) {
-		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit (E_FAILURE);
-	}
-#endif				/* WITH_TCB */
-
 	if (pw_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),

@@ -208,10 +208,6 @@ libshadow_la_SOURCES = \
 	xgetspnam.c \
 	yesno.c
 
-if WITH_TCB
-libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
-endif
-
 if WITH_BTRFS
 libshadow_la_SOURCES += btrfs.c
 endif

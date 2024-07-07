@@ -63,12 +63,9 @@ noinst_PROGRAMS = sulogin
 
 suidusbins     =
 suidbins       =
-suidubins      = chage chfn chsh expiry gpasswd newgrp
+suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
 if WITH_SU
 suidbins      += su
-endif
-if !WITH_TCB
-suidubins += passwd
 endif
 if ACCT_TOOLS_SETUID
 suidusbins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
@@ -79,13 +76,8 @@ suidubins += newgidmap newuidmap
 endif
 endif
 
-if WITH_TCB
-shadowsgidubins = passwd
-endif
-
 LDADD          = $(INTLLIBS) \
-		 $(top_builddir)/lib/libshadow.la \
-		 $(LIBTCB)
+		 $(top_builddir)/lib/libshadow.la
 
 if ACCT_TOOLS_SETUID
 LIBPAM_SUID  = $(LIBPAM)
@@ -150,12 +142,6 @@ install-am: all-am
 	set -e; for i in $(suidusbins); do \
 		chmod $(suidperms) $(DESTDIR)$(usbindir)/$$i; \
 	done
-if WITH_TCB
-	set -e; for i in $(shadowsgidubins); do \
-		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
-		chmod $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
-	done
-endif
 if ENABLE_SUBIDS
 if FCAPS
 	setcap cap_setuid+ep $(DESTDIR)$(ubindir)/newuidmap
@@ -176,8 +162,7 @@ MISCLIBS = \
 	$(LIBSKEY) \
 	$(LIBMD) \
 	$(LIBECONF) \
-	$(LIBCRYPT) \
-	$(LIBTCB)
+	$(LIBCRYPT)
 
 getsubids_LDADD = \
 	$(top_builddir)/lib/libshadow.la \

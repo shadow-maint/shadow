@@ -69,7 +69,6 @@ lib/spawn.c
 lib/strtoday.c
 lib/sub.c
 lib/sulog.c
-lib/tcbfuncs.c
 lib/ttytype.c
 lib/tz.c
 lib/ulimit.c

@@ -40,10 +40,6 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif				/* WITH_SELINUX */
-#ifdef WITH_TCB
-#include <tcb.h>
-#include "tcbfuncs.h"
-#endif				/* WITH_TCB */
 #include "run_part.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -119,9 +115,6 @@ static bool path_prefix (const char *, const char *);
 #endif				/* EXTRA_CHECK_HOME_DIR */
 static int is_owner (uid_t, const char *);
 static int remove_mailbox (void);
-#ifdef WITH_TCB
-static int remove_tcbdir (const char *user_name, uid_t user_id);
-#endif				/* WITH_TCB */
 
 /*
  * usage - display usage message and exit
@@ -901,49 +894,6 @@ static int remove_mailbox (void)
 	return errors;
 }
 
-#ifdef WITH_TCB
-static int remove_tcbdir (const char *user_name, uid_t user_id)
-{
-	int   ret = 0;
-	char  *buf;
-
-	if (!getdef_bool ("USE_TCB")) {
-		return 0;
-	}
-
-	if (asprintf(&buf, TCB_DIR "/%s", user_name) == -1) {
-		fprintf(stderr,
-		        _("%s: Can't allocate memory, tcb entry for %s not removed.\n"),
-		        Prog, user_name);
-		return 1;
-	}
-	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		fprintf (stderr, _("%s: Cannot drop privileges: %s\n"),
-		         Prog, strerror (errno));
-		shadowtcb_gain_priv ();
-		free (buf);
-		return 1;
-	}
-	/* Only remove directory contents with dropped privileges.
-	 * We will regain them and remove the user's tcb directory afterwards.
-	 */
-	if (remove_tree (buf, false) != 0) {
-		fprintf (stderr, _("%s: Cannot remove the content of %s: %s\n"),
-		         Prog, buf, strerror (errno));
-		shadowtcb_gain_priv ();
-		free (buf);
-		return 1;
-	}
-	shadowtcb_gain_priv ();
-	free (buf);
-	if (shadowtcb_remove (user_name) == SHADOWTCB_FAILURE) {
-		fprintf (stderr, _("%s: Cannot remove tcb files for %s: %s\n"),
-		         Prog, user_name, strerror (errno));
-		ret = 1;
-	}
-	return ret;
-}
-#endif				/* WITH_TCB */
 
 /*
  * main - userdel command
@@ -1120,11 +1070,6 @@ int main (int argc, char **argv)
 		}
 		pw_close();
 	}
-#ifdef WITH_TCB
-	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
-		exit (E_NOTFOUND);
-	}
-#endif				/* WITH_TCB */
 	/*
 	 * Check to make certain the user isn't logged in.
 	 * Note: This is a best effort basis. The user may log in between,
@@ -1271,9 +1216,6 @@ int main (int argc, char **argv)
 		exit(1);
 	}
 
-#ifdef WITH_TCB
-	errors += remove_tcbdir (user_name, user_id);
-#endif				/* WITH_TCB */
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

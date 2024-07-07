@@ -15,7 +15,6 @@ MISCLIBS = \
 	$(LIBCRYPT) \
 	$(LIBACL) \
 	$(LIBATTR) \
-	$(LIBTCB) \
 	$(LIBPAM)
 
 libsubid_la_LIBADD = \
