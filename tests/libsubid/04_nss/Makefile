@@ -1,7 +1,7 @@
 all: test_nss libsubid_zzz.so
 
-BASE_TEST_DIR ?= $(shell git rev-parse --show-toplevel)
-basedir := $(BASE_TEST_DIR)
+BUILD_BASE_DIR ?= $(shell git rev-parse --show-toplevel)
+basedir := $(BUILD_BASE_DIR)
 
 test_nss: test_nss.c $(basedir)/lib/nss.c
 	gcc -c -I$(basedir)/lib/ -I$(basedir) -o test_nss.o test_nss.c
