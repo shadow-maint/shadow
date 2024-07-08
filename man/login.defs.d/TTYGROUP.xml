@@ -6,7 +6,7 @@
 -->
 <varlistentry>
   <term><option>TTYGROUP</option> (string)</term>
-  <term><option>TTYPERM</option> (string)</term>
+  <term><option>TTYPERM</option> (number)</term>
   <listitem>
     <para>
       The terminal permissions: the login tty will be owned by the
