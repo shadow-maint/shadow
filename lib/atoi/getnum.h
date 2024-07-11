@@ -13,7 +13,8 @@
 #include <stddef.h>
 #include <sys/types.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "attr.h"
 #include "typetraits.h"
 

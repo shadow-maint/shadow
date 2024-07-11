@@ -22,7 +22,8 @@
 #include <libeconf.h>
 #endif
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
