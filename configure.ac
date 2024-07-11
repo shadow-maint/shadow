@@ -399,6 +399,10 @@ if test "$enable_logind" = "yes"; then
 fi
 AM_CONDITIONAL(ENABLE_LOGIND, test "x$enable_logind" != "xno")
 
+AC_SUBST(LIBA2I)
+AC_CHECK_LIB(a2i, str2si, [LIBA2I=-la2i],
+	[AC_MSG_ERROR([str2si() not found])])
+
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
