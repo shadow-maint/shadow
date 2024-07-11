@@ -37,16 +37,8 @@ libshadow_la_SOURCES = \
 	alloc/realloc.h \
 	alloc/reallocf.c \
 	alloc/reallocf.h \
-	atoi/a2i.c \
-	atoi/a2i.h \
 	atoi/getnum.c \
 	atoi/getnum.h \
-	atoi/strtoi/strtoi.c \
-	atoi/strtoi/strtoi.h \
-	atoi/strtoi/strtou.c \
-	atoi/strtoi/strtou.h \
-	atoi/strtoi/strtou_noneg.c \
-	atoi/strtoi/strtou_noneg.h \
 	attr.h \
 	audit_help.c \
 	basename.c \
