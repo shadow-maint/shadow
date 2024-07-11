@@ -18,8 +18,9 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "atoi/a2i/a2s.h"
-#include "atoi/str2i/str2u.h"
+#include <a2i/a2i/a2s.h>
+#include <a2i/str2i/str2u.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"

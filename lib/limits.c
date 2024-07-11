@@ -30,11 +30,12 @@
 #include "shadowlog.h"
 #include <sys/resource.h>
 
-#include "atoi/a2i/a2i.h"
-#include "atoi/a2i/a2s.h"
-#include "atoi/str2i/str2i.h"
-#include "atoi/str2i/str2s.h"
-#include "atoi/str2i/str2u.h"
+#include <a2i/a2i/a2i.h>
+#include <a2i/a2i/a2s.h>
+#include <a2i/str2i/str2i.h>
+#include <a2i/str2i/str2s.h>
+#include <a2i/str2i/str2u.h>
+
 #include "string/memset/memzero.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
