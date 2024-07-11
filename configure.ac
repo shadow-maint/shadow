@@ -360,6 +360,11 @@ AC_CHECK_LIB([crypt], [crypt], [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
 AC_SUBST([LIBCRYPT])
 
+AC_CHECK_LIB([a2i], [str2si], [LIBA2I=-la2i],
+	[AC_MSG_ERROR([str2si() not found])])
+AC_SUBST([LIBA2I])
+
+
 AC_SUBST([LIBBSD])
 if test "$with_libbsd" != "no"; then
 	AC_SEARCH_LIBS([readpassphrase], [bsd], [], [
