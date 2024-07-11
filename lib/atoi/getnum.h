@@ -13,8 +13,9 @@
 #include <stddef.h>
 #include <sys/types.h>
 
-#include "atoi/a2i/a2i.h"
-#include "atoi/a2i/a2s.h"
+#include <a2i/a2i/a2i.h>
+#include <a2i/a2i/a2s.h>
+
 #include "attr.h"
 #include "typetraits.h"
 
