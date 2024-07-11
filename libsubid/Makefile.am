@@ -5,6 +5,7 @@ libsubid_la_LDFLAGS = -version-info @LIBSUBID_ABI_MAJOR@ -export-symbols-regex '
 pkginclude_HEADERS = subid.h
 
 MISCLIBS = \
+	$(LIBA2I) \
 	$(LIBAUDIT) \
 	$(LIBSELINUX) \
 	$(LIBSEMANAGE) \
