@@ -26,7 +26,8 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
 
-#include "atoi/a2i/a2s.h"
+#include <a2i/a2i/a2s.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "pwio.h"
