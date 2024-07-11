@@ -23,7 +23,8 @@
 #include <net/if.h>
 #endif
 
-#include "atoi/str2i.h"
+#include <a2i/str2i.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"

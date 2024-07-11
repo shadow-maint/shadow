@@ -17,6 +17,8 @@
 # include <sys/capability.h>
 #endif
 
+#include <a2i/a2i/a2u.h>
+
 #include "alloc/calloc.h"
 #include "alloc/x/xmalloc.h"
 #include "atoi/a2i/a2u.h"
