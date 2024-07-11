@@ -7,7 +7,6 @@ TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
     test_adds \
-    test_atoi_strtoi \
     test_chkhash \
     test_chkname \
     test_stprintf \
@@ -32,19 +31,6 @@ test_adds_CFLAGS = \
 test_adds_LDFLAGS = \
     $(NULL)
 test_adds_LDADD = \
-    $(LIBSHADOW) \
-    $(CMOCKA_LIBS) \
-    $(NULL)
-
-test_atoi_strtoi_SOURCES = \
-    test_atoi_strtoi.c \
-    $(NULL)
-test_atoi_strtoi_CFLAGS = \
-    $(AM_CFLAGS) \
-    $(NULL)
-test_atoi_strtoi_LDFLAGS = \
-    $(NULL)
-test_atoi_strtoi_LDADD = \
     $(LIBSHADOW) \
     $(CMOCKA_LIBS) \
     $(NULL)
