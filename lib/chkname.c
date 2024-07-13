@@ -24,6 +24,8 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
+#include <sys/param.h>
 #include <unistd.h>
 
 #include "defines.h"
@@ -43,7 +45,7 @@ login_name_max_size(void)
 	if (conf == -1 && errno != 0)
 		return LOGIN_NAME_MAX;
 
-	return conf;
+	return MIN(conf, PTRDIFF_MAX);
 }
 
 
