@@ -195,7 +195,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    A list of usernames to add as members of the group.
+	    A comma-separated list of usernames to add as members of the group.
 	  </para>
 	  <para>
 	    The default behavior (if the <option>-g</option>,
