@@ -70,7 +70,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-a</option>, <option>--append</option>&nbsp;<replaceable>GID</replaceable>
+	  <option>-a</option>, <option>--append</option>
 	</term>
 	<listitem>
       <para>If group members are specified with -U, append them to the existing
