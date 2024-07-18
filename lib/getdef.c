@@ -22,9 +22,10 @@
 #include <libeconf.h>
 #endif
 
-#include "atoi/a2i/a2s.h"
-#include "atoi/a2i/a2u.h"
-#include "atoi/str2i/str2u.h"
+#include <a2i/a2i/a2s.h>
+#include <a2i/a2i/a2u.h>
+#include <a2i/str2i/str2u.h>
+
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
