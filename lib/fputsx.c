@@ -9,6 +9,7 @@
 
 #include "config.h"
 
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -24,7 +25,7 @@ fgetsx(/*@returned@*/char *restrict buf, int cnt, FILE *restrict f)
 	char *ep;
 
 	while (cnt > 0) {
-		if (fgets (cp, cnt, f) != cp) {
+		if (fgets(cp, cnt, f) == NULL) {
 			if (cp == buf) {
 				return NULL;
 			} else {

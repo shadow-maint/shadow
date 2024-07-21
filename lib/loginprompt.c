@@ -12,8 +12,9 @@
 #ident "$Id$"
 
 #include <assert.h>
-#include <stdio.h>
 #include <signal.h>
+#include <stddef.h>
+#include <stdio.h>
 
 #include "attr.h"
 #include "defines.h"
@@ -83,9 +84,8 @@ login_prompt(char *name, int namesize)
 	 */
 
 	memzero_a(buf);
-	if (fgets(buf, sizeof(buf), stdin) != buf) {
+	if (fgets(buf, sizeof(buf), stdin) == NULL)
 		exit (EXIT_FAILURE);
-	}
 
 	if (stpsep(buf, "\n") == NULL)
 		exit(EXIT_FAILURE);
