@@ -102,8 +102,6 @@ static struct commonio_ops group_ops = {
 	group_getname,
 	group_parse,
 	group_put,
-	fgetsx,
-	fputsx,
 	group_open_hook,
 	group_close_hook
 };
