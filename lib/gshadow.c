@@ -119,7 +119,7 @@ sgetsgent(const char *s)
 		return NULL;
 	}
 
-	if (fgetsx(buf, buflen, fp) == NULL)
+	if (fgets(buf, buflen, fp) == NULL)
 		return NULL;
 
 	while (   (strrchr(buf, '\n') == NULL)
@@ -134,7 +134,7 @@ sgetsgent(const char *s)
 		buflen *= 2;
 
 		len = strlen (buf);
-		if (fgetsx(&buf[len], buflen - len, fp) == NULL)
+		if (fgets(&buf[len], buflen - len, fp) == NULL)
 			return NULL;
 	}
 	stpsep(buf, "\n");
@@ -233,11 +233,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	}
 	stpcpy(cp, "\n");
 
-	/*
-	 * Output using the function which understands the line
-	 * continuation conventions.
-	 */
-	if (fputsx (buf, fp) == EOF) {
+	if (fputs(buf, fp) == EOF) {
 		free (buf);
 		return -1;
 	}
