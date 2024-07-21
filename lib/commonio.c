@@ -655,9 +655,7 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_errno;
 
 			len = strlen (buf);
-			if (db->ops->fgets (buf + len,
-			                    (int) (buflen - len),
-			                    db->fp) == NULL) {
+			if (db->ops->fgets(buf + len, buflen - len, db->fp) == NULL) {
 				goto cleanup_buf;
 			}
 		}
