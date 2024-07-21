@@ -16,6 +16,7 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -55,7 +56,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets(buf, sizeof(buf), fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		if (stpsep(buf, "\n") == NULL)
 			break;
 
