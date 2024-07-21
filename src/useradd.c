@@ -18,16 +18,17 @@
 #include <getopt.h>
 #include <grp.h>
 #ifdef ENABLE_LASTLOG
-#include <lastlog.h>
+# include <lastlog.h>
 #endif /* ENABLE_LASTLOG */
 #include <libgen.h>
 #include <pwd.h>
 #include <signal.h>
 #ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
+# ifdef USE_PAM
+#  include "pam_defs.h"
+# endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -361,7 +362,7 @@ get_defaults(void)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets(buf, sizeof(buf), fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		stpsep(buf, "\n");
 
 		cp = stpsep(buf, "=");
@@ -601,7 +602,7 @@ set_defaults(void)
 		goto skip;
 	}
 
-	while (fgets(buf, sizeof(buf), ifp) == buf) {
+	while (fgets(buf, sizeof(buf), ifp) != NULL) {
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {

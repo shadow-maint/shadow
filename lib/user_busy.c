@@ -12,6 +12,7 @@
 #ident "$Id: $"
 
 #include <assert.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -125,7 +126,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	if (NULL == sfile) {
 		return 0;
 	}
-	while (fgets(line, sizeof(line), sfile) == line) {
+	while (fgets(line, sizeof(line), sfile) != NULL) {
 		if (strncmp (line, "Uid:\t", 5) == 0) {
 			unsigned long ruid, euid, suid;
 
