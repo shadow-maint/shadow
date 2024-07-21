@@ -13,6 +13,7 @@
 #ident "$Id$"
 
 #include <pwd.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
@@ -73,7 +74,7 @@ bool hushed (const char *username)
 	if (NULL == fp) {
 		return false;
 	}
-	for (found = false; !found && (fgets(buf, sizeof(buf), fp) == buf);) {
+	for (found = false; !found && (fgets(buf, sizeof(buf), fp) != NULL);) {
 		stpsep(buf, "\n");
 		found = streq(buf, pw->pw_shell) ||
 		        streq(buf, pw->pw_name);
