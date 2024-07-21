@@ -84,11 +84,7 @@ putsgent(const struct sgrp *sgrp, FILE *fp)
 	}
 	stpcpy(cp, "\n");
 
-	/*
-	 * Output using the function which understands the line
-	 * continuation conventions.
-	 */
-	if (fputsx (buf, fp) == EOF) {
+	if (fputs(buf, fp) == EOF) {
 		free (buf);
 		return -1;
 	}
