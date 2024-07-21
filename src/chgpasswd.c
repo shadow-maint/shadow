@@ -476,7 +476,7 @@ int main (int argc, char **argv)
 	 * group entry for each group will be looked up in the appropriate
 	 * file (gshadow or group) and the password changed.
 	 */
-	while (fgets(buf, (int) sizeof(buf), stdin) != NULL) {
+	while (fgets(buf, sizeof(buf), stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),
