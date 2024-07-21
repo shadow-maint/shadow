@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -642,7 +643,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (NULL == buf)
 		goto cleanup_errno;
 
-	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
+	while (db->ops->fgets(buf, buflen, db->fp) != NULL) {
 		struct commonio_entry  *p;
 
 		while (   (strrchr (buf, '\n') == NULL)
