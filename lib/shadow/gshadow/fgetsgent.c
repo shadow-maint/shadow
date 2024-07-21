@@ -51,7 +51,7 @@ fgetsgent(FILE *fp)
 		return NULL;
 	}
 
-	if (fgetsx(buf, buflen, fp) == NULL)
+	if (fgets(buf, buflen, fp) == NULL)
 		return NULL;
 
 	while (   (strrchr(buf, '\n') == NULL)
@@ -66,7 +66,7 @@ fgetsgent(FILE *fp)
 		buflen *= 2;
 
 		len = strlen (buf);
-		if (fgetsx(&buf[len], buflen - len, fp) == NULL)
+		if (fgets(&buf[len], buflen - len, fp) == NULL)
 			return NULL;
 	}
 	stpsep(buf, "\n");
