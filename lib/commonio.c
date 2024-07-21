@@ -643,7 +643,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (NULL == buf)
 		goto cleanup_errno;
 
-	while (db->ops->fgets(buf, buflen, db->fp) != NULL) {
+	while (fgets(buf, buflen, db->fp) != NULL) {
 		struct commonio_entry  *p;
 
 		while (   (strrchr (buf, '\n') == NULL)
@@ -656,9 +656,8 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_errno;
 
 			len = strlen (buf);
-			if (db->ops->fgets(buf + len, buflen - len, db->fp) == NULL) {
+			if (fgets(buf + len, buflen - len, db->fp) == NULL)
 				goto cleanup_buf;
-			}
 		}
 		stpsep(buf, "\n");
 
@@ -876,9 +875,9 @@ static int write_all (const struct commonio_db *db)
 				return -1;
 			}
 		} else if (NULL != p->line) {
-			if (db->ops->fputs (p->line, db->fp) == EOF) {
+			if (fputs(p->line, db->fp) == EOF)
 				return -1;
-			}
+
 			if (putc ('\n', db->fp) == EOF) {
 				return -1;
 			}
