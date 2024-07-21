@@ -170,9 +170,8 @@ void endsgent (void)
 		buflen *= 2;
 
 		len = strlen (buf);
-		if (fgetsx(&buf[len], buflen - len, fp) != &buf[len]) {
+		if (fgetsx(&buf[len], buflen - len, fp) == NULL)
 			return NULL;
-		}
 	}
 	stpsep(buf, "\n");
 	return (sgetsgent (buf));

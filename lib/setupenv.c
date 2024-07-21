@@ -17,6 +17,7 @@
 
 #include <assert.h>
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
@@ -54,7 +55,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets(buf, sizeof(buf), fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		if (stpsep(buf, "\n") == NULL)
 			break;
 
