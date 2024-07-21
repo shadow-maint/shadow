@@ -155,29 +155,29 @@ void endsgent (void)
 		return NULL;
 	}
 
-	if (fgetsx(buf, buflen, fp) == buf) {
-		while (   (strrchr(buf, '\n') == NULL)
-		       && (feof (fp) == 0)) {
-			size_t len;
+	if (fgetsx(buf, buflen, fp) == NULL)
+		return NULL;
 
-			cp = REALLOC(buf, buflen * 2, char);
-			if (NULL == cp) {
-				return NULL;
-			}
-			buf = cp;
-			buflen *= 2;
+	while (   (strrchr(buf, '\n') == NULL)
+	       && (feof (fp) == 0)) {
+		size_t len;
 
-			len = strlen (buf);
-			if (fgetsx (&buf[len],
-			            (int) (buflen - len),
-			            fp) != &buf[len]) {
-				return NULL;
-			}
+		cp = REALLOC(buf, buflen * 2, char);
+		if (NULL == cp) {
+			return NULL;
 		}
-		stpsep(buf, "\n");
-		return (sgetsgent (buf));
+		buf = cp;
+		buflen *= 2;
+
+		len = strlen (buf);
+		if (fgetsx (&buf[len],
+			    (int) (buflen - len),
+			    fp) != &buf[len]) {
+			return NULL;
+		}
 	}
-	return NULL;
+	stpsep(buf, "\n");
+	return (sgetsgent (buf));
 }
 
 /*
