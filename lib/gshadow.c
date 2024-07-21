@@ -153,9 +153,7 @@ sgetsgent(const char *s)
 		buflen *= 2;
 
 		len = strlen (buf);
-		if (fgetsx (&buf[len],
-			    (int) (buflen - len),
-			    fp) != &buf[len]) {
+		if (fgetsx(&buf[len], buflen - len, fp) != &buf[len]) {
 			return NULL;
 		}
 	}
