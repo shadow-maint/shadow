@@ -651,7 +651,6 @@ int commonio_open (struct commonio_db *db, int mode)
 
 			len = strlen (buf);
 			if (db->ops->cio_fgets(buf + len, buflen - len, db->fp) == NULL)
-				goto cleanup_buf;
 		}
 		stpsep(buf, "\n");
 
