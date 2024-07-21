@@ -155,11 +155,6 @@ extern int getrange (const char *range,
 /* gettime.c */
 extern time_t gettime (void);
 
-/* fputsx.c */
-ATTR_ACCESS(write_only, 1, 2)
-extern /*@null@*/char *fgetsx(/*@returned@*/char *restrict, int, FILE *restrict);
-extern int fputsx (const char *, FILE *);
-
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
 extern /*@observer@*/const struct commonio_db *__gr_get_db (void);

@@ -138,8 +138,6 @@ static struct commonio_ops subordinate_ops = {
 	NULL,			/* getname */
 	subordinate_parse,	/* parse */
 	subordinate_put,	/* put */
-	fgets,			/* fgets */
-	fputs,			/* fputs */
 	NULL,			/* open_hook */
 	NULL,			/* close_hook */
 };

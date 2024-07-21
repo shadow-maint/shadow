@@ -61,15 +61,6 @@ struct commonio_ops {
 	int (*cio_put)(const void *, FILE *);
 
 	/*
-	 * fgets and fputs (can be replaced by versions that
-	 * understand line continuation conventions).
-	 */
-	ATTR_ACCESS(write_only, 1, 2)
-	/*@null@*/char *(*cio_fgets)(/*@returned@*/char *restrict s, int n,
-	                         FILE *restrict stream);
-	int (*cio_fputs)(const char *, FILE *);
-
-	/*
 	 * open_hook and close_hook.
 	 * If non NULL, these functions will be called after the database
 	 * is open or before it is closed.
