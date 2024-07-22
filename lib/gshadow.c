@@ -129,8 +129,9 @@ sgetsgent(const char *string)
 /*@observer@*//*@null@*/struct sgrp *
 fgetsgent(/*@null@*/FILE *fp)
 {
-	static size_t buflen = 0;
-	static char *buf = NULL;
+	char         *buf = NULL;
+	size_t       buflen = 0;
+	struct sgrp  *sg;
 
 	if (NULL == fp) {
 		return NULL;
@@ -141,7 +142,11 @@ fgetsgent(/*@null@*/FILE *fp)
 	if (stpsep(buf, "\n") == NULL)
 		return NULL;
 
-	return (sgetsgent (buf));
+	sg = sgetsgent(buf);
+
+	free(buf);
+
+	return sg;
 }
 
 
