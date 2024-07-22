@@ -24,7 +24,6 @@
 #include <utime.h>
 
 #include "alloc/malloc.h"
-#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"
@@ -568,11 +567,9 @@ static void add_one_entry_nis (struct commonio_db *db,
 }
 #endif				/* KEEP_NIS_AT_END */
 
-/* Initial buffer size, as well as increment if not sufficient
-   (for reading very long lines in group files).  */
-#define BUFLEN 4096
 
-int commonio_open (struct commonio_db *db, int mode)
+int
+commonio_open(struct commonio_db *db, int mode)
 {
 	char *buf;
 	char *line;
@@ -634,28 +631,12 @@ int commonio_open (struct commonio_db *db, int mode)
 		return 0;
 	}
 
-	buflen = BUFLEN;
-	buf = MALLOC(buflen, char);
-	if (NULL == buf)
-		goto cleanup_errno;
-
-	while (fgets(buf, buflen, db->fp) != NULL) {
+	buf = NULL;
+	while (getline(&buf, &buflen, db->fp) != -1) {
 		struct commonio_entry  *p;
 
-		while (   (strrchr (buf, '\n') == NULL)
-		       && (feof (db->fp) == 0)) {
-			size_t len;
-
-			buflen += BUFLEN;
-			buf = REALLOCF(buf, buflen, char);
-			if (NULL == buf)
-				goto cleanup_errno;
-
-			len = strlen (buf);
-			if (fgets(buf + len, buflen - len, db->fp) == NULL)
-				goto cleanup_buf;
-		}
-		stpsep(buf, "\n");
+		if (stpsep(buf, "\n") == NULL)
+			goto cleanup_buf;
 
 		line = strdup (buf);
 		if (NULL == line) {
@@ -715,6 +696,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	errno = saved_errno;
 	return 0;
 }
+
 
 /*
  * Sort given db according to cmp function (usually compares uids)
