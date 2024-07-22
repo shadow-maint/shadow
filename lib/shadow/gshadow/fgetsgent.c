@@ -37,39 +37,15 @@ fgetsgent(FILE *fp)
 	static size_t buflen = 0;
 	static char *buf = NULL;
 
-	char *cp;
-
-	if (0 == buflen) {
-		buf = MALLOC(BUFSIZ, char);
-		if (NULL == buf) {
-			return NULL;
-		}
-		buflen = BUFSIZ;
-	}
-
 	if (NULL == fp) {
 		return NULL;
 	}
 
-	if (fgets(buf, buflen, fp) == NULL)
+	if (getline(&buf, &buflen, fp) == -1)
+		return NULL;
+	if (stpsep(buf, "\n") == NULL)
 		return NULL;
 
-	while (   (strrchr(buf, '\n') == NULL)
-	       && (feof (fp) == 0)) {
-		size_t len;
-
-		cp = REALLOC(buf, buflen * 2, char);
-		if (NULL == cp) {
-			return NULL;
-		}
-		buf = cp;
-		buflen *= 2;
-
-		len = strlen (buf);
-		if (fgets(&buf[len], buflen - len, fp) == NULL)
-			return NULL;
-	}
-	stpsep(buf, "\n");
 	return sgetsgent(buf);
 }
 #endif
