@@ -129,19 +129,28 @@ sgetsgent(const char *string)
 /*@observer@*//*@null@*/struct sgrp *
 fgetsgent(/*@null@*/FILE *fp)
 {
-	static size_t buflen = 0;
-	static char *buf = NULL;
+	char         *buf;
+	size_t       buflen;
+	struct sgrp  *sg;
 
 	if (NULL == fp) {
 		return NULL;
 	}
 
+	buf = NULL;
+	buflen = 0;
 	if (getline(&buf, &buflen, fp) == -1)
-		return NULL;
+		goto fail;
 	if (stpsep(buf, "\n") == NULL)
-		return NULL;
+		goto fail;
 
-	return (sgetsgent (buf));
+	sg = sgetsgent(buf);
+
+	free(buf);
+	return sg;
+fail:
+	free(buf);
+	return NULL;
 }
 
 
