@@ -73,7 +73,7 @@ bool hushed (const char *username)
 	if (NULL == fp) {
 		return false;
 	}
-	for (found = false; !found && (fgets (buf, sizeof buf, fp) == buf);) {
+	for (found = false; !found && (fgets(buf, sizeof(buf), fp) == buf);) {
 		stpsep(buf, "\n");
 		found = streq(buf, pw->pw_shell) ||
 		        streq(buf, pw->pw_name);

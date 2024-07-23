@@ -73,7 +73,7 @@ login_prompt(char *name, int namesize)
 			(void) fclose (fp);
 		}
 	}
-	(void) gethostname (buf, sizeof buf);
+	(void) gethostname(buf, sizeof(buf));
 	printf (_("\n%s login: "), buf);
 	(void) fflush (stdout);
 
@@ -83,7 +83,7 @@ login_prompt(char *name, int namesize)
 	 */
 
 	memzero_a(buf);
-	if (fgets (buf, sizeof buf, stdin) != buf) {
+	if (fgets(buf, sizeof(buf), stdin) != buf) {
 		exit (EXIT_FAILURE);
 	}
 

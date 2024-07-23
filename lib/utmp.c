@@ -112,7 +112,7 @@ failtmp(const char *username, const struct utmpx *failent)
 	 * Append the new failure record and close the log file.
 	 */
 
-	if (write_full(fd, failent, sizeof *failent) == -1) {
+	if (write_full(fd, failent, sizeof(*failent)) == -1) {
 		goto err_write;
 	}
 
@@ -306,8 +306,8 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		strncpy_a(utent->ut_host, hostname);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
-		utent->ut_syslen = MIN (strlen (hostname),
-		                        sizeof (utent->ut_host));
+		utent->ut_syslen = MIN(strlen(hostname),
+		                       sizeof(utent->ut_host));
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
@@ -320,21 +320,21 @@ prepare_utmp(const char *name, const char *line, const char *host,
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR)
 				memcpy (&(utent->ut_addr),
 				        &(sa->sin_addr),
-				        MIN (sizeof (utent->ut_addr),
-				             sizeof (sa->sin_addr)));
+				        MIN(sizeof(utent->ut_addr),
+				            sizeof(sa->sin_addr)));
 # endif
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin_addr),
-				        MIN (sizeof (utent->ut_addr_v6),
-				             sizeof (sa->sin_addr)));
+				        MIN(sizeof(utent->ut_addr_v6),
+				            sizeof(sa->sin_addr)));
 			} else if (info->ai_family == AF_INET6) {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *) info->ai_addr;
 				memcpy (utent->ut_addr_v6,
 				        &(sa->sin6_addr),
-				        MIN (sizeof (utent->ut_addr_v6),
-				             sizeof (sa->sin6_addr)));
+				        MIN(sizeof(utent->ut_addr_v6),
+				            sizeof(sa->sin6_addr)));
 # endif
 			}
 			freeaddrinfo (info);
