@@ -46,7 +46,7 @@ void ttytype (const char *line)
 			perror (typefile);
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) == buf) {
 		if (buf[0] == '#') {
 			continue;
 		}

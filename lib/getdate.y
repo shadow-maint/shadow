@@ -771,7 +771,7 @@ yylex (void)
       if (isalpha (c))
 	{
 	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
-	    if (p < &buff[sizeof buff - 1])
+	    if (p < &buff[sizeof(buff) - 1])
 	      *p++ = c;
           stpcpy(p, "");
 	  yyInput--;

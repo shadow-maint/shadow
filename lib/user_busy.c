@@ -69,7 +69,7 @@ user_busy_utmp(const char *name)
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
 		}
-		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
+		if (strncmp(utent->ut_user, name, sizeof(utent->ut_user)) != 0) {
 			continue;
 		}
 		if (kill (utent->ut_pid, 0) != 0) {
@@ -125,7 +125,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	if (NULL == sfile) {
 		return 0;
 	}
-	while (fgets (line, sizeof (line), sfile) == line) {
+	while (fgets(line, sizeof(line), sfile) == line) {
 		if (strncmp (line, "Uid:\t", 5) == 0) {
 			unsigned long ruid, euid, suid;
 
