@@ -181,7 +181,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		errno = EINVAL;
 		return 0;
 	}
-	len = read (fd, buf, sizeof (buf) - 1);
+	len = read(fd, buf, sizeof(buf) - 1);
 	close (fd);
 	if (len <= 0) {
 		if (log) {
@@ -767,7 +767,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		entries[n] = ptr;
 		n++;
 	}
-	qsort (entries, n, sizeof (struct commonio_entry *), cmp);
+	qsort(entries, n, sizeof(struct commonio_entry *), cmp);
 
 	/* Take care of the head and tail separately */
 	db->head = entries[0];
@@ -905,7 +905,7 @@ int commonio_close (struct commonio_db *db, bool process_selinux)
 		goto fail;
 	}
 
-	memzero (&sb, sizeof sb);
+	memzero(&sb, sizeof(sb));
 	if (NULL != db->fp) {
 		if (fstat (fileno (db->fp), &sb) != 0) {
 			(void) fclose (db->fp);
