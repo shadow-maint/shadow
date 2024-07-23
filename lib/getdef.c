@@ -79,7 +79,7 @@ struct itemdef {
 	{"MOTD_FIRSTONLY", NULL},		\
 
 
-#define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
+#define NUMDEFS  (sizeof(def_table) / sizeof(def_table[0]))
 static struct itemdef def_table[] = {
 	{"CHFN_RESTRICT", NULL},
 	{"CONSOLE_GROUPS", NULL},
@@ -157,7 +157,7 @@ static struct itemdef def_table[] = {
 	{NULL, NULL}
 };
 
-#define NUMKNOWNDEFS	(sizeof(knowndef_table)/sizeof(knowndef_table[0]))
+#define NUMKNOWNDEFS  (sizeof(knowndef_table) / sizeof(knowndef_table[0]))
 static struct itemdef knowndef_table[] = {
 #ifdef USE_PAM
 	PAMDEFS
@@ -556,7 +556,7 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.
