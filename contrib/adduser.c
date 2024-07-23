@@ -203,7 +203,7 @@ main (void)
 	  printf ("\nLogin to add (^C to quit): ");
 	  fflush (stdout);
 
-	  safeget (usrname, sizeof (usrname));
+	  safeget(usrname, sizeof(usrname));
 
 	  if (!strlen (usrname))
 	    {
@@ -238,10 +238,10 @@ main (void)
 
       printf ("\nFull Name [%s]: ", usrname);
       fflush (stdout);
-      safeget (person, sizeof (person));
+      safeget(person, sizeof(person));
       if (!strlen (person))
 	{
-	  bzero (person, sizeof (person));
+	  bzero(person, sizeof(person));
 	  strcpy (person, usrname);
 	};
 
@@ -252,7 +252,7 @@ main (void)
 	      bad = 0;
 	      printf ("GID [%d]: ", DEFAULT_GROUP);
 	      fflush (stdout);
-	      safeget (foo, sizeof (foo));
+	      safeget(foo, sizeof(foo));
 	      if (!strlen (foo))
 		group = DEFAULT_GROUP;
 	      else if (isdigit (*foo))
@@ -293,7 +293,7 @@ main (void)
 	  printf ("\nIf home dir ends with a / then '%s' will be appended to it\n", usrname);
 	  printf ("Home Directory [%s/%s]: ", DEFAULT_HOME, usrname);
 	  fflush (stdout);
-	  safeget (dir, sizeof (dir));
+	  safeget(dir, sizeof(dir));
 	  if (!strlen(dir))  /* hit return */
 	    sprintf(dir, "%s/%s", DEFAULT_HOME, usrname);
 	  else if (dir[strlen (dir) - 1] == '/')
@@ -307,7 +307,7 @@ main (void)
 
       printf ("\nShell [%s]: ", DEFAULT_SHELL);
       fflush (stdout);
-      safeget (shell, sizeof (shell));
+      safeget(shell, sizeof(shell));
       if (!strlen (shell))
 	strcpy(shell, DEFAULT_SHELL);
       else
@@ -339,7 +339,7 @@ main (void)
 #endif
 	  printf ("\nMin. Password Change Days [%d]: ", DEFAULT_MIN_PASS);
 	  fflush (stdout);
-	  safeget (foo, sizeof (foo));
+	  safeget(foo, sizeof(foo));
 	  if (strlen (foo) > 1)
 	    min_pass = DEFAULT_MIN_PASS;
 	  else
@@ -347,7 +347,7 @@ main (void)
 
 	  printf ("Max. Password Change Days [%d]: ", DEFAULT_MAX_PASS);
 	  fflush (stdout);
-	  safeget (foo, sizeof (foo));
+	  safeget(foo, sizeof(foo));
 	  if (strlen (foo) > 1)
 	    max_pass = atoi (foo);
 	  else
@@ -355,7 +355,7 @@ main (void)
 
 	  printf ("Password Warning Days [%d]: ", DEFAULT_WARN_PASS);
 	  fflush (stdout);
-	  safeget (foo, sizeof (foo));
+	  safeget(foo, sizeof(foo));
 	  warn_pass = atoi (foo);
 	  if (warn_pass == 0)
 
@@ -363,7 +363,7 @@ main (void)
 
 	  printf ("Days after Password Expiry for Account Locking [%d]: ", DEFAULT_USER_DIE);
 	  fflush (stdout);
-	  safeget (foo, sizeof (foo));
+	  safeget(foo, sizeof(foo));
 	  user_die = atoi (foo);
 	  if (user_die == 0)
 	    user_die = DEFAULT_USER_DIE;
@@ -387,7 +387,7 @@ main (void)
 	      min_pass, max_pass, warn_pass, user_die);
       printf ("\nIs this correct? [y/N]: ");
       fflush (stdout);
-      safeget (foo, sizeof (foo));
+      safeget(foo, sizeof(foo));
 
       done = bad = correct = (foo[0] == 'y' || foo[0] == 'Y');
 
@@ -400,7 +400,7 @@ main (void)
 
   *environ = NULL;
 
-  bzero (cmd, sizeof (cmd));
+  bzero(cmd, sizeof(cmd));
   sprintf (cmd, "%s -g %d -d %s -s %s -c \"%s\" -m -k /etc/skel %s",
 	   USERADD_PATH, group, dir, shell, person, usrname);
   printf ("Calling useradd to add new user:\n%s\n", cmd);
@@ -418,7 +418,7 @@ main (void)
 			 */
   setuid (0);
 
-  bzero (cmd, sizeof (cmd));
+  bzero(cmd, sizeof(cmd));
 
   /* Chage runs suid root. => we need ruid root to run it with
    * anything other than chage -l
@@ -438,7 +438,7 @@ main (void)
   /* I want to add a user completely with one easy command --chris */
 
 #ifdef HAVE_QUOTAS
-  bzero (cmd, sizeof (cmd));
+  bzero(cmd, sizeof(cmd));
   sprintf (cmd, "%s -p %s -u %s", EDQUOTA_PATH, QUOTA_DEFAULT, usrname);
   printf ("%s\n", cmd);
   if (system (cmd))
@@ -452,7 +452,7 @@ main (void)
     printf ("\nDefault quota set.\n");
 #endif /* HAVE_QUOTAS */
 
-  bzero (cmd, sizeof (cmd));
+  bzero(cmd, sizeof(cmd));
   sprintf (cmd, "%s %s", PASSWD_PATH, usrname);
   if (system (cmd))
     {
@@ -462,7 +462,7 @@ main (void)
 #endif
     }
 #ifdef IMMEDIATE_CHANGE
-  bzero (cmd, sizeof (cmd));
+  bzero(cmd, sizeof(cmd));
   sprintf (cmd, "%s -e %s", PASSWD_PATH, usrname);
   if (system (cmd))
     {

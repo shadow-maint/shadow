@@ -97,7 +97,7 @@ login_access(const char *user, const char *from)
 	if (NULL != fp) {
 		int lineno = 0;	/* for diagnostics */
 		while (   !match
-		       && (fgets (line, sizeof (line), fp) == line))
+		       && (fgets(line, sizeof(line), fp) == line))
 		{
 			char  *p;
 
@@ -185,7 +185,7 @@ static char *myhostname (void)
 	static char name[MAXHOSTNAMELEN + 1] = "";
 
 	if (streq(name, "")) {
-		gethostname (name, sizeof (name));
+		gethostname(name, sizeof(name));
 		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
 	return (name);
