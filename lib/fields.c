@@ -62,8 +62,8 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 	char newf[200];
 	char *cp;
 
-	if (maxsize > sizeof (newf)) {
-		maxsize = sizeof (newf);
+	if (maxsize > sizeof(newf)) {
+		maxsize = sizeof(newf);
 	}
 
 	printf ("\t%s [%s]: ", prompt, buf);
