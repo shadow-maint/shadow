@@ -42,7 +42,7 @@ add_groups(const char *list)
 	int ret;
 	FILE *shadow_logfd = log_get_logfd();
 
-	if (strlen (list) >= sizeof (buf)) {
+	if (strlen(list) >= sizeof(buf)) {
 		errno = EINVAL;
 		return -1;
 	}
