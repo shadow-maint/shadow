@@ -48,7 +48,7 @@ sgetspent(const char *string)
 	 * have to do that to our private copy.
 	 */
 
-	if (strlen (string) >= sizeof spwbuf) {
+	if (strlen(string) >= sizeof(spwbuf)) {
 		fprintf (shadow_logfd,
 		         "%s: Too long passwd entry encountered, file corruption?\n",
 		         shadow_progname);

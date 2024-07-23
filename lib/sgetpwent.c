@@ -50,7 +50,7 @@ sgetpwent(const char *buf)
 	 * the password structure remain valid.
 	 */
 
-	if (strlen (buf) >= sizeof pwdbuf) {
+	if (strlen(buf) >= sizeof(pwdbuf)) {
 		fprintf (shadow_logfd,
 		         "%s: Too long passwd entry encountered, file corruption?\n",
 		         shadow_progname);
