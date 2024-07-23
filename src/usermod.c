@@ -1720,7 +1720,7 @@ static void usr_update (struct option_flags *flags)
 			 *    a shadowed password
 			 *  + aging information is requested
 			 */
-			bzero(&spent, sizeof spent);
+			bzero(&spent, sizeof(spent));
 			spent.sp_namp   = user_name;
 
 			/* The user explicitly asked for a shadow feature.
@@ -1897,8 +1897,8 @@ static void update_lastlog (void)
 {
 	struct lastlog ll;
 	int fd;
-	off_t off_uid = (off_t) user_id * sizeof ll;
-	off_t off_newuid = (off_t) user_newid * sizeof ll;
+	off_t off_uid = (off_t) user_id * sizeof(ll);
+	off_t off_newuid = (off_t) user_newid * sizeof(ll);
 	uid_t max_uid;
 
 	if (access(_PATH_LASTLOG, F_OK) != 0) {
@@ -1921,10 +1921,10 @@ static void update_lastlog (void)
 	}
 
 	if (   (lseek (fd, off_uid, SEEK_SET) == off_uid)
-	    && (read (fd, &ll, sizeof ll) == (ssize_t) sizeof ll)) {
+	    && (read(fd, &ll, sizeof(ll)) == (ssize_t) sizeof(ll))) {
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-		    || (write_full(fd, &ll, sizeof ll) == -1)
+		    || (write_full(fd, &ll, sizeof(ll)) == -1)
 		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
@@ -1936,11 +1936,11 @@ static void update_lastlog (void)
 
 		/* Check if the new UID already has an entry */
 		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
-		    && (read (fd, &ll, sizeof ll) == (ssize_t) sizeof ll)) {
+		    && (read(fd, &ll, sizeof(ll)) == (ssize_t) sizeof(ll))) {
 			/* Reset the new uid's lastlog entry */
-			memzero (&ll, sizeof (ll));
+			memzero(&ll, sizeof(ll));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-			    || (write_full(fd, &ll, sizeof ll) == -1)
+			    || (write_full(fd, &ll, sizeof(ll)) == -1)
 			    || (fsync (fd) != 0)) {
 				fprintf (stderr,
 				         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
@@ -1968,8 +1968,8 @@ static void update_faillog (void)
 {
 	struct faillog fl;
 	int fd;
-	off_t off_uid = (off_t) user_id * sizeof fl;
-	off_t off_newuid = (off_t) user_newid * sizeof fl;
+	off_t off_uid = (off_t) user_id * sizeof(fl);
+	off_t off_newuid = (off_t) user_newid * sizeof(fl);
 
 	if (access (FAILLOG_FILE, F_OK) != 0) {
 		return;
@@ -1985,10 +1985,10 @@ static void update_faillog (void)
 	}
 
 	if (   (lseek (fd, off_uid, SEEK_SET) == off_uid)
-	    && (read (fd, &fl, sizeof fl) == (ssize_t) sizeof fl)) {
+	    && (read(fd, &fl, sizeof(fl)) == (ssize_t) sizeof(fl))) {
 		/* Copy the old entry to its new location */
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-		    || (write_full(fd, &fl, sizeof fl) == -1)
+		    || (write_full(fd, &fl, sizeof(fl)) == -1)
 		    || (fsync (fd) != 0)) {
 			fprintf (stderr,
 			         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
@@ -2000,11 +2000,11 @@ static void update_faillog (void)
 
 		/* Check if the new UID already has an entry */
 		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
-		    && (read (fd, &fl, sizeof fl) == (ssize_t) sizeof fl)) {
+		    && (read(fd, &fl, sizeof(fl)) == (ssize_t) sizeof(fl))) {
 			/* Reset the new uid's faillog entry */
-			memzero (&fl, sizeof (fl));
+			memzero(&fl, sizeof(fl));
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
-			    || (write_full(fd, &fl, sizeof fl) == -1))
+			    || (write_full(fd, &fl, sizeof(fl)) == -1))
 			{
 				fprintf (stderr,
 				         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),

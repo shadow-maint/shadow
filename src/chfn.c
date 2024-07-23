@@ -180,31 +180,31 @@ static void new_fields (void)
 	puts (_("Enter the new value, or press ENTER for the default"));
 
 	if (may_change_field ('f')) {
-		change_field (fullnm, sizeof fullnm, _("Full Name"));
+		change_field(fullnm, sizeof(fullnm), _("Full Name"));
 	} else {
 		printf (_("\t%s: %s\n"), _("Full Name"), fullnm);
 	}
 
 	if (may_change_field ('r')) {
-		change_field (roomno, sizeof roomno, _("Room Number"));
+		change_field(roomno, sizeof(roomno), _("Room Number"));
 	} else {
 		printf (_("\t%s: %s\n"), _("Room Number"), roomno);
 	}
 
 	if (may_change_field ('w')) {
-		change_field (workph, sizeof workph, _("Work Phone"));
+		change_field(workph, sizeof(workph), _("Work Phone"));
 	} else {
 		printf (_("\t%s: %s\n"), _("Work Phone"), workph);
 	}
 
 	if (may_change_field ('h')) {
-		change_field (homeph, sizeof homeph, _("Home Phone"));
+		change_field(homeph, sizeof(homeph), _("Home Phone"));
 	} else {
 		printf (_("\t%s: %s\n"), _("Home Phone"), homeph);
 	}
 
 	if (amroot) {
-		change_field (slop, sizeof slop, _("Other"));
+		change_field(slop, sizeof(slop), _("Other"));
 	}
 }
 

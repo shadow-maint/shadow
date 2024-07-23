@@ -757,7 +757,7 @@ static int copy_file (const struct path_info *src, const struct path_info *dst,
 		char buf[8192];
 		ssize_t cnt;
 
-		cnt = read (ifd, buf, sizeof buf);
+		cnt = read(ifd, buf, sizeof(buf));
 		if (cnt < 0) {
 			if (errno == EINTR) {
 				continue;

@@ -55,7 +55,7 @@ void dolastlog (
 	 * for this UID.  Negative UID's will create problems, but ...
 	 */
 
-	offset = (off_t) pw->pw_uid * sizeof newlog;
+	offset = (off_t) pw->pw_uid * sizeof(newlog);
 
 	if (lseek (fd, offset, SEEK_SET) != offset) {
 		SYSLOG ((LOG_WARN,
@@ -71,8 +71,8 @@ void dolastlog (
 	 * the way we read the old one in.
 	 */
 
-	if (read (fd, &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
-		memzero (&newlog, sizeof newlog);
+	if (read(fd, &newlog, sizeof(newlog)) != (ssize_t) sizeof(newlog)) {
+		memzero(&newlog, sizeof(newlog));
 	}
 	if (NULL != ll) {
 		*ll = newlog;
@@ -86,7 +86,7 @@ void dolastlog (
 	strncpy_a(newlog.ll_host, host);
 #endif
 	if (   (lseek (fd, offset, SEEK_SET) != offset)
-	    || (write_full(fd, &newlog, sizeof newlog) == -1)) {
+	    || (write_full(fd, &newlog, sizeof(newlog)) == -1)) {
 		goto err_write;
 	}
 

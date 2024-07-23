@@ -76,7 +76,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * See if this tty is listed in the console file.
 	 */
 
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		stpsep(buf, "\n");
 		if (streq(buf, tty)) {
 			(void) fclose (fp);

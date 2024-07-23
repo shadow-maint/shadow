@@ -355,7 +355,7 @@ get_defaults(struct option_flags *flags)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) == buf) {
 		stpsep(buf, "\n");
 
 		cp = stpsep(buf, "=");
@@ -587,7 +587,7 @@ set_defaults(void)
 		goto skip;
 	}
 
-	while (fgets (buf, sizeof buf, ifp) == buf) {
+	while (fgets(buf, sizeof(buf), ifp) == buf) {
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {
@@ -930,7 +930,7 @@ static void usage (int status)
  */
 static void new_pwent (struct passwd *pwent)
 {
-	memzero (pwent, sizeof *pwent);
+	memzero(pwent, sizeof(*pwent));
 	pwent->pw_name = (char *) user_name;
 	if (is_shadow_pwd) {
 		pwent->pw_passwd = (char *) SHADOW_PASSWD_STRING;
@@ -953,7 +953,7 @@ static void new_pwent (struct passwd *pwent)
  */
 static void new_spent (struct spwd *spent)
 {
-	memzero (spent, sizeof *spent);
+	memzero(spent, sizeof(*spent));
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = gettime () / DAY;
@@ -1855,7 +1855,7 @@ static char *empty_list = NULL;
 
 static void new_grent (struct group *grent)
 {
-	memzero (grent, sizeof *grent);
+	memzero(grent, sizeof(*grent));
 	grent->gr_name = (char *) user_name;
 #ifdef  SHADOWGRP
 	if (is_shadow_grp) {
@@ -1879,7 +1879,7 @@ static void new_grent (struct group *grent)
 
 static void new_sgent (struct sgrp *sgent)
 {
-	memzero (sgent, sizeof *sgent);
+	memzero(sgent, sizeof(*sgent));
 	sgent->sg_namp = (char *) user_name;
 	sgent->sg_passwd = "!";	/* XXX warning: const */
 	sgent->sg_adm = &empty_list;
@@ -1956,14 +1956,14 @@ static void faillog_reset (uid_t uid)
 {
 	struct faillog fl;
 	int fd;
-	off_t offset_uid = (off_t) (sizeof fl) * uid;
+	off_t offset_uid = (off_t) sizeof(fl) * uid;
 	struct stat st;
 
 	if (stat (FAILLOG_FILE, &st) != 0 || st.st_size <= offset_uid) {
 		return;
 	}
 
-	memzero (&fl, sizeof (fl));
+	memzero(&fl, sizeof(fl));
 
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (-1 == fd) {
@@ -1974,7 +1974,7 @@ static void faillog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full(fd, &fl, sizeof (fl)) == -1)
+	    || (write_full(fd, &fl, sizeof(fl)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
@@ -1994,7 +1994,7 @@ static void lastlog_reset (uid_t uid)
 {
 	struct lastlog ll;
 	int fd;
-	off_t offset_uid = (off_t) (sizeof ll) * uid;
+	off_t offset_uid = (off_t) sizeof(ll) * uid;
 	uid_t max_uid;
 	struct stat st;
 
@@ -2008,7 +2008,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 
-	memzero (&ll, sizeof (ll));
+	memzero(&ll, sizeof(ll));
 
 	fd = open(_PATH_LASTLOG, O_RDWR);
 	if (-1 == fd) {
@@ -2019,7 +2019,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full (fd, &ll, sizeof (ll)) == -1)
+	    || (write_full(fd, &ll, sizeof(ll)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
