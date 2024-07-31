@@ -243,7 +243,7 @@ print_day_as_date(long day)
 	}
 
 	if (localtime_r(&date, &tm) == NULL) {
-		(void) printf ("time_t: %lu\n", (unsigned long)date);
+		puts(_("future"));
 		return;
 	}
 
