@@ -38,7 +38,7 @@ day_to_str(size_t size, char buf[size], long day)
 		return;
 	}
 
-	if (gmtime_r(&date, &tm) == NULL) {
+	if (localtime_r(&date, &tm) == NULL) {
 		strtcpy(buf, "future", size);
 		return;
 	}
