@@ -242,7 +242,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	if (gmtime_r(&date, &tm) == NULL) {
+	if (localtime_r(&date, &tm) == NULL) {
 		(void) printf ("time_t: %lu\n", (unsigned long)date);
 		return;
 	}
