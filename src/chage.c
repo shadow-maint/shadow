@@ -229,26 +229,10 @@ static int new_fields (void)
 static void
 print_day_as_date(long day)
 {
-	char       buf[80];
-	time_t     date;
-	struct tm  tm;
+	char  buf[80];
 
-	if (day < 0) {
-		puts(_("never"));
-		return;
-	}
-	if (__builtin_mul_overflow(day, DAY, &date)) {
-		puts(_("future"));
-		return;
-	}
-
-	if (localtime_r(&date, &tm) == NULL) {
-		puts(_("future"));
-		return;
-	}
-
-	STRFTIME(buf, iflg ? "%F" : "%x", &tm);
-	(void) puts (buf);
+	DAY_TO_STR(buf, day, iflg);
+	puts(buf);
 }
 
 
