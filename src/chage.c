@@ -247,7 +247,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	STRFTIME(buf, iflg ? "%F" : "%b %d, %Y", &tm);
+	STRFTIME(buf, iflg ? "%F" : "%x", &tm);
 	(void) puts (buf);
 }
 
