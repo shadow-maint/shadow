@@ -1201,7 +1201,7 @@ int main (int argc, char **argv)
 			struct tm  tm;
 
 			localtime_r(&ll_time, &tm);
-			STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y", &tm);
+			STRFTIME(ptime, "%c", &tm);
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
