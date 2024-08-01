@@ -13,7 +13,7 @@
 #include "sizeof.h"
 
 
-#define STRFTIME(dst, fmt, ...)  strftime(dst, NITEMS(dst), fmt, __VA_ARGS__)
+#define STRFTIME(dst, fmt, tm)  strftime(dst, NITEMS(dst), fmt, tm)
 
 
 #endif  // include guard
