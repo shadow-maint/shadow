@@ -9,6 +9,8 @@
 
 #include <config.h>
 
+#include <stdbool.h>
+#include <stddef.h>
 #include <time.h>
 
 #include "defines.h"
@@ -16,14 +18,14 @@
 #include "string/strcpy/strtcpy.h"
 
 
-#define DAY_TO_STR(str, day)   day_to_str(NITEMS(str), str, day)
+#define DAY_TO_STR(str, day, iso)   day_to_str(NITEMS(str), str, day, iso)
 
 
-inline void day_to_str(size_t size, char buf[size], long day);
+inline void day_to_str(size_t size, char buf[size], long day, bool iso);
 
 
 inline void
-day_to_str(size_t size, char buf[size], long day)
+day_to_str(size_t size, char buf[size], long day, bool iso)
 {
 	time_t     date;
 	struct tm  tm;
@@ -43,7 +45,7 @@ day_to_str(size_t size, char buf[size], long day)
 		return;
 	}
 
-	if (strftime(buf, size, "%F", &tm) == 0)
+	if (strftime(buf, size, iso ? "%F" : "%x", &tm) == 0)
 		strtcpy(buf, "future", size);
 }
 
