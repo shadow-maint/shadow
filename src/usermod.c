@@ -591,8 +591,8 @@ static void new_spent (struct spwd *spent)
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
 
-		DAY_TO_STR(new_exp, user_newexpire);
-		DAY_TO_STR(old_exp, user_expire);
+		DAY_TO_STR(new_exp, user_newexpire, 1);
+		DAY_TO_STR(old_exp, user_expire, 1);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "changing expiration date",

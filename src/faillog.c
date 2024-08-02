@@ -172,7 +172,7 @@ static void print_one (/*@null@*/const struct passwd *pw, bool force)
 		fprintf (stderr, "Cannot read time from faillog.\n");
 		return;
 	}
-	STRFTIME(ptime, "%D %H:%M:%S %z", tm);
+	STRFTIME(ptime, "%c", tm);
 	cp = ptime;
 
 	printf ("%-9s   %5d    %5d   ",

@@ -161,7 +161,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 	if (tm == NULL) {
 		cp = "(unknown)";
 	} else {
-		STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y", tm);
+		STRFTIME(ptime, "%c", tm);
 		cp = ptime;
 	}
 	if (ll.ll_time == (time_t) 0) {
