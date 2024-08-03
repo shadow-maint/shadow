@@ -754,7 +754,7 @@ msgid "future"
 msgstr ""
 
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Último cambio de contraseña\t\t\t\t\t:"
+msgstr "Último cambio de contraseña\t\t\t\t\t: "
 
 msgid "password must be changed"
 msgstr "se debe cambiar la contraseña"

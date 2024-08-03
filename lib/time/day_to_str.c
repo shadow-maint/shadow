@@ -7,5 +7,8 @@
 
 #include "time/day_to_str.h"
 
+#include <stdbool.h>
+#include <stddef.h>
 
-extern inline void day_to_str(size_t size, char buf[size], long day);
+
+extern inline void day_to_str(size_t size, char buf[size], long day, bool iso);

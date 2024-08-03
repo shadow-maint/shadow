@@ -182,7 +182,7 @@ static int new_fields (void)
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
 		strcpy(buf, "-1");
 	else
-		DAY_TO_STR(buf, lstchgdate);
+		DAY_TO_STR(buf, lstchgdate, 1);
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
@@ -208,7 +208,7 @@ static int new_fields (void)
 	if (-1 == expdate || LONG_MAX / DAY < expdate)
 		strcpy(buf, "-1");
 	else
-		DAY_TO_STR(buf, expdate);
+		DAY_TO_STR(buf, expdate, 1);
 
 	change_field (buf, sizeof buf,
 	              _("Account Expiration Date (YYYY-MM-DD)"));
@@ -229,26 +229,10 @@ static int new_fields (void)
 static void
 print_day_as_date(long day)
 {
-	char       buf[80];
-	time_t     date;
-	struct tm  tm;
+	char  buf[80];
 
-	if (day < 0) {
-		puts(_("never"));
-		return;
-	}
-	if (__builtin_mul_overflow(day, DAY, &date)) {
-		puts(_("future"));
-		return;
-	}
-
-	if (localtime_r(&date, &tm) == NULL) {
-		(void) printf ("time_t: %lu\n", (unsigned long)date);
-		return;
-	}
-
-	STRFTIME(buf, iflg ? "%Y-%m-%d" : "%b %d, %Y", &tm);
-	(void) puts (buf);
+	DAY_TO_STR(buf, day, iflg);
+	puts(buf);
 }
 
 
