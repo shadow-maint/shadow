@@ -45,7 +45,7 @@ day_to_str(size_t size, char buf[size], long day, bool iso)
 		return;
 	}
 
-	if (strftime(buf, size, iso ? "%F" : "%x", &tm) == 0)
+	if (strftime(buf, size, iso ? "%FZ" : "%x UTC", &tm) == 0)
 		strtcpy(buf, "future", size);
 }
 
