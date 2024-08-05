@@ -24,8 +24,6 @@
 /usr/sbin
 /usr/sbin/chgpasswd
 /usr/sbin/chpasswd
-/usr/sbin/cpgr
-/usr/sbin/cppw
 /usr/sbin/groupadd
 /usr/sbin/groupdel
 /usr/sbin/groupmems
@@ -245,8 +243,6 @@
 /usr/share/man/man8
 /usr/share/man/man8/chgpasswd.8.gz
 /usr/share/man/man8/chpasswd.8.gz
-/usr/share/man/man8/cpgr.8.gz
-/usr/share/man/man8/cppw.8.gz
 /usr/share/man/man8/groupadd.8.gz
 /usr/share/man/man8/groupdel.8.gz
 /usr/share/man/man8/groupmems.8.gz

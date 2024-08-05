@@ -4,7 +4,7 @@
 # Markus Hiereth <translation@hiereth.de>, 2021, 2022, 2023
 # Remark
 # This message catalogue does not contain strings for manpages
-# subuid(5), subgid(5), cpgr(8), cppw(8),
+# subuid(5), subgid(5),
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages\n"
