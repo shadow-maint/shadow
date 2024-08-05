@@ -50,7 +50,7 @@ sgetpwent(const char *buf)
 	 * the password structure remain valid.
 	 */
 
-	if (strlen (buf) >= sizeof pwdbuf) {
+	if (strlen(buf) >= sizeof(pwdbuf)) {
 		fprintf (shadow_logfd,
 		         "%s: Too long passwd entry encountered, file corruption?\n",
 		         shadow_progname);
@@ -75,8 +75,11 @@ sgetpwent(const char *buf)
 	 * There must be exactly NFIELDS colon separated fields or
 	 * the entry is invalid.  Also, the UID and GID must be non-blank.
 	 */
-
-	if (i != NFIELDS || *fields[2] == '\0' || *fields[3] == '\0')
+	if (i != NFIELDS)
+		return NULL;
+	if (strcmp(fields[2], "") == 0)
+		return NULL;
+	if (strcmp(fields[3], "") == 0)
 		return NULL;
 
 	/*
