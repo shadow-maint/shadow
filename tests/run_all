@@ -233,17 +233,6 @@ run_test ./convtools/31_pwconv_usage/pwconv.test
 run_test ./convtools/32_pwconv_usage_extra_arg/pwconv.test
 run_test ./convtools/33_grpunconv_usage/grpunconv.test
 run_test ./convtools/34_grpunconv_usage_extra_arg/grpunconv.test
-run_test ./cptools/02_cppw_usage/cppw.test
-run_test ./cptools/03_cppw_usage_invalid_option/cppw.test
-run_test ./cptools/04_cppw_no_file_argument/cppw.test
-run_test ./cptools/05_cppw_2_files/cppw.test
-run_test ./cptools/06_cppw_no_file/cppw.test
-run_test ./cptools/07_cppw_locked_passwd/cppw.test
-run_test ./cptools/08_cppw-p/cppw.test
-run_test ./cptools/09_cppw-g/cppw.test
-run_test ./cptools/10_cppw-g-s/cppw.test
-run_test ./cptools/11_cppw-p-s/cppw.test
-run_test ./cptools/12_cppw-s_no_shadow_file/cppw.test
 run_test ./debian/01/run
 run_test ./grouptools/chgpasswd/01_chgpasswd_invalid_group/chgpasswd.test
 run_test ./grouptools/chgpasswd/02_chgpasswd_multiple_groups/chgpasswd.test
@@ -845,10 +834,6 @@ run_test ./usertools/usermod/49_usermod_change_gid+move_homedir_other_device/use
 run_test ./usertools/usermod/50_usermod_change_uid+move_homedir/usermod.test
 run_test ./usertools/usermod/51_usermod_change_gid+move_homedir/usermod.test
 run_test ./usertools/usermod/52_usermod_move_homedir_symlink/usermod.test
-run_test ./cptools/01/run1
-run_test ./cptools/01/run2
-run_test ./cptools/01/run3
-run_test ./cptools/01/run4
 run_test ./cktools/01/run1
 run_test ./cktools/01/run2
 run_test ./cktools/02_pwck_sort/pwck.test
@@ -1060,9 +1045,6 @@ if [ "$USE_PAM" = "yes" ]; then
 fi
 run_test ./failures/chsh/01_chsh_open_passwd_failure/chsh.test
 run_test ./failures/chsh/02_chsh_rename_passwd_failure/chsh.test
-run_test ./failures/cppw/01_cppw_open_passwd_in_failure/cppw.test
-run_test ./failures/cppw/02_cppw_open_passwd_backup_failure/cppw.test
-run_test ./failures/cppw/03_cppw_rename_passwd_failure/cppw.test
 run_test ./failures/gpasswd/01_gpasswd_group_open_failure/gpasswd.test
 run_test ./failures/gpasswd/02_gpasswd_gshadow_open_failure/gpasswd.test
 run_test ./failures/gpasswd/03_gpasswd-a_group_open_failure/gpasswd.test
