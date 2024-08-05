@@ -201,7 +201,8 @@ void set_env (int argc, char *const *argv)
  * but... I feel better with that silly precaution. -j.
  */
 
-void sanitize_env (void)
+void
+sanitize_env(void)
 {
 	char **envp = environ;
 	const char *const *bad;
@@ -225,9 +226,9 @@ void sanitize_env (void)
 			if (strncmp (*cur, *bad, strlen (*bad)) != 0) {
 				continue;
 			}
-			if (strchr (*cur, '/') == NULL) {
+			if (strchr(*cur, '/') == NULL)
 				continue;	/* OK */
-			}
+
 			for (move = cur; NULL != *move; move++) {
 				*move = *(move + 1);
 			}

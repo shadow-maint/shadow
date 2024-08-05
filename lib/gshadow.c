@@ -156,7 +156,7 @@ void endsgent (void)
 	}
 
 	if (fgetsx(buf, buflen, fp) == buf) {
-		while (   ((cp = strrchr (buf, '\n')) == NULL)
+		while (   (strrchr(buf, '\n') == NULL)
 		       && (feof (fp) == 0)) {
 			size_t len;
 

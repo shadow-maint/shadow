@@ -15,6 +15,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
@@ -153,7 +154,7 @@ main(int argc, char *argv[])
 		 * it will work with standard getpass() (no NULL on EOF).
 		 * --marekm
 		 */
-		if ((NULL == pass) || ('\0' == *pass)) {
+		if (NULL == pass || strcmp(pass, "") == 0) {
 			erase_pass (pass);
 			(void) puts ("");
 #ifdef	TELINIT

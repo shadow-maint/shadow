@@ -43,12 +43,11 @@ static int portcmp (const char *pattern, const char *port)
 		port++;
 	}
 
-	if (('\0' == *pattern) && ('\0' == *port)) {
+	if (strcmp(pattern, "") == 0 && strcmp(port, "") == 0)
 		return 0;
-	}
-	if (('S' == orig[0]) && ('U' == orig[1]) && ('\0' == orig[2])) {
+
+	if (strcmp(orig, "SU") == 0)
 		return 1;
-	}
 
 	return (*pattern == '*') ? 0 : 1;
 }
@@ -204,7 +203,7 @@ next:
 
 	cp = field;
 
-	if ('\0' == *cp) {
+	if (strcmp(field, "") == 0) {
 		port.pt_times = 0;
 		return &port;
 	}
@@ -215,7 +214,7 @@ next:
 	 * Get the next comma separated entry
 	 */
 
-	for (j = 0; ('\0' != *cp) && (j < PORT_TIMES); j++) {
+	for (j = 0; strcmp(cp, "") == 0 && (j < PORT_TIMES); j++) {
 
 		/*
 		 * Start off with no days of the week

@@ -18,6 +18,7 @@
 
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -43,12 +44,9 @@ static int isgrp (const char *, const char *);
 static int lines = 0;
 
 
-int check_su_auth (const char *actual_id,
-                   const char *wanted_id,
-                   bool su_to_root)
+int
+check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 {
-	int posn;
-	const char field[] = ":";
 	FILE *authfile_fd;
 	char temp[1024];
 	char *to_users;
@@ -73,6 +71,8 @@ int check_su_auth (const char *actual_id,
 	}
 
 	while (fgets (temp, sizeof (temp), authfile_fd) != NULL) {
+		char  *p;
+
 		lines++;
 
 		if (stpsep(temp, "\n") == NULL) {
@@ -84,17 +84,14 @@ int check_su_auth (const char *actual_id,
 
 		stpcpy(strrspn(temp, " \t"), "");
 
-		posn = 0;
-		while (temp[posn] == ' ' || temp[posn] == '\t')
-			posn++;
-
-		if (temp[posn] == '#' || temp[posn] == '\0') {
+		p = stpspn(temp, " \t");
+		if (*p == '#' || *p == '\0')
 			continue;
-		}
-		if (!(to_users = strtok (temp + posn, field))
-		    || !(from_users = strtok (NULL, field))
-		    || !(action = strtok (NULL, field))
-		    || strtok (NULL, field)) {
+
+		to_users = strsep(&p, ":");
+		from_users = strsep(&p, ":");
+		action = strsep(&p, ":");
+		if (action == NULL || p != NULL) {
 			SYSLOG ((LOG_ERR,
 				 "%s, line %d. Bad number of fields.\n",
 				 SUAUTHFILE, lines));
@@ -138,15 +135,14 @@ int check_su_auth (const char *actual_id,
 	return NOACTION;
 }
 
-static int applies (const char *single, char *list)
+static int
+applies(const char *single, char *list)
 {
-	const char split[] = ", ";
 	char *tok;
 
 	int state = 0;
 
-	for (tok = strtok (list, split); tok != NULL;
-	     tok = strtok (NULL, split)) {
+	while (NULL != (tok = strsep(&list, ", "))) {
 
 		if (!strcmp (tok, "ALL")) {
 			if (state != 0) {

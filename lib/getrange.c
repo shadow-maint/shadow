@@ -9,6 +9,7 @@
 
 #include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "atoi/a2i/a2u.h"
 #include "defines.h"
@@ -53,7 +54,7 @@ getrange(const char *range,
 		return 0;  /* <long> */
 
 	case '-':
-		if ('\0' == *end)
+		if (strcmp(end, "") == 0)
 			return 0;  /* <long>- */
 parse_max:
 		if (!isdigit((unsigned char) *end))
