@@ -1,3 +1,0 @@
-fopen64 FAILURE data/passwd r ...
-cppw: data/passwd: Input/output error
-cppw: /etc/passwd is unchanged

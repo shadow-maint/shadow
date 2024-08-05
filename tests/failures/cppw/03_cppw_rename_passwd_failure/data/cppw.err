@@ -1,3 +1,0 @@
-rename FAILURE /etc/passwd.new /etc/passwd
-cppw: can't copy /etc/passwd.new: Input/output error)
-cppw: /etc/passwd is unchanged
