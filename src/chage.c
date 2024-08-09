@@ -247,6 +247,11 @@ print_day_as_date(long day)
 		return;
 	}
 
+	if (!iflg) {
+		fputs(_("This date format is deprecated; use the '-i' option.\n"),
+		      stderr);
+	}
+
 	STRFTIME(buf, iflg ? "%F" : "%b %d, %Y", &tm);
 	(void) puts (buf);
 }
