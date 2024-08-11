@@ -42,7 +42,6 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "groupio.h"
-#include "memzero.h"
 #include "must_be.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -63,6 +62,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"

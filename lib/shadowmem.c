@@ -18,8 +18,9 @@
 #include <stdio.h>
 
 #include "alloc/calloc.h"
-#include "memzero.h"
 #include "shadowio.h"
+#include "string/memset/memzero.h"
+
 
 /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent)
 {

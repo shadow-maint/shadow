@@ -16,9 +16,10 @@
 
 #include "alloc/calloc.h"
 #include "defines.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "pwio.h"
+#include "string/memset/memzero.h"
+
 
 /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent)
 {

@@ -29,7 +29,6 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
-#include "memzero.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -38,6 +37,7 @@
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 #include "string/strtok/stpsep.h"
 
 

@@ -22,11 +22,11 @@
 #include "atoi/str2i/str2s.h"
 #include "defines.h"
 #include "faillog.h"
-#include "memzero.h"
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 #include "string/strftime.h"
 
 

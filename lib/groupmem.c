@@ -14,10 +14,11 @@
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "groupio.h"
+#include "string/memset/memzero.h"
+
 
 /*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent)
 {

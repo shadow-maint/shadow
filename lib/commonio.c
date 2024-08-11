@@ -27,7 +27,6 @@
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"
-#include "memzero.h"
 #include "nscd.h"
 #ifdef WITH_TCB
 #include <tcb.h>
@@ -35,6 +34,7 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sssd.h"
+#include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strtok/stpsep.h"
 
