@@ -18,8 +18,8 @@
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
-#include "memzero.h"
 #include "prototypes.h"
+#include "string/memset/memzero.h"
 #include "string/strtok/stpsep.h"
 
 

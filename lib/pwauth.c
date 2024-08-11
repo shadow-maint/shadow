@@ -21,10 +21,10 @@
 
 #include "agetpass.h"
 #include "defines.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
+#include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 
 #ifdef SKEY

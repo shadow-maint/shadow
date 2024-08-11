@@ -16,10 +16,10 @@
 #include <stdio.h>
 
 #include "attr.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strdup/xstrdup.h"
 

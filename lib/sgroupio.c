@@ -20,8 +20,9 @@
 #include "defines.h"
 #include "commonio.h"
 #include "getdef.h"
-#include "memzero.h"
 #include "sgroupio.h"
+#include "string/memset/memzero.h"
+
 
 /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent)
 {

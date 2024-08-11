@@ -32,12 +32,12 @@
 #include "faillog.h"
 #include "failure.h"
 #include "getdef.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "pwauth.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"

@@ -27,10 +27,10 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
-#include "memzero.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 #include "string/strftime.h"
 
 

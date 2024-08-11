@@ -35,7 +35,7 @@
 #include "atoi/str2i/str2i.h"
 #include "atoi/str2i/str2s.h"
 #include "atoi/str2i/str2u.h"
-#include "memzero.h"
+#include "string/memset/memzero.h"
 #include "typetraits.h"
 
 

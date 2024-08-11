@@ -19,9 +19,9 @@
 
 #include "alloc/calloc.h"
 #include "attr.h"
-#include "memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/memset/memzero.h"
 
 /*@null@*/ /*@only@*/static const char *non_interactive_password = NULL;
 static int ni_conv (int num_msg,

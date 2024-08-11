@@ -124,8 +124,6 @@ libshadow_la_SOURCES = \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \
-	memzero.c \
-	memzero.h \
 	motd.c \
 	must_be.h \
 	myname.c \
@@ -174,6 +172,8 @@ libshadow_la_SOURCES = \
 	spawn.c \
 	sssd.c \
 	sssd.h \
+	string/memset/memzero.c \
+	string/memset/memzero.h \
 	string/sprintf/snprintf.c \
 	string/sprintf/snprintf.h \
 	string/sprintf/stpeprintf.c \

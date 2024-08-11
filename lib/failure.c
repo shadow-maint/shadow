@@ -18,8 +18,8 @@
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
-#include "memzero.h"
 #include "prototypes.h"
+#include "string/memset/memzero.h"
 #include "string/strftime.h"
 #include "string/strcpy/strtcpy.h"
 
