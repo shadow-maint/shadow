@@ -353,7 +353,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	const char *method;
 	unsigned long rounds = 0;
 
-	bzero(result, GENSALT_SETTING_SIZE);
+	bzero(result, countof(result));
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "DES";
 
@@ -392,7 +392,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 			 method);
 		salt_len = MAX_SALT_SIZE;
 		rounds = 0;
-		bzero(result, GENSALT_SETTING_SIZE);
+		bzero(result, countof(result));
 	}
 
 #if USE_XCRYPT_GENSALT
@@ -402,7 +402,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	 */
 	if (streq(result, "")) {
 		/* Avoid -Wunused-but-set-variable. */
-		salt_len = GENSALT_SETTING_SIZE - 1;
+		salt_len = countof(result) - 1;
 		rounds = 0;
 		memset(result, '.', salt_len);
 		stpcpy(&result[salt_len], "");
