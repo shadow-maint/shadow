@@ -15,8 +15,8 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
-#include "sizeof.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
@@ -77,7 +77,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * See if this tty is listed in the console file.
 	 */
 
-	while (fgets(buf, countof(buf), fp) != NULL) {
+	while (fgets_a(buf, fp) != NULL) {
 		stpsep(buf, "\n");
 		if (streq(buf, tty)) {
 			(void) fclose (fp);

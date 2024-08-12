@@ -15,25 +15,26 @@
 
 #ident "$Id$"
 
-#include <assert.h>
+#include <ctype.h>
+#include <pwd.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
-#include <ctype.h>
 
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "shadowlog.h"
-#include "sizeof.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
+
+#include <assert.h>
 
 
 #ifndef USE_PAM
@@ -57,7 +58,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets(buf, countof(buf), fp) != NULL) {
+	while (fgets_a(buf, fp) != NULL) {
 		if (stpsep(buf, "\n") == NULL)
 			break;
 
