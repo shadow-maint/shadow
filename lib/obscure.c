@@ -112,12 +112,9 @@ static /*@observer@*//*@null@*/const char *password_check (
 	} else if (strstr (wrapped, newmono) != NULL) {
 		msg = _("rotated");
 	}
-	strzero (newmono);
-	strzero (oldmono);
-	strzero (wrapped);
-	free (newmono);
-	free (oldmono);
-	free (wrapped);
+	free(strzero(newmono));
+	free(strzero(oldmono));
+	free(strzero(wrapped));
 
 	return msg;
 }
