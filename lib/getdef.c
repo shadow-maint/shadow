@@ -157,7 +157,6 @@ static struct itemdef def_table[] = {
 	{NULL, NULL}
 };
 
-#define NUMKNOWNDEFS	(sizeof(knowndef_table)/sizeof(knowndef_table[0]))
 static struct itemdef knowndef_table[] = {
 #ifdef USE_PAM
 	PAMDEFS
