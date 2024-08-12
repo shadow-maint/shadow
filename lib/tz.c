@@ -19,8 +19,8 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
-#include "sizeof.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -38,7 +38,7 @@
 
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
-	    || (fgets(tzbuf, countof(tzbuf), fp) == NULL)) {
+	    || (fgets_a(tzbuf, fp) == NULL)) {
 		result = "TZ=CST6CDT";
 	} else {
 		stpsep(tzbuf, "\n");
