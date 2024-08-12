@@ -31,6 +31,7 @@
 #include <sys/resource.h>
 
 #include "atoi/a2i.h"
+#include "sizeof.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -366,7 +367,7 @@ static int setup_user_limits (const char *uname)
 	 *
 	 * FIXME: a better (smarter) checking should be done
 	 */
-	while (fgets (buf, 1024, fil) != NULL) {
+	while (fgets(buf, countof(buf), fil) != NULL) {
 		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
 			continue;
 		}
