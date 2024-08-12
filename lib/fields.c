@@ -15,8 +15,10 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/param.h>
 
 #include "prototypes.h"
+#include "sizeof.h"
 #include "string/ctype/strisascii/strisprint.h"
 #include "string/ctype/strchrisascii/strchriscntrl.h"
 #include "string/strcmp/streq.h"
@@ -60,16 +62,12 @@ valid_field_(const char *field, const char *illegal)
 void
 change_field(char *buf, size_t maxsize, const char *prompt)
 {
-	char newf[200];
 	char *cp;
-
-	if (maxsize > sizeof(newf)) {
-		maxsize = sizeof(newf);
-	}
+	char  newf[MIN(200, maxsize)];
 
 	printf ("\t%s [%s]: ", prompt, buf);
 	(void) fflush (stdout);
-	if (fgets(newf, maxsize, stdin) == NULL)
+	if (fgets(newf, countof(newf), stdin) == NULL)
 		return;
 
 	if (stpsep(newf, "\n") == NULL)
