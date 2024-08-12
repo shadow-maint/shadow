@@ -38,6 +38,7 @@
 #include "pwauth.h"
 #include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -649,7 +650,7 @@ int main (int argc, char **argv)
 		unsigned int  failcount = 0;
 
 		/* Make the login prompt look like we want it */
-		if (gethostname(hostn, sizeof(hostn)) == 0) {
+		if (gethostname(hostn, countof(hostn)) == 0) {
 			stprintf_a(loginprompt, _("%s login: "), hostn);
 		} else {
 			strtcpy_a(loginprompt, _("login: "));
