@@ -18,6 +18,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strprefix.h"
@@ -163,7 +164,7 @@ void set_env (int argc, char *const *argv)
 	char  *cp;
 
 	for (; argc > 0; argc--, argv++) {
-		if (strlen(*argv) >= sizeof(variable)) {
+		if (strlen(*argv) >= countof(variable)) {
 			continue;	/* ignore long entries */
 		}
 
