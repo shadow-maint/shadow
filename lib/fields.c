@@ -60,10 +60,10 @@ valid_field_(const char *field, const char *illegal)
  * current value.
  */
 void
-change_field(char *buf, size_t maxsize, const char *prompt)
+change_field(char *buf, size_t n, const char *prompt)
 {
 	char *cp;
-	char  newf[MIN(200, maxsize)];
+	char  newf[MIN(200, n)];
 
 	printf ("\t%s [%s]: ", prompt, buf);
 	(void) fflush (stdout);
