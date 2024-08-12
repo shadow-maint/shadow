@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "sizeof.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
@@ -74,7 +75,7 @@ bool hushed (const char *username)
 	if (NULL == fp) {
 		return false;
 	}
-	for (found = false; !found && (fgets(buf, sizeof(buf), fp) != NULL);) {
+	for (found = false; !found && (fgets(buf, countof(buf), fp) != NULL);) {
 		stpsep(buf, "\n");
 		found = streq(buf, pw->pw_shell) ||
 		        streq(buf, pw->pw_name);

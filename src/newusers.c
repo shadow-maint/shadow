@@ -50,6 +50,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -1049,7 +1050,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets(buf, sizeof(buf), stdin) != NULL) {
+	while (fgets(buf, countof(buf), stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),

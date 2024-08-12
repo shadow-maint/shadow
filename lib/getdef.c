@@ -553,7 +553,7 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets(buf, countof(buf), fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.

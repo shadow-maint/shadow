@@ -20,6 +20,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "sizeof.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -37,7 +38,7 @@
 
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
-	    || (fgets(tzbuf, sizeof(tzbuf), fp) == NULL)) {
+	    || (fgets(tzbuf, countof(tzbuf), fp) == NULL)) {
 		result = "TZ=CST6CDT";
 	} else {
 		stpsep(tzbuf, "\n");

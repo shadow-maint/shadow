@@ -27,6 +27,7 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -56,7 +57,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets(buf, countof(buf), fp) != NULL) {
 		if (stpsep(buf, "\n") == NULL)
 			break;
 
