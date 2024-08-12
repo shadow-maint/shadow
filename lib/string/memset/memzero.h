@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2022-2023, Christian Göttsche <cgzones@googlemail.com>
-// SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -19,11 +19,11 @@
 #define MEMZERO(arr)  memzero(arr, SIZEOF_ARRAY(arr))
 
 
-inline void memzero(void *ptr, size_t size);
-inline void strzero(char *s);
+inline void *memzero(void *ptr, size_t size);
+inline char *strzero(char *s);
 
 
-inline void
+inline void *
 memzero(void *ptr, size_t size)
 {
 #if defined(HAVE_MEMSET_EXPLICIT)
@@ -34,13 +34,14 @@ memzero(void *ptr, size_t size)
 	bzero(ptr, size);
 	__asm__ __volatile__ ("" : : "r"(ptr) : "memory");
 #endif
+	return ptr;
 }
 
 
-inline void
+inline char *
 strzero(char *s)
 {
-	memzero(s, strlen(s));
+	return memzero(s, strlen(s));
 }
 
 
