@@ -83,10 +83,9 @@ void
 gr_free(/*@only@*/struct group *grent)
 {
 	free (grent->gr_name);
-	if (NULL != grent->gr_passwd) {
-		strzero (grent->gr_passwd);
-		free (grent->gr_passwd);
-	}
+	if (NULL != grent->gr_passwd)
+		free(strzero(grent->gr_passwd));
+
 	gr_free_members(grent);
 	free (grent);
 }
