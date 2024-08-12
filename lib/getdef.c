@@ -25,6 +25,7 @@
 #include "atoi/a2i.h"
 #include "defines.h"
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sizeof.h"
@@ -553,7 +554,7 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets(buf, countof(buf), fp) != NULL) {
+	while (fgets_a(buf, fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.
