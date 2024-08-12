@@ -28,6 +28,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
@@ -128,7 +129,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	if (NULL == sfile) {
 		return 0;
 	}
-	while (fgets(line, sizeof(line), sfile) != NULL) {
+	while (fgets(line, countof(line), sfile) != NULL) {
 		if (strprefix(line, "Uid:\t")) {
 			unsigned long ruid, euid, suid;
 

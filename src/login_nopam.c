@@ -100,7 +100,7 @@ login_access(const char *user, const char *from)
 	if (NULL != fp) {
 		intmax_t lineno = 0;	/* for diagnostics */
 		while (   !match
-		       && (fgets(line, sizeof(line), fp) != NULL))
+		       && (fgets(line, countof(line), fp) != NULL))
 		{
 			char  *p;
 

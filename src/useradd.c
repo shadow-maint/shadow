@@ -62,6 +62,7 @@
 #endif
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
@@ -353,7 +354,7 @@ get_defaults(const struct option_flags *flags)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets(buf, countof(buf), fp) != NULL) {
 		stpsep(buf, "\n");
 
 		cp = stpsep(buf, "=");
@@ -597,7 +598,7 @@ set_defaults(void)
 		goto skip;
 	}
 
-	while (fgets(buf, sizeof(buf), ifp) != NULL) {
+	while (fgets(buf, countof(buf), ifp) != NULL) {
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {
