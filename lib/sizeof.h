@@ -27,6 +27,7 @@
 
 // sizeof_a - sizeof array
 #define sizeof_a(a)          (countof(a) * sizeof((a)[0]))
+#define endof(a)             (&(a)[countof(a)])
 #define STRLEN(s)            (countof("" s "") - 1)
 
 
