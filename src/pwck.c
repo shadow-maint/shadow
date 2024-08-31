@@ -471,9 +471,14 @@ static void check_pw_file (int *errors, bool *changed)
 		 * Check for invalid usernames.  --marekm
 		 */
 
-		if (!is_valid_user_name (pwd->pw_name)) {
-			printf (_("invalid user name '%s': use --badname to ignore\n"),
-					pwd->pw_name);
+		if (!is_valid_user_name(pwd->pw_name)) {
+			if (errno == EINVAL) {
+				printf(_("invalid user name '%s': use --badname to ignore\n"),
+				       pwd->pw_name);
+			} else {
+				printf(_("invalid user name '%s'\n"),
+				       pwd->pw_name);
+			}
 			*errors += 1;
 		}
 

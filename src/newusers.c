@@ -386,10 +386,16 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	struct passwd pwent;
 
 	/* Check if this is a valid user name */
-	if (!is_valid_user_name (name)) {
-		fprintf (stderr,
-		         _("%s: invalid user name '%s': use --badname to ignore\n"),
-		         Prog, name);
+	if (!is_valid_user_name(name)) {
+		if (errno == EINVAL) {
+			fprintf(stderr,
+			        _("%s: invalid user name '%s': use --badname to ignore\n"),
+			        Prog, name);
+		} else {
+			fprintf(stderr,
+			        _("%s: invalid user name '%s'\n"),
+			        Prog, name);
+		}
 		return -1;
 	}
 

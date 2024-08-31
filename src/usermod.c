@@ -1116,10 +1116,16 @@ process_flags(int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'l':
-				if (!is_valid_user_name (optarg)) {
-					fprintf (stderr,
-					         _("%s: invalid user name '%s': use --badname to ignore\n"),
-					         Prog, optarg);
+				if (!is_valid_user_name(optarg)) {
+					if (errno == EINVAL) {
+						fprintf(stderr,
+						        _("%s: invalid user name '%s': use --badname to ignore\n"),
+						        Prog, optarg);
+					} else {
+						fprintf(stderr,
+						        _("%s: invalid user name '%s'\n"),
+						        Prog, optarg);
+					}
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
