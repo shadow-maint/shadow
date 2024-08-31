@@ -12,6 +12,9 @@
  * return values:
  *   true  - OK
  *   false - bad name
+ * errors:
+ *   EINVAL	Invalid name characters or sequences
+ *   EOVERFLOW	Name longer than maximum size
  */
 
 
@@ -49,7 +52,8 @@ login_name_max_size(void)
 }
 
 
-static bool is_valid_name (const char *name)
+static bool
+is_valid_name(const char *name)
 {
 	if (allow_bad_names) {
 		return true;
@@ -73,7 +77,9 @@ static bool is_valid_name (const char *name)
 	      (*name >= 'A' && *name <= 'Z') ||
 	      (*name >= '0' && *name <= '9') ||
 	      *name == '_' ||
-	      *name == '.')) {
+	      *name == '.'))
+	{
+		errno = EINVAL;
 		return false;
 	}
 
@@ -87,34 +93,46 @@ static bool is_valid_name (const char *name)
 		      *name == '.' ||
 		      *name == '-' ||
 		      (*name == '$' && name[1] == '\0')
-		     )) {
+		     ))
+		{
+			errno = EINVAL;
 			return false;
 		}
 		numeric &= isdigit(*name);
 	}
 
-	return !numeric;
+	if (numeric) {
+		errno = EINVAL;
+		return false;
+	}
+
+	return true;
 }
 
 
 bool
 is_valid_user_name(const char *name)
 {
-	if (strlen(name) >= login_name_max_size())
+	if (strlen(name) >= login_name_max_size()) {
+		errno = EOVERFLOW;
 		return false;
+	}
 
 	return is_valid_name(name);
 }
 
 
-bool is_valid_group_name (const char *name)
+bool
+is_valid_group_name(const char *name)
 {
 	/*
 	 * Arbitrary limit for group names.
 	 * HP-UX 10 limits to 16 characters
 	 */
 	if (   (GROUP_NAME_MAX_LENGTH > 0)
-	    && (strlen (name) > GROUP_NAME_MAX_LENGTH)) {
+	    && (strlen (name) > GROUP_NAME_MAX_LENGTH))
+	{
+		errno = EOVERFLOW;
 		return false;
 	}
 
