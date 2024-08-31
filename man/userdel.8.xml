@@ -77,17 +77,9 @@
 	</term>
 	<listitem>
 	  <para>
-	    This option forces the removal of the user account, even if the
-	    user is still
-	    logged in. It also forces <command>userdel</command> to remove
-	    the user's home directory and mail spool, even if another
-	    user uses the same home directory or if the mail spool is not
-	    owned by the specified user.  If
-	    <option>USERGROUPS_ENAB</option> is defined to <emphasis
-	    remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>
-	    and if a group exists with the same name as the deleted user,
-	    then this group will be removed, even if it is still the primary
-	    group of another user.
+	    This option forces the removal of the user account
+	    and any other requested actions,
+	    skipping any safety checks.
 	  </para>
 	  <para>
 	    <emphasis>Note:</emphasis> This option is dangerous and may leave
