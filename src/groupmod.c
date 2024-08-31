@@ -351,7 +351,8 @@ static void check_new_gid (void)
  *	check_new_name() insures that the new name does not exist already.
  *	You can't have the same name twice, period.
  */
-static void check_new_name (void)
+static void
+check_new_name(void)
 {
 	/*
 	 * Make sure they are actually changing the name.
@@ -361,29 +362,22 @@ static void check_new_name (void)
 		return;
 	}
 
-	if (is_valid_group_name (group_newname)) {
-
-		/*
-		 * If the entry is found, too bad.
-		 */
-		/* local, no need for xgetgrnam */
-		if (prefix_getgrnam (group_newname) != NULL) {
-			fprintf (stderr,
-			         _("%s: group '%s' already exists\n"),
-			         Prog, group_newname);
-			exit (E_NAME_IN_USE);
-		}
-		return;
+	if (!is_valid_group_name(group_newname)) {
+		fprintf(stderr,
+			_("%s: invalid group name '%s'\n"),
+			Prog, group_newname);
+		exit(E_BAD_ARG);
 	}
 
-	/*
-	 * All invalid group names land here.
-	 */
+	/* local, no need for xgetgrnam */
+	if (prefix_getgrnam(group_newname) != NULL) {
+		fprintf(stderr,
+			_("%s: group '%s' already exists\n"),
+			Prog, group_newname);
+		exit(E_NAME_IN_USE);
+	}
 
-	fprintf (stderr,
-	         _("%s: invalid group name '%s'\n"),
-	         Prog, group_newname);
-	exit (E_BAD_ARG);
+	return;
 }
 
 /*

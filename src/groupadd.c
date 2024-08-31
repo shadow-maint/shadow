@@ -236,20 +236,17 @@ static void grp_update (void)
  *	check_new_name() insures that the new name doesn't contain any
  *	illegal characters.
  */
-static void check_new_name (void)
+static void
+check_new_name(void)
 {
-	if (is_valid_group_name (group_name)) {
-		return;
+	if (!is_valid_group_name(group_name)) {
+		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
+			Prog, group_name);
+
+		exit(E_BAD_ARG);
 	}
 
-	/*
-	 * All invalid group names land here.
-	 */
-
-	fprintf (stderr, _("%s: '%s' is not a valid group name\n"),
-	         Prog, group_name);
-
-	exit (E_BAD_ARG);
+	return;
 }
 
 /*
