@@ -37,6 +37,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
 #ifndef USE_PAM
@@ -813,7 +814,8 @@ save_caller_context(void)
  *	the values that the user will be created with accordingly. The
  *	values are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void
+process_flags(int argc, char **argv)
 {
 	int c;
 	static struct option long_options[] = {
@@ -861,7 +863,7 @@ static void process_flags (int argc, char **argv)
 	if (optind < argc) {
 		STRTCPY(name, argv[optind++]);	/* use this login id */
 	}
-	if ('\0' == name[0]) {		/* use default user */
+	if (strcmp(name, "") == 0) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
 		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
 			(void) strcpy (name, "root");
@@ -881,7 +883,8 @@ static void process_flags (int argc, char **argv)
 	}
 }
 
-static void set_environment (struct passwd *pw)
+static void
+set_environment(struct passwd *pw)
 {
 	const char *cp;
 	/*
@@ -949,7 +952,7 @@ static void set_environment (struct passwd *pw)
 	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
 		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
+	} else if (!!strchr(cp, '=')) {
 		addenv (cp, NULL);
 	} else {
 		addenv ("PATH", cp);
@@ -1003,7 +1006,8 @@ static void set_environment (struct passwd *pw)
  *	particular, the argument "-c" will cause the next argument to be
  *	interpreted as a command by the common shell programs.
  */
-int main (int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	const char *cp;
 	struct passwd *pw = NULL;
@@ -1076,12 +1080,9 @@ int main (int argc, char **argv)
 		shellstr = pw->pw_shell;
 	}
 
-	/*
-	 * Set the default shell.
-	 */
-	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
+	/* Set the default shell.  */
+	if (NULL == shellstr || strcmp(shellstr, "") == 0)
 		shellstr = SHELL;
-	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {

@@ -129,6 +129,7 @@ void endsgent (void)
 	return &sgroup;
 }
 
+
 /*
  * fgetsgent - convert next line in stream to (struct sgrp)
  *
@@ -136,49 +137,29 @@ void endsgent (void)
  * converts it to a (struct sgrp).  NULL is returned on EOF.
  */
 
-/*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE * fp)
+/*@observer@*//*@null@*/struct sgrp *
+fgetsgent(/*@null@*/FILE *fp)
 {
-	static size_t buflen = 0;
-	static char *buf = NULL;
-
-	char *cp;
-
-	if (0 == buflen) {
-		buf = MALLOC(BUFSIZ, char);
-		if (NULL == buf) {
-			return NULL;
-		}
-		buflen = BUFSIZ;
-	}
+	char         *buf = NULL;
+	size_t       buflen = 0;
+	struct sgrp  *sg;
 
 	if (NULL == fp) {
 		return NULL;
 	}
 
-	if (fgetsx(buf, buflen, fp) == buf) {
-		while (   ((cp = strrchr (buf, '\n')) == NULL)
-		       && (feof (fp) == 0)) {
-			size_t len;
+	if (getline(&buf, &buflen, fp) == -1)
+		return NULL;
+	if (stpsep(buf, "\n") == NULL)
+		return NULL;
 
-			cp = REALLOC(buf, buflen * 2, char);
-			if (NULL == cp) {
-				return NULL;
-			}
-			buf = cp;
-			buflen *= 2;
+	sg = sgetsgent(buf);
 
-			len = strlen (buf);
-			if (fgetsx (&buf[len],
-			            (int) (buflen - len),
-			            fp) != &buf[len]) {
-				return NULL;
-			}
-		}
-		stpsep(buf, "\n");
-		return (sgetsgent (buf));
-	}
-	return NULL;
+	free(buf);
+
+	return sg;
 }
+
 
 /*
  * getsgent - get a single shadow group entry
@@ -272,11 +253,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	}
 	stpcpy(cp, "\n");
 
-	/*
-	 * Output using the function which understands the line
-	 * continuation conventions.
-	 */
-	if (fputsx (buf, fp) == EOF) {
+	if (fputs(buf, fp) == EOF) {
 		free (buf);
 		return -1;
 	}

@@ -16,6 +16,7 @@
 #include <getopt.h>
 #include <grp.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -127,7 +128,7 @@ usage (int status)
  */
 static void new_grent (struct group *grent)
 {
-	memzero (grent, sizeof *grent);
+	memzero(grent, sizeof(*grent));
 	grent->gr_name = group_name;
 	if (pflg) {
 		grent->gr_passwd = group_passwd;
@@ -147,7 +148,7 @@ static void new_grent (struct group *grent)
  */
 static void new_sgent (struct sgrp *sgent)
 {
-	memzero (sgent, sizeof *sgent);
+	memzero(sgent, sizeof(*sgent));
 	sgent->sg_name = group_name;
 	if (pflg) {
 		sgent->sg_passwd = group_passwd;
@@ -164,7 +165,8 @@ static void new_sgent (struct sgrp *sgent)
  *
  *	grp_update() writes the new records to the group files.
  */
-static void grp_update (void)
+static void
+grp_update(void)
 {
 	struct group grp;
 
@@ -196,15 +198,15 @@ static void grp_update (void)
 #endif				/* SHADOWGRP */
 
 	if (user_list) {
-		char *token;
-		token = strtok(user_list, ",");
-		while (token) {
-			if (prefix_getpwnam (token) == NULL) {
-				fprintf (stderr, _("Invalid member username %s\n"), token);
+		char  *u, *ul;
+
+		ul = user_list;
+		while (NULL != (u = strsep(&ul, ","))) {
+			if (prefix_getpwnam(u) == NULL) {
+				fprintf(stderr, _("Invalid member username %s\n"), u);
 				exit (E_GRP_UPDATE);
 			}
-			grp.gr_mem = add_list(grp.gr_mem, token);
-			token = strtok(NULL, ",");
+			grp.gr_mem = add_list(grp.gr_mem, u);
 		}
 	}
 

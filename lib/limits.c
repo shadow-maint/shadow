@@ -19,6 +19,7 @@
 
 #ident "$Id$"
 
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -36,6 +37,7 @@
 #include "atoi/str2i/str2s.h"
 #include "atoi/str2i/str2u.h"
 #include "string/memset/memzero.h"
+#include "string/strchr/stpspn.h"
 #include "typetraits.h"
 
 
@@ -185,11 +187,7 @@ static int do_user_limits (const char *buf, const char *name)
 	int retval = 0;
 	bool reported = false;
 
-	pp = buf;
-	/* Skip leading whitespace. */
-	while ((' ' == *pp) || ('\t' == *pp)) {
-		pp++;
-	}
+	pp = stpspn(buf, " \t");
 
 	/* The special limit string "-" results in no limit for all known
 	 * limits.
@@ -313,12 +311,7 @@ static int do_user_limits (const char *buf, const char *name)
 		 * So, let's skip all digits, "-" and our limited set of
 		 * whitespace.
 		 */
-		while (   isdigit (*pp)
-		       || ('-'  == *pp)
-		       || (' '  == *pp)
-		       || ('\t' ==*pp)) {
-			pp++;
-		}
+		pp = stpspn(pp, "0123456789- \t");
 	}
 	return retval;
 }
@@ -349,7 +342,8 @@ static bool user_in_group (const char *uname, const char *gname)
 	return is_on_list (groupdata->gr_mem, uname);
 }
 
-static int setup_user_limits (const char *uname)
+static int
+setup_user_limits(const char *uname)
 {
 	FILE *fil;
 	char buf[1024];
@@ -420,11 +414,11 @@ static int setup_user_limits (const char *uname)
 		}
 	}
 	(void) fclose (fil);
-	if (limits[0] == '\0') {
+	if (strcmp(limits, "") == 0) {
 		/* no user specific limits */
-		if (deflimits[0] == '\0') {	/* no default limits */
+		if (strcmp(deflimits, "") == 0)  /* no defaults limits */
 			return 0;
-		}
+
 		strcpy (limits, deflimits);	/* use the default limits */
 	}
 	return do_user_limits (limits, uname);
