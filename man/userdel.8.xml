@@ -79,7 +79,16 @@
 	  <para>
 	    This option forces the removal of the user account
 	    and any other requested actions,
-	    skipping any safety checks.
+	    skipping safety checks.
+	  </para>
+	  <para>
+	    If specified once,
+	    a user is removed
+	    even if it's still logged in,
+	    and its primary group is removed
+	    even if it's the primary group of another user.
+	    If specified twice,
+	    it skips all safety checks.
 	  </para>
 	  <para>
 	    <emphasis>Note:</emphasis> This option is dangerous and may leave
