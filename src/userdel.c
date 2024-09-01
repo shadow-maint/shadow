@@ -80,7 +80,7 @@ static uid_t user_id;
 static gid_t user_gid;
 static char *user_home;
 
-static bool fflg = false;
+static int fflg = 0;
 static bool rflg = false;
 #ifdef WITH_SELINUX
 static bool Zflg = false;
@@ -313,7 +313,7 @@ static void remove_usergroup (void)
 		return;
 	}
 
-	if (!fflg) {
+	if (fflg < 1) {
 		/*
 		 * Scan the passwd file to check if this group is still
 		 * used as a primary group.
@@ -833,7 +833,7 @@ static int remove_mailbox (void)
 		}
 	}
 
-	if (fflg) {
+	if (fflg >= 2) {
 		if (unlink (mailfile) != 0) {
 			fprintf (stderr,
 			         _("%s: warning: can't remove %s: %s\n"),
@@ -998,8 +998,8 @@ int main (int argc, char **argv)
 #endif				/* !WITH_SELINUX */
 		                         long_options, NULL)) != -1) {
 			switch (c) {
-			case 'f':	/* force remove even if not owned by user */
-				fflg = true;
+			case 'f':
+				fflg++;
 				break;
 			case 'h':
 				usage (E_SUCCESS);
@@ -1132,7 +1132,7 @@ int main (int argc, char **argv)
 	 * a cron job may be started on her behalf, etc.
 	 */
 	if (streq(prefix, "") && !Rflg && user_busy(user_name, user_id) != 0) {
-		if (!fflg) {
+		if (fflg < 1) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting user logged in",
@@ -1161,7 +1161,7 @@ int main (int argc, char **argv)
 			         _("%s: %s home directory (%s) not found\n"),
 			         Prog, user_name, user_home);
 			rflg = 0;
-		} else if ((0 == home_owned) && !fflg) {
+		} else if ((0 == home_owned) && fflg < 2) {
 			fprintf (stderr,
 			         _("%s: %s not owned by %s, not removing\n"),
 			         Prog, user_home, user_name);
@@ -1173,7 +1173,7 @@ int main (int argc, char **argv)
 
 #ifdef EXTRA_CHECK_HOME_DIR
 	/* This may be slow, the above should be good enough. */
-	if (rflg && !fflg) {
+	if (rflg && fflg < 2) {
 		struct passwd *pwd;
 		/*
 		 * For safety, refuse to remove the home directory if it
