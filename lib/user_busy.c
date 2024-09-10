@@ -17,6 +17,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <utmpx.h>
 
 #include "atoi/getnum.h"
 #include "defines.h"
