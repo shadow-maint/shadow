@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 			usage();
 	}
 
-	/* Who am i? */
+	/* Who am I? */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
 		fprintf (stderr,

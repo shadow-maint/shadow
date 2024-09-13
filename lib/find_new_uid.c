@@ -305,7 +305,7 @@ int find_new_uid(bool sys_user,
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
-				 * This GID is in use or unusable, we'll
+				 * This UID is in use or unusable, we'll
 				 * continue to the next.
 				 */
 			} else {
@@ -351,7 +351,7 @@ int find_new_uid(bool sys_user,
 					return 0;
 				} else if (result == EEXIST || result == EINVAL) {
 					/*
-					 * This GID is in use or unusable, we'll
+					 * This UID is in use or unusable, we'll
 					 * continue to the next.
 					 */
 				} else {
@@ -414,7 +414,7 @@ int find_new_uid(bool sys_user,
 				return 0;
 			} else if (result == EEXIST || result == EINVAL) {
 				/*
-				 * This GID is in use or unusable, we'll
+				 * This UID is in use or unusable, we'll
 				 * continue to the next.
 				 */
 			} else {
@@ -460,7 +460,7 @@ int find_new_uid(bool sys_user,
 					return 0;
 				} else if (result == EEXIST || result == EINVAL) {
 					/*
-					 * This GID is in use or unusable, we'll
+					 * This UID is in use or unusable, we'll
 					 * continue to the next.
 					 */
 				} else {

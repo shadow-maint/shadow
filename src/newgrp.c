@@ -400,7 +400,7 @@ int main (int argc, char **argv)
 
 	/*
 	 * Save my name for error messages and save my real gid in case of
-	 * errors. If there is an error i have to exec a new login shell for
+	 * errors. If there is an error, I have to exec a new login shell for
 	 * the user since her old shell won't have fork'd to create the
 	 * process. Skip over the program name to the next command line
 	 * argument.
@@ -460,7 +460,7 @@ int main (int argc, char **argv)
 	 * for sg causes a command string to be executed.
 	 *
 	 * The next argument, if present, must be the new group name. Any
-	 * remaining remaining arguments will be used to execute a command
+	 * remaining arguments will be used to execute a command
 	 * as the named group. If the group name isn't present, I just use
 	 * the login group ID of the current user.
 	 *
@@ -539,9 +539,9 @@ int main (int argc, char **argv)
 
 #ifdef HAVE_SETGROUPS
 	/*
-	 * get the current users groupset. The new group will be added to
+	 * get the current user's groupset. The new group will be added to
 	 * the concurrent groupset if there is room, otherwise you get a
-	 * nasty message but at least your real and effective group id's are
+	 * nasty message but at least your real and effective group ids are
 	 * set.
 	 */
 	/* don't use getgroups(0, 0) - it doesn't work on some systems */
@@ -576,7 +576,7 @@ int main (int argc, char **argv)
 	 * now we put her in the new group. The password file entry for her
 	 * current user id has been gotten. If there was no optional group
 	 * argument she will have her real and effective group id set to the
-	 * set to the value from her password file entry.
+	 * value from her password file entry.
 	 *
 	 * If run as newgrp, or as sg with no command, this process exec's
 	 * an interactive subshell with the effective GID of the new group.
@@ -677,8 +677,8 @@ int main (int argc, char **argv)
 #ifdef HAVE_SETGROUPS
 	/*
 	 * I am going to try to add her new group id to her concurrent group
-	 * set. If the group id is already present i'll just skip this part.
-	 * If the group doesn't fit, i'll complain loudly and skip this
+	 * set. If the group id is already present I'll just skip this part.
+	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
 	for (i = 0; i < ngroups; i++) {
@@ -737,7 +737,7 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * See if the "-c" flag was used. If it was, i just create a shell
+	 * See if the "-c" flag was used. If it was, I just create a shell
 	 * command for her using the argument that followed the "-c" flag.
 	 */
 	if (cflag) {
@@ -753,7 +753,7 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * I have to get the pathname of her login shell. As a favor, i'll
+	 * I have to get the pathname of her login shell. As a favor, I'll
 	 * try her environment for a $SHELL value first, and then try the
 	 * password file entry. Obviously this shouldn't be in the
 	 * restricted command directory since it could be used to leave the
@@ -785,7 +785,7 @@ int main (int argc, char **argv)
 	progbase = Basename (prog);
 
 	/*
-	 * Switch back to her home directory if i am doing login
+	 * Switch back to her home directory if I am doing login
 	 * initialization.
 	 */
 	if (initflag) {

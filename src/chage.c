@@ -566,7 +566,7 @@ static void open_files (bool readonly)
 	/*
 	 * For shadow password files we have to lock the file and read in
 	 * the entries as was done for the password file. The user entries
-	 * does not have to exist in this case; a new entry will be created
+	 * do not have to exist in this case; a new entry will be created
 	 * for this user if one does not exist already.
 	 */
 	if (!readonly) {
