@@ -17,9 +17,9 @@
 
 int run_part (char *script_path, const char *name, const char *action)
 {
-	int pid;
+	pid_t pid;
 	int wait_status;
-	int pid_status;
+	pid_t pid_status;
 	char *args[] = { script_path, NULL };
 
 	pid=fork();
