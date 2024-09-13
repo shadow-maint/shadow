@@ -24,14 +24,14 @@ int run_part (char *script_path, const char *name, const char *action)
 
 	pid=fork();
 	if (pid==-1) {
-		perror ("Could not fork");
+		fprintf (shadow_logfd, "Could not fork: %s\n", strerror(errno));
 		return 1;
 	}
 	if (pid==0) {
 		setenv ("ACTION",action,1);
 		setenv ("SUBJECT",name,1);
 		execv (script_path,args);
-		perror ("execv");
+		fprintf (shadow_logfd, "execv: %s\n", strerror(errno));
 		exit(1);
 	}
 
@@ -40,7 +40,7 @@ int run_part (char *script_path, const char *name, const char *action)
 		return (wait_status);
 	}
 
-	perror ("waitpid");
+	fprintf (shadow_logfd, "waitpid: %s\n", strerror(errno));
 	return (1);
 }
 
@@ -61,7 +61,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 		struct stat  sb;
 
 		if (asprintf(&s, "%s/%s", directory, namelist[n]->d_name) == -1) {
-			fprintf(stderr, "could not allocate memory\n");
+			fprintf (shadow_logfd, "could not allocate memory\n");
 			for (; n<scanlist; n++) {
 				free(namelist[n]);
 			}
@@ -71,7 +71,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 
 		execute_result = 0;
 		if (stat (s, &sb) == -1) {
-			perror ("stat");
+			fprintf (shadow_logfd, "stat: %s\n", strerror(errno));
 			free(s);
 			for (; n<scanlist; n++) {
 				free (namelist[n]);
