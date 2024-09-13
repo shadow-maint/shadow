@@ -15,7 +15,7 @@
 #include "shadowlog_internal.h"
 
 
-int run_part (char *script_path, const char *name, const char *action)
+static int run_part (char *script_path, const char *name, const char *action)
 {
 	pid_t pid;
 	int wait_status;
