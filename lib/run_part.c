@@ -24,7 +24,7 @@ static int run_part (char *script_path, const char *name, const char *action)
 
 	pid=fork();
 	if (pid==-1) {
-		fprintf (shadow_logfd, "Could not fork: %s\n", strerror(errno));
+		fprintf (shadow_logfd, "fork: %s\n", strerror(errno));
 		return 1;
 	}
 	if (pid==0) {
@@ -61,7 +61,7 @@ int run_parts (const char *directory, const char *name, const char *action)
 		struct stat  sb;
 
 		if (asprintf(&s, "%s/%s", directory, namelist[n]->d_name) == -1) {
-			fprintf (shadow_logfd, "could not allocate memory\n");
+			fprintf (shadow_logfd, "asprintf: %s\n", strerror(errno));
 			for (; n<scanlist; n++) {
 				free(namelist[n]);
 			}
