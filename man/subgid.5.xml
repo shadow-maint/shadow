@@ -51,7 +51,8 @@
       <replaceable>files</replaceable>.
     </para>
     <para>
-      Note, that <command>groupadd</command> will only create entries in
+      Note, that <command>newusers</command>, <command>useradd</command>, and
+      <command>usermod</command> will only create entries in
       <filename>/etc/subgid</filename> if subid delegation is managed via subid
       files.
     </para>
