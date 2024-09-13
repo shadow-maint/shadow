@@ -44,7 +44,7 @@ void do_cleanups (void)
 {
 	unsigned int i;
 
-	/* Make sure there were no overflow */
+	/* Make sure there were no overflows */
 	assert (NULL == cleanup_functions[CLEANUP_FUNCTIONS-1]);
 
 	if (getpid () != cleanup_pid) {

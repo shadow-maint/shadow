@@ -689,7 +689,7 @@ AC_SUBST(LIBMD)
 if test "$with_skey" = "yes"; then
 	AC_CHECK_LIB(md, MD5Init, [LIBMD=-lmd])
 	AC_CHECK_LIB(skey, skeychallenge, [LIBSKEY=-lskey],
-		[AC_MSG_ERROR([liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
+		[AC_MSG_ERROR([libskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
 	AC_DEFINE(SKEY, 1, [Define to support S/Key logins.])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 		#include <stdio.h>

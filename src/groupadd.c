@@ -480,11 +480,11 @@ static void check_flags (void)
 	check_new_name ();
 
 	/*
-	 * Check if the group already exist.
+	 * Check if the group already exists.
 	 */
 	/* local, no need for xgetgrnam */
 	if (prefix_getgrnam (group_name) != NULL) {
-		/* The group already exist */
+		/* The group already exists */
 		if (fflg) {
 			/* OK, no need to do anything */
 			exit (E_SUCCESS);
@@ -496,7 +496,7 @@ static void check_flags (void)
 	}
 
 	if (gflg && (prefix_getgrgid (group_id) != NULL)) {
-		/* A GID was specified, and a group already exist with that GID
+		/* A GID was specified, and a group already exists with that GID
 		 *  - either we will use this GID anyway (-o)
 		 *  - either we ignore the specified GID and
 		 *    we will use another one (-f)

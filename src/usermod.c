@@ -1803,7 +1803,7 @@ static void move_home (void)
 
 	if (access (prefix_user_newhome, F_OK) == 0) {
 		/*
-		 * If the new home directory already exist, the user
+		 * If the new home directory already exists, the user
 		 * should not use -m.
 		 */
 		fprintf (stderr,

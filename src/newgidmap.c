@@ -177,7 +177,7 @@ int main(int argc, char **argv)
 		if (proc_dir_fd < 0)
 			usage();
 	}
-	/* Who am i? */
+	/* Who am I? */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
 		fprintf (stderr,

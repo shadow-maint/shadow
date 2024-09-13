@@ -80,7 +80,7 @@ sgetpwent(const char *buf)
 		return NULL;
 
 	/*
-	 * Each of the fields is converted the appropriate data type
+	 * Each of the fields is converted to the appropriate data type
 	 * and the result assigned to the password structure.  If the
 	 * UID or GID does not convert to an integer value, a NULL
 	 * pointer is returned.
