@@ -32,27 +32,23 @@
 /*@observer@*/const char *tz (const char *fname)
 {
 	FILE *fp = NULL;
+	const char *result;
 	static char tzbuf[BUFSIZ];
-	const char *def_tz = "TZ=CST6CDT";
 
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
 	    || (fgets (tzbuf, sizeof (tzbuf), fp) == NULL)) {
-		def_tz = getdef_str ("ENV_TZ");
-		if ((NULL == def_tz) || ('/' == def_tz[0])) {
-			def_tz = "TZ=CST6CDT";
-		}
-
-		strcpy (tzbuf, def_tz);
+		result = "TZ=CST6CDT";
 	} else {
 		stpsep(tzbuf, "\n");
+		result = tzbuf;
 	}
 
 	if (NULL != fp) {
 		(void) fclose (fp);
 	}
 
-	return tzbuf;
+	return result;
 }
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
