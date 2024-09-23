@@ -590,6 +590,17 @@ set_defaults(void)
 	}
 
 	/*
+	 * Change the permissions of the new file to 644
+	 */
+	if (chmod(new_file, 0644) != 0) {
+		fprintf(stderr,
+				_("%s: failed to change permissions for %s\n"),
+				Prog,
+				new_file);
+		goto err_free_def;
+	}
+
+	/*
 	 * Open the existing defaults file and copy the lines to the
 	 * temporary file, using any new values. Each line is checked
 	 * to insure that it is not output more than once.
