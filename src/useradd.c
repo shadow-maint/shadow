@@ -242,7 +242,7 @@ static void create_home (void);
 static void create_mail (void);
 static void check_uid_range(int rflg, uid_t user_id);
 
-static FILE *fmkstemp(char *template);
+static FILE *fmkomstemp(char *template, unsigned int flags, mode_t m);
 
 
 /*
@@ -581,7 +581,7 @@ set_defaults(void)
 	/*
 	 * Create a temporary file to copy the new output to.
 	 */
-	ofp = fmkstemp(new_file);
+	ofp = fmkomstemp(new_file, 0, 0644);
 	if (NULL == ofp) {
 		fprintf (stderr,
 		         _("%s: cannot open new defaults file\n"),
@@ -2737,21 +2737,25 @@ int main (int argc, char **argv)
 
 
 static FILE *
-fmkstemp(char *template)
+fmkomstemp(char *template, unsigned int flags, mode_t m)
 {
 	int   fd;
 	FILE  *fp;
 
-	fd = mkstemp(template);
+	fd = mkostemp(template, flags);
 	if (fd == -1)
 		return NULL;
 
+	if (fchmod(fd, m) == -1)
+		goto fail;
+
 	fp = fdopen(fd, "w");
-	if (fp == NULL) {
-		close(fd);
-		unlink(template);
-		return NULL;
-	}
+	if (fp == NULL)
+		goto fail;
 
 	return fp;
+fail:
+	close(fd);
+	unlink(template);
+	return NULL;
 }
