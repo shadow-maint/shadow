@@ -6,7 +6,6 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -41,7 +40,6 @@ main(int argc, char **argv)
 
 	owner = argv[1];
 	check_uids = argv[2][0] == 'u';
-	errno = 0;
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
 	if (str2ul(&count, argv[4]) == -1)
