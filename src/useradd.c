@@ -667,26 +667,26 @@ set_defaults(void)
 	 * have an entry for that value.
 	 */
 	if (!out_group)
-		fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
+		fprintf (ofp, DGROUP "=%u\n", (unsigned int) def_group);
 	if (!out_groups)
-		fprintf (ofp, DGROUPS "%s\n", def_groups);
+		fprintf (ofp, DGROUPS "=%s\n", def_groups);
 	if (!out_home)
-		fprintf (ofp, DHOME "%s\n", def_home);
+		fprintf (ofp, DHOME "=%s\n", def_home);
 	if (!out_inactive)
-		fprintf (ofp, DINACT "%ld\n", def_inactive);
+		fprintf (ofp, DINACT "=%ld\n", def_inactive);
 	if (!out_expire)
-		fprintf (ofp, DEXPIRE "%s\n", def_expire);
+		fprintf (ofp, DEXPIRE "=%s\n", def_expire);
 	if (!out_shell)
-		fprintf (ofp, DSHELL "%s\n", def_shell);
+		fprintf (ofp, DSHELL "=%s\n", def_shell);
 	if (!out_skel)
-		fprintf (ofp, DSKEL "%s\n", def_template);
+		fprintf (ofp, DSKEL "=%s\n", def_template);
 	if (!out_usrskel)
-		fprintf (ofp, DUSRSKEL "%s\n", def_usrtemplate);
+		fprintf (ofp, DUSRSKEL "=%s\n", def_usrtemplate);
 
 	if (!out_create_mail_spool)
-		fprintf (ofp, DCREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
+		fprintf (ofp, DCREATE_MAIL_SPOOL "=%s\n", def_create_mail_spool);
 	if (!out_log_init)
-		fprintf (ofp, DLOG_INIT "%s\n", def_log_init);
+		fprintf (ofp, DLOG_INIT "=%s\n", def_log_init);
 	/*
 	 * Flush and close the file. Check for errors to make certain
 	 * the new file is intact.
