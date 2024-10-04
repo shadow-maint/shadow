@@ -2042,7 +2042,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full (fd, &ll, sizeof (ll)) != -1)
+	    || (write_full (fd, &ll, sizeof (ll)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
