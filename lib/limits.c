@@ -36,6 +36,7 @@
 #include "atoi/str2i/str2s.h"
 #include "atoi/str2i/str2u.h"
 #include "string/memset/memzero.h"
+#include "string/strchr/stpspn.h"
 #include "typetraits.h"
 
 
@@ -185,11 +186,7 @@ static int do_user_limits (const char *buf, const char *name)
 	int retval = 0;
 	bool reported = false;
 
-	pp = buf;
-	/* Skip leading whitespace. */
-	while ((' ' == *pp) || ('\t' == *pp)) {
-		pp++;
-	}
+	pp = stpspn(buf, " \t");
 
 	/* The special limit string "-" results in no limit for all known
 	 * limits.
@@ -313,12 +310,7 @@ static int do_user_limits (const char *buf, const char *name)
 		 * So, let's skip all digits, "-" and our limited set of
 		 * whitespace.
 		 */
-		while (   isdigit (*pp)
-		       || ('-'  == *pp)
-		       || (' '  == *pp)
-		       || ('\t' ==*pp)) {
-			pp++;
-		}
+		pp = stpspn(pp, "0123456789- \t");
 	}
 	return retval;
 }

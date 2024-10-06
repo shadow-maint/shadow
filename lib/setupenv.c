@@ -27,6 +27,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strchr/stpspn.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -58,9 +59,7 @@ static void read_env_file (const char *filename)
 
 		cp = buf;
 		/* ignore whitespace and comments */
-		while (isspace (*cp)) {
-			cp++;
-		}
+		cp = stpspn(cp, " \t");
 		if (('\0' == *cp) || ('#' == *cp)) {
 			continue;
 		}

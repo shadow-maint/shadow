@@ -20,6 +20,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/memset/memzero.h"
+#include "string/strchr/stpspn.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -93,7 +94,7 @@ void login_prompt (char *name, int namesize)
 	 * Then copy the rest (up to the end) into the username.
 	 */
 
-	for (cp = buf; *cp == ' ' || *cp == '\t'; cp++);
+	cp = stpspn(buf, " \t");
 
 	for (i = 0; i < namesize - 1 && *cp != '\0'; name[i++] = *cp++);
 
