@@ -27,6 +27,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -215,7 +216,8 @@ extern int allow_bad_names;
  *	converts it to a NULL-terminated array. Any unknown group names are
  *	reported as errors.
  */
-static int get_groups (char *list)
+static int
+get_groups(char *list)
 {
 	struct group *grp;
 	int errors = 0;
@@ -226,9 +228,8 @@ static int get_groups (char *list)
 	 */
 	user_groups[0] = NULL;
 
-	if ('\0' == *list) {
+	if (strcmp(list, "") == 0)
 		return 0;
-	}
 
 	/*
 	 * So long as there is some data to be converted, strip off each
@@ -2141,7 +2142,8 @@ static void move_mailbox (void)
 /*
  * main - usermod command
  */
-int main (int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -2185,7 +2187,7 @@ int main (int argc, char **argv)
 	 * be changed while the user is logged in.
 	 * Note: no need to check if a prefix is specified...
 	 */
-	if ( (prefix[0] == '\0') &&  (uflg || lflg || dflg
+	if ( strcmp(prefix, "") == 0 &&  (uflg || lflg || dflg
 #ifdef ENABLE_SUBIDS
 	        || Vflg || Wflg
 #endif				/* ENABLE_SUBIDS */

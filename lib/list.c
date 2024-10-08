@@ -8,8 +8,7 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
+#include <string.h>
 #include <assert.h>
 
 #include "alloc/x/xmalloc.h"
@@ -224,7 +223,7 @@ bool is_on_list (char *const *list, const char *member)
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm
 	 */
 
-	if ('\0' == *members) {
+	if (strcmp(members, "") == 0) {
 		*array = NULL;
 		free (members);
 		return array;

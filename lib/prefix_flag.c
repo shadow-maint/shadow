@@ -10,6 +10,7 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
 
 #include "atoi/getnum.h"
@@ -50,7 +51,8 @@ static FILE* fp_grent = NULL;
  *
  * The audit, syslog, or locale files shall be open before
  */
-extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv)
+extern const char *
+process_prefix_flag(const char* short_opt, int argc, char **argv)
 {
 	/*
 	 * Parse the command line options.
@@ -96,7 +98,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			exit (EXIT_FAILURE);
 		}
 
-		if ( prefix[0] == '\0' || !strcmp(prefix, "/"))
+		if (strcmp(prefix, "") == 0 || strcmp(prefix, "/") == 0)
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
 

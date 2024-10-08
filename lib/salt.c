@@ -27,6 +27,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 
+
 #if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
      CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
 #define USE_XCRYPT_GENSALT 1
@@ -354,7 +355,8 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
  *    (if not NULL).
  *  * For the YESCRYPT method, this specifies the cost factor (if not NULL).
  */
-/*@observer@*/const char *crypt_make_salt (/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
+/*@observer@*/const char *
+crypt_make_salt(/*@null@*//*@observer@*/const char *meth, /*@null@*/void *arg)
 {
 	static char result[GENSALT_SETTING_SIZE];
 	size_t salt_len = MAX_SALT_SIZE;
@@ -417,7 +419,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	 * Prepare DES setting for crypt_gensalt(), if result
 	 * has not been filled with anything previously.
 	 */
-	if ('\0' == result[0]) {
+	if (strcmp(result, "") == 0) {
 		/* Avoid -Wunused-but-set-variable. */
 		salt_len = GENSALT_SETTING_SIZE - 1;
 		rounds = 0;
