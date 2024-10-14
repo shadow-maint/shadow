@@ -7,4 +7,4 @@
 #include "fs/readlink/areadlink.h"
 
 
-extern inline char *areadlink(const char *path);
+extern inline char *areadlink(const char *link);
