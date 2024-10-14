@@ -5,7 +5,7 @@ runs:
   steps:
   - shell: bash
     run: |
-      sudo cat /etc/apt/sources.list.d/ubuntu.sources
+      cat /etc/apt/sources.list.d/ubuntu.sources
       sudo sed -i 's/^Types: deb/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
       export DEBIAN_PRIORITY=critical
       export DEBIAN_FRONTEND=noninteractive
