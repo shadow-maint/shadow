@@ -19,27 +19,28 @@
 
 
 ATTR_STRING(1)
-inline char *areadlink(const char *path);
+inline char *areadlink(const char *link);
 
 
 // Similar to readlink(2), but allocate and terminate the string.
 inline char *
-areadlink(const char *filename)
+areadlink(const char *link)
 {
 	size_t size = 1024;
 
 	while (true) {
-		int  len;
-		char *buffer = MALLOC(size, char);
-		if (NULL == buffer) {
+		int   len;
+		char  *buf;
+
+		buf = MALLOC(size, char);
+		if (NULL == buf)
 			return NULL;
-		}
 
-		len = readlinknul(filename, buffer, size);
+		len = readlinknul(link, buf, size);
 		if (len != -1)
-			return buffer;
+			return buf;
 
-		free(buffer);
+		free(buf);
 		if (errno != E2BIG)
 			return NULL;
 
