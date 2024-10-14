@@ -13,5 +13,5 @@ runs:
       sudo apt-mark hold grub-efi-amd64-bin grub-efi-amd64-signed
       sudo apt-get update
       sudo apt-get -y dist-upgrade
-      sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev pkgconf
+      sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev libltdl-dev pkgconf
       sudo apt-get -y build-dep shadow
