@@ -13,7 +13,8 @@
 
 #ident "$Id$"
 
-#include "atoi/str2i/str2s.h"
+#include <a2i/str2i/str2s.h>
+
 #include "getdate.h"
 #include "prototypes.h"
 #include "string/strchr/stpspn.h"
