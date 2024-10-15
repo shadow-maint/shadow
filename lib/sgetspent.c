@@ -85,7 +85,7 @@ sgetspent(const char *string)
 	 * incorrectly formatted number.
 	 */
 
-	if (fields[2][0] == '\0')
+	if (strcmp(fields[2], "") == 0)
 		spwd.sp_lstchg = -1;
 	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -94,7 +94,7 @@ sgetspent(const char *string)
 	 * Get the minimum period between password changes.
 	 */
 
-	if (fields[3][0] == '\0')
+	if (strcmp(fields[3], "") == 0)
 		spwd.sp_min = -1;
 	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -103,7 +103,7 @@ sgetspent(const char *string)
 	 * Get the maximum number of days a password is valid.
 	 */
 
-	if (fields[4][0] == '\0')
+	if (strcmp(fields[4], "") == 0)
 		spwd.sp_max = -1;
 	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -126,7 +126,7 @@ sgetspent(const char *string)
 	 * Get the number of days of password expiry warning.
 	 */
 
-	if (fields[5][0] == '\0')
+	if (strcmp(fields[5], "") == 0)
 		spwd.sp_warn = -1;
 	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -136,7 +136,7 @@ sgetspent(const char *string)
 	 * disabled.
 	 */
 
-	if (fields[6][0] == '\0')
+	if (strcmp(fields[6], "") == 0)
 		spwd.sp_inact = -1;
 	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -146,7 +146,7 @@ sgetspent(const char *string)
 	 * set to expire.
 	 */
 
-	if (fields[7][0] == '\0')
+	if (strcmp(fields[7], "") == 0)
 		spwd.sp_expire = -1;
 	else if (a2sl(&spwd.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
@@ -156,7 +156,7 @@ sgetspent(const char *string)
 	 * to have anything other than a valid integer in it.
 	 */
 
-	if (fields[8][0] == '\0')
+	if (strcmp(fields[8], "") == 0)
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 	else if (str2ul(&spwd.sp_flag, fields[8]) == -1)
 		return NULL;

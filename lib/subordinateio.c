@@ -107,7 +107,13 @@ subordinate_parse(const char *line)
 	 * There must be exactly SUBID_NFIELDS colon separated fields or
 	 * the entry is invalid.  Also, fields must be non-blank.
 	 */
-	if (i != SUBID_NFIELDS || *fields[0] == '\0' || *fields[1] == '\0' || *fields[2] == '\0')
+	if (i != SUBID_NFIELDS)
+		return NULL;
+	if (strcmp(fields[0], "") == 0)
+		return NULL;
+	if (strcmp(fields[1], "") == 0)
+		return NULL;
+	if (strcmp(fields[2], "") == 0)
 		return NULL;
 	range.owner = fields[0];
 	if (str2ul(&range.start, fields[1]) == -1)
