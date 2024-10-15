@@ -190,6 +190,8 @@ libshadow_la_SOURCES = \
 	string/strchr/strnul.h \
 	string/strchr/strrspn.c \
 	string/strchr/strrspn.h \
+	string/strcmp/streq.c \
+	string/strcmp/streq.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
 	string/strcpy/strncat.c \
