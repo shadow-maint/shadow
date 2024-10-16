@@ -13,7 +13,7 @@
 
 #define REALLOC(p, n, type)                                                   \
 (                                                                             \
-	_Generic(p, type *:  (type *) reallocarray(p, n, sizeof(type)))       \
+	_Generic(p, type *: (type *) reallocarray(p, (n) ?: 1, sizeof(type))) \
 )
 
 
