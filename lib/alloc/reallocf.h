@@ -14,9 +14,9 @@
 #include "attr.h"
 
 
-#define REALLOCF(ptr, n, type)                                                \
+#define REALLOCF(p, n, type)                                                  \
 (                                                                             \
-	_Generic(ptr, type *:  (type *) reallocarrayf(ptr, n, sizeof(type)))  \
+	_Generic(p, type *:  (type *) reallocarrayf(p, n, sizeof(type)))      \
 )
 
 
