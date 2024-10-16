@@ -11,9 +11,9 @@
 #include <stdlib.h>
 
 
-#define REALLOC(ptr, n, type)                                                 \
+#define REALLOC(p, n, type)                                                   \
 (                                                                             \
-	_Generic(ptr, type *:  (type *) reallocarray(ptr, n, sizeof(type)))   \
+	_Generic(p, type *:  (type *) reallocarray(p, n, sizeof(type)))       \
 )
 
 
