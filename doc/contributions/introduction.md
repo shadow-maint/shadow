@@ -72,6 +72,6 @@ understand the project's development model:
 * [Build & install](build_install.md)
 * [Coding style](coding_style.md)
 * [Tests](tests.md)
-* [Continuous Integration](CI.md)
+* [Continuous Integration](ci.md)
 * [Releases](releases.md)
 * [License](license.md)
