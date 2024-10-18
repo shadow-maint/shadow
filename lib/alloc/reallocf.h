@@ -14,9 +14,9 @@
 #include "attr.h"
 
 
-#define REALLOCF(ptr, n, type)                                                \
+#define REALLOCF(p, n, type)                                                  \
 (                                                                             \
-	_Generic(ptr, type *:  (type *) reallocarrayf(ptr, n, sizeof(type)))  \
+	_Generic(p, type *: (type *) reallocarrayf(p, (n) ?: 1, sizeof(type)))\
 )
 
 
@@ -30,10 +30,9 @@ reallocarrayf(void *p, size_t nmemb, size_t size)
 {
 	void  *q;
 
-	q = reallocarray(p, nmemb, size);
+	q = reallocarray(p, nmemb ?: 1, size ?: 1);
 
-	/* realloc(p, 0) is equivalent to free(p);  avoid double free.  */
-	if (q == NULL && nmemb != 0 && size != 0)
+	if (q == NULL)
 		free(p);
 	return q;
 }
