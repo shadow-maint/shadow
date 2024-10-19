@@ -25,6 +25,7 @@
 #endif
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -770,7 +771,7 @@ yylex (void)
       if (isalpha (c))
 	{
 	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
-	    if (p < &buff[sizeof buff - 1])
+	    if (p < &buff[sizeof(buff) - 1])
 	      *p++ = c;
           stpcpy(p, "");
 	  yyInput--;
@@ -933,7 +934,7 @@ main(void)
   (void) fflush (stdout);
 
   buff[MAX_BUFF_LEN] = 0;
-  while (fgets (buff, MAX_BUFF_LEN, stdin) && buff[0])
+  while (fgets(buff, MAX_BUFF_LEN, stdin) != NULL && buff[0])
     {
       d = get_date(buff, NULL);
       if (d == -1)

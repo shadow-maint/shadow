@@ -25,7 +25,8 @@
  * under "cfgin" in config (directly or indirectly). Fallback to default if
  * something is bad.
  */
-static bool is_listed (const char *cfgin, const char *tty, bool def)
+static bool
+is_listed(const char *cfgin, const char *tty, bool def)
 {
 	FILE *fp;
 	char buf[1024], *s;
@@ -48,14 +49,13 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 
 	if (*cons != '/') {
 		char *pbuf;
+
 		STRTCPY(buf, cons);
-		pbuf = &buf[0];
-		while ((s = strtok (pbuf, ":")) != NULL) {
+		pbuf = buf;
+		while (NULL != (s = strsep(&pbuf, ":"))) {
 			if (strcmp (s, tty) == 0) {
 				return true;
 			}
-
-			pbuf = NULL;
 		}
 		return false;
 	}
@@ -74,7 +74,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 * See if this tty is listed in the console file.
 	 */
 
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		stpsep(buf, "\n");
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);

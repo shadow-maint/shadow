@@ -46,7 +46,7 @@ sssd_flush_cache(int dbflags)
 	if (dbflags & SSSD_DB_GROUP)
 		stpcpy(p, "G");
 
-	if (*p == '\0') {
+	if (strcmp(p, "") == 0) {
 		/* Neither passwd nor group, nothing to do */
 		free(sss_cache_args);
 		return 0;

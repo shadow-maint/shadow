@@ -125,7 +125,7 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 		free (path);
 		return NULL;
 	}
-	ret = readlink (path, link, sizeof (link) - 1);
+	ret = readlink(path, link, sizeof(link) - 1);
 	if (-1 == ret) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot read symbolic link %s: %s\n"),
@@ -184,7 +184,8 @@ static /*@null@*/ char *shadowtcb_path_existing (const char *name)
 	return ret;
 }
 
-static shadowtcb_status mkdir_leading (const char *name, uid_t uid)
+static shadowtcb_status
+mkdir_leading(const char *name, uid_t uid)
 {
 	char *ind, *dir, *ptr, *path = shadowtcb_path_rel (name, uid);
 	struct stat st;
@@ -199,7 +200,7 @@ static shadowtcb_status mkdir_leading (const char *name, uid_t uid)
 		         shadow_progname, TCB_DIR, strerror (errno));
 		goto out_free_path;
 	}
-	while ((ind = strchr (ptr, '/'))) {
+	while (NULL != (ind = strchr(ptr, '/'))) {
 		stpcpy(ind, "");
 		if (asprintf (&dir, TCB_DIR "/%s", path) == -1) {
 			OUT_OF_MEMORY;

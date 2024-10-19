@@ -12,8 +12,9 @@
 #ident "$Id$"
 
 #include <assert.h>
-#include <stdio.h>
 #include <signal.h>
+#include <stddef.h>
+#include <stdio.h>
 
 #include "attr.h"
 #include "defines.h"
@@ -72,7 +73,7 @@ void login_prompt (char *name, int namesize)
 			(void) fclose (fp);
 		}
 	}
-	(void) gethostname (buf, sizeof buf);
+	(void) gethostname(buf, sizeof(buf));
 	printf (_("\n%s login: "), buf);
 	(void) fflush (stdout);
 
@@ -82,9 +83,8 @@ void login_prompt (char *name, int namesize)
 	 */
 
 	MEMZERO(buf);
-	if (fgets (buf, sizeof buf, stdin) != buf) {
+	if (fgets(buf, sizeof(buf), stdin) == NULL)
 		exit (EXIT_FAILURE);
-	}
 
 	if (stpsep(buf, "\n") == NULL)
 		exit(EXIT_FAILURE);

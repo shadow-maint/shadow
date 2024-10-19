@@ -12,8 +12,9 @@
 #ident "$Id$"
 
 #include <ctype.h>
-#include <string.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "prototypes.h"
 #include "string/strchr/stpspn.h"
@@ -67,20 +68,20 @@ int valid_field (const char *field, const char *illegal)
  * prompt the user with the name of the field being changed and the
  * current value.
  */
-void change_field (char *buf, size_t maxsize, const char *prompt)
+void
+change_field(char *buf, size_t maxsize, const char *prompt)
 {
 	char newf[200];
 	char *cp;
 
-	if (maxsize > sizeof (newf)) {
-		maxsize = sizeof (newf);
+	if (maxsize > sizeof(newf)) {
+		maxsize = sizeof(newf);
 	}
 
 	printf ("\t%s [%s]: ", prompt, buf);
 	(void) fflush (stdout);
-	if (fgets (newf, maxsize, stdin) != newf) {
+	if (fgets(newf, maxsize, stdin) == NULL)
 		return;
-	}
 
 	if (stpsep(newf, "\n") == NULL)
 		return;
@@ -91,7 +92,7 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-		stpcpy(strrspn(newf, " \t\n"), "");
+		stpcpy(strrspn(newf, " \t"), "");
 		cp = stpspn(newf, " \t");
 		strcpy (buf, cp);
 	}
