@@ -760,6 +760,15 @@ static int get_groups (char *list)
 	int errors = 0;
 	int ngroups = 0;
 
+	/*
+	 * Free previous group list before creating a new one.
+	 */
+	int i = 0;
+	while (NULL != user_groups[i]) {
+		free(user_groups[i]);
+		user_groups[i++] = NULL;
+	}
+
 	if ('\0' == *list) {
 		return 0;
 	}
