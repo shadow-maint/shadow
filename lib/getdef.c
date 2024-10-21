@@ -142,6 +142,7 @@ static struct itemdef def_table[] = {
 	{"UMASK", NULL},
 	{"USERDEL_CMD", NULL},
 	{"USERGROUPS_ENAB", NULL},
+	{"SYS_USER_AUTO_GROUPS_ENAB", NULL},
 #ifndef USE_PAM
 	PAMDEFS
 #endif

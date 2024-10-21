@@ -471,3 +471,10 @@ PREVENT_NO_AUTH superuser
 # that are available in your system.
 #
 #HMAC_CRYPTO_ALGO SHA512
+
+#
+# Should system users be automatically added to supplementary groups
+# from the GROUPS option in the /etc/default/useradd?
+# Default is no.
+#
+#SYS_USER_AUTO_GROUPS_ENAB no
