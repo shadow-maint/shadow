@@ -52,6 +52,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/param.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>		/* for inet_ntoa() */
@@ -60,11 +61,6 @@
 #include "string/strchr/strrspn.h"
 #include "string/strtok/stpsep.h"
 
-
-#if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
-#undef MAXHOSTNAMELEN
-#define MAXHOSTNAMELEN 256
-#endif
 
  /* Path name of the access control file. */
 #ifndef	TABLE
