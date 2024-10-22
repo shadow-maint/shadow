@@ -9,6 +9,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -26,7 +27,7 @@ inline char *areadlink(const char *link);
 inline char *
 areadlink(const char *link)
 {
-	size_t size = 1024;
+	size_t  size = PATH_MAX;
 
 	while (true) {
 		int   len;
