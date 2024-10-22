@@ -262,7 +262,7 @@ static const char *resolve_hostname (const char *string)
 	const char       *addr_str;
 	struct addrinfo  *addrs;
 
-	static char      host[MAXHOSTNAMELEN];
+	static char      host[NI_MAXHOST];
 
 	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
 	if (gai_err != 0) {
