@@ -21,6 +21,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "memory/memset/memzero.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/stprintf.h"
