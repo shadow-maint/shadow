@@ -23,6 +23,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/memset/bzero.h"
 #include "string/strcmp/streq.h"
 
 #undef NDEBUG
@@ -318,7 +319,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[MAX_SALT_SIZE + 6];
 
-	bzero(salt, MAX_SALT_SIZE + 6);
+	bzero_a(salt);
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
@@ -353,7 +354,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	const char *method;
 	unsigned long rounds = 0;
 
-	bzero(result, countof(result));
+	bzero_a(result);
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "DES";
 
@@ -392,7 +393,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 			 method);
 		salt_len = MAX_SALT_SIZE;
 		rounds = 0;
-		bzero(result, countof(result));
+		bzero_a(result);
 	}
 
 #if USE_XCRYPT_GENSALT
