@@ -88,6 +88,9 @@ ctype/ - Character classification and conversion functions
 
 memset/ - Memory zeroing
 
+    bzero_a()
+	Like bzero(3), but takes an array.
+
     memzero()
 	Synonym of explicit_bzero(3).
     memzero_a()
