@@ -61,6 +61,7 @@ static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
 static bool Cflg = false;	/* clear record for user */
 static bool Sflg = false;	/* set record for user */
+static bool aflg = false;	/* print only users that have logged in */
 
 #define	NOW	time(NULL)
 
@@ -81,6 +82,7 @@ usage (int status)
 	(void) fputs (_("  -S, --set                     set lastlog record to current time (usable only with -u)\n"), usageout);
 	(void) fputs (_("  -t, --time DAYS               print only lastlog records more recent than DAYS\n"), usageout);
 	(void) fputs (_("  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"), usageout);
+	(void) fputs (_("  -a, --active                  print lastlog excluding '**Never logged in**' users"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -165,6 +167,9 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		cp = ptime;
 	}
 	if (ll.ll_time == (time_t) 0) {
+		/* If aflg is used,i.e aflag=true omit the 'Never logged in' lines */
+		if (aflg)
+			return;
 		cp = _("**Never logged in**\0");
 	}
 
@@ -319,10 +324,11 @@ int main (int argc, char **argv)
 			{"set",    no_argument,       NULL, 'S'},
 			{"time",   required_argument, NULL, 't'},
 			{"user",   required_argument, NULL, 'u'},
+			{"active", no_argument,       NULL, 'a'},
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c = getopt_long (argc, argv, "b:ChR:St:u:", longopts,
+		while ((c = getopt_long (argc, argv, "b:ChR:St:u:a", longopts,
 		                         NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -394,6 +400,11 @@ int main (int argc, char **argv)
 						exit (EXIT_FAILURE);
 					}
 				}
+				break;
+			}
+			case 'a':
+			{
+				aflg = true;
 				break;
 			}
 			default:
