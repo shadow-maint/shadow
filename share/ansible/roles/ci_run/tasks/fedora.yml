@@ -1,7 +1,11 @@
 ---
 # tasks file for ci_run
+- name: Ensure python is installed
+  ansible.builtin.raw: dnf install -y python3 python3-dnf
+
 - name: Ensure dependencies are installed
   ansible.builtin.dnf:
+    use_backend: dnf4
     name:
       - dnf-plugins-core
       - libcmocka-devel
