@@ -5,8 +5,16 @@ runs:
   steps:
   - shell: bash
     run: |
-      cat /etc/apt/sources.list.d/ubuntu.sources
-      sudo sed -i 's/^Types: deb/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
+      if [ -f /etc/apt/sources.list.d/ubuntu.sources ]; then
+        echo "Found new-style sources.list.d"
+        cat /etc/apt/sources.list.d/ubuntu.sources
+        sudo sed -i 's/^Types: deb/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
+      else
+        echo "Found legacy sources.list"
+        cat /etc/apt/sources.list
+        sudo sed -i '/deb-src/d' /etc/apt/sources.list
+        sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+      fi
       export DEBIAN_PRIORITY=critical
       export DEBIAN_FRONTEND=noninteractive
       # let's try to work around upgrade breakage in a pkg we don't care about
