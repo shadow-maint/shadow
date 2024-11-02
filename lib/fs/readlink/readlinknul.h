@@ -30,12 +30,14 @@ inline int readlinknul(const char *restrict link, char *restrict buf,
 inline int
 readlinknul(const char *restrict link, char *restrict buf, size_t size)
 {
-	ssize_t  len;
+	size_t   len;
+	ssize_t  r;
 
-	len = readlink(link, buf, size);
-	if (len == -1)
+	r = readlink(link, buf, size);
+	if (r == -1)
 		return -1;
 
+	len = r;
 	if (len == size) {
 		stpcpy(&buf[size-1], "");
 		errno = E2BIG;
