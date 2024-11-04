@@ -236,7 +236,7 @@ static int get_groups (char *list)
 	 * name and look it up. A mix of numerical and string values for
 	 * group identifiers is permitted.
 	 */
-	do {
+	while (NULL != list) {
 		char  *g;
 
 		/*
@@ -281,7 +281,7 @@ static int get_groups (char *list)
 		 */
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
 		gr_free (grp);
-	} while (NULL != list);
+	}
 
 	user_groups[ngroups] = NULL;
 
