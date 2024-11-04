@@ -40,7 +40,7 @@ static /*@null@*/char **
 build_list(char *s, char ***list, size_t *nlist)
 {
 	char **ptr = *list;
-	size_t nelem = *nlist, size;
+	size_t nelem = *nlist;
 
 	while (s != NULL && *s != '\0') {
 		ptr = XREALLOC(*list, nelem + 1, char *);
