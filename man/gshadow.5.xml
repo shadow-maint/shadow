@@ -51,7 +51,7 @@
 	<term><emphasis role="bold">group name</emphasis></term>
 	<listitem>
 	  <para>
-	    It must be a valid group name, which exist on the system.
+	    It must be a valid group name, which exists on the system.
 	  </para>
 	</listitem>
       </varlistentry>
