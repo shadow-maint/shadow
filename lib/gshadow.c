@@ -28,16 +28,14 @@
 
 static /*@null@*/FILE *shadow;
 static /*@null@*//*@only@*/char **members = NULL;
-static size_t nmembers = 0;
 static /*@null@*//*@only@*/char **admins = NULL;
-static size_t nadmins = 0;
 static struct sgrp sgroup;
 
 #define	FIELDS	4
 
 
 static /*@null@*/char **
-build_list(char *s, char ***lp, size_t *np)
+build_list(char *s, char ***lp)
 {
 	char    **l;
 	size_t  n;
@@ -50,7 +48,6 @@ build_list(char *s, char ***lp, size_t *np)
 		l[n] = strsep(&s, ",");
 		n++;
 		*lp = l;
-		*np = n;
 	}
 
 	l = XREALLOC(*lp, n + 1, char *);
@@ -123,8 +120,8 @@ sgetsgent(const char *string)
 	free (admins);
 	free (members);
 
-	sgroup.sg_adm = build_list (fields[2], &admins, &nadmins);
-	sgroup.sg_mem = build_list (fields[3], &members, &nmembers);
+	sgroup.sg_adm = build_list(fields[2], &admins);
+	sgroup.sg_mem = build_list(fields[3], &members);
 
 	return &sgroup;
 }
