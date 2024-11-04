@@ -30,7 +30,6 @@ struct sgrp {
 
 #include <stdio.h>		/* for FILE */
 
-#if __STDC__
 /*@observer@*//*@null@*/struct sgrp *getsgent (void);
 /*@observer@*//*@null@*/struct sgrp *getsgnam (const char *);
 /*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *);
@@ -38,15 +37,6 @@ struct sgrp {
 void setsgent (void);
 void endsgent (void);
 int putsgent (const struct sgrp *, FILE *);
-#else
-/*@observer@*//*@null@*/struct sgrp *getsgent ();
-/*@observer@*//*@null@*/struct sgrp *getsgnam ();
-/*@observer@*//*@null@*/struct sgrp *sgetsgent ();
-/*@observer@*//*@null@*/struct sgrp *fgetsgent ();
-void setsgent ();
-void endsgent ();
-int putsgent ();
-#endif
 
 #define	GSHADOW	"/etc/gshadow"
 #endif				/* ifndef _H_GSHADOW */
