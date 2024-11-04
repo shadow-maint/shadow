@@ -75,7 +75,8 @@ void endsgent (void)
 	shadow = NULL;
 }
 
-/*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *string)
+/*@observer@*//*@null@*/struct sgrp *
+sgetsgent(const char *string)
 {
 	static char *sgrbuf = NULL;
 	static size_t sgrbuflen = 0;
@@ -115,16 +116,14 @@ void endsgent (void)
 
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
-	if (0 != nadmins) {
-		nadmins = 0;
-		free (admins);
-		admins = NULL;
-	}
-	if (0 != nmembers) {
-		nmembers = 0;
-		free (members);
-		members = NULL;
-	}
+
+	nadmins = 0;
+	free (admins);
+	admins = NULL;
+	nmembers = 0;
+	free (members);
+	members = NULL;
+
 	sgroup.sg_adm = build_list (fields[2], &admins, &nadmins);
 	sgroup.sg_mem = build_list (fields[3], &members, &nmembers);
 
