@@ -36,7 +36,8 @@ static struct sgrp sgroup;
 #define	FIELDS	4
 
 
-static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
+static /*@null@*/char **
+build_list(char *s, char ***list, size_t *nlist)
 {
 	char **ptr = *list;
 	size_t nelem = *nlist, size;
