@@ -40,18 +40,18 @@ build_list(char *s, char ***lp)
 	char    **l;
 	size_t  n;
 
-	*lp = NULL;
+	l = NULL;
 	n = 0;
 
 	while (s != NULL && *s != '\0') {
-		l = XREALLOC(*lp, n + 1, char *);
+		l = XREALLOC(l, n + 1, char *);
 		l[n] = strsep(&s, ",");
 		n++;
-		*lp = l;
 	}
 
-	l = XREALLOC(*lp, n + 1, char *);
+	l = XREALLOC(l, n + 1, char *);
 	l[n] = NULL;
+
 	*lp = l;
 
 	return l;
