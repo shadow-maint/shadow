@@ -45,8 +45,7 @@ build_list(char *s, char ***lp)
 
 	while (s != NULL && *s != '\0') {
 		l = XREALLOC(l, n + 1, char *);
-		l[n] = strsep(&s, ",");
-		n++;
+		l[n++] = strsep(&s, ",");
 	}
 
 	l = XREALLOC(l, n + 1, char *);
