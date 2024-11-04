@@ -37,24 +37,24 @@ static struct sgrp sgroup;
 
 
 static /*@null@*/char **
-build_list(char *s, char ***list, size_t *nlist)
+build_list(char *s, char ***lp, size_t *np)
 {
-	char **ptr = *list;
-	size_t nelem = *nlist;
+	char    **l = *lp;
+	size_t  n = *np;
 
 	while (s != NULL && *s != '\0') {
-		ptr = XREALLOC(*list, nelem + 1, char *);
-		ptr[nelem] = strsep(&s, ",");
-		nelem++;
-		*list = ptr;
-		*nlist = nelem;
+		l = XREALLOC(*lp, n + 1, char *);
+		l[n] = strsep(&s, ",");
+		n++;
+		*lp = l;
+		*np = n;
 	}
 
-	ptr = XREALLOC(*list, nelem + 1, char *);
-	ptr[nelem] = NULL;
-	*list = ptr;
+	l = XREALLOC(*lp, n + 1, char *);
+	l[n] = NULL;
+	*lp = l;
 
-	return ptr;
+	return l;
 }
 
 void setsgent (void)
