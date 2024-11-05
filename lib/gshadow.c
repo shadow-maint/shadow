@@ -28,9 +28,7 @@
 
 
 static /*@null@*/FILE *shadow;
-static /*@null@*//*@only@*/char **members = NULL;
-static /*@null@*//*@only@*/char **admins = NULL;
-static struct sgrp sgroup;
+static struct sgrp  sgroup = {};
 
 #define	FIELDS	4
 
@@ -115,11 +113,11 @@ sgetsgent(const char *string)
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
 
-	free (admins);
-	free (members);
+	free(sgroup.sg_adm);
+	free(sgroup.sg_mem);
 
-	sgroup.sg_adm = admins  = build_list(fields[2]);
-	sgroup.sg_mem = members = build_list(fields[3]);
+	sgroup.sg_adm = build_list(fields[2]);
+	sgroup.sg_mem = build_list(fields[3]);
 
 	return &sgroup;
 }
