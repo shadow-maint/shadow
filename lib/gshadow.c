@@ -40,7 +40,10 @@ static /*@null@*/char **
 build_list(char *s, char ***lp, size_t *np)
 {
 	char    **l;
-	size_t  n = *np;
+	size_t  n;
+
+	*lp = NULL;
+	n = 0;
 
 	while (s != NULL && *s != '\0') {
 		l = XREALLOC(*lp, n + 1, char *);
@@ -117,12 +120,8 @@ sgetsgent(const char *string)
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
 
-	nadmins = 0;
 	free (admins);
-	admins = NULL;
-	nmembers = 0;
 	free (members);
-	members = NULL;
 
 	sgroup.sg_adm = build_list (fields[2], &admins, &nadmins);
 	sgroup.sg_mem = build_list (fields[3], &members, &nmembers);
