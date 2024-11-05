@@ -14,6 +14,7 @@
 
 #ident "$Id$"
 
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -87,9 +88,9 @@ sgetsgent(const char *string)
 
 	if (len > sgrbuflen) {
 		char *buf = REALLOC(sgrbuf, len, char);
-		if (NULL == buf) {
+		if (NULL == buf)
 			return NULL;
-		}
+
 		sgrbuf = buf;
 		sgrbuflen = len;
 	}
@@ -111,7 +112,7 @@ sgetsgent(const char *string)
 	 */
 
 	if (NULL != cp || i != FIELDS)
-		return 0;
+		return NULL;
 
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
