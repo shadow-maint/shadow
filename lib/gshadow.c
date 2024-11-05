@@ -36,7 +36,7 @@ static struct sgrp sgroup;
 
 
 static /*@null@*/char **
-build_list(char *s, char ***lp)
+build_list(char *s)
 {
 	char    **l;
 	size_t  n;
@@ -51,8 +51,6 @@ build_list(char *s, char ***lp)
 
 	l = XREALLOC(l, n + 1, char *);
 	l[n] = NULL;
-
-	*lp = l;
 
 	return l;
 }
@@ -120,8 +118,8 @@ sgetsgent(const char *string)
 	free (admins);
 	free (members);
 
-	sgroup.sg_adm = build_list(fields[2], &admins);
-	sgroup.sg_mem = build_list(fields[3], &members);
+	sgroup.sg_adm = admins  = build_list(fields[2]);
+	sgroup.sg_mem = members = build_list(fields[3]);
 
 	return &sgroup;
 }
