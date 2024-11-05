@@ -39,7 +39,7 @@ static struct sgrp sgroup;
 static /*@null@*/char **
 build_list(char *s, char ***lp, size_t *np)
 {
-	char    **l = *lp;
+	char    **l;
 	size_t  n = *np;
 
 	while (s != NULL && *s != '\0') {
