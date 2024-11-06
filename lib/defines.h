@@ -50,13 +50,8 @@
 
 #include <dirent.h>
 
-/*
- * Possible cases:
- * - /usr/include/shadow.h exists and includes the shadow group stuff.
- * - /usr/include/shadow.h exists, but we use our own gshadow.h.
- */
 #include <shadow.h>
-#if defined(SHADOWGRP) && !defined(GSHADOW)
+#if defined(SHADOWGRP)
 #include "gshadow_.h"
 #endif
 
