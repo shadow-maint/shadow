@@ -76,33 +76,6 @@ AC_CHECK_FUNC(secure_getenv, [AC_DEFINE(HAS_SECURE_GETENV,
                                         1,
                                         [Defined to 1 if you have the declaration of 'secure_getenv'])])
 
-if test "$ac_cv_header_shadow_h" = "yes"; then
-	AC_CACHE_CHECK(for working shadow group support,
-		ac_cv_libc_shadowgrp,
-		AC_RUN_IFELSE([AC_LANG_SOURCE([
-				#include <shadow.h>
-				#ifdef HAVE_GSHADOW_H
-				#include <gshadow.h>
-				#endif
-				int
-				main()
-				{
-					struct sgrp *sg = sgetsgent("test:x::");
-					/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
-					return !sg || !sg->sg_adm || !sg->sg_mem;
-				}]
-			)],
-			[ac_cv_libc_shadowgrp=yes],
-			[ac_cv_libc_shadowgrp=no],
-			[ac_cv_libc_shadowgrp=no]
-		)
-	)
-
-	if test "$ac_cv_libc_shadowgrp" = "yes"; then
-		AC_DEFINE(HAVE_SHADOWGRP, 1, [Have working shadow group support in libc])
-	fi
-fi
-
 AC_CACHE_CHECK([location of shared mail directory], shadow_cv_maildir,
 [for shadow_cv_maildir in /var/mail /var/spool/mail /usr/spool/mail /usr/mail none; do
 	if test -d $shadow_cv_maildir; then
