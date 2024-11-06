@@ -264,7 +264,7 @@ static void update_groups (void)
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), nsgrp->sg_name);
+			         Prog, sgr_dbname (), nsgrp->sg_namp);
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
@@ -273,7 +273,7 @@ static void update_groups (void)
 		              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif				/* WITH_AUDIT */
 		SYSLOG ((LOG_INFO, "delete '%s' from shadow group '%s'\n",
-		         user_name, nsgrp->sg_name));
+		         user_name, nsgrp->sg_namp));
 	}
 #endif				/* SHADOWGRP */
 }

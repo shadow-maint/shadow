@@ -708,7 +708,7 @@ static void update_group (struct group *gr)
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, sgr_dbname (), sg->sg_name);
+		         Prog, sgr_dbname (), sg->sg_namp);
 		exit (1);
 	}
 #endif				/* SHADOWGRP */
@@ -774,13 +774,13 @@ static void get_group (struct group *gr)
 		tmpsg = sgr_locate (group);
 		if (NULL != tmpsg) {
 			*sg = *tmpsg;
-			sg->sg_name = xstrdup (tmpsg->sg_name);
+			sg->sg_namp = xstrdup (tmpsg->sg_namp);
 			sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
 
 			sg->sg_mem = dup_list (tmpsg->sg_mem);
 			sg->sg_adm = dup_list (tmpsg->sg_adm);
 		} else {
-			sg->sg_name = xstrdup (group);
+			sg->sg_namp = xstrdup (group);
 			sg->sg_passwd = gr->gr_passwd;
 			gr->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 

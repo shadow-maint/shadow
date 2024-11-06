@@ -18,7 +18,7 @@
  */
 
 struct sgrp {
-	char *sg_name;		/* group name */
+	char *sg_namp;		/* group name */
 	char *sg_passwd;	/* group password */
 	char **sg_adm;		/* group administrator list */
 	char **sg_mem;		/* group membership list */

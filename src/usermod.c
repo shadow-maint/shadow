@@ -850,7 +850,7 @@ update_gshadow(const struct sgrp *sgrp)
 	 * concurrent groups.
 	 */
 	is_member = Gflg && (   (was_member && aflg)
-			     || is_on_list (user_groups, sgrp->sg_name));
+			     || is_on_list (user_groups, sgrp->sg_namp));
 
 	if (!was_member && !was_admin && !is_member)
 		return;
@@ -885,7 +885,7 @@ update_gshadow(const struct sgrp *sgrp)
 #endif
 		SYSLOG ((LOG_INFO,
 			 "change admin '%s' to '%s' in shadow group '%s'",
-			 user_name, user_newname, nsgrp->sg_name));
+			 user_name, user_newname, nsgrp->sg_namp));
 	}
 
 	if (was_member) {
@@ -908,7 +908,7 @@ update_gshadow(const struct sgrp *sgrp)
 				SYSLOG ((LOG_INFO,
 					 "change '%s' to '%s' in shadow group '%s'",
 					 user_name, user_newname,
-					 nsgrp->sg_name));
+					 nsgrp->sg_namp));
 			}
 		} else {
 			/* User was a member but is no more a
@@ -923,7 +923,7 @@ update_gshadow(const struct sgrp *sgrp)
 #endif
 			SYSLOG ((LOG_INFO,
 				 "delete '%s' from shadow group '%s'",
-				 user_name, nsgrp->sg_name));
+				 user_name, nsgrp->sg_namp));
 		}
 	} else if (is_member) {
 		/* User was not a member but is now a member this
@@ -937,7 +937,7 @@ update_gshadow(const struct sgrp *sgrp)
 			      user_newname, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
-			 user_newname, nsgrp->sg_name));
+			 user_newname, nsgrp->sg_namp));
 	}
 	if (!changed)
 		goto free_nsgrp;
@@ -948,9 +948,9 @@ update_gshadow(const struct sgrp *sgrp)
 	if (sgr_update (nsgrp) == 0) {
 		fprintf (stderr,
 			 _("%s: failed to prepare the new %s entry '%s'\n"),
-			 Prog, sgr_dbname (), nsgrp->sg_name);
+			 Prog, sgr_dbname (), nsgrp->sg_namp);
 		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'",
-			 sgr_dbname (), nsgrp->sg_name));
+			 sgr_dbname (), nsgrp->sg_namp));
 		fail_exit (E_GRP_UPDATE);
 	}
 
