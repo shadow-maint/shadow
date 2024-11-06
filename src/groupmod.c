@@ -178,7 +178,7 @@ static void new_grent (struct group *grent)
 static void new_sgent (struct sgrp *sgent)
 {
 	if (nflg) {
-		sgent->sg_name = xstrdup (group_newname);
+		sgent->sg_namp = xstrdup (group_newname);
 	}
 
 	/* Always update the shadowed password if there is a shadow entry
@@ -238,7 +238,7 @@ grp_update(void)
 			 * gshadow entry when a new password is requested.
 			 */
 			bzero(&sgrp, sizeof sgrp);
-			sgrp.sg_name   = xstrdup (grp.gr_name);
+			sgrp.sg_namp   = xstrdup (grp.gr_name);
 			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
 			sgrp.sg_adm    = &empty;
 			sgrp.sg_mem    = dup_list (grp.gr_mem);
@@ -318,7 +318,7 @@ grp_update(void)
 		if (sgr_update (&sgrp) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), sgrp.sg_name);
+			         Prog, sgr_dbname (), sgrp.sg_namp);
 			exit (E_GRP_UPDATE);
 		}
 		if (nflg && (sgr_remove (group_name) == 0)) {

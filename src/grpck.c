@@ -612,7 +612,7 @@ static void check_grp_file (int *errors, bool *changed)
 					struct group gr;
 					static char *empty = NULL;
 
-					sg.sg_name = grp->gr_name;
+					sg.sg_namp = grp->gr_name;
 					sg.sg_passwd = grp->gr_passwd;
 					sg.sg_adm = &empty;
 					sg.sg_mem = grp->gr_mem;
@@ -624,7 +624,7 @@ static void check_grp_file (int *errors, bool *changed)
 					if (sgr_update (&sg) == 0) {
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
-						         Prog, sgr_dbname (), sg.sg_name);
+						         Prog, sgr_dbname (), sg.sg_namp);
 						fail_exit (E_CANT_UPDATE);
 					}
 					/* remove password from /etc/group */
@@ -739,7 +739,7 @@ static void check_sgr_file (int *errors, bool *changed)
 				continue;
 			}
 
-			if (!streq(sgr->sg_name, ent->sg_name)) {
+			if (!streq(sgr->sg_namp, ent->sg_namp)) {
 				continue;
 			}
 
@@ -762,7 +762,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		/*
 		 * Make sure this entry exists in the /etc/group file.
 		 */
-		grp = gr_locate (sgr->sg_name);
+		grp = gr_locate (sgr->sg_namp);
 		if (grp == NULL) {
 			printf (_("no matching group file entry in %s\n"),
 			        grp_file);
@@ -776,7 +776,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 * Verify that the all members defined in /etc/gshadow are also
 			 * present in /etc/group.
 			 */
-			compare_members_lists (sgr->sg_name,
+			compare_members_lists (sgr->sg_namp,
 			                       sgr->sg_mem, grp->gr_mem,
 			                       sgr_file, grp_file);
 		}
@@ -784,7 +784,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		/*
 		 * Make sure each administrator exists
 		 */
-		if (check_members (sgr->sg_name, sgr->sg_adm,
+		if (check_members (sgr->sg_namp, sgr->sg_adm,
 		                   _("shadow group %s: no administrative user %s\n"),
 		                   _("delete administrative member '%s'? "),
 		                   "delete admin '%s' from shadow group '%s'",
@@ -797,7 +797,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		/*
 		 * Make sure each member exists
 		 */
-		if (check_members (sgr->sg_name, sgr->sg_mem,
+		if (check_members (sgr->sg_namp, sgr->sg_mem,
 		                   _("shadow group %s: no user %s\n"),
 		                   _("delete member '%s'? "),
 		                   "delete member '%s' from shadow group '%s'",
