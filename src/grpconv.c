@@ -172,17 +172,17 @@ int main (int argc, char **argv)
 	 */
 	(void) sgr_rewind ();
 	while ((sg = sgr_next ()) != NULL) {
-		if (gr_locate (sg->sg_name) != NULL) {
+		if (gr_locate (sg->sg_namp) != NULL) {
 			continue;
 		}
 
-		if (sgr_remove (sg->sg_name) == 0) {
+		if (sgr_remove (sg->sg_namp) == 0) {
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
-			         Prog, sg->sg_name, sgr_dbname ());
+			         Prog, sg->sg_namp, sgr_dbname ());
 			fail_exit (3);
 		}
 		(void) sgr_rewind ();
@@ -205,7 +205,7 @@ int main (int argc, char **argv)
 
 			/* add new shadow group entry */
 			bzero(&sgent, sizeof sgent);
-			sgent.sg_name = gr->gr_name;
+			sgent.sg_namp = gr->gr_name;
 			sgent.sg_passwd = gr->gr_passwd;
 			sgent.sg_adm = &empty;
 		}
@@ -220,7 +220,7 @@ int main (int argc, char **argv)
 		if (sgr_update (&sgent) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), sgent.sg_name);
+			         Prog, sgr_dbname (), sgent.sg_namp);
 			fail_exit (3);
 		}
 		/* remove password from /etc/group */

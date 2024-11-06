@@ -149,7 +149,7 @@ static void new_grent (struct group *grent)
 static void new_sgent (struct sgrp *sgent)
 {
 	memzero (sgent, sizeof *sgent);
-	sgent->sg_name = group_name;
+	sgent->sg_namp = group_name;
 	if (pflg) {
 		sgent->sg_passwd = group_passwd;
 	} else {
@@ -231,7 +231,7 @@ grp_update(void)
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, sgr_dbname (), sgrp.sg_name);
+		         Prog, sgr_dbname (), sgrp.sg_namp);
 		exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */

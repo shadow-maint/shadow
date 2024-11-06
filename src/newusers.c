@@ -323,7 +323,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	if (is_shadow_grp) {
 		struct sgrp sgrent;
 		char *admins[1];
-		sgrent.sg_name = grent.gr_name;
+		sgrent.sg_namp = grent.gr_name;
 		sgrent.sg_passwd = "*";	/* XXX warning: const */
 		grent.gr_passwd  = "x";	/* XXX warning: const */
 		admins[0] = NULL;
