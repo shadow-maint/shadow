@@ -38,15 +38,14 @@ static /*@null@*/char **
 build_list(char *s)
 {
 	char    **l;
-	size_t  n;
+	size_t  i;
 
 	l = XMALLOC(strchrcnt(s, ',') + 2, char *);
-	n = 0;
 
-	while (s != NULL && *s != '\0')
-		l[n++] = strsep(&s, ",");
+	for (i = 0; s != NULL && *s != '\0'; i++)
+		l[i] = strsep(&s, ",");
 
-	l[n] = NULL;
+	l[i] = NULL;
 
 	return l;
 }
