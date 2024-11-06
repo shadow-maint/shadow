@@ -9,8 +9,7 @@
 
 #include <config.h>
 
-/* Newer versions of Linux libc already have shadow support.  */
-#if defined(SHADOWGRP) && !defined(HAVE_SHADOWGRP)	/*{ */
+#if defined(SHADOWGRP) && !defined(HAVE_GSHADOW_H)
 
 #ident "$Id$"
 
@@ -276,4 +275,4 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 }
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/*} SHADOWGRP */
+#endif  // !SHADOWGRP
