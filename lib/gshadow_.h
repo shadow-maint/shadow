@@ -1,17 +1,17 @@
-/*
- * SPDX-FileCopyrightText: 1988 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1997, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2003 - 2005, Tomasz Kłoczko
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1988-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1997, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2003-2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
-/*
- *	$Id$
- */
 
-#ifndef	_H_GSHADOW
-#define	_H_GSHADOW
+#ifndef SHADOW_INCLUDE_LIB_GSHADOW__H_
+#define SHADOW_INCLUDE_LIB_GSHADOW__H_
+
+
+#if defined(HAVE_GSHADOW_H)
+# include <gshadow.h>
+#else
 
 /*
  * Shadow group security file structure
@@ -39,4 +39,7 @@ void endsgent (void);
 int putsgent (const struct sgrp *, FILE *);
 
 #define	GSHADOW	"/etc/gshadow"
-#endif				/* ifndef _H_GSHADOW */
+
+
+#endif  // !HAVE_GSHADOW_H
+#endif  // include guard
