@@ -20,9 +20,10 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
-#include "alloc/x/xrealloc.h"
+#include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
@@ -39,15 +40,12 @@ build_list(char *s)
 	char    **l;
 	size_t  n;
 
-	l = NULL;
+	l = XMALLOC(strchrcnt(s, ',') + 2, char *);
 	n = 0;
 
-	while (s != NULL && *s != '\0') {
-		l = XREALLOC(l, n + 1, char *);
+	while (s != NULL && *s != '\0')
 		l[n++] = strsep(&s, ",");
-	}
 
-	l = XREALLOC(l, n + 1, char *);
 	l[n] = NULL;
 
 	return l;
