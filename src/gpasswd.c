@@ -171,11 +171,13 @@ static void catch_signals (int killed)
  *
  *	It returns true if the list of users is valid.
  */
-static bool is_valid_user_list (const char *users)
+static bool
+is_valid_user_list(const char *users)
 {
-	bool is_valid = true;
+	bool  is_valid;
 	char  *dup, *tmpusers;
 
+	is_valid = true;
 	tmpusers = dup = xstrdup(users);
 
 	while (NULL != tmpusers && '\0' != *tmpusers) {
