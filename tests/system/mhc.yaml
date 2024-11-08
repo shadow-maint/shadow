@@ -1,0 +1,12 @@
+provisioned_topologies:
+- shadow
+domains:
+- id: shadow
+  hosts:
+  - hostname: shadow.test
+    role: shadow
+    conn:
+      type: podman
+      container: builder
+    artifacts:
+    - /var/log/*
