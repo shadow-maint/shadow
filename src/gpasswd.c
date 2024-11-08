@@ -174,7 +174,9 @@ static void catch_signals (int killed)
 static bool is_valid_user_list (const char *users)
 {
 	bool is_valid = true;
-	/*@owned@*/char *tmpusers = xstrdup (users);
+	char  *dup, *tmpusers;
+
+	tmpusers = dup = xstrdup(users);
 
 	while (NULL != tmpusers && '\0' != *tmpusers) {
 		const char  *u;
@@ -193,7 +195,7 @@ static bool is_valid_user_list (const char *users)
 		}
 	}
 
-	free (tmpusers);
+	free(dup);
 
 	return is_valid;
 }
