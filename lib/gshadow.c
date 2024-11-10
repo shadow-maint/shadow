@@ -55,15 +55,6 @@ void setsgent (void)
 	}
 }
 
-void endsgent (void)
-{
-	if (NULL != gshadow) {
-		fclose(gshadow);
-	}
-
-	gshadow = NULL;
-}
-
 /*@observer@*//*@null@*/struct sgrp *
 sgetsgent(const char *s)
 {
