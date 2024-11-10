@@ -1,15 +1,14 @@
-/*
- * SPDX-FileCopyrightText: 1990 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2005       , Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2008       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1990-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
-#ident "$Id$"
+#include "shadow/group/sgetgrent.h"
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -26,6 +25,7 @@
 
 
 #define	NFIELDS	4
+
 
 /*
  * list - turn a comma-separated string into an array of (char *)'s
@@ -64,7 +64,8 @@ list(char *s)
 }
 
 
-struct group *sgetgrent (const char *buf)
+struct group *
+sgetgrent(const char *buf)
 {
 	static char *grpbuf = NULL;
 	static size_t size = 0;
@@ -105,4 +106,3 @@ struct group *sgetgrent (const char *buf)
 
 	return &grent;
 }
-
