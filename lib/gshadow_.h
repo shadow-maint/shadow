@@ -35,7 +35,6 @@ struct sgrp {
 /*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *);
 /*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE *);
 void setsgent (void);
-void endsgent (void);
 
 #define	GSHADOW	"/etc/gshadow"
 
