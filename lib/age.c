@@ -20,6 +20,7 @@
 #include "defines.h"
 #include "exitcodes.h"
 #include "prototypes.h"
+#include "shadow/gshadow/endsgent.h"
 
 
 #ident "$Id$"

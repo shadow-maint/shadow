@@ -59,6 +59,7 @@
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif
+#include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"

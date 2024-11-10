@@ -27,6 +27,7 @@
 #include "search/l/lfind.h"
 #include "search/l/lsearch.h"
 #include "shadow/grp/agetgroups.h"
+#include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
