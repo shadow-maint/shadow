@@ -18,6 +18,7 @@
 #include "alloc/realloc.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "shadow/gshadow/sgetsgent.h"
 #include "shadow/gshadow/sgrp.h"
 #include "string/strtok/stpsep.h"
 
@@ -72,6 +73,6 @@ fgetsgent(FILE *fp)
 		}
 	}
 	stpsep(buf, "\n");
-	return (sgetsgent (buf));
+	return sgetsgent(buf);
 }
 #endif
