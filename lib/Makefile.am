@@ -176,6 +176,8 @@ libshadow_la_SOURCES = \
 	shadow/grp/agetgroups.h \
 	shadow/gshadow/endsgent.c \
 	shadow/gshadow/endsgent.h \
+	shadow/gshadow/fgetsgent.c \
+	shadow/gshadow/fgetsgent.h \
 	shadow/gshadow/gshadow.c \
 	shadow/gshadow/gshadow.h \
 	shadow/gshadow/putsgent.c \
