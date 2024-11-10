@@ -8,33 +8,26 @@
 
 #include <config.h>
 
-#include "shadow/gshadow/getsgnam.h"
+#include "shadow/gshadow/getsgent.h"
 
 #include <stddef.h>
-#include <string.h>
 
-#include "defines.h"
-#include "shadow/gshadow/getsgent.h"
+#include "shadow/gshadow/fgetsgent.h"
+#include "shadow/gshadow/gshadow.h"
 #include "shadow/gshadow/setsgent.h"
 #include "shadow/gshadow/sgrp.h"
 
 
-/*
- * getsgnam - get a shadow group entry by name
- */
 #if defined(SHADOWGRP) && !defined(HAVE_GSHADOW_H)
+/*
+ * getsgent - get a single shadow group entry
+ */
 struct sgrp *
-getsgnam(const char *name)
+getsgent(void)
 {
-	struct sgrp *sgrp;
-
-	setsgent ();
-
-	while ((sgrp = getsgent ()) != NULL) {
-		if (strcmp (name, sgrp->sg_namp) == 0) {
-			break;
-		}
+	if (NULL == gshadow) {
+		setsgent ();
 	}
-	return sgrp;
+	return fgetsgent(gshadow);
 }
 #endif
