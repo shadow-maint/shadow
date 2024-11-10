@@ -18,8 +18,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alloc/malloc.h"
-#include "alloc/realloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadow/gshadow/fgetsgent.h"
@@ -27,56 +25,7 @@
 #include "shadow/gshadow/setsgent.h"
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
-#include "string/strtok/strsep2arr.h"
-#include "string/strtok/xastrsep2ls.h"
 
-
-static struct sgrp  sgroup = {};
-
-
-static /*@null@*/char **
-build_list(char *s)
-{
-	char    **l;
-	size_t  n;
-
-	l = xastrsep2ls(s, ",", &n);
-
-	if (streq(l[n-1], ""))
-		l[n-1] = NULL;
-
-	return l;
-}
-
-/*@observer@*//*@null@*/struct sgrp *
-sgetsgent(const char *s)
-{
-	static char  *dup = NULL;
-
-	char  *fields[4];
-
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
-		return NULL;
-
-	stpsep(dup, "\n");
-
-	if (STRSEP2ARR(dup, ":", fields) == -1)
-		return NULL;
-
-	sgroup.sg_namp = fields[0];
-	sgroup.sg_passwd = fields[1];
-
-	free(sgroup.sg_adm);
-	free(sgroup.sg_mem);
-
-	sgroup.sg_adm = build_list(fields[2]);
-	sgroup.sg_mem = build_list(fields[3]);
-
-	return &sgroup;
-}
 
 /*
  * getsgent - get a single shadow group entry
