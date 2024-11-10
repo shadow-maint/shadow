@@ -27,7 +27,6 @@ lib/getgr_nam_gid.c
 lib/getrange.c
 lib/groupio.c
 lib/groupmem.c
-lib/gshadow.c
 lib/hushed.c
 lib/idmapping.c
 lib/isexpired.c
