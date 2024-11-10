@@ -161,7 +161,6 @@ libshadow_la_SOURCES = \
 	setupenv.c \
 	sgetgrent.c \
 	sgetpwent.c \
-	sgetspent.c \
 	sgroupio.c \
 	sgroupio.h\
 	shadow.c \

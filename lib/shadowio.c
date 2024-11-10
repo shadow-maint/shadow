@@ -14,15 +14,18 @@
 
 #include "prototypes.h"
 #include "defines.h"
-#include <shadow.h>
-#include <stdio.h>
 #include "commonio.h"
 #include "getdef.h"
 #include "shadowio.h"
+
+#include <shadow.h>
+#include <stdio.h>
+
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
+
 
 static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {

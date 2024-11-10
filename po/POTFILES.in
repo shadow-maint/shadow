@@ -59,7 +59,6 @@ lib/setugid.c
 lib/setupenv.c
 lib/sgetgrent.c
 lib/sgetpwent.c
-lib/sgetspent.c
 lib/sgroupio.c
 lib/shadow.c
 lib/shadowio.c
