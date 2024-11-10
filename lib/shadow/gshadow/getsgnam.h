@@ -5,24 +5,20 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_GSHADOW__H_
-#define SHADOW_INCLUDE_LIB_GSHADOW__H_
+#ifndef SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_GETSGNAM_H_
+#define SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_GETSGNAM_H_
+
+
+#include "config.h"
+
+#include "shadow/gshadow/sgrp.h"
 
 
 #if __has_include(<gshadow.h>)
 # include <gshadow.h>
 #else
+struct sgrp *getsgnam(const char *);
+#endif
 
 
-#include <config.h>
-
-#include "shadow/gshadow/sgrp.h"
-
-
-/*@observer@*//*@null@*/struct sgrp *getsgent (void);
-
-#define	GSHADOW	"/etc/gshadow"
-
-
-#endif  // !__has_include(<gshadow.h>)
 #endif  // include guard
