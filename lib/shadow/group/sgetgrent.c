@@ -1,15 +1,14 @@
-/*
- * SPDX-FileCopyrightText: 1990 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2005       , Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2008       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1990-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "config.h"
 
-#ident "$Id$"
+#include "shadow/group/sgetgrent.h"
 
 #include <grp.h>
 #include <stdio.h>
@@ -56,6 +55,7 @@ list(char *s)
 }
 
 
+// from-string get group entry
 struct group *
 sgetgrent(const char *s)
 {
