@@ -23,6 +23,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadow/gshadow/gshadow.h"
+#include "shadow/gshadow/setsgent.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
@@ -47,15 +48,6 @@ build_list(char *s)
 	l[i] = NULL;
 
 	return l;
-}
-
-void setsgent (void)
-{
-	if (NULL != gshadow) {
-		rewind(gshadow);
-	} else {
-		gshadow = fopen(GSHADOW_FILE, "re");
-	}
 }
 
 /*@observer@*//*@null@*/struct sgrp *
