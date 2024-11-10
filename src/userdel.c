@@ -50,6 +50,7 @@
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
