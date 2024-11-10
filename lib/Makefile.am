@@ -306,5 +306,4 @@ endif
 
 EXTRA_DIST = \
 	.indent.pro \
-	gshadow_.h \
 	xgetXXbyYY.c
