@@ -51,9 +51,6 @@
 #include <dirent.h>
 
 #include <shadow.h>
-#if defined(SHADOWGRP)
-#include "gshadow_.h"
-#endif
 
 #include <limits.h>
 
