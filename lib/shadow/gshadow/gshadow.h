@@ -16,6 +16,9 @@
 #include "shadow/gshadow/gshadow.h"
 
 
+#define GSHADOW_FILE  "/etc/gshadow"
+
+
 extern FILE  *gshadow;
 
 
