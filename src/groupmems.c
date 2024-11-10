@@ -26,6 +26,7 @@
 #ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"

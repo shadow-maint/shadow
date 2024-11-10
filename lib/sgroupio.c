@@ -24,6 +24,7 @@
 #include "sgroupio.h"
 #include "shadow/gshadow/gshadow.h"
 #include "shadow/gshadow/putsgent.h"
+#include "shadow/gshadow/sgrp.h"
 #include "string/memset/memzero.h"
 
 

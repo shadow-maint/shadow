@@ -24,6 +24,7 @@
 #include "nscd.h"
 #include "prototypes.h"
 #include "shadow/gshadow/gshadow.h"
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"

@@ -24,6 +24,7 @@
 #include "prototypes.h"
 #include "shadow/gshadow/gshadow.h"
 #include "shadow/gshadow/setsgent.h"
+#include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
