@@ -22,6 +22,7 @@
 #include "alloc/realloc.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "shadow/gshadow/fgetsgent.h"
 #include "shadow/gshadow/gshadow.h"
 #include "shadow/gshadow/setsgent.h"
 #include "shadow/gshadow/sgrp.h"
@@ -75,57 +76,6 @@ sgetsgent(const char *s)
 	sgroup.sg_mem = build_list(fields[3]);
 
 	return &sgroup;
-}
-
-/*
- * fgetsgent - convert next line in stream to (struct sgrp)
- *
- * fgetsgent() reads the next line from the provided stream and
- * converts it to a (struct sgrp).  NULL is returned on EOF.
- */
-
-/*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE * fp)
-{
-	static size_t buflen = 0;
-	static char *buf = NULL;
-
-	char *cp;
-
-	if (0 == buflen) {
-		buf = MALLOC(BUFSIZ, char);
-		if (NULL == buf) {
-			return NULL;
-		}
-		buflen = BUFSIZ;
-	}
-
-	if (NULL == fp) {
-		return NULL;
-	}
-
-	if (fgetsx(buf, buflen, fp) == NULL)
-		return NULL;
-
-	while (   (strrchr(buf, '\n') == NULL)
-	       && (feof (fp) == 0)) {
-		size_t len;
-
-		cp = REALLOC(buf, buflen * 2, char);
-		if (NULL == cp) {
-			return NULL;
-		}
-		buf = cp;
-		buflen *= 2;
-
-		len = strlen (buf);
-		if (fgetsx (&buf[len],
-			    (int) (buflen - len),
-			    fp) != &buf[len]) {
-			return NULL;
-		}
-	}
-	stpsep(buf, "\n");
-	return (sgetsgent (buf));
 }
 
 /*
