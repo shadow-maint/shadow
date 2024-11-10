@@ -34,6 +34,8 @@
 #include "attr.h"
 #include "defines.h"
 #include "commonio.h"
+#include "shadow/gshadow/sgrp.h"
+
 
 /* addgrps.c */
 #if !defined(USE_PAM)
