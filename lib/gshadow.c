@@ -51,7 +51,7 @@ void setsgent (void)
 	if (NULL != gshadow) {
 		rewind(gshadow);
 	} else {
-		gshadow = fopen(SGROUP_FILE, "re");
+		gshadow = fopen(_PATH_GSHADOW, "re");
 	}
 }
 

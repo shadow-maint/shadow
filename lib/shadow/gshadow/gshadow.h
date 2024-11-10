@@ -11,7 +11,13 @@
 
 #include "config.h"
 
+#include <paths.h>
 #include <stdio.h>
+
+
+#ifndef _PATH_GSHADOW
+# define _PATH_GSHADOW  "/etc/gshadow"
+#endif
 
 
 extern FILE  *gshadow;

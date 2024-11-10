@@ -172,12 +172,6 @@
 #define SUBGID_FILE "/etc/subgid"
 #endif
 
-#ifdef SHADOWGRP
-#ifndef SGROUP_FILE
-#define SGROUP_FILE "/etc/gshadow"
-#endif
-#endif
-
 /*
  * string to use for the pw_passwd field in /etc/passwd when using
  * shadow passwords - most systems use "x" but there are a few

@@ -12,7 +12,7 @@
 
 #ifdef SHADOWGRP
 
-#ident "$Id$"
+#include <paths.h>
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
@@ -22,6 +22,7 @@
 #include "fields.h"
 #include "getdef.h"
 #include "sgroupio.h"
+#include "shadow/gshadow/gshadow.h"
 #include "shadow/gshadow/putsgent.h"
 #include "string/memset/memzero.h"
 
@@ -206,7 +207,7 @@ static struct commonio_ops gshadow_ops = {
 };
 
 static struct commonio_db gshadow_db = {
-	SGROUP_FILE,		/* filename */
+	_PATH_GSHADOW,		/* filename */
 	&gshadow_ops,		/* ops */
 	NULL,			/* fp */
 #ifdef WITH_SELINUX
