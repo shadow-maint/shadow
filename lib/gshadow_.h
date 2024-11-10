@@ -13,22 +13,13 @@
 # include <gshadow.h>
 #else
 
-/*
- * Shadow group security file structure
- */
 
-struct sgrp {
-	char *sg_namp;		/* group name */
-	char *sg_passwd;	/* group password */
-	char **sg_adm;		/* group administrator list */
-	char **sg_mem;		/* group membership list */
-};
-
-/*
- * Shadow group security file functions.
- */
+#include <config.h>
 
 #include <stdio.h>		/* for FILE */
+
+#include "shadow/gshadow/sgrp.h"
+
 
 /*@observer@*//*@null@*/struct sgrp *getsgent (void);
 /*@observer@*//*@null@*/struct sgrp *getsgnam (const char *);
