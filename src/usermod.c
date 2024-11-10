@@ -61,6 +61,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadow/gshadow/endsgent.h"
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
