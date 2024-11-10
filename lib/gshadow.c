@@ -22,12 +22,12 @@
 #include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "shadow/gshadow/gshadow.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
-static /*@null@*/FILE *shadow;
 static struct sgrp  sgroup = {};
 
 #define	FIELDS	4
@@ -51,20 +51,20 @@ build_list(char *s)
 
 void setsgent (void)
 {
-	if (NULL != shadow) {
-		rewind (shadow);
+	if (NULL != gshadow) {
+		rewind(gshadow);
 	} else {
-		shadow = fopen (SGROUP_FILE, "re");
+		gshadow = fopen(SGROUP_FILE, "re");
 	}
 }
 
 void endsgent (void)
 {
-	if (NULL != shadow) {
-		(void) fclose (shadow);
+	if (NULL != gshadow) {
+		fclose(gshadow);
 	}
 
-	shadow = NULL;
+	gshadow = NULL;
 }
 
 /*@observer@*//*@null@*/struct sgrp *
@@ -175,10 +175,10 @@ sgetsgent(const char *string)
 
 /*@observer@*//*@null@*/struct sgrp *getsgent (void)
 {
-	if (NULL == shadow) {
+	if (NULL == gshadow) {
 		setsgent ();
 	}
-	return (fgetsgent (shadow));
+	return fgetsgent(gshadow);
 }
 
 /*
