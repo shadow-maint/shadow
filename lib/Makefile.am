@@ -180,6 +180,8 @@ libshadow_la_SOURCES = \
 	shadow/gshadow/gshadow.h \
 	shadow/gshadow/putsgent.c \
 	shadow/gshadow/putsgent.h \
+	shadow/gshadow/setsgent.c \
+	shadow/gshadow/setsgent.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
