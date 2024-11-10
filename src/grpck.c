@@ -12,6 +12,7 @@
 
 #include <fcntl.h>
 #include <grp.h>
+#include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <getopt.h>
@@ -22,6 +23,7 @@
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
+#include "shadow/gshadow/gshadow.h"
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"
@@ -30,6 +32,7 @@
 #ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
+
 
 /*
  * Exit codes
@@ -52,7 +55,7 @@ static const char *grp_file = GROUP_FILE;
 static bool use_system_grp_file = true;
 
 #ifdef	SHADOWGRP
-static const char *sgr_file = SGROUP_FILE;
+static const char  *sgr_file = _PATH_GSHADOW;
 static bool use_system_sgr_file = true;
 static bool is_shadow = false;
 static bool sgr_locked = false;
