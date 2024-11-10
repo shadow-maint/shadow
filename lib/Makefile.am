@@ -178,6 +178,8 @@ libshadow_la_SOURCES = \
 	shadow/gshadow/endsgent.h \
 	shadow/gshadow/fgetsgent.c \
 	shadow/gshadow/fgetsgent.h \
+	shadow/gshadow/getsgnam.c \
+	shadow/gshadow/getsgnam.h \
 	shadow/gshadow/gshadow.c \
 	shadow/gshadow/gshadow.h \
 	shadow/gshadow/putsgent.c \

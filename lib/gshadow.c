@@ -38,24 +38,6 @@
 	}
 	return fgetsgent(gshadow);
 }
-
-/*
- * getsgnam - get a shadow group entry by name
- */
-
-/*@observer@*//*@null@*/struct sgrp *getsgnam (const char *name)
-{
-	struct sgrp *sgrp;
-
-	setsgent ();
-
-	while (NULL != (sgrp = getsgent())) {
-		if (streq(name, sgrp->sg_namp)) {
-			break;
-		}
-	}
-	return sgrp;
-}
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif  // !SHADOWGRP
