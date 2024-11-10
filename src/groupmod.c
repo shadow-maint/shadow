@@ -38,6 +38,7 @@
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/sprintf/stpeprintf.h"

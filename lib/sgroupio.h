@@ -12,6 +12,12 @@
 #ifndef _SGROUPIO_H
 #define _SGROUPIO_H
 
+
+#include "config.h"
+
+#include "shadow/gshadow/sgrp.h"
+
+
 extern int sgr_close (void);
 extern bool sgr_file_present (void);
 extern /*@observer@*/ /*@null@*/const struct sgrp *sgr_locate (const char *name);

@@ -36,6 +36,7 @@
 #include "groupio.h"
 #include "sgroupio.h"
 #include "shadow/gshadow/gshadow.h"
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 
 

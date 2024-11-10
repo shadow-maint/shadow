@@ -17,6 +17,7 @@
 
 #include "alloc/malloc.h"
 #include "prototypes.h"
+#include "shadow/gshadow/sgrp.h"
 
 
 /*

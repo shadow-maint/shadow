@@ -34,6 +34,7 @@
 #endif
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"

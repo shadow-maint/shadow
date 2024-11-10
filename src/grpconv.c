@@ -36,6 +36,7 @@
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
+#include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
 

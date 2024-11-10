@@ -182,6 +182,8 @@ libshadow_la_SOURCES = \
 	shadow/gshadow/putsgent.h \
 	shadow/gshadow/setsgent.c \
 	shadow/gshadow/setsgent.h \
+	shadow/gshadow/sgrp.c \
+	shadow/gshadow/sgrp.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
