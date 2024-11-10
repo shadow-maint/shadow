@@ -1,15 +1,14 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2003 - 2005, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2008       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2003-2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "config.h"
 
-#ident "$Id$"
+#include "shadow/passwd/sgetpwent.h"
 
 #include <pwd.h>
 #include <stdio.h>
@@ -38,6 +37,7 @@
  *	performance reasons.  I am going to come up with some conditional
  *	compilation glarp to improve on this in the future.
  */
+// from-string get pasword entry
 struct passwd *
 sgetpwent(const char *s)
 {
@@ -85,4 +85,3 @@ sgetpwent(const char *s)
 
 	return &pwent;
 }
-
