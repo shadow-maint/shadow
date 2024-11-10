@@ -21,6 +21,7 @@
 #include "commonio.h"
 #include "getdef.h"
 #include "sgroupio.h"
+#include "shadow/gshadow/putsgent.h"
 #include "string/memset/memzero.h"
 
 
