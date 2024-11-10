@@ -397,9 +397,6 @@ extern void setup (struct passwd *);
 /* setupenv.c */
 extern void setup_env (struct passwd *);
 
-/* sgetgrent.c */
-extern struct group *sgetgrent (const char *buf);
-
 /* sgetpwent.c */
 extern struct passwd *sgetpwent (const char *buf);
 
