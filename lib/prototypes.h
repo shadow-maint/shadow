@@ -397,9 +397,6 @@ extern void setup (struct passwd *);
 /* setupenv.c */
 extern void setup_env (struct passwd *);
 
-/* sgetpwent.c */
-extern struct passwd *sgetpwent (const char *buf);
-
 /* sgetspent.c */
 #ifndef HAVE_SGETSPENT
 extern struct spwd *sgetspent (const char *string);
