@@ -36,6 +36,7 @@
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
+#include "shadow/gshadow/gshadow.h"
 #include "shadowlog.h"
 
 
@@ -201,11 +202,11 @@ int main (int argc, char **argv)
 		fail_exit (3);
 	}
 
-	if (unlink (SGROUP_FILE) != 0) {
+	if (unlink(GSHADOW_FILE) != 0) {
 		fprintf (stderr,
 		         _("%s: cannot delete %s\n"),
-		         Prog, SGROUP_FILE);
-		SYSLOG ((LOG_ERR, "cannot delete %s", SGROUP_FILE));
+		         Prog, GSHADOW_FILE);
+		SYSLOG((LOG_ERR, "cannot delete %s", GSHADOW_FILE));
 		fail_exit (3);
 	}
 
