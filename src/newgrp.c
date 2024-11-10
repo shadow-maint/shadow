@@ -28,6 +28,7 @@
 #include "search/l/lsearch.h"
 #include "shadow/grp/agetgroups.h"
 #include "shadow/gshadow/endsgent.h"
+#include "shadow/gshadow/getsgnam.h"
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
