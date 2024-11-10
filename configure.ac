@@ -68,10 +68,7 @@ AC_CHECK_MEMBERS([struct utmpx.ut_name,
 dnl Checks for library functions.
 AC_TYPE_GETGROUPS
 AC_FUNC_UTIME_NULL
-AC_REPLACE_FUNCS(putgrent putpwent putspent)
-AC_REPLACE_FUNCS(sgetgrent sgetpwent)
 
-AC_CHECK_FUNC(setpgrp)
 AC_CHECK_FUNC(secure_getenv, [AC_DEFINE(HAS_SECURE_GETENV,
                                         1,
                                         [Defined to 1 if you have the declaration of 'secure_getenv'])])
