@@ -56,10 +56,10 @@ lib/selinux.c
 lib/semanage.c
 lib/setugid.c
 lib/setupenv.c
-lib/sgetgrent.c
 lib/sgetpwent.c
 lib/sgetspent.c
 lib/sgroupio.c
+lib/shadow/group/sgetgrent.c
 lib/shadowio.c
 lib/shadowmem.c
 lib/shell.c
