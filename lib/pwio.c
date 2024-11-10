@@ -18,6 +18,8 @@
 #include "fields.h"
 #include "prototypes.h"
 #include "pwio.h"
+#include "shadow/passwd/sgetpwent.h"
+
 
 static /*@null@*/ /*@only@*/void *passwd_dup (const void *ent)
 {
