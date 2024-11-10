@@ -166,11 +166,12 @@ libshadow_la_SOURCES = \
 	semanage.c \
 	setugid.c \
 	setupenv.c \
-	sgetgrent.c \
 	sgetpwent.c \
 	sgetspent.c \
 	sgroupio.c \
 	sgroupio.h \
+	shadow/group/sgetgrent.c \
+	shadow/group/sgetgrent.h \
 	shadow/grp/agetgroups.c \
 	shadow/grp/agetgroups.h \
 	shadow/gshadow/endsgent.c \
