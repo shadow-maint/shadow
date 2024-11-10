@@ -10,7 +10,6 @@ man_MANS = \
 	man1/expiry.1 \
 	man5/faillog.5 \
 	man8/faillog.8 \
-	man3/getspnam.3 \
 	man1/gpasswd.1 \
 	man8/groupadd.8 \
 	man8/groupdel.8 \
@@ -32,7 +31,6 @@ man_MANS = \
 	man8/pwconv.8 \
 	man8/pwunconv.8 \
 	man1/sg.1 \
-	man3/shadow.3 \
 	man5/shadow.5 \
 	man1/su.1 \
 	man5/suauth.5 \

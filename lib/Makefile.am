@@ -163,7 +163,6 @@ libshadow_la_SOURCES = \
 	sgetpwent.c \
 	sgroupio.c \
 	sgroupio.h\
-	shadow.c \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \

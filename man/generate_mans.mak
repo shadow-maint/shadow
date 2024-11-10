@@ -80,6 +80,4 @@ endif
 
 man8/grpconv.8 man8/grpunconv.8 man8/pwunconv.8: man8/pwconv.8
 
-man3/getspnam.3: man3/shadow.3
-
 man8/vigr.8: man8/vipw.8
