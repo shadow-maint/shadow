@@ -117,7 +117,6 @@ libshadow_la_SOURCES = \
 	groupio.c \
 	groupmem.c \
 	groupio.h \
-	gshadow.c \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
@@ -176,6 +175,8 @@ libshadow_la_SOURCES = \
 	shadow/gshadow/endsgent.h \
 	shadow/gshadow/fgetsgent.c \
 	shadow/gshadow/fgetsgent.h \
+	shadow/gshadow/getsgent.c \
+	shadow/gshadow/getsgent.h \
 	shadow/gshadow/getsgnam.c \
 	shadow/gshadow/getsgnam.h \
 	shadow/gshadow/gshadow.c \
