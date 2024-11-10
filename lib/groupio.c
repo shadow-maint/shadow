@@ -23,6 +23,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "prototypes.h"
+#include "shadow/group/sgetgrent.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 
