@@ -5,21 +5,22 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_PUTSGENT_H_
-#define SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_PUTSGENT_H_
+#ifndef SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_SGRP_H_
+#define SHADOW_INCLUDE_LIB_SHADOW_GSHADOW_SGRP_H_
 
 
 #include "config.h"
-
-#include <stdio.h>
-
-#include "shadow/gshadow/sgrp.h"
 
 
 #if __has_include(<gshadow.h>)
 # include <gshadow.h>
 #else
-int putsgent(const struct sgrp *sgrp, FILE *fp);
+struct sgrp {
+	char *sg_namp;		/* group name */
+	char *sg_passwd;	/* group password */
+	char **sg_adm;		/* group administrator list */
+	char **sg_mem;		/* group membership list */
+};
 #endif
 
 
