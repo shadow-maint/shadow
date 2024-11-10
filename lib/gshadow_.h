@@ -16,15 +16,12 @@
 
 #include <config.h>
 
-#include <stdio.h>		/* for FILE */
-
 #include "shadow/gshadow/sgrp.h"
 
 
 /*@observer@*//*@null@*/struct sgrp *getsgent (void);
 /*@observer@*//*@null@*/struct sgrp *getsgnam (const char *);
 /*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *);
-/*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE *);
 
 #define	GSHADOW	"/etc/gshadow"
 
