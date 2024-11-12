@@ -13,8 +13,8 @@
 #include <stdio.h>
 #include <strings.h>
 #include <sys/prctl.h>
-#if HAVE_SYS_CAPABILITY_H
-#include <sys/capability.h>
+#if __has_include(<sys/capability.h>)
+# include <sys/capability.h>
 #endif
 
 #include "alloc/calloc.h"
@@ -86,7 +86,7 @@ get_map_ranges(int ranges, int argc, char **argv)
  */
 #define ULONG_DIGITS (((WIDTHOF(unsigned long) + 9)/10)*3)
 
-#if HAVE_SYS_CAPABILITY_H
+#if __has_include(<sys/capability.h>)
 static inline bool maps_lower_root(int cap, int ranges, const struct map_range *mappings)
 {
 	int idx;
@@ -129,7 +129,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	char *buf, *pos, *end;
 	int fd;
 
-#if HAVE_SYS_CAPABILITY_H
+#if __has_include(<sys/capability.h>)
 	int cap;
 	struct __user_cap_header_struct hdr = {_LINUX_CAPABILITY_VERSION_3, 0};
 	struct __user_cap_data_struct data[2] = {{0}};
