@@ -37,7 +37,7 @@ LT_LIB_DLLOAD
 dnl Checks for libraries.
 
 dnl Checks for header files.
-AC_CHECK_HEADERS(crypt.h utmp.h \
+AC_CHECK_HEADERS(utmp.h \
 	termio.h sgtty.h sys/ioctl.h paths.h \
 	sys/capability.h sys/random.h \
 	gshadow.h lastlog.h rpc/key_prot.h acl/libacl.h \
