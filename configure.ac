@@ -39,7 +39,6 @@ dnl Checks for libraries.
 dnl Checks for header files.
 AC_CHECK_HEADERS(utmp.h \
 	termio.h sgtty.h sys/ioctl.h paths.h \
-	sys/capability.h \
 	gshadow.h lastlog.h rpc/key_prot.h acl/libacl.h \
 	attr/libattr.h attr/error_context.h)
 
