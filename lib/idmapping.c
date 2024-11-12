@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <strings.h>
-#if HAVE_SYS_CAPABILITY_H
 #include <sys/prctl.h>
+#if HAVE_SYS_CAPABILITY_H
 #include <sys/capability.h>
 #endif
 
