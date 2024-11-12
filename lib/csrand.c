@@ -1,21 +1,19 @@
-/*
- * SPDX-FileCopyrightText:  Alejandro Colomar <alx@kernel.org>
- *
- * SPDX-License-Identifier:  BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 #include <config.h>
 
 #ident "$Id$"
 
+#include <fcntl.h>
 #include <limits.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #if HAVE_SYS_RANDOM_H
 #include <sys/random.h>
 #endif
+
 #include "bit.h"
 #include "defines.h"
 #include "prototypes.h"
@@ -34,7 +32,7 @@ static unsigned long csrand_uniform_slow(unsigned long n);
 unsigned long
 csrand(void)
 {
-	FILE           *fp;
+	int            fd;
 	unsigned long  r;
 
 #ifdef HAVE_GETENTROPY
@@ -56,17 +54,16 @@ csrand(void)
 #endif
 
 	/* Use /dev/urandom as a last resort.  */
-	fp = fopen("/dev/urandom", "r");
-	if (NULL == fp) {
+	fd = open("/dev/urandom", O_RDONLY);
+	if (fd == -1)
+		goto fail;
+
+	if (read(fd, &r, sizeof(r)) != sizeof(r)) {
+		close(fd);
 		goto fail;
 	}
 
-	if (fread(&r, sizeof(r), 1, fp) != 1) {
-		fclose(fp);
-		goto fail;
-	}
-
-	fclose(fp);
+	close(fd);
 	return r;
 
 fail:
