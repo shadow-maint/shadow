@@ -10,8 +10,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-#if HAVE_SYS_RANDOM_H
-#include <sys/random.h>
+#if __has_include(<sys/random.h>)
+# include <sys/random.h>
 #endif
 
 #include "bit.h"
