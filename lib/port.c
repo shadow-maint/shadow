@@ -121,7 +121,7 @@ getportent(void)
 
 	if (NULL == ports) {
 		errno = saveerr;
-		return 0;
+		return NULL;
 	}
 
 	/*
@@ -204,7 +204,7 @@ next:
 	cp = field;
 
 	if ('\0' == *cp) {
-		port.pt_times = 0;
+		port.pt_times = NULL;
 		return &port;
 	}
 
@@ -259,7 +259,7 @@ next:
 				break;
 			default:
 				errno = EINVAL;
-				return 0;
+				return NULL;
 			}
 		}
 
@@ -380,7 +380,7 @@ bool isttytime (const char *id, const char *port, time_t when)
 	 * ever let them login.
 	 */
 
-	if (0 == pp->pt_times) {
+	if (NULL == pp->pt_times) {
 		return false;
 	}
 

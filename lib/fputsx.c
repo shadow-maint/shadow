@@ -27,7 +27,7 @@ fgetsx(/*@returned@*/char *restrict buf, int cnt, FILE *restrict f)
 	while (cnt > 0) {
 		if (fgets (cp, cnt, f) != cp) {
 			if (cp == buf) {
-				return 0;
+				return NULL;
 			} else {
 				break;
 			}

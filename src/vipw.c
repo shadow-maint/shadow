@@ -389,7 +389,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		vipwexit (fileedit, 1, 1);
 	}
 	if (st1.st_mtime == st2.st_mtime) {
-		vipwexit (0, 0, 0);
+		vipwexit(NULL, 0, 0);
 	}
 #ifdef WITH_SELINUX
 	/* unset the fscreatecon */
@@ -446,7 +446,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			free(to_rename);
 		}
 #endif				/* WITH_TCB */
-		vipwexit (0, 0, 1);
+		vipwexit(NULL, 0, 1);
 	}
 
 #ifdef WITH_TCB
