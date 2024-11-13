@@ -166,7 +166,7 @@ static bool list_match (char *list, const char *item, bool (*match_fn) (const ch
 		while (   ((tok = strtok (NULL, sep)) != NULL)
 		       && (strcasecmp (tok, "EXCEPT") != 0))
 			/* VOID */ ;
-		if (tok == 0 || !list_match (NULL, item, match_fn)) {
+		if (tok == NULL || !list_match(NULL, item, match_fn)) {
 			return (match);
 		}
 	}

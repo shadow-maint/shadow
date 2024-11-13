@@ -54,7 +54,7 @@ sgetpwent(const char *buf)
 		fprintf (shadow_logfd,
 		         "%s: Too long passwd entry encountered, file corruption?\n",
 		         shadow_progname);
-		return 0;	/* fail if too long */
+		return NULL;	/* fail if too long */
 	}
 	strcpy (pwdbuf, buf);
 

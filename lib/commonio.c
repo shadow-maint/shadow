@@ -1240,7 +1240,7 @@ int commonio_rewind (struct commonio_db *db)
 
 	if (!db->isopen) {
 		errno = EINVAL;
-		return 0;
+		return NULL;
 	}
 	if (NULL == db->cursor) {
 		db->cursor = db->head;

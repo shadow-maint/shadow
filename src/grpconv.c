@@ -197,7 +197,7 @@ int main (int argc, char **argv)
 			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)
 				sgent.sg_passwd = gr->gr_passwd;
 		} else {
-			static char *empty = 0;
+			static char *empty = NULL;
 
 			/* add new shadow group entry */
 			bzero(&sgent, sizeof sgent);
