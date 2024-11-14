@@ -683,11 +683,7 @@ fail_gg:
 	grouplist = XREALLOC(grouplist, ngroups + 1, GETGROUPS_T);
 
 	if (LFIND(&gid, grouplist, ngroups) == NULL) {
-		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			(void) fputs (_("too many groups\n"), stderr);
-		} else {
-			grouplist[ngroups++] = gid;
-		}
+		grouplist[ngroups++] = gid;
 	}
 
 	if (setgroups(ngroups, grouplist) == -1)
