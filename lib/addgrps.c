@@ -38,7 +38,8 @@ add_groups(const char *list)
 	char *g, *p;
 	char buf[1024];
 	FILE *shadow_logfd = log_get_logfd();
-	size_t  ngroups;
+	size_t  n;
+	ssize_t n0;
 
 	if (strlen (list) >= sizeof (buf)) {
 		errno = EINVAL;
@@ -46,18 +47,19 @@ add_groups(const char *list)
 	}
 	strcpy (buf, list);
 
-	ngroups = getgroups(0, NULL);
-	if (ngroups == -1)
+	n0 = getgroups(0, NULL);
+	if (n0 == -1)
 		return -1;
 
-	grouplist = MALLOC(ngroups, GETGROUPS_T);
+	grouplist = MALLOC(n0, GETGROUPS_T);
 	if (grouplist == NULL)
 		return -1;
 
-	ngroups = getgroups(ngroups, grouplist);
-	if (ngroups == -1)
+	n0 = getgroups(n0, grouplist);
+	if (n0 == -1)
 		goto free_gids;
 
+	n = n0;
 	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
 		struct group  *grp;
@@ -68,14 +70,14 @@ add_groups(const char *list)
 			continue;
 		}
 
-		grouplist = REALLOCF(grouplist, ngroups + 1, GETGROUPS_T);
+		grouplist = REALLOCF(grouplist, n + 1, GETGROUPS_T);
 		if (grouplist == NULL)
 			return -1;
 
-		LSEARCH(&grp->gr_gid, grouplist, &ngroups);
+		LSEARCH(&grp->gr_gid, grouplist, &n);
 	}
 
-	if (setgroups(ngroups, grouplist) == -1) {
+	if (setgroups(n, grouplist) == -1) {
 		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
 		goto free_gids;
 	}
