@@ -370,7 +370,6 @@ static void syslog_sg (const char *name, const char *group)
 int main (int argc, char **argv)
 {
 	bool initflag = false;
-	int i;
 	bool is_member = false;
 	bool cflag = false;
 	int err = 0;
@@ -556,16 +555,13 @@ int main (int argc, char **argv)
 	 * set.
 	 */
 	/* don't use getgroups(0, 0) - it doesn't work on some systems */
-	i = 16;
-	for (;;) {
+	for (int i = 16; /* void */; i *= 2) {
 		grouplist = XMALLOC(i, GETGROUPS_T);
 		ngroups = getgroups (i, grouplist);
 		if (i > ngroups && !(ngroups == -1 && errno == EINVAL)) {
 			break;
 		}
-		/* not enough room, so try allocating a larger buffer */
 		free (grouplist);
-		i *= 2;
 	}
 	if (ngroups < 0) {
 		perror ("getgroups");
@@ -632,7 +628,7 @@ int main (int argc, char **argv)
 	 * database. However getgroups() will return the group. So
 	 * if she is listed there already it is ok to grant membership.
 	 */
-	for (i = 0; i < ngroups; i++) {
+	for (int i = 0; i < ngroups; i++) {
 		if (grp->gr_gid == grouplist[i]) {
 			is_member = true;
 			break;
@@ -689,6 +685,7 @@ int main (int argc, char **argv)
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
+	int i;
 	for (i = 0; i < ngroups; i++) {
 		if (gid == grouplist[i]) {
 			break;
