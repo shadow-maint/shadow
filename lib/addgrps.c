@@ -70,6 +70,10 @@ add_groups(const char *list)
 			continue;
 		}
 
+		grouplist = REALLOCF(grouplist, ngroups + 1, GETGROUPS_T);
+		if (grouplist == NULL)
+			return -1;
+
 		if (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL)
 			continue;
 
@@ -77,10 +81,7 @@ add_groups(const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		grouplist = REALLOCF(grouplist, ngroups + 1, GETGROUPS_T);
-		if (grouplist == NULL) {
-			return -1;
-		}
+
 		grouplist[ngroups] = grp->gr_gid;
 		ngroups++;
 		added = true;
