@@ -25,6 +25,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "search/l/lfind.h"
+#include "search/l/lsearch.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -39,7 +40,7 @@ static const char *Prog;
 extern char **newenvp;
 
 #ifdef HAVE_SETGROUPS
-static int ngroups;
+static size_t  ngroups;
 static /*@null@*/ /*@only@*/GETGROUPS_T *grouplist;
 #endif
 
@@ -688,9 +689,7 @@ fail_gg:
 	 */
 	grouplist = XREALLOC(grouplist, ngroups + 1, GETGROUPS_T);
 
-	if (LFIND(&gid, grouplist, ngroups) == NULL) {
-		grouplist[ngroups++] = gid;
-	}
+	LSEARCH(&gid, grouplist, &ngroups);
 
 	if (setgroups(ngroups, grouplist) == -1)
 		perror("setgroups");
