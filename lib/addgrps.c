@@ -88,11 +88,8 @@ add_groups(const char *list)
 	}
 
 	if (added) {
-		int  ret;
-
-		ret = setgroups (ngroups, grouplist);
-		free (grouplist);
-		return ret;
+		if (setgroups(ngroups, grouplist) == -1)
+			goto free_gids;
 	}
 
 	free (grouplist);
