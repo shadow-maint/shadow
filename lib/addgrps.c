@@ -1,11 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2001 - 2006, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2007 - 2009, Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2001-2006, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2007-2009, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -21,9 +20,11 @@
 
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
+#include "search/l/lfind.h"
 #include "shadowlog.h"
 
 #ident "$Id$"
+
 
 /*
  * Add groups with names from LIST (separated by commas or colons)
@@ -61,7 +62,6 @@ add_groups(const char *list)
 	added = false;
 	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
-		size_t        i;
 		struct group  *grp;
 
 		grp = getgrnam(g); /* local, no need for xgetgrnam */
@@ -70,11 +70,8 @@ add_groups(const char *list)
 			continue;
 		}
 
-		for (i = 0; i < (size_t)ngroups && grouplist[i] != grp->gr_gid; i++);
-
-		if (i < (size_t)ngroups) {
+		if (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL)
 			continue;
-		}
 
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
