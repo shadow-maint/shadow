@@ -554,28 +554,28 @@ int main (int argc, char **argv)
 	 * nasty message but at least your real and effective group ids are
 	 * set.
 	 */
-	/* don't use getgroups(0, 0) - it doesn't work on some systems */
-	for (int i = 16; /* void */; i *= 2) {
-		grouplist = XMALLOC(i, GETGROUPS_T);
-		ngroups = getgroups (i, grouplist);
-		if (ngroups == -1 && errno != EINVAL) {
-			perror("getgroups");
+
+	ngroups = getgroups(0, NULL);
+	if (ngroups == -1)
+		goto fail_gg;
+
+	grouplist = XMALLOC(ngroups, GETGROUPS_T);
+
+	ngroups = getgroups(ngroups, grouplist);
+	if (ngroups == -1) {
+fail_gg:
+		perror("getgroups");
 #ifdef WITH_AUDIT
-			if (group) {
-				SNPRINTF(audit_buf, "changing new-group=%s", group);
-				audit_logger(AUDIT_CHGRP_ID, Prog,
-					     audit_buf, NULL, getuid(), 0);
-			} else {
-				audit_logger(AUDIT_CHGRP_ID, Prog,
-					     "changing", NULL, getuid(), 0);
-			}
+		if (group) {
+			SNPRINTF(audit_buf, "changing new-group=%s", group);
+			audit_logger(AUDIT_CHGRP_ID, Prog,
+				     audit_buf, NULL, getuid(), 0);
+		} else {
+			audit_logger(AUDIT_CHGRP_ID, Prog,
+				     "changing", NULL, getuid(), 0);
+		}
 #endif
-			exit(EXIT_FAILURE);
-		}
-		if (i > (size_t)ngroups) {
-			break;
-		}
-		free (grouplist);
+		exit(EXIT_FAILURE);
 	}
 
 	/*
@@ -685,6 +685,8 @@ int main (int argc, char **argv)
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
+	grouplist = XREALLOC(grouplist, ngroups + 1, GETGROUPS_T);
+
 	int i;
 	for (i = 0; i < ngroups; i++) {
 		if (gid == grouplist[i]) {
