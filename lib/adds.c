@@ -11,5 +11,3 @@
 
 extern inline long addsl2(long a, long b);
 extern inline long addslN(size_t n, long addend[n]);
-
-extern inline int cmpl(const void *p1, const void *p2);
