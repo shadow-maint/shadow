@@ -46,21 +46,17 @@ add_groups(const char *list)
 	}
 	strcpy (buf, list);
 
-	for (size_t i = 16; /* void */; i *= 2) {
-		grouplist = MALLOC(i, GETGROUPS_T);
-		if (NULL == grouplist) {
-			return -1;
-		}
-		ngroups = getgroups (i, grouplist);
-		if (ngroups == -1 && errno != EINVAL) {
-			free(grouplist);
-			return -1;
-		}
-		if (i > (size_t)ngroups) {
-			break;
-		}
-		free (grouplist);
-	}
+	ngroups = getgroups(0, NULL);
+	if (ngroups == -1)
+		return -1;
+
+	grouplist = MALLOC(ngroups, GETGROUPS_T);
+	if (grouplist == NULL)
+		return -1;
+
+	ngroups = getgroups(ngroups, grouplist);
+	if (ngroups == -1)
+		goto free_gids;
 
 	added = false;
 	p = buf;
@@ -103,6 +99,10 @@ add_groups(const char *list)
 
 	free (grouplist);
 	return 0;
+
+free_gids:
+	free(grouplist);
+	return -1;
 }
 #else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
