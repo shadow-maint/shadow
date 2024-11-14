@@ -192,6 +192,8 @@ libshadow_la_SOURCES = \
 	string/sprintf/xasprintf.h \
 	string/strchr/strchrcnt.c \
 	string/strchr/strchrcnt.h \
+	string/strchr/strchrscnt.c \
+	string/strchr/strchrscnt.h \
 	string/strchr/stpspn.c \
 	string/strchr/stpspn.h \
 	string/strchr/strnul.c \
