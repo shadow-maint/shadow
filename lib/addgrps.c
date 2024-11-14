@@ -52,18 +52,14 @@ add_groups(const char *list)
 			return -1;
 		}
 		ngroups = getgroups (i, grouplist);
-		if (   (   (-1 == ngroups)
-		        && (EINVAL != errno))
-		    || (i > (size_t)ngroups)) {
-			/* Unexpected failure of getgroups or successful
-			 * reception of the groups */
+		if (ngroups == -1 && errno != EINVAL) {
+			free(grouplist);
+			return -1;
+		}
+		if (i > (size_t)ngroups) {
 			break;
 		}
 		free (grouplist);
-	}
-	if (ngroups < 0) {
-		free (grouplist);
-		return -1;
 	}
 
 	added = false;

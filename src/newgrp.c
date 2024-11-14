@@ -558,24 +558,24 @@ int main (int argc, char **argv)
 	for (int i = 16; /* void */; i *= 2) {
 		grouplist = XMALLOC(i, GETGROUPS_T);
 		ngroups = getgroups (i, grouplist);
-		if (i > ngroups && !(ngroups == -1 && errno == EINVAL)) {
+		if (ngroups == -1 && errno != EINVAL) {
+			perror("getgroups");
+#ifdef WITH_AUDIT
+			if (group) {
+				SNPRINTF(audit_buf, "changing new-group=%s", group);
+				audit_logger(AUDIT_CHGRP_ID, Prog,
+					     audit_buf, NULL, getuid(), 0);
+			} else {
+				audit_logger(AUDIT_CHGRP_ID, Prog,
+					     "changing", NULL, getuid(), 0);
+			}
+#endif
+			exit(EXIT_FAILURE);
+		}
+		if (i > (size_t)ngroups) {
 			break;
 		}
 		free (grouplist);
-	}
-	if (ngroups < 0) {
-		perror ("getgroups");
-#ifdef WITH_AUDIT
-		if (group) {
-			SNPRINTF(audit_buf, "changing new-group=%s", group);
-			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              audit_buf, NULL, getuid (), 0);
-		} else {
-			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              "changing", NULL, getuid (), 0);
-		}
-#endif
-		exit (EXIT_FAILURE);
 	}
 
 	/*
