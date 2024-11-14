@@ -157,6 +157,8 @@ libshadow_la_SOURCES = \
 	salt.c \
 	search/cmp/cmp.c \
 	search/cmp/cmp.h \
+	search/l/lfind.c \
+	search/l/lfind.h \
 	selinux.c \
 	semanage.c \
 	setugid.c \
