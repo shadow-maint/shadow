@@ -161,6 +161,8 @@ libshadow_la_SOURCES = \
 	search/l/lfind.h \
 	search/l/lsearch.c \
 	search/l/lsearch.h \
+	search/sort/qsort.c \
+	search/sort/qsort.h \
 	selinux.c \
 	semanage.c \
 	setugid.c \
