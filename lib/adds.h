@@ -11,9 +11,8 @@
 #include <errno.h>
 #include <limits.h>
 #include <stddef.h>
-#include <stdlib.h>
 
-#include "search/cmp/cmp.h"
+#include "search/sort/qsort.h"
 #include "sizeof.h"
 
 
@@ -56,7 +55,7 @@ addslN(size_t n, long addend[n])
 
 	e = errno;
 	while (n > 1) {
-		qsort(addend, n, sizeof(addend[0]), cmp_long);
+		QSORT(addend, n);
 
 		errno = 0;
 		addend[0] = addsl2(addend[0], addend[--n]);
