@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "search/cmp/cmp.h"
 #include "sizeof.h"
 
 
@@ -26,8 +27,6 @@
 
 inline long addsl2(long a, long b);
 inline long addslN(size_t n, long addend[n]);
-
-inline int cmpl(const void *p1, const void *p2);
 
 
 inline long
@@ -57,7 +56,7 @@ addslN(size_t n, long addend[n])
 
 	e = errno;
 	while (n > 1) {
-		qsort(addend, n, sizeof(addend[0]), cmpl);
+		qsort(addend, n, sizeof(addend[0]), cmp_long);
 
 		errno = 0;
 		addend[0] = addsl2(addend[0], addend[--n]);
@@ -66,20 +65,6 @@ addslN(size_t n, long addend[n])
 	}
 	errno = e;
 	return addend[0];
-}
-
-
-inline int
-cmpl(const void *p1, const void *p2)
-{
-	const long  *l1 = p1;
-	const long  *l2 = p2;
-
-	if (*l1 < *l2)
-		return -1;
-	if (*l1 > *l2)
-		return +1;
-	return 0;
 }
 
 

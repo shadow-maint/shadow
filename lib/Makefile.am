@@ -155,6 +155,8 @@ libshadow_la_SOURCES = \
 	run_part.h \
 	run_part.c \
 	salt.c \
+	search/cmp/cmp.c \
+	search/cmp/cmp.h \
 	selinux.c \
 	semanage.c \
 	setugid.c \
