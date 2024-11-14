@@ -36,7 +36,6 @@ add_groups(const char *list)
 {
 	GETGROUPS_T *grouplist;
 	int ngroups;
-	bool added;
 	char *g, *p;
 	char buf[1024];
 	FILE *shadow_logfd = log_get_logfd();
@@ -59,7 +58,6 @@ add_groups(const char *list)
 	if (ngroups == -1)
 		goto free_gids;
 
-	added = false;
 	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
 		struct group  *grp;
@@ -84,13 +82,10 @@ add_groups(const char *list)
 
 		grouplist[ngroups] = grp->gr_gid;
 		ngroups++;
-		added = true;
 	}
 
-	if (added) {
-		if (setgroups(ngroups, grouplist) == -1)
-			goto free_gids;
-	}
+	if (setgroups(ngroups, grouplist) == -1)
+		goto free_gids;
 
 	free (grouplist);
 	return 0;
