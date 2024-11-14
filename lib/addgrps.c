@@ -75,17 +75,14 @@ add_groups(const char *list)
 		if (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL)
 			continue;
 
-		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fputs (_("Warning: too many groups\n"), shadow_logfd);
-			break;
-		}
-
 		grouplist[ngroups] = grp->gr_gid;
 		ngroups++;
 	}
 
-	if (setgroups(ngroups, grouplist) == -1)
+	if (setgroups(ngroups, grouplist) == -1) {
+		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
 		goto free_gids;
+	}
 
 	free (grouplist);
 	return 0;
