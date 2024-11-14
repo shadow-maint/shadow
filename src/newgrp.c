@@ -687,11 +687,11 @@ fail_gg:
 			(void) fputs (_("too many groups\n"), stderr);
 		} else {
 			grouplist[ngroups++] = gid;
-			if (setgroups (ngroups, grouplist) != 0) {
-				perror ("setgroups");
-			}
 		}
 	}
+
+	if (setgroups(ngroups, grouplist) == -1)
+		perror("setgroups");
 
 	/*
 	 * Close all files before changing the user/group IDs.
