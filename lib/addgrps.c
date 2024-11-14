@@ -77,7 +77,7 @@ add_groups(const char *list)
 			fputs (_("Warning: too many groups\n"), shadow_logfd);
 			break;
 		}
-		grouplist = REALLOCF(grouplist, (size_t) ngroups + 1, GETGROUPS_T);
+		grouplist = REALLOCF(grouplist, ngroups + 1, GETGROUPS_T);
 		if (grouplist == NULL) {
 			return -1;
 		}
