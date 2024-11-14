@@ -1,11 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 1990 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 2000, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2001 - 2006, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2007 - 2008, Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1990-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-2000, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2001-2006, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2007-2008, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -25,6 +24,7 @@
 #include "exitcodes.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "search/l/lfind.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -628,12 +628,7 @@ fail_gg:
 	 * database. However getgroups() will return the group. So
 	 * if she is listed there already it is ok to grant membership.
 	 */
-	for (int i = 0; i < ngroups; i++) {
-		if (grp->gr_gid == grouplist[i]) {
-			is_member = true;
-			break;
-		}
-	}
+	is_member = (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL);
 
 	/*
 	 * For split groups (due to limitations of NIS), check all
@@ -687,13 +682,7 @@ fail_gg:
 	 */
 	grouplist = XREALLOC(grouplist, ngroups + 1, GETGROUPS_T);
 
-	int i;
-	for (i = 0; i < ngroups; i++) {
-		if (gid == grouplist[i]) {
-			break;
-		}
-	}
-	if (i == ngroups) {
+	if (LFIND(&gid, grouplist, ngroups) == NULL) {
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
 			(void) fputs (_("too many groups\n"), stderr);
 		} else {
