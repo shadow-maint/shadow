@@ -20,7 +20,7 @@
 
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
-#include "search/l/lfind.h"
+#include "search/l/lsearch.h"
 #include "shadowlog.h"
 
 #ident "$Id$"
@@ -35,10 +35,10 @@ int
 add_groups(const char *list)
 {
 	GETGROUPS_T *grouplist;
-	int ngroups;
 	char *g, *p;
 	char buf[1024];
 	FILE *shadow_logfd = log_get_logfd();
+	size_t  ngroups;
 
 	if (strlen (list) >= sizeof (buf)) {
 		errno = EINVAL;
@@ -72,11 +72,7 @@ add_groups(const char *list)
 		if (grouplist == NULL)
 			return -1;
 
-		if (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL)
-			continue;
-
-		grouplist[ngroups] = grp->gr_gid;
-		ngroups++;
+		LSEARCH(&grp->gr_gid, grouplist, &ngroups);
 	}
 
 	if (setgroups(ngroups, grouplist) == -1) {
