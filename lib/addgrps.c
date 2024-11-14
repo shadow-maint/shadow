@@ -22,8 +22,7 @@
 #include "alloc/reallocf.h"
 #include "search/l/lsearch.h"
 #include "shadowlog.h"
-
-#ident "$Id$"
+#include "string/strchr/strchrscnt.h"
 
 
 /*
@@ -59,6 +58,10 @@ add_groups(const char *list)
 	if (n0 == -1)
 		goto free_gids;
 
+	grouplist = REALLOCF(grouplist, n0 + strchrscnt(list, ",:") + 1, GETGROUPS_T);
+	if (grouplist == NULL)
+		return -1;
+
 	n = n0;
 	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
@@ -69,10 +72,6 @@ add_groups(const char *list)
 			fprintf(shadow_logfd, _("Warning: unknown group %s\n"), g);
 			continue;
 		}
-
-		grouplist = REALLOCF(grouplist, n + 1, GETGROUPS_T);
-		if (grouplist == NULL)
-			return -1;
 
 		LSEARCH(&grp->gr_gid, grouplist, &n);
 	}
