@@ -34,12 +34,10 @@ int
 add_groups(const char *list)
 {
 	GETGROUPS_T *grouplist;
-	size_t i;
 	int ngroups;
 	bool added;
 	char *g, *p;
 	char buf[1024];
-	int ret;
 	FILE *shadow_logfd = log_get_logfd();
 
 	if (strlen (list) >= sizeof (buf)) {
@@ -48,8 +46,7 @@ add_groups(const char *list)
 	}
 	strcpy (buf, list);
 
-	i = 16;
-	for (;;) {
+	for (size_t i = 16; /* void */; i *= 2) {
 		grouplist = MALLOC(i, GETGROUPS_T);
 		if (NULL == grouplist) {
 			return -1;
@@ -62,9 +59,7 @@ add_groups(const char *list)
 			 * reception of the groups */
 			break;
 		}
-		/* not enough room, so try allocating a larger buffer */
 		free (grouplist);
-		i *= 2;
 	}
 	if (ngroups < 0) {
 		free (grouplist);
@@ -74,7 +69,8 @@ add_groups(const char *list)
 	added = false;
 	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
-		struct group *grp;
+		size_t        i;
+		struct group  *grp;
 
 		grp = getgrnam(g); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
@@ -102,6 +98,8 @@ add_groups(const char *list)
 	}
 
 	if (added) {
+		int  ret;
+
 		ret = setgroups (ngroups, grouplist);
 		free (grouplist);
 		return ret;
