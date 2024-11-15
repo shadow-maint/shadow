@@ -40,7 +40,7 @@ static const char *Prog;
 extern char **newenvp;
 
 static size_t  ngroups;
-static /*@null@*/ /*@only@*/GETGROUPS_T *grouplist;
+static /*@null@*/ /*@only@*/GETGROUPS_T  *gids;
 
 static bool is_newgrp;
 
@@ -560,9 +560,9 @@ int main (int argc, char **argv)
 	if (ngroups == -1)
 		goto fail_gg;
 
-	grouplist = XMALLOC(ngroups, GETGROUPS_T);
+	gids = XMALLOC(ngroups, GETGROUPS_T);
 
-	ngroups = getgroups(ngroups, grouplist);
+	ngroups = getgroups(ngroups, gids);
 	if (ngroups == -1) {
 fail_gg:
 		perror("getgroups");
@@ -629,7 +629,7 @@ fail_gg:
 	 * database. However getgroups() will return the group. So
 	 * if she is listed there already it is ok to grant membership.
 	 */
-	is_member = (LFIND(&grp->gr_gid, grouplist, ngroups) != NULL);
+	is_member = (LFIND(&grp->gr_gid, gids, ngroups) != NULL);
 
 	/*
 	 * For split groups (due to limitations of NIS), check all
@@ -681,11 +681,11 @@ fail_gg:
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
-	grouplist = XREALLOC(grouplist, ngroups + 1, GETGROUPS_T);
+	gids = XREALLOC(gids, ngroups + 1, GETGROUPS_T);
 
-	LSEARCH(&gid, grouplist, &ngroups);
+	LSEARCH(&gid, gids, &ngroups);
 
-	if (setgroups(ngroups, grouplist) == -1)
+	if (setgroups(ngroups, gids) == -1)
 		perror("setgroups");
 
 	/*

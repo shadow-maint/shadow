@@ -33,7 +33,7 @@
 int
 add_groups(const char *list)
 {
-	GETGROUPS_T *grouplist;
+	GETGROUPS_T  *gids;
 	char *g, *p;
 	char buf[1024];
 	FILE *shadow_logfd = log_get_logfd();
@@ -50,16 +50,16 @@ add_groups(const char *list)
 	if (n0 == -1)
 		return -1;
 
-	grouplist = MALLOC(n0, GETGROUPS_T);
-	if (grouplist == NULL)
+	gids = MALLOC(n0, GETGROUPS_T);
+	if (gids == NULL)
 		return -1;
 
-	n0 = getgroups(n0, grouplist);
+	n0 = getgroups(n0, gids);
 	if (n0 == -1)
 		goto free_gids;
 
-	grouplist = REALLOCF(grouplist, n0 + strchrscnt(list, ",:") + 1, GETGROUPS_T);
-	if (grouplist == NULL)
+	gids = REALLOCF(gids, n0 + strchrscnt(list, ",:") + 1, GETGROUPS_T);
+	if (gids == NULL)
 		return -1;
 
 	n = n0;
@@ -73,19 +73,19 @@ add_groups(const char *list)
 			continue;
 		}
 
-		LSEARCH(&grp->gr_gid, grouplist, &n);
+		LSEARCH(&grp->gr_gid, gids, &n);
 	}
 
-	if (setgroups(n, grouplist) == -1) {
+	if (setgroups(n, gids) == -1) {
 		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
 		goto free_gids;
 	}
 
-	free (grouplist);
+	free(gids);
 	return 0;
 
 free_gids:
-	free(grouplist);
+	free(gids);
 	return -1;
 }
 #else				/* !USE_PAM */
