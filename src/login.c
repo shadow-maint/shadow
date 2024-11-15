@@ -21,6 +21,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <assert.h>
@@ -1180,7 +1181,9 @@ int main (int argc, char **argv)
 		 * this
 		 */
 #ifndef USE_PAM
-		motd ();	/* print the message of the day */
+		if (motd() == -1)
+			exit(EXIT_FAILURE);
+
 		if (   getdef_bool ("FAILLOG_ENAB")
 		    && (0 != faillog.fail_cnt)) {
 			failprint (&faillog);
