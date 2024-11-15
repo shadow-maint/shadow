@@ -46,15 +46,15 @@ motd(void)
 	mb = motdlist;
 	while (NULL != (motdfile = strsep(&mb, ":"))) {
 		fp = fopen (motdfile, "r");
-		if (NULL != fp) {
-			while ((c = getc (fp)) != EOF) {
-				putchar (c);
-			}
-			fclose (fp);
+		if (fp == NULL)
+			continue;
+
+		while ((c = getc(fp)) != EOF) {
+			putchar(c);
 		}
+		fclose(fp);
 	}
 	fflush (stdout);
 
 	free (motdlist);
 }
-
