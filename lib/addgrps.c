@@ -34,17 +34,10 @@ int
 add_groups(const char *list)
 {
 	GETGROUPS_T  *gids;
-	char *g, *p;
-	char buf[1024];
+	char    *g, *p, *dup;
 	FILE *shadow_logfd = log_get_logfd();
 	size_t  n;
 	ssize_t n0;
-
-	if (strlen (list) >= sizeof (buf)) {
-		errno = EINVAL;
-		return -1;
-	}
-	strcpy (buf, list);
 
 	n0 = getgroups(0, NULL);
 	if (n0 == -1)
@@ -62,8 +55,11 @@ add_groups(const char *list)
 	if (gids == NULL)
 		return -1;
 
+	p = dup = strdup(list);
+	if (dup == NULL)
+		goto free_gids;
+
 	n = n0;
-	p = buf;
 	while (NULL != (g = strsep(&p, ",:"))) {
 		struct group  *grp;
 
@@ -75,6 +71,7 @@ add_groups(const char *list)
 
 		LSEARCH(&grp->gr_gid, gids, &n);
 	}
+	free(dup);
 
 	if (setgroups(n, gids) == -1) {
 		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
