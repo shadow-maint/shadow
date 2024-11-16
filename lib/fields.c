@@ -18,7 +18,7 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
-#include "string/strspn/strrspn.h"
+#include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -93,7 +93,7 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 		 * makes it possible to change the field to empty, by
 		 * entering a space.  --marekm
 		 */
-		stpcpy(strrspn(newf, " \t"), "");
+		stpcpy(stprspn(newf, " \t"), "");
 		cp = stpspn(newf, " \t");
 		strcpy (buf, cp);
 	}
