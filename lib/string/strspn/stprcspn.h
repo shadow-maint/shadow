@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_STRCHR_STPRCSPN_H_
-#define SHADOW_INCLUDE_LIB_STRING_STRCHR_STPRCSPN_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_STRSPN_STPRCSPN_H_
+#define SHADOW_INCLUDE_LIB_STRING_STRSPN_STPRCSPN_H_
 
 
 #include <config.h>
 
 #include <string.h>
 
-#include "string/strchr/strrcspn.h"
+#include "string/strspn/strrcspn.h"
 
 
 #define stprcspn(s, reject)                                                   \
