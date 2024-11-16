@@ -66,7 +66,6 @@ AC_CHECK_MEMBERS([struct utmpx.ut_name,
                   struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
 
 dnl Checks for library functions.
-AC_TYPE_GETGROUPS
 AC_FUNC_UTIME_NULL
 AC_REPLACE_FUNCS(putgrent putpwent putspent)
 AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
