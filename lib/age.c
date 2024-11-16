@@ -106,7 +106,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 		 * passwd to work just like it would had they executed
 		 * it from the command line while logged in.
 		 */
-#if defined(HAVE_INITGROUPS) && ! defined(USE_PAM)
+#if !defined(USE_PAM)
 		if (setup_uid_gid (pw, false) != 0)
 #else
 		if (setup_uid_gid (pw) != 0)
