@@ -8,20 +8,20 @@
 
 #include <config.h>
 
+#include <stddef.h>
 #include <string.h>
 
 #include "attr.h"
 #include "string/strchr/strnul.h"
 
 
+ATTR_STRING(1)
 ATTR_STRING(2)
-inline char *strrspn(char *restrict s, const char *restrict accept);
+inline size_t strrspn_(const char *s, const char *accept);
 
 
-// Available in Oracle Solaris: strrspn(3GEN).
-// <https://docs.oracle.com/cd/E36784_01/html/E36877/strrspn-3gen.html>
-inline char *
-strrspn(char *restrict s, const char *restrict accept)
+inline size_t
+strrspn_(const char *s, const char *accept)
 {
 	char  *p;
 
@@ -29,9 +29,9 @@ strrspn(char *restrict s, const char *restrict accept)
 	while (p > s) {
 		p--;
 		if (strchr(accept, *p) == NULL)
-			return p + 1;
+			return p + 1 - s;
 	}
-	return s;
+	return 0;
 }
 
 

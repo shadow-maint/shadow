@@ -32,7 +32,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
-#include "string/strspn/strrspn.h"
+#include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -561,7 +561,7 @@ static void def_load (void)
 		/*
 		 * Trim trailing whitespace.
 		 */
-		stpcpy(strrspn(buf, " \t\n"), "");
+		stpcpy(stprspn(buf, " \t\n"), "");
 
 		/*
 		 * Break the line into two fields.
