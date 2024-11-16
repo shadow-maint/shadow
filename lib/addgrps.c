@@ -17,6 +17,7 @@
 #include <grp.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
 
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
@@ -33,9 +34,9 @@
 int
 add_groups(const char *list)
 {
-	GETGROUPS_T  *gids;
 	char    *g, *p, *dup;
 	FILE *shadow_logfd = log_get_logfd();
+	gid_t   *gids;
 	size_t  n;
 	ssize_t n0;
 
@@ -43,7 +44,7 @@ add_groups(const char *list)
 	if (n0 == -1)
 		return -1;
 
-	gids = MALLOC(n0, GETGROUPS_T);
+	gids = MALLOC(n0, gid_t);
 	if (gids == NULL)
 		return -1;
 
@@ -51,7 +52,7 @@ add_groups(const char *list)
 	if (n0 == -1)
 		goto free_gids;
 
-	gids = REALLOCF(gids, n0 + strchrscnt(list, ",:") + 1, GETGROUPS_T);
+	gids = REALLOCF(gids, n0 + strchrscnt(list, ",:") + 1, gid_t);
 	if (gids == NULL)
 		return -1;
 

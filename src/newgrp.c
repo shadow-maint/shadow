@@ -14,7 +14,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <assert.h>
+#include <sys/types.h>
 
 #include "agetpass.h"
 #include "alloc/x/xmalloc.h"
@@ -31,6 +31,8 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
+#include <assert.h>
+
 
 /*
  * Global variables
@@ -41,7 +43,7 @@ extern char **newenvp;
 
 #ifdef HAVE_SETGROUPS
 static size_t  ngroups;
-static /*@null@*/ /*@only@*/GETGROUPS_T  *gids;
+static /*@null@*/ /*@only@*/gid_t  *gids;
 #endif
 
 static bool is_newgrp;
@@ -563,7 +565,7 @@ int main (int argc, char **argv)
 	if (ngroups == -1)
 		goto fail_gg;
 
-	gids = XMALLOC(ngroups, GETGROUPS_T);
+	gids = XMALLOC(ngroups, gid_t);
 
 	ngroups = getgroups(ngroups, gids);
 	if (ngroups == -1) {
@@ -687,7 +689,7 @@ fail_gg:
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
-	gids = XREALLOC(gids, ngroups + 1, GETGROUPS_T);
+	gids = XREALLOC(gids, ngroups + 1, gid_t);
 
 	LSEARCH(&gid, gids, &ngroups);
 
