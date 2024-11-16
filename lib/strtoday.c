@@ -16,7 +16,7 @@
 #include "atoi/str2i/str2s.h"
 #include "getdate.h"
 #include "prototypes.h"
-#include "string/strchr/stpspn.h"
+#include "string/strspn/stpspn.h"
 
 
 /*

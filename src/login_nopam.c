@@ -58,7 +58,7 @@
 #include <arpa/inet.h>		/* for inet_ntoa() */
 
 #include "sizeof.h"
-#include "string/strchr/strrspn.h"
+#include "string/strspn/strrspn.h"
 #include "string/strtok/stpsep.h"
 
 
