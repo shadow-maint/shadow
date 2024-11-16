@@ -384,7 +384,7 @@ extern int del_seuser(const char *login_name);
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);
 extern int change_uid (const struct passwd *info);
-#if (defined HAVE_INITGROUPS) && (! defined USE_PAM)
+#if !defined(USE_PAM)
 extern int setup_uid_gid (const struct passwd *info, bool is_console);
 #else
 extern int setup_uid_gid (const struct passwd *info);
