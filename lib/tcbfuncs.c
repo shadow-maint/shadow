@@ -24,6 +24,7 @@
 #include "shadowio.h"
 #include "tcbfuncs.h"
 #include "shadowlog_internal.h"
+#include "string/strcmp/strprefix.h"
 
 
 #define SHADOWTCB_HASH_BY 1000
@@ -255,37 +256,31 @@ static shadowtcb_status unlink_suffs (const char *user)
 static shadowtcb_status
 rmdir_leading(const char *relpath)
 {
-	char  *ind, *dir, *path;
+	char  *ind, *path, *p;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 
-	path = strdup(relpath);
-	if (path == NULL)
+	if (asprintf(&path, TCB_DIR "/%s", relpath) == -1)
 		goto oom;
 
+	p = strprefix(path, TCB_DIR "/");
 
-	while ((ind = strrchr (path, '/'))) {
+	while ((ind = strrchr(p, '/'))) {
 		stpcpy(ind, "");
-		if (asprintf(&dir, TCB_DIR "/%s", path) == -1)
-			goto free_path;
 
-		if (rmdir (dir) != 0) {
+		if (rmdir(path) != 0) {
 			if (errno != ENOTEMPTY) {
 				fprintf (shadow_logfd,
 				         _("%s: Cannot remove directory %s: %s\n"),
-				         shadow_progname, dir, strerror (errno));
+				         shadow_progname, path, strerror (errno));
 				ret = SHADOWTCB_FAILURE;
 			}
-			free (dir);
 			break;
 		}
-		free (dir);
 	}
 
 	free(path);
 	return ret;
 
-free_path:
-	free(path);
 oom:
 	OUT_OF_MEMORY;
 	return SHADOWTCB_FAILURE;
