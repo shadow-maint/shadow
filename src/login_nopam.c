@@ -58,8 +58,8 @@
 
 #include "prototypes.h"
 #include "sizeof.h"
-#include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/strrspn.h"
 #include "string/strtok/stpsep.h"
 
 
