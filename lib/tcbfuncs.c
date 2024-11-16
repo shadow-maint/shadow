@@ -26,6 +26,7 @@
 #include "shadowlog_internal.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
 
@@ -257,38 +258,32 @@ static shadowtcb_status unlink_suffs (const char *user)
 static shadowtcb_status
 rmdir_leading(const char *relpath)
 {
-	char  *ind, *dir, *path;
+	char  *ind, *path, *p;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 
-	path = strdup(relpath);
+	path = aprintf(TCB_DIR "/%s", relpath);
 	if (path == NULL)
 		goto oom;
 
+	p = strprefix(path, TCB_DIR "/");
 
-	while ((ind = strrchr (path, '/'))) {
+	while ((ind = strrchr(p, '/'))) {
 		stpcpy(ind, "");
-		dir = aprintf(TCB_DIR "/%s", path);
-		if (dir == NULL)
-			goto free_path;
 
-		if (rmdir (dir) != 0) {
+		if (rmdir(path) != 0) {
 			if (errno != ENOTEMPTY) {
 				fprintf (shadow_logfd,
 				         _("%s: Cannot remove directory %s: %s\n"),
-				         shadow_progname, dir, strerrno());
+				         shadow_progname, path, strerrno());
 				ret = SHADOWTCB_FAILURE;
 			}
-			free (dir);
 			break;
 		}
-		free (dir);
 	}
 
 	free(path);
 	return ret;
 
-free_path:
-	free(path);
 oom:
 	OUT_OF_MEMORY;
 	return SHADOWTCB_FAILURE;
