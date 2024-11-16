@@ -16,9 +16,9 @@
 #include <stdio.h>
 
 #include "prototypes.h"
-#include "string/strchr/stpspn.h"
-#include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
+#include "string/strspn/strrspn.h"
 #include "string/strtok/stpsep.h"
 
 

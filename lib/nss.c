@@ -15,8 +15,8 @@
 #include "shadowlog_internal.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
 
