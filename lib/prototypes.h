@@ -36,7 +36,7 @@
 #include "commonio.h"
 
 /* addgrps.c */
-#if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)
+#if !defined(USE_PAM)
 extern int add_groups (const char *);
 #endif
 
