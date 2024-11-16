@@ -252,16 +252,22 @@ static shadowtcb_status unlink_suffs (const char *user)
 }
 
 /* path should be a relative existing tcb directory */
-static shadowtcb_status rmdir_leading (char *path)
+static shadowtcb_status
+rmdir_leading(const char *relpath)
 {
-	char *ind, *dir;
+	char  *ind, *dir, *path;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
+
+	path = strdup(relpath);
+	if (path == NULL)
+		goto oom;
+
+
 	while ((ind = strrchr (path, '/'))) {
 		stpcpy(ind, "");
-		if (asprintf (&dir, TCB_DIR "/%s", path) == -1) {
-			OUT_OF_MEMORY;
-			return SHADOWTCB_FAILURE;
-		}
+		if (asprintf(&dir, TCB_DIR "/%s", path) == -1)
+			goto free_path;
+
 		if (rmdir (dir) != 0) {
 			if (errno != ENOTEMPTY) {
 				fprintf (shadow_logfd,
@@ -274,7 +280,15 @@ static shadowtcb_status rmdir_leading (char *path)
 		}
 		free (dir);
 	}
+
+	free(path);
 	return ret;
+
+free_path:
+	free(path);
+oom:
+	OUT_OF_MEMORY;
+	return SHADOWTCB_FAILURE;
 }
 
 static shadowtcb_status move_dir (const char *user_newname, uid_t user_newid)
