@@ -4,4 +4,9 @@
 
 #include <config.h>
 
-#include "string/strchr/stpspn.h"
+#include "string/strspn/strrcspn.h"
+
+#include <stddef.h>
+
+
+extern inline size_t strrcspn(const char *s, const char *reject);

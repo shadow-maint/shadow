@@ -20,8 +20,8 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/memset/memzero.h"
-#include "string/strchr/stpspn.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
 
