@@ -38,10 +38,8 @@ static const char *Prog;
 
 extern char **newenvp;
 
-#ifdef HAVE_SETGROUPS
 static int ngroups;
 static /*@null@*/ /*@only@*/GETGROUPS_T *grouplist;
-#endif
 
 static bool is_newgrp;
 
@@ -551,7 +549,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-#ifdef HAVE_SETGROUPS
 	/*
 	 * get the current user's groupset. The new group will be added to
 	 * the concurrent groupset if there is room, otherwise you get a
@@ -584,7 +581,6 @@ int main (int argc, char **argv)
 #endif
 		exit (EXIT_FAILURE);
 	}
-#endif				/* HAVE_SETGROUPS */
 
 	/*
 	 * now we put her in the new group. The password file entry for her
@@ -632,7 +628,6 @@ int main (int argc, char **argv)
 		goto failure;
 	}
 
-#ifdef HAVE_SETGROUPS
 	/* when using pam_group, she will not be listed in the groups
 	 * database. However getgroups() will return the group. So
 	 * if she is listed there already it is ok to grant membership.
@@ -643,7 +638,7 @@ int main (int argc, char **argv)
 			break;
 		}
 	}
-#endif                          /* HAVE_SETGROUPS */
+
 	/*
 	 * For split groups (due to limitations of NIS), check all
 	 * groups of the same GID like the requested group for
@@ -688,7 +683,6 @@ int main (int argc, char **argv)
 
 	gid = grp->gr_gid;
 
-#ifdef HAVE_SETGROUPS
 	/*
 	 * I am going to try to add her new group id to her concurrent group
 	 * set. If the group id is already present I'll just skip this part.
@@ -710,7 +704,6 @@ int main (int argc, char **argv)
 			}
 		}
 	}
-#endif
 
 	/*
 	 * Close all files before changing the user/group IDs.
