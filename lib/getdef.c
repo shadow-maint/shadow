@@ -30,10 +30,10 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/xasprintf.h"
-#include "string/strchr/stpspn.h"
-#include "string/strchr/strrspn.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
+#include "string/strspn/strrspn.h"
 #include "string/strtok/stpsep.h"
 
 

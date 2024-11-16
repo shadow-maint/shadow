@@ -4,4 +4,7 @@
 
 #include <config.h>
 
-#include "string/strchr/stprcspn.h"
+#include "string/strspn/strrspn.h"
+
+
+extern inline char *strrspn(char *restrict s, const char *restrict accept);
