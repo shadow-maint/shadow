@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <grp.h>
+#include <libgen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -256,22 +257,19 @@ static shadowtcb_status unlink_suffs (const char *user)
 static shadowtcb_status
 rmdir_leading(const char *relpath)
 {
-	char  *ind, *path, *p;
+	char  *path, *p;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
 
 	if (asprintf(&path, TCB_DIR "/%s", relpath) == -1)
 		goto oom;
 
-	p = strprefix(path, TCB_DIR "/");
-
-	while ((ind = strrchr(p, '/'))) {
-		stpcpy(ind, "");
-
-		if (rmdir(path) != 0) {
+	p = path;
+	while (strprefix(p = dirname(p), TCB_DIR "/")) {
+		if (rmdir(p) != 0) {
 			if (errno != ENOTEMPTY) {
 				fprintf (shadow_logfd,
 				         _("%s: Cannot remove directory %s: %s\n"),
-				         shadow_progname, path, strerror (errno));
+				         shadow_progname, p, strerror(errno));
 				ret = SHADOWTCB_FAILURE;
 			}
 			break;
