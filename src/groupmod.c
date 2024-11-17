@@ -221,7 +221,7 @@ static void grp_update (void)
 	new_grent (&grp);
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
-	    && (pflg || nflg)) {
+	    && (pflg || nflg || user_list)) {
 		osgrp = sgr_locate (group_name);
 		if (NULL != osgrp) {
 			sgrp = *osgrp;
@@ -261,6 +261,17 @@ static void grp_update (void)
 			if (NULL != grp.gr_mem[0])
 				grp.gr_mem = dup_list (grp.gr_mem);
 		}
+#ifdef	SHADOWGRP
+		if (NULL != osgrp) {
+			if (!aflg) {
+				sgrp.sg_mem = XMALLOC(1, char *);
+				sgrp.sg_mem[0] = NULL;
+			} else {
+				if (NULL != sgrp.sg_mem[0])
+					sgrp.sg_mem = dup_list(sgrp.sg_mem);
+			}
+		}
+#endif				/* SHADOWGRP */
 
 		token = strtok(user_list, ",");
 		while (token) {
@@ -269,6 +280,10 @@ static void grp_update (void)
 				exit (E_GRP_UPDATE);
 			}
 			grp.gr_mem = add_list(grp.gr_mem, token);
+#ifdef	SHADOWGRP
+			if (NULL != osgrp)
+				sgrp.sg_mem = add_list(sgrp.sg_mem, token);
+#endif				/* SHADOWGRP */
 			token = strtok(NULL, ",");
 		}
 	}
@@ -485,7 +500,7 @@ static void close_files (void)
 
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
-	    && (pflg || nflg)) {
+	    && (pflg || nflg || user_list)) {
 		if (sgr_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
@@ -617,7 +632,7 @@ static void prepare_failure_reports (void)
 	add_cleanup (cleanup_report_mod_group, &info_group);
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
-	    && (pflg || nflg)) {
+	    && (pflg || nflg || user_list)) {
 		add_cleanup (cleanup_report_mod_gshadow, &info_gshadow);
 	}
 #endif
@@ -644,7 +659,7 @@ static void lock_files (void)
 
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
-	    && (pflg || nflg)) {
+	    && (pflg || nflg || user_list)) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
@@ -682,7 +697,7 @@ static void open_files (void)
 
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
-	    && (pflg || nflg)) {
+	    && (pflg || nflg || user_list)) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),

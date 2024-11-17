@@ -204,6 +204,10 @@ static void grp_update (void)
 				exit (E_GRP_UPDATE);
 			}
 			grp.gr_mem = add_list(grp.gr_mem, token);
+#ifdef  SHADOWGRP
+			if (is_shadow_grp)
+				sgrp.sg_mem = add_list(sgrp.sg_mem, token);
+#endif
 			token = strtok(NULL, ",");
 		}
 	}
