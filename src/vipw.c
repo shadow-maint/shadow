@@ -31,7 +31,6 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "sgroupio.h"
@@ -43,8 +42,10 @@
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \
@@ -471,7 +472,7 @@ int main (int argc, char **argv)
 	bool  editshadow = false;
 	bool  do_vigr;
 
-	do_vigr = (strcmp(Basename(argv[0]), "vigr") == 0);
+	do_vigr = streq(Basename(argv[0]), "vigr");
 
 	Prog = do_vigr ? "vigr" : "vipw";
 	log_set_progname(Prog);

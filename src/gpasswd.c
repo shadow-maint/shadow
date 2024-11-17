@@ -24,18 +24,19 @@
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "defines.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
-/*@-exitarg@*/
-#include "exitcodes.h"
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 
@@ -843,7 +844,7 @@ static void change_passwd (struct group *gr)
 			exit (1);
 		}
 
-		if (strcmp (pass, cp) == 0) {
+		if (streq(pass, cp)) {
 			erase_pass (cp);
 			break;
 		}

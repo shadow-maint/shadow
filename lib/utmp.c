@@ -26,6 +26,7 @@
 #include "alloc/x/xcalloc.h"
 #include "alloc/x/xmalloc.h"
 #include "sizeof.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -63,7 +64,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 		exit (EXIT_FAILURE);
 	}
 
-	return strcmp (full_tty, tmptty) == 0;
+	return streq(full_tty, tmptty);
 }
 
 

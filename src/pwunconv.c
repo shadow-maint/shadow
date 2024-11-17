@@ -17,16 +17,19 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <getopt.h>
+
 #include "defines.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "getdef.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
-/*@-exitarg@*/
-#include "exitcodes.h"
 #include "shadowlog.h"
+#include "sssd.h"
+#include "string/strcmp/streq.h"
+
 
 /*
  * Global variables
@@ -180,7 +183,7 @@ int main (int argc, char **argv)
 		/*
 		 * Update password if non-shadow is "x".
 		 */
-		if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+		if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 			pwent.pw_passwd = spwd->sp_pwdp;
 		}
 

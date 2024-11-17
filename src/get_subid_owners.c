@@ -4,10 +4,11 @@
 #include <stdio.h>
 
 #include "atoi/getnum.h"
-#include "subid.h"
-#include "stdlib.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "stdlib.h"
+#include "string/strcmp/streq.h"
+#include "subid.h"
 
 
 static const char Prog[] = "get_subid_owners";
@@ -32,10 +33,10 @@ int main(int argc, char *argv[])
 	if (argc < 2) {
 		usage();
 	}
-	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
+	if (argc == 3 && streq(argv[1], "-g")) {
 		get_uid(argv[2], &u);
 		n = subid_get_gid_owners(u, &uids);
-	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
+	} else if (argc == 2 && streq(argv[1], "-h")) {
 		usage();
 	} else {
 		get_gid(argv[1], &u);

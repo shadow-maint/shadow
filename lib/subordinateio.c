@@ -23,6 +23,7 @@
 #include "alloc/reallocf.h"
 #include "atoi/str2i/str2u.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 
 
 #define ID_SIZE 31
@@ -161,7 +162,7 @@ static bool range_exists(struct commonio_db *db, const char *owner)
 	const struct subordinate_range *range;
 	commonio_rewind(db);
 	while ((range = commonio_next(db)) != NULL) {
-		if (0 == strcmp(range->owner, owner))
+		if (streq(range->owner, owner))
 			return true;
 	}
 	return false;
@@ -246,7 +247,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                  * Range matches. Check if range owner is specified
                  * as numeric UID and if it matches.
                  */
-                if (0 == strcmp(range->owner, owner_uid_string)) {
+                if (streq(range->owner, owner_uid_string)) {
                         return range;
                 }
 
@@ -889,7 +890,7 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 	commonio_rewind(db);
 	while ((range = commonio_next(db)) != NULL) {
-		if (0 == strcmp(range->owner, owner)) {
+		if (streq(range->owner, owner)) {
 			if (!append_range(&ranges, range, count++)) {
 				free(ranges);
 				ranges = NULL;
@@ -899,7 +900,7 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		}
 
 		// Let's also compare with the ID
-		if (have_owner_id == true && 0 == strcmp(range->owner, id)) {
+		if (have_owner_id == true && streq(range->owner, id)) {
 			if (!append_range(&ranges, range, count++)) {
 				free(ranges);
 				ranges = NULL;

@@ -32,6 +32,7 @@
 #include "attr.h"
 #include "getdate.h"
 #include "string/strchr/stpspn.h"
+#include "string/strcmp/streq.h"
 
 
 /* Some old versions of bison generate parsers that use bcopy.
@@ -630,12 +631,12 @@ static int LookupWord (char *buff)
     if (isupper (*p))
       *p = tolower (*p);
 
-  if (strcmp (buff, "am") == 0 || strcmp (buff, "a.m.") == 0)
+  if (streq(buff, "am") || streq(buff, "a.m."))
     {
       yylval.Meridian = MERam;
       return tMERIDIAN;
     }
-  if (strcmp (buff, "pm") == 0 || strcmp (buff, "p.m.") == 0)
+  if (streq(buff, "pm") || streq(buff, "p.m."))
     {
       yylval.Meridian = MERpm;
       return tMERIDIAN;
@@ -662,7 +663,7 @@ static int LookupWord (char *buff)
 	      return tp->type;
 	    }
 	}
-      else if (strcmp (buff, tp->name) == 0)
+      else if (streq(buff, tp->name))
 	{
 	  yylval.Number = tp->value;
 	  return tp->type;
@@ -670,17 +671,17 @@ static int LookupWord (char *buff)
     }
 
   for (tp = TimezoneTable; tp->name; tp++)
-    if (strcmp (buff, tp->name) == 0)
+    if (streq(buff, tp->name))
       {
 	yylval.Number = tp->value;
 	return tp->type;
       }
 
-  if (strcmp (buff, "dst") == 0)
+  if (streq(buff, "dst"))
     return tDST;
 
   for (tp = UnitsTable; tp->name; tp++)
-    if (strcmp (buff, tp->name) == 0)
+    if (streq(buff, tp->name))
       {
 	yylval.Number = tp->value;
 	return tp->type;
@@ -692,7 +693,7 @@ static int LookupWord (char *buff)
     {
       stpcpy(&buff[i], "");
       for (tp = UnitsTable; tp->name; tp++)
-	if (strcmp (buff, tp->name) == 0)
+	if (streq(buff, tp->name))
 	  {
 	    yylval.Number = tp->value;
 	    return tp->type;
@@ -701,7 +702,7 @@ static int LookupWord (char *buff)
     }
 
   for (tp = OtherTable; tp->name; tp++)
-    if (strcmp (buff, tp->name) == 0)
+    if (streq(buff, tp->name))
       {
 	yylval.Number = tp->value;
 	return tp->type;
@@ -711,7 +712,7 @@ static int LookupWord (char *buff)
   if (buff[1] == '\0' && isalpha (*buff))
     {
       for (tp = MilitaryTable; tp->name; tp++)
-	if (strcmp (buff, tp->name) == 0)
+	if (streq(buff, tp->name))
 	  {
 	    yylval.Number = tp->value;
 	    return tp->type;
@@ -727,7 +728,7 @@ static int LookupWord (char *buff)
   stpcpy(p, "");
   if (0 != i)
     for (tp = TimezoneTable; NULL != tp->name; tp++)
-      if (strcmp (buff, tp->name) == 0)
+      if (streq(buff, tp->name))
 	{
 	  yylval.Number = tp->value;
 	  return tp->type;

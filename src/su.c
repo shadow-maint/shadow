@@ -49,18 +49,19 @@
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "cast.h"
-#include "prototypes.h"
 #include "defines.h"
-#include "pwauth.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "getdef.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
-/*@-exitarg@*/
-#include "exitcodes.h"
+#include "pwauth.h"
+#include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 
@@ -186,7 +187,7 @@ static bool restricted_shell (const char *shellname)
 
 	setusershell ();
 	while ((line = getusershell ()) != NULL) {
-		if (('#' != *line) && (strcmp (line, shellname) == 0)) {
+		if (('#' != *line) && streq(line, shellname)) {
 			endusershell ();
 			return false;
 		}
@@ -511,17 +512,17 @@ static void check_perms_nopam (const struct passwd *pw)
 		return;
 	}
 
-	if (strcmp (pw->pw_passwd, "") == 0) {
+	if (streq(pw->pw_passwd, "")) {
 		const char  *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
 
 		if (prevent_no_auth == NULL) {
 			prevent_no_auth = "superuser";
 		}
-		if (strcmp(prevent_no_auth, "yes") == 0) {
+		if (streq(prevent_no_auth, "yes")) {
 			fprintf(stderr, _("Password field is empty, this is forbidden for all accounts.\n"));
 			exit(1);
 		} else if ((pw->pw_uid == 0)
-				&& (strcmp(prevent_no_auth, "superuser") == 0)) {
+				&& streq(prevent_no_auth, "superuser")) {
 			fprintf(stderr, _("Password field is empty, this is forbidden for super-user.\n"));
 			exit(1);
 		}
@@ -555,7 +556,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	}
 	spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
 #ifdef SU_ACCESS
-	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+	if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 		if (NULL != spwd) {
 			password = spwd->sp_pwdp;
 		}
@@ -792,7 +793,7 @@ save_caller_context(void)
 	 * -- chris
 	 */
 	password = pw->pw_passwd;
-	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+	if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 		const struct spwd *spwd = getspnam (caller_name);
 		if (NULL != spwd) {
 			password = spwd->sp_pwdp;
@@ -853,7 +854,7 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
+	if ((optind < argc) && streq(argv[optind], "-")) {
 		fakelogin = true;
 		optind++;
 	}

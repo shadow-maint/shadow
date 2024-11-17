@@ -31,10 +31,11 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
-#define IS_CRYPT_METHOD(str) ((crypt_method != NULL && strcmp(crypt_method, str) == 0) ? true : false)
+#define IS_CRYPT_METHOD(str) ((crypt_method != NULL && streq(crypt_method, str)) ? true : false)
 
 /*
  * Global variables
@@ -588,8 +589,8 @@ int main (int argc, char **argv)
 			sp = spw_locate (name);
 
 			if (   (NULL == sp)
-			    && (strcmp (pw->pw_passwd,
-			                SHADOW_PASSWD_STRING) == 0)) {
+			    && streq(pw->pw_passwd, SHADOW_PASSWD_STRING))
+			{
 				/* If the password is set to 'x' in
 				 * passwd, but there are no entries in
 				 * shadow, create one.

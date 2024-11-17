@@ -21,6 +21,7 @@
 #include "adds.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 
 #ident "$Id$"
 
@@ -67,7 +68,7 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	 * returns sp_lstchg==0 (must change password) instead of -1!
 	 */
 	if (   (0 == sp->sp_lstchg)
-	    && (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
+	    && streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 		return 1;
 	}
 

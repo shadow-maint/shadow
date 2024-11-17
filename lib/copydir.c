@@ -39,6 +39,7 @@
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -314,8 +315,8 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 		/*
 		 * Skip the "." and ".." entries
 		 */
-		if (strcmp(ent->d_name, ".") == 0 ||
-		    strcmp(ent->d_name, "..") == 0)
+		if (streq(ent->d_name, ".") ||
+		    streq(ent->d_name, ".."))
 		{
 			continue;
 		}

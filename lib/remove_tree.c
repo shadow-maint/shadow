@@ -19,8 +19,11 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <unistd.h>
-#include "prototypes.h"
+
 #include "defines.h"
+#include "prototypes.h"
+#include "string/strcmp/streq.h"
+
 
 static int remove_tree_at (int at_fd, const char *path, bool remove_root)
 {
@@ -48,8 +51,8 @@ static int remove_tree_at (int at_fd, const char *path, bool remove_root)
 		/*
 		 * Skip the "." and ".." entries
 		 */
-		if (strcmp (ent->d_name, ".") == 0 ||
-		    strcmp (ent->d_name, "..") == 0) {
+		if (streq(ent->d_name, ".") ||
+		    streq(ent->d_name, "..")) {
 			continue;
 		}
 

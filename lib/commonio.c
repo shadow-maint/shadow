@@ -36,6 +36,7 @@
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -830,10 +831,8 @@ int commonio_sort_wrt (struct commonio_db *shadow,
 			if (NULL == spw_ptr->eptr) {
 				continue;
 			}
-			if (strcmp (name, shadow->ops->getname (spw_ptr->eptr))
-			    == 0) {
+			if (streq(name, shadow->ops->getname(spw_ptr->eptr)))
 				break;
-			}
 		}
 		if (NULL == spw_ptr) {
 			continue;
@@ -1034,7 +1033,7 @@ static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
 	for (p = pos; NULL != p; p = p->next) {
 		ep = p->eptr;
 		if (   (NULL != ep)
-		    && (strcmp (db->ops->getname (ep), name) == 0)) {
+		    && streq(db->ops->getname(ep), name)) {
 			break;
 		}
 	}

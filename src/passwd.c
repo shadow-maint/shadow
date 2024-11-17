@@ -22,21 +22,22 @@
 
 #include "agetpass.h"
 #include "atoi/a2i/a2s.h"
+#include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
-#include "chkname.h"
 
 
 /*
@@ -242,16 +243,16 @@ static int new_password (const struct passwd *pw)
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
 		}
 	} else {
-		if (   (strcmp (method, "MD5")    == 0)
+		if (   streq(method, "MD5")
 #ifdef USE_SHA_CRYPT
-		    || (strcmp (method, "SHA256") == 0)
-		    || (strcmp (method, "SHA512") == 0)
+		    || streq(method, "SHA256")
+		    || streq(method, "SHA512")
 #endif /* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-		    || (strcmp (method, "BCRYPT") == 0)
+		    || streq(method, "BCRYPT")
 #endif /* USE_BCRYPT*/
 #ifdef USE_YESCRYPT
-		    || (strcmp (method, "YESCRYPT") == 0)
+		    || streq(method, "YESCRYPT")
 #endif /* USE_YESCRYPT*/
 
 		    ) {

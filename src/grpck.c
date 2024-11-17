@@ -15,14 +15,16 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <getopt.h>
+
 #include "chkname.h"
 #include "commonio.h"
 #include "defines.h"
 #include "groupio.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "sssd.h"
+#include "string/strcmp/streq.h"
 
 #ifdef SHADOWGRP
 #include "sgroupio.h"
@@ -436,7 +438,7 @@ static void compare_members_lists (const char *groupname,
 
 	for (pmem = members; NULL != *pmem; pmem++) {
 		for (other_pmem = other_members; NULL != *other_pmem; other_pmem++) {
-			if (strcmp (*pmem, *other_pmem) == 0) {
+			if (streq(*pmem, *other_pmem)) {
 				break;
 			}
 		}

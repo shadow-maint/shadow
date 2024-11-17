@@ -22,6 +22,7 @@
 #include "atoi/str2i/str2u.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -100,7 +101,7 @@ struct spwd *getspnam (const char *name)
 	setspent ();
 
 	while ((sp = getspent ()) != NULL) {
-		if (strcmp (name, sp->sp_namp) == 0) {
+		if (streq(name, sp->sp_namp)) {
 			break;
 		}
 	}
