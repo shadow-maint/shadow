@@ -10,12 +10,16 @@
 #ident "$Id$"
 
 #include <stdio.h>
-#include <assert.h>
+
 #include "defines.h"
-#include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
+
+#include <assert.h>
+
 
 static void change_root (const char* newroot);
 
@@ -38,10 +42,10 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 
 	for (i = 0; i < argc; i++) {
 		val = NULL;
-		if (   (strcmp (argv[i], "--root") == 0)
+		if (   streq(argv[i], "--root")
 		    || ((strncmp (argv[i], "--root=", 7) == 0)
 			&& (val = argv[i] + 7))
-		    || (strcmp (argv[i], short_opt) == 0)) {
+		    || streq(argv[i], short_opt)) {
 			if (NULL != newroot) {
 				fprintf (log_get_logfd(),
 				         _("%s: multiple --root options\n"),

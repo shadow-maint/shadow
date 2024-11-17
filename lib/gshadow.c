@@ -22,6 +22,7 @@
 #include "alloc/x/xrealloc.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -203,7 +204,7 @@ void endsgent (void)
 	setsgent ();
 
 	while ((sgrp = getsgent ()) != NULL) {
-		if (strcmp (name, sgrp->sg_name) == 0) {
+		if (streq(name, sgrp->sg_name)) {
 			break;
 		}
 	}

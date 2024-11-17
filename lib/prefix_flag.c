@@ -29,6 +29,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 
 
 static char *passwd_db_file = NULL;
@@ -60,10 +61,11 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 
 	for (i = 0; i < argc; i++) {
 		val = NULL;
-		if (   (strcmp (argv[i], "--prefix") == 0)
+		if (   streq(argv[i], "--prefix")
 		    || ((strncmp (argv[i], "--prefix=", 9) == 0)
 			&& (val = argv[i] + 9))
-		    || (strcmp (argv[i], short_opt) == 0)) {
+		    || streq(argv[i], short_opt))
+		{
 			if (NULL != prefix) {
 				fprintf (log_get_logfd(),
 				         _("%s: multiple --prefix options\n"),
@@ -96,7 +98,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			exit (EXIT_FAILURE);
 		}
 
-		if ( prefix[0] == '\0' || !strcmp(prefix, "/"))
+		if (prefix[0] == '\0' || streq(prefix, "/"))
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
 
@@ -153,7 +155,7 @@ extern struct group *prefix_getgrnam(const char *name)
 		if (!fg)
 			return NULL;
 		while ((grp = fgetgrent(fg)) != NULL) {
-			if (!strcmp(name, grp->gr_name))
+			if (streq(name, grp->gr_name))
 				break;
 		}
 		fclose(fg);
@@ -213,7 +215,7 @@ extern struct passwd *prefix_getpwnam(const char* name)
 		if (!fg)
 			return NULL;
 		while ((pwd = fgetpwent(fg)) != NULL) {
-			if (!strcmp(name, pwd->pw_name))
+			if (streq(name, pwd->pw_name))
 				break;
 		}
 		fclose(fg);
@@ -235,7 +237,7 @@ extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
 		if (!fg)
 			return errno;
 		while ((ret = fgetpwent_r(fg, pwd, buf, buflen, result)) == 0) {
-			if (!strcmp(name, pwd->pw_name))
+			if (streq(name, pwd->pw_name))
 				break;
 		}
 		fclose(fg);
@@ -256,7 +258,7 @@ extern struct spwd *prefix_getspnam(const char* name)
 		if (!fg)
 			return NULL;
 		while ((sp = fgetspent(fg)) != NULL) {
-			if (!strcmp(name, sp->sp_namp))
+			if (streq(name, sp->sp_namp))
 				break;
 		}
 		fclose(fg);

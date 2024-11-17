@@ -21,12 +21,13 @@
 
 #include "alloc/x/xmalloc.h"
 #include "defines.h"
-#include "prototypes.h"
 #include "groupio.h"
+#include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -85,7 +86,7 @@ static char *whoami (void)
 
 	if (   (NULL != usr)
 	    && (NULL != grp)
-	    && (0 == strcmp (usr->pw_name, grp->gr_name))) {
+	    && streq(usr->pw_name, grp->gr_name)) {
 		return xstrdup (usr->pw_name);
 	} else {
 		return NULL;

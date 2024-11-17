@@ -118,6 +118,8 @@
 #include <sys/stat.h>
 #include <syslog.h>
 
+#include "string/strcmp/streq.h"
+
 
 #define IMMEDIATE_CHANGE	/* Expire newly created password, must be changed
 				 * immediately upon next login */
@@ -315,7 +317,7 @@ main (void)
 #ifdef HAVE_GETUSERSHELL
 	  setusershell ();
 	  while ((sh = getusershell ()) != NULL)
-	    if (!strcmp (shell, sh))
+	    if (streq(shell, sh))
 	      ok = 1;
 	  endusershell ();
 #endif

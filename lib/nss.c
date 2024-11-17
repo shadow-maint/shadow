@@ -15,8 +15,9 @@
 #include "shadowlog_internal.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/strtok/stpsep.h"
 #include "string/strchr/stpspn.h"
+#include "string/strcmp/streq.h"
+#include "string/strtok/stpsep.h"
 
 
 #define NSSWITCH "/etc/nsswitch.conf"
@@ -98,7 +99,7 @@ nss_init(const char *nsswitch_path) {
 		// subid_nss has to be null here, but to ease reviews:
 		goto null_subid;
 	}
-	if (strcmp(p, "files") == 0) {
+	if (streq(p, "files")) {
 		goto null_subid;
 	}
 	if (strlen(p) > 50) {

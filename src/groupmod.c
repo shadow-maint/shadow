@@ -31,15 +31,16 @@
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
-#include "pwio.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
+#include "pwio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/sprintf/stpeprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/stpecpy.h"
 #include "string/strdup/xstrdup.h"
 
@@ -227,7 +228,7 @@ static void grp_update (void)
 			sgrp = *osgrp;
 			new_sgent (&sgrp);
 		} else if (   pflg
-		           && (strcmp (grp.gr_passwd, SHADOW_PASSWD_STRING) == 0)) {
+		           && streq(grp.gr_passwd, SHADOW_PASSWD_STRING)) {
 			static char *empty = NULL;
 			/* If there is a gshadow file with no entries for
 			 * the group, but the group file indicates a
@@ -357,7 +358,7 @@ check_new_name(void)
 	/*
 	 * Make sure they are actually changing the name.
 	 */
-	if (strcmp (group_name, group_newname) == 0) {
+	if (streq(group_name, group_newname)) {
 		nflg = 0;
 		return;
 	}

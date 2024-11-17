@@ -5,6 +5,8 @@
 
 #define _GNU_SOURCE
 
+#include <config.h>
+
 #include <errno.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -15,15 +17,14 @@
 #include <tcb.h>
 #include <unistd.h>
 
-#include "config.h"
-
 #include "defines.h"
-#include "prototypes.h"
 #include "fs/readlink/readlinknul.h"
 #include "getdef.h"
-#include "shadowio.h"
+#include "prototypes.h"
 #include "tcbfuncs.h"
+#include "shadowio.h"
 #include "shadowlog_internal.h"
+#include "string/strcmp/streq.h"
 
 
 #define SHADOWTCB_HASH_BY 1000
@@ -308,7 +309,7 @@ static shadowtcb_status move_dir (const char *user_newname, uid_t user_newid)
 	if (NULL == real_new_dir) {
 		goto out_free;
 	}
-	if (strcmp (real_old_dir, real_new_dir) == 0) {
+	if (streq(real_old_dir, real_new_dir)) {
 		ret = SHADOWTCB_SUCCESS;
 		goto out_free;
 	}

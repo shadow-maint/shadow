@@ -17,22 +17,23 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include "chkname.h"
 #include "defines.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "getdef.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
-/*@-exitarg@*/
-#include "exitcodes.h"
 #include "shadowlog.h"
+#include "sssd.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "chkname.h"
 
 
 #ifndef SHELLS_FILE
@@ -179,7 +180,7 @@ static bool shell_is_listed (const char *sh)
 	}
 
 	for (size_t i = 0; i < size; i++) {
-		if (strcmp (keys[i], sh) == 0) {
+		if (streq(keys[i], sh)) {
 			found = true;
 			break;
 		}
@@ -200,7 +201,7 @@ static bool shell_is_listed (const char *sh)
 	char *cp;
 	setusershell ();
 	while ((cp = getusershell ())) {
-		if (strcmp (cp, sh) == 0) {
+		if (streq(cp, sh)) {
 			found = true;
 			break;
 		}
@@ -221,7 +222,7 @@ static bool shell_is_listed (const char *sh)
 			continue;
 		}
 
-		if (strcmp (buf, sh) == 0) {
+		if (streq(buf, sh)) {
 			found = true;
 			break;
 		}

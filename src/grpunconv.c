@@ -26,15 +26,19 @@
 #include <getopt.h>
 
 #include "attr.h"
-#include "nscd.h"
-#include "sssd.h"
-#include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "nscd.h"
+#include "prototypes.h"
+#include "sssd.h"
+#include "string/strcmp/streq.h"
+
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
 #include "shadowlog.h"
+
+
 /*
  * Global variables
  */
@@ -174,7 +178,7 @@ int main (int argc, char **argv)
 	while ((gr = gr_next ()) != NULL) {
 		sg = sgr_locate (gr->gr_name);
 		if (   (NULL != sg)
-		    && (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) == 0)) {
+		    && streq(gr->gr_passwd, SHADOW_PASSWD_STRING)) {
 			/* add password to /etc/group */
 			grent = *gr;
 			grent.gr_passwd = sg->sg_passwd;

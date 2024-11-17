@@ -21,6 +21,7 @@
 #include "getdef.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -95,7 +96,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
 
-	if (strcmp (new, old) == 0) {
+	if (streq(new, old)) {
 		return _("no change");
 	}
 
@@ -105,7 +106,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 	if (palindrome (oldmono, newmono)) {
 		msg = _("a palindrome");
-	} else if (strcmp (oldmono, newmono) == 0) {
+	} else if (streq(oldmono, newmono)) {
 		msg = _("case changes only");
 	} else if (similar (oldmono, newmono)) {
 		msg = _("too similar");
@@ -162,16 +163,16 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 
 	} else {
 
-		if (   (strcmp (result, "MD5")    == 0)
+		if (   streq(result, "MD5")
 #ifdef USE_SHA_CRYPT
-		    || (strcmp (result, "SHA256") == 0)
-		    || (strcmp (result, "SHA512") == 0)
+		    || streq(result, "SHA256")
+		    || streq(result, "SHA512")
 #endif
 #ifdef USE_BCRYPT
-		    || (strcmp (result, "BCRYPT") == 0)
+		    || streq(result, "BCRYPT")
 #endif
 #ifdef USE_YESCRYPT
-		    || (strcmp (result, "YESCRYPT") == 0)
+		    || streq(result, "YESCRYPT")
 #endif
 		    ) {
 			return NULL;

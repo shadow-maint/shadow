@@ -11,11 +11,15 @@
 
 #ident "$Id$"
 
-#include <sys/types.h>
-#include <stdio.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+#include <stdio.h>
+#include <sys/types.h>
+
+#include "defines.h"
+#include "prototypes.h"
+#include "string/strcmp/streq.h"
+
+
 /*
  * valid - compare encrypted passwords
  *
@@ -73,7 +77,7 @@ bool valid (const char *password, const struct passwd *ent)
 
 	if (   (NULL != ent->pw_name)
 	    && (NULL != encrypted)
-	    && (strcmp (encrypted, ent->pw_passwd) == 0)) {
+	    && streq(encrypted, ent->pw_passwd)) {
 		return true;
 	} else {
 		return false;

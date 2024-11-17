@@ -28,6 +28,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 
 
 #ifdef __linux__
@@ -103,7 +104,7 @@ static int different_namespace (const char *sname)
 	if (READLINKNUL("/proc/self/ns/user", buf2) == -1)
 		return 0;
 
-	if (strcmp(buf, buf2) == 0)
+	if (streq(buf, buf2))
 		return 0; /* same namespace */
 
 	return 1;
@@ -199,8 +200,8 @@ static int user_busy_processes (const char *name, uid_t uid)
 		 * This patch is applied by default in some RedHat
 		 * kernels.
 		 */
-		if (   (strcmp (tmp_d_name, ".") == 0)
-		    || (strcmp (tmp_d_name, "..") == 0)) {
+		if (   streq(tmp_d_name, ".")
+		    || streq(tmp_d_name, "..")) {
 			continue;
 		}
 		if (*tmp_d_name == '.') {

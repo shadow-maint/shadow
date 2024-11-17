@@ -16,6 +16,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "string/strchr/strchrcnt.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -41,7 +42,7 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 */
 
 	for (i = 0; list[i] != NULL; i++) {
-		if (strcmp (list[i], member) == 0) {
+		if (streq(list[i], member)) {
 			return list;
 		}
 	}
@@ -167,7 +168,7 @@ bool is_on_list (char *const *list, const char *member)
 	assert (NULL != list);
 
 	while (NULL != *list) {
-		if (strcmp (*list, member) == 0) {
+		if (streq(*list, member)) {
 			return true;
 		}
 		list++;

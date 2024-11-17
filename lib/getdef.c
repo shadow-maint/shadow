@@ -32,6 +32,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -419,7 +420,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name, cons
 	 */
 
 	for (ptr = def_table; NULL != ptr->name; ptr++) {
-		if (strcmp (ptr->name, name) == 0) {
+		if (streq(ptr->name, name)) {
 			return ptr;
 		}
 	}
@@ -429,7 +430,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name, cons
 	 */
 
 	for (ptr = knowndef_table; NULL != ptr->name; ptr++) {
-		if (strcmp (ptr->name, name) == 0) {
+		if (streq(ptr->name, name)) {
 			goto out;
 		}
 	}

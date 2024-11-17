@@ -1,11 +1,13 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include "subid.h"
+#include <string.h>
+
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
+#include "subid.h"
 
 static const char Prog[] = "getsubids";
 
@@ -28,10 +30,10 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		usage();
 	owner = argv[1];
-	if (argc == 3 && strcmp(argv[1], "-g") == 0) {
+	if (argc == 3 && streq(argv[1], "-g")) {
 		owner = argv[2];
 		count = subid_get_gid_ranges(owner, &ranges);
-	} else if (argc == 2 && strcmp(argv[1], "-h") == 0) {
+	} else if (argc == 2 && streq(argv[1], "-h")) {
 		usage();
 	} else {
 		count = subid_get_uid_ranges(owner, &ranges);

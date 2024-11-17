@@ -13,11 +13,14 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+
+#include "defines.h"
+#include "prototypes.h"
+#include "string/strcmp/streq.h"
+
 
 static int chown_tree_at (int at_fd,
                 const char *path,
@@ -56,8 +59,8 @@ static int chown_tree_at (int at_fd,
 		/*
 		 * Skip the "." and ".." entries
 		 */
-		if (   (strcmp (ent->d_name, ".") == 0)
-		    || (strcmp (ent->d_name, "..") == 0)) {
+		if (   streq(ent->d_name, ".")
+		    || streq(ent->d_name, "..")) {
 			continue;
 		}
 

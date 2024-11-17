@@ -38,21 +38,22 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-#include "prototypes.h"
+#include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
-#include "sssd.h"
+#include "prototypes.h"
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
-#include "chkname.h"
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -428,29 +429,29 @@ static int update_passwd (struct passwd *pwd, const char *password)
 	if (NULL != crypt_method) {
 #if defined(USE_SHA_CRYPT)
 		if (sflg) {
-			if (   (0 == strcmp (crypt_method, "SHA256"))
-				|| (0 == strcmp (crypt_method, "SHA512"))) {
+			if (   streq(crypt_method, "SHA256")
+				|| streq(crypt_method, "SHA512")) {
 				crypt_arg = &sha_rounds;
 			}
 		}
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
 		if (sflg) {
-			if (0 == strcmp (crypt_method, "BCRYPT")) {
+			if (streq(crypt_method, "BCRYPT")) {
 				crypt_arg = &bcrypt_rounds;
 			}
 		}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
 		if (sflg) {
-			if (0 == strcmp (crypt_method, "YESCRYPT")) {
+			if (streq(crypt_method, "YESCRYPT")) {
 				crypt_arg = &yescrypt_cost;
 			}
 		}
 #endif				/* USE_YESCRYPT */
 	}
 
-	if ((NULL != crypt_method) && (0 == strcmp(crypt_method, "NONE"))) {
+	if ((NULL != crypt_method) && streq(crypt_method, "NONE")) {
 		pwd->pw_passwd = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
@@ -484,22 +485,23 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	if (NULL != crypt_method) {
 #if defined(USE_SHA_CRYPT)
 		if (sflg) {
-			if (   (0 == strcmp (crypt_method, "SHA256"))
-				|| (0 == strcmp (crypt_method, "SHA512"))) {
+			if (streq(crypt_method, "SHA256")
+			    || streq(crypt_method, "SHA512"))
+			{
 				crypt_arg = &sha_rounds;
 			}
 		}
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
 		if (sflg) {
-			if (0 == strcmp (crypt_method, "BCRYPT")) {
+			if (streq(crypt_method, "BCRYPT")) {
 				crypt_arg = &bcrypt_rounds;
 			}
 		}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
 		if (sflg) {
-			if (0 == strcmp (crypt_method, "YESCRYPT")) {
+			if (streq(crypt_method, "YESCRYPT")) {
 				crypt_arg = &yescrypt_cost;
 			}
 		}
@@ -525,7 +527,8 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	if (NULL != sp) {
 		spent = *sp;
 		if (   (NULL != crypt_method)
-		    && (0 == strcmp(crypt_method, "NONE"))) {
+		    && streq(crypt_method, "NONE"))
+		{
 			spent.sp_pwdp = (char *)password;
 		} else {
 			const char *salt = crypt_make_salt (crypt_method,
@@ -576,7 +579,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 */
 	spent.sp_namp = pwd->pw_name;
 #ifndef USE_PAM
-	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
+	if ((crypt_method != NULL) && streq(crypt_method, "NONE")) {
 		spent.sp_pwdp = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
@@ -682,19 +685,19 @@ static void process_flags (int argc, char **argv)
 				usage (EXIT_FAILURE);
 			}
 #if defined(USE_SHA_CRYPT)
-			if (  (   ((0 == strcmp (crypt_method, "SHA256")) || (0 == strcmp (crypt_method, "SHA512")))
+			if (  (   (streq(crypt_method, "SHA256") || streq(crypt_method, "SHA512"))
 			       && (-1 == str2sl(&sha_rounds, optarg)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
-                        if ((   (0 == strcmp (crypt_method, "BCRYPT"))
+                        if ((   streq(crypt_method, "BCRYPT")
 			       && (-1 == str2sl(&bcrypt_rounds, optarg)))) {
                             bad_s = 1;
                         }
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-                        if ((   (0 == strcmp (crypt_method, "YESCRYPT"))
+                        if ((   streq(crypt_method, "YESCRYPT")
 			       && (-1 == str2sl(&yescrypt_cost, optarg)))) {
                             bad_s = 1;
                         }

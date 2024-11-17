@@ -47,12 +47,14 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
-#include "shadowio.h"
-#include "nscd.h"
 #include "sssd.h"
+#include "shadowio.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
+
 
 /*
  * exit status values
@@ -231,7 +233,7 @@ int main (int argc, char **argv)
 		sp = spw_locate (pw->pw_name);
 		if (NULL != sp) {
 			/* do we need to update this entry? */
-			if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+			if (streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 				continue;
 			}
 			/* update existing shadow entry */

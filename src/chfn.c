@@ -18,23 +18,24 @@
 #include <sys/types.h>
 #include <getopt.h>
 
+#include "chkname.h"
 #include "defines.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "getdef.h"
 #include "nscd.h"
-#include "sssd.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
-/*@-exitarg@*/
-#include "exitcodes.h"
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "chkname.h"
 
 
 /*
@@ -151,9 +152,9 @@ static bool may_change_field (int field)
 	cp = getdef_str ("CHFN_RESTRICT");
 	if (NULL == cp) {
 		cp = "";
-	} else if (strcmp (cp, "yes") == 0) {
+	} else if (streq(cp, "yes")) {
 		cp = "rwh";
-	} else if (strcmp (cp, "no") == 0) {
+	} else if (streq(cp, "no")) {
 		cp = "frwh";
 	}
 

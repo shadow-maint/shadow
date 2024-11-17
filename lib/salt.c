@@ -22,10 +22,12 @@
 #include <string.h>
 #include <strings.h>
 
-#include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
+
 
 #if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
      CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
@@ -372,31 +374,31 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		}
 	}
 
-	if (0 == strcmp (method, "MD5")) {
+	if (streq(method, "MD5")) {
 		MAGNUM(result, '1');
 		salt_len = MD5_CRYPT_SALT_SIZE;
 		rounds = 0;
 #ifdef USE_BCRYPT
-	} else if (0 == strcmp (method, "BCRYPT")) {
+	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
 		salt_len = BCRYPT_SALT_SIZE;
 		rounds = BCRYPT_get_salt_rounds (arg);
 		BCRYPT_salt_rounds_to_buf (result, rounds);
 #endif /* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-	} else if (0 == strcmp (method, "YESCRYPT")) {
+	} else if (streq(method, "YESCRYPT")) {
 		MAGNUM(result, 'y');
 		salt_len = YESCRYPT_SALT_SIZE;
 		rounds = YESCRYPT_get_salt_cost (arg);
 		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
 #ifdef USE_SHA_CRYPT
-	} else if (0 == strcmp (method, "SHA256")) {
+	} else if (streq(method, "SHA256")) {
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
-	} else if (0 == strcmp (method, "SHA512")) {
+	} else if (streq(method, "SHA512")) {
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);

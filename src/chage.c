@@ -34,6 +34,7 @@
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strftime.h"
@@ -186,7 +187,7 @@ static int new_fields (void)
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
-	if (strcmp (buf, "-1") == 0) {
+	if (streq(buf, "-1")) {
 		lstchgdate = -1;
 	} else {
 		lstchgdate = strtoday (buf);
@@ -213,7 +214,7 @@ static int new_fields (void)
 	change_field (buf, sizeof buf,
 	              _("Account Expiration Date (YYYY-MM-DD)"));
 
-	if (strcmp (buf, "-1") == 0) {
+	if (streq(buf, "-1")) {
 		expdate = -1;
 	} else {
 		expdate = strtoday (buf);

@@ -52,6 +52,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -319,7 +320,7 @@ static void remove_usergroup (void)
 		 */
 		prefix_setpwent ();
 		while ((pwd = prefix_getpwent ()) != NULL) {
-			if (strcmp (pwd->pw_name, user_name) == 0) {
+			if (streq(pwd->pw_name, user_name)) {
 				continue;
 			}
 			if (pwd->pw_gid == grp->gr_gid) {
@@ -1183,7 +1184,7 @@ int main (int argc, char **argv)
 		 */
 		prefix_setpwent ();
 		while ((pwd = prefix_getpwent ())) {
-			if (strcmp (pwd->pw_name, user_name) == 0) {
+			if (streq(pwd->pw_name, user_name)) {
 				continue;
 			}
 			if (path_prefix (user_home, pwd->pw_dir)) {

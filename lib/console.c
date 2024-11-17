@@ -16,6 +16,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strtok/stpsep.h"
 
@@ -51,7 +52,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 		STRTCPY(buf, cons);
 		pbuf = &buf[0];
 		while ((s = strtok (pbuf, ":")) != NULL) {
-			if (strcmp (s, tty) == 0) {
+			if (streq(s, tty)) {
 				return true;
 			}
 
@@ -76,7 +77,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 
 	while (fgets (buf, sizeof (buf), fp) != NULL) {
 		stpsep(buf, "\n");
-		if (strcmp (buf, tty) == 0) {
+		if (streq(buf, tty)) {
 			(void) fclose (fp);
 			return true;
 		}

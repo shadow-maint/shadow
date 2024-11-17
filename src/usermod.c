@@ -44,7 +44,6 @@
 #include "groupio.h"
 #include "must_be.h"
 #include "nscd.h"
-#include "sssd.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
@@ -62,6 +61,7 @@
 #include "tcbfuncs.h"
 #endif
 #include "shadowlog.h"
+#include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
@@ -1374,10 +1374,10 @@ process_flags(int argc, char **argv)
 		gflg = false;
 	}
 	if (   (NULL != user_newshell)
-	    && (strcmp (user_newshell, user_shell) == 0)) {
+	    && streq(user_newshell, user_shell)) {
 		sflg = false;
 	}
-	if (strcmp (user_newname, user_name) == 0) {
+	if (streq(user_newname, user_name)) {
 		lflg = false;
 	}
 	if (user_newinactive == user_inactive) {
@@ -1387,12 +1387,12 @@ process_flags(int argc, char **argv)
 		eflg = false;
 	}
 	if (   (NULL != user_newhome)
-	    && (strcmp (user_newhome, user_home) == 0)) {
+	    && streq(user_newhome, user_home)) {
 		dflg = false;
 		mflg = false;
 	}
 	if (   (NULL != user_newcomment)
-	    && (strcmp (user_newcomment, user_comment) == 0)) {
+	    && streq(user_newcomment, user_comment)) {
 		cflg = false;
 	}
 
@@ -1727,7 +1727,7 @@ static void usr_update (void)
 			spent = *spwd;
 			new_spent (&spent);
 		} else if (   (    pflg
-		               && (strcmp (pwent.pw_passwd, SHADOW_PASSWD_STRING) == 0))
+		               && streq(pwent.pw_passwd, SHADOW_PASSWD_STRING))
 		           || eflg || fflg) {
 			/* In some cases, we force the creation of a
 			 * shadow entry:

@@ -19,6 +19,7 @@
 #include "defines.h"
 #include "port.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -46,7 +47,7 @@ static int portcmp (const char *pattern, const char *port)
 	if (('\0' == *pattern) && ('\0' == *port)) {
 		return 0;
 	}
-	if (strcmp(orig, "SU") == 0)
+	if (streq(orig, "SU"))
 		return 1;
 
 	return (*pattern == '*') ? 0 : 1;
@@ -339,9 +340,9 @@ getttyuser(const char *tty, const char *user)
 			continue;
 
 		for (ptu = port->pt_users; *ptu != NULL; ptu++) {
-			if (strcmp(*ptu, user) == 0)
+			if (streq(*ptu, user))
 				goto end;
-			if (strcmp(*ptu, "*") == 0)
+			if (streq(*ptu, "*"))
 				goto end;
 		}
 	}

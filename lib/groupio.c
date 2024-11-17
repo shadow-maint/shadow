@@ -17,11 +17,12 @@
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
-#include "prototypes.h"
-#include "defines.h"
 #include "commonio.h"
+#include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "prototypes.h"
+#include "string/strcmp/streq.h"
 
 
 static /*@null@*/struct commonio_entry *merge_group_entries (
@@ -263,8 +264,8 @@ static int group_open_hook (void)
 			struct group *g2 = gr2->eptr;
 			if (NULL != g1 &&
 			    NULL != g2 &&
-			    0 == strcmp (g1->gr_name, g2->gr_name) &&
-			    0 == strcmp (g1->gr_passwd, g2->gr_passwd) &&
+			    streq(g1->gr_name, g2->gr_name) &&
+			    streq(g1->gr_passwd, g2->gr_passwd) &&
 			    g1->gr_gid == g2->gr_gid) {
 				/* Both group entries refer to the same
 				 * group. It is a split group. Merge the
@@ -332,7 +333,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = gptr1->gr_mem;
 		while (NULL != *pmember) {
-			if (0 == strcmp(*pmember, gptr2->gr_mem[i])) {
+			if (streq(*pmember, gptr2->gr_mem[i])) {
 				break;
 			}
 			pmember++;
@@ -355,7 +356,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = new_members;
 		while (NULL != *pmember) {
-			if (0 == strcmp(*pmember, gptr2->gr_mem[i])) {
+			if (streq(*pmember, gptr2->gr_mem[i])) {
 				break;
 			}
 			pmember++;

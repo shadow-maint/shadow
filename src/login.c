@@ -29,16 +29,17 @@
 #include "attr.h"
 #include "chkname.h"
 #include "defines.h"
+/*@-exitarg@*/
+#include "exitcodes.h"
 #include "faillog.h"
 #include "failure.h"
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
-/*@-exitarg@*/
-#include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strftime.h"
@@ -269,7 +270,7 @@ static void process_flags (int argc, char *const *argv)
 		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2) {
 			usage ();
 		}
-		if (strcmp(argv[arg], "--") == 0) {
+		if (streq(argv[arg], "--")) {
 			break; /* stop checking on a "--" */
 		}
 	}
@@ -864,22 +865,22 @@ int main (int argc, char **argv)
 				failed = true;
 			}
 
-			if (strcmp (user_passwd, "") == 0) {
+			if (streq(user_passwd, "")) {
 				const char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
 
 				if (prevent_no_auth == NULL) {
 					prevent_no_auth = "superuser";
 				}
-				if (strcmp(prevent_no_auth, "yes") == 0) {
+				if (streq(prevent_no_auth, "yes")) {
 					failed = true;
 				} else if ((pwd->pw_uid == 0)
-					&& (strcmp(prevent_no_auth, "superuser") == 0)) {
+					&& streq(prevent_no_auth, "superuser")) {
 					failed = true;
 				}
 			}
 		}
 
-		if (strcmp (user_passwd, SHADOW_PASSWD_STRING) == 0) {
+		if (streq(user_passwd, SHADOW_PASSWD_STRING)) {
 			spwd = xgetspnam (username);
 			if (NULL != spwd) {
 				user_passwd = spwd->sp_pwdp;
