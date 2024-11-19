@@ -173,6 +173,8 @@ libshadow_la_SOURCES = \
 	sgroupio.c \
 	sgroupio.h\
 	shadow.c \
+	shadow/grp/agetgroups.c \
+	shadow/grp/agetgroups.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
