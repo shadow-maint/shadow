@@ -19,9 +19,9 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "alloc/malloc.h"
 #include "alloc/reallocf.h"
 #include "search/l/lsearch.h"
+#include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
 #include "string/strchr/strchrscnt.h"
 
@@ -38,21 +38,12 @@ add_groups(const char *list)
 	FILE *shadow_logfd = log_get_logfd();
 	gid_t   *gids;
 	size_t  n;
-	ssize_t n0;
 
-	n0 = getgroups(0, NULL);
-	if (n0 == -1)
-		return -1;
-
-	gids = MALLOC(n0, gid_t);
+	gids = agetgroups(&n);
 	if (gids == NULL)
 		return -1;
 
-	n0 = getgroups(n0, gids);
-	if (n0 == -1)
-		goto free_gids;
-
-	gids = REALLOCF(gids, n0 + strchrscnt(list, ",:") + 1, gid_t);
+	gids = REALLOCF(gids, n + strchrscnt(list, ",:") + 1, gid_t);
 	if (gids == NULL)
 		return -1;
 
@@ -60,7 +51,6 @@ add_groups(const char *list)
 	if (dup == NULL)
 		goto free_gids;
 
-	n = n0;
 	while (NULL != (g = strsep(&p, ",:"))) {
 		struct group  *grp;
 

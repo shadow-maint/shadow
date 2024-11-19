@@ -26,6 +26,7 @@
 #include "prototypes.h"
 #include "search/l/lfind.h"
 #include "search/l/lsearch.h"
+#include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -557,17 +558,9 @@ int main (int argc, char **argv)
 	 * nasty message but at least your real and effective group ids are
 	 * set.
 	 */
-
-	ngroups = getgroups(0, NULL);
-	if (ngroups == -1)
-		goto fail_gg;
-
-	gids = XMALLOC(ngroups, gid_t);
-
-	ngroups = getgroups(ngroups, gids);
-	if (ngroups == -1) {
-fail_gg:
-		perror("getgroups");
+	gids = agetgroups(&ngroups);
+	if (gids == NULL) {
+		perror("agetgroups");
 #ifdef WITH_AUDIT
 		if (group) {
 			SNPRINTF(audit_buf, "changing new-group=%s", group);
