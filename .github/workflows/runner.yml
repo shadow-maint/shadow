@@ -74,6 +74,10 @@ jobs:
         os: [alpine, debian, fedora]
 
     steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -98,4 +102,6 @@ jobs:
           ./share/ansible/build-out/config.h
           ./share/ansible/build-out/build.log
           ./share/ansible/build-out/test-suite.log
+          ./tests/system/pytest.log
+          ./tests/system/artifacts
         if-no-files-found: ignore
