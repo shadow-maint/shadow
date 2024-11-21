@@ -15,3 +15,8 @@
   gather_facts: false
   roles:
     - role: ci_run
+
+- name: Run system tests
+  hosts: localhost
+  roles:
+    - role: run_system_tests
