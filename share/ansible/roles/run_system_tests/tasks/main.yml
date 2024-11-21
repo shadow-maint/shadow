@@ -1,0 +1,14 @@
+---
+# tasks file for run_system_tests
+- name: Prepare environment and run system tests
+  ansible.builtin.shell: |
+    set -ex
+    pushd ../../tests/system/
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip3 install -r ./requirements.txt
+    exec 3>&1 1> >(tee pytest.log) 2>&1
+    pytest --mh-config=mhc.yaml --mh-lazy-ssh -vvv
+    popd
+  args:
+    executable: /bin/bash
