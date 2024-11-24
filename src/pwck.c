@@ -13,23 +13,26 @@
 #ident "$Id$"
 
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <getopt.h>
+
 #include "chkname.h"
 #include "commonio.h"
 #include "defines.h"
+#include "getdef.h"
+#include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
-#include "getdef.h"
-#include "nscd.h"
+#include "shadowlog.h"
 #include "sssd.h"
+#include "string/strcmp/streq.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
-#include "shadowlog.h"
+
 
 /*
  * Exit codes
@@ -447,7 +450,7 @@ static void check_pw_file (int *errors, bool *changed)
 				continue;
 			}
 
-			if (strcmp (pwd->pw_name, ent->pw_name) != 0) {
+			if (!streq(pwd->pw_name, ent->pw_name)) {
 				continue;
 			}
 
@@ -518,7 +521,7 @@ static void check_pw_file (int *errors, bool *changed)
 				/*
 				 * Home directory does not exist, give a warning (unless intentional)
 				 */
-				if (NULL == nonexistent || strcmp (pwd->pw_dir, nonexistent) != 0) {
+				if (NULL == nonexistent || !streq(pwd->pw_dir, nonexistent)) {
 					printf (_("user '%s': directory '%s' does not exist\n"),
 							pwd->pw_name, pwd->pw_dir);
 					*errors += 1;
@@ -644,8 +647,7 @@ static void check_pw_file (int *errors, bool *changed)
 				 * Make sure no passwords are in passwd.
 				 */
 				if (   !quiet
-				    && (strcmp (pwd->pw_passwd,
-				                SHADOW_PASSWD_STRING) != 0)) {
+				    && !streq(pwd->pw_passwd, SHADOW_PASSWD_STRING)) {
 					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        pwd->pw_name, spw_dbname (), pw_dbname ());
 					*errors += 1;
@@ -773,7 +775,7 @@ static void check_spw_file (int *errors, bool *changed)
 				continue;
 			}
 
-			if (strcmp (spw->sp_namp, ent->sp_namp) != 0) {
+			if (!streq(spw->sp_namp, ent->sp_namp)) {
 				continue;
 			}
 

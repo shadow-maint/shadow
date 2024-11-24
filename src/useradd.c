@@ -1413,7 +1413,7 @@ static void process_flags (int argc, char **argv)
 				}
 				if (    '\0' != optarg[0]
 				     && '*'  != optarg[0]
-				     && strcmp(optarg, "/sbin/nologin") != 0
+				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
 				         || S_ISDIR(st.st_mode)
 				         || access(optarg, X_OK) != 0)) {

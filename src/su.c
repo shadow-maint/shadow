@@ -681,7 +681,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
 	tmp_name = item;
-	if (strcmp (name, tmp_name) != 0) {
+	if (!streq(name, tmp_name)) {
 		SYSLOG ((LOG_INFO,
 		         "Change user from '%s' to '%s' as requested by PAM",
 		         name, tmp_name));

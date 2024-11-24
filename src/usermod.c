@@ -496,7 +496,7 @@ static void new_pwent (struct passwd *pwent)
 	 * used for this account.
 	 */
 	if (   (!is_shadow_pwd)
-	    || (strcmp (pwent->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
+	    || !streq(pwent->pw_passwd, SHADOW_PASSWD_STRING)) {
 		pwent->pw_passwd = new_pw_passwd (pwent->pw_passwd);
 	}
 
@@ -1164,7 +1164,7 @@ process_flags(int argc, char **argv)
 				}
 				if (    '\0' != optarg[0]
 				     && '*'  != optarg[0]
-				     && strcmp(optarg, "/sbin/nologin") != 0
+				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
 				         || S_ISDIR(st.st_mode)
 				         || access(optarg, X_OK) != 0)) {

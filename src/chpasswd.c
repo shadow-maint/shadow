@@ -627,7 +627,7 @@ int main (int argc, char **argv)
 		}
 
 		if (   (NULL == sp)
-		    || (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
+		    || !streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 			newpw = *pw;
 			newpw.pw_passwd = cp;
 		}
@@ -647,7 +647,7 @@ int main (int argc, char **argv)
 			}
 		}
 		if (   (NULL == sp)
-		    || (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) != 0)) {
+		    || !streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 			if (pw_update (&newpw) == 0) {
 				fprintf (stderr,
 				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),

@@ -537,7 +537,7 @@ static void check_grp_file (int *errors, bool *changed)
 				continue;
 			}
 
-			if (strcmp (grp->gr_name, ent->gr_name) != 0) {
+			if (!streq(grp->gr_name, ent->gr_name)) {
 				continue;
 			}
 
@@ -649,7 +649,7 @@ static void check_grp_file (int *errors, bool *changed)
 				/* The group entry has a gshadow counterpart.
 				 * Make sure no passwords are in group.
 				 */
-				if (strcmp (grp->gr_passwd, SHADOW_PASSWD_STRING) != 0) {
+				if (!streq(grp->gr_passwd, SHADOW_PASSWD_STRING)) {
 					printf (_("group %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        grp->gr_name, sgr_file, grp_file);
 					*errors += 1;
@@ -739,7 +739,7 @@ static void check_sgr_file (int *errors, bool *changed)
 				continue;
 			}
 
-			if (strcmp (sgr->sg_name, ent->sg_name) != 0) {
+			if (!streq(sgr->sg_name, ent->sg_name)) {
 				continue;
 			}
 

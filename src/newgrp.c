@@ -75,7 +75,7 @@ static bool ingroup(const char *name, struct group *gr)
 
 	look = gr->gr_mem;
 	while (*look && notfound)
-		notfound = strcmp (*look++, name);
+		notfound = !streq(*look++, name);
 
 	return !notfound;
 }
@@ -189,7 +189,7 @@ static void check_perms (const struct group *grp,
 		}
 
 		if (grp->gr_passwd[0] == '\0' ||
-		    strcmp (cpasswd, grp->gr_passwd) != 0) {
+		    !streq(cpasswd, grp->gr_passwd)) {
 #ifdef WITH_AUDIT
 			SNPRINTF(audit_buf, "authentication new-gid=%lu",
 			         (unsigned long) grp->gr_gid);
