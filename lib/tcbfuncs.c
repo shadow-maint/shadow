@@ -342,7 +342,7 @@ static shadowtcb_status move_dir (const char *user_newname, uid_t user_newid)
 	if (NULL == real_new_dir_rel) {
 		goto out_free;
 	}
-	if (   (strcmp (real_new_dir, newdir) != 0)
+	if (   !streq(real_new_dir, newdir)
 	    && (symlink (real_new_dir_rel, newdir) != 0)) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot create symbolic link %s: %s\n"),

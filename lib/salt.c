@@ -404,7 +404,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
 #endif /* USE_SHA_CRYPT */
-	} else if (0 != strcmp (method, "DES")) {
+	} else if (!streq(method, "DES")) {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to DES.\n"),

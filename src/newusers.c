@@ -557,7 +557,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 * when the entry was created, so this user would have to have had
 	 * the password set someplace else.
 	 */
-	if (strcmp (pwd->pw_passwd, "x") != 0) {
+	if (!streq(pwd->pw_passwd, "x")) {
 		return update_passwd (pwd, password);
 	}
 #else				/* USE_PAM */
@@ -568,7 +568,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 * The password will be updated later for all users using PAM.
 	 */
 	if (   (NULL != sp)
-	    || (strcmp (pwd->pw_passwd, "x") != 0)) {
+	    || !streq(pwd->pw_passwd, "x")) {
 		return 0;
 	}
 #endif				/* USE_PAM */
@@ -754,18 +754,18 @@ static void check_flags (void)
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 
 	if (cflg) {
-		if (   (0 != strcmp (crypt_method, "DES"))
-		    && (0 != strcmp (crypt_method, "MD5"))
-		    && (0 != strcmp (crypt_method, "NONE"))
+		if (   !streq(crypt_method, "DES")
+		    && !streq(crypt_method, "MD5")
+		    && !streq(crypt_method, "NONE")
 #ifdef USE_SHA_CRYPT
-		    && (0 != strcmp (crypt_method, "SHA256"))
-		    && (0 != strcmp (crypt_method, "SHA512"))
+		    && !streq(crypt_method, "SHA256")
+		    && !streq(crypt_method, "SHA512")
 #endif				/* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-		    && (0 != strcmp (crypt_method, "BCRYPT"))
+		    && !streq(crypt_method, "BCRYPT")
 #endif				/* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-		    && (0 != strcmp (crypt_method, "YESCRYPT"))
+		    && !streq(crypt_method, "YESCRYPT")
 #endif				/* USE_YESCRYPT */
 		    ) {
 			fprintf (stderr,

@@ -197,7 +197,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 		unsigned long first = range->start;
 		unsigned long last = first + range->count - 1;
 
-		if (0 != strcmp(range->owner, owner))
+		if (!streq(range->owner, owner))
 			continue;
 
 		if ((val >= first) && (val <= last))
@@ -208,7 +208,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
         /*
          * We only do special handling for these two files
          */
-        if ((0 != strcmp(db->filename, SUBUID_FILE)) && (0 != strcmp(db->filename, SUBGID_FILE)))
+        if (!streq(db->filename, SUBUID_FILE) && !streq(db->filename, SUBGID_FILE))
                 return NULL;
 
         /*
@@ -465,7 +465,7 @@ static int remove_range (struct commonio_db *db,
 		last = first + range->count - 1;
 
 		/* Skip entries with a different owner */
-		if (0 != strcmp (range->owner, owner)) {
+		if (!streq(range->owner, owner)) {
 			continue;
 		}
 
@@ -1062,7 +1062,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 	if (reuse) {
 		while ((r = commonio_next(db)) != NULL) {
 			// TODO account for username vs uid_t
-			if (0 != strcmp(r->owner, range->owner))
+			if (!streq(r->owner, range->owner))
 				continue;
 			if (r->count >= range->count) {
 				range->count = r->count;

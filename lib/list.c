@@ -93,7 +93,7 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 */
 
 	for (i = j = 0; list[i] != NULL; i++) {
-		if (strcmp (list[i], member) != 0) {
+		if (!streq(list[i], member)) {
 			j++;
 		}
 	}
@@ -116,7 +116,7 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 */
 
 	for (i = j = 0; list[i] != NULL; i++) {
-		if (strcmp (list[i], member) != 0) {
+		if (!streq(list[i], member)) {
 			tmp[j] = list[i];
 			j++;
 		}

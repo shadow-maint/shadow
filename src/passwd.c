@@ -213,7 +213,7 @@ static int new_password (const struct passwd *pw)
 			return -1;
 		}
 
-		if (strcmp (cipher, crypt_passwd) != 0) {
+		if (!streq(cipher, crypt_passwd)) {
 			erase_pass (clear);
 			strzero (cipher);
 			SYSLOG ((LOG_WARN, "incorrect password for %s",
@@ -299,7 +299,7 @@ static int new_password (const struct passwd *pw)
 				MEMZERO(pass);
 				return -1;
 			}
-			if (warned && (strcmp (pass, cp) != 0)) {
+			if (warned && !streq(pass, cp)) {
 				warned = false;
 			}
 			ret = STRTCPY (pass, cp);
@@ -333,7 +333,7 @@ static int new_password (const struct passwd *pw)
 				MEMZERO(pass);
 				return -1;
 			}
-			if (strcmp (cp, pass) != 0) {
+			if (!streq(cp, pass)) {
 				erase_pass (cp);
 				(void) fputs (_("They don't match; try again.\n"), stderr);
 			} else {
@@ -839,7 +839,7 @@ main(int argc, char **argv)
 			case 'r':
 				/* -r repository (files|nis|nisplus) */
 				/* only "files" supported for now */
-				if (strcmp (optarg, "files") != 0) {
+				if (!streq(optarg, "files")) {
 					fprintf (stderr,
 					         _("%s: repository %s not supported\n"),
 						 Prog, optarg);

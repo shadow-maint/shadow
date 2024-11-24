@@ -260,18 +260,18 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (   (0 != strcmp (crypt_method, "DES"))
-		    && (0 != strcmp (crypt_method, "MD5"))
-		    && (0 != strcmp (crypt_method, "NONE"))
+		if (   !streq(crypt_method, "DES")
+		    && !streq(crypt_method, "MD5")
+		    && !streq(crypt_method, "NONE")
 #ifdef USE_SHA_CRYPT
-		    && (0 != strcmp (crypt_method, "SHA256"))
-		    && (0 != strcmp (crypt_method, "SHA512"))
+		    && !streq(crypt_method, "SHA256")
+		    && !streq(crypt_method, "SHA512")
 #endif				/* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
-		    && (0 != strcmp (crypt_method, "BCRYPT"))
+		    && !streq(crypt_method, "BCRYPT")
 #endif				/* USE_BCRYPT */
 #ifdef USE_YESCRYPT
-		    && (0 != strcmp (crypt_method, "YESCRYPT"))
+		    && !streq(crypt_method, "YESCRYPT")
 #endif				/* USE_YESCRYPT */
 		    ) {
 			fprintf (stderr,
@@ -490,7 +490,7 @@ int main (int argc, char **argv)
 		newpwd = cp;
 		if (   (!eflg)
 		    && (   (NULL == crypt_method)
-		        || (0 != strcmp (crypt_method, "NONE")))) {
+		        || !streq(crypt_method, "NONE"))) {
 			void *arg = NULL;
 			const char *salt;
 			if (md5flg) {
@@ -577,7 +577,7 @@ int main (int argc, char **argv)
 			newsg.sg_passwd = cp;
 		}
 		if (   (NULL == sg)
-		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+		    || !streq(gr->gr_passwd, SHADOW_PASSWD_STRING))
 #endif
 		{
 			newgr = *gr;
@@ -600,7 +600,7 @@ int main (int argc, char **argv)
 			}
 		}
 		if (   (NULL == sg)
-		    || (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+		    || !streq(gr->gr_passwd, SHADOW_PASSWD_STRING))
 #endif
 		{
 			if (gr_update (&newgr) == 0) {

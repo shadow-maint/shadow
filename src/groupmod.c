@@ -155,7 +155,7 @@ static void new_grent (struct group *grent)
 	if (   pflg
 #ifdef SHADOWGRP
 	    && (   (!is_shadow_grp)
-	        || (strcmp (grent->gr_passwd, SHADOW_PASSWD_STRING) != 0))
+	        || !streq(grent->gr_passwd, SHADOW_PASSWD_STRING))
 #endif
 		) {
 		/* Update the password in group if there is no gshadow

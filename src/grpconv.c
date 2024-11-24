@@ -17,6 +17,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,18 +25,21 @@
 #include <strings.h>
 #include <time.h>
 #include <unistd.h>
-#include <getopt.h>
 
 #include "attr.h"
-#include "nscd.h"
-#include "sssd.h"
-#include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "nscd.h"
+#include "prototypes.h"
+#include "string/strcmp/streq.h"
+
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
 #include "shadowlog.h"
+#include "sssd.h"
+
+
 /*
  * Global variables
  */
@@ -194,7 +198,7 @@ int main (int argc, char **argv)
 		if (NULL != sg) {
 			/* update existing shadow group entry */
 			sgent = *sg;
-			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)
+			if (!streq(gr->gr_passwd, SHADOW_PASSWD_STRING))
 				sgent.sg_passwd = gr->gr_passwd;
 		} else {
 			static char *empty = NULL;
