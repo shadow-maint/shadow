@@ -64,6 +64,7 @@
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
 
@@ -1062,7 +1063,7 @@ process_flags(int argc, char **argv)
 				}
 				dflg = true;
 				user_newhome = optarg;
-				if (user_newhome[0] != '/') {
+				if ((user_newhome[0] != '/') && !streq(user_newhome, "")) {
 					fprintf (stderr,
 					         _("%s: homedir must be an absolute path\n"),
 					         Prog);
