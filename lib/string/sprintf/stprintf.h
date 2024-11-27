@@ -27,16 +27,17 @@
 
 // stprintf - string truncate print formatted
 format_attr(printf, 3, 4)
-inline int stprintf(char *restrict s, ssize_t size,
-    const char *restrict fmt, ...);
+inline int stprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, ...);
 // vstprintf - va_list string truncate print formatted
 format_attr(printf, 3, 0)
-inline int vstprintf(char *restrict s, ssize_t size,
-    const char *restrict fmt, va_list ap);
+inline int vstprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, va_list ap);
 
 
 inline int
-stprintf(char *restrict s, ssize_t size, const char *restrict fmt, ...)
+stprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, ...)
 {
 	int      len;
 	va_list  ap;
@@ -50,7 +51,8 @@ stprintf(char *restrict s, ssize_t size, const char *restrict fmt, ...)
 
 
 inline int
-vstprintf(char *restrict s, ssize_t size, const char *restrict fmt, va_list ap)
+vstprintf(ssize_t size;
+    char s[restrict size], ssize_t size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 
