@@ -21,13 +21,13 @@
 
 ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
-inline void *mallocarray(size_t nmemb, size_t size);
+inline void *mallocarray(size_t n, size_t size);
 
 
 inline void *
-mallocarray(size_t nmemb, size_t size)
+mallocarray(size_t n, size_t size)
 {
-	return reallocarray(NULL, nmemb, size);
+	return reallocarray(NULL, n, size);
 }
 
 
