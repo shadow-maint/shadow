@@ -22,13 +22,13 @@
 
 ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
-inline void *xmallocarray(size_t nmemb, size_t size);
+inline void *xmallocarray(size_t n, size_t size);
 
 
 inline void *
-xmallocarray(size_t nmemb, size_t size)
+xmallocarray(size_t n, size_t size)
 {
-	return xreallocarray(NULL, nmemb, size);
+	return xreallocarray(NULL, n, size);
 }
 
 
