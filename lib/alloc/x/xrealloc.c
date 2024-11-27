@@ -20,9 +20,9 @@
 
 
 void *
-xreallocarray(void *p, size_t nmemb, size_t size)
+xreallocarray(void *p, size_t n, size_t size)
 {
-	p = reallocarrayf(p, nmemb, size);
+	p = reallocarrayf(p, n, size);
 	if (p == NULL)
 		goto x;
 
