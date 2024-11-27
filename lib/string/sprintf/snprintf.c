@@ -10,7 +10,7 @@
 #include <stddef.h>
 
 
-extern inline int snprintf_(char *restrict s, size_t size,
-    const char *restrict fmt, ...);
-extern inline int vsnprintf_(char *restrict s, size_t size,
-    const char *restrict fmt, va_list ap);
+extern inline int snprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, ...);
+extern inline int vsnprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, va_list ap);
