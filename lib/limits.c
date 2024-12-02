@@ -413,9 +413,9 @@ static int setup_user_limits (const char *uname)
 		}
 	}
 	(void) fclose (fil);
-	if (limits[0] == '\0') {
+	if (streq(limits, "")) {
 		/* no user specific limits */
-		if (deflimits[0] == '\0') {	/* no default limits */
+		if (streq(deflimits, "")) {	/* no default limits */
 			return 0;
 		}
 		strcpy (limits, deflimits);	/* use the default limits */
