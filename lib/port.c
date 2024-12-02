@@ -44,7 +44,7 @@ static int portcmp (const char *pattern, const char *port)
 		port++;
 	}
 
-	if (('\0' == *pattern) && ('\0' == *port)) {
+	if (streq(pattern, "") && streq(port, "")) {
 		return 0;
 	}
 	if (streq(orig, "SU"))
@@ -204,7 +204,7 @@ next:
 
 	cp = field;
 
-	if ('\0' == *cp) {
+	if (streq(cp, "")) {
 		port.pt_times = NULL;
 		return &port;
 	}

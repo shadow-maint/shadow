@@ -439,7 +439,7 @@ get_defaults(void)
 		 * Default Skeleton information
 		 */
 		else if (streq(buf, DSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = SKEL_DIR;
 
 			if (prefix[0]) {
@@ -456,7 +456,7 @@ get_defaults(void)
 		 * Default Usr Skeleton information
 		 */
 		else if (streq(buf, DUSRSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
@@ -472,7 +472,7 @@ get_defaults(void)
 		 * Create by default user mail spool or not ?
 		 */
 		else if (streq(buf, DCREATE_MAIL_SPOOL)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = "no";
 
 			def_create_mail_spool = xstrdup(ccp);
@@ -482,7 +482,7 @@ get_defaults(void)
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (streq(buf, DLOG_INIT)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = def_log_init;
 
 			def_log_init = xstrdup(ccp);
@@ -770,7 +770,7 @@ static int get_groups (char *list)
 		user_groups[i++] = NULL;
 	}
 
-	if ('\0' == *list) {
+	if (streq(list, "")) {
 		return 0;
 	}
 

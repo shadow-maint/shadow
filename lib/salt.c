@@ -419,7 +419,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	 * Prepare DES setting for crypt_gensalt(), if result
 	 * has not been filled with anything previously.
 	 */
-	if ('\0' == result[0]) {
+	if (streq(result, "")) {
 		/* Avoid -Wunused-but-set-variable. */
 		salt_len = GENSALT_SETTING_SIZE - 1;
 		rounds = 0;

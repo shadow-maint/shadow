@@ -661,7 +661,7 @@ int main (int argc, char **argv)
 		/* if we didn't get a user on the command line,
 		   set it to NULL */
 		get_pam_user (&pam_user);
-		if ((NULL != pam_user) && ('\0' == pam_user[0])) {
+		if ((NULL != pam_user) && streq(pam_user, "")) {
 			retcode = pam_set_item (pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
 		}
@@ -838,7 +838,7 @@ int main (int argc, char **argv)
 			username = XMALLOC(max_size, char);
 			login_prompt(username, max_size);
 
-			if ('\0' == username[0]) {
+			if (streq(username, "")) {
 				/* Prompt for a new login */
 				free (username);
 				username = NULL;
@@ -963,7 +963,7 @@ int main (int argc, char **argv)
 		 * guys won't see that the passwordless account exists at
 		 * all).  --marekm
 		 */
-		if (user_passwd[0] == '\0') {
+		if (streq(user_passwd, "")) {
 			pw_auth ("!", username, reason, NULL);
 		}
 

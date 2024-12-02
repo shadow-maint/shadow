@@ -29,7 +29,6 @@
 #ifndef USE_PAM
 #ident "$Id$"
 
-#include "prototypes.h"
     /*
      * This module implements a simple but effective form of login access
      * control based on login names and on host (or domain) names, internet
@@ -38,27 +37,29 @@
      *
      * Author: Wietse Venema, Eindhoven University of Technology, The Netherlands.
      */
-#include <sys/types.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <syslog.h>
+#include <arpa/inet.h>		/* for inet_ntoa() */
 #include <ctype.h>
-#include <netdb.h>
+#include <errno.h>
 #include <grp.h>
+#include <netdb.h>
+#include <netinet/in.h>
 #ifdef PRIMARY_GROUP_MATCH
 #include <pwd.h>
 #endif
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/param.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>		/* for inet_ntoa() */
+#include <sys/types.h>
+#include <syslog.h>
+#include <unistd.h>
 
+#include "prototypes.h"
 #include "sizeof.h"
 #include "string/strchr/strrspn.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -110,7 +111,7 @@ login_access(const char *user, const char *from)
 				continue;	/* comment line */
 			}
 			stpcpy(strrspn(line, " \t"), "");
-			if (line[0] == '\0') {	/* skip blank lines */
+			if (streq(line, "")) {	/* skip blank lines */
 				continue;
 			}
 			p = line;
@@ -182,7 +183,7 @@ static char *myhostname (void)
 {
 	static char name[MAXHOSTNAMELEN + 1] = "";
 
-	if (name[0] == '\0') {
+	if (streq(name, "")) {
 		gethostname (name, sizeof (name));
 		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
