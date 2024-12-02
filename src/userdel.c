@@ -1131,7 +1131,7 @@ int main (int argc, char **argv)
 	 * Note: This is a best effort basis. The user may log in between,
 	 * a cron job may be started on her behalf, etc.
 	 */
-	if ((prefix[0] == '\0') && !Rflg && user_busy (user_name, user_id) != 0) {
+	if (streq(prefix, "") && !Rflg && user_busy(user_name, user_id) != 0) {
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
@@ -1264,7 +1264,7 @@ int main (int argc, char **argv)
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
 	 * the entry from /etc/passwd.
 	 */
-	if (prefix[0] == '\0')
+	if (streq(prefix, ""))
 		user_cancel (user_name);
 	close_files ();
 

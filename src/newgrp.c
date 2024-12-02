@@ -150,7 +150,7 @@ static void check_perms (const struct group *grp,
 		spw_free (spwd);
 	}
 
-	if ((pwd->pw_passwd[0] == '\0') && (grp->gr_passwd[0] != '\0')) {
+	if (streq(pwd->pw_passwd, "") && (grp->gr_passwd[0] != '\0')) {
 		needspasswd = true;
 	}
 
@@ -188,8 +188,8 @@ static void check_perms (const struct group *grp,
 			goto failure;
 		}
 
-		if (grp->gr_passwd[0] == '\0' ||
-		    !streq(cpasswd, grp->gr_passwd)) {
+		if (streq(grp->gr_passwd, "") ||
+		    !streq(grp->gr_passwd, cpasswd)) {
 #ifdef WITH_AUDIT
 			SNPRINTF(audit_buf, "authentication new-gid=%lu",
 			         (unsigned long) grp->gr_gid);

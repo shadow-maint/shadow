@@ -1,7 +1,9 @@
 /* Author: Peter Vrabec <pvrabec@redhat.com> */
 
 #include <config.h>
+
 #ifdef USE_SSSD
+#include "sssd.h"
 
 #include <stdio.h>
 #include <sys/stat.h>
@@ -12,9 +14,8 @@
 #include "exitcodes.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "sssd.h"
-
 #include "shadowlog_internal.h"
+#include "string/strcmp/streq.h"
 
 
 #define MSG_SSSD_FLUSH_CACHE_FAILED "%s: Failed to flush the sssd cache."
@@ -46,7 +47,7 @@ sssd_flush_cache(int dbflags)
 	if (dbflags & SSSD_DB_GROUP)
 		stpcpy(p, "G");
 
-	if (*p == '\0') {
+	if (streq(p, "")) {
 		/* Neither passwd nor group, nothing to do */
 		free(sss_cache_args);
 		return 0;

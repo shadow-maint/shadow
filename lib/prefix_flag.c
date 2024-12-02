@@ -98,7 +98,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			exit (EXIT_FAILURE);
 		}
 
-		if (prefix[0] == '\0' || streq(prefix, "/"))
+		if (streq(prefix, "") || streq(prefix, "/"))
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
 

@@ -26,6 +26,7 @@
 #include "getdef.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/streq.h"
 
 #ifdef SKEY
 #include <skey.h>
@@ -102,7 +103,7 @@ int pw_auth (const char *cipher,
 	 * matter.
 	 */
 
-	if ((NULL == cipher) || ('\0' == *cipher)) {
+	if ((NULL == cipher) || streq(cipher, "")) {
 		return 0;
 	}
 
@@ -169,7 +170,7 @@ int pw_auth (const char *cipher,
 	 * ...Re-prompt, with echo on.
 	 * -- AR 8/22/1999
 	 */
-	if ((0 != retval) && ('\0' == input[0]) && use_skey) {
+	if ((0 != retval) && streq(input, "") && use_skey) {
 		erase_pass(clear);
 		clear = agetpass(prompt);
 		input = (clear == NULL) ? "" : clear;

@@ -441,7 +441,7 @@ static /*@observer@*/const char *pw_status (const char *pass)
 	if (*pass == '*' || *pass == '!') {
 		return "L";
 	}
-	if (*pass == '\0') {
+	if (streq(pass, "")) {
 		return "NP";
 	}
 	return "P";

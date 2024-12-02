@@ -28,6 +28,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpspn.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -60,7 +61,7 @@ static void read_env_file (const char *filename)
 		cp = buf;
 		/* ignore whitespace and comments */
 		cp = stpspn(cp, " \t");
-		if (('\0' == *cp) || ('#' == *cp)) {
+		if (streq(cp, "") || ('#' == *cp)) {
 			continue;
 		}
 		/*
@@ -209,7 +210,7 @@ void setup_env (struct passwd *info)
 	 * Create the SHELL environmental variable and export it.
 	 */
 
-	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
+	if ((NULL == info->pw_shell) || streq(info->pw_shell, "")) {
 		free (info->pw_shell);
 		info->pw_shell = xstrdup (SHELL);
 	}

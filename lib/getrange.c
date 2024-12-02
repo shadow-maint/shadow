@@ -13,6 +13,7 @@
 #include "atoi/a2i/a2u.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
 
 
 /*
@@ -53,7 +54,7 @@ getrange(const char *range,
 		return 0;  /* <long> */
 
 	case '-':
-		if ('\0' == *end)
+		if (streq(end, ""))
 			return 0;  /* <long>- */
 parse_max:
 		if (!isdigit((unsigned char) *end))
