@@ -101,6 +101,8 @@ libshadow_la_SOURCES = \
 	fputsx.c \
 	fs/mkstemp/fmkomstemp.c \
 	fs/mkstemp/fmkomstemp.h \
+	fs/mkstemp/mkomstemp.c \
+	fs/mkstemp/mkomstemp.h \
 	fs/readlink/areadlink.c \
 	fs/readlink/areadlink.h \
 	fs/readlink/readlinknul.c \
