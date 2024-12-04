@@ -9,27 +9,25 @@
 #include <config.h>
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include "fs/mkstemp/mkomstemp.h"
 
 
 inline FILE *fmkomstemp(char *template, unsigned int flags, mode_t m);
 
 
+// FILE make with-open(2)-flags with-mode secure temporary
 inline FILE *
 fmkomstemp(char *template, unsigned int flags, mode_t m)
 {
 	int   fd;
 	FILE  *fp;
 
-	fd = mkostemp(template, flags);
+	fd = mkomstemp(template, flags, m);
 	if (fd == -1)
 		return NULL;
-
-	if (fchmod(fd, m) == -1)
-		goto fail;
 
 	fp = fdopen(fd, "w");
 	if (fp == NULL)
