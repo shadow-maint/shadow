@@ -42,6 +42,7 @@
 #include "chkname.h"
 #include "defines.h"
 #include "faillog.h"
+#include "fs/mkstemp/fmkomstemp.h"
 #include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
@@ -245,8 +246,6 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count);
 static void create_home (void);
 static void create_mail (void);
 static void check_uid_range(int rflg, uid_t user_id);
-
-static FILE *fmkomstemp(char *template, unsigned int flags, mode_t m);
 
 
 /*
@@ -2681,29 +2680,4 @@ int main (int argc, char **argv)
 	}
 
 	return E_SUCCESS;
-}
-
-
-static FILE *
-fmkomstemp(char *template, unsigned int flags, mode_t m)
-{
-	int   fd;
-	FILE  *fp;
-
-	fd = mkostemp(template, flags);
-	if (fd == -1)
-		return NULL;
-
-	if (fchmod(fd, m) == -1)
-		goto fail;
-
-	fp = fdopen(fd, "w");
-	if (fp == NULL)
-		goto fail;
-
-	return fp;
-fail:
-	close(fd);
-	unlink(template);
-	return NULL;
 }
