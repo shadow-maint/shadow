@@ -201,6 +201,7 @@ static bool home_added = false;
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
 #endif				/* ENABLE_SUBIDS */
+#define E_BAD_NAME	19	/* Bad login name */
 
 #define DGROUP			"GROUP"
 #define DGROUPS			"GROUPS"
@@ -1549,7 +1550,7 @@ static void process_flags (int argc, char **argv)
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
 #endif
-			exit (E_BAD_ARG);
+			exit (E_BAD_NAME);
 		}
 		if (!dflg) {
 			char  *uh;
