@@ -891,6 +891,12 @@
 	    <para>can't update SELinux user mapping</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>19</replaceable></term>
+	  <listitem>
+	    <para>invalid user or group name</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
