@@ -177,7 +177,7 @@ static bool
     Uflg = false;		/* create a group having the same name as the user */
 
 #ifdef WITH_SELINUX
-#define Zflg ('\0' != *user_selinux)
+#define Zflg  (!streq(user_selinux, ""))
 #endif				/* WITH_SELINUX */
 
 static bool home_added = false;
@@ -439,7 +439,7 @@ get_defaults(void)
 		 * Default Skeleton information
 		 */
 		else if (streq(buf, DSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = SKEL_DIR;
 
 			if (prefix[0]) {
@@ -456,7 +456,7 @@ get_defaults(void)
 		 * Default Usr Skeleton information
 		 */
 		else if (streq(buf, DUSRSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
@@ -472,7 +472,7 @@ get_defaults(void)
 		 * Create by default user mail spool or not ?
 		 */
 		else if (streq(buf, DCREATE_MAIL_SPOOL)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = "no";
 
 			def_create_mail_spool = xstrdup(ccp);
@@ -482,7 +482,7 @@ get_defaults(void)
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (streq(buf, DLOG_INIT)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = def_log_init;
 
 			def_log_init = xstrdup(ccp);
@@ -770,7 +770,7 @@ static int get_groups (char *list)
 		user_groups[i++] = NULL;
 	}
 
-	if ('\0' == *list) {
+	if (streq(list, "")) {
 		return 0;
 	}
 
@@ -1268,7 +1268,7 @@ static void process_flags (int argc, char **argv)
 				Dflg = true;
 				break;
 			case 'e':
-				if ('\0' != *optarg) {
+				if (!streq(optarg, "")) {
 					user_expire = strtoday (optarg);
 					if (user_expire < -1) {
 						fprintf (stderr,
@@ -1403,7 +1403,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   ('\0' != optarg[0])
+				    || (   !streq(optarg, "")
 				        && ('/'  != optarg[0])
 				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
@@ -1411,7 +1411,7 @@ static void process_flags (int argc, char **argv)
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (    '\0' != optarg[0]
+				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0

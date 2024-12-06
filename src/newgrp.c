@@ -150,7 +150,7 @@ static void check_perms (const struct group *grp,
 		spw_free (spwd);
 	}
 
-	if ((pwd->pw_passwd[0] == '\0') && (grp->gr_passwd[0] != '\0')) {
+	if (streq(pwd->pw_passwd, "") && !streq(grp->gr_passwd, "")) {
 		needspasswd = true;
 	}
 
@@ -188,8 +188,8 @@ static void check_perms (const struct group *grp,
 			goto failure;
 		}
 
-		if (grp->gr_passwd[0] == '\0' ||
-		    !streq(cpasswd, grp->gr_passwd)) {
+		if (streq(grp->gr_passwd, "") ||
+		    !streq(grp->gr_passwd, cpasswd)) {
 #ifdef WITH_AUDIT
 			SNPRINTF(audit_buf, "authentication new-gid=%lu",
 			         (unsigned long) grp->gr_gid);
@@ -786,7 +786,7 @@ int main (int argc, char **argv)
 	cp = getenv ("SHELL");
 	if (!initflag && (NULL != cp)) {
 		prog = cp;
-	} else if ((NULL != pwd->pw_shell) && ('\0' != pwd->pw_shell[0])) {
+	} else if ((NULL != pwd->pw_shell) && !streq(pwd->pw_shell, "")) {
 		prog = pwd->pw_shell;
 	} else {
 		prog = SHELL;

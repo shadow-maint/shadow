@@ -422,7 +422,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 	const char *failent_user = "UNKNOWN";
 	bool log_unkfail_enab = getdef_bool("LOG_UNKFAIL_ENAB");
 
-	if ((NULL != user) && ('\0' != user[0])) {
+	if ((NULL != user) && !streq(user, "")) {
 		if (   log_unkfail_enab
 		    || (getpwnam (user) != NULL)) {
 			failent_user = user;
@@ -589,13 +589,13 @@ int main (int argc, char **argv)
 
 	if (hflg) {
 		cp = hostname;
-	} else if ((host != NULL) && (host[0] != '\0')) {
+	} else if ((host != NULL) && !streq(host, "")) {
 		cp = host;
 	} else {
 		cp = "";
 	}
 
-	if ('\0' != *cp) {
+	if (!streq(cp, "")) {
 		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
 		SNPRINTF(fromhost, " on '%.100s'", tty);
@@ -661,7 +661,7 @@ int main (int argc, char **argv)
 		/* if we didn't get a user on the command line,
 		   set it to NULL */
 		get_pam_user (&pam_user);
-		if ((NULL != pam_user) && ('\0' == pam_user[0])) {
+		if ((NULL != pam_user) && streq(pam_user, "")) {
 			retcode = pam_set_item (pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
 		}
@@ -838,7 +838,7 @@ int main (int argc, char **argv)
 			username = XMALLOC(max_size, char);
 			login_prompt(username, max_size);
 
-			if ('\0' == username[0]) {
+			if (streq(username, "")) {
 				/* Prompt for a new login */
 				free (username);
 				username = NULL;
@@ -925,7 +925,7 @@ int main (int argc, char **argv)
 			failed = true;
 		}
 		if (   !failed
-		    && !login_access (username, ('\0' != *hostname) ? hostname : tty)) {
+		    && !login_access(username, (!streq(hostname, "")) ? hostname : tty)) {
 			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
 			         username, fromhost));
 			failed = true;
@@ -963,7 +963,7 @@ int main (int argc, char **argv)
 		 * guys won't see that the passwordless account exists at
 		 * all).  --marekm
 		 */
-		if (user_passwd[0] == '\0') {
+		if (streq(user_passwd, "")) {
 			pw_auth ("!", username, reason, NULL);
 		}
 

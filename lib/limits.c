@@ -203,7 +203,7 @@ static int do_user_limits (const char *buf, const char *name)
 		pp = "A- C- D- F- I- L- M- N- O- P- R- S- T- U-";
 	}
 
-	while ('\0' != *pp) {
+	while (!streq(pp, "")) {
 		switch (*pp++) {
 		case 'a':
 		case 'A':
@@ -413,9 +413,9 @@ static int setup_user_limits (const char *uname)
 		}
 	}
 	(void) fclose (fil);
-	if (limits[0] == '\0') {
+	if (streq(limits, "")) {
 		/* no user specific limits */
-		if (deflimits[0] == '\0') {	/* no default limits */
+		if (streq(deflimits, "")) {	/* no default limits */
 			return 0;
 		}
 		strcpy (limits, deflimits);	/* use the default limits */

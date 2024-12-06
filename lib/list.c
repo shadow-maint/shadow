@@ -209,7 +209,7 @@ comma_to_list(const char *comma)
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm
 	 */
 
-	if ('\0' == *members) {
+	if (streq(members, "")) {
 		*array = NULL;
 		free (members);
 		return array;

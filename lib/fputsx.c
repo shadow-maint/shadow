@@ -14,8 +14,7 @@
 
 #include "defines.h"
 #include "prototypes.h"
-
-#ident "$Id$"
+#include "string/strcmp/streq.h"
 
 
 /*@null@*/char *
@@ -48,7 +47,7 @@ int fputsx (const char *s, FILE * stream)
 {
 	int i;
 
-	for (i = 0; '\0' != *s; i++, s++) {
+	for (i = 0; !streq(s, ""); i++, s++) {
 		if (putc (*s, stream) == EOF) {
 			return EOF;
 		}

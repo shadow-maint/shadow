@@ -580,7 +580,8 @@ static void check_grp_file (int *errors, bool *changed)
 		 */
 		if (   (NULL != grp->gr_mem[0])
 		    && (NULL == grp->gr_mem[1])
-		    && ('\0' == grp->gr_mem[0][0])) {
+		    && streq(grp->gr_mem[0], ""))
+		{
 			grp->gr_mem[0] = NULL;
 		}
 

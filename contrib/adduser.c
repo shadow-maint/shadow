@@ -224,7 +224,7 @@ main (void)
 	      printf ("That name is in use, choose another.\n");
 	      done = 0;
 	    }
-	  else if (strchr (usrname, ' ') != NULL)
+	  else if (!!strchr(usrname, ' '))
 	    {
 	      printf ("No spaces in username!!\n");
 	      done = 0;
