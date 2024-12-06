@@ -21,6 +21,7 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2ls.h"
 
 
 static FILE *ports;
@@ -159,13 +160,7 @@ next:
 		goto next;
 
 	port.pt_names = ttys;
-	for (j = 0; j < PORT_TTY; j++) {
-		port.pt_names[j] = strsep(&cp, ",");
-		if (cp == NULL)
-			break;
-	}
-	port.pt_names[j] = NULL;
-	if (cp != NULL)
+	if (STRSEP2LS(cp, ",", ttys) == -1)
 		goto next;
 
 	/*
@@ -180,13 +175,7 @@ next:
 		goto next;
 
 	port.pt_users = users;
-	for (j = 0; j < PORT_IDS; j++) {
-		port.pt_users[j] = strsep(&cp, ",");
-		if (cp == NULL)
-			break;
-	}
-	port.pt_users[j] = NULL;
-	if (cp != NULL)
+	if (STRSEP2LS(cp, ",", users) == -1)
 		goto next;
 
 	/*
