@@ -23,9 +23,8 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
-
-#define	NFIELDS	4
 
 /*
  * list - turn a comma-separated string into an array of (char *)'s
@@ -67,11 +66,9 @@ list(char *s)
 struct group *sgetgrent (const char *buf)
 {
 	static char *grpbuf = NULL;
+	static char   *grpfields[4];
 	static size_t size = 0;
-	static char *grpfields[NFIELDS];
 	static struct group grent;
-	int i;
-	char *cp;
 
 	if (strlen (buf) + 1 > size) {
 		/* no need to use realloc() here - just free it and
@@ -87,12 +84,12 @@ struct group *sgetgrent (const char *buf)
 	strcpy (grpbuf, buf);
 	stpsep(grpbuf, "\n");
 
-	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
-		grpfields[i] = strsep(&cp, ":");
-
-	if (i < NFIELDS || streq(grpfields[2], "") || cp != NULL) {
+	if (STRSEP2ARR(grpbuf, ":", grpfields) == -1)
 		return NULL;
-	}
+
+	if (streq(grpfields[2], ""))
+		return NULL;
+
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
 	if (get_gid(grpfields[2], &grent.gr_gid) == -1) {
