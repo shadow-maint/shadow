@@ -194,7 +194,7 @@ static int new_password (const struct passwd *pw)
 	 * password.
 	 */
 
-	if (!amroot && ('\0' != crypt_passwd[0])) {
+	if (!amroot && !streq(crypt_passwd, "")) {
 		clear = agetpass (_("Old password: "));
 		if (NULL == clear) {
 			return -1;

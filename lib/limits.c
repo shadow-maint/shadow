@@ -203,7 +203,7 @@ static int do_user_limits (const char *buf, const char *name)
 		pp = "A- C- D- F- I- L- M- N- O- P- R- S- T- U-";
 	}
 
-	while ('\0' != *pp) {
+	while (!streq(pp, "")) {
 		switch (*pp++) {
 		case 'a':
 		case 'A':

@@ -150,7 +150,7 @@ static void check_perms (const struct group *grp,
 		spw_free (spwd);
 	}
 
-	if (streq(pwd->pw_passwd, "") && (grp->gr_passwd[0] != '\0')) {
+	if (streq(pwd->pw_passwd, "") && !streq(grp->gr_passwd, "")) {
 		needspasswd = true;
 	}
 
@@ -786,7 +786,7 @@ int main (int argc, char **argv)
 	cp = getenv ("SHELL");
 	if (!initflag && (NULL != cp)) {
 		prog = cp;
-	} else if ((NULL != pwd->pw_shell) && ('\0' != pwd->pw_shell[0])) {
+	} else if ((NULL != pwd->pw_shell) && !streq(pwd->pw_shell, "")) {
 		prog = pwd->pw_shell;
 	} else {
 		prog = SHELL;
