@@ -16,6 +16,7 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -28,6 +29,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpspn.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -53,14 +55,14 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets (buf, (int)(sizeof buf), fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		if (stpsep(buf, "\n") == NULL)
 			break;
 
 		cp = buf;
 		/* ignore whitespace and comments */
 		cp = stpspn(cp, " \t");
-		if (('\0' == *cp) || ('#' == *cp)) {
+		if (streq(cp, "") || ('#' == *cp)) {
 			continue;
 		}
 		/*
@@ -209,7 +211,7 @@ void setup_env (struct passwd *info)
 	 * Create the SHELL environmental variable and export it.
 	 */
 
-	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
+	if ((NULL == info->pw_shell) || streq(info->pw_shell, "")) {
 		free (info->pw_shell);
 		info->pw_shell = xstrdup (SHELL);
 	}
@@ -233,7 +235,7 @@ void setup_env (struct passwd *info)
 	if (NULL == cp) {
 		/* not specified, use a minimal default */
 		addenv ((info->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=')) {
+	} else if (!!strchr(cp, '=')) {
 		/* specified as name=value (PATH=...) */
 		addenv (cp, NULL);
 	} else {

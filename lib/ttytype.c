@@ -11,6 +11,7 @@
 
 #ident "$Id$"
 
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -46,7 +47,7 @@ void ttytype (const char *line)
 			perror (typefile);
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		if (buf[0] == '#') {
 			continue;
 		}
@@ -58,7 +59,7 @@ void ttytype (const char *line)
 			break;
 		}
 	}
-	if ((feof (fp) == 0) && (ferror (fp) == 0) && (type[0] != '\0')) {
+	if ((feof(fp) == 0) && (ferror(fp) == 0) && !streq(type, "")) {
 		addenv ("TERM", type);
 	}
 

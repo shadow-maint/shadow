@@ -862,7 +862,7 @@ static void process_flags (int argc, char **argv)
 	if (optind < argc) {
 		STRTCPY(name, argv[optind++]);	/* use this login id */
 	}
-	if ('\0' == name[0]) {		/* use default user */
+	if (streq(name, "")) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
 		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
 			(void) strcpy (name, "root");
@@ -882,7 +882,8 @@ static void process_flags (int argc, char **argv)
 	}
 }
 
-static void set_environment (struct passwd *pw)
+static void
+set_environment(struct passwd *pw)
 {
 	const char *cp;
 	/*
@@ -950,7 +951,7 @@ static void set_environment (struct passwd *pw)
 	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
 		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
+	} else if (!!strchr(cp, '=')) {
 		addenv (cp, NULL);
 	} else {
 		addenv ("PATH", cp);
@@ -1080,15 +1081,15 @@ int main (int argc, char **argv)
 	/*
 	 * Set the default shell.
 	 */
-	if ((NULL == shellstr) || ('\0' == shellstr[0])) {
+	if ((NULL == shellstr) || streq(shellstr, "")) {
 		shellstr = SHELL;
 	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
-		         ('\0' != caller_name[0]) ? caller_name : "???",
-		         ('\0' != name[0]) ? name : "???"));
+		         (!streq(caller_name, "")) ? caller_name : "???",
+		         (!streq(name, "")) ? name : "???"));
 	}
 
 #ifdef USE_PAM
@@ -1143,7 +1144,7 @@ int main (int argc, char **argv)
 				AUDIT_USER_ROLE_CHANGE,
 				NULL,    /* Prog. name */
 				"su",
-				('\0' != caller_name[0]) ? caller_name : "???",
+				(!streq(caller_name, "")) ? caller_name : "???",
 				AUDIT_NO_ID,
 				"localhost",
 				NULL,    /* addr */

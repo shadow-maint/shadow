@@ -18,16 +18,17 @@
 #include <getopt.h>
 #include <grp.h>
 #ifdef ENABLE_LASTLOG
-#include <lastlog.h>
+# include <lastlog.h>
 #endif /* ENABLE_LASTLOG */
 #include <libgen.h>
 #include <pwd.h>
 #include <signal.h>
 #ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
+# ifdef USE_PAM
+#  include "pam_defs.h"
+# endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -177,7 +178,7 @@ static bool
     Uflg = false;		/* create a group having the same name as the user */
 
 #ifdef WITH_SELINUX
-#define Zflg ('\0' != *user_selinux)
+#define Zflg  (!streq(user_selinux, ""))
 #endif				/* WITH_SELINUX */
 
 static bool home_added = false;
@@ -361,7 +362,7 @@ get_defaults(void)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		stpsep(buf, "\n");
 
 		cp = stpsep(buf, "=");
@@ -439,7 +440,7 @@ get_defaults(void)
 		 * Default Skeleton information
 		 */
 		else if (streq(buf, DSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = SKEL_DIR;
 
 			if (prefix[0]) {
@@ -456,7 +457,7 @@ get_defaults(void)
 		 * Default Usr Skeleton information
 		 */
 		else if (streq(buf, DUSRSKEL)) {
-			if ('\0' == *ccp)
+			if (streq(ccp, ""))
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
@@ -472,7 +473,7 @@ get_defaults(void)
 		 * Create by default user mail spool or not ?
 		 */
 		else if (streq(buf, DCREATE_MAIL_SPOOL)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = "no";
 
 			def_create_mail_spool = xstrdup(ccp);
@@ -482,7 +483,7 @@ get_defaults(void)
 		 * By default do we add the user to the lastlog and faillog databases ?
 		 */
 		else if (streq(buf, DLOG_INIT)) {
-			if (*ccp == '\0')
+			if (streq(ccp, ""))
 				ccp = def_log_init;
 
 			def_log_init = xstrdup(ccp);
@@ -601,7 +602,7 @@ set_defaults(void)
 		goto skip;
 	}
 
-	while (fgets (buf, sizeof buf, ifp) == buf) {
+	while (fgets(buf, sizeof(buf), ifp) != NULL) {
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {
@@ -770,7 +771,7 @@ static int get_groups (char *list)
 		user_groups[i++] = NULL;
 	}
 
-	if ('\0' == *list) {
+	if (streq(list, "")) {
 		return 0;
 	}
 
@@ -947,7 +948,7 @@ static void usage (int status)
  */
 static void new_pwent (struct passwd *pwent)
 {
-	memzero (pwent, sizeof *pwent);
+	memzero(pwent, sizeof(*pwent));
 	pwent->pw_name = (char *) user_name;
 	if (is_shadow_pwd) {
 		pwent->pw_passwd = (char *) SHADOW_PASSWD_STRING;
@@ -970,7 +971,7 @@ static void new_pwent (struct passwd *pwent)
  */
 static void new_spent (struct spwd *spent)
 {
-	memzero (spent, sizeof *spent);
+	memzero(spent, sizeof(*spent));
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = gettime () / DAY;
@@ -1268,7 +1269,7 @@ static void process_flags (int argc, char **argv)
 				Dflg = true;
 				break;
 			case 'e':
-				if ('\0' != *optarg) {
+				if (!streq(optarg, "")) {
 					user_expire = strtoday (optarg);
 					if (user_expire < -1) {
 						fprintf (stderr,
@@ -1403,7 +1404,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   ('\0' != optarg[0])
+				    || (   !streq(optarg, "")
 				        && ('/'  != optarg[0])
 				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
@@ -1411,7 +1412,7 @@ static void process_flags (int argc, char **argv)
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (    '\0' != optarg[0]
+				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
@@ -1888,7 +1889,7 @@ static char *empty_list = NULL;
 
 static void new_grent (struct group *grent)
 {
-	memzero (grent, sizeof *grent);
+	memzero(grent, sizeof(*grent));
 	grent->gr_name = (char *) user_name;
 #ifdef  SHADOWGRP
 	if (is_shadow_grp) {
@@ -1912,7 +1913,7 @@ static void new_grent (struct group *grent)
 
 static void new_sgent (struct sgrp *sgent)
 {
-	memzero (sgent, sizeof *sgent);
+	memzero(sgent, sizeof(*sgent));
 	sgent->sg_name = (char *) user_name;
 	sgent->sg_passwd = "!";	/* XXX warning: const */
 	sgent->sg_adm = &empty_list;
@@ -1989,14 +1990,14 @@ static void faillog_reset (uid_t uid)
 {
 	struct faillog fl;
 	int fd;
-	off_t offset_uid = (off_t) (sizeof fl) * uid;
+	off_t offset_uid = (off_t) sizeof(fl) * uid;
 	struct stat st;
 
 	if (stat (FAILLOG_FILE, &st) != 0 || st.st_size <= offset_uid) {
 		return;
 	}
 
-	memzero (&fl, sizeof (fl));
+	memzero(&fl, sizeof(fl));
 
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (-1 == fd) {
@@ -2007,7 +2008,7 @@ static void faillog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full(fd, &fl, sizeof (fl)) == -1)
+	    || (write_full(fd, &fl, sizeof(fl)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
@@ -2027,7 +2028,7 @@ static void lastlog_reset (uid_t uid)
 {
 	struct lastlog ll;
 	int fd;
-	off_t offset_uid = (off_t) (sizeof ll) * uid;
+	off_t offset_uid = (off_t) sizeof(ll) * uid;
 	uid_t max_uid;
 	struct stat st;
 
@@ -2041,7 +2042,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 
-	memzero (&ll, sizeof (ll));
+	memzero(&ll, sizeof(ll));
 
 	fd = open (LASTLOG_FILE, O_RDWR);
 	if (-1 == fd) {
@@ -2052,7 +2053,7 @@ static void lastlog_reset (uid_t uid)
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full (fd, &ll, sizeof (ll)) == -1)
+	    || (write_full(fd, &ll, sizeof(ll)) == -1)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),

@@ -12,12 +12,14 @@
 #ident "$Id$"
 
 #include <ctype.h>
-#include <string.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "prototypes.h"
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
+#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -47,7 +49,7 @@ int valid_field (const char *field, const char *illegal)
 	}
 
 	/* Search if there are non-printable or control characters */
-	for (cp = field; '\0' != *cp; cp++) {
+	for (cp = field; !streq(cp, ""); cp++) {
 		unsigned char c = *cp;
 		if (!isprint (c)) {
 			err = 1;
@@ -73,20 +75,19 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 	char newf[200];
 	char *cp;
 
-	if (maxsize > sizeof (newf)) {
-		maxsize = sizeof (newf);
+	if (maxsize > sizeof(newf)) {
+		maxsize = sizeof(newf);
 	}
 
 	printf ("\t%s [%s]: ", prompt, buf);
 	(void) fflush (stdout);
-	if (fgets (newf, maxsize, stdin) != newf) {
+	if (fgets(newf, maxsize, stdin) == NULL)
 		return;
-	}
 
 	if (stpsep(newf, "\n") == NULL)
 		return;
 
-	if ('\0' != newf[0]) {
+	if (!streq(newf, "")) {
 		/*
 		 * Remove leading and trailing whitespace.  This also
 		 * makes it possible to change the field to empty, by

@@ -33,6 +33,7 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "string/strcmp/streq.h"
 
 
 int allow_bad_names = false;
@@ -85,7 +86,7 @@ is_valid_name(const char *name)
 
 	numeric = isdigit(*name);
 
-	while ('\0' != *++name) {
+	while (!streq(++name, "")) {
 		if (!((*name >= 'a' && *name <= 'z') ||
 		      (*name >= 'A' && *name <= 'Z') ||
 		      (*name >= '0' && *name <= '9') ||

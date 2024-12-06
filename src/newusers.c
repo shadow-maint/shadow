@@ -282,7 +282,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	/*
 	 * Now I have all of the fields required to create the new group.
 	 */
-	if (('\0' != gid[0]) && (!isdigit (gid[0]))) {
+	if (!streq(gid, "") && (!isdigit(gid[0]))) {
 		grent.gr_name = xstrdup (gid);
 	} else {
 		grent.gr_name = xstrdup (name);
@@ -355,7 +355,7 @@ static int get_user_id (const char *uid, uid_t *nuid) {
 			return -1;
 		}
 	} else {
-		if ('\0' != uid[0]) {
+		if (!streq(uid, "")) {
 			const struct passwd *pwd;
 			/* local, no need for xgetpwnam */
 			pwd = getpwnam (uid);
@@ -1109,7 +1109,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets (buf, sizeof buf, stdin) != NULL) {
+	while (fgets(buf, sizeof(buf), stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
@@ -1222,19 +1222,19 @@ int main (int argc, char **argv)
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
-		if ('\0' != fields[4][0]) {
+		if (!streq(fields[4], "")) {
 			newpw.pw_gecos = fields[4];
 		}
 
-		if ('\0' != fields[5][0]) {
+		if (!streq(fields[5], "")) {
 			newpw.pw_dir = fields[5];
 		}
 
-		if ('\0' != fields[6][0]) {
+		if (!streq(fields[6], "")) {
 			newpw.pw_shell = fields[6];
 		}
 
-		if (   ('\0' != fields[5][0])
+		if (   !streq(fields[5], "")
 		    && (access (newpw.pw_dir, F_OK) != 0)) {
 /* FIXME: should check for directory */
 			mode_t mode = getdef_num ("HOME_MODE",

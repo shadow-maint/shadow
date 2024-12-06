@@ -25,6 +25,7 @@
 #endif
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -627,7 +628,7 @@ static int LookupWord (char *buff)
   bool abbrev;
 
   /* Make it lowercase. */
-  for (p = buff; '\0' != *p; p++)
+  for (p = buff; !streq(p, ""); p++)
     if (isupper (*p))
       *p = tolower (*p);
 
@@ -720,7 +721,7 @@ static int LookupWord (char *buff)
     }
 
   /* Drop out any periods and try the timezone table again. */
-  for (i = 0, p = q = buff; '\0' != *q; q++)
+  for (i = 0, p = q = buff; !streq(q, ""); q++)
     if (*q != '.')
       *p++ = *q;
     else
@@ -771,7 +772,7 @@ yylex (void)
       if (isalpha (c))
 	{
 	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
-	    if (p < &buff[sizeof buff - 1])
+	    if (p < &buff[sizeof(buff) - 1])
 	      *p++ = c;
           stpcpy(p, "");
 	  yyInput--;
@@ -934,7 +935,7 @@ main(void)
   (void) fflush (stdout);
 
   buff[MAX_BUFF_LEN] = 0;
-  while (fgets (buff, MAX_BUFF_LEN, stdin) && buff[0])
+  while (fgets(buff, MAX_BUFF_LEN, stdin) != NULL && buff[0])
     {
       d = get_date(buff, NULL);
       if (d == -1)
