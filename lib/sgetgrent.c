@@ -24,9 +24,8 @@
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
-
-#define	NFIELDS	4
 
 /*
  * list - turn a comma-separated string into an array of (char *)'s
@@ -71,9 +70,7 @@ sgetgrent(const char *s)
 	static char         *dup = NULL;
 	static struct group grent;
 
-	int i;
-	char *cp;
-	char  *fields[NFIELDS];
+	char  *fields[4];
 
 	free(dup);
 	dup = strdup(s);
@@ -82,12 +79,12 @@ sgetgrent(const char *s)
 
 	stpsep(dup, "\n");
 
-	for (cp = dup, i = 0; (i < NFIELDS) && (NULL != cp); i++)
-		fields[i] = strsep(&cp, ":");
-
-	if (i < NFIELDS || streq(fields[2], "") || cp != NULL) {
+	if (STRSEP2ARR(dup, ":", fields) == -1)
 		return NULL;
-	}
+
+	if (streq(fields[2], ""))
+		return NULL;
+
 	grent.gr_name = fields[0];
 	grent.gr_passwd = fields[1];
 	if (get_gid(fields[2], &grent.gr_gid) == -1) {
