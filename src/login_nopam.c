@@ -320,7 +320,7 @@ static bool from_match (const char *tok, const char *string)
 		if (strchr (string, '.') == NULL) {
 			return true;
 		}
-	} else if (   (tok[0] != '\0' && tok[(tok_len = strlen (tok)) - 1] == '.') /* network */
+	} else if (   (!streq(tok, "") && tok[(tok_len = strlen(tok)) - 1] == '.') /* network */
 		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
 		return true;
 	}

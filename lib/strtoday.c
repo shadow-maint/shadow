@@ -54,7 +54,7 @@ long strtoday (const char *str)
 		s++;
 	}
 	s = stpspn(s, " ");
-	while (isnum && ('\0' != *s)) {
+	while (isnum && !streq(s, "")) {
 		if (!isdigit (*s)) {
 			isnum = false;
 		}

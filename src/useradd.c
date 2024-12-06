@@ -177,7 +177,7 @@ static bool
     Uflg = false;		/* create a group having the same name as the user */
 
 #ifdef WITH_SELINUX
-#define Zflg ('\0' != *user_selinux)
+#define Zflg  (!streq(user_selinux, ""))
 #endif				/* WITH_SELINUX */
 
 static bool home_added = false;
@@ -1268,7 +1268,7 @@ static void process_flags (int argc, char **argv)
 				Dflg = true;
 				break;
 			case 'e':
-				if ('\0' != *optarg) {
+				if (!streq(optarg, "")) {
 					user_expire = strtoday (optarg);
 					if (user_expire < -1) {
 						fprintf (stderr,
@@ -1403,7 +1403,7 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   ('\0' != optarg[0])
+				    || (   !streq(optarg, "")
 				        && ('/'  != optarg[0])
 				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
@@ -1411,7 +1411,7 @@ static void process_flags (int argc, char **argv)
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (    '\0' != optarg[0]
+				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0

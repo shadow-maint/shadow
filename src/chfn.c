@@ -225,7 +225,7 @@ static char *copy_field (char *in, char *out, char *extra)
 			break;
 
 		if (NULL != extra) {
-			if ('\0' != extra[0]) {
+			if (!streq(extra, "")) {
 				strcat (extra, ",");
 			}
 
@@ -543,7 +543,7 @@ static void get_old_fields (const char *gecos)
 	 * Anything left over is "slop".
 	 */
 	if ((NULL != cp) && !oflg) {
-		if ('\0' != slop[0]) {
+		if (!streq(slop, "")) {
 			strcat (slop, ",");
 		}
 
@@ -702,7 +702,7 @@ int main (int argc, char **argv)
 	}
 	SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
 	         fullnm, roomno, workph, homeph,
-	         ('\0' != slop[0]) ? "," : "", slop);
+	         (!streq(slop, "")) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);

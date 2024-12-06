@@ -422,7 +422,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 	const char *failent_user = "UNKNOWN";
 	bool log_unkfail_enab = getdef_bool("LOG_UNKFAIL_ENAB");
 
-	if ((NULL != user) && ('\0' != user[0])) {
+	if ((NULL != user) && !streq(user, "")) {
 		if (   log_unkfail_enab
 		    || (getpwnam (user) != NULL)) {
 			failent_user = user;
@@ -589,13 +589,13 @@ int main (int argc, char **argv)
 
 	if (hflg) {
 		cp = hostname;
-	} else if ((host != NULL) && (host[0] != '\0')) {
+	} else if ((host != NULL) && !streq(host, "")) {
 		cp = host;
 	} else {
 		cp = "";
 	}
 
-	if ('\0' != *cp) {
+	if (!streq(cp, "")) {
 		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
 		SNPRINTF(fromhost, " on '%.100s'", tty);
@@ -925,7 +925,7 @@ int main (int argc, char **argv)
 			failed = true;
 		}
 		if (   !failed
-		    && !login_access (username, ('\0' != *hostname) ? hostname : tty)) {
+		    && !login_access(username, (!streq(hostname, "")) ? hostname : tty)) {
 			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
 			         username, fromhost));
 			failed = true;

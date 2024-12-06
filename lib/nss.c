@@ -87,7 +87,7 @@ nss_init(const char *nsswitch_path) {
 			continue;
 		p = &line[6];
 		p = stpspn(p, " \t\n");
-		if (*p != '\0')
+		if (!streq(p, ""))
 			break;
 		p = NULL;
 	}

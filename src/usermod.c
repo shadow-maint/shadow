@@ -1154,7 +1154,7 @@ process_flags(int argc, char **argv)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   ('\0' != optarg[0])
+				    || (   !streq(optarg, "")
 				        && ('/'  != optarg[0])
 				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
@@ -1162,7 +1162,7 @@ process_flags(int argc, char **argv)
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (    '\0' != optarg[0]
+				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
@@ -2334,7 +2334,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_SELINUX
 	if (Zflg) {
-		if ('\0' != *user_selinux) {
+		if (!streq(user_selinux, "")) {
 			if (set_seuser (user_name, user_selinux, user_selinux_range) != 0) {
 				fprintf (stderr,
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),

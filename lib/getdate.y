@@ -627,7 +627,7 @@ static int LookupWord (char *buff)
   bool abbrev;
 
   /* Make it lowercase. */
-  for (p = buff; '\0' != *p; p++)
+  for (p = buff; !streq(p, ""); p++)
     if (isupper (*p))
       *p = tolower (*p);
 
@@ -720,7 +720,7 @@ static int LookupWord (char *buff)
     }
 
   /* Drop out any periods and try the timezone table again. */
-  for (i = 0, p = q = buff; '\0' != *q; q++)
+  for (i = 0, p = q = buff; !streq(q, ""); q++)
     if (*q != '.')
       *p++ = *q;
     else

@@ -58,7 +58,7 @@ void ttytype (const char *line)
 			break;
 		}
 	}
-	if ((feof (fp) == 0) && (ferror (fp) == 0) && (type[0] != '\0')) {
+	if ((feof(fp) == 0) && (ferror(fp) == 0) && !streq(type, "")) {
 		addenv ("TERM", type);
 	}
 
