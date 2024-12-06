@@ -254,7 +254,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 
-	if (NULL != host && '\0' != host[0])
+	if (NULL != host && !streq(host, ""))
 		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && '\0' != ut->ut_host[0])

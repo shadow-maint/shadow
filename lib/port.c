@@ -39,7 +39,7 @@ static int portcmp (const char *pattern, const char *port)
 {
 	const char *orig = port;
 
-	while (('\0' != *pattern) && (*pattern == *port)) {
+	while (!streq(pattern, "") && (*pattern == *port)) {
 		pattern++;
 		port++;
 	}
@@ -215,7 +215,7 @@ next:
 	 * Get the next comma separated entry
 	 */
 
-	for (j = 0; ('\0' != *cp) && (j < PORT_TIMES); j++) {
+	for (j = 0; !streq(cp, "") && (j < PORT_TIMES); j++) {
 
 		/*
 		 * Start off with no days of the week

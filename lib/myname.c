@@ -15,9 +15,13 @@
 
 #ident "$Id$"
 
-#include "defines.h"
 #include <pwd.h>
+
+#include "defines.h"
 #include "prototypes.h"
+#include "string/strcmp/streq.h"
+
+
 /*@null@*/ /*@only@*/struct passwd *get_my_pwent (void)
 {
 	struct passwd *pw;
@@ -34,7 +38,7 @@
 	 * XXX - when running from su, will return the current user (not
 	 * the original user, like getlogin() does).  Does this matter?
 	 */
-	if ((NULL != cp) && ('\0' != *cp)) {
+	if ((NULL != cp) && !streq(cp, "")) {
 		pw = xgetpwnam (cp);
 		if ((NULL != pw) && (pw->pw_uid == ruid)) {
 			return pw;

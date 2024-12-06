@@ -179,7 +179,7 @@ static bool is_valid_user_list (const char *users)
 
 	tmpusers = dup = xstrdup(users);
 
-	while (NULL != tmpusers && '\0' != *tmpusers) {
+	while (NULL != tmpusers && !streq(tmpusers, "")) {
 		const char  *u;
 
 		u = strsep(&tmpusers, ",");

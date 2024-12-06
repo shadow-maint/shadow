@@ -42,7 +42,7 @@ build_list(char *s)
 
 	l = XMALLOC(strchrcnt(s, ',') + 2, char *);
 
-	for (i = 0; s != NULL && *s != '\0'; i++)
+	for (i = 0; s != NULL && !streq(s, ""); i++)
 		l[i] = strsep(&s, ",");
 
 	l[i] = NULL;
