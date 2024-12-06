@@ -440,7 +440,7 @@ USERGROUPS_ENAB yes
 # This option is overridden with the -M or -m flags on the useradd(8)
 # command-line.
 #
-#CREATE_HOME     yes
+CREATE_HOME     yes
 
 #
 # Force use shadow, even if shadow passwd & shadow group files are
