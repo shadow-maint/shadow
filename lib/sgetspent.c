@@ -25,8 +25,10 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+#include "sizeof.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
 
 #define	FIELDS	9
@@ -43,8 +45,7 @@ sgetspent(const char *s)
 	static struct spwd spwd;
 
 	char *fields[FIELDS];
-	char *cp;
-	int i;
+	size_t  i;
 
 	free(dup);
 	dup = strdup(s);
@@ -53,18 +54,10 @@ sgetspent(const char *s)
 
 	stpsep(dup, "\n");
 
-	/*
-	 * Tokenize the string into colon separated fields.  Allow up to
-	 * FIELDS different fields.
-	 */
-
-	for (cp = dup, i = 0; cp != NULL && i < FIELDS; i++)
-		fields[i] = strsep(&cp, ":");
-
-	if (i == (FIELDS - 1))
+	i = strsep2arr(dup, ":", countof(fields), fields);
+	if (i == countof(fields) - 1)
 		fields[i++] = "";
-
-	if (cp != NULL || (i != FIELDS && i != OFIELDS))
+	if (i != countof(fields) && i != OFIELDS)
 		return NULL;
 
 	/*
