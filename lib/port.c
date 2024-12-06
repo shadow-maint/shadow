@@ -103,7 +103,8 @@ getportent(void)
 	int   dtime;
 	int   i, j;
 	int   saveerr;
-	char  *cp, *field;
+	char  *cp;
+	char  *fields[3];
 
 	static char            buf[BUFSIZ];
 	static char            *ttys[PORT_TTY + 1];
@@ -147,7 +148,8 @@ next:
 
 	stpsep(buf, "\n");
 
-	field = buf;
+	if (STRSEP2ARR(buf, ":", fields) == -1)
+		goto next;
 
 	/*
 	 * Get the name of the TTY device.  It is the first colon
@@ -155,13 +157,8 @@ next:
 	 * leading "/dev".  The entry '*' is used to specify all
 	 * TTY devices.
 	 */
-
-	cp = strsep(&field, ":");
-	if (field == NULL)
-		goto next;
-
 	port.pt_names = ttys;
-	if (STRSEP2LS(cp, ",", ttys) == -1)
+	if (STRSEP2LS(fields[0], ",", ttys) == -1)
 		goto next;
 
 	/*
@@ -170,13 +167,8 @@ next:
 	 * names.  The entry '*' is used to specify all usernames.
 	 * The last entry in the list is a NULL pointer.
 	 */
-
-	cp = strsep(&field, ":");
-	if (field == NULL)
-		goto next;
-
 	port.pt_users = users;
-	if (STRSEP2LS(cp, ",", users) == -1)
+	if (STRSEP2LS(fields[1], ",", users) == -1)
 		goto next;
 
 	/*
@@ -192,7 +184,7 @@ next:
 	 * the starting time.  Days are presumed to wrap at 0000.
 	 */
 
-	cp = field;
+	cp = fields[2];
 
 	if (streq(cp, "")) {
 		port.pt_times = NULL;
