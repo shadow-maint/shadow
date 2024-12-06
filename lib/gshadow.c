@@ -26,12 +26,11 @@
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
 
 static /*@null@*/FILE *shadow;
 static struct sgrp  sgroup = {};
-
-#define	FIELDS	4
 
 
 static /*@null@*/char **
@@ -73,9 +72,7 @@ sgetsgent(const char *s)
 {
 	static char  *dup = NULL;
 
-	char  *fields[FIELDS];
-	char *cp;
-	int i;
+	char  *fields[4];
 
 	free(dup);
 	dup = strdup(s);
@@ -84,20 +81,7 @@ sgetsgent(const char *s)
 
 	stpsep(dup, "\n");
 
-	/*
-	 * There should be exactly 4 colon separated fields.  Find
-	 * all 4 of them and save the starting addresses in fields[].
-	 */
-
-	for (cp = dup, i = 0; (i < FIELDS) && (NULL != cp); i++)
-		fields[i] = strsep(&cp, ":");
-
-	/*
-	 * If there was an extra field somehow, or perhaps not enough,
-	 * the line is invalid.
-	 */
-
-	if (NULL != cp || i != FIELDS)
+	if (STRSEP2ARR(dup, ":", fields) == -1)
 		return NULL;
 
 	sgroup.sg_namp = fields[0];
