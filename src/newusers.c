@@ -56,6 +56,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
 
 /*
@@ -1058,8 +1059,6 @@ int main (int argc, char **argv)
 {
 	char buf[BUFSIZ];
 	char *fields[8];
-	int nfields;
-	char *cp;
 	const struct passwd *pw;
 	struct passwd newpw;
 	int line = 0;
@@ -1117,17 +1116,7 @@ int main (int argc, char **argv)
 			fail_exit (EXIT_FAILURE);
 		}
 
-		/*
-		 * Break the string into fields and screw around with them.
-		 * There MUST be 7 colon separated fields, although the
-		 * values aren't that particular.
-		 */
-		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
-			fields[nfields] = strsep(&cp, ":");
-			if (cp == NULL)
-				break;
-		}
-		if (nfields != 6) {
+		if (STRSEP2ARR(buf, ":", fields) == -1) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
