@@ -17,12 +17,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <a2i/str2i/str2s.h>
+
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-#include "atoi/str2i/str2s.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"
