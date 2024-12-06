@@ -82,7 +82,7 @@ static char *str_lower (/*@returned@*/char *string)
 {
 	char *cp;
 
-	for (cp = string; '\0' != *cp; cp++) {
+	for (cp = string; !streq(cp, ""); cp++) {
 		*cp = tolower (*cp);
 	}
 	return string;

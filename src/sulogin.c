@@ -27,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -153,7 +154,7 @@ main(int argc, char *argv[])
 		 * it will work with standard getpass() (no NULL on EOF).
 		 * --marekm
 		 */
-		if ((NULL == pass) || ('\0' == *pass)) {
+		if ((NULL == pass) || streq(pass, "")) {
 			erase_pass (pass);
 			(void) puts ("");
 #ifdef	TELINIT

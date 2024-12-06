@@ -227,7 +227,7 @@ static int get_groups (char *list)
 	 */
 	user_groups[0] = NULL;
 
-	if ('\0' == *list) {
+	if (streq(list, "")) {
 		return 0;
 	}
 
@@ -1154,7 +1154,7 @@ process_flags(int argc, char **argv)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   ('\0' != optarg[0])
+				    || (   !streq(optarg, "")
 				        && ('/'  != optarg[0])
 				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
@@ -1162,7 +1162,7 @@ process_flags(int argc, char **argv)
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (    '\0' != optarg[0]
+				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
@@ -2186,7 +2186,7 @@ int main (int argc, char **argv)
 	 * be changed while the user is logged in.
 	 * Note: no need to check if a prefix is specified...
 	 */
-	if ( (prefix[0] == '\0') &&  (uflg || lflg || dflg
+	if (streq(prefix, "") && (uflg || lflg || dflg
 #ifdef ENABLE_SUBIDS
 	        || Vflg || Wflg
 #endif				/* ENABLE_SUBIDS */
@@ -2334,7 +2334,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_SELINUX
 	if (Zflg) {
-		if ('\0' != *user_selinux) {
+		if (!streq(user_selinux, "")) {
 			if (set_seuser (user_name, user_selinux, user_selinux_range) != 0) {
 				fprintf (stderr,
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),

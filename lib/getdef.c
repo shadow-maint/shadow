@@ -567,7 +567,7 @@ static void def_load (void)
 		 * Break the line into two fields.
 		 */
 		name = stpspn(buf, " \t");	/* first nonwhite */
-		if (*name == '\0' || *name == '#')
+		if (streq(name, "") || *name == '#')
 			continue;	/* comment or empty */
 
 		s = stpsep(name, " \t");  /* next field */

@@ -533,7 +533,7 @@ static void check_pw_file (int *errors, bool *changed)
 		 * Make sure the login shell is executable
 		 */
 		if (   !quiet
-		    && ('\0' != pwd->pw_shell[0])
+		    && !streq(pwd->pw_shell, "")
 		    && (access (pwd->pw_shell, F_OK) != 0)) {
 
 			/*

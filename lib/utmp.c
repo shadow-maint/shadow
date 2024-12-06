@@ -53,13 +53,13 @@ is_my_tty(const char tty[UTX_LINESIZE])
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
-	if ('\0' == tmptty[0]) {
+	if (streq(tmptty, "")) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
 			STRTCPY(tmptty, tname);
 	}
 
-	if ('\0' == tmptty[0]) {
+	if (streq(tmptty, "")) {
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
 	}
@@ -254,7 +254,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 
-	if (NULL != host && '\0' != host[0])
+	if (NULL != host && !streq(host, ""))
 		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && '\0' != ut->ut_host[0])
