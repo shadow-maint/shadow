@@ -22,20 +22,22 @@
 
 
 ATTR_STRING(1)
-inline int readlinknul(const char *restrict link, char *restrict buf,
+inline ssize_t readlinknul(const char *restrict link, char *restrict buf,
     size_t size);
 
 
 // Similar to readlink(2), but terminate the string.
-inline int
+inline ssize_t
 readlinknul(const char *restrict link, char *restrict buf, size_t size)
 {
-	ssize_t  len;
+	size_t   len;
+	ssize_t  r;
 
-	len = readlink(link, buf, size);
-	if (len == -1)
+	r = readlink(link, buf, size);
+	if (r == -1)
 		return -1;
 
+	len = r;
 	if (len == size) {
 		stpcpy(&buf[size-1], "");
 		errno = E2BIG;
