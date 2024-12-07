@@ -41,15 +41,15 @@
 struct passwd *
 sgetpwent(const char *s)
 {
-	static char  *pwdbuf = NULL;
+	static char          *dup = NULL;
 	static struct passwd pwent;
 	int i;
 	char *cp;
 	char *fields[NFIELDS];
 
-	free(pwdbuf);
-	pwdbuf = strdup(s);
-	if (pwdbuf == NULL)
+	free(dup);
+	dup = strdup(s);
+	if (dup == NULL)
 		return NULL;
 
 	/*
@@ -57,7 +57,7 @@ sgetpwent(const char *s)
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = pwdbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
+	for (cp = dup, i = 0; (i < NFIELDS) && (NULL != cp); i++)
 		fields[i] = strsep(&cp, ":");
 
 	/* something at the end, columns over shot */
