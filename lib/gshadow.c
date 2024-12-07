@@ -15,6 +15,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "alloc/malloc.h"
@@ -68,26 +69,19 @@ void endsgent (void)
 }
 
 /*@observer@*//*@null@*/struct sgrp *
-sgetsgent(const char *string)
+sgetsgent(const char *s)
 {
 	static char *sgrbuf = NULL;
-	static size_t sgrbuflen = 0;
 
 	char *fields[FIELDS];
 	char *cp;
 	int i;
-	size_t len = strlen (string) + 1;
 
-	if (len > sgrbuflen) {
-		char *buf = REALLOC(sgrbuf, len, char);
-		if (NULL == buf)
-			return NULL;
+	free(sgrbuf);
+	sgrbuf = strdup(s);
+	if (sgrbuf == NULL)
+		return NULL;
 
-		sgrbuf = buf;
-		sgrbuflen = len;
-	}
-
-	strcpy (sgrbuf, string);
 	stpsep(sgrbuf, "\n");
 
 	/*

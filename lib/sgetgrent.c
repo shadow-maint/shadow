@@ -11,10 +11,11 @@
 
 #ident "$Id$"
 
-#include <stdio.h>
-#include <sys/types.h>
 #include <grp.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
@@ -64,27 +65,20 @@ list(char *s)
 }
 
 
-struct group *sgetgrent (const char *buf)
+struct group *
+sgetgrent(const char *s)
 {
 	static char *grpbuf = NULL;
-	static size_t size = 0;
 	static char *grpfields[NFIELDS];
 	static struct group grent;
 	int i;
 	char *cp;
 
-	if (strlen (buf) + 1 > size) {
-		/* no need to use realloc() here - just free it and
-		   allocate a larger block */
-		free (grpbuf);
-		size = strlen (buf) + 1000;	/* at least: strlen(buf) + 1 */
-		grpbuf = MALLOC(size, char);
-		if (grpbuf == NULL) {
-			size = 0;
-			return NULL;
-		}
-	}
-	strcpy (grpbuf, buf);
+	free(grpbuf);
+	grpbuf = strdup(s);
+	if (grpbuf == NULL)
+		return NULL;
+
 	stpsep(grpbuf, "\n");
 
 	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
