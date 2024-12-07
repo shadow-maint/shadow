@@ -20,12 +20,12 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "agetpass.h"
 #include "atoi/a2i/a2s.h"
 #include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
+#include "pass/agetpass.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"

@@ -17,13 +17,13 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "agetpass.h"
 #include "alloc/x/xmalloc.h"
 #include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "pass/agetpass.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"

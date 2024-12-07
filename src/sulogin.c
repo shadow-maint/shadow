@@ -18,14 +18,14 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
-#include "agetpass.h"
 #include "attr.h"
 #include "defines.h"
-#include "getdef.h"
-#include "prototypes.h"
-#include "pwauth.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "getdef.h"
+#include "pass/agetpass.h"
+#include "prototypes.h"
+#include "pwauth.h"
 #include "shadowlog.h"
 #include "string/strdup/xstrdup.h"
 

@@ -27,8 +27,6 @@ libshadow_la_SOURCES = \
 	adds.c \
 	adds.h \
 	age.c \
-	agetpass.c \
-	agetpass.h \
 	alloc/calloc.c \
 	alloc/calloc.h \
 	alloc/malloc.c \
@@ -138,6 +136,8 @@ libshadow_la_SOURCES = \
 	pam_defs.h \
 	pam_pass.c \
 	pam_pass_non_interactive.c \
+	pass/agetpass.c \
+	pass/agetpass.h \
 	port.c \
 	port.h \
 	prefix_flag.c \

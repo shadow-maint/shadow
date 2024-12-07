@@ -19,11 +19,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "agetpass.h"
 #include "defines.h"
+#include "getdef.h"
+#include "pass/agetpass.h"
 #include "prototypes.h"
 #include "pwauth.h"
-#include "getdef.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 

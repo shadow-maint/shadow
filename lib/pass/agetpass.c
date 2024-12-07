@@ -1,20 +1,15 @@
-/*
- * SPDX-FileCopyrightText:  2022, Alejandro Colomar <alx@kernel.org>
- *
- * SPDX-License-Identifier:  BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <config.h>
 
-#include "agetpass.h"
+#include "pass/agetpass.h"
 
 #include <limits.h>
 #include <readpassphrase.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ident "$Id$"
 
 #include "alloc/malloc.h"
 

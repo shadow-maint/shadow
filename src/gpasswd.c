@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "agetpass.h"
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "defines.h"
@@ -28,6 +27,7 @@
 #include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "pass/agetpass.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
