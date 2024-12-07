@@ -16,6 +16,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
 
@@ -36,26 +37,19 @@
  * sgetspent - convert string in shadow file format to (struct spwd *)
  */
 struct spwd *
-sgetspent(const char *string)
+sgetspent(const char *s)
 {
-	static char spwbuf[PASSWD_ENTRY_MAX_LENGTH];
+	static char  *spwbuf = NULL;
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
 	int i;
 
-	/*
-	 * Copy string to local buffer.  It has to be tokenized and we
-	 * have to do that to our private copy.
-	 */
+	free(spwbuf);
+	spwbuf = strdup(s);
+	if (spwbuf == NULL)
+		return NULL;
 
-	if (strlen (string) >= sizeof spwbuf) {
-		fprintf (shadow_logfd,
-		         "%s: Too long passwd entry encountered, file corruption?\n",
-		         shadow_progname);
-		return NULL;	/* fail if too long */
-	}
-	strcpy (spwbuf, string);
 	stpsep(spwbuf, "\n");
 
 	/*
