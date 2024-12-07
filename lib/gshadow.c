@@ -71,25 +71,25 @@ void endsgent (void)
 /*@observer@*//*@null@*/struct sgrp *
 sgetsgent(const char *s)
 {
-	static char *sgrbuf = NULL;
+	static char  *dup = NULL;
 
 	char *fields[FIELDS];
 	char *cp;
 	int i;
 
-	free(sgrbuf);
-	sgrbuf = strdup(s);
-	if (sgrbuf == NULL)
+	free(dup);
+	dup = strdup(s);
+	if (dup == NULL)
 		return NULL;
 
-	stpsep(sgrbuf, "\n");
+	stpsep(dup, "\n");
 
 	/*
 	 * There should be exactly 4 colon separated fields.  Find
 	 * all 4 of them and save the starting addresses in fields[].
 	 */
 
-	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++)
+	for (cp = dup, i = 0; (i < FIELDS) && (NULL != cp); i++)
 		fields[i] = strsep(&cp, ":");
 
 	/*

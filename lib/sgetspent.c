@@ -39,25 +39,25 @@
 struct spwd *
 sgetspent(const char *s)
 {
-	static char  *spwbuf = NULL;
+	static char        *dup = NULL;
 	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
 	int i;
 
-	free(spwbuf);
-	spwbuf = strdup(s);
-	if (spwbuf == NULL)
+	free(dup);
+	dup = strdup(s);
+	if (dup == NULL)
 		return NULL;
 
-	stpsep(spwbuf, "\n");
+	stpsep(dup, "\n");
 
 	/*
 	 * Tokenize the string into colon separated fields.  Allow up to
 	 * FIELDS different fields.
 	 */
 
-	for (cp = spwbuf, i = 0; cp != NULL && i < FIELDS; i++)
+	for (cp = dup, i = 0; cp != NULL && i < FIELDS; i++)
 		fields[i] = strsep(&cp, ":");
 
 	if (i == (FIELDS - 1))

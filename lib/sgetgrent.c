@@ -68,20 +68,20 @@ list(char *s)
 struct group *
 sgetgrent(const char *s)
 {
-	static char *grpbuf = NULL;
+	static char         *dup = NULL;
 	static char *grpfields[NFIELDS];
 	static struct group grent;
 	int i;
 	char *cp;
 
-	free(grpbuf);
-	grpbuf = strdup(s);
-	if (grpbuf == NULL)
+	free(dup);
+	dup = strdup(s);
+	if (dup == NULL)
 		return NULL;
 
-	stpsep(grpbuf, "\n");
+	stpsep(dup, "\n");
 
-	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
+	for (cp = dup, i = 0; (i < NFIELDS) && (NULL != cp); i++)
 		grpfields[i] = strsep(&cp, ":");
 
 	if (i < NFIELDS || streq(grpfields[2], "") || cp != NULL) {
