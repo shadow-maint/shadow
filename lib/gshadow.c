@@ -20,13 +20,12 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
-#include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
+#include "string/strtok/xastrsep2ls.h"
 
 
 static /*@null@*/FILE *shadow;
@@ -37,14 +36,12 @@ static /*@null@*/char **
 build_list(char *s)
 {
 	char    **l;
-	size_t  i;
+	size_t  n;
 
-	l = XMALLOC(strchrcnt(s, ',') + 2, char *);
+	l = xastrsep2ls(s, ",", &n);
 
-	for (i = 0; s != NULL && !streq(s, ""); i++)
-		l[i] = strsep(&s, ",");
-
-	l[i] = NULL;
+	if (streq(l[n-1], ""))
+		l[n-1] = NULL;
 
 	return l;
 }
