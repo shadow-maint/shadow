@@ -74,7 +74,7 @@ sgetsgent(const char *s)
 {
 	static char  *dup = NULL;
 
-	char *fields[FIELDS];
+	char  *fields[FIELDS];
 	char *cp;
 	int i;
 

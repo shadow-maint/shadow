@@ -43,9 +43,10 @@ sgetpwent(const char *s)
 {
 	static char          *dup = NULL;
 	static struct passwd pwent;
+
 	int i;
 	char *cp;
-	char *fields[NFIELDS];
+	char  *fields[NFIELDS];
 
 	free(dup);
 	dup = strdup(s);
