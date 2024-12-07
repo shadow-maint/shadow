@@ -11,10 +11,11 @@
 
 #ident "$Id$"
 
-#include <sys/types.h>
-#include <stdio.h>
 #include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 #include "atoi/getnum.h"
 #include "defines.h"
@@ -38,26 +39,18 @@
  *	compilation glarp to improve on this in the future.
  */
 struct passwd *
-sgetpwent(const char *buf)
+sgetpwent(const char *s)
 {
+	static char  *pwdbuf = NULL;
 	static struct passwd pwent;
-	static char pwdbuf[PASSWD_ENTRY_MAX_LENGTH];
 	int i;
 	char *cp;
 	char *fields[NFIELDS];
 
-	/*
-	 * Copy the string to a static buffer so the pointers into
-	 * the password structure remain valid.
-	 */
-
-	if (strlen (buf) >= sizeof pwdbuf) {
-		fprintf (shadow_logfd,
-		         "%s: Too long passwd entry encountered, file corruption?\n",
-		         shadow_progname);
-		return NULL;	/* fail if too long */
-	}
-	strcpy (pwdbuf, buf);
+	free(pwdbuf);
+	pwdbuf = strdup(s);
+	if (pwdbuf == NULL)
+		return NULL;
 
 	/*
 	 * Save a pointer to the start of each colon separated
