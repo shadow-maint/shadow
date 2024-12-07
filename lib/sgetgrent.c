@@ -17,13 +17,13 @@
 #include <string.h>
 
 #include "alloc/malloc.h"
-#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
+#include "string/strtok/astrsep2ls.h"
 
 
 /*
@@ -39,29 +39,18 @@ static char **
 list(char *s)
 {
 	static char **members = NULL;
-	static size_t size = 0;	/* max members + 1 */
-	size_t i;
+
+	size_t  n;
 
 	free(members);
-	members = NULL;
 
-	i = 0;
-	for (;;) {
-		/* check if there is room for another pointer (to a group
-		   member name, or terminating NULL).  */
-		if (i >= size) {
-			size = i + 100;	/* at least: i + 1 */
-			members = REALLOCF(members, size, char *);
-			if (!members) {
-				size = 0;
-				return NULL;
-			}
-		}
-		if (!s || streq(s, ""))
-			break;
-		members[i++] = strsep(&s, ",");
-	}
-	members[i] = NULL;
+	members = astrsep2ls(s, ",", &n);
+	if (members == NULL)
+		return NULL;
+
+	if (streq(members[n-1], ""))
+		members[n-1] = NULL;
+
 	return members;
 }
 
