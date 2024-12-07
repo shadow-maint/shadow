@@ -43,6 +43,9 @@ list(char *s)
 	static size_t size = 0;	/* max members + 1 */
 	size_t i;
 
+	free(members);
+	members = NULL;
+
 	i = 0;
 	for (;;) {
 		/* check if there is room for another pointer (to a group
