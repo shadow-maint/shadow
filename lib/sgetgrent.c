@@ -69,10 +69,11 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char         *dup = NULL;
-	static char *grpfields[NFIELDS];
 	static struct group grent;
+
 	int i;
 	char *cp;
+	char  *fields[NFIELDS];
 
 	free(dup);
 	dup = strdup(s);
@@ -82,21 +83,20 @@ sgetgrent(const char *s)
 	stpsep(dup, "\n");
 
 	for (cp = dup, i = 0; (i < NFIELDS) && (NULL != cp); i++)
-		grpfields[i] = strsep(&cp, ":");
+		fields[i] = strsep(&cp, ":");
 
-	if (i < NFIELDS || streq(grpfields[2], "") || cp != NULL) {
+	if (i < NFIELDS || streq(fields[2], "") || cp != NULL) {
 		return NULL;
 	}
-	grent.gr_name = grpfields[0];
-	grent.gr_passwd = grpfields[1];
-	if (get_gid(grpfields[2], &grent.gr_gid) == -1) {
+	grent.gr_name = fields[0];
+	grent.gr_passwd = fields[1];
+	if (get_gid(fields[2], &grent.gr_gid) == -1) {
 		return NULL;
 	}
-	grent.gr_mem = list (grpfields[3]);
+	grent.gr_mem = list(fields[3]);
 	if (NULL == grent.gr_mem) {
 		return NULL;	/* out of memory */
 	}
 
 	return &grent;
 }
-
