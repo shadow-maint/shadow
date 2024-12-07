@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+#include "string/strtok/stpsep.h"
 
 
 #define	NFIELDS	7
@@ -50,6 +51,8 @@ sgetpwent(const char *s)
 	dup = strdup(s);
 	if (dup == NULL)
 		return NULL;
+
+	stpsep(dup, "\n");
 
 	/*
 	 * Save a pointer to the start of each colon separated
