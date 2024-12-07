@@ -41,6 +41,7 @@ sgetspent(const char *s)
 {
 	static char        *dup = NULL;
 	static struct spwd spwd;
+
 	char *fields[FIELDS];
 	char *cp;
 	int i;
