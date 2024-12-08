@@ -130,6 +130,8 @@ test_typetraits_LDADD = \
     $(NULL)
 
 test_xaprintf_SOURCES = \
+    ../../lib/exit_if_null.c \
+    ../../lib/shadowlog.c \
     ../../lib/string/sprintf/aprintf.c \
     ../../lib/string/sprintf/xaprintf.c \
     ../../lib/string/strcmp/streq.c \
