@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 1990-1994, Julianne Frances Haugh
 // SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
 // SPDX-FileCopyrightText: 2003-2006, Tomasz Kłoczko
-// SPDX-FileCopyrightText: 2008     , Nicolas François
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -14,19 +14,11 @@
 
 #include <string.h>
 
-#include "alloc/x/xmalloc.h"
-#include "attr.h"
+#include "exit_if_null.h"
 
 
-ATTR_MALLOC(free)
-inline char *xstrdup(const char *str);
-
-
-inline char *
-xstrdup(const char *str)
-{
-	return strcpy(XMALLOC(strlen(str) + 1, char), str);
-}
+// xstrdup - exit-on-error string duplicate
+#define xstrdup(s)  exit_if_null(strdup(s))
 
 
 #endif  // include guard
