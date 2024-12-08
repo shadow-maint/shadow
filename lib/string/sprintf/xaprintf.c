@@ -5,9 +5,3 @@
 #include "config.h"
 
 #include "string/sprintf/xaprintf.h"
-
-#include <stdarg.h>
-
-
-extern inline char *xaprintf(const char *restrict fmt, ...);
-extern inline char *xvaprintf(const char *restrict fmt, va_list ap);
