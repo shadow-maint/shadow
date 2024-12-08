@@ -130,8 +130,10 @@ test_typetraits_LDADD = \
     $(NULL)
 
 test_xaprintf_SOURCES = \
+    ../../lib/shadowlog.c \
     ../../lib/string/sprintf/aprintf.c \
     ../../lib/string/sprintf/xaprintf.c \
+    ../../lib/x.c \
     test_xaprintf.c \
     $(NULL)
 test_xaprintf_CFLAGS = \
