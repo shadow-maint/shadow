@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,28 +8,11 @@
 
 #include "config.h"
 
-#include <stddef.h>
-
-#include "alloc/x/xrealloc.h"
-#include "attr.h"
+#include "alloc/malloc.h"
+#include "exit_if_null.h"
 
 
-#define XMALLOC(n, type)                                                      \
-(                                                                             \
-	(type *) xmallocarray(n, sizeof(type))                                \
-)
-
-
-ATTR_ALLOC_SIZE(1, 2)
-ATTR_MALLOC(free)
-inline void *xmallocarray(size_t nmemb, size_t size);
-
-
-inline void *
-xmallocarray(size_t nmemb, size_t size)
-{
-	return xreallocarray(NULL, nmemb, size);
-}
+#define XMALLOC(n, type)  exit_if_null(MALLOC(n, type))
 
 
 #endif  // include guard
