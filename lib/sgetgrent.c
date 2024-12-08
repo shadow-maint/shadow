@@ -89,7 +89,7 @@ struct group *sgetgrent (const char *buf)
 	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
 		grpfields[i] = strsep(&cp, ":");
 
-	if (i < (NFIELDS - 1) || *grpfields[2] == '\0' || cp != NULL) {
+	if (i < NFIELDS || *grpfields[2] == '\0' || cp != NULL) {
 		return NULL;
 	}
 	grent.gr_name = grpfields[0];
