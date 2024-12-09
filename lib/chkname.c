@@ -35,9 +35,6 @@
 #include "chkname.h"
 
 
-int allow_bad_names = false;
-
-
 size_t
 login_name_max_size(void)
 {
@@ -55,10 +52,6 @@ login_name_max_size(void)
 static bool
 is_valid_name(const char *name)
 {
-	if (allow_bad_names) {
-		return true;
-	}
-
 	/*
          * User/group names must match BRE regex:
          *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
