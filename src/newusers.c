@@ -122,7 +122,6 @@ static void check_perms(const struct option_flags *flags);
 static void open_files (bool process_selinux);
 static void close_files(const struct option_flags *flags);
 
-extern int allow_bad_names;
 
 /*
  * usage - display usage message and exit
@@ -135,7 +134,6 @@ static void usage (int status)
 	                  "\n"
 	                  "Options:\n"),
 	                Prog);
-	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 #ifndef USE_PAM
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
@@ -396,17 +394,8 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 {
 	struct passwd pwent;
 
-	/* Check if this is a valid user name */
 	if (!is_valid_user_name(name)) {
-		if (errno == EILSEQ) {
-			fprintf(stderr,
-			        _("%s: invalid user name '%s': use --badname to ignore\n"),
-			        Prog, name);
-		} else {
-			fprintf(stderr,
-			        _("%s: invalid user name '%s'\n"),
-			        Prog, name);
-		}
+		fprintf(stderr, _("%s: invalid user name '%s'\n"), Prog, name);
 		return -1;
 	}
 
@@ -639,7 +628,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 #endif 				/* !USE_PAM */
 	static struct option long_options[] = {
-		{"badname",      no_argument,       NULL, 'b'},
 #ifndef USE_PAM
 		{"crypt-method", required_argument, NULL, 'c'},
 #endif				/* !USE_PAM */
@@ -666,9 +654,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 #endif
 	                         long_options, NULL)) != -1) {
 		switch (c) {
-		case 'b':
-			allow_bad_names = true;
-			break;
 #ifndef USE_PAM
 		case 'c':
 			crypt_method = optarg;
