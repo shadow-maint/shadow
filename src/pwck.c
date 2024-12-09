@@ -10,8 +10,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
@@ -30,6 +28,8 @@
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerror.h"
+
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
@@ -482,7 +482,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		}
 
 		if (!is_valid_user_name(pwd->pw_name)) {
-			printf(_("invalid user name '%s'\n"), pwd->pw_name);
+			printf(_("user: %s\n"), strerrno());
 			*errors = true;
 		}
 
