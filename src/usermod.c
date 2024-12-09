@@ -1130,9 +1130,8 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				/*@notreached@*/break;
 			case 'l':
 				if (!is_valid_user_name(optarg)) {
-					fprintf(stderr,
-						_("%s: invalid user name '%s'\n"),
-						Prog, optarg);
+					fprintf(stderr, _("%s: user: %s\n"),
+						Prog, strerrno());
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
