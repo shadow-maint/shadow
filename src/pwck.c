@@ -12,11 +12,13 @@
 
 #ident "$Id$"
 
+#include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "chkname.h"
 #include "commonio.h"
@@ -465,7 +467,7 @@ static void check_pw_file (bool *errors, bool *changed)
 		}
 
 		if (!is_valid_user_name(pwd->pw_name)) {
-			printf(_("invalid user name '%s'\n"), pwd->pw_name);
+			printf(_("user: %s\n"), strerror(errno));
 			*errors = true;
 		}
 

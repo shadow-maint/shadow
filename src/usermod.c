@@ -27,6 +27,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -1111,9 +1112,8 @@ process_flags(int argc, char **argv)
 				/*@notreached@*/break;
 			case 'l':
 				if (!is_valid_user_name(optarg)) {
-					fprintf(stderr,
-						_("%s: invalid user name '%s'\n"),
-						Prog, optarg);
+					fprintf(stderr, _("%s: user: %s\n"),
+						Prog, strerror(errno));
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
