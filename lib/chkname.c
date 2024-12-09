@@ -14,7 +14,7 @@
  *   false - bad name
  * errors:
  *   EINVAL	Invalid name
- *   EILSEQ	Invalid name character sequence (acceptable with --badname)
+ *   EILSEQ	Invalid name character sequence
  *   EOVERFLOW	Name longer than maximum size
  */
 
@@ -44,9 +44,6 @@
 #endif
 
 
-int allow_bad_names = false;
-
-
 size_t
 login_name_max_size(void)
 {
@@ -66,17 +63,11 @@ is_valid_name(const char *name)
 	if (streq(name, "")
 	 || streq(name, ".")
 	 || streq(name, "..")
-	 || strpbrk(name, ",: /")
 	 || strprefix(name, "-")
-	 || strchriscntrl(name)
 	 || strisdigit(name))
 	{
 		errno = EINVAL;
 		return false;
-	}
-
-	if (allow_bad_names) {
-		return true;
 	}
 
 	/*
