@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -45,6 +43,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/stpecpy.h"
 #include "string/strdup/strdup.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -389,9 +388,7 @@ check_new_name(void)
 	}
 
 	if (!is_valid_group_name(group_newname)) {
-		fprintf(stderr,
-			_("%s: invalid group name '%s'\n"),
-			Prog, group_newname);
+		fprintf(stderr, _("%s: group: %s\n"), Prog, strerrno());
 		exit(E_BAD_ARG);
 	}
 

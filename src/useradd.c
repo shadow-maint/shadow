@@ -1492,9 +1492,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 
 		user_name = argv[optind];
 		if (!is_valid_user_name(user_name)) {
-			fprintf(stderr,
-			        _("%s: invalid user name '%s'\n"),
-			        Prog, user_name);
+			fprintf(stderr, _("%s: user: %s\n"), Prog, strerrno());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER,
 			              "add-user",

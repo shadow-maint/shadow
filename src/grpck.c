@@ -11,11 +11,11 @@
 #include "config.h"
 
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <getopt.h>
 
 #include "chkname.h"
 #include "commonio.h"
@@ -29,6 +29,7 @@
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 
 #ifdef SHADOWGRP
 #include "sgroupio.h"
@@ -583,7 +584,7 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		 */
 		if (!is_valid_group_name (grp->gr_name)) {
 			*errors = true;
-			printf (_("invalid group name '%s'\n"), grp->gr_name);
+			printf(_("group: %s\n"), strerrno());
 		}
 
 		/*

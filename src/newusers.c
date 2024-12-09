@@ -299,9 +299,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 
 	/* Check if this is a valid group name */
 	if (!is_valid_group_name (grent.gr_name)) {
-		fprintf (stderr,
-		         _("%s: invalid group name '%s'\n"),
-		         Prog, grent.gr_name);
+		fprintf(stderr, _("%s: group: %s\n"), Prog, strerrno());
 		free (grent.gr_name);
 		return -1;
 	}
@@ -395,7 +393,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	struct passwd pwent;
 
 	if (!is_valid_user_name(name)) {
-		fprintf(stderr, _("%s: invalid user name '%s'\n"), Prog, name);
+		fprintf(stderr, _("%s: user: %s\n"), Prog, strerrno());
 		return -1;
 	}
 

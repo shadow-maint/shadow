@@ -268,9 +268,7 @@ static void
 check_new_name(void)
 {
 	if (!is_valid_group_name(group_name)) {
-		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
-			Prog, group_name);
-
+		fprintf(stderr, _("%s: group: %s\n"), Prog, strerrno());
 		fail_exit (E_BAD_ARG);
 	}
 
