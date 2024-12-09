@@ -14,6 +14,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 
 #include "agetpass.h"
@@ -478,9 +479,8 @@ int main (int argc, char **argv)
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
+				fprintf(stderr, _("%s: group: %s\n"),
+					Prog, strerror(errno));
 				goto failure;
 			}
 			group = argv[0];
@@ -515,9 +515,8 @@ int main (int argc, char **argv)
 			goto failure;
 		} else if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
+				fprintf(stderr, _("%s: group: %s\n"),
+					Prog, strerror(errno));
 				goto failure;
 			}
 			group = argv[0];

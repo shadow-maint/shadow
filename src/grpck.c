@@ -10,11 +10,13 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <getopt.h>
+#include <string.h>
 
 #include "chkname.h"
 #include "commonio.h"
@@ -563,7 +565,7 @@ static void check_grp_file (bool *errors, bool *changed)
 		 */
 		if (!is_valid_group_name (grp->gr_name)) {
 			*errors = true;
-			printf (_("invalid group name '%s'\n"), grp->gr_name);
+			printf(_("group: %s\n"), strerror(errno));
 		}
 
 		/*
