@@ -208,7 +208,6 @@ static void update_faillog (void);
 static void move_mailbox (void);
 #endif
 
-extern int allow_bad_names;
 
 /*
  * get_groups - convert a list of group names to an array of group IDs
@@ -384,7 +383,6 @@ usage (int status)
 	(void) fputs (_("  -a, --append                  append the user to the supplemental GROUPS\n"
 	                "                                mentioned by the -G option without removing\n"
 	                "                                the user from other groups\n"), usageout);
-	(void) fputs (_("  -b, --badname                 allow bad names\n"), usageout);
 	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
 	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
@@ -1005,8 +1003,6 @@ process_flags(int argc, char **argv)
 		int c;
 		static struct option long_options[] = {
 			{"append",       no_argument,       NULL, 'a'},
-			{"badname",      no_argument,       NULL, 'b'},
-			{"badnames",     no_argument,       NULL, 'b'},
 			{"comment",      required_argument, NULL, 'c'},
 			{"home",         required_argument, NULL, 'd'},
 			{"expiredate",   required_argument, NULL, 'e'},
@@ -1049,9 +1045,6 @@ process_flags(int argc, char **argv)
 			switch (c) {
 			case 'a':
 				aflg = true;
-				break;
-			case 'b':
-				allow_bad_names = true;
 				break;
 			case 'c':
 				if (!VALID (optarg)) {
@@ -1127,15 +1120,9 @@ process_flags(int argc, char **argv)
 				/*@notreached@*/break;
 			case 'l':
 				if (!is_valid_user_name(optarg)) {
-					if (errno == EILSEQ) {
-						fprintf(stderr,
-						        _("%s: invalid user name '%s': use --badname to ignore\n"),
-						        Prog, optarg);
-					} else {
-						fprintf(stderr,
-						        _("%s: invalid user name '%s'\n"),
-						        Prog, optarg);
-					}
+					fprintf(stderr,
+						_("%s: invalid user name '%s'\n"),
+						Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
