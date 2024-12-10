@@ -223,7 +223,7 @@ void sanitize_env (void)
 
 	for (cur = envp; NULL != *cur; cur++) {
 		for (bad = noslash; NULL != *bad; bad++) {
-			if (strncmp (*cur, *bad, strlen (*bad)) != 0) {
+			if (!strprefix(*cur, *bad)) {
 				continue;
 			}
 			if (strchr (*cur, '/') == NULL) {
