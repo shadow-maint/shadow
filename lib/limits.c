@@ -63,7 +63,7 @@ static int setrlimit_value (unsigned int resource,
 	/* The "-" is special, not belonging to a strange negative limit.
 	 * It is infinity, in a controlled way.
 	 */
-	if ('-' == value[0]) {
+	if (strprefix(value, "-")) {
 		limit = RLIM_INFINITY;
 
 	} else {
@@ -371,7 +371,7 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: A better (smarter) checking should be done
 	 */
 	while (fgets (buf, 1024, fil) != NULL) {
-		if (('#' == buf[0]) || ('\n' == buf[0])) {
+		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
 			continue;
 		}
 		MEMZERO(tempbuf);
@@ -402,7 +402,7 @@ static int setup_user_limits (const char *uname)
 				break;
 			} else if (streq(name, "*")) {
 				strcpy (deflimits, tempbuf);
-			} else if (name[0] == '@') {
+			} else if (strprefix(name, "@")) {
 				/* If the user is in the group, the group
 				 * limits apply unless later a line for
 				 * the specific user is found.

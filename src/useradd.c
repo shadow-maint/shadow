@@ -68,6 +68,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -2259,7 +2260,7 @@ static void create_home (void)
 	 */
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		/* Avoid turning a relative path into an absolute path. */
-		if (bhome[0] == '/' || !streq(path, ""))
+		if (strprefix(bhome, "/") || !streq(path, ""))
 			strcat(path, "/");
 
 		strcat(path, cp);
