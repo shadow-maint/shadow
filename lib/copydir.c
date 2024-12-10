@@ -40,6 +40,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -576,7 +577,7 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	 * create a link to the corresponding entry in the dst_orig
 	 * directory.
 	 */
-	if (strncmp(oldlink, src_orig, strlen(src_orig)) == 0) {
+	if (strprefix(oldlink, src_orig)) {
 		char  *dummy;
 
 		xasprintf(&dummy, "%s%s", dst_orig, oldlink + strlen(src_orig));
