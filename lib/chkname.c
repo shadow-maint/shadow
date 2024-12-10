@@ -31,6 +31,7 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
 
 
@@ -71,7 +72,11 @@ is_valid_name(const char *name)
          *
          * Also do not allow fully numeric names or just "." or "..".
          */
-	int numeric;
+
+	if (strisdigit(name)) {
+		errno = EINVAL;
+		return false;
+	}
 
 	if (streq(name, "") ||
 	    streq(name, ".") ||
@@ -86,8 +91,6 @@ is_valid_name(const char *name)
 		return false;
 	}
 
-	numeric = isdigit(*name);
-
 	while (!streq(++name, "")) {
 		if (!((*name >= 'a' && *name <= 'z') ||
 		      (*name >= 'A' && *name <= 'Z') ||
@@ -101,12 +104,6 @@ is_valid_name(const char *name)
 			errno = EINVAL;
 			return false;
 		}
-		numeric &= isdigit(*name);
-	}
-
-	if (numeric) {
-		errno = EINVAL;
-		return false;
 	}
 
 	return true;

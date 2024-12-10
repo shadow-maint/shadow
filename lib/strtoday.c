@@ -14,6 +14,7 @@
 #include "atoi/str2i/str2s.h"
 #include "getdate.h"
 #include "prototypes.h"
+#include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
@@ -35,7 +36,6 @@
 long strtoday (const char *str)
 {
 	time_t t;
-	bool isnum = true;
 	const char *s = str;
 
 	/*
@@ -54,14 +54,9 @@ long strtoday (const char *str)
 		s++;
 	}
 	s = stpspn(s, " ");
-	while (isnum && !streq(s, "")) {
-		if (!isdigit (*s)) {
-			isnum = false;
-		}
-		s++;
-	}
-	if (isnum) {
+	if (strisdigit(s)) {
 		long retdate;
+
 		if (str2sl(&retdate, str) == -1)
 			return -2;
 		return retdate;
