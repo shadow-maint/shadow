@@ -32,6 +32,7 @@
 #include "attr.h"
 #include "getdate.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 
 
@@ -657,7 +658,7 @@ static int LookupWord (char *buff)
     {
       if (abbrev)
 	{
-	  if (strncmp (buff, tp->name, 3) == 0)
+	  if (strprefix(tp->name, buff))
 	    {
 	      yylval.Number = tp->value;
 	      return tp->type;
