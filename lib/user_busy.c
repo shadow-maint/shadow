@@ -127,7 +127,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 		return 0;
 	}
 	while (fgets (line, sizeof (line), sfile) == line) {
-		if (strncmp (line, "Uid:\t", 5) == 0) {
+		if (strprefix(line, "Uid:\t")) {
 			unsigned long ruid, euid, suid;
 
 			assert (uid == (unsigned long) uid);
