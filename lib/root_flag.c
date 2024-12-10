@@ -34,13 +34,11 @@ static void change_root (const char* newroot);
  */
 extern void process_root_flag (const char* short_opt, int argc, char **argv)
 {
-	/*
-	 * Parse the command line options.
-	 */
-	int i;
-	const char *newroot = NULL, *val;
+	const char *newroot = NULL;
 
-	for (i = 0; i < argc; i++) {
+	for (int i = 0; i < argc; i++) {
+		const char  *val;
+
 		val = NULL;
 		if (   streq(argv[i], "--root")
 		    || ((strncmp (argv[i], "--root=", 7) == 0)
