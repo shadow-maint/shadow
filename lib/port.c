@@ -50,7 +50,7 @@ static int portcmp (const char *pattern, const char *port)
 	if (streq(orig, "SU"))
 		return 1;
 
-	return (*pattern == '*') ? 0 : 1;
+	return !strprefix(pattern, "*");
 }
 
 /*
