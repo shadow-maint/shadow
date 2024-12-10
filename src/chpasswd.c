@@ -446,7 +446,6 @@ int main (int argc, char **argv)
 	char buf[BUFSIZ];
 	char *name;
 	char *newpwd;
-	char *cp;
 	const char *salt;
 
 #ifdef USE_PAM
@@ -503,6 +502,8 @@ int main (int argc, char **argv)
 	 * present.
 	 */
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
+		char  *cp;
+
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			if (feof (stdin) == 0) {
