@@ -15,10 +15,11 @@
 #include "atoi/getnum.h"
 #include "atoi/str2i/str2u.h"
 #include "defines.h"
-#include "prototypes.h"
-#include "subordinateio.h"
 #include "idmapping.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/strprefix.h"
+#include "subordinateio.h"
 
 
 static const char Prog[] = "check_subid_range";
@@ -39,7 +40,7 @@ main(int argc, char **argv)
 		exit(1);
 
 	owner = argv[1];
-	check_uids = argv[2][0] == 'u';
+	check_uids = strprefix(argv[2], "u");
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
 	if (str2ul(&count, argv[4]) == -1)

@@ -20,6 +20,7 @@
 #include "port.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -140,7 +141,7 @@ next:
 		errno = saveerr;
 		return NULL;
 	}
-	if ('#' == buf[0])
+	if (strprefix(buf, "#"))
 		goto next;
 
 	stpsep(buf, "\n");
