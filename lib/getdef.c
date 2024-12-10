@@ -33,6 +33,7 @@
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -567,7 +568,7 @@ static void def_load (void)
 		 * Break the line into two fields.
 		 */
 		name = stpspn(buf, " \t");	/* first nonwhite */
-		if (streq(name, "") || *name == '#')
+		if (streq(name, "") || strprefix(name, "#"))
 			continue;	/* comment or empty */
 
 		s = stpsep(name, " \t");  /* next field */

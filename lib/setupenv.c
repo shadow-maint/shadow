@@ -29,6 +29,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
@@ -61,7 +62,7 @@ static void read_env_file (const char *filename)
 		cp = buf;
 		/* ignore whitespace and comments */
 		cp = stpspn(cp, " \t");
-		if (streq(cp, "") || ('#' == *cp)) {
+		if (streq(cp, "") || strprefix(cp, "#")) {
 			continue;
 		}
 		/*
