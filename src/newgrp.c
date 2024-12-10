@@ -30,6 +30,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 
 #include <assert.h>
@@ -249,9 +250,9 @@ static void syslog_sg (const char *name, const char *group)
 	}
 	if (tty == NULL) {
 		tty = "???";
-	} else if (strncmp (tty, "/dev/", 5) == 0) {
-		tty += 5;
 	}
+	tty = strprefix(tty, "/dev/") ?: tty;
+
 	SYSLOG ((LOG_INFO,
 		 "user '%s' (login '%s' on %s) switched to group '%s'",
 		 name, loginname, tty, group));
