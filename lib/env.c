@@ -23,6 +23,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 
 
@@ -175,7 +176,7 @@ void set_env (int argc, char *const *argv)
 			const char *const *p;
 
 			for (p = forbid; NULL != *p; p++) {
-				if (strncmp (*argv, *p, strlen (*p)) == 0) {
+				if (strprefix(*argv, *p)) {
 					break;
 				}
 			}
@@ -210,7 +211,7 @@ void sanitize_env (void)
 
 	for (cur = envp; NULL != *cur; cur++) {
 		for (bad = forbid; NULL != *bad; bad++) {
-			if (strncmp (*cur, *bad, strlen (*bad)) == 0) {
+			if (strprefix(*cur, *bad)) {
 				for (move = cur; NULL != *move; move++) {
 					*move = *(move + 1);
 				}
