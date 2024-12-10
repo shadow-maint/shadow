@@ -16,6 +16,7 @@
 #include "prototypes.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 /*
@@ -50,9 +51,7 @@ long strtoday (const char *str)
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
 	 */
-	if ('-' == *s) {
-		s++;
-	}
+	s = strprefix(s, "-") ?: s;
 	s = stpspn(s, " ");
 	while (isnum && !streq(s, "")) {
 		if (!isdigit (*s)) {
