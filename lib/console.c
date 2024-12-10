@@ -17,6 +17,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strtok/stpsep.h"
 
@@ -103,9 +104,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 
 bool console (const char *tty)
 {
-	if (strncmp (tty, "/dev/", 5) == 0) {
-		tty += 5;
-	}
+	tty = strprefix(tty, "/dev/") ?: tty;
 
 	return is_listed ("CONSOLE", tty, true);
 }

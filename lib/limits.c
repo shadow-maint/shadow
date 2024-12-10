@@ -37,6 +37,7 @@
 #include "atoi/str2i/str2u.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "typetraits.h"
 
@@ -473,9 +474,7 @@ void setup_limits (const struct passwd *info)
 			}
 		}
 		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
-			if (',' == *cp) {
-				cp++;
-			}
+			cp = strprefix(cp, ",") ?: cp;
 
 			if (strncmp (cp, "pri=", 4) == 0) {
 				int  inc;
