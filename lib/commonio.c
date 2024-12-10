@@ -37,6 +37,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -515,7 +516,7 @@ static void add_one_entry (struct commonio_db *db,
 
 static bool name_is_nis (const char *name)
 {
-	return (('+' == name[0]) || ('-' == name[0]));
+	return strprefix(name, "+") || strprefix(name, "-");
 }
 
 

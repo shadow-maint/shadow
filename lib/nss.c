@@ -16,6 +16,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -79,7 +80,7 @@ nss_init(const char *nsswitch_path) {
 	}
 	p = NULL;
 	while (getline(&line, &len, nssfp) != -1) {
-		if (line[0] == '#')
+		if (strprefix(line, "#"))
 			continue;
 		if (strlen(line) < 8)
 			continue;
