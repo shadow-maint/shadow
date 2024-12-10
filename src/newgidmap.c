@@ -169,7 +169,7 @@ int main(int argc, char **argv)
 	 */
 
 	target_str = argv[1];
-	if (strlen(target_str) > 3 && strncmp(target_str, "fd:", 3) == 0) {
+	if (strlen(target_str) > 3 && strprefix(target_str, "fd:")) {
 		/* the user passed in a /proc/pid fd for the process */
 		target_str = &target_str[3];
 		proc_dir_fd = get_pidfd_from_fd(target_str);

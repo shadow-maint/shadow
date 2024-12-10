@@ -30,6 +30,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 static char *passwd_db_file = NULL;
@@ -58,10 +59,10 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 	for (int i = 0; i < argc; i++) {
 		const char  *val;
 
-		val = NULL;
+		val = strprefix(argv[i], "--prefix=");
+
 		if (   streq(argv[i], "--prefix")
-		    || ((strncmp (argv[i], "--prefix=", 9) == 0)
-			&& (val = argv[i] + 9))
+		    || val != NULL
 		    || streq(argv[i], short_opt))
 		{
 			if (NULL != prefix) {

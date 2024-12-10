@@ -61,6 +61,7 @@
 #include "sizeof.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -288,8 +289,6 @@ static const char *resolve_hostname (const char *string)
 
 static bool from_match (char *tok, const char *string)
 {
-	size_t tok_len;
-
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds. Return
 	 * true if the token fully matches the string. If the token is a domain
@@ -306,7 +305,8 @@ static bool from_match (char *tok, const char *string)
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
 	} else if (tok[0] == '.') {	/* domain: match last fields */
-		size_t str_len;
+		size_t  str_len, tok_len;
+
 		str_len = strlen (string);
 		tok_len = strlen (tok);
 		if (   (str_len > tok_len)
@@ -317,8 +317,8 @@ static bool from_match (char *tok, const char *string)
 		if (strchr (string, '.') == NULL) {
 			return true;
 		}
-	} else if (   (!streq(tok, "") && tok[(tok_len = strlen(tok)) - 1] == '.') /* network */
-		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
+	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
+		   && strprefix(resolve_hostname(string), tok)) {
 		return true;
 	}
 	return false;
