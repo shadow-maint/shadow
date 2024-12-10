@@ -769,11 +769,13 @@ int main (int argc, char **argv)
 		}
 
 		while (NULL != *envp) {
-			if (strncmp (*envp, "PATH=", 5) == 0 ||
-			    strncmp (*envp, "HOME=", 5) == 0 ||
-			    strncmp (*envp, "SHELL=", 6) == 0 ||
-			    strncmp (*envp, "TERM=", 5) == 0)
+			if (strprefix(*envp, "PATH=") ||
+			    strprefix(*envp, "HOME=") ||
+			    strprefix(*envp, "SHELL=") ||
+			    strprefix(*envp, "TERM="))
+			{
 				addenv (*envp, NULL);
+			}
 
 			envp++;
 		}
