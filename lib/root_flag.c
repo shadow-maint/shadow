@@ -17,6 +17,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 #include <assert.h>
 
@@ -39,11 +40,12 @@ extern void process_root_flag (const char* short_opt, int argc, char **argv)
 	for (int i = 0; i < argc; i++) {
 		const char  *val;
 
-		val = NULL;
+		val = strprefix(argv[i], "--root=");
+
 		if (   streq(argv[i], "--root")
-		    || ((strncmp (argv[i], "--root=", 7) == 0)
-			&& (val = argv[i] + 7))
-		    || streq(argv[i], short_opt)) {
+		    || val != NULL
+		    || streq(argv[i], short_opt))
+		{
 			if (NULL != newroot) {
 				fprintf (log_get_logfd(),
 				         _("%s: multiple --root options\n"),
