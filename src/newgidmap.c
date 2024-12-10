@@ -13,12 +13,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #include "defines.h"
-#include "prototypes.h"
-#include "subordinateio.h"
 #include "getdef.h"
 #include "idmapping.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/strprefix.h"
+#include "subordinateio.h"
+
 
 /*
  * Global variables
@@ -116,7 +119,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 			strerror(errno));
 		exit(EXIT_FAILURE);
 	}
-	if (!strncmp(policy_buffer, policy, strlen(policy)))
+	if (strprefix(policy_buffer, policy))
 		goto out;
 
 	/* Write the policy. */
