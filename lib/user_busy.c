@@ -29,6 +29,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 #ifdef __linux__
@@ -204,9 +205,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		    || streq(tmp_d_name, "..")) {
 			continue;
 		}
-		if (*tmp_d_name == '.') {
-			tmp_d_name++;
-		}
+		tmp_d_name = strprefix(tmp_d_name, ".") ?: tmp_d_name;
 
 		/* Check if this is a valid PID */
 		if (get_pid(tmp_d_name, &pid) == -1) {
