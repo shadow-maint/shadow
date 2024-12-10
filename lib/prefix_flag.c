@@ -53,13 +53,11 @@ static FILE* fp_grent = NULL;
  */
 extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv)
 {
-	/*
-	 * Parse the command line options.
-	 */
-	int i;
-	const char *prefix = NULL, *val;
+	const char *prefix = NULL;
 
-	for (i = 0; i < argc; i++) {
+	for (int i = 0; i < argc; i++) {
+		const char  *val;
+
 		val = NULL;
 		if (   streq(argv[i], "--prefix")
 		    || ((strncmp (argv[i], "--prefix=", 9) == 0)
