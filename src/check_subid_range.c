@@ -27,7 +27,6 @@ static const char Prog[] = "check_subid_range";
 int
 main(int argc, char **argv)
 {
-	bool           check_uids;
 	char           *owner;
 	uid_t          start;
 	unsigned long  count;
@@ -39,12 +38,11 @@ main(int argc, char **argv)
 		exit(1);
 
 	owner = argv[1];
-	check_uids = argv[2][0] == 'u';
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
 	if (str2ul(&count, argv[4]) == -1)
 		exit(1);
-	if (check_uids) {
+	if (argv[2][0] == 'u') {
 		if (have_sub_uids(owner, start, count))
 			exit(0);
 		exit(1);
