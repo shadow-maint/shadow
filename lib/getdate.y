@@ -25,6 +25,7 @@
 #endif
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -33,6 +34,7 @@
 #include "getdate.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 /* Some old versions of bison generate parsers that use bcopy.
@@ -657,7 +659,7 @@ static int LookupWord (char *buff)
     {
       if (abbrev)
 	{
-	  if (strncmp (buff, tp->name, 3) == 0)
+	  if (strprefix(tp->name, buff))
 	    {
 	      yylval.Number = tp->value;
 	      return tp->type;
@@ -771,7 +773,7 @@ yylex (void)
       if (isalpha (c))
 	{
 	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
-	    if (p < &buff[sizeof buff - 1])
+	    if (p < &buff[sizeof(buff) - 1])
 	      *p++ = c;
           stpcpy(p, "");
 	  yyInput--;
@@ -934,7 +936,7 @@ main(void)
   (void) fflush (stdout);
 
   buff[MAX_BUFF_LEN] = 0;
-  while (fgets (buff, MAX_BUFF_LEN, stdin) && buff[0])
+  while (fgets(buff, MAX_BUFF_LEN, stdin) != NULL && buff[0])
     {
       d = get_date(buff, NULL);
       if (d == -1)

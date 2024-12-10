@@ -102,7 +102,6 @@ libshadow_la_SOURCES = \
 	find_new_uid.c \
 	find_new_sub_gids.c \
 	find_new_sub_uids.c \
-	fputsx.c \
 	fs/readlink/areadlink.c \
 	fs/readlink/areadlink.h \
 	fs/readlink/readlinknul.c \
@@ -194,6 +193,8 @@ libshadow_la_SOURCES = \
 	string/strchr/strrspn.h \
 	string/strcmp/streq.c \
 	string/strcmp/streq.h \
+	string/strcmp/strprefix.c \
+	string/strcmp/strprefix.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
 	string/strcpy/strncat.c \
