@@ -12,6 +12,7 @@
       - build-base
       - byacc
       - cmocka-dev
+      - coreutils
       - expect
       - gettext-dev
       - git
@@ -64,3 +65,9 @@
     - "/usr/local/src/shadow/config.h"
     - "/usr/local/src/shadow/build.log"
     - "/usr/local/src/shadow/tests/unit/test-suite.log"
+
+- name: Copy configuration file for testing
+  ansible.builtin.copy:
+    src: /usr/local/src/shadow/etc/login.defs
+    dest: /etc/login.defs
+    remote_src: yes
