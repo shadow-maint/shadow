@@ -27,19 +27,16 @@
 /*
  * valid_field - insure that a field contains all legal characters
  *
- * The supplied field is scanned for non-printable and other illegal
- * characters.
- *  + -1 is returned if an illegal or control character is present.
- *  +  1 is returned if no illegal or control characters are present,
- *       but the field contains a non-printable character.
- *  +  0 is returned otherwise.
+ * Return:
+ *	-1	Illegal or control characters are present.
+ *	1	Non-ASCII characters are present.
+ *	0	All chatacters are legal and ASCII.
  */
 int
 valid_field_(const char *field, const char *illegal)
 {
-	if (NULL == field) {
+	if (NULL == field)
 		return -1;
-	}
 
 	if (strpbrk(field, illegal))
 		return -1;
@@ -50,7 +47,7 @@ valid_field_(const char *field, const char *illegal)
 	if (streq(field, ""))
 		return 0;
 
-	return 1;
+	return 1;  // !ASCII
 }
 
 /*
