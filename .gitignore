@@ -54,3 +54,8 @@ test-driver
 /shadow-*.tar.*
 /lib/getdate.c
 /libsubid/subid.h
+
+.venv
+__pycache__/
+tests/system/artifacts/
+tests/system/pytest.log
