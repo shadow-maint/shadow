@@ -42,11 +42,8 @@ valid_field_(const char *field, const char *illegal)
 		return -1;
 	}
 
-	/* For each character of field, search if it appears in the list
-	 * of illegal characters. */
-	if (illegal && strpbrk(field, illegal)) {
+	if (strpbrk(field, illegal))
 		return -1;
-	}
 
 	/* Search if there are non-printable or control characters */
 	for (cp = field; !streq(cp, ""); cp++) {
