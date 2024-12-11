@@ -48,12 +48,10 @@ valid_field_(const char *field, const char *illegal)
 	/* Search if there are non-printable or control characters */
 	for (cp = field; !streq(cp, ""); cp++) {
 		unsigned char c = *cp;
+		if (iscntrl(c))
+			return -1;
 		if (!isprint (c)) {
 			err = 1;
-		}
-		if (iscntrl (c)) {
-			err = -1;
-			break;
 		}
 	}
 
