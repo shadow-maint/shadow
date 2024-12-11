@@ -183,6 +183,8 @@ libshadow_la_SOURCES = \
 	sssd.h \
 	string/ctype/strisascii/strisdigit.c \
 	string/ctype/strisascii/strisdigit.h \
+	string/ctype/strisascii/strisprint.c \
+	string/ctype/strisascii/strisprint.h \
 	string/ctype/strtoascii/strtolower.c \
 	string/ctype/strtoascii/strtolower.h \
 	string/memset/memzero.c \
