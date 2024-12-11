@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "prototypes.h"
+#include "string/ctype/strisascii/strisprint.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 #include "string/strspn/stprspn.h"
@@ -36,7 +37,6 @@ int
 valid_field_(const char *field, const char *illegal)
 {
 	const char *cp;
-	int err = 0;
 
 	if (NULL == field) {
 		return -1;
@@ -50,12 +50,14 @@ valid_field_(const char *field, const char *illegal)
 		unsigned char c = *cp;
 		if (iscntrl(c))
 			return -1;
-		if (!isprint (c)) {
-			err = 1;
-		}
 	}
 
-	return err;
+	if (strisprint(field))
+		return 0;
+	if (streq(field, ""))
+		return 0;
+
+	return 1;
 }
 
 /*
