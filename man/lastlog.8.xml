@@ -152,6 +152,16 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-a</option>
+	</term>
+	<listitem>
+	  <para>
+	    Print the lastlog records of the users that have logged in at least once. Excludes records for users with '**Never logged in**'.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
 
     <para>
