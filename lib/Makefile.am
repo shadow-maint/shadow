@@ -179,6 +179,8 @@ libshadow_la_SOURCES = \
 	spawn.c \
 	sssd.c \
 	sssd.h \
+	string/ctype/strchrisascii/strchriscntrl.c \
+	string/ctype/strchrisascii/strchriscntrl.h \
 	string/ctype/strisascii/strisdigit.c \
 	string/ctype/strisascii/strisdigit.h \
 	string/ctype/strisascii/strisprint.c \
