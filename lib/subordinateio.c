@@ -22,6 +22,7 @@
 #include "alloc/realloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/str2i/str2u.h"
+#include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 
@@ -926,22 +927,12 @@ out:
 	return count;
 }
 
-static bool all_digits(const char *str)
-{
-	int i;
-
-	for (i = 0; str[i] != '\0'; i++)
-		if (!isdigit(str[i]))
-			return false;
-	return true;
-}
-
 static int append_uids(uid_t **uids, const char *owner, int n)
 {
 	int    i;
 	uid_t  owner_uid;
 
-	if (all_digits(owner)) {
+	if (strisdigit(owner)) {
 		i = sscanf(owner, "%d", &owner_uid);
 		if (i != 1) {
 			// should not happen
