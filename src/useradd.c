@@ -751,11 +751,7 @@ static int get_groups (char *list, struct option_flags *flags)
 	/*
 	 * Free previous group list before creating a new one.
 	 */
-	int i = 0;
-	while (NULL != user_groups[i]) {
-		free(user_groups[i]);
-		user_groups[i++] = NULL;
-	}
+	free_list(user_groups);
 
 	if (streq(list, "")) {
 		return 0;
