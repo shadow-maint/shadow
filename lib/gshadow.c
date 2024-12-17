@@ -9,8 +9,7 @@
 
 #include <config.h>
 
-/* Newer versions of Linux libc already have shadow support.  */
-#if defined(SHADOWGRP) && !defined(HAVE_SHADOWGRP)	/*{ */
+#if defined(SHADOWGRP) && !defined(HAVE_GSHADOW_H)
 
 #ident "$Id$"
 
@@ -107,7 +106,7 @@ sgetsgent(const char *string)
 	if (NULL != cp || i != FIELDS)
 		return NULL;
 
-	sgroup.sg_name = fields[0];
+	sgroup.sg_namp = fields[0];
 	sgroup.sg_passwd = fields[1];
 
 	free(sgroup.sg_adm);
@@ -193,7 +192,7 @@ sgetsgent(const char *string)
 	setsgent ();
 
 	while ((sgrp = getsgent ()) != NULL) {
-		if (streq(name, sgrp->sg_name)) {
+		if (streq(name, sgrp->sg_namp)) {
 			break;
 		}
 	}
@@ -219,7 +218,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	}
 
 	/* calculate the required buffer size */
-	size = strlen (sgrp->sg_name) + strlen (sgrp->sg_passwd) + 10;
+	size = strlen (sgrp->sg_namp) + strlen (sgrp->sg_passwd) + 10;
 	for (i = 0; (NULL != sgrp->sg_adm) && (NULL != sgrp->sg_adm[i]); i++) {
 		size += strlen (sgrp->sg_adm[i]) + 1;
 	}
@@ -236,7 +235,7 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	/*
 	 * Copy the group name and passwd.
 	 */
-	cp = stpcpy(stpcpy(cp, sgrp->sg_name), ":");
+	cp = stpcpy(stpcpy(cp, sgrp->sg_namp), ":");
 	cp = stpcpy(stpcpy(cp, sgrp->sg_passwd), ":");
 
 	/*
@@ -276,4 +275,4 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 }
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/*} SHADOWGRP */
+#endif  // !SHADOWGRP

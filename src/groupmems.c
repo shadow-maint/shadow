@@ -128,7 +128,7 @@ static void add_user (const char *user,
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_namp = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
 			sgrent.sg_adm = XMALLOC(1, char *);
 			sgrent.sg_adm[0] = NULL;
@@ -154,7 +154,7 @@ static void add_user (const char *user,
 		if (sgr_update (newsg) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_name);
+			         Prog, sgr_dbname (), newsg->sg_namp);
 			fail_exit (13);
 		}
 	}
@@ -203,7 +203,7 @@ static void remove_user (const char *user,
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_namp = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
 			sgrent.sg_adm = XMALLOC(1, char *);
 			sgrent.sg_adm[0] = NULL;
@@ -230,7 +230,7 @@ static void remove_user (const char *user,
 		if (sgr_update (newsg) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_name);
+			         Prog, sgr_dbname (), newsg->sg_namp);
 			fail_exit (13);
 		}
 	}
@@ -269,7 +269,7 @@ static void purge_members (const struct group *grp)
 		if (NULL == sg) {
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
-			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_namp = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = XMALLOC(1, char *);
 			sgrent.sg_mem[0] = NULL;
 			sgrent.sg_adm = XMALLOC(1, char *);
@@ -299,7 +299,7 @@ static void purge_members (const struct group *grp)
 		if (sgr_update (newsg) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, sgr_dbname (), newsg->sg_name);
+			         Prog, sgr_dbname (), newsg->sg_namp);
 			fail_exit (13);
 		}
 	}
