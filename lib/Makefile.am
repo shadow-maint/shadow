@@ -186,12 +186,8 @@ libshadow_la_SOURCES = \
 	string/sprintf/xasprintf.h \
 	string/strchr/strchrcnt.c \
 	string/strchr/strchrcnt.h \
-	string/strchr/stpspn.c \
-	string/strchr/stpspn.h \
 	string/strchr/strnul.c \
 	string/strchr/strnul.h \
-	string/strchr/strrspn.c \
-	string/strchr/strrspn.h \
 	string/strcmp/streq.c \
 	string/strcmp/streq.h \
 	string/strcpy/stpecpy.c \
@@ -210,6 +206,16 @@ libshadow_la_SOURCES = \
 	string/strdup/xstrndup.h \
 	string/strftime.c \
 	string/strftime.h \
+	string/strspn/stpspn.c \
+	string/strspn/stpspn.h \
+	string/strspn/stprcspn.c \
+	string/strspn/stprcspn.h \
+	string/strspn/stprspn.c \
+	string/strspn/stprspn.h \
+	string/strspn/strrcspn.c \
+	string/strspn/strrcspn.h \
+	string/strspn/strrspn.c \
+	string/strspn/strrspn.h \
 	string/strtok/stpsep.c \
 	string/strtok/stpsep.h \
 	strtoday.c \

@@ -31,8 +31,8 @@
 
 #include "attr.h"
 #include "getdate.h"
-#include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
 
 
 /* Some old versions of bison generate parsers that use bcopy.
