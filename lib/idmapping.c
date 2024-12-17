@@ -12,6 +12,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <strings.h>
+
+#include <a2i/a2i/a2u.h>
+
 #if HAVE_SYS_CAPABILITY_H
 #include <sys/prctl.h>
 #include <sys/capability.h>
