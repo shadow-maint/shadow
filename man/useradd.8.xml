@@ -6,25 +6,26 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY CREATE_HOME           SYSTEM "login.defs.d/CREATE_HOME.xml">
-<!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
-<!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
-<!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
-<!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
-<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
-<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
-<!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
-<!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
-<!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
-<!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
-<!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
-<!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
-<!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
-<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
-<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
-<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!ENTITY CREATE_HOME               SYSTEM "login.defs.d/CREATE_HOME.xml">
+<!ENTITY GID_MAX                   SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY HOME_MODE                 SYSTEM "login.defs.d/HOME_MODE.xml">
+<!ENTITY LASTLOG_UID_MAX           SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
+<!ENTITY MAIL_DIR                  SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY MAX_MEMBERS_PER_GROUP     SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY PASS_MAX_DAYS             SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
+<!ENTITY PASS_MIN_DAYS             SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
+<!ENTITY PASS_WARN_AGE             SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY SUB_GID_COUNT             SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
+<!ENTITY SUB_UID_COUNT             SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
+<!ENTITY SYS_GID_MAX               SYSTEM "login.defs.d/SYS_GID_MAX.xml">
+<!ENTITY SYS_UID_MAX               SYSTEM "login.defs.d/SYS_UID_MAX.xml">
+<!ENTITY SYS_USER_AUTO_GROUPS_ENAB SYSTEM "login.defs.d/SYS_USER_AUTO_GROUPS_ENAB.xml">
+<!ENTITY UID_MAX                   SYSTEM "login.defs.d/UID_MAX.xml">
+<!ENTITY UMASK                     SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY TCB_AUTH_GROUP            SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
+<!ENTITY TCB_SYMLINKS              SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
+<!ENTITY USE_TCB                   SYSTEM "login.defs.d/USE_TCB.xml">
+<!ENTITY USERGROUPS_ENAB           SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='useradd.8'>
@@ -489,6 +490,14 @@
 	    specify the <option>-F</option> options if you want to update
 	    the files for a system account to be created.
 	  </para>
+	  <para>
+	    Note that the option <option>GROUPS</option>
+	    in the file <filename>/etc/default/useradd</filename>
+	    will not add system users to those supplementary groups by default.
+	    The default behavior is defined by
+	    the <option>SYS_USER_AUTO_GROUPS_ENAB</option>
+	    variable in <filename>/etc/login.defs</filename>.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -752,6 +761,7 @@
       &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
+      &SYS_USER_AUTO_GROUPS_ENAB;
       &TCB_AUTH_GROUP;
       &TCB_SYMLINKS;
       &UID_MAX; <!-- documents also UID_MIN -->
