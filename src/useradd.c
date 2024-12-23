@@ -1498,7 +1498,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 
 		user_name = argv[optind];
 		if (!is_valid_user_name(user_name)) {
-			if (errno == EINVAL) {
+			if (errno == EILSEQ) {
 				fprintf(stderr,
 				        _("%s: invalid user name '%s': use --badname to ignore\n"),
 				        Prog, user_name);
