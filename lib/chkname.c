@@ -86,10 +86,7 @@ is_valid_name(const char *name)
 	 * sake of Samba 3.x "add machine script"
 	 */
 
-	if (!(isalnum(*name) ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
+	if (!ispfchar_c(*name)) {
 		errno = EILSEQ;
 		return false;
 	}
@@ -98,12 +95,7 @@ is_valid_name(const char *name)
 		if (streq(name, "$"))  // Samba
 			return true;
 
-		if (!(isalnum(*name) ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-'
-		     ))
-		{
+		if (!ispfchar_c(*name)) {
 			errno = EILSEQ;
 			return false;
 		}
