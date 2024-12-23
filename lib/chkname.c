@@ -69,9 +69,7 @@ is_valid_name(const char *name)
 	 * sake of Samba 3.x "add machine script"
 	 */
 
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
+	if (!(isalnum(*name) ||
 	      *name == '_' ||
 	      *name == '.'))
 	{
@@ -80,9 +78,7 @@ is_valid_name(const char *name)
 	}
 
 	while (!streq(++name, "")) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= 'A' && *name <= 'Z') ||
-		      (*name >= '0' && *name <= '9') ||
+		if (!(isalnum(*name) ||
 		      *name == '_' ||
 		      *name == '.' ||
 		      *name == '-' ||
