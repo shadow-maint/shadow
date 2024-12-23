@@ -1130,7 +1130,7 @@ process_flags(int argc, char **argv)
 				/*@notreached@*/break;
 			case 'l':
 				if (!is_valid_user_name(optarg)) {
-					if (errno == EINVAL) {
+					if (errno == EILSEQ) {
 						fprintf(stderr,
 						        _("%s: invalid user name '%s': use --badname to ignore\n"),
 						        Prog, optarg);
