@@ -84,11 +84,13 @@ is_valid_name(const char *name)
 	}
 
 	while (!streq(++name, "")) {
+		if (streq(name, "$"))  // Samba
+			return true;
+
 		if (!(isalnum_c(*name) ||
 		      *name == '_' ||
 		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
+		      *name == '-'
 		     ))
 		{
 			errno = EILSEQ;
