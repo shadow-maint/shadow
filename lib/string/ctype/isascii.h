@@ -28,6 +28,7 @@
 #define CTYPE_PRINT_C   CTYPE_GRAPH_C " "
 #define CTYPE_XDIGIT_C  CTYPE_DIGIT_C "abcdefABCDEF"
 #define CTYPE_ASCII_C   CTYPE_PRINT_C CTYPE_CNTRL_C /*NUL*/
+#define CTYPE_PFCHAR_C  CTYPE_ALNUM_C "._-"  // portable filename character set
 
 
 // isascii_c - is [:ascii:] C-locale
@@ -43,6 +44,7 @@
 #define isgraph_c(c)   (!streq(strchrnul(CTYPE_GRAPH_C, c), ""))
 #define isprint_c(c)   (!streq(strchrnul(CTYPE_PRINT_C, c), ""))
 #define isxdigit_c(c)  (!streq(strchrnul(CTYPE_XDIGIT_C, c), ""))
+#define ispfchar_c(c)  (!streq(strchrnul(CTYPE_PFCHAR_C, c), ""))
 
 
 #endif  // include guard
