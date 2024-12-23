@@ -67,6 +67,8 @@ libshadow_la_SOURCES = \
 	console.c \
 	copydir.c \
 	csrand.c \
+	ctype/ispfchar.c \
+	ctype/ispfchar.h \
 	defines.h \
 	encrypt.c \
 	env.c \
