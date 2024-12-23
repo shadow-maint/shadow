@@ -34,6 +34,7 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "ctype/ispfchar.h"
 #include "string/ctype/strchrisascii/strchriscntrl.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
@@ -84,10 +85,7 @@ is_valid_name(const char *name)
          * sake of Samba 3.x "add machine script"
          */
 
-	if (!(isalnum(*name) ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
+	if (!ispfchar(*name)) {
 		errno = EILSEQ;
 		return false;
 	}
@@ -96,12 +94,7 @@ is_valid_name(const char *name)
 		if (streq(name, "$"))  // Samba
 			return true;
 
-		if (!(isalnum(*name) ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-'
-		     ))
-		{
+		if (!ispfchar(*name)) {
 			errno = EILSEQ;
 			return false;
 		}
