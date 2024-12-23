@@ -475,7 +475,7 @@ static void check_pw_file (int *errors, bool *changed)
 		 */
 
 		if (!is_valid_user_name(pwd->pw_name)) {
-			if (errno == EINVAL) {
+			if (errno == EILSEQ) {
 				printf(_("invalid user name '%s': use --badname to ignore\n"),
 				       pwd->pw_name);
 			} else {
