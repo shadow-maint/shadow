@@ -13,7 +13,8 @@
  *   true  - OK
  *   false - bad name
  * errors:
- *   EINVAL	Invalid name characters or sequences
+ *   EINVAL	Invalid name
+ *   EILSEQ	Invalid name character sequence (acceptable with --badname)
  *   EOVERFLOW	Name longer than maximum size
  */
 
@@ -33,7 +34,10 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "string/ctype/strchrisascii/strchriscntrl.h"
+#include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 int allow_bad_names = false;
@@ -56,6 +60,18 @@ login_name_max_size(void)
 static bool
 is_valid_name(const char *name)
 {
+	if (streq(name, "")
+	 || streq(name, ".")
+	 || streq(name, "..")
+	 || strpbrk(name, ",: ")
+	 || strprefix(name, "-")
+	 || strchriscntrl(name)
+	 || strisdigit(name))
+	{
+		errno = EINVAL;
+		return false;
+	}
+
 	if (allow_bad_names) {
 		return true;
 	}
@@ -66,25 +82,17 @@ is_valid_name(const char *name)
          *
          * as a non-POSIX, extension, allow "$" as the last char for
          * sake of Samba 3.x "add machine script"
-         *
-         * Also do not allow fully numeric names or just "." or "..".
          */
-	int numeric;
 
-	if (streq(name, "") ||
-	    streq(name, ".") ||
-	    streq(name, "..") ||
-	    !((*name >= 'a' && *name <= 'z') ||
+	if (!((*name >= 'a' && *name <= 'z') ||
 	      (*name >= 'A' && *name <= 'Z') ||
 	      (*name >= '0' && *name <= '9') ||
 	      *name == '_' ||
 	      *name == '.'))
 	{
-		errno = EINVAL;
+		errno = EILSEQ;
 		return false;
 	}
-
-	numeric = isdigit(*name);
 
 	while (!streq(++name, "")) {
 		if (!((*name >= 'a' && *name <= 'z') ||
@@ -96,15 +104,9 @@ is_valid_name(const char *name)
 		      streq(name, "$")
 		     ))
 		{
-			errno = EINVAL;
+			errno = EILSEQ;
 			return false;
 		}
-		numeric &= isdigit(*name);
-	}
-
-	if (numeric) {
-		errno = EINVAL;
-		return false;
 	}
 
 	return true;
