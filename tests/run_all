@@ -772,6 +772,9 @@ run_test ./usertools/useradd/65_useradd_locked_group/useradd.test
 run_test ./usertools/useradd/66_useradd_locked_shadow/useradd.test
 run_test ./usertools/useradd/67_useradd_locked_gshadow/useradd.test
 run_test ./usertools/useradd/68_useradd-s_empty/useradd.test
+run_test ./usertools/useradd/69_useradd_default_GROUPS_name/useradd.test
+run_test ./usertools/useradd/70_useradd-r_SYS_USER_AUTO_GROUPS_ENAB_default/useradd.test
+run_test ./usertools/useradd/71_useradd-r_SYS_USER_AUTO_GROUPS_ENAB_yes/useradd.test
 run_test ./usertools/userdel/01_userdel_usage/userdel.test
 run_test ./usertools/userdel/02_userdel_usage_invalid_option/userdel.test
 run_test ./usertools/userdel/03_userdel_usage_no_users/userdel.test

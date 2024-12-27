@@ -191,6 +191,7 @@ login_defs_v = \
 	SUB_UID_COUNT.xml \
 	SYS_GID_MAX.xml \
 	SYS_UID_MAX.xml \
+	SYS_USER_AUTO_GROUPS_ENAB.xml \
 	YESCRYPT_COST_FACTOR.xml
 
 EXTRA_DIST = \
