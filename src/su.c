@@ -1212,6 +1212,7 @@ int main (int argc, char **argv)
 		}
 
 		xasprintf(&arg0, "-%s", cp);
+		cp = arg0;
 	} else {
 		cp = Basename (shellstr);
 	}
