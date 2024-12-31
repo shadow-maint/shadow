@@ -111,7 +111,7 @@ static const char *def_log_init = "yes";
 static long def_inactive = -1;
 static const char *def_expire = "";
 
-#define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
+#define VALID(s)  (!strpbrk(s, ":\n"))
 
 static const char *user_name = "";
 static const char *user_pass = "!";
