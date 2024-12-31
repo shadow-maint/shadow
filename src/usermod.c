@@ -94,7 +94,7 @@
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
 #endif				/* ENABLE_SUBIDS */
 
-#define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
+#define VALID(s)  (!strpbrk(s, ":\n"))
 
 /*
  * Global variables
