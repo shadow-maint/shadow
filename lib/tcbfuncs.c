@@ -435,8 +435,11 @@ shadowtcb_status shadowtcb_move (/*@NULL@*/const char *user_newname, uid_t user_
 	if (-1 == user_newid) {
 		return SHADOWTCB_SUCCESS;
 	}
-	if (   (asprintf (&tcbdir, TCB_DIR "/%s", user_newname) == -1)
-	    || (asprintf (&shadow, TCB_FMT, user_newname) == -1)) {
+	if (asprintf(&tcbdir, TCB_DIR "/%s", user_newname) == -1) {
+		OUT_OF_MEMORY;
+		return SHADOWTCB_FAILURE;
+	}
+	if (asprintf(&shadow, TCB_FMT, user_newname) == -1) {
 		OUT_OF_MEMORY;
 		return SHADOWTCB_FAILURE;
 	}
@@ -540,8 +543,11 @@ shadowtcb_status shadowtcb_create (const char *name, uid_t uid)
 		}
 	}
 
-	if (   (asprintf (&dir, TCB_DIR "/%s", name) == -1)
-	    || (asprintf (&shadow, TCB_FMT, name) == -1)) {
+	if (asprintf(&dir, TCB_DIR "/%s", name) == -1) {
+		OUT_OF_MEMORY;
+		return SHADOWTCB_FAILURE;
+	}
+	if (asprintf(&shadow, TCB_FMT, name) == -1) {
 		OUT_OF_MEMORY;
 		return SHADOWTCB_FAILURE;
 	}
