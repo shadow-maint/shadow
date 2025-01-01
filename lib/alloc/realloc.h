@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,12 +9,16 @@
 #include "config.h"
 
 #include <stdlib.h>
+#include "x.h"
 
 
 #define REALLOC(p, n, type)                                                   \
 (                                                                             \
 	_Generic(p, type *: (type *) reallocarray(p, (n) ?: 1, sizeof(type))) \
 )
+
+
+#define XREALLOC(p, n, type)  X(REALLOC(p, n, type))
 
 
 #endif  // include guard
