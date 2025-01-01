@@ -17,7 +17,8 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
+#include "alloc/realloc.h"
 #include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
@@ -34,7 +35,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 #include <assert.h>
 

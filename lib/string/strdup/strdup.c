@@ -4,4 +4,4 @@
 
 #include "config.h"
 
-#include "alloc/x/xcalloc.h"
+#include "string/strdup/strdup.h"
