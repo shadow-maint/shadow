@@ -43,6 +43,7 @@
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
 #include "sssd.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
@@ -428,8 +429,9 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (stat (file, &st1) != 0) {
 			vipwexit (_("failed to stat edited file"), errno, 1);
 		}
-		if (asprintf(&to_rename, "%s+", file) == -1)
-			vipwexit (_("asprintf(3) failed"), errno, 1);
+		to_rename = aprintf("%s+", file);
+		if (to_rename == NULL)
+			vipwexit (_("aprintf() failed"), errno, 1);
 
 		if (create_backup_file (f, to_rename, &st1) != 0) {
 			free(to_rename);
