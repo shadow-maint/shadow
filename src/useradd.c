@@ -66,6 +66,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/strcaseeq.h"
@@ -330,7 +331,8 @@ get_defaults(void)
 	const char  *ccp;
 
 	if (prefix[0]) {
-		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
+		default_file = aprintf("%s/%s", prefix, USER_DEFAULTS_FILE);
+		if (default_file == NULL)
 			return;
 	}
 
@@ -531,16 +533,16 @@ set_defaults(void)
 	FILE  *ofp;
 
 
-	if (asprintf(&new_file, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE) == -1)
-	{
+	new_file = aprintf("%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
+	if (new_file == NULL) {
 		fprintf(stderr, _("%s: cannot create new defaults file: %s\n"),
 		        Prog, strerror(errno));
 		return -1;
         }
 
 	if (prefix[0]) {
-		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
-		{
+		default_file = aprintf("%s/%s", prefix, USER_DEFAULTS_FILE);
+		if (default_file == NULL) {
 			fprintf(stderr,
 			        _("%s: cannot create new defaults file: %s\n"),
 			        Prog, strerror(errno));

@@ -51,6 +51,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -856,7 +857,8 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 0;
 	}
 
-	if (asprintf(&buf, TCB_DIR "/%s", user_name) == -1) {
+	buf = aprintf(TCB_DIR "/%s", user_name);
+	if (buf == NULL) {
 		fprintf(stderr,
 		        _("%s: Can't allocate memory, tcb entry for %s not removed.\n"),
 		        Prog, user_name);
