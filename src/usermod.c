@@ -34,7 +34,6 @@
 #include <time.h>
 
 #include "alloc/malloc.h"
-#include "alloc/x/xmalloc.h"
 #include "atoi/a2i/a2i.h"
 #include "atoi/a2i/a2s.h"
 #include "atoi/getnum.h"
@@ -65,10 +64,10 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 

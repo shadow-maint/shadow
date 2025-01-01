@@ -38,7 +38,7 @@
 #include "string/sprintf/stpeprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 struct option_flags {
 	bool chroot;
