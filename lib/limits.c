@@ -38,6 +38,7 @@
 #include "string/memset/memzero.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "typetraits.h"
 
 
@@ -62,7 +63,7 @@ static int setrlimit_value (unsigned int resource,
 	/* The "-" is special, not belonging to a strange negative limit.
 	 * It is infinity, in a controlled way.
 	 */
-	if ('-' == value[0]) {
+	if (strprefix(value, "-")) {
 		limit = RLIM_INFINITY;
 
 	} else {
@@ -370,7 +371,7 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: A better (smarter) checking should be done
 	 */
 	while (fgets (buf, 1024, fil) != NULL) {
-		if (('#' == buf[0]) || ('\n' == buf[0])) {
+		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
 			continue;
 		}
 		MEMZERO(tempbuf);
@@ -401,7 +402,7 @@ static int setup_user_limits (const char *uname)
 				break;
 			} else if (streq(name, "*")) {
 				strcpy (deflimits, tempbuf);
-			} else if (name[0] == '@') {
+			} else if (strprefix(name, "@")) {
 				/* If the user is in the group, the group
 				 * limits apply unless later a line for
 				 * the specific user is found.
@@ -473,14 +474,15 @@ void setup_limits (const struct passwd *info)
 			}
 		}
 		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
-			if (',' == *cp) {
-				cp++;
-			}
+			char  *val;
 
-			if (strncmp (cp, "pri=", 4) == 0) {
+			cp = strprefix(cp, ",") ?: cp;
+
+			val = strprefix(cp, "pri=");
+			if (val != NULL) {
 				int  inc;
 
-				if (a2si(&inc, cp + 4, NULL, 0, -20, 20) == 0) {
+				if (a2si(&inc, val, NULL, 0, -20, 20) == 0) {
 					errno = 0;
 					if (   (nice (inc) != -1)
 					    || (0 != errno)) {
@@ -495,10 +497,12 @@ void setup_limits (const struct passwd *info)
 
 				continue;
 			}
-			if (strncmp (cp, "ulimit=", 7) == 0) {
+
+			val = strprefix(cp, "ulimit=");
+			if (val != NULL) {
 				int  blocks;
 
-				if (   (str2si(&blocks, cp + 7) == -1)
+				if (   (str2si(&blocks, val) == -1)
 				    || (set_filesize_limit (blocks) != 0)) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set the ulimit for user %s",
@@ -506,10 +510,12 @@ void setup_limits (const struct passwd *info)
 				}
 				continue;
 			}
-			if (strncmp (cp, "umask=", 6) == 0) {
+
+			val = strprefix(cp, "umask=");
+			if (val != NULL) {
 				mode_t  mask;
 
-				if (str2i(mode_t, &mask, cp + 6) == -1) {
+				if (str2i(mode_t, &mask, val) == -1) {
 					SYSLOG ((LOG_WARN,
 					         "Can't set umask value for user %s",
 					         info->pw_name));
