@@ -26,7 +26,7 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
@@ -39,7 +39,7 @@ addenv_path(const char *varname, const char *dirname, const char *filename)
 {
 	char  *buf;
 
-	xasprintf(&buf, "%s/%s", dirname, filename);
+	buf = xaprintf("%s/%s", dirname, filename);
 	addenv(varname, buf);
 	free(buf);
 }
