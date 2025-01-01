@@ -178,6 +178,8 @@ libshadow_la_SOURCES = \
 	sssd.h \
 	string/memset/memzero.c \
 	string/memset/memzero.h \
+	string/sprintf/aprintf.c \
+	string/sprintf/aprintf.h \
 	string/sprintf/snprintf.c \
 	string/sprintf/snprintf.h \
 	string/sprintf/stpeprintf.c \
