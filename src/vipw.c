@@ -45,7 +45,7 @@
 #include "sssd.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 
 
@@ -308,7 +308,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 				continue;
 		}
 
-		xasprintf(&buf, "%s %s", editor, fileedit);
+		buf = xaprintf("%s %s", editor, fileedit);
 
 		status = system (buf);
 		if (-1 == status) {
