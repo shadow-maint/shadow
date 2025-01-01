@@ -456,13 +456,9 @@ out:
 void setdef_config_file (const char* file)
 {
 #ifdef USE_ECONF
-	char  *cp;
-
-	cp = xaprintf("%s/%s", file, sysconfdir);
-	sysconfdir = cp;
+	sysconfdir = xaprintf("%s/%s", file, sysconfdir);
 #ifdef VENDORDIR
-	cp = xaprintf("%s/%s", file, vendordir);
-	vendordir = cp;
+	vendordir = xaprintf("%s/%s", file, vendordir);
 #endif
 #else
 	def_fname = file;

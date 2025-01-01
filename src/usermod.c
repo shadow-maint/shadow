@@ -428,15 +428,12 @@ usage (int status)
 static char *new_pw_passwd (char *pw_pass)
 {
 	if (Lflg && ('!' != pw_pass[0])) {
-		char  *buf;
-
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating-passwd", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
-		buf = xaprintf("!%s", pw_pass);
-		pw_pass = buf;
+		pw_pass = xaprintf("!%s", pw_pass);
 	} else if (Uflg && strprefix(pw_pass, "!")) {
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
