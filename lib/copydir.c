@@ -39,7 +39,7 @@
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 
@@ -234,7 +234,7 @@ static /*@exposed@*/ /*@null@*/struct link_name *check_link (const char *name, c
 	lp->ln_dev = sb->st_dev;
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
-	xasprintf(&lp->ln_name, "%s%s", dst_orig, name + strlen(src_orig));
+	lp->ln_name = xaprintf("%s%s", dst_orig, name + strlen(src_orig));
 	lp->ln_next = links;
 	links = lp;
 
@@ -581,7 +581,7 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
 	if (strprefix(oldlink, src_orig)) {
 		char  *dummy;
 
-		xasprintf(&dummy, "%s%s", dst_orig, oldlink + strlen(src_orig));
+		dummy = xaprintf("%s%s", dst_orig, oldlink + strlen(src_orig));
 		free(oldlink);
 		oldlink = dummy;
 	}

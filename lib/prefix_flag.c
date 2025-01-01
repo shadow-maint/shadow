@@ -28,7 +28,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 
@@ -108,32 +108,32 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			exit (E_BAD_ARG);
 		}
 
-		xasprintf(&passwd_db_file, "%s/%s", prefix, PASSWD_FILE);
+		passwd_db_file = xaprintf("%s/%s", prefix, PASSWD_FILE);
 		pw_setdbname(passwd_db_file);
 
-		xasprintf(&group_db_file, "%s/%s", prefix, GROUP_FILE);
+		group_db_file = xaprintf("%s/%s", prefix, GROUP_FILE);
 		gr_setdbname(group_db_file);
 
 #ifdef  SHADOWGRP
-		xasprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE);
+		sgroup_db_file = xaprintf("%s/%s", prefix, SGROUP_FILE);
 		sgr_setdbname(sgroup_db_file);
 #endif
 
-		xasprintf(&spw_db_file, "%s/%s", prefix, SHADOW_FILE);
+		spw_db_file = xaprintf("%s/%s", prefix, SHADOW_FILE);
 		spw_setdbname(spw_db_file);
 
 #ifdef ENABLE_SUBIDS
-		xasprintf(&suid_db_file, "%s/%s", prefix, SUBUID_FILE);
+		suid_db_file = xaprintf("%s/%s", prefix, SUBUID_FILE);
 		sub_uid_setdbname(suid_db_file);
 
-		xasprintf(&sgid_db_file, "%s/%s", prefix, SUBGID_FILE);
+		sgid_db_file = xaprintf("%s/%s", prefix, SUBGID_FILE);
 		sub_gid_setdbname(sgid_db_file);
 #endif
 
 #ifdef USE_ECONF
 		setdef_config_file(prefix);
 #else
-		xasprintf(&def_conf_file, "%s/%s", prefix, "/etc/login.defs");
+		def_conf_file = xaprintf("%s/%s", prefix, "/etc/login.defs");
 		setdef_config_file(def_conf_file);
 #endif
 	}
