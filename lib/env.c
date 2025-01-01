@@ -22,7 +22,7 @@
 #include "defines.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 
@@ -78,7 +78,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	size_t  i, n;
 
 	if (NULL != value) {
-		xasprintf(&newstring, "%s=%s", string, value);
+		newstring = xaprintf("%s=%s", string, value);
 	} else {
 		newstring = xstrdup (string);
 	}

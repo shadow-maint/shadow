@@ -20,7 +20,7 @@
 #include "getdef.h"
 #include "string/ctype/strtoascii/strtolower.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
@@ -93,7 +93,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 	newmono = strtolower(xstrdup(new));
 	oldmono = strtolower(xstrdup(old));
-	xasprintf(&wrapped, "%s%s", oldmono, oldmono);
+	wrapped = xaprintf("%s%s", oldmono, oldmono);
 
 	if (palindrome (oldmono, newmono)) {
 		msg = _("a palindrome");
