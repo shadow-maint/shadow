@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -10,16 +10,12 @@
 
 #include <string.h>
 
-#include "alloc/x/xmalloc.h"
 #include "sizeof.h"
-#include "string/strcpy/strncat.h"
+#include "exit_if_null.h"
 
 
 // Similar to strndup(3), but ensure that 's' is an array, and exit on ENOMEM.
-#define XSTRNDUP(s)                                                           \
-(                                                                             \
-	STRNCAT(strcpy(XMALLOC(strnlen(s, countof(s)) + 1, char), ""), s)     \
-)
+#define XSTRNDUP(s)  exit_if_null(strndup(s, countof(s)))
 
 
 #endif  // include guard
