@@ -444,14 +444,10 @@ get_defaults(void)
 			if (streq(ccp, ""))
 				ccp = SKEL_DIR;
 
-			if (prefix[0]) {
-				char  *dt;
-
-				dt = xaprintf("%s/%s", prefix, ccp);
-				def_template = dt;
-			} else {
+			if (prefix[0])
+				def_template = xaprintf("%s/%s", prefix, ccp);
+			else
 				def_template = xstrdup(ccp);
-			}
 		}
 
 		/*
@@ -462,10 +458,7 @@ get_defaults(void)
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
-				char  *dut;
-
-				dut = xaprintf("%s/%s", prefix, ccp);
-				def_usrtemplate = dut;
+				def_usrtemplate = xaprintf("%s/%s", prefix, ccp);
 			} else {
 				def_usrtemplate = xstrdup(ccp);
 			}
@@ -1554,16 +1547,10 @@ static void process_flags (int argc, char **argv)
 			exit (E_BAD_ARG);
 		}
 		if (!dflg) {
-			char  *uh;
-
-			uh = xaprintf("%s/%s", def_home, user_name);
-			user_home = uh;
+			user_home = xaprintf("%s/%s", def_home, user_name);
 		}
 		if (prefix[0]) {
-			char  *puh; /* to avoid const warning */
-
-			puh = xaprintf("%s/%s", prefix, user_home);
-			prefix_user_home = puh;
+			prefix_user_home = xaprintf("%s/%s", prefix, user_home);
 		} else {
 			prefix_user_home = user_home;
 		}
