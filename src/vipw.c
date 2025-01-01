@@ -45,7 +45,6 @@
 #include "sssd.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 
 

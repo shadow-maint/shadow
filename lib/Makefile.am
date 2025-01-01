@@ -37,12 +37,6 @@ libshadow_la_SOURCES = \
 	alloc/realloc.h \
 	alloc/reallocf.c \
 	alloc/reallocf.h \
-	alloc/x/xcalloc.c \
-	alloc/x/xcalloc.h \
-	alloc/x/xmalloc.c \
-	alloc/x/xmalloc.h \
-	alloc/x/xrealloc.c \
-	alloc/x/xrealloc.h \
 	atoi/a2i/a2i.c \
 	atoi/a2i/a2i.h \
 	atoi/a2i/a2s.c \
@@ -223,8 +217,6 @@ libshadow_la_SOURCES = \
 	string/sprintf/snprintf.h \
 	string/sprintf/stpeprintf.c \
 	string/sprintf/stpeprintf.h \
-	string/sprintf/xaprintf.c \
-	string/sprintf/xaprintf.h \
 	string/strchr/strchrcnt.c \
 	string/strchr/strchrcnt.h \
 	string/strchr/strchrscnt.c \
@@ -249,12 +241,12 @@ libshadow_la_SOURCES = \
 	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
+	string/strdup/strdup.c \
+	string/strdup/strdup.h \
 	string/strdup/strndupa.c \
 	string/strdup/strndupa.h \
-	string/strdup/xstrdup.c \
-	string/strdup/xstrdup.h \
-	string/strdup/xstrndup.c \
-	string/strdup/xstrndup.h \
+	string/strdup/strndup.c \
+	string/strdup/strndup.h \
 	string/strftime.c \
 	string/strftime.h \
 	string/strspn/stpspn.c \
@@ -275,8 +267,6 @@ libshadow_la_SOURCES = \
 	string/strtok/strsep2arr.h \
 	string/strtok/strsep2ls.c \
 	string/strtok/strsep2ls.h \
-	string/strtok/xastrsep2ls.c \
-	string/strtok/xastrsep2ls.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \

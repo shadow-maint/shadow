@@ -26,7 +26,7 @@
 #include <sys/ioctl.h>
 #include <assert.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "chkname.h"
 #include "defines.h"
@@ -45,7 +45,7 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strftime.h"
 
 

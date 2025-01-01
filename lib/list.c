@@ -12,12 +12,12 @@
 
 #include <assert.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strtok/strsep2ls.h"
 
 

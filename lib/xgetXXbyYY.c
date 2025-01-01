@@ -32,7 +32,7 @@
 #include <errno.h>
 
 #include "alloc/malloc.h"
-#include "alloc/x/xrealloc.h"
+#include "alloc/realloc.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 

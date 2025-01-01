@@ -46,7 +46,7 @@
 #include <fcntl.h>
 #endif				/* !USE_PAM */
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "cast.h"
 #include "defines.h"
@@ -59,12 +59,12 @@
 #include "pwauth.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 
 /*

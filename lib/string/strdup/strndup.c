@@ -4,4 +4,4 @@
 
 #include "config.h"
 
-#include "string/strdup/xstrndup.h"
+#include "string/strdup/strndup.h"

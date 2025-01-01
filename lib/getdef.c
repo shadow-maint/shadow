@@ -30,7 +30,7 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sizeof.h"
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"

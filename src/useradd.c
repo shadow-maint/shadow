@@ -37,7 +37,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "atoi/a2i/a2s.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
@@ -70,11 +70,10 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strtok/stpsep.h"
 
 

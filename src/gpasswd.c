@@ -21,7 +21,7 @@
 #include <sys/types.h>
 
 #include "agetpass.h"
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "defines.h"
 /*@-exitarg@*/
@@ -39,7 +39,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 struct option_flags {
 	bool chroot;

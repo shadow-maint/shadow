@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,8 +12,13 @@
 
 #include "alloc/malloc.h"
 #include "attr.h"
+#include "exit_if_null.h"
 #include "string/strchr/strchrscnt.h"
 #include "string/strtok/strsep2ls.h"
+
+
+// xastrsep2ls - exit-on-error allocate string separate to list-of-strings
+#define xastrsep2ls(s, delim, np)  exit_if_null(astrsep2ls(s, delim, np))
 
 
 ATTR_ACCESS(read_write, 1) ATTR_ACCESS(write_only, 3)
@@ -22,8 +27,7 @@ inline char **astrsep2ls(char *restrict s, const char *restrict delim,
     size_t *restrict np);
 
 
-// allocate string separate to list-of-strings
-// Like strsep2ls(), but allocate the list array.
+// astrsep2ls - allocate string separate to list-of-strings
 inline char **
 astrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
 {

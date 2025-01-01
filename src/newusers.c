@@ -57,7 +57,7 @@
 #include "sssd.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 

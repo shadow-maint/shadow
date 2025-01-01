@@ -27,7 +27,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
@@ -44,7 +44,7 @@
 #include "string/sprintf/stpeprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/stpecpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 
 /*
