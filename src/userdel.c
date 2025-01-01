@@ -52,7 +52,7 @@
 #endif				/* ENABLE_SUBIDS */
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 
@@ -808,9 +808,9 @@ static bool remove_mailbox (void)
 	}
 
 	if (prefix[0]) {
-		xasprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name);
+		mailfile = xaprintf("%s/%s/%s", prefix, maildir, user_name);
 	} else {
-		xasprintf(&mailfile, "%s/%s", maildir, user_name);
+		mailfile = xaprintf("%s/%s", maildir, user_name);
 	}
 
 	if (access (mailfile, F_OK) != 0) {
@@ -1118,7 +1118,7 @@ int main (int argc, char **argv)
 		user_gid = pwd->pw_gid;
 
 		if (prefix[0]) {
-			xasprintf(&user_home, "%s/%s", prefix, pwd->pw_dir);
+			user_home = xaprintf("%s/%s", prefix, pwd->pw_dir);
 		} else {
 			user_home = xstrdup(pwd->pw_dir);
 		}
