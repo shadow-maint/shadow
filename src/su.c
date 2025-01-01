@@ -60,7 +60,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -1211,7 +1211,7 @@ int main (int argc, char **argv)
 			cp = Basename (shellstr);
 		}
 
-		xasprintf(&arg0, "-%s", cp);
+		arg0 = xaprintf("-%s", cp);
 		cp = arg0;
 	} else {
 		cp = Basename (shellstr);
