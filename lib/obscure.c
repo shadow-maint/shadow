@@ -21,9 +21,9 @@
 #include "getdef.h"
 #include "string/ctype/strtoascii/strtolower.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 
 #if WITH_LIBBSD == 0

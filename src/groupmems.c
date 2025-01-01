@@ -19,7 +19,7 @@
 #endif				/* USE_PAM */
 #include <pwd.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "defines.h"
 #include "groupio.h"
 #include "prototypes.h"
@@ -29,7 +29,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 
 /* Exit Status Values */

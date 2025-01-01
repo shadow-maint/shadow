@@ -53,10 +53,9 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 
 
 /*
