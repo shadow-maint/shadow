@@ -68,7 +68,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -433,7 +433,7 @@ get_defaults(void)
 			if (prefix[0]) {
 				char  *dt;
 
-				xasprintf(&dt, "%s/%s", prefix, ccp);
+				dt = xaprintf("%s/%s", prefix, ccp);
 				def_template = dt;
 			} else {
 				def_template = xstrdup(ccp);
@@ -450,7 +450,7 @@ get_defaults(void)
 			if (prefix[0]) {
 				char  *dut;
 
-				xasprintf(&dut, "%s/%s", prefix, ccp);
+				dut = xaprintf("%s/%s", prefix, ccp);
 				def_usrtemplate = dut;
 			} else {
 				def_usrtemplate = xstrdup(ccp);
@@ -1520,13 +1520,13 @@ static void process_flags (int argc, char **argv)
 		if (!dflg) {
 			char  *uh;
 
-			xasprintf(&uh, "%s/%s", def_home, user_name);
+			uh = xaprintf("%s/%s", def_home, user_name);
 			user_home = uh;
 		}
 		if (prefix[0]) {
 			char  *puh; /* to avoid const warning */
 
-			xasprintf(&puh, "%s/%s", prefix, user_home);
+			puh = xaprintf("%s/%s", prefix, user_home);
 			prefix_user_home = puh;
 		} else {
 			prefix_user_home = user_home;
@@ -2330,9 +2330,9 @@ static void create_mail (void)
 		return;
 	}
 	if (prefix[0])
-		xasprintf(&file, "%s/%s/%s", prefix, spool, user_name);
+		file = xaprintf("%s/%s/%s", prefix, spool, user_name);
 	else
-		xasprintf(&file, "%s/%s", spool, user_name);
+		file = xaprintf("%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context(file, S_IFREG) != 0) {
