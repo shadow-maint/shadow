@@ -38,6 +38,7 @@
 #include <attr/libattr.h>
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -322,13 +323,13 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 			continue;
 		}
 
-		if (asprintf(&src_name, "%s/%s", src->full_path, ent->d_name) == -1)
-		{
+		src_name = aprintf("%s/%s", src->full_path, ent->d_name);
+		if (src_name == NULL) {
 			err = -1;
 			continue;
 		}
-		if (asprintf(&dst_name, "%s/%s", dst->full_path, ent->d_name) == -1)
-		{
+		dst_name = aprintf("%s/%s", dst->full_path, ent->d_name);
+		if (dst_name == NULL) {
 			err = -1;
 			goto skip;
 		}
