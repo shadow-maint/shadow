@@ -11,7 +11,7 @@ check_PROGRAMS = \
     test_strncpy \
     test_strtcpy \
     test_typetraits \
-    test_xasprintf
+    test_xaprintf
 
 if ENABLE_LOGIND
 check_PROGRAMS += \
@@ -129,18 +129,19 @@ test_typetraits_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
-test_xasprintf_SOURCES = \
-    ../../lib/string/sprintf/xasprintf.c \
-    test_xasprintf.c \
+test_xaprintf_SOURCES = \
+    ../../lib/string/sprintf/aprintf.c \
+    ../../lib/string/sprintf/xaprintf.c \
+    test_xaprintf.c \
     $(NULL)
-test_xasprintf_CFLAGS = \
+test_xaprintf_CFLAGS = \
     $(AM_CFLAGS) \
     $(NULL)
-test_xasprintf_LDFLAGS = \
+test_xaprintf_LDFLAGS = \
     -Wl,-wrap,vasprintf \
     -Wl,-wrap,exit \
     $(NULL)
-test_xasprintf_LDADD = \
+test_xaprintf_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
