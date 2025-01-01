@@ -63,7 +63,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
@@ -434,7 +434,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "updating-passwd", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
-		xasprintf(&buf, "!%s", pw_pass);
+		buf = xaprintf("!%s", pw_pass);
 		pw_pass = buf;
 	} else if (Uflg && pw_pass[0] == '!') {
 		if (pw_pass[1] == '\0') {
@@ -1302,10 +1302,10 @@ process_flags(int argc, char **argv)
 		user_newgid = user_gid;
 	}
 	if (prefix[0]) {
-		xasprintf(&prefix_user_home, "%s/%s", prefix, user_home);
+		prefix_user_home = xaprintf("%s/%s", prefix, user_home);
 		if (user_newhome) {
-			xasprintf(&prefix_user_newhome, "%s/%s",
-			          prefix, user_newhome);
+			prefix_user_newhome = xaprintf("%s/%s",
+			                               prefix, user_newhome);
 		}
 	} else {
 		prefix_user_home = user_home;
@@ -2079,9 +2079,9 @@ static void move_mailbox (void)
 	 * between stat and chown).  --marekm
 	 */
 	if (prefix[0]) {
-		xasprintf(&mailfile, "%s/%s/%s", prefix, maildir, user_name);
+		mailfile = xaprintf("%s/%s/%s", prefix, maildir, user_name);
 	} else {
-		xasprintf(&mailfile, "%s/%s", maildir, user_name);
+		mailfile = xaprintf("%s/%s", maildir, user_name);
 	}
 
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
@@ -2126,10 +2126,10 @@ static void move_mailbox (void)
 		char  *newmailfile;
 
 		if (prefix[0]) {
-			xasprintf(&newmailfile, "%s/%s/%s",
-			          prefix, maildir, user_newname);
+			newmailfile = xaprintf("%s/%s/%s",
+			                       prefix, maildir, user_newname);
 		} else {
-			xasprintf(&newmailfile, "%s/%s", maildir, user_newname);
+			newmailfile = xaprintf("%s/%s", maildir, user_newname);
 		}
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {
