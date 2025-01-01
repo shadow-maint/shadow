@@ -1205,15 +1205,12 @@ int main (int argc, char **argv)
 	 * case they will be provided to the new user's shell as arguments.
 	 */
 	if (fakelogin) {
-		char  *arg0;
-
 		cp = getdef_str ("SU_NAME");
 		if (NULL == cp) {
 			cp = Basename (shellstr);
 		}
 
-		arg0 = xaprintf("-%s", cp);
-		cp = arg0;
+		cp = xaprintf("-%s", cp);
 	} else {
 		cp = Basename (shellstr);
 	}
