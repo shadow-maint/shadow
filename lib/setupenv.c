@@ -73,7 +73,7 @@ static void read_env_file (const char *filename)
 		val = stpsep(cp, "=");
 		if (val == NULL)
 			continue;
-		if (strpbrk(name, " \t") != NULL)
+		if (strpbrk(name, " \t"))
 			continue;
 #if 0				/* XXX untested, and needs rewrite with fewer goto's :-) */
 /*
