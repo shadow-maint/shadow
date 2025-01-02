@@ -16,6 +16,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "alloc/malloc.h"
@@ -69,34 +70,27 @@ void endsgent (void)
 }
 
 /*@observer@*//*@null@*/struct sgrp *
-sgetsgent(const char *string)
+sgetsgent(const char *s)
 {
-	static char *sgrbuf = NULL;
-	static size_t sgrbuflen = 0;
+	static char  *dup = NULL;
 
 	char *fields[FIELDS];
 	char *cp;
 	int i;
-	size_t len = strlen (string) + 1;
 
-	if (len > sgrbuflen) {
-		char *buf = REALLOC(sgrbuf, len, char);
-		if (NULL == buf)
-			return NULL;
+	free(dup);
+	dup = strdup(s);
+	if (dup == NULL)
+		return NULL;
 
-		sgrbuf = buf;
-		sgrbuflen = len;
-	}
-
-	strcpy (sgrbuf, string);
-	stpsep(sgrbuf, "\n");
+	stpsep(dup, "\n");
 
 	/*
 	 * There should be exactly 4 colon separated fields.  Find
 	 * all 4 of them and save the starting addresses in fields[].
 	 */
 
-	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++)
+	for (cp = dup, i = 0; (i < FIELDS) && (NULL != cp); i++)
 		fields[i] = strsep(&cp, ":");
 
 	/*
