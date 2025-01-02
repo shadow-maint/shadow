@@ -4,4 +4,4 @@
 
 #include <config.h>
 
-#include "string/strchr/stpspn.h"
+#include "string/strspn/stprcspn.h"
