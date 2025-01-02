@@ -65,6 +65,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
 
@@ -436,7 +437,7 @@ static char *new_pw_passwd (char *pw_pass)
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
 		xasprintf(&buf, "!%s", pw_pass);
 		pw_pass = buf;
-	} else if (Uflg && pw_pass[0] == '!') {
+	} else if (Uflg && strprefix(pw_pass, "!")) {
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
 			         _("%s: unlocking the user's password would result in a passwordless account.\n"

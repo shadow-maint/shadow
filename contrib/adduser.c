@@ -119,6 +119,7 @@
 #include <syslog.h>
 
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 #define IMMEDIATE_CHANGE	/* Expire newly created password, must be changed
@@ -389,7 +390,7 @@ main (void)
       fflush (stdout);
       safeget (foo, sizeof (foo));
 
-      done = bad = correct = (foo[0] == 'y' || foo[0] == 'Y');
+      done = bad = correct = (strprefix(foo, "y") || strprefix(foo, "Y"));
 
       if (bad != 1)
 	printf ("\nUser [%s] not added\n", usrname);
