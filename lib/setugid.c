@@ -47,7 +47,7 @@ int setup_groups (const struct passwd *info)
 		closelog ();
 		return -1;
 	}
-#ifdef HAVE_INITGROUPS
+
 	/*
 	 * For systems which support multiple concurrent groups, go get
 	 * the group set from the /etc/group file.
@@ -60,7 +60,7 @@ int setup_groups (const struct passwd *info)
 		closelog ();
 		return -1;
 	}
-#endif
+
 	return 0;
 }
 
@@ -96,7 +96,7 @@ int change_uid (const struct passwd *info)
  *	Returns 0 on success, or -1 on failure.
  */
 
-#if defined (HAVE_INITGROUPS) && ! (defined USE_PAM)
+#if !defined(USE_PAM)
 int setup_uid_gid (const struct passwd *info, bool is_console)
 #else
 int setup_uid_gid (const struct passwd *info)
@@ -106,7 +106,7 @@ int setup_uid_gid (const struct passwd *info)
 		return -1;
 	}
 
-#if defined (HAVE_INITGROUPS) && ! defined (USE_PAM)
+#if !defined(USE_PAM)
 	if (is_console) {
 		const char *cp = getdef_str ("CONSOLE_GROUPS");
 
@@ -114,7 +114,7 @@ int setup_uid_gid (const struct passwd *info)
 			perror ("Warning: add_groups");
 		}
 	}
-#endif				/* HAVE_INITGROUPS && !USE_PAM*/
+#endif  // !USE_PAM
 
 	if (change_uid (info) < 0) {
 		return -1;

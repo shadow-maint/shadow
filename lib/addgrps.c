@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)
+#if !defined(USE_PAM)
 
 #include "prototypes.h"
 #include "defines.h"
@@ -110,7 +110,6 @@ add_groups(const char *list)
 	free (grouplist);
 	return 0;
 }
-#else				/* HAVE_SETGROUPS && !USE_PAM */
+#else				/* !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;
-#endif				/* HAVE_SETGROUPS && !USE_PAM */
-
+#endif				/* !USE_PAM */
