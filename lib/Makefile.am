@@ -212,6 +212,14 @@ libshadow_la_SOURCES = \
 	string/strftime.h \
 	string/strtok/stpsep.c \
 	string/strtok/stpsep.h \
+	string/strtok/astrsep2ls.c \
+	string/strtok/astrsep2ls.h \
+	string/strtok/strsep2arr.c \
+	string/strtok/strsep2arr.h \
+	string/strtok/strsep2ls.c \
+	string/strtok/strsep2ls.h \
+	string/strtok/xastrsep2ls.c \
+	string/strtok/xastrsep2ls.h \
 	strtoday.c \
 	sub.c \
 	subordinateio.h \

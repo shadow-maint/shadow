@@ -24,8 +24,10 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+#include "sizeof.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
 
 
 #define	FIELDS	9
@@ -41,8 +43,7 @@ sgetspent(const char *string)
 	static char spwbuf[PASSWD_ENTRY_MAX_LENGTH];
 	static struct spwd spwd;
 	char *fields[FIELDS];
-	char *cp;
-	int i;
+	size_t  i;
 
 	/*
 	 * Copy string to local buffer.  It has to be tokenized and we
@@ -58,18 +59,10 @@ sgetspent(const char *string)
 	strcpy (spwbuf, string);
 	stpsep(spwbuf, "\n");
 
-	/*
-	 * Tokenize the string into colon separated fields.  Allow up to
-	 * FIELDS different fields.
-	 */
-
-	for (cp = spwbuf, i = 0; cp != NULL && i < FIELDS; i++)
-		fields[i] = strsep(&cp, ":");
-
-	if (i == (FIELDS - 1))
+	i = strsep2arr(spwbuf, ":", NITEMS(fields), fields);
+	if (i == NITEMS(fields) - 1)
 		fields[i++] = "";
-
-	if (cp != NULL || (i != FIELDS && i != OFIELDS))
+	if (i != NITEMS(fields) && i != OFIELDS)
 		return NULL;
 
 	/*
