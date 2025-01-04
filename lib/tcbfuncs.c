@@ -73,25 +73,17 @@ static /*@null@*/ char *shadowtcb_path_rel (const char *name, uid_t uid)
 
 	if (!getdef_bool ("TCB_SYMLINKS") || uid < SHADOWTCB_HASH_BY) {
 		ret = strdup(name);
-		if (ret == NULL) {
-			OUT_OF_MEMORY;
-			return NULL;
-		}
 	} else if (uid < SHADOWTCB_HASH_BY * SHADOWTCB_HASH_BY) {
 		ret = aprintf(":%dK/%s", uid / SHADOWTCB_HASH_BY, name);
-		if (ret == NULL) {
-			OUT_OF_MEMORY;
-			return NULL;
-		}
 	} else {
 		ret = aprintf(":%dM/:%dK/%s",
 		              uid / (SHADOWTCB_HASH_BY * SHADOWTCB_HASH_BY),
 		              (uid % (SHADOWTCB_HASH_BY * SHADOWTCB_HASH_BY)) / SHADOWTCB_HASH_BY,
 		              name);
-		if (ret == NULL) {
-			OUT_OF_MEMORY;
-			return NULL;
-		}
+	}
+	if (ret == NULL) {
+		OUT_OF_MEMORY;
+		return NULL;
 	}
 	return ret;
 }
