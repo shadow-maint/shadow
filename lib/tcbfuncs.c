@@ -72,7 +72,7 @@ static /*@null@*/ char *shadowtcb_path_rel (const char *name, uid_t uid)
 	char *ret;
 
 	if (!getdef_bool ("TCB_SYMLINKS") || uid < SHADOWTCB_HASH_BY) {
-		ret = aprintf("%s", name);
+		ret = strdup(name);
 		if (ret == NULL) {
 			OUT_OF_MEMORY;
 			return NULL;
