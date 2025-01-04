@@ -23,8 +23,8 @@
 
 #include "attr.h"
 #include "prototypes.h"
-
 #include "shadowlog_internal.h"
+#include "string/sprintf/aprintf.h"
 
 
 format_attr(printf, 3, 4)
@@ -32,18 +32,14 @@ static void semanage_error_callback (MAYBE_UNUSED void *varg,
                                      semanage_handle_t *handle,
                                      const char *fmt, ...)
 {
-	int ret;
 	char * message = NULL;
 	va_list ap;
 
-
 	va_start (ap, fmt);
-	ret = vasprintf (&message, fmt, ap);
+	message = vaprintf(fmt, ap);
 	va_end (ap);
-	if (ret < 0) {
-		/* ENOMEM */
+	if (message == NULL)
 		return;
-	}
 
 	switch (semanage_msg_get_level (handle)) {
 	case SEMANAGE_MSG_ERR:
