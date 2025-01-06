@@ -55,7 +55,7 @@ void setsgent (void)
 	if (NULL != shadow) {
 		rewind (shadow);
 	} else {
-		shadow = fopen (SGROUP_FILE, "r");
+		shadow = fopen (SGROUP_FILE, "re");
 	}
 }
 
