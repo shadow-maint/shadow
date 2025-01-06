@@ -41,7 +41,7 @@ void setspent (void)
 	if (NULL != shadow) {
 		rewind (shadow);
 	}else {
-		shadow = fopen (SHADOW_FILE, "r");
+		shadow = fopen (SHADOW_FILE, "re");
 	}
 }
 
