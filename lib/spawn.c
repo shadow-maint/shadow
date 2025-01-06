@@ -35,11 +35,11 @@ run_command(const char *cmd, const char *argv[],
 		(void) execve (cmd, (char * const *) argv,
 		               (char * const *) envp);
 		if (ENOENT == errno) {
-			exit (E_CMD_NOTFOUND);
+			_exit (E_CMD_NOTFOUND);
 		}
 		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
 		         shadow_progname, cmd, strerror (errno));
-		exit (E_CMD_NOEXEC);
+		_exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
 		fprintf (shadow_logfd, "%s: cannot execute %s: %s\n",
 		         shadow_progname, cmd, strerror (errno));
