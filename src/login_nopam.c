@@ -68,9 +68,9 @@
 #define TABLE	"/etc/login.access"
 #endif
 
-static bool list_match (char *list, const char *item, bool (*match_fn) (const char *, const char *));
-static bool user_match (const char *tok, const char *string);
-static bool from_match (const char *tok, const char *string);
+static bool list_match (char *list, const char *item, bool (*match_fn) (char *, const char *));
+static bool user_match (char *tok, const char *string);
+static bool from_match (char *tok, const char *string);
 static bool string_match (const char *tok, const char *string);
 static const char *resolve_hostname (const char *string);
 
@@ -143,7 +143,7 @@ login_access(const char *user, const char *from)
 
 /* list_match - match an item against a list of tokens with exceptions */
 static bool
-list_match(char *list, const char *item, bool (*match_fn)(const char *, const char*))
+list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 {
 	static const char  sep[] = ", \t";
 
@@ -209,7 +209,7 @@ netgroup_match (const char *group, const char *machine, const char *user)
 #endif
 
 /* user_match - match a username against one token */
-static bool user_match (const char *tok, const char *string)
+static bool user_match (char *tok, const char *string)
 {
 	struct group *group;
 
@@ -289,7 +289,7 @@ static const char *resolve_hostname (const char *string)
 
 /* from_match - match a host or tty against a list of tokens */
 
-static bool from_match (const char *tok, const char *string)
+static bool from_match (char *tok, const char *string)
 {
 	size_t tok_len;
 
