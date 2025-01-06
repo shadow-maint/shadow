@@ -32,7 +32,7 @@ static int run_part(char *script_path, const char *name, const char *action)
 		setenv("SUBJECT",name,1);
 		execv(script_path,args);
 		fprintf(shadow_logfd, "execv: %s\n", strerror(errno));
-		exit(1);
+		_exit(1);
 	}
 
 	pid_status = wait(&wait_status);
