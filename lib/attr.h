@@ -5,7 +5,7 @@
 #include "config.h"
 
 
-#if defined(__GNUC__)
+#if (__GNUC__ >= 10)
 # define MAYBE_UNUSED                [[gnu::unused]]
 # define NORETURN                    [[gnu::__noreturn__]]
 # define format_attr(type, fmt, va)  [[gnu::format(type, fmt, va)]]
