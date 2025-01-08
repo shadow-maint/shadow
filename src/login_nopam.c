@@ -171,7 +171,7 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 		while (   (NULL != (tok = strsep(&list, sep)))
 		       && (strcasecmp (tok, "EXCEPT") != 0))
 			/* VOID */ ;
-		if (tok == NULL || !list_match(NULL, item, match_fn)) {
+		if (tok == NULL || !list_match(list, item, match_fn)) {
 			return (match);
 		}
 	}
