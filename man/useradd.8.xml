@@ -242,7 +242,7 @@
 	    set to <replaceable>yes</replaceable> (or
 	    <option>-U/--user-group</option> is specified on the command
 	    line), a group will be created for the user, with the same
-	    name as her loginname. If the variable is set to
+	    name as the loginname. If the variable is set to
 	    <replaceable>no</replaceable> (or
 	    <option>-N/--no-user-group</option> is specified on the
 	    command line), useradd will set the primary group of the new
@@ -690,7 +690,6 @@
 	  </listitem>
 	</varlistentry>
       </variablelist>
-
     </refsect2>
   </refsect1>
 
