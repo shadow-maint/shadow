@@ -11,6 +11,7 @@
 
 #ident "$Id$"
 
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -18,6 +19,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -46,8 +48,8 @@ void ttytype (const char *line)
 			perror (typefile);
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp) == buf) {
-		if (buf[0] == '#') {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
+		if (strprefix(buf, "#")) {
 			continue;
 		}
 

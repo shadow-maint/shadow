@@ -171,12 +171,12 @@ static int new_fields (void)
 	(void) puts ("");
 
 	SNPRINTF(buf, "%ld", mindays);
-	change_field (buf, sizeof buf, _("Minimum Password Age"));
+	change_field(buf, sizeof(buf), _("Minimum Password Age"));
 	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", maxdays);
-	change_field (buf, sizeof buf, _("Maximum Password Age"));
+	change_field(buf, sizeof(buf), _("Maximum Password Age"));
 	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
@@ -185,7 +185,7 @@ static int new_fields (void)
 	else
 		DAY_TO_STR(buf, lstchgdate);
 
-	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
+	change_field(buf, sizeof(buf), _("Last Password Change (YYYY-MM-DD)"));
 
 	if (streq(buf, "-1")) {
 		lstchgdate = -1;
@@ -197,12 +197,12 @@ static int new_fields (void)
 	}
 
 	SNPRINTF(buf, "%ld", warndays);
-	change_field (buf, sizeof buf, _("Password Expiration Warning"));
+	change_field(buf, sizeof(buf), _("Password Expiration Warning"));
 	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
 	SNPRINTF(buf, "%ld", inactdays);
-	change_field (buf, sizeof buf, _("Password Inactive"));
+	change_field(buf, sizeof(buf), _("Password Inactive"));
 	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
@@ -211,7 +211,7 @@ static int new_fields (void)
 	else
 		DAY_TO_STR(buf, expdate);
 
-	change_field (buf, sizeof buf,
+	change_field(buf, sizeof(buf),
 	              _("Account Expiration Date (YYYY-MM-DD)"));
 
 	if (streq(buf, "-1")) {
@@ -644,7 +644,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	if (NULL == sp) {
 		struct passwd pwent = *pw;
 
-		memzero (&spwent, sizeof spwent);
+		memzero(&spwent, sizeof(spwent));
 		spwent.sp_namp = xstrdup (pwent.pw_name);
 		spwent.sp_pwdp = xstrdup (pwent.pw_passwd);
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
