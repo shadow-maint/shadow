@@ -556,7 +556,7 @@ int main (int argc, char **argv)
 				 * group, but there are no entries in
 				 * gshadow, create one.
 				 */
-				newsg.sg_name   = name;
+				newsg.sg_namp   = name;
 				/* newsg.sg_passwd = NULL; will be set later */
 				newsg.sg_adm    = &empty;
 				newsg.sg_mem    = dup_list (gr->gr_mem);
@@ -594,7 +594,7 @@ int main (int argc, char **argv)
 			if (sgr_update (&newsg) == 0) {
 				fprintf (stderr,
 				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
-				         Prog, line, sgr_dbname (), newsg.sg_name);
+				         Prog, line, sgr_dbname (), newsg.sg_namp);
 				errors++;
 				continue;
 			}
