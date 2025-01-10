@@ -20,32 +20,28 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
-#include "alloc/x/xmalloc.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
+#include "string/strtok/xastrsep2ls.h"
 
 
 static /*@null@*/FILE *shadow;
 static struct sgrp  sgroup = {};
-
-#define	FIELDS	4
 
 
 static /*@null@*/char **
 build_list(char *s)
 {
 	char    **l;
-	size_t  i;
+	size_t  n;
 
-	l = XMALLOC(strchrcnt(s, ',') + 2, char *);
+	l = xastrsep2ls(s, ",", &n);
 
-	for (i = 0; s != NULL && !streq(s, ""); i++)
-		l[i] = strsep(&s, ",");
-
-	l[i] = NULL;
+	if (streq(l[n-1], ""))
+		l[n-1] = NULL;
 
 	return l;
 }
@@ -74,9 +70,7 @@ sgetsgent(const char *string)
 	static char *sgrbuf = NULL;
 	static size_t sgrbuflen = 0;
 
-	char *fields[FIELDS];
-	char *cp;
-	int i;
+	char  *fields[4];
 	size_t len = strlen (string) + 1;
 
 	if (len > sgrbuflen) {
@@ -91,20 +85,7 @@ sgetsgent(const char *string)
 	strcpy (sgrbuf, string);
 	stpsep(sgrbuf, "\n");
 
-	/*
-	 * There should be exactly 4 colon separated fields.  Find
-	 * all 4 of them and save the starting addresses in fields[].
-	 */
-
-	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++)
-		fields[i] = strsep(&cp, ":");
-
-	/*
-	 * If there was an extra field somehow, or perhaps not enough,
-	 * the line is invalid.
-	 */
-
-	if (NULL != cp || i != FIELDS)
+	if (STRSEP2ARR(sgrbuf, ":", fields) == -1)
 		return NULL;
 
 	sgroup.sg_name = fields[0];

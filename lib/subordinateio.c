@@ -24,6 +24,7 @@
 #include "atoi/str2i/str2u.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strtok/strsep2arr.h"
 
 
 #define ID_SIZE 31
@@ -84,8 +85,6 @@ subordinate_parse(const char *line)
 {
 	static struct subordinate_range range;
 	static char rangebuf[1024];
-	int i;
-	char *cp;
 	char *fields[SUBID_NFIELDS];
 
 	/*
@@ -96,20 +95,9 @@ subordinate_parse(const char *line)
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 
-	/*
-	 * Save a pointer to the start of each colon separated
-	 * field.  The fields are converted into NUL terminated strings.
-	 */
-
-	for (cp = rangebuf, i = 0; (i < SUBID_NFIELDS) && (NULL != cp); i++)
-		fields[i] = strsep(&cp, ":");
-
-	/*
-	 * There must be exactly SUBID_NFIELDS colon separated fields or
-	 * the entry is invalid.  Also, fields must be non-blank.
-	 */
-	if (i != SUBID_NFIELDS)
+	if (STRSEP2ARR(rangebuff, ":", fields) == -1)
 		return NULL;
+
 	if (streq(fields[0], ""))
 		return NULL;
 	if (streq(fields[1], ""))
