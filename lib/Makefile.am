@@ -155,6 +155,14 @@ libshadow_la_SOURCES = \
 	run_part.h \
 	run_part.c \
 	salt.c \
+	search/cmp/cmp.c \
+	search/cmp/cmp.h \
+	search/l/lfind.c \
+	search/l/lfind.h \
+	search/l/lsearch.c \
+	search/l/lsearch.h \
+	search/sort/qsort.c \
+	search/sort/qsort.h \
 	selinux.c \
 	semanage.c \
 	setugid.c \
@@ -165,6 +173,8 @@ libshadow_la_SOURCES = \
 	sgroupio.c \
 	sgroupio.h\
 	shadow.c \
+	shadow/grp/agetgroups.c \
+	shadow/grp/agetgroups.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
@@ -186,6 +196,8 @@ libshadow_la_SOURCES = \
 	string/sprintf/xasprintf.h \
 	string/strchr/strchrcnt.c \
 	string/strchr/strchrcnt.h \
+	string/strchr/strchrscnt.c \
+	string/strchr/strchrscnt.h \
 	string/strchr/stpspn.c \
 	string/strchr/stpspn.h \
 	string/strchr/strnul.c \

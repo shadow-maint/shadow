@@ -1,11 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2001 - 2006, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2007 - 2009, Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2001-2006, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2007-2009, Nicolas François
+// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -18,12 +17,14 @@
 #include <grp.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
 
-#include "alloc/malloc.h"
 #include "alloc/reallocf.h"
+#include "search/l/lsearch.h"
+#include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
+#include "string/strchr/strchrscnt.h"
 
-#ident "$Id$"
 
 /*
  * Add groups with names from LIST (separated by commas or colons)
@@ -33,48 +34,25 @@
 int
 add_groups(const char *list)
 {
-	GETGROUPS_T *grouplist;
-	size_t i;
-	int ngroups;
-	bool added;
-	char *g, *p;
-	char buf[1024];
-	int ret;
+	char    *g, *p, *dup;
 	FILE *shadow_logfd = log_get_logfd();
+	gid_t   *gids;
+	size_t  n;
 
-	if (strlen (list) >= sizeof (buf)) {
-		errno = EINVAL;
+	gids = agetgroups(&n);
+	if (gids == NULL)
 		return -1;
-	}
-	strcpy (buf, list);
 
-	i = 16;
-	for (;;) {
-		grouplist = MALLOC(i, GETGROUPS_T);
-		if (NULL == grouplist) {
-			return -1;
-		}
-		ngroups = getgroups (i, grouplist);
-		if (   (   (-1 == ngroups)
-		        && (EINVAL != errno))
-		    || (i > (size_t)ngroups)) {
-			/* Unexpected failure of getgroups or successful
-			 * reception of the groups */
-			break;
-		}
-		/* not enough room, so try allocating a larger buffer */
-		free (grouplist);
-		i *= 2;
-	}
-	if (ngroups < 0) {
-		free (grouplist);
+	gids = REALLOCF(gids, n + strchrscnt(list, ",:") + 1, gid_t);
+	if (gids == NULL)
 		return -1;
-	}
 
-	added = false;
-	p = buf;
+	p = dup = strdup(list);
+	if (dup == NULL)
+		goto free_gids;
+
 	while (NULL != (g = strsep(&p, ",:"))) {
-		struct group *grp;
+		struct group  *grp;
 
 		grp = getgrnam(g); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
@@ -82,33 +60,21 @@ add_groups(const char *list)
 			continue;
 		}
 
-		for (i = 0; i < (size_t)ngroups && grouplist[i] != grp->gr_gid; i++);
+		LSEARCH(&grp->gr_gid, gids, &n);
+	}
+	free(dup);
 
-		if (i < (size_t)ngroups) {
-			continue;
-		}
-
-		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fputs (_("Warning: too many groups\n"), shadow_logfd);
-			break;
-		}
-		grouplist = REALLOCF(grouplist, (size_t) ngroups + 1, GETGROUPS_T);
-		if (grouplist == NULL) {
-			return -1;
-		}
-		grouplist[ngroups] = grp->gr_gid;
-		ngroups++;
-		added = true;
+	if (setgroups(n, gids) == -1) {
+		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
+		goto free_gids;
 	}
 
-	if (added) {
-		ret = setgroups (ngroups, grouplist);
-		free (grouplist);
-		return ret;
-	}
-
-	free (grouplist);
+	free(gids);
 	return 0;
+
+free_gids:
+	free(gids);
+	return -1;
 }
 #else				/* HAVE_SETGROUPS && !USE_PAM */
 extern int ISO_C_forbids_an_empty_translation_unit;

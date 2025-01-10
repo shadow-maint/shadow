@@ -23,6 +23,7 @@ check_PROGRAMS += \
 
 test_adds_SOURCES = \
     ../../lib/adds.c \
+    ../../lib/search/cmp/cmp.c \
     test_adds.c \
     $(NULL)
 test_adds_CFLAGS = \
