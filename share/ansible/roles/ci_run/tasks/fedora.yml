@@ -75,6 +75,6 @@
 
 - name: Copy configuration file for testing
   ansible.builtin.copy:
-    src: /usr/local/src/shadow/etc/login.defs
+    src: /usr/local/src/shadow/tests/system/etc/login.defs
     dest: /etc/login.defs
     remote_src: yes
