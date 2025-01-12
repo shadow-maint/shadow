@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -426,7 +427,7 @@ int main (int argc, char **argv)
 	const struct group *gr;
 	struct group newgr;
 	int errors = 0;
-	int line = 0;
+	intmax_t line = 0;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -463,7 +464,7 @@ int main (int argc, char **argv)
 	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %d: line too long\n"),
+			fprintf (stderr, _("%s: line %jd: line too long\n"),
 			         Prog, line);
 			errors++;
 			continue;
@@ -482,7 +483,7 @@ int main (int argc, char **argv)
 		cp = stpsep(name, ":");
 		if (cp == NULL) {
 			fprintf (stderr,
-			         _("%s: line %d: missing new password\n"),
+			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
 			errors++;
 			continue;
@@ -533,7 +534,7 @@ int main (int argc, char **argv)
 		gr = gr_locate (name);
 		if (NULL == gr) {
 			fprintf (stderr,
-			         _("%s: line %d: group '%s' does not exist\n"), Prog,
+			         _("%s: line %jd: group '%s' does not exist\n"), Prog,
 			         line, name);
 			errors++;
 			continue;
@@ -593,7 +594,7 @@ int main (int argc, char **argv)
 		if (NULL != sg) {
 			if (sgr_update (&newsg) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, sgr_dbname (), newsg.sg_name);
 				errors++;
 				continue;
@@ -605,7 +606,7 @@ int main (int argc, char **argv)
 		{
 			if (gr_update (&newgr) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, gr_dbname (), newgr.gr_name);
 				errors++;
 				continue;
