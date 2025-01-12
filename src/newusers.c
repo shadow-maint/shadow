@@ -28,6 +28,7 @@
 #include <getopt.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -1070,7 +1071,7 @@ int main (int argc, char **argv)
 	intmax_t *lines = NULL;
 	char **usernames = NULL;
 	char **passwords = NULL;
-	unsigned int nusers = 0;
+	size_t nusers = 0;
 #endif				/* USE_PAM */
 
 	log_set_progname(Prog);
@@ -1334,9 +1335,8 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
 #ifdef USE_PAM
-	unsigned int i;
 	/* Now update the passwords using PAM */
-	for (i = 0; i < nusers; i++) {
+	for (size_t i = 0; i < nusers; i++) {
 		if (do_pam_passwd_non_interactive ("newusers", usernames[i], passwords[i]) != 0) {
 			fprintf (stderr,
 			         _("%s: (line %jd, user %s) password not changed\n"),
