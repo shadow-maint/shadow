@@ -28,6 +28,7 @@
 #include <getopt.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "alloc/reallocf.h"
@@ -1062,11 +1063,11 @@ int main (int argc, char **argv)
 	char *cp;
 	const struct passwd *pw;
 	struct passwd newpw;
-	int line = 0;
+	intmax_t line = 0;
 	uid_t uid;
 	gid_t gid;
 #ifdef USE_PAM
-	int *lines = NULL;
+	intmax_t *lines = NULL;
 	char **usernames = NULL;
 	char **passwords = NULL;
 	unsigned int nusers = 0;
@@ -1112,7 +1113,7 @@ int main (int argc, char **argv)
 	while (fgets (buf, sizeof buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
-			fprintf (stderr, _("%s: line %d: line too long\n"),
+			fprintf (stderr, _("%s: line %jd: line too long\n"),
 				 Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1128,7 +1129,7 @@ int main (int argc, char **argv)
 				break;
 		}
 		if (nfields != 6) {
-			fprintf (stderr, _("%s: line %d: invalid line\n"),
+			fprintf (stderr, _("%s: line %jd: invalid line\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1147,7 +1148,7 @@ int main (int argc, char **argv)
 
 		if (NULL == pw && get_user_id(fields[2], &uid) != 0) {
 			fprintf (stderr,
-			         _("%s: line %d: can't create user\n"),
+			         _("%s: line %jd: can't create user\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1167,7 +1168,7 @@ int main (int argc, char **argv)
 		if (   (NULL == pw)
 		    && (add_group (fields[0], fields[3], &gid, uid) != 0)) {
 			fprintf (stderr,
-			         _("%s: line %d: can't create group\n"),
+			         _("%s: line %jd: can't create group\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1182,7 +1183,7 @@ int main (int argc, char **argv)
 		if (   (NULL == pw)
 		    && (add_user (fields[0], uid, gid) != 0)) {
 			fprintf (stderr,
-			         _("%s: line %d: can't create user\n"),
+			         _("%s: line %jd: can't create user\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1194,7 +1195,7 @@ int main (int argc, char **argv)
 		pw = pw_locate (fields[0]);
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _("%s: line %d: user '%s' does not exist in %s\n"),
+			         _("%s: line %jd: user '%s' does not exist in %s\n"),
 			         Prog, line, fields[0], pw_dbname ());
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1203,12 +1204,12 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 		/* keep the list of user/password for later update by PAM */
 		nusers++;
-		lines     = REALLOCF(lines, nusers, int);
+		lines     = REALLOCF(lines, nusers, intmax_t);
 		usernames = REALLOCF(usernames, nusers, char *);
 		passwords = REALLOCF(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
 			fprintf (stderr,
-			         _("%s: line %d: %s\n"),
+			         _("%s: line %jd: %s\n"),
 			         Prog, line, strerror(errno));
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1218,7 +1219,7 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 		if (add_passwd (&newpw, fields[1]) != 0) {
 			fprintf (stderr,
-			         _("%s: line %d: can't update password\n"),
+			         _("%s: line %jd: can't update password\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1241,13 +1242,13 @@ int main (int argc, char **argv)
 			                          0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 			if (newpw.pw_dir[0] != '/') {
 				fprintf(stderr,
-					_("%s: line %d: homedir must be an absolute path\n"),
+					_("%s: line %jd: homedir must be an absolute path\n"),
 					Prog, line);
 				fail_exit (EXIT_FAILURE);
 			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
-				         _("%s: line %d: mkdir %s failed: %s\n"),
+				         _("%s: line %jd: mkdir %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
 				if (errno != EEXIST) {
@@ -1257,7 +1258,7 @@ int main (int argc, char **argv)
 			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
 			{
 				fprintf (stderr,
-				         _("%s: line %d: chown %s failed: %s\n"),
+				         _("%s: line %jd: chown %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
 				fail_exit (EXIT_FAILURE);
@@ -1269,7 +1270,7 @@ int main (int argc, char **argv)
 		 */
 		if (pw_update (&newpw) == 0) {
 			fprintf (stderr,
-			         _("%s: line %d: can't update entry\n"),
+			         _("%s: line %jd: can't update entry\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
 		}
@@ -1338,7 +1339,7 @@ int main (int argc, char **argv)
 	for (i = 0; i < nusers; i++) {
 		if (do_pam_passwd_non_interactive ("newusers", usernames[i], passwords[i]) != 0) {
 			fprintf (stderr,
-			         _("%s: (line %d, user %s) password not changed\n"),
+			         _("%s: (line %jd, user %s) password not changed\n"),
 			         Prog, lines[i], usernames[i]);
 			exit (EXIT_FAILURE);
 		}
