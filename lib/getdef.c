@@ -29,7 +29,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
@@ -453,13 +453,9 @@ out:
 void setdef_config_file (const char* file)
 {
 #ifdef USE_ECONF
-	char  *cp;
-
-	xasprintf(&cp, "%s/%s", file, sysconfdir);
-	sysconfdir = cp;
+	sysconfdir = xaprintf("%s/%s", file, sysconfdir);
 #ifdef VENDORDIR
-	xasprintf(&cp, "%s/%s", file, vendordir);
-	vendordir = cp;
+	vendordir = xaprintf("%s/%s", file, vendordir);
 #endif
 #else
 	def_fname = file;
