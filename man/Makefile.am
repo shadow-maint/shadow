@@ -39,7 +39,6 @@ man_MANS = \
 	man1/sg.1 \
 	man3/shadow.3 \
 	man5/shadow.5 \
-	man5/suauth.5 \
 	man8/useradd.8 \
 	man8/userdel.8 \
 	man8/usermod.8 \
@@ -57,6 +56,7 @@ man_nopam = \
 
 if WITH_SU
 man_MANS += man1/su.1
+man_nopam += man5/suauth.5
 endif
 
 if !USE_PAM
