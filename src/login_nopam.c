@@ -47,6 +47,7 @@
 #include <pwd.h>
 #endif
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -94,7 +95,7 @@ login_access(const char *user, const char *from)
 	 */
 	fp = fopen (TABLE, "r");
 	if (NULL != fp) {
-		int lineno = 0;	/* for diagnostics */
+		intmax_t lineno = 0;	/* for diagnostics */
 		while (   !match
 		       && (fgets (line, sizeof (line), fp) == line))
 		{
@@ -103,7 +104,7 @@ login_access(const char *user, const char *from)
 			lineno++;
 			if (stpsep(line, "\n") == NULL) {
 				SYSLOG ((LOG_ERR,
-					 "%s: line %d: missing newline or line too long",
+					 "%s: line %jd: missing newline or line too long",
 					 TABLE, lineno));
 				continue;
 			}
@@ -120,13 +121,13 @@ login_access(const char *user, const char *from)
 			froms = strsep(&p, ":");
 			if (froms == NULL || p != NULL) {
 				SYSLOG ((LOG_ERR,
-					 "%s: line %d: bad field count",
+					 "%s: line %jd: bad field count",
 					 TABLE, lineno));
 				continue;
 			}
 			if (perm[0] != '+' && perm[0] != '-') {
 				SYSLOG ((LOG_ERR,
-					 "%s: line %d: bad first field",
+					 "%s: line %jd: bad first field",
 					 TABLE, lineno));
 				continue;
 			}

@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -453,7 +454,7 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	int errors = 0;
-	int line = 0;
+	intmax_t line = 0;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -514,7 +515,7 @@ int main (int argc, char **argv)
 				}
 
 				fprintf (stderr,
-				         _("%s: line %d: line too long\n"),
+				         _("%s: line %jd: line too long\n"),
 				         Prog, line);
 				errors++;
 				continue;
@@ -534,7 +535,7 @@ int main (int argc, char **argv)
 		cp = stpsep(name, ":");
 		if (cp == NULL) {
 			fprintf (stderr,
-			         _("%s: line %d: missing new password\n"),
+			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
 			errors++;
 			continue;
@@ -545,7 +546,7 @@ int main (int argc, char **argv)
 		if (use_pam) {
 			if (do_pam_passwd_non_interactive (Prog, name, newpwd) != 0) {
 				fprintf (stderr,
-				         _("%s: (line %d, user %s) password not changed\n"),
+				         _("%s: (line %jd, user %s) password not changed\n"),
 				         Prog, line, name);
 				errors++;
 			}
@@ -574,7 +575,7 @@ int main (int argc, char **argv)
 		pw = pw_locate (name);
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _("%s: line %d: user '%s' does not exist\n"), Prog,
+			         _("%s: line %jd: user '%s' does not exist\n"), Prog,
 			         line, name);
 			errors++;
 			continue;
@@ -640,7 +641,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			if (spw_update (&newsp) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, spw_dbname (), newsp.sp_namp);
 				errors++;
 				continue;
@@ -650,7 +651,7 @@ int main (int argc, char **argv)
 		    || !streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 			if (pw_update (&newpw) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, pw_dbname (), newpw.pw_name);
 				errors++;
 				continue;
