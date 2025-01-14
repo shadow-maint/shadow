@@ -19,11 +19,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <time.h>
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
 
 #include "atoi/a2i/a2s.h"
@@ -474,23 +469,10 @@ static void check_flags (int argc, int opt_index)
  *	(we will later make sure that the user is only listing her aging
  *	information)
  *
- *	With PAM support, the setuid bit can be set on chage to allow
- *	non-root users to groups.
- *	Without PAM support, only users who can write in the group databases
- *	can add groups.
- *
  *	It will not return if the user is not allowed.
  */
 static void check_perms (void)
 {
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
-	int retval;
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
-
 	/*
 	 * An unprivileged user can ask for their own aging information, but
 	 * only root can change it, or list another user's aging
@@ -501,39 +483,6 @@ static void check_perms (void)
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
-
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		exit (E_NOPERM);
-	}
-
-	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		fail_exit (E_NOPERM);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 }
 
 /*
