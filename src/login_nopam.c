@@ -149,7 +149,6 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 	static const char  sep[] = ", \t";
 
 	char *tok;
-	bool match = false;
 
 	/*
 	 * Process tokens one at a time. We have exhausted all possible matches
@@ -162,20 +161,16 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 			break;
 
 		} else if ((*match_fn)(tok, item)) {
-			match = true;
+			while (   (NULL != (tok = strsep(&list, sep)))
+			       && (strcasecmp (tok, "EXCEPT") != 0))
+				/* VOID */ ;
+			if (tok == NULL || !list_match(list, item, match_fn)) {
+				return true;
+			}
 			break;
 		}
 	}
 
-	/* Process exceptions to matches. */
-	if (match) {
-		while (   (NULL != (tok = strsep(&list, sep)))
-		       && (strcasecmp (tok, "EXCEPT") != 0))
-			/* VOID */ ;
-		if (tok == NULL || !list_match(list, item, match_fn)) {
-			return true;
-		}
-	}
 	return false;
 }
 
