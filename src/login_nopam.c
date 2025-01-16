@@ -173,7 +173,7 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 		       && (strcasecmp (tok, "EXCEPT") != 0))
 			/* VOID */ ;
 		if (tok == NULL || !list_match(list, item, match_fn)) {
-			return (match);
+			return true;
 		}
 	}
 	return false;
