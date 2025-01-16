@@ -147,29 +147,31 @@ static bool
 list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 {
 	char *tok;
+	bool inclusion = true;
+	bool matched = false;
+	bool result = false;
 
 	/*
 	 * Process tokens one at a time. We have exhausted all possible matches
 	 * when we reach an "EXCEPT" token or the end of the list. If we do find
-	 * a match, look for an "EXCEPT" list and recurse to determine whether
-	 * the match is affected by any exceptions.
+	 * a match, look for an "EXCEPT" list and determine whether the match is
+	 * affected by any exceptions.
 	 */
 	while (NULL != (tok = strsep(&list, ", \t"))) {
-		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
-			break;
+		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: invert */
+			if (!matched) {	/* stop processing: not part of list */
+				break;
+			}
+			inclusion = !inclusion;
+			matched = false;
 
 		} else if ((*match_fn)(tok, item)) {
-			while (   (NULL != (tok = strsep(&list, ", \t")))
-			       && (strcasecmp (tok, "EXCEPT") != 0))
-				/* VOID */ ;
-			if (tok == NULL || !list_match(list, item, match_fn)) {
-				return true;
-			}
-			break;
+			result = inclusion;
+			matched = true;
 		}
 	}
 
-	return false;
+	return result;
 }
 
 /* myhostname - figure out local machine name */
