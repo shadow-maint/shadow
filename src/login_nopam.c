@@ -160,8 +160,8 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 	while (NULL != (tok = strsep(&list, sep))) {
 		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
 			break;
-		}
-		if ((*match_fn)(tok, item)) {
+
+		} else if ((*match_fn)(tok, item)) {
 			match = true;
 			break;
 		}
