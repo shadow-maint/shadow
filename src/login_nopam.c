@@ -146,8 +146,6 @@ login_access(const char *user, const char *from)
 static bool
 list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 {
-	static const char  sep[] = ", \t";
-
 	char *tok;
 
 	/*
@@ -156,12 +154,12 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 	 * a match, look for an "EXCEPT" list and recurse to determine whether
 	 * the match is affected by any exceptions.
 	 */
-	while (NULL != (tok = strsep(&list, sep))) {
+	while (NULL != (tok = strsep(&list, ", \t"))) {
 		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
 			break;
 
 		} else if ((*match_fn)(tok, item)) {
-			while (   (NULL != (tok = strsep(&list, sep)))
+			while (   (NULL != (tok = strsep(&list, ", \t")))
 			       && (strcasecmp (tok, "EXCEPT") != 0))
 				/* VOID */ ;
 			if (tok == NULL || !list_match(list, item, match_fn)) {
