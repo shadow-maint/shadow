@@ -161,8 +161,8 @@ list_match(char *list, const char *item, bool (*match_fn)(char *, const char*))
 		if (strcasecmp (tok, "EXCEPT") == 0) {	/* EXCEPT: give up */
 			break;
 		}
-		match = (*match_fn) (tok, item);
-		if (match) {
+		if ((*match_fn)(tok, item)) {
+			match = true;
 			break;
 		}
 	}
