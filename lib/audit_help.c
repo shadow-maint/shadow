@@ -45,6 +45,25 @@ void audit_help_open (void)
 }
 
 /*
+ * This takes a string and replaces the old character with the new.
+ */
+static char *strreplace (char *str, char old, char new)
+{
+	if (str == NULL) {
+		return NULL;
+	}
+
+	char *p = str;
+	while (*p) {
+		if (*p == old) {
+			*p = new;
+		}
+		p++;
+	}
+	return str;
+}
+
+/*
  * This function will log a message to the audit system using a predefined
  * message format. Parameter usage is as follows:
  *
@@ -63,8 +82,16 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
 	if (audit_fd < 0) {
 		return;
 	} else {
-		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-		                        NULL, NULL, NULL, result);
+		/*
+		 * The audit system needs white space in the op field to
+		 * be replaced with dashes so that parsers get the whole
+		 * field.
+		 */
+		char *fixed_op = strreplace (strdup (op), ' ', '-');
+		audit_log_acct_message (audit_fd, type, NULL,
+					fixed_op ? fixed_op : op, name,
+					id, NULL, NULL, NULL, result);
+		free (fixed_op);
 	}
 }
 
