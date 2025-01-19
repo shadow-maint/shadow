@@ -818,7 +818,7 @@ static void change_passwd (struct group *gr)
 #endif
 {
 	char *cp;
-	static char pass[BUFSIZ];
+	static char pass[PASS_MAX + 1];
 	int retries;
 	const char *salt;
 
