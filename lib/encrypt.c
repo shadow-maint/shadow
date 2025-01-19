@@ -65,7 +65,8 @@
 		(void) fprintf (shadow_logfd,
 		                _("crypt method not supported by libcrypt? (%s)\n"),
 		                method);
-		exit (EXIT_FAILURE);
+		errno = EINVAL;
+		return NULL;
 	}
 
 	if (strlen (cp) != 13) {
