@@ -864,13 +864,13 @@ static void change_passwd (struct group *gr)
 
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
+	MEMZERO(pass);
 	if (NULL == cp) {
 		fprintf (stderr,
 		         _("%s: failed to crypt password with salt '%s': %s\n"),
 		         Prog, salt, strerror (errno));
 		exit (1);
 	}
-	MEMZERO(pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		gr->gr_passwd = SHADOW_PASSWD_STRING;
