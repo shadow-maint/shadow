@@ -15,6 +15,11 @@
 #include "string/strcpy/strncat.h"
 
 
+#ifndef  strndupa
+# define strndupa(s, n)  strncat(strcpy(alloca(n + 1), ""), s, n)
+#endif
+
+
 // Similar to strndupa(3), but ensure that 's' is an array.
 #define STRNDUPA(s)                                                           \
 (                                                                             \
