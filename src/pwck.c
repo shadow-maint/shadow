@@ -73,8 +73,8 @@ NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (bool changed);
-static void check_pw_file (int *errors, bool *changed);
-static void check_spw_file (int *errors, bool *changed);
+static void check_pw_file (bool *errors, bool *changed);
+static void check_spw_file (bool *errors, bool *changed);
 
 extern int allow_bad_names;
 
@@ -367,7 +367,7 @@ static void close_files (bool changed)
 /*
  * check_pw_file - check the content of the passwd file
  */
-static void check_pw_file (int *errors, bool *changed)
+static void check_pw_file (bool *errors, bool *changed)
 {
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
@@ -399,7 +399,7 @@ static void check_pw_file (int *errors, bool *changed)
 			 */
 			puts (_("invalid password file entry"));
 			printf (_("delete line '%s'? "), pfe->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -460,7 +460,7 @@ static void check_pw_file (int *errors, bool *changed)
 			 */
 			puts (_("duplicate password entry"));
 			printf (_("delete line '%s'? "), pfe->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -482,7 +482,7 @@ static void check_pw_file (int *errors, bool *changed)
 				printf(_("invalid user name '%s'\n"),
 				       pwd->pw_name);
 			}
-			*errors += 1;
+			*errors = true;
 		}
 
 		/*
@@ -490,7 +490,7 @@ static void check_pw_file (int *errors, bool *changed)
 		 */
 		if (pwd->pw_uid == (uid_t)-1) {
 			printf (_("invalid user ID '%lu'\n"), (long unsigned int)pwd->pw_uid);
-			*errors += 1;
+			*errors = true;
 		}
 
 		/*
@@ -505,7 +505,7 @@ static void check_pw_file (int *errors, bool *changed)
 
 			printf (_("user '%s': no group %lu\n"),
 			        pwd->pw_name, (unsigned long) pwd->pw_gid);
-			*errors += 1;
+			*errors = true;
 		}
 
 		/*
@@ -524,7 +524,7 @@ static void check_pw_file (int *errors, bool *changed)
 				if (NULL == nonexistent || !streq(pwd->pw_dir, nonexistent)) {
 					printf (_("user '%s': directory '%s' does not exist\n"),
 							pwd->pw_name, pwd->pw_dir);
-					*errors += 1;
+					*errors = true;
 				}
 			}
 		}
@@ -541,7 +541,7 @@ static void check_pw_file (int *errors, bool *changed)
 			 */
 			printf (_("user '%s': program '%s' does not exist\n"),
 			        pwd->pw_name, pwd->pw_shell);
-			*errors += 1;
+			*errors = true;
 		}
 
 		/*
@@ -556,10 +556,10 @@ static void check_pw_file (int *errors, bool *changed)
 					        pwd->pw_name);
 					printf (_("create tcb directory for %s?"),
 					        pwd->pw_name);
-					*errors += 1;
+					*errors = true;
 					if (yes_or_no (read_only)) {
 						if (shadowtcb_create (pwd->pw_name, pwd->pw_uid) == SHADOWTCB_FAILURE) {
-							*errors += 1;
+							*errors = true;
 							printf (_("failed to create tcb directory for %s\n"), pwd->pw_name);
 							continue;
 						}
@@ -568,7 +568,7 @@ static void check_pw_file (int *errors, bool *changed)
 					}
 				}
 				if (spw_lock () == 0) {
-					*errors += 1;
+					*errors = true;
 					fprintf (stderr,
 					         _("%s: cannot lock %s.\n"),
 					         Prog, spw_dbname ());
@@ -579,7 +579,7 @@ static void check_pw_file (int *errors, bool *changed)
 					fprintf (stderr,
 					         _("%s: cannot open %s\n"),
 					         Prog, spw_dbname ());
-					*errors += 1;
+					*errors = true;
 					if (spw_unlock () == 0) {
 						fprintf (stderr,
 						         _("%s: failed to unlock %s\n"),
@@ -601,7 +601,7 @@ static void check_pw_file (int *errors, bool *changed)
 				        spw_dbname ());
 				printf (_("add user '%s' in %s? "),
 				        pwd->pw_name, spw_dbname ());
-				*errors += 1;
+				*errors = true;
 				if (yes_or_no (read_only)) {
 					struct spwd sp;
 					struct passwd pw;
@@ -650,7 +650,7 @@ static void check_pw_file (int *errors, bool *changed)
 				    && !streq(pwd->pw_passwd, SHADOW_PASSWD_STRING)) {
 					printf (_("user %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        pwd->pw_name, spw_dbname (), pw_dbname ());
-					*errors += 1;
+					*errors = true;
 				}
 			}
 		}
@@ -687,7 +687,7 @@ static void check_pw_file (int *errors, bool *changed)
 /*
  * check_spw_file - check the content of the shadowed password file (shadow)
  */
-static void check_spw_file (int *errors, bool *changed)
+static void check_spw_file (bool *errors, bool *changed)
 {
 	struct commonio_entry *spe, *tspe;
 	struct spwd *spw;
@@ -724,7 +724,7 @@ static void check_spw_file (int *errors, bool *changed)
 			 */
 			puts (_("invalid shadow password file entry"));
 			printf (_("delete line '%s'? "), spe->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -785,7 +785,7 @@ static void check_spw_file (int *errors, bool *changed)
 			 */
 			puts (_("duplicate shadow password entry"));
 			printf (_("delete line '%s'? "), spe->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -807,7 +807,7 @@ static void check_spw_file (int *errors, bool *changed)
 			printf (_("no matching password file entry in %s\n"),
 			        pw_dbname ());
 			printf (_("delete line '%s'? "), spe->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -826,7 +826,7 @@ static void check_spw_file (int *errors, bool *changed)
 			    && (spw->sp_lstchg > t / DAY)) {
 				printf (_("user %s: last password change in the future\n"),
 			                spw->sp_namp);
-				*errors += 1;
+				*errors = true;
 			}
 		}
 	}
@@ -837,7 +837,7 @@ static void check_spw_file (int *errors, bool *changed)
  */
 int main (int argc, char **argv)
 {
-	int errors = 0;
+	bool errors = false;
 	bool changed = false;
 
 	log_set_progname(Prog);
@@ -890,13 +890,13 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (0 != errors) {
+	if (errors) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
 	}
 
 	closelog ();
-	return ((0 != errors) ? E_BADENTRY : E_OKAY);
+	return (errors ? E_BADENTRY : E_OKAY);
 }
 

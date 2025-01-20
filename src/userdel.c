@@ -119,7 +119,7 @@ static void user_cancel (const char *);
 static bool path_prefix (const char *, const char *);
 #endif				/* EXTRA_CHECK_HOME_DIR */
 static int is_owner (uid_t, const char *);
-static int remove_mailbox (void);
+static bool remove_mailbox (void);
 #ifdef WITH_TCB
 static int remove_tcbdir (const char *user_name, uid_t user_id);
 #endif				/* WITH_TCB */
@@ -789,9 +789,10 @@ static int is_owner (uid_t uid, const char *path)
 	return (st.st_uid == uid) ? 1 : 0;
 }
 
-static int remove_mailbox (void)
+static bool remove_mailbox (void)
 {
-	int         i, errors = 0;
+	int         i;
+	bool        errors = false;
 	char        *mailfile;
 	const char  *maildir;
 
@@ -844,7 +845,7 @@ static int remove_mailbox (void)
 			              "deleting mail file",
 			              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
-			errors = 1;
+			errors = true;
 			/* continue */
 		}
 #ifdef WITH_AUDIT
@@ -887,7 +888,7 @@ static int remove_mailbox (void)
 		              "deleting mail file",
 		              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
-		errors = 1;
+		errors = true;
 		/* continue */
 	}
 #ifdef WITH_AUDIT
@@ -951,7 +952,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
  */
 int main (int argc, char **argv)
 {
-	int errors = 0; /* Error in the removal of the home directory */
+	bool errors = false; /* Error in the removal of the home directory */
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -1152,7 +1153,9 @@ int main (int argc, char **argv)
 	update_groups ();
 
 	if (rflg) {
-		errors += remove_mailbox ();
+		if (remove_mailbox ()) {
+			errors = true;
+		}
 	}
 	if (rflg) {
 		int home_owned = is_owner (user_id, user_home);
@@ -1166,7 +1169,7 @@ int main (int argc, char **argv)
 			         _("%s: %s not owned by %s, not removing\n"),
 			         Prog, user_home, user_name);
 			rflg = 0;
-			errors++;
+			errors = true;
 			/* continue */
 		}
 	}
@@ -1192,7 +1195,7 @@ int main (int argc, char **argv)
 				         _("%s: not removing directory %s (would remove home of user %s)\n"),
 				         Prog, user_home, pwd->pw_name);
 				rflg = false;
-				errors++;
+				errors = true;
 				/* continue */
 				break;
 			}
@@ -1205,7 +1208,7 @@ int main (int argc, char **argv)
 #ifdef WITH_BTRFS
 		int is_subvolume = btrfs_is_subvolume (user_home);
 		if (is_subvolume < 0) {
-		    errors++;
+		    errors = true;
 		    /* continue */
 		}
 		else if (is_subvolume > 0) {
@@ -1213,7 +1216,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: error removing subvolume %s\n"),
 				         Prog, user_home);
-				errors++;
+				errors = true;
 				/* continue */
 			}
 		}
@@ -1223,7 +1226,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: error removing directory %s\n"),
 			         Prog, user_home);
-			errors++;
+			errors = true;
 			/* continue */
 		}
 #ifdef WITH_AUDIT
@@ -1236,7 +1239,7 @@ int main (int argc, char **argv)
 #endif				/* WITH_AUDIT */
 	}
 #ifdef WITH_AUDIT
-	if (0 != errors) {
+	if (errors) {
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting home directory",
 		              user_name, AUDIT_NO_ID,
@@ -1273,13 +1276,15 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_TCB
-	errors += remove_tcbdir (user_name, user_id);
+	if (remove_tcbdir (user_name, user_id)) {
+		errors = true;
+	}
 #endif				/* WITH_TCB */
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
-	return ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
+	return (errors ? E_HOMEDIR : E_SUCCESS);
 }
 

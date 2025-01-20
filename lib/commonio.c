@@ -891,7 +891,7 @@ static int write_all (const struct commonio_db *db)
 
 int commonio_close (struct commonio_db *db)
 {
-	int          errors = 0;
+	bool         errors = false;
 	char         buf[1024];
 	struct stat  sb;
 
@@ -932,25 +932,25 @@ int commonio_close (struct commonio_db *db)
 
 #ifdef WITH_SELINUX
 		if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
-			errors++;
+			errors = true;
 		}
 #endif
 		if (create_backup (buf, db->fp) != 0) {
-			errors++;
+			errors = true;
 		}
 
 		if (fclose (db->fp) != 0) {
-			errors++;
+			errors = true;
 		}
 
 		db->fp = NULL;
 
 #ifdef WITH_SELINUX
 		if (reset_selinux_file_context () != 0) {
-			errors++;
+			errors = true;
 		}
 #endif
-		if (errors != 0)
+		if (errors)
 			goto fail;
 	} else {
 		/*
@@ -966,7 +966,7 @@ int commonio_close (struct commonio_db *db)
 
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
-		errors++;
+		errors = true;
 	}
 #endif
 
@@ -976,24 +976,24 @@ int commonio_close (struct commonio_db *db)
 	}
 
 	if (write_all (db) != 0) {
-		errors++;
+		errors = true;
 	}
 
 	if (fflush (db->fp) != 0) {
-		errors++;
+		errors = true;
 	}
 
 	if (fsync (fileno (db->fp)) != 0) {
-		errors++;
+		errors = true;
 	}
 
 	if (fclose (db->fp) != 0) {
-		errors++;
+		errors = true;
 	}
 
 	db->fp = NULL;
 
-	if (errors != 0) {
+	if (errors) {
 		unlink (buf);
 		goto fail;
 	}
@@ -1011,11 +1011,11 @@ int commonio_close (struct commonio_db *db)
 	nscd_need_reload = true;
 	goto success;
       fail:
-	errors++;
+	errors = true;
       success:
 
 	free_linked_list (db);
-	return errors == 0;
+	return !errors;
 }
 
 static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
