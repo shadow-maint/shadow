@@ -5,6 +5,7 @@
       fedora: registry.fedoraproject.org/fedora:latest
       alpine: docker.io/library/alpine:latest
       debian: docker.io/library/debian:latest
+      opensuse: docker.io/opensuse/tumbleweed:latest
 
   roles:
     - role: build_container
