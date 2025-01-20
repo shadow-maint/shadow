@@ -74,15 +74,15 @@ static int check_members (const char *groupname,
                           const char *fmt_info,
                           const char *fmt_prompt,
                           const char *fmt_syslog,
-                          int *errors);
-static void check_grp_file (int *errors, bool *changed);
+                          bool *errors);
+static void check_grp_file (bool *errors, bool *changed);
 #ifdef SHADOWGRP
 static void compare_members_lists (const char *groupname,
                                    char **members,
                                    char **other_members,
                                    const char *file,
                                    const char *other_file);
-static void check_sgr_file (int *errors, bool *changed);
+static void check_sgr_file (bool *errors, bool *changed);
 #endif
 
 /*
@@ -360,7 +360,7 @@ static void close_files (bool changed)
 /*
  * check_members - check that every members of a group exist
  *
- *	If an error is detected, *errors is incremented.
+ *	If an error is detected, *errors is set to true.
  *
  *	The user will be prompted for the removal of the non-existent
  *	user.
@@ -381,7 +381,7 @@ static int check_members (const char *groupname,
                           const char *fmt_info,
                           const char *fmt_prompt,
                           const char *fmt_syslog,
-                          int *errors)
+                          bool *errors)
 {
 	int i;
 	int members_changed = 0;
@@ -398,7 +398,7 @@ static int check_members (const char *groupname,
 		 * Can't find this user. Remove them
 		 * from the list.
 		 */
-		*errors += 1;
+		*errors = true;
 		printf (fmt_info, groupname, members[i]);
 		printf (fmt_prompt, members[i]);
 
@@ -454,7 +454,7 @@ static void compare_members_lists (const char *groupname,
 /*
  * check_grp_file - check the content of the group file
  */
-static void check_grp_file (int *errors, bool *changed)
+static void check_grp_file (bool *errors, bool *changed)
 {
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
@@ -487,7 +487,7 @@ static void check_grp_file (int *errors, bool *changed)
 			 */
 			(void) puts (_("invalid group file entry"));
 			printf (_("delete line '%s'? "), gre->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -547,7 +547,7 @@ static void check_grp_file (int *errors, bool *changed)
 			 */
 			(void) puts (_("duplicate group entry"));
 			printf (_("delete line '%s'? "), gre->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -561,7 +561,7 @@ static void check_grp_file (int *errors, bool *changed)
 		 * Check for invalid group names.  --marekm
 		 */
 		if (!is_valid_group_name (grp->gr_name)) {
-			*errors += 1;
+			*errors = true;
 			printf (_("invalid group name '%s'\n"), grp->gr_name);
 		}
 
@@ -570,7 +570,7 @@ static void check_grp_file (int *errors, bool *changed)
 		 */
 		if (grp->gr_gid == (gid_t)-1) {
 			printf (_("invalid group ID '%lu'\n"), (long unsigned int)grp->gr_gid);
-			*errors += 1;
+			*errors = true;
 		}
 
 		/*
@@ -607,7 +607,7 @@ static void check_grp_file (int *errors, bool *changed)
 				        sgr_file);
 				printf (_("add group '%s' in %s? "),
 				        grp->gr_name, sgr_file);
-				*errors += 1;
+				*errors = true;
 				if (yes_or_no (read_only)) {
 					struct sgrp sg;
 					struct group gr;
@@ -653,7 +653,7 @@ static void check_grp_file (int *errors, bool *changed)
 				if (!streq(grp->gr_passwd, SHADOW_PASSWD_STRING)) {
 					printf (_("group %s has an entry in %s, but its password field in %s is not set to 'x'\n"),
 					        grp->gr_name, sgr_file, grp_file);
-					*errors += 1;
+					*errors = true;
 				}
 			}
 		}
@@ -666,7 +666,7 @@ static void check_grp_file (int *errors, bool *changed)
 /*
  * check_sgr_file - check the content of the shadowed group file (gshadow)
  */
-static void check_sgr_file (int *errors, bool *changed)
+static void check_sgr_file (bool *errors, bool *changed)
 {
 	const struct group *grp;
 	struct commonio_entry *sge, *tsge;
@@ -690,7 +690,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 */
 			(void) puts (_("invalid shadow group file entry"));
 			printf (_("delete line '%s'? "), sge->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -750,7 +750,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 */
 			(void) puts (_("duplicate shadow group entry"));
 			printf (_("delete line '%s'? "), sge->line);
-			*errors += 1;
+			*errors = true;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -768,7 +768,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			printf (_("no matching group file entry in %s\n"),
 			        grp_file);
 			printf (_("delete line '%s'? "), sge->line);
-			*errors += 1;
+			*errors = true;
 			if (yes_or_no (read_only)) {
 				goto delete_sg;
 			}
@@ -816,7 +816,7 @@ static void check_sgr_file (int *errors, bool *changed)
  */
 int main (int argc, char **argv)
 {
-	int errors = 0;
+	bool errors = false;
 	bool changed = false;
 
 	log_set_progname(Prog);
@@ -863,7 +863,7 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (0 != errors) {
+	if (errors) {
 		if (changed) {
 			printf (_("%s: the files have been updated\n"), Prog);
 		} else {
@@ -871,6 +871,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-	return ((0 != errors) ? E_BAD_ENTRY : E_OKAY);
+	return (errors ? E_BAD_ENTRY : E_OKAY);
 }
 

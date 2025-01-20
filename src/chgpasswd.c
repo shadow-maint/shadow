@@ -426,7 +426,7 @@ int main (int argc, char **argv)
 
 	const struct group *gr;
 	struct group newgr;
-	int errors = 0;
+	bool errors = false;
 	intmax_t line = 0;
 
 	log_set_progname(Prog);
@@ -466,7 +466,7 @@ int main (int argc, char **argv)
 		if (stpsep(buf, "\n") == NULL) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),
 			         Prog, line);
-			errors++;
+			errors = true;
 			continue;
 		}
 
@@ -485,7 +485,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
-			errors++;
+			errors = true;
 			continue;
 		}
 		newpwd = cp;
@@ -536,7 +536,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: group '%s' does not exist\n"), Prog,
 			         line, name);
-			errors++;
+			errors = true;
 			continue;
 		}
 #ifdef SHADOWGRP
@@ -596,7 +596,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, sgr_dbname (), newsg.sg_name);
-				errors++;
+				errors = true;
 				continue;
 			}
 		}
@@ -608,7 +608,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, gr_dbname (), newgr.gr_name);
-				errors++;
+				errors = true;
 				continue;
 			}
 		}
@@ -621,7 +621,7 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	if (0 != errors) {
+	if (errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
 		fail_exit (1);

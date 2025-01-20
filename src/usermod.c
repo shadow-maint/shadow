@@ -219,7 +219,7 @@ extern int allow_bad_names;
 static int get_groups (char *list)
 {
 	struct group *grp;
-	int errors = 0;
+	bool errors = false;
 	int ngroups = 0;
 
 	/*
@@ -257,7 +257,7 @@ static int get_groups (char *list)
 		if (NULL == grp) {
 			fprintf (stderr, _("%s: group '%s' does not exist\n"),
 			         Prog, g);
-			errors++;
+			errors = true;
 		}
 
 		/*
@@ -288,7 +288,7 @@ static int get_groups (char *list)
 	/*
 	 * Any errors in finding group names are fatal
 	 */
-	if (0 != errors) {
+	if (errors) {
 		return -1;
 	}
 

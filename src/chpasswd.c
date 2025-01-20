@@ -453,7 +453,7 @@ int main (int argc, char **argv)
 	bool use_pam = true;
 #endif				/* USE_PAM */
 
-	int errors = 0;
+	bool errors = false;
 	intmax_t line = 0;
 
 	log_set_progname(Prog);
@@ -517,7 +517,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: line too long\n"),
 				         Prog, line);
-				errors++;
+				errors = true;
 				continue;
 			}
 		}
@@ -537,7 +537,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: missing new password\n"),
 			         Prog, line);
-			errors++;
+			errors = true;
 			continue;
 		}
 		newpwd = cp;
@@ -548,7 +548,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: (line %jd, user %s) password not changed\n"),
 				         Prog, line, name);
-				errors++;
+				errors = true;
 			}
 		} else
 #endif				/* USE_PAM */
@@ -577,7 +577,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: user '%s' does not exist\n"), Prog,
 			         line, name);
-			errors++;
+			errors = true;
 			continue;
 		}
 		if (is_shadow_pwd) {
@@ -643,7 +643,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, spw_dbname (), newsp.sp_namp);
-				errors++;
+				errors = true;
 				continue;
 			}
 		}
@@ -653,7 +653,7 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, pw_dbname (), newpw.pw_name);
-				errors++;
+				errors = true;
 				continue;
 			}
 		}
@@ -670,7 +670,7 @@ int main (int argc, char **argv)
 	 * With PAM, it is not possible to delay the update of the
 	 * password database.
 	 */
-	if (0 != errors) {
+	if (errors) {
 #ifdef USE_PAM
 		if (!use_pam)
 #endif				/* USE_PAM */

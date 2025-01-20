@@ -758,7 +758,7 @@ err_free_new:
 static int get_groups (char *list)
 {
 	struct group *grp;
-	int errors = 0;
+	bool errors = false;
 	int ngroups = 0;
 
 	/*
@@ -808,7 +808,7 @@ static int get_groups (char *list)
 			fprintf (stderr,
 			         _("%s: group '%s' does not exist\n"),
 			         Prog, g);
-			errors++;
+			errors = true;
 		}
 
 		/*
@@ -842,7 +842,7 @@ static int get_groups (char *list)
 	/*
 	 * Any errors in finding group names are fatal
 	 */
-	if (0 != errors) {
+	if (errors) {
 		return -1;
 	}
 
