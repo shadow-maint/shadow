@@ -12,3 +12,4 @@ cd share/ansible/
 ansible-playbook playbook.yml -i inventory.ini -e 'distribution=alpine'
 ansible-playbook playbook.yml -i inventory.ini -e 'distribution=debian'
 ansible-playbook playbook.yml -i inventory.ini -e 'distribution=fedora'
+ansible-playbook playbook.yml -i inventory.ini -e 'distribution=opensuse'
