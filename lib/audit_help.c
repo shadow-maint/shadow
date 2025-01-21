@@ -21,6 +21,7 @@
 #include <libaudit.h>
 #include <errno.h>
 #include <stdio.h>
+#include <alloca.h>
 
 #include "attr.h"
 #include "prototypes.h"
@@ -47,18 +48,16 @@ void audit_help_open (void)
 /*
  * This takes a string and replaces the old character with the new.
  */
-static char *strreplace (char *str, char old, char new)
+static inline char *strtr (char *str, char old, char new)
 {
 	if (str == NULL) {
 		return NULL;
 	}
 
-	char *p = str;
-	while (*p) {
+	for (char *p = str; *p; p++) {
 		if (*p == old) {
 			*p = new;
 		}
-		p++;
 	}
 	return str;
 }
@@ -85,13 +84,14 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
 		/*
 		 * The audit system needs white space in the op field to
 		 * be replaced with dashes so that parsers get the whole
-		 * field.
+		 * field. Not all C libraries have strdupa.
 		 */
-		char *fixed_op = strreplace (strdup (op), ' ', '-');
+		char *tmp_op = alloca (strlen (op) + 1);
+		strcpy (tmp_op, op);
+		char *fixed_op = strtr (tmp_op, ' ', '-');
 		audit_log_acct_message (audit_fd, type, NULL,
-					fixed_op ? fixed_op : op, name,
-					id, NULL, NULL, NULL, result);
-		free (fixed_op);
+					fixed_op,  name, id,
+					NULL, NULL, NULL, result);
 	}
 }
 
