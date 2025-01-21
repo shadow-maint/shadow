@@ -30,5 +30,5 @@ VM or a container instead.
 You can execute system tests by running:
 
 ```
-cd tests && ./run_all`.
+cd tests && ./run_all
 ```
