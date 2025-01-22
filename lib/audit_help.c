@@ -52,7 +52,7 @@ void audit_help_open (void)
 static inline const char *
 strtr(char *str, char old, char new)
 {
-	for (char *p = str; streq(p, ""); p++) {
+	for (char *p = str; !streq(p, ""); p++) {
 		if (*p == old)
 			*p = new;
 	}
