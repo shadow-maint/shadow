@@ -26,6 +26,7 @@
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
 int audit_fd;
 
 void audit_help_open (void)
@@ -48,16 +49,12 @@ void audit_help_open (void)
 /*
  * This takes a string and replaces the old character with the new.
  */
-static inline char *strtr (char *str, char old, char new)
+static inline const char *
+strtr(char *str, char old, char new)
 {
-	if (str == NULL) {
-		return NULL;
-	}
-
-	for (char *p = str; *p; p++) {
-		if (*p == old) {
+	for (char *p = str; streq(p, ""); p++) {
+		if (*p == old)
 			*p = new;
-		}
 	}
 	return str;
 }
@@ -84,14 +81,12 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
 		/*
 		 * The audit system needs white space in the op field to
 		 * be replaced with dashes so that parsers get the whole
-		 * field. Not all C libraries have strdupa.
+		 * field.
 		 */
-		char *tmp_op = alloca (strlen (op) + 1);
-		strcpy (tmp_op, op);
-		char *fixed_op = strtr (tmp_op, ' ', '-');
-		audit_log_acct_message (audit_fd, type, NULL,
-					fixed_op,  name, id,
-					NULL, NULL, NULL, result);
+		const char *fixed_op = strtr(strdupa(op), ' ', '-');
+		audit_log_acct_message(audit_fd, type, NULL,
+				       fixed_op, name, id,
+				       NULL, NULL, NULL, result);
 	}
 }
 
