@@ -131,7 +131,9 @@ main(int argc, char *argv[])
 	(void) alarm (ALARM);		/* only wait so long ... */
 
 	do {			/* repeatedly get login/password pairs */
-		char *pass;
+		char        *pass;
+		const char  *prompt;
+
 		if (pw_entry("root", &pwent) == -1) {	/* get entry from password file */
 			/*
 			 * Fail secure
@@ -144,12 +146,14 @@ main(int argc, char *argv[])
 		 * Here we prompt for the root password, or if no password
 		 * is given we just exit.
 		 */
-
-		/* get a password for root */
-		pass = agetpass (_(
+		prompt = _(
 "\n"
 "Type control-d to proceed with normal startup,\n"
-"(or give root password for system maintenance):"));
+"(or give root password for system maintenance):");
+
+		/* get a password for root */
+		pass = agetpass(prompt);
+
 		/*
 		 * XXX - can't enter single user mode if root password is
 		 * empty.  I think this doesn't happen very often :-). But
