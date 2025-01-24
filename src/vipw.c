@@ -372,8 +372,14 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		}
 	}
 
-	if (orig_pgrp != -1)
+	if (orig_pgrp != -1) {
+		 /* Restore terminal pgrp after editing. */
+		if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
+			fprintf(stderr, "%s: %s: %s", Prog,
+			        "tcsetpgrp", strerror(errno));
+		}
 		sigprocmask(SIG_SETMASK, &omask, NULL);
+	}
 
 	if (-1 == pid) {
 		vipwexit (editor, 1, 1);
