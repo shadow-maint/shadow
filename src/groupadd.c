@@ -120,6 +120,15 @@ usage (int status)
 	exit (status);
 }
 
+static void fail_exit(int status)
+{
+#ifdef WITH_AUDIT
+	audit_logger(AUDIT_ADD_GROUP, Prog, "add-group", group_name,
+				 AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+#endif
+	exit (status);
+}
+
 /*
  * new_grent - initialize the values in a group file entry
  *
@@ -222,7 +231,7 @@ grp_update(void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	/*
@@ -232,7 +241,7 @@ grp_update(void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_namp);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
 }
@@ -250,7 +259,7 @@ check_new_name(void)
 		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
 			Prog, group_name);
 
-		exit(E_BAD_ARG);
+		fail_exit (E_BAD_ARG);
 	}
 
 	return;
@@ -269,11 +278,11 @@ static void close_files (void)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP, Prog,
-	              "adding group to /etc/group",
+	              "add-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "group added to %s: name=%s, GID=%u",
@@ -290,11 +299,11 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
-		              "adding group to /etc/gshadow",
+		audit_logger (AUDIT_GRP_MGMT, Prog,
+		              "add-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO, "group added to %s: name=%s",
@@ -307,10 +316,6 @@ static void close_files (void)
 #endif				/* SHADOWGRP */
 
 	/* Report success at the system level */
-#ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
-	              "", group_name, group_id, SHADOW_AUDIT_SUCCESS);
-#endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 	         group_name, (unsigned int) group_id));
 	del_cleanup (cleanup_report_add_group);
@@ -328,7 +333,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	add_cleanup (cleanup_unlock_group, NULL);
 
@@ -338,7 +343,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 		add_cleanup (cleanup_unlock_gshadow, NULL);
 	}
@@ -354,7 +359,7 @@ static void open_files (void)
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname (), strerror(errno));
 		SYSLOG ((LOG_WARN, "cannot open %s: %s", gr_dbname (), strerror(errno)));
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 
 #ifdef	SHADOWGRP
@@ -364,7 +369,7 @@ static void open_files (void)
 			         _("%s: cannot open %s: %s\n"),
 			         Prog, sgr_dbname (), strerror(errno));
 			SYSLOG ((LOG_WARN, "cannot open %s: %s", sgr_dbname (), strerror(errno)));
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -499,7 +504,7 @@ static void check_flags (void)
 		fprintf (stderr,
 		         _("%s: group '%s' already exists\n"),
 		         Prog, group_name);
-		exit (E_NAME_IN_USE);
+		fail_exit (E_NAME_IN_USE);
 	}
 
 	if (gflg && (prefix_getgrgid (group_id) != NULL)) {
@@ -518,7 +523,7 @@ static void check_flags (void)
 			fprintf (stderr,
 			         _("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long) group_id);
-			exit (E_GID_IN_USE);
+			fail_exit (E_GID_IN_USE);
 		}
 	}
 }
@@ -546,7 +551,7 @@ static void check_perms (void)
 		fprintf (stderr,
 		         _("%s: Cannot determine your user name.\n"),
 		         Prog);
-		exit (1);
+		fail_exit (1);
 	}
 
 	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -566,7 +571,7 @@ static void check_perms (void)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (1);
+		fail_exit (1);
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -597,7 +602,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (1);
+		fail_exit (1);
 	}
 
 	/*
@@ -624,7 +629,7 @@ int main (int argc, char **argv)
 
 	if (!gflg) {
 		if (find_new_gid (rflg, &group_id, NULL) < 0) {
-			exit (E_GID_IN_USE);
+			fail_exit (E_GID_IN_USE);
 		}
 	}
 
