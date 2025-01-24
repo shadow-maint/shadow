@@ -182,6 +182,12 @@ extern int audit_fd;
 extern void audit_help_open (void);
 /* Use AUDIT_NO_ID when a name is provided to audit_logger instead of an ID */
 #define AUDIT_NO_ID	((unsigned int) -1)
+#ifndef AUDIT_GRP_MGMT
+#define AUDIT_GRP_MGMT          1132    /* Group account was modified */
+#endif
+#ifndef AUDIT_GRP_CHAUTHTOK
+#define AUDIT_GRP_CHAUTHTOK     1133    /* Group account password was changed */
+#endif
 typedef enum {
 	SHADOW_AUDIT_FAILURE = 0,
 	SHADOW_AUDIT_SUCCESS = 1} shadow_audit_result;
