@@ -193,10 +193,10 @@ static void check_perms (const struct group *grp,
 		if (streq(grp->gr_passwd, "") ||
 		    !streq(grp->gr_passwd, cpasswd)) {
 #ifdef WITH_AUDIT
-			SNPRINTF(audit_buf, "authentication new-gid=%lu",
+			SNPRINTF(audit_buf, "authentication new_gid=%lu",
 			         (unsigned long) grp->gr_gid);
 			audit_logger (AUDIT_GRP_AUTH, Prog,
-			              audit_buf, NULL, getuid (), 0);
+			              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group '%s' from '%s'",
@@ -206,10 +206,10 @@ static void check_perms (const struct group *grp,
 			goto failure;
 		}
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "authentication new-gid=%lu",
+		SNPRINTF(audit_buf, "authentication new_gid=%lu",
 		         (unsigned long) grp->gr_gid);
 		audit_logger (AUDIT_GRP_AUTH, Prog,
-		              audit_buf, NULL, getuid (), 1);
+		              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
 #endif
 	}
 
@@ -220,16 +220,6 @@ failure:
 	 * harm.  -- JWP
 	 */
 	closelog ();
-#ifdef WITH_AUDIT
-	if (groupname) {
-		SNPRINTF(audit_buf, "changing new-group=%s", groupname);
-		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
-	} else {
-		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL, getuid (), 0);
-	}
-#endif
 	exit (EXIT_FAILURE);
 }
 
@@ -447,7 +437,7 @@ int main (int argc, char **argv)
 		         Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL, getuid (), 0);
+		              "changing", NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
@@ -704,9 +694,9 @@ int main (int argc, char **argv)
 	if (setgid (gid) != 0) {
 		perror ("setgid");
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new-gid=%lu", (unsigned long) gid);
+		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 		exit (EXIT_FAILURE);
 	}
@@ -714,9 +704,9 @@ int main (int argc, char **argv)
 	if (setuid (getuid ()) != 0) {
 		perror ("setuid");
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new-gid=%lu", (unsigned long) gid);
+		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 		exit (EXIT_FAILURE);
 	}
@@ -729,9 +719,9 @@ int main (int argc, char **argv)
 		closelog ();
 		execl (SHELL, "sh", "-c", command, (char *) NULL);
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new-gid=%lu", (unsigned long) gid);
+		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
 		perror (SHELL);
 		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
@@ -795,9 +785,9 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_AUDIT
-	SNPRINTF(audit_buf, "changing new-gid=%lu", (unsigned long) gid);
+	SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 	audit_logger (AUDIT_CHGRP_ID, Prog,
-	              audit_buf, NULL, getuid (), 1);
+	              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
 #endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
