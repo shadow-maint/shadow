@@ -293,13 +293,13 @@ static void syslog_sg (const char *name, const char *group)
 				 is_newgrp ? "newgrp" : "sg", strerror (errno));
 #ifdef WITH_AUDIT
 			if (group) {
-				SNPRINTF(audit_buf,
-				         "changing new-group=%s", group);
-				audit_logger (AUDIT_CHGRP_ID, Prog,
-				              audit_buf, NULL, getuid (), 0);
+				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
+							getuid(), "new_group", group,
+							SHADOW_AUDIT_FAILURE);
 			} else {
 				audit_logger (AUDIT_CHGRP_ID, Prog,
-				              "changing", NULL, getuid (), 0);
+				              "changing", NULL, getuid(),
+				              SHADOW_AUDIT_FAILURE);
 			}
 #endif
 			exit (EXIT_FAILURE);
@@ -553,12 +553,11 @@ int main (int argc, char **argv)
 		perror("agetgroups");
 #ifdef WITH_AUDIT
 		if (group) {
-			SNPRINTF(audit_buf, "changing new-group=%s", group);
-			audit_logger(AUDIT_CHGRP_ID, Prog,
-				     audit_buf, NULL, getuid(), 0);
+			audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL, getuid(),
+						"new_group", group, SHADOW_AUDIT_FAILURE);
 		} else {
 			audit_logger(AUDIT_CHGRP_ID, Prog,
-				     "changing", NULL, getuid(), 0);
+				     "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
 		}
 #endif
 		exit(EXIT_FAILURE);
@@ -811,9 +810,9 @@ int main (int argc, char **argv)
 	closelog ();
 #ifdef WITH_AUDIT
 	if (NULL != group) {
-		SNPRINTF(audit_buf, "changing new-group=%s", group);
-		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
+					getuid(), "new_group", group,
+					SHADOW_AUDIT_FAILURE);
 	} else {
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              "changing", NULL, getuid (), 0);
