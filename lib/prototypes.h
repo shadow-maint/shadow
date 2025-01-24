@@ -194,6 +194,9 @@ typedef enum {
 extern void audit_logger (int type, const char *pgname, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
+void audit_logger_with_group (int type, MAYBE_UNUSED const char *pgname,
+                const char *op, const char *name, unsigned int id,
+                const char *grp, shadow_audit_result result);
 void audit_logger_message (const char *message, shadow_audit_result result);
 #endif
 

@@ -25,6 +25,8 @@
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/sprintf/snprintf.h"
+
 int audit_fd;
 
 void audit_help_open (void)
@@ -66,6 +68,43 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
 		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
 		                        NULL, NULL, NULL, result);
 	}
+}
+
+/*
+ * This function will log a message to the audit system using a predefined
+ * message format. Parameter usage is as follows:
+ *
+ * type - type of message: AUDIT_USER_MGMT for changing any account
+ *	  attributes.
+ * pgname - program's name
+ * op  -  operation. "adding user", "changing finger info", "deleting group"
+ * name - user's account or group name. If not available use NULL.
+ * id  -  uid or gid that the operation is being performed on. This is used
+ *	  only when user is NULL.
+ * grp - group name associated with event
+ */
+void audit_logger_with_group (int type, MAYBE_UNUSED const char *pgname,
+		const char *op, const char *name, unsigned int id,
+		const char *grp, shadow_audit_result result)
+{
+	int len;
+	char enc_group[GROUP_NAME_MAX_LENGTH * 2 + 1];
+	char buf[NITEMS(enc_group) + 100];
+
+	if (audit_fd < 0) {
+		return;
+	}
+
+	len = strnlen(grp, sizeof(enc_group)/2);
+	if (audit_value_needs_encoding(grp, len)) {
+		SNPRINTF(buf, "%s grp=%s", op,
+			audit_encode_value(enc_group, grp, len));
+	} else {
+		SNPRINTF(buf, "%s grp=\"%s\"", op, grp);
+	}
+
+	audit_log_acct_message (audit_fd, type, NULL, buf, name, id,
+		                        NULL, NULL, NULL, (int) result);
 }
 
 void audit_logger_message (const char *message, shadow_audit_result result)
