@@ -200,6 +200,7 @@ extern void setup_limits (const struct passwd *);
 extern /*@only@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
 extern /*@only@*/char **dup_list (char *const *);
+extern void free_list (char **);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 
