@@ -8,12 +8,14 @@
 
 #include "config.h"
 
+#include <alloca.h>
 #include <stdlib.h>
 
 #include "attr.h"
 #include "exit_if_null.h"
 
 
+#define ALLOCA(n, type)  ((type *) alloca(n * sizeof(type)))
 #define MALLOC(n, type)                                                       \
 (                                                                             \
 	(type *) mallocarray(n, sizeof(type))                                 \
