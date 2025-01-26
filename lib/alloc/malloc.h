@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <alloca.h>
 #include <stdlib.h>
 
 #include "attr.h"
@@ -19,6 +20,12 @@
 #define MALLOC_(n, T)                                                 \
 (                                                                     \
 	(T *) mallocarray(n, sizeof(T))                               \
+)
+
+#define ALLOCA(n, T)   ALLOCA_(n, typeas(T))
+#define ALLOCA_(n, T)                                                 \
+(                                                                     \
+	(T *) alloca(n * sizeof(T))                                   \
 )
 
 
