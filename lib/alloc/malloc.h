@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <alloca.h>
 #include <stdlib.h>
 
 #include "attr.h"
@@ -20,6 +21,13 @@
 #define malloc_T_(n, T)                                               \
 ({                                                                    \
 	(T *){mallocarray(n, sizeof(T))};                             \
+})
+
+// alloca_T - alloca type-safe
+#define alloca_T(n, T)   alloca_T_(n, typeas(T))
+#define alloca_T_(n, T)                                               \
+({                                                                    \
+	(T *){alloca(n * sizeof(T))};                                 \
 })
 
 
