@@ -2259,9 +2259,9 @@ static void create_home (void)
 	 */
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		/* Avoid turning a relative path into an absolute path. */
-		if (bhome[0] == '/' || strlen(path) != 0) {
+		if (bhome[0] == '/' || !streq(path, ""))
 			strcat(path, "/");
-		}
+
 		strcat(path, cp);
 		if (access(path, F_OK) == 0) {
 			continue;
