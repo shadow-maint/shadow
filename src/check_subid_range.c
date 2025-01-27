@@ -12,8 +12,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include <a2i/str2i/str2u.h>
+
 #include "atoi/getnum.h"
-#include "atoi/str2i/str2u.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "subordinateio.h"
