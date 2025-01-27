@@ -21,10 +21,12 @@
 #include <libaudit.h>
 #include <errno.h>
 #include <stdio.h>
+#include <alloca.h>
 
 #include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strcmp/streq.h"
 int audit_fd;
 
 void audit_help_open (void)
@@ -42,6 +44,19 @@ void audit_help_open (void)
 		              log_get_logfd());
 		exit (EXIT_FAILURE);
 	}
+}
+
+/*
+ * This takes a string and replaces the old character with the new.
+ */
+static inline const char *
+strtr(char *str, char old, char new)
+{
+	for (char *p = str; !streq(p, ""); p++) {
+		if (*p == old)
+			*p = new;
+	}
+	return str;
 }
 
 /*
@@ -63,8 +78,15 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
 	if (audit_fd < 0) {
 		return;
 	} else {
-		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-		                        NULL, NULL, NULL, result);
+		/*
+		 * The audit system needs white space in the op field to
+		 * be replaced with dashes so that parsers get the whole
+		 * field.
+		 */
+		const char *fixed_op = strtr(strdupa(op), ' ', '-');
+		audit_log_acct_message(audit_fd, type, NULL,
+				       fixed_op, name, id,
+				       NULL, NULL, NULL, result);
 	}
 }
 
