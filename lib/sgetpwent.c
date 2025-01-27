@@ -21,9 +21,8 @@
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/strcmp/streq.h"
+#include "string/strtok/strsep2arr.h"
 
-
-#define	NFIELDS	7
 
 /*
  * sgetpwent - convert a string to a (struct passwd)
@@ -42,9 +41,8 @@ sgetpwent(const char *buf)
 {
 	static struct passwd pwent;
 	static char pwdbuf[PASSWD_ENTRY_MAX_LENGTH];
-	int i;
-	char *cp;
-	char *fields[NFIELDS];
+
+	char  *fields[7];
 
 	/*
 	 * Copy the string to a static buffer so the pointers into
@@ -59,26 +57,12 @@ sgetpwent(const char *buf)
 	}
 	strcpy (pwdbuf, buf);
 
-	/*
-	 * Save a pointer to the start of each colon separated
-	 * field.  The fields are converted into NUL terminated strings.
-	 */
-
-	for (cp = pwdbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
-		fields[i] = strsep(&cp, ":");
-
-	/* something at the end, columns over shot */
-	if ( cp != NULL ) {
-		return( NULL );
-	}
-
-	/*
-	 * There must be exactly NFIELDS colon separated fields or
-	 * the entry is invalid.  Also, the UID and GID must be non-blank.
-	 */
-
-	if (i != NFIELDS)
+	if (STRSEP2ARR(pwdbuf, ":", fields) == -1)
 		return NULL;
+
+	/*
+	 * The UID and GID must be non-blank.
+	 */
 	if (streq(fields[2], ""))
 		return NULL;
 	if (streq(fields[3], ""))

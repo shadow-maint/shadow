@@ -18,6 +18,7 @@
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strtok/strsep2ls.h"
 
 
 /*
@@ -186,9 +187,6 @@ comma_to_list(const char *comma)
 {
 	char *members;
 	char **array;
-	int i;
-	char *cp;
-	char *cp2;
 
 	assert (NULL != comma);
 
@@ -215,18 +213,7 @@ comma_to_list(const char *comma)
 		return array;
 	}
 
-	/*
-	 * Now go walk that list all over again, this time building the
-	 * array of pointers.
-	 */
-
-	for (cp = members, i = 0; cp != NULL; i++)
-		array[i] = strsep(&cp, ",");
-	array[i] = NULL;
-
-	/*
-	 * Return the new array of pointers
-	 */
+	STRSEP2LS(members, ",", array);
 
 	return array;
 }
