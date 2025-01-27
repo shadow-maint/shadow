@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,14 +12,14 @@
 #include <string.h>
 
 #include "sizeof.h"
-#include "string/strcpy/strncat.h"
 
 
-// Similar to strndupa(3), but ensure that 's' is an array.
-#define STRNDUPA(s)                                                           \
-(                                                                             \
-	STRNCAT(strcpy(alloca(strnlen(s, NITEMS(s)) + 1), ""), s)             \
-)
+#ifndef  strndupa
+# define strndupa(s, n)  strncat(strcpy(alloca(n + 1), ""), s, n)
+#endif
+
+
+#define STRNDUPA(s)  strndupa(s, NITEMS(s))
 
 
 #endif  // include guard
