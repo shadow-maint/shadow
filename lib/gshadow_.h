@@ -9,7 +9,7 @@
 #define SHADOW_INCLUDE_LIB_GSHADOW__H_
 
 
-#if defined(HAVE_GSHADOW_H)
+#if __has_include(<gshadow.h>)
 # include <gshadow.h>
 #else
 
@@ -41,5 +41,5 @@ int putsgent (const struct sgrp *, FILE *);
 #define	GSHADOW	"/etc/gshadow"
 
 
-#endif  // !HAVE_GSHADOW_H
+#endif  // !__has_include(<gshadow.h>)
 #endif  // include guard

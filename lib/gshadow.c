@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#if defined(SHADOWGRP) && !defined(HAVE_GSHADOW_H)
+#if defined(SHADOWGRP) && !__has_include(<gshadow.h>)
 
 #ident "$Id$"
 

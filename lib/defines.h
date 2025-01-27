@@ -41,7 +41,7 @@
  * crypt(3), crypt_gensalt(3), and their
  * feature test macros may be defined in here.
  */
-#if HAVE_CRYPT_H
+#if __has_include(<crypt.h>)
 # include <crypt.h>
 #endif
 
