@@ -36,9 +36,6 @@ LT_LIB_DLLOAD
 
 dnl Checks for libraries.
 
-dnl Checks for header files.
-AC_CHECK_HEADERS(gshadow.h)
-
 dnl shadow now uses the libc's shadow implementation
 AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
