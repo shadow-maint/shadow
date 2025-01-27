@@ -20,6 +20,7 @@
 #include "port.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -50,7 +51,7 @@ static int portcmp (const char *pattern, const char *port)
 	if (streq(orig, "SU"))
 		return 1;
 
-	return (*pattern == '*') ? 0 : 1;
+	return !strprefix(pattern, "*");
 }
 
 /*
@@ -140,7 +141,7 @@ next:
 		errno = saveerr;
 		return NULL;
 	}
-	if ('#' == buf[0])
+	if (strprefix(buf, "#"))
 		goto next;
 
 	stpsep(buf, "\n");

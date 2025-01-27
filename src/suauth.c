@@ -22,6 +22,7 @@
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -72,7 +73,7 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		return DENY;
 	}
 
-	while (fgets (temp, sizeof (temp), authfile_fd) != NULL) {
+	while (fgets(temp, sizeof(temp), authfile_fd) != NULL) {
 		char  *p;
 
 		lines++;
@@ -87,7 +88,7 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		stpcpy(strrspn(temp, " \t"), "");
 
 		p = stpspn(temp, " \t");
-		if (*p == '#' || streq(p, ""))
+		if (strprefix(p, "#") || streq(p, ""))
 			continue;
 
 		to_users = strsep(&p, ":");
