@@ -1534,7 +1534,7 @@ static void process_flags (int argc, char **argv)
 
 		user_name = argv[optind];
 		if (!is_valid_user_name(user_name)) {
-			if (errno == EINVAL) {
+			if (errno == EILSEQ) {
 				fprintf(stderr,
 				        _("%s: invalid user name '%s': use --badname to ignore\n"),
 				        Prog, user_name);
@@ -2259,9 +2259,9 @@ static void create_home (void)
 	 */
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		/* Avoid turning a relative path into an absolute path. */
-		if (bhome[0] == '/' || strlen(path) != 0) {
+		if (bhome[0] == '/' || !streq(path, ""))
 			strcat(path, "/");
-		}
+
 		strcat(path, cp);
 		if (access(path, F_OK) == 0) {
 			continue;
