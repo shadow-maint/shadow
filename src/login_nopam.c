@@ -59,8 +59,8 @@
 
 #include "prototypes.h"
 #include "sizeof.h"
-#include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -111,7 +111,7 @@ login_access(const char *user, const char *from)
 			if (line[0] == '#') {
 				continue;	/* comment line */
 			}
-			stpcpy(strrspn(line, " \t"), "");
+			stpcpy(stprspn(line, " \t"), "");
 			if (streq(line, "")) {	/* skip blank lines */
 				continue;
 			}

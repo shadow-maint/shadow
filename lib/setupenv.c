@@ -27,9 +27,9 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
-#include "string/strchr/stpspn.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
 

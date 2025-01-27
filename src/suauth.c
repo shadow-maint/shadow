@@ -19,9 +19,9 @@
 
 #include "defines.h"
 #include "prototypes.h"
-#include "string/strchr/stpspn.h"
-#include "string/strchr/strrspn.h"
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
+#include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -84,7 +84,7 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 			continue;
 		}
 
-		stpcpy(strrspn(temp, " \t"), "");
+		stpcpy(stprspn(temp, " \t"), "");
 
 		p = stpspn(temp, " \t");
 		if (*p == '#' || streq(p, ""))
