@@ -118,7 +118,6 @@ libshadow_la_SOURCES = \
 	groupio.c \
 	groupmem.c \
 	groupio.h \
-	gshadow.c \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
@@ -167,14 +166,34 @@ libshadow_la_SOURCES = \
 	semanage.c \
 	setugid.c \
 	setupenv.c \
-	sgetgrent.c \
-	sgetpwent.c \
 	sgetspent.c \
 	sgroupio.c \
-	sgroupio.h\
+	sgroupio.h \
 	shadow.c \
+	shadow/group/sgetgrent.c \
+	shadow/group/sgetgrent.h \
 	shadow/grp/agetgroups.c \
 	shadow/grp/agetgroups.h \
+	shadow/gshadow/endsgent.c \
+	shadow/gshadow/endsgent.h \
+	shadow/gshadow/fgetsgent.c \
+	shadow/gshadow/fgetsgent.h \
+	shadow/gshadow/getsgent.c \
+	shadow/gshadow/getsgent.h \
+	shadow/gshadow/getsgnam.c \
+	shadow/gshadow/getsgnam.h \
+	shadow/gshadow/gshadow.c \
+	shadow/gshadow/gshadow.h \
+	shadow/gshadow/putsgent.c \
+	shadow/gshadow/putsgent.h \
+	shadow/gshadow/setsgent.c \
+	shadow/gshadow/setsgent.h \
+	shadow/gshadow/sgetsgent.c \
+	shadow/gshadow/sgetsgent.h \
+	shadow/gshadow/sgrp.c \
+	shadow/gshadow/sgrp.h \
+	shadow/passwd/sgetpwent.c \
+	shadow/passwd/sgetpwent.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
@@ -279,5 +298,4 @@ endif
 
 EXTRA_DIST = \
 	.indent.pro \
-	gshadow_.h \
 	xgetXXbyYY.c
