@@ -17,7 +17,6 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
-#include "string/strdup/xstrdup.h"
 
 
 /*
@@ -27,7 +26,7 @@
  * it to the user's terminal at login time.  The MOTD_FILE configuration
  * option is a colon-delimited list of filenames.
  */
-void
+int
 motd(void)
 {
 	FILE *fp;
@@ -37,24 +36,26 @@ motd(void)
 	int c;
 
 	motdfile = getdef_str ("MOTD_FILE");
-	if (NULL == motdfile) {
-		return;
-	}
+	if (NULL == motdfile)
+		return 0;
 
-	motdlist = xstrdup (motdfile);
+	motdlist = strdup(motdfile);
+	if (motdlist == NULL)
+		return -1;
 
 	mb = motdlist;
 	while (NULL != (motdfile = strsep(&mb, ":"))) {
 		fp = fopen (motdfile, "r");
-		if (NULL != fp) {
-			while ((c = getc (fp)) != EOF) {
-				putchar (c);
-			}
-			fclose (fp);
+		if (fp == NULL)
+			continue;
+
+		while ((c = getc(fp)) != EOF) {
+			putchar(c);
 		}
+		fclose(fp);
 	}
 	fflush (stdout);
 
 	free (motdlist);
+	return 0;
 }
-

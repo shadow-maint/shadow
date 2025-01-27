@@ -222,7 +222,7 @@ extern void login_prompt (char *, int);
 extern void mailcheck (void);
 
 /* motd.c */
-extern void motd (void);
+extern int motd(void);
 
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
