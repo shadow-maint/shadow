@@ -35,6 +35,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
@@ -401,7 +402,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * changed. Passwords which have been inactive too long cannot be
 	 * changed.
 	 */
-	if (   (sp->sp_pwdp[0] == '!')
+	if (   strprefix(sp->sp_pwdp, "!")
 	    || (exp_status > 1)
 	    || (   (sp->sp_max >= 0)
 	        && (sp->sp_min > sp->sp_max))) {
@@ -438,7 +439,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 
 static /*@observer@*/const char *pw_status (const char *pass)
 {
-	if (*pass == '*' || *pass == '!') {
+	if (strprefix(pass, "*") || strprefix(pass, "!")) {
 		return "L";
 	}
 	if (streq(pass, "")) {
@@ -519,7 +520,7 @@ static char *update_crypt_pw (char *cp)
 	if (dflg)
 		strcpy(cp, "");
 
-	if (uflg && *cp == '!') {
+	if (uflg && strprefix(cp, "!")) {
 		if (cp[1] == '\0') {
 			(void) fprintf (stderr,
 			                _("%s: unlocking the password would result in a passwordless account.\n"
