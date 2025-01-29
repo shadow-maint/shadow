@@ -50,14 +50,14 @@ static const char *PROMPT = gettext_noop ("%s's Password: ");
 
 int pw_auth (const char *cipher,
              const char *user,
-             int reason,
-             /*@null@*/const char *input)
+             int reason)
 {
 	int          retval;
 	char         prompt[1024];
 	char         *clear = NULL;
 	const char   *cp;
 	const char   *encrypted;
+	const char   *input = NULL;
 
 #ifdef	SKEY
 	bool         use_skey = false;
@@ -70,14 +70,6 @@ int pw_auth (const char *cipher,
 	 */
 
 	if ((PW_ADD == reason) || (PW_DELETE == reason)) {
-		return 0;
-	}
-
-	/*
-	 * There are even programs for changing the user name ...
-	 */
-
-	if ((PW_CHANGE == reason) && (NULL != input)) {
 		return 0;
 	}
 
@@ -132,7 +124,7 @@ int pw_auth (const char *cipher,
 	 * get the cleartext password for us.
 	 */
 
-	if ((PW_FTP != reason) && (PW_REXEC != reason) && (NULL == input)) {
+	if ((PW_FTP != reason) && (PW_REXEC != reason)) {
 		cp = getdef_str ("LOGIN_STRING");
 		if (NULL == cp) {
 			cp = _(PROMPT);

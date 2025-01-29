@@ -903,7 +903,7 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		if (pw_auth (user_passwd, username, reason, NULL) == 0) {
+		if (pw_auth(user_passwd, username, reason) == 0) {
 			goto auth_ok;
 		}
 
@@ -964,7 +964,7 @@ int main (int argc, char **argv)
 		 * all).  --marekm
 		 */
 		if (streq(user_passwd, "")) {
-			pw_auth ("!", username, reason, NULL);
+			pw_auth("!", username, reason);
 		}
 
 		/*

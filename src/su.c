@@ -590,7 +590,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-	if (pw_auth (password, name, PW_SU, NULL) != 0) {
+	if (pw_auth(password, name, PW_SU) != 0) {
 		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
 		         "Authentication failed for %s", name));
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
