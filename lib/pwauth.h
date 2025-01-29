@@ -17,8 +17,7 @@
 #ifndef USE_PAM
 int pw_auth (const char *cipher,
              const char *user,
-             int flag,
-             /*@null@*/const char *input);
+             int flag);
 #endif				/* !USE_PAM */
 
 /*
