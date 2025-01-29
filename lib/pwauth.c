@@ -19,8 +19,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "agetpass.h"
 #include "defines.h"
+#include "pass.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "getdef.h"
@@ -55,7 +55,7 @@ int pw_auth (const char *cipher,
 {
 	int          retval;
 	char         prompt[1024];
-	char         *clear = NULL;
+	pass_t       *clear = NULL;
 	const char   *cp;
 	const char   *encrypted;
 
@@ -144,8 +144,8 @@ int pw_auth (const char *cipher,
 #endif
 
 		SNPRINTF(prompt, cp, user);
-		clear = agetpass(prompt);
-		input = (clear == NULL) ? "" : clear;
+		clear = getpassa(prompt);
+		input = (clear == NULL) ? "" : *clear;
 	}
 
 	/*
@@ -171,9 +171,9 @@ int pw_auth (const char *cipher,
 	 * -- AR 8/22/1999
 	 */
 	if ((0 != retval) && streq(input, "") && use_skey) {
-		erase_pass(clear);
-		clear = agetpass(prompt);
-		input = (clear == NULL) ? "" : clear;
+		passzero(clear);
+		clear = getpassa(prompt);
+		input = (clear == NULL) ? "" : *clear;
 	}
 
 	if ((0 != retval) && use_skey) {
@@ -187,7 +187,7 @@ int pw_auth (const char *cipher,
 		}
 	}
 #endif
-	erase_pass(clear);
+	passzero(clear);
 
 	return retval;
 }
