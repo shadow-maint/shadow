@@ -54,37 +54,16 @@ int pw_auth (const char *cipher,
 {
 	int          retval;
 	char         prompt[1024];
-	char         *clear = NULL;
+	char         *clear;
 	const char   *cp;
 	const char   *encrypted;
-	const char   *input = NULL;
+	const char   *input;
 
 #ifdef	SKEY
 	bool         use_skey = false;
 	char         challenge_info[40];
 	struct skey  skey;
 #endif
-
-	/*
-	 * There are programs for adding and deleting authentication data.
-	 */
-
-	if ((PW_ADD == reason) || (PW_DELETE == reason)) {
-		return 0;
-	}
-
-	/*
-	 * WARNING:
-	 *
-	 * When we change a password and we are root, we don't prompt.
-	 * This is so root can change any password without having to
-	 * know it.  This is a policy decision that might have to be
-	 * revisited.
-	 */
-
-	if ((PW_CHANGE == reason) && (getuid () == 0)) {
-		return 0;
-	}
 
 	/*
 	 * WARNING:
@@ -120,25 +99,22 @@ int pw_auth (const char *cipher,
 #endif
 
 	/*
-	 * Prompt for the password as required.  FTPD and REXECD both
-	 * get the cleartext password for us.
+	 * Prompt for the password as required.
 	 */
 
-	if ((PW_FTP != reason) && (PW_REXEC != reason)) {
-		cp = getdef_str ("LOGIN_STRING");
-		if (NULL == cp) {
-			cp = _(PROMPT);
-		}
+	cp = getdef_str ("LOGIN_STRING");
+	if (NULL == cp) {
+		cp = _(PROMPT);
+	}
 #ifdef	SKEY
-		if (use_skey) {
-			printf ("[%s]\n", challenge_info);
-		}
+	if (use_skey) {
+		printf ("[%s]\n", challenge_info);
+	}
 #endif
 
-		SNPRINTF(prompt, cp, user);
-		clear = agetpass(prompt);
-		input = (clear == NULL) ? "" : clear;
-	}
+	SNPRINTF(prompt, cp, user);
+	clear = agetpass(prompt);
+	input = (clear == NULL) ? "" : clear;
 
 	/*
 	 * Convert the cleartext password into a ciphertext string.

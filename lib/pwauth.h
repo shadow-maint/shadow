@@ -28,20 +28,10 @@ int pw_auth (const char *cipher,
 #define	PW_LOGIN	2
 
 /*
- * Administrative functions
- */
-
-#define	PW_ADD		101
-#define	PW_CHANGE	102
-#define	PW_DELETE	103
-
-/*
  * Network access
  */
 
 #define	PW_TELNET	201
 #define	PW_RLOGIN	202
-#define	PW_FTP		203
-#define	PW_REXEC	204
 
 #endif /* _PWAUTH_H */
