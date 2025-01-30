@@ -48,9 +48,8 @@ static const char *PROMPT = gettext_noop ("%s's Password: ");
  *	compared.
  */
 
-int pw_auth (const char *cipher,
-             const char *user,
-             int reason)
+int
+pw_auth(const char *cipher, const char *user)
 {
 	int          retval;
 	char         prompt[1024];

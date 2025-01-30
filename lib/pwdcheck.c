@@ -28,7 +28,7 @@ void passwd_check (const char *user, const char *passwd, MAYBE_UNUSED const char
 	if (NULL != sp) {
 		passwd = sp->sp_pwdp;
 	}
-	if (pw_auth(passwd, user, PW_LOGIN) != 0) {
+	if (pw_auth(passwd, user) != 0) {
 		SYSLOG ((LOG_WARN, "incorrect password for `%s'", user));
 		(void) sleep (1);
 		fprintf (log_get_logfd(), _("Incorrect password for %s.\n"), user);

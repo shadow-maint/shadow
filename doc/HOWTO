@@ -1751,7 +1751,7 @@
       }
   #ifdef HAS_SHADOW
       if ((pw->pw_passwd && pw->pw_passwd[0] == '@'
-           && pw_auth (pw->pw_passwd+1, pw->pw_name, PW_LOGIN))
+           && pw_auth(pw->pw_passwd+1, pw->pw_name))
           || !valid (passwd, pw)) {
           return (UPAP_AUTHNAK);
       }
