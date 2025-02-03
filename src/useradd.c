@@ -2514,7 +2514,7 @@ int main (int argc, char **argv)
 
 	if (run_parts ("/etc/shadow-maint/useradd-pre.d", user_name,
 			"useradd")) {
-		exit(1);
+		return 1;
 	}
 
 #ifdef ACCT_TOOLS_SETUID
@@ -2559,11 +2559,11 @@ int main (int argc, char **argv)
 	 */
 	if (Dflg) {
 		if (gflg || bflg || fflg || eflg || sflg) {
-			exit ((set_defaults () != 0) ? 1 : 0);
+			return (set_defaults () != 0) ? 1 : 0;
 		}
 
 		show_defaults ();
-		exit (E_SUCCESS);
+		return E_SUCCESS;
 	}
 
 	/*
@@ -2739,7 +2739,7 @@ int main (int argc, char **argv)
 
 	if (run_parts ("/etc/shadow-maint/useradd-post.d", user_name,
 			"useradd")) {
-		exit(1);
+		return 1;
 	}
 
 	return E_SUCCESS;

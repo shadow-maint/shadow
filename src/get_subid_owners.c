@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	}
 	if (n < 0) {
 		fprintf(stderr, "No owners found\n");
-		exit(1);
+		return 1;
 	}
 	for (i = 0; i < n; i++) {
 		printf("%d\n", uids[i]);

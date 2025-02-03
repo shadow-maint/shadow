@@ -938,7 +938,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN,
 		         "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 	myname = xstrdup (pw->pw_name);
 
@@ -948,7 +948,7 @@ int main (int argc, char **argv)
 	 */
 	if (atexit (do_cleanups) != 0) {
 		fprintf(stderr, "%s: cannot set exit function\n", Prog);
-		exit (1);
+		return 1;
 	}
 
 	/* Parse the options */
@@ -1044,7 +1044,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, user, group);
-			exit (E_BAD_ARG);
+			return E_BAD_ARG;
 		}
 		goto output;
 	}
@@ -1082,7 +1082,7 @@ int main (int argc, char **argv)
 	 */
 	if ((isatty (0) == 0) || (isatty (1) == 0)) {
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 
 	catch_signals (0);	/* save tty modes */
@@ -1111,7 +1111,7 @@ int main (int argc, char **argv)
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 	pwd_init ();
 
@@ -1135,6 +1135,6 @@ int main (int argc, char **argv)
 	}
 #endif
 	free(grent.gr_mem);
-	exit (E_SUCCESS);
+	return E_SUCCESS;
 }
 

@@ -92,15 +92,15 @@ main(int argc, char *argv[])
 	}
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
 		(void) puts (_("No password file"));
-		exit (1);
+		return 1;
 	}
 #if !defined(DEBUG) && defined(SULOGIN_ONLY_INIT)
 	if (getppid () != 1) {	/* parent must be INIT */
-		exit (1);
+		return 1;
 	}
 #endif
 	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
-		exit (1);	/* must be a terminal */
+		return 1;	/* must be a terminal */
 	}
 	/* If we were init, we need to start a new session */
 	if (getppid() == 1) {
@@ -135,7 +135,7 @@ main(int argc, char *argv[])
 			 * Fail secure
 			 */
 			(void) puts(_("No password entry for 'root'"));
-			exit(1);
+			return 1;
 		}
 
 		/*
@@ -160,7 +160,7 @@ main(int argc, char *argv[])
 #ifdef	TELINIT
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) NULL);
 #endif
-			exit (0);
+			return 0;
 		}
 
 		done = valid(pass, &pwent);

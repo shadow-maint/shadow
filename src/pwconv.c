@@ -173,7 +173,7 @@ int main (int argc, char **argv)
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
 		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit (E_FAILURE);
+		return E_FAILURE;
 	}
 #endif				/* WITH_TCB */
 

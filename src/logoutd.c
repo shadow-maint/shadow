@@ -137,11 +137,11 @@ main(int argc, char **argv)
 	pid = fork ();
 	if (pid > 0) {
 		/* parent */
-		exit (EXIT_SUCCESS);
+		return EXIT_SUCCESS;
 	} else if (pid < 0) {
 		/* error */
 		perror ("fork");
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 #endif				/* !DEBUG */
 

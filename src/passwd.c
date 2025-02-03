@@ -843,7 +843,7 @@ main(int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: repository %s not supported\n"),
 						 Prog, optarg);
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
@@ -908,7 +908,7 @@ main(int argc, char **argv)
 		                Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 	myname = xstrdup (pw->pw_name);
 	if (optind < argc) {
@@ -940,7 +940,7 @@ main(int argc, char **argv)
 			(void) fprintf (stderr,
 			                _("%s: Permission denied.\n"),
 			                Prog);
-			exit (E_NOPERM);
+			return E_NOPERM;
 		}
 		prefix_setpwent ();
 		while ( (pw = prefix_getpwent ()) != NULL ) {
@@ -980,7 +980,7 @@ main(int argc, char **argv)
 
 	if (anyflag && !amroot) {
 		(void) fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 
 	pw = xprefix_getpwnam (name);
@@ -988,7 +988,7 @@ main(int argc, char **argv)
 		(void) fprintf (stderr,
 		                _("%s: user '%s' does not exist\n"),
 		                Prog, name);
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 #ifdef WITH_SELINUX
 	/* only do this check when getuid()==0 because it's a pre-condition for
@@ -1000,7 +1000,7 @@ main(int argc, char **argv)
 		(void) fprintf(stderr,
 		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
 		               Prog, name);
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 #endif				/* WITH_SELINUX */
 
@@ -1016,12 +1016,12 @@ main(int argc, char **argv)
 		         "can't view or modify password information for %s",
 		         name));
 		closelog ();
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 
 	if (Sflg) {
 		print_status (pw);
-		exit (E_SUCCESS);
+		return E_SUCCESS;
 	}
 	if (!use_pam)
 	{
@@ -1034,7 +1034,7 @@ main(int argc, char **argv)
 				(void) fprintf (stderr,
 				                _("%s: Permission denied.\n"),
 				                Prog);
-				exit (E_NOPERM);
+				return E_NOPERM;
 			}
 			sp = pwd_to_spwd (pw);
 		}
@@ -1065,7 +1065,7 @@ main(int argc, char **argv)
 				                _("The password for %s is unchanged.\n"),
 				                name);
 				closelog ();
-				exit (E_NOPERM);
+				return E_NOPERM;
 			}
 			do_update_pwd = true;
 			do_update_age = true;
@@ -1095,14 +1095,14 @@ main(int argc, char **argv)
 		} else {
 			do_pam_passwd (name, qflg, kflg);
 		}
-		exit (E_SUCCESS);
+		return E_SUCCESS;
 	}
 #endif				/* USE_PAM */
 	if (setuid (0) != 0) {
 		(void) fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 	if (spw_file_present ()) {
 		update_shadow ();

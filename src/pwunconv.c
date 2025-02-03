@@ -134,13 +134,13 @@ int main (int argc, char **argv)
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
 		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
-		exit (1);
+		return 1;
 	}
 #endif				/* WITH_TCB */
 
 	if (!spw_file_present ()) {
 		/* shadow not installed, do nothing */
-		exit (0);
+		return 0;
 	}
 
 	if (pw_lock () == 0) {

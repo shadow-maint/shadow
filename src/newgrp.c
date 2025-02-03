@@ -452,7 +452,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
 		closelog ();
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 	name = pwd->pw_name;
 
@@ -498,7 +498,7 @@ int main (int argc, char **argv)
 		} else {
 			usage ();
 			closelog ();
-			exit (EXIT_FAILURE);
+			return EXIT_FAILURE;
 		}
 		if (argc > 0) {
 
@@ -571,7 +571,7 @@ int main (int argc, char **argv)
 				     "changing", NULL, getuid(), 0);
 		}
 #endif
-		exit(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	/*
@@ -708,7 +708,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), 0);
 #endif
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	if (setuid (getuid ()) != 0) {
@@ -718,7 +718,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), 0);
 #endif
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	/*
@@ -734,7 +734,7 @@ int main (int argc, char **argv)
 		              audit_buf, NULL, getuid (), 0);
 #endif
 		perror (SHELL);
-		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+		return (errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC;
 	}
 
 	/*
@@ -804,7 +804,7 @@ int main (int argc, char **argv)
 	 * the previous environment which should be the user's login shell.
 	 */
 	err = shell (prog, initflag ? NULL : progbase, newenvp);
-	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+	return (err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC;
 	/*@notreached@*/
       failure:
 
@@ -829,6 +829,6 @@ int main (int argc, char **argv)
 		              "changing", NULL, getuid (), 0);
 	}
 #endif
-	exit (EXIT_FAILURE);
+	return EXIT_FAILURE;
 }
 

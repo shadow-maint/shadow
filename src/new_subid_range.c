@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 	if (!ok) {
 		fprintf(stderr, "Failed creating new id range\n");
-		exit(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 	printf("Subuid range %lu:%lu\n", range.start, range.count);
 

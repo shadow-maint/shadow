@@ -160,7 +160,7 @@ int main (int argc, char **argv)
 		         Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
-		exit (10);
+		return 10;
 	}
 	spwd = getspnam (pwd->pw_name); /* !USE_PAM, No need for xgetspnam */
 
@@ -176,7 +176,7 @@ int main (int argc, char **argv)
 		/*
 		 * Exit with status indicating state of account.
 		 */
-		exit (isexpired (pwd, spwd));
+		return isexpired (pwd, spwd);
 	}
 
 	/*

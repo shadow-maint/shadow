@@ -581,6 +581,6 @@ int main (int argc, char **argv)
 	sssd_flush_cache (SSSD_DB_PASSWD);
 
 	closelog ();
-	exit (E_SUCCESS);
+	return E_SUCCESS;
 }
 

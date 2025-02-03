@@ -551,7 +551,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				lflg = true;
 				break;
@@ -561,7 +561,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				mflg = true;
 				break;
@@ -576,7 +576,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
@@ -607,7 +607,7 @@ int main (int argc, char **argv)
 						fprintf (stderr,
 						         _("%s: Unknown user or range: %s\n"),
 						         Prog, optarg);
-						exit (E_BAD_ARG);
+						return E_BAD_ARG;
 					}
 				}
 
@@ -639,7 +639,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot open %s: %s\n"),
 		         Prog, FAILLOG_FILE, strerror (errno));
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 
 	/* Get the size of the faillog */
@@ -647,7 +647,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot get the size of %s: %s\n"),
 		         Prog, FAILLOG_FILE, strerror (errno));
-		exit (E_NOPERM);
+		return E_NOPERM;
 	}
 
 	if (lflg) {
@@ -681,6 +681,6 @@ int main (int argc, char **argv)
 		(void) fclose (fail);
 	}
 
-	exit (errors ? E_NOPERM : E_SUCCESS);
+	return errors ? E_NOPERM : E_SUCCESS;
 }
 

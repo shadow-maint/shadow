@@ -1034,7 +1034,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: pam_start: error %d\n"),
 		         Prog, ret));
-		exit (1);
+		return 1;
 	}
 
 	ret = pam_set_item (pamh, PAM_TTY, caller_tty);
@@ -1046,7 +1046,7 @@ int main (int argc, char **argv)
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
-		exit (1);
+		return 1;
 	}
 #endif				/* USE_PAM */
 
@@ -1095,7 +1095,7 @@ int main (int argc, char **argv)
 	/* set primary group id and supplementary groups */
 	if (setup_groups (pw) != 0) {
 		pam_end (pamh, PAM_ABORT);
-		exit (1);
+		return 1;
 	}
 
 	/*
@@ -1107,7 +1107,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
-		exit (1);
+		return 1;
 	}
 
 	ret = pam_open_session (pamh, 0);
@@ -1117,14 +1117,14 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		(void) pam_end (pamh, ret);
-		exit (1);
+		return 1;
 	}
 
 	prepare_pam_close_session ();
 
 	/* become the new user */
 	if (change_uid (pw) != 0) {
-		exit (1);
+		return 1;
 	}
 #else				/* !USE_PAM */
 	/* no limits if su from root (unless su must fake login's behavior) */
@@ -1133,7 +1133,7 @@ int main (int argc, char **argv)
 	}
 
 	if (setup_uid_gid (pw, caller_on_console) != 0) {
-		exit (1);
+		return 1;
 	}
 #endif				/* !USE_PAM */
 
@@ -1180,7 +1180,7 @@ int main (int argc, char **argv)
 			(void) fprintf (stderr,
 			                _("%s: Cannot drop the controlling terminal\n"),
 			                Prog);
-			exit (1);
+			return 1;
 		}
 	}
 

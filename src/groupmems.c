@@ -614,6 +614,6 @@ int main (int argc, char **argv)
 
 	close_files ();
 
-	exit (EXIT_SUCCESS);
+	return EXIT_SUCCESS;
 }
 

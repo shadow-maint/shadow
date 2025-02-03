@@ -495,13 +495,13 @@ int main (int argc, char **argv)
 
 	if (geteuid() != 0) {
 		fprintf (stderr, _("%s: Cannot possibly work without effective root\n"), Prog);
-		exit (1);
+		return 1;
 	}
 
 	process_flags (argc, argv);
 
 	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
-		exit (1);	/* must be a terminal */
+		return 1;	/* must be a terminal */
 	}
 
 	err = get_session_host(&host);
@@ -513,7 +513,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR,
 				 "No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
 				 err));
-		exit (1);
+		return 1;
 	}
 
 	tmptty = ttyname (0);
@@ -623,7 +623,7 @@ int main (int argc, char **argv)
 		         pam_strerror (pamh, retcode));
 		SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
 		         pam_strerror (pamh, retcode)));
-		exit (99);
+		return 99;
 	}
 
 	/*
@@ -699,13 +699,13 @@ int main (int argc, char **argv)
 				         _("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
 				PAM_END;
-				exit(0);
+				return 0;
 			} else if (retcode == PAM_ABORT) {
 				/* Serious problems, quit now */
 				(void) fputs (_("login: abort requested by PAM\n"), stderr);
 				SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
 				PAM_END;
-				exit(99);
+				return 99;
 			} else if (retcode != PAM_SUCCESS) {
 				SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%u)%s FOR '%s', %s",
 				         failcount, fromhost, failent_user,
@@ -743,7 +743,7 @@ int main (int argc, char **argv)
 				         _("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
 				PAM_END;
-				exit(0);
+				return 0;
 			}
 
 			/*
@@ -788,7 +788,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("Cannot find user (%s)\n"),
 		         username);
-		exit (1);
+		return 1;
 	}
 
 	/* This set up the process credential (group) and initialize the
@@ -796,7 +796,7 @@ int main (int argc, char **argv)
 	 * This has to be done before pam_setcred
 	 */
 	if (setup_groups (pwd) != 0) {
-		exit (1);
+		return 1;
 	}
 
 	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
@@ -832,7 +832,7 @@ int main (int argc, char **argv)
 			max_size = login_name_max_size();
 			if (subroot) {
 				closelog ();
-				exit (1);
+				return 1;
 			}
 			preauth_flag = false;
 			username = XMALLOC(max_size, char);
@@ -988,7 +988,7 @@ int main (int argc, char **argv)
 		/* allow only one attempt with -f */
 		if (fflg || (retries <= 0)) {
 			closelog ();
-			exit (1);
+			return 1;
 		}
 	}			/* while (true) */
 #endif				/* ! USE_PAM */
@@ -1009,7 +1009,7 @@ int main (int argc, char **argv)
 		         username, fromhost));
 		closelog ();
 		bad_time_notify ();
-		exit (1);
+		return 1;
 	}
 
 	check_nologin (pwd->pw_uid == 0);
@@ -1076,7 +1076,7 @@ int main (int argc, char **argv)
 				SYSLOG ((LOG_ERR,
 				         "cannot find user %s after update of expired password",
 				         username));
-				exit (1);
+				return 1;
 			}
 			spw_free (spwd);
 			spwd = xgetspnam (username);
@@ -1098,7 +1098,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: failure forking: %s"),
 		         Prog, strerror (errno));
 		PAM_END;
-		exit (0);
+		return 0;
 	} else if (child != 0) {
 		/*
 		 * parent - wait for child to finish, then cleanup
@@ -1106,7 +1106,7 @@ int main (int argc, char **argv)
 		 */
 		wait (NULL);
 		PAM_END;
-		exit (0);
+		return 0;
 	}
 	/* child */
 #endif
@@ -1151,7 +1151,7 @@ int main (int argc, char **argv)
 	if (change_uid (pwd))
 #endif
 	{
-		exit (1);
+		return 1;
 	}
 
 	setup_env (pwd);	/* set env vars, cd to the home dir */

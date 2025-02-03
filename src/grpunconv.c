@@ -142,7 +142,7 @@ int main (int argc, char **argv)
 	process_flags (argc, argv);
 
 	if (sgr_file_present () == 0) {
-		exit (0);	/* no /etc/gshadow, nothing to do */
+		return 0;	/* no /etc/gshadow, nothing to do */
 	}
 
 	if (gr_lock () == 0) {
@@ -231,7 +231,7 @@ int main (MAYBE_UNUSED int argc, char **argv)
 {
 	fprintf (stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);
-	exit (1);
+	return 1;
 }
 #endif				/* !SHADOWGRP */
 

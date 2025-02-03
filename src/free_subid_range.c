@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
 	if (!ok) {
 		fprintf(stderr, "Failed freeing id range\n");
-		exit(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	return 0;

@@ -397,7 +397,7 @@ int main (int argc, char **argv)
 						fprintf (stderr,
 						         _("%s: Unknown user or range: %s\n"),
 						         Prog, optarg);
-						exit (EXIT_FAILURE);
+						return EXIT_FAILURE;
 					}
 				}
 				break;
@@ -435,7 +435,7 @@ int main (int argc, char **argv)
 	lastlogfile = fopen (LASTLOG_FILE, (Cflg || Sflg)?"r+":"r");
 	if (NULL == lastlogfile) {
 		perror (LASTLOG_FILE);
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	/* Get the lastlog size */
@@ -443,7 +443,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot get the size of %s: %s\n"),
 		         Prog, LASTLOG_FILE, strerror (errno));
-		exit (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	if (Cflg || Sflg)

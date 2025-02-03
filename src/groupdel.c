@@ -368,7 +368,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (1);
+		return 1;
 	}
 
 	process_flags (argc, argv);
@@ -382,7 +382,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (1);
+			return 1;
 		}
 
 		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -403,7 +403,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (1);
+		return 1;
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -438,7 +438,7 @@ int main (int argc, char **argv)
 
 	if (run_parts ("/etc/shadow-maint/groupdel-pre.d", group_name,
 			Prog)) {
-		exit(1);
+		return 1;
 	}
 
 	/*
@@ -453,7 +453,7 @@ int main (int argc, char **argv)
 
 	if (run_parts ("/etc/shadow-maint/groupdel-post.d", group_name,
 			Prog)) {
-		exit(1);
+		return 1;
 	}
 
 	nscd_flush_cache ("group");

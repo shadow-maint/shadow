@@ -749,7 +749,7 @@ int main (int argc, char **argv)
 		         Prog);
 		SYSLOG ((LOG_WARN, "can't find the shadow password file"));
 		closelog ();
-		exit (E_SHADOW_NOTFOUND);
+		return E_SHADOW_NOTFOUND;
 	}
 
 	open_files (lflg);
@@ -856,6 +856,6 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
 
 	closelog ();
-	exit (E_SUCCESS);
+	return E_SUCCESS;
 }
 

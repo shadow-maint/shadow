@@ -1341,11 +1341,11 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: (line %jd, user %s) password not changed\n"),
 			         Prog, lines[i], usernames[i]);
-			exit (EXIT_FAILURE);
+			return EXIT_FAILURE;
 		}
 	}
 #endif				/* USE_PAM */
 
-	exit (EXIT_SUCCESS);
+	return EXIT_SUCCESS;
 }
 

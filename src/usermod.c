@@ -2192,7 +2192,7 @@ int main (int argc, char **argv)
 #endif				/* ENABLE_SUBIDS */
 	       )
 	    && (user_busy (user_name, user_id) != 0)) {
-		exit (E_USER_BUSY);
+		return E_USER_BUSY;
 	}
 
 #ifdef ACCT_TOOLS_SETUID
@@ -2204,7 +2204,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (1);
+			return 1;
 		}
 
 		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -2225,7 +2225,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (1);
+		return 1;
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -2233,7 +2233,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
-		exit (E_PW_UPDATE);
+		return E_PW_UPDATE;
 	}
 #endif
 
@@ -2324,7 +2324,7 @@ int main (int argc, char **argv)
 #ifdef WITH_TCB
 	if (   (lflg || uflg)
 	    && (shadowtcb_move (user_newname, user_newid) == SHADOWTCB_FAILURE) ) {
-		exit (E_PW_UPDATE);
+		return E_PW_UPDATE;
 	}
 #endif
 

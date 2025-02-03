@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	}
 	if (!ranges) {
 		fprintf(stderr, "Error fetching ranges\n");
-		exit(1);
+		return 1;
 	}
 	for (i = 0; i < count; i++) {
 		printf("%d: %s %lu %lu\n", i, owner,

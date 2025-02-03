@@ -597,7 +597,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (1);
+		return 1;
 	}
 
 	/*
@@ -609,7 +609,7 @@ int main (int argc, char **argv)
 
 	if (run_parts ("/etc/shadow-maint/groupadd-pre.d", group_name,
 			Prog)) {
-		exit(1);
+		return 1;
 	}
 
 #ifdef SHADOWGRP
@@ -624,7 +624,7 @@ int main (int argc, char **argv)
 
 	if (!gflg) {
 		if (find_new_gid (rflg, &group_id, NULL) < 0) {
-			exit (E_GID_IN_USE);
+			return E_GID_IN_USE;
 		}
 	}
 
@@ -632,7 +632,7 @@ int main (int argc, char **argv)
 	close_files ();
 	if (run_parts ("/etc/shadow-maint/groupadd-post.d", group_name,
 			Prog)) {
-		exit(1);
+		return 1;
 	}
 
 

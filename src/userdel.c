@@ -1019,7 +1019,7 @@ int main (int argc, char **argv)
 					fprintf (stderr,
 					         _("%s: -Z cannot be used with --prefix\n"),
 					         Prog);
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				if (is_selinux_enabled () > 0) {
 					Zflg = true;
@@ -1028,7 +1028,7 @@ int main (int argc, char **argv)
 					         _("%s: -Z requires SELinux enabled kernel\n"),
 					         Prog);
 
-					exit (E_BAD_ARG);
+					return E_BAD_ARG;
 				}
 				break;
 #endif				/* WITH_SELINUX */
@@ -1051,7 +1051,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (E_PW_UPDATE);
+			return E_PW_UPDATE;
 		}
 
 		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -1072,7 +1072,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (E_PW_UPDATE);
+		return E_PW_UPDATE;
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -1096,7 +1096,7 @@ int main (int argc, char **argv)
 
 		if (run_parts ("/etc/shadow-maint/userdel-pre.d", user_name,
 				"userdel")) {
-			exit(1);
+			return 1;
 		}
 		pw_open(O_RDONLY);
 		pwd = pw_locate (user_name); /* we care only about local users */
@@ -1110,7 +1110,7 @@ int main (int argc, char **argv)
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
-			exit (E_NOTFOUND);
+			return E_NOTFOUND;
 		}
 		user_id = pwd->pw_uid;
 		user_gid = pwd->pw_gid;
@@ -1124,7 +1124,7 @@ int main (int argc, char **argv)
 	}
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
-		exit (E_NOTFOUND);
+		return E_NOTFOUND;
 	}
 #endif				/* WITH_TCB */
 	/*
@@ -1140,7 +1140,7 @@ int main (int argc, char **argv)
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
-			exit (E_USER_BUSY);
+			return E_USER_BUSY;
 		}
 	}
 
@@ -1272,7 +1272,7 @@ int main (int argc, char **argv)
 	close_files ();
 
 	if (run_parts ("/etc/shadow-maint/userdel-post.d", user_name, "userdel")) {
-		exit(1);
+		return 1;
 	}
 
 #ifdef WITH_TCB

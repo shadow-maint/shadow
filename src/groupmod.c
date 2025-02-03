@@ -784,7 +784,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (E_CLEANUP_SERVICE);
+		return E_CLEANUP_SERVICE;
 	}
 
 	process_flags (argc, argv);
@@ -798,7 +798,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (E_PAM_USERNAME);
+			return E_PAM_USERNAME;
 		}
 
 		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -819,7 +819,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (E_PAM_ERROR);
+		return E_PAM_ERROR;
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -838,7 +838,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: group '%s' does not exist\n"),
 			         Prog, group_name);
-			exit (E_NOTFOUND);
+			return E_NOTFOUND;
 		} else {
 			group_id = grp->gr_gid;
 		}
