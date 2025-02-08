@@ -15,6 +15,7 @@
 #include "shadowlog_internal.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
@@ -84,7 +85,7 @@ nss_init(const char *nsswitch_path) {
 			continue;
 		if (strlen(line) < 8)
 			continue;
-		if (strncasecmp(line, "subid:", 6) != 0)
+		if (!strcaseprefix(line, "subid:"))
 			continue;
 		p = &line[6];
 		p = stpspn(p, " \t\n");
