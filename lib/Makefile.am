@@ -217,10 +217,10 @@ libshadow_la_SOURCES = \
 	string/memset/memzero.h \
 	string/sprintf/aprintf.c \
 	string/sprintf/aprintf.h \
-	string/sprintf/snprintf.c \
-	string/sprintf/snprintf.h \
 	string/sprintf/stpeprintf.c \
 	string/sprintf/stpeprintf.h \
+	string/sprintf/stprintf.c \
+	string/sprintf/stprintf.h \
 	string/sprintf/xaprintf.c \
 	string/sprintf/xaprintf.h \
 	string/strchr/strchrcnt.c \
