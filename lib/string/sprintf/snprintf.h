@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -53,8 +54,10 @@ vsnprintf_(char *restrict s, size_t size, const char *restrict fmt, va_list ap)
 	len = vsnprintf(s, size, fmt, ap);
 	if (len == -1)
 		return -1;
-	if ((size_t) len >= size)
+	if ((size_t) len >= size) {
+		errno = E2BIG;
 		return -1;
+	}
 
 	return len;
 }

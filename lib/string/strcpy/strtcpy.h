@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
@@ -42,8 +43,10 @@ strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 
 	stpcpy(mempcpy(dst, src, dlen), "");
 
-	if (trunc)
+	if (trunc) {
+		errno = E2BIG;
 		return -1;
+	}
 
 	return slen;
 }
