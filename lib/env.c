@@ -21,7 +21,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "shadowlog.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
@@ -169,7 +169,7 @@ void set_env (int argc, char *const *argv)
 
 		cp = strchr (*argv, '=');
 		if (NULL == cp) {
-			assert(SNPRINTF(variable, "L%d", noname) != -1);
+			assert(STPRINTF(variable, "L%d", noname) != -1);
 			noname++;
 			addenv (variable, *argv);
 		} else {
