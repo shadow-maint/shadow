@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_SPRINTF_SNPRINTF_H_
-#define SHADOW_INCLUDE_LIB_STRING_SPRINTF_SNPRINTF_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPRINTF_H_
+#define SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPRINTF_H_
 
 
 #include "config.h"
@@ -19,30 +19,30 @@
 
 
 // stprintf_a - string truncate print formatted array
-#define stprintf_a(s, fmt, ...)                                               \
-(                                                                             \
-	snprintf_(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)               \
+#define stprintf_a(s, fmt, ...)                                       \
+(                                                                     \
+	stprintf(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)        \
 )
 
 
 // stprintf - string truncate print formatted
 format_attr(printf, 3, 4)
-inline int snprintf_(char *restrict s, ssize_t size,
+inline int stprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, ...);
 // vstprintf - va_list string truncate print formatted
 format_attr(printf, 3, 0)
-inline int vsnprintf_(char *restrict s, ssize_t size,
+inline int vstprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, va_list ap);
 
 
 inline int
-snprintf_(char *restrict s, ssize_t size, const char *restrict fmt, ...)
+stprintf(char *restrict s, ssize_t size, const char *restrict fmt, ...)
 {
 	int      len;
 	va_list  ap;
 
 	va_start(ap, fmt);
-	len = vsnprintf_(s, size, fmt, ap);
+	len = vstprintf(s, size, fmt, ap);
 	va_end(ap);
 
 	return len;
@@ -50,7 +50,7 @@ snprintf_(char *restrict s, ssize_t size, const char *restrict fmt, ...)
 
 
 inline int
-vsnprintf_(char *restrict s, ssize_t size, const char *restrict fmt, va_list ap)
+vstprintf(char *restrict s, ssize_t size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 
