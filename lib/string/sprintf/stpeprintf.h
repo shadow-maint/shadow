@@ -10,9 +10,9 @@
 
 #include <stdarg.h>
 #include <stddef.h>
-#include <stdio.h>
 
 #include "attr.h"
+#include "string/sprintf/snprintf.h"
 
 
 #if !defined(HAVE_STPEPRINTF)
@@ -57,20 +57,17 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
  *
  * RETURN VALUE
  *	dst + strlen(dst)
- *		•  On success, these functions return a pointer to the
- *		   terminating NUL byte.
+ *		On success, these functions return a pointer to the
+ *		terminating NUL byte.
  *
- *	end
- *		•  If this call truncated the resulting string.
- *		•  If `dst == end` (a previous chained call to these
- *		   functions truncated).
- *	NULL
- *		•  If this function failed (see ERRORS).
- *		•  If `dst == NULL` (a previous chained call to these
- *		   functions failed).
+ *	NULL	On error.
  *
  * ERRORS
+ *	E2BIG	The string was truncated.
+ *
  *	These functions may fail for the same reasons as vsnprintf(3).
+ *
+ *	If dst is NULL at input, this function doesn't clobber errno.
  */
 
 
@@ -97,18 +94,13 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 	int        len;
 	ptrdiff_t  size;
 
-	if (dst == end)
-		return end;
 	if (dst == NULL)
 		return NULL;
 
 	size = end - dst;
-	len = vsnprintf(dst, size, fmt, ap);
-
+	len = vsnprintf_(dst, size, fmt, ap);
 	if (len == -1)
 		return NULL;
-	if (len >= size)
-		return end;
 
 	return dst + len;
 }
