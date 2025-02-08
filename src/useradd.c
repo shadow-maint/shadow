@@ -67,6 +67,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
+#include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
@@ -2361,7 +2362,7 @@ static void create_mail (void)
 	const char    *spool;
 	struct group  *gr;
 
-	if (strcasecmp(create_mail_spool, "yes") != 0)
+	if (!strcaseeq(create_mail_spool, "yes"))
 		return;
 
 	spool = getdef_str("MAIL_DIR");
