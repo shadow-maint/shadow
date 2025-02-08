@@ -14,7 +14,7 @@
 #include <cmocka.h>
 
 #include "sizeof.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 
 
 static void test_stprintf_a_trunc(void **);
