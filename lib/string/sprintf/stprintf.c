@@ -4,13 +4,13 @@
 
 #include "config.h"
 
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 
 #include <stdarg.h>
 #include <sys/types.h>
 
 
-extern inline int snprintf_(char *restrict s, ssize_t size,
+extern inline int stprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, ...);
-extern inline int vsnprintf_(char *restrict s, ssize_t size,
+extern inline int vstprintf(char *restrict s, ssize_t size,
     const char *restrict fmt, va_list ap);
