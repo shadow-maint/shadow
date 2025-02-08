@@ -33,7 +33,7 @@
 #include "pwio.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -706,7 +706,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
-	SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
+	STPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
 	         fullnm, roomno, workph, homeph,
 	         (!streq(slop, "")) ? "," : "", slop);
 
