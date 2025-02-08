@@ -12,7 +12,7 @@
 #include <stddef.h>
 
 #include "attr.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 
 
 #if !defined(HAVE_STPEPRINTF)
@@ -53,7 +53,7 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 		return NULL;
 
 	size = end - dst;
-	len = vsnprintf_(dst, size, fmt, ap);
+	len = vstprintf(dst, size, fmt, ap);
 	if (len == -1)
 		return NULL;
 

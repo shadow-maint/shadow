@@ -23,7 +23,7 @@
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
 #include "string/ctype/strisascii/strisdigit.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -830,7 +830,7 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 		if (pw == NULL) {
 			return false;
 		}
-		if (snprintf_(id, ID_SIZE, "%u", pw->pw_uid) == -1)
+		if (stprintf(id, ID_SIZE, "%u", pw->pw_uid) == -1)
 			return false;
 		break;
 	case ID_TYPE_GID:
@@ -838,7 +838,7 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 		if (gr == NULL) {
 			return false;
 		}
-		if (snprintf_(id, ID_SIZE, "%u", gr->gr_gid) == -1)
+		if (stprintf(id, ID_SIZE, "%u", gr->gr_gid) == -1)
 			return false;
 		break;
 	default:
