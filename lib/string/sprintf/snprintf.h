@@ -10,7 +10,6 @@
 
 #include <errno.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include <stdio.h>
 
 #include "attr.h"
@@ -24,15 +23,14 @@
 
 
 format_attr(printf, 3, 4)
-inline int snprintf_(char *restrict s, size_t size, const char *restrict fmt,
-    ...);
+inline int snprintf_(char *restrict s, int size, const char *restrict fmt, ...);
 format_attr(printf, 3, 0)
-inline int vsnprintf_(char *restrict s, size_t size, const char *restrict fmt,
+inline int vsnprintf_(char *restrict s, int size, const char *restrict fmt,
     va_list ap);
 
 
 inline int
-snprintf_(char *restrict s, size_t size, const char *restrict fmt, ...)
+snprintf_(char *restrict s, int size, const char *restrict fmt, ...)
 {
 	int      len;
 	va_list  ap;
@@ -46,14 +44,14 @@ snprintf_(char *restrict s, size_t size, const char *restrict fmt, ...)
 
 
 inline int
-vsnprintf_(char *restrict s, size_t size, const char *restrict fmt, va_list ap)
+vsnprintf_(char *restrict s, int size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 
 	len = vsnprintf(s, size, fmt, ap);
 	if (len == -1)
 		return -1;
-	if ((size_t) len >= size) {
+	if (len >= size) {
 		errno = E2BIG;
 		return -1;
 	}
