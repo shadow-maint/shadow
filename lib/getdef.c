@@ -32,6 +32,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strchr/stpspn.h"
 #include "string/strchr/strrspn.h"
+#include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
@@ -226,7 +227,7 @@ bool getdef_bool (const char *item)
 		return false;
 	}
 
-	return (strcasecmp (d->value, "yes") == 0);
+	return strcaseeq(d->value, "yes");
 }
 
 
