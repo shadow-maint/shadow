@@ -40,7 +40,7 @@
 #include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
@@ -588,16 +588,16 @@ int main (int argc, char **argv)
 	}
 
 	if (!streq(cp, "")) {
-		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
+		STPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
-		SNPRINTF(fromhost, " on '%.100s'", tty);
+		STPRINTF(fromhost, " on '%.100s'", tty);
 	}
 	free(host);
 
       top:
 	/* only allow ALARM sec. for login */
 	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
-	SNPRINTF(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
+	STPRINTF(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
 	(void) signal (SIGALRM, alarm_handler);
 	if (timeout > 0) {
 		(void) alarm (timeout);
@@ -642,7 +642,7 @@ int main (int argc, char **argv)
 
 		/* Make the login prompt look like we want it */
 		if (gethostname (hostn, sizeof (hostn)) == 0) {
-			SNPRINTF(loginprompt, _("%s login: "), hostn);
+			STPRINTF(loginprompt, _("%s login: "), hostn);
 		} else {
 			STRTCPY(loginprompt, _("login: "));
 		}
