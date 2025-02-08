@@ -13,7 +13,7 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 
 
 /*
@@ -57,8 +57,8 @@ int open_pidfd(const char *pidstr)
 	if (get_pid(pidstr, &target) == -1)
 		return -ENOENT;
 
-	if (SNPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
-		fprintf(stderr, "snprintf of proc path failed for %d: %s\n",
+	if (STPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
+		fprintf(stderr, "stprintf of proc path failed for %d: %s\n",
 			target, strerror(errno));
 		return -EINVAL;
 	}

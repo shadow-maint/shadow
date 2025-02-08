@@ -25,7 +25,7 @@
 #include "pwauth.h"
 #include "getdef.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 
 #ifdef SKEY
@@ -111,7 +111,7 @@ pw_auth(const char *cipher, const char *user)
 	}
 #endif
 
-	SNPRINTF(prompt, cp, user);
+	STPRINTF(prompt, cp, user);
 	clear = agetpass(prompt);
 	input = (clear == NULL) ? "" : clear;
 
