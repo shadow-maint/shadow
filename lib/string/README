@@ -213,7 +213,7 @@ sprintf/ - Formatted string creation
 	sprintf(3) variant that allocates.
 	It has better interface than asprintf(3).
 
-    stprintf()  // Current name: snprintf_()
+    stprintf()
 	snprintf(3) wrapper that reports truncation with -1.
 	If you need more than one call to form a string,
 	use seprintf() instead.
