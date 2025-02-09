@@ -1,7 +1,5 @@
-/*
- * SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <setjmp.h>
@@ -19,6 +17,7 @@
 #include "string/sprintf/xasprintf.h"
 
 
+#define smock()               _Generic(mock(), uintmax_t: (intmax_t) mock())
 #define assert_unreachable()  assert_true(0)
 
 #define XASPRINTF_CALLED  (-36)
@@ -56,7 +55,7 @@ main(void)
 int
 __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap)
 {
-	return mock() == -1 ? -1 : __real_vasprintf(p, fmt, ap);
+	return smock() == -1 ? -1 : __real_vasprintf(p, fmt, ap);
 }
 
 
