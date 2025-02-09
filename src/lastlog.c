@@ -30,6 +30,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "string/memset/memzero.h"
 #include "string/strftime.h"
 
@@ -116,7 +117,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 
 
 	offset = (off_t) pw->pw_uid * sizeof (ll);
-	if (offset + sizeof (ll) <= statbuf.st_size) {
+	if (offset + ssizeof(ll) <= statbuf.st_size) {
 		/* fseeko errors are not really relevant for us. */
 		int err = fseeko (lastlogfile, offset, SEEK_SET);
 		assert (0 == err);
