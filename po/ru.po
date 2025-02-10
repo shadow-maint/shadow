@@ -244,7 +244,7 @@ msgstr "Невозможно задать имя для %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: строка %d: вызов chown %s завершился неудачно: %s\n"
 
 #, fuzzy, c-format

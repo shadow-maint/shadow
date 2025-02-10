@@ -243,7 +243,7 @@ msgstr "Não foi possível definir nome para %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: linha %d: chown %s falhou: %s\n"
 
 #, fuzzy, c-format
