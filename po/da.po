@@ -244,7 +244,7 @@ msgstr "Kunne ikke angive navn for %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: Linje %d: chown %s fejlede: %s\n"
 
 #, fuzzy, c-format

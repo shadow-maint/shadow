@@ -231,7 +231,7 @@ msgstr "%s の名前を設定できません\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: %d 行: chown %s が失敗しました: %s\n"
 
 #, fuzzy, c-format
