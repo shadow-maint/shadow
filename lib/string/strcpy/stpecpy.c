@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2022-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,6 +8,6 @@
 
 
 #if !defined(HAVE_STPECPY)
-extern inline char *stpecpy(char *dst, const char *end,
+extern inline char *stpecpy(char *dst, const char end[0],
     const char *restrict src);
 #endif

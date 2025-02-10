@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2022-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -20,13 +20,13 @@
 #if !defined(HAVE_STPECPY)
 // stpecpy - string offset-pointer end-pointer copy
 ATTR_STRING(3)
-inline char *stpecpy(char *dst, const char *end, const char *restrict src);
+inline char *stpecpy(char *dst, const char end[0], const char *restrict src);
 #endif
 
 
 #if !defined(HAVE_STPECPY)
 inline char *
-stpecpy(char *dst, const char *end, const char *restrict src)
+stpecpy(char *dst, const char end[0], const char *restrict src)
 {
 	ssize_t  dlen;
 
