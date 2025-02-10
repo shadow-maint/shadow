@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPEPRINTF_H_
-#define SHADOW_INCLUDE_LIB_STRING_SPRINTF_STPEPRINTF_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_SPRINTF_SEPRINTF_H_
+#define SHADOW_INCLUDE_LIB_STRING_SPRINTF_SEPRINTF_H_
 
 
 #include <config.h>
@@ -15,28 +15,28 @@
 #include "string/sprintf/stprintf.h"
 
 
-#if !defined(HAVE_STPEPRINTF)
+#if !defined(HAVE_SEPRINTF)
 // string pointer-to-end print formatted
 // Like stpecpy(), but with a formatted string.
 // Report internal snprintf(3) errors with NULL and errno.
 // Calls to these functions can be chained with calls to stpecpy().
 format_attr(printf, 3, 4)
-inline char *stpeprintf(char *dst, char end[0], const char *restrict fmt, ...);
+inline char *seprintf(char *dst, char end[0], const char *restrict fmt, ...);
 format_attr(printf, 3, 0)
-inline char *vstpeprintf(char *dst, char end[0], const char *restrict fmt,
+inline char *vseprintf(char *dst, char end[0], const char *restrict fmt,
     va_list ap);
 #endif
 
 
-#if !defined(HAVE_STPEPRINTF)
+#if !defined(HAVE_SEPRINTF)
 inline char *
-stpeprintf(char *dst, char end[0], const char *restrict fmt, ...)
+seprintf(char *dst, char end[0], const char *restrict fmt, ...)
 {
 	char     *p;
 	va_list  ap;
 
 	va_start(ap, fmt);
-	p = vstpeprintf(dst, end, fmt, ap);
+	p = vseprintf(dst, end, fmt, ap);
 	va_end(ap);
 
 	return p;
@@ -44,9 +44,9 @@ stpeprintf(char *dst, char end[0], const char *restrict fmt, ...)
 #endif
 
 
-#if !defined(HAVE_STPEPRINTF)
+#if !defined(HAVE_SEPRINTF)
 inline char *
-vstpeprintf(char *dst, char end[0], const char *restrict fmt, va_list ap)
+vseprintf(char *dst, char end[0], const char *restrict fmt, va_list ap)
 {
 	int        len;
 	ptrdiff_t  size;
