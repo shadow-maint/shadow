@@ -17,47 +17,10 @@
 
 
 #if !defined(HAVE_STPECPY)
+// stpecpy - string offset-pointer end-pointer copy
 ATTR_STRING(3)
 inline char *stpecpy(char *dst, char *end, const char *restrict src);
 #endif
-
-
-/*
- * SYNOPSIS
- *	[[gnu::null_terminated_string_arg(3)]]
- *	char *_Nullable stpecpy(char *_Nullable dst, char end[0],
- *	                        const char *restrict src);
- *
- * ARGUMENTS
- *	dst	Destination buffer where to copy a string.
- *
- *	end	Pointer to one after the last element of the buffer
- *		pointed to by `dst`.  Usually, it should be calculated
- *		as `dst + countof(dst)`.
- *
- *	src	Source string to be copied into dst.
- *
- * DESCRIPTION
- *	This function copies the string pointed to by src, into a string
- *	at the buffer pointed to by dst.  If the destination buffer,
- *	limited by a pointer to its end --one after its last element--,
- *	isn't large enough to hold the copy, the resulting string is
- *	truncated.
- *
- *	This function can be chained with calls to [v]stpeprintf().
- *
- * RETURN VALUE
- *	dst + strlen(dst)
- *		On success, this function returns a pointer to the
- *		terminating NUL byte.
- *
- *	NULL	On error.
- *
- * ERRORS
- *	E2BIG	The string was truncated.
- *
- *	If dst is NULL at input, this function doesn't clobber errno.
- */
 
 
 #if !defined(HAVE_STPECPY)
