@@ -213,7 +213,7 @@ msgstr "%s：无法设置上限\n"
 
 #, fuzzy, c-format
 #| msgid "%s: snprintf failed!\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s：snprintf 失败\n"
 
 #, c-format
