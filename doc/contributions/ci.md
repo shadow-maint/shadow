@@ -6,8 +6,7 @@ only pull-requests with green results are merged.
 
 ## Build & install
 
-The project is built & installed on Ubuntu, Alpine, Debian and Fedora. The last
-three distributions are built & installed on containers, and the workflow can
+The project is built & installed on various distributions. The workflow can
 be triggered locally by following the instructions specified in the
 [Build & install](build_install.md#containers) page.
 
