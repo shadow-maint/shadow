@@ -22,8 +22,10 @@
 )
 
 
+// stprintf - string truncate print formatted
 format_attr(printf, 3, 4)
 inline int snprintf_(char *restrict s, int size, const char *restrict fmt, ...);
+// vstprintf - va_list string truncate print formatted
 format_attr(printf, 3, 0)
 inline int vsnprintf_(char *restrict s, int size, const char *restrict fmt,
     va_list ap);
