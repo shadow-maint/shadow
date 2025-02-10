@@ -16,10 +16,8 @@
 #include "attr.h"
 
 
-#if !defined(HAVE_STPECPY)
 ATTR_STRING(3)
 inline char *stpecpy(char *dst, char *end, const char *restrict src);
-#endif
 
 
 /*
@@ -60,7 +58,6 @@ inline char *stpecpy(char *dst, char *end, const char *restrict src);
  */
 
 
-#if !defined(HAVE_STPECPY)
 inline char *
 stpecpy(char *dst, char *end, const char *restrict src)
 {
@@ -84,7 +81,6 @@ stpecpy(char *dst, char *end, const char *restrict src)
 
 	return p;
 }
-#endif
 
 
 #endif  // include guard
