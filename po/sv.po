@@ -231,7 +231,7 @@ msgstr "Kunde inte allokera plats för konfigurationsinformationen.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: rad %d: chown %s misslyckades: %s\n"
 
 #, fuzzy, c-format

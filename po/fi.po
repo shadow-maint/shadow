@@ -209,7 +209,7 @@ msgstr "Asetustiedoille ei voi varata tilaa.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: tiedosta ei voi avata\n"
 
 #, fuzzy, c-format

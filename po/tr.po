@@ -211,7 +211,7 @@ msgstr "Yapılandırma bilgileri için yer ayrılamadı.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: dosya açılamıyor\n"
 
 #, fuzzy, c-format

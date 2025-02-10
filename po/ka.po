@@ -227,8 +227,8 @@ msgid "%s: Could not set caps\n"
 msgstr "%s: caps-ების დაყენების შედომა\n"
 
 #, c-format
-msgid "%s: stpeprintf failed!\n"
-msgstr "%s: stpeprintf ჩავარდა!\n"
+msgid "%s: seprintf failed!\n"
+msgstr "%s: seprintf ჩავარდა!\n"
 
 #, c-format
 msgid "%s: open of %s failed: %s\n"

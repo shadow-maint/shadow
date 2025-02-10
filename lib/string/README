@@ -220,7 +220,7 @@ sprintf/ - Formatted string creation
     stprintf_a()
 	Like stprintf(), but takes an array.
 
-    seprintf()  // Current name: stpeprintf())
+    seprintf()
 	Similar to stprintf(), but takes a pointer to the end instead of
 	a size.  This makes it safer for chaining several calls.
 

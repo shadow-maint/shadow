@@ -219,7 +219,7 @@ msgstr "Hindi makapaglaan ng lugar para sa impormasyong pagsasaayos.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: hindi mabuksan ang talaksan\n"
 
 #, fuzzy, c-format

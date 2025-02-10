@@ -251,7 +251,7 @@ msgstr "Klarte ikke å endre navn på %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: klarte ikke å åpne fil\n"
 
 #, fuzzy, c-format

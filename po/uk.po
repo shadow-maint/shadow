@@ -235,7 +235,7 @@ msgstr "%s: не вдалося встановити можливості\n"
 
 #, fuzzy, c-format
 #| msgid "%s: snprintf failed!\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: помилка snprintf!\n"
 
 #, c-format

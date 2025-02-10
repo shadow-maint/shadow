@@ -228,7 +228,7 @@ msgstr "Nelze nastavit jméno uživatele %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: snprintf failed!\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: snprintf selhalo!\n"
 
 #, c-format

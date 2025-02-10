@@ -215,7 +215,7 @@ msgstr "རིམ་སྒྲིག་བརྡ་དོན་གྱི་དོ
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
