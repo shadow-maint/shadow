@@ -10,8 +10,8 @@
 
 
 #if !defined(HAVE_SEPRINTF)
-extern inline char *seprintf(char *dst, const char *end,
+extern inline char *seprintf(char *dst, const char end[0],
     const char *restrict fmt, ...);
-extern inline char *vseprintf(char *dst, const char *end,
+extern inline char *vseprintf(char *dst, const char end[0],
     const char *restrict fmt, va_list ap);
 #endif
