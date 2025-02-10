@@ -15,13 +15,11 @@
 #include "string/sprintf/stprintf.h"
 
 
-#if !defined(HAVE_STPEPRINTF)
 format_attr(printf, 3, 4)
 inline char *stpeprintf(char *dst, char *end, const char *restrict fmt, ...);
 format_attr(printf, 3, 0)
 inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
     va_list ap);
-#endif
 
 
 /*
@@ -71,7 +69,6 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
  */
 
 
-#if !defined(HAVE_STPEPRINTF)
 inline char *
 stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
 {
@@ -84,10 +81,8 @@ stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
 
 	return p;
 }
-#endif
 
 
-#if !defined(HAVE_STPEPRINTF)
 inline char *
 vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 {
@@ -104,7 +99,6 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 
 	return dst + len;
 }
-#endif
 
 
 #endif  // include guard
