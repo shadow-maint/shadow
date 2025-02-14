@@ -238,7 +238,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	if (localtime_r(&date, &tm) == NULL) {
+	if (gmtime_r(&date, &tm) == NULL) {
 		puts(_("future"));
 		return;
 	}
