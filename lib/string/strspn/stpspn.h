@@ -13,6 +13,7 @@
 #include "attr.h"
 
 
+// string returns-pointer substring prefix length
 // Similar to strspn(3), but return a pointer instead of an offset.
 // Similar to strchrnul(3), but search for any bytes not in 'accept'.
 #define stpspn(s, accept)                                                     \

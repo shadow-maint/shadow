@@ -18,6 +18,7 @@ ATTR_STRING(1)
 inline size_t strchrcnt(const char *s, char c);
 
 
+// string character count
 inline size_t
 strchrcnt(const char *s, char c)
 {

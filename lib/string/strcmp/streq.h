@@ -19,6 +19,7 @@ ATTR_STRING(2)
 inline bool streq(const char *s1, const char *s2);
 
 
+// strings equal
 /* Return true if s1 and s2 compare equal.  */
 inline bool
 streq(const char *s1, const char *s2)

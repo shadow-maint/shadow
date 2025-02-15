@@ -13,6 +13,7 @@
 #include "string/strspn/strrcspn.h"
 
 
+// string returns-pointer rear complement substring prefix length
 #define stprcspn(s, reject)                                                   \
 ({                                                                            \
 	__auto_type  s_ = (s);                                                \
