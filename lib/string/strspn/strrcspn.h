@@ -20,6 +20,7 @@ ATTR_STRING(2)
 inline size_t strrcspn(const char *s, const char *reject);
 
 
+// string rear complement substring prefix length
 inline size_t
 strrcspn(const char *s, const char *reject)
 {

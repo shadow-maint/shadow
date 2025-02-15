@@ -13,6 +13,7 @@
 #include "attr.h"
 
 
+// string null-byte
 // Similar to strlen(3), but return a pointer instead of an offset.
 #define strnul(s)                                                             \
 ({                                                                            \

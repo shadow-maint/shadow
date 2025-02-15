@@ -13,6 +13,7 @@
 #include "sizeof.h"
 
 
+// string format time
 #define STRFTIME(dst, fmt, tm)  strftime(dst, NITEMS(dst), fmt, tm)
 
 

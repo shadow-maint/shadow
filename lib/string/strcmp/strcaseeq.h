@@ -18,6 +18,7 @@ ATTR_STRING(1) ATTR_STRING(2)
 inline bool strcaseeq(const char *s1, const char *s2);
 
 
+// strings case-insensitive equal
 // streq(), but case-insensitive.
 inline bool
 strcaseeq(const char *s1, const char *s2)

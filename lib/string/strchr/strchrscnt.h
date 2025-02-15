@@ -20,6 +20,7 @@ ATTR_STRING(2)
 inline size_t strchrscnt(const char *s, const char *c);
 
 
+// string characters count
 // Similar to strchrcnt(), but search for multiple characters.
 inline size_t
 strchrscnt(const char *s, const char *c)
