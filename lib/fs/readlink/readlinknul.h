@@ -22,13 +22,14 @@
 
 
 ATTR_STRING(1)
-inline ssize_t readlinknul(const char *restrict link, char *restrict buf,
-    size_t size);
+inline ssize_t readlinknul(size_t size;
+    const char *restrict link, char buf[restrict size], size_t size);
 
 
 // Similar to readlink(2), but terminate the string.
 inline ssize_t
-readlinknul(const char *restrict link, char *restrict buf, size_t size)
+readlinknul(size_t size;
+    const char *restrict link, char buf[restrict size], size_t size)
 {
 	size_t   ulen;
 	ssize_t  slen;
