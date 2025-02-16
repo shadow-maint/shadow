@@ -62,6 +62,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 
@@ -714,7 +715,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	 * the shell specified in /etc/passwd (not the one specified with
 	 * --shell, which will be the one executed in the chroot later).
 	 */
-	if ('*' == pw->pw_shell[0]) {	/* subsystem root required */
+	if (strprefix(pw->pw_shell, "*")) {  /* subsystem root required */
 		subsystem (pw);	/* change to the subsystem root */
 		endpwent ();		/* close the old password databases */
 		endspent ();
@@ -915,7 +916,7 @@ static void set_environment (struct passwd *pw)
 #ifndef USE_PAM
 		cp = getdef_str ("ENV_TZ");
 		if (NULL != cp) {
-			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
 		}
 
 		/*
@@ -950,7 +951,7 @@ static void set_environment (struct passwd *pw)
 	cp = getdef_str ((pw->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
 		addenv ((pw->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
-	} else if (strchr (cp, '=') != NULL) {
+	} else if (strchr(cp, '=')) {
 		addenv (cp, NULL);
 	} else {
 		addenv ("PATH", cp);
