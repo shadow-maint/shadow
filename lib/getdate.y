@@ -31,6 +31,7 @@
 
 #include "attr.h"
 #include "getdate.h"
+#include "string/ctype/strtoascii/strtolower.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
@@ -626,10 +627,7 @@ static int LookupWord (char *buff)
   int i;
   bool abbrev;
 
-  /* Make it lowercase. */
-  for (p = buff; !streq(p, ""); p++)
-    if (isupper (*p))
-      *p = tolower (*p);
+  strtolower(buff);
 
   if (streq(buff, "am") || streq(buff, "a.m."))
     {
