@@ -36,7 +36,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "string/strtok/stpsep.h"
 
 
 /*
@@ -222,8 +221,8 @@ static char *copy_field (char *in, char *out, char *extra)
 	while (NULL != in) {
 		char  *f;
 
-		f = in;
-		cp = stpsep(in, ",");
+		f = strsep(&in, ",");
+		cp = in;
 
 		if (strchr(f, '=') == NULL)
 			break;
@@ -235,7 +234,6 @@ static char *copy_field (char *in, char *out, char *extra)
 
 			strcat(extra, f);
 		}
-		in = cp;
 	}
 	if ((NULL != in) && (NULL != out)) {
 		strcpy (out, in);
