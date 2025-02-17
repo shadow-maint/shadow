@@ -216,27 +216,32 @@ static void new_fields (void)
  */
 static char *copy_field (char *in, char *out, char *extra)
 {
+	char *cp = NULL;
+
 	while (NULL != in) {
-		char  *f;
+		cp = strchr (in, ',');
+		if (NULL != cp) {
+			*cp++ = '\0';
+		}
 
-		f = strsep(&in, ",");
-
-		if (strchr(f, '=') == NULL)
+		if (strchr (in, '=') == NULL) {
 			break;
+		}
 
 		if (NULL != extra) {
 			if (!streq(extra, "")) {
 				strcat (extra, ",");
 			}
 
-			strcat(extra, f);
+			strcat (extra, in);
 		}
+		in = cp;
 	}
 	if ((NULL != in) && (NULL != out)) {
 		strcpy (out, in);
 	}
 
-	return in;
+	return cp;
 }
 
 /*
