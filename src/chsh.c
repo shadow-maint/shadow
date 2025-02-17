@@ -555,9 +555,11 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		fail_exit (1);
 	}
-	if (loginsh[0] != '/'
-			|| is_restricted_shell (loginsh)
-			|| (access (loginsh, X_OK) != 0)) {
+	if (!streq(loginsh, "")
+	    && (loginsh[0] != '/'
+	        || is_restricted_shell (loginsh)
+	        || (access (loginsh, X_OK) != 0)))
+	{
 		if (amroot) {
 			fprintf (stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
 		} else {
@@ -567,10 +569,13 @@ int main (int argc, char **argv)
 	}
 
 	/* Even for root, warn if an invalid shell is specified. */
-	if (access (loginsh, F_OK) != 0) {
-		fprintf (stderr, _("%s: Warning: %s does not exist\n"), Prog, loginsh);
-	} else if (access (loginsh, X_OK) != 0) {
-		fprintf (stderr, _("%s: Warning: %s is not executable\n"), Prog, loginsh);
+	if (!streq(loginsh, "")) {
+		/* But not if an empty string is given, documented as meaning the default shell */
+		if (access (loginsh, F_OK) != 0) {
+			fprintf (stderr, _("%s: Warning: %s does not exist\n"), Prog, loginsh);
+		} else if (access (loginsh, X_OK) != 0) {
+			fprintf (stderr, _("%s: Warning: %s is not executable\n"), Prog, loginsh);
+		}
 	}
 
 	update_shell (user, loginsh);
