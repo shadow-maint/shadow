@@ -92,8 +92,6 @@
 static int yylex (void);
 static int yyerror (const char *s);
 
-#define EPOCH		1970
-#define HOUR(x)		((x) * 60)
 
 #define MAX_BUFF_LEN    128   /* size of buffer to read the date into */
 
@@ -128,8 +126,6 @@ static int	yyHaveDate;
 static int	yyHaveDay;
 static int	yyHaveRel;
 static int	yyHaveTime;
-static int	yyHaveZone;
-static int	yyTimezone;
 static int	yyDay;
 static int	yyHour;
 static int	yyMinutes;
@@ -151,13 +147,13 @@ static int	yyRelYear;
     enum _MERIDIAN	Meridian;
 }
 
-%token	tAGO tDAY tDAY_UNIT tDAYZONE tDST tHOUR_UNIT tID
+%token	tAGO tDAY tDAY_UNIT tHOUR_UNIT tID
 %token	tMERIDIAN tMINUTE_UNIT tMONTH tMONTH_UNIT
-%token	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT tZONE
+%token	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
 
-%type	<Number>	tDAY tDAY_UNIT tDAYZONE tHOUR_UNIT tMINUTE_UNIT
+%type	<Number>	tDAY tDAY_UNIT tHOUR_UNIT tMINUTE_UNIT
 %type	<Number>	tMONTH tMONTH_UNIT
-%type	<Number>	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT tZONE
+%type	<Number>	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
 %type	<Meridian>	tMERIDIAN o_merid
 
 %%
@@ -168,9 +164,6 @@ spec	: /* NULL */
 
 item	: time {
 	    yyHaveTime++;
-	}
-	| zone {
-	    yyHaveZone++;
 	}
 	| date {
 	    yyHaveDate++;
@@ -196,14 +189,10 @@ time	: tUNUMBER tMERIDIAN {
 	    yySeconds = 0;
 	    yyMeridian = $4;
 	}
-	| tUNUMBER ':' tUNUMBER tSNUMBER {
+	| tUNUMBER ':' tUNUMBER {
 	    yyHour = $1;
 	    yyMinutes = $3;
 	    yyMeridian = MER24;
-	    yyHaveZone++;
-	    yyTimezone = ($4 < 0
-			  ? -$4 % 100 + (-$4 / 100) * 60
-			  : - ($4 % 100 + ($4 / 100) * 60));
 	}
 	| tUNUMBER ':' tUNUMBER ':' tUNUMBER o_merid {
 	    yyHour = $1;
@@ -211,27 +200,11 @@ time	: tUNUMBER tMERIDIAN {
 	    yySeconds = $5;
 	    yyMeridian = $6;
 	}
-	| tUNUMBER ':' tUNUMBER ':' tUNUMBER tSNUMBER {
+	| tUNUMBER ':' tUNUMBER ':' tUNUMBER {
 	    yyHour = $1;
 	    yyMinutes = $3;
 	    yySeconds = $5;
 	    yyMeridian = MER24;
-	    yyHaveZone++;
-	    yyTimezone = ($6 < 0
-			  ? -$6 % 100 + (-$6 / 100) * 60
-			  : - ($6 % 100 + ($6 / 100) * 60));
-	}
-	;
-
-zone	: tZONE {
-	    yyTimezone = $1;
-	}
-	| tDAYZONE {
-	    yyTimezone = $1 - 60;
-	}
-	|
-	  tZONE tDST {
-	    yyTimezone = $1 - 60;
 	}
 	;
 
@@ -484,91 +457,6 @@ static TABLE const OtherTable[] = {
     { NULL, 0, 0 }
 };
 
-/* The timezone table. */
-static TABLE const TimezoneTable[] = {
-    { "gmt",	tZONE,     HOUR ( 0) },	/* Greenwich Mean */
-    { "ut",	tZONE,     HOUR ( 0) },	/* Universal (Coordinated) */
-    { "utc",	tZONE,     HOUR ( 0) },
-    { "wet",	tZONE,     HOUR ( 0) },	/* Western European */
-    { "bst",	tDAYZONE,  HOUR ( 0) },	/* British Summer */
-    { "wat",	tZONE,     HOUR ( 1) },	/* West Africa */
-    { "at",	tZONE,     HOUR ( 2) },	/* Azores */
-    { "ast",	tZONE,     HOUR ( 4) },	/* Atlantic Standard */
-    { "adt",	tDAYZONE,  HOUR ( 4) },	/* Atlantic Daylight */
-    { "est",	tZONE,     HOUR ( 5) },	/* Eastern Standard */
-    { "edt",	tDAYZONE,  HOUR ( 5) },	/* Eastern Daylight */
-    { "cst",	tZONE,     HOUR ( 6) },	/* Central Standard */
-    { "cdt",	tDAYZONE,  HOUR ( 6) },	/* Central Daylight */
-    { "mst",	tZONE,     HOUR ( 7) },	/* Mountain Standard */
-    { "mdt",	tDAYZONE,  HOUR ( 7) },	/* Mountain Daylight */
-    { "pst",	tZONE,     HOUR ( 8) },	/* Pacific Standard */
-    { "pdt",	tDAYZONE,  HOUR ( 8) },	/* Pacific Daylight */
-    { "yst",	tZONE,     HOUR ( 9) },	/* Yukon Standard */
-    { "ydt",	tDAYZONE,  HOUR ( 9) },	/* Yukon Daylight */
-    { "hst",	tZONE,     HOUR (10) },	/* Hawaii Standard */
-    { "hdt",	tDAYZONE,  HOUR (10) },	/* Hawaii Daylight */
-    { "cat",	tZONE,     HOUR (10) },	/* Central Alaska */
-    { "ahst",	tZONE,     HOUR (10) },	/* Alaska-Hawaii Standard */
-    { "nt",	tZONE,     HOUR (11) },	/* Nome */
-    { "idlw",	tZONE,     HOUR (12) },	/* International Date Line West */
-    { "cet",	tZONE,     -HOUR (1) },	/* Central European */
-    { "met",	tZONE,     -HOUR (1) },	/* Middle European */
-    { "mewt",	tZONE,     -HOUR (1) },	/* Middle European Winter */
-    { "mest",	tDAYZONE,  -HOUR (1) },	/* Middle European Summer */
-    { "mesz",	tDAYZONE,  -HOUR (1) },	/* Middle European Summer */
-    { "swt",	tZONE,     -HOUR (1) },	/* Swedish Winter */
-    { "sst",	tDAYZONE,  -HOUR (1) },	/* Swedish Summer */
-    { "fwt",	tZONE,     -HOUR (1) },	/* French Winter */
-    { "fst",	tDAYZONE,  -HOUR (1) },	/* French Summer */
-    { "eet",	tZONE,     -HOUR (2) },	/* Eastern Europe, USSR Zone 1 */
-    { "bt",	tZONE,     -HOUR (3) },	/* Baghdad, USSR Zone 2 */
-    { "zp4",	tZONE,     -HOUR (4) },	/* USSR Zone 3 */
-    { "zp5",	tZONE,     -HOUR (5) },	/* USSR Zone 4 */
-    { "zp6",	tZONE,     -HOUR (6) },	/* USSR Zone 5 */
-    { "wast",	tZONE,     -HOUR (7) },	/* West Australian Standard */
-    { "wadt",	tDAYZONE,  -HOUR (7) },	/* West Australian Daylight */
-    { "cct",	tZONE,     -HOUR (8) },	/* China Coast, USSR Zone 7 */
-    { "jst",	tZONE,     -HOUR (9) },	/* Japan Standard, USSR Zone 8 */
-    { "east",	tZONE,     -HOUR (10) },	/* Eastern Australian Standard */
-    { "eadt",	tDAYZONE,  -HOUR (10) },	/* Eastern Australian Daylight */
-    { "gst",	tZONE,     -HOUR (10) },	/* Guam Standard, USSR Zone 9 */
-    { "nzt",	tZONE,     -HOUR (12) },	/* New Zealand */
-    { "nzst",	tZONE,     -HOUR (12) },	/* New Zealand Standard */
-    { "nzdt",	tDAYZONE,  -HOUR (12) },	/* New Zealand Daylight */
-    { "idle",	tZONE,     -HOUR (12) },	/* International Date Line East */
-    { NULL, 0, 0 }
-};
-
-/* Military timezone table. */
-static TABLE const MilitaryTable[] = {
-    { "a",	tZONE,	HOUR (  1) },
-    { "b",	tZONE,	HOUR (  2) },
-    { "c",	tZONE,	HOUR (  3) },
-    { "d",	tZONE,	HOUR (  4) },
-    { "e",	tZONE,	HOUR (  5) },
-    { "f",	tZONE,	HOUR (  6) },
-    { "g",	tZONE,	HOUR (  7) },
-    { "h",	tZONE,	HOUR (  8) },
-    { "i",	tZONE,	HOUR (  9) },
-    { "k",	tZONE,	HOUR ( 10) },
-    { "l",	tZONE,	HOUR ( 11) },
-    { "m",	tZONE,	HOUR ( 12) },
-    { "n",	tZONE,	HOUR (- 1) },
-    { "o",	tZONE,	HOUR (- 2) },
-    { "p",	tZONE,	HOUR (- 3) },
-    { "q",	tZONE,	HOUR (- 4) },
-    { "r",	tZONE,	HOUR (- 5) },
-    { "s",	tZONE,	HOUR (- 6) },
-    { "t",	tZONE,	HOUR (- 7) },
-    { "u",	tZONE,	HOUR (- 8) },
-    { "v",	tZONE,	HOUR (- 9) },
-    { "w",	tZONE,	HOUR (-10) },
-    { "x",	tZONE,	HOUR (-11) },
-    { "y",	tZONE,	HOUR (-12) },
-    { "z",	tZONE,	HOUR (  0) },
-    { NULL, 0, 0 }
-};
-
 
 
 
@@ -621,7 +509,6 @@ static int ToYear (int Year)
 static int LookupWord (char *buff)
 {
   register char *p;
-  register char *q;
   register const TABLE *tp;
   int i;
   bool abbrev;
@@ -670,16 +557,6 @@ static int LookupWord (char *buff)
 	}
     }
 
-  for (tp = TimezoneTable; tp->name; tp++)
-    if (streq(buff, tp->name))
-      {
-	yylval.Number = tp->value;
-	return tp->type;
-      }
-
-  if (streq(buff, "dst"))
-    return tDST;
-
   for (tp = UnitsTable; tp->name; tp++)
     if (streq(buff, tp->name))
       {
@@ -707,32 +584,6 @@ static int LookupWord (char *buff)
 	yylval.Number = tp->value;
 	return tp->type;
       }
-
-  /* Military timezones. */
-  if (buff[1] == '\0' && isalpha (*buff))
-    {
-      for (tp = MilitaryTable; tp->name; tp++)
-	if (streq(buff, tp->name))
-	  {
-	    yylval.Number = tp->value;
-	    return tp->type;
-	  }
-    }
-
-  /* Drop out any periods and try the timezone table again. */
-  for (i = 0, p = q = buff; !streq(q, ""); q++)
-    if (*q != '.')
-      *p++ = *q;
-    else
-      i++;
-  stpcpy(p, "");
-  if (0 != i)
-    for (tp = TimezoneTable; NULL != tp->name; tp++)
-      if (streq(buff, tp->name))
-	{
-	  yylval.Number = tp->value;
-	  return tp->type;
-	}
 
   return tID;
 }
@@ -796,34 +647,14 @@ yylex (void)
 
 #define TM_YEAR_ORIGIN 1900
 
-/* Yield A - B, measured in seconds.  */
-static long difftm (struct tm *a, struct tm *b)
-{
-  int ay = a->tm_year + (TM_YEAR_ORIGIN - 1);
-  int by = b->tm_year + (TM_YEAR_ORIGIN - 1);
-  long days = (
-  /* difference in day of year */
-		a->tm_yday - b->tm_yday
-  /* + intervening leap days */
-		+ ((ay >> 2) - (by >> 2))
-		- (ay / 100 - by / 100)
-		+ ((ay / 100 >> 2) - (by / 100 >> 2))
-  /* + difference in years * 365 */
-		+ (long) (ay - by) * 365
-  );
-  return (60 * (60 * (24 * days + (a->tm_hour - b->tm_hour))
-		+ (a->tm_min - b->tm_min))
-	  + (a->tm_sec - b->tm_sec));
-}
-
 time_t get_date (const char *p, const time_t *now)
 {
-  struct tm tm, tm0, *tmp;
+  struct tm  tm, *tmp;
   time_t Start;
 
   yyInput = p;
   Start = now ? *now : time(NULL);
-  tmp = localtime (&Start);
+  tmp = gmtime(&Start);
   yyYear = tmp->tm_year + TM_YEAR_ORIGIN;
   yyMonth = tmp->tm_mon + 1;
   yyDay = tmp->tm_mday;
@@ -841,10 +672,9 @@ time_t get_date (const char *p, const time_t *now)
   yyHaveDay = 0;
   yyHaveRel = 0;
   yyHaveTime = 0;
-  yyHaveZone = 0;
 
   if (yyparse ()
-      || yyHaveTime > 1 || yyHaveZone > 1 || yyHaveDate > 1 || yyHaveDay > 1)
+      || yyHaveTime > 1 || yyHaveDate > 1 || yyHaveDay > 1)
     return -1;
 
   tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN + yyRelYear;
@@ -866,39 +696,12 @@ time_t get_date (const char *p, const time_t *now)
   tm.tm_hour += yyRelHour;
   tm.tm_min += yyRelMinutes;
   tm.tm_sec += yyRelSeconds;
-  tm.tm_isdst = -1;
-  tm0 = tm;
+  tm.tm_isdst = 0;
 
-  Start = mktime (&tm);
+  Start = timegm(&tm);
 
   if (Start == (time_t) -1)
     {
-
-      /* Guard against falsely reporting errors near the time_t boundaries
-         when parsing times in other time zones.  For example, if the min
-         time_t value is 1970-01-01 00:00:00 UTC and we are 8 hours ahead
-         of UTC, then the min localtime value is 1970-01-01 08:00:00; if
-         we apply mktime to 1970-01-01 00:00:00 we will get an error, so
-         we apply mktime to 1970-01-02 08:00:00 instead and adjust the time
-         zone by 24 hours to compensate.  This algorithm assumes that
-         there is no DST transition within a day of the time_t boundaries.  */
-      if (yyHaveZone)
-	{
-	  tm = tm0;
-	  if (tm.tm_year <= EPOCH - TM_YEAR_ORIGIN)
-	    {
-	      tm.tm_mday++;
-	      yyTimezone -= 24 * 60;
-	    }
-	  else
-	    {
-	      tm.tm_mday--;
-	      yyTimezone += 24 * 60;
-	    }
-	  Start = mktime (&tm);
-	}
-
-      if (Start == (time_t) -1)
 	return Start;
     }
 
@@ -906,17 +709,9 @@ time_t get_date (const char *p, const time_t *now)
     {
       tm.tm_mday += ((yyDayNumber - tm.tm_wday + 7) % 7
 		     + 7 * (yyDayOrdinal - (0 < yyDayOrdinal)));
-      Start = mktime (&tm);
+      Start = timegm(&tm);
       if (Start == (time_t) -1)
 	return Start;
-    }
-
-  if (yyHaveZone)
-    {
-      long delta = yyTimezone * 60L + difftm (&tm, gmtime (&Start));
-      if ((Start + delta < Start) != (delta < 0))
-	return -1;		/* time_t overflow */
-      Start += delta;
     }
 
   return Start;
