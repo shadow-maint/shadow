@@ -33,7 +33,8 @@
  *	24-sep-72
  *	24sep72
  */
-long strtoday (const char *str)
+long
+strtoday(const char *str)
 {
 	time_t t;
 	const char *s = str;
