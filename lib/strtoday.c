@@ -24,14 +24,8 @@ strtoday(const char *str)
 	long  d;
 	time_t t;
 
-	/*
-	 * get_date() interprets an empty string as the current date,
-	 * which is not what we expect, unless you're a BOFH :-).
-	 * (useradd sets sp_expire = current date for new lusers)
-	 */
-	if ((NULL == str) || streq(str, "")) {
+	if (NULL == str || streq(str, ""))
 		return -1;
-	}
 
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
