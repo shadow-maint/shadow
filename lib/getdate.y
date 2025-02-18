@@ -132,7 +132,6 @@ spec	: /* NULL */
 	;
 
 item	: date
-	| number
 	;
 
 date	: tUNUMBER tSNUMBER tSNUMBER {
@@ -141,14 +140,6 @@ date	: tUNUMBER tSNUMBER tSNUMBER {
 	    yyMonth = -$2;
 	    yyDay = -$3;
 	}
-	;
-
-number	: tUNUMBER
-          {
-		    yyDay= ($1)%100;
-		    yyMonth= ($1/100)%100;
-		    yyYear = $1/10000;
-	  }
 	;
 
 %%
