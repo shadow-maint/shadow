@@ -49,7 +49,7 @@ strtoday(const char *str)
 		return retdate;
 	}
 
-	t = get_date(str, NULL);
+	t = get_date(str);
 	if ((time_t) - 1 == t) {
 		return -2;
 	}

@@ -31,11 +31,11 @@ static int parse_date(const char *s);
 
 
 time_t
-get_date(const char *p, const time_t *now)
+get_date(const char *s)
 {
 	struct tm  tm;
 
-	if (parse_date(p) == -1)
+	if (parse_date(s) == -1)
 		return -1;
 
 	tm.tm_year = yyYear - TM_YEAR_ORIGIN;
