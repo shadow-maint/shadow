@@ -106,14 +106,6 @@ typedef struct _TABLE {
 
 
 /*
-**  Meridian:  am, pm, or 24-hour style.
-*/
-typedef enum _MERIDIAN {
-    MERam, MERpm, MER24
-} MERIDIAN;
-
-
-/*
 **  Global variables.  We could get rid of most of these by using a good
 **  union as the yacc stack.  (This routine was originally written before
 **  yacc had the %union construct.)  Maybe someday; right now we only use
@@ -132,7 +124,6 @@ static int	yyMinutes;
 static int	yyMonth;
 static int	yySeconds;
 static int	yyYear;
-static MERIDIAN	yyMeridian;
 static int	yyRelDay;
 static int	yyRelHour;
 static int	yyRelMinutes;
@@ -144,17 +135,15 @@ static int	yyRelYear;
 
 %union {
     int			Number;
-    enum _MERIDIAN	Meridian;
 }
 
 %token	tAGO tDAY tDAY_UNIT tHOUR_UNIT tID
-%token	tMERIDIAN tMINUTE_UNIT tMONTH tMONTH_UNIT
+%token	tMINUTE_UNIT tMONTH tMONTH_UNIT
 %token	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
 
 %type	<Number>	tDAY tDAY_UNIT tHOUR_UNIT tMINUTE_UNIT
 %type	<Number>	tMONTH tMONTH_UNIT
 %type	<Number>	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
-%type	<Meridian>	tMERIDIAN o_merid
 
 %%
 
@@ -177,34 +166,14 @@ item	: time {
 	| number
 	;
 
-time	: tUNUMBER tMERIDIAN {
-	    yyHour = $1;
-	    yyMinutes = 0;
-	    yySeconds = 0;
-	    yyMeridian = $2;
-	}
-	| tUNUMBER ':' tUNUMBER o_merid {
+time	: tUNUMBER ':' tUNUMBER {
 	    yyHour = $1;
 	    yyMinutes = $3;
-	    yySeconds = 0;
-	    yyMeridian = $4;
-	}
-	| tUNUMBER ':' tUNUMBER {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yyMeridian = MER24;
-	}
-	| tUNUMBER ':' tUNUMBER ':' tUNUMBER o_merid {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yySeconds = $5;
-	    yyMeridian = $6;
 	}
 	| tUNUMBER ':' tUNUMBER ':' tUNUMBER {
 	    yyHour = $1;
 	    yyMinutes = $3;
 	    yySeconds = $5;
-	    yyMeridian = MER24;
 	}
 	;
 
@@ -370,19 +339,8 @@ number	: tUNUMBER
 		    	yyMinutes = $1 % 100;
 		      }
 		    yySeconds = 0;
-		    yyMeridian = MER24;
 		  }
 	      }
-	  }
-	;
-
-o_merid	: /* NULL */
-	  {
-	    $$ = MER24;
-	  }
-	| tMERIDIAN
-	  {
-	    $$ = $1;
 	  }
 	;
 
@@ -465,32 +423,6 @@ static int yyerror (MAYBE_UNUSED const char *s)
   return 0;
 }
 
-static int ToHour (int Hours, MERIDIAN Meridian)
-{
-  switch (Meridian)
-    {
-    case MER24:
-      if (Hours < 0 || Hours > 23)
-	return -1;
-      return Hours;
-    case MERam:
-      if (Hours < 1 || Hours > 12)
-	return -1;
-      if (Hours == 12)
-	Hours = 0;
-      return Hours;
-    case MERpm:
-      if (Hours < 1 || Hours > 12)
-	return -1;
-      if (Hours == 12)
-	Hours = 0;
-      return Hours + 12;
-    default:
-      abort ();
-    }
-  /* NOTREACHED */
-}
-
 static int ToYear (int Year)
 {
   if (Year < 0)
@@ -517,17 +449,6 @@ static int LookupWord (char *buff)
   for (p = buff; !streq(p, ""); p++)
     if (isupper (*p))
       *p = tolower (*p);
-
-  if (streq(buff, "am") || streq(buff, "a.m."))
-    {
-      yylval.Meridian = MERam;
-      return tMERIDIAN;
-    }
-  if (streq(buff, "pm") || streq(buff, "p.m."))
-    {
-      yylval.Meridian = MERpm;
-      return tMERIDIAN;
-    }
 
   /* See if we have an abbreviation for a month. */
   if (strlen (buff) == 3)
@@ -661,7 +582,6 @@ time_t get_date (const char *p, const time_t *now)
   yyHour = tmp->tm_hour;
   yyMinutes = tmp->tm_min;
   yySeconds = tmp->tm_sec;
-  yyMeridian = MER24;
   yyRelSeconds = 0;
   yyRelMinutes = 0;
   yyRelHour = 0;
@@ -683,7 +603,7 @@ time_t get_date (const char *p, const time_t *now)
   if ((yyHaveTime != 0) ||
       ( (yyHaveRel != 0) && (yyHaveDate == 0) && (yyHaveDay == 0) ))
     {
-      tm.tm_hour = ToHour (yyHour, yyMeridian);
+      tm.tm_hour = yyHour;
       if (tm.tm_hour < 0)
 	return -1;
       tm.tm_min = yyMinutes;
