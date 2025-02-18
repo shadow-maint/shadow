@@ -352,7 +352,6 @@ yylex (void)
 time_t get_date (const char *p, const time_t *now)
 {
   struct tm  tm;
-  time_t Start;
 
   yyInput = p;
   yyHaveDate = 0;
@@ -367,14 +366,7 @@ time_t get_date (const char *p, const time_t *now)
   tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
   tm.tm_isdst = 0;
 
-  Start = timegm(&tm);
-
-  if (Start == (time_t) -1)
-    {
-	return Start;
-    }
-
-  return Start;
+  return timegm(&tm);
 }
 
 #if	defined (TEST)
