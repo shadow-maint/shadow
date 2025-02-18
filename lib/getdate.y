@@ -161,21 +161,6 @@ static int yyerror (MAYBE_UNUSED const char *s)
   return 0;
 }
 
-static int ToYear (int Year)
-{
-  if (Year < 0)
-    Year = -Year;
-
-  /* XPG4 suggests that years 00-68 map to 2000-2068, and
-     years 69-99 map to 1969-1999.  */
-  if (Year < 69)
-    Year += 2000;
-  else if (Year < 100)
-    Year += 1900;
-
-  return Year;
-}
-
 static int
 yylex (void)
 {
@@ -235,7 +220,7 @@ time_t get_date (const char *p, const time_t *now)
   if (yyparse())
     return -1;
 
-  tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN;
+  tm.tm_year = yyYear - TM_YEAR_ORIGIN;
   tm.tm_mon = yyMonth - 1;
   tm.tm_mday = yyDay;
   tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
