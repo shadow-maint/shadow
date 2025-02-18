@@ -112,10 +112,7 @@ typedef struct _TABLE {
 **  the %union very rarely.
 */
 static const char	*yyInput;
-static int	yyDayOrdinal;
-static int	yyDayNumber;
 static int	yyHaveDate;
-static int	yyHaveDay;
 static int	yyDay;
 static int	yyMonth;
 static int	yyYear;
@@ -126,11 +123,10 @@ static int	yyYear;
     int			Number;
 }
 
-%token	tDAY tID
+%token	tID
 %token	tMONTH
 %token	tSNUMBER tUNUMBER
 
-%type	<Number>	tDAY
 %type	<Number>	tMONTH
 %type	<Number>	tSNUMBER tUNUMBER
 
@@ -143,24 +139,7 @@ spec	: /* NULL */
 item	: date {
 	    yyHaveDate++;
 	}
-	| day {
-	    yyHaveDay++;
-	}
 	| number
-	;
-
-day	: tDAY {
-	    yyDayOrdinal = 1;
-	    yyDayNumber = $1;
-	}
-	| tDAY ',' {
-	    yyDayOrdinal = 1;
-	    yyDayNumber = $1;
-	}
-	| tUNUMBER tDAY {
-	    yyDayOrdinal = $1;
-	    yyDayNumber = $2;
-	}
 	;
 
 date	: tUNUMBER '/' tUNUMBER {
@@ -228,8 +207,8 @@ number	: tUNUMBER
 
 %%
 
-/* Month and day table. */
-static TABLE const MonthDayTable[] = {
+/* Month table. */
+static TABLE const MonthTable[] = {
     { "january",	tMONTH,  1 },
     { "february",	tMONTH,  2 },
     { "march",		tMONTH,  3 },
@@ -243,17 +222,6 @@ static TABLE const MonthDayTable[] = {
     { "october",	tMONTH, 10 },
     { "november",	tMONTH, 11 },
     { "december",	tMONTH, 12 },
-    { "sunday",		tDAY, 0 },
-    { "monday",		tDAY, 1 },
-    { "tuesday",	tDAY, 2 },
-    { "tues",		tDAY, 2 },
-    { "wednesday",	tDAY, 3 },
-    { "wednes",		tDAY, 3 },
-    { "thursday",	tDAY, 4 },
-    { "thur",		tDAY, 4 },
-    { "thurs",		tDAY, 4 },
-    { "friday",		tDAY, 5 },
-    { "saturday",	tDAY, 6 },
     { NULL, 0, 0 }
 };
 
@@ -302,7 +270,7 @@ static int LookupWord (char *buff)
   else
     abbrev = false;
 
-  for (tp = MonthDayTable; tp->name; tp++)
+  for (tp = MonthTable; tp->name; tp++)
     {
       if (abbrev)
 	{
@@ -383,20 +351,14 @@ yylex (void)
 
 time_t get_date (const char *p, const time_t *now)
 {
-  struct tm  tm, *tmp;
+  struct tm  tm;
   time_t Start;
 
   yyInput = p;
-  Start = now ? *now : time(NULL);
-  tmp = gmtime(&Start);
-  yyYear = tmp->tm_year + TM_YEAR_ORIGIN;
-  yyMonth = tmp->tm_mon + 1;
-  yyDay = tmp->tm_mday;
   yyHaveDate = 0;
-  yyHaveDay = 0;
 
   if (yyparse ()
-      || yyHaveDate > 1 || yyHaveDay > 1)
+      || yyHaveDate > 1)
     return -1;
 
   tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN;
@@ -409,15 +371,6 @@ time_t get_date (const char *p, const time_t *now)
 
   if (Start == (time_t) -1)
     {
-	return Start;
-    }
-
-  if (yyHaveDay && !yyHaveDate)
-    {
-      tm.tm_mday += ((yyDayNumber - tm.tm_wday + 7) % 7
-		     + 7 * (yyDayOrdinal - (0 < yyDayOrdinal)));
-      Start = timegm(&tm);
-      if (Start == (time_t) -1)
 	return Start;
     }
 
