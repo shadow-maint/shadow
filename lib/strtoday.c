@@ -14,18 +14,15 @@
 #include "atoi/str2i.h"
 #include "getdate.h"
 #include "prototypes.h"
-#include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
-#include "string/strspn/stpspn.h"
 
 
 // string parse-to day-since-Epoch
 long
 strtoday(const char *str)
 {
+	long  d;
 	time_t t;
-	const char *s = str;
 
 	/*
 	 * get_date() interprets an empty string as the current date,
@@ -39,15 +36,8 @@ strtoday(const char *str)
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
 	 */
-	s = strprefix(s, "-") ?: s;
-	s = stpspn(s, " ");
-	if (strisdigit(s)) {
-		long retdate;
-
-		if (str2sl(&retdate, str) == -1)
-			return -2;
-		return retdate;
-	}
+	if (str2sl(&d, str) == 0)
+		return d;
 
 	t = get_date(str);
 	if ((time_t) - 1 == t) {
