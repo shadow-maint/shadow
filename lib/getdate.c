@@ -1,12 +1,8 @@
-%{
 // SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
+#include <config.h>
 
 #include <errno.h>
 #include <limits.h>
@@ -23,66 +19,12 @@
 #include "string/strspn/stpspn.h"
 
 
-static int yylex (void);
-static int yyerror (const char *s);
+#define TM_YEAR_ORIGIN 1900
 
 
-#define MAX_BUFF_LEN    128   /* size of buffer to read the date into */
-
-/*
-**  An entry in the lexical lookup table.
-*/
-typedef struct _TABLE {
-    const char	*name;
-    int		type;
-    int		value;
-} TABLE;
-
-
-/*
-**  Global variables.  We could get rid of most of these by using a good
-**  union as the yacc stack.  (This routine was originally written before
-**  yacc had the %union construct.)  Maybe someday; right now we only use
-**  the %union very rarely.
-*/
-static const char	*yyInput;
 static long  yyDay;
 static long  yyMonth;
 static long  yyYear;
-
-%}
-
-%union {
-    int			Number;
-}
-
-%token	tSNUMBER tUNUMBER
-
-%type	<Number>	tSNUMBER tUNUMBER
-
-%%
-
-spec	: /* NULL */
-	;
-
-%%
-
-
-
-
-static int yyerror (MAYBE_UNUSED const char *s)
-{
-  return 0;
-}
-
-static int
-yylex (void)
-{
-  return 0;
-}
-
-
-#define TM_YEAR_ORIGIN 1900
 
 
 static int parse_date(const char *s);
@@ -91,8 +33,6 @@ static int parse_date(const char *s);
 time_t get_date (const char *p, const time_t *now)
 {
   struct tm  tm;
-
-  yyInput = p;
 
   if (parse_date(p) == -1)
     return -1;
