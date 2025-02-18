@@ -18,7 +18,8 @@
 #include "string/strcmp/streq.h"
 
 
-static time_t get_date(const char *s);
+static long get_date(const char *s);
+static long dategm(struct tm *tm);
 
 
 // string parse-to day-since-Epoch
@@ -26,7 +27,6 @@ long
 strtoday(const char *str)
 {
 	long  d;
-	time_t t;
 
 	if (NULL == str || streq(str, ""))
 		return -1;
@@ -37,15 +37,15 @@ strtoday(const char *str)
 	if (str2sl(&d, str) == 0)
 		return d;
 
-	t = get_date(str);
-	if ((time_t) - 1 == t) {
+	d = get_date(str);
+	if (d == -1)
 		return -2;
-	}
-	return t / DAY;
+
+	return d;
 }
 
 
-static time_t
+static long
 get_date(const char *s)
 {
 	time_t      t;
@@ -60,5 +60,18 @@ get_date(const char *s)
 	if (p == NULL || !streq(p, ""))
 		return -1;
 
-	return timegm(&tm);
+	return dategm(&tm);
+}
+
+
+static long
+dategm(struct tm *tm)
+{
+	time_t  t;
+
+	t = timegm(tm);
+	if (t == (time_t) -1)
+		return -1;
+
+	return t / DAY;
 }
