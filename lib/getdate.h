@@ -12,5 +12,5 @@
 #include <config.h>
 #include "defines.h"
 
-time_t get_date (const char *p, /*@null@*/const time_t *now);
+time_t get_date(const char *s);
 #endif
