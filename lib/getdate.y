@@ -111,7 +111,6 @@ typedef struct _TABLE {
 **  the %union very rarely.
 */
 static const char	*yyInput;
-static int	yyHaveDate;
 static int	yyDay;
 static int	yyMonth;
 static int	yyYear;
@@ -132,9 +131,7 @@ spec	: /* NULL */
 	| spec item
 	;
 
-item	: date {
-	    yyHaveDate++;
-	}
+item	: date
 	| number
 	;
 
@@ -148,7 +145,6 @@ date	: tUNUMBER tSNUMBER tSNUMBER {
 
 number	: tUNUMBER
           {
-		    yyHaveDate++;
 		    yyDay= ($1)%100;
 		    yyMonth= ($1/100)%100;
 		    yyYear = $1/10000;
@@ -235,10 +231,8 @@ time_t get_date (const char *p, const time_t *now)
   struct tm  tm;
 
   yyInput = p;
-  yyHaveDate = 0;
 
-  if (yyparse ()
-      || yyHaveDate > 1)
+  if (yyparse())
     return -1;
 
   tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN;
