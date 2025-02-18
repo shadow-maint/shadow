@@ -52,7 +52,6 @@ test-driver
 
 /shadow.spec
 /shadow-*.tar.*
-/lib/getdate.c
 /libsubid/subid.h
 
 .venv
