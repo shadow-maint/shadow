@@ -6,8 +6,6 @@
 **  <rsalz@bbn.com> and Jim Berets <jberets@bbn.com> in August, 1990;
 **
 **  This grammar has 13 shift/reduce conflicts.
-**
-**  This code is in the public domain and has no copyright.
 */
 
 #ifdef HAVE_CONFIG_H
@@ -24,13 +22,18 @@
 # undef static
 #endif
 
-#include <ctype.h>
-#include <stdio.h>
+#include <errno.h>
+#include <limits.h>
+#include <stddef.h>
 #include <string.h>
 #include <time.h>
 
-#include "attr.h"
+#include "atoi/a2i/a2s.h"
 #include "getdate.h"
+#include "string/strchr/strchrcnt.h"
+#include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
+#include "string/strcmp/strsuffix.h"
 #include "string/strspn/stpspn.h"
 
 
@@ -111,9 +114,9 @@ typedef struct _TABLE {
 **  the %union very rarely.
 */
 static const char	*yyInput;
-static int	yyDay;
-static int	yyMonth;
-static int	yyYear;
+static long  yyDay;
+static long  yyMonth;
+static long  yyYear;
 
 %}
 
@@ -128,18 +131,6 @@ static int	yyYear;
 %%
 
 spec	: /* NULL */
-	| spec item
-	;
-
-item	: date
-	;
-
-date	: tUNUMBER tSNUMBER tSNUMBER {
-	    /* ISO 8601 format.  yyyy-mm-dd.  */
-	    yyYear = $1;
-	    yyMonth = -$2;
-	    yyDay = -$3;
-	}
 	;
 
 %%
@@ -155,52 +146,14 @@ static int yyerror (MAYBE_UNUSED const char *s)
 static int
 yylex (void)
 {
-  register char c;
-  register char *p;
-  char buff[20];
-  int Count;
-  int sign;
-
-  for (;;)
-    {
-      yyInput = stpspn(yyInput, " \t");
-
-      if (isdigit (c = *yyInput) || c == '-' || c == '+')
-	{
-	  if (c == '-' || c == '+')
-	    {
-	      sign = c == '-' ? -1 : 1;
-	      if (!isdigit (*++yyInput))
-		/* skip the '-' sign */
-		continue;
-	    }
-	  else
-	    sign = 0;
-	  for (yylval.Number = 0; isdigit (c = *yyInput++);)
-	    yylval.Number = 10 * yylval.Number + c - '0';
-	  yyInput--;
-	  if (sign < 0)
-	    yylval.Number = -yylval.Number;
-	  return (0 != sign) ? tSNUMBER : tUNUMBER;
-	}
-      if (c != '(')
-	return *yyInput++;
-      Count = 0;
-      do
-	{
-	  c = *yyInput++;
-	  if (c == '\0')
-	    return c;
-	  if (c == '(')
-	    Count++;
-	  else if (c == ')')
-	    Count--;
-	}
-      while (Count > 0);
-    }
+  return 0;
 }
 
 #define TM_YEAR_ORIGIN 1900
+
+
+static int parse_date(const char *s);
+
 
 time_t get_date (const char *p, const time_t *now)
 {
@@ -208,7 +161,7 @@ time_t get_date (const char *p, const time_t *now)
 
   yyInput = p;
 
-  if (yyparse())
+  if (parse_date(p) == -1)
     return -1;
 
   tm.tm_year = yyYear - TM_YEAR_ORIGIN;
@@ -219,6 +172,40 @@ time_t get_date (const char *p, const time_t *now)
 
   return timegm(&tm);
 }
+
+
+static int
+parse_date(const char *s)
+{
+	long  n;
+
+	if (!streq(stpspn(s, "0123456789-"), "")
+	 || strchrcnt(s, '-') != 2
+	 || strprefix(s, "-")
+	 || strsuffix(s, "-")
+	 || strstr(s, "--"))
+	{
+		return -1;
+	}
+
+	if (a2sl(&yyYear, s, &s, 10, LONG_MIN, LONG_MAX) == -1 && errno != ENOTSUP)
+		return -1;
+
+	if (!strprefix(s++, "-"))
+		return -1;
+
+	if (a2sl(&yyMonth, s, &s, 10, LONG_MIN, LONG_MAX) == -1 && errno != ENOTSUP)
+		return -1;
+
+	if (!strprefix(s++, "-"))
+		return -1;
+
+	if (a2sl(&yyDay, s, NULL, 10, LONG_MIN, LONG_MAX) == -1)
+		return -1;
+
+	return 0;
+}
+
 
 #if	defined (TEST)
 
