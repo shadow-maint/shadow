@@ -30,20 +30,21 @@ static long  yyYear;
 static int parse_date(const char *s);
 
 
-time_t get_date (const char *p, const time_t *now)
+time_t
+get_date(const char *p, const time_t *now)
 {
-  struct tm  tm;
+	struct tm  tm;
 
-  if (parse_date(p) == -1)
-    return -1;
+	if (parse_date(p) == -1)
+		return -1;
 
-  tm.tm_year = yyYear - TM_YEAR_ORIGIN;
-  tm.tm_mon = yyMonth - 1;
-  tm.tm_mday = yyDay;
-  tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
-  tm.tm_isdst = 0;
+	tm.tm_year = yyYear - TM_YEAR_ORIGIN;
+	tm.tm_mon = yyMonth - 1;
+	tm.tm_mday = yyDay;
+	tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
+	tm.tm_isdst = 0;
 
-  return timegm(&tm);
+	return timegm(&tm);
 }
 
 
