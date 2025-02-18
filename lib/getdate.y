@@ -106,14 +106,6 @@ typedef struct _TABLE {
 
 
 /*
-**  Meridian:  am, pm, or 24-hour style.
-*/
-typedef enum _MERIDIAN {
-    MERam, MERpm, MER24
-} MERIDIAN;
-
-
-/*
 **  Global variables.  We could get rid of most of these by using a good
 **  union as the yacc stack.  (This routine was originally written before
 **  yacc had the %union construct.)  Maybe someday; right now we only use
@@ -125,36 +117,26 @@ static int	yyDayNumber;
 static int	yyHaveDate;
 static int	yyHaveDay;
 static int	yyHaveRel;
-static int	yyHaveTime;
 static int	yyDay;
-static int	yyHour;
-static int	yyMinutes;
 static int	yyMonth;
-static int	yySeconds;
 static int	yyYear;
-static MERIDIAN	yyMeridian;
 static int	yyRelDay;
-static int	yyRelHour;
-static int	yyRelMinutes;
 static int	yyRelMonth;
-static int	yyRelSeconds;
 static int	yyRelYear;
 
 %}
 
 %union {
     int			Number;
-    enum _MERIDIAN	Meridian;
 }
 
-%token	tAGO tDAY tDAY_UNIT tHOUR_UNIT tID
-%token	tMERIDIAN tMINUTE_UNIT tMONTH tMONTH_UNIT
-%token	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
+%token	tAGO tDAY tDAY_UNIT tID
+%token	tMONTH tMONTH_UNIT
+%token	tSNUMBER tUNUMBER tYEAR_UNIT
 
-%type	<Number>	tDAY tDAY_UNIT tHOUR_UNIT tMINUTE_UNIT
+%type	<Number>	tDAY tDAY_UNIT
 %type	<Number>	tMONTH tMONTH_UNIT
-%type	<Number>	tSEC_UNIT tSNUMBER tUNUMBER tYEAR_UNIT
-%type	<Meridian>	tMERIDIAN o_merid
+%type	<Number>	tSNUMBER tUNUMBER tYEAR_UNIT
 
 %%
 
@@ -162,10 +144,7 @@ spec	: /* NULL */
 	| spec item
 	;
 
-item	: time {
-	    yyHaveTime++;
-	}
-	| date {
+item	: date {
 	    yyHaveDate++;
 	}
 	| day {
@@ -175,37 +154,6 @@ item	: time {
 	    yyHaveRel++;
 	}
 	| number
-	;
-
-time	: tUNUMBER tMERIDIAN {
-	    yyHour = $1;
-	    yyMinutes = 0;
-	    yySeconds = 0;
-	    yyMeridian = $2;
-	}
-	| tUNUMBER ':' tUNUMBER o_merid {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yySeconds = 0;
-	    yyMeridian = $4;
-	}
-	| tUNUMBER ':' tUNUMBER {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yyMeridian = MER24;
-	}
-	| tUNUMBER ':' tUNUMBER ':' tUNUMBER o_merid {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yySeconds = $5;
-	    yyMeridian = $6;
-	}
-	| tUNUMBER ':' tUNUMBER ':' tUNUMBER {
-	    yyHour = $1;
-	    yyMinutes = $3;
-	    yySeconds = $5;
-	    yyMeridian = MER24;
-	}
 	;
 
 day	: tDAY {
@@ -277,9 +225,6 @@ date	: tUNUMBER '/' tUNUMBER {
 	;
 
 rel	: relunit tAGO {
-	    yyRelSeconds = -yyRelSeconds;
-	    yyRelMinutes = -yyRelMinutes;
-	    yyRelHour = -yyRelHour;
 	    yyRelDay = -yyRelDay;
 	    yyRelMonth = -yyRelMonth;
 	    yyRelYear = -yyRelYear;
@@ -314,75 +259,14 @@ relunit	: tUNUMBER tYEAR_UNIT {
 	| tDAY_UNIT {
 	    yyRelDay += $1;
 	}
-	| tUNUMBER tHOUR_UNIT {
-	    yyRelHour += $1 * $2;
-	}
-	| tSNUMBER tHOUR_UNIT {
-	    yyRelHour += $1 * $2;
-	}
-	| tHOUR_UNIT {
-	    yyRelHour += $1;
-	}
-	| tUNUMBER tMINUTE_UNIT {
-	    yyRelMinutes += $1 * $2;
-	}
-	| tSNUMBER tMINUTE_UNIT {
-	    yyRelMinutes += $1 * $2;
-	}
-	| tMINUTE_UNIT {
-	    yyRelMinutes += $1;
-	}
-	| tUNUMBER tSEC_UNIT {
-	    yyRelSeconds += $1 * $2;
-	}
-	| tSNUMBER tSEC_UNIT {
-	    yyRelSeconds += $1 * $2;
-	}
-	| tSEC_UNIT {
-	    yyRelSeconds += $1;
-	}
 	;
 
 number	: tUNUMBER
           {
-	    if ((yyHaveTime != 0) && (yyHaveDate != 0) && (yyHaveRel == 0))
-	      yyYear = $1;
-	    else
-	      {
-		if ($1>10000)
-		  {
 		    yyHaveDate++;
 		    yyDay= ($1)%100;
 		    yyMonth= ($1/100)%100;
 		    yyYear = $1/10000;
-		  }
-		else
-		  {
-		    yyHaveTime++;
-		    if ($1 < 100)
-		      {
-			yyHour = $1;
-			yyMinutes = 0;
-		      }
-		    else
-		      {
-		    	yyHour = $1 / 100;
-		    	yyMinutes = $1 % 100;
-		      }
-		    yySeconds = 0;
-		    yyMeridian = MER24;
-		  }
-	      }
-	  }
-	;
-
-o_merid	: /* NULL */
-	  {
-	    $$ = MER24;
-	  }
-	| tMERIDIAN
-	  {
-	    $$ = $1;
 	  }
 	;
 
@@ -424,22 +308,17 @@ static TABLE const UnitsTable[] = {
     { "fortnight",	tDAY_UNIT,	14 },
     { "week",		tDAY_UNIT,	7 },
     { "day",		tDAY_UNIT,	1 },
-    { "hour",		tHOUR_UNIT,	1 },
-    { "minute",		tMINUTE_UNIT,	1 },
-    { "min",		tMINUTE_UNIT,	1 },
-    { "second",		tSEC_UNIT,	1 },
-    { "sec",		tSEC_UNIT,	1 },
     { NULL, 0, 0 }
 };
 
 /* Assorted relative-time words. */
 static TABLE const OtherTable[] = {
-    { "tomorrow",	tMINUTE_UNIT,	1 * 24 * 60 },
-    { "yesterday",	tMINUTE_UNIT,	-1 * 24 * 60 },
-    { "today",		tMINUTE_UNIT,	0 },
-    { "now",		tMINUTE_UNIT,	0 },
+    { "tomorrow",	tDAY_UNIT,	1 },
+    { "yesterday",	tDAY_UNIT,	-1 },
+    { "today",		tDAY_UNIT,	0 },
+    { "now",		tDAY_UNIT,	0 },
     { "last",		tUNUMBER,	-1 },
-    { "this",		tMINUTE_UNIT,	0 },
+    { "this",		tDAY_UNIT,	0 },
     { "next",		tUNUMBER,	2 },
     { "first",		tUNUMBER,	1 },
 /*  { "second",		tUNUMBER,	2 }, */
@@ -463,32 +342,6 @@ static TABLE const OtherTable[] = {
 static int yyerror (MAYBE_UNUSED const char *s)
 {
   return 0;
-}
-
-static int ToHour (int Hours, MERIDIAN Meridian)
-{
-  switch (Meridian)
-    {
-    case MER24:
-      if (Hours < 0 || Hours > 23)
-	return -1;
-      return Hours;
-    case MERam:
-      if (Hours < 1 || Hours > 12)
-	return -1;
-      if (Hours == 12)
-	Hours = 0;
-      return Hours;
-    case MERpm:
-      if (Hours < 1 || Hours > 12)
-	return -1;
-      if (Hours == 12)
-	Hours = 0;
-      return Hours + 12;
-    default:
-      abort ();
-    }
-  /* NOTREACHED */
 }
 
 static int ToYear (int Year)
@@ -517,17 +370,6 @@ static int LookupWord (char *buff)
   for (p = buff; !streq(p, ""); p++)
     if (isupper (*p))
       *p = tolower (*p);
-
-  if (streq(buff, "am") || streq(buff, "a.m."))
-    {
-      yylval.Meridian = MERam;
-      return tMERIDIAN;
-    }
-  if (streq(buff, "pm") || streq(buff, "p.m."))
-    {
-      yylval.Meridian = MERpm;
-      return tMERIDIAN;
-    }
 
   /* See if we have an abbreviation for a month. */
   if (strlen (buff) == 3)
@@ -658,44 +500,21 @@ time_t get_date (const char *p, const time_t *now)
   yyYear = tmp->tm_year + TM_YEAR_ORIGIN;
   yyMonth = tmp->tm_mon + 1;
   yyDay = tmp->tm_mday;
-  yyHour = tmp->tm_hour;
-  yyMinutes = tmp->tm_min;
-  yySeconds = tmp->tm_sec;
-  yyMeridian = MER24;
-  yyRelSeconds = 0;
-  yyRelMinutes = 0;
-  yyRelHour = 0;
   yyRelDay = 0;
   yyRelMonth = 0;
   yyRelYear = 0;
   yyHaveDate = 0;
   yyHaveDay = 0;
   yyHaveRel = 0;
-  yyHaveTime = 0;
 
   if (yyparse ()
-      || yyHaveTime > 1 || yyHaveDate > 1 || yyHaveDay > 1)
+      || yyHaveDate > 1 || yyHaveDay > 1)
     return -1;
 
   tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN + yyRelYear;
   tm.tm_mon = yyMonth - 1 + yyRelMonth;
   tm.tm_mday = yyDay + yyRelDay;
-  if ((yyHaveTime != 0) ||
-      ( (yyHaveRel != 0) && (yyHaveDate == 0) && (yyHaveDay == 0) ))
-    {
-      tm.tm_hour = ToHour (yyHour, yyMeridian);
-      if (tm.tm_hour < 0)
-	return -1;
-      tm.tm_min = yyMinutes;
-      tm.tm_sec = yySeconds;
-    }
-  else
-    {
-      tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
-    }
-  tm.tm_hour += yyRelHour;
-  tm.tm_min += yyRelMinutes;
-  tm.tm_sec += yyRelSeconds;
+  tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
   tm.tm_isdst = 0;
 
   Start = timegm(&tm);
