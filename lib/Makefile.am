@@ -108,8 +108,6 @@ libshadow_la_SOURCES = \
 	fs/readlink/readlinknul.c \
 	fs/readlink/readlinknul.h \
 	get_pid.c \
-	getdate.c \
-	getdate.h \
 	getdef.c \
 	getdef.h \
 	getgr_nam_gid.c \
