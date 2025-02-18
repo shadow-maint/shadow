@@ -1,26 +1,12 @@
 %{
-/*
-**  Originally written by Steven M. Bellovin <smb@research.att.com> while
-**  at the University of North Carolina at Chapel Hill.  Later tweaked by
-**  a couple of people on Usenet.  Completely overhauled by Rich $alz
-**  <rsalz@bbn.com> and Jim Berets <jberets@bbn.com> in August, 1990;
-**
-**  This grammar has 13 shift/reduce conflicts.
-*/
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
 
-/* Since the code of getdate.y is not included in the Emacs executable
-   itself, there is no need to #define static in this file.  Even if
-   the code were included in the Emacs executable, it probably
-   wouldn't do any harm to #undef it here; this will only cause
-   problems if we try to write to a static variable, which I don't
-   think this code needs to do.  */
-#ifdef emacs
-# undef static
-#endif
 
 #include <errno.h>
 #include <limits.h>
@@ -36,60 +22,6 @@
 #include "string/strcmp/strsuffix.h"
 #include "string/strspn/stpspn.h"
 
-
-/* Some old versions of bison generate parsers that use bcopy.
-   That loses on systems that don't provide the function, so we have
-   to redefine it here.  */
-#if !defined (HAVE_BCOPY) && !defined (bcopy)
-# define bcopy(from, to, len) memcpy ((to), (from), (len))
-#endif
-
-/* Remap normal yacc parser interface names (yyparse, yylex, yyerror, etc),
-   as well as gratuitously global symbol names, so we can have multiple
-   yacc generated parsers in the same program.  Note that these are only
-   the variables produced by yacc.  If other parser generators (bison,
-   byacc, etc) produce additional global names that conflict at link time,
-   then those parser generators need to be fixed instead of adding those
-   names to this list. */
-
-#define yymaxdepth gd_maxdepth
-#define yyparse gd_parse
-#define yylex   gd_lex
-#define yyerror gd_error
-#define yylval  gd_lval
-#define yychar  gd_char
-#define yydebug gd_debug
-#define yypact  gd_pact
-#define yyr1    gd_r1
-#define yyr2    gd_r2
-#define yydef   gd_def
-#define yychk   gd_chk
-#define yypgo   gd_pgo
-#define yyact   gd_act
-#define yyexca  gd_exca
-#define yyerrflag gd_errflag
-#define yynerrs gd_nerrs
-#define yyps    gd_ps
-#define yypv    gd_pv
-#define yys     gd_s
-#define yy_yys  gd_yys
-#define yystate gd_state
-#define yytmp   gd_tmp
-#define yyv     gd_v
-#define yy_yyv  gd_yyv
-#define yyval   gd_val
-#define yylloc  gd_lloc
-#define yyreds  gd_reds          /* With YYDEBUG defined */
-#define yytoks  gd_toks          /* With YYDEBUG defined */
-#define yylhs   gd_yylhs
-#define yylen   gd_yylen
-#define yydefred gd_yydefred
-#define yydgoto gd_yydgoto
-#define yysindex gd_yysindex
-#define yyrindex gd_yyrindex
-#define yygindex gd_yygindex
-#define yytable  gd_yytable
-#define yycheck  gd_yycheck
 
 static int yylex (void);
 static int yyerror (const char *s);
@@ -149,6 +81,7 @@ yylex (void)
   return 0;
 }
 
+
 #define TM_YEAR_ORIGIN 1900
 
 
@@ -205,31 +138,3 @@ parse_date(const char *s)
 
 	return 0;
 }
-
-
-#if	defined (TEST)
-
-int
-main(void)
-{
-  char buff[MAX_BUFF_LEN + 1];
-  time_t d;
-
-  (void) printf ("Enter date, or blank line to exit.\n\t> ");
-  (void) fflush (stdout);
-
-  buff[MAX_BUFF_LEN] = 0;
-  while (fgets (buff, MAX_BUFF_LEN, stdin) && buff[0])
-    {
-      d = get_date(buff, NULL);
-      if (d == -1)
-	(void) printf ("Bad format - couldn't convert.\n");
-      else
-	(void) printf ("%s", ctime (&d));
-      (void) printf ("\t> ");
-      (void) fflush (stdout);
-    }
-  exit (0);
-  /* NOTREACHED */
-}
-#endif /* defined (TEST) */
