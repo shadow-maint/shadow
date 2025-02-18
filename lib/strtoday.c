@@ -21,7 +21,8 @@
 
 
 // string parse-to day-since-Epoch
-long strtoday (const char *str)
+long
+strtoday(const char *str)
 {
 	time_t t;
 	const char *s = str;
