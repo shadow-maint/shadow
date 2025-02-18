@@ -116,13 +116,9 @@ static int	yyDayOrdinal;
 static int	yyDayNumber;
 static int	yyHaveDate;
 static int	yyHaveDay;
-static int	yyHaveRel;
 static int	yyDay;
 static int	yyMonth;
 static int	yyYear;
-static int	yyRelDay;
-static int	yyRelMonth;
-static int	yyRelYear;
 
 %}
 
@@ -130,13 +126,13 @@ static int	yyRelYear;
     int			Number;
 }
 
-%token	tAGO tDAY tDAY_UNIT tID
-%token	tMONTH tMONTH_UNIT
-%token	tSNUMBER tUNUMBER tYEAR_UNIT
+%token	tDAY tID
+%token	tMONTH
+%token	tSNUMBER tUNUMBER
 
-%type	<Number>	tDAY tDAY_UNIT
-%type	<Number>	tMONTH tMONTH_UNIT
-%type	<Number>	tSNUMBER tUNUMBER tYEAR_UNIT
+%type	<Number>	tDAY
+%type	<Number>	tMONTH
+%type	<Number>	tSNUMBER tUNUMBER
 
 %%
 
@@ -149,9 +145,6 @@ item	: date {
 	}
 	| day {
 	    yyHaveDay++;
-	}
-	| rel {
-	    yyHaveRel++;
 	}
 	| number
 	;
@@ -224,43 +217,6 @@ date	: tUNUMBER '/' tUNUMBER {
 	}
 	;
 
-rel	: relunit tAGO {
-	    yyRelDay = -yyRelDay;
-	    yyRelMonth = -yyRelMonth;
-	    yyRelYear = -yyRelYear;
-	}
-	| relunit
-	;
-
-relunit	: tUNUMBER tYEAR_UNIT {
-	    yyRelYear += $1 * $2;
-	}
-	| tSNUMBER tYEAR_UNIT {
-	    yyRelYear += $1 * $2;
-	}
-	| tYEAR_UNIT {
-	    yyRelYear += $1;
-	}
-	| tUNUMBER tMONTH_UNIT {
-	    yyRelMonth += $1 * $2;
-	}
-	| tSNUMBER tMONTH_UNIT {
-	    yyRelMonth += $1 * $2;
-	}
-	| tMONTH_UNIT {
-	    yyRelMonth += $1;
-	}
-	| tUNUMBER tDAY_UNIT {
-	    yyRelDay += $1 * $2;
-	}
-	| tSNUMBER tDAY_UNIT {
-	    yyRelDay += $1 * $2;
-	}
-	| tDAY_UNIT {
-	    yyRelDay += $1;
-	}
-	;
-
 number	: tUNUMBER
           {
 		    yyHaveDate++;
@@ -301,41 +257,6 @@ static TABLE const MonthDayTable[] = {
     { NULL, 0, 0 }
 };
 
-/* Time units table. */
-static TABLE const UnitsTable[] = {
-    { "year",		tYEAR_UNIT,	1 },
-    { "month",		tMONTH_UNIT,	1 },
-    { "fortnight",	tDAY_UNIT,	14 },
-    { "week",		tDAY_UNIT,	7 },
-    { "day",		tDAY_UNIT,	1 },
-    { NULL, 0, 0 }
-};
-
-/* Assorted relative-time words. */
-static TABLE const OtherTable[] = {
-    { "tomorrow",	tDAY_UNIT,	1 },
-    { "yesterday",	tDAY_UNIT,	-1 },
-    { "today",		tDAY_UNIT,	0 },
-    { "now",		tDAY_UNIT,	0 },
-    { "last",		tUNUMBER,	-1 },
-    { "this",		tDAY_UNIT,	0 },
-    { "next",		tUNUMBER,	2 },
-    { "first",		tUNUMBER,	1 },
-/*  { "second",		tUNUMBER,	2 }, */
-    { "third",		tUNUMBER,	3 },
-    { "fourth",		tUNUMBER,	4 },
-    { "fifth",		tUNUMBER,	5 },
-    { "sixth",		tUNUMBER,	6 },
-    { "seventh",	tUNUMBER,	7 },
-    { "eighth",		tUNUMBER,	8 },
-    { "ninth",		tUNUMBER,	9 },
-    { "tenth",		tUNUMBER,	10 },
-    { "eleventh",	tUNUMBER,	11 },
-    { "twelfth",	tUNUMBER,	12 },
-    { "ago",		tAGO,	1 },
-    { NULL, 0, 0 }
-};
-
 
 
 
@@ -363,7 +284,6 @@ static int LookupWord (char *buff)
 {
   register char *p;
   register const TABLE *tp;
-  int i;
   bool abbrev;
 
   /* Make it lowercase. */
@@ -398,34 +318,6 @@ static int LookupWord (char *buff)
 	  return tp->type;
 	}
     }
-
-  for (tp = UnitsTable; tp->name; tp++)
-    if (streq(buff, tp->name))
-      {
-	yylval.Number = tp->value;
-	return tp->type;
-      }
-
-  /* Strip off any plural and try the units table again. */
-  i = strlen (buff) - 1;
-  if (buff[i] == 's')
-    {
-      stpcpy(&buff[i], "");
-      for (tp = UnitsTable; tp->name; tp++)
-	if (streq(buff, tp->name))
-	  {
-	    yylval.Number = tp->value;
-	    return tp->type;
-	  }
-      buff[i] = 's';		/* Put back for "this" in OtherTable. */
-    }
-
-  for (tp = OtherTable; tp->name; tp++)
-    if (streq(buff, tp->name))
-      {
-	yylval.Number = tp->value;
-	return tp->type;
-      }
 
   return tID;
 }
@@ -500,20 +392,16 @@ time_t get_date (const char *p, const time_t *now)
   yyYear = tmp->tm_year + TM_YEAR_ORIGIN;
   yyMonth = tmp->tm_mon + 1;
   yyDay = tmp->tm_mday;
-  yyRelDay = 0;
-  yyRelMonth = 0;
-  yyRelYear = 0;
   yyHaveDate = 0;
   yyHaveDay = 0;
-  yyHaveRel = 0;
 
   if (yyparse ()
       || yyHaveDate > 1 || yyHaveDay > 1)
     return -1;
 
-  tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN + yyRelYear;
-  tm.tm_mon = yyMonth - 1 + yyRelMonth;
-  tm.tm_mday = yyDay + yyRelDay;
+  tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN;
+  tm.tm_mon = yyMonth - 1;
+  tm.tm_mday = yyDay;
   tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
   tm.tm_isdst = 0;
 
