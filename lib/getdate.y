@@ -31,7 +31,6 @@
 
 #include "attr.h"
 #include "getdate.h"
-#include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
 
@@ -112,7 +111,6 @@ typedef struct _TABLE {
 **  the %union very rarely.
 */
 static const char	*yyInput;
-static int	yyHaveDate;
 static int	yyDay;
 static int	yyMonth;
 static int	yyYear;
@@ -123,11 +121,8 @@ static int	yyYear;
     int			Number;
 }
 
-%token	tID
-%token	tMONTH
 %token	tSNUMBER tUNUMBER
 
-%type	<Number>	tMONTH
 %type	<Number>	tSNUMBER tUNUMBER
 
 %%
@@ -136,69 +131,20 @@ spec	: /* NULL */
 	| spec item
 	;
 
-item	: date {
-	    yyHaveDate++;
-	}
+item	: date
 	| number
 	;
 
-date	: tUNUMBER '/' tUNUMBER {
-	    yyMonth = $1;
-	    yyDay = $3;
-	}
-	| tUNUMBER '/' tUNUMBER '/' tUNUMBER {
-	  /* Interpret as YYYY/MM/DD if $1 >= 1000, otherwise as MM/DD/YY.
-	     The goal in recognizing YYYY/MM/DD is solely to support legacy
-	     machine-generated dates like those in an RCS log listing.  If
-	     you want portability, use the ISO 8601 format.  */
-	  if ($1 >= 1000)
-	    {
-	      yyYear = $1;
-	      yyMonth = $3;
-	      yyDay = $5;
-	    }
-	  else
-	    {
-	      yyMonth = $1;
-	      yyDay = $3;
-	      yyYear = $5;
-	    }
-	}
-	| tUNUMBER tSNUMBER tSNUMBER {
+date	: tUNUMBER tSNUMBER tSNUMBER {
 	    /* ISO 8601 format.  yyyy-mm-dd.  */
 	    yyYear = $1;
 	    yyMonth = -$2;
 	    yyDay = -$3;
 	}
-	| tUNUMBER tMONTH tSNUMBER {
-	    /* e.g. 17-JUN-1992.  */
-	    yyDay = $1;
-	    yyMonth = $2;
-	    yyYear = -$3;
-	}
-	| tMONTH tUNUMBER {
-	    yyMonth = $1;
-	    yyDay = $2;
-	}
-	| tMONTH tUNUMBER ',' tUNUMBER {
-	    yyMonth = $1;
-	    yyDay = $2;
-	    yyYear = $4;
-	}
-	| tUNUMBER tMONTH {
-	    yyMonth = $2;
-	    yyDay = $1;
-	}
-	| tUNUMBER tMONTH tUNUMBER {
-	    yyMonth = $2;
-	    yyDay = $1;
-	    yyYear = $3;
-	}
 	;
 
 number	: tUNUMBER
           {
-		    yyHaveDate++;
 		    yyDay= ($1)%100;
 		    yyMonth= ($1/100)%100;
 		    yyYear = $1/10000;
@@ -207,87 +153,12 @@ number	: tUNUMBER
 
 %%
 
-/* Month table. */
-static TABLE const MonthTable[] = {
-    { "january",	tMONTH,  1 },
-    { "february",	tMONTH,  2 },
-    { "march",		tMONTH,  3 },
-    { "april",		tMONTH,  4 },
-    { "may",		tMONTH,  5 },
-    { "june",		tMONTH,  6 },
-    { "july",		tMONTH,  7 },
-    { "august",		tMONTH,  8 },
-    { "september",	tMONTH,  9 },
-    { "sept",		tMONTH,  9 },
-    { "october",	tMONTH, 10 },
-    { "november",	tMONTH, 11 },
-    { "december",	tMONTH, 12 },
-    { NULL, 0, 0 }
-};
-
 
 
 
 static int yyerror (MAYBE_UNUSED const char *s)
 {
   return 0;
-}
-
-static int ToYear (int Year)
-{
-  if (Year < 0)
-    Year = -Year;
-
-  /* XPG4 suggests that years 00-68 map to 2000-2068, and
-     years 69-99 map to 1969-1999.  */
-  if (Year < 69)
-    Year += 2000;
-  else if (Year < 100)
-    Year += 1900;
-
-  return Year;
-}
-
-static int LookupWord (char *buff)
-{
-  register char *p;
-  register const TABLE *tp;
-  bool abbrev;
-
-  /* Make it lowercase. */
-  for (p = buff; !streq(p, ""); p++)
-    if (isupper (*p))
-      *p = tolower (*p);
-
-  /* See if we have an abbreviation for a month. */
-  if (strlen (buff) == 3)
-    abbrev = true;
-  else if (strlen (buff) == 4 && buff[3] == '.')
-    {
-      abbrev = true;
-      stpcpy(&buff[3], "");
-    }
-  else
-    abbrev = false;
-
-  for (tp = MonthTable; tp->name; tp++)
-    {
-      if (abbrev)
-	{
-	  if (strncmp (buff, tp->name, 3) == 0)
-	    {
-	      yylval.Number = tp->value;
-	      return tp->type;
-	    }
-	}
-      else if (streq(buff, tp->name))
-	{
-	  yylval.Number = tp->value;
-	  return tp->type;
-	}
-    }
-
-  return tID;
 }
 
 static int
@@ -321,15 +192,6 @@ yylex (void)
 	    yylval.Number = -yylval.Number;
 	  return (0 != sign) ? tSNUMBER : tUNUMBER;
 	}
-      if (isalpha (c))
-	{
-	  for (p = buff; (c = *yyInput++, isalpha (c)) || c == '.';)
-	    if (p < &buff[sizeof buff - 1])
-	      *p++ = c;
-          stpcpy(p, "");
-	  yyInput--;
-	  return LookupWord (buff);
-	}
       if (c != '(')
 	return *yyInput++;
       Count = 0;
@@ -354,13 +216,11 @@ time_t get_date (const char *p, const time_t *now)
   struct tm  tm;
 
   yyInput = p;
-  yyHaveDate = 0;
 
-  if (yyparse ()
-      || yyHaveDate > 1)
+  if (yyparse())
     return -1;
 
-  tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN;
+  tm.tm_year = yyYear - TM_YEAR_ORIGIN;
   tm.tm_mon = yyMonth - 1;
   tm.tm_mday = yyDay;
   tm.tm_hour = tm.tm_min = tm.tm_sec = 0;
