@@ -31,7 +31,7 @@ static int parse_date(const char *s);
 
 
 time_t
-get_date(const char *p, const time_t *now)
+get_date(const char *s);
 {
 	struct tm  tm;
 
