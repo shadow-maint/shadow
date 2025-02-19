@@ -75,7 +75,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the number of days since January 1st, 1970 when the password
+	    Set the number of days since 1970-01-01 when the password
 	    was last changed. The date may also be expressed in the format
 	    YYYY-MM-DD (or the format more commonly used in your area).
 	    If the <replaceable>LAST_DAY</replaceable> is set to
@@ -90,7 +90,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the date or number of days since January 1, 1970 on which the
+	    Set the date or number of days since 1970-01-01 on which the
 	    user's account will no longer be accessible. The date may also
 	    be expressed in the format YYYY-MM-DD (or the format more
 	    commonly used in your area). A user whose account is locked must
@@ -102,7 +102,7 @@
 	    in 180 days:
 	  </para>
 	  <programlisting>
-	    chage -E $(date -d +180days +%Y-%m-%d)
+	    chage -E $(date -d +180days +%F)
 	  </programlisting>
 	  <para>
 	    Passing the number <emphasis remap='I'>-1</emphasis> as the
