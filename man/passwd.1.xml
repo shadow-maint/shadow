@@ -229,7 +229,7 @@
 	    still be able to login using another authentication token
 	    (e.g. an SSH key). To disable the account, administrators
 	    should use <command>usermod --expiredate 1</command> (this sets
-	    the account's expire date to Jan 2, 1970).
+	    the account's expire date to 1970-01-02).
 	  </para>
 	  <para>
 	    Users with a locked password are not allowed to change their
