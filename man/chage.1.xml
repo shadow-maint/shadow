@@ -77,7 +77,7 @@
 	  <para>
 	    Set the number of days since 1970-01-01 when the password
 	    was last changed. The date may also be expressed in the format
-	    YYYY-MM-DD (or the format more commonly used in your area).
+	    YYYY-MM-DD.
 	    If the <replaceable>LAST_DAY</replaceable> is set to
 	    <emphasis>0</emphasis> the user is forced to change his password
 	    on the next log on.
@@ -92,8 +92,8 @@
 	  <para>
 	    Set the date or number of days since 1970-01-01 on which the
 	    user's account will no longer be accessible. The date may also
-	    be expressed in the format YYYY-MM-DD (or the format more
-	    commonly used in your area). A user whose account is locked must
+	    be expressed in the format YYYY-MM-DD.
+	    A user whose account is locked must
 	    contact the system administrator before being able to use the
 	    system again.
 	  </para>
