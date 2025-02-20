@@ -94,12 +94,12 @@ static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
 static void get_group (struct group *gr, struct sgrp *sg);
-static void check_perms (const struct group *gr, const struct sgrp *sg);
+static void check_perms(const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
 static void get_group (struct group *gr);
-static void check_perms (const struct group *gr);
+static void check_perms(void);
 static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
@@ -632,9 +632,9 @@ static void close_files (void)
  *	It only returns if the user is allowed.
  */
 #ifdef SHADOWGRP
-static void check_perms (const struct group *gr, const struct sgrp *sg)
+static void check_perms (const struct sgrp *sg)
 #else
-static void check_perms (const struct group *gr)
+static void check_perms (void)
 #endif
 {
 	/*
@@ -940,9 +940,9 @@ int main (int argc, char **argv)
 	 * Check if the user is allowed to change the password of this group.
 	 */
 #ifdef SHADOWGRP
-	check_perms (&grent, &sgent);
+	check_perms(&sgent);
 #else
-	check_perms (&grent);
+	check_perms();
 #endif
 
 	/*
