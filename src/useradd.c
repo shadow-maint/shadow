@@ -527,7 +527,6 @@ set_defaults(void)
 	char  *new_file = NULL;
 	char  *new_file_dup = NULL;
 	char  *default_file = USER_DEFAULTS_FILE;
-	char  *cp;
 	FILE  *ifp;
 	FILE  *ofp;
 
