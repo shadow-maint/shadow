@@ -116,7 +116,7 @@ static void send_mesg_to_tty (int tty_fd)
  *	off from the system.
  */
 int
-main(int argc, char **argv)
+main(int argc, char *[])
 {
 	pid_t  pid;
 
