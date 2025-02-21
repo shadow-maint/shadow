@@ -366,12 +366,14 @@ static void init_env (void)
 #endif				/* !USE_PAM */
 }
 
-static void exit_handler (MAYBE_UNUSED int sig)
+static void
+exit_handler(int)
 {
 	_exit (0);
 }
 
-static void alarm_handler (MAYBE_UNUSED int sig)
+static void
+alarm_handler(int)
 {
 	write_full(STDERR_FILENO, tmsg, strlen(tmsg));
 	signal(SIGALRM, exit_handler);
