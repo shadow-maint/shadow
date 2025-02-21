@@ -13,13 +13,13 @@
 #include "adds.h"
 
 
-static void test_addsl_2_ok(void **state);
-static void test_addsl_2_underflow(void **state);
-static void test_addsl_2_overflow(void **state);
-static void test_addsl_3_ok(void **state);
-static void test_addsl_3_underflow(void **state);
-static void test_addsl_3_overflow(void **state);
-static void test_addsl_5_ok(void **state);
+static void test_addsl_2_ok(void **);
+static void test_addsl_2_underflow(void **);
+static void test_addsl_2_overflow(void **);
+static void test_addsl_3_ok(void **);
+static void test_addsl_3_underflow(void **);
+static void test_addsl_3_overflow(void **);
+static void test_addsl_5_ok(void **);
 
 
 int
@@ -40,7 +40,7 @@ main(void)
 
 
 static void
-test_addsl_2_ok(void **state)
+test_addsl_2_ok(void **)
 {
 	assert_true(addsl(1, 3)			== 1 + 3);
 	assert_true(addsl(-4321, 7)		== -4321 + 7);
@@ -54,7 +54,7 @@ test_addsl_2_ok(void **state)
 
 
 static void
-test_addsl_2_underflow(void **state)
+test_addsl_2_underflow(void **)
 {
 	assert_true(addsl(LONG_MIN, -1)		== LONG_MIN);
 	assert_true(addsl(LONG_MIN + 3, -7)	== LONG_MIN);
@@ -63,7 +63,7 @@ test_addsl_2_underflow(void **state)
 
 
 static void
-test_addsl_2_overflow(void **state)
+test_addsl_2_overflow(void **)
 {
 	assert_true(addsl(LONG_MAX, 1)		== LONG_MAX);
 	assert_true(addsl(LONG_MAX - 3, 7)	== LONG_MAX);
@@ -72,7 +72,7 @@ test_addsl_2_overflow(void **state)
 
 
 static void
-test_addsl_3_ok(void **state)
+test_addsl_3_ok(void **)
 {
 	assert_true(addsl(1, 2, 3)		== 1 + 2 + 3);
 	assert_true(addsl(LONG_MIN, -3, 4)	== LONG_MIN + 4 - 3);
@@ -82,7 +82,7 @@ test_addsl_3_ok(void **state)
 
 
 static void
-test_addsl_3_underflow(void **state)
+test_addsl_3_underflow(void **)
 {
 	assert_true(addsl(LONG_MIN, 2, -3)	== LONG_MIN);
 	assert_true(addsl(LONG_MIN, -1, 0)	== LONG_MIN);
@@ -90,7 +90,7 @@ test_addsl_3_underflow(void **state)
 
 
 static void
-test_addsl_3_overflow(void **state)
+test_addsl_3_overflow(void **)
 {
 	assert_true(addsl(LONG_MAX, -1, 2)	== LONG_MAX);
 	assert_true(addsl(LONG_MAX, +1, 0)	== LONG_MAX);
@@ -99,7 +99,7 @@ test_addsl_3_overflow(void **state)
 
 
 static void
-test_addsl_5_ok(void **state)
+test_addsl_5_ok(void **)
 {
 	assert_true(addsl(LONG_MAX, LONG_MAX, LONG_MIN, LONG_MIN, 44) == 42);
 }
