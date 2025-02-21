@@ -882,7 +882,8 @@ static int write_all (const struct commonio_db *db)
 }
 
 
-int commonio_close (struct commonio_db *db, bool process_selinux)
+int
+commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 {
 	bool         errors = false;
 	char         buf[1024];
