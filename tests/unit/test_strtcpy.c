@@ -18,8 +18,8 @@
 #include "string/strcpy/strtcpy.h"
 
 
-static void test_STRTCPY_trunc(void **state);
-static void test_STRTCPY_ok(void **state);
+static void test_STRTCPY_trunc(void **);
+static void test_STRTCPY_ok(void **);
 
 
 int
@@ -35,7 +35,7 @@ main(void)
 
 
 static void
-test_STRTCPY_trunc(void **state)
+test_STRTCPY_trunc(void **)
 {
 	char  buf[countof("foo")];
 
@@ -49,7 +49,7 @@ test_STRTCPY_trunc(void **state)
 
 
 static void
-test_STRTCPY_ok(void **state)
+test_STRTCPY_ok(void **)
 {
 	char  buf[countof("foo")];
 

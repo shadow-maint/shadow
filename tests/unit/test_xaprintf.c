@@ -30,10 +30,10 @@ static jmp_buf  jmpb;
 
 int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
-void __wrap_exit(int status);
+void __wrap_exit(int);
 
-static void test_xaprintf_exit(void **state);
-static void test_xaprintf_ok(void **state);
+static void test_xaprintf_exit(void **);
+static void test_xaprintf_ok(void **);
 
 
 int
@@ -56,14 +56,14 @@ __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap)
 
 
 void
-__wrap_exit(int status)
+__wrap_exit(int)
 {
 	longjmp(jmpb, EXIT_CALLED);
 }
 
 
 static void
-test_xaprintf_exit(void **state)
+test_xaprintf_exit(void **)
 {
 	char *volatile  p;
 
@@ -91,7 +91,7 @@ test_xaprintf_exit(void **state)
 
 
 static void
-test_xaprintf_ok(void **state)
+test_xaprintf_ok(void **)
 {
 	char  *p;
 
