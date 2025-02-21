@@ -15,8 +15,10 @@
 #include <pwd.h>
 #include <fcntl.h>
 #include <time.h>
-#include "defines.h"
 #include <lastlog.h>
+
+#include "attr.h"
+#include "defines.h"
 #include "prototypes.h"
 #include "string/memset/memzero.h"
 #include "string/strcpy/strncpy.h"
@@ -34,7 +36,7 @@ void dolastlog (
 	struct lastlog *ll,
 	const struct passwd *pw,
 	/*@unique@*/const char *line,
-	/*@unique@*/const char *host)
+	MAYBE_UNUSED /*@unique@*/const char *host)
 {
 	int fd;
 	off_t offset;
