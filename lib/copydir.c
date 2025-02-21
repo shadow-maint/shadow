@@ -72,7 +72,6 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
@@ -437,7 +436,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	*/
 
 	else if (S_ISLNK (sb.st_mode)) {
-		err = copy_symlink (src, dst, reset_selinux, &sb, mt,
+		err = copy_symlink (src, dst, &sb, mt,
 				    old_uid, new_uid, old_gid, new_gid);
 	}
 
@@ -551,7 +550,6 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid)
