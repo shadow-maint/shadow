@@ -56,13 +56,12 @@ void audit_help_open (void)
  *
  * type - type of message. A list of possible values is available in
  *        "audit-records.h" file.
- * pgname - program's name
  * op  -  operation. "adding user", "changing finger info", "deleting group"
  * name - user's account or group name. If not available use NULL.
  * id  -  uid or gid that the operation is being performed on. This is used
  *	  only when user is NULL.
  */
-void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
+void audit_logger (int type, const char *op,
                    const char *name, unsigned int id,
                    shadow_audit_result result)
 {
