@@ -35,6 +35,7 @@
 #include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "atoi/str2i.h"
+#include "attr.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -475,7 +476,8 @@ static int update_passwd (struct passwd *pwd, const char *password)
 /*
  * add_passwd - add or update the encrypted password
  */
-static int add_passwd (struct passwd *pwd, const char *password)
+static int
+add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 {
 	const struct spwd *sp;
 	struct spwd spent;
