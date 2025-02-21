@@ -20,6 +20,7 @@
 #include <pwd.h>
 
 #include "alloc/malloc.h"
+#include "attr.h"
 #include "defines.h"
 #include "groupio.h"
 #include "prototypes.h"
@@ -427,7 +428,8 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 
 }
 
-static void check_perms (bool process_selinux)
+static void
+check_perms(MAYBE_UNUSED bool process_selinux)
 {
 	if (!list) {
 #ifdef USE_PAM
