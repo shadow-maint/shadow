@@ -28,7 +28,7 @@
 
 
 format_attr(printf, 3, 4)
-static void semanage_error_callback (MAYBE_UNUSED void *varg,
+static void semanage_error_callback (void *,
                                      semanage_handle_t *handle,
                                      const char *fmt, ...)
 {

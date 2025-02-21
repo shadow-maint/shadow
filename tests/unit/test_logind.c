@@ -19,13 +19,13 @@
  * WRAPPERS
  **********************/
 struct passwd *
-__wrap_prefix_getpwnam(uid_t uid)
+__wrap_prefix_getpwnam(uid_t)
 {
     return (struct passwd*) mock();
 }
 
 int
-__wrap_sd_uid_get_sessions(uid_t uid, int require_active, char ***sessions)
+__wrap_sd_uid_get_sessions(uid_t, int, char ***)
 {
     return mock();
 }

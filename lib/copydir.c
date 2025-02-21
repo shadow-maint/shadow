@@ -99,7 +99,8 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
  * error_acl - format the error messages for the ACL and EQ libraries.
  */
 format_attr(printf, 2, 3)
-static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, ...)
+static void
+error_acl(struct error_context *, const char *fmt, ...)
 {
 	va_list ap;
 	FILE *shadow_logfd = log_get_logfd();
