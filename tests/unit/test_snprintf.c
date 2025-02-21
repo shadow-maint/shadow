@@ -61,6 +61,9 @@ test_stprintf_a_ok(void **)
 	assert_true(stprintf_a(buf, "f") == strlen("f"));
 	assert_true(strcmp(buf, "f") == 0);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
 	assert_true(stprintf_a(buf, "") == strlen(""));
+#pragma GCC diagnostic pop
 	assert_true(strcmp(buf, "") == 0);
 }
