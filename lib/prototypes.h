@@ -305,7 +305,7 @@ extern int do_pam_passwd_non_interactive (const char *pam_service,
 #endif				/* USE_PAM */
 
 /* obscure.c */
-extern bool obscure (const char *, const char *, const struct passwd *);
+extern bool obscure (const char *, const char *);
 
 /* pam_pass.c */
 #ifdef USE_PAM
