@@ -179,7 +179,8 @@ void cleanup_report_del_group_gshadow (void *group_name)
  *
  * It should be registered after the group file is successfully locked.
  */
-void cleanup_unlock_group (MAYBE_UNUSED void *arg)
+void
+cleanup_unlock_group(void *)
 {
 	if (gr_unlock () == 0) {
 		fprintf (log_get_logfd(),
@@ -199,7 +200,8 @@ void cleanup_unlock_group (MAYBE_UNUSED void *arg)
  *
  * It should be registered after the gshadow file is successfully locked.
  */
-void cleanup_unlock_gshadow (MAYBE_UNUSED void *arg)
+void
+cleanup_unlock_gshadow(void *)
 {
 	if (sgr_unlock () == 0) {
 		fprintf (log_get_logfd(),
