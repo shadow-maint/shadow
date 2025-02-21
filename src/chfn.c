@@ -347,7 +347,7 @@ static void check_perms (const struct passwd *pw)
 	 * --marekm
 	 */
 	if (!amroot && getdef_bool ("CHFN_AUTH")) {
-		passwd_check (pw->pw_name, pw->pw_passwd, Prog);
+		passwd_check(pw->pw_name, pw->pw_passwd);
 	}
 
 #else				/* !USE_PAM */

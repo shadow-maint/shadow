@@ -339,7 +339,7 @@ extern struct spwd *pwd_to_spwd (const struct passwd *);
 
 /* pwdcheck.c */
 #ifndef USE_PAM
-extern void passwd_check (const char *, const char *, const char *);
+extern void passwd_check(const char *, const char *);
 #endif
 
 /* pwd_init.c */
