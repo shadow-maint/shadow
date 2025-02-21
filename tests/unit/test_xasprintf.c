@@ -75,6 +75,8 @@ xasprintf_volatile(char *volatile *restrict s, const char *restrict fmt, ...)
 	va_start(ap, fmt);
 	len = xvasprintf((char **) s, fmt, ap);
 	va_end(ap);
+
+	return len;
 }
 
 
