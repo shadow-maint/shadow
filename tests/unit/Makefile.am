@@ -9,7 +9,6 @@ check_PROGRAMS = \
     test_chkhash \
     test_chkname \
     test_snprintf \
-    test_strncpy \
     test_strtcpy \
     test_typetraits \
     test_exit_if_null
@@ -103,18 +102,6 @@ test_snprintf_CFLAGS = \
 test_snprintf_LDFLAGS = \
     $(NULL)
 test_snprintf_LDADD = \
-    $(CMOCKA_LIBS) \
-    $(NULL)
-
-test_strncpy_SOURCES = \
-    test_strncpy.c \
-    $(NULL)
-test_strncpy_CFLAGS = \
-    $(AM_CFLAGS) \
-    $(NULL)
-test_strncpy_LDFLAGS = \
-    $(NULL)
-test_strncpy_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
