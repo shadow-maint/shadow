@@ -20,6 +20,7 @@
 #include "alloc/calloc.h"
 #include "alloc/x/xmalloc.h"
 #include "atoi/a2i/a2u.h"
+#include "attr.h"
 #include "idmapping.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -121,7 +122,7 @@ static inline bool maps_lower_root(int cap, int ranges, const struct map_range *
  * If this is wanted: use file capabilities!
  */
 void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings,
-	const char *map_file, uid_t ruid)
+	const char *map_file, MAYBE_UNUSED uid_t ruid)
 {
 	int idx;
 	const struct map_range *mapping;
