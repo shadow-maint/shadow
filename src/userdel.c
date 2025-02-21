@@ -543,7 +543,7 @@ static void fail_exit (int code, bool process_selinux)
 #endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_USER, Prog,
+	audit_logger (AUDIT_DEL_USER,
 	              "delete-user",
 	              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
@@ -682,7 +682,7 @@ static void update_user (bool process_selinux)
 	}
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_USER, Prog,
+	audit_logger (AUDIT_DEL_USER,
 	              "delete-user",
 	              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif				/* WITH_AUDIT */
@@ -781,7 +781,7 @@ static bool remove_mailbox (void)
 			        Prog, mailfile, strerrno());
 			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
+			audit_logger (AUDIT_DEL_USER,
 			              "delete-mail-file",
 			              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
@@ -797,7 +797,7 @@ static bool remove_mailbox (void)
 			        Prog, mailfile, strerrno());
 			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
+			audit_logger (AUDIT_DEL_USER,
 			              "delete-mail-file",
 			              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
@@ -807,7 +807,7 @@ static bool remove_mailbox (void)
 #ifdef WITH_AUDIT
 		else
 		{
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "delete-mail-file",
 			              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 		}
@@ -822,7 +822,7 @@ static bool remove_mailbox (void)
 		         Prog, mailfile, user_name);
 		SYSLOG((LOG_ERR, "%s not owned by %s, not removed", mailfile, strerrno()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_USER, Prog,
+		audit_logger (AUDIT_DEL_USER,
 		              "delete-mail-file",
 		              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
@@ -838,7 +838,7 @@ static bool remove_mailbox (void)
 		         Prog, mailfile, strerrno());
 		SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_USER, Prog,
+		audit_logger (AUDIT_DEL_USER,
 		              "delete-mail-file",
 		              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
@@ -848,7 +848,7 @@ static bool remove_mailbox (void)
 #ifdef WITH_AUDIT
 	else
 	{
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "delete-mail-file",
 		              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 	}
@@ -1064,7 +1064,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
+			audit_logger (AUDIT_DEL_USER,
 			              "deleting-user-not-found",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -1094,7 +1094,7 @@ int main (int argc, char **argv)
 	if (streq(prefix, "") && !flags.chroot && user_busy(user_name, user_id) != 0) {
 		if (!fflg) {
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
+			audit_logger (AUDIT_DEL_USER,
 			              "deleting-user-logged-in",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -1191,7 +1191,7 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 		else
 		{
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "deleting-home-directory",
 			              user_name, user_id, SHADOW_AUDIT_SUCCESS);
 		}
@@ -1199,7 +1199,7 @@ int main (int argc, char **argv)
 	}
 #ifdef WITH_AUDIT
 	if (errors) {
-		audit_logger (AUDIT_DEL_USER, Prog,
+		audit_logger (AUDIT_DEL_USER,
 		              "deleting-home-directory",
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -1213,7 +1213,7 @@ int main (int argc, char **argv)
 			         _("%s: warning: the user name %s to SELinux user mapping removal failed.\n"),
 			         Prog, user_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ROLE_REMOVE, Prog,
+			audit_logger (AUDIT_ROLE_REMOVE,
 			              "delete-selinux-user-mapping",
 			              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */

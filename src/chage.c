@@ -116,7 +116,7 @@ fail_exit (int code, bool process_selinux)
 
 #ifdef WITH_AUDIT
 	if (E_SUCCESS != code) {
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "change-age", user_name, user_uid, SHADOW_AUDIT_FAILURE);
 	}
 #endif
@@ -832,7 +832,7 @@ int main (int argc, char **argv)
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-all-aging-information",
 			              user_name, user_uid, SHADOW_AUDIT_SUCCESS);
 		}
@@ -840,30 +840,30 @@ int main (int argc, char **argv)
 	} else {
 #ifdef WITH_AUDIT
 		if (Mflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-max-age", user_name, user_uid, SHADOW_AUDIT_SUCCESS);
 		}
 		if (mflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-min-age", user_name, user_uid, 1);
 		}
 		if (dflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-last-change-date",
 			              user_name, user_uid, 1);
 		}
 		if (Wflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-passwd-warning",
 			              user_name, user_uid, 1);
 		}
 		if (Iflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-inactive-days",
 			              user_name, user_uid, 1);
 		}
 		if (Eflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "change-passwd-expiration",
 			              user_name, user_uid, 1);
 		}

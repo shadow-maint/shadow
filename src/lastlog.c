@@ -231,14 +231,14 @@ static void update_one (/*@null@*/const struct passwd *pw)
 #endif
 		strcpy (ll.ll_line, "lastlog");
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
+		audit_logger (AUDIT_ACCT_UNLOCK,
 			"clearing-lastlog",
 			pw->pw_name, pw->pw_uid, SHADOW_AUDIT_SUCCESS);
 #endif
 	}
 #ifdef WITH_AUDIT
 	else {
-		audit_logger (AUDIT_ACCT_UNLOCK, Prog,
+		audit_logger (AUDIT_ACCT_UNLOCK,
 			"refreshing-lastlog",
 			pw->pw_name, pw->pw_uid, SHADOW_AUDIT_SUCCESS);
 	}

@@ -133,7 +133,7 @@ usage (int status)
 static void fail_exit(int status)
 {
 #ifdef WITH_AUDIT
-	audit_logger(AUDIT_ADD_GROUP, Prog, "add-group", group_name,
+	audit_logger(AUDIT_ADD_GROUP, "add-group", group_name,
 				 AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
 	exit (status);
@@ -295,7 +295,7 @@ static void close_files (struct option_flags *flags)
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
+	audit_logger (AUDIT_ADD_GROUP,
 	              "add-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -316,7 +316,7 @@ static void close_files (struct option_flags *flags)
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_GRP_MGMT, Prog,
+		audit_logger (AUDIT_GRP_MGMT,
 		              "add-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
