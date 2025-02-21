@@ -10,7 +10,11 @@
 #ifdef	USE_SSSD
 extern int sssd_flush_cache (int dbflags);
 #else
-#define sssd_flush_cache(service) (0)
+static inline int
+sssd_flush_cache(int)
+{
+	return 0;
+}
 #endif
 
 #endif
