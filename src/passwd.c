@@ -311,7 +311,7 @@ static int new_password (const struct passwd *pw)
 				return -1;
 			}
 
-			if (!amroot && !obscure(orig, pass, pw)) {
+			if (!amroot && !obscure(orig, pass)) {
 				(void) puts (_("Try again."));
 				continue;
 			}
@@ -322,7 +322,7 @@ static int new_password (const struct passwd *pw)
 			 * --marekm
 			 */
 			if (amroot && !warned && getdef_bool ("PASS_ALWAYS_WARN")
-				&& !obscure(orig, pass, pw)) {
+				&& !obscure(orig, pass)) {
 				(void) puts (_("\nWarning: weak password (enter it again to use it anyway)."));
 				warned = true;
 				continue;
