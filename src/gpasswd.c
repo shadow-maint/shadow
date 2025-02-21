@@ -393,7 +393,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to add user %s to group %s%s",
 		         myname, user, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -405,7 +405,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to remove user %s from group %s%s",
 		         myname, user, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -417,7 +417,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to remove password of group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -429,7 +429,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to restrict access to group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -443,7 +443,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "%s failed to set the administrators of group %s to %s%s",
 			         myname, group, admins, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -457,7 +457,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "%s failed to set the members of group %s to %s%s",
 			         myname, group, members, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -470,7 +470,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to change password of group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -517,7 +517,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "user %s added by %s to group %s%s",
 		         user, myname, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -529,7 +529,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "user %s removed by %s from group %s%s",
 		         user, myname, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -541,7 +541,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -553,7 +553,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -567,7 +567,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "administrators of group %s set by %s to %s%s",
 			         group, myname, admins, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
@@ -581,7 +581,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "members of group %s set by %s to %s%s",
 			         group, myname, members, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
@@ -594,7 +594,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "password of group %s changed by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);

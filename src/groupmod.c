@@ -488,7 +488,7 @@ static void close_files (void)
 		exit (E_GRP_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, Prog,
+	audit_logger (AUDIT_USER_ACCT,
 	              info_group.audit_msg,
 	              group_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
@@ -511,7 +511,7 @@ static void close_files (void)
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              info_gshadow.audit_msg,
 		              group_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -534,7 +534,7 @@ static void close_files (void)
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              info_passwd.audit_msg,
 		              group_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -549,7 +549,7 @@ static void close_files (void)
 	}
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, Prog,
+	audit_logger (AUDIT_USER_ACCT,
 	              "modifying group",
 	              group_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);

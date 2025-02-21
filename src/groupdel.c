@@ -148,7 +148,7 @@ static void close_files (void)
 	}
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP, Prog,
+	audit_logger (AUDIT_DEL_GROUP,
 	              "removing group from /etc/group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -172,7 +172,7 @@ static void close_files (void)
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_GROUP, Prog,
+		audit_logger (AUDIT_DEL_GROUP,
 		              "removing group from /etc/gshadow",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -188,7 +188,7 @@ static void close_files (void)
 
 	/* Report success at the system level */
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP, Prog,
+	audit_logger (AUDIT_DEL_GROUP,
 	              "", group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));

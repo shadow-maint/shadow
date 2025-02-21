@@ -272,7 +272,7 @@ static void close_files (void)
 		exit (E_GRP_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
+	audit_logger (AUDIT_ADD_GROUP,
 	              "adding group to /etc/group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -293,7 +293,7 @@ static void close_files (void)
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
+		audit_logger (AUDIT_ADD_GROUP,
 		              "adding group to /etc/gshadow",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -308,7 +308,7 @@ static void close_files (void)
 
 	/* Report success at the system level */
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
+	audit_logger (AUDIT_ADD_GROUP,
 	              "", group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
