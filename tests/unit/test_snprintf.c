@@ -17,8 +17,8 @@
 #include "string/sprintf/snprintf.h"
 
 
-static void test_stprintf_a_trunc(void **state);
-static void test_stprintf_a_ok(void **state);
+static void test_stprintf_a_trunc(void **);
+static void test_stprintf_a_ok(void **);
 
 
 int
@@ -34,7 +34,7 @@ main(void)
 
 
 static void
-test_stprintf_a_trunc(void **state)
+test_stprintf_a_trunc(void **)
 {
 	char  buf[countof("foo")];
 
@@ -48,7 +48,7 @@ test_stprintf_a_trunc(void **state)
 
 
 static void
-test_stprintf_a_ok(void **state)
+test_stprintf_a_ok(void **)
 {
 	char  buf[countof("foo")];
 

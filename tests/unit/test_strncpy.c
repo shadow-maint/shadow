@@ -18,9 +18,9 @@
 #include "string/strcpy/strncpy.h"
 
 
-static void test_strncpy_a_trunc(void **state);
-static void test_strncpy_a_fit(void **state);
-static void test_strncpy_a_pad(void **state);
+static void test_strncpy_a_trunc(void **);
+static void test_strncpy_a_fit(void **);
+static void test_strncpy_a_pad(void **);
 
 
 int
@@ -37,7 +37,7 @@ main(void)
 
 
 static void
-test_strncpy_a_trunc(void **state)
+test_strncpy_a_trunc(void **)
 {
 	char  buf[3];
 
@@ -52,7 +52,7 @@ test_strncpy_a_trunc(void **state)
 
 
 static void
-test_strncpy_a_fit(void **state)
+test_strncpy_a_fit(void **)
 {
 	char  buf[3];
 
@@ -67,7 +67,7 @@ test_strncpy_a_fit(void **state)
 
 
 static void
-test_strncpy_a_pad(void **state)
+test_strncpy_a_pad(void **)
 {
 	char  buf[3];
 

@@ -26,10 +26,10 @@
 static jmp_buf  jmpb;
 
 
-void __wrap_exit(int status);
+void __wrap_exit(int);
 
-static void test_exit_if_null_exit(void **state);
-static void test_exit_if_null_ok(void **state);
+static void test_exit_if_null_exit(void **);
+static void test_exit_if_null_ok(void **);
 
 
 int
@@ -45,14 +45,14 @@ main(void)
 
 
 void
-__wrap_exit(int status)
+__wrap_exit(int)
 {
 	longjmp(jmpb, EXIT_CALLED);
 }
 
 
 static void
-test_exit_if_null_exit(void **state)
+test_exit_if_null_exit(void **)
 {
 	char *volatile  p;
 
@@ -78,7 +78,7 @@ test_exit_if_null_exit(void **state)
 
 
 static void
-test_exit_if_null_ok(void **state)
+test_exit_if_null_ok(void **)
 {
 	char  *p;
 
