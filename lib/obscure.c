@@ -32,7 +32,8 @@
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
  */
-static bool palindrome (MAYBE_UNUSED const char *old, const char *new)
+static bool
+palindrome(const char *new)
 {
 	size_t i, j;
 
@@ -103,7 +104,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 	oldmono = str_lower (xstrdup (old));
 	xasprintf(&wrapped, "%s%s", oldmono, oldmono);
 
-	if (palindrome (oldmono, newmono)) {
+	if (palindrome(newmono)) {
 		msg = _("a palindrome");
 	} else if (streq(oldmono, newmono)) {
 		msg = _("case changes only");
