@@ -90,8 +90,7 @@ static char *str_lower (/*@returned@*/char *string)
 
 static /*@observer@*//*@null@*/const char *password_check (
 	/*@notnull@*/const char *old,
-	/*@notnull@*/const char *new,
-	/*@notnull@*/MAYBE_UNUSED const struct passwd *pwdp)
+	/*@notnull@*/const char *new)
 {
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
@@ -122,8 +121,7 @@ static /*@observer@*//*@null@*/const char *password_check (
 
 static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*@notnull@*/const char *old,
-	/*@notnull@*/const char *new,
-	/*@notnull@*/const struct passwd *pwdp)
+	/*@notnull@*/const char *new)
 {
 	size_t maxlen, oldlen, newlen;
 	char *new1, *old1;
@@ -144,7 +142,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		return NULL;
 	}
 
-	msg = password_check (old, new, pwdp);
+	msg = password_check(old, new);
 	if (NULL != msg) {
 		return msg;
 	}
@@ -192,7 +190,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	if (oldlen > maxlen)
 		stpcpy(&old1[maxlen], "");
 
-	msg = password_check (old1, new1, pwdp);
+	msg = password_check(old1, new1);
 
 	freezero (new1, newlen);
 	freezero (old1, oldlen);
@@ -208,9 +206,10 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
  *	check passwords.
  */
 
-bool obscure (const char *old, const char *new, const struct passwd *pwdp)
+bool
+obscure(const char *old, const char *new)
 {
-	const char *msg = obscure_msg (old, new, pwdp);
+	const char *msg = obscure_msg(old, new);
 
 	if (NULL != msg) {
 		printf (_("Bad password: %s.  "), msg);
