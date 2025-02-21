@@ -27,7 +27,7 @@ void cleanup_report_add_user (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s", name));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, log_get_progname(),
+	audit_logger (AUDIT_ADD_USER,
 	              "",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -44,7 +44,7 @@ void cleanup_report_mod_passwd (void *cleanup_info)
 	         pw_dbname (),
 	         info->action));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_MGMT, log_get_progname(),
+	audit_logger (AUDIT_USER_MGMT,
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -64,7 +64,7 @@ void cleanup_report_add_user_passwd (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, pw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, log_get_progname(),
+	audit_logger (AUDIT_ADD_USER,
 	              "adding-user",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -84,7 +84,7 @@ void cleanup_report_add_user_shadow (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, spw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_MGMT, log_get_progname(),
+	audit_logger (AUDIT_USER_MGMT,
 	              "adding-shadow-user",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
