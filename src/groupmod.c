@@ -500,7 +500,7 @@ static void close_files (struct option_flags *flags)
 		exit (E_GRP_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT, Prog,
+	audit_logger (AUDIT_GRP_MGMT,
 	              info_group.audit_msg,
 	              group_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
@@ -525,12 +525,12 @@ static void close_files (struct option_flags *flags)
 #ifdef WITH_AUDIT
 		/* If both happened, log password change as its more important */
 		if (pflg)
-			audit_logger (AUDIT_GRP_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_GRP_CHAUTHTOK,
 		              info_gshadow.audit_msg,
 		              group_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
 		else
-			audit_logger (AUDIT_GRP_MGMT, Prog,
+			audit_logger (AUDIT_GRP_MGMT,
 		              info_gshadow.audit_msg,
 		              group_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -553,7 +553,7 @@ static void close_files (struct option_flags *flags)
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_GRP_MGMT, Prog,
+		audit_logger (AUDIT_GRP_MGMT,
 		              info_passwd.audit_msg,
 		              group_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -568,7 +568,7 @@ static void close_files (struct option_flags *flags)
 	}
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_GRP_MGMT, Prog,
+	audit_logger (AUDIT_GRP_MGMT,
 	              "modify-group",
 	              group_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);

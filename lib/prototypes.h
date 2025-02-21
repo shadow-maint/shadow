@@ -183,7 +183,7 @@ extern void audit_help_open (void);
 typedef enum {
 	SHADOW_AUDIT_FAILURE = 0,
 	SHADOW_AUDIT_SUCCESS = 1} shadow_audit_result;
-extern void audit_logger (int type, const char *pgname, const char *op,
+extern void audit_logger (int type, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
 void audit_logger_message (const char *message, shadow_audit_result result);
