@@ -90,7 +90,7 @@ usage (int status)
 static void fail_exit(int status)
 {
 #ifdef WITH_AUDIT
-	audit_logger(AUDIT_GRP_MGMT, Prog, "delete-group", group_name,
+	audit_logger(AUDIT_GRP_MGMT, "delete-group", group_name,
                         AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
 	exit (status);
@@ -157,7 +157,7 @@ static void close_files (void)
 	}
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP, Prog,
+	audit_logger (AUDIT_DEL_GROUP,
 	              "delete-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
@@ -181,7 +181,7 @@ static void close_files (void)
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_GRP_MGMT, Prog,
+		audit_logger (AUDIT_GRP_MGMT,
 		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
