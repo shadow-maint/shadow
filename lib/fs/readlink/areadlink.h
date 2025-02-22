@@ -9,11 +9,11 @@
 #include <config.h>
 
 #include <errno.h>
-#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "defines.h"
 #include "alloc/malloc.h"
 #include "attr.h"
 #include "fs/readlink/readlinknul.h"

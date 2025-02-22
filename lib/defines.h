@@ -65,6 +65,14 @@
 #endif
 #endif
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
+#ifndef MAXHOSTNAMELEN
+#define MAXHOSTNAMELEN 64
+#endif
+
 #include <syslog.h>
 
 #ifndef LOG_WARN

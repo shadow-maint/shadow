@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include "defines.h"
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
