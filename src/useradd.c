@@ -30,6 +30,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -2413,14 +2414,16 @@ static void check_uid_range(int rflg, uid_t user_id)
 	if (rflg) {
 		uid_max = getdef_ulong("SYS_UID_MAX",getdef_ulong("UID_MIN",1000UL)-1);
 		if (user_id > uid_max) {
-			fprintf(stderr, _("%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"), Prog, user_name, user_id, uid_max);
+			fprintf(stderr, _("%s warning: %s's uid %jd is greater than SYS_UID_MAX %jd\n"),
+			        Prog, user_name, (intmax_t) user_id, (intmax_t) uid_max);
 		}
 	}else{
 		uid_min = getdef_ulong("UID_MIN", 1000UL);
 		uid_max = getdef_ulong("UID_MAX", 6000UL);
 		if (uid_min <= uid_max) {
 			if (user_id < uid_min || user_id >uid_max)
-				fprintf(stderr, _("%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"), Prog, user_name, user_id, uid_min, uid_max);
+				fprintf(stderr, _("%s warning: %s's uid %jd outside of the UID_MIN %jd and UID_MAX %jd range.\n"),
+				        Prog, user_name, (intmax_t) user_id, (intmax_t) uid_min, (intmax_t) uid_max);
 		}
 	}
 
