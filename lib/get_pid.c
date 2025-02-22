@@ -57,15 +57,15 @@ int open_pidfd(const char *pidstr)
 	if (get_pid(pidstr, &target) == -1)
 		return -ENOENT;
 
-	if (SNPRINTF(proc_dir_name, "/proc/%u/", target) == -1) {
-		fprintf(stderr, "snprintf of proc path failed for %u: %s\n",
+	if (SNPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
+		fprintf(stderr, "snprintf of proc path failed for %d: %s\n",
 			target, strerror(errno));
 		return -EINVAL;
 	}
 
 	proc_dir_fd = open(proc_dir_name, O_DIRECTORY);
 	if (proc_dir_fd < 0) {
-		fprintf(stderr, _("Could not open proc directory for target %u: %s\n"),
+		fprintf(stderr, _("Could not open proc directory for target %d: %s\n"),
 			target, strerror(errno));
 		return -EINVAL;
 	}
