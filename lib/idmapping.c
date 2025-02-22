@@ -43,7 +43,7 @@ get_map_ranges(int ranges, int argc, char **argv)
 	}
 
 	if (ranges * 3 != argc) {
-		fprintf(log_get_logfd(), "%s: ranges: %u is wrong for argc: %d\n", log_get_progname(), ranges, argc);
+		fprintf(log_get_logfd(), "%s: ranges: %d is wrong for argc: %d\n", log_get_progname(), ranges, argc);
 		return NULL;
 	}
 
