@@ -304,7 +304,8 @@ void __sgr_del_entry (const struct commonio_entry *ent)
 }
 
 /* Sort with respect to group ordering. */
-int sgr_sort ()
+int
+sgr_sort(void)
 {
 	return commonio_sort_wrt (&gshadow_db, __gr_get_db ());
 }
