@@ -210,7 +210,8 @@ static int pw_cmp (const void *p1, const void *p2)
 }
 
 /* Sort entries by UID */
-int pw_sort ()
+int
+pw_sort(void)
 {
 	return commonio_sort (&passwd_db, pw_cmp);
 }
