@@ -2216,8 +2216,7 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
  */
 static void create_home(const struct option_flags *flags)
 {
-	char    path[strlen(prefix_user_home) + 2];
-	char    *bhome, *cp;
+	char    *bhome, *cp, *path;
 	mode_t  mode;
 	bool    process_selinux;
 
@@ -2249,7 +2248,9 @@ static void create_home(const struct option_flags *flags)
 	   exists. If not, create it with permissions 755 and
 	   owner root:root.
 	 */
-	strcpy(path, "");
+
+	path = strcpy(XMALLOC(strlen(prefix_user_home) + 2, char), "");
+
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		/* Avoid turning a relative path into an absolute path. */
 		if (strprefix(bhome, "/") || !streq(path, ""))
@@ -2317,6 +2318,7 @@ static void create_home(const struct option_flags *flags)
 		fprintf(stderr, _("%s: warning: chown on '%s' failed: %m\n"),
 			Prog, path);
 	}
+	free(path);
 	home_added = true;
 #ifdef WITH_AUDIT
 	audit_logger(AUDIT_USER_MGMT, "add-home-dir",
