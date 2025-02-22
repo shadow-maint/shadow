@@ -2227,7 +2227,6 @@ static void create_home(const struct option_flags *flags)
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
 
-	strcpy(path, "");
 	bhome = strdup(prefix_user_home);
 	if (!bhome) {
 		fprintf(stderr,
@@ -2251,6 +2250,7 @@ static void create_home(const struct option_flags *flags)
 	   exists. If not, create it with permissions 755 and
 	   owner root:root.
 	 */
+	strcpy(path, "");
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		bool  dir_created;
 
