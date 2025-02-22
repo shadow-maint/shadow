@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "adds.h"
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
@@ -71,15 +72,12 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	}
 
 	/*
-	 * Update the record.  We increment the failure count to log the
-	 * latest failure.  The only concern here is overflow, and we'll
-	 * check for that.  The line name and time of day are both
-	 * updated as well.
+	 * Update the record.  We increment (with saturation) the
+	 * failure count to log the latest failure.  The line name and
+	 * time of day are both updated as well.  
 	 */
 
-	if (fl->fail_cnt + 1 > 0) {
-		fl->fail_cnt++;
-	}
+	fl->fail_cnt = addsh(fl->fail_cnt, 1);
 
 	strtcpy_a(fl->fail_line, tty);
 	fl->fail_time = time(NULL);
