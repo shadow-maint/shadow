@@ -57,6 +57,7 @@
 #include <syslog.h>
 #include <unistd.h>
 
+#include "defines.h"
 #include "prototypes.h"
 #include "sizeof.h"
 #include "string/strcmp/strcaseeq.h"
