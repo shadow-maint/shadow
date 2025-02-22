@@ -2187,8 +2187,7 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
  */
 static void create_home (void)
 {
-	char    path[strlen(prefix_user_home) + 2];
-	char    *bhome, *cp;
+	char    *bhome, *cp, *path;
 	mode_t  mode;
 
 	if (access (prefix_user_home, F_OK) == 0)
@@ -2215,7 +2214,9 @@ static void create_home (void)
 	   exists. If not, create it with permissions 755 and
 	   owner root:root.
 	 */
-	strcpy(path, "");
+
+	path = strcpy(XMALLOC(strlen(prefix_user_home) + 2, char), "");
+
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
 		/* Avoid turning a relative path into an absolute path. */
 		if (bhome[0] == '/' || !streq(path, ""))
@@ -2283,6 +2284,7 @@ static void create_home (void)
 		fprintf(stderr, _("%s: warning: chown on '%s' failed: %m\n"),
 			Prog, path);
 	}
+	free(path);
 	home_added = true;
 #ifdef WITH_AUDIT
 	audit_logger(AUDIT_USER_MGMT, "add-home-dir",
