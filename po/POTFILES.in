@@ -56,7 +56,6 @@ lib/selinux.c
 lib/semanage.c
 lib/setugid.c
 lib/setupenv.c
-lib/sgetspent.c
 lib/sgroupio.c
 lib/shadow/group/sgetgrent.c
 lib/shadow/passwd/sgetpwent.c
