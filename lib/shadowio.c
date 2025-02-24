@@ -12,12 +12,14 @@
 
 #ident "$Id$"
 
-#include "prototypes.h"
-#include "defines.h"
 #include <shadow.h>
 #include <stdio.h>
+
 #include "commonio.h"
+#include "defines.h"
 #include "getdef.h"
+#include "prototypes.h"
+#include "shadow/shadow/sgetspent.h"
 #include "shadowio.h"
 #ifdef WITH_TCB
 #include <tcb.h>
