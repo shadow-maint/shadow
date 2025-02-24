@@ -103,13 +103,7 @@ AC_DEFINE_UNQUOTED(LASTLOG_FILE, "$shadow_cv_logdir/lastlog",
 AC_DEFINE_UNQUOTED(FAILLOG_FILE, "$shadow_cv_logdir/faillog",
 	[Path for faillog file.])
 
-AC_CACHE_CHECK([location of the passwd program], shadow_cv_passwd_dir,
-[if test -f /usr/bin/passwd; then
-	shadow_cv_passwd_dir=/usr/bin
-else
-	shadow_cv_passwd_dir=/bin
-fi])
-AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$shadow_cv_passwd_dir/passwd",
+AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$exec_prefix/bin/passwd",
 	[Path to passwd program.])
 
 AC_ARG_ENABLE(shadowgrp,
