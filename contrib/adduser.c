@@ -128,7 +128,6 @@
 #define EXPIRE_VALS_SET		/* If defined, 'normal' users can't change 
 				 * password expiry values (if running suid root) */
 
-#define HAVE_GETUSERSHELL	/* FIXME: Isn't this defined in config.h too? */
 #define LOGGING			/* If we want to log various things to syslog */
 #define MAX_USRNAME  8		/* Longer usernames seem to work on my system....
 				 * But they're probably a poor idea */
@@ -315,13 +314,13 @@ main (void)
 	{
 	  char *sh;
 	  int ok = 0;
-#ifdef HAVE_GETUSERSHELL
+
 	  setusershell ();
 	  while ((sh = getusershell ()) != NULL)
 	    if (streq(shell, sh))
 	      ok = 1;
 	  endusershell ();
-#endif
+
 	  if (!ok)
 	    {
 	      if (getuid () == 0)
