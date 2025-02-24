@@ -397,11 +397,6 @@ extern void setup (struct passwd *);
 /* setupenv.c */
 extern void setup_env (struct passwd *);
 
-/* sgetspent.c */
-#ifndef HAVE_SGETSPENT
-extern struct spwd *sgetspent (const char *string);
-#endif
-
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent);
