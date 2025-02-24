@@ -90,18 +90,6 @@ if test $shadow_cv_mailfile != none; then
 		[Name of user's mail spool file if stored in user's home directory.])
 fi
 
-AC_CACHE_CHECK([location of utmp], shadow_cv_utmpdir,
-[for shadow_cv_utmpdir in /var/run /var/adm /usr/adm /etc none; do
-	if test -f $shadow_cv_utmpdir/utmp; then
-		break
-	fi
-done])
-if test "$shadow_cv_utmpdir" = "none"; then
-	AC_MSG_WARN(utmp file not found)
-fi
-AC_DEFINE_UNQUOTED(_UTMP_FILE, "$shadow_cv_utmpdir/utmp",
-	[Path for utmp file.])
-
 AC_CACHE_CHECK([location of faillog/lastlog/wtmp], shadow_cv_logdir,
 [for shadow_cv_logdir in /var/log /var/adm /usr/adm /etc; do
 	if test -d $shadow_cv_logdir; then
