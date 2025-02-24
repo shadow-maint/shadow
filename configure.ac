@@ -21,10 +21,6 @@ AC_SUBST([LIBSUBID_ABI_MINOR], [libsubid_abi_minor])
 AC_SUBST([LIBSUBID_ABI_MICRO], [libsubid_abi_micro])
 AC_SUBST([LIBSUBID_ABI], [libsubid_abi])
 
-dnl Some hacks...
-test "x$prefix" = "xNONE" && prefix="/usr"
-test "X$prefix" = "X/usr" && exec_prefix=""
-
 AC_USE_SYSTEM_EXTENSIONS
 
 AC_ENABLE_STATIC
