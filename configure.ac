@@ -39,7 +39,7 @@ dnl Checks for libraries.
 dnl shadow now uses the libc's shadow implementation
 AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
-AC_CHECK_FUNCS(arc4random_buf futimes \
+AC_CHECK_FUNCS(arc4random_buf \
 	getentropy getrandom \
 	lckpwdf lutimes \
 	updwtmpx innetgr \
