@@ -1,18 +1,16 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1998, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2003 - 2005, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2009       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1998, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2003-2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2009, Nicolas François
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "config.h"
 
-/* Newer versions of Linux libc already have shadow support.  */
-#ifndef HAVE_SGETSPENT
+#include "shadow/shadow/sgetspent.h"
 
-#ident "$Id$"
+#ifndef HAVE_SGETSPENT
 
 #include <stddef.h>
 #include <stdio.h>
