@@ -11,10 +11,12 @@
 #include <config.h>
 
 #include <limits.h>
+#include <sys/types.h>
 
 #include "must_be.h"
 
 
+#define ssizeof(x)           ((ssize_t) sizeof(x))
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
 #define SIZEOF_ARRAY(a)      (sizeof(a) + must_be_array(a))
