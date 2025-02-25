@@ -27,7 +27,11 @@ inline char *areadlink(const char *link);
 inline char *
 areadlink(const char *link)
 {
+#ifdef PATH_MAX
 	size_t  size = PATH_MAX;
+#else
+	size_t  size = 1024;
+#endif
 
 	while (true) {
 		int   len;
