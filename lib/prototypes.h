@@ -34,6 +34,8 @@
 #include "attr.h"
 #include "defines.h"
 #include "commonio.h"
+#include "shadow/gshadow/sgrp.h"
+
 
 /* addgrps.c */
 #if !defined(USE_PAM)
@@ -395,17 +397,6 @@ extern void setup (struct passwd *);
 
 /* setupenv.c */
 extern void setup_env (struct passwd *);
-
-/* sgetgrent.c */
-extern struct group *sgetgrent (const char *buf);
-
-/* sgetpwent.c */
-extern struct passwd *sgetpwent (const char *buf);
-
-/* sgetspent.c */
-#ifndef HAVE_SGETSPENT
-extern struct spwd *sgetspent (const char *string);
-#endif
 
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
