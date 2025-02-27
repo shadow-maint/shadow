@@ -1,7 +1,5 @@
-/*
- * SPDX-FileCopyrightText: 2023, Alejandro Colomar <alx@kernel.org>
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
 
 
 #include <setjmp.h>
@@ -19,6 +17,7 @@
 #include "string/sprintf/xasprintf.h"
 
 
+#define smock()               _Generic(mock(), uintmax_t: (intmax_t) mock())
 #define assert_unreachable()  assert_true(0)
 
 #define XASPRINTF_CALLED  (-36)
@@ -31,14 +30,14 @@ static jmp_buf  jmpb;
 
 int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
-void __wrap_exit(int status);
+void __wrap_exit(int);
 
 [[gnu::noipa]]
 static int xasprintf_volatile(char *volatile *restrict s,
     const char *restrict fmt, ...);
 
-static void test_xasprintf_exit(void **state);
-static void test_xasprintf_ok(void **state);
+static void test_xasprintf_exit(void **);
+static void test_xasprintf_ok(void **);
 
 
 int
@@ -56,12 +55,12 @@ main(void)
 int
 __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap)
 {
-	return mock() == -1 ? -1 : __real_vasprintf(p, fmt, ap);
+	return smock() == -1 ? -1 : __real_vasprintf(p, fmt, ap);
 }
 
 
 void
-__wrap_exit(int status)
+__wrap_exit(int)
 {
 	longjmp(jmpb, EXIT_CALLED);
 }
@@ -76,11 +75,13 @@ xasprintf_volatile(char *volatile *restrict s, const char *restrict fmt, ...)
 	va_start(ap, fmt);
 	len = xvasprintf((char **) s, fmt, ap);
 	va_end(ap);
+
+	return len;
 }
 
 
 static void
-test_xasprintf_exit(void **state)
+test_xasprintf_exit(void **)
 {
 	volatile int    len;
 	char *volatile  p;
@@ -109,7 +110,7 @@ test_xasprintf_exit(void **state)
 
 
 static void
-test_xasprintf_ok(void **state)
+test_xasprintf_ok(void **)
 {
 	int   len;
 	char  *p;

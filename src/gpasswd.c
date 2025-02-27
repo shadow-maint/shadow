@@ -93,24 +93,24 @@ static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
 static void get_group (struct group *gr, struct sgrp *sg);
-static void check_perms (const struct group *gr, const struct sgrp *sg);
+static void check_perms(const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
 static void get_group (struct group *gr);
-static void check_perms (const struct group *gr);
+static void check_perms(void);
 static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
 static void log_gpasswd_failure (const char *suffix);
-static void log_gpasswd_failure_system (/*@null@*/MAYBE_UNUSED void *arg);
-static void log_gpasswd_failure_group (/*@null@*/MAYBE_UNUSED void *arg);
+static void log_gpasswd_failure_system (/*@null@*/void *);
+static void log_gpasswd_failure_group (/*@null@*/void *);
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (/*@null@*/MAYBE_UNUSED void *arg);
+static void log_gpasswd_failure_gshadow (/*@null@*/void *);
 #endif
 static void log_gpasswd_success (const char *suffix);
-static void log_gpasswd_success_system (/*@null@*/MAYBE_UNUSED void *arg);
-static void log_gpasswd_success_group (/*@null@*/MAYBE_UNUSED void *arg);
+static void log_gpasswd_success_system (/*@null@*/void *);
+static void log_gpasswd_success_group(/*@null@*/void *);
 
 /*
  * usage - display usage message
@@ -393,7 +393,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to add user %s to group %s%s",
 		         myname, user, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -405,7 +405,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to remove user %s from group %s%s",
 		         myname, user, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -417,7 +417,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to remove password of group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -429,7 +429,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to restrict access to group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -443,7 +443,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "%s failed to set the administrators of group %s to %s%s",
 			         myname, group, admins, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -457,7 +457,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "%s failed to set the members of group %s to %s%s",
 			         myname, group, members, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -470,7 +470,7 @@ static void log_gpasswd_failure (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "%s failed to change password of group %s%s",
 		         myname, group, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -478,12 +478,14 @@ static void log_gpasswd_failure (const char *suffix)
 	}
 }
 
-static void log_gpasswd_failure_system (MAYBE_UNUSED void *arg)
+static void
+log_gpasswd_failure_system(void *)
 {
 	log_gpasswd_failure ("");
 }
 
-static void log_gpasswd_failure_group (MAYBE_UNUSED void *arg)
+static void
+log_gpasswd_failure_group(void *)
 {
 	char  buf[1024];
 
@@ -492,7 +494,8 @@ static void log_gpasswd_failure_group (MAYBE_UNUSED void *arg)
 }
 
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (MAYBE_UNUSED void *arg)
+static void
+log_gpasswd_failure_gshadow(void *)
 {
 	char  buf[1024];
 
@@ -514,7 +517,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "user %s added by %s to group %s%s",
 		         user, myname, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -526,7 +529,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "user %s removed by %s from group %s%s",
 		         user, myname, group, suffix);
-		audit_logger (AUDIT_USER_ACCT, Prog,
+		audit_logger (AUDIT_USER_ACCT,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -538,7 +541,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -550,7 +553,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -564,7 +567,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "administrators of group %s set by %s to %s%s",
 			         group, myname, admins, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
@@ -578,7 +581,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 			SNPRINTF(buf, "members of group %s set by %s to %s%s",
 			         group, myname, members, suffix);
-			audit_logger (AUDIT_USER_ACCT, Prog,
+			audit_logger (AUDIT_USER_ACCT,
 			              buf,
 			              group, AUDIT_NO_ID,
 			              SHADOW_AUDIT_SUCCESS);
@@ -591,7 +594,7 @@ static void log_gpasswd_success (const char *suffix)
 #ifdef WITH_AUDIT
 		SNPRINTF(buf, "password of group %s changed by %s%s",
 		         group, myname, suffix);
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              buf,
 		              group, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
@@ -599,12 +602,14 @@ static void log_gpasswd_success (const char *suffix)
 	}
 }
 
-static void log_gpasswd_success_system (MAYBE_UNUSED void *arg)
+static void
+log_gpasswd_success_system(void *)
 {
 	log_gpasswd_success ("");
 }
 
-static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
+static void
+log_gpasswd_success_group(void *)
 {
 	char  buf[1024];
 
@@ -659,9 +664,9 @@ static void close_files (void)
  *	It only returns if the user is allowed.
  */
 #ifdef SHADOWGRP
-static void check_perms (const struct group *gr, const struct sgrp *sg)
+static void check_perms (const struct sgrp *sg)
 #else
-static void check_perms (const struct group *gr)
+static void check_perms (void)
 #endif
 {
 	/*
@@ -967,9 +972,9 @@ int main (int argc, char **argv)
 	 * Check if the user is allowed to change the password of this group.
 	 */
 #ifdef SHADOWGRP
-	check_perms (&grent, &sgent);
+	check_perms(&sgent);
 #else
-	check_perms (&grent);
+	check_perms();
 #endif
 
 	/*

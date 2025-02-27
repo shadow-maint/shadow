@@ -26,6 +26,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <stdint.h>
 #include <stdio.h>
 #include <strings.h>
 #include <sys/stat.h>
@@ -430,7 +431,7 @@ static char *new_pw_passwd (char *pw_pass)
 		char  *buf;
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating passwd", user_newname, user_newid, 0);
 #endif
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
@@ -446,14 +447,14 @@ static char *new_pw_passwd (char *pw_pass)
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating password", user_newname, user_newid, 0);
 #endif
 		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
 		memmove(pw_pass, pw_pass + 1, strlen(pw_pass));
 	} else if (pflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing password", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "change user '%s' password", user_newname));
@@ -482,7 +483,7 @@ static void new_pwent (struct passwd *pwent)
 			fail_exit (E_NAME_IN_USE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing name", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
@@ -502,28 +503,28 @@ static void new_pwent (struct passwd *pwent)
 
 	if (uflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing uid", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' UID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_uid, user_newid));
+		         "change user '%s' UID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_uid, (intmax_t) user_newid));
 		pwent->pw_uid = user_newid;
 	}
 	if (gflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing primary group",
 		              user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' GID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_gid, user_newgid));
+		         "change user '%s' GID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_gid, (intmax_t) user_newgid));
 		pwent->pw_gid = user_newgid;
 	}
 	if (cflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing comment", user_newname, user_newid, 1);
 #endif
 		pwent->pw_gecos = user_newcomment;
@@ -531,7 +532,7 @@ static void new_pwent (struct passwd *pwent)
 
 	if (dflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing home directory",
 		              user_newname, user_newid, 1);
 #endif
@@ -548,7 +549,7 @@ static void new_pwent (struct passwd *pwent)
 	}
 	if (sflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing user shell",
 		              user_newname, user_newid, 1);
 #endif
@@ -579,7 +580,7 @@ static void new_spent (struct spwd *spent)
 
 	if (fflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing inactive days",
 		              user_newname, user_newid, 1);
 #endif
@@ -595,7 +596,7 @@ static void new_spent (struct spwd *spent)
 		DAY_TO_STR(new_exp, user_newexpire);
 		DAY_TO_STR(old_exp, user_expire);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "changing expiration date",
 		              user_newname, user_newid, 1);
 #endif
@@ -681,7 +682,7 @@ fail_exit (int code)
 #endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_USER_CHAUTHTOK,
 	              "modifying account",
 	              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -753,7 +754,7 @@ update_group(const struct group *grp)
 							 user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				audit_logger (AUDIT_USER_CHAUTHTOK,
 					      "changing group member",
 					      user_newname, AUDIT_NO_ID, 1);
 #endif
@@ -769,7 +770,7 @@ update_group(const struct group *grp)
 			ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 			changed = true;
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 				      "removing group member",
 				      user_name, AUDIT_NO_ID, 1);
 #endif
@@ -784,7 +785,7 @@ update_group(const struct group *grp)
 		ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
 		changed = true;
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 			      "adding user to group",
 			      user_name, AUDIT_NO_ID, 1);
 #endif
@@ -879,7 +880,7 @@ update_gshadow(const struct sgrp *sgrp)
 		nsgrp->sg_adm = add_list (nsgrp->sg_adm, user_newname);
 		changed = true;
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 			      "changing admin name in shadow group",
 			      user_name, AUDIT_NO_ID, 1);
 #endif
@@ -901,7 +902,7 @@ update_gshadow(const struct sgrp *sgrp)
 							  user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				audit_logger (AUDIT_USER_CHAUTHTOK,
 					      "changing member in shadow group",
 					      user_name, AUDIT_NO_ID, 1);
 #endif
@@ -917,7 +918,7 @@ update_gshadow(const struct sgrp *sgrp)
 			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 			changed = true;
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 				      "removing user from shadow group",
 				      user_name, AUDIT_NO_ID, 1);
 #endif
@@ -932,7 +933,7 @@ update_gshadow(const struct sgrp *sgrp)
 		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
 		changed = true;
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 			      "adding user to shadow group",
 			      user_newname, AUDIT_NO_ID, 1);
 #endif
@@ -1829,7 +1830,7 @@ static void move_home (void)
 
 #ifdef WITH_AUDIT
 		if (uflg || gflg) {
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 				      "changing home directory owner",
 				      user_newname, user_newid, 1);
 		}
@@ -1848,7 +1849,7 @@ static void move_home (void)
 				fail_exit (E_HOMEDIR);
 			}
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 			              "moving home directory",
 			              user_newname, user_newid, 1);
 #endif
@@ -1877,7 +1878,6 @@ static void move_home (void)
 					}
 #ifdef WITH_AUDIT
 					audit_logger (AUDIT_USER_CHAUTHTOK,
-					              Prog,
 					              "moving home directory",
 					              user_newname,
 					              user_newid,
@@ -2102,7 +2102,7 @@ static void move_mailbox (void)
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 			              "changing mail file owner",
 			              user_newname, user_newid, 1);
 		}
@@ -2126,7 +2126,7 @@ static void move_mailbox (void)
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_USER_CHAUTHTOK,
 			              "changing mail file name",
 			              user_newname, user_newid, 1);
 		}
@@ -2340,7 +2340,7 @@ int main (int argc, char **argv)
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 				         Prog, user_name, user_selinux);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				audit_logger (AUDIT_USER_CHAUTHTOK,
 				              "modifying User mapping ",
 				              user_name, user_id,
 				              SHADOW_AUDIT_FAILURE);
@@ -2353,7 +2353,7 @@ int main (int argc, char **argv)
 				         _("%s: warning: the user name %s to SELinux user mapping removal failed.\n"),
 				         Prog, user_name);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_ADD_USER, Prog,
+				audit_logger (AUDIT_ADD_USER,
 				              "removing SELinux user mapping",
 				              user_name, user_id,
 				              SHADOW_AUDIT_FAILURE);
@@ -2397,7 +2397,7 @@ int main (int argc, char **argv)
 			 */
 #ifdef WITH_AUDIT
 			if (uflg || gflg) {
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				audit_logger (AUDIT_USER_CHAUTHTOK,
 					      "changing home directory owner",
 					      user_newname, user_newid, 1);
 			}

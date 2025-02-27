@@ -9,7 +9,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "attr.h"
 #include "defines.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -27,7 +26,7 @@ void cleanup_report_add_user (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s", name));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, log_get_progname(),
+	audit_logger (AUDIT_ADD_USER,
 	              "",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -44,7 +43,7 @@ void cleanup_report_mod_passwd (void *cleanup_info)
 	         pw_dbname (),
 	         info->action));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, log_get_progname(),
+	audit_logger (AUDIT_USER_ACCT,
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -64,7 +63,7 @@ void cleanup_report_add_user_passwd (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, pw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, log_get_progname(),
+	audit_logger (AUDIT_ADD_USER,
 	              "adding user to /etc/passwd",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -84,7 +83,7 @@ void cleanup_report_add_user_shadow (void *user_name)
 
 	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, spw_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_USER, log_get_progname(),
+	audit_logger (AUDIT_ADD_USER,
 	              "adding user to /etc/shadow",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -96,7 +95,8 @@ void cleanup_report_add_user_shadow (void *user_name)
  *
  * It should be registered after the passwd database is successfully locked.
  */
-void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
+void
+cleanup_unlock_passwd(void *)
 {
 	if (pw_unlock () == 0) {
 		fprintf (log_get_logfd(),
@@ -115,7 +115,8 @@ void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
  *
  * It should be registered after the shadow database is successfully locked.
  */
-void cleanup_unlock_shadow (MAYBE_UNUSED void *arg)
+void
+cleanup_unlock_shadow(void *)
 {
 	if (spw_unlock () == 0) {
 		fprintf (log_get_logfd(),
