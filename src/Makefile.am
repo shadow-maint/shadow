@@ -2,13 +2,13 @@
 EXTRA_DIST = \
 	.indent.pro
 
-ubindir = ${exec_prefix}/bin
-usbindir = ${exec_prefix}/sbin
+ubindir = $(exec_prefix)/bin
+usbindir = $(exec_prefix)/sbin
 suidperms = 4755
 sgidperms = 2755
 
 AM_CPPFLAGS = \
-	-I${top_srcdir}/lib \
+	-I$(top_srcdir)/lib \
 	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	$(ECONF_CPPFLAGS)
