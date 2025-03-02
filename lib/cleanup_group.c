@@ -62,7 +62,7 @@ void cleanup_report_mod_group (void *cleanup_info)
 	         gr_dbname (),
 	         info->action));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, log_get_progname(),
+	audit_logger (AUDIT_GRP_MGMT, log_get_progname(),
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -80,7 +80,7 @@ void cleanup_report_mod_gshadow (void *cleanup_info)
 	         sgr_dbname (),
 	         info->action));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_ACCT, log_get_progname(),
+	audit_logger (AUDIT_GRP_MGMT, log_get_progname(),
 	              info->audit_msg,
 	              info->name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
@@ -101,7 +101,7 @@ void cleanup_report_add_group_group (void *group_name)
 	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, gr_dbname ()));
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP, log_get_progname(),
-	              "adding group to /etc/group",
+	              "adding-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
@@ -120,8 +120,8 @@ void cleanup_report_add_group_gshadow (void *group_name)
 
 	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, sgr_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, log_get_progname(),
-	              "adding group to /etc/gshadow",
+	audit_logger (AUDIT_GRP_MGMT, log_get_progname(),
+	              "adding-shadow-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
@@ -143,8 +143,8 @@ void cleanup_report_del_group_group (void *group_name)
 	         "failed to remove group %s from %s",
 	         name, gr_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, log_get_progname(),
-	              "removing group from /etc/group",
+	audit_logger (AUDIT_DEL_GROUP, log_get_progname(),
+	              "removing-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
@@ -166,8 +166,8 @@ void cleanup_report_del_group_gshadow (void *group_name)
 	         "failed to remove group %s from %s",
 	         name, sgr_dbname ()));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, log_get_progname(),
-	              "removing group from /etc/gshadow",
+	audit_logger (AUDIT_GRP_MGMT, log_get_progname(),
+	              "removing-shadow-group",
 	              name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_FAILURE);
 #endif
@@ -187,7 +187,7 @@ void cleanup_unlock_group (MAYBE_UNUSED void *arg)
 		         log_get_progname(), gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger_message ("unlocking group file",
+		audit_logger_message ("unlocking-group",
 		                      SHADOW_AUDIT_FAILURE);
 #endif
 	}
@@ -207,7 +207,7 @@ void cleanup_unlock_gshadow (MAYBE_UNUSED void *arg)
 		         log_get_progname(), sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger_message ("unlocking gshadow file",
+		audit_logger_message ("unlocking-gshadow",
 		                      SHADOW_AUDIT_FAILURE);
 #endif
 	}

@@ -189,6 +189,9 @@ extern void audit_logger (int type, const char *pgname, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
 void audit_logger_message (const char *message, shadow_audit_result result);
+void audit_logger_with_group(int type, const char *op, const char *name,
+    id_t id, const char *grp_type, const char *grp,
+    shadow_audit_result result);
 #endif
 
 /* limits.c */

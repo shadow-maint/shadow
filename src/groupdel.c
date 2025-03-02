@@ -87,6 +87,15 @@ usage (int status)
 	exit (status);
 }
 
+static void fail_exit(int status)
+{
+#ifdef WITH_AUDIT
+	audit_logger(AUDIT_GRP_MGMT, Prog, "delete-group", group_name,
+                        AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+#endif
+	exit (status);
+}
+
 /*
  * grp_update - update group file entries
  *
@@ -113,7 +122,7 @@ static void grp_update (void)
 		fprintf (stderr,
 		         _("%s: cannot remove entry '%s' from %s\n"),
 		         Prog, group_name, gr_dbname ());
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 
 #ifdef	SHADOWGRP
@@ -125,7 +134,7 @@ static void grp_update (void)
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, group_name, sgr_dbname ());
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -144,12 +153,12 @@ static void close_files (void)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP, Prog,
-	              "removing group from /etc/group",
+	              "delete-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO,
@@ -168,12 +177,12 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_GROUP, Prog,
-		              "removing group from /etc/gshadow",
+		audit_logger (AUDIT_GRP_MGMT, Prog,
+		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO,
@@ -186,11 +195,6 @@ static void close_files (void)
 	}
 #endif				/* SHADOWGRP */
 
-	/* Report success at the system level */
-#ifdef WITH_AUDIT
-	audit_logger (AUDIT_DEL_GROUP, Prog,
-	              "", group_name, group_id, SHADOW_AUDIT_SUCCESS);
-#endif
 	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));
 	del_cleanup (cleanup_report_del_group);
 }
@@ -207,7 +211,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	add_cleanup (cleanup_unlock_group, NULL);
 #ifdef	SHADOWGRP
@@ -216,7 +220,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 		add_cleanup (cleanup_unlock_gshadow, NULL);
 	}
@@ -234,7 +238,7 @@ static void open_files (void)
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
@@ -243,7 +247,7 @@ static void open_files (void)
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
-			exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -284,7 +288,7 @@ static void group_busy (gid_t gid)
 	fprintf (stderr,
 	         _("%s: cannot remove the primary group of user '%s'\n"),
 	         Prog, pwd->pw_name);
-	exit (E_GROUP_BUSY);
+	fail_exit (E_GROUP_BUSY);
 }
 
 /*
@@ -368,7 +372,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: Cannot setup cleanup service.\n"),
 		         Prog);
-		exit (1);
+		fail_exit (1);
 	}
 
 	process_flags (argc, argv);
@@ -382,7 +386,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (1);
+			fail_exit (1);
 		}
 
 		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
@@ -403,7 +407,7 @@ int main (int argc, char **argv)
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
-		exit (1);
+		fail_exit (1);
 	}
 	(void) pam_end (pamh, retval);
 #endif				/* USE_PAM */
@@ -423,7 +427,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: group '%s' does not exist\n"),
 			         Prog, group_name);
-			exit (E_NOTFOUND);
+			fail_exit (E_NOTFOUND);
 		}
 
 		group_id = grp->gr_gid;
