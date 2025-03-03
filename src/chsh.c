@@ -196,9 +196,8 @@ static bool shell_is_listed (const char *sh)
 static bool shell_is_listed (const char *sh)
 {
 	bool found = false;
-
-#ifdef HAVE_GETUSERSHELL
 	char *cp;
+
 	setusershell ();
 	while ((cp = getusershell ())) {
 		if (streq(cp, sh)) {
@@ -207,30 +206,7 @@ static bool shell_is_listed (const char *sh)
 		}
 	}
 	endusershell ();
-#else
-	char *buf = NULL;
-	FILE *fp;
-	size_t n = 0;
 
-	fp = fopen (SHELLS_FILE, "r");
-	if (NULL == fp) {
-		return false;
-	}
-
-	while (getline (&buf, &n, fp) != -1) {
-		if (buf[0] != '/') {
-			continue;
-		}
-
-		if (streq(buf, sh)) {
-			found = true;
-			break;
-		}
-	}
-
-	free(buf);
-	fclose (fp);
-#endif
 	return found;
 }
 #endif /* with HAVE_VENDORDIR */
