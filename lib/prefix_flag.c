@@ -27,6 +27,7 @@
 #include "subordinateio.h"
 #endif				/* ENABLE_SUBIDS */
 #include "getdef.h"
+#include "shadow/gshadow/gshadow.h"
 #include "shadowlog.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
@@ -116,7 +117,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		gr_setdbname(group_db_file);
 
 #ifdef  SHADOWGRP
-		xasprintf(&sgroup_db_file, "%s/%s", prefix, SGROUP_FILE);
+		xasprintf(&sgroup_db_file, "%s/%s", prefix, GSHADOW_FILE);
 		sgr_setdbname(sgroup_db_file);
 #endif
 
