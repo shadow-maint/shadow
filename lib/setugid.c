@@ -15,13 +15,16 @@
 
 #ident "$Id$"
 
-#include <stdio.h>
-#include <grp.h>
 #include <errno.h>
+#include <grp.h>
+#include <pwd.h>
+#include <stdint.h>
+#include <stdio.h>
+
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #include "getdef.h"
+
 
 /*
  * setup_groups - set the group credentials
@@ -42,8 +45,8 @@ int setup_groups (const struct passwd *info)
 	if (setgid (info->pw_gid) == -1) {
 		int err = errno;
 		perror ("setgid");
-		SYSLOG ((LOG_ERR, "bad group ID `%d' for user `%s': %s\n",
-		         info->pw_gid, info->pw_name, strerror (err)));
+		SYSLOG((LOG_ERR, "bad group ID `%jd' for user `%s': %s\n",
+		        (intmax_t) info->pw_gid, info->pw_name, strerror(err)));
 		closelog ();
 		return -1;
 	}
