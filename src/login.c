@@ -41,6 +41,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strftime.h"
@@ -267,7 +268,7 @@ static void process_flags (int argc, char *const *argv)
 	 * clever telnet, and getty holes.
 	 */
 	for (arg = 1; arg < argc; arg++) {
-		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2) {
+		if (strprefix(argv[arg], "-") && strlen(argv[arg]) > 2) {
 			usage ();
 		}
 		if (streq(argv[arg], "--")) {
@@ -348,7 +349,7 @@ static void init_env (void)
 	else {
 		cp = getdef_str ("ENV_TZ");
 		if (NULL != cp) {
-			addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
 		}
 	}
 #endif				/* !USE_PAM */
@@ -856,8 +857,8 @@ int main (int argc, char **argv)
 			 * login, even if they have been
 			 * "pre-authenticated."
 			 */
-			if (   ('!' == user_passwd[0])
-			    || ('*' == user_passwd[0])) {
+			if (   strprefix(user_passwd, "!")
+			    || strprefix(user_passwd, "*")) {
 				failed = true;
 			}
 
@@ -1015,7 +1016,7 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	if (pwd->pw_shell[0] == '*') {	/* subsystem root */
+	if (strprefix(pwd->pw_shell, "*")) {  /* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */
 		subsystem (pwd);	/* figure out what to execute */
 		subroot = true;	/* say I was here again */
