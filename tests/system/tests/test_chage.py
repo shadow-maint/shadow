@@ -1,5 +1,5 @@
 """
-Test usermod
+Test chage
 """
 
 from __future__ import annotations
@@ -9,39 +9,6 @@ import pytest
 from pytest_mh.conn import ProcessError
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
-
-
-@pytest.mark.topology(KnownTopology.Shadow)
-def test_usermod__rename_user(shadow: Shadow):
-    """
-    :title: Rename user
-    :setup:
-        1. Create user
-        2. Rename user
-    :steps:
-        1. User exists with new name and GID is 1000
-        2. Group exists and GID is 1000
-        3. Home folder exists
-    :expectedresults:
-        1. User is found and UID matches
-        2. Group is found and GID matches
-        3. Home folder is found
-    :customerscenario: False
-    """
-    shadow.useradd("tuser1")
-    shadow.usermod("-l tuser2 tuser1")
-
-    result = shadow.tools.id("tuser2")
-    assert result is not None, "User should be found"
-    assert result.user.name == "tuser2", "Incorrect username"
-    assert result.user.id == 1000, "Incorrect UID"
-
-    result = shadow.tools.getent.group("tuser1")
-    assert result is not None, "Group should be found"
-    assert result.name == "tuser1", "Incorrect groupname"
-    assert result.gid == 1000, "Incorrect GID"
-
-    assert shadow.fs.exists("/home/tuser1"), "Home folder should be found"
 
 
 @pytest.mark.topology(KnownTopology.Shadow)
@@ -57,7 +24,7 @@ def test_usermod__rename_user(shadow: Shadow):
         ("2025-01-01", 20089),
     ],
 )
-def test_usermod__expire_user_correct_date(shadow: Shadow, expiration_date: str, expected_date: int | None):
+def test_chage__expire_user_correct_date(shadow: Shadow, expiration_date: str, expected_date: int | None):
     """
     :title: Set account expiration date correctly
     :setup:
@@ -72,7 +39,7 @@ def test_usermod__expire_user_correct_date(shadow: Shadow, expiration_date: str,
     """
     shadow.useradd("tuser1")
 
-    shadow.usermod(f"-e {expiration_date} tuser1")
+    shadow.chage(f"-E {expiration_date} tuser1")
 
     result = shadow.tools.getent.shadow("tuser1")
     assert result is not None, "User should be found"
@@ -94,7 +61,7 @@ def test_usermod__expire_user_correct_date(shadow: Shadow, expiration_date: str,
         "tomorrow",
     ],
 )
-def test_usermod__expire_user_incorrect_date(shadow: Shadow, expiration_date: str):
+def test_chage__expire_user_incorrect_date(shadow: Shadow, expiration_date: str):
     """
     :title: Set account expiration date incorrectly
     :setup:
@@ -110,7 +77,7 @@ def test_usermod__expire_user_incorrect_date(shadow: Shadow, expiration_date: st
     shadow.useradd("tuser1")
 
     with pytest.raises(ProcessError):
-        shadow.usermod(f"-e {expiration_date} tuser1")
+        shadow.chage(f"-E {expiration_date} tuser1")
 
     result = shadow.tools.getent.shadow("tuser1")
     assert result is not None, "User should be found"
@@ -126,7 +93,7 @@ def test_usermod__expire_user_incorrect_date(shadow: Shadow, expiration_date: st
         "''",
     ],
 )
-def test_usermod__expire_user_empty_date(shadow: Shadow, expiration_date: str):
+def test_chage__expire_user_empty_date(shadow: Shadow, expiration_date: str):
     """
     :title: Empty account expiration
     :setup:
@@ -145,14 +112,14 @@ def test_usermod__expire_user_empty_date(shadow: Shadow, expiration_date: str):
     """
     shadow.useradd("tuser1")
 
-    shadow.usermod("-e 10 tuser1")
+    shadow.chage("-E 10 tuser1")
 
     result = shadow.tools.getent.shadow("tuser1")
     assert result is not None, "User should be found"
     assert result.name == "tuser1", "Incorrect username"
     assert result.expiration_date == 10, "Incorrect expiration date"
 
-    shadow.usermod(f"-e {expiration_date} tuser1")
+    shadow.chage(f"-E {expiration_date} tuser1")
 
     result = shadow.tools.getent.shadow("tuser1")
     assert result is not None, "User should be found"
