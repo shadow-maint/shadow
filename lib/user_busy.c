@@ -12,6 +12,7 @@
 #ident "$Id: $"
 
 #include <assert.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -29,6 +30,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 
 
 #ifdef __linux__
@@ -69,7 +71,7 @@ user_busy_utmp(const char *name)
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
 		}
-		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
+		if (strncmp(utent->ut_user, name, sizeof(utent->ut_user)) != 0) {
 			continue;
 		}
 		if (kill (utent->ut_pid, 0) != 0) {
@@ -125,8 +127,8 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	if (NULL == sfile) {
 		return 0;
 	}
-	while (fgets (line, sizeof (line), sfile) == line) {
-		if (strncmp (line, "Uid:\t", 5) == 0) {
+	while (fgets(line, sizeof(line), sfile) != NULL) {
+		if (strprefix(line, "Uid:\t")) {
 			unsigned long ruid, euid, suid;
 
 			assert (uid == (unsigned long) uid);
@@ -204,9 +206,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		    || streq(tmp_d_name, "..")) {
 			continue;
 		}
-		if (*tmp_d_name == '.') {
-			tmp_d_name++;
-		}
+		tmp_d_name = strprefix(tmp_d_name, ".") ?: tmp_d_name;
 
 		/* Check if this is a valid PID */
 		if (get_pid(tmp_d_name, &pid) == -1) {

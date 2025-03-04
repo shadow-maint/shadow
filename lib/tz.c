@@ -37,7 +37,7 @@
 
 	fp = fopen (fname, "r");
 	if (   (NULL == fp)
-	    || (fgets (tzbuf, sizeof (tzbuf), fp) == NULL)) {
+	    || (fgets(tzbuf, sizeof(tzbuf), fp) == NULL)) {
 		result = "TZ=CST6CDT";
 	} else {
 		stpsep(tzbuf, "\n");
