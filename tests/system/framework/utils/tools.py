@@ -16,6 +16,7 @@ __all__ = [
     "PasswdEntry",
     "ShadowEntry",
     "GroupEntry",
+    "GShadowEntry"
     "InitgroupsEntry",
     "LinuxToolsUtils",
     "KillCommand",
@@ -369,6 +370,69 @@ class GroupEntry(object):
         return cls.FromDict(result[0])
 
 
+class GShadowEntry(object):
+    """
+    Result of ``getent gshadow``
+    """
+
+    def __init__(
+        self,
+        name: str,
+        password: str,
+        administrators: str,
+        members: str,
+    ) -> None:
+        self.name: str | None = name
+        """
+        Group name.
+        """
+
+        self.password: str | None = password
+        """
+        Group password.
+        """
+
+        self.administrators: int = administrators
+        """
+        Group administrators.
+        """
+
+        self.members: int = members
+        """
+        Group members.
+        """
+
+    def __str__(self) -> str:
+        return (
+            f"({self.name}:{self.password}:{self.administrators}:"
+            f"{self.members})"
+        )
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    @classmethod
+    def FromDict(cls, d: dict[str, Any]) -> GShadowEntry:
+        return cls(
+            name=d.get("group_name", None),
+            password=d.get("password", None),
+            administrators=d.get("administrators", None),
+            members=d.get("members", []),
+        )
+
+    @classmethod
+    def FromOutput(cls, stdout: str) -> GShadowEntry:
+        result = jc.parse("gshadow", stdout)
+
+        if not isinstance(result, list):
+            raise TypeError(f"Unexpected type: {type(result)}, expecting list")
+
+        if len(result) != 1:
+            raise ValueError("More then one entry was returned")
+
+        return cls.FromDict(result[0])
+
+
 class InitgroupsEntry(object):
     """
     Result of ``getent initgroups``
@@ -553,6 +617,19 @@ class GetentUtils(MultihostUtility[MultihostHost]):
         :rtype: PasswdEntry | None
         """
         return self.__exec(GroupEntry, "group", name, service)
+
+    def gshadow(self, name: str | int, *, service: str | None = None) -> GShadowEntry | None:
+        """
+        Call ``getent gshadow $name``
+
+        :param name: Group name or id.
+        :type name: str | int
+        :param service: Service used, defaults to None
+        :type service: str | None
+        :return: group data, None if not found
+        :rtype: GShadowEntry | None
+        """
+        return self.__exec(GShadowEntry, "gshadow", name, service)
 
     def initgroups(self, name: str, *, service: str | None = None) -> InitgroupsEntry:
         """
