@@ -11,8 +11,7 @@
 #include <errno.h>
 #include <stddef.h>
 
-#include "atoi/strtoi/strtoi.h"
-#include "atoi/strtoi/strtou_noneg.h"
+#include "atoi/strton.h"
 #include "cast.h"
 #include "typetraits.h"
 
@@ -21,6 +20,7 @@
 #define a2i(T, n, s, endp, base, min, max)                            \
 ({                                                                    \
 	T            *n_ = n;                                         \
+	QChar_of(s)  *s_ = s;                                         \
 	QChar_of(s)  **endp_ = endp;                                  \
 	T            min_ = min;                                      \
 	T            max_ = max;                                      \
@@ -36,7 +36,7 @@
 		unsigned int:       strtou_noneg,                     \
 		unsigned long:      strtou_noneg,                     \
 		unsigned long long: strtou_noneg                      \
-	)(s, const_cast(char **, endp_), base, min_, max_, &status);  \
+	)(s_, endp_, base, min_, max_, &status);                      \
 	                                                              \
 	if (status != 0)                                              \
 		errno = status;                                       \
