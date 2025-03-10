@@ -65,10 +65,8 @@ libshadow_la_SOURCES = \
 	atoi/str2i/str2s.h \
 	atoi/str2i/str2u.c \
 	atoi/str2i/str2u.h \
-	atoi/strtoi/strtoi.c \
-	atoi/strtoi/strtoi.h \
-	atoi/strtoi/strtou.c \
-	atoi/strtoi/strtou.h \
+	atoi/strtoi/strton.c \
+	atoi/strtoi/strton.h \
 	atoi/strtoi/strtou_noneg.c \
 	atoi/strtoi/strtou_noneg.h \
 	attr.h \
