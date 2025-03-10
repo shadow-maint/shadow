@@ -36,7 +36,7 @@ test_adds_LDADD = \
     $(NULL)
 
 test_atoi_strtoi_SOURCES = \
-    ../../lib/atoi/strtoi/strtoi.c \
+    ../../lib/atoi/strtoi/strton.c \
     ../../lib/atoi/strtoi/strtou_noneg.c \
     test_atoi_strtoi.c \
     $(NULL)

@@ -10,7 +10,7 @@
 
 #include <errno.h>
 
-#include "atoi/strtoi/strtoi.h"
+#include "atoi/strtoi/strton.h"
 #include "attr.h"
 
 
@@ -34,7 +34,7 @@ a2sh_nc(short *restrict n, char *s,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = STRTON(intmax_t, s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -49,7 +49,7 @@ a2si_nc(int *restrict n, char *s,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = STRTON(intmax_t, s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -64,7 +64,7 @@ a2sl_nc(long *restrict n, char *s,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = STRTON(intmax_t, s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
@@ -79,7 +79,7 @@ a2sll_nc(long long *restrict n, char *s,
 {
 	int  status;
 
-	*n = strtoi_(s, endp, base, min, max, &status);
+	*n = STRTON(intmax_t, s, endp, base, min, max, &status);
 	if (status != 0) {
 		errno = status;
 		return -1;
