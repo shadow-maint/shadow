@@ -5,9 +5,3 @@
 #include "config.h"
 
 #include "search/l/lfind.h"
-
-#include <stddef.h>
-
-
-extern inline const void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
