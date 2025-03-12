@@ -60,7 +60,7 @@ add_groups(const char *list)
 			continue;
 		}
 
-		LSEARCH(&grp->gr_gid, gids, &n);
+		LSEARCH(gid_t, &grp->gr_gid, gids, &n);
 	}
 	free(dup);
 
