@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,79 +8,39 @@
 
 #include "config.h"
 
+#include <sys/types.h>
 
-#define CMP(TYPE)                                                     \
+
+/* Compatible with bsearch(3), lfind(3), and qsort(3).  */
+#define CMP(T)                                                        \
 (                                                                     \
-	_Generic((TYPE) 0,                                            \
-		int:            cmp_int,                              \
-		long:           cmp_long,                             \
-		unsigned int:   cmp_uint,                             \
-		unsigned long:  cmp_ulong                             \
+	_Generic((T) 0,                                               \
+		int:     CMP__ ## int,                                \
+		long:    CMP__ ## long,                               \
+		u_int:   CMP__ ## u_int,                              \
+		u_long:  CMP__ ## u_long                              \
 	)                                                             \
 )
 
 
-/* Compatible with bsearch(3), lfind(3), and qsort(3).  */
-inline int cmp_int(const void *key, const void *elt);
-inline int cmp_long(const void *key, const void *elt);
-inline int cmp_uint(const void *key, const void *elt);
-inline int cmp_ulong(const void *key, const void *elt);
-
-
-inline int
-cmp_int(const void *key, const void *elt)
-{
-	const int  *k = key;
-	const int  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
+#define template_CMP(T)                                               \
+inline int                                                            \
+CMP__ ## T(const void *key, const void *elt)                          \
+{                                                                     \
+	const T  *k = key;                                            \
+	const T  *e = elt;                                            \
+                                                                      \
+	if (*k < *e)                                                  \
+		return -1;                                            \
+	if (*k > *e)                                                  \
+		return +1;                                            \
+	return 0;                                                     \
 }
-
-
-inline int
-cmp_long(const void *key, const void *elt)
-{
-	const long  *k = key;
-	const long  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
-
-
-inline int
-cmp_uint(const void *key, const void *elt)
-{
-	const unsigned int  *k = key;
-	const unsigned int  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
-
-
-inline int
-cmp_ulong(const void *key, const void *elt)
-{
-	const unsigned long  *k = key;
-	const unsigned long  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
+template_CMP(int);
+template_CMP(long);
+template_CMP(u_int);
+template_CMP(u_long);
+#undef template_CMP
 
 
 #endif  // include guard
