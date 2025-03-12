@@ -10,31 +10,36 @@
 
 #include <search.h>
 #include <stddef.h>
+#include <sys/types.h>
 
 #include "search/cmp/cmp.h"
 #include "typetraits.h"
 
 
-#define LFIND(T, k, a, n)                                             \
-({                                                                    \
-	const T  *k_ = k;                                             \
-	const T  *a_ = a;                                             \
-                                                                      \
-	(const T *) lfind_(k_, a_, n, sizeof(T), CMP(T));             \
-})
+#define LFIND(T, ...)                                                 \
+(                                                                     \
+	_Generic((T) 0,                                               \
+		int:     LFIND__ ## int,                              \
+		long:    LFIND__ ## long,                             \
+		u_int:   LFIND__ ## u_int,                            \
+		u_long:  LFIND__ ## u_long                            \
+	)(__VA_ARGS__)                                                \
+)
 
 
-inline const void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
-
-
-inline const void *
-lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp)
-{
-	// lfind(3) wants a pointer to n for historic reasons.
-	return lfind(k, a, &n, ksize, cmp);
+#define template_LFIND(T)                                             \
+inline const T *                                                      \
+LFIND__ ## T(size_t n;                                                \
+    const T *k, const T a[n], size_t n)                               \
+{                                                                     \
+	/* lfind(3) wants a pointer to n for historic reasons.  */    \
+	return lfind(k, a, &n, sizeof(T), CMP(T));                    \
 }
+template_LFIND(int);
+template_LFIND(long);
+template_LFIND(u_int);
+template_LFIND(u_long);
+#undef template_LFIND
 
 
 #endif  // include guard
