@@ -54,7 +54,8 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
         """
         self.logger.info(f"Detecting distro information on {self.hostname}")
         os_release = self.fs.read("/etc/os-release")
-        self._os_release = dict(csv.reader([x for x in os_release.splitlines() if x], delimiter="="))
+        valid_lines = [line for line in os_release.splitlines() if line and not line.startswith("#")]
+        self._os_release = dict(csv.reader(valid_lines, delimiter="="))
         if "NAME" in self._os_release:
             self._distro_name = self._os_release["NAME"]
         if "VERSION_ID" not in self._os_release:
