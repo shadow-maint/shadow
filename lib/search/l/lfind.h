@@ -12,29 +12,16 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
 
 
-#define LFIND(T, k, a, n)                                             \
-({                                                                    \
-	const T  *k_ = k;                                             \
-	const T  *a_ = a;                                             \
-                                                                      \
-	(const T *) lfind_(k_, a_, n, sizeof(T), CMP(T));             \
-})
-
-
-inline const void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
-
-
-inline const void *
-lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp)
-{
-	// lfind(3) wants a pointer to n for historic reasons.
-	return lfind(k, a, &n, ksize, cmp);
-}
+#define LFIND(T, ...)                                                 \
+((static inline const T *                                             \
+  (size_t n;                                                          \
+   const T *k, const T a[n], size_t n))                               \
+{                                                                     \
+	/* lfind(3) wants a pointer to n for historic reasons.  */    \
+	return lfind(k, a, &n, sizeof(T), CMP(T));                    \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
