@@ -20,8 +20,11 @@
 ({                                                                            \
 	long  addend_[] = {a, b, __VA_ARGS__};                                \
                                                                               \
-	addslN(countof(addend_), addend_);                                    \
+	ADDSLN_(addend_);                                                     \
 })
+
+
+#define ADDSLN_(a)        addslN(countof(a), a)
 
 
 inline long addsl2(long a, long b);
