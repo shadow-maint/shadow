@@ -16,13 +16,7 @@
 #include "sizeof.h"
 
 
-#define addsl(a, b, ...)                                                      \
-({                                                                            \
-	long  addend_[] = {a, b, __VA_ARGS__};                                \
-                                                                              \
-	ADDSLN_(addend_);                                                     \
-})
-
+#define addsl(a, b, ...)  ADDSLN_(((long []){a, b, __VA_ARGS__}))
 
 #define ADDSLN_(a)        addslN(countof(a), a)
 
