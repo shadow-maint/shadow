@@ -19,7 +19,7 @@
 	const T  *k_ = k;                                             \
 	const T  *a_ = a;                                             \
                                                                       \
-	(const T *) lfind_(k_, a_, n, sizeof(T), CMP(T *));           \
+	(const T *) lfind_(k_, a_, n, sizeof(T), CMP(T));             \
 })
 
 

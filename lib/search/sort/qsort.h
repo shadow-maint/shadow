@@ -17,7 +17,7 @@
 {                                                                     \
 	T  *p_ = a;                                                   \
                                                                       \
-	qsort(p_, n, sizeof(T), CMP(T *));                            \
+	qsort(p_, n, sizeof(T), CMP(T));                              \
 } while (0)
 
 
