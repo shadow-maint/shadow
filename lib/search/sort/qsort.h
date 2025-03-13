@@ -8,18 +8,20 @@
 
 #include "config.h"
 
+#include <stddef.h>
 #include <stdlib.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
+#include "sizeof.h"
 
 
-#define QSORT(T, a, n)  do                                            \
+#define QSORT(T, ...)                                                 \
+((static inline void                                                  \
+  (size_t n;                                                          \
+   T a[n], size_t n))                                                 \
 {                                                                     \
-	T  *p_ = a;                                                   \
-                                                                      \
-	qsort(p_, n, sizeof(T), CMP(T));                              \
-} while (0)
+	qsort(a, n, sizeof(T), CMP(T));                               \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
