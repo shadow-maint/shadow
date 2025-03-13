@@ -9,18 +9,18 @@
 #include "config.h"
 
 #include <search.h>
+#include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
 
 
-#define LSEARCH(T, k, a, n)  do                                       \
+#define LSEARCH(T, ...)                                               \
+((static inline void                                                  \
+  (size_t *n;                                                         \
+   const T *k, T a[*n], size_t *n))                                   \
 {                                                                     \
-	const T  *k_ = k;                                             \
-	T        *a_ = a;                                             \
-                                                                      \
-	lsearch(k_, a_, n, sizeof(T), CMP(T));                        \
-} while (0)
+	lsearch(k, a, n, sizeof(T), CMP(T));                          \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
