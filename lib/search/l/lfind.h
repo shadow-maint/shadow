@@ -20,15 +20,15 @@
 	const T  *k_ = k;                                             \
 	const T  *a_ = a;                                             \
                                                                       \
-	(T *) lfind_(k_, a_, n, sizeof(T), CMP(T *));                 \
+	(const T *) lfind_(k_, a_, n, sizeof(T), CMP(T *));           \
 })
 
 
-inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
+inline const void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
     typeof(int (const void *k, const void *elt)) *cmp);
 
 
-inline void *
+inline const void *
 lfind_(const void *k, const void *a, size_t n, size_t ksize,
     typeof(int (const void *k, const void *elt)) *cmp)
 {
