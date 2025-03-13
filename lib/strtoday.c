@@ -11,7 +11,7 @@
 
 #include <ctype.h>
 
-#include "atoi/str2i/str2s.h"
+#include "atoi/str2i.h"
 #include "getdate.h"
 #include "prototypes.h"
 #include "string/ctype/strisascii/strisdigit.h"
