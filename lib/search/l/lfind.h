@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -10,35 +10,35 @@
 
 #include <search.h>
 #include <stddef.h>
+#include <sys/types.h>
 
-#include "must_be.h"
 #include "search/cmp/cmp.h"
 
-#include <assert.h>
+
+#define LFIND(T, ...)                                                 \
+(                                                                     \
+	_Generic((T) 0,                                               \
+		int:     LFIND__ ## int,                              \
+		long:    LFIND__ ## long,                             \
+		u_int:   LFIND__ ## u_int,                            \
+		u_long:  LFIND__ ## u_long                            \
+	)(__VA_ARGS__)                                                \
+)
 
 
-#define LFIND(k, a, n)                                                \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_))); \
-})
-
-
-inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
-
-
-inline void *
-lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp)
-{
-	// lfind(3) wants a pointer to n for historic reasons.
-	return lfind(k, a, &n, ksize, cmp);
+#define template_LFIND(T)                                             \
+inline const T *                                                      \
+LFIND__ ## T(size_t n;                                                \
+    const T *k, const T a[n], size_t n)                               \
+{                                                                     \
+	/* lfind(3) wants a pointer to n for historic reasons.  */    \
+	return lfind(k, a, &n, sizeof(T), CMP(T));                    \
 }
+template_LFIND(int);
+template_LFIND(long);
+template_LFIND(u_int);
+template_LFIND(u_long);
+#undef template_LFIND
 
 
 #endif  // include guard
