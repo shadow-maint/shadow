@@ -13,13 +13,13 @@
 #include "search/cmp/cmp.h"
 
 
-#define LSEARCH(T, k, a, n)                                           \
-({                                                                    \
+#define LSEARCH(T, k, a, n)  do                                       \
+(                                                                     \
 	const T  *k_ = k;                                             \
 	T        *a_ = a;                                             \
                                                                       \
-	(T *) lsearch(k_, a_, n, sizeof(T), CMP(T *));                \
-})
+	lsearch(k_, a_, n, sizeof(T), CMP(T *));                      \
+} while (0)
 
 
 #endif  // include guard
