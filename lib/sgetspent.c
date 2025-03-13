@@ -20,7 +20,7 @@
 #include <string.h>
 
 #include "atoi/a2i/a2s.h"
-#include "atoi/str2i/str2u.h"
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
