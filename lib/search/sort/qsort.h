@@ -9,16 +9,35 @@
 #include <config.h>
 
 #include <stdlib.h>
+#include <stddef.h>
+#include <sys/types.h>
 
 #include "search/cmp/cmp.h"
 
 
-#define QSORT(T, a, n)  do                                            \
+#define QSORT(T, ...)                                                 \
+(                                                                     \
+	_Generic((T) 0,                                               \
+		int:     QSORT__ ## int,                              \
+		long:    QSORT__ ## long,                             \
+		u_int:   QSORT__ ## u_int,                            \
+		u_long:  QSORT__ ## u_long                            \
+	)(__VA_ARGS__)                                                \
+)
+
+
+#define template_QSORT(T)                                             \
+inline void                                                           \
+QSORT__ ## T(size_t n;                                                \
+    T a[n], size_t n)                                                 \
 {                                                                     \
-	T  *p_ = a;                                                   \
-                                                                      \
-	qsort(p_, n, sizeof(T), CMP(T));                              \
-} while (0)
+	qsort(a, n, sizeof(T), CMP(T));                               \
+}
+template_QSORT(int);
+template_QSORT(long);
+template_QSORT(u_int);
+template_QSORT(u_long);
+#undef template_QSORT
 
 
 #endif  // include guard
