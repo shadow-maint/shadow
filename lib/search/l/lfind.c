@@ -9,5 +9,5 @@
 #include <stddef.h>
 
 
-extern inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
+extern inline const void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
     typeof(int (const void *k, const void *elt)) *cmp);
