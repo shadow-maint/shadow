@@ -13,7 +13,7 @@
 #include <fcntl.h>
 
 #include "atoi/getnum.h"
-#include "atoi/str2i/str2u.h"
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "idmapping.h"
 #include "prototypes.h"
