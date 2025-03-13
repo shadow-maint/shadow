@@ -19,7 +19,7 @@
 #include <time.h>
 #include <assert.h>
 
-#include "atoi/str2i/str2s.h"
+#include "atoi/str2i.h"
 #include "defines.h"
 #include "faillog.h"
 #include "prototypes.h"
