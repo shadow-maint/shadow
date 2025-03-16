@@ -19,13 +19,13 @@
 #if !defined(HAVE_STPECPY)
 // stpecpy - string offset-pointer end-pointer copy
 ATTR_STRING(3)
-inline char *stpecpy(char *dst, char *end, const char *restrict src);
+inline char *stpecpy(char *dst, const char *end, const char *restrict src);
 #endif
 
 
 #if !defined(HAVE_STPECPY)
 inline char *
-stpecpy(char *dst, char *end, const char *restrict src)
+stpecpy(char *dst, const char *end, const char *restrict src)
 {
 	bool    trunc;
 	char    *p;
