@@ -7,4 +7,5 @@
 #include "string/strcpy/stpecpy.h"
 
 
-extern inline char *stpecpy(char *dst, char end[0], const char *restrict src);
+extern inline char *stpecpy(char *dst, const char end[0],
+    const char *restrict src);

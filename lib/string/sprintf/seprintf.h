@@ -20,14 +20,15 @@
 // Report internal snprintf(3) errors with NULL and errno.
 // Calls to these functions can be chained with calls to stpecpy().
 format_attr(printf, 3, 4)
-inline char *seprintf(char *dst, char end[0], const char *restrict fmt, ...);
+inline char *seprintf(char *dst, const char end[0], const char *restrict fmt,
+    ...);
 format_attr(printf, 3, 0)
-inline char *vseprintf(char *dst, char end[0], const char *restrict fmt,
+inline char *vseprintf(char *dst, const char end[0], const char *restrict fmt,
     va_list ap);
 
 
 inline char *
-seprintf(char *dst, char end[0], const char *restrict fmt, ...)
+seprintf(char *dst, const char end[0], const char *restrict fmt, ...)
 {
 	char     *p;
 	va_list  ap;
@@ -41,7 +42,7 @@ seprintf(char *dst, char end[0], const char *restrict fmt, ...)
 
 
 inline char *
-vseprintf(char *dst, char end[0], const char *restrict fmt, va_list ap)
+vseprintf(char *dst, const char end[0], const char *restrict fmt, va_list ap)
 {
 	int        len;
 	ptrdiff_t  size;
