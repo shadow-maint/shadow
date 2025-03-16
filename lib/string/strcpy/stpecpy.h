@@ -18,7 +18,7 @@
 
 #if !defined(HAVE_STPECPY)
 ATTR_STRING(3)
-inline char *stpecpy(char *dst, char end[0], const char *restrict src);
+inline char *stpecpy(char *dst, const char end[0], const char *restrict src);
 #endif
 
 
@@ -28,7 +28,7 @@ inline char *stpecpy(char *dst, char end[0], const char *restrict src);
 // Transparently pass through a NULL input.
 // Calls to this function can be chained with calls to [v]seprintf().
 inline char *
-stpecpy(char *dst, char end[0], const char *restrict src)
+stpecpy(char *dst, const char end[0], const char *restrict src)
 {
 	bool    trunc;
 	char    *p;
