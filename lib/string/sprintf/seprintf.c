@@ -9,7 +9,7 @@
 #include <stdarg.h>
 
 
-extern inline char *seprintf(char *dst, char end[0], const char *restrict fmt,
-    ...);
-extern inline char *vseprintf(char *dst, char end[0], const char *restrict fmt,
-    va_list ap);
+extern inline char *seprintf(char *dst, const char end[0],
+    const char *restrict fmt, ...);
+extern inline char *vseprintf(char *dst, const char end[0],
+    const char *restrict fmt, va_list ap);
