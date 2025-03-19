@@ -75,12 +75,18 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the number of days since 1970-01-01 when the password
-	    was last changed. The date may also be expressed in the format
-	    YYYY-MM-DD.
-	    If the <replaceable>LAST_DAY</replaceable> is set to
-	    <emphasis>0</emphasis> the user is forced to change his password
-	    on the next log on.
+	    Set the date when the password was last changed.
+	    The value can be specified as a date in the YYYY-MM-DD format
+	    or as a number of days since 1970-01-01.
+	    The date is interpreted using the UTC timezone.
+	    If the <replaceable>LAST_DAY</replaceable>
+	    is set to <emphasis>0</emphasis>,
+	    the user is forced to change their password upon the next login.
+	  </para>
+	  <para>
+	    Passing the value <emphasis>-1</emphasis> or an empty string
+	    as the <replaceable>LAST_DAY</replaceable>
+	    clears the value and removes the password change requirement.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -90,24 +96,26 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the date or number of days since 1970-01-01 on which the
-	    user's account will no longer be accessible. The date may also
-	    be expressed in the format YYYY-MM-DD.
-	    A user whose account is locked must
-	    contact the system administrator before being able to use the
-	    system again.
+	    Set the date on which the user's password expires
+	    and their account will no longer be accessible.
+	    The value can be specified as a date in the YYYY-MM-DD format
+	    or as a number of days since 1970-01-01.
+	    The date is interpreted using the UTC timezone.
+	    If the password expires,
+	    the user must contact the system administrator
+	    to regain access to the system.
 	  </para>
 	  <para>
-	    For example the following can be used to set an account to expire
+	    For example, the following command sets an account to expire
 	    in 180 days:
 	  </para>
 	  <programlisting>
 	    chage -E $(date -d +180days +%F)
 	  </programlisting>
 	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the
-	    <replaceable>EXPIRE_DATE</replaceable> will remove an account
-	    expiration date.
+	    Passing the value <emphasis remap='I'>-1</emphasis>
+	    or an empty string as the <replaceable>EXPIRE_DATE</replaceable>
+	    removes the account expiration date.
 	  </para>
 	</listitem>
       </varlistentry>
