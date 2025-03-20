@@ -14,7 +14,9 @@ __all__ = [
     "UnixGroup",
     "IdEntry",
     "PasswdEntry",
+    "ShadowEntry",
     "GroupEntry",
+    "GShadowEntry"
     "InitgroupsEntry",
     "LinuxToolsUtils",
     "KillCommand",
@@ -222,6 +224,98 @@ class PasswdEntry(object):
         return cls.FromDict(result[0])
 
 
+class ShadowEntry(object):
+    """
+    Result of ``getent shadow``
+    """
+
+    def __init__(
+        self,
+        name: str,
+        password: str,
+        last_changed: int,
+        min_days: int,
+        max_days: int,
+        warn_days: int,
+        inactivity_days: int,
+        expiration_date: int,
+    ) -> None:
+        self.name: str | None = name
+        """
+        User name.
+        """
+
+        self.password: str | None = password
+        """
+        User password.
+        """
+
+        self.last_changed: int = last_changed
+        """
+        Last password change.
+        """
+
+        self.min_days: int = min_days
+        """
+        Minimum number of days before a password change is allowed.
+        """
+
+        self.max_days: int = max_days
+        """
+        Maximum number of days a password is valid.
+        """
+
+        self.warn_days: int = warn_days
+        """
+        Number of days to warn the user before the password expires.
+        """
+
+        self.inactivity_days: int | None = inactivity_days
+        """
+        Number of days after a password expires before the account is disabled.
+        """
+
+        self.expiration_date: int | None = expiration_date
+        """
+        The account expiration date, expressed as the number of days since 1970-01-01 00:00:00 UTC.
+        """
+
+    def __str__(self) -> str:
+        return (
+            f"({self.name}:{self.password}:{self.last_changed}:"
+            f"{self.min_days}:{self.max_days}:{self.warn_days}:"
+            f"{self.inactivity_days}:{self.expiration_date}:)"
+        )
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    @classmethod
+    def FromDict(cls, d: dict[str, Any]) -> ShadowEntry:
+        return cls(
+            name=d.get("username", None),
+            password=d.get("password", None),
+            last_changed=d.get("last_changed", None),
+            min_days=d.get("minimum", None),
+            max_days=d.get("maximum", None),
+            warn_days=d.get("warn", None),
+            inactivity_days=d.get("inactive", None),
+            expiration_date=d.get("expire", None),
+        )
+
+    @classmethod
+    def FromOutput(cls, stdout: str) -> ShadowEntry:
+        result = jc.parse("shadow", stdout)
+
+        if not isinstance(result, list):
+            raise TypeError(f"Unexpected type: {type(result)}, expecting list")
+
+        if len(result) != 1:
+            raise ValueError("More then one entry was returned")
+
+        return cls.FromDict(result[0])
+
+
 class GroupEntry(object):
     """
     Result of ``getent group``
@@ -266,6 +360,69 @@ class GroupEntry(object):
     @classmethod
     def FromOutput(cls, stdout: str) -> GroupEntry:
         result = jc.parse("group", stdout)
+
+        if not isinstance(result, list):
+            raise TypeError(f"Unexpected type: {type(result)}, expecting list")
+
+        if len(result) != 1:
+            raise ValueError("More then one entry was returned")
+
+        return cls.FromDict(result[0])
+
+
+class GShadowEntry(object):
+    """
+    Result of ``getent gshadow``
+    """
+
+    def __init__(
+        self,
+        name: str,
+        password: str,
+        administrators: str,
+        members: str,
+    ) -> None:
+        self.name: str | None = name
+        """
+        Group name.
+        """
+
+        self.password: str | None = password
+        """
+        Group password.
+        """
+
+        self.administrators: int = administrators
+        """
+        Group administrators.
+        """
+
+        self.members: int = members
+        """
+        Group members.
+        """
+
+    def __str__(self) -> str:
+        return (
+            f"({self.name}:{self.password}:{self.administrators}:"
+            f"{self.members})"
+        )
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    @classmethod
+    def FromDict(cls, d: dict[str, Any]) -> GShadowEntry:
+        return cls(
+            name=d.get("group_name", None),
+            password=d.get("password", None),
+            administrators=d.get("administrators", None),
+            members=d.get("members", []),
+        )
+
+    @classmethod
+    def FromOutput(cls, stdout: str) -> GShadowEntry:
+        result = jc.parse("gshadow", stdout)
 
         if not isinstance(result, list):
             raise TypeError(f"Unexpected type: {type(result)}, expecting list")
@@ -435,6 +592,19 @@ class GetentUtils(MultihostUtility[MultihostHost]):
         """
         return self.__exec(PasswdEntry, "passwd", name, service)
 
+    def shadow(self, name: str | int, *, service: str | None = None) -> ShadowEntry | None:
+        """
+        Call ``getent shadow $name``
+
+        :param name: User name or id.
+        :type name: str | int
+        :param service: Service used, defaults to None
+        :type service: str | None
+        :return: shadow data, None if not found
+        :rtype: ShadowEntry | None
+        """
+        return self.__exec(ShadowEntry, "shadow", name, service)
+
     def group(self, name: str | int, *, service: str | None = None) -> GroupEntry | None:
         """
         Call ``getent group $name``
@@ -447,6 +617,19 @@ class GetentUtils(MultihostUtility[MultihostHost]):
         :rtype: PasswdEntry | None
         """
         return self.__exec(GroupEntry, "group", name, service)
+
+    def gshadow(self, name: str | int, *, service: str | None = None) -> GShadowEntry | None:
+        """
+        Call ``getent gshadow $name``
+
+        :param name: Group name or id.
+        :type name: str | int
+        :param service: Service used, defaults to None
+        :type service: str | None
+        :return: group data, None if not found
+        :rtype: GShadowEntry | None
+        """
+        return self.__exec(GShadowEntry, "gshadow", name, service)
 
     def initgroups(self, name: str, *, service: str | None = None) -> InitgroupsEntry:
         """
