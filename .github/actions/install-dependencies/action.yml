@@ -17,6 +17,7 @@ runs:
       fi
       export DEBIAN_PRIORITY=critical
       export DEBIAN_FRONTEND=noninteractive
+      sudo apt purge -y man-db
       # let's try to work around upgrade breakage in a pkg we don't care about
       sudo apt-mark hold grub-efi-amd64-bin grub-efi-amd64-signed
       sudo apt-get update
