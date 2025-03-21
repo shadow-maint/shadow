@@ -56,10 +56,12 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>chage</command> command changes the number of days between
-      password changes and the date of the last password change. This
-      information is used by the system to determine when a user must change
-      their password.
+      The <command>chage</command> command changes
+      password expiration information for a user.
+      It sets the number of days between password changes and
+      the date of the last password change.
+      This information is used by the system to determine
+      when the user must change their password.
     </para>
   </refsect1>
 
