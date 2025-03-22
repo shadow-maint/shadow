@@ -79,7 +79,7 @@ rpmatch(const char *response)
 	if (response[0] == 'y' || response[0] == 'Y')
 		return 1;
 
-	if (response[0] == 'n' || response[0] == 'n')
+	if (response[0] == 'n' || response[0] == 'N')
 		return 0;
 
 	return -1;
