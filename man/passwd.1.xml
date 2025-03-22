@@ -484,6 +484,12 @@
 	    <para>invalid argument to option</para>
 	  </listitem>
 	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>10</replaceable></term>
+	  <listitem>
+	    <para>an error was returned by <refentrytitle>pam</refentrytitle><manvolnum>3</manvolnum></para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
