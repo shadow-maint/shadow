@@ -51,6 +51,7 @@
 #define E_MISSING	4	/* unexpected failure, passwd file missing */
 #define E_PWDBUSY	5	/* passwd file busy, try again later */
 #define E_BAD_ARG	6	/* invalid argument to option */
+#define E_PAM_ERR	10	/* PAM returned an error */
 /*
  * Global variables
  */
