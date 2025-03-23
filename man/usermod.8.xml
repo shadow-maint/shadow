@@ -130,20 +130,20 @@
 	</term>
 	<listitem>
 	  <para>
-            The date on which the user account will be disabled. The
-            date is specified in the format 
-            <emphasis remap="I">YYYY-MM-DD</emphasis>. Integers as input are
-            interpreted as days after 1970-01-01.
+	    Specifies the date on which the user account will be disabled.
+	    The value can be specified as a date in the YYYY-MM-DD format
+	    or as a number of days since 1970-01-01.
+	    The date is interpreted using the UTC timezone.
 	  </para>
 	  <para>
-	    An input of -1 or an empty string will blank the account
-	    expiration field in the shadow password file. The account
-	    will remain available with no date limit.
+	    An input of -1 or an empty string blanks the account expiration field
+	    in the shadow password file.
+	    The account will remain available with no expiration date.
 	  </para>
 	  <para>
-	    This option requires a <filename>/etc/shadow</filename> file.
-	    A <filename>/etc/shadow</filename> entry will be created if
-	    there were none.
+	    This option requires the <filename>/etc/shadow</filename> file.
+	    If no entry exists in the <filename>/etc/shadow</filename> file,
+	    the system will automatically create one.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -358,7 +358,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    changes the user's login shell. An empty string for SHELL blanks the
+	    changes the user's login shell. An empty string for SHELL empties the
 	    field in <filename>/etc/passwd</filename> and logs the user into the
 	    system's default shell.
 	  </para>
