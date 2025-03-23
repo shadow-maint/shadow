@@ -180,11 +180,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date on which the user account will be disabled. The date is
+	    Sets the date on which the user account will be disabled. The date must be
 	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
 	  </para>
 	  <para>
-	    If not specified, <command>useradd</command> will use the
+	    If not specified, <command>useradd</command> uses the
 	    default expiry date specified by the <option>EXPIRE</option>
 	    variable in <filename>/etc/default/useradd</filename>, or
 	    an empty string (no expiry) by default.
