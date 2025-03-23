@@ -205,7 +205,7 @@
 	    Defines the number of days after a password exceeds its maximum age
 	    before the user account gets locked.
 	    If the user does not change their password within this period of time,
-	    their account gets disabled.
+	    their account becomes inactive.
 	    This value is stored in the shadow password file.
 	    For more information, see <citerefentry>
 	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
