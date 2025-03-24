@@ -17,15 +17,14 @@
 #include <string.h>
 
 #include "alloc/malloc.h"
-#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
+#include "string/strtok/strsep2arr.h"
+#include "string/strtok/astrsep2ls.h"
 
-
-#define	NFIELDS	4
 
 /*
  * list - turn a comma-separated string into an array of (char *)'s
@@ -40,26 +39,18 @@ static char **
 list(char *s)
 {
 	static char **members = NULL;
-	static size_t size = 0;	/* max members + 1 */
-	size_t i;
 
-	i = 0;
-	for (;;) {
-		/* check if there is room for another pointer (to a group
-		   member name, or terminating NULL).  */
-		if (i >= size) {
-			size = i + 100;	/* at least: i + 1 */
-			members = REALLOCF(members, size, char *);
-			if (!members) {
-				size = 0;
-				return NULL;
-			}
-		}
-		if (!s || streq(s, ""))
-			break;
-		members[i++] = strsep(&s, ",");
-	}
-	members[i] = NULL;
+	size_t  n;
+
+	free(members);
+
+	members = astrsep2ls(s, ",", &n);
+	if (members == NULL)
+		return NULL;
+
+	if (streq(members[n-1], ""))
+		members[n-1] = NULL;
+
 	return members;
 }
 
@@ -67,11 +58,9 @@ list(char *s)
 struct group *sgetgrent (const char *buf)
 {
 	static char *grpbuf = NULL;
+	static char   *grpfields[4];
 	static size_t size = 0;
-	static char *grpfields[NFIELDS];
 	static struct group grent;
-	int i;
-	char *cp;
 
 	if (strlen (buf) + 1 > size) {
 		/* no need to use realloc() here - just free it and
@@ -87,12 +76,12 @@ struct group *sgetgrent (const char *buf)
 	strcpy (grpbuf, buf);
 	stpsep(grpbuf, "\n");
 
-	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++)
-		grpfields[i] = strsep(&cp, ":");
-
-	if (i < NFIELDS || streq(grpfields[2], "") || cp != NULL) {
+	if (STRSEP2ARR(grpbuf, ":", grpfields) == -1)
 		return NULL;
-	}
+
+	if (streq(grpfields[2], ""))
+		return NULL;
+
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
 	if (get_gid(grpfields[2], &grent.gr_gid) == -1) {
