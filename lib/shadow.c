@@ -70,7 +70,7 @@ struct spwd *fgetspent (FILE * fp)
 		return (0);
 	}
 
-	if (fgets (buf, sizeof buf, fp) != NULL)
+	if (fgets(buf, sizeof(buf), fp) != NULL)
 	{
 		stpsep(buf, "\n");
 		return sgetspent(buf);
