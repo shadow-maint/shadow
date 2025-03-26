@@ -10,6 +10,9 @@
 
 #ifdef USE_PAM
 
+/* Copied from src/passwd.c */
+#define E_PAM_ERR	10	/* PAM returned an error */
+
 #ident "$Id$"
 
 
