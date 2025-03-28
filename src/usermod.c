@@ -1176,6 +1176,7 @@ process_flags(int argc, char **argv)
 				if (!streq(optarg, "")
 				     && '*'  != optarg[0]
 				     && !streq(optarg, "/sbin/nologin")
+				     && !streq(optarg, "/usr/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
 				         || S_ISDIR(st.st_mode)
 				         || access(optarg, X_OK) != 0)) {
