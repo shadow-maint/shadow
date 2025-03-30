@@ -43,7 +43,7 @@ int valid_field (const char *field, const char *illegal)
 
 	/* For each character of field, search if it appears in the list
 	 * of illegal characters. */
-	if (illegal && NULL != strpbrk (field, illegal)) {
+	if (illegal && strpbrk(field, illegal)) {
 		return -1;
 	}
 
