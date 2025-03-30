@@ -16,13 +16,13 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "agetpass.h"
 #include "alloc/x/xmalloc.h"
 #include "chkname.h"
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "pass.h"
 #include "prototypes.h"
 #include "search/l/lfind.h"
 #include "search/l/lsearch.h"
@@ -123,8 +123,8 @@ static void check_perms (const struct group *grp,
                          const char *groupname)
 {
 	bool needspasswd = false;
+	pass_t      *p;
 	struct spwd *spwd;
-	char *cp;
 	const char *cpasswd;
 
 	/*
@@ -167,8 +167,8 @@ static void check_perms (const struct group *grp,
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
 		 */
-		cp = agetpass (_("Password: "));
-		if (NULL == cp) {
+		p = getpassa(_("Password: "));
+		if (NULL == p) {
 			goto failure;
 		}
 
@@ -177,8 +177,8 @@ static void check_perms (const struct group *grp,
 		 * password in the group file. The result of this encryption
 		 * must match the previously encrypted value in the file.
 		 */
-		cpasswd = pw_encrypt (cp, grp->gr_passwd);
-		erase_pass (cp);
+		cpasswd = pw_encrypt(*p, grp->gr_passwd);
+		passzero(p);
 
 		if (NULL == cpasswd) {
 			fprintf (stderr,
