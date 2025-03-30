@@ -61,6 +61,7 @@
 #include "sizeof.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -98,7 +99,7 @@ login_access(const char *user, const char *from)
 	if (NULL != fp) {
 		intmax_t lineno = 0;	/* for diagnostics */
 		while (   !match
-		       && (fgets (line, sizeof (line), fp) == line))
+		       && (fgets(line, sizeof(line), fp) != NULL))
 		{
 			char  *p;
 
@@ -109,7 +110,7 @@ login_access(const char *user, const char *from)
 					 TABLE, lineno));
 				continue;
 			}
-			if (line[0] == '#') {
+			if (strprefix(line, "#")) {
 				continue;	/* comment line */
 			}
 			stpcpy(stprspn(line, " \t"), "");
@@ -140,7 +141,7 @@ login_access(const char *user, const char *from)
 		int err = errno;
 		SYSLOG ((LOG_ERR, "cannot open %s: %s", TABLE, strerror (err)));
 	}
-	return (!match || (line[0] == '+'))?1:0;
+	return (!match || strprefix(line, "+"))?1:0;
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
@@ -181,7 +182,7 @@ static char *myhostname (void)
 	static char name[MAXHOSTNAMELEN + 1] = "";
 
 	if (streq(name, "")) {
-		gethostname (name, sizeof (name));
+		gethostname(name, sizeof(name));
 		stpcpy(&name[MAXHOSTNAMELEN], "");
 	}
 	return (name);
@@ -224,7 +225,7 @@ static bool user_match (char *tok, const char *string)
 	if (host != NULL) {
 		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
-	} else if (tok[0] == '@') {	/* netgroup */
+	} else if (strprefix(tok, "@")) {	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
 #endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
@@ -288,8 +289,6 @@ static const char *resolve_hostname (const char *string)
 
 static bool from_match (char *tok, const char *string)
 {
-	size_t tok_len;
-
 	/*
 	 * If a token has the magic value "ALL" the match always succeeds. Return
 	 * true if the token fully matches the string. If the token is a domain
@@ -299,14 +298,15 @@ static bool from_match (char *tok, const char *string)
 	 * if it matches the head of the string.
 	 */
 #if HAVE_INNETGR
-	if (tok[0] == '@') {	/* netgroup */
+	if (strprefix(tok, "@")) {  /* netgroup */
 		return (netgroup_match (tok + 1, string, NULL));
 	} else
 #endif
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
-	} else if (tok[0] == '.') {	/* domain: match last fields */
-		size_t str_len;
+	} else if (strprefix(tok, ".")) {  /* domain: match last fields */
+		size_t  str_len, tok_len;
+
 		str_len = strlen (string);
 		tok_len = strlen (tok);
 		if (   (str_len > tok_len)
@@ -314,11 +314,10 @@ static bool from_match (char *tok, const char *string)
 			return true;
 		}
 	} else if (strcaseeq(tok, "LOCAL")) {	/* LOCAL: no dots */
-		if (strchr (string, '.') == NULL) {
+		if (!strchr(string, '.'))
 			return true;
-		}
-	} else if (   (!streq(tok, "") && tok[(tok_len = strlen(tok)) - 1] == '.') /* network */
-		   && (strncmp (tok, resolve_hostname (string), tok_len) == 0)) {
+	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
+		   && strprefix(resolve_hostname(string), tok)) {
 		return true;
 	}
 	return false;

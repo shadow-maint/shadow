@@ -32,6 +32,7 @@
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
@@ -81,7 +82,7 @@ struct itemdef {
 	{"MOTD_FIRSTONLY", NULL},		\
 
 
-#define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
+#define NUMDEFS  (sizeof(def_table) / sizeof(def_table[0]))
 static struct itemdef def_table[] = {
 	{"CHFN_RESTRICT", NULL},
 	{"CONSOLE_GROUPS", NULL},
@@ -557,7 +558,7 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.
@@ -568,7 +569,7 @@ static void def_load (void)
 		 * Break the line into two fields.
 		 */
 		name = stpspn(buf, " \t");	/* first nonwhite */
-		if (streq(name, "") || *name == '#')
+		if (streq(name, "") || strprefix(name, "#"))
 			continue;	/* comment or empty */
 
 		s = stpsep(name, " \t");  /* next field */
