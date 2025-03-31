@@ -42,6 +42,9 @@ class ShadowHost(BaseHost, BaseLinuxHost):
         ]
         """Files to verify for mismatch."""
 
+        self._features: dict[str, bool] | None = None
+        """Features supported by the host."""
+
     def pytest_setup(self) -> None:
         super().pytest_setup()
 
@@ -60,6 +63,34 @@ class ShadowHost(BaseHost, BaseLinuxHost):
         :raises NotImplementedError: _description_
         """
         raise NotImplementedError("Stopping shadow service is not implemented.")
+
+    @property
+    def features(self) -> dict[str, bool]:
+        """
+        Features supported by the host.
+        """
+        if self._features is not None:
+            return self._features
+
+        self.logger.info(f"Detecting shadow features on {self.hostname}")
+        result = self.conn.run(
+            """
+            set -ex
+
+            getent gshadow > /dev/null 2>&1 && echo "gshadow" || :
+            """,
+            log_level=ProcessLogLevel.Error,
+        )
+
+        # Set default values
+        self._features = {
+            "gshadow": False,
+        }
+
+        self._features.update({k: True for k in result.stdout_lines})
+        self.logger.info("Detected features:", extra={"data": {"Features": self._features}})
+
+        return self._features
 
     def backup(self) -> Any:
         """
