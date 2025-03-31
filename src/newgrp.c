@@ -30,6 +30,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 
 #include <assert.h>
@@ -249,9 +250,9 @@ static void syslog_sg (const char *name, const char *group)
 	}
 	if (tty == NULL) {
 		tty = "???";
-	} else if (strncmp (tty, "/dev/", 5) == 0) {
-		tty += 5;
 	}
+	tty = strprefix(tty, "/dev/") ?: tty;
+
 	SYSLOG ((LOG_INFO,
 		 "user '%s' (login '%s' on %s) switched to group '%s'",
 		 name, loginname, tty, group));
@@ -509,7 +510,7 @@ int main (int argc, char **argv)
 		 * Do the command line for "newgrp". It's just making sure
 		 * there aren't any flags and getting the new group name.
 		 */
-		if ((argc > 0) && (argv[0][0] == '-')) {
+		if ((argc > 0) && strprefix(argv[0], "-")) {
 			usage ();
 			goto failure;
 		} else if (argv[0] != NULL) {
@@ -768,11 +769,13 @@ int main (int argc, char **argv)
 		}
 
 		while (NULL != *envp) {
-			if (strncmp (*envp, "PATH=", 5) == 0 ||
-			    strncmp (*envp, "HOME=", 5) == 0 ||
-			    strncmp (*envp, "SHELL=", 6) == 0 ||
-			    strncmp (*envp, "TERM=", 5) == 0)
+			if (strprefix(*envp, "PATH=") ||
+			    strprefix(*envp, "HOME=") ||
+			    strprefix(*envp, "SHELL=") ||
+			    strprefix(*envp, "TERM="))
+			{
 				addenv (*envp, NULL);
+			}
 
 			envp++;
 		}

@@ -14,7 +14,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "prototypes.h"
+#include "string/strcmp/strprefix.h"
 
 
 /*
@@ -76,10 +78,9 @@ yes_or_no(bool read_only)
 static int
 rpmatch(const char *response)
 {
-	if (response[0] == 'y' || response[0] == 'Y')
+	if (strprefix(response, "y") || strprefix(response, "Y"))
 		return 1;
-
-	if (response[0] == 'n' || response[0] == 'n')
+	if (strprefix(response, "n") || strprefix(response, "N"))
 		return 0;
 
 	return -1;
