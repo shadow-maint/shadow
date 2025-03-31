@@ -60,7 +60,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -1204,15 +1204,12 @@ int main (int argc, char **argv)
 	 * case they will be provided to the new user's shell as arguments.
 	 */
 	if (fakelogin) {
-		char  *arg0;
-
 		cp = getdef_str ("SU_NAME");
 		if (NULL == cp) {
 			cp = Basename (shellstr);
 		}
 
-		xasprintf(&arg0, "-%s", cp);
-		cp = arg0;
+		cp = xaprintf("-%s", cp);
 	} else {
 		cp = Basename (shellstr);
 	}
