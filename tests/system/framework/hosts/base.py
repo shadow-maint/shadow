@@ -47,6 +47,7 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
         self._distro_name: str = "unknown"
         self._distro_major: int = 0
         self._distro_minor: int = 0
+        self._revision: int = 0
 
     def _distro_information(self):
         """
@@ -60,9 +61,13 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
             self._distro_name = self._os_release["NAME"]
         if "VERSION_ID" not in self._os_release:
             return
-        if "." in self._os_release["VERSION_ID"]:
-            self._distro_major = int(self._os_release["VERSION_ID"].split(".", maxsplit=1)[0])
-            self._distro_minor = int(self._os_release["VERSION_ID"].split(".", maxsplit=1)[1])
+        if self._os_release["VERSION_ID"].count(".") == 2:
+            self._distro_major = int(self._os_release["VERSION_ID"].split(".")[0])
+            self._distro_minor = int(self._os_release["VERSION_ID"].split(".")[1])
+            self._revision = int(self._os_release["VERSION_ID"].split(".")[2])
+        elif self._os_release["VERSION_ID"].count(".") == 1:
+            self._distro_major = int(self._os_release["VERSION_ID"].split(".")[0])
+            self._distro_minor = int(self._os_release["VERSION_ID"].split(".")[1])
         else:
             self._distro_major = int(self._os_release["VERSION_ID"])
 
