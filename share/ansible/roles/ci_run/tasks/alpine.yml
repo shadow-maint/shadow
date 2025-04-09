@@ -10,7 +10,6 @@
       - automake
       - bash
       - build-base
-      - byacc
       - cmocka-dev
       - coreutils
       - expect
