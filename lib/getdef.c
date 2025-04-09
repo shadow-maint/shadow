@@ -76,6 +76,7 @@ struct itemdef {
 #define FOREIGNDEFS				\
 	{"ALWAYS_SET_PATH", NULL},		\
 	{"ENV_ROOTPATH", NULL},			\
+	{"LOGIN_ENV_SAFELIST", NULL},		\
 	{"LOGIN_KEEP_USERNAME", NULL},		\
 	{"LOGIN_PLAIN_PROMPT", NULL},		\
 	{"MOTD_FIRSTONLY", NULL},		\
