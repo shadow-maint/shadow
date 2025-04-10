@@ -26,6 +26,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <stdint.h>
 #include <stdio.h>
 #include <strings.h>
 #include <sys/stat.h>
@@ -430,7 +431,7 @@ static char *new_pw_passwd (char *pw_pass)
 		char  *buf;
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-passwd", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
@@ -446,14 +447,14 @@ static char *new_pw_passwd (char *pw_pass)
 		}
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-password", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
 		memmove(pw_pass, pw_pass + 1, strlen(pw_pass));
 	} else if (pflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-password", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "change user '%s' password", user_newname));
@@ -482,7 +483,7 @@ static void new_pwent (struct passwd *pwent)
 			fail_exit (E_NAME_IN_USE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-name", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
@@ -502,28 +503,28 @@ static void new_pwent (struct passwd *pwent)
 
 	if (uflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-uid", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' UID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_uid, user_newid));
+		         "change user '%s' UID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_uid, (intmax_t) user_newid));
 		pwent->pw_uid = user_newid;
 	}
 	if (gflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-primary-group",
 		              user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' GID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_gid, user_newgid));
+		         "change user '%s' GID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_gid, (intmax_t) user_newgid));
 		pwent->pw_gid = user_newgid;
 	}
 	if (cflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-comment", user_newname, user_newid, 1);
 #endif
 		pwent->pw_gecos = user_newcomment;
@@ -531,7 +532,7 @@ static void new_pwent (struct passwd *pwent)
 
 	if (dflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-home-dir",
 		              user_newname, user_newid, 1);
 #endif
@@ -548,7 +549,7 @@ static void new_pwent (struct passwd *pwent)
 	}
 	if (sflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-shell",
 		              user_newname, user_newid, 1);
 #endif
@@ -579,7 +580,7 @@ static void new_spent (struct spwd *spent)
 
 	if (fflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-inactive-days",
 		              user_newname, user_newid, 1);
 #endif
@@ -595,7 +596,7 @@ static void new_spent (struct spwd *spent)
 		DAY_TO_STR(new_exp, user_newexpire);
 		DAY_TO_STR(old_exp, user_expire);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT, Prog,
+		audit_logger (AUDIT_USER_MGMT,
 		              "changing-expiration-date",
 		              user_newname, user_newid, 1);
 #endif
@@ -681,7 +682,7 @@ fail_exit (int code)
 #endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_MGMT, Prog,
+	audit_logger (AUDIT_USER_MGMT,
 	              "modify-account",
 	              user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
@@ -1841,7 +1842,7 @@ static void move_home (void)
 
 #ifdef WITH_AUDIT
 		if (uflg || gflg) {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 				      "updating-home-dir-owner",
 				      user_newname, user_newid, 1);
 		}
@@ -1860,7 +1861,7 @@ static void move_home (void)
 				fail_exit (E_HOMEDIR);
 			}
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "moving-home-dir",
 			              user_newname, user_newid, 1);
 #endif
@@ -1889,7 +1890,6 @@ static void move_home (void)
 					}
 #ifdef WITH_AUDIT
 					audit_logger (AUDIT_USER_MGMT,
-					              Prog,
 					              "moving-home-dir",
 					              user_newname,
 					              user_newid,
@@ -2114,7 +2114,7 @@ static void move_mailbox (void)
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "updating-mail-file-owner",
 			              user_newname, user_newid, 1);
 		}
@@ -2138,7 +2138,7 @@ static void move_mailbox (void)
 		}
 #ifdef WITH_AUDIT
 		else {
-			audit_logger (AUDIT_USER_MGMT, Prog,
+			audit_logger (AUDIT_USER_MGMT,
 			              "updating-mail-file-name",
 			              user_newname, user_newid, 1);
 		}
@@ -2352,7 +2352,7 @@ int main (int argc, char **argv)
 				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 				         Prog, user_name, user_selinux);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_ROLE_ASSIGN, Prog,
+				audit_logger (AUDIT_ROLE_ASSIGN,
 				              "changing-selinux-user-mapping ",
 				              user_name, user_id,
 				              SHADOW_AUDIT_FAILURE);
@@ -2365,7 +2365,7 @@ int main (int argc, char **argv)
 				         _("%s: warning: the user name %s to SELinux user mapping removal failed.\n"),
 				         Prog, user_name);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_ROLE_REMOVE, Prog,
+				audit_logger (AUDIT_ROLE_REMOVE,
 				              "delete-selinux-user-mapping",
 				              user_name, user_id,
 				              SHADOW_AUDIT_FAILURE);
@@ -2409,7 +2409,7 @@ int main (int argc, char **argv)
 			 */
 #ifdef WITH_AUDIT
 			if (uflg || gflg) {
-				audit_logger (AUDIT_USER_MGMT, Prog,
+				audit_logger (AUDIT_USER_MGMT,
 					      "updating-home-dir-owner",
 					      user_newname, user_newid, 1);
 			}
