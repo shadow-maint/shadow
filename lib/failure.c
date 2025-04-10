@@ -34,7 +34,7 @@
 void failure (uid_t uid, const char *tty, struct faillog *fl)
 {
 	int fd;
-	off_t offset_uid = (off_t) (sizeof *fl) * uid;
+	off_t offset_uid = (off_t) sizeof(*fl) * uid;
 
 	/*
 	 * Don't do anything if failure logging isn't set up.
@@ -59,7 +59,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (read (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+	    || (read(fd, fl, sizeof(*fl)) != (ssize_t) sizeof(*fl))) {
 		/* This is not necessarily a failure. The file is
 		 * initially zero length.
 		 *
@@ -67,7 +67,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		 * might reset the counter. But the new failure will be
 		 * logged.
 		 */
-		memzero (fl, sizeof *fl);
+		memzero(fl, sizeof(*fl));
 	}
 
 	/*
@@ -92,7 +92,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (write_full(fd, fl, sizeof *fl) == -1)) {
+	    || (write_full(fd, fl, sizeof(*fl)) == -1)) {
 		goto err_write;
 	}
 
@@ -150,7 +150,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 {
 	int fd;
 	struct faillog fail;
-	off_t offset_uid = (off_t) (sizeof *fl) * uid;
+	off_t offset_uid = (off_t) sizeof(*fl) * uid;
 
 	/*
 	 * Suppress the check if the log file isn't there.
@@ -182,7 +182,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 	 */
 
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-	    || (read (fd, fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+	    || (read(fd, fl, sizeof(*fl)) != (ssize_t) sizeof(*fl))) {
 		(void) close (fd);
 		return 1;
 	}
@@ -204,7 +204,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 		fail.fail_cnt = 0;
 
 		if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
-		    || (write_full(fd, &fail, sizeof fail) == -1)) {
+		    || (write_full(fd, &fail, sizeof(fail)) == -1)) {
 			    goto err_write;
 		}
 
