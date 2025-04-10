@@ -13,9 +13,11 @@
 
 #include <selinux/selinux.h>
 #include <selinux/label.h>
-#include "prototypes.h"
 
+#include "prototypes.h"
 #include "shadowlog_internal.h"
+#include "string/sprintf/aprintf.h"
+
 
 static bool selinux_checked = false;
 static bool selinux_enabled;
@@ -113,18 +115,15 @@ format_attr(printf, 2, 3)
 static int selinux_log_cb (int type, const char *fmt, ...) {
 	va_list ap;
 	char *buf;
-	int r;
 #ifdef WITH_AUDIT
 	static int selinux_audit_fd = -2;
 #endif
 
 	va_start (ap, fmt);
-	r = vasprintf (&buf, fmt, ap);
+	buf = vaprintf(fmt, ap);
 	va_end (ap);
-
-	if (r < 0) {
+	if (buf == NULL)
 		return 0;
-	}
 
 #ifdef WITH_AUDIT
 	if (-2 == selinux_audit_fd) {
