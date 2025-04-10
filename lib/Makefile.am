@@ -172,7 +172,6 @@ libshadow_la_SOURCES = \
 	sgetspent.c \
 	sgroupio.c \
 	sgroupio.h\
-	shadow.c \
 	shadow/grp/agetgroups.c \
 	shadow/grp/agetgroups.h \
 	shadowio.c \
