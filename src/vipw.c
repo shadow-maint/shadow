@@ -43,7 +43,7 @@
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
 
@@ -206,7 +206,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	/* FIXME: the following should have variable sizes */
 	char         filebackup[1024], fileedit[1024];
 
-	SNPRINTF(filebackup, "%s-", file);
+	STPRINTF(filebackup, "%s-", file);
 #ifdef WITH_TCB
 	if (tcb_mode) {
 		if (   (mkdir (TCB_DIR "/" SHADOWTCB_SCRATCHDIR, 0700) != 0)
@@ -216,12 +216,12 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
-		SNPRINTF(fileedit,
+		STPRINTF(fileedit,
 		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.vipw.shadow.%s",
 		         user);
 	} else {
 #endif				/* WITH_TCB */
-		SNPRINTF(fileedit, "%s.edit", file);
+		STPRINTF(fileedit, "%s.edit", file);
 #ifdef WITH_TCB
 	}
 #endif				/* WITH_TCB */
