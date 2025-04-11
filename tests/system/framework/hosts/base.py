@@ -47,6 +47,7 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
         self._distro_name: str = "unknown"
         self._distro_major: int = 0
         self._distro_minor: int = 0
+        self._revision: int = 0
 
     def _distro_information(self):
         """
@@ -54,14 +55,19 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
         """
         self.logger.info(f"Detecting distro information on {self.hostname}")
         os_release = self.fs.read("/etc/os-release")
-        self._os_release = dict(csv.reader([x for x in os_release.splitlines() if x], delimiter="="))
+        valid_lines = [line for line in os_release.splitlines() if line and not line.startswith("#")]
+        self._os_release = dict(csv.reader(valid_lines, delimiter="="))
         if "NAME" in self._os_release:
             self._distro_name = self._os_release["NAME"]
         if "VERSION_ID" not in self._os_release:
             return
-        if "." in self._os_release["VERSION_ID"]:
-            self._distro_major = int(self._os_release["VERSION_ID"].split(".", maxsplit=1)[0])
-            self._distro_minor = int(self._os_release["VERSION_ID"].split(".", maxsplit=1)[1])
+        if self._os_release["VERSION_ID"].count(".") == 2:
+            self._distro_major = int(self._os_release["VERSION_ID"].split(".")[0])
+            self._distro_minor = int(self._os_release["VERSION_ID"].split(".")[1])
+            self._revision = int(self._os_release["VERSION_ID"].split(".")[2])
+        elif self._os_release["VERSION_ID"].count(".") == 1:
+            self._distro_major = int(self._os_release["VERSION_ID"].split(".")[0])
+            self._distro_minor = int(self._os_release["VERSION_ID"].split(".")[1])
         else:
             self._distro_major = int(self._os_release["VERSION_ID"])
 
