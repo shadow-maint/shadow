@@ -157,10 +157,13 @@
 	    user's login directory. The default is to append the
 	    <replaceable>LOGIN</replaceable> name to
 	    <replaceable>BASE_DIR</replaceable> and use that as the
-	    login directory name.  If the directory
-	    <replaceable>HOME_DIR</replaceable> does not exist, then
-	    it will be created unless the <option>-M</option> option
-	    is specified.
+	    login directory name.  
+	    The directory <replaceable>HOME_DIR</replaceable> is not created by
+	    default.  However it will be created for non-system users if either the
+	    <option>-m</option> flag is specifed or
+	    <replaceable>CREATE_HOME</replaceable> in
+	    <filename>login.defs</filename> is set to true.  However, it will never
+	    be created if the <option>-M</option> flag is specified.
 	  </para>
 	</listitem>
       </varlistentry>
