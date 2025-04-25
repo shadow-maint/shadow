@@ -138,7 +138,7 @@ extern int commonio_append (struct commonio_db *, const void *);
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
 extern /*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *);
-extern int commonio_close (struct commonio_db *);
+extern int commonio_close (struct commonio_db *, bool);
 extern int commonio_unlock (struct commonio_db *);
 extern void commonio_del_entry (struct commonio_db *,
                                 const struct commonio_entry *);
