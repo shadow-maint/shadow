@@ -319,7 +319,7 @@ static void close_files (bool changed)
 			}
 			fail_exit (E_CANTUPDATE);
 		}
-		if (spw_opened && (spw_close () == 0)) {
+		if (spw_opened && (spw_close (true) == 0)) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
@@ -656,7 +656,7 @@ static void check_pw_file (bool *errors, bool *changed)
 		}
 #ifdef WITH_TCB
 		if (getdef_bool ("USE_TCB") && spw_locked) {
-			if (spw_opened && (spw_close () == 0)) {
+			if (spw_opened && (spw_close (true) == 0)) {
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, spw_dbname ());

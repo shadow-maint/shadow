@@ -1580,7 +1580,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_close () == 0)) {
+	if (is_shadow_pwd && (spw_close (true) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));

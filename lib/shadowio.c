@@ -183,7 +183,7 @@ int spw_rewind (void)
 	return commonio_next (&shadow_db);
 }
 
-int spw_close (void)
+int spw_close (bool process_selinux)
 {
 	int retval = 0;
 #ifdef WITH_TCB
@@ -193,7 +193,7 @@ int spw_close (void)
 		return 0;
 	}
 #endif				/* WITH_TCB */
-	retval = commonio_close (&shadow_db, true);
+	retval = commonio_close (&shadow_db, process_selinux);
 #ifdef WITH_TCB
 	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
 		return 0;

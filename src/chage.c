@@ -545,7 +545,7 @@ static void close_files (void)
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
 	 */
-	if (spw_close () == 0) {
+	if (spw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));

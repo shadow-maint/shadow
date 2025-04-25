@@ -624,7 +624,7 @@ static void update_shadow (void)
 	sp = spw_locate (name);
 	if (NULL == sp) {
 		/* Try to update the password in /etc/passwd instead. */
-		(void) spw_close ();
+		(void) spw_close (true);
 		update_noshadow ();
 		if (spw_unlock () == 0) {
 			(void) fprintf (stderr,
@@ -680,7 +680,7 @@ static void update_shadow (void)
 		                Prog, spw_dbname (), nsp->sp_namp);
 		fail_exit (E_FAILURE);
 	}
-	if (spw_close () == 0) {
+	if (spw_close (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, spw_dbname ());

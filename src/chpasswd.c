@@ -378,7 +378,7 @@ static void open_files (void)
 static void close_files (void)
 {
 	if (is_shadow_pwd) {
-		if (spw_close () == 0) {
+		if (spw_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
