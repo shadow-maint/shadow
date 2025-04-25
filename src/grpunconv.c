@@ -191,7 +191,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	(void) sgr_close (); /* was only open O_RDONLY */
+	(void) sgr_close (true); /* was only open O_RDONLY */
 
 	if (gr_close (true) == 0) {
 		fprintf (stderr,

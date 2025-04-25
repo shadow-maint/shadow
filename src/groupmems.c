@@ -538,7 +538,7 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if ((sgr_close () == 0) && !list) {
+		if ((sgr_close (true) == 0) && !list) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (EXIT_GROUP_FILE);
