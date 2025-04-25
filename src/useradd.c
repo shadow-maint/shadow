@@ -264,7 +264,7 @@ static void fail_exit (int code)
 		SYSLOG((LOG_ERR, "failed to remove %s", prefix_user_home));
 	}
 
-	if (spw_locked && spw_unlock() == 0) {
+	if (spw_locked && spw_unlock(true) == 0) {
 		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 		SYSLOG((LOG_ERR, "failed to unlock %s", spw_dbname()));
 		/* continue */
@@ -1604,7 +1604,7 @@ static void close_files (void)
 	}
 #endif				/* ENABLE_SUBIDS */
 	if (is_shadow_pwd) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT

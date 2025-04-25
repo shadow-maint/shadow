@@ -202,14 +202,14 @@ int spw_close (bool process_selinux)
 	return retval;
 }
 
-int spw_unlock (void)
+int spw_unlock (bool process_selinux)
 {
 #ifdef WITH_TCB
 	int retval = 0;
 
 	if (!getdef_bool ("USE_TCB")) {
 #endif				/* WITH_TCB */
-		return commonio_unlock (&shadow_db, true);
+		return commonio_unlock (&shadow_db, process_selinux);
 #ifdef WITH_TCB
 	}
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {

@@ -490,7 +490,7 @@ fail_exit (int status)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -626,7 +626,7 @@ static void update_shadow (void)
 		/* Try to update the password in /etc/passwd instead. */
 		(void) spw_close (true);
 		update_noshadow ();
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			(void) fprintf (stderr,
 			                _("%s: failed to unlock %s\n"),
 			                Prog, spw_dbname ());
@@ -687,7 +687,7 @@ static void update_shadow (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (spw_unlock () == 0) {
+	if (spw_unlock (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, spw_dbname ());
