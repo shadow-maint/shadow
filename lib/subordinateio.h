@@ -31,7 +31,7 @@ extern bool release_subid_range(struct subordinate_range *range, enum subid_type
 extern int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids);
 extern void free_subordinate_ranges(struct subordinate_range **ranges, int count);
 
-extern int sub_gid_close(void);
+extern int sub_gid_close(bool process_selinux);
 extern bool have_sub_gids(const char *owner, gid_t start, unsigned long count);
 extern bool sub_gid_file_present (void);
 extern bool local_sub_gid_assigned(const char *owner);

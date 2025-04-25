@@ -1576,7 +1576,7 @@ static void close_files (void)
 		sub_uid_locked = false;
 	}
 	if (wflg || Wflg) {
-		if (sub_gid_close () == 0) {
+		if (sub_gid_close (true) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);

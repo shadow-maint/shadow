@@ -982,7 +982,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 		fail_exit (EXIT_FAILURE);
 	}
-	if (is_sub_gid  && (sub_gid_close () == 0)) {
+	if (is_sub_gid  && (sub_gid_close (true) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
