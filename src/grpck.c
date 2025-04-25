@@ -331,7 +331,7 @@ static void close_files (bool changed)
 			fail_exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
-		if (is_shadow && (sgr_close () == 0)) {
+		if (is_shadow && (sgr_close (true) == 0)) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
 			fail_exit (E_CANT_UPDATE);
