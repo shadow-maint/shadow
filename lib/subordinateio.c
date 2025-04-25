@@ -592,7 +592,7 @@ static bool have_range(struct commonio_db *db,
 		if (db == &subordinate_uid_db)
 			sub_uid_close(true);
 		else
-			sub_gid_close();
+			sub_gid_close(true);
 	}
 
 	return ret;
@@ -775,9 +775,9 @@ int sub_gid_remove (const char *owner, gid_t start, unsigned long count)
 	return remove_range (&subordinate_gid_db, owner, start, count);
 }
 
-int sub_gid_close (void)
+int sub_gid_close (bool process_selinux)
 {
-	return commonio_close (&subordinate_gid_db, true);
+	return commonio_close (&subordinate_gid_db, process_selinux);
 }
 
 int sub_gid_unlock (void)
@@ -909,7 +909,7 @@ out:
 	if (id_type == ID_TYPE_UID)
 		sub_uid_close(true);
 	else
-		sub_gid_close();
+		sub_gid_close(true);
 
 	*in_ranges = ranges;
 	return count;
@@ -1000,7 +1000,7 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	if (id_type == ID_TYPE_UID)
 		sub_uid_close(true);
 	else
-		sub_gid_close();
+		sub_gid_close(true);
 
 	return n;
 }
@@ -1071,7 +1071,7 @@ out:
 		sub_uid_close(true);
 		sub_uid_unlock();
 	} else {
-		sub_gid_close();
+		sub_gid_close(true);
 		sub_gid_unlock();
 	}
 
@@ -1121,7 +1121,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 		sub_uid_close(true);
 		sub_uid_unlock();
 	} else {
-		sub_gid_close();
+		sub_gid_close(true);
 		sub_gid_unlock();
 	}
 
