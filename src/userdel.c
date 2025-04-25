@@ -452,7 +452,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 			fail_exit (E_SUB_UID_UPDATE);
 		}
-		if (sub_uid_unlock () == 0) {
+		if (sub_uid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -513,7 +513,7 @@ static void fail_exit (int code)
 #endif				/* SHADOWGRP */
 #ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
-		if (sub_uid_unlock () == 0) {
+		if (sub_uid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */

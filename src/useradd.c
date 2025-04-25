@@ -287,7 +287,7 @@ static void fail_exit (int code)
 	}
 #endif
 #ifdef ENABLE_SUBIDS
-	if (sub_uid_locked && sub_uid_unlock() == 0) {
+	if (sub_uid_locked && sub_uid_unlock(true) == 0) {
 		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
 		SYSLOG((LOG_ERR, "failed to unlock %s", sub_uid_dbname()));
 		/* continue */
@@ -1634,7 +1634,7 @@ static void close_files (void)
 
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
-		if (sub_uid_unlock () == 0) {
+		if (sub_uid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 #ifdef WITH_AUDIT
