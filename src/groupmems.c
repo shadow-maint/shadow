@@ -522,7 +522,7 @@ static void open_files (void)
 
 static void close_files (void)
 {
-	if ((gr_close () == 0) && !list) {
+	if ((gr_close (true) == 0) && !list) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (EXIT_GROUP_FILE);

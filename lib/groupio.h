@@ -14,8 +14,9 @@
 
 #include <sys/types.h>
 #include <grp.h>
+#include <stdbool.h>
 
-extern int gr_close (void);
+extern int gr_close (bool process_selinux);
 extern /*@observer@*/ /*@null@*/const struct group *gr_locate (const char *name);
 extern /*@observer@*/ /*@null@*/const struct group *gr_locate_gid (gid_t gid);
 extern int gr_lock (void);
