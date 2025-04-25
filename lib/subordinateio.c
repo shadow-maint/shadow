@@ -591,7 +591,7 @@ static bool have_range(struct commonio_db *db,
 
 	if (doclose) {
 		if (db == &subordinate_uid_db)
-			sub_uid_close();
+			sub_uid_close(true);
 		else
 			sub_gid_close();
 	}
@@ -669,9 +669,9 @@ int sub_uid_remove (const char *owner, uid_t start, unsigned long count)
 	return remove_range (&subordinate_uid_db, owner, start, count);
 }
 
-int sub_uid_close (void)
+int sub_uid_close (bool process_selinux)
 {
-	return commonio_close (&subordinate_uid_db, true);
+	return commonio_close (&subordinate_uid_db, process_selinux);
 }
 
 int sub_uid_unlock (void)
@@ -931,7 +931,7 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 out:
 	if (id_type == ID_TYPE_UID)
-		sub_uid_close();
+		sub_uid_close(true);
 	else
 		sub_gid_close();
 
@@ -1022,7 +1022,7 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	}
 
 	if (id_type == ID_TYPE_UID)
-		sub_uid_close();
+		sub_uid_close(true);
 	else
 		sub_gid_close();
 
@@ -1092,7 +1092,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 
 out:
 	if (id_type == ID_TYPE_UID) {
-		sub_uid_close();
+		sub_uid_close(true);
 		sub_uid_unlock();
 	} else {
 		sub_gid_close();
@@ -1142,7 +1142,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 	ret = remove_range(db, range->owner, range->start, range->count) == 1;
 
 	if (id_type == ID_TYPE_UID) {
-		sub_uid_close();
+		sub_uid_close(true);
 		sub_uid_unlock();
 	} else {
 		sub_gid_close();
