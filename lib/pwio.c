@@ -156,9 +156,9 @@ int pw_rewind (void)
 	return commonio_next (&passwd_db);
 }
 
-int pw_close (void)
+int pw_close (bool process_selinux)
 {
-	return commonio_close (&passwd_db, true);
+	return commonio_close (&passwd_db, process_selinux);
 }
 
 int pw_unlock (void)

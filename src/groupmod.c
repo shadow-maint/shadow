@@ -534,7 +534,7 @@ static void close_files (void)
 #endif				/* SHADOWGRP */
 
 	if (gflg) {
-		if (pw_close () == 0) {
+		if (pw_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
