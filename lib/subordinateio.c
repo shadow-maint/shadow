@@ -812,9 +812,9 @@ int sub_gid_close (bool process_selinux)
 	return commonio_close (&subordinate_gid_db, process_selinux);
 }
 
-int sub_gid_unlock (void)
+int sub_gid_unlock (bool process_selinux)
 {
-	return commonio_unlock (&subordinate_gid_db, true);
+	return commonio_unlock (&subordinate_gid_db, process_selinux);
 }
 
 gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
@@ -1058,7 +1058,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 		}
 		if (!sub_gid_open(O_CREAT | O_RDWR)) {
 			printf("Failed opening subgids (errno %d)\n", errno);
-			sub_gid_unlock();
+			sub_gid_unlock(true);
 			return false;
 		}
 		db = &subordinate_gid_db;
@@ -1096,7 +1096,7 @@ out:
 		sub_uid_unlock(true);
 	} else {
 		sub_gid_close(true);
-		sub_gid_unlock();
+		sub_gid_unlock(true);
 	}
 
 	return ret;
@@ -1130,7 +1130,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 		}
 		if (!sub_gid_open(O_CREAT | O_RDWR)) {
 			printf("Failed opening subgids (errno %d)\n", errno);
-			sub_gid_unlock();
+			sub_gid_unlock(true);
 			return false;
 		}
 		db = &subordinate_gid_db;
@@ -1146,7 +1146,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 		sub_uid_unlock(true);
 	} else {
 		sub_gid_close(true);
-		sub_gid_unlock();
+		sub_gid_unlock(true);
 	}
 
 	return ret;
