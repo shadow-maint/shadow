@@ -149,7 +149,7 @@ static void grp_update (void)
 static void close_files (void)
 {
 	/* First, write the changes in the regular group database */
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
