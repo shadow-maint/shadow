@@ -672,7 +672,7 @@ fail_exit (int code)
 		}
 	}
 	if (sub_gid_locked) {
-		if (sub_gid_unlock () == 0) {
+		if (sub_gid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -1581,7 +1581,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);
 		}
-		if (sub_gid_unlock () == 0) {
+		if (sub_gid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
