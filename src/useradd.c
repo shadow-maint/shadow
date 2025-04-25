@@ -1590,7 +1590,7 @@ static void close_files (void)
 	close_group_files ();
 
 #ifdef ENABLE_SUBIDS
-	if (is_sub_uid  && (sub_uid_close () == 0)) {
+	if (is_sub_uid  && (sub_uid_close (true) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
