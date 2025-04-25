@@ -163,7 +163,7 @@ int pw_close (bool process_selinux)
 
 int pw_unlock (void)
 {
-	return commonio_unlock (&passwd_db);
+	return commonio_unlock (&passwd_db, true);
 }
 
 /*@null@*/struct commonio_entry *__pw_get_head (void)
