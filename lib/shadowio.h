@@ -23,7 +23,7 @@ extern /*@observer@*/ /*@null@*/const struct spwd *spw_next (void);
 extern int spw_open (int mode);
 extern int spw_remove (const char *name);
 extern int spw_rewind (void);
-extern int spw_unlock (void);
+extern int spw_unlock (bool process_selinux);
 extern int spw_update (const struct spwd *sp);
 extern int spw_sort (void);
 
