@@ -415,7 +415,7 @@ static void close_files (void)
 		spw_locked = false;
 	}
 
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);

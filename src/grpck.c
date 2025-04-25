@@ -320,7 +320,7 @@ static void close_files (bool changed)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (gr_close () == 0) {
+		if (gr_close (true) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_UPDATE);
