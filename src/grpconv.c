@@ -56,7 +56,7 @@ static void process_flags (int argc, char **argv);
 static void fail_exit (int status)
 {
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -253,7 +253,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 		/* continue */
 	}
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
