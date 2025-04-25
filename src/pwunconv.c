@@ -54,7 +54,7 @@ static void fail_exit (int status)
 		}
 	}
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -227,7 +227,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 		/* continue */
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */

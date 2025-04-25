@@ -56,7 +56,7 @@ int lckpwdf (void)
 	 */
 
 	if (i == 15) {
-		pw_unlock ();
+		pw_unlock (true);
 		return -1;
 	}
 
@@ -78,7 +78,7 @@ int ulckpwdf (void)
 	 * Unlock both files.
 	 */
 
-	return (pw_unlock () && spw_unlock ())? 0 : -1;
+	return (pw_unlock (true) && spw_unlock ())? 0 : -1;
 }
 #else
 extern int ISO_C_forbids_an_empty_translation_unit;
