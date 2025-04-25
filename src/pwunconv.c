@@ -205,7 +205,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	(void) spw_close (); /* was only open O_RDONLY */
+	(void) spw_close (true); /* was only open O_RDONLY */
 
 	if (pw_close (true) == 0) {
 		fprintf (stderr,

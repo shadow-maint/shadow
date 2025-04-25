@@ -13,7 +13,7 @@
 
 #include "defines.h"
 
-extern int spw_close (void);
+extern int spw_close (bool process_selinux);
 extern bool spw_file_present (void);
 extern /*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name);
 extern int spw_lock (void);
