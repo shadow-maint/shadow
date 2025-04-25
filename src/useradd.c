@@ -269,7 +269,7 @@ static void fail_exit (int code)
 		SYSLOG((LOG_ERR, "failed to unlock %s", spw_dbname()));
 		/* continue */
 	}
-	if (pw_locked && pw_unlock() == 0) {
+	if (pw_locked && pw_unlock(true) == 0) {
 		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG((LOG_ERR, "failed to unlock %s", pw_dbname()));
 		/* continue */
@@ -1617,7 +1617,7 @@ static void close_files (void)
 		}
 		spw_locked = false;
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
