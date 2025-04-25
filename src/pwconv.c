@@ -274,7 +274,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (spw_close () == 0) {
+	if (spw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
