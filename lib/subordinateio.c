@@ -687,7 +687,7 @@ int sub_uid_close (bool process_selinux)
 
 int sub_uid_unlock (void)
 {
-	return commonio_unlock (&subordinate_uid_db);
+	return commonio_unlock (&subordinate_uid_db, true);
 }
 
 uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
@@ -794,7 +794,7 @@ int sub_gid_close (bool process_selinux)
 
 int sub_gid_unlock (void)
 {
-	return commonio_unlock (&subordinate_gid_db);
+	return commonio_unlock (&subordinate_gid_db, true);
 }
 
 gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)

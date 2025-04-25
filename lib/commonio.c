@@ -462,13 +462,13 @@ static void dec_lock_count (void)
 }
 
 
-int commonio_unlock (struct commonio_db *db)
+int commonio_unlock (struct commonio_db *db, bool process_selinux)
 {
 	char  lock[1029];
 
 	if (db->isopen) {
 		db->readonly = true;
-		if (commonio_close (db, true) == 0) {
+		if (commonio_close (db, process_selinux) == 0) {
 			if (db->locked) {
 				dec_lock_count ();
 			}

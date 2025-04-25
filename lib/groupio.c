@@ -189,7 +189,7 @@ int gr_close (bool process_selinux)
 
 int gr_unlock (void)
 {
-	return commonio_unlock (&group_db);
+	return commonio_unlock (&group_db, true);
 }
 
 void __gr_set_changed (void)

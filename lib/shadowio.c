@@ -209,7 +209,7 @@ int spw_unlock (void)
 
 	if (!getdef_bool ("USE_TCB")) {
 #endif				/* WITH_TCB */
-		return commonio_unlock (&shadow_db);
+		return commonio_unlock (&shadow_db, true);
 #ifdef WITH_TCB
 	}
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
