@@ -22,7 +22,7 @@ extern /*@null@*/const struct sgrp *sgr_next (void);
 extern int sgr_open (int mode);
 extern int sgr_remove (const char *name);
 extern int sgr_rewind (void);
-extern int sgr_unlock (void);
+extern int sgr_unlock (bool process_selinux);
 extern int sgr_update (const struct sgrp *sg);
 extern int sgr_sort (void);
 

@@ -280,9 +280,9 @@ int sgr_close (bool process_selinux)
 	return commonio_close (&gshadow_db, process_selinux);
 }
 
-int sgr_unlock (void)
+int sgr_unlock (bool process_selinux)
 {
-	return commonio_unlock (&gshadow_db, true);
+	return commonio_unlock (&gshadow_db, process_selinux);
 }
 
 void __sgr_set_changed (void)

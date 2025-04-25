@@ -468,7 +468,7 @@ static void fail_exit (int code)
 
 #ifdef SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
+		if (sgr_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, sgr_dbname ());
@@ -544,7 +544,7 @@ static void close_files (void)
 			fail_exit (EXIT_GROUP_FILE);
 		}
 		if (sgr_locked) {
-			if (sgr_unlock () == 0) {
+			if (sgr_unlock (true) == 0) {
 				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 				/* continue */
