@@ -117,7 +117,7 @@ void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
  */
 void cleanup_unlock_shadow (MAYBE_UNUSED void *arg)
 {
-	if (spw_unlock () == 0) {
+	if (spw_unlock (true) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), spw_dbname ());
