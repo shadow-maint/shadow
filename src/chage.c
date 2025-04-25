@@ -556,7 +556,7 @@ static void close_files (void)
 	 * Close the password file. If any entries were modified, the file
 	 * will be re-written.
 	 */
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);

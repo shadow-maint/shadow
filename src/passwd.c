@@ -585,7 +585,7 @@ static void update_noshadow (void)
 		                Prog, pw_dbname (), npw->pw_name);
 		fail_exit (E_FAILURE);
 	}
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, pw_dbname ());

@@ -492,7 +492,7 @@ static void update_gecos (const char *user, char *gecos)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);

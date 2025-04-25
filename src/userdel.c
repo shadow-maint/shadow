@@ -388,7 +388,7 @@ static void remove_usergroup (void)
  */
 static void close_files (void)
 {
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
@@ -1043,7 +1043,7 @@ int main (int argc, char **argv)
 		pw_open(O_RDONLY);
 		pwd = pw_locate (user_name); /* we care only about local users */
 		if (NULL == pwd) {
-			pw_close();
+			pw_close(true);
 			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
@@ -1062,7 +1062,7 @@ int main (int argc, char **argv)
 		} else {
 			user_home = xstrdup(pwd->pw_dir);
 		}
-		pw_close();
+		pw_close(true);
 	}
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {
