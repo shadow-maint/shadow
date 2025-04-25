@@ -39,7 +39,7 @@ extern int sub_gid_lock (void);
 extern int sub_gid_setdbname (const char *filename);
 extern /*@observer@*/const char *sub_gid_dbname (void);
 extern int sub_gid_open (int mode);
-extern int sub_gid_unlock (void);
+extern int sub_gid_unlock (bool process_selinux);
 extern int sub_gid_add (const char *owner, gid_t start, unsigned long count);
 extern int sub_gid_remove (const char *owner, gid_t start, unsigned long count);
 extern uid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count);
