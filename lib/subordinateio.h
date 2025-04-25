@@ -13,7 +13,7 @@
 
 #include "../libsubid/subid.h"
 
-extern int sub_uid_close(void);
+extern int sub_uid_close(bool process_selinux);
 extern bool have_sub_uids(const char *owner, uid_t start, unsigned long count);
 extern bool sub_uid_file_present (void);
 extern bool local_sub_uid_assigned(const char *owner);
