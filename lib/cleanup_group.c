@@ -181,7 +181,7 @@ void cleanup_report_del_group_gshadow (void *group_name)
  */
 void cleanup_unlock_group (MAYBE_UNUSED void *arg)
 {
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), gr_dbname ());
