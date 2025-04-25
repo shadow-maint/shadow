@@ -26,7 +26,7 @@ extern /*@observer@*/ /*@null@*/const struct passwd *pw_next (void);
 extern int pw_open (int mode);
 extern int pw_remove (const char *name);
 extern int pw_rewind (void);
-extern int pw_unlock (void);
+extern int pw_unlock (bool process_selinux);
 extern int pw_update (const struct passwd *pw);
 extern int pw_sort (void);
 

@@ -98,7 +98,7 @@ void cleanup_report_add_user_shadow (void *user_name)
  */
 void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
 {
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), pw_dbname ());
