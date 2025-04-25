@@ -207,7 +207,7 @@ int main (int argc, char **argv)
 
 	(void) spw_close (); /* was only open O_RDONLY */
 
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
