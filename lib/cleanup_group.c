@@ -201,7 +201,7 @@ void cleanup_unlock_group (MAYBE_UNUSED void *arg)
  */
 void cleanup_unlock_gshadow (MAYBE_UNUSED void *arg)
 {
-	if (sgr_unlock () == 0) {
+	if (sgr_unlock (true) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), sgr_dbname ());
