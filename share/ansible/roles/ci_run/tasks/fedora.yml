@@ -8,6 +8,7 @@
     use_backend: dnf4
     name:
       - dnf-plugins-core
+      - gawk
       - libcmocka-devel
       - systemd-devel
     state: present
