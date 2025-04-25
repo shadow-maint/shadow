@@ -682,7 +682,7 @@ int sub_uid_remove (const char *owner, uid_t start, unsigned long count)
 
 int sub_uid_close (void)
 {
-	return commonio_close (&subordinate_uid_db);
+	return commonio_close (&subordinate_uid_db, true);
 }
 
 int sub_uid_unlock (void)
@@ -789,7 +789,7 @@ int sub_gid_remove (const char *owner, gid_t start, unsigned long count)
 
 int sub_gid_close (void)
 {
-	return commonio_close (&subordinate_gid_db);
+	return commonio_close (&subordinate_gid_db, true);
 }
 
 int sub_gid_unlock (void)

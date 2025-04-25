@@ -184,7 +184,7 @@ int gr_rewind (void)
 
 int gr_close (void)
 {
-	return commonio_close (&group_db);
+	return commonio_close (&group_db, true);
 }
 
 int gr_unlock (void)

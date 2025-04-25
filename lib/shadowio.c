@@ -193,7 +193,7 @@ int spw_close (void)
 		return 0;
 	}
 #endif				/* WITH_TCB */
-	retval = commonio_close (&shadow_db);
+	retval = commonio_close (&shadow_db, true);
 #ifdef WITH_TCB
 	if (use_tcb && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE)) {
 		return 0;

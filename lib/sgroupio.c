@@ -277,7 +277,7 @@ int sgr_rewind (void)
 
 int sgr_close (void)
 {
-	return commonio_close (&gshadow_db);
+	return commonio_close (&gshadow_db, true);
 }
 
 int sgr_unlock (void)

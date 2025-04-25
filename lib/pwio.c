@@ -158,7 +158,7 @@ int pw_rewind (void)
 
 int pw_close (void)
 {
-	return commonio_close (&passwd_db);
+	return commonio_close (&passwd_db, true);
 }
 
 int pw_unlock (void)
