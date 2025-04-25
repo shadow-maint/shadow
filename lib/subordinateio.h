@@ -21,7 +21,7 @@ extern int sub_uid_lock (void);
 extern int sub_uid_setdbname (const char *filename);
 extern /*@observer@*/const char *sub_uid_dbname (void);
 extern int sub_uid_open (int mode);
-extern int sub_uid_unlock (void);
+extern int sub_uid_unlock (bool process_selinux);
 extern int sub_uid_add (const char *owner, uid_t start, unsigned long count);
 extern int sub_uid_remove (const char *owner, uid_t start, unsigned long count);
 extern uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count);

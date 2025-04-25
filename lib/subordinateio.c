@@ -674,9 +674,9 @@ int sub_uid_close (bool process_selinux)
 	return commonio_close (&subordinate_uid_db, process_selinux);
 }
 
-int sub_uid_unlock (void)
+int sub_uid_unlock (bool process_selinux)
 {
-	return commonio_unlock (&subordinate_uid_db, true);
+	return commonio_unlock (&subordinate_uid_db, process_selinux);
 }
 
 uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
@@ -1046,7 +1046,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 		}
 		if (!sub_uid_open(O_CREAT | O_RDWR)) {
 			printf("Failed opening subuids (errno %d)\n", errno);
-			sub_uid_unlock();
+			sub_uid_unlock(true);
 			return false;
 		}
 		db = &subordinate_uid_db;
@@ -1093,7 +1093,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 out:
 	if (id_type == ID_TYPE_UID) {
 		sub_uid_close(true);
-		sub_uid_unlock();
+		sub_uid_unlock(true);
 	} else {
 		sub_gid_close(true);
 		sub_gid_unlock();
@@ -1118,7 +1118,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 		}
 		if (!sub_uid_open(O_CREAT | O_RDWR)) {
 			printf("Failed opening subuids (errno %d)\n", errno);
-			sub_uid_unlock();
+			sub_uid_unlock(true);
 			return false;
 		}
 		db = &subordinate_uid_db;
@@ -1143,7 +1143,7 @@ bool release_subid_range(struct subordinate_range *range, enum subid_type id_typ
 
 	if (id_type == ID_TYPE_UID) {
 		sub_uid_close(true);
-		sub_uid_unlock();
+		sub_uid_unlock(true);
 	} else {
 		sub_gid_close(true);
 		sub_gid_unlock();
