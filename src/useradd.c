@@ -1683,7 +1683,7 @@ static void close_group_files (void)
 		fail_exit(E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && sgr_close() == 0) {
+	if (is_shadow_grp && sgr_close(true) == 0) {
 		fprintf(stderr,
 		        _("%s: failure while writing changes to %s\n"),
 		        Prog, sgr_dbname());

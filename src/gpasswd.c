@@ -607,7 +607,7 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -762,7 +762,7 @@ static void get_group (struct group *gr)
 			sg->sg_adm[0] = NULL;
 
 		}
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while closing read-only %s\n"),
 			         Prog, sgr_dbname ());

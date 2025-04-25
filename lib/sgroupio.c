@@ -275,9 +275,9 @@ int sgr_rewind (void)
 	return commonio_next (&gshadow_db);
 }
 
-int sgr_close (void)
+int sgr_close (bool process_selinux)
 {
-	return commonio_close (&gshadow_db, true);
+	return commonio_close (&gshadow_db, process_selinux);
 }
 
 int sgr_unlock (void)

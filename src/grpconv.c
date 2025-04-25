@@ -234,7 +234,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (sgr_close () == 0) {
+	if (sgr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
