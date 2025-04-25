@@ -420,7 +420,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
@@ -489,7 +489,7 @@ static void fail_exit (int code)
 		}
 	}
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */

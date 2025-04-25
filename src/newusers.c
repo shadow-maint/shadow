@@ -178,7 +178,7 @@ static void fail_exit (int code)
 		}
 	}
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -990,7 +990,7 @@ static void close_files (void)
 	}
 #endif				/* ENABLE_SUBIDS */
 
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, gr_dbname ());

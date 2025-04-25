@@ -274,7 +274,7 @@ static void fail_exit (int code)
 		SYSLOG((LOG_ERR, "failed to unlock %s", pw_dbname()));
 		/* continue */
 	}
-	if (gr_locked && gr_unlock() == 0) {
+	if (gr_locked && gr_unlock(true) == 0) {
 		fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
 		SYSLOG((LOG_ERR, "failed to unlock %s", gr_dbname()));
 		/* continue */
@@ -1701,7 +1701,7 @@ static void close_group_files (void)
  */
 static void unlock_group_files (void)
 {
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
