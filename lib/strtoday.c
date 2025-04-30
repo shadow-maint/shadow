@@ -19,20 +19,7 @@
 #include "string/strspn/stpspn.h"
 
 
-/*
- * strtoday() now uses get_date() (borrowed from GNU shellutils)
- * which can handle many date formats, for example:
- *	1970-09-17	# ISO 8601.
- *	70-9-17		# This century assumed by default.
- *	70-09-17	# Leading zeros are ignored.
- *	9/17/72		# Common U.S. writing.
- *	24 September 1972
- *	24 Sept 72	# September has a special abbreviation.
- *	24 Sep 72	# Three-letter abbreviations always allowed.
- *	Sep 24, 1972
- *	24-sep-72
- *	24sep72
- */
+// string parse-to day-since-Epoch
 long strtoday (const char *str)
 {
 	time_t t;
