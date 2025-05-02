@@ -190,8 +190,9 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprintf(stderr, _("%s: Could not stat directory for process\n"),
-			Prog);
+		fprintf(stderr,
+		        _("%s: Could not stat directory for target process: %s\n"),
+		        Prog, strerror (errno));
 		return EXIT_FAILURE;
 	}
 
@@ -211,6 +212,9 @@ int main(int argc, char **argv)
 	}
 
 	if (!sub_gid_open(O_RDONLY)) {
+		fprintf (stderr,
+		         _("%s: cannot open %s: %s\n"),
+		         Prog, sub_gid_dbname (), strerror (errno));
 		return EXIT_FAILURE;
 	}
 
