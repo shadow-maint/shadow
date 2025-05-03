@@ -65,7 +65,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
@@ -690,7 +690,7 @@ set_defaults(void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	assert(SNPRINTF(buf, "%s-", default_file) != -1);
+	assert(STPRINTF(buf, "%s-", default_file) != -1);
 	unlink (buf);
 	if ((link (default_file, buf) != 0) && (ENOENT != errno)) {
 		int err = errno;
