@@ -29,6 +29,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
@@ -383,7 +384,7 @@ static void check_pw_file (bool *errors, bool *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (('+' == pfe->line[0]) || ('-' == pfe->line[0])) {
+		if (strprefix(pfe->line, "+") || strprefix(pfe->line, "-")) {
 			continue;
 		}
 
@@ -708,7 +709,7 @@ static void check_spw_file (bool *errors, bool *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (('+' == spe->line[0]) || ('-' == spe->line[0])) {
+		if (strprefix(spe->line, "+") || strprefix(spe->line, "-")) {
 			continue;
 		}
 
