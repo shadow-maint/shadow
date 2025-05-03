@@ -1,11 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1999, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2003 - 2005, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2007 - 2010, Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1999, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2003-2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2007-2010, Nicolas François
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
@@ -19,6 +18,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+#include "string/ctype/strtoascii/strtolower.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/streq.h"
@@ -78,15 +78,6 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 	return true;
 }
 
-static char *str_lower (/*@returned@*/char *string)
-{
-	char *cp;
-
-	for (cp = string; !streq(cp, ""); cp++) {
-		*cp = tolower (*cp);
-	}
-	return string;
-}
 
 static /*@observer@*//*@null@*/const char *password_check (
 	/*@notnull@*/const char *old,
@@ -100,8 +91,8 @@ static /*@observer@*//*@null@*/const char *password_check (
 		return _("no change");
 	}
 
-	newmono = str_lower (xstrdup (new));
-	oldmono = str_lower (xstrdup (old));
+	newmono = strtolower(xstrdup(new));
+	oldmono = strtolower(xstrdup(old));
 	xasprintf(&wrapped, "%s%s", oldmono, oldmono);
 
 	if (palindrome (oldmono, newmono)) {
