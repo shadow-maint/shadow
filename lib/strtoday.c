@@ -16,6 +16,7 @@
 #include "prototypes.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 
 
@@ -37,9 +38,7 @@ long strtoday (const char *str)
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
 	 */
-	if ('-' == *s) {
-		s++;
-	}
+	s = strprefix(s, "-") ?: s;
 	s = stpspn(s, " ");
 	if (strisdigit(s)) {
 		long retdate;
