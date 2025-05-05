@@ -274,7 +274,7 @@ check_new_name(void)
 static void close_files (void)
 {
 	/* First, write the changes in the regular group database */
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -295,7 +295,7 @@ static void close_files (void)
 	/* Now, write the changes in the shadow database */
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());

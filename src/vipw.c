@@ -61,7 +61,7 @@ static const char *Prog;
 static const char *filename, *fileeditname;
 static bool filelocked = false;
 static bool createedit = false;
-static int (*unlock) (void);
+static int (*unlock) (bool);
 static bool quiet = false;
 #ifdef WITH_TCB
 static const char *user = NULL;
@@ -73,7 +73,7 @@ static bool tcb_mode = false;
 static void usage (int status);
 static int create_backup_file (FILE *, const char *, struct stat *);
 static void vipwexit (const char *msg, int syserr, int ret);
-static void vipwedit (const char *, int (*)(void), int (*)(void));
+static void vipwedit (const char *, int (*)(void), int (*)(bool));
 
 /*
  * usage - display usage message and exit
@@ -163,7 +163,7 @@ static void vipwexit (const char *msg, int syserr, int ret)
 		}
 	}
 	if (filelocked) {
-		if ((*unlock) () == 0) {
+		if ((*unlock) (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
 			SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 			/* continue */
@@ -194,7 +194,7 @@ static void vipwexit (const char *msg, int syserr, int ret)
  *
  */
 static void
-vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
+vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 {
 	int          status;
 	char         *to_rename;
@@ -465,7 +465,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	}
 #endif				/* WITH_TCB */
 
-	if ((*file_unlock) () == 0) {
+	if ((*file_unlock) (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
 		SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 		/* continue */

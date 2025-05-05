@@ -74,3 +74,71 @@ def test_useradd__recreate_deleted_user(shadow: Shadow):
     assert result.gid == 1000, "Incorrect GID"
 
     assert shadow.fs.exists("/home/tuser"), "Home folder should be found"
+
+
+# TODO: only check in environments with SELinux?
+@pytest.mark.ticket(gh=940)
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__chroot_option(shadow: Shadow):
+    """
+    :title: User creation with chroot option
+    :setup:
+        1. Create basic environment
+        2. Check initial SELinux context
+        3. Create user
+    :steps:
+        1. Check SELinux context after user creation
+    :expectedresults:
+        1. Initial and ending SELinux context should be the same
+    :customerscenario: True
+    """
+    chroot_dir = "/tmp/newroot"
+    shadow.fs.mkdir_p(f"{chroot_dir}/etc")
+    shadow.fs.touch(f"{chroot_dir}/etc/passwd")
+    shadow.fs.touch(f"{chroot_dir}/etc/group")
+    # TODO: check more files? shadow, gshadow, subuid, subgid?
+
+    init_passwd = shadow.fs.selinux_context(f"{chroot_dir}/etc/passwd")
+    init_group = shadow.fs.selinux_context(f"{chroot_dir}/etc/group")
+
+    shadow.useradd(f"tuser -R {chroot_dir}")
+
+    end_passwd = shadow.fs.selinux_context(f"{chroot_dir}/etc/passwd")
+    end_group = shadow.fs.selinux_context(f"{chroot_dir}/etc/group")
+
+    assert init_passwd == end_passwd, "passwd SELinux context should be the same"
+    assert init_group == end_group, "group SELinux context should be the same"
+
+
+# TODO: only check in environments with SELinux?
+@pytest.mark.ticket(gh=940)
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__prefix_option(shadow: Shadow):
+    """
+    :title: User creation with prefix option
+    :setup:
+        1. Create basic environment
+        2. Check initial SELinux context
+        3. Create user
+    :steps:
+        1. Check SELinux context after user creation
+    :expectedresults:
+        1. Initial and ending SELinux context should be the same
+    :customerscenario: True
+    """
+    prefix_dir = "/tmp/newroot"
+    shadow.fs.mkdir_p(f"{prefix_dir}/etc")
+    shadow.fs.touch(f"{prefix_dir}/etc/passwd")
+    shadow.fs.touch(f"{prefix_dir}/etc/group")
+    # TODO: check more files? shadow, gshadow, subuid, subgid?
+
+    init_passwd = shadow.fs.selinux_context(f"{prefix_dir}/etc/passwd")
+    init_group = shadow.fs.selinux_context(f"{prefix_dir}/etc/group")
+
+    shadow.useradd(f"tuser -P {prefix_dir}")
+
+    end_passwd = shadow.fs.selinux_context(f"{prefix_dir}/etc/passwd")
+    end_group = shadow.fs.selinux_context(f"{prefix_dir}/etc/group")
+
+    assert init_passwd == end_passwd, "passwd SELinux context should be the same"
+    assert init_group == end_group, "group SELinux context should be the same"

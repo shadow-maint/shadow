@@ -457,7 +457,7 @@ static void check_perms (void)
 static void fail_exit (int code)
 {
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, gr_dbname ());
@@ -468,7 +468,7 @@ static void fail_exit (int code)
 
 #ifdef SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
+		if (sgr_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, sgr_dbname ());
@@ -522,13 +522,13 @@ static void open_files (void)
 
 static void close_files (void)
 {
-	if ((gr_close () == 0) && !list) {
+	if ((gr_close (true) == 0) && !list) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (EXIT_GROUP_FILE);
 	}
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -538,13 +538,13 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if ((sgr_close () == 0) && !list) {
+		if ((sgr_close (true) == 0) && !list) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (EXIT_GROUP_FILE);
 		}
 		if (sgr_locked) {
-			if (sgr_unlock () == 0) {
+			if (sgr_unlock (true) == 0) {
 				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 				/* continue */
