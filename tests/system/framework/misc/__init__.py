@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import datetime
 from typing import Any
 
 
@@ -40,3 +41,14 @@ def to_list_of_strings(value: Any | list[Any] | None) -> list[str]:
     :rtype: list[str]
     """
     return [str(x) for x in to_list(value)]
+
+
+def days_since_epoch():
+    """
+    Gets the current date and returns the number of days since 1970-01-01 UTC, this time is also referred to as the
+    Unix epoch.
+    """
+    epoch = datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    delta = now_utc - epoch
+    return delta.days
