@@ -179,9 +179,11 @@ void cleanup_report_del_group_gshadow (void *group_name)
  *
  * It should be registered after the group file is successfully locked.
  */
-void cleanup_unlock_group (MAYBE_UNUSED void *arg)
+void cleanup_unlock_group (void *process_selinux)
 {
-	if (gr_unlock (true) == 0) {
+	bool process = *((bool *) process_selinux);
+
+	if (gr_unlock (process) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), gr_dbname ());
@@ -199,9 +201,11 @@ void cleanup_unlock_group (MAYBE_UNUSED void *arg)
  *
  * It should be registered after the gshadow file is successfully locked.
  */
-void cleanup_unlock_gshadow (MAYBE_UNUSED void *arg)
+void cleanup_unlock_gshadow (void *process_selinux)
 {
-	if (sgr_unlock (true) == 0) {
+	bool process = *((bool *) process_selinux);
+
+	if (sgr_unlock (process) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), sgr_dbname ());
