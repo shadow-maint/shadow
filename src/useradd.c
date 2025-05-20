@@ -249,8 +249,8 @@ static void lastlog_reset (uid_t);
 #endif /* ENABLE_LASTLOG */
 static void tallylog_reset (const char *);
 static void usr_update (unsigned long subuid_count, unsigned long subgid_count);
-static void create_home (void);
-static void create_mail (void);
+static void create_home (struct option_flags *flags);
+static void create_mail (struct option_flags *flags);
 static void check_uid_range(int rflg, uid_t user_id);
 
 
@@ -2188,11 +2188,14 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
  *	already exist. It will be created mode 755 owned by the user
  *	with the user's default group.
  */
-static void create_home (void)
+static void create_home (struct option_flags *flags)
 {
 	char    path[strlen(prefix_user_home) + 2];
 	char    *bhome, *cp;
 	mode_t  mode;
+	bool    process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (access (prefix_user_home, F_OK) == 0)
 		return;
@@ -2207,11 +2210,13 @@ static void create_home (void)
 	}
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context(prefix_user_home, S_IFDIR) != 0) {
-		fprintf(stderr,
-			_("%s: cannot set SELinux context for home directory %s\n"),
-			Prog, user_home);
-		fail_exit(E_HOMEDIR);
+	if (process_selinux) {
+		if (set_selinux_file_context(prefix_user_home, S_IFDIR) != 0) {
+			fprintf(stderr,
+				_("%s: cannot set SELinux context for home directory %s\n"),
+				Prog, user_home);
+			fail_exit(E_HOMEDIR);
+		}
 	}
 #endif
 
@@ -2292,12 +2297,14 @@ static void create_home (void)
 		     user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif
 #ifdef WITH_SELINUX
-	/* Reset SELinux to create files with default contexts */
-	if (reset_selinux_file_context() != 0) {
-		fprintf(stderr,
-			_("%s: cannot reset SELinux file creation context\n"),
-			Prog);
-		fail_exit(E_HOMEDIR);
+	if (process_selinux) {
+		/* Reset SELinux to create files with default contexts */
+		if (reset_selinux_file_context() != 0) {
+			fprintf(stderr,
+				_("%s: cannot reset SELinux file creation context\n"),
+				Prog);
+			fail_exit(E_HOMEDIR);
+		}
 	}
 #endif
 }
@@ -2309,7 +2316,7 @@ static void create_home (void)
  *	exist. It will be created mode 660 owned by the user and group
  *	'mail'
  */
-static void create_mail (void)
+static void create_mail (struct option_flags *flags)
 {
 	int           fd;
 	char          *file;
@@ -2317,6 +2324,7 @@ static void create_mail (void)
 	mode_t        mode;
 	const char    *spool;
 	struct group  *gr;
+	bool          process_selinux;
 
 	if (!strcaseeq(create_mail_spool, "yes"))
 		return;
@@ -2336,11 +2344,13 @@ static void create_mail (void)
 		file = xaprintf("%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context(file, S_IFREG) != 0) {
-		fprintf(stderr,
-		        _("%s: cannot set SELinux context for mailbox file %s\n"),
-		        Prog, file);
-		fail_exit(E_MAILBOXFILE);
+	if (process_selinux) {
+		if (set_selinux_file_context(file, S_IFREG) != 0) {
+			fprintf(stderr,
+					_("%s: cannot set SELinux context for mailbox file %s\n"),
+					Prog, file);
+			fail_exit(E_MAILBOXFILE);
+		}
 	}
 #endif
 
@@ -2376,12 +2386,14 @@ static void create_mail (void)
 		perror (_("Closing mailbox file"));
 	}
 #ifdef WITH_SELINUX
-	/* Reset SELinux to create files with default contexts */
-	if (reset_selinux_file_context() != 0) {
-		fprintf(stderr,
-		        _("%s: cannot reset SELinux file creation context\n"),
-		        Prog);
-		fail_exit(E_MAILBOXFILE);
+	if (process_selinux) {
+		/* Reset SELinux to create files with default contexts */
+		if (reset_selinux_file_context() != 0) {
+			fprintf(stderr,
+					_("%s: cannot reset SELinux file creation context\n"),
+					Prog);
+			fail_exit(E_MAILBOXFILE);
+		}
 	}
 #endif
 }
@@ -2660,7 +2672,7 @@ int main (int argc, char **argv)
 #endif				/* WITH_SELINUX */
 
 	if (mflg) {
-		create_home ();
+		create_home (&flags);
 		if (home_added) {
 			copy_tree (def_template, prefix_user_home, false, true,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
@@ -2677,7 +2689,7 @@ int main (int argc, char **argv)
 
 	/* Do not create mail directory for system accounts */
 	if (!rflg) {
-		create_mail ();
+		create_mail (&flags);
 	}
 
 	if (run_parts ("/etc/shadow-maint/useradd-post.d", user_name,
