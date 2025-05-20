@@ -96,9 +96,11 @@ void cleanup_report_add_user_shadow (void *user_name)
  *
  * It should be registered after the passwd database is successfully locked.
  */
-void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
+void cleanup_unlock_passwd (void *process_selinux)
 {
-	if (pw_unlock (true) == 0) {
+	bool process = *((bool *) process_selinux);
+
+	if (pw_unlock (process) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), pw_dbname ());
@@ -115,9 +117,11 @@ void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
  *
  * It should be registered after the shadow database is successfully locked.
  */
-void cleanup_unlock_shadow (MAYBE_UNUSED void *arg)
+void cleanup_unlock_shadow (void *process_selinux)
 {
-	if (spw_unlock (true) == 0) {
+	bool process = *((bool *) process_selinux);
+
+	if (spw_unlock (process) == 0) {
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), spw_dbname ());
