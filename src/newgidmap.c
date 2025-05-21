@@ -227,7 +227,7 @@ int main(int argc, char **argv)
 
 	write_setgroups(proc_dir_fd, allow_setgroups);
 	write_mapping(proc_dir_fd, ranges, mappings, "gid_map", pw->pw_uid);
-	sub_gid_close();
+	sub_gid_close(true);
 
 	return EXIT_SUCCESS;
 }

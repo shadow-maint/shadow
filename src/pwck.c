@@ -84,7 +84,7 @@ extern int allow_bad_names;
 static void fail_exit (int code)
 {
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			if (use_system_spw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -95,7 +95,7 @@ static void fail_exit (int code)
 	}
 
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			if (use_system_pw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -308,7 +308,7 @@ static void close_files (bool changed)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (pw_close () == 0) {
+		if (pw_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
@@ -319,7 +319,7 @@ static void close_files (bool changed)
 			}
 			fail_exit (E_CANTUPDATE);
 		}
-		if (spw_opened && (spw_close () == 0)) {
+		if (spw_opened && (spw_close (true) == 0)) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
@@ -337,7 +337,7 @@ static void close_files (bool changed)
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
@@ -350,7 +350,7 @@ static void close_files (bool changed)
 	}
 	spw_locked = false;
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, pw_dbname ());
@@ -580,7 +580,7 @@ static void check_pw_file (bool *errors, bool *changed)
 					         _("%s: cannot open %s\n"),
 					         Prog, spw_dbname ());
 					*errors = true;
-					if (spw_unlock () == 0) {
+					if (spw_unlock (true) == 0) {
 						fprintf (stderr,
 						         _("%s: failed to unlock %s\n"),
 						         Prog, spw_dbname ());
@@ -656,7 +656,7 @@ static void check_pw_file (bool *errors, bool *changed)
 		}
 #ifdef WITH_TCB
 		if (getdef_bool ("USE_TCB") && spw_locked) {
-			if (spw_opened && (spw_close () == 0)) {
+			if (spw_opened && (spw_close (true) == 0)) {
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, spw_dbname ());
@@ -668,7 +668,7 @@ static void check_pw_file (bool *errors, bool *changed)
 			} else {
 				spw_opened = false;
 			}
-			if (spw_unlock () == 0) {
+			if (spw_unlock (true) == 0) {
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, spw_dbname ());

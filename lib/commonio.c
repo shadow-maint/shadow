@@ -462,13 +462,13 @@ static void dec_lock_count (void)
 }
 
 
-int commonio_unlock (struct commonio_db *db)
+int commonio_unlock (struct commonio_db *db, bool process_selinux)
 {
 	char  lock[1029];
 
 	if (db->isopen) {
 		db->readonly = true;
-		if (commonio_close (db) == 0) {
+		if (commonio_close (db, process_selinux) == 0) {
 			if (db->locked) {
 				dec_lock_count ();
 			}
@@ -880,7 +880,7 @@ static int write_all (const struct commonio_db *db)
 }
 
 
-int commonio_close (struct commonio_db *db)
+int commonio_close (struct commonio_db *db, bool process_selinux)
 {
 	bool         errors = false;
 	char         buf[1024];
@@ -922,7 +922,8 @@ int commonio_close (struct commonio_db *db)
 		}
 
 #ifdef WITH_SELINUX
-		if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
+		if (process_selinux
+		    && set_selinux_file_context (db->filename, S_IFREG) != 0) {
 			errors = true;
 		}
 #endif
@@ -937,7 +938,8 @@ int commonio_close (struct commonio_db *db)
 		db->fp = NULL;
 
 #ifdef WITH_SELINUX
-		if (reset_selinux_file_context () != 0) {
+		if (process_selinux
+		    && reset_selinux_file_context () != 0) {
 			errors = true;
 		}
 #endif
@@ -956,7 +958,8 @@ int commonio_close (struct commonio_db *db)
 		goto fail;
 
 #ifdef WITH_SELINUX
-	if (set_selinux_file_context (db->filename, S_IFREG) != 0) {
+	if (process_selinux
+	    && set_selinux_file_context (db->filename, S_IFREG) != 0) {
 		errors = true;
 	}
 #endif
@@ -994,7 +997,8 @@ int commonio_close (struct commonio_db *db)
 	}
 
 #ifdef WITH_SELINUX
-	if (reset_selinux_file_context () != 0) {
+	if (process_selinux
+	    && reset_selinux_file_context () != 0) {
 		goto fail;
 	}
 #endif

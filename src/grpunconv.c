@@ -55,7 +55,7 @@ static void process_flags (int argc, char **argv);
 static void fail_exit (int status)
 {
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -63,7 +63,7 @@ static void fail_exit (int status)
 	}
 
 	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
+		if (sgr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -191,9 +191,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	(void) sgr_close (); /* was only open O_RDONLY */
+	(void) sgr_close (true); /* was only open O_RDONLY */
 
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -209,13 +209,13 @@ int main (int argc, char **argv)
 		fail_exit (3);
 	}
 
-	if (gr_unlock () == 0) {
+	if (gr_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
 
-	if (sgr_unlock () == 0) {
+	if (sgr_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 		/* continue */

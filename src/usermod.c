@@ -634,7 +634,7 @@ static void
 fail_exit (int code)
 {
 	if (gr_locked) {
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -642,7 +642,7 @@ fail_exit (int code)
 	}
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
+		if (sgr_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -650,14 +650,14 @@ fail_exit (int code)
 	}
 #endif
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
 	}
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -665,14 +665,14 @@ fail_exit (int code)
 	}
 #ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
-		if (sub_uid_unlock () == 0) {
+		if (sub_uid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
 		}
 	}
 	if (sub_gid_locked) {
-		if (sub_gid_unlock () == 0) {
+		if (sub_gid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -1471,14 +1471,14 @@ process_flags(int argc, char **argv)
  */
 static void close_files (void)
 {
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_close () == 0)) {
+	if (is_shadow_pwd && (spw_close (true) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
@@ -1489,7 +1489,7 @@ static void close_files (void)
 	}
 
 	if (Gflg || lflg) {
-		if (gr_close () == 0) {
+		if (gr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, gr_dbname ());
@@ -1500,7 +1500,7 @@ static void close_files (void)
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
-			if (sgr_close () == 0) {
+			if (sgr_close (true) == 0) {
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, sgr_dbname ());
@@ -1513,7 +1513,7 @@ static void close_files (void)
 #endif
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
-			if (sgr_unlock () == 0) {
+			if (sgr_unlock (true) == 0) {
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, sgr_dbname ());
@@ -1524,7 +1524,7 @@ static void close_files (void)
 			}
 		}
 #endif
-		if (gr_unlock () == 0) {
+		if (gr_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, gr_dbname ());
@@ -1536,7 +1536,7 @@ static void close_files (void)
 	}
 
 	if (is_shadow_pwd) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
@@ -1546,7 +1546,7 @@ static void close_files (void)
 			/* continue */
 		}
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, pw_dbname ());
@@ -1563,12 +1563,12 @@ static void close_files (void)
 
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
-		if (sub_uid_close () == 0) {
+		if (sub_uid_close (true) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 			fail_exit (E_SUB_UID_UPDATE);
 		}
-		if (sub_uid_unlock () == 0) {
+		if (sub_uid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -1576,12 +1576,12 @@ static void close_files (void)
 		sub_uid_locked = false;
 	}
 	if (wflg || Wflg) {
-		if (sub_gid_close () == 0) {
+		if (sub_gid_close (true) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);
 		}
-		if (sub_gid_unlock () == 0) {
+		if (sub_gid_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */

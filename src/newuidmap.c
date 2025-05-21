@@ -155,7 +155,7 @@ int main(int argc, char **argv)
 	verify_ranges(pw, ranges, mappings);
 
 	write_mapping(proc_dir_fd, ranges, mappings, "uid_map", pw->pw_uid);
-	sub_uid_close();
+	sub_uid_close(true);
 
 	return EXIT_SUCCESS;
 }
