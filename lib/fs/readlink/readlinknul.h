@@ -17,7 +17,7 @@
 #include "sizeof.h"
 
 
-#define READLINKNUL(link, buf)  readlinknul(link, buf, NITEMS(buf))
+#define READLINKNUL(link, buf)  readlinknul(link, buf, countof(buf))
 
 
 ATTR_STRING(1)

@@ -36,7 +36,7 @@
 #ident "$Id$"
 
 
-#define UTX_LINESIZE  NITEMS(memberof(struct utmpx, ut_line))
+#define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
 
 
 /*

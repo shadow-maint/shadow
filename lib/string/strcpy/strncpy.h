@@ -13,7 +13,7 @@
 #include "sizeof.h"
 
 
-#define STRNCPY(dst, src)  strncpy(dst, src, NITEMS(dst))
+#define STRNCPY(dst, src)  strncpy(dst, src, countof(dst))
 
 
 #endif  // include guard

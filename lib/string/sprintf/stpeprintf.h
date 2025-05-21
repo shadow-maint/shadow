@@ -40,7 +40,7 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
  *
  *	end	Pointer to one after the last element of the buffer
  *		pointed to by `dst`.  Usually, it should be calculated
- *		as `dst + NITEMS(dst)`.
+ *		as `dst + countof(dst)`.
  *
  *	fmt	Format string
  *

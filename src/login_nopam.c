@@ -275,7 +275,7 @@ static const char *resolve_hostname (const char *string)
 
 	addr_str = host;
 	gai_err = getnameinfo(addrs[0].ai_addr, addrs[0].ai_addrlen,
-	                      host, NITEMS(host), NULL, 0, NI_NUMERICHOST);
+	                      host, countof(host), NULL, 0, NI_NUMERICHOST);
 	if (gai_err != 0) {
 		SYSLOG ((LOG_ERR, "getnameinfo(%s): %s", string, gai_strerror(gai_err)));
 		addr_str = string;

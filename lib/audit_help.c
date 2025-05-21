@@ -98,7 +98,7 @@ audit_logger_with_group(int type, const char *op, const char *name,
 {
 	int len;
 	char enc_group[GROUP_NAME_MAX_LENGTH * 2 + 1];
-	char buf[NITEMS(enc_group) + 100];
+	char buf[countof(enc_group) + 100];
 
 	if (audit_fd < 0)
 		return;
