@@ -20,12 +20,12 @@
 #define ssizeof(x)           ((ssize_t) sizeof(x))
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
-#define SIZEOF_ARRAY(a)      (sizeof(a) + must_be_array(a))
 
 #if !defined(countof)
-# define countof(a)          (SIZEOF_ARRAY((a)) / sizeof((a)[0]))
+# define countof(a)          (sizeof(a) / sizeof((a)[0]) + must_be_array(a))
 #endif
 
+#define SIZEOF_ARRAY(a)      (countof(a) * sizeof((a)[0]))
 #define STRLEN(s)            (countof("" s "") - 1)
 
 
