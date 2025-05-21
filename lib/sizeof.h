@@ -14,15 +14,13 @@
 #endif
 #include <sys/types.h>
 
-#include "must_be.h"
-
 
 #define ssizeof(x)           ((ssize_t) sizeof(x))
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
 
 #if !defined(countof)
-# define countof(a)          (sizeof(a) / sizeof((a)[0]) + must_be_array(a))
+# define countof(a)          (sizeof(a) / sizeof((a)[0]))
 #endif
 
 #define SIZEOF_ARRAY(a)      (countof(a) * sizeof((a)[0]))
