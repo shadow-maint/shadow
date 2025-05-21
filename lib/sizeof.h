@@ -22,7 +22,7 @@
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
 
 #if !defined(countof)
-# define countof(a)          (sizeof(a) / sizeof((a)[0]) + must_be_array(a))
+# define countof(a)          (sizeof(a) / sizeof((a)[0]) + must_be(is_array(a)))
 #endif
 
 #define SIZEOF_ARRAY(a)      (countof(a) * sizeof((a)[0]))

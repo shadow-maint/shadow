@@ -38,9 +38,7 @@
  *	static_assert(3).
  *
  * EXAMPLES
- *	#define must_be_array(a)  must_be(is_array(a))
- *
- *	#define countof(a)  (sizeof(a) / sizeof(*(a)) + must_be_array(a))
+ *	#define countof(a)  (sizeof(a) / sizeof(*(a)) + must_be(is_array(a)))
  *
  *	int foo[42];
  *	int bar[countof(foo)];
@@ -58,38 +56,6 @@
 )
 
 
-/*
- * SYNOPSIS
- *	int must_be_array(a);
- *
- * ARGUMENTS
- *	a	Array.
- *
- * DESCRIPTION
- *	This macro fails compilation if 'a' is not an array.  It is
- *	useful in macros that accept an array as a parameter, where this
- *	macro can validate the macro argument.  It prevent passing a
- *	pointer to such macros, which would otherwise produce silent
- *	bugs.
- *
- * RETURN VALUE
- *	0
- *
- * ERRORS
- *	If 'a' is not an array, the compilation will fail.
- *
- * EXAMPLES
- *	int a[10];
- *	int *p;
- *
- *	must_be_array(a);  // Ok
- *	must_be_array(p);  // Compile-time error
- *
- * SEE ALSO
- *	must_be()
- */
-
-
 #define is_same_type(a, b)                                                    \
 (                                                                             \
 	__builtin_types_compatible_p(a, b)                                    \
@@ -105,12 +71,6 @@
 #define is_array(a)                                                           \
 (                                                                             \
 	!is_same_typeof(a, &(a)[0])                                           \
-)
-
-
-#define must_be_array(a)                                                      \
-(                                                                             \
-	must_be(is_array(a))                                                  \
 )
 
 
