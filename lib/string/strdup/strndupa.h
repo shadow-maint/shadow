@@ -20,7 +20,7 @@
 #endif
 
 
-#define STRNDUPA(s)  strndupa(s, NITEMS(s))
+#define STRNDUPA(s)  strndupa(s, countof(s))
 
 
 #endif  // include guard

@@ -37,7 +37,7 @@ main(void)
 static void
 test_STRTCPY_trunc(void **state)
 {
-	char  buf[NITEMS("foo")];
+	char  buf[countof("foo")];
 
 	// Test that we're not returning SIZE_MAX
 	assert_true(STRTCPY(buf, "fooo") < 0);
@@ -51,7 +51,7 @@ test_STRTCPY_trunc(void **state)
 static void
 test_STRTCPY_ok(void **state)
 {
-	char  buf[NITEMS("foo")];
+	char  buf[countof("foo")];
 
 	assert_int_equal(STRTCPY(buf, "foo"), strlen("foo"));
 	assert_string_equal(buf, "foo");

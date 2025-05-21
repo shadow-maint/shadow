@@ -36,7 +36,7 @@ main(void)
 static void
 test_SNPRINTF_trunc(void **state)
 {
-	char  buf[NITEMS("foo")];
+	char  buf[countof("foo")];
 
 	// Test that we're not returning SIZE_MAX
 	assert_true(SNPRINTF(buf, "f%su", "oo") < 0);
@@ -50,7 +50,7 @@ test_SNPRINTF_trunc(void **state)
 static void
 test_SNPRINTF_ok(void **state)
 {
-	char  buf[NITEMS("foo")];
+	char  buf[countof("foo")];
 
 	assert_true(SNPRINTF(buf, "%s", "foo") == strlen("foo"));
 	assert_true(strcmp(buf, "foo") == 0);

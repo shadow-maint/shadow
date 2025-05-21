@@ -16,7 +16,7 @@
 #include "string/strcpy/strtcpy.h"
 
 
-#define DAY_TO_STR(str, day)   day_to_str(NITEMS(str), str, day)
+#define DAY_TO_STR(str, day)   day_to_str(countof(str), str, day)
 
 
 inline void day_to_str(size_t size, char buf[size], long day);

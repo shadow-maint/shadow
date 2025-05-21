@@ -20,7 +20,7 @@
 ({                                                                            \
 	long  addend_[] = {a, b, __VA_ARGS__};                                \
                                                                               \
-	addslN(NITEMS(addend_), addend_);                                     \
+	addslN(countof(addend_), addend_);                                    \
 })
 
 
