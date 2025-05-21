@@ -14,7 +14,7 @@
 
 
 // string format time
-#define STRFTIME(dst, fmt, tm)  strftime(dst, NITEMS(dst), fmt, tm)
+#define STRFTIME(dst, fmt, tm)  strftime(dst, countof(dst), fmt, tm)
 
 
 #endif  // include guard

@@ -40,10 +40,10 @@
  * EXAMPLES
  *	#define must_be_array(a)  must_be(is_array(a))
  *
- *	#define NITEMS(a)  (sizeof(a) / sizeof(*(a)) + must_be_array(a))
+ *	#define countof(a)  (sizeof(a) / sizeof(*(a)) + must_be_array(a))
  *
  *	int foo[42];
- *	int bar[NITEMS(foo)];
+ *	int bar[countof(foo)];
  */
 
 
