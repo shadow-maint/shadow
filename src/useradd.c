@@ -65,8 +65,9 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
+#include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
@@ -330,7 +331,8 @@ get_defaults(void)
 	const char  *ccp;
 
 	if (prefix[0]) {
-		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
+		default_file = aprintf("%s/%s", prefix, USER_DEFAULTS_FILE);
+		if (default_file == NULL)
 			return;
 	}
 
@@ -428,14 +430,10 @@ get_defaults(void)
 			if (streq(ccp, ""))
 				ccp = SKEL_DIR;
 
-			if (prefix[0]) {
-				char  *dt;
-
-				xasprintf(&dt, "%s/%s", prefix, ccp);
-				def_template = dt;
-			} else {
+			if (prefix[0])
+				def_template = xaprintf("%s/%s", prefix, ccp);
+			else
 				def_template = xstrdup(ccp);
-			}
 		}
 
 		/*
@@ -446,10 +444,7 @@ get_defaults(void)
 				ccp = USRSKELDIR;
 
 			if (prefix[0]) {
-				char  *dut;
-
-				xasprintf(&dut, "%s/%s", prefix, ccp);
-				def_usrtemplate = dut;
+				def_usrtemplate = xaprintf("%s/%s", prefix, ccp);
 			} else {
 				def_usrtemplate = xstrdup(ccp);
 			}
@@ -531,16 +526,16 @@ set_defaults(void)
 	FILE  *ofp;
 
 
-	if (asprintf(&new_file, "%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE) == -1)
-	{
+	new_file = aprintf("%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
+	if (new_file == NULL) {
 		fprintf(stderr, _("%s: cannot create new defaults file: %s\n"),
 		        Prog, strerror(errno));
 		return -1;
         }
 
 	if (prefix[0]) {
-		if (asprintf(&default_file, "%s/%s", prefix, USER_DEFAULTS_FILE) == -1)
-		{
+		default_file = aprintf("%s/%s", prefix, USER_DEFAULTS_FILE);
+		if (default_file == NULL) {
 			fprintf(stderr,
 			        _("%s: cannot create new defaults file: %s\n"),
 			        Prog, strerror(errno));
@@ -1516,16 +1511,10 @@ static void process_flags (int argc, char **argv)
 			exit (E_BAD_NAME);
 		}
 		if (!dflg) {
-			char  *uh;
-
-			xasprintf(&uh, "%s/%s", def_home, user_name);
-			user_home = uh;
+			user_home = xaprintf("%s/%s", def_home, user_name);
 		}
 		if (prefix[0]) {
-			char  *puh; /* to avoid const warning */
-
-			xasprintf(&puh, "%s/%s", prefix, user_home);
-			prefix_user_home = puh;
+			prefix_user_home = xaprintf("%s/%s", prefix, user_home);
 		} else {
 			prefix_user_home = user_home;
 		}
@@ -2328,9 +2317,9 @@ static void create_mail (void)
 		return;
 	}
 	if (prefix[0])
-		xasprintf(&file, "%s/%s/%s", prefix, spool, user_name);
+		file = xaprintf("%s/%s/%s", prefix, spool, user_name);
 	else
-		xasprintf(&file, "%s/%s", spool, user_name);
+		file = xaprintf("%s/%s", spool, user_name);
 
 #ifdef WITH_SELINUX
 	if (set_selinux_file_context(file, S_IFREG) != 0) {

@@ -33,7 +33,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/xasprintf.h"
+#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -535,7 +535,7 @@ static char *update_crypt_pw (char *cp)
 	if (lflg && *cp != '!') {
 		char  *newpw;
 
-		xasprintf(&newpw, "!%s", cp);
+		newpw = xaprintf("!%s", cp);
 		if (!use_pam)
 		{
 			if (do_update_pwd) {
