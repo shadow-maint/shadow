@@ -18,7 +18,7 @@
 
 #define SNPRINTF(s, fmt, ...)                                                 \
 (                                                                             \
-	snprintf_(s, NITEMS(s), fmt __VA_OPT__(,) __VA_ARGS__)                \
+	snprintf_(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)               \
 )
 
 
