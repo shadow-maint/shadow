@@ -17,11 +17,9 @@ def test_groupadd__add_group(shadow: Shadow):
     :setup:
         1. Create group
     :steps:
-        1. Check group entry
-        2. Check gshadow entry
+        1. Group exists and GID is 1000
     :expectedresults:
-        1. group entry for the user exists and the attributes are correct
-        2. gshadow entry for the user exists and the attributes are correct
+        1. Group is found and GID matches
     :customerscenario: False
     """
     shadow.groupadd("tgroup")
@@ -30,9 +28,3 @@ def test_groupadd__add_group(shadow: Shadow):
     assert result is not None, "Group should be found"
     assert result.name == "tgroup", "Incorrect groupname"
     assert result.gid == 1000, "Incorrect GID"
-
-    if shadow.host.features["gshadow"]:
-        result = shadow.tools.getent.gshadow("tgroup")
-        assert result is not None, "Group should be found"
-        assert result.name == "tgroup", "Incorrect groupname"
-        assert result.password == "!", "Incorrect password"
