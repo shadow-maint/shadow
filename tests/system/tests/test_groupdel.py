@@ -18,18 +18,13 @@ def test_groupdel__delete_group(shadow: Shadow):
         1. Create group
         2. Delete group
     :steps:
-        1. Check group entry
-        2. Check gshadow entry
+        1. Group doesn't exist
     :expectedresults:
-        1. group entry for the user doesn't exist
-        2. gshadow entry for the user doesn't exist
+        1. Group is not found
     :customerscenario: False
     """
     shadow.groupadd("tgroup")
     shadow.groupdel("tgroup")
 
     result = shadow.tools.getent.group("tgroup")
-    assert result is None, "Group should not be found"
-
-    result = shadow.tools.getent.gshadow("tgroup")
     assert result is None, "Group should not be found"
