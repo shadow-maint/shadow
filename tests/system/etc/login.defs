@@ -446,7 +446,7 @@ CREATE_HOME     yes
 # Force use shadow, even if shadow passwd & shadow group files are
 # missing.
 #
-FORCE_SHADOW    yes
+#FORCE_SHADOW    yes
 
 #
 # Allow newuidmap and newgidmap when running under an alternative
