@@ -13,7 +13,7 @@
 #include "sizeof.h"
 
 
-#define STRNCAT(dst, src)  strncat(dst, src, NITEMS(src))
+#define STRNCAT(dst, src)  strncat(dst, src, countof(src))
 
 
 #endif  // include guard

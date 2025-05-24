@@ -18,7 +18,7 @@
 // Similar to strndup(3), but ensure that 's' is an array, and exit on ENOMEM.
 #define XSTRNDUP(s)                                                           \
 (                                                                             \
-	STRNCAT(strcpy(XMALLOC(strnlen(s, NITEMS(s)) + 1, char), ""), s)      \
+	STRNCAT(strcpy(XMALLOC(strnlen(s, countof(s)) + 1, char), ""), s)     \
 )
 
 

@@ -18,7 +18,7 @@
 // Similar to strndupa(3), but ensure that 's' is an array.
 #define STRNDUPA(s)                                                           \
 (                                                                             \
-	STRNCAT(strcpy(alloca(strnlen(s, NITEMS(s)) + 1), ""), s)             \
+	STRNCAT(strcpy(alloca(strnlen(s, countof(s)) + 1), ""), s)            \
 )
 
 
