@@ -95,20 +95,12 @@ audit_logger_with_group(int type, const char *op, const char *name,
     id_t id, const char *grp_type, const char *grp,
     shadow_audit_result result)
 {
-	int len;
-	char enc_group[GROUP_NAME_MAX_LENGTH * 2 + 1];
-	char buf[countof(enc_group) + 100];
+	char  buf[GROUP_NAME_MAX_LENGTH + 100];
 
 	if (audit_fd < 0)
 		return;
 
-	len = strnlen(grp, sizeof(enc_group)/2);
-	if (audit_value_needs_encoding(grp, len)) {
-		stprintf_a(buf, "%s %s=%s", op, grp_type,
-			audit_encode_value(enc_group, grp, len));
-	} else {
-		stprintf_a(buf, "%s %s=\"%s\"", op, grp_type, grp);
-	}
+	stprintf_a(buf, "%s %s=\"%s\"", op, grp_type, grp);
 
 	audit_log_acct_message(audit_fd, type, NULL, buf, name, id,
 		               NULL, NULL, NULL, result);
