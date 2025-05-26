@@ -42,7 +42,6 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "groupio.h"
-#include "must_be.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -68,6 +67,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
 #include "time/day_to_str.h"
+#include "typetraits.h"
 
 
 /*

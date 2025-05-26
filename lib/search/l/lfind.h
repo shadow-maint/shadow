@@ -11,8 +11,8 @@
 #include <search.h>
 #include <stddef.h>
 
-#include "must_be.h"
 #include "search/cmp/cmp.h"
+#include "typetraits.h"
 
 #include <assert.h>
 
