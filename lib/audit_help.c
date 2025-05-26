@@ -65,12 +65,11 @@ void audit_logger (int type, const char *op,
                    const char *name, unsigned int id,
                    shadow_audit_result result)
 {
-	if (audit_fd < 0) {
+	if (audit_fd < 0)
 		return;
-	} else {
-		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-		                        NULL, NULL, NULL, result);
-	}
+
+	audit_log_acct_message(audit_fd, type, NULL, op, name, id,
+	                       NULL, NULL, NULL, result);
 }
 
 /*
@@ -108,20 +107,18 @@ audit_logger_with_group(int type, const char *op, const char *name,
 
 void audit_logger_message (const char *message, shadow_audit_result result)
 {
-	if (audit_fd < 0) {
+	if (audit_fd < 0)
 		return;
-	} else {
-		audit_log_user_message (audit_fd,
-		                        AUDIT_USYS_CONFIG,
-		                        message,
-		                        NULL, /* hostname */
-		                        NULL, /* addr */
-		                        NULL, /* tty */
-		                        result);
-	}
+
+	audit_log_user_message (audit_fd,
+	                        AUDIT_USYS_CONFIG,
+	                        message,
+	                        NULL, /* hostname */
+	                        NULL, /* addr */
+	                        NULL, /* tty */
+	                        result);
 }
 
 #else				/* WITH_AUDIT */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* WITH_AUDIT */
-
