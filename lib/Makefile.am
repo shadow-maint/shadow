@@ -123,7 +123,6 @@ libshadow_la_SOURCES = \
 	loginprompt.c \
 	mail.c \
 	motd.c \
-	must_be.h \
 	myname.c \
 	nss.c \
 	nscd.c \
