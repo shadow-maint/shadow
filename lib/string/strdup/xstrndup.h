@@ -14,8 +14,11 @@
 #include "exit_if_null.h"
 
 
-// Similar to strndup(3), but ensure that 's' is an array, and exit on ENOMEM.
-#define XSTRNDUP(s)  exit_if_null(strndup(s, countof(s)))
+// Similar to strndup(3), but ensure that 's' is an array.
+#define STRNDUP(s)   strndup(s, countof(s))
+
+// exit-on-error nonstring duplicate-into-string
+#define XSTRNDUP(s)  exit_if_null(STRNDUP(s))
 
 
 #endif  // include guard
