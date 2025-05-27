@@ -14,8 +14,11 @@
 #include "x.h"
 
 
-// Similar to strndup(3), but ensure that 's' is an array, and exit on ENOMEM.
-#define XSTRNDUP(s)  X(strndup(s, countof(s)))
+// Similar to strndup(3), but ensure that 's' is an array.
+#define STRNDUP(s)   strndup(s, countof(s))
+
+// Similar to STRNDUP(), but exit on ENOMEM.
+#define XSTRNDUP(s)  X(STRNDUP(s))
 
 
 #endif  // include guard
