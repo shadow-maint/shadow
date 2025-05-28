@@ -29,6 +29,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
+#include "sizeof.h"
 #include "string/sprintf/xasprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
@@ -83,7 +84,6 @@ struct itemdef {
 	{"MOTD_FIRSTONLY", NULL},		\
 
 
-#define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
 	{"CHFN_RESTRICT", NULL},
 	{"CONSOLE_GROUPS", NULL},
@@ -611,7 +611,7 @@ int main (int argc, char **argv)
 
 	def_load ();
 
-	for (i = 0; i < NUMDEFS; ++i) {
+	for (i = 0; i < countof(def_table); ++i) {
 		d = def_find (def_table[i].name, NULL);
 		if (NULL == d) {
 			printf ("error - lookup '%s' failed\n",
