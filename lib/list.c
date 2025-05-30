@@ -188,7 +188,6 @@ comma_to_list(const char *comma)
 	char **array;
 	int i;
 	char *cp;
-	char *cp2;
 
 	assert (NULL != comma);
 

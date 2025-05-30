@@ -71,12 +71,10 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
                      uid_t old_uid, uid_t new_uid,
                      gid_t old_gid, gid_t new_gid);
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid);
 static int copy_hardlink (const struct path_info *dst,
-                          MAYBE_UNUSED bool reset_selinux,
                           struct link_name *lp);
 static int copy_special (const struct path_info *src, const struct path_info *dst,
                          bool reset_selinux,
@@ -100,7 +98,8 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
  * error_acl - format the error messages for the ACL and EQ libraries.
  */
 format_attr(printf, 2, 3)
-static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, ...)
+static void
+error_acl(struct error_context *, const char *fmt, ...)
 {
 	va_list ap;
 	FILE *shadow_logfd = log_get_logfd();
@@ -436,7 +435,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	*/
 
 	else if (S_ISLNK (sb.st_mode)) {
-		err = copy_symlink (src, dst, reset_selinux, &sb, mt,
+		err = copy_symlink (src, dst, &sb, mt,
 				    old_uid, new_uid, old_gid, new_gid);
 	}
 
@@ -445,7 +444,7 @@ static int copy_entry (const struct path_info *src, const struct path_info *dst,
 	*/
 
 	else if ((lp = check_link (src->full_path, &sb)) != NULL) {
-		err = copy_hardlink (dst, reset_selinux, lp);
+		err = copy_hardlink (dst, lp);
 	}
 
 	/*
@@ -550,7 +549,6 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_symlink (const struct path_info *src, const struct path_info *dst,
-                         MAYBE_UNUSED bool reset_selinux,
                          const struct stat *statp, const struct timespec mt[],
                          uid_t old_uid, uid_t new_uid,
                          gid_t old_gid, gid_t new_gid)
@@ -621,7 +619,6 @@ static int copy_symlink (const struct path_info *src, const struct path_info *ds
  *	Return 0 on success, -1 on error.
  */
 static int copy_hardlink (const struct path_info *dst,
-                          MAYBE_UNUSED bool reset_selinux,
                           struct link_name *lp)
 {
 	/* FIXME: selinux, ACL, Extended Attributes needed? */
@@ -652,8 +649,8 @@ static int copy_hardlink (const struct path_info *dst,
  *	Return 0 on success, -1 on error.
  */
 static int
-copy_special(const struct path_info *src, const struct path_info *dst,
-             bool reset_selinux,
+copy_special(MAYBE_UNUSED const struct path_info *src, const struct path_info *dst,
+             MAYBE_UNUSED bool reset_selinux,
              const struct stat *statp, const struct timespec mt[],
              uid_t old_uid, uid_t new_uid,
              gid_t old_gid, gid_t new_gid)
@@ -708,7 +705,7 @@ copy_special(const struct path_info *src, const struct path_info *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_file (const struct path_info *src, const struct path_info *dst,
-                      bool reset_selinux,
+                      MAYBE_UNUSED bool reset_selinux,
                       const struct stat *statp, const struct timespec mt[],
                       uid_t old_uid, uid_t new_uid,
                       gid_t old_gid, gid_t new_gid)
