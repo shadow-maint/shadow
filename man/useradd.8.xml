@@ -183,11 +183,13 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date on which the user account will be disabled. The date is
-	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
+	    Sets the date on which the user account will be disabled.
+	    The value can be specified as a date in the YYYY-MM-DD format
+	    or as a number of days since 1970-01-01.
+	    The date is interpreted using the UTC timezone.
 	  </para>
 	  <para>
-	    If not specified, <command>useradd</command> will use the
+	    If not specified, <command>useradd</command> uses the
 	    default expiry date specified by the <option>EXPIRE</option>
 	    variable in <filename>/etc/default/useradd</filename>, or
 	    an empty string (no expiry) by default.
@@ -200,19 +202,28 @@
 	</term>
 	<listitem>
 	  <para>
-            defines the number of days after the password exceeded its maximum
-            age where the user is expected to replace this password. The value
-            is stored in the shadow password file. An input of 0 will disable an
-            expired password with no delay. An input of -1 will blank the
-            respective field in the shadow password file. See <citerefentry>
+	    Defines the number of days after a password exceeds its maximum age
+	    before the user account gets locked.
+	    If the user does not change their password within this period of time,
+	    their account becomes inactive.
+	    This value is stored in the shadow password file.
+	    For more information, see <citerefentry>
 	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-            </citerefentry>for more information.
+	    </citerefentry>.
 	  </para>
 	  <para>
-	    If not specified, <command>useradd</command> will use the
-	    default inactivity period specified by the
-	    <option>INACTIVE</option> variable in
-	    <filename>/etc/default/useradd</filename>, or -1 by default.
+	    A value of 0 disables the account when the password expires, with no delay.
+	  </para>
+	  <para>
+	    A value of -1 blanks the respective field in the shadow password file,
+	    which means that the inactivity period is not enforced.
+	  </para>
+	  <para>
+	    If not specified,
+	    <command>useradd</command> uses the default inactivity
+	    period specified by the <option>INACTIVE</option> variable in
+	    <filename>/etc/default/useradd</filename>,
+	    or -1 by default if no value is specified.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -651,10 +662,9 @@
 	  </term>
 	  <listitem>
 	    <para>
-              defines the number of days after the password exceeded its maximum
-              age where the user is expected to replace this password. See <citerefentry>
-	      <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-              </citerefentry>for more information.
+	      specifies the number of days after a password expires
+	      during which the user can still log in.
+	      After this period, the account is locked.
 	    </para>
 	    <para>
 	      This option sets the <option>INACTIVE</option> variable in
