@@ -35,7 +35,7 @@
 #include "shadowlog_internal.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
@@ -138,7 +138,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	}
 
 	pid = getpid ();
-	SNPRINTF(buf, "%lu", (unsigned long) pid);
+	STPRINTF(buf, "%lu", (unsigned long) pid);
 	len = (ssize_t) strlen (buf) + 1;
 	if (write_full(fd, buf, len) == -1) {
 		if (log) {
@@ -339,7 +339,7 @@ static void free_linked_list (struct commonio_db *db)
 
 int commonio_setname (struct commonio_db *db, const char *name)
 {
-	SNPRINTF(db->filename, "%s", name);
+	STPRINTF(db->filename, "%s", name);
 	db->setname = true;
 	return 1;
 }
@@ -482,7 +482,7 @@ int commonio_unlock (struct commonio_db *db)
 		 * then call ulckpwdf() (if used) on last unlock.
 		 */
 		db->locked = false;
-		SNPRINTF(lock, "%s.lock", db->filename);
+		STPRINTF(lock, "%s.lock", db->filename);
 		unlink (lock);
 		dec_lock_count ();
 		return 1;
@@ -916,7 +916,7 @@ int commonio_close (struct commonio_db *db)
 		/*
 		 * Create backup file.
 		 */
-		if (SNPRINTF(buf, "%s-", db->filename) == -1) {
+		if (STPRINTF(buf, "%s-", db->filename) == -1) {
 			(void) fclose (db->fp);
 			db->fp = NULL;
 			goto fail;
@@ -953,7 +953,7 @@ int commonio_close (struct commonio_db *db)
 		sb.st_gid = db->st_gid;
 	}
 
-	if (SNPRINTF(buf, "%s+", db->filename) == -1)
+	if (STPRINTF(buf, "%s+", db->filename) == -1)
 		goto fail;
 
 #ifdef WITH_SELINUX

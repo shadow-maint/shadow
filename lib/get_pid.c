@@ -14,7 +14,7 @@
 #include <fcntl.h>
 
 #include "atoi/getnum.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 
 
 /*
@@ -59,8 +59,8 @@ int open_pidfd(const char *pidstr)
 		return -ENOENT;
 
 	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
-	if (SNPRINTF(proc_dir_name, "/proc/%u/", target) == -1) {
-		fprintf(stderr, "snprintf of proc path failed for %u: %s\n",
+	if (STPRINTF(proc_dir_name, "/proc/%u/", target) == -1) {
+		fprintf(stderr, "stprintf of proc path failed for %u: %s\n",
 			target, strerror(errno));
 		return -EINVAL;
 	}
