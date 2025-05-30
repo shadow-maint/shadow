@@ -11,10 +11,12 @@
 
 #ident "$Id$"
 
+#include <errno.h>
 #include <fcntl.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <getopt.h>
 
@@ -651,7 +653,7 @@ int main (int argc, char **argv)
 	 */
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			fprintf(stderr, _("%s: user: %s\n"), Prog, strerror(errno));
 			fail_exit (E_NOPERM);
 		}
 		user = argv[optind];

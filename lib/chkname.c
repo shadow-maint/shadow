@@ -13,7 +13,8 @@
  *   true  - OK
  *   false - bad name
  * errors:
- *   EINVAL	Invalid name characters or sequences
+ *   EINVAL	Invalid name
+ *   EILSEQ	Invalid name character sequence
  *   EOVERFLOW	Name longer than maximum size
  */
 
@@ -31,16 +32,17 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "ctype/ispfchar.h"
+#include "string/ctype/strchrisascii/strchriscntrl.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strcaseeq.h"
+#include "string/strcmp/strprefix.h"
 
 
 #ifndef  LOGIN_NAME_MAX
 # define LOGIN_NAME_MAX  256
 #endif
-
-
-int allow_bad_names = false;
 
 
 size_t
@@ -59,8 +61,17 @@ login_name_max_size(void)
 static bool
 is_valid_name(const char *name)
 {
-	if (allow_bad_names) {
-		return true;
+	if (streq(name, "")
+	 || streq(name, ".")
+	 || streq(name, "..")
+	 || strcaseeq(name, "none")
+	 || strcaseeq(name, "all")
+	 || strcaseeq(name, "except")
+	 || strprefix(name, "-")
+	 || strisdigit(name))
+	{
+		errno = EINVAL;
+		return false;
 	}
 
 	/*
@@ -69,39 +80,19 @@ is_valid_name(const char *name)
          *
          * as a non-POSIX, extension, allow "$" as the last char for
          * sake of Samba 3.x "add machine script"
-         *
-         * Also do not allow fully numeric names or just "." or "..".
          */
 
-	if (strisdigit(name)) {
-		errno = EINVAL;
-		return false;
-	}
-
-	if (streq(name, "") ||
-	    streq(name, ".") ||
-	    streq(name, "..") ||
-	    !((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
-		errno = EINVAL;
+	if (!ispfchar(*name)) {
+		errno = EILSEQ;
 		return false;
 	}
 
 	while (!streq(++name, "")) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= 'A' && *name <= 'Z') ||
-		      (*name >= '0' && *name <= '9') ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
-		     ))
-		{
-			errno = EINVAL;
+		if (streq(name, "$"))  // Samba
+			return true;
+
+		if (!ispfchar(*name)) {
+			errno = EILSEQ;
 			return false;
 		}
 	}
