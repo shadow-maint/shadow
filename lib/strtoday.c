@@ -1,56 +1,77 @@
-/*
- * SPDX-FileCopyrightText: 1991 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1999, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2003 - 2005, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2008       , Nicolas François
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1991-1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996-1999, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2003-2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2008, Nicolas François
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2025, "Haelwenn (lanodan) Monnier" <contact@hacktivis.me>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include <config.h>
 
-#include <ctype.h>
+#include <stddef.h>
+#include <time.h>
 
 #include "atoi/str2i.h"
-#include "getdate.h"
+#include "defines.h"
 #include "prototypes.h"
-#include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
-#include "string/strspn/stpspn.h"
+
+
+static long get_date(const char *s);
+static long dategm(struct tm *tm);
 
 
 // string parse-to day-since-Epoch
-long strtoday (const char *str)
+long
+strtoday(const char *str)
 {
-	time_t t;
-	const char *s = str;
+	long  d;
 
-	/*
-	 * get_date() interprets an empty string as the current date,
-	 * which is not what we expect, unless you're a BOFH :-).
-	 * (useradd sets sp_expire = current date for new lusers)
-	 */
-	if ((NULL == str) || streq(str, "")) {
+	if (NULL == str || streq(str, ""))
 		return -1;
-	}
 
 	/* If a numerical value is provided, this is already a number of
 	 * days since EPOCH.
 	 */
-	s = strprefix(s, "-") ?: s;
-	s = stpspn(s, " ");
-	if (strisdigit(s)) {
-		long retdate;
+	if (str2sl(&d, str) == 0)
+		return d;
 
-		if (str2sl(&retdate, str) == -1)
-			return -2;
-		return retdate;
-	}
-
-	t = get_date(str, NULL);
-	if ((time_t) - 1 == t) {
+	d = get_date(str);
+	if (d == -1)
 		return -2;
-	}
+
+	return d;
+}
+
+
+static long
+get_date(const char *s)
+{
+	time_t      t;
+	struct tm   tm;
+	const char  *p;
+
+	t = 0;
+	if (gmtime_r(&t, &tm) == NULL)
+		return -1;
+
+	p = strptime(s, "%Y-%m-%d", &tm);
+	if (p == NULL || !streq(p, ""))
+		return -1;
+
+	return dategm(&tm);
+}
+
+
+static long
+dategm(struct tm *tm)
+{
+	time_t  t;
+
+	t = timegm(tm);
+	if (t == (time_t) -1)
+		return -1;
+
 	return t / DAY;
 }
