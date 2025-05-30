@@ -483,7 +483,7 @@ static void
 fail_exit (int status)
 {
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -491,7 +491,7 @@ fail_exit (int status)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -586,14 +586,14 @@ static void update_noshadow (void)
 		                Prog, pw_dbname (), npw->pw_name);
 		fail_exit (E_FAILURE);
 	}
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, pw_dbname ());
@@ -625,9 +625,9 @@ static void update_shadow (void)
 	sp = spw_locate (name);
 	if (NULL == sp) {
 		/* Try to update the password in /etc/passwd instead. */
-		(void) spw_close ();
+		(void) spw_close (true);
 		update_noshadow ();
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			(void) fprintf (stderr,
 			                _("%s: failed to unlock %s\n"),
 			                Prog, spw_dbname ());
@@ -681,14 +681,14 @@ static void update_shadow (void)
 		                Prog, spw_dbname (), nsp->sp_namp);
 		fail_exit (E_FAILURE);
 	}
-	if (spw_close () == 0) {
+	if (spw_close (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (spw_unlock () == 0) {
+	if (spw_unlock (true) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, spw_dbname ());

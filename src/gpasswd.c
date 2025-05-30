@@ -593,7 +593,7 @@ static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
  */
 static void close_files (void)
 {
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -607,7 +607,7 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -724,7 +724,7 @@ static void get_group (struct group *gr)
 	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while closing read-only %s\n"),
 		         Prog, gr_dbname ());
@@ -762,7 +762,7 @@ static void get_group (struct group *gr)
 			sg->sg_adm[0] = NULL;
 
 		}
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while closing read-only %s\n"),
 			         Prog, sgr_dbname ());

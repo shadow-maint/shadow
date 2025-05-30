@@ -481,7 +481,7 @@ static void process_flags (int argc, char **argv)
  */
 static void close_files (void)
 {
-	if (gr_close () == 0) {
+	if (gr_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -504,7 +504,7 @@ static void close_files (void)
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
 	    && (pflg || nflg || user_list)) {
-		if (sgr_close () == 0) {
+		if (sgr_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -534,7 +534,7 @@ static void close_files (void)
 #endif				/* SHADOWGRP */
 
 	if (gflg) {
-		if (pw_close () == 0) {
+		if (pw_close (true) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());

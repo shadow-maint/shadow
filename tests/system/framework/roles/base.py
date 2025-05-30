@@ -12,6 +12,7 @@ from pytest_mh.utils.coredumpd import Coredumpd
 from pytest_mh.utils.firewall import Firewalld
 from pytest_mh.utils.fs import LinuxFileSystem
 from pytest_mh.utils.journald import JournaldUtils
+from pytest_mh.utils.selinux import SELinux
 from pytest_mh.utils.tc import LinuxTrafficControl
 
 from ..hosts.base import BaseHost
@@ -169,4 +170,9 @@ class BaseLinuxRole(BaseRole[HostType]):
         self.coredumpd: Coredumpd = Coredumpd(self.host, self.fs, mode=coredumpd_mode, filter=coredumpd_filter)
         """
         Coredumpd utilities.
+        """
+
+        self.selinux: SELinux = SELinux(self.host)
+        """
+        SELinux utilities.
         """

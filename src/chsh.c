@@ -77,7 +77,7 @@ static void
 fail_exit (int code)
 {
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -427,12 +427,12 @@ static void update_shell (const char *user, char *newshell)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (1);
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */

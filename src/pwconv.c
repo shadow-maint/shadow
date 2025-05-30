@@ -83,7 +83,7 @@ static void process_flags (int argc, char **argv);
 static void fail_exit (int status)
 {
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -91,7 +91,7 @@ static void fail_exit (int status)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (true) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -274,14 +274,14 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (spw_close () == 0) {
+	if (spw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (pw_close () == 0) {
+	if (pw_close (true) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
@@ -299,13 +299,13 @@ int main (int argc, char **argv)
 		/* continue */
 	}
 
-	if (pw_unlock () == 0) {
+	if (pw_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
 	}
 
-	if (spw_unlock () == 0) {
+	if (spw_unlock (true) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 		/* continue */
