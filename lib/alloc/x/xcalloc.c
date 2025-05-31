@@ -19,11 +19,11 @@
 
 
 void *
-xcalloc(size_t nmemb, size_t size)
+xcalloc(size_t n, size_t size)
 {
 	void  *p;
 
-	p = calloc(nmemb, size);
+	p = calloc(n, size);
 	if (p == NULL)
 		goto x;
 

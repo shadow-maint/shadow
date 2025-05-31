@@ -22,15 +22,15 @@
 
 ATTR_ALLOC_SIZE(2, 3)
 ATTR_MALLOC(free)
-inline void *reallocarrayf(void *p, size_t nmemb, size_t size);
+inline void *reallocarrayf(void *p, size_t n, size_t size);
 
 
 inline void *
-reallocarrayf(void *p, size_t nmemb, size_t size)
+reallocarrayf(void *p, size_t n, size_t size)
 {
 	void  *q;
 
-	q = reallocarray(p, nmemb ?: 1, size ?: 1);
+	q = reallocarray(p, n ?: 1, size ?: 1);
 
 	if (q == NULL)
 		free(p);
