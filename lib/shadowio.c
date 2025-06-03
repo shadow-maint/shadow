@@ -10,19 +10,21 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
-#include "prototypes.h"
-#include "defines.h"
 #include <shadow.h>
 #include <stdio.h>
+
 #include "commonio.h"
+#include "defines.h"
+#include "fields.h"
 #include "getdef.h"
+#include "prototypes.h"
 #include "shadowio.h"
+
 #ifdef WITH_TCB
 #include <tcb.h>
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
+
 
 static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {

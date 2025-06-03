@@ -19,6 +19,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
+#include "fields.h"
 #include "getdef.h"
 #include "sgroupio.h"
 #include "string/memset/memzero.h"

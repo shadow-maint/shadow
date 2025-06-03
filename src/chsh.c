@@ -21,6 +21,7 @@
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "fields.h"
 #include "getdef.h"
 #include "nscd.h"
 #include "prototypes.h"

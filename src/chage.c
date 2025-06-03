@@ -23,6 +23,7 @@
 
 #include "atoi/a2i/a2s.h"
 #include "defines.h"
+#include "fields.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"

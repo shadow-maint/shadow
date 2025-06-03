@@ -19,6 +19,7 @@
 #include "alloc/malloc.h"
 #include "commonio.h"
 #include "defines.h"
+#include "fields.h"
 #include "getdef.h"
 #include "groupio.h"
 #include "prototypes.h"
