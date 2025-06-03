@@ -120,10 +120,6 @@ extern void sanitize_env (void);
 /* fd.c */
 extern void check_fds (void);
 
-/* fields.c */
-extern void change_field (char *, size_t, const char *);
-extern int valid_field (const char *, const char *);
-
 /* find_new_gid.c */
 extern int find_new_gid (bool sys_group,
                          gid_t *gid,

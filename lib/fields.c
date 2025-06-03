@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#ident "$Id$"
+#include "fields.h"
 
 #include <ctype.h>
 #include <string.h>

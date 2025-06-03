@@ -10,13 +10,13 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
 #include <stdio.h>
+
 #include "commonio.h"
+#include "defines.h"
+#include "fields.h"
+#include "prototypes.h"
 #include "pwio.h"
 
 static /*@null@*/ /*@only@*/void *passwd_dup (const void *ent)

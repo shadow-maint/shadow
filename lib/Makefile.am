@@ -94,6 +94,7 @@ libshadow_la_SOURCES = \
 	failure.h \
 	fd.c \
 	fields.c \
+	fields.h \
 	find_new_gid.c \
 	find_new_uid.c \
 	find_new_sub_gids.c \
