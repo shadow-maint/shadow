@@ -32,7 +32,8 @@
  *       but the field contains a non-printable character.
  *  +  0 is returned otherwise.
  */
-int valid_field (const char *field, const char *illegal)
+int
+valid_field_(const char *field, const char *illegal)
 {
 	const char *cp;
 	int err = 0;

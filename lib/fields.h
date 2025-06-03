@@ -10,7 +10,10 @@
 #include <stddef.h>
 
 
-int valid_field(const char *field, const char *illegal);
+#define valid_field(field, illegal)  valid_field_(field, "" illegal "")
+
+
+int valid_field_(const char *field, const char *illegal);
 void change_field(char *buf, size_t maxsize, const char *prompt);
 
 
