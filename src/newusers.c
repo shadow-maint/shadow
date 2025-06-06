@@ -1121,8 +1121,7 @@ int main (int argc, char **argv)
 
 		/*
 		 * Break the string into fields and screw around with them.
-		 * There MUST be 7 colon separated fields, although the
-		 * values aren't that particular.
+		 * The values aren't that particular.
 		 */
 		for (cp = buf, nfields = 0; nfields < 6 && cp != NULL; nfields++) {
 			fields[nfields] = strsep(&cp, ":");
