@@ -5,15 +5,14 @@
 
 #include <config.h>
 
-#ident "$Id$"
-
-#include "prototypes.h"
-#include "defines.h"
+#include <limits.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 
 #include "atoi/getnum.h"
+#include "defines.h"
+#include "prototypes.h"
 #include "string/sprintf/snprintf.h"
 
 
@@ -52,13 +51,12 @@ int get_pidfd_from_fd(const char *pidfdstr)
 int open_pidfd(const char *pidstr)
 {
 	int    proc_dir_fd;
-	char   proc_dir_name[32];
+	char   proc_dir_name[PATH_MAX];
 	pid_t  target;
 
 	if (get_pid(pidstr, &target) == -1)
 		return -ENOENT;
 
-	/* max string length is 6 + 10 + 1 + 1 = 18, allocate 32 bytes */
 	if (SNPRINTF(proc_dir_name, "/proc/%u/", target) == -1) {
 		fprintf(stderr, "snprintf of proc path failed for %u: %s\n",
 			target, strerror(errno));
