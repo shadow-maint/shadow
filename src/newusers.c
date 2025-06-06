@@ -1230,10 +1230,6 @@ int main (int argc, char **argv)
 			newpw.pw_dir = fields[5];
 		}
 
-		if (!streq(fields[6], "")) {
-			newpw.pw_shell = fields[6];
-		}
-
 		if (   !streq(fields[5], "")
 		    && (access (newpw.pw_dir, F_OK) != 0)) {
 /* FIXME: should check for directory */
