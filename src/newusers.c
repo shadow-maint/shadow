@@ -1124,10 +1124,8 @@ int main (int argc, char **argv)
 		 * There MUST be 7 colon separated fields, although the
 		 * values aren't that particular.
 		 */
-		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
+		for (cp = buf, nfields = 0; nfields < 7 && cp != NULL; nfields++) {
 			fields[nfields] = strsep(&cp, ":");
-			if (cp == NULL)
-				break;
 		}
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %jd: invalid line\n"),
