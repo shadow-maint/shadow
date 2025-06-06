@@ -1059,7 +1059,7 @@ static bool want_subgids(void)
 int main (int argc, char **argv)
 {
 	char buf[BUFSIZ];
-	char *fields[8];
+	char *fields[7];
 	int nfields;
 	char *cp;
 	const struct passwd *pw;
