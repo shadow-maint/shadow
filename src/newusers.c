@@ -1059,7 +1059,7 @@ static bool want_subgids(void)
 int main (int argc, char **argv)
 {
 	char buf[BUFSIZ];
-	char *fields[7];
+	char *fields[6];
 	int nfields;
 	char *cp;
 	const struct passwd *pw;
@@ -1124,10 +1124,10 @@ int main (int argc, char **argv)
 		 * There MUST be 7 colon separated fields, although the
 		 * values aren't that particular.
 		 */
-		for (cp = buf, nfields = 0; nfields < 7 && cp != NULL; nfields++) {
+		for (cp = buf, nfields = 0; nfields < 6 && cp != NULL; nfields++) {
 			fields[nfields] = strsep(&cp, ":");
 		}
-		if (nfields != 6) {
+		if (nfields != 6 || cp != NULL) {
 			fprintf (stderr, _("%s: line %jd: invalid line\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE);
