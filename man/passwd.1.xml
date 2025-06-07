@@ -65,26 +65,27 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>passwd</command> command changes passwords for user accounts.
-      A normal user may only change the password for their own account, while
-      the superuser may change the password for any account.
-      <command>passwd</command> also changes the account or associated
-      password validity period.
+      The <command>passwd</command> command changes passwords
+      for user accounts.
+      A regular user can only change the password for their own account,
+      while the superuser can change the password for any account.
+      The <command>passwd</command> also changes the account
+      or associated password validity period.
     </para>
 
     <refsect2 id='password_changes'>
       <title>Password Changes</title>
       <para>
-	The user is first prompted for their old password, if one is
-	present. This password is then encrypted and compared against the
-	stored password. The user has only one chance to enter the correct
-	password. The superuser is permitted to bypass this step so that
-	forgotten passwords may be changed.
+	If the account has a non-empty password,
+	the user is first prompted to enter their current password.
+	The entered password is encrypted and compared to the stored value.
+	The user has only one attempt to enter the correct password.
+	The superuser can bypass this step to allow changing forgotten passwords.
       </para>
 
       <para>
 	After the password has been entered, password aging information is
-	checked to see if the user is permitted to change the password at
+	checked to determine if the user is permitted to change the password at
 	this time. If not, <command>passwd</command> refuses to change the
 	password and exits.
       </para>
@@ -92,14 +93,14 @@
       <para>
 	The user is then prompted twice for a replacement password. The
 	second entry is compared against the first and both are required to
-	match in order for the password to be changed.
+	match for the password to be changed.
       </para>
 
       <para>
 	Then, the password is tested for complexity.
-	<command>passwd</command> will reject any password which is not
-	suitably complex.  Care must be taken not to include the system
-	default erase or kill characters.
+	<command>passwd</command> rejects passwords that do not meet
+	the complexity requirements.
+	Do not include the system default erase or kill characters.
       </para>
 
     </refsect2>
@@ -107,18 +108,18 @@
     <refsect2 id='hints_for_user_passwords'>
       <title>Hints for user passwords</title>
       <para>
-	The security of a password depends upon the strength of the
+	The security of a password depends on the strength of the
 	encryption algorithm and the size of the key space. The legacy
 	<emphasis>UNIX</emphasis> System encryption method is based on the
 	NBS DES algorithm. More recent methods are now recommended (see
 	<option>ENCRYPT_METHOD</option>). The size of the key space
-	depends upon the randomness of the password which is selected.
+	depends on the randomness of the selected password.
       </para>
 
       <para>
 	Compromises in password security normally result from careless
 	password selection or handling. For this reason, you should not
-	select a password which appears in a dictionary or which must be
+	select a password which appears in a dictionary or one that must be
 	written down. The password should also not be a proper name, your
 	license number, birth date, or street address. Any of these may be
 	used as guesses to violate system security.
@@ -165,9 +166,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    Delete a user's password (make it empty). This is a quick way
-	    to disable a password for an account. It will set the named
-	    account passwordless.
+	    Deletes a user's password, making it empty.
+	    This command sets the account to be passwordless.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -228,8 +228,8 @@
 	    Note that this does not disable the account. The user may
 	    still be able to login using another authentication token
 	    (e.g. an SSH key). To disable the account, administrators
-	    should use <command>usermod --expiredate 1</command> (this sets
-	    the account's expire date to 1970-01-02).
+	    should use <command>usermod --expiredate 1</command>
+	    (this sets the account's expire date to 1970-01-02).
 	  </para>
 	  <para>
 	    Users with a locked password are not allowed to change their
@@ -333,10 +333,11 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the number of days of warning before a password change is
-	    required. The <replaceable>WARN_DAYS</replaceable> option is
-	    the number of days prior to the password expiring that a user
-	    will be warned that their password is about to expire.
+	    Set the number of days of warning before a password change is required.
+	    The <replaceable>WARN_DAYS</replaceable> option is
+	    the number of days prior to password expiration
+	    during which the user is warned
+	    that their password is about to expire.
 	  </para>
 	</listitem>
       </varlistentry>

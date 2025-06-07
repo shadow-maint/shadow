@@ -72,15 +72,16 @@
 	<term><emphasis role="bold">encrypted password</emphasis></term>
 	<listitem>
 	  <para>
-	    This field may be empty, in which case no passwords are
-	    required to authenticate as the specified login name.
-	    However, some applications which read the
-	    <filename>/etc/shadow</filename> file may decide not to permit
-	    any access at all if the password field is empty.
+	    If the password field is empty, the user can log in without a password.
+	    However, some applications that read
+	    the <filename>/etc/shadow</filename> file
+	    might block access
+	    if the password field is empty.
 	  </para>
 	  <para>
-	    A password field which starts with an exclamation mark means
-	    that the password is locked.  The remaining characters on the
+	    If the password field begins with an exclamation mark <emphasis>!</emphasis>,
+	    the password is locked.
+	    The remaining characters on the
 	    line represent the password field before the password was
 	    locked.
 	  </para>
@@ -90,11 +91,11 @@
 	    this string is interpreted.
 	  </para>
 	  <para>
-	    If the password field contains some string that is not a valid
+	    If the password field contains a string that is not a valid
 	    result of <citerefentry><refentrytitle>crypt</refentrytitle>
 	    <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
-	    the user will not be able to use a unix password to log in
-	    (but the user may log in the system by other means).
+	    the user cannot use a UNIX password to log in.
+	    However, the user may log in the system by other means.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -108,9 +109,8 @@
 	    of days since 1970-01-01 00:00:00 UTC.
 	  </para>
 	  <para>
-	    The value 0 has a special meaning, which is that the user
-	    should change her password the next time she will log in the
-	    system.
+	    The value 0 indicates that the user must change their password
+	    the next time they log in to the system.
 	  </para>
 	  <para>
 	    An empty field means that password aging features are
@@ -122,9 +122,8 @@
 	<term><emphasis role="bold">minimum password age</emphasis></term>
 	<listitem>
 	  <para>
-	    The minimum password age is the number of days the user will
-	    have to wait before she will be allowed to change her password
-	    again.
+	    The minimum password age is the number of days the user must wait
+	    before they can change their password again.
 	  </para>
 	  <para>
 	    An empty field and value 0 mean that there is no minimum
@@ -137,12 +136,11 @@
 	<listitem>
 	  <para>
 	    The maximum password age is the number of days after which the
-	    user will have to change her password.
+	    user must change their password.
 	  </para>
 	  <para>
-	    After this number of days is elapsed, the password may still
-	    be valid.  The user should be asked to change her password the
-	    next time she will log in.
+	    After this number of days has elapsed, the password may still be valid.
+	    The user is prompted to change their password at the next login.
 	  </para>
 	  <para>
 	    An empty field means that there are no maximum password age,
@@ -161,12 +159,12 @@
 	</term>
 	<listitem>
 	  <para>
-	    The number of days before a password is going to expire (see
-	    the maximum password age above) during which the user should
-	    be warned.
+	    The number of days before a password expires
+	    (see the maximum password age above)
+	    during which the user is warned.
 	  </para>
 	  <para>
-	    An empty field and value 0 mean that there are no password
+	    An empty field and value 0 mean that there is no password
 	    warning period.
 	  </para>
 	</listitem>
@@ -177,19 +175,17 @@
 	</term>
 	<listitem>
 	  <para>
-	    The number of days after a password has expired (see the
-	    maximum password age above) during which the password should
-	    still be accepted (and the user should update her password
-	    during the next login).
+	    The number of days after a password expires
+	    (see the maximum password age above)
+	    during which the password is still accepted,
+	    and the user must update their password at the next login.
 	  </para>
 	  <para>
-	    After expiration of the password and this expiration period is
-	    elapsed, no login is possible for the user. The user should contact
-	    her administrator.
+	    After the password expires and the password inactivity period elapses,
+	    the user cannot log in and must contact their administrator.
 	  </para>
 	  <para>
-	    An empty field means that there are no enforcement of an
-	    inactivity period.
+	    An empty string means that no inactivity period is enforced.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -199,22 +195,22 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date of expiration of the account, expressed as the number
-	    of days since 1970-01-01 00:00:00 UTC.
+	    The date when the account expires,
+	    expressed as the number of days since 1970-01-01.
 	  </para>
 	  <para>
-	    Note that an account expiration differs from a password
-	    expiration.  In case of an account expiration, the user shall
-	    not be allowed to login.  In case of a password expiration,
-	    the user is not allowed to login using her password.
+	    Note that account expiration differs from password expiration.
+	    Account expiration prevents the user from logging in,
+	    whereas password expiration only prevents users from logging in
+	    with their password.
 	  </para>
 	  <para>
-	    An empty field means that the account will never expire.
+	    An empty field means that the account never expires.
 	  </para>
 	  <para>
-	    The value 0 should not be used as it is interpreted as either
-	    an account with no expiration, or as an expiration on Jan 1,
-	    1970.
+	    The value 0 should not be used,
+	    as it is interpreted either as an account with no expiration
+	    or as an expiration date of 1970-01-01.
 	  </para>
 	</listitem>
       </varlistentry>
