@@ -330,7 +330,7 @@ if test "$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; the
 		enable_lastlog="yes"
 	else
 		AC_MSG_ERROR([Cannot enable support for lastlog on systems where the data structures aren't available])
-		enable_subids="no"
+		enable_lastlog="no"
 	fi
 fi
 AM_CONDITIONAL(ENABLE_LASTLOG, test "x$enable_lastlog" != "xno")
