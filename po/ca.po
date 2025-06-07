@@ -234,8 +234,8 @@ msgstr "%s: No s'han pogut establir les «capabilities»\n"
 
 #, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
-msgstr "%s: ha fallat stpeprintf!\n"
+msgid "%s: seprintf failed!\n"
+msgstr "%s: ha fallat seprintf!\n"
 
 #, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
