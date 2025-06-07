@@ -14,6 +14,11 @@
 #include <stdlib.h>
 
 #include "attr.h"
+#include "x.h"
+
+
+// exit-on-error allocate print formatted
+#define xaprintf(...)  X(aprintf(__VA_ARGS__))
 
 
 ATTR_MALLOC(free)

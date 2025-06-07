@@ -32,7 +32,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strftime.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/

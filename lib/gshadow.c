@@ -23,9 +23,9 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
+#include "string/strtok/astrsep2ls.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/xastrsep2ls.h"
 
 
 static /*@null@*/FILE *shadow;
