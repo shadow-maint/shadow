@@ -18,10 +18,11 @@
 #include <fcntl.h>
 #include <string.h>
 
+#include <a2i/str2i.h>
+
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
 #include "alloc/reallocf.h"
-#include "atoi/str2i.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"

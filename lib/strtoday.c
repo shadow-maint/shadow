@@ -12,7 +12,8 @@
 #include <stddef.h>
 #include <time.h>
 
-#include "atoi/str2i.h"
+#include <a2i/str2i.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
