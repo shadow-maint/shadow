@@ -371,12 +371,14 @@ static void init_env (void)
 #endif				/* !USE_PAM */
 }
 
-static void exit_handler (MAYBE_UNUSED int sig)
+static void
+exit_handler(int)
 {
 	_exit (0);
 }
 
-static void alarm_handler (MAYBE_UNUSED int sig)
+static void
+alarm_handler(int)
 {
 	write_full(STDERR_FILENO, tmsg, strlen(tmsg));
 	signal(SIGALRM, exit_handler);
@@ -451,7 +453,9 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
 int main (int argc, char **argv)
 {
 	int            err;
+#if !defined(USE_PAM)
 	bool           subroot = false;
+#endif
 	char           **envp = environ;
 	char           *host = NULL;
 	char           tty[BUFSIZ];
@@ -1019,7 +1023,9 @@ int main (int argc, char **argv)
 	if (strprefix(pwd->pw_shell, "*")) {  /* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */
 		subsystem (pwd);	/* figure out what to execute */
+#if !defined(USE_PAM)
 		subroot = true;	/* say I was here again */
+#endif
 		endpwent ();	/* close all of the file which were */
 		endgrent ();	/* open in the original rooted file */
 		endspent ();	/* system. they will be re-opened */
