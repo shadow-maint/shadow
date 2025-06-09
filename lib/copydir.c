@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
 #include "prototypes.h"
@@ -39,7 +39,6 @@
 #endif				/* WITH_ATTR */
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 
