@@ -20,7 +20,8 @@
 #include "pwauth.h"
 #include "shadowlog.h"
 
-void passwd_check (const char *user, const char *passwd, MAYBE_UNUSED const char *progname)
+void
+passwd_check(const char *user, const char *passwd)
 {
 	struct spwd *sp;
 
