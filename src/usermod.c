@@ -34,8 +34,7 @@
 
 #include "alloc/malloc.h"
 #include "alloc/x/xmalloc.h"
-#include "atoi/a2i/a2i.h"
-#include "atoi/a2i/a2s.h"
+#include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"
