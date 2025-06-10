@@ -8,13 +8,15 @@
 
 #include "config.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 #include "alloc/malloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/astrsep2ls.h"
-#include "string/strtok/xastrsep2ls.h"
 
 #undef NDEBUG
 #include <assert.h>
@@ -198,7 +200,6 @@ comma_to_list(const char *comma)
 {
 	char *members;
 	char **array;
-	size_t  n;
 
 	assert (NULL != comma);
 
@@ -208,10 +209,10 @@ comma_to_list(const char *comma)
 
 	members = xstrdup (comma);
 
-	array = xastrsep2ls(members, ",", &n);
+	array = build_list(members);
+	if (array == NULL)
+		exit(EXIT_FAILURE);
 
-	if (streq(array[n-1], ""))
-		array[n-1] = NULL;
 	if (array[0] == NULL)
 		free(members);
 
