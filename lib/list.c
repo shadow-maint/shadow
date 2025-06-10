@@ -15,11 +15,10 @@
 #include "alloc/x/xmalloc.h"
 #include "prototypes.h"
 #include "defines.h"
-#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/astrsep2ls.h"
-#include "string/strtok/strsep2ls.h"
+#include "string/strtok/xastrsep2ls.h"
 
 
 /*
@@ -199,15 +198,7 @@ comma_to_list(const char *comma)
 
 	members = xstrdup (comma);
 
-	/*
-	 * Allocate the array we're going to store the pointers into.
-	 * n: number of delimiters + last element + NULL
-	 */
-
-	n = strchrcnt(members, ',') + 2;
-	array = XMALLOC(n, char *);
-
-	strsep2ls(members, ",", n, array);
+	array = xastrsep2ls(members, ",", &n);
 
 	if (streq(array[n-1], ""))
 		array[n-1] = NULL;
