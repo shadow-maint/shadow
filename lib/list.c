@@ -142,7 +142,8 @@ dup_list(char *const *list)
 
 	assert (NULL != list);
 
-	for (i = 0; NULL != list[i]; i++);
+	for (i = 0; NULL != list[i]; i++)
+		continue;
 
 	tmp = xmalloc_T(i + 1, char *);
 
