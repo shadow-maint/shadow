@@ -56,7 +56,8 @@
 		return NULL;
 	}
 
-	for (i = 0; NULL != sgent->sg_adm[i]; i++);
+	for (i = 0; NULL != sgent->sg_adm[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_adm = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
@@ -81,7 +82,8 @@
 	}
 	sg->sg_adm[i] = NULL;
 
-	for (i = 0; NULL != sgent->sg_mem[i]; i++);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_mem = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
