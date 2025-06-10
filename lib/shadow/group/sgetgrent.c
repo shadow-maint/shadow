@@ -23,33 +23,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/astrsep2ls.h"
-
-
-/*
- * list - turn a comma-separated string into an array of (char *)'s
- *
- *	list() converts the comma-separated list of member names into
- *	an array of character pointers.
- *
- * FINALLY added dynamic allocation.  Still need to fix sgetsgent().
- *  --marekm
- */
-static char **
-list(char *s)
-{
-	char    **members;
-	size_t  n;
-
-	members = astrsep2ls(s, ",", &n);
-	if (members == NULL)
-		return NULL;
-
-	if (streq(members[n-1], ""))
-		members[n-1] = NULL;
-
-	return members;
-}
 
 
 // from-string get group entry
@@ -82,7 +55,7 @@ sgetgrent(const char *s)
 
 	free(grent.gr_mem);
 
-	grent.gr_mem = list(fields[3]);
+	grent.gr_mem = build_list(fields[3]);
 	if (NULL == grent.gr_mem) {
 		return NULL;	/* out of memory */
 	}
