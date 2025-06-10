@@ -16,9 +16,9 @@
 
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
+#include "string/strtok/astrsep2ls.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/xastrsep2ls.h"
 
 
 #if defined(SHADOWGRP) && !__has_include(<gshadow.h>)
@@ -55,6 +55,9 @@ sgetsgent(const char *s)
 	sgroup.sg_adm = build_list(fields[2]);
 	sgroup.sg_mem = build_list(fields[3]);
 
+	if (sgroup.sg_adm == NULL || sgroup.sg_mem == NULL)
+		return NULL;
+
 	return &sgroup;
 }
 
@@ -65,7 +68,9 @@ build_list(char *s)
 	char    **l;
 	size_t  n;
 
-	l = xastrsep2ls(s, ",", &n);
+	l = astrsep2ls(s, ",", &n);
+	if (l == NULL)
+		return NULL;
 
 	if (streq(l[n-1], ""))
 		l[n-1] = NULL;
