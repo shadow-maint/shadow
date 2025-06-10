@@ -20,7 +20,6 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -44,14 +43,10 @@ sgetgrent(const char *s)
 	if (strsep2arr_a(dup, ":", fields) == -1)
 		return NULL;
 
-	if (streq(fields[2], ""))
-		return NULL;
-
 	grent.gr_name = fields[0];
 	grent.gr_passwd = fields[1];
-	if (get_gid(fields[2], &grent.gr_gid) == -1) {
+	if (get_gid(fields[2], &grent.gr_gid) == -1)
 		return NULL;
-	}
 
 	free(grent.gr_mem);
 
