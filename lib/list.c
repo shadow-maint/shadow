@@ -218,17 +218,12 @@ comma_to_list(const char *comma)
 	n = strchrcnt(members, ',') + 2;
 	array = xmalloc_T(n, char *);
 
-	/*
-	 * Empty list is special - 0 members, not 1 empty member.  --marekm
-	 */
-
-	if (streq(members, "")) {
-		*array = NULL;
-		free (members);
-		return array;
-	}
-
 	strsep2ls(members, ",", n, array);
+
+	if (streq(array[n-1], ""))
+		array[n-1] = NULL;
+	if (array[0] == NULL)
+		free(members);
 
 	return array;
 }
