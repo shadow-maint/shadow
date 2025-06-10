@@ -203,6 +203,7 @@ extern /*@only@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *
 extern /*@only@*/char **dup_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
+extern char **build_list(char *s);
 
 #ifdef ENABLE_LASTLOG
 /* log.c */
