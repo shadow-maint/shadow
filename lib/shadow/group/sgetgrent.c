@@ -38,11 +38,8 @@
 static char **
 list(char *s)
 {
-	static char **members = NULL;
-
+	char    **members;
 	size_t  n;
-
-	free(members);
 
 	members = astrsep2ls(s, ",", &n);
 	if (members == NULL)
@@ -60,7 +57,7 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char         *dup = NULL;
-	static struct group grent;
+	static struct group grent = {};
 
 	char  *fields[4];
 
@@ -82,6 +79,9 @@ sgetgrent(const char *s)
 	if (get_gid(fields[2], &grent.gr_gid) == -1) {
 		return NULL;
 	}
+
+	free(grent.gr_mem);
+
 	grent.gr_mem = list(fields[3]);
 	if (NULL == grent.gr_mem) {
 		return NULL;	/* out of memory */
