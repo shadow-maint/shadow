@@ -683,7 +683,6 @@ AC_CONFIG_FILES([
 	libsubid/Makefile
 	libsubid/subid.h
 	src/Makefile
-	contrib/Makefile
 	etc/Makefile
 	etc/pam.d/Makefile
 	etc/shadow-maint/Makefile
