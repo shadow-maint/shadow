@@ -50,7 +50,7 @@ sgetgrent(const char *s)
 
 	free(grent.gr_mem);
 
-	grent.gr_mem = build_list(fields[3]);
+	grent.gr_mem = acsv2ls(fields[3]);
 	if (NULL == grent.gr_mem) {
 		return NULL;	/* out of memory */
 	}
