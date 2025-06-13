@@ -199,7 +199,7 @@ extern /*@only@*/char **dup_list (char *const *);
 extern void free_list (char **);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
-extern char **build_list(char *s);
+extern char **acsv2ls(char *s);
 
 #ifdef ENABLE_LASTLOG
 /* log.c */
