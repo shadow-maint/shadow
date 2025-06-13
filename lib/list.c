@@ -197,7 +197,7 @@ comma_to_list(const char *comma)
 
 	members = xstrdup (comma);
 
-	array = build_list(members);
+	array = acsv2ls(members);
 	if (array == NULL)
 		exit(EXIT_FAILURE);
 
@@ -209,7 +209,7 @@ comma_to_list(const char *comma)
 
 
 char **
-build_list(char *s)
+acsv2ls(char *s)
 {
 	char    **l;
 	size_t  n;
