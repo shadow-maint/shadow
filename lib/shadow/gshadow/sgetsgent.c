@@ -49,8 +49,8 @@ sgetsgent(const char *s)
 	free(sgroup.sg_adm);
 	free(sgroup.sg_mem);
 
-	sgroup.sg_adm = build_list(fields[2]);
-	sgroup.sg_mem = build_list(fields[3]);
+	sgroup.sg_adm = acsv2ls(fields[2]);
+	sgroup.sg_mem = acsv2ls(fields[3]);
 
 	if (sgroup.sg_adm == NULL || sgroup.sg_mem == NULL)
 		return NULL;
