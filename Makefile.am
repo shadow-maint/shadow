@@ -6,7 +6,7 @@ if ENABLE_SUBIDS
 SUBDIRS += libsubid
 endif
 
-SUBDIRS += src po contrib doc etc tests/unit
+SUBDIRS += src po doc etc tests/unit
 
 if ENABLE_REGENERATE_MAN
 SUBDIRS += man
