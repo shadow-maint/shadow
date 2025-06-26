@@ -14,7 +14,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 
 
 #define smock()               _Generic(mock(), uintmax_t: (intmax_t) mock())
