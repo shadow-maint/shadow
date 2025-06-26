@@ -16,12 +16,9 @@
 #include "sizeof.h"
 
 
-#define addsl(a, b, ...)                                                      \
-({                                                                            \
-	long  addend_[] = {a, b, __VA_ARGS__};                                \
-                                                                              \
-	addslN(countof(addend_), addend_);                                    \
-})
+#define addsl(a, b, ...)  ADDSLN_(((long []){a, b, __VA_ARGS__}))
+
+#define ADDSLN_(a)        addslN(countof(a), a)
 
 
 inline long addsl2(long a, long b);
@@ -55,7 +52,7 @@ addslN(size_t n, long addend[n])
 
 	e = errno;
 	while (n > 1) {
-		QSORT(addend, n);
+		QSORT(long, addend, n);
 
 		errno = 0;
 		addend[0] = addsl2(addend[0], addend[--n]);
