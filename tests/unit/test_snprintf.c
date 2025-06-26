@@ -17,8 +17,8 @@
 #include "string/sprintf/snprintf.h"
 
 
-static void test_SNPRINTF_trunc(void **state);
-static void test_SNPRINTF_ok(void **state);
+static void test_SNPRINTF_trunc(void **);
+static void test_SNPRINTF_ok(void **);
 
 
 int
@@ -34,7 +34,7 @@ main(void)
 
 
 static void
-test_SNPRINTF_trunc(void **state)
+test_SNPRINTF_trunc(void **)
 {
 	char  buf[countof("foo")];
 
@@ -48,7 +48,7 @@ test_SNPRINTF_trunc(void **state)
 
 
 static void
-test_SNPRINTF_ok(void **state)
+test_SNPRINTF_ok(void **)
 {
 	char  buf[countof("foo")];
 
@@ -61,6 +61,9 @@ test_SNPRINTF_ok(void **state)
 	assert_true(SNPRINTF(buf, "f") == strlen("f"));
 	assert_true(strcmp(buf, "f") == 0);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
 	assert_true(SNPRINTF(buf, "") == strlen(""));
+#pragma GCC diagnostic pop
 	assert_true(strcmp(buf, "") == 0);
 }
