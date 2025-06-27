@@ -158,6 +158,17 @@ dup_list(char *const *list)
 }
 
 /*
+ * free_list - free input list
+ */
+void
+free_list(char **list)
+{
+	for (size_t i = 0; list[i] != NULL; i++)
+		free(list[i]);
+	list[0] = NULL;
+}
+
+/*
  * Check if member is part of the input list
  * The input list is not modified, but in order to allow the use of this
  * function with list of members, the list elements are not enforced to be
