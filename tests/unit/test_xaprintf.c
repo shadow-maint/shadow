@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
+#include "string/sprintf/xaprintf.h"
+
 #include <setjmp.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -14,7 +16,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "string/sprintf/xaprintf.h"
+#include "string/strcmp/streq.h"
 
 
 #define smock()               _Generic(mock(), uintmax_t: (intmax_t) mock())
@@ -76,7 +78,7 @@ test_xaprintf_exit(void **state)
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
-		assert_true(strcmp(p, "xaprintf_called"));
+		assert_true(streq(p, "xaprintf_called"));
 		p = "test_ok";
 		break;
 	default:
@@ -84,7 +86,7 @@ test_xaprintf_exit(void **state)
 		break;
 	}
 
-	assert_true(strcmp(p, "test_ok"));
+	assert_true(streq(p, "test_ok"));
 }
 
 
