@@ -132,6 +132,7 @@ test_typetraits_LDADD = \
 test_xaprintf_SOURCES = \
     ../../lib/string/sprintf/aprintf.c \
     ../../lib/string/sprintf/xaprintf.c \
+    ../../lib/string/strcmp/streq.c \
     test_xaprintf.c \
     $(NULL)
 test_xaprintf_CFLAGS = \
