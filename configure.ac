@@ -293,6 +293,7 @@ if test "$enable_man" = "yes"; then
 fi
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test "x$enable_man" != "xno")
 
+AC_CHECK_HEADERS(sys/prctl.h, [], [enable_subids="no"])
 if test "$enable_subids" != "no"; then
 	dnl
 	dnl FIXME: check if 32 bit UIDs/GIDs are supported by libc
