@@ -46,6 +46,13 @@
 #define EXIT_INVALID_GROUP	9	/* specified group does not exist */
 
 /*
+ * Structures
+ */
+struct option_flags {
+	bool chroot;
+};
+
+/*
  * Global variables
  */
 static const char Prog[] = "groupmems";
@@ -73,7 +80,7 @@ static void remove_user (const char *user,
 static void purge_members (const struct group *grp);
 static void display_members (const char *const *members);
 NORETURN static void usage (int status);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_perms (void);
 NORETURN static void fail_exit (int code);
 #define isroot()		(getuid () == 0)
@@ -355,7 +362,7 @@ usage (int status)
 /*
  * process_flags - perform command line argument setting
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -395,6 +402,7 @@ static void process_flags (int argc, char **argv)
 			++exclusive;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		default:
 			usage (EXIT_USAGE);
@@ -521,15 +529,19 @@ static void open_files (void)
 #endif
 }
 
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if ((gr_close (true) == 0) && !list) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
+	if ((gr_close (process_selinux) == 0) && !list) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (EXIT_GROUP_FILE);
 	}
 	if (gr_locked) {
-		if (gr_unlock (true) == 0) {
+		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -539,13 +551,13 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if ((sgr_close (true) == 0) && !list) {
+		if ((sgr_close (process_selinux) == 0) && !list) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (EXIT_GROUP_FILE);
 		}
 		if (sgr_locked) {
-			if (sgr_unlock (true) == 0) {
+			if (sgr_unlock (process_selinux) == 0) {
 				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 				/* continue */
@@ -560,6 +572,7 @@ int main (int argc, char **argv)
 {
 	char *name;
 	const struct group *grp;
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -576,7 +589,7 @@ int main (int argc, char **argv)
 	is_shadowgrp = sgr_file_present ();
 #endif
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	if (NULL == thisgroup) {
 		name = whoami ();
@@ -613,7 +626,7 @@ int main (int argc, char **argv)
 		purge_members (grp);
 	}
 
-	close_files ();
+	close_files (&flags);
 
 	exit (EXIT_SUCCESS);
 }
