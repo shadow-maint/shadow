@@ -56,14 +56,14 @@ static bool gr_locked  = false;
 static bool sgr_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int status);
+static void fail_exit (int status, bool process_selinux);
 static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 
-static void fail_exit (int status)
+static void fail_exit (int status, bool process_selinux)
 {
 	if (gr_locked) {
-		if (gr_unlock (true) == 0) {
+		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -71,7 +71,7 @@ static void fail_exit (int status)
 	}
 
 	if (sgr_locked) {
-		if (sgr_unlock (true) == 0) {
+		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -158,24 +158,24 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	gr_locked = true;
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	if (sgr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, sgr_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	sgr_locked = true;
 	if (sgr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	/*
@@ -194,7 +194,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, sg->sg_namp, sgr_dbname ());
-			fail_exit (3);
+			fail_exit (3, process_selinux);
 		}
 		(void) sgr_rewind ();
 	}
@@ -232,7 +232,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, sgr_dbname (), sgent.sg_namp);
-			fail_exit (3);
+			fail_exit (3, process_selinux);
 		}
 		/* remove password from /etc/group */
 		grent = *gr;
@@ -241,7 +241,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, gr_dbname (), grent.gr_name);
-			fail_exit (3);
+			fail_exit (3, process_selinux);
 		}
 	}
 
@@ -250,14 +250,14 @@ int main (int argc, char **argv)
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 	if (sgr_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
