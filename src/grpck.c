@@ -48,6 +48,13 @@
 #define	E_CANT_UPDATE	5
 
 /*
+ * Structures
+ */
+struct option_flags {
+	bool chroot;
+};
+
+/*
  * Global variables
  */
 static const char Prog[] = "grpck";
@@ -71,9 +78,9 @@ static bool silence_warnings = false;
 static void fail_exit (int status);
 NORETURN static void usage (int status);
 static void delete_member (char **, const char *);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void open_files (void);
-static void close_files (bool changed);
+static void close_files (bool changed, struct option_flags *flags);
 static int check_members (const char *groupname,
                           char **members,
                           const char *fmt_info,
@@ -176,7 +183,7 @@ static void delete_member (char **list, const char *member)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -205,6 +212,7 @@ static void process_flags (int argc, char **argv)
 			read_only = true;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 's':
 			sort_mode = true;
@@ -318,20 +326,24 @@ static void open_files (void)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (bool changed)
+static void close_files (bool changed, struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
 	/*
 	 * All done. If there were no change we can just abandon any
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (gr_close (true) == 0) {
+		if (gr_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
-		if (is_shadow && (sgr_close (true) == 0)) {
+		if (is_shadow && (sgr_close (process_selinux) == 0)) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
 			fail_exit (E_CANT_UPDATE);
@@ -344,7 +356,7 @@ static void close_files (bool changed)
 	 */
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock (true) == 0) {
+		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -353,7 +365,7 @@ static void close_files (bool changed)
 	}
 #endif
 	if (gr_locked) {
-		if (gr_unlock (true) == 0) {
+		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -823,6 +835,7 @@ int main (int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -836,7 +849,7 @@ int main (int argc, char **argv)
 	OPENLOG (Prog);
 
 	/* Parse the command line arguments */
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	open_files ();
 
@@ -858,7 +871,7 @@ int main (int argc, char **argv)
 	}
 
 	/* Commit the change in the database if needed */
-	close_files (changed);
+	close_files (changed, &flags);
 
 	if (!read_only && changed) {
 		nscd_flush_cache ("group");
