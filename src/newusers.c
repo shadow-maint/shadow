@@ -105,7 +105,7 @@ static bool sub_gid_locked = false;
 
 /* local function prototypes */
 NORETURN static void usage (int status);
-NORETURN static void fail_exit (int);
+NORETURN static void fail_exit (int, bool);
 static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_user_id (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
@@ -116,7 +116,7 @@ static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
 static void check_perms (void);
-static void open_files (void);
+static void open_files (bool process_selinux);
 static void close_files (struct option_flags *flags);
 
 extern int allow_bad_names;
@@ -166,24 +166,24 @@ static void usage (int status)
 /*
  * fail_exit - undo as much as possible
  */
-static void fail_exit (int code)
+static void fail_exit (int code, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
 	}
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
 		}
 	}
 	if (gr_locked) {
-		if (gr_unlock (true) == 0) {
+		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -191,7 +191,7 @@ static void fail_exit (int code)
 	}
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
-		if (sgr_unlock (true) == 0) {
+		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -200,14 +200,14 @@ static void fail_exit (int code)
 #endif
 #ifdef ENABLE_SUBIDS
 	if (sub_uid_locked) {
-		if (sub_uid_unlock (true) == 0) {
+		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
 		}
 	}
 	if (sub_gid_locked) {
-		if (sub_gid_unlock (true) == 0) {
+		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -736,7 +736,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 
 			SNPRINTF(buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, !flags->chroot);
 		}
 	}
 
@@ -838,7 +838,7 @@ static void check_perms (void)
 /*
  * open_files - lock and open the password, group and shadow databases
  */
-static void open_files (void)
+static void open_files (bool process_selinux)
 {
 	/*
 	 * Lock the password files and open them for update. This will bring
@@ -850,7 +850,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	pw_locked = true;
 	if (is_shadow) {
@@ -858,7 +858,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		spw_locked = true;
 	}
@@ -866,7 +866,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	gr_locked = true;
 #ifdef SHADOWGRP
@@ -875,7 +875,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		sgr_locked = true;
 	}
@@ -886,7 +886,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sub_uid_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		sub_uid_locked = true;
 	}
@@ -895,7 +895,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sub_gid_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		sub_gid_locked = true;
 	}
@@ -903,20 +903,20 @@ static void open_files (void)
 
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	if (is_shadow && (spw_open (O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 #ifdef SHADOWGRP
 	if (is_shadow_grp && (sgr_open (O_CREAT | O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 #endif
 #ifdef ENABLE_SUBIDS
@@ -925,7 +925,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_uid_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 	}
 	if (is_sub_gid) {
@@ -933,7 +933,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sub_gid_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 	}
 #endif				/* ENABLE_SUBIDS */
@@ -951,7 +951,7 @@ static void close_files (struct option_flags *flags)
 	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
@@ -966,7 +966,7 @@ static void close_files (struct option_flags *flags)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr,
@@ -983,20 +983,20 @@ static void close_files (struct option_flags *flags)
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid  && (sub_uid_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 	if (is_sub_gid  && (sub_gid_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
-		fail_exit (EXIT_FAILURE);
+		fail_exit (EXIT_FAILURE, process_selinux);
 	}
 #endif				/* ENABLE_SUBIDS */
 
@@ -1016,7 +1016,7 @@ static void close_files (struct option_flags *flags)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr,
@@ -1082,6 +1082,7 @@ int main (int argc, char **argv)
 	size_t nusers = 0;
 #endif				/* USE_PAM */
 	struct option_flags  flags;
+	bool process_selinux;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -1096,6 +1097,7 @@ int main (int argc, char **argv)
 	OPENLOG ("newusers");
 
 	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
 	check_perms ();
 
@@ -1109,7 +1111,7 @@ int main (int argc, char **argv)
 	is_sub_gid = sub_gid_file_present () && !rflg;
 #endif				/* ENABLE_SUBIDS */
 
-	open_files ();
+	open_files (process_selinux);
 
 	/*
 	 * Read each line. The line has the same format as a password file
@@ -1125,13 +1127,13 @@ int main (int argc, char **argv)
 		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),
 				 Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		if (STRSEP2ARR(buf, ":", fields) == -1) {
 			fprintf (stderr, _("%s: line %jd: invalid line\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		/*
@@ -1143,14 +1145,14 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 				 _("%s: cannot update the entry of user %s (not in the passwd database)\n"),
 				 Prog, fields[0]);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		if (NULL == pw && get_user_id(fields[2], &uid) != 0) {
 			fprintf (stderr,
 			         _("%s: line %jd: can't create user\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		/*
@@ -1170,7 +1172,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: can't create group\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		/*
@@ -1185,7 +1187,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: can't create user\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 		/*
@@ -1197,7 +1199,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: user '%s' does not exist in %s\n"),
 			         Prog, line, fields[0], pw_dbname ());
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		newpw = *pw;
 
@@ -1211,7 +1213,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: %s\n"),
 			         Prog, line, strerror(errno));
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		lines[nusers-1]     = line;
 		usernames[nusers-1] = xstrdup(fields[0]);
@@ -1221,7 +1223,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: can't update password\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		if (!streq(fields[4], "")) {
 			newpw.pw_gecos = fields[4];
@@ -1244,7 +1246,7 @@ int main (int argc, char **argv)
 				fprintf(stderr,
 					_("%s: line %jd: homedir must be an absolute path\n"),
 					Prog, line);
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
@@ -1252,7 +1254,7 @@ int main (int argc, char **argv)
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
 				if (errno != EEXIST) {
-					fail_exit (EXIT_FAILURE);
+					fail_exit (EXIT_FAILURE, process_selinux);
 				}
 			}
 			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
@@ -1261,7 +1263,7 @@ int main (int argc, char **argv)
 				         _("%s: line %jd: chown %s failed: %s\n"),
 				         Prog, line, newpw.pw_dir,
 				         strerror (errno));
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}
 
@@ -1272,7 +1274,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: line %jd: can't update entry\n"),
 			         Prog, line);
-			fail_exit (EXIT_FAILURE);
+			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
 #ifdef ENABLE_SUBIDS
@@ -1287,14 +1289,14 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 					_("%s: can't find subordinate user range\n"),
 					Prog);
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0)
 			{
 				fprintf (stderr,
 					_("%s: failed to prepare new %s entry\n"),
 					Prog, sub_uid_dbname ());
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}
 
@@ -1308,13 +1310,13 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 					_("%s: can't find subordinate group range\n"),
 					Prog);
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
 				fprintf (stderr,
 					_("%s: failed to prepare new %s entry\n"),
 					Prog, sub_uid_dbname ());
-				fail_exit (EXIT_FAILURE);
+				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}
 #endif				/* ENABLE_SUBIDS */
