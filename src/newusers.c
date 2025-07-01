@@ -61,6 +61,10 @@
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
+struct option_flags {
+	bool chroot;
+};
+
 
 /*
  * Global variables
@@ -110,11 +114,11 @@ static int add_user (const char *, uid_t, gid_t);
 static int update_passwd (struct passwd *, const char *);
 #endif				/* !USE_PAM */
 static int add_passwd (struct passwd *, const char *);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
 static void check_perms (void);
 static void open_files (void);
-static void close_files (void);
+static void close_files (struct option_flags *flags);
 
 extern int allow_bad_names;
 
@@ -624,7 +628,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 #ifndef USE_PAM
@@ -675,6 +679,7 @@ static void process_flags (int argc, char **argv)
 			rflg = true;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 #ifndef USE_PAM
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
@@ -938,14 +943,18 @@ static void open_files (void)
 /*
  * close_files - close and unlock the password, group and shadow databases
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if (pw_close (true) == 0) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (EXIT_FAILURE);
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
@@ -953,14 +962,14 @@ static void close_files (void)
 	pw_locked = false;
 
 	if (is_shadow) {
-		if (spw_close (true) == 0) {
+		if (spw_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 			fail_exit (EXIT_FAILURE);
 		}
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
@@ -970,7 +979,7 @@ static void close_files (void)
 		spw_locked = false;
 	}
 
-	if (gr_close (true) == 0) {
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -978,13 +987,13 @@ static void close_files (void)
 		fail_exit (EXIT_FAILURE);
 	}
 #ifdef ENABLE_SUBIDS
-	if (is_sub_uid  && (sub_uid_close (true) == 0)) {
+	if (is_sub_uid  && (sub_uid_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 		fail_exit (EXIT_FAILURE);
 	}
-	if (is_sub_gid  && (sub_gid_close (true) == 0)) {
+	if (is_sub_gid  && (sub_gid_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
@@ -992,7 +1001,7 @@ static void close_files (void)
 	}
 #endif				/* ENABLE_SUBIDS */
 
-	if (gr_unlock (true) == 0) {
+	if (gr_unlock (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, gr_dbname ());
@@ -1003,14 +1012,14 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close (true) == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (EXIT_FAILURE);
 		}
-		if (sgr_unlock (true) == 0) {
+		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, sgr_dbname ());
@@ -1022,7 +1031,7 @@ static void close_files (void)
 #endif
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
-		if (sub_uid_unlock (true) == 0) {
+		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -1030,7 +1039,7 @@ static void close_files (void)
 		sub_uid_locked = false;
 	}
 	if (is_sub_gid) {
-		if (sub_gid_unlock (true) == 0) {
+		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -1055,6 +1064,7 @@ int main (int argc, char **argv)
 	char **passwords = NULL;
 	size_t nusers = 0;
 #endif				/* USE_PAM */
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -1068,7 +1078,7 @@ int main (int argc, char **argv)
 
 	OPENLOG ("newusers");
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	check_perms ();
 
@@ -1300,7 +1310,7 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	close_files ();
+	close_files (&flags);
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
