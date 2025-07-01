@@ -73,6 +73,14 @@
 #endif				/* ENABLE_SUBIDS */
 
 /*
+ * Structures
+ */
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
+
+/*
  * Global variables
  */
 static const char Prog[] = "userdel";
@@ -87,7 +95,6 @@ static bool rflg = false;
 #ifdef WITH_SELINUX
 static bool Zflg = false;
 #endif
-static bool Rflg = false;
 
 static bool is_shadow_pwd;
 
@@ -905,6 +912,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -954,9 +962,10 @@ int main (int argc, char **argv)
 				rflg = true;
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
-				Rflg = true;
+				flags.chroot = true;
 				break;
 			case 'P': /* no-op, handled in process_prefix_flag () */
+				flags.prefix = true;
 				break;
 #ifdef WITH_SELINUX
 			case 'Z':
@@ -1077,7 +1086,7 @@ int main (int argc, char **argv)
 	 * Note: This is a best effort basis. The user may log in between,
 	 * a cron job may be started on her behalf, etc.
 	 */
-	if (streq(prefix, "") && !Rflg && user_busy(user_name, user_id) != 0) {
+	if (streq(prefix, "") && !flags.chroot && user_busy(user_name, user_id) != 0) {
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
