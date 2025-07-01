@@ -100,6 +100,14 @@
 #define VALID(s)  (!strpbrk(s, ":\n"))
 
 /*
+ * Structures
+ */
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
+
+/*
  * Global variables
  */
 static const char Prog[] = "usermod";
@@ -197,8 +205,8 @@ static void update_gshadow(const struct sgrp *sgrp);
 #endif
 static void grp_update (void);
 
-static void process_flags (int, char **);
-static void close_files (void);
+static void process_flags (int, char **, struct option_flags *);
+static void close_files (struct option_flags *);
 static void open_files (void);
 static void usr_update (void);
 static void move_home (void);
@@ -996,7 +1004,7 @@ static void grp_update (void)
  *	are checked for sanity.
  */
 static void
-process_flags(int argc, char **argv)
+process_flags(int argc, char **argv, struct option_flags *flags)
 {
 	struct stat st;
 	bool anyflag = false;
@@ -1161,8 +1169,10 @@ process_flags(int argc, char **argv)
 				rflg = true;
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
+				flags->chroot = true;
 				break;
 			case 'P': /* no-op, handled in process_prefix_flag () */
+				flags->prefix = true;
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
@@ -1470,16 +1480,20 @@ process_flags(int argc, char **argv)
  *	close_files() closes all of the files that were opened for this new
  *	user. This causes any modified entries to be written out.
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if (pw_close (true) == 0) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_close (true) == 0)) {
+	if (is_shadow_pwd && (spw_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
@@ -1490,7 +1504,7 @@ static void close_files (void)
 	}
 
 	if (Gflg || lflg) {
-		if (gr_close (true) == 0) {
+		if (gr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, gr_dbname ());
@@ -1501,7 +1515,7 @@ static void close_files (void)
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
-			if (sgr_close (true) == 0) {
+			if (sgr_close (process_selinux) == 0) {
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, sgr_dbname ());
@@ -1514,7 +1528,7 @@ static void close_files (void)
 #endif
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
-			if (sgr_unlock (true) == 0) {
+			if (sgr_unlock (process_selinux) == 0) {
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, sgr_dbname ());
@@ -1525,7 +1539,7 @@ static void close_files (void)
 			}
 		}
 #endif
-		if (gr_unlock (true) == 0) {
+		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, gr_dbname ());
@@ -1537,7 +1551,7 @@ static void close_files (void)
 	}
 
 	if (is_shadow_pwd) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
@@ -1547,7 +1561,7 @@ static void close_files (void)
 			/* continue */
 		}
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, pw_dbname ());
@@ -1564,12 +1578,12 @@ static void close_files (void)
 
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
-		if (sub_uid_close (true) == 0) {
+		if (sub_uid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 			fail_exit (E_SUB_UID_UPDATE);
 		}
-		if (sub_uid_unlock (true) == 0) {
+		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -1577,12 +1591,12 @@ static void close_files (void)
 		sub_uid_locked = false;
 	}
 	if (wflg || Wflg) {
-		if (sub_gid_close (true) == 0) {
+		if (sub_gid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);
 		}
-		if (sub_gid_unlock (true) == 0) {
+		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -2163,6 +2177,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -2192,7 +2207,7 @@ int main (int argc, char **argv)
 	is_sub_gid = want_subgid_file() && sub_gid_file_present();
 #endif				/* ENABLE_SUBIDS */
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	/*
 	 * The home directory, the username and the user's UID should not
@@ -2332,7 +2347,7 @@ int main (int argc, char **argv)
 		}
 	}
 #endif				/* ENABLE_SUBIDS */
-	close_files ();
+	close_files (&flags);
 
 #ifdef WITH_TCB
 	if (   (lflg || uflg)
