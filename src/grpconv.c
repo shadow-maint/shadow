@@ -39,6 +39,12 @@
 #include "shadowlog.h"
 #include "sssd.h"
 
+/*
+ * Structures
+ */
+struct option_flags {
+	bool chroot;
+};
 
 /*
  * Global variables
@@ -51,7 +57,7 @@ static bool sgr_locked = false;
 /* local function prototypes */
 static void fail_exit (int status);
 static void usage (int status);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 
 static void fail_exit (int status)
 {
@@ -93,7 +99,7 @@ static void usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -112,6 +118,7 @@ static void process_flags (int argc, char **argv)
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		default:
 			usage (E_USAGE);
@@ -129,6 +136,8 @@ int main (int argc, char **argv)
 	struct group grent;
 	const struct sgrp *sg;
 	struct sgrp sgent;
+	struct option_flags  flags;
+	bool process_selinux;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -141,7 +150,8 @@ int main (int argc, char **argv)
 
 	OPENLOG (Prog);
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
 	if (gr_lock () == 0) {
 		fprintf (stderr,
@@ -234,26 +244,26 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (sgr_close (true) == 0) {
+	if (sgr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 		fail_exit (3);
 	}
-	if (gr_close (true) == 0) {
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (3);
 	}
-	if (sgr_unlock (true) == 0) {
+	if (sgr_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 		/* continue */
 	}
-	if (gr_unlock (true) == 0) {
+	if (gr_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
