@@ -119,7 +119,7 @@ static const char* prefix = "";
 static void usage (int status);
 static void update_groups (void);
 static void remove_usergroup (void);
-static void close_files (void);
+static void close_files (struct option_flags *flags);
 static void fail_exit (int);
 static void open_files (void);
 static void update_user (void);
@@ -396,14 +396,18 @@ static void remove_usergroup (void)
  *	close_files() closes all of the files that were opened for this
  *	new user. This causes any modified entries to be written out.
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if (pw_close (true) == 0) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
@@ -411,13 +415,13 @@ static void close_files (void)
 	pw_locked = false;
 
 	if (is_shadow_pwd) {
-		if (spw_close (true) == 0) {
+		if (spw_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 			fail_exit (E_PW_UPDATE);
 		}
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -425,12 +429,12 @@ static void close_files (void)
 		spw_locked = false;
 	}
 
-	if (gr_close (true) == 0) {
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (gr_unlock (true) == 0) {
+	if (gr_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
@@ -439,14 +443,14 @@ static void close_files (void)
 
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close (true) == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 
-		if (sgr_unlock (true) == 0) {
+		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
@@ -457,12 +461,12 @@ static void close_files (void)
 
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid) {
-		if (sub_uid_close (true) == 0) {
+		if (sub_uid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
 			fail_exit (E_SUB_UID_UPDATE);
 		}
-		if (sub_uid_unlock (true) == 0) {
+		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 			/* continue */
@@ -471,12 +475,12 @@ static void close_files (void)
 	}
 
 	if (is_sub_gid) {
-		if (sub_gid_close (true) == 0) {
+		if (sub_gid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
 			fail_exit (E_SUB_GID_UPDATE);
 		}
-		if (sub_gid_unlock (true) == 0) {
+		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 			/* continue */
@@ -1224,7 +1228,7 @@ int main (int argc, char **argv)
 	 */
 	if (streq(prefix, ""))
 		user_cancel (user_name);
-	close_files ();
+	close_files (&flags);
 
 	if (run_parts ("/etc/shadow-maint/userdel-post.d", user_name, "userdel")) {
 		exit(1);
