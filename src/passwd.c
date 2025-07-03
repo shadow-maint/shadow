@@ -53,6 +53,12 @@
 #define E_PWDBUSY	5	/* passwd file busy, try again later */
 #define E_BAD_ARG	6	/* invalid argument to option */
 #define E_PAM_ERR	10	/* PAM returned an error */
+
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
+
 /*
  * Global variables
  */
@@ -131,9 +137,9 @@ static void print_status (const struct passwd *);
 NORETURN static void fail_exit (int);
 NORETURN static void oom (void);
 static char *update_crypt_pw (char *);
-static void update_noshadow (void);
+static void update_noshadow (struct option_flags *flags);
 
-static void update_shadow (void);
+static void update_shadow (struct option_flags *flags);
 
 /*
  * usage - print command usage and exit
@@ -549,10 +555,13 @@ static char *update_crypt_pw (char *cp)
 }
 
 
-static void update_noshadow (void)
+static void update_noshadow (struct option_flags *flags)
 {
 	const struct passwd *pw;
 	struct passwd *npw;
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (pw_lock () == 0) {
 		(void) fprintf (stderr,
@@ -586,14 +595,14 @@ static void update_noshadow (void)
 		                Prog, pw_dbname (), npw->pw_name);
 		fail_exit (E_FAILURE);
 	}
-	if (pw_close (true) == 0) {
+	if (pw_close (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, pw_dbname ());
@@ -603,10 +612,13 @@ static void update_noshadow (void)
 	pw_locked = false;
 }
 
-static void update_shadow (void)
+static void update_shadow (struct option_flags *flags)
 {
 	const struct spwd *sp;
 	struct spwd *nsp;
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (spw_lock () == 0) {
 		(void) fprintf (stderr,
@@ -625,9 +637,9 @@ static void update_shadow (void)
 	sp = spw_locate (name);
 	if (NULL == sp) {
 		/* Try to update the password in /etc/passwd instead. */
-		(void) spw_close (true);
-		update_noshadow ();
-		if (spw_unlock (true) == 0) {
+		(void) spw_close (process_selinux);
+		update_noshadow (flags);
+		if (spw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr,
 			                _("%s: failed to unlock %s\n"),
 			                Prog, spw_dbname ());
@@ -681,14 +693,14 @@ static void update_shadow (void)
 		                Prog, spw_dbname (), nsp->sp_namp);
 		fail_exit (E_FAILURE);
 	}
-	if (spw_close (true) == 0) {
+	if (spw_close (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	if (spw_unlock (true) == 0) {
+	if (spw_unlock (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, spw_dbname ());
@@ -733,6 +745,7 @@ main(int argc, char **argv)
 	char *cp;		/* Miscellaneous character pointing  */
 
 	const struct spwd *sp;	/* Shadow file entry for user   */
+	struct option_flags  flags;
 
 	sanitize_env ();
 	check_fds ();
@@ -849,8 +862,10 @@ main(int argc, char **argv)
 				}
 				break;
 			case 'R': /* no-op, handled in process_root_flag () */
+				flags.chroot = true;
 				break;
 			case 'P': /* no-op, handled in process_prefix_flag () */
+				flags.prefix = true;
 				break;
 			case 'S':
 				Sflg = true;	/* ok for users */
@@ -1107,9 +1122,9 @@ main(int argc, char **argv)
 		exit (E_NOPERM);
 	}
 	if (spw_file_present ()) {
-		update_shadow ();
+		update_shadow (&flags);
 	} else {
-		update_noshadow ();
+		update_noshadow (&flags);
 	}
 
 	nscd_flush_cache ("passwd");
