@@ -81,14 +81,14 @@ static bool spw_locked = false;
 static bool pw_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int status);
+static void fail_exit (int status, bool process_selinux);
 static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 
-static void fail_exit (int status)
+static void fail_exit (int status, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -96,7 +96,7 @@ static void fail_exit (int status)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -190,26 +190,26 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (E_PWDBUSY);
+		fail_exit (E_PWDBUSY, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (E_MISSING);
+		fail_exit (E_MISSING, process_selinux);
 	}
 
 	if (spw_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
-		fail_exit (E_PWDBUSY);
+		fail_exit (E_PWDBUSY, process_selinux);
 	}
 	spw_locked = true;
 	if (spw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 
 	/*
@@ -228,7 +228,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, sp->sp_namp, spw_dbname ());
-			fail_exit (E_FAILURE);
+			fail_exit (E_FAILURE, process_selinux);
 		}
 		(void) spw_rewind();
 	}
@@ -269,7 +269,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, spw_dbname (), spent.sp_namp);
-			fail_exit (E_FAILURE);
+			fail_exit (E_FAILURE, process_selinux);
 		}
 
 		/* remove password from /etc/passwd */
@@ -279,7 +279,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, pw_dbname (), pwent.pw_name);
-			fail_exit (E_FAILURE);
+			fail_exit (E_FAILURE, process_selinux);
 		}
 	}
 
@@ -288,14 +288,14 @@ int main (int argc, char **argv)
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 
 	/* /etc/passwd- (backup file) */
