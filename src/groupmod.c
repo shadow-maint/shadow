@@ -62,6 +62,10 @@
 #define E_PAM_USERNAME	12	/* can't determine your username for use with pam */
 #define E_PAM_ERROR	13	/* pam returned an error, see Syslog facility id groupmod */
 
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
 
 /*
  * Global variables
@@ -103,11 +107,11 @@ static void new_sgent (struct sgrp *);
 static void grp_update (void);
 static void check_new_gid (void);
 static void check_new_name (void);
-static void process_flags (int, char **);
-static void lock_files (void);
+static void process_flags (int, char **, struct option_flags *);
+static void lock_files (struct option_flags *flags);
 static void prepare_failure_reports (void);
 static void open_files (void);
-static void close_files (void);
+static void close_files (struct option_flags *flags);
 static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 
@@ -407,7 +411,7 @@ check_new_name(void)
  *	values that the user will be created with accordingly. The values
  *	are checked for sanity.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -453,8 +457,10 @@ static void process_flags (int argc, char **argv)
 			pflg = true;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 'P': /* no-op, handled in process_prefix_flag () */
+			flags->prefix = true;
 			break;
 		case 'U':
 			user_list = optarg;
@@ -481,9 +487,13 @@ static void process_flags (int argc, char **argv)
  *	close_files() closes all of the files that were opened for this new
  *	group. This causes any modified entries to be written out.
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if (gr_close (true) == 0) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -500,13 +510,13 @@ static void close_files (void)
 	         gr_dbname (), info_group.action));
 	del_cleanup (cleanup_report_mod_group);
 
-	cleanup_unlock_group (NULL);
+	cleanup_unlock_group (&process_selinux);
 	del_cleanup (cleanup_unlock_group);
 
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
 	    && (pflg || nflg || user_list)) {
-		if (sgr_close (true) == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -530,13 +540,13 @@ static void close_files (void)
 		         sgr_dbname (), info_gshadow.action));
 		del_cleanup (cleanup_report_mod_gshadow);
 
-		cleanup_unlock_gshadow (NULL);
+		cleanup_unlock_gshadow (&process_selinux);
 		del_cleanup (cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
 
 	if (gflg) {
-		if (pw_close (true) == 0) {
+		if (pw_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
@@ -553,7 +563,7 @@ static void close_files (void)
 		         pw_dbname (), info_passwd.action));
 		del_cleanup (cleanup_report_mod_passwd);
 
-		cleanup_unlock_passwd (NULL);
+		cleanup_unlock_passwd (&process_selinux);
 		del_cleanup (cleanup_unlock_passwd);
 	}
 
@@ -659,15 +669,19 @@ static void prepare_failure_reports (void)
  *
  *	lock_files() locks the group, gshadow, and passwd databases.
  */
-static void lock_files (void)
+static void lock_files (struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
-	add_cleanup (cleanup_unlock_group, NULL);
+	add_cleanup (cleanup_unlock_group, &process_selinux);
 
 #ifdef	SHADOWGRP
 	if (   is_shadow_grp
@@ -678,7 +692,7 @@ static void lock_files (void)
 			         Prog, sgr_dbname ());
 			exit (E_GRP_UPDATE);
 		}
-		add_cleanup (cleanup_unlock_gshadow, NULL);
+		add_cleanup (cleanup_unlock_gshadow, &process_selinux);
 	}
 #endif
 
@@ -689,7 +703,7 @@ static void lock_files (void)
 			         Prog, pw_dbname ());
 			exit (E_GRP_UPDATE);
 		}
-		add_cleanup (cleanup_unlock_passwd, NULL);
+		add_cleanup (cleanup_unlock_passwd, &process_selinux);
 	}
 }
 
@@ -773,6 +787,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -796,7 +811,7 @@ int main (int argc, char **argv)
 		exit (E_CLEANUP_SERVICE);
 	}
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -861,7 +876,7 @@ int main (int argc, char **argv)
 		check_new_name ();
 	}
 
-	lock_files ();
+	lock_files (&flags);
 
 	/*
 	 * Now if the group is not changed, it's our fault.
@@ -877,7 +892,7 @@ int main (int argc, char **argv)
 
 	grp_update ();
 
-	close_files ();
+	close_files (&flags);
 
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_GROUP);
