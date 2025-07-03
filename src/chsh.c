@@ -64,13 +64,13 @@ static bool pw_locked = false;
 /* external identifiers */
 
 /* local function prototypes */
-NORETURN static void fail_exit (int code);
+NORETURN static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void new_fields (void);
 static bool shell_is_listed (const char *);
 static bool is_restricted_shell (const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void check_perms (const struct passwd *pw);
+static void check_perms (const struct passwd *pw, struct option_flags *flags);
 static void update_shell (const char *user, char *loginsh,
                           struct option_flags *flags);
 
@@ -79,10 +79,10 @@ static void update_shell (const char *user, char *loginsh,
  */
 NORETURN
 static void
-fail_exit (int code)
+fail_exit (int code, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -268,13 +268,16 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *
  *	It will not return if the user is not allowed.
  */
-static void check_perms (const struct passwd *pw)
+static void check_perms (const struct passwd *pw, struct option_flags *flags)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
 	struct passwd *pampw;
 #endif
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Non-privileged users are only allowed to change the shell if the
@@ -285,7 +288,7 @@ static void check_perms (const struct passwd *pw)
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	/*
@@ -297,7 +300,7 @@ static void check_perms (const struct passwd *pw)
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 #ifdef WITH_SELINUX
 	/*
@@ -310,7 +313,7 @@ static void check_perms (const struct passwd *pw)
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 #endif
 
@@ -381,7 +384,7 @@ static void update_shell (const char *user, char *newshell, struct option_flags 
 	if (setuid (0) != 0) {
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		fputs (_("Cannot change ID to root.\n"), stderr);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 	pwd_init ();
 
@@ -392,13 +395,13 @@ static void update_shell (const char *user, char *newshell, struct option_flags 
 	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	/*
@@ -412,7 +415,7 @@ static void update_shell (const char *user, char *newshell, struct option_flags 
 		fprintf (stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
 		         Prog, user, pw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	/*
@@ -430,7 +433,7 @@ static void update_shell (const char *user, char *newshell, struct option_flags 
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, pw_dbname (), pwent.pw_name);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	/*
@@ -439,7 +442,7 @@ static void update_shell (const char *user, char *newshell, struct option_flags 
 	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
@@ -460,6 +463,7 @@ int main (int argc, char **argv)
 	char *user;		/* User name                         */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct option_flags  flags;
+	bool process_selinux;
 
 	sanitize_env ();
 	check_fds ();
@@ -482,6 +486,7 @@ int main (int argc, char **argv)
 
 	/* parse the command line options */
 	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
 	/*
 	 * Get the name of the user to check. It is either the command line
@@ -490,14 +495,14 @@ int main (int argc, char **argv)
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
 			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (1);
+			fail_exit (1, process_selinux);
 		}
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
 			fprintf (stderr,
 			         _("%s: user '%s' does not exist\n"), Prog, user);
-			fail_exit (1);
+			fail_exit (1, process_selinux);
 		}
 	} else {
 		pw = get_my_pwent ();
@@ -507,12 +512,12 @@ int main (int argc, char **argv)
 			         Prog);
 			SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 			         (unsigned long) getuid ()));
-			fail_exit (1);
+			fail_exit (1, process_selinux);
 		}
 		user = xstrdup (pw->pw_name);
 	}
 
-	check_perms (pw);
+	check_perms (pw, &flags);
 
 	/*
 	 * Now get the login shell. Either get it from the password
@@ -539,7 +544,7 @@ int main (int argc, char **argv)
 	 */
 	if (valid_field (loginsh, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 	if (!streq(loginsh, "")
 	    && (loginsh[0] != '/'
@@ -550,7 +555,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
 		} else {
 			fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
-			fail_exit (1);
+			fail_exit (1, process_selinux);
 		}
 	}
 
