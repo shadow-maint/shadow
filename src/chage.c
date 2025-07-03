@@ -42,6 +42,10 @@
 #include "tcbfuncs.h"
 #endif
 
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
 
 /*
  * Global variables
@@ -79,11 +83,11 @@ NORETURN static void usage (int status);
 static int new_fields (void);
 static void print_day_as_date (long day);
 static void list_fields (void);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (int argc, int opt_index);
 static void check_perms (void);
 static void open_files (bool readonly);
-static void close_files (void);
+static void close_files (struct option_flags *flags);
 NORETURN static void fail_exit (int code);
 
 /*
@@ -338,7 +342,7 @@ static void list_fields (void)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -419,8 +423,10 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 'P': /* no-op, handled in process_prefix_flag () */
+			flags->prefix = true;
 			break;
 		case 'W':
 			Wflg = true;
@@ -540,13 +546,17 @@ static void open_files (bool readonly)
 /*
  * close_files - close and unlock the password/shadow databases
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
 	/*
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
 	 */
-	if (spw_close (true) == 0) {
+	if (spw_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
@@ -557,18 +567,18 @@ static void close_files (void)
 	 * Close the password file. If any entries were modified, the file
 	 * will be re-written.
 	 */
-	if (pw_close (true) == 0) {
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
-	if (spw_unlock (true) == 0) {
+	if (spw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 		/* continue */
 	}
 	spw_locked = false;
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
@@ -712,6 +722,7 @@ int main (int argc, char **argv)
 	uid_t ruid;
 	gid_t rgid;
 	const struct passwd *pw;
+	struct option_flags  flags;
 
 	sanitize_env ();
 	check_fds ();
@@ -740,7 +751,7 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	check_perms ();
 
@@ -849,7 +860,7 @@ int main (int argc, char **argv)
 
 	update_age (sp, pw);
 
-	close_files ();
+	close_files (&flags);
 
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
 
