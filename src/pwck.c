@@ -73,10 +73,10 @@ static bool sort_mode = false;
 static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
-static void fail_exit (int code);
+static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void open_files (void);
+static void open_files (struct option_flags *flags);
 static void close_files (bool changed, struct option_flags *flags);
 static void check_pw_file (bool *errors, bool *changed,
                            struct option_flags *flags);
@@ -87,10 +87,10 @@ extern int allow_bad_names;
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static void fail_exit (int code)
+static void fail_exit (int code, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			if (use_system_spw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -101,7 +101,7 @@ static void fail_exit (int code)
 	}
 
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			if (use_system_pw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -246,12 +246,15 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (void)
+static void open_files (struct option_flags *flags)
 {
 	bool use_tcb = false;
 #ifdef WITH_TCB
 	use_tcb = getdef_bool ("USE_TCB");
 #endif				/* WITH_TCB */
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Lock the files if we aren't in "read-only" mode
@@ -261,7 +264,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, pw_dbname ());
-			fail_exit (E_CANTLOCK);
+			fail_exit (E_CANTLOCK, process_selinux);
 		}
 		pw_locked = true;
 		if (is_shadow && !use_tcb) {
@@ -269,7 +272,7 @@ static void open_files (void)
 				fprintf (stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
 				         Prog, spw_dbname ());
-				fail_exit (E_CANTLOCK);
+				fail_exit (E_CANTLOCK, process_selinux);
 			}
 			spw_locked = true;
 		}
@@ -285,7 +288,7 @@ static void open_files (void)
 		if (use_system_pw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		}
-		fail_exit (E_CANTOPEN);
+		fail_exit (E_CANTOPEN, process_selinux);
 	}
 	if (is_shadow && !use_tcb) {
 		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
@@ -295,7 +298,7 @@ static void open_files (void)
 				SYSLOG ((LOG_WARN, "cannot open %s",
 				         spw_dbname ()));
 			}
-			fail_exit (E_CANTOPEN);
+			fail_exit (E_CANTOPEN, process_selinux);
 		}
 		spw_opened = true;
 	}
@@ -328,7 +331,7 @@ static void close_files (bool changed, struct option_flags *flags)
 				         "failure while writing changes to %s",
 				         pw_dbname ()));
 			}
-			fail_exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE, process_selinux);
 		}
 		if (spw_opened && (spw_close (process_selinux) == 0)) {
 			fprintf (stderr,
@@ -339,7 +342,7 @@ static void close_files (bool changed, struct option_flags *flags)
 				         "failure while writing changes to %s",
 				         spw_dbname ()));
 			}
-			fail_exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE, process_selinux);
 		}
 		spw_opened = false;
 	}
@@ -644,7 +647,7 @@ static void check_pw_file (bool *errors, bool *changed, struct option_flags *fla
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, spw_dbname (), sp.sp_namp);
-						fail_exit (E_CANTUPDATE);
+						fail_exit (E_CANTUPDATE, process_selinux);
 					}
 					/* remove password from /etc/passwd */
 					pw = *pwd;
@@ -653,7 +656,7 @@ static void check_pw_file (bool *errors, bool *changed, struct option_flags *fla
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, pw_dbname (), pw.pw_name);
-						fail_exit (E_CANTUPDATE);
+						fail_exit (E_CANTUPDATE, process_selinux);
 					}
 				}
 			} else {
@@ -854,6 +857,7 @@ int main (int argc, char **argv)
 	bool errors = false;
 	bool changed = false;
 	struct option_flags  flags;
+	bool process_selinux;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -868,22 +872,23 @@ int main (int argc, char **argv)
 
 	/* Parse the command line arguments */
 	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
-	open_files ();
+	open_files (&flags);
 
 	if (sort_mode) {
 		if (pw_sort () != 0) {
 			fprintf (stderr,
 			         _("%s: cannot sort entries in %s\n"),
 			         Prog, pw_dbname ());
-			fail_exit (E_CANTSORT);
+			fail_exit (E_CANTSORT, process_selinux);
 		}
 		if (is_shadow) {
 			if (spw_sort () != 0) {
 				fprintf (stderr,
 				         _("%s: cannot sort entries in %s\n"),
 				         Prog, spw_dbname ());
-				fail_exit (E_CANTSORT);
+				fail_exit (E_CANTSORT, process_selinux);
 			}
 		}
 		changed = true;
