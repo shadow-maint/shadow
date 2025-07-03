@@ -43,21 +43,21 @@ static bool spw_locked = false;
 static bool pw_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int status);
+static void fail_exit (int status, bool process_selinux);
 static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 
-static void fail_exit (int status)
+static void fail_exit (int status, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
 	}
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -154,28 +154,28 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	if (spw_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	spw_locked = true;
 	if (spw_open (O_RDONLY) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, spw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	(void) pw_rewind ();
@@ -208,7 +208,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, pw_dbname (), pwent.pw_name);
-			fail_exit (3);
+			fail_exit (3, process_selinux);
 		}
 	}
 
@@ -219,14 +219,14 @@ int main (int argc, char **argv)
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
 			 _("%s: cannot delete %s\n"), Prog, SHADOW);
 		SYSLOG ((LOG_ERR, "cannot delete %s", SHADOW));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 
 	if (spw_unlock (process_selinux) == 0) {
