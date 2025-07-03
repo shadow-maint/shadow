@@ -67,7 +67,7 @@ static bool pw_locked = false;
  */
 
 /* local function prototypes */
-NORETURN static void fail_exit (int code);
+NORETURN static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
@@ -79,10 +79,10 @@ static void get_old_fields (const char *gecos);
 /*
  * fail_exit - exit with an error and do some cleanup
  */
-static void fail_exit (int code)
+static void fail_exit (int code, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -404,7 +404,7 @@ static void update_gecos (const char *user, char *gecos, struct option_flags *fl
 	if (setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	pwd_init ();
 
@@ -416,13 +416,13 @@ static void update_gecos (const char *user, char *gecos, struct option_flags *fl
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -436,7 +436,7 @@ static void update_gecos (const char *user, char *gecos, struct option_flags *fl
 		fprintf (stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
 		         Prog, user, pw_dbname ());
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -454,7 +454,7 @@ static void update_gecos (const char *user, char *gecos, struct option_flags *fl
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, pw_dbname (), pwent.pw_name);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -463,7 +463,7 @@ static void update_gecos (const char *user, char *gecos, struct option_flags *fl
 	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
@@ -512,7 +512,7 @@ static void get_old_fields (const char *gecos)
  *
  *	It will not return if a field is not valid.
  */
-static void check_fields (void)
+static void check_fields (bool process_selinux)
 {
 	int err;
 	err = valid_field (fullnm, ":,=\n");
@@ -520,7 +520,7 @@ static void check_fields (void)
 		fprintf (stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
 	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	err = valid_field (roomno, ":,=\n");
 	if (err > 0) {
@@ -528,17 +528,17 @@ static void check_fields (void)
 	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
 		         Prog, roomno);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	if (valid_field (workph, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
 		         Prog, workph);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	if (valid_field (homeph, ":,=\n") != 0) {
 		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
 		         Prog, homeph);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	err = valid_field (slop, ":\n");
 	if (err > 0) {
@@ -547,7 +547,7 @@ static void check_fields (void)
 		fprintf (stderr,
 		         _("%s: '%s' contains illegal characters\n"),
 		         Prog, slop);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 }
 
@@ -573,6 +573,7 @@ int main (int argc, char **argv)
 	char                 *user, *p, *e;
 	const struct passwd  *pw;
 	struct option_flags  flags;
+	bool                 process_selinux;
 
 	sanitize_env ();
 	check_fds ();
@@ -596,6 +597,7 @@ int main (int argc, char **argv)
 
 	/* parse the command line options */
 	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
 	/*
 	 * Get the name of the user to check. It is either the command line
@@ -604,14 +606,14 @@ int main (int argc, char **argv)
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
 			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (E_NOPERM);
+			fail_exit (E_NOPERM, process_selinux);
 		}
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
 			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
 			         user);
-			fail_exit (E_NOPERM);
+			fail_exit (E_NOPERM, process_selinux);
 		}
 	} else {
 		pw = get_my_pwent ();
@@ -621,7 +623,7 @@ int main (int argc, char **argv)
 			         Prog);
 			SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 			         (unsigned long) getuid ()));
-			fail_exit (E_NOPERM);
+			fail_exit (E_NOPERM, process_selinux);
 		}
 		user = xstrdup (pw->pw_name);
 	}
@@ -646,7 +648,7 @@ int main (int argc, char **argv)
 	/*
 	 * Check all of the fields for valid information
 	 */
-	check_fields ();
+	check_fields (process_selinux);
 
 	/* Build the new GECOS field by plastering all the pieces together.  */
 	p = new_gecos;
@@ -660,7 +662,7 @@ int main (int argc, char **argv)
 
 	if (p == e || p == NULL) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 
 	/* Rewrite the user's gecos in the passwd file */
