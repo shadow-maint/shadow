@@ -134,9 +134,9 @@ static int new_password (const struct passwd *);
 static void check_password (const struct passwd *, const struct spwd *);
 static /*@observer@*/const char *pw_status (const char *);
 static void print_status (const struct passwd *);
-NORETURN static void fail_exit (int);
-NORETURN static void oom (void);
-static char *update_crypt_pw (char *);
+NORETURN static void fail_exit (int, bool);
+NORETURN static void oom (bool process_selinux);
+static char *update_crypt_pw (char *, bool);
 static void update_noshadow (struct option_flags *flags);
 
 static void update_shadow (struct option_flags *flags);
@@ -486,10 +486,10 @@ static void print_status (const struct passwd *pw)
 
 NORETURN
 static void
-fail_exit (int status)
+fail_exit (int status, bool process_selinux)
 {
 	if (pw_locked) {
-		if (pw_unlock (true) == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -497,7 +497,7 @@ fail_exit (int status)
 	}
 
 	if (spw_locked) {
-		if (spw_unlock (true) == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
@@ -509,13 +509,13 @@ fail_exit (int status)
 
 NORETURN
 static void
-oom (void)
+oom (bool process_selinux)
 {
 	(void) fprintf (stderr, _("%s: out of memory\n"), Prog);
-	fail_exit (E_FAILURE);
+	fail_exit (E_FAILURE, process_selinux);
 }
 
-static char *update_crypt_pw (char *cp)
+static char *update_crypt_pw (char *cp, bool process_selinux)
 {
 	if (!use_pam)
 	{
@@ -533,7 +533,7 @@ static char *update_crypt_pw (char *cp)
 			                _("%s: unlocking the password would result in a passwordless account.\n"
 			                  "You should set a password with usermod -p to unlock the password of this account.\n"),
 			                Prog);
-			fail_exit (E_FAILURE);
+			fail_exit (E_FAILURE, process_selinux);
 		} else {
 			cp++;
 		}
@@ -575,32 +575,32 @@ static void update_noshadow (struct option_flags *flags)
 		                _("%s: cannot open %s\n"),
 		                Prog, pw_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
-		fail_exit (E_MISSING);
+		fail_exit (E_MISSING, process_selinux);
 	}
 	pw = pw_locate (name);
 	if (NULL == pw) {
 		(void) fprintf (stderr,
 		                _("%s: user '%s' does not exist in %s\n"),
 		                Prog, name, pw_dbname ());
-		fail_exit (E_NOPERM);
+		fail_exit (E_NOPERM, process_selinux);
 	}
 	npw = __pw_dup (pw);
 	if (NULL == npw) {
-		oom ();
+		oom (process_selinux);
 	}
-	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
+	npw->pw_passwd = update_crypt_pw (npw->pw_passwd, process_selinux);
 	if (pw_update (npw) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, pw_dbname (), npw->pw_name);
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (pw_close (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		(void) fprintf (stderr,
@@ -632,7 +632,7 @@ static void update_shadow (struct option_flags *flags)
 		                _("%s: cannot open %s\n"),
 		                Prog, spw_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	sp = spw_locate (name);
 	if (NULL == sp) {
@@ -651,9 +651,9 @@ static void update_shadow (struct option_flags *flags)
 	}
 	nsp = __spw_dup (sp);
 	if (NULL == nsp) {
-		oom ();
+		oom (process_selinux);
 	}
-	nsp->sp_pwdp = update_crypt_pw (nsp->sp_pwdp);
+	nsp->sp_pwdp = update_crypt_pw (nsp->sp_pwdp, process_selinux);
 	if (xflg) {
 		nsp->sp_max = age_max;
 	}
@@ -691,14 +691,14 @@ static void update_shadow (struct option_flags *flags)
 		(void) fprintf (stderr,
 		                _("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, spw_dbname (), nsp->sp_namp);
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (spw_close (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
-		fail_exit (E_FAILURE);
+		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (spw_unlock (process_selinux) == 0) {
 		(void) fprintf (stderr,
@@ -746,6 +746,7 @@ main(int argc, char **argv)
 
 	const struct spwd *sp;	/* Shadow file entry for user   */
 	struct option_flags  flags;
+	bool process_selinux;
 
 	sanitize_env ();
 	check_fds ();
@@ -912,6 +913,7 @@ main(int argc, char **argv)
 			}
 		}
 	}
+	process_selinux = !flags.chroot && !flags.prefix;
 
 	/*
 	 * Now I have to get the user name. The name will be gotten from the
@@ -931,7 +933,7 @@ main(int argc, char **argv)
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
 			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
-			fail_exit (E_NOPERM);
+			fail_exit (E_NOPERM, process_selinux);
 		}
 		name = argv[optind];
 	} else {
