@@ -41,6 +41,9 @@
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 
+struct option_flags {
+	bool chroot;
+};
 
 /*
  * Global variables
@@ -88,17 +91,17 @@ NORETURN static void failure(void);
 static void usage (int status);
 static void catch_signals (int killed);
 static bool is_valid_user_list (const char *users);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (int argc, int opt_index);
 static void open_files (void);
-static void close_files (void);
+static void close_files (struct option_flags *flags);
 #ifdef SHADOWGRP
-static void get_group (struct group *gr, struct sgrp *sg);
+static void get_group (struct group *gr, struct sgrp *sg, struct option_flags *flags);
 static void check_perms (const struct group *gr, const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
-static void get_group (struct group *gr);
+static void get_group (struct group *gr, struct option_flags *flags);
 static void check_perms (const struct group *gr);
 static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
@@ -212,7 +215,7 @@ static void failure(void)
 /*
  * process_flags - process the command line options and arguments
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -273,6 +276,7 @@ static void process_flags (int argc, char **argv)
 			Mflg = true;
 			break;
 		case 'Q':	/* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 'r':	/* remove group password */
 			rflg = true;
@@ -592,9 +596,13 @@ static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
  *
  *	It will call exit in case of error.
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
-	if (gr_close (true) == 0) {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -608,7 +616,7 @@ static void close_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_close (true) == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -696,15 +704,18 @@ static void update_group (struct group *gr)
  *	Note: If !is_shadowgrp, *sg will not be initialized.
  */
 #ifdef SHADOWGRP
-static void get_group (struct group *gr, struct sgrp *sg)
+static void get_group (struct group *gr, struct sgrp *sg, struct option_flags *flags)
 #else
-static void get_group (struct group *gr)
+static void get_group (struct group *gr, struct option_flags *flags)
 #endif
 {
 	struct group const*tmpgr = NULL;
 #ifdef SHADOWGRP
 	struct sgrp const*tmpsg = NULL;
 #endif
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	if (gr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
@@ -725,7 +736,7 @@ static void get_group (struct group *gr)
 	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
-	if (gr_close (true) == 0) {
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while closing read-only %s\n"),
 		         Prog, gr_dbname ());
@@ -763,7 +774,7 @@ static void get_group (struct group *gr)
 			sg->sg_adm[0] = NULL;
 
 		}
-		if (sgr_close (true) == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while closing read-only %s\n"),
 			         Prog, sgr_dbname ());
@@ -865,6 +876,7 @@ int main (int argc, char **argv)
 	struct sgrp sgent;
 #endif
 	struct passwd *pw = NULL;
+	struct option_flags  flags;
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
@@ -925,15 +937,15 @@ int main (int argc, char **argv)
 	}
 
 	/* Parse the options */
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	/*
 	 * Replicate the group so it can be modified later on.
 	 */
 #ifdef SHADOWGRP
-	get_group (&grent, &sgent);
+	get_group (&grent, &sgent, &flags);
 #else
-	get_group (&grent);
+	get_group (&grent, &flags);
 #endif
 
 	/*
@@ -1096,7 +1108,7 @@ int main (int argc, char **argv)
 	update_group (&grent);
 #endif
 
-	close_files ();
+	close_files (&flags);
 
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_GROUP);
