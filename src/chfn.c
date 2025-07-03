@@ -39,6 +39,9 @@
 #include "string/strdup/xstrdup.h"
 #include "string/strtok/stpsep.h"
 
+struct option_flags {
+	bool chroot;
+};
 
 /*
  * Global variables.
@@ -68,9 +71,9 @@ NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
 static char *copy_field (char *, char *, char *);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_perms (const struct passwd *pw);
-static void update_gecos (const char *user, char *gecos);
+static void update_gecos (const char *user, char *gecos, struct option_flags *flags);
 static void get_old_fields (const char *gecos);
 
 /*
@@ -250,7 +253,7 @@ static char *copy_field (char *in, char *out, char *extra)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;		/* flag currently being processed    */
 	static struct option long_options[] = {
@@ -316,6 +319,7 @@ static void process_flags (int argc, char **argv)
 			STRTCPY(roomno, optarg);
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 'u':
 			usage (E_SUCCESS);
@@ -423,10 +427,13 @@ static void check_perms (const struct passwd *pw)
  *
  *	Commit the user's entry after changing her gecos field.
  */
-static void update_gecos (const char *user, char *gecos)
+static void update_gecos (const char *user, char *gecos, struct option_flags *flags)
 {
 	const struct passwd *pw;	/* The user's password file entry */
 	struct passwd pwent;		/* modified password file entry */
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
@@ -493,12 +500,12 @@ static void update_gecos (const char *user, char *gecos)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close (true) == 0) {
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
@@ -622,6 +629,7 @@ int main (int argc, char **argv)
 	char                 new_gecos[BUFSIZ];
 	char                 *user;
 	const struct passwd  *pw;
+	struct option_flags  flags;
 
 	sanitize_env ();
 	check_fds ();
@@ -644,7 +652,7 @@ int main (int argc, char **argv)
 	OPENLOG (Prog);
 
 	/* parse the command line options */
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	/*
 	 * Get the name of the user to check. It is either the command line
@@ -711,7 +719,7 @@ int main (int argc, char **argv)
 	         (!streq(slop, "")) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
-	update_gecos (user, new_gecos);
+	update_gecos (user, new_gecos, &flags);
 
 	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
 
