@@ -47,6 +47,9 @@
 #define ETCDIR "/etc"
 #endif
 
+struct option_flags {
+	bool chroot;
+};
 
 /*
  * Global variables
@@ -66,9 +69,10 @@ NORETURN static void usage (int status);
 static void new_fields (void);
 static bool shell_is_listed (const char *);
 static bool is_restricted_shell (const char *);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_perms (const struct passwd *pw);
-static void update_shell (const char *user, char *loginsh);
+static void update_shell (const char *user, char *loginsh,
+                          struct option_flags *flags);
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
@@ -217,7 +221,7 @@ static bool shell_is_listed (const char *sh)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -234,6 +238,7 @@ static void process_flags (int argc, char **argv)
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 's':
 			sflg = true;
@@ -359,10 +364,13 @@ static void check_perms (const struct passwd *pw)
  *
  *	It will not return in case of error.
  */
-static void update_shell (const char *user, char *newshell)
+static void update_shell (const char *user, char *newshell, struct option_flags *flags)
 {
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;		/* New password entry                */
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Before going any further, raise the ulimit to prevent
@@ -428,12 +436,12 @@ static void update_shell (const char *user, char *newshell)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (pw_close (true) == 0) {
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (1);
 	}
-	if (pw_unlock (true) == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
@@ -451,6 +459,7 @@ int main (int argc, char **argv)
 {
 	char *user;		/* User name                         */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
+	struct option_flags  flags;
 
 	sanitize_env ();
 	check_fds ();
@@ -472,7 +481,7 @@ int main (int argc, char **argv)
 	OPENLOG (Prog);
 
 	/* parse the command line options */
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 	/*
 	 * Get the name of the user to check. It is either the command line
@@ -555,7 +564,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	update_shell (user, loginsh);
+	update_shell (user, loginsh, &flags);
 
 	SYSLOG ((LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh));
 
