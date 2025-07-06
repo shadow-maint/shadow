@@ -119,8 +119,6 @@ libshadow_la_SOURCES = \
 	groupio.h \
 	gshadow.c \
 	hushed.c \
-	idmapping.h \
-	idmapping.c \
 	isexpired.c \
 	limits.c \
 	list.c \
@@ -272,6 +270,10 @@ libshadow_la_SOURCES = \
 	xgetgrgid.c \
 	xgetspnam.c \
 	yesno.c
+
+if ENABLE_SUBIDS
+libshadow_la_SOURCES += idmapping.h idmapping.c
+endif
 
 if WITH_TCB
 libshadow_la_SOURCES += tcbfuncs.c tcbfuncs.h
