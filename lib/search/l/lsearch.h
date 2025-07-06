@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,22 +9,36 @@
 #include <config.h>
 
 #include <search.h>
+#include <stddef.h>
+#include <sys/types.h>
 
 #include "search/cmp/cmp.h"
 #include "typetraits.h"
 
-#include <assert.h>
+
+#define LSEARCH(T, ...)                                               \
+(                                                                     \
+	_Generic((T) 0,                                               \
+		int:     LSEARCH__ ## int,                            \
+		long:    LSEARCH__ ## long,                           \
+		u_int:   LSEARCH__ ## u_int,                          \
+		u_long:  LSEARCH__ ## u_long                          \
+	)(__VA_ARGS__)                                                \
+)
 
 
-#define LSEARCH(k, a, n)                                              \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lsearch(k_, a_, n, sizeof(*k_), CMP(typeof(k_)));\
-})
+#define template_LSEARCH(T)                                           \
+inline void                                                           \
+LSEARCH__ ## T(size_t *n;                                             \
+    const T *k, T a[*n], size_t *n)                                   \
+{                                                                     \
+	lsearch(k, a, n, sizeof(T), CMP(T));                          \
+}
+template_LSEARCH(int);
+template_LSEARCH(long);
+template_LSEARCH(u_int);
+template_LSEARCH(u_long);
+#undef template_LSEARCH
 
 
 #endif  // include guard
