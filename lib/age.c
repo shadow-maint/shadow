@@ -20,6 +20,7 @@
 #include "defines.h"
 #include "exitcodes.h"
 #include "prototypes.h"
+#include "shadow/gshadow/endsgent.h"
 
 
 #ident "$Id$"
@@ -124,7 +125,8 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 		exit (EXIT_FAILURE);
 	}
 
-	while (((child = wait (&status)) != pid) && (child != (pid_t)-1));
+	while (((child = wait (&status)) != pid) && (child != (pid_t)-1))
+		continue;
 
 	if ((child == pid) && (0 == status)) {
 		return 1;

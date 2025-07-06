@@ -22,6 +22,10 @@
 #include "fields.h"
 #include "getdef.h"
 #include "sgroupio.h"
+#include "shadow/gshadow/gshadow.h"
+#include "shadow/gshadow/putsgent.h"
+#include "shadow/gshadow/sgetsgent.h"
+#include "shadow/gshadow/sgrp.h"
 #include "string/memset/memzero.h"
 
 
@@ -52,7 +56,8 @@
 		return NULL;
 	}
 
-	for (i = 0; NULL != sgent->sg_adm[i]; i++);
+	for (i = 0; NULL != sgent->sg_adm[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_adm = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
@@ -77,7 +82,8 @@
 	}
 	sg->sg_adm[i] = NULL;
 
-	for (i = 0; NULL != sgent->sg_mem[i]; i++);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++)
+		continue;
 	/*@-mustfreeonly@*/
 	sg->sg_mem = MALLOC(i + 1, char *);
 	/*@=mustfreeonly@*/
@@ -205,7 +211,7 @@ static struct commonio_ops gshadow_ops = {
 };
 
 static struct commonio_db gshadow_db = {
-	SGROUP_FILE,		/* filename */
+	GSHADOW_FILE,		/* filename */
 	&gshadow_ops,		/* ops */
 	NULL,			/* fp */
 #ifdef WITH_SELINUX
