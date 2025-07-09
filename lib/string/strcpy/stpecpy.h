@@ -8,6 +8,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
@@ -50,16 +51,14 @@ inline char *stpecpy(char *p, char *end, const char *restrict src);
  *		•  On success, this function returns a pointer to the
  *		   terminating NUL byte.
  *
- *	end
- *		•  If this call truncated the resulting string.
- *		•  If `p == end` (a previous chained call to these
- *		   functions truncated).
  *	NULL
+ *		•  If this call truncated the resulting string.
  *		•  If `p == NULL` (a previous chained call to
- *		   [v]stpeprintf() failed).
+ *		   [v]stpeprintf() failed or truncated).
  *
  * ERRORS
- *	This function doesn't set errno.
+ *	E2BIG
+ *		•  If this call truncated the resulting string.
  */
 
 
@@ -70,8 +69,6 @@ stpecpy(char *p, char *end, const char *restrict src)
 	bool    trunc;
 	size_t  dsize, dlen, slen;
 
-	if (p == end)
-		return end;
 	if (p == NULL)
 		return NULL;
 
@@ -80,7 +77,13 @@ stpecpy(char *p, char *end, const char *restrict src)
 	trunc = (slen == dsize);
 	dlen = slen - trunc;
 
-	return stpcpy(mempcpy(p, src, dlen), "") + trunc;
+	p = stpcpy(mempcpy(p, src, dlen), "");
+
+	if (trunc) {
+		errno = E2BIG;
+		return NULL;
+	}
+	return p;
 }
 #endif
 
