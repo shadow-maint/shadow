@@ -10,8 +10,8 @@
 
 
 #if !defined(HAVE_STPEPRINTF)
-extern inline char *stpeprintf(char *dst, char *end, const char *restrict fmt,
-    ...);
-extern inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
-    va_list ap);
+extern inline char *stpeprintf(char *dst, const char *end,
+    const char *restrict fmt, ...);
+extern inline char *vstpeprintf(char *dst, const char *end,
+    const char *restrict fmt, va_list ap);
 #endif
