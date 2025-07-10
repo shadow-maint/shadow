@@ -356,7 +356,7 @@ if test "X$enable_logind" = "Xyes"; then
 		]
 	)
 fi
-AM_CONDITIONAL([ENABLE_LOGIND], [test "x$enable_logind" != "xno"])
+AM_CONDITIONAL([ENABLE_LOGIND], [test "X$enable_logind" = "Xyes"])
 
 AC_CHECK_LIB([crypt], [crypt], [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
