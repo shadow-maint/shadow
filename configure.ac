@@ -346,10 +346,14 @@ AM_CONDITIONAL([ENABLE_LASTLOG], [test "x$enable_lastlog" != "xno"])
 AC_SUBST([LIBSYSTEMD])
 if test "X$enable_logind" = "Xyes"; then
 	AC_CHECK_LIB([systemd], [sd_session_get_remote_host],
-		[enable_logind="yes"; [LIBSYSTEMD=-lsystemd];
-		AC_DEFINE([ENABLE_LOGIND], [1],
-			[Define to manage session support with logind.])],
-		[enable_logind="no"])
+		[
+			enable_logind="yes"
+			LIBSYSTEMD=-lsystemd
+			AC_DEFINE([ENABLE_LOGIND], [1], [Define to manage session support with logind.])
+		],[
+			enable_logind="no"
+		]
+	)
 fi
 AM_CONDITIONAL([ENABLE_LOGIND], [test "x$enable_logind" != "xno"])
 
