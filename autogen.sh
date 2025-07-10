@@ -18,6 +18,7 @@ CFLAGS="$CFLAGS -Wno-unknown-warning-option"
 "$(dirname "$0")"/configure \
 	CFLAGS="$CFLAGS" \
 	--enable-lastlog \
+	--disable-logind \
 	--enable-man \
 	--enable-maintainer-mode \
 	--enable-shared \
