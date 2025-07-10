@@ -463,17 +463,18 @@ extern int user_busy (const char *name, uid_t uid);
 /*
  * Session management: utmp.c or logind.c
  */
+#ifdef ENABLE_UTMP
 
 /**
- * @brief Get host for the current session
+ * @brief Get host for the current session from utmp
  *
  * @param[out] out Host name
  *
  * @return 0 or a positive integer if the host was obtained properly,
  *         another value on error.
  */
-extern int get_session_host (char **out);
-#ifndef ENABLE_LOGIND
+extern int get_session_host_utmp (char **out);
+
 /**
  * @brief Update or create an utmp entry in utmp, wtmp, utmpw, or wtmpx
  *
@@ -498,19 +499,50 @@ extern int update_utmp (const char *user,
 extern void record_failure(const char *failent_user,
                            const char *tty,
                            const char *hostname);
-#endif /* ENABLE_LOGIND */
 
 /**
- * @brief Number of active user sessions
+ * @brief Check if the number of active utmp user sessions has exceeded limit
  *
  * @param[in] name username
  * @param[in] limit maximum number of active sessions
  *
- * @return number of active sessions.
+ * @return 1 if number of active user sessions has exceeded the limit,
+ *         0 if number of active user sessions less or equal the limit,
+ *         -1 on error
  *
  */
-extern unsigned long active_sessions_count(const char *name,
-                                           unsigned long limit);
+extern int active_sessions_limit_exceeded_utmp(const char *name,
+											   unsigned long limit);
+
+#endif /* ENABLE_UTMP */
+#ifdef ENABLE_LOGIND
+
+/**
+ * @brief Get host for the current session from logind
+ *
+ * @param[out] out Host name
+ *
+ * @return 0 or a positive integer if the host was obtained properly,
+ *         another value on error.
+ */
+extern int get_session_host_lgnd (char **out);
+
+/**
+ * @brief Check if the number of active logind user sessions has exceeded limit
+ *
+ * @param[in] name username
+ * @param[in] limit maximum number of active sessions
+ *
+ * @return 1 if number of active user sessions has exceeded the limit,
+ *         0 if number of active user sessions less or equal the limit,
+ *         -1 on error
+ *
+ */
+extern int active_sessions_limit_exceeded_lgnd(const char *name,
+											   unsigned long limit);
+
+#endif /* ENABLE_LOGIND */
+
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
