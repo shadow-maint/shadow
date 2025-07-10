@@ -62,7 +62,7 @@ jobs:
         tar -zxf $f
         d=$(basename $f .tar.gz)
         cd $d
-        ./configure
+        ./configure --disable-logind
         make -j5
         make check
 

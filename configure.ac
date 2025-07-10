@@ -152,13 +152,14 @@ AC_ARG_ENABLE([lastlog],
 )
 
 AC_ARG_ENABLE([logind],
-	[AS_HELP_STRING([--enable-logind],
-		[enable logind @<:@default=yes if found@:>@])],
+	[AS_HELP_STRING([--disable-logind],
+		[disable logind integration])],
 	[
 		AS_CASE([${enableval}],
 			[yes],[],
 			[no],[],
-			[AC_MSG_ERROR([bad parameter value for --enable-logind=${enableval}])]
+			[AC_MSG_ERROR([bad parameter value for --enable-logind=${enableval}.  ]dnl
+[Supported values are: --enable-logind (or --enable-logind=yes) and --disable-logind (or --enable-logind=no).])]
 		)
 	],
 	[enable_logind="yes"]
@@ -347,11 +348,11 @@ AC_SUBST([LIBSYSTEMD])
 if test "X$enable_logind" = "Xyes"; then
 	AC_CHECK_LIB([systemd], [sd_session_get_remote_host],
 		[
-			enable_logind="yes"
 			LIBSYSTEMD=-lsystemd
 			AC_DEFINE([ENABLE_LOGIND], [1], [Define to manage session support with logind.])
 		],[
-			enable_logind="no"
+			AC_MSG_ERROR([libsystemd not found.  If logind integration is not required, disable it using the --disable-logind option. ]dnl
+[ If logind integration is required, consider installing systemd or another package that provides libsystemd.])
 		]
 	)
 fi
