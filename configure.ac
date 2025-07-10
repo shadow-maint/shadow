@@ -158,10 +158,11 @@ AC_ARG_ENABLE([logind],
 		AS_CASE([${enableval}],
 			[yes],[],
 			[no],[],
+			[maybe|auto],[enable_logind="auto"],
 			[AC_MSG_ERROR([bad parameter value for --enable-logind=${enableval}])]
 		)
 	],
-	[enable_logind="yes"]
+	[enable_logind="auto"]
 )
 
 AC_ARG_WITH([audit],
@@ -344,18 +345,20 @@ fi
 AM_CONDITIONAL([ENABLE_LASTLOG], [test "x$enable_lastlog" != "xno"])
 
 AC_SUBST([LIBSYSTEMD])
-if test "X$enable_logind" = "Xyes"; then
+if test "X$enable_logind" != "Xno"; then
 	AC_CHECK_LIB([systemd], [sd_session_get_remote_host],
 		[
 			enable_logind="yes"
 			LIBSYSTEMD=-lsystemd
 			AC_DEFINE([ENABLE_LOGIND], [1], [Define to manage session support with logind.])
 		],[
+			AS_IF([test "X$enable_logind" = "Xyes"],
+				[AC_MSG_ERROR([libsystemd not found, logind cannot be enabled])])
 			enable_logind="no"
 		]
 	)
 fi
-AM_CONDITIONAL([ENABLE_LOGIND], [test "x$enable_logind" != "xno"])
+AM_CONDITIONAL([ENABLE_LOGIND], [test "x$enable_logind" = "xyes"])
 
 AC_CHECK_LIB([crypt], [crypt], [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
