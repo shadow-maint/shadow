@@ -20,7 +20,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
@@ -60,7 +60,7 @@ bool hushed (const char *username)
 	 */
 
 	if (hushfile[0] != '/') {
-		SNPRINTF(buf, "%s/%s", pw->pw_dir, hushfile);
+		STPRINTF(buf, "%s/%s", pw->pw_dir, hushfile);
 		return (access (buf, F_OK) == 0);
 	}
 
