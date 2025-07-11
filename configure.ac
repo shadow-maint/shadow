@@ -345,13 +345,9 @@ if test "$enable_logind" = "yes"; then
 fi
 AM_CONDITIONAL(ENABLE_LOGIND, test "x$enable_logind" != "xno")
 
-AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
 	[AC_MSG_ERROR([crypt() not found])])
-
-AC_SUBST(LIYESCRYPT)
-AC_CHECK_LIB(crypt, crypt, [LIYESCRYPT=-lcrypt],
-	[AC_MSG_ERROR([crypt() not found])])
+AC_SUBST(LIBCRYPT)
 
 AC_SUBST(LIBBSD)
 if test "$with_libbsd" != "no"; then
