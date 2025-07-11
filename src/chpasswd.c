@@ -22,6 +22,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "atoi/str2i.h"
+#include "chkhash.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -554,6 +555,21 @@ int main (int argc, char **argv)
 		} else
 #endif				/* USE_PAM */
 		{
+
+		/*
+		 * Prevent adding a non valid hash to /etc/shadow and
+		 * potentialy lock account
+		 */
+
+		if (eflg) {
+			if (!is_valid_hash(newpwd)) {
+				fprintf (stderr,
+					_("%s: (line %jd, user %s) invalid password hash\n"),
+					Prog, line, name);
+				errors = true;
+				continue;
+			}
+		}
 		const struct spwd *sp;
 		struct spwd newsp;
 		const struct passwd *pw;

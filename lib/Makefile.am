@@ -75,6 +75,8 @@ libshadow_la_SOURCES = \
 	cast.h \
 	chkname.c \
 	chkname.h \
+	chkhash.c \
+	chkhash.h \
 	chowndir.c \
 	chowntty.c \
 	cleanup.c \
