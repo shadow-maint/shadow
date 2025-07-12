@@ -687,30 +687,28 @@ AC_CONFIG_FILES([
 ])
 AC_OUTPUT
 
-echo
-echo "shadow will be compiled with the following features:"
-echo
-echo "	auditing support:		$with_audit"
-echo "	PAM support:			$with_libpam"
-if test "X$with_libpam" = "Xyes"; then
-echo "	suid account management tools:	$enable_acct_tools_setuid"
-fi
-echo "	SELinux support:		$with_selinux"
-echo "	BtrFS support:			$with_btrfs"
-echo "	ACL support:			$with_acl"
-echo "	Extended Attributes support:	$with_attr"
-echo "	tcb support (incomplete):	$with_tcb"
-echo "	shadow group support:		$enable_shadowgrp"
-echo "	S/Key support:			$with_skey"
-echo "	SHA passwords encryption:	$with_sha_crypt"
-echo "	bcrypt passwords encryption:	$with_bcrypt"
-echo "	yescrypt passwords encryption:	$with_yescrypt"
-echo "	nscd support:			$with_nscd"
-echo "	sssd support:			$with_sssd"
-echo "	subordinate IDs support:	$enable_subids"
-echo "	enable lastlog:			$enable_lastlog"
-echo "	enable logind:			$enable_logind"
-echo "	use file caps:			$with_fcaps"
-echo "	install su:			$with_su"
-echo "	enabled vendor dir:             $enable_vendordir"
-echo
+AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following features:
+
+	auditing support:		$with_audit
+	PAM support:			$with_libpam
+	suid account management tools:	$enable_acct_tools_setuid
+	SELinux support:		$with_selinux
+	BtrFS support:			$with_btrfs
+	ACL support:			$with_acl
+	Extended Attributes support:	$with_attr
+	tcb support (incomplete):	$with_tcb
+	shadow group support:		$enable_shadowgrp
+	S/Key support:			$with_skey
+	SHA passwords encryption:	$with_sha_crypt
+	bcrypt passwords encryption:	$with_bcrypt
+	yescrypt passwords encryption:	$with_yescrypt
+	nscd support:			$with_nscd
+	sssd support:			$with_sssd
+	subordinate IDs support:	$enable_subids
+	enable lastlog:			$enable_lastlog
+	enable logind:			$enable_logind
+	use file caps:			$with_fcaps
+	install su:			$with_su
+	enabled vendor dir:             $enable_vendordir
+
+])
