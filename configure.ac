@@ -584,16 +584,15 @@ if test "$with_libpam" = "yes"; then
 
 	AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
 	AC_DEFINE_UNQUOTED(SHADOW_PAM_CONVERSATION, [$pam_conv_function],[PAM conversation to use])
-	AM_CONDITIONAL(USE_PAM, [true])
 
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_MSG_RESULT(no)
 else
 	AC_DEFINE(SU_ACCESS, 1, [Define to support /etc/suauth su access control.])
-	AM_CONDITIONAL(USE_PAM, [false])
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_MSG_RESULT(yes)
 fi
+AM_CONDITIONAL([USE_PAM], [test "X$with_libpam" = "Xyes"])
 
 if test "$enable_acct_tools_setuid" != "no"; then
 	if test "$with_libpam" != "yes"; then
