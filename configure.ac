@@ -561,7 +561,7 @@ if test "$with_libpam" != "no"; then
 	fi
 
 
-	if test "X$pam_lib$pam_headers_found" = "Xyesyes" -a "$pam_conv_function" != "no" ; then
+	if test "X$pam_lib$pam_headers_found" = "Xyesyes" && test "$pam_conv_function" != "no" ; then
 		with_libpam="yes"
 	else
 		with_libpam="no"
