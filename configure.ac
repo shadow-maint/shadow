@@ -297,8 +297,8 @@ if test "$enable_subids" != "no"; then
 	dnl
 	dnl FIXME: check if 32 bit UIDs/GIDs are supported by libc
 	dnl
-	AC_CHECK_SIZEOF([uid_t],[], [#include "sys/types.h"])
-	AC_CHECK_SIZEOF([gid_t],[], [#include "sys/types.h"])
+	AC_CHECK_SIZEOF([uid_t],[], [[#include "sys/types.h"]])
+	AC_CHECK_SIZEOF([gid_t],[], [[#include "sys/types.h"]])
 
 	if test "$ac_cv_sizeof_uid_t" -ge 4 && test "$ac_cv_sizeof_gid_t" -ge 4; then
 		AC_DEFINE([ENABLE_SUBIDS], [1], [Define to support the subordinate IDs.])
@@ -315,7 +315,7 @@ AM_CONDITIONAL([ENABLE_SUBIDS], [test "x$enable_subids" != "xno"])
 if test "$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; then
 	AC_CACHE_CHECK([for ll_host in struct lastlog],
 		[ac_cv_struct_lastlog_ll_host],
-		[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <lastlog.h>],
+		[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <lastlog.h>]],
 					[struct lastlog ll; char *cp = ll.ll_host;])],
 			[ac_cv_struct_lastlog_ll_host=yes],
 			[ac_cv_struct_lastlog_ll_host=no])
@@ -428,10 +428,10 @@ if test "$with_audit" != "no"; then
 	if test "$audit_header$with_audit" = "noyes" ; then
 		AC_MSG_ERROR([libaudit.h is missing])
 	elif test "$audit_header" = "yes"; then
-		AC_CHECK_DECL([AUDIT_ADD_USER],[],[audit_header="no"],[#include <libaudit.h>])
-		AC_CHECK_DECL([AUDIT_DEL_USER],[],[audit_header="no"],[#include <libaudit.h>])
-		AC_CHECK_DECL([AUDIT_ADD_GROUP],[],[audit_header="no"],[#include <libaudit.h>])
-		AC_CHECK_DECL([AUDIT_DEL_GROUP],[],[audit_header="no"],[#include <libaudit.h>])
+		AC_CHECK_DECL([AUDIT_ADD_USER],[],[audit_header="no"],[[#include <libaudit.h>]])
+		AC_CHECK_DECL([AUDIT_DEL_USER],[],[audit_header="no"],[[#include <libaudit.h>]])
+		AC_CHECK_DECL([AUDIT_ADD_GROUP],[],[audit_header="no"],[[#include <libaudit.h>]])
+		AC_CHECK_DECL([AUDIT_DEL_GROUP],[],[audit_header="no"],[[#include <libaudit.h>]])
 		if test "$audit_header$with_audit" = "noyes" ; then
 			AC_MSG_ERROR([AUDIT_ADD_USER AUDIT_DEL_USER AUDIT_ADD_GROUP or AUDIT_DEL_GROUP missing from libaudit.h])
 		fi
@@ -552,7 +552,7 @@ if test "$with_libpam" != "no"; then
 	pam_headers_found=no
 	AC_CHECK_HEADERS( [security/openpam.h security/pam_misc.h],
 	                 [ pam_headers_found=yes ; break ], [],
-	                 [ #include <security/pam_appl.h> ] )
+	                 [[#include <security/pam_appl.h>]] )
 	if test "$pam_headers_found$with_libpam" = "noyes" ; then
 	                AC_MSG_ERROR([PAM headers not found])
 	fi
@@ -571,7 +571,7 @@ if test "$with_libpam" = "yes"; then
 	                PAM_DELETE_CRED,
 	                PAM_NEW_AUTHTOK_REQD,
 	                PAM_DATA_SILENT],
-	               [], [], [#include <security/pam_appl.h>])
+	               [], [], [[#include <security/pam_appl.h>]])
 
 
 	save_libs=$LIBS
