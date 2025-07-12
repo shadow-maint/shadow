@@ -254,13 +254,13 @@ PKG_CHECK_MODULES([CMOCKA], [cmocka], [have_cmocka="yes"],
 	[AC_MSG_WARN([libcmocka not found, cmocka tests will not be built])])
 AM_CONDITIONAL([HAVE_CMOCKA], [test x$have_cmocka = xyes])
 
+AC_ARG_ENABLE([vendordir],
+    [AS_HELP_STRING([--enable-vendordir=DIR], [Directory for distribution provided configuration files])],[],[])
 AC_CHECK_LIB([econf],[econf_readDirs],[LIBECONF="-leconf"],[LIBECONF=""])
 if test -n "$LIBECONF"; then
         AC_DEFINE_UNQUOTED([VENDORDIR], ["$enable_vendordir"],
 					[Directory for distribution provided configuration files])
 	ECONF_CPPFLAGS="-DUSE_ECONF=1"
-	AC_ARG_ENABLE([vendordir],
-		[AS_HELP_STRING([--enable-vendordir=DIR], [Directory for distribution provided configuration files])],[],[])
 fi
 AC_SUBST([ECONF_CPPFLAGS])
 AC_SUBST([LIBECONF])
