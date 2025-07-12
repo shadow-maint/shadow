@@ -20,8 +20,8 @@ AC_SUBST([LIBSUBID_ABI_MICRO], [libsubid_abi_micro])
 AC_SUBST([LIBSUBID_ABI], [libsubid_abi])
 
 dnl Some hacks...
-test "$prefix" = "NONE" && prefix="/usr"
-test "$prefix" = "/usr" && exec_prefix=""
+test "x$prefix" = "xNONE" && prefix="/usr"
+test "X$prefix" = "X/usr" && exec_prefix=""
 
 AC_USE_SYSTEM_EXTENSIONS
 
@@ -207,9 +207,9 @@ AC_ARG_WITH([libbsd],
 	[AS_HELP_STRING([--with-libbsd], [use libbsd support @<:@default=yes if found@:>@])],
 	[with_libbsd=$withval], [with_libbsd=yes])
 
-if test "$with_group_name_max_length" = "no" ; then
+if test "X$with_group_name_max_length" = "Xno" ; then
 	with_group_name_max_length=0
-elif test "$with_group_name_max_length" = "yes" ; then
+elif test "X$with_group_name_max_length" = "Xyes" ; then
 	with_group_name_max_length=32
 fi
 AC_DEFINE_UNQUOTED([GROUP_NAME_MAX_LENGTH], [$with_group_name_max_length], [max group name length])
@@ -218,27 +218,27 @@ GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 
 
 AM_CONDITIONAL([USE_SHA_CRYPT], [test "x$with_sha_crypt" = "xyes"])
-if test "$with_sha_crypt" = "yes"; then
+if test "X$with_sha_crypt" = "Xyes"; then
 	AC_DEFINE([USE_SHA_CRYPT], [1], [Define to allow the SHA256 and SHA512 password encryption algorithms])
 fi
 
 AM_CONDITIONAL([USE_BCRYPT], [test "x$with_bcrypt" = "xyes"])
-if test "$with_bcrypt" = "yes"; then
+if test "X$with_bcrypt" = "Xyes"; then
 	AC_DEFINE([USE_BCRYPT], [1], [Define to allow the bcrypt password encryption algorithm])
 fi
 
 AM_CONDITIONAL([USE_YESCRYPT], [test "x$with_yescrypt" = "xyes"])
-if test "$with_yescrypt" = "yes"; then
+if test "X$with_yescrypt" = "Xyes"; then
 	AC_DEFINE([USE_YESCRYPT], [1], [Define to allow the yescrypt password encryption algorithm])
 fi
 
-if test "$with_nscd" = "yes"; then
+if test "X$with_nscd" = "Xyes"; then
 	AC_CHECK_FUNC([posix_spawn],
 	              [AC_DEFINE([USE_NSCD], [1], [Define to support flushing of nscd caches])],
 	              [AC_MSG_ERROR([posix_spawn is needed for nscd support])])
 fi
 
-if test "$with_sssd" = "yes"; then
+if test "X$with_sssd" = "Xyes"; then
 	AC_CHECK_FUNC([posix_spawn],
 	              [AC_DEFINE([USE_SSSD], [1], [Define to support flushing of sssd caches])],
 	              [AC_MSG_ERROR([posix_spawn is needed for sssd support])])
@@ -273,12 +273,12 @@ if test "x$enable_vendordir" != x; then
 fi
 AM_CONDITIONAL([HAVE_VENDORDIR], [test "x$enable_vendordir" != x])
 
-if test "$enable_shadowgrp" = "yes"; then
+if test "X$enable_shadowgrp" = "Xyes"; then
 	AC_DEFINE([SHADOWGRP], [1], [Define to support the shadow group file.])
 fi
 AM_CONDITIONAL([SHADOWGRP], [test "x$enable_shadowgrp" = "xyes"])
 
-if test "$enable_man" = "yes"; then
+if test "X$enable_man" = "Xyes"; then
 	dnl
 	dnl Check for xsltproc
 	dnl
@@ -315,7 +315,7 @@ if test "$enable_subids" != "no"; then
 fi
 AM_CONDITIONAL([ENABLE_SUBIDS], [test "x$enable_subids" != "xno"])
 
-if test "$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; then
+if test "X$enable_lastlog" = "Xyes" && test "X$ac_cv_header_lastlog_h" = "Xyes"; then
 	AC_CACHE_CHECK([for ll_host in struct lastlog],
 		[ac_cv_struct_lastlog_ll_host],
 		[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <lastlog.h>]],
@@ -325,7 +325,7 @@ if test "$enable_lastlog" = "yes" && test "$ac_cv_header_lastlog_h" = "yes"; the
 		]
 	)
 
-	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
+	if test "X$ac_cv_struct_lastlog_ll_host" = "Xyes"; then
 		AC_DEFINE([HAVE_LL_HOST], [1],
 			[Define if struct lastlog has ll_host])
 		AC_DEFINE([ENABLE_LASTLOG], [1], [Define to support lastlog.])
@@ -338,7 +338,7 @@ fi
 AM_CONDITIONAL([ENABLE_LASTLOG], [test "x$enable_lastlog" != "xno"])
 
 AC_SUBST([LIBSYSTEMD])
-if test "$enable_logind" = "yes"; then
+if test "X$enable_logind" = "Xyes"; then
 	AC_CHECK_LIB([systemd], [sd_session_get_remote_host],
 		[enable_logind="yes"; [LIBSYSTEMD=-lsystemd];
 		AC_DEFINE([ENABLE_LOGIND], [1],
@@ -356,7 +356,7 @@ if test "$with_libbsd" != "no"; then
 	AC_SEARCH_LIBS([readpassphrase], [bsd], [], [
 		AC_MSG_ERROR([readpassphrase() is missing, either from libc or libbsd])
 	])
-	AS_IF([test "$ac_cv_search_readpassphrase" = "-lbsd"], [
+	AS_IF([test "X$ac_cv_search_readpassphrase" = "X-lbsd"], [
 		PKG_CHECK_MODULES([LIBBSD], [libbsd-overlay])
 	])
 	dnl Make sure either the libc or libbsd provide the header.
@@ -376,17 +376,17 @@ AM_CONDITIONAL([WITH_LIBBSD], [test x$with_libbsd = xyes])
 AC_SUBST([LIBACL])
 if test "$with_acl" != "no"; then
 	AC_CHECK_HEADERS([acl/libacl.h attr/error_context.h], [acl_header="yes"], [acl_header="no"])
-	if test "$acl_header$with_acl" = "noyes" ; then
+	if test "X$acl_header$with_acl" = "Xnoyes" ; then
 		AC_MSG_ERROR([acl/libacl.h or attr/error_context.h is missing])
-	elif test "$acl_header" = "yes" ; then
+	elif test "X$acl_header" = "Xyes" ; then
 		AC_CHECK_LIB([acl], [perm_copy_file],
 		             [AC_CHECK_LIB([acl], [perm_copy_fd],
 		                           [acl_lib="yes"],
 		                           [acl_lib="no"])],
 		             [acl_lib="no"])
-		if test "$acl_lib$with_acl" = "noyes" ; then
+		if test "X$acl_lib$with_acl" = "Xnoyes" ; then
 			AC_MSG_ERROR([libacl not found])
-		elif test "$acl_lib" = "no" ; then
+		elif test "X$acl_lib" = "Xno" ; then
 			with_acl="no"
 		else
 			AC_DEFINE([WITH_ACL], [1],
@@ -402,17 +402,17 @@ fi
 AC_SUBST([LIBATTR])
 if test "$with_attr" != "no"; then
 	AC_CHECK_HEADERS([attr/libattr.h attr/error_context.h], [attr_header="yes"], [attr_header="no"])
-	if test "$attr_header$with_attr" = "noyes" ; then
+	if test "X$attr_header$with_attr" = "noyes" ; then
 		AC_MSG_ERROR([attr/libattr.h or attr/error_context.h is missing])
-	elif test "$attr_header" = "yes" ; then
+	elif test "X$attr_header" = "Xyes" ; then
 		AC_CHECK_LIB([attr], [attr_copy_file],
 		             [AC_CHECK_LIB([attr], [attr_copy_fd],
 		                           [attr_lib="yes"],
 		                           [attr_lib="no"])],
 		             [attr_lib="no"])
-		if test "$attr_lib$with_attr" = "noyes" ; then
+		if test "X$attr_lib$with_attr" = "Xnoyes" ; then
 			AC_MSG_ERROR([libattr not found])
-		elif test "$attr_lib" = "no" ; then
+		elif test "X$attr_lib" = "Xno" ; then
 			with_attr="no"
 		else
 			AC_DEFINE([WITH_ATTR], [1],
@@ -428,23 +428,23 @@ fi
 AC_SUBST([LIBAUDIT])
 if test "$with_audit" != "no"; then
 	AC_CHECK_HEADER([libaudit.h], [audit_header="yes"], [audit_header="no"])
-	if test "$audit_header$with_audit" = "noyes" ; then
+	if test "X$audit_header$with_audit" = "Xnoyes" ; then
 		AC_MSG_ERROR([libaudit.h is missing])
-	elif test "$audit_header" = "yes"; then
+	elif test "X$audit_header" = "Xyes"; then
 		AC_CHECK_DECL([AUDIT_ADD_USER],[],[audit_header="no"],[[#include <libaudit.h>]])
 		AC_CHECK_DECL([AUDIT_DEL_USER],[],[audit_header="no"],[[#include <libaudit.h>]])
 		AC_CHECK_DECL([AUDIT_ADD_GROUP],[],[audit_header="no"],[[#include <libaudit.h>]])
 		AC_CHECK_DECL([AUDIT_DEL_GROUP],[],[audit_header="no"],[[#include <libaudit.h>]])
-		if test "$audit_header$with_audit" = "noyes" ; then
+		if test "X$audit_header$with_audit" = "Xnoyes" ; then
 			AC_MSG_ERROR([AUDIT_ADD_USER AUDIT_DEL_USER AUDIT_ADD_GROUP or AUDIT_DEL_GROUP missing from libaudit.h])
 		fi
 	fi
-	if test "$audit_header" = "yes"; then
+	if test "X$audit_header" = "Xyes"; then
 		AC_CHECK_LIB([audit], [audit_log_acct_message],
 		             [audit_lib="yes"], [audit_lib="no"])
-		if test "$audit_lib$with_audit" = "noyes" ; then
+		if test "X$audit_lib$with_audit" = "Xnoyes" ; then
 			AC_MSG_ERROR([libaudit not found])
-		elif test "$audit_lib" = "no" ; then
+		elif test "X$audit_lib" = "Xno" ; then
 			with_audit="no"
 		else
 			AC_DEFINE([WITH_AUDIT], [1],
@@ -460,11 +460,11 @@ fi
 if test "$with_btrfs" != "no"; then
 	AC_CHECK_HEADERS([sys/statfs.h linux/magic.h linux/btrfs_tree.h], \
 		[btrfs_headers="yes"], [btrfs_headers="no"])
-	if test "$btrfs_headers$with_btrfs" = "noyes" ; then
+	if test "X$btrfs_headers$with_btrfs" = "Xnoyes" ; then
 		AC_MSG_ERROR([One of sys/statfs.h linux/magic.h linux/btrfs_tree.h is missing])
 	fi
 
-	if test "$btrfs_headers" = "yes" ; then
+	if test "X$btrfs_headers" = "Xyes" ; then
 		AC_DEFINE([WITH_BTRFS], [1], [Build shadow with BtrFS support])
 		with_btrfs="yes"
 	fi
@@ -475,27 +475,27 @@ AC_SUBST([LIBSELINUX])
 AC_SUBST([LIBSEMANAGE])
 if test "$with_selinux" != "no"; then
 	AC_CHECK_HEADERS([selinux/selinux.h], [selinux_header="yes"], [selinux_header="no"])
-	if test "$selinux_header$with_selinux" = "noyes" ; then
+	if test "X$selinux_header$with_selinux" = "Xnoyes" ; then
 		AC_MSG_ERROR([selinux/selinux.h is missing])
 	fi
 
 	AC_CHECK_HEADERS([semanage/semanage.h], [semanage_header="yes"], [semanage_header="no"])
-	if test "$semanage_header$with_selinux" = "noyes" ; then
+	if test "X$semanage_header$with_selinux" = "Xnoyes" ; then
 		AC_MSG_ERROR([semanage/semanage.h is missing])
 	fi
 
-	if test "$selinux_header$semanage_header" = "yesyes" ; then
+	if test "X$selinux_header$semanage_header" = "Xyesyes" ; then
 		AC_CHECK_LIB([selinux], [is_selinux_enabled], [selinux_lib="yes"], [selinux_lib="no"])
-		if test "$selinux_lib$with_selinux" = "noyes" ; then
+		if test "X$selinux_lib$with_selinux" = "Xnoyes" ; then
 			AC_MSG_ERROR([libselinux not found])
 		fi
 
 		AC_CHECK_LIB([semanage], [semanage_connect], [semanage_lib="yes"], [semanage_lib="no"])
-		if test "$semanage_lib$with_selinux" = "noyes" ; then
+		if test "X$semanage_lib$with_selinux" = "Xnoyes" ; then
 			AC_MSG_ERROR([libsemanage not found])
 		fi
 
-		if test "$selinux_lib$semanage_lib" = "yesyes" ; then
+		if test "X$selinux_lib$semanage_lib" = "Xyesyes" ; then
 			AC_DEFINE([WITH_SELINUX], [1],
 			          [Build shadow with SELinux support])
 			LIBSELINUX="-lselinux"
@@ -512,13 +512,13 @@ fi
 AC_SUBST([LIBTCB])
 if test "$with_tcb" != "no"; then
 	AC_CHECK_HEADERS([tcb.h], [tcb_header="yes"], [tcb_header="no"])
-	if test "$tcb_header$with_tcb" = "noyes" ; then
+	if test "X$tcb_header$with_tcb" = "Xnoyes" ; then
 		AC_MSG_ERROR([tcb.h is missing])
-	elif test "$tcb_header" = "yes" ; then
+	elif test "X$tcb_header" = "Xyes" ; then
 		AC_CHECK_LIB([tcb], [tcb_is_suspect], [tcb_lib="yes"], [tcb_lib="no"])
-		if test "$tcb_lib$with_tcb" = "noyes" ; then
+		if test "X$tcb_lib$with_tcb" = "Xnoyes" ; then
 			AC_MSG_ERROR([libtcb not found])
-		elif test "$tcb_lib" = "no" ; then
+		elif test "X$tcb_lib" = "Xno" ; then
 			with_tcb="no"
 		else
 			AC_DEFINE([WITH_TCB], [1], [Build shadow with tcb support (incomplete)])
@@ -535,7 +535,7 @@ AC_SUBST([LIBPAM])
 if test "$with_libpam" != "no"; then
 	AC_CHECK_LIB([pam], [pam_start],
 	             [pam_lib="yes"], [pam_lib="no"])
-	if test "$pam_lib$with_libpam" = "noyes" ; then
+	if test "X$pam_lib$with_libpam" = "Xnoyes" ; then
 		AC_MSG_ERROR([libpam not found])
 	fi
 
@@ -548,7 +548,7 @@ if test "$with_libpam" != "no"; then
 	                           [pam_conv_function="misc_conv"; LIBPAM="$LIBPAM -lpam_misc"])]
 	            )
 
-	if test "$pam_conv_function$with_libpam" = "noyes" ; then
+	if test "X$pam_conv_function$with_libpam" = "Xnoyes" ; then
 		AC_MSG_ERROR([PAM conversation function not found])
 	fi
 
@@ -556,12 +556,12 @@ if test "$with_libpam" != "no"; then
 	AC_CHECK_HEADERS( [security/openpam.h security/pam_misc.h],
 	                 [ pam_headers_found=yes ; break ], [],
 	                 [[#include <security/pam_appl.h>]] )
-	if test "$pam_headers_found$with_libpam" = "noyes" ; then
+	if test "X$pam_headers_found$with_libpam" = "Xnoyes" ; then
 	                AC_MSG_ERROR([PAM headers not found])
 	fi
 
 
-	if test "$pam_lib$pam_headers_found" = "yesyes" -a "$pam_conv_function" != "no" ; then
+	if test "X$pam_lib$pam_headers_found" = "Xyesyes" -a "$pam_conv_function" != "no" ; then
 		with_libpam="yes"
 	else
 		with_libpam="no"
@@ -569,7 +569,7 @@ if test "$with_libpam" != "no"; then
 	fi
 fi
 dnl Now with_libpam is either yes or no
-if test "$with_libpam" = "yes"; then
+if test "X$with_libpam" = "Xyes"; then
 	AC_CHECK_DECLS([PAM_ESTABLISH_CRED,
 	                PAM_DELETE_CRED,
 	                PAM_NEW_AUTHTOK_REQD,
@@ -598,7 +598,7 @@ AM_CONDITIONAL([USE_PAM], [test "X$with_libpam" = "Xyes"])
 
 if test "$enable_acct_tools_setuid" != "no"; then
 	if test "$with_libpam" != "yes"; then
-		if test "$enable_acct_tools_setuid" = "yes"; then
+		if test "X$enable_acct_tools_setuid" = "Xyes"; then
 			AC_MSG_ERROR([PAM support is required for --enable-account-tools-setuid])
 		else
 			enable_acct_tools_setuid="no"
@@ -606,7 +606,7 @@ if test "$enable_acct_tools_setuid" != "no"; then
 	else
 		enable_acct_tools_setuid="yes"
 	fi
-	if test "$enable_acct_tools_setuid" = "yes"; then
+	if test "X$enable_acct_tools_setuid" = "Xyes"; then
 		AC_DEFINE([ACCT_TOOLS_SETUID],
 		          [1],
 		          [Define if account management tools should be installed setuid and authenticate the callers])
@@ -629,7 +629,7 @@ fi
 
 AC_SUBST([LIBSKEY])
 AC_SUBST([LIBMD])
-if test "$with_skey" = "yes"; then
+if test "X$with_skey" = "Xyes"; then
 	AC_CHECK_LIB([md], [MD5Init], [LIBMD=-lmd])
 	AC_CHECK_LIB([skey], [skeychallenge], [LIBSKEY=-lskey],
 		[AC_MSG_ERROR([libskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
@@ -692,7 +692,7 @@ echo "shadow will be compiled with the following features:"
 echo
 echo "	auditing support:		$with_audit"
 echo "	PAM support:			$with_libpam"
-if test "$with_libpam" = "yes"; then
+if test "X$with_libpam" = "Xyes"; then
 echo "	suid account management tools:	$enable_acct_tools_setuid"
 fi
 echo "	SELinux support:		$with_selinux"
