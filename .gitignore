@@ -21,24 +21,16 @@ test-driver
 /ABOUT-NLS
 /aclocal.m4
 /autom4te.cache
-/compile
 /config.cache
-/config.guess
 /config.h
 /config.h.in
 /config.log
-/config.rpath
 /config.status
-/config.sub
 /configure
-/depcomp
-/install-sh
 /libtool
-/ltmain.sh
 /m4
-/missing
+/build-aux/
 /stamp-h1
-/test-driver
 /ylwrap
 
 /po/*.header
