@@ -4,12 +4,15 @@ m4_define([libsubid_abi_major], [5])
 m4_define([libsubid_abi_minor], [0])
 m4_define([libsubid_abi_micro], [0])
 m4_define([libsubid_abi], [libsubid_abi_major.libsubid_abi_minor.libsubid_abi_micro])
+
 AC_INIT([shadow], [4.18.0], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
-AM_INIT_AUTOMAKE([1.11 foreign dist-xz subdir-objects tar-pax])
 AC_CONFIG_MACRO_DIRS([m4])
-AM_SILENT_RULES([yes])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
+
+AM_INIT_AUTOMAKE([1.11 foreign dist-xz subdir-objects tar-pax])
+AM_SILENT_RULES([yes])
 
 AC_SUBST([LIBSUBID_ABI_MAJOR], [libsubid_abi_major])
 AC_SUBST([LIBSUBID_ABI_MINOR], [libsubid_abi_minor])
