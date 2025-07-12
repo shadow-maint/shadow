@@ -464,6 +464,7 @@ int main (int argc, char **argv)
 	unsigned int   retries;
 	unsigned int   timeout;
 	struct passwd  *pwd = NULL;
+	bool           is_init;
 
 #if defined(USE_PAM)
 	int            retcode;
@@ -1083,6 +1084,7 @@ int main (int argc, char **argv)
 #endif				/* ! USE_PAM */
 	chown_tty (pwd);
 
+	is_init = (getpid() == 1); /* Check before forking */
 #ifdef USE_PAM
 	/*
 	 * We must fork before setuid() because we need to call
@@ -1109,7 +1111,7 @@ int main (int argc, char **argv)
 #endif
 
 	/* If we were init, we need to start a new session */
-	if (getppid() == 1) {
+	if (is_init) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
 			fprintf (stderr, _("TIOCSCTTY failed on %s"), tty);
