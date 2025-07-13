@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 		count = subid_get_uid_ranges(owner, &ranges);
 	}
 	if (!ranges) {
-		fprintf(stderr, "Error fetching ranges\n");
+		eprintf("Error fetching ranges\n");
 		exit(1);
 	}
 	for (i = 0; i < count; i++) {
@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
 static void
 usage(void)
 {
-	fprintf(stderr, "Usage: %s [-g] user\n", Prog);
-	fprintf(stderr, "    list subuid ranges for user\n");
-	fprintf(stderr, "    pass -g to list subgid ranges\n");
+	eprintf("Usage: %s [-g] user\n", Prog);
+	eprintf("    list subuid ranges for user\n");
+	eprintf("    pass -g to list subgid ranges\n");
 	exit(EXIT_FAILURE);
 }
