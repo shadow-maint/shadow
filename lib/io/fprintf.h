@@ -16,6 +16,10 @@
 #include "attr.h"
 
 
+// eprintf - stderr print formatted
+#define eprintf(...)  fprintf(stderr, __VA_ARGS__)
+
+
 // fprinte - FILE* print errno
 #define fprinte(stream, ...)  do                                      \
 {                                                                     \
