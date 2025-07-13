@@ -20,6 +20,7 @@
 #include "commonio.h"
 #include "defines.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -93,7 +94,7 @@ static void fail_exit (int status)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
 		}
@@ -102,7 +103,7 @@ static void fail_exit (int status)
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
 		}
@@ -214,7 +215,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (sort_mode && read_only) {
-		fprintf (stderr, _("%s: -s and -r are incompatible\n"), Prog);
+		eprintf(_("%s: -s and -r are incompatible\n"), Prog);
 		exit (E_USAGE);
 	}
 
@@ -264,8 +265,7 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (gr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_LOCK);
 		}
@@ -273,8 +273,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 		if (is_shadow) {
 			if (sgr_lock () == 0) {
-				fprintf (stderr,
-				         _("%s: cannot lock %s; try again later.\n"),
+				eprintf(_("%s: cannot lock %s; try again later.\n"),
 				         Prog, sgr_file);
 				fail_exit (E_CANT_LOCK);
 			}
@@ -288,8 +287,7 @@ static void open_files (void)
 	 * O_RDWR otherwise.
 	 */
 	if (gr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
-		         grp_file);
+		eprintf(_("%s: cannot open %s\n"), Prog, grp_file);
 		if (use_system_grp_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", grp_file));
 		}
@@ -297,8 +295,7 @@ static void open_files (void)
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
-		         sgr_file);
+		eprintf(_("%s: cannot open %s\n"), Prog, sgr_file);
 		if (use_system_sgr_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_file));
 		}
@@ -322,13 +319,13 @@ static void close_files (bool changed)
 	 */
 	if (changed) {
 		if (gr_close () == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_close () == 0)) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
 			fail_exit (E_CANT_UPDATE);
 		}
@@ -341,7 +338,7 @@ static void close_files (bool changed)
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
 		}
@@ -350,7 +347,7 @@ static void close_files (bool changed)
 #endif
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
 		}
@@ -624,8 +621,7 @@ static void check_grp_file (bool *errors, bool *changed)
 					*changed = true;
 
 					if (sgr_update (&sg) == 0) {
-						fprintf (stderr,
-						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, sgr_dbname (), sg.sg_namp);
 						fail_exit (E_CANT_UPDATE);
 					}
@@ -633,8 +629,7 @@ static void check_grp_file (bool *errors, bool *changed)
 					gr = *grp;
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (gr_update (&gr) == 0) {
-						fprintf (stderr,
-						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, gr_dbname (), gr.gr_name);
 						fail_exit (E_CANT_UPDATE);
 					}
