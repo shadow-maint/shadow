@@ -16,8 +16,8 @@ static const char Prog[] = "free_subid_range";
 
 static void usage(void)
 {
-	fprintf(stderr, "Usage: %s [-g] user start count\n", Prog);
-	fprintf(stderr, "    Release a user's subuid (or with -g, subgid) range\n");
+	eprintf("Usage: %s [-g] user start count\n", Prog);
+	eprintf("    Release a user's subuid (or with -g, subgid) range\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 		ok = subid_ungrant_uid_range(&range);
 
 	if (!ok) {
-		fprintf(stderr, "Failed freeing id range\n");
+		eprintf("Failed freeing id range\n");
 		exit(EXIT_FAILURE);
 	}
 
