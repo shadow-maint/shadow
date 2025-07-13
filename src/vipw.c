@@ -82,7 +82,7 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
 static void usage (int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
-	(void) fprintf (stderr,
+	(void) fprintf (usageout,
 	                _("Usage: %s [options]\n"
 	                  "\n"
 	                  "Options:\n"),
