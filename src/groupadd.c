@@ -218,7 +218,7 @@ grp_update(void)
 		ul = user_list;
 		while (NULL != (u = strsep(&ul, ","))) {
 			if (prefix_getpwnam(u) == NULL) {
-				fprintf(stderr, _("Invalid member username %s\n"), u);
+				eprintf(_("Invalid member username %s\n"), u);
 				exit (E_GRP_UPDATE);
 			}
 
@@ -234,8 +234,7 @@ grp_update(void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -244,8 +243,7 @@ grp_update(void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_namp);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -262,7 +260,7 @@ static void
 check_new_name(void)
 {
 	if (!is_valid_group_name(group_name)) {
-		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
+		eprintf(_("%s: '%s' is not a valid group name\n"),
 			Prog, group_name);
 
 		fail_exit (E_BAD_ARG);
@@ -285,8 +283,7 @@ static void close_files(const struct option_flags *flags)
 
 	/* First, write the changes in the regular group database */
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -306,8 +303,7 @@ static void close_files(const struct option_flags *flags)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -344,8 +340,7 @@ static void open_files(const struct option_flags *flags)
 
 	/* First, lock the databases */
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -354,8 +349,7 @@ static void open_files(const struct option_flags *flags)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -430,8 +424,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			gflg = true;
 			if (   (get_gid(optarg, &group_id) == -1)
 			    || (group_id == (gid_t)-1)) {
-				fprintf (stderr,
-				         _("%s: invalid group ID '%s'\n"),
+				eprintf(_("%s: invalid group ID '%s'\n"),
 				         Prog, optarg);
 				exit (E_BAD_ARG);
 			}
@@ -447,8 +440,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			 */
 			cp = stpsep(optarg, "=");
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: -K requires KEY=VALUE\n"),
+				eprintf(_("%s: -K requires KEY=VALUE\n"),
 				         Prog);
 				exit (E_BAD_ARG);
 			}
@@ -515,8 +507,7 @@ static void check_flags (void)
 			/* OK, no need to do anything */
 			exit (E_SUCCESS);
 		}
-		fprintf (stderr,
-		         _("%s: group '%s' already exists\n"),
+		eprintf(_("%s: group '%s' already exists\n"),
 		         Prog, group_name);
 		fail_exit (E_NAME_IN_USE);
 	}
@@ -534,8 +525,7 @@ static void check_flags (void)
 			/* Turn off -g, we can use any GID */
 			gflg = false;
 		} else {
-			fprintf (stderr,
-			         _("%s: GID '%lu' already exists\n"),
+			eprintf(_("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long) group_id);
 			fail_exit (E_GID_IN_USE);
 		}
@@ -565,9 +555,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot setup cleanup service.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot setup cleanup service.\n"), Prog);
 		fail_exit (1);
 	}
 
