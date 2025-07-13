@@ -23,6 +23,7 @@
 #include "exitcodes.h"
 #include "fields.h"
 #include "getdef.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -83,7 +84,7 @@ fail_exit (int code, bool process_selinux)
 {
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
@@ -169,16 +170,14 @@ static bool shell_is_listed (const char *sh, bool process_selinux)
 			       "", /* key only */
 			       "#" /* comment */);
 	if (error) {
-		fprintf (stderr,
-			 _("Cannot parse shell files: %s"),
+		eprintf(_("Cannot parse shell files: %s"),
 			 econf_errString(error));
 		fail_exit (1, process_selinux);
 	}
 
 	error = econf_getKeys(key_file, NULL, &size, &keys);
 	if (error) {
-		fprintf (stderr,
-			 _("Cannot evaluate entries in shell files: %s"),
+		eprintf(_("Cannot evaluate entries in shell files: %s"),
 			 econf_errString(error));
 		econf_free (key_file);
 		fail_exit (1, process_selinux);
@@ -285,9 +284,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
-		         _("You may not change the shell for '%s'.\n"),
-		         pw->pw_name);
+		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1, process_selinux);
 	}
 
@@ -297,9 +294,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 */
 	if (!amroot && is_restricted_shell (pw->pw_shell, process_selinux)) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
-		         _("You may not change the shell for '%s'.\n"),
-		         pw->pw_name);
+		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1, process_selinux);
 	}
 #ifdef WITH_SELINUX
@@ -310,9 +305,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	if ((pw->pw_uid != getuid ())
 	    && (check_selinux_permit(Prog) != 0)) {
 		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
-		fprintf (stderr,
-		         _("You may not change the shell for '%s'.\n"),
-		         pw->pw_name);
+		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1, process_selinux);
 	}
 #endif
@@ -331,9 +324,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 #else				/* !USE_PAM */
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		exit (E_NOPERM);
 	}
 
@@ -348,8 +339,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	}
 
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
+		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
 		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
@@ -393,13 +383,13 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * the password file. Get a lock on the file and open it.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
 		fail_exit (1, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (1, process_selinux);
 	}
@@ -412,8 +402,7 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 */
 	pw = pw_locate (user);
 	if (NULL == pw) {
-		fprintf (stderr,
-		         _("%s: user '%s' does not exist in %s\n"),
+		eprintf(_("%s: user '%s' does not exist in %s\n"),
 		         Prog, user, pw_dbname ());
 		fail_exit (1, process_selinux);
 	}
@@ -430,8 +419,7 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * that entry as well.
 	 */
 	if (pw_update (&pwent) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, pw_dbname (), pwent.pw_name);
 		fail_exit (1, process_selinux);
 	}
@@ -440,12 +428,12 @@ static void update_shell (const char *user, char *newshell, const struct option_
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
 	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
@@ -494,21 +482,19 @@ int main (int argc, char **argv)
 	 */
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			eprintf(_("%s: Provided user name is not a valid name\n"), Prog);
 			fail_exit (1, process_selinux);
 		}
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
-			fprintf (stderr,
-			         _("%s: user '%s' does not exist\n"), Prog, user);
+			eprintf(_("%s: user '%s' does not exist\n"), Prog, user);
 			fail_exit (1, process_selinux);
 		}
 	} else {
 		pw = get_my_pwent ();
 		if (NULL == pw) {
-			fprintf (stderr,
-			         _("%s: Cannot determine your user name.\n"),
+			eprintf(_("%s: Cannot determine your user name.\n"),
 			         Prog);
 			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 			       (unsigned long) getuid());
@@ -543,7 +529,7 @@ int main (int argc, char **argv)
 	 * The shell must be executable by the user.
 	 */
 	if (valid_field (loginsh, ":,=\n") != 0) {
-		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
+		eprintf(_("%s: Invalid entry: %s\n"), Prog, loginsh);
 		fail_exit (1, process_selinux);
 	}
 	if (!streq(loginsh, "")
@@ -552,9 +538,9 @@ int main (int argc, char **argv)
 	        || (access (loginsh, X_OK) != 0)))
 	{
 		if (amroot) {
-			fprintf (stderr, _("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
+			eprintf(_("%s: Warning: %s is an invalid shell\n"), Prog, loginsh);
 		} else {
-			fprintf (stderr, _("%s: %s is an invalid shell\n"), Prog, loginsh);
+			eprintf(_("%s: %s is an invalid shell\n"), Prog, loginsh);
 			fail_exit (1, process_selinux);
 		}
 	}
@@ -563,9 +549,9 @@ int main (int argc, char **argv)
 	if (!streq(loginsh, "")) {
 		/* But not if an empty string is given, documented as meaning the default shell */
 		if (access (loginsh, F_OK) != 0) {
-			fprintf (stderr, _("%s: Warning: %s does not exist\n"), Prog, loginsh);
+			eprintf(_("%s: Warning: %s does not exist\n"), Prog, loginsh);
 		} else if (access (loginsh, X_OK) != 0) {
-			fprintf (stderr, _("%s: Warning: %s is not executable\n"), Prog, loginsh);
+			eprintf(_("%s: Warning: %s is not executable\n"), Prog, loginsh);
 		}
 	}
 

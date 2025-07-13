@@ -19,6 +19,7 @@
 
 #include "attr.h"
 #include "defines.h"
+#include "io/fprintf/eprintf.h"
 #include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
@@ -101,16 +102,12 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (cflg && fflg) {
-		fprintf (stderr,
-		         _("%s: options %s and %s conflict\n"),
-		         Prog, "-c", "-f");
+		eprintf(_("%s: options %s and %s conflict\n"), Prog, "-c", "-f");
 		usage (E_USAGE);
 	}
 
 	if (argc != optind) {
-		fprintf (stderr,
-		         _("%s: unexpected argument: %s\n"),
-		         Prog, argv[optind]);
+		eprintf(_("%s: unexpected argument: %s\n"), Prog, argv[optind]);
 		usage (E_USAGE);
 	}
 }
@@ -157,8 +154,7 @@ int main (int argc, char **argv)
 	 */
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		       (unsigned long) getuid());
 		exit (10);

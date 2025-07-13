@@ -27,6 +27,7 @@
 #include "attr.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "sssd.h"
@@ -63,7 +64,7 @@ static void fail_exit (int status, bool process_selinux)
 {
 	if (gr_locked) {
 		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
@@ -71,7 +72,7 @@ static void fail_exit (int status, bool process_selinux)
 
 	if (sgr_locked) {
 		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -157,28 +158,24 @@ int main (int argc, char **argv)
 	}
 
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (5, process_selinux);
 	}
 	gr_locked = true;
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		fail_exit (1, process_selinux);
 	}
 
 	if (sgr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, sgr_dbname ());
 		fail_exit (5, process_selinux);
 	}
 	sgr_locked = true;
 	if (sgr_open (O_RDONLY) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 		fail_exit (1, process_selinux);
 	}
 
@@ -194,8 +191,7 @@ int main (int argc, char **argv)
 			grent = *gr;
 			grent.gr_passwd = sg->sg_passwd;
 			if (gr_update (&grent) == 0) {
-				fprintf (stderr,
-				         _("%s: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 				         Prog, gr_dbname (), grent.gr_name);
 				fail_exit (3, process_selinux);
 			}
@@ -205,29 +201,26 @@ int main (int argc, char **argv)
 	(void) sgr_close (process_selinux); /* was only open O_RDONLY */
 
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit (3, process_selinux);
 	}
 
 	if (unlink(_PATH_GSHADOW) != 0) {
-		fprintf (stderr,
-		         _("%s: cannot delete %s\n"),
-		         Prog, _PATH_GSHADOW);
+		eprintf(_("%s: cannot delete %s\n"), Prog, _PATH_GSHADOW);
 		SYSLOG(LOG_ERR, "cannot delete %s", _PATH_GSHADOW);
 		fail_exit (3, process_selinux);
 	}
 
 	if (gr_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
 
 	if (sgr_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 		/* continue */
 	}
@@ -241,8 +234,7 @@ int main (int argc, char **argv)
 int
 main(int, char **argv)
 {
-	fprintf (stderr,
-		 "%s: not configured for shadow group support.\n", argv[0]);
+	eprintf("%s: not configured for shadow group support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWGRP */

@@ -22,6 +22,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -51,14 +52,14 @@ static void fail_exit (int status, bool process_selinux)
 {
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
@@ -140,7 +141,7 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		eprintf(_("%s: can't work with tcb enabled\n"), Prog);
 		exit (1);
 	}
 #endif				/* WITH_TCB */
@@ -151,30 +152,24 @@ int main (int argc, char **argv)
 	}
 
 	if (pw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
 		fail_exit (5, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, pw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 
 	if (spw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
 		fail_exit (5, process_selinux);
 	}
 	spw_locked = true;
 	if (spw_open (O_RDONLY) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, spw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
 		fail_exit (1, process_selinux);
 	}
 
@@ -195,8 +190,7 @@ int main (int argc, char **argv)
 		}
 
 		if (pw_update (&pwent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (3, process_selinux);
 		}
@@ -205,27 +199,25 @@ int main (int argc, char **argv)
 	(void) spw_close (process_selinux); /* was only open O_RDONLY */
 
 	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (3, process_selinux);
 	}
 
 	if (unlink (SHADOW) != 0) {
-		fprintf (stderr,
-			 _("%s: cannot delete %s\n"), Prog, SHADOW);
+		eprintf(_("%s: cannot delete %s\n"), Prog, SHADOW);
 		SYSLOG(LOG_ERR, "cannot delete %s", SHADOW);
 		fail_exit (3, process_selinux);
 	}
 
 	if (spw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
