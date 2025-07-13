@@ -30,6 +30,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -212,7 +213,7 @@ grp_update(void)
 		ul = user_list;
 		while (NULL != (u = strsep(&ul, ","))) {
 			if (prefix_getpwnam(u) == NULL) {
-				fprintf(stderr, _("Invalid member username %s\n"), u);
+				eprintf(_("Invalid member username %s\n"), u);
 				exit (E_GRP_UPDATE);
 			}
 
@@ -228,8 +229,7 @@ grp_update(void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -238,8 +238,7 @@ grp_update(void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_namp);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -256,7 +255,7 @@ static void
 check_new_name(void)
 {
 	if (!is_valid_group_name(group_name)) {
-		fprintf(stderr, _("%s: '%s' is not a valid group name\n"),
+		eprintf(_("%s: '%s' is not a valid group name\n"),
 			Prog, group_name);
 
 		fail_exit (E_BAD_ARG);
@@ -275,8 +274,7 @@ static void close_files (void)
 {
 	/* First, write the changes in the regular group database */
 	if (gr_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -296,8 +294,7 @@ static void close_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close () == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -330,8 +327,7 @@ static void open_files (void)
 {
 	/* First, lock the databases */
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -340,8 +336,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -357,7 +352,7 @@ static void open_files (void)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname (), strerror(errno));
+		eprintf(_("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerror(errno));
 		SYSLOG ((LOG_WARN, "cannot open %s: %s", gr_dbname (), strerror(errno)));
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -365,8 +360,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s: %s\n"),
+			eprintf(_("%s: cannot open %s: %s\n"),
 			         Prog, sgr_dbname (), strerror(errno));
 			SYSLOG ((LOG_WARN, "cannot open %s: %s", sgr_dbname (), strerror(errno)));
 			fail_exit (E_GRP_UPDATE);
@@ -418,8 +412,7 @@ static void process_flags (int argc, char **argv)
 			gflg = true;
 			if (   (get_gid(optarg, &group_id) == -1)
 			    || (group_id == (gid_t)-1)) {
-				fprintf (stderr,
-				         _("%s: invalid group ID '%s'\n"),
+				eprintf(_("%s: invalid group ID '%s'\n"),
 				         Prog, optarg);
 				exit (E_BAD_ARG);
 			}
@@ -435,8 +428,7 @@ static void process_flags (int argc, char **argv)
 			 */
 			cp = stpsep(optarg, "=");
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: -K requires KEY=VALUE\n"),
+				eprintf(_("%s: -K requires KEY=VALUE\n"),
 				         Prog);
 				exit (E_BAD_ARG);
 			}
@@ -501,8 +493,7 @@ static void check_flags (void)
 			/* OK, no need to do anything */
 			exit (E_SUCCESS);
 		}
-		fprintf (stderr,
-		         _("%s: group '%s' already exists\n"),
+		eprintf(_("%s: group '%s' already exists\n"),
 		         Prog, group_name);
 		fail_exit (E_NAME_IN_USE);
 	}
@@ -520,8 +511,7 @@ static void check_flags (void)
 			/* Turn off -g, we can use any GID */
 			gflg = false;
 		} else {
-			fprintf (stderr,
-			         _("%s: GID '%lu' already exists\n"),
+			eprintf(_("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long) group_id);
 			fail_exit (E_GID_IN_USE);
 		}
@@ -548,9 +538,7 @@ static void check_perms (void)
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		fail_exit (1);
 	}
 
@@ -565,8 +553,7 @@ static void check_perms (void)
 	}
 
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
+		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
 		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
@@ -599,9 +586,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot setup cleanup service.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot setup cleanup service.\n"), Prog);
 		fail_exit (1);
 	}
 

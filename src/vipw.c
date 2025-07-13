@@ -30,6 +30,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -159,22 +160,22 @@ static void vipwexit (const char *msg, int syserr, int ret)
 
 	if (createedit) {
 		if (unlink (fileeditname) != 0) {
-			fprintf (stderr, _("%s: failed to remove %s\n"), Prog, fileeditname);
+			eprintf(_("%s: failed to remove %s\n"), Prog, fileeditname);
 			/* continue */
 		}
 	}
 	if (filelocked) {
 		if ((*unlock) () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
+			eprintf(_("%s: failed to unlock %s\n"), Prog, fileeditname);
 			SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 			/* continue */
 		}
 	}
 	if (NULL != msg) {
-		fprintf (stderr, "%s: %s", Prog, msg);
+		eprintf("%s: %s", Prog, msg);
 	}
 	if (0 != syserr) {
-		fprintf (stderr, ": %s", strerror (err));
+		eprintf(": %s", strerror(err));
 	}
 	if (   (NULL != msg)
 	    || (0 != syserr)) {
@@ -312,16 +313,16 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 		status = system (buf);
 		if (-1 == status) {
-			fprintf (stderr, _("%s: %s: %s\n"), Prog, editor,
+			eprintf(_("%s: %s: %s\n"), Prog, editor,
 			         strerror (errno));
 			exit (1);
 		} else if (   WIFEXITED (status)
 		           && (WEXITSTATUS (status) != 0)) {
-			fprintf (stderr, _("%s: %s returned with status %d\n"),
+			eprintf(_("%s: %s returned with status %d\n"),
 			         Prog, editor, WEXITSTATUS (status));
 			exit (WEXITSTATUS (status));
 		} else if (WIFSIGNALED (status)) {
-			fprintf (stderr, _("%s: %s killed by signal %d\n"),
+			eprintf(_("%s: %s killed by signal %d\n"),
 			         Prog, editor, WTERMSIG (status));
 			exit (1);
 		} else {
@@ -351,11 +352,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			if (orig_pgrp != -1) {
 				editor_pgrp = tcgetpgrp(STDIN_FILENO);
 				if (editor_pgrp == -1) {
-					fprintf (stderr, "%s: %s: %s", Prog,
+					eprintf("%s: %s: %s", Prog,
 						 "tcgetpgrp", strerror (errno));
 				}
 				if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
-					fprintf (stderr, "%s: %s: %s", Prog,
+					eprintf("%s: %s: %s", Prog,
 						 "tcsetpgrp", strerror (errno));
 				}
 			}
@@ -363,7 +364,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			/* wake child when resumed */
 			if (editor_pgrp != -1) {
 				if (tcsetpgrp(STDIN_FILENO, editor_pgrp) == -1) {
-					fprintf (stderr, "%s: %s: %s", Prog,
+					eprintf("%s: %s: %s", Prog,
 						 "tcsetpgrp", strerror (errno));
 				}
 			}
@@ -376,7 +377,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (orig_pgrp != -1) {
 		 /* Restore terminal pgrp after editing. */
 		if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
-			fprintf(stderr, "%s: %s: %s", Prog,
+			eprintf("%s: %s: %s", Prog,
 			        "tcsetpgrp", strerror(errno));
 		}
 		sigprocmask(SIG_SETMASK, &omask, NULL);
@@ -388,7 +389,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	           && (WEXITSTATUS (status) != 0)) {
 		vipwexit (NULL, 0, WEXITSTATUS (status));
 	} else if (WIFSIGNALED (status)) {
-		fprintf (stderr, _("%s: %s killed by signal %d\n"),
+		eprintf(_("%s: %s killed by signal %d\n"),
 		         Prog, editor, WTERMSIG(status));
 		vipwexit (NULL, 0, 1);
 	}
@@ -447,8 +448,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	unlink (filebackup);
 	link (file, filebackup);
 	if (rename (to_rename, file) == -1) {
-		fprintf (stderr,
-		         _("%s: can't restore %s: %s (your changes are in %s)\n"),
+		eprintf(_("%s: can't restore %s: %s (your changes are in %s)\n"),
 		         Prog, file, strerror (errno), to_rename);
 #ifdef WITH_TCB
 		if (tcb_mode) {
@@ -468,7 +468,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 #endif				/* WITH_TCB */
 
 	if ((*file_unlock) () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, fileeditname);
+		eprintf(_("%s: failed to unlock %s\n"), Prog, fileeditname);
 		SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 		/* continue */
 	}
@@ -576,8 +576,7 @@ int main (int argc, char **argv)
 #ifdef WITH_TCB
 			if (getdef_bool ("USE_TCB") && (NULL != user)) {
 				if (shadowtcb_set_user (user) == SHADOWTCB_FAILURE) {
-					fprintf (stderr,
-					         _("%s: failed to find tcb directory for %s\n"),
+					eprintf(_("%s: failed to find tcb directory for %s\n"),
 					         Prog, user);
 					return E_SHADOW_NOTFOUND;
 				}

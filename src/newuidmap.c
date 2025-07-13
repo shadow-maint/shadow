@@ -17,6 +17,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "idmapping.h"
+#include "io/fprintf/eprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/strprefix.h"
@@ -54,7 +55,7 @@ static void verify_ranges(struct passwd *pw, int ranges,
 	mapping = mappings;
 	for (idx = 0; idx < ranges; idx++, mapping++) {
 		if (!verify_range(pw, mapping)) {
-			fprintf(stderr, _( "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"),
+			eprintf(_( "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"),
 				Prog,
 				mapping->upper,
 				mapping->upper + mapping->count,
@@ -67,7 +68,7 @@ static void verify_ranges(struct passwd *pw, int ranges,
 
 static void usage(void)
 {
-	fprintf(stderr, _("usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"), Prog);
+	eprintf(_("usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> <count> ] ... \n"), Prog);
 	exit(EXIT_FAILURE);
 }
 
@@ -112,9 +113,7 @@ int main(int argc, char **argv)
 	/* Who am I? */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fprintf (stderr,
-			_("%s: Cannot determine your user name.\n"),
-			Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 				(unsigned long) getuid ()));
 		return EXIT_FAILURE;
@@ -122,8 +121,7 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprintf(stderr,
-		        _("%s: Could not stat directory for target process: %s\n"),
+		eprintf(_("%s: Could not stat directory for target process: %s\n"),
 		        Prog, strerror (errno));
 		return EXIT_FAILURE;
 	}
@@ -136,7 +134,7 @@ int main(int argc, char **argv)
 	    (!getdef_bool("GRANT_AUX_GROUP_SUBIDS") && (getgid() != pw->pw_gid)) ||
 	    (pw->pw_uid != st.st_uid) ||
 	    (getgid() != st.st_gid)) {
-		fprintf(stderr, _( "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
+		eprintf(_( "%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n" ),
 			Prog,
 			(unsigned long)getuid(), (unsigned long)pw->pw_uid, (unsigned long)st.st_uid,
 			(unsigned long)getgid(), (unsigned long)pw->pw_gid, (unsigned long)st.st_gid);
@@ -144,8 +142,7 @@ int main(int argc, char **argv)
 	}
 
 	if (!sub_uid_open(O_RDONLY)) {
-		fprintf (stderr,
-		         _("%s: cannot open %s: %s\n"),
+		eprintf(_("%s: cannot open %s: %s\n"),
 		         Prog, sub_uid_dbname (), strerror (errno));
 		return EXIT_FAILURE;
 	}
