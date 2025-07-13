@@ -180,10 +180,9 @@ static void vipwexit (const char *msg, int syserr, int ret)
 	    || (0 != syserr)) {
 		(void) fputs ("\n", stderr);
 	}
-	if (!quiet) {
-		fprintf (stdout, _("%s: %s is unchanged\n"), Prog,
-			 filename);
-	}
+	if (!quiet)
+		printf(_("%s: %s is unchanged\n"), Prog, filename);
+
 	exit (ret);
 }
 
