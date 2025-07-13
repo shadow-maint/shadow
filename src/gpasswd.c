@@ -196,8 +196,7 @@ static bool is_valid_user_list (const char *users)
 
 		/* local, no need for xgetpwnam */
 		if (getpwnam(u) == NULL) {
-			fprintf (stderr, _("%s: user '%s' does not exist\n"),
-			         Prog, u);
+			eprintf(_("%s: user '%s' does not exist\n"), Prog, u);
 			is_valid = false;
 		}
 	}
@@ -209,7 +208,7 @@ static bool is_valid_user_list (const char *users)
 
 static void failure(void)
 {
-	fprintf(stderr, _("%s: Permission denied.\n"), Prog);
+	eprintf(_("%s: Permission denied.\n"), Prog);
 	log_gpasswd_failure(": Permission denied");
 	exit(E_NOPERM);
 }
@@ -240,8 +239,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			user = optarg;
 			/* local, no need for xgetpwnam */
 			if (getpwnam (user) == NULL) {
-				fprintf (stderr,
-				         _("%s: user '%s' does not exist\n"),
+				eprintf(_("%s: user '%s' does not exist\n"),
 				         Prog, user);
 				exit (E_BAD_ARG);
 			}
@@ -249,8 +247,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 #ifdef SHADOWGRP
 		case 'A':	/* set the list of administrators */
 			if (!is_shadowgrp) {
-				fprintf (stderr,
-				         _("%s: shadow group passwords required for -A\n"),
+				eprintf(_("%s: shadow group passwords required for -A\n"),
 				         Prog);
 				exit (E_GSHADOW_NOTFOUND);
 			}
@@ -345,8 +342,7 @@ static void open_files(const struct option_flags *flags)
 	process_selinux = !flags->chroot;
 
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		exit (E_NOPERM);
 	}
@@ -355,8 +351,7 @@ static void open_files(const struct option_flags *flags)
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			exit (E_NOPERM);
 		}
@@ -367,9 +362,7 @@ static void open_files(const struct option_flags *flags)
 	add_cleanup (log_gpasswd_failure_system, NULL);
 
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		exit (E_NOPERM);
 	}
@@ -377,9 +370,7 @@ static void open_files(const struct option_flags *flags)
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			exit (E_NOPERM);
 		}
@@ -602,8 +593,7 @@ static void close_files(const struct option_flags *flags)
 	process_selinux = !flags->chroot;
 
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		exit (E_NOPERM);
 	}
@@ -616,8 +606,7 @@ static void close_files(const struct option_flags *flags)
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			exit (E_NOPERM);
 		}
@@ -679,15 +668,13 @@ static void update_group (struct group *gr)
 #endif
 {
 	if (gr_update (gr) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), gr->gr_name);
 		exit (1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sg->sg_namp);
 		exit (1);
 	}
@@ -717,15 +704,14 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 	process_selinux = !flags->chroot;
 
 	if (gr_open (O_RDONLY) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		exit (E_NOPERM);
 	}
 
 	tmpgr = gr_locate (group);
 	if (NULL == tmpgr) {
-		fprintf (stderr,
-		         _("%s: group '%s' does not exist in %s\n"),
+		eprintf(_("%s: group '%s' does not exist in %s\n"),
 		         Prog, group, gr_dbname ());
 		exit (E_BAD_ARG);
 	}
@@ -736,8 +722,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while closing read-only %s\n"),
+		eprintf(_("%s: failure while closing read-only %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG(LOG_ERR, "failure while closing read-only %s", gr_dbname());
 		exit (E_NOPERM);
@@ -746,9 +731,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_open (O_RDONLY) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			exit (E_NOPERM);
 		}
@@ -772,8 +755,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 
 		}
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while closing read-only %s\n"),
+			eprintf(_("%s: failure while closing read-only %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG(LOG_ERR, "failure while closing read-only %s",
 			       sgr_dbname());
@@ -838,7 +820,7 @@ static void change_passwd (struct group *gr)
 	}
 
 	if (retries == RETRIES) {
-		fprintf (stderr, _("%s: Try again later\n"), Prog);
+		eprintf(_("%s: Try again later\n"), Prog);
 		exit (1);
 	}
 
@@ -912,8 +894,7 @@ int main (int argc, char **argv)
 	 */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		SYSLOG(LOG_WARN,
 		       "Cannot determine the user name of the caller (UID %lu)",
 		       (unsigned long) getuid());
@@ -926,7 +907,7 @@ int main (int argc, char **argv)
 	 * could create.
 	 */
 	if (atexit (do_cleanups) != 0) {
-		fprintf(stderr, "%s: cannot set exit function\n", Prog);
+		eprintf("%s: cannot set exit function\n", Prog);
 		exit (1);
 	}
 
@@ -1020,8 +1001,7 @@ int main (int argc, char **argv)
 		}
 #endif
 		if (!removed) {
-			fprintf (stderr,
-			         _("%s: user '%s' is not a member of '%s'\n"),
+			eprintf(_("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, user, group);
 			exit (E_BAD_ARG);
 		}
@@ -1060,7 +1040,7 @@ int main (int argc, char **argv)
 	 * modes can be restored.
 	 */
 	if ((isatty (0) == 0) || (isatty (1) == 0)) {
-		fprintf (stderr, _("%s: Not a tty\n"), Prog);
+		eprintf(_("%s: Not a tty\n"), Prog);
 		exit (E_NOPERM);
 	}
 
