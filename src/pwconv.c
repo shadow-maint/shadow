@@ -47,6 +47,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -84,7 +85,7 @@ static void fail_exit (int status)
 {
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
 		}
@@ -92,7 +93,7 @@ static void fail_exit (int status)
 
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
@@ -172,34 +173,30 @@ int main (int argc, char **argv)
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
-		fprintf (stderr, _("%s: can't work with tcb enabled\n"), Prog);
+		eprintf(_("%s: can't work with tcb enabled\n"), Prog);
 		exit (E_FAILURE);
 	}
 #endif				/* WITH_TCB */
 
 	if (pw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
 		fail_exit (E_MISSING);
 	}
 
 	if (spw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	spw_locked = true;
 	if (spw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
 		fail_exit (E_FAILURE);
 	}
 
@@ -216,8 +213,7 @@ int main (int argc, char **argv)
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
-			fprintf (stderr,
-			         _("%s: cannot remove entry '%s' from %s\n"),
+			eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, sp->sp_namp, spw_dbname ());
 			fail_exit (E_FAILURE);
 		}
@@ -257,8 +253,7 @@ int main (int argc, char **argv)
 			spent.sp_lstchg = -1;
 		}
 		if (spw_update (&spent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, spw_dbname (), spent.sp_namp);
 			fail_exit (E_FAILURE);
 		}
@@ -267,23 +262,20 @@ int main (int argc, char **argv)
 		pwent = *pw;
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (E_FAILURE);
 		}
 	}
 
 	if (spw_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
@@ -292,21 +284,20 @@ int main (int argc, char **argv)
 	/* /etc/passwd- (backup file) */
 	errno = 0;
 	if ((chmod (PASSWD_FILE "-", 0600) != 0) && (errno != ENOENT)) {
-		fprintf (stderr,
-		         _("%s: failed to change the mode of %s to 0600\n"),
+		eprintf(_("%s: failed to change the mode of %s to 0600\n"),
 		         Prog, PASSWD_FILE "-");
 		SYSLOG ((LOG_ERR, "failed to change the mode of %s to 0600", PASSWD_FILE "-"));
 		/* continue */
 	}
 
 	if (pw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
 	}
 
 	if (spw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 		/* continue */
 	}

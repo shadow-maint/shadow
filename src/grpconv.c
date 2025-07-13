@@ -29,6 +29,7 @@
 #include "attr.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
@@ -57,7 +58,7 @@ static void fail_exit (int status)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
 		}
@@ -65,7 +66,7 @@ static void fail_exit (int status)
 
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
 		}
@@ -144,26 +145,24 @@ int main (int argc, char **argv)
 	process_flags (argc, argv);
 
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (5);
 	}
 	gr_locked = true;
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		fail_exit (1);
 	}
 
 	if (sgr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, sgr_dbname ());
 		fail_exit (5);
 	}
 	sgr_locked = true;
 	if (sgr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 		fail_exit (1);
 	}
 
@@ -180,8 +179,7 @@ int main (int argc, char **argv)
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
-			fprintf (stderr,
-			         _("%s: cannot remove entry '%s' from %s\n"),
+			eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, sg->sg_namp, sgr_dbname ());
 			fail_exit (3);
 		}
@@ -218,8 +216,7 @@ int main (int argc, char **argv)
 		sgent.sg_mem = gr->gr_mem;
 
 		if (sgr_update (&sgent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, sgr_dbname (), sgent.sg_namp);
 			fail_exit (3);
 		}
@@ -227,34 +224,31 @@ int main (int argc, char **argv)
 		grent = *gr;
 		grent.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (gr_update (&grent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, gr_dbname (), grent.gr_name);
 			fail_exit (3);
 		}
 	}
 
 	if (sgr_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 		fail_exit (3);
 	}
 	if (gr_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (3);
 	}
 	if (sgr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 		/* continue */
 	}
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
@@ -267,8 +261,7 @@ int main (int argc, char **argv)
 #else				/* !SHADOWGRP */
 int main (MAYBE_UNUSED int argc, char **argv)
 {
-	fprintf (stderr,
-		 "%s: not configured for shadow group support.\n", argv[0]);
+	eprintf("%s: not configured for shadow group support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWGRP */
