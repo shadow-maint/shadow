@@ -16,6 +16,9 @@
 #include "attr.h"
 
 
+// eprintf - stderr print formatted
+#define eprintf(...)  fprintf(stderr, __VA_ARGS__)
+
 // fprinte - FILE print errno
 #define fprinte(stream, ...)       fprintec(stream, errno, __VA_ARGS__)
 // vfprinte - va_list FILE print errno
