@@ -435,8 +435,7 @@ int main (int argc, char **argv)
 
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID,
 		              "changing", NULL, getuid (), SHADOW_AUDIT_FAILURE);
@@ -479,8 +478,7 @@ int main (int argc, char **argv)
 		 */
 		if ((argc > 0) && (argv[0][0] != '-')) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
+				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
 			}
@@ -516,8 +514,7 @@ int main (int argc, char **argv)
 			goto failure;
 		} else if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
+				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
 			}
@@ -532,8 +529,7 @@ int main (int argc, char **argv)
 			 */
 			grp = xgetgrgid (pwd->pw_gid);
 			if (NULL == grp) {
-				fprintf (stderr,
-				         _("%s: GID '%lu' does not exist\n"),
+				eprintf(_("%s: GID '%lu' does not exist\n"),
 				         Prog, (unsigned long) pwd->pw_gid);
 				SYSLOG(LOG_CRIT, "GID '%lu' does not exist",
 				       (unsigned long) pwd->pw_gid);
@@ -607,7 +603,7 @@ int main (int argc, char **argv)
 	 */
 	grp = getgrnam (group); /* local, no need for xgetgrnam */
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: group '%s' does not exist\n"), Prog, group);
+		eprintf(_("%s: group '%s' does not exist\n"), Prog, group);
 		goto failure;
 	}
 

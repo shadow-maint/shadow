@@ -90,7 +90,7 @@ static void fail_exit (int code, bool process_selinux)
 {
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
@@ -98,7 +98,7 @@ static void fail_exit (int code, bool process_selinux)
 
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
@@ -223,8 +223,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			}
 #endif				/* USE_YESCRYPT */
 			if (bad_s != 0) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -250,8 +249,7 @@ static void check_flags (void)
 {
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	if (sflg && !cflg) {
-		fprintf (stderr,
-		         _("%s: %s flag is only allowed with the %s flag\n"),
+		eprintf(_("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage (E_USAGE);
 	}
@@ -259,9 +257,7 @@ static void check_flags (void)
 
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
-		fprintf (stderr,
-		         _("%s: the -c, -e, and -m flags are exclusive\n"),
-		         Prog);
+		eprintf(_("%s: the -c, -e, and -m flags are exclusive\n"), Prog);
 		usage (E_USAGE);
 	}
 
@@ -280,8 +276,7 @@ static void check_flags (void)
 		    &&(!IS_CRYPT_METHOD("YESCRYPT"))
 #endif				/* USE_YESCRYPT */
 		    ) {
-			fprintf (stderr,
-			         _("%s: unsupported crypt method: %s\n"),
+			eprintf(_("%s: unsupported crypt method: %s\n"),
 			         Prog, crypt_method);
 			usage (E_USAGE);
 		}
@@ -312,9 +307,7 @@ static void check_perms (void)
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		exit (1);
 	}
 
@@ -329,8 +322,7 @@ static void check_perms (void)
 	}
 
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
+		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
 		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
@@ -356,31 +348,26 @@ static void open_files(const struct option_flags *flags)
 	 * will bring all of the entries into memory where they may be updated.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
 		fail_exit (1, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
 			fail_exit (1, process_selinux);
 		}
 		spw_locked = true;
 		if (spw_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, spw_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
 			fail_exit (1, process_selinux);
 		}
 	}
@@ -397,14 +384,13 @@ static void close_files(const struct option_flags *flags)
 
 	if (is_shadow_pwd) {
 		if (spw_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 			fail_exit (1, process_selinux);
 		}
 		if (spw_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
@@ -412,14 +398,13 @@ static void close_files(const struct option_flags *flags)
 	}
 
 	if (pw_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
@@ -534,8 +519,7 @@ int main (int argc, char **argv)
 						break;
 				}
 
-				fprintf (stderr,
-				         _("%s: line %jd: line too long\n"),
+				eprintf(_("%s: line %jd: line too long\n"),
 				         Prog, line);
 				errors = true;
 				continue;
@@ -554,8 +538,7 @@ int main (int argc, char **argv)
 		name = buf;
 		cp = stpsep(name, ":");
 		if (cp == NULL) {
-			fprintf (stderr,
-			         _("%s: line %jd: missing new password\n"),
+			eprintf(_("%s: line %jd: missing new password\n"),
 			         Prog, line);
 			errors = true;
 			continue;
@@ -565,8 +548,7 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 		if (use_pam) {
 			if (do_pam_passwd_non_interactive (Prog, name, newpwd) != 0) {
-				fprintf (stderr,
-				         _("%s: (line %jd, user %s) password not changed\n"),
+				eprintf(_("%s: (line %jd, user %s) password not changed\n"),
 				         Prog, line, name);
 				errors = true;
 			}
@@ -608,8 +590,7 @@ int main (int argc, char **argv)
 		 */
 		pw = pw_locate (name);
 		if (NULL == pw) {
-			fprintf (stderr,
-			         _("%s: line %jd: user '%s' does not exist\n"), Prog,
+			eprintf(_("%s: line %jd: user '%s' does not exist\n"), Prog,
 			         line, name);
 			errors = true;
 			continue;
@@ -674,8 +655,7 @@ int main (int argc, char **argv)
 		 */
 		if (NULL != sp) {
 			if (spw_update (&newsp) == 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, spw_dbname (), newsp.sp_namp);
 				errors = true;
 				continue;
@@ -684,8 +664,7 @@ int main (int argc, char **argv)
 		if (   (NULL == sp)
 		    || !streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 			if (pw_update (&newpw) == 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, pw_dbname (), newpw.pw_name);
 				errors = true;
 				continue;
@@ -709,8 +688,7 @@ int main (int argc, char **argv)
 		if (!use_pam)
 #endif				/* USE_PAM */
 		{
-			fprintf (stderr,
-			         _("%s: error detected, changes ignored\n"),
+			eprintf(_("%s: error detected, changes ignored\n"),
 			         Prog);
 		}
 		fail_exit (1, process_selinux);

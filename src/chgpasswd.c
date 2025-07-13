@@ -91,7 +91,7 @@ static void fail_exit (int code, bool process_selinux)
 {
 	if (gr_locked) {
 		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
@@ -100,7 +100,7 @@ static void fail_exit (int code, bool process_selinux)
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -203,8 +203,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			bad_s = 0;
 
 			if (!crypt_method) {
-				fprintf (stderr,
-				         _("%s: no crypt method defined\n"),
+				eprintf(_("%s: no crypt method defined\n"),
 				         Prog);
 				usage (E_USAGE);
 			}
@@ -227,8 +226,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			}
 #endif				/* USE_YESCRYPT */
 			if (bad_s != 0) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -254,8 +252,7 @@ static void check_flags (void)
 {
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	if (sflg && !cflg) {
-		fprintf (stderr,
-		         _("%s: %s flag is only allowed with the %s flag\n"),
+		eprintf(_("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage (E_USAGE);
 	}
@@ -263,8 +260,7 @@ static void check_flags (void)
 
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
-		fprintf (stderr,
-		         _("%s: the -c, -e, and -m flags are exclusive\n"),
+		eprintf(_("%s: the -c, -e, and -m flags are exclusive\n"),
 		         Prog);
 		usage (E_USAGE);
 	}
@@ -284,8 +280,7 @@ static void check_flags (void)
 		    && !streq(crypt_method, "YESCRYPT")
 #endif				/* USE_YESCRYPT */
 		    ) {
-			fprintf (stderr,
-			         _("%s: unsupported crypt method: %s\n"),
+			eprintf(_("%s: unsupported crypt method: %s\n"),
 			         Prog, crypt_method);
 			usage (E_USAGE);
 		}
@@ -312,9 +307,7 @@ static void check_perms (void)
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		exit (1);
 	}
 
@@ -329,8 +322,7 @@ static void check_perms (void)
 	}
 
 	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
+		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
 		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
@@ -352,15 +344,13 @@ static void open_files (bool process_selinux)
 	 * bring all of the entries into memory where they may be updated.
 	 */
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (1, process_selinux);
 	}
 	gr_locked = true;
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		fail_exit (1, process_selinux);
 	}
 
@@ -368,15 +358,13 @@ static void open_files (bool process_selinux)
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (1, process_selinux);
 		}
 		sgr_locked = true;
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr, _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
+			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 			fail_exit (1, process_selinux);
 		}
 	}
@@ -394,14 +382,13 @@ static void close_files(const struct option_flags *flags)
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
 			fail_exit (1, process_selinux);
 		}
 		if (sgr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
@@ -410,14 +397,13 @@ static void close_files(const struct option_flags *flags)
 #endif
 
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit (1, process_selinux);
 	}
 	if (gr_unlock (process_selinux) == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
@@ -479,8 +465,7 @@ int main (int argc, char **argv)
 	while (fgets(buf, sizeof(buf), stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %jd: line too long\n"),
-			         Prog, line);
+			eprintf(_("%s: line %jd: line too long\n"), Prog, line);
 			errors = true;
 			continue;
 		}
@@ -497,8 +482,7 @@ int main (int argc, char **argv)
 		name = buf;
 		cp = stpsep(name, ":");
 		if (cp == NULL) {
-			fprintf (stderr,
-			         _("%s: line %jd: missing new password\n"),
+			eprintf(_("%s: line %jd: missing new password\n"),
 			         Prog, line);
 			errors = true;
 			continue;
@@ -547,8 +531,7 @@ int main (int argc, char **argv)
 		 */
 		gr = gr_locate (name);
 		if (NULL == gr) {
-			fprintf (stderr,
-			         _("%s: line %jd: group '%s' does not exist\n"), Prog,
+			eprintf(_("%s: line %jd: group '%s' does not exist\n"), Prog,
 			         line, name);
 			errors = true;
 			continue;
@@ -607,8 +590,7 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 		if (NULL != sg) {
 			if (sgr_update (&newsg) == 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, sgr_dbname (), newsg.sg_namp);
 				errors = true;
 				continue;
@@ -619,8 +601,7 @@ int main (int argc, char **argv)
 #endif
 		{
 			if (gr_update (&newgr) == 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: line %jd: failed to prepare the new %s entry '%s'\n"),
 				         Prog, line, gr_dbname (), newgr.gr_name);
 				errors = true;
 				continue;
@@ -636,8 +617,7 @@ int main (int argc, char **argv)
 	 * afterwards.
 	 */
 	if (errors) {
-		fprintf (stderr,
-		         _("%s: error detected, changes ignored\n"), Prog);
+		eprintf(_("%s: error detected, changes ignored\n"), Prog);
 		fail_exit (1, process_selinux);
 	}
 

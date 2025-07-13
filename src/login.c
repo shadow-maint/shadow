@@ -56,7 +56,7 @@
 static pam_handle_t *pamh = NULL;
 
 #define PAM_FAIL_CHECK if (retcode != PAM_SUCCESS) { \
-	fprintf(stderr,"\n%s\n",pam_strerror(pamh, retcode)); \
+	eprintf("\n%s\n",pam_strerror(pamh, retcode)); \
 	SYSLOG(LOG_ERR,"%s",pam_strerror(pamh, retcode)); \
 	(void) pam_end(pamh, retcode); \
 	exit(1); \
@@ -132,11 +132,11 @@ static void exit_handler (int);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-p] [name]\n"), Prog);
+	eprintf(_("Usage: %s [-p] [name]\n"), Prog);
 	if (!amroot) {
 		exit (1);
 	}
-	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
+	eprintf(_("       %s [-p] [-h host] [-f name]\n"), Prog);
 	exit (1);
 }
 
@@ -173,14 +173,12 @@ static void setup_tty (void)
 		 * getdef_num cannot validate this.
 		 */
 		if (erasechar != (int) termio.c_cc[VERASE]) {
-			fprintf (stderr,
-			         _("configuration error - cannot parse %s value: '%d'"),
+			eprintf(_("configuration error - cannot parse %s value: '%d'"),
 			         "ERASECHAR", erasechar);
 			exit (1);
 		}
 		if (killchar != (int) termio.c_cc[VKILL]) {
-			fprintf (stderr,
-			         _("configuration error - cannot parse %s value: '%d'"),
+			eprintf(_("configuration error - cannot parse %s value: '%d'"),
 			         "KILLCHAR", killchar);
 			exit (1);
 		}
@@ -299,7 +297,7 @@ static void process_flags (int argc, char *const *argv)
 	 */
 
 	if ((fflg || hflg) && !amroot) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		eprintf(_("%s: Permission denied.\n"), Prog);
 		exit (1);
 	}
 
@@ -492,7 +490,7 @@ int main (int argc, char **argv)
 	log_set_logfd(stderr);
 
 	if (geteuid() != 0) {
-		fprintf (stderr, _("%s: Cannot possibly work without effective root\n"), Prog);
+		eprintf(_("%s: Cannot possibly work without effective root\n"), Prog);
 		exit (1);
 	}
 
@@ -614,8 +612,7 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retcode = pam_start (Prog, username, &conv, &pamh);
 	if (retcode != PAM_SUCCESS) {
-		fprintf (stderr,
-		         _("login: PAM Failure, aborting: %s\n"),
+		eprintf(_("login: PAM Failure, aborting: %s\n"),
 		         pam_strerror (pamh, retcode));
 		SYSLOG(LOG_ERR, "Couldn't initialize PAM: %s", pam_strerror(pamh, retcode));
 		exit (99);
@@ -690,8 +687,7 @@ int main (int argc, char **argv)
 				SYSLOG(LOG_NOTICE,
 				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
 				       failcount, fromhost, failent_user);
-				fprintf (stderr,
-				         _("Maximum number of tries exceeded (%u)\n"),
+				eprintf(_("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
 				PAM_END;
 				exit(0);
@@ -734,8 +730,7 @@ int main (int argc, char **argv)
 				SYSLOG(LOG_NOTICE,
 				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
 				       failcount, fromhost, failent_user);
-				fprintf (stderr,
-				         _("Maximum number of tries exceeded (%u)\n"),
+				eprintf(_("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
 				PAM_END;
 				exit(0);
@@ -780,9 +775,7 @@ int main (int argc, char **argv)
 	pwd = xgetpwnam (username);
 	if (NULL == pwd) {
 		SYSLOG(LOG_ERR, "cannot find user %s", failent_user);
-		fprintf (stderr,
-		         _("Cannot find user (%s)\n"),
-		         username);
+		eprintf(_("Cannot find user (%s)\n"), username);
 		exit (1);
 	}
 
@@ -1106,7 +1099,7 @@ int main (int argc, char **argv)
 	if (1 == initial_pid) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
-			fprintf (stderr, _("TIOCSCTTY failed on %s"), tty);
+			eprintf(_("TIOCSCTTY failed on %s"), tty);
 		}
 	}
 
