@@ -53,6 +53,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "getdef.h"
+#include "io/fprintf/eprintf.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
@@ -293,9 +294,7 @@ static void prepare_pam_close_session (void)
 	sigemptyset (&action.sa_mask);
 	action.sa_flags = 0;
 	if (0 == caught && sigaction (SIGCHLD, &action, NULL) != 0) {
-		fprintf (stderr,
-		         _("%s: signal masking malfunction\n"),
-		         Prog);
+		eprintf(_("%s: signal masking malfunction\n"), Prog);
 		SYSLOG(LOG_WARN, "Will not execute %s", shellstr);
 		closelog ();
 		exit (1);
@@ -306,9 +305,7 @@ static void prepare_pam_close_session (void)
 	if (pid_child == 0) {	/* child shell */
 		return; /* Only the child will return from pam_create_session */
 	} else if ((pid_t)-1 == pid_child) {
-		(void) fprintf (stderr,
-		                _("%s: Cannot fork user shell\n"),
-		                Prog);
+		(void) eprintf(_("%s: Cannot fork user shell\n"), Prog);
 		SYSLOG(LOG_WARN, "Cannot execute %s", shellstr);
 		closelog ();
 		exit (1);
@@ -318,9 +315,7 @@ static void prepare_pam_close_session (void)
 	/* parent only */
 	sigfillset (&ourset);
 	if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
-		(void) fprintf (stderr,
-		                _("%s: signal malfunction\n"),
-		                Prog);
+		(void) eprintf(_("%s: signal malfunction\n"), Prog);
 		caught = SIGTERM;
 	}
 	if (0 == caught) {
@@ -343,9 +338,7 @@ static void prepare_pam_close_session (void)
 		            || (sigaction (SIGTSTP,  &action, NULL) != 0)))
 		    || (sigprocmask (SIG_UNBLOCK, &ourset, NULL) != 0)
 		    ) {
-			fprintf (stderr,
-			         _("%s: signal masking malfunction\n"),
-			         Prog);
+			eprintf(_("%s: signal masking malfunction\n"), Prog);
 			caught = SIGTERM;
 		}
 	}
@@ -400,7 +393,7 @@ static void prepare_pam_close_session (void)
 		 * so it's time to block all of them. */
 		sigfillset (&ourset);
 		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
-			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
+			eprintf(_("%s: signal masking malfunction\n"), Prog);
 			kill_child(pid_child);
 			/* Never reached (exit called). */
 		}
@@ -429,7 +422,7 @@ static void prepare_pam_close_session (void)
 	ret = pam_close_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_close_session: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 	}
 
 	(void) pam_setcred (pamh, PAM_DELETE_CRED);
@@ -471,7 +464,7 @@ static void check_perms_pam (const struct passwd *pw)
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
 		       pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 		(void) pam_end (pamh, ret);
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
@@ -479,25 +472,21 @@ static void check_perms_pam (const struct passwd *pw)
 	ret = pam_acct_mgmt (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		if (caller_is_root) {
-			fprintf (stderr,
-			         _("%s: %s\n(Ignored)\n"),
+			eprintf(_("%s: %s\n(Ignored)\n"),
 			         Prog, pam_strerror (pamh, ret));
 		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
 			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 			if (PAM_SUCCESS != ret) {
 				SYSLOG(LOG_ERR, "pam_chauthtok: %s",
 				       pam_strerror(pamh, ret));
-				fprintf (stderr,
-				         _("%s: %s\n"),
+				eprintf(_("%s: %s\n"),
 				         Prog, pam_strerror (pamh, ret));
 				(void) pam_end (pamh, ret);
 				su_failure (caller_tty, 0 == pw->pw_uid);
 			}
 		} else {
 			SYSLOG(LOG_ERR, "pam_acct_mgmt: %s", pam_strerror(pamh, ret));
-			fprintf (stderr,
-			         _("%s: %s\n"),
-			         Prog, pam_strerror (pamh, ret));
+			eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 			(void) pam_end (pamh, ret);
 			su_failure (caller_tty, 0 == pw->pw_uid);
 		}
@@ -521,11 +510,11 @@ static void check_perms_nopam (const struct passwd *pw)
 			prevent_no_auth = "superuser";
 		}
 		if (streq(prevent_no_auth, "yes")) {
-			fprintf(stderr, _("Password field is empty, this is forbidden for all accounts.\n"));
+			eprintf(_("Password field is empty, this is forbidden for all accounts.\n"));
 			exit(1);
 		} else if ((pw->pw_uid == 0)
 				&& streq(prevent_no_auth, "superuser")) {
-			fprintf(stderr, _("Password field is empty, this is forbidden for super-user.\n"));
+			eprintf(_("Password field is empty, this is forbidden for super-user.\n"));
 			exit(1);
 		}
 	}
@@ -551,9 +540,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	if (   (0 == pw->pw_uid)
 	    && getdef_bool ("SU_WHEEL_ONLY")
 	    && !iswheel (caller_name)) {
-		fprintf (stderr,
-		         _("You are not authorized to su %s\n"),
-		         name);
+		eprintf(_("You are not authorized to su %s\n"), name);
 		exit (1);
 	}
 	spwd = getspnam (name); /* !USE_PAM, no need for xgetspnam */
@@ -575,9 +562,7 @@ static void check_perms_nopam (const struct passwd *pw)
 		password = caller_pass;
 		break;
 	default:	/* access denied (-1) or unexpected value */
-		fprintf (stderr,
-		         _("You are not authorized to su %s\n"),
-		         name);
+		eprintf(_("You are not authorized to su %s\n"), name);
 		exit (1);
 	}
 #endif				/* SU_ACCESS */
@@ -595,7 +580,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	if (pw_auth(password, name) != 0) {
 		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN,
 		       "Authentication failed for %s", name);
-		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
+		eprintf(_("%s: Authentication failure\n"), Prog);
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
 	(void) signal (SIGQUIT, oldsig);
@@ -618,8 +603,7 @@ static void check_perms_nopam (const struct passwd *pw)
 	if (!isttytime (name, "SU", time (NULL))) {
 		SYSLOG(pw->pw_uid ? LOG_WARN : LOG_CRIT,
 		       "SU by %s to restricted account %s", caller_name, name);
-		fprintf (stderr,
-		         _("%s: You are not authorized to su at that time\n"),
+		eprintf(_("%s: You are not authorized to su at that time\n"),
 		         Prog);
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
@@ -660,8 +644,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	 */
 	struct passwd *pw = xgetpwnam (name);
 	if (NULL == pw) {
-		(void) fprintf (stderr,
-		                _("No passwd entry for user '%s'\n"), name);
+		(void) eprintf(_("No passwd entry for user '%s'\n"), name);
 		SYSLOG(LOG_NOTICE, "No passwd entry for user '%s'", name);
 		su_failure (caller_tty, true);
 	}
@@ -675,8 +658,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	ret = pam_get_item(pamh, PAM_USER, &item);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG(LOG_ERR, "pam_get_item: internal PAM error\n");
-		(void) fprintf (stderr,
-		                "%s: Internal PAM error retrieving username\n",
+		(void) eprintf("%s: Internal PAM error retrieving username\n",
 		                Prog);
 		(void) pam_end (pamh, ret);
 		su_failure (caller_tty, 0 == pw->pw_uid);
@@ -687,15 +669,13 @@ static /*@only@*/struct passwd * do_check_perms (void)
 		       "Change user from '%s' to '%s' as requested by PAM",
 		       name, tmp_name);
 		if (strtcpy_a(name, tmp_name) == -1) {
-			fprintf (stderr, _("Overlong user name '%s'\n"),
-			         tmp_name);
+			eprintf(_("Overlong user name '%s'\n"), tmp_name);
 			SYSLOG(LOG_NOTICE, "Overlong user name '%s'", tmp_name);
 			su_failure (caller_tty, true);
 		}
 		pw = xgetpwnam (name);
 		if (NULL == pw) {
-			(void) fprintf (stderr,
-			                _("No passwd entry for user '%s'\n"),
+			(void) eprintf(_("No passwd entry for user '%s'\n"),
 			                name);
 			SYSLOG(LOG_NOTICE, "No passwd entry for user '%s'", name);
 			su_failure (caller_tty, true);
@@ -762,9 +742,7 @@ save_caller_context(void)
 		 * Be more paranoid, like su from SimplePAMApps.  --marekm
 		 */
 		if (!caller_is_root) {
-			fprintf (stderr,
-			         _("%s: must be run from a terminal\n"),
-			         Prog);
+			eprintf(_("%s: must be run from a terminal\n"), Prog);
 			exit (1);
 		}
 		caller_tty = "???";
@@ -776,9 +754,7 @@ save_caller_context(void)
 	 */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
 		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		       (unsigned long) caller_uid);
 		su_failure (caller_tty, true); /* unknown target UID*/
@@ -1030,7 +1006,7 @@ int main (int argc, char **argv)
 	ret = pam_start (Prog, name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_start: error %d", ret);
-		fprintf(stderr, _("%s: pam_start: error %d\n"), Prog, ret);
+		eprintf(_("%s: pam_start: error %d\n"), Prog, ret);
 		exit (1);
 	}
 
@@ -1040,7 +1016,7 @@ int main (int argc, char **argv)
 	}
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_set_item: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -1101,7 +1077,7 @@ int main (int argc, char **argv)
 	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_setcred: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 		(void) pam_end (pamh, ret);
 		exit (1);
 	}
@@ -1109,7 +1085,7 @@ int main (int argc, char **argv)
 	ret = pam_open_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
 		SYSLOG(LOG_ERR, "pam_open_session: %s", pam_strerror(pamh, ret));
-		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		eprintf(_("%s: %s\n"), Prog, pam_strerror(pamh, ret));
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		(void) pam_end (pamh, ret);
 		exit (1);
@@ -1172,8 +1148,7 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 		if (-1 == err) {
-			(void) fprintf (stderr,
-			                _("%s: Cannot drop the controlling terminal\n"),
+			(void) eprintf(_("%s: Cannot drop the controlling terminal\n"),
 			                Prog);
 			exit (1);
 		}
@@ -1225,8 +1200,7 @@ int main (int argc, char **argv)
 		argv[-1] = const_cast(char *, cp);
 		execve_shell (shellstr, &argv[-1], environ);
 		err = errno;
-		(void) fprintf (stderr,
-		                _("Cannot execute %s\n"), shellstr);
+		(void) eprintf(_("Cannot execute %s\n"), shellstr);
 		errno = err;
 	} else {
 		(void) shell (shellstr, cp, environ);
