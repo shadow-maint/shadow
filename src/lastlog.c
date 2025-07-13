@@ -120,8 +120,7 @@ static void print_one (/*@null@*/const struct passwd *pw)
 		 * empty entry in this case.
 		 */
 		if (fread(&ll, sizeof(ll), 1, lastlogfile) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to get the entry for UID %lu\n"),
+			eprintf(_("%s: Failed to get the entry for UID %lu\n"),
 			         Prog, (unsigned long)pw->pw_uid);
 			exit (EXIT_FAILURE);
 		}
@@ -185,8 +184,8 @@ static void print (void)
 	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (   (has_umin && umin > lastlog_uid_max)
 	    || (has_umax && umax > lastlog_uid_max)) {
-		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
-				   "\tthe output might be incorrect.\n"), Prog, lastlog_uid_max);
+		eprintf(_("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+			  "\tthe output might be incorrect.\n"), Prog, lastlog_uid_max);
 	}
 
 	if (uflg && has_umin && has_umax && (umin == umax)) {
@@ -245,8 +244,7 @@ static void update_one (/*@null@*/const struct passwd *pw)
 #endif
 
 	if (fwrite(&ll, sizeof(ll), 1, lastlogfile) != 1) {
-			fprintf (stderr,
-			         _("%s: Failed to update the entry for UID %lu\n"),
+			eprintf(_("%s: Failed to update the entry for UID %lu\n"),
 			         Prog, (unsigned long)pw->pw_uid);
 			exit (EXIT_FAILURE);
 	}
@@ -263,8 +261,8 @@ static void update (void)
 	lastlog_uid_max = getdef_ulong ("LASTLOG_UID_MAX", 0xFFFFFFFFUL);
 	if (   (has_umin && umin > lastlog_uid_max)
 	    || (has_umax && umax > lastlog_uid_max)) {
-		fprintf (stderr, _("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
-				   "\tthey will not be updated.\n"), Prog, lastlog_uid_max);
+		eprintf(_("%s: Selected uid(s) are higher than LASTLOG_UID_MAX (%lu),\n"
+			  "\tthey will not be updated.\n"), Prog, lastlog_uid_max);
 		return;
 	}
 
@@ -283,8 +281,7 @@ static void update (void)
 	}
 
 	if (fflush (lastlogfile) != 0 || fsync (fileno (lastlogfile)) != 0) {
-			fprintf (stderr,
-			         _("%s: Failed to update the lastlog file\n"),
+			eprintf(_("%s: Failed to update the lastlog file\n"),
 			         Prog);
 			exit (EXIT_FAILURE);
 	}
@@ -330,8 +327,7 @@ int main (int argc, char **argv)
 			{
 				unsigned long inverse_days;
 				if (str2ul(&inverse_days, optarg) == -1) {
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
+					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (EXIT_FAILURE);
 				}
@@ -358,8 +354,7 @@ int main (int argc, char **argv)
 			{
 				unsigned long days;
 				if (str2ul(&days, optarg) == -1) {
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
+					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					exit (EXIT_FAILURE);
 				}
@@ -389,8 +384,7 @@ int main (int argc, char **argv)
 					if (getrange(optarg,
 					             &umin, &has_umin,
 					             &umax, &has_umax) == -1) {
-						fprintf (stderr,
-						         _("%s: Unknown user or range: %s\n"),
+						eprintf(_("%s: Unknown user or range: %s\n"),
 						         Prog, optarg);
 						exit (EXIT_FAILURE);
 					}
@@ -408,20 +402,17 @@ int main (int argc, char **argv)
 			}
 		}
 		if (argc > optind) {
-			fprintf (stderr,
-			         _("%s: unexpected argument: %s\n"),
+			eprintf(_("%s: unexpected argument: %s\n"),
 			         Prog, argv[optind]);
 			usage (EXIT_FAILURE);
 		}
 		if (Cflg && Sflg) {
-			fprintf (stderr,
-			         _("%s: Option -C cannot be used together with option -S\n"),
+			eprintf(_("%s: Option -C cannot be used together with option -S\n"),
 			         Prog);
 			usage (EXIT_FAILURE);
 		}
 		if ((Cflg || Sflg) && !uflg) {
-			fprintf (stderr,
-			         _("%s: Options -C and -S require option -u to specify the user\n"),
+			eprintf(_("%s: Options -C and -S require option -u to specify the user\n"),
 			         Prog);
 			usage (EXIT_FAILURE);
 		}
