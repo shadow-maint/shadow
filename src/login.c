@@ -37,6 +37,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
+#include "session_management.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"

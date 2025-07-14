@@ -9,6 +9,8 @@
 
 #include "config.h"
 
+#include "session_management.h"
+
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
