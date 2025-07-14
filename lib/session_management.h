@@ -13,20 +13,14 @@
 
 #include "config.h"
 
+#include <stdlib.h>
 #include <sys/types.h>
 
+#include "attr.h"
 
-/**
- * @brief Get host for the current session
- *
- * @param[out] out Host name
- * @param[in] main_pid the PID of the main process (the parent PID if
- *                     the process forked itself)
- *
- * @return 0 or a positive integer if the host was obtained properly,
- *         another value on error.
- */
-int get_session_host(char **out, pid_t main_pid);
+
+ATTR_MALLOC(free)
+char *get_session_host(pid_t main_pid);
 
 
 #if !defined(ENABLE_LOGIND)

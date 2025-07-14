@@ -25,23 +25,22 @@ ATTR_MALLOC(free) static char *pid_get_session(pid_t pid);
 ATTR_MALLOC(free) static char *session_get_remote_host(char *session);
 
 
-int
-get_session_host(char **out, pid_t main_pid)
+char *
+get_session_host(pid_t main_pid)
 {
 	char  *host;
 	char  *session;
 
 	session = pid_get_session(main_pid);
 	if (session == NULL)
-		return errno;
+		return NULL;
 
 	host = session_get_remote_host(session);
 	free(session);
 	if (host == NULL)
-		return errno;
+		return NULL;
 
-	*out = host;
-	return 0;
+	return host;
 }
 
 
