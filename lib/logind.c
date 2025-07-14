@@ -1,8 +1,11 @@
 // SPDX-FileCopyrightText: 2023, Iker Pedrosa <ipedrosa@redhat.com>
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
 #include "config.h"
+
+#include "session_management.h"
 
 #include <systemd/sd-login.h>
 
