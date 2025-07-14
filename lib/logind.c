@@ -14,9 +14,9 @@
 int
 get_session_host(char **out, pid_t main_pid)
 {
-	char *host = NULL;
-	char *session = NULL;
-	int ret;
+	int   ret;
+	char  *host;
+	char  *session;
 
 	ret = sd_pid_get_session(main_pid, &session);
 	if (ret < 0)
@@ -36,13 +36,10 @@ unsigned long
 active_sessions_count(const char *name, unsigned long)
 {
 	struct passwd  *pw;
-	unsigned long  count = 0;
 
 	pw = prefix_getpwnam(name);
 	if (pw == NULL)
 		return 0;
 
-	count = sd_uid_get_sessions(pw->pw_uid, 0, NULL);
-
-	return count;
+	return sd_uid_get_sessions(pw->pw_uid, 0, NULL);
 }
