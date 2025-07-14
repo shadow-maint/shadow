@@ -468,11 +468,13 @@ extern int user_busy (const char *name, uid_t uid);
  * @brief Get host for the current session
  *
  * @param[out] out Host name
+ * @param[in] main_pid the PID of the main process (the parent PID if
+ *                     the process forked itself)
  *
  * @return 0 or a positive integer if the host was obtained properly,
  *         another value on error.
  */
-extern int get_session_host (char **out);
+extern int get_session_host (char **out, pid_t main_pid);
 #ifndef ENABLE_LOGIND
 /**
  * @brief Update or create an utmp entry in utmp, wtmp, utmpw, or wtmpx
@@ -480,24 +482,30 @@ extern int get_session_host (char **out);
  * @param[in] user username
  * @param[in] tty tty
  * @param[in] host hostname
+ * @param[in] main_pid the PID of the main process (the parent PID if
+ *                     the process forked itself)
  *
  * @return 0 if utmp was updated properly,
  *         1 on error.
  */
 extern int update_utmp (const char *user,
                         const char *tty,
-                        const char *host);
+                        const char *host,
+                        pid_t main_pid);
 /**
  * @brief Update the cumulative failure log
  *
  * @param[in] failent_user username
  * @param[in] tty tty
  * @param[in] host hostname
+ * @param[in] main_pid the PID of the main process (the parent PID if
+ *                     the process forked itself)
  *
  */
 extern void record_failure(const char *failent_user,
                            const char *tty,
-                           const char *hostname);
+                           const char *hostname,
+                           pid_t main_pid);
 #endif /* ENABLE_LOGIND */
 
 /**

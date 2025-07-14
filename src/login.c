@@ -456,6 +456,7 @@ int main (int argc, char **argv)
 	char           *host = NULL;
 	char           tty[BUFSIZ];
 	char           fromhost[512];
+	pid_t          initial_pid; /* the "session leader" PID */
 	const char     *failent_user;
 	const char     *tmptty;
 	const char     *cp;
@@ -504,7 +505,8 @@ int main (int argc, char **argv)
 		exit (1);	/* must be a terminal */
 	}
 
-	err = get_session_host(&host);
+	initial_pid = getpid();
+	err = get_session_host(&host, initial_pid);
 	/*
 	 * Be picky if run by normal users (possible if installed setuid
 	 * root), but not if run by root.
@@ -944,7 +946,7 @@ int main (int argc, char **argv)
 			failure (pwd->pw_uid, tty, &faillog);
 		}
 #ifndef ENABLE_LOGIND
-		record_failure(failent_user, tty, hostname);
+		record_failure(failent_user, tty, hostname, initial_pid);
 #endif /* ENABLE_LOGIND */
 
 		retries--;
@@ -1121,7 +1123,7 @@ int main (int argc, char **argv)
 	 * The utmp entry needs to be updated to indicate the new status
 	 * of the session, the new PID and SID.
 	 */
-	err = update_utmp (username, tty, hostname);
+	err = update_utmp(username, tty, hostname, initial_pid);
 	if (err != 0) {
 		SYSLOG ((LOG_WARN, "Unable to update utmp entry for %s", username));
 	}

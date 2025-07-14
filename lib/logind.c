@@ -14,13 +14,13 @@
 
 #include <systemd/sd-login.h>
 
-int get_session_host (char **out)
+int get_session_host (char **out, pid_t main_pid)
 {
     char *host = NULL;
     char *session = NULL;
     int ret;
 
-    ret = sd_pid_get_session (getpid(), &session);
+    ret = sd_pid_get_session(main_pid, &session);
     if (ret < 0) {
         return ret;
     }
