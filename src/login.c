@@ -38,6 +38,7 @@
 #include "io/fprintf.h"
 #include "prototypes.h"
 #include "pwauth.h"
+#include "session_management.h"
 #include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
