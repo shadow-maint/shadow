@@ -31,6 +31,7 @@
 #include <sys/resource.h>
 
 #include "atoi/a2i.h"
+#include "session_management.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
