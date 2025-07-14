@@ -187,28 +187,24 @@ get_current_utmp(pid_t main_pid)
 }
 
 
-int
-get_session_host(char **out, pid_t main_pid)
+char *
+get_session_host(pid_t main_pid)
 {
-	int           ret = 0;
+	char          *host = NULL;
 	struct utmpx  *ut;
-
-	*out = NULL;
 
 	ut = get_current_utmp(main_pid);
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
-		*out = XSTRNDUP(ut->ut_host);
-	} else {
-		ret = -2;
-	}
+	if ((ut != NULL) && (ut->ut_host[0] != '\0'))
+		host = XSTRNDUP(ut->ut_host);
 #else
-	ret = -2;
+	errno = ENOSYS;
 #endif
+
 	free(ut);
 
-	return ret;
+	return host;
 }
 
 
