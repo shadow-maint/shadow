@@ -200,24 +200,22 @@ get_current_utmp(pid_t main_pid)
 }
 
 
-int
-get_session_host(char **out, pid_t main_pid)
+char *
+get_session_host(pid_t main_pid)
 {
-	int           ret = 0;
+	char          *host;
 	struct utmpx  *ut;
 
 	ut = get_current_utmp(main_pid);
 
-	if ((ut != NULL) && !STRNEQ(ut->ut_host, "")) {
-		*out = XSTRNDUP(ut->ut_host);
-	} else {
-		*out = NULL;
-		ret = -2;
-	}
+	if ((ut != NULL) && !STRNEQ(ut->ut_host, ""))
+		host = XSTRNDUP(ut->ut_host);
+	else
+		host = NULL;
 
 	free(ut);
 
-	return ret;
+	return host;
 }
 
 
