@@ -25,14 +25,12 @@ get_session_host(char **out, pid_t main_pid)
 	if (ret < 0)
 		return ret;
 	ret = sd_session_get_remote_host(session, &host);
+	free(session);
 	if (ret < 0)
-		goto done;
+		return ret;
 
 	*out = host;
-
-done:
-	free(session);
-	return ret;
+	return 0;
 }
 
 unsigned long
