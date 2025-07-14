@@ -149,7 +149,7 @@ err_close:
  *	Return NULL if no entries exist in utmp for the current process.
  */
 static /*@null@*/ /*@only@*/struct utmpx *
-get_current_utmp(void)
+get_current_utmp(pid_t main_pid)
 {
 	struct utmpx  *ut;
 
@@ -161,8 +161,7 @@ get_current_utmp(void)
 		    && (USER_PROCESS  != ut->ut_type))
 			continue;
 
-		if (   (   (ut->ut_pid == getpid ())
-		        || (ut->ut_pid == getppid ()))
+		if (   (main_pid == ut->ut_pid)
 		    && ('\0' != ut->ut_id[0])
 		    /* A process may have failed to close an entry
 		     * Check if this entry refers to the current tty */
@@ -187,12 +186,12 @@ get_current_utmp(void)
 
 
 int
-get_session_host(char **out)
+get_session_host(char **out, pid_t main_pid)
 {
 	int           ret = 0;
 	struct utmpx  *ut;
 
-	ut = get_current_utmp();
+	ut = get_current_utmp(main_pid);
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
@@ -250,7 +249,7 @@ updwtmpx(const char *filename, const struct utmpx *ut)
  */
 static /*@only@*/struct utmpx *
 prepare_utmp(const char *name, const char *line, const char *host,
-             /*@null@*/const struct utmpx *ut)
+             /*@null@*/const struct utmpx *ut, pid_t main_pid)
 {
 	char            *hostname = NULL;
 	struct utmpx    *utent;
@@ -274,7 +273,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 	utent->ut_type = USER_PROCESS;
-	utent->ut_pid = getpid ();
+	utent->ut_pid = main_pid;
 	STRNCPY(utent->ut_line, line);
 	if (NULL != ut) {
 		STRNCPY(utent->ut_id, ut->ut_id);
@@ -372,12 +371,13 @@ setutmp(struct utmpx *ut)
 
 
 int
-update_utmp(const char *user, const char *tty, const char *host)
+update_utmp(const char *user, const char *tty, const char *host,
+            pid_t main_pid)
 {
 	struct utmpx  *utent, *ut;
 
-	utent = get_current_utmp ();
-	ut = prepare_utmp  (user, tty, host, utent);
+	utent = get_current_utmp(main_pid);
+	ut = prepare_utmp(user, tty, host, utent, main_pid);
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 
@@ -389,13 +389,15 @@ update_utmp(const char *user, const char *tty, const char *host)
 
 
 void
-record_failure(const char *failent_user, const char *tty, const char *hostname)
+record_failure(const char *failent_user, const char *tty, const char *hostname,
+               pid_t main_pid)
 {
 	struct utmpx  *utent, *failent;
 
 	if (getdef_str ("FTMP_FILE") != NULL) {
-		utent = get_current_utmp ();
-		failent = prepare_utmp (failent_user, tty, hostname, utent);
+		utent = get_current_utmp(main_pid);
+		failent = prepare_utmp(failent_user, tty, hostname, utent,
+		                       main_pid);
 		failtmp (failent_user, failent);
 		free (utent);
 		free (failent);
