@@ -1111,7 +1111,7 @@ int main (int argc, char **argv)
 #endif
 
 	/* If we were init, we need to start a new session */
-	if (getppid() == 1) {
+	if (1 == initial_pid) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
 			fprintf (stderr, _("TIOCSCTTY failed on %s"), tty);
