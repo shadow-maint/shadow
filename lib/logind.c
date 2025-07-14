@@ -22,12 +22,12 @@
 
 
 ATTR_MALLOC(free) static char *pid_get_session(pid_t pid);
+ATTR_MALLOC(free) static char *session_get_remote_host(char *session);
 
 
 int
 get_session_host(char **out, pid_t main_pid)
 {
-	int   ret;
 	char  *host;
 	char  *session;
 
@@ -35,10 +35,10 @@ get_session_host(char **out, pid_t main_pid)
 	if (session == NULL)
 		return errno;
 
-	ret = sd_session_get_remote_host(session, &host);
+	host = session_get_remote_host(session);
 	free(session);
-	if (ret < 0)
-		return ret;
+	if (host == NULL)
+		return errno;
 
 	*out = host;
 	return 0;
@@ -71,4 +71,20 @@ pid_get_session(pid_t pid)
 	}
 
 	return session;
+}
+
+
+static char *
+session_get_remote_host(char *session)
+{
+	int   e;
+	char  *host;
+
+	e = sd_session_get_remote_host(session, &host);
+	if (e < 0) {
+		errno = -e;
+		return NULL;
+	}
+
+	return host;
 }
