@@ -504,15 +504,15 @@ int main (int argc, char **argv)
 	}
 
 	initial_pid = getpid();
-	err = get_session_host(&host, initial_pid);
+	host = get_session_host(initial_pid);
 	/*
 	 * Be picky if run by normal users (possible if installed setuid
 	 * root), but not if run by root.
 	 */
-	if (!amroot && (err != 0)) {
-		SYSLOG ((LOG_ERR,
-				 "No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
-				 err));
+	if (!amroot && host == NULL) {
+		SYSLOG((LOG_ERR,
+			"No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
+			errno));
 		exit (1);
 	}
 
