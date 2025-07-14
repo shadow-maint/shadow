@@ -42,8 +42,6 @@
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
-#ident "$Id$"
-
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
 
@@ -203,7 +201,7 @@ get_session_host(pid_t main_pid)
 	ut = get_current_utmp(main_pid);
 
 	if ((ut != NULL) && !strneq_a(ut->ut_host, ""))
-		host = xstrndup_a(ut->ut_host);
+		host = strndup_a(ut->ut_host);
 	else
 		host = NULL;
 
