@@ -13,8 +13,9 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-#include "prototypes.h"
 #include "attr.h"
+#include "session_management.h"
+
 
 /***********************
  * WRAPPERS
