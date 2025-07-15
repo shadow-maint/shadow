@@ -11,7 +11,7 @@
  * Separated from setup.c.  --marekm
  */
 
-#include <config.h>
+#include "config.h"
 
 #ident "$Id$"
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <config.h>
+#include "config.h"
 
 #include "atoi/strtoi/strtou_noneg.h"
 

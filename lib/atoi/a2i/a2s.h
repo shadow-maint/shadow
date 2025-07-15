@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_ATOI_A2I_A2S_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include "atoi/a2i/a2i.h"
 

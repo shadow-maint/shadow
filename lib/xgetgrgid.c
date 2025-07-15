@@ -26,7 +26,7 @@
  * This file provides wrapper to the getgrgid or getgrgid_r functions.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include "groupio.h"
 

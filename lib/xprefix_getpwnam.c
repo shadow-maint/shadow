@@ -26,7 +26,7 @@
  * This file provides wrapper to the prefix_getpwnam or prefix_getpwnam_r functions.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include "pwio.h"
 

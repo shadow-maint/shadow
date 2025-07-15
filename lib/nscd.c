@@ -1,6 +1,6 @@
 /* Author: Peter Vrabec <pvrabec@redhat.com> */
 
-#include <config.h>
+#include "config.h"
 #ifdef USE_NSCD
 
 #include <stdio.h>

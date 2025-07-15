@@ -5,7 +5,7 @@
 #ifndef _SUBORDINATEIO_H
 #define _SUBORDINATEIO_H
 
-#include <config.h>
+#include "config.h"
 
 #ifdef ENABLE_SUBIDS
 

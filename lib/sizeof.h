@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIBMISC_SIZEOF_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <limits.h>
 #if __has_include(<stdcountof.h>)

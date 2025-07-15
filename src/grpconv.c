@@ -12,7 +12,7 @@
  *
  */
 
-#include <config.h>
+#include "config.h"
 #ident "$Id$"
 
 #include <errno.h>

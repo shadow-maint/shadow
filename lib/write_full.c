@@ -6,7 +6,7 @@
  */
 
 
-#include <config.h>
+#include "config.h"
 
 #ident "$Id$"
 

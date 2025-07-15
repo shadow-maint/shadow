@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_ALLOC_REALLOCF_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <stddef.h>
 #include <stdlib.h>

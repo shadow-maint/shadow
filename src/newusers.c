@@ -15,7 +15,7 @@
  *	adding entries in the related directories.
  */
 
-#include <config.h>
+#include "config.h"
 
 #ident "$Id$"
 

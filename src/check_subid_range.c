@@ -3,7 +3,7 @@
 // Exits 0 if owner has subid range starting start, of size count
 // Exits 1 otherwise.
 
-#include <config.h>
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>

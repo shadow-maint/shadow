@@ -7,7 +7,7 @@
 #define SHADOW_INCLUDE_LIB_TIME_DAY_TO_STR_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <time.h>
 

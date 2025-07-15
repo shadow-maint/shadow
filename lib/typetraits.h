@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_TYPETRAITS_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include "sizeof.h"
 

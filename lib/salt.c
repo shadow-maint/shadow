@@ -12,7 +12,7 @@
  * it is in the public domain.
  */
 
-#include <config.h>
+#include "config.h"
 
 #ident "$Id$"
 

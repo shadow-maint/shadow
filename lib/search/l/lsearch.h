@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_SEARCH_L_LSEARCH_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <search.h>
 

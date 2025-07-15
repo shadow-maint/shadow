@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include <config.h>
+#include "config.h"
 
 #include <security/pam_appl.h>
 #if __has_include(<security/pam_misc.h>)
