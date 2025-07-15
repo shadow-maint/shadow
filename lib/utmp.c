@@ -158,11 +158,13 @@ get_current_utmp(void)
 
 	/* First, try to find a valid utmp entry for this process.  */
 	while ((ut = getutxent()) != NULL) {
+		if (   (LOGIN_PROCESS != ut->ut_type)
+		    && (USER_PROCESS  != ut->ut_type))
+			continue;
+
 		if (   (   (ut->ut_pid == getpid ())
 		        || (ut->ut_pid == getppid ()))
 		    && ('\0' != ut->ut_id[0])
-		    && (   (LOGIN_PROCESS == ut->ut_type)
-		        || (USER_PROCESS  == ut->ut_type))
 		    /* A process may have failed to close an entry
 		     * Check if this entry refers to the current tty */
 		    && is_my_tty(ut->ut_line))
