@@ -26,7 +26,7 @@
  * This file provides wrapper to the getpwuid or getpwuid_r functions.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include "pwio.h"
 

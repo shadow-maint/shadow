@@ -10,7 +10,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_STRDUP_XSTRDUP_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <string.h>
 

@@ -19,7 +19,7 @@
 #ifndef _PROTOTYPES_H
 #define _PROTOTYPES_H
 
-#include <config.h>
+#include "config.h"
 
 #include <sys/socket.h>
 #include <sys/stat.h>

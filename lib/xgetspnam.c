@@ -26,7 +26,7 @@
  * This file provides wrapper to the getspnam or getspnam_r functions.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include "shadowio.h"
 

@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_STRTOK_STRSEP2LS_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <errno.h>
 #include <stddef.h>

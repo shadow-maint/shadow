@@ -26,7 +26,7 @@
  * This file provides wrapper to the getgrnam or getgrnam_r functions.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include "groupio.h"
 

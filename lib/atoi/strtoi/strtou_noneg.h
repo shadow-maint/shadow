@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_ATOI_STRTOI_STRTOU_NONEG_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <errno.h>
 #include <stddef.h>

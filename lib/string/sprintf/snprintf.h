@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_SPRINTF_SNPRINTF_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <stdarg.h>
 #include <stddef.h>

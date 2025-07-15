@@ -9,7 +9,7 @@
 #define SHADOW_INCLUDE_LIB_BIT_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <limits.h>
 

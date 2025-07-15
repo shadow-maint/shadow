@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_STRDUP_STRNDUPA_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <alloca.h>
 #include <string.h>

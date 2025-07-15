@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_SEARCH_CMP_CMP_H_
 
 
-#include <config.h>
+#include "config.h"
 
 
 #define CMP(TYPE)                                                     \

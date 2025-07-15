@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_FS_READLINK_AREADLINK_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <errno.h>
 #include <stdbool.h>

@@ -7,7 +7,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include <config.h>
+#include "config.h"
 
 /* Newer versions of Linux libc already have shadow support.  */
 #ifndef HAVE_SGETSPENT

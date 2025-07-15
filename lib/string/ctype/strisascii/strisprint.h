@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_CTYPE_STRISASCII_STRISPRINT_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <ctype.h>
 #include <stdbool.h>

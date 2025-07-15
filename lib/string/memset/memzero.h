@@ -7,7 +7,7 @@
 #define SHADOW_INCLUDE_LIB_STRING_MEMSET_MEMZERO_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <stddef.h>
 #include <string.h>

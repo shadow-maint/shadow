@@ -13,7 +13,7 @@
  * Enhancements of resource limit code by Thomas Orgis <thomas@orgis.org>
  */
 
-#include <config.h>
+#include "config.h"
 
 #ifndef USE_PAM
 

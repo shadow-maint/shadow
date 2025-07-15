@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_FS_MKSTEMP_FMKOMSTEMP_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <stdio.h>
 #include <sys/types.h>

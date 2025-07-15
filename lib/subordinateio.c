@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2012 - Eric Biederman
  */
 
-#include <config.h>
+#include "config.h"
 
 #ifdef ENABLE_SUBIDS
 

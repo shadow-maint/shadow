@@ -8,7 +8,7 @@
 #define SHADOW_INCLUDE_LIB_AGETPASS_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include "attr.h"
 #include "defines.h"

@@ -6,7 +6,7 @@
 #define SHADOW_INCLUDE_LIB_SEARCH_SORT_QSORT_H_
 
 
-#include <config.h>
+#include "config.h"
 
 #include <stdlib.h>
 
