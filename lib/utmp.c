@@ -152,7 +152,6 @@ static /*@null@*/ /*@only@*/struct utmpx *
 get_current_utmp(void)
 {
 	struct utmpx  *ut;
-	struct utmpx  *ret = NULL;
 
 	setutxent();
 
@@ -174,13 +173,16 @@ get_current_utmp(void)
 	}
 
 	if (NULL != ut) {
-		ret = XMALLOC(1, struct utmpx);
-		memcpy (ret, ut, sizeof (*ret));
+		struct utmpx  *ut_copy;
+
+		ut_copy = XMALLOC(1, struct utmpx);
+		memcpy(ut_copy, ut, sizeof(*ut));
+		ut = ut_copy;
 	}
 
 	endutxent();
 
-	return ret;
+	return ut;
 }
 
 
