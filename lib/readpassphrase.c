@@ -91,7 +91,7 @@ restart:
 	 * generate SIGTTOU, so do it *before* installing the signal handlers.
 	 */
 	if (input != STDIN_FILENO && tcgetattr(input, &oterm) == 0) {
-		memcpy(&term, &oterm, sizeof(term));
+		term = oterm;
 		if (!(flags & RPP_ECHO_ON))
 			term.c_lflag &= ~(ECHO | ECHONL);
 #ifdef VSTATUS

@@ -318,16 +318,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR)
-				memcpy (&(utent->ut_addr),
-				        &(sa->sin_addr),
-				        MIN(sizeof(utent->ut_addr),
-				            sizeof(sa->sin_addr)));
+				utent->ut_addr = sa->sin_addr.s_addr;
 # endif
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
-				memcpy (utent->ut_addr_v6,
-				        &(sa->sin_addr),
-				        MIN(sizeof(utent->ut_addr_v6),
-				            sizeof(sa->sin_addr)));
+				utent->ut_addr_v6[0] = sa->sin_addr.s_addr;
 			} else if (info->ai_family == AF_INET6) {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *) info->ai_addr;
