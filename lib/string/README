@@ -128,6 +128,11 @@ memory/ - memory operations
     memcpy_a()
 	Like memcpy(3), but takes two arrays.
 
+  strnlen/ - String length
+
+    strnlen_a()
+	Like strnlen(3), but take an array.
+
 string/ - string operations
   ctype/ - Character classification and conversion functions
 
