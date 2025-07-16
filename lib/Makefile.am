@@ -131,6 +131,8 @@ libshadow_la_SOURCES = \
 	memory/memdup/strndup.h \
 	memory/memset/memzero.c \
 	memory/memset/memzero.h \
+	memory/strnlen/strnlen.c \
+	memory/strnlen/strnlen.h \
 	motd.c \
 	myname.c \
 	nss.c \
