@@ -31,6 +31,7 @@
 #include "attr.h"
 #include "io/syslog.h"
 #include "memory/memcpy/strncpytail.h"
+#include "memory/strnlen/strnlen.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
@@ -300,8 +301,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		strncpy_a(utent->ut_host, hostname);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
-		utent->ut_syslen = MIN(strlen(hostname),
-		                       countof(utent->ut_host));
+		utent->ut_syslen = strnlen_a(utent->ut_host);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
