@@ -185,8 +185,9 @@ get_current_utmp(pid_t main_pid)
 	if (NULL != ut) {
 		struct utmpx  *ut_copy;
 
-		ut_copy = xmalloc_T(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
+		ut_copy = malloc_T(1, struct utmpx);
+		if (ut_copy != NULL)
+			memcpy(ut_copy, ut, sizeof(*ut));
 		ut = ut_copy;
 	}
 
