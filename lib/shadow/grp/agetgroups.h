@@ -34,6 +34,8 @@ agetgroups(size_t *ngids)
 	if (n == -1)
 		return NULL;
 
+	n = n ?: 1;
+
 	gids = MALLOC(n, gid_t);
 	if (gids == NULL)
 		return NULL;
