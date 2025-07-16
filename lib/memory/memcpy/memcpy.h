@@ -1,0 +1,28 @@
+// SPDX-FileCopyrightText: 2025-2026, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
+
+#ifndef SHADOW_INCLUDE_LIB_MEMORY_MEMCPY_MEMCPY_H_
+#define SHADOW_INCLUDE_LIB_MEMORY_MEMCPY_MEMCPY_H_
+
+
+#include "config.h"
+
+#include <memory.h>
+
+#include "sizeof.h"
+
+#undef NDEBUG
+#include <assert.h>
+
+
+// memcpy_a - memory copy array
+#define memcpy_a(dst, src)  do                                        \
+{                                                                     \
+	static_assert(sizeof_a(dst) == sizeof_a(src), "");            \
+	                                                              \
+	memcpy(dst, src, sizeof_a(dst));                              \
+} while (0)
+
+
+#endif  // include guard
