@@ -25,8 +25,8 @@
 #include <string.h>
 #include <fcntl.h>
 
+#include "alloc/malloc.h"
 #include "alloc/x/xcalloc.h"
-#include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
@@ -195,8 +195,9 @@ get_current_utmp(pid_t main_pid)
 	}
 
 	if (match) {
-		ut = XMALLOC(1, struct utmpx);
-		*ut = ut_copy;
+		ut = MALLOC(1, struct utmpx);
+		if (ut != NULL)
+			*ut = ut_copy;
 	} else {
 		ut = NULL;
 	}
