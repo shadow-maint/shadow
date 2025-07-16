@@ -23,7 +23,6 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "alloc/malloc.h"
 #include "alloc/x/xcalloc.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
@@ -31,6 +30,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/memdup.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
 
@@ -171,14 +171,8 @@ get_current_utmp(pid_t main_pid)
 		}
 	}
 
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
-
-		ut_copy = MALLOC(1, struct utmpx);
-		if (ut_copy != NULL)
-			memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
-	}
+	if (NULL != ut)
+		ut = MEMDUP(ut, struct utmpx);
 
 	endutxent();
 
