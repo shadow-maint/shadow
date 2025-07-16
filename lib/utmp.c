@@ -36,6 +36,7 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
+#include "string/strdup/memdup.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
@@ -182,14 +183,8 @@ get_current_utmp(pid_t main_pid)
 	if (NULL == ut)
 		ut = ut_by_pid ?: ut_by_line;
 
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
-
-		ut_copy = malloc_T(1, struct utmpx);
-		if (ut_copy != NULL)
-			*ut_copy = *ut;
-		ut = ut_copy;
-	}
+	if (NULL != ut)
+		ut = memdup_T(ut, struct utmpx);
 
 	free(ut_by_line);
 	free(ut_by_pid);
