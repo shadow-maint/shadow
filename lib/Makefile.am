@@ -117,6 +117,8 @@ libshadow_la_SOURCES = \
 	mail.c \
 	memory/memcpy/strncpytail.c \
 	memory/memcpy/strncpytail.h \
+	memory/strnlen/strnlen.c \
+	memory/strnlen/strnlen.h \
 	motd.c \
 	myname.c \
 	nss.c \
