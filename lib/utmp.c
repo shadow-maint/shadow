@@ -282,7 +282,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		STRNCPY(utent->ut_host, hostname);
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
-		                        sizeof (utent->ut_host));
+		                        countof(utent->ut_host));
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
