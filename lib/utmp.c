@@ -271,12 +271,11 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	utent->ut_type = USER_PROCESS;
 	utent->ut_pid = getpid ();
 	STRNCPY(utent->ut_line, line);
-	if (NULL != ut) {
+	if (NULL != ut)
 		STRNCPY(utent->ut_id, ut->ut_id);
-	} else {
-		/* XXX - assumes /dev/tty?? */
-		STRNCPY(utent->ut_id, line + 3);
-	}
+	else
+		STRNCPY(utent->ut_id, strprefix(line, "tty") ?: line);
+
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
 	STRNCPY(utent->ut_name, name);
 #endif
