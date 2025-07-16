@@ -23,8 +23,8 @@
 #include <string.h>
 #include <fcntl.h>
 
+#include "alloc/malloc.h"
 #include "alloc/x/xcalloc.h"
-#include "alloc/x/xmalloc.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
@@ -174,8 +174,9 @@ get_current_utmp(pid_t main_pid)
 	if (NULL != ut) {
 		struct utmpx  *ut_copy;
 
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
+		ut_copy = MALLOC(1, struct utmpx);
+		if (ut_copy != NULL)
+			memcpy(ut_copy, ut, sizeof(*ut));
 		ut = ut_copy;
 	}
 
