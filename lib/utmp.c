@@ -288,10 +288,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		struct addrinfo *info = NULL;
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 		STRNCPY(utent->ut_host, hostname);
-#endif
-#if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
+# if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
 		                        countof(utent->ut_host));
+# endif
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
