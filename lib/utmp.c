@@ -40,6 +40,7 @@
 #include "string/strcpy/strncpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
+#include "string/strlen/strnlen.h"
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
@@ -295,8 +296,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		struct addrinfo *info = NULL;
 		strncpy_a(utent->ut_host, hostname);
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
-		utent->ut_syslen = MIN(strlen(hostname),
-		                       countof(utent->ut_host));
+		utent->ut_syslen = strnlen_a(utent->ut_host);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
