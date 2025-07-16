@@ -26,6 +26,7 @@
 #include "alloc/x/xcalloc.h"
 #include "alloc/x/xmalloc.h"
 #include "sizeof.h"
+#include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
@@ -274,7 +275,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	if (NULL != ut) {
 		STRNCPY(utent->ut_id, ut->ut_id);
 	} else {
-		STRNCPY(utent->ut_id, strprefix(line, "tty") ?: line);
+		STRNCPY(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
 	}
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
 	STRNCPY(utent->ut_name, name);
