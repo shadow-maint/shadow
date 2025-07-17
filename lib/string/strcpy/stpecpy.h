@@ -17,28 +17,28 @@
 
 #if !defined(HAVE_STPECPY)
 ATTR_STRING(3)
-inline char *stpecpy(char *dst, char *end, const char *restrict src);
+inline char *stpecpy(char *p, char *end, const char *restrict src);
 #endif
 
 
 /*
  * SYNOPSIS
  *	[[gnu::null_terminated_string_arg(3)]]
- *	char *_Nullable stpecpy(char *_Nullable dst, char end[0],
+ *	char *_Nullable stpecpy(char *_Nullable p, char end[0],
  *	                        const char *restrict src);
  *
  * ARGUMENTS
- *	dst	Destination buffer where to copy a string.
+ *	p	Destination buffer where to copy a string.
  *
  *	end	Pointer to one after the last element of the buffer
- *		pointed to by `dst`.  Usually, it should be calculated
- *		as `dst + countof(dst)`.
+ *		pointed to by `p`.  Usually, it should be calculated
+ *		as `p + countof(p)`.
  *
- *	src	Source string to be copied into dst.
+ *	src	Source string to be copied into p.
  *
  * DESCRIPTION
  *	This function copies the string pointed to by src, into a string
- *	at the buffer pointed to by dst.  If the destination buffer,
+ *	at the buffer pointed to by p.  If the destination buffer,
  *	limited by a pointer to its end --one after its last element--,
  *	isn't large enough to hold the copy, the resulting string is
  *	truncated.
@@ -46,16 +46,16 @@ inline char *stpecpy(char *dst, char *end, const char *restrict src);
  *	This function can be chained with calls to [v]stpeprintf().
  *
  * RETURN VALUE
- *	dst + strlen(dst)
+ *	p + strlen(p)
  *		•  On success, this function returns a pointer to the
  *		   terminating NUL byte.
  *
  *	end
  *		•  If this call truncated the resulting string.
- *		•  If `dst == end` (a previous chained call to these
+ *		•  If `p == end` (a previous chained call to these
  *		   functions truncated).
  *	NULL
- *		•  If `dst == NULL` (a previous chained call to
+ *		•  If `p == NULL` (a previous chained call to
  *		   [v]stpeprintf() failed).
  *
  * ERRORS
@@ -65,22 +65,22 @@ inline char *stpecpy(char *dst, char *end, const char *restrict src);
 
 #if !defined(HAVE_STPECPY)
 inline char *
-stpecpy(char *dst, char *end, const char *restrict src)
+stpecpy(char *p, char *end, const char *restrict src)
 {
 	bool    trunc;
 	size_t  dsize, dlen, slen;
 
-	if (dst == end)
+	if (p == end)
 		return end;
-	if (dst == NULL)
+	if (p == NULL)
 		return NULL;
 
-	dsize = end - dst;
+	dsize = end - p;
 	slen = strnlen(src, dsize);
 	trunc = (slen == dsize);
 	dlen = slen - trunc;
 
-	return stpcpy(mempcpy(dst, src, dlen), "") + trunc;
+	return stpcpy(mempcpy(p, src, dlen), "") + trunc;
 }
 #endif
 
