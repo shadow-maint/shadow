@@ -37,7 +37,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "string/strtok/stpsep.h"
 
 
 /*
@@ -67,7 +66,6 @@ NORETURN static void fail_exit (int code);
 NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
-static char *copy_field (char *, char *, char *);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_gecos (const char *user, char *gecos);
@@ -204,27 +202,6 @@ static void new_fields (void)
 	if (amroot) {
 		change_field (slop, sizeof slop, _("Other"));
 	}
-}
-
-/*
- * copy_field - get the next field from the gecos field
- *
- * copy_field copies the next field from the gecos field, returning a
- * pointer to the field which follows, or NULL if there are no more fields.
- *
- *	in - the current GECOS field
- *	out - where to copy the field to
- */
-static char *copy_field(char *in, char *out)
-{
-	char  *next;
-
-	next = stpsep(in, ",");
-
-	if (out != NULL)
-		strcpy(out, in);
-
-	return next;
 }
 
 /*
@@ -494,45 +471,32 @@ static void update_gecos (const char *user, char *gecos)
  */
 static void get_old_fields (const char *gecos)
 {
-	char *cp;		/* temporary character pointer       */
-	char old_gecos[BUFSIZ];	/* buffer for old GECOS fields       */
+	char        *p;
+	char        old_gecos[BUFSIZ];
+	const char  *f;
 
 	STRTCPY(old_gecos, gecos);
+	p = old_gecos;
 
-	/*
-	 * Now get the full name. It is the first comma separated field in
-	 * the GECOS field.
-	 */
-	cp = copy_field(old_gecos, fflg ? NULL : fullnm);
+	f = strsep(&p, ",");
+	if (!fflg)
+		strcpy(fullnm, f);
 
-	/*
-	 * Now get the room number. It is the next comma separated field,
-	 * if there is indeed one.
-	 */
-	if (NULL != cp) {
-		cp = copy_field(cp, rflg ? NULL : roomno);
-	}
+	f = strsep(&p, ",");
+	if (!rflg && f != NULL)
+		strcpy(roomno, f);
 
-	/*
-	 * Now get the work phone number. It is the third field.
-	 */
-	if (NULL != cp) {
-		cp = copy_field(cp, wflg ? NULL : workph);
-	}
+	f = strsep(&p, ",");
+	if (!wflg && f != NULL)
+		strcpy(workph, f);
 
-	/*
-	 * Now get the home phone number. It is the fourth field.
-	 */
-	if (NULL != cp) {
-		cp = copy_field(cp, hflg ? NULL : homeph);
-	}
+	f = strsep(&p, ",");
+	if (!hflg && f != NULL)
+		strcpy(homeph, f);
 
-	/*
-	 * Anything left over is "slop".
-	 */
-	if ((NULL != cp) && !oflg) {
-		strcpy(slop, cp);
-	}
+	/* Anything left over is "slop".  */
+	if (!oflg && p != NULL)
+		strcpy(slop, p);
 }
 
 /*
