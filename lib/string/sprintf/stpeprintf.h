@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2022-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -60,17 +61,17 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
  *		•  On success, these functions return a pointer to the
  *		   terminating NUL byte.
  *
- *	end
- *		•  If this call truncated the resulting string.
- *		•  If `dst == end` (a previous chained call to these
- *		   functions truncated).
  *	NULL
+ *		•  If this call truncated the resulting string (E2BIG).
  *		•  If this function failed (see ERRORS).
  *		•  If `dst == NULL` (a previous chained call to these
  *		   functions failed).
  *
  * ERRORS
  *	These functions may fail for the same reasons as vsnprintf(3).
+ *
+ *	E2BIG
+ *		•  If this call truncated the resulting string.
  */
 
 
@@ -97,8 +98,6 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 	int        len;
 	ptrdiff_t  size;
 
-	if (dst == end)
-		return end;
 	if (dst == NULL)
 		return NULL;
 
@@ -107,8 +106,10 @@ vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
 
 	if (len == -1)
 		return NULL;
-	if (len >= size)
-		return end;
+	if (len >= size) {
+		errno = E2BIG;
+		return NULL;
+	}
 
 	return dst + len;
 }
