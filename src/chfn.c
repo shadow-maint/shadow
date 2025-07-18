@@ -214,33 +214,15 @@ static void new_fields (void)
  *
  *	in - the current GECOS field
  *	out - where to copy the field to
- *	extra - fields with '=' get copied here
  */
-static char *copy_field (char *in, char *out, char *extra)
+static char *copy_field(char *in, char *out)
 {
-	char  *next = NULL;
+	char  *next;
 
-	while (NULL != in) {
-		const char  *f;
+	next = stpsep(in, ",");
 
-		f = in;
-		next = stpsep(in, ",");
-
-		if (strchr(f, '=') == NULL)
-			break;
-
-		if (NULL != extra) {
-			if (!streq(extra, "")) {
-				strcat (extra, ",");
-			}
-
-			strcat(extra, f);
-		}
-		in = next;
-	}
-	if ((NULL != in) && (NULL != out)) {
-		strcpy (out, in);
-	}
+	if (out != NULL)
+		strcpy(out, in);
 
 	return next;
 }
@@ -521,39 +503,35 @@ static void get_old_fields (const char *gecos)
 	 * Now get the full name. It is the first comma separated field in
 	 * the GECOS field.
 	 */
-	cp = copy_field (old_gecos, fflg ? NULL : fullnm, slop);
+	cp = copy_field(old_gecos, fflg ? NULL : fullnm);
 
 	/*
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, rflg ? NULL : roomno, slop);
+		cp = copy_field(cp, rflg ? NULL : roomno);
 	}
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, wflg ? NULL : workph, slop);
+		cp = copy_field(cp, wflg ? NULL : workph);
 	}
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, hflg ? NULL : homeph, slop);
+		cp = copy_field(cp, hflg ? NULL : homeph);
 	}
 
 	/*
 	 * Anything left over is "slop".
 	 */
 	if ((NULL != cp) && !oflg) {
-		if (!streq(slop, "")) {
-			strcat (slop, ",");
-		}
-
-		strcat (slop, cp);
+		strcpy(slop, cp);
 	}
 }
 
