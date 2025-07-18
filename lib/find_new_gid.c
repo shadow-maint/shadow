@@ -245,7 +245,7 @@ int find_new_gid (bool sys_group,
 	(void) gr_rewind ();
 	highest_found = gid_min;
 	lowest_found = gid_max;
-	while ((grp = gr_next ()) != NULL) {
+	while (NULL != (grp = gr_next())) {
 		/*
 		 * Does this entry have a lower GID than the lowest we've found
 		 * so far?

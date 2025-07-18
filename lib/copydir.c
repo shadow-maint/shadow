@@ -310,7 +310,7 @@ static int copy_tree_impl (const struct path_info *src, const struct path_info *
 		dst_orig = dst->full_path;
 		set_orig = true;
 	}
-	while ((0 == err) && (ent = readdir (dir)) != NULL) {
+	while (0 == err && NULL != (ent = readdir(dir))) {
 		char              *src_name = NULL;
 		char              *dst_name;
 		struct path_info  src_entry, dst_entry;

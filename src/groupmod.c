@@ -735,7 +735,7 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 	struct passwd *pwd;
 
 	prefix_setpwent ();
-	while ((pwd = prefix_getpwent ()) != NULL) {
+	while (NULL != (pwd = prefix_getpwent())) {
 		if (pwd->pw_gid == ogid) {
 			const struct passwd *lpwd;
 			struct passwd npwd;

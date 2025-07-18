@@ -166,7 +166,7 @@ sgetsgent(const char *s)
 
 	setsgent ();
 
-	while ((sgrp = getsgent ()) != NULL) {
+	while (NULL != (sgrp = getsgent())) {
 		if (streq(name, sgrp->sg_namp)) {
 			break;
 		}

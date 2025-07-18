@@ -172,7 +172,7 @@ int main (int argc, char **argv)
 	}
 
 	(void) pw_rewind ();
-	while ((pw = pw_next ()) != NULL) {
+	while (NULL != (pw = pw_next())) {
 		spwd = spw_locate (pw->pw_name);
 		if (NULL == spwd) {
 			continue;
