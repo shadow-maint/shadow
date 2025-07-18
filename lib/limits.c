@@ -119,7 +119,8 @@ set_umask(const char *value)
 /* Counts the number of user logins and check against the limit */
 static int check_logins (const char *name, const char *maxlogins)
 {
-	unsigned long limit, count;
+	unsigned long limit;
+	int exceeded = -1;
 
 	if (str2ul(&limit, maxlogins) == -1) {
 		if (errno == ERANGE) {
@@ -134,9 +135,16 @@ static int check_logins (const char *name, const char *maxlogins)
 		return LOGIN_ERROR_LOGIN;
 	}
 
-	count = active_sessions_count(name, limit);
+#ifdef ENABLE_LOGIND
+	if (exceeded < 0)
+		exceeded = active_sessions_limit_exceeded_lgnd(name, limit);
+#endif /* ENABLE_LOGIND */
+#ifdef ENABLE_UTMP
+	if (exceeded < 0)
+		exceeded = active_sessions_limit_exceeded_utmp(name, limit);
+#endif /* ENABLE_UTMP */
 
-	if (count > limit) {
+	if (exceeded > 0) {
 		SYSLOG ((LOG_WARN,
 		         "Too many logins (max %lu) for %s\n",
 		         limit, name));

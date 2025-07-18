@@ -450,7 +450,7 @@ static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *use
  */
 int main (int argc, char **argv)
 {
-	int            err;
+	int            err = -1;
 	bool           subroot = false;
 	char           **envp = environ;
 	char           *host = NULL;
@@ -504,7 +504,14 @@ int main (int argc, char **argv)
 		exit (1);	/* must be a terminal */
 	}
 
-	err = get_session_host(&host);
+#ifdef ENABLE_LOGIND
+	if (0 != err)
+		err = get_session_host_lgnd(&host);
+#endif /* ENABLE_LOGIND */
+#ifdef ENABLE_UTMP
+	if (0 != err)
+		err = get_session_host_utmp(&host);
+#endif /* ENABLE_UTMP */
 	/*
 	 * Be picky if run by normal users (possible if installed setuid
 	 * root), but not if run by root.
@@ -943,9 +950,9 @@ int main (int argc, char **argv)
 		if ((NULL != pwd) && getdef_bool ("FAILLOG_ENAB")) {
 			failure (pwd->pw_uid, tty, &faillog);
 		}
-#ifndef ENABLE_LOGIND
+#ifdef ENABLE_UTMP
 		record_failure(failent_user, tty, hostname);
-#endif /* ENABLE_LOGIND */
+#endif /* ENABLE_UTMP */
 
 		retries--;
 		if (retries <= 0) {
@@ -1116,7 +1123,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-#ifndef ENABLE_LOGIND
+#ifdef ENABLE_UTMP
 	/*
 	 * The utmp entry needs to be updated to indicate the new status
 	 * of the session, the new PID and SID.
@@ -1125,7 +1132,7 @@ int main (int argc, char **argv)
 	if (err != 0) {
 		SYSLOG ((LOG_WARN, "Unable to update utmp entry for %s", username));
 	}
-#endif /* ENABLE_LOGIND */
+#endif /* ENABLE_UTMP */
 
 	/* The pwd and spwd entries for the user have been copied.
 	 *

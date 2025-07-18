@@ -287,7 +287,9 @@ endif
 
 if ENABLE_LOGIND
 libshadow_la_SOURCES += logind.c
-else
+endif
+
+if ENABLE_UTMP
 libshadow_la_SOURCES += utmp.c
 endif
 

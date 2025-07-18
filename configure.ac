@@ -41,21 +41,11 @@ AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 AC_CHECK_FUNCS(arc4random_buf \
 	getentropy getrandom \
 	lckpwdf lutimes \
-	updwtmpx innetgr \
+	innetgr \
 	getspnam_r \
 	rpmatch \
 	memset_explicit explicit_bzero stpecpy stpeprintf)
 AC_SYS_LARGEFILE
-
-dnl Checks for typedefs, structures, and compiler characteristics.
-
-AC_CHECK_MEMBERS([struct utmpx.ut_name,
-                  struct utmpx.ut_host,
-                  struct utmpx.ut_syslen,
-                  struct utmpx.ut_addr,
-                  struct utmpx.ut_addr_v6,
-                  struct utmpx.ut_time,
-                  struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
 
 dnl Checks for library functions.
 AC_FUNC_UTIME_NULL
@@ -104,6 +94,40 @@ AC_DEFINE_UNQUOTED(FAILLOG_FILE, "$shadow_cv_logdir/faillog",
 
 AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$exec_prefix/bin/passwd",
 	[Path to passwd program.])
+
+AC_ARG_ENABLE([utmp],
+	[AS_HELP_STRING([--enable-utmp],
+		[enable utmp and wtmp access and update @<:@default=yes if supported@:>@])],
+	[AS_CASE([${enableval}],
+			 [yes],[:]
+			 [no],[:],
+			 [AC_MSG_ERROR([bad value ${enableval} for --enable-utmp])])],
+	[enable_utmp="maybe"]
+)
+AS_IF([test "X$enable_utmp" != "Xno"], [
+	found_utmp="no"
+	AC_CHECK_HEADERS([utmpx.h],[
+		AC_CHECK_FUNCS([setutxent],[found_utmp="yes"])
+	])
+	AS_IF([test "X$found_utmp" != "Xyes"],[
+		AS_IF([test "X$enable_utmp" = "Xyes"],[
+			AC_MSG_ERROR([utmp is not supported by libc, utmp cannot be enabled])
+		])
+		enable_utmp="no"
+	],[
+		enable_utmp="yes"
+		AC_CHECK_MEMBERS([struct utmpx.ut_name,
+						struct utmpx.ut_host,
+						struct utmpx.ut_syslen,
+						struct utmpx.ut_addr,
+						struct utmpx.ut_addr_v6,
+						struct utmpx.ut_time,
+						struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
+		AC_CHECK_FUNCS([updwtmpx])
+		AC_DEFINE([ENABLE_UTMP],[1],[Define to have utmp and wtmp access and update])
+	])
+])
+AM_CONDITIONAL([ENABLE_UTMP], [test "X$enable_utmp" = "Xyes"])
 
 AC_ARG_ENABLE(shadowgrp,
 	[AS_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
@@ -344,6 +368,8 @@ if test "$enable_logind" = "yes"; then
 		[enable_logind="no"])
 fi
 AM_CONDITIONAL(ENABLE_LOGIND, test "x$enable_logind" != "xno")
+AS_IF([test "x$enable_logind" != "xyes" && "X$enable_utmp" != "Xyes"],
+	[AC_MSG_ERROR([both logind and utmp cannot be disabled. At least one of them must be enabled])])
 
 AC_SUBST(LIBCRYPT)
 AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
@@ -713,6 +739,7 @@ echo "	sssd support:			$with_sssd"
 echo "	subordinate IDs support:	$enable_subids"
 echo "	enable lastlog:			$enable_lastlog"
 echo "	enable logind:			$enable_logind"
+echo "	enable utmp:			$enable_utmp"
 echo "	use file caps:			$with_fcaps"
 echo "	install su:			$with_su"
 echo "	enabled vendor dir:             $enable_vendordir"

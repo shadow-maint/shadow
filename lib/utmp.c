@@ -183,7 +183,7 @@ get_current_utmp(void)
 
 
 int
-get_session_host(char **out)
+get_session_host_utmp(char **out)
 {
 	int           ret = 0;
 	struct utmpx  *ut;
@@ -398,15 +398,14 @@ record_failure(const char *failent_user, const char *tty, const char *hostname)
 	}
 }
 
-
-unsigned long
-active_sessions_count(const char *name, unsigned long limit)
+int
+active_sessions_limit_exceeded_utmp(const char *name, unsigned long limit)
 {
 	struct utmpx   *ut;
 	unsigned long  count = 0;
 
 	setutxent();
-	while ((ut = getutxent()))
+	while ((ut = getutxent()) && (count <= limit))
 	{
 		if (USER_PROCESS != ut->ut_type) {
 			continue;
@@ -418,11 +417,8 @@ active_sessions_count(const char *name, unsigned long limit)
 			continue;
 		}
 		count++;
-		if (count > limit) {
-			break;
-		}
 	}
 	endutxent();
 
-	return count;
+	return (count > limit) ? 1 : 0;
 }

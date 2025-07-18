@@ -14,7 +14,7 @@
 
 #include <systemd/sd-login.h>
 
-int get_session_host (char **out)
+int get_session_host_lgnd (char **out)
 {
     char *host = NULL;
     char *session = NULL;
@@ -36,17 +36,17 @@ done:
     return ret;
 }
 
-unsigned long active_sessions_count(const char *name, MAYBE_UNUSED unsigned long limit)
+int active_sessions_limit_exceeded_lgnd(const char *name, unsigned long limit)
 {
     struct passwd *pw;
     unsigned long count = 0;
 
     pw = prefix_getpwnam(name);
     if (pw == NULL) {
-        return 0;
+        return -1;
     }
 
     count = sd_uid_get_sessions(pw->pw_uid, 0, NULL);
 
-    return count;
+	return (count > limit) ? 1 : 0;
 }
