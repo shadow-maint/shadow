@@ -156,7 +156,7 @@ static bool range_exists(struct commonio_db *db, const char *owner)
 {
 	const struct subordinate_range *range;
 	commonio_rewind(db);
-	while ((range = commonio_next(db)) != NULL) {
+	while (NULL != (range = commonio_next(db))) {
 		if (streq(range->owner, owner))
 			return true;
 	}
@@ -188,7 +188,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 	 * before.
 	 */
 	commonio_rewind(db);
-	while ((range = commonio_next(db)) != NULL) {
+	while (NULL != (range = commonio_next(db))) {
 		unsigned long first = range->start;
 		unsigned long last = first + range->count - 1;
 
@@ -229,7 +229,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                 return NULL;
 
         commonio_rewind(db);
-        while ((range = commonio_next(db)) != NULL) {
+        while (NULL != (range = commonio_next(db))) {
                 unsigned long first = range->start;
                 unsigned long last = first + range->count - 1;
 
@@ -366,7 +366,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 	commonio_rewind(db);
 
 	low = min;
-	while ((range = commonio_next(db)) != NULL) {
+	while (NULL != (range = commonio_next(db))) {
 		unsigned long first = range->start;
 		unsigned long last = first + range->count - 1;
 
@@ -884,7 +884,7 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 	have_owner_id = get_owner_id(owner, id_type, id);
 
 	commonio_rewind(db);
-	while ((range = commonio_next(db)) != NULL) {
+	while (NULL != (range = commonio_next(db))) {
 		if (streq(range->owner, owner)) {
 			if (!append_range(&ranges, range, count++)) {
 				free(ranges);
@@ -989,7 +989,7 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 	*uids = NULL;
 
 	commonio_rewind(db);
-	while ((range = commonio_next(db)) != NULL) {
+	while (NULL != (range = commonio_next(db))) {
 		if (id >= range->start && id < range->start + range-> count) {
 			n = append_uids(uids, range->owner, n);
 			if (n < 0)
@@ -1045,7 +1045,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 
 	commonio_rewind(db);
 	if (reuse) {
-		while ((r = commonio_next(db)) != NULL) {
+		while (NULL != (r = commonio_next(db))) {
 			// TODO account for username vs uid_t
 			if (!streq(r->owner, range->owner))
 				continue;

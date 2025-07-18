@@ -310,7 +310,7 @@ getttyuser(const char *tty, const char *user)
 
 	setportent();
 
-	while ((port = getportent()) != NULL) {
+	while (NULL != (port = getportent())) {
 		char  **ptn;
 		char  **ptu;
 
