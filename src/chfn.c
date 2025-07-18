@@ -480,23 +480,23 @@ static void get_old_fields (const char *gecos)
 
 	f = strsep(&p, ",");
 	if (!fflg)
-		strcpy(fullnm, f);
+		strcpy(fullnm, f ?: "");
 
 	f = strsep(&p, ",");
-	if (!rflg && f != NULL)
-		strcpy(roomno, f);
+	if (!rflg)
+		strcpy(roomno, f ?: "");
 
 	f = strsep(&p, ",");
-	if (!wflg && f != NULL)
-		strcpy(workph, f);
+	if (!wflg)
+		strcpy(workph, f ?: "");
 
 	f = strsep(&p, ",");
-	if (!hflg && f != NULL)
-		strcpy(homeph, f);
+	if (!hflg)
+		strcpy(homeph, f ?: "");
 
 	/* Anything left over is "slop".  */
-	if (!oflg && p != NULL)
-		strcpy(slop, p);
+	if (!oflg)
+		strcpy(slop, p ?: "");
 }
 
 /*
