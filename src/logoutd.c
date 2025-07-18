@@ -171,7 +171,7 @@ main(int argc, char **argv)
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-		while ((ut = getutxent()) != NULL) {
+		while (NULL != (ut = getutxent())) {
 			int   tty_fd;
 			char  tty_name[sizeof(ut->ut_line) + 6];  // /dev/ + NUL
 

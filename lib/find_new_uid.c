@@ -245,7 +245,7 @@ int find_new_uid(bool sys_user,
 	(void) pw_rewind ();
 	highest_found = uid_min;
 	lowest_found = uid_max;
-	while ((pwd = pw_next ()) != NULL) {
+	while (NULL != (pwd = pw_next())) {
 		/*
 		 * Does this entry have a lower UID than the lowest we've found
 		 * so far?

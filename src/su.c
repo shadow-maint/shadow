@@ -187,7 +187,7 @@ static bool restricted_shell (const char *shellname)
 	/*@observer@*/const char *line;
 
 	setusershell ();
-	while ((line = getusershell ()) != NULL) {
+	while (NULL != (line = getusershell())) {
 		if (('#' != *line) && streq(line, shellname)) {
 			endusershell ();
 			return false;
