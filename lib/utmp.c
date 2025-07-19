@@ -30,6 +30,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
+#include "string/strcpy/strncpytail.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
@@ -278,7 +279,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	if (NULL != ut) {
 		STRNCPY(utent->ut_id, ut->ut_id);
 	} else {
-		STRNCPY(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
+		STRNCPYTAIL(utent->ut_id, line);
 	}
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
 	STRNCPY(utent->ut_name, name);
