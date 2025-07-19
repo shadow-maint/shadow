@@ -171,7 +171,7 @@ int main (int argc, char **argv)
 	 * Remove /etc/gshadow entries for groups not in /etc/group.
 	 */
 	(void) sgr_rewind ();
-	while ((sg = sgr_next ()) != NULL) {
+	while (NULL != (sg = sgr_next())) {
 		if (gr_locate (sg->sg_namp) != NULL) {
 			continue;
 		}

@@ -65,7 +65,7 @@ user_busy_utmp(const char *name)
 	struct utmpx  *utent;
 
 	setutxent();
-	while ((utent = getutxent()) != NULL)
+	while (NULL != (utent = getutxent()))
 	{
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
@@ -193,7 +193,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		return 0;
 	}
 
-	while ((ent = readdir (proc)) != NULL) {
+	while (NULL != (ent = readdir(proc))) {
 		tmp_d_name = ent->d_name;
 		/*
 		 * Ingo Molnar's patch introducing NPTL for 2.4 hides
@@ -236,7 +236,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		SNPRINTF(task_path, "/proc/%lu/task", (unsigned long) pid);
 		task_dir = opendir (task_path);
 		if (task_dir != NULL) {
-			while ((ent = readdir (task_dir)) != NULL) {
+			while (NULL != (ent = readdir(task_dir))) {
 				pid_t tid;
 				if (get_pid(ent->d_name, &tid) == -1) {
 					continue;

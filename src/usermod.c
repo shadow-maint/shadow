@@ -696,7 +696,7 @@ update_group_file(void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-	while ((grp = gr_next()) != NULL)
+	while (NULL != (grp = gr_next()))
 		update_group(grp);
 }
 
@@ -822,7 +822,7 @@ update_gshadow_file(void)
 	 * Scan through the entire shadow group file looking for the groups
 	 * that the user is a member of.
 	 */
-	while ((sgrp = sgr_next()) != NULL)
+	while (NULL != (sgrp = sgr_next()))
 		update_gshadow(sgrp);
 }
 #endif				/* SHADOWGRP */
