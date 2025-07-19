@@ -47,7 +47,7 @@ static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
 static char homeph[BUFSIZ];
-static char slop[BUFSIZ + 1 + 80];
+static char slop[BUFSIZ];
 static bool amroot;
 /* Flags */
 static bool fflg = false;		/* -f - set full name                */
