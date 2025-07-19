@@ -561,7 +561,8 @@ static void check_fields (void)
  */
 int main (int argc, char **argv)
 {
-	char                 new_gecos[BUFSIZ];
+	int                  ret;
+	char                 new_gecos[80];
 	char                 *user;
 	const struct passwd  *pw;
 
@@ -643,14 +644,13 @@ int main (int argc, char **argv)
 	 * Build the new GECOS field by plastering all the pieces together,
 	 * if they will fit ...
 	 */
-	if ((strlen (fullnm) + strlen (roomno) + strlen (workph) +
-	     strlen (homeph) + strlen (slop)) > (unsigned int) 80) {
+	ret = SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
+	               fullnm, roomno, workph, homeph,
+	               (!streq(slop, "")) ? "," : "", slop);
+	if (ret == -1) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
-	SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
-	         fullnm, roomno, workph, homeph,
-	         (!streq(slop, "")) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);
