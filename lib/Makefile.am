@@ -163,6 +163,7 @@ libshadow_la_SOURCES = \
 	search/sort/qsort.h \
 	selinux.c \
 	semanage.c \
+	session_management.h \
 	setugid.c \
 	setupenv.c \
 	sgetgrent.c \
@@ -223,6 +224,8 @@ libshadow_la_SOURCES = \
 	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
+	string/strdup/strndup.c \
+	string/strdup/strndup.h \
 	string/strdup/strndupa.c \
 	string/strdup/strndupa.h \
 	string/strdup/xstrdup.c \

@@ -9,6 +9,8 @@
 
 #include "config.h"
 
+#include "session_management.h"
+
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
@@ -31,10 +33,9 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/strndup.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
-
-#ident "$Id$"
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
@@ -185,28 +186,24 @@ get_current_utmp(pid_t main_pid)
 }
 
 
-int
-get_session_host(char **out, pid_t main_pid)
+char *
+get_session_host(pid_t main_pid)
 {
-	int           ret = 0;
+	char          *host = NULL;
 	struct utmpx  *ut;
 
 	ut = get_current_utmp(main_pid);
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
-		*out = XSTRNDUP(ut->ut_host);
-		free (ut);
-	} else {
-		*out = NULL;
-		ret = -2;
-	}
+	if ((ut != NULL) && (ut->ut_host[0] != '\0'))
+		host = STRNDUP(ut->ut_host);
 #else
-	*out = NULL;
-	ret = -2;
+	errno = ENOSYS;
 #endif
 
-	return ret;
+	free(ut);
+
+	return host;
 }
 
 
