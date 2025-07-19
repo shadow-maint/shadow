@@ -29,12 +29,12 @@
 #include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strcpy/memcpy.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
-
-#ident "$Id$"
+#include "string/strlen/strnlen.h"
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
@@ -288,10 +288,9 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		struct addrinfo *info = NULL;
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 		STRNCPY(utent->ut_host, hostname);
-#endif
-#if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
-		utent->ut_syslen = MIN (strlen (hostname),
-		                        sizeof (utent->ut_host));
+# if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
+		utent->ut_syslen = STRNLEN(utent->ut_host);
+# endif
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {
@@ -302,23 +301,14 @@ prepare_utmp(const char *name, const char *line, const char *host,
 				struct sockaddr_in *sa =
 					(struct sockaddr_in *) info->ai_addr;
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR)
-				memcpy (&(utent->ut_addr),
-				        &(sa->sin_addr),
-				        MIN (sizeof (utent->ut_addr),
-				             sizeof (sa->sin_addr)));
+				utent->ut_addr = sa->sin_addr.s_addr;
 # endif
 # if defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
-				memcpy (utent->ut_addr_v6,
-				        &(sa->sin_addr),
-				        MIN (sizeof (utent->ut_addr_v6),
-				             sizeof (sa->sin_addr)));
+				utent->ut_addr_v6[0] = sa->sin_addr.s_addr;
 			} else if (info->ai_family == AF_INET6) {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *) info->ai_addr;
-				memcpy (utent->ut_addr_v6,
-				        &(sa->sin6_addr),
-				        MIN (sizeof (utent->ut_addr_v6),
-				             sizeof (sa->sin6_addr)));
+				MEMCPY(utent->ut_addr_v6, sa->sin6_addr.s6_addr);
 # endif
 			}
 			freeaddrinfo (info);
