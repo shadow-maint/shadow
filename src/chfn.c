@@ -32,8 +32,9 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stpeprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -561,9 +562,8 @@ static void check_fields (void)
  */
 int main (int argc, char **argv)
 {
-	int                  ret;
 	char                 new_gecos[80];
-	char                 *user;
+	char                 *user, *p, *e;
 	const struct passwd  *pw;
 
 	sanitize_env ();
@@ -640,14 +640,17 @@ int main (int argc, char **argv)
 	 */
 	check_fields ();
 
-	/*
-	 * Build the new GECOS field by plastering all the pieces together,
-	 * if they will fit ...
-	 */
-	ret = SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
-	               fullnm, roomno, workph, homeph,
-	               (!streq(slop, "")) ? "," : "", slop);
-	if (ret == -1) {
+	/* Build the new GECOS field by plastering all the pieces together.  */
+	p = new_gecos;
+	e = new_gecos + countof(new_gecos);
+	p = stpeprintf(p, e, "%s", fullnm);
+	p = stpeprintf(p, e, ",%s", roomno);
+	p = stpeprintf(p, e, ",%s", workph);
+	p = stpeprintf(p, e, ",%s", homeph);
+	if (!streq(slop, ""))
+		p = stpeprintf(p, e, ",%s", slop);
+
+	if (p == e || p == NULL) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
