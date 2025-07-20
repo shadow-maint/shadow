@@ -211,17 +211,12 @@ get_session_host(char **out, pid_t main_pid)
 
 	ut = get_current_utmp(main_pid);
 
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
 		*out = XSTRNDUP(ut->ut_host);
 	} else {
 		*out = NULL;
 		ret = -2;
 	}
-#else
-	*out = NULL;
-	ret = -2;
-#endif
 
 	free(ut);
 
@@ -282,10 +277,8 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	if (NULL != host && !streq(host, ""))
 		hostname = xstrdup(host);
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && '\0' != ut->ut_host[0])
 		hostname = XSTRNDUP(ut->ut_host);
-#endif
 
 	line = strprefix(line, "/dev/") ?: line;
 
@@ -307,9 +300,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	STRNCPY(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 		STRNCPY(utent->ut_host, hostname);
-#endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
 		                        sizeof (utent->ut_host));
