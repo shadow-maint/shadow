@@ -23,6 +23,7 @@
 #include "shadowlog.h"
 #include "sizeof.h"
 #include "string/strcmp/strneq.h"
+#include "string/strcmp/strnpfx.h"
 #include "string/strcpy/strncat.h"
 #include "string/strdup/strndupa.h"
 
@@ -202,7 +203,7 @@ main(int argc, char **argv)
 			}
 			/* child */
 
-			if (strncmp(ut->ut_line, "/dev/", 5) != 0)
+			if (!STRNPFX(ut->ut_line, "/dev/"))
 				strcpy(tty_name, "/dev/");
 			else
 				strcpy(tty_name, "");
