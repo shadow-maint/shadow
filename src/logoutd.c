@@ -22,6 +22,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
+#include "string/strcmp/strneq.h"
 #include "string/strcpy/strncat.h"
 #include "string/strdup/strndupa.h"
 
@@ -179,7 +180,7 @@ main(int argc, char **argv)
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
-			if (strncmp(ut->ut_user, "", countof(ut->ut_user)) == 0)
+			if (STRNEQ(ut->ut_user, ""))
 				continue;
 
 			if (check_login (ut)) {

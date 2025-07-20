@@ -29,6 +29,7 @@
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 
 
@@ -70,9 +71,9 @@ user_busy_utmp(const char *name)
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
 		}
-		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
+		if (!STRNEQ(utent->ut_user, name))
 			continue;
-		}
+
 		if (kill (utent->ut_pid, 0) != 0) {
 			continue;
 		}
