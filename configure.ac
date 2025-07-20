@@ -154,7 +154,13 @@ AC_ARG_ENABLE([lastlog],
 AC_ARG_ENABLE([logind],
 	[AS_HELP_STRING([--enable-logind],
 		[enable logind @<:@default=yes if found@:>@])],
-	[enable_logind="${enableval}"],
+	[
+		AS_CASE([${enableval}],
+			[yes],[],
+			[no],[],
+			[AC_MSG_ERROR([bad parameter value for --enable-logind=${enableval}])]
+		)
+	],
 	[enable_logind="yes"]
 )
 
