@@ -153,7 +153,7 @@ AC_ARG_ENABLE([lastlog],
 
 AC_ARG_ENABLE([logind],
 	[AS_HELP_STRING([--enable-logind],
-		[enable logind @<:@default=yes@:>@])],
+		[enable logind @<:@default=yes if found@:>@])],
 	[enable_logind="${enableval}"],
 	[enable_logind="yes"]
 )
