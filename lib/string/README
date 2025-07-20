@@ -33,6 +33,11 @@ Don't use some libc functions without Really Good Reasons:
 	The return value of strcmp(3) is confusing.
 	strcmp(3) would be legitimate for sorting strings.
 
+    strncmp(3)
+	Use STRNEQ(), or strpfx(), or else, depending on what you want.
+	The return value of strncmp(3) is confusing,
+	and it is unclear the purpose of its use when you read it.
+
     strcasecmp(3)
 	Use strcaseeq() instead.
 
@@ -131,9 +136,9 @@ strcmp/ - String comparison
 	Like strsfx(), but ignore upper-/lower-case.
 
   n/
-    strneq()  // Unimplemented
+    strneq()
 	Return true if a [[gnu::nonstring]] is equal to a string.
-    STRNEQ()  // Unimplemented
+    STRNEQ()
 	Like strneq(), but takes an array.
 
     strnpfx()  // Unimplemented
