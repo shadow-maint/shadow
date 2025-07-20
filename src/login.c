@@ -42,6 +42,7 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -1200,7 +1201,7 @@ int main (int argc, char **argv)
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
-			if (strncmp(ll.ll_host, "", countof(ll.ll_host)) != 0) {
+			if (!STRNEQ(ll.ll_host, "")) {
 				printf (_(" from %.*s"),
 				        (int) sizeof ll.ll_host, ll.ll_host);
 			}
