@@ -8,5 +8,6 @@
 
 
 #if !defined(HAVE_STPECPY)
-extern inline char *stpecpy(char *dst, char *end, const char *restrict src);
+extern inline char *stpecpy(char dst[], char end[];
+    char dst[dst ? end - dst : 0], char end[0], const char *restrict src);
 #endif
