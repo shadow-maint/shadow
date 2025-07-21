@@ -23,32 +23,23 @@ inline char *stpecpy(char *dst, const char end[0], const char *restrict src);
 
 
 #if !defined(HAVE_STPECPY)
-// Like stpcpy(3), but use an 'end' pointer to truncate.
+// string returns-pointer end-delimited copy
 // Report truncation with NULL and E2BIG.
 // Transparently pass through a NULL input.
 // Calls to this function can be chained with calls to [v]seprintf().
 inline char *
 stpecpy(char *dst, const char end[0], const char *restrict src)
 {
-	bool    trunc;
-	char    *p;
-	size_t  dsize, dlen, slen;
+	size_t  dlen;
 
 	if (dst == NULL)
 		return NULL;
 
-	dsize = end - dst;
-	slen = strnlen(src, dsize);
-	trunc = (slen == dsize);
-	dlen = slen - trunc;
-
-	p = stpcpy(mempcpy(dst, src, dlen), "");
-	if (trunc) {
-		errno = E2BIG;
+	dlen = strtcpy(dst, src, end - dst);
+	if (dlen == -1)
 		return NULL;
-	}
 
-	return p;
+	return dst + dlen;
 }
 #endif
 
