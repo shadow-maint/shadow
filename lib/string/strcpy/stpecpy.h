@@ -14,6 +14,7 @@
 #include <string.h>
 
 #include "attr.h"
+#include "string/strcpy/strtcpy.h"
 
 
 #if !defined(HAVE_STPECPY)
@@ -27,25 +28,16 @@ inline char *stpecpy(char *dst, const char *end, const char *restrict src);
 inline char *
 stpecpy(char *dst, const char *end, const char *restrict src)
 {
-	bool    trunc;
-	char    *p;
-	size_t  dsize, dlen, slen;
+	ssize_t  dlen;
 
 	if (dst == NULL)
 		return NULL;
 
-	dsize = end - dst;
-	slen = strnlen(src, dsize);
-	trunc = (slen == dsize);
-	dlen = slen - trunc;
-
-	p = stpcpy(mempcpy(dst, src, dlen), "");
-	if (trunc) {
-		errno = E2BIG;
+	dlen = strtcpy(dst, src, end - dst);
+	if (dlen == -1)
 		return NULL;
-	}
 
-	return p;
+	return dst + dlen;
 }
 #endif
 
