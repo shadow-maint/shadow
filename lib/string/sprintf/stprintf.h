@@ -51,6 +51,11 @@ vstprintf(char *restrict s, int size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 
+	if (size == 0) {
+		errno = EOVERFLOW;
+		return -1;
+	}
+
 	len = vsnprintf(s, size, fmt, ap);
 	if (len == -1)
 		return -1;
