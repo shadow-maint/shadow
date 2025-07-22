@@ -154,8 +154,8 @@ int main (int argc, char **argv)
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
 		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) getuid ()));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		exit (10);
 	}
 	spwd = getspnam (pwd->pw_name); /* !USE_PAM, No need for xgetspnam */

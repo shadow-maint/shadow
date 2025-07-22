@@ -86,7 +86,7 @@ static void fail_exit (int status)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -94,7 +94,7 @@ static void fail_exit (int status)
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
@@ -271,13 +271,13 @@ int main (int argc, char **argv)
 	if (spw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_FAILURE);
 	}
 
@@ -286,19 +286,19 @@ int main (int argc, char **argv)
 	if ((chmod (PASSWD_FILE "-", 0600) != 0) && (errno != ENOENT)) {
 		eprintf(_("%s: failed to change the mode of %s to 0600\n"),
 		         Prog, PASSWD_FILE "-");
-		SYSLOG ((LOG_ERR, "failed to change the mode of %s to 0600", PASSWD_FILE "-"));
+		SYSLOG(LOG_ERR, "failed to change the mode of %s to 0600", PASSWD_FILE "-");
 		/* continue */
 	}
 
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 
 	if (spw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 

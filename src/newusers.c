@@ -169,21 +169,21 @@ static void fail_exit (int code)
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
@@ -191,7 +191,7 @@ static void fail_exit (int code)
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 	}
@@ -200,14 +200,14 @@ static void fail_exit (int code)
 	if (sub_uid_locked) {
 		if (sub_uid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 			/* continue */
 		}
 	}
 	if (sub_gid_locked) {
 		if (sub_gid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 			/* continue */
 		}
 	}
@@ -798,7 +798,7 @@ static void check_perms (void)
 
 	if (PAM_SUCCESS != retval) {
 		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
@@ -910,12 +910,12 @@ static void close_files (void)
 {
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (EXIT_FAILURE);
 	}
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -924,12 +924,12 @@ static void close_files (void)
 		if (spw_close () == 0) {
 			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 			fail_exit (EXIT_FAILURE);
 		}
 		if (spw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 		spw_locked = false;
@@ -938,25 +938,25 @@ static void close_files (void)
 	if (gr_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit (EXIT_FAILURE);
 	}
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid  && (sub_uid_close () == 0)) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
 		fail_exit (EXIT_FAILURE);
 	}
 	if (is_sub_gid  && (sub_gid_close () == 0)) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
 		fail_exit (EXIT_FAILURE);
 	}
 #endif				/* ENABLE_SUBIDS */
 
 	if (gr_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
 	gr_locked = false;
@@ -966,12 +966,12 @@ static void close_files (void)
 		if (sgr_close () == 0) {
 			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
 			fail_exit (EXIT_FAILURE);
 		}
 		if (sgr_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 		sgr_locked = false;
@@ -981,7 +981,7 @@ static void close_files (void)
 	if (is_sub_uid) {
 		if (sub_uid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 			/* continue */
 		}
 		sub_uid_locked = false;
@@ -989,7 +989,7 @@ static void close_files (void)
 	if (is_sub_gid) {
 		if (sub_gid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 			/* continue */
 		}
 		sub_gid_locked = false;

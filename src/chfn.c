@@ -82,7 +82,7 @@ static void fail_exit (int code)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -360,7 +360,7 @@ static void check_perms (const struct passwd *pw)
 
 	if (PAM_SUCCESS != retval) {
 		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
@@ -388,7 +388,7 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		SYSLOG(LOG_ERR, "can't setuid(0)");
 		fail_exit (E_NOPERM);
 	}
 	pwd_init ();
@@ -443,12 +443,12 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_NOPERM);
 	}
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -592,8 +592,8 @@ int main (int argc, char **argv)
 		if (NULL == pw) {
 			eprintf(_("%s: Cannot determine your user name.\n"),
 			         Prog);
-			SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-			         (unsigned long) getuid ()));
+			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			       (unsigned long) getuid());
 			fail_exit (E_NOPERM);
 		}
 		user = xstrdup (pw->pw_name);
@@ -639,7 +639,7 @@ int main (int argc, char **argv)
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);
 
-	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
+	SYSLOG(LOG_INFO, "changed user '%s' information", user);
 
 	nscd_flush_cache ("passwd");
 	sssd_flush_cache (SSSD_DB_PASSWD);

@@ -178,8 +178,8 @@ int main(int argc, char **argv)
 	pw = get_my_pwent ();
 	if (NULL == pw) {
 		eprintf(_("%s: Cannot determine your user name.\n"), Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-				(unsigned long) getuid ()));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		return EXIT_FAILURE;
 	}
 
