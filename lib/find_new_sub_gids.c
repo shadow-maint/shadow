@@ -51,7 +51,7 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 		fprintf (log_get_logfd(),
 		         _("%s: Can't get unique subordinate GID range\n"),
 		         log_get_progname());
-		SYSLOG ((LOG_WARN, "no more available subordinate GIDs on the system"));
+		SYSLOG(LOG_WARN, "no more available subordinate GIDs on the system");
 		return -1;
 	}
 	*range_start = start;

@@ -58,9 +58,9 @@ void chown_tty (const struct passwd *info)
 		fprintf (shadow_logfd,
 		         _("Unable to change owner or mode of tty stdin: %s"),
 		         strerror (err));
-		SYSLOG ((LOG_WARN,
-		         "unable to change owner or mode of tty stdin for user `%s': %s\n",
-		         info->pw_name, strerror (err)));
+		SYSLOG(LOG_WARN,
+		       "unable to change owner or mode of tty stdin for user `%s': %s\n",
+		       info->pw_name, strerror(err));
 		if (EROFS != err) {
 			closelog ();
 			exit (EXIT_FAILURE);
