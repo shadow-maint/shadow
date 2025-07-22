@@ -13,6 +13,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "attr.h"
 #include "prototypes.h"
@@ -66,9 +67,8 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 	}
 
 	for (i = j = 0; ('\0' != new[i]) && ('\0' != old[i]); i++) {
-		if (strchr (new, old[i]) != NULL) {
+		if (strchr(new, old[i]))
 			j++;
-		}
 	}
 
 	if (i >= j * 2) {
