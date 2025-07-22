@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -14,6 +14,10 @@
 #include "attr.h"
 #include "string/strchr/strchrscnt.h"
 #include "string/strtok/strsep2ls.h"
+#include "x.h"
+
+
+#define xastrsep2ls(s, delim, np)  X(astrsep2ls(s, delim, np))
 
 
 ATTR_ACCESS(read_write, 1) ATTR_ACCESS(write_only, 3)
