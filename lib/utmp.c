@@ -101,9 +101,9 @@ failtmp(const char *username, const struct utmpx *failent)
 	fd = open (ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
 		if (errno != ENOENT) {
-			SYSLOG ((LOG_WARN,
-			        "Can't append failure of user %s to %s: %m",
-			        username, ftmp));
+			SYSLOG(LOG_WARN,
+			       "Can't append failure of user %s to %s: %m",
+			       username, ftmp);
 		}
 		return;
 	}
@@ -129,9 +129,7 @@ err_write:
 		errno = saved_errno;
 	}
 err_close:
-	SYSLOG ((LOG_WARN,
-	         "Can't append failure of user %s to %s: %m",
-	         username, ftmp));
+	SYSLOG(LOG_WARN, "Can't append failure of user %s to %s: %m", username, ftmp);
 }
 
 
