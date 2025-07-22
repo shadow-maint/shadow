@@ -40,6 +40,8 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
+#include "string/strerrno.h"
+
 
 struct option_flags {
 	bool chroot;
@@ -852,7 +854,7 @@ static void change_passwd (struct group *gr)
 	if (NULL == cp) {
 		fprintf (stderr,
 		         _("%s: failed to crypt password with salt '%s': %s\n"),
-		         Prog, salt, strerror (errno));
+		        Prog, salt, strerrno());
 		exit (1);
 	}
 #ifdef SHADOWGRP

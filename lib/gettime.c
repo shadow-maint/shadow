@@ -15,6 +15,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -40,7 +41,7 @@ gettime(void)
 	if (a2i(time_t, &epoch, source_date_epoch, NULL, 10, 0, fallback) == -1) {
 		fprintf(shadow_logfd,
 		        _("Environment variable $SOURCE_DATE_EPOCH: a2i(\"%s\"): %s"),
-		        source_date_epoch, strerror(errno));
+		        source_date_epoch, strerrno());
 		return fallback;
 	}
 	return epoch;

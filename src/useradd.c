@@ -74,6 +74,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -534,7 +535,7 @@ set_defaults(void)
 	new_file = aprintf("%s%s%s", prefix, prefix[0]?"/":"", NEW_USER_FILE);
 	if (new_file == NULL) {
 		fprintf(stderr, _("%s: cannot create new defaults file: %s\n"),
-		        Prog, strerror(errno));
+		        Prog, strerrno());
 		return -1;
         }
 
@@ -543,7 +544,7 @@ set_defaults(void)
 		if (default_file == NULL) {
 			fprintf(stderr,
 			        _("%s: cannot create new defaults file: %s\n"),
-			        Prog, strerror(errno));
+			        Prog, strerrno());
 			goto err_free_new;
 		}
 	}
@@ -693,10 +694,9 @@ set_defaults(void)
 	assert(SNPRINTF(buf, "%s-", default_file) != -1);
 	unlink (buf);
 	if ((link (default_file, buf) != 0) && (ENOENT != errno)) {
-		int err = errno;
 		fprintf (stderr,
 		         _("%s: Cannot create backup file (%s): %s\n"),
-		         Prog, buf, strerror (err));
+		         Prog, buf, strerrno());
 		unlink (new_file);
 		goto err_free_def;
 	}
@@ -705,10 +705,9 @@ set_defaults(void)
 	 * Rename the new default file to its correct name.
 	 */
 	if (rename (new_file, default_file) != 0) {
-		int err = errno;
 		fprintf (stderr,
 		         _("%s: rename: %s: %s\n"),
-		         Prog, new_file, strerror (err));
+		         Prog, new_file, strerrno());
 		goto err_free_def;
 	}
 #ifdef WITH_AUDIT
@@ -1969,7 +1968,7 @@ static void faillog_reset (uid_t uid)
 	if (-1 == fd) {
 		fprintf (stderr,
 		         _("%s: failed to open the faillog file for UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to open the faillog file for UID %lu", (unsigned long) uid));
 		return;
 	}
@@ -1978,13 +1977,13 @@ static void faillog_reset (uid_t uid)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid));
 	}
 	if (close (fd) != 0 && errno != EINTR) {
 		fprintf (stderr,
 		         _("%s: failed to close the faillog file for UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to close the faillog file for UID %lu", (unsigned long) uid));
 	}
 }
@@ -2014,7 +2013,7 @@ static void lastlog_reset (uid_t uid)
 	if (-1 == fd) {
 		fprintf (stderr,
 		         _("%s: failed to open the lastlog file for UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to open the lastlog file for UID %lu", (unsigned long) uid));
 		return;
 	}
@@ -2023,14 +2022,14 @@ static void lastlog_reset (uid_t uid)
 	    || (fsync (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid));
 		/* continue */
 	}
 	if (close (fd) != 0 && errno != EINTR) {
 		fprintf (stderr,
 		         _("%s: failed to close the lastlog file for UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror (errno));
+		        Prog, (unsigned long) uid, strerrno());
 		SYSLOG ((LOG_WARN, "failed to close the lastlog file for UID %lu", (unsigned long) uid));
 		/* continue */
 	}

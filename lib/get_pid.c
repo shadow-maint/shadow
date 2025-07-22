@@ -15,6 +15,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "string/sprintf/snprintf.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -60,14 +61,14 @@ int open_pidfd(const char *pidstr)
 
 	if (SNPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
 		fprintf(stderr, "snprintf of proc path failed for %d: %s\n",
-			target, strerror(errno));
+			target, strerrno());
 		return -EINVAL;
 	}
 
 	proc_dir_fd = open(proc_dir_name, O_DIRECTORY);
 	if (proc_dir_fd < 0) {
 		fprintf(stderr, _("Could not open proc directory for target %d: %s\n"),
-			target, strerror(errno));
+			target, strerrno());
 		return -EINVAL;
 	}
 	return proc_dir_fd;

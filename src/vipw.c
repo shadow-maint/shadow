@@ -46,6 +46,7 @@
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strerrno.h"
 
 
 #define MSG_WARN_EDIT_OTHER_FILE _( \
@@ -310,8 +311,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 
 		status = system (buf);
 		if (-1 == status) {
-			fprintf (stderr, _("%s: %s: %s\n"), Prog, editor,
-			         strerror (errno));
+			fprintf(stderr, _("%s: %s: %s\n"), Prog, editor, strerrno());
 			exit (1);
 		} else if (   WIFEXITED (status)
 		           && (WEXITSTATUS (status) != 0)) {
@@ -350,11 +350,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 				editor_pgrp = tcgetpgrp(STDIN_FILENO);
 				if (editor_pgrp == -1) {
 					fprintf (stderr, "%s: %s: %s", Prog,
-						 "tcgetpgrp", strerror (errno));
+						"tcgetpgrp", strerrno());
 				}
 				if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
 					fprintf (stderr, "%s: %s: %s", Prog,
-						 "tcsetpgrp", strerror (errno));
+						"tcsetpgrp", strerrno());
 				}
 			}
 			kill (getpid (), SIGSTOP);
@@ -362,7 +362,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 			if (editor_pgrp != -1) {
 				if (tcsetpgrp(STDIN_FILENO, editor_pgrp) == -1) {
 					fprintf (stderr, "%s: %s: %s", Prog,
-						 "tcsetpgrp", strerror (errno));
+						"tcsetpgrp", strerrno());
 				}
 			}
 			killpg (pid, SIGCONT);
@@ -374,8 +374,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	if (orig_pgrp != -1) {
 		 /* Restore terminal pgrp after editing. */
 		if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
-			fprintf(stderr, "%s: %s: %s", Prog,
-			        "tcsetpgrp", strerror(errno));
+			fprintf(stderr, "%s: %s: %s", Prog, "tcsetpgrp", strerrno());
 		}
 		sigprocmask(SIG_SETMASK, &omask, NULL);
 	}
@@ -447,7 +446,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	if (rename (to_rename, file) == -1) {
 		fprintf (stderr,
 		         _("%s: can't restore %s: %s (your changes are in %s)\n"),
-		         Prog, file, strerror (errno), to_rename);
+		        Prog, file, strerrno(), to_rename);
 #ifdef WITH_TCB
 		if (tcb_mode) {
 			free(to_rename);
