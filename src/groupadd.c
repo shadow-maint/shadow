@@ -300,8 +300,8 @@ static void close_files(const struct option_flags *flags)
 	              "add-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-	SYSLOG ((LOG_INFO, "group added to %s: name=%s, GID=%u",
-	         gr_dbname (), group_name, (unsigned int) group_id));
+	SYSLOG(LOG_INFO, "group added to %s: name=%s, GID=%u",
+	       gr_dbname(), group_name, (unsigned int) group_id);
 	del_cleanup (cleanup_report_add_group_group);
 
 	cleanup_unlock_group (&process_selinux);
@@ -321,8 +321,8 @@ static void close_files(const struct option_flags *flags)
 		              "add-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO, "group added to %s: name=%s",
-		         sgr_dbname (), group_name));
+		SYSLOG(LOG_INFO, "group added to %s: name=%s",
+		       sgr_dbname(), group_name);
 		del_cleanup (cleanup_report_add_group_gshadow);
 
 		cleanup_unlock_gshadow (&process_selinux);
@@ -331,8 +331,8 @@ static void close_files(const struct option_flags *flags)
 #endif				/* SHADOWGRP */
 
 	/* Report success at the system level */
-	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
-	         group_name, (unsigned int) group_id));
+	SYSLOG(LOG_INFO, "new group: name=%s, GID=%u",
+	       group_name, (unsigned int) group_id);
 	del_cleanup (cleanup_report_add_group);
 }
 
@@ -377,7 +377,7 @@ static void open_files(const struct option_flags *flags)
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf(stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerrno());
-		SYSLOG((LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno()));
+		SYSLOG(LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno());
 		fail_exit (E_GRP_UPDATE);
 	}
 
@@ -387,7 +387,7 @@ static void open_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: cannot open %s: %s\n"),
 			         Prog, sgr_dbname(), strerrno());
-			SYSLOG((LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno()));
+			SYSLOG(LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -588,7 +588,7 @@ static void check_perms (void)
 	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM: %s\n"),
 		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
