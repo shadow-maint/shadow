@@ -67,7 +67,7 @@ NORETURN static void fail_exit (int code);
 NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
-static char *copy_field (char *, char *, char *);
+static char *copy_field (char *, char *, char *, unsigned long);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_gecos (const char *user, char *gecos);
@@ -215,8 +215,10 @@ static void new_fields (void)
  *	in - the current GECOS field
  *	out - where to copy the field to
  *	extra - fields with '=' get copied here
+ *	out_size - output string size
  */
-static char *copy_field (char *in, char *out, char *extra)
+static char *
+copy_field (char *in, char *out, char *extra, unsigned long out_size)
 {
 	char  *next = NULL;
 
@@ -230,6 +232,10 @@ static char *copy_field (char *in, char *out, char *extra)
 			break;
 
 		if (NULL != extra) {
+			if (strlen(extra) + 1 + strlen(f) + 1 > out_size) {
+				return NULL;
+			}
+
 			if (!streq(extra, "")) {
 				strcat (extra, ",");
 			}
@@ -521,28 +527,32 @@ static void get_old_fields (const char *gecos)
 	 * Now get the full name. It is the first comma separated field in
 	 * the GECOS field.
 	 */
-	cp = copy_field (old_gecos, fflg ? NULL : fullnm, slop);
+	cp = copy_field (old_gecos, fflg ? NULL : fullnm, slop,
+			fflg ? 0 : countof(fullnm));
 
 	/*
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, rflg ? NULL : roomno, slop);
+		cp = copy_field (cp, rflg ? NULL : roomno, slop,
+				rflg ? 0 : countof(roomno));
 	}
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, wflg ? NULL : workph, slop);
+		cp = copy_field (cp, wflg ? NULL : workph, slop,
+				wflg ? 0 : countof(workph));
 	}
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
 	if (NULL != cp) {
-		cp = copy_field (cp, hflg ? NULL : homeph, slop);
+		cp = copy_field (cp, hflg ? NULL : homeph, slop,
+				hflg ? 0 : countof(homeph));
 	}
 
 	/*
