@@ -263,40 +263,40 @@ static void fail_exit (int code)
 	if (home_added && rmdir(prefix_user_home) != 0) {
 		eprintf(_("%s: %s was created, but could not be removed\n"),
 		        Prog, prefix_user_home);
-		SYSLOG((LOG_ERR, "failed to remove %s", prefix_user_home));
+		SYSLOG(LOG_ERR, "failed to remove %s", prefix_user_home);
 	}
 
 	if (spw_locked && spw_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-		SYSLOG((LOG_ERR, "failed to unlock %s", spw_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 	if (pw_locked && pw_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG((LOG_ERR, "failed to unlock %s", pw_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	if (gr_locked && gr_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
-		SYSLOG((LOG_ERR, "failed to unlock %s", gr_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
 #ifdef SHADOWGRP
 	if (sgr_locked && sgr_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-		SYSLOG((LOG_ERR, "failed to unlock %s", sgr_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 		/* continue */
 	}
 #endif
 #ifdef ENABLE_SUBIDS
 	if (sub_uid_locked && sub_uid_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
-		SYSLOG((LOG_ERR, "failed to unlock %s", sub_uid_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 		/* continue */
 	}
 	if (sub_gid_locked && sub_gid_unlock() == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 		/* continue */
 	}
 #endif  /* ENABLE_SUBIDS */
@@ -311,7 +311,7 @@ static void fail_exit (int code)
 	              "add-user",
 	             user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
-	SYSLOG((LOG_INFO, "failed adding user '%s', exit code: %d", user_name, code));
+	SYSLOG(LOG_INFO, "failed adding user '%s', exit code: %d", user_name, code);
 	exit(code);
 }
 
@@ -700,12 +700,12 @@ set_defaults(void)
 	              NULL, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
 #endif
-	SYSLOG ((LOG_INFO,
+	SYSLOG(LOG_INFO,
 	         "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
 	         "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s, LOG_INIT=%s",
 	         (unsigned int) def_group, def_home, def_shell,
 	         def_inactive, def_expire, def_template,
-	         def_create_mail_spool, def_log_init));
+	         def_create_mail_spool, def_log_init);
 	ret = 0;
 
 err_free_def:
@@ -1004,7 +1004,7 @@ static void grp_update (void)
 		if (NULL == ngrp) {
 			eprintf(_("%s: Out of memory. Cannot update %s.\n"),
 			         Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname (), user_name));
+			SYSLOG(LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname(), user_name);
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -1016,7 +1016,7 @@ static void grp_update (void)
 		if (gr_update (ngrp) == 0) {
 			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, gr_dbname (), ngrp->gr_name);
-			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname (), user_name));
+			SYSLOG(LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname(), user_name);
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
@@ -1025,9 +1025,7 @@ static void grp_update (void)
 		              user_name, AUDIT_NO_ID, "grp", ngrp->gr_name,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "add '%s' to group '%s'",
-		         user_name, ngrp->gr_name));
+		SYSLOG(LOG_INFO, "add '%s' to group '%s'", user_name, ngrp->gr_name);
 	}
 
 #ifdef	SHADOWGRP
@@ -1065,7 +1063,7 @@ static void grp_update (void)
 		if (NULL == nsgrp) {
 			eprintf(_("%s: Out of memory. Cannot update %s.\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname (), user_name));
+			SYSLOG(LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname(), user_name);
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -1077,7 +1075,7 @@ static void grp_update (void)
 		if (sgr_update (nsgrp) == 0) {
 			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, sgr_dbname (), nsgrp->sg_namp);
-			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname (), user_name));
+			SYSLOG(LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname(), user_name);
 
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -1087,9 +1085,8 @@ static void grp_update (void)
 		              user_name, AUDIT_NO_ID, "grp", nsgrp->sg_namp,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "add '%s' to shadow group '%s'",
-		         user_name, nsgrp->sg_namp));
+		SYSLOG(LOG_INFO, "add '%s' to shadow group '%s'",
+		       user_name, nsgrp->sg_namp);
 	}
 #endif				/* SHADOWGRP */
 }
@@ -1523,12 +1520,12 @@ static void close_files (void)
 {
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_close () == 0)) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1537,19 +1534,19 @@ static void close_files (void)
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid  && (sub_uid_close () == 0)) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
 		fail_exit (E_SUB_UID_UPDATE);
 	}
 	if (is_sub_gid  && (sub_gid_close () == 0)) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
 		fail_exit (E_SUB_GID_UPDATE);
 	}
 #endif				/* ENABLE_SUBIDS */
 	if (is_shadow_pwd) {
 		if (spw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking-shadow-file",
@@ -1562,7 +1559,7 @@ static void close_files (void)
 	}
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking-passwd-file",
@@ -1579,7 +1576,7 @@ static void close_files (void)
 	if (is_sub_uid) {
 		if (sub_uid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 				"unlocking-subordinate-user-file",
@@ -1593,7 +1590,7 @@ static void close_files (void)
 	if (is_sub_gid) {
 		if (sub_gid_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 				"unlocking-subordinate-group-file",
@@ -1621,14 +1618,14 @@ static void close_group_files (void)
 	if (gr_close() == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"),
 		        Prog, gr_dbname());
-		SYSLOG((LOG_ERR, "failure while writing changes to %s", gr_dbname()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit(E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && sgr_close() == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"),
 		        Prog, sgr_dbname());
-		SYSLOG((LOG_ERR, "failure while writing changes to %s", sgr_dbname()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
 		fail_exit(E_GRP_UPDATE);
 	}
 #endif /* SHADOWGRP */
@@ -1644,7 +1641,7 @@ static void unlock_group_files (void)
 {
 	if (gr_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking-group-file",
@@ -1658,7 +1655,7 @@ static void unlock_group_files (void)
 	if (is_shadow_grp) {
 		if (sgr_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking-gshadow-file",
@@ -1866,7 +1863,7 @@ static void grp_add (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
-	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u", user_name, user_gid));
+	SYSLOG(LOG_INFO, "new group: name=%s, GID=%u", user_name, user_gid);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP, Prog,
 	              "add-group",
@@ -1893,7 +1890,7 @@ static void faillog_reset (uid_t uid)
 	if (-1 == fd) {
 		eprintf(_("%s: failed to open the faillog file for UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to open the faillog file for UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to open the faillog file for UID %lu", (unsigned long) uid);
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
@@ -1901,12 +1898,12 @@ static void faillog_reset (uid_t uid)
 	    || (fsync (fd) != 0)) {
 		eprintf(_("%s: failed to reset the faillog entry of UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid);
 	}
 	if (close (fd) != 0 && errno != EINTR) {
 		eprintf(_("%s: failed to close the faillog file for UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to close the faillog file for UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to close the faillog file for UID %lu", (unsigned long) uid);
 	}
 }
 
@@ -1935,7 +1932,7 @@ static void lastlog_reset (uid_t uid)
 	if (-1 == fd) {
 		eprintf(_("%s: failed to open the lastlog file for UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to open the lastlog file for UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to open the lastlog file for UID %lu", (unsigned long) uid);
 		return;
 	}
 	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
@@ -1943,13 +1940,13 @@ static void lastlog_reset (uid_t uid)
 	    || (fsync (fd) != 0)) {
 		eprintf(_("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid);
 		/* continue */
 	}
 	if (close (fd) != 0 && errno != EINTR) {
 		eprintf(_("%s: failed to close the lastlog file for UID %lu: %s\n"),
 		        Prog, (unsigned long) uid, strerrno());
-		SYSLOG ((LOG_WARN, "failed to close the lastlog file for UID %lu", (unsigned long) uid));
+		SYSLOG(LOG_WARN, "failed to close the lastlog file for UID %lu", (unsigned long) uid);
 		/* continue */
 	}
 }
@@ -1993,7 +1990,7 @@ static void tallylog_reset (const char *user_name)
 	{
 		eprintf(_("%s: failed to reset the tallylog entry of user \"%s\"\n"),
 		         Prog, user_name);
-		SYSLOG ((LOG_WARN, "failed to reset the tallylog entry of user \"%s\"", user_name));
+		SYSLOG(LOG_WARN, "failed to reset the tallylog entry of user \"%s\"", user_name);
 	}
 
 	return;
@@ -2023,11 +2020,11 @@ static void usr_update (unsigned long subuid_count, unsigned long subgid_count)
 	 * happens so we know what we were trying to accomplish.
 	 */
 	tty=ttyname (STDIN_FILENO);
-	SYSLOG ((LOG_INFO,
+	SYSLOG(LOG_INFO,
 	         "new user: name=%s, UID=%u, GID=%u, home=%s, shell=%s, from=%s",
 	         user_name, (unsigned int) user_id,
 	         (unsigned int) user_gid, user_home, user_shell,
-	         tty ? tty : "none" ));
+	         tty ? tty : "none");
 
 	/*
 	 * Initialize faillog and lastlog entries for this UID in case
@@ -2402,7 +2399,7 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS != retval) {
 		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}

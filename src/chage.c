@@ -98,14 +98,14 @@ fail_exit (int code)
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -503,7 +503,7 @@ static void open_files (bool readonly)
 	}
 	if (pw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
 		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (E_NOPERM);
 	}
 
@@ -523,7 +523,7 @@ static void open_files (bool readonly)
 	}
 	if (spw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
 		eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
-		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 		fail_exit (E_NOPERM);
 	}
 }
@@ -539,7 +539,7 @@ static void close_files (void)
 	 */
 	if (spw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 		fail_exit (E_NOPERM);
 	}
 
@@ -549,18 +549,18 @@ static void close_files (void)
 	 */
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_NOPERM);
 	}
 	if (spw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 	spw_locked = false;
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -734,7 +734,7 @@ int main (int argc, char **argv)
 
 	if (!spw_file_present ()) {
 		eprintf(_("%s: the shadow password file is not present\n"), Prog);
-		SYSLOG ((LOG_WARN, "can't find the shadow password file"));
+		SYSLOG(LOG_WARN, "can't find the shadow password file");
 		closelog ();
 		exit (E_SHADOW_NOTFOUND);
 	}
@@ -836,7 +836,7 @@ int main (int argc, char **argv)
 
 	close_files ();
 
-	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
+	SYSLOG(LOG_INFO, "changed password expiry for %s", user_name);
 
 	closelog ();
 	exit (E_SUCCESS);
