@@ -12,9 +12,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <strings.h>
-#include <sys/prctl.h>
 #if __has_include(<sys/capability.h>)
 # include <sys/capability.h>
+#endif
+#if __has_include(<sys/prctl.h>)
+# include <sys/prctl.h>
 #endif
 
 #include "alloc/calloc.h"
