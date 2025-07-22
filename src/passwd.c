@@ -39,6 +39,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 #include "time/day_to_str.h"
 
 
@@ -208,7 +209,7 @@ static int new_password (const struct passwd *pw)
 		if (NULL == cipher) {
 			erase_pass (clear);
 			eprintf(_("%s: failed to crypt password with previous salt: %s\n"),
-			         Prog, strerror (errno));
+			         Prog, strerrno());
 			SYSLOG ((LOG_INFO,
 			         "Failed to crypt password with previous salt of user '%s'",
 			         pw->pw_name));
@@ -360,7 +361,7 @@ static int new_password (const struct passwd *pw)
 
 	if (NULL == cp) {
 		eprintf(_("%s: failed to crypt password with salt '%s': %s\n"),
-		         Prog, salt, strerror (errno));
+		         Prog, salt, strerrno());
 		return -1;
 	}
 

@@ -33,6 +33,7 @@
 #include "shadowlog.h"
 #include "sizeof.h"
 #include "string/memset/memzero.h"
+#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -434,7 +435,7 @@ int main (int argc, char **argv)
 	/* Get the lastlog size */
 	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
 		eprintf(_("%s: Cannot get the size of %s: %s\n"),
-		         Prog, LASTLOG_FILE, strerror (errno));
+		        Prog, LASTLOG_FILE, strerrno());
 		exit (EXIT_FAILURE);
 	}
 

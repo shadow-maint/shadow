@@ -39,6 +39,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -102,7 +103,7 @@ static int check_link_count (const char *file, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file stat error: %s\n",
-			                shadow_progname, file, strerror (errno));
+			                shadow_progname, file, strerrno());
 		}
 		return 0;
 	}
@@ -133,7 +134,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: %s\n",
-			                shadow_progname, file, strerror (errno));
+			                shadow_progname, file, strerrno());
 		}
 		return 0;
 	}
@@ -145,7 +146,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file write error: %s\n",
-			                shadow_progname, file, strerror (errno));
+			                shadow_progname, file, strerrno());
 		}
 		(void) close (fd);
 		unlink (file);
@@ -155,7 +156,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s file sync error: %s\n",
-			                shadow_progname, file, strerror (errno));
+			                shadow_progname, file, strerrno());
 		}
 		(void) close (fd);
 		unlink (file);
@@ -174,7 +175,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
+			                shadow_progname, lock, strerrno());
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -217,7 +218,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
+			                shadow_progname, lock, strerrno());
 		}
 		unlink (file);
 		return 0;
@@ -230,7 +231,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (shadow_logfd,
 			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerror (errno));
+			                shadow_progname, lock, strerrno());
 		}
 	}
 

@@ -40,6 +40,7 @@
 #endif
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -352,17 +353,16 @@ static void open_files (void)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		eprintf(_("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerror(errno));
-		SYSLOG ((LOG_WARN, "cannot open %s: %s", gr_dbname (), strerror(errno)));
+		eprintf(_("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerrno());
+		SYSLOG((LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno()));
 		fail_exit (E_GRP_UPDATE);
 	}
 
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			eprintf(_("%s: cannot open %s: %s\n"),
-			         Prog, sgr_dbname (), strerror(errno));
-			SYSLOG ((LOG_WARN, "cannot open %s: %s", sgr_dbname (), strerror(errno)));
+			eprintf(_("%s: cannot open %s: %s\n"), Prog, sgr_dbname(), strerrno());
+			SYSLOG((LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}

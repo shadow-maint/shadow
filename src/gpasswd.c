@@ -40,6 +40,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -822,7 +823,7 @@ static void change_passwd (struct group *gr)
 	MEMZERO(pass);
 	if (NULL == cp) {
 		eprintf(_("%s: failed to crypt password with salt '%s': %s\n"),
-		         Prog, salt, strerror (errno));
+		        Prog, salt, strerrno());
 		exit (1);
 	}
 #ifdef SHADOWGRP

@@ -34,6 +34,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 #include "string/strftime.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/
@@ -743,7 +744,7 @@ int main (int argc, char **argv)
 	if (lflg && (   (setregid (rgid, rgid) != 0)
 	             || (setreuid (ruid, ruid) != 0))) {
 		eprintf(_("%s: failed to drop privileges (%s)\n"),
-		         Prog, strerror (errno));
+		         Prog, strerrno());
 		fail_exit (E_NOPERM);
 	}
 

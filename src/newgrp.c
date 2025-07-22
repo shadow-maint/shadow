@@ -33,6 +33,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 
 #include <assert.h>
 
@@ -184,7 +185,7 @@ static void check_perms (const struct group *grp,
 
 		if (NULL == cpasswd) {
 			eprintf(_("%s: failed to crypt password with previous salt: %s\n"),
-			         Prog, strerror (errno));
+			        Prog, strerrno());
 			SYSLOG ((LOG_INFO,
 			         "Failed to crypt password with previous salt of group '%s'",
 			         groupname));
@@ -291,7 +292,7 @@ static void syslog_sg (const char *name, const char *group)
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
 			eprintf(_("%s: failure forking: %s\n"),
-				 is_newgrp ? "newgrp" : "sg", strerror (errno));
+				is_newgrp ? "newgrp" : "sg", strerrno());
 #ifdef WITH_AUDIT
 			if (group) {
 				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
