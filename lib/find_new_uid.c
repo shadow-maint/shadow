@@ -322,9 +322,9 @@ int find_new_uid(bool sys_user,
 						_("%s: Can't get unique system UID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -368,9 +368,9 @@ int find_new_uid(bool sys_user,
 							_("%s: Can't get unique system UID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -431,9 +431,9 @@ int find_new_uid(bool sys_user,
 						_("%s: Can't get unique UID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -477,9 +477,9 @@ int find_new_uid(bool sys_user,
 							_("%s: Can't get unique UID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -495,7 +495,7 @@ int find_new_uid(bool sys_user,
 	fprintf (log_get_logfd(),
 		_("%s: Can't get unique UID (no more available UIDs)\n"),
 		log_get_progname());
-	SYSLOG ((LOG_WARN, "no more available UIDs on the system"));
+	SYSLOG(LOG_WARN, "no more available UIDs on the system");
 	free (used_uids);
 	return -1;
 }
