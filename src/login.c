@@ -45,6 +45,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -1080,7 +1081,7 @@ int main (int argc, char **argv)
 	child = fork ();
 	if (child < 0) {
 		/* error in fork() */
-		eprintf(_("%s: failure forking: %s"), Prog, strerror(errno));
+		eprintf(_("%s: failure forking: %s"), Prog, strerrno());
 		PAM_END;
 		exit (0);
 	} else if (child != 0) {

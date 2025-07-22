@@ -21,6 +21,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 #include "subordinateio.h"
 
 
@@ -103,9 +104,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 			eprintf(_("%s: kernel doesn't support setgroups restrictions\n"), Prog);
 			goto out;
 		}
-		eprintf(_("%s: couldn't open process setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+		eprintf(_("%s: couldn't open process setgroups: %s\n"), Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 
@@ -115,9 +114,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 * fail.
 	 */
 	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
-		eprintf(_("%s: failed to read setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+		eprintf(_("%s: failed to read setgroups: %s\n"), Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 	if (strprefix(policy_buffer, policy))
@@ -125,16 +122,12 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 
 	/* Write the policy. */
 	if (lseek(setgroups_fd, 0, SEEK_SET) < 0) {
-		eprintf(_("%s: failed to seek setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+		eprintf(_("%s: failed to seek setgroups: %s\n"), Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 	if (dprintf(setgroups_fd, "%s", policy) < 0) {
 		eprintf(_("%s: failed to setgroups %s policy: %s\n"),
-			Prog,
-			policy,
-			strerror(errno));
+			Prog, policy, strerrno());
 		exit(EXIT_FAILURE);
 	}
 
@@ -193,7 +186,7 @@ int main(int argc, char **argv)
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
 		eprintf(_("%s: Could not stat directory for target process: %s\n"),
-		        Prog, strerror (errno));
+		        Prog, strerrno());
 		return EXIT_FAILURE;
 	}
 
@@ -213,8 +206,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subgid_file() && !sub_gid_open(O_RDONLY)) {
-		eprintf(_("%s: cannot open %s: %s\n"),
-		         Prog, sub_gid_dbname (), strerror (errno));
+		eprintf(_("%s: cannot open %s: %s\n"), Prog, sub_gid_dbname(), strerrno());
 		return EXIT_FAILURE;
 	}
 

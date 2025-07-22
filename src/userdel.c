@@ -57,6 +57,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -738,8 +739,8 @@ static bool remove_mailbox (void)
 			return 0;
 		} else {
 			eprintf(_("%s: warning: can't remove %s: %s\n"),
-			         Prog, mailfile, strerror (errno));
-			SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
+			        Prog, mailfile, strerrno());
+			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "delete-mail-file",
@@ -753,8 +754,8 @@ static bool remove_mailbox (void)
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
 			eprintf(_("%s: warning: can't remove %s: %s\n"),
-			         Prog, mailfile, strerror (errno));
-			SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
+			        Prog, mailfile, strerrno());
+			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "delete-mail-file",
@@ -778,9 +779,7 @@ static bool remove_mailbox (void)
 	if (i == 0) {
 		eprintf(_("%s: %s not owned by %s, not removing\n"),
 		         Prog, mailfile, user_name);
-		SYSLOG ((LOG_ERR,
-		         "%s not owned by %s, not removed",
-		         mailfile, strerror (errno)));
+		SYSLOG((LOG_ERR, "%s not owned by %s, not removed", mailfile, strerrno()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "delete-mail-file",
@@ -793,9 +792,8 @@ static bool remove_mailbox (void)
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
-		eprintf(_("%s: warning: can't remove %s: %s\n"),
-		         Prog, mailfile, strerror (errno));
-		SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
+		eprintf(_("%s: warning: can't remove %s: %s\n"), Prog, mailfile, strerrno());
+		SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "delete-mail-file",
@@ -833,8 +831,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 1;
 	}
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		eprintf(_("%s: Cannot drop privileges: %s\n"),
-		         Prog, strerror (errno));
+		eprintf(_("%s: Cannot drop privileges: %s\n"), Prog, strerrno());
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -844,7 +841,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	 */
 	if (remove_tree (buf, false) != 0) {
 		eprintf(_("%s: Cannot remove the content of %s: %s\n"),
-		         Prog, buf, strerror (errno));
+		        Prog, buf, strerrno());
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -853,7 +850,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	free (buf);
 	if (shadowtcb_remove (user_name) == SHADOWTCB_FAILURE) {
 		eprintf(_("%s: Cannot remove tcb files for %s: %s\n"),
-		         Prog, user_name, strerror (errno));
+		        Prog, user_name, strerrno());
 		ret = 1;
 	}
 	return ret;

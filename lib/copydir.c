@@ -42,6 +42,7 @@
 #include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -118,7 +119,7 @@ static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, 
 	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
 		(void) fputs (_(": "), shadow_logfd);
 	}
-	(void) fprintf (shadow_logfd, "%s\n", strerror (errno));
+	(void) fprintf(shadow_logfd, "%s\n", strerrno());
 	va_end (ap);
 }
 

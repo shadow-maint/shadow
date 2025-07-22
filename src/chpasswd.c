@@ -36,6 +36,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -561,7 +562,7 @@ int main (int argc, char **argv)
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
 				eprintf(_("%s: failed to crypt password with salt '%s': %s\n"),
-				         Prog, salt, strerror (errno));
+				        Prog, salt, strerrno());
 				fail_exit (1);
 			}
 		}

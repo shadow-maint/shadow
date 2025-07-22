@@ -68,6 +68,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
+#include "string/strerrno.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 
@@ -356,8 +357,7 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 
 	entry = MALLOC(1, struct id_range_list_entry);
 	if (!entry) {
-		eprintf(_("%s: failed to allocate memory: %s\n"),
-			Prog, strerror (errno));
+		eprintf(_("%s: failed to allocate memory: %s\n"), Prog, strerrno());
 		return 0;
 	}
 	entry->next = *head;
@@ -1859,7 +1859,7 @@ static void update_lastlog (void)
 
 	if (-1 == fd) {
 		eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-		         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 		return;
 	}
 
@@ -1870,7 +1870,7 @@ static void update_lastlog (void)
 		    || (write_full(fd, &ll, sizeof ll) == -1)
 		    || (fsync (fd) != 0)) {
 			eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -1885,14 +1885,14 @@ static void update_lastlog (void)
 			    || (write_full(fd, &ll, sizeof ll) == -1)
 			    || (fsync (fd) != 0)) {
 				eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
 		eprintf(_("%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"),
-		         Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerror (errno));
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
 	}
 }
 #endif /* ENABLE_LASTLOG */
@@ -1919,7 +1919,7 @@ static void update_faillog (void)
 
 	if (-1 == fd) {
 		eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-		         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 		return;
 	}
 
@@ -1930,7 +1930,7 @@ static void update_faillog (void)
 		    || (write_full(fd, &fl, sizeof fl) == -1)
 		    || (fsync (fd) != 0)) {
 			eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -1945,14 +1945,14 @@ static void update_faillog (void)
 			    || (write_full(fd, &fl, sizeof fl) == -1))
 			{
 				eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
 		eprintf(_("%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"),
-		         Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerror (errno));
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
 	}
 }
 
