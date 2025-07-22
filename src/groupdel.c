@@ -160,9 +160,7 @@ static void close_files (void)
 	              "delete-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-	SYSLOG ((LOG_INFO,
-	         "group '%s' removed from %s",
-	         group_name, gr_dbname ()));
+	SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, gr_dbname());
 	del_cleanup (cleanup_report_del_group_group);
 
 	cleanup_unlock_group (NULL);
@@ -183,9 +181,7 @@ static void close_files (void)
 		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "group '%s' removed from %s",
-		         group_name, sgr_dbname ()));
+		SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, sgr_dbname());
 		del_cleanup (cleanup_report_del_group_gshadow);
 
 		cleanup_unlock_gshadow (NULL);
@@ -193,7 +189,7 @@ static void close_files (void)
 	}
 #endif				/* SHADOWGRP */
 
-	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));
+	SYSLOG(LOG_INFO, "group '%s' removed\n", group_name);
 	del_cleanup (cleanup_report_del_group);
 }
 
@@ -231,14 +227,14 @@ static void open_files (void)
 	/* An now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -390,7 +386,7 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS != retval) {
 		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}

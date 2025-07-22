@@ -25,7 +25,7 @@ void cleanup_report_add_user (void *user_name)
 {
 	const char *name = user_name;
 
-	SYSLOG ((LOG_ERR, "failed to add user %s", name));
+	SYSLOG(LOG_ERR, "failed to add user %s", name);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, log_get_progname(),
 	              "",
@@ -39,10 +39,7 @@ void cleanup_report_mod_passwd (void *cleanup_info)
 	const struct cleanup_info_mod *info;
 	info = (const struct cleanup_info_mod *)cleanup_info;
 
-	SYSLOG ((LOG_ERR,
-	         "failed to change %s (%s)",
-	         pw_dbname (),
-	         info->action));
+	SYSLOG(LOG_ERR, "failed to change %s (%s)", pw_dbname(), info->action);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_MGMT, log_get_progname(),
 	              info->audit_msg,
@@ -62,7 +59,7 @@ void cleanup_report_add_user_passwd (void *user_name)
 {
 	const char *name = user_name;
 
-	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, pw_dbname ()));
+	SYSLOG(LOG_ERR, "failed to add user %s to %s", name, pw_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, log_get_progname(),
 	              "adding-user",
@@ -82,7 +79,7 @@ void cleanup_report_add_user_shadow (void *user_name)
 {
 	const char *name = user_name;
 
-	SYSLOG ((LOG_ERR, "failed to add user %s to %s", name, spw_dbname ()));
+	SYSLOG(LOG_ERR, "failed to add user %s to %s", name, spw_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_MGMT, log_get_progname(),
 	              "adding-shadow-user",
@@ -102,7 +99,7 @@ void cleanup_unlock_passwd (MAYBE_UNUSED void *arg)
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking-passwd",
 		                      SHADOW_AUDIT_FAILURE);
@@ -121,7 +118,7 @@ void cleanup_unlock_shadow (MAYBE_UNUSED void *arg)
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), spw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking-shadow",
 		                      SHADOW_AUDIT_FAILURE);

@@ -81,7 +81,7 @@ fail_exit (int code)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -275,7 +275,7 @@ static void check_perms (const struct passwd *pw)
 	 * UID of the user matches the current real UID.
 	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
-		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
+		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
 		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1);
 	}
@@ -285,7 +285,7 @@ static void check_perms (const struct passwd *pw)
 	 * is not a restricted one.
 	 */
 	if (!amroot && is_restricted_shell (pw->pw_shell)) {
-		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
+		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
 		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1);
 	}
@@ -296,7 +296,7 @@ static void check_perms (const struct passwd *pw)
 	 */
 	if ((pw->pw_uid != getuid ())
 	    && (check_selinux_permit(Prog) != 0)) {
-		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
+		SYSLOG(LOG_WARN, "can't change shell for '%s'", pw->pw_name);
 		eprintf(_("You may not change the shell for '%s'.\n"), pw->pw_name);
 		fail_exit (1);
 	}
@@ -332,7 +332,7 @@ static void check_perms (const struct passwd *pw)
 
 	if (PAM_SUCCESS != retval) {
 		eprintf(_("%s: PAM: %s\n"), Prog, pam_strerror(pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
+		SYSLOG(LOG_ERR, "%s", pam_strerror(pamh, retval));
 		if (NULL != pamh) {
 			(void) pam_end (pamh, retval);
 		}
@@ -361,7 +361,7 @@ static void update_shell (const char *user, char *newshell)
 	 * keyboard signals are set to be ignored.
 	 */
 	if (setuid (0) != 0) {
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		SYSLOG(LOG_ERR, "can't setuid(0)");
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		fail_exit (1);
 	}
@@ -379,7 +379,7 @@ static void update_shell (const char *user, char *newshell)
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (1);
 	}
 
@@ -418,12 +418,12 @@ static void update_shell (const char *user, char *newshell)
 	 */
 	if (pw_close () == 0) {
 		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (1);
 	}
 	if (pw_unlock () == 0) {
 		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked= false;
@@ -482,8 +482,8 @@ int main (int argc, char **argv)
 		if (NULL == pw) {
 			eprintf(_("%s: Cannot determine your user name.\n"),
 			         Prog);
-			SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-			         (unsigned long) getuid ()));
+			SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			       (unsigned long) getuid());
 			fail_exit (1);
 		}
 		user = xstrdup (pw->pw_name);
@@ -543,7 +543,7 @@ int main (int argc, char **argv)
 
 	update_shell (user, loginsh);
 
-	SYSLOG ((LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh));
+	SYSLOG(LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh);
 
 	nscd_flush_cache ("passwd");
 	sssd_flush_cache (SSSD_DB_PASSWD);
