@@ -323,7 +323,7 @@ static void remove_usergroup (void)
 		 * used as a primary group.
 		 */
 		prefix_setpwent ();
-		while ((pwd = prefix_getpwent ()) != NULL) {
+		while (NULL != (pwd = prefix_getpwent())) {
 			if (streq(pwd->pw_name, user_name)) {
 				continue;
 			}

@@ -96,7 +96,7 @@ static /*@null@*/struct group *find_matching_group (const char *name, struct gro
 		return gr;
 
 	setgrent ();
-	while ((gr = getgrent ()) != NULL) {
+	while (NULL != (gr = getgrent())) {
 		if (gr->gr_gid != gid) {
 			continue;
 		}
