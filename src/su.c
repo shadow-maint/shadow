@@ -203,10 +203,10 @@ su_failure (const char *tty, bool su_to_root)
 {
 	sulog (tty, false, caller_name, name);	/* log failed attempt */
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
-		SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
-		         "- %s %s:%s", tty,
-		         ('\0' != caller_name[0]) ? caller_name : "???",
-		         ('\0' != name[0]) ? name : "???"));
+		SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
+		       "- %s %s:%s", tty,
+		       ('\0' != caller_name[0]) ? caller_name : "???",
+		       ('\0' != name[0]) ? name : "???");
 	}
 	closelog ();
 
@@ -294,7 +294,7 @@ static void prepare_pam_close_session (void)
 		fprintf (stderr,
 		         _("%s: signal masking malfunction\n"),
 		         Prog);
-		SYSLOG ((LOG_WARN, "Will not execute %s", shellstr));
+		SYSLOG(LOG_WARN, "Will not execute %s", shellstr);
 		closelog ();
 		exit (1);
 		/* Only the child returns. See above. */
@@ -307,7 +307,7 @@ static void prepare_pam_close_session (void)
 		(void) fprintf (stderr,
 		                _("%s: Cannot fork user shell\n"),
 		                Prog);
-		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
+		SYSLOG(LOG_WARN, "Cannot execute %s", shellstr);
 		closelog ();
 		exit (1);
 		/* Only the child returns. See above. */
@@ -425,8 +425,7 @@ static void prepare_pam_close_session (void)
 
 	ret = pam_close_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_close_session: %s",
-		         pam_strerror (pamh, ret)));
+		SYSLOG(LOG_ERR, "pam_close_session: %s", pam_strerror(pamh, ret));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 	}
 
@@ -467,8 +466,8 @@ static void check_perms_pam (const struct passwd *pw)
 	int ret;
 	ret = pam_authenticate (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
-		         pam_strerror (pamh, ret)));
+		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
+		       pam_strerror(pamh, ret));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
 		su_failure (caller_tty, 0 == pw->pw_uid);
@@ -483,8 +482,8 @@ static void check_perms_pam (const struct passwd *pw)
 		} else if (PAM_NEW_AUTHTOK_REQD == ret) {
 			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 			if (PAM_SUCCESS != ret) {
-				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
-				         pam_strerror (pamh, ret)));
+				SYSLOG(LOG_ERR, "pam_chauthtok: %s",
+				       pam_strerror(pamh, ret));
 				fprintf (stderr,
 				         _("%s: %s\n"),
 				         Prog, pam_strerror (pamh, ret));
@@ -492,8 +491,7 @@ static void check_perms_pam (const struct passwd *pw)
 				su_failure (caller_tty, 0 == pw->pw_uid);
 			}
 		} else {
-			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
-			         pam_strerror (pamh, ret)));
+			SYSLOG(LOG_ERR, "pam_acct_mgmt: %s", pam_strerror(pamh, ret));
 			fprintf (stderr,
 			         _("%s: %s\n"),
 			         Prog, pam_strerror (pamh, ret));
@@ -592,8 +590,8 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * character.
 	 */
 	if (pw_auth(password, name) != 0) {
-		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN,
-		         "Authentication failed for %s", name));
+		SYSLOG(pw->pw_uid ? LOG_NOTICE : LOG_WARN,
+		       "Authentication failed for %s", name);
 		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
 		su_failure (caller_tty, 0 == pw->pw_uid);
 	}
@@ -615,9 +613,8 @@ static void check_perms_nopam (const struct passwd *pw)
 	 * the account.
 	 */
 	if (!isttytime (name, "SU", time (NULL))) {
-		SYSLOG (((0 != pw->pw_uid) ? LOG_WARN : LOG_CRIT,
-		         "SU by %s to restricted account %s",
-		         caller_name, name));
+		SYSLOG(pw->pw_uid ? LOG_WARN : LOG_CRIT,
+		       "SU by %s to restricted account %s", caller_name, name);
 		fprintf (stderr,
 		         _("%s: You are not authorized to su at that time\n"),
 		         Prog);
@@ -662,7 +659,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	if (NULL == pw) {
 		(void) fprintf (stderr,
 		                _("No passwd entry for user '%s'\n"), name);
-		SYSLOG ((LOG_NOTICE, "No passwd entry for user '%s'", name));
+		SYSLOG(LOG_NOTICE, "No passwd entry for user '%s'", name);
 		su_failure (caller_tty, true);
 	}
 
@@ -674,7 +671,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	/* PAM authentication can request a change of account */
 	ret = pam_get_item(pamh, PAM_USER, &item);
 	if (ret != PAM_SUCCESS) {
-		SYSLOG((LOG_ERR, "pam_get_item: internal PAM error\n"));
+		SYSLOG(LOG_ERR, "pam_get_item: internal PAM error\n");
 		(void) fprintf (stderr,
 		                "%s: Internal PAM error retrieving username\n",
 		                Prog);
@@ -683,14 +680,13 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	}
 	tmp_name = item;
 	if (!streq(name, tmp_name)) {
-		SYSLOG ((LOG_INFO,
-		         "Change user from '%s' to '%s' as requested by PAM",
-		         name, tmp_name));
+		SYSLOG(LOG_INFO,
+		       "Change user from '%s' to '%s' as requested by PAM",
+		       name, tmp_name);
 		if (strtcpy_a(name, tmp_name) == -1) {
 			fprintf (stderr, _("Overlong user name '%s'\n"),
 			         tmp_name);
-			SYSLOG ((LOG_NOTICE, "Overlong user name '%s'",
-			         tmp_name));
+			SYSLOG(LOG_NOTICE, "Overlong user name '%s'", tmp_name);
 			su_failure (caller_tty, true);
 		}
 		pw = xgetpwnam (name);
@@ -698,8 +694,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 			(void) fprintf (stderr,
 			                _("No passwd entry for user '%s'\n"),
 			                name);
-			SYSLOG ((LOG_NOTICE,
-			         "No passwd entry for user '%s'", name));
+			SYSLOG(LOG_NOTICE, "No passwd entry for user '%s'", name);
 			su_failure (caller_tty, true);
 		}
 	}
@@ -781,8 +776,8 @@ save_caller_context(void)
 		fprintf (stderr,
 		         _("%s: Cannot determine your user name.\n"),
 		         Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) caller_uid));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) caller_uid);
 		su_failure (caller_tty, true); /* unknown target UID*/
 	}
 	strtcpy_a(caller_name, pw->pw_name);
@@ -870,7 +865,7 @@ static void process_flags (int argc, char **argv)
 		} else {
 			root_pw = getpwuid (0);
 			if (NULL == root_pw) {
-				SYSLOG ((LOG_CRIT, "There is no UID 0 user."));
+				SYSLOG(LOG_CRIT, "There is no UID 0 user.");
 				su_failure (caller_tty, true);
 			}
 			(void) strcpy (name, root_pw->pw_name);
@@ -1031,7 +1026,7 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	ret = pam_start (Prog, name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG((LOG_ERR, "pam_start: error %d", ret));
+		SYSLOG(LOG_ERR, "pam_start: error %d", ret);
 		fprintf(stderr, _("%s: pam_start: error %d\n"), Prog, ret);
 		exit (1);
 	}
@@ -1041,8 +1036,7 @@ int main (int argc, char **argv)
 		ret = pam_set_item (pamh, PAM_RUSER, caller_name);
 	}
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_set_item: %s",
-		         pam_strerror (pamh, ret)));
+		SYSLOG(LOG_ERR, "pam_set_item: %s", pam_strerror(pamh, ret));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
@@ -1085,9 +1079,9 @@ int main (int argc, char **argv)
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
 	if (getdef_bool ("SYSLOG_SU_ENAB")) {
-		SYSLOG ((LOG_INFO, "+ %s %s:%s", caller_tty,
-		         (!streq(caller_name, "")) ? caller_name : "???",
-		         (!streq(name, "")) ? name : "???"));
+		SYSLOG(LOG_INFO, "+ %s %s:%s", caller_tty,
+		       (!streq(caller_name, "")) ? caller_name : "???",
+		       (!streq(name, "")) ? name : "???");
 	}
 
 #ifdef USE_PAM
@@ -1103,7 +1097,7 @@ int main (int argc, char **argv)
 	 */
 	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
+		SYSLOG(LOG_ERR, "pam_setcred: %s", pam_strerror(pamh, ret));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
 		exit (1);
@@ -1111,8 +1105,7 @@ int main (int argc, char **argv)
 
 	ret = pam_open_session (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_open_session: %s",
-		         pam_strerror (pamh, ret)));
+		SYSLOG(LOG_ERR, "pam_open_session: %s", pam_strerror(pamh, ret));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		(void) pam_end (pamh, ret);
