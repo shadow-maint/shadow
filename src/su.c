@@ -1031,10 +1031,8 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	ret = pam_start (Prog, name, &conv, &pamh);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_start: error %d", ret);
-		fprintf (stderr,
-		         _("%s: pam_start: error %d\n"),
-		         Prog, ret));
+		SYSLOG((LOG_ERR, "pam_start: error %d", ret));
+		fprintf(stderr, _("%s: pam_start: error %d\n"), Prog, ret);
 		exit (1);
 	}
 
