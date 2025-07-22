@@ -42,8 +42,8 @@ int setup_groups (const struct passwd *info)
 	if (setgid (info->pw_gid) == -1) {
 		int err = errno;
 		perror ("setgid");
-		SYSLOG ((LOG_ERR, "bad group ID `%d' for user `%s': %s\n",
-		         info->pw_gid, info->pw_name, strerror (err)));
+		SYSLOG(LOG_ERR, "bad group ID `%d' for user `%s': %s\n",
+		       info->pw_gid, info->pw_name, strerror(err));
 		closelog ();
 		return -1;
 	}
@@ -55,8 +55,8 @@ int setup_groups (const struct passwd *info)
 	if (initgroups (info->pw_name, info->pw_gid) == -1) {
 		int err = errno;
 		perror ("initgroups");
-		SYSLOG ((LOG_ERR, "initgroups failed for user `%s': %s\n",
-		         info->pw_name, strerror (err)));
+		SYSLOG(LOG_ERR, "initgroups failed for user `%s': %s\n",
+		       info->pw_name, strerror(err));
 		closelog ();
 		return -1;
 	}
@@ -77,8 +77,8 @@ int change_uid (const struct passwd *info)
 	if (setuid (info->pw_uid) != 0) {
 		int err = errno;
 		perror ("setuid");
-		SYSLOG ((LOG_ERR, "bad user ID `%d' for user `%s': %s\n",
-		         (int) info->pw_uid, info->pw_name, strerror (err)));
+		SYSLOG(LOG_ERR, "bad user ID `%d' for user `%s': %s\n",
+		       (int) info->pw_uid, info->pw_name, strerror(err));
 		closelog ();
 		return -1;
 	}
