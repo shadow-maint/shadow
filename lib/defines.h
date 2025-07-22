@@ -51,9 +51,6 @@
 #include <dirent.h>
 
 #include <shadow.h>
-#if defined(SHADOWGRP)
-#include "gshadow_.h"
-#endif
 
 #include <limits.h>
 
@@ -170,12 +167,6 @@
 
 #ifndef SUBGID_FILE
 #define SUBGID_FILE "/etc/subgid"
-#endif
-
-#ifdef SHADOWGRP
-#ifndef SGROUP_FILE
-#define SGROUP_FILE "/etc/gshadow"
-#endif
 #endif
 
 /*

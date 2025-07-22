@@ -127,7 +127,8 @@ main(int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 #ifndef DEBUG
-	for (int i = 0; close(i) == 0; i++);
+	for (int i = 0; close(i) == 0; i++)
+		continue;
 
 	setpgrp ();
 
@@ -242,7 +243,8 @@ main(int argc, char **argv)
 		/*
 		 * Reap any dead babies ...
 		 */
-		while (wait(NULL) != -1);
+		while (wait(NULL) != -1)
+			continue;
 	}
 
 	return EXIT_FAILURE;

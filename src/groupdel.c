@@ -270,7 +270,8 @@ static void group_busy (gid_t gid)
 
 	prefix_setpwent ();
 
-	while ( ((pwd = prefix_getpwent ()) != NULL) && (pwd->pw_gid != gid) );
+	while ( ((pwd = prefix_getpwent ()) != NULL) && (pwd->pw_gid != gid) )
+		continue;
 
 	prefix_endpwent ();
 
