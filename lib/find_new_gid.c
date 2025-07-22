@@ -18,6 +18,8 @@
 #include "groupio.h"
 #include "getdef.h"
 #include "shadowlog.h"
+#include "string/strerrno.h"
+
 
 /*
  * get_ranges - Get the minimum and maximum ID ranges for the search
@@ -237,7 +239,7 @@ int find_new_gid (bool sys_group,
 	if (NULL == used_gids) {
 		fprintf (log_get_logfd(),
 			 _("%s: failed to allocate memory: %s\n"),
-			 log_get_progname(), strerror (errno));
+			 log_get_progname(), strerrno());
 		return -1;
 	}
 

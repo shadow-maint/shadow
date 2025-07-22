@@ -58,6 +58,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -467,7 +468,7 @@ static int update_passwd (struct passwd *pwd, const char *password)
 		if (NULL == cp) {
 			fprintf (stderr,
 			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			         Prog, salt, strerror (errno));
+			        Prog, salt, strerrno());
 			return 1;
 		}
 		pwd->pw_passwd = cp;
@@ -545,7 +546,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			if (NULL == cp) {
 				fprintf (stderr,
 				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				         Prog, salt, strerror (errno));
+				        Prog, salt, strerrno());
 				return 1;
 			}
 			spent.sp_pwdp = cp;
@@ -595,7 +596,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		if (NULL == cp) {
 			fprintf (stderr,
 			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			         Prog, salt, strerror (errno));
+			        Prog, salt, strerrno());
 			return 1;
 		}
 		spent.sp_pwdp = cp;
@@ -1196,9 +1197,7 @@ int main (int argc, char **argv)
 		usernames = REALLOCF(usernames, nusers, char *);
 		passwords = REALLOCF(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
-			fprintf (stderr,
-			         _("%s: line %jd: %s\n"),
-			         Prog, line, strerror(errno));
+			fprintf(stderr, _("%s: line %jd: %s\n"), Prog, line, strerrno());
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		lines[nusers-1]     = line;
@@ -1237,8 +1236,7 @@ int main (int argc, char **argv)
 			if (mkdir (newpw.pw_dir, mode) != 0) {
 				fprintf (stderr,
 				         _("%s: line %jd: mkdir %s failed: %s\n"),
-				         Prog, line, newpw.pw_dir,
-				         strerror (errno));
+				        Prog, line, newpw.pw_dir, strerrno());
 				if (errno != EEXIST) {
 					fail_exit (EXIT_FAILURE, process_selinux);
 				}
@@ -1247,8 +1245,7 @@ int main (int argc, char **argv)
 			{
 				fprintf (stderr,
 				         _("%s: line %jd: chown %s failed: %s\n"),
-				         Prog, line, newpw.pw_dir,
-				         strerror (errno));
+				        Prog, line, newpw.pw_dir, strerrno());
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}

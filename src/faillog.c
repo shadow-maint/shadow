@@ -27,6 +27,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
+#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -638,7 +639,7 @@ int main (int argc, char **argv)
 	if (NULL == fail) {
 		fprintf (stderr,
 		         _("%s: Cannot open %s: %s\n"),
-		         Prog, FAILLOG_FILE, strerror (errno));
+		        Prog, FAILLOG_FILE, strerrno());
 		exit (E_NOPERM);
 	}
 
@@ -646,7 +647,7 @@ int main (int argc, char **argv)
 	if (fstat (fileno (fail), &statbuf) != 0) {
 		fprintf (stderr,
 		         _("%s: Cannot get the size of %s: %s\n"),
-		         Prog, FAILLOG_FILE, strerror (errno));
+		        Prog, FAILLOG_FILE, strerrno());
 		exit (E_NOPERM);
 	}
 
@@ -673,7 +674,7 @@ int main (int argc, char **argv)
 		    || (fclose (fail) != 0)) {
 			fprintf (stderr,
 			         _("%s: Failed to write %s: %s\n"),
-			         Prog, FAILLOG_FILE, strerror (errno));
+			        Prog, FAILLOG_FILE, strerrno());
 			(void) fclose (fail);
 			errors = true;
 		}

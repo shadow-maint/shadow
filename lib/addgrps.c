@@ -24,6 +24,7 @@
 #include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
 #include "string/strchr/strchrscnt.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -65,7 +66,7 @@ add_groups(const char *list)
 	free(dup);
 
 	if (setgroups(n, gids) == -1) {
-		fprintf(shadow_logfd, "setgroups: %s\n", strerror(errno));
+		fprintf(shadow_logfd, "setgroups: %s\n", strerrno());
 		goto free_gids;
 	}
 

@@ -20,6 +20,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 #include "subordinateio.h"
 
 
@@ -103,8 +104,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 			goto out;
 		}
 		fprintf(stderr, _("%s: couldn't open process setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+			Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 
@@ -115,8 +115,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 */
 	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
 		fprintf(stderr, _("%s: failed to read setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+			Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 	if (strprefix(policy_buffer, policy))
@@ -125,15 +124,12 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	/* Write the policy. */
 	if (lseek(setgroups_fd, 0, SEEK_SET) < 0) {
 		fprintf(stderr, _("%s: failed to seek setgroups: %s\n"),
-			Prog,
-			strerror(errno));
+			Prog, strerrno());
 		exit(EXIT_FAILURE);
 	}
 	if (dprintf(setgroups_fd, "%s", policy) < 0) {
 		fprintf(stderr, _("%s: failed to setgroups %s policy: %s\n"),
-			Prog,
-			policy,
-			strerror(errno));
+			Prog, policy, strerrno());
 		exit(EXIT_FAILURE);
 	}
 
@@ -195,7 +191,7 @@ int main(int argc, char **argv)
 	if (fstat(proc_dir_fd, &st) < 0) {
 		fprintf(stderr,
 		        _("%s: Could not stat directory for target process: %s\n"),
-		        Prog, strerror (errno));
+		        Prog, strerrno());
 		return EXIT_FAILURE;
 	}
 
@@ -217,7 +213,7 @@ int main(int argc, char **argv)
 	if (want_subgid_file() && !sub_gid_open(O_RDONLY)) {
 		fprintf (stderr,
 		         _("%s: cannot open %s: %s\n"),
-		         Prog, sub_gid_dbname (), strerror (errno));
+		         Prog, sub_gid_dbname(), strerrno());
 		return EXIT_FAILURE;
 	}
 

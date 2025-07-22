@@ -8,13 +8,12 @@
 
 #include "config.h"
 
-#include <errno.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "shadowlog.h"
+#include "string/strerrno.h"
 
 
 /*
@@ -40,8 +39,7 @@ inline void
 exit_if_null_(void *p)
 {
 	if (p == NULL) {
-		fprintf(log_get_logfd(), "%s: %s\n",
-		        log_get_progname(), strerror(errno));
+		fprintf(log_get_logfd(), "%s: %s\n", log_get_progname(), strerrno());
 		exit(13);
 	}
 }

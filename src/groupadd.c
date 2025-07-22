@@ -40,6 +40,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -374,8 +375,8 @@ static void open_files (struct option_flags *flags)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname (), strerror(errno));
-		SYSLOG ((LOG_WARN, "cannot open %s: %s", gr_dbname (), strerror(errno)));
+		fprintf(stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerrno());
+		SYSLOG((LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno()));
 		fail_exit (E_GRP_UPDATE);
 	}
 
@@ -384,8 +385,8 @@ static void open_files (struct option_flags *flags)
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s: %s\n"),
-			         Prog, sgr_dbname (), strerror(errno));
-			SYSLOG ((LOG_WARN, "cannot open %s: %s", sgr_dbname (), strerror(errno)));
+			         Prog, sgr_dbname(), strerrno());
+			SYSLOG((LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}

@@ -35,6 +35,7 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -597,7 +598,7 @@ int main (int argc, char **argv)
 			if (NULL == cp) {
 				fprintf (stderr,
 				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				         Prog, salt, strerror (errno));
+				        Prog, salt, strerrno());
 				fail_exit (1, process_selinux);
 			}
 		}

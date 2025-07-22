@@ -34,6 +34,7 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strerrno.h"
 
 
 static char *passwd_db_file = NULL;
@@ -96,7 +97,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		    || (setreuid (getuid (), getuid ()) != 0)) {
 			fprintf (log_get_logfd(),
 			         _("%s: failed to drop privileges (%s)\n"),
-			         log_get_progname(), strerror (errno));
+			         log_get_progname(), strerrno());
 			exit (EXIT_FAILURE);
 		}
 
