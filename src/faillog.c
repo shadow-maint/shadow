@@ -627,13 +627,13 @@ int main (int argc, char **argv)
 		fail = fopen (FAILLOG_FILE, "r");
 	}
 	if (NULL == fail) {
-		fprinte(stderr, _("%s: Cannot open %s"), Prog, FAILLOG_FILE);
+		eprinte(_("%s: Cannot open %s"), Prog, FAILLOG_FILE);
 		exit (E_NOPERM);
 	}
 
 	/* Get the size of the faillog */
 	if (fstat (fileno (fail), &statbuf) != 0) {
-		fprinte(stderr, _("%s: Cannot get the size of %s"), Prog, FAILLOG_FILE);
+		eprinte(_("%s: Cannot get the size of %s"), Prog, FAILLOG_FILE);
 		exit (E_NOPERM);
 	}
 
@@ -658,7 +658,7 @@ int main (int argc, char **argv)
 		    || (fflush (fail) != 0)
 		    || (fsync  (fileno (fail)) != 0)
 		    || (fclose (fail) != 0)) {
-			fprinte(stderr, _("%s: Failed to write %s"), Prog, FAILLOG_FILE);
+			eprinte(_("%s: Failed to write %s"), Prog, FAILLOG_FILE);
 			(void) fclose (fail);
 			errors = true;
 		}

@@ -311,7 +311,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 
 		status = system (buf);
 		if (-1 == status) {
-			fprinte(stderr, _("%s: %s"), Prog, editor);
+			eprinte(_("%s: %s"), Prog, editor);
 			exit (1);
 		} else if (   WIFEXITED (status)
 		           && (WEXITSTATUS (status) != 0)) {
@@ -349,17 +349,17 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 			if (orig_pgrp != -1) {
 				editor_pgrp = tcgetpgrp(STDIN_FILENO);
 				if (editor_pgrp == -1) {
-					fprinte(stderr, "%s: %s", Prog, "tcgetpgrp");
+					eprinte("%s: %s", Prog, "tcgetpgrp");
 				}
 				if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
-					fprinte(stderr, "%s: %s", Prog, "tcsetpgrp");
+					eprinte("%s: %s", Prog, "tcsetpgrp");
 				}
 			}
 			kill (getpid (), SIGSTOP);
 			/* wake child when resumed */
 			if (editor_pgrp != -1) {
 				if (tcsetpgrp(STDIN_FILENO, editor_pgrp) == -1) {
-					fprinte(stderr, "%s: %s", Prog, "tcsetpgrp");
+					eprinte("%s: %s", Prog, "tcsetpgrp");
 				}
 			}
 			killpg (pid, SIGCONT);
@@ -371,7 +371,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	if (orig_pgrp != -1) {
 		 /* Restore terminal pgrp after editing. */
 		if (tcsetpgrp(STDIN_FILENO, orig_pgrp) == -1) {
-			fprinte(stderr, "%s: %s", Prog, "tcsetpgrp");
+			eprinte("%s: %s", Prog, "tcsetpgrp");
 		}
 		sigprocmask(SIG_SETMASK, &omask, NULL);
 	}
@@ -441,7 +441,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	unlink (filebackup);
 	link (file, filebackup);
 	if (rename (to_rename, file) == -1) {
-		fprinte(stderr, _("%s: can't restore %s (your changes are in %s)"),
+		eprinte(_("%s: can't restore %s (your changes are in %s)"),
 		        Prog, file, to_rename);
 #ifdef WITH_TCB
 		if (tcb_mode) {
