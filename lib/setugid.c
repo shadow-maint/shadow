@@ -18,10 +18,13 @@
 #include <stdio.h>
 #include <grp.h>
 #include <errno.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+
+#include "defines.h"
 #include "getdef.h"
+#include "io/syslog.h"
+#include "prototypes.h"
+
 
 /*
  * setup_groups - set the group credentials
@@ -40,10 +43,9 @@ int setup_groups (const struct passwd *info)
 	 * file.
 	 */
 	if (setgid (info->pw_gid) == -1) {
-		int err = errno;
 		perror ("setgid");
-		SYSLOG(LOG_ERR, "bad group ID `%d' for user `%s': %s\n",
-		       info->pw_gid, info->pw_name, strerror(err));
+		SYSLOGE(LOG_ERR, "bad group ID `%d' for user `%s'",
+		        info->pw_gid, info->pw_name);
 		closelog ();
 		return -1;
 	}
@@ -55,8 +57,7 @@ int setup_groups (const struct passwd *info)
 	if (initgroups (info->pw_name, info->pw_gid) == -1) {
 		int err = errno;
 		perror ("initgroups");
-		SYSLOG(LOG_ERR, "initgroups failed for user `%s': %s\n",
-		       info->pw_name, strerror(err));
+		SYSLOGE(LOG_ERR, "initgroups failed for user `%s'", info->pw_name);
 		closelog ();
 		return -1;
 	}
@@ -77,8 +78,8 @@ int change_uid (const struct passwd *info)
 	if (setuid (info->pw_uid) != 0) {
 		int err = errno;
 		perror ("setuid");
-		SYSLOG(LOG_ERR, "bad user ID `%d' for user `%s': %s\n",
-		       (int) info->pw_uid, info->pw_name, strerror(err));
+		SYSLOGE(LOG_ERR, "bad user ID `%d' for user `%s'",
+		        (int) info->pw_uid, info->pw_name);
 		closelog ();
 		return -1;
 	}
