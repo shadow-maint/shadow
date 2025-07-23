@@ -15,6 +15,7 @@
 #include <selinux/label.h>
 
 #include "io/fprintf/fprinte.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/aprintf.h"
@@ -194,9 +195,7 @@ int check_selinux_permit (const char *perm_name)
 	if (getprevcon_raw (&user_context_raw) != 0) {
 		fprinte(shadow_logfd, _("%s: can not get previous SELinux process context"),
 		        shadow_progname);
-		SYSLOG(LOG_WARN,
-		       "can not get previous SELinux process context: %s",
-		       strerrno());
+		SYSLOGE(LOG_WARN, "can not get previous SELinux process context");
 		return (security_getenforce () != 0);
 	}
 

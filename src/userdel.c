@@ -30,6 +30,7 @@
 #include "groupio.h"
 #include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -738,7 +739,7 @@ static bool remove_mailbox (void)
 			return 0;
 		} else {
 			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
-			SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
+			SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "delete-mail-file",
@@ -752,7 +753,7 @@ static bool remove_mailbox (void)
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
 			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
-			SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
+			SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "delete-mail-file",
@@ -790,7 +791,7 @@ static bool remove_mailbox (void)
 	}
 	if (unlink (mailfile) != 0) {
 		eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
-		SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
+		SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "delete-mail-file",
