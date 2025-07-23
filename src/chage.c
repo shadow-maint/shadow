@@ -24,6 +24,7 @@
 #include "atoi/a2i/a2s.h"
 #include "defines.h"
 #include "fields.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -33,7 +34,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "string/strftime.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/
@@ -780,8 +780,7 @@ int main (int argc, char **argv)
 	/* Drop privileges */
 	if (lflg && (   (setregid (rgid, rgid) != 0)
 	             || (setreuid (ruid, ruid) != 0))) {
-		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
-		         Prog, strerrno());
+		fprinte(stderr, _("%s: failed to drop privileges"), Prog);
 		fail_exit (E_NOPERM, process_selinux);
 	}
 
