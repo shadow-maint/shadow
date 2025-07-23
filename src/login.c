@@ -35,6 +35,7 @@
 #include "faillog.h"
 #include "failure.h"
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "shadow/gshadow/endsgent.h"
@@ -46,7 +47,6 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -1087,7 +1087,7 @@ int main (int argc, char **argv)
 	child = fork ();
 	if (child < 0) {
 		/* error in fork() */
-		fprintf(stderr, _("%s: failure forking: %s"), Prog, strerrno());
+		fprinte(stderr, _("%s: failure forking"), Prog);
 		PAM_END;
 		exit (0);
 	} else if (child != 0) {
