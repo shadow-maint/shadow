@@ -43,6 +43,7 @@
 #include "faillog.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
@@ -68,7 +69,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
-#include "string/strerrno.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 
@@ -357,7 +357,7 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 
 	entry = MALLOC(1, struct id_range_list_entry);
 	if (!entry) {
-		eprintf(_("%s: failed to allocate memory: %s\n"), Prog, strerrno());
+		eprinte(_("%s: failed to allocate memory"), Prog);
 		return 0;
 	}
 	entry->next = *head;
@@ -1837,8 +1837,8 @@ static void update_lastlog (void)
 	fd = open(_PATH_LASTLOG, O_RDWR);
 
 	if (-1 == fd) {
-		eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+		eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
 
@@ -1848,8 +1848,8 @@ static void update_lastlog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &ll, sizeof ll) == -1)
 		    || (fsync (fd) != 0)) {
-			eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+			eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -1863,15 +1863,15 @@ static void update_lastlog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &ll, sizeof ll) == -1)
 			    || (fsync (fd) != 0)) {
-				eprintf(_("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
-				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+				eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		eprintf(_("%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"),
-		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
+		eprinte(_("%s: failed to copy the lastlog entry of user %ju to user %ju"),
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
 #endif /* ENABLE_LASTLOG */
@@ -1897,8 +1897,8 @@ static void update_faillog (void)
 	fd = open (FAILLOG_FILE, O_RDWR);
 
 	if (-1 == fd) {
-		eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-		        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+		eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
+		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
 
@@ -1908,8 +1908,8 @@ static void update_faillog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &fl, sizeof fl) == -1)
 		    || (fsync (fd) != 0)) {
-			eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-			        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+			eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
+			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
 		/* Assume lseek or read failed because there is
@@ -1923,15 +1923,15 @@ static void update_faillog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &fl, sizeof fl) == -1))
 			{
-				eprintf(_("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
-				        Prog, (unsigned long) user_id, (unsigned long) user_newid, strerrno());
+				eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
+				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		eprintf(_("%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"),
-		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid, strerrno());
+		eprinte(_("%s: failed to copy the faillog entry of user %ju to user %ju"),
+		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
 
