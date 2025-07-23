@@ -16,8 +16,8 @@
 
 #include "alloc/reallocf.h"
 #include "defines.h"
+#include "io/fprintf/fprinte.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 void *
@@ -30,6 +30,6 @@ xreallocarray(void *p, size_t nmemb, size_t size)
 	return p;
 
 x:
-	fprintf(log_get_logfd(), _("%s: %s\n"), log_get_progname(), strerrno());
+	fprinte(log_get_logfd(), "%s", log_get_progname());
 	exit(13);
 }
