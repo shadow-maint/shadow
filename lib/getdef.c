@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "io/fgets/fgets.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
@@ -549,9 +550,7 @@ static void def_load (void)
 		if (errno == ENOENT)
 			return;
 
-		int err = errno;
-		SYSLOG(LOG_CRIT, "cannot open login definitions %s [%s]",
-		       def_fname, strerror(err));
+		SYSLOGE(LOG_CRIT, "cannot open login definitions %s", def_fname);
 		exit (EXIT_FAILURE);
 	}
 
@@ -590,9 +589,7 @@ static void def_load (void)
 	}
 
 	if (ferror (fp) != 0) {
-		int err = errno;
-		SYSLOG(LOG_CRIT, "cannot read login definitions %s [%s]",
-		       def_fname, strerror(err));
+		SYSLOGE(LOG_CRIT, "cannot read login definitions %s", def_fname);
 		exit (EXIT_FAILURE);
 	}
 

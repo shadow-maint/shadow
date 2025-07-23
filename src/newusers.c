@@ -42,6 +42,7 @@
 #include "groupio.h"
 #include "io/fgets/fgets.h"
 #include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -1182,8 +1183,7 @@ int main (int argc, char **argv)
 				fprinte(stderr,
 					_("%s: can't find subordinate user range"),
 					Prog);
-				SYSLOG(LOG_WARN, "can't find subordinate user range: %s\n",
-				       strerrno());
+				SYSLOGE(LOG_WARN, "can't find subordinate user range");
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0)
@@ -1205,8 +1205,7 @@ int main (int argc, char **argv)
 				fprinte(stderr,
 					_("%s: can't find subordinate group range"),
 					Prog);
-				SYSLOG(LOG_WARN, "can't find subordinate group range: %s\n",
-				       strerrno());
+				SYSLOGE(LOG_WARN, "can't find subordinate group range");
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
