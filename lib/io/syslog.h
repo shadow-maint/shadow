@@ -14,6 +14,8 @@
 #include <string.h>
 #include <syslog.h>
 
+#include "string/strerrno.h"
+
 
 #ifndef LOG_WARN
 #define LOG_WARN LOG_WARNING
@@ -48,6 +50,13 @@
 #endif
 
 #define OPENLOG(progname) openlog(progname, SYSLOG_OPTIONS, SYSLOG_FACILITY)
+
+
+// system log errno
+#define SYSLOGE(prio, fmt, ...)  do                                   \
+{                                                                     \
+	SYSLOG(prio, "" fmt ": %s" __VA_OPT__(,) __VA_ARGS__, strerrno()); \
+} while (0)
 
 
 // system log C-locale
