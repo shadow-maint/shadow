@@ -17,8 +17,8 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 /*
  * get_ranges - Get the minimum and maximum ID ranges for the search
@@ -236,9 +236,8 @@ int find_new_uid(bool sys_user,
 	/* Create an array to hold all of the discovered UIDs */
 	used_uids = calloc_T(uid_max + 1, bool);
 	if (NULL == used_uids) {
-		fprintf (log_get_logfd(),
-			 _("%s: failed to allocate memory: %s\n"),
-			 log_get_progname(), strerrno());
+		fprinte(log_get_logfd(), _("%s: failed to allocate memory"),
+			log_get_progname());
 		return -1;
 	}
 

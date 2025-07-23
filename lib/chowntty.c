@@ -16,10 +16,12 @@
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+
+#include "defines.h"
 #include "getdef.h"
+#include "io/fprintf.h"
+#include "prototypes.h"
 #include "shadowlog.h"
 
 /*
@@ -54,9 +56,7 @@ void chown_tty (const struct passwd *info)
 	    || (fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
-		fprintf (log_get_logfd(),
-		         _("Unable to change owner or mode of tty stdin: %s"),
-		         strerror (err));
+		fprinte(log_get_logfd(), _("Unable to change owner or mode of tty stdin"));
 		SYSLOG(LOG_WARN,
 		       "unable to change owner or mode of tty stdin for user `%s': %s\n",
 		       info->pw_name, strerror(err));

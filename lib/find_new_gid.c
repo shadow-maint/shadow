@@ -14,11 +14,11 @@
 #include <errno.h>
 
 #include "alloc/calloc.h"
-#include "prototypes.h"
 #include "groupio.h"
 #include "getdef.h"
+#include "io/fprintf.h"
+#include "prototypes.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -237,9 +237,8 @@ int find_new_gid (bool sys_group,
 	/* Create an array to hold all of the discovered GIDs */
 	used_gids = calloc_T(gid_max + 1, bool);
 	if (NULL == used_gids) {
-		fprintf (log_get_logfd(),
-			 _("%s: failed to allocate memory: %s\n"),
-			 log_get_progname(), strerrno());
+		fprinte(log_get_logfd(), _("%s: failed to allocate memory"),
+			log_get_progname());
 		return -1;
 	}
 

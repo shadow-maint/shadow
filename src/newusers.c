@@ -40,6 +40,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -54,7 +55,6 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -461,9 +461,8 @@ static int update_passwd (struct passwd *pwd, const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprintf (stderr,
-			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			        Prog, salt, strerrno());
+			fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+			        Prog, salt);
 			return 1;
 		}
 		pwd->pw_passwd = cp;
@@ -540,9 +539,9 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 			                                    crypt_arg);
 			cp = pw_encrypt (password, salt);
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				        Prog, salt, strerrno());
+				fprinte(stderr,
+				        _("%s: failed to crypt password with salt '%s'"),
+				        Prog, salt);
 				return 1;
 			}
 			spent.sp_pwdp = cp;
@@ -590,9 +589,9 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprintf (stderr,
-			         _("%s: failed to crypt password with salt '%s': %s\n"),
-			        Prog, salt, strerrno());
+			fprinte(stderr,
+			        _("%s: failed to crypt password with salt '%s'"),
+			        Prog, salt);
 			return 1;
 		}
 		spent.sp_pwdp = cp;
@@ -1137,7 +1136,7 @@ int main (int argc, char **argv)
 		usernames = reallocf_T(usernames, nusers, char *);
 		passwords = reallocf_T(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
-			fprintf(stderr, _("%s: line %jd: %s\n"), Prog, line, strerrno());
+			fprinte(stderr, _("%s: line %jd"), Prog, line);
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		lines[nusers-1]     = line;
@@ -1174,18 +1173,16 @@ int main (int argc, char **argv)
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
-				fprintf (stderr,
-				         _("%s: line %jd: mkdir %s failed: %s\n"),
-				        Prog, line, newpw.pw_dir, strerrno());
+				fprinte(stderr, _("%s: line %jd: mkdir %s failed"),
+				        Prog, line, newpw.pw_dir);
 				if (errno != EEXIST) {
 					fail_exit (EXIT_FAILURE, process_selinux);
 				}
 			}
 			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
 			{
-				fprintf (stderr,
-				         _("%s: line %jd: chown %s failed: %s\n"),
-				        Prog, line, newpw.pw_dir, strerrno());
+				fprinte(stderr, _("%s: line %jd: chown %s failed"),
+				        Prog, line, newpw.pw_dir);
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 		}

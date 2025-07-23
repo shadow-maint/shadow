@@ -27,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "groupio.h"
+#include "io/fprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
@@ -40,7 +41,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 
 
 struct option_flags {
@@ -846,9 +846,7 @@ static void change_passwd (struct group *gr)
 	cp = pw_encrypt (pass, salt);
 	memzero_a(pass);
 	if (NULL == cp) {
-		fprintf (stderr,
-		         _("%s: failed to crypt password with salt '%s': %s\n"),
-		        Prog, salt, strerrno());
+		fprinte(stderr, _("%s: failed to crypt password with salt '%s'"), Prog, salt);
 		exit (1);
 	}
 #ifdef SHADOWGRP

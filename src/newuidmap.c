@@ -17,10 +17,10 @@
 #include "defines.h"
 #include "getdef.h"
 #include "idmapping.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 #include "subordinateio.h"
 
 
@@ -123,9 +123,7 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprintf(stderr,
-		        _("%s: Could not stat directory for target process: %s\n"),
-		        Prog, strerrno());
+		fprinte(stderr, _("%s: Could not stat directory for target process"), Prog);
 		return EXIT_FAILURE;
 	}
 
@@ -145,9 +143,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subuid_file() && !sub_uid_open(O_RDONLY)) {
-		fprintf (stderr,
-		         _("%s: cannot open %s: %s\n"),
-		        Prog, sub_uid_dbname(), strerrno());
+		fprinte(stderr, _("%s: cannot open %s"), Prog, sub_uid_dbname());
 		return EXIT_FAILURE;
 	}
 
