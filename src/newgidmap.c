@@ -103,7 +103,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 			eprintf(_("%s: kernel doesn't support setgroups restrictions\n"), Prog);
 			goto out;
 		}
-		fprinte(stderr, _("%s: couldn't open process setgroups"), Prog);
+		eprinte(_("%s: couldn't open process setgroups"), Prog);
 		exit(EXIT_FAILURE);
 	}
 
@@ -113,7 +113,7 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 	 * fail.
 	 */
 	if (read(setgroups_fd, policy_buffer, sizeof(policy_buffer)) < 0) {
-		fprinte(stderr, _("%s: failed to read setgroups"), Prog);
+		eprinte(_("%s: failed to read setgroups"), Prog);
 		exit(EXIT_FAILURE);
 	}
 	if (strprefix(policy_buffer, policy))
@@ -121,11 +121,11 @@ static void write_setgroups(int proc_dir_fd, bool allow_setgroups)
 
 	/* Write the policy. */
 	if (lseek(setgroups_fd, 0, SEEK_SET) < 0) {
-		fprinte(stderr, _("%s: failed to seek setgroups"), Prog);
+		eprinte(_("%s: failed to seek setgroups"), Prog);
 		exit(EXIT_FAILURE);
 	}
 	if (dprintf(setgroups_fd, "%s", policy) < 0) {
-		fprinte(stderr, _("%s: failed to setgroups %s policy"), Prog, policy);
+		eprinte(_("%s: failed to setgroups %s policy"), Prog, policy);
 		exit(EXIT_FAILURE);
 	}
 
@@ -183,7 +183,7 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprinte(stderr, _("%s: Could not stat directory for target process"), Prog);
+		eprinte(_("%s: Could not stat directory for target process"), Prog);
 		return EXIT_FAILURE;
 	}
 
@@ -203,7 +203,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subgid_file() && !sub_gid_open(O_RDONLY)) {
-		fprinte(stderr, _("%s: cannot open %s"), Prog, sub_gid_dbname());
+		eprinte(_("%s: cannot open %s"), Prog, sub_gid_dbname());
 		return EXIT_FAILURE;
 	}
 

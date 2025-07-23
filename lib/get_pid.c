@@ -60,13 +60,13 @@ int open_pidfd(const char *pidstr)
 		return -ENOENT;
 
 	if (stprintf_a(proc_dir_name, "/proc/%d/", target) == -1) {
-		fprinte(stderr, "snprintf of proc path failed for %d", target);
+		eprinte("snprintf of proc path failed for %d", target);
 		return -EINVAL;
 	}
 
 	proc_dir_fd = open(proc_dir_name, O_DIRECTORY);
 	if (proc_dir_fd < 0) {
-		fprinte(stderr, _("Could not open proc directory for target %d"), target);
+		eprinte(_("Could not open proc directory for target %d"), target);
 		return -EINVAL;
 	}
 	return proc_dir_fd;
