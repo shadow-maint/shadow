@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
 	/* Get the effective uid and effective gid of the target process */
 	if (fstat(proc_dir_fd, &st) < 0) {
-		fprinte(stderr, _("%s: Could not stat directory for target process"), Prog);
+		eprinte(_("%s: Could not stat directory for target process"), Prog);
 		return EXIT_FAILURE;
 	}
 
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
 	}
 
 	if (want_subuid_file() && !sub_uid_open(O_RDONLY)) {
-		fprinte(stderr, _("%s: cannot open %s"), Prog, sub_uid_dbname());
+		eprinte(_("%s: cannot open %s"), Prog, sub_uid_dbname());
 		return EXIT_FAILURE;
 	}
 

@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	uid_t  *uids;
 
 	if (!subid_init(Prog, stderr))
-		fprinte(stderr, "subid_init");
+		eprinte("subid_init");
 	if (argc < 2) {
 		usage();
 	}
