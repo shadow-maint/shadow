@@ -426,7 +426,7 @@ int main (int argc, char **argv)
 
 	/* Get the lastlog size */
 	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
-		fprinte(stderr, _("%s: Cannot get the size of %s"), Prog, _PATH_LASTLOG);
+		eprinte(_("%s: Cannot get the size of %s"), Prog, _PATH_LASTLOG);
 		exit (EXIT_FAILURE);
 	}
 

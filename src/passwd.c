@@ -210,7 +210,7 @@ static int new_password (const struct passwd *pw)
 
 		if (NULL == cipher) {
 			erase_pass (clear);
-			fprinte(stderr, _("%s: failed to crypt password with previous salt"),
+			eprinte(_("%s: failed to crypt password with previous salt"),
 			        Prog);
 			SYSLOG(LOG_INFO,
 			       "Failed to crypt password with previous salt of user '%s'",
@@ -340,7 +340,7 @@ static int new_password (const struct passwd *pw)
 	memzero_a(pass);
 
 	if (NULL == cp) {
-		fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+		eprinte(_("%s: failed to crypt password with salt '%s'"),
 		        Prog, salt);
 		return -1;
 	}

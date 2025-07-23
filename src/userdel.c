@@ -748,7 +748,7 @@ static bool remove_mailbox (void)
 			free(mailfile);
 			return 0;
 		} else {
-			fprinte(stderr, _("%s: warning: can't remove %s"), Prog, mailfile);
+			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 			SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER,
@@ -762,7 +762,7 @@ static bool remove_mailbox (void)
 
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
-			fprinte(stderr, _("%s: warning: can't remove %s"), Prog, mailfile);
+			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 			SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER,
@@ -800,7 +800,7 @@ static bool remove_mailbox (void)
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
-		fprinte(stderr, _("%s: warning: can't remove %s"), Prog, mailfile);
+		eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 		SYSLOGE(LOG_ERR, "Cannot remove %s", mailfile);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER,
@@ -839,7 +839,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 1;
 	}
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		fprinte(stderr, _("%s: Cannot drop privileges"), Prog);
+		eprinte(_("%s: Cannot drop privileges"), Prog);
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -848,7 +848,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
 	if (remove_tree (buf, false) != 0) {
-		fprinte(stderr, _("%s: Cannot remove the content of %s"), Prog, buf);
+		eprinte(_("%s: Cannot remove the content of %s"), Prog, buf);
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -856,7 +856,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	shadowtcb_gain_priv ();
 	free (buf);
 	if (shadowtcb_remove (user_name) == SHADOWTCB_FAILURE) {
-		fprinte(stderr, _("%s: Cannot remove tcb files for %s"), Prog, user_name);
+		eprinte(_("%s: Cannot remove tcb files for %s"), Prog, user_name);
 		ret = 1;
 	}
 	return ret;

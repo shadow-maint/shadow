@@ -454,7 +454,7 @@ static int update_passwd (struct passwd *pwd, const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+			eprinte(_("%s: failed to crypt password with salt '%s'"),
 			        Prog, salt);
 			return 1;
 		}
@@ -532,8 +532,7 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 			                                    crypt_arg);
 			cp = pw_encrypt (password, salt);
 			if (NULL == cp) {
-				fprinte(stderr,
-				        _("%s: failed to crypt password with salt '%s'"),
+				eprinte(_("%s: failed to crypt password with salt '%s'"),
 				        Prog, salt);
 				return 1;
 			}
@@ -582,8 +581,7 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		cp = pw_encrypt (password, salt);
 		if (NULL == cp) {
-			fprinte(stderr,
-			        _("%s: failed to crypt password with salt '%s'"),
+			eprinte(_("%s: failed to crypt password with salt '%s'"),
 			        Prog, salt);
 			return 1;
 		}
@@ -1150,7 +1148,7 @@ int main (int argc, char **argv)
 		usernames = reallocf_T(usernames, nusers, char *);
 		passwords = reallocf_T(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
-			fprinte(stderr, _("%s: line %jd"), Prog, line);
+			eprinte(_("%s: line %jd"), Prog, line);
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 		lines[nusers-1]     = line;
@@ -1185,7 +1183,7 @@ int main (int argc, char **argv)
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (mkdir (newpw.pw_dir, mode) != 0) {
-				fprinte(stderr, _("%s: line %jd: mkdir %s failed"),
+				eprinte(_("%s: line %jd: mkdir %s failed"),
 				        Prog, line, newpw.pw_dir);
 				if (errno != EEXIST) {
 					fail_exit (EXIT_FAILURE, process_selinux);
@@ -1193,7 +1191,7 @@ int main (int argc, char **argv)
 			}
 			if (chown(newpw.pw_dir, newpw.pw_uid, newpw.pw_gid) != 0)
 			{
-				fprinte(stderr, _("%s: line %jd: chown %s failed"),
+				eprinte(_("%s: line %jd: chown %s failed"),
 				        Prog, line, newpw.pw_dir);
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}

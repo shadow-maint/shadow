@@ -828,7 +828,7 @@ static void change_passwd (struct group *gr)
 	cp = pw_encrypt (pass, salt);
 	memzero_a(pass);
 	if (NULL == cp) {
-		fprinte(stderr, _("%s: failed to crypt password with salt '%s'"), Prog, salt);
+		eprinte(_("%s: failed to crypt password with salt '%s'"), Prog, salt);
 		exit (1);
 	}
 #ifdef SHADOWGRP

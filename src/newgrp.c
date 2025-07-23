@@ -187,7 +187,7 @@ static void check_perms (const struct group *grp,
 		erase_pass (cp);
 
 		if (NULL == cpasswd) {
-			fprinte(stderr, _("%s: failed to crypt password with previous salt"),
+			eprinte(_("%s: failed to crypt password with previous salt"),
 			        Prog);
 			SYSLOG(LOG_INFO,
 			       "Failed to crypt password with previous salt of group '%s'",
@@ -293,8 +293,7 @@ static void syslog_sg (const char *name, const char *group)
 		child = fork ();
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
-			fprinte(stderr, _("%s: failure forking"),
-				is_newgrp ? "newgrp" : "sg");
+			eprinte(_("%s: failure forking"), is_newgrp ? "newgrp" : "sg");
 #ifdef WITH_AUDIT
 			if (group) {
 				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
