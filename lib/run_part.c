@@ -11,10 +11,10 @@
 #include <unistd.h>
 #include <lib/prototypes.h>
 
+#include "io/fprintf.h"
 #include "run_part.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/strerrno.h"
 
 
 static int run_part(char *script_path, const char *name, const char *action)
@@ -26,14 +26,14 @@ static int run_part(char *script_path, const char *name, const char *action)
 
 	pid=fork();
 	if (pid==-1) {
-		fprintf(log_get_logfd(), "fork: %s\n", strerrno());
+		fprinte(log_get_logfd(), "fork");
 		return 1;
 	}
 	if (pid==0) {
 		setenv("ACTION",action,1);
 		setenv("SUBJECT",name,1);
 		execv(script_path,args);
-		fprintf(log_get_logfd(), "execv: %s\n", strerrno());
+		fprinte(log_get_logfd(), "execv");
 		_exit(1);
 	}
 
@@ -42,7 +42,7 @@ static int run_part(char *script_path, const char *name, const char *action)
 		return (wait_status);
 	}
 
-	fprintf(log_get_logfd(), "wait: %s\n", strerrno());
+	fprinte(log_get_logfd(), "wait");
 	return (1);
 }
 
@@ -64,7 +64,7 @@ int run_parts(const char *directory, const char *name, const char *action)
 
 		s = aprintf("%s/%s", directory, namelist[n]->d_name);
 		if (s == NULL) {
-			fprintf(log_get_logfd(), "aprintf: %s\n", strerrno());
+			fprinte(log_get_logfd(), "aprintf");
 			for (; n<scanlist; n++) {
 				free(namelist[n]);
 			}
@@ -74,7 +74,7 @@ int run_parts(const char *directory, const char *name, const char *action)
 
 		execute_result = 0;
 		if (stat(s, &sb) == -1) {
-			fprintf(log_get_logfd(), "stat: %s\n", strerrno());
+			fprinte(log_get_logfd(), "stat");
 			free(s);
 			for (; n<scanlist; n++) {
 				free(namelist[n]);
