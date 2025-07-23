@@ -19,6 +19,9 @@
 // eprintf - stderr print formatted
 #define eprintf(...)  fprintf(stderr, __VA_ARGS__)
 
+// eprinte - stderr print errno
+#define eprinte(...)  fprinte(stderr, __VA_ARGS__)
+
 
 // fprinte - FILE* print errno
 #define fprinte(stream, ...)  do                                      \
