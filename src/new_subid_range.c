@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	bool ok;
 
 	if (!subid_init(Prog, stderr))
-		fprinte(stderr, "subid_init");
+		eprinte("subid_init");
 	while ((c = getopt(argc, argv, "gn")) != EOF) {
 		switch(c) {
 		case 'n': makenew = true; break;

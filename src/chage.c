@@ -761,7 +761,7 @@ int main (int argc, char **argv)
 	/* Drop privileges */
 	if (lflg && (   (setregid (rgid, rgid) != 0)
 	             || (setreuid (ruid, ruid) != 0))) {
-		fprinte(stderr, _("%s: failed to drop privileges"), Prog);
+		eprinte(_("%s: failed to drop privileges"), Prog);
 		fail_exit (E_NOPERM, process_selinux);
 	}
 

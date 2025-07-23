@@ -1089,7 +1089,7 @@ int main (int argc, char **argv)
 	child = fork ();
 	if (child < 0) {
 		/* error in fork() */
-		fprinte(stderr, _("%s: failure forking"), Prog);
+		eprinte(_("%s: failure forking"), Prog);
 		retcode = pam_close_session(pamh, 0);
 		pam_end(pamh, retcode);
 		exit (0);
