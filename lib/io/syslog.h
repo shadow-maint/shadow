@@ -49,21 +49,19 @@
 #define SYSLOG_C(...)  do                                             \
 {                                                                     \
 	char  *l_;                                                    \
-	char  *saved_locale;                                          \
                                                                       \
 	l_ = setlocale(LC_ALL, NULL);                                 \
-	saved_locale = NULL;                                          \
                                                                       \
 	if (NULL != l_)                                               \
-		saved_locale = strdup(l_);                            \
+		l_ = strdup(l_);                                      \
                                                                       \
-	if (NULL != saved_locale)                                     \
+	if (NULL != l_)                                               \
 		setlocale(LC_ALL, "C");                               \
                                                                       \
 	syslog(__VA_ARGS__);                                          \
-	if (NULL != saved_locale) {                                   \
-		setlocale(LC_ALL, saved_locale);                      \
-		free(saved_locale);                                   \
+	if (NULL != l_) {                                             \
+		setlocale(LC_ALL, l_);                                \
+		free(l_);                                             \
 	}                                                             \
 } while (0)
 
