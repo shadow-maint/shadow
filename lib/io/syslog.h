@@ -48,14 +48,14 @@
 // system log C-locale
 #define SYSLOG_C(...)  do                                             \
 {                                                                     \
-	char  *old_locale;                                            \
+	char  *l_;                                                    \
 	char  *saved_locale;                                          \
                                                                       \
-	old_locale = setlocale(LC_ALL, NULL);                         \
+	l_ = setlocale(LC_ALL, NULL);                                 \
 	saved_locale = NULL;                                          \
                                                                       \
-	if (NULL != old_locale)                                       \
-		saved_locale = strdup(old_locale);                    \
+	if (NULL != l_)                                               \
+		saved_locale = strdup(l_);                            \
                                                                       \
 	if (NULL != saved_locale)                                     \
 		setlocale(LC_ALL, "C");                               \
