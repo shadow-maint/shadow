@@ -30,6 +30,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -353,7 +354,7 @@ static void open_files (void)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		eprintf(_("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerrno());
+		eprinte(_("%s: cannot open %s"), Prog, gr_dbname());
 		SYSLOG(LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -361,7 +362,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			eprintf(_("%s: cannot open %s: %s\n"), Prog, sgr_dbname(), strerrno());
+			eprinte(_("%s: cannot open %s"), Prog, sgr_dbname());
 			SYSLOG(LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno());
 			fail_exit (E_GRP_UPDATE);
 		}
