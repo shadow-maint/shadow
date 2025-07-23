@@ -519,7 +519,7 @@ int main (int argc, char **argv)
 			salt = crypt_make_salt (crypt_method, arg);
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
-				fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+				eprinte(_("%s: failed to crypt password with salt '%s'"),
 				        Prog, salt);
 				fail_exit (1, process_selinux);
 			}
