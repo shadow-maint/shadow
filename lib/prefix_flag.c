@@ -18,6 +18,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "groupio.h"
+#include "io/fprintf/fprinte.h"
 #include "pwio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
@@ -31,7 +32,6 @@
 #include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 
 
 static char *passwd_db_file = NULL;
@@ -92,9 +92,8 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		/* Drop privileges */
 		if (   (setregid (getgid (), getgid ()) != 0)
 		    || (setreuid (getuid (), getuid ()) != 0)) {
-			fprintf (log_get_logfd(),
-			         _("%s: failed to drop privileges (%s)\n"),
-			         log_get_progname(), strerrno());
+			fprinte(log_get_logfd(), _("%s: failed to drop privileges"),
+			        log_get_progname());
 			exit (EXIT_FAILURE);
 		}
 
