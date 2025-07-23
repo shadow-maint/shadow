@@ -21,6 +21,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "io/fprintf.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -57,9 +58,9 @@ void chown_tty (const struct passwd *info)
 		int err = errno;
 
 		fprinte(log_get_logfd(), _("Unable to change owner or mode of tty stdin"));
-		SYSLOG(LOG_WARN,
-		       "unable to change owner or mode of tty stdin for user `%s': %s\n",
-		       info->pw_name, strerror(err));
+		SYSLOGE(LOG_WARN,
+		       "unable to change owner or mode of tty stdin for user `%s'",
+		       info->pw_name);
 		if (EROFS != err) {
 			closelog ();
 			exit (EXIT_FAILURE);
