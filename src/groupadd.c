@@ -31,6 +31,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -41,7 +42,6 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -377,7 +377,7 @@ static void open_files (struct option_flags *flags)
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprinte(stderr, _("%s: cannot open %s"), Prog, gr_dbname());
-		SYSLOG(LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno());
+		SYSLOGE(LOG_WARN, "cannot open %s", gr_dbname());
 		fail_exit (E_GRP_UPDATE);
 	}
 
@@ -385,7 +385,7 @@ static void open_files (struct option_flags *flags)
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprinte(stderr, _("%s: cannot open %s"), Prog, sgr_dbname());
-			SYSLOG(LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno());
+			SYSLOGE(LOG_WARN, "cannot open %s", sgr_dbname());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
