@@ -15,9 +15,9 @@
 #include <string.h>
 
 #include "attr.h"
+#include "io/fprintf/fprinte.h"
 #include "shadowlog.h"
 #include "string/strtok/astrsep2ls.h"
-#include "string/strerrno.h"
 
 
 ATTR_ACCESS(read_write, 1) ATTR_ACCESS(write_only, 3)
@@ -38,7 +38,7 @@ xastrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
 
 	return ls;
 x:
-	fprintf(log_get_logfd(), "%s: %s\n", log_get_progname(), strerrno());
+	fprinte(log_get_logfd(), "%s", log_get_progname());
 	exit(13);
 }
 
