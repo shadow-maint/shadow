@@ -123,6 +123,8 @@ libshadow_la_SOURCES = \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
+	io/fprintf/eprinte.c \
+	io/fprintf/eprinte.h \
 	io/fprintf/eprintf.c \
 	io/fprintf/eprintf.h \
 	io/fprintf/fprinte.c \
