@@ -24,35 +24,11 @@
 #define LOG_AUTHPRIV LOG_AUTH
 #endif
 
-/* cleaner than lots of #ifdefs everywhere - use this as follows:
-   SYSLOG(LOG_CRIT, "user %s cracked root", user); */
 #ifdef ENABLE_NLS
-/* Temporarily set LC_TIME to "C" to avoid strange dates in syslog.
-   This is a workaround for a more general syslog(d) design problem -
-   syslogd should log the current system time for each event, and not
-   trust the formatted time received from the unix domain (or worse,
-   UDP) socket.  -MM */
-/* Avoid translated PAM error messages: set LC_ALL to "C".
- * --Nekral */
-#define SYSLOG(...)							\
-	do {								\
-		char *old_locale = setlocale (LC_ALL, NULL);		\
-		char *saved_locale = NULL;				\
-		if (NULL != old_locale) {				\
-			saved_locale = strdup (old_locale);		\
-		}							\
-		if (NULL != saved_locale) {				\
-			(void) setlocale (LC_ALL, "C");			\
-		}							\
-		syslog(__VA_ARGS__);					\
-		if (NULL != saved_locale) {				\
-			(void) setlocale (LC_ALL, saved_locale);	\
-			free (saved_locale);				\
-		}							\
-	} while (false)
-#else				/* !ENABLE_NLS */
+#define SYSLOG(...)  SYSLOG_C(__VA_ARGS__)
+#else
 #define SYSLOG(...)  syslog(__VA_ARGS__)
-#endif				/* !ENABLE_NLS */
+#endif
 
 /* The default syslog settings can now be changed here,
    in just one place.  */
@@ -67,6 +43,29 @@
 #endif
 
 #define OPENLOG(progname) openlog(progname, SYSLOG_OPTIONS, SYSLOG_FACILITY)
+
+
+// system log C-locale
+#define SYSLOG_C(...)  do                                             \
+{                                                                     \
+	char  *old_locale;                                            \
+	char  *saved_locale;                                          \
+                                                                      \
+	old_locale = setlocale(LC_ALL, NULL);                         \
+	saved_locale = NULL;                                          \
+                                                                      \
+	if (NULL != old_locale)                                       \
+		saved_locale = strdup(old_locale);                    \
+                                                                      \
+	if (NULL != saved_locale)                                     \
+		setlocale(LC_ALL, "C");                               \
+                                                                      \
+	syslog(__VA_ARGS__);                                          \
+	if (NULL != saved_locale) {                                   \
+		setlocale(LC_ALL, saved_locale);                      \
+		free(saved_locale);                                   \
+	}                                                             \
+} while (0)
 
 
 #endif  // include guard
