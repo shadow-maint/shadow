@@ -13,6 +13,7 @@
 #include "defines.h"
 #include "atoi/getnum.h"
 #include "defines.h"
+#include "io/fprintf/eprinte.h"
 #include "prototypes.h"
 #include "string/sprintf/snprintf.h"
 
@@ -59,15 +60,13 @@ int open_pidfd(const char *pidstr)
 		return -ENOENT;
 
 	if (SNPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
-		fprintf(stderr, "snprintf of proc path failed for %d: %s\n",
-			target, strerror(errno));
+		eprinte("snprintf of proc path failed for %d", target);
 		return -EINVAL;
 	}
 
 	proc_dir_fd = open(proc_dir_name, O_DIRECTORY);
 	if (proc_dir_fd < 0) {
-		fprintf(stderr, _("Could not open proc directory for target %d: %s\n"),
-			target, strerror(errno));
+		eprinte(_("Could not open proc directory for target %d"), target);
 		return -EINVAL;
 	}
 	return proc_dir_fd;

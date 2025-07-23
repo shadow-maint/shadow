@@ -17,6 +17,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "getdef.h"
+#include "io/fprintf/fprinte.h"
 #include "shadowlog.h"
 
 /*
@@ -235,9 +236,8 @@ int find_new_uid(bool sys_user,
 	/* Create an array to hold all of the discovered UIDs */
 	used_uids = CALLOC(uid_max + 1, bool);
 	if (NULL == used_uids) {
-		fprintf (log_get_logfd(),
-			 _("%s: failed to allocate memory: %s\n"),
-			 log_get_progname(), strerror (errno));
+		fprinte(log_get_logfd(), _("%s: failed to allocate memory"),
+			log_get_progname());
 		return -1;
 	}
 
@@ -321,9 +321,9 @@ int find_new_uid(bool sys_user,
 						_("%s: Can't get unique system UID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -367,9 +367,9 @@ int find_new_uid(bool sys_user,
 							_("%s: Can't get unique system UID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -430,9 +430,9 @@ int find_new_uid(bool sys_user,
 						_("%s: Can't get unique UID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available UIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -476,9 +476,9 @@ int find_new_uid(bool sys_user,
 							_("%s: Can't get unique UID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available UIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -494,7 +494,7 @@ int find_new_uid(bool sys_user,
 	fprintf (log_get_logfd(),
 		_("%s: Can't get unique UID (no more available UIDs)\n"),
 		log_get_progname());
-	SYSLOG ((LOG_WARN, "no more available UIDs on the system"));
+	SYSLOG(LOG_WARN, "no more available UIDs on the system");
 	free (used_uids);
 	return -1;
 }

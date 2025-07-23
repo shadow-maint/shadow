@@ -22,6 +22,7 @@
 #include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX
@@ -115,10 +116,7 @@ static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, 
 
 	va_start (ap, fmt);
 	(void) fprintf (shadow_logfd, _("%s: "), log_get_progname());
-	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
-		(void) fputs (_(": "), shadow_logfd);
-	}
-	(void) fprintf (shadow_logfd, "%s\n", strerror (errno));
+	vfprinte(shadow_logfd, fmt, ap);
 	va_end (ap);
 }
 

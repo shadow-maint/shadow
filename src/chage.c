@@ -24,6 +24,8 @@
 #include "atoi/a2i/a2s.h"
 #include "defines.h"
 #include "fields.h"
+#include "io/fprintf/eprinte.h"
+#include "io/fprintf/eprintf.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -95,15 +97,15 @@ fail_exit (int code)
 {
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -366,8 +368,7 @@ static void process_flags (int argc, char **argv)
 			dflg = true;
 			lstchgdate = strtoday (optarg);
 			if (lstchgdate < -1) {
-				fprintf (stderr,
-				         _("%s: invalid date '%s'\n"),
+				eprintf(_("%s: invalid date '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -376,8 +377,7 @@ static void process_flags (int argc, char **argv)
 			Eflg = true;
 			expdate = strtoday (optarg);
 			if (expdate < -1) {
-				fprintf (stderr,
-				         _("%s: invalid date '%s'\n"),
+				eprintf(_("%s: invalid date '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -391,8 +391,7 @@ static void process_flags (int argc, char **argv)
 		case 'I':
 			Iflg = true;
 			if (a2sl(&inactdays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -403,8 +402,7 @@ static void process_flags (int argc, char **argv)
 		case 'm':
 			mflg = true;
 			if (a2sl(&mindays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -412,8 +410,7 @@ static void process_flags (int argc, char **argv)
 		case 'M':
 			Mflg = true;
 			if (a2sl(&maxdays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -425,8 +422,7 @@ static void process_flags (int argc, char **argv)
 		case 'W':
 			Wflg = true;
 			if (a2sl(&warndays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
+				eprintf(_("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
 				usage (E_USAGE);
 			}
@@ -456,9 +452,7 @@ static void check_flags (int argc, int opt_index)
 	}
 
 	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
-		fprintf (stderr,
-		         _("%s: do not include \"l\" with other flags\n"),
-		         Prog);
+		eprintf(_("%s: do not include \"l\" with other flags\n"), Prog);
 		usage (E_USAGE);
 	}
 }
@@ -481,7 +475,7 @@ static void check_perms (void)
 	 */
 
 	if (!amroot && !lflg) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		eprintf(_("%s: Permission denied.\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
 }
@@ -501,16 +495,15 @@ static void open_files (bool readonly)
 	 */
 	if (!readonly) {
 		if (pw_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, pw_dbname ());
 			fail_exit (E_NOPERM);
 		}
 		pw_locked = true;
 	}
 	if (pw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (E_NOPERM);
 	}
 
@@ -522,17 +515,15 @@ static void open_files (bool readonly)
 	 */
 	if (!readonly) {
 		if (spw_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
 			fail_exit (E_NOPERM);
 		}
 		spw_locked = true;
 	}
 	if (spw_open (readonly ? O_RDONLY: O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
+		eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
+		SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 		fail_exit (E_NOPERM);
 	}
 }
@@ -547,9 +538,8 @@ static void close_files (void)
 	 * entries to be re-written.
 	 */
 	if (spw_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+		eprintf(_("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 		fail_exit (E_NOPERM);
 	}
 
@@ -558,19 +548,19 @@ static void close_files (void)
 	 * will be re-written.
 	 */
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_NOPERM);
 	}
 	if (spw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 	spw_locked = false;
 	if (pw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -601,8 +591,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, pw_dbname (), pwent.pw_name);
+			eprintf(_("%s: failed to prepare the new %s entry '%s'\n"), Prog, pw_dbname(), pwent.pw_name);
 			fail_exit (E_NOPERM);
 		}
 	} else {
@@ -624,8 +613,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	spwent.sp_expire = expdate;
 
 	if (spw_update (&spwent) == 0) {
-		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, spw_dbname (), spwent.sp_namp);
+		eprintf(_("%s: failed to prepare the new %s entry '%s'\n"), Prog, spw_dbname(), spwent.sp_namp);
 		fail_exit (E_NOPERM);
 	}
 
@@ -745,10 +733,8 @@ int main (int argc, char **argv)
 	check_perms ();
 
 	if (!spw_file_present ()) {
-		fprintf (stderr,
-		         _("%s: the shadow password file is not present\n"),
-		         Prog);
-		SYSLOG ((LOG_WARN, "can't find the shadow password file"));
+		eprintf(_("%s: the shadow password file is not present\n"), Prog);
+		SYSLOG(LOG_WARN, "can't find the shadow password file");
 		closelog ();
 		exit (E_SHADOW_NOTFOUND);
 	}
@@ -757,14 +743,13 @@ int main (int argc, char **argv)
 	/* Drop privileges */
 	if (lflg && (   (setregid (rgid, rgid) != 0)
 	             || (setreuid (ruid, ruid) != 0))) {
-		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
-		         Prog, strerror (errno));
+		eprinte(_("%s: failed to drop privileges"), Prog);
 		fail_exit (E_NOPERM);
 	}
 
 	pw = pw_locate (argv[optind]);
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: user '%s' does not exist in %s\n"),
+		eprintf(_("%s: user '%s' does not exist in %s\n"),
 		         Prog, argv[optind], pw_dbname ());
 		closelog ();
 		fail_exit (E_NOPERM);
@@ -787,7 +772,7 @@ int main (int argc, char **argv)
 	 */
 	if (lflg) {
 		if (!amroot && (ruid != user_uid)) {
-			fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+			eprintf(_("%s: Permission denied.\n"), Prog);
 			fail_exit (E_NOPERM);
 		}
 		/* Displaying fields is not of interest to audit */
@@ -803,8 +788,7 @@ int main (int argc, char **argv)
 		printf (_("Changing the aging information for %s\n"),
 		        user_name);
 		if (new_fields () == 0) {
-			fprintf (stderr, _("%s: error changing fields\n"),
-			         Prog);
+			eprintf(_("%s: error changing fields\n"), Prog);
 			fail_exit (E_NOPERM);
 		}
 #ifdef WITH_AUDIT
@@ -851,7 +835,7 @@ int main (int argc, char **argv)
 
 	close_files ();
 
-	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
+	SYSLOG(LOG_INFO, "changed password expiry for %s", user_name);
 
 	closelog ();
 	exit (E_SUCCESS);
