@@ -43,6 +43,7 @@
 #include "groupio.h"
 #include "io/fgets/fgets.h"
 #include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -2651,8 +2652,7 @@ int main (int argc, char **argv)
 			fprinte(stderr,
 			        _("%s: can't create subordinate user IDs"),
 			        Prog);
-			SYSLOG(LOG_WARN, "can't create subordinate user IDs: %s\n",
-			       strerrno());
+			SYSLOGE(LOG_WARN, "can't create subordinate user IDs");
 			fail_exit(E_SUB_UID_UPDATE, process_selinux);
 		}
 	}
@@ -2661,8 +2661,7 @@ int main (int argc, char **argv)
 			fprinte(stderr,
 			        _("%s: can't create subordinate group IDs"),
 			        Prog);
-			SYSLOG(LOG_WARN, "can't create subordinate group IDs: %s\n",
-			       strerrno());
+			SYSLOGE(LOG_WARN, "can't create subordinate group IDs");
 			fail_exit(E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
