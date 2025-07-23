@@ -8,11 +8,23 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 
 #include "attr.h"
+
+
+// fprinte - FILE* print errno
+#define fprinte(stream, ...)  do                                      \
+{                                                                     \
+	int  e__;                                                     \
+	                                                              \
+	e__ = errno;                                                  \
+	fprintec(stream, e__, __VA_ARGS__);                           \
+	errno = e__;                                                  \
+} while (0)
 
 
 format_attr(printf, 3, 4)
