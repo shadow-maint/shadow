@@ -38,6 +38,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "io/fprintf.h"
+#include "io/syslog.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -2242,16 +2243,14 @@ int main (int argc, char **argv)
 			fprinte(stderr,
 				_("%s: unable to find new subordinate uid range"),
 				Prog);
-			SYSLOG(LOG_WARN, "unable to find new subordinate uid range: %s\n",
-			       strerrno());
+			SYSLOGE(LOG_WARN, "unable to find new subordinate uid range");
 			fail_exit (E_SUB_UID_UPDATE, process_selinux);
 		}
 		if (find_range (&add_sub_gids, user_id, find_new_sub_gids) == 0) {
 			fprinte(stderr,
 				_("%s: unable to find new subordinate gid range"),
 				Prog);
-			SYSLOG(LOG_WARN, "unable to find new subordinate gid range: %s\n",
-			       strerrno());
+			SYSLOGE(LOG_WARN, "unable to find new subordinate gid range");
 			fail_exit (E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
