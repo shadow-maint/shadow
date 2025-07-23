@@ -364,7 +364,7 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 
 	entry = malloc_T(1, struct id_range_list_entry);
 	if (!entry) {
-		fprinte(stderr, _("%s: failed to allocate memory"), Prog);
+		eprinte(_("%s: failed to allocate memory"), Prog);
 		return 0;
 	}
 	entry->next = *head;
@@ -388,7 +388,7 @@ find_range(struct id_range_list_entry **head,
 
 	entry = malloc_T(1, struct id_range_list_entry);
 	if (entry == NULL) {
-		fprinte(stderr, "%s: malloc", Prog);
+		eprinte("%s: malloc", Prog);
 		return 0;
 	}
 
@@ -1882,7 +1882,7 @@ static void update_lastlog (void)
 	fd = open(_PATH_LASTLOG, O_RDWR);
 
 	if (-1 == fd) {
-		fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+		eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
 		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
@@ -1893,7 +1893,7 @@ static void update_lastlog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &ll, sizeof(ll)) == -1)
 		    || (fsync (fd) != 0)) {
-			fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+			eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
 			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
@@ -1908,14 +1908,14 @@ static void update_lastlog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &ll, sizeof(ll)) == -1)
 			    || (fsync (fd) != 0)) {
-				fprinte(stderr, _("%s: failed to copy the lastlog entry of user %lu to user %lu"),
+				eprinte(_("%s: failed to copy the lastlog entry of user %lu to user %lu"),
 				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		fprinte(stderr, _("%s: failed to copy the lastlog entry of user %ju to user %ju"),
+		eprinte(_("%s: failed to copy the lastlog entry of user %ju to user %ju"),
 		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
@@ -1942,7 +1942,7 @@ static void update_faillog (void)
 	fd = open (FAILLOG_FILE, O_RDWR);
 
 	if (-1 == fd) {
-		fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+		eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
 		        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		return;
 	}
@@ -1953,7 +1953,7 @@ static void update_faillog (void)
 		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 		    || (write_full(fd, &fl, sizeof(fl)) == -1)
 		    || (fsync (fd) != 0)) {
-			fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+			eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
 			        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 		}
 	} else {
@@ -1968,14 +1968,14 @@ static void update_faillog (void)
 			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
 			    || (write_full(fd, &fl, sizeof(fl)) == -1))
 			{
-				fprinte(stderr, _("%s: failed to copy the faillog entry of user %lu to user %lu"),
+				eprinte(_("%s: failed to copy the faillog entry of user %lu to user %lu"),
 				        Prog, (unsigned long) user_id, (unsigned long) user_newid);
 			}
 		}
 	}
 
 	if (close (fd) != 0 && errno != EINTR) {
-		fprinte(stderr, _("%s: failed to copy the faillog entry of user %ju to user %ju"),
+		eprinte(_("%s: failed to copy the faillog entry of user %ju to user %ju"),
 		        Prog, (uintmax_t) user_id, (uintmax_t) user_newid);
 	}
 }
