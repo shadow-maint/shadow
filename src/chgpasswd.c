@@ -25,10 +25,11 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include "atoi/a2i.h"
 #include "defines.h"
+#include "groupio.h"
+#include "io/fprintf.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
-#include "groupio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
@@ -37,7 +38,6 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 /*
@@ -535,9 +535,8 @@ int main (int argc, char **argv)
 			salt = crypt_make_salt (crypt_method, arg);
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				        Prog, salt, strerrno());
+				fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+				        Prog, salt);
 				fail_exit (1, process_selinux);
 			}
 		}
