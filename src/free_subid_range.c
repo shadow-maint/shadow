@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	bool group = false;   // get subuids by default
 
 	if (!subid_init(Prog, stderr))
-		fprinte(stderr, "subid_init");
+		eprinte("subid_init");
 	while ((c = getopt(argc, argv, "g")) != EOF) {
 		switch(c) {
 		case 'g': group = true; break;

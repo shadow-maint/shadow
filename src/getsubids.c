@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	const char *owner;
 
 	if (!subid_init(Prog, stderr))
-		fprinte(stderr, "subid_init");
+		eprinte("subid_init");
 	if (argc < 2)
 		usage();
 	owner = argv[1];
