@@ -5,10 +5,10 @@
 
 #include "atoi/getnum.h"
 #include "attr.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "stdlib.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "subid.h"
 
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	uid_t  *uids;
 
 	if (!subid_init(Prog, stderr))
-		fprintf(stderr, "subid_init: %s\n", strerrno());
+		fprinte(stderr, "subid_init");
 	if (argc < 2) {
 		usage();
 	}

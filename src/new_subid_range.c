@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "atoi/a2i.h"
-#include "string/strerrno.h"
+#include "io/fprintf.h"
 #include "subid.h"
 #include "stdlib.h"
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	bool ok;
 
 	if (!subid_init(Prog, stderr))
-		fprintf(stderr, "subid_init: %s\n", strerrno());
+		fprinte(stderr, "subid_init");
 	while ((c = getopt(argc, argv, "gn")) != EOF) {
 		switch(c) {
 		case 'n': makenew = true; break;
