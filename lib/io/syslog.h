@@ -8,6 +8,7 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <locale.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -51,6 +52,24 @@
 #endif
 
 #define OPENLOG(progname) openlog(progname, SYSLOG_OPTIONS, SYSLOG_FACILITY)
+
+
+// SYSLOGE - system log errno
+#define SYSLOGE(prio, fmt, ...)  do                                   \
+{                                                                     \
+	int  e__;                                                     \
+                                                                      \
+	e__ = errno;                                                  \
+	SYSLOGEC(prio, e__, fmt __VA_OPT__(,) __VA_ARGS__);           \
+	errno = e__;                                                  \
+} while (0)
+
+
+// SYSLOGEC - system log errno code
+#define SYSLOGEC(prio, e, fmt, ...)  do                               \
+{                                                                     \
+	SYSLOG(prio, "" fmt ": %s" __VA_OPT__(,) __VA_ARGS__, strerror(e)); \
+} while (0)
 
 
 // system log C-locale
