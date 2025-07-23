@@ -26,6 +26,7 @@
 #include "nscd.h"
 #include "sssd.h"
 #include "getdef.h"
+#include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -34,7 +35,6 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -546,8 +546,8 @@ int main (int argc, char **argv)
 		if (salt) {
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
-				eprintf(_("%s: failed to crypt password with salt '%s': %s\n"),
-				        Prog, salt, strerrno());
+				eprinte(_("%s: failed to crypt password with salt '%s'"),
+				        Prog, salt);
 				fail_exit (1);
 			}
 		}

@@ -27,6 +27,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "groupio.h"
+#include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
@@ -40,7 +41,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -807,8 +807,7 @@ static void change_passwd (struct group *gr)
 	cp = pw_encrypt (pass, salt);
 	MEMZERO(pass);
 	if (NULL == cp) {
-		eprintf(_("%s: failed to crypt password with salt '%s': %s\n"),
-		        Prog, salt, strerrno());
+		eprinte(_("%s: failed to crypt password with salt '%s'"), Prog, salt);
 		exit (1);
 	}
 #ifdef SHADOWGRP

@@ -28,6 +28,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fprintf/eprinte.h"
 #include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "sssd.h"
@@ -736,8 +737,7 @@ static bool remove_mailbox (void)
 			free(mailfile);
 			return 0;
 		} else {
-			eprintf(_("%s: warning: can't remove %s: %s\n"),
-			        Prog, mailfile, strerrno());
+			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 			SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
@@ -751,8 +751,7 @@ static bool remove_mailbox (void)
 
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
-			eprintf(_("%s: warning: can't remove %s: %s\n"),
-			        Prog, mailfile, strerrno());
+			eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 			SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
@@ -790,7 +789,7 @@ static bool remove_mailbox (void)
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
-		eprintf(_("%s: warning: can't remove %s: %s\n"), Prog, mailfile, strerrno());
+		eprinte(_("%s: warning: can't remove %s"), Prog, mailfile);
 		SYSLOG(LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
@@ -829,7 +828,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 		return 1;
 	}
 	if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
-		eprintf(_("%s: Cannot drop privileges: %s\n"), Prog, strerrno());
+		eprinte(_("%s: Cannot drop privileges"), Prog);
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -838,8 +837,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	 * We will regain them and remove the user's tcb directory afterwards.
 	 */
 	if (remove_tree (buf, false) != 0) {
-		eprintf(_("%s: Cannot remove the content of %s: %s\n"),
-		        Prog, buf, strerrno());
+		eprinte(_("%s: Cannot remove the content of %s"), Prog, buf);
 		shadowtcb_gain_priv ();
 		free (buf);
 		return 1;
@@ -847,8 +845,7 @@ static int remove_tcbdir (const char *user_name, uid_t user_id)
 	shadowtcb_gain_priv ();
 	free (buf);
 	if (shadowtcb_remove (user_name) == SHADOWTCB_FAILURE) {
-		eprintf(_("%s: Cannot remove tcb files for %s: %s\n"),
-		        Prog, user_name, strerrno());
+		eprinte(_("%s: Cannot remove tcb files for %s"), Prog, user_name);
 		ret = 1;
 	}
 	return ret;
