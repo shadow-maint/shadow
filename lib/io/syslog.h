@@ -64,10 +64,9 @@
 		setlocale(LC_ALL, "C");                               \
                                                                       \
 	syslog(__VA_ARGS__);                                          \
-	if (NULL != l_) {                                             \
-		setlocale(LC_ALL, l_);                                \
-		free(l_);                                             \
-	}                                                             \
+                                                                      \
+	setlocale(LC_ALL, l_);                                        \
+	free(l_);                                                     \
 } while (0)
 
 
