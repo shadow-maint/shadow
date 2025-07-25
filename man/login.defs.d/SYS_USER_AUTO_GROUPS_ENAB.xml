@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>SYS_USER_AUTO_GROUPS_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Indicate if the option <option>GROUPS</option>
+      in the file <filename>/etc/default/useradd</filename>
+      should add system users to those supplementary groups by default.
+    </para>
+  </listitem>
+</varlistentry>
