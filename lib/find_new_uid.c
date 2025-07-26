@@ -236,8 +236,7 @@ int find_new_uid(bool sys_user,
 	/* Create an array to hold all of the discovered UIDs */
 	used_uids = calloc_T(uid_max + 1, bool);
 	if (NULL == used_uids) {
-		fprinte(log_get_logfd(), _("%s: failed to allocate memory"),
-			log_get_progname());
+		fprinte(log_get_logfd(), "%s: calloc", log_get_progname());
 		return -1;
 	}
 
