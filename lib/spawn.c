@@ -39,12 +39,10 @@ run_command(const char *cmd, const char *argv[],
 		if (ENOENT == errno) {
 			_exit (E_CMD_NOTFOUND);
 		}
-		fprinte(shadow_logfd, "%s: cannot execute %s",
-		        shadow_progname, cmd);
+		fprinte(shadow_logfd, "%s: execve(\"%s\")", shadow_progname, cmd);
 		_exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
-		fprinte(shadow_logfd, "%s: cannot execute %s",
-		        shadow_progname, cmd);
+		fprinte(shadow_logfd, "%s: fork(\"%s\")", shadow_progname, cmd);
 		return -1;
 	}
 
@@ -56,7 +54,7 @@ run_command(const char *cmd, const char *argv[],
 	         || ((pid_t)-1 != wpid && wpid != pid));
 
 	if ((pid_t)-1 == wpid) {
-		fprinte(shadow_logfd, "%s: waitpid (status: %d)",
+		fprinte(shadow_logfd, "%s: waitpid(status: %d)",
 		        shadow_progname, *status);
 		return -1;
 	}
