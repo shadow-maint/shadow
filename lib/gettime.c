@@ -39,8 +39,7 @@ gettime(void)
 		return fallback;
 
 	if (a2i(time_t, &epoch, source_date_epoch, NULL, 10, 0, fallback) == -1) {
-		fprinte(shadow_logfd,
-		        _("Environment variable $SOURCE_DATE_EPOCH: a2i(\"%s\")"),
+		fprinte(shadow_logfd, "a2i(SOURCE_DATE_EPOCH=\"%s\")",
 		        source_date_epoch);
 		return fallback;
 	}

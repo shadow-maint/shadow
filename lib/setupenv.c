@@ -16,16 +16,17 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <ctype.h>
+#include <pwd.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
-#include <ctype.h>
 
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #include "getdef.h"
+#include "io/fprintf/fprinte.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
@@ -187,10 +188,9 @@ void setup_env (struct passwd *info)
 	 * this a configurable option.  --marekm
 	 */
 
-	if (chdir (info->pw_dir) == -1) {
+	if (chdir(info->pw_dir) == -1) {
 		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
-			fprintf (log_get_logfd(), _("Unable to cd to '%s'\n"),
-				 info->pw_dir);
+			fprinte(log_get_logfd(), "chdir(\"%s\")", info->pw_dir);
 			SYSLOG(LOG_WARN,
 				"unable to cd to `%s' for user `%s'\n",
 				info->pw_dir, info->pw_name);
