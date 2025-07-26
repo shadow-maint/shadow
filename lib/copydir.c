@@ -106,7 +106,7 @@ error_acl(struct error_context *, const char *fmt, ...)
 	}
 
 	va_start (ap, fmt);
-	(void) fprintf (log_get_logfd(), _("%s: "), log_get_progname());
+	fprintf(log_get_logfd(), "%s: ", log_get_progname());
 	vfprintec(log_get_logfd(), e, fmt, ap);
 	va_end (ap);
 

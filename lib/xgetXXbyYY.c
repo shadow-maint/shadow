@@ -34,6 +34,7 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 
@@ -113,8 +114,7 @@
 #endif
 
 oom:
-	fprintf (log_get_logfd(), _("%s: out of memory\n"),
-		 "x" STRINGIZE(FUNCTION_NAME));
+	fprinte(log_get_logfd(), "%s: malloc", "x" STRINGIZE(FUNCTION_NAME));
 	exit (13);
 }
 

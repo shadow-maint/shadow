@@ -72,9 +72,9 @@ static int check_link_count (const char *file, bool log)
 {
 	struct stat sb;
 
-	if (stat (file, &sb) != 0) {
+	if (stat(file, &sb) == -1) {
 		if (log) {
-			fprinte(log_get_logfd(), "%s: %s file stat error",
+			fprinte(log_get_logfd(), "%s: stat(\"%s\")",
 			        log_get_progname(), file);
 		}
 		return 0;
@@ -104,7 +104,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	fd = open (file, O_CREAT | O_TRUNC | O_WRONLY, 0600);
 	if (-1 == fd) {
 		if (log) {
-			fprinte(log_get_logfd(), "%s: %s", log_get_progname(), file);
+			fprinte(log_get_logfd(), "%s: open(\"%s\")", log_get_progname(), file);
 		}
 		return 0;
 	}
@@ -114,7 +114,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	len = (ssize_t) strlen (buf) + 1;
 	if (write_full(fd, buf, len) == -1) {
 		if (log) {
-			fprinte(log_get_logfd(), "%s: %s file write error",
+			fprinte(log_get_logfd(), "%s: write(\"%s\")",
 			        log_get_progname(), file);
 		}
 		(void) close (fd);
@@ -123,7 +123,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	}
 	if (fdatasync (fd) == -1) {
 		if (log) {
-			fprinte(log_get_logfd(), "%s: %s file sync error",
+			fprinte(log_get_logfd(), "%s: fdatasync(\"%s\")",
 			        log_get_progname(), file);
 		}
 		(void) close (fd);
@@ -141,7 +141,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	fd = open (lock, O_RDWR);
 	if (-1 == fd) {
 		if (log) {
-			fprinte(log_get_logfd(), "%s: %s", log_get_progname(), lock);
+			fprinte(log_get_logfd(), "%s: open(\"%s\")", log_get_progname(), lock);
 		}
 		unlink (file);
 		errno = EINVAL;

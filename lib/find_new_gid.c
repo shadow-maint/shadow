@@ -237,8 +237,7 @@ int find_new_gid (bool sys_group,
 	/* Create an array to hold all of the discovered GIDs */
 	used_gids = calloc_T(gid_max + 1, bool);
 	if (NULL == used_gids) {
-		fprinte(log_get_logfd(), _("%s: failed to allocate memory"),
-			log_get_progname());
+		fprinte(log_get_logfd(), "%s: calloc", log_get_progname());
 		return -1;
 	}
 
