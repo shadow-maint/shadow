@@ -111,7 +111,6 @@ libshadow_la_SOURCES = \
 	getdef.h \
 	getgr_nam_gid.c \
 	getrange.c \
-	gettime.c \
 	groupio.c \
 	groupmem.c \
 	groupio.h \
@@ -274,6 +273,7 @@ libshadow_la_SOURCES = \
 	subordinateio.h \
 	subordinateio.c \
 	sulog.c \
+	time/date.c \
 	time/date.h \
 	time/day_to_str.c \
 	time/day_to_str.h \
