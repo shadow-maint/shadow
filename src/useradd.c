@@ -978,11 +978,7 @@ static void new_spent (struct spwd *spent)
 	memzero(spent, sizeof(*spent));
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = gettime () / DAY;
-	if (0 == spent->sp_lstchg) {
-		/* Better disable aging than requiring a password change */
-		spent->sp_lstchg = -1;
-	}
+	spent->sp_lstchg = date_or_SDE();
 	spent->sp_min = -1;
 	if (!rflg) {
 		spent->sp_max = getdef_num ("PASS_MAX_DAYS", -1);
