@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -68,6 +66,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strspn/stprspn.h"
 #include "sysconf.h"
+#include "time/date.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 
