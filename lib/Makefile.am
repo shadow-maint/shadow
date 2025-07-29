@@ -268,6 +268,7 @@ libshadow_la_SOURCES = \
 	sulog.c \
 	sysconf.c \
 	sysconf.h \
+	time/date.h \
 	time/day_to_str.c \
 	time/day_to_str.h \
 	ttytype.c \
