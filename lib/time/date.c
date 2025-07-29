@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2017, Chris Lamb
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -16,6 +16,9 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strerrno.h"
+
+
+extern inline long date_or_SDE(void);
 
 
 /*
