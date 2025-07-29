@@ -73,6 +73,7 @@
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"
+#include "time/date.h"
 
 #undef NDEBUG
 #include <assert.h>

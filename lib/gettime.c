@@ -5,7 +5,7 @@
 
 #include "config.h"
 
-#ident "$Id$"
+#include "time/date.h"
 
 #include <errno.h>
 #include <limits.h>
