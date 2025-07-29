@@ -17,8 +17,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -62,6 +60,7 @@
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
+#include "time/date.h"
 
 struct option_flags {
 	bool chroot;

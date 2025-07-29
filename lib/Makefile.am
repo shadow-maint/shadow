@@ -259,6 +259,7 @@ libshadow_la_SOURCES = \
 	subordinateio.h \
 	subordinateio.c \
 	sulog.c \
+	time/date.h \
 	time/day_to_str.c \
 	time/day_to_str.h \
 	ttytype.c \
