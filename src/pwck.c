@@ -10,8 +10,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
@@ -30,6 +28,7 @@
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "time/date.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
