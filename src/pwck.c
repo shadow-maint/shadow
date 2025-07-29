@@ -20,6 +20,7 @@
 
 #include "chkname.h"
 #include "commonio.h"
+#include "date.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
@@ -618,13 +619,7 @@ static void check_pw_file (bool *errors, bool *changed)
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = gettime () / DAY;
-					if (0 == sp.sp_lstchg) {
-						/* Better disable aging than
-						 * requiring a password change
-						 */
-						sp.sp_lstchg = -1;
-					}
+					sp.sp_lstchg = date();
 					*changed = true;
 
 					if (spw_update (&sp) == 0) {

@@ -150,9 +150,6 @@ extern int getrange (const char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
 
-/* gettime.c */
-extern time_t gettime (void);
-
 /* fputsx.c */
 ATTR_ACCESS(write_only, 1, 2)
 extern /*@null@*/char *fgetsx(/*@returned@*/char *restrict, int, FILE *restrict);
