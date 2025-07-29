@@ -41,6 +41,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include "chkname.h"
+#include "date.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"

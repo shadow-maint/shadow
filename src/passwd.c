@@ -23,6 +23,7 @@
 #include "agetpass.h"
 #include "atoi/a2i/a2s.h"
 #include "chkname.h"
+#include "date.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"

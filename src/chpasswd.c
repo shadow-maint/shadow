@@ -23,6 +23,7 @@
 #endif				/* USE_PAM */
 #include "atoi/str2i.h"
 #include "chkhash.h"
+#include "date.h"
 #include "defines.h"
 #include "nscd.h"
 #include "sssd.h"

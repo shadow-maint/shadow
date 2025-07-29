@@ -11,10 +11,12 @@
 
 #ident "$Id$"
 
-#include <sys/types.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+#include <sys/types.h>
+
+#include "prototypes.h"
+#include "date.h"
+#include "defines.h"
 
 /*
  * pwd_to_spwd - create entries for new spwd structure

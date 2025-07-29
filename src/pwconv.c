@@ -45,6 +45,7 @@
 #include <unistd.h>
 #include <getopt.h>
 
+#include "date.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"

@@ -38,6 +38,7 @@
 #include "atoi/a2i/a2s.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
+#include "date.h"
 #include "defines.h"
 #include "faillog.h"
 #include "getdef.h"
