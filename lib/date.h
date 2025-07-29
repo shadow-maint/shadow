@@ -13,7 +13,21 @@
 #include "defines.h"
 
 
+inline long date(void);
 time_t gettime(void);
+
+
+inline long
+date(void)
+{
+	time_t  t;
+
+	t = gettime();
+	if (t == -1)
+		return -1;
+
+	return t / DAY;
+}
 
 
 #endif  // include guard

@@ -87,6 +87,7 @@ libshadow_la_SOURCES = \
 	console.c \
 	copydir.c \
 	csrand.c \
+	date.c \
 	date.h \
 	defines.h \
 	encrypt.c \
@@ -116,7 +117,6 @@ libshadow_la_SOURCES = \
 	getdef.h \
 	getgr_nam_gid.c \
 	getrange.c \
-	gettime.c \
 	groupio.c \
 	groupmem.c \
 	groupio.h \
