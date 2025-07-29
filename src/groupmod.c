@@ -132,7 +132,8 @@ static void usage (int status)
 	                "                                PASSWORD\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files\n"), usageout);
-	(void) fputs (_("  -U, --users USERS             list of user members of this group\n"), usageout);
+	(void) fputs (_("  -U, --users USERS             comma-separated list of users to add as\n"
+	                "                                members of this group\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
