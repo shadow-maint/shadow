@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
@@ -66,6 +64,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/xstrdup.h"
+#include "time/date.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 

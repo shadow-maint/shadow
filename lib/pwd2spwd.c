@@ -9,12 +9,12 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <sys/types.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+#include <sys/types.h>
+
+#include "defines.h"
+#include "prototypes.h"
+#include "time/date.h"
 
 /*
  * pwd_to_spwd - create entries for new spwd structure
