@@ -614,14 +614,8 @@ static void new_spent (struct spwd *spent)
 	 */
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 
-	if (pflg) {
-		spent->sp_lstchg = gettime () / DAY;
-		if (0 == spent->sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change. */
-			spent->sp_lstchg = -1;
-		}
-	}
+	if (pflg)
+		spent->sp_lstchg = date_or_SDE();
 }
 
 /*
@@ -1754,12 +1748,7 @@ static void usr_update (void)
 			spent.sp_pwdp   = xstrdup (pwent.pw_passwd);
 			pwent.pw_passwd = xstrdup (SHADOW_PASSWD_STRING);
 
-			spent.sp_lstchg = gettime () / DAY;
-			if (0 == spent.sp_lstchg) {
-				/* Better disable aging than
-				 * requiring a password change */
-				spent.sp_lstchg = -1;
-			}
+			spent.sp_lstchg = date_or_SDE();
 			spent.sp_min    = getdef_num ("PASS_MIN_DAYS", -1);
 			spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
 			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
