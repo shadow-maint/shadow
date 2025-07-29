@@ -32,8 +32,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <errno.h>
 #include <fcntl.h>
 #include <pwd.h>
@@ -54,6 +52,7 @@
 #include "shadowio.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "time/date.h"
 
 
 /*
