@@ -123,6 +123,14 @@ libshadow_la_SOURCES = \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
+	io/fprintf/eprinte.c \
+	io/fprintf/eprinte.h \
+	io/fprintf/eprintf.c \
+	io/fprintf/eprintf.h \
+	io/fprintf/fprinte.c \
+	io/fprintf/fprinte.h \
+	io/syslog.c \
+	io/syslog.h \
 	isexpired.c \
 	limits.c \
 	list.c \
@@ -231,6 +239,8 @@ libshadow_la_SOURCES = \
 	string/strdup/xstrdup.h \
 	string/strdup/xstrndup.c \
 	string/strdup/xstrndup.h \
+	string/strerrno.c \
+	string/strerrno.h \
 	string/strftime.c \
 	string/strftime.h \
 	string/strspn/stpspn.c \
