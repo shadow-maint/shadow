@@ -109,6 +109,7 @@
 	    directory and use the configuration files from the
 	    <replaceable>CHROOT_DIR</replaceable> directory.
 	    Only absolute paths are supported.
+      No SELINUX support.
 	  </para>
 	</listitem>
       </varlistentry>
