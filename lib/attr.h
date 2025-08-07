@@ -16,13 +16,17 @@
 # define MAYBE_UNUSED
 #endif
 
+#if __has_c_attribute(noreturn)
+# define NORETURN                    [[noreturn]]
+#else
+# define NORETURN
+#endif
+
 #if (__GNUC__ >= 10)
-# define NORETURN                    [[gnu::__noreturn__]]
 # define format_attr(type, fmt, va)  [[gnu::format(type, fmt, va)]]
 # define ATTR_ACCESS(...)            [[gnu::access(__VA_ARGS__)]]
 # define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
 #else
-# define NORETURN
 # define format_attr(type, fmt, va)
 # define ATTR_ACCESS(...)
 # define ATTR_ALLOC_SIZE(...)
