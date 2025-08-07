@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "attr.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
@@ -11,13 +12,9 @@
 
 static const char Prog[] = "getsubids";
 
-static void usage(void)
-{
-	fprintf(stderr, "Usage: %s [-g] user\n", Prog);
-	fprintf(stderr, "    list subuid ranges for user\n");
-	fprintf(stderr, "    pass -g to list subgid ranges\n");
-	exit(EXIT_FAILURE);
-}
+
+NORETURN static void usage(void);
+
 
 int main(int argc, char *argv[])
 {
@@ -48,4 +45,14 @@ int main(int argc, char *argv[])
 	}
 	subid_free(ranges);
 	return 0;
+}
+
+
+static void
+usage(void)
+{
+	fprintf(stderr, "Usage: %s [-g] user\n", Prog);
+	fprintf(stderr, "    list subuid ranges for user\n");
+	fprintf(stderr, "    pass -g to list subgid ranges\n");
+	exit(EXIT_FAILURE);
 }
