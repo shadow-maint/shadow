@@ -46,7 +46,7 @@
 # define ATTR_MALLOC(deallocator)
 #endif
 
-#if (__GNUC__ >= 14)
+#if __has_c_attribute(gnu::null_terminated_string_arg)
 # define ATTR_STRING(i)              [[gnu::null_terminated_string_arg(i)]]
 #else
 # define ATTR_STRING(i)
