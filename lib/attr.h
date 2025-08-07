@@ -5,6 +5,11 @@
 #include "config.h"
 
 
+#if !defined(__has_c_attribute)
+# define __has_c_attribute(x)  0
+#endif
+
+
 #if (__GNUC__ >= 10)
 # define MAYBE_UNUSED                [[gnu::unused]]
 # define NORETURN                    [[gnu::__noreturn__]]
