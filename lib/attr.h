@@ -28,11 +28,15 @@
 # define format_attr(type, fmt, va)
 #endif
 
-#if (__GNUC__ >= 10)
+#if __has_c_attribute(gnu::access)
 # define ATTR_ACCESS(...)            [[gnu::access(__VA_ARGS__)]]
-# define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
 #else
 # define ATTR_ACCESS(...)
+#endif
+
+#if (__GNUC__ >= 10)
+# define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
+#else
 # define ATTR_ALLOC_SIZE(...)
 #endif
 
