@@ -22,12 +22,16 @@
 # define NORETURN
 #endif
 
-#if (__GNUC__ >= 10)
+#if __has_c_attribute(gnu::format)
 # define format_attr(type, fmt, va)  [[gnu::format(type, fmt, va)]]
+#else
+# define format_attr(type, fmt, va)
+#endif
+
+#if (__GNUC__ >= 10)
 # define ATTR_ACCESS(...)            [[gnu::access(__VA_ARGS__)]]
 # define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
 #else
-# define format_attr(type, fmt, va)
 # define ATTR_ACCESS(...)
 # define ATTR_ALLOC_SIZE(...)
 #endif
