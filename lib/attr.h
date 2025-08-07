@@ -34,7 +34,7 @@
 # define ATTR_ACCESS(...)
 #endif
 
-#if (__GNUC__ >= 10)
+#if __has_c_attribute(gnu::alloc_size)
 # define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
 #else
 # define ATTR_ALLOC_SIZE(...)
