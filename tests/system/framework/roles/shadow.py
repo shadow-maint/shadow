@@ -142,3 +142,27 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
 
         return cmd
+
+    def newusers(self, *args, users_data: str | None = None) -> ProcessResult:
+        """
+        Update or create new users in batch.
+
+        Updates or creates multiple users by reading account information in passwd
+        format. If `users_data` is provided, it's passed via stdin and takes
+        precedence; otherwise, the command reads from a file specified in `args`.
+        """
+        if users_data:
+            cmd_args = " ".join(args)
+            self.logger.info(f"Creating users from stdin on {self.host.hostname}")
+            cmd = self.host.conn.run(f"echo '{users_data}' | newusers {cmd_args}", log_level=ProcessLogLevel.Error)
+        else:
+            args_dict = self._parse_args(args)
+            self.logger.info(f'Creating users from "{args_dict["name"]}" on {self.host.hostname}')
+            cmd = self.host.conn.run("newusers " + args[0], log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/passwd")
+        self.host.discard_file("/etc/shadow")
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
