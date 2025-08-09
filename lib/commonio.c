@@ -328,9 +328,8 @@ static void free_linked_list (struct commonio_db *db)
 
 		free (p->line);
 
-		if (NULL != p->eptr) {
-			db->ops->free (p->eptr);
-		}
+		if (NULL != p->eptr)
+			(db->ops->free)(p->eptr);
 
 		free (p);
 	}
@@ -638,7 +637,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (NULL == buf)
 		goto cleanup_errno;
 
-	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
+	while ((db->ops->fgets)(buf, buflen, db->fp) == buf) {
 		struct commonio_entry  *p;
 
 		while (   (strrchr (buf, '\n') == NULL)
@@ -651,11 +650,8 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_errno;
 
 			len = strlen (buf);
-			if (db->ops->fgets (buf + len,
-			                    (int) (buflen - len),
-			                    db->fp) == NULL) {
+			if ((db->ops->fgets)(buf + len, buflen - len, db->fp) == NULL)
 				goto cleanup_buf;
-			}
 		}
 		stpsep(buf, "\n");
 
@@ -702,9 +698,8 @@ int commonio_open (struct commonio_db *db, int mode)
 	return 1;
 
       cleanup_entry:
-	if (NULL != eptr) {
-		db->ops->free (eptr);
-	}
+	if (NULL != eptr)
+		(db->ops->free)(eptr);
       cleanup_line:
 	free (line);
       cleanup_buf:
@@ -873,9 +868,9 @@ static int write_all (const struct commonio_db *db)
 				return -1;
 			}
 		} else if (NULL != p->line) {
-			if (db->ops->fputs (p->line, db->fp) == EOF) {
+			if ((db->ops->fputs)(p->line, db->fp) == EOF)
 				return -1;
-			}
+
 			if (putc ('\n', db->fp) == EOF) {
 				return -1;
 			}
@@ -1062,10 +1057,10 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	if (NULL != p) {
 		if (next_entry_by_name (db, p->next, db->ops->getname (eptr)) != NULL) {
 			fprintf (shadow_logfd, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->getname (eptr), db->filename);
-			db->ops->free (nentry);
+			(db->ops->free)(nentry);
 			return 0;
 		}
-		db->ops->free (p->eptr);
+		(db->ops->free)(p->eptr);
 		p->eptr = nentry;
 		p->changed = true;
 		db->cursor = p;
@@ -1076,7 +1071,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	/* not found, new entry */
 	p = MALLOC(1, struct commonio_entry);
 	if (NULL == p) {
-		db->ops->free (nentry);
+		(db->ops->free)(nentry);
 		errno = ENOMEM;
 		return 0;
 	}
@@ -1113,7 +1108,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 	/* new entry */
 	p = MALLOC(1, struct commonio_entry);
 	if (NULL == p) {
-		db->ops->free (nentry);
+		(db->ops->free)(nentry);
 		errno = ENOMEM;
 		return 0;
 	}
@@ -1174,9 +1169,8 @@ int commonio_remove (struct commonio_db *db, const char *name)
 
 	free (p->line);
 
-	if (NULL != p->eptr) {
-		db->ops->free (p->eptr);
-	}
+	if (NULL != p->eptr)
+		(db->ops->free)(p->eptr);
 
 	free(p);
 
