@@ -245,11 +245,8 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	const struct stat *sb)
 {
 	FILE *fp;
-	mode_t mask;
 
-	mask = umask (0777);
 	fp = fopen (name, mode);
-	(void) umask (mask);
 	if (NULL == fp) {
 		return NULL;
 	}
@@ -257,9 +254,8 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 	if (fchown (fileno (fp), sb->st_uid, sb->st_gid) != 0) {
 		goto fail;
 	}
-	if (fchmod (fileno (fp), sb->st_mode & 0664) != 0) {
+	if (fchmod(fileno (fp), sb->st_mode & 0664) != 0)
 		goto fail;
-	}
 
 	return fp;
 
