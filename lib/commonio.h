@@ -12,6 +12,10 @@
 #define COMMONIO_H
 
 
+#include <config.h>
+
+#include <stdio.h>
+
 #include "attr.h"
 #include "defines.h" /* bool */
 
@@ -64,10 +68,8 @@ struct commonio_ops {
 	 * fgets and fputs (can be replaced by versions that
 	 * understand line continuation conventions).
 	 */
-	ATTR_ACCESS(write_only, 1, 2)
-	/*@null@*/char *(*cio_fgets)(/*@returned@*/char *restrict s, int n,
-	                         FILE *restrict stream);
-	int (*cio_fputs)(const char *, FILE *);
+	ATTR_COPY(fgets) typeof(fgets)  *cio_fgets;
+	ATTR_COPY(fputs) typeof(fputs)  *cio_fputs;
 
 	/*
 	 * open_hook and close_hook.
