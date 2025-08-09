@@ -32,12 +32,12 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowlog.h"
+#include "sizeof.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stpeprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
-#include "string/strtok/stpsep.h"
 
 
 /*
@@ -48,7 +48,7 @@ static char fullnm[BUFSIZ];
 static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
 static char homeph[BUFSIZ];
-static char slop[BUFSIZ + 1 + 80];
+static char slop[BUFSIZ];
 static bool amroot;
 /* Flags */
 static bool fflg = false;		/* -f - set full name                */
@@ -67,7 +67,6 @@ NORETURN static void fail_exit (int code);
 NORETURN static void usage (int status);
 static bool may_change_field (int);
 static void new_fields (void);
-static char *copy_field (char *, char *, char *);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_gecos (const char *user, char *gecos);
@@ -204,45 +203,6 @@ static void new_fields (void)
 	if (amroot) {
 		change_field (slop, sizeof slop, _("Other"));
 	}
-}
-
-/*
- * copy_field - get the next field from the gecos field
- *
- * copy_field copies the next field from the gecos field, returning a
- * pointer to the field which follows, or NULL if there are no more fields.
- *
- *	in - the current GECOS field
- *	out - where to copy the field to
- *	extra - fields with '=' get copied here
- */
-static char *copy_field (char *in, char *out, char *extra)
-{
-	char  *next = NULL;
-
-	while (NULL != in) {
-		const char  *f;
-
-		f = in;
-		next = stpsep(in, ",");
-
-		if (strchr(f, '=') == NULL)
-			break;
-
-		if (NULL != extra) {
-			if (!streq(extra, "")) {
-				strcat (extra, ",");
-			}
-
-			strcat(extra, f);
-		}
-		in = next;
-	}
-	if ((NULL != in) && (NULL != out)) {
-		strcpy (out, in);
-	}
-
-	return next;
 }
 
 /*
@@ -512,49 +472,32 @@ static void update_gecos (const char *user, char *gecos)
  */
 static void get_old_fields (const char *gecos)
 {
-	char *cp;		/* temporary character pointer       */
-	char old_gecos[BUFSIZ];	/* buffer for old GECOS fields       */
+	char        *p;
+	char        old_gecos[BUFSIZ];
+	const char  *f;
 
 	STRTCPY(old_gecos, gecos);
+	p = old_gecos;
 
-	/*
-	 * Now get the full name. It is the first comma separated field in
-	 * the GECOS field.
-	 */
-	cp = copy_field (old_gecos, fflg ? NULL : fullnm, slop);
+	f = strsep(&p, ",");
+	if (!fflg)
+		strcpy(fullnm, f ?: "");
 
-	/*
-	 * Now get the room number. It is the next comma separated field,
-	 * if there is indeed one.
-	 */
-	if (NULL != cp) {
-		cp = copy_field (cp, rflg ? NULL : roomno, slop);
-	}
+	f = strsep(&p, ",");
+	if (!rflg)
+		strcpy(roomno, f ?: "");
 
-	/*
-	 * Now get the work phone number. It is the third field.
-	 */
-	if (NULL != cp) {
-		cp = copy_field (cp, wflg ? NULL : workph, slop);
-	}
+	f = strsep(&p, ",");
+	if (!wflg)
+		strcpy(workph, f ?: "");
 
-	/*
-	 * Now get the home phone number. It is the fourth field.
-	 */
-	if (NULL != cp) {
-		cp = copy_field (cp, hflg ? NULL : homeph, slop);
-	}
+	f = strsep(&p, ",");
+	if (!hflg)
+		strcpy(homeph, f ?: "");
 
-	/*
-	 * Anything left over is "slop".
-	 */
-	if ((NULL != cp) && !oflg) {
-		if (!streq(slop, "")) {
-			strcat (slop, ",");
-		}
-
-		strcat (slop, cp);
-	}
+	/* Anything left over is "slop".  */
+	if (!oflg)
+		strcpy(slop, p ?: "");
 }
 
 /*
@@ -619,8 +562,8 @@ static void check_fields (void)
  */
 int main (int argc, char **argv)
 {
-	char                 new_gecos[BUFSIZ];
-	char                 *user;
+	char                 new_gecos[80];
+	char                 *user, *p, *e;
 	const struct passwd  *pw;
 
 	sanitize_env ();
@@ -697,18 +640,20 @@ int main (int argc, char **argv)
 	 */
 	check_fields ();
 
-	/*
-	 * Build the new GECOS field by plastering all the pieces together,
-	 * if they will fit ...
-	 */
-	if ((strlen (fullnm) + strlen (roomno) + strlen (workph) +
-	     strlen (homeph) + strlen (slop)) > (unsigned int) 80) {
+	/* Build the new GECOS field by plastering all the pieces together.  */
+	p = new_gecos;
+	e = new_gecos + countof(new_gecos);
+	p = stpeprintf(p, e, "%s", fullnm);
+	p = stpeprintf(p, e, ",%s", roomno);
+	p = stpeprintf(p, e, ",%s", workph);
+	p = stpeprintf(p, e, ",%s", homeph);
+	if (!streq(slop, ""))
+		p = stpeprintf(p, e, ",%s", slop);
+
+	if (p == e || p == NULL) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		fail_exit (E_NOPERM);
 	}
-	SNPRINTF(new_gecos, "%s,%s,%s,%s%s%s",
-	         fullnm, roomno, workph, homeph,
-	         (!streq(slop, "")) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);
