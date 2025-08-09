@@ -328,9 +328,8 @@ static void free_linked_list (struct commonio_db *db)
 
 		free (p->line);
 
-		if (NULL != p->eptr) {
-			db->ops->free (p->eptr);
-		}
+		if (NULL != p->eptr)
+			db->ops->cio_free(p->eptr);
 
 		free (p);
 	}
@@ -548,7 +547,7 @@ static void add_one_entry_nis (struct commonio_db *db,
 	struct commonio_entry *p;
 
 	for (p = db->head; NULL != p; p = p->next) {
-		if (name_is_nis (p->eptr ? db->ops->getname (p->eptr)
+		if (name_is_nis (p->eptr ? db->ops->cio_getname(p->eptr)
 		                         : p->line)) {
 			/*@-mustfreeonly@*/
 			newp->next = p;
@@ -638,7 +637,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (NULL == buf)
 		goto cleanup_errno;
 
-	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
+	while (db->ops->cio_fgets(buf, buflen, db->fp) == buf) {
 		struct commonio_entry  *p;
 
 		while (   (strrchr (buf, '\n') == NULL)
@@ -651,11 +650,8 @@ int commonio_open (struct commonio_db *db, int mode)
 				goto cleanup_errno;
 
 			len = strlen (buf);
-			if (db->ops->fgets (buf + len,
-			                    (int) (buflen - len),
-			                    db->fp) == NULL) {
+			if (db->ops->cio_fgets(buf + len, buflen - len, db->fp) == NULL)
 				goto cleanup_buf;
-			}
 		}
 		stpsep(buf, "\n");
 
@@ -667,9 +663,9 @@ int commonio_open (struct commonio_db *db, int mode)
 		if (name_is_nis (line)) {
 			eptr = NULL;
 		} else {
-			eptr = db->ops->parse (line);
+			eptr = db->ops->cio_parse(line);
 			if (NULL != eptr) {
-				eptr = db->ops->dup (eptr);
+				eptr = db->ops->cio_dup(eptr);
 				if (NULL == eptr) {
 					goto cleanup_line;
 				}
@@ -694,7 +690,7 @@ int commonio_open (struct commonio_db *db, int mode)
 		goto cleanup_errno;
 	}
 
-	if ((NULL != db->ops->open_hook) && (db->ops->open_hook () == 0)) {
+	if ((NULL != db->ops->cio_open_hook) && (db->ops->cio_open_hook() == 0)) {
 		goto cleanup_errno;
 	}
 
@@ -702,9 +698,8 @@ int commonio_open (struct commonio_db *db, int mode)
 	return 1;
 
       cleanup_entry:
-	if (NULL != eptr) {
-		db->ops->free (eptr);
-	}
+	if (NULL != eptr)
+		db->ops->cio_free(eptr);
       cleanup_line:
 	free (line);
       cleanup_buf:
@@ -820,14 +815,14 @@ int commonio_sort_wrt (struct commonio_db *shadow,
 		if (NULL == pw_ptr->eptr) {
 			continue;
 		}
-		name = passwd->ops->getname (pw_ptr->eptr);
+		name = passwd->ops->cio_getname(pw_ptr->eptr);
 		for (spw_ptr = shadow->head;
 		     NULL != spw_ptr;
 		     spw_ptr = spw_ptr->next) {
 			if (NULL == spw_ptr->eptr) {
 				continue;
 			}
-			if (streq(name, shadow->ops->getname(spw_ptr->eptr)))
+			if (streq(name, shadow->ops->cio_getname(spw_ptr->eptr)))
 				break;
 		}
 		if (NULL == spw_ptr) {
@@ -869,13 +864,13 @@ static int write_all (const struct commonio_db *db)
 		if (p->changed) {
 			eptr = p->eptr;
 			assert (NULL != eptr);
-			if (db->ops->put (eptr, db->fp) != 0) {
+			if (db->ops->cio_put(eptr, db->fp) != 0) {
 				return -1;
 			}
 		} else if (NULL != p->line) {
-			if (db->ops->fputs (p->line, db->fp) == EOF) {
+			if (db->ops->cio_fputs(p->line, db->fp) == EOF)
 				return -1;
-			}
+
 			if (putc ('\n', db->fp) == EOF) {
 				return -1;
 			}
@@ -905,7 +900,7 @@ int commonio_close (struct commonio_db *db, bool process_selinux)
 		goto success;
 	}
 
-	if ((NULL != db->ops->close_hook) && (db->ops->close_hook () == 0)) {
+	if ((NULL != db->ops->cio_close_hook) && (db->ops->cio_close_hook() == 0)) {
 		goto fail;
 	}
 
@@ -1033,7 +1028,7 @@ static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
 	for (p = pos; NULL != p; p = p->next) {
 		ep = p->eptr;
 		if (   (NULL != ep)
-		    && streq(db->ops->getname(ep), name)) {
+		    && streq(db->ops->cio_getname(ep), name)) {
 			break;
 		}
 	}
@@ -1057,19 +1052,19 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 		errno = EINVAL;
 		return 0;
 	}
-	nentry = db->ops->dup (eptr);
+	nentry = db->ops->cio_dup(eptr);
 	if (NULL == nentry) {
 		errno = ENOMEM;
 		return 0;
 	}
-	p = find_entry_by_name (db, db->ops->getname (eptr));
+	p = find_entry_by_name(db, db->ops->cio_getname(eptr));
 	if (NULL != p) {
-		if (next_entry_by_name (db, p->next, db->ops->getname (eptr)) != NULL) {
-			fprintf (shadow_logfd, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->getname (eptr), db->filename);
-			db->ops->free (nentry);
+		if (next_entry_by_name(db, p->next, db->ops->cio_getname(eptr)) != NULL) {
+			fprintf(shadow_logfd, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->cio_getname(eptr), db->filename);
+			db->ops->cio_free(nentry);
 			return 0;
 		}
-		db->ops->free (p->eptr);
+		db->ops->cio_free(p->eptr);
 		p->eptr = nentry;
 		p->changed = true;
 		db->cursor = p;
@@ -1080,7 +1075,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	/* not found, new entry */
 	p = MALLOC(1, struct commonio_entry);
 	if (NULL == p) {
-		db->ops->free (nentry);
+		db->ops->cio_free(nentry);
 		errno = ENOMEM;
 		return 0;
 	}
@@ -1109,7 +1104,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 		errno = EINVAL;
 		return 0;
 	}
-	nentry = db->ops->dup (eptr);
+	nentry = db->ops->cio_dup(eptr);
 	if (NULL == nentry) {
 		errno = ENOMEM;
 		return 0;
@@ -1117,7 +1112,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 	/* new entry */
 	p = MALLOC(1, struct commonio_entry);
 	if (NULL == p) {
-		db->ops->free (nentry);
+		db->ops->cio_free(nentry);
 		errno = ENOMEM;
 		return 0;
 	}
@@ -1178,9 +1173,8 @@ int commonio_remove (struct commonio_db *db, const char *name)
 
 	free (p->line);
 
-	if (NULL != p->eptr) {
-		db->ops->free (p->eptr);
-	}
+	if (NULL != p->eptr)
+		db->ops->cio_free(p->eptr);
 
 	free(p);
 
