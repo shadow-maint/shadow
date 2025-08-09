@@ -40,6 +40,12 @@
 # define ATTR_ALLOC_SIZE(...)
 #endif
 
+#if __has_c_attribute(gnu::copy)
+# define ATTR_COPY(x)            [[gnu::copy(x)]]
+#else
+# define ATTR_COPY(x)
+#endif
+
 #if (__GNUC__ >= 11) && !defined(__clang__)
 # define ATTR_MALLOC(deallocator)    [[gnu::malloc(deallocator)]]
 #else
