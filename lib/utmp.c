@@ -150,8 +150,8 @@ static /*@null@*/ /*@only@*/struct utmpx *
 get_current_utmp(pid_t main_pid)
 {
 	struct utmpx  *ut;
-	struct utmpx  *ut_by_pid  = NULL;
-	struct utmpx  *ut_by_line = NULL;
+	struct utmpx  *ut_copy = NULL;
+	bool          ut_copy_is_by_line_only = false;
 
 	setutxent();
 
@@ -162,38 +162,34 @@ get_current_utmp(pid_t main_pid)
 			continue;
 
 		if (main_pid == ut->ut_pid) {
-			if (is_my_tty(ut->ut_line))
+			bool has_tty_match;
+
+			has_tty_match = is_my_tty(ut->ut_line);
+
+			if (NULL == ut_copy) {
+				ut_copy = XMALLOC(1, struct utmpx);
+				memcpy(ut_copy, ut, sizeof(*ut));
+			} else if (   has_tty_match
+			           || ut_copy_is_by_line_only)
+				memcpy(ut_copy, ut, sizeof(*ut));
+
+			if (has_tty_match)
 				break; /* Perfect match, stop the search */
 
-			if (NULL == ut_by_pid) {
-				ut_by_pid = XMALLOC(1, struct utmpx);
-				memcpy(ut_by_pid, ut, sizeof(*ut));
-			}
+			ut_copy_is_by_line_only = false; /* Match by PID */
 
-		} else if (   (NULL == ut_by_line)
+		} else if (   (NULL == ut_copy)
 			   && (LOGIN_PROCESS == ut->ut_type) /* Be more picky when matching by 'ut_line' only */
 			   && (is_my_tty(ut->ut_line))) {
-			ut_by_line = XMALLOC(1, struct utmpx);
-			memcpy(ut_by_line, ut, sizeof(*ut));
+			ut_copy = XMALLOC(1, struct utmpx);
+			memcpy(ut_copy, ut, sizeof(*ut));
+			ut_copy_is_by_line_only = true;
 		}
 	}
 
-	if (NULL == ut)
-		ut = ut_by_pid ?: ut_by_line;
-
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
-
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
-	}
-
-	free (ut_by_line);
-	free (ut_by_pid);
 	endutxent();
 
-	return ut;
+	return ut_copy;
 }
 
 
