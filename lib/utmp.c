@@ -165,13 +165,16 @@ get_current_utmp(pid_t main_pid)
 			if (is_my_tty(ut->ut_line))
 				break; /* Perfect match, stop the search */
 
-			if (NULL == ut_by_pid)
-				ut_by_pid = ut;
+			if (NULL == ut_by_pid) {
+				ut_by_pid = XMALLOC(1, struct utmpx);
+				*ut_by_pid = *ut;
+			}
 
 		} else if (   (NULL == ut_by_line)
 			   && (LOGIN_PROCESS == ut->ut_type) /* Be more picky when matching by 'ut_line' only */
 			   && (is_my_tty(ut->ut_line))) {
-			ut_by_line = ut;
+			ut_by_line = XMALLOC(1, struct utmpx);
+			*ut_by_line = *ut;
 		}
 	}
 
@@ -186,6 +189,8 @@ get_current_utmp(pid_t main_pid)
 		ut = ut_copy;
 	}
 
+	free(ut_by_line);
+	free(ut_by_pid);
 	endutxent();
 
 	return ut;
