@@ -26,6 +26,7 @@
 
 #include "alloc/x/xcalloc.h"
 #include "alloc/x/xmalloc.h"
+#include "attr.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
 #include "string/strcmp/streq.h"
@@ -146,6 +147,7 @@ err_close:
  *	Return NULL if no entries exist in utmp for the current process or
  *	            there is an error reading utmp.
  */
+ATTR_MALLOC(free)
 static /*@null@*/ /*@only@*/struct utmpx *
 get_current_utmp(pid_t main_pid)
 {
