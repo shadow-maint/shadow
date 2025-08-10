@@ -150,6 +150,7 @@ static /*@null@*/ /*@only@*/struct utmpx *
 get_current_utmp(pid_t main_pid)
 {
 	struct utmpx  *ut;
+	struct utmpx  *ut_copy    = NULL;
 	struct utmpx  *ut_by_pid  = NULL;
 	struct utmpx  *ut_by_line = NULL;
 
@@ -162,8 +163,11 @@ get_current_utmp(pid_t main_pid)
 			continue;
 
 		if (main_pid == ut->ut_pid) {
-			if (is_my_tty(ut->ut_line))
+			if (is_my_tty(ut->ut_line)) {
+				ut_copy = XMALLOC(1, struct utmpx);
+				memcpy(ut_copy, ut, sizeof(*ut));
 				break; /* Perfect match, stop the search */
+			}
 
 			if (NULL == ut_by_pid) {
 				ut_by_pid = XMALLOC(1, struct utmpx);
@@ -178,22 +182,17 @@ get_current_utmp(pid_t main_pid)
 		}
 	}
 
-	if (NULL == ut)
-		ut = ut_by_pid ?: ut_by_line;
+	if (NULL == ut_copy)
+		ut_copy = ut_by_pid ?: ut_by_line;
 
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
+	if (ut_copy != ut_by_line)
+		free(ut_by_line);
+	if (ut_copy != ut_by_pid)
+		free(ut_by_pid);
 
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
-	}
-
-	free(ut_by_line);
-	free(ut_by_pid);
 	endutxent();
 
-	return ut;
+	return ut_copy;
 }
 
 
