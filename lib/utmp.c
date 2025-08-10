@@ -203,7 +203,6 @@ get_session_host(char **out, pid_t main_pid)
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && (ut->ut_host[0] != '\0')) {
 		*out = XSTRNDUP(ut->ut_host);
-		free (ut);
 	} else {
 		*out = NULL;
 		ret = -2;
@@ -212,6 +211,7 @@ get_session_host(char **out, pid_t main_pid)
 	*out = NULL;
 	ret = -2;
 #endif
+	free(ut);
 
 	return ret;
 }
