@@ -14,14 +14,14 @@
 
 
 inline long date_or_SDE(void);
-time_t gettime(void);
+time_t time_or_SDE(void);
 
 
 // Like time_or_SDE(), but return a date, not a time.
 inline long
 date_or_SDE(void)
 {
-	return gettime() / DAY;
+	return time_or_SDE() / DAY;
 }
 
 
