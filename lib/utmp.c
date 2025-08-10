@@ -3,7 +3,6 @@
  * SPDX-FileCopyrightText: 1996 - 1999, Marek Michałkiewicz
  * SPDX-FileCopyrightText: 2001 - 2005, Tomasz Kłoczko
  * SPDX-FileCopyrightText: 2008 - 2009, Nicolas François
- * SPDX-FileCopyrightText: 2025, Evgeny Grin (Karlson2k)
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -139,19 +138,20 @@ err_close:
  * get_current_utmp - return the most probable utmp entry for the current
  *                    session
  *
- *	When an entry is returned by this function, and if the utmpx structure
- *	has a ut_id field and this field is not empty, then this field
- *	should be used to update the entry information.
+ *	The utmp file is scanned for an entry with the same process ID.
+ *	The line entered by the *getty / telnetd, etc. should also match
+ *	the current terminal.
  *
- *	Return NULL if no entries exist in utmp for the current process or
- *	            there is an error reading utmp.
+ *	When an entry is returned by get_current_utmp, and if the utmpx
+ *	structure has a ut_id field, this field should be used to update
+ *	the entry information.
+ *
+ *	Return NULL if no entries exist in utmp for the current process.
  */
 static /*@null@*/ /*@only@*/struct utmpx *
 get_current_utmp(pid_t main_pid)
 {
 	struct utmpx  *ut;
-	struct utmpx  *ut_by_pid  = NULL;
-	struct utmpx  *ut_by_line = NULL;
 
 	setutxent();
 
@@ -161,22 +161,15 @@ get_current_utmp(pid_t main_pid)
 		    && (USER_PROCESS  != ut->ut_type))
 			continue;
 
-		if (main_pid == ut->ut_pid) {
-			if (is_my_tty(ut->ut_line))
-				break; /* Perfect match, stop the search */
-
-			if (NULL == ut_by_pid)
-				ut_by_pid = ut;
-
-		} else if (   (NULL == ut_by_line)
-			   && (LOGIN_PROCESS == ut->ut_type) /* Be more picky when matching by 'ut_line' only */
-			   && (is_my_tty(ut->ut_line))) {
-			ut_by_line = ut;
+		if (   (main_pid == ut->ut_pid)
+		    && ('\0' != ut->ut_id[0])
+		    /* A process may have failed to close an entry
+		     * Check if this entry refers to the current tty */
+		    && is_my_tty(ut->ut_line))
+		{
+			break;
 		}
 	}
-
-	if (NULL == ut)
-		ut = ut_by_pid ?: ut_by_line;
 
 	if (NULL != ut) {
 		struct utmpx  *ut_copy;
@@ -243,8 +236,7 @@ updwtmpx(const char *filename, const struct utmpx *ut)
  *	It accepts an utmp entry in input (ut) to return an entry with
  *	the right ut_id. This is typically an entry returned by
  *	get_current_utmp
- *	If ut is NULL or ut->ut_id is empty, ut_id will be forged based on
- *	the line argument.
+ *	If ut is NULL, ut_id will be forged based on the line argument.
  *
  *	The ut_host field of the input structure may also be kept, and is
  *	used to define the ut_addr/ut_addr_v6 fields. (if these fields
@@ -283,8 +275,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	utent->ut_type = USER_PROCESS;
 	utent->ut_pid = main_pid;
 	STRNCPY(utent->ut_line, line);
-	if (   (NULL != ut)
-	    && ('\0' != ut->ut_id[0])) {
+	if (NULL != ut) {
 		STRNCPY(utent->ut_id, ut->ut_id);
 	} else {
 		STRNCPY(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
