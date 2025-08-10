@@ -155,7 +155,6 @@ get_current_utmp(pid_t main_pid)
 
 	setutxent();
 
-	/* First, try to find a valid utmp entry for this process.  */
 	while (NULL != (ut = getutxent())) {
 		if (   (LOGIN_PROCESS != ut->ut_type)
 		    && (USER_PROCESS  != ut->ut_type))
