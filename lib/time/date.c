@@ -21,31 +21,26 @@
 extern inline long date_or_SDE(void);
 
 
-/*
- * gettime() returns the time as the number of seconds since the Epoch
- *
- * Like time(), gettime() returns the time as the number of seconds since the
- * Epoch, 1970-01-01 00:00:00 +0000 (UTC), except that if the SOURCE_DATE_EPOCH
- * environment variable is exported it will use that instead.
- */
-/*@observer@*/time_t
-gettime(void)
+// time(2) or SOURCE_DATE_EPOCH
+time_t
+time_or_SDE(void)
 {
-	char    *source_date_epoch;
+	char    *env;
 	FILE    *shadow_logfd = log_get_logfd();
-	time_t  fallback, epoch;
+	time_t  t, sde;
 
-	fallback = time (NULL);
-	source_date_epoch = shadow_getenv ("SOURCE_DATE_EPOCH");
+	t = time(NULL);
 
-	if (!source_date_epoch)
-		return fallback;
+	env = shadow_getenv("SOURCE_DATE_EPOCH");
+	if (env == NULL)
+		return t;
 
-	if (a2i(time_t, &epoch, source_date_epoch, NULL, 10, 0, fallback) == -1) {
+	if (a2i(time_t, &sde, env, NULL, 10, 0, t) == -1) {
 		fprintf(shadow_logfd,
 		        _("Environment variable $SOURCE_DATE_EPOCH: a2i(\"%s\"): %s"),
-		        source_date_epoch, strerrno());
-		return fallback;
+		        env, strerrno());
+		return t;
 	}
-	return epoch;
+
+	return sde;
 }
