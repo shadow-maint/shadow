@@ -186,11 +186,11 @@ get_current_utmp(pid_t main_pid)
 		ut = ut_by_pid ?: ut_by_line;
 
 	if (NULL != ut) {
-		struct utmpx  *ut_copy;
+		struct utmpx  *dup;
 
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
+		dup = XMALLOC(1, struct utmpx);
+		memcpy(dup, ut, sizeof(*ut));
+		ut = dup;
 	}
 
 	free(ut_by_line);
