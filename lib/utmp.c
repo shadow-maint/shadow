@@ -195,11 +195,9 @@ get_current_utmp(pid_t main_pid)
 		}
 	}
 
-	ut = match ? MEMDUP(&ut_copy, struct utmpx) : NULL;
-
 	endutxent();
 
-	return ut;
+	return match ? MEMDUP(&ut_copy, struct utmpx) : NULL;
 }
 
 
