@@ -172,11 +172,13 @@ get_current_utmp(pid_t main_pid)
 				*ut_by_pid = *ut;
 			}
 
-		} else if (   (NULL == ut_by_line)
-			   && (LOGIN_PROCESS == ut->ut_type) /* Be more picky when matching by 'ut_line' only */
-			   && (is_my_tty(ut->ut_line))) {
-			ut_by_line = xmalloc_T(1, struct utmpx);
-			*ut_by_line = *ut;
+		} else if (   LOGIN_PROCESS == ut->ut_type /* Be more picky when matching by 'ut_line' only */
+			   && is_my_tty(ut->ut_line))
+		{
+			if (NULL == ut_by_line) {
+				ut_by_line = xmalloc_T(1, struct utmpx);
+				*ut_by_line = *ut;
+			}
 		}
 	}
 
