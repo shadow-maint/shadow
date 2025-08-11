@@ -158,9 +158,8 @@ get_current_utmp(pid_t main_pid)
 		UT_MATCH_BY_PID_AND_LINE
 	};
 
+	struct utmpx   ut_copy;
 	struct utmpx   *ut;
-	struct utmpx   *ut_by_pid  = NULL;
-	struct utmpx   *ut_by_line = NULL;
 	enum ut_match  match;
 
 	setutxent();
@@ -175,13 +174,13 @@ get_current_utmp(pid_t main_pid)
 		if (main_pid == ut->ut_pid) {
 			if (is_my_tty(ut->ut_line)) {
 				match = UT_MATCH_BY_PID_AND_LINE;
+				ut_copy = *ut;
 				break;
 			}
 
 			if (match < UT_MATCH_BY_PID) {
 				match = UT_MATCH_BY_PID;
-				ut_by_pid = xmalloc_T(1, struct utmpx);
-				*ut_by_pid = *ut;
+				ut_copy = *ut;
 			}
 
 		} else if (   LOGIN_PROCESS == ut->ut_type /* Be more picky when matching by 'ut_line' only */
@@ -189,20 +188,13 @@ get_current_utmp(pid_t main_pid)
 		{
 			if (match < UT_MATCH_BY_LINE) {
 				match = UT_MATCH_BY_LINE;
-				ut_by_line = xmalloc_T(1, struct utmpx);
-				*ut_by_line = *ut;
+				ut_copy = *ut;
 			}
 		}
 	}
 
-	if (NULL == ut)
-		ut = ut_by_pid ?: ut_by_line;
+	ut = match ? memdup_T(&ut_copy, struct utmpx) : NULL;
 
-	if (NULL != ut)
-		ut = memdup_T(ut, struct utmpx);
-
-	free(ut_by_line);
-	free(ut_by_pid);
 	endutxent();
 
 	return ut;
