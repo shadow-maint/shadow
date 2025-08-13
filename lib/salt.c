@@ -27,6 +27,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "string/strcpy/strtcat.h"
 
 
 #if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
@@ -443,12 +444,8 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	return retval;
 #else /* USE_XCRYPT_GENSALT */
-	/* Check if the result buffer is long enough. */
-	assert (GENSALT_SETTING_SIZE > strlen (result) + salt_len);
 
-	/* Concatenate a pseudo random salt. */
-	strncat (result, gensalt (salt_len),
-		 GENSALT_SETTING_SIZE - strlen (result) - 1);
+	assert(STRTCAT(result, gensalt(salt_len)) != -1);
 
 	return result;
 #endif /* USE_XCRYPT_GENSALT */
