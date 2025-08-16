@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include "getdef.h"
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 
 #ident "$Id$"
 

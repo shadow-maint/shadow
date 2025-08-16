@@ -25,8 +25,8 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "alloc/x/xcalloc.h"
-#include "alloc/x/xmalloc.h"
+#include "alloc/calloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
@@ -34,8 +34,8 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
-#include "string/strdup/xstrndup.h"
+#include "string/strdup/strdup.h"
+#include "string/strdup/strndup.h"
 
 #ident "$Id$"
 
