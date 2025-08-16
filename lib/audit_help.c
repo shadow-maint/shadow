@@ -66,12 +66,11 @@ void audit_logger (int type, MAYBE_UNUSED const char *pgname, const char *op,
                    const char *name, unsigned int id,
                    shadow_audit_result result)
 {
-	if (audit_fd < 0) {
+	if (audit_fd < 0)
 		return;
-	} else {
-		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-		                        NULL, NULL, NULL, result);
-	}
+
+	audit_log_acct_message(audit_fd, type, NULL, op, name, id,
+	                       NULL, NULL, NULL, result);
 }
 
 /*
@@ -96,20 +95,12 @@ audit_logger_with_group(int type, const char *op, const char *name,
     id_t id, const char *grp_type, const char *grp,
     shadow_audit_result result)
 {
-	int len;
-	char enc_group[GROUP_NAME_MAX_LENGTH * 2 + 1];
-	char buf[countof(enc_group) + 100];
+	char  buf[GROUP_NAME_MAX_LENGTH + 100];
 
 	if (audit_fd < 0)
 		return;
 
-	len = strnlen(grp, sizeof(enc_group)/2);
-	if (audit_value_needs_encoding(grp, len)) {
-		SNPRINTF(buf, "%s %s=%s", op, grp_type,
-			audit_encode_value(enc_group, grp, len));
-	} else {
-		SNPRINTF(buf, "%s %s=\"%s\"", op, grp_type, grp);
-	}
+	SNPRINTF(buf, "%s %s=\"%s\"", op, grp_type, grp);
 
 	audit_log_acct_message(audit_fd, type, NULL, buf, name, id,
 		               NULL, NULL, NULL, result);
@@ -117,20 +108,18 @@ audit_logger_with_group(int type, const char *op, const char *name,
 
 void audit_logger_message (const char *message, shadow_audit_result result)
 {
-	if (audit_fd < 0) {
+	if (audit_fd < 0)
 		return;
-	} else {
-		audit_log_user_message (audit_fd,
-		                        AUDIT_USYS_CONFIG,
-		                        message,
-		                        NULL, /* hostname */
-		                        NULL, /* addr */
-		                        NULL, /* tty */
-		                        result);
-	}
+
+	audit_log_user_message (audit_fd,
+	                        AUDIT_USYS_CONFIG,
+	                        message,
+	                        NULL, /* hostname */
+	                        NULL, /* addr */
+	                        NULL, /* tty */
+	                        result);
 }
 
 #else				/* WITH_AUDIT */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* WITH_AUDIT */
-
