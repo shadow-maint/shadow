@@ -18,6 +18,7 @@
 /*@-exitarg@*/
 #include "exitcodes.h"
 #include "groupio.h"
+#include "io/fprintf/fprinte.h"
 #include "pwio.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
@@ -89,11 +90,12 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 
 	if (prefix != NULL) {
 		/* Drop privileges */
-		if (   (setregid (getgid (), getgid ()) != 0)
-		    || (setreuid (getuid (), getuid ()) != 0)) {
-			fprintf (log_get_logfd(),
-			         _("%s: failed to drop privileges (%s)\n"),
-			         log_get_progname(), strerror (errno));
+		if (setregid(getgid(), getgid()) == -1) {
+			fprinte(log_get_logfd(), "%s: setregid", log_get_progname());
+			exit (EXIT_FAILURE);
+		}
+		if (setreuid(getuid(), getuid()) == -1) {
+			fprinte(log_get_logfd(), "%s: setreuid", log_get_progname());
 			exit (EXIT_FAILURE);
 		}
 
