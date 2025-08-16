@@ -20,6 +20,7 @@
 #include "commonio.h"
 #include "defines.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "shadowlog.h"
@@ -93,8 +94,8 @@ static void fail_exit (int status)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
@@ -102,8 +103,8 @@ static void fail_exit (int status)
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 	}
@@ -214,7 +215,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (sort_mode && read_only) {
-		fprintf (stderr, _("%s: -s and -r are incompatible\n"), Prog);
+		eprintf(_("%s: -s and -r are incompatible\n"), Prog);
 		exit (E_USAGE);
 	}
 
@@ -264,8 +265,7 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (gr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_LOCK);
 		}
@@ -273,8 +273,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 		if (is_shadow) {
 			if (sgr_lock () == 0) {
-				fprintf (stderr,
-				         _("%s: cannot lock %s; try again later.\n"),
+				eprintf(_("%s: cannot lock %s; try again later.\n"),
 				         Prog, sgr_file);
 				fail_exit (E_CANT_LOCK);
 			}
@@ -288,19 +287,17 @@ static void open_files (void)
 	 * O_RDWR otherwise.
 	 */
 	if (gr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
-		         grp_file);
+		eprintf(_("%s: cannot open %s\n"), Prog, grp_file);
 		if (use_system_grp_file) {
-			SYSLOG ((LOG_WARN, "cannot open %s", grp_file));
+			SYSLOG(LOG_WARN, "cannot open %s", grp_file);
 		}
 		fail_exit (E_CANT_OPEN);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_CREAT | O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
-		         sgr_file);
+		eprintf(_("%s: cannot open %s\n"), Prog, sgr_file);
 		if (use_system_sgr_file) {
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_file));
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_file);
 		}
 		fail_exit (E_CANT_OPEN);
 	}
@@ -322,13 +319,13 @@ static void close_files (bool changed)
 	 */
 	if (changed) {
 		if (gr_close () == 0) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
 			fail_exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_close () == 0)) {
-			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
 			fail_exit (E_CANT_UPDATE);
 		}
@@ -341,8 +338,8 @@ static void close_files (bool changed)
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 		sgr_locked = false;
@@ -350,8 +347,8 @@ static void close_files (bool changed)
 #endif
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 		gr_locked = false;
@@ -407,7 +404,7 @@ static int check_members (const char *groupname,
 			continue;
 		}
 
-		SYSLOG ((LOG_INFO, fmt_syslog, members[i], groupname));
+		SYSLOG(LOG_INFO, fmt_syslog, members[i], groupname);
 		members_changed = 1;
 		delete_member (members, members[i]);
 
@@ -504,8 +501,7 @@ static void check_grp_file (bool *errors, bool *changed)
 			 * to try out the next list element.
 			 */
 		      delete_gr:
-			SYSLOG ((LOG_INFO, "delete group line '%s'",
-			         gre->line));
+			SYSLOG(LOG_INFO, "delete group line '%s'", gre->line);
 			*changed = true;
 
 			__gr_del_entry (gre);
@@ -618,14 +614,12 @@ static void check_grp_file (bool *errors, bool *changed)
 					sg.sg_passwd = grp->gr_passwd;
 					sg.sg_adm = &empty;
 					sg.sg_mem = grp->gr_mem;
-					SYSLOG ((LOG_INFO,
-					         "add group '%s' to '%s'",
-					         grp->gr_name, sgr_file));
+					SYSLOG(LOG_INFO, "add group '%s' to '%s'",
+					       grp->gr_name, sgr_file);
 					*changed = true;
 
 					if (sgr_update (&sg) == 0) {
-						fprintf (stderr,
-						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, sgr_dbname (), sg.sg_namp);
 						fail_exit (E_CANT_UPDATE);
 					}
@@ -633,8 +627,7 @@ static void check_grp_file (bool *errors, bool *changed)
 					gr = *grp;
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (gr_update (&gr) == 0) {
-						fprintf (stderr,
-						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, gr_dbname (), gr.gr_name);
 						fail_exit (E_CANT_UPDATE);
 					}
@@ -707,8 +700,7 @@ static void check_sgr_file (bool *errors, bool *changed)
 			 * of the loop to try out the next list element.
 			 */
 		      delete_sg:
-			SYSLOG ((LOG_INFO, "delete shadow line '%s'",
-			         sge->line));
+			SYSLOG(LOG_INFO, "delete shadow line '%s'", sge->line);
 			*changed = true;
 
 			__sgr_del_entry (sge);

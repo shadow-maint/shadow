@@ -28,6 +28,7 @@
 #include "attr.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "sssd.h"
@@ -56,16 +57,16 @@ static void fail_exit (int status)
 {
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
 
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 	}
@@ -146,28 +147,24 @@ int main (int argc, char **argv)
 	}
 
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (5);
 	}
 	gr_locked = true;
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
 		fail_exit (1);
 	}
 
 	if (sgr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, sgr_dbname ());
 		fail_exit (5);
 	}
 	sgr_locked = true;
 	if (sgr_open (O_RDONLY) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+		eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
 		fail_exit (1);
 	}
 
@@ -183,8 +180,7 @@ int main (int argc, char **argv)
 			grent = *gr;
 			grent.gr_passwd = sg->sg_passwd;
 			if (gr_update (&grent) == 0) {
-				fprintf (stderr,
-				         _("%s: failed to prepare the new %s entry '%s'\n"),
+				eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 				         Prog, gr_dbname (), grent.gr_name);
 				fail_exit (3);
 			}
@@ -194,30 +190,27 @@ int main (int argc, char **argv)
 	(void) sgr_close (); /* was only open O_RDONLY */
 
 	if (gr_close () == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit (3);
 	}
 
 	if (unlink (SGROUP_FILE) != 0) {
-		fprintf (stderr,
-		         _("%s: cannot delete %s\n"),
-		         Prog, SGROUP_FILE);
-		SYSLOG ((LOG_ERR, "cannot delete %s", SGROUP_FILE));
+		eprintf(_("%s: cannot delete %s\n"), Prog, SGROUP_FILE);
+		SYSLOG(LOG_ERR, "cannot delete %s", SGROUP_FILE);
 		fail_exit (3);
 	}
 
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
 
 	if (sgr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+		eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 		/* continue */
 	}
 
@@ -229,8 +222,7 @@ int main (int argc, char **argv)
 #else				/* !SHADOWGRP */
 int main (MAYBE_UNUSED int argc, char **argv)
 {
-	fprintf (stderr,
-		 "%s: not configured for shadow group support.\n", argv[0]);
+	eprintf("%s: not configured for shadow group support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWGRP */
