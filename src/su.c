@@ -59,7 +59,7 @@
 #include "pwauth.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/sprintf/xaprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -394,8 +394,8 @@ static void prepare_pam_close_session (void)
 		              stderr);
 		(void) kill (-pid_child, caught);
 
-		SNPRINTF(kill_msg, _(" ...killed.\n"));
-		SNPRINTF(wait_msg, _(" ...waiting for child to terminate.\n"));
+		STPRINTF(kill_msg, _(" ...killed.\n"));
+		STPRINTF(wait_msg, _(" ...waiting for child to terminate.\n"));
 
 		/* Any signals other than SIGCHLD and SIGALRM will no longer have any effect,
 		 * so it's time to block all of them. */
