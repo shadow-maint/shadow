@@ -15,6 +15,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <getopt.h>
 
@@ -159,9 +160,8 @@ static bool may_change_field (int field)
 		cp = "frwh";
 	}
 
-	if (strchr (cp, field) != NULL) {
+	if (strchr(cp, field))
 		return true;
-	}
 
 	return false;
 }
