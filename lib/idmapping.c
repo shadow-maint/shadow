@@ -23,6 +23,7 @@
 #include "alloc/x/xmalloc.h"
 #include "atoi/a2i/a2u.h"
 #include "idmapping.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
@@ -47,8 +48,7 @@ get_map_ranges(int ranges, int argc, char **argv)
 
 	mappings = CALLOC(ranges, struct map_range);
 	if (!mappings) {
-		fprintf(log_get_logfd(), _( "%s: Memory allocation failure\n"),
-			log_get_progname());
+		fprinte(log_get_logfd(), "%s: calloc:", log_get_progname());
 		return NULL;
 	}
 
@@ -148,12 +148,12 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	/* Align setuid- and fscaps-based new{g,u}idmap behavior. */
 	if (geteuid() == 0 && geteuid() != ruid) {
 		if (prctl(PR_SET_KEEPCAPS, 1L) == -1) {
-			fprintf(log_get_logfd(), _("%s: Could not prctl(PR_SET_KEEPCAPS)\n"), log_get_progname());
+			fprinte(log_get_logfd(), "%s: prctl(PR_SET_KEEPCAPS)", log_get_progname());
 			exit(EXIT_FAILURE);
 		}
 
-		if (seteuid(ruid) < 0) {
-			fprintf(log_get_logfd(), _("%s: Could not seteuid to %d\n"), log_get_progname(), ruid);
+		if (seteuid(ruid) == -1) {
+			fprinte(log_get_logfd(), "%s: seteuid(%d)", log_get_progname(), ruid);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -168,8 +168,8 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	if (maps_lower_root(cap, ranges, mappings))
 		data[0].effective |= CAP_TO_MASK(CAP_SETFCAP);
 	data[0].permitted = data[0].effective;
-	if (capset(&hdr, data) < 0) {
-		fprintf(log_get_logfd(), _("%s: Could not set caps\n"), log_get_progname());
+	if (capset(&hdr, data) == -1) {
+		fprinte(log_get_logfd(), "%s: capset", log_get_progname());
 		exit(EXIT_FAILURE);
 	}
 #endif
@@ -188,25 +188,25 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 		                 mapping->count);
 	}
 	if (pos == end || pos == NULL) {
-		fprintf(log_get_logfd(), _("%s: stpeprintf failed!\n"), log_get_progname());
+		fprinte(log_get_logfd(), "%s: stpeprintf", log_get_progname());
 		exit(EXIT_FAILURE);
 	}
 
 	/* Write the mapping to the mapping file */
 	fd = openat(proc_dir_fd, map_file, O_WRONLY);
-	if (fd < 0) {
-		fprintf(log_get_logfd(), _("%s: open of %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+	if (fd == -1) {
+		fprinte(log_get_logfd(), "%s: openat(map_file)",
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 	if (write_full(fd, buf, pos - buf) == -1) {
-		fprintf(log_get_logfd(), _("%s: write to %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+		fprinte(log_get_logfd(), "%s: write(\"%s\")",
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
-	if (close(fd) != 0 && errno != EINTR) {
-		fprintf(log_get_logfd(), _("%s: closing %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+	if (close(fd) == -1 && errno != EINTR) {
+		fprinte(log_get_logfd(), "%s: close(\"%s\")",
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 	free(buf);

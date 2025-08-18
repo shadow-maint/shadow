@@ -24,6 +24,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
@@ -431,13 +432,8 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	/* Should not happen, but... */
 	if (NULL == retval) {
-		fprintf (log_get_logfd(),
-			 _("Unable to generate a salt from setting "
-			   "\"%s\", check your settings in "
-			   "ENCRYPT_METHOD and the corresponding "
-			   "configuration for your selected hash "
-			   "method.\n"), result);
-
+		fprinte(log_get_logfd(), "crypt_gensalt(\"%s\", %lu)",
+		        result, rounds);
 		exit (1);
 	}
 
