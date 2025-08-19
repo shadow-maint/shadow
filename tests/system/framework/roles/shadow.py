@@ -166,3 +166,27 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/gshadow")
 
         return cmd
+
+    def groupmems(self, *args, run_as: str = "root", password: str | None = None) -> ProcessResult:
+        """
+        Administer members of a user's primary group.
+
+        The groupmems command allows management of group membership lists.
+        If `run_as` is provided, then the `password` must be provided and the command groupmems run under this user.
+        If `run_as` isn't provided, then the command is run under `root`.
+        """
+        args_dict = self._parse_args(args)
+
+        if run_as == "root":
+            self.logger.info(f'Administer {args_dict["name"]} group membership as root on {self.host.hostname}')
+            cmd = self.host.conn.run("groupmems " + args[0], log_level=ProcessLogLevel.Error)
+        else:
+            self.logger.info(f'Administer {args_dict["name"]} group membership on {self.host.hostname}')
+            cmd = self.host.conn.run(
+                f"echo '{password}' | su - {run_as} -c 'groupmems {args[0]}'", log_level=ProcessLogLevel.Error
+            )
+
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
