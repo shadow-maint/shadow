@@ -1,0 +1,278 @@
+General guidelines:
+===================
+
+-  If there's an upper-case macro that wraps a function, use the macro
+   if possible.  These use macro magic to add safety.
+
+-  x*() functions wrap a function of the same name without the 'x'.
+   These wrappers exit on error instead of returning NULL.
+   They simplify program code.  Avoid them in library code.
+
+-  strn*() functions are forbidden for use with strings.  Consider strn
+   a mnemonic for [[gnu::nonstring]].  We use them with utmp(5) members
+   (almost) exclusively.
+
+
+Don't use some libc functions without Really Good Reasons:
+==========================================================
+
+<stdio.h>
+    asprintf(3)
+	Use aprintf() instead.
+	It is difficult to handle errors after asprintf(3).
+	Also, it makes it more difficult for static analyzers to check
+	that memory is later free(3)d appropriately.
+
+<string.h>
+    snprintf(3)
+	Use stprintf() or seprintf() instead.
+	It is difficult to check for truncation after snprintf(3).
+
+    strcmp(3)
+	Use streq() instead.
+	The return value of strcmp(3) is confusing.
+	strcmp(3) would be legitimate for sorting strings.
+
+    strcasecmp(3)
+	Use strcaseeq() instead.
+
+    strncat(3)
+	Use strndup(3) or strndupa(3) instead.
+	strncat(3) is legitimate for catenating a prefix of a string
+	after an existing string.
+
+    strlcpy(3)
+	Use strtcpy() instead.
+	strlcpy(3) is vulnerable to DoS.
+	Also, it is difficult to check for truncation after strlcpy(3).
+
+    strlcat(3)
+	Use strtcat() or stpecpy() instead.
+	strlcat(3) is vulnerable to DoS.
+	Also, it is difficult to check for truncation after strlcat(3).
+
+
+Specific guidelines:
+====================
+	Under lib/string/ we provide a set of functions to manipulate
+	strings, separated in subdirectories by utility type.  In this
+	section, we provide a broad overview.
+
+ctype/ - Character classification and conversion functions
+
+    strchrisascii/
+	The functions defined under this directory
+	return true
+	if the string has any characters that
+	belong to the category specified in the function name.
+
+    strisascii/
+	The functions defined under this directory
+	return true
+	if all of the characters of the string
+	belong to the category specified in the function name
+	and the string is not an empty string.
+
+    strtoascii/
+	The functions defined under this directory
+	translate all characters in a string.
+
+memset/ - Memory zeroing
+
+    memzero()
+	Synonym of explicit_bzero(3).
+    MEMZERO()
+	Like memzero(), but takes an array.
+
+    strzero()
+	Like memzero(), but takes a string.
+
+strchr/ - Character search and counting
+
+    strchrcnt()
+	Count the number of occurrences of a given character in a string.
+
+    strchrscnt()
+	Count the number of occurrences of several characters.
+
+    strnul()
+	Return a pointer to the terminating null byte.  (s + strlen(s))
+
+strstr/ - String search
+
+  s/
+    stppfx()  // Current name: strprefix()
+	Return a pointer to the end of the prefix,
+	or NULL if not found.
+
+    stpsfx()  // Unimplemented
+	Return a pointer to the beginning of the suffix,
+	or NULL if not found.
+
+strcmp/ - String comparison
+
+  s/
+    streq()
+	Return true if the strings are equal.
+
+    strpfx()  // Unimplemented
+	Return true if the string starts with a prefix.
+
+    strsfx()  // Unimplemented
+	Return true if the string ends with a suffix.
+
+    strcaseeq()
+	Like streq(), but ignore upper-/lower-case.
+
+    strcasepfx()  // Unimplemented
+	Like strpfx(), but ignore upper-/lower-case.
+
+    strcasesfx()  // Unimplemented
+	Like strsfx(), but ignore upper-/lower-case.
+
+  n/
+    strneq()  // Unimplemented
+	Return true if a [[gnu::nonstring]] is equal to a string.
+    STRNEQ()  // Unimplemented
+	Like strneq(), but takes an array.
+
+    strnpfx()  // Unimplemented
+	Return true if a [[gnu::nonstring]] starts with a prefix.
+    STRNPFX()  // Unimplemented
+	Like strnpfx(), but takes an array.
+
+strdup/ - Memory duplication
+
+  s/
+    strndupa(3)
+	Create a new string (in stack) from a [[gnu::nonstring]].
+    STRNDUPA()
+	Like strndupa(3), but takes an array.
+
+    STRNDUP()
+	Like strndup(3), but takes an array.
+
+  m/
+    memdup()
+	Duplicate an object.  Returns a pointer to the dup.
+    MEMDUP()
+	Like memdup(), but with type-safety checks.
+
+strcpy/ - String copying
+
+  n/
+    STRNCPY()
+	Like strncpy(3), but takes an array.
+	Use it *exclusively* for copying from a string into a utmp(5)
+	member.
+
+    strncpytail()
+	Like strncpy(), but when truncating, the tail of the string is
+	kept instead of the beginning.  This is useful for ut_id.
+    STRNCPYTAIL()
+	Like strncpytail, but takes an array.
+
+    STRNCAT()  // To be removed
+	Do NOT use.  I'll remove it soon.
+
+  s/
+    strtcpy()
+	Copy from a string into another string with truncation.
+	This is what the Linux kernel calls strscpy().
+	If you need more than one call to form a string,
+	use stpecpy() instead.
+    STRTCPY()
+	Like strtcpy(), but takes an array.
+
+    strtcat()  // Unimplemented
+	Catenate a string after an existing string, with truncation.
+	Rarely useful.  Consider using stpecpy() instead.
+    STRTCAT()  // Unimplemented
+	Like strtcat(), but takes an array.
+
+    stpecpy()
+	Similar to strtcpy(), but takes a pointer to the end instead of
+	a size.  This makes it safer for chaining several calls.
+
+  m/
+    MEMCPY()
+	Like memcpy(3), but takes two arrays.
+
+sprintf/ - Formatted string creation
+
+    aprintf()
+	sprintf(3) variant that allocates.
+	It has better interface than asprintf(3).
+
+    stprintf()  // Current name: snprintf_()
+	snprintf(3) wrapper that reports truncation with -1.
+	If you need more than one call to form a string,
+	use seprintf() instead.
+    STPRINTF()  // Current name: SNPRINTF()
+	Like stprintf(), but takes an array.
+
+    seprintf()  // Current name: stpeprintf())
+	Similar to stprintf(), but takes a pointer to the end instead of
+	a size.  This makes it safer for chaining several calls.
+
+strspn/ - String span searching
+
+	Naming conventions:
+	-  'r': reverse (search from the end).
+	-  'c': complement (negate the second argument).
+	-  'stp': Return a pointer instead of a length.
+
+    stpspn()
+	Like strspn(3), but return a pointer instead of an offset.
+	It is useful for skipping leading white space.
+
+    strrspn()
+	Use stprspn() instead.
+	Return the offset of a suffix segment consisting only of
+	characters in 'accept'.
+    stprspn()
+	Like strrspn(), but return a pointer instead of an offset.
+	It is useful for removing trailing white space.
+
+    strrcspn()
+	Use stprcspn() instead.
+	Return the offset of a suffix segment consisting only of
+	characters not in 'reject'.
+    stprcspn()
+	Like strrcspn(), but return a pointer instead of an offset.
+	This is rarely useful.  It was useful for implementing
+	basename().
+
+strsep/ - String separation
+
+    stpsep()
+	Similar to strsep(3), but swap the input pointer with the return
+	value.  It writes a null byte at the first delimiter found, and
+	returns a pointer to one past that null byte.  If no delimiters
+	are found, it returns NULL.
+	It is very useful after fgets(3), for removing the '\n', while
+	checking for its presence.  In some cases, it's also useful as
+	a replacement for strsep(3) with a more convenient calling
+	convention, but this depends on the surrounding code.
+
+    strsep2arr()
+	Loop around strsep(3) to fill an array of buffers with all
+	the delimited strings that have been split.
+	Useful when the number of delimiter-separated fields is known.
+    STRSEP2ARR()
+	Like strsep2arr(), but take an array, and simplify error checks.
+
+    strsep2ls()
+	Similar to strsep2arr(), but terminate the list with a null
+	pointer.
+	Useful when the number of delimiter-separated fields is unknown.
+    STRSEP2LS()
+	Like strsep2ls(), but take an array.
+
+    astrsep2ls()
+	Variant of strsep2ls() that allocates the array of strings.
+	(But the strings themselves are not duplicated.)
+
+strftime.h
+    STRFTIME()
+	Like strftime(3), but takes an array.
