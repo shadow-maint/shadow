@@ -107,8 +107,9 @@
 	</term>
 	<listitem>
 	  <para>
-	    This field will be encrypted and used as the new value of the
-	    encrypted password.
+	    If this field is not empty,
+	    it will be encrypted
+	    and used as the new value of the encrypted password.
 	  </para>
 	</listitem>
       </varlistentry>
