@@ -1204,7 +1204,7 @@ int main (int argc, char **argv)
 		usernames[nusers-1] = xstrdup(fields[0]);
 		passwords[nusers-1] = xstrdup(fields[1]);
 #endif				/* USE_PAM */
-		if (add_passwd (&newpw, fields[1]) != 0) {
+		if (!streq(fields[1], "") && add_passwd(&newpw, fields[1]) != 0) {
 			fprintf (stderr,
 			         _("%s: line %jd: can't update password\n"),
 			         Prog, line);
@@ -1321,6 +1321,8 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	/* Now update the passwords using PAM */
 	for (size_t i = 0; i < nusers; i++) {
+		if (streq(passwords[i], ""))
+			continue;
 		if (do_pam_passwd_non_interactive ("newusers", usernames[i], passwords[i]) != 0) {
 			fprintf (stderr,
 			         _("%s: (line %jd, user %s) password not changed\n"),
