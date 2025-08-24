@@ -275,16 +275,17 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 static bool have_range(struct commonio_db *db,
 		       const char *owner, unsigned long start, unsigned long count);
 
-static bool append_range(struct subid_range **ranges, const struct subordinate_range *new, int n)
+static struct subid_range *
+append_range(struct subid_range *ranges, const struct subordinate_range *new, int n)
 {
-	*ranges = REALLOCF(*ranges, n + 1, struct subid_range);
-	if (!*ranges)
-		return false;
+	ranges = REALLOCF(ranges, n + 1, struct subid_range);
+	if (ranges == NULL)
+		return NULL;
 
-	(*ranges)[n].start = new->start;
-	(*ranges)[n].count = new->count;
+	ranges[n].start = new->start;
+	ranges[n].count = new->count;
 
-	return true;
+	return ranges;
 }
 
 void free_subordinate_ranges(struct subordinate_range **ranges, int count)
@@ -916,7 +917,8 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		if (   streq(range->owner, owner)
 		    || (have_owner_id && streq(range->owner, id)))
 		{
-			if (!append_range(&ranges, range, count++)) {
+			ranges = append_range(ranges, range, count++);
+			if (ranges == NULL) {
 				count = -1;
 				goto out;
 			}
