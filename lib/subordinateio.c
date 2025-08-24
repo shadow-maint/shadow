@@ -20,7 +20,6 @@
 #include <string.h>
 
 #include "alloc/malloc.h"
-#include "alloc/realloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
 #include "string/ctype/strisascii/strisdigit.h"
@@ -278,15 +277,12 @@ static bool have_range(struct commonio_db *db,
 
 static bool append_range(struct subid_range **ranges, const struct subordinate_range *new, int n)
 {
-	struct subid_range  *sr;
-
-	sr = REALLOC(*ranges, n + 1, struct subid_range);
-	if (!sr)
+	*ranges = REALLOCF(*ranges, n + 1, struct subid_range);
+	if (!*ranges)
 		return false;
 
-	sr[n].start = new->start;
-	sr[n].count = new->count;
-	*ranges = sr;
+	(*ranges)[n].start = new->start;
+	(*ranges)[n].count = new->count;
 
 	return true;
 }
@@ -921,8 +917,6 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		    || (have_owner_id && streq(range->owner, id)))
 		{
 			if (!append_range(&ranges, range, count++)) {
-				free(ranges);
-				ranges = NULL;
 				count = -1;
 				goto out;
 			}
