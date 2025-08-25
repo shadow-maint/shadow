@@ -22,7 +22,6 @@ man_MANS = \
 	man5/gshadow.5 \
 	man1/login.1 \
 	man5/login.defs.5 \
-	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man8/newusers.8 \
 	man8/nologin.8 \
