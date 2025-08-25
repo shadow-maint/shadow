@@ -14,7 +14,6 @@ man_MANS = \
 	man8/groupmems.8 \
 	man8/groupmod.8 \
 	man8/grpck.8 \
-	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man1/sg.1 \
 	man3/shadow.3 \

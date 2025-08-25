@@ -379,7 +379,6 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <!-- logoutd: no variables -->
       <varlistentry>
 	<term>newgrp / sg</term>
 	<listitem>

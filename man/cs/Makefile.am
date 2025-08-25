@@ -22,6 +22,5 @@ man_MANS += man8/lastlog.8
 endif
 
 EXTRA_DIST = $(man_MANS) \
-	man8/groupmems.8 \
-	man8/logoutd.8
+	man8/groupmems.8
 

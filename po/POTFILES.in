@@ -92,7 +92,6 @@ src/grpunconv.c
 src/lastlog.c
 src/login.c
 src/login_nopam.c
-src/logoutd.c
 src/newgidmap.c
 src/newgrp.c
 src/newuidmap.c
