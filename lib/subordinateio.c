@@ -885,17 +885,9 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
-		if (streq(range->owner, owner)) {
-			if (!append_range(&ranges, range, count++)) {
-				free(ranges);
-				ranges = NULL;
-				count = -1;
-				goto out;
-			}
-		}
-
-		// Let's also compare with the ID
-		if (have_owner_id == true && streq(range->owner, id)) {
+		if (   streq(range->owner, owner)
+		    || (have_owner_id && streq(range->owner, id)))
+		{
 			if (!append_range(&ranges, range, count++)) {
 				free(ranges);
 				ranges = NULL;
