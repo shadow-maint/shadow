@@ -12,9 +12,27 @@ be triggered locally by following the instructions specified in the
 
 ## System tests
 
-The project is tested on Ubuntu. For that purpose it is built & installed in
-this distribution in a VM. You can run this step locally by following the
-instructions provided in the [Tests](tests.md#system-tests) page.
+The project runs system tests to verify functionality
+across different environments
+using two complementary approaches:
+
+### Bash system tests
+
+Legacy Bash system tests run on Ubuntu in a VM environment.
+These provide coverage for Ubuntu-specific scenarios and legacy test cases.
+You can run this step locally by following the instructions provided
+in the [Tests](tests.md#bash-system-tests) page.
+
+### Python system tests
+
+The new Python system tests use pytest and pytest-mh,
+running across multiple distributions (Fedora, Debian, Alpine, openSUSE)
+in containerized environments.
+These tests provide cross-distribution compatibility
+and improved environment management compared to the Bash tests.
+
+For local execution of Python system tests,
+follow the instructions in the [Tests](tests.md#python-system-tests) page.
 
 ## Static code analysis
 
