@@ -73,3 +73,31 @@ were running some of the CI checks locally:
 ```
 share/container-build.sh
 ```
+
+### Container troubleshooting
+
+When working with containers for testing or development,
+you may encounter issues.
+Here are common troubleshooting steps:
+
+**Post-test inspection:**
+- **Container persistence**: After tests complete, containers are left running
+  to allow inspection of the test environment and debugging of any failures.
+  This enables you to examine logs, file states, and system configuration
+  that existed when tests ran.
+
+**Container management:**
+- **List containers**: `docker ps -a` to see all containers and their status.
+- **Access container**: `docker exec -it <container-name> bash` to get shell access.
+- **Container logs**: `docker logs <container-name>` to view container output.
+- **Remove containers**: `docker rm <container-name>` to clean up stopped containers.
+
+**Common issues:**
+- **Container not found**: ensure you've run the Ansible playbook
+  to create the required containers.
+- **Permission issues**: verify the container has proper privileges
+  for user/group operations.
+- **Network connectivity**: check that containers can communicate
+  if tests involve network operations.
+- **Resource constraints**: ensure sufficient disk space and memory
+  for container operations.
