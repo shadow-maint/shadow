@@ -9,6 +9,7 @@
       - autoconf
       - automake
       - diffutils
+      - expect
       - gawk
       - gcc
       - gettext-tools
