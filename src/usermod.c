@@ -26,6 +26,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <paths.h>
 #include <stdio.h>
 #include <strings.h>
 #include <sys/stat.h>
@@ -1927,7 +1928,7 @@ static void update_lastlog (void)
 	off_t off_newuid = (off_t) user_newid * sizeof ll;
 	uid_t max_uid;
 
-	if (access (LASTLOG_FILE, F_OK) != 0) {
+	if (access(_PATH_LASTLOG, F_OK) != 0) {
 		return;
 	}
 
@@ -1937,7 +1938,7 @@ static void update_lastlog (void)
 		return;
 	}
 
-	fd = open (LASTLOG_FILE, O_RDWR);
+	fd = open(_PATH_LASTLOG, O_RDWR);
 
 	if (-1 == fd) {
 		fprintf (stderr,

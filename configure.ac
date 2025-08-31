@@ -100,8 +100,6 @@ AC_CACHE_CHECK([location of faillog/lastlog/wtmp], [shadow_cv_logdir],
 done])
 AC_DEFINE_UNQUOTED([_WTMP_FILE], ["$shadow_cv_logdir/wtmp"],
 	[Path for wtmp file.])
-AC_DEFINE_UNQUOTED([LASTLOG_FILE], ["$shadow_cv_logdir/lastlog"],
-	[Path for lastlog file.])
 AC_DEFINE_UNQUOTED([FAILLOG_FILE], ["$shadow_cv_logdir/faillog"],
 	[Path for faillog file.])
 
