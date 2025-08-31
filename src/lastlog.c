@@ -13,6 +13,7 @@
 
 #include <getopt.h>
 #include <lastlog.h>
+#include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -34,14 +35,6 @@
 #include "string/memset/memzero.h"
 #include "string/strftime.h"
 
-
-
-/*
- * Needed for MkLinux DR1/2/2.1 - J.
- */
-#ifndef LASTLOG_FILE
-#define LASTLOG_FILE "/var/log/lastlog"
-#endif
 
 /*
  * Global variables
@@ -433,9 +426,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	lastlogfile = fopen (LASTLOG_FILE, (Cflg || Sflg)?"r+":"r");
+	lastlogfile = fopen(_PATH_LASTLOG, (Cflg || Sflg)?"r+":"r");
 	if (NULL == lastlogfile) {
-		perror (LASTLOG_FILE);
+		perror(_PATH_LASTLOG);
 		exit (EXIT_FAILURE);
 	}
 
@@ -443,7 +436,7 @@ int main (int argc, char **argv)
 	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
 		fprintf (stderr,
 		         _("%s: Cannot get the size of %s: %s\n"),
-		         Prog, LASTLOG_FILE, strerror (errno));
+		         Prog, _PATH_LASTLOG, strerror(errno));
 		exit (EXIT_FAILURE);
 	}
 

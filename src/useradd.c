@@ -28,6 +28,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+#include <paths.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -86,12 +87,8 @@
 #define USER_DEFAULTS_FILE "/etc/default/useradd"
 #define NEW_USER_FILE "/etc/default/nuaddXXXXXX"
 #endif
-/*
- * Needed for MkLinux DR1/2/2.1 - J.
- */
-#ifndef LASTLOG_FILE
-#define LASTLOG_FILE "/var/log/lastlog"
-#endif
+
+
 /*
  * Global variables
  */
@@ -1984,7 +1981,7 @@ static void lastlog_reset (uid_t uid)
 	uid_t max_uid;
 	struct stat st;
 
-	if (stat (LASTLOG_FILE, &st) != 0 || st.st_size <= offset_uid) {
+	if (stat(_PATH_LASTLOG, &st) != 0 || st.st_size <= offset_uid) {
 		return;
 	}
 
@@ -1996,7 +1993,7 @@ static void lastlog_reset (uid_t uid)
 
 	memzero (&ll, sizeof (ll));
 
-	fd = open (LASTLOG_FILE, O_RDWR);
+	fd = open(_PATH_LASTLOG, O_RDWR);
 	if (-1 == fd) {
 		fprintf (stderr,
 		         _("%s: failed to open the lastlog file for UID %lu: %s\n"),
