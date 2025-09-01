@@ -26,13 +26,13 @@ def test_groupadd__add_group(shadow: Shadow):
     """
     shadow.groupadd("tgroup")
 
-    result = shadow.tools.getent.group("tgroup")
-    assert result is not None, "Group should be found"
-    assert result.name == "tgroup", "Incorrect groupname"
-    assert result.gid == 1000, "Incorrect GID"
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tgroup", "Incorrect groupname"
+    assert group_entry.gid == 1000, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
-        result = shadow.tools.getent.gshadow("tgroup")
-        assert result is not None, "Group should be found"
-        assert result.name == "tgroup", "Incorrect groupname"
-        assert result.password == "!", "Incorrect password"
+        gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+        assert gshadow_entry is not None, "Group should be found"
+        assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+        assert gshadow_entry.password == "!", "Incorrect password"
