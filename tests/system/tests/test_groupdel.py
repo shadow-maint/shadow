@@ -28,8 +28,8 @@ def test_groupdel__delete_group(shadow: Shadow):
     shadow.groupadd("tgroup")
     shadow.groupdel("tgroup")
 
-    result = shadow.tools.getent.group("tgroup")
-    assert result is None, "Group should not be found"
+    group_entry = shadow.tools.getent.group("tgroup")
+    assert group_entry is None, "Group should not be found"
 
-    result = shadow.tools.getent.gshadow("tgroup")
-    assert result is None, "Group should not be found"
+    gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+    assert gshadow_entry is None, "Group should not be found"
