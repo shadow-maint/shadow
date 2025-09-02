@@ -2,6 +2,14 @@
 module = "jc.*"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "pytest"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pytest_mh.*"
+ignore_missing_imports = true
+
 [tool.isort]
 line_length = 119
 profile = "black"

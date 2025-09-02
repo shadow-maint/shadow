@@ -5,9 +5,9 @@ Test useradd
 from __future__ import annotations
 
 import pytest
+from pytest_mh.conn import ProcessError
 
 from framework.misc import days_since_epoch
-from pytest_mh.conn import ProcessError
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -34,37 +34,37 @@ def test_useradd__add_user(shadow: Shadow):
     """
     shadow.useradd("tuser")
 
-    result = shadow.tools.getent.passwd("tuser")
-    assert result is not None, "User should be found"
-    assert result.name == "tuser", "Incorrect username"
-    assert result.password == "x", "Incorrect password"
-    assert result.uid == 1000, "Incorrect UID"
-    assert result.gid == 1000, "Incorrect GID"
-    assert result.home == "/home/tuser", "Incorrect home"
+    passwd_entry = shadow.tools.getent.passwd("tuser")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.name == "tuser", "Incorrect username"
+    assert passwd_entry.password == "x", "Incorrect password"
+    assert passwd_entry.uid == 1000, "Incorrect UID"
+    assert passwd_entry.gid == 1000, "Incorrect GID"
+    assert passwd_entry.home == "/home/tuser", "Incorrect home"
     if "Debian" in shadow.host.distro_name:
-        assert result.shell == "/bin/sh", "Incorrect shell"
+        assert passwd_entry.shell == "/bin/sh", "Incorrect shell"
     else:
-        assert result.shell == "/bin/bash", "Incorrect shell"
+        assert passwd_entry.shell == "/bin/bash", "Incorrect shell"
 
-    result = shadow.tools.getent.shadow("tuser")
-    assert result is not None, "User should be found"
-    assert result.name == "tuser", "Incorrect username"
-    assert result.password == "!", "Incorrect password"
-    assert result.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert result.min_days == 0, "Incorrect min days"
-    assert result.max_days == 99999, "Incorrect max days"
-    assert result.warn_days == 7, "Incorrect warn days"
+    shadow_entry = shadow.tools.getent.shadow("tuser")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.name == "tuser", "Incorrect username"
+    assert shadow_entry.password == "!", "Incorrect password"
+    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
+    assert shadow_entry.min_days == 0, "Incorrect min days"
+    assert shadow_entry.max_days == 99999, "Incorrect max days"
+    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
-    result = shadow.tools.getent.group("tuser")
-    assert result is not None, "Group should be found"
-    assert result.name == "tuser", "Incorrect groupname"
-    assert result.gid == 1000, "Incorrect GID"
+    group_entry = shadow.tools.getent.group("tuser")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tuser", "Incorrect groupname"
+    assert group_entry.gid == 1000, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
-        result = shadow.tools.getent.gshadow("tuser")
-        assert result is not None, "User should be found"
-        assert result.name == "tuser", "Incorrect username"
-        assert result.password == "!", "Incorrect password"
+        gshadow_entry = shadow.tools.getent.gshadow("tuser")
+        assert gshadow_entry is not None, "User should be found"
+        assert gshadow_entry.name == "tuser", "Incorrect username"
+        assert gshadow_entry.password == "!", "Incorrect password"
 
     assert shadow.fs.exists("/home/tuser"), "Home folder should be found"
 
@@ -91,15 +91,15 @@ def test_useradd__recreate_deleted_user(shadow: Shadow):
     shadow.userdel("tuser")
     shadow.useradd("tuser")
 
-    result = shadow.tools.id("tuser")
-    assert result is not None, "User should be found"
-    assert result.user.name == "tuser", "Incorrect username"
-    assert result.user.id == 1000, "Incorrect UID"
+    id_entry = shadow.tools.id("tuser")
+    assert id_entry is not None, "User should be found"
+    assert id_entry.user.name == "tuser", "Incorrect username"
+    assert id_entry.user.id == 1000, "Incorrect UID"
 
-    result = shadow.tools.getent.group("tuser")
-    assert result is not None, "Group should be found"
-    assert result.name == "tuser", "Incorrect groupname"
-    assert result.gid == 1000, "Incorrect GID"
+    group_entry = shadow.tools.getent.group("tuser")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tuser", "Incorrect groupname"
+    assert group_entry.gid == 1000, "Incorrect GID"
 
     assert shadow.fs.exists("/home/tuser"), "Home folder should be found"
 

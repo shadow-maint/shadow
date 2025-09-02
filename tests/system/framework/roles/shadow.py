@@ -133,7 +133,9 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         Change user password expiry information.
         """
         args_dict = self._parse_args(args)
-        self.logger.info(f'Changing user password expiry information on user "{args_dict["name"]}" on {self.host.hostname}')
+        self.logger.info(
+            f'Changing user password expiry information on user "{args_dict["name"]}" on {self.host.hostname}'
+        )
         cmd = self.host.conn.run("chage " + args[0], log_level=ProcessLogLevel.Error)
 
         self.host.discard_file("/etc/passwd")

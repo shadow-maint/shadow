@@ -5,8 +5,8 @@ Test chage
 from __future__ import annotations
 
 import pytest
-
 from pytest_mh.conn import ProcessError
+
 from framework.misc import days_since_epoch
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology

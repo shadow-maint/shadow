@@ -34,16 +34,13 @@ class ShadowHost(BaseHost, BaseLinuxHost):
         self._backup_path: PurePosixPath | None = None
         """Path to backup files."""
 
-        self._verify_files: [dict[str, str]] = [
+        self._verify_files: list[dict[str, str]] = [
             {"origin": "/etc/passwd", "backup": "passwd"},
             {"origin": "/etc/shadow", "backup": "shadow"},
             {"origin": "/etc/group", "backup": "group"},
             {"origin": "/etc/gshadow", "backup": "gshadow"},
         ]
         """Files to verify for mismatch."""
-
-        self._features: dict[str, bool] | None = None
-        """Features supported by the host."""
 
     def pytest_setup(self) -> None:
         super().pytest_setup()

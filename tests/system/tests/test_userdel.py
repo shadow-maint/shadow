@@ -34,16 +34,16 @@ def test_userdel__homedir_removed(shadow: Shadow):
     shadow.useradd("tuser")
     shadow.userdel("-r tuser")
 
-    result = shadow.tools.getent.passwd("tuser")
-    assert result is None, "User should not be found"
+    passwd_entry = shadow.tools.getent.passwd("tuser")
+    assert passwd_entry is None, "User should not be found"
 
-    result = shadow.tools.getent.shadow("tuser")
-    assert result is None, "User should not be found"
+    shadow_entry = shadow.tools.getent.shadow("tuser")
+    assert shadow_entry is None, "User should not be found"
 
-    result = shadow.tools.getent.group("tuser")
-    assert result is None, "Group should not be found"
+    group_entry = shadow.tools.getent.group("tuser")
+    assert group_entry is None, "Group should not be found"
 
-    result = shadow.tools.getent.gshadow("tuser1")
-    assert result is None, "User should not be found"
+    gshadow_entry = shadow.tools.getent.gshadow("tuser1")
+    assert gshadow_entry is None, "User should not be found"
 
     assert not shadow.fs.exists("/home/tuser"), "Home folder should not exist"

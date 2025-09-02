@@ -16,7 +16,7 @@ __all__ = [
     "PasswdEntry",
     "ShadowEntry",
     "GroupEntry",
-    "GShadowEntry"
+    "GShadowEntry",
     "InitgroupsEntry",
     "LinuxToolsUtils",
     "KillCommand",
@@ -157,7 +157,16 @@ class PasswdEntry(object):
     Result of ``getent passwd``
     """
 
-    def __init__(self, name: str, password: str, uid: int, gid: int, gecos: str, home: str, shell: str) -> None:
+    def __init__(
+        self,
+        name: str | None,
+        password: str | None,
+        uid: int | None,
+        gid: int | None,
+        gecos: str | None,
+        home: str | None,
+        shell: str | None,
+    ) -> None:
         self.name: str | None = name
         """
         User name.
@@ -168,12 +177,12 @@ class PasswdEntry(object):
         User password.
         """
 
-        self.uid: int = uid
+        self.uid: int | None = uid
         """
         User id.
         """
 
-        self.gid: int = gid
+        self.gid: int | None = gid
         """
         Group id.
         """
@@ -231,14 +240,14 @@ class ShadowEntry(object):
 
     def __init__(
         self,
-        name: str,
-        password: str,
-        last_changed: int,
-        min_days: int,
-        max_days: int,
-        warn_days: int,
-        inactivity_days: int,
-        expiration_date: int,
+        name: str | None,
+        password: str | None,
+        last_changed: int | None,
+        min_days: int | None,
+        max_days: int | None,
+        warn_days: int | None,
+        inactivity_days: int | None,
+        expiration_date: int | None,
     ) -> None:
         self.name: str | None = name
         """
@@ -250,22 +259,22 @@ class ShadowEntry(object):
         User password.
         """
 
-        self.last_changed: int = last_changed
+        self.last_changed: int | None = last_changed
         """
         Last password change.
         """
 
-        self.min_days: int = min_days
+        self.min_days: int | None = min_days
         """
         Minimum number of days before a password change is allowed.
         """
 
-        self.max_days: int = max_days
+        self.max_days: int | None = max_days
         """
         Maximum number of days a password is valid.
         """
 
-        self.warn_days: int = warn_days
+        self.warn_days: int | None = warn_days
         """
         Number of days to warn the user before the password expires.
         """
@@ -321,7 +330,7 @@ class GroupEntry(object):
     Result of ``getent group``
     """
 
-    def __init__(self, name: str, password: str, gid: int, members: list[str]) -> None:
+    def __init__(self, name: str | None, password: str | None, gid: int | None, members: list[str]) -> None:
         self.name: str | None = name
         """
         Group name.
@@ -332,7 +341,7 @@ class GroupEntry(object):
         Group password.
         """
 
-        self.gid: int = gid
+        self.gid: int | None = gid
         """
         Group id.
         """
@@ -377,10 +386,10 @@ class GShadowEntry(object):
 
     def __init__(
         self,
-        name: str,
-        password: str,
-        administrators: str,
-        members: str,
+        name: str | None,
+        password: str | None,
+        administrators: str | None,
+        members: str | None,
     ) -> None:
         self.name: str | None = name
         """
@@ -392,21 +401,18 @@ class GShadowEntry(object):
         Group password.
         """
 
-        self.administrators: int = administrators
+        self.administrators: str | None = administrators
         """
         Group administrators.
         """
 
-        self.members: int = members
+        self.members: str | None = members
         """
         Group members.
         """
 
     def __str__(self) -> str:
-        return (
-            f"({self.name}:{self.password}:{self.administrators}:"
-            f"{self.members})"
-        )
+        return f"({self.name}:{self.password}:{self.administrators}:" f"{self.members})"
 
     def __repr__(self) -> str:
         return str(self)

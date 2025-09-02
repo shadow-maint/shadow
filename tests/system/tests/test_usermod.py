@@ -5,8 +5,8 @@ Test usermod
 from __future__ import annotations
 
 import pytest
-
 from pytest_mh.conn import ProcessError
+
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -35,24 +35,24 @@ def test_usermod__rename_user(shadow: Shadow):
     shadow.useradd("tuser1")
     shadow.usermod("-l tuser2 tuser1")
 
-    result = shadow.tools.getent.passwd("tuser2")
-    assert result is not None, "User should be found"
-    assert result.name == "tuser2", "Incorrect username"
-    assert result.uid == 1000, "Incorrect UID"
+    passwd_entry = shadow.tools.getent.passwd("tuser2")
+    assert passwd_entry is not None, "User should be found"
+    assert passwd_entry.name == "tuser2", "Incorrect username"
+    assert passwd_entry.uid == 1000, "Incorrect UID"
 
-    result = shadow.tools.getent.shadow("tuser2")
-    assert result is not None, "User should be found"
-    assert result.name == "tuser2", "Incorrect username"
+    shadow_entry = shadow.tools.getent.shadow("tuser2")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.name == "tuser2", "Incorrect username"
 
-    result = shadow.tools.getent.group("tuser1")
-    assert result is not None, "Group should be found"
-    assert result.name == "tuser1", "Incorrect groupname"
-    assert result.gid == 1000, "Incorrect GID"
+    group_entry = shadow.tools.getent.group("tuser1")
+    assert group_entry is not None, "Group should be found"
+    assert group_entry.name == "tuser1", "Incorrect groupname"
+    assert group_entry.gid == 1000, "Incorrect GID"
 
     if shadow.host.features["gshadow"]:
-        result = shadow.tools.getent.gshadow("tuser1")
-        assert result is not None, "User should be found"
-        assert result.name == "tuser1", "Incorrect username"
+        gshadow_entry = shadow.tools.getent.gshadow("tuser1")
+        assert gshadow_entry is not None, "User should be found"
+        assert gshadow_entry.name == "tuser1", "Incorrect username"
 
     assert shadow.fs.exists("/home/tuser1"), "Home folder should be found"
 
