@@ -1095,8 +1095,8 @@ int main (int argc, char **argv)
 	is_shadow_grp = sgr_file_present ();
 #endif
 #ifdef ENABLE_SUBIDS
-	is_sub_uid = sub_uid_file_present () && !rflg;
-	is_sub_gid = sub_gid_file_present () && !rflg;
+	is_sub_uid = want_subuid_file () && sub_uid_file_present () && !rflg;
+	is_sub_gid = want_subgid_file () && sub_gid_file_present () && !rflg;
 #endif				/* ENABLE_SUBIDS */
 
 	open_files ();
@@ -1269,7 +1269,7 @@ int main (int argc, char **argv)
 		/*
 		 * Add subordinate uids if the user does not have them.
 		 */
-		if (is_sub_uid && want_subuids() && !local_sub_uid_assigned(fields[0])) {
+		if (is_sub_uid && !local_sub_uid_assigned(fields[0])) {
 			uid_t sub_uid_start = 0;
 			unsigned long sub_uid_count = 0;
 			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) != 0)
@@ -1291,7 +1291,7 @@ int main (int argc, char **argv)
 		/*
 		 * Add subordinate gids if the user does not have them.
 		 */
-		if (is_sub_gid && want_subgids() && !local_sub_gid_assigned(fields[0])) {
+		if (is_sub_gid && !local_sub_gid_assigned(fields[0])) {
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
 			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) != 0) {
