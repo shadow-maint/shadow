@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "commonio.h"
 #include "subordinateio.h"
+#include "getdef.h"
 #include "../libsubid/subid.h"
 #include <sys/types.h>
 #include <pwd.h>
@@ -683,6 +684,37 @@ uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
 	unsigned long start;
 	start = find_free_range (&subordinate_uid_db, min, max, count);
 	return start == ULONG_MAX ? (uid_t) -1 : start;
+}
+
+
+/*
+ * want_subuid_file: check if /etc/subuid should be used.
+ *
+ * Returns true if /etc/subuid should be opened/created, if
+ * false is returned, /etc/subuid should not be accessed.
+ */
+bool want_subuid_file(void)
+{
+	if (get_subid_nss_handle() != NULL)
+		return false;
+	if (getdef_ulong("SUB_UID_COUNT", 65536) == 0)
+		return false;
+	return true;
+}
+
+/*
+ * want_subgid_file: check if /etc/subuid should be used.
+ *
+ * Returns true if /etc/subgid should be opened/created, if
+ * false is returned, /etc/subgid should not be accessed.
+ */
+bool want_subgid_file(void)
+{
+	if (get_subid_nss_handle() != NULL)
+		return false;
+	if (getdef_ulong("SUB_GID_COUNT", 65536) == 0)
+		return false;
+	return true;
 }
 
 static struct commonio_db subordinate_gid_db = {
