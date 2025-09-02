@@ -214,7 +214,7 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	if (!sub_gid_open(O_RDONLY)) {
+	if (want_subgid_file() && !sub_gid_open(O_RDONLY)) {
 		fprintf (stderr,
 		         _("%s: cannot open %s: %s\n"),
 		         Prog, sub_gid_dbname (), strerror (errno));
@@ -230,7 +230,8 @@ int main(int argc, char **argv)
 
 	write_setgroups(proc_dir_fd, allow_setgroups);
 	write_mapping(proc_dir_fd, ranges, mappings, "gid_map", pw->pw_uid);
-	sub_gid_close();
+	if (want_subgid_file())
+		sub_gid_close();
 
 	return EXIT_SUCCESS;
 }

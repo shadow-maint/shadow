@@ -2185,8 +2185,8 @@ int main (int argc, char **argv)
 	is_shadow_grp = sgr_file_present ();
 #endif
 #ifdef ENABLE_SUBIDS
-	is_sub_uid = sub_uid_file_present ();
-	is_sub_gid = sub_gid_file_present ();
+	is_sub_uid = want_subuid_file() && sub_uid_file_present();
+	is_sub_gid = want_subgid_file() && sub_gid_file_present();
 #endif				/* ENABLE_SUBIDS */
 
 	process_flags (argc, argv);
