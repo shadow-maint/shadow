@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	if (!sub_uid_open(O_RDONLY)) {
+	if (want_subuid_file() && !sub_uid_open(O_RDONLY)) {
 		fprintf (stderr,
 		         _("%s: cannot open %s: %s\n"),
 		         Prog, sub_uid_dbname (), strerror (errno));
@@ -158,7 +158,8 @@ int main(int argc, char **argv)
 	verify_ranges(pw, ranges, mappings);
 
 	write_mapping(proc_dir_fd, ranges, mappings, "uid_map", pw->pw_uid);
-	sub_uid_close();
+	if (want_subuid_file())
+		sub_uid_close();
 
 	return EXIT_SUCCESS;
 }
