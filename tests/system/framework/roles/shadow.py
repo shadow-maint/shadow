@@ -48,6 +48,133 @@ class Shadow(BaseLinuxRole[ShadowHost]):
 
         return {"name": name}
 
+    def _has_non_interactive_passwd_flags(self, args_str: str) -> bool:
+        non_interactive_flags = ["--delete", "-d", "--expire", "-e", "--lock", "-l", "--unlock", "-u"]
+        return any(flag in args_str for flag in non_interactive_flags)
+
+    def _passwd_as_root(self, *args, new_password: str | None = None) -> ProcessResult:
+        args_dict = self._parse_args(args)
+        self.logger.info(f'Running passwd for user "{args_dict["name"]}" as root on {self.host.hostname}')
+
+        if "--stdin" in args[0]:
+            if new_password is None:
+                raise ValueError("new_password is required when running passwd as a regular user")
+
+            cmd = self.host.conn.run(
+                f"echo '{new_password}' | passwd --stdin {args[0]}", log_level=ProcessLogLevel.Error
+            )
+        elif self._has_non_interactive_passwd_flags(args[0]):
+            cmd = self.host.conn.run(f"passwd {args[0]}", log_level=ProcessLogLevel.Error)
+        else:
+            if new_password is None:
+                raise ValueError("new_password is required when using --stdin")
+            result = self.host.conn.expect(
+                rf"""
+                set timeout {DEFAULT_INTERACTIVE_TIMEOUT}
+                set prompt "\[#\$>\] $"
+
+                spawn passwd {args[0]}
+
+                expect {{
+                    -re "New.*password.*:" {{send "{new_password}\n"}}
+                    timeout {{puts "expect result: Timeout waiting for new password prompt"; exit 201}}
+                    eof {{puts "expect result: Unexpected end of file"; exit 202}}
+                }}
+
+                expect {{
+                    -re "Retype.*password.*:" {{send "{new_password}\n"}}
+                    -re "Re-enter.*password.*:" {{send "{new_password}\n"}}
+                    -re $prompt {{}}
+                    timeout {{puts "expect result: Timeout waiting for retype password prompt"; exit 201}}
+                    eof {{puts "expect result: Unexpected end of file"; exit 202}}
+                }}
+
+                expect {{
+                    -re $prompt {{}}
+                    timeout {{puts "expect result: Timeout waiting for final prompt"; exit 201}}
+                    eof {{exit 0}}
+                }}
+
+                exit 0
+                """,
+                verbose=False,
+            )
+
+            if result.rc > 200:
+                raise ExpectScriptError(result.rc)
+
+            cmd = result
+
+        self.host.discard_file("/etc/shadow")
+
+        return cmd
+
+    def _passwd_as_user(
+        self, *args, run_as: str, old_password: str | None = None, new_password: str | None = None
+    ) -> ProcessResult:
+        if old_password is None:
+            raise ValueError("old_password is required when running passwd as a regular user")
+        if new_password is None:
+            raise ValueError("new_password is required when running passwd as a regular user")
+
+        self.logger.info(f'Running passwd as user "{run_as}" on {self.host.hostname}')
+
+        result = self.host.conn.expect(
+            rf"""
+            set timeout {DEFAULT_INTERACTIVE_TIMEOUT}
+            set prompt "\[#\$>\] $"
+
+            spawn su - {run_as}
+            expect {{
+                -re $prompt {{send "passwd{' ' + args[0] if args else ''}\n"}}
+                timeout {{puts "expect result: Timeout waiting for su prompt"; exit 201}}
+                eof {{puts "expect result: Unexpected end of file"; exit 202}}
+            }}
+
+            expect {{
+                -re "Current.* password.*:" {{send "{old_password}\n"}}
+                -re "Old password.*:" {{send "{old_password}\n"}}
+                timeout {{puts "expect result: Timeout waiting for password prompt"; exit 201}}
+                eof {{puts "expect result: Unexpected end of file"; exit 202}}
+            }}
+
+            expect {{
+                -re "New.*password.*:" {{send "{new_password}\n"}}
+                -re "Retype.*password.*:" {{send "{new_password}\n"}}
+                -re $prompt {{}}
+                timeout {{puts "expect result: Timeout waiting for new password prompt"; exit 201}}
+                eof {{puts "expect result: Unexpected end of file"; exit 202}}
+            }}
+
+            expect {{
+                -re "Retype.*password.*:" {{send "{new_password}\n"}}
+                -re "Re-enter.*password.*:" {{send "{new_password}\n"}}
+                -re $prompt {{}}
+                timeout {{puts "expect result: Timeout waiting for retype password prompt"; exit 201}}
+                eof {{puts "expect result: Unexpected end of file"; exit 202}}
+            }}
+
+            expect {{
+                -re $prompt {{send "exit\n"}}
+                timeout {{puts "expect result: Timeout waiting for final prompt"; exit 201}}
+                eof {{}}
+            }}
+
+            expect {{
+                eof {{exit 0}}
+                timeout {{exit 201}}
+            }}
+            """,
+            verbose=False,
+        )
+
+        if result.rc > 200:
+            raise ExpectScriptError(result.rc)
+
+        self.host.discard_file("/etc/shadow")
+
+        return result
+
     def useradd(self, *args) -> ProcessResult:
         """
         Create user.
@@ -271,3 +398,18 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         current_gid = int(gid_line.split(":")[1])
 
         return result, current_gid
+
+    def passwd(
+        self, *args, run_as: str = "root", old_password: str | None = None, new_password: str | None = None
+    ) -> ProcessResult:
+        """
+        Change user password.
+
+        The passwd command changes passwords for user accounts. When run as root,
+        it can change any user's password without prompting for the old password.
+        When run as a regular user, it requires the old and new password.
+        """
+        if run_as == "root":
+            return self._passwd_as_root(*args, new_password=new_password)
+        else:
+            return self._passwd_as_user(*args, run_as=run_as, old_password=old_password, new_password=new_password)
