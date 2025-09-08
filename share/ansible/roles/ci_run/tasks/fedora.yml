@@ -39,6 +39,15 @@
     group: root
     mode: '0644'
 
+- name: Temporary workaround to create the chpasswd PAM service file
+  ansible.builtin.copy:
+    src: /etc/pam.d/chfn
+    dest: /etc/pam.d/chpasswd
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Build configuration
   ansible.builtin.command: >
     ./autogen.sh
