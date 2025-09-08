@@ -413,3 +413,24 @@ class Shadow(BaseLinuxRole[ShadowHost]):
             return self._passwd_as_root(*args, new_password=new_password)
         else:
             return self._passwd_as_user(*args, run_as=run_as, old_password=old_password, new_password=new_password)
+
+    def chpasswd(self, *args, passwords_data: str | None = None, file: str | None = None) -> ProcessResult:
+        """
+        Update passwords in batch.
+
+        Updates user passwords in batch by reading username:password pairs.
+        If `passwords_data` is provided, this data is used to simulate an interactive prompt.
+        Otherwise, the command reads from a file specified in `file`.
+        """
+        cmd_args = " ".join(args)
+
+        if passwords_data:
+            self.logger.info(f"Running chpasswd interactively on {self.host.hostname}")
+            cmd = self.host.conn.run(f"echo '{passwords_data}' | chpasswd {cmd_args}", log_level=ProcessLogLevel.Error)
+        else:
+            self.logger.info(f"Running chpasswd from file on {self.host.hostname}")
+            cmd = self.host.conn.run(f"chpasswd {cmd_args} < {file}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/shadow")
+
+        return cmd
