@@ -7,6 +7,7 @@
   ansible.builtin.dnf:
     use_backend: dnf4
     name:
+      - cracklib-dicts
       - dnf-plugins-core
       - expect
       - gawk
