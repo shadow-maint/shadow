@@ -52,3 +52,14 @@ def days_since_epoch():
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     delta = now_utc - epoch
     return delta.days
+
+
+def shadow_password_pattern() -> str:
+    """
+    Returns the shadow password regex pattern.
+
+    This pattern matches encrypted password hashes stored in /etc/shadow files,
+    including common formats like MD5, SHA-256, SHA-512, and yescrypt. The pattern
+    expects the standard Unix crypt format: $algorithm$salt$hash with optional parameters.
+    """
+    return r"^\$(?:\w)\$[^$]*\$[\w./]+(?:\$[\w./]+)?$"
