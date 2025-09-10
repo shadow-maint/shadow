@@ -23,6 +23,7 @@
 #include "alloc/x/xmalloc.h"
 #include "atoi/a2i/a2u.h"
 #include "idmapping.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
@@ -195,18 +196,18 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	/* Write the mapping to the mapping file */
 	fd = openat(proc_dir_fd, map_file, O_WRONLY);
 	if (fd < 0) {
-		fprintf(log_get_logfd(), _("%s: open of %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+		fprinte(log_get_logfd(), _("%s: open of %s failed"),
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 	if (write_full(fd, buf, pos - buf) == -1) {
-		fprintf(log_get_logfd(), _("%s: write to %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+		fprinte(log_get_logfd(), _("%s: write to %s failed"),
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 	if (close(fd) != 0 && errno != EINTR) {
-		fprintf(log_get_logfd(), _("%s: closing %s failed: %s\n"),
-			log_get_progname(), map_file, strerror(errno));
+		fprinte(log_get_logfd(), _("%s: closing %s failed"),
+			log_get_progname(), map_file);
 		exit(EXIT_FAILURE);
 	}
 	free(buf);
