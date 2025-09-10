@@ -462,12 +462,22 @@ int main (int argc, char **argv)
 	 * file (gshadow or group) and the password changed.
 	 */
 	while (fgets (buf, (int) sizeof buf, stdin) != NULL) {
+		char *cp;
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %jd: line too long\n"),
-			         Prog, line);
-			errors = true;
-			continue;
+			if (feof (stdin) == 0) {
+				// Drop all remaining characters on this line.
+				while (fgets (buf, sizeof buf, stdin) != NULL) {
+					cp = strchr (buf, '\n');
+					if (cp != NULL) {
+						break;
+					}
+				}
+				fprintf (stderr, _("%s: line %jd: line too long\n"),
+				         Prog, line);
+				errors = true;
+				continue;
+			}
 		}
 
 		/*
