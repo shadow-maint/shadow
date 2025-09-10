@@ -9,6 +9,7 @@
 - name: Ensure dependencies are installed
   ansible.builtin.apt:
     name:
+      - expect
       - gpg
       - libbsd-dev
       - libcmocka-dev

@@ -22,6 +22,12 @@
       - pkgconf
     state: present
 
+- name: Make sure expect is found
+  ansible.builtin.file:
+    src: /usr/bin/expect
+    dest: /bin/expect
+    state: link
+
 - name: Build configuration
   ansible.builtin.command: >
     ./autogen.sh
