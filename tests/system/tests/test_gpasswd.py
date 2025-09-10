@@ -39,3 +39,29 @@ def test_gpasswd__add_user_group_member_as_root(shadow: Shadow):
         assert gshadow_entry is not None, "Group should be found"
         assert gshadow_entry.name == "tgroup", "Incorrect groupname"
         assert "tuser" in gshadow_entry.members, "User should be member of group"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+@pytest.mark.builtwith(shadow="gshadow")
+def test_gpasswd__add_user_group_administrator_as_root(shadow: Shadow):
+    """
+    :title: Add user as group administrator
+    :setup:
+        1. Create test user and group
+    :steps:
+        1. Add user as group administrator using gpasswd
+        2. Check gshadow entry
+    :expectedresults:
+        1. User is added as group administrator
+        2. gshadow entry values are correct
+    :customerscenario: False
+    """
+    shadow.useradd("tuser")
+    shadow.groupadd("tgroup")
+
+    shadow.gpasswd("-A tuser tgroup")
+
+    gshadow_entry = shadow.tools.getent.gshadow("tgroup")
+    assert gshadow_entry is not None, "Group should be found"
+    assert gshadow_entry.name == "tgroup", "Incorrect groupname"
+    assert "tuser" in gshadow_entry.administrators, "User should be administrator of group"
