@@ -6,7 +6,6 @@ man_MANS = \
 	man1/chfn.1 \
 	man8/groupdel.8 \
 	man5/gshadow.5 \
-	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man8/nologin.8 \
 	man1/sg.1 \

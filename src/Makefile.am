@@ -48,7 +48,6 @@ usbin_PROGRAMS = \
 	grpck \
 	grpconv \
 	grpunconv \
-	logoutd \
 	newusers \
 	pwck \
 	pwconv \

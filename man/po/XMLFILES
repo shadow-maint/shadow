@@ -20,7 +20,6 @@ XMLFILES = \
 	$(top_srcdir)/man/login.1.xml \
 	$(top_srcdir)/man/login.access.5.xml \
 	$(top_srcdir)/man/login.defs.5.xml \
-	$(top_srcdir)/man/logoutd.8.xml \
 	$(top_srcdir)/man/newgrp.1.xml \
 	$(top_srcdir)/man/newusers.8.xml \
 	$(top_srcdir)/man/nologin.8.xml \
