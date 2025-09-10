@@ -454,3 +454,27 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/gshadow")
 
         return cmd
+
+    def chgpasswd(self, *args, passwords_data: str | None = None, file: str | None = None) -> ProcessResult:
+        """
+        Update group passwords in batch.
+
+        Updates group passwords in batch by reading groupname:password pairs.
+        If `passwords_data` is provided, this data is used to simulate an interactive prompt.
+        Otherwise, the command reads from a file specified in `file`.
+        """
+        cmd_args = " ".join(args)
+
+        if passwords_data:
+            self.logger.info(f"Running chgpasswd interactively on {self.host.hostname}")
+            cmd = self.host.conn.run(
+                f"echo '{passwords_data}' | chgpasswd {cmd_args}", log_level=ProcessLogLevel.Error
+            )
+        else:
+            self.logger.info(f"Running chgpasswd from file on {self.host.hostname}")
+            cmd = self.host.conn.run(f"chgpasswd {cmd_args} < {file}", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
