@@ -434,3 +434,23 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/shadow")
 
         return cmd
+
+    def gpasswd(self, *args, run_as: str = "root") -> ProcessResult:
+        """
+        Administer group passwords and membership.
+
+        Groups can have administrators, members, and passwords.
+        """
+        args_dict = self._parse_args(args)
+
+        if run_as == "root":
+            self.logger.info(f'Administering group "{args_dict["name"]}" as root on {self.host.hostname}')
+            cmd = self.host.conn.run("gpasswd " + args[0], log_level=ProcessLogLevel.Error)
+        else:
+            self.logger.info(f'Administering group "{args_dict["name"]}" as user "{run_as}" on {self.host.hostname}')
+            cmd = self.host.conn.run(f"su - {run_as} -c 'gpasswd {args[0]}'", log_level=ProcessLogLevel.Error)
+
+        self.host.discard_file("/etc/group")
+        self.host.discard_file("/etc/gshadow")
+
+        return cmd
