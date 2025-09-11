@@ -478,3 +478,90 @@ class Shadow(BaseLinuxRole[ShadowHost]):
         self.host.discard_file("/etc/gshadow")
 
         return cmd
+
+    def vipw(self, *args, editor_script: str | None = None) -> ProcessResult:
+        """
+        Safely edit password, group, shadow or gshadow files.
+
+        If `editor_script` is provided, this script to run in the editor.
+        Otherwise, the editor will exit immediately without making changes.
+        """
+        cmd_args = " ".join(args)
+
+        if "g" in cmd_args:
+            if "s" in cmd_args:
+                file_to_discard = "/etc/gshadow"
+            else:
+                file_to_discard = "/etc/group"
+        else:
+            if "s" in cmd_args:
+                file_to_discard = "/etc/shadow"
+            else:
+                file_to_discard = "/etc/passwd"
+
+        self.logger.info(f"Running vipw on file {file_to_discard} on {self.host.hostname}")
+
+        commands = editor_script.split("\n") if editor_script else [":q!"]
+
+        command_script = ""
+        for i, cmd in enumerate(commands):
+            if cmd.strip():
+                is_insert_command = cmd.strip() in ["Go", "o", "O", "i", "I", "a", "A"]
+
+                if is_insert_command:
+                    command_script += f"""
+                        # Send command {i + 1}: {cmd[:30]}... (insert mode)
+                        send "{cmd}\\r"
+                        sleep 0.1
+                        """
+                elif cmd.strip().startswith(":"):
+                    command_script += f"""
+                        # Send command {i + 1}: {cmd[:30]}... (command mode)
+                        send "\\033"
+                        sleep 0.1
+                        send "{cmd}\\r"
+                        sleep 0.1
+                        """
+                else:
+                    command_script += f"""
+                        # Send command {i + 1}: {cmd[:30]}...
+                        send "{cmd}\\r"
+                        sleep 0.1
+                        """
+
+        result = self.host.conn.expect(
+            rf"""
+            set timeout {DEFAULT_INTERACTIVE_TIMEOUT}
+            set prompt "\[#\$>\] $"
+
+            spawn env EDITOR=vi TERM=dumb LC_ALL=C vipw {cmd_args}
+
+            expect {{
+                -re ":" {{}}
+                -re "~" {{}}
+                -re "lines" {{}}
+                -re "entering" {{}}
+                timeout {{puts "expect result: Timeout waiting for editor"; exit 201}}
+                eof {{puts "expect result: Unexpected end of file"; exit 202}}
+            }}
+
+            sleep 0.2
+            {command_script}
+
+            expect {{
+                -re $prompt {{}}
+                timeout {{puts "expect result: Timeout waiting for vipw to finish"; exit 201}}
+                eof {{exit 0}}
+            }}
+
+            exit 0
+            """,
+            verbose=False,
+        )
+
+        if result.rc > 200:
+            raise ExpectScriptError(result.rc)
+
+        self.host.discard_file(file_to_discard)
+
+        return result
