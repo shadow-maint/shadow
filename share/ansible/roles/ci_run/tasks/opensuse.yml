@@ -20,6 +20,7 @@
       - libxslt-tools
       - make
       - systemd-devel
+      - vim
     state: present
 
 # Needed to use `zypper si`
