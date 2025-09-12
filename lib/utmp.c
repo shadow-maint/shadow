@@ -16,6 +16,7 @@
 
 #include <utmpx.h>
 #include <assert.h>
+#include <paths.h>
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -381,7 +382,7 @@ setutmp(struct utmpx *ut)
 
 #if !defined(USE_PAM)
 	/* This is done by pam_lastlog */
-	updwtmpx(_WTMP_FILE, ut);
+	updwtmpx(_PATH_WTMP, ut);
 #endif
 
 	return err;

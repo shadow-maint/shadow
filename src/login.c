@@ -63,14 +63,6 @@ static pam_handle_t *pamh = NULL;
 
 #endif				/* USE_PAM */
 
-#ifndef USE_PAM
-/*
- * Needed for MkLinux DR1/2/2.1 - J.
- */
-#ifndef LASTLOG_FILE
-#define LASTLOG_FILE "/var/log/lastlog"
-#endif
-#endif				/* !USE_PAM */
 
 /*
  * Global variables

@@ -9,14 +9,14 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <sys/types.h>
+#include <lastlog.h>
+#include <paths.h>
 #include <pwd.h>
 #include <fcntl.h>
+#include <sys/types.h>
 #include <time.h>
+
 #include "defines.h"
-#include <lastlog.h>
 #include "prototypes.h"
 #include "string/memset/memzero.h"
 #include "string/strcpy/strncpy.h"
@@ -45,7 +45,7 @@ void dolastlog (
 	 * If the file does not exist, don't create it.
 	 */
 
-	fd = open (LASTLOG_FILE, O_RDWR);
+	fd = open(_PATH_LASTLOG, O_RDWR);
 	if (-1 == fd) {
 		return;
 	}
@@ -60,7 +60,7 @@ void dolastlog (
 	if (lseek (fd, offset, SEEK_SET) != offset) {
 		SYSLOG ((LOG_WARN,
 		         "Can't read last lastlog entry for UID %lu in %s. Entry not updated.",
-		         (unsigned long) pw->pw_uid, LASTLOG_FILE));
+		         (unsigned long) pw->pw_uid, _PATH_LASTLOG));
 		(void) close (fd);
 		return;
 	}
@@ -105,5 +105,5 @@ err_write:
 err_close:
 	SYSLOG ((LOG_WARN,
 	         "Can't write lastlog entry for UID %lu in %s: %m",
-	         (unsigned long) pw->pw_uid, LASTLOG_FILE));
+	         (unsigned long) pw->pw_uid, _PATH_LASTLOG));
 }
