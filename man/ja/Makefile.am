@@ -18,7 +18,6 @@ man_MANS = \
 	man8/grpunconv.8 \
 	man1/login.1 \
 	man5/login.defs.5 \
-	man8/logoutd.8 \
 	man1/newgrp.1 \
 	man8/newusers.8 \
 	man1/passwd.1 \
