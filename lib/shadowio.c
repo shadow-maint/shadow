@@ -18,6 +18,7 @@
 #include "fields.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "shadow/shadow/sgetspent.h"
 #include "shadowio.h"
 
 #ifdef WITH_TCB
