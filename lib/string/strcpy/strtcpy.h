@@ -58,8 +58,10 @@ strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 	bool    trunc;
 	size_t  dlen, slen;
 
-	if (dsize == 0)
+	if (dsize == 0) {
+		errno = EOVERFLOW;
 		return -1;
+	}
 
 	slen = strnlen(src, dsize);
 	trunc = (slen == dsize);
@@ -67,8 +69,10 @@ strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 
 	stpcpy(mempcpy(dst, src, dlen), "");
 
-	if (trunc)
+	if (trunc) {
+		errno = E2BIG;
 		return -1;
+	}
 
 	return slen;
 }
