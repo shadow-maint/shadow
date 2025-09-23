@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 
 #include <setjmp.h>
 #include <stdarg.h>
