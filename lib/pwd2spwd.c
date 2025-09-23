@@ -9,12 +9,12 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <sys/types.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+#include <sys/types.h>
+
+#include "defines.h"
+#include "prototypes.h"
+#include "time/date.h"
 
 /*
  * pwd_to_spwd - create entries for new spwd structure
@@ -40,12 +40,7 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 		 */
 		sp.sp_min = 0;
 		sp.sp_max = 10000;
-		sp.sp_lstchg = gettime () / DAY;
-		if (0 == sp.sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			sp.sp_lstchg = -1;
-		}
+		sp.sp_lstchg = date_or_SDE();
 	}
 
 	/*
