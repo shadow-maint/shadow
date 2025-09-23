@@ -22,7 +22,7 @@
 
 ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
-void *xcalloc(size_t nmemb, size_t size);
+void *xcalloc(size_t n, size_t size);
 
 
 #endif  // include guard
