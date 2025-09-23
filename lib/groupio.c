@@ -23,6 +23,7 @@
 #include "getdef.h"
 #include "groupio.h"
 #include "prototypes.h"
+#include "shadow/group/sgetgrent.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 
@@ -331,7 +332,8 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 		return NULL;
 
 	/* Concatenate the 2 list of members */
-	for (i=0; NULL != gptr1->gr_mem[i]; i++);
+	for (i=0; NULL != gptr1->gr_mem[i]; i++)
+		continue;
 	members += i;
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = gptr1->gr_mem;
@@ -401,7 +403,8 @@ static int split_groups (unsigned int max_members)
 		if (NULL == gptr) {
 			continue;
 		}
-		for (members = 0; NULL != gptr->gr_mem[members]; members++);
+		for (members = 0; NULL != gptr->gr_mem[members]; members++)
+			continue;
 		if (members <= max_members) {
 			continue;
 		}
