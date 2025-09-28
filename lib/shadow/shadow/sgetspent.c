@@ -10,6 +10,8 @@
 
 #include "shadow/shadow/sgetspent.h"
 
+#include <errno.h>
+#include <shadow.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,8 +43,9 @@ sgetspent(const char *s)
 	static struct spwd  spent_ = {};
 	struct spwd         *spent = &spent_;
 
-	char *fields[FIELDS];
-	size_t  i, size;
+	int          e;
+	size_t       size;
+	struct spwd  *dummy;
 
 	size = strlen(s) + 1;
 
@@ -51,8 +54,33 @@ sgetspent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	if (strtcpy(buf, s, size) == -1)
+	e = sgetspent_r(s, spent, buf, size, &dummy);
+	if (e != 0) {
+		errno = e;
 		return NULL;
+	}
+
+	return spent;
+}
+#endif
+
+
+#ifndef HAVE_SGETSPENT_R
+// from-string get shadow password entry re-entrant
+int
+sgetspent_r(size_t size;
+    const char *restrict s, struct spwd *spent, char buf[size], size_t size,
+    struct spwd **dummy)
+{
+	char    *fields[FIELDS];
+	size_t  i;
+
+	// 'dummy' exists only for historic reasons.
+	if (dummy != NULL)
+		*dummy = spent;
+
+	if (strtcpy(buf, s, size) == -1)
+		return errno;
 
 	stpsep(buf, "\n");
 
@@ -60,7 +88,7 @@ sgetspent(const char *s)
 	if (i == countof(fields) - 1)
 		fields[i++] = "";
 	if (i != countof(fields) && i != OFIELDS)
-		return NULL;
+		return EINVAL;
 
 	spent->sp_namp = fields[0];
 	spent->sp_pwdp = fields[1];
@@ -68,17 +96,17 @@ sgetspent(const char *s)
 	if (streq(fields[2], ""))
 		spent->sp_lstchg = -1;
 	else if (a2sl(&spent->sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	if (streq(fields[3], ""))
 		spent->sp_min = -1;
 	else if (a2sl(&spent->sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	if (streq(fields[4], ""))
 		spent->sp_max = -1;
 	else if (a2sl(&spent->sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	if (i == OFIELDS) {
 		/*
@@ -91,23 +119,23 @@ sgetspent(const char *s)
 		spent->sp_expire = -1;
 		spent->sp_flag   = SHADOW_SP_FLAG_UNSET;
 
-		return spent;
+		return 0;
 	}
 
 	if (streq(fields[5], ""))
 		spent->sp_warn = -1;
 	else if (a2sl(&spent->sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	if (streq(fields[6], ""))
 		spent->sp_inact = -1;
 	else if (a2sl(&spent->sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	if (streq(fields[7], ""))
 		spent->sp_expire = -1;
 	else if (a2sl(&spent->sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		return errno;
 
 	/*
 	 * This field is reserved for future use.  But it isn't supposed
@@ -116,8 +144,8 @@ sgetspent(const char *s)
 	if (streq(fields[8], ""))
 		spent->sp_flag = SHADOW_SP_FLAG_UNSET;
 	else if (str2ul(&spent->sp_flag, fields[8]) == -1)
-		return NULL;
+		return errno;
 
-	return spent;
+	return 0;
 }
 #endif
