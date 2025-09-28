@@ -10,7 +10,9 @@
 
 #include "list.h"
 
+#include <stddef.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 #include <assert.h>
 
@@ -19,6 +21,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/astrsep2ls.h"
+#include "string/strtok/strsep2ls.h"
 
 
 /*
@@ -233,4 +236,20 @@ acsv2ls(char *s)
 		l[n-1] = NULL;
 
 	return l;
+}
+
+
+int
+csv2ls(char *s, size_t n, char *ls[restrict n])
+{
+	ssize_t  i;
+
+	i = strsep2ls(s, ",", n, ls);
+	if (i == -1)
+		return -1;
+
+	if (streq(ls[i-1], ""))
+		ls[i-1] = NULL;
+
+	return 0;
 }
