@@ -18,8 +18,7 @@
 
 #include "alloc/malloc.h"
 #include "atoi/getnum.h"
-#include "defines.h"
-#include "prototypes.h"
+#include "list.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 

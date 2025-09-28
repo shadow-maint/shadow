@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "prototypes.h"
+#include "list.h"
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
