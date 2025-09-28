@@ -122,7 +122,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 		sgr_setdbname(sgroup_db_file);
 #endif
 
-		spw_db_file = xaprintf("%s/%s", prefix, SHADOW_FILE);
+		spw_db_file = xaprintf("%s/%s", prefix, _PATH_SHADOW);
 		spw_setdbname(spw_db_file);
 
 #ifdef ENABLE_SUBIDS

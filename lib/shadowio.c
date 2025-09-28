@@ -10,6 +10,7 @@
 
 #include "config.h"
 
+#include <paths.h>
 #include <shadow.h>
 #include <stdio.h>
 
@@ -82,7 +83,7 @@ static struct commonio_ops shadow_ops = {
 };
 
 static struct commonio_db shadow_db = {
-	SHADOW_FILE,		/* filename */
+	_PATH_SHADOW,		/* filename */
 	&shadow_ops,		/* ops */
 	NULL,			/* fp */
 #ifdef WITH_SELINUX
