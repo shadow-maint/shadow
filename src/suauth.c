@@ -18,6 +18,7 @@
 #include <sys/types.h>
 
 #include "defines.h"
+#include "list.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
