@@ -9,6 +9,7 @@
 #include "config.h"
 
 #include <stdbool.h>
+#include <stddef.h>
 
 
 extern /*@only@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
@@ -17,6 +18,7 @@ extern /*@only@*/char **dup_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
 extern /*@only@*/char **comma_to_list (const char *);
 extern char **acsv2ls(char *s);
+extern int csv2ls(char *s, size_t n, char *ls[restrict n]);
 
 
 #endif  // include guard
