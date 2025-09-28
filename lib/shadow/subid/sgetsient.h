@@ -14,6 +14,9 @@
 
 #ifdef ENABLE_SUBIDS
 struct subordinate_range *sgetsient(const char *s);
+int sgetsient_r(size_t size;
+    const char *restrict s, struct subordinate_range *restrict sient,
+    char buf[restrict size], size_t size);
 #endif
 
 
