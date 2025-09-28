@@ -106,6 +106,7 @@ libshadow_la_SOURCES = \
 	isexpired.c \
 	limits.c \
 	list.c \
+	list.h \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \

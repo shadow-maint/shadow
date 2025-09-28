@@ -8,12 +8,13 @@
 
 #include "config.h"
 
+#include "list.h"
+
 #include <stdlib.h>
 
 #include <assert.h>
 
 #include "alloc/malloc.h"
-#include "prototypes.h"
 #include "defines.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
