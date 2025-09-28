@@ -17,20 +17,19 @@
 
 #ifndef USE_PAM
 
-#ident "$Id$"
-
+#include <ctype.h>
+#include <pwd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <stdio.h>
-#include <ctype.h>
-#include "prototypes.h"
-#include "defines.h"
-#include <pwd.h>
-#include "getdef.h"
-#include "shadowlog.h"
 #include <sys/resource.h>
 
 #include "atoi/a2i.h"
+#include "defines.h"
+#include "list.h"
+#include "getdef.h"
+#include "prototypes.h"
+#include "shadowlog.h"
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
