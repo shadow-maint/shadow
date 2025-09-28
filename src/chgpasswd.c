@@ -20,6 +20,7 @@
 
 #include "atoi/a2i.h"
 #include "defines.h"
+#include "list.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
