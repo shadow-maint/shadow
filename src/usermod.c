@@ -40,6 +40,7 @@
 #include "groupio.h"
 #include "io/fprintf.h"
 #include "io/syslog.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
