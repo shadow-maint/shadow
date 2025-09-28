@@ -157,10 +157,6 @@
 #define GROUP_FILE "/etc/group"
 #endif
 
-#ifndef SHADOW_FILE
-#define SHADOW_FILE "/etc/shadow"
-#endif
-
 #ifndef SUBUID_FILE
 #define SUBUID_FILE "/etc/subuid"
 #endif
