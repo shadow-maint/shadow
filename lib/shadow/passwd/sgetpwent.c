@@ -33,8 +33,7 @@ struct passwd *
 sgetpwent(const char *s)
 {
 	static char           *buf = NULL;
-	static struct passwd  pwent_ = {};
-	struct passswd        *pwent = &pwent_;
+	static struct passwd  pwent = {};
 
 	int     e;
 	size_t  size;
@@ -46,13 +45,13 @@ sgetpwent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	e = sgetpwent_r(s, pwent, buf, size);
+	e = sgetpwent_r(s, &pwent, buf, size);
 	if (e != 0) {
 		errno = e;
 		return NULL;
 	}
 
-	return pwent;
+	return &pwent;
 }
 
 
