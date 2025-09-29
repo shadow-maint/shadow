@@ -22,14 +22,12 @@
 
 
 #if defined(SHADOWGRP) && !__has_include(<gshadow.h>)
-static struct sgrp  sgroup = {};
-
-
 // from-string get shadow group entry
 struct sgrp *
 sgetsgent(const char *s)
 {
-	static char  *dup = NULL;
+	static char         *dup = NULL;
+	static struct sgrp  sgroup = {};
 
 	char  *fields[4];
 
