@@ -17,10 +17,12 @@
 #include <string.h>
 
 #include "atoi/a2i.h"
+#include "alloc/malloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "sizeof.h"
 #include "string/strcmp/streq.h"
+#include "string/strcpy/strtcpy.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -38,11 +40,16 @@ sgetspent(const char *s)
 	static struct spwd spwd;
 
 	char *fields[FIELDS];
-	size_t  i;
+	size_t  i, size;
+
+	size = strlen(s) + 1;
 
 	free(buf);
-	buf = strdup(s);
+	buf = MALLOC(size, char);
 	if (buf == NULL)
+		return NULL;
+
+	if (strtcpy(buf, s, size) == -1)
 		return NULL;
 
 	stpsep(buf, "\n");
