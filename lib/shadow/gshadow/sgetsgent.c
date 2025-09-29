@@ -29,28 +29,24 @@
 struct sgrp *
 sgetsgent(const char *s)
 {
-	static char         **buf = NULL;
-	static char         *p = NULL;
+	static char         *buf = NULL;
 	static struct sgrp  sgroup = {};
 
 	char    *fields[4];
-	char    *end;
-	size_t  n, nadm, nmem, size;
+	char    *p, *end;
+	size_t  n, nadm, nmem, lssize, size;
 
 	n = strchrcnt(s, ',') + 4;
-	size = strlen(s) + 1;
+	lssize = n * sizeof(char *);  // For 'sgent.sg_adm' and 'sgent.sg_mem'
+	size = lssize + strlen(s) + 1;
 
 	free(buf);
-	buf = MALLOC(n, char *);
+	buf = MALLOC(size, char);
 	if (buf == NULL)
 		return NULL;
 
-	free(p);
-	p = MALLOC(size, char);
-	if (p == NULL)
-		return NULL;
-
-	end = p + size;
+	end = buf + size;
+	p = buf + lssize;
 	if (stpecpy(p, end, s) == NULL)
 		return NULL;
 
@@ -62,14 +58,14 @@ sgetsgent(const char *s)
 	sgroup.sg_namp = fields[0];
 	sgroup.sg_passwd = fields[1];
 
-	sgroup.sg_adm = buf;
+	sgroup.sg_adm = (char **) buf;
 	nadm = strchrcnt(fields[2], ',') + 2;
 	if (nadm > n)
 		return NULL;
 	if (csv2ls(fields[2], nadm, sgroup.sg_adm) == -1)
 		return NULL;
 
-	sgroup.sg_mem = buf + nadm;
+	sgroup.sg_mem = sgroup.sg_adm + nadm;
 	nmem = strchrcnt(fields[3], ',') + 2;
 	if (nmem + nadm > n)
 		return NULL;
