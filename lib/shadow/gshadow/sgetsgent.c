@@ -30,14 +30,15 @@ struct sgrp *
 sgetsgent(const char *s)
 {
 	static char         *buf = NULL;
-	static struct sgrp  sgent = {};
+	static struct sgrp  sgent_ = {};
+	struct sgrp         *sgent = &sgent_;
 
 	char    *fields[4];
 	char    *p, *end;
 	size_t  n, nadm, nmem, lssize, size;
 
 	n = strchrcnt(s, ',') + 4;
-	lssize = n * sizeof(char *);  // For 'sgent.sg_adm' and 'sgent.sg_mem'
+	lssize = n * sizeof(char *);  // For 'sgent->sg_adm' and 'sgent->sg_mem'
 	size = lssize + strlen(s) + 1;
 
 	free(buf);
@@ -55,23 +56,23 @@ sgetsgent(const char *s)
 	if (strsep2arr_a(p, ":", fields) == -1)
 		return NULL;
 
-	sgent.sg_namp = fields[0];
-	sgent.sg_passwd = fields[1];
+	sgent->sg_namp = fields[0];
+	sgent->sg_passwd = fields[1];
 
-	sgent.sg_adm = (char **) buf;
+	sgent->sg_adm = (char **) buf;
 	nadm = strchrcnt(fields[2], ',') + 2;
 	if (nadm > n)
 		return NULL;
-	if (csv2ls(fields[2], nadm, sgent.sg_adm) == -1)
+	if (csv2ls(fields[2], nadm, sgent->sg_adm) == -1)
 		return NULL;
 
-	sgent.sg_mem = sgent.sg_adm + nadm;
+	sgent->sg_mem = sgent->sg_adm + nadm;
 	nmem = strchrcnt(fields[3], ',') + 2;
 	if (nmem + nadm > n)
 		return NULL;
-	if (csv2ls(fields[3], nmem, sgent.sg_mem) == -1)
+	if (csv2ls(fields[3], nmem, sgent->sg_mem) == -1)
 		return NULL;
 
-	return &sgent;
+	return sgent;
 }
 #endif
