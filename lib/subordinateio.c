@@ -26,10 +26,10 @@
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "shadow/passwd/getpw.h"
+#include "shadow/subid/sgetsient.h"
 #include "string/ctype/isascii.h"
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/strsep2arr.h"
 #include "typetraits.h"
 
 #undef NDEBUG
@@ -92,37 +92,7 @@ subordinate_free(/*@only@*/void *ent)
 static void *
 subordinate_parse(const char *line)
 {
-	static struct subordinate_range range;
-	static char rangebuf[1024];
-	char *fields[SUBID_NFIELDS];
-
-	/*
-	 * Copy the string to a temporary buffer so the substrings can
-	 * be modified to be NULL terminated.
-	 */
-	if (strlen(line) >= sizeof(rangebuf))
-		return NULL;	/* fail if too long */
-	strcpy (rangebuf, line);
-
-	if (strsep2arr_a(rangebuf, ":", fields) == -1)
-		return NULL;
-
-	if (streq(fields[0], ""))
-		return NULL;
-	if (streq(fields[1], ""))
-		return NULL;
-	if (streq(fields[2], ""))
-		return NULL;
-	range.owner = fields[0];
-	if (a2ul(&range.start, fields[1], NULL, 0, 0, maxof(id_t)) == -1)
-		return NULL;
-	if (a2ul(&range.count, fields[2], NULL, 0, 0,
-	         MIN(maxof(id_t) + 1LL - range.start, maxof(id_t))) == -1)
-	{
-		return NULL;
-	}
-
-	return &range;
+	return sgetsient(line);
 }
 
 /*
