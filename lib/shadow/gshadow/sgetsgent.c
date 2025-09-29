@@ -30,7 +30,7 @@ struct sgrp *
 sgetsgent(const char *s)
 {
 	static char         *buf = NULL;
-	static struct sgrp  sgroup = {};
+	static struct sgrp  sgent = {};
 
 	char    *fields[4];
 	char    *p, *end;
@@ -55,23 +55,23 @@ sgetsgent(const char *s)
 	if (strsep2arr_a(p, ":", fields) == -1)
 		return NULL;
 
-	sgroup.sg_namp = fields[0];
-	sgroup.sg_passwd = fields[1];
+	sgent.sg_namp = fields[0];
+	sgent.sg_passwd = fields[1];
 
-	sgroup.sg_adm = (char **) buf;
+	sgent.sg_adm = (char **) buf;
 	nadm = strchrcnt(fields[2], ',') + 2;
 	if (nadm > n)
 		return NULL;
-	if (csv2ls(fields[2], nadm, sgroup.sg_adm) == -1)
+	if (csv2ls(fields[2], nadm, sgent.sg_adm) == -1)
 		return NULL;
 
-	sgroup.sg_mem = sgroup.sg_adm + nadm;
+	sgent.sg_mem = sgent.sg_adm + nadm;
 	nmem = strchrcnt(fields[3], ',') + 2;
 	if (nmem + nadm > n)
 		return NULL;
-	if (csv2ls(fields[3], nmem, sgroup.sg_mem) == -1)
+	if (csv2ls(fields[3], nmem, sgent.sg_mem) == -1)
 		return NULL;
 
-	return &sgroup;
+	return &sgent;
 }
 #endif
