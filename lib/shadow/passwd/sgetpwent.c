@@ -33,7 +33,8 @@ struct passwd *
 sgetpwent(const char *s)
 {
 	static char           *buf = NULL;
-	static struct passwd pwent;
+	static struct passwd  pwent_ = {};
+	struct passswd        *pwent = &pwent_;
 
 	char    *fields[7];
 	size_t  size;
@@ -53,17 +54,15 @@ sgetpwent(const char *s)
 	if (strsep2arr_a(buf, ":", fields) == -1)
 		return NULL;
 
-	pwent.pw_name = fields[0];
-	pwent.pw_passwd = fields[1];
-	if (get_uid(fields[2], &pwent.pw_uid) == -1) {
+	pwent->pw_name = fields[0];
+	pwent->pw_passwd = fields[1];
+	if (get_uid(fields[2], &pwent->pw_uid) == -1)
 		return NULL;
-	}
-	if (get_gid(fields[3], &pwent.pw_gid) == -1) {
+	if (get_gid(fields[3], &pwent->pw_gid) == -1)
 		return NULL;
-	}
-	pwent.pw_gecos = fields[4];
-	pwent.pw_dir = fields[5];
-	pwent.pw_shell = fields[6];
+	pwent->pw_gecos = fields[4];
+	pwent->pw_dir = fields[5];
+	pwent->pw_shell = fields[6];
 
-	return &pwent;
+	return pwent;
 }
