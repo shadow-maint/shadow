@@ -8,8 +8,16 @@
 
 #include "config.h"
 
+#include <stdalign.h>
+#include <stdint.h>
+
 #include "sizeof.h"
 
+
+#define is_aligned(p, T)                                              \
+(                                                                     \
+	!((uintptr_t) p % alignof(T))                                 \
+)
 
 #define is_unsigned(x)                                                        \
 (                                                                             \
