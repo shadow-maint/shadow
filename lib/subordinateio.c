@@ -1124,8 +1124,4 @@ void free_subid_pointer(void *ptr)
 		free(ptr);
 	}
 }
-
-#else				/* !ENABLE_SUBIDS */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
-

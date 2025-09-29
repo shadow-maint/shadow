@@ -204,7 +204,4 @@ int check_selinux_permit (const char *perm_name)
 	freecon (user_context_raw);
 	return r;
 }
-
-#else				/* !WITH_SELINUX */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !WITH_SELINUX */
