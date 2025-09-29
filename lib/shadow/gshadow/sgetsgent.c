@@ -32,15 +32,14 @@ struct sgrp *
 sgetsgent(const char *s)
 {
 	static char         *buf = NULL;
-	static struct sgrp  sgent_ = {};
-	struct sgrp         *sgent = &sgent_;
+	static struct sgrp  sgent = {};
 
 	int          e;
 	size_t       n, lssize, size;
 	struct sgrp  *dummy;
 
 	n = strchrcnt(s, ',') + 4;
-	lssize = n * sizeof(char *);  // For 'sgent->sg_adm' and 'sgent->sg_mem'
+	lssize = n * sizeof(char *);  // For 'sgent.sg_adm' and 'sgent.sg_mem'
 	size = lssize + strlen(s) + 1;
 
 	free(buf);
@@ -48,13 +47,13 @@ sgetsgent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	e = sgetsgent_r(s, sgent, buf, size, &dummy);
+	e = sgetsgent_r(s, &sgent, buf, size, &dummy);
 	if (e != 0) {
 		errno = e;
 		return NULL;
 	}
 
-	return sgent;
+	return &sgent;
 }
 
 
