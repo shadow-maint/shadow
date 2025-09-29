@@ -38,7 +38,7 @@ struct spwd *
 sgetspent(const char *s)
 {
 	static char         *buf = NULL;
-	static struct spwd spwd;
+	static struct spwd  spent;
 
 	char *fields[FIELDS];
 	size_t  i, size;
@@ -61,22 +61,22 @@ sgetspent(const char *s)
 	if (i != countof(fields) && i != OFIELDS)
 		return NULL;
 
-	spwd.sp_namp = fields[0];
-	spwd.sp_pwdp = fields[1];
+	spent.sp_namp = fields[0];
+	spent.sp_pwdp = fields[1];
 
 	if (streq(fields[2], ""))
-		spwd.sp_lstchg = -1;
-	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_lstchg = -1;
+	else if (a2sl(&spent.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	if (streq(fields[3], ""))
-		spwd.sp_min = -1;
-	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_min = -1;
+	else if (a2sl(&spent.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	if (streq(fields[4], ""))
-		spwd.sp_max = -1;
-	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_max = -1;
+	else if (a2sl(&spent.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	if (i == OFIELDS) {
@@ -85,27 +85,27 @@ sgetspent(const char *s)
 		 * /etc/shadow formatted file.  Initialize the other
 		 * field members to -1.
 		 */
-		spwd.sp_warn   = -1;
-		spwd.sp_inact  = -1;
-		spwd.sp_expire = -1;
-		spwd.sp_flag   = SHADOW_SP_FLAG_UNSET;
+		spent.sp_warn   = -1;
+		spent.sp_inact  = -1;
+		spent.sp_expire = -1;
+		spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
 
-		return &spwd;
+		return &spent;
 	}
 
 	if (streq(fields[5], ""))
-		spwd.sp_warn = -1;
-	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_warn = -1;
+	else if (a2sl(&spent.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	if (streq(fields[6], ""))
-		spwd.sp_inact = -1;
-	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_inact = -1;
+	else if (a2sl(&spent.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	if (streq(fields[7], ""))
-		spwd.sp_expire = -1;
-	else if (a2sl(&spwd.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
+		spent.sp_expire = -1;
+	else if (a2sl(&spent.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
 	/*
@@ -113,10 +113,10 @@ sgetspent(const char *s)
 	 * to have anything other than a valid integer in it.
 	 */
 	if (streq(fields[8], ""))
-		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	else if (str2ul(&spwd.sp_flag, fields[8]) == -1)
+		spent.sp_flag = SHADOW_SP_FLAG_UNSET;
+	else if (str2ul(&spent.sp_flag, fields[8]) == -1)
 		return NULL;
 
-	return (&spwd);
+	return (&spent);
 }
 #endif
