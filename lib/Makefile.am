@@ -176,6 +176,8 @@ libshadow_la_SOURCES = \
 	shadow/passwd/sgetpwent.h \
 	shadow/shadow/sgetspent.c \
 	shadow/shadow/sgetspent.h \
+	shadow/subid/sgetsient.c \
+	shadow/subid/sgetsient.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
