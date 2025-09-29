@@ -29,19 +29,19 @@
 struct passwd *
 sgetpwent(const char *s)
 {
-	static char          *dup = NULL;
+	static char           *buf = NULL;
 	static struct passwd pwent;
 
 	char  *fields[7];
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	free(buf);
+	buf = strdup(s);
+	if (buf == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
+	stpsep(buf, "\n");
 
-	if (strsep2arr_a(dup, ":", fields) == -1)
+	if (strsep2arr_a(buf, ":", fields) == -1)
 		return NULL;
 
 	pwent.pw_name = fields[0];
