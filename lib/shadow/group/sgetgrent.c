@@ -11,6 +11,7 @@
 #include "shadow/group/sgetgrent.h"
 
 #include <grp.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +20,7 @@
 #include "alloc/malloc.h"
 #include "atoi/getnum.h"
 #include "list.h"
+#include "string/strchr/strchrcnt.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -27,10 +29,19 @@
 struct group *
 sgetgrent(const char *s)
 {
+	static char         **buf = NULL;
 	static char         *dup = NULL;
 	static struct group grent = {};
 
-	char  *fields[4];
+	char    *fields[4];
+	size_t  n;
+
+	n = strchrcnt(s, ',') + 2;
+
+	free(buf);
+	buf = MALLOC(n, char *);
+	if (buf == NULL)
+		return NULL;
 
 	free(dup);
 	dup = strdup(s);
@@ -47,12 +58,9 @@ sgetgrent(const char *s)
 	if (get_gid(fields[2], &grent.gr_gid) == -1)
 		return NULL;
 
-	free(grent.gr_mem);
-
-	grent.gr_mem = acsv2ls(fields[3]);
-	if (NULL == grent.gr_mem) {
+	grent.gr_mem = buf;
+	if (csv2ls(fields[3], n, grent.gr_mem) == -1)
 		return NULL;
-	}
 
 	return &grent;
 }
