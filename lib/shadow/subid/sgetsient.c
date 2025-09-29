@@ -29,12 +29,8 @@ sgetsient(const char *s)
 
 	char *fields[SUBID_NFIELDS];
 
-	/*
-	 * Copy the string to a temporary buffer so the substrings can
-	 * be modified to be NULL terminated.
-	 */
 	if (strlen(s) >= sizeof(rangebuf))
-		return NULL;	/* fail if too long */
+		return NULL;
 	strcpy(rangebuf, s);
 
 	if (strsep2arr_a(rangebuf, ":", fields) == -1)
