@@ -40,8 +40,7 @@ struct spwd *
 sgetspent(const char *s)
 {
 	static char         *buf = NULL;
-	static struct spwd  spent_ = {};
-	struct spwd         *spent = &spent_;
+	static struct spwd  spent = {};
 
 	int          e;
 	size_t       size;
@@ -54,13 +53,13 @@ sgetspent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	e = sgetspent_r(s, spent, buf, size, &dummy);
+	e = sgetspent_r(s, &spent, buf, size, &dummy);
 	if (e != 0) {
 		errno = e;
 		return NULL;
 	}
 
-	return spent;
+	return &spent;
 }
 #endif
 
