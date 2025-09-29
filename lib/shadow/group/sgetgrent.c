@@ -21,6 +21,7 @@
 #include "atoi/getnum.h"
 #include "list.h"
 #include "string/strchr/strchrcnt.h"
+#include "string/strcpy/stpecpy.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -34,9 +35,11 @@ sgetgrent(const char *s)
 	static struct group grent = {};
 
 	char    *fields[4];
-	size_t  n;
+	char    *end;
+	size_t  n, size;
 
 	n = strchrcnt(s, ',') + 2;
+	size = strlen(s) + 1;
 
 	free(buf);
 	buf = MALLOC(n, char *);
@@ -44,8 +47,12 @@ sgetgrent(const char *s)
 		return NULL;
 
 	free(p);
-	p = strdup(s);
+	p = MALLOC(size, char);
 	if (p == NULL)
+		return NULL;
+
+	end = p + size;
+	if (stpecpy(p, end, s) == NULL)
 		return NULL;
 
 	stpsep(p, "\n");
