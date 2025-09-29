@@ -31,14 +31,15 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char          *buf = NULL;
-	static struct group grent = {};
+	static struct group  grent_ = {};
+	struct group         *grent = &grent_;
 
 	char    *fields[4];
 	char    *p, *end;
 	size_t  n, lssize, size;
 
 	n = strchrcnt(s, ',') + 2;
-	lssize = n * sizeof(char *);  // For 'grent.gr_mem'.
+	lssize = n * sizeof(char *);  // For 'grent->gr_mem'.
 	size = lssize + strlen(s) + 1;
 
 	free(buf);
@@ -56,14 +57,14 @@ sgetgrent(const char *s)
 	if (strsep2arr_a(p, ":", fields) == -1)
 		return NULL;
 
-	grent.gr_name = fields[0];
-	grent.gr_passwd = fields[1];
-	if (get_gid(fields[2], &grent.gr_gid) == -1)
+	grent->gr_name = fields[0];
+	grent->gr_passwd = fields[1];
+	if (get_gid(fields[2], &grent->gr_gid) == -1)
 		return NULL;
 
-	grent.gr_mem = (char **) buf;
-	if (csv2ls(fields[3], n, grent.gr_mem) == -1)
+	grent->gr_mem = (char **) buf;
+	if (csv2ls(fields[3], n, grent->gr_mem) == -1)
 		return NULL;
 
-	return &grent;
+	return grent;
 }
