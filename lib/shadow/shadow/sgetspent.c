@@ -35,20 +35,20 @@
 struct spwd *
 sgetspent(const char *s)
 {
-	static char        *dup = NULL;
+	static char         *buf = NULL;
 	static struct spwd spwd;
 
 	char *fields[FIELDS];
 	size_t  i;
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	free(buf);
+	buf = strdup(s);
+	if (buf == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
+	stpsep(buf, "\n");
 
-	i = strsep2arr(dup, ":", countof(fields), fields);
+	i = strsep2arr(buf, ":", countof(fields), fields);
 	if (i == countof(fields) - 1)
 		fields[i++] = "";
 	if (i != countof(fields) && i != OFIELDS)
