@@ -80,6 +80,4 @@ int ulckpwdf (void)
 
 	return (pw_unlock () && spw_unlock ())? 0 : -1;
 }
-#else
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif

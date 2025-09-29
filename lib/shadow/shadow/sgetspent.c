@@ -150,6 +150,4 @@ sgetspent(const char *s)
 
 	return (&spwd);
 }
-#else
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif
