@@ -30,7 +30,7 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char         **buf = NULL;
-	static char         *dup = NULL;
+	static char         *p = NULL;
 	static struct group grent = {};
 
 	char    *fields[4];
@@ -43,14 +43,14 @@ sgetgrent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	free(p);
+	p = strdup(s);
+	if (p == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
+	stpsep(p, "\n");
 
-	if (strsep2arr_a(dup, ":", fields) == -1)
+	if (strsep2arr_a(p, ":", fields) == -1)
 		return NULL;
 
 	grent.gr_name = fields[0];
