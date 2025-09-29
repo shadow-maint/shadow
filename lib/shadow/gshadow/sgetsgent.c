@@ -29,7 +29,7 @@ struct sgrp *
 sgetsgent(const char *s)
 {
 	static char         **buf = NULL;
-	static char         *dup = NULL;
+	static char         *p = NULL;
 	static struct sgrp  sgroup = {};
 
 	char    *fields[4];
@@ -42,14 +42,14 @@ sgetsgent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	free(p);
+	p = strdup(s);
+	if (p == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
+	stpsep(p, "\n");
 
-	if (STRSEP2ARR(dup, ":", fields) == -1)
+	if (STRSEP2ARR(p, ":", fields) == -1)
 		return NULL;
 
 	sgroup.sg_namp = fields[0];
