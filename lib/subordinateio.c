@@ -22,10 +22,10 @@
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
+#include "shadow/subid/sgetsient.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/strsep2arr.h"
 
 
 #define ID_SIZE 31
@@ -84,34 +84,7 @@ subordinate_free(/*@only@*/void *ent)
 static void *
 subordinate_parse(const char *line)
 {
-	static struct subordinate_range range;
-	static char rangebuf[1024];
-	char *fields[SUBID_NFIELDS];
-
-	/*
-	 * Copy the string to a temporary buffer so the substrings can
-	 * be modified to be NULL terminated.
-	 */
-	if (strlen(line) >= sizeof(rangebuf))
-		return NULL;	/* fail if too long */
-	strcpy (rangebuf, line);
-
-	if (strsep2arr_a(rangebuf, ":", fields) == -1)
-		return NULL;
-
-	if (streq(fields[0], ""))
-		return NULL;
-	if (streq(fields[1], ""))
-		return NULL;
-	if (streq(fields[2], ""))
-		return NULL;
-	range.owner = fields[0];
-	if (str2ul(&range.start, fields[1]) == -1)
-		return NULL;
-	if (str2ul(&range.count, fields[2]) == -1)
-		return NULL;
-
-	return &range;
+	return sgetsient(line);
 }
 
 /*
