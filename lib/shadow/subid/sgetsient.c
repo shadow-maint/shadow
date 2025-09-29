@@ -16,6 +16,7 @@
 #include "alloc/malloc.h"
 #include "atoi/str2i.h"
 #include "string/strcmp/streq.h"
+#include "string/strcpy/strtcpy.h"
 #include "string/strtok/strsep2arr.h"
 
 
@@ -24,14 +25,21 @@
 struct subordinate_range *
 sgetsient(const char *s)
 {
-	static char                     buf[1024];
+	static char                      *buf = NULL;
 	static struct subordinate_range range;
 
 	char *fields[SUBID_NFIELDS];
+	size_t  size;
 
-	if (strlen(s) >= sizeof(buf))
+	size = strlen(s) + 1;
+
+	free(buf);
+	buf = MALLOC(size, char);
+	if (buf == NULL)
 		return NULL;
-	strcpy(buf, s);
+
+	if (strtcpy(buf, s, size) == -1)
+		return NULL;
 
 	if (strsep2arr_a(buf, ":", fields) == -1)
 		return NULL;
