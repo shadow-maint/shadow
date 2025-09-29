@@ -10,8 +10,6 @@
 
 #include "shadow/shadow/sgetspent.h"
 
-#ifndef HAVE_SGETSPENT
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +30,7 @@
 #define	OFIELDS	5
 
 
+#ifndef HAVE_SGETSPENT
 // from-string get shadow password entry
 struct spwd *
 sgetspent(const char *s)
