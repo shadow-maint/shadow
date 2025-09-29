@@ -25,19 +25,7 @@
 #include "string/strtok/strsep2arr.h"
 
 
-/*
- * sgetpwent - convert a string to a (struct passwd)
- *
- * sgetpwent() parses a string into the parts required for a password
- * structure.  Strict checking is made for the UID and GID fields and
- * presence of the correct number of colons.  Any failing tests result
- * in a NULL pointer being returned.
- *
- * NOTE: this function uses hard-coded string scanning functions for
- *	performance reasons.  I am going to come up with some conditional
- *	compilation glarp to improve on this in the future.
- */
-// from-string get pasword entry
+// sgetpwent - string get pasword entry
 struct passwd *
 sgetpwent(const char *s)
 {
@@ -55,13 +43,6 @@ sgetpwent(const char *s)
 
 	if (strsep2arr_a(dup, ":", fields) == -1)
 		return NULL;
-
-	/*
-	 * Each of the fields is converted to the appropriate data type
-	 * and the result assigned to the password structure.  If the
-	 * UID or GID does not convert to an integer value, a NULL
-	 * pointer is returned.
-	 */
 
 	pwent.pw_name = fields[0];
 	pwent.pw_passwd = fields[1];
