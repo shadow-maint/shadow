@@ -24,16 +24,16 @@
 struct subordinate_range *
 sgetsient(const char *s)
 {
+	static char                     buf[1024];
 	static struct subordinate_range range;
-	static char rangebuf[1024];
 
 	char *fields[SUBID_NFIELDS];
 
-	if (strlen(s) >= sizeof(rangebuf))
+	if (strlen(s) >= sizeof(buf))
 		return NULL;
-	strcpy(rangebuf, s);
+	strcpy(buf, s);
 
-	if (strsep2arr_a(rangebuf, ":", fields) == -1)
+	if (strsep2arr_a(buf, ":", fields) == -1)
 		return NULL;
 
 	if (streq(fields[0], ""))
