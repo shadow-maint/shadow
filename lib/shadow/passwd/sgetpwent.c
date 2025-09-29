@@ -57,14 +57,6 @@ sgetpwent(const char *s)
 		return NULL;
 
 	/*
-	 * The UID and GID must be non-blank.
-	 */
-	if (streq(fields[2], ""))
-		return NULL;
-	if (streq(fields[3], ""))
-		return NULL;
-
-	/*
 	 * Each of the fields is converted to the appropriate data type
 	 * and the result assigned to the password structure.  If the
 	 * UID or GID does not convert to an integer value, a NULL
