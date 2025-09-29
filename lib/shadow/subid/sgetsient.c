@@ -26,7 +26,8 @@ struct subordinate_range *
 sgetsient(const char *s)
 {
 	static char                      *buf = NULL;
-	static struct subordinate_range  sient;
+	static struct subordinate_range  sient_ = {};
+	struct subordinate_range         *sient = &sient_;
 
 	char *fields[SUBID_NFIELDS];
 	size_t  size;
@@ -46,12 +47,12 @@ sgetsient(const char *s)
 
 	if (streq(fields[0], ""))
 		return NULL;
-	sient.owner = fields[0];
-	if (str2ul(&sient.start, fields[1]) == -1)
+	sient->owner = fields[0];
+	if (str2ul(&sient->start, fields[1]) == -1)
 		return NULL;
-	if (str2ul(&sient.count, fields[2]) == -1)
+	if (str2ul(&sient->count, fields[2]) == -1)
 		return NULL;
 
-	return &sient;
+	return sient;
 }
 #endif
