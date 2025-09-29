@@ -14,8 +14,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "alloc/malloc.h"
 #include "list.h"
 #include "shadow/gshadow/sgrp.h"
+#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
@@ -26,10 +28,19 @@
 struct sgrp *
 sgetsgent(const char *s)
 {
+	static char         **buf = NULL;
 	static char         *dup = NULL;
 	static struct sgrp  sgroup = {};
 
-	char  *fields[4];
+	char    *fields[4];
+	size_t  n, nadm, nmem;
+
+	n = strchrcnt(s, ',') + 4;
+
+	free(buf);
+	buf = MALLOC(n, char *);
+	if (buf == NULL)
+		return NULL;
 
 	free(dup);
 	dup = strdup(s);
@@ -44,13 +55,18 @@ sgetsgent(const char *s)
 	sgroup.sg_namp = fields[0];
 	sgroup.sg_passwd = fields[1];
 
-	free(sgroup.sg_adm);
-	free(sgroup.sg_mem);
+	sgroup.sg_adm = buf;
+	nadm = strchrcnt(fields[2], ',') + 2;
+	if (nadm > n)
+		return NULL;
+	if (csv2ls(fields[2], nadm, sgroup.sg_adm) == -1)
+		return NULL;
 
-	sgroup.sg_adm = acsv2ls(fields[2]);
-	sgroup.sg_mem = acsv2ls(fields[3]);
-
-	if (sgroup.sg_adm == NULL || sgroup.sg_mem == NULL)
+	sgroup.sg_mem = buf + nadm;
+	nmem = strchrcnt(fields[3], ',') + 2;
+	if (nmem + nadm > n)
+		return NULL;
+	if (csv2ls(fields[3], nmem, sgroup.sg_mem) == -1)
 		return NULL;
 
 	return &sgroup;
