@@ -41,10 +41,6 @@ sgetsient(const char *s)
 
 	if (streq(fields[0], ""))
 		return NULL;
-	if (streq(fields[1], ""))
-		return NULL;
-	if (streq(fields[2], ""))
-		return NULL;
 	range.owner = fields[0];
 	if (a2ul(&range.start, fields[1], NULL, 0, 0, maxof(id_t)) == -1)
 		return NULL;
