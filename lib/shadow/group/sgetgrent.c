@@ -33,14 +33,13 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char          *buf = NULL;
-	static struct group  grent_ = {};
-	struct group         *grent = &grent_;
+	static struct group  grent = {};
 
 	int     e;
 	size_t  n, lssize, size;
 
 	n = strchrcnt(s, ',') + 2;
-	lssize = n * sizeof(char *);  // For 'grent->gr_mem'.
+	lssize = n * sizeof(char *);  // For 'grent.gr_mem'.
 	size = lssize + strlen(s) + 1;
 
 	free(buf);
@@ -48,13 +47,13 @@ sgetgrent(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	e = sgetgrent_r(s, grent, buf, size);
+	e = sgetgrent_r(s, &grent, buf, size);
 	if (e != 0) {
 		errno = e;
 		return NULL;
 	}
 
-	return grent;
+	return &grent;
 }
 
 

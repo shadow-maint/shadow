@@ -26,8 +26,7 @@ struct subordinate_range *
 sgetsient(const char *s)
 {
 	static char                      *buf = NULL;
-	static struct subordinate_range  sient_ = {};
-	struct subordinate_range         *sient = &sient_;
+	static struct subordinate_range  sient = {};
 
 	int     e;
 	size_t  size;
@@ -39,13 +38,13 @@ sgetsient(const char *s)
 	if (buf == NULL)
 		return NULL;
 
-	e = sgetsient_r(s, sient, buf, size);
+	e = sgetsient_r(s, &sient, buf, size);
 	if (e != 0) {
 		errno = e;
 		return NULL;
 	}
 
-	return sient;
+	return &sient;
 }
 
 
