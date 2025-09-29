@@ -310,6 +310,4 @@ int sgr_sort ()
 {
 	return commonio_sort_wrt (&gshadow_db, __gr_get_db ());
 }
-#else
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif

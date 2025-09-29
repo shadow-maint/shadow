@@ -83,6 +83,4 @@ free_gids:
 	free(gids);
 	return -1;
 }
-#else				/* !USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */

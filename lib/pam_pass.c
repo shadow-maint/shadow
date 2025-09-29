@@ -57,6 +57,4 @@ void do_pam_passwd (const char *user, bool silent, bool change_expired)
 	fputs (_("passwd: password updated successfully\n"), shadow_logfd);
 	(void) pam_end (pamh, PAM_SUCCESS);
 }
-#else				/* !USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */

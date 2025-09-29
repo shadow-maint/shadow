@@ -58,7 +58,4 @@ int find_new_sub_uids (uid_t *range_start, unsigned long *range_count)
 	*range_count = count;
 	return 0;
 }
-#else				/* !ENABLE_SUBIDS */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
-
