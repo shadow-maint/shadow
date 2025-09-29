@@ -30,28 +30,24 @@
 struct group *
 sgetgrent(const char *s)
 {
-	static char         **buf = NULL;
-	static char         *p = NULL;
+	static char          *buf = NULL;
 	static struct group grent = {};
 
 	char    *fields[4];
-	char    *end;
-	size_t  n, size;
+	char    *p, *end;
+	size_t  n, lssize, size;
 
 	n = strchrcnt(s, ',') + 2;
-	size = strlen(s) + 1;
+	lssize = n * sizeof(char *);  // For 'grent.gr_mem'.
+	size = lssize + strlen(s) + 1;
 
 	free(buf);
-	buf = MALLOC(n, char *);
+	buf = MALLOC(size, char);
 	if (buf == NULL)
 		return NULL;
 
-	free(p);
-	p = MALLOC(size, char);
-	if (p == NULL)
-		return NULL;
-
-	end = p + size;
+	end = buf + size;
+	p = buf + lssize;
 	if (stpecpy(p, end, s) == NULL)
 		return NULL;
 
@@ -65,7 +61,7 @@ sgetgrent(const char *s)
 	if (get_gid(fields[2], &grent.gr_gid) == -1)
 		return NULL;
 
-	grent.gr_mem = buf;
+	grent.gr_mem = (char **) buf;
 	if (csv2ls(fields[3], n, grent.gr_mem) == -1)
 		return NULL;
 
