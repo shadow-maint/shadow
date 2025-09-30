@@ -15,6 +15,7 @@
 #include <string.h>
 
 #include "attr.h"
+#include "io/fprintf/fprinte.h"
 #include "shadowlog.h"
 #include "string/strtok/astrsep2ls.h"
 
@@ -37,8 +38,7 @@ xastrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
 
 	return ls;
 x:
-	fprintf(log_get_logfd(), "%s: %s\n",
-	        log_get_progname(), strerror(errno));
+	fprinte(log_get_logfd(), "%s", log_get_progname());
 	exit(13);
 }
 

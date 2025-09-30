@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "atoi/getnum.h"
+#include "io/fprintf/eprintf.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "stdlib.h"
@@ -16,9 +17,9 @@ static const char Prog[] = "get_subid_owners";
 
 static void usage(void)
 {
-	fprintf(stderr, "Usage: [-g] %s subuid\n", Prog);
-	fprintf(stderr, "    list uids who own the given subuid\n");
-	fprintf(stderr, "    pass -g to query a subgid\n");
+	eprintf("Usage: [-g] %s subuid\n", Prog);
+	eprintf("    list uids who own the given subuid\n");
+	eprintf("    pass -g to query a subgid\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 		n = subid_get_uid_owners(u, &uids);
 	}
 	if (n < 0) {
-		fprintf(stderr, "No owners found\n");
+		eprintf("No owners found\n");
 		exit(1);
 	}
 	for (i = 0; i < n; i++) {

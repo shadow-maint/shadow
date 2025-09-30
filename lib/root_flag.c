@@ -14,6 +14,7 @@
 #include "defines.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fprintf/fprinte.h"
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
@@ -76,8 +77,8 @@ static void change_root (const char* newroot)
 	/* Drop privileges */
 	if (   (setregid (getgid (), getgid ()) != 0)
 	    || (setreuid (getuid (), getuid ()) != 0)) {
-		fprintf (log_get_logfd(), _("%s: failed to drop privileges (%s)\n"),
-		         log_get_progname(), strerror (errno));
+		fprinte(log_get_logfd(), _("%s: failed to drop privileges"),
+		        log_get_progname());
 		exit (EXIT_FAILURE);
 	}
 
@@ -89,23 +90,20 @@ static void change_root (const char* newroot)
 	}
 
 	if (access (newroot, F_OK) != 0) {
-		fprintf(log_get_logfd(),
-		        _("%s: cannot access chroot directory %s: %s\n"),
-		        log_get_progname(), newroot, strerror (errno));
+		fprinte(log_get_logfd(), _("%s: cannot access chroot directory %s"),
+		        log_get_progname(), newroot);
 		exit (E_BAD_ARG);
 	}
 
 	if (chroot (newroot) != 0) {
-		fprintf(log_get_logfd(),
-			        _("%s: unable to chroot to directory %s: %s\n"),
-				log_get_progname(), newroot, strerror (errno));
+		fprinte(log_get_logfd(), _("%s: unable to chroot to directory %s"),
+		        log_get_progname(), newroot);
 		exit (E_BAD_ARG);
 	}
 
 	if (chdir ("/") != 0) {
-		fprintf(log_get_logfd(),
-			_("%s: cannot chdir in chroot directory %s: %s\n"),
-		        log_get_progname(), newroot, strerror (errno));
+		fprinte(log_get_logfd(), _("%s: cannot chdir in chroot directory %s"),
+		        log_get_progname(), newroot);
 		exit (E_BAD_ARG);
 	}
 }
