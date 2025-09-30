@@ -26,12 +26,15 @@ inline uintmax_t
 strtou_noneg(const char *s, char **restrict endp, int base,
     uintmax_t min, uintmax_t max, int *restrict status)
 {
-	int  st;
+	int  st, e;
 
 	if (status == NULL)
 		status = &st;
+
+	e = errno;
 	if (strtoi_(s, endp, base, 0, 1, status) == 0 && *status == ERANGE)
 		return min;
+	errno = e;
 
 	return strtou_(s, endp, base, min, max, status);
 }
