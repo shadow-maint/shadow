@@ -27,6 +27,7 @@
 #include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sizeof.h"
@@ -394,7 +395,7 @@ int putdef_str (const char *name, const char *value, const char *srcfile)
 	if (NULL == cp) {
 		(void) fputs (_("Could not allocate space for config info.\n"),
 		              shadow_logfd);
-		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
+		SYSLOG(LOG_ERR, "could not allocate space for config info");
 		return -1;
 	}
 
@@ -441,7 +442,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name, cons
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
 	if (srcfile != NULL)
-		SYSLOG ((LOG_CRIT, "shadow: unknown configuration item '%s' in '%s'", name, srcfile));
+		SYSLOG(LOG_CRIT, "shadow: unknown configuration item '%s' in '%s'", name, srcfile);
 
 out:
 	return NULL;
@@ -490,14 +491,14 @@ static void def_load (void)
 		if (error == ECONF_NOFILE)
 			return;
 
-		SYSLOG ((LOG_CRIT, "cannot open login definitions [%s]",
-			econf_errString(error)));
+		SYSLOG(LOG_CRIT, "cannot open login definitions [%s]",
+			econf_errString(error));
 		exit (EXIT_FAILURE);
 	}
 
 	if ((error = econf_getKeys(defs_file, NULL, &key_number, &keys))) {
-		SYSLOG ((LOG_CRIT, "cannot read login definitions [%s]",
-			econf_errString(error)));
+		SYSLOG(LOG_CRIT, "cannot read login definitions [%s]",
+			econf_errString(error));
 		exit (EXIT_FAILURE);
 	}
 
@@ -506,8 +507,8 @@ static void def_load (void)
 
 		error = econf_getStringValue(defs_file, NULL, keys[i], &value);
 		if (error) {
-			SYSLOG ((LOG_CRIT, "failed reading key %zu from econf [%s]",
-				i, econf_errString(error)));
+			SYSLOG(LOG_CRIT, "failed reading key %zu from econf [%s]",
+				i, econf_errString(error));
 			exit (EXIT_FAILURE);
 		}
 
@@ -546,9 +547,7 @@ static void def_load (void)
 		if (errno == ENOENT)
 			return;
 
-		int err = errno;
-		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
-		         def_fname, strerror (err)));
+		SYSLOGE(LOG_CRIT, "cannot open login definitions %s", def_fname);
 		exit (EXIT_FAILURE);
 	}
 
@@ -587,9 +586,7 @@ static void def_load (void)
 	}
 
 	if (ferror (fp) != 0) {
-		int err = errno;
-		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%s]",
-		         def_fname, strerror (err)));
+		SYSLOGE(LOG_CRIT, "cannot read login definitions %s", def_fname);
 		exit (EXIT_FAILURE);
 	}
 
