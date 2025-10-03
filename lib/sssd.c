@@ -32,6 +32,10 @@ sssd_flush_cache(int dbflags)
 	const char   *spawnedEnv[] = {NULL};
 	struct stat  sb;
 
+	if ((dbflags & (SSSD_DB_PASSWD|SSSD_DB_GROUP)) == 0)
+	    /* Neither passwd nor group, nothing to do */
+	    return 0;
+
 	rv = stat(cmd, &sb);
 	if (rv == -1 && errno == ENOENT)
 		return 0;
@@ -43,15 +47,10 @@ sssd_flush_cache(int dbflags)
 
 	p = stpcpy(sss_cache_args, "-");
 	if (dbflags & SSSD_DB_PASSWD)
-		stpcpy(p, "U");
+		p = stpcpy(p, "U");
 	if (dbflags & SSSD_DB_GROUP)
-		stpcpy(p, "G");
+		p = stpcpy(p, "G");
 
-	if (streq(p, "")) {
-		/* Neither passwd nor group, nothing to do */
-		free(sss_cache_args);
-		return 0;
-	}
 	spawnedArgs[1] = sss_cache_args;
 
 	rv = run_command (cmd, spawnedArgs, spawnedEnv, &status);
