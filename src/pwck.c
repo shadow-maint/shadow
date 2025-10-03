@@ -883,7 +883,7 @@ int main (int argc, char **argv)
 
 	close_files (changed);
 
-	if (!read_only) {
+	if (!read_only && changed) {
 		nscd_flush_cache ("passwd");
 		sssd_flush_cache (SSSD_DB_PASSWD);
 	}
