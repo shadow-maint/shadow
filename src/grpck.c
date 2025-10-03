@@ -856,7 +856,7 @@ int main (int argc, char **argv)
 	/* Commit the change in the database if needed */
 	close_files (changed);
 
-	if (!read_only) {
+	if (!read_only && changed) {
 		nscd_flush_cache ("group");
 		sssd_flush_cache (SSSD_DB_GROUP);
 	}
