@@ -36,5 +36,11 @@
 # define ATTR_STRING(i)
 #endif
 
+#if __has_c_attribute(gnu::nonstring)
+# define ATTR_NONSTRING              [[gnu::nonstring]]
+#else
+# define ATTR_NONSTRING
+#endif
+
 
 #endif  // include guard
