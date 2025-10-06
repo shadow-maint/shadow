@@ -68,11 +68,6 @@
 #define LOG_WARN LOG_WARNING
 #endif
 
-/* LOG_NOWAIT is deprecated */
-#ifndef LOG_NOWAIT
-#define LOG_NOWAIT 0
-#endif
-
 /* LOG_AUTH is deprecated, use LOG_AUTHPRIV instead */
 #ifndef LOG_AUTHPRIV
 #define LOG_AUTHPRIV LOG_AUTH
@@ -112,7 +107,7 @@
    in just one place.  */
 
 #ifndef SYSLOG_OPTIONS
-/* #define SYSLOG_OPTIONS (LOG_PID | LOG_CONS | LOG_NOWAIT) */
+/* #define SYSLOG_OPTIONS (LOG_PID | LOG_CONS) */
 #define SYSLOG_OPTIONS (LOG_PID)
 #endif
 
