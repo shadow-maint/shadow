@@ -54,14 +54,6 @@
 
 #include <limits.h>
 
-#ifndef	NGROUPS_MAX
-#ifdef	NGROUPS
-#define	NGROUPS_MAX	NGROUPS
-#else
-#define	NGROUPS_MAX	64
-#endif
-#endif
-
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
