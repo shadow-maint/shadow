@@ -241,7 +241,8 @@ void __spw_del_entry (const struct commonio_entry *ent)
 }
 
 /* Sort with respect to passwd ordering. */
-int spw_sort ()
+int
+spw_sort(void)
 {
 #ifdef WITH_TCB
 	if (getdef_bool ("USE_TCB")) {

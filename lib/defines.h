@@ -54,14 +54,6 @@
 
 #include <limits.h>
 
-#ifndef	NGROUPS_MAX
-#ifdef	NGROUPS
-#define	NGROUPS_MAX	NGROUPS
-#else
-#define	NGROUPS_MAX	64
-#endif
-#endif
-
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
@@ -74,11 +66,6 @@
 
 #ifndef LOG_WARN
 #define LOG_WARN LOG_WARNING
-#endif
-
-/* LOG_NOWAIT is deprecated */
-#ifndef LOG_NOWAIT
-#define LOG_NOWAIT 0
 #endif
 
 /* LOG_AUTH is deprecated, use LOG_AUTHPRIV instead */
@@ -120,7 +107,7 @@
    in just one place.  */
 
 #ifndef SYSLOG_OPTIONS
-/* #define SYSLOG_OPTIONS (LOG_PID | LOG_CONS | LOG_NOWAIT) */
+/* #define SYSLOG_OPTIONS (LOG_PID | LOG_CONS) */
 #define SYSLOG_OPTIONS (LOG_PID)
 #endif
 

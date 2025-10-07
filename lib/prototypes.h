@@ -94,11 +94,11 @@ void cleanup_report_del_group_gshadow (void *group_name);
 void cleanup_report_mod_passwd (void *cleanup_info);
 void cleanup_report_mod_group (void *cleanup_info);
 void cleanup_report_mod_gshadow (void *cleanup_info);
-void cleanup_unlock_group (/*@null@*/void *MAYBE_UNUSED);
+void cleanup_unlock_group (/*@null@*/void *);
 #ifdef SHADOWGRP
-void cleanup_unlock_gshadow (/*@null@*/void *MAYBE_UNUSED);
+void cleanup_unlock_gshadow (/*@null@*/void *);
 #endif
-void cleanup_unlock_passwd (/*@null@*/void *MAYBE_UNUSED);
+void cleanup_unlock_passwd (/*@null@*/void *);
 
 /* console.c */
 extern bool console (const char *);
@@ -183,7 +183,7 @@ extern void audit_help_open (void);
 typedef enum {
 	SHADOW_AUDIT_FAILURE = 0,
 	SHADOW_AUDIT_SUCCESS = 1} shadow_audit_result;
-extern void audit_logger (int type, const char *pgname, const char *op,
+extern void audit_logger (int type, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
 void audit_logger_message (const char *message, shadow_audit_result result);
@@ -305,7 +305,7 @@ extern int do_pam_passwd_non_interactive (const char *pam_service,
 #endif				/* USE_PAM */
 
 /* obscure.c */
-extern bool obscure (const char *, const char *, const struct passwd *);
+extern bool obscure (const char *, const char *);
 
 /* pam_pass.c */
 #ifdef USE_PAM
@@ -339,7 +339,7 @@ extern struct spwd *pwd_to_spwd (const struct passwd *);
 
 /* pwdcheck.c */
 #ifndef USE_PAM
-extern void passwd_check (const char *, const char *, const char *);
+extern void passwd_check(const char *, const char *);
 #endif
 
 /* pwd_init.c */
