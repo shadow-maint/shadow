@@ -159,7 +159,7 @@ int main(int argc, char **argv)
 
 	write_mapping(proc_dir_fd, ranges, mappings, "uid_map", pw->pw_uid);
 	if (want_subuid_file())
-		sub_uid_close();
+		sub_uid_close(true);
 
 	return EXIT_SUCCESS;
 }
