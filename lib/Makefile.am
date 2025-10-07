@@ -245,6 +245,8 @@ libshadow_la_SOURCES = \
 	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
+	string/strdup/memdup.c \
+	string/strdup/memdup.h \
 	string/strdup/strndupa.c \
 	string/strdup/strndupa.h \
 	string/strdup/xstrdup.c \
