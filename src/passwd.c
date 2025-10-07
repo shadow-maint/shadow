@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -38,6 +36,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
+#include "time/date.h"
 #include "time/day_to_str.h"
 
 
@@ -656,14 +655,8 @@ static void update_shadow (void)
 	}
 	if (!use_pam)
 	{
-		if (do_update_age) {
-			nsp->sp_lstchg = gettime () / DAY;
-			if (0 == nsp->sp_lstchg) {
-				/* Better disable aging than requiring a password
-				 * change */
-				nsp->sp_lstchg = -1;
-			}
-		}
+		if (do_update_age)
+			nsp->sp_lstchg = date_or_SDE();
 	}
 
 	/*
