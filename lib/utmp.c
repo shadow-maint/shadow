@@ -27,7 +27,6 @@
 #include <fcntl.h>
 
 #include "alloc/x/xcalloc.h"
-#include "alloc/x/xmalloc.h"
 #include "attr.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
@@ -35,6 +34,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
+#include "string/strdup/memdup.h"
 #include "string/strdup/xstrdup.h"
 #include "string/strdup/xstrndup.h"
 
@@ -185,13 +185,8 @@ get_current_utmp(pid_t main_pid)
 	if (NULL == ut)
 		ut = ut_by_pid ?: ut_by_line;
 
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
-
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
-	}
+	if (NULL != ut)
+		ut = MEMDUP(ut, struct utmpx);
 
 	free(ut_by_line);
 	free(ut_by_pid);
