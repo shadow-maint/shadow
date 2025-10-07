@@ -36,7 +36,7 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/xstrdup.h"
@@ -470,7 +470,7 @@ static void log_gpasswd_failure_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", gr_dbname());
+	STPRINTF(buf, " in %s", gr_dbname());
 	log_gpasswd_failure (buf);
 }
 
@@ -479,7 +479,7 @@ static void log_gpasswd_failure_gshadow (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", sgr_dbname());
+	STPRINTF(buf, " in %s", sgr_dbname());
 	log_gpasswd_failure (buf);
 }
 #endif				/* SHADOWGRP */
@@ -515,7 +515,7 @@ static void log_gpasswd_success (const char *suffix)
 		         "password of group %s removed by %s%s",
 		         group, myname, suffix));
 #ifdef WITH_AUDIT
-		SNPRINTF(buf, "password of group %s removed by %s%s",
+		STPRINTF(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
 		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
 		              "delete-group-password",
@@ -527,7 +527,7 @@ static void log_gpasswd_success (const char *suffix)
 		         "access to group %s restricted by %s%s",
 		         group, myname, suffix));
 #ifdef WITH_AUDIT
-		SNPRINTF(buf, "access to group %s restricted by %s%s",
+		STPRINTF(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
 		audit_logger_with_group (AUDIT_GRP_MGMT,
 		              "restrict-group",
@@ -581,7 +581,7 @@ static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", gr_dbname());
+	STPRINTF(buf, " in %s", gr_dbname());
 	log_gpasswd_success (buf);
 }
 
