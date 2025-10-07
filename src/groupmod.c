@@ -12,6 +12,7 @@
 #ident "$Id$"
 
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
@@ -383,9 +384,7 @@ check_new_name(void)
 	}
 
 	if (!is_valid_group_name(group_newname)) {
-		fprintf(stderr,
-			_("%s: invalid group name '%s'\n"),
-			Prog, group_newname);
+		fprintf(stderr, _("%s: group: %s\n"), Prog, strerror(errno));
 		exit(E_BAD_ARG);
 	}
 
