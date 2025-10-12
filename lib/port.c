@@ -275,11 +275,10 @@ next:
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
-		if (   ((',' != cp[i]) && ('\0' != cp[i]))
-		    || (dtime > 2400)
-		    || ((dtime % 100) > 59)) {
+		if (strcspn(cp + i, ","))
 			goto next;
-		}
+		if (dtime > 2400 || (dtime % 100) > 59)
+			goto next;
 
 		port.pt_times[j].t_end = dtime;
 		cp = cp + i + 1;

@@ -102,7 +102,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 	 */
 	for (i = 0; i < newenvc; i++) {
 		if (   (strncmp (newstring, newenvp[i], n) == 0)
-		    && (('=' == newenvp[i][n]) || ('\0' == newenvp[i][n]))) {
+		    && !strcspn(newenvp[i] + n, "=")) {
 			break;
 		}
 	}
