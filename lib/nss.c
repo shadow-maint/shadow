@@ -17,7 +17,6 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -84,7 +83,7 @@ nss_init(const char *nsswitch_path) {
 			fprintf(log_get_logfd(), "%s: Non-text file.\n", nsswitch_path);
 			goto null_subid;
 		}
-		if (strprefix(line, "#"))
+		if (!strcspn(line, "#"))
 			continue;
 		if (strlen(line) < 7)
 			continue;
