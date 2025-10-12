@@ -111,9 +111,9 @@ login_access(const char *user, const char *from)
 					 TABLE, lineno));
 				continue;
 			}
-			if (strprefix(line, "#")) {
-				continue;	/* comment line */
-			}
+			if (!strcspn(line, "#"))
+				continue;	/* comment or empty */
+
 			stpcpy(stprspn(line, " \t"), "");
 			if (streq(line, "")) {	/* skip blank lines */
 				continue;
