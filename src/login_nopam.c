@@ -128,7 +128,7 @@ login_access(const char *user, const char *from)
 					 TABLE, lineno));
 				continue;
 			}
-			if (perm[0] != '+' && perm[0] != '-') {
+			if (!strspn(perm, "+-")) {
 				SYSLOG ((LOG_ERR,
 					 "%s: line %jd: bad first field",
 					 TABLE, lineno));
@@ -142,7 +142,7 @@ login_access(const char *user, const char *from)
 		int err = errno;
 		SYSLOG ((LOG_ERR, "cannot open %s: %s", TABLE, strerror (err)));
 	}
-	return (!match || strprefix(line, "+"))?1:0;
+	return (!match || strspn(line, "+"))?1:0;
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
@@ -226,7 +226,7 @@ static bool user_match (char *tok, const char *string)
 	if (host != NULL) {
 		return user_match(tok, string) && from_match(host, myhostname());
 #if HAVE_INNETGR
-	} else if (strprefix(tok, "@")) {	/* netgroup */
+	} else if (strspn(tok, "@")) {	/* netgroup */
 		return (netgroup_match (tok + 1, NULL, string));
 #endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
@@ -299,13 +299,13 @@ static bool from_match (char *tok, const char *string)
 	 * if it matches the head of the string.
 	 */
 #if HAVE_INNETGR
-	if (strprefix(tok, "@")) {  /* netgroup */
+	if (strspn(tok, "@")) {  /* netgroup */
 		return (netgroup_match (tok + 1, string, NULL));
 	} else
 #endif
 	if (string_match (tok, string)) {	/* ALL or exact match */
 		return true;
-	} else if (strprefix(tok, ".")) {  /* domain: match last fields */
+	} else if (strspn(tok, ".")) {  /* domain: match last fields */
 		size_t  str_len, tok_len;
 
 		str_len = strlen (string);

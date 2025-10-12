@@ -10,6 +10,7 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <string.h>
 
 #include "defines.h"
 /*@-exitarg@*/
@@ -82,7 +83,7 @@ static void change_root (const char* newroot)
 		exit (EXIT_FAILURE);
 	}
 
-	if ('/' != newroot[0]) {
+	if (!strspn(newroot, "/")) {
 		fprintf (log_get_logfd(),
 		         _("%s: invalid chroot path '%s', only absolute paths are supported.\n"),
 		         log_get_progname(), newroot);

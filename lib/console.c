@@ -49,7 +49,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	 * console devices upon which root logins are allowed.
 	 */
 
-	if (*cons != '/') {
+	if (!strspn(cons, "/")) {
 		char *pbuf;
 
 		strtcpy_a(buf, cons);
