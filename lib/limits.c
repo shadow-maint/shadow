@@ -369,9 +369,9 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: A better (smarter) checking should be done
 	 */
 	while (fgets (buf, 1024, fil) != NULL) {
-		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
+		if (!strcspn(buf, "#\n"))
 			continue;
-		}
+
 		MEMZERO(tempbuf);
 		/* a valid line should have a username, then spaces,
 		 * then limits
