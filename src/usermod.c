@@ -28,6 +28,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -66,7 +67,6 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "time/day_to_str.h"
@@ -336,7 +336,7 @@ getid_range(const char *str)
 		return result;
 	}
 
-	if ('-' != *pos++)
+	if (!strspn(pos++, "-"))
 		return result;
 
 	if (a2i(id_t, &last, pos, NULL, 10, first, last) == -1)
@@ -438,14 +438,14 @@ usage (int status)
  */
 static char *new_pw_passwd (char *pw_pass)
 {
-	if (Lflg && ('!' != pw_pass[0])) {
+	if (Lflg && !strspn(pw_pass, "!")) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-passwd", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
 		pw_pass = xaprintf("!%s", pw_pass);
-	} else if (Uflg && strprefix(pw_pass, "!")) {
+	} else if (Uflg && strspn(pw_pass, "!")) {
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
 			         _("%s: unlocking the user's password would result in a passwordless account.\n"
