@@ -68,7 +68,6 @@
 #include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
@@ -1203,7 +1202,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			switch (c) {
 			case 'b':
 				if (   ( !VALID (optarg) )
-				    || ( optarg[0] != '/' )) {
+				    || !strspn(optarg, "/")) {
 					fprintf (stderr,
 					         _("%s: invalid base directory '%s'\n"),
 					         Prog, optarg);
@@ -1230,7 +1229,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				break;
 			case 'd':
 				if (   ( !VALID (optarg) )
-				    || ( optarg[0] != '/' )) {
+				    || !strspn(optarg, "/")) {
 					fprintf (stderr,
 					         _("%s: invalid home directory '%s'\n"),
 					         Prog, optarg);
@@ -2254,7 +2253,7 @@ static void create_home(const struct option_flags *flags)
 		bool  dir_created;
 
 		/* Avoid turning a relative path into an absolute path. */
-		if (strprefix(bhome, "/") || !streq(path, ""))
+		if (strspn(bhome, "/") || !streq(path, ""))
 			strcat(path, "/");
 
 		strcat(path, cp);
