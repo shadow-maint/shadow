@@ -22,6 +22,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
@@ -42,7 +43,6 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
@@ -266,7 +266,7 @@ static void process_flags (int argc, char *const *argv)
 	 * clever telnet, and getty holes.
 	 */
 	for (arg = 1; arg < argc; arg++) {
-		if (strprefix(argv[arg], "-") && strlen(argv[arg]) > 2) {
+		if (strspn(argv[arg], "-") && strlen(argv[arg]) > 2) {
 			usage ();
 		}
 		if (streq(argv[arg], "--")) {
@@ -347,7 +347,7 @@ static void init_env (void)
 	else {
 		cp = getdef_str ("ENV_TZ");
 		if (NULL != cp) {
-			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
+			addenv(strspn(cp, "/") ? tz(cp) : cp, NULL);
 		}
 	}
 #endif				/* !USE_PAM */
@@ -864,10 +864,8 @@ int main (int argc, char **argv)
 			 * login, even if they have been
 			 * "pre-authenticated."
 			 */
-			if (   strprefix(user_passwd, "!")
-			    || strprefix(user_passwd, "*")) {
+			if (strspn(user_passwd, "*!"))
 				failed = true;
-			}
 
 			if (streq(user_passwd, "")) {
 				const char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
@@ -1020,7 +1018,7 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	if (strprefix(pwd->pw_shell, "*")) {  /* subsystem root */
+	if (strspn(pwd->pw_shell, "*")) {  /* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */
 		subsystem (pwd);	/* figure out what to execute */
 		subroot = true;	/* say I was here again */
