@@ -37,6 +37,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
 #ifndef USE_PAM
@@ -62,7 +63,6 @@
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
 
@@ -189,7 +189,7 @@ static bool restricted_shell (const char *shellname)
 
 	setusershell ();
 	while (NULL != (line = getusershell())) {
-		if (('#' != *line) && streq(line, shellname)) {
+		if (!strspn(line, "#") && streq(line, shellname)) {
 			endusershell ();
 			return false;
 		}
@@ -716,7 +716,7 @@ static /*@only@*/struct passwd * do_check_perms (void)
 	 * the shell specified in /etc/passwd (not the one specified with
 	 * --shell, which will be the one executed in the chroot later).
 	 */
-	if (strprefix(pw->pw_shell, "*")) {  /* subsystem root required */
+	if (strspn(pw->pw_shell, "*")) {  /* subsystem root required */
 		subsystem (pw);	/* change to the subsystem root */
 		endpwent ();		/* close the old password databases */
 		endspent ();
@@ -917,7 +917,7 @@ static void set_environment (struct passwd *pw)
 #ifndef USE_PAM
 		cp = getdef_str ("ENV_TZ");
 		if (NULL != cp) {
-			addenv(strprefix(cp, "/") ? tz(cp) : cp, NULL);
+			addenv(strspn(cp, "/") ? tz(cp) : cp, NULL);
 		}
 
 		/*
