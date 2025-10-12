@@ -1092,7 +1092,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				}
 				dflg = true;
 				user_newhome = optarg;
-				if ((user_newhome[0] != '/') && !streq(user_newhome, "")) {
+				if (strcspn(user_newhome, "/")) {
 					eprintf(_("%s: homedir must be an absolute path\n"),
 					         Prog);
 					exit (E_BAD_ARG);
@@ -1179,15 +1179,13 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 				break;
 			case 's':
 				if (   ( !VALID (optarg) )
-				    || (   !streq(optarg, "")
-				        && ('/'  != optarg[0])
-				        && ('*'  != optarg[0]) )) {
+				    || strcspn(optarg, "/*"))
+				{
 					eprintf(_("%s: invalid shell '%s'\n"),
 					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-				if (!streq(optarg, "")
-				     && '*'  != optarg[0]
+				if (strcspn(optarg, "*")
 				     && !streq(optarg, "/sbin/nologin")
 				     && !streq(optarg, "/usr/sbin/nologin")
 				     && (   stat(optarg, &st) != 0
