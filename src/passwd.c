@@ -17,6 +17,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <time.h>
 
@@ -440,9 +441,8 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 
 static /*@observer@*/const char *pw_status (const char *pass)
 {
-	if (strprefix(pass, "*") || strprefix(pass, "!")) {
+	if (strspn(pass, "*!"))
 		return "L";
-	}
 	if (streq(pass, "")) {
 		return "NP";
 	}

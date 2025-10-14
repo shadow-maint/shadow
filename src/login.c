@@ -22,6 +22,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <assert.h>
@@ -852,10 +853,8 @@ int main (int argc, char **argv)
 			 * login, even if they have been
 			 * "pre-authenticated."
 			 */
-			if (   strprefix(user_passwd, "!")
-			    || strprefix(user_passwd, "*")) {
+			if (strspn(user_passwd, "*!"))
 				failed = true;
-			}
 
 			if (streq(user_passwd, "")) {
 				const char *prevent_no_auth = getdef_str("PREVENT_NO_AUTH");
