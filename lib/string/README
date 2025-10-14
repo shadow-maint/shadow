@@ -177,7 +177,7 @@ strcpy/ - String copying
     STRNCPYTAIL()
 	Like strncpytail, but takes an array.
 
-    STRNCAT()  // To be removed
+    strncat_a()  // To be removed
 	Do NOT use.  I'll remove it soon.
 
   s/
