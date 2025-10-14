@@ -289,21 +289,21 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	utent->ut_type = USER_PROCESS;
 	utent->ut_pid = main_pid;
-	STRNCPY(utent->ut_line, line);
+	strncpy_a(utent->ut_line, line);
 	if (   (NULL != ut)
 	    && ('\0' != ut->ut_id[0])) {
-		STRNCPY(utent->ut_id, ut->ut_id);
+		strncpy_a(utent->ut_id, ut->ut_id);
 	} else {
-		STRNCPY(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
+		strncpy_a(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
 	}
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
-	STRNCPY(utent->ut_name, name);
+	strncpy_a(utent->ut_name, name);
 #endif
-	STRNCPY(utent->ut_user, name);
+	strncpy_a(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-		STRNCPY(utent->ut_host, hostname);
+		strncpy_a(utent->ut_host, hostname);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),
