@@ -52,7 +52,7 @@ is_listed(const char *cfgin, const char *tty, bool def)
 	if (*cons != '/') {
 		char *pbuf;
 
-		STRTCPY(buf, cons);
+		strtcpy_a(buf, cons);
 		pbuf = buf;
 		while (NULL != (s = strsep(&pbuf, ":"))) {
 			if (streq(s, tty)) {

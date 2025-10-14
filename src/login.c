@@ -517,7 +517,7 @@ int main (int argc, char **argv)
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
-	STRTCPY(tty, tmptty);
+	strtcpy_a(tty, tmptty);
 
 #ifndef USE_PAM
 	is_console = console (tty);
@@ -646,7 +646,7 @@ int main (int argc, char **argv)
 		if (gethostname (hostn, sizeof (hostn)) == 0) {
 			stprintf_a(loginprompt, _("%s login: "), hostn);
 		} else {
-			STRTCPY(loginprompt, _("login: "));
+			strtcpy_a(loginprompt, _("login: "));
 		}
 
 		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
