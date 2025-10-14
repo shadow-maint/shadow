@@ -252,7 +252,7 @@ void failprint (const struct faillog *fail)
 	/*
 	 * Print all information we have.
 	 */
-	STRFTIME(lasttimeb, "%c", tp);
+	strftime_a(lasttimeb, "%c", tp);
 
 	/*@-formatconst@*/
 	(void) printf (ngettext ("%d failure since last login.\n"

@@ -279,5 +279,5 @@ strsep/ - String separation
 	(But the strings themselves are not duplicated.)
 
 strftime.h
-    STRFTIME()
+    strftime_a()
 	Like strftime(3), but takes an array.
