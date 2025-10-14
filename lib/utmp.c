@@ -63,7 +63,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 	if (streq(tmptty, "")) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
-			STRTCPY(tmptty, tname);
+			strtcpy_a(tmptty, tname);
 	}
 
 	if (streq(tmptty, "")) {
