@@ -16,7 +16,7 @@
 #include "sizeof.h"
 
 
-#define MEMZERO(arr)  memzero(arr, SIZEOF_ARRAY(arr))
+#define MEMZERO(arr)  memzero(arr, sizeof_a(arr))
 
 
 inline void *memzero(void *ptr, size_t size);
