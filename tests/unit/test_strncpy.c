@@ -18,18 +18,18 @@
 #include "string/strcpy/strncpy.h"
 
 
-static void test_STRNCPY_trunc(void **state);
-static void test_STRNCPY_fit(void **state);
-static void test_STRNCPY_pad(void **state);
+static void test_strncpy_a_trunc(void **state);
+static void test_strncpy_a_fit(void **state);
+static void test_strncpy_a_pad(void **state);
 
 
 int
 main(void)
 {
     const struct CMUnitTest  tests[] = {
-        cmocka_unit_test(test_STRNCPY_trunc),
-        cmocka_unit_test(test_STRNCPY_fit),
-        cmocka_unit_test(test_STRNCPY_pad),
+        cmocka_unit_test(test_strncpy_a_trunc),
+        cmocka_unit_test(test_strncpy_a_fit),
+        cmocka_unit_test(test_strncpy_a_pad),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
@@ -37,49 +37,49 @@ main(void)
 
 
 static void
-test_STRNCPY_trunc(void **state)
+test_strncpy_a_trunc(void **state)
 {
 	char  buf[3];
 
 	char  src1[4] = {'f', 'o', 'o', 'o'};
 	char  res1[3] = {'f', 'o', 'o'};
-	assert_true(memcmp(res1, STRNCPY(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
 
 	char  src2[5] = "barb";
 	char  res2[3] = {'b', 'a', 'r'};
-	assert_true(memcmp(res2, STRNCPY(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
 }
 
 
 static void
-test_STRNCPY_fit(void **state)
+test_strncpy_a_fit(void **state)
 {
 	char  buf[3];
 
 	char  src1[3] = {'b', 'a', 'z'};
 	char  res1[3] = {'b', 'a', 'z'};
-	assert_true(memcmp(res1, STRNCPY(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
 
 	char  src2[4] = "qwe";
 	char  res2[3] = {'q', 'w', 'e'};
-	assert_true(memcmp(res2, STRNCPY(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
 }
 
 
 static void
-test_STRNCPY_pad(void **state)
+test_strncpy_a_pad(void **state)
 {
 	char  buf[3];
 
 	char  src1[3] = "as";
 	char  res1[3] = {'a', 's', 0};
-	assert_true(memcmp(res1, STRNCPY(buf, src1), sizeof(buf)) == 0);
+	assert_true(memcmp(res1, strncpy_a(buf, src1), sizeof(buf)) == 0);
 
 	char  src2[3] = "";
 	char  res2[3] = {0, 0, 0};
-	assert_true(memcmp(res2, STRNCPY(buf, src2), sizeof(buf)) == 0);
+	assert_true(memcmp(res2, strncpy_a(buf, src2), sizeof(buf)) == 0);
 
 	char  src3[3] = {'a', 0, 'b'};
 	char  res3[3] = {'a', 0, 0};
-	assert_true(memcmp(res3, STRNCPY(buf, src3), sizeof(buf)) == 0);
+	assert_true(memcmp(res3, strncpy_a(buf, src3), sizeof(buf)) == 0);
 }
