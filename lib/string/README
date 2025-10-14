@@ -86,7 +86,7 @@ memset/ - Memory zeroing
 
     memzero()
 	Synonym of explicit_bzero(3).
-    MEMZERO()
+    memzero_a()
 	Like memzero(), but takes an array.
 
     strzero()
