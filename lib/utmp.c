@@ -208,7 +208,7 @@ get_session_host(char **out, pid_t main_pid)
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && !STRNEQ(ut->ut_host, "")) {
-		*out = XSTRNDUP(ut->ut_host);
+		*out = xstrndup_a(ut->ut_host);
 	} else {
 		*out = NULL;
 		ret = -2;
@@ -279,7 +279,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && !STRNEQ(ut->ut_host, ""))
-		hostname = XSTRNDUP(ut->ut_host);
+		hostname = xstrndup_a(ut->ut_host);
 #endif
 
 	line = strprefix(line, "/dev/") ?: line;

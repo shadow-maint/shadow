@@ -14,11 +14,11 @@
 #include "exit_if_null.h"
 
 
-// Similar to strndup(3), but ensure that 's' is an array.
-#define STRNDUP(s)   strndup(s, countof(s))
+// strndup_a - nonstring duplicate-into-string array
+#define strndup_a(s)   strndup(s, countof(s))
 
-// exit-on-error nonstring duplicate-into-string
-#define XSTRNDUP(s)  exit_if_null(STRNDUP(s))
+// xstrndup_a - exit-on-error nonstring duplicate-into-string array
+#define xstrndup_a(s)  exit_if_null(strndup_a(s))
 
 
 #endif  // include guard
