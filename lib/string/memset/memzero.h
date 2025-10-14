@@ -16,13 +16,15 @@
 #include "sizeof.h"
 
 
-#define MEMZERO(arr)  memzero(arr, sizeof_a(arr))
+// memzero_a - memory zero (explicit) array
+#define memzero_a(arr)  memzero(arr, sizeof_a(arr))
 
 
 inline void *memzero(void *ptr, size_t size);
 inline char *strzero(char *s);
 
 
+// memzero - memory zero (explicit)
 inline void *
 memzero(void *ptr, size_t size)
 {
@@ -38,6 +40,7 @@ memzero(void *ptr, size_t size)
 }
 
 
+// strzero - string zero (explicit)
 inline char *
 strzero(char *s)
 {

@@ -351,11 +351,11 @@ static int setup_user_limits (const char *uname)
 	char tempbuf[1024];
 
 	/* init things */
-	MEMZERO(buf);
-	MEMZERO(name);
-	MEMZERO(limits);
-	MEMZERO(deflimits);
-	MEMZERO(tempbuf);
+	memzero_a(buf);
+	memzero_a(name);
+	memzero_a(limits);
+	memzero_a(deflimits);
+	memzero_a(tempbuf);
 
 	/* start the checks */
 	fil = fopen (LIMITS_FILE, "r");
@@ -372,7 +372,7 @@ static int setup_user_limits (const char *uname)
 		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
 			continue;
 		}
-		MEMZERO(tempbuf);
+		memzero_a(tempbuf);
 		/* a valid line should have a username, then spaces,
 		 * then limits
 		 * we allow the format:
