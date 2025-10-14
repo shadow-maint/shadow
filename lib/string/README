@@ -264,7 +264,7 @@ strsep/ - String separation
 	Loop around strsep(3) to fill an array of buffers with all
 	the delimited strings that have been split.
 	Useful when the number of delimiter-separated fields is known.
-    STRSEP2ARR()
+    strsep2arr_a()
 	Like strsep2arr(), but take an array, and simplify error checks.
 
     strsep2ls()
