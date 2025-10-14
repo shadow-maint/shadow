@@ -271,7 +271,7 @@ strsep/ - String separation
 	Similar to strsep2arr(), but terminate the list with a null
 	pointer.
 	Useful when the number of delimiter-separated fields is unknown.
-    STRSEP2LS()
+    strsep2ls_a()
 	Like strsep2ls(), but take an array.
 
     astrsep2ls()
