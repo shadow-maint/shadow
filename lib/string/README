@@ -166,7 +166,7 @@ strdup/ - Memory duplication
 strcpy/ - String copying
 
   n/
-    STRNCPY()
+    strncpy_a()
 	Like strncpy(3), but takes an array.
 	Use it *exclusively* for copying from a string into a utmp(5)
 	member.
