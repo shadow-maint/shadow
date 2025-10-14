@@ -207,7 +207,7 @@ main(int argc, char **argv)
 			else
 				strcpy(tty_name, "");
 
-			STRNCAT(tty_name, ut->ut_line);
+			strncat_a(tty_name, ut->ut_line);
 #ifndef O_NOCTTY
 #define O_NOCTTY 0
 #endif
