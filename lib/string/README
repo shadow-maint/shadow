@@ -186,7 +186,7 @@ strcpy/ - String copying
 	This is what the Linux kernel calls strscpy().
 	If you need more than one call to form a string,
 	use stpecpy() instead.
-    STRTCPY()
+    strtcpy_a()
 	Like strtcpy(), but takes an array.
 
     strtcat()  // Unimplemented

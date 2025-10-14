@@ -244,7 +244,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				exit (E_NOPERM);
 			}
 			fflg = true;
-			STRTCPY(fullnm, optarg);
+			strtcpy_a(fullnm, optarg);
 			break;
 		case 'h':
 			if (!may_change_field ('h')) {
@@ -253,7 +253,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				exit (E_NOPERM);
 			}
 			hflg = true;
-			STRTCPY(homeph, optarg);
+			strtcpy_a(homeph, optarg);
 			break;
 		case 'o':
 			if (!amroot) {
@@ -267,7 +267,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				         _("%s: fields too long\n"), Prog);
 				exit (E_NOPERM);
 			}
-			STRTCPY(slop, optarg);
+			strtcpy_a(slop, optarg);
 			break;
 		case 'r':
 			if (!may_change_field ('r')) {
@@ -276,7 +276,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				exit (E_NOPERM);
 			}
 			rflg = true;
-			STRTCPY(roomno, optarg);
+			strtcpy_a(roomno, optarg);
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
@@ -291,7 +291,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				exit (E_NOPERM);
 			}
 			wflg = true;
-			STRTCPY(workph, optarg);
+			strtcpy_a(workph, optarg);
 			break;
 		default:
 			usage (E_USAGE);
@@ -483,7 +483,7 @@ static void get_old_fields (const char *gecos)
 	char        old_gecos[BUFSIZ];
 	const char  *f;
 
-	STRTCPY(old_gecos, gecos);
+	strtcpy_a(old_gecos, gecos);
 	p = old_gecos;
 
 	f = strsep(&p, ",");

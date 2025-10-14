@@ -18,16 +18,16 @@
 #include "string/strcpy/strtcpy.h"
 
 
-static void test_STRTCPY_trunc(void **state);
-static void test_STRTCPY_ok(void **state);
+static void test_strtcpy_a_trunc(void **state);
+static void test_strtcpy_a_ok(void **state);
 
 
 int
 main(void)
 {
     const struct CMUnitTest  tests[] = {
-        cmocka_unit_test(test_STRTCPY_trunc),
-        cmocka_unit_test(test_STRTCPY_ok),
+        cmocka_unit_test(test_strtcpy_a_trunc),
+        cmocka_unit_test(test_strtcpy_a_ok),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
@@ -35,33 +35,33 @@ main(void)
 
 
 static void
-test_STRTCPY_trunc(void **state)
+test_strtcpy_a_trunc(void **state)
 {
 	char  buf[countof("foo")];
 
 	// Test that we're not returning SIZE_MAX
-	assert_true(STRTCPY(buf, "fooo") < 0);
+	assert_true(strtcpy_a(buf, "fooo") < 0);
 	assert_string_equal(buf, "foo");
 
-	assert_int_equal(STRTCPY(buf, "barbaz"), -1);
+	assert_int_equal(strtcpy_a(buf, "barbaz"), -1);
 	assert_string_equal(buf, "bar");
 }
 
 
 static void
-test_STRTCPY_ok(void **state)
+test_strtcpy_a_ok(void **state)
 {
 	char  buf[countof("foo")];
 
-	assert_int_equal(STRTCPY(buf, "foo"), strlen("foo"));
+	assert_int_equal(strtcpy_a(buf, "foo"), strlen("foo"));
 	assert_string_equal(buf, "foo");
 
-	assert_int_equal(STRTCPY(buf, "fo"), strlen("fo"));
+	assert_int_equal(strtcpy_a(buf, "fo"), strlen("fo"));
 	assert_string_equal(buf, "fo");
 
-	assert_int_equal(STRTCPY(buf, "f"), strlen("f"));
+	assert_int_equal(strtcpy_a(buf, "f"), strlen("f"));
 	assert_string_equal(buf, "f");
 
-	assert_int_equal(STRTCPY(buf, ""), strlen(""));
+	assert_int_equal(strtcpy_a(buf, ""), strlen(""));
 	assert_string_equal(buf, "");
 }

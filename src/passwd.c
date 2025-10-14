@@ -233,7 +233,7 @@ static int new_password (const struct passwd *pw)
 			                pw->pw_name);
 			return -1;
 		}
-		STRTCPY(orig, clear);
+		strtcpy_a(orig, clear);
 		erase_pass (clear);
 		strzero (cipher);
 	} else {
@@ -292,7 +292,7 @@ static int new_password (const struct passwd *pw)
 		if (NULL == cp) {
 			return -1;
 		}
-		ret = STRTCPY (pass, cp);
+		ret = strtcpy_a(pass, cp);
 		erase_pass (cp);
 		if (ret == -1) {
 			(void) fputs (_("Password is too long.\n"), stderr);
@@ -311,7 +311,7 @@ static int new_password (const struct passwd *pw)
 			if (warned && !streq(pass, cp)) {
 				warned = false;
 			}
-			ret = STRTCPY (pass, cp);
+			ret = strtcpy_a(pass, cp);
 			erase_pass (cp);
 			if (ret == -1) {
 				(void) fputs (_("Password is too long.\n"), stderr);
@@ -373,7 +373,7 @@ static int new_password (const struct passwd *pw)
 		return -1;
 	}
 
-	STRTCPY(crypt_passwd, cp);
+	strtcpy_a(crypt_passwd, cp);
 	return 0;
 }
 
@@ -1065,7 +1065,7 @@ main(int argc, char **argv)
 		 * If there are no other flags, just change the password.
 		 */
 		if (!anyflag) {
-			STRTCPY(crypt_passwd, cp);
+			strtcpy_a(crypt_passwd, cp);
 
 			/*
 			 * See if the user is permitted to change the password.

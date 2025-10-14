@@ -793,7 +793,7 @@ int main (int argc, char **argv)
 		fail_exit (E_NOPERM, process_selinux);
 	}
 
-	STRTCPY(user_name, pw->pw_name);
+	strtcpy_a(user_name, pw->pw_name);
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (pw->pw_name) == SHADOWTCB_FAILURE) {
 		fail_exit (E_NOPERM, process_selinux);

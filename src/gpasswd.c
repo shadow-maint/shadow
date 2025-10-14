@@ -822,7 +822,7 @@ static void change_passwd (struct group *gr)
 			exit (1);
 		}
 
-		STRTCPY(pass, cp);
+		strtcpy_a(pass, cp);
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
