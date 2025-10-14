@@ -97,7 +97,7 @@ subordinate_parse(const char *line)
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 
-	if (STRSEP2ARR(rangebuf, ":", fields) == -1)
+	if (strsep2arr_a(rangebuf, ":", fields) == -1)
 		return NULL;
 
 	if (streq(fields[0], ""))

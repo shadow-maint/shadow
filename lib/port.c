@@ -148,7 +148,7 @@ next:
 
 	stpsep(buf, "\n");
 
-	if (STRSEP2ARR(buf, ":", fields) == -1)
+	if (strsep2arr_a(buf, ":", fields) == -1)
 		goto next;
 
 	/*
