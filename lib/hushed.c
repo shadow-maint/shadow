@@ -60,7 +60,7 @@ bool hushed (const char *username)
 	 */
 
 	if (hushfile[0] != '/') {
-		SNPRINTF(buf, "%s/%s", pw->pw_dir, hushfile);
+		stprintf_a(buf, "%s/%s", pw->pw_dir, hushfile);
 		return (access (buf, F_OK) == 0);
 	}
 

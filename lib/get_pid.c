@@ -59,7 +59,7 @@ int open_pidfd(const char *pidstr)
 	if (get_pid(pidstr, &target) == -1)
 		return -ENOENT;
 
-	if (SNPRINTF(proc_dir_name, "/proc/%d/", target) == -1) {
+	if (stprintf_a(proc_dir_name, "/proc/%d/", target) == -1) {
 		fprintf(stderr, "snprintf of proc path failed for %d: %s\n",
 			target, strerrno());
 		return -EINVAL;

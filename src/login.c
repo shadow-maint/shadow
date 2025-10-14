@@ -590,16 +590,16 @@ int main (int argc, char **argv)
 	}
 
 	if (!streq(cp, "")) {
-		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
+		stprintf_a(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
-		SNPRINTF(fromhost, " on '%.100s'", tty);
+		stprintf_a(fromhost, " on '%.100s'", tty);
 	}
 	free(host);
 
       top:
 	/* only allow ALARM sec. for login */
 	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
-	SNPRINTF(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
+	stprintf_a(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
 	(void) signal (SIGALRM, alarm_handler);
 	if (timeout > 0) {
 		(void) alarm (timeout);
@@ -644,7 +644,7 @@ int main (int argc, char **argv)
 
 		/* Make the login prompt look like we want it */
 		if (gethostname (hostn, sizeof (hostn)) == 0) {
-			SNPRINTF(loginprompt, _("%s login: "), hostn);
+			stprintf_a(loginprompt, _("%s login: "), hostn);
 		} else {
 			STRTCPY(loginprompt, _("login: "));
 		}

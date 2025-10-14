@@ -140,7 +140,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 	}
 
 	pid = getpid ();
-	SNPRINTF(buf, "%lu", (unsigned long) pid);
+	stprintf_a(buf, "%lu", (unsigned long) pid);
 	len = (ssize_t) strlen (buf) + 1;
 	if (write_full(fd, buf, len) == -1) {
 		if (log) {
@@ -340,7 +340,7 @@ static void free_linked_list (struct commonio_db *db)
 
 int commonio_setname (struct commonio_db *db, const char *name)
 {
-	SNPRINTF(db->filename, "%s", name);
+	stprintf_a(db->filename, "%s", name);
 	db->setname = true;
 	return 1;
 }
@@ -486,7 +486,7 @@ int commonio_unlock (struct commonio_db *db, bool process_selinux)
 		 * then call ulckpwdf() (if used) on last unlock.
 		 */
 		db->locked = false;
-		SNPRINTF(lock, "%s.lock", db->filename);
+		stprintf_a(lock, "%s.lock", db->filename);
 		unlink (lock);
 		dec_lock_count ();
 		return 1;
@@ -916,7 +916,7 @@ int commonio_close (struct commonio_db *db, bool process_selinux)
 		/*
 		 * Create backup file.
 		 */
-		if (SNPRINTF(buf, "%s-", db->filename) == -1) {
+		if (stprintf_a(buf, "%s-", db->filename) == -1) {
 			(void) fclose (db->fp);
 			db->fp = NULL;
 			goto fail;
@@ -955,7 +955,7 @@ int commonio_close (struct commonio_db *db, bool process_selinux)
 		sb.st_gid = db->st_gid;
 	}
 
-	if (SNPRINTF(buf, "%s+", db->filename) == -1)
+	if (stprintf_a(buf, "%s+", db->filename) == -1)
 		goto fail;
 
 #ifdef WITH_SELINUX

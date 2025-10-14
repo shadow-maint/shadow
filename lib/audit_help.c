@@ -104,10 +104,10 @@ audit_logger_with_group(int type, const char *op, const char *name,
 
 	len = strnlen(grp, sizeof(enc_group)/2);
 	if (audit_value_needs_encoding(grp, len)) {
-		SNPRINTF(buf, "%s %s=%s", op, grp_type,
+		stprintf_a(buf, "%s %s=%s", op, grp_type,
 			audit_encode_value(enc_group, grp, len));
 	} else {
-		SNPRINTF(buf, "%s %s=\"%s\"", op, grp_type, grp);
+		stprintf_a(buf, "%s %s=\"%s\"", op, grp_type, grp);
 	}
 
 	audit_log_acct_message(audit_fd, type, NULL, buf, name, id,

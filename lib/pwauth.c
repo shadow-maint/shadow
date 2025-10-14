@@ -111,7 +111,7 @@ pw_auth(const char *cipher, const char *user)
 	}
 #endif
 
-	SNPRINTF(prompt, cp, user);
+	stprintf_a(prompt, cp, user);
 	clear = agetpass(prompt);
 	input = (clear == NULL) ? "" : clear;
 
