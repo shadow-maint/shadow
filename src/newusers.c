@@ -1117,7 +1117,7 @@ int main (int argc, char **argv)
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
-		if (STRSEP2ARR(buf, ":", fields) == -1) {
+		if (strsep2arr_a(buf, ":", fields) == -1) {
 			fprintf (stderr, _("%s: line %jd: invalid line\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE, process_selinux);

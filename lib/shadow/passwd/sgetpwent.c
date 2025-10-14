@@ -53,7 +53,7 @@ sgetpwent(const char *s)
 
 	stpsep(dup, "\n");
 
-	if (STRSEP2ARR(dup, ":", fields) == -1)
+	if (strsep2arr_a(dup, ":", fields) == -1)
 		return NULL;
 
 	/*
