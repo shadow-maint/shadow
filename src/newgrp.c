@@ -198,7 +198,7 @@ static void check_perms (const struct group *grp,
 		if (streq(grp->gr_passwd, "") ||
 		    !streq(grp->gr_passwd, cpasswd)) {
 #ifdef WITH_AUDIT
-			SNPRINTF(audit_buf, "authentication new_gid=%lu",
+			stprintf_a(audit_buf, "authentication new_gid=%lu",
 			         (unsigned long) grp->gr_gid);
 			audit_logger (AUDIT_GRP_AUTH, Prog,
 			              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
@@ -211,7 +211,7 @@ static void check_perms (const struct group *grp,
 			goto failure;
 		}
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "authentication new_gid=%lu",
+		stprintf_a(audit_buf, "authentication new_gid=%lu",
 		         (unsigned long) grp->gr_gid);
 		audit_logger (AUDIT_GRP_AUTH, Prog,
 		              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
@@ -698,7 +698,7 @@ int main (int argc, char **argv)
 	if (setgid (gid) != 0) {
 		perror ("setgid");
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
+		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
@@ -708,7 +708,7 @@ int main (int argc, char **argv)
 	if (setuid (getuid ()) != 0) {
 		perror ("setuid");
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
+		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
@@ -723,7 +723,7 @@ int main (int argc, char **argv)
 		closelog ();
 		execl (SHELL, "sh", "-c", command, (char *) NULL);
 #ifdef WITH_AUDIT
-		SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
+		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
@@ -791,7 +791,7 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_AUDIT
-	SNPRINTF(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
+	stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 	audit_logger (AUDIT_CHGRP_ID, Prog,
 	              audit_buf, NULL, getuid (), SHADOW_AUDIT_SUCCESS);
 #endif

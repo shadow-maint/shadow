@@ -98,7 +98,7 @@ static int different_namespace (const char *sname)
 	char     path[41];
 	char     buf[512], buf2[512];
 
-	SNPRINTF(path, "/proc/%s/ns/user", sname);
+	stprintf_a(path, "/proc/%s/ns/user", sname);
 
 	if (readlinknul_a(path, buf) == -1)
 		return 0;
@@ -121,7 +121,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	char  line[1024];
 	FILE  *sfile;
 
-	SNPRINTF(status, "/proc/%s/status", sname);
+	stprintf_a(status, "/proc/%s/status", sname);
 
 	sfile = fopen (status, "r");
 	if (NULL == sfile) {
@@ -214,7 +214,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 		}
 
 		/* Check if the process is in our chroot */
-		SNPRINTF(root_path, "/proc/%lu/root", (unsigned long) pid);
+		stprintf_a(root_path, "/proc/%lu/root", (unsigned long) pid);
 		if (stat (root_path, &sbroot_process) != 0) {
 			continue;
 		}
@@ -234,7 +234,7 @@ static int user_busy_processes (const char *name, uid_t uid)
 			return 1;
 		}
 
-		SNPRINTF(task_path, "/proc/%lu/task", (unsigned long) pid);
+		stprintf_a(task_path, "/proc/%lu/task", (unsigned long) pid);
 		task_dir = opendir (task_path);
 		if (task_dir != NULL) {
 			while (NULL != (ent = readdir(task_dir))) {

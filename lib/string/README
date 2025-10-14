@@ -213,7 +213,7 @@ sprintf/ - Formatted string creation
 	snprintf(3) wrapper that reports truncation with -1.
 	If you need more than one call to form a string,
 	use seprintf() instead.
-    STPRINTF()  // Current name: SNPRINTF()
+    stprintf_a()
 	Like stprintf(), but takes an array.
 
     seprintf()  // Current name: stpeprintf())
