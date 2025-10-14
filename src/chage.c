@@ -171,12 +171,12 @@ static int new_fields (void)
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	SNPRINTF(buf, "%ld", mindays);
+	stprintf_a(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
 	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
-	SNPRINTF(buf, "%ld", maxdays);
+	stprintf_a(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
 	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
@@ -197,12 +197,12 @@ static int new_fields (void)
 		}
 	}
 
-	SNPRINTF(buf, "%ld", warndays);
+	stprintf_a(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
 	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
-	SNPRINTF(buf, "%ld", inactdays);
+	stprintf_a(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
 	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;

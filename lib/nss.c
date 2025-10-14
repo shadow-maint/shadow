@@ -109,7 +109,7 @@ nss_init(const char *nsswitch_path) {
 		fprintf(shadow_logfd, "Using files\n");
 		goto null_subid;
 	}
-	SNPRINTF(libname, "libsubid_%s.so", p);
+	stprintf_a(libname, "libsubid_%s.so", p);
 	h = dlopen(libname, RTLD_LAZY);
 	if (!h) {
 		fprintf(shadow_logfd, "Error opening %s: %s\n", libname, dlerror());
