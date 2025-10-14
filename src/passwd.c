@@ -296,7 +296,7 @@ static int new_password (const struct passwd *pw)
 		erase_pass (cp);
 		if (ret == -1) {
 			(void) fputs (_("Password is too long.\n"), stderr);
-			MEMZERO(pass);
+			memzero_a(pass);
 			return -1;
 		}
 	} else {
@@ -304,8 +304,8 @@ static int new_password (const struct passwd *pw)
 		for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
 			cp = agetpass (_("New password: "));
 			if (NULL == cp) {
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 			if (warned && !streq(pass, cp)) {
@@ -315,8 +315,8 @@ static int new_password (const struct passwd *pw)
 			erase_pass (cp);
 			if (ret == -1) {
 				(void) fputs (_("Password is too long.\n"), stderr);
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 
@@ -338,8 +338,8 @@ static int new_password (const struct passwd *pw)
 			}
 			cp = agetpass (_("Re-enter new password: "));
 			if (NULL == cp) {
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 			if (!streq(cp, pass)) {
@@ -350,10 +350,10 @@ static int new_password (const struct passwd *pw)
 				break;
 			}
 		}
-		MEMZERO(orig);
+		memzero_a(orig);
 
 		if (i == 0) {
-			MEMZERO(pass);
+			memzero_a(pass);
 			return -1;
 		}
 	}
@@ -364,7 +364,7 @@ static int new_password (const struct passwd *pw)
 	 */
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
-	MEMZERO(pass);
+	memzero_a(pass);
 
 	if (NULL == cp) {
 		fprintf (stderr,

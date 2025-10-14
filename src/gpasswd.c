@@ -826,7 +826,7 @@ static void change_passwd (struct group *gr)
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
-			MEMZERO(pass);
+			memzero_a(pass);
 			exit (1);
 		}
 
@@ -836,7 +836,7 @@ static void change_passwd (struct group *gr)
 		}
 
 		erase_pass (cp);
-		MEMZERO(pass);
+		memzero_a(pass);
 
 		if (retries + 1 < RETRIES) {
 			puts (_("They don't match; try again"));
@@ -850,7 +850,7 @@ static void change_passwd (struct group *gr)
 
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
-	MEMZERO(pass);
+	memzero_a(pass);
 	if (NULL == cp) {
 		fprintf (stderr,
 		         _("%s: failed to crypt password with salt '%s': %s\n"),
