@@ -154,7 +154,7 @@ strdup/ - Memory duplication
     strndupa_a()
 	Like strndupa(3), but takes an array.
 
-    STRNDUP()
+    strndup_a()
 	Like strndup(3), but takes an array.
 
   m/
