@@ -100,10 +100,10 @@ static int different_namespace (const char *sname)
 
 	SNPRINTF(path, "/proc/%s/ns/user", sname);
 
-	if (READLINKNUL(path, buf) == -1)
+	if (readlinknul_a(path, buf) == -1)
 		return 0;
 
-	if (READLINKNUL("/proc/self/ns/user", buf2) == -1)
+	if (readlinknul_a("/proc/self/ns/user", buf2) == -1)
 		return 0;
 
 	if (streq(buf, buf2))
