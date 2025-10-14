@@ -56,8 +56,8 @@ check_login(const struct utmpx *ut)
 	char    *line;
 	time_t  now;
 
-	user = STRNDUPA(ut->ut_user);
-	line = STRNDUPA(ut->ut_line);
+	user = strndupa_a(ut->ut_user);
+	line = strndupa_a(ut->ut_line);
 
 	now = time(NULL);
 
@@ -227,7 +227,7 @@ main(int argc, char **argv)
 
 			SYSLOG ((LOG_NOTICE,
 				 "logged off user '%s' on '%s'",
-			         STRNDUPA(ut->ut_user),
+			         strndupa_a(ut->ut_user),
 				 tty_name));
 
 			/*

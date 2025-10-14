@@ -151,7 +151,7 @@ strdup/ - Memory duplication
   s/
     strndupa(3)
 	Create a new string (in stack) from a [[gnu::nonstring]].
-    STRNDUPA()
+    strndupa_a()
 	Like strndupa(3), but takes an array.
 
     STRNDUP()
