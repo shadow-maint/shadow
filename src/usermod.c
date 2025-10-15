@@ -1418,7 +1418,6 @@ process_flags(int argc, char **argv)
 	      || Zflg
 #endif				/* WITH_SELINUX */
 	)) {
-		printf(_("%s: no changes\n"), Prog);
 		exit (E_SUCCESS);
 	}
 
