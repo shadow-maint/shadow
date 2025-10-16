@@ -11,7 +11,7 @@
 
 #include <stddef.h>
 
-#include "atoi/a2i/a2i.h"
+#include "atoi/a2i.h"
 #include "typetraits.h"
 
 
