@@ -21,7 +21,7 @@
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
-#include "atoi/a2i/a2u.h"
+#include "atoi/a2i.h"
 #include "idmapping.h"
 #include "prototypes.h"
 #include "shadowlog.h"
