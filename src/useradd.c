@@ -743,11 +743,7 @@ static int get_groups (char *list)
 	/*
 	 * Free previous group list before creating a new one.
 	 */
-	int i = 0;
-	while (NULL != user_groups[i]) {
-		free(user_groups[i]);
-		user_groups[i++] = NULL;
-	}
+	free_list(user_groups);
 
 	if (streq(list, "")) {
 		return 0;
@@ -1545,6 +1541,13 @@ static void process_flags (int argc, char **argv)
 		 * do not create a home dir */
 		if (getdef_bool ("CREATE_HOME")) {
 			mflg = true;
+		}
+	} else {
+		/* If SYS_USER_AUTO_GROUPS_ENAB is disabled,
+		 * then do not automatically add supplements groups for system users. */
+		if (!getdef_bool("SYS_USER_AUTO_GROUPS_ENAB") && !Gflg && do_grp_update) {
+			free_list(user_groups);
+			do_grp_update = false;
 		}
 	}
 
