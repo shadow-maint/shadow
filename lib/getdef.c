@@ -23,7 +23,6 @@
 #endif
 
 #include "atoi/a2i.h"
-#include "atoi/str2i.h"
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
