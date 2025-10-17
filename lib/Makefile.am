@@ -41,8 +41,6 @@ libshadow_la_SOURCES = \
 	atoi/a2i.h \
 	atoi/getnum.c \
 	atoi/getnum.h \
-	atoi/str2i.c \
-	atoi/str2i.h \
 	atoi/strtoi/strtoi.c \
 	atoi/strtoi/strtoi.h \
 	atoi/strtoi/strtou.c \
