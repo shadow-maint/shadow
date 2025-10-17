@@ -9,6 +9,7 @@
 #include "config.h"
 
 #include <errno.h>
+#include <stddef.h>
 
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou_noneg.h"
@@ -51,6 +52,18 @@
 #define a2ui(...)   a2i(unsigned int, __VA_ARGS__)
 #define a2ul(...)   a2i(unsigned long, __VA_ARGS__)
 #define a2ull(...)  a2i(unsigned long long, __VA_ARGS__)
+
+#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0, type_min(T), type_max(T))
+
+#define str2sh(...)    str2i(short, __VA_ARGS__)
+#define str2si(...)    str2i(int, __VA_ARGS__)
+#define str2sl(...)    str2i(long, __VA_ARGS__)
+#define str2sll(...)   str2i(long long, __VA_ARGS__)
+
+#define str2uh(...)    str2i(unsigned short, __VA_ARGS__)
+#define str2ui(...)    str2i(unsigned int, __VA_ARGS__)
+#define str2ul(...)    str2i(unsigned long, __VA_ARGS__)
+#define str2ull(...)   str2i(unsigned long long, __VA_ARGS__)
 
 
 #endif  // include guard

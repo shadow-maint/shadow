@@ -19,7 +19,6 @@
 #include <string.h>
 
 #include "atoi/a2i.h"
-#include "atoi/str2i.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
