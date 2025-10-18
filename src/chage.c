@@ -32,7 +32,7 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strftime.h"
 #include "time/day_to_str.h"
 /*@-exitarg@*/
@@ -170,12 +170,12 @@ static int new_fields (void)
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	SNPRINTF(buf, "%ld", mindays);
+	stprintf_a(buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
 	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
-	SNPRINTF(buf, "%ld", maxdays);
+	stprintf_a(buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
 	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
@@ -196,12 +196,12 @@ static int new_fields (void)
 		}
 	}
 
-	SNPRINTF(buf, "%ld", warndays);
+	stprintf_a(buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
 	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
-	SNPRINTF(buf, "%ld", inactdays);
+	stprintf_a(buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
 	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
@@ -248,7 +248,7 @@ print_day_as_date(long day)
 		return;
 	}
 
-	if (STRFTIME(buf, iflg ? "%F" : "%b %d, %Y", &tm) == 0) {
+	if (strftime_a(buf, iflg ? "%F" : "%b %d, %Y", &tm) == 0) {
 		puts(_("future"));
 		return;
 	}
@@ -792,7 +792,7 @@ int main (int argc, char **argv)
 		fail_exit (E_NOPERM, process_selinux);
 	}
 
-	STRTCPY(user_name, pw->pw_name);
+	strtcpy_a(user_name, pw->pw_name);
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (pw->pw_name) == SHADOWTCB_FAILURE) {
 		fail_exit (E_NOPERM, process_selinux);

@@ -26,8 +26,8 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "alloc/x/xcalloc.h"
-#include "alloc/x/xmalloc.h"
+#include "alloc/calloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "sizeof.h"
 #include "string/strchr/strnul.h"
@@ -36,8 +36,8 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
-#include "string/strdup/xstrndup.h"
+#include "string/strdup/strdup.h"
+#include "string/strdup/strndup.h"
 
 #ident "$Id$"
 
@@ -63,7 +63,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 	if (streq(tmptty, "")) {
 		const char *tname = ttyname (STDIN_FILENO);
 		if (NULL != tname)
-			STRTCPY(tmptty, tname);
+			strtcpy_a(tmptty, tname);
 	}
 
 	if (streq(tmptty, "")) {
@@ -212,7 +212,7 @@ get_session_host(char **out, pid_t main_pid)
 
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	if ((ut != NULL) && !STRNEQ(ut->ut_host, "")) {
-		*out = XSTRNDUP(ut->ut_host);
+		*out = xstrndup_a(ut->ut_host);
 	} else {
 		*out = NULL;
 		ret = -2;
@@ -283,7 +283,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 		hostname = xstrdup(host);
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && !STRNEQ(ut->ut_host, ""))
-		hostname = XSTRNDUP(ut->ut_host);
+		hostname = xstrndup_a(ut->ut_host);
 #endif
 
 	line = strprefix(line, "/dev/") ?: line;
@@ -293,21 +293,21 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	utent->ut_type = USER_PROCESS;
 	utent->ut_pid = main_pid;
-	STRNCPY(utent->ut_line, line);
+	strncpy_a(utent->ut_line, line);
 	if (   (NULL != ut)
 	    && ('\0' != ut->ut_id[0])) {
-		STRNCPY(utent->ut_id, ut->ut_id);
+		strncpy_a(utent->ut_id, ut->ut_id);
 	} else {
-		STRNCPY(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
+		strncpy_a(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
 	}
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
-	STRNCPY(utent->ut_name, name);
+	strncpy_a(utent->ut_name, name);
 #endif
-	STRNCPY(utent->ut_user, name);
+	strncpy_a(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
 #if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-		STRNCPY(utent->ut_host, hostname);
+		strncpy_a(utent->ut_host, hostname);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
 		utent->ut_syslen = MIN (strlen (hostname),

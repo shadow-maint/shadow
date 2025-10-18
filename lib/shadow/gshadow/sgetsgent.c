@@ -16,9 +16,9 @@
 
 #include "shadow/gshadow/sgrp.h"
 #include "string/strcmp/streq.h"
+#include "string/strtok/astrsep2ls.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/xastrsep2ls.h"
 
 
 #if defined(SHADOWGRP) && !__has_include(<gshadow.h>)
@@ -43,7 +43,7 @@ sgetsgent(const char *s)
 
 	stpsep(dup, "\n");
 
-	if (STRSEP2ARR(dup, ":", fields) == -1)
+	if (strsep2arr_a(dup, ":", fields) == -1)
 		return NULL;
 
 	sgroup.sg_namp = fields[0];

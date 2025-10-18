@@ -26,7 +26,7 @@
 #include <sys/ioctl.h>
 #include <assert.h>
 
-#include "alloc/x/xmalloc.h"
+#include "alloc/malloc.h"
 #include "attr.h"
 #include "chkname.h"
 #include "defines.h"
@@ -45,7 +45,7 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strftime.h"
 
 
@@ -516,7 +516,7 @@ int main (int argc, char **argv)
 	if (NULL == tmptty) {
 		tmptty = "UNKNOWN";
 	}
-	STRTCPY(tty, tmptty);
+	strtcpy_a(tty, tmptty);
 
 #ifndef USE_PAM
 	is_console = console (tty);
@@ -589,16 +589,16 @@ int main (int argc, char **argv)
 	}
 
 	if (!streq(cp, "")) {
-		SNPRINTF(fromhost, " on '%.100s' from '%.200s'", tty, cp);
+		stprintf_a(fromhost, " on '%.100s' from '%.200s'", tty, cp);
 	} else {
-		SNPRINTF(fromhost, " on '%.100s'", tty);
+		stprintf_a(fromhost, " on '%.100s'", tty);
 	}
 	free(host);
 
       top:
 	/* only allow ALARM sec. for login */
 	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
-	SNPRINTF(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
+	stprintf_a(tmsg, _("\nLogin timed out after %u seconds.\n"), timeout);
 	(void) signal (SIGALRM, alarm_handler);
 	if (timeout > 0) {
 		(void) alarm (timeout);
@@ -643,9 +643,9 @@ int main (int argc, char **argv)
 
 		/* Make the login prompt look like we want it */
 		if (gethostname (hostn, sizeof (hostn)) == 0) {
-			SNPRINTF(loginprompt, _("%s login: "), hostn);
+			stprintf_a(loginprompt, _("%s login: "), hostn);
 		} else {
-			STRTCPY(loginprompt, _("login: "));
+			strtcpy_a(loginprompt, _("login: "));
 		}
 
 		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
@@ -1197,7 +1197,7 @@ int main (int argc, char **argv)
 			struct tm  tm;
 
 			localtime_r(&ll_time, &tm);
-			STRFTIME(ptime, "%a %b %e %H:%M:%S %z %Y", &tm);
+			strftime_a(ptime, "%a %b %e %H:%M:%S %z %Y", &tm);
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
