@@ -34,45 +34,27 @@
 struct sgrp *
 fgetsgent(FILE *fp)
 {
-	static size_t buflen = 0;
-	static char *buf = NULL;
-
-	char *cp;
-
-	if (0 == buflen) {
-		buf = MALLOC(BUFSIZ, char);
-		if (NULL == buf) {
-			return NULL;
-		}
-		buflen = BUFSIZ;
-	}
+	char         *buf;
+	size_t       buflen;
+	struct sgrp  *sg;
 
 	if (NULL == fp) {
 		return NULL;
 	}
 
-	if (fgetsx(buf, buflen, fp) == NULL)
-		return NULL;
+	buf = NULL;
+	buflen = 0;
+	if (getline(&buf, &buflen, fp) == -1)
+		goto fail;
+	if (stpsep(buf, "\n") == NULL)
+		goto fail;
 
-	while (   (strrchr(buf, '\n') == NULL)
-	       && (feof (fp) == 0)) {
-		size_t len;
+	sg = sgetsgent(buf);
 
-		cp = REALLOC(buf, buflen * 2, char);
-		if (NULL == cp) {
-			return NULL;
-		}
-		buf = cp;
-		buflen *= 2;
-
-		len = strlen (buf);
-		if (fgetsx (&buf[len],
-			    (int) (buflen - len),
-			    fp) != &buf[len]) {
-			return NULL;
-		}
-	}
-	stpsep(buf, "\n");
-	return sgetsgent(buf);
+	free(buf);
+	return sg;
+fail:
+	free(buf);
+	return NULL;
 }
 #endif
