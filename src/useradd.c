@@ -312,7 +312,7 @@ static void fail_exit (int code, bool process_selinux)
 	else
 		type = AUDIT_ADD_USER;
 
-	audit_logger (type, Prog,
+	audit_logger (type,
 	              "add-user",
 	             user_name, AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
@@ -527,7 +527,6 @@ set_defaults(void)
 	char  *new_file = NULL;
 	char  *new_file_dup = NULL;
 	char  *default_file = USER_DEFAULTS_FILE;
-	char  *cp;
 	FILE  *ifp;
 	FILE  *ofp;
 
@@ -713,7 +712,7 @@ set_defaults(void)
 		goto err_free_def;
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USYS_CONFIG, Prog,
+	audit_logger (AUDIT_USYS_CONFIG,
 	              "changing-useradd-defaults",
 	              NULL, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
@@ -1514,7 +1513,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				        Prog, user_name);
 			}
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
+			audit_logger (AUDIT_ADD_USER,
 			              "add-user",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -1612,7 +1611,7 @@ static void close_files (struct option_flags *flags)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
+			audit_logger (AUDIT_ADD_USER,
 			              "unlocking-shadow-file",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -1625,7 +1624,7 @@ static void close_files (struct option_flags *flags)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_USER, Prog,
+		audit_logger (AUDIT_ADD_USER,
 		              "unlocking-passwd-file",
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -1642,7 +1641,7 @@ static void close_files (struct option_flags *flags)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
+			audit_logger (AUDIT_ADD_USER,
 				"unlocking-subordinate-user-file",
 				user_name, AUDIT_NO_ID,
 				SHADOW_AUDIT_FAILURE);
@@ -1656,7 +1655,7 @@ static void close_files (struct option_flags *flags)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
+			audit_logger (AUDIT_ADD_USER,
 				"unlocking-subordinate-group-file",
 				user_name, AUDIT_NO_ID,
 				SHADOW_AUDIT_FAILURE);
@@ -1709,7 +1708,7 @@ static void unlock_group_files (bool process_selinux)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_USER, Prog,
+		audit_logger (AUDIT_ADD_USER,
 		              "unlocking-group-file",
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -1723,7 +1722,7 @@ static void unlock_group_files (bool process_selinux)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_USER, Prog,
+			audit_logger (AUDIT_ADD_USER,
 			              "unlocking-gshadow-file",
 			              user_name, AUDIT_NO_ID,
 			              SHADOW_AUDIT_FAILURE);
@@ -1919,7 +1918,7 @@ static void grp_add (bool process_selinux)
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
+		audit_logger (AUDIT_ADD_GROUP,
 		              "add-group",
 		              grp.gr_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -1935,7 +1934,7 @@ static void grp_add (bool process_selinux)
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_namp);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
+		audit_logger (AUDIT_ADD_GROUP,
 		              "add-group",
 		              grp.gr_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
@@ -1945,7 +1944,7 @@ static void grp_add (bool process_selinux)
 #endif				/* SHADOWGRP */
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u", user_name, user_gid));
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
+	audit_logger (AUDIT_ADD_GROUP,
 	              "add-group",
 	              grp.gr_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
@@ -2174,7 +2173,7 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
 	 * because its not written to disk yet. After close_files it is
 	 * and we can use the real ID thereafter.
 	 */
-	audit_logger (AUDIT_ADD_USER, Prog,
+	audit_logger (AUDIT_ADD_USER,
 	              "add-user",
 	              user_name, AUDIT_NO_ID,
 	              SHADOW_AUDIT_SUCCESS);
@@ -2299,7 +2298,7 @@ static void create_home (struct option_flags *flags)
 	}
 	home_added = true;
 #ifdef WITH_AUDIT
-	audit_logger(AUDIT_USER_MGMT, Prog, "add-home-dir",
+	audit_logger(AUDIT_USER_MGMT, "add-home-dir",
 		     user_name, user_id, SHADOW_AUDIT_SUCCESS);
 #endif
 #ifdef WITH_SELINUX
@@ -2672,7 +2671,7 @@ int main (int argc, char **argv)
 			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
 			         Prog, user_name, user_selinux);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ROLE_ASSIGN, Prog,
+			audit_logger (AUDIT_ROLE_ASSIGN,
 			              "add-selinux-user-mapping",
 			              user_name, user_id, SHADOW_AUDIT_FAILURE);
 #endif				/* WITH_AUDIT */
