@@ -26,10 +26,10 @@
 #include <pwd.h>
 #include "getdef.h"
 #include "shadowlog.h"
-#include "string/sprintf/xaprintf.h"
+#include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strdup/xstrdup.h"
+#include "string/strdup/strdup.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
