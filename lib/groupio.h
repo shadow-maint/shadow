@@ -14,8 +14,9 @@
 
 #include <sys/types.h>
 #include <grp.h>
+#include <stdbool.h>
 
-extern int gr_close (void);
+extern int gr_close (bool process_selinux);
 extern /*@observer@*/ /*@null@*/const struct group *gr_locate (const char *name);
 extern /*@observer@*/ /*@null@*/const struct group *gr_locate_gid (gid_t gid);
 extern int gr_lock (void);
@@ -25,7 +26,7 @@ extern /*@observer@*/ /*@null@*/const struct group *gr_next (void);
 extern int gr_open (int mode);
 extern int gr_remove (const char *name);
 extern int gr_rewind (void);
-extern int gr_unlock (void);
+extern int gr_unlock (bool process_selinux);
 extern int gr_update (const struct group *gr);
 extern int gr_sort (void);
 

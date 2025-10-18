@@ -30,6 +30,9 @@
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 
+struct option_flags {
+	bool chroot;
+};
 
 /*
  * Global variables
@@ -40,21 +43,21 @@ static bool spw_locked = false;
 static bool pw_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int status);
+static void fail_exit (int status, bool process_selinux);
 static void usage (int status);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 
-static void fail_exit (int status)
+static void fail_exit (int status, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
 	}
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
@@ -82,7 +85,7 @@ static void usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -101,6 +104,7 @@ static void process_flags (int argc, char **argv)
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		default:
 			usage (E_USAGE);
@@ -117,6 +121,8 @@ int main (int argc, char **argv)
 	const struct passwd *pw;
 	struct passwd pwent;
 	const struct spwd *spwd;
+	struct option_flags  flags;
+	bool process_selinux;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -129,7 +135,8 @@ int main (int argc, char **argv)
 
 	OPENLOG (Prog);
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
 #ifdef WITH_TCB
 	if (getdef_bool("USE_TCB")) {
@@ -147,28 +154,28 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	if (spw_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
-		fail_exit (5);
+		fail_exit (5, process_selinux);
 	}
 	spw_locked = true;
 	if (spw_open (O_RDONLY) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, spw_dbname ());
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	(void) pw_rewind ();
@@ -201,33 +208,33 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, pw_dbname (), pwent.pw_name);
-			fail_exit (3);
+			fail_exit (3, process_selinux);
 		}
 	}
 
-	(void) spw_close (); /* was only open O_RDONLY */
+	(void) spw_close (process_selinux); /* was only open O_RDONLY */
 
-	if (pw_close () == 0) {
+	if (pw_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
 			 _("%s: cannot delete %s\n"), Prog, SHADOW);
 		SYSLOG ((LOG_ERR, "cannot delete %s", SHADOW));
-		fail_exit (3);
+		fail_exit (3, process_selinux);
 	}
 
-	if (spw_unlock () == 0) {
+	if (spw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 		/* continue */
 	}
-	if (pw_unlock () == 0) {
+	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */

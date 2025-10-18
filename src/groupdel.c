@@ -33,6 +33,12 @@
 #endif
 #include "shadowlog.h"
 #include "run_part.h"
+
+struct option_flags {
+	bool chroot;
+	bool prefix;
+};
+
 /*
  * Global variables
  */
@@ -61,10 +67,10 @@ static bool is_shadow_grp;
 /* local function prototypes */
 NORETURN static void usage (int status);
 static void grp_update (void);
-static void close_files (void);
-static void open_files (void);
+static void close_files (struct option_flags *flags);
+static void open_files (struct option_flags *flags);
 static void group_busy (gid_t gid);
-static void process_flags (int argc, char **argv);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
 
 /*
  * usage - display usage message and exit
@@ -146,10 +152,14 @@ static void grp_update (void)
  *	close_files() closes all of the files that were opened for this
  *	new group.  This causes any modified entries to be written out.
  */
-static void close_files (void)
+static void close_files (struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
 	/* First, write the changes in the regular group database */
-	if (gr_close () == 0) {
+	if (gr_close (process_selinux) == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
@@ -166,14 +176,14 @@ static void close_files (void)
 	         group_name, gr_dbname ()));
 	del_cleanup (cleanup_report_del_group_group);
 
-	cleanup_unlock_group (NULL);
+	cleanup_unlock_group (&process_selinux);
 	del_cleanup (cleanup_unlock_group);
 
 
 	/* Then, write the changes in the shadow database */
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close () == 0) {
+		if (sgr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
@@ -190,7 +200,7 @@ static void close_files (void)
 		         group_name, sgr_dbname ()));
 		del_cleanup (cleanup_report_del_group_gshadow);
 
-		cleanup_unlock_gshadow (NULL);
+		cleanup_unlock_gshadow (&process_selinux);
 		del_cleanup (cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
@@ -204,8 +214,12 @@ static void close_files (void)
  *
  *	open_files() opens the two group files.
  */
-static void open_files (void)
+static void open_files (struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
 	/* First, lock the databases */
 	if (gr_lock () == 0) {
 		fprintf (stderr,
@@ -213,7 +227,7 @@ static void open_files (void)
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
-	add_cleanup (cleanup_unlock_group, NULL);
+	add_cleanup (cleanup_unlock_group, &process_selinux);
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
@@ -222,7 +236,7 @@ static void open_files (void)
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
-		add_cleanup (cleanup_unlock_gshadow, NULL);
+		add_cleanup (cleanup_unlock_gshadow, &process_selinux);
 	}
 #endif
 
@@ -296,7 +310,7 @@ static void group_busy (gid_t gid)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	/*
 	 * Parse the command line options.
@@ -317,8 +331,10 @@ static void process_flags (int argc, char **argv)
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 'P': /* no-op, handled in process_prefix_flag () */
+			flags->prefix = true;
 			break;
 		case 'f':
 			check_group_busy = false;
@@ -352,6 +368,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
+	struct option_flags  flags;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -375,7 +392,7 @@ int main (int argc, char **argv)
 		fail_exit (1);
 	}
 
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
 
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -449,11 +466,11 @@ int main (int argc, char **argv)
 	 * Do the hard stuff - open the files, delete the group entries,
 	 * then close and update the files.
 	 */
-	open_files ();
+	open_files (&flags);
 
 	grp_update ();
 
-	close_files ();
+	close_files (&flags);
 
 	if (run_parts ("/etc/shadow-maint/groupdel-post.d", group_name,
 			Prog)) {

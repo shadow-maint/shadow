@@ -48,6 +48,10 @@
 #define	E_CANTUPDATE	5
 #define	E_CANTSORT	6
 
+struct option_flags {
+	bool chroot;
+};
+
 /*
  * Global variables
  */
@@ -69,12 +73,13 @@ static bool sort_mode = false;
 static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
-static void fail_exit (int code);
+static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
-static void process_flags (int argc, char **argv);
-static void open_files (void);
-static void close_files (bool changed);
-static void check_pw_file (bool *errors, bool *changed);
+static void process_flags (int argc, char **argv, struct option_flags *flags);
+static void open_files (struct option_flags *flags);
+static void close_files (bool changed, struct option_flags *flags);
+static void check_pw_file (bool *errors, bool *changed,
+                           struct option_flags *flags);
 static void check_spw_file (bool *errors, bool *changed);
 
 extern int allow_bad_names;
@@ -82,10 +87,10 @@ extern int allow_bad_names;
 /*
  * fail_exit - do some cleanup and exit with the given error code
  */
-static void fail_exit (int code)
+static void fail_exit (int code, bool process_selinux)
 {
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			if (use_system_spw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -96,7 +101,7 @@ static void fail_exit (int code)
 	}
 
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			if (use_system_pw_file) {
 				SYSLOG ((LOG_ERR, "failed to unlock %s",
@@ -155,7 +160,7 @@ usage (int status)
  *
  *	It will not return if an error is encountered.
  */
-static void process_flags (int argc, char **argv)
+static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 	static struct option long_options[] = {
@@ -188,6 +193,7 @@ static void process_flags (int argc, char **argv)
 			read_only = true;
 			break;
 		case 'R': /* no-op, handled in process_root_flag () */
+			flags->chroot = true;
 			break;
 		case 's':
 			sort_mode = true;
@@ -240,12 +246,15 @@ static void process_flags (int argc, char **argv)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (void)
+static void open_files (struct option_flags *flags)
 {
 	bool use_tcb = false;
 #ifdef WITH_TCB
 	use_tcb = getdef_bool ("USE_TCB");
 #endif				/* WITH_TCB */
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Lock the files if we aren't in "read-only" mode
@@ -255,7 +264,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, pw_dbname ());
-			fail_exit (E_CANTLOCK);
+			fail_exit (E_CANTLOCK, process_selinux);
 		}
 		pw_locked = true;
 		if (is_shadow && !use_tcb) {
@@ -263,7 +272,7 @@ static void open_files (void)
 				fprintf (stderr,
 				         _("%s: cannot lock %s; try again later.\n"),
 				         Prog, spw_dbname ());
-				fail_exit (E_CANTLOCK);
+				fail_exit (E_CANTLOCK, process_selinux);
 			}
 			spw_locked = true;
 		}
@@ -279,7 +288,7 @@ static void open_files (void)
 		if (use_system_pw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		}
-		fail_exit (E_CANTOPEN);
+		fail_exit (E_CANTOPEN, process_selinux);
 	}
 	if (is_shadow && !use_tcb) {
 		if (spw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
@@ -289,7 +298,7 @@ static void open_files (void)
 				SYSLOG ((LOG_WARN, "cannot open %s",
 				         spw_dbname ()));
 			}
-			fail_exit (E_CANTOPEN);
+			fail_exit (E_CANTOPEN, process_selinux);
 		}
 		spw_opened = true;
 	}
@@ -302,14 +311,18 @@ static void open_files (void)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (bool changed)
+static void close_files (bool changed, struct option_flags *flags)
 {
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
 	/*
 	 * All done. If there were no change we can just abandon any
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (pw_close () == 0) {
+		if (pw_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
@@ -318,9 +331,9 @@ static void close_files (bool changed)
 				         "failure while writing changes to %s",
 				         pw_dbname ()));
 			}
-			fail_exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE, process_selinux);
 		}
-		if (spw_opened && (spw_close () == 0)) {
+		if (spw_opened && (spw_close (process_selinux) == 0)) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
@@ -329,7 +342,7 @@ static void close_files (bool changed)
 				         "failure while writing changes to %s",
 				         spw_dbname ()));
 			}
-			fail_exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE, process_selinux);
 		}
 		spw_opened = false;
 	}
@@ -338,7 +351,7 @@ static void close_files (bool changed)
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 	if (spw_locked) {
-		if (spw_unlock () == 0) {
+		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
@@ -351,7 +364,7 @@ static void close_files (bool changed)
 	}
 	spw_locked = false;
 	if (pw_locked) {
-		if (pw_unlock () == 0) {
+		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, pw_dbname ());
@@ -368,13 +381,16 @@ static void close_files (bool changed)
 /*
  * check_pw_file - check the content of the passwd file
  */
-static void check_pw_file (bool *errors, bool *changed)
+static void check_pw_file (bool *errors, bool *changed, struct option_flags *flags)
 {
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
 	const struct spwd *spw;
 	uid_t min_sys_id = getdef_ulong ("SYS_UID_MIN", 101UL);
 	uid_t max_sys_id = getdef_ulong ("SYS_UID_MAX", 999UL);
+	bool process_selinux;
+
+	process_selinux = !flags->chroot;
 
 	/*
 	 * Loop through the entire password file.
@@ -581,7 +597,7 @@ static void check_pw_file (bool *errors, bool *changed)
 					         _("%s: cannot open %s\n"),
 					         Prog, spw_dbname ());
 					*errors = true;
-					if (spw_unlock () == 0) {
+					if (spw_unlock (process_selinux) == 0) {
 						fprintf (stderr,
 						         _("%s: failed to unlock %s\n"),
 						         Prog, spw_dbname ());
@@ -631,7 +647,7 @@ static void check_pw_file (bool *errors, bool *changed)
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, spw_dbname (), sp.sp_namp);
-						fail_exit (E_CANTUPDATE);
+						fail_exit (E_CANTUPDATE, process_selinux);
 					}
 					/* remove password from /etc/passwd */
 					pw = *pwd;
@@ -640,7 +656,7 @@ static void check_pw_file (bool *errors, bool *changed)
 						fprintf (stderr,
 						         _("%s: failed to prepare the new %s entry '%s'\n"),
 						         Prog, pw_dbname (), pw.pw_name);
-						fail_exit (E_CANTUPDATE);
+						fail_exit (E_CANTUPDATE, process_selinux);
 					}
 				}
 			} else {
@@ -657,7 +673,7 @@ static void check_pw_file (bool *errors, bool *changed)
 		}
 #ifdef WITH_TCB
 		if (getdef_bool ("USE_TCB") && spw_locked) {
-			if (spw_opened && (spw_close () == 0)) {
+			if (spw_opened && (spw_close (process_selinux) == 0)) {
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, spw_dbname ());
@@ -669,7 +685,7 @@ static void check_pw_file (bool *errors, bool *changed)
 			} else {
 				spw_opened = false;
 			}
-			if (spw_unlock () == 0) {
+			if (spw_unlock (process_selinux) == 0) {
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, spw_dbname ());
@@ -840,6 +856,8 @@ int main (int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
+	struct option_flags  flags;
+	bool process_selinux;
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
@@ -853,35 +871,36 @@ int main (int argc, char **argv)
 	OPENLOG (Prog);
 
 	/* Parse the command line arguments */
-	process_flags (argc, argv);
+	process_flags (argc, argv, &flags);
+	process_selinux = !flags.chroot;
 
-	open_files ();
+	open_files (&flags);
 
 	if (sort_mode) {
 		if (pw_sort () != 0) {
 			fprintf (stderr,
 			         _("%s: cannot sort entries in %s\n"),
 			         Prog, pw_dbname ());
-			fail_exit (E_CANTSORT);
+			fail_exit (E_CANTSORT, process_selinux);
 		}
 		if (is_shadow) {
 			if (spw_sort () != 0) {
 				fprintf (stderr,
 				         _("%s: cannot sort entries in %s\n"),
 				         Prog, spw_dbname ());
-				fail_exit (E_CANTSORT);
+				fail_exit (E_CANTSORT, process_selinux);
 			}
 		}
 		changed = true;
 	} else {
-		check_pw_file (&errors, &changed);
+		check_pw_file (&errors, &changed, &flags);
 
 		if (is_shadow) {
 			check_spw_file (&errors, &changed);
 		}
 	}
 
-	close_files (changed);
+	close_files (changed, &flags);
 
 	if (!read_only && changed) {
 		nscd_flush_cache ("passwd");
