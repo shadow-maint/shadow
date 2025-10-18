@@ -125,6 +125,7 @@ libshadow_la_SOURCES = \
 	isexpired.c \
 	limits.c \
 	list.c \
+	list.h \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \
@@ -194,6 +195,8 @@ libshadow_la_SOURCES = \
 	shadow/passwd/sgetpwent.h \
 	shadow/shadow/sgetspent.c \
 	shadow/shadow/sgetspent.h \
+	shadow/subid/sgetsient.c \
+	shadow/subid/sgetsient.h \
 	shadowio.c \
 	shadowio.h \
 	shadowlog.c \
