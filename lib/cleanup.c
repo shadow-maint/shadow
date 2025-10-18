@@ -75,7 +75,8 @@ void add_cleanup (/*@notnull@*/cleanup_function pcf, /*@null@*/void *arg)
 	}
 
 	/* Add the cleanup_function at the end of the stack */
-	for (i=0; NULL != cleanup_functions[i]; i++);
+	for (i=0; NULL != cleanup_functions[i]; i++)
+		continue;
 	cleanup_functions[i] = pcf;
 	cleanup_function_args[i] = arg;
 }
