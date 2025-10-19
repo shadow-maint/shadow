@@ -54,4 +54,15 @@
 )
 
 
+#define QChar_of(s)  typeof                                           \
+(                                                                     \
+	_Generic(s,                                                   \
+		const char *:  (const char){},                        \
+		const void *:  (const char){},                        \
+		char *:        (char){},                              \
+		void *:        (char){}                               \
+	)                                                             \
+)
+
+
 #endif  // include guard
