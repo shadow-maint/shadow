@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
@@ -35,7 +36,6 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
-#include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
@@ -51,16 +51,15 @@
 static bool
 is_my_tty(const char tty[UTX_LINESIZE])
 {
-	char         full_tty[STRLEN("/dev/") + UTX_LINESIZE + 1];
-	const char   *my_tty;
+	char  full_tty[STRLEN("/dev/") + UTX_LINESIZE + 1];
+	char  my_tty[countof(full_tty)];
 
 	stpcpy(full_tty, "");
 	if (tty[0] != '/')
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
-	my_tty = ttyname(STDIN_FILENO);
-	if (NULL != my_tty)
+	if (ttyname_r(STDIN_FILENO, my_tty, countof(my_tty)) != 0) {
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
 	}
