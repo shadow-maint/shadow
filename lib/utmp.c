@@ -52,21 +52,15 @@ static bool
 is_my_tty(const char tty[UTX_LINESIZE])
 {
 	char         full_tty[STRLEN("/dev/") + UTX_LINESIZE + 1];
-	/* tmptty shall be bigger than full_tty */
-	static char  tmptty[sizeof(full_tty) + 1];
+	const char   *tmptty;
 
 	stpcpy(full_tty, "");
 	if (tty[0] != '/')
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
-	if (streq(tmptty, "")) {
-		const char *tname = ttyname (STDIN_FILENO);
-		if (NULL != tname)
-			STRTCPY(tmptty, tname);
-	}
-
-	if (streq(tmptty, "")) {
+	tmptty = ttyname(STDIN_FILENO);
+	if (NULL != tmptty)
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
 	}
