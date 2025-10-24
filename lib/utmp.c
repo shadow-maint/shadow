@@ -44,6 +44,9 @@
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
 
+// ttyname_ra - tty name re-entrant array
+#define ttyname_ra(fd, buf)  ttyname_r(fd, buf, countof(buf))
+
 
 /*
  * is_my_tty -- determine if "tty" is the same TTY stdin is using
@@ -59,7 +62,7 @@ is_my_tty(const char tty[UTX_LINESIZE])
 		strcpy (full_tty, "/dev/");
 	strncat(full_tty, tty, UTX_LINESIZE);
 
-	if (ttyname_r(STDIN_FILENO, my_tty, countof(my_tty)) != 0) {
+	if (ttyname_ra(STDIN_FILENO, my_tty) != 0) {
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
 	}
