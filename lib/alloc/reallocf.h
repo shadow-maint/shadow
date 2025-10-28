@@ -14,10 +14,11 @@
 #include "attr.h"
 
 
-#define REALLOCF(p, n, type)                                                  \
-(                                                                             \
-	_Generic(p, type *: (type *) reallocarrayf(p, (n) ?: 1, sizeof(type)))\
-)
+#define REALLOCF(p_, n_, T)                                           \
+((static inline typeof(T) *(typeof(T) *p, size_t n))                  \
+{                                                                     \
+	return reallocarrayf(p, n ?: 1, sizeof(T));                   \
+}(p_, n_))
 
 
 ATTR_ALLOC_SIZE(2, 3)
