@@ -15,11 +15,12 @@
 
 
 // calloc_T - calloc type-safe
-#define calloc_T(n, T)   calloc_T_(n, typeas(T))
-#define calloc_T_(n, T)                                               \
-({                                                                    \
-	(T *){calloc(n, sizeof(T))};                                  \
-})
+#define calloc_T(n, T)     calloc_T_(typeas(T), n)
+#define calloc_T_(T, ...)                                             \
+((static inline T *(size_t n))                                        \
+{                                                                     \
+	return calloc(n, sizeof(T));                                  \
+}(__VA_ARGS__)
 
 
 // xcalloc_T - exit-on-error calloc type-safe
