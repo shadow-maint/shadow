@@ -14,10 +14,11 @@
 #include "exit_if_null.h"
 
 
-#define MALLOC(n, type)                                                       \
-(                                                                             \
-	(type *) mallocarray(n, sizeof(type))                                 \
-)
+#define MALLOC(n_, T)                                                 \
+((static inline typeof(T) *(size_t n))                                \
+{                                                                     \
+	return mallocarray(n, sizeof(T));                             \
+}(n_))
 
 
 #define XMALLOC(n, type)  exit_if_null(MALLOC(n, type))
