@@ -13,10 +13,11 @@
 #include "exit_if_null.h"
 
 
-#define REALLOC(p, n, type)                                                   \
-(                                                                             \
-	_Generic(p, type *: (type *) reallocarray(p, (n) ?: 1, sizeof(type))) \
-)
+#define REALLOC(p_, n_, T)                                            \
+((static inline typeof(T) *(typeof(T) *p, size_t n))                  \
+{                                                                     \
+	return reallocarray(p, n ?: 1, sizeof(T));                    \
+}(p_, n_))
 
 
 #define XREALLOC(p, n, type)  exit_if_null(REALLOC(p, n, type))
