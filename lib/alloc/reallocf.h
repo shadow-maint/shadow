@@ -16,14 +16,12 @@
 
 
 // reallocf_T - realloc free-on-error type-safe
-#define reallocf_T(p, n, T)   reallocf_T_(p, n, typeas(T))
-#define reallocf_T_(p, n, T)                                          \
-({                                                                    \
-	_Generic(p, T *: (void)0);                                    \
-	(T *){reallocarrayf_(p, n, sizeof(T))};                       \
-})
-
-#define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
+#define reallocf_T(p, n, T)  reallocf_T_(typeas(T), p, n)
+#define reallocf_T_(T, ...)                                           \
+((static inline T *(T *p, size_t n))                                  \
+{                                                                     \
+	return reallocarrayf(p, n ?: 1, sizeof(T));                   \
+}(__VA_ARGS__))
 
 
 // reallocarrayf - realloc array free-on-error
