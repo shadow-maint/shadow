@@ -16,11 +16,12 @@
 
 
 // malloc_T - malloc type-safe
-#define malloc_T(n, T)   malloc_T_(n, typeas(T))
-#define malloc_T_(n, T)                                               \
-({                                                                    \
-	(T *){mallocarray(n, sizeof(T))};                             \
-})
+#define malloc_T(n, T)     malloc_T_(typeas(T), n)
+#define malloc_T_(T, ...)                                             \
+((static inline T *(size_t n))                                        \
+{                                                                     \
+	return mallocarray(n, sizeof(T));                             \
+}(__VA_ARGS__))
 
 
 // xmalloc_T - exit-on-error malloc type-safe
