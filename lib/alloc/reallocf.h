@@ -15,11 +15,12 @@
 #include "sizeof.h"
 
 
-#define REALLOCF(p, n, T)   REALLOCF_(p, n, typeas(T))
-#define REALLOCF_(p, n, T)                                            \
-(                                                                     \
-	_Generic(p, T *: (T *) reallocarrayf(p, (n) ?: 1, sizeof(T))) \
-)
+#define REALLOCF(p, n, T)   REALLOCF_(typeas(T), p, n)
+#define REALLOCF_(T, ...)                                             \
+((static inline T *(T *p, size_t n))                                  \
+{                                                                     \
+	return reallocarrayf(p, n ?: 1, sizeof(T));                   \
+}(__VA_ARGS__))
 
 
 ATTR_ALLOC_SIZE(2, 3)

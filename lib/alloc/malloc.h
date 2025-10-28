@@ -15,11 +15,12 @@
 #include "sizeof.h"
 
 
-#define MALLOC(n, T)   MALLOC_(n, typeas(T))
-#define MALLOC_(n, T)                                                 \
-(                                                                     \
-	(T *) mallocarray(n, sizeof(T))                               \
-)
+#define MALLOC(n, T)   MALLOC_(typeas(T), n)
+#define MALLOC_(T, ...)                                               \
+((static inline T *(size_t n))                                        \
+{                                                                     \
+	return mallocarray(n, sizeof(T));                             \
+}(__VA_ARGS__))
 
 
 #define XMALLOC(n, T)  exit_if_null(MALLOC(n, T))

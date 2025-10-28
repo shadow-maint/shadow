@@ -14,11 +14,12 @@
 #include "sizeof.h"
 
 
-#define CALLOC(n, T)   CALLOC_(n, typeas(T))
-#define CALLOC_(n, T)                                                 \
-(                                                                     \
-	(T *) calloc(n, sizeof(T))                                    \
-)
+#define CALLOC(n, T)   CALLOC_(typeas(T), n)
+#define CALLOC_(T, ...)                                               \
+((static inline T *(size_t n))                                        \
+{                                                                     \
+	return calloc(n, sizeof(T));                                  \
+}(__VA_ARGS__)
 
 
 #define XCALLOC(n, T)  exit_if_null(CALLOC(n, T))
