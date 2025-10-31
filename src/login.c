@@ -1201,7 +1201,7 @@ int main (int argc, char **argv)
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
-			if (!STRNEQ(ll.ll_host, "")) {
+			if (!strneq_a(ll.ll_host, "")) {
 				printf (_(" from %.*s"),
 				        (int) sizeof ll.ll_host, ll.ll_host);
 			}

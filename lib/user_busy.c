@@ -71,7 +71,7 @@ user_busy_utmp(const char *name)
 		if (utent->ut_type != USER_PROCESS) {
 			continue;
 		}
-		if (!STRNEQ(utent->ut_user, name))
+		if (!strneq_a(utent->ut_user, name))
 			continue;
 
 		if (kill (utent->ut_pid, 0) != 0) {
