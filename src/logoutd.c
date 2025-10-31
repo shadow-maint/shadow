@@ -180,7 +180,7 @@ main(int argc, char **argv)
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}
-			if (STRNEQ(ut->ut_user, ""))
+			if (strneq_a(ut->ut_user, ""))
 				continue;
 
 			if (check_login (ut)) {

@@ -15,7 +15,7 @@
 #include "sizeof.h"
 
 
-#define STRNEQ(strn, s)  strneq(strn, s, countof(strn))
+#define strneq_a(strn, s)  strneq(strn, s, countof(strn))
 
 
 ATTR_STRING(2)
