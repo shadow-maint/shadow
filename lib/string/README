@@ -4,6 +4,9 @@ General guidelines:
 -  If there's an upper-case macro that wraps a function, use the macro
    if possible.  These use macro magic to add safety.
 
+-  If there's a *_a() macro that wraps an API, use the macro if
+   possible.  These use countof() to add bounds safety.
+
 -  x*() functions wrap a function of the same name without the 'x'.
    These wrappers exit on error instead of returning NULL.
    They simplify program code.  Avoid them in library code.
