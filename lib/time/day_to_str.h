@@ -16,12 +16,14 @@
 #include "string/strcpy/strtcpy.h"
 
 
-#define DAY_TO_STR(str, day)   day_to_str(countof(str), str, day)
+// day_to_str_a - day-since-Epoch to string array
+#define day_to_str_a(str, day)  day_to_str(countof(str), str, day)
 
 
 inline void day_to_str(size_t size, char buf[size], long day);
 
 
+// dat_to_str - day-since-Epoch to string
 inline void
 day_to_str(size_t size, char buf[size], long day)
 {

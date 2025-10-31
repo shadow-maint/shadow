@@ -601,8 +601,8 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
 
-		DAY_TO_STR(new_exp, user_newexpire);
-		DAY_TO_STR(old_exp, user_expire);
+		day_to_str_a(new_exp, user_newexpire);
+		day_to_str_a(old_exp, user_expire);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_MGMT,
 		              "changing-expiration-date",
