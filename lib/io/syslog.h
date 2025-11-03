@@ -25,12 +25,21 @@
 #endif
 
 #if !USE_SYSLOG
-# define SYSLOG(...)
+# define SYSLOG_(...)
 #elif defined(ENABLE_NLS)
-# define SYSLOG(...)  SYSLOG_C(__VA_ARGS__)
+# define SYSLOG_(...)  SYSLOG_C(__VA_ARGS__)
 #else
-# define SYSLOG(...)  syslog(__VA_ARGS__)
+# define SYSLOG_(...)  syslog(__VA_ARGS__)
 #endif
+
+#define SYSLOG(...)  do                                               \
+{                                                                     \
+	int  e_;                                                      \
+                                                                      \
+	e_ = errno;                                                   \
+	SYSLOG_(__VA_ARGS__);                                         \
+	errno = e_;                                                   \
+} while (0)
 
 /* The default syslog settings can now be changed here,
    in just one place.  */
