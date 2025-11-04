@@ -16,7 +16,6 @@
 #include <cmocka.h>
 
 #include "sizeof.h"
-#include "string/strcmp/streq.h"
 
 
 #define assert_unreachable()  assert_true(0)
@@ -66,7 +65,7 @@ test_exit_if_null_exit(void **state)
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
-		assert_true(streq(p, "called"));
+		assert_string_equal(p, "called");
 		p = "test_ok";
 		break;
 	default:
@@ -74,7 +73,7 @@ test_exit_if_null_exit(void **state)
 		break;
 	}
 
-	assert_true(streq(p, "test_ok"));
+	assert_string_equal(p, "test_ok");
 }
 
 
