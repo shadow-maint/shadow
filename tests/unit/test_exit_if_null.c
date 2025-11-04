@@ -32,16 +32,16 @@ int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 void __wrap_exit(int status);
 
-static void test_xaprintf_exit(void **state);
-static void test_xaprintf_ok(void **state);
+static void test_exit_if_null_exit(void **state);
+static void test_exit_if_null_ok(void **state);
 
 
 int
 main(void)
 {
 	const struct CMUnitTest  tests[] = {
-		cmocka_unit_test(test_xaprintf_exit),
-		cmocka_unit_test(test_xaprintf_ok),
+		cmocka_unit_test(test_exit_if_null_exit),
+		cmocka_unit_test(test_exit_if_null_ok),
 	};
 
 	return cmocka_run_group_tests(tests, NULL, NULL);
@@ -63,7 +63,7 @@ __wrap_exit(int status)
 
 
 static void
-test_xaprintf_exit(void **state)
+test_exit_if_null_exit(void **state)
 {
 	char *volatile  p;
 
@@ -73,12 +73,12 @@ test_xaprintf_exit(void **state)
 
 	switch (setjmp(jmpb)) {
 	case 0:
-		p = "xaprintf_called";
+		p = "called";
 		p = xaprintf("foo%s", "bar");
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
-		assert_true(streq(p, "xaprintf_called"));
+		assert_true(streq(p, "called"));
 		p = "test_ok";
 		break;
 	default:
@@ -91,7 +91,7 @@ test_xaprintf_exit(void **state)
 
 
 static void
-test_xaprintf_ok(void **state)
+test_exit_if_null_ok(void **state)
 {
 	char  *p;
 
