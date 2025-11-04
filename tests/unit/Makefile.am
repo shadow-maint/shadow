@@ -133,7 +133,6 @@ test_exit_if_null_SOURCES = \
     ../../lib/exit_if_null.c \
     ../../lib/shadowlog.c \
     ../../lib/alloc/malloc.c \
-    ../../lib/string/strcmp/streq.c \
     test_exit_if_null.c \
     $(NULL)
 test_exit_if_null_CFLAGS = \
