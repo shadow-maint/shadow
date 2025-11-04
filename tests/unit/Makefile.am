@@ -132,7 +132,7 @@ test_typetraits_LDADD = \
 test_exit_if_null_SOURCES = \
     ../../lib/exit_if_null.c \
     ../../lib/shadowlog.c \
-    ../../lib/string/sprintf/aprintf.c \
+    ../../lib/alloc/malloc.c \
     ../../lib/string/strcmp/streq.c \
     test_exit_if_null.c \
     $(NULL)
@@ -140,7 +140,6 @@ test_exit_if_null_CFLAGS = \
     $(AM_CFLAGS) \
     $(NULL)
 test_exit_if_null_LDFLAGS = \
-    -Wl,-wrap,vasprintf \
     -Wl,-wrap,exit \
     $(NULL)
 test_exit_if_null_LDADD = \
