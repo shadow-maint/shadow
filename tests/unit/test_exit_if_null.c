@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include "string/sprintf/aprintf.h"
+#include "alloc/malloc.h"
 
 #include <setjmp.h>
-#include <stdarg.h>
-#include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -16,10 +15,10 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
+#include "sizeof.h"
 #include "string/strcmp/streq.h"
 
 
-#define smock()               _Generic(mock(), uintmax_t: (intmax_t) mock())
 #define assert_unreachable()  assert_true(0)
 
 #define EXIT_CALLED       (42)
@@ -28,8 +27,6 @@
 static jmp_buf  jmpb;
 
 
-int __real_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
-int __wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap);
 void __wrap_exit(int status);
 
 static void test_exit_if_null_exit(void **state);
@@ -48,13 +45,6 @@ main(void)
 }
 
 
-int
-__wrap_vasprintf(char **restrict p, const char *restrict fmt, va_list ap)
-{
-	return smock() == -1 ? -1 : __real_vasprintf(p, fmt, ap);
-}
-
-
 void
 __wrap_exit(int status)
 {
@@ -67,14 +57,12 @@ test_exit_if_null_exit(void **state)
 {
 	char *volatile  p;
 
-	will_return(__wrap_vasprintf, -1);
-
 	p = "before";
 
 	switch (setjmp(jmpb)) {
 	case 0:
 		p = "called";
-		p = xaprintf("foo%s", "bar");
+		p = XMALLOC(SIZE_MAX, char);
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
@@ -95,10 +83,15 @@ test_exit_if_null_ok(void **state)
 {
 	char  *p;
 
-	// Trick: vasprintf(3) will actually return the new string, not 0.
-	will_return(__wrap_vasprintf, 0);
+	static const char  foo[] = "foo1bar";
 
-	p = xaprintf("foo%d%s", 1, "bar");
+	p = XMALLOC(countof(foo), char);
+	assert_true(p != NULL);
+	strcpy(p, foo);
 	assert_string_equal(p, "foo1bar");
+	free(p);
+
+	p = XMALLOC(0, char);
+	assert_true(p != NULL);
 	free(p);
 }
