@@ -13,7 +13,8 @@
 #include "sizeof.h"
 
 
-#define STRNCAT(dst, src)  strncat(dst, src, countof(src))
+// strncat_a - nonstring catenate-into-string array
+#define strncat_a(dst, src)  strncat(dst, src, countof(src))
 
 
 #endif  // include guard

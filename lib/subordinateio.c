@@ -97,7 +97,7 @@ subordinate_parse(const char *line)
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 
-	if (STRSEP2ARR(rangebuf, ":", fields) == -1)
+	if (strsep2arr_a(rangebuf, ":", fields) == -1)
 		return NULL;
 
 	if (streq(fields[0], ""))
@@ -226,7 +226,7 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
                 return NULL;
         }
         owner_uid = pwd->pw_uid;
-        if (SNPRINTF(owner_uid_string, "%lu", (unsigned long) owner_uid) == -1)
+        if (stprintf_a(owner_uid_string, "%lu", (unsigned long) owner_uid) == -1)
                 return NULL;
 
         commonio_rewind(db);

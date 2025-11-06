@@ -736,7 +736,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		if (freopen (argv[optind], "r", stdin) == NULL) {
 			char  buf[BUFSIZ];
 
-			SNPRINTF(buf, "%s: %s", Prog, argv[1]);
+			stprintf_a(buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
 			fail_exit (EXIT_FAILURE, !flags->chroot);
 		}
@@ -1117,7 +1117,7 @@ int main (int argc, char **argv)
 			fail_exit (EXIT_FAILURE, process_selinux);
 		}
 
-		if (STRSEP2ARR(buf, ":", fields) == -1) {
+		if (strsep2arr_a(buf, ":", fields) == -1) {
 			fprintf (stderr, _("%s: line %jd: invalid line\n"),
 			         Prog, line);
 			fail_exit (EXIT_FAILURE, process_selinux);

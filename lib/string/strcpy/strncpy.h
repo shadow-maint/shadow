@@ -13,7 +13,8 @@
 #include "sizeof.h"
 
 
-#define STRNCPY(dst, src)  strncpy(dst, src, countof(dst))
+// strncpy_a - nonstring copy array
+#define strncpy_a(dst, src)  strncpy(dst, src, countof(dst))
 
 
 #endif  // include guard

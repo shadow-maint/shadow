@@ -17,7 +17,8 @@
 #include "sizeof.h"
 
 
-#define STRSEP2ARR(s, delim, a)                                       \
+// strsep2arr_a - string separate to array-of-strings array
+#define strsep2arr_a(s, delim, a)                                     \
 (                                                                     \
 	strsep2arr(s, delim, countof(a), a) == countof(a) ? 0 : -1    \
 )
@@ -29,9 +30,7 @@ inline ssize_t strsep2arr(char *s, const char *restrict delim,
     size_t n, char *a[restrict n]);
 
 
-// string separate to array-of-strings
-// strsep(3) a string into an array of strings.
-// Return the number of fields in the string, or -1 on error.
+// strsep2arr - string separate to array-of-strings
 inline ssize_t
 strsep2arr(char *s, const char *restrict delim, size_t n, char *a[restrict n])
 {

@@ -690,7 +690,7 @@ set_defaults(void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-	assert(SNPRINTF(buf, "%s-", default_file) != -1);
+	assert(stprintf_a(buf, "%s-", default_file) != -1);
 	unlink (buf);
 	if ((link (default_file, buf) != 0) && (ENOENT != errno)) {
 		fprintf (stderr,

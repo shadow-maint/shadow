@@ -476,7 +476,7 @@ static void log_gpasswd_failure_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", gr_dbname());
+	stprintf_a(buf, " in %s", gr_dbname());
 	log_gpasswd_failure (buf);
 }
 
@@ -485,7 +485,7 @@ static void log_gpasswd_failure_gshadow (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", sgr_dbname());
+	stprintf_a(buf, " in %s", sgr_dbname());
 	log_gpasswd_failure (buf);
 }
 #endif				/* SHADOWGRP */
@@ -521,7 +521,7 @@ static void log_gpasswd_success (const char *suffix)
 		         "password of group %s removed by %s%s",
 		         group, myname, suffix));
 #ifdef WITH_AUDIT
-		SNPRINTF(buf, "password of group %s removed by %s%s",
+		stprintf_a(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
 		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
 		              "delete-group-password",
@@ -533,7 +533,7 @@ static void log_gpasswd_success (const char *suffix)
 		         "access to group %s restricted by %s%s",
 		         group, myname, suffix));
 #ifdef WITH_AUDIT
-		SNPRINTF(buf, "access to group %s restricted by %s%s",
+		stprintf_a(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
 		audit_logger_with_group (AUDIT_GRP_MGMT,
 		              "restrict-group",
@@ -587,7 +587,7 @@ static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
 {
 	char  buf[1024];
 
-	SNPRINTF(buf, " in %s", gr_dbname());
+	stprintf_a(buf, " in %s", gr_dbname());
 	log_gpasswd_success (buf);
 }
 
@@ -822,11 +822,11 @@ static void change_passwd (struct group *gr)
 			exit (1);
 		}
 
-		STRTCPY(pass, cp);
+		strtcpy_a(pass, cp);
 		erase_pass (cp);
 		cp = agetpass (_("Re-enter new password: "));
 		if (NULL == cp) {
-			MEMZERO(pass);
+			memzero_a(pass);
 			exit (1);
 		}
 
@@ -836,7 +836,7 @@ static void change_passwd (struct group *gr)
 		}
 
 		erase_pass (cp);
-		MEMZERO(pass);
+		memzero_a(pass);
 
 		if (retries + 1 < RETRIES) {
 			puts (_("They don't match; try again"));
@@ -850,7 +850,7 @@ static void change_passwd (struct group *gr)
 
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
-	MEMZERO(pass);
+	memzero_a(pass);
 	if (NULL == cp) {
 		fprintf (stderr,
 		         _("%s: failed to crypt password with salt '%s': %s\n"),

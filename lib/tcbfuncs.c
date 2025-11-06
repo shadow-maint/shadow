@@ -123,7 +123,7 @@ static /*@null@*/ char *shadowtcb_path_rel_existing (const char *name)
 		free (path);
 		return NULL;
 	}
-	if (READLINKNUL(path, link) == -1) {
+	if (readlinknul_a(path, link) == -1) {
 		fprintf (shadow_logfd,
 		         _("%s: Cannot read symbolic link %s: %s\n"),
 		         shadow_progname, path, strerrno());

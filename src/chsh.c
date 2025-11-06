@@ -242,7 +242,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			break;
 		case 's':
 			sflg = true;
-			STRTCPY(loginsh, optarg);
+			strtcpy_a(loginsh, optarg);
 			break;
 		default:
 			usage (E_USAGE);
@@ -524,7 +524,7 @@ int main (int argc, char **argv)
 	 * file, or use the value from the command line.
 	 */
 	if (!sflg) {
-		STRTCPY(loginsh, pw->pw_shell);
+		strtcpy_a(loginsh, pw->pw_shell);
 	}
 
 	/*

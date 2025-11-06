@@ -233,7 +233,7 @@ static int new_password (const struct passwd *pw)
 			                pw->pw_name);
 			return -1;
 		}
-		STRTCPY(orig, clear);
+		strtcpy_a(orig, clear);
 		erase_pass (clear);
 		strzero (cipher);
 	} else {
@@ -292,11 +292,11 @@ static int new_password (const struct passwd *pw)
 		if (NULL == cp) {
 			return -1;
 		}
-		ret = STRTCPY (pass, cp);
+		ret = strtcpy_a(pass, cp);
 		erase_pass (cp);
 		if (ret == -1) {
 			(void) fputs (_("Password is too long.\n"), stderr);
-			MEMZERO(pass);
+			memzero_a(pass);
 			return -1;
 		}
 	} else {
@@ -304,19 +304,19 @@ static int new_password (const struct passwd *pw)
 		for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
 			cp = agetpass (_("New password: "));
 			if (NULL == cp) {
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 			if (warned && !streq(pass, cp)) {
 				warned = false;
 			}
-			ret = STRTCPY (pass, cp);
+			ret = strtcpy_a(pass, cp);
 			erase_pass (cp);
 			if (ret == -1) {
 				(void) fputs (_("Password is too long.\n"), stderr);
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 
@@ -338,8 +338,8 @@ static int new_password (const struct passwd *pw)
 			}
 			cp = agetpass (_("Re-enter new password: "));
 			if (NULL == cp) {
-				MEMZERO(orig);
-				MEMZERO(pass);
+				memzero_a(orig);
+				memzero_a(pass);
 				return -1;
 			}
 			if (!streq(cp, pass)) {
@@ -350,10 +350,10 @@ static int new_password (const struct passwd *pw)
 				break;
 			}
 		}
-		MEMZERO(orig);
+		memzero_a(orig);
 
 		if (i == 0) {
-			MEMZERO(pass);
+			memzero_a(pass);
 			return -1;
 		}
 	}
@@ -364,7 +364,7 @@ static int new_password (const struct passwd *pw)
 	 */
 	salt = crypt_make_salt (NULL, NULL);
 	cp = pw_encrypt (pass, salt);
-	MEMZERO(pass);
+	memzero_a(pass);
 
 	if (NULL == cp) {
 		fprintf (stderr,
@@ -373,7 +373,7 @@ static int new_password (const struct passwd *pw)
 		return -1;
 	}
 
-	STRTCPY(crypt_passwd, cp);
+	strtcpy_a(crypt_passwd, cp);
 	return 0;
 }
 
@@ -466,7 +466,7 @@ static void print_status (const struct passwd *pw)
 
 	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
-		DAY_TO_STR(date, sp->sp_lstchg);
+		day_to_str_a(date, sp->sp_lstchg);
 		(void) printf ("%s %s %s %ld %ld %ld %ld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),
@@ -1065,7 +1065,7 @@ main(int argc, char **argv)
 		 * If there are no other flags, just change the password.
 		 */
 		if (!anyflag) {
-			STRTCPY(crypt_passwd, cp);
+			strtcpy_a(crypt_passwd, cp);
 
 			/*
 			 * See if the user is permitted to change the password.
