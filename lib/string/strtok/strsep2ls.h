@@ -17,7 +17,8 @@
 #include "string/strtok/strsep2arr.h"
 
 
-#define STRSEP2LS(s, delim, ls)  strsep2ls(s, delim, countof(ls), ls)
+// strsep2ls_a - string separate to list-of-strings array
+#define strsep2ls_a(s, delim, ls)  strsep2ls(s, delim, countof(ls), ls)
 
 
 ATTR_ACCESS(read_write, 1) ATTR_ACCESS(write_only, 4, 3)
@@ -26,7 +27,7 @@ inline ssize_t strsep2ls(char *s, const char *restrict delim,
     size_t n, char *ls[restrict n]);
 
 
-// string separate to list-of-strings
+// strsep2ls - string separate to list-of-strings
 // Like strsep2arr(), but add a NULL terminator.
 inline ssize_t
 strsep2ls(char *s, const char *restrict delim, size_t n, char *ls[restrict n])

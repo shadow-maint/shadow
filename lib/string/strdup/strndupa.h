@@ -14,13 +14,14 @@
 #include "sizeof.h"
 
 
-// string n-bounded-read duplicate using-alloca(3)
+// strndupa - nonstring duplicate-into-string using-alloca(3)
 #ifndef  strndupa
 # define strndupa(s, n)  strncat(strcpy(alloca(n + 1), ""), s, n)
 #endif
 
 
-#define STRNDUPA(s)  strndupa(s, countof(s))
+// strndupa_a - nonstring duplicate-into-string using-alloca(3) array
+#define strndupa_a(s)  strndupa(s, countof(s))
 
 
 #endif  // include guard

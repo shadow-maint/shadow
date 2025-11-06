@@ -4,6 +4,9 @@ General guidelines:
 -  If there's an upper-case macro that wraps a function, use the macro
    if possible.  These use macro magic to add safety.
 
+-  If there's a *_a() macro that wraps an API, use the macro if
+   possible.  These use countof() to add bounds safety.
+
 -  x*() functions wrap a function of the same name without the 'x'.
    These wrappers exit on error instead of returning NULL.
    They simplify program code.  Avoid them in library code.
@@ -34,7 +37,8 @@ Don't use some libc functions without Really Good Reasons:
 	strcmp(3) would be legitimate for sorting strings.
 
     strncmp(3)
-	Use STRNEQ(), or strpfx(), or else, depending on what you want.
+	Use strneq_a(), or strpfx(), or else,
+	depending on what you want.
 	The return value of strncmp(3) is confusing,
 	and it is unclear the purpose of its use when you read it.
 
@@ -86,7 +90,7 @@ memset/ - Memory zeroing
 
     memzero()
 	Synonym of explicit_bzero(3).
-    MEMZERO()
+    memzero_a()
 	Like memzero(), but takes an array.
 
     strzero()
@@ -138,7 +142,7 @@ strcmp/ - String comparison
   n/
     strneq()
 	Return true if a [[gnu::nonstring]] is equal to a string.
-    STRNEQ()
+    strneq_a()
 	Like strneq(), but takes an array.
 
     strnpfx()  // Unimplemented
@@ -151,10 +155,10 @@ strdup/ - Memory duplication
   s/
     strndupa(3)
 	Create a new string (in stack) from a [[gnu::nonstring]].
-    STRNDUPA()
+    strndupa_a()
 	Like strndupa(3), but takes an array.
 
-    STRNDUP()
+    strndup_a()
 	Like strndup(3), but takes an array.
 
   m/
@@ -166,7 +170,7 @@ strdup/ - Memory duplication
 strcpy/ - String copying
 
   n/
-    STRNCPY()
+    strncpy_a()
 	Like strncpy(3), but takes an array.
 	Use it *exclusively* for copying from a string into a utmp(5)
 	member.
@@ -177,7 +181,7 @@ strcpy/ - String copying
     STRNCPYTAIL()
 	Like strncpytail, but takes an array.
 
-    STRNCAT()  // To be removed
+    strncat_a()  // To be removed
 	Do NOT use.  I'll remove it soon.
 
   s/
@@ -186,7 +190,7 @@ strcpy/ - String copying
 	This is what the Linux kernel calls strscpy().
 	If you need more than one call to form a string,
 	use stpecpy() instead.
-    STRTCPY()
+    strtcpy_a()
 	Like strtcpy(), but takes an array.
 
     strtcat()  // Unimplemented
@@ -213,7 +217,7 @@ sprintf/ - Formatted string creation
 	snprintf(3) wrapper that reports truncation with -1.
 	If you need more than one call to form a string,
 	use seprintf() instead.
-    STPRINTF()  // Current name: SNPRINTF()
+    stprintf_a()
 	Like stprintf(), but takes an array.
 
     seprintf()  // Current name: stpeprintf())
@@ -264,14 +268,14 @@ strsep/ - String separation
 	Loop around strsep(3) to fill an array of buffers with all
 	the delimited strings that have been split.
 	Useful when the number of delimiter-separated fields is known.
-    STRSEP2ARR()
+    strsep2arr_a()
 	Like strsep2arr(), but take an array, and simplify error checks.
 
     strsep2ls()
 	Similar to strsep2arr(), but terminate the list with a null
 	pointer.
 	Useful when the number of delimiter-separated fields is unknown.
-    STRSEP2LS()
+    strsep2ls_a()
 	Like strsep2ls(), but take an array.
 
     astrsep2ls()
@@ -279,5 +283,5 @@ strsep/ - String separation
 	(But the strings themselves are not duplicated.)
 
 strftime.h
-    STRFTIME()
+    strftime_a()
 	Like strftime(3), but takes an array.

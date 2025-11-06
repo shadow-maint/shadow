@@ -148,7 +148,7 @@ next:
 
 	stpsep(buf, "\n");
 
-	if (STRSEP2ARR(buf, ":", fields) == -1)
+	if (strsep2arr_a(buf, ":", fields) == -1)
 		goto next;
 
 	/*
@@ -158,7 +158,7 @@ next:
 	 * TTY devices.
 	 */
 	port.pt_names = ttys;
-	if (STRSEP2LS(fields[0], ",", ttys) == -1)
+	if (strsep2ls_a(fields[0], ",", ttys) == -1)
 		goto next;
 
 	/*
@@ -168,7 +168,7 @@ next:
 	 * The last entry in the list is a NULL pointer.
 	 */
 	port.pt_users = users;
-	if (STRSEP2LS(fields[1], ",", users) == -1)
+	if (strsep2ls_a(fields[1], ",", users) == -1)
 		goto next;
 
 	/*

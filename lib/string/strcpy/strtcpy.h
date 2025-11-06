@@ -17,34 +17,8 @@
 #include "sizeof.h"
 
 
-/*
- * SYNOPSIS
- *	[[gnu::null_terminated_string_arg(2)]]
- *	int STRTCPY(char dst[restrict], const char *restrict src);
- *
- * ARGUMENTS
- *	dst	Destination buffer where to copy a string.
- *	src	Source string to be copied into dst.
- *
- * DESCRIPTION
- *	This macro copies the string pointed to by src, into a string
- *	at the buffer pointed to by dst.  If the destination buffer,
- *	isn't large enough to hold the copy, the resulting string is
- *	truncated.  The size of the buffer is calculated internally via
- *	countof().
- *
- * RETURN VALUE
- *	-1	If this call truncated the resulting string.
- *
- *	strlen(dst)
- *		On success.
- *
- * ERRORS
- *	This function doesn't set errno.
- */
-
-
-#define STRTCPY(dst, src)  strtcpy(dst, src, countof(dst))
+// strtcpy_a - string truncate copy array
+#define strtcpy_a(dst, src)  strtcpy(dst, src, countof(dst))
 
 
 ATTR_STRING(2)
@@ -52,6 +26,7 @@ inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
     size_t dsize);
 
 
+// strtcpy - string truncate copy
 inline ssize_t
 strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
 {

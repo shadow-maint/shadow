@@ -81,7 +81,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		fl->fail_cnt++;
 	}
 
-	STRTCPY(fl->fail_line, tty);
+	strtcpy_a(fl->fail_line, tty);
 	fl->fail_time = time(NULL);
 
 	/*
@@ -252,7 +252,7 @@ void failprint (const struct faillog *fail)
 	/*
 	 * Print all information we have.
 	 */
-	STRFTIME(lasttimeb, "%c", tp);
+	strftime_a(lasttimeb, "%c", tp);
 
 	/*@-formatconst@*/
 	(void) printf (ngettext ("%d failure since last login.\n"
