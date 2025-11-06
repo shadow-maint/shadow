@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -23,7 +24,6 @@
 #include <utime.h>
 
 #include "alloc/malloc.h"
-#include "alloc/reallocf.h"
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"
@@ -181,7 +181,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		errno = EINVAL;
 		return 0;
 	}
-	len = read (fd, buf, sizeof (buf) - 1);
+	len = read(fd, buf, sizeof(buf) - 1);
 	close (fd);
 	if (len <= 0) {
 		if (log) {
@@ -567,11 +567,9 @@ static void add_one_entry_nis (struct commonio_db *db,
 }
 #endif				/* KEEP_NIS_AT_END */
 
-/* Initial buffer size, as well as increment if not sufficient
-   (for reading very long lines in group files).  */
-#define BUFLEN 4096
 
-int commonio_open (struct commonio_db *db, int mode)
+int
+commonio_open(struct commonio_db *db, int mode)
 {
 	char *buf;
 	char *line;
@@ -633,28 +631,12 @@ int commonio_open (struct commonio_db *db, int mode)
 		return 0;
 	}
 
-	buflen = BUFLEN;
-	buf = MALLOC(buflen, char);
-	if (NULL == buf)
-		goto cleanup_errno;
-
-	while (db->ops->cio_fgets(buf, buflen, db->fp) == buf) {
+	buf = NULL;
+	while (getline(&buf, &buflen, db->fp) != -1) {
 		struct commonio_entry  *p;
 
-		while (   (strrchr (buf, '\n') == NULL)
-		       && (feof (db->fp) == 0)) {
-			size_t len;
-
-			buflen += BUFLEN;
-			buf = REALLOCF(buf, buflen, char);
-			if (NULL == buf)
-				goto cleanup_errno;
-
-			len = strlen (buf);
-			if (db->ops->cio_fgets(buf + len, buflen - len, db->fp) == NULL)
-				goto cleanup_buf;
-		}
-		stpsep(buf, "\n");
+		if (stpsep(buf, "\n") == NULL)
+			goto cleanup_buf;
 
 		line = strdup (buf);
 		if (NULL == line) {
@@ -715,6 +697,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	return 0;
 }
 
+
 /*
  * Sort given db according to cmp function (usually compares uids)
  */
@@ -767,7 +750,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		entries[n] = ptr;
 		n++;
 	}
-	qsort (entries, n, sizeof (struct commonio_entry *), cmp);
+	qsort(entries, n, sizeof(struct commonio_entry *), cmp);
 
 	/* Take care of the head and tail separately */
 	db->head = entries[0];
@@ -869,7 +852,7 @@ static int write_all (const struct commonio_db *db)
 				return -1;
 			}
 		} else if (NULL != p->line) {
-			if (db->ops->cio_fputs(p->line, db->fp) == EOF)
+			if (fputs(p->line, db->fp) == EOF)
 				return -1;
 
 			if (putc ('\n', db->fp) == EOF) {
@@ -905,7 +888,7 @@ int commonio_close (struct commonio_db *db, bool process_selinux)
 		goto fail;
 	}
 
-	memzero (&sb, sizeof sb);
+	memzero(&sb, sizeof(sb));
 	if (NULL != db->fp) {
 		if (fstat (fileno (db->fp), &sb) != 0) {
 			(void) fclose (db->fp);

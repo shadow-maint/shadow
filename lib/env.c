@@ -164,7 +164,7 @@ void set_env (int argc, char *const *argv)
 	char  *cp;
 
 	for (; argc > 0; argc--, argv++) {
-		if (strlen (*argv) >= sizeof variable) {
+		if (strlen(*argv) >= sizeof(variable)) {
 			continue;	/* ignore long entries */
 		}
 
