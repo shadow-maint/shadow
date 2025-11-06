@@ -22,6 +22,7 @@
 #include "alloc/malloc.h"
 #include "defines.h"
 #include "groupio.h"
+#include "list.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
