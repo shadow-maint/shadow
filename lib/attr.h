@@ -10,18 +10,40 @@
 #endif
 
 
-#if (__GNUC__ >= 10)
-# define MAYBE_UNUSED                [[gnu::unused]]
-# define NORETURN                    [[gnu::__noreturn__]]
-# define format_attr(type, fmt, va)  [[gnu::format(type, fmt, va)]]
-# define ATTR_ACCESS(...)            [[gnu::access(__VA_ARGS__)]]
-# define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
+#if __has_c_attribute(maybe_unused)
+# define MAYBE_UNUSED                [[maybe_unused]]
 #else
 # define MAYBE_UNUSED
+#endif
+
+#if __has_c_attribute(noreturn)
+# define NORETURN                    [[noreturn]]
+#else
 # define NORETURN
+#endif
+
+#if __has_c_attribute(gnu::format)
+# define format_attr(type, fmt, va)  [[gnu::format(type, fmt, va)]]
+#else
 # define format_attr(type, fmt, va)
+#endif
+
+#if __has_c_attribute(gnu::access)
+# define ATTR_ACCESS(...)            [[gnu::access(__VA_ARGS__)]]
+#else
 # define ATTR_ACCESS(...)
+#endif
+
+#if __has_c_attribute(gnu::alloc_size)
+# define ATTR_ALLOC_SIZE(...)        [[gnu::alloc_size(__VA_ARGS__)]]
+#else
 # define ATTR_ALLOC_SIZE(...)
+#endif
+
+#if __has_c_attribute(gnu::copy)
+# define ATTR_COPY(x)            [[gnu::copy(x)]]
+#else
+# define ATTR_COPY(x)
 #endif
 
 #if (__GNUC__ >= 11) && !defined(__clang__)
@@ -30,7 +52,7 @@
 # define ATTR_MALLOC(deallocator)
 #endif
 
-#if (__GNUC__ >= 14)
+#if __has_c_attribute(gnu::null_terminated_string_arg)
 # define ATTR_STRING(i)              [[gnu::null_terminated_string_arg(i)]]
 #else
 # define ATTR_STRING(i)
