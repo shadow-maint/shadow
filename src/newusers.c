@@ -55,7 +55,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
@@ -736,7 +736,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		if (freopen (argv[optind], "r", stdin) == NULL) {
 			char  buf[BUFSIZ];
 
-			SNPRINTF(buf, "%s: %s", Prog, argv[1]);
+			STPRINTF(buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
 			fail_exit (EXIT_FAILURE, !flags->chroot);
 		}
