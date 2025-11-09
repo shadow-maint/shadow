@@ -160,6 +160,7 @@ libshadow_la_SOURCES = \
 	search/sort/qsort.h \
 	selinux.c \
 	semanage.c \
+	session_management.h \
 	setugid.c \
 	setupenv.c \
 	sgroupio.c \
