@@ -10,6 +10,8 @@
 
 #include "config.h"
 
+#include "session_management.h"
+
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
@@ -38,8 +40,7 @@
 #include "string/strcpy/strncpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
-
-#ident "$Id$"
+#include "string/strlen/strnlen.h"
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
@@ -198,29 +199,22 @@ get_current_utmp(pid_t main_pid)
 }
 
 
-int
-get_session_host(char **out, pid_t main_pid)
+char *
+get_session_host(pid_t main_pid)
 {
-	int           ret = 0;
+	char          *host;
 	struct utmpx  *ut;
 
 	ut = get_current_utmp(main_pid);
 
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
-	if ((ut != NULL) && !STRNEQ(ut->ut_host, "")) {
-		*out = XSTRNDUP(ut->ut_host);
-	} else {
-		*out = NULL;
-		ret = -2;
-	}
-#else
-	*out = NULL;
-	ret = -2;
-#endif
+	if ((ut != NULL) && !STRNEQ(ut->ut_host, ""))
+		host = STRNDUP(ut->ut_host);
+	else
+		host = NULL;
 
 	free(ut);
 
-	return ret;
+	return host;
 }
 
 
@@ -277,10 +271,8 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	if (NULL != host && !streq(host, ""))
 		hostname = xstrdup(host);
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 	else if (NULL != ut && !STRNEQ(ut->ut_host, ""))
 		hostname = XSTRNDUP(ut->ut_host);
-#endif
 
 	line = strprefix(line, "/dev/") ?: line;
 
@@ -302,12 +294,9 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	STRNCPY(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
-#if defined(HAVE_STRUCT_UTMPX_UT_HOST)
 		STRNCPY(utent->ut_host, hostname);
-#endif
 #if defined(HAVE_STRUCT_UTMPX_UT_SYSLEN)
-		utent->ut_syslen = MIN (strlen (hostname),
-		                        sizeof (utent->ut_host));
+		utent->ut_syslen = strnlen_a(utent->ut_host);
 #endif
 #if defined(HAVE_STRUCT_UTMPX_UT_ADDR) || defined(HAVE_STRUCT_UTMPX_UT_ADDR_V6)
 		if (getaddrinfo (hostname, NULL, NULL, &info) == 0) {

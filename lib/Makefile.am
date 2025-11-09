@@ -160,6 +160,7 @@ libshadow_la_SOURCES = \
 	search/sort/qsort.h \
 	selinux.c \
 	semanage.c \
+	session_management.h \
 	setugid.c \
 	setupenv.c \
 	sgroupio.c \
@@ -251,6 +252,8 @@ libshadow_la_SOURCES = \
 	string/strerrno.h \
 	string/strftime.c \
 	string/strftime.h \
+	string/strlen/strnlen.c \
+	string/strlen/strnlen.h \
 	string/strspn/stpspn.c \
 	string/strspn/stpspn.h \
 	string/strspn/stprcspn.c \
