@@ -1554,6 +1554,12 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		}
 	}
 
+	if (rflg && !Gflg && do_grp_update) {
+		/* Do not automatically add supplements groups for system users. */
+		free_list(user_groups);
+		do_grp_update = false;
+	}
+
 	if (Mflg) {
 		/* absolutely sure that we do not create home dirs */
 		mflg = false;
