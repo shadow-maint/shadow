@@ -7,7 +7,7 @@ cd "$(dirname $0)"
 . ../../../common/config.sh
 . ../../../common/log.sh
 
-log_start "$0" "useradd adds supplementary groups based on the GROUPS field in /etc/default/useradd"
+log_start "$0" "useradd ignores supplementary groups from GROUPS field in /etc/default/useradd for system user"
 
 save_config
 
@@ -16,8 +16,8 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-printf "Create user foo, with group associations with bin,adm,man,cdrom..."
-useradd foo
+printf "Create system user foo, without group associations with bin,adm,man,cdrom..."
+useradd -r foo
 printf "OK\n"
 
 printf "Check the passwd file..."

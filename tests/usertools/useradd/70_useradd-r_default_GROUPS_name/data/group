@@ -39,3 +39,4 @@ users:x:100:
 nogroup:x:65534:
 crontab:x:101:
 Debian-exim:x:102:
+foo:x:999:
