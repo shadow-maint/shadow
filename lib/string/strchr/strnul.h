@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -15,11 +15,10 @@
 
 // string null-byte
 // Similar to strlen(3), but return a pointer instead of an offset.
-#define strnul(s)                                                             \
-({                                                                            \
-	__auto_type  s_ = s;                                                  \
-                                                                              \
-	s_ + strlen(s_);                                                      \
+#define strnul                                                        \
+((static inline auto *(auto *s))                                      \
+{                                                                     \
+	return s + strlen(s);                                         \
 })
 
 
