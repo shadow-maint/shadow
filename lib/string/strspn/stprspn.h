@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -13,14 +13,13 @@
 #include "string/strspn/strrspn.h"
 
 
-// string returns-pointer rear substring prefix length
+// stprspn - string offset-pointer rear substring prefix length
 // Available in Oracle Solaris as strrspn(3GEN).
 // <https://docs.oracle.com/cd/E36784_01/html/E36877/strrspn-3gen.html>
-#define stprspn(s, accept)                                                    \
-({                                                                            \
-	__auto_type  s_ = (s);                                                \
-	                                                                      \
-	s_ + strrspn_(s_, accept);                                            \
+#define stprspn                                                       \
+((static inline auto *(auto *s, const char *accept))                  \
+{                                                                     \
+	return s + strrspn_(s, accept);                               \
 })
 
 
