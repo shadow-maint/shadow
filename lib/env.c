@@ -75,7 +75,7 @@ void initenv (void)
 
 void addenv (const char *string, /*@null@*/const char *value)
 {
-	char    *cp, *newstring;
+	char    *newstring;
 	size_t  i, n;
 
 	if (NULL != value) {
@@ -89,13 +89,12 @@ void addenv (const char *string, /*@null@*/const char *value)
 	 * just ignore the whole string.
 	 */
 
-	cp = strchr (newstring, '=');
-	if (NULL == cp) {
+	if (!strchr(newstring, '=')) {
 		free(newstring);
 		return;
 	}
 
-	n = (size_t) (cp - newstring);
+	n = strcspn(newstring, "=");
 
 	/*
 	 * If this environment variable is already set, change its value.
