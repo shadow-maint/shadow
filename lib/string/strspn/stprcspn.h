@@ -15,11 +15,10 @@
 
 
 // stprcspn - string returns-pointer rear complement span
-#define stprcspn(s, reject)                                           \
-({                                                                    \
-	__auto_type  s_ = (s);                                        \
-	                                                              \
-	strnul(s_) - strrcspn(s_, reject);                            \
+#define stprcspn                                                      \
+((static inline auto *(auto *s, const char *reject))                  \
+{                                                                     \
+	return strnul(s) - strrcspn(s, reject);                       \
 })
 
 

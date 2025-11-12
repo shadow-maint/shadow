@@ -5,6 +5,3 @@
 #include "config.h"
 
 #include "string/strcmp/strprefix.h"
-
-
-extern inline const char *strprefix_(const char *s, const char *prefix);
