@@ -16,34 +16,16 @@
 
 
 // string case-insensitive prefix
-#define strcaseprefix(s, prefix)                                      \
-({                                                                    \
-	const char  *p_;                                              \
+#define strcaseprefix                                                 \
+((static inline auto *                                                \
+  (auto *s, const char *prefix)                                       \
+  ATTR_STRING(1) ATTR_STRING(2))                                      \
+{                                                                     \
+	if (strncasecmp(s, prefix, strlen(prefix)) != 0)              \
+		return NULL;                                          \
                                                                       \
-	p_ = strcaseprefix_(s, prefix);                               \
-                                                                      \
-	_Generic(s,                                                   \
-		const char *:                     p_,                 \
-		const void *:                     p_,                 \
-		char *:        const_cast(char *, p_),                \
-		void *:        const_cast(char *, p_)                 \
-	);                                                            \
+	return s + strlen(prefix);                                    \
 })
-
-
-ATTR_STRING(1) ATTR_STRING(2)
-inline const char *strcaseprefix_(const char *s, const char *prefix);
-
-
-// strprefix_(), but case-insensitive.
-inline const char *
-strcaseprefix_(const char *s, const char *prefix)
-{
-	if (strncasecmp(s, prefix, strlen(prefix)) != 0)
-		return NULL;
-
-	return s + strlen(prefix);
-}
 
 
 #endif  // include guard
