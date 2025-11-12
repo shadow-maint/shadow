@@ -9,31 +9,22 @@
 #include "config.h"
 
 #include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
 
-#include "attr.h"
+#include "alloc/malloc.h"
 
 
-#define MEMDUP(p, T)  _Generic(p, T *: (T *) memdup(p, sizeof(T)))
-
-
-ATTR_MALLOC(free)
-inline void *memdup(const void *p, size_t size);
-
-
-// memdup - memory duplicate
-inline void *
-memdup(const void *p, size_t size)
-{
-	void  *new;
-
-	new = malloc(size);
-	if (new == NULL)
-		return NULL;
-
-	return memcpy(new, p, size);
-}
+#define MEMDUP(p_, T)                                                 \
+((static inline typeof(T) *(const typeof(T) *p))                      \
+{                                                                     \
+	typeof(T)  *new;                                              \
+                                                                      \
+	new = MALLOC(1, T);                                           \
+	if (new == NULL)                                              \
+		return NULL;                                          \
+                                                                      \
+	*new = *p;                                                    \
+	return new;                                                   \
+}(p_))
 
 
 #endif  // include guard
