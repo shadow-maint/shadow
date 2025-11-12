@@ -13,10 +13,11 @@
 #include "exit_if_null.h"
 
 
-#define CALLOC(n, type)                                                       \
-(                                                                             \
-	(type *) calloc(n, sizeof(type))                                      \
-)
+#define CALLOC(n_, T)                                                 \
+((static inline typeof(T) *(size_t n))                                \
+{                                                                     \
+	return calloc(n, sizeof(T));                                  \
+}(n_)
 
 
 #define XCALLOC(n, type)  exit_if_null(CALLOC(n, type))
