@@ -19,11 +19,11 @@
 
 // memdup_T - memory duplicate type-safe
 #define memdup_T(p, n, T)   memdup_T_(p, n, typeas(T))
-#define memdup_T_(p, n, T)                                            \
-(                                                                     \
-	_Generic(p, T *: (void)0, const T *: (void)0),                \
-	(T *){memdup(p, (n) * sizeof(T))}                             \
-)
+#define memdup_T_(..., T)                                             \
+((static inline T *(size_t n, const T *p))                            \
+{                                                                     \
+	return memdup(p, n * sizeof(T));                              \
+}(__VA_ARGS__))
 
 
 ATTR_MALLOC(free)
