@@ -16,12 +16,17 @@
 
 
 #define LFIND(T, k, a, n)                                             \
-({                                                                    \
-	const typeas(T)  *k_ = k;                                     \
-	const typeas(T)  *a_ = a;                                     \
-                                                                      \
-	(typeas(T) *){lfind_(k_, a_, n, sizeof(T), CMP(T))};          \
-})
+(                                                                     \
+	(typeas(T) *){                                                \
+		lfind_(                                               \
+			(const typeas(T) *){k},                       \
+			(const typeas(T) *){a},                       \
+			n,                                            \
+			sizeof(T),                                    \
+			CMP(T)                                        \
+		)                                                     \
+	}                                                             \
+)
 
 
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,

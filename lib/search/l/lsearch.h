@@ -15,12 +15,17 @@
 
 
 #define LSEARCH(T, k, a, n)                                           \
-({                                                                    \
-	const typeas(T)  *k_ = k;                                     \
-	typeas(T)        *a_ = a;                                     \
-                                                                      \
-	(typeas(T) *){lsearch(k_, a_, n, sizeof(T), CMP(T))};         \
-})
+(                                                                     \
+	(typeas(T) *){                                                \
+		lsearch(                                              \
+			(const typeas(T) *){k},                       \
+			(typeas(T) *){a},                             \
+			n,                                            \
+			sizeof(T),                                    \
+			CMP(T)                                        \
+		)                                                     \
+	}                                                             \
+)
 
 
 #endif  // include guard

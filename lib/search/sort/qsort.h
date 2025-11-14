@@ -16,9 +16,7 @@
 
 #define QSORT(T, a, n)  do                                            \
 {                                                                     \
-	typeas(T)  *p_ = a;                                           \
-                                                                      \
-	qsort(p_, n, sizeof(T), CMP(T));                              \
+	qsort((typeas(T) *){a}, n, sizeof(T), CMP(T));                \
 } while (0)
 
 
