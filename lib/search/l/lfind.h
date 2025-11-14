@@ -24,7 +24,7 @@
                                                                       \
 	static_assert(is_same_typeof(k_, a_), "");                    \
                                                                       \
-	(typeof(k_)) lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_))); \
+	(typeof(k_)){lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_)))}; \
 })
 
 

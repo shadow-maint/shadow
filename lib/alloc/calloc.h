@@ -15,7 +15,7 @@
 
 #define CALLOC(n, T)                                                  \
 (                                                                     \
-	(T *) calloc(n, sizeof(T))                                    \
+	(T *){calloc(n, sizeof(T))}                                   \
 )
 
 

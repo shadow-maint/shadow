@@ -16,7 +16,7 @@
 
 #define MALLOC(n, T)                                                  \
 (                                                                     \
-	(T *) mallocarray(n, sizeof(T))                               \
+	(T *){mallocarray(n, sizeof(T))}                              \
 )
 
 

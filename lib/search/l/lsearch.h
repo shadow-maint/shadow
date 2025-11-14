@@ -23,7 +23,7 @@
                                                                       \
 	static_assert(is_same_typeof(k_, a_), "");                    \
                                                                       \
-	(typeof(k_)) lsearch(k_, a_, n, sizeof(*k_), CMP(typeof(k_)));\
+	(typeof(k_)){lsearch(k_, a_, n, sizeof(*k_), CMP(typeof(k_)))};\
 })
 
 
