@@ -20,7 +20,7 @@
 ({                                                                    \
 	_Generic(k, T *: (void)0, const T *: (void)0);                \
 	_Generic(a, T *: (void)0);                                    \
-	(T *) lsearch(k, a, n, sizeof(T), cmp);                       \
+	(T *){lsearch(k, a, n, sizeof(T), cmp)};                      \
 })
 
 #define LSEARCH(T, ...)  lsearch_T(T, __VA_ARGS__, CMP(T))

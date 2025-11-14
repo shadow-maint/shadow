@@ -21,7 +21,7 @@
 ({                                                                    \
 	_Generic(k, T *: (void)0, const T *: (void)0);                \
 	_Generic(a, T *: (void)0, const T *: (void)0);                \
-	(T *) lfind_(k, a, n, sizeof(T), cmp);                        \
+	(T *){lfind_(k, a, n, sizeof(T), cmp)};                       \
 })
 
 #define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
