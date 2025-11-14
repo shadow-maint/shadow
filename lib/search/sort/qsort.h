@@ -13,12 +13,7 @@
 #include "search/cmp/cmp.h"
 
 
-#define QSORT(T, a, n)  do                                            \
-{                                                                     \
-	T  *p_ = a;                                                   \
-                                                                      \
-	qsort(p_, n, sizeof(T), CMP(T));                              \
-} while (0)
+#define QSORT(T, a, n)  qsort((T *){a}, n, sizeof(T), CMP(T))
 
 
 #endif  // include guard

@@ -15,12 +15,9 @@
 
 
 #define LFIND(T, k, a, n)                                             \
-({                                                                    \
-	const T  *k_ = k;                                             \
-	const T  *a_ = a;                                             \
-                                                                      \
-	(T *){lfind_(k_, a_, n, sizeof(T), CMP(T))};                  \
-})
+(                                                                     \
+	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), CMP(T))}\
+)
 
 
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,

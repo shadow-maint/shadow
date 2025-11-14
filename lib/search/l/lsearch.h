@@ -14,12 +14,9 @@
 
 
 #define LSEARCH(T, k, a, n)                                           \
-({                                                                    \
-	const T  *k_ = k;                                             \
-	T        *a_ = a;                                             \
-                                                                      \
-	(T *){lsearch(k_, a_, n, sizeof(T), CMP(T))};                 \
-})
+(                                                                     \
+	(T *){lsearch((const T *){k}, (T *){a}, n, sizeof(T), CMP(T))}\
+)
 
 
 #endif  // include guard
