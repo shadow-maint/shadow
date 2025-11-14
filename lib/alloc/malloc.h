@@ -17,9 +17,9 @@
 
 #define MALLOC(n, T)   MALLOC_(n, typeas(T))
 #define MALLOC_(n, T)                                                 \
-(                                                                     \
-	(T *) mallocarray(n, sizeof(T))                               \
-)
+({                                                                    \
+	(T *){mallocarray(n, sizeof(T))};                             \
+})
 
 
 #define XMALLOC(n, T)  exit_if_null(MALLOC(n, T))
