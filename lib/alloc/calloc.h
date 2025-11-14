@@ -16,9 +16,9 @@
 
 #define CALLOC(n, T)   CALLOC_(n, typeas(T))
 #define CALLOC_(n, T)                                                 \
-(                                                                     \
-	(T *) calloc(n, sizeof(T))                                    \
-)
+({                                                                    \
+	(T *){calloc(n, sizeof(T))};                                  \
+})
 
 
 #define XCALLOC(n, T)  exit_if_null(CALLOC(n, T))
