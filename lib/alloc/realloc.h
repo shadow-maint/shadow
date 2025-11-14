@@ -16,9 +16,7 @@
 
 #define REALLOC(p, n, T)                                              \
 (                                                                     \
-	_Generic(p, typeas(T) *:                                      \
-		(typeas(T) *){reallocarray(p, (n) ?: 1, sizeof(T))}   \
-	)                                                             \
+	(typeas(T) *){reallocarray((typeas(T) *){p}, (n) ?: 1, sizeof(T))}\
 )
 
 
