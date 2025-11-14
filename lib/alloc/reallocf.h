@@ -18,7 +18,7 @@
 #define REALLOCF(p, n, T)   REALLOCF_(p, n, typeas(T))
 #define REALLOCF_(p, n, T)                                            \
 (                                                                     \
-	_Generic(p, T *: (T *){reallocarrayf_(p, n, sizeof(T))})      \
+	(T *){reallocarrayf_((T *){p}, n, sizeof(T))}                 \
 )
 
 #define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
