@@ -9,11 +9,13 @@
 - name: Ensure dependencies are installed
   ansible.builtin.apt:
     name:
+      - expect
       - gpg
       - libbsd-dev
       - libcmocka-dev
       - libltdl-dev
       - pkgconf
+      - vim
     state: present
 
 - name: Gather selected facts
