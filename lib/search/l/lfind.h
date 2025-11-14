@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,19 +12,13 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
-
-#include <assert.h>
 
 
-#define LFIND(k, a, n)                                                \
+#define LFIND(T, k, a, n)                                             \
 ({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_))); \
+	_Generic(k, T *: 0, const T *: 0);                            \
+	_Generic(a, T *: 0, const T *: 0);                            \
+	(T *) lfind_(k, a, n, sizeof(T), CMP(T *));                   \
 })
 
 

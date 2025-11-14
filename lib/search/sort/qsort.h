@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -11,14 +11,12 @@
 #include <stdlib.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
 
 
-#define QSORT(a, n)  do                                               \
+#define QSORT(T, a, n)  do                                            \
 {                                                                     \
-	__auto_type  p_ = a;                                          \
-                                                                      \
-	qsort(p_, n, sizeof(*p_), CMP(typeof(p_)));                   \
+	_Generic(a, T *: 0);                                          \
+	qsort(a, n, sizeof(T), CMP(T *));                             \
 } while (0)
 
 
