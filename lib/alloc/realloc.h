@@ -17,7 +17,8 @@
 #define REALLOC(p, n, T)   REALLOC_(p, n, typeas(T))
 #define REALLOC_(p, n, T)                                             \
 ({                                                                    \
-	_Generic(p, T *: (T *){reallocarray_(p, n, sizeof(T))});      \
+	_Generic(p, T *: (void)0);                                    \
+	(T *){reallocarray_(p, n, sizeof(T))};                        \
 })
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
