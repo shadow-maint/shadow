@@ -405,7 +405,7 @@ static int split_groups (unsigned int max_members)
 			continue;
 		}
 
-		new = MALLOC(1, struct commonio_entry);
+		new = malloc_T(1, struct commonio_entry);
 		if (NULL == new) {
 			return 0;
 		}

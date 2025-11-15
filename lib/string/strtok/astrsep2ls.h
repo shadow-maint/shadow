@@ -36,7 +36,7 @@ astrsep2ls(char *s, const char *restrict delim, size_t *restrict np)
 
 	n = strchrscnt(s, delim) + 2;
 
-	ls = MALLOC(n, char *);
+	ls = malloc_T(n, char *);
 	if (ls == NULL)
 		return NULL;
 

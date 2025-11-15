@@ -49,7 +49,7 @@
 	for (i = 0; grent->gr_mem[i]; i++);
 
 	/*@-mustfreeonly@*/
-	gr->gr_mem = MALLOC(i + 1, char *);
+	gr->gr_mem = malloc_T(i + 1, char *);
 	/*@=mustfreeonly@*/
 	if (NULL == gr->gr_mem) {
 		gr_free(gr);
