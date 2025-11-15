@@ -135,7 +135,7 @@ void addenv (const char *string, /*@null@*/const char *value)
 
 		update_environ = (environ == newenvp);
 
-		newenvp = XREALLOC(newenvp, newenvc + NEWENVP_STEP, char *);
+		newenvp = xrealloc_T(newenvp, newenvc + NEWENVP_STEP, char *);
 
 		/*
 		 * If this is our current environment, update
