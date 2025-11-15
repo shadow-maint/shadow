@@ -14,7 +14,8 @@
 #include "sizeof.h"
 
 
-#define LSEARCH(T, k, a, n)                                           \
+// lsearch_T - linear search type-safe
+#define lsearch_T(T, k, a, n, cmp)                                    \
 (                                                                     \
 	(typeas(T) *){                                                \
 		lsearch(                                              \
@@ -22,10 +23,12 @@
 			(typeas(T) *){a},                             \
 			n,                                            \
 			sizeof(T),                                    \
-			CMP(T)                                        \
+			cmp                                           \
 		)                                                     \
 	}                                                             \
 )
+
+#define LSEARCH(T, k, a, n)  lsearch_T(T, k, a, n, CMP(T))
 
 
 #endif  // include guard

@@ -14,10 +14,13 @@
 #include "sizeof.h"
 
 
-#define QSORT(T, a, n)  do                                            \
+// qsort_T - sort type-safe
+#define qsort_T(T, a, n, cmp)  do                                     \
 {                                                                     \
-	qsort((typeas(T) *){a}, n, sizeof(T), CMP(T));                \
+	qsort((typeas(T) *){a}, n, sizeof(T), cmp);                   \
 } while (0)
+
+#define QSORT(T, a, n)  qsort_T(T, a, n, CMP(T))
 
 
 #endif  // include guard
