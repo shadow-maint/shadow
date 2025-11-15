@@ -11,9 +11,11 @@
 #include <stdlib.h>
 
 #include "exit_if_null.h"
+#include "sizeof.h"
 
 
-#define REALLOC(p, n, T)                                              \
+#define REALLOC(p, n, T)   REALLOC_(p, n, typeas(T))
+#define REALLOC_(p, n, T)                                             \
 (                                                                     \
 	_Generic(p, T *: (T *) reallocarray(p, (n) ?: 1, sizeof(T)))  \
 )

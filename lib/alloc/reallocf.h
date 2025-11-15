@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,9 +12,11 @@
 #include <stdlib.h>
 
 #include "attr.h"
+#include "sizeof.h"
 
 
-#define REALLOCF(p, n, T)                                             \
+#define REALLOCF(p, n, T)   REALLOCF_(p, n, typeas(T))
+#define REALLOCF_(p, n, T)                                            \
 (                                                                     \
 	_Generic(p, T *: (T *) reallocarrayf(p, (n) ?: 1, sizeof(T))) \
 )
