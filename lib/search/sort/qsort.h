@@ -15,10 +15,8 @@
 
 
 // qsort_T - sort type-safe
-#define qsort_T(T, a, n, cmp)  do                                     \
-{                                                                     \
-	qsort((typeas(T) *){a}, n, sizeof(T), cmp);                   \
-} while (0)
+#define qsort_T(T, a, n, cmp)   qsort_T_(typeas(T), a, n, cmp)
+#define qsort_T_(T, a, n, cmp)  qsort((T *){a}, n, sizeof(T), cmp)
 
 #define QSORT(T, a, n)  qsort_T(T, a, n, CMP(T))
 

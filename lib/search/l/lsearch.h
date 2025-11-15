@@ -15,17 +15,10 @@
 
 
 // lsearch_T - linear search type-safe
-#define lsearch_T(T, k, a, n, cmp)                                    \
+#define lsearch_T(T, k, a, n, cmp)   lsearch_T_(typeas(T), k, a, n, cmp)
+#define lsearch_T_(T, k, a, n, cmp)                                   \
 (                                                                     \
-	(typeas(T) *){                                                \
-		lsearch(                                              \
-			(const typeas(T) *){k},                       \
-			(typeas(T) *){a},                             \
-			n,                                            \
-			sizeof(T),                                    \
-			cmp                                           \
-		)                                                     \
-	}                                                             \
+	(T *){lsearch((const T *){k}, (T *){a}, n, sizeof(T), cmp)}   \
 )
 
 #define LSEARCH(T, k, a, n)  lsearch_T(T, k, a, n, CMP(T))

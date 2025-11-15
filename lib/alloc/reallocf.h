@@ -18,10 +18,8 @@
 #define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
 
 // reallocf_T - realloc free-on-error type-safe
-#define reallocf_T(p, n, T)                                           \
-(                                                                     \
-	(typeas(T) *){reallocarrayf_((typeas(T) *){p}, n, sizeof(T))} \
-)
+#define reallocf_T(p, n, T)   reallocf_T_(p, n, typeas(T))
+#define reallocf_T_(p, n, T)  ((T *){reallocarrayf_((T *){p}, n, sizeof(T))})
 
 
 // reallocarrayf - realloc array free-on-error

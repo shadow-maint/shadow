@@ -17,10 +17,8 @@
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
 
 // realloc_T - realloc type-safe
-#define realloc_T(p, n, T)                                            \
-(                                                                     \
-	(typeas(T) *){reallocarray_((typeas(T) *){p}, n, sizeof(T))}  \
-)
+#define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
+#define realloc_T_(p, n, T)  ((T *){reallocarray_((T *){p}, n, sizeof(T))})
 
 
 // xrealloc_T - exit-on-error realloc type-safe

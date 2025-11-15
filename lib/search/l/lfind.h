@@ -16,17 +16,10 @@
 
 
 // lfind_T - linear find type-safe
-#define lfind_T(T, k, a, n, cmp)                                      \
+#define lfind_T(T, k, a, n, cmp)   lfind_T_(typeas(T), k, a, n, cmp)
+#define lfind_T_(T, k, a, n, cmp)                                     \
 (                                                                     \
-	(typeas(T) *){                                                \
-		lfind_(                                               \
-			(const typeas(T) *){k},                       \
-			(const typeas(T) *){a},                       \
-			n,                                            \
-			sizeof(T),                                    \
-			cmp                                           \
-		)                                                     \
-	}                                                             \
+	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), cmp)}\
 )
 
 #define LFIND(T, k, a, n)  lfind_T(T, k, a, n, CMP(T))
