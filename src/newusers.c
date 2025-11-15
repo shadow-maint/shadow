@@ -1196,9 +1196,9 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 		/* keep the list of user/password for later update by PAM */
 		nusers++;
-		lines     = REALLOCF(lines, nusers, intmax_t);
-		usernames = REALLOCF(usernames, nusers, char *);
-		passwords = REALLOCF(passwords, nusers, char *);
+		lines     = reallocf_T(lines, nusers, intmax_t);
+		usernames = reallocf_T(usernames, nusers, char *);
+		passwords = reallocf_T(passwords, nusers, char *);
 		if (lines == NULL || usernames == NULL || passwords == NULL) {
 			fprintf(stderr, _("%s: line %jd: %s\n"), Prog, line, strerrno());
 			fail_exit (EXIT_FAILURE, process_selinux);

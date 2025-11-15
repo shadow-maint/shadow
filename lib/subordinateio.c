@@ -962,7 +962,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			return n;
 	}
 
-	*uids = REALLOCF(*uids, n + 1, uid_t);
+	*uids = reallocf_T(*uids, n + 1, uid_t);
 	if (!*uids)
 		return -1;
 
