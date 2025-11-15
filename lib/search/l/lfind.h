@@ -15,11 +15,14 @@
 #include "sizeof.h"
 
 
-#define LFIND(T, ...)       LFIND_(typeas(T), __VA_ARGS__)
-#define LFIND_(T, k, a, n)                                            \
+// lfind_T - linear find type-safe
+#define lfind_T(T, ...)            lfind_T_(typeas(T), __VA_ARGS__)
+#define lfind_T_(T, k, a, n, cmp)                                     \
 (                                                                     \
-	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), CMP(T))}\
+	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), cmp)}\
 )
+
+#define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
 
 
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
