@@ -12,10 +12,10 @@
 #define CMP(T)                                                        \
 (                                                                     \
 	_Generic((T) 0,                                               \
-		int *:            cmp_int,                            \
-		long *:           cmp_long,                           \
-		unsigned int *:   cmp_uint,                           \
-		unsigned long *:  cmp_ulong                           \
+		int:            cmp_int,                              \
+		long:           cmp_long,                             \
+		unsigned int:   cmp_uint,                             \
+		unsigned long:  cmp_ulong                             \
 	)                                                             \
 )
 

@@ -18,7 +18,7 @@
 ({                                                                    \
 	_Generic(k, T *: 0, const T *: 0);                            \
 	_Generic(a, T *: 0, const T *: 0);                            \
-	(T *) lfind_(k, a, n, sizeof(T), CMP(T *));                   \
+	(T *) lfind_(k, a, n, sizeof(T), CMP(T));                     \
 })
 
 
