@@ -26,7 +26,7 @@
 {
 	struct spwd *sp;
 
-	sp = CALLOC (1, struct spwd);
+	sp = calloc_T(1, struct spwd);
 	if (NULL == sp) {
 		return NULL;
 	}

@@ -25,7 +25,7 @@
 	struct group *gr;
 	int i;
 
-	gr = CALLOC(1, struct group);
+	gr = calloc_T(1, struct group);
 	if (NULL == gr) {
 		return NULL;
 	}

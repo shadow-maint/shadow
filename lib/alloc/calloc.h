@@ -14,14 +14,15 @@
 #include "sizeof.h"
 
 
-#define CALLOC(n, T)   CALLOC_(n, typeas(T))
-#define CALLOC_(n, T)                                                 \
+// calloc_T - calloc type-safe
+#define calloc_T(n, T)   calloc_T_(n, typeas(T))
+#define calloc_T_(n, T)                                               \
 ({                                                                    \
 	(T *){calloc(n, sizeof(T))};                                  \
 })
 
 
-#define XCALLOC(n, T)  exit_if_null(CALLOC(n, T))
+#define XCALLOC(n, T)  exit_if_null(calloc_T(n, T))
 
 
 #endif  // include guard
