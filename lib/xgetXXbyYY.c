@@ -61,7 +61,7 @@
 	while (true) {
 		int status;
 		LOOKUP_TYPE *resbuf = NULL;
-		buffer = XREALLOC(buffer, length, char);
+		buffer = xrealloc_T(buffer, length, char);
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
 		if ((0 == status) && (resbuf == result)) {

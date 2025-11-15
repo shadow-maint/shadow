@@ -23,7 +23,8 @@
 )
 
 
-#define XREALLOC(p, n, T)  exit_if_null(realloc_T(p, n, T))
+// xrealloc_T - exit-on-error realloc type-safe
+#define xrealloc_T(p, n, T)  exit_if_null(realloc_T(p, n, T))
 
 
 #endif  // include guard
