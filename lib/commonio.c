@@ -634,7 +634,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 
 	buflen = BUFLEN;
-	buf = MALLOC(buflen, char);
+	buf = malloc_T(buflen, char);
 	if (NULL == buf)
 		goto cleanup_errno;
 
@@ -646,7 +646,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			size_t len;
 
 			buflen += BUFLEN;
-			buf = REALLOCF(buf, buflen, char);
+			buf = reallocf_T(buf, buflen, char);
 			if (NULL == buf)
 				goto cleanup_errno;
 
@@ -673,7 +673,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			}
 		}
 
-		p = MALLOC(1, struct commonio_entry);
+		p = malloc_T(1, struct commonio_entry);
 		if (NULL == p) {
 			goto cleanup_entry;
 		}
@@ -748,7 +748,7 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 		return 0;
 	}
 
-	entries = MALLOC(n, struct commonio_entry *);
+	entries = malloc_T(n, struct commonio_entry *);
 	if (entries == NULL) {
 		return -1;
 	}
@@ -1074,7 +1074,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 		return 1;
 	}
 	/* not found, new entry */
-	p = MALLOC(1, struct commonio_entry);
+	p = malloc_T(1, struct commonio_entry);
 	if (NULL == p) {
 		db->ops->cio_free(nentry);
 		errno = ENOMEM;
@@ -1111,7 +1111,7 @@ int commonio_append (struct commonio_db *db, const void *eptr)
 		return 0;
 	}
 	/* new entry */
-	p = MALLOC(1, struct commonio_entry);
+	p = malloc_T(1, struct commonio_entry);
 	if (NULL == p) {
 		db->ops->cio_free(nentry);
 		errno = ENOMEM;
