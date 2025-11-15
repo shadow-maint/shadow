@@ -43,7 +43,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 	const struct subordinate_range *rangeent = ent;
 	struct subordinate_range *range;
 
-	range = MALLOC(1, struct subordinate_range);
+	range = malloc_T(1, struct subordinate_range);
 	if (NULL == range) {
 		return NULL;
 	}
