@@ -777,7 +777,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 
 			sg->sg_mem = dup_list (gr->gr_mem);
 
-			sg->sg_adm = XMALLOC(1, char *);
+			sg->sg_adm = xmalloc_T(1, char *);
 			sg->sg_adm[0] = NULL;
 
 		}

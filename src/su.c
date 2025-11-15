@@ -251,7 +251,7 @@ static void execve_shell (const char *shellname,
 		while (NULL != args[n_args]) {
 			n_args++;
 		}
-		targs = XMALLOC(n_args + 3, char *);
+		targs = xmalloc_T(n_args + 3, char *);
 		targs[0] = "sh";
 		targs[1] = "-";
 		targs[2] = xstrdup (shellname);

@@ -142,7 +142,7 @@ static void add_user (const char *user,
 			static struct sgrp sgrent;
 			sgrent.sg_namp = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
-			sgrent.sg_adm = XMALLOC(1, char *);
+			sgrent.sg_adm = xmalloc_T(1, char *);
 			sgrent.sg_adm[0] = NULL;
 
 			/* Move any password to gshadow */
@@ -218,7 +218,7 @@ static void remove_user (const char *user,
 			static struct sgrp sgrent;
 			sgrent.sg_namp = xstrdup (newgrp->gr_name);
 			sgrent.sg_mem = dup_list (newgrp->gr_mem);
-			sgrent.sg_adm = XMALLOC(1, char *);
+			sgrent.sg_adm = xmalloc_T(1, char *);
 			sgrent.sg_adm[0] = NULL;
 
 			/* Move any password to gshadow */
@@ -283,9 +283,9 @@ static void purge_members (const struct group *grp, bool process_selinux)
 			/* Create a shadow group based on this group */
 			static struct sgrp sgrent;
 			sgrent.sg_namp = xstrdup (newgrp->gr_name);
-			sgrent.sg_mem = XMALLOC(1, char *);
+			sgrent.sg_mem = xmalloc_T(1, char *);
 			sgrent.sg_mem[0] = NULL;
-			sgrent.sg_adm = XMALLOC(1, char *);
+			sgrent.sg_adm = xmalloc_T(1, char *);
 			sgrent.sg_adm[0] = NULL;
 
 			/* Move any password to gshadow */
