@@ -284,7 +284,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	line = strprefix(line, "/dev/") ?: line;
 
-	utent = XCALLOC(1, struct utmpx);
+	utent = xcalloc_T(1, struct utmpx);
 
 
 	utent->ut_type = USER_PROCESS;
