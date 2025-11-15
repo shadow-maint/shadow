@@ -13,13 +13,13 @@
 #include "exit_if_null.h"
 
 
-#define CALLOC(n, type)                                                       \
-(                                                                             \
-	(type *) calloc(n, sizeof(type))                                      \
+#define CALLOC(n, T)                                                  \
+(                                                                     \
+	(T *) calloc(n, sizeof(T))                                    \
 )
 
 
-#define XCALLOC(n, type)  exit_if_null(CALLOC(n, type))
+#define XCALLOC(n, T)  exit_if_null(CALLOC(n, T))
 
 
 #endif  // include guard
