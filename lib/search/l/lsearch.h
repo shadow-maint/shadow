@@ -11,10 +11,12 @@
 #include <search.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 // lsearch_T - linear search-and-insert type-safe
-#define lsearch_T(T, k, a, n, cmp)                                    \
+#define lsearch_T(T, ...)            lsearch_T_(typeas(T), __VA_ARGS__)
+#define lsearch_T_(T, k, a, n, cmp)                                   \
 ({                                                                    \
 	_Generic(k, T *: 0, const T *: 0);                            \
 	_Generic(a, T *: 0);                                          \

@@ -11,10 +11,12 @@
 #include <stdlib.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 // qsort_T - sort type-safe
-#define qsort_T(T, a, n, cmp)  do                                     \
+#define qsort_T(T, ...)         qsort_T_(typeas(T), __VA_ARGS__)
+#define qsort_T_(T, a, n, cmp)  do                                    \
 {                                                                     \
 	_Generic(a, T *: 0);                                          \
 	qsort(a, n, sizeof(T), cmp);                                  \
