@@ -11,9 +11,11 @@
 #include <stdlib.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
-#define QSORT(T, a, n)  qsort((T *){a}, n, sizeof(T), CMP(T))
+#define QSORT(T, ...)    QSORT_(typeas(T), __VA_ARGS__)
+#define QSORT_(T, a, n)  qsort((T *){a}, n, sizeof(T), CMP(T))
 
 
 #endif  // include guard

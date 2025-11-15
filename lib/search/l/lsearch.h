@@ -11,9 +11,11 @@
 #include <search.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
-#define LSEARCH(T, k, a, n)                                           \
+#define LSEARCH(T, ...)       LSEARCH_(typeas(T), __VA_ARGS__)
+#define LSEARCH_(T, k, a, n)                                          \
 (                                                                     \
 	(T *){lsearch((const T *){k}, (T *){a}, n, sizeof(T), CMP(T))}\
 )

@@ -12,9 +12,11 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
-#define LFIND(T, k, a, n)                                             \
+#define LFIND(T, ...)       LFIND_(typeas(T), __VA_ARGS__)
+#define LFIND_(T, k, a, n)                                            \
 (                                                                     \
 	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), CMP(T))}\
 )
