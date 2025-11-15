@@ -44,7 +44,7 @@ add_groups(const char *list)
 	if (gids == NULL)
 		return -1;
 
-	gids = REALLOCF(gids, n + strchrscnt(list, ",:") + 1, gid_t);
+	gids = reallocf_T(gids, n + strchrscnt(list, ",:") + 1, gid_t);
 	if (gids == NULL)
 		return -1;
 
