@@ -40,7 +40,7 @@ fgetsgent(FILE *fp)
 	char *cp;
 
 	if (0 == buflen) {
-		buf = MALLOC(BUFSIZ, char);
+		buf = malloc_T(BUFSIZ, char);
 		if (NULL == buf) {
 			return NULL;
 		}
@@ -58,7 +58,7 @@ fgetsgent(FILE *fp)
 	       && (feof (fp) == 0)) {
 		size_t len;
 
-		cp = REALLOC(buf, buflen * 2, char);
+		cp = realloc_T(buf, buflen * 2, char);
 		if (NULL == cp) {
 			return NULL;
 		}
