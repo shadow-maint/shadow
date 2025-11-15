@@ -14,9 +14,10 @@
 #include "sizeof.h"
 
 
+#define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
 #define REALLOC(p, n, T)                                              \
 (                                                                     \
-	(typeas(T) *){reallocarray((typeas(T) *){p}, (n) ?: 1, sizeof(T))}\
+	(typeas(T) *){reallocarray_((typeas(T) *){p}, n, sizeof(T))}  \
 )
 
 

@@ -15,9 +15,10 @@
 #include "sizeof.h"
 
 
+#define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
 #define REALLOCF(p, n, T)                                             \
 (                                                                     \
-	(typeas(T) *){reallocarrayf((typeas(T) *){p}, (n) ?: 1, sizeof(T))}\
+	(typeas(T) *){reallocarrayf_((typeas(T) *){p}, n, sizeof(T))} \
 )
 
 
