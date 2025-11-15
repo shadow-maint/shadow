@@ -13,13 +13,13 @@
 #include "exit_if_null.h"
 
 
-#define REALLOC(p, n, type)                                                   \
-(                                                                             \
-	_Generic(p, type *: (type *) reallocarray(p, (n) ?: 1, sizeof(type))) \
+#define REALLOC(p, n, T)                                              \
+(                                                                     \
+	_Generic(p, T *: (T *) reallocarray(p, (n) ?: 1, sizeof(T)))  \
 )
 
 
-#define XREALLOC(p, n, type)  exit_if_null(REALLOC(p, n, type))
+#define XREALLOC(p, n, T)  exit_if_null(REALLOC(p, n, T))
 
 
 #endif  // include guard

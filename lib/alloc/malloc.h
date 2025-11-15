@@ -14,13 +14,13 @@
 #include "exit_if_null.h"
 
 
-#define MALLOC(n, type)                                                       \
-(                                                                             \
-	(type *) mallocarray(n, sizeof(type))                                 \
+#define MALLOC(n, T)                                                  \
+(                                                                     \
+	(T *) mallocarray(n, sizeof(T))                               \
 )
 
 
-#define XMALLOC(n, type)  exit_if_null(MALLOC(n, type))
+#define XMALLOC(n, T)  exit_if_null(MALLOC(n, T))
 
 
 ATTR_ALLOC_SIZE(1, 2)
