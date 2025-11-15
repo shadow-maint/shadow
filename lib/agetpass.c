@@ -106,7 +106,7 @@ agetpass_internal(const char *prompt, int flags)
 	 * Let's add one more byte, and if the password uses it, it
 	 * means the introduced password was longer than PASS_MAX.
 	 */
-	pass = MALLOC(PASS_MAX + 2, char);
+	pass = malloc_T(PASS_MAX + 2, char);
 	if (pass == NULL)
 		return NULL;
 

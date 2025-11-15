@@ -15,15 +15,17 @@
 #include "sizeof.h"
 
 
-#define MALLOC(n, T)                                                  \
+// malloc_T - malloc type-safe
+#define malloc_T(n, T)                                                  \
 (                                                                     \
 	(typeas(T) *){mallocarray(n, sizeof(T))}                      \
 )
 
 
-#define XMALLOC(n, T)  exit_if_null(MALLOC(n, T))
+#define XMALLOC(n, T)  exit_if_null(malloc_T(n, T))
 
 
+// mallocarray - malloc array
 ATTR_ALLOC_SIZE(1, 2)
 ATTR_MALLOC(free)
 inline void *mallocarray(size_t nmemb, size_t size);
