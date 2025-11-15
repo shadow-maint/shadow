@@ -19,7 +19,7 @@ libshadow_la_CPPFLAGS += -DVENDORDIR=\"$(VENDORDIR)\"
 endif
 
 libshadow_la_CPPFLAGS += -I$(top_srcdir)
-libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
+libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBA2I) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
 libshadow_la_LIBADD = $(LIBADD_DLOPEN)
 
 libshadow_la_SOURCES = \
@@ -37,30 +37,8 @@ libshadow_la_SOURCES = \
 	alloc/realloc.h \
 	alloc/reallocf.c \
 	alloc/reallocf.h \
-	atoi/a2i/a2i.c \
-	atoi/a2i/a2i.h \
-	atoi/a2i/a2s.c \
-	atoi/a2i/a2s.h \
-	atoi/a2i/a2s_c.c \
-	atoi/a2i/a2s_c.h \
-	atoi/a2i/a2s_nc.c \
-	atoi/a2i/a2s_nc.h \
-	atoi/a2i/a2u.c \
-	atoi/a2i/a2u.h \
-	atoi/a2i/a2u_c.c \
-	atoi/a2i/a2u_c.h \
-	atoi/a2i/a2u_nc.c \
-	atoi/a2i/a2u_nc.h \
 	atoi/getnum.c \
 	atoi/getnum.h \
-	atoi/str2i.c \
-	atoi/str2i.h \
-	atoi/strtoi/strtoi.c \
-	atoi/strtoi/strtoi.h \
-	atoi/strtoi/strtou.c \
-	atoi/strtoi/strtou.h \
-	atoi/strtoi/strtou_noneg.c \
-	atoi/strtoi/strtou_noneg.h \
 	attr.h \
 	audit_help.c \
 	basename.c \
