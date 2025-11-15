@@ -33,7 +33,7 @@ areadlink(const char *link)
 		int   len;
 		char  *buf;
 
-		buf = MALLOC(size, char);
+		buf = malloc_T(size, char);
 		if (NULL == buf)
 			return NULL;
 

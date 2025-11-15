@@ -366,7 +366,7 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 	if (range.first > range.last)
 		return 0;
 
-	entry = MALLOC(1, struct id_range_list_entry);
+	entry = malloc_T(1, struct id_range_list_entry);
 	if (!entry) {
 		fprintf (stderr,
 			_("%s: failed to allocate memory: %s\n"),

@@ -36,7 +36,7 @@ agetgroups(size_t *ngids)
 
 	n = n ?: 1;
 
-	gids = MALLOC(n, gid_t);
+	gids = malloc_T(n, gid_t);
 	if (gids == NULL)
 		return NULL;
 
