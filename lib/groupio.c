@@ -344,7 +344,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 			members++;
 		}
 	}
-	new_members = CALLOC (members + 1, char *);
+	new_members = calloc_T(members + 1, char *);
 	if (NULL == new_members) {
 		free(new_line);
 		return NULL;
