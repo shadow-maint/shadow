@@ -15,6 +15,8 @@
 #include <sys/types.h>
 
 
+#define typeas(T)            typeof((T){})
+
 #define ssizeof(x)           ((ssize_t) sizeof(x))
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
