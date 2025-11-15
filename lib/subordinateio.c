@@ -280,7 +280,7 @@ static bool append_range(struct subid_range **ranges, const struct subordinate_r
 {
 	struct subid_range  *sr;
 
-	sr = REALLOC(*ranges, n + 1, struct subid_range);
+	sr = realloc_T(*ranges, n + 1, struct subid_range);
 	if (!sr)
 		return false;
 

@@ -15,13 +15,15 @@
 
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
-#define REALLOC(p, n, T)                                              \
+
+// realloc_T - realloc type-safe
+#define realloc_T(p, n, T)                                            \
 (                                                                     \
 	(typeas(T) *){reallocarray_((typeas(T) *){p}, n, sizeof(T))}  \
 )
 
 
-#define XREALLOC(p, n, T)  exit_if_null(REALLOC(p, n, T))
+#define XREALLOC(p, n, T)  exit_if_null(realloc_T(p, n, T))
 
 
 #endif  // include guard
