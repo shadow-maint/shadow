@@ -671,7 +671,7 @@ int main (int argc, char **argv)
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
-	gids = XREALLOC(gids, ngroups + 1, gid_t);
+	gids = xrealloc_T(gids, ngroups + 1, gid_t);
 
 	LSEARCH(gid_t, &gid, gids, &ngroups);
 
