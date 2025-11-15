@@ -22,7 +22,8 @@
 })
 
 
-#define XCALLOC(n, T)  exit_if_null(calloc_T(n, T))
+// xcalloc_T - exit-on-error calloc type-safe
+#define xcalloc_T(n, T)  exit_if_null(calloc_T(n, T))
 
 
 #endif  // include guard
