@@ -14,12 +14,15 @@
 #include "search/cmp/cmp.h"
 
 
-#define LFIND(T, k, a, n)                                             \
+// lfind_T - linear find type-safe
+#define lfind_T(T, k, a, n, cmp)                                      \
 ({                                                                    \
 	_Generic(k, T *: 0, const T *: 0);                            \
 	_Generic(a, T *: 0, const T *: 0);                            \
-	(T *) lfind_(k, a, n, sizeof(T), CMP(T));                     \
+	(T *) lfind_(k, a, n, sizeof(T), cmp);                        \
 })
+
+#define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
 
 
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
