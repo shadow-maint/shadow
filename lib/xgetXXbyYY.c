@@ -53,7 +53,7 @@
 	/* we have to start with something */
 	size_t length = 0x100;
 
-	result = MALLOC(1, LOOKUP_TYPE);
+	result = malloc_T(1, LOOKUP_TYPE);
 	if (NULL == result) {
 		goto oom;
 	}
