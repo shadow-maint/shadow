@@ -14,8 +14,9 @@
 #include "sizeof.h"
 
 
-#define REALLOC(p, n, T)   REALLOC_(p, n, typeas(T))
-#define REALLOC_(p, n, T)                                             \
+// realloc_T - realloc type-safe
+#define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
+#define realloc_T_(p, n, T)                                           \
 ({                                                                    \
 	_Generic(p, T *: (void)0);                                    \
 	(T *){reallocarray_(p, n, sizeof(T))};                        \
@@ -24,7 +25,7 @@
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
 
 
-#define XREALLOC(p, n, T)  exit_if_null(REALLOC(p, n, T))
+#define XREALLOC(p, n, T)  exit_if_null(realloc_T(p, n, T))
 
 
 #endif  // include guard
