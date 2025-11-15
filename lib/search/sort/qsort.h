@@ -16,7 +16,7 @@
 #define QSORT(T, a, n)  do                                            \
 {                                                                     \
 	_Generic(a, T *: 0);                                          \
-	qsort(a, n, sizeof(T), CMP(T *));                             \
+	qsort(a, n, sizeof(T), CMP(T));                               \
 } while (0)
 
 

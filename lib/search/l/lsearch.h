@@ -17,7 +17,7 @@
 ({                                                                    \
 	_Generic(k, T *: 0, const T *: 0);                            \
 	_Generic(a, T *: 0);                                          \
-	(T *) lsearch(k, a, n, sizeof(T), CMP(T *));                  \
+	(T *) lsearch(k, a, n, sizeof(T), CMP(T));                    \
 })
 
 
