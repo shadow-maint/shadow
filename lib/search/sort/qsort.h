@@ -13,11 +13,14 @@
 #include "search/cmp/cmp.h"
 
 
-#define QSORT(T, a, n)  do                                            \
+// qsort_T - sort type-safe
+#define qsort_T(T, a, n, cmp)  do                                     \
 {                                                                     \
 	_Generic(a, T *: 0);                                          \
-	qsort(a, n, sizeof(T), CMP(T));                               \
+	qsort(a, n, sizeof(T), cmp);                                  \
 } while (0)
+
+#define QSORT(T, ...)  qsort_T(T, __VA_ARGS__, CMP(T))
 
 
 #endif  // include guard
