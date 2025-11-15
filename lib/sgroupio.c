@@ -34,7 +34,7 @@
 	struct sgrp *sg;
 	int i;
 
-	sg = CALLOC (1, struct sgrp);
+	sg = calloc_T(1, struct sgrp);
 	if (NULL == sg) {
 		return NULL;
 	}
