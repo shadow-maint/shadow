@@ -12,14 +12,15 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 #define LFIND(T, k, a, n)                                             \
 ({                                                                    \
-	const T  *k_ = k;                                             \
-	const T  *a_ = a;                                             \
+	const typeas(T)  *k_ = k;                                     \
+	const typeas(T)  *a_ = a;                                     \
                                                                       \
-	(T *){lfind_(k_, a_, n, sizeof(T), CMP(T))};                  \
+	(typeas(T) *){lfind_(k_, a_, n, sizeof(T), CMP(T))};          \
 })
 
 

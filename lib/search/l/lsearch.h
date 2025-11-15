@@ -11,14 +11,15 @@
 #include <search.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 #define LSEARCH(T, k, a, n)                                           \
 ({                                                                    \
-	const T  *k_ = k;                                             \
-	T        *a_ = a;                                             \
+	const typeas(T)  *k_ = k;                                     \
+	typeas(T)        *a_ = a;                                     \
                                                                       \
-	(T *){lsearch(k_, a_, n, sizeof(T), CMP(T))};                 \
+	(typeas(T) *){lsearch(k_, a_, n, sizeof(T), CMP(T))};         \
 })
 
 

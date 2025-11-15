@@ -11,11 +11,12 @@
 #include <stdlib.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 #define QSORT(T, a, n)  do                                            \
 {                                                                     \
-	T  *p_ = a;                                                   \
+	typeas(T)  *p_ = a;                                           \
                                                                       \
 	qsort(p_, n, sizeof(T), CMP(T));                              \
 } while (0)

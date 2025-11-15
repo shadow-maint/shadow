@@ -12,11 +12,12 @@
 
 #include "attr.h"
 #include "exit_if_null.h"
+#include "sizeof.h"
 
 
 #define MALLOC(n, T)                                                  \
 (                                                                     \
-	(T *){mallocarray(n, sizeof(T))}                              \
+	(typeas(T) *){mallocarray(n, sizeof(T))}                      \
 )
 
 

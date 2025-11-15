@@ -11,11 +11,12 @@
 #include <stdlib.h>
 
 #include "exit_if_null.h"
+#include "sizeof.h"
 
 
 #define CALLOC(n, T)                                                  \
 (                                                                     \
-	(T *){calloc(n, sizeof(T))}                                   \
+	(typeas(T) *){calloc(n, sizeof(T))}                           \
 )
 
 
