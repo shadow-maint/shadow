@@ -12,10 +12,12 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
+#include "sizeof.h"
 
 
 // lfind_T - linear find type-safe
-#define lfind_T(T, k, a, n, cmp)                                      \
+#define lfind_T(T, ...)            lfind_T_(typeas(T), __VA_ARGS__)
+#define lfind_T_(T, k, a, n, cmp)                                     \
 ({                                                                    \
 	_Generic(k, T *: 0, const T *: 0);                            \
 	_Generic(a, T *: 0, const T *: 0);                            \
