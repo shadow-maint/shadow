@@ -18,7 +18,7 @@
 	const T  *k_ = k;                                             \
 	T        *a_ = a;                                             \
                                                                       \
-	(T *){lsearch(k_, a_, n, sizeof(T), CMP(T *))};               \
+	(T *){lsearch(k_, a_, n, sizeof(T), CMP(T))};                 \
 })
 
 
