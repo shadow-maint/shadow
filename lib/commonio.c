@@ -647,7 +647,7 @@ int commonio_open (struct commonio_db *db, int mode)
 			size_t len;
 
 			buflen += BUFLEN;
-			buf = REALLOCF(buf, buflen, char);
+			buf = reallocf_T(buf, buflen, char);
 			if (NULL == buf)
 				goto cleanup_errno;
 
