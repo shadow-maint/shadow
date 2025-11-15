@@ -9,13 +9,13 @@
 #include "config.h"
 
 
-#define CMP(TYPE)                                                     \
+#define CMP(T)                                                        \
 (                                                                     \
-	_Generic((TYPE) 0,                                            \
-		int *:            cmp_int,                            \
-		long *:           cmp_long,                           \
-		unsigned int *:   cmp_uint,                           \
-		unsigned long *:  cmp_ulong                           \
+	_Generic((T){},                                               \
+		int:            cmp_int,                              \
+		long:           cmp_long,                             \
+		unsigned int:   cmp_uint,                             \
+		unsigned long:  cmp_ulong                             \
 	)                                                             \
 )
 
