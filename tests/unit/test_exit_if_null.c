@@ -61,7 +61,7 @@ test_exit_if_null_exit(void **)
 	switch (setjmp(jmpb)) {
 	case 0:
 		p = "called";
-		p = XMALLOC(SIZE_MAX, char);
+		p = xmalloc_T(SIZE_MAX, char);
 		assert_unreachable();
 		break;
 	case EXIT_CALLED:
@@ -84,13 +84,13 @@ test_exit_if_null_ok(void **)
 
 	static const char  foo[] = "foo1bar";
 
-	p = XMALLOC(countof(foo), char);
+	p = xmalloc_T(countof(foo), char);
 	assert_true(p != NULL);
 	strcpy(p, foo);
 	assert_string_equal(p, "foo1bar");
 	free(p);
 
-	p = XMALLOC(0, char);
+	p = xmalloc_T(0, char);
 	assert_true(p != NULL);
 	free(p);
 }

@@ -23,7 +23,8 @@
 })
 
 
-#define XMALLOC(n, T)  exit_if_null(malloc_T(n, T))
+// xmalloc_T - exit-on-error malloc type-safe
+#define xmalloc_T(n, T)  exit_if_null(malloc_T(n, T))
 
 
 // mallocarray - malloc array

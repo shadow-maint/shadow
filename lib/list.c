@@ -53,7 +53,7 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 * old entries, and the new entries as well.
 	 */
 
-	tmp = XMALLOC(i + 2, char *);
+	tmp = xmalloc_T(i + 2, char *);
 
 	/*
 	 * Copy the original list to the new list, then append the
@@ -108,7 +108,7 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 * old entries.
 	 */
 
-	tmp = XMALLOC(j + 1, char *);
+	tmp = xmalloc_T(j + 1, char *);
 
 	/*
 	 * Copy the original list except the deleted members to the
@@ -144,7 +144,7 @@ dup_list(char *const *list)
 
 	for (i = 0; NULL != list[i]; i++);
 
-	tmp = XMALLOC(i + 1, char *);
+	tmp = xmalloc_T(i + 1, char *);
 
 	i = 0;
 	while (NULL != *list) {
@@ -214,7 +214,7 @@ comma_to_list(const char *comma)
 	 */
 
 	n = strchrcnt(members, ',') + 2;
-	array = XMALLOC(n, char *);
+	array = xmalloc_T(n, char *);
 
 	/*
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm

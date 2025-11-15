@@ -831,7 +831,7 @@ int main (int argc, char **argv)
 				exit (1);
 			}
 			preauth_flag = false;
-			username = XMALLOC(max_size, char);
+			username = xmalloc_T(max_size, char);
 			login_prompt(username, max_size);
 
 			if (streq(username, "")) {
