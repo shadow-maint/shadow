@@ -276,7 +276,7 @@ static bool have_range(struct commonio_db *db,
 static struct subid_range *
 append_range(struct subid_range *ranges, const struct subordinate_range *new, int n)
 {
-	ranges = REALLOCF(ranges, n + 1, struct subid_range);
+	ranges = reallocf_T(ranges, n + 1, struct subid_range);
 	if (ranges == NULL)
 		return NULL;
 
