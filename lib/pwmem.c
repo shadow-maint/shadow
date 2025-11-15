@@ -25,7 +25,7 @@
 {
 	struct passwd *pw;
 
-	pw = CALLOC (1, struct passwd);
+	pw = calloc_T(1, struct passwd);
 	if (NULL == pw) {
 		return NULL;
 	}

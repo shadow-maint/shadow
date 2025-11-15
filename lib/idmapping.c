@@ -47,7 +47,7 @@ get_map_ranges(int ranges, int argc, char **argv)
 		return NULL;
 	}
 
-	mappings = CALLOC(ranges, struct map_range);
+	mappings = calloc_T(ranges, struct map_range);
 	if (!mappings) {
 		fprintf(log_get_logfd(), _( "%s: Memory allocation failure\n"),
 			log_get_progname());
