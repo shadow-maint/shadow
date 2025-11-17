@@ -16,10 +16,10 @@
 
 // lsearch_T - linear search-and-insert type-safe
 #define lsearch_T(T, ...)            lsearch_T_(typeas(T), __VA_ARGS__)
-#define lsearch_T_(T, k, a, n, cmp)                                   \
-(                                                                     \
-	(T *){lsearch((const T *){k}, (T *){a}, n, sizeof(T), cmp)}   \
-)
+#define lsearch_T_(T, k, a, n, cmp)  do                               \
+{                                                                     \
+	lsearch((const T *){k}, (T *){a}, n, sizeof(T), cmp);         \
+} while (0)
 
 #define LSEARCH(T, ...)  lsearch_T(T, __VA_ARGS__, CMP(T))
 
