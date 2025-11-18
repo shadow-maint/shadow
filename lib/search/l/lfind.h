@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,20 +12,17 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
-
-#include <assert.h>
+#include "sizeof.h"
 
 
-#define LFIND(k, a, n)                                                \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_))); \
-})
+// lfind_T - linear find type-safe
+#define lfind_T(T, ...)            lfind_T_(typeas(T), __VA_ARGS__)
+#define lfind_T_(T, k, a, n, cmp)                                     \
+(                                                                     \
+	(T *){lfind_((const T *){k}, (const T *){a}, n, sizeof(T), cmp)}\
+)
+
+#define LFIND(T, ...)  lfind_T(T, __VA_ARGS__, CMP(T))
 
 
 inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,

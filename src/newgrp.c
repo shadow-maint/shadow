@@ -619,7 +619,7 @@ int main (int argc, char **argv)
 	 * database. However getgroups() will return the group. So
 	 * if she is listed there already it is ok to grant membership.
 	 */
-	is_member = (LFIND(&grp->gr_gid, gids, ngroups) != NULL);
+	is_member = (LFIND(gid_t, &grp->gr_gid, gids, ngroups) != NULL);
 
 	/*
 	 * For split groups (due to limitations of NIS), check all
@@ -671,9 +671,9 @@ int main (int argc, char **argv)
 	 * If the group doesn't fit, I'll complain loudly and skip this
 	 * part.
 	 */
-	gids = XREALLOC(gids, ngroups + 1, gid_t);
+	gids = xrealloc_T(gids, ngroups + 1, gid_t);
 
-	LSEARCH(&gid, gids, &ngroups);
+	LSEARCH(gid_t, &gid, gids, &ngroups);
 
 	if (setgroups(ngroups, gids) == -1)
 		perror("setgroups");

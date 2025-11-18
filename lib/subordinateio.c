@@ -44,7 +44,7 @@ static /*@null@*/ /*@only@*/void *subordinate_dup (const void *ent)
 	const struct subordinate_range *rangeent = ent;
 	struct subordinate_range *range;
 
-	range = MALLOC(1, struct subordinate_range);
+	range = malloc_T(1, struct subordinate_range);
 	if (NULL == range) {
 		return NULL;
 	}
@@ -280,7 +280,7 @@ static bool append_range(struct subid_range **ranges, const struct subordinate_r
 {
 	struct subid_range  *sr;
 
-	sr = REALLOC(*ranges, n + 1, struct subid_range);
+	sr = realloc_T(*ranges, n + 1, struct subid_range);
 	if (!sr)
 		return false;
 
@@ -968,7 +968,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 			return n;
 	}
 
-	*uids = REALLOCF(*uids, n + 1, uid_t);
+	*uids = reallocf_T(*uids, n + 1, uid_t);
 	if (!*uids)
 		return -1;
 
