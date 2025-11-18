@@ -20,9 +20,9 @@
  */
 
 
-#define a2i(TYPE, n, s, ...)                                                  \
+#define a2i(T, n, s, ...)                                                     \
 (                                                                             \
-	_Generic((void (*)(TYPE, typeof(s))) 0,                               \
+	_Generic((void (*)(T, typeof(s))){},                                  \
 		void (*)(short,              const char *):  a2sh_c,          \
 		void (*)(short,              const void *):  a2sh_c,          \
 		void (*)(short,              char *):        a2sh_nc,         \

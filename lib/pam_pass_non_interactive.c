@@ -49,7 +49,7 @@ static int ni_conv (int num_msg,
 		return PAM_CONV_ERR;
 	}
 
-	responses = CALLOC (num_msg, struct pam_response);
+	responses = calloc_T(num_msg, struct pam_response);
 	if (NULL == responses) {
 		return PAM_CONV_ERR;
 	}
