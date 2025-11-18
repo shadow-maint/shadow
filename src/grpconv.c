@@ -215,7 +215,7 @@ int main (int argc, char **argv)
 			static char *empty = NULL;
 
 			/* add new shadow group entry */
-			bzero(&sgent, sizeof sgent);
+			bzero(&sgent, sizeof(sgent));
 			sgent.sg_namp = gr->gr_name;
 			sgent.sg_passwd = gr->gr_passwd;
 			sgent.sg_adm = &empty;
