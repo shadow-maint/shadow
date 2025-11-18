@@ -49,7 +49,7 @@ putsgent(const struct sgrp *sgrp, FILE *fp)
 		size += strlen (sgrp->sg_mem[i]) + 1;
 	}
 
-	buf = MALLOC(size, char);
+	buf = malloc_T(size, char);
 	if (NULL == buf) {
 		return -1;
 	}

@@ -53,7 +53,7 @@
 	/* we have to start with something */
 	size_t length = 0x100;
 
-	result = MALLOC(1, LOOKUP_TYPE);
+	result = malloc_T(1, LOOKUP_TYPE);
 	if (NULL == result) {
 		goto oom;
 	}
@@ -61,7 +61,7 @@
 	while (true) {
 		int status;
 		LOOKUP_TYPE *resbuf = NULL;
-		buffer = XREALLOC(buffer, length, char);
+		buffer = xrealloc_T(buffer, length, char);
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
 		if ((0 == status) && (resbuf == result)) {
