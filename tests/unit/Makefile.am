@@ -10,6 +10,7 @@ check_PROGRAMS = \
     test_atoi_strtoi \
     test_chkhash \
     test_chkname \
+    test_defarg \
     test_stprintf \
     test_strtcpy \
     test_typetraits \
@@ -72,6 +73,18 @@ test_chkname_LDFLAGS = \
     $(NULL)
 test_chkname_LDADD = \
     $(LIBSHADOW) \
+    $(CMOCKA_LIBS) \
+    $(NULL)
+
+test_defarg_SOURCES = \
+    test_defarg.c \
+    $(NULL)
+test_defarg_CFLAGS = \
+    $(AM_CFLAGS) \
+    $(NULL)
+test_defarg_LDFLAGS = \
+    $(NULL)
+test_defarg_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 
