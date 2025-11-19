@@ -16,7 +16,8 @@
 #include "sizeof.h"
 
 
-#define SNPRINTF(s, fmt, ...)                                                 \
+// stprintf_a - string truncate print formatted array
+#define stprintf_a(s, fmt, ...)                                               \
 (                                                                             \
 	snprintf_(s, countof(s), fmt __VA_OPT__(,) __VA_ARGS__)               \
 )

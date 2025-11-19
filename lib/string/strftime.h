@@ -13,8 +13,8 @@
 #include "sizeof.h"
 
 
-// string format time
-#define STRFTIME(dst, fmt, tm)  strftime(dst, countof(dst), fmt, tm)
+// strftime_a - string format time array
+#define strftime_a(dst, fmt, tm)  strftime(dst, countof(dst), fmt, tm)
 
 
 #endif  // include guard
