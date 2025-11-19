@@ -108,6 +108,7 @@ libshadow_la_SOURCES = \
 	list.c \
 	lockpw.c \
 	loginprompt.c \
+	macro.h \
 	mail.c \
 	motd.c \
 	myname.c \
