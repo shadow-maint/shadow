@@ -63,7 +63,7 @@ static int setrlimit_value (unsigned int resource,
 		limit = RLIM_INFINITY;
 
 	} else {
-		if (a2i(rlim_t, &l, value, NULL, 10, 0, type_max(rlim_t)) == -1
+		if (a2i(rlim_t, &l, value, NULL, 10, 0,) == -1
 		    && errno != ENOTSUP)
 		{
 			return 0;  // FIXME: we could instead throw an error, though.
