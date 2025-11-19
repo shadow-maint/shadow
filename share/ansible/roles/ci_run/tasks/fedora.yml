@@ -8,6 +8,7 @@
     use_backend: dnf4
     name:
       - dnf-plugins-core
+      - expect
       - gawk
       - libcmocka-devel
       - systemd-devel
@@ -18,6 +19,24 @@
     dnf builddep -y shadow-utils
   register: dnf_result
   changed_when: '"Nothing to do" not in dnf_result.stdout'
+
+- name: Temporary workaround to create the newusers PAM service file
+  ansible.builtin.copy:
+    src: /etc/pam.d/chfn
+    dest: /etc/pam.d/newusers
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Temporary workaround to create the groupmems PAM service file
+  ansible.builtin.copy:
+    src: /etc/pam.d/chfn
+    dest: /etc/pam.d/groupmems
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Build configuration
   ansible.builtin.command: >
