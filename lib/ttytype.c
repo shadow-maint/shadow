@@ -48,9 +48,8 @@ void ttytype (const char *line)
 		return;
 	}
 	while (fgets (buf, sizeof buf, fp) == buf) {
-		if (strprefix(buf, "#")) {
+		if (strspn(buf, "#"))
 			continue;
-		}
 
 		stpsep(buf, "\n");
 

@@ -11,6 +11,7 @@
 
 #include <paths.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <assert.h>
 
@@ -105,7 +106,7 @@ extern const char* process_prefix_flag (const char* short_opt, int argc, char **
 			return ""; /* if prefix is "/" then we ignore the flag option */
 		/* should we prevent symbolic link from being used as a prefix? */
 
-		if ( prefix[0] != '/') {
+		if (!strspn(prefix, "/")) {
 			fprintf (log_get_logfd(),
 				 _("%s: prefix must be an absolute path\n"),
 				 log_get_progname());

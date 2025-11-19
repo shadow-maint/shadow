@@ -15,11 +15,11 @@
 
 #ident "$Id$"
 
-#include <assert.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <stdio.h>
-#include <ctype.h>
 
 #include "prototypes.h"
 #include "defines.h"
@@ -28,10 +28,11 @@
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
+
+#include <assert.h>
 
 
 #ifndef USE_PAM
@@ -62,9 +63,9 @@ static void read_env_file (const char *filename)
 		cp = buf;
 		/* ignore whitespace and comments */
 		cp = stpspn(cp, " \t");
-		if (streq(cp, "") || strprefix(cp, "#")) {
+		if (!strcspn(cp, "#"))
 			continue;
-		}
+
 		/*
 		 * ignore lines which don't follow the name=value format
 		 * (for example, the "export NAME" shell commands)
