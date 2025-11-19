@@ -13,6 +13,7 @@
 
 #include "atoi/strtoi/strtoi.h"
 #include "atoi/strtoi/strtou_noneg.h"
+#include "macro.h"
 #include "typetraits.h"
 
 
@@ -21,8 +22,8 @@
 ({                                                                    \
 	T            *n_ = n;                                         \
 	QChar_of(s)  **endp_ = endp;                                  \
-	T            min_ = min;                                      \
-	T            max_ = max;                                      \
+	T            min_ = DEFAULT(type_min(T), min);                \
+	T            max_ = DEFAULT(type_max(T), max);                \
 	                                                              \
 	int  status;                                                  \
 	                                                              \
@@ -53,7 +54,7 @@
 #define a2ul(...)   a2i(unsigned long, __VA_ARGS__)
 #define a2ull(...)  a2i(unsigned long long, __VA_ARGS__)
 
-#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0, type_min(T), type_max(T))
+#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0,,)
 
 #define str2sh(...)    str2i(short, __VA_ARGS__)
 #define str2si(...)    str2i(int, __VA_ARGS__)
