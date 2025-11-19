@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "io/fprintf.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -39,7 +39,7 @@ inline void
 exit_if_null_(void *p)
 {
 	if (p == NULL) {
-		fprintf(log_get_logfd(), "%s: %s\n", log_get_progname(), strerrno());
+		fprinte(log_get_logfd(), "%s", log_get_progname());
 		exit(13);
 	}
 }
