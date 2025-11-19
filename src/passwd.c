@@ -811,9 +811,7 @@ main(int argc, char **argv)
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
 			case 'i':
-				if (a2sl(&inact, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
+				if (a2sl(&inact, optarg, NULL, 0, -1,) == -1) {
 					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					usage (E_BAD_ARG);
@@ -855,9 +853,7 @@ main(int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'w':
-				if (a2sl(&warn, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
+				if (a2sl(&warn, optarg, NULL, 0, -1,) == -1) {
 					(void) eprintf(_("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);
 					usage (E_BAD_ARG);
@@ -866,9 +862,7 @@ main(int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'x':
-				if (a2sl(&age_max, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
+				if (a2sl(&age_max, optarg, NULL, 0, -1,) == -1) {
 					(void) eprintf(_("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);
 					usage (E_BAD_ARG);
