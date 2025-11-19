@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -16,38 +16,16 @@
 
 
 // string prefix
-#define strprefix(s, prefix)                                          \
-({                                                                    \
-	const char  *p_;                                              \
+#define strprefix                                                     \
+((static inline auto *                                                \
+  (auto *s, const char *prefix)                                       \
+  ATTR_STRING(1) ATTR_STRING(2))                                      \
+{                                                                     \
+	if (strncmp(s, prefix, strlen(prefix)) != 0)                  \
+		return NULL;                                          \
                                                                       \
-	p_ = strprefix_(s, prefix);                                   \
-                                                                      \
-	_Generic(s,                                                   \
-		const char *:                     p_,                 \
-		const void *:                     p_,                 \
-		char *:        const_cast(char *, p_),                \
-		void *:        const_cast(char *, p_)                 \
-	);                                                            \
+	return s + strlen(prefix);                                    \
 })
-
-
-ATTR_STRING(1)
-ATTR_STRING(2)
-inline const char *strprefix_(const char *s, const char *prefix);
-
-
-/*
- * Return NULL if s does not start with prefix.
- * Return `s + strlen(prefix)` if s starts with prefix.
- */
-inline const char *
-strprefix_(const char *s, const char *prefix)
-{
-	if (strncmp(s, prefix, strlen(prefix)) != 0)
-		return NULL;
-
-	return s + strlen(prefix);
-}
 
 
 #endif  // include guard

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -16,11 +16,10 @@
 // string returns-pointer substring prefix length
 // Similar to strspn(3), but return a pointer instead of an offset.
 // Similar to strchrnul(3), but search for any bytes not in 'accept'.
-#define stpspn(s, accept)                                                     \
-({                                                                            \
-	__auto_type  s_ = s;                                                  \
-                                                                              \
-	s_ + strspn(s_, accept);                                              \
+#define stpspn                                                        \
+((static inline auto *(auto *s, const char *accept))                  \
+{                                                                     \
+	return s + strspn(s, accept);                                 \
 })
 
 

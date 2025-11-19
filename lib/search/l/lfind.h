@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,33 +12,16 @@
 #include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
-
-#include <assert.h>
 
 
-#define LFIND(k, a, n)                                                \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lfind_(k_, a_, n, sizeof(*k_), CMP(typeof(k_))); \
-})
-
-
-inline void *lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp);
-
-
-inline void *
-lfind_(const void *k, const void *a, size_t n, size_t ksize,
-    typeof(int (const void *k, const void *elt)) *cmp)
-{
-	// lfind(3) wants a pointer to n for historic reasons.
-	return lfind(k, a, &n, ksize, cmp);
-}
+#define LFIND(T, ...)                                                 \
+((static inline const T *                                             \
+  (size_t n;                                                          \
+   const T *k, const T a[n], size_t n))                               \
+{                                                                     \
+	/* lfind(3) wants a pointer to n for historic reasons.  */    \
+	return lfind(k, a, &n, sizeof(T), CMP(T));                    \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
