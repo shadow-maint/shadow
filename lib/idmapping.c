@@ -19,6 +19,8 @@
 # include <sys/prctl.h>
 #endif
 
+#include <a2i/a2i/a2u.h>
+
 #include "alloc/calloc.h"
 #include "alloc/malloc.h"
 #include "atoi/a2i/a2u.h"
