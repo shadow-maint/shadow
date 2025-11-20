@@ -643,7 +643,7 @@ int main (int argc, char **argv)
 		unsigned int  failcount = 0;
 
 		/* Make the login prompt look like we want it */
-		if (gethostname (hostn, sizeof (hostn)) == 0) {
+		if (gethostname(hostn, sizeof(hostn)) == 0) {
 			SNPRINTF(loginprompt, _("%s login: "), hostn);
 		} else {
 			STRTCPY(loginprompt, _("login: "));
@@ -1203,7 +1203,7 @@ int main (int argc, char **argv)
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
 			if (!STRNEQ(ll.ll_host, "")) {
 				printf (_(" from %.*s"),
-				        (int) sizeof ll.ll_host, ll.ll_host);
+				        (int) sizeof(ll.ll_host), ll.ll_host);
 			}
 #endif
 			printf (".\n");

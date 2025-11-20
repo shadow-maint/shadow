@@ -93,7 +93,7 @@ subordinate_parse(const char *line)
 	 * Copy the string to a temporary buffer so the substrings can
 	 * be modified to be NULL terminated.
 	 */
-	if (strlen (line) >= sizeof rangebuf)
+	if (strlen(line) >= sizeof(rangebuf))
 		return NULL;	/* fail if too long */
 	strcpy (rangebuf, line);
 

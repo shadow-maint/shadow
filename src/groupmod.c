@@ -243,7 +243,7 @@ grp_update(void)
 			 * shadowed password, we force the creation of a
 			 * gshadow entry when a new password is requested.
 			 */
-			bzero(&sgrp, sizeof sgrp);
+			bzero(&sgrp, sizeof(sgrp));
 			sgrp.sg_namp   = xstrdup (grp.gr_name);
 			sgrp.sg_passwd = xstrdup (grp.gr_passwd);
 			sgrp.sg_adm    = &empty;

@@ -148,7 +148,7 @@ static void fail_exit(int status)
  */
 static void new_grent (struct group *grent)
 {
-	memzero (grent, sizeof *grent);
+	memzero(grent, sizeof(*grent));
 	grent->gr_name = group_name;
 	if (pflg) {
 		grent->gr_passwd = group_passwd;
@@ -168,7 +168,7 @@ static void new_grent (struct group *grent)
  */
 static void new_sgent (struct sgrp *sgent)
 {
-	memzero (sgent, sizeof *sgent);
+	memzero(sgent, sizeof(*sgent));
 	sgent->sg_namp = group_name;
 	if (pflg) {
 		sgent->sg_passwd = group_passwd;
