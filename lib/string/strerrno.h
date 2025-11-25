@@ -13,7 +13,7 @@
 
 
 // strerrno - string errno
-#define strerrno()  ((const char *){strerror(errno)})
+#define strerrno()  ({(const char *){strerror(errno)};})
 
 
 #endif  // include guard
