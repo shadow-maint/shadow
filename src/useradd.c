@@ -2443,7 +2443,10 @@ int main (int argc, char **argv)
 #endif
 	unsigned long subuid_count = 0;
 	unsigned long subgid_count = 0;
-	struct option_flags  flags;
+	struct option_flags  flags = {
+		.chroot = false,
+		.prefix = false,
+	};
 	bool process_selinux;
 
 	log_set_progname(Prog);
