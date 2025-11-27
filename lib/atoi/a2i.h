@@ -53,7 +53,7 @@
 #define a2ul(...)   a2i(unsigned long, __VA_ARGS__)
 #define a2ull(...)  a2i(unsigned long long, __VA_ARGS__)
 
-#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0, type_min(T), type_max(T))
+#define str2i(T, ...)  a2i(T, __VA_ARGS__, NULL, 0, minof(T), maxof(T))
 
 #define str2sh(...)    str2i(short, __VA_ARGS__)
 #define str2si(...)    str2i(int, __VA_ARGS__)
