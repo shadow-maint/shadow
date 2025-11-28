@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,22 +9,18 @@
 #include "config.h"
 
 #include <search.h>
+#include <stddef.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
-
-#include <assert.h>
 
 
-#define LSEARCH(k, a, n)                                              \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lsearch(k_, a_, n, sizeof(*k_), CMP(typeof(k_)));\
-})
+#define LSEARCH(T, ...)                                               \
+((static inline void                                                  \
+  (size_t *n;                                                         \
+   const T *k, T a[*n], size_t *n))                                   \
+{                                                                     \
+	lsearch(k, a, n, sizeof(T), CMP(T));                          \
+}(__VA_ARGS__))
 
 
 #endif  // include guard
