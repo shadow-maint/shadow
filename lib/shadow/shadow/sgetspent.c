@@ -10,8 +10,8 @@
 
 #include "shadow/shadow/sgetspent.h"
 
-#ifndef HAVE_SGETSPENT
-
+#include <errno.h>
+#include <shadow.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,11 +19,13 @@
 #include <string.h>
 
 #include "atoi/a2i.h"
+#include "alloc/malloc.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "sizeof.h"
 #include "string/strcmp/streq.h"
+#include "string/strcpy/strtcpy.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
 
@@ -32,123 +34,117 @@
 #define	OFIELDS	5
 
 
-/*
- * sgetspent - convert string in shadow file format to (struct spwd *)
- */
+#ifndef HAVE_SGETSPENT
+// from-string get shadow password entry
 struct spwd *
 sgetspent(const char *s)
 {
-	static char        *dup = NULL;
-	static struct spwd spwd;
+	static char         *buf = NULL;
+	static struct spwd  spent = {};
 
-	char *fields[FIELDS];
-	size_t  i;
+	int          e;
+	size_t       size;
+	struct spwd  *dummy;
 
-	free(dup);
-	dup = strdup(s);
-	if (dup == NULL)
+	size = strlen(s) + 1;
+
+	free(buf);
+	buf = MALLOC(size, char);
+	if (buf == NULL)
 		return NULL;
 
-	stpsep(dup, "\n");
+	e = sgetspent_r(s, &spent, buf, size, &dummy);
+	if (e != 0) {
+		errno = e;
+		return NULL;
+	}
 
-	i = strsep2arr(dup, ":", countof(fields), fields);
+	return &spent;
+}
+#endif
+
+
+#ifndef HAVE_SGETSPENT_R
+// from-string get shadow password entry re-entrant
+int
+sgetspent_r(size_t size;
+    const char *restrict s, struct spwd *spent, char buf[size], size_t size,
+    struct spwd **dummy)
+{
+	char    *fields[FIELDS];
+	size_t  i;
+
+	// 'dummy' exists only for historic reasons.
+	if (dummy != NULL)
+		*dummy = spent;
+
+	if (strtcpy(buf, s, size) == -1)
+		return errno;
+
+	stpsep(buf, "\n");
+
+	i = strsep2arr(buf, ":", countof(fields), fields);
 	if (i == countof(fields) - 1)
 		fields[i++] = "";
 	if (i != countof(fields) && i != OFIELDS)
-		return NULL;
+		return EINVAL;
 
-	/*
-	 * Start populating the structure.  The fields are all in
-	 * static storage, as is the structure we pass back.
-	 */
-
-	spwd.sp_namp = fields[0];
-	spwd.sp_pwdp = fields[1];
-
-	/*
-	 * Get the last changed date.  For all of the integer fields,
-	 * we check for proper format.  It is an error to have an
-	 * incorrectly formatted number.
-	 */
+	spent->sp_namp = fields[0];
+	spent->sp_pwdp = fields[1];
 
 	if (streq(fields[2], ""))
-		spwd.sp_lstchg = -1;
-	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the minimum period between password changes.
-	 */
+		spent->sp_lstchg = -1;
+	else if (a2sl(&spent->sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	if (streq(fields[3], ""))
-		spwd.sp_min = -1;
-	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the maximum number of days a password is valid.
-	 */
+		spent->sp_min = -1;
+	else if (a2sl(&spent->sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	if (streq(fields[4], ""))
-		spwd.sp_max = -1;
-	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * If there are only OFIELDS fields (this is a SVR3.2 /etc/shadow
-	 * formatted file), initialize the other field members to -1.
-	 */
+		spent->sp_max = -1;
+	else if (a2sl(&spent->sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	if (i == OFIELDS) {
-		spwd.sp_warn   = -1;
-		spwd.sp_inact  = -1;
-		spwd.sp_expire = -1;
-		spwd.sp_flag   = SHADOW_SP_FLAG_UNSET;
+		/*
+		 * If there are only OFIELDS fields, this is a SVr3.2
+		 * /etc/shadow formatted file.  Initialize the other
+		 * field members to -1.
+		 */
+		spent->sp_warn   = -1;
+		spent->sp_inact  = -1;
+		spent->sp_expire = -1;
+		spent->sp_flag   = SHADOW_SP_FLAG_UNSET;
 
-		return &spwd;
+		return 0;
 	}
 
-	/*
-	 * Get the number of days of password expiry warning.
-	 */
-
 	if (streq(fields[5], ""))
-		spwd.sp_warn = -1;
-	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the number of days of inactivity before an account is
-	 * disabled.
-	 */
+		spent->sp_warn = -1;
+	else if (a2sl(&spent->sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	if (streq(fields[6], ""))
-		spwd.sp_inact = -1;
-	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the number of days after the epoch before the account is
-	 * set to expire.
-	 */
+		spent->sp_inact = -1;
+	else if (a2sl(&spent->sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	if (streq(fields[7], ""))
-		spwd.sp_expire = -1;
-	else if (a2sl(&spwd.sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+		spent->sp_expire = -1;
+	else if (a2sl(&spent->sp_expire, fields[7], NULL, 0, 0, LONG_MAX) == -1)
+		return errno;
 
 	/*
 	 * This field is reserved for future use.  But it isn't supposed
 	 * to have anything other than a valid integer in it.
 	 */
-
 	if (streq(fields[8], ""))
-		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-	else if (str2ul(&spwd.sp_flag, fields[8]) == -1)
-		return NULL;
+		spent->sp_flag = SHADOW_SP_FLAG_UNSET;
+	else if (str2ul(&spent->sp_flag, fields[8]) == -1)
+		return errno;
 
-	return (&spwd);
+	return 0;
 }
-#else
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif
