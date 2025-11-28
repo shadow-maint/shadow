@@ -32,6 +32,7 @@
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
