@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2023-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -12,14 +12,21 @@
 #include <stdlib.h>
 
 #include "attr.h"
+#include "sizeof.h"
 
 
-#define REALLOCF(p, n, type)                                                  \
-(                                                                             \
-	_Generic(p, type *: (type *) reallocarrayf(p, (n) ?: 1, sizeof(type)))\
-)
+// reallocf_T - realloc free-on-error type-safe
+#define reallocf_T(p, n, T)   reallocf_T_(p, n, typeas(T))
+#define reallocf_T_(p, n, T)                                          \
+({                                                                    \
+	_Generic(p, T *: 0);                                          \
+	(T *){reallocarrayf_(p, n, sizeof(T))};                       \
+})
+
+#define reallocarrayf_(p, n, size)  reallocarrayf(p, (n) ?: 1, (size) ?: 1)
 
 
+// reallocarrayf - realloc array free-on-error
 ATTR_ALLOC_SIZE(2, 3)
 ATTR_MALLOC(free)
 inline void *reallocarrayf(void *p, size_t nmemb, size_t size);

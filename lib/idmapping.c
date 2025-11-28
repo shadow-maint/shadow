@@ -46,7 +46,7 @@ get_map_ranges(int ranges, int argc, char **argv)
 		return NULL;
 	}
 
-	mappings = CALLOC(ranges, struct map_range);
+	mappings = calloc_T(ranges, struct map_range);
 	if (!mappings) {
 		fprintf(log_get_logfd(), _( "%s: Memory allocation failure\n"),
 			log_get_progname());
@@ -176,7 +176,7 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 #endif
 
 	bufsize = (ULONG_DIGITS + 1) * 3 * ranges + 1;
-	pos = buf = XMALLOC(bufsize, char);
+	pos = buf = xmalloc_T(bufsize, char);
 	end = buf + bufsize;
 
 	/* Build the mapping command */

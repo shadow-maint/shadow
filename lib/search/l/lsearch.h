@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -11,20 +11,19 @@
 #include <search.h>
 
 #include "search/cmp/cmp.h"
-#include "typetraits.h"
-
-#include <assert.h>
+#include "sizeof.h"
 
 
-#define LSEARCH(k, a, n)                                              \
-({                                                                    \
-	__auto_type  k_ = k;                                          \
-	__auto_type  a_ = a;                                          \
-                                                                      \
-	static_assert(is_same_typeof(k_, a_), "");                    \
-                                                                      \
-	(typeof(k_)) lsearch(k_, a_, n, sizeof(*k_), CMP(typeof(k_)));\
-})
+// lsearch_T - linear search-and-insert type-safe
+#define lsearch_T(T, ...)            lsearch_T_(typeas(T), __VA_ARGS__)
+#define lsearch_T_(T, k, a, n, cmp)  do                               \
+{                                                                     \
+	_Generic(k, T *: 0, const T *: 0);                            \
+	_Generic(a, T *: 0);                                          \
+	lsearch(k, a, n, sizeof(T), cmp);                             \
+} while (0)
+
+#define LSEARCH(T, ...)  lsearch_T(T, __VA_ARGS__, CMP(T))
 
 
 #endif  // include guard

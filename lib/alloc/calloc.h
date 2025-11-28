@@ -11,15 +11,19 @@
 #include <stdlib.h>
 
 #include "exit_if_null.h"
+#include "sizeof.h"
 
 
-#define CALLOC(n, type)                                                       \
-(                                                                             \
-	(type *) calloc(n, sizeof(type))                                      \
-)
+// calloc_T - calloc type-safe
+#define calloc_T(n, T)   calloc_T_(n, typeas(T))
+#define calloc_T_(n, T)                                               \
+({                                                                    \
+	(T *){calloc(n, sizeof(T))};                                  \
+})
 
 
-#define XCALLOC(n, type)  exit_if_null(CALLOC(n, type))
+// xcalloc_T - exit-on-error calloc type-safe
+#define xcalloc_T(n, T)  exit_if_null(calloc_T(n, T))
 
 
 #endif  // include guard

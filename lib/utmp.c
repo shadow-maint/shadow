@@ -36,6 +36,7 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strncpy.h"
+#include "string/strdup/memdup.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
@@ -167,14 +168,14 @@ get_current_utmp(pid_t main_pid)
 				break; /* Perfect match, stop the search */
 
 			if (NULL == ut_by_pid) {
-				ut_by_pid = XMALLOC(1, struct utmpx);
+				ut_by_pid = xmalloc_T(1, struct utmpx);
 				*ut_by_pid = *ut;
 			}
 
 		} else if (   (NULL == ut_by_line)
 			   && (LOGIN_PROCESS == ut->ut_type) /* Be more picky when matching by 'ut_line' only */
 			   && (is_my_tty(ut->ut_line))) {
-			ut_by_line = XMALLOC(1, struct utmpx);
+			ut_by_line = xmalloc_T(1, struct utmpx);
 			*ut_by_line = *ut;
 		}
 	}
@@ -182,13 +183,8 @@ get_current_utmp(pid_t main_pid)
 	if (NULL == ut)
 		ut = ut_by_pid ?: ut_by_line;
 
-	if (NULL != ut) {
-		struct utmpx  *ut_copy;
-
-		ut_copy = XMALLOC(1, struct utmpx);
-		memcpy(ut_copy, ut, sizeof(*ut));
-		ut = ut_copy;
-	}
+	if (NULL != ut)
+		ut = memdup_T(ut, struct utmpx);
 
 	free(ut_by_line);
 	free(ut_by_pid);
@@ -284,7 +280,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 	line = strprefix(line, "/dev/") ?: line;
 
-	utent = XCALLOC(1, struct utmpx);
+	utent = xcalloc_T(1, struct utmpx);
 
 
 	utent->ut_type = USER_PROCESS;
