@@ -26,6 +26,7 @@
 #include "shadowlog_internal.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
+#include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
 
@@ -254,30 +255,38 @@ static shadowtcb_status unlink_suffs (const char *user)
 }
 
 /* path should be a relative existing tcb directory */
-static shadowtcb_status rmdir_leading (char *path)
+static shadowtcb_status
+rmdir_leading(const char *relpath)
 {
-	char *ind, *dir;
+	char  *ind, *path, *p;
 	shadowtcb_status ret = SHADOWTCB_SUCCESS;
-	while ((ind = strrchr (path, '/'))) {
+
+	path = aprintf(TCB_DIR "/%s", relpath);
+	if (path == NULL)
+		goto oom;
+
+	p = strprefix(path, TCB_DIR "/");
+
+	while ((ind = strrchr(p, '/'))) {
 		stpcpy(ind, "");
-		dir = aprintf(TCB_DIR "/%s", path);
-		if (dir == NULL) {
-			OUT_OF_MEMORY;
-			return SHADOWTCB_FAILURE;
-		}
-		if (rmdir (dir) != 0) {
+
+		if (rmdir(path) != 0) {
 			if (errno != ENOTEMPTY) {
 				fprintf (shadow_logfd,
 				         _("%s: Cannot remove directory %s: %s\n"),
-				         shadow_progname, dir, strerrno());
+				         shadow_progname, path, strerrno());
 				ret = SHADOWTCB_FAILURE;
 			}
-			free (dir);
 			break;
 		}
-		free (dir);
 	}
+
+	free(path);
 	return ret;
+
+oom:
+	OUT_OF_MEMORY;
+	return SHADOWTCB_FAILURE;
 }
 
 static shadowtcb_status move_dir (const char *user_newname, uid_t user_newid)
