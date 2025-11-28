@@ -11,15 +11,22 @@
 #include <stdlib.h>
 
 #include "exit_if_null.h"
+#include "sizeof.h"
 
 
-#define REALLOC(p, n, type)                                                   \
-(                                                                             \
-	_Generic(p, type *: (type *) reallocarray(p, (n) ?: 1, sizeof(type))) \
-)
+// realloc_T - realloc type-safe
+#define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
+#define realloc_T_(p, n, T)                                           \
+({                                                                    \
+	_Generic(p, T *: 0);                                          \
+	(T *){reallocarray_(p, n, sizeof(T))};                        \
+})
+
+#define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
 
 
-#define XREALLOC(p, n, type)  exit_if_null(REALLOC(p, n, type))
+// xrealloc_T - exit-on-error realloc type-safe
+#define xrealloc_T(p, n, T)  exit_if_null(realloc_T(p, n, T))
 
 
 #endif  // include guard

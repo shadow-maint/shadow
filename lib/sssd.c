@@ -40,7 +40,7 @@ sssd_flush_cache(int dbflags)
 	if (rv == -1 && errno == ENOENT)
 		return 0;
 
-	sss_cache_args = MALLOC(4, char);
+	sss_cache_args = malloc_T(4, char);
 	if (sss_cache_args == NULL) {
 	    return -1;
 	}
