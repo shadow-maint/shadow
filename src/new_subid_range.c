@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "atoi/a2i.h"
+#include "io/fprintf/eprintf.h"
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"
@@ -16,10 +17,10 @@ static const char Prog[] = "new_subid_range";
 
 static void usage(void)
 {
-	fprintf(stderr, "Usage: %s [-g] [-n] user count\n", Prog);
-	fprintf(stderr, "    Find a subuid (or with -g, subgid) range for user\n");
-	fprintf(stderr, "    If -n is given, a new range will be created even if one exists\n");
-	fprintf(stderr, "    count defaults to 65536\n");
+	eprintf("Usage: %s [-g] [-n] user count\n", Prog);
+	eprintf("    Find a subuid (or with -g, subgid) range for user\n");
+	eprintf("    If -n is given, a new range will be created even if one exists\n");
+	eprintf("    count defaults to 65536\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -55,7 +56,7 @@ int main(int argc, char *argv[])
 		ok = subid_grant_uid_range(&range, !makenew);
 
 	if (!ok) {
-		fprintf(stderr, "Failed creating new id range\n");
+		eprintf("Failed creating new id range\n");
 		exit(EXIT_FAILURE);
 	}
 	printf("Subuid range %lu:%lu\n", range.start, range.count);
