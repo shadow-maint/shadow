@@ -199,10 +199,10 @@ libshadow_la_SOURCES = \
 	string/memset/memzero.h \
 	string/sprintf/aprintf.c \
 	string/sprintf/aprintf.h \
-	string/sprintf/snprintf.c \
-	string/sprintf/snprintf.h \
-	string/sprintf/stpeprintf.c \
-	string/sprintf/stpeprintf.h \
+	string/sprintf/seprintf.c \
+	string/sprintf/seprintf.h \
+	string/sprintf/stprintf.c \
+	string/sprintf/stprintf.h \
 	string/strchr/strchrcnt.c \
 	string/strchr/strchrcnt.h \
 	string/strchr/strchrscnt.c \
@@ -225,6 +225,8 @@ libshadow_la_SOURCES = \
 	string/strcpy/strncat.h \
 	string/strcpy/strncpy.c \
 	string/strcpy/strncpy.h \
+	string/strcpy/strtcat.c \
+	string/strcpy/strtcat.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
 	string/strdup/strdup.c \
