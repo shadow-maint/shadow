@@ -134,7 +134,7 @@ test_is_valid_user_name_long(void **)
 	char    *name;
 
 	max = sysconf(_SC_LOGIN_NAME_MAX);
-	name = MALLOC(max + 1, char);
+	name = malloc_T(max + 1, char);
 	assert_true(name != NULL);
 
 	memset(name, '_', max);
