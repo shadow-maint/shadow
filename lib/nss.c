@@ -17,7 +17,6 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -81,7 +80,7 @@ nss_init(const char *nsswitch_path) {
 	}
 	p = NULL;
 	while (getline(&line, &len, nssfp) != -1) {
-		if (strprefix(line, "#"))
+		if (!strcspn(line, "#"))
 			continue;
 		if (strlen(line) < 8)
 			continue;
