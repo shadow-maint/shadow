@@ -28,6 +28,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -68,6 +69,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
+#include "string/strspn/stprspn.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
 
@@ -547,10 +549,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		         "change user '%s' home from '%s' to '%s'",
 		         pwent->pw_name, pwent->pw_dir, user_newhome));
 
-		if (strlen(user_newhome) > 1
-			&& '/' == user_newhome[strlen(user_newhome)-1]) {
-			user_newhome[strlen(user_newhome)-1]='\0';
-		}
+		if (!streq(user_newhome, ""))
+			stpcpy(stprspn(user_newhome + 1, "/"), "");
 
 		pwent->pw_dir = user_newhome;
 	}
