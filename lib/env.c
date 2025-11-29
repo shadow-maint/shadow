@@ -22,8 +22,7 @@
 #include "defines.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/snprintf.h"
-#include "string/sprintf/aprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 
