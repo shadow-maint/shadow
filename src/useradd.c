@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
@@ -77,6 +75,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
+#include "time/date.h"
 
 
 #ifndef SKEL_DIR
@@ -957,11 +956,7 @@ static void new_spent (struct spwd *spent)
 	memzero(spent, sizeof(*spent));
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = gettime () / DAY;
-	if (0 == spent->sp_lstchg) {
-		/* Better disable aging than requiring a password change */
-		spent->sp_lstchg = -1;
-	}
+	spent->sp_lstchg = date_or_SDE();
 	if (!rflg) {
 		spent->sp_min = getdef_num ("PASS_MIN_DAYS", -1);
 		spent->sp_max = getdef_num ("PASS_MAX_DAYS", -1);

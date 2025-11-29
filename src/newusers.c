@@ -17,8 +17,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -61,6 +59,7 @@
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
+#include "time/date.h"
 
 struct option_flags {
 	bool chroot;
@@ -551,12 +550,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			}
 			spent.sp_pwdp = cp;
 		}
-		spent.sp_lstchg = gettime () / DAY;
-		if (0 == spent.sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			spent.sp_lstchg = -1;
-		}
+		spent.sp_lstchg = date_or_SDE();
 		return (spw_update (&spent) == 0);
 	}
 
@@ -608,11 +602,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 */
 	spent.sp_pwdp = "!";
 #endif
-	spent.sp_lstchg = gettime () / DAY;
-	if (0 == spent.sp_lstchg) {
-		/* Better disable aging than requiring a password change */
-		spent.sp_lstchg = -1;
-	}
+	spent.sp_lstchg = date_or_SDE();
 	spent.sp_min    = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */
 	spent.sp_max    = getdef_num ("PASS_MAX_DAYS", 10000);
