@@ -24,7 +24,7 @@ inline size_t strrcspn(const char *s, const char *reject);
 inline size_t
 strrcspn(const char *s, const char *reject)
 {
-	char  *p;
+	const char  *p;
 
 	p = strnul(s);
 	while (p > s) {
