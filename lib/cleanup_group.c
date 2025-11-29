@@ -25,7 +25,7 @@ void cleanup_report_add_group (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR, "failed to add group %s", name));
+	SYSLOG(LOG_ERR, "failed to add group %s", name);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP,
 	              "",
@@ -43,7 +43,7 @@ void cleanup_report_del_group (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR, "failed to remove group %s", name));
+	SYSLOG(LOG_ERR, "failed to remove group %s", name);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP,
 	              "",
@@ -57,10 +57,7 @@ void cleanup_report_mod_group (void *cleanup_info)
 	const struct cleanup_info_mod *info;
 	info = (const struct cleanup_info_mod *)cleanup_info;
 
-	SYSLOG ((LOG_ERR,
-	         "failed to change %s (%s)",
-	         gr_dbname (),
-	         info->action));
+	SYSLOG(LOG_ERR, "failed to change %s (%s)", gr_dbname(), info->action);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_GRP_MGMT,
 	              info->audit_msg,
@@ -75,10 +72,7 @@ void cleanup_report_mod_gshadow (void *cleanup_info)
 	const struct cleanup_info_mod *info;
 	info = (const struct cleanup_info_mod *)cleanup_info;
 
-	SYSLOG ((LOG_ERR,
-	         "failed to change %s (%s)",
-	         sgr_dbname (),
-	         info->action));
+	SYSLOG(LOG_ERR, "failed to change %s (%s)", sgr_dbname(), info->action);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_GRP_MGMT,
 	              info->audit_msg,
@@ -98,7 +92,7 @@ void cleanup_report_add_group_group (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, gr_dbname ()));
+	SYSLOG(LOG_ERR, "failed to add group %s to %s", name, gr_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP,
 	              "adding-group",
@@ -118,7 +112,7 @@ void cleanup_report_add_group_gshadow (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR, "failed to add group %s to %s", name, sgr_dbname ()));
+	SYSLOG(LOG_ERR, "failed to add group %s to %s", name, sgr_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_GRP_MGMT,
 	              "adding-shadow-group",
@@ -139,9 +133,7 @@ void cleanup_report_del_group_group (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR,
-	         "failed to remove group %s from %s",
-	         name, gr_dbname ()));
+	SYSLOG(LOG_ERR, "failed to remove group %s from %s", name, gr_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP,
 	              "removing-group",
@@ -162,9 +154,7 @@ void cleanup_report_del_group_gshadow (void *group_name)
 {
 	const char *name = group_name;
 
-	SYSLOG ((LOG_ERR,
-	         "failed to remove group %s from %s",
-	         name, sgr_dbname ()));
+	SYSLOG(LOG_ERR, "failed to remove group %s from %s", name, sgr_dbname());
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_GRP_MGMT,
 	              "removing-shadow-group",
@@ -187,7 +177,7 @@ void cleanup_unlock_group (void *process_selinux)
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking-group",
 		                      SHADOW_AUDIT_FAILURE);
@@ -209,7 +199,7 @@ void cleanup_unlock_gshadow (void *process_selinux)
 		fprintf (log_get_logfd(),
 		         _("%s: failed to unlock %s\n"),
 		         log_get_progname(), sgr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 #ifdef WITH_AUDIT
 		audit_logger_message ("unlocking-gshadow",
 		                      SHADOW_AUDIT_FAILURE);
