@@ -43,7 +43,7 @@ static char *group_db_file = NULL;
 static char *sgroup_db_file = NULL;
 static char *suid_db_file = NULL;
 static char *sgid_db_file = NULL;
-static char *def_conf_file = NULL;
+MAYBE_UNUSED static char *def_conf_file = NULL;
 static FILE* fp_pwent = NULL;
 static FILE* fp_grent = NULL;
 
