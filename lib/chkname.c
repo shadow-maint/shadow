@@ -63,10 +63,7 @@ is_valid_name(const char *name, bool badnames)
 
 	/*
 	 * User/group names must match BRE regex:
-	 *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
-	 *
-	 * as a non-POSIX, extension, allow "$" as the last char for
-	 * sake of Samba 3.x "add machine script"
+	 *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*
 	 */
 
 	if (!((*name >= 'a' && *name <= 'z') ||
@@ -85,8 +82,7 @@ is_valid_name(const char *name, bool badnames)
 		      (*name >= '0' && *name <= '9') ||
 		      *name == '_' ||
 		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
+		      *name == '-'
 		     ))
 		{
 			errno = EILSEQ;
