@@ -653,8 +653,6 @@ fi
 
 AC_CHECK_FUNC([fgetpwent_r], [AC_DEFINE([HAVE_FGETPWENT_R], [1], [Defined to 1 if you have the declaration of 'fgetpwent_r'])])
 
-AC_DEFINE_UNQUOTED([SHELL], ["$SHELL"], [The default shell.])
-
 AM_GNU_GETTEXT_VERSION([0.19])
 AM_GNU_GETTEXT([external], [need-ngettext])
 AM_CONDITIONAL([USE_NLS], [test "x$USE_NLS" = "xyes"])

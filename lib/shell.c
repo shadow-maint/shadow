@@ -9,10 +9,10 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <stdio.h>
 #include <errno.h>
+#include <paths.h>
+#include <stdio.h>
+
 #include "prototypes.h"
 #include "defines.h"
 #include "string/sprintf/snprintf.h"
@@ -65,7 +65,7 @@ int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 		 * Assume this is a shell script (with no shebang).
 		 * Interpret it with /bin/sh
 		 */
-		(void) execle (SHELL, "sh", "-", file, (char *) NULL, envp);
+		(void) execle(_PATH_BSHELL, "sh", "-", file, (char *) NULL, envp);
 		err = errno;
 	}
 
