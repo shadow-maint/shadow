@@ -14,6 +14,7 @@
 #include "config.h"
 
 #include <ctype.h>
+#include <paths.h>
 #include <pwd.h>
 #include <stddef.h>
 #include <sys/types.h>
@@ -136,7 +137,7 @@ void setup_env (struct passwd *info)
 
 	if ((NULL == info->pw_shell) || streq(info->pw_shell, "")) {
 		free (info->pw_shell);
-		info->pw_shell = xstrdup (SHELL);
+		info->pw_shell = xstrdup(_PATH_BSHELL);
 	}
 
 	addenv ("SHELL", info->pw_shell);
