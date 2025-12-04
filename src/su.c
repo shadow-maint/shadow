@@ -34,6 +34,7 @@
 
 #include <getopt.h>
 #include <grp.h>
+#include <paths.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -261,7 +262,7 @@ static void execve_shell (const char *shellname,
 			n_args--;
 		}
 
-		(void) execve (SHELL, targs, envp);
+		(void) execve(_PATH_BSHELL, targs, envp);
 	} else {
 		errno = err;
 	}
@@ -456,7 +457,7 @@ static void usage (int status)
 	         "  -m, -p,\n"
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
-	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
+	         "  -s, --shell SHELL             use SHELL instead of the system default\n"
 	         "\n"
 	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
@@ -1081,7 +1082,7 @@ int main (int argc, char **argv)
 	 * Set the default shell.
 	 */
 	if ((NULL == shellstr) || streq(shellstr, "")) {
-		shellstr = SHELL;
+		shellstr = _PATH_BSHELL;
 	}
 
 	sulog (caller_tty, true, caller_name, name);	/* save SU information */
