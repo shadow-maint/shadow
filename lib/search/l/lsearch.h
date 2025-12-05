@@ -18,8 +18,8 @@
 #define lsearch_T(T, ...)            lsearch_T_(typeas(T), __VA_ARGS__)
 #define lsearch_T_(T, k, a, n, cmp)                                   \
 ({                                                                    \
-	_Generic(k, T *: 0, const T *: 0);                            \
-	_Generic(a, T *: 0);                                          \
+	_Generic(k, T *: (void)0, const T *: (void)0);                \
+	_Generic(a, T *: (void)0);                                    \
 	(T *) lsearch(k, a, n, sizeof(T), cmp);                       \
 })
 
