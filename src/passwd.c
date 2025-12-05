@@ -138,9 +138,8 @@ static void print_status (const struct passwd *);
 NORETURN static void fail_exit (int, bool);
 NORETURN static void oom (bool process_selinux);
 static char *update_crypt_pw (char *, bool);
-static void update_noshadow (struct option_flags *flags);
-
-static void update_shadow (struct option_flags *flags);
+static void update_noshadow(const struct option_flags *flags);
+static void update_shadow(const struct option_flags *flags);
 
 /*
  * usage - print command usage and exit
@@ -556,7 +555,7 @@ static char *update_crypt_pw (char *cp, bool process_selinux)
 }
 
 
-static void update_noshadow (struct option_flags *flags)
+static void update_noshadow(const struct option_flags *flags)
 {
 	const struct passwd *pw;
 	struct passwd *npw;
@@ -613,7 +612,7 @@ static void update_noshadow (struct option_flags *flags)
 	pw_locked = false;
 }
 
-static void update_shadow (struct option_flags *flags)
+static void update_shadow(const struct option_flags *flags)
 {
 	const struct spwd *sp;
 	struct spwd *nsp;
@@ -746,7 +745,7 @@ main(int argc, char **argv)
 	char *cp;		/* Miscellaneous character pointing  */
 
 	const struct spwd *sp;	/* Shadow file entry for user   */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
 	sanitize_env ();

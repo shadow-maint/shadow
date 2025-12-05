@@ -67,8 +67,8 @@ static bool is_shadow_grp;
 /* local function prototypes */
 NORETURN static void usage (int status);
 static void grp_update (void);
-static void close_files (struct option_flags *flags);
-static void open_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
+static void open_files(const struct option_flags *flags);
 static void group_busy (gid_t gid);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 
@@ -152,7 +152,7 @@ static void grp_update (void)
  *	close_files() closes all of the files that were opened for this
  *	new group.  This causes any modified entries to be written out.
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -214,7 +214,7 @@ static void close_files (struct option_flags *flags)
  *
  *	open_files() opens the two group files.
  */
-static void open_files (struct option_flags *flags)
+static void open_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -368,7 +368,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);

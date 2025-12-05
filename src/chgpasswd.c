@@ -82,7 +82,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
 static void check_perms (void);
 static void open_files (bool process_selinux);
-static void close_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 
 /*
  * fail_exit - exit with a failure code after unlocking the files
@@ -386,7 +386,7 @@ static void open_files (bool process_selinux)
 /*
  * close_files - close and unlock the group databases
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -440,7 +440,7 @@ int main (int argc, char **argv)
 	struct group newgr;
 	bool errors = false;
 	intmax_t line = 0;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

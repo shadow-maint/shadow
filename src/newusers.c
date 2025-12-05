@@ -117,9 +117,9 @@ static int update_passwd (struct passwd *, const char *);
 static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
-static void check_perms (struct option_flags *flags);
+static void check_perms(const struct option_flags *flags);
 static void open_files (bool process_selinux);
-static void close_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 
 extern int allow_bad_names;
 
@@ -797,7 +797,7 @@ static void check_flags (void)
  *
  *	It will not return if the user is not allowed.
  */
-static void check_perms (struct option_flags *flags)
+static void check_perms(const struct option_flags *flags)
 {
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
@@ -947,7 +947,7 @@ static void open_files (bool process_selinux)
 /*
  * close_files - close and unlock the password, group and shadow databases
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -1068,7 +1068,7 @@ int main (int argc, char **argv)
 	char **passwords = NULL;
 	size_t nusers = 0;
 #endif				/* USE_PAM */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

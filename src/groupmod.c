@@ -108,10 +108,10 @@ static void grp_update (void);
 static void check_new_gid (void);
 static void check_new_name (void);
 static void process_flags (int, char **, struct option_flags *);
-static void lock_files (struct option_flags *flags);
+static void lock_files(const struct option_flags *flags);
 static void prepare_failure_reports (void);
 static void open_files (void);
-static void close_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 
@@ -487,7 +487,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *	close_files() closes all of the files that were opened for this new
  *	group. This causes any modified entries to be written out.
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -669,7 +669,7 @@ static void prepare_failure_reports (void)
  *
  *	lock_files() locks the group, gshadow, and passwd databases.
  */
-static void lock_files (struct option_flags *flags)
+static void lock_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -787,7 +787,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 
 	log_set_progname(Prog);
 	log_set_logfd(stderr);

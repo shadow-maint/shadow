@@ -207,9 +207,9 @@ static void update_gshadow(const struct sgrp *sgrp, bool process_selinux);
 static void grp_update (bool process_selinux);
 
 static void process_flags (int, char **, struct option_flags *);
-static void close_files (struct option_flags *);
+static void close_files(const struct option_flags *);
 static void open_files (bool process_selinux);
-static void usr_update (struct option_flags *flags);
+static void usr_update(const struct option_flags *flags);
 static void move_home (bool process_selinux);
 #ifdef ENABLE_LASTLOG
 static void update_lastlog (void);
@@ -1436,7 +1436,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
  *	close_files() closes all of the files that were opened for this new
  *	user. This causes any modified entries to be written out.
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -1680,7 +1680,7 @@ static void open_files (bool process_selinux)
  *	usr_update() creates the password file entries for this user and
  *	will update the group entries if required.
  */
-static void usr_update (struct option_flags *flags)
+static void usr_update(const struct option_flags *flags)
 {
 	struct passwd pwent;
 	const struct passwd *pwd;
@@ -2134,7 +2134,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

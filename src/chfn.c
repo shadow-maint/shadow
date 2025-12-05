@@ -73,7 +73,7 @@ static bool may_change_field (int);
 static void new_fields (void);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_perms (const struct passwd *pw);
-static void update_gecos (const char *user, char *gecos, struct option_flags *flags);
+static void update_gecos(const char *user, char *gecos, const struct option_flags *flags);
 static void get_old_fields (const char *gecos);
 
 /*
@@ -387,7 +387,7 @@ static void check_perms (const struct passwd *pw)
  *
  *	Commit the user's entry after changing her gecos field.
  */
-static void update_gecos (const char *user, char *gecos, struct option_flags *flags)
+static void update_gecos(const char *user, char *gecos, const struct option_flags *flags)
 {
 	const struct passwd *pw;	/* The user's password file entry */
 	struct passwd pwent;		/* modified password file entry */
@@ -572,7 +572,7 @@ int main (int argc, char **argv)
 	char                 new_gecos[80];
 	char                 *user, *p, *e;
 	const struct passwd  *pw;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool                 process_selinux;
 
 	sanitize_env ();
