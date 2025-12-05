@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-06-28 23:49+0200\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2024-08-11 21:26+0100\n"
 "Last-Translator: Carles Pina i Estany <cpina@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -21,9 +21,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Avís: el grup %s és desconegut\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Avís: hi ha massa grups\n"
 
 msgid "Your password has expired."
 msgstr "La vostra contrasenya ha caducat."
@@ -66,8 +63,10 @@ msgid "%s: failed to unlock %s\n"
 msgstr "%s: ha fallat el desbloqueig de %s\n"
 
 #, c-format
-msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr "Diverses entrades de nom «%s» a %s. Corregiu això amb «pwck» o «grpck».\n"
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"Diverses entrades de nom «%s» a %s. Corregiu això amb «pwck» o «grpck».\n"
 
 #, c-format
 msgid "%s: "
@@ -100,9 +99,11 @@ msgstr[1] ""
 
 #, c-format
 msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
 msgstr ""
-"%s: Configuració incorrecta: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX (%lu)\n"
+"%s: Configuració incorrecta: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
 
 #, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
@@ -117,7 +118,8 @@ msgid "%s: failed to allocate memory: %s\n"
 msgstr "%s: no es pot assignar memòria: %s\n"
 
 #, c-format
-msgid "%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr ""
 "%s: no es pot obtenir un GID de sistema únic (%s). S'estan suprimint els "
 "missatges addicionals.\n"
@@ -133,12 +135,9 @@ msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: no es pot obtenir un GID únic (no hi ha més GID disponibles)\n"
 
 #, c-format
-#| msgid ""
-#| "%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
-#| "(%lu)\n"
 msgid ""
-"%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), SUB_GID_COUNT "
-"(%lu)\n"
+"%s: Invalid configuration: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
+"SUB_GID_COUNT (%lu)\n"
 msgstr ""
 "%s: la configuració no és vàlida: SUB_GID_MIN (%lu), SUB_GID_MAX (%lu), "
 "SUB_GID_COUNT (%lu)\n"
@@ -148,12 +147,9 @@ msgid "%s: Can't get unique subordinate GID range\n"
 msgstr "%s: no es pot obtenir un únic rang GID subordinat\n"
 
 #, c-format
-#| msgid ""
-#| "%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
-#| "(%lu)\n"
 msgid ""
-"%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), SUB_UID_COUNT "
-"(%lu)\n"
+"%s: Invalid configuration: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
+"SUB_UID_COUNT (%lu)\n"
 msgstr ""
 "%s: la configuració no és vàlida: SUB_UID_MIN (%lu), SUB_UID_MAX (%lu), "
 "SUB_UID_COUNT (%lu)\n"
@@ -164,9 +160,11 @@ msgstr "%s: no es pot obtenir un únic rang UID subordinat\n"
 
 #, c-format
 msgid ""
-"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
+"%s: Invalid configuration: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
 msgstr ""
-"%s: Configuració incorrecta: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX (%lu)\n"
+"%s: Configuració incorrecta: SYS_UID_MIN (%lu), UID_MIN (%lu), SYS_UID_MAX "
+"(%lu)\n"
 
 #, c-format
 msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
@@ -177,7 +175,8 @@ msgid "%s: Encountered error attempting to use preferred UID: %s\n"
 msgstr "%s: s'ha trobat un error en intentar utilitzar l'UID preferit: %s\n"
 
 #, c-format
-msgid "%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
 msgstr ""
 "%s: no es pot obtenir un UID de sistema únic (%s). S'estan suprimint els "
 "missatges addicionals.\n"
@@ -214,7 +213,6 @@ msgid "%s: subuid overflow detected.\n"
 msgstr "%s: s'ha detectat un desbordament subuid.\n"
 
 #, c-format
-#| msgid "%s: invalid field '%s'\n"
 msgid "%s: Invalid map file %s specified\n"
 msgstr "%s: S'ha especificat el fitxer mapa %s que no és vàlid\n"
 
@@ -223,32 +221,26 @@ msgid "%s: Could not prctl(PR_SET_KEEPCAPS)\n"
 msgstr "%s: no s'ha pogut prctl(PR_SET_KEEPCAPS)\n"
 
 #, c-format
-#| msgid "Could not set name for %s\n"
 msgid "%s: Could not seteuid to %d\n"
 msgstr "%s: No s'ha pogut fer un «seteuid» a %d\n"
 
 #, c-format
-#| msgid "Could not set name for %s\n"
 msgid "%s: Could not set caps\n"
 msgstr "%s: No s'han pogut establir les «capabilities»\n"
 
 #, c-format
-#| msgid "%s: can't open file\n"
 msgid "%s: stpeprintf failed!\n"
 msgstr "%s: ha fallat stpeprintf!\n"
 
 #, c-format
-#| msgid "%s: line %d: chown %s failed: %s\n"
 msgid "%s: open of %s failed: %s\n"
 msgstr "%s: L'obertura de %s ha fallat: %s\n"
 
 #, c-format
-#| msgid "%s: line %d: chown %s failed: %s\n"
 msgid "%s: write to %s failed: %s\n"
 msgstr "%s: L'escriptura a %s ha fallat: %s\n"
 
 #, c-format
-#| msgid "%s: line %d: chown %s failed: %s\n"
 msgid "%s: closing %s failed: %s\n"
 msgstr "%s: El tancament de %s ha fallat: %s\n"
 
@@ -321,17 +313,14 @@ msgid "%s: PAM modules requesting echoing are not supported.\n"
 msgstr "%s: Els mòduls PAM que sol·liciten eco no són compatibles.\n"
 
 #, c-format
-#| msgid "%s: repository %s not supported\n"
 msgid "%s: conversation type %d not supported.\n"
 msgstr "%s: El tipus de conversació %d no és compatible.\n"
 
 #, c-format
-#| msgid "%s: pam_start: error %d\n"
 msgid "%s: (user %s) pam_start failure %d\n"
 msgstr "%s: (usuari %s) «pam_start» ha fallat %d\n"
 
 #, c-format
-#| msgid "passwd: pam_start() failed, error %d\n"
 msgid ""
 "%s: (user %s) pam_chauthtok() failed, error:\n"
 "%s\n"
@@ -365,7 +354,8 @@ msgstr "%s: ha fallat la rebaixa de privilegis (%s)\n"
 #, c-format
 msgid "%s: invalid chroot path '%s', only absolute paths are supported.\n"
 msgstr ""
-"%s: el camí «chroot» «%s» no és vàlid, només són acceptats els camins absoluts\n"
+"%s: el camí «chroot» «%s» no és vàlid, només són acceptats els camins "
+"absoluts\n"
 
 #, c-format
 msgid "%s: cannot access chroot directory %s: %s\n"
@@ -394,8 +384,8 @@ msgid ""
 "method.\n"
 msgstr ""
 "No s'ha pogut generar una sal des de la configuració «%s», comproveu la "
-"configuració a ENCRYPT_METHOD i la configuració corresponent per al mètode «hash» "
-"seleccionat.\n"
+"configuració a ENCRYPT_METHOD i la configuració corresponent per al mètode "
+"«hash» seleccionat.\n"
 
 msgid "Cannot open audit interface.\n"
 msgstr "No es pot obrir la interfície d'auditoria.\n"
@@ -487,8 +477,8 @@ msgstr "No es pot validar la transacció SELinux\n"
 #, c-format
 msgid "Login mapping for %s is not defined, OK if default mapping was used\n"
 msgstr ""
-"L'assignació d'inici de sessió per a %s no està definida, seleccioneu «OK» si "
-"s'utilitzava l'assignació per defecte\n"
+"L'assignació d'inici de sessió per a %s no està definida, seleccioneu «OK» "
+"si s'utilitzava l'assignació per defecte\n"
 
 #, c-format
 msgid "Login mapping for %s is defined in policy, cannot be deleted\n"
@@ -538,10 +528,6 @@ msgstr "%s:  %s no és ni un directori ni un enllaç simbòlic.\n"
 #, c-format
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: no es pot llegir l'enllaç simbòlic %s: %s\n"
-
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: enllaç simbòlic sospitosament llarg:  %s\n"
 
 #, c-format
 msgid "%s: Cannot create directory %s: %s\n"
@@ -629,13 +615,15 @@ msgstr ""
 "Opcions:\n"
 
 msgid ""
-"  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 msgstr ""
 "  -d, --lastday ÚLTIM_DIA       estableix la data de l'últim canvi de "
 "contrasenya\n"
 "                                a ÚLTIM_DIA\n"
 
-msgid "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgid ""
+"  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 "  -E, --expiredate DATA_EXPIRACIÓ\n"
 "                                estableix la data de caducitat del\n"
@@ -644,15 +632,16 @@ msgstr ""
 msgid "  -h, --help                    display this help message and exit\n"
 msgstr "  -h, --help                    mostra aquesta ajuda i acaba\n"
 
-#| msgid "  -g, --group                   edit group database\n"
 msgid "  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"
-msgstr "  -i, --iso8601                 usa YYYY-MM-DD a l'hora de mostrar dates\n"
+msgstr ""
+"  -i, --iso8601                 usa YYYY-MM-DD a l'hora de mostrar dates\n"
 
 msgid ""
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
 msgstr ""
-"  -I, --inactive INACTIVA        estableix la contrasenya com inactiva després\n"
+"  -I, --inactive INACTIVA        estableix la contrasenya com inactiva "
+"després\n"
 "                                de INACTIVA dies de caducitat \n"
 
 msgid "  -l, --list                    show account aging information\n"
@@ -670,17 +659,19 @@ msgid ""
 "  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
-"  -M, --maxdays DIES_MÀX        estableix en DIES_MÀX el màxim nombre de dies\n"
+"  -M, --maxdays DIES_MÀX        estableix en DIES_MÀX el màxim nombre de "
+"dies\n"
 "                                abans de canviar la contrasenya\n"
 
 msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -R, --root DIR_CHROOT         fes «chroot» en el directori DIR_CHROOT\n"
+msgstr ""
+"  -R, --root DIR_CHROOT         fes «chroot» en el directori DIR_CHROOT\n"
 
-#| msgid "  -R, --root CHROOT_DIR         directory to chroot into\n"
 msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
 msgstr "  -P, --prefix DIR_PREFIX      directori prefix\n"
 
-msgid "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgid ""
+"  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 "  -W, --warndays DIES_AVÍS      estableix els dies d'avís de caducitat\n"
 "                                a DIES_AVÍS\n"
@@ -756,14 +747,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: S'ha denegat el permís.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: No es pot determinar el seu nom d'usuari.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: PAM: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: no es pot blocar %s, intenteu-ho més tard\n"
 
@@ -810,8 +793,8 @@ msgstr "  -f, --full-name NOM_COMPLET  canvia el nom complet de l'usuari\n"
 
 msgid "  -h, --home-phone HOME_PHONE   change user's home phone number\n"
 msgstr ""
-"  -h, --home-phone TELÈFON_LLAR       canvia el número de telèfon domèstic de "
-"l'usuari\n"
+"  -h, --home-phone TELÈFON_LLAR       canvia el número de telèfon domèstic "
+"de l'usuari\n"
 
 msgid "  -o, --other OTHER_INFO        change user's other GECOS information\n"
 msgstr ""
@@ -826,8 +809,8 @@ msgstr "  -u, --help                   mostra aquest missatge d'ajuda i surt\n"
 
 msgid "  -w, --work-phone WORK_PHONE   change user's office phone number\n"
 msgstr ""
-"  -w, --work-phone TELÈFON_FEINA     canvia el número de telèfon de la feina de "
-"l'usuari\n"
+"  -w, --work-phone TELÈFON_FEINA     canvia el número de telèfon de la feina "
+"de l'usuari\n"
 
 msgid "Full Name"
 msgstr "Nom complet"
@@ -851,6 +834,14 @@ msgstr "Altre"
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: els camps són massa llargs\n"
+
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: No es pot determinar el seu nom d'usuari.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: PAM: %s\n"
 
 msgid "Cannot change ID to root.\n"
 msgstr "No es pot canviar l'ID al de root.\n"
@@ -888,6 +879,11 @@ msgstr "%s: «%s» conté caràcters que no són ASCII\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: «%s» conté caràcters no permesos\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: «%s» no és un nom de grup vàlid\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: l'usuari «%s» no existeix\n"
@@ -912,7 +908,8 @@ msgstr "  -c, --crypt-method METHOD     el mètode de xifratge (un de %s)\n"
 
 msgid "  -e, --encrypted               supplied passwords are encrypted\n"
 msgstr ""
-"  -e, --encrypted               les contrasenyes subministrades són xifrades\n"
+"  -e, --encrypted               les contrasenyes subministrades són "
+"xifrades\n"
 
 msgid ""
 "  -m, --md5                     encrypt the clear text password using\n"
@@ -922,9 +919,6 @@ msgstr ""
 "                                l'algorisme MD5\n"
 
 # traducció dubtosa
-#| msgid ""
-#| "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-#| "                                crypt algorithms\n"
 msgid ""
 "  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 "                                or YESCRYPT crypt algorithms\n"
@@ -948,47 +942,58 @@ msgstr "%s: els senyaladors -c, -e, i -m són exclusius\n"
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s:  mètode de xifratge no està implementat: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: línia %d: la línia és massa llarga\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: línia %d: manca la nova contrasenya\n"
 
 #, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: no s'ha pogut xifrar la contrasenya amb la sal «%s»: %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: línia %d: el grup «%s» no existeix\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: línia %d: ha fallat la preparació de la nova entrada %s: «%s»\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: s'ha detectat un error, els canvis s'han ignorat\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: (línia %d, usuari %s) contrasenya sense canviar\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s: (línia %d, usuari %s) contrasenya sense canviar\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: línia %d: l'usuari «%s» no existeix\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
 msgstr ""
-"  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte d'usuari\n"
+"  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte "
+"d'usuari\n"
 
 msgid "Login Shell"
 msgstr "Intèrpret d'accés"
 
 #, c-format
-#| msgid "%s: Cannot get the size of %s: %s\n"
 msgid "Cannot parse shell files: %s"
 msgstr "No es poden analitzar els fitxers d'intèrpret d'ordres: %s"
 
@@ -1030,10 +1035,12 @@ msgstr ""
 "l'usuari\n"
 
 msgid ""
-"  -f, --force                   force password change if the user's password\n"
+"  -f, --force                   force password change if the user's "
+"password\n"
 "                                is expired\n"
 msgstr ""
-"  -f, --force                   força el canvi de la contrasenya de l'usuari\n"
+"  -f, --force                   força el canvi de la contrasenya de "
+"l'usuari\n"
 "                                si ha caducat\n"
 
 #, c-format
@@ -1046,16 +1053,18 @@ msgstr "%s: no s'esperava l'argument: %s\n"
 
 msgid "  -a, --all                     display faillog records for all users\n"
 msgstr ""
-"  -a, --all                     mostra els registres «faillog» per a tots els "
-"usuaris\n"
+"  -a, --all                     mostra els registres «faillog» per a tots "
+"els usuaris\n"
 
 msgid ""
-"  -l, --lock-secs SEC           after failed login lock account for SEC seconds\n"
+"  -l, --lock-secs SEC           after failed login lock account for SEC "
+"seconds\n"
 msgstr ""
-"  -l, --lock-secs SEC           després d'una identificació fallida, bloqueja el "
-"compte durant SEC segons\n"
+"  -l, --lock-secs SEC           després d'una identificació fallida, "
+"bloqueja el compte durant SEC segons\n"
 
-msgid "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
+msgid ""
+"  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 msgstr ""
 "  -m, --maximum MAX             estableix el nombre màxim d'identificacions "
 "fallides a MAX\n"
@@ -1066,10 +1075,11 @@ msgstr ""
 "d'identificació\n"
 
 msgid ""
-"  -t, --time DAYS               display faillog records more recent than DAYS\n"
+"  -t, --time DAYS               display faillog records more recent than "
+"DAYS\n"
 msgstr ""
-"  -t, --time DAYS               mostra els registres «faillog» de menys de DAYS "
-"dies\n"
+"  -t, --time DAYS               mostra els registres «faillog» de menys de "
+"DAYS dies\n"
 
 msgid ""
 "  -u, --user LOGIN/RANGE        display faillog record or maintains failure\n"
@@ -1078,8 +1088,8 @@ msgid ""
 msgstr ""
 "  -u, --user LOGIN/RANGE        mostra el registre «faillog» o manté els "
 "comptadors\n"
-"                                de fallides i els límits (si s'utilitza amb  -r, -"
-"m,\n"
+"                                de fallides i els límits (si s'utilitza amb  "
+"-r, -m,\n"
 "                                o -i) només per l'identificador/s LOGIN "
 "especificats\n"
 
@@ -1100,7 +1110,8 @@ msgstr " [blocat %lds]"
 
 #, c-format
 msgid "%s: Failed to reset fail count for UID %lu\n"
-msgstr "%s: Ha fallat el restabliment del recompte de fallades per a l'UID %lu\n"
+msgstr ""
+"%s: Ha fallat el restabliment del recompte de fallades per a l'UID %lu\n"
 
 #, c-format
 msgid "%s: Failed to set max for UID %lu\n"
@@ -1139,26 +1150,31 @@ msgid "  -d, --delete USER             remove USER from GROUP\n"
 msgstr "  -d, --delete USER             elimina USER del GROUP\n"
 
 msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
-msgstr "  -Q, --root CHROOT_DIR        fes «chroot» en el directori CHROOT_DIR\n"
+msgstr ""
+"  -Q, --root CHROOT_DIR        fes «chroot» en el directori CHROOT_DIR\n"
 
 msgid "  -r, --remove-password         remove the GROUP's password\n"
-msgstr "  -r, --remove-password         elimina la contrasenya del grup GROUP\n"
-
-msgid "  -R, --restrict                restrict access to GROUP to its members\n"
 msgstr ""
-"  -R, --restrict                restringeix l'accés als membres del grup GROUP\n"
+"  -r, --remove-password         elimina la contrasenya del grup GROUP\n"
+
+msgid ""
+"  -R, --restrict                restrict access to GROUP to its members\n"
+msgstr ""
+"  -R, --restrict                restringeix l'accés als membres del grup "
+"GROUP\n"
 
 msgid "  -M, --members USER,...        set the list of members of GROUP\n"
 msgstr ""
-"  -M, --members USER,...        estableix el llistat de membres del grup GROUP\n"
+"  -M, --members USER,...        estableix el llistat de membres del grup "
+"GROUP\n"
 
 msgid ""
 "  -A, --administrators ADMIN,...\n"
 "                                set the list of administrators for GROUP\n"
 msgstr ""
 "  -A, --administrators ADMIN,...\n"
-"                                estableix la llista d'administradors del grup "
-"GROUP\n"
+"                                estableix la llista d'administradors del "
+"grup GROUP\n"
 
 msgid "Except for the -A and -M options, the options cannot be combined.\n"
 msgstr ""
@@ -1223,7 +1239,8 @@ msgstr ""
 "Opcions:\n"
 
 msgid ""
-"  -f, --force                   exit successfully if the group already exists,\n"
+"  -f, --force                   exit successfully if the group already "
+"exists,\n"
 "                                and cancel -g if the GID is already used\n"
 msgstr ""
 "  -f, --force                   sortir correctament si el grup ja existeix,\n"
@@ -1234,8 +1251,8 @@ msgstr "  -g, --gid GID                 fes servir GID pel nou grup\n"
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
-"  -K, --key KEY=VALUE           substitueix els valors predeterminats de «/etc/"
-"login.defs»\n"
+"  -K, --key KEY=VALUE           substitueix els valors predeterminats de «/"
+"etc/login.defs»\n"
 
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
@@ -1245,16 +1262,20 @@ msgstr ""
 "                                (no únics) GID\n"
 
 msgid ""
-"  -p, --password PASSWORD       use this encrypted password for the new group\n"
+"  -p, --password PASSWORD       use this encrypted password for the new "
+"group\n"
 msgstr ""
-"  -p, --password PASSWORD       fes servir aquesta contrasenya xifrada pel nou "
-"grup\n"
+"  -p, --password PASSWORD       fes servir aquesta contrasenya xifrada pel "
+"nou grup\n"
 
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  genera un compte del sistema\n"
 
-#| msgid "  -l, --list                    list the members of the group\n"
-msgid "  -U, --users USERS             list of user members of this group\n"
+#, fuzzy
+#| msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr ""
 "  -U, --users USUARIS             llista dels usuaris membres d'aquest grup\n"
 
@@ -1291,17 +1312,18 @@ msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: no es pot configurar el servei de neteja.\n"
 
 msgid ""
-"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* "
-"files\n"
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
 msgstr ""
-"  -P, --prefix PREFIXDIR        prefix del directori on es troben els fitxers /etc/*\n"
+"  -P, --prefix PREFIXDIR        prefix del directori on es troben els "
+"fitxers /etc/*\n"
 
 msgid ""
-"  -f, --force                   delete group even if it is the primary group of a "
-"user\n"
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
 msgstr ""
-"  -f, --force                   esborra el grup encara que sigui el grup primari "
-"d'un usuari\n"
+"  -f, --force                   esborra el grup encara que sigui el grup "
+"primari d'un usuari\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1334,7 +1356,8 @@ msgstr ""
 "Opcions:\n"
 
 msgid ""
-"  -g, --group groupname         change groupname instead of the user's group\n"
+"  -g, --group groupname         change groupname instead of the user's "
+"group\n"
 "                                (root only)\n"
 msgstr ""
 "  -g, --group groupname         canvia el nom de grup en lloc del grup de "
@@ -1347,14 +1370,18 @@ msgstr "\n"
 msgid "Actions:\n"
 msgstr "Accions:\n"
 
-msgid "  -a, --add username            add username to the members of the group\n"
+msgid ""
+"  -a, --add username            add username to the members of the group\n"
 msgstr ""
-"  -a, --add username            afegeix el nom d'usuari als membres del grup\n"
+"  -a, --add username            afegeix el nom d'usuari als membres del "
+"grup\n"
 
 msgid ""
-"  -d, --delete username         remove username from the members of the group\n"
+"  -d, --delete username         remove username from the members of the "
+"group\n"
 msgstr ""
-"  -d, --delete username         elimina el nom d'usuari dels membres del grup\n"
+"  -d, --delete username         elimina el nom d'usuari dels membres del "
+"grup\n"
 
 msgid "  -p, --purge                   purge all members from the group\n"
 msgstr "  -p, --purge                   elimina tots els membres del grup\n"
@@ -1370,17 +1397,13 @@ msgstr "%s: el seu nom de grup no concorda amb el seu nom d'usuari\n"
 msgid "%s: only root can use the -g/--group option\n"
 msgstr "%s:només l'usuari «root» pot fer servir l'opció -g/--group\n"
 
-#| msgid ""
-#| "  -a, --append                  append the user to the supplemental GROUPS\n"
-#| "                                mentioned by the -G option without removing\n"
-#| "                                the user from other groups\n"
 msgid ""
-"  -a, --append                  append the users mentioned by -U option to the "
-"group \n"
+"  -a, --append                  append the users mentioned by -U option to "
+"the group \n"
 "                                without removing existing user members\n"
 msgstr ""
-"  -a, --append                  afegeix al grup els usuaris citats amb l'opció -"
-"U\n"
+"  -a, --append                  afegeix al grup els usuaris citats amb "
+"l'opció -U\n"
 "                                sense eliminar-ne els usuaris ja existents\n"
 
 msgid "  -g, --gid GID                 change the group ID to GID\n"
@@ -1389,7 +1412,8 @@ msgstr "  -g, --gid GID                 canvia l'ID del grup per GID\n"
 msgid "  -n, --new-name NEW_GROUP      change the name to NEW_GROUP\n"
 msgstr "  -n, --new-name NEW_GROUP      canvia el nom del grup per NEW_GROUP\n"
 
-msgid "  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
+msgid ""
+"  -o, --non-unique              allow to use a duplicate (non-unique) GID\n"
 msgstr ""
 "  -o, --non-unique              permet utilitzar un duplicat (no únics) GID\n"
 
@@ -1400,13 +1424,17 @@ msgstr ""
 "  -p, --password PASSWORD       canvia la contrasenya per aquesta (xifrada)\n"
 "                                PASSWORD\n"
 
+#, fuzzy
+#| msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr ""
+"  -U, --users USUARIS             llista dels usuaris membres d'aquest grup\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: el nom de grup «%s» no és vàlid\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: usuari %s desconegut\n"
 
 #, c-format
 msgid ""
@@ -1438,8 +1466,10 @@ msgstr ""
 msgid "  -s, --sort                    sort entries by UID\n"
 msgstr "  -s, --sort                    ordena les entrades per UID\n"
 
-msgid "  -S, --silence-warnings        silence controversial/paranoid warnings\n"
-msgstr "  -S, --silence-warnings        silencia els avisos polèmics/paranoics\n"
+msgid ""
+"  -S, --silence-warnings        silence controversial/paranoid warnings\n"
+msgstr ""
+"  -S, --silence-warnings        silencia els avisos polèmics/paranoics\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatible\n"
@@ -1483,8 +1513,8 @@ msgstr "voleu afegir el grup «%s» a %s? "
 msgid ""
 "group %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"el grup %s té una entrada a  %s, però el seu camp de contrasenya a %s no està "
-"establert a «x»\n"
+"el grup %s té una entrada a  %s, però el seu camp de contrasenya a %s no "
+"està establert a «x»\n"
 
 msgid "invalid shadow group file entry"
 msgstr "l'entrada del fitxer de grup ombra no és vàlida"
@@ -1516,33 +1546,29 @@ msgstr "%s: no hi ha canvis\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: no es pot eliminar %s\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Forma d'ús: id [-a]\n"
-
-msgid " groups="
-msgstr " grups="
-
-msgid "  -b, --before DAYS             print only lastlog records older than DAYS\n"
+msgid ""
+"  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
 "  -b, --before DIES             mostra només els registres de lastlog més\n"
 "                                antics que DIES\n"
 
 msgid ""
-"  -C, --clear                   clear lastlog record of a user (usable only with -"
-"u)\n"
+"  -C, --clear                   clear lastlog record of a user (usable only "
+"with -u)\n"
 msgstr ""
 "  -C, --clear                   neteja el registre lastlog de l'usuari "
 "(utilitzable només amb -u)\n"
 
 msgid ""
-"  -S, --set                     set lastlog record to current time (usable only "
-"with -u)\n"
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
 msgstr ""
 "  -S, --set                     estableix el registre de lastlog per l'hora "
 "actual (utilitzable només amb -u)\n"
 
 msgid ""
-"  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
+"  -t, --time DAYS               print only lastlog records more recent than "
+"DAYS\n"
 msgstr ""
 "  -t, --time DIES               mostra només els registres de lastlog més\n"
 "                                recents que DIES\n"
@@ -1551,6 +1577,16 @@ msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 msgstr ""
 "  -u, --user USUARI              mostra el registre de lastlog de l'USUARI\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr ""
+"  -a, --all                     mostra els registres «faillog» per a tots "
+"els usuaris\n"
 
 #, c-format
 msgid "Username         Port     From%*sLatest\n"
@@ -1592,7 +1628,8 @@ msgstr "%s: l'opció -C no es pot utilitzar juntament amb l'opció -S\n"
 
 #, c-format
 msgid "%s: Options -C and -S require option -u to specify the user\n"
-msgstr "%s: les opcions -C i -S requereixen l'opció -u per especificar l'usuari\n"
+msgstr ""
+"%s: les opcions -C i -S requereixen l'opció -u per especificar l'usuari\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1601,10 +1638,6 @@ msgstr "Forma d'ús: %s [-p] [nom]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h ordinador] [-f nom]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r ordinador\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1725,19 +1758,18 @@ msgstr "%s: no s'han pogut cercar els setgroups: %s\n"
 msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: no s'ha pogut establir la política de grups %s: %s\n"
 
-#, c-format
-msgid "%s: Could not stat directory for process\n"
-msgstr ""
-"%s: No s'ha pogut fer stat al directori del procés\n"
-"\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
+msgstr "%s: No s'ha pogut fer stat al directori del procés objectiu\n"
 
 #, c-format
 msgid ""
-"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:%lu, "
-"gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: Target process is owned by a different user: uid:%lu pw_uid:%lu st_uid:"
+"%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 msgstr ""
-"%s: El procés de destinació és propietat d'un usuari diferent: uid:%lu pw_uid:%lu "
-"st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
+"%s: El procés de destinació és propietat d'un usuari diferent: uid:%lu "
+"pw_uid:%lu st_uid:%lu, gid:%lu pw_gid:%lu st_gid:%lu\n"
 
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Forma d'ús: newgrp [-] [grup]\n"
@@ -1756,12 +1788,14 @@ msgstr "Contrasenya no vàlida.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: fallada al fer fork: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: «%s» no és un nom de grup vàlid\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: el GID »%lu« no existeix\n"
-
-msgid "too many groups\n"
-msgstr "hi ha massa grups\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1775,11 +1809,6 @@ msgstr ""
 "ús: %s [<pid>|fd:<pidfd>] <uid> <uid menor> <compte> [ <uid> <uid menor> "
 "<compte> ] ... \n"
 
-#, c-format
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: No s'ha pogut fer stat al directori del procés objectiu\n"
-
-#| msgid "  -q, --quiet                   quiet mode\n"
 msgid "  -b, --badname                 allow bad names\n"
 msgstr "  -b, --badname                 permet noms dolents\n"
 
@@ -1795,59 +1824,73 @@ msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: l'ID d'usuari «%s» no és vàlid\n"
 
 #, c-format
-#| msgid "%s: invalid user name '%s'\n"
 msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: el nom d'usuari no és vàlid «%s»: useu --badname per ignorar-lo\n"
+
+#, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
 
 #, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr "%s: proporciona «--crypt-method» abans del nombre de rondes\n"
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: línia %d: la línia no és vàlida\n"
 
 #, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
 msgstr ""
-"%s: no es pot actualitzar l'entrada per a l'usuari %s (no apareix a la base de "
-"dades de contrasenyes)\n"
+"%s: no es pot actualitzar l'entrada per a l'usuari %s (no apareix a la base "
+"de dades de contrasenyes)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: línia %d: no es pot generar l'usuari\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: línia %d: no es pot generar el grup\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: line %d: l'usuari «%s» no existeix a %s\n"
 
-#, c-format
-#| msgid "%s: unlink: %s: %s\n"
-msgid "%s: line %d: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: línia %d: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: línia %d: no es pot actualitzar la contrasenya\n"
 
-#, c-format
-msgid "%s: line %d: homedir must be an absolute path\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: línia %d: el directori d'usuari ha de ser un camí absolut\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
-msgstr "%s: línia %d: no s'ha pogut generar el directori «%s» (ordre mkdir): %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
+msgstr ""
+"%s: línia %d: no s'ha pogut generar el directori «%s» (ordre mkdir): %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
-msgstr "%s: línia %d: no s'ha pogut canviar el propietari (ordre «chown»)  %s: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
+msgstr ""
+"%s: línia %d: no s'ha pogut canviar el propietari (ordre «chown»)  %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: línia %d: no es pot actualitzar l'entrada\n"
 
 #, c-format
@@ -1862,24 +1905,28 @@ msgstr "%s: ha fallat la preparació de la nova entrada %s\n"
 msgid "%s: can't find subordinate group range\n"
 msgstr "%s: no es pot trobar el rang de grups subordinat\n"
 
-msgid "  -a, --all                     report password status on all accounts\n"
+msgid ""
+"  -a, --all                     report password status on all accounts\n"
 msgstr ""
 "  -a, --all                     informa de l'estat de la contrasenya\n"
 "                                per a tots els comptes\n"
 
-msgid "  -d, --delete                  delete the password for the named account\n"
+msgid ""
+"  -d, --delete                  delete the password for the named account\n"
 msgstr ""
 "  -d, --delete                  esborra la contrasenya per al compte\n"
 "                                anomenat\n"
 
 msgid ""
-"  -e, --expire                  force expire the password for the named account\n"
+"  -e, --expire                  force expire the password for the named "
+"account\n"
 msgstr ""
 "  -e, --expire                  força la caducitat de la contrasenya per\n"
 "                                al compte anomenat\n"
 
 msgid "  -k, --keep-tokens             change password only if expired\n"
-msgstr "  -k, --keep-tokens             canvia la contrasenya només si ha caducat\n"
+msgstr ""
+"  -k, --keep-tokens             canvia la contrasenya només si ha caducat\n"
 
 msgid ""
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
@@ -1888,7 +1935,8 @@ msgstr ""
 "  -i, --inactive INACTIU        estableix la contrasenya a inactiva després\n"
 "                                 d'INACTIU dies de caducitat\n"
 
-msgid "  -l, --lock                    lock the password of the named account\n"
+msgid ""
+"  -l, --lock                    lock the password of the named account\n"
 msgstr "  -l, --lock                    bloca el compte anomenat\n"
 
 msgid ""
@@ -1901,7 +1949,8 @@ msgstr ""
 msgid "  -q, --quiet                   quiet mode\n"
 msgstr "  -q, --quiet                   mode silenciós\n"
 
-msgid "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+msgid ""
+"  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 msgstr "  -r, --repository DIPÒSIT   canvia la contrasenya en el DIPÒSIT\n"
 
 msgid ""
@@ -1910,10 +1959,12 @@ msgstr ""
 "  -S, --status                  informa de l'estat de la contrasenya per\n"
 "                                al compte anomenat\n"
 
-msgid "  -u, --unlock                  unlock the password of the named account\n"
+msgid ""
+"  -u, --unlock                  unlock the password of the named account\n"
 msgstr "  -u, --unlock                  desbloca el compte anomenat\n"
 
-msgid "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+msgid ""
+"  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 msgstr ""
 "  -w, --warndays DIES_AVÍS      estableix els dies d'avís de caducitat\n"
 "                                a DIES_AVÍS\n"
@@ -1978,7 +2029,8 @@ msgstr "Encara no es pot canviar la contrasenya de %s.\n"
 #, c-format
 msgid "%s: malformed password data obtained for user %s\n"
 msgstr ""
-"%s: les dades de contrasenya obtingudes per l'usuari %s no estan ben formades\n"
+"%s: les dades de contrasenya obtingudes per l'usuari %s no estan ben "
+"formades\n"
 
 #, c-format
 msgid ""
@@ -2005,7 +2057,8 @@ msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s: No podeu veure o canviar la informació de la contrasenya per a %s.\n"
+msgstr ""
+"%s: No podeu veure o canviar la informació de la contrasenya per a %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -2046,7 +2099,8 @@ msgstr "  -q, --quiet                   informa només dels errors\n"
 #, c-format
 msgid "%s: no alternative shadow file allowed when USE_TCB is enabled.\n"
 msgstr ""
-"%s: no hi ha un fitxer «shadow» alternatiu permès quan USE_TCB està habilitat.\n"
+"%s: no hi ha un fitxer «shadow» alternatiu permès quan USE_TCB està "
+"habilitat.\n"
 
 msgid "invalid password file entry"
 msgstr "l'entrada del fitxer de contrasenyes no és vàlida"
@@ -2055,9 +2109,13 @@ msgid "duplicate password entry"
 msgstr "l'entrada de contrasenya està duplicada"
 
 #, c-format
-#| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr "el nom d'usuari «%s» no és vàlid: useu --badname per ignorar-ho\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
 
 #, c-format
 msgid "invalid user ID '%lu'\n"
@@ -2100,10 +2158,11 @@ msgid "add user '%s' in %s? "
 msgstr "voleu afegir l'usuari «%s» a %s? "
 
 #, c-format
-msgid "user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
+msgid ""
+"user %s has an entry in %s, but its password field in %s is not set to 'x'\n"
 msgstr ""
-"l'usuari %s té una entrada a %s, però el seu camp de contrasenya a %s no està "
-"establert a «x»\n"
+"l'usuari %s té una entrada a %s, però el seu camp de contrasenya a %s no "
+"està establert a «x»\n"
 
 msgid "invalid shadow password file entry"
 msgstr "l'entrada del fitxer de contrasenyes ombra no és vàlida"
@@ -2205,11 +2264,13 @@ msgstr ""
 #, c-format
 msgid "Password field is empty, this is forbidden for all accounts.\n"
 msgstr ""
-"El camp de contrasenya està buit, això està prohibit per a tots els comptes.\n"
+"El camp de contrasenya està buit, això està prohibit per a tots els "
+"comptes.\n"
 
 #, c-format
 msgid "Password field is empty, this is forbidden for super-user.\n"
-msgstr "El camp de contrasenya està buit, això està prohibit per al superusuari.\n"
+msgstr ""
+"El camp de contrasenya està buit, això està prohibit per al superusuari.\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
@@ -2275,15 +2336,21 @@ msgstr "S'està entrant en mode de manteniment del sistema"
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s: %s va ser generat, però no és possible eliminar-ho\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s: la configuració %s a %s serà ignorada\n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+#| "group\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad group\n"
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
+"group\n"
 msgstr ""
-"%s: la configuració «%s» a %s té un grup no vàlid, s'ignorarà el grup erroni\n"
+"%s: la configuració «%s» a %s té un grup no vàlid, s'ignorarà el grup "
+"erroni\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file: %s\n"
@@ -2291,7 +2358,8 @@ msgstr "%s: no es pot crear un fitxer nou de valors predeterminats: %s\n"
 
 #, c-format
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: no es pot crear un directori per al fitxer de valors predeterminats\n"
+msgstr ""
+"%s: no es pot crear un directori per al fitxer de valors predeterminats\n"
 
 #, c-format
 msgid "%s: cannot open new defaults file\n"
@@ -2331,18 +2399,19 @@ msgstr ""
 "\n"
 "Opcions:\n"
 
-#| msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgid "      --badname                 do not check for bad names\n"
 msgstr "      --badname                 do not check for bad names\n"
 
 msgid ""
-"  -b, --base-dir BASE_DIR       base directory for the home directory of the\n"
+"  -b, --base-dir BASE_DIR       base directory for the home directory of "
+"the\n"
 "                                new account\n"
 msgstr ""
 "  -b, --base-dir BASE_DIR       directori base per al directori arrel del\n"
 "                                compte nou\n"
 
-msgid "      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
+msgid ""
+"      --btrfs-subvolume-home    use BTRFS subvolume for home directory\n"
 msgstr ""
 "      --btrfs-subvolume-home    utilitza el subvolum BTRFS per al directori "
 "inicial\n"
@@ -2354,24 +2423,26 @@ msgid "  -d, --home-dir HOME_DIR       home directory of the new account\n"
 msgstr "  -d, --home-dir HOME_DIR       directori arrel del nou compte\n"
 
 msgid ""
-"  -D, --defaults                print or change default useradd configuration\n"
+"  -D, --defaults                print or change default useradd "
+"configuration\n"
 msgstr ""
-"  -D, --defaults                imprimeix o canvia la configuració predeterminada "
-"de l'usuari afegit\n"
+"  -D, --defaults                imprimeix o canvia la configuració "
+"predeterminada de l'usuari afegit\n"
 
 msgid "  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"
 msgstr "  -e, --expiredate EXPIRE_DATE  data de venciment del nou compte\n"
 
 msgid ""
-"  -f, --inactive INACTIVE       password inactivity period of the new account\n"
+"  -f, --inactive INACTIVE       password inactivity period of the new "
+"account\n"
 msgstr "  -f, --inactive INACTIVE       període d'inactivitat del nou compte\n"
 
 msgid ""
 "  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a "
 "system user\n"
 msgstr ""
-"  -F, --add-subids-for-system   afegeix entrades al sub[ud]id fins i tot quan "
-"s'afegeix un usuari del sistema\n"
+"  -F, --add-subids-for-system   afegeix entrades al sub[ud]id fins i tot "
+"quan s'afegeix un usuari del sistema\n"
 
 msgid ""
 "  -g, --gid GROUP               name or ID of the primary group of the new\n"
@@ -2387,7 +2458,8 @@ msgstr ""
 "  -G, --groups GROUPS           llista dels grups suplementaris del nou\n"
 "                                compte\n"
 
-msgid "  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
+msgid ""
+"  -k, --skel SKEL_DIR           use this alternative skeleton directory\n"
 msgstr ""
 "  -k, --skel SKEL_DIR           fer servir aquesta branca de directori "
 "alternativa\n"
@@ -2400,10 +2472,13 @@ msgstr ""
 "                                a la base de dades dels informes d'errades\n"
 
 msgid "  -m, --create-home             create the user's home directory\n"
-msgstr "  -m, --create-home             genera el directori arrel dels usuaris\n"
+msgstr ""
+"  -m, --create-home             genera el directori arrel dels usuaris\n"
 
-msgid "  -M, --no-create-home          do not create the user's home directory\n"
-msgstr "  -M, --no-create-home          no genera el directori arrel dels usuaris\n"
+msgid ""
+"  -M, --no-create-home          do not create the user's home directory\n"
+msgstr ""
+"  -M, --no-create-home          no genera el directori arrel dels usuaris\n"
 
 msgid ""
 "  -N, --no-user-group           do not create a group with the same name as\n"
@@ -2429,9 +2504,11 @@ msgid "  -u, --uid UID                 user ID of the new account\n"
 msgstr "  -u, --uid UID                 ID d'usuari del nou compte\n"
 
 msgid ""
-"  -U, --user-group              create a group with the same name as the user\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 msgstr ""
-"  -U, --user-group              generar un grup amb el mateix nom que l'usuari\n"
+"  -U, --user-group              generar un grup amb el mateix nom que "
+"l'usuari\n"
 
 msgid ""
 "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
@@ -2441,8 +2518,8 @@ msgstr ""
 "l'assignació d'usuaris «SELinux»\n"
 
 msgid ""
-"      --selinux-range SERANGE   use a specific MLS range for the SELinux user "
-"mapping\n"
+"      --selinux-range SERANGE   use a specific MLS range for the SELinux "
+"user mapping\n"
 msgstr ""
 "      --selinux-range SERANGE   utilitza un rang MLS específic per al mapeig "
 "d'usuari de SELinux\n"
@@ -2494,7 +2571,8 @@ msgstr "%s: no s'ha pogut obrir el fitxer faillog per l'UID %lu: %s\n"
 #, c-format
 msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
 msgstr ""
-"%s: ha fallat el restabliment de l'entrada del registre d'errors de UID %lu: %s\n"
+"%s: ha fallat el restabliment de l'entrada del registre d'errors de UID %lu: "
+"%s\n"
 
 #, c-format
 msgid "%s: failed to close the faillog file for UID %lu: %s\n"
@@ -2530,7 +2608,8 @@ msgstr "%s: no es pot establir el context SELinux al directori d'usuari %s\n"
 
 #, c-format
 msgid "%s: error while duplicating string in BTRFS check %s\n"
-msgstr "%s: s'ha produït un error en duplicar la cadena a la comprovació BTRFS %s\n"
+msgstr ""
+"%s: s'ha produït un error en duplicar la cadena a la comprovació BTRFS %s\n"
 
 #, c-format
 msgid "%s: home directory \"%s\" must be mounted on BTRFS\n"
@@ -2558,19 +2637,22 @@ msgstr "%s: avís: ha fallat chown a «%s»: %m\n"
 
 #, c-format
 msgid "%s: cannot reset SELinux file creation context\n"
-msgstr "%s: no s'ha pogut reinicialitzar el context de creació de fitxers SELinux\n"
+msgstr ""
+"%s: no s'ha pogut reinicialitzar el context de creació de fitxers SELinux\n"
 
 #, c-format
 msgid "%s: cannot set SELinux context for mailbox file %s\n"
-msgstr "%s: no s'ha pogut establir el context SELinux per al fitxer de bústia %s\n"
+msgstr ""
+"%s: no s'ha pogut establir el context SELinux per al fitxer de bústia %s\n"
 
 msgid "Creating mailbox file"
 msgstr "S'està creant la bústia de correu"
 
-msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
-"No s'ha trobat el grup «mail». S'està creant la bústia de correu de l'usuari amb "
-"mode 0600.\n"
+"No s'ha trobat el grup «mail». S'està creant la bústia de correu de l'usuari "
+"amb mode 0600.\n"
 
 msgid "Setting mailbox file permissions"
 msgstr "S'estan establint els permisos de la bústia de correu"
@@ -2586,18 +2668,22 @@ msgid "%s warning: %s's uid %d is greater than SYS_UID_MAX %d\n"
 msgstr "Avís %s: l'uid de %s, %d, és més gran que el SYS_UID_MAX %d\n"
 
 #, c-format
-msgid "%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
+msgid ""
+"%s warning: %s's uid %d outside of the UID_MIN %d and UID_MAX %d range.\n"
 msgstr ""
-"Avís %s: l'uid de %s, %d, està fora de l'interval entre UID_MIN %d i UID_MAX %d.\n"
+"Avís %s: l'uid de %s, %d, està fora de l'interval entre UID_MIN %d i UID_MAX "
+"%d.\n"
 
 #, c-format
 msgid "%s: user '%s' already exists\n"
 msgstr "%s: l'usuari «%s» existeix\n"
 
 #, c-format
-msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: el grup %s existeix, si voleu afegir aquest usuari a aquest grup, useu «-g».\n"
+"%s: el grup %s existeix, si voleu afegir aquest usuari a aquest grup, useu «-"
+"g».\n"
 
 #, c-format
 msgid "%s: can't create user\n"
@@ -2637,15 +2723,17 @@ msgstr ""
 "%s: no s'hi copiarà cap fitxer del directori skel\n"
 
 msgid ""
-"  -f, --force                   force some actions that would fail otherwise\n"
+"  -f, --force                   force some actions that would fail "
+"otherwise\n"
 "                                e.g. removal of user still logged in\n"
 "                                or files, even if not owned by the user\n"
 msgstr ""
-"  -f, --force                   força algunes accions que altrament fallarien\n"
+"  -f, --force                   força algunes accions que altrament "
+"fallarien\n"
 "                                p.ex. eliminació d'un usuari que està encara "
 "loguejat\n"
-"                                o de fitxers, fins i tot si no son propietat de "
-"l'usuari\n"
+"                                o de fitxers, fins i tot si no son propietat "
+"de l'usuari\n"
 
 msgid "  -r, --remove                  remove home directory and mail spool\n"
 msgstr ""
@@ -2653,13 +2741,15 @@ msgstr ""
 "                                de correu\n"
 
 msgid ""
-"  -Z, --selinux-user            remove any SELinux user mapping for the user\n"
+"  -Z, --selinux-user            remove any SELinux user mapping for the "
+"user\n"
 msgstr ""
 "  -Z, --selinux-user            elimina totes les assignacions SELinux per a "
 "l'usuari\n"
 
 #, c-format
-msgid "%s: group %s not removed because it is not the primary group of user %s.\n"
+msgid ""
+"%s: group %s not removed because it is not the primary group of user %s.\n"
 msgstr ""
 "%s: no s'ha pogut eliminar el grup %s degut a què no és el grup primari de "
 "l'usuari %s\n"
@@ -2671,7 +2761,8 @@ msgstr "%s: no s'eliminarà el grup %s degut a que hi ha usuaris assignats.\n"
 #, c-format
 msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
-"%s: no es pot eliminar el grup %s, que és el grup primari per un altre usuari.\n"
+"%s: no es pot eliminar el grup %s, que és el grup primari per un altre "
+"usuari.\n"
 
 #, c-format
 msgid "%s: cannot remove entry %lu from %s\n"
@@ -2691,7 +2782,8 @@ msgstr "%s: %s no és propietat de %s, no s'elimina\n"
 
 #, c-format
 msgid "%s: Can't allocate memory, tcb entry for %s not removed.\n"
-msgstr "%s: No és possible assignar memòria, l'entrada «tcb» de %s no s'elimina.\n"
+msgstr ""
+"%s: No és possible assignar memòria, l'entrada «tcb» de %s no s'elimina.\n"
 
 #, c-format
 msgid "%s: Cannot drop privileges: %s\n"
@@ -2712,8 +2804,8 @@ msgstr "%s: no s'ha trobat el directori personal (%s) de %s \n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: no s'elimina el directori %s (eliminaria el directori personal de l'usuari "
-"%s)\n"
+"%s: no s'elimina el directori %s (eliminaria el directori personal de "
+"l'usuari %s)\n"
 
 #, c-format
 msgid "%s: error removing subvolume %s\n"
@@ -2726,8 +2818,8 @@ msgstr "%s: s'ha produït un error en eliminar el directori %s\n"
 #, c-format
 msgid "%s: warning: the user name %s to SELinux user mapping removal failed.\n"
 msgstr ""
-"%s: avís: ha fallat l'eliminació del nom d'usuari %s de l'assignació d'usuaris "
-"SELinux.\n"
+"%s: avís: ha fallat l'eliminació del nom d'usuari %s de l'assignació "
+"d'usuaris SELinux.\n"
 
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
@@ -2741,12 +2833,14 @@ msgstr ""
 msgid "  -c, --comment COMMENT         new value of the GECOS field\n"
 msgstr "  -c, --comment COMENTARI       nou valor per al camp GECOS\n"
 
-msgid "  -d, --home HOME_DIR           new home directory for the user account\n"
+msgid ""
+"  -d, --home HOME_DIR           new home directory for the user account\n"
 msgstr ""
 "  -d, --home DIR_PERSONAL       nou directori personal per al nou compte\n"
 "                                d'usuari\n"
 
-msgid "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+msgid ""
+"  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 msgstr ""
 "  -e, --expiredate DATA_CADUCITAT estableix la data de caducitat del compte\n"
 "                                a DATA_CADUCITAT\n"
@@ -2779,7 +2873,8 @@ msgstr ""
 "  -m, --move-home               mou els continguts del directori personal\n"
 "                                a la nova ubicació (usar només amb -d)\n"
 
-msgid "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+msgid ""
+"  -o, --non-unique              allow using duplicate (non-unique) UID\n"
 msgstr "  -o, --non-unique              permet usar UID duplicats (no únics)\n"
 
 msgid ""
@@ -2794,8 +2889,8 @@ msgid ""
 "                                mentioned by the -G option without removing\n"
 "                                the user from other groups\n"
 msgstr ""
-"  -r, --remove                  elimina l'usuari de només els grups suplementaris "
-"GROUPS\n"
+"  -r, --remove                  elimina l'usuari de només els grups "
+"suplementaris GROUPS\n"
 "                                mencionats per l'opció -G sense eliminar\n"
 "                                l'usuari d'altres grups\n"
 
@@ -2818,13 +2913,17 @@ msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
 msgstr "  -W, --del-subgids FIRST-LAST  esborra un rang de gids subordinats\n"
 
 msgid ""
-"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"
+"  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
+"account\n"
 msgstr ""
-"  -Z, --selinux-user SEUSER     nova assignació SELinux per al compte d'usuari\n"
+"  -Z, --selinux-user SEUSER     nova assignació SELinux per al compte "
+"d'usuari\n"
 
-msgid "      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
+msgid ""
+"      --selinux-range SERANGE   new SELinux MLS range for the user account\n"
 msgstr ""
-"      --selinux-range SERANGE   nou rang de SELinux MLS per la compta d'usuari\n"
+"      --selinux-range SERANGE   nou rang de SELinux MLS per la compta "
+"d'usuari\n"
 
 #, c-format
 msgid ""
@@ -2833,8 +2932,8 @@ msgid ""
 msgstr ""
 "%s: el desbloqueig de la contrasenya de l'usuari deixarà el compte sense "
 "contrasenya.\n"
-"Heu d'establir una contrasenya amb «usermod-p» per desbloquejar la contrasenya de "
-"l'usuari.\n"
+"Heu d'establir una contrasenya amb «usermod-p» per desbloquejar la "
+"contrasenya de l'usuari.\n"
 
 #, c-format
 msgid "%s: user '%s' already exists in %s\n"
@@ -2882,8 +2981,8 @@ msgstr "%s: el directori %s ja existeix\n"
 
 #, c-format
 msgid ""
-"%s: The previous home directory (%s) was not a directory. It is not removed and "
-"no home directories are created.\n"
+"%s: The previous home directory (%s) was not a directory. It is not removed "
+"and no home directories are created.\n"
 msgstr ""
 "%s: El directori arrel d'usuari anterior (%s) no és un directori. No s'ha "
 "eliminat i no s'han generat els directoris arrels d'usuaris.\n"
@@ -2894,11 +2993,13 @@ msgstr "%s: No s'ha pogut canviar la propietat del directori d'inici"
 
 #, c-format
 msgid "%s: error: cannot move subvolume from %s to %s - different device\n"
-msgstr "%s: error: no es pot moure el subvolum de %s a %s - dispositiu diferent\n"
+msgstr ""
+"%s: error: no es pot moure el subvolum de %s a %s - dispositiu diferent\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr "%s: avís: no s'ha pogut eliminar completament l'antic directori personal %s"
+msgstr ""
+"%s: avís: no s'ha pogut eliminar completament l'antic directori personal %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -2909,8 +3010,8 @@ msgid ""
 "%s: The previous home directory (%s) does not exist or is inaccessible. Move "
 "cannot be completed.\n"
 msgstr ""
-"%s: el directori home anterior (%s) no existeix o és inaccessible. No s'ha pogut "
-"completar el move.\n"
+"%s: el directori home anterior (%s) no existeix o és inaccessible. No s'ha "
+"pogut completar el move.\n"
 
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
@@ -2921,7 +3022,8 @@ msgstr ""
 #, c-format
 msgid "%s: failed to copy the lastlog entry of user %ju to user %ju: %s\n"
 msgstr ""
-"%s: no s'ha pogut copiar l'entrada de lastlog de l'usuari %ju a l'usuari %ju: %s\n"
+"%s: no s'ha pogut copiar l'entrada de lastlog de l'usuari %ju a l'usuari "
+"%ju: %s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
@@ -2932,8 +3034,8 @@ msgstr ""
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
-"%s: ha fallat la còpia de l'entrada de lastlog de l'usuari %ju a l'usuari %ju: "
-"%s\n"
+"%s: ha fallat la còpia de l'entrada de lastlog de l'usuari %ju a l'usuari "
+"%ju: %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -2945,20 +3047,24 @@ msgstr "no s'ha pogut canviar el propietari de la bústia de correu"
 msgid "failed to rename mailbox"
 msgstr "no s'ha pogut reanomenar la bústia de correu"
 
-#, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: failed to remove uid range %lu-%lu from '%s'\n"
 
-#, c-format
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: no s'ha pogut afegir el rang d'uids %lu-%lu a «%s»\n"
 
-#, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: no s'ha pogut treure el rang d'uids %lu-%lu de «%s»\n"
 
-#, c-format
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: no s'ha pogut afegir el rang de gids %lu-%lu a «%s»\n"
 
 #, c-format
@@ -2975,7 +3081,8 @@ msgid "  -g, --group                   edit group database\n"
 msgstr "  -g, --group                   edita la base de dades del grup\n"
 
 msgid "  -p, --passwd                  edit passwd database\n"
-msgstr "  -p, --passwd                  edita la base de dades de contrasenyes\n"
+msgstr ""
+"  -p, --passwd                  edita la base de dades de contrasenyes\n"
 
 msgid "  -s, --shadow                  edit shadow or gshadow database\n"
 msgstr ""
@@ -3036,8 +3143,9 @@ msgstr "no s'ha pogut desvincular el fitxer de treball"
 msgid "failed to stat edited file"
 msgstr "no s'ha pogut comptabilitzar el fitxer editat"
 
-#| msgid "%s: can't open file\n"
-msgid "asprintf(3) failed"
+#, fuzzy
+#| msgid "asprintf(3) failed"
+msgid "aprintf() failed"
 msgstr "ha fallat asprintf(3)"
 
 msgid "failed to create backup file"
@@ -3050,6 +3158,36 @@ msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Avís: hi ha massa grups\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s: enllaç simbòlic sospitosament llarg:  %s\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: usuari %s desconegut\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Forma d'ús: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " grups="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r ordinador\n"
+
+#, c-format
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr ""
+#~ "%s: No s'ha pogut fer stat al directori del procés\n"
+#~ "\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "hi ha massa grups\n"
 
 #~ msgid "Environment overflow\n"
 #~ msgstr "Desbordament d'entorn\n"
@@ -3091,7 +3229,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 
 #~ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 #~ msgstr ""
-#~ "No hi ha entrada utmp. Heu d'executar «login» des del «sh» de nivell més baix"
+#~ "No hi ha entrada utmp. Heu d'executar «login» des del «sh» de nivell més "
+#~ "baix"
 
 #, fuzzy, c-format
 #~ msgid "%s: Could not open proc directory for target %u\n"
@@ -3106,10 +3245,6 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "Última accés: %.19s a %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
 
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
@@ -3137,15 +3272,19 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Usage: chage [options] [LOGIN]\n"
 #~ "\n"
 #~ "Options:\n"
-#~ "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
-#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+#~ "  -d, --lastday LAST_DAY        set date of last password change to "
+#~ "LAST_DAY\n"
+#~ "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
 #~ "  -h, --help                    display this help message and exit\n"
 #~ "  -I, --inactive INACTIVE       set password inactive after expiration\n"
 #~ "                                to INACTIVE\n"
 #~ "  -l, --list                    show account aging information\n"
-#~ "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+#~ "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
 #~ "                                change to MIN_DAYS\n"
-#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+#~ "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#~ "password\n"
 #~ "                                change to MAX_DAYS\n"
 #~ "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 #~ "\n"
@@ -3153,7 +3292,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Forma d'ús: chage [opcions] [USUARI]\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -d, --lastday ÚLTIM_DIA          estableix l'últim canvi de contrasenya\n"
+#~ "  -d, --lastday ÚLTIM_DIA          estableix l'últim canvi de "
+#~ "contrasenya\n"
 #~ "                                   a ÚLTIM_DIA\n"
 #~ "  -E, --expiredate DATA_EXPIRACIÓ  estableix la data d'expiració del\n"
 #~ "                                   compte a DATA_EXPIRACIÓ\n"
@@ -3162,9 +3302,11 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "                                   després d'expiració a INACTIVA\n"
 #~ "  -l, --list                       mostra informació d'envelliment del\n"
 #~ "                                   compte\n"
-#~ "  -m, --mindays DIES_MÍN           estableix el número mínim de dies abans\n"
+#~ "  -m, --mindays DIES_MÍN           estableix el número mínim de dies "
+#~ "abans\n"
 #~ "                                   de canvi de contrasenya a DIES_MÍN\n"
-#~ "  -M, --maxdays DIES_MÀX           estableix el número màxim de dies abans\n"
+#~ "  -M, --maxdays DIES_MÀX           estableix el número màxim de dies "
+#~ "abans\n"
 #~ "                                   de canvi de contrasenya a DIES_MÀX\n"
 #~ "  -W, --warndays DIES_AVÍS         estableix els dies d'avís d'expiració\n"
 #~ "                                   a DIES_AVÍS\n"
@@ -3200,9 +3342,11 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "\n"
 #~ "Opcions:\n"
 #~ " -c, --crypt-method            mètode de xifrat (un de %s)\n"
-#~ "  -e, --encrypted               les contrasenyes proveïdes estan xifrades\n"
+#~ "  -e, --encrypted               les contrasenyes proveïdes estan "
+#~ "xifrades\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
-#~ "  -m, --md5                     xifra la contrasenya en text pla fent servir\n"
+#~ "  -m, --md5                     xifra la contrasenya en text pla fent "
+#~ "servir\n"
 #~ "                                l'algorisme MD5\n"
 #~ "%s\n"
 
@@ -3218,7 +3362,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "\n"
 #~ "Opcions:\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
-#~ "  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte d'usuari\n"
+#~ "  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte "
+#~ "d'usuari\n"
 #~ "\n"
 
 #~ msgid "Usage: expiry {-f|-c}\n"
@@ -3255,20 +3400,24 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Usage: lastlog [options]\n"
 #~ "\n"
 #~ "Options:\n"
-#~ "  -b, --before DAYS             print only lastlog records older than DAYS\n"
-#~ "  -h, --help                    display this help message and exit\n"
-#~ "  -t, --time DAYS               print only lastlog records more recent than "
+#~ "  -b, --before DAYS             print only lastlog records older than "
 #~ "DAYS\n"
-#~ "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+#~ "  -h, --help                    display this help message and exit\n"
+#~ "  -t, --time DAYS               print only lastlog records more recent "
+#~ "than DAYS\n"
+#~ "  -u, --user LOGIN              print lastlog record of the specified "
+#~ "LOGIN\n"
 #~ "\n"
 #~ msgstr ""
 #~ "Forma d'ús: lastlog [opcions]\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -b, --before DIES             mostra només els registres de lastlog més\n"
+#~ "  -b, --before DIES             mostra només els registres de lastlog "
+#~ "més\n"
 #~ "                                antics que DIES\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
-#~ "  -t, --time DIES               mostra només els registres de lastlog més\n"
+#~ "  -t, --time DIES               mostra només els registres de lastlog "
+#~ "més\n"
 #~ "                                recents que DIES\n"
 #~ "  -u, --user USUARI             mostra el registre de lastlog per a\n"
 #~ "                                l'usuari amb USUARI especific\n"
@@ -3279,7 +3428,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "\n"
 #~ "Options:\n"
 #~ "  -a, --all                     report password status on all accounts\n"
-#~ "  -d, --delete                  delete the password for the named account\n"
+#~ "  -d, --delete                  delete the password for the named "
+#~ "account\n"
 #~ "  -e, --expire                  force expire the password for the named "
 #~ "account\n"
 #~ "  -h, --help                    display this help message and exit\n"
@@ -3287,14 +3437,17 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 #~ "                                to INACTIVE\n"
 #~ "  -l, --lock                    lock the password of the named account\n"
-#~ "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
+#~ "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#~ "password\n"
 #~ "                                change to MIN_DAYS\n"
 #~ "  -q, --quiet                   quiet mode\n"
 #~ "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
-#~ "  -S, --status                  report password status on the named account\n"
+#~ "  -S, --status                  report password status on the named "
+#~ "account\n"
 #~ "  -u, --unlock                  unlock the password of the named account\n"
 #~ "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
+#~ "  -x, --maxdays MAX_DAYS        set maximum number of days before "
+#~ "password\n"
 #~ "                                change to MAX_DAYS\n"
 #~ "\n"
 #~ msgstr ""
@@ -3308,11 +3461,14 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -e, --expire                  força la caducitat de la contrasenya per\n"
 #~ "                                al compte anomenat\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
-#~ "  -k, --keep-tokens             canvia la contrasenya només si ha caducat\n"
-#~ "  -i, --inactive INACTIU        estableix la contrasenya a inactiva després\n"
+#~ "  -k, --keep-tokens             canvia la contrasenya només si ha "
+#~ "caducat\n"
+#~ "  -i, --inactive INACTIU        estableix la contrasenya a inactiva "
+#~ "després\n"
 #~ "                                d'INACTIU dies de caducitat\n"
 #~ "  -l, --lock                    bloca el compte anomenat\n"
-#~ "  -n, --mindays DIES_MÍN        estableix els dies mínims abans del canvi\n"
+#~ "  -n, --mindays DIES_MÍN        estableix els dies mínims abans del "
+#~ "canvi\n"
 #~ "                                de contrasenya a DIES_MÍN\n"
 #~ "  -q, --quiet                   mode silenciós\n"
 #~ "  -r, --repository REPOSITORI   canvia la contrasenya en el REPOSITORI\n"
@@ -3321,7 +3477,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -u, --unlock                  desbloca el compte anomenat\n"
 #~ "  -w, --warndays DIES_AVÍS      estableix els dies d'avís de caducitat\n"
 #~ "                                a DIES_AVÍS\n"
-#~ "  -x, --maxdays DIES_MÀX        estableix els dies màxims abans del canvi\n"
+#~ "  -x, --maxdays DIES_MÀX        estableix els dies màxims abans del "
+#~ "canvi\n"
 #~ "                                de contrasenya a DIES_MÀX\n"
 #~ "\n"
 
@@ -3356,7 +3513,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Forma d'ús: userdel [opcions] USUARI\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -f, --force                   força l'eliminació de fitxers, encara que\n"
+#~ "  -f, --force                   força l'eliminació de fitxers, encara "
+#~ "que\n"
 #~ "                                no siguin propietat de l'usuari\n"
 #~ "  -h, --help                    mostra aquesta ajuda i acaba\n"
 #~ "  -r, --remove                  elimina el directori personal i la cua\n"
@@ -3369,21 +3527,26 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Options:\n"
 #~ "  -c, --comment COMMENT         new value of the GECOS field\n"
 #~ "  -d, --home HOME_DIR           new home directory for the user account\n"
-#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
 #~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 #~ "                                to INACTIVE\n"
 #~ "  -g, --gid GROUP               force use GROUP as new primary group\n"
 #~ "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
-#~ "  -a, --append                  append the user to the supplemental GROUPS\n"
-#~ "                                mentioned by the -G option without removing\n"
+#~ "  -a, --append                  append the user to the supplemental "
+#~ "GROUPS\n"
+#~ "                                mentioned by the -G option without "
+#~ "removing\n"
 #~ "                                the user from other groups\n"
 #~ "  -h, --help                    display this help message and exit\n"
 #~ "  -l, --login NEW_LOGIN         new value of the login name\n"
 #~ "  -L, --lock                    lock the user account\n"
-#~ "  -m, --move-home               move contents of the home directory to the\n"
+#~ "  -m, --move-home               move contents of the home directory to "
+#~ "the\n"
 #~ "                                new location (use only with -d)\n"
 #~ "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
-#~ "  -p, --password PASSWORD       use encrypted password for the new password\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
 #~ "  -s, --shell SHELL             new login shell for the user account\n"
 #~ "  -u, --uid UID                 new UID for the user account\n"
 #~ "  -U, --unlock                  unlock the user account\n"
@@ -3395,25 +3558,31 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -c, --comment COMENTARI       nou valor per al camp GECOS\n"
 #~ "  -d, --home DIR_PERSONAL       nou directori personal per al nou compte\n"
 #~ "                                d'usuari\n"
-#~ "  -e, --expiredate DATA_CADUCIT estableix la data de caducitat del compte\n"
+#~ "  -e, --expiredate DATA_CADUCIT estableix la data de caducitat del "
+#~ "compte\n"
 #~ "                                a DATA_CADUCITAT\n"
-#~ "  -f, --inactive INACTIU        estableix la contrasenya a inactiva després\n"
+#~ "  -f, --inactive INACTIU        estableix la contrasenya a inactiva "
+#~ "després\n"
 #~ "                                d'INACTIU dies de caducitat\n"
-#~ "  -g, --gid GRUP                força l'ús de GRUP com a nou grup inicial\n"
+#~ "  -g, --gid GRUP                força l'ús de GRUP com a nou grup "
+#~ "inicial\n"
 #~ "                                d'accés\n"
 #~ "  -G, --groups GRUPS            llista de GRUPS addicionals\n"
 #~ "  -a, --append                  afegeix l'usuari als GRUPS addicionals\n"
-#~ "                                llistats amb la opció -G sense eliminar-los\n"
+#~ "                                llistats amb la opció -G sense eliminar-"
+#~ "los\n"
 #~ "                                d'altres grups\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i surt\n"
 #~ "  -l, --login USUARI            nou valor per al nom d'usuari\n"
 #~ "  -L, --lock                    bloca el compte d'usuari\n"
-#~ "  -m, --move-home               mou els continguts del directori personal\n"
+#~ "  -m, --move-home               mou els continguts del directori "
+#~ "personal\n"
 #~ "                                a la nova ubicació (usar només amb -d)\n"
 #~ "  -o, --non-unique              permet usar UID duplicats (no únics)\n"
 #~ "  -p, --password CONTRASENYA    usa contrasenya xifrada per a la nova\n"
 #~ "                                contrasenya\n"
-#~ "  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte d'usuari\n"
+#~ "  -s, --shell INTÈRPRET         nou intèrpret d'accés per al compte "
+#~ "d'usuari\n"
 #~ "  -u, --uid UID                 nou UID per al compte d'usuari\n"
 #~ "  -U, --unlock                  desbloca el compte d'usuari\n"
 #~ "%s\n"
@@ -3440,7 +3609,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
 #~ "  -p, --passwd                  edita la base de dades de passwd\n"
 #~ "  -q, --quiet                   mode silenciós\n"
-#~ "  -s, --shadow                  edita la base de dades de shadow o gshadow\n"
+#~ "  -s, --shadow                  edita la base de dades de shadow o "
+#~ "gshadow\n"
 #~ "\n"
 
 #~ msgid ""
@@ -3465,17 +3635,20 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "seconds\n"
 #~ "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 #~ "  -r, --reset                   reset the counters of login failures\n"
-#~ "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-#~ "  -u, --user LOGIN              display faillog record or maintains failure\n"
-#~ "                                counters and limits (if used with -r, -m or -"
-#~ "l\n"
+#~ "  -t, --time DAYS               display faillog records more recent than "
+#~ "DAYS\n"
+#~ "  -u, --user LOGIN              display faillog record or maintains "
+#~ "failure\n"
+#~ "                                counters and limits (if used with -r, -m "
+#~ "or -l\n"
 #~ "                                options) only for user with LOGIN\n"
 #~ "\n"
 #~ msgstr ""
 #~ "Forma d'ús: faillog [opcions]\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -a, --all                     mostra els registres de faillog de tots els\n"
+#~ "  -a, --all                     mostra els registres de faillog de tots "
+#~ "els\n"
 #~ "                                usuaris\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
 #~ "  -l, --lock-time SEG           bloca durant SEG segons després d'una\n"
@@ -3484,11 +3657,14 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "                                fallades d'accés a MÀX\n"
 #~ "  -r, --reset                   reinicialitza els comptadors de fallades\n"
 #~ "                                d'accés\n"
-#~ "  -t, --time DIES               mostra registres de faillog més recents que\n"
+#~ "  -t, --time DIES               mostra registres de faillog més recents "
+#~ "que\n"
 #~ "                                DIES\n"
 #~ "  -u, --user USUARI             mostra registre de faillog o manté\n"
-#~ "                                comptadors de fallades i límits (si es fa\n"
-#~ "                                servir amb les opcions -r, -m o -l) només\n"
+#~ "                                comptadors de fallades i límits (si es "
+#~ "fa\n"
+#~ "                                servir amb les opcions -r, -m o -l) "
+#~ "només\n"
 #~ "                                per a l'usuari amb USUARI\n"
 #~ "\n"
 
@@ -3511,7 +3687,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Forma d'ús: groupadd [opcions] GRUP\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -f, --force                   força la sortida amb un estat d'èxit si el\n"
+#~ "  -f, --force                   força la sortida amb un estat d'èxit si "
+#~ "el\n"
 #~ "                                grup especificat ja existeix\n"
 #~ "  -g, --gid GID                 usa GID per al nou grup\n"
 #~ "  -h, --help                    mostra aquest missatge d'ajuda i acaba\n"
@@ -3531,7 +3708,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 #~ "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 #~ "GROUP\n"
-#~ "  -p, --password PASSWORD       use encrypted password for the new password\n"
+#~ "  -p, --password PASSWORD       use encrypted password for the new "
+#~ "password\n"
 #~ "\n"
 #~ msgstr ""
 #~ "Forma d'ús: groupmod [opcions] GRUP\n"
@@ -3551,11 +3729,13 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "Options:\n"
 #~ "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
 #~ "                                home directory\n"
-#~ "  -c, --comment COMMENT         set the GECOS field for the new user account\n"
+#~ "  -c, --comment COMMENT         set the GECOS field for the new user "
+#~ "account\n"
 #~ "  -d, --home-dir HOME_DIR       home directory for the new user account\n"
 #~ "  -D, --defaults                print or save modified default useradd\n"
 #~ "                                configuration\n"
-#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+#~ "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#~ "EXPIRE_DATE\n"
 #~ "  -f, --inactive INACTIVE       set password inactive after expiration\n"
 #~ "                                to INACTIVE\n"
 #~ "  -g, --gid GROUP               force use GROUP for the new user account\n"
@@ -3570,7 +3750,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "                                account\n"
 #~ "  -M, --no-create-home          do not create user's home directory\n"
 #~ "                                (overrides /etc/login.defs)\n"
-#~ "  -N, --no-user-group           do not create a group with the same name as\n"
+#~ "  -N, --no-user-group           do not create a group with the same name "
+#~ "as\n"
 #~ "                                the user\n"
 #~ "  -o, --non-unique              allow create user with duplicate\n"
 #~ "                                (non-unique) UID\n"
@@ -3578,20 +3759,25 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "                                account\n"
 #~ "  -r, --system                  create a system account\n"
 #~ "  -s, --shell SHELL             the login shell for the new user account\n"
-#~ "  -u, --uid UID                 force use the UID for the new user account\n"
-#~ "  -U, --user-group              create a group with the same name as the user\n"
+#~ "  -u, --uid UID                 force use the UID for the new user "
+#~ "account\n"
+#~ "  -U, --user-group              create a group with the same name as the "
+#~ "user\n"
 #~ "%s\n"
 #~ msgstr ""
 #~ "Forma d'ús: useradd [opcions] USUARI\n"
 #~ "\n"
 #~ "Opcions:\n"
-#~ "  -b, --base-dir DIR_BASE          directori base per al directori personal\n"
+#~ "  -b, --base-dir DIR_BASE          directori base per al directori "
+#~ "personal\n"
 #~ "                                   del nou compte d'usuari\n"
 #~ "  -c, --comment COMENTARI          estableix el camp GECOS per al nou\n"
 #~ "                                   compte d'usuari\n"
 #~ "  -d, --home-dir DIR_PERSONAL      directori personal per al nou compte\n"
-#~ "  -D, --defaults                   mostra o guarda les modificacions a les\n"
-#~ "                                   d'usuari configuracions predeterminades\n"
+#~ "  -D, --defaults                   mostra o guarda les modificacions a "
+#~ "les\n"
+#~ "                                   d'usuari configuracions "
+#~ "predeterminades\n"
 #~ "                                   de useradd\n"
 #~ "  -e, --expiredate DATA_CADUCITAT  estableix la data de caducitat del\n"
 #~ "                                   compte a DATA_CADUCITAT\n"
@@ -3600,15 +3786,20 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "                                   d'INACTIU dies de caducitat\n"
 #~ "  -g, --gid GRUP                   força l'ús del GRUP per al nou compte\n"
 #~ "                                   creat\n"
-#~ "  -G, --groups GRUPS               llista de grups suplementaris per al nou\n"
+#~ "  -G, --groups GRUPS               llista de grups suplementaris per al "
+#~ "nou\n"
 #~ "                                   compte d'usuari\n"
-#~ "  -h, --help                       mostra aquest missatge d'ajuda i acaba\n"
-#~ "  -k, --skel DIR_SKEL              especifica un directori skel alternatiu\n"
-#~ "  -K, --key CLAU=VALOR             substitueix els valors predeterminats de\n"
+#~ "  -h, --help                       mostra aquest missatge d'ajuda i "
+#~ "acaba\n"
+#~ "  -k, --skel DIR_SKEL              especifica un directori skel "
+#~ "alternatiu\n"
+#~ "  -K, --key CLAU=VALOR             substitueix els valors predeterminats "
+#~ "de\n"
 #~ "                                   /etc/login.defs\n"
 #~ "  -m, --create-home                crea el directori personal per al nou\n"
 #~ "                                   compte d'usuari\n"
-#~ "  -o, --non-unique                 permet crear usuaris amb UID duplicats\n"
+#~ "  -o, --non-unique                 permet crear usuaris amb UID "
+#~ "duplicats\n"
 #~ "                                   (no únics)\n"
 #~ "  -p, --password CONTRASENYA       usa contrasenya xifrada per al nou\n"
 #~ "                                   compte d'usuari\n"
@@ -3655,7 +3846,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "\tTelèfon de casa: %s\n"
 
 #~ msgid "Cannot lock the password file; try again later.\n"
-#~ msgstr "No s'ha pogut blocar el fitxer de contrasenyes; intenteu-ho més tard\n"
+#~ msgstr ""
+#~ "No s'ha pogut blocar el fitxer de contrasenyes; intenteu-ho més tard\n"
 
 #~ msgid "Cannot open the password file.\n"
 #~ msgstr "No s'ha pogut obrir el fitxer de contrasenyes.\n"
@@ -3705,13 +3897,15 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ "%s: s'ha produït un error en actualitzar el fitxer de contrasenyes ombra\n"
 
 #~ msgid "%s: error updating password file\n"
-#~ msgstr "%s: s'ha produït un error en actualitzar el fitxer de contrasenyes\n"
+#~ msgstr ""
+#~ "%s: s'ha produït un error en actualitzar el fitxer de contrasenyes\n"
 
 #~ msgid "%s: line %d: unknown user %s\n"
 #~ msgstr "%s: línia %d: l'usuari %s és desconegut\n"
 
 #~ msgid "%s: line %d: cannot update password entry\n"
-#~ msgstr "%s: línia %d: no s'ha pogut actualitzar l'entrada de la contrasenya\n"
+#~ msgstr ""
+#~ "%s: línia %d: no s'ha pogut actualitzar l'entrada de la contrasenya\n"
 
 #~ msgid "%s: unknown user\n"
 #~ msgstr "%s: l'usuari és desconegut\n"
@@ -3738,7 +3932,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "%s: no es pot obtenir el bloqueig\n"
 
 #~ msgid "%s: can't get shadow lock\n"
-#~ msgstr "%s: no es pot obtenir el bloqueig del fitxer de contrasenyes ombra\n"
+#~ msgstr ""
+#~ "%s: no es pot obtenir el bloqueig del fitxer de contrasenyes ombra\n"
 
 #~ msgid "%s: can't re-write shadow file\n"
 #~ msgstr "%s: no es pot reescriure el fitxer ombra\n"
@@ -3750,7 +3945,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "%s: no es pot actualitzar l'entrada\n"
 
 #~ msgid "%s: can't update shadow entry\n"
-#~ msgstr "%s: no es pot actualitzar l'entrada del fitxer de contrasenyes ombra\n"
+#~ msgstr ""
+#~ "%s: no es pot actualitzar l'entrada del fitxer de contrasenyes ombra\n"
 
 #~ msgid "unknown group: %s\n"
 #~ msgstr "El grup és desconegut: %s\n"
@@ -3805,7 +4001,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgid "Member to remove could not be found\n"
 #~ msgstr "No s'han trobat els membres a borrar\n"
 
-#~ msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+#~ msgid ""
+#~ "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 #~ msgstr "Forma d'ús: groupmems -a úsuari | -d úsuari | -D | -l [-g grup]\n"
 
 #~ msgid "Only root can add members to different groups\n"
@@ -3955,7 +4152,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "%s: s'ha produït un error en obrir el fitxer de grups ombra\n"
 
 #~ msgid "%s: error adding new password entry\n"
-#~ msgstr "%s: s'ha produït un error en afegir la nova entrada de contrasenya\n"
+#~ msgstr ""
+#~ "%s: s'ha produït un error en afegir la nova entrada de contrasenya\n"
 
 #~ msgid "%s: error adding new shadow password entry\n"
 #~ msgstr ""
@@ -3963,7 +4161,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 
 #~ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 #~ msgstr ""
-#~ "%s: avís: CREATE_HOME no està suportat, si us plau useu «-m» en el seu lloc.\n"
+#~ "%s: avís: CREATE_HOME no està suportat, si us plau useu «-m» en el seu "
+#~ "lloc.\n"
 
 #~ msgid "%s: error updating group entry\n"
 #~ msgstr "%s: s'ha produït un error en actualitzar l'entrada de grup\n"
@@ -3982,7 +4181,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya\n"
 
 #~ msgid "%s: error deleting shadow password entry\n"
-#~ msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
+#~ msgstr ""
+#~ "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
 
 #, fuzzy
 #~ msgid "%s: error adding new shadow group entry\n"
@@ -3998,7 +4198,8 @@ msgstr "%s: no es pot trobar el directori «tcb» per %s\n"
 #~ msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya\n"
 
 #~ msgid "%s: error removing shadow password entry\n"
-#~ msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
+#~ msgstr ""
+#~ "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
 
 #~ msgid "%s: can't get unique GID\n"
 #~ msgstr "%s: no es pot obtenir un GID únic\n"

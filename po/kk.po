@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-03-14 18:23-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2017-02-07 17:09+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -21,9 +21,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Ескерту: белгісіз топ %s\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Ескерту: топ саны тым көп\n"
 
 msgid "Your password has expired."
 msgstr "Пароліңіздің мерзімі аяқталған."
@@ -81,9 +78,6 @@ msgstr ": "
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "шифрлеу тәсіліне libcrypt-тан қолдау жоқ па? (%s)\n"
-
-msgid "Environment overflow\n"
-msgstr "Орындалу орта айнымалыларының шектен көп саны\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -538,10 +532,6 @@ msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: %s символдық сілтемесін оқу мүмкін емес: %s\n"
 
 #, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Күдіктілі ұзын символдық сілтеме: %s\n"
-
-#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: %s бумасын жасау мүмкін емес: %s\n"
 
@@ -761,14 +751,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: Рұқсат жоқ.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Сіздің пайдаланушы атын анықтау мүмкін емес.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: PAM: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: %s оқшаулау сәтсіз; кейін қайталаңыз.\n"
 
@@ -854,6 +836,14 @@ msgstr "Басқа"
 msgid "%s: fields too long\n"
 msgstr "%s: жолдар өте ұзын\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Сіздің пайдаланушы атын анықтау мүмкін емес.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: PAM: %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Суперпайдаланушы (root) құқығын алу мүмкін емес.\n"
 
@@ -889,17 +879,14 @@ msgstr "%s: '%s' құрамында ASCII-емес таңбалар бар\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' құрамында қате таңбалар бар\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: '%s' дұрыс топ аты емес\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: пайдаланушы '%s' жоқ болып тұр\n"
-
-#, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: NIS клиентінде '%s' пайдаланушыны ауыстыруға мүмкін емес.\n"
-
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s' - бұл клиент үшін NIS сервері.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
@@ -957,36 +944,47 @@ msgstr "%s: -c, -e, және -m жалаушалары өзара үйлеспе
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: қолдауы жоқ шифрлеу тәсілі: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: жол %d: жол өте ұзын\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: жол %d: жаңа пароль жоқ\n"
 
 #, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: парольді '%s' тұзымен шифрлеу сәтсіз аяқталды: %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: жол %d: '%s' тобы жоқ болып тұр\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: жол %d: жаңа %s '%s' жазбаны дайындау мүмкін емес\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: қателер орын алды, өзгерістер сақталмады\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: (жол %d, пайдаланушы %s) пароль өзгертілмеген\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s: (жол %d, пайдаланушы %s) пароль өзгертілмеген\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: жол %d: пайдаланушы '%s' жоқ болып тұр\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1268,7 +1266,9 @@ msgstr "  -r, --system                  жүйелік тіркелгіні жа
 
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
-msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr "  -l, --list                    топ мүшелердің тізімін шығару\n"
 
 #, fuzzy, c-format
@@ -1328,14 +1328,6 @@ msgstr "%s: '%s' пайдаланушының басты тобын өшіру �
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: '%s' тобы жоқ болып тұр\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: '%s' тобы NIS тобы болып тұр\n"
-
-#, c-format
-msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s қазір NIS сервері болып тұр\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
@@ -1428,17 +1420,16 @@ msgid ""
 msgstr ""
 "  -p, --password ПАРОЛЬ         парольді осы ПАРОЛЬге (шифрленген) оранту\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr "  -l, --list                    топ мүшелердің тізімін шығару\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: қате топ аты '%s'\n"
-
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: %s тобы NIS тобы болып тұр\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: белгісіз пайдаланушы %s\n"
 
 #, c-format
 msgid ""
@@ -1549,12 +1540,6 @@ msgstr "%s: өзгерістер жоқ\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: %s өшіру мүмкін емес\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Қолданылуы: id [-a]\n"
-
-msgid " groups="
-msgstr " топтар="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1591,6 +1576,16 @@ msgid ""
 msgstr ""
 "  -u, --user ТІРКЕЛГІ           көрсетілген ТІРКЕЛГІ үшін lastlog жазбаларын "
 "көрсету\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr ""
+"  -a, --all                     барлық пайдаланушылар үшін faillog "
+"жазбаларын көрсету\n"
 
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
@@ -1639,10 +1634,6 @@ msgstr "Қолданылуы: %s [-p] [аты]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h хост] [-f аты]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r хост\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1767,7 +1758,7 @@ msgstr "%s: %s босату сәтсіз\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: %s үшін tcb бумасын жасау мүмкін емес\n"
 
 #, c-format
@@ -1793,12 +1784,14 @@ msgstr "пароль қате.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: үрдісті бастау қатесі: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: '%s' дұрыс топ аты емес\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: '%lu' GID-і жоқ болып тұр\n"
-
-msgid "too many groups\n"
-msgstr "топ саны шектен тыс\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1809,11 +1802,6 @@ msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
-
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: %s үшін tcb бумасын жасау мүмкін емес\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1838,11 +1826,16 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: '%s' пайдаланушы аты қате\n"
 
 #, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: '%s' пайдаланушы аты қате\n"
+
+#, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: жол %d: жол қате\n"
 
 #, c-format
@@ -1850,42 +1843,49 @@ msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
 msgstr ""
 "%s: %s пайдаланушы жазбасын жаңарту мүмкін емес (passwd дерекқорында жоқ)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: жол %d: пайдаланушыны жасау мүмкін емес\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: жол %d: топты жасау мүмкін емес\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: жол %d: '%s' пайдаланушысы %s ішінде жоқ\n"
 
 #, fuzzy, c-format
 #| msgid "%s: unlink: %s: %s\n"
-msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: unlink: %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: жол %d: парольді жаңарту мүмкін емес\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: mkdir %s failed: %s\n"
-msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: жол %d: mkdir %s сәтсіз: %s\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: жол %d: mkdir %s сәтсіз: %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: жол %d: жазбаны жаңарту мүмкін емес\n"
 
 #, c-format
@@ -2110,6 +2110,11 @@ msgstr "қайталанатын пароль жазбасы"
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: '%s' пайдаланушы аты қате\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
 msgstr "%s: '%s' пайдаланушы аты қате\n"
 
 #, c-format
@@ -2341,14 +2346,15 @@ msgstr "Жүйені жөндеу режиміне өту"
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s: %s жасалды, бірақ оны өшіру мүмкін емес\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s: %s баптауы,  ол %s ішінде, есепке алынбайды\n"
 
 #, fuzzy, c-format
 #| msgid "%s: the %s configuration in %s will be ignored\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr "%s: %s баптауы,  ол %s ішінде, есепке алынбайды\n"
 
@@ -2360,10 +2366,6 @@ msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
-
-#, c-format
-msgid "%s: cannot create new defaults file\n"
 msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
 
 #, c-format
@@ -2381,10 +2383,6 @@ msgstr "%s: Қор көшірме файлын жасау мүмкін емес 
 #, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: атын ауыстыру: %s: %s\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: '%s' тобы NIS тобы болып тұр.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -2811,10 +2809,6 @@ msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: %s үшін tcb файлдарын өшіру мүмкін емес: %s\n"
 
 #, c-format
-msgid "%s: user %s is a NIS user\n"
-msgstr "%s: %s қазір NIS пайдаланушысы болып тұр\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s үшін үй бумасы (%s) табылмады\n"
 
@@ -3077,22 +3071,24 @@ msgstr "mailbox иесін ауыстыру қатемен аяқталды"
 msgid "failed to rename mailbox"
 msgstr "mailbox атын ауыстыру қатемен аяқталды"
 
-#, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: %lu-%lu uid-тар ауқымын '%s' ішінен өшіру сәтсіз аяқталды\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: %lu-%lu uid ауқымын '%s' ішіне қосу сәтсіз аяқталды\n"
 
-#, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: %lu-%lu gid-тар ауқымын '%s' ішінен өшіру сәтсіз аяқталды\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: %lu-%lu gid ауқымын '%s' ішіне қосу сәтсіз аяқталды\n"
 
 #, c-format
@@ -3169,8 +3165,10 @@ msgstr "scratch файлын жою сәтсіз"
 msgid "failed to stat edited file"
 msgstr "түзетілген файлды табу сәтсіз"
 
-msgid "asprintf(3) failed"
-msgstr ""
+#, fuzzy
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "aprintf() failed"
+msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
 
 msgid "failed to create backup file"
 msgstr "резервті көшірме файлын жасау сәтсіз"
@@ -3182,6 +3180,70 @@ msgstr "%s: %s қайтару мүмкін емес: %s (сіздің өзгер
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Ескерту: топ саны тым көп\n"
+
+#~ msgid "Environment overflow\n"
+#~ msgstr "Орындалу орта айнымалыларының шектен көп саны\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s: Күдіктілі ұзын символдық сілтеме: %s\n"
+
+#, c-format
+#~ msgid "%s: cannot change user '%s' on NIS client.\n"
+#~ msgstr "%s: NIS клиентінде '%s' пайдаланушыны ауыстыруға мүмкін емес.\n"
+
+#, c-format
+#~ msgid "%s: '%s' is the NIS master for this client.\n"
+#~ msgstr "%s: '%s' - бұл клиент үшін NIS сервері.\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group\n"
+#~ msgstr "%s: '%s' тобы NIS тобы болып тұр\n"
+
+#, c-format
+#~ msgid "%s: %s is the NIS master\n"
+#~ msgstr "%s: %s қазір NIS сервері болып тұр\n"
+
+#, c-format
+#~ msgid "%s: group %s is a NIS group\n"
+#~ msgstr "%s: %s тобы NIS тобы болып тұр\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: белгісіз пайдаланушы %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Қолданылуы: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " топтар="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r хост\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: Failed to create tcb directory for %s\n"
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s: %s үшін tcb бумасын жасау мүмкін емес\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "топ саны шектен тыс\n"
+
+#, c-format
+#~ msgid "%s: cannot create new defaults file\n"
+#~ msgstr "%s: жаңа defaults файлын жасау мүмкін емес\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group.\n"
+#~ msgstr "%s: '%s' тобы NIS тобы болып тұр.\n"
+
+#, c-format
+#~ msgid "%s: user %s is a NIS user\n"
+#~ msgstr "%s: %s қазір NIS пайдаланушысы болып тұр\n"
 
 #~ msgid "too simple"
 #~ msgstr "өте оңай"
@@ -3205,10 +3267,6 @@ msgstr "%s: %s үшін tcb бумасын табу сәтсіз\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "Жүйеге соңғы кіру: %.19s, терминал %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: '%s' пайдаланушы аты қате\n"
 
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"

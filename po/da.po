@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-03-14 18:23-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2012-01-26 23:57+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -33,9 +33,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Advarsel: Ukendt gruppe %s\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Advarsel: For mange grupper\n"
 
 msgid "Your password has expired."
 msgstr "Din adgangskode er udløbet."
@@ -93,9 +90,6 @@ msgstr ": "
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "cryptmetode er ikke understøttet af libcrypt? (%s)\n"
-
-msgid "Environment overflow\n"
-msgstr "Miljøoverløb\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -552,10 +546,6 @@ msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: Kan ikke omdøbe symbolsk henvisning %s: %s\n"
 
 #, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Mistænkelig lang symbolsk henvisning: %s\n"
-
-#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: Kan ikke oprette mappen %s: %s\n"
 
@@ -771,14 +761,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: Adgang nægtet.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: PAM: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: Kan ikke låse %s; prøv igen senere.\n"
 
@@ -862,6 +844,14 @@ msgstr "Andet"
 msgid "%s: fields too long\n"
 msgstr "%s: Felter for lange\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: PAM: %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Kan ikke ændre id til root.\n"
 
@@ -897,17 +887,14 @@ msgstr "%s: »%s« indeholder ikke-ASCII-tegn\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: »%s« indeholder ugyldige tegn\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: »%s« er ikke et gyldigt gruppenavn\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: Brugeren »%s« findes ikke\n"
-
-#, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: Kan ikke ændre brugeren »%s« på NIS-klienten.\n"
-
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: »%s« er NIS-masteren for denne klient.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
@@ -966,36 +953,47 @@ msgstr "%s: Flagene -c, -e og -m udelukker hinanden\n"
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: Crypt-metode er ikke understøttet: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: Linje %d: Linjen er for lang\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: Linje %d: Mangler ny adgangskode\n"
 
 #, fuzzy, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: Kunne ikke skrive %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: Linje %d: Gruppe »%s« findes ikke\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: Linje %d: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: Fejl opdaget, ændringerne blev ignoreret\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: (Linje %d, bruger %s) adgangskode ikke ændret\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s: (Linje %d, bruger %s) adgangskode ikke ændret\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: Linje %d: Bruger »%s« findes ikke\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1272,7 +1270,9 @@ msgstr "  -r, --system                  opret en systemkonto\n"
 
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
-msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr "  -l, --list                    vis medlemmer af gruppen\n"
 
 #, fuzzy, c-format
@@ -1332,14 +1332,6 @@ msgstr "%s: Kan ikke fjerne den primære gruppe for bruger »%s«.\n"
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: Gruppe »%s« findes ikke\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: Gruppe »%s« er en NIS-gruppe.\n"
-
-#, c-format
-msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s er NIS-masteren\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
@@ -1437,17 +1429,16 @@ msgstr ""
 "  -p, --password ADGANGSKODE    ændr adgangskoden til denne (krypteret)\n"
 "                                ADGANGSKODE\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr "  -l, --list                    vis medlemmer af gruppen\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: Ugyldigt gruppenavn »%s«\n"
-
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: Gruppen %s er en NIS-gruppe\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: Ukendt bruger %s\n"
 
 #, c-format
 msgid ""
@@ -1558,12 +1549,6 @@ msgstr "%s: Ingen ændringer\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: Kan ikke slette %s\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Brug: id [-a]\n"
-
-msgid " groups="
-msgstr " grupper="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1594,6 +1579,14 @@ msgid ""
 msgstr ""
 "  -u, --user LOGIND             vis lastlog-poster for brugeren med\n"
 "                                det angivne LOGIND\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr "  -a, --all                     vis faillog-poster for alle brugere\n"
 
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
@@ -1641,10 +1634,6 @@ msgstr "Brug: %s [-p] [navn]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h vært] [-f navn]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r vært\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1768,7 +1757,7 @@ msgstr "%s: Kunne ikke åbne %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: Kan ikke oprette tcv-mappe for %s\n"
 
 #, c-format
@@ -1794,12 +1783,14 @@ msgstr "Ugyldig adgangskode.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: fejl under forgrening: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: »%s« er ikke et gyldigt gruppenavn\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: GID »%lu« findes ikke\n"
-
-msgid "too many groups\n"
-msgstr "for mange grupper\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1810,11 +1801,6 @@ msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
-
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: Kan ikke oprette tcv-mappe for %s\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1838,11 +1824,16 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: Ugyldigt brugernavn »%s«\n"
 
 #, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: Ugyldigt brugernavn »%s«\n"
+
+#, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: Linje %d: Ugyldig linje\n"
 
 #, c-format
@@ -1850,42 +1841,49 @@ msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
 msgstr ""
 "%s: Kan ikke opdatere punktet for brugeren %s (ikke i passwd-databasen)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: Linje %d: Kan ikke oprette bruger\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: Linje %d: Kan ikke oprette gruppe\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: Linje %d: Bruger »%s« findes ikke i %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: unlink: %s: %s\n"
-msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: Fjern henvisning: %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: Linje %d: Kan ikke opdatere adgangskode\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: mkdir %s failed: %s\n"
-msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: Linje %d: mkdir %s fejlede: %s\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: Linje %d: mkdir %s fejlede: %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: Linje %d: chown %s fejlede: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: Linje %d: Kan ikke opdatere punktet\n"
 
 #, fuzzy, c-format
@@ -2102,6 +2100,11 @@ msgstr "adgangskodepunkt er en dublet"
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: Ugyldigt brugernavn »%s«\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
 msgstr "%s: Ugyldigt brugernavn »%s«\n"
 
 #, c-format
@@ -2332,14 +2335,15 @@ msgstr "Går i systemvedligeholdelsestilstand"
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s: %s blev oprettet, men kunne ikke fjernes\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s: Konfigurationen %s i %s vil blive ignoreret\n"
 
 #, fuzzy, c-format
 #| msgid "%s: the %s configuration in %s will be ignored\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr "%s: Konfigurationen %s i %s vil blive ignoreret\n"
 
@@ -2351,10 +2355,6 @@ msgstr "%s: Kan ikke oprette ny standardværdifil\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: Kan ikke oprette ny standardværdifil\n"
-
-#, c-format
-msgid "%s: cannot create new defaults file\n"
 msgstr "%s: Kan ikke oprette ny standardværdifil\n"
 
 #, c-format
@@ -2372,10 +2372,6 @@ msgstr "%s: Kan ikke oprette symbolsk henvisning %s: %s\n"
 #, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: Omdøb: %s: %s\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: Gruppen »%s« er en NIS-gruppe.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -2813,10 +2809,6 @@ msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: Kan ikke fjerne tcb-filer for %s: %s\n"
 
 #, c-format
-msgid "%s: user %s is a NIS user\n"
-msgstr "%s: Brugeren %s er en NIS-bruger\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s hjemmemappe (%s) er ikke fundet\n"
 
@@ -3079,19 +3071,19 @@ msgid "failed to rename mailbox"
 msgstr "kunne ikke omdøbe postkasse"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: Kunne ikke forberede det nye %s-punkt »%s«\n"
 
 #, c-format
@@ -3168,8 +3160,10 @@ msgstr "kunne ikke fjerne henvisning for scratch-fil"
 msgid "failed to stat edited file"
 msgstr "kunne ikke stat redigeret fil"
 
-msgid "asprintf(3) failed"
-msgstr ""
+#, fuzzy
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "aprintf() failed"
+msgstr "%s: Linje %d: chown %s fejlede: %s\n"
 
 msgid "failed to create backup file"
 msgstr "kunne ikke oprette sikkerhedskopifil"
@@ -3181,6 +3175,70 @@ msgstr "%s: Kan ikke gendanne %s: %s (dine ændringer er i %s)\n"
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: Kunne ikke finde tcb-mappe for %s\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Advarsel: For mange grupper\n"
+
+#~ msgid "Environment overflow\n"
+#~ msgstr "Miljøoverløb\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s: Mistænkelig lang symbolsk henvisning: %s\n"
+
+#, c-format
+#~ msgid "%s: cannot change user '%s' on NIS client.\n"
+#~ msgstr "%s: Kan ikke ændre brugeren »%s« på NIS-klienten.\n"
+
+#, c-format
+#~ msgid "%s: '%s' is the NIS master for this client.\n"
+#~ msgstr "%s: »%s« er NIS-masteren for denne klient.\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group\n"
+#~ msgstr "%s: Gruppe »%s« er en NIS-gruppe.\n"
+
+#, c-format
+#~ msgid "%s: %s is the NIS master\n"
+#~ msgstr "%s: %s er NIS-masteren\n"
+
+#, c-format
+#~ msgid "%s: group %s is a NIS group\n"
+#~ msgstr "%s: Gruppen %s er en NIS-gruppe\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: Ukendt bruger %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Brug: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " grupper="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r vært\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: Failed to create tcb directory for %s\n"
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s: Kan ikke oprette tcv-mappe for %s\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "for mange grupper\n"
+
+#, c-format
+#~ msgid "%s: cannot create new defaults file\n"
+#~ msgstr "%s: Kan ikke oprette ny standardværdifil\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group.\n"
+#~ msgstr "%s: Gruppen »%s« er en NIS-gruppe.\n"
+
+#, c-format
+#~ msgid "%s: user %s is a NIS user\n"
+#~ msgstr "%s: Brugeren %s er en NIS-bruger\n"
 
 #~ msgid "too simple"
 #~ msgstr "for simpelt"
@@ -3202,10 +3260,6 @@ msgstr "%s: Kunne ikke finde tcb-mappe for %s\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "Sidst logget på: %.19s på %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: Ugyldigt brugernavn »%s«\n"
 
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"

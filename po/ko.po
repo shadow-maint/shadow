@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-03-14 18:23-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2009-04-19 21:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -21,9 +21,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "경고: 알 수 없는 그룹(%s)\n"
-
-msgid "Warning: too many groups\n"
-msgstr "경고: 그룹이 너무 많음\n"
 
 msgid "Your password has expired."
 msgstr "암호 사용기한이 지났습니다."
@@ -81,9 +78,6 @@ msgstr ""
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "libcrypt가 지원하지 않는 암호화 방법? (%s)\n"
-
-msgid "Environment overflow\n"
-msgstr "환경 변수 오버플로우\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -512,10 +506,6 @@ msgstr "%s: 홈 디렉터리 '%s'은(는) 잘못되었습니다\n"
 msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: '%s' 항목을 %s에서 제거할 수 없습니다\n"
 
-#, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
@@ -713,14 +703,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: 권한이 거부되었습니다.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
-
-#, fuzzy, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: %s을(를) 잠글 수 없습니다. 나중에 다시 시도하십시오.\n"
 
@@ -800,6 +782,14 @@ msgstr "기타"
 msgid "%s: fields too long\n"
 msgstr "%s: 입력범위가 너무 깁니다\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
+
+#, fuzzy, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "아이디를 루트로 바꿀 수는 없습니다.\n"
 
@@ -835,17 +825,14 @@ msgstr "%s: '%s'에 ASCII가 아닌 문자가 들어 있습니다\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s'에 사용할 수 없는 글자가 들어 있습니다\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: '%s'은(는) 사용할 수 없는 그룹 이름입니다\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: '%s' 사용자가 없습니다\n"
-
-#, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: NIS 클라이언트에서 '%s' 사용자를 바꿀 수 없습니다.\n"
-
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s'이(가) 현재의 클라이언트의 NIS 마스터입니다.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
@@ -897,24 +884,28 @@ msgstr "%s: -c, -e, -m 옵션은 하나만 쓸 수 있습니다\n"
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: 지원하지 않는 암호화 방법: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: %d번 줄: 너무 깁니다\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: %d번 줄: 새 암호가 없습니다\n"
 
 #, fuzzy, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: %s을(를) 제거하는데 실패했습니다\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: %d번 줄: '%s' 그룹이 없습니다\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: %d번 줄: 새 %s 항목 '%s'을(를) 준비하는 데 실패했습니다\n"
 
 #, c-format
@@ -922,11 +913,16 @@ msgid "%s: error detected, changes ignored\n"
 msgstr "%s: 오류 발견, 바뀐 내역은 무시합니다\n"
 
 #, fuzzy, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: %d번 줄: '%s' 사용자가 없습니다\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s: %d번 줄: '%s' 사용자가 없습니다\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: %d번 줄: '%s' 사용자가 없습니다\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1176,8 +1172,11 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
-msgid "  -U, --users USERS             list of user members of this group\n"
-msgstr ""
+#, fuzzy
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
 
 #, fuzzy, c-format
 #| msgid "invalid user name '%s'\n"
@@ -1233,14 +1232,6 @@ msgstr "%s: '%s' 사용자의 주요 그룹을 제거할 수 없습니다\n"
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: '%s' 그룹이 없습니다\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: '%s' 그룹은 NIS 그룹입니다\n"
-
-#, c-format
-msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s은(는) NIS 마스터입니다\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
@@ -1315,17 +1306,15 @@ msgid ""
 "                                PASSWORD\n"
 msgstr ""
 
+#, fuzzy
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr "  -s, --sha-rounds              SHA* 암호화 알고리즘의 SHA 라운드 수\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: '%s' 그룹 이름은 쓸 수 없습니다\n"
-
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: %s 그룹은 NIS 그룹입니다\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: 알 수 없는 사용자 %s\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -1427,12 +1416,6 @@ msgstr "%s: 바뀐 점이 없음\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: '%s'을(를) 삭제할 수 없습니다\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "사용법: id [-a]\n"
-
-msgid " groups="
-msgstr " 그룹 목록="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1454,6 +1437,11 @@ msgstr ""
 
 msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
+msgstr ""
+
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1502,10 +1490,6 @@ msgstr "사용법: %s [-p] [이름]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h 호스트이름] [-f 이름]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r 호스트\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1628,7 +1612,7 @@ msgid "%s: failed to setgroups %s policy: %s\n"
 msgstr "%s: %s의 잠금을 푸는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: Could not stat directory for process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
 
 #, c-format
@@ -1654,12 +1638,14 @@ msgstr "쓸 수 없는 암호입니다.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: 프로세스 만들기 실패: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: '%s'은(는) 사용할 수 없는 그룹 이름입니다\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: '%lu' GID가 없습니다\n"
-
-msgid "too many groups\n"
-msgstr "그룹이 너무 많습니다\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1670,10 +1656,6 @@ msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr ""
@@ -1695,11 +1677,16 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
 
 #, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
+
+#, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: %d번 줄: 올바른 줄이 아닙니다\n"
 
 #, c-format
@@ -1708,40 +1695,45 @@ msgstr ""
 "%s: %s 사용자의 항목을 업데이트 할 수 없습니다 (passwd 데이터베이스에 없습니"
 "다)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: %d번 줄: 사용자를 만들 수 없습니다\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: %d번 줄: 그룹을 만들 수 없습니다\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: %d번 줄: `%s' 사용자가 %s 안에 없습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: 이름 다시 설정: %s"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: %d번 줄: 암호를 업데이트 할 수 없습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: %d번 줄: 디렉터리 만들기에 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: %d번 줄: 디렉터리 만들기에 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: %d번 줄: chown 실패했습니다\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: %d번 줄: 입력값을 업데이트 할 수 없습니다\n"
 
 #, fuzzy, c-format
@@ -1938,6 +1930,11 @@ msgstr "암호 입력값 복제"
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
 msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
 
 #, c-format
@@ -2166,12 +2163,12 @@ msgid "%s: %s was created, but could not be removed\n"
 msgstr ""
 
 #, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr ""
 
 #, c-format
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr ""
 
@@ -2183,10 +2180,6 @@ msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
-
-#, c-format
-msgid "%s: cannot create new defaults file\n"
 msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
 
 #, c-format
@@ -2204,10 +2197,6 @@ msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
 #, fuzzy, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: 이름 다시 설정: %s"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: '%s' 그룹은 NIS 그룹입니다.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -2597,10 +2586,6 @@ msgstr "lastlog: %s의 크기를 읽을 수 없습니다: %s\n"
 msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: '%s' 항목을 %s에서 제거할 수 없습니다\n"
 
-#, c-format
-msgid "%s: user %s is a NIS user\n"
-msgstr "%s: %s 사용자는 NIS 사용자 입니다\n"
-
 #, fuzzy, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: 홈 디렉터리 '%s'은(는) 잘못되었습니다\n"
@@ -2825,19 +2810,19 @@ msgid "failed to rename mailbox"
 msgstr "메일함의 이름을 바꾸는 데 실패했습니다"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: 새 %s 항목 '%s'을(를) 준비하는데 실패했습니다\n"
 
 #, c-format
@@ -2919,8 +2904,9 @@ msgstr "%s: %s의 잠금을 푸는데 실패했습니다\n"
 msgid "failed to stat edited file"
 msgstr "메일함의 이름을 바꾸는 데 실패했습니다"
 
-msgid "asprintf(3) failed"
-msgstr ""
+#, fuzzy
+msgid "aprintf() failed"
+msgstr "%s: %d번 줄: chown 실패했습니다\n"
 
 #, fuzzy
 msgid "failed to create backup file"
@@ -2933,6 +2919,65 @@ msgstr "%s: %s을(를) 복구할 수 없습니다: %s (바뀐 사항은 %s에 �
 #, fuzzy, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "경고: 그룹이 너무 많음\n"
+
+#~ msgid "Environment overflow\n"
+#~ msgstr "환경 변수 오버플로우\n"
+
+#, c-format
+#~ msgid "%s: cannot change user '%s' on NIS client.\n"
+#~ msgstr "%s: NIS 클라이언트에서 '%s' 사용자를 바꿀 수 없습니다.\n"
+
+#, c-format
+#~ msgid "%s: '%s' is the NIS master for this client.\n"
+#~ msgstr "%s: '%s'이(가) 현재의 클라이언트의 NIS 마스터입니다.\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group\n"
+#~ msgstr "%s: '%s' 그룹은 NIS 그룹입니다\n"
+
+#, c-format
+#~ msgid "%s: %s is the NIS master\n"
+#~ msgstr "%s: %s은(는) NIS 마스터입니다\n"
+
+#, c-format
+#~ msgid "%s: group %s is a NIS group\n"
+#~ msgstr "%s: %s 그룹은 NIS 그룹입니다\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: 알 수 없는 사용자 %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "사용법: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " 그룹 목록="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r 호스트\n"
+
+#, fuzzy, c-format
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s: 디렉터리 %s을(를) 만들 수 없습니다\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "그룹이 너무 많습니다\n"
+
+#, c-format
+#~ msgid "%s: cannot create new defaults file\n"
+#~ msgstr "%s: 새로운 기본값 파일을 만들 수 없습니다\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group.\n"
+#~ msgstr "%s: '%s' 그룹은 NIS 그룹입니다.\n"
+
+#, c-format
+#~ msgid "%s: user %s is a NIS user\n"
+#~ msgstr "%s: %s 사용자는 NIS 사용자 입니다\n"
 
 #~ msgid "too simple"
 #~ msgstr "너무 간단합니다"
@@ -2955,10 +3000,6 @@ msgstr "%s: 기본 디렉터리 '%s' 잘못되었습니다\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "마지막 로그인: %.19s on %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: 쓸 수 없는 사용자 이름 '%s'\n"
 
 #, fuzzy, c-format
 #~ msgid "%s: password expiry information changed.\n"

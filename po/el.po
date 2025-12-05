@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-03-14 18:23-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2012-01-21 00:22+0200\n"
 "Last-Translator: Thomas Vasileiou <thomas-v@wildmail.com>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -24,9 +24,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Προειδοποίηση: άγνωστη ομάδα %s\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Προειδοποίηση: Πολλές ομάδες\n"
 
 msgid "Your password has expired."
 msgstr "Το συνθηματικό σας έχει λήξει."
@@ -82,9 +79,6 @@ msgstr ": "
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "η μέθοδος κρυπτογράφησης δεν υποστηρίζεται από το libcrypt? (%s)\n"
-
-msgid "Environment overflow\n"
-msgstr "Υπερχείλιση περιβάλλοντος\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -549,10 +543,6 @@ msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: Αδυναμία ανάγνωσης του συμβολικού συνδέσμου %s: %s\n"
 
 #, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Ύποπτα μεγάλος συμβολικός σύνδεσμος: %s\n"
-
-#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: Αδυναμία δημιουργίας καταλόγου %s: %s\n"
 
@@ -780,14 +770,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: άδεια απορρίφθηκε\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Δεν είναι δυνατόν να καθοριστεί το όνομα χρήστη σας.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: PAM: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: αδυναμία κλειδώματος %s. Δοκιμάστε αργότερα.\n"
 
@@ -878,6 +860,14 @@ msgstr "Άλλο"
 msgid "%s: fields too long\n"
 msgstr "%s: Πολύ μακριά πεδία\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Δεν είναι δυνατόν να καθοριστεί το όνομα χρήστη σας.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: PAM: %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Αδυναμία αλλαγής ταυτότητας χρήστη σε root.\n"
 
@@ -913,17 +903,14 @@ msgstr "%s: '%s' περιέχει μη-ASCII χαρακτήρες\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' περιέχει μη έγκυρους χαρακτήρες\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: Το '%s' δεν είναι έγκυρο όνομα ομάδας\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: Ο χρήστης '%s' δεν υπάρχει\n"
-
-#, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: αδυναμία αλλαγής χρήστη '%s' στον εξυπηρετητή NIS.\n"
-
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s' είναι ο κύριος διακομιστής NIS γι'αυτόν τον εξυπηρετούμενο.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
@@ -983,36 +970,47 @@ msgstr "%s: οι σημαίες -c, -e, και -m είναι αποκλειστ�
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: η μέθοδος κρυπτογράφησης δεν υποστηρίζεται: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: γραμμή %d: πολύ μεγάλη γραμμή\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: γραμμή %d: έλλειψη νέου συνθηματικού\n"
 
 #, fuzzy, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: Αποτυχία εγγραφής %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: γραμμή %d: η ομάδα '%s' δεν υπάρχει\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: γραμμή %d: αδυναμία προετοιμασίας της νέας εισόδου %s '%s'\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: Ανιχνεύτηκε σφάλμα, οι αλλαγές αγνοήθηκαν\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s:  (γραμμή %d, χρήστης %s) το συνθηματικό δεν άλλαξε\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s:  (γραμμή %d, χρήστης %s) το συνθηματικό δεν άλλαξε\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: γραμμή %d: ο χρήστης '%s' δεν υπάρχει\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1301,7 +1299,9 @@ msgstr "  -r, --system                  δημιουργία λογαριασμ�
 
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
-msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr "  -l, --list                    λίστα όλων των μελών της ομάδας\n"
 
 #, fuzzy, c-format
@@ -1361,14 +1361,6 @@ msgstr "%s: αδυναμία απομάκρυνσης της πρωταρχικ�
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: Η ομάδα '%s' δεν υπάρχει\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: Η ομάδα '%s' είναι NIS ομάδα.\n"
-
-#, c-format
-msgid "%s: %s is the NIS master\n"
-msgstr "%s: Ο %s είναι ο κύριος διακομιστής NIS\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
@@ -1465,17 +1457,16 @@ msgstr ""
 "(κρυπτογραφημένο)\n"
 "                                ΣΥΝΘΗΜΑΤΙΚΟ\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr "  -l, --list                    λίστα όλων των μελών της ομάδας\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: μη έγκυρο όνομα ομάδας '%s'\n"
-
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: Η ομάδα %s είναι NIS ομάδα\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: άγνωστος χρήστης %s\n"
 
 #, c-format
 msgid ""
@@ -1586,12 +1577,6 @@ msgstr "%s: καμιά αλλαγή\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: αδυναμία διαγραφής του %s\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Χρήση: id [-a]\n"
-
-msgid " groups="
-msgstr " ομάδες="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1626,6 +1611,16 @@ msgid ""
 msgstr ""
 "  -u, --user ΟΝΟΜΑ              προβολή των εγγραφών του lastlog για το "
 "συγκεκριμένο ΟΝΟΜΑ\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr ""
+"  -a, --all                     προβολή των εγγραφών του faillog για όλους "
+"τους χρήστες\n"
 
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
@@ -1673,10 +1668,6 @@ msgstr "Χρήση: %s [-p] [όνομα]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h σύστημα] [-f όνομα]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r σύστημα\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1802,7 +1793,7 @@ msgstr "%s: Αποτυχία ξεκλειδώματος %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: Αδυναμία δημιουργίας tcb καταλόγου για το χρήστη %s\n"
 
 #, c-format
@@ -1828,12 +1819,14 @@ msgstr "Λάθος συνθηματικό.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: αποτυχία διχάλωσης: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: Το '%s' δεν είναι έγκυρο όνομα ομάδας\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: Ο GID '%lu' δεν υπάρχει\n"
-
-msgid "too many groups\n"
-msgstr "πάρα πολλές ομάδες\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1844,11 +1837,6 @@ msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
-
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: Αδυναμία δημιουργίας tcb καταλόγου για το χρήστη %s\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1873,11 +1861,16 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: μη έγκυρο όνομα χρήστη '%s'\n"
 
 #, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: μη έγκυρο όνομα χρήστη '%s'\n"
+
+#, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: γραμμή %d: μη έγκυρη γραμμή\n"
 
 #, c-format
@@ -1886,42 +1879,49 @@ msgstr ""
 "%s: αδυναμία ανανέωσης καταχώρησης για το χρήστη %s (δεν βρέθηκε στη βάση "
 "δεδομένων του passwd)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: γραμμή %d: αδυναμία δημιουργίας χρήστη\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: γραμμή %d: αδυναμία δημιουργίας ομάδας\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: γραμμή %d: Ο χρήστης '%s' δεν υπάρχει στο %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: unlink: %s: %s\n"
-msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: αποσύνδεση: %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: γραμμή %d: αδυναμία ανανέωση συνθηματικού\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: mkdir %s failed: %s\n"
-msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: γραμμή %d: αποτυχία δημιουργίας καταλόγου %s (mkdir) : %s\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: γραμμή %d: αποτυχία δημιουργίας καταλόγου %s (mkdir) : %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: γραμμή %d: αποτυχία αλλαγής ιδιοκτήτη %s (chown): %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης\n"
 
 #, fuzzy, c-format
@@ -2162,6 +2162,11 @@ msgstr "διπλότυπη καταχώριση στο αρχείο συνθημ
 msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: μη έγκυρο όνομα χρήστη '%s'\n"
 
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "%s: μη έγκυρο όνομα χρήστη '%s'\n"
+
 #, c-format
 msgid "invalid user ID '%lu'\n"
 msgstr "Μη έγκυρο ID χρήστη '%lu'\n"
@@ -2392,14 +2397,15 @@ msgstr "Έναρξη Κατάστασης Συντήρησης Συστήματ�
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s: το %s δημιουργήθηκε, αλλά δεν μπορεί να διαγραφεί\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s: η %s διαμόρφωση στο %s θα αγνοηθεί\n"
 
 #, fuzzy, c-format
 #| msgid "%s: the %s configuration in %s will be ignored\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr "%s: η %s διαμόρφωση στο %s θα αγνοηθεί\n"
 
@@ -2411,10 +2417,6 @@ msgstr "%s: αδυναμία δημιουργίας νέου αρχείου πρ
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: αδυναμία δημιουργίας νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
-
-#, c-format
-msgid "%s: cannot create new defaults file\n"
 msgstr "%s: αδυναμία δημιουργίας νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
 
 #, c-format
@@ -2432,10 +2434,6 @@ msgstr "%s: Αδυναμία δημιουργίας συμβολικού συν�
 #, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: μετονομασία: %s: %s\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: Η ομάδα '%s' είναι NIS ομάδα.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -2884,10 +2882,6 @@ msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: Αδυναμία διαγραφής των αρχείων tcb για το χρήστη %s: %s\n"
 
 #, c-format
-msgid "%s: user %s is a NIS user\n"
-msgstr "%s: Ο χρήστης %s είναι NIS χρήστης\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s ο αρχικός κατάλογος χρήστη (%s) δεν βρέθηκε\n"
 
@@ -3162,19 +3156,19 @@ msgid "failed to rename mailbox"
 msgstr "αποτυχία μετονομασίας γραμματοκιβωτίου"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, fuzzy, c-format
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: αποτυχία προετοιμασίας της νέας εγγραφής %s '%s'\n"
 
 #, c-format
@@ -3255,7 +3249,7 @@ msgstr "αποτυχία εκτέλεσης της εφαρμογής stat γι�
 
 #, fuzzy
 #| msgid "%s: can't open file\n"
-msgid "asprintf(3) failed"
+msgid "aprintf() failed"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
 
 msgid "failed to create backup file"
@@ -3268,6 +3262,71 @@ msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές ε
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: αποτυχία εύρεσης καταλόγου tcb %s\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Προειδοποίηση: Πολλές ομάδες\n"
+
+#~ msgid "Environment overflow\n"
+#~ msgstr "Υπερχείλιση περιβάλλοντος\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s: Ύποπτα μεγάλος συμβολικός σύνδεσμος: %s\n"
+
+#, c-format
+#~ msgid "%s: cannot change user '%s' on NIS client.\n"
+#~ msgstr "%s: αδυναμία αλλαγής χρήστη '%s' στον εξυπηρετητή NIS.\n"
+
+#, c-format
+#~ msgid "%s: '%s' is the NIS master for this client.\n"
+#~ msgstr ""
+#~ "%s: '%s' είναι ο κύριος διακομιστής NIS γι'αυτόν τον εξυπηρετούμενο.\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group\n"
+#~ msgstr "%s: Η ομάδα '%s' είναι NIS ομάδα.\n"
+
+#, c-format
+#~ msgid "%s: %s is the NIS master\n"
+#~ msgstr "%s: Ο %s είναι ο κύριος διακομιστής NIS\n"
+
+#, c-format
+#~ msgid "%s: group %s is a NIS group\n"
+#~ msgstr "%s: Η ομάδα %s είναι NIS ομάδα\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: άγνωστος χρήστης %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Χρήση: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " ομάδες="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r σύστημα\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: Failed to create tcb directory for %s\n"
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s: Αδυναμία δημιουργίας tcb καταλόγου για το χρήστη %s\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "πάρα πολλές ομάδες\n"
+
+#, c-format
+#~ msgid "%s: cannot create new defaults file\n"
+#~ msgstr "%s: αδυναμία δημιουργίας νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group.\n"
+#~ msgstr "%s: Η ομάδα '%s' είναι NIS ομάδα.\n"
+
+#, c-format
+#~ msgid "%s: user %s is a NIS user\n"
+#~ msgstr "%s: Ο χρήστης %s είναι NIS χρήστης\n"
 
 #~ msgid "too simple"
 #~ msgstr "πολύ απλό"
@@ -3291,10 +3350,6 @@ msgstr "%s: αποτυχία εύρεσης καταλόγου tcb %s\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "Τελευταία είσοδος: %.19s στο %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: μη έγκυρο όνομα χρήστη '%s'\n"
 
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
