@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.16.0\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-06-18 16:40-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2024-07-06 15:36+0200\n"
 "Last-Translator: bubu <bubub@no-log.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -36,9 +36,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Attention : groupe inconnu %s\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Attention : trop de groupes\n"
 
 msgid "Your password has expired."
 msgstr "Votre mot de passe a expiré."
@@ -568,10 +565,6 @@ msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s : Impossible de lire le lien symbolique %s : %s\n"
 
 #, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s : Lien symbolique suspicieusement long : %s\n"
-
-#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s : Impossible de créer le répertoire %s : %s\n"
 
@@ -794,14 +787,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s : Permission refusée.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s : Impossible de déterminer votre nom utilisateur.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s : PAM : %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s : impossible de vérouiller %s ; réessayer plus tard.\n"
 
@@ -894,6 +879,14 @@ msgstr "Autre"
 msgid "%s: fields too long\n"
 msgstr "%s : champs trop longs\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s : Impossible de déterminer votre nom utilisateur.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s : PAM : %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Impossible de changer l'IDentifiant à root.\n"
 
@@ -928,6 +921,11 @@ msgstr "%s : '%s' contient des caractères non-ASCII\n"
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s : '%s' contient des caractères illégaux\n"
+
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s : '%s' n'est pas un nom de groupe valable\n"
 
 #, c-format
 msgid "%s: user '%s' does not exist\n"
@@ -987,24 +985,28 @@ msgstr "%s : les drapeaux -c, -e et -m sont mutuellement exclusifs\n"
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s : la méthode de chiffrement n'est pas prise en charge : %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s : ligne %d : ligne trop longue\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s : ligne %d : il manque le nouveau mot de passe\n"
 
 #, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s : le chiffrement du mot de passe avec le bon '%s' a échoué : %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s : ligne : %d : le groupe '%s' n'existe pas\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr ""
 "%s : ligne %d : la préparation de la nouvelle %s entrée '%s' a échoué\n"
 
@@ -1012,12 +1014,19 @@ msgstr ""
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s : erreur détectée, changements ignorés\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s : (ligne %d, utilisateur %s) mot de passe inchangé\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s : (ligne %d, utilisateur %s) mot de passe inchangé\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s : ligne %d : l'utilisateur '%s' n'existe pas\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1030,8 +1039,7 @@ msgstr "Interpréteur de commandes de connexion"
 
 #, c-format
 msgid "Cannot parse shell files: %s"
-msgstr ""
-"Impossible d'analyser les fichiers de l'interpréteur de commandes : %s"
+msgstr "Impossible d'analyser les fichiers de l'interpréteur de commandes : %s"
 
 #, c-format
 msgid "Cannot evaluate entries in shell files: %s"
@@ -1312,7 +1320,11 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  créer un compte système\n"
 
-msgid "  -U, --users USERS             list of user members of this group\n"
+#, fuzzy
+#| msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr ""
 "  -U, --users USERS             liste des utilisateurs membres de ce groupe\n"
 
@@ -1465,13 +1477,17 @@ msgstr ""
 "  -p, --password PASSWORD       changer le mot de passe par\n"
 "                                 PASSWORD (chiffré)\n"
 
+#, fuzzy
+#| msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr ""
+"  -U, --users USERS             liste des utilisateurs membres de ce groupe\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s : nom de groupe '%s' non valable\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s : utilisateur inconnu %s\n"
 
 #, c-format
 msgid ""
@@ -1584,12 +1600,6 @@ msgstr "%s : aucun changement\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s : impossible d'effacer %s\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Utilisation : id [-a]\n"
-
-msgid " groups="
-msgstr " groupes ="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1622,6 +1632,16 @@ msgid ""
 msgstr ""
 "  -u, --user LOGIN              afficher le dernier enregistrement de "
 "journal du LOGIN spécifié\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr ""
+"  -a, --all                    Afficher les enregistrements du journal "
+"d'échecs de tous les utilisateurs.\n"
 
 #, c-format
 msgid "Username         Port     From%*sLatest\n"
@@ -1797,9 +1817,10 @@ msgstr ""
 "%s : Echec de la politique %s setgroups : %s\n"
 " \n"
 
-#, c-format
-msgid "%s: Could not stat directory for process\n"
-msgstr "%s : Impossible de statuer sur le répertoire du processus\n"
+#, fuzzy, c-format
+#| msgid "%s: Could not stat directory for target process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
+msgstr "%s : Impossible de statuer sur le répertoire du processus cible\n"
 
 #, c-format
 msgid ""
@@ -1827,12 +1848,14 @@ msgstr "Mot de passe non valable.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s : échec du fourchage : %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s : '%s' n'est pas un nom de groupe valable\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s : le GID '%lu' n'existe pas\n"
-
-msgid "too many groups\n"
-msgstr "trop de groupes\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1845,10 +1868,6 @@ msgid ""
 msgstr ""
 "utilisation : %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> "
 "<loweruid> <count> ] ... \n"
-
-#, c-format
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s : Impossible de statuer sur le répertoire du processus cible\n"
 
 msgid "  -b, --badname                 allow bad names\n"
 msgstr "  -b, --badname                autoriser les mauvais noms\n"
@@ -1870,12 +1889,18 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr ""
 "%s : nom d'utilisateur '%s' non valable ; utilisez --badname pour l'ignorer\n"
 
+#, fuzzy, c-format
+#| msgid "%s: invalid user ID '%s'\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s : IDentification d'utilisateur '%s' non valable\n"
+
 #, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr "%s: Fournir '--crypt-method' avant le nombre de tours\n"
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s : ligne %d : ligne non valable\n"
 
 #, c-format
@@ -1884,42 +1909,51 @@ msgstr ""
 "%s : impossible de mettre à jour l'entrée pour l'utilisateur %s (n'est pas "
 "dans la base de données passwd)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s : ligne %d : impossible de créer l'utilisateur\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s : ligne %d : impossible de créer le groupe\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s : ligne %d : l'utilisateur '%s' n'existe pas dans %s\n"
 
-#, c-format
-msgid "%s: line %d: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s : ligne : %d : %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr ""
 "%s : ligne %d : impossible de mettre à jour le fichier des mots de passe - "
 "password -\n"
 
-#, c-format
-msgid "%s: line %d: homedir must be an absolute path\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s : ligne %d : homedir doit être un chemin absolu\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s : ligne %d : échec mkdir %s : %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s : ligne %d : échec de chown %s : %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s : ligne %d : impossible de mettre à jour l'entrée\n"
 
 #, c-format
@@ -2157,6 +2191,11 @@ msgid "invalid user name '%s': use --badname to ignore\n"
 msgstr ""
 "Nom d'utilisateur '%s' non valable ; utilisez --badname pour l'ignorer\n"
 
+#, fuzzy, c-format
+#| msgid "invalid group name '%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "nom de groupe '%s' non valable\n"
+
 #, c-format
 msgid "invalid user ID '%lu'\n"
 msgstr "ID utilisateur '%lu' non valable\n"
@@ -2380,13 +2419,17 @@ msgstr "Commencement du mode de maintenance du système"
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s : %s a été créé, mais n'a pas pu être supprimé\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s : le paramétrage %s dans %s sera ignoré \n"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+#| "group\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr ""
 "%s : la configuration '%s' dans %s a un groupe non valable, et ignore ce "
@@ -3112,14 +3155,14 @@ msgstr ""
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
 msgstr ""
-"%s : la copie de l'entrée de faillog de l'utilisateur %lu vers "
-"l'utilisateur %lu a échoué : %s\n"
+"%s : la copie de l'entrée de faillog de l'utilisateur %lu vers l'utilisateur "
+"%lu a échoué : %s\n"
 
 #, c-format
 msgid "%s: failed to copy the faillog entry of user %ju to user %ju: %s\n"
 msgstr ""
-"%s : la copie de l'entrée de faillog de l'utilisateur %ju vers "
-"l'utilisateur %ju a échoué : %s\n"
+"%s : la copie de l'entrée de faillog de l'utilisateur %ju vers l'utilisateur "
+"%ju a échoué : %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -3131,20 +3174,24 @@ msgstr "impossible de changer le proriétaire du fichier mailbox"
 msgid "failed to rename mailbox"
 msgstr "impossible de renommer le fichier mailbox"
 
-#, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s : échec de la suppression de la gamme d'uid %lu-%lu de '%s'\n"
 
-#, c-format
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s : échec de l'ajout de la gamme d'uid %lu-%lu à '%s'\n"
 
-#, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s : échec de la suppression de la gamme de gid %lu-%lu de '%s'\n"
 
-#, c-format
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s : échec de l'ajout de la gamme de gid %lu-%lu à '%s'\n"
 
 #, c-format
@@ -3226,7 +3273,9 @@ msgstr "impossible de délier le fichier scratch"
 msgid "failed to stat edited file"
 msgstr "impossible de statuer sur le fichier édité"
 
-msgid "asprintf(3) failed"
+#, fuzzy
+#| msgid "asprintf(3) failed"
+msgid "aprintf() failed"
 msgstr "échec de asprintf(3) "
 
 msgid "failed to create backup file"
@@ -3241,6 +3290,30 @@ msgid "%s: failed to find tcb directory for %s\n"
 msgstr ""
 "%s : impossible de trouver le répertoire tcb pour %s\n"
 "\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Attention : trop de groupes\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s : Lien symbolique suspicieusement long : %s\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s : utilisateur inconnu %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Utilisation : id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " groupes ="
+
+#, c-format
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s : Impossible de statuer sur le répertoire du processus\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "trop de groupes\n"
 
 #~ msgid "Environment overflow\n"
 #~ msgstr "Débordement de l'environnement\n"

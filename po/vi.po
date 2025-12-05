@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow master\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2024-03-14 18:23-0500\n"
+"POT-Creation-Date: 2025-12-04 22:45-0600\n"
 "PO-Revision-Date: 2016-10-04 07:07+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -22,9 +22,6 @@ msgstr ""
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Cảnh báo: không biết nhóm %s.\n"
-
-msgid "Warning: too many groups\n"
-msgstr "Cảnh báo: quá nhiều nhóm\n"
 
 msgid "Your password has expired."
 msgstr "Mật khẩu của bạn đã hết hạn dùng."
@@ -83,9 +80,6 @@ msgstr ": "
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr "Phương pháp mã hóa không được thư viện libcrypt hỗ trợ? (%s)\n"
-
-msgid "Environment overflow\n"
-msgstr "Tràn môi trường\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -547,10 +541,6 @@ msgid "%s: Cannot read symbolic link %s: %s\n"
 msgstr "%s: Không thể đọc liên kết mềm %s: %s\n"
 
 #, c-format
-msgid "%s: Suspiciously long symlink: %s\n"
-msgstr "%s: Liên kết mềm dài một cách điên rồ: %s\n"
-
-#, c-format
 msgid "%s: Cannot create directory %s: %s\n"
 msgstr "%s: Không thể tạo thư mục %s: %s\n"
 
@@ -772,14 +762,6 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: không đủ quyền.\n"
 
 #, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Không thể phân giải tên người dùng của bạn.\n"
-
-#, c-format
-msgid "%s: PAM: %s\n"
-msgstr "%s: PAM: %s\n"
-
-#, c-format
 msgid "%s: cannot lock %s; try again later.\n"
 msgstr "%s: Không thể khóa %s; hãy thử lại sau.\n"
 
@@ -864,6 +846,14 @@ msgstr "Khác"
 msgid "%s: fields too long\n"
 msgstr "%s: trường quá dài\n"
 
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Không thể phân giải tên người dùng của bạn.\n"
+
+#, c-format
+msgid "%s: PAM: %s\n"
+msgstr "%s: PAM: %s\n"
+
 msgid "Cannot change ID to root.\n"
 msgstr "Không thể thay đổi mã số thành siêu quản trị (root).\n"
 
@@ -899,17 +889,14 @@ msgstr "%s: “%s” chứa ký tự không thuộc bảng mã ASCII\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: “%s” chứa ký tự bị cấm\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: Provided user name is not a valid name\n"
+msgstr "%s: “%s” không phải là tên nhóm hợp lệ\n"
+
 #, c-format
 msgid "%s: user '%s' does not exist\n"
 msgstr "%s: người dùng “%s” không tồn tại\n"
-
-#, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: không thể thay đổi người dùng “%s” trên ứng dụng khách NIS.\n"
-
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: “%s” là NIS cái cho ứng dụng khách này.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
@@ -967,36 +954,47 @@ msgstr "%s: các cờ “-c”, “-e” và “-m” loại từ lẫn nhau\n"
 msgid "%s: unsupported crypt method: %s\n"
 msgstr "%s: phương pháp mã hóa không được hỗ trợ: %s\n"
 
-#, c-format
-msgid "%s: line %d: line too long\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: line too long\n"
+msgid "%s: line %jd: line too long\n"
 msgstr "%s: dòng %d: dòng quá dài\n"
 
-#, c-format
-msgid "%s: line %d: missing new password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %jd: missing new password\n"
 msgstr "%s: dòng %d: thiếu mật khẩu mới\n"
 
 #, c-format
 msgid "%s: failed to crypt password with salt '%s': %s\n"
 msgstr "%s: gặp lỗi khi mã hóa mật khẩu với muối “%s”: %s\n"
 
-#, c-format
-msgid "%s: line %d: group '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: group '%s' does not exist\n"
+msgid "%s: line %jd: group '%s' does not exist\n"
 msgstr "%s: dòng %d, nhóm “%s” không tồn tại\n"
 
-#, c-format
-msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
+msgid "%s: line %jd: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: dòng %d: gặp lỗi khi chuẩn bị mục tin %s mới “%s”\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: gặp lỗi nên bỏ qua các thay đổi\n"
 
-#, c-format
-msgid "%s: (line %d, user %s) password not changed\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) password not changed\n"
 msgstr "%s: (dòng %d, người dùng %s) mật khẩu chưa thay đổi\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: (line %d, user %s) password not changed\n"
+msgid "%s: (line %jd, user %s) invalid password hash\n"
+msgstr "%s: (dòng %d, người dùng %s) mật khẩu chưa thay đổi\n"
+
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist\n"
+msgid "%s: line %jd: user '%s' does not exist\n"
 msgstr "%s: dòng %d: người dùng “%s” không tồn tại\n"
 
 msgid "  -s, --shell SHELL             new login shell for the user account\n"
@@ -1281,7 +1279,9 @@ msgstr "  -r, --system                  tạo một tài khoản hệ thống\n"
 
 #, fuzzy
 #| msgid "  -l, --list                    list the members of the group\n"
-msgid "  -U, --users USERS             list of user members of this group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"\t                         members of this group\n"
 msgstr "  -l, --list                    liệt kê những người trong nhóm\n"
 
 #, fuzzy, c-format
@@ -1341,14 +1341,6 @@ msgstr "%s: không thể gỡ bỏ nhóm chính của người dùng “%s”\n"
 #, c-format
 msgid "%s: group '%s' does not exist\n"
 msgstr "%s: nhóm “%s” không tồn tại\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group\n"
-msgstr "%s: nhóm “%s” là một nhóm kiểu NIS\n"
-
-#, c-format
-msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s là NIS chủ\n"
 
 #, c-format
 msgid "%s: user '%s' is already a member of '%s'\n"
@@ -1440,17 +1432,16 @@ msgstr ""
 "  -p, --password MẬT_KHẨU       thay đổi mật khẩu thành MẬT_KHẨU (đã mật mã) "
 "này\n"
 
+#, fuzzy
+#| msgid "  -l, --list                    list the members of the group\n"
+msgid ""
+"  -U, --users USERS             comma-separated list of users to add as\n"
+"                                members of this group\n"
+msgstr "  -l, --list                    liệt kê những người trong nhóm\n"
+
 #, c-format
 msgid "%s: invalid group name '%s'\n"
 msgstr "%s: tên nhóm không hợp lệ “%s”\n"
-
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: nhóm %s là một nhóm kiểu NIS\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: không rõ người dùng %s\n"
 
 #, c-format
 msgid ""
@@ -1561,12 +1552,6 @@ msgstr "%s: chưa thay đổi gì\n"
 msgid "%s: cannot delete %s\n"
 msgstr "%s: không thể xóa %s\n"
 
-msgid "Usage: id [-a]\n"
-msgstr "Cách dùng: id [-a]\n"
-
-msgid " groups="
-msgstr " nhóm="
-
 msgid ""
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 msgstr ""
@@ -1604,6 +1589,16 @@ msgid ""
 msgstr ""
 "  -u, --user ĐĂNG_NHẬP          hiển thị mục ghi lastlog cho _người dùng_ "
 "tên này\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -a, --active                  print lastlog excluding '**Never logged "
+"in**' users"
+msgstr ""
+"  -a, --all                     hiển thị các mục ghi faillog cho mọi người "
+"dùng\n"
 
 #, fuzzy, c-format
 #| msgid "Username                Port     Latest"
@@ -1651,10 +1646,6 @@ msgstr "Cách dùng: %s [-p] [tên]\n"
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h máy] [-f tên]\n"
-
-#, c-format
-msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r máy\n"
 
 #, c-format
 msgid "configuration error - cannot parse %s value: '%d'"
@@ -1778,7 +1769,7 @@ msgstr "%s: gặp lỗi khi mở khóa %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for process\n"
+msgid "%s: Could not stat directory for target process: %s\n"
 msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
 
 #, c-format
@@ -1808,12 +1799,14 @@ msgstr "Mật khẩu không hợp lệ.\n"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: lỗi tạo tiến trình con: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: '%s' is not a valid group name\n"
+msgid "%s: provided group is not a valid group name\n"
+msgstr "%s: “%s” không phải là tên nhóm hợp lệ\n"
+
 #, c-format
 msgid "%s: GID '%lu' does not exist\n"
 msgstr "%s: GID “%lu” không tồn tại\n"
-
-msgid "too many groups\n"
-msgstr "quá nhiều nhóm\n"
 
 #, c-format
 msgid "%s: uid range [%lu-%lu) -> [%lu-%lu) not allowed\n"
@@ -1824,11 +1817,6 @@ msgid ""
 "usage: %s [<pid>|fd:<pidfd>] <uid> <loweruid> <count> [ <uid> <loweruid> "
 "<count> ] ... \n"
 msgstr ""
-
-#, fuzzy, c-format
-#| msgid "%s: Failed to create tcb directory for %s\n"
-msgid "%s: Could not stat directory for target process\n"
-msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
 
 #, fuzzy
 #| msgid "  -q, --quiet                   quiet mode\n"
@@ -1853,11 +1841,16 @@ msgid "%s: invalid user name '%s': use --badname to ignore\n"
 msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: tên dùng không hợp lệ “%s”\n"
+
+#, c-format
 msgid "%s: Provide '--crypt-method' before number of rounds\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: invalid line\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: invalid line\n"
+msgid "%s: line %jd: invalid line\n"
 msgstr "%s: dòng %d: dòng không hợp lệ\n"
 
 #, c-format
@@ -1866,42 +1859,49 @@ msgstr ""
 "%s: không thể cập nhật mục tin của người dùng %s (không có trong cơ sở dữ "
 "liệu mật khẩu passwd)\n"
 
-#, c-format
-msgid "%s: line %d: can't create user\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create user\n"
+msgid "%s: line %jd: can't create user\n"
 msgstr "%s: dòng %d: không thể tạo người dùng\n"
 
-#, c-format
-msgid "%s: line %d: can't create group\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't create group\n"
+msgid "%s: line %jd: can't create group\n"
 msgstr "%s: dòng %d: không thể tạo nhóm\n"
 
-#, c-format
-msgid "%s: line %d: user '%s' does not exist in %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgid "%s: line %jd: user '%s' does not exist in %s\n"
 msgstr "%s: dòng %d: người dùng “%s” không tồn tại trong %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: unlink: %s: %s\n"
-msgid "%s: line %d: %s\n"
+msgid "%s: line %jd: %s\n"
 msgstr "%s: unlink: %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update password\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update password\n"
+msgid "%s: line %jd: can't update password\n"
 msgstr "%s: dòng %d: không thể cập nhật mật khẩu\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: mkdir %s failed: %s\n"
-msgid "%s: line %d: homedir must be an absolute path\n"
+msgid "%s: line %jd: homedir must be an absolute path\n"
 msgstr "%s: dòng %d: lỗi mkdir (tạo thư mục) %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: mkdir %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir %s failed: %s\n"
+msgid "%s: line %jd: mkdir %s failed: %s\n"
 msgstr "%s: dòng %d: lỗi mkdir (tạo thư mục) %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: chown %s failed: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "%s: line %jd: chown %s failed: %s\n"
 msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 
-#, c-format
-msgid "%s: line %d: can't update entry\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %jd: can't update entry\n"
 msgstr "%s: dòng %d: không thể cập nhật mục tin\n"
 
 #, c-format
@@ -2126,6 +2126,11 @@ msgstr "mục tin mật khẩu trùng"
 #, fuzzy, c-format
 #| msgid "%s: invalid user name '%s'\n"
 msgid "invalid user name '%s': use --badname to ignore\n"
+msgstr "%s: tên dùng không hợp lệ “%s”\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid user name '%s'\n"
+msgid "invalid user name '%s'\n"
 msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
@@ -2360,14 +2365,15 @@ msgstr "Đang vào Chế độ Bảo dưỡng Hệ thống"
 msgid "%s: %s was created, but could not be removed\n"
 msgstr "%s: %s đã được tạo, nhưng không thể bị gỡ bỏ\n"
 
-#, c-format
-msgid "%s: the %s configuration in %s will be ignored\n"
+#, fuzzy, c-format
+#| msgid "%s: the %s configuration in %s will be ignored\n"
+msgid "%s: the %s= configuration in %s will be ignored\n"
 msgstr "%s: cấu hình %s trong %s sẽ bị bỏ qua\n"
 
 #, fuzzy, c-format
 #| msgid "%s: the %s configuration in %s will be ignored\n"
 msgid ""
-"%s: the '%s' configuration in %s has an invalid group, ignoring the bad "
+"%s: the '%s=' configuration in %s has an invalid group, ignoring the bad "
 "group\n"
 msgstr "%s: cấu hình %s trong %s sẽ bị bỏ qua\n"
 
@@ -2379,10 +2385,6 @@ msgstr "%s: không thể tạo tập tin mặc định mới\n"
 #, fuzzy, c-format
 #| msgid "%s: cannot create new defaults file\n"
 msgid "%s: cannot create directory for defaults file\n"
-msgstr "%s: không thể tạo tập tin mặc định mới\n"
-
-#, c-format
-msgid "%s: cannot create new defaults file\n"
 msgstr "%s: không thể tạo tập tin mặc định mới\n"
 
 #, c-format
@@ -2400,10 +2402,6 @@ msgstr "%s: Không thể tạo tập tin sao lưu dự phòng (%s): %s\n"
 #, c-format
 msgid "%s: rename: %s: %s\n"
 msgstr "%s: thay tên: %s: %s\n"
-
-#, c-format
-msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: nhóm “%s” là nhóm kiểu NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -2835,10 +2833,6 @@ msgid "%s: Cannot remove tcb files for %s: %s\n"
 msgstr "%s: Không thể gỡ bỏ tập tin tcb cho %s: %s\n"
 
 #, c-format
-msgid "%s: user %s is a NIS user\n"
-msgstr "%s: người dùng %s là người dùng kiểu NIS\n"
-
-#, c-format
 msgid "%s: %s home directory (%s) not found\n"
 msgstr "%s: %s không tìm thấy thư mục riêng (%s)\n"
 
@@ -3097,22 +3091,24 @@ msgstr "gặp lỗi khi đổi chủ sở hữu hộp thư"
 msgid "failed to rename mailbox"
 msgstr "gặp lỗi khi đổi tên của hộp thư"
 
-#, c-format
-msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove uid range %ju-%ju from '%s'\n"
 msgstr "%s: gặp lỗi khi xóa bỏ vùng mã người dùng %lu-%lu khỏi “%s”\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to add uid range %lu-%lu from '%s'\n"
-msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add uid range %ju-%ju to '%s'\n"
 msgstr "%s: gặp lỗi khi thêm vùng mã người dùng %lu-%lu vào “%s”\n"
 
-#, c-format
-msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgid "%s: failed to remove gid range %ju-%ju from '%s'\n"
 msgstr "%s: gặp lỗi khi gỡ bỏ vùng mã số nhóm %lu-%lu khỏi “%s”\n"
 
 #, fuzzy, c-format
 #| msgid "%s: failed to add gid range %lu-%lu from '%s'\n"
-msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgid "%s: failed to add gid range %ju-%ju to '%s'\n"
 msgstr "%s: gặp lỗi khi thêm vùng mã số nhóm %lu-%lu vào “%s”\n"
 
 #, c-format
@@ -3188,8 +3184,10 @@ msgstr "gặp lỗi khi bỏ liên kết tập tin hỗn tạp"
 msgid "failed to stat edited file"
 msgstr "gặp lỗi khi lấy thống kê tập tin đã sửa"
 
-msgid "asprintf(3) failed"
-msgstr ""
+#, fuzzy
+#| msgid "%s: line %d: chown %s failed: %s\n"
+msgid "aprintf() failed"
+msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu) %s: %s\n"
 
 msgid "failed to create backup file"
 msgstr "không thể tạo tập tin sao lưu dự phòng"
@@ -3201,6 +3199,70 @@ msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn nằm
 #, c-format
 msgid "%s: failed to find tcb directory for %s\n"
 msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
+
+#~ msgid "Warning: too many groups\n"
+#~ msgstr "Cảnh báo: quá nhiều nhóm\n"
+
+#~ msgid "Environment overflow\n"
+#~ msgstr "Tràn môi trường\n"
+
+#, c-format
+#~ msgid "%s: Suspiciously long symlink: %s\n"
+#~ msgstr "%s: Liên kết mềm dài một cách điên rồ: %s\n"
+
+#, c-format
+#~ msgid "%s: cannot change user '%s' on NIS client.\n"
+#~ msgstr "%s: không thể thay đổi người dùng “%s” trên ứng dụng khách NIS.\n"
+
+#, c-format
+#~ msgid "%s: '%s' is the NIS master for this client.\n"
+#~ msgstr "%s: “%s” là NIS cái cho ứng dụng khách này.\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group\n"
+#~ msgstr "%s: nhóm “%s” là một nhóm kiểu NIS\n"
+
+#, c-format
+#~ msgid "%s: %s is the NIS master\n"
+#~ msgstr "%s: %s là NIS chủ\n"
+
+#, c-format
+#~ msgid "%s: group %s is a NIS group\n"
+#~ msgstr "%s: nhóm %s là một nhóm kiểu NIS\n"
+
+#, c-format
+#~ msgid "%s: unknown user %s\n"
+#~ msgstr "%s: không rõ người dùng %s\n"
+
+#~ msgid "Usage: id [-a]\n"
+#~ msgstr "Cách dùng: id [-a]\n"
+
+#~ msgid " groups="
+#~ msgstr " nhóm="
+
+#, c-format
+#~ msgid "       %s [-p] -r host\n"
+#~ msgstr "       %s [-p] -r máy\n"
+
+#, fuzzy, c-format
+#~| msgid "%s: Failed to create tcb directory for %s\n"
+#~ msgid "%s: Could not stat directory for process\n"
+#~ msgstr "%s: Gặp lỗi khi tạo thư mục tcb cho %s\n"
+
+#~ msgid "too many groups\n"
+#~ msgstr "quá nhiều nhóm\n"
+
+#, c-format
+#~ msgid "%s: cannot create new defaults file\n"
+#~ msgstr "%s: không thể tạo tập tin mặc định mới\n"
+
+#, c-format
+#~ msgid "%s: group '%s' is a NIS group.\n"
+#~ msgstr "%s: nhóm “%s” là nhóm kiểu NIS.\n"
+
+#, c-format
+#~ msgid "%s: user %s is a NIS user\n"
+#~ msgstr "%s: người dùng %s là người dùng kiểu NIS\n"
 
 #~ msgid "too simple"
 #~ msgstr "quá đơn giản"
@@ -3224,10 +3286,6 @@ msgstr "%s: gặp lỗi khi tìm thư mục tcb cho %s\n"
 #, c-format
 #~ msgid "Last login: %.19s on %s"
 #~ msgstr "Đang nhập cuối cùng: %.19s vào %s"
-
-#, c-format
-#~ msgid "%s: invalid user name '%s'\n"
-#~ msgstr "%s: tên dùng không hợp lệ “%s”\n"
 
 #, c-format
 #~ msgid "%s: password expiry information changed.\n"
