@@ -14,10 +14,11 @@
 #include <selinux/selinux.h>
 #include <selinux/label.h>
 
+#include "io/fprintf.h"
+#include "io/syslog.h"
 #include "prototypes.h"
 #include "shadowlog_internal.h"
 #include "string/sprintf/aprintf.h"
-#include "string/strerrno.h"
 
 
 static bool selinux_checked = false;
@@ -139,7 +140,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 
 			    (void) fputs (_("Cannot open audit interface.\n"),
 			              shadow_logfd);
-			    SYSLOG ((LOG_WARN, "Cannot open audit interface."));
+			    SYSLOG(LOG_WARN, "Cannot open audit interface.");
 			}
 		}
 	}
@@ -161,7 +162,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 	}
 #endif
 
-	SYSLOG ((LOG_WARN, "libselinux: %s", buf));
+	SYSLOG(LOG_WARN, "libselinux: %s", buf);
 
 skip_syslog:
 	free (buf);
@@ -191,12 +192,9 @@ int check_selinux_permit (const char *perm_name)
 	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) { .func_log = selinux_log_cb });
 
 	if (getprevcon_raw (&user_context_raw) != 0) {
-		fprintf (shadow_logfd,
-		    _("%s: can not get previous SELinux process context: %s\n"),
-		    shadow_progname, strerrno());
-		SYSLOG ((LOG_WARN,
-		    "can not get previous SELinux process context: %s",
-		    strerrno()));
+		fprinte(shadow_logfd, _("%s: can not get previous SELinux process context"),
+		        shadow_progname);
+		SYSLOGE(LOG_WARN, "can not get previous SELinux process context");
 		return (security_getenforce () != 0);
 	}
 
