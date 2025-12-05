@@ -19,8 +19,8 @@
 #define lfind_T(T, ...)            lfind_T_(typeas(T), __VA_ARGS__)
 #define lfind_T_(T, k, a, n, cmp)                                     \
 ({                                                                    \
-	_Generic(k, T *: 0, const T *: 0);                            \
-	_Generic(a, T *: 0, const T *: 0);                            \
+	_Generic(k, T *: (void)0, const T *: (void)0);                \
+	_Generic(a, T *: (void)0, const T *: (void)0);                \
 	(T *) lfind_(k, a, n, sizeof(T), cmp);                        \
 })
 

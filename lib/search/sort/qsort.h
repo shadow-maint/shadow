@@ -18,7 +18,7 @@
 #define qsort_T(T, ...)         qsort_T_(typeas(T), __VA_ARGS__)
 #define qsort_T_(T, a, n, cmp)  do                                    \
 {                                                                     \
-	_Generic(a, T *: 0);                                          \
+	_Generic(a, T *: (void)0);                                    \
 	qsort(a, n, sizeof(T), cmp);                                  \
 } while (0)
 
