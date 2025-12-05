@@ -2322,7 +2322,7 @@ static void create_home(const struct option_flags *flags)
  *	exist. It will be created mode 660 owned by the user and group
  *	'mail'
  */
-static void create_mail(const struct option_flags *flags)
+static void create_mail(MAYBE_UNUSED const struct option_flags *flags)
 {
 	int           fd;
 	char          *file;
@@ -2330,9 +2330,9 @@ static void create_mail(const struct option_flags *flags)
 	mode_t        mode;
 	const char    *spool;
 	struct group  *gr;
-	bool          process_selinux;
-
-	process_selinux = !flags->chroot && !flags->prefix;
+#ifdef WITH_SELINUX
+	bool          process_selinux = !flags->chroot && !flags->prefix;
+#endif
 
 	if (!strcaseeq(create_mail_spool, "yes"))
 		return;
