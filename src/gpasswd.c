@@ -96,14 +96,14 @@ static bool is_valid_user_list (const char *users);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (int argc, int opt_index);
 static void open_files (void);
-static void close_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 #ifdef SHADOWGRP
-static void get_group (struct group *gr, struct sgrp *sg, struct option_flags *flags);
+static void get_group(struct group *gr, struct sgrp *sg, const struct option_flags *flags);
 static void check_perms(const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
-static void get_group (struct group *gr, struct option_flags *flags);
+static void get_group(struct group *gr, const struct option_flags *flags);
 static void check_perms(void);
 static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
@@ -598,7 +598,7 @@ static void log_gpasswd_success_group (MAYBE_UNUSED void *arg)
  *
  *	It will call exit in case of error.
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -706,9 +706,9 @@ static void update_group (struct group *gr)
  *	Note: If !is_shadowgrp, *sg will not be initialized.
  */
 #ifdef SHADOWGRP
-static void get_group (struct group *gr, struct sgrp *sg, struct option_flags *flags)
+static void get_group(struct group *gr, struct sgrp *sg, const struct option_flags *flags)
 #else
-static void get_group (struct group *gr, struct option_flags *flags)
+static void get_group(struct group *gr, const struct option_flags *flags)
 #endif
 {
 	struct group const*tmpgr = NULL;
@@ -878,7 +878,7 @@ int main (int argc, char **argv)
 	struct sgrp sgent;
 #endif
 	struct passwd *pw = NULL;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 
 #ifdef WITH_AUDIT
 	audit_help_open ();

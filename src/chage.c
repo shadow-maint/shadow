@@ -86,9 +86,9 @@ static void print_day_as_date (long day);
 static void list_fields (void);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (int argc, int opt_index);
-static void check_perms (struct option_flags *flags);
-static void open_files (bool readonly, struct option_flags *flags);
-static void close_files (struct option_flags *flags);
+static void check_perms(const struct option_flags *flags);
+static void open_files(bool readonly, const struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 NORETURN static void fail_exit (int code, bool process_selinux);
 
 /*
@@ -479,7 +479,7 @@ static void check_flags (int argc, int opt_index)
  *
  *	It will not return if the user is not allowed.
  */
-static void check_perms (struct option_flags *flags)
+static void check_perms(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -503,7 +503,7 @@ static void check_perms (struct option_flags *flags)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (bool readonly, struct option_flags *flags)
+static void open_files(bool readonly, const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -555,7 +555,7 @@ static void open_files (bool readonly, struct option_flags *flags)
 /*
  * close_files - close and unlock the password/shadow databases
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -732,7 +732,7 @@ int main (int argc, char **argv)
 	uid_t ruid;
 	gid_t rgid;
 	const struct passwd *pw;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
 	sanitize_env ();

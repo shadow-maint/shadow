@@ -70,9 +70,9 @@ static void new_fields (void);
 static bool shell_is_listed (const char *);
 static bool is_restricted_shell (const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void check_perms (const struct passwd *pw, struct option_flags *flags);
+static void check_perms(const struct passwd *pw, const struct option_flags *flags);
 static void update_shell (const char *user, char *loginsh,
-                          struct option_flags *flags);
+                          const struct option_flags *flags);
 
 /*
  * fail_exit - do some cleanup and exit with the given error code
@@ -268,7 +268,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *
  *	It will not return if the user is not allowed.
  */
-static void check_perms (const struct passwd *pw, struct option_flags *flags)
+static void check_perms(const struct passwd *pw, const struct option_flags *flags)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
@@ -367,7 +367,7 @@ static void check_perms (const struct passwd *pw, struct option_flags *flags)
  *
  *	It will not return in case of error.
  */
-static void update_shell (const char *user, char *newshell, struct option_flags *flags)
+static void update_shell (const char *user, char *newshell, const struct option_flags *flags)
 {
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;		/* New password entry                */
@@ -462,7 +462,7 @@ int main (int argc, char **argv)
 {
 	char *user;		/* User name                         */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	sanitize_env ();

@@ -119,7 +119,7 @@ static const char* prefix = "";
 static void usage (int status);
 static void update_groups (bool process_selinux);
 static void remove_usergroup (bool process_selinux);
-static void close_files (struct option_flags *flags);
+static void close_files(const struct option_flags *flags);
 static void fail_exit (int, bool);
 static void open_files (bool process_selinux);
 static void update_user (bool process_selinux);
@@ -396,7 +396,7 @@ static void remove_usergroup (bool process_selinux)
  *	close_files() closes all of the files that were opened for this
  *	new user. This causes any modified entries to be written out.
  */
-static void close_files (struct option_flags *flags)
+static void close_files(const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -915,7 +915,7 @@ int main (int argc, char **argv)
 	int retval;
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

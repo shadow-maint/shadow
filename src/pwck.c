@@ -76,10 +76,10 @@ static bool quiet = false;		/* don't report warnings, only errors */
 static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
-static void open_files (struct option_flags *flags);
-static void close_files (bool changed, struct option_flags *flags);
+static void open_files(const struct option_flags *flags);
+static void close_files(bool changed, const struct option_flags *flags);
 static void check_pw_file (bool *errors, bool *changed,
-                           struct option_flags *flags);
+                           const struct option_flags *flags);
 static void check_spw_file (bool *errors, bool *changed);
 
 extern int allow_bad_names;
@@ -246,7 +246,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (struct option_flags *flags)
+static void open_files(const struct option_flags *flags)
 {
 	bool use_tcb = false;
 #ifdef WITH_TCB
@@ -311,7 +311,7 @@ static void open_files (struct option_flags *flags)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (bool changed, struct option_flags *flags)
+static void close_files(bool changed, const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -381,7 +381,7 @@ static void close_files (bool changed, struct option_flags *flags)
 /*
  * check_pw_file - check the content of the passwd file
  */
-static void check_pw_file (bool *errors, bool *changed, struct option_flags *flags)
+static void check_pw_file(bool *errors, bool *changed, const struct option_flags *flags)
 {
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
@@ -856,7 +856,7 @@ int main (int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

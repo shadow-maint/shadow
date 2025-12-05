@@ -80,7 +80,7 @@ NORETURN static void usage (int status);
 static void delete_member (char **, const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void open_files (bool process_selinux);
-static void close_files (bool changed, struct option_flags *flags);
+static void close_files(bool changed, const struct option_flags *flags);
 static int check_members (const char *groupname,
                           char **members,
                           const char *fmt_info,
@@ -88,7 +88,7 @@ static int check_members (const char *groupname,
                           const char *fmt_syslog,
                           bool *errors);
 static void check_grp_file (bool *errors, bool *changed,
-                            struct option_flags *flags);
+                            const struct option_flags *flags);
 #ifdef SHADOWGRP
 static void compare_members_lists (const char *groupname,
                                    char **members,
@@ -327,7 +327,7 @@ static void open_files (bool process_selinux)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (bool changed, struct option_flags *flags)
+static void close_files(bool changed, const struct option_flags *flags)
 {
 	bool process_selinux;
 
@@ -472,7 +472,7 @@ static void compare_members_lists (const char *groupname,
 /*
  * check_grp_file - check the content of the group file
  */
-static void check_grp_file (bool *errors, bool *changed, struct option_flags *flags)
+static void check_grp_file(bool *errors, bool *changed, const struct option_flags *flags)
 {
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
@@ -839,7 +839,7 @@ int main (int argc, char **argv)
 {
 	bool errors = false;
 	bool changed = false;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

@@ -135,7 +135,7 @@ int main (int argc, char **argv)
 	const struct group *gr;
 	struct group grent;
 	const struct sgrp *sg;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);

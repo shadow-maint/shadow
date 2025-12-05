@@ -162,7 +162,7 @@ int main (int argc, char **argv)
 	struct passwd pwent;
 	const struct spwd *sp;
 	struct spwd spent;
-	struct option_flags  flags;
+	struct option_flags  flags = {.chroot = false};
 	bool process_selinux;
 
 	log_set_progname(Prog);
