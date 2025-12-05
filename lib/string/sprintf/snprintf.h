@@ -11,6 +11,7 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 
 #include "attr.h"
@@ -49,6 +50,9 @@ inline int
 vsnprintf_(char *restrict s, ssize_t size, const char *restrict fmt, va_list ap)
 {
 	int  len;
+
+	if (size == 0)
+		abort();
 
 	len = vsnprintf(s, size, fmt, ap);
 	if (len == -1)
