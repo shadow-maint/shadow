@@ -22,6 +22,7 @@
 #include "alloc/malloc.h"
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX
@@ -41,7 +42,6 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -112,11 +112,8 @@ static void error_acl (MAYBE_UNUSED struct error_context *ctx, const char *fmt, 
 	}
 
 	va_start (ap, fmt);
-	(void) fprintf (shadow_logfd, _("%s: "), log_get_progname());
-	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
-		(void) fputs (_(": "), shadow_logfd);
-	}
-	(void) fprintf(shadow_logfd, "%s\n", strerrno());
+	fprintf(shadow_logfd, "%s: ", log_get_progname());
+	vfprinte(shadow_logfd, fmt, ap);
 	va_end (ap);
 }
 
