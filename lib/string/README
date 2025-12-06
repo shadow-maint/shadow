@@ -178,7 +178,7 @@ strcpy/ - String copying
     strncpytail()
 	Like strncpy(), but when truncating, the tail of the string is
 	kept instead of the beginning.  This is useful for ut_id.
-    STRNCPYTAIL()
+    strncpytail_a()
 	Like strncpytail, but takes an array.
 
     strncat_a()  // To be removed
