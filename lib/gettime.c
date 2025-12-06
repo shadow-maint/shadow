@@ -11,7 +11,8 @@
 #include <limits.h>
 #include <stdio.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "shadowlog.h"
