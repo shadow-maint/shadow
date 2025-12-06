@@ -121,23 +121,21 @@ static int check_logins (const char *name, const char *maxlogins)
 
 	if (str2ul(&limit, maxlogins) == -1) {
 		if (errno == ERANGE) {
-			SYSLOG((LOG_WARN, "Invalid maxlogins value\n"));
+			SYSLOG(LOG_WARN, "Invalid maxlogins value\n");
 			return LOGIN_ERROR_LOGIN;
 		}
 		return 0;
 	}
 
 	if (0 == limit) {	/* maximum 0 logins ? */
-		SYSLOG ((LOG_WARN, "No logins allowed for `%s'\n", name));
+		SYSLOG(LOG_WARN, "No logins allowed for `%s'\n", name);
 		return LOGIN_ERROR_LOGIN;
 	}
 
 	count = active_sessions_count(name, limit);
 
 	if (count > limit) {
-		SYSLOG ((LOG_WARN,
-		         "Too many logins (max %lu) for %s\n",
-		         limit, name));
+		SYSLOG(LOG_WARN, "Too many logins (max %lu) for %s\n", limit, name);
 		return LOGIN_ERROR_LOGIN;
 	}
 	return 0;
@@ -294,9 +292,7 @@ static int do_user_limits (const char *buf, const char *name)
 			 * is still processed
 			 */
 			if (!reported) {
-				SYSLOG ((LOG_WARN,
-				         "Invalid limit string: '%s'",
-				         pp-1));
+				SYSLOG(LOG_WARN, "Invalid limit string: '%s'", pp-1);
 				reported = true;
 				retval |= LOGIN_ERROR_RLIMIT;
 			}
@@ -331,8 +327,7 @@ static bool user_in_group (const char *uname, const char *gname)
 	 * one needs to add some mess for getgrnam_r. */
 	groupdata = getgrnam (gname);
 	if (NULL == groupdata) {
-		SYSLOG ((LOG_WARN, "Nonexisting group `%s' in limits file.",
-		         gname));
+		SYSLOG(LOG_WARN, "Nonexisting group `%s' in limits file.", gname);
 		return false;
 	}
 
@@ -487,9 +482,9 @@ void setup_limits (const struct passwd *info)
 				}
 
 				/* Failed to parse or failed to nice() */
-				SYSLOG ((LOG_WARN,
-				         "Can't set the nice value for user %s",
-				         info->pw_name));
+				SYSLOG(LOG_WARN,
+				       "Can't set the nice value for user %s",
+				       info->pw_name);
 
 				continue;
 			}
@@ -500,9 +495,9 @@ void setup_limits (const struct passwd *info)
 
 				if (   (str2si(&blocks, val) == -1)
 				    || (set_filesize_limit (blocks) != 0)) {
-					SYSLOG ((LOG_WARN,
-					         "Can't set the ulimit for user %s",
-					         info->pw_name));
+					SYSLOG(LOG_WARN,
+					       "Can't set the ulimit for user %s",
+					       info->pw_name);
 				}
 				continue;
 			}
@@ -512,9 +507,9 @@ void setup_limits (const struct passwd *info)
 				mode_t  mask;
 
 				if (str2i(mode_t, &mask, val) == -1) {
-					SYSLOG ((LOG_WARN,
-					         "Can't set umask value for user %s",
-					         info->pw_name));
+					SYSLOG(LOG_WARN,
+					       "Can't set umask value for user %s",
+					       info->pw_name);
 				} else {
 					(void) umask (mask);
 				}

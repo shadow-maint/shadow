@@ -366,7 +366,7 @@ static void open_files (void)
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		exit (E_NOPERM);
 	}
 
@@ -376,7 +376,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			exit (E_NOPERM);
 		}
 		add_cleanup (log_gpasswd_failure_gshadow, NULL);
@@ -390,9 +390,8 @@ static void open_files (void)
 static void log_gpasswd_failure (const char *suffix)
 {
 	if (aflg) {
-		SYSLOG ((LOG_ERR,
-		         "%s failed to add user %s to group %s%s",
-		         myname, user, group, suffix));
+		SYSLOG(LOG_ERR, "%s failed to add user %s to group %s%s",
+		       myname, user, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_USER_MGMT,
 		              "add-user-to-group",
@@ -400,9 +399,8 @@ static void log_gpasswd_failure (const char *suffix)
 		              SHADOW_AUDIT_FAILURE);
 #endif
 	} else if (dflg) {
-		SYSLOG ((LOG_ERR,
-		         "%s failed to remove user %s from group %s%s",
-		         myname, user, group, suffix));
+		SYSLOG(LOG_ERR, "%s failed to remove user %s from group %s%s",
+		       myname, user, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_USER_MGMT,
 		              "delete-user-from-group",
@@ -410,9 +408,8 @@ static void log_gpasswd_failure (const char *suffix)
 		              SHADOW_AUDIT_FAILURE);
 #endif
 	} else if (rflg) {
-		SYSLOG ((LOG_ERR,
-		         "%s failed to remove password of group %s%s",
-		         myname, group, suffix));
+		SYSLOG(LOG_ERR, "%s failed to remove password of group %s%s",
+		       myname, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
 		              "delete-group-password",
@@ -420,9 +417,8 @@ static void log_gpasswd_failure (const char *suffix)
 		              SHADOW_AUDIT_FAILURE);
 #endif
 	} else if (Rflg) {
-		SYSLOG ((LOG_ERR,
-		         "%s failed to restrict access to group %s%s",
-		         myname, group, suffix));
+		SYSLOG(LOG_ERR, "%s failed to restrict access to group %s%s",
+		       myname, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_GRP_MGMT,
 		              "restrict-group",
@@ -432,9 +428,9 @@ static void log_gpasswd_failure (const char *suffix)
 	} else if (Aflg || Mflg) {
 #ifdef SHADOWGRP
 		if (Aflg) {
-			SYSLOG ((LOG_ERR,
-			         "%s failed to set the administrators of group %s to %s%s",
-			         myname, group, admins, suffix));
+			SYSLOG(LOG_ERR,
+			       "%s failed to set the administrators of group %s to %s%s",
+			       myname, group, admins, suffix);
 #ifdef WITH_AUDIT
 			audit_logger_with_group (AUDIT_GRP_MGMT,
 			              "set-admins-of-group",
@@ -444,9 +440,9 @@ static void log_gpasswd_failure (const char *suffix)
 		}
 #endif				/* SHADOWGRP */
 		if (Mflg) {
-			SYSLOG ((LOG_ERR,
-			         "%s failed to set the members of group %s to %s%s",
-			         myname, group, members, suffix));
+			SYSLOG(LOG_ERR,
+			       "%s failed to set the members of group %s to %s%s",
+			       myname, group, members, suffix);
 #ifdef WITH_AUDIT
 			audit_logger_with_group (AUDIT_USER_MGMT,
 			              "add-users-to-group",
@@ -455,9 +451,8 @@ static void log_gpasswd_failure (const char *suffix)
 #endif
 		}
 	} else {
-		SYSLOG ((LOG_ERR,
-		         "%s failed to change password of group %s%s",
-		         myname, group, suffix));
+		SYSLOG(LOG_ERR, "%s failed to change password of group %s%s",
+		       myname, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
 		              "change-password",
@@ -500,9 +495,8 @@ static void log_gpasswd_success (const char *suffix)
 #endif
 
 	if (aflg) {
-		SYSLOG ((LOG_INFO,
-		         "user %s added by %s to group %s%s",
-		         user, myname, group, suffix));
+		SYSLOG(LOG_INFO, "user %s added by %s to group %s%s",
+		       user, myname, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_USER_MGMT,
 		              "add-user-to-group",
@@ -510,9 +504,8 @@ static void log_gpasswd_success (const char *suffix)
 		              SHADOW_AUDIT_SUCCESS);
 #endif
 	} else if (dflg) {
-		SYSLOG ((LOG_INFO,
-		         "user %s removed by %s from group %s%s",
-		         user, myname, group, suffix));
+		SYSLOG(LOG_INFO, "user %s removed by %s from group %s%s",
+		       user, myname, group, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_USER_MGMT,
 		              "delete-user-from-group",
@@ -520,9 +513,8 @@ static void log_gpasswd_success (const char *suffix)
 		              SHADOW_AUDIT_SUCCESS);
 #endif
 	} else if (rflg) {
-		SYSLOG ((LOG_INFO,
-		         "password of group %s removed by %s%s",
-		         group, myname, suffix));
+		SYSLOG(LOG_INFO, "password of group %s removed by %s%s",
+		       group, myname, suffix);
 #ifdef WITH_AUDIT
 		stprintf_a(buf, "password of group %s removed by %s%s",
 		         group, myname, suffix);
@@ -532,9 +524,8 @@ static void log_gpasswd_success (const char *suffix)
 		              SHADOW_AUDIT_SUCCESS);
 #endif
 	} else if (Rflg) {
-		SYSLOG ((LOG_INFO,
-		         "access to group %s restricted by %s%s",
-		         group, myname, suffix));
+		SYSLOG(LOG_INFO, "access to group %s restricted by %s%s",
+		       group, myname, suffix);
 #ifdef WITH_AUDIT
 		stprintf_a(buf, "access to group %s restricted by %s%s",
 		         group, myname, suffix);
@@ -546,9 +537,8 @@ static void log_gpasswd_success (const char *suffix)
 	} else if (Aflg || Mflg) {
 #ifdef SHADOWGRP
 		if (Aflg) {
-			SYSLOG ((LOG_INFO,
-			         "administrators of group %s set by %s to %s%s",
-			         group, myname, admins, suffix));
+			SYSLOG(LOG_INFO, "administrators of group %s set by %s to %s%s",
+			       group, myname, admins, suffix);
 #ifdef WITH_AUDIT
 			audit_logger_with_group (AUDIT_GRP_MGMT,
 			              "set-admins-of-group",
@@ -558,9 +548,8 @@ static void log_gpasswd_success (const char *suffix)
 		}
 #endif				/* SHADOWGRP */
 		if (Mflg) {
-			SYSLOG ((LOG_INFO,
-			         "members of group %s set by %s to %s%s",
-			         group, myname, members, suffix));
+			SYSLOG(LOG_INFO, "members of group %s set by %s to %s%s",
+			       group, myname, members, suffix);
 #ifdef WITH_AUDIT
 			audit_logger_with_group (AUDIT_USER_MGMT,
 			              "add-users-to-group",
@@ -569,9 +558,8 @@ static void log_gpasswd_success (const char *suffix)
 #endif
 		}
 	} else {
-		SYSLOG ((LOG_INFO,
-		         "password of group %s changed by %s%s",
-		         group, myname, suffix));
+		SYSLOG(LOG_INFO, "password of group %s changed by %s%s",
+		       group, myname, suffix);
 #ifdef WITH_AUDIT
 		audit_logger_with_group (AUDIT_GRP_CHAUTHTOK,
 		              "change-password",
@@ -726,7 +714,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 
 	if (gr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		exit (E_NOPERM);
 	}
 
@@ -747,9 +735,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: failure while closing read-only %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR,
-		         "failure while closing read-only %s",
-		         gr_dbname ()));
+		SYSLOG(LOG_ERR, "failure while closing read-only %s", gr_dbname());
 		exit (E_NOPERM);
 	}
 
@@ -759,7 +745,7 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			exit (E_NOPERM);
 		}
 		tmpsg = sgr_locate (group);
@@ -785,9 +771,8 @@ static void get_group(struct group *gr, const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failure while closing read-only %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failure while closing read-only %s",
-			         sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failure while closing read-only %s",
+			       sgr_dbname());
 			exit (E_NOPERM);
 		}
 	}
@@ -927,9 +912,9 @@ int main (int argc, char **argv)
 	if (NULL == pw) {
 		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
 		         Prog);
-		SYSLOG ((LOG_WARN,
-		         "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) getuid ()));
+		SYSLOG(LOG_WARN,
+		       "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
@@ -1101,7 +1086,7 @@ int main (int argc, char **argv)
       output:
 	if (setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		SYSLOG(LOG_ERR, "can't setuid(0)");
 		closelog ();
 		exit (E_NOPERM);
 	}

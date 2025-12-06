@@ -323,9 +323,9 @@ int find_new_gid (bool sys_group,
 						_("%s: Can't get unique system GID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -369,9 +369,9 @@ int find_new_gid (bool sys_group,
 							_("%s: Can't get unique system GID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -432,9 +432,9 @@ int find_new_gid (bool sys_group,
 						_("%s: Can't get unique GID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -478,9 +478,9 @@ int find_new_gid (bool sys_group,
 							_("%s: Can't get unique GID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -496,7 +496,7 @@ int find_new_gid (bool sys_group,
 	fprintf (log_get_logfd(),
 		_("%s: Can't get unique GID (no more available GIDs)\n"),
 		log_get_progname());
-	SYSLOG ((LOG_WARN, "no more available GIDs on the system"));
+	SYSLOG(LOG_WARN, "no more available GIDs on the system");
 	free (used_gids);
 	return -1;
 }
