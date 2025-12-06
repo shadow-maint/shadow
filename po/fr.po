@@ -254,8 +254,8 @@ msgid "%s: Could not set caps\n"
 msgstr "%s : Impossible de définir les plafonds\n"
 
 #, c-format
-msgid "%s: stpeprintf failed!\n"
-msgstr "%s : échec de stpeprintf !\n"
+msgid "%s: seprintf failed!\n"
+msgstr "%s : échec de seprintf !\n"
 
 #, c-format
 msgid "%s: open of %s failed: %s\n"
