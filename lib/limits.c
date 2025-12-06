@@ -35,6 +35,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
+#include "string/strtok/stpsep.h"
 #include "typetraits.h"
 
 
@@ -366,9 +367,10 @@ static int setup_user_limits (const char *uname)
 		char  name[1024];
 		char  tempbuf[1024];
 
-		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
+		if (stpsep(buf, "\n") == NULL)
 			continue;
-		}
+		if (strprefix(buf, "#") || streq(buf, ""))
+			continue;
 		/* a valid line should have a username, then spaces,
 		 * then limits
 		 * we allow the format:
