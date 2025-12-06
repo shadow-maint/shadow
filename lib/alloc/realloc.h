@@ -14,11 +14,12 @@
 #include "sizeof.h"
 
 
-#define REALLOC(p, n, T)   REALLOC_(p, n, typeas(T))
-#define REALLOC_(p, n, T)                                             \
-(                                                                     \
-	_Generic(p, T *: (T *) reallocarray(p, (n) ?: 1, sizeof(T)))  \
-)
+#define REALLOC(p, n, T)   REALLOC_(typeas(T), p, n)
+#define REALLOC_(T, ...)                                              \
+((static inline T *(T *p, size_t n))                                  \
+{                                                                     \
+	return reallocarray(p, n ?: 1, sizeof(T));                    \
+}(__VA_ARGS__))
 
 
 #define XREALLOC(p, n, T)  exit_if_null(REALLOC(p, n, T))
