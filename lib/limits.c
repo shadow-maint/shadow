@@ -364,8 +364,7 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: a better (smarter) checking should be done
 	 */
 	while (fgets (buf, 1024, fil) != NULL) {
-		char  name[1024];
-		char  tempbuf[1024];
+		char  *name, *lim, *p;
 
 		if (stpsep(buf, "\n") == NULL)
 			continue;
@@ -391,23 +390,27 @@ static int setup_user_limits (const char *uname)
 		 * the last encountered entry for a matching group rules.
 		 * If there is no matching group entry, the default limits rule.
 		 */
-		if (sscanf (buf, "%s%[ACDFIKLMNOPRSTUacdfiklmnoprstu0-9 \t-]",
-		            name, tempbuf) == 2) {
+		name = buf;
+		lim = stpsep(buf, " \t");
+		if (lim == NULL)
+			continue;
+		p = stpspn(lim, "ACDFIKLMNOPRSTUacdfiklmnoprstu0123456789 \t-");
+		stpcpy(p, "");
+
 			if (streq(name, uname)) {
-				strcpy (limits, tempbuf);
+				strcpy (limits, lim);
 				break;
 			} else if (streq(name, "*")) {
-				strcpy (deflimits, tempbuf);
+				strcpy (deflimits, lim);
 			} else if (strprefix(name, "@")) {
 				/* If the user is in the group, the group
 				 * limits apply unless later a line for
 				 * the specific user is found.
 				 */
 				if (user_in_group (uname, name+1)) {
-					strcpy (limits, tempbuf);
+					strcpy (limits, lim);
 				}
 			}
-		}
 	}
 	(void) fclose (fil);
 	if (streq(limits, "")) {
