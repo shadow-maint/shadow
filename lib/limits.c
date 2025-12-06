@@ -397,20 +397,20 @@ static int setup_user_limits (const char *uname)
 		p = stpspn(lim, "ACDFIKLMNOPRSTUacdfiklmnoprstu0123456789 \t-");
 		stpcpy(p, "");
 
-			if (streq(name, uname)) {
-				strcpy (limits, lim);
-				break;
-			} else if (streq(name, "*")) {
-				strcpy (deflimits, lim);
-			} else if (strprefix(name, "@")) {
-				/* If the user is in the group, the group
-				 * limits apply unless later a line for
-				 * the specific user is found.
-				 */
-				if (user_in_group (uname, name+1)) {
-					strcpy (limits, lim);
-				}
+		if (streq(name, uname)) {
+			strcpy(limits, lim);
+			break;
+		} else if (streq(name, "*")) {
+			strcpy(deflimits, lim);
+		} else if (strprefix(name, "@")) {
+			/* If the user is in the group, the group
+			 * limits apply unless later a line for
+			 * the specific user is found.
+			 */
+			if (user_in_group(uname, name+1)) {
+				strcpy(limits, lim);
 			}
+		}
 	}
 	(void) fclose (fil);
 	if (streq(limits, "")) {
