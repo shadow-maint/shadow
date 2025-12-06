@@ -11,11 +11,12 @@
 #include "config.h"
 
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
-#include <getopt.h>
+#include <string.h>
 
 #include "chkname.h"
 #include "commonio.h"
@@ -28,7 +29,6 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 
 #ifdef SHADOWGRP
 #include "sgroupio.h"
@@ -490,10 +490,8 @@ static void check_grp_file(bool *errors, bool *changed, const struct option_flag
 		/*
 		 * Skip all NIS entries.
 		 */
-
-		if (strprefix(gre->line, "+") || strprefix(gre->line, "-")) {
+		if (strspn(gre->line, "+-"))
 			continue;
-		}
 
 		/*
 		 * Start with the entries that are completely corrupt. They

@@ -17,6 +17,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "chkname.h"
 #include "commonio.h"
@@ -29,7 +30,6 @@
 #include "shadowlog.h"
 #include "sssd.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
@@ -400,9 +400,8 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (strprefix(pfe->line, "+") || strprefix(pfe->line, "-")) {
+		if (strspn(pfe->line, "+-"))
 			continue;
-		}
 
 		/*
 		 * Start with the entries that are completely corrupt.  They
@@ -725,9 +724,8 @@ static void check_spw_file (bool *errors, bool *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (strprefix(spe->line, "+") || strprefix(spe->line, "-")) {
+		if (strspn(spe->line, "+-"))
 			continue;
-		}
 
 		/*
 		 * Start with the entries that are completely corrupt. They
