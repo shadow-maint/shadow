@@ -21,13 +21,13 @@
 
 #include "atoi/a2i.h"
 #include "defines.h"
-#include "faillog.h"
-#include "prototypes.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "faillog.h"
+#include "io/fprintf.h"
+#include "prototypes.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
-#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -637,17 +637,13 @@ int main (int argc, char **argv)
 		fail = fopen (FAILLOG_FILE, "r");
 	}
 	if (NULL == fail) {
-		fprintf (stderr,
-		         _("%s: Cannot open %s: %s\n"),
-		        Prog, FAILLOG_FILE, strerrno());
+		fprinte(stderr, _("%s: Cannot open %s"), Prog, FAILLOG_FILE);
 		exit (E_NOPERM);
 	}
 
 	/* Get the size of the faillog */
 	if (fstat (fileno (fail), &statbuf) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot get the size of %s: %s\n"),
-		        Prog, FAILLOG_FILE, strerrno());
+		fprinte(stderr, _("%s: Cannot get the size of %s"), Prog, FAILLOG_FILE);
 		exit (E_NOPERM);
 	}
 
@@ -672,9 +668,7 @@ int main (int argc, char **argv)
 		    || (fflush (fail) != 0)
 		    || (fsync  (fileno (fail)) != 0)
 		    || (fclose (fail) != 0)) {
-			fprintf (stderr,
-			         _("%s: Failed to write %s: %s\n"),
-			        Prog, FAILLOG_FILE, strerrno());
+			fprinte(stderr, _("%s: Failed to write %s"), Prog, FAILLOG_FILE);
 			(void) fclose (fail);
 			errors = true;
 		}
