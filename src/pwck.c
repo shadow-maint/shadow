@@ -10,8 +10,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <grp.h>
@@ -30,6 +28,7 @@
 #include "sssd.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "time/date.h"
 #ifdef WITH_TCB
 #include "tcbfuncs.h"
 #endif				/* WITH_TCB */
@@ -634,13 +633,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = gettime () / DAY;
-					if (0 == sp.sp_lstchg) {
-						/* Better disable aging than
-						 * requiring a password change
-						 */
-						sp.sp_lstchg = -1;
-					}
+					sp.sp_lstchg = date_or_SDE();
 					*changed = true;
 
 					if (spw_update (&sp) == 0) {
