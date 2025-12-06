@@ -24,12 +24,6 @@
 #endif
 
 
-#define is_same_type(a, b)                                                    \
-(                                                                             \
-	__builtin_types_compatible_p(a, b)                                    \
-)
-
-
 #define QChar_of(s)  typeof                                           \
 (                                                                     \
 	_Generic(s,                                                   \
