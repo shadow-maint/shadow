@@ -139,7 +139,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 
 			    (void) fputs (_("Cannot open audit interface.\n"),
 			              shadow_logfd);
-			    SYSLOG ((LOG_WARN, "Cannot open audit interface."));
+			    SYSLOG(LOG_WARN, "Cannot open audit interface.");
 			}
 		}
 	}
@@ -161,7 +161,7 @@ static int selinux_log_cb (int type, const char *fmt, ...) {
 	}
 #endif
 
-	SYSLOG ((LOG_WARN, "libselinux: %s", buf));
+	SYSLOG(LOG_WARN, "libselinux: %s", buf);
 
 skip_syslog:
 	free (buf);
@@ -194,9 +194,9 @@ int check_selinux_permit (const char *perm_name)
 		fprintf (shadow_logfd,
 		    _("%s: can not get previous SELinux process context: %s\n"),
 		    shadow_progname, strerrno());
-		SYSLOG ((LOG_WARN,
-		    "can not get previous SELinux process context: %s",
-		    strerrno()));
+		SYSLOG(LOG_WARN,
+		       "can not get previous SELinux process context: %s",
+		       strerrno());
 		return (security_getenforce () != 0);
 	}
 
