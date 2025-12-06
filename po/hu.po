@@ -206,7 +206,7 @@ msgstr "Sikertelen helyfoglalás a beállítási infónak.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: nem tudom megnyitni a fájlt\n"
 
 #, fuzzy, c-format

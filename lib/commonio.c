@@ -36,7 +36,7 @@
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"

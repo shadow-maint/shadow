@@ -211,7 +211,7 @@ msgstr "Non se puido reservar espacio para a información de configuración.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: non se pode abrir o ficheiro\n"
 
 #, fuzzy, c-format
