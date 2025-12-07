@@ -348,7 +348,6 @@ static int setup_user_limits (const char *uname)
 	char deflimits[1024];
 
 	/* init things */
-	memzero_a(buf);
 	memzero_a(limits);
 	memzero_a(deflimits);
 
