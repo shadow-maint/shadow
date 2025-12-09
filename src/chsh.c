@@ -67,8 +67,8 @@ static bool pw_locked = false;
 NORETURN static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void new_fields (void);
-static bool shell_is_listed (const char *);
-static bool is_restricted_shell (const char *);
+static bool shell_is_listed (const char *, bool process_selinux);
+static bool is_restricted_shell (const char *, bool process_selinux);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_perms(const struct passwd *pw, const struct option_flags *flags);
 static void update_shell (const char *user, char *loginsh,
@@ -130,14 +130,14 @@ static void new_fields (void)
  * is_restricted_shell - return true if the shell is restricted
  *
  */
-static bool is_restricted_shell (const char *sh)
+static bool is_restricted_shell (const char *sh, bool process_selinux)
 {
 	/*
 	 * Shells not listed in /etc/shells are considered to be restricted.
 	 * Changed this to avoid confusion with "rc" (the plan9 shell - not
 	 * restricted despite the name starting with 'r').  --marekm
 	 */
-	return !shell_is_listed (sh);
+	return !shell_is_listed (sh, process_selinux);
 }
 
 /*
@@ -152,7 +152,7 @@ static bool is_restricted_shell (const char *sh)
  */
 
 #ifdef HAVE_VENDORDIR
-static bool shell_is_listed (const char *sh)
+static bool shell_is_listed (const char *sh, bool process_selinux)
 {
 	bool found = false;
 
@@ -172,7 +172,7 @@ static bool shell_is_listed (const char *sh)
 		fprintf (stderr,
 			 _("Cannot parse shell files: %s"),
 			 econf_errString(error));
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	error = econf_getKeys(key_file, NULL, &size, &keys);
@@ -181,7 +181,7 @@ static bool shell_is_listed (const char *sh)
 			 _("Cannot evaluate entries in shell files: %s"),
 			 econf_errString(error));
 		econf_free (key_file);
-		fail_exit (1);
+		fail_exit (1, process_selinux);
 	}
 
 	for (size_t i = 0; i < size; i++) {
@@ -198,7 +198,7 @@ static bool shell_is_listed (const char *sh)
 
 #else /* without HAVE_VENDORDIR */
 
-static bool shell_is_listed (const char *sh)
+static bool shell_is_listed (const char *sh, bool)
 {
 	bool found = false;
 	char *cp;
@@ -295,7 +295,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 * Non-privileged users are only allowed to change the shell if it
 	 * is not a restricted one.
 	 */
-	if (!amroot && is_restricted_shell (pw->pw_shell)) {
+	if (!amroot && is_restricted_shell (pw->pw_shell, process_selinux)) {
 		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
@@ -548,7 +548,7 @@ int main (int argc, char **argv)
 	}
 	if (!streq(loginsh, "")
 	    && (loginsh[0] != '/'
-	        || is_restricted_shell (loginsh)
+	        || is_restricted_shell (loginsh, process_selinux)
 	        || (access (loginsh, X_OK) != 0)))
 	{
 		if (amroot) {
