@@ -187,7 +187,7 @@ get_current_utmp(pid_t main_pid)
 
 		ut_copy = malloc_T(1, struct utmpx);
 		if (ut_copy != NULL)
-			memcpy(ut_copy, ut, sizeof(*ut));
+			*ut_copy = *ut;
 		ut = ut_copy;
 	}
 
