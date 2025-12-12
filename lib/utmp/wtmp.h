@@ -15,20 +15,21 @@
 #include "prototypes.h"
 
 
-inline void updwtmpx(const char *filename, const struct utmpx *ut);
+inline void updwtmpx(const char *path, const struct utmpx *ut);
 
 
 #if !defined(HAVE_UPDWTMPX)
 // updwtmpx(3) - update wtmp(5) struct-utmpx
 inline void
-updwtmpx(const char *filename, const struct utmpx *ut)
+updwtmpx(const char *path, const struct utmpx *ut)
 {
-	int fd;
+	int  fd;
 
-	fd = open (filename, O_APPEND | O_WRONLY, 0);
-	if (fd >= 0) {
-		write_full(fd, ut, sizeof(*ut));
-		close (fd);
-	}
+	fd = open(path, O_APPEND | O_WRONLY, 0);
+	if (fd == -1)
+		return;
+
+	write_full(fd, ut, sizeof(*ut));
+	close(fd);
 }
 #endif
