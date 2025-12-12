@@ -291,12 +291,10 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	utent->ut_type = USER_PROCESS;
 	utent->ut_pid = main_pid;
 	strncpy_a(utent->ut_line, line);
-	if (   (NULL != ut)
-	    && ('\0' != ut->ut_id[0])) {
+	if (NULL != ut && !strneq_a(ut->ut_id, ""))
 		strncpy_a(utent->ut_id, ut->ut_id);
-	} else {
+	else
 		strncpytail_a(utent->ut_id, line);
-	}
 #if defined(HAVE_STRUCT_UTMPX_UT_NAME)
 	strncpy_a(utent->ut_name, name);
 #endif
