@@ -363,8 +363,6 @@ setutmp(struct utmpx *ut)
 {
 	int err = 0;
 
-	assert (NULL != ut);
-
 	setutxent();
 	if (pututxline(ut) == NULL) {
 		err = 1;
@@ -387,6 +385,7 @@ update_utmp(const char *user, const char *tty, const char *host,
 
 	utent = get_current_utmp(main_pid);
 	ut = prepare_utmp(user, tty, host, utent, main_pid);
+	assert (NULL != ut);
 
 	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
 
