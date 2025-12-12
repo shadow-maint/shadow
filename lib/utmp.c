@@ -372,8 +372,7 @@ setutmp(struct utmpx *ut)
 	endutxent();
 
 #if !defined(USE_PAM)
-	/* This is done by pam_lastlog */
-	updwtmpx(_PATH_WTMP, ut);
+	updwtmpx(_PATH_WTMP, ut);  // wtmp(5) is PAM's responsibility
 #endif
 
 	return err;
