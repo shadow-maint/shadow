@@ -136,6 +136,33 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>--btrfs-subvolume-home</option>
+	</term>
+	<listitem>
+	  <para>
+	    Create the user's home directory as a Btrfs subvolume.
+	  </para>
+	  <para>
+	    If this option is not specified,
+		<command>useradd</command> will follow the default behavior
+		defined by the <option>BTRFS_SUBVOLUME_HOME</option> variable
+		in <filename>/etc/default/useradd</filename>.
+	    If this variable is not set, the default value is no.
+	  </para>
+	  <para>
+	    When the <option>--btrfs-subvolume-home</option> command-line option
+	    is specified,
+		a Btrfs subvolume is created
+		regardless of any configuration file settings.
+	  </para>
+	  <para>
+	    Note: this feature works only if the underlying filesystem supports
+	    Btrfs subvolumes.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-c</option>, <option>--comment</option>&nbsp;<replaceable>COMMENT</replaceable>
 	</term>
 	<listitem>
