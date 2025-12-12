@@ -353,23 +353,15 @@ prepare_utmp(const char *name, const char *line, const char *host,
 }
 
 
-/*
- * setutmp - Update utmp(5)
- *
- *	Return 1 on failure and 0 on success.
- */
-static int
+// setutmp - Update utmp(5)
+static struct utmpx *
 setutmp(struct utmpx *ut)
 {
-	int err = 0;
-
 	setutxent();
-	if (pututxline(ut) == NULL) {
-		err = 1;
-	}
+	ut = pututxline(ut);
 	endutxent();
 
-	return err;
+	return ut;
 }
 
 
