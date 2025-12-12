@@ -289,9 +289,6 @@ prepare_utmp(const char *name, const char *line, const char *host,
 	} else {
 		strncpy_a(utent->ut_id, strnul(line) - MIN(strlen(line), countof(utent->ut_id)));
 	}
-#if defined(HAVE_STRUCT_UTMPX_UT_NAME)
-	strncpy_a(utent->ut_name, name);
-#endif
 	strncpy_a(utent->ut_user, name);
 	if (NULL != hostname) {
 		struct addrinfo *info = NULL;
