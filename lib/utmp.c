@@ -353,9 +353,9 @@ prepare_utmp(const char *name, const char *line, const char *host,
 }
 
 
-// setutmp - Update utmp(5)
+// updutmpx - Update utmp(5) struct-utmpx
 static struct utmpx *
-setutmp(struct utmpx *ut)
+updutmpx(struct utmpx *ut)
 {
 	setutxent();
 	ut = pututxline(ut);
@@ -378,7 +378,7 @@ update_utmp(const char *user, const char *tty, const char *host,
 #if !defined(USE_PAM)
 	updwtmpx(_PATH_WTMP, ut);  // wtmp(5) is PAM's responsibility
 #endif
-	(void) setutmp(ut);
+	updutmpx(ut);
 
 	free(utent);
 	free(ut);
