@@ -10,5 +10,5 @@
 
 
 #if !defined(HAVE_UPDWTMPX)
-extern inline void updwtmpx(const char *filename, const struct utmpx *ut);
+extern inline void updwtmpx(const char *path, const struct utmpx *ut);
 #endif
