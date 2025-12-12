@@ -354,7 +354,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 
 
 /*
- * setutmp - Update an entry in utmp and log an entry in wtmp
+ * setutmp - Update utmp(5)
  *
  *	Return 1 on failure and 0 on success.
  */
@@ -368,10 +368,6 @@ setutmp(struct utmpx *ut)
 		err = 1;
 	}
 	endutxent();
-
-#if !defined(USE_PAM)
-	updwtmpx(_PATH_WTMP, ut);  // wtmp(5) is PAM's responsibility
-#endif
 
 	return err;
 }
@@ -387,7 +383,10 @@ update_utmp(const char *user, const char *tty, const char *host,
 	ut = prepare_utmp(user, tty, host, utent, main_pid);
 	assert (NULL != ut);
 
-	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
+#if !defined(USE_PAM)
+	updwtmpx(_PATH_WTMP, ut);  // wtmp(5) is PAM's responsibility
+#endif
+	(void) setutmp(ut);
 
 	free(utent);
 	free(ut);
