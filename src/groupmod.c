@@ -282,7 +282,7 @@ grp_update(void)
 		}
 #endif				/* SHADOWGRP */
 
-		{
+		if (!streq(user_list, "")) {
 			ul = user_list;
 			while (NULL != (u = strsep(&ul, ","))) {
 				if (prefix_getpwnam(u) == NULL) {

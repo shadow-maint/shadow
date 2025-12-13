@@ -24,6 +24,7 @@
 #include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
 #include "string/strchr/strchrscnt.h"
+#include "string/strcmp/streq.h"
 #include "string/strerrno.h"
 
 
@@ -52,7 +53,7 @@ add_groups(const char *list)
 	if (dup == NULL)
 		goto free_gids;
 
-	{
+	if (!streq(dup, "")) {
 		while (NULL != (g = strsep(&p, ",:"))) {
 			struct group  *grp;
 
