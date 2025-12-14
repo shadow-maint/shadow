@@ -185,6 +185,10 @@ strcpy/ - String copying
 	Do NOT use.  I'll remove it soon.
 
   s/
+    strmove()
+	Like memmove(3), for strings.  It takes the length of the string
+	internally with strlen(3).
+
     strtcpy()
 	Copy from a string into another string with truncation.
 	This is what the Linux kernel calls strscpy().
