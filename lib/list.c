@@ -13,6 +13,7 @@
 #include <assert.h>
 
 #include "alloc/malloc.h"
+#include "alloc/realloc.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "string/strchr/strchrcnt.h"
@@ -23,16 +24,11 @@
 
 /*
  * add_list - add a member to a list of group members
- *
- *	the array of member names is searched for the new member
- *	name, and if not present it is added to a freshly allocated
- *	list of users.
  */
 /*@only@*/char **
 add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i;
-	char **tmp;
 
 	assert (NULL != member);
 	assert (NULL != list);
@@ -41,34 +37,17 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 	 * Scan the list for the new name.  Return the original list
 	 * pointer if it is present.
 	 */
-
 	for (i = 0; list[i] != NULL; i++) {
 		if (streq(list[i], member)) {
 			return list;
 		}
 	}
 
-	/*
-	 * Allocate a new list pointer large enough to hold all the
-	 * old entries, and the new entries as well.
-	 */
+	list = xrealloc_T(list, i + 2, char *);
+	list[i] = xstrdup(member);
+	list[i+1] = NULL;
 
-	tmp = xmalloc_T(i + 2, char *);
-
-	/*
-	 * Copy the original list to the new list, then append the
-	 * new member and NULL terminate the result.  This new list
-	 * is returned to the invoker.
-	 */
-
-	for (i = 0; list[i] != NULL; i++) {
-		tmp[i] = list[i];
-	}
-
-	tmp[i] = xstrdup (member);
-	tmp[i+1] = NULL;
-
-	return tmp;
+	return list;
 }
 
 /*
