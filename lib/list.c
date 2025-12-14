@@ -146,12 +146,8 @@ dup_list(char *const *list)
 
 	tmp = xmalloc_T(i + 1, char *);
 
-	i = 0;
-	while (NULL != *list) {
-		tmp[i] = xstrdup (*list);
-		i++;
-		list++;
-	}
+	for (i = 0; NULL != list[i]; i++)
+		tmp[i] = xstrdup(list[i]);
 
 	tmp[i] = NULL;
 	return tmp;
@@ -179,11 +175,9 @@ bool is_on_list (char *const *list, const char *member)
 	assert (NULL != member);
 	assert (NULL != list);
 
-	while (NULL != *list) {
-		if (streq(*list, member)) {
+	for (size_t i = 0; list[i] != NULL; i++) {
+		if (streq(list[i], member))
 			return true;
-		}
-		list++;
 	}
 
 	return false;
