@@ -13,8 +13,9 @@
 
 #include "alloc/malloc.h"
 #include "alloc/realloc.h"
-#include "prototypes.h"
 #include "defines.h"
+#include "memory/memcpy/memmove.h"
+#include "prototypes.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
@@ -69,7 +70,7 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 		for (m = 0; list[m] != NULL && !streq(list[m], member); m++)
 			continue;
 		free(list[m]);
-		memmove(&list[m], &list[m+1], (n-m) * sizeof(char *));
+		memmove_T(&list[m], &list[m+1], n-m, char *);
 	} while (m != n);
 
 	return xrealloc_T(list, n+1, char *);
