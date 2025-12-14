@@ -207,6 +207,9 @@ strcpy/ - String copying
     MEMCPY()
 	Like memcpy(3), but takes two arrays.
 
+    memmove_T()
+	Like memmove(3), but type safe.
+
 sprintf/ - Formatted string creation
 
     aprintf()
