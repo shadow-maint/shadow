@@ -115,6 +115,8 @@ libshadow_la_SOURCES = \
 	lockpw.c \
 	loginprompt.c \
 	mail.c \
+	memory/memcpy/memmove.c \
+	memory/memcpy/memmove.h \
 	motd.c \
 	myname.c \
 	nss.c \
