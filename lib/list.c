@@ -19,6 +19,7 @@
 #include "defines.h"
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
+#include "string/strcpy/memmove.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/strsep2ls.h"
 
@@ -67,7 +68,7 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 			continue;
 		for (m = 0; list[m] != NULL && !streq(list[m], member); m++)
 			continue;
-		memmove(&list[m], &list[m+1], (n-m) * sizeof(char *));
+		memmove_T(&list[m], &list[m+1], n-m, char *);
 	} while (m != n);
 
 	return xrealloc_T(list, n+1, char *);
