@@ -8,7 +8,8 @@
 
 #include "config.h"
 
-#ident "$Id$"
+#include <stddef.h>
+#include <string.h>
 
 #include <assert.h>
 
@@ -52,59 +53,24 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 
 /*
  * del_list - delete a member from a list of group members
- *
- *	the array of member names is searched for the old member
- *	name, and if present it is deleted from a freshly allocated
- *	list of users.
  */
-
 /*@only@*/char **
 del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
-	int i, j;
-	char **tmp;
+	int  n, m;
 
 	assert (NULL != member);
 	assert (NULL != list);
 
-	/*
-	 * Scan the list for the old name.  Return the original list
-	 * pointer if it is not present.
-	 */
+	do {
+		for (n = 0; list[n] != NULL; n++)
+			continue;
+		for (m = 0; list[m] != NULL && !streq(list[m], member); m++)
+			continue;
+		memmove(&list[m], &list[m+1], (n-m) * sizeof(char *));
+	} while (m != n);
 
-	for (i = j = 0; list[i] != NULL; i++) {
-		if (!streq(list[i], member)) {
-			j++;
-		}
-	}
-
-	if (j == i) {
-		return list;
-	}
-
-	/*
-	 * Allocate a new list pointer large enough to hold all the
-	 * old entries.
-	 */
-
-	tmp = xmalloc_T(j + 1, char *);
-
-	/*
-	 * Copy the original list except the deleted members to the
-	 * new list, then NULL terminate the result.  This new list
-	 * is returned to the invoker.
-	 */
-
-	for (i = j = 0; list[i] != NULL; i++) {
-		if (!streq(list[i], member)) {
-			tmp[j] = list[i];
-			j++;
-		}
-	}
-
-	tmp[j] = NULL;
-
-	return tmp;
+	return xrealloc_T(list, n+1, char *);
 }
 
 /*
