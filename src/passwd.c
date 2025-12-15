@@ -138,8 +138,8 @@ static void print_status (const struct passwd *);
 NORETURN static void fail_exit (int, bool);
 NORETURN static void oom (bool process_selinux);
 static char *update_crypt_pw (char *, bool);
-static void update_noshadow(const struct option_flags *flags);
-static void update_shadow(const struct option_flags *flags);
+static void update_noshadow(bool);
+static void update_shadow(bool);
 
 /*
  * usage - print command usage and exit
@@ -555,13 +555,10 @@ static char *update_crypt_pw (char *cp, bool process_selinux)
 }
 
 
-static void update_noshadow(const struct option_flags *flags)
+static void update_noshadow(bool process_selinux)
 {
 	const struct passwd *pw;
 	struct passwd *npw;
-	bool process_selinux;
-
-	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (pw_lock () == 0) {
 		(void) fprintf (stderr,
@@ -612,13 +609,10 @@ static void update_noshadow(const struct option_flags *flags)
 	pw_locked = false;
 }
 
-static void update_shadow(const struct option_flags *flags)
+static void update_shadow(bool process_selinux)
 {
 	const struct spwd *sp;
 	struct spwd *nsp;
-	bool process_selinux;
-
-	process_selinux = !flags->chroot && !flags->prefix;
 
 	if (spw_lock () == 0) {
 		(void) fprintf (stderr,
@@ -638,7 +632,7 @@ static void update_shadow(const struct option_flags *flags)
 	if (NULL == sp) {
 		/* Try to update the password in /etc/passwd instead. */
 		(void) spw_close (process_selinux);
-		update_noshadow (flags);
+		update_noshadow (process_selinux);
 		if (spw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr,
 			                _("%s: failed to unlock %s\n"),
@@ -1124,9 +1118,9 @@ main(int argc, char **argv)
 		exit (E_NOPERM);
 	}
 	if (spw_file_present ()) {
-		update_shadow (&flags);
+		update_shadow (process_selinux);
 	} else {
-		update_noshadow (&flags);
+		update_noshadow (process_selinux);
 	}
 
 	nscd_flush_cache ("passwd");
