@@ -1017,6 +1017,7 @@ run_test ./newusers/58_invalid_input_file/newusers.test
 run_test ./newusers/59_no_gshadow_file/newusers.test
 run_test ./newusers/60_update_no_gecos/newusers.test
 run_test ./newusers/61_update_no_shell/newusers.test
+run_test ./newusers/62_create_user_no_aging/newusers.test
 run_test ./split_groups/01_useradd_split_group/useradd.test
 run_test ./split_groups/02_useradd_no_split_group/useradd.test
 run_test ./split_groups/03_useradd_split_group_already_split/useradd.test
