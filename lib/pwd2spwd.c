@@ -34,18 +34,16 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 	sp.sp_namp = pw->pw_name;
 	sp.sp_pwdp = pw->pw_passwd;
 
-	{
-		/*
-		 * Defaults used if there is no pw_age information.
-		 */
-		sp.sp_min = 0;
-		sp.sp_max = 10000;
-		sp.sp_lstchg = gettime () / DAY;
-		if (0 == sp.sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			sp.sp_lstchg = -1;
-		}
+	/*
+	 * Defaults used if there is no pw_age information.
+	 */
+	sp.sp_min = 0;
+	sp.sp_max = 10000;
+	sp.sp_lstchg = gettime () / DAY;
+	if (0 == sp.sp_lstchg) {
+		/* Better disable aging than requiring a password
+		 * change */
+		sp.sp_lstchg = -1;
 	}
 
 	/*
