@@ -564,7 +564,7 @@ static void update_noshadow(bool process_selinux)
 		(void) fprintf (stderr,
 		                _("%s: cannot lock %s; try again later.\n"),
 		                Prog, pw_dbname ());
-		exit (E_PWDBUSY);
+		fail_exit (E_PWDBUSY, process_selinux);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
