@@ -6,7 +6,6 @@ man_MANS = \
 	man1/chfn.1 \
 	man8/chpasswd.8 \
 	man1/chsh.1 \
-	man1/expiry.1 \
 	man5/faillog.5 \
 	man8/faillog.8 \
 	man1/gpasswd.1 \
