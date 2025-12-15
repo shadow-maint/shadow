@@ -12,7 +12,6 @@ man_MANS = \
 	man8/chgpasswd.8 \
 	man8/chpasswd.8 \
 	man1/chsh.1 \
-	man1/expiry.1 \
 	man5/faillog.5 \
 	man8/faillog.8 \
 	man3/getspnam.3 \
@@ -80,7 +79,6 @@ man_XMANS = \
 	chgpasswd.8.xml \
 	chpasswd.8.xml \
 	chsh.1.xml \
-	expiry.1.xml \
 	faillog.5.xml \
 	faillog.8.xml \
 	getsubids.1.xml \

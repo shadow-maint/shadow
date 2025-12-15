@@ -79,7 +79,6 @@ src/chfn.c
 src/chgpasswd.c
 src/chpasswd.c
 src/chsh.c
-src/expiry.c
 src/faillog.c
 src/gpasswd.c
 src/groupadd.c

@@ -28,7 +28,7 @@ AM_CFLAGS = $(LIBBSD_CFLAGS)
 
 bin_PROGRAMS   = login
 sbin_PROGRAMS  = nologin
-ubin_PROGRAMS  = faillog chage chfn chsh expiry gpasswd newgrp passwd
+ubin_PROGRAMS  = faillog chage chfn chsh gpasswd newgrp passwd
 if ENABLE_SUBIDS
 ubin_PROGRAMS += newgidmap newuidmap
 endif
@@ -63,7 +63,7 @@ noinst_PROGRAMS = sulogin
 
 suidusbins     =
 suidbins       =
-suidubins      = chage chfn chsh expiry gpasswd newgrp
+suidubins      = chage chfn chsh gpasswd newgrp
 if WITH_SU
 suidbins      += su
 endif
@@ -106,7 +106,6 @@ chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) 
 chgpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
 chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF) -ldl
-expiry_LDADD = $(LDADD) $(LIBECONF)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
 groupadd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 groupdel_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl

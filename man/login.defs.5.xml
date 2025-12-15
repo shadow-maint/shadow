@@ -284,7 +284,6 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <!-- expiry: no variables (CONSOLE_GROUPS linked, but not used) -->
       <!-- faillog: no variables -->
       <varlistentry>
 	<term>gpasswd</term>
