@@ -12,7 +12,6 @@
 #ident "$Id$"
 
 #include <sys/types.h>
-#include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
 
@@ -35,21 +34,12 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 	sp.sp_pwdp = pw->pw_passwd;
 
 	/*
-	 * Defaults used if there is no pw_age information.
-	 */
-	sp.sp_min = 0;
-	sp.sp_max = 10000;
-	sp.sp_lstchg = gettime () / DAY;
-	if (0 == sp.sp_lstchg) {
-		/* Better disable aging than requiring a password
-		 * change */
-		sp.sp_lstchg = -1;
-	}
-
-	/*
 	 * These fields have no corresponding information in the password
 	 * file.  They are set to uninitialized values.
 	 */
+	sp.sp_lstchg = -1;
+	sp.sp_min = 0;
+	sp.sp_max = -1;
 	sp.sp_warn = -1;
 	sp.sp_expire = -1;
 	sp.sp_inact = -1;
