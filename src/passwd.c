@@ -128,16 +128,16 @@ static bool do_update_pwd = false;
  */
 
 /* local function prototypes */
-NORETURN static void usage (int);
+NORETURN static void usage(int);
 
-static int new_password (const struct passwd *);
+static int new_password(const struct passwd *);
 
-static void check_password (const struct passwd *, const struct spwd *);
-static /*@observer@*/const char *pw_status (const char *);
-static void print_status (const struct passwd *);
-NORETURN static void fail_exit (int, bool);
-NORETURN static void oom (bool process_selinux);
-static char *update_crypt_pw (char *, bool);
+static void check_password(const struct passwd *, const struct spwd *);
+static /*@observer@*/const char *pw_status(const char *);
+static void print_status(const struct passwd *);
+NORETURN static void fail_exit(int, bool);
+NORETURN static void oom(bool);
+static char *update_crypt_pw(char *, bool);
 static void update_noshadow(bool);
 static void update_shadow(bool);
 
