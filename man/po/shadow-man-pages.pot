@@ -15,7 +15,6 @@ msgstr ""
 #: chfn.1.xml.out:18
 #: chpasswd.8.xml.out:21
 #: chsh.1.xml.out:18
-#: expiry.1.xml.out:19
 #: faillog.5.xml.out:15
 #: faillog.8.xml.out:15
 #: groupadd.8.xml.out:18
@@ -48,7 +47,6 @@ msgstr ""
 #: chfn.1.xml.out:19
 #: chpasswd.8.xml.out:22
 #: chsh.1.xml.out:19
-#: expiry.1.xml.out:20
 #: faillog.5.xml.out:16
 #: faillog.8.xml.out:16
 #: groupadd.8.xml.out:19
@@ -80,7 +78,6 @@ msgstr ""
 #: chage.1.xml.out:18
 #: chfn.1.xml.out:20
 #: chsh.1.xml.out:20
-#: expiry.1.xml.out:21
 msgid "Creation, 1990"
 msgstr ""
 
@@ -90,7 +87,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:22
 #: chpasswd.8.xml.out:26
 #: chsh.1.xml.out:23
-#: expiry.1.xml.out:24
 #: faillog.5.xml.out:20
 #: faillog.8.xml.out:20
 #: gpasswd.1.xml.out:27
@@ -131,7 +127,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:23
 #: chpasswd.8.xml.out:27
 #: chsh.1.xml.out:24
-#: expiry.1.xml.out:25
 #: faillog.5.xml.out:21
 #: faillog.8.xml.out:21
 #: gpasswd.1.xml.out:28
@@ -172,7 +167,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:24
 #: chpasswd.8.xml.out:28
 #: chsh.1.xml.out:25
-#: expiry.1.xml.out:26
 #: faillog.5.xml.out:22
 #: faillog.8.xml.out:22
 #: gpasswd.1.xml.out:29
@@ -212,7 +206,6 @@ msgstr ""
 #: chfn.1.xml.out:26
 #: chpasswd.8.xml.out:29
 #: chsh.1.xml.out:26
-#: expiry.1.xml.out:27
 #: faillog.5.xml.out:23
 #: faillog.8.xml.out:23
 #: gpasswd.1.xml.out:30
@@ -253,7 +246,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:28
 #: chpasswd.8.xml.out:32
 #: chsh.1.xml.out:29
-#: expiry.1.xml.out:30
 #: faillog.5.xml.out:26
 #: faillog.8.xml.out:26
 #: gpasswd.1.xml.out:33
@@ -296,7 +288,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:29
 #: chpasswd.8.xml.out:33
 #: chsh.1.xml.out:30
-#: expiry.1.xml.out:31
 #: faillog.5.xml.out:27
 #: faillog.8.xml.out:27
 #: gpasswd.1.xml.out:34
@@ -339,7 +330,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:30
 #: chpasswd.8.xml.out:34
 #: chsh.1.xml.out:31
-#: expiry.1.xml.out:32
 #: faillog.5.xml.out:28
 #: faillog.8.xml.out:28
 #: gpasswd.1.xml.out:35
@@ -382,7 +372,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:31
 #: chpasswd.8.xml.out:35
 #: chsh.1.xml.out:32
-#: expiry.1.xml.out:33
 #: faillog.5.xml.out:29
 #: faillog.8.xml.out:29
 #: gpasswd.1.xml.out:36
@@ -453,7 +442,6 @@ msgstr ""
 #: chpasswd.8.xml.out:307
 #: chsh.1.xml.out:37
 #: chsh.1.xml.out:212
-#: expiry.1.xml.out:38
 #: faillog.8.xml.out:235
 #: gpasswd.1.xml.out:41
 #: gpasswd.1.xml.out:95
@@ -545,7 +533,6 @@ msgstr ""
 #: chage.1.xml.out:36
 #: chfn.1.xml.out:38
 #: chsh.1.xml.out:38
-#: expiry.1.xml.out:39
 #: gpasswd.1.xml.out:42
 #: groups.1.xml.out:35
 #: login.1.xml.out:68
@@ -562,7 +549,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:38
 #: chpasswd.8.xml.out:42
 #: chsh.1.xml.out:39
-#: expiry.1.xml.out:40
 #: faillog.5.xml.out:36
 #: faillog.8.xml.out:36
 #: gpasswd.1.xml.out:43
@@ -605,7 +591,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:39
 #: chpasswd.8.xml.out:43
 #: chsh.1.xml.out:40
-#: expiry.1.xml.out:41
 #: faillog.5.xml.out:37
 #: faillog.8.xml.out:37
 #: gpasswd.1.xml.out:44
@@ -702,7 +687,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:56
 #: chpasswd.8.xml.out:60
 #: chsh.1.xml.out:60
-#: expiry.1.xml.out:58
 #: faillog.5.xml.out:45
 #: faillog.8.xml.out:54
 #: gpasswd.1.xml.out:72
@@ -752,7 +736,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:83
 #: chpasswd.8.xml.out:108
 #: chsh.1.xml.out:71
-#: expiry.1.xml.out:67
 #: faillog.8.xml.out:65
 #: gpasswd.1.xml.out:112
 #: groupadd.8.xml.out:51
@@ -781,7 +764,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:84
 #: chpasswd.8.xml.out:109
 #: chsh.1.xml.out:72
-#: expiry.1.xml.out:68
 #: faillog.8.xml.out:66
 #: gpasswd.1.xml.out:120
 #: groupadd.8.xml.out:81
@@ -1009,7 +991,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:113
 #: chpasswd.8.xml.out:153
 #: chsh.1.xml.out:77
-#: expiry.1.xml.out:88
 #: faillog.8.xml.out:98
 #: gpasswd.1.xml.out:151
 #: groupadd.8.xml.out:118
@@ -1037,7 +1018,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:113
 #: chpasswd.8.xml.out:153
 #: chsh.1.xml.out:77
-#: expiry.1.xml.out:88
 #: faillog.8.xml.out:98
 #: gpasswd.1.xml.out:151
 #: groupadd.8.xml.out:118
@@ -1071,9 +1051,6 @@ msgstr ""
 #: chpasswd.8.xml.out:153
 #: chpasswd.8.xml.out:161
 #: chsh.1.xml.out:77
-#: expiry.1.xml.out:73
-#: expiry.1.xml.out:79
-#: expiry.1.xml.out:88
 #: faillog.8.xml.out:72
 #: faillog.8.xml.out:98
 #: faillog.8.xml.out:144
@@ -1155,7 +1132,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:115
 #: chpasswd.8.xml.out:155
 #: chsh.1.xml.out:79
-#: expiry.1.xml.out:90
 #: faillog.8.xml.out:100
 #: gpasswd.1.xml.out:153
 #: groupadd.8.xml.out:120
@@ -1779,7 +1755,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:218
 #: chpasswd.8.xml.out:274
 #: chsh.1.xml.out:163
-#: expiry.1.xml.out:97
 #: faillog.5.xml.out:72
 #: faillog.8.xml.out:220
 #: gpasswd.1.xml.out:258
@@ -1820,7 +1795,6 @@ msgstr ""
 #: chfn.1.xml.out:193
 #: chpasswd.8.xml.out:277
 #: chsh.1.xml.out:166
-#: expiry.1.xml.out:100
 #: groupmod.8.xml.out:245
 #: grpck.8.xml.out:223
 #: lastlog.8.xml.out:63
@@ -1862,7 +1836,6 @@ msgstr ""
 #: chfn.1.xml.out:195
 #: chpasswd.8.xml.out:279
 #: chsh.1.xml.out:168
-#: expiry.1.xml.out:102
 #: groupmod.8.xml.out:247
 #: grpck.8.xml.out:225
 #: login.1.xml.out:331
@@ -1884,7 +1857,6 @@ msgstr ""
 #. (itstool) path: para/filename
 #: chage.1.xml.out:288
 #: chpasswd.8.xml.out:283
-#: expiry.1.xml.out:106
 #: login.1.xml.out:335
 #: newgrp.1.xml.out:68
 #: newgrp.1.xml.out:106
@@ -1925,7 +1897,6 @@ msgstr ""
 #. (itstool) path: listitem/para
 #: chage.1.xml.out:291
 #: chpasswd.8.xml.out:285
-#: expiry.1.xml.out:108
 #: login.1.xml.out:337
 #: newgrp.1.xml.out:108
 #: newusers.8.xml.out:428
@@ -2034,7 +2005,6 @@ msgstr ""
 #: chgpasswd.8.xml.out:242
 #: chpasswd.8.xml.out:304
 #: chsh.1.xml.out:209
-#: expiry.1.xml.out:115
 #: faillog.5.xml.out:84
 #: faillog.8.xml.out:232
 #: gpasswd.1.xml.out:276
@@ -2082,7 +2052,6 @@ msgstr ""
 #: chfn.1.xml.out:211
 #: chpasswd.8.xml.out:307
 #: chsh.1.xml.out:218
-#: expiry.1.xml.out:118
 #: groupadd.8.xml.out:351
 #: groupdel.8.xml.out:211
 #: groupmems.8.xml.out:215
@@ -2140,8 +2109,6 @@ msgstr ""
 #: chpasswd.8.xml.out:314
 #: chsh.1.xml.out:215
 #: chsh.1.xml.out:218
-#: expiry.1.xml.out:118
-#: expiry.1.xml.out:121
 #: faillog.5.xml.out:34
 #: faillog.8.xml.out:238
 #: gpasswd.1.xml.out:294
@@ -2224,7 +2191,6 @@ msgstr ""
 #. (itstool) path: refnamediv/refname
 #. (itstool) path: para/filename
 #: chage.1.xml.out:337
-#: expiry.1.xml.out:121
 #: grpck.8.xml.out:51
 #: grpck.8.xml.out:190
 #: grpck.8.xml.out:297
@@ -2255,7 +2221,6 @@ msgstr ""
 
 #. (itstool) path: refsect1/para
 #: chage.1.xml.out:332
-#: expiry.1.xml.out:116
 #: faillog.8.xml.out:233
 #: nologin.8.xml.out:58
 #: shadow.3.xml.out:215
@@ -2336,8 +2301,6 @@ msgstr ""
 #. (itstool) path: para/option
 #. (itstool) path: cmdsynopsis/arg
 #: chfn.1.xml.out:94
-#: expiry.1.xml.out:61
-#: expiry.1.xml.out:79
 #: groupadd.8.xml.out:88
 #: groupdel.8.xml.out:72
 #: login.1.xml.out:90
@@ -2784,8 +2747,6 @@ msgstr ""
 #: chpasswd.8.xml.out:86
 #: chpasswd.8.xml.out:116
 #: chpasswd.8.xml.out:135
-#: expiry.1.xml.out:60
-#: expiry.1.xml.out:73
 #: newusers.8.xml.out:270
 #: sg.1.xml.out:50
 #: su.1.xml.out:86
@@ -3546,55 +3507,16 @@ msgstr ""
 msgid "Directory for additional user defined configuration files."
 msgstr ""
 
-#. (itstool) path: refmeta/refentrytitle
-#. (itstool) path: refnamediv/refname
-#. (itstool) path: cmdsynopsis/command
-#. (itstool) path: para/command
-#: expiry.1.xml.out:37
-#: expiry.1.xml.out:44
-#: expiry.1.xml.out:50
-#: expiry.1.xml.out:60
-#: expiry.1.xml.out:69
-msgid "expiry"
-msgstr ""
-
-#. (itstool) path: refnamediv/refpurpose
-#: expiry.1.xml.out:45
-msgid "check and enforce password expiration policy"
-msgstr ""
-
 #. (itstool) path: arg/replaceable
-#: expiry.1.xml.out:52
 #: gpasswd.1.xml.out:63
 msgid "option"
 msgstr ""
 
-#. (itstool) path: refsect1/para
-#: expiry.1.xml.out:59
-msgid "The <_:command-1/> command checks (<_:option-2/>) the current password expiration and forces (<_:option-3/>) changes when required. It is callable as a normal user command."
-msgstr ""
-
 #. (itstool) path: term/option
-#: expiry.1.xml.out:73
-msgid "--check"
-msgstr ""
-
-#. (itstool) path: listitem/para
-#: expiry.1.xml.out:75
-msgid "Check the password expiration of the current user."
-msgstr ""
-
-#. (itstool) path: term/option
-#: expiry.1.xml.out:79
 #: groupadd.8.xml.out:88
 #: groupdel.8.xml.out:72
 #: userdel.8.xml.out:76
 msgid "--force"
-msgstr ""
-
-#. (itstool) path: listitem/para
-#: expiry.1.xml.out:81
-msgid "Force a password change if the current user has an expired password."
 msgstr ""
 
 #. (itstool) path: author/contrib

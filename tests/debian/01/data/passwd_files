@@ -18,7 +18,6 @@
 /usr/bin/chage
 /usr/bin/chfn
 /usr/bin/chsh
-/usr/bin/expiry
 /usr/bin/gpasswd
 /usr/bin/passwd
 /usr/sbin
@@ -59,7 +58,6 @@
 /usr/share/man
 /usr/share/man/cs
 /usr/share/man/cs/man1
-/usr/share/man/cs/man1/expiry.1.gz
 /usr/share/man/cs/man1/gpasswd.1.gz
 /usr/share/man/cs/man5
 /usr/share/man/cs/man5/gshadow.5.gz
@@ -85,7 +83,6 @@
 /usr/share/man/de/man1/chage.1.gz
 /usr/share/man/de/man1/chfn.1.gz
 /usr/share/man/de/man1/chsh.1.gz
-/usr/share/man/de/man1/expiry.1.gz
 /usr/share/man/de/man1/gpasswd.1.gz
 /usr/share/man/de/man1/passwd.1.gz
 /usr/share/man/de/man5
@@ -119,7 +116,6 @@
 /usr/share/man/fr/man1/chage.1.gz
 /usr/share/man/fr/man1/chfn.1.gz
 /usr/share/man/fr/man1/chsh.1.gz
-/usr/share/man/fr/man1/expiry.1.gz
 /usr/share/man/fr/man1/gpasswd.1.gz
 /usr/share/man/fr/man1/passwd.1.gz
 /usr/share/man/fr/man5
@@ -164,7 +160,6 @@
 /usr/share/man/it/man1/chage.1.gz
 /usr/share/man/it/man1/chfn.1.gz
 /usr/share/man/it/man1/chsh.1.gz
-/usr/share/man/it/man1/expiry.1.gz
 /usr/share/man/it/man1/gpasswd.1.gz
 /usr/share/man/it/man1/passwd.1.gz
 /usr/share/man/it/man5
@@ -194,7 +189,6 @@
 /usr/share/man/ja/man1/chage.1.gz
 /usr/share/man/ja/man1/chfn.1.gz
 /usr/share/man/ja/man1/chsh.1.gz
-/usr/share/man/ja/man1/expiry.1.gz
 /usr/share/man/ja/man1/gpasswd.1.gz
 /usr/share/man/ja/man1/passwd.1.gz
 /usr/share/man/ja/man5
@@ -231,7 +225,6 @@
 /usr/share/man/man1/chage.1.gz
 /usr/share/man/man1/chfn.1.gz
 /usr/share/man/man1/chsh.1.gz
-/usr/share/man/man1/expiry.1.gz
 /usr/share/man/man1/gpasswd.1.gz
 /usr/share/man/man1/passwd.1.gz
 /usr/share/man/man5
@@ -264,7 +257,6 @@
 /usr/share/man/pl/man1
 /usr/share/man/pl/man1/chage.1.gz
 /usr/share/man/pl/man1/chsh.1.gz
-/usr/share/man/pl/man1/expiry.1.gz
 /usr/share/man/pl/man8
 /usr/share/man/pl/man8/groupadd.8.gz
 /usr/share/man/pl/man8/groupdel.8.gz
@@ -291,7 +283,6 @@
 /usr/share/man/ru/man1/chage.1.gz
 /usr/share/man/ru/man1/chfn.1.gz
 /usr/share/man/ru/man1/chsh.1.gz
-/usr/share/man/ru/man1/expiry.1.gz
 /usr/share/man/ru/man1/gpasswd.1.gz
 /usr/share/man/ru/man1/passwd.1.gz
 /usr/share/man/ru/man5
@@ -320,7 +311,6 @@
 /usr/share/man/sv/man1
 /usr/share/man/sv/man1/chage.1.gz
 /usr/share/man/sv/man1/chsh.1.gz
-/usr/share/man/sv/man1/expiry.1.gz
 /usr/share/man/sv/man1/passwd.1.gz
 /usr/share/man/sv/man5
 /usr/share/man/sv/man5/gshadow.5.gz
@@ -355,7 +345,6 @@
 /usr/share/man/zh_CN/man1/chage.1.gz
 /usr/share/man/zh_CN/man1/chfn.1.gz
 /usr/share/man/zh_CN/man1/chsh.1.gz
-/usr/share/man/zh_CN/man1/expiry.1.gz
 /usr/share/man/zh_CN/man1/gpasswd.1.gz
 /usr/share/man/zh_CN/man1/passwd.1.gz
 /usr/share/man/zh_CN/man5
