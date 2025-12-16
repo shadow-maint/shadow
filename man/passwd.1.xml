@@ -203,18 +203,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-k</option>, <option>--keep-tokens</option>
-	</term>
-	<listitem>
-	  <para>
-	    Indicate password change should be performed only for expired
-	    authentication tokens (passwords). The user wishes to keep their
-	    non-expired tokens as before.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-l</option>, <option>--lock</option>
 	</term>
 	<listitem>

@@ -306,7 +306,7 @@ extern void obscure_get_range(int *, int *);
 
 /* pam_pass.c */
 #ifdef USE_PAM
-extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
+extern void do_pam_passwd (const char *user, bool silent);
 #endif
 
 /* port.c */
