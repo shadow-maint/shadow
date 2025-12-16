@@ -227,18 +227,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-n</option>, <option>--mindays</option>&nbsp;<replaceable>MIN_DAYS</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the minimum number of days between password changes to
-	    <replaceable>MIN_DAYS</replaceable>. A value of zero for this field
-	    indicates that the user may change their password at any time.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-q</option>, <option>--quiet</option>
 	</term>
 	<listitem>

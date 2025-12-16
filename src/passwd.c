@@ -77,7 +77,6 @@ static bool
     eflg = false,			/* -e - force password change */
     iflg = false,			/* -i - set inactive days */
     lflg = false,			/* -l - lock the user's password */
-    nflg = false,			/* -n - set minimum days */
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
     uflg = false,			/* -u - unlock the user's password */
@@ -91,7 +90,6 @@ static bool
  */
 static bool anyflag = false;
 
-static long age_min = 0;	/* Minimum days before change   */
 static long age_max = 0;	/* Maximum days until change     */
 static long warn = 0;		/* Warning days before change   */
 static long inact = 0;		/* Days without change before locked */
@@ -160,8 +158,6 @@ usage (int status)
 	(void) fputs (_("  -i, --inactive INACTIVE       set password inactive after expiration\n"
 	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --lock                    lock the password of the named account\n"), usageout);
-	(void) fputs (_("  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
-	                "                                change to MIN_DAYS\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
 	(void) fputs (_("  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
@@ -651,9 +647,6 @@ static void update_shadow(bool process_selinux)
 	if (xflg) {
 		nsp->sp_max = age_max;
 	}
-	if (nflg) {
-		nsp->sp_min = age_min;
-	}
 	if (wflg) {
 		nsp->sp_warn = warn;
 	}
@@ -702,7 +695,6 @@ static void update_shadow(bool process_selinux)
  *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
  *	-l	lock the password of the named account (*)
- *	-n #	set sp_min to # days (*)
  *	-r #	change password in # repository
  *	-S	show password status of named account
  *	-u	unlock the password of the named account (*)
@@ -765,7 +757,6 @@ main(int argc, char **argv)
 			{"help",        no_argument,       NULL, 'h'},
 			{"inactive",    required_argument, NULL, 'i'},
 			{"lock",        no_argument,       NULL, 'l'},
-			{"mindays",     required_argument, NULL, 'n'},
 			{"quiet",       no_argument,       NULL, 'q'},
 			{"repository",  required_argument, NULL, 'r'},
 			{"root",        required_argument, NULL, 'R'},
@@ -809,18 +800,6 @@ main(int argc, char **argv)
 				break;
 			case 'l':
 				lflg = true;
-				anyflag = true;
-				break;
-			case 'n':
-				if (a2sl(&age_min, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				nflg = true;
 				anyflag = true;
 				break;
 			case 'q':
