@@ -326,7 +326,7 @@ static void check_perms(const struct passwd *pw, const struct option_flags *flag
 	 */
 	if (!amroot && getdef_bool ("CHSH_AUTH")) {
 		passwd_check(pw->pw_name, pw->pw_passwd);
-        }
+	}
 
 #else				/* !USE_PAM */
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */

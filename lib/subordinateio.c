@@ -198,74 +198,74 @@ static const struct subordinate_range *find_range(struct commonio_db *db,
 	}
 
 
-        /*
-         * We only do special handling for these two files
-         */
-        if (!streq(db->filename, SUBUID_FILE) && !streq(db->filename, SUBGID_FILE))
-                return NULL;
+	/*
+	 * We only do special handling for these two files
+	 */
+	if (!streq(db->filename, SUBUID_FILE) && !streq(db->filename, SUBGID_FILE))
+		return NULL;
 
-        /*
-         * Search loop above did not produce any result. Let's rerun it,
-         * but this time try to match actual UIDs. The first entry that
-         * matches is considered a success.
-         * (It may be specified as literal UID or as another username which
-         * has the same UID as the username we are looking for.)
-         */
-        char           owner_uid_string[33];
-        uid_t          owner_uid;
-        struct passwd  *pwd;
+	/*
+	 * Search loop above did not produce any result. Let's rerun it,
+	 * but this time try to match actual UIDs. The first entry that
+	 * matches is considered a success.
+	 * (It may be specified as literal UID or as another username which
+	 * has the same UID as the username we are looking for.)
+	 */
+	char           owner_uid_string[33];
+	uid_t          owner_uid;
+	struct passwd  *pwd;
 
 
-        /* Get UID of the username we are looking for */
-        pwd = getpwnam(owner);
-        if (NULL == pwd) {
-                /* Username not defined in /etc/passwd, or error occurred during lookup */
-                return NULL;
-        }
-        owner_uid = pwd->pw_uid;
-        if (stprintf_a(owner_uid_string, "%lu", (unsigned long) owner_uid) == -1)
-                return NULL;
+	/* Get UID of the username we are looking for */
+	pwd = getpwnam(owner);
+	if (NULL == pwd) {
+		/* Username not defined in /etc/passwd, or error occurred during lookup */
+		return NULL;
+	}
+	owner_uid = pwd->pw_uid;
+	if (stprintf_a(owner_uid_string, "%lu", (unsigned long) owner_uid) == -1)
+		return NULL;
 
-        commonio_rewind(db);
-        while (NULL != (range = commonio_next(db))) {
-                unsigned long first = range->start;
-                unsigned long last = first + range->count - 1;
+	commonio_rewind(db);
+	while (NULL != (range = commonio_next(db))) {
+		unsigned long first = range->start;
+		unsigned long last = first + range->count - 1;
 
-                /* For performance reasons check range before using getpwnam() */
-                if ((val < first) || (val > last)) {
-                        continue;
-                }
+		/* For performance reasons check range before using getpwnam() */
+		if ((val < first) || (val > last)) {
+			continue;
+		}
 
-                /*
-                 * Range matches. Check if range owner is specified
-                 * as numeric UID and if it matches.
-                 */
-                if (streq(range->owner, owner_uid_string)) {
-                        return range;
-                }
+		/*
+		 * Range matches. Check if range owner is specified
+		 * as numeric UID and if it matches.
+		 */
+		if (streq(range->owner, owner_uid_string)) {
+			return range;
+		}
 
-                /*
-                 * Ok, this range owner is not specified as numeric UID
-                 * we are looking for. It may be specified as another
-                 * UID or as a literal username.
-                 *
-                 * If specified as another UID, the call to getpwnam()
-                 * will return NULL.
-                 *
-                 * If specified as literal username, we will get its
-                 * UID and compare that to UID we are looking for.
-                 */
-                const struct passwd *range_owner_pwd;
+		/*
+		 * Ok, this range owner is not specified as numeric UID
+		 * we are looking for. It may be specified as another
+		 * UID or as a literal username.
+		 *
+		 * If specified as another UID, the call to getpwnam()
+		 * will return NULL.
+		 *
+		 * If specified as literal username, we will get its
+		 * UID and compare that to UID we are looking for.
+		 */
+		const struct passwd *range_owner_pwd;
 
-                range_owner_pwd = getpwnam(range->owner);
-                if (NULL == range_owner_pwd) {
-                        continue;
-                }
+		range_owner_pwd = getpwnam(range->owner);
+		if (NULL == range_owner_pwd) {
+			continue;
+		}
 
-                if (owner_uid == range_owner_pwd->pw_uid) {
-                        return range;
-                }
-        }
+		if (owner_uid == range_owner_pwd->pw_uid) {
+			return range;
+		}
+	}
 
 	return NULL;
 }

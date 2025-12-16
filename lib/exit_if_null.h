@@ -26,7 +26,7 @@
 #define exit_if_null(p)                                               \
 ({                                                                    \
 	__auto_type  p_ = p;                                          \
-                                                                      \
+	                                                              \
 	exit_if_null_(p_);                                            \
 	p_;                                                           \
 })

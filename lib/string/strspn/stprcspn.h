@@ -17,7 +17,7 @@
 #define stprcspn(s, reject)                                                   \
 ({                                                                            \
 	__auto_type  s_ = (s);                                                \
-                                                                              \
+	                                                                      \
 	s_ + strrcspn(s_, reject);                                            \
 })
 

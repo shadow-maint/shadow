@@ -19,9 +19,9 @@
 #define strcaseprefix(s, prefix)                                      \
 ({                                                                    \
 	const char  *p_;                                              \
-                                                                      \
+	                                                              \
 	p_ = strcaseprefix_(s, prefix);                               \
-                                                                      \
+	                                                              \
 	_Generic(s,                                                   \
 		const char *:                     p_,                 \
 		const void *:                     p_,                 \

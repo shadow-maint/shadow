@@ -19,9 +19,9 @@
 #define strprefix(s, prefix)                                          \
 ({                                                                    \
 	const char  *p_;                                              \
-                                                                      \
+	                                                              \
 	p_ = strprefix_(s, prefix);                                   \
-                                                                      \
+	                                                              \
 	_Generic(s,                                                   \
 		const char *:                     p_,                 \
 		const void *:                     p_,                 \

@@ -64,14 +64,14 @@ is_valid_name(const char *name)
 	}
 
 	/*
-         * User/group names must match BRE regex:
-         *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
-         *
-         * as a non-POSIX, extension, allow "$" as the last char for
-         * sake of Samba 3.x "add machine script"
-         *
-         * Also do not allow fully numeric names or just "." or "..".
-         */
+	 * User/group names must match BRE regex:
+	 *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
+	 *
+	 * as a non-POSIX, extension, allow "$" as the last char for
+	 * sake of Samba 3.x "add machine script"
+	 *
+	 * Also do not allow fully numeric names or just "." or "..".
+	 */
 
 	if (strisdigit(name)) {
 		errno = EINVAL;

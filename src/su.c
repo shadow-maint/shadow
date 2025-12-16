@@ -979,10 +979,10 @@ static void set_environment (struct passwd *pw)
 		}
 
 #ifdef USE_PAM
-	        /* we need to setup the environment *after* pam_open_session(),
-                 * else the UID is changed before stuff like pam_xauth could
-                 * run, and we cannot access /etc/shadow and co
-                 */
+		/* we need to setup the environment *after* pam_open_session(),
+		 * else the UID is changed before stuff like pam_xauth could
+		 * run, and we cannot access /etc/shadow and co
+		 */
 		/* update environment with all pam set variables */
 		char **envcp = pam_getenvlist (pamh);
 		if (NULL != envcp) {

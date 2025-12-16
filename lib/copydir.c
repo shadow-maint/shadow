@@ -501,14 +501,14 @@ static int copy_dir (const struct path_info *src, const struct path_info *dst,
 		return -1;
 	}
 #endif				/* WITH_SELINUX */
-        /*
-         * If the destination is already a directory, don't change it
-         * but copy into it (recursively).
-        */
-        if (fstatat(dst->dirfd, dst->name, &dst_sb, AT_SYMLINK_NOFOLLOW) == 0 && S_ISDIR(dst_sb.st_mode)) {
-            return (copy_tree_impl (src, dst, false, reset_selinux,
-                           old_uid, new_uid, old_gid, new_gid) != 0);
-        }
+	/*
+	 * If the destination is already a directory, don't change it
+	 * but copy into it (recursively).
+	 */
+	if (fstatat(dst->dirfd, dst->name, &dst_sb, AT_SYMLINK_NOFOLLOW) == 0 && S_ISDIR(dst_sb.st_mode)) {
+		return (copy_tree_impl (src, dst, false, reset_selinux,
+		               old_uid, new_uid, old_gid, new_gid) != 0);
+	}
 
 	if (   (mkdirat (dst->dirfd, dst->name, 0700) != 0)
 	    || (chownat_if_needed (dst, statp,
@@ -798,7 +798,7 @@ static int chown_function ## _if_needed (type_dst dst,                 \
 {                                                                      \
 	uid_t tmpuid = (uid_t) -1;                                     \
 	gid_t tmpgid = (gid_t) -1;                                     \
-                                                                       \
+	                                                               \
 	/* Use new_uid if old_uid is set to -1 or if the file was      \
 	 * owned by the user. */                                       \
 	if (((uid_t) -1 == old_uid) || (statp->st_uid == old_uid)) {   \
@@ -809,14 +809,14 @@ static int chown_function ## _if_needed (type_dst dst,                 \
 	if ((uid_t) -1 == tmpuid) {                                    \
 		tmpuid = statp->st_uid;                                \
 	}                                                              \
-                                                                       \
+	                                                               \
 	if (((gid_t) -1 == old_gid) || (statp->st_gid == old_gid)) {   \
 		tmpgid = new_gid;                                      \
 	}                                                              \
 	if ((gid_t) -1 == tmpgid) {                                    \
 		tmpgid = statp->st_gid;                                \
 	}                                                              \
-                                                                       \
+	                                                               \
 	return chown_function (dst, tmpuid, tmpgid);                   \
 }
 

@@ -18,7 +18,7 @@
 #define strnul(s)                                                             \
 ({                                                                            \
 	__auto_type  s_ = s;                                                  \
-                                                                              \
+	                                                                      \
 	s_ + strlen(s_);                                                      \
 })
 

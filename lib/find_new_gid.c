@@ -56,11 +56,11 @@ static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
 			(void) fprintf (log_get_logfd(),
-                            _("%s: Invalid configuration: SYS_GID_MIN (%lu), "
-                              "GID_MIN (%lu), SYS_GID_MAX (%lu)\n"),
-                            log_get_progname(), (unsigned long) *min_id,
-                            getdef_ulong ("GID_MIN", 1000UL),
-                            (unsigned long) *max_id);
+			    _("%s: Invalid configuration: SYS_GID_MIN (%lu), "
+			      "GID_MIN (%lu), SYS_GID_MAX (%lu)\n"),
+			    log_get_progname(), (unsigned long) *min_id,
+			    getdef_ulong ("GID_MIN", 1000UL),
+			    (unsigned long) *max_id);
 			return EINVAL;
 		}
 		/*

@@ -1237,7 +1237,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 					exit(E_BAD_ARG);
 				}
 				wflg = true;
-                break;
+				break;
 			case 'W':
 				if (prepend_range (optarg, &del_sub_gids) == 0) {
 					fprintf (stderr,

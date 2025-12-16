@@ -23,9 +23,9 @@
 	QChar_of(s)  **endp_ = endp;                                  \
 	T            min_ = min;                                      \
 	T            max_ = max;                                      \
-                                                                      \
+	                                                              \
 	int  status;                                                  \
-                                                                      \
+	                                                              \
 	*n_ = _Generic((T){},                                         \
 		short:              strtoi_,                          \
 		int:                strtoi_,                          \
@@ -36,7 +36,7 @@
 		unsigned long:      strtou_noneg,                     \
 		unsigned long long: strtou_noneg                      \
 	)(s, (char **) endp_, base, min_, max_, &status);             \
-                                                                      \
+	                                                              \
 	if (status != 0)                                              \
 		errno = status;                                       \
 	-!!status;                                                    \

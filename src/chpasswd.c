@@ -159,7 +159,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
-        int bad_s;
+	int bad_s;
 #endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 	static struct option long_options[] = {
 		{"crypt-method", required_argument, NULL, 'c'},
@@ -203,26 +203,26 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 #if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		case 's':
 			sflg = true;
-                        bad_s = 0;
+			bad_s = 0;
 #if defined(USE_SHA_CRYPT)
 			if ((IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512"))
 			    && (-1 == str2sl(&sha_rounds, optarg))) {
-                            bad_s = 1;
-                        }
+				bad_s = 1;
+			}
 #endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
-                        if (IS_CRYPT_METHOD("BCRYPT")
+			if (IS_CRYPT_METHOD("BCRYPT")
 			    && (-1 == str2sl(&bcrypt_rounds, optarg))) {
-                            bad_s = 1;
-                        }
+				bad_s = 1;
+			}
 #endif				/* USE_BCRYPT */
 #if defined(USE_YESCRYPT)
-                        if (IS_CRYPT_METHOD("YESCRYPT")
+			if (IS_CRYPT_METHOD("YESCRYPT")
 			    && (-1 == str2sl(&yescrypt_cost, optarg))) {
-                            bad_s = 1;
-                        }
+				bad_s = 1;
+			}
 #endif				/* USE_YESCRYPT */
-                        if (bad_s != 0) {
+			if (bad_s != 0) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
