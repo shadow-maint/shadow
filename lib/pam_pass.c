@@ -28,7 +28,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 
-void do_pam_passwd (const char *user, bool silent, bool change_expired)
+void do_pam_passwd (const char *user, bool silent)
 {
 	pam_handle_t *pamh = NULL;
 	int flags = 0, ret;
@@ -36,8 +36,6 @@ void do_pam_passwd (const char *user, bool silent, bool change_expired)
 
 	if (silent)
 		flags |= PAM_SILENT;
-	if (change_expired)
-		flags |= PAM_CHANGE_EXPIRED_AUTHTOK;
 
 	ret = pam_start ("passwd", user, &conv, &pamh);
 	if (ret != PAM_SUCCESS) {
