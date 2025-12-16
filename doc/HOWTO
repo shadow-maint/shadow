@@ -1069,7 +1069,6 @@
   ______________________________________________________________________
   GROUP=1
   HOME=/home
-  INACTIVE=0
   EXPIRE=0
   SHELL=
   SKEL=/etc/skel
@@ -1096,7 +1095,6 @@
   ______________________________________________________________________
   GROUP=100
   HOME=/home
-  INACTIVE=-1
   EXPIRE=60
   SHELL=/bin/bash
   SKEL=/etc/skel
@@ -1175,7 +1173,6 @@
   GROUP=100        # Default Group
   HOME=/home       # Home directory location (/home/username)
   SKEL=/etc/skel   # Skeleton Directory
-  INACTIVE=0       # Days after password expires to disable account (0=never)
   EXPIRE=60        # Days that a passwords lasts
   SHELL=/bin/bash  # Default Shell (full path)
   ##
@@ -1208,7 +1205,7 @@
   # parameter when it reached the SPACE character.
   #
   /usr/sbin/useradd -c"$FULLNAME" -d$HOME/$USERNAME -e$EXPIRE \
-          -f$INACTIVE -g$GROUP -m -k$SKEL -s$SHELL $USERNAME
+          -g$GROUP -m -k$SKEL -s$SHELL $USERNAME
   ##
   #  Set password defaults
   ##
