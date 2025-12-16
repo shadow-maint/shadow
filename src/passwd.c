@@ -81,7 +81,6 @@ static bool
     Sflg = false,			/* -S - show password status */
     uflg = false,			/* -u - unlock the user's password */
     wflg = false,			/* -w - set warning days */
-    xflg = false,			/* -x - set maximum days */
     sflg = false;			/* -s - read passwd from stdin */
 
 /*
@@ -90,7 +89,6 @@ static bool
  */
 static bool anyflag = false;
 
-static long age_max = 0;	/* Maximum days until change     */
 static long warn = 0;		/* Warning days before change   */
 static long inact = 0;		/* Days without change before locked */
 
@@ -165,8 +163,6 @@ usage (int status)
 	(void) fputs (_("  -S, --status                  report password status on the named account\n"), usageout);
 	(void) fputs (_("  -u, --unlock                  unlock the password of the named account\n"), usageout);
 	(void) fputs (_("  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
-	(void) fputs (_("  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
-	                "                                change to MAX_DAYS\n"), usageout);
 	(void) fputs (_("  -s, --stdin                   read new token from stdin\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
@@ -644,9 +640,6 @@ static void update_shadow(bool process_selinux)
 		oom (process_selinux);
 	}
 	nsp->sp_pwdp = update_crypt_pw (nsp->sp_pwdp, process_selinux);
-	if (xflg) {
-		nsp->sp_max = age_max;
-	}
 	if (wflg) {
 		nsp->sp_warn = warn;
 	}
@@ -699,7 +692,6 @@ static void update_shadow(bool process_selinux)
  *	-S	show password status of named account
  *	-u	unlock the password of the named account (*)
  *	-w #	set sp_warn to # days (*)
- *	-x #	set sp_max to # days (*)
  *	-s	read password from stdin (*)
  *
  *	(*) requires root permission to execute.
@@ -764,7 +756,6 @@ main(int argc, char **argv)
 			{"status",      no_argument,       NULL, 'S'},
 			{"unlock",      no_argument,       NULL, 'u'},
 			{"warndays",    required_argument, NULL, 'w'},
-			{"maxdays",     required_argument, NULL, 'x'},
 			{"stdin",       no_argument,       NULL, 's'},
 			{NULL, 0, NULL, '\0'}
 		};
@@ -838,18 +829,6 @@ main(int argc, char **argv)
 					usage (E_BAD_ARG);
 				}
 				wflg = true;
-				anyflag = true;
-				break;
-			case 'x':
-				if (a2sl(&age_max, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
-					                Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				xflg = true;
 				anyflag = true;
 				break;
 			case 's':

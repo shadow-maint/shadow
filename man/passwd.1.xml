@@ -320,23 +320,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-x</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the maximum number of days a password remains valid. After
-	    <replaceable>MAX_DAYS</replaceable>, the password is required
-	    to be changed.
-	  </para>
-	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as
-	    <replaceable>MAX_DAYS</replaceable> will remove checking a
-	    password's validity.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-s</option>, <option>--stdin</option>
 	</term>
 	<listitem>
