@@ -436,8 +436,8 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		if (now < ok) {
 			(void) fprintf (stderr,
 			                _("The password for %s cannot be changed yet.\n"),
-			                pw->pw_name);
-			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", pw->pw_name));
+			                sp->sp_namp);
+			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", sp->sp_namp));
 			closelog ();
 			exit (E_NOPERM);
 		}
