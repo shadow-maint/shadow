@@ -207,13 +207,6 @@ UMASK		022
 #HOME_MODE	0700
 
 #
-# Password aging controls:
-#
-#	PASS_MIN_LEN	Minimum acceptable password length.
-#	PASS_WARN_AGE	Number of days warning given before a password expires.
-#
-PASS_MIN_LEN	5
-PASS_WARN_AGE	7
 
 #
 # If "yes", the user must be listed as a member of the first gid 0 group
