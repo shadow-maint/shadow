@@ -544,7 +544,6 @@ run_test ./usertools/01/05_useradd_invalid_numeric_primary_group.test
 run_test ./usertools/01/06_useradd_invalid_named_primary_group.test
 run_test ./usertools/01/07_useradd_numerical_primary_group.test
 run_test ./usertools/01/08_useradd_named_primary_group.test
-run_test ./usertools/01/09_usermod_change_user_info.test
 run_test ./usertools/01/10_usermod_rename_user.test
 run_test ./usertools/01/10_usermod_rename_user_in_group.test
 run_test ./usertools/01/11_usermod_change_password.test
@@ -760,12 +759,9 @@ run_test ./usertools/usermod/08_usermod_unlock_already_unlocked_password2/usermo
 run_test ./usertools/usermod/09_usermod_unlock_already_unlocked_password3/usermod.test
 run_test ./usertools/usermod/10_usermod_usage/usermod.test
 run_test ./usertools/usermod/11_usermod_usage_bad_option/usermod.test
-run_test ./usertools/usermod/12_usermod_usage_bad-f/usermod.test
-run_test ./usertools/usermod/13_usermod_usage_bad-f_negative/usermod.test
 run_test ./usertools/usermod/14_usermod_usage_no_options/usermod.test
 run_test ./usertools/usermod/15_usermod_usage_no_user/usermod.test
 run_test ./usertools/usermod/16_usermod_usage_-e_no_shadow_file/usermod.test
-run_test ./usertools/usermod/17_usermod_usage_-f_no_shadow_file/usermod.test
 run_test ./usertools/usermod/18_usermod_usage-L-p_exclusive/usermod.test
 run_test ./usertools/usermod/19_usermod_usage-L-U_exclusive/usermod.test
 run_test ./usertools/usermod/20_usermod_usage-p-U_exclusive/usermod.test
@@ -777,13 +773,11 @@ run_test ./usertools/usermod/25_usermod-e_empty_arg/usermod.test
 run_test ./usertools/usermod/26_usermod-e-1/usermod.test
 run_test ./usertools/usermod/27_usermod-e_invalid1/usermod.test
 run_test ./usertools/usermod/28_usermod-e_invalid2/usermod.test
-run_test ./usertools/usermod/29_usermod_no_changes/usermod.test
 run_test ./usertools/usermod/30_usermod_usage-a_without-G/usermod.test
 run_test ./usertools/usermod/31_usermod_usage-o_without-u/usermod.test
 run_test ./usertools/usermod/32_usermod_usage-m_without-d/usermod.test
 run_test ./usertools/usermod/33_usermod_change_shell/usermod.test
 run_test ./usertools/usermod/34_usermod-e_date_no_shadow_entry/usermod.test
-run_test ./usertools/usermod/35_usermod-f_no_shadow_entry/usermod.test
 run_test ./usertools/usermod/36_usermod_move_homedir_existing_dir/usermod.test
 run_test ./usertools/usermod/37_usermod_move_nonexistent_homedir/usermod.test
 run_test ./usertools/usermod/38_usermod-u_lastlog_not_created/usermod.test
@@ -1121,7 +1115,6 @@ run_test ./failures/usermod/07_usermod_change_user_name_open_shadow_failure/user
 run_test ./failures/usermod/08_usermod_change_user_name_open_group_failure/usermod.test
 run_test ./failures/usermod/09_usermod_change_user_name_open_gshadow_failure/usermod.test
 run_test ./failures/usermod/10_usermod_-p_time_0/usermod.test
-run_test ./failures/usermod/11_usermod-f_no_shadow_entry_time_0/usermod.test
 #run_test ./failures/usermod/12_usermod_change_uid_passwd_unlock_passwd_failure/usermod.test
 run_test ./failures/usermod/13_usermod_-v_open_subuid_failure/usermod.test
 run_test ./failures/usermod/14_usermod_-V_open_subuid_failure/usermod.test
