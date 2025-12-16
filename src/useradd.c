@@ -537,7 +537,7 @@ set_defaults(void)
 		fprintf(stderr, _("%s: cannot create new defaults file: %s\n"),
 		        Prog, strerrno());
 		return -1;
-        }
+	}
 
 	if (prefix[0]) {
 		default_file = aprintf("%s/%s", prefix, USER_DEFAULTS_FILE);

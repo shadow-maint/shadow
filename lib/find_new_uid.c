@@ -55,11 +55,11 @@ static int get_ranges (bool sys_user, uid_t *min_id, uid_t *max_id,
 		/* Check that the ranges make sense */
 		if (*max_id < *min_id) {
 			(void) fprintf (log_get_logfd(),
-                            _("%s: Invalid configuration: SYS_UID_MIN (%lu), "
-                              "UID_MIN (%lu), SYS_UID_MAX (%lu)\n"),
-                            log_get_progname(), (unsigned long) *min_id,
-                            getdef_ulong ("UID_MIN", 1000UL),
-                            (unsigned long) *max_id);
+			    _("%s: Invalid configuration: SYS_UID_MIN (%lu), "
+			      "UID_MIN (%lu), SYS_UID_MAX (%lu)\n"),
+			    log_get_progname(), (unsigned long) *min_id,
+			    getdef_ulong ("UID_MIN", 1000UL),
+			    (unsigned long) *max_id);
 			return EINVAL;
 		}
 		/*

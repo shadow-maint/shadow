@@ -97,7 +97,7 @@ static void fail_exit(int status)
 {
 #ifdef WITH_AUDIT
 	audit_logger(AUDIT_GRP_MGMT, "delete-group", group_name,
-                        AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
+	                AUDIT_NO_ID, SHADOW_AUDIT_FAILURE);
 #endif
 	exit (status);
 }

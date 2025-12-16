@@ -19,7 +19,7 @@
 #define stpspn(s, accept)                                                     \
 ({                                                                            \
 	__auto_type  s_ = s;                                                  \
-                                                                              \
+	                                                                      \
 	s_ + strspn(s_, accept);                                              \
 })
 

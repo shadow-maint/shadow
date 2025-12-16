@@ -16,37 +16,37 @@
 
 int get_session_host (char **out, pid_t main_pid)
 {
-    char *host = NULL;
-    char *session = NULL;
-    int ret;
+	char *host = NULL;
+	char *session = NULL;
+	int ret;
 
-    ret = sd_pid_get_session(main_pid, &session);
-    if (ret < 0) {
-        return ret;
-    }
-    ret = sd_session_get_remote_host (session, &host);
-    if (ret < 0) {
-        goto done;
-    }
+	ret = sd_pid_get_session(main_pid, &session);
+	if (ret < 0) {
+		return ret;
+	}
+	ret = sd_session_get_remote_host (session, &host);
+	if (ret < 0) {
+		goto done;
+	}
 
-    *out = host;
+	*out = host;
 
 done:
-    free (session);
-    return ret;
+	free (session);
+	return ret;
 }
 
 unsigned long active_sessions_count(const char *name, unsigned long)
 {
-    struct passwd *pw;
-    unsigned long count = 0;
+	struct passwd *pw;
+	unsigned long count = 0;
 
-    pw = prefix_getpwnam(name);
-    if (pw == NULL) {
-        return 0;
-    }
+	pw = prefix_getpwnam(name);
+	if (pw == NULL) {
+		return 0;
+	}
 
-    count = sd_uid_get_sessions(pw->pw_uid, 0, NULL);
+	count = sd_uid_get_sessions(pw->pw_uid, 0, NULL);
 
-    return count;
+	return count;
 }

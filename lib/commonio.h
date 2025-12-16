@@ -94,7 +94,7 @@ struct commonio_db {
 #endif
 	/*
 	 * Default permissions and owner for newly created data file.
-         */
+	 */
 	mode_t st_mode;
 	uid_t st_uid;
 	gid_t st_gid;
