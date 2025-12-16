@@ -1705,7 +1705,7 @@ static void usr_update(const struct option_flags *flags)
 				 * requiring a password change */
 				spent.sp_lstchg = -1;
 			}
-			spent.sp_min    = getdef_num ("PASS_MIN_DAYS", -1);
+			spent.sp_min    = -1;
 			spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
 			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
 			spent.sp_inact  = -1;

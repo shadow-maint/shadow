@@ -51,7 +51,6 @@
 <!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
 <!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
 <!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
@@ -190,10 +189,9 @@
       &PASS_ALWAYS_WARN;
       &PASS_CHANGE_TRIES;
       &PASS_MAX_DAYS;
-      &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
       <para> 
-        <option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> and
+        <option>PASS_MAX_DAYS</option>, and
         <option>PASS_WARN_AGE</option> are only used at the
         time of account creation. Any changes to these settings won't affect
         existing accounts.
@@ -397,7 +395,7 @@
 	    GID_MAX GID_MIN
 	    MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
 	    HOME_MODE
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    PASS_MAX_DAYS PASS_WARN_AGE
 	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
 	    SHA_CRYPT_MIN_ROUNDS</phrase>
 	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
@@ -427,7 +425,7 @@
 	<term>pwck</term>
 	<listitem>
 	  <para>
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    PASS_MAX_DAYS PASS_WARN_AGE
 	    <phrase condition="tcb">TCB_AUTH_GROUP TCB_SYMLINKS USE_TCB</phrase>
 	  </para>
 	</listitem>
@@ -436,7 +434,7 @@
 	<term>pwconv</term>
 	<listitem>
 	  <para>
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    PASS_MAX_DAYS PASS_WARN_AGE
 	    <phrase condition="tcb">USE_TCB</phrase>
 	  </para>
 	</listitem>
@@ -484,7 +482,7 @@
 	    HOME_MODE
 	    LASTLOG_UID_MAX
 	    MAIL_DIR MAX_MEMBERS_PER_GROUP
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    PASS_MAX_DAYS PASS_WARN_AGE
 	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
 	    SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN
 	    SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN
