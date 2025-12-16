@@ -190,19 +190,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-i</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    This option is used to disable an account after the password has
-	    been expired for a number of days. After a user account has had
-	    an expired password for <replaceable>INACTIVE</replaceable>
-	    days, the user may no longer sign on to the account.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-l</option>, <option>--lock</option>
 	</term>
 	<listitem>

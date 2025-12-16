@@ -75,7 +75,6 @@ static bool
     aflg = false,			/* -a - show status for all users */
     dflg = false,			/* -d - delete password */
     eflg = false,			/* -e - force password change */
-    iflg = false,			/* -i - set inactive days */
     lflg = false,			/* -l - lock the user's password */
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
@@ -90,7 +89,6 @@ static bool
 static bool anyflag = false;
 
 static long warn = 0;		/* Warning days before change   */
-static long inact = 0;		/* Days without change before locked */
 
 static bool do_update_age = false;
 #ifdef USE_PAM
@@ -153,8 +151,6 @@ usage (int status)
 	(void) fputs (_("  -d, --delete                  delete the password for the named account\n"), usageout);
 	(void) fputs (_("  -e, --expire                  force expire the password for the named account\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -i, --inactive INACTIVE       set password inactive after expiration\n"
-	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --lock                    lock the password of the named account\n"), usageout);
 	(void) fputs (_("  -q, --quiet                   quiet mode\n"), usageout);
 	(void) fputs (_("  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"), usageout);
@@ -365,7 +361,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
 	 * locked may not be changed. Passwords where min > max may not be
-	 * changed. Passwords which have been inactive too long cannot be
 	 * changed.
 	 */
 	if (   strprefix(sp->sp_pwdp, "!")
@@ -643,9 +638,6 @@ static void update_shadow(bool process_selinux)
 	if (wflg) {
 		nsp->sp_warn = warn;
 	}
-	if (iflg) {
-		nsp->sp_inact = inact;
-	}
 	if (!use_pam)
 	{
 		if (do_update_age) {
@@ -685,7 +677,6 @@ static void update_shadow(bool process_selinux)
  *
  *	-d	delete the password for the named account (*)
  *	-e	expire the password for the named account (*)
- *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
  *	-l	lock the password of the named account (*)
  *	-r #	change password in # repository
@@ -747,7 +738,6 @@ main(int argc, char **argv)
 			{"delete",      no_argument,       NULL, 'd'},
 			{"expire",      no_argument,       NULL, 'e'},
 			{"help",        no_argument,       NULL, 'h'},
-			{"inactive",    required_argument, NULL, 'i'},
 			{"lock",        no_argument,       NULL, 'l'},
 			{"quiet",       no_argument,       NULL, 'q'},
 			{"repository",  required_argument, NULL, 'r'},
@@ -777,18 +767,6 @@ main(int argc, char **argv)
 			case 'h':
 				usage (E_SUCCESS);
 				/*@notreached@*/break;
-			case 'i':
-				if (a2sl(&inact, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				iflg = true;
-				anyflag = true;
-				break;
 			case 'l':
 				lflg = true;
 				anyflag = true;
