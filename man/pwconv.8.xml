@@ -9,7 +9,6 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!-- SHADOW-CONFIG-HERE -->
@@ -142,7 +141,6 @@
 
     <para>
       <command>pwconv</command> will use the values of <emphasis
-      remap='I'>PASS_MIN_DAYS</emphasis>, <emphasis
       remap='I'>PASS_MAX_DAYS</emphasis>, and <emphasis
       remap='I'>PASS_WARN_AGE</emphasis> from
       <filename>/etc/login.defs</filename> when adding new entries to
@@ -218,7 +216,6 @@
     </para>
     <variablelist>
       &PASS_MAX_DAYS;
-      &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
       &USE_TCB;
     </variablelist>
