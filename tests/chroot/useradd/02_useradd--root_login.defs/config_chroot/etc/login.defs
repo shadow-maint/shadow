@@ -146,13 +146,6 @@ KILLCHAR	025
 UMASK		022
 
 #
-# Password aging controls:
-#
-#	PASS_WARN_AGE	Number of days warning given before a password expires.
-#
-PASS_WARN_AGE	7
-
-#
 # Min/max values for automatic uid selection in useradd
 #
 UID_MIN			 2000
