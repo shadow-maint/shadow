@@ -1707,7 +1707,7 @@ static void usr_update(const struct option_flags *flags)
 			}
 			spent.sp_min    = -1;
 			spent.sp_max    = -1;
-			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
+			spent.sp_warn   = -1;
 			spent.sp_inact  = -1;
 			spent.sp_expire = -1;
 			spent.sp_flag   = SHADOW_SP_FLAG_UNSET;

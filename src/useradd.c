@@ -962,12 +962,11 @@ static void new_spent (struct spwd *spent)
 	}
 	spent->sp_min = -1;
 	spent->sp_max = -1;
+	spent->sp_warn = -1;
 	if (!rflg) {
-		spent->sp_warn = getdef_num ("PASS_WARN_AGE", -1);
 		spent->sp_inact = def_inactive;
 		spent->sp_expire = user_expire;
 	} else {
-		spent->sp_warn = -1;
 		spent->sp_inact = -1;
 		spent->sp_expire = -1;
 	}
