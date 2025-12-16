@@ -132,7 +132,7 @@ NORETURN static void usage(int);
 
 static int new_password(const struct passwd *);
 
-static void check_password(const struct passwd *, const struct spwd *);
+static void check_password(const struct passwd *, const struct spwd *, bool);
 static /*@observer@*/const char *pw_status(const char *);
 static void print_status(const struct passwd *);
 NORETURN static void fail_exit(int, bool);
@@ -382,7 +382,7 @@ static int new_password (const struct passwd *pw)
  *	check_password() sees if the invoker has permission to change the
  *	password for the given user.
  */
-static void check_password (const struct passwd *pw, const struct spwd *sp)
+static void check_password (const struct passwd *pw, const struct spwd *sp, bool process_selinux)
 {
 	int exp_status;
 
@@ -393,7 +393,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * PAM) was specified, do nothing. --marekm
 	 */
 	if (kflg && (0 == exp_status)) {
-		exit (E_SUCCESS);
+		fail_exit(E_SUCCESS, process_selinux);
 	}
 
 	/*
@@ -418,7 +418,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		                sp->sp_namp);
 		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
 		closelog ();
-		exit (E_NOPERM);
+		fail_exit(E_NOPERM, process_selinux);
 	}
 
 	/*
@@ -439,7 +439,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 			                sp->sp_namp);
 			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", sp->sp_namp));
 			closelog ();
-			exit (E_NOPERM);
+			fail_exit(E_NOPERM, process_selinux);
 		}
 	}
 }
@@ -1079,7 +1079,7 @@ main(int argc, char **argv)
 			 * See if the user is permitted to change the password.
 			 * Otherwise, go ahead and set a new password.
 			 */
-			check_password (pw, sp);
+			check_password(pw, sp, process_selinux);
 
 			/*
 			 * Let the user know whose password is being changed.
