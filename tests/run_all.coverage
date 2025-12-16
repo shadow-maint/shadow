@@ -724,9 +724,6 @@ run_test ./usertools/useradd/35_useradd_default_GROUP_name/useradd.test
 run_test ./usertools/useradd/34_useradd_default_GROUP_GID/useradd.test
 run_test ./usertools/useradd/36_useradd_default_GROUP_invalid_GID/useradd.test
 run_test ./usertools/useradd/37_useradd_default_GROUP_invalid_name/useradd.test
-run_test ./usertools/useradd/38_useradd_default_INACTIVE/useradd.test
-run_test ./usertools/useradd/39_useradd_default_INACTIVE_invalid1/useradd.test
-run_test ./usertools/useradd/40_useradd_default_INACTIVE_invalid2/useradd.test
 run_test ./usertools/useradd/41_useradd_default_default_SKEL/useradd.test
 run_test ./usertools/useradd/42_useradd_default_default_CREATE_MAIL_SPOOL/useradd.test
 run_test ./usertools/useradd/43_useradd_default_no_final_eol/useradd.test

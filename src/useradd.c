@@ -116,7 +116,6 @@ static const char *def_usrtemplate = USRSKELDIR;
 static const char *def_create_mail_spool = "yes";
 static const char *def_log_init = "yes";
 
-static long def_inactive = -1;
 static const char *def_expire = "";
 
 #define VALID(s)  (!strpbrk(s, ":\n"))
@@ -216,7 +215,6 @@ static bool home_added = false;
 #define DGROUPS			"GROUPS"
 #define DHOME			"HOME"
 #define DSHELL			"SHELL"
-#define DINACT			"INACTIVE"
 #define DEXPIRE			"EXPIRE"
 #define DSKEL			"SKEL"
 #define DUSRSKEL		"USRSKEL"
@@ -408,21 +406,6 @@ get_defaults(const struct option_flags *flags)
 		}
 
 		/*
-		 * Default Password Inactive value
-		 */
-		else if (streq(buf, DINACT)) {
-			if (a2sl(&def_inactive, ccp, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
-				         Prog, ccp);
-				fprintf (stderr,
-				         _("%s: the %s= configuration in %s will be ignored\n"),
-				         Prog, DINACT, default_file);
-				def_inactive = -1;
-			}
-		}
-
-		/*
 		 * Default account expiration date
 		 */
 		else if (streq(buf, DEXPIRE)) {
@@ -493,7 +476,6 @@ static void show_defaults (void)
 	printf ("GROUP=%u\n", (unsigned int) def_group);
 	printf ("GROUPS=%s\n", def_groups);
 	printf ("HOME=%s\n", def_home);
-	printf ("INACTIVE=%ld\n", def_inactive);
 	printf ("EXPIRE=%s\n", def_expire);
 	printf ("SHELL=%s\n", def_shell);
 	printf ("SKEL=%s\n", def_template);
@@ -516,7 +498,6 @@ set_defaults(void)
 	bool  out_group = false;
 	bool  out_groups = false;
 	bool  out_home = false;
-	bool  out_inactive = false;
 	bool  out_expire = false;
 	bool  out_shell = false;
 	bool  out_skel = false;
@@ -616,9 +597,6 @@ set_defaults(void)
 		} else if (!out_home && streq(buf, DHOME)) {
 			fprintf(ofp, DHOME "=%s\n", def_home);
 			out_home = true;
-		} else if (!out_inactive && streq(buf, DINACT)) {
-			fprintf(ofp, DINACT "=%ld\n", def_inactive);
-			out_inactive = true;
 		} else if (!out_expire && streq(buf, DEXPIRE)) {
 			fprintf(ofp, DEXPIRE "=%s\n", def_expire);
 			out_expire = true;
@@ -659,8 +637,6 @@ set_defaults(void)
 		fprintf (ofp, DGROUPS "=%s\n", def_groups);
 	if (!out_home)
 		fprintf (ofp, DHOME "=%s\n", def_home);
-	if (!out_inactive)
-		fprintf (ofp, DINACT "=%ld\n", def_inactive);
 	if (!out_expire)
 		fprintf (ofp, DEXPIRE "=%s\n", def_expire);
 	if (!out_shell)
@@ -716,10 +692,10 @@ set_defaults(void)
 	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO,
-	         "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
+	         "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, "
 	         "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s, LOG_INIT=%s",
 	         (unsigned int) def_group, def_home, def_shell,
-	         def_inactive, def_expire, def_template,
+	         def_expire, def_template,
 	         def_create_mail_spool, def_log_init));
 	ret = 0;
 
@@ -963,11 +939,10 @@ static void new_spent (struct spwd *spent)
 	spent->sp_min = -1;
 	spent->sp_max = -1;
 	spent->sp_warn = -1;
+	spent->sp_inact = -1;
 	if (!rflg) {
-		spent->sp_inact = def_inactive;
 		spent->sp_expire = user_expire;
 	} else {
-		spent->sp_inact = -1;
 		spent->sp_expire = -1;
 	}
 	spent->sp_flag = SHADOW_SP_FLAG_UNSET;
