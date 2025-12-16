@@ -135,8 +135,6 @@ static const char *user_selinux_range = NULL;
 static char *user_newshell;
 static long user_expire = MISSING_TIME;
 static long user_newexpire = MISSING_TIME;
-static long user_inactive = MISSING_TIME;
-static long user_newinactive = MISSING_TIME;
 static size_t sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
 
@@ -149,7 +147,6 @@ static bool
     cflg = false,		/* new comment (GECOS) field */
     dflg = false,		/* new home directory */
     eflg = false,		/* days since 1970-01-01 when account becomes expired */
-    fflg = false,		/* days until account with expired password is locked */
     gflg = false,		/* new primary group ID */
     Gflg = false,		/* new secondary group set */
     Lflg = false,		/* lock the password */
@@ -430,8 +427,6 @@ usage (int status)
 	(void) fputs (_("  -c, --comment COMMENT         new value of the GECOS field\n"), usageout);
 	(void) fputs (_("  -d, --home HOME_DIR           new home directory for the user account\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
-	(void) fputs (_("  -f, --inactive INACTIVE       set password inactive after expiration\n"
-	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -g, --gid GROUP               force use GROUP as new primary group\n"), usageout);
 	(void) fputs (_("  -G, --groups GROUPS           new list of supplementary GROUPS\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
@@ -610,17 +605,6 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 			fail_exit (E_NAME_IN_USE, process_selinux);
 		}
 		spent->sp_namp = xstrdup (user_newname);
-	}
-
-	if (fflg) {
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_MGMT,
-		              "changing-inactive-days",
-		              user_newname, user_newid, 1);
-#endif
-		SYSLOG(LOG_INFO, "change user '%s' inactive from '%ld' to '%ld'",
-		       spent->sp_namp, spent->sp_inact, user_newinactive);
-		spent->sp_inact = user_newinactive;
 	}
 	if (eflg) {
 		/* log dates rather than numbers of days. */
@@ -1041,7 +1025,6 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 			{"comment",      required_argument, NULL, 'c'},
 			{"home",         required_argument, NULL, 'd'},
 			{"expiredate",   required_argument, NULL, 'e'},
-			{"inactive",     required_argument, NULL, 'f'},
 			{"gid",          required_argument, NULL, 'g'},
 			{"groups",       required_argument, NULL, 'G'},
 			{"help",         no_argument,       NULL, 'h'},
@@ -1120,17 +1103,6 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 					exit (E_BAD_ARG);
 				}
 				eflg = true;
-				break;
-			case 'f':
-				if (a2sl(&user_newinactive, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					exit (E_BAD_ARG);
-				}
-				fflg = true;
 				break;
 			case 'g':
 			{
@@ -1356,7 +1328,6 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 		/* local, no need for xgetspnam */
 		if (is_shadow_pwd && ((spwd = prefix_getspnam (user_name)) != NULL)) {
 			user_expire = spwd->sp_expire;
-			user_inactive = spwd->sp_inact;
 		}
 	}
 
@@ -1430,9 +1401,6 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 	if (streq(user_newname, user_name)) {
 		lflg = false;
 	}
-	if (user_newinactive == user_inactive) {
-		fflg = false;
-	}
 	if (user_newexpire == user_expire) {
 		eflg = false;
 	}
@@ -1447,7 +1415,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 	}
 
 	if (!(Uflg || uflg || sflg || pflg || mflg || Lflg ||
-	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg
+	      lflg || Gflg || gflg || eflg || dflg || cflg
 #ifdef ENABLE_SUBIDS
 	      || vflg || Vflg || wflg || Wflg
 #endif				/* ENABLE_SUBIDS */
@@ -1458,9 +1426,9 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 		exit (E_SUCCESS);
 	}
 
-	if (!is_shadow_pwd && (eflg || fflg)) {
+	if (!is_shadow_pwd && eflg) {
 		fprintf (stderr,
-		         _("%s: shadow passwords required for -e and -f\n"),
+		         _("%s: shadow passwords required for -e\n"),
 		         Prog);
 		exit (E_USAGE);
 	}
@@ -1766,12 +1734,12 @@ static void usr_update(const struct option_flags *flags)
 			new_spent (&spent, process_selinux);
 		} else if (   (    pflg
 		               && streq(pwent.pw_passwd, SHADOW_PASSWD_STRING))
-		           || eflg || fflg) {
+		           || eflg) {
 			/* In some cases, we force the creation of a
 			 * shadow entry:
 			 *  + new password requested and passwd indicates
 			 *    a shadowed password
-			 *  + aging information is requested
+			 *  + expiration information is requested
 			 */
 			bzero(&spent, sizeof(spent));
 			spent.sp_namp   = user_name;
@@ -1814,7 +1782,7 @@ static void usr_update(const struct option_flags *flags)
 			fail_exit (E_PW_UPDATE, process_selinux);
 		}
 	}
-	if ((NULL != spwd) && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
+	if ((NULL != spwd) && (lflg || eflg || pflg || Lflg || Uflg)) {
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
@@ -2239,7 +2207,7 @@ int main (int argc, char **argv)
 	 * change the home directory, then close and update the files.
 	 */
 	open_files (process_selinux);
-	if (   cflg || dflg || eflg || fflg || gflg || Lflg || lflg || pflg
+	if (   cflg || dflg || eflg || gflg || Lflg || lflg || pflg
 	    || sflg || uflg || Uflg) {
 		usr_update (&flags);
 	}
