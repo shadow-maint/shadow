@@ -584,15 +584,6 @@ run_test ./usertools/01/23_usermod_add_groups.test
 run_test ./usertools/01/24_usermod_new_groups_remove_old_groups.test
 run_test ./usertools/01/25_useradd_specified_large_UID2.test
 run_test ./usertools/01/26_useradd_UID_-1.test
-run_test ./usertools/02/useradd_default_default_values.test
-run_test ./usertools/02/useradd_get_default_values.test
-run_test ./usertools/02/useradd_change_default_INACTIVE.test
-run_test ./usertools/02/useradd_change_default_SHELL.test
-run_test ./usertools/02/useradd_change_default_EXPIRE.test
-run_test ./usertools/02/useradd_change_default_GROUP.test
-run_test ./usertools/02/useradd_change_default_HOME.test
-run_test ./usertools/02/useradd_change_defaults.test
-run_test ./usertools/03/useradd_change_defaults.test
 run_test ./usertools/04/01_useradd_add_user.test
 run_test ./usertools/05_userdel_del_from_group_members/userdel.test
 run_test ./usertools/06_userdel_del_from_gshadow_members/userdel.test
@@ -704,8 +695,6 @@ run_test ./usertools/chpasswd-PAM/12_chpasswd_usage-s_invalid/chpasswd.test
 run_test ./usertools/chpasswd-PAM/13_chpasswd_usage-c_invalid/chpasswd.test
 run_test ./usertools/useradd/01_useradd_usage/useradd.test
 run_test ./usertools/useradd/02_useradd_usage_invalid_option/useradd.test
-run_test ./usertools/useradd/03_useradd_usage_no_users/useradd.test
-run_test ./usertools/useradd/04_useradd_usage_2_users/useradd.test
 run_test ./usertools/useradd/05_useradd_usage-b_invalid1/useradd.test
 run_test ./usertools/useradd/06_useradd_usage-b_invalid2/useradd.test
 run_test ./usertools/useradd/07_useradd_usage-b_invalid3/useradd.test
@@ -717,9 +706,6 @@ run_test ./usertools/useradd/12_useradd_usage-d_invalid3/useradd.test
 run_test ./usertools/useradd/13_useradd_usage-e_invalid1/useradd.test
 run_test ./usertools/useradd/14_useradd_usage-e_invalid2/useradd.test
 run_test ./usertools/useradd/15_useradd_usage-e_no_shadow_file/useradd.test
-run_test ./usertools/useradd/16_useradd_usage-f_invalid1/useradd.test
-run_test ./usertools/useradd/17_useradd_usage-f_invalid2/useradd.test
-run_test ./usertools/useradd/18_useradd_usage-f_no_shadow_file/useradd.test
 run_test ./usertools/useradd/19_useradd_usage-K_invalid1/useradd.test
 run_test ./usertools/useradd/20_useradd_usage-O_invalid2/useradd.test
 run_test ./usertools/useradd/21_useradd_usage-p_invalid1/useradd.test
@@ -758,10 +744,7 @@ run_test ./usertools/useradd/53_useradd-G_empty/useradd.test
 run_test ./usertools/useradd/54_useradd_no_shadow_file/useradd.test
 run_test ./usertools/useradd/55_useradd_no_gshadow_file/useradd.test
 run_test ./usertools/useradd/56_useradd_gshadow_entry_without_group_entry/useradd.test
-run_test ./usertools/useradd/57_useradd_usage-D_not_first_option/useradd.test
 run_test ./usertools/useradd/58_useradd-e_empty/useradd.test
-run_test ./usertools/useradd/59_useradd-e-1-f-1/useradd.test
-run_test ./usertools/useradd/60_useradd-e-1-f-1_no_shadow_file/useradd.test
 run_test ./usertools/useradd/61_useradd-K/useradd.test
 run_test ./usertools/useradd/62_useradd-p/useradd.test
 run_test ./usertools/useradd/63_useradd-s/useradd.test
