@@ -78,7 +78,6 @@ static bool
     dflg = false,			/* -d - delete password */
     eflg = false,			/* -e - force password change */
     iflg = false,			/* -i - set inactive days */
-    kflg = false,			/* -k - change only if expired */
     lflg = false,			/* -l - lock the user's password */
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
@@ -158,7 +157,6 @@ usage (int status)
 	(void) fputs (_("  -d, --delete                  delete the password for the named account\n"), usageout);
 	(void) fputs (_("  -e, --expire                  force expire the password for the named account\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -k, --keep-tokens             change password only if expired\n"), usageout);
 	(void) fputs (_("  -i, --inactive INACTIVE       set password inactive after expiration\n"
 	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --lock                    lock the password of the named account\n"), usageout);
@@ -348,14 +346,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	int exp_status;
 
 	exp_status = isexpired (pw, sp);
-
-	/*
-	 * If not expired and the "change only if expired" option (idea from
-	 * PAM) was specified, do nothing. --marekm
-	 */
-	if (kflg && (0 == exp_status)) {
-		fail_exit(E_SUCCESS, process_selinux);
-	}
 
 	/*
 	 * Root can change any password any time.
@@ -780,7 +770,6 @@ main(int argc, char **argv)
 			{"expire",      no_argument,       NULL, 'e'},
 			{"help",        no_argument,       NULL, 'h'},
 			{"inactive",    required_argument, NULL, 'i'},
-			{"keep-tokens", no_argument,       NULL, 'k'},
 			{"lock",        no_argument,       NULL, 'l'},
 			{"quiet",       no_argument,       NULL, 'q'},
 			{"repository",  required_argument, NULL, 'r'},
@@ -821,10 +810,6 @@ main(int argc, char **argv)
 				}
 				iflg = true;
 				anyflag = true;
-				break;
-			case 'k':
-				/* change only if expired, like Linux-PAM passwd -k. */
-				kflg = true;	/* ok for users */
 				break;
 			case 'l':
 				lflg = true;
@@ -965,10 +950,8 @@ main(int argc, char **argv)
 		usage (E_USAGE);
 	}
 
-	if (   (Sflg && kflg)
-	    || (anyflag && (Sflg || kflg))) {
+	if (anyflag && Sflg)
 		usage (E_USAGE);
-	}
 
 	if (anyflag && !amroot) {
 #ifdef WITH_AUDIT
@@ -1097,7 +1080,7 @@ main(int argc, char **argv)
 			do_pam_passwd_non_interactive ("passwd", name, cp);
 			erase_pass (cp);
 		} else {
-			do_pam_passwd (name, qflg, kflg);
+			do_pam_passwd (name, qflg);
 		}
 		exit (E_SUCCESS);
 	}

@@ -297,7 +297,7 @@ extern size_t pass_min_len(void);
 
 /* pam_pass.c */
 #ifdef USE_PAM
-extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
+extern void do_pam_passwd (const char *user, bool silent);
 #endif
 
 /* port.c */
