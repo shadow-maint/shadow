@@ -7,7 +7,6 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY NONEXISTENT           SYSTEM "login.defs.d/NONEXISTENT.xml">
-<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
 <!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
 <!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
@@ -244,7 +243,6 @@
     </para>
     <variablelist>
       &NONEXISTENT;
-      &PASS_WARN_AGE;
       &TCB_AUTH_GROUP;
       &TCB_SYMLINKS;
       &USE_TCB;
