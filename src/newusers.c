@@ -616,7 +616,7 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 		spent.sp_lstchg = -1;
 	}
 	spent.sp_min    = -1;
-	spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
+	spent.sp_max    = -1;
 	spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
 	spent.sp_inact  = -1;
 	spent.sp_expire = -1;

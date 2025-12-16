@@ -163,7 +163,6 @@ login_defs_v = \
 	OBSCURE_CHECKS_ENAB.xml \
 	PASS_ALWAYS_WARN.xml \
 	PASS_CHANGE_TRIES.xml \
-	PASS_MAX_DAYS.xml \
 	PASS_MAX_LEN.xml \
 	PASS_WARN_AGE.xml \
 	PORTTIME_CHECKS_ENAB.xml \

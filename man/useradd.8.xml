@@ -12,7 +12,6 @@
 <!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
 <!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
@@ -295,14 +294,10 @@
 	  <para>
 	    Overrides <filename>/etc/login.defs</filename> defaults
 	    (<option>UID_MIN</option>, <option>UID_MAX</option>,
-	    <option>UMASK</option>, <option>PASS_MAX_DAYS</option>
+	    <option>UMASK</option>,
 	    and others).
 	  </para>
 	  <para>
-	    Example:
-	    <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS
-	    </replaceable>=<replaceable>-1</replaceable> can be used
-	    when creating an account to turn off password aging.
 	    Multiple <option>-K</option> options can be specified,
 	    e.g.:
 	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>
@@ -710,7 +705,6 @@
       &LASTLOG_UID_MAX;
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
-      &PASS_MAX_DAYS;
       &PASS_WARN_AGE;
       &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->
       &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->
