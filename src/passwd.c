@@ -79,7 +79,6 @@ static bool
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
     uflg = false,			/* -u - unlock the user's password */
-    wflg = false,			/* -w - set warning days */
     sflg = false;			/* -s - read passwd from stdin */
 
 /*
@@ -87,8 +86,6 @@ static bool
  * and require username to be specified
  */
 static bool anyflag = false;
-
-static long warn = 0;		/* Warning days before change   */
 
 static bool do_update_age = false;
 #ifdef USE_PAM
@@ -158,7 +155,6 @@ usage (int status)
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -S, --status                  report password status on the named account\n"), usageout);
 	(void) fputs (_("  -u, --unlock                  unlock the password of the named account\n"), usageout);
-	(void) fputs (_("  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
 	(void) fputs (_("  -s, --stdin                   read new token from stdin\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
@@ -635,9 +631,6 @@ static void update_shadow(bool process_selinux)
 		oom (process_selinux);
 	}
 	nsp->sp_pwdp = update_crypt_pw (nsp->sp_pwdp, process_selinux);
-	if (wflg) {
-		nsp->sp_warn = warn;
-	}
 	if (!use_pam)
 	{
 		if (do_update_age) {
@@ -682,7 +675,6 @@ static void update_shadow(bool process_selinux)
  *	-r #	change password in # repository
  *	-S	show password status of named account
  *	-u	unlock the password of the named account (*)
- *	-w #	set sp_warn to # days (*)
  *	-s	read password from stdin (*)
  *
  *	(*) requires root permission to execute.
@@ -745,7 +737,6 @@ main(int argc, char **argv)
 			{"prefix",      required_argument, NULL, 'P'},
 			{"status",      no_argument,       NULL, 'S'},
 			{"unlock",      no_argument,       NULL, 'u'},
-			{"warndays",    required_argument, NULL, 'w'},
 			{"stdin",       no_argument,       NULL, 's'},
 			{NULL, 0, NULL, '\0'}
 		};
@@ -795,18 +786,6 @@ main(int argc, char **argv)
 				break;
 			case 'u':
 				uflg = true;
-				anyflag = true;
-				break;
-			case 'w':
-				if (a2sl(&warn, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
-					                Prog, optarg);
-					usage (E_BAD_ARG);
-				}
-				wflg = true;
 				anyflag = true;
 				break;
 			case 's':

@@ -293,20 +293,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-w</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the number of days of warning before a password change is required.
-	    The <replaceable>WARN_DAYS</replaceable> option is
-	    the number of days prior to password expiration
-	    during which the user is warned
-	    that their password is about to expire.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-s</option>, <option>--stdin</option>
 	</term>
 	<listitem>
