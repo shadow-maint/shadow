@@ -13,7 +13,6 @@
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
 <!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
@@ -712,7 +711,6 @@
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
       &PASS_MAX_DAYS;
-      &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
       &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->
       &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->

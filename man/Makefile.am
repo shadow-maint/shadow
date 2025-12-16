@@ -165,7 +165,6 @@ login_defs_v = \
 	PASS_CHANGE_TRIES.xml \
 	PASS_MAX_DAYS.xml \
 	PASS_MAX_LEN.xml \
-	PASS_MIN_DAYS.xml \
 	PASS_WARN_AGE.xml \
 	PORTTIME_CHECKS_ENAB.xml \
 	QUOTAS_ENAB.xml \
