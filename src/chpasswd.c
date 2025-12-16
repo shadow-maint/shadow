@@ -636,7 +636,7 @@ int main (int argc, char **argv)
 				/* newsp.sp_lstchg= 0;    will be set later */
 				newsp.sp_min   = -1;
 				newsp.sp_max   = -1;
-				newsp.sp_warn  = getdef_num ("PASS_WARN_AGE", -1);
+				newsp.sp_warn  = -1;
 				newsp.sp_inact = -1;
 				newsp.sp_expire= -1;
 				newsp.sp_flag  = SHADOW_SP_FLAG_UNSET;

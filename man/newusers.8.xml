@@ -12,7 +12,6 @@
 <!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
-<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
 <!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
@@ -394,9 +393,6 @@
     </variablelist>
     <variablelist condition="no_pam">
       &MD5_CRYPT_ENAB;
-    </variablelist>
-    <variablelist>
-      &PASS_WARN_AGE;
     </variablelist>
     <variablelist condition="no_pam">
       &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS-->

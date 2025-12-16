@@ -627,8 +627,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 					sp.sp_pwdp   = pwd->pw_passwd;
 					sp.sp_min    = -1;
 					sp.sp_max    = -1;
-					sp.sp_warn   =
-					    getdef_num ("PASS_WARN_AGE", -1);
+					sp.sp_warn   = -1;
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
