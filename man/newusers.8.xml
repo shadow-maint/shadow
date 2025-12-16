@@ -11,7 +11,6 @@
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
@@ -392,7 +391,6 @@
       &MAX_MEMBERS_PER_GROUP;
     </variablelist>
     <variablelist>
-      &PASS_MAX_DAYS;
       &PASS_WARN_AGE;
     </variablelist>
     <variablelist condition="no_pam">
