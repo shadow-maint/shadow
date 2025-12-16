@@ -168,7 +168,6 @@ static bool
     dflg = false,		/* home directory for new account */
     Dflg = false,		/* set/show new user default values */
     eflg = false,		/* days since 1970-01-01 when account is locked */
-    fflg = false,		/* days until account with expired password is locked */
 #ifdef ENABLE_SUBIDS
     Fflg = false,		/* update /etc/subuid and /etc/subgid even if -r option is given */
 #endif
@@ -887,7 +886,6 @@ static void usage (int status)
 	(void) fputs (_("  -d, --home-dir HOME_DIR       home directory of the new account\n"), usageout);
 	(void) fputs (_("  -D, --defaults                print or change default useradd configuration\n"), usageout);
 	(void) fputs (_("  -e, --expiredate EXPIRE_DATE  expiration date of the new account\n"), usageout);
-	(void) fputs (_("  -f, --inactive INACTIVE       password inactivity period of the new account\n"), usageout);
 #ifdef ENABLE_SUBIDS
 	(void) fputs (_("  -F, --add-subids-for-system   add entries to sub[ud]id even when adding a system user\n"), usageout);
 #endif
@@ -1146,7 +1144,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			{"home-dir",       required_argument, NULL, 'd'},
 			{"defaults",       no_argument,       NULL, 'D'},
 			{"expiredate",     required_argument, NULL, 'e'},
-			{"inactive",       required_argument, NULL, 'f'},
 #ifdef ENABLE_SUBIDS
 			{"add-subids-for-system", no_argument,NULL, 'F'},
 #endif
@@ -1255,27 +1252,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 					def_expire = optarg;
 				}
 				eflg = true;
-				break;
-			case 'f':
-				if (a2sl(&def_inactive, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					exit (E_BAD_ARG);
-				}
-				/*
-				 * -f -1 is allowed
-				 * it's a no-op without /etc/shadow
-				 */
-				if ((-1 != def_inactive) && !is_shadow_pwd) {
-					fprintf (stderr,
-					         _("%s: shadow passwords required for -f\n"),
-					         Prog);
-					exit (E_USAGE);
-				}
-				fflg = true;
 				break;
 #ifdef ENABLE_SUBIDS
 			case 'F':
@@ -2541,7 +2517,7 @@ int main (int argc, char **argv)
 	 * a new user.
 	 */
 	if (Dflg) {
-		if (gflg || bflg || fflg || eflg || sflg) {
+		if (gflg || bflg || eflg || sflg) {
 			exit ((set_defaults () != 0) ? 1 : 0);
 		}
 

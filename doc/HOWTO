@@ -1085,20 +1085,18 @@
 
   ·  I want passwords to expire every 60 days
 
-  ·  I don't want to lock an account because the password is expired
-
   ·  I want to default shell to be /bin/bash
 
      To make these changes I would use:
 
-       useradd -D -g100 -e60 -f0 -s/bin/bash
+       useradd -D -g100 -e60 -s/bin/bash
 
   Now running useradd -D will give:
 
   ______________________________________________________________________
   GROUP=100
   HOME=/home
-  INACTIVE=0
+  INACTIVE=-1
   EXPIRE=60
   SHELL=/bin/bash
   SKEL=/etc/skel

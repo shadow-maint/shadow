@@ -198,37 +198,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Defines the number of days after a password exceeds its maximum age
-	    before the user account gets locked.
-	    If the user does not change their password within this period of time,
-	    their account becomes inactive.
-	    This value is stored in the shadow password file.
-	    For more information, see <citerefentry>
-	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-	    </citerefentry>.
-	  </para>
-	  <para>
-	    A value of 0 disables the account when the password expires, with no delay.
-	  </para>
-	  <para>
-	    A value of -1 empties the respective field in the shadow password file,
-	    which means that the inactivity period is not enforced.
-	  </para>
-	  <para>
-	    If not specified,
-	    <command>useradd</command> uses the default inactivity
-	    period specified by the <option>INACTIVE</option> variable in
-	    <filename>/etc/default/useradd</filename>,
-	    or -1 by default if no value is specified.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-F</option>, <option>--add-subids-for-system</option>
 	</term>
 	<listitem>
@@ -653,22 +622,6 @@
 	    <para>sets the date on which newly created user accounts are disabled.</para>
 	    <para>
 	      This option sets the <option>EXPIRE</option> variable in
-	      <filename>/etc/default/useradd</filename>.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>
-	    <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	  </term>
-	  <listitem>
-	    <para>
-	      specifies the number of days after a password expires
-	      during which the user can still log in.
-	      After this period, the account is locked.
-	    </para>
-	    <para>
-	      This option sets the <option>INACTIVE</option> variable in
 	      <filename>/etc/default/useradd</filename>.
 	    </para>
 	  </listitem>
