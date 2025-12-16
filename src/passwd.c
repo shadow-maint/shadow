@@ -649,6 +649,7 @@ static void update_noshadow(bool process_selinux)
 		                Prog, name, pw_dbname ());
 		fail_exit (E_NOPERM, process_selinux);
 	}
+	check_password(pw, pwd_to_spwd(pw), process_selinux);
 	npw = __pw_dup (pw);
 	if (NULL == npw) {
 		oom (process_selinux);
@@ -664,6 +665,7 @@ static void update_noshadow(bool process_selinux)
 
 static void update_shadow(bool process_selinux)
 {
+	const struct passwd pw = { .pw_passwd = SHADOW_PASSWD_STRING };
 	const struct spwd *sp;
 	struct spwd *nsp;
 
@@ -673,6 +675,7 @@ static void update_shadow(bool process_selinux)
 		update_noshadow (process_selinux);
 		return;
 	}
+	check_password(&pw, sp, process_selinux);
 	nsp = __spw_dup (sp);
 	if (NULL == nsp) {
 		oom (process_selinux);
