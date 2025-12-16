@@ -209,11 +209,9 @@ UMASK		022
 #
 # Password aging controls:
 #
-#	PASS_MAX_DAYS	Maximum number of days a password may be used.
 #	PASS_MIN_LEN	Minimum acceptable password length.
 #	PASS_WARN_AGE	Number of days warning given before a password expires.
 #
-#PASS_MAX_DAYS	99999
 PASS_MIN_LEN	5
 PASS_WARN_AGE	7
 
