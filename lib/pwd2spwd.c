@@ -38,7 +38,7 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 	 * file.  They are set to uninitialized values.
 	 */
 	sp.sp_lstchg = -1;
-	sp.sp_min = 0;
+	sp.sp_min = -1;
 	sp.sp_max = -1;
 	sp.sp_warn = -1;
 	sp.sp_expire = -1;

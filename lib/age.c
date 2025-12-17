@@ -71,7 +71,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	 * change that password.
 	 */
 
-	if ((status > 1) || (sp->sp_max < sp->sp_min)) {
+	if (status > 1) {
 		(void) puts (_("  Contact the system administrator."));
 		exit (EXIT_FAILURE);
 	}
