@@ -135,25 +135,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-I</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the number of days of inactivity after a password has
-	    expired before the account is locked. The
-	    <replaceable>INACTIVE</replaceable> option is the number of days
-	    of inactivity. A user whose account is locked must contact the
-	    system administrator before being able to use the system again.
-	  </para>
-	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the
-	    <replaceable>INACTIVE</replaceable> will remove an account's
-	    inactivity.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-l</option>, <option>--list</option>
 	</term>
 	<listitem>
