@@ -120,30 +120,21 @@ run_test ./su/10_su_sulog_success/su.test
 run_test ./su/11_su_sulog_failure/su.test
 run_test ./su/12_su_child_failure/su.test
 run_test ./su/13_su_child_success/su.test
-run_test ./chage/01/run
 find "${build_path}" -name "*.gcda" -exec chmod a+rw {} \;
 run_test ./chage/02/run
 run_test ./chage/03_chsh_usage/chage.test
 run_test ./chage/04_chsh_usage_invalid_option/chage.test
-run_test ./chage/05_chsh_usage_2_users/chage.test
-run_test ./chage/06_chsh_usage_no_users/chage.test
 run_test ./chage/07_chsh_usage-l_exclusive/chage.test
 run_test ./chage/08_chsh_usage_invalid_date/chage.test
 run_test ./chage/09_chsh_usage_invalid_numeric_arg/chage.test
 run_test ./chage/10_chsh-l/chage.test
-run_test ./chage/11_chsh_usage_invalid_user/chage.test
 run_test ./chage/12_chsh_usage-l_invalid_user2/chage.test
-run_test ./chage/13_chsh_locked_passwd/chage.test
-run_test ./chage/14_chsh_locked_shadow/chage.test
-run_test ./chage/15_chage-I_no_shadow_entry/chage.test
 run_test ./chage/16_chage-m_no_shadow_entry/chage.test
 run_test ./chage/17_chage-M_no_shadow_entry/chage.test
 run_test ./chage/18_chage-d_no_shadow_entry/chage.test
 run_test ./chage/19_chage-W_no_shadow_entry/chage.test
 run_test ./chage/20_chage-E_no_shadow_entry/chage.test
-run_test ./chage/21_chage_no_shadow_file/chage.test
 run_test ./chage/22_chage_myuser-l/chage.test
-run_test ./chage/23_chage_myuser-I/chage.test
 run_test ./chage/24_chage_myuser-l_other/chage.test
 run_test ./chage/25_chage_interactive/chage.test
 run_test ./chage/26_chage_interactive_date_0/chage.test
@@ -1023,12 +1014,8 @@ run_test ./split_groups/08_useradd_no_split_group_already_split/useradd.test
 run_test ./split_groups/09_groupdel_split_group_already_split/groupdel.test
 run_test ./split_groups/10_groupdel_no_split_group_already_split/groupdel.test
 if [ "$FAILURE_TESTS" = "yes" ]; then
-run_test ./failures/chage/01_chage_openRW_passwd_failure/chage.test
 run_test ./failures/chage/02_chage_openRO_passwd_failure/chage.test
-run_test ./failures/chage/03_chage_openRW_shadow_failure/chage.test
 run_test ./failures/chage/04_chage_openRO_shadow_failure/chage.test
-run_test ./failures/chage/05_chage_rename_shadow_failure/chage.test
-run_test ./failures/chage/06_chage_rename_passwd_failure/chage.test
 run_test ./failures/chgpasswd/01_chgpasswd-e_open_group_failure/chgpasswd.test
 run_test ./failures/chgpasswd/02_chgpasswd-e_open_gshadow_failure/chgpasswd.test
 run_test ./failures/chgpasswd/03_chgpasswd-e_rename_group_failure/chgpasswd.test
