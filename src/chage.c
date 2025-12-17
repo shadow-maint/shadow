@@ -189,11 +189,7 @@ static int new_fields (void)
 		}
 	}
 
-	stprintf_a(buf, "%ld", warndays);
-	change_field(buf, sizeof(buf), _("Password Expiration Warning"));
-	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
-		return 0;
-
+	warndays = -1;
 	inactdays = -1;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate)

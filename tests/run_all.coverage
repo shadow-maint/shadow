@@ -169,9 +169,6 @@ run_test ./chage/29_chage_interactive_date_pre-EPOCH/chage.test
 run_test ./chage/30_chage_interactive_date_pre-EPOCH2/chage.test
 run_test ./chage/31_chage_interactive_date_invalid/chage.test
 run_test ./chage/32_chage_interactive_date_invalid2/chage.test
-run_test ./chage/33_chage_interactive-W_invalid1/chage.test
-run_test ./chage/34_chage_interactive-W_invalid2/chage.test
-run_test ./chage/35_chage_interactive-W-1/chage.test
 run_test ./chage/39_chage_interactive-d-1/chage.test
 run_test ./chsh/01/run
 run_test ./chsh/02_chsh_usage/chsh.test
