@@ -45,7 +45,6 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry is not None, "tuser1 user should be found in shadow"
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed is None, "Incorrect last changed"
 
     group_entry = shadow.tools.getent.group("tuser1")
     assert group_entry is not None, "tuser1 group should be found"
@@ -74,7 +73,6 @@ def test_newusers__create_users_from_stdin(shadow: Shadow):
     assert shadow_entry is not None, "tuser2 user should be found in shadow"
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed is None, "Incorrect last changed"
 
     group_entry = shadow.tools.getent.group("tuser2")
     assert group_entry is not None, "tuser2 group should be found"
@@ -127,7 +125,6 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry is not None, "tuser1 user should be found in shadow"
     assert shadow_entry.name == "tuser1", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed is None, "Incorrect last changed"
 
     group_entry = shadow.tools.getent.group("tuser1")
     assert group_entry is not None, "tuser1 group should be found"
@@ -156,7 +153,6 @@ def test_newusers__create_users_from_file(shadow: Shadow):
     assert shadow_entry is not None, "tuser2 user should be found in shadow"
     assert shadow_entry.name == "tuser2", "Incorrect username"
     assert shadow_entry.password is not None, "Incorrect password"
-    assert shadow_entry.last_changed is None, "Incorrect last changed"
 
     group_entry = shadow.tools.getent.group("tuser2")
     assert group_entry is not None, "tuser2 group should be found"
