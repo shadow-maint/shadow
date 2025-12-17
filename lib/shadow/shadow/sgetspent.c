@@ -77,15 +77,7 @@ sgetspent(const char *s)
 		return NULL;
 
 	spwd.sp_min = -1;
-
-	/*
-	 * Get the maximum number of days a password is valid.
-	 */
-
-	if (streq(fields[4], ""))
-		spwd.sp_max = -1;
-	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+	spwd.sp_max = -1;
 
 	/*
 	 * If there are only OFIELDS fields (this is a SVR3.2 /etc/shadow

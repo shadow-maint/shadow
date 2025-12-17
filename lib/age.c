@@ -16,7 +16,6 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "adds.h"
 #include "defines.h"
 #include "exitcodes.h"
 #include "prototypes.h"
@@ -56,9 +55,6 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	case 1:
 		(void) fputs (_("Your password has expired."), stdout);
 		break;
-	case 2:
-		(void) fputs (_("Your password is inactive."), stdout);
-		break;
 	case 3:
 		(void) fputs (_("Your login has expired."), stdout);
 		break;
@@ -71,7 +67,7 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	 * change that password.
 	 */
 
-	if (status > 1) {
+	if (status == 3) {
 		(void) puts (_("  Contact the system administrator."));
 		exit (EXIT_FAILURE);
 	}
@@ -133,50 +129,3 @@ int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 	exit (EXIT_FAILURE);
  /*@notreached@*/}
-
-/*
- * agecheck - see if warning is needed for password expiration
- *
- *	agecheck sees how many days until the user's password is going
- *	to expire and warns the user of the pending password expiration.
- */
-
-void agecheck (/*@null@*/const struct spwd *sp)
-{
-	long now = time(NULL) / DAY;
-	long remain;
-
-	if (NULL == sp) {
-		return;
-	}
-
-	/*
-	 * The last, max, and warn fields must be supported or the
-	 * warning period cannot be calculated.
-	 */
-
-	if (   (-1 == sp->sp_lstchg)
-	    || (-1 == sp->sp_max)
-	    || (-1 == sp->sp_warn)) {
-		return;
-	}
-
-	if (0 == sp->sp_lstchg) {
-		(void) puts (_("You must change your password."));
-		return;
-	}
-
-	remain = addsl(sp->sp_lstchg, sp->sp_max, -now);
-
-	if (remain <= sp->sp_warn) {
-		if (remain > 1) {
-			(void) printf (_("Your password will expire in %ld days.\n"),
-			               remain);
-		} else if (1 == remain) {
-			(void) puts (_("Your password will expire tomorrow."));
-		} else if (remain == 0) {
-			(void) puts (_("Your password will expire today."));
-		}
-	}
-}
-

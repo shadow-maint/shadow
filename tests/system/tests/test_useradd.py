@@ -52,7 +52,7 @@ def test_useradd__add_user(shadow: Shadow):
     assert shadow_entry.password == "!", "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
     assert shadow_entry.min_days is None, "Incorrect min days"
-    assert shadow_entry.max_days == 99999, "Incorrect max days"
+    assert shadow_entry.max_days is None, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser")
