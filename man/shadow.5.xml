@@ -127,23 +127,7 @@
       <varlistentry>
 	<term><emphasis role="bold">maximum password age</emphasis></term>
 	<listitem>
-	  <para>
-	    The maximum password age is the number of days after which the
-	    user must change their password.
-	  </para>
-	  <para>
-	    After this number of days has elapsed, the password may still be valid.
-	    The user is prompted to change their password at the next login.
-	  </para>
-	  <para>
-	    An empty field means that there are no maximum password age,
-	    no password warning period, and no password inactivity period
-	    (see below).
-	  </para>
-	  <para>
-	    If the maximum password age is lower than the minimum password
-	    age, the user cannot change her password.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

@@ -67,7 +67,6 @@ static bool spw_locked = false;	/* Indicate if the shadow file is locked */
 static char user_name[BUFSIZ] = "";
 static uid_t user_uid = -1;
 
-static long maxdays;
 static long lstchgdate;
 static long warndays;
 static long inactdays;
@@ -157,8 +156,6 @@ static int new_fields (void)
 
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
-
-	maxdays = -1;
 
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
 		strcpy(buf, "-1");
@@ -255,16 +252,10 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
-	if (lstchgdate == 0) {
+	if (lstchgdate == 0)
 		(void) puts (_("password must be changed"));
-	} else if (   (lstchgdate < 0)
-	           || (maxdays < 0)
-	           || (LONG_MAX - lstchgdate < maxdays))
-	{
+	else
 		(void) puts (_("never"));
-	} else {
-		print_day_as_date(lstchgdate + maxdays);
-	}
 
 	/*
 	 * The account becomes inactive if the password is expired for more
@@ -273,18 +264,10 @@ static void list_fields (void)
 	 * active will be disabled.
 	 */
 	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
-	if (lstchgdate == 0) {
+	if (lstchgdate == 0)
 		(void) puts (_("password must be changed"));
-	} else if (   (lstchgdate < 0)
-	           || (inactdays < 0)
-	           || (maxdays < 0)
-	           || (LONG_MAX - inactdays < maxdays)
-	           || (LONG_MAX - lstchgdate < maxdays + inactdays))
-	{
+	else
 		(void) puts (_("never"));
-	} else {
-		print_day_as_date(lstchgdate + maxdays + inactdays);
-	}
 
 	/*
 	 * The account will expire on the given date regardless of the
@@ -293,8 +276,6 @@ static void list_fields (void)
 	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
 	print_day_as_date(expdate);
 
-	printf (_("Maximum number of days between password change\t\t: %ld\n"),
-	        maxdays);
 	printf (_("Number of days of warning before password expires\t: %ld\n"),
 	        warndays);
 }
@@ -557,7 +538,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	 * modified entry back to the shadow file. Closing the shadow and
 	 * password files will commit any changes that have been made.
 	 */
-	spwent.sp_max = maxdays;
+	spwent.sp_max = -1;
 	spwent.sp_min = -1;
 	spwent.sp_lstchg = lstchgdate;
 	spwent.sp_warn = warndays;
@@ -582,7 +563,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 	 * the password file.
 	 */
 	if (NULL != sp) {
-		maxdays = sp->sp_max;
 		if (!dflg) {
 			lstchgdate = sp->sp_lstchg;
 		}
@@ -596,7 +576,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		 * Use default values that will not change the behavior of the
 		 * account.
 		 */
-		maxdays = -1;
 		if (!dflg) {
 			lstchgdate = -1;
 		}
