@@ -170,10 +170,7 @@ static int new_fields (void)
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	stprintf_a(buf, "%ld", mindays);
-	change_field(buf, sizeof(buf), _("Minimum Password Age"));
-	if (a2sl(&mindays, buf, NULL, 0, -1, LONG_MAX) == -1)
-		return 0;
+	mindays = -1;
 
 	stprintf_a(buf, "%ld", maxdays);
 	change_field(buf, sizeof(buf), _("Maximum Password Age"));
