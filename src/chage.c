@@ -69,7 +69,6 @@ static uid_t user_uid = -1;
 
 static long lstchgdate;
 static long warndays;
-static long inactdays;
 static long expdate;
 
 /* local function prototypes */
@@ -174,7 +173,6 @@ static int new_fields (void)
 	}
 
 	warndays = -1;
-	inactdays = -1;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate)
 		strcpy(buf, "-1");
@@ -252,18 +250,6 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
-	if (lstchgdate == 0)
-		(void) puts (_("password must be changed"));
-	else
-		(void) puts (_("never"));
-
-	/*
-	 * The account becomes inactive if the password is expired for more
-	 * than "inactdays". The expiration date is calculated and the
-	 * number of inactive days is added. The resulting date is when the
-	 * active will be disabled.
-	 */
-	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
 	if (lstchgdate == 0)
 		(void) puts (_("password must be changed"));
 	else
@@ -542,7 +528,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	spwent.sp_min = -1;
 	spwent.sp_lstchg = lstchgdate;
 	spwent.sp_warn = warndays;
-	spwent.sp_inact = inactdays;
+	spwent.sp_inact = -1;
 	spwent.sp_expire = expdate;
 
 	if (spw_update (&spwent) == 0) {
@@ -567,7 +553,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 			lstchgdate = sp->sp_lstchg;
 		}
 		warndays = sp->sp_warn;
-		inactdays = sp->sp_inact;
 		if (!Eflg) {
 			expdate = sp->sp_expire;
 		}
@@ -580,7 +565,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 			lstchgdate = -1;
 		}
 		warndays = -1;
-		inactdays = -1;
 		if (!Eflg) {
 			expdate = -1;
 		}
