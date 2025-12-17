@@ -359,7 +359,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	 * locked may not be changed.
 	 */
 	if (   strprefix(sp->sp_pwdp, "!")
-	    || (exp_status > 1)) {
+	    || (exp_status == 3)) {
 		(void) fprintf (stderr,
 		                _("The password for %s cannot be changed.\n"),
 		                sp->sp_namp);
@@ -391,11 +391,10 @@ static void print_status (const struct passwd *pw)
 	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
 		day_to_str_a(date, sp->sp_lstchg);
-		(void) printf ("%s %s %s -1 %ld %ld %ld\n",
+		(void) printf ("%s %s %s -1 -1 %ld %ld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),
 		               date,
-		               sp->sp_max,
 		               sp->sp_warn,
 		               sp->sp_inact);
 	} else if (NULL != pw->pw_passwd) {

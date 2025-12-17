@@ -43,7 +43,6 @@ extern int add_groups (const char *);
 #endif
 
 /* age.c */
-extern void agecheck (/*@null@*/const struct spwd *);
 extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* isexpired.c */
