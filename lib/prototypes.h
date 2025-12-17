@@ -151,9 +151,6 @@ extern int getrange (const char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
 
-/* gettime.c */
-extern time_t gettime (void);
-
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
 extern /*@observer@*/const struct commonio_db *__gr_get_db (void);
