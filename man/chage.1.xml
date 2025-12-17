@@ -171,19 +171,6 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
-	<term>
-	  <option>-W</option>, <option>--warndays</option>&nbsp;<replaceable>WARN_DAYS</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the number of days of warning before a password change is
-	    required. The <replaceable>WARN_DAYS</replaceable> option is the
-	    number of days prior to the password expiring that a user will
-	    be warned their password is about to expire.
-	  </para>
-	</listitem>
-      </varlistentry>
     </variablelist>
     <para>
       If none of the options are selected, <command>chage</command> operates
