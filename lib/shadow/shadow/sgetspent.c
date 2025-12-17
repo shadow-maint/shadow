@@ -76,14 +76,7 @@ sgetspent(const char *s)
 	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
-	/*
-	 * Get the minimum period between password changes.
-	 */
-
-	if (streq(fields[3], ""))
-		spwd.sp_min = -1;
-	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+	spwd.sp_min = -1;
 
 	/*
 	 * Get the maximum number of days a password is valid.

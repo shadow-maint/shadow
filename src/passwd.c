@@ -356,41 +356,16 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
-	 * locked may not be changed. Passwords where min > max may not be
-	 * changed.
+	 * locked may not be changed.
 	 */
 	if (   strprefix(sp->sp_pwdp, "!")
-	    || (exp_status > 1)
-	    || (   (sp->sp_max >= 0)
-	        && (sp->sp_min > sp->sp_max))) {
+	    || (exp_status > 1)) {
 		(void) fprintf (stderr,
 		                _("The password for %s cannot be changed.\n"),
 		                sp->sp_namp);
 		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
 		closelog ();
 		fail_exit(E_NOPERM, process_selinux);
-	}
-
-	/*
-	 * Passwords may only be changed after sp_min time is up.
-	 */
-	if (sp->sp_lstchg > 0) {
-		long now, ok;
-		now = time(NULL) / DAY;
-		ok = sp->sp_lstchg;
-		if (   (sp->sp_min > 0)
-		    && __builtin_add_overflow(ok, sp->sp_min, &ok)) {
-			ok = LONG_MAX;
-		}
-
-		if (now < ok) {
-			(void) fprintf (stderr,
-			                _("The password for %s cannot be changed yet.\n"),
-			                sp->sp_namp);
-			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", sp->sp_namp));
-			closelog ();
-			fail_exit(E_NOPERM, process_selinux);
-		}
 	}
 }
 
@@ -416,11 +391,10 @@ static void print_status (const struct passwd *pw)
 	sp = prefix_getspnam (pw->pw_name); /* local, no need for xprefix_getspnam */
 	if (NULL != sp) {
 		day_to_str_a(date, sp->sp_lstchg);
-		(void) printf ("%s %s %s %ld %ld %ld %ld\n",
+		(void) printf ("%s %s %s -1 %ld %ld %ld\n",
 		               pw->pw_name,
 		               pw_status (sp->sp_pwdp),
 		               date,
-		               sp->sp_min,
 		               sp->sp_max,
 		               sp->sp_warn,
 		               sp->sp_inact);
