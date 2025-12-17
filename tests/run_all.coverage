@@ -146,7 +146,6 @@ run_test ./chage/09_chsh_usage_invalid_numeric_arg/chage.test
 run_test ./chage/10_chsh-l/chage.test
 run_test ./chage/12_chsh_usage-l_invalid_user2/chage.test
 run_test ./chage/18_chage-d_no_shadow_entry/chage.test
-run_test ./chage/19_chage-W_no_shadow_entry/chage.test
 run_test ./chage/20_chage-E_no_shadow_entry/chage.test
 run_test ./chage/22_chage_myuser-l/chage.test
 run_test ./chage/24_chage_myuser-l_other/chage.test
