@@ -201,10 +201,7 @@ static int new_fields (void)
 	if (a2sl(&warndays, buf, NULL, 0, -1, LONG_MAX) == -1)
 		return 0;
 
-	stprintf_a(buf, "%ld", inactdays);
-	change_field(buf, sizeof(buf), _("Password Inactive"));
-	if (a2sl(&inactdays, buf, NULL, 0, -1, LONG_MAX) == -1)
-		return 0;
+	inactdays = -1;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate)
 		strcpy(buf, "-1");
