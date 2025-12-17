@@ -135,15 +135,7 @@
 	  <emphasis role="bold">password warning period</emphasis>
 	</term>
 	<listitem>
-	  <para>
-	    The number of days before a password expires
-	    (see the maximum password age above)
-	    during which the user is warned.
-	  </para>
-	  <para>
-	    An empty field and value 0 mean that there is no password
-	    warning period.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
