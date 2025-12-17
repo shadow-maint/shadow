@@ -171,11 +171,7 @@ static int new_fields (void)
 	(void) puts ("");
 
 	mindays = -1;
-
-	stprintf_a(buf, "%ld", maxdays);
-	change_field(buf, sizeof(buf), _("Maximum Password Age"));
-	if (a2sl(&maxdays, buf, NULL, 0, -1, LONG_MAX) == -1)
-		return 0;
+	maxdays = -1;
 
 	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
 		strcpy(buf, "-1");
