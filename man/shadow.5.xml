@@ -151,19 +151,7 @@
 	  <emphasis role="bold">password inactivity period</emphasis>
 	</term>
 	<listitem>
-	  <para>
-	    The number of days after a password expires
-	    (see the maximum password age above)
-	    during which the password is still accepted,
-	    and the user must update their password at the next login.
-	  </para>
-	  <para>
-	    After the password expires and the password inactivity period elapses,
-	    the user cannot log in and must contact their administrator.
-	  </para>
-	  <para>
-	    An empty string means that no inactivity period is enforced.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

@@ -102,15 +102,7 @@ sgetspent(const char *s)
 	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
 		return NULL;
 
-	/*
-	 * Get the number of days of inactivity before an account is
-	 * disabled.
-	 */
-
-	if (streq(fields[6], ""))
-		spwd.sp_inact = -1;
-	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+	spwd.sp_inact = -1;
 
 	/*
 	 * Get the number of days after the epoch before the account is
