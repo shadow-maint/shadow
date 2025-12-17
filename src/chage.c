@@ -56,7 +56,6 @@ static bool
     dflg = false,		/* set last password change date */
     Eflg = false,		/* set account expiration date */
     iflg = false,		/* set iso8601 date formatting */
-    Iflg = false,		/* set password inactive after expiration */
     lflg = false,		/* show account aging information */
     mflg = false,		/* set minimum number of days before password change */
     Mflg = false,		/* set maximum number of days before password change */
@@ -140,8 +139,6 @@ usage (int status)
 	(void) fputs (_("  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
 	(void) fputs (_("  -i, --iso8601                 use YYYY-MM-DD when printing dates\n"), usageout);
-	(void) fputs (_("  -I, --inactive INACTIVE       set password inactive after expiration\n"
-	                "                                to INACTIVE\n"), usageout);
 	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
 	(void) fputs (_("  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
 	                "                                change to MIN_DAYS\n"), usageout);
@@ -336,7 +333,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{"lastday",    required_argument, NULL, 'd'},
 		{"expiredate", required_argument, NULL, 'E'},
 		{"help",       no_argument,       NULL, 'h'},
-		{"inactive",   required_argument, NULL, 'I'},
 		{"list",       no_argument,       NULL, 'l'},
 		{"mindays",    required_argument, NULL, 'm'},
 		{"maxdays",    required_argument, NULL, 'M'},
@@ -375,15 +371,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			/*@notreached@*/break;
 		case 'i':
 			iflg = true;
-			break;
-		case 'I':
-			Iflg = true;
-			if (a2sl(&inactdays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
-				         Prog, optarg);
-				usage (E_USAGE);
-			}
 			break;
 		case 'l':
 			lflg = true;
@@ -445,7 +432,7 @@ static void check_flags (int argc, int opt_index)
 		usage (E_USAGE);
 	}
 
-	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
+	if (lflg && (mflg || Mflg || dflg || Wflg || Eflg)) {
 		fprintf (stderr,
 		         _("%s: do not include \"l\" with other flags\n"),
 		         Prog);
@@ -656,9 +643,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!Wflg) {
 			warndays = sp->sp_warn;
 		}
-		if (!Iflg) {
-			inactdays = sp->sp_inact;
-		}
+		inactdays = sp->sp_inact;
 		if (!Eflg) {
 			expdate = sp->sp_expire;
 		}
@@ -679,9 +664,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!Wflg) {
 			warndays = -1;
 		}
-		if (!Iflg) {
-			inactdays = -1;
-		}
+		inactdays = -1;
 		if (!Eflg) {
 			expdate = -1;
 		}
@@ -697,7 +680,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
  *
  *	-d	set last password change date (*)
  *	-E	set account expiration date (*)
- *	-I	set password inactive after expiration (*)
  *	-l	show account aging information
  *	-M	set maximum number of days before password change (*)
  *	-m	set minimum number of days before password change (*)
@@ -805,7 +787,7 @@ int main (int argc, char **argv)
 	 * If none of the fields were changed from the command line, let the
 	 * user interactively change them.
 	 */
-	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg) {
+	if (!mflg && !Mflg && !dflg && !Wflg && !Eflg) {
 		printf (_("Changing the aging information for %s\n"),
 		        user_name);
 		if (new_fields () == 0) {
@@ -838,11 +820,6 @@ int main (int argc, char **argv)
 		if (Wflg) {
 			audit_logger (AUDIT_USER_MGMT,
 			              "change-passwd-warning",
-			              user_name, user_uid, 1);
-		}
-		if (Iflg) {
-			audit_logger (AUDIT_USER_MGMT,
-			              "change-inactive-days",
 			              user_name, user_uid, 1);
 		}
 		if (Eflg) {
