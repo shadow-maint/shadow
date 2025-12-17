@@ -33,7 +33,7 @@
 	/* The libc might define other fields. They won't be copied. */
 	sp->sp_lstchg = spent->sp_lstchg;
 	sp->sp_min    = -1;
-	sp->sp_max    = spent->sp_max;
+	sp->sp_max    = -1;
 	sp->sp_warn   = spent->sp_warn;
 	sp->sp_inact  = spent->sp_inact;
 	sp->sp_expire = spent->sp_expire;
