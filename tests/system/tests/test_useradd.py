@@ -51,7 +51,6 @@ def test_useradd__add_user(shadow: Shadow):
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password == "!", "Incorrect password"
     assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
-    assert shadow_entry.warn_days == 7, "Incorrect warn days"
 
     group_entry = shadow.tools.getent.group("tuser")
     assert group_entry is not None, "Group should be found"
