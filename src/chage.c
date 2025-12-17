@@ -56,8 +56,7 @@ static bool
     dflg = false,		/* set last password change date */
     Eflg = false,		/* set account expiration date */
     iflg = false,		/* set iso8601 date formatting */
-    lflg = false,		/* show account aging information */
-    Wflg = false;		/* set expiration warning days */
+    lflg = false;		/* show account aging information */
 static bool amroot = false;
 
 static const char *prefix = "";
@@ -140,7 +139,6 @@ usage (int status)
 	(void) fputs (_("  -l, --list                    show account aging information\n"), usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
-	(void) fputs (_("  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"), usageout);
 	(void) fputs ("\n", usageout);
 	exit (status);
 }
@@ -330,7 +328,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{"list",       no_argument,       NULL, 'l'},
 		{"root",       required_argument, NULL, 'R'},
 		{"prefix",     required_argument, NULL, 'P'},
-		{"warndays",   required_argument, NULL, 'W'},
 		{"iso8601",    no_argument,       NULL, 'i'},
 		{NULL, 0, NULL, '\0'}
 	};
@@ -373,15 +370,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		case 'P': /* no-op, handled in process_prefix_flag () */
 			flags->prefix = true;
 			break;
-		case 'W':
-			Wflg = true;
-			if (a2sl(&warndays, optarg, NULL, 0, -1, LONG_MAX) == -1) {
-				fprintf (stderr,
-				         _("%s: invalid numeric argument '%s'\n"),
-				         Prog, optarg);
-				usage (E_USAGE);
-			}
-			break;
 		default:
 			usage (E_USAGE);
 		}
@@ -406,7 +394,7 @@ static void check_flags (int argc, int opt_index)
 		usage (E_USAGE);
 	}
 
-	if (lflg && (dflg || Wflg || Eflg)) {
+	if (lflg && (dflg || Eflg)) {
 		fprintf (stderr,
 		         _("%s: do not include \"l\" with other flags\n"),
 		         Prog);
@@ -610,9 +598,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!dflg) {
 			lstchgdate = sp->sp_lstchg;
 		}
-		if (!Wflg) {
-			warndays = sp->sp_warn;
-		}
+		warndays = sp->sp_warn;
 		inactdays = sp->sp_inact;
 		if (!Eflg) {
 			expdate = sp->sp_expire;
@@ -627,9 +613,7 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!dflg) {
 			lstchgdate = -1;
 		}
-		if (!Wflg) {
-			warndays = -1;
-		}
+		warndays = -1;
 		inactdays = -1;
 		if (!Eflg) {
 			expdate = -1;
@@ -647,7 +631,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
  *	-d	set last password change date (*)
  *	-E	set account expiration date (*)
  *	-l	show account aging information
- *	-W	set expiration warning days (*)
  *
  *	(*) requires root permission to execute.
  *
@@ -751,7 +734,7 @@ int main (int argc, char **argv)
 	 * If none of the fields were changed from the command line, let the
 	 * user interactively change them.
 	 */
-	if (!dflg && !Wflg && !Eflg) {
+	if (!dflg && !Eflg) {
 		printf (_("Changing the aging information for %s\n"),
 		        user_name);
 		if (new_fields () == 0) {
@@ -771,11 +754,6 @@ int main (int argc, char **argv)
 		if (dflg) {
 			audit_logger (AUDIT_USER_MGMT,
 			              "change-last-change-date",
-			              user_name, user_uid, 1);
-		}
-		if (Wflg) {
-			audit_logger (AUDIT_USER_MGMT,
-			              "change-passwd-warning",
 			              user_name, user_uid, 1);
 		}
 		if (Eflg) {
