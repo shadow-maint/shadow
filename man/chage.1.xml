@@ -145,27 +145,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-M</option>, <option>--maxdays</option>&nbsp;<replaceable>MAX_DAYS</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Set the maximum number of days during which a password is valid. 
-	    When <replaceable>MAX_DAYS</replaceable> plus
-	    <replaceable>LAST_DAY</replaceable> is less than the current
-	    day, the user will be required to change their password before
-	    being able to use their account. This occurrence can be planned for
-	    in advance by use of the <option>-W</option> option, which
-	    provides the user with advance warning.
-	  </para>
-	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as
-	    <replaceable>MAX_DAYS</replaceable> will remove checking a
-	    password's validity.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>

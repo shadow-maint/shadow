@@ -6,8 +6,6 @@ Options:
   -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
   -h, --help                    display this help message and exit
   -l, --list                    show account aging information
-  -M, --maxdays MAX_DAYS        set maximum number of days before password
-                                change to MAX_DAYS
   -R, --root CHROOT_DIR         directory to chroot into
   -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS
 
