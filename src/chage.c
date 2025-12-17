@@ -70,7 +70,6 @@ static bool spw_locked = false;	/* Indicate if the shadow file is locked */
 static char user_name[BUFSIZ] = "";
 static uid_t user_uid = -1;
 
-static long mindays;
 static long maxdays;
 static long lstchgdate;
 static long warndays;
@@ -166,8 +165,6 @@ static int new_fields (void)
 
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
-
-	mindays = -1;
 
 	stprintf_a(buf, "%ld", maxdays);
 	change_field(buf, sizeof(buf), _("Maximum Password Age"));
@@ -314,15 +311,6 @@ static void list_fields (void)
 	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
 	print_day_as_date(expdate);
 
-	/*
-	 * Start with the easy numbers - the number of days before the
-	 * password can be changed, the number of days after which the
-	 * password must be changed, the number of days before the password
-	 * expires that the user is told, and the number of days after the
-	 * password expires that the account becomes unusable.
-	 */
-	printf (_("Minimum number of days between password change\t\t: %ld\n"),
-	        mindays);
 	printf (_("Maximum number of days between password change\t\t: %ld\n"),
 	        maxdays);
 	printf (_("Number of days of warning before password expires\t: %ld\n"),
@@ -618,7 +606,7 @@ static void update_age (/*@null@*/const struct spwd *sp,
 	 * password files will commit any changes that have been made.
 	 */
 	spwent.sp_max = maxdays;
-	spwent.sp_min = mindays;
+	spwent.sp_min = -1;
 	spwent.sp_lstchg = lstchgdate;
 	spwent.sp_warn = warndays;
 	spwent.sp_inact = inactdays;
@@ -645,7 +633,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!Mflg) {
 			maxdays = sp->sp_max;
 		}
-		mindays = sp->sp_min;
 		if (!dflg) {
 			lstchgdate = sp->sp_lstchg;
 		}
@@ -666,7 +653,6 @@ static void get_defaults (/*@null@*/const struct spwd *sp)
 		if (!Mflg) {
 			maxdays = -1;
 		}
-		mindays = -1;
 		if (!dflg) {
 			lstchgdate = -1;
 		}
