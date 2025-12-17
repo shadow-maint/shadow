@@ -34,7 +34,7 @@
 	sp->sp_lstchg = spent->sp_lstchg;
 	sp->sp_min    = -1;
 	sp->sp_max    = -1;
-	sp->sp_warn   = spent->sp_warn;
+	sp->sp_warn   = -1;
 	sp->sp_inact  = -1;
 	sp->sp_expire = spent->sp_expire;
 	sp->sp_flag   = spent->sp_flag;
