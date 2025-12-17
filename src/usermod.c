@@ -608,12 +608,7 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 
 	if (pflg) {
-		spent->sp_lstchg = gettime () / DAY;
-		if (0 == spent->sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change. */
-			spent->sp_lstchg = -1;
-		}
+		spent->sp_lstchg = -1;
 	}
 }
 
@@ -1699,12 +1694,7 @@ static void usr_update(const struct option_flags *flags)
 			spent.sp_pwdp   = xstrdup (pwent.pw_passwd);
 			pwent.pw_passwd = xstrdup (SHADOW_PASSWD_STRING);
 
-			spent.sp_lstchg = gettime () / DAY;
-			if (0 == spent.sp_lstchg) {
-				/* Better disable aging than
-				 * requiring a password change */
-				spent.sp_lstchg = -1;
-			}
+			spent.sp_lstchg = -1;
 			spent.sp_min    = -1;
 			spent.sp_max    = -1;
 			spent.sp_warn   = -1;

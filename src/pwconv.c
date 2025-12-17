@@ -259,12 +259,7 @@ int main (int argc, char **argv)
 			spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
 		}
 		spent.sp_pwdp = pw->pw_passwd;
-		spent.sp_lstchg = gettime () / DAY;
-		if (0 == spent.sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			spent.sp_lstchg = -1;
-		}
+		spent.sp_lstchg = -1;
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),

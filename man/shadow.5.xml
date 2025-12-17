@@ -105,16 +105,9 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date of the last password change, expressed as the number
-	    of days since 1970-01-01 00:00:00 UTC.
-	  </para>
-	  <para>
 	    The value 0 indicates that the user must change their password
 	    the next time they log in to the system.
-	  </para>
-	  <para>
-	    An empty field means that password aging features are
-	    disabled.
+	    Otherwise, the field should be empty.
 	  </para>
 	</listitem>
       </varlistentry>

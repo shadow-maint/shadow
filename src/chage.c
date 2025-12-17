@@ -155,21 +155,19 @@ static int new_fields (void)
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
-	if (-1 == lstchgdate || lstchgdate > LONG_MAX / DAY)
-		strcpy(buf, "-1");
+	if (lstchgdate == 0)
+		strcpy(buf, "0");
 	else
-		day_to_str_a(buf, lstchgdate);
+		strcpy(buf, "-1");
 
-	change_field(buf, sizeof(buf), _("Last Password Change (YYYY-MM-DD)"));
+	change_field(buf, sizeof(buf), _("Last Password Change"));
 
-	if (streq(buf, "-1")) {
+	if (streq(buf, "-1") || streq(buf, ""))
 		lstchgdate = -1;
-	} else {
-		lstchgdate = strtoday (buf);
-		if (lstchgdate <= -1) {
-			return 0;
-		}
-	}
+	else if (streq(buf, "0"))
+		lstchgdate = 0;
+	else
+		return 0;
 
 	if (-1 == expdate || LONG_MAX / DAY < expdate)
 		strcpy(buf, "-1");
@@ -232,17 +230,6 @@ print_day_as_date(long day)
 static void list_fields (void)
 {
 	/*
-	 * The "last change" date is either "never" or the date the password
-	 * was last modified. The date is the number of days since 1/1/1970.
-	 */
-	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
-	if (lstchgdate == 0) {
-		(void) puts (_("password must be changed"));
-	} else {
-		print_day_as_date(lstchgdate);
-	}
-
-	/*
 	 * The password expiration date is determined from the last change
 	 * date plus the number of days the password is valid for.
 	 */
@@ -287,8 +274,11 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		switch (c) {
 		case 'd':
 			dflg = true;
-			lstchgdate = strtoday (optarg);
-			if (lstchgdate < -1) {
+			if (streq(optarg, "-1") || streq(optarg, "")) {
+				lstchgdate = -1;
+			} else if (streq(optarg, "0")) {
+				lstchgdate = 0;
+			} else {
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);

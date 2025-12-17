@@ -7,7 +7,6 @@ from __future__ import annotations
 import pytest
 from pytest_mh.conn import ProcessError
 
-from framework.misc import days_since_epoch
 from framework.roles.shadow import Shadow
 from framework.topology import KnownTopology
 
@@ -50,7 +49,7 @@ def test_useradd__add_user(shadow: Shadow):
     assert shadow_entry is not None, "User should be found"
     assert shadow_entry.name == "tuser", "Incorrect username"
     assert shadow_entry.password == "!", "Incorrect password"
-    assert shadow_entry.last_changed == days_since_epoch(), "Incorrect last changed"
+    assert shadow_entry.last_changed is None, "Incorrect last changed"
     assert shadow_entry.min_days is None, "Incorrect min days"
     assert shadow_entry.max_days is None, "Incorrect max days"
     assert shadow_entry.warn_days is None, "Incorrect warn days"

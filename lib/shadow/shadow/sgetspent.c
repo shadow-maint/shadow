@@ -64,18 +64,10 @@ sgetspent(const char *s)
 
 	spwd.sp_namp = fields[0];
 	spwd.sp_pwdp = fields[1];
-
-	/*
-	 * Get the last changed date.  For all of the integer fields,
-	 * we check for proper format.  It is an error to have an
-	 * incorrectly formatted number.
-	 */
-
-	if (streq(fields[2], ""))
+	if (streq(fields[2], "0"))
+		spwd.sp_lstchg = 0;
+	else
 		spwd.sp_lstchg = -1;
-	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
 	spwd.sp_min = -1;
 	spwd.sp_max = -1;
 

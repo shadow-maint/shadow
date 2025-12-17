@@ -553,12 +553,7 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 			}
 			spent.sp_pwdp = cp;
 		}
-		spent.sp_lstchg = gettime () / DAY;
-		if (0 == spent.sp_lstchg) {
-			/* Better disable aging than requiring a password
-			 * change */
-			spent.sp_lstchg = -1;
-		}
+		spent.sp_lstchg = -1;
 		return (spw_update (&spent) == 0);
 	}
 
@@ -610,11 +605,7 @@ add_passwd(struct passwd *pwd, MAYBE_UNUSED const char *password)
 	 */
 	spent.sp_pwdp = "!";
 #endif
-	spent.sp_lstchg = gettime () / DAY;
-	if (0 == spent.sp_lstchg) {
-		/* Better disable aging than requiring a password change */
-		spent.sp_lstchg = -1;
-	}
+	spent.sp_lstchg = -1;
 	spent.sp_min    = -1;
 	spent.sp_max    = -1;
 	spent.sp_warn   = -1;
