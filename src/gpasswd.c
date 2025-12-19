@@ -95,7 +95,7 @@ static void catch_signals (int killed);
 static bool is_valid_user_list (const char *users);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (int argc, int opt_index);
-static void open_files (void);
+static void open_files(const struct option_flags *flags);
 static void close_files(const struct option_flags *flags);
 #ifdef SHADOWGRP
 static void get_group(struct group *gr, struct sgrp *sg, const struct option_flags *flags);
@@ -338,15 +338,19 @@ static void check_flags (int argc, int opt_index)
  *
  *	It will call exit in case of error.
  */
-static void open_files (void)
+static void open_files(const struct option_flags *flags)
 {
+	static bool process_selinux;
+
+	process_selinux = !flags->chroot;
+
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		exit (E_NOPERM);
 	}
-	add_cleanup (cleanup_unlock_group, NULL);
+	add_cleanup (cleanup_unlock_group, &process_selinux);
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
@@ -356,7 +360,7 @@ static void open_files (void)
 			         Prog, sgr_dbname ());
 			exit (E_NOPERM);
 		}
-		add_cleanup (cleanup_unlock_gshadow, NULL);
+		add_cleanup (cleanup_unlock_gshadow, &process_selinux);
 	}
 #endif				/* SHADOWGRP */
 
@@ -618,7 +622,7 @@ static void close_files(const struct option_flags *flags)
 	add_cleanup (log_gpasswd_success_group, NULL);
 	del_cleanup (log_gpasswd_failure_group);
 
-	cleanup_unlock_group (NULL);
+	cleanup_unlock_group (&process_selinux);
 	del_cleanup (cleanup_unlock_group);
 
 #ifdef SHADOWGRP
@@ -631,7 +635,7 @@ static void close_files(const struct option_flags *flags)
 		}
 		del_cleanup (log_gpasswd_failure_gshadow);
 
-		cleanup_unlock_gshadow (NULL);
+		cleanup_unlock_gshadow (&process_selinux);
 		del_cleanup (cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
@@ -1107,7 +1111,7 @@ int main (int argc, char **argv)
 	}
 	pwd_init ();
 
-	open_files ();
+	open_files (&flags);
 
 #ifdef SHADOWGRP
 	update_group (&grent, &sgent);
