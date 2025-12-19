@@ -194,8 +194,6 @@ static int new_password (const struct passwd *pw)
 	int i;			/* Counter for retries */
 	int ret;
 	bool warned;
-	int pass_max_len = -1;
-	const char *method;
 
 	/*
 	 * Authenticate the user. The user will be prompted for their own
@@ -245,41 +243,20 @@ static int new_password (const struct passwd *pw)
 	 * be optionally tested for strength. The root user can circumvent
 	 * tests. This provides an escape for initial login passwords.
 	 */
-	method = getdef_str ("ENCRYPT_METHOD");
-	if (NULL == method) {
-		if (!getdef_bool ("MD5_CRYPT_ENAB")) {
-			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
-		}
-	} else {
-		if (   streq(method, "MD5")
-#ifdef USE_SHA_CRYPT
-		    || streq(method, "SHA256")
-		    || streq(method, "SHA512")
-#endif /* USE_SHA_CRYPT */
-#ifdef USE_BCRYPT
-		    || streq(method, "BCRYPT")
-#endif /* USE_BCRYPT*/
-#ifdef USE_YESCRYPT
-		    || streq(method, "YESCRYPT")
-#endif /* USE_YESCRYPT*/
-
-		    ) {
-			pass_max_len = -1;
-		} else {
-			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
-		}
-	}
 	if (!qflg && !sflg) {
+		int pass_max_len, pass_min_len;
+
+		obscure_get_range(&pass_min_len, &pass_max_len);
 		if (pass_max_len == -1) {
 			(void) printf (_(
 "Enter the new password (minimum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"),
-				getdef_num ("PASS_MIN_LEN", 5));
+				pass_min_len);
 		} else {
 			(void) printf (_(
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"),
-				getdef_num ("PASS_MIN_LEN", 5), pass_max_len);
+				pass_min_len, pass_max_len);
 		}
 	}
 
