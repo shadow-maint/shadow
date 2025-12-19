@@ -194,16 +194,6 @@ int main (int argc, char **argv)
 			pwent.pw_passwd = spwd->sp_pwdp;
 		}
 
-		/*
-		 * Password aging works differently in the two different
-		 * systems. With shadow password files you apparently must
-		 * have some aging information. The maxweeks or minweeks
-		 * may not map exactly. In pwconv we set max == 10000,
-		 * which is about 30 years. Here we have to undo that
-		 * kludge. So, if maxdays == 10000, no aging information is
-		 * put into the new file. Otherwise, the days are converted
-		 * to weeks and so on.
-		 */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
