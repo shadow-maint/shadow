@@ -33,7 +33,7 @@
  * presence of the correct number of colons.  Any failing tests result
  * in a NULL pointer being returned.
  *
- * NOTE: This function uses hard-coded string scanning functions for
+ * NOTE: this function uses hard-coded string scanning functions for
  *	performance reasons.  I am going to come up with some conditional
  *	compilation glarp to improve on this in the future.
  */

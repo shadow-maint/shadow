@@ -145,10 +145,10 @@ pytest --mh-config=mhc.yaml --mh-lazy-ssh -v -k test_useradd__add_user
 ```
 
 **Command options explained:**
-- `--mh-config=mhc.yaml`: Specifies the multihost configuration file
-- `--mh-lazy-ssh`: Enables lazy SSH connections for better performance
-- `-v`: Verbose output showing individual test results
-- `-k`: Filters tests by name pattern
+- `--mh-config=mhc.yaml`: specifies the multihost configuration file
+- `--mh-lazy-ssh`: enables lazy SSH connections for better performance
+- `-v`: verbose output showing individual test results
+- `-k`: filters tests by name pattern
 
 For additional running options,
 see the [pytest-mh running tests documentation](https://pytest-mh.readthedocs.io/en/latest/articles/running-tests.html).

@@ -81,7 +81,7 @@
    syslogd should log the current system time for each event, and not
    trust the formatted time received from the unix domain (or worse,
    UDP) socket.  -MM */
-/* Avoid translated PAM error messages: Set LC_ALL to "C".
+/* Avoid translated PAM error messages: set LC_ALL to "C".
  * --Nekral */
 #define SYSLOG(x)							\
 	do {								\

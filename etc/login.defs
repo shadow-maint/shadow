@@ -6,7 +6,7 @@
 
 #
 # Delay in seconds before being allowed another attempt after a login failure
-# Note: When PAM is used, some modules may enforce a minimum delay (e.g.
+# Note: when PAM is used, some modules may enforce a minimum delay (e.g.
 #       pam_unix(8) enforces a 2s delay)
 #
 FAIL_DELAY		3
@@ -308,7 +308,7 @@ CHFN_RESTRICT		rwh
 # Set to "no" if you need to copy encrypted passwords to other systems
 # which don't understand the new algorithm.  Default is "no".
 #
-# Note: If you use PAM, it is recommended to use a value consistent with
+# Note: if you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.
 #
 # This variable is deprecated. You should use ENCRYPT_METHOD instead.
@@ -326,7 +326,7 @@ CHFN_RESTRICT		rwh
 # MD5 and DES should not be used for new hashes, see crypt(5) for recommendations.
 # Overrides the MD5_CRYPT_ENAB option
 #
-# Note: If you use PAM, it is recommended to use a value consistent with
+# Note: if you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.
 #
 #ENCRYPT_METHOD DES
@@ -467,7 +467,7 @@ PREVENT_NO_AUTH superuser
 # Used in pam_timestamp module to calculate the keyed-hash message
 # authentication code.
 #
-# Note: It is recommended to check hmac(3) to see the possible algorithms
+# Note: it is recommended to check hmac(3) to see the possible algorithms
 # that are available in your system.
 #
 #HMAC_CRYPTO_ALGO SHA512

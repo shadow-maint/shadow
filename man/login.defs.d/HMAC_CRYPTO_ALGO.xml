@@ -13,7 +13,7 @@
       code.
     </para>
     <para>
-      Note: Check <refentrytitle>hmac</refentrytitle><manvolnum>3</manvolnum>
+      Note: check <refentrytitle>hmac</refentrytitle><manvolnum>3</manvolnum>
       to see the possible algorithms that are available in your system.
     </para>
   </listitem>

@@ -26,10 +26,10 @@
  *
  * This function will return the minimum and maximum ranges for IDs
  *
- * 0: The function completed successfully
- * EINVAL: The provided ranges are impossible (such as maximum < minimum)
+ * 0: the function completed successfully
+ * EINVAL: the provided ranges are impossible (such as maximum < minimum)
  *
- * preferred_min: The special-case minimum value for a specifically-
+ * preferred_min: the special-case minimum value for a specifically-
  * requested ID, which may be lower than the standard min_id
  */
 static int get_ranges (bool sys_group, gid_t *min_id, gid_t *max_id,

@@ -708,7 +708,7 @@ static void update_group (struct group *gr)
  *	The information are copied in group structure(s) so that they can be
  *	modified later.
  *
- *	Note: If !is_shadowgrp, *sg will not be initialized.
+ *	Note: if !is_shadowgrp, *sg will not be initialized.
  */
 #ifdef SHADOWGRP
 static void get_group(struct group *gr, struct sgrp *sg, const struct option_flags *flags)

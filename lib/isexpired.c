@@ -33,11 +33,11 @@
  *	password expiration criteria.
  *
  * Return value:
- *	0: The password is still valid
- *	1: The password has expired, it must be changed
- *	2: The password has expired since a long time and the account is
+ *	0: the password is still valid
+ *	1: the password has expired, it must be changed
+ *	2: the password has expired since a long time and the account is
  *	   now disabled. (password cannot be changed)
- *	3: The account has expired
+ *	3: the account has expired
  */
 int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 {

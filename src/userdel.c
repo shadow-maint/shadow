@@ -1088,7 +1088,7 @@ int main (int argc, char **argv)
 #endif				/* WITH_TCB */
 	/*
 	 * Check to make certain the user isn't logged in.
-	 * Note: This is a best effort basis. The user may log in between,
+	 * Note: this is a best effort basis. The user may log in between,
 	 * a cron job may be started on her behalf, etc.
 	 */
 	if (streq(prefix, "") && !flags.chroot && user_busy(user_name, user_id) != 0) {

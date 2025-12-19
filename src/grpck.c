@@ -444,7 +444,7 @@ static int check_members (const char *groupname,
  *	also in other_members.
  *	file and other_file are used for logging.
  *
- *	TODO: No changes are performed on the lists.
+ *	TODO: no changes are performed on the lists.
  */
 static void compare_members_lists (const char *groupname,
                                    char **members,

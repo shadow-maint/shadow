@@ -785,7 +785,7 @@ static int get_groups(char *list, const struct option_flags *flags)
 		/*
 		 * There must be a match, either by GID value or by
 		 * string name.
-		 * FIXME: It should exist according to gr_locate,
+		 * FIXME: it should exist according to gr_locate,
 		 *        otherwise, we can't change its members
 		 */
 		if (NULL == grp) {
