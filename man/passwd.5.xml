@@ -147,7 +147,7 @@
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>optional encrypted password file</para>
+	  <para>Optional encrypted password file.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
