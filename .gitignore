@@ -5,9 +5,11 @@ lib*.a
 *.la
 *.mo
 *.gmo
+.cache
 .deps
 .libs
 .dirstamp
+.vscode
 
 *.patch
 *.rej
@@ -21,6 +23,7 @@ test-driver
 /ABOUT-NLS
 /aclocal.m4
 /autom4te.cache
+/compile_commands.json
 /config.cache
 /config.h
 /config.h.in
