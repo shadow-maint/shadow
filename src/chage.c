@@ -286,7 +286,6 @@ static void list_fields (void)
 	if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
 	} else if (   (lstchgdate < 0)
-	           || (maxdays >= 10000)
 	           || (maxdays < 0)
 	           || (LONG_MAX - lstchgdate < maxdays))
 	{
@@ -306,7 +305,6 @@ static void list_fields (void)
 		(void) puts (_("password must be changed"));
 	} else if (   (lstchgdate < 0)
 	           || (inactdays < 0)
-	           || (maxdays >= 10000)
 	           || (maxdays < 0)
 	           || (LONG_MAX - inactdays < maxdays)
 	           || (LONG_MAX - lstchgdate < maxdays + inactdays))
