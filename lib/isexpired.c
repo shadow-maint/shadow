@@ -82,13 +82,11 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 
 	/*
 	 * The last and max fields must be present for an account
-	 * to have an expired password.  A maximum of >10000 days
-	 * is considered to be infinite.
+	 * to have an expired password.
 	 */
 
 	if (   (-1 == sp->sp_lstchg)
-	    || (-1 == sp->sp_max)
-	    || (sp->sp_max >= 10000)) {
+	    || (-1 == sp->sp_max)) {
 		return 0;
 	}
 
