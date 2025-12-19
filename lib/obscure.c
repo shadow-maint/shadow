@@ -116,6 +116,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*@notnull@*/const char *new)
 {
 	size_t maxlen, oldlen, newlen;
+	int minlen;
 	char *new1, *old1;
 	const char *msg;
 	const char *result;
@@ -123,7 +124,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	oldlen = strlen (old);
 	newlen = strlen (new);
 
-	if (newlen < (size_t) getdef_num ("PASS_MIN_LEN", 0)) {
+	minlen = getdef_num ("PASS_MIN_LEN", 0);
+	if (minlen != -1 && newlen < (size_t) minlen) {
 		return _("too short");
 	}
 
