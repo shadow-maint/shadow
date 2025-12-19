@@ -7,7 +7,7 @@
   <listitem>
     <para>
       This defines the system default encryption algorithm for encrypting
-      passwords (if no algorithm are specified on the command line).
+      passwords (if no algorithm is specified on the command line).
     </para>
     <para>
       It can take one of these values: <phrase condition="bcrypt">
@@ -26,7 +26,7 @@
       variable.
     </para>
     <para condition="pam">
-      Note: This only affect the generation of group passwords.
+      Note: This only affects the generation of group passwords.
       The generation of user passwords is done by PAM and subject to the
       PAM configuration. It is recommended to set this variable
       consistently with the PAM configuration.
