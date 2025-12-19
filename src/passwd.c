@@ -241,9 +241,9 @@ static int new_password (const struct passwd *pw)
 
 	/*
 	 * Get the new password. The user is prompted for the new password
-	 * and has five tries to get it right. The password will be tested
-	 * for strength, unless it is the root user. This provides an escape
-	 * for initial login passwords.
+	 * and has PASS_CHANGE_TRIES tries to get it right. The password will
+	 * be optionally tested for strength. The root user can circumvent
+	 * tests. This provides an escape for initial login passwords.
 	 */
 	method = getdef_str ("ENCRYPT_METHOD");
 	if (NULL == method) {
