@@ -229,7 +229,7 @@ strspn/ - String span searching
 	Naming conventions:
 	-  'r': reverse (search from the end).
 	-  'c': complement (negate the second argument).
-	-  'stp': Return a pointer instead of a length.
+	-  'stp': return a pointer instead of a length.
 
     stpspn()
 	Like strspn(3), but return a pointer instead of an offset.

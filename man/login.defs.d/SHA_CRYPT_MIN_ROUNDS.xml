@@ -36,7 +36,7 @@
       used.
     </para>
     <para condition="pam">
-      Note: This only affect the generation of group passwords.
+      Note: this only affect the generation of group passwords.
       The generation of user passwords is done by PAM and subject to the
       PAM configuration. It is recommended to set this variable
       consistently with the PAM configuration.

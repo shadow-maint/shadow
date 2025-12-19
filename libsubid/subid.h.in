@@ -42,9 +42,9 @@ extern "C" {
 /*
  * subid_init: initialize libsubid
  *
- * @progname: Name to display as program.  If NULL, then "(libsubid)" will be
+ * @progname: name to display as program.  If NULL, then "(libsubid)" will be
  *            shown in error messages.
- * @logfd:    Open file pointer to pass error messages to.  If NULL, then
+ * @logfd:    open file pointer to pass error messages to.  If NULL, then
  *            /dev/null will be opened and messages will be sent there.  The
  *            default if libsubid_init() is not called is stderr (2).
  *
@@ -58,7 +58,7 @@ bool subid_init(const char *progname, FILE *logfd);
 /*
  * subid_free: free memory allocated in any subid_* function
  *
- * @ptr: Pointer to a memory block to release.
+ * @ptr: pointer to a memory block to release.
  *
  * Some functions like @subid_get_uid_ranges allocate memory internally. As
  * soon as a result is no longer needed, it should be freed with this routine.
@@ -98,7 +98,7 @@ int subid_get_gid_ranges(const char *owner, struct subid_range **ranges);
  * subid_get_uid_owners: return a list of uids to which the given uid has been
  *                    delegated.
  *
- * @uid: The subuid being queried
+ * @uid: the subuid being queried
  * @owners: a pointer to an array of uids into which the results are placed.
  *          The returned array must be freed by the caller.
  *
@@ -110,7 +110,7 @@ int subid_get_uid_owners(uid_t uid, uid_t **owner);
  * subid_get_gid_owners: return a list of uids to which the given gid has been
  *                    delegated.
  *
- * @uid: The subgid being queried
+ * @uid: the subgid being queried
  * @owners: a pointer to an array of uids into which the results are placed.
  *          The returned array must be freed by the caller.
  *

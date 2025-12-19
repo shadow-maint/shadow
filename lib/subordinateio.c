@@ -143,7 +143,7 @@ static struct commonio_ops subordinate_ops = {
 };
 
 /*
- * range_exists: Check whether @owner owns any ranges
+ * range_exists: check whether @owner owns any ranges
  *
  * @db: database to query
  * @owner: owner being queried

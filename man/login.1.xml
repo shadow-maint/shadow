@@ -194,7 +194,7 @@
 	    Do not perform authentication, user is preauthenticated.
 	  </para>
 	  <para>
-	    Note: In that case, <replaceable>username</replaceable> is
+	    Note: in that case, <replaceable>username</replaceable> is
 	    mandatory.
 	  </para>
 	</listitem>

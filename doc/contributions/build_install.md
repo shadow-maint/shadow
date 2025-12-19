@@ -81,7 +81,7 @@ you may encounter issues.
 Here are common troubleshooting steps:
 
 **Post-test inspection:**
-- **Container persistence**: After tests complete, containers are left running
+- **Container persistence**: after tests complete, containers are left running
   to allow inspection of the test environment and debugging of any failures.
   This enables you to examine logs, file states, and system configuration
   that existed when tests ran.

@@ -346,7 +346,7 @@
   return value points to static data whose content is overwritten by
   each call.
 
-  Warning: The key space consists of 2**56 equal 7.2e16 possible values.
+  Warning: the key space consists of 2**56 equal 7.2e16 possible values.
   Exhaustive searches of this key space are possible using massively
   parallel computers.  Software, such as crack(1), is available which
   will search the portion of this key space that is generally used by
@@ -996,7 +996,7 @@
   sudo for the shadow suite, is available as at:
   <ftp://sunsite.unc.edu/pub/Linux/system/Admin/sudo-1.2-shadow.tgz>
 
-  Warning: When you install sudo your /etc/sudoers file will be replaced
+  Warning: when you install sudo your /etc/sudoers file will be replaced
   with a default one, so you need to make a backup of it if you have
   added anything to the default one.  (you could also edit the Makefile
   and remove the line that copies the default file to /etc).

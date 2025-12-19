@@ -106,17 +106,17 @@ ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7:1:18294:' ] || exit 1
 
 echo "testing option -I"
-# NOTE: I could pass a date to -I
+# Note: I could pass a date to -I
 chage -I 42 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7:42:18294:' ] || exit 1
 echo "testing option -I -1"
-# NOTE: this behavior is not documented
+# Note: this behavior is not documented
 chage -I -1 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7::18294:' ] || exit 1
 echo "testing option -I 0"
-# NOTE: We should check that this is the expected behavior
+# Note: we should check that this is the expected behavior
 chage -I 0 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7:0:18294:' ] || exit 1
@@ -130,7 +130,7 @@ chage -m 24 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:24:99999:7:12:18294:' ] || exit 1
 echo "testing option -m -1"
-# NOTE: this behavior is not documented
+# Note: this behavior is not documented
 chage -m -1 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280::99999:7:12:18294:' ] || exit 1
@@ -140,7 +140,7 @@ ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7:12:18294:' ] || exit 1
 echo "testing option --mindays"
 chage --min 1 myuser7
-# NOTE: that shouldn't have work
+# Note: that shouldn't have work
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1:99999:7:12:18294:' ] || exit 1
 
@@ -149,7 +149,7 @@ chage -M 25 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1:25:7:12:18294:' ] || exit 1
 echo "testing option -M -1"
-# NOTE: this behavior is not documented
+# Note: this behavior is not documented
 chage -M -1 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1::7:12:18294:' ] || exit 1
@@ -167,7 +167,7 @@ chage -W 26 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1:2:26:12:18294:' ] || exit 1
 echo "testing option -W -1"
-# NOTE: this behavior is not documented
+# Note: this behavior is not documented
 chage -W -1 myuser7
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1:2::12:18294:' ] || exit 1

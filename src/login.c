@@ -797,7 +797,7 @@ int main (int argc, char **argv)
 
 	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
-	/* NOTE: If pam_setcred changes PAM_USER, this will not be taken
+	/* Note: if pam_setcred changes PAM_USER, this will not be taken
 	 * into account.
 	 */
 
