@@ -8,7 +8,7 @@ cd $(dirname $0)
 . ../../../common/log.sh
 
 log_start "$0" "chpasswd changes the passwd entry if there are no shadow entries"
-# FIXME: the PAM and !PAM versions differs:
+# FIXME: the PAM and !PAM versions differ:
 # PAM will create a shadow entry if the shadow file exists
 # !PAM will update the passwd entry and leave the shadow file untouched
 

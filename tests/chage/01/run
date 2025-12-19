@@ -140,7 +140,7 @@ ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:0:99999:7:12:18294:' ] || exit 1
 echo "testing option --mindays"
 chage --min 1 myuser7
-# Note: that shouldn't have work
+# Note: that shouldn't have worked
 ent=$(getent shadow myuser7)
 [ "$ent" = 'myuser7:$1$yQnIAZWV$gDAMB2IkqaONgrQiRdo4y.:15280:1:99999:7:12:18294:' ] || exit 1
 
