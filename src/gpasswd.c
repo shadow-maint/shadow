@@ -885,10 +885,6 @@ int main (int argc, char **argv)
 	struct passwd *pw = NULL;
 	struct option_flags  flags = {.chroot = false};
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
 	sanitize_env ();
 	check_fds ();
 
@@ -908,6 +904,10 @@ int main (int argc, char **argv)
 	log_set_logfd(stderr);
 
 	OPENLOG (Prog);
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	setbuf (stdout, NULL);
 	setbuf (stderr, NULL);
 
