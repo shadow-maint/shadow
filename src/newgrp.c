@@ -387,10 +387,6 @@ int main (int argc, char **argv)
 	struct sgrp *sgrp;
 #endif
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
 	check_fds ();
 
 	(void) setlocale (LC_ALL, "");
@@ -432,6 +428,9 @@ int main (int argc, char **argv)
 	log_set_progname(Prog);
 	log_set_logfd(stderr);
 	OPENLOG (Prog);
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
 	argc--;
 	argv++;
 
