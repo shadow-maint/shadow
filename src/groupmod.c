@@ -282,18 +282,20 @@ grp_update(void)
 		}
 #endif				/* SHADOWGRP */
 
-		ul = user_list;
-		while (NULL != (u = strsep(&ul, ","))) {
-			if (prefix_getpwnam(u) == NULL) {
-				fprintf(stderr, _("Invalid member username %s\n"), u);
-				exit (E_GRP_UPDATE);
-			}
+		{
+			ul = user_list;
+			while (NULL != (u = strsep(&ul, ","))) {
+				if (prefix_getpwnam(u) == NULL) {
+					fprintf(stderr, _("Invalid member username %s\n"), u);
+					exit(E_GRP_UPDATE);
+				}
 
-			grp.gr_mem = add_list(grp.gr_mem, u);
+				grp.gr_mem = add_list(grp.gr_mem, u);
 #ifdef	SHADOWGRP
-			if (NULL != osgrp)
-				sgrp.sg_mem = add_list(sgrp.sg_mem, u);
+				if (NULL != osgrp)
+					sgrp.sg_mem = add_list(sgrp.sg_mem, u);
 #endif				/* SHADOWGRP */
+			}
 		}
 	}
 

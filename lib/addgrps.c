@@ -52,16 +52,18 @@ add_groups(const char *list)
 	if (dup == NULL)
 		goto free_gids;
 
-	while (NULL != (g = strsep(&p, ",:"))) {
-		struct group  *grp;
+	{
+		while (NULL != (g = strsep(&p, ",:"))) {
+			struct group  *grp;
 
-		grp = getgrnam(g); /* local, no need for xgetgrnam */
-		if (NULL == grp) {
-			fprintf(shadow_logfd, _("Warning: unknown group %s\n"), g);
-			continue;
+			grp = getgrnam(g); /* local, no need for xgetgrnam */
+			if (NULL == grp) {
+				fprintf(shadow_logfd, _("Warning: unknown group %s\n"), g);
+				continue;
+			}
+
+			LSEARCH(gid_t, &grp->gr_gid, gids, &n);
 		}
-
-		LSEARCH(gid_t, &grp->gr_gid, gids, &n);
 	}
 	free(dup);
 
