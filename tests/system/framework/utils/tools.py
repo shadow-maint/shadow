@@ -388,8 +388,8 @@ class GShadowEntry(object):
         self,
         name: str | None,
         password: str | None,
-        administrators: str | None,
-        members: str | None,
+        administrators: list[str],
+        members: list[str],
     ) -> None:
         self.name: str | None = name
         """
@@ -401,18 +401,18 @@ class GShadowEntry(object):
         Group password.
         """
 
-        self.administrators: str | None = administrators
+        self.administrators: list[str] = administrators
         """
         Group administrators.
         """
 
-        self.members: str | None = members
+        self.members: list[str] = members
         """
         Group members.
         """
 
     def __str__(self) -> str:
-        return f"({self.name}:{self.password}:{self.administrators}:" f"{self.members})"
+        return f"({self.name}:{self.password}:" f"{self.administrators}:" f"{self.members})"
 
     def __repr__(self) -> str:
         return str(self)
@@ -422,7 +422,7 @@ class GShadowEntry(object):
         return cls(
             name=d.get("group_name", None),
             password=d.get("password", None),
-            administrators=d.get("administrators", None),
+            administrators=d.get("administrators", []),
             members=d.get("members", []),
         )
 
