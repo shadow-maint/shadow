@@ -376,18 +376,22 @@ static void open_files(const struct option_flags *flags)
 
 	/* And now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf(stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname(), strerrno());
-		SYSLOG((LOG_WARN, "cannot open %s: %s", gr_dbname(), strerrno()));
+		const char *errmsg = strerrno();
+
+		fprintf(stderr, _("%s: cannot open %s: %s\n"), Prog, gr_dbname(), errmsg);
+		SYSLOG((LOG_WARN, "cannot open %s: %s", gr_dbname(), errmsg));
 		fail_exit (E_GRP_UPDATE);
 	}
 
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
+			const char *errmsg = strerrno();
+
 			fprintf (stderr,
 			         _("%s: cannot open %s: %s\n"),
-			         Prog, sgr_dbname(), strerrno());
-			SYSLOG((LOG_WARN, "cannot open %s: %s", sgr_dbname(), strerrno()));
+			         Prog, sgr_dbname(), errmsg);
+			SYSLOG((LOG_WARN, "cannot open %s: %s", sgr_dbname(), errmsg));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}

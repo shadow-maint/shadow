@@ -102,6 +102,7 @@ format_attr(printf, 2, 3)
 static void
 error_acl(struct error_context *, const char *fmt, ...)
 {
+	const char *errmsg;
 	va_list ap;
 	FILE *shadow_logfd = log_get_logfd();
 
@@ -112,12 +113,13 @@ error_acl(struct error_context *, const char *fmt, ...)
 		return;
 	}
 
+	errmsg = strerrno();
 	va_start (ap, fmt);
 	(void) fprintf (shadow_logfd, _("%s: "), log_get_progname());
 	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
 		(void) fputs (_(": "), shadow_logfd);
 	}
-	(void) fprintf(shadow_logfd, "%s\n", strerrno());
+	(void) fprintf(shadow_logfd, "%s\n", errmsg);
 	va_end (ap);
 }
 

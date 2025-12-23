@@ -776,10 +776,12 @@ static bool remove_mailbox (void)
 			free(mailfile);
 			return 0;
 		} else {
+			const char *errmsg = strerrno();
+
 			fprintf (stderr,
 			         _("%s: warning: can't remove %s: %s\n"),
-			        Prog, mailfile, strerrno());
-			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
+			        Prog, mailfile, errmsg);
+			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, errmsg));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER,
 			              "delete-mail-file",
@@ -792,10 +794,12 @@ static bool remove_mailbox (void)
 
 	if (fflg) {
 		if (unlink (mailfile) != 0) {
+			const char *errmsg = strerrno();
+
 			fprintf (stderr,
 			         _("%s: warning: can't remove %s: %s\n"),
-			        Prog, mailfile, strerrno());
-			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
+			        Prog, mailfile, errmsg);
+			SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, errmsg));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER,
 			              "delete-mail-file",
@@ -833,10 +837,12 @@ static bool remove_mailbox (void)
 		return 0;		/* mailbox doesn't exist */
 	}
 	if (unlink (mailfile) != 0) {
+		const char *errmsg = strerrno();
+
 		fprintf (stderr,
 		         _("%s: warning: can't remove %s: %s\n"),
-		         Prog, mailfile, strerrno());
-		SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, strerrno()));
+		         Prog, mailfile, errmsg);
+		SYSLOG((LOG_ERR, "Cannot remove %s: %s", mailfile, errmsg));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER,
 		              "delete-mail-file",

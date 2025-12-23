@@ -191,12 +191,14 @@ int check_selinux_permit (const char *perm_name)
 	selinux_set_callback (SELINUX_CB_LOG, (union selinux_callback) { .func_log = selinux_log_cb });
 
 	if (getprevcon_raw (&user_context_raw) != 0) {
+		const char *errmsg = strerrno();
+
 		fprintf (shadow_logfd,
 		    _("%s: can not get previous SELinux process context: %s\n"),
-		    shadow_progname, strerrno());
+		    shadow_progname, errmsg);
 		SYSLOG ((LOG_WARN,
 		    "can not get previous SELinux process context: %s",
-		    strerrno()));
+		    errmsg));
 		return (security_getenforce () != 0);
 	}
 
