@@ -32,7 +32,6 @@
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
-#include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strftime.h"
 #include "time/day_to_str.h"
@@ -613,8 +612,8 @@ static void update_age (/*@null@*/const struct spwd *sp,
 		struct passwd pwent = *pw;
 
 		memzero(&spwent, sizeof(spwent));
-		spwent.sp_namp = xstrdup (pwent.pw_name);
-		spwent.sp_pwdp = xstrdup (pwent.pw_passwd);
+		spwent.sp_namp = pwent.pw_name;
+		spwent.sp_pwdp = pwent.pw_passwd;
 		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
@@ -624,8 +623,8 @@ static void update_age (/*@null@*/const struct spwd *sp,
 			fail_exit (E_NOPERM, process_selinux);
 		}
 	} else {
-		spwent.sp_namp = xstrdup (sp->sp_namp);
-		spwent.sp_pwdp = xstrdup (sp->sp_pwdp);
+		spwent.sp_namp = sp->sp_namp;
+		spwent.sp_pwdp = sp->sp_pwdp;
 		spwent.sp_flag = sp->sp_flag;
 	}
 
