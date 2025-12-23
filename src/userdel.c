@@ -820,7 +820,7 @@ static bool remove_mailbox (void)
 		fprintf (stderr,
 		         _("%s: %s not owned by %s, not removing\n"),
 		         Prog, mailfile, user_name);
-		SYSLOG((LOG_ERR, "%s not owned by %s, not removed", mailfile, strerrno()));
+		SYSLOG((LOG_ERR, "%s not owned by %s, not removed", mailfile, user_name));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER,
 		              "delete-mail-file",
