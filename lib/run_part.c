@@ -42,7 +42,7 @@ static int run_part(char *script_path, const char *name, const char *action)
 		return (wait_status);
 	}
 
-	fprintf(shadow_logfd, "waitpid: %s\n", strerrno());
+	fprintf(shadow_logfd, "wait: %s\n", strerrno());
 	return (1);
 }
 
