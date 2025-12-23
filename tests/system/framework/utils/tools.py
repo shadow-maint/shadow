@@ -389,7 +389,7 @@ class GShadowEntry(object):
         name: str | None,
         password: str | None,
         administrators: str | None,
-        members: str | None,
+        members: list[str],
     ) -> None:
         self.name: str | None = name
         """
@@ -406,7 +406,7 @@ class GShadowEntry(object):
         Group administrators.
         """
 
-        self.members: str | None = members
+        self.members: list[str] = members
         """
         Group members.
         """
