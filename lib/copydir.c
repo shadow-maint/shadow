@@ -36,7 +36,6 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -93,12 +92,15 @@ format_attr(printf, 2, 3)
 static void
 error_acl(struct error_context *, const char *fmt, ...)
 {
-	va_list ap;
+	int      e;
+	va_list  ap;
+
+	e = errno;
 
 	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
-	if (ENOTSUP == errno) {
-		errno = 0;
+	if (ENOTSUP == e) {
+		e = 0;
 		return;
 	}
 
@@ -107,8 +109,10 @@ error_acl(struct error_context *, const char *fmt, ...)
 	if (vfprintf (log_get_logfd(), fmt, ap) != 0) {
 		(void) fputs (_(": "), log_get_logfd());
 	}
-	(void) fprintf(log_get_logfd(), "%s\n", strerrno());
+	(void) fprintf(log_get_logfd(), "%s\n", strerror(e));
 	va_end (ap);
+
+	errno = e;
 }
 
 static struct error_context ctx = {
