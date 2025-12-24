@@ -33,7 +33,6 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 
 #undef NDEBUG
 #include <assert.h>
@@ -93,7 +92,8 @@ format_attr(printf, 2, 3)
 static void
 error_acl(MAYBE_UNUSED struct error_context *_1, const char *fmt, ...)
 {
-	va_list ap;
+	int      e;
+	va_list  ap;
 
 	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
@@ -102,13 +102,17 @@ error_acl(MAYBE_UNUSED struct error_context *_1, const char *fmt, ...)
 		return;
 	}
 
+	e = errno;
+
 	va_start (ap, fmt);
 	(void) fprintf (log_get_logfd(), _("%s: "), log_get_progname());
 	if (vfprintf (log_get_logfd(), fmt, ap) != 0) {
 		(void) fputs (_(": "), log_get_logfd());
 	}
-	(void) fprintf(log_get_logfd(), "%s\n", strerrno());
+	(void) fprintf(log_get_logfd(), "%s\n", strerror(e));
 	va_end (ap);
+
+	errno = e;
 }
 
 static struct error_context ctx = {
