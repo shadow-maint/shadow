@@ -22,6 +22,7 @@
 #include "alloc/malloc.h"
 #include "attr.h"
 #include "fs/readlink/areadlink.h"
+#include "io/fprintf.h"
 #include "prototypes.h"
 #include "defines.h"
 #ifdef WITH_SELINUX
@@ -106,10 +107,7 @@ error_acl(struct error_context *, const char *fmt, ...)
 
 	va_start (ap, fmt);
 	(void) fprintf (log_get_logfd(), _("%s: "), log_get_progname());
-	if (vfprintf (log_get_logfd(), fmt, ap) != 0) {
-		(void) fputs (_(": "), log_get_logfd());
-	}
-	(void) fprintf(log_get_logfd(), "%s\n", strerror(e));
+	vfprintec(log_get_logfd(), e, fmt, ap);
 	va_end (ap);
 
 	errno = e;
