@@ -41,7 +41,6 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strerrno.h"
 
 
 static /*@null@*/const char *src_orig;
@@ -102,13 +101,17 @@ format_attr(printf, 2, 3)
 static void
 error_acl(struct error_context *, const char *fmt, ...)
 {
-	va_list ap;
-	FILE *shadow_logfd = log_get_logfd();
+	int      e;
+	va_list  ap;
+	FILE     *shadow_logfd;
+
+	e = errno;
+	shadow_logfd = log_get_logfd();
 
 	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
-	if (ENOTSUP == errno) {
-		errno = 0;
+	if (ENOTSUP == e) {
+		e = 0;
 		return;
 	}
 
@@ -117,8 +120,10 @@ error_acl(struct error_context *, const char *fmt, ...)
 	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
 		(void) fputs (_(": "), shadow_logfd);
 	}
-	(void) fprintf(shadow_logfd, "%s\n", strerrno());
+	(void) fprintf(shadow_logfd, "%s\n", strerror(e));
 	va_end (ap);
+
+	errno = e;
 }
 
 static struct error_context ctx = {
