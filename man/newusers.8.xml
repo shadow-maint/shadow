@@ -320,7 +320,7 @@
       </varlistentry>
     </variablelist>
     <variablelist remap='IP' condition="no_pam">
-      <varlistentry condition="bcrypt;sha_crypt;yescrypt">
+      <varlistentry>
 	<term><option>-s</option>, <option>--sha-rounds</option></term>
 	<listitem>
 	  <para>
@@ -330,9 +330,8 @@
 	    You can only use this option with crypt method:
 	    <phrase condition="bcrypt">
 	    <replaceable>BCRYPT</replaceable></phrase>
-	    <phrase condition="sha_crypt">
 	    <replaceable>SHA256</replaceable>
-	    <replaceable>SHA512</replaceable></phrase>
+	    <replaceable>SHA512</replaceable>
 	    <phrase condition="yescrypt">
 	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
@@ -345,12 +344,12 @@
 	    A minimal value of 4 and a maximal value of 31
 	    will be enforced for BCRYPT. The default is 13.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    By default, the number of rounds for SHA256 or SHA512 is defined by the
 	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
 	    <filename>/etc/login.defs</filename>.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    A minimal value of 1000 and a maximal value of 999,999,999
 	    will be enforced for SHA256 and SHA512. The default is 5000.
 	  </para>

@@ -221,10 +221,8 @@ obscure_get_range(int *minlen, int *maxlen)
 		}
 	} else {
 		if (   streq(method, "MD5")
-#ifdef USE_SHA_CRYPT
 		    || streq(method, "SHA256")
 		    || streq(method, "SHA512")
-#endif
 #ifdef USE_BCRYPT
 		    || streq(method, "BCRYPT")
 #endif
