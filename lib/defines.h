@@ -74,7 +74,7 @@
 #endif
 
 /* cleaner than lots of #ifdefs everywhere - use this as follows:
-   SYSLOG((LOG_CRIT, "user %s cracked root", user)); */
+   SYSLOG(LOG_CRIT, "user %s cracked root", user); */
 #ifdef ENABLE_NLS
 /* Temporarily set LC_TIME to "C" to avoid strange dates in syslog.
    This is a workaround for a more general syslog(d) design problem -
@@ -83,7 +83,7 @@
    UDP) socket.  -MM */
 /* Avoid translated PAM error messages: set LC_ALL to "C".
  * --Nekral */
-#define SYSLOG(x)							\
+#define SYSLOG(...)							\
 	do {								\
 		char *old_locale = setlocale (LC_ALL, NULL);		\
 		char *saved_locale = NULL;				\
@@ -93,14 +93,14 @@
 		if (NULL != saved_locale) {				\
 			(void) setlocale (LC_ALL, "C");			\
 		}							\
-		syslog x ;						\
+		syslog(__VA_ARGS__);					\
 		if (NULL != saved_locale) {				\
 			(void) setlocale (LC_ALL, saved_locale);	\
 			free (saved_locale);				\
 		}							\
 	} while (false)
 #else				/* !ENABLE_NLS */
-#define SYSLOG(x) syslog x
+#define SYSLOG(...)  syslog(__VA_ARGS__)
 #endif				/* !ENABLE_NLS */
 
 /* The default syslog settings can now be changed here,
