@@ -215,23 +215,11 @@ obscure_get_range(int *minlen, int *maxlen)
 	}
 
 	method = getdef_str ("ENCRYPT_METHOD");
-	if (NULL == method) {
-		if (getdef_bool ("MD5_CRYPT_ENAB")) {
-			return;
-		}
-	} else {
-		if (   streq(method, "MD5")
-		    || streq(method, "SHA256")
-		    || streq(method, "SHA512")
-#ifdef USE_BCRYPT
-		    || streq(method, "BCRYPT")
-#endif
-#ifdef USE_YESCRYPT
-		    || streq(method, "YESCRYPT")
-#endif
-		    ) {
-			return;
-		}
-	}
+	if (NULL == method)
+		return;
+
+	if (!streq(method, "DES"))
+		return;
+
 	*maxlen = getdef_num ("PASS_MAX_LEN", 8);
 }
