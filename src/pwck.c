@@ -625,22 +625,13 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 
 					sp.sp_namp   = pwd->pw_name;
 					sp.sp_pwdp   = pwd->pw_passwd;
-					sp.sp_min    =
-					    getdef_num ("PASS_MIN_DAYS", -1);
-					sp.sp_max    =
-					    getdef_num ("PASS_MAX_DAYS", -1);
-					sp.sp_warn   =
-					    getdef_num ("PASS_WARN_AGE", -1);
+					sp.sp_min    = -1;
+					sp.sp_max    = -1;
+					sp.sp_warn   = -1;
 					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
 					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
-					sp.sp_lstchg = gettime () / DAY;
-					if (0 == sp.sp_lstchg) {
-						/* Better disable aging than
-						 * requiring a password change
-						 */
-						sp.sp_lstchg = -1;
-					}
+					sp.sp_lstchg = -1;
 					*changed = true;
 
 					if (spw_update (&sp) == 0) {
@@ -831,19 +822,6 @@ static void check_spw_file (bool *errors, bool *changed)
 			 */
 			if (yes_or_no (read_only)) {
 				goto delete_spw;
-			}
-		}
-
-		/*
-		 * Warn if last password change in the future.  --marekm
-		 */
-		if (!quiet) {
-			time_t t = time (NULL);
-			if (   (t != 0)
-			    && (spw->sp_lstchg > t / DAY)) {
-				printf (_("user %s: last password change in the future\n"),
-			                spw->sp_namp);
-				*errors = true;
 			}
 		}
 	}

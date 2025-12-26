@@ -1211,8 +1211,6 @@ int main (int argc, char **argv)
 			printf (".\n");
 		}
 #endif /* ENABLE_LASTLOG */
-		agecheck (spwd);
-
 		mailcheck ();	/* report on the status of mail */
 #endif				/* !USE_PAM */
 	} else {

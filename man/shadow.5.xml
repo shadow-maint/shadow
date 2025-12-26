@@ -105,52 +105,22 @@
 	</term>
 	<listitem>
 	  <para>
-	    The date of the last password change, expressed as the number
-	    of days since 1970-01-01 00:00:00 UTC.
-	  </para>
-	  <para>
 	    The value 0 indicates that the user must change their password
 	    the next time they log in to the system.
-	  </para>
-	  <para>
-	    An empty field means that password aging features are
-	    disabled.
+	    Otherwise, the field should be empty.
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><emphasis role="bold">minimum password age</emphasis></term>
 	<listitem>
-	  <para>
-	    The minimum password age is the number of days the user must wait
-	    before they can change their password again.
-	  </para>
-	  <para>
-	    An empty field and value 0 mean that there is no minimum
-	    password age.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><emphasis role="bold">maximum password age</emphasis></term>
 	<listitem>
-	  <para>
-	    The maximum password age is the number of days after which the
-	    user must change their password.
-	  </para>
-	  <para>
-	    After this number of days has elapsed, the password may still be valid.
-	    The user is prompted to change their password at the next login.
-	  </para>
-	  <para>
-	    An empty field means that there are no maximum password age,
-	    no password warning period, and no password inactivity period
-	    (see below).
-	  </para>
-	  <para>
-	    If the maximum password age is lower than the minimum password
-	    age, the user cannot change her password.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -158,15 +128,7 @@
 	  <emphasis role="bold">password warning period</emphasis>
 	</term>
 	<listitem>
-	  <para>
-	    The number of days before a password expires
-	    (see the maximum password age above)
-	    during which the user is warned.
-	  </para>
-	  <para>
-	    An empty field and value 0 mean that there is no password
-	    warning period.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -174,19 +136,7 @@
 	  <emphasis role="bold">password inactivity period</emphasis>
 	</term>
 	<listitem>
-	  <para>
-	    The number of days after a password expires
-	    (see the maximum password age above)
-	    during which the password is still accepted,
-	    and the user must update their password at the next login.
-	  </para>
-	  <para>
-	    After the password expires and the password inactivity period elapses,
-	    the user cannot log in and must contact their administrator.
-	  </para>
-	  <para>
-	    An empty string means that no inactivity period is enforced.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
