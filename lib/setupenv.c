@@ -16,11 +16,12 @@
 #ident "$Id$"
 
 #include <assert.h>
+#include <ctype.h>
+#include <paths.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
-#include <ctype.h>
 
 #include "prototypes.h"
 #include "defines.h"
@@ -214,7 +215,7 @@ void setup_env (struct passwd *info)
 
 	if ((NULL == info->pw_shell) || streq(info->pw_shell, "")) {
 		free (info->pw_shell);
-		info->pw_shell = xstrdup (SHELL);
+		info->pw_shell = xstrdup(_PATH_BSHELL);
 	}
 
 	addenv ("SHELL", info->pw_shell);
