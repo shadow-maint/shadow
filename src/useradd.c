@@ -114,6 +114,7 @@ static const char *def_shell = "/bin/bash";
 static const char *def_template = SKEL_DIR;
 static const char *def_usrtemplate = USRSKELDIR;
 static const char *def_create_mail_spool = "yes";
+static const char *def_btrfs_subvolume_home = "no";
 static const char *def_log_init = "yes";
 
 static long def_inactive = -1;
@@ -222,6 +223,7 @@ static bool home_added = false;
 #define DSKEL			"SKEL"
 #define DUSRSKEL		"USRSKEL"
 #define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL"
+#define DBTRFS_SUBVOLUME_HOME	"BTRFS_SUBVOLUME_HOME"
 #define DLOG_INIT		"LOG_INIT"
 
 /* local function prototypes */
@@ -456,6 +458,7 @@ get_defaults(const struct option_flags *flags)
 				def_usrtemplate = xstrdup(ccp);
 			}
 		}
+
 		/*
 		 * Create by default user mail spool or not ?
 		 */
@@ -464,6 +467,15 @@ get_defaults(const struct option_flags *flags)
 				ccp = "no";
 
 			def_create_mail_spool = xstrdup(ccp);
+		}
+
+		/*
+		 * Create home directories as Btrfs subvolumes by default?
+		 */
+		else if (streq(buf, DBTRFS_SUBVOLUME_HOME)) {
+			if (streq(ccp, ""))
+				ccp = "no";
+			def_btrfs_subvolume_home = xstrdup(ccp);
 		}
 
 		/*
@@ -500,6 +512,7 @@ static void show_defaults (void)
 	printf ("SKEL=%s\n", def_template);
 	printf ("USRSKEL=%s\n", def_usrtemplate);
 	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
+	printf ("BTRFS_SUBVOLUME_HOME=%s\n", def_btrfs_subvolume_home);
 	printf ("LOG_INIT=%s\n", def_log_init);
 }
 
@@ -523,6 +536,7 @@ set_defaults(void)
 	bool  out_skel = false;
 	bool  out_usrskel = false;
 	bool  out_create_mail_spool = false;
+	bool  out_btrfs_subvolume_home = false;
 	bool  out_log_init = false;
 	char  buf[1024];
 	char  *new_file = NULL;
@@ -639,6 +653,11 @@ set_defaults(void)
 			        DCREATE_MAIL_SPOOL "=%s\n",
 			        def_create_mail_spool);
 			out_create_mail_spool = true;
+		} else if (!out_btrfs_subvolume_home && streq(buf, DBTRFS_SUBVOLUME_HOME)) {
+			fprintf(ofp,
+			        DBTRFS_SUBVOLUME_HOME "=%s\n",
+			        def_btrfs_subvolume_home);
+			out_btrfs_subvolume_home = true;
 		} else if (!out_log_init && streq(buf, DLOG_INIT)) {
 			fprintf(ofp, DLOG_INIT "=%s\n", def_log_init);
 			out_log_init = true;
@@ -673,6 +692,8 @@ set_defaults(void)
 
 	if (!out_create_mail_spool)
 		fprintf (ofp, DCREATE_MAIL_SPOOL "=%s\n", def_create_mail_spool);
+	if (!out_btrfs_subvolume_home)
+		fprintf (ofp, DBTRFS_SUBVOLUME_HOME "=%s\n", def_btrfs_subvolume_home);
 	if (!out_log_init)
 		fprintf (ofp, DLOG_INIT "=%s\n", def_log_init);
 	/*
@@ -1430,6 +1451,9 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 			anyflag = true;
 		}
 	}
+
+	if (!subvolflg && strcaseeq(def_btrfs_subvolume_home, "yes"))
+		subvolflg = true;
 
 	if (!gflg && !Nflg && !Uflg) {
 		/* Get the settings from login.defs */
