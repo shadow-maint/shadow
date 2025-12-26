@@ -161,9 +161,8 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while ((c = getopt_long (argc, argv,
-	                         "c:ehmR:P:s:",
-	                         long_options, NULL)) != -1) {
+	while (-1 != (c = getopt_long(argc, argv, "c:ehmR:P:s:", long_options, NULL)))
+	{
 		switch (c) {
 		case 'c':
 			crypt_method = optarg;
