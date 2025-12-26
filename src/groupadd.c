@@ -40,6 +40,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
+#include "string/strcmp/streq.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
@@ -217,7 +218,7 @@ grp_update(void)
 	}
 #endif				/* SHADOWGRP */
 
-	if (user_list) {
+	if (user_list && !streq(user_list, "")) {
 		char  *u, *ul;
 
 		ul = user_list;

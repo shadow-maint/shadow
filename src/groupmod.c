@@ -259,8 +259,6 @@ grp_update(void)
 	}
 
 	if (user_list) {
-		char  *u, *ul;
-
 		if (!aflg) {
 			// requested to replace the existing groups
 			grp.gr_mem = xmalloc_T(1, char *);
@@ -282,18 +280,22 @@ grp_update(void)
 		}
 #endif				/* SHADOWGRP */
 
-		ul = user_list;
-		while (NULL != (u = strsep(&ul, ","))) {
-			if (prefix_getpwnam(u) == NULL) {
-				fprintf(stderr, _("Invalid member username %s\n"), u);
-				exit (E_GRP_UPDATE);
-			}
+		if (!streq(user_list, "")) {
+			char  *u, *ul;
 
-			grp.gr_mem = add_list(grp.gr_mem, u);
+			ul = user_list;
+			while (NULL != (u = strsep(&ul, ","))) {
+				if (prefix_getpwnam(u) == NULL) {
+					fprintf(stderr, _("Invalid member username %s\n"), u);
+					exit(E_GRP_UPDATE);
+				}
+
+				grp.gr_mem = add_list(grp.gr_mem, u);
 #ifdef	SHADOWGRP
-			if (NULL != osgrp)
-				sgrp.sg_mem = add_list(sgrp.sg_mem, u);
+				if (NULL != osgrp)
+					sgrp.sg_mem = add_list(sgrp.sg_mem, u);
 #endif				/* SHADOWGRP */
+			}
 		}
 	}
 
