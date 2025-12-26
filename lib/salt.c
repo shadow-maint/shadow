@@ -355,7 +355,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	bzero(result, GENSALT_SETTING_SIZE);
 
-	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "DES";
+	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
 	if (streq(method, "MD5")) {
 		MAGNUM(result, '1');
@@ -381,6 +381,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (streq(method, "SHA512")) {
+sha512:
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
@@ -388,11 +389,9 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 	} else if (!streq(method, "DES")) {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
-			   "Defaulting to DES.\n"),
+			   "Defaulting to SHA512.\n"),
 			 method);
-		salt_len = MAX_SALT_SIZE;
-		rounds = 0;
-		bzero(result, GENSALT_SETTING_SIZE);
+		goto sha512;
 	}
 
 #if USE_XCRYPT_GENSALT
