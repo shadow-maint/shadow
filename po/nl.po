@@ -232,8 +232,8 @@ msgid "%s: Could not set caps\n"
 msgstr "%s: Kon hoofdletters niet instellen\n"
 
 #, c-format
-msgid "%s: stpeprintf failed!\n"
-msgstr "%s: stpeprintf is mislukt!\n"
+msgid "%s: seprintf failed!\n"
+msgstr "%s: seprintf is mislukt!\n"
 
 #, c-format
 msgid "%s: open of %s failed: %s\n"

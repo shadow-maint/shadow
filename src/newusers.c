@@ -56,7 +56,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"

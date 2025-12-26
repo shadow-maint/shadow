@@ -205,7 +205,7 @@ msgstr "Tidak dapat mengalokasikan ruang untuk informasi konfigurasi.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: tidak dapat membuka berkas\n"
 
 #, fuzzy, c-format

@@ -32,7 +32,7 @@
 #include "shadow/gshadow/getsgnam.h"
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
