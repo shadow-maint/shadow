@@ -206,7 +206,7 @@ msgid "%s: Could not set caps\n"
 msgstr "Kujdes: grup i panjohur %s\n"
 
 #, fuzzy, c-format
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "Kujdes: grup i panjohur %s\n"
 
 #, fuzzy, c-format

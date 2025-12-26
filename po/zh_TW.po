@@ -224,7 +224,7 @@ msgstr "無法設定 %s 的名稱\n"
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s：無法打開檔案\n"
 
 #, fuzzy, c-format
