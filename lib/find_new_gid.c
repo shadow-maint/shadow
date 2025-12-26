@@ -14,11 +14,11 @@
 #include <errno.h>
 
 #include "alloc/calloc.h"
-#include "prototypes.h"
 #include "groupio.h"
 #include "getdef.h"
+#include "io/fprintf.h"
+#include "prototypes.h"
 #include "shadowlog.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -237,9 +237,7 @@ int find_new_gid (bool sys_group,
 	/* Create an array to hold all of the discovered GIDs */
 	used_gids = calloc_T(gid_max + 1, bool);
 	if (NULL == used_gids) {
-		fprintf (log_get_logfd(),
-			 _("%s: failed to allocate memory: %s\n"),
-			 log_get_progname(), strerrno());
+		fprinte(log_get_logfd(), "%s: calloc", log_get_progname());
 		return -1;
 	}
 
@@ -323,9 +321,9 @@ int find_new_gid (bool sys_group,
 						_("%s: Can't get unique system GID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -369,9 +367,9 @@ int find_new_gid (bool sys_group,
 							_("%s: Can't get unique system GID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -432,9 +430,9 @@ int find_new_gid (bool sys_group,
 						_("%s: Can't get unique GID (%s). "
 						  "Suppressing additional messages.\n"),
 						log_get_progname(), strerror (result));
-					SYSLOG ((LOG_ERR,
+					SYSLOG(LOG_ERR,
 						"Error checking available GIDs: %s",
-						strerror (result)));
+						strerror(result));
 					nospam = 1;
 				}
 				/*
@@ -478,9 +476,9 @@ int find_new_gid (bool sys_group,
 							_("%s: Can't get unique GID (%s). "
 							  "Suppressing additional messages.\n"),
 							log_get_progname(), strerror (result));
-						SYSLOG ((LOG_ERR,
+						SYSLOG(LOG_ERR,
 							"Error checking available GIDs: %s",
-							strerror (result)));
+							strerror(result));
 						nospam = 1;
 					}
 					/*
@@ -496,7 +494,7 @@ int find_new_gid (bool sys_group,
 	fprintf (log_get_logfd(),
 		_("%s: Can't get unique GID (no more available GIDs)\n"),
 		log_get_progname());
-	SYSLOG ((LOG_WARN, "no more available GIDs on the system"));
+	SYSLOG(LOG_WARN, "no more available GIDs on the system");
 	free (used_gids);
 	return -1;
 }

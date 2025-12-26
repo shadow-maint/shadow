@@ -25,6 +25,7 @@
 #include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
+#include "io/fprintf.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -38,7 +39,6 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
-#include "string/strerrno.h"
 #include "time/day_to_str.h"
 
 
@@ -210,23 +210,20 @@ static int new_password (const struct passwd *pw)
 
 		if (NULL == cipher) {
 			erase_pass (clear);
-			fprintf (stderr,
-			         _("%s: failed to crypt password with previous salt: %s\n"),
-			         Prog, strerrno());
-			SYSLOG ((LOG_INFO,
-			         "Failed to crypt password with previous salt of user '%s'",
-			         pw->pw_name));
+			eprinte(_("%s: failed to crypt password with previous salt"),
+			        Prog);
+			SYSLOG(LOG_INFO,
+			       "Failed to crypt password with previous salt of user '%s'",
+			       pw->pw_name);
 			return -1;
 		}
 
 		if (!streq(cipher, crypt_passwd)) {
 			erase_pass (clear);
 			strzero (cipher);
-			SYSLOG ((LOG_WARN, "incorrect password for %s",
-			         pw->pw_name));
+			SYSLOG(LOG_WARN, "incorrect password for %s", pw->pw_name);
 			(void) sleep (1);
-			(void) fprintf (stderr,
-			                _("Incorrect password for %s.\n"),
+			(void) eprintf(_("Incorrect password for %s.\n"),
 			                pw->pw_name);
 			return -1;
 		}
@@ -343,9 +340,8 @@ static int new_password (const struct passwd *pw)
 	memzero_a(pass);
 
 	if (NULL == cp) {
-		fprintf (stderr,
-		         _("%s: failed to crypt password with salt '%s': %s\n"),
-		         Prog, salt, strerrno());
+		eprinte(_("%s: failed to crypt password with salt '%s'"),
+		        Prog, salt);
 		return -1;
 	}
 
@@ -390,10 +386,9 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	    || (exp_status > 1)
 	    || (   (sp->sp_max >= 0)
 	        && (sp->sp_min > sp->sp_max))) {
-		(void) fprintf (stderr,
-		                _("The password for %s cannot be changed.\n"),
+		(void) eprintf(_("The password for %s cannot be changed.\n"),
 		                sp->sp_namp);
-		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
+		SYSLOG(LOG_WARN, "password locked for '%s'", sp->sp_namp);
 		closelog ();
 		fail_exit(E_NOPERM, process_selinux);
 	}
@@ -411,10 +406,9 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 		}
 
 		if (now < ok) {
-			(void) fprintf (stderr,
-			                _("The password for %s cannot be changed yet.\n"),
+			(void) eprintf(_("The password for %s cannot be changed yet.\n"),
 			                sp->sp_namp);
-			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", sp->sp_namp));
+			SYSLOG(LOG_WARN, "now < minimum age for '%s'", sp->sp_namp);
 			closelog ();
 			fail_exit(E_NOPERM, process_selinux);
 		}
@@ -455,7 +449,7 @@ static void print_status (const struct passwd *pw)
 		(void) printf ("%s %s\n",
 		               pw->pw_name, pw_status (pw->pw_passwd));
 	} else {
-		(void) fprintf(stderr, _("%s: malformed password data obtained for user %s\n"),
+		(void) eprintf(_("%s: malformed password data obtained for user %s\n"),
 		               Prog, pw->pw_name);
 	}
 }
@@ -467,16 +461,16 @@ fail_exit (int status, bool process_selinux)
 {
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
-			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
-			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -488,7 +482,7 @@ NORETURN
 static void
 oom (bool process_selinux)
 {
-	(void) fprintf (stderr, _("%s: out of memory\n"), Prog);
+	eprintf(_("%s: out of memory\n"), Prog);
 	fail_exit (E_FAILURE, process_selinux);
 }
 
@@ -500,34 +494,26 @@ oom (bool process_selinux)
 static void open_files(bool process_selinux)
 {
 	if (pw_lock () == 0) {
-		(void) fprintf (stderr,
-		                _("%s: cannot lock %s; try again later.\n"),
-		                Prog, pw_dbname ());
+		eprintf(_("%s: cannot lock %s; try again later.\n"), Prog, pw_dbname());
 		exit (E_PWDBUSY);
 	}
 	pw_locked = true;
 	if (pw_open (O_CREAT | O_RDWR) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: cannot open %s\n"),
-		                Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+		eprintf(_("%s: cannot open %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (E_MISSING, process_selinux);
 	}
 
 	if (!spw_file_present ())
 		return;
 	if (spw_lock () == 0) {
-		(void) fprintf (stderr,
-		                _("%s: cannot lock %s; try again later.\n"),
-		                Prog, spw_dbname ());
+		eprintf(_("%s: cannot lock %s; try again later.\n"), Prog, spw_dbname());
 		fail_exit (E_PWDBUSY, process_selinux);
 	}
 	spw_locked = true;
 	if (spw_open (O_CREAT | O_RDWR) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: cannot open %s\n"),
-		                Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
+		eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
+		SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 		fail_exit (E_FAILURE, process_selinux);
 	}
 }
@@ -542,33 +528,25 @@ static void close_files(bool process_selinux)
 {
 	if (spw_locked) {
 		if (spw_close (process_selinux) == 0) {
-			(void) fprintf (stderr,
-			                _("%s: failure while writing changes to %s\n"),
-			                Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			eprintf(_("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 			fail_exit (E_FAILURE, process_selinux);
 		}
 		if (spw_unlock (process_selinux) == 0) {
-			(void) fprintf (stderr,
-			                _("%s: failed to unlock %s\n"),
-			                Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 		spw_locked = false;
 	}
 	if (pw_close (process_selinux) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: failure while writing changes to %s\n"),
-		                Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		eprintf(_("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: failed to unlock %s\n"),
-		                Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -588,9 +566,8 @@ static char *update_crypt_pw (char *cp, bool process_selinux)
 
 	if (uflg && strprefix(cp, "!")) {
 		if (cp[1] == '\0') {
-			(void) fprintf (stderr,
-			                _("%s: unlocking the password would result in a passwordless account.\n"
-			                  "You should set a password with usermod -p to unlock the password of this account.\n"),
+			(void) eprintf(_("%s: unlocking the password would result in a passwordless account.\n"
+			                 "You should set a password with usermod -p to unlock the password of this account.\n"),
 			                Prog);
 			fail_exit (E_FAILURE, process_selinux);
 		} else {
@@ -621,8 +598,7 @@ static void update_noshadow(bool process_selinux)
 
 	pw = pw_locate (name);
 	if (NULL == pw) {
-		(void) fprintf (stderr,
-		                _("%s: user '%s' does not exist in %s\n"),
+		(void) eprintf(_("%s: user '%s' does not exist in %s\n"),
 		                Prog, name, pw_dbname ());
 		fail_exit (E_NOPERM, process_selinux);
 	}
@@ -633,8 +609,7 @@ static void update_noshadow(bool process_selinux)
 	}
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd, process_selinux);
 	if (pw_update (npw) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: failed to prepare the new %s entry '%s'\n"),
+		(void) eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, pw_dbname (), npw->pw_name);
 		fail_exit (E_FAILURE, process_selinux);
 	}
@@ -692,8 +667,7 @@ static void update_shadow(bool process_selinux)
 	}
 
 	if (spw_update (nsp) == 0) {
-		(void) fprintf (stderr,
-		                _("%s: failed to prepare the new %s entry '%s'\n"),
+		(void) eprintf(_("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, spw_dbname (), nsp->sp_namp);
 		fail_exit (E_FAILURE, process_selinux);
 	}
@@ -810,8 +784,7 @@ main(int argc, char **argv)
 				if (a2sl(&inact, optarg, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
+					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					usage (E_BAD_ARG);
 				}
@@ -830,8 +803,7 @@ main(int argc, char **argv)
 				if (a2sl(&age_min, optarg, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
+					eprintf(_("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
 					usage (E_BAD_ARG);
 				}
@@ -845,8 +817,7 @@ main(int argc, char **argv)
 				/* -r repository (files|nis|nisplus) */
 				/* only "files" supported for now */
 				if (!streq(optarg, "files")) {
-					fprintf (stderr,
-					         _("%s: repository %s not supported\n"),
+					eprintf(_("%s: repository %s not supported\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -868,8 +839,7 @@ main(int argc, char **argv)
 				if (a2sl(&warn, optarg, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
+					(void) eprintf(_("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);
 					usage (E_BAD_ARG);
 				}
@@ -880,8 +850,7 @@ main(int argc, char **argv)
 				if (a2sl(&age_max, optarg, NULL, 0, -1, LONG_MAX)
 				    == -1)
 				{
-					(void) fprintf (stderr,
-					                _("%s: invalid numeric argument '%s'\n"),
+					(void) eprintf(_("%s: invalid numeric argument '%s'\n"),
 					                Prog, optarg);
 					usage (E_BAD_ARG);
 				}
@@ -890,8 +859,7 @@ main(int argc, char **argv)
 				break;
 			case 's':
 				if (!amroot) {
-					(void) fprintf (stderr,
-					                _("%s: only root can use --stdin/-s option\n"),
+					(void) eprintf(_("%s: only root can use --stdin/-s option\n"),
 					                Prog);
 					usage (E_BAD_ARG);
 				}
@@ -911,17 +879,15 @@ main(int argc, char **argv)
 	 */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		(void) fprintf (stderr,
-		                _("%s: Cannot determine your user name.\n"),
-		                Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) getuid ()));
+		(void) eprintf(_("%s: Cannot determine your user name.\n"), Prog);
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
 	if (optind < argc) {
 		if (!is_valid_user_name (argv[optind])) {
-			fprintf (stderr, _("%s: Provided user name is not a valid name\n"), Prog);
+			eprintf(_("%s: Provided user name is not a valid name\n"), Prog);
 			fail_exit (E_NOPERM, process_selinux);
 		}
 		name = argv[optind];
@@ -945,9 +911,7 @@ main(int argc, char **argv)
 			usage (E_USAGE);
 		}
 		if (!amroot) {
-			(void) fprintf (stderr,
-			                _("%s: Permission denied.\n"),
-			                Prog);
+			(void) eprintf(_("%s: Permission denied.\n"), Prog);
 			exit (E_NOPERM);
 		}
 		prefix_setpwent ();
@@ -987,26 +951,23 @@ main(int argc, char **argv)
 	}
 
 	if (anyflag && !amroot) {
-		(void) fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		(void) eprintf(_("%s: Permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
 
 	pw = xprefix_getpwnam (name);
 	if (NULL == pw) {
-		(void) fprintf (stderr,
-		                _("%s: user '%s' does not exist\n"),
-		                Prog, name);
+		(void) eprintf(_("%s: user '%s' does not exist\n"), Prog, name);
 		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
 	/* only do this check when getuid()==0 because it's a pre-condition for
 	   changing a password without entering the old one */
 	if (amroot && (check_selinux_permit (Prog) != 0)) {
-		SYSLOG ((LOG_ALERT,
-		         "root is not authorized by SELinux to change the password of %s",
-		         name));
-		(void) fprintf(stderr,
-		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
+		SYSLOG(LOG_ALERT,
+		       "root is not authorized by SELinux to change the password of %s",
+		       name);
+		(void) eprintf(_("%s: root is not authorized by SELinux to change the password of %s\n"),
 		               Prog, name);
 		exit (E_NOPERM);
 	}
@@ -1017,12 +978,11 @@ main(int argc, char **argv)
 	 * check if I'm root.
 	 */
 	if (!amroot && (pw->pw_uid != getuid ())) {
-		(void) fprintf (stderr,
-		                _("%s: You may not view or modify password information for %s.\n"),
+		(void) eprintf(_("%s: You may not view or modify password information for %s.\n"),
 		                Prog, name);
-		SYSLOG ((LOG_WARN,
-		         "can't view or modify password information for %s",
-		         name));
+		SYSLOG(LOG_WARN,
+		       "can't view or modify password information for %s",
+		       name);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1039,8 +999,7 @@ main(int argc, char **argv)
 		sp = prefix_getspnam (name); /* !use_pam, no need for xprefix_getspnam */
 		if (NULL == sp) {
 			if (errno == EACCES) {
-				(void) fprintf (stderr,
-				                _("%s: Permission denied.\n"),
+				(void) eprintf(_("%s: Permission denied.\n"),
 				                Prog);
 				exit (E_NOPERM);
 			}
@@ -1069,8 +1028,7 @@ main(int argc, char **argv)
 			}
 
 			if (new_password (pw) != 0) {
-				(void) fprintf (stderr,
-				                _("The password for %s is unchanged.\n"),
+				(void) eprintf(_("The password for %s is unchanged.\n"),
 				                name);
 				closelog ();
 				exit (E_NOPERM);
@@ -1108,7 +1066,7 @@ main(int argc, char **argv)
 #endif				/* USE_PAM */
 	if (setuid (0) != 0) {
 		(void) fputs (_("Cannot change ID to root.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		SYSLOG(LOG_ERR, "can't setuid(0)");
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1120,7 +1078,7 @@ main(int argc, char **argv)
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
-	SYSLOG ((LOG_INFO, "password for '%s' changed by '%s'", name, myname));
+	SYSLOG(LOG_INFO, "password for '%s' changed by '%s'", name, myname);
 	closelog ();
 	if (!qflg) {
 		if (!anyflag) {
