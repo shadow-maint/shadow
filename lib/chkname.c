@@ -14,7 +14,7 @@
  *   false - bad name
  * errors:
  *   EINVAL	Invalid name
- *   EILSEQ	Invalid name character sequence (acceptable with --badname)
+ *   EILSEQ	Invalid name character sequence
  *   EOVERFLOW	Name longer than maximum size
  */
 
@@ -33,6 +33,7 @@
 
 #include "defines.h"
 #include "chkname.h"
+#include "ctype/ispfchar.h"
 #include "string/ctype/strchrisascii/strchriscntrl.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
@@ -42,9 +43,6 @@
 #ifndef  LOGIN_NAME_MAX
 # define LOGIN_NAME_MAX  256
 #endif
-
-
-int allow_bad_names = false;
 
 
 size_t
@@ -66,17 +64,14 @@ is_valid_name(const char *name)
 	if (streq(name, "")
 	 || streq(name, ".")
 	 || streq(name, "..")
+	 || strcaseeq(name, "all")     // access.conf(5)
+	 || strcaseeq(name, "except")  // access.conf(5)
+	 || strcaseeq(name, "none")    // access.conf(5)
 	 || strspn(name, "-")
-	 || strpbrk(name, " \"#',/:;")
-	 || strchriscntrl(name)
 	 || strisdigit(name))
 	{
 		errno = EINVAL;
 		return false;
-	}
-
-	if (allow_bad_names) {
-		return true;
 	}
 
 	/*
@@ -87,26 +82,16 @@ is_valid_name(const char *name)
 	 * sake of Samba 3.x "add machine script"
 	 */
 
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
+	if (!ispfchar(*name)) {
 		errno = EILSEQ;
 		return false;
 	}
 
 	while (!streq(++name, "")) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= 'A' && *name <= 'Z') ||
-		      (*name >= '0' && *name <= '9') ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
-		     ))
-		{
+		if (streq(name, "$"))  // Samba
+			return true;
+
+		if (!ispfchar(*name)) {
 			errno = EILSEQ;
 			return false;
 		}
