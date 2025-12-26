@@ -26,14 +26,14 @@
 
 #include "atoi/a2i.h"
 #include "defines.h"
-#include "prototypes.h"
-#include "getdef.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "getdef.h"
+#include "io/fprintf.h"
+#include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
 #include "string/memset/memzero.h"
-#include "string/strerrno.h"
 #include "string/strftime.h"
 
 
@@ -435,9 +435,7 @@ int main (int argc, char **argv)
 
 	/* Get the lastlog size */
 	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot get the size of %s: %s\n"),
-		        Prog, _PATH_LASTLOG, strerrno());
+		fprinte(stderr, _("%s: Cannot get the size of %s"), Prog, _PATH_LASTLOG);
 		exit (EXIT_FAILURE);
 	}
 
