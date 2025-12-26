@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -37,6 +35,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
+#include "time/date.h"
 
 
 #define IS_CRYPT_METHOD(str) ((crypt_method != NULL && streq(crypt_method, str)) ? true : false)
@@ -654,12 +653,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = gettime () / DAY;
-			if (0 == newsp.sp_lstchg) {
-				/* Better disable aging than requiring a
-				 * password change */
-				newsp.sp_lstchg = -1;
-			}
+			newsp.sp_lstchg = date_or_SDE();
 		}
 
 		if (   (NULL == sp)
