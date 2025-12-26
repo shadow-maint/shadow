@@ -48,15 +48,11 @@ struct option_flags {
 static const char Prog[] = "chgpasswd";
 static bool eflg   = false;
 static bool md5flg = false;
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 static bool sflg   = false;
-#endif /* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 
 static /*@null@*//*@observer@*/const char *crypt_method = NULL;
 #define cflg (NULL != crypt_method)
-#ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
-#endif
 #ifdef USE_BCRYPT
 static long bcrypt_rounds = 13;
 #endif
@@ -120,9 +116,7 @@ usage (int status)
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
 	                "NONE DES MD5"
-#if defined(USE_SHA_CRYPT)
 	                " SHA256 SHA512"
-#endif
 #if defined(USE_BCRYPT)
 	                " BCRYPT"
 #endif
@@ -136,11 +130,9 @@ usage (int status)
 	                "                                the MD5 algorithm\n"),
 	              usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
 	                "                                or YESCRYPT crypt algorithms\n"),
 	              usageout);
-#endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 	(void) fputs ("\n", usageout);
 
 	exit (status);
@@ -154,26 +146,18 @@ usage (int status)
 static void process_flags (int argc, char **argv, struct option_flags *flags)
 {
 	int c;
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	int bad_s;
-#endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 	static struct option long_options[] = {
 		{"crypt-method", required_argument, NULL, 'c'},
 		{"encrypted",    no_argument,       NULL, 'e'},
 		{"help",         no_argument,       NULL, 'h'},
 		{"md5",          no_argument,       NULL, 'm'},
 		{"root",         required_argument, NULL, 'R'},
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		{"sha-rounds",   required_argument, NULL, 's'},
-#endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
 		{NULL, 0, NULL, '\0'}
 	};
 	while ((c = getopt_long (argc, argv,
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	                         "c:ehmR:s:",
-#else
-	                         "c:ehmR:",
-#endif
 	                         long_options, NULL)) != -1) {
 		switch (c) {
 		case 'c':
@@ -191,7 +175,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
 			break;
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 		case 's':
 			sflg = true;
 			bad_s = 0;
@@ -202,12 +185,10 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				         Prog);
 				usage (E_USAGE);
 			}
-#if defined(USE_SHA_CRYPT)
 			if (  (   (streq(crypt_method, "SHA256") || streq(crypt_method, "SHA512"))
 			       && (-1 == str2sl(&sha_rounds, optarg)))) {
 				bad_s = 1;
 			}
-#endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
 			if (  (   streq(crypt_method, "BCRYPT")
 			       && (-1 == str2sl(&bcrypt_rounds, optarg)))) {
@@ -227,8 +208,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				usage (E_USAGE);
 			}
 			break;
-#endif				/* USE_SHA_CRYPT || USE_BCRYPT || USE_YESCRYPT */
-
 		default:
 			usage (E_USAGE);
 			/*@notreached@*/break;
@@ -246,14 +225,12 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
  */
 static void check_flags (void)
 {
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 	if (sflg && !cflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage (E_USAGE);
 	}
-#endif
 
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
@@ -267,10 +244,8 @@ static void check_flags (void)
 		if (   !streq(crypt_method, "DES")
 		    && !streq(crypt_method, "MD5")
 		    && !streq(crypt_method, "NONE")
-#ifdef USE_SHA_CRYPT
 		    && !streq(crypt_method, "SHA256")
 		    && !streq(crypt_method, "SHA512")
-#endif				/* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
 		    && !streq(crypt_method, "BCRYPT")
 #endif				/* USE_BCRYPT */
@@ -454,14 +429,11 @@ int main (int argc, char **argv)
 			if (md5flg) {
 				crypt_method = "MD5";
 			}
-#if defined(USE_SHA_CRYPT) || defined(USE_BCRYPT) || defined(USE_YESCRYPT)
 			if (sflg) {
-#if defined(USE_SHA_CRYPT)
 				if (   streq(crypt_method, "SHA256")
 					|| streq(crypt_method, "SHA512")) {
 					arg = &sha_rounds;
 				}
-#endif				/* USE_SHA_CRYPT */
 #if defined(USE_BCRYPT)
 				if (streq(crypt_method, "BCRYPT")) {
 					arg = &bcrypt_rounds;
@@ -473,7 +445,6 @@ int main (int argc, char **argv)
 				}
 #endif				/* USE_YESCRYPT */
 			}
-#endif
 			salt = crypt_make_salt (crypt_method, arg);
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
