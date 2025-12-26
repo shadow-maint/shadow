@@ -69,6 +69,7 @@ in the output of the previous step
 Additionally, you should also check the following internal guidelines to
 understand the project's development model:
 
+* [Use of AI](ai.md)
 * [Build & install](build_install.md)
 * [Coding style](coding_style.md)
 * [Tests](tests.md)
