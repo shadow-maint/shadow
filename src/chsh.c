@@ -15,6 +15,7 @@
 #include <getopt.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 
 #include "chkname.h"
@@ -547,7 +548,7 @@ int main (int argc, char **argv)
 		fail_exit (1, process_selinux);
 	}
 	if (!streq(loginsh, "")
-	    && (loginsh[0] != '/'
+	    && (!strspn(loginsh, "/")
 	        || is_restricted_shell (loginsh, process_selinux)
 	        || (access (loginsh, X_OK) != 0)))
 	{
