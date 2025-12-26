@@ -14,8 +14,7 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "atoi/strtoi/strtoi.h"
-#include "atoi/strtoi/strtou_noneg.h"
+#include "atoi/strton.h"
 
 
 static void test_strtoi(void **);

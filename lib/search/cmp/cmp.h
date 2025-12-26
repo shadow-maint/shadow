@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -9,78 +9,16 @@
 #include "config.h"
 
 
-#define CMP(T)                                                        \
-(                                                                     \
-	_Generic((T){},                                               \
-		int:            cmp_int,                              \
-		long:           cmp_long,                             \
-		unsigned int:   cmp_uint,                             \
-		unsigned long:  cmp_ulong                             \
-	)                                                             \
-)
-
-
 /* Compatible with bsearch(3), lfind(3), and qsort(3).  */
-inline int cmp_int(const void *key, const void *elt);
-inline int cmp_long(const void *key, const void *elt);
-inline int cmp_uint(const void *key, const void *elt);
-inline int cmp_ulong(const void *key, const void *elt);
-
-
-inline int
-cmp_int(const void *key, const void *elt)
-{
-	const int  *k = key;
-	const int  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
-
-
-inline int
-cmp_long(const void *key, const void *elt)
-{
-	const long  *k = key;
-	const long  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
-
-
-inline int
-cmp_uint(const void *key, const void *elt)
-{
-	const unsigned int  *k = key;
-	const unsigned int  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
-
-
-inline int
-cmp_ulong(const void *key, const void *elt)
-{
-	const unsigned long  *k = key;
-	const unsigned long  *e = elt;
-
-	if (*k < *e)
-		return -1;
-	if (*k > *e)
-		return +1;
-	return 0;
-}
+#define CMP(T)                                                        \
+((static inline int (const T *key, const T *elt))                     \
+{                                                                     \
+	if (*key < *elt)                                              \
+		return -1;                                            \
+	if (*key > *elt)                                              \
+		return +1;                                            \
+	return 0;                                                     \
+})
 
 
 #endif  // include guard

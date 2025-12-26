@@ -41,12 +41,8 @@ libshadow_la_SOURCES = \
 	atoi/a2i.h \
 	atoi/getnum.c \
 	atoi/getnum.h \
-	atoi/strtoi/strtoi.c \
-	atoi/strtoi/strtoi.h \
-	atoi/strtoi/strtou.c \
-	atoi/strtoi/strtou.h \
-	atoi/strtoi/strtou_noneg.c \
-	atoi/strtoi/strtou_noneg.h \
+	atoi/strton.c \
+	atoi/strton.h \
 	attr.h \
 	audit_help.c \
 	basename.c \
@@ -226,6 +222,8 @@ libshadow_la_SOURCES = \
 	string/strcpy/strncpy.h \
 	string/strcpy/strtcpy.c \
 	string/strcpy/strtcpy.h \
+	string/strdup/memdup.c \
+	string/strdup/memdup.h \
 	string/strdup/strdup.c \
 	string/strdup/strdup.h \
 	string/strdup/strndupa.c \

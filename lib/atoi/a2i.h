@@ -11,22 +11,18 @@
 #include <errno.h>
 #include <stddef.h>
 
-#include "atoi/strtoi/strtoi.h"
-#include "atoi/strtoi/strtou_noneg.h"
+#include "atoi/strton.h"
+#include "cast.h"
 #include "typetraits.h"
 
 
-// a2i - alpha to integer
-#define a2i(T, n, s, endp, base, min, max)                            \
-({                                                                    \
-	T            *n_ = n;                                         \
-	QChar_of(s)  **endp_ = endp;                                  \
-	T            min_ = min;                                      \
-	T            max_ = max;                                      \
-	                                                              \
+#define a2i_(T, QChar, ...)                                           \
+((static inline int                                                   \
+  (T *n, QChar *s, QChar **endp, int base, T min, T max))             \
+{                                                                     \
 	int  status;                                                  \
 	                                                              \
-	*n_ = _Generic((T){},                                         \
+	*n = _Generic(T,                                              \
 		short:              strtoi_,                          \
 		int:                strtoi_,                          \
 		long:               strtoi_,                          \
@@ -35,12 +31,16 @@
 		unsigned int:       strtou_noneg,                     \
 		unsigned long:      strtou_noneg,                     \
 		unsigned long long: strtou_noneg                      \
-	)(s, (char **) endp_, base, min_, max_, &status);             \
+	)(s, endp, base, min, max, &status);                          \
 	                                                              \
 	if (status != 0)                                              \
 		errno = status;                                       \
-	-!!status;                                                    \
-})
+	return -!!status;                                             \
+}(__VA_ARGS__))
+
+
+// a2i - alpha to integer
+#define a2i(T, n, s, ...)  a2i_(T, QChar_of(s), n, s, __VA_ARGS__)
 
 
 #define a2sh(...)   a2i(short, __VA_ARGS__)
