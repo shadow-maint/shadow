@@ -51,7 +51,6 @@
 #define B_ROUNDS_MAX 31
 #endif /* USE_BCRYPT */
 
-#ifdef USE_SHA_CRYPT
 /* Fixed salt len for sha{256,512}crypt. */
 #define SHA_CRYPT_SALT_SIZE 16
 /* Default number of rounds if not explicitly specified.  */
@@ -60,7 +59,6 @@
 #define SHA_ROUNDS_MIN 1000
 /* Maximum number of rounds.  */
 #define SHA_ROUNDS_MAX 999999999
-#endif
 
 #ifdef USE_YESCRYPT
 /*
@@ -93,10 +91,8 @@
 #if !USE_XCRYPT_GENSALT
 static /*@observer@*/const char *gensalt (size_t salt_size);
 #endif /* !USE_XCRYPT_GENSALT */
-#ifdef USE_SHA_CRYPT
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds);
 static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long rounds);
-#endif /* USE_SHA_CRYPT */
 #ifdef USE_BCRYPT
 static /*@observer@*/unsigned long BCRYPT_get_salt_rounds (/*@null@*/const int *prefered_rounds);
 static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long rounds);
@@ -107,7 +103,6 @@ static /*@observer@*/void YESCRYPT_salt_cost_to_buf (char *buf, unsigned long co
 #endif /* USE_YESCRYPT */
 
 
-#ifdef USE_SHA_CRYPT
 /* Return the the rounds number for the SHA crypt methods. */
 static /*@observer@*/unsigned long SHA_get_salt_rounds (/*@null@*/const int *prefered_rounds)
 {
@@ -179,7 +174,6 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 
 	(void) snprintf (buf + buf_begin, 18, "rounds=%lu$", rounds);
 }
-#endif /* USE_SHA_CRYPT */
 
 #ifdef USE_BCRYPT
 /* Return the the rounds number for the BCRYPT method. */
@@ -392,7 +386,6 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = YESCRYPT_get_salt_cost (arg);
 		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
-#ifdef USE_SHA_CRYPT
 	} else if (streq(method, "SHA256")) {
 		MAGNUM(result, '5');
 		salt_len = SHA_CRYPT_SALT_SIZE;
@@ -403,7 +396,6 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
-#endif /* USE_SHA_CRYPT */
 	} else if (!streq(method, "DES")) {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"

@@ -256,8 +256,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
-	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
-	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
@@ -270,8 +269,7 @@
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    <phrase condition="no_pam">ENCRYPT_METHOD
 	    MD5_CRYPT_ENAB </phrase>
-	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
-	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
@@ -293,8 +291,7 @@
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
-	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
-	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
@@ -399,8 +396,7 @@
 	    MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
 	    HOME_MODE
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
-	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
-	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN
 	    SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN
 	    SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN
@@ -418,8 +414,7 @@
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB
 	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN
-	    <phrase condition="sha_crypt">SHA_CRYPT_MAX_ROUNDS
-	    SHA_CRYPT_MIN_ROUNDS</phrase>
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
 	</listitem>
