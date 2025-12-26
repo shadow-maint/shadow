@@ -479,10 +479,12 @@ int main (int argc, char **argv)
 	while (fgets(buf, sizeof(buf), stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
-			fprintf (stderr, _("%s: line %jd: line too long\n"),
-			         Prog, line);
-			errors = true;
-			continue;
+			if (feof(stdin) == 0) {
+				fprintf (stderr, _("%s: line %jd: line too long\n"),
+				         Prog, line);
+				errors = true;
+				continue;
+			}
 		}
 
 		/*
