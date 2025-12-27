@@ -108,10 +108,10 @@
       <title>Hints for user passwords</title>
       <para>
 	The security of a password depends on the strength of the
-	encryption algorithm and the size of the key space. The legacy
-	<emphasis>UNIX</emphasis> System encryption method is based on the
-	NBS DES algorithm. More recent methods are now recommended (see
-	<option>ENCRYPT_METHOD</option>). The size of the key space
+	hashing method and the size of the key space.
+	The hashing method can be selected with
+	<option>ENCRYPT_METHOD</option>.
+	The size of the key space
 	depends on the randomness of the selected password.
       </para>
 
