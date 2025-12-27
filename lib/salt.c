@@ -355,14 +355,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	bzero(result, GENSALT_SETTING_SIZE);
 
-	if (NULL != meth)
-		method = meth;
-	else {
-		method = getdef_str ("ENCRYPT_METHOD");
-		if (NULL == method) {
-			method = "SHA512";
-		}
-	}
+	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
 	if (streq(method, "MD5")) {
 		MAGNUM(result, '1');
