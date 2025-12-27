@@ -51,7 +51,6 @@ struct option_flags {
  */
 static const char Prog[] = "chpasswd";
 static bool eflg   = false;
-static bool md5flg = false;
 static bool sflg   = false;
 
 static /*@null@*//*@observer@*/const char *crypt_method = NULL;
@@ -128,9 +127,6 @@ usage (int status)
 	               );
 	(void) fputs (_("  -e, --encrypted               supplied passwords are encrypted\n"), usageout);
 	(void) fputs (_("  -h, --help                    display this help message and exit\n"), usageout);
-	(void) fputs (_("  -m, --md5                     encrypt the clear text password using\n"
-	                "                                the MD5 algorithm\n"),
-	              usageout);
 	(void) fputs (_("  -R, --root CHROOT_DIR         directory to chroot into\n"), usageout);
 	(void) fputs (_("  -P, --prefix PREFIX_DIR       directory prefix\n"), usageout);
 	(void) fputs (_("  -s, --sha-rounds              number of rounds for the SHA, BCRYPT\n"
@@ -154,14 +150,13 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		{"crypt-method", required_argument, NULL, 'c'},
 		{"encrypted",    no_argument,       NULL, 'e'},
 		{"help",         no_argument,       NULL, 'h'},
-		{"md5",          no_argument,       NULL, 'm'},
 		{"root",         required_argument, NULL, 'R'},
 		{"prefix",       required_argument, NULL, 'P'},
 		{"sha-rounds",   required_argument, NULL, 's'},
 		{NULL, 0, NULL, '\0'}
 	};
 
-	while (-1 != (c = getopt_long(argc, argv, "c:ehmR:P:s:", long_options, NULL)))
+	while (-1 != (c = getopt_long(argc, argv, "c:ehR:P:s:", long_options, NULL)))
 	{
 		switch (c) {
 		case 'c':
@@ -173,9 +168,6 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 		case 'h':
 			usage (E_SUCCESS);
 			/*@notreached@*/break;
-		case 'm':
-			md5flg = true;
-			break;
 		case 'R': /* no-op, handled in process_root_flag () */
 			flags->chroot = true;
 			break;
@@ -232,10 +224,9 @@ static void check_flags (void)
 		usage (E_USAGE);
 	}
 
-	if ((eflg && (md5flg || cflg)) ||
-	    (md5flg && cflg)) {
+	if (eflg && cflg) {
 		fprintf (stderr,
-		         _("%s: the -c, -e, and -m flags are exclusive\n"),
+		         _("%s: the -c and -e flags are exclusive\n"),
 		         Prog);
 		usage (E_USAGE);
 	}
@@ -353,9 +344,6 @@ static const char *get_salt(void)
 		return NULL;
 	}
 
-	if (md5flg) {
-		crypt_method = "MD5";
-	}
 	if (sflg) {
 		if (IS_CRYPT_METHOD("SHA256") || IS_CRYPT_METHOD("SHA512")) {
 			arg = &sha_rounds;
@@ -411,7 +399,7 @@ int main (int argc, char **argv)
 	prefix = process_prefix_flag ("-P", argc, argv);
 
 #ifdef USE_PAM
-	if (md5flg || eflg || cflg || prefix[0]) {
+	if (eflg || cflg || prefix[0]) {
 		use_pam = false;
 	}
 #endif				/* USE_PAM */

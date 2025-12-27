@@ -75,13 +75,13 @@
       The default encryption algorithm can be defined for the system with
       the <option>ENCRYPT_METHOD</option> variable of
       <filename>/etc/login.defs</filename>, and can be overwritten with the
-      <option>-e</option>, <option>-m</option>, or <option>-c</option>
+      <option>-e</option> or <option>-c</option>
       options.
     </para>
     <para condition="pam">
       By default, passwords are encrypted by PAM, but (even if not
       recommended) you can select a different encryption method with the
-      <option>-e</option>, <option>-m</option>, or <option>-c</option>
+      <option>-e</option> or <option>-c</option>
       options.
     </para>
     <para>
@@ -131,8 +131,8 @@
 	    By default, PAM is used to encrypt the passwords.
 	  </para>
 	  <para condition="no_pam">
-	    By default (if none of the <option>-c</option>,
-	    <option>-m</option>, or <option>-e</option> options are
+	    By default (if none of the <option>-c</option>
+	    or <option>-e</option> options are
 	    specified), the encryption method is defined by the 
 	    <option>ENCRYPT_METHOD</option> variable of
 	    <filename>/etc/login.defs</filename>.
@@ -155,15 +155,6 @@
       </varlistentry>
     </variablelist>
     <variablelist remap='IP'>
-      <varlistentry>
-	<term><option>-m</option>, <option>--md5</option></term>
-	<listitem>
-	  <para>
-	    Use MD5 encryption instead of DES when the supplied passwords are
-	    not encrypted.
-	  </para>
-	</listitem>
-      </varlistentry>
       <varlistentry>
 	<term>
 	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
