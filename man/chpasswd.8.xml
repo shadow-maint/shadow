@@ -8,7 +8,6 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY BCRYPT_MIN_ROUNDS     SYSTEM "login.defs.d/BCRYPT_MIN_ROUNDS.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
-<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
 <!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
@@ -74,8 +73,7 @@
     </para>
     <para condition="no_pam">
       The default encryption algorithm can be defined for the system with
-      the <option>ENCRYPT_METHOD</option> or
-      <option>MD5_CRYPT_ENAB</option> variables of
+      the <option>ENCRYPT_METHOD</option> variable of
       <filename>/etc/login.defs</filename>, and can be overwritten with the
       <option>-e</option>, <option>-m</option>, or <option>-c</option>
       options.
@@ -136,8 +134,7 @@
 	    By default (if none of the <option>-c</option>,
 	    <option>-m</option>, or <option>-e</option> options are
 	    specified), the encryption method is defined by the 
-	    <option>ENCRYPT_METHOD</option> or
-	    <option>MD5_CRYPT_ENAB</option> variables of
+	    <option>ENCRYPT_METHOD</option> variable of
 	    <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
@@ -262,7 +259,6 @@
     </para>
     <variablelist condition="no_pam">
       &ENCRYPT_METHOD;
-      &MD5_CRYPT_ENAB;
     </variablelist>
     <variablelist>
       &BCRYPT_MIN_ROUNDS; <!--documents also BCRYPT_MAX_ROUNDS-->

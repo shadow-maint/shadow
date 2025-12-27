@@ -42,7 +42,6 @@
 <!ENTITY MAIL_CHECK_ENAB       SYSTEM "login.defs.d/MAIL_CHECK_ENAB.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY MOTD_FILE             SYSTEM "login.defs.d/MOTD_FILE.xml">
 <!ENTITY NOLOGINS_FILE         SYSTEM "login.defs.d/NOLOGINS_FILE.xml">
 <!ENTITY NONEXISTENT           SYSTEM "login.defs.d/NONEXISTENT.xml">
@@ -182,7 +181,6 @@
       &MAIL_CHECK_ENAB;
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
-      &MD5_CRYPT_ENAB;
       &MOTD_FILE;
       &NOLOGINS_FILE;
       &NONEXISTENT;
@@ -255,7 +253,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -267,8 +265,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    <phrase condition="no_pam">ENCRYPT_METHOD
-	    MD5_CRYPT_ENAB </phrase>
+	    <phrase condition="no_pam">ENCRYPT_METHOD</phrase>
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -290,7 +287,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>
 	  </para>
@@ -392,7 +389,7 @@
 	    BCRYPT_MIN_ROUNDS</phrase>
 	    ENCRYPT_METHOD
 	    GID_MAX GID_MIN
-	    MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    MAX_MEMBERS_PER_GROUP
 	    HOME_MODE
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
@@ -411,7 +408,7 @@
 	  <para>
 	    <phrase condition="bcrypt">BCRYPT_MAX_ROUNDS
 	    BCRYPT_MIN_ROUNDS</phrase>
-	    ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB
+	    ENCRYPT_METHOD OBSCURE_CHECKS_ENAB
 	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN
 	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	    <phrase condition="yescrypt">YESCRYPT_COST_FACTOR</phrase>

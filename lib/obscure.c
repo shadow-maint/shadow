@@ -215,11 +215,7 @@ obscure_get_range(int *minlen, int *maxlen)
 	}
 
 	method = getdef_str ("ENCRYPT_METHOD");
-	if (NULL == method) {
-		if (getdef_bool ("MD5_CRYPT_ENAB")) {
-			return;
-		}
-	} else {
+	if (NULL != method) {
 		if (   streq(method, "MD5")
 		    || streq(method, "SHA256")
 		    || streq(method, "SHA512")
