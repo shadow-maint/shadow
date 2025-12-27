@@ -50,7 +50,7 @@ is_valid_hash(const char *hash)
 		return true;
 
 	// Minimum hash length
-	if (strlen(hash) < 13)
+	if (strlen(hash) < 27)
 		return false;
 
 	// Yescrypt: $y$ + algorithm parameters + $ + salt + $ + 43-char hash
