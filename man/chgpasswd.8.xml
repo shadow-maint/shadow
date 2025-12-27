@@ -69,8 +69,8 @@
     <para>
       The default encryption algorithm can be defined for the system with
       the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>,
-      and can be overwritten with the <option>-e</option>,
-      <option>-m</option>, or <option>-c</option> options.
+      and can be overwritten with the <option>-e</option>
+      or <option>-c</option> options.
     </para>
     <para>
       This command is intended to be used in a large system environment
@@ -113,15 +113,6 @@
 	<term><option>-h</option>, <option>--help</option></term>
 	<listitem>
 	  <para>Display help message and exit.</para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>-m</option>, <option>--md5</option></term>
-	<listitem>
-	  <para>
-	    Use MD5 encryption instead of DES when the supplied passwords are
-	    not encrypted.
-	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

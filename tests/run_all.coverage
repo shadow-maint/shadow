@@ -257,14 +257,11 @@ run_test ./grouptools/chgpasswd/04_chgpasswd_no_gshadow_entry/chgpasswd.test
 run_test ./grouptools/chgpasswd/05_chgpasswd_error_no_password/chgpasswd.test
 run_test ./grouptools/chgpasswd/06_chgpasswd_usage/chgpasswd.test
 run_test ./grouptools/chgpasswd/07_chgpasswd_usage_bad_option/chgpasswd.test
-run_test ./grouptools/chgpasswd/08_chgpasswd_usage-e-m_exclusive/chgpasswd.test
 run_test ./grouptools/chgpasswd/09_chgpasswd_usage-e-c_exclusive/chgpasswd.test
-run_test ./grouptools/chgpasswd/10_chgpasswd_usage-m-c_exclusive/chgpasswd.test
 run_test ./grouptools/chgpasswd/11_chgpasswd_usage-s_without-c/chgpasswd.test
 run_test ./grouptools/chgpasswd/12_chgpasswd_usage-s_invalid/chgpasswd.test
 run_test ./grouptools/chgpasswd/13_chgpasswd_usage-c_invalid/chgpasswd.test
 run_test ./grouptools/chgpasswd/14_chgpasswd_password_encrypted/chgpasswd.test
-run_test ./grouptools/chgpasswd/15_chgpasswd_password_md5/chgpasswd.test
 run_test ./grouptools/chgpasswd/16_chgpasswd_password_NONE/chgpasswd.test
 run_test ./grouptools/chgpasswd/17_chgpasswd_password_MD5/chgpasswd.test
 run_test ./grouptools/chgpasswd/18_chgpasswd_password_DES/chgpasswd.test
@@ -930,7 +927,6 @@ run_test ./crypt/login.defs_DES/08_chgpasswd--crypt-method-MD5.test
 run_test ./crypt/login.defs_DES/09_chgpasswd--crypt-method-DES.test
 run_test ./crypt/login.defs_DES/10_chgpasswd--crypt-method-NONE.test
 run_test ./crypt/login.defs_DES/11_chgpasswd-e.test
-run_test ./crypt/login.defs_DES/12_chgpasswd-m.test
 if [ "$USE_PAM" != "yes" ]; then
 	run_test ./crypt/login.defs_MD5/01_chpasswd.test
 fi
