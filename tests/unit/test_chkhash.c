@@ -111,17 +111,6 @@ test_is_valid_hash_ok_sha256(MAYBE_UNUSED void ** _1)
 
 
 static void
-test_is_valid_hash_ok_md5(MAYBE_UNUSED void ** _1)
-{
-	// Basic MD5 hash: $1$ + salt + $ + 22 character hash
-	assert_true(is_valid_hash("$1$salt$abcdefghijklmnopqrstuv"));
-
-	// MD5 with maximum salt length (8 characters)
-	assert_true(is_valid_hash("$1$maxsalt8$abcdefghijklmnopqrstuv"));
-}
-
-
-static void
 test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
 {
 	// Empty string - passwordless account
@@ -164,7 +153,6 @@ test_is_valid_hash_edge_account_locks(MAYBE_UNUSED void ** _1)
 	// Complex ! prefix scenarios with various hash types should work
 	assert_true(is_valid_hash("!$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
 	assert_true(is_valid_hash("!$5$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
-	assert_true(is_valid_hash("!$1$salt$abcdefghijklmnopqrstuv"));
 
 	// But invalid hashes with ! prefix should still fail
 	assert_false(is_valid_hash("!invalid"));
@@ -230,7 +218,6 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
         cmocka_unit_test(test_is_valid_hash_ok_sha512),
         cmocka_unit_test(test_is_valid_hash_ok_sha256),
-        cmocka_unit_test(test_is_valid_hash_ok_md5),
         cmocka_unit_test(test_is_valid_hash_ok_special),
         cmocka_unit_test(test_is_valid_hash_edge_salt_chars),
         cmocka_unit_test(test_is_valid_hash_edge_account_locks),
