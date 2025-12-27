@@ -301,7 +301,7 @@ extern int do_pam_passwd_non_interactive (const char *pam_service,
 
 /* obscure.c */
 extern bool obscure (const char *, const char *);
-extern void obscure_get_range(int *);
+extern size_t pass_min_len(void);
 
 /* pam_pass.c */
 #ifdef USE_PAM

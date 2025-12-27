@@ -244,13 +244,10 @@ static int new_password (const struct passwd *pw)
 	 * tests. This provides an escape for initial login passwords.
 	 */
 	if (!qflg && !sflg) {
-		int  pass_min_len;
-
-		obscure_get_range(&pass_min_len);
 		printf(_(
-"Enter the new password (minimum of %d characters)\n"
+"Enter the new password (minimum of %zu characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"),
-		       pass_min_len);
+		       pass_min_len());
 	}
 
 	if (sflg) {
