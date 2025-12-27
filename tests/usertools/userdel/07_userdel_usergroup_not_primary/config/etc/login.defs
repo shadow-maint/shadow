@@ -250,22 +250,10 @@ USERGROUPS_ENAB yes
 #CONSOLE_GROUPS		floppy:audio:cdrom
 
 #
-# If set to "yes", new passwords will be encrypted using the MD5-based
-# algorithm compatible with the one used by recent releases of FreeBSD.
-# It supports passwords of unlimited length and longer salt strings.
-# Set to "no" if you need to copy encrypted passwords to other systems
-# which don't understand the new algorithm.  Default is "no".
-#
-# This variable is deprecated. You should use ENCRYPT_METHOD.
-#
-#MD5_CRYPT_ENAB	no
-
-#
 # If set to MD5 , MD5-based algorithm will be used for encrypting password
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to DES, DES-based algorithm will be used for encrypting password (default)
-# Overrides the MD5_CRYPT_ENAB option
 #
 # Note: It is recommended to use a value consistent with
 # the PAM modules configuration.

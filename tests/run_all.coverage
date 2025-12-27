@@ -924,7 +924,6 @@ run_test ./cktools/pwck/30_pwck_NIS_entries/pwck.test
 run_test ./cktools/pwck/31_pwck_shadow_entry_passwd_no_x/pwck.test
 run_test ./cktools/pwck/32_pwck_quiet/pwck.test
 if [ "$USE_PAM" != "yes" ]; then
-	run_test ./crypt/login.defs_DES-MD5_CRYPT_ENAB/01_chpasswd.test
 	run_test ./crypt/login.defs_DES/01_chpasswd.test
 	run_test ./crypt/login.defs_DES/02_chpasswd--crypt-method-MD5.test
 	run_test ./crypt/login.defs_DES/03_chpasswd--crypt-method-DES.test
@@ -940,10 +939,8 @@ run_test ./crypt/login.defs_DES/11_chgpasswd-e.test
 run_test ./crypt/login.defs_DES/12_chgpasswd-m.test
 if [ "$USE_PAM" != "yes" ]; then
 	run_test ./crypt/login.defs_MD5/01_chpasswd.test
-	run_test ./crypt/login.defs_MD5_CRYPT_ENAB/01_chpasswd.test
 fi
 run_test ./crypt/login.defs_MD5/02_chgpasswd.test
-run_test ./crypt/login.defs_MD5_CRYPT_ENAB/02_chgpasswd.test
 if [ "$USE_PAM" != "yes" ]; then
 	run_test ./crypt/login.defs_SHA256-round-max/01_chpasswd.test
 	run_test ./crypt/login.defs_SHA256-round-min-max/01_chpasswd.test
