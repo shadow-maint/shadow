@@ -1,0 +1,12 @@
+<!--
+   SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+   SPDX-License-Identifier: BSD-3-Clause
+-->
+<varlistentry condition="no_pam">
+  <term><option>PASS_MIN_LEN</option> (number)</term>
+  <listitem>
+    <para>
+      Minimum allowed length of a password.
+    </para>
+  </listitem>
+</varlistentry>

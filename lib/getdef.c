@@ -63,7 +63,6 @@ struct itemdef {
 	{"OBSCURE_CHECKS_ENAB", NULL},		\
 	{"PASS_ALWAYS_WARN", NULL},		\
 	{"PASS_CHANGE_TRIES", NULL},		\
-	{"PASS_MAX_LEN", NULL},			\
 	{"PASS_MIN_LEN", NULL},			\
 	{"PORTTIME_CHECKS_ENAB", NULL},		\
 	{"QUOTAS_ENAB", NULL},			\
