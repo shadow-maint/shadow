@@ -73,10 +73,6 @@ is_valid_hash(const char *hash)
 	if (match_regex("^\\$1\\$[^$:\n]{1,8}\\$[./A-Za-z0-9]{22}$", hash))
 		return true;
 
-	// DES: exactly 13 characters from [A-Za-z0-9./]
-	if (match_regex("^[./A-Za-z0-9]{13}$", hash))
-		return true;
-
 	// Not a valid hash
 	return false;
 }
