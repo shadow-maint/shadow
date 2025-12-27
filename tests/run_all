@@ -247,7 +247,6 @@ run_test ./grouptools/chgpasswd/12_chgpasswd_usage-s_invalid/chgpasswd.test
 run_test ./grouptools/chgpasswd/13_chgpasswd_usage-c_invalid/chgpasswd.test
 run_test ./grouptools/chgpasswd/14_chgpasswd_password_encrypted/chgpasswd.test
 run_test ./grouptools/chgpasswd/16_chgpasswd_password_NONE/chgpasswd.test
-run_test ./grouptools/chgpasswd/17_chgpasswd_password_MD5/chgpasswd.test
 run_test ./grouptools/chgpasswd/19_chgpasswd_password_SHA256/chgpasswd.test
 run_test ./grouptools/chgpasswd/20_chgpasswd_password_SHA256_rounds_900/chgpasswd.test
 run_test ./grouptools/chgpasswd/21_chgpasswd_password_SHA256_rounds_9000/chgpasswd.test
@@ -664,7 +663,6 @@ if [ "$USE_PAM" = "yes" ]; then
 	run_test ./usertools/chpasswd-PAM/13_chpasswd_usage-c_invalid/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/14_chpasswd_password_encrypted/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/16_chpasswd_password_NONE/chpasswd.test
-	run_test ./usertools/chpasswd-PAM/17_chpasswd_password_MD5/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/19_chpasswd_password_SHA256/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/20_chpasswd_password_SHA256_rounds_900/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/21_chpasswd_password_SHA256_rounds_9000/chpasswd.test
@@ -898,10 +896,6 @@ run_test ./cktools/pwck/30_pwck_NIS_entries/pwck.test
 run_test ./cktools/pwck/31_pwck_shadow_entry_passwd_no_x/pwck.test
 run_test ./cktools/pwck/32_pwck_quiet/pwck.test
 if [ "$USE_PAM" != "yes" ]; then
-	run_test ./crypt/login.defs_MD5/01_chpasswd.test
-fi
-run_test ./crypt/login.defs_MD5/02_chgpasswd.test
-if [ "$USE_PAM" != "yes" ]; then
 	run_test ./crypt/login.defs_SHA256-round-max/01_chpasswd.test
 	run_test ./crypt/login.defs_SHA256-round-min-max/01_chpasswd.test
 	run_test ./crypt/login.defs_SHA256-round-min/01_chpasswd.test
@@ -952,7 +946,6 @@ run_test ./newusers/34_update_password_no_shadow/newusers.test
 run_test ./newusers/35_read_from_stdin/newusers.test
 if [ "$USE_PAM" != "yes" ]; then
 	run_test ./newusers/36_create_user_encrypted/newusers.test
-	run_test ./newusers/37_create_user_encrypt_MD5/newusers.test
 	run_test ./newusers/38_update_password_no_shadow_encrypted/newusers.test
 	run_test ./newusers/39_update_password_no_shadow_password_encrypted/newusers.test
 	run_test ./newusers/40_update_password_encrypted/newusers.test
@@ -961,19 +954,11 @@ if [ "$USE_PAM" != "yes" ]; then
 	run_test ./newusers/43_create_user_encrypt_SHA256_rounds_3000/newusers.test
 	run_test ./newusers/44_create_user_encrypt_SHA256_rounds_300/newusers.test
 	run_test ./newusers/45_create_user_encrypt_rounds_3000/newusers.test
-	run_test ./newusers/46_create_user_encrypt_MD5_ignore_rounds_3000/newusers.test
 else
-
-	run_test ./newusers/37_create_user_encrypt_MD5-PAM/newusers.test
-
-
-
 	run_test ./newusers/41_create_user_encrypt_SHA256-PAM/newusers.test
 	run_test ./newusers/42_create_user_encrypt_SHA512-PAM/newusers.test
 	run_test ./newusers/43_create_user_encrypt_SHA256_rounds_3000-PAM/newusers.test
 	run_test ./newusers/44_create_user_encrypt_SHA256_rounds_300-PAM/newusers.test
-
-
 fi
 run_test ./newusers/47_create_user_error_UID_4294967295/newusers.test
 run_test ./newusers/48_create_user_error_GID_4294967295/newusers.test

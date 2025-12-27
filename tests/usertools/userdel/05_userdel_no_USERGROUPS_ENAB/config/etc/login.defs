@@ -250,7 +250,6 @@ USERGROUPS_ENAB no
 #CONSOLE_GROUPS		floppy:audio:cdrom
 
 #
-# If set to MD5 , MD5-based algorithm will be used for encrypting password
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 #
