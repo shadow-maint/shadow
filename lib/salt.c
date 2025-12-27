@@ -386,7 +386,7 @@ sha512:
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
-	} else if (!streq(method, "DES")) {
+	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to SHA512.\n"),
@@ -395,18 +395,6 @@ sha512:
 	}
 
 #if USE_XCRYPT_GENSALT
-	/*
-	 * Prepare DES setting for crypt_gensalt(), if result
-	 * has not been filled with anything previously.
-	 */
-	if (streq(result, "")) {
-		/* Avoid -Wunused-but-set-variable. */
-		salt_len = GENSALT_SETTING_SIZE - 1;
-		rounds = 0;
-		memset(result, '.', salt_len);
-		stpcpy(&result[salt_len], "");
-	}
-
 	char *retval = crypt_gensalt (result, rounds, NULL, 0);
 
 	/* Should not happen, but... */

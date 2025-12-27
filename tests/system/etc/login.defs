@@ -306,13 +306,12 @@ CHFN_RESTRICT		rwh
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
 # If set to YESCRYPT, YESCRYPT-based algorithm will be used for encrypting password
-# If set to DES, DES-based algorithm will be used for encrypting password (default)
-# MD5 and DES should not be used for new hashes, see crypt(5) for recommendations.
+# MD5 should not be used for new hashes, see crypt(5) for recommendations.
 #
 # Note: If you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.
 #
-#ENCRYPT_METHOD DES
+#ENCRYPT_METHOD SHA512
 
 #
 # Only works if ENCRYPT_METHOD is set to SHA256 or SHA512.
