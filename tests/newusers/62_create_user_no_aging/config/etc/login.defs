@@ -274,12 +274,6 @@ PASS_CHANGE_TRIES	5
 PASS_ALWAYS_WARN	yes
 
 #
-# Number of significant characters in the password for crypt().
-# Default is 8, don't change unless your crypt() is better.
-#
-#PASS_MAX_LEN		8
-
-#
 # Require password before chfn(1)/chsh(1) can make any changes.
 #
 CHFN_AUTH		yes
