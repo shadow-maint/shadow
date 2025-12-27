@@ -295,12 +295,10 @@ CHFN_RESTRICT		rwh
 
 #
 # Only works if compiled with ENCRYPTMETHOD_SELECT defined:
-# If set to MD5, MD5-based algorithm will be used for encrypting password
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
 # If set to YESCRYPT, YESCRYPT-based algorithm will be used for encrypting password
-# MD5 should not be used for new hashes, see crypt(5) for recommendations.
 #
 # Note: if you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.

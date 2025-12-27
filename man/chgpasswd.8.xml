@@ -92,7 +92,6 @@
 	  <para>
 	    The available methods are <phrase condition="bcrypt">
 	    <replaceable>BCRYPT</replaceable>,</phrase>
-	    <replaceable>MD5</replaceable>,
 	    <replaceable>SHA256</replaceable>,
 	    <replaceable>SHA512</replaceable>,
 	    <phrase condition="yescrypt">

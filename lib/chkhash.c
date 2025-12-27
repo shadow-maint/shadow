@@ -69,10 +69,6 @@ is_valid_hash(const char *hash)
 	if (match_regex("^\\$5\\$(rounds=[1-9][0-9]{3,8}\\$)?[^$:\n]{1,16}\\$[./A-Za-z0-9]{43}$", hash))
 		return true;
 
-	// MD5: $1$ + salt + $ + 22-char hash
-	if (match_regex("^\\$1\\$[^$:\n]{1,8}\\$[./A-Za-z0-9]{22}$", hash))
-		return true;
-
 	// Not a valid hash
 	return false;
 }
