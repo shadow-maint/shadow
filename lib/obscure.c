@@ -56,7 +56,7 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 
 	/*
 	 * XXX - sometimes this fails when changing from a simple password
-	 * to a really long one (MD5).  For now, I just return success if
+	 * to a really long one.  For now, I just return success if
 	 * the new password is long enough.  Please feel free to suggest
 	 * something better...  --marekm
 	 */
