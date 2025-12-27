@@ -115,15 +115,12 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*@notnull@*/const char *old,
 	/*@notnull@*/const char *new)
 {
-	int maxlen, minlen;
-	size_t oldlen, newlen;
-	char *new1, *old1;
-	const char *msg;
+	int  minlen;
+	size_t  newlen;
 
-	oldlen = strlen (old);
 	newlen = strlen (new);
 
-	obscure_get_range(&minlen, &maxlen);
+	obscure_get_range(&minlen);
 
 	if (newlen < (size_t) minlen) {
 		return _("too short");
@@ -136,39 +133,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		return NULL;
 	}
 
-	msg = password_check(old, new);
-	if (NULL != msg) {
-		return msg;
-	}
-
-	if (maxlen == -1) {
-		return NULL;
-	}
-
-	/* The traditional crypt() truncates passwords to 8 chars.  It is
-	   possible to circumvent the above checks by choosing an easy
-	   8-char password and adding some random characters to it...
-	   Example: "password$%^&*123".  So check it again, this time
-	   truncated to the maximum length.  Idea from npasswd.  --marekm */
-
-	if (   (oldlen <= (size_t) maxlen)
-	    && (newlen <= (size_t) maxlen)) {
-		return NULL;
-	}
-
-	new1 = xstrdup (new);
-	old1 = xstrdup (old);
-	if (newlen > (size_t) maxlen)
-		stpcpy(&new1[maxlen], "");
-	if (oldlen > (size_t) maxlen)
-		stpcpy(&old1[maxlen], "");
-
-	msg = password_check(old1, new1);
-
-	freezero (new1, newlen);
-	freezero (old1, oldlen);
-
-	return msg;
+	return password_check(old, new);
 }
 
 /*
@@ -192,20 +157,17 @@ obscure(const char *old, const char *new)
 }
 
 /*
- * obscure_get_range - retrieve min and max password lengths
+ * obscure_get_range - retrieve min password length
  *
- *  Returns minimum and maximum allowed lengths of a password
+ *  Returns minimum allowed lengths of a password
  *  to pass obscure checks.
  */
 void
-obscure_get_range(int *minlen, int *maxlen)
+obscure_get_range(int *minlen)
 {
 	int        val;
 
 	/* Minimum length is 0, even if -1 is configured. */
 	val = getdef_num("PASS_MIN_LEN", 0);
 	*minlen = val == -1 ? 0 : val;
-
-	/* Maximum password length check is optional. */
-	*maxlen = -1;
 }
