@@ -19,12 +19,6 @@ else
 TCB_COND=no_tcb
 endif
 
-if USE_SHA_CRYPT
-SHA_CRYPT_COND=sha_crypt
-else
-SHA_CRYPT_COND=no_sha_crypt
-endif
-
 if USE_BCRYPT
 BCRYPT_COND=bcrypt
 else
@@ -62,7 +56,7 @@ if ENABLE_REGENERATE_MAN
 	fi
 
 man1/% man3/% man5/% man8/%: %.xml-config Makefile config.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(SHA_CRYPT_COND);$(BCRYPT_COND);$(YESCRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND);$(LASTLOG_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(TCB_COND);$(BCRYPT_COND);$(YESCRYPT_COND);$(SUBIDS_COND);$(VENDORDIR_COND);$(LASTLOG_COND)" \
 	            --param "man.authors.section.enabled" "0" \
 	            --stringparam "man.output.base.dir" "" \
 	            --stringparam vendordir "$(VENDORDIR)" \
