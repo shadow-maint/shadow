@@ -117,8 +117,7 @@ usage (int status)
 	                Prog);
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
-	                "NONE MD5"
-	                " SHA256 SHA512"
+	                "NONE SHA256 SHA512"
 #if defined(USE_BCRYPT)
 	                " BCRYPT"
 #endif
@@ -233,8 +232,7 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (!IS_CRYPT_METHOD("MD5")
-		    &&(!IS_CRYPT_METHOD("NONE"))
+		if (!IS_CRYPT_METHOD("NONE")
 		    &&(!IS_CRYPT_METHOD("SHA256"))
 		    &&(!IS_CRYPT_METHOD("SHA512"))
 #ifdef USE_BCRYPT

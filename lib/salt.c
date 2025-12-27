@@ -77,9 +77,6 @@
 #define Y_COST_MAX 11
 #endif
 
-/* Fixed salt len for md5crypt. */
-#define MD5_CRYPT_SALT_SIZE 8
-
 /* Generate salt of size salt_size. */
 #define MAX_SALT_SIZE 44
 #define MIN_SALT_SIZE 8
@@ -357,10 +354,11 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
-	if (streq(method, "MD5")) {
-		MAGNUM(result, '1');
-		salt_len = MD5_CRYPT_SALT_SIZE;
-		rounds = 0;
+	if (streq(method, "SHA256")) {
+		MAGNUM(result, '5');
+		salt_len = SHA_CRYPT_SALT_SIZE;
+		rounds = SHA_get_salt_rounds (arg);
+		SHA_salt_rounds_to_buf (result, rounds);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
@@ -375,11 +373,6 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = YESCRYPT_get_salt_cost (arg);
 		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
-	} else if (streq(method, "SHA256")) {
-		MAGNUM(result, '5');
-		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds (arg);
-		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (streq(method, "SHA512")) {
 sha512:
 		MAGNUM(result, '6');
