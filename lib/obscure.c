@@ -12,6 +12,7 @@
 
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -25,10 +26,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 
-
-#if WITH_LIBBSD == 0
-#include "freezero.h"
-#endif /* WITH_LIBBSD */
 
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
@@ -115,16 +112,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*@notnull@*/const char *old,
 	/*@notnull@*/const char *new)
 {
-	int  minlen;
-	size_t  newlen;
-
-	newlen = strlen (new);
-
-	obscure_get_range(&minlen);
-
-	if (newlen < (size_t) minlen) {
+	if (strlen(new) < pass_min_len())
 		return _("too short");
-	}
 
 	/*
 	 * Remaining checks are optional.
@@ -156,18 +145,12 @@ obscure(const char *old, const char *new)
 	return true;
 }
 
-/*
- * obscure_get_range - retrieve min password length
- *
- *  Returns minimum allowed lengths of a password
- *  to pass obscure checks.
- */
-void
-obscure_get_range(int *minlen)
+size_t
+pass_min_len(void)
 {
-	int        val;
+	int  val;
 
 	/* Minimum length is 0, even if -1 is configured. */
 	val = getdef_num("PASS_MIN_LEN", 0);
-	*minlen = val == -1 ? 0 : val;
+	return val == -1 ? 0 : val;
 }
