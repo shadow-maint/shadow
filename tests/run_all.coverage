@@ -678,14 +678,11 @@ if [ "$USE_PAM" = "yes" ]; then
 	run_test ./usertools/chpasswd-PAM/05_chpasswd_error_no_password/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/06_chpasswd_usage/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/07_chpasswd_usage_bad_option/chpasswd.test
-	run_test ./usertools/chpasswd-PAM/08_chpasswd_usage-e-m_exclusive/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/09_chpasswd_usage-e-c_exclusive/chpasswd.test
-	run_test ./usertools/chpasswd-PAM/10_chpasswd_usage-m-c_exclusive/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/11_chpasswd_usage-s_without-c/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/12_chpasswd_usage-s_invalid/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/13_chpasswd_usage-c_invalid/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/14_chpasswd_password_encrypted/chpasswd.test
-	run_test ./usertools/chpasswd-PAM/15_chpasswd_password_md5/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/16_chpasswd_password_NONE/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/17_chpasswd_password_MD5/chpasswd.test
 	run_test ./usertools/chpasswd-PAM/18_chpasswd_password_DES/chpasswd.test
@@ -714,9 +711,7 @@ else
 fi
 run_test ./usertools/chpasswd-PAM/06_chpasswd_usage/chpasswd.test
 run_test ./usertools/chpasswd-PAM/07_chpasswd_usage_bad_option/chpasswd.test
-run_test ./usertools/chpasswd-PAM/08_chpasswd_usage-e-m_exclusive/chpasswd.test
 run_test ./usertools/chpasswd-PAM/09_chpasswd_usage-e-c_exclusive/chpasswd.test
-run_test ./usertools/chpasswd-PAM/10_chpasswd_usage-m-c_exclusive/chpasswd.test
 run_test ./usertools/chpasswd-PAM/11_chpasswd_usage-s_without-c/chpasswd.test
 run_test ./usertools/chpasswd-PAM/12_chpasswd_usage-s_invalid/chpasswd.test
 run_test ./usertools/chpasswd-PAM/13_chpasswd_usage-c_invalid/chpasswd.test
@@ -929,7 +924,6 @@ if [ "$USE_PAM" != "yes" ]; then
 	run_test ./crypt/login.defs_DES/03_chpasswd--crypt-method-DES.test
 	run_test ./crypt/login.defs_DES/04_chpasswd--crypt-method-NONE.test
 	run_test ./crypt/login.defs_DES/05_chpasswd-e.test
-	run_test ./crypt/login.defs_DES/06_chpasswd-m.test
 fi
 run_test ./crypt/login.defs_DES/07_chgpasswd.test
 run_test ./crypt/login.defs_DES/08_chgpasswd--crypt-method-MD5.test
