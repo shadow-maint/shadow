@@ -201,7 +201,6 @@ void
 obscure_get_range(int *minlen, int *maxlen)
 {
 	int        val;
-	const char *method;
 
 	/* Minimum length is 0, even if -1 is configured. */
 	val = getdef_num("PASS_MIN_LEN", 0);
@@ -209,17 +208,4 @@ obscure_get_range(int *minlen, int *maxlen)
 
 	/* Maximum password length check is optional. */
 	*maxlen = -1;
-
-	if (!getdef_bool("OBSCURE_CHECKS_ENAB")) {
-		return;
-	}
-
-	method = getdef_str ("ENCRYPT_METHOD");
-	if (NULL == method)
-		return;
-
-	if (!streq(method, "DES"))
-		return;
-
-	*maxlen = getdef_num ("PASS_MAX_LEN", 8);
 }
