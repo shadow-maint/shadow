@@ -64,7 +64,7 @@
       <command>newgrp</command> and <command>sg</command> is that some
       shells treat <command>newgrp</command> specially, replacing themselves
       with a new instance of a shell that <command>newgrp</command> creates.
-      This doesn't happen with <command>sg</command>, so upon exit from a
+      This doesn't happen with <command>sg</command>, so upon exit from an
       <command>sg</command> command you are returned to your previous group
       ID.
     </para>

@@ -498,7 +498,7 @@ int main (int argc, char **argv)
 		if (argc > 0) {
 
 			/*
-			 * skip -c if specified so both forms work:
+			 * Skip -c if specified so both forms work:
 			 * "sg group -c command" (as in the man page) or
 			 * "sg group command" (as in the usage message).
 			 */
