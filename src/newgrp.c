@@ -72,7 +72,7 @@ static void usage (void)
 	if (is_newgrp) {
 		(void) fputs (_("Usage: newgrp [-] [group]\n"), stderr);
 	} else {
-		(void) fputs (_("Usage: sg group [[-c] command]\n"), stderr);
+		(void) fputs (_("Usage: sg [-] group [[-c] command]\n"), stderr);
 	}
 }
 
@@ -465,8 +465,8 @@ int main (int argc, char **argv)
 	 * The valid syntax are
 	 *      newgrp [-] [groupid]
 	 *      newgrp [-l] [groupid]
-	 *      sg [-]
-	 *      sg [-] groupid [[-c command]
+	 *      sg [-] groupid [[-c] command]
+	 *      sg [-l] groupid [[-c] command]
 	 */
 	if (   (argc > 0)
 	    && (   streq(argv[0], "-")
@@ -499,8 +499,7 @@ int main (int argc, char **argv)
 
 			/*
 			 * Skip -c if specified so both forms work:
-			 * "sg group -c command" (as in the man page) or
-			 * "sg group command" (as in the usage message).
+			 * "sg group -c command" or "sg group command".
 			 */
 			if ((argc > 1) && streq(argv[0], "-c")) {
 				command = argv[1];
