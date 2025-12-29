@@ -46,7 +46,10 @@
     <cmdsynopsis>
       <command>sg</command>
       <arg choice='opt'>- </arg>
-      <arg choice='opt'>group
+      <arg choice='plain'>
+        <replaceable>group</replaceable>
+      </arg>
+      <arg choice='opt'>
 	<arg choice='opt'>-c </arg>
 	command
       </arg>
