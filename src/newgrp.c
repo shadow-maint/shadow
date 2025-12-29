@@ -70,9 +70,9 @@ static void syslog_sg (const char *name, const char *group);
 static void usage (void)
 {
 	if (is_newgrp) {
-		(void) fputs (_("Usage: newgrp [-] [group]\n"), stderr);
+		(void) fputs (_("Usage: newgrp [-l|-] [group]\n"), stderr);
 	} else {
-		(void) fputs (_("Usage: sg [-] group [[-c] command]\n"), stderr);
+		(void) fputs (_("Usage: sg [-l|-] group [[-c] command]\n"), stderr);
 	}
 }
 
@@ -453,7 +453,7 @@ int main (int argc, char **argv)
 
 	/*
 	 * Parse the command line. There are two accepted flags. The first
-	 * is "-", which for newgrp means to re-create the entire
+	 * is "-l" or "-", which for newgrp means to re-create the entire
 	 * environment as though a login had been performed, and "-c", which
 	 * for sg causes a command string to be executed.
 	 *
@@ -463,10 +463,8 @@ int main (int argc, char **argv)
 	 * the login group ID of the current user.
 	 *
 	 * The valid syntax are
-	 *      newgrp [-] [groupid]
-	 *      newgrp [-l] [groupid]
-	 *      sg [-] groupid [[-c] command]
-	 *      sg [-l] groupid [[-c] command]
+	 *      newgrp [-l|-] [groupid]
+	 *      sg [-l|-] groupid [[-c] command]
 	 */
 	if (   (argc > 0)
 	    && (   streq(argv[0], "-")
