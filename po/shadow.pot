@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.18.0\n"
+"Project-Id-Version: shadow 4.19.0\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-04 22:45-0600\n"
+"POT-Creation-Date: 2025-12-30 14:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1565,7 +1565,7 @@ msgstr ""
 msgid "Usage: newgrp [-] [group]\n"
 msgstr ""
 
-msgid "Usage: sg group [[-c] command]\n"
+msgid "Usage: sg [-] group [[-c] command]\n"
 msgstr ""
 
 #, c-format
