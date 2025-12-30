@@ -69,9 +69,9 @@ static void
 usage(void)
 {
 	if (is_newgrp)
-		fputs(_("Usage: newgrp [-l|-] [group]\n"), stderr);
+		fputs(_("Usage: newgrp [-l] [-] [group]\n"), stderr);
 	else
-		fputs(_("Usage: sg [-l|-] group [[-c] command]\n"), stderr);
+		fputs(_("Usage: sg [-l] [-] group [[-c] command]\n"), stderr);
 }
 
 static bool ingroup(const char *name, struct group *gr)
@@ -447,7 +447,11 @@ main(int, char *argv[])
 	}
 	name = pwd->pw_name;
 
-	if (*argv != NULL && (streq(*argv, "-l") || streq(*argv, "-"))) {
+	if (*argv != NULL && streq(*argv, "-l")) {
+		argv++;
+		initflag = true;
+	}
+	if (*argv != NULL && streq(*argv, "-")) {
 		argv++;
 		initflag = true;
 	}
