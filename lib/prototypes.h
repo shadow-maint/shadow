@@ -177,7 +177,8 @@ extern void audit_help_open (void);
 #define AUDIT_NO_ID	((unsigned int) -1)
 typedef enum {
 	SHADOW_AUDIT_FAILURE = 0,
-	SHADOW_AUDIT_SUCCESS = 1} shadow_audit_result;
+	SHADOW_AUDIT_SUCCESS = 1
+} shadow_audit_result;
 extern void audit_logger (int type, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
