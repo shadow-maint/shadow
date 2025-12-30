@@ -470,7 +470,7 @@ main(int, char *argv[])
 		usage();
 		goto failure;
 	}
-	if (!is_newgrp) {
+	{
 		if (argv[0] != NULL) {
 			if (!is_valid_group_name(argv[0])) {
 				eprintf(_("%s: provided group is not a valid group name\n"),
@@ -479,20 +479,10 @@ main(int, char *argv[])
 			}
 			group = argv[0];
 			argv++;
-		} else {
+		} else if (!is_newgrp) {
 			usage ();
 			closelog ();
 			exit (EXIT_FAILURE);
-		}
-	} else {
-		if (argv[0] != NULL) {
-			if (!is_valid_group_name(argv[0])) {
-				eprintf(_("%s: provided group is not a valid group name\n"),
-					Prog);
-				goto failure;
-			}
-			group = argv[0];
-			argv++;
 		} else {
 			/*
 			 * get the group file entry for her login group id.
