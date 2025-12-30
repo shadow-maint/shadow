@@ -474,39 +474,28 @@ main(int, char *argv[])
 		usage();
 		goto failure;
 	}
-	{
-		if (argv[0] != NULL) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
-				goto failure;
-			}
-			group = argv[0];
-			argv++;
-		} else if (!is_newgrp) {
-			usage ();
-			closelog ();
-			exit (EXIT_FAILURE);
-		} else {
-			/*
-			 * get the group file entry for her login group id.
-			 * the entry must exist, simply to be annoying.
-			 *
-			 * Perhaps in the past, but the default behavior now depends on the
-			 * group entry, so it had better exist.  -- JWP
-			 */
-			grp = xgetgrgid (pwd->pw_gid);
-			if (NULL == grp) {
-				fprintf (stderr,
-				         _("%s: GID '%lu' does not exist\n"),
-				         Prog, (unsigned long) pwd->pw_gid);
-				SYSLOG ((LOG_CRIT, "GID '%lu' does not exist",
-				        (unsigned long) pwd->pw_gid));
-				goto failure;
-			}
-			group = grp->gr_name;
+	if (argv[0] != NULL) {
+		if (!is_valid_group_name(argv[0])) {
+			fprintf(stderr, _("%s: provided group is not a valid group name\n"),
+			        Prog);
+			goto failure;
 		}
+		group = argv[0];
+		argv++;
+	} else if (!is_newgrp) {
+		usage();
+		closelog();
+		exit(EXIT_FAILURE);
+	} else {
+		grp = xgetgrgid(pwd->pw_gid);
+		if (NULL == grp) {
+			fprintf(stderr, _("%s: GID '%lu' does not exist\n"),
+			        Prog, (unsigned long) pwd->pw_gid);
+			SYSLOG((LOG_CRIT, "GID '%lu' does not exist",
+			       (unsigned long) pwd->pw_gid));
+			goto failure;
+		}
+		group = grp->gr_name;
 	}
 	if (!is_newgrp) {
 		if (argv[0] != NULL && streq(argv[0], "-c")) {
