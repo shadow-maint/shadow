@@ -505,25 +505,10 @@ main(int, char *argv[])
 		goto failure;
 	}
 
-	/*
-	 * get the current user's groupset. The new group will be added to
-	 * the concurrent groupset if there is room, otherwise you get a
-	 * nasty message but at least your real and effective group ids are
-	 * set.
-	 */
 	gids = agetgroups(&ngroups);
 	if (gids == NULL) {
 		perror("agetgroups");
-#ifdef WITH_AUDIT
-		if (group) {
-			audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL, getuid(),
-						"new_group", group, SHADOW_AUDIT_FAILURE);
-		} else {
-			audit_logger(AUDIT_CHGRP_ID,
-				     "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
-		}
-#endif
-		exit(EXIT_FAILURE);
+		goto failure;
 	}
 
 	/*
