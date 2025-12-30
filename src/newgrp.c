@@ -364,7 +364,8 @@ static void syslog_sg (const char *name, const char *group)
 /*
  * newgrp - change the invokers current real and effective group id
  */
-int main (int argc, char **argv)
+int
+main(int, char *argv[])
 {
 	bool initflag = false;
 	bool is_member = false;
@@ -428,7 +429,6 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	argc--;
 	argv++;
 
 	initenv ();
@@ -462,10 +462,9 @@ int main (int argc, char **argv)
 	 *      newgrp [-l|-] [groupid]
 	 *      sg [-l|-] groupid [[-c] command]
 	 */
-	if (   (argc > 0)
+	if (   argv[0] != NULL
 	    && (   streq(argv[0], "-")
 	        || streq(argv[0], "-l"))) {
-		argc--;
 		argv++;
 		initflag = true;
 	}
@@ -474,29 +473,27 @@ int main (int argc, char **argv)
 		 * Do the command line for everything that is
 		 * not "newgrp".
 		 */
-		if ((argc > 0) && (argv[0][0] != '-')) {
+		if (argv[0] != NULL && argv[0][0] != '-') {
 			if (!is_valid_group_name(argv[0])) {
 				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
 				goto failure;
 			}
 			group = argv[0];
-			argc--;
 			argv++;
 		} else {
 			usage ();
 			closelog ();
 			exit (EXIT_FAILURE);
 		}
-		if (argc > 0 && streq(argv[0], "-c")) {
-			argc--;
+		if (argv[0] != NULL && streq(argv[0], "-c")) {
 			argv++;
-			if (argc == 0) {
+			if (argv[0] == NULL) {
 				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
 				goto failure;
 			}
 		}
-		if (argc > 0) {
+		if (argv[0] != NULL) {
 			command = argv[0];
 			cflag = true;
 		}
@@ -505,7 +502,7 @@ int main (int argc, char **argv)
 		 * Do the command line for "newgrp". It's just making sure
 		 * there aren't any flags and getting the new group name.
 		 */
-		if ((argc > 0) && strprefix(argv[0], "-")) {
+		if (argv[0] != NULL && strprefix(argv[0], "-")) {
 			usage ();
 			goto failure;
 		} else if (argv[0] != NULL) {
