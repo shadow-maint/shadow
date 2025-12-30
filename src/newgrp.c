@@ -493,20 +493,15 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (EXIT_FAILURE);
 		}
-		if (argc > 0) {
-
-			/*
-			 * Skip -c if specified so both forms work:
-			 * "sg group -c command" or "sg group command".
-			 */
-			if (streq(argv[0], "-c")) {
-				argc--;
-				argv++;
-				if (argc == 0) {
-					fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
-					goto failure;
-				}
+		if (argc > 0 && streq(argv[0], "-c")) {
+			argc--;
+			argv++;
+			if (argc == 0) {
+				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
+				goto failure;
 			}
+		}
+		if (argc > 0) {
 			command = argv[0];
 			cflag = true;
 		}
