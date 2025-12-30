@@ -423,7 +423,7 @@ main(int, char *argv[])
 	 * injecting arbitrary strings into our stderr/stdout, as this can
 	 * be an exploit vector.
 	 */
-	is_newgrp = streq(Basename (argv[0]), "newgrp");
+	is_newgrp = streq(Basename(*argv++), "newgrp");
 	Prog = is_newgrp ? "newgrp" : "sg";
 
 	log_set_progname(Prog);
@@ -432,8 +432,6 @@ main(int, char *argv[])
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	argv++;
-
 	initenv ();
 
 	pwd = get_my_pwent ();
@@ -456,22 +454,21 @@ main(int, char *argv[])
 	 *      newgrp [-l|-] [groupid]
 	 *      sg [-l|-] groupid [[-c] command]
 	 */
-	if (argv[0] != NULL && (streq(argv[0], "-l") || streq(argv[0], "-"))) {
+	if (*argv != NULL && (streq(*argv, "-l") || streq(*argv, "-"))) {
 		argv++;
 		initflag = true;
 	}
-	if (argv[0] != NULL && strspn(argv[0], "-")) {
+	if (*argv != NULL && strspn(*argv, "-")) {
 		usage();
 		goto failure;
 	}
-	if (argv[0] != NULL) {
-		if (!is_valid_group_name(argv[0])) {
+	if (*argv != NULL) {
+		if (!is_valid_group_name(*argv)) {
 			fprintf(stderr, _("%s: provided group is not a valid group name\n"),
 			        Prog);
 			goto failure;
 		}
-		group = argv[0];
-		argv++;
+		group = *argv++;
 	} else if (!is_newgrp) {
 		usage();
 		goto failure;
@@ -487,20 +484,19 @@ main(int, char *argv[])
 		group = grp->gr_name;
 	}
 	if (!is_newgrp) {
-		if (argv[0] != NULL && streq(argv[0], "-c")) {
+		if (*argv != NULL && streq(*argv, "-c")) {
 			argv++;
-			if (argv[0] == NULL) {
+			if (*argv == NULL) {
 				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
 				goto failure;
 			}
 		}
-		if (argv[0] != NULL) {
-			command = argv[0];
-			argv++;
+		if (*argv != NULL) {
+			command = *argv++;
 			cflag = true;
 		}
 	}
-	if (argv[0] != NULL) {
+	if (*argv != NULL) {
 		usage();
 		goto failure;
 	}
