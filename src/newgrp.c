@@ -64,16 +64,14 @@ static void check_perms (const struct group *grp,
                          const char *groupname);
 static void syslog_sg (const char *name, const char *group);
 
-/*
- * usage - print command usage message
- */
-static void usage (void)
+
+static void
+usage(void)
 {
-	if (is_newgrp) {
-		(void) fputs (_("Usage: newgrp [-l|-] [group]\n"), stderr);
-	} else {
-		(void) fputs (_("Usage: sg [-l|-] group [[-c] command]\n"), stderr);
-	}
+	if (is_newgrp)
+		fputs(_("Usage: newgrp [-l|-] [group]\n"), stderr);
+	else
+		fputs(_("Usage: sg [-l|-] group [[-c] command]\n"), stderr);
 }
 
 static bool ingroup(const char *name, struct group *gr)
@@ -449,11 +447,6 @@ main(int, char *argv[])
 	}
 	name = pwd->pw_name;
 
-	/*
-	 * Synopsis
-	 *      newgrp [-l|-] [groupid]
-	 *      sg [-l|-] groupid [[-c] command]
-	 */
 	if (*argv != NULL && (streq(*argv, "-l") || streq(*argv, "-"))) {
 		argv++;
 		initflag = true;
