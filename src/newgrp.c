@@ -776,11 +776,11 @@ main(int, char *argv[])
 #ifdef WITH_AUDIT
 	if (NULL != group) {
 		audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
-					getuid(), "new_group", group,
+		                        getuid(), "new_group", group,
 					SHADOW_AUDIT_FAILURE);
 	} else {
-		audit_logger (AUDIT_CHGRP_ID,
-		              "changing", NULL, getuid (), 0);
+		audit_logger(AUDIT_CHGRP_ID, "changing", NULL,
+		             getuid(), SHADOW_AUDIT_FAILURE);
 	}
 #endif
 	exit (EXIT_FAILURE);
