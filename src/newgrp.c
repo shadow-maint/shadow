@@ -507,8 +507,13 @@ main(int, char *argv[])
 		}
 		if (argv[0] != NULL) {
 			command = argv[0];
+			argv++;
 			cflag = true;
 		}
+	}
+	if (argv[0] != NULL) {
+		usage();
+		goto failure;
 	}
 
 	/*
