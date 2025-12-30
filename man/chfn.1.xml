@@ -138,7 +138,7 @@
 	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
 	    directory and use the configuration files from the
 	    <replaceable>CHROOT_DIR</replaceable> directory.
-      No SELINUX support.
+	    No SELINUX support.
 	  </para>
 	</listitem>
       </varlistentry>
