@@ -503,7 +503,8 @@ main(int, char *argv[])
 		if (argv[0] != NULL && strprefix(argv[0], "-")) {
 			usage ();
 			goto failure;
-		} else if (argv[0] != NULL) {
+		}
+		if (argv[0] != NULL) {
 			if (!is_valid_group_name(argv[0])) {
 				eprintf(_("%s: provided group is not a valid group name\n"),
 					Prog);
@@ -525,9 +526,8 @@ main(int, char *argv[])
 				SYSLOG(LOG_CRIT, "GID '%lu' does not exist",
 				       (unsigned long) pwd->pw_gid);
 				goto failure;
-			} else {
-				group = grp->gr_name;
 			}
+			group = grp->gr_name;
 		}
 	}
 
