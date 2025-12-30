@@ -474,8 +474,7 @@ main(int, char *argv[])
 		argv++;
 	} else if (!is_newgrp) {
 		usage();
-		closelog();
-		exit(EXIT_FAILURE);
+		goto failure;
 	} else {
 		grp = xgetgrgid(pwd->pw_gid);
 		if (NULL == grp) {
