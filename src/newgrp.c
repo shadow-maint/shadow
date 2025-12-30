@@ -468,12 +468,12 @@ main(int, char *argv[])
 		argv++;
 		initflag = true;
 	}
+	if (argv[0] != NULL && strspn(argv[0], "-")) {
+		usage();
+		goto failure;
+	}
 	if (!is_newgrp) {
-		/*
-		 * Do the command line for everything that is
-		 * not "newgrp".
-		 */
-		if (argv[0] != NULL && argv[0][0] != '-') {
+		if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
 				fprintf (
 					stderr, _("%s: provided group is not a valid group name\n"),
@@ -499,14 +499,6 @@ main(int, char *argv[])
 			cflag = true;
 		}
 	} else {
-		/*
-		 * Do the command line for "newgrp". It's just making sure
-		 * there aren't any flags and getting the new group name.
-		 */
-		if (argv[0] != NULL && strprefix(argv[0], "-")) {
-			usage ();
-			goto failure;
-		}
 		if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
 				fprintf (
