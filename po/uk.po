@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-04 22:45-0600\n"
+"POT-Creation-Date: 2025-12-30 14:17+0100\n"
 "PO-Revision-Date: 2022-05-16 19:32+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -1244,8 +1244,8 @@ msgstr "  -g, --gid GID                 використати GID для нов
 
 msgid "  -K, --key KEY=VALUE           override /etc/login.defs defaults\n"
 msgstr ""
-"  -K, --key КЛЮЧ=ЗНАЧЕННЯ       перевизначити типові значення /etc/login."
-"defs\n"
+"  -K, --key КЛЮЧ=ЗНАЧЕННЯ       перевизначити типові значення /etc/"
+"login.defs\n"
 
 msgid ""
 "  -o, --non-unique              allow to create groups with duplicate\n"
@@ -1781,7 +1781,9 @@ msgstr ""
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Користування: newgrp [-] [група]\n"
 
-msgid "Usage: sg group [[-c] command]\n"
+#, fuzzy
+#| msgid "Usage: sg group [[-c] command]\n"
+msgid "Usage: sg [-] group [[-c] command]\n"
 msgstr "Користування: sg група [[-c] команда]\n"
 
 #, c-format

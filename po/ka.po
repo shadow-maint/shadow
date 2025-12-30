@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-utils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2025-12-04 22:45-0600\n"
+"POT-Creation-Date: 2025-12-30 14:17+0100\n"
 "PO-Revision-Date: 2024-02-08 06:13+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -1754,7 +1754,9 @@ msgstr ""
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "გამოყენება: newgrp [-] [ჯგუფი]\n"
 
-msgid "Usage: sg group [[-c] command]\n"
+#, fuzzy
+#| msgid "Usage: sg group [[-c] command]\n"
+msgid "Usage: sg [-] group [[-c] command]\n"
 msgstr "გამოყენება: sg ჯგუფი [[-c] ბრძანება]\n"
 
 #, c-format
@@ -2722,8 +2724,8 @@ msgid ""
 "  -Z, --selinux-user            remove any SELinux user mapping for the "
 "user\n"
 msgstr ""
-"  -Z, --selinux-user            არსებობის შემთხვევაში მომხმარებლის SELinux -"
-"ის მომხმარებელზე ბმის წაშლა\n"
+"  -Z, --selinux-user            არსებობის შემთხვევაში მომხმარებლის SELinux "
+"-ის მომხმარებელზე ბმის წაშლა\n"
 
 #, c-format
 msgid ""
