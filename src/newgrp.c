@@ -499,9 +499,13 @@ int main (int argc, char **argv)
 			 * Skip -c if specified so both forms work:
 			 * "sg group -c command" or "sg group command".
 			 */
-			if ((argc > 1) && streq(argv[0], "-c")) {
+			if (streq(argv[0], "-c")) {
 				argc--;
 				argv++;
+				if (argc == 0) {
+					fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
+					goto failure;
+				}
 			}
 			command = argv[0];
 			cflag = true;
