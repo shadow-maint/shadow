@@ -15,7 +15,7 @@
 #include <sys/types.h>
 
 
-#define typeas(T)            typeof((T){})
+#define typeas(T)            typeof((T){0})
 
 #define ssizeof(x)           ({(ssize_t){sizeof(x)};})
 #define memberof(T, member)  ((T){}.member)

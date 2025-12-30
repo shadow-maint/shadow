@@ -26,7 +26,7 @@
 	                                                              \
 	int  status;                                                  \
 	                                                              \
-	*n_ = _Generic((T){},                                         \
+	*n_ = _Generic((T){0},                                        \
 		short:              strtoi_,                          \
 		int:                strtoi_,                          \
 		long:               strtoi_,                          \
