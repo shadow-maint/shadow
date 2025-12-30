@@ -294,7 +294,7 @@ static void syslog_sg (const char *name, const char *group)
 		child = fork ();
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
-			eprinte(_("%s: failure forking"), is_newgrp ? "newgrp" : "sg");
+			eprinte(_("%s: failure forking"), Prog);
 #ifdef WITH_AUDIT
 			if (group) {
 				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
