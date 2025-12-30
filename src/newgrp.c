@@ -487,17 +487,6 @@ main(int, char *argv[])
 			closelog ();
 			exit (EXIT_FAILURE);
 		}
-		if (argv[0] != NULL && streq(argv[0], "-c")) {
-			argv++;
-			if (argv[0] == NULL) {
-				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
-				goto failure;
-			}
-		}
-		if (argv[0] != NULL) {
-			command = argv[0];
-			cflag = true;
-		}
 	} else {
 		if (argv[0] != NULL) {
 			if (!is_valid_group_name (argv[0])) {
@@ -507,6 +496,7 @@ main(int, char *argv[])
 				goto failure;
 			}
 			group = argv[0];
+			argv++;
 		} else {
 			/*
 			 * get the group file entry for her login group id.
@@ -525,6 +515,19 @@ main(int, char *argv[])
 				goto failure;
 			}
 			group = grp->gr_name;
+		}
+	}
+	if (!is_newgrp) {
+		if (argv[0] != NULL && streq(argv[0], "-c")) {
+			argv++;
+			if (argv[0] == NULL) {
+				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
+				goto failure;
+			}
+		}
+		if (argv[0] != NULL) {
+			command = argv[0];
+			cflag = true;
 		}
 	}
 
