@@ -466,9 +466,7 @@ main(int, char *argv[])
 	 *      newgrp [-l|-] [groupid]
 	 *      sg [-l|-] groupid [[-c] command]
 	 */
-	if (   argv[0] != NULL
-	    && (   streq(argv[0], "-")
-	        || streq(argv[0], "-l"))) {
+	if (argv[0] != NULL && (streq(argv[0], "-l") || streq(argv[0], "-"))) {
 		argv++;
 		initflag = true;
 	}
