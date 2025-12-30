@@ -455,10 +455,6 @@ main(int, char *argv[])
 		argv++;
 		initflag = true;
 	}
-	if (*argv != NULL && strspn(*argv, "-")) {
-		usage();
-		goto failure;
-	}
 	if (*argv != NULL) {
 		if (!is_valid_group_name(*argv)) {
 			fprintf(stderr, _("%s: provided group is not a valid group name\n"),
