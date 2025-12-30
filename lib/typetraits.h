@@ -57,10 +57,10 @@
 #define QChar_of(s)  typeof                                           \
 (                                                                     \
 	_Generic(s,                                                   \
-		const char *:  (const char){},                        \
-		const void *:  (const char){},                        \
-		char *:        (char){},                              \
-		void *:        (char){}                               \
+		const char *:  (const char){0},                       \
+		const void *:  (const char){0},                       \
+		char *:        (char){0},                             \
+		void *:        (char){0}                              \
 	)                                                             \
 )
 
