@@ -500,10 +500,10 @@ int main (int argc, char **argv)
 			 * "sg group -c command" or "sg group command".
 			 */
 			if ((argc > 1) && streq(argv[0], "-c")) {
-				command = argv[1];
-			} else {
-				command = argv[0];
+				argc--;
+				argv++;
 			}
+			command = argv[0];
 			cflag = true;
 		}
 	} else {
