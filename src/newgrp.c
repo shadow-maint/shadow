@@ -452,17 +452,7 @@ main(int, char *argv[])
 	name = pwd->pw_name;
 
 	/*
-	 * Parse the command line. There are two accepted flags. The first
-	 * is "-l" or "-", which for newgrp means to re-create the entire
-	 * environment as though a login had been performed, and "-c", which
-	 * for sg causes a command string to be executed.
-	 *
-	 * The next argument, if present, must be the new group name. Any
-	 * remaining arguments will be used to execute a command
-	 * as the named group. If the group name isn't present, I just use
-	 * the login group ID of the current user.
-	 *
-	 * The valid syntax are
+	 * Synopsis
 	 *      newgrp [-l|-] [groupid]
 	 *      sg [-l|-] groupid [[-c] command]
 	 */
