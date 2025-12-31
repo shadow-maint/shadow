@@ -225,10 +225,8 @@ main(int argc, char *[])
 				kill (-ut->ut_pid, SIGKILL);
 			}
 
-			SYSLOG ((LOG_NOTICE,
-				 "logged off user '%s' on '%s'",
-			         strndupa_a(ut->ut_user),
-				 tty_name));
+			SYSLOG(LOG_NOTICE, "logged off user '%s' on '%s'",
+			       strndupa_a(ut->ut_user), tty_name);
 
 			/*
 			 * This child has done all it can, drop dead.
