@@ -715,9 +715,7 @@ static void user_cancel (const char *user)
 #ifdef EXTRA_CHECK_HOME_DIR
 static bool path_prefix (const char *s1, const char *s2)
 {
-	return (   strprefix(s2, s1)
-	        && (   ('\0' == s2[strlen (s1)])
-	            || ('/'  == s2[strlen (s1)])));
+	return strprefix(s2, s1) && !strcspn(s2 + strlen(s1), "/");
 }
 #endif				/* EXTRA_CHECK_HOME_DIR */
 
