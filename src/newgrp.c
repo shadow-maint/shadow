@@ -190,9 +190,9 @@ static void check_perms (const struct group *grp,
 			fprintf (stderr,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			        Prog, strerrno());
-			SYSLOG ((LOG_INFO,
-			         "Failed to crypt password with previous salt of group '%s'",
-			         groupname));
+			SYSLOG(LOG_INFO,
+			       "Failed to crypt password with previous salt of group '%s'",
+			       groupname);
 			goto failure;
 		}
 
@@ -204,9 +204,9 @@ static void check_perms (const struct group *grp,
 			audit_logger (AUDIT_GRP_AUTH,
 			              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
-			SYSLOG ((LOG_INFO,
-				 "Invalid password for group '%s' from '%s'",
-				 groupname, pwd->pw_name));
+			SYSLOG(LOG_INFO,
+				"Invalid password for group '%s' from '%s'",
+				groupname, pwd->pw_name);
 			(void) sleep (1);
 			(void) fputs (_("Invalid password.\n"), stderr);
 			goto failure;
@@ -258,9 +258,8 @@ static void syslog_sg (const char *name, const char *group)
 	}
 	tty = strprefix(tty, "/dev/") ?: tty;
 
-	SYSLOG ((LOG_INFO,
-		 "user '%s' (login '%s' on %s) switched to group '%s'",
-		 name, loginname, tty, group));
+	SYSLOG(LOG_INFO, "user '%s' (login '%s' on %s) switched to group '%s'",
+		name, loginname, tty, group);
 #ifdef USE_PAM
 	/*
 	 * We want to fork and exec the new shell in the child, leaving the
@@ -330,21 +329,20 @@ static void syslog_sg (const char *name, const char *group)
 			         || ((pid != child) && (errno == EINTR)));
 			/* local, no need for xgetgrgid */
 			if (NULL != grp) {
-				SYSLOG ((LOG_INFO,
-				         "user '%s' (login '%s' on %s) returned to group '%s'",
-				         name, loginname, tty, grp->gr_name));
+				SYSLOG(LOG_INFO,
+				       "user '%s' (login '%s' on %s) returned to group '%s'",
+				       name, loginname, tty, grp->gr_name);
 			} else {
-				SYSLOG ((LOG_INFO,
-				         "user '%s' (login '%s' on %s) returned to group '%lu'",
-				         name, loginname, tty,
-				         (unsigned long) gid));
+				SYSLOG(LOG_INFO,
+				       "user '%s' (login '%s' on %s) returned to group '%lu'",
+				       name, loginname, tty, (unsigned long) gid);
 				/* Either the user's passwd entry has a
 				 * GID that does not match with any group,
 				 * or the group was deleted while the user
 				 * was in a newgrp session.*/
-				SYSLOG ((LOG_WARN,
-				         "unknown GID '%lu' used by user '%s'",
-				         (unsigned long) gid, name));
+				SYSLOG(LOG_WARN,
+				       "unknown GID '%lu' used by user '%s'",
+				       (unsigned long) gid, name);
 			}
 			closelog ();
 			exit ((0 != WIFEXITED (cst)) ? WEXITSTATUS (cst)
@@ -444,8 +442,8 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_CHGRP_ID,
 		              "changing", NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) getuid ()));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
@@ -537,8 +535,8 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 				         _("%s: GID '%lu' does not exist\n"),
 				         Prog, (unsigned long) pwd->pw_gid);
-				SYSLOG ((LOG_CRIT, "GID '%lu' does not exist",
-				        (unsigned long) pwd->pw_gid));
+				SYSLOG(LOG_CRIT, "GID '%lu' does not exist",
+				       (unsigned long) pwd->pw_gid);
 				goto failure;
 			} else {
 				group = grp->gr_name;
