@@ -1,7 +1,8 @@
 
 AUTOMAKE_OPTIONS = 1.0 foreign
 
-DEFS =
+DEFS = \
+	-DPASSWD_PROGRAM='"$(bindir)/passwd"'
 
 noinst_LTLIBRARIES = libshadow.la
 
