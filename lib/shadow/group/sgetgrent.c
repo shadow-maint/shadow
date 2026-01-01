@@ -18,41 +18,9 @@
 
 #include "alloc/malloc.h"
 #include "atoi/getnum.h"
-#include "defines.h"
-#include "prototypes.h"
-#include "string/strcmp/streq.h"
+#include "list.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
-#include "string/strtok/astrsep2ls.h"
-
-
-/*
- * list - turn a comma-separated string into an array of (char *)'s
- *
- *	list() converts the comma-separated list of member names into
- *	an array of character pointers.
- *
- * FINALLY added dynamic allocation.  Still need to fix sgetsgent().
- *  --marekm
- */
-static char **
-list(char *s)
-{
-	static char **members = NULL;
-
-	size_t  n;
-
-	free(members);
-
-	members = astrsep2ls(s, ",", &n);
-	if (members == NULL)
-		return NULL;
-
-	if (streq(members[n-1], ""))
-		members[n-1] = NULL;
-
-	return members;
-}
 
 
 // from-string get group entry
@@ -60,7 +28,7 @@ struct group *
 sgetgrent(const char *s)
 {
 	static char         *dup = NULL;
-	static struct group grent;
+	static struct group grent = {};
 
 	char  *fields[4];
 
@@ -74,15 +42,14 @@ sgetgrent(const char *s)
 	if (strsep2arr_a(dup, ":", fields) == -1)
 		return NULL;
 
-	if (streq(fields[2], ""))
-		return NULL;
-
 	grent.gr_name = fields[0];
 	grent.gr_passwd = fields[1];
-	if (get_gid(fields[2], &grent.gr_gid) == -1) {
+	if (get_gid(fields[2], &grent.gr_gid) == -1)
 		return NULL;
-	}
-	grent.gr_mem = list(fields[3]);
+
+	free(grent.gr_mem);
+
+	grent.gr_mem = acsv2ls(fields[3]);
 	if (NULL == grent.gr_mem) {
 		return NULL;	/* out of memory */
 	}
