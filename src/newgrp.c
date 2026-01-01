@@ -12,6 +12,7 @@
 
 #include <errno.h>
 #include <grp.h>
+#include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -720,13 +721,13 @@ int main (int argc, char **argv)
 	 */
 	if (cflag) {
 		closelog ();
-		execl (SHELL, "sh", "-c", command, (char *) NULL);
+		execl(_PATH_BSHELL, "sh", "-c", command, (char *) NULL);
 #ifdef WITH_AUDIT
 		stprintf_a(audit_buf, "changing new_gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID,
 		              audit_buf, NULL, getuid (), SHADOW_AUDIT_FAILURE);
 #endif
-		perror (SHELL);
+		perror(_PATH_BSHELL);
 		exit ((errno == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
@@ -753,7 +754,7 @@ int main (int argc, char **argv)
 	} else if ((NULL != pwd->pw_shell) && !streq(pwd->pw_shell, "")) {
 		prog = pwd->pw_shell;
 	} else {
-		prog = SHELL;
+		prog = _PATH_BSHELL;
 	}
 
 	/*
