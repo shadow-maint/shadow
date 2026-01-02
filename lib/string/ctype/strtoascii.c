@@ -4,7 +4,7 @@
 
 #include "config.h"
 
-#include "string/ctype/strtoascii/strtolower.h"
+#include "string/ctype/strtoascii.h"
 
 
 extern inline char *strtolower(char *str);

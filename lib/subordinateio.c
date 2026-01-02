@@ -22,7 +22,7 @@
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
-#include "string/ctype/strisascii/strisdigit.h"
+#include "string/ctype/strisascii.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/strsep2arr.h"

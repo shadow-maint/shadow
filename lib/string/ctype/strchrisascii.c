@@ -4,9 +4,9 @@
 
 #include "config.h"
 
-#include "string/ctype/strisascii/strisdigit.h"
+#include "string/ctype/strchrisascii.h"
 
 #include <stdbool.h>
 
 
-extern inline bool strisdigit(const char *s);
+extern inline bool strchriscntrl(const char *s);

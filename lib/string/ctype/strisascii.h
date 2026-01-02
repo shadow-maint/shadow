@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_CTYPE_STRISASCII_STRISDIGIT_H_
-#define SHADOW_INCLUDE_LIB_STRING_CTYPE_STRISASCII_STRISDIGIT_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_CTYPE_STRISASCII_H_
+#define SHADOW_INCLUDE_LIB_STRING_CTYPE_STRISASCII_H_
 
 
 #include "config.h"
@@ -16,6 +16,7 @@
 
 
 inline bool strisdigit(const char *s);
+inline bool strisprint(const char *s);
 
 
 // strisdigit - string is [:digit:]
@@ -26,6 +27,22 @@ strisdigit(const char *s)
 		return false;
 
 	return streq(stpspn(s, CTYPE_DIGIT_C), "");
+}
+
+
+// strisprint - string is [:print:]
+inline bool
+strisprint(const char *s)
+{
+	if (streq(s, ""))
+		return false;
+
+	for (; !streq(s, ""); s++) {
+		if (!isprint_c(*s))
+			return false;
+	}
+
+	return true;
 }
 
 
