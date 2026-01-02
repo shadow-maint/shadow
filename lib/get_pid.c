@@ -14,7 +14,7 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strerrno.h"
 
 

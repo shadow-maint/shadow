@@ -40,7 +40,7 @@
 #include "shadow/gshadow/endsgent.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
