@@ -8,17 +8,16 @@
 
 #include "config.h"
 
-#include <ctype.h>
 #include <stdbool.h>
 
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 
 
 inline bool strisprint(const char *s);
 
 
-// string is [:print:]
-// Like isprint(3), but check all characters in the string.
+// strisprint - string is [:print:]
 inline bool
 strisprint(const char *s)
 {
@@ -26,9 +25,7 @@ strisprint(const char *s)
 		return false;
 
 	for (; !streq(s, ""); s++) {
-		unsigned char  c = *s;
-
-		if (!isprint(c))
+		if (!isprint_c(*s))
 			return false;
 	}
 

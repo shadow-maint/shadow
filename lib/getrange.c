@@ -13,6 +13,7 @@
 #include "atoi/a2i.h"
 #include "defines.h"
 #include "prototypes.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 
 
@@ -57,7 +58,7 @@ getrange(const char *range,
 		if (streq(end, ""))
 			return 0;  /* <long>- */
 parse_max:
-		if (!isdigit((unsigned char) *end))
+		if (!isdigit_c(*end))
 			return -1;
 
 		if (a2ul(max, end, NULL, 10, *min, ULONG_MAX) == -1)

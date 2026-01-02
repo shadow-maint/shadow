@@ -8,24 +8,21 @@
 
 #include "config.h"
 
-#include <ctype.h>
 #include <stdbool.h>
 
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 
 
 inline bool strchriscntrl(const char *s);
 
 
-// string character is [:cntrl:]
-// Return true if any iscntrl(3) character is found in the string.
+// strchriscntrl - string character is [:cntrl:]
 inline bool
 strchriscntrl(const char *s)
 {
 	for (; !streq(s, ""); s++) {
-		unsigned char  c = *s;
-
-		if (iscntrl(c))
+		if (iscntrl_c(*s))
 			return true;
 	}
 
