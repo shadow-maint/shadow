@@ -69,6 +69,12 @@ Specific guidelines:
 
 ctype/ - Character classification and conversion functions
 
+    isascii.h
+	The functions defined in this file
+	return true
+	if the character
+	belongs to the category specified in the function name.
+
     strchrisascii/
 	The functions defined under this directory
 	return true
