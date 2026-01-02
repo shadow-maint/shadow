@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_CTYPE_STRTOASCII_STRTOLOWER_H_
-#define SHADOW_INCLUDE_LIB_STRING_CTYPE_STRTOASCII_STRTOLOWER_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_CTYPE_STRTOASCII_H_
+#define SHADOW_INCLUDE_LIB_STRING_CTYPE_STRTOASCII_H_
 
 
 #include "config.h"
@@ -16,9 +16,7 @@
 inline char *strtolower(char *str);
 
 
-// string convert-to lower-case
-// Like tolower(3), but convert all characters in the string.
-// Returns the input pointer.
+// strtolower - string convert-to lower-case
 inline char *
 strtolower(char *str)
 {
