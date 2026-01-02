@@ -35,6 +35,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strcpy/memcpy.h"
 #include "string/strcpy/strncpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
@@ -325,10 +326,7 @@ prepare_utmp(const char *name, const char *line, const char *host,
 			} else if (info->ai_family == AF_INET6) {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *) info->ai_addr;
-				memcpy (utent->ut_addr_v6,
-				        &(sa->sin6_addr),
-				        MIN(sizeof(utent->ut_addr_v6),
-				            sizeof(sa->sin6_addr)));
+				memcpy_a(utent->ut_addr_v6, sa->sin6_addr.s6_addr);
 # endif
 			}
 			freeaddrinfo (info);
