@@ -69,7 +69,7 @@ is_valid_name(const char *name)
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
 	 || strchriscntrl_c0c1(name)
-	 || strisdigit(name))
+	 || strisdigit_c(name))
 	{
 		errno = EINVAL;
 		return false;
