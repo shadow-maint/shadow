@@ -8,16 +8,19 @@
 
 #include "config.h"
 
-#ident "$Id$"
+#include "list.h"
+
+#include <stddef.h>
+#include <stdlib.h>
+#include <sys/types.h>
 
 #include <assert.h>
 
 #include "alloc/malloc.h"
-#include "prototypes.h"
 #include "defines.h"
-#include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
+#include "string/strtok/astrsep2ls.h"
 #include "string/strtok/strsep2ls.h"
 
 
@@ -142,7 +145,8 @@ dup_list(char *const *list)
 
 	assert (NULL != list);
 
-	for (i = 0; NULL != list[i]; i++);
+	for (i = 0; NULL != list[i]; i++)
+		continue;
 
 	tmp = xmalloc_T(i + 1, char *);
 
@@ -198,7 +202,6 @@ comma_to_list(const char *comma)
 {
 	char *members;
 	char **array;
-	size_t  n;
 
 	assert (NULL != comma);
 
@@ -208,26 +211,45 @@ comma_to_list(const char *comma)
 
 	members = xstrdup (comma);
 
-	/*
-	 * Allocate the array we're going to store the pointers into.
-	 * n: number of delimiters + last element + NULL
-	 */
+	array = acsv2ls(members);
+	if (array == NULL)
+		exit(EXIT_FAILURE);
 
-	n = strchrcnt(members, ',') + 2;
-	array = xmalloc_T(n, char *);
-
-	/*
-	 * Empty list is special - 0 members, not 1 empty member.  --marekm
-	 */
-
-	if (streq(members, "")) {
-		*array = NULL;
-		free (members);
-		return array;
-	}
-
-	strsep2ls(members, ",", n, array);
+	if (array[0] == NULL)
+		free(members);
 
 	return array;
 }
 
+
+char **
+acsv2ls(char *s)
+{
+	char    **l;
+	size_t  n;
+
+	l = astrsep2ls(s, ",", &n);
+	if (l == NULL)
+		return NULL;
+
+	if (streq(l[n-1], ""))
+		l[n-1] = NULL;
+
+	return l;
+}
+
+
+int
+csv2ls(char *s, size_t n, char *ls[restrict n])
+{
+	ssize_t  i;
+
+	i = strsep2ls(s, ",", n, ls);
+	if (i == -1)
+		return -1;
+
+	if (streq(ls[i-1], ""))
+		ls[i-1] = NULL;
+
+	return 0;
+}

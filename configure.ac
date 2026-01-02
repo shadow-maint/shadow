@@ -65,7 +65,7 @@ AC_CHECK_MEMBERS([struct utmpx.ut_name,
 dnl Checks for library functions.
 AC_FUNC_UTIME_NULL
 AC_REPLACE_FUNCS([putgrent putpwent putspent])
-AC_REPLACE_FUNCS([sgetgrent sgetpwent sgetspent])
+AC_REPLACE_FUNCS([sgetgrent sgetpwent sgetspent sgetspent_r])
 
 AC_CHECK_FUNC([setpgrp])
 AC_CHECK_FUNC([secure_getenv],

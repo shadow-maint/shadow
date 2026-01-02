@@ -46,7 +46,8 @@
 		return NULL;
 	}
 
-	for (i = 0; grent->gr_mem[i]; i++);
+	for (i = 0; grent->gr_mem[i]; i++)
+		continue;
 
 	/*@-mustfreeonly@*/
 	gr->gr_mem = malloc_T(i + 1, char *);

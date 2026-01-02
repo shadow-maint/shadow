@@ -143,6 +143,4 @@ int do_pam_passwd_non_interactive (const char *pam_service,
 
 	return ((PAM_SUCCESS == ret) ? 0 : 1);
 }
-#else				/* !USE_PAM */
-extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !USE_PAM */
