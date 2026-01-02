@@ -79,32 +79,13 @@ is_valid_name(const char *name)
 		return true;
 	}
 
-	/*
-	 * User/group names must match BRE regex:
-	 *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*$\?
-	 *
-	 * as a non-POSIX, extension, allow "$" as the last char for
-	 * sake of Samba 3.x "add machine script"
-	 */
-
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
-		errno = EILSEQ;
-		return false;
-	}
-
 	while (!streq(++name, "")) {
 		if (!((*name >= 'a' && *name <= 'z') ||
 		      (*name >= 'A' && *name <= 'Z') ||
 		      (*name >= '0' && *name <= '9') ||
 		      *name == '_' ||
 		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
+		      *name == '-'
 		     ))
 		{
 			errno = EILSEQ;
