@@ -15,17 +15,17 @@
 #include "string/strspn/stpspn.h"
 
 
-inline bool strisdigit(const char *s); // strisdigit - string is [:digit:]
-inline bool strisprint(const char *s); // strisprint - string is [:print:]
+inline bool strisdigit_c(const char *s); // strisdigit - string is [:digit:] C-locale
+inline bool strisprint_c(const char *s); // strisprint - string is [:print:] C-locale
 
 
 inline bool
-strisdigit(const char *s)
+strisdigit_c(const char *s)
 {
 	return !streq(s, "") && streq(stpspn(s, CTYPE_DIGIT_C), "");
 }
 inline bool
-strisprint(const char *s)
+strisprint_c(const char *s)
 {
 	return !streq(s, "") && streq(stpspn(s, CTYPE_PRINT_C), "");
 }
