@@ -41,9 +41,9 @@ valid_field_(const char *field, const char *illegal)
 
 	if (strpbrk(field, illegal))
 		return -1;
-	if (strchriscntrl(field))
+	if (strchriscntrl_c(field))
 		return -1;
-	if (strisprint(field))
+	if (strisprint_c(field))
 		return 0;
 	if (streq(field, ""))
 		return 0;

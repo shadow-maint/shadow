@@ -68,8 +68,8 @@ is_valid_name(const char *name)
 	 || streq(name, "..")
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
-	 || strchriscntrl(name)
-	 || strisdigit(name))
+	 || strchriscntrl_c(name)
+	 || strisdigit_c(name))
 	{
 		errno = EINVAL;
 		return false;
