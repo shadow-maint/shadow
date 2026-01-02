@@ -37,7 +37,9 @@ static atomic_bool nss_init_completed;
 
 static struct subid_nss_ops *subid_nss;
 
-bool nss_is_initialized() {
+bool
+nss_is_initialized(void)
+{
 	return atomic_load(&nss_init_completed);
 }
 
@@ -158,7 +160,9 @@ done:
 	}
 }
 
-struct subid_nss_ops *get_subid_nss_handle() {
+struct subid_nss_ops *
+get_subid_nss_handle(void)
+{
 	nss_init(NULL);
 	return subid_nss;
 }

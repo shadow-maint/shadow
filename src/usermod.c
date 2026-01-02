@@ -27,6 +27,7 @@
 #endif				/* USE_PAM */
 #endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <strings.h>
@@ -516,8 +517,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		              "changing-uid", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' UID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_uid, user_newid));
+		         "change user '%s' UID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_uid, (intmax_t) user_newid));
 		pwent->pw_uid = user_newid;
 	}
 	if (gflg) {
@@ -527,8 +528,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		              user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-		         "change user '%s' GID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_gid, user_newgid));
+		         "change user '%s' GID from '%jd' to '%jd'",
+		         pwent->pw_name, (intmax_t) pwent->pw_gid, (intmax_t) user_newgid));
 		pwent->pw_gid = user_newgid;
 	}
 	if (cflg) {
