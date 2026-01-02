@@ -54,9 +54,7 @@ AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 
-AC_CHECK_MEMBERS([struct utmpx.ut_name,
-                  struct utmpx.ut_host,
-                  struct utmpx.ut_syslen,
+AC_CHECK_MEMBERS([struct utmpx.ut_syslen,
                   struct utmpx.ut_addr,
                   struct utmpx.ut_addr_v6,
                   struct utmpx.ut_time,
