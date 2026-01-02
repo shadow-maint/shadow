@@ -8,26 +8,13 @@
 
 #include "config.h"
 
-#include <stdbool.h>
+#include <string.h>
 
 #include "string/ctype/isascii.h"
-#include "string/strcmp/streq.h"
-
-
-inline bool strchriscntrl_c0c1(const char *s);
 
 
 // strchriscntrl_c0c1 - string character is control-character (C0 or C1)
-inline bool
-strchriscntrl_c0c1(const char *s)
-{
-	for (; !streq(s, ""); s++) {
-		if (iscntrl_c0c1(*s))
-			return true;
-	}
-
-	return false;
-}
+#define strchriscntrl_c0c1(s)  (!!strpbrk(s, CTYPE_CNTRL_C0C1))
 
 
 #endif  // include guard
