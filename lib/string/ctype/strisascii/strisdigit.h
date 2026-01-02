@@ -10,6 +10,7 @@
 
 #include <stdbool.h>
 
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
@@ -17,15 +18,14 @@
 inline bool strisdigit(const char *s);
 
 
-// string is [:digit:]
-// Like isdigit(3), but check all characters in the string.
+// strisdigit - string is [:digit:]
 inline bool
 strisdigit(const char *s)
 {
 	if (streq(s, ""))
 		return false;
 
-	return streq(stpspn(s, "0123456789"), "");
+	return streq(stpspn(s, CTYPE_DIGIT_C), "");
 }
 
 
