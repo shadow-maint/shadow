@@ -8,26 +8,13 @@
 
 #include "config.h"
 
-#include <stdbool.h>
+#include <string.h>
 
 #include "string/ctype/isascii.h"
-#include "string/strcmp/streq.h"
-
-
-inline bool strchriscntrl_c(const char *s);
 
 
 // strchriscntrl_c - string character is [:cntrl:] C-locale
-inline bool
-strchriscntrl_c(const char *s)
-{
-	for (; !streq(s, ""); s++) {
-		if (iscntrl_c(*s))
-			return true;
-	}
-
-	return false;
-}
+#define strchriscntrl_c(s)  (!!strpbrk(s, CTYPE_CNTRL_C))
 
 
 #endif  // include guard
