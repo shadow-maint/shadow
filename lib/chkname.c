@@ -79,21 +79,6 @@ is_valid_name(const char *name)
 		return true;
 	}
 
-	/*
-	 * User/group names must match BRE regex:
-	 *    [a-zA-Z0-9_.][a-zA-Z0-9_.-]*
-	 */
-
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
-		errno = EILSEQ;
-		return false;
-	}
-
 	while (!streq(++name, "")) {
 		if (!((*name >= 'a' && *name <= 'z') ||
 		      (*name >= 'A' && *name <= 'Z') ||
