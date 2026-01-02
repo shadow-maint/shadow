@@ -19,7 +19,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-#include "string/ctype/strtoascii/strtolower.h"
+#include "string/ctype/strtoascii.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
