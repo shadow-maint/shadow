@@ -37,12 +37,7 @@ strisprint(const char *s)
 	if (streq(s, ""))
 		return false;
 
-	for (; !streq(s, ""); s++) {
-		if (!isprint_c(*s))
-			return false;
-	}
-
-	return true;
+	return streq(stpspn(s, CTYPE_PRINT_C), "");
 }
 
 
