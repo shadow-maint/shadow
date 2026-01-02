@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -15,29 +15,19 @@
 #include "string/strspn/stpspn.h"
 
 
-inline bool strisdigit(const char *s);
-inline bool strisprint(const char *s);
+inline bool strisdigit(const char *s); // strisdigit - string is [:digit:]
+inline bool strisprint(const char *s); // strisprint - string is [:print:]
 
 
-// strisdigit - string is [:digit:]
 inline bool
 strisdigit(const char *s)
 {
-	if (streq(s, ""))
-		return false;
-
-	return streq(stpspn(s, CTYPE_DIGIT_C), "");
+	return !streq(s, "") && streq(stpspn(s, CTYPE_DIGIT_C), "");
 }
-
-
-// strisprint - string is [:print:]
 inline bool
 strisprint(const char *s)
 {
-	if (streq(s, ""))
-		return false;
-
-	return streq(stpspn(s, CTYPE_PRINT_C), "");
+	return !streq(s, "") && streq(stpspn(s, CTYPE_PRINT_C), "");
 }
 
 
