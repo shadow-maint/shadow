@@ -32,10 +32,11 @@
 #include <stdint.h>
 #include <string.h>
 
+#include <a2i.h>
+
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
-#include "attr.h"
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"

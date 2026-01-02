@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "subid.h"
 #include "stdlib.h"
 #include "prototypes.h"

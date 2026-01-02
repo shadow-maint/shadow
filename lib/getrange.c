@@ -10,7 +10,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"

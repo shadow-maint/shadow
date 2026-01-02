@@ -4,6 +4,7 @@
 // Exits 1 otherwise.
 
 #include "config.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -12,7 +13,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "idmapping.h"

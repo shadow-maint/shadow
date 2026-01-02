@@ -19,7 +19,8 @@
 #include <time.h>
 #include <assert.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "defines.h"
 #include "faillog.h"
 #include "prototypes.h"
