@@ -24,7 +24,7 @@
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "shadow/passwd/getpw.h"
-#include "string/ctype/strisascii/strisdigit.h"
+#include "string/ctype/strisascii.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/strsep2arr.h"

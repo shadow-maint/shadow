@@ -75,21 +75,21 @@ ctype/ - Character classification and conversion functions
 	if the character
 	belongs to the category specified in the function name.
 
-    strchrisascii/
-	The functions defined under this directory
+    strchrisascii.h
+	The functions defined in this file
 	return true
 	if the string has any characters that
 	belong to the category specified in the function name.
 
-    strisascii/
-	The functions defined under this directory
+    strisascii.h
+	The functions defined in this file
 	return true
 	if all of the characters of the string
 	belong to the category specified in the function name
 	and the string is not an empty string.
 
-    strtoascii/
-	The functions defined under this directory
+    strtoascii.h
+	The functions defined in this file
 	translate all characters in a string.
 
 memset/ - Memory zeroing
