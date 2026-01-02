@@ -5,8 +5,3 @@
 #include "config.h"
 
 #include "string/ctype/strchrisascii.h"
-
-#include <stdbool.h>
-
-
-extern inline bool strchriscntrl_c(const char *s);
