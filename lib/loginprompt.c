@@ -19,6 +19,7 @@
 #include "attr.h"
 #include "defines.h"
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "string/memset/memzero.h"
 #include "string/strcpy/strtcpy.h"
@@ -85,7 +86,7 @@ login_prompt(char *name, int namesize)
 	 */
 
 	memzero_a(buf);
-	if (fgets(buf, sizeof(buf), stdin) == NULL)
+	if (fgets_a(buf, stdin) == NULL)
 		exit (EXIT_FAILURE);
 
 	if (stpsep(buf, "\n") == NULL)
