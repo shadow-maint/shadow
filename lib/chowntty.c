@@ -16,10 +16,13 @@
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
+
+#include "defines.h"
 #include "getdef.h"
+#include "io/fprintf.h"
+#include "io/syslog.h"
+#include "prototypes.h"
 #include "shadowlog.h"
 
 /*
@@ -55,12 +58,10 @@ void chown_tty (const struct passwd *info)
 		int err = errno;
 		FILE *shadow_logfd = log_get_logfd();
 
-		fprintf (shadow_logfd,
-		         _("Unable to change owner or mode of tty stdin: %s"),
-		         strerror (err));
-		SYSLOG ((LOG_WARN,
-		         "unable to change owner or mode of tty stdin for user `%s': %s\n",
-		         info->pw_name, strerror (err)));
+		fprinte(shadow_logfd, _("Unable to change owner or mode of tty stdin"));
+		SYSLOGE(LOG_WARN,
+		       "unable to change owner or mode of tty stdin for user `%s'",
+		       info->pw_name);
 		if (EROFS != err) {
 			closelog ();
 			exit (EXIT_FAILURE);
