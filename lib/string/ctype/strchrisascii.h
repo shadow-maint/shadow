@@ -14,12 +14,12 @@
 #include "string/strcmp/streq.h"
 
 
-inline bool strchriscntrl(const char *s);
+inline bool strchriscntrl_c(const char *s);
 
 
-// strchriscntrl - string character is [:cntrl:]
+// strchriscntrl_c - string character is [:cntrl:] C-locale
 inline bool
-strchriscntrl(const char *s)
+strchriscntrl_c(const char *s)
 {
 	for (; !streq(s, ""); s++) {
 		if (iscntrl_c(*s))

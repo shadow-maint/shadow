@@ -938,7 +938,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	int    i;
 	uid_t  owner_uid;
 
-	if (strisdigit(owner)) {
+	if (strisdigit_c(owner)) {
 		i = sscanf(owner, "%d", &owner_uid);
 		if (i != 1) {
 			// should not happen
