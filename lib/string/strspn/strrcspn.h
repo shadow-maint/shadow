@@ -15,6 +15,15 @@
 #include "string/strchr/strnul.h"
 
 
+// stprcspn - string returns-pointer rear complement span
+#define stprcspn(s, reject)                                           \
+({                                                                    \
+	__auto_type  s_ = (s);                                        \
+	                                                              \
+	strnul(s_) - strrcspn(s_, reject);                            \
+})
+
+
 ATTR_STRING(1)
 ATTR_STRING(2)
 inline size_t strrcspn(const char *s, const char *reject);

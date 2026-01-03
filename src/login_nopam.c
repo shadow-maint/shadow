@@ -65,7 +65,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/strrspn.h"
-#include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
 
