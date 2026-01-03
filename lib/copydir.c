@@ -27,16 +27,11 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif				/* WITH_SELINUX */
-#if defined(WITH_ACL) || defined(WITH_ATTR)
+#if defined(WITH_ACL)
 #include <stdarg.h>
 #include <attr/error_context.h>
-#endif				/* WITH_ACL || WITH_ATTR */
-#ifdef WITH_ACL
 #include <acl/libacl.h>
 #endif				/* WITH_ACL */
-#ifdef WITH_ATTR
-#include <attr/libattr.h>
-#endif				/* WITH_ATTR */
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
@@ -90,7 +85,7 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
                              uid_t old_uid, uid_t new_uid,
                              gid_t old_gid, gid_t new_gid);
 
-#if defined(WITH_ACL) || defined(WITH_ATTR)
+#if defined(WITH_ACL)
 /*
  * error_acl - format the error messages for the ACL and EQ libraries.
  */
@@ -120,7 +115,7 @@ error_acl(struct error_context *, const char *fmt, ...)
 static struct error_context ctx = {
 	error_acl, NULL, NULL
 };
-#endif				/* WITH_ACL || WITH_ATTR */
+#endif				/* WITH_ACL */
 
 #ifdef WITH_ACL
 static int perm_copy_path(const struct path_info *src,
