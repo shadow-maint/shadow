@@ -5,9 +5,3 @@
 #include "config.h"
 
 #include "string/ctype/strisascii.h"
-
-#include <stdbool.h>
-
-
-extern inline bool strisdigit_c(const char *s);
-extern inline bool strisprint_c(const char *s);
