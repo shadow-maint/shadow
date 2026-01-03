@@ -17,7 +17,7 @@
 #include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 #include "string/strtok/stpsep.h"
 
 
