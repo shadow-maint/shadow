@@ -43,9 +43,9 @@ valid_field_(const char *field, const char *illegal)
 		return -1;
 	if (strchriscntrl_c(field))
 		return -1;
-	if (strisprint_c(field))
-		return 0;
 	if (streq(field, ""))
+		return 0;
+	if (strisprint_c(field))
 		return 0;
 
 	return 1;  // !ASCII
