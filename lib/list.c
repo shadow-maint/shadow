@@ -8,6 +8,8 @@
 
 #include "config.h"
 
+#include <stddef.h>
+
 #include "alloc/malloc.h"
 #include "prototypes.h"
 #include "defines.h"
@@ -30,8 +32,8 @@
 /*@only@*/char **
 add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
-	int i;
-	char **tmp;
+	size_t  i;
+	char    **tmp;
 
 	assert (NULL != member);
 	assert (NULL != list);
@@ -81,8 +83,8 @@ add_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 /*@only@*/char **
 del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 {
-	int i, j;
-	char **tmp;
+	size_t  i, j;
+	char    **tmp;
 
 	assert (NULL != member);
 	assert (NULL != list);
@@ -136,8 +138,8 @@ del_list(/*@returned@*/ /*@only@*/char **list, const char *member)
 /*@only@*/char **
 dup_list(char *const *list)
 {
-	int i;
-	char **tmp;
+	size_t  i;
+	char    **tmp;
 
 	assert (NULL != list);
 
