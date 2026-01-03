@@ -8,27 +8,14 @@
 
 #include "config.h"
 
-#include <stdbool.h>
-
 #include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 
 
-inline bool strisdigit_c(const char *s); // strisdigit - string is [:digit:] C-locale
-inline bool strisprint_c(const char *s); // strisprint - string is [:print:] C-locale
-
-
-inline bool
-strisdigit_c(const char *s)
-{
-	return !streq(s, "") && streq(stpspn(s, CTYPE_DIGIT_C), "");
-}
-inline bool
-strisprint_c(const char *s)
-{
-	return !streq(s, "") && streq(stpspn(s, CTYPE_PRINT_C), "");
-}
+// strisascii_c - string is [:ascii:] C-locale
+#define strisdigit_c(s)   streq(stpspn(s, CTYPE_DIGIT_C), "")
+#define strisprint_c(s)   streq(stpspn(s, CTYPE_PRINT_C), "")
 
 
 #endif  // include guard
