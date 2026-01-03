@@ -35,7 +35,7 @@
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
-#include "string/strspn/stpspn.h"
+#include "string/strspn/strspn.h"
 #include "typetraits.h"
 
 

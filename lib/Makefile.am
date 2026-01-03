@@ -237,16 +237,12 @@ libshadow_la_SOURCES = \
 	string/strdup/strndup.h \
 	string/strftime.c \
 	string/strftime.h \
-	string/strspn/stpspn.c \
-	string/strspn/stpspn.h \
-	string/strspn/stprcspn.c \
-	string/strspn/stprcspn.h \
-	string/strspn/stprspn.c \
-	string/strspn/stprspn.h \
 	string/strspn/strrcspn.c \
 	string/strspn/strrcspn.h \
 	string/strspn/strrspn.c \
 	string/strspn/strrspn.h \
+	string/strspn/strspn.c \
+	string/strspn/strspn.h \
 	string/strtok/stpsep.c \
 	string/strtok/stpsep.h \
 	string/strtok/astrsep2ls.c \
