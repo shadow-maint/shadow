@@ -14,7 +14,6 @@ MISCLIBS = \
 	$(LIBECONF) \
 	$(LIBCRYPT) \
 	$(LIBACL) \
-	$(LIBATTR) \
 	$(LIBTCB) \
 	$(LIBPAM)
 

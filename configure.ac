@@ -408,32 +408,6 @@ if test "$with_acl" != "no"; then
 	fi
 fi
 
-AC_SUBST([LIBATTR])
-if test "$with_attr" != "no"; then
-	AC_CHECK_HEADERS([attr/libattr.h attr/error_context.h], [attr_header="yes"], [attr_header="no"])
-	if test "X$attr_header$with_attr" = "noyes" ; then
-		AC_MSG_ERROR([attr/libattr.h or attr/error_context.h is missing])
-	elif test "X$attr_header" = "Xyes" ; then
-		AC_CHECK_LIB([attr], [attr_copy_file],
-		             [AC_CHECK_LIB([attr], [attr_copy_fd],
-		                           [attr_lib="yes"],
-		                           [attr_lib="no"])],
-		             [attr_lib="no"])
-		if test "X$attr_lib$with_attr" = "Xnoyes" ; then
-			AC_MSG_ERROR([libattr not found])
-		elif test "X$attr_lib" = "Xno" ; then
-			with_attr="no"
-		else
-			AC_DEFINE([WITH_ATTR], [1],
-			          [Build shadow with Extended Attributes support])
-			LIBATTR="-lattr"
-			with_attr="yes"
-		fi
-	else
-		with_attr="no"
-	fi
-fi
-
 AC_SUBST([LIBAUDIT])
 if test "$with_audit" != "no"; then
 	AC_CHECK_HEADER([libaudit.h], [audit_header="yes"], [audit_header="no"])
