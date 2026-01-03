@@ -2708,9 +2708,9 @@ int main (int argc, char **argv)
 	if (mflg) {
 		create_home (&flags);
 		if (home_added) {
-			copy_tree (def_template, prefix_user_home, false, true,
+			copy_tree (def_template, prefix_user_home, false,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
-			copy_tree (def_usrtemplate, prefix_user_home, false, true,
+			copy_tree (def_usrtemplate, prefix_user_home, false,
 			           (uid_t)-1, user_id, (gid_t)-1, user_gid);
 		} else {
 			fprintf (stderr,
