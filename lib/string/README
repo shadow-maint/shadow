@@ -85,8 +85,7 @@ ctype/ - Character classification and conversion functions
 	The functions defined in this file
 	return true
 	if all of the characters of the string
-	belong to the category specified in the function name
-	and the string is not an empty string.
+	belong to the category specified in the function name.
 
     strtoascii.h
 	The functions defined in this file
