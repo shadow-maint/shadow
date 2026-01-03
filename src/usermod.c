@@ -1850,7 +1850,6 @@ static void move_home (bool process_selinux)
 #endif
 
 				if (copy_tree (prefix_user_home, prefix_user_newhome, true,
-				               true,
 				               user_id,
 				               uflg ? user_newid : (uid_t)-1,
 				               user_gid,
