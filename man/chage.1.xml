@@ -270,7 +270,7 @@
     </para>
   </refsect1>
 
-  <refsect1 id='configuration'>
+  <refsect1 id='configuration' condition="tcb">
     <title>CONFIGURATION</title>
     <para>
       The following configuration variables in
