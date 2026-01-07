@@ -43,6 +43,7 @@
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
 #include "sssd.h"
+#include "fs/mkstemp/fmkomstemp.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -72,7 +73,7 @@ static bool tcb_mode = false;
 
 /* local function prototypes */
 static void usage (int status);
-static int create_backup_file (FILE *, const char *, struct stat *);
+static int create_backup_file (FILE *, char *, struct stat *);
 static void vipwexit (const char *msg, int syserr, int ret);
 static void vipwedit (const char *, int (*)(void), int (*)(bool));
 
@@ -103,16 +104,13 @@ static void usage (int status)
 /*
  *
  */
-static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
+static int create_backup_file (FILE * fp, char *backup, struct stat *sb)
 {
 	struct utimbuf ub;
 	FILE *bkfp;
 	int c;
-	mode_t mask;
 
-	mask = umask (077);
-	bkfp = fopen (backup, "w");
-	(void) umask (mask);
+	bkfp = fmkomstemp(backup, 0, 0600);
 	if (NULL == bkfp) {
 		return -1;
 	}
@@ -217,11 +215,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
 		stprintf_a(fileedit,
-		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.vipw.shadow.%s",
-		         user);
+		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.%s.shadow.%s.XXXXXX",
+		         Prog, user);
 	} else {
 #endif				/* WITH_TCB */
-		stprintf_a(fileedit, "%s.edit", file);
+		stprintf_a(fileedit, "/etc/.%s.XXXXXX", Prog);
 #ifdef WITH_TCB
 	}
 #endif				/* WITH_TCB */
