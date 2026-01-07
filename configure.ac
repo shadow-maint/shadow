@@ -187,9 +187,6 @@ AC_ARG_WITH([skey],
 AC_ARG_WITH([tcb],
 	[AS_HELP_STRING([--with-tcb], [use tcb support (incomplete) @<:@default=yes if found@:>@])],
 	[with_tcb=$withval], [with_tcb=maybe])
-AC_ARG_WITH([sha-crypt],
-	[AS_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
-	[with_sha_crypt=$withval], [with_sha_crypt=yes])
 AC_ARG_WITH([bcrypt],
 	[AS_HELP_STRING([--with-bcrypt], [allow the bcrypt password encryption algorithm @<:@default=no@:>@])],
 	[with_bcrypt=$withval], [with_bcrypt=no])
@@ -221,11 +218,6 @@ AC_DEFINE_UNQUOTED([GROUP_NAME_MAX_LENGTH], [$with_group_name_max_length], [max 
 AC_SUBST([GROUP_NAME_MAX_LENGTH])
 GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 
-
-AM_CONDITIONAL([USE_SHA_CRYPT], [test "x$with_sha_crypt" = "xyes"])
-if test "X$with_sha_crypt" = "Xyes"; then
-	AC_DEFINE([USE_SHA_CRYPT], [1], [Define to allow the SHA256 and SHA512 password encryption algorithms])
-fi
 
 AM_CONDITIONAL([USE_BCRYPT], [test "x$with_bcrypt" = "xyes"])
 if test "X$with_bcrypt" = "Xyes"; then
@@ -708,7 +700,6 @@ AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following 
 	tcb support (incomplete):	$with_tcb
 	shadow group support:		$enable_shadowgrp
 	S/Key support:			$with_skey
-	SHA passwords encryption:	$with_sha_crypt
 	bcrypt passwords encryption:	$with_bcrypt
 	yescrypt passwords encryption:	$with_yescrypt
 	nscd support:			$with_nscd

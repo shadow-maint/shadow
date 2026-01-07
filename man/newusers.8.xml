@@ -11,7 +11,6 @@
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY HOME_MODE             SYSTEM "login.defs.d/HOME_MODE.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
@@ -272,7 +271,7 @@
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
 	  <para>
-	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
+	    The available methods are MD5, NONE, and SHA256 or SHA512
 	    if your libc support these methods.
 	  </para>
 	</listitem>
@@ -320,7 +319,7 @@
       </varlistentry>
     </variablelist>
     <variablelist remap='IP' condition="no_pam">
-      <varlistentry condition="bcrypt;sha_crypt;yescrypt">
+      <varlistentry>
 	<term><option>-s</option>, <option>--sha-rounds</option></term>
 	<listitem>
 	  <para>
@@ -330,9 +329,8 @@
 	    You can only use this option with crypt method:
 	    <phrase condition="bcrypt">
 	    <replaceable>BCRYPT</replaceable></phrase>
-	    <phrase condition="sha_crypt">
 	    <replaceable>SHA256</replaceable>
-	    <replaceable>SHA512</replaceable></phrase>
+	    <replaceable>SHA512</replaceable>
 	    <phrase condition="yescrypt">
 	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
@@ -345,12 +343,12 @@
 	    A minimal value of 4 and a maximal value of 31
 	    will be enforced for BCRYPT. The default is 13.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    By default, the number of rounds for SHA256 or SHA512 is defined by the
 	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
 	    <filename>/etc/login.defs</filename>.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    A minimal value of 1000 and a maximal value of 999,999,999
 	    will be enforced for SHA256 and SHA512. The default is 5000.
 	  </para>
@@ -393,9 +391,6 @@
       &GID_MAX; <!-- documents also GID_MIN -->
       &HOME_MODE;
       &MAX_MEMBERS_PER_GROUP;
-    </variablelist>
-    <variablelist condition="no_pam">
-      &MD5_CRYPT_ENAB;
     </variablelist>
     <variablelist>
       &PASS_MAX_DAYS;
