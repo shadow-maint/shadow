@@ -289,6 +289,9 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 
 	orig_pgrp = tcgetpgrp(STDIN_FILENO);
 
+	/* set SIGCHLD to default for waitpid */
+	signal(SIGCHLD, SIG_DFL);
+
 	pid = fork ();
 	if (-1 == pid) {
 		vipwexit ("fork", 1, 1);
@@ -335,9 +338,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		sigaddset(&mask, SIGTTOU);
 		sigprocmask(SIG_BLOCK, &mask, &omask);
 	}
-
-	/* set SIGCHLD to default for waitpid */
-	signal(SIGCHLD, SIG_DFL);
 
 	for (;;) {
 		pid = waitpid (pid, &status, WUNTRACED);
