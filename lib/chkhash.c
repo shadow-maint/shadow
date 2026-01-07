@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 
 
@@ -40,6 +41,9 @@ bool
 is_valid_hash(const char *hash) 
 {
 	hash = strprefix(hash, "!") ?: hash;
+
+	if (streq(hash, "*"))
+		return true;
 
 	// Minimum hash length
 	if (strlen(hash) < 13)
