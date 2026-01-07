@@ -158,7 +158,6 @@ login_defs_v = \
 	MAIL_CHECK_ENAB.xml \
 	MAIL_DIR.xml \
 	MAX_MEMBERS_PER_GROUP.xml \
-	MD5_CRYPT_ENAB.xml \
 	MOTD_FILE.xml \
 	NOLOGINS_FILE.xml \
 	NONEXISTENT.xml \

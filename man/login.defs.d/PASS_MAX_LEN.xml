@@ -18,8 +18,7 @@
     <para>
       <option>PASS_MAX_LEN</option> is only used for DES.
       It is ignored if an encryption algorithm other than DES is used,
-      either because <option>MD5_CRYPT_ENAB</option> set to
-      <replaceable>yes</replaceable> or <option>ENCRYPT_METHOD</option>
+      because <option>ENCRYPT_METHOD</option>
       set to an algorithm other than <replaceable>DES</replaceable>.
     </para>
     <para>
