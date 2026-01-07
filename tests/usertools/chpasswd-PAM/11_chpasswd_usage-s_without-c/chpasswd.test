@@ -16,7 +16,7 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 
 change_config
 
-echo -n "Password must use md5 and another method (chpasswd --sha-rounds 12)..."
+echo -n "Password hashing method (chpasswd --sha-rounds 12)..."
 echo 'nobody:test' | chpasswd --sha-rounds 12 2>tmp/usage.out && exit 1 || {
 	status=$?
 }
