@@ -28,6 +28,7 @@
 #endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
@@ -97,6 +98,7 @@
 #define E_SUB_UID_UPDATE 16	/* can't update the subordinate uid file */
 #define E_SUB_GID_UPDATE 18	/* can't update the subordinate gid file */
 #endif				/* ENABLE_SUBIDS */
+#define E_PASSWORDLESS	20	/* would result in a passwordless account */
 
 #define VALID(s)  (!strpbrk(s, ":\n"))
 
@@ -437,7 +439,8 @@ usage (int status)
  * update encrypted password string (for both shadow and non-shadow
  * passwords)
  */
-static char *new_pw_passwd (char *pw_pass)
+static char *
+new_pw_passwd(char *pw_pass, bool process_selinux)
 {
 	if (Lflg && ('!' != pw_pass[0])) {
 #ifdef WITH_AUDIT
@@ -452,7 +455,7 @@ static char *new_pw_passwd (char *pw_pass)
 			         _("%s: unlocking the user's password would result in a passwordless account.\n"
 			           "You should set a password with usermod -p to unlock this user's password.\n"),
 			         Prog);
-			return pw_pass;
+			fail_exit(E_PASSWORDLESS, process_selinux);
 		}
 
 #ifdef WITH_AUDIT
@@ -507,7 +510,7 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 	 */
 	if (   (!is_shadow_pwd)
 	    || !streq(pwent->pw_passwd, SHADOW_PASSWD_STRING)) {
-		pwent->pw_passwd = new_pw_passwd (pwent->pw_passwd);
+		pwent->pw_passwd = new_pw_passwd(pwent->pw_passwd, process_selinux);
 	}
 
 	if (uflg) {
@@ -622,7 +625,7 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 	 *  + there were already both entries
 	 *  + aging has been requested
 	 */
-	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
+	spent->sp_pwdp = new_pw_passwd(spent->sp_pwdp, process_selinux);
 
 	if (pflg) {
 		spent->sp_lstchg = gettime () / DAY;
