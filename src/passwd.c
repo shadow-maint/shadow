@@ -20,12 +20,12 @@
 #include <sys/types.h>
 #include <time.h>
 
-#include "agetpass.h"
 #include "atoi/a2i.h"
 #include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
 #include "nscd.h"
+#include "pass.h"
 #include "prototypes.h"
 #include "pwauth.h"
 #include "pwio.h"
@@ -185,10 +185,11 @@ usage (int status)
  */
 static int new_password (const struct passwd *pw)
 {
-	char *clear;		/* Pointer to clear text */
 	char *cipher;		/* Pointer to cipher text */
+	char       *cp;
 	const char *salt;	/* Pointer to new salt */
-	char *cp;		/* Pointer to agetpass() response */
+	pass_t     *clear;	/* Pointer to clear text */
+	pass_t     *p;		/* Pointer to getpassa() response */
 	char orig[PASS_MAX + 1];	/* Original password */
 	char pass[PASS_MAX + 1];	/* New password */
 	int i;			/* Counter for retries */
@@ -201,15 +202,15 @@ static int new_password (const struct passwd *pw)
 	 */
 
 	if (!amroot && !streq(crypt_passwd, "")) {
-		clear = agetpass (_("Old password: "));
+		clear = getpassa(_("Old password: "));
 		if (NULL == clear) {
 			return -1;
 		}
 
-		cipher = pw_encrypt (clear, crypt_passwd);
+		cipher = pw_encrypt(*clear, crypt_passwd);
 
 		if (NULL == cipher) {
-			erase_pass (clear);
+			passzero(clear);
 			fprintf (stderr,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			         Prog, strerrno());
@@ -220,7 +221,7 @@ static int new_password (const struct passwd *pw)
 		}
 
 		if (!streq(cipher, crypt_passwd)) {
-			erase_pass (clear);
+			passzero(clear);
 			strzero (cipher);
 			SYSLOG ((LOG_WARN, "incorrect password for %s",
 			         pw->pw_name));
@@ -230,8 +231,8 @@ static int new_password (const struct passwd *pw)
 			                pw->pw_name);
 			return -1;
 		}
-		strtcpy_a(orig, clear);
-		erase_pass (clear);
+		strtcpy_a(orig, *clear);
+		passzero(clear);
 		strzero (cipher);
 	} else {
 		strcpy(orig, "");
@@ -264,12 +265,12 @@ static int new_password (const struct passwd *pw)
 		/*
 		 * root is setting the passphrase from stdin
 		 */
-		cp = agetpass_stdin ();
-		if (NULL == cp) {
+		p = getpassa_stdin();
+		if (NULL == p) {
 			return -1;
 		}
-		ret = strtcpy_a(pass, cp);
-		erase_pass (cp);
+		ret = strtcpy_a(pass, *p);
+		passzero(p);
 		if (ret == -1) {
 			(void) fputs (_("Password is too long.\n"), stderr);
 			memzero_a(pass);
@@ -277,18 +278,19 @@ static int new_password (const struct passwd *pw)
 		}
 	} else {
 		warned = false;
+		p = passalloca();
 		for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
-			cp = agetpass (_("New password: "));
-			if (NULL == cp) {
+			p = getpass2(p, _("New password: "));
+			if (NULL == p) {
 				memzero_a(orig);
 				memzero_a(pass);
 				return -1;
 			}
-			if (warned && !streq(pass, cp)) {
+			if (warned && !streq(pass, *p)) {
 				warned = false;
 			}
-			ret = strtcpy_a(pass, cp);
-			erase_pass (cp);
+			ret = strtcpy_a(pass, *p);
+			p = passzero(p);
 			if (ret == -1) {
 				(void) fputs (_("Password is too long.\n"), stderr);
 				memzero_a(orig);
@@ -312,17 +314,17 @@ static int new_password (const struct passwd *pw)
 				warned = true;
 				continue;
 			}
-			cp = agetpass (_("Re-enter new password: "));
-			if (NULL == cp) {
+			p = getpass2(p, _("Re-enter new password: "));
+			if (NULL == p) {
 				memzero_a(orig);
 				memzero_a(pass);
 				return -1;
 			}
-			if (!streq(cp, pass)) {
-				erase_pass (cp);
+			if (!streq(*p, pass)) {
+				p = passzero(p);
 				(void) fputs (_("They don't match; try again.\n"), stderr);
 			} else {
-				erase_pass (cp);
+				passzero(p);
 				break;
 			}
 		}
@@ -1094,12 +1096,14 @@ main(int argc, char **argv)
 	 */
 	if (!anyflag && use_pam) {
 		if (sflg) {
-			cp = agetpass_stdin ();
-			if (cp == NULL) {
+			pass_t  *p;
+
+			p = getpassa_stdin();
+			if (p == NULL) {
 				exit (E_FAILURE);
 			}
-			do_pam_passwd_non_interactive ("passwd", name, cp);
-			erase_pass (cp);
+			do_pam_passwd_non_interactive ("passwd", name, *p);
+			passzero(p);
 		} else {
 			do_pam_passwd (name, qflg, kflg);
 		}

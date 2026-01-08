@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "agetpass.h"
 #include "alloc/malloc.h"
 #include "attr.h"
 #include "defines.h"
@@ -28,6 +27,7 @@
 #include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "pass.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "sgroupio.h"
@@ -815,6 +815,7 @@ static void change_passwd (struct group *gr)
 	char *cp;
 	static char pass[PASS_MAX + 1];
 	int retries;
+	pass_t     *p;
 	const char *salt;
 
 	/*
@@ -825,26 +826,27 @@ static void change_passwd (struct group *gr)
 	 */
 	printf (_("Changing the password for group %s\n"), group);
 
+	p = passalloca();
 	for (retries = 0; retries < RETRIES; retries++) {
-		cp = agetpass (_("New Password: "));
-		if (NULL == cp) {
+		p = getpass2(p, _("New Password: "));
+		if (NULL == p) {
 			exit (1);
 		}
 
-		strtcpy_a(pass, cp);
-		erase_pass (cp);
-		cp = agetpass (_("Re-enter new password: "));
-		if (NULL == cp) {
+		strtcpy_a(pass, *p);
+		p = passzero(p);
+		p = getpass2(p, _("Re-enter new password: "));
+		if (NULL == p) {
 			memzero_a(pass);
 			exit (1);
 		}
 
-		if (streq(pass, cp)) {
-			erase_pass (cp);
+		if (streq(pass, *p)) {
+			passzero(p);
 			break;
 		}
 
-		erase_pass (cp);
+		p = passzero(p);
 		memzero_a(pass);
 
 		if (retries + 1 < RETRIES) {
