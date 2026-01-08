@@ -576,7 +576,7 @@ int main (int argc, char **argv)
 
 		/*
 		 * Prevent adding a non valid hash to /etc/shadow and
-		 * potentialy lock account
+		 * potentially lock account
 		 */
 
 		if (eflg) {

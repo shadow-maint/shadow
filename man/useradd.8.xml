@@ -187,7 +187,7 @@
 	    login directory name.  
 	    The directory <replaceable>HOME_DIR</replaceable> is not created by
 	    default.  However it will be created for non-system users if either the
-	    <option>-m</option> flag is specifed or
+	    <option>-m</option> flag is specified or
 	    <replaceable>CREATE_HOME</replaceable> in
 	    <filename>login.defs</filename> is set to true.  However, it will never
 	    be created if the <option>-M</option> flag is specified.

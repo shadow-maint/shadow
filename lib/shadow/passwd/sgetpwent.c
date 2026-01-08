@@ -37,7 +37,7 @@
  *	performance reasons.  I am going to come up with some conditional
  *	compilation glarp to improve on this in the future.
  */
-// from-string get pasword entry
+// from-string get password entry
 struct passwd *
 sgetpwent(const char *s)
 {
