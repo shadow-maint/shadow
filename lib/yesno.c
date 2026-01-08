@@ -32,7 +32,7 @@
  *	After a yes/no question, this function gets the answer from the
  *	user.
  *
- *	Calls to this function will normally be preceeded by a prompt on
+ *	Calls to this function will normally be preceded by a prompt on
  *	stdout, so we should fflush(3).
  *
  * Return value
