@@ -218,6 +218,8 @@ libshadow_la_SOURCES = \
 	string/strcmp/strneq.h \
 	string/strcmp/strprefix.c \
 	string/strcmp/strprefix.h \
+	string/strcpy/memcpy.c \
+	string/strcpy/memcpy.h \
 	string/strcpy/stpecpy.c \
 	string/strcpy/stpecpy.h \
 	string/strcpy/strncat.c \
