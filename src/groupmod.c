@@ -41,7 +41,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
-#include "string/sprintf/stpeprintf.h"
+#include "string/sprintf/seprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/stpecpy.h"
 #include "string/strdup/strdup.h"
@@ -607,11 +607,11 @@ static void prepare_failure_reports (void)
 	info_passwd.audit_msg  = pw;
 	pw_end                 = pw + 512;
 
-	gr = stpeprintf(gr, gr_end, "changing %s; ", gr_dbname ());
+	gr = seprintf(gr, gr_end, "changing %s; ", gr_dbname());
 #ifdef	SHADOWGRP
-	sgr = stpeprintf(sgr, sgr_end, "changing %s; ", sgr_dbname ());
+	sgr = seprintf(sgr, sgr_end, "changing %s; ", sgr_dbname());
 #endif
-	pw = stpeprintf(pw, pw_end, "changing %s; ", pw_dbname ());
+	pw = seprintf(pw, pw_end, "changing %s; ", pw_dbname());
 
 	info_group.action   = gr;
 #ifdef	SHADOWGRP
@@ -619,14 +619,11 @@ static void prepare_failure_reports (void)
 #endif
 	info_passwd.action  = pw;
 
-	gr  = stpeprintf(gr, gr_end,
-	                 "group %s/%ju", group_name, (uintmax_t) group_id);
+	gr  = seprintf(gr, gr_end, "group %s/%ju", group_name, (uintmax_t) group_id);
 #ifdef	SHADOWGRP
-	sgr = stpeprintf(sgr, sgr_end,
-	                 "group %s", group_name);
+	sgr = seprintf(sgr, sgr_end, "group %s", group_name);
 #endif
-	pw  = stpeprintf(pw, pw_end,
-	                 "group %s/%ju", group_name, (uintmax_t) group_id);
+	pw  = seprintf(pw, pw_end, "group %s/%ju", group_name, (uintmax_t) group_id);
 
 	if (nflg) {
 		gr = stpecpy(gr, gr_end, ", new name: ");
@@ -646,10 +643,10 @@ static void prepare_failure_reports (void)
 	}
 	if (gflg) {
 		gr = stpecpy(gr, gr_end, ", new gid: ");
-		stpeprintf(gr, gr_end, "%ju", (uintmax_t) group_newid);
+		seprintf(gr, gr_end, "%ju", (uintmax_t) group_newid);
 
 		pw = stpecpy(pw, pw_end, ", new gid: ");
-		stpeprintf(pw, pw_end, "%ju", (uintmax_t) group_newid);
+		seprintf(pw, pw_end, "%ju", (uintmax_t) group_newid);
 	}
 
 // FIXME: add a system cleanup
