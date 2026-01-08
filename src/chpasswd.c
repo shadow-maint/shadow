@@ -634,7 +634,7 @@ int main (int argc, char **argv)
 				newsp.sp_namp  = name;
 				/* newsp.sp_pwdp  = NULL; will be set later */
 				/* newsp.sp_lstchg= 0;    will be set later */
-				newsp.sp_min   = getdef_num ("PASS_MIN_DAYS", -1);
+				newsp.sp_min   = -1;
 				newsp.sp_max   = getdef_num ("PASS_MAX_DAYS", -1);
 				newsp.sp_warn  = getdef_num ("PASS_WARN_AGE", -1);
 				newsp.sp_inact = -1;

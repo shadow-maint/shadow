@@ -121,14 +121,7 @@
       <varlistentry>
 	<term><emphasis role="bold">minimum password age</emphasis></term>
 	<listitem>
-	  <para>
-	    The minimum password age is the number of days the user must wait
-	    before they can change their password again.
-	  </para>
-	  <para>
-	    An empty field and value 0 mean that there is no minimum
-	    password age.
-	  </para>
+	  <para>This deprecated field should be empty, and is ignored.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
