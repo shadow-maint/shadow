@@ -8,13 +8,14 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <pwd.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
+
 #include "prototypes.h"
 #include "defines.h"
+
 #define	MAX_SUBROOT2	"maximum subsystem depth reached\n"
 #define	BAD_SUBROOT2	"invalid root `%s' for user `%s'\n"
 #define	NO_SUBROOT2	"no subsystem root `%s' for user `%s'\n"
@@ -45,7 +46,7 @@ void subsystem (const struct passwd *pw)
 	 * The new root directory must begin with a "/" character.
 	 */
 
-	if (pw->pw_dir[0] != '/') {
+	if (!strspn(pw->pw_dir, "/")) {
 		printf (_("Invalid root directory '%s'\n"), pw->pw_dir);
 		SYSLOG ((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();

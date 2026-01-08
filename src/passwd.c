@@ -17,6 +17,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <time.h>
 
@@ -35,7 +36,6 @@
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
@@ -386,7 +386,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 	 * changed. Passwords which have been inactive too long cannot be
 	 * changed.
 	 */
-	if (   strprefix(sp->sp_pwdp, "!")
+	if (   strspn(sp->sp_pwdp, "!")
 	    || (exp_status > 1)
 	    || (   (sp->sp_max >= 0)
 	        && (sp->sp_min > sp->sp_max))) {
@@ -423,9 +423,8 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 
 static /*@observer@*/const char *pw_status (const char *pass)
 {
-	if (strprefix(pass, "*") || strprefix(pass, "!")) {
+	if (strspn(pass, "*!"))
 		return "L";
-	}
 	if (streq(pass, "")) {
 		return "NP";
 	}
@@ -586,7 +585,7 @@ static char *update_crypt_pw (char *cp, bool process_selinux)
 	if (dflg)
 		strcpy(cp, "");
 
-	if (uflg && strprefix(cp, "!")) {
+	if (uflg && strspn(cp, "!")) {
 		if (cp[1] == '\0') {
 			(void) fprintf (stderr,
 			                _("%s: unlocking the password would result in a passwordless account.\n"
@@ -598,7 +597,7 @@ static char *update_crypt_pw (char *cp, bool process_selinux)
 		}
 	}
 
-	if (lflg && *cp != '!') {
+	if (lflg && !strspn(cp, "!")) {
 		char  *newpw;
 
 		newpw = xaprintf("!%s", cp);

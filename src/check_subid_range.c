@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -18,7 +19,6 @@
 #include "idmapping.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "string/strcmp/strprefix.h"
 #include "subordinateio.h"
 
 
@@ -40,7 +40,7 @@ main(int argc, char **argv)
 		exit(1);
 
 	owner = argv[1];
-	check_uids = strprefix(argv[2], "u");
+	check_uids = strspn(argv[2], "u");
 	if (get_uid(argv[3], &start) == -1)
 		exit(1);
 	if (str2ul(&count, argv[4]) == -1)
