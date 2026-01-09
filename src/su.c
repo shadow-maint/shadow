@@ -368,7 +368,7 @@ static void prepare_pam_close_session (void)
 			    && (EINTR == errno)
 			    && (SIGTSTP == caught)) {
 				caught = 0;
-				/* Except for SIGTSTP, which request to
+				/* Except for SIGTSTP, which requests to
 				 * stop the child.
 				 * We will SIGSTOP ourself on the next
 				 * waitpid round.
@@ -404,7 +404,7 @@ static void prepare_pam_close_session (void)
 		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
 			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
 			kill_child (0);
-			/* Never reach (_exit called). */
+			/* Never reached (_exit called). */
 		}
 
 		/* Send SIGKILL to the child if it doesn't
