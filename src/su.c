@@ -166,6 +166,7 @@ static bool iswheel (const char *username)
 	return is_on_list (grp->gr_mem, username);
 }
 #else				/* USE_PAM */
+NORETURN
 static void
 kill_child(pid_t pid_child)
 {
