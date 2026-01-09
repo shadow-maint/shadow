@@ -98,6 +98,7 @@ static char kill_msg[256];
 static char wait_msg[256];
 static pam_handle_t *pamh = NULL;
 static volatile sig_atomic_t caught = 0;
+static volatile sig_atomic_t timeout = 0;
 /* PID of the child, in case it needs to be killed */
 static pid_t pid_child = 0;
 #endif
@@ -117,6 +118,7 @@ static void execve_shell (const char *shellname,
 #ifdef USE_PAM
 static void kill_child(int);
 static void prepare_pam_close_session (void);
+static void set_timeout(int);
 #else				/* !USE_PAM */
 static void die (int);
 static bool iswheel (const char *);
@@ -179,6 +181,12 @@ kill_child(int)
 		(void) write_full(STDERR_FILENO, wait_msg, strlen(wait_msg));
 	}
 	_exit (255);
+}
+
+static void
+set_timeout(int)
+{
+	timeout = 1;
 }
 #endif				/* USE_PAM */
 
@@ -409,7 +417,7 @@ static void prepare_pam_close_session (void)
 
 		/* Send SIGKILL to the child if it doesn't
 		 * exit within 2 seconds (after SIGTERM) */
-		(void) signal (SIGALRM, kill_child);
+		(void) signal (SIGALRM, set_timeout);
 		(void) signal (SIGCHLD, catch_signals);
 		(void) alarm (2);
 
@@ -418,6 +426,10 @@ static void prepare_pam_close_session (void)
 
 		while (0 == waitpid (pid_child, &status, WNOHANG)) {
 			sigsuspend (&ourset);
+			if (timeout) {
+				kill_child(0);
+				/* Never reached (_exit called). */
+			}
 		}
 		pid_child = 0;
 
