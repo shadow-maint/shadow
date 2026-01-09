@@ -97,7 +97,7 @@ static bool change_environment = true;
 static char kill_msg[256];
 static char wait_msg[256];
 static pam_handle_t *pamh = NULL;
-static int caught = 0;
+static volatile sig_atomic_t caught = 0;
 /* PID of the child, in case it needs to be killed */
 static pid_t pid_child = 0;
 #endif
