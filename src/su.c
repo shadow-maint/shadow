@@ -60,7 +60,6 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/sprintf/aprintf.h"
-#include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
@@ -94,8 +93,6 @@ static char caller_name[BUFSIZ];
 static bool change_environment = true;
 
 #ifdef USE_PAM
-static char kill_msg[256];
-static char wait_msg[256];
 static pam_handle_t *pamh = NULL;
 static volatile sig_atomic_t caught = 0;
 static volatile sig_atomic_t timeout = 0;
@@ -176,9 +173,9 @@ kill_child(int)
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);
-		(void) write_full(STDERR_FILENO, kill_msg, strlen(kill_msg));
+		fputs(_(" ...killed.\n"), stderr);
 	} else {
-		(void) write_full(STDERR_FILENO, wait_msg, strlen(wait_msg));
+		fputs(_(" ...waiting for child to terminate.\n"), stderr);
 	}
 	_exit (255);
 }
@@ -402,9 +399,6 @@ static void prepare_pam_close_session (void)
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
 		(void) kill (-pid_child, caught);
-
-		stprintf_a(kill_msg, _(" ...killed.\n"));
-		stprintf_a(wait_msg, _(" ...waiting for child to terminate.\n"));
 
 		/* Any signals other than SIGCHLD and SIGALRM will no longer have any effect,
 		 * so it's time to block all of them. */
