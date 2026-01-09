@@ -96,8 +96,6 @@ static bool change_environment = true;
 static pam_handle_t *pamh = NULL;
 static volatile sig_atomic_t caught = 0;
 static volatile sig_atomic_t timeout = 0;
-/* PID of the child, in case it needs to be killed */
-static pid_t pid_child = 0;
 #endif
 
 /*
@@ -113,7 +111,7 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
-static void kill_child(int);
+static void kill_child(pid_t);
 static void prepare_pam_close_session (void);
 static void set_timeout(int);
 #else				/* !USE_PAM */
@@ -169,7 +167,7 @@ static bool iswheel (const char *username)
 }
 #else				/* USE_PAM */
 static void
-kill_child(int)
+kill_child(pid_t pid_child)
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);
@@ -291,6 +289,7 @@ static void prepare_pam_close_session (void)
 	int status;
 	int ret;
 	struct sigaction action;
+	pid_t pid_child;
 
 	/* reset SIGCHLD handling to default */
 	action.sa_handler = SIG_DFL;
@@ -405,7 +404,7 @@ static void prepare_pam_close_session (void)
 		sigfillset (&ourset);
 		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
 			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
-			kill_child (0);
+			kill_child(pid_child);
 			/* Never reached (_exit called). */
 		}
 
@@ -421,7 +420,7 @@ static void prepare_pam_close_session (void)
 		while (0 == waitpid (pid_child, &status, WNOHANG)) {
 			sigsuspend (&ourset);
 			if (timeout) {
-				kill_child(0);
+				kill_child(pid_child);
 				/* Never reached (_exit called). */
 			}
 		}
