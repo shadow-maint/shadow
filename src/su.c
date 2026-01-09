@@ -172,7 +172,7 @@ kill_child(pid_t pid_child)
 {
 	kill(-pid_child, SIGKILL);
 	fputs(_(" ...killed.\n"), stderr);
-	_exit (255);
+	exit (255);
 }
 
 static void
@@ -402,7 +402,7 @@ static void prepare_pam_close_session (void)
 		if (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0) {
 			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
 			kill_child(pid_child);
-			/* Never reached (_exit called). */
+			/* Never reached (exit called). */
 		}
 
 		/* Send SIGKILL to the child if it doesn't
@@ -418,7 +418,7 @@ static void prepare_pam_close_session (void)
 			sigsuspend (&ourset);
 			if (timeout) {
 				kill_child(pid_child);
-				/* Never reached (_exit called). */
+				/* Never reached (exit called). */
 			}
 		}
 		pid_child = 0;
