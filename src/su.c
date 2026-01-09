@@ -169,12 +169,8 @@ static bool iswheel (const char *username)
 static void
 kill_child(pid_t pid_child)
 {
-	if (0 != pid_child) {
-		(void) kill (-pid_child, SIGKILL);
-		fputs(_(" ...killed.\n"), stderr);
-	} else {
-		fputs(_(" ...waiting for child to terminate.\n"), stderr);
-	}
+	kill(-pid_child, SIGKILL);
+	fputs(_(" ...killed.\n"), stderr);
 	_exit (255);
 }
 
