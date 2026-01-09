@@ -19,9 +19,6 @@ GROUP=424242
 # The default home directory. Same as DHOME for adduser
 HOME=/tmp
 #
-# The number of days after a password expires until the account 
-# is permanently disabled
-INACTIVE=12
 #
 # The default expire date
 EXPIRE=2012-12-12

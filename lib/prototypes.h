@@ -43,7 +43,6 @@ extern int add_groups (const char *);
 #endif
 
 /* age.c */
-extern void agecheck (/*@null@*/const struct spwd *);
 extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* isexpired.c */
@@ -150,9 +149,6 @@ extern int open_pidfd(const char *pidstr);
 extern int getrange (const char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
-
-/* gettime.c */
-extern time_t gettime (void);
 
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
@@ -305,7 +301,7 @@ extern void obscure_get_range(int *, int *);
 
 /* pam_pass.c */
 #ifdef USE_PAM
-extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
+extern void do_pam_passwd (const char *user, bool silent);
 #endif
 
 /* port.c */
