@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
 
