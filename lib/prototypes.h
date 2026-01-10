@@ -218,7 +218,9 @@ extern void login_prompt (char *, int);
 extern void mailcheck (void);
 
 /* motd.c */
+#ifndef USE_PAM
 extern int motd(void);
+#endif
 
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);

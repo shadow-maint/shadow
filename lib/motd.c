@@ -9,6 +9,8 @@
 
 #include "config.h"
 
+#ifndef USE_PAM
+
 #ident "$Id$"
 
 #include <stdio.h>
@@ -59,3 +61,7 @@ motd(void)
 	free (motdlist);
 	return 0;
 }
+
+#else				/* !USE_PAM */
+extern int ISO_C_forbids_an_empty_translation_unit;
+#endif				/* !USE_PAM */
