@@ -18,9 +18,10 @@
 // malloc_T - malloc type-safe
 #define malloc_T(n, T)   malloc_T_(n, typeas(T))
 #define malloc_T_(n, T)                                               \
-({                                                                    \
-	(T *){mallocarray(n, sizeof(T))};                             \
-})
+(                                                                     \
+	(void)0,                                                      \
+	(T *){mallocarray(n, sizeof(T))}                              \
+)
 
 
 // xmalloc_T - exit-on-error malloc type-safe
