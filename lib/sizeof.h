@@ -17,7 +17,7 @@
 
 #define typeas(T)            typeof((T){0})
 
-#define ssizeof(x)           ({(ssize_t){sizeof(x)};})
+#define ssizeof(x)           ((void)0, (ssize_t){sizeof(x)})
 #define memberof(T, member)  ((T){}.member)
 #define WIDTHOF(x)           (sizeof(x) * CHAR_BIT)
 

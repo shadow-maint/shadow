@@ -17,10 +17,10 @@
 // realloc_T - realloc type-safe
 #define realloc_T(p, n, T)   realloc_T_(p, n, typeas(T))
 #define realloc_T_(p, n, T)                                           \
-({                                                                    \
-	_Generic(p, T *: (void)0);                                    \
-	(T *){reallocarray_(p, n, sizeof(T))};                        \
-})
+(                                                                     \
+	_Generic(p, T *: (void)0),                                    \
+	(T *){reallocarray_(p, n, sizeof(T))}                         \
+)
 
 #define reallocarray_(p, n, size)  reallocarray(p, (n) ?: 1, (size) ?: 1)
 
