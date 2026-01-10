@@ -17,9 +17,10 @@
 // calloc_T - calloc type-safe
 #define calloc_T(n, T)   calloc_T_(n, typeas(T))
 #define calloc_T_(n, T)                                               \
-({                                                                    \
-	(T *){calloc(n, sizeof(T))};                                  \
-})
+(                                                                     \
+	(void)0,                                                      \
+	(T *){calloc(n, sizeof(T))}                                   \
+)
 
 
 // xcalloc_T - exit-on-error calloc type-safe
