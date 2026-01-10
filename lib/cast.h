@@ -11,7 +11,7 @@
 
 #define const_cast(T, p)  _Generic(p, const T:  (T) (p))
 
-#define rvalue(lv)        ({(lv);})
+#define rvalue(lv)        ((void)0, (lv))
 
 
 #endif  // include guard
