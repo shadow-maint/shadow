@@ -11,7 +11,6 @@
 #include "prototypes.h"
 #include "nscd.h"
 #include "shadowlog.h"
-#include "shadowlog_internal.h"
 
 #define MSG_NSCD_FLUSH_CACHE_FAILED "%s: Failed to flush the nscd cache.\n"
 
@@ -27,7 +26,7 @@ int nscd_flush_cache (const char *service)
 
 	if (run_command (cmd, spawnedArgs, spawnedEnv, &status) != 0) {
 		/* run_command writes its own more detailed message. */
-		(void) fprintf (log_get_logfd(), _(MSG_NSCD_FLUSH_CACHE_FAILED), shadow_progname);
+		(void) fprintf (log_get_logfd(), _(MSG_NSCD_FLUSH_CACHE_FAILED), log_get_progname());
 		return -1;
 	}
 
@@ -35,7 +34,7 @@ int nscd_flush_cache (const char *service)
 	if (!WIFEXITED (status)) {
 		(void) fprintf (log_get_logfd(),
 		                _("%s: nscd did not terminate normally (signal %d)\n"),
-		                shadow_progname, WTERMSIG (status));
+		                log_get_progname(), WTERMSIG (status));
 		return -1;
 	} else if (code == E_CMD_NOTFOUND) {
 		/* nscd is not installed, or it is installed but uses an
@@ -46,8 +45,8 @@ int nscd_flush_cache (const char *service)
 		return 0;
 	} else if (code != 0) {
 		(void) fprintf (log_get_logfd(), _("%s: nscd exited with status %d\n"),
-		                shadow_progname, code);
-		(void) fprintf (log_get_logfd(), _(MSG_NSCD_FLUSH_CACHE_FAILED), shadow_progname);
+		                log_get_progname(), code);
+		(void) fprintf (log_get_logfd(), _(MSG_NSCD_FLUSH_CACHE_FAILED), log_get_progname());
 		return -1;
 	}
 

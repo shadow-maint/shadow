@@ -33,7 +33,6 @@
 #endif				/* WITH_TCB */
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "shadowlog_internal.h"
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
@@ -104,7 +103,7 @@ static int check_link_count (const char *file, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: %s file stat error: %s\n",
-			                shadow_progname, file, strerrno());
+			                log_get_progname(), file, strerrno());
 		}
 		return 0;
 	}
@@ -113,7 +112,7 @@ static int check_link_count (const char *file, bool log)
 		if (log) {
 			fprintf(log_get_logfd(),
 			        "%s: %s: lock file already used (nlink: %ju)\n",
-			        shadow_progname, file, (uintmax_t) sb.st_nlink);
+			        log_get_progname(), file, (uintmax_t) sb.st_nlink);
 		}
 		return 0;
 	}
@@ -135,7 +134,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: %s: %s\n",
-			                shadow_progname, file, strerrno());
+			                log_get_progname(), file, strerrno());
 		}
 		return 0;
 	}
@@ -147,7 +146,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: %s file write error: %s\n",
-			                shadow_progname, file, strerrno());
+			                log_get_progname(), file, strerrno());
 		}
 		(void) close (fd);
 		unlink (file);
@@ -157,7 +156,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: %s file sync error: %s\n",
-			                shadow_progname, file, strerrno());
+			                log_get_progname(), file, strerrno());
 		}
 		(void) close (fd);
 		unlink (file);
@@ -176,7 +175,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: %s: %s\n",
-			                shadow_progname, lock, strerrno());
+			                log_get_progname(), lock, strerrno());
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -188,7 +187,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: existing lock file %s without a PID\n",
-			                shadow_progname, lock);
+			                log_get_progname(), lock);
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -199,7 +198,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: existing lock file %s with an invalid PID '%s'\n",
-			                shadow_progname, lock, buf);
+			                log_get_progname(), lock, buf);
 		}
 		unlink (file);
 		errno = EINVAL;
@@ -209,7 +208,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: lock %s already used by PID %lu\n",
-			                shadow_progname, lock, (unsigned long) pid);
+			                log_get_progname(), lock, (unsigned long) pid);
 		}
 		unlink (file);
 		errno = EEXIST;
@@ -219,7 +218,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerrno());
+			                log_get_progname(), lock, strerrno());
 		}
 		unlink (file);
 		return 0;
@@ -232,7 +231,7 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 		if (log) {
 			(void) fprintf (log_get_logfd(),
 			                "%s: cannot get lock %s: %s\n",
-			                shadow_progname, lock, strerrno());
+			                log_get_progname(), lock, strerrno());
 		}
 	}
 
@@ -405,7 +404,7 @@ int commonio_lock (struct commonio_db *db)
 				if (geteuid () != 0) {
 					(void) fprintf (log_get_logfd(),
 					                "%s: Permission denied.\n",
-					                shadow_progname);
+					                log_get_progname());
 				}
 				return 0;	/* failure */
 			}
@@ -440,7 +439,7 @@ int commonio_lock (struct commonio_db *db)
 		/* no unnecessary retries on "permission denied" errors */
 		if (geteuid () != 0) {
 			(void) fprintf (log_get_logfd(), "%s: Permission denied.\n",
-			                shadow_progname);
+			                log_get_progname());
 			return 0;
 		}
 	}

@@ -12,7 +12,6 @@
 #include "alloc/malloc.h"
 #include "prototypes.h"
 #include "../libsubid/subid.h"
-#include "shadowlog_internal.h"
 #include "shadowlog.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/strcaseprefix.h"

@@ -16,7 +16,6 @@
 
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "shadowlog_internal.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strerrno.h"
 
@@ -194,7 +193,7 @@ int check_selinux_permit (const char *perm_name)
 	if (getprevcon_raw (&user_context_raw) != 0) {
 		fprintf (log_get_logfd(),
 		    _("%s: can not get previous SELinux process context: %s\n"),
-		    shadow_progname, strerrno());
+		    log_get_progname(), strerrno());
 		SYSLOG ((LOG_WARN,
 		    "can not get previous SELinux process context: %s",
 		    strerrno()));
