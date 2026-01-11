@@ -3,7 +3,7 @@
 #include "lib/shadowlog_internal.h"
 
 const char *shadow_progname = "libshadow";
-FILE *shadow_logfd = NULL;
+static FILE *shadow_logfd = NULL;
 
 void log_set_progname(const char *progname)
 {

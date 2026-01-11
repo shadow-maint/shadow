@@ -94,7 +94,6 @@ static void
 error_acl(struct error_context *, const char *fmt, ...)
 {
 	va_list ap;
-	FILE *shadow_logfd = log_get_logfd();
 
 	/* ignore the case when destination does not support ACLs
 	 * or extended attributes */
@@ -104,11 +103,11 @@ error_acl(struct error_context *, const char *fmt, ...)
 	}
 
 	va_start (ap, fmt);
-	(void) fprintf (shadow_logfd, _("%s: "), log_get_progname());
-	if (vfprintf (shadow_logfd, fmt, ap) != 0) {
-		(void) fputs (_(": "), shadow_logfd);
+	(void) fprintf (log_get_logfd(), _("%s: "), log_get_progname());
+	if (vfprintf (log_get_logfd(), fmt, ap) != 0) {
+		(void) fputs (_(": "), log_get_logfd());
 	}
-	(void) fprintf(shadow_logfd, "%s\n", strerrno());
+	(void) fprintf(log_get_logfd(), "%s\n", strerrno());
 	va_end (ap);
 }
 

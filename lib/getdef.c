@@ -26,7 +26,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
-#include "shadowlog_internal.h"
+#include "shadowlog.h"
 #include "sizeof.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/strcaseeq.h"
@@ -255,7 +255,7 @@ getdef_num(const char *item, int dflt)
 	}
 
 	if (a2si(&val, d->value, NULL, 0, -1, INT_MAX) == -1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -289,7 +289,7 @@ getdef_unum(const char *item, unsigned int dflt)
 	}
 
 	if (a2ui(&val, d->value, NULL, 0, 0, UINT_MAX) == -1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -322,7 +322,7 @@ long getdef_long (const char *item, long dflt)
 	}
 
 	if (a2sl(&val, d->value, NULL, 0, -1, LONG_MAX) == -1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -354,7 +354,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 	}
 
 	if (str2ul(&val, d->value) == -1) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 		         _("configuration error - cannot parse %s value: '%s'"),
 		         item, d->value);
 		return dflt;
@@ -391,7 +391,7 @@ int putdef_str (const char *name, const char *value, const char *srcfile)
 	cp = strdup (value);
 	if (NULL == cp) {
 		(void) fputs (_("Could not allocate space for config info.\n"),
-		              shadow_logfd);
+		              log_get_logfd());
 		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
 		return -1;
 	}
@@ -435,7 +435,7 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name, cons
 			goto out;
 		}
 	}
-	fprintf (shadow_logfd,
+	fprintf (log_get_logfd(),
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
 	if (srcfile != NULL)
