@@ -5,10 +5,9 @@
 #include <unistd.h>
 
 #include "atoi/a2i.h"
+#include "string/strerrno.h"
 #include "subid.h"
 #include "stdlib.h"
-#include "prototypes.h"
-#include "shadowlog.h"
 
 
 /* Test program for the subid freeing routine */
@@ -29,8 +28,8 @@ int main(int argc, char *argv[])
 	struct subordinate_range range;
 	bool group = false;   // get subuids by default
 
-	log_set_progname(Prog);
-	log_set_logfd(stderr);
+	if (!subid_init(Prog, stderr))
+		fprintf(stderr, "subid_init: %s\n", strerrno());
 	while ((c = getopt(argc, argv, "g")) != EOF) {
 		switch(c) {
 		case 'g': group = true; break;

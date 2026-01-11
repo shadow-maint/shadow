@@ -6,8 +6,8 @@
 
 #include "attr.h"
 #include "prototypes.h"
-#include "shadowlog.h"
 #include "string/strcmp/streq.h"
+#include "string/strerrno.h"
 #include "subid.h"
 
 static const char Prog[] = "getsubids";
@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
 	struct subid_range *ranges;
 	const char *owner;
 
-	log_set_progname(Prog);
-	log_set_logfd(stderr);
+	if (!subid_init(Prog, stderr))
+		fprintf(stderr, "subid_init: %s\n", strerrno());
 	if (argc < 2)
 		usage();
 	owner = argv[1];
