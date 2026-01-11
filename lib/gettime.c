@@ -29,7 +29,6 @@
 gettime(void)
 {
 	char    *source_date_epoch;
-	FILE    *shadow_logfd = log_get_logfd();
 	time_t  fallback, epoch;
 
 	fallback = time (NULL);
@@ -39,7 +38,7 @@ gettime(void)
 		return fallback;
 
 	if (a2i(time_t, &epoch, source_date_epoch, NULL, 10, 0, fallback) == -1) {
-		fprintf(shadow_logfd,
+		fprintf(log_get_logfd(),
 		        _("Environment variable $SOURCE_DATE_EPOCH: a2i(\"%s\"): %s"),
 		        source_date_epoch, strerrno());
 		return fallback;
