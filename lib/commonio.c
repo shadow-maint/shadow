@@ -45,7 +45,6 @@
 
 
 /* local function prototypes */
-static int lrename (const char *, const char *);
 static int check_link_count (const char *file, bool log);
 static int do_lock_file (const char *file, const char *lock, bool log);
 static /*@null@*/ /*@dependent@*/FILE *fmkstemp_set_perms (
@@ -68,32 +67,6 @@ static /*@dependent@*/ /*@null@*/struct commonio_entry *next_entry_by_name (
 
 static int lock_count = 0;
 static bool nscd_need_reload = false;
-
-/*
- * Simple rename(P) alternative that attempts to rename to symlink
- * target.
- */
-int lrename (const char *old, const char *new)
-{
-	int res;
-	char *r = NULL;
-	struct stat sb;
-
-	if (lstat (new, &sb) == 0 && S_ISLNK (sb.st_mode)) {
-		r = realpath (new, NULL);
-		if (NULL == r) {
-			perror ("realpath in lrename()");
-		} else {
-			new = r;
-		}
-	}
-
-	res = rename (old, new);
-
-	free (r);
-
-	return res;
-}
 
 static int check_link_count (const char *file, bool log)
 {
@@ -311,7 +284,7 @@ static int create_backup (const char *name, FILE * fp)
 	}
 
 	stprintf_a(target, "%s-", name);
-	if (lrename(tmpf, target) != 0) {
+	if (rename(tmpf, target) != 0) {
 		unlink(tmpf);
 		return -1;
 	}
@@ -975,7 +948,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		goto fail;
 	}
 
-	if (lrename(tmpf, db->filename) != 0) {
+	if (rename(tmpf, db->filename) != 0) {
 		goto fail;
 	}
 
