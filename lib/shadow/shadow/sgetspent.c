@@ -21,7 +21,6 @@
 #include "atoi/a2i.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "shadowlog_internal.h"
 #include "sizeof.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"

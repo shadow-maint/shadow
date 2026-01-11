@@ -32,7 +32,6 @@ void do_pam_passwd (const char *user, bool silent, bool change_expired)
 {
 	pam_handle_t *pamh = NULL;
 	int flags = 0, ret;
-	FILE *shadow_logfd = log_get_logfd();
 
 	if (silent)
 		flags |= PAM_SILENT;
@@ -41,20 +40,20 @@ void do_pam_passwd (const char *user, bool silent, bool change_expired)
 
 	ret = pam_start ("passwd", user, &conv, &pamh);
 	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd,
+		fprintf (log_get_logfd(),
 			 _("passwd: pam_start() failed, error %d\n"), ret);
 		exit (E_PAM_ERR);
 	}
 
 	ret = pam_chauthtok (pamh, flags);
 	if (ret != PAM_SUCCESS) {
-		fprintf (shadow_logfd, _("passwd: %s\n"), pam_strerror (pamh, ret));
-		fputs (_("passwd: password unchanged\n"), shadow_logfd);
+		fprintf (log_get_logfd(), _("passwd: %s\n"), pam_strerror (pamh, ret));
+		fputs (_("passwd: password unchanged\n"), log_get_logfd());
 		pam_end (pamh, ret);
 		exit (E_PAM_ERR);
 	}
 
-	fputs (_("passwd: password updated successfully\n"), shadow_logfd);
+	fputs (_("passwd: password updated successfully\n"), log_get_logfd());
 	(void) pam_end (pamh, PAM_SUCCESS);
 }
 #else				/* !USE_PAM */

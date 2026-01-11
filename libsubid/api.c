@@ -21,7 +21,7 @@
 
 bool subid_init(const char *progname, FILE * logfd)
 {
-	FILE *shadow_logfd;
+	FILE *fp;
 	if (progname) {
 		progname = strdup(progname);
 		if (!progname)
@@ -35,12 +35,12 @@ bool subid_init(const char *progname, FILE * logfd)
 		log_set_logfd(logfd);
 		return true;
 	}
-	shadow_logfd = fopen("/dev/null", "w");
-	if (!shadow_logfd) {
+	fp = fopen("/dev/null", "w");
+	if (!fp) {
 		log_set_logfd(stderr);
 		return false;
 	}
-	log_set_logfd(shadow_logfd);
+	log_set_logfd(fp);
 	return true;
 }
 

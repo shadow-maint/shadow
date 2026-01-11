@@ -179,7 +179,6 @@ libshadow_la_SOURCES = \
 	shadowio.h \
 	shadowlog.c \
 	shadowlog.h \
-	shadowlog_internal.h \
 	shadowmem.c \
 	shell.c \
 	sizeof.h \

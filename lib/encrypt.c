@@ -16,7 +16,7 @@
 
 #include "prototypes.h"
 #include "defines.h"
-#include "shadowlog_internal.h"
+#include "shadowlog.h"
 #include "string/strcmp/strprefix.h"
 
 
@@ -64,7 +64,7 @@
 				method = &nummethod[0];
 			}
 		}
-		(void) fprintf (shadow_logfd,
+		(void) fprintf (log_get_logfd(),
 		                _("crypt method not supported by libcrypt? (%s)\n"),
 		                method);
 		errno = EINVAL;

@@ -37,7 +37,6 @@ int
 add_groups(const char *list)
 {
 	char    *dup;
-	FILE *shadow_logfd = log_get_logfd();
 	gid_t   *gids;
 	size_t  n;
 
@@ -62,7 +61,7 @@ add_groups(const char *list)
 
 			grp = getgrnam(g); /* local, no need for xgetgrnam */
 			if (NULL == grp) {
-				fprintf(shadow_logfd, _("Warning: unknown group %s\n"), g);
+				fprintf(log_get_logfd(), _("Warning: unknown group %s\n"), g);
 				continue;
 			}
 
@@ -72,7 +71,7 @@ add_groups(const char *list)
 	free(dup);
 
 	if (setgroups(n, gids) == -1) {
-		fprintf(shadow_logfd, "setgroups: %s\n", strerrno());
+		fprintf(log_get_logfd(), "setgroups: %s\n", strerrno());
 		goto free_gids;
 	}
 
