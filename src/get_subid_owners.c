@@ -6,9 +6,9 @@
 #include "atoi/getnum.h"
 #include "attr.h"
 #include "prototypes.h"
-#include "shadowlog.h"
 #include "stdlib.h"
 #include "string/strcmp/streq.h"
+#include "string/strerrno.h"
 #include "subid.h"
 
 
@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 	uid_t  u;
 	uid_t  *uids;
 
-	log_set_progname(Prog);
-	log_set_logfd(stderr);
+	if (!subid_init(Prog, stderr))
+		fprintf(stderr, "subid_init: %s\n", strerrno());
 	if (argc < 2) {
 		usage();
 	}
