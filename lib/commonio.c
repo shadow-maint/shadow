@@ -27,6 +27,7 @@
 #include "atoi/getnum.h"
 #include "commonio.h"
 #include "defines.h"
+#include "fs/mkstemp/fmkomstemp.h"
 #include "nscd.h"
 #ifdef WITH_TCB
 #include <tcb.h>
@@ -47,9 +48,8 @@
 static int lrename (const char *, const char *);
 static int check_link_count (const char *file, bool log);
 static int do_lock_file (const char *file, const char *lock, bool log);
-static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
-	const char *name,
-	const char *mode,
+static /*@null@*/ /*@dependent@*/FILE *fmkstemp_set_perms (
+	char *name,
 	const struct stat *sb);
 static int create_backup (const char *, FILE *);
 static void free_linked_list (struct commonio_db *);
@@ -240,17 +240,13 @@ static int do_lock_file (const char *file, const char *lock, bool log)
 }
 
 
-static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
-	const char *name,
-	const char *mode,
+static /*@null@*/ /*@dependent@*/FILE *fmkstemp_set_perms (
+	char *name,
 	const struct stat *sb)
 {
 	FILE *fp;
-	mode_t mask;
 
-	mask = umask (0777);
-	fp = fopen (name, mode);
-	(void) umask (mask);
+	fp = fmkomstemp(name, 0, 0600);
 	if (NULL == fp) {
 		return NULL;
 	}
@@ -266,24 +262,26 @@ static /*@null@*/ /*@dependent@*/FILE *fopen_set_perms (
 
       fail:
 	(void) fclose (fp);
-	/* fopen_set_perms is used for intermediate files */
+	/* fmkstemp_set_perms is used for intermediate files */
 	(void) unlink (name);
 	return NULL;
 }
 
 
-static int create_backup (const char *backup, FILE * fp)
+static int create_backup (const char *name, FILE * fp)
 {
+	char  tmpf[PATH_MAX], target[PATH_MAX];
 	struct stat sb;
 	struct utimbuf ub;
 	FILE *bkfp;
 	int c;
 
+	stprintf_a(tmpf, "%s.cioXXXXXX", name);
 	if (fstat (fileno (fp), &sb) != 0) {
 		return -1;
 	}
 
-	bkfp = fopen_set_perms (backup, "w", &sb);
+	bkfp = fmkstemp_set_perms(tmpf, &sb);
 	if (NULL == bkfp) {
 		return -1;
 	}
@@ -299,22 +297,28 @@ static int create_backup (const char *backup, FILE * fp)
 	}
 	if ((c != EOF) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
 		(void) fclose (bkfp);
-		unlink(backup);
+		unlink(tmpf);
 		return -1;
 	}
 	if (fsync (fileno (bkfp)) != 0) {
 		(void) fclose (bkfp);
-		unlink(backup);
+		unlink(tmpf);
 		return -1;
 	}
 	if (fclose (bkfp) != 0) {
-		unlink(backup);
+		unlink(tmpf);
+		return -1;
+	}
+
+	stprintf_a(target, "%s-", name);
+	if (lrename(tmpf, target) != 0) {
+		unlink(tmpf);
 		return -1;
 	}
 
 	ub.actime = sb.st_atime;
 	ub.modtime = sb.st_mtime;
-	(void) utime (backup, &ub);
+	(void) utime(tmpf, &ub);
 	return 0;
 }
 
@@ -900,19 +904,13 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		/*
 		 * Create backup file.
 		 */
-		if (stprintf_a(buf, "%s-", db->filename) == -1) {
-			(void) fclose (db->fp);
-			db->fp = NULL;
-			goto fail;
-		}
-
 #ifdef WITH_SELINUX
 		if (process_selinux
 		    && set_selinux_file_context (db->filename, S_IFREG) != 0) {
 			errors = true;
 		}
 #endif
-		if (create_backup (buf, db->fp) != 0) {
+		if (create_backup(db->filename, db->fp) != 0) {
 			errors = true;
 		}
 
@@ -939,7 +937,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		sb.st_gid = db->st_gid;
 	}
 
-	if (stprintf_a(buf, "%s+", db->filename) == -1)
+	if (stprintf_a(buf, "%s.cioXXXXXX", db->filename) == -1)
 		goto fail;
 
 #ifdef WITH_SELINUX
@@ -949,7 +947,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 	}
 #endif
 
-	db->fp = fopen_set_perms (buf, "w", &sb);
+	db->fp = fmkstemp_set_perms(buf, &sb);
 	if (NULL == db->fp) {
 		goto fail;
 	}
@@ -977,7 +975,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		goto fail;
 	}
 
-	if (lrename (buf, db->filename) != 0) {
+	if (lrename(buf, db->filename) != 0) {
 		goto fail;
 	}
 
