@@ -414,7 +414,7 @@ get_defaults(const struct option_flags *flags)
 		 * Default Password Inactive value
 		 */
 		else if (streq(buf, DINACT)) {
-			if (a2sl(&def_inactive, ccp, NULL, 0, -1, LONG_MAX) == -1) {
+			if (a2sl(&def_inactive, ccp, NULL, 0, -1,) == -1) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, ccp);
@@ -1278,9 +1278,7 @@ static void process_flags (int argc, char **argv, struct option_flags *flags)
 				eflg = true;
 				break;
 			case 'f':
-				if (a2sl(&def_inactive, optarg, NULL, 0, -1, LONG_MAX)
-				    == -1)
-				{
+				if (a2sl(&def_inactive, optarg, NULL, 0, -1,) == -1) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
