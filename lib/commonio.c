@@ -299,16 +299,16 @@ static int create_backup (const char *backup, FILE * fp)
 	}
 	if ((c != EOF) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
 		(void) fclose (bkfp);
-		/* FIXME: unlink the backup file? */
+		unlink(backup);
 		return -1;
 	}
 	if (fsync (fileno (bkfp)) != 0) {
 		(void) fclose (bkfp);
-		/* FIXME: unlink the backup file? */
+		unlink(backup);
 		return -1;
 	}
 	if (fclose (bkfp) != 0) {
-		/* FIXME: unlink the backup file? */
+		unlink(backup);
 		return -1;
 	}
 
