@@ -16,7 +16,6 @@
 #include "exitcodes.h"
 #include "prototypes.h"
 #include "shadowlog.h"
-#include "shadowlog_internal.h"
 #include "string/strerrno.h"
 
 
@@ -41,11 +40,11 @@ run_command(const char *cmd, const char *argv[],
 			_exit (E_CMD_NOTFOUND);
 		}
 		fprintf (log_get_logfd(), "%s: cannot execute %s: %s\n",
-		         shadow_progname, cmd, strerrno());
+		         log_get_progname(), cmd, strerrno());
 		_exit (E_CMD_NOEXEC);
 	} else if ((pid_t)-1 == pid) {
 		fprintf (log_get_logfd(), "%s: cannot execute %s: %s\n",
-		         shadow_progname, cmd, strerrno());
+		         log_get_progname(), cmd, strerrno());
 		return -1;
 	}
 
@@ -58,7 +57,7 @@ run_command(const char *cmd, const char *argv[],
 
 	if ((pid_t)-1 == wpid) {
 		fprintf (log_get_logfd(), "%s: waitpid (status: %d): %s\n",
-		         shadow_progname, *status, strerrno());
+		         log_get_progname(), *status, strerrno());
 		return -1;
 	}
 

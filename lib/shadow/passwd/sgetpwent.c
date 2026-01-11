@@ -19,7 +19,6 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "prototypes.h"
-#include "shadowlog_internal.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 #include "string/strtok/strsep2arr.h"
