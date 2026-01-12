@@ -64,35 +64,12 @@ sgetspent(const char *s)
 
 	spwd.sp_namp = fields[0];
 	spwd.sp_pwdp = fields[1];
-
-	/*
-	 * Get the last changed date.  For all of the integer fields,
-	 * we check for proper format.  It is an error to have an
-	 * incorrectly formatted number.
-	 */
-
-	if (streq(fields[2], ""))
+	if (streq(fields[2], "0"))
+		spwd.sp_lstchg = 0;
+	else
 		spwd.sp_lstchg = -1;
-	else if (a2sl(&spwd.sp_lstchg, fields[2], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the minimum period between password changes.
-	 */
-
-	if (streq(fields[3], ""))
-		spwd.sp_min = -1;
-	else if (a2sl(&spwd.sp_min, fields[3], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the maximum number of days a password is valid.
-	 */
-
-	if (streq(fields[4], ""))
-		spwd.sp_max = -1;
-	else if (a2sl(&spwd.sp_max, fields[4], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+	spwd.sp_min = -1;
+	spwd.sp_max = -1;
 
 	/*
 	 * If there are only OFIELDS fields (this is a SVR3.2 /etc/shadow
@@ -108,24 +85,8 @@ sgetspent(const char *s)
 		return &spwd;
 	}
 
-	/*
-	 * Get the number of days of password expiry warning.
-	 */
-
-	if (streq(fields[5], ""))
-		spwd.sp_warn = -1;
-	else if (a2sl(&spwd.sp_warn, fields[5], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
-
-	/*
-	 * Get the number of days of inactivity before an account is
-	 * disabled.
-	 */
-
-	if (streq(fields[6], ""))
-		spwd.sp_inact = -1;
-	else if (a2sl(&spwd.sp_inact, fields[6], NULL, 0, 0, LONG_MAX) == -1)
-		return NULL;
+	spwd.sp_warn = -1;
+	spwd.sp_inact = -1;
 
 	/*
 	 * Get the number of days after the epoch before the account is

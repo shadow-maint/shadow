@@ -12,9 +12,6 @@
 <!ENTITY LASTLOG_UID_MAX       SYSTEM "login.defs.d/LASTLOG_UID_MAX.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
-<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
-<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
-<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SUB_GID_COUNT         SYSTEM "login.defs.d/SUB_GID_COUNT.xml">
 <!ENTITY SUB_UID_COUNT         SYSTEM "login.defs.d/SUB_UID_COUNT.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
@@ -225,37 +222,6 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Defines the number of days after a password exceeds its maximum age
-	    before the user account gets locked.
-	    If the user does not change their password within this period of time,
-	    their account becomes inactive.
-	    This value is stored in the shadow password file.
-	    For more information, see <citerefentry>
-	    <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-	    </citerefentry>.
-	  </para>
-	  <para>
-	    A value of 0 disables the account when the password expires, with no delay.
-	  </para>
-	  <para>
-	    A value of -1 empties the respective field in the shadow password file,
-	    which means that the inactivity period is not enforced.
-	  </para>
-	  <para>
-	    If not specified,
-	    <command>useradd</command> uses the default inactivity
-	    period specified by the <option>INACTIVE</option> variable in
-	    <filename>/etc/default/useradd</filename>,
-	    or -1 by default if no value is specified.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-F</option>, <option>--add-subids-for-system</option>
 	</term>
 	<listitem>
@@ -354,14 +320,10 @@
 	  <para>
 	    Overrides <filename>/etc/login.defs</filename> defaults
 	    (<option>UID_MIN</option>, <option>UID_MAX</option>,
-	    <option>UMASK</option>, <option>PASS_MAX_DAYS</option>
+	    <option>UMASK</option>,
 	    and others).
 	  </para>
 	  <para>
-	    Example:
-	    <option>-K</option>&nbsp;<replaceable>PASS_MAX_DAYS
-	    </replaceable>=<replaceable>-1</replaceable> can be used
-	    when creating an account to turn off password aging.
 	    Multiple <option>-K</option> options can be specified,
 	    e.g.:
 	    <option>-K</option>&nbsp;<replaceable>UID_MIN</replaceable>
@@ -686,22 +648,6 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-f</option>, <option>--inactive</option>&nbsp;<replaceable>INACTIVE</replaceable>
-	  </term>
-	  <listitem>
-	    <para>
-	      specifies the number of days after a password expires
-	      during which the user can still log in.
-	      After this period, the account is locked.
-	    </para>
-	    <para>
-	      This option sets the <option>INACTIVE</option> variable in
-	      <filename>/etc/default/useradd</filename>.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>
 	    <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GROUP</replaceable>
 	  </term>
 	  <listitem>
@@ -785,9 +731,6 @@
       &LASTLOG_UID_MAX;
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
-      &PASS_MAX_DAYS;
-      &PASS_MIN_DAYS;
-      &PASS_WARN_AGE;
       &SUB_GID_COUNT; <!-- documents also SUB_GID_MAX and SUB_GID_MIN -->
       &SUB_UID_COUNT; <!-- documents also SUB_UID_MAX and SUB_UID_MIN -->
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->

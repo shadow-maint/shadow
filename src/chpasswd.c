@@ -633,10 +633,10 @@ int main (int argc, char **argv)
 				 */
 				newsp.sp_namp  = name;
 				/* newsp.sp_pwdp  = NULL; will be set later */
-				/* newsp.sp_lstchg= 0;    will be set later */
-				newsp.sp_min   = getdef_num ("PASS_MIN_DAYS", -1);
-				newsp.sp_max   = getdef_num ("PASS_MAX_DAYS", -1);
-				newsp.sp_warn  = getdef_num ("PASS_WARN_AGE", -1);
+				/* newsp.sp_lstchg= -1;    will be set later */
+				newsp.sp_min   = -1;
+				newsp.sp_max   = -1;
+				newsp.sp_warn  = -1;
 				newsp.sp_inact = -1;
 				newsp.sp_expire= -1;
 				newsp.sp_flag  = SHADOW_SP_FLAG_UNSET;
@@ -654,12 +654,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = gettime () / DAY;
-			if (0 == newsp.sp_lstchg) {
-				/* Better disable aging than requiring a
-				 * password change */
-				newsp.sp_lstchg = -1;
-			}
+			newsp.sp_lstchg = -1;
 		}
 
 		if (   (NULL == sp)
