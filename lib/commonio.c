@@ -872,7 +872,7 @@ int
 commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 {
 	bool         errors = false;
-	char         buf[1024];
+	char         tmpf[PATH_MAX];
 	struct stat  sb;
 
 	if (!db->isopen) {
@@ -937,7 +937,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 		sb.st_gid = db->st_gid;
 	}
 
-	if (stprintf_a(buf, "%s.cioXXXXXX", db->filename) == -1)
+	if (stprintf_a(tmpf, "%s.cioXXXXXX", db->filename) == -1)
 		goto fail;
 
 #ifdef WITH_SELINUX
@@ -947,7 +947,7 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 	}
 #endif
 
-	db->fp = fmkstemp_set_perms(buf, &sb);
+	db->fp = fmkstemp_set_perms(tmpf, &sb);
 	if (NULL == db->fp) {
 		goto fail;
 	}
@@ -971,11 +971,11 @@ commonio_close(struct commonio_db *db, MAYBE_UNUSED bool process_selinux)
 	db->fp = NULL;
 
 	if (errors) {
-		unlink (buf);
+		unlink(tmpf);
 		goto fail;
 	}
 
-	if (lrename(buf, db->filename) != 0) {
+	if (lrename(tmpf, db->filename) != 0) {
 		goto fail;
 	}
 
