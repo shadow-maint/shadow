@@ -23,7 +23,7 @@
 /*
  * valid - compare encrypted passwords
  *
- *	Valid() compares the DES encrypted password from the password file
+ *	Valid() compares the hashed password from the password file
  *	against the password which the user has entered after it has been
  *	encrypted using the same salt as the original.  Entries which do
  *	not have a password file entry have a NULL pw_name field and this
