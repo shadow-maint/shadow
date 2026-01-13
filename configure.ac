@@ -103,9 +103,6 @@ done])
 AC_DEFINE_UNQUOTED([FAILLOG_FILE], ["$shadow_cv_logdir/faillog"],
 	[Path for faillog file.])
 
-AC_DEFINE_UNQUOTED([PASSWD_PROGRAM], ["$exec_prefix/bin/passwd"],
-	[Path to passwd program.])
-
 AC_ARG_ENABLE([shadowgrp],
 	[AS_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
 	[case "${enableval}" in
