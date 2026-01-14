@@ -130,7 +130,7 @@ static int create_backup_file (FILE * fp, char *backup, struct stat *sb)
 	ub.modtime = sb->st_mtime;
 	if (   (utime (backup, &ub) != 0)
 	    || (fchown(fileno(bkfp), sb->st_uid, sb->st_gid) != 0)
-	    || (fchmod(fileno(bkfp), sb->st_mode) != 0)) {
+	    || (fchmod(fileno(bkfp), sb->st_mode & 0664) != 0)) {
 		fclose(bkfp);
 		unlink (backup);
 		return -1;
