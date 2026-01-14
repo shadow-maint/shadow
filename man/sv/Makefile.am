@@ -4,7 +4,6 @@ mandir = @mandir@/sv
 man_MANS = \
 	man1/chage.1 \
 	man1/chsh.1 \
-	man1/expiry.1 \
 	man5/faillog.5 \
 	man8/faillog.8 \
 	man3/getspnam.3 \
