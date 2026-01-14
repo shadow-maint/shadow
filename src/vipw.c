@@ -43,6 +43,7 @@
 #endif				/* WITH_TCB */
 #include "shadowlog.h"
 #include "sssd.h"
+#include "fs/copy/fcopy.h"
 #include "fs/mkstemp/fmkomstemp.h"
 #include "string/sprintf/aprintf.h"
 #include "string/sprintf/snprintf.h"
@@ -108,21 +109,13 @@ static int create_backup_file (FILE * fp, char *backup, struct stat *sb)
 {
 	struct utimbuf ub;
 	FILE *bkfp;
-	int c;
 
 	bkfp = fmkomstemp(backup, 0, 0600);
 	if (NULL == bkfp) {
 		return -1;
 	}
 
-	c = 0;
-	if (fseeko (fp, 0, SEEK_SET) == 0)
-		while ((c = getc (fp)) != EOF) {
-			if (putc (c, bkfp) == EOF) {
-				break;
-			}
-		}
-	if ((EOF != c) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
+	if (fcopy(bkfp, fp) == -1) {
 		fclose (bkfp);
 		unlink (backup);
 		return -1;
