@@ -318,7 +318,7 @@ static int create_backup (const char *name, FILE * fp)
 
 	ub.actime = sb.st_atime;
 	ub.modtime = sb.st_mtime;
-	(void) utime(tmpf, &ub);
+	(void) utime(target, &ub);
 	return 0;
 }
 
