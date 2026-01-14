@@ -426,7 +426,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (stat (file, &st1) != 0) {
 			vipwexit (_("failed to stat edited file"), errno, 1);
 		}
-		to_rename = aprintf("%s+", file);
+		to_rename = aprintf("%s,XXXXXX", file);
 		if (to_rename == NULL)
 			vipwexit (_("aprintf() failed"), errno, 1);
 
