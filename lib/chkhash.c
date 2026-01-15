@@ -40,9 +40,13 @@ match_regex(const char *pattern, const char *string)
 bool 
 is_valid_hash(const char *hash) 
 {
-	hash = strprefix(hash, "!") ?: hash;
+	// If the hash starts with '!', it means just lock the password.
+	if (strprefix(hash, "!"))
+		return true;
 
-	if (streq(hash, "*"))
+	// If the hash starts with '*', this is an intentional way to prevent
+	// a user from logging in with password.
+	if (strprefix(hash, "*"))
 		return true;
 
 	// Minimum hash length
