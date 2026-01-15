@@ -38,12 +38,14 @@ match_regex(const char *pattern, const char *string)
 bool 
 is_valid_hash(const char *hash) 
 {
+	// Password temporarily locked
 	hash = strprefix(hash, "!") ?: hash;
 
 	// Passwordless account; discouraged
 	if (streq(hash, ""))
 		return true;
 
+	// Password permanently locked (and forgotten)
 	if (streq(hash, "*"))
 		return true;
 
