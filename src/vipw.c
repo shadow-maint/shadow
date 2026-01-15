@@ -413,8 +413,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	createedit = false;
 #ifdef WITH_TCB
 	if (tcb_mode) {
-		f = fopen (fileedit, "r");
-		if (NULL == f) {
+		FILE  *fe;
+
+		fe = fopen(fileedit, "r");
+		if (NULL == fe) {
 			vipwexit (_("failed to open scratch file"), errno, 1);
 		}
 		if (unlink (fileedit) != 0) {
@@ -430,11 +432,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (to_rename == NULL)
 			vipwexit (_("aprintf() failed"), errno, 1);
 
-		if (create_backup_file (f, to_rename, &st1) != 0) {
+		if (create_backup_file(fe, to_rename, &st1) != 0) {
 			free(to_rename);
 			vipwexit (_("failed to create backup file"), errno, 1);
 		}
-		(void) fclose (f);
+		(void) fclose(fe);
 	} else {
 #endif				/* WITH_TCB */
 		to_rename = fileedit;
