@@ -31,9 +31,7 @@ match_regex(const char *pattern, const char *string)
 
 
 /*
- * is_valid_hash - check if the given string is a valid password hash
- *
- * Returns true if the string appears to be a valid hash, false otherwise.
+ * is_valid_hash - check if the string is a valid shadow(5) 2nd field.
  *
  * regex from: https://man.archlinux.org/man/crypt.5.en
  */
