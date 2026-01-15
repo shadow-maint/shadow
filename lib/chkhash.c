@@ -42,6 +42,10 @@ is_valid_hash(const char *hash)
 {
 	hash = strprefix(hash, "!") ?: hash;
 
+	// Passwordless account; discouraged
+	if (streq(hash, ""))
+		return true;
+
 	if (streq(hash, "*"))
 		return true;
 
