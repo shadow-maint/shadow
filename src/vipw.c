@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <utime.h>
 
+#include "attr.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
@@ -72,15 +73,16 @@ static bool tcb_mode = false;
 #endif				/* WITH_TCB */
 
 /* local function prototypes */
-static void usage (int status);
+NORETURN static void usage(int status);
 static int create_backup_file (FILE *, char *, struct stat *);
-static void vipwexit (const char *msg, int syserr, int ret);
+NORETURN static void vipwexit(const char *msg, int syserr, int ret);
 static void vipwedit (const char *, int (*)(void), int (*)(bool));
 
 /*
  * usage - display usage message and exit
  */
-static void usage (int status)
+static void
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -153,7 +155,8 @@ static int create_backup_file (FILE * fp, char *backup, struct stat *sb)
 /*
  *
  */
-static void vipwexit (const char *msg, int syserr, int ret)
+static void
+vipwexit(const char *msg, int syserr, int ret)
 {
 	int err = errno;
 
