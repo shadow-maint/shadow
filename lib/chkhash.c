@@ -40,6 +40,9 @@ match_regex(const char *pattern, const char *string)
 bool 
 is_valid_hash(const char *hash) 
 {
+	if (streq(hash, "!"))
+		return true;
+
 	hash = strprefix(hash, "!") ?: hash;
 
 	if (streq(hash, "*"))
