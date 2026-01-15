@@ -219,18 +219,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
-		stprintf_a(fileedit,
-		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.%s.shadow.%s.XXXXXX",
-		         Prog, user);
-	} else {
-#endif				/* WITH_TCB */
-		stprintf_a(fileedit, "/etc/.%s.XXXXXX", Prog);
-#ifdef WITH_TCB
 	}
-#endif				/* WITH_TCB */
+#endif
 	unlock = file_unlock;
 	filename = file;
-	fileeditname = fileedit;
 
 	if (access (file, F_OK) != 0) {
 		vipwexit (file, 1, 1);
@@ -275,6 +267,16 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		vipwexit (file, 1, 1);
 	}
 #ifdef WITH_TCB
+	if (tcb_mode) {
+		stprintf_a(fileedit,
+		           TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.%s.shadow.%s.XXXXXX",
+		           Prog, user);
+	} else
+#endif
+	{
+		stprintf_a(fileedit, "/etc/.%s.XXXXXX", Prog);
+	}
+#ifdef WITH_TCB
 	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE))
 		vipwexit (_("failed to gain privileges"), errno, 1);
 #endif				/* WITH_TCB */
@@ -282,6 +284,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		vipwexit (_("Couldn't make backup"), errno, 1);
 	}
 	(void) fclose (f);
+	fileeditname = fileedit;
 	createedit = true;
 
 	editor = getenv ("VISUAL");
