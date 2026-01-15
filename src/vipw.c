@@ -319,18 +319,18 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (-1 == status) {
 			fprintf(stderr, _("%s: %s: %s\n"), Prog, editor, strerrno());
 			exit (1);
-		} else if (   WIFEXITED (status)
-		           && (WEXITSTATUS (status) != 0)) {
+		}
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
 			fprintf (stderr, _("%s: %s returned with status %d\n"),
 			         Prog, editor, WEXITSTATUS (status));
 			exit (WEXITSTATUS (status));
-		} else if (WIFSIGNALED (status)) {
+		}
+		if (WIFSIGNALED(status)) {
 			fprintf (stderr, _("%s: %s killed by signal %d\n"),
 			         Prog, editor, WTERMSIG (status));
 			exit (1);
-		} else {
-			exit (0);
 		}
+		exit(0);
 	}
 
 	/* Run child in a new pgrp and make it the foreground pgrp. */
@@ -382,12 +382,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		sigprocmask(SIG_SETMASK, &omask, NULL);
 	}
 
-	if (-1 == pid) {
+	if (-1 == pid)
 		vipwexit (editor, 1, 1);
-	} else if (   WIFEXITED (status)
-	           && (WEXITSTATUS (status) != 0)) {
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		vipwexit (NULL, 0, WEXITSTATUS (status));
-	} else if (WIFSIGNALED (status)) {
+	if (WIFSIGNALED(status)) {
 		fprintf (stderr, _("%s: %s killed by signal %d\n"),
 		         Prog, editor, WTERMSIG(status));
 		vipwexit (NULL, 0, 1);
