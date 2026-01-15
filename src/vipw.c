@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <utime.h>
 
+#include "attr.h"
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
@@ -72,15 +73,16 @@ static bool tcb_mode = false;
 #endif				/* WITH_TCB */
 
 /* local function prototypes */
-static void usage (int status);
+NORETURN static void usage(int status);
 static int create_backup_file (FILE *, char *, struct stat *);
-static void vipwexit (const char *msg, int syserr, int ret);
+NORETURN static void vipwexit(const char *msg, int syserr, int ret);
 static void vipwedit (const char *, int (*)(void), int (*)(bool));
 
 /*
  * usage - display usage message and exit
  */
-static void usage (int status)
+static void
+usage(int status)
 {
 	FILE *usageout = (E_SUCCESS != status) ? stderr : stdout;
 	(void) fprintf (usageout,
@@ -153,7 +155,8 @@ static int create_backup_file (FILE * fp, char *backup, struct stat *sb)
 /*
  *
  */
-static void vipwexit (const char *msg, int syserr, int ret)
+static void
+vipwexit(const char *msg, int syserr, int ret)
 {
 	int err = errno;
 
@@ -216,18 +219,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (shadowtcb_drop_priv () == SHADOWTCB_FAILURE) {
 			vipwexit (_("failed to drop privileges"), errno, 1);
 		}
-		stprintf_a(fileedit,
-		         TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.%s.shadow.%s.XXXXXX",
-		         Prog, user);
-	} else {
-#endif				/* WITH_TCB */
-		stprintf_a(fileedit, "/etc/.%s.XXXXXX", Prog);
-#ifdef WITH_TCB
 	}
-#endif				/* WITH_TCB */
+#endif
 	unlock = file_unlock;
 	filename = file;
-	fileeditname = fileedit;
 
 	if (access (file, F_OK) != 0) {
 		vipwexit (file, 1, 1);
@@ -272,6 +267,16 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		vipwexit (file, 1, 1);
 	}
 #ifdef WITH_TCB
+	if (tcb_mode) {
+		stprintf_a(fileedit,
+		           TCB_DIR "/" SHADOWTCB_SCRATCHDIR "/.%s.shadow.%s.XXXXXX",
+		           Prog, user);
+	} else
+#endif
+	{
+		stprintf_a(fileedit, "/etc/.%s.XXXXXX", Prog);
+	}
+#ifdef WITH_TCB
 	if (tcb_mode && (shadowtcb_gain_priv () == SHADOWTCB_FAILURE))
 		vipwexit (_("failed to gain privileges"), errno, 1);
 #endif				/* WITH_TCB */
@@ -279,6 +284,7 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		vipwexit (_("Couldn't make backup"), errno, 1);
 	}
 	(void) fclose (f);
+	fileeditname = fileedit;
 	createedit = true;
 
 	editor = getenv ("VISUAL");
@@ -316,18 +322,18 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (-1 == status) {
 			fprintf(stderr, _("%s: %s: %s\n"), Prog, editor, strerrno());
 			exit (1);
-		} else if (   WIFEXITED (status)
-		           && (WEXITSTATUS (status) != 0)) {
+		}
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
 			fprintf (stderr, _("%s: %s returned with status %d\n"),
 			         Prog, editor, WEXITSTATUS (status));
 			exit (WEXITSTATUS (status));
-		} else if (WIFSIGNALED (status)) {
+		}
+		if (WIFSIGNALED(status)) {
 			fprintf (stderr, _("%s: %s killed by signal %d\n"),
 			         Prog, editor, WTERMSIG (status));
 			exit (1);
-		} else {
-			exit (0);
 		}
+		exit(0);
 	}
 
 	/* Run child in a new pgrp and make it the foreground pgrp. */
@@ -379,12 +385,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		sigprocmask(SIG_SETMASK, &omask, NULL);
 	}
 
-	if (-1 == pid) {
+	if (-1 == pid)
 		vipwexit (editor, 1, 1);
-	} else if (   WIFEXITED (status)
-	           && (WEXITSTATUS (status) != 0)) {
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		vipwexit (NULL, 0, WEXITSTATUS (status));
-	} else if (WIFSIGNALED (status)) {
+	if (WIFSIGNALED(status)) {
 		fprintf (stderr, _("%s: %s killed by signal %d\n"),
 		         Prog, editor, WTERMSIG(status));
 		vipwexit (NULL, 0, 1);
@@ -413,8 +418,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 	createedit = false;
 #ifdef WITH_TCB
 	if (tcb_mode) {
-		f = fopen (fileedit, "r");
-		if (NULL == f) {
+		FILE  *fe;
+
+		fe = fopen(fileedit, "r");
+		if (NULL == fe) {
 			vipwexit (_("failed to open scratch file"), errno, 1);
 		}
 		if (unlink (fileedit) != 0) {
@@ -430,11 +437,11 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (bool))
 		if (to_rename == NULL)
 			vipwexit (_("aprintf() failed"), errno, 1);
 
-		if (create_backup_file (f, to_rename, &st1) != 0) {
+		if (create_backup_file(fe, to_rename, &st1) != 0) {
 			free(to_rename);
 			vipwexit (_("failed to create backup file"), errno, 1);
 		}
-		(void) fclose (f);
+		(void) fclose(fe);
 	} else {
 #endif				/* WITH_TCB */
 		to_rename = fileedit;
