@@ -33,15 +33,21 @@ match_regex(const char *pattern, const char *string)
 /*
  * is_valid_hash - check if the given string is a valid password hash
  *
- * Returns true if the string appears to be a valid hash, false otherwise.
+ * Returns true if the string appears to be a valid shadow(5) 2nd field.
  *
  * regex from: https://man.archlinux.org/man/crypt.5.en
  */
 bool 
 is_valid_hash(const char *hash) 
 {
+	// Password temporarily locked
 	hash = strprefix(hash, "!") ?: hash;
 
+	// Passwordless account; discouraged
+	if (streq(hash, ""))
+		return true;
+
+	// Password permanently locked (and forgotten)
 	if (streq(hash, "*"))
 		return true;
 
