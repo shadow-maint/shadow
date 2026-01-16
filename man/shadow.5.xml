@@ -82,8 +82,12 @@
 	    If the password field begins with an exclamation mark <emphasis>!</emphasis>,
 	    the password is locked.
 	    The remaining characters on the
-	    line represent the password field before the password was
-	    locked.
+	    line represent the password hash.
+	  </para>
+	  <para>
+	    If the password hash consists of a star <emphasis>*</emphasis>,
+	    password access is effectively disallowed;
+	    this is because no password can produce a hash like this.
 	  </para>
 	  <para>
 	    Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
