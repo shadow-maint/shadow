@@ -1391,6 +1391,48 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 	}
 #endif				/* WITH_SELINUX */
 
+	if (user_newid == user_id) {
+		uflg = false;
+		oflg = false;
+	}
+	if (user_newgid == user_gid) {
+		gflg = false;
+	}
+	if (   (NULL != user_newshell)
+	    && streq(user_newshell, user_shell)) {
+		sflg = false;
+	}
+	if (streq(user_newname, user_name)) {
+		lflg = false;
+	}
+	if (user_newinactive == user_inactive) {
+		fflg = false;
+	}
+	if (user_newexpire == user_expire) {
+		eflg = false;
+	}
+	if (   (NULL != user_newhome)
+	    && streq(user_newhome, user_home)) {
+		dflg = false;
+		mflg = false;
+	}
+	if (   (NULL != user_newcomment)
+	    && streq(user_newcomment, user_comment)) {
+		cflg = false;
+	}
+
+	if (!(Uflg || uflg || sflg || pflg || mflg || Lflg ||
+	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg
+#ifdef ENABLE_SUBIDS
+	      || vflg || Vflg || wflg || Wflg
+#endif				/* ENABLE_SUBIDS */
+#ifdef WITH_SELINUX
+	      || Zflg
+#endif				/* WITH_SELINUX */
+	)) {
+		exit (E_SUCCESS);
+	}
+
 	if (!is_shadow_pwd && (eflg || fflg)) {
 		fprintf (stderr,
 		         _("%s: shadow passwords required for -e and -f\n"),
