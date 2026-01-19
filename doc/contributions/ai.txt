@@ -1,0 +1,68 @@
+Name
+	AI - artificial intelligence policy
+
+Description
+	It is expressly forbidden to contribute to this project any
+	content that has been created with the assistance of
+	AI tools.
+
+	The use of AI tools should be minimal, limited to reviewing
+	a contribution once it's almost finished.  Use of AI tools in
+	the process of a contribution should be disclosed explicitly and
+	clearly.  If such use of AI tools resulted in changing the
+	contribution in any way --for example, if an AI-based static
+	analyzer detected a bug, which was fixed before sending the
+	contribution--, this should be disclosed explicitly with more
+	detail.
+
+    Exceptions
+	As an exception to the above, AI assistive tools which don't
+	have any influence on the contribution other than enabling the
+	contributor to work with their computer (e.g., screen reader,
+	text to speech) --where the contributor verifies the output to
+	the best of their ability-- are allowed, and the contributor
+	need not disclose their use.
+
+    Concerns
+	Copyright concerns.
+		At this point, the regulations concerning copyright of
+		generated contents are still emerging worldwide.  Using
+		such material could pose a danger of copyright
+		violations, but it could also weaken claims to copyright
+		and void the guarantees given by copyleft licensing.
+
+	Quality concerns.
+		Popular LLMs are really great at generating plausibly
+		looking, but meaningless content.  They pose both the
+		risk of lowering the quality of a project, and of
+		requiring an unfair human effort from contributors and
+		maintainers to review contributions and detect the
+		mistakes resulting from the use of AI.
+
+	Ethical concerns.
+		The business side of AI boom is creating serious ethical
+		concerns.  Among them:
+
+		-  Commercial AI projects are frequently indulging in
+		   blatant copyright violations to train their models.
+		-  Their operations are causing concerns about the huge
+		   use of energy, water, and other natural resources.
+		-  The advertising and use of AI models has caused
+		   a significant harm to employees and reduction of
+		   service quality.
+		-  LLMs have been empowering all kinds of spam and scam
+		   efforts.
+
+Caveats
+	This policy can be revisited, should a case be made over such
+	a tool that does not pose copyright, quality, or ethical
+	concerns.
+
+	We will reject patches were the use of AI is not anecdotical.
+
+Copyright
+	Text derived from --but different than-- the Gentoo project
+	AI policy
+	<https://wiki.gentoo.org/wiki/Project:Council/AI_policy>.
+
+	SPDX-License-Identifier: CC-BY-SA-4.0
