@@ -251,7 +251,7 @@ int main (int argc, char **argv)
 			/* add new shadow entry */
 			bzero(&spent, sizeof(spent));
 			spent.sp_namp   = pw->pw_name;
-			spent.sp_min    = getdef_num ("PASS_MIN_DAYS", -1);
+			spent.sp_min    = -1;
 			spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
 			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
 			spent.sp_inact  = -1;
