@@ -105,7 +105,7 @@ static void read_env_file (const char *filename)
 		} else if (*cp == '\0') {
 			/* end of string */
 			goto finished;
-		} else if (isspace (*cp)) {
+		} else if (isspace_c(*cp)) {
 			/* unescaped whitespace - end of string */
 			stpcpy(cp, "");
 			goto finished;
