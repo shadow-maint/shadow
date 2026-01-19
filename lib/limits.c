@@ -35,6 +35,7 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strspn/stpspn.h"
+#include "string/strtok/stpsep.h"
 #include "typetraits.h"
 
 
@@ -343,17 +344,12 @@ static int setup_user_limits (const char *uname)
 {
 	FILE *fil;
 	char buf[1024];
-	char name[1024];
 	char limits[1024];
 	char deflimits[1024];
-	char tempbuf[1024];
 
 	/* init things */
-	memzero_a(buf);
-	memzero_a(name);
 	memzero_a(limits);
 	memzero_a(deflimits);
-	memzero_a(tempbuf);
 
 	/* start the checks */
 	fil = fopen (LIMITS_FILE, "r");
@@ -367,10 +363,12 @@ static int setup_user_limits (const char *uname)
 	 * FIXME: a better (smarter) checking should be done
 	 */
 	while (fgets (buf, 1024, fil) != NULL) {
-		if (strprefix(buf, "#") || strprefix(buf, "\n")) {
+		char  *name, *lim, *p;
+
+		if (stpsep(buf, "\n") == NULL)
 			continue;
-		}
-		memzero_a(tempbuf);
+		if (strprefix(buf, "#") || streq(buf, ""))
+			continue;
 		/* a valid line should have a username, then spaces,
 		 * then limits
 		 * we allow the format:
@@ -391,21 +389,25 @@ static int setup_user_limits (const char *uname)
 		 * the last encountered entry for a matching group rules.
 		 * If there is no matching group entry, the default limits rule.
 		 */
-		if (sscanf (buf, "%s%[ACDFIKLMNOPRSTUacdfiklmnoprstu0-9 \t-]",
-		            name, tempbuf) == 2) {
-			if (streq(name, uname)) {
-				strcpy (limits, tempbuf);
-				break;
-			} else if (streq(name, "*")) {
-				strcpy (deflimits, tempbuf);
-			} else if (strprefix(name, "@")) {
-				/* If the user is in the group, the group
-				 * limits apply unless later a line for
-				 * the specific user is found.
-				 */
-				if (user_in_group (uname, name+1)) {
-					strcpy (limits, tempbuf);
-				}
+		name = buf;
+		lim = stpsep(buf, " \t");
+		if (lim == NULL)
+			continue;
+		p = stpspn(lim, "ACDFIKLMNOPRSTUacdfiklmnoprstu0123456789 \t-");
+		stpcpy(p, "");
+
+		if (streq(name, uname)) {
+			strcpy(limits, lim);
+			break;
+		} else if (streq(name, "*")) {
+			strcpy(deflimits, lim);
+		} else if (strprefix(name, "@")) {
+			/* If the user is in the group, the group
+			 * limits apply unless later a line for
+			 * the specific user is found.
+			 */
+			if (user_in_group(uname, name+1)) {
+				strcpy(limits, lim);
 			}
 		}
 	}
