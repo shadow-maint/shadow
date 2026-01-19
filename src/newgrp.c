@@ -64,16 +64,14 @@ static void check_perms (const struct group *grp,
                          const char *groupname);
 static void syslog_sg (const char *name, const char *group);
 
-/*
- * usage - print command usage message
- */
-static void usage (void)
+
+static void
+usage(void)
 {
-	if (is_newgrp) {
-		(void) fputs (_("Usage: newgrp [-] [group]\n"), stderr);
-	} else {
-		(void) fputs (_("Usage: sg [-] group [[-c] command]\n"), stderr);
-	}
+	if (is_newgrp)
+		fputs(_("Usage: newgrp [-l] [-] [group]\n"), stderr);
+	else
+		fputs(_("Usage: sg [-l] [-] group [[-c] command]\n"), stderr);
 }
 
 static bool ingroup(const char *name, struct group *gr)
@@ -296,7 +294,7 @@ static void syslog_sg (const char *name, const char *group)
 		if ((pid_t)-1 == child) {
 			/* error in fork() */
 			fprintf (stderr, _("%s: failure forking: %s\n"),
-				is_newgrp ? "newgrp" : "sg", strerrno());
+			         Prog, strerrno());
 #ifdef WITH_AUDIT
 			if (group) {
 				audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
@@ -367,7 +365,8 @@ static void syslog_sg (const char *name, const char *group)
 /*
  * newgrp - change the invokers current real and effective group id
  */
-int main (int argc, char **argv)
+int
+main(int, char *argv[])
 {
 	bool initflag = false;
 	bool is_member = false;
@@ -422,7 +421,7 @@ int main (int argc, char **argv)
 	 * injecting arbitrary strings into our stderr/stdout, as this can
 	 * be an exploit vector.
 	 */
-	is_newgrp = streq(Basename (argv[0]), "newgrp");
+	is_newgrp = streq(Basename(*argv++), "newgrp");
 	Prog = is_newgrp ? "newgrp" : "sg";
 
 	log_set_progname(Prog);
@@ -431,9 +430,6 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	argc--;
-	argv++;
-
 	initenv ();
 
 	pwd = get_my_pwent ();
@@ -451,120 +447,57 @@ int main (int argc, char **argv)
 	}
 	name = pwd->pw_name;
 
-	/*
-	 * Parse the command line. There are two accepted flags. The first
-	 * is "-", which for newgrp means to re-create the entire
-	 * environment as though a login had been performed, and "-c", which
-	 * for sg causes a command string to be executed.
-	 *
-	 * The next argument, if present, must be the new group name. Any
-	 * remaining arguments will be used to execute a command
-	 * as the named group. If the group name isn't present, I just use
-	 * the login group ID of the current user.
-	 *
-	 * The valid syntax are
-	 *      newgrp [-] [groupid]
-	 *      newgrp [-l] [groupid]
-	 *      sg [-] groupid [[-c] command]
-	 *      sg [-l] groupid [[-c] command]
-	 */
-	if (   (argc > 0)
-	    && (   streq(argv[0], "-")
-	        || streq(argv[0], "-l"))) {
-		argc--;
+	if (*argv != NULL && streq(*argv, "-l")) {
 		argv++;
 		initflag = true;
 	}
+	if (*argv != NULL && streq(*argv, "-")) {
+		argv++;
+		initflag = true;
+	}
+	if (*argv != NULL) {
+		if (!is_valid_group_name(*argv)) {
+			fprintf(stderr, _("%s: provided group is not a valid group name\n"),
+			        Prog);
+			goto failure;
+		}
+		group = *argv++;
+	} else if (!is_newgrp) {
+		usage();
+		goto failure;
+	} else {
+		grp = xgetgrgid(pwd->pw_gid);
+		if (NULL == grp) {
+			fprintf(stderr, _("%s: GID '%lu' does not exist\n"),
+			        Prog, (unsigned long) pwd->pw_gid);
+			SYSLOG((LOG_CRIT, "GID '%lu' does not exist",
+			       (unsigned long) pwd->pw_gid));
+			goto failure;
+		}
+		group = grp->gr_name;
+	}
 	if (!is_newgrp) {
-		/*
-		 * Do the command line for everything that is
-		 * not "newgrp".
-		 */
-		if ((argc > 0) && (argv[0][0] != '-')) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
+		if (*argv != NULL && streq(*argv, "-c")) {
+			argv++;
+			if (*argv == NULL) {
+				fprintf(stderr, _("%s: -c: missing argument.\n"), Prog);
 				goto failure;
 			}
-			group = argv[0];
-			argc--;
-			argv++;
-		} else {
-			usage ();
-			closelog ();
-			exit (EXIT_FAILURE);
 		}
-		if (argc > 0) {
-
-			/*
-			 * Skip -c if specified so both forms work:
-			 * "sg group -c command" or "sg group command".
-			 */
-			if ((argc > 1) && streq(argv[0], "-c")) {
-				command = argv[1];
-			} else {
-				command = argv[0];
-			}
+		if (*argv != NULL) {
+			command = *argv++;
 			cflag = true;
 		}
-	} else {
-		/*
-		 * Do the command line for "newgrp". It's just making sure
-		 * there aren't any flags and getting the new group name.
-		 */
-		if ((argc > 0) && strprefix(argv[0], "-")) {
-			usage ();
-			goto failure;
-		} else if (argv[0] != NULL) {
-			if (!is_valid_group_name (argv[0])) {
-				fprintf (
-					stderr, _("%s: provided group is not a valid group name\n"),
-					Prog);
-				goto failure;
-			}
-			group = argv[0];
-		} else {
-			/*
-			 * get the group file entry for her login group id.
-			 * the entry must exist, simply to be annoying.
-			 *
-			 * Perhaps in the past, but the default behavior now depends on the
-			 * group entry, so it had better exist.  -- JWP
-			 */
-			grp = xgetgrgid (pwd->pw_gid);
-			if (NULL == grp) {
-				fprintf (stderr,
-				         _("%s: GID '%lu' does not exist\n"),
-				         Prog, (unsigned long) pwd->pw_gid);
-				SYSLOG ((LOG_CRIT, "GID '%lu' does not exist",
-				        (unsigned long) pwd->pw_gid));
-				goto failure;
-			} else {
-				group = grp->gr_name;
-			}
-		}
+	}
+	if (*argv != NULL) {
+		usage();
+		goto failure;
 	}
 
-	/*
-	 * get the current user's groupset. The new group will be added to
-	 * the concurrent groupset if there is room, otherwise you get a
-	 * nasty message but at least your real and effective group ids are
-	 * set.
-	 */
 	gids = agetgroups(&ngroups);
 	if (gids == NULL) {
 		perror("agetgroups");
-#ifdef WITH_AUDIT
-		if (group) {
-			audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL, getuid(),
-						"new_group", group, SHADOW_AUDIT_FAILURE);
-		} else {
-			audit_logger(AUDIT_CHGRP_ID,
-				     "changing", NULL, getuid(), SHADOW_AUDIT_FAILURE);
-		}
-#endif
-		exit(EXIT_FAILURE);
+		goto failure;
 	}
 
 	/*
@@ -817,11 +750,11 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	if (NULL != group) {
 		audit_logger_with_group(AUDIT_CHGRP_ID, "changing", NULL,
-					getuid(), "new_group", group,
+		                        getuid(), "new_group", group,
 					SHADOW_AUDIT_FAILURE);
 	} else {
-		audit_logger (AUDIT_CHGRP_ID,
-		              "changing", NULL, getuid (), 0);
+		audit_logger(AUDIT_CHGRP_ID, "changing", NULL,
+		             getuid(), SHADOW_AUDIT_FAILURE);
 	}
 #endif
 	exit (EXIT_FAILURE);
