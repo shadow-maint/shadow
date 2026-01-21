@@ -61,7 +61,7 @@ class UnixObject(object):
             if len(o) != 2 or not isinstance(o[0], int) or not isinstance(o[1], str):
                 raise NotImplementedError(f"Unable to compare {type(o)} with {self.__class__}")
 
-            (id, name) = o
+            id, name = o
             return id == self.id and name == self.name
         elif isinstance(o, UnixObject):
             # Fallback to identity comparison
