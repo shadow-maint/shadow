@@ -90,6 +90,7 @@ $(DOMAIN).pot-update: $(XMLFILES) $(srcdir)/XMLFILES
 	@set -ex; tmpdir=`mktemp -d`; \
 	origdir=`pwd`; \
 	cd $(top_srcdir)/man; \
+	cp -r login.defs.d $$tmpdir/; \
 	cp *.xml $$tmpdir/; \
 	files=""; \
 	for file in $(notdir $(XMLFILES)); do \
