@@ -62,15 +62,15 @@ is_valid_hash(const char *hash)
 		return true;
 
 	// SHA-512: $6$ + salt + $ + 86-char hash
-	if (match_regex("^\\$6\\$(rounds=[1-9][0-9]{3,8}\\$)?[^$:\\n]{1,16}\\$[./A-Za-z0-9]{86}$", hash))
+	if (match_regex("^\\$6\\$(rounds=[1-9][0-9]{3,8}\\$)?[^$:\n]{1,16}\\$[./A-Za-z0-9]{86}$", hash))
 		return true;
 
 	// SHA-256: $5$ + salt + $ + 43-char hash
-	if (match_regex("^\\$5\\$(rounds=[1-9][0-9]{3,8}\\$)?[^$:\\n]{1,16}\\$[./A-Za-z0-9]{43}$", hash))
+	if (match_regex("^\\$5\\$(rounds=[1-9][0-9]{3,8}\\$)?[^$:\n]{1,16}\\$[./A-Za-z0-9]{43}$", hash))
 		return true;
 
 	// MD5: $1$ + salt + $ + 22-char hash
-	if (match_regex("^\\$1\\$[^$:\\n]{1,8}\\$[./A-Za-z0-9]{22}$", hash))
+	if (match_regex("^\\$1\\$[^$:\n]{1,8}\\$[./A-Za-z0-9]{22}$", hash))
 		return true;
 
 	// DES: exactly 13 characters from [A-Za-z0-9./]
