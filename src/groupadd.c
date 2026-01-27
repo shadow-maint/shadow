@@ -18,12 +18,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#include <pwd.h>
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 #include "atoi/getnum.h"
 #include "chkname.h"
@@ -100,7 +94,6 @@ static void close_files(const struct option_flags *flags);
 static void open_files(const struct option_flags *flags);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
-static void check_perms (void);
 
 /*
  * usage - display usage message and exit
@@ -551,56 +544,6 @@ static void check_flags (void)
 }
 
 /*
- * check_perms - check if the caller is allowed to add a group
- *
- *	With PAM support, the setuid bit can be set on groupadd to allow
- *	non-root users to groups.
- *	Without PAM support, only users who can write in the group databases
- *	can add groups.
- *
- *	It will not return if the user is not allowed.
- */
-static void check_perms (void)
-{
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-	struct passwd *pampw;
-
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		fail_exit (1);
-	}
-
-	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		fail_exit (1);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
-}
-
-/*
  * main - groupadd command
  */
 int main (int argc, char **argv)
@@ -633,8 +576,6 @@ int main (int argc, char **argv)
 	 * Parse the command line options.
 	 */
 	process_flags (argc, argv, &flags);
-
-	check_perms ();
 
 	if (run_parts ("/etc/shadow-maint/groupadd-pre.d", group_name,
 			Prog)) {

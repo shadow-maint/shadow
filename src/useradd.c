@@ -23,11 +23,6 @@
 #include <libgen.h>
 #include <pwd.h>
 #include <signal.h>
-#ifdef ACCT_TOOLS_SETUID
-# ifdef USE_PAM
-#  include "pam_defs.h"
-# endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -2454,13 +2449,6 @@ static void check_uid_range(int rflg, uid_t user_id)
  */
 int main (int argc, char **argv)
 {
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
-
 #ifdef ENABLE_SUBIDS
 	uid_t uid_min;
 	uid_t uid_max;
@@ -2523,42 +2511,6 @@ int main (int argc, char **argv)
 			"useradd")) {
 		exit(1);
 	}
-
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL && getuid ()) {
-			fprintf (stderr,
-			         _("%s: Cannot determine your user name.\n"),
-			         Prog);
-			fail_exit (1, process_selinux);
-		}
-
-		retval = pam_start (Prog, pampw?pampw->pw_name:"root", &conv, &pamh);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		fail_exit (1, process_selinux);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 	/*
 	 * See if we are messing with the defaults file, or creating

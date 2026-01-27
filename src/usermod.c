@@ -21,11 +21,6 @@
 #include <lastlog.h>
 #endif /* ENABLE_LASTLOG */
 #include <pwd.h>
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include <paths.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -2172,12 +2167,6 @@ static void move_mailbox (void)
  */
 int main (int argc, char **argv)
 {
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
@@ -2225,42 +2214,6 @@ int main (int argc, char **argv)
 	    && (user_busy (user_name, user_id) != 0)) {
 		exit (E_USER_BUSY);
 	}
-
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			fprintf (stderr,
-			         _("%s: Cannot determine your user name.\n"),
-			         Prog);
-			exit (1);
-		}
-
-		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		exit (1);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_TCB
 	if (shadowtcb_set_user (user_name) == SHADOWTCB_FAILURE) {

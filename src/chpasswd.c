@@ -79,7 +79,6 @@ NORETURN static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
-static void check_perms (void);
 static void open_files(const struct option_flags *flags);
 static void close_files(const struct option_flags *flags);
 
@@ -289,60 +288,6 @@ static void check_flags (void)
 }
 
 /*
- * check_perms - check if the caller is allowed to add a group
- *
- *	With PAM support, the setuid bit can be set on chpasswd to allow
- *	non-root users to groups.
- *	Without PAM support, only users who can write in the group databases
- *	can add groups.
- *
- *	It will not return if the user is not allowed.
- */
-static void check_perms (void)
-{
-#ifdef USE_PAM
-#ifdef ACCT_TOOLS_SETUID
-	/* If chpasswd uses PAM and is SUID, check the permissions,
-	 * otherwise, the permissions are enforced by the access to the
-	 * passwd and shadow files.
-	 */
-	pam_handle_t *pamh = NULL;
-	int retval;
-	struct passwd *pampw;
-
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		exit (1);
-	}
-
-	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		exit (1);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* ACCT_TOOLS_SETUID */
-#endif				/* USE_PAM */
-}
-
-/*
  * open_files - lock and open the password databases
  */
 static void open_files(const struct option_flags *flags)
@@ -502,8 +447,6 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	OPENLOG (Prog);
-
-	check_perms ();
 
 #ifdef USE_PAM
 	if (!use_pam)
