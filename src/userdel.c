@@ -20,11 +20,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
@@ -909,12 +904,6 @@ int main (int argc, char **argv)
 {
 	bool errors = false; /* Error in the removal of the home directory */
 
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 	bool process_selinux;
 
@@ -1000,42 +989,6 @@ int main (int argc, char **argv)
 	if ((optind + 1) != argc) {
 		usage (E_USAGE);
 	}
-
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			fprintf (stderr,
-			         _("%s: Cannot determine your user name.\n"),
-			         Prog);
-			exit (E_PW_UPDATE);
-		}
-
-		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		exit (E_PW_UPDATE);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP

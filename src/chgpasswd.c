@@ -18,11 +18,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include "atoi/a2i.h"
 #include "defines.h"
 #include "nscd.h"
@@ -80,7 +75,6 @@ NORETURN static void fail_exit (int code, bool process_selinux);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
-static void check_perms (void);
 static void open_files (bool process_selinux);
 static void close_files(const struct option_flags *flags);
 
@@ -293,56 +287,6 @@ static void check_flags (void)
 }
 
 /*
- * check_perms - check if the caller is allowed to add a group
- *
- *	With PAM support, the setuid bit can be set on chgpasswd to allow
- *	non-root users to groups.
- *	Without PAM support, only users who can write in the group databases
- *	can add groups.
- *
- *	It will not return if the user is not allowed.
- */
-static void check_perms (void)
-{
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-	struct passwd *pampw;
-
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		exit (1);
-	}
-
-	retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		exit (1);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
-}
-
-/*
  * open_files - lock and open the group databases
  */
 static void open_files (bool process_selinux)
@@ -462,8 +406,6 @@ int main (int argc, char **argv)
 	process_selinux = !flags.chroot;
 
 	OPENLOG (Prog);
-
-	check_perms ();
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

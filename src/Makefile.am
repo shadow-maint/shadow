@@ -69,9 +69,6 @@ endif
 if !WITH_TCB
 suidubins += passwd
 endif
-if ACCT_TOOLS_SETUID
-suidusbins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
-endif
 if ENABLE_SUBIDS
 if !FCAPS
 suidubins += newgidmap newuidmap
@@ -86,12 +83,6 @@ LDADD          = $(INTLLIBS) \
 		 $(top_builddir)/lib/libshadow.la \
 		 $(LIBTCB)
 
-if ACCT_TOOLS_SETUID
-LIBPAM_SUID  = $(LIBPAM)
-else
-LIBPAM_SUID  =
-endif
-
 if USE_PAM
 LIBCRYPT_NOPAM =
 else
@@ -102,15 +93,15 @@ chage_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 newuidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP) $(LIBECONF) -ldl
 newgidmap_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCAP) $(LIBECONF) -ldl
 chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
-chgpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
+chgpasswd_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
 chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF)
 chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF) -ldl
 expiry_LDADD = $(LDADD) $(LIBECONF)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT) $(LIBECONF)
-groupadd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
-groupdel_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
+groupadd_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
+groupdel_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
-groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
+groupmod_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF) -ldl
 grpck_LDADD    = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpconv_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 grpunconv_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
@@ -131,9 +122,9 @@ su_SOURCES     = \
 	suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD) $(LIBECONF) $(LIBSELINUX)
 sulogin_LDADD  = $(LDADD) $(LIBCRYPT) $(LIBECONF)
-useradd_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBECONF) -ldl
-userdel_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBECONF) -ldl
-usermod_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBECONF) -ldl
+useradd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBECONF) -ldl
+userdel_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBECONF) -ldl
+usermod_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBECONF) -ldl
 vipw_LDADD     = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBECONF)
 
 install-am: all-am

@@ -36,11 +36,6 @@
 #include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "attr.h"
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 #include "chkname.h"
 #include "defines.h"
 #include "getdef.h"
@@ -118,7 +113,6 @@ static int update_passwd (struct passwd *, const char *);
 static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv, struct option_flags *flags);
 static void check_flags (void);
-static void check_perms(const struct option_flags *flags);
 static void open_files (bool process_selinux);
 static void close_files(const struct option_flags *flags);
 
@@ -789,60 +783,6 @@ static void check_flags (void)
 }
 
 /*
- * check_perms - check if the caller is allowed to add a group
- *
- *	With PAM support, the setuid bit can be set on groupadd to allow
- *	non-root users to groups.
- *	Without PAM support, only users who can write in the group databases
- *	can add groups.
- *
- *	It will not return if the user is not allowed.
- */
-static void
-check_perms(MAYBE_UNUSED const struct option_flags *flags)
-{
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-	struct passwd *pampw;
-	bool process_selinux;
-
-	process_selinux = !flags->chroot;
-
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		fprintf (stderr,
-		         _("%s: Cannot determine your user name.\n"),
-		         Prog);
-		fail_exit (EXIT_FAILURE, process_selinux);
-	}
-
-	retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		fail_exit (EXIT_FAILURE, process_selinux);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
-}
-
-/*
  * open_files - lock and open the password, group and shadow databases
  */
 static void open_files (bool process_selinux)
@@ -1087,8 +1027,6 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv, &flags);
 	process_selinux = !flags.chroot;
-
-	check_perms (&flags);
 
 	is_shadow = spw_file_present ();
 

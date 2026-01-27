@@ -20,12 +20,6 @@
 #include <string.h>
 #include <strings.h>
 #include <sys/types.h>
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-#include "pam_defs.h"
-#include <pwd.h>
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 #include "alloc/malloc.h"
 #include "atoi/getnum.h"
@@ -783,12 +777,6 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
  */
 int main (int argc, char **argv)
 {
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 	struct option_flags  flags = {.chroot = false, .prefix = false};
 
 	log_set_progname(Prog);
@@ -814,42 +802,6 @@ int main (int argc, char **argv)
 	}
 
 	process_flags (argc, argv, &flags);
-
-#ifdef ACCT_TOOLS_SETUID
-#ifdef USE_PAM
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (NULL == pampw) {
-			fprintf (stderr,
-			         _("%s: Cannot determine your user name.\n"),
-			         Prog);
-			exit (E_PAM_USERNAME);
-		}
-
-		retval = pam_start (Prog, pampw->pw_name, &conv, &pamh);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
-
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
-
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM: %s\n"),
-		         Prog, pam_strerror (pamh, retval));
-		SYSLOG((LOG_ERR, "%s", pam_strerror (pamh, retval)));
-		if (NULL != pamh) {
-			(void) pam_end (pamh, retval);
-		}
-		exit (E_PAM_ERROR);
-	}
-	(void) pam_end (pamh, retval);
-#endif				/* USE_PAM */
-#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
