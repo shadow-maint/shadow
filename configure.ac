@@ -123,18 +123,6 @@ AC_ARG_ENABLE([man],
 	[enable_man="no"]
 )
 
-AC_ARG_ENABLE([account-tools-setuid],
-	[AS_HELP_STRING([--enable-account-tools-setuid],
-		[Install the user and group management tools setuid and authenticate the callers. This requires --with-libpam.])],
-	[case "${enableval}" in
-	 yes) enable_acct_tools_setuid="yes" ;;
-	  no) enable_acct_tools_setuid="no" ;;
-	   *) AC_MSG_ERROR([bad value ${enableval} for --enable-account-tools-setuid])
-	   ;;
-	 esac],
-	[enable_acct_tools_setuid="no"]
-)
-
 AC_ARG_ENABLE([subordinate-ids],
 	[AS_HELP_STRING([--enable-subordinate-ids],
 		[support subordinate ids @<:@default=yes@:>@])],
@@ -579,25 +567,6 @@ else
 fi
 AM_CONDITIONAL([USE_PAM], [test "X$with_libpam" = "Xyes"])
 
-if test "$enable_acct_tools_setuid" != "no"; then
-	if test "$with_libpam" != "yes"; then
-		if test "X$enable_acct_tools_setuid" = "Xyes"; then
-			AC_MSG_ERROR([PAM support is required for --enable-account-tools-setuid])
-		else
-			enable_acct_tools_setuid="no"
-		fi
-	else
-		enable_acct_tools_setuid="yes"
-	fi
-	if test "X$enable_acct_tools_setuid" = "Xyes"; then
-		AC_DEFINE([ACCT_TOOLS_SETUID],
-		          [1],
-		          [Define if account management tools should be installed setuid and authenticate the callers])
-	fi
-fi
-AM_CONDITIONAL([ACCT_TOOLS_SETUID], [test "x$enable_acct_tools_setuid" = "xyes"])
-
-
 AC_ARG_WITH([fcaps],
 	[AS_HELP_STRING([--with-fcaps], [use file capabilities instead of suid binaries for newuidmap/newgidmap @<:@default=no@:>@])],
 	[with_fcaps=$withval], [with_fcaps=no])
@@ -674,7 +643,6 @@ AC_MSG_NOTICE([shadow ${PACKAGE_VERSION} has been configured with the following 
 
 	auditing support:		$with_audit
 	PAM support:			$with_libpam
-	suid account management tools:	$enable_acct_tools_setuid
 	SELinux support:		$with_selinux
 	BtrFS support:			$with_btrfs
 	ACL support:			$with_acl
