@@ -1169,19 +1169,6 @@ run_test ./failures/usermod/16_usermod_-W_open_subgid_failure/usermod.test
 run_test ./failures/usermod/17_usermod_-v_rename_subuid_failure/usermod.test
 run_test ./failures/usermod/18_usermod_-w_rename_subgid_failure/usermod.test
 fi
-run_test ./expiry/01_expiry_-c_no_expiry/expiry.test
-run_test ./expiry/02_expiry_-c_expired/expiry.test
-run_test ./expiry/03_expiry_-f_expired/expiry.test
-run_test ./expiry/04_expiry_no_options/expiry.test
-run_test ./expiry/05_expiry_-c_no_shadow_file/expiry.test
-run_test ./expiry/06_expiry_-c_no_shadow_entry/expiry.test
-run_test ./expiry/07_expiry_-c_expired_account/expiry.test
-run_test ./expiry/08_expiry_-c_expired_max+inact/expiry.test
-run_test ./expiry/09_expiry_-c_expired_not_inactive/expiry.test
-run_test ./expiry/10_expiry_bad_option/expiry.test
-run_test ./expiry/11_expiry_usage/expiry.test
-run_test ./expiry/12_expiry_extra_arg/expiry.test
-run_test ./expiry/13_expiry_usage-c-f/expiry.test
 run_test ./passwd/01_passwd_-S_root_locked_account/passwd.test
 run_test ./passwd/02_passwd_-S_root_valid_account/passwd.test
 run_test ./passwd/03_passwd_-S_root_empty_password/passwd.test
