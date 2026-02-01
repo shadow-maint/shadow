@@ -64,12 +64,36 @@ test_is_valid_hash_ok_bcrypt(void **)
 }
 
 
+static void
+test_is_valid_hash_ok_sha512(void **)
+{
+	// Basic SHA-512 hash: $6$ + salt + $ + 86 character hash
+	assert_true(is_valid_hash("$6$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with rounds parameter
+	assert_true(is_valid_hash("$6$rounds=5000$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with minimum rounds (1000)
+	assert_true(is_valid_hash("$6$rounds=1000$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with maximum rounds (999999999)
+	assert_true(is_valid_hash("$6$rounds=999999999$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with minimum salt length (1 character)
+	assert_true(is_valid_hash("$6$a$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with maximum salt length (16 characters)
+	assert_true(is_valid_hash("$6$sixteencharsaltx$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+}
+
+
 int
 main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_is_valid_hash_ok_yescrypt),
         cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
+        cmocka_unit_test(test_is_valid_hash_ok_sha512),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
