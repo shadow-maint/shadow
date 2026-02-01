@@ -44,11 +44,32 @@ test_is_valid_hash_ok_yescrypt(void **)
 }
 
 
+static void
+test_is_valid_hash_ok_bcrypt(void **)
+{
+	// Basic bcrypt hash: $2a$ + cost + $ + 53 character hash
+	assert_true(is_valid_hash("$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+
+	// Bcrypt $2b$ variant with different cost
+	assert_true(is_valid_hash("$2b$10$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+
+	// Bcrypt $2x$ variant with minimum cost
+	assert_true(is_valid_hash("$2x$04$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+
+	// Bcrypt $2y$ variant with high cost
+	assert_true(is_valid_hash("$2y$15$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+
+	// Bcrypt with numeric characters in hash portion
+	assert_true(is_valid_hash("$2a$08$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+}
+
+
 int
 main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_is_valid_hash_ok_yescrypt),
+        cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
