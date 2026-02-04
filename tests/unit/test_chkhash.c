@@ -110,6 +110,28 @@ test_is_valid_hash_ok_sha256(void **)
 }
 
 
+static void
+test_is_valid_hash_ok_md5(void **)
+{
+	// Basic MD5 hash: $1$ + salt + $ + 22 character hash
+	assert_true(is_valid_hash("$1$salt$abcdefghijklmnopqrstuv"));
+
+	// MD5 with maximum salt length (8 characters)
+	assert_true(is_valid_hash("$1$maxsalt8$abcdefghijklmnopqrstuv"));
+}
+
+
+static void
+test_is_valid_hash_ok_des(void **)
+{
+	// Basic DES hash: 13 characters
+	assert_true(is_valid_hash("abcDEF123./zZ"));
+
+	// DES with different character combinations
+	assert_true(is_valid_hash("ZZ./0123456xy"));
+}
+
+
 int
 main(void)
 {
@@ -118,6 +140,8 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
         cmocka_unit_test(test_is_valid_hash_ok_sha512),
         cmocka_unit_test(test_is_valid_hash_ok_sha256),
+        cmocka_unit_test(test_is_valid_hash_ok_md5),
+        cmocka_unit_test(test_is_valid_hash_ok_des),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
