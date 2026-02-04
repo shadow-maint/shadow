@@ -132,6 +132,26 @@ test_is_valid_hash_ok_des(void **)
 }
 
 
+static void
+test_is_valid_hash_ok_special(void **)
+{
+	// Empty string - passwordless account
+	assert_true(is_valid_hash(""));
+
+	// Single asterisk - password permanently locked
+	assert_true(is_valid_hash("*"));
+
+	// Single ! - temporarily locked passwordless account
+	assert_true(is_valid_hash("!"));
+
+	// Leading ! prefix - temporarily locked account with SHA-512 hash
+	assert_true(is_valid_hash("!$6$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// Leading ! prefix - temporarily locked account with yescrypt hash
+	assert_true(is_valid_hash("!$y$j9T$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+}
+
+
 int
 main(void)
 {
@@ -142,6 +162,7 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_sha256),
         cmocka_unit_test(test_is_valid_hash_ok_md5),
         cmocka_unit_test(test_is_valid_hash_ok_des),
+        cmocka_unit_test(test_is_valid_hash_ok_special),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
