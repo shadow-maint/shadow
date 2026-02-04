@@ -625,8 +625,7 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 
 					sp.sp_namp   = pwd->pw_name;
 					sp.sp_pwdp   = pwd->pw_passwd;
-					sp.sp_min    =
-					    getdef_num ("PASS_MIN_DAYS", -1);
+					sp.sp_min    = -1;
 					sp.sp_max    =
 					    getdef_num ("PASS_MAX_DAYS", -1);
 					sp.sp_warn   =
