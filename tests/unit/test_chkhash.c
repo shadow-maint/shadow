@@ -87,6 +87,29 @@ test_is_valid_hash_ok_sha512(void **)
 }
 
 
+static void
+test_is_valid_hash_ok_sha256(void **)
+{
+	// Basic SHA-256 hash: $5$ + salt + $ + 43 character hash
+	assert_true(is_valid_hash("$5$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with rounds parameter
+	assert_true(is_valid_hash("$5$rounds=5000$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with minimum rounds (1000)
+	assert_true(is_valid_hash("$5$rounds=1000$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with maximum rounds (999999999)
+	assert_true(is_valid_hash("$5$rounds=999999999$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with minimum salt length (1 character)
+	assert_true(is_valid_hash("$5$a$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with maximum salt length (16 characters)
+	assert_true(is_valid_hash("$5$sixteencharsaltx$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+}
+
+
 int
 main(void)
 {
@@ -94,6 +117,7 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_yescrypt),
         cmocka_unit_test(test_is_valid_hash_ok_bcrypt),
         cmocka_unit_test(test_is_valid_hash_ok_sha512),
+        cmocka_unit_test(test_is_valid_hash_ok_sha256),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
