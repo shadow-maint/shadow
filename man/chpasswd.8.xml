@@ -121,9 +121,10 @@
 	    The available methods are <phrase condition="bcrypt">
 	    <replaceable>BCRYPT</replaceable>,</phrase>
 	    <replaceable>DES</replaceable>,
-	    <replaceable>MD5</replaceable><phrase condition="sha_crypt">,
+	    <replaceable>MD5</replaceable>,
 	    <replaceable>SHA256</replaceable>,
-	    <replaceable>SHA512</replaceable></phrase><phrase condition="yescrypt">,
+	    <replaceable>SHA512</replaceable>,
+	    <phrase condition="yescrypt">
 	    <replaceable>YESCRYPT</replaceable></phrase> and
 	    <replaceable>NONE</replaceable>
 	    if your libc supports these methods.
@@ -195,7 +196,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="bcrypt;sha_crypt;yescrypt">
+      <varlistentry>
 	<term>
 	  <option>-s</option>, <option>--sha-rounds</option>&nbsp;<replaceable>ROUNDS</replaceable>
 	</term>
@@ -207,9 +208,8 @@
 	    You can only use this option with crypt method:
 	    <phrase condition="bcrypt">
 	    <replaceable>BCRYPT</replaceable></phrase>
-	    <phrase condition="sha_crypt">
 	    <replaceable>SHA256</replaceable>
-	    <replaceable>SHA512</replaceable></phrase>
+	    <replaceable>SHA512</replaceable>
 	    <phrase condition="yescrypt">
 	    <replaceable>YESCRYPT</replaceable></phrase>
 	  </para>
@@ -222,12 +222,12 @@
 	    A minimal value of 4 and a maximal value of 31
 	    will be enforced for BCRYPT. The default number of rounds is 13.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    By default, the number of rounds for SHA256 or SHA512 is defined by
 	    the SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
 	    <filename>/etc/login.defs</filename>.
 	  </para>
-	  <para condition="sha_crypt">
+	  <para>
 	    A minimal value of 1000 and a maximal value of 999,999,999
 	    will be enforced for SHA256 and SHA512. The default number of rounds
 	    is 5000.
