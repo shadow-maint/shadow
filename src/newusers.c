@@ -51,6 +51,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "sssd.h"
+#include "string/ctype/isascii.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
@@ -242,7 +243,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		return 0;
 	}
 
-	if (isdigit (gid[0])) {
+	if (isdigit_c(gid[0])) {
 		/*
 		 * The GID is a number, which means either this is a brand
 		 * new group, or an existing group.
@@ -286,7 +287,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	/*
 	 * Now I have all of the fields required to create the new group.
 	 */
-	if (!streq(gid, "") && (!isdigit(gid[0]))) {
+	if (!streq(gid, "") && (!isdigit_c(gid[0]))) {
 		grent.gr_name = xstrdup (gid);
 	} else {
 		grent.gr_name = xstrdup (name);
@@ -351,7 +352,7 @@ static int get_user_id (const char *uid, uid_t *nuid) {
 	 * The first guess for the UID is either the numerical UID that the
 	 * caller provided, or the next available UID.
 	 */
-	if (isdigit (uid[0])) {
+	if (isdigit_c(uid[0])) {
 		if ((get_uid(uid, nuid) == -1) || (*nuid == (uid_t)-1)) {
 			fprintf (stderr,
 			         _("%s: invalid user ID '%s'\n"),
