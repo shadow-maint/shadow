@@ -183,6 +183,56 @@ test_is_valid_hash_edge_account_locks(void **)
 }
 
 
+static void
+test_is_invalid_algorithm(void **)
+{
+	assert_false(is_valid_hash("$7$salt$hash"));
+	assert_false(is_valid_hash("$2z$12$hash"));
+	assert_false(is_valid_hash("$abc$salt$hash"));
+}
+
+
+static void
+test_is_invalid_hash_length(void **)
+{
+	assert_false(is_valid_hash("$y$j9T$salt$tooshort"));
+	assert_false(is_valid_hash("$2a$12$tooshort"));
+	assert_false(is_valid_hash("$6$salt$tooshort"));
+	assert_false(is_valid_hash("$5$salt$tooshort"));
+}
+
+
+static void
+test_is_invalid_delimeters(void **)
+{
+	// Missing delimiters
+	assert_false(is_valid_hash("$6salt$hash"));
+	assert_false(is_valid_hash("$6$salthash"));
+
+	// Extra delimiters
+	assert_false(is_valid_hash("$6$$salt$$hash"));
+	assert_false(is_valid_hash("$$6$salt$hash"));
+}
+
+
+static void
+test_is_invalid_salt_chars(void **)
+{
+	assert_false(is_valid_hash("$6$sa:lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+	assert_false(is_valid_hash("$6$sa$lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+	assert_false(is_valid_hash("$6$sa\nlt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+}
+
+
+static void
+test_is_invalid_rounds(void **)
+{
+	assert_false(is_valid_hash("$6$rounds=abc$salt$hash")); // Non-numeric rounds
+	assert_false(is_valid_hash("$6$rounds=0$salt$hash")); // Invalid rounds (must start with 1-9)
+	assert_false(is_valid_hash("$6$rounds=$salt$hash")); // Missing rounds value
+}
+
+
 int
 main(void)
 {
@@ -196,6 +246,11 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_special),
         cmocka_unit_test(test_is_valid_hash_edge_salt_chars),
         cmocka_unit_test(test_is_valid_hash_edge_account_locks),
+        cmocka_unit_test(test_is_invalid_algorithm),
+        cmocka_unit_test(test_is_invalid_hash_length),
+        cmocka_unit_test(test_is_invalid_delimeters),
+        cmocka_unit_test(test_is_invalid_salt_chars),
+        cmocka_unit_test(test_is_invalid_rounds),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
