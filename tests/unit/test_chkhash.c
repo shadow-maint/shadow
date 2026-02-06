@@ -152,6 +152,37 @@ test_is_valid_hash_ok_special(void **)
 }
 
 
+static void
+test_is_valid_hash_edge_salt_chars(void **)
+{
+	// SHA-512 with backslash in salt
+	assert_true(is_valid_hash("$6$sa\\lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-512 with 'n' in salt
+	assert_true(is_valid_hash("$6$salnt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
+
+	// SHA-256 with backslash in salt
+	assert_true(is_valid_hash("$5$sa\\lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+
+	// SHA-256 with 'n' in salt
+	assert_true(is_valid_hash("$5$salnt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+}
+
+
+static void
+test_is_valid_hash_edge_account_locks(void **)
+{
+	// Complex ! prefix scenarios with various hash types should work
+	assert_true(is_valid_hash("!$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
+	assert_true(is_valid_hash("!$5$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
+	assert_true(is_valid_hash("!$1$salt$abcdefghijklmnopqrstuv"));
+
+	// But invalid hashes with ! prefix should still fail
+	assert_false(is_valid_hash("!invalid"));
+	assert_false(is_valid_hash("!toolong"));
+}
+
+
 int
 main(void)
 {
@@ -163,6 +194,8 @@ main(void)
         cmocka_unit_test(test_is_valid_hash_ok_md5),
         cmocka_unit_test(test_is_valid_hash_ok_des),
         cmocka_unit_test(test_is_valid_hash_ok_special),
+        cmocka_unit_test(test_is_valid_hash_edge_salt_chars),
+        cmocka_unit_test(test_is_valid_hash_edge_account_locks),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
