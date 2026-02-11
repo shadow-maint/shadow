@@ -14,18 +14,19 @@
 #include <sys/types.h>
 
 #include "prototypes.h"
+#include "attr.h"
 
 /***********************
  * WRAPPERS
  **********************/
 struct passwd *
-__wrap_prefix_getpwnam(uid_t)
+__wrap_prefix_getpwnam(MAYBE_UNUSED uid_t _1)
 {
     return (struct passwd*) mock();
 }
 
 int
-__wrap_sd_uid_get_sessions(uid_t, int, char ***)
+__wrap_sd_uid_get_sessions(MAYBE_UNUSED uid_t _1, MAYBE_UNUSED int _2, MAYBE_UNUSED char ***_3)
 {
     return mock();
 }
@@ -33,7 +34,7 @@ __wrap_sd_uid_get_sessions(uid_t, int, char ***)
 /***********************
  * TEST
  **********************/
-static void test_active_sessions_count_return_ok(void **)
+static void test_active_sessions_count_return_ok(MAYBE_UNUSED void ** _1)
 {
     int count;
     struct passwd *pw = malloc(sizeof(struct passwd));
@@ -46,7 +47,7 @@ static void test_active_sessions_count_return_ok(void **)
     assert_int_equal(count, 1);
 }
 
-static void test_active_sessions_count_prefix_getpwnam_failure(void **)
+static void test_active_sessions_count_prefix_getpwnam_failure(MAYBE_UNUSED void ** _1)
 {
     int count;
     struct passwd *pw = NULL;

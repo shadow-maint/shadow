@@ -16,10 +16,10 @@
 
 #include "sizeof.h"
 #include "string/strcpy/strtcpy.h"
+#include "attr.h"
 
-
-static void test_strtcpy_a_trunc(void **);
-static void test_strtcpy_a_ok(void **);
+static void test_strtcpy_a_trunc(MAYBE_UNUSED void ** _1);
+static void test_strtcpy_a_ok(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -35,7 +35,7 @@ main(void)
 
 
 static void
-test_strtcpy_a_trunc(void **)
+test_strtcpy_a_trunc(MAYBE_UNUSED void ** _1)
 {
 	char  buf[countof("foo")];
 
@@ -49,7 +49,7 @@ test_strtcpy_a_trunc(void **)
 
 
 static void
-test_strtcpy_a_ok(void **)
+test_strtcpy_a_ok(MAYBE_UNUSED void ** _1)
 {
 	char  buf[countof("foo")];
 

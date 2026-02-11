@@ -16,7 +16,7 @@
 #include <cmocka.h>
 
 #include "sizeof.h"
-
+#include "attr.h"
 
 #define assert_unreachable()  assert_true(0)
 
@@ -26,10 +26,10 @@
 static jmp_buf  jmpb;
 
 
-void __wrap_exit(int);
+void __wrap_exit(MAYBE_UNUSED int _1);
 
-static void test_exit_if_null_exit(void **);
-static void test_exit_if_null_ok(void **);
+static void test_exit_if_null_exit(MAYBE_UNUSED void ** _1);
+static void test_exit_if_null_ok(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -45,14 +45,14 @@ main(void)
 
 
 void
-__wrap_exit(int)
+__wrap_exit(MAYBE_UNUSED int _1)
 {
 	longjmp(jmpb, EXIT_CALLED);
 }
 
 
 static void
-test_exit_if_null_exit(void **)
+test_exit_if_null_exit(MAYBE_UNUSED void ** _1)
 {
 	char *volatile  p;
 
@@ -78,7 +78,7 @@ test_exit_if_null_exit(void **)
 
 
 static void
-test_exit_if_null_ok(void **)
+test_exit_if_null_ok(MAYBE_UNUSED void ** _1)
 {
 	char  *p;
 

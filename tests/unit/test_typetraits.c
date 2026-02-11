@@ -11,10 +11,10 @@
 #include <cmocka.h>
 
 #include "typetraits.h"
+#include "attr.h"
 
-
-static void test_type_max(void **);
-static void test_type_min(void **);
+static void test_type_max(MAYBE_UNUSED void ** _1);
+static void test_type_min(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -30,7 +30,7 @@ main(void)
 
 
 static void
-test_type_max(void **)
+test_type_max(MAYBE_UNUSED void ** _1)
 {
 	assert_true(type_max(long) == LONG_MAX);
 	assert_true(type_max(unsigned long) == ULONG_MAX);
@@ -43,7 +43,7 @@ test_type_max(void **)
 
 
 static void
-test_type_min(void **)
+test_type_min(MAYBE_UNUSED void ** _1)
 {
 	assert_true(type_min(long) == LONG_MIN);
 	assert_true(type_min(unsigned long) == 0);

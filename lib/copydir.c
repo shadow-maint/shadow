@@ -91,7 +91,7 @@ static int fchown_if_needed (int fdst, const struct stat *statp,
  */
 format_attr(printf, 2, 3)
 static void
-error_acl(struct error_context *, const char *fmt, ...)
+error_acl(MAYBE_UNUSED struct error_context *_1, const char *fmt, ...)
 {
 	va_list ap;
 
