@@ -15,10 +15,10 @@
 
 #include "sizeof.h"
 #include "string/sprintf/snprintf.h"
+#include "attr.h"
 
-
-static void test_stprintf_a_trunc(void **);
-static void test_stprintf_a_ok(void **);
+static void test_stprintf_a_trunc(MAYBE_UNUSED void ** _1);
+static void test_stprintf_a_ok(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -34,7 +34,7 @@ main(void)
 
 
 static void
-test_stprintf_a_trunc(void **)
+test_stprintf_a_trunc(MAYBE_UNUSED void ** _1)
 {
 	char  buf[countof("foo")];
 
@@ -48,7 +48,7 @@ test_stprintf_a_trunc(void **)
 
 
 static void
-test_stprintf_a_ok(void **)
+test_stprintf_a_ok(MAYBE_UNUSED void ** _1)
 {
 	char  buf[countof("foo")];
 

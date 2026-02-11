@@ -18,17 +18,17 @@
 
 #include "alloc/malloc.h"
 #include "chkname.h"
+#include "attr.h"
 
-
-static void test_is_valid_user_name_ok(void **);
-static void test_is_valid_user_name_ok_dollar(void **);
-static void test_is_valid_user_name_nok_dash(void **);
-static void test_is_valid_user_name_nok_dir(void **);
-static void test_is_valid_user_name_nok_dollar(void **);
-static void test_is_valid_user_name_nok_empty(void **);
-static void test_is_valid_user_name_nok_numeric(void **);
-static void test_is_valid_user_name_nok_otherchars(void **);
-static void test_is_valid_user_name_long(void **);
+static void test_is_valid_user_name_ok(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_ok_dollar(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_dash(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_dir(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_dollar(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_empty(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_numeric(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_nok_otherchars(MAYBE_UNUSED void ** _1);
+static void test_is_valid_user_name_long(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -51,7 +51,7 @@ main(void)
 
 
 static void
-test_is_valid_user_name_ok(void **)
+test_is_valid_user_name_ok(MAYBE_UNUSED void ** _1)
 {
 	assert_true(is_valid_user_name("alx"));
 	assert_true(is_valid_user_name("u-ser"));
@@ -66,7 +66,7 @@ test_is_valid_user_name_ok(void **)
 
 
 static void
-test_is_valid_user_name_ok_dollar(void **)
+test_is_valid_user_name_ok_dollar(MAYBE_UNUSED void ** _1)
 {
 	// Non-POSIX extension for Samba 3.x "add machine script".
 	assert_true(is_valid_user_name("dollar$"));
@@ -75,7 +75,7 @@ test_is_valid_user_name_ok_dollar(void **)
 
 
 static void
-test_is_valid_user_name_nok_dash(void **)
+test_is_valid_user_name_nok_dash(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name("-"));
 	assert_true(false == is_valid_user_name("-not-valid"));
@@ -84,7 +84,7 @@ test_is_valid_user_name_nok_dash(void **)
 
 
 static void
-test_is_valid_user_name_nok_dir(void **)
+test_is_valid_user_name_nok_dir(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name("."));
 	assert_true(false == is_valid_user_name(".."));
@@ -92,7 +92,7 @@ test_is_valid_user_name_nok_dir(void **)
 
 
 static void
-test_is_valid_user_name_nok_dollar(void **)
+test_is_valid_user_name_nok_dollar(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name("$"));
 	assert_true(false == is_valid_user_name("$dollar"));
@@ -103,14 +103,14 @@ test_is_valid_user_name_nok_dollar(void **)
 
 
 static void
-test_is_valid_user_name_nok_empty(void **)
+test_is_valid_user_name_nok_empty(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name(""));
 }
 
 
 static void
-test_is_valid_user_name_nok_numeric(void **)
+test_is_valid_user_name_nok_numeric(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name("6"));
 	assert_true(false == is_valid_user_name("42"));
@@ -118,7 +118,7 @@ test_is_valid_user_name_nok_numeric(void **)
 
 
 static void
-test_is_valid_user_name_nok_otherchars(void **)
+test_is_valid_user_name_nok_otherchars(MAYBE_UNUSED void ** _1)
 {
 	assert_true(false == is_valid_user_name("no spaces"));
 	assert_true(false == is_valid_user_name("no,"));
@@ -128,7 +128,7 @@ test_is_valid_user_name_nok_otherchars(void **)
 
 
 static void
-test_is_valid_user_name_long(void **)
+test_is_valid_user_name_long(MAYBE_UNUSED void ** _1)
 {
 	size_t  max;
 	char    *name;

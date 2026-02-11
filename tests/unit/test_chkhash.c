@@ -16,10 +16,10 @@
 #include <cmocka.h>
 
 #include "chkhash.h"
-
+#include "attr.h"
 
 static void
-test_is_valid_hash_ok_yescrypt(void **)
+test_is_valid_hash_ok_yescrypt(MAYBE_UNUSED void ** _1)
 {
 	// Basic yescrypt hash: $y$ + params + $ + salt + $ + 43 character hash
 	assert_true(is_valid_hash("$y$j9T$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
@@ -45,7 +45,7 @@ test_is_valid_hash_ok_yescrypt(void **)
 
 
 static void
-test_is_valid_hash_ok_bcrypt(void **)
+test_is_valid_hash_ok_bcrypt(MAYBE_UNUSED void ** _1)
 {
 	// Basic bcrypt hash: $2a$ + cost + $ + 53 character hash
 	assert_true(is_valid_hash("$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
@@ -65,7 +65,7 @@ test_is_valid_hash_ok_bcrypt(void **)
 
 
 static void
-test_is_valid_hash_ok_sha512(void **)
+test_is_valid_hash_ok_sha512(MAYBE_UNUSED void ** _1)
 {
 	// Basic SHA-512 hash: $6$ + salt + $ + 86 character hash
 	assert_true(is_valid_hash("$6$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -88,7 +88,7 @@ test_is_valid_hash_ok_sha512(void **)
 
 
 static void
-test_is_valid_hash_ok_sha256(void **)
+test_is_valid_hash_ok_sha256(MAYBE_UNUSED void ** _1)
 {
 	// Basic SHA-256 hash: $5$ + salt + $ + 43 character hash
 	assert_true(is_valid_hash("$5$salt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ"));
@@ -111,7 +111,7 @@ test_is_valid_hash_ok_sha256(void **)
 
 
 static void
-test_is_valid_hash_ok_md5(void **)
+test_is_valid_hash_ok_md5(MAYBE_UNUSED void ** _1)
 {
 	// Basic MD5 hash: $1$ + salt + $ + 22 character hash
 	assert_true(is_valid_hash("$1$salt$abcdefghijklmnopqrstuv"));
@@ -122,7 +122,7 @@ test_is_valid_hash_ok_md5(void **)
 
 
 static void
-test_is_valid_hash_ok_des(void **)
+test_is_valid_hash_ok_des(MAYBE_UNUSED void ** _1)
 {
 	// Basic DES hash: 13 characters
 	assert_true(is_valid_hash("abcDEF123./zZ"));
@@ -133,7 +133,7 @@ test_is_valid_hash_ok_des(void **)
 
 
 static void
-test_is_valid_hash_ok_special(void **)
+test_is_valid_hash_ok_special(MAYBE_UNUSED void ** _1)
 {
 	// Empty string - passwordless account
 	assert_true(is_valid_hash(""));
@@ -153,7 +153,7 @@ test_is_valid_hash_ok_special(void **)
 
 
 static void
-test_is_valid_hash_edge_salt_chars(void **)
+test_is_valid_hash_edge_salt_chars(MAYBE_UNUSED void ** _1)
 {
 	// SHA-512 with backslash in salt
 	assert_true(is_valid_hash("$6$sa\\lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -170,7 +170,7 @@ test_is_valid_hash_edge_salt_chars(void **)
 
 
 static void
-test_is_valid_hash_edge_account_locks(void **)
+test_is_valid_hash_edge_account_locks(MAYBE_UNUSED void ** _1)
 {
 	// Complex ! prefix scenarios with various hash types should work
 	assert_true(is_valid_hash("!$2a$12$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."));
@@ -184,7 +184,7 @@ test_is_valid_hash_edge_account_locks(void **)
 
 
 static void
-test_is_invalid_algorithm(void **)
+test_is_invalid_algorithm(MAYBE_UNUSED void ** _1)
 {
 	assert_false(is_valid_hash("$7$salt$hash"));
 	assert_false(is_valid_hash("$2z$12$hash"));
@@ -193,7 +193,7 @@ test_is_invalid_algorithm(void **)
 
 
 static void
-test_is_invalid_hash_length(void **)
+test_is_invalid_hash_length(MAYBE_UNUSED void ** _1)
 {
 	assert_false(is_valid_hash("$y$j9T$salt$tooshort"));
 	assert_false(is_valid_hash("$2a$12$tooshort"));
@@ -203,7 +203,7 @@ test_is_invalid_hash_length(void **)
 
 
 static void
-test_is_invalid_delimeters(void **)
+test_is_invalid_delimeters(MAYBE_UNUSED void ** _1)
 {
 	// Missing delimiters
 	assert_false(is_valid_hash("$6salt$hash"));
@@ -216,7 +216,7 @@ test_is_invalid_delimeters(void **)
 
 
 static void
-test_is_invalid_salt_chars(void **)
+test_is_invalid_salt_chars(MAYBE_UNUSED void ** _1)
 {
 	assert_false(is_valid_hash("$6$sa:lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
 	assert_false(is_valid_hash("$6$sa$lt$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890./abcdefghijklmnopqrstuv"));
@@ -225,7 +225,7 @@ test_is_invalid_salt_chars(void **)
 
 
 static void
-test_is_invalid_rounds(void **)
+test_is_invalid_rounds(MAYBE_UNUSED void ** _1)
 {
 	assert_false(is_valid_hash("$6$rounds=abc$salt$hash")); // Non-numeric rounds
 	assert_false(is_valid_hash("$6$rounds=0$salt$hash")); // Invalid rounds (must start with 1-9)
