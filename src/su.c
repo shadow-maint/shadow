@@ -115,7 +115,7 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
-static void kill_child(int);
+static void kill_child(MAYBE_UNUSED int _1);
 static void prepare_pam_close_session (void);
 #else				/* !USE_PAM */
 static void die (int);
@@ -170,7 +170,7 @@ static bool iswheel (const char *username)
 }
 #else				/* USE_PAM */
 static void
-kill_child(int)
+kill_child(MAYBE_UNUSED int _1)
 {
 	if (0 != pid_child) {
 		(void) kill (-pid_child, SIGKILL);

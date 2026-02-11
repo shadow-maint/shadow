@@ -16,11 +16,11 @@
 
 #include "sizeof.h"
 #include "string/strcpy/strncpy.h"
+#include "attr.h"
 
-
-static void test_strncpy_a_trunc(void **);
-static void test_strncpy_a_fit(void **);
-static void test_strncpy_a_pad(void **);
+static void test_strncpy_a_trunc(MAYBE_UNUSED void ** _1);
+static void test_strncpy_a_fit(MAYBE_UNUSED void ** _1);
+static void test_strncpy_a_pad(MAYBE_UNUSED void ** _1);
 
 
 int
@@ -37,7 +37,7 @@ main(void)
 
 
 static void
-test_strncpy_a_trunc(void **)
+test_strncpy_a_trunc(MAYBE_UNUSED void ** _1)
 {
 	char  buf[3];
 
@@ -52,7 +52,7 @@ test_strncpy_a_trunc(void **)
 
 
 static void
-test_strncpy_a_fit(void **)
+test_strncpy_a_fit(MAYBE_UNUSED void ** _1)
 {
 	char  buf[3];
 
@@ -67,7 +67,7 @@ test_strncpy_a_fit(void **)
 
 
 static void
-test_strncpy_a_pad(void **)
+test_strncpy_a_pad(MAYBE_UNUSED void ** _1)
 {
 	char  buf[3];
 

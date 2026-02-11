@@ -367,13 +367,13 @@ static void init_env (void)
 }
 
 static void
-exit_handler(int)
+exit_handler(MAYBE_UNUSED int _1)
 {
 	_exit (0);
 }
 
 static void
-alarm_handler(int)
+alarm_handler(MAYBE_UNUSED int _1)
 {
 	write_full(STDERR_FILENO, tmsg, strlen(tmsg));
 	signal(SIGALRM, exit_handler);

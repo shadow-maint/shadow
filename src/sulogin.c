@@ -50,7 +50,7 @@ static int pw_entry(const char *name, struct passwd *pwent);
 
 
 static void
-catch_signals(int)
+catch_signals(MAYBE_UNUSED int _1)
 {
 	_exit (1);
 }
