@@ -2,5 +2,6 @@
 *.log
 *.trs
 
-# Specific files to be added each time a new file is included
-test_logind
+# All test executables
+test_*
+!test_*.c
