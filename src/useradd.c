@@ -2499,12 +2499,10 @@ int main (int argc, char **argv)
 	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
 	is_sub_uid = want_subuid_file () &&
 	    subuid_count > 0 && sub_uid_file_present () &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	    (!rflg && (!user_id || (user_id <= uid_max && user_id >= uid_min))) || Fflg;
 	is_sub_gid = want_subgid_file() &&
 	    subgid_count > 0 && sub_gid_file_present() &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	    (!rflg && (!user_id || (user_id <= uid_max && user_id >= uid_min))) || Fflg;
 #endif				/* ENABLE_SUBIDS */
 
 	if (run_parts ("/etc/shadow-maint/useradd-pre.d", user_name,
