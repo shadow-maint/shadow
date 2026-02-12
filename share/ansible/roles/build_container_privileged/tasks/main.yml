@@ -1,0 +1,18 @@
+- name: Pull container image
+  containers.podman.podman_image:
+    name: "{{ image[distribution] }}"
+
+- name: Create and start privileged container
+  containers.podman.podman_container:
+    name: builder-privileged
+    state: started
+    image: "{{ image[distribution] }}"
+    command: "sleep 1d"
+    privileged: true
+
+- name: Prepare source tree
+  ansible.builtin.shell: |
+    podman exec builder-privileged rm -rf /usr/local/src/shadow
+    podman exec builder-privileged mkdir -p /usr/local/src
+    podman cp "{{ playbook_dir }}/../.." builder-privileged:/usr/local/src/shadow
+

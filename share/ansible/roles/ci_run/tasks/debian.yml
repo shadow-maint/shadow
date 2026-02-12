@@ -9,6 +9,7 @@
 - name: Ensure dependencies are installed
   ansible.builtin.apt:
     name:
+      - btrfs-progs
       - expect
       - gpg
       - libbsd-dev

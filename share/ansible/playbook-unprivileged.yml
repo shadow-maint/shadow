@@ -1,0 +1,27 @@
+---
+- name: Start unprivileged build container
+  hosts: localhost
+  vars:
+    image:
+      fedora: registry.fedoraproject.org/fedora:latest
+      alpine: docker.io/library/alpine:latest
+      debian: docker.io/library/debian:latest
+      opensuse: docker.io/opensuse/tumbleweed:latest
+  roles:
+    - role: build_container_unprivileged
+
+- name: CI run
+  hosts: builder
+  connection: podman
+  gather_facts: false
+  roles:
+    - role: ci_run
+
+- name: Run unprivileged system tests
+  hosts: localhost
+  roles:
+    - role: run_system_tests
+      vars:
+        mhc: "mhc.yaml"
+        pytest_extra_args: '-m "not privileged"'
+

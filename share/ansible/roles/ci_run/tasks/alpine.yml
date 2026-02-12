@@ -9,17 +9,23 @@
       - autoconf
       - automake
       - bash
+      - btrfs-progs
       - build-base
       - cmocka-dev
       - coreutils
+      - cython
       - expect
       - gettext-dev
       - git
       - libbsd-dev
       - libeconf-dev
+      - libssh-dev
       - libtool
       - libxslt
+      - musl-dev
+      - util-linux
       - pkgconf
+      - python3-dev
     state: present
 
 - name: Make sure expect is found
