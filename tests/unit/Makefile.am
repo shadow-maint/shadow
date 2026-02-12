@@ -6,6 +6,7 @@ TESTS = $(check_PROGRAMS)
 check_PROGRAMS = \
     test_adds \
     test_atoi_strtoi \
+    test_chkhash \
     test_chkname \
     test_snprintf \
     test_strncpy \
@@ -46,6 +47,19 @@ test_atoi_strtoi_CFLAGS = \
 test_atoi_strtoi_LDFLAGS = \
     $(NULL)
 test_atoi_strtoi_LDADD = \
+    $(CMOCKA_LIBS) \
+    $(NULL)
+
+test_chkhash_SOURCES = \
+    ../../lib/chkhash.c \
+    test_chkhash.c \
+    $(NULL)
+test_chkhash_CFLAGS = \
+    $(AM_CFLAGS) \
+    $(NULL)
+test_chkhash_LDFLAGS = \
+    $(NULL)
+test_chkhash_LDADD = \
     $(CMOCKA_LIBS) \
     $(NULL)
 

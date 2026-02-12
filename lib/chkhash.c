@@ -53,7 +53,7 @@ is_valid_hash(const char *hash)
 	if (strlen(hash) < 13)
 		return false;
 
-	// Yescrypt: $y$ + algorithm parameters + $ + salt + $ + 43-char (minimum) hash
+	// Yescrypt: $y$ + algorithm parameters + $ + salt + $ + 43-char hash
 	if (match_regex("^\\$y\\$[./A-Za-z0-9]+\\$[./A-Za-z0-9]{1,86}\\$[./A-Za-z0-9]{43}$", hash))
 		return true;
 
