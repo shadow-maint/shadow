@@ -8,6 +8,7 @@
     name:
       - autoconf
       - automake
+      - btrfs-progs
       - diffutils
       - expect
       - gawk

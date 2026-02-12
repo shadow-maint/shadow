@@ -1,4 +1,5 @@
-- name: Start build container
+---
+- name: "Start {{ 'privileged' if privileged_mode | default(false) | bool else 'unprivileged' }} build container"
   hosts: localhost
   vars:
     image:
@@ -6,18 +7,28 @@
       alpine: docker.io/library/alpine:latest
       debian: docker.io/library/debian:latest
       opensuse: docker.io/opensuse/tumbleweed:latest
-
+    container_name: "{{ 'builder-privileged' if privileged_mode | default(false) | bool else 'builder' }}"
   roles:
     - role: build_container
+      vars:
+        privileged: "{{ privileged_mode | default(false) | bool }}"
+        name: "{{ container_name }}"
+  post_tasks:
+    - name: Register container as a host
+      ansible.builtin.add_host:
+        name: "{{ container_name }}"
+        groups: build_target
+        ansible_connection: containers.podman.podman
 
 - name: CI run
-  hosts: builder
-  connection: podman
+  hosts: build_target
   gather_facts: false
   roles:
     - role: ci_run
 
-- name: Run system tests
+- name: "Run {{ 'privileged' if privileged_mode | default(false) | bool else 'unprivileged' }} system tests"
   hosts: localhost
   roles:
     - role: run_system_tests
+      vars:
+        mhc: "{{ 'mhc-privileged.yaml' if privileged_mode | default(false) | bool else 'mhc.yaml' }}"

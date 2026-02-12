@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Build container images.
+Builds unprivileged and privileged container images.
 
 Role Variables
 --------------
@@ -14,8 +14,9 @@ Example Playbook
 Usage example:
 
     - hosts: localhost
+      become: true
       roles:
-        - role: build_container
+        - role: build_container_privileged
 
 License
 -------
@@ -26,3 +27,4 @@ Author Information
 ------------------
 
 Iker Pedrosa <ipedrosa@redhat.com>
+Hadi Chokr <hadichokr@icloud.com>
