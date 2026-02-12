@@ -1,0 +1,17 @@
+- name: Pull container image
+  containers.podman.podman_image:
+    name: "{{ image[distribution] }}"
+
+- name: Create and start container
+  containers.podman.podman_container:
+    name: builder
+    state: started
+    image: "{{ image[distribution] }}"
+    command: "sleep 1d"
+
+- name: Prepare source tree
+  ansible.builtin.shell: |
+    podman exec builder rm -rf /usr/local/src/shadow
+    podman exec builder mkdir -p /usr/local/src
+    podman cp "{{ playbook_dir }}/../.." builder:/usr/local/src/shadow
+
