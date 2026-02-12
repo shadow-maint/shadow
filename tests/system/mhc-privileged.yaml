@@ -1,13 +1,13 @@
 provisioned_topologies:
-- shadow
+- shadow-privileged
 
 domains:
-- id: shadow
+- id: shadow-privileged
   hosts:
-  - hostname: shadow.test
+  - hostname: shadow-priv.test
     role: shadow
     conn:
       type: podman
-      container: builder
+      container: builder-privileged
     artifacts:
     - /var/log/*

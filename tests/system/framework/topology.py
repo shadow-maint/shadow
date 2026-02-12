@@ -35,6 +35,12 @@ class KnownTopology(KnownTopologyBase):
         fixtures=dict(shadow="shadow.shadow[0]"),
     )
 
+    ShadowPrivileged = TopologyMark(
+        name="shadow-privileged",
+        topology=Topology(TopologyDomain("shadow-privileged", shadow=1)),
+        fixtures=dict(shadow="shadow-privileged.shadow[0]"),
+    )
+
 
 class KnownTopologyGroup(KnownTopologyGroupBase):
     """
