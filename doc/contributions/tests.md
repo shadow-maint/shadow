@@ -52,15 +52,20 @@ The Python framework provides several advantages over Bash tests:
 • **Cross-distribution compatibility**: works on all distributions in CI
   (Alpine, Debian, Fedora and openSUSE)
   unlike Bash tests which only run on Ubuntu.
+  
 • **Proper environment management**: ensures clean setup and teardown
   with environment restoration even when tests fail.
+  
 • **Improved test maintainability**: provides a rich, high-level API
   that reduces complex test code
   and makes tests easier to understand.
+  
 • **Automated artifact collection**: automatically collects logs and artifacts
   when tests finish (even if they fail).
+  
 • **Flexible infrastructure**: supports both VMs and containers for testing
   with local execution capabilities.
+  
 • **Future extensibility**: enables potential filtering by ticket
   or importance and other advanced features.
 
@@ -68,6 +73,55 @@ The Python framework provides several advantages over Bash tests:
 
 **For all new contributions,
 we recommend using the Python system test framework.**
+
+## Privilege levels
+
+Python system tests are divided into two categories.
+
+### Unprivileged tests (default)
+
+These tests run with standard container permissions and do not require
+elevated capabilities. They are suitable for CI and should be the
+preferred choice for new test development.
+
+### Privileged tests (opt-in)
+
+These tests require elevated capabilities and may perform operations
+such as:
+
+-   Mounting filesystems
+-   Creating loop devices
+-   Working with BTRFS subvolumes
+-   Modifying kernel-visible system state
+
+These capabilities operate at the kernel boundary. If isolation is
+misconfigured, they may affect the host system directly.
+
+Concrete risks include:
+
+-   Accessing and modifying any file on the host system through bind
+    mounts
+-   Interfering with host services by consuming loop devices
+-   Filling host disk space by creating large filesystem images
+-   Leaving orphaned mount points that prevent clean system shutdown
+
+Privileged tests are useful when validating functionality that
+fundamentally depends on those capabilities. However, they should be
+introduced only when no reasonable unprivileged alternative exists.
+
+When writing new tests:
+
+-   Prefer unprivileged designs.
+-   Consider whether the behavior can be validated without mounts or
+    device manipulation.
+-   Use privileged tests as a targeted tool, not the default approach.
+
+Privileged tests should be executed **only** inside:
+
+-   A disposable virtual machine, or
+-   A dedicated privileged container created for testing
+
+They are not intended to run directly on a host system.
 
 #### Contribution guidance
 
@@ -81,6 +135,13 @@ When contributing:
    to understand the established patterns and conventions.
 3. **Missing features**: if you're comfortable implementing missing pytest-mh features,
    contributions are encouraged.
+
+When adding new coverage, prioritize unprivileged test designs.
+Privileged tests should be added only when the feature under test cannot
+be meaningfully validated otherwise.
+
+Review examples in `tests/system/tests/privileged` before introducing
+new privileged scenarios.
 
 #### Running tests
 
@@ -126,11 +187,14 @@ Instructions are available in the
 
 ##### Execution
 
-Run all Python system tests:
+Run all Python system tests (privileged tests excluded by default):
 
 ```bash
 pytest --mh-config=mhc.yaml --mh-lazy-ssh -v
 ```
+
+By default, privileged tests are excluded via pytest markers to prevent accidental execution on
+non-disposable systems.
 
 Run tests in a file:
 
@@ -144,11 +208,25 @@ Run a single test case:
 pytest --mh-config=mhc.yaml --mh-lazy-ssh -v -k test_useradd__add_user
 ```
 
+To run privileged tests, ensure you are **inside a disposable VM or a privileged
+container**, then run:
+
+```bash
+pytest -m "privileged" --mh-config=mhc-privileged.yaml --mh-lazy-ssh -v
+```
+
+Run both unprivileged and privileged tests:
+
+```bash
+pytest -m "privileged or not privileged" --mh-config=mhc.yaml --mh-lazy-ssh -v
+```
+
 **Command options explained:**
 - `--mh-config=mhc.yaml`: specifies the multihost configuration file
 - `--mh-lazy-ssh`: enables lazy SSH connections for better performance
 - `-v`: verbose output showing individual test results
 - `-k`: filters tests by name pattern
+- `-m`: filters tests by marker expression
 
 For additional running options,
 see the [pytest-mh running tests documentation](https://pytest-mh.readthedocs.io/en/latest/articles/running-tests.html).
@@ -259,6 +337,7 @@ The framework automatically manages shadow system files:
 - Use containers or VMs to avoid system state pollution.
 - Ensure proper cleanup in the framework between test runs.
 - Verify container/VM has necessary privileges for user/group operations.
+- Running privileged tests on the host system, even for local development is a **bad idea**.
 
 For additional information about the testing framework,
 see the [pytest-mh documentation](https://pytest-mh.readthedocs.io).
