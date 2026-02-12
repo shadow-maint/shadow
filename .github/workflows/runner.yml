@@ -16,6 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
+
     - name: debug
       run: |
         id
@@ -27,17 +28,22 @@ jobs:
         cat /proc/self/uid_map
         cat /proc/self/status
         systemd-detect-virt
+
     - name: Install dependencies
       id: dependencies
       uses: ./.github/actions/install-dependencies
+
     - name: configure
       run: |
         autoreconf -v -f --install
         ./autogen.sh --without-selinux --disable-man --with-yescrypt
+
     - run: make
     - run: make install DESTDIR=${HOME}/rootfs
     - run: sudo make install
+
     - name: run tests in shell with tty
+      # Run tests inside a pseudo-TTY because some parts expect one.
       shell: 'script -q -e -c "bash {0}"'
       run: |
         set -e
@@ -71,10 +77,12 @@ jobs:
 
   container-build:
     runs-on: ubuntu-latest
+    name: "container-build (${{ matrix.os }}${{ matrix.privileged && ', privileged' || '' }})"
     strategy:
       fail-fast: false
       matrix:
         os: [alpine, debian, fedora, opensuse]
+        privileged: [false, true]
 
     steps:
     - uses: actions/setup-python@v5
@@ -89,17 +97,21 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install ansible
 
-    - name: Build container
+    - name: "Build container (${{ matrix.privileged && 'privileged' || 'unprivileged'}})"
       run: |
         pushd share/ansible/
-        ansible-playbook playbook.yml -i inventory.ini -e 'distribution=${{ matrix.os }}'
+        ${{ matrix.privileged && 'sudo' || '' }} ansible-playbook playbook.yml \
+          -i inventory.ini \
+          -e "distribution=${{ matrix.os }}" \
+          -e "privileged_mode=${{ matrix.privileged }}"
         popd
 
     - name: Store artifacts
+      # Always upload logs to allow debugging even on failure.
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-build
+        name: "${{ matrix.os }}-${{ matrix.privileged && 'privileged' || 'unprivileged'}}-build"
         path: |
           ./share/ansible/build-out/config.log
           ./share/ansible/build-out/config.h
