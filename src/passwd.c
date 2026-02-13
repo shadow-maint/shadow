@@ -34,6 +34,7 @@
 #include "sssd.h"
 #include "string/memset/memzero.h"
 #include "string/sprintf/aprintf.h"
+#include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strcpy/strtcpy.h"
@@ -745,6 +746,17 @@ static void update_shadow(bool process_selinux)
 	if (eflg) {
 		audit_logger(AUDIT_USER_MGMT,
 		             "expired-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	/* Audit aging parameter changes if any were modified */
+	if (xflg || nflg || wflg || iflg) {
+		char aging_msg[256];
+		stprintf_a(aging_msg,
+		           "changed-password-aging min=%ld max=%ld warn=%ld inact=%ld",
+		           nsp->sp_min, nsp->sp_max, nsp->sp_warn, nsp->sp_inact);
+		audit_logger(AUDIT_USER_MGMT,
+		             aging_msg,
 		             NULL, pw->pw_uid,
 		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
 	}
