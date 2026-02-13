@@ -22,7 +22,8 @@ Fedora:
 dnf builddep shadow-utils
 ```
 
-An alternative would be to take a look at the CI workflow [file](../../.github/workflows/runner.yml)
+An alternative would be to take a look at the CI workflow
+[file](../../.github/workflows/runner.yml)
 and get the package names from there. This has the advantage that it
 also includes new dependencies needed for the development version
 which might have not been present in the last release.
@@ -55,24 +56,58 @@ make install
 
 ## Containers
 
-Alternatively, you can use any of the preconfigured container images builders
-to build and install shadow.
+Alternatively, you can use the preconfigured container builders
+to build, install, and test shadow in an isolated environment.
 
-You can either generate a single image by running the following command from
-the root folder of the project (i.e. Alpine):
+The container workflow supports two execution modes:
+
+- Unprivileged (default)
+- Privileged (opt-in, required for BTRFS, mounts, and similar tests)
+
+### Single distribution build
 
 ```
-ansible-playbook share/ansible/playbook.yml -i share/ansible/inventory.ini -e 'distribution=alpine'
+ansible-playbook share/ansible/playbook-unprivileged.yml \
+  -i share/ansible/inventory.ini \
+  -e 'distribution=alpine'
 ```
 
 **Note**: you'll need to install ansible to run this automation.
 
 Or generate all of the images with the `container-build.sh` script, as if you
 were running some of the CI checks locally:
+### Multiple distributions
 
 ```
 share/container-build.sh
 ```
+
+## Privileged builds and tests
+
+Most development and CI scenarios should use the default (unprivileged)
+mode. It is sufficient for validating core functionality and avoids
+unnecessary exposure to elevated capabilities.
+
+Privileged mode is available for tests that require kernel-level
+operations such as BTRFS subvolumes, loop devices, or filesystem mounts.
+
+To run privileged builds across all distributions:
+
+``` bash
+sudo share/container-build.sh --privileged
+```
+
+Or for a single distribution:
+
+``` bash
+sudo ansible-playbook share/ansible/playbook-privileged.yml \
+  -i share/ansible/inventory.ini \
+  -e "distribution=fedora"
+```
+
+Privileged containers should be used in disposable environments (for
+example, a VM or a temporary development system). While they are useful
+for certain scenarios, most development workflows do not require them.
 
 ### Container troubleshooting
 
@@ -87,6 +122,7 @@ Here are common troubleshooting steps:
   that existed when tests ran.
 
 **Container management:**
+If using a privileged container, you will need to be root to execute these commands.
 - **List containers**: `docker ps -a` to see all containers and their status.
 - **Access container**: `docker exec -it <container-name> bash` to get shell access.
 - **Container logs**: `docker logs <container-name>` to view container output.

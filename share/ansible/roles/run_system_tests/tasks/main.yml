@@ -3,12 +3,21 @@
 - name: Prepare environment and run system tests
   ansible.builtin.shell: |
     set -ex
-    pushd ../../tests/system/
+    pushd ../../tests/system
+
+    export PYTHONPATH="$(pwd)/../..:${PYTHONPATH}"
+
     python3 -m venv .venv
     source .venv/bin/activate
-    pip3 install -r ./requirements.txt
+    pip3 install -r requirements.txt
+
     exec 3>&1 1> >(tee pytest.log) 2>&1
-    pytest --mh-config=mhc.yaml --mh-lazy-ssh -vvv
+    pytest \
+      --mh-config={{ mhc }} \
+      --mh-lazy-ssh \
+      -vvv \
+      {{ pytest_extra_args }}
+
     popd
   args:
     executable: /bin/bash
