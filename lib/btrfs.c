@@ -5,32 +5,16 @@
 
 #include "prototypes.h"
 
-static bool path_exists(const char *p)
-{
-	struct stat sb;
 
-	return stat(p, &sb) == 0;
-}
+#define PATH_ENV  "/usr/bin/env"
 
-static const char *btrfs_cmd(void)
-{
-	const char *const btrfs_paths[] = {"/sbin/btrfs",
-		"/bin/btrfs", "/usr/sbin/btrfs", "/usr/bin/btrfs", NULL};
-	const char *p;
-	int i;
-
-	for (i = 0, p = btrfs_paths[i]; p; i++, p = btrfs_paths[i])
-		if (path_exists(p))
-			return p;
-
-	return NULL;
-}
 
 static int run_btrfs_subvolume_cmd(const char *subcmd, const char *arg1, const char *arg2)
 {
 	int status = 0;
-	const char *cmd = btrfs_cmd();
+	const char *cmd = PATH_ENV;
 	const char *argv[] = {
+		"env",
 		"btrfs",
 		"subvolume",
 		subcmd,
@@ -39,12 +23,12 @@ static int run_btrfs_subvolume_cmd(const char *subcmd, const char *arg1, const c
 		NULL
 	};
 
-	if (!cmd || access(cmd, X_OK)) {
+	if (access(cmd, X_OK) == -1)
 		return 1;
-	}
 
 	if (run_command(cmd, argv, NULL, &status))
 		return -1;
+
 	return status;
 }
 
