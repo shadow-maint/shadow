@@ -618,6 +618,7 @@ static void update_noshadow(bool process_selinux)
 {
 	const struct passwd *pw;
 	struct passwd *npw;
+	int ret;
 
 	pw = pw_locate (name);
 	if (NULL == pw) {
@@ -632,7 +633,28 @@ static void update_noshadow(bool process_selinux)
 		oom (process_selinux);
 	}
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd, process_selinux);
-	if (pw_update (npw) == 0) {
+	ret = pw_update(npw);
+#ifdef WITH_AUDIT
+	if (lflg) {
+		audit_logger(AUDIT_ACCT_LOCK,
+		             "locked-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	if (uflg) {
+		audit_logger(AUDIT_ACCT_UNLOCK,
+		             "unlocked-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	if (dflg) {
+		audit_logger(AUDIT_USER_CHAUTHTOK,
+		             "deleted-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+#endif /* WITH_AUDIT */
+	if (ret == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, pw_dbname (), npw->pw_name);
@@ -642,9 +664,18 @@ static void update_noshadow(bool process_selinux)
 
 static void update_shadow(bool process_selinux)
 {
-	const struct passwd pw = { .pw_passwd = SHADOW_PASSWD_STRING };
+	const struct passwd *pw;
 	const struct spwd *sp;
 	struct spwd *nsp;
+	int ret;
+
+	pw = pw_locate(name);
+	if (NULL == pw) {
+		fprintf(stderr,
+		        _("%s: user '%s' does not exist in %s\n"),
+		        Prog, name, pw_dbname ());
+		fail_exit (E_NOPERM, process_selinux);
+	}
 
 	sp = spw_locked ? spw_locate(name) : NULL;
 	if (NULL == sp) {
@@ -652,7 +683,7 @@ static void update_shadow(bool process_selinux)
 		update_noshadow (process_selinux);
 		return;
 	}
-	check_password(&pw, sp, process_selinux);
+	check_password(pw, sp, process_selinux);
 	nsp = __spw_dup (sp);
 	if (NULL == nsp) {
 		oom (process_selinux);
@@ -691,7 +722,34 @@ static void update_shadow(bool process_selinux)
 		nsp->sp_lstchg = 0;
 	}
 
-	if (spw_update (nsp) == 0) {
+	ret = spw_update(nsp);
+#ifdef WITH_AUDIT
+	if (lflg) {
+		audit_logger(AUDIT_ACCT_LOCK,
+		             "locked-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	if (uflg) {
+		audit_logger(AUDIT_ACCT_UNLOCK,
+		             "unlocked-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	if (dflg) {
+		audit_logger(AUDIT_USER_CHAUTHTOK,
+		             "deleted-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+	if (eflg) {
+		audit_logger(AUDIT_USER_MGMT,
+		             "expired-password",
+		             NULL, pw->pw_uid,
+		             ret ? SHADOW_AUDIT_SUCCESS : SHADOW_AUDIT_FAILURE);
+	}
+#endif /* WITH_AUDIT */
+	if (ret == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to prepare the new %s entry '%s'\n"),
 		                Prog, spw_dbname (), nsp->sp_namp);
@@ -754,6 +812,10 @@ main(int argc, char **argv)
 		use_pam = false;
 		do_update_age = true;
 	}
+
+#ifdef WITH_AUDIT
+	audit_help_open();
+#endif /* WITH_AUDIT */
 
 	/*
 	 * The program behaves differently when executed by root than when
@@ -987,6 +1049,12 @@ main(int argc, char **argv)
 	}
 
 	if (anyflag && !amroot) {
+#ifdef WITH_AUDIT
+		audit_logger(AUDIT_USER_CHAUTHTOK,
+		             "attempted-to-change-password-attribute",
+		             NULL, getuid(),
+		             SHADOW_AUDIT_FAILURE);
+#endif /* WITH_AUDIT */
 		(void) fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
@@ -1002,6 +1070,12 @@ main(int argc, char **argv)
 	/* only do this check when getuid()==0 because it's a pre-condition for
 	   changing a password without entering the old one */
 	if (amroot && (check_selinux_permit (Prog) != 0)) {
+#ifdef WITH_AUDIT
+		audit_logger(AUDIT_USER_CHAUTHTOK,
+		             "attempted-to-change-password",
+		             NULL, pw->pw_uid,
+		             SHADOW_AUDIT_FAILURE);
+#endif /* WITH_AUDIT */
 		SYSLOG ((LOG_ALERT,
 		         "root is not authorized by SELinux to change the password of %s",
 		         name));
@@ -1017,6 +1091,12 @@ main(int argc, char **argv)
 	 * check if I'm root.
 	 */
 	if (!amroot && (pw->pw_uid != getuid ())) {
+#ifdef WITH_AUDIT
+		audit_logger(AUDIT_USER_CHAUTHTOK,
+		             "attempted-to-change-password",
+		             NULL, pw->pw_uid,
+		             SHADOW_AUDIT_FAILURE);
+#endif /* WITH_AUDIT */
 		(void) fprintf (stderr,
 		                _("%s: You may not view or modify password information for %s.\n"),
 		                Prog, name);
