@@ -26,8 +26,7 @@
 #include "string/strtok/stpsep.h"
 
 
-static void
-login_exit(int)
+static void login_exit (MAYBE_UNUSED int sig)
 {
 	_exit (EXIT_FAILURE);
 }

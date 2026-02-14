@@ -111,7 +111,7 @@ static void execve_shell (const char *shellname,
                           char *args[],
                           char *const envp[]);
 #ifdef USE_PAM
-static void kill_child(pid_t);
+static void kill_child (MAYBE_UNUSED pid_t s);
 static void prepare_pam_close_session (void);
 static void set_timeout(int);
 #else				/* !USE_PAM */
