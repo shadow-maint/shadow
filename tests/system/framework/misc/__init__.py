@@ -52,3 +52,10 @@ def days_since_epoch():
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     delta = now_utc - epoch
     return delta.days
+
+
+def shadow_password_pattern() -> str:
+    """
+    Returns the shadow password regex pattern
+    """
+    return r"^\$(?:\w)\$[^$]*\$[\w./]+(?:\$[\w./]+)?$"

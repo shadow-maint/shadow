@@ -15,6 +15,7 @@
       - libcmocka-dev
       - libltdl-dev
       - pkgconf
+      - vim
     state: present
 
 - name: Gather selected facts

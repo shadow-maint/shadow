@@ -10,6 +10,7 @@ from framework.config import ShadowMultihostConfig
 pytest_plugins = (
     "pytest_mh",
     "pytest_ticket",
+    "framework.markers",
 )
 
 

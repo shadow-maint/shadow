@@ -19,6 +19,7 @@
       - libxslt-tools
       - make
       - systemd-devel
+      - vim
     state: present
 
 # Needed to use `zypper si`
@@ -31,6 +32,14 @@
     zypper --non-interactive si -d shadow
   register: zypper_result
   changed_when: '"Nothing to do" not in zypper_result.stdout'
+
+- name: Temporary solution to create /etc/gshadow
+  ansible.builtin.file:
+    path: /etc/gshadow
+    state: touch
+    owner: root
+    group: root
+    mode: '0000'
 
 - name: Build configuration
   ansible.builtin.command: >
