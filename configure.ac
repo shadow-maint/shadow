@@ -548,13 +548,6 @@ if test "X$with_libpam" = "Xyes"; then
 	               [], [], [[#include <security/pam_appl.h>]])
 
 
-	save_libs=$LIBS
-	LIBS="$LIBS $LIBPAM"
-	# We do not use AC_CHECK_FUNCS to avoid duplicated definition with
-	# Linux PAM.
-	AC_CHECK_FUNC([pam_fail_delay], [AC_DEFINE([HAS_PAM_FAIL_DELAY], [1], [Define to 1 if you have the declaration of 'pam_fail_delay'])])
-	LIBS=$save_libs
-
 	AC_DEFINE([USE_PAM], [1], [Define to support Pluggable Authentication Modules])
 	AC_DEFINE_UNQUOTED([SHADOW_PAM_CONVERSATION], [$pam_conv_function],[PAM conversation to use])
 
