@@ -758,7 +758,7 @@
 
     <para>
       Usernames may contain only lower and upper case letters, digits,
-      underscores, or dashes. They can end with a dollar sign.
+      underscores, dashes, or dots. They can end with a dollar sign.
 
       Dashes are not allowed at the beginning of the username.
       Fully numeric usernames and usernames . or .. are
