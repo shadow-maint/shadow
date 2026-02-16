@@ -634,7 +634,7 @@ int main (int argc, char **argv)
 	PAM_FAIL_CHECK;
 	retcode = pam_set_item (pamh, PAM_TTY, tty);
 	PAM_FAIL_CHECK;
-#ifdef HAS_PAM_FAIL_DELAY
+#ifdef HAVE_PAM_FAIL_DELAY
 	retcode = pam_fail_delay (pamh, 1000000 * delay);
 	PAM_FAIL_CHECK;
 #endif
@@ -675,7 +675,7 @@ int main (int argc, char **argv)
 			bool failed = false;
 
 			failcount++;
-#ifdef HAS_PAM_FAIL_DELAY
+#ifdef HAVE_PAM_FAIL_DELAY
 			if (delay > 0) {
 				retcode = pam_fail_delay(pamh, 1000000*delay);
 				PAM_FAIL_CHECK;
