@@ -64,7 +64,6 @@ dnl Checks for library functions.
 AC_REPLACE_FUNCS([putgrent putpwent putspent])
 AC_REPLACE_FUNCS([sgetgrent sgetpwent sgetspent])
 
-AC_CHECK_FUNC([setpgrp])
 AC_CHECK_DECLS([secure_getenv])
 
 AC_CACHE_CHECK([location of shared mail directory], [shadow_cv_maildir],
