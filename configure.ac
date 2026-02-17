@@ -3,7 +3,6 @@ AC_PREREQ([2.69])
 m4_define([libsubid_abi_major], [5])
 m4_define([libsubid_abi_minor], [0])
 m4_define([libsubid_abi_micro], [0])
-m4_define([libsubid_abi], [libsubid_abi_major.libsubid_abi_minor.libsubid_abi_micro])
 
 AC_INIT([shadow], [4.19.0], [pkg-shadow-devel@lists.alioth.debian.org], [],
 	[https://github.com/shadow-maint/shadow])
@@ -19,7 +18,6 @@ AC_SUBST([AM_DISTCHECK_CONFIGURE_FLAGS], ["$ac_configure_args"])
 AC_SUBST([LIBSUBID_ABI_MAJOR], [libsubid_abi_major])
 AC_SUBST([LIBSUBID_ABI_MINOR], [libsubid_abi_minor])
 AC_SUBST([LIBSUBID_ABI_MICRO], [libsubid_abi_micro])
-AC_SUBST([LIBSUBID_ABI], [libsubid_abi])
 
 dnl Some hacks...
 test "x$prefix" = "xNONE" && prefix="/usr"
