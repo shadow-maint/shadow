@@ -581,7 +581,7 @@ if test "X$with_skey" = "Xyes"; then
 	]])],[AC_DEFINE([SKEY_BSD_STYLE], [1], [Define to support newer BSD S/Key API])],[])
 fi
 
-AC_CHECK_FUNC([fgetpwent_r], [AC_DEFINE([HAVE_FGETPWENT_R], [1], [Defined to 1 if you have the declaration of 'fgetpwent_r'])])
+AC_CHECK_FUNCS([fgetpwent_r])
 
 AC_DEFINE_UNQUOTED([SHELL], ["$SHELL"], [The default shell.])
 
