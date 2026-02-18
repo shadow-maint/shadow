@@ -2449,18 +2449,27 @@ static void check_uid_range(int rflg, uid_t user_id)
 static bool
 should_assign_subuid(void)
 {
-	uid_t uid_min;
-	uid_t uid_max;
-	unsigned long subuid_count;
+	uid_t          uid_min;
+	uid_t          uid_max;
+	unsigned long  subuid_count;
 
 	uid_min = getdef_ulong ("UID_MIN", 1000UL);
 	uid_max = getdef_ulong ("UID_MAX", 60000UL);
 	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
 
-	return want_subuid_file () &&
-	    subuid_count > 0 && sub_uid_file_present () &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	if (!want_subuid_file())
+		return false;
+	if (subuid_count == 0)
+		return false;
+	if (!sub_uid_file_present())
+		return false;
+	if (rflg && !Fflg)
+		return false;
+	if (user_id == 0)
+		return false;
+	if (user_id > uid_max || user_id < uid_min)
+		return false;
+	return true;
 }
 #endif
 
@@ -2468,18 +2477,27 @@ should_assign_subuid(void)
 static bool
 should_assign_subgid(void)
 {
-	uid_t uid_min;
-	uid_t uid_max;
-	unsigned long subgid_count;
+	uid_t          uid_min;
+	uid_t          uid_max;
+	unsigned long  subgid_count;
 
 	uid_min = getdef_ulong ("UID_MIN", 1000UL);
 	uid_max = getdef_ulong ("UID_MAX", 60000UL);
 	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
 
-	return want_subgid_file() &&
-	    subgid_count > 0 && sub_gid_file_present() &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	if (!want_subgid_file())
+		return false;
+	if (subgid_count == 0)
+		return false;
+	if (!sub_gid_file_present())
+		return false;
+	if (rflg && !Fflg)
+		return false;
+	if (user_id == 0)
+		return false;
+	if (user_id > uid_max || user_id < uid_min)
+		return false;
+	return true;
 }
 #endif
 
