@@ -282,6 +282,11 @@ strsep/ - String separation
 	Variant of strsep2ls() that allocates the array of strings.
 	(But the strings themselves are not duplicated.)
 
+strlen/ - String length
+
+    strnlen_a()
+	Like strnlen(3), but take an array.
+
 strftime.h
     strftime_a()
 	Like strftime(3), but takes an array.
