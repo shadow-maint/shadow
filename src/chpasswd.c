@@ -25,9 +25,10 @@
 #include "atoi/a2i.h"
 #include "chkhash.h"
 #include "defines.h"
+#include "getdef.h"
+#include "io/fprintf.h"
 #include "nscd.h"
 #include "sssd.h"
-#include "getdef.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
@@ -35,7 +36,6 @@
 #include "exitcodes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
 
@@ -90,7 +90,7 @@ static void fail_exit (int code, bool process_selinux)
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -98,7 +98,7 @@ static void fail_exit (int code, bool process_selinux)
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
@@ -345,12 +345,12 @@ static void close_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 			fail_exit (1, process_selinux);
 		}
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 		spw_locked = false;
@@ -360,12 +360,12 @@ static void close_files(const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (1, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -539,9 +539,8 @@ int main (int argc, char **argv)
 		if (salt) {
 			cp = pw_encrypt (newpwd, salt);
 			if (NULL == cp) {
-				fprintf (stderr,
-				         _("%s: failed to crypt password with salt '%s': %s\n"),
-				        Prog, salt, strerrno());
+				fprinte(stderr, _("%s: failed to crypt password with salt '%s'"),
+				        Prog, salt);
 				fail_exit (1, process_selinux);
 			}
 		}

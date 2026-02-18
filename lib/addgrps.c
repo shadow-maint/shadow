@@ -20,12 +20,12 @@
 #include <sys/types.h>
 
 #include "alloc/reallocf.h"
+#include "io/fprintf.h"
 #include "search/l/lsearch.h"
 #include "shadow/grp/agetgroups.h"
 #include "shadowlog.h"
 #include "string/strchr/strchrscnt.h"
 #include "string/strcmp/streq.h"
-#include "string/strerrno.h"
 
 
 /*
@@ -71,7 +71,7 @@ add_groups(const char *list)
 	free(dup);
 
 	if (setgroups(n, gids) == -1) {
-		fprintf(log_get_logfd(), "setgroups: %s\n", strerrno());
+		fprinte(log_get_logfd(), "setgroups");
 		goto free_gids;
 	}
 
