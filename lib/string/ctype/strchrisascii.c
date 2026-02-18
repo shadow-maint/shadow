@@ -4,9 +4,4 @@
 
 #include "config.h"
 
-#include "string/ctype/strisascii/strisprint.h"
-
-#include <stdbool.h>
-
-
-extern inline bool strisprint(const char *s);
+#include "string/ctype/strchrisascii.h"

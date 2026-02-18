@@ -19,6 +19,7 @@
 #include "defines.h"
 #include "port.h"
 #include "prototypes.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strtok/stpsep.h"
@@ -211,7 +212,7 @@ next:
 		 * week or the other two values.
 		 */
 
-		for (i = 0; isalpha(cp[i]) && ('\0' != cp[i + 1]); i += 2) {
+		for (i = 0; isalpha_c(cp[i]) && ('\0' != cp[i + 1]); i += 2) {
 			switch ((cp[i] << 8) | (cp[i + 1])) {
 			case ('S' << 8) | 'u':
 				port.pt_times[j].t_days |= 01;
@@ -260,7 +261,7 @@ next:
 		 * representing the times of day.
 		 */
 
-		for (dtime = 0; isdigit (cp[i]); i++) {
+		for (dtime = 0; isdigit_c(cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
@@ -270,7 +271,7 @@ next:
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
 
-		for (dtime = 0, i = 0; isdigit (cp[i]); i++) {
+		for (dtime = 0, i = 0; isdigit_c(cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
 		}
 
