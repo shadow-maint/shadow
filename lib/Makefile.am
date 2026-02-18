@@ -266,6 +266,8 @@ libshadow_la_SOURCES = \
 	typetraits.h \
 	tz.c \
 	ulimit.c \
+	utmp/wtmp.c \
+	utmp/wtmp.h \
 	user_busy.c \
 	valid.c \
 	write_full.c \

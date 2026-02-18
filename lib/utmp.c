@@ -1,12 +1,11 @@
-/*
- * SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
- * SPDX-FileCopyrightText: 1996 - 1999, Marek Michałkiewicz
- * SPDX-FileCopyrightText: 2001 - 2005, Tomasz Kłoczko
- * SPDX-FileCopyrightText: 2008 - 2009, Nicolas François
- * SPDX-FileCopyrightText: 2025, Evgeny Grin (Karlson2k)
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+// SPDX-FileCopyrightText: 1989 - 1994, Julianne Frances Haugh
+// SPDX-FileCopyrightText: 1996 - 1999, Marek Michałkiewicz
+// SPDX-FileCopyrightText: 2001 - 2005, Tomasz Kłoczko
+// SPDX-FileCopyrightText: 2008 - 2009, Nicolas François
+// SPDX-FileCopyrightText: 2025, Evgeny Grin (Karlson2k)
+// SPDX-FileCopyrightText: 2025, Alejandro Colomar <alx@kernel.org>
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "config.h"
 
@@ -39,8 +38,7 @@
 #include "string/strdup/memdup.h"
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
-
-#ident "$Id$"
+#include "utmp/wtmp.h"
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))
@@ -220,25 +218,6 @@ get_session_host(char **out, pid_t main_pid)
 }
 
 
-#if !defined(USE_PAM) && !defined(HAVE_UPDWTMPX)
-/*
- * Some systems already have updwtmpx().  Others
- * don't, so we re-implement these functions if necessary.
- */
-static void
-updwtmpx(const char *filename, const struct utmpx *ut)
-{
-	int fd;
-
-	fd = open (filename, O_APPEND | O_WRONLY, 0);
-	if (fd >= 0) {
-		write_full(fd, ut, sizeof(*ut));
-		close (fd);
-	}
-}
-#endif
-
-
 /*
  * prepare_utmp - prepare an utmp entry so that it can be logged in a
  *                utmp/wtmp file.
@@ -349,30 +328,15 @@ prepare_utmp(const char *name, const char *line, const char *host,
 }
 
 
-/*
- * setutmp - Update an entry in utmp and log an entry in wtmp
- *
- *	Return 1 on failure and 0 on success.
- */
-static int
-setutmp(struct utmpx *ut)
+// updutmpx - Update utmp(5) struct-utmpx
+static struct utmpx *
+updutmpx(struct utmpx *ut)
 {
-	int err = 0;
-
-	assert (NULL != ut);
-
 	setutxent();
-	if (pututxline(ut) == NULL) {
-		err = 1;
-	}
+	ut = pututxline(ut);
 	endutxent();
 
-#if !defined(USE_PAM)
-	/* This is done by pam_lastlog */
-	updwtmpx(_PATH_WTMP, ut);
-#endif
-
-	return err;
+	return ut;
 }
 
 
@@ -384,8 +348,12 @@ update_utmp(const char *user, const char *tty, const char *host,
 
 	utent = get_current_utmp(main_pid);
 	ut = prepare_utmp(user, tty, host, utent, main_pid);
+	assert (NULL != ut);
 
-	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
+#if !defined(USE_PAM)
+	updwtmpx(_PATH_WTMP, ut);  // wtmp(5) is PAM's responsibility
+#endif
+	updutmpx(ut);
 
 	free(utent);
 	free(ut);
