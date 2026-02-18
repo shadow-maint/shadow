@@ -302,27 +302,18 @@ if test "$enable_subids" != "no"; then
 fi
 AM_CONDITIONAL([ENABLE_SUBIDS], [test "x$enable_subids" != "xno"])
 
-if test "X$enable_lastlog" = "Xyes" && test "X$ac_cv_header_lastlog_h" = "Xyes"; then
-	AC_CACHE_CHECK([for ll_host in struct lastlog],
-		[ac_cv_struct_lastlog_ll_host],
-		[AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <lastlog.h>]],
-					[struct lastlog ll; char *cp = ll.ll_host;])],
-			[ac_cv_struct_lastlog_ll_host=yes],
-			[ac_cv_struct_lastlog_ll_host=no])
-		]
-	)
-
-	if test "X$ac_cv_struct_lastlog_ll_host" = "Xyes"; then
-		AC_DEFINE([HAVE_LL_HOST], [1],
-			[Define if struct lastlog has ll_host])
-		AC_DEFINE([ENABLE_LASTLOG], [1], [Define to support lastlog.])
-		enable_lastlog="yes"
-	else
-		AC_MSG_ERROR([Cannot enable support for lastlog on systems where the data structures aren't available])
-		enable_lastlog="no"
-	fi
+if test "X$enable_lastlog" = "Xyes"; then
+	AC_CHECK_HEADER([lastlog.h], [
+		AC_CHECK_MEMBER([struct lastlog.ll_host], [
+			AC_DEFINE([HAVE_LL_HOST], [1],
+				[Define if struct lastlog has ll_host])
+		], [], [#include <lastlog.h>])
+	], [
+		AC_MSG_ERROR([Cannot enable support for lastlog on systems where lastlog.h is not available])
+	])
+	AC_DEFINE([ENABLE_LASTLOG], [1], [Define to support lastlog.])
 fi
-AM_CONDITIONAL([ENABLE_LASTLOG], [test "x$enable_lastlog" != "xno"])
+AM_CONDITIONAL([ENABLE_LASTLOG], [test "x$enable_lastlog" = "xyes"])
 
 AC_SUBST([LIBSYSTEMD])
 if test "X$enable_logind" = "Xyes"; then
