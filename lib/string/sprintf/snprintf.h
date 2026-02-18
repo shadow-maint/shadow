@@ -24,15 +24,16 @@
 
 
 format_attr(printf, 3, 4)
-inline int snprintf_(char *restrict s, size_t size, const char *restrict fmt,
-    ...);
+inline int snprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, ...);
 format_attr(printf, 3, 0)
-inline int vsnprintf_(char *restrict s, size_t size, const char *restrict fmt,
-    va_list ap);
+inline int vsnprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, va_list ap);
 
 
 inline int
-snprintf_(char *restrict s, size_t size, const char *restrict fmt, ...)
+snprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, ...)
 {
 	int      len;
 	va_list  ap;
@@ -46,7 +47,8 @@ snprintf_(char *restrict s, size_t size, const char *restrict fmt, ...)
 
 
 inline int
-vsnprintf_(char *restrict s, size_t size, const char *restrict fmt, va_list ap)
+vsnprintf_(size_t size;
+    char s[restrict size], size_t size, const char *restrict fmt, va_list ap)
 {
 	int  len;
 

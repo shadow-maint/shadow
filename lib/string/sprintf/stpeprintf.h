@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022-2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2022-2025, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -17,10 +17,11 @@
 
 #if !defined(HAVE_STPEPRINTF)
 format_attr(printf, 3, 4)
-inline char *stpeprintf(char *dst, char *end, const char *restrict fmt, ...);
+inline char *stpeprintf(char dst[], char end[];
+    char dst[dst ? end - dst : 0], char end[0], const char *restrict fmt, ...);
 format_attr(printf, 3, 0)
-inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
-    va_list ap);
+inline char *vstpeprintf(char dst[], char end[];
+    char dst[dst ? end - dst : 0], char end[0], const char *restrict fmt, va_list ap);
 #endif
 
 
@@ -76,7 +77,8 @@ inline char *vstpeprintf(char *dst, char *end, const char *restrict fmt,
 
 #if !defined(HAVE_STPEPRINTF)
 inline char *
-stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
+stpeprintf(char dst[], char end[];
+    char dst[dst ? end - dst : 0], char end[0], const char *restrict fmt, ...)
 {
 	char     *p;
 	va_list  ap;
@@ -92,7 +94,8 @@ stpeprintf(char *dst, char *end, const char *restrict fmt, ...)
 
 #if !defined(HAVE_STPEPRINTF)
 inline char *
-vstpeprintf(char *dst, char *end, const char *restrict fmt, va_list ap)
+vstpeprintf(char dst[], char end[];
+    char dst[dst ? end - dst : 0], char end[0], const char *restrict fmt, va_list ap)
 {
 	int        len;
 	ptrdiff_t  size;
