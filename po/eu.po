@@ -221,7 +221,7 @@ msgstr "Ezin izan da lekua esleitu, konfigurazioaren informaziorako.\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: %d lerroa: chown %s-ek huts egin du: %s\n"
 
 #, fuzzy, c-format
