@@ -44,7 +44,7 @@ static void semanage_error_callback (void *,
 	switch (semanage_msg_get_level (handle)) {
 	case SEMANAGE_MSG_ERR:
 	case SEMANAGE_MSG_WARN:
-		fprintf (log_get_logfd(), _("[libsemanage]: %s\n"), message);
+		fprintf(log_get_logfd(), "[libsemanage]: %s\n", message);
 		break;
 	case SEMANAGE_MSG_INFO:
 		/* nop */

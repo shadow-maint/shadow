@@ -18,8 +18,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <getopt.h>
+
 #include "defines.h"
 #include "groupio.h"
+#include "io/fprintf/eprintf.h"
 #include "nscd.h"
 #include "sssd.h"
 #include "prototypes.h"
@@ -120,8 +122,7 @@ static void grp_update (void)
 	 * Delete the group entry.
 	 */
 	if (gr_remove (group_name) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot remove entry '%s' from %s\n"),
+		eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 		         Prog, group_name, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -132,8 +133,7 @@ static void grp_update (void)
 	 */
 	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
 		if (sgr_remove (group_name) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot remove entry '%s' from %s\n"),
+			eprintf(_("%s: cannot remove entry '%s' from %s\n"),
 			         Prog, group_name, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -155,8 +155,7 @@ static void close_files(const struct option_flags *flags)
 
 	/* First, write the changes in the regular group database */
 	if (gr_close (process_selinux) == 0) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"),
+		eprintf(_("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -166,9 +165,7 @@ static void close_files(const struct option_flags *flags)
 	              "delete-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-	SYSLOG ((LOG_INFO,
-	         "group '%s' removed from %s",
-	         group_name, gr_dbname ()));
+	SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, gr_dbname());
 	del_cleanup (cleanup_report_del_group_group);
 
 	cleanup_unlock_group (&process_selinux);
@@ -179,8 +176,7 @@ static void close_files(const struct option_flags *flags)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close (process_selinux) == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
+			eprintf(_("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -190,9 +186,7 @@ static void close_files(const struct option_flags *flags)
 		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "group '%s' removed from %s",
-		         group_name, sgr_dbname ()));
+		SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, sgr_dbname());
 		del_cleanup (cleanup_report_del_group_gshadow);
 
 		cleanup_unlock_gshadow (&process_selinux);
@@ -200,7 +194,7 @@ static void close_files(const struct option_flags *flags)
 	}
 #endif				/* SHADOWGRP */
 
-	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));
+	SYSLOG(LOG_INFO, "group '%s' removed\n", group_name);
 	del_cleanup (cleanup_report_del_group);
 }
 
@@ -217,8 +211,7 @@ static void open_files(const struct option_flags *flags)
 
 	/* First, lock the databases */
 	if (gr_lock () == 0) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
+		eprintf(_("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -226,8 +219,7 @@ static void open_files(const struct option_flags *flags)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
+			eprintf(_("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -243,19 +235,15 @@ static void open_files(const struct option_flags *flags)
 
 	/* An now open the databases */
 	if (gr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		eprintf(_("%s: cannot open %s\n"), Prog, gr_dbname());
+		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_open (O_CREAT | O_RDWR) == 0) {
-			fprintf (stderr,
-			         _("%s: cannot open %s\n"),
-			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -294,8 +282,7 @@ static void group_busy (gid_t gid)
 	/*
 	 * Can't remove the group.
 	 */
-	fprintf (stderr,
-	         _("%s: cannot remove the primary group of user '%s'\n"),
+	eprintf(_("%s: cannot remove the primary group of user '%s'\n"),
 	         Prog, pwd->pw_name);
 	fail_exit (E_GROUP_BUSY);
 }
@@ -375,9 +362,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (atexit (do_cleanups) != 0) {
-		fprintf (stderr,
-		         _("%s: Cannot setup cleanup service.\n"),
-		         Prog);
+		eprintf(_("%s: Cannot setup cleanup service.\n"), Prog);
 		fail_exit (1);
 	}
 
@@ -395,8 +380,7 @@ int main (int argc, char **argv)
 		 */
 		grp = prefix_getgrnam (group_name); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr,
-			         _("%s: group '%s' does not exist\n"),
+			eprintf(_("%s: group '%s' does not exist\n"),
 			         Prog, group_name);
 			fail_exit (E_NOTFOUND);
 		}
