@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -322,8 +319,8 @@ getid_range(const char *str)
 		.last = type_min(id_t)
 	};
 
-	static_assert(is_same_type(id_t, uid_t), "");
-	static_assert(is_same_type(id_t, gid_t), "");
+	_Generic((id_t){}, uid_t: (void)0);
+	_Generic((id_t){}, gid_t: (void)0);
 
 	first = type_min(id_t);
 	last = type_max(id_t);
