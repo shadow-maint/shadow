@@ -63,6 +63,7 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strcpy/strmove.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strspn/stprspn.h"
@@ -458,7 +459,7 @@ new_pw_passwd(char *pw_pass, bool process_selinux)
 		              "updating-password", user_newname, user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
-		memmove(pw_pass, pw_pass + 1, strlen(pw_pass));
+		strmove(pw_pass, pw_pass + 1);
 	} else if (pflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK,
