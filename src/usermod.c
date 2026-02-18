@@ -318,15 +318,15 @@ getid_range(const char *str)
 	id_t             first, last;
 	const char       *pos;
 	struct id_range  result = {
-		.first = type_max(id_t),
-		.last = type_min(id_t)
+		.first = maxof(id_t),
+		.last = minof(id_t)
 	};
 
 	static_assert(is_same_type(id_t, uid_t), "");
 	static_assert(is_same_type(id_t, gid_t), "");
 
-	first = type_min(id_t);
-	last = type_max(id_t);
+	first = minof(id_t);
+	last = maxof(id_t);
 
 	if (a2i(id_t, &first, str, &pos, 10, first, last) == -1
 	    && errno != ENOTSUP)
