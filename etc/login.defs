@@ -207,19 +207,6 @@ UMASK		022
 #HOME_MODE	0700
 
 #
-# Password aging controls:
-#
-#	PASS_MAX_DAYS	Maximum number of days a password may be used.
-#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
-#	PASS_MIN_LEN	Minimum acceptable password length.
-#	PASS_WARN_AGE	Number of days warning given before a password expires.
-#
-PASS_MAX_DAYS	99999
-PASS_MIN_DAYS	0
-PASS_MIN_LEN	5
-PASS_WARN_AGE	7
-
-#
 # If "yes", the user must be listed as a member of the first gid 0 group
 # in /etc/group (called "root" on most Linux systems) to be able to "su"
 # to uid 0 accounts.  If the group doesn't exist or is empty, no one
@@ -269,15 +256,15 @@ LOGIN_TIMEOUT		60
 PASS_CHANGE_TRIES	5
 
 #
+# Password strength controls:
+#
 # Warn about weak passwords (but still allow them) if you are root.
-#
 PASS_ALWAYS_WARN	yes
-
-#
+# Minimum acceptable password length.
+PASS_MIN_LEN	5
 # Number of significant characters in the password for crypt().
 # Default is 8, don't change unless your crypt() is better.
 # Only used for DES encryption algorithm.
-#
 #PASS_MAX_LEN		8
 
 #
