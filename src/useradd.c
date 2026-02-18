@@ -2444,15 +2444,50 @@ static void check_uid_range(int rflg, uid_t user_id)
 	}
 
 }
+
+#ifdef ENABLE_SUBIDS
+static bool
+should_assign_subuid(void)
+{
+	uid_t uid_min;
+	uid_t uid_max;
+	unsigned long subuid_count;
+
+	uid_min = getdef_ulong ("UID_MIN", 1000UL);
+	uid_max = getdef_ulong ("UID_MAX", 60000UL);
+	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
+
+	return want_subuid_file () &&
+	    subuid_count > 0 && sub_uid_file_present () &&
+	    (!rflg || Fflg) &&
+	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+}
+#endif
+
+#ifdef ENABLE_SUBIDS
+static bool
+should_assign_subgid(void)
+{
+	uid_t uid_min;
+	uid_t uid_max;
+	unsigned long subgid_count;
+
+	uid_min = getdef_ulong ("UID_MIN", 1000UL);
+	uid_max = getdef_ulong ("UID_MAX", 60000UL);
+	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
+
+	return want_subgid_file() &&
+	    subgid_count > 0 && sub_gid_file_present() &&
+	    (!rflg || Fflg) &&
+	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+}
+#endif
+
 /*
  * main - useradd command
  */
 int main (int argc, char **argv)
 {
-#ifdef ENABLE_SUBIDS
-	uid_t uid_min;
-	uid_t uid_max;
-#endif
 	unsigned long subuid_count = 0;
 	unsigned long subgid_count = 0;
 	struct option_flags  flags = {.chroot = false, .prefix = false};
@@ -2493,18 +2528,10 @@ int main (int argc, char **argv)
 	process_selinux = !flags.chroot && !flags.prefix;
 
 #ifdef ENABLE_SUBIDS
-	uid_min = getdef_ulong ("UID_MIN", 1000UL);
-	uid_max = getdef_ulong ("UID_MAX", 60000UL);
 	subuid_count = getdef_ulong ("SUB_UID_COUNT", 65536);
 	subgid_count = getdef_ulong ("SUB_GID_COUNT", 65536);
-	is_sub_uid = want_subuid_file () &&
-	    subuid_count > 0 && sub_uid_file_present () &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
-	is_sub_gid = want_subgid_file() &&
-	    subgid_count > 0 && sub_gid_file_present() &&
-	    (!rflg || Fflg) &&
-	    (!user_id || (user_id <= uid_max && user_id >= uid_min));
+	is_sub_uid = should_assign_subuid();
+	is_sub_gid = should_assign_subgid();
 #endif				/* ENABLE_SUBIDS */
 
 	if (run_parts ("/etc/shadow-maint/useradd-pre.d", user_name,
