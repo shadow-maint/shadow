@@ -154,7 +154,7 @@ extern struct group *prefix_getgrnam(const char *name)
 		FILE* fg;
 		struct group * grp = NULL;
 
-		fg = fopen(group_db_file, "rt");
+		fg = fopen(group_db_file, "r");
 		if (!fg)
 			return NULL;
 		while (NULL != (grp = fgetgrent(fg))) {
@@ -174,7 +174,7 @@ extern struct group *prefix_getgrgid(gid_t gid)
 		FILE* fg;
 		struct group * grp = NULL;
 
-		fg = fopen(group_db_file, "rt");
+		fg = fopen(group_db_file, "r");
 		if (!fg)
 			return NULL;
 		while (NULL != (grp = fgetgrent(fg))) {
@@ -194,7 +194,7 @@ extern struct passwd *prefix_getpwuid(uid_t uid)
 		FILE* fg;
 		struct passwd *pwd = NULL;
 
-		fg = fopen(passwd_db_file, "rt");
+		fg = fopen(passwd_db_file, "r");
 		if (!fg)
 			return NULL;
 		while (NULL != (pwd = fgetpwent(fg))) {
@@ -214,7 +214,7 @@ extern struct passwd *prefix_getpwnam(const char* name)
 		FILE* fg;
 		struct passwd *pwd = NULL;
 
-		fg = fopen(passwd_db_file, "rt");
+		fg = fopen(passwd_db_file, "r");
 		if (!fg)
 			return NULL;
 		while (NULL != (pwd = fgetpwent(fg))) {
@@ -236,7 +236,7 @@ extern int prefix_getpwnam_r(const char* name, struct passwd* pwd,
 		FILE* fg;
 		int ret = 0;
 
-		fg = fopen(passwd_db_file, "rt");
+		fg = fopen(passwd_db_file, "r");
 		if (!fg)
 			return errno;
 		while ((ret = fgetpwent_r(fg, pwd, buf, buflen, result)) == 0) {
@@ -257,7 +257,7 @@ extern struct spwd *prefix_getspnam(const char* name)
 		FILE* fg;
 		struct spwd *sp = NULL;
 
-		fg = fopen(spw_db_file, "rt");
+		fg = fopen(spw_db_file, "r");
 		if (!fg)
 			return NULL;
 		while (NULL != (sp = fgetspent(fg))) {
@@ -281,7 +281,7 @@ extern void prefix_setpwent(void)
 	if (fp_pwent)
 		fclose (fp_pwent);
 
-	fp_pwent = fopen(passwd_db_file, "rt");
+	fp_pwent = fopen(passwd_db_file, "r");
 	if (!fp_pwent)
 		return;
 }
@@ -315,7 +315,7 @@ extern void prefix_setgrent(void)
 	if (fp_grent)
 		fclose (fp_grent);
 
-	fp_grent = fopen(group_db_file, "rt");
+	fp_grent = fopen(group_db_file, "r");
 	if (!fp_grent)
 		return;
 }
