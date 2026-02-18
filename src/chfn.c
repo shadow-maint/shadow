@@ -35,7 +35,7 @@
 #include "shadowlog.h"
 #include "sizeof.h"
 #include "sssd.h"
-#include "string/sprintf/stpeprintf.h"
+#include "string/sprintf/seprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strdup/strdup.h"
@@ -653,12 +653,12 @@ int main (int argc, char **argv)
 	/* Build the new GECOS field by plastering all the pieces together.  */
 	p = new_gecos;
 	e = new_gecos + countof(new_gecos);
-	p = stpeprintf(p, e, "%s", fullnm);
-	p = stpeprintf(p, e, ",%s", roomno);
-	p = stpeprintf(p, e, ",%s", workph);
-	p = stpeprintf(p, e, ",%s", homeph);
+	p = seprintf(p, e, "%s", fullnm);
+	p = seprintf(p, e, ",%s", roomno);
+	p = seprintf(p, e, ",%s", workph);
+	p = seprintf(p, e, ",%s", homeph);
 	if (!streq(slop, ""))
-		p = stpeprintf(p, e, ",%s", slop);
+		p = seprintf(p, e, ",%s", slop);
 
 	if (p == e || p == NULL) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);

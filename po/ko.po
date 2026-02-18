@@ -212,7 +212,7 @@ msgid "%s: Could not set caps\n"
 msgstr "설정 정보를 위한 공간을 확보할 수 없습니다.\n"
 
 #, fuzzy, c-format
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: %d번 줄: chown 실패했습니다\n"
 
 #, fuzzy, c-format
