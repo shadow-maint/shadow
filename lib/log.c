@@ -59,9 +59,9 @@ void dolastlog (
 	offset = (off_t) pw->pw_uid * sizeof(newlog);
 
 	if (lseek (fd, offset, SEEK_SET) != offset) {
-		SYSLOG ((LOG_WARN,
-		         "Can't read last lastlog entry for UID %lu in %s. Entry not updated.",
-		         (unsigned long) pw->pw_uid, _PATH_LASTLOG));
+		SYSLOG(LOG_WARN,
+		       "Can't read last lastlog entry for UID %lu in %s. Entry not updated.",
+		       (unsigned long) pw->pw_uid, _PATH_LASTLOG);
 		(void) close (fd);
 		return;
 	}
@@ -104,7 +104,7 @@ err_write:
 		errno = saved_errno;
 	}
 err_close:
-	SYSLOG ((LOG_WARN,
-	         "Can't write lastlog entry for UID %lu in %s: %m",
-	         (unsigned long) pw->pw_uid, _PATH_LASTLOG));
+	SYSLOG(LOG_WARN,
+	       "Can't write lastlog entry for UID %lu in %s: %m",
+	       (unsigned long) pw->pw_uid, _PATH_LASTLOG);
 }

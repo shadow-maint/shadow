@@ -103,6 +103,10 @@ libshadow_la_SOURCES = \
 	hushed.c \
 	idmapping.h \
 	idmapping.c \
+	io/fprintf.c \
+	io/fprintf.h \
+	io/syslog.c \
+	io/syslog.h \
 	isexpired.c \
 	limits.c \
 	list.c \

@@ -36,7 +36,7 @@ void subsystem (const struct passwd *pw)
 	 */
 	if (++depth > MAX_DEPTH) {
 		printf (_("Maximum subsystem depth reached\n"));
-		SYSLOG ((LOG_WARN, MAX_SUBROOT2));
+		SYSLOG(LOG_WARN, MAX_SUBROOT2);
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
@@ -47,7 +47,7 @@ void subsystem (const struct passwd *pw)
 
 	if (pw->pw_dir[0] != '/') {
 		printf (_("Invalid root directory '%s'\n"), pw->pw_dir);
-		SYSLOG ((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
+		SYSLOG(LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name);
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
@@ -61,7 +61,7 @@ void subsystem (const struct passwd *pw)
 	    || (chdir ("/") != 0)) {
 		(void) printf (_("Can't change root directory to '%s'\n"),
 		               pw->pw_dir);
-		SYSLOG ((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
+		SYSLOG(LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name);
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
