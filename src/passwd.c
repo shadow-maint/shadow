@@ -214,17 +214,16 @@ static int new_password (const struct passwd *pw)
 			fprintf (stderr,
 			         _("%s: failed to crypt password with previous salt: %s\n"),
 			         Prog, strerrno());
-			SYSLOG ((LOG_INFO,
-			         "Failed to crypt password with previous salt of user '%s'",
-			         pw->pw_name));
+			SYSLOG(LOG_INFO,
+			       "Failed to crypt password with previous salt of user '%s'",
+			       pw->pw_name);
 			return -1;
 		}
 
 		if (!streq(cipher, crypt_passwd)) {
 			erase_pass (clear);
 			strzero (cipher);
-			SYSLOG ((LOG_WARN, "incorrect password for %s",
-			         pw->pw_name));
+			SYSLOG(LOG_WARN, "incorrect password for %s", pw->pw_name);
 			(void) sleep (1);
 			(void) fprintf (stderr,
 			                _("Incorrect password for %s.\n"),
@@ -394,7 +393,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 		(void) fprintf (stderr,
 		                _("The password for %s cannot be changed.\n"),
 		                sp->sp_namp);
-		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
+		SYSLOG(LOG_WARN, "password locked for '%s'", sp->sp_namp);
 		closelog ();
 		fail_exit(E_NOPERM, process_selinux);
 	}
@@ -415,7 +414,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp, bool
 			(void) fprintf (stderr,
 			                _("The password for %s cannot be changed yet.\n"),
 			                sp->sp_namp);
-			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", sp->sp_namp));
+			SYSLOG(LOG_WARN, "now < minimum age for '%s'", sp->sp_namp);
 			closelog ();
 			fail_exit(E_NOPERM, process_selinux);
 		}
@@ -469,7 +468,7 @@ fail_exit (int status, bool process_selinux)
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
@@ -477,7 +476,7 @@ fail_exit (int status, bool process_selinux)
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -511,7 +510,7 @@ static void open_files(bool process_selinux)
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		fail_exit (E_MISSING, process_selinux);
 	}
 
@@ -528,7 +527,7 @@ static void open_files(bool process_selinux)
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 		fail_exit (E_FAILURE, process_selinux);
 	}
 }
@@ -546,14 +545,14 @@ static void close_files(bool process_selinux)
 			(void) fprintf (stderr,
 			                _("%s: failure while writing changes to %s\n"),
 			                Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 			fail_exit (E_FAILURE, process_selinux);
 		}
 		if (spw_unlock (process_selinux) == 0) {
 			(void) fprintf (stderr,
 			                _("%s: failed to unlock %s\n"),
 			                Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 		spw_locked = false;
@@ -562,14 +561,14 @@ static void close_files(bool process_selinux)
 		(void) fprintf (stderr,
 		                _("%s: failure while writing changes to %s\n"),
 		                Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_FAILURE, process_selinux);
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: failed to unlock %s\n"),
 		                Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 	pw_locked = false;
@@ -988,8 +987,8 @@ main(int argc, char **argv)
 		(void) fprintf (stderr,
 		                _("%s: Cannot determine your user name.\n"),
 		                Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-		         (unsigned long) getuid ()));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		       (unsigned long) getuid());
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
@@ -1088,9 +1087,9 @@ main(int argc, char **argv)
 		             NULL, pw->pw_uid,
 		             SHADOW_AUDIT_FAILURE);
 #endif /* WITH_AUDIT */
-		SYSLOG ((LOG_ALERT,
-		         "root is not authorized by SELinux to change the password of %s",
-		         name));
+		SYSLOG(LOG_ALERT,
+		       "root is not authorized by SELinux to change the password of %s",
+		       name);
 		(void) fprintf(stderr,
 		               _("%s: root is not authorized by SELinux to change the password of %s\n"),
 		               Prog, name);
@@ -1112,9 +1111,9 @@ main(int argc, char **argv)
 		(void) fprintf (stderr,
 		                _("%s: You may not view or modify password information for %s.\n"),
 		                Prog, name);
-		SYSLOG ((LOG_WARN,
-		         "can't view or modify password information for %s",
-		         name));
+		SYSLOG(LOG_WARN,
+		       "can't view or modify password information for %s",
+		       name);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1200,7 +1199,7 @@ main(int argc, char **argv)
 #endif				/* USE_PAM */
 	if (setuid (0) != 0) {
 		(void) fputs (_("Cannot change ID to root.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		SYSLOG(LOG_ERR, "can't setuid(0)");
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1212,7 +1211,7 @@ main(int argc, char **argv)
 	nscd_flush_cache ("group");
 	sssd_flush_cache (SSSD_DB_PASSWD | SSSD_DB_GROUP);
 
-	SYSLOG ((LOG_INFO, "password for '%s' changed by '%s'", name, myname));
+	SYSLOG(LOG_INFO, "password for '%s' changed by '%s'", name, myname);
 	closelog ();
 	if (!qflg) {
 		if (!anyflag) {

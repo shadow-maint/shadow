@@ -56,22 +56,22 @@ sssd_flush_cache(int dbflags)
 	free(sss_cache_args);
 	if (rv != 0) {
 		/* run_command writes its own more detailed message. */
-		SYSLOG ((LOG_WARN, MSG_SSSD_FLUSH_CACHE_FAILED, log_get_progname()));
+		SYSLOG(LOG_WARN, MSG_SSSD_FLUSH_CACHE_FAILED, log_get_progname());
 		return -1;
 	}
 
 	code = WEXITSTATUS (status);
 	if (!WIFEXITED (status)) {
-		SYSLOG ((LOG_WARN, "%s: sss_cache did not terminate normally (signal %d)",
-			log_get_progname(), WTERMSIG (status)));
+		SYSLOG(LOG_WARN, "%s: sss_cache did not terminate normally (signal %d)",
+		       log_get_progname(), WTERMSIG(status));
 		return -1;
 	} else if (code == E_CMD_NOTFOUND) {
 		/* sss_cache is not installed, or it is installed but uses an
 		   interpreter that is missing.  Probably the former. */
 		return 0;
 	} else if (code != 0) {
-		SYSLOG ((LOG_WARN, "%s: sss_cache exited with status %d", log_get_progname(), code));
-		SYSLOG ((LOG_WARN, MSG_SSSD_FLUSH_CACHE_FAILED, log_get_progname()));
+		SYSLOG(LOG_WARN, "%s: sss_cache exited with status %d", log_get_progname(), code);
+		SYSLOG(LOG_WARN, MSG_SSSD_FLUSH_CACHE_FAILED, log_get_progname());
 		return -1;
 	}
 

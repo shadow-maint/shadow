@@ -93,8 +93,7 @@ static void fail_exit (int code, bool process_selinux)
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_ERR, "failed to unlock %s",
-				         spw_dbname ()));
+				SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			}
 			/* continue */
 		}
@@ -104,8 +103,7 @@ static void fail_exit (int code, bool process_selinux)
 		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			if (use_system_pw_file) {
-				SYSLOG ((LOG_ERR, "failed to unlock %s",
-				         pw_dbname ()));
+				SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			}
 			/* continue */
 		}
@@ -286,7 +284,7 @@ static void open_files(const struct option_flags *flags)
 		fprintf (stderr, _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
 		if (use_system_pw_file) {
-			SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
+			SYSLOG(LOG_WARN, "cannot open %s", pw_dbname());
 		}
 		fail_exit (E_CANTOPEN, process_selinux);
 	}
@@ -295,8 +293,7 @@ static void open_files(const struct option_flags *flags)
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_WARN, "cannot open %s",
-				         spw_dbname ()));
+				SYSLOG(LOG_WARN, "cannot open %s", spw_dbname());
 			}
 			fail_exit (E_CANTOPEN, process_selinux);
 		}
@@ -327,9 +324,9 @@ static void close_files(bool changed, const struct option_flags *flags)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, pw_dbname ());
 			if (use_system_pw_file) {
-				SYSLOG ((LOG_ERR,
-				         "failure while writing changes to %s",
-				         pw_dbname ()));
+				SYSLOG(LOG_ERR,
+				       "failure while writing changes to %s",
+				       pw_dbname());
 			}
 			fail_exit (E_CANTUPDATE, process_selinux);
 		}
@@ -338,9 +335,9 @@ static void close_files(bool changed, const struct option_flags *flags)
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_ERR,
-				         "failure while writing changes to %s",
-				         spw_dbname ()));
+				SYSLOG(LOG_ERR,
+				       "failure while writing changes to %s",
+				       spw_dbname());
 			}
 			fail_exit (E_CANTUPDATE, process_selinux);
 		}
@@ -356,8 +353,7 @@ static void close_files(bool changed, const struct option_flags *flags)
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_ERR, "failed to unlock %s",
-				         spw_dbname ()));
+				SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			}
 			/* continue */
 		}
@@ -369,8 +365,7 @@ static void close_files(bool changed, const struct option_flags *flags)
 			         _("%s: failed to unlock %s\n"),
 			         Prog, pw_dbname ());
 			if (use_system_pw_file) {
-				SYSLOG ((LOG_ERR, "failed to unlock %s",
-				         pw_dbname ()));
+				SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			}
 			/* continue */
 		}
@@ -433,8 +428,8 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 			 */
 		      delete_pw:
 			if (use_system_pw_file) {
-				SYSLOG ((LOG_INFO, "delete passwd line '%s'",
-				         pfe->line));
+				SYSLOG(LOG_INFO, "delete passwd line '%s'",
+				       pfe->line);
 			}
 			*changed = true;
 
@@ -602,9 +597,9 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 						         _("%s: failed to unlock %s\n"),
 						         Prog, spw_dbname ());
 						if (use_system_spw_file) {
-							SYSLOG ((LOG_ERR,
-							         "failed to unlock %s",
-							         spw_dbname ()));
+							SYSLOG(LOG_ERR,
+							       "failed to unlock %s",
+							       spw_dbname());
 						}
 					}
 					continue;
@@ -678,9 +673,9 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, spw_dbname ());
 				if (use_system_spw_file) {
-					SYSLOG ((LOG_ERR,
-					         "failure while writing changes to %s",
-					         spw_dbname ()));
+					SYSLOG(LOG_ERR,
+					       "failure while writing changes to %s",
+					       spw_dbname());
 				}
 			} else {
 				spw_opened = false;
@@ -690,8 +685,8 @@ static void check_pw_file(bool *errors, bool *changed, const struct option_flags
 				         _("%s: failed to unlock %s\n"),
 				         Prog, spw_dbname ());
 				if (use_system_spw_file) {
-					SYSLOG ((LOG_ERR, "failed to unlock %s",
-					         spw_dbname ()));
+					SYSLOG(LOG_ERR, "failed to unlock %s",
+					       spw_dbname());
 				}
 			} else {
 				spw_locked = false;
@@ -758,8 +753,8 @@ static void check_spw_file (bool *errors, bool *changed)
 			 */
 		      delete_spw:
 			if (use_system_spw_file) {
-				SYSLOG ((LOG_INFO, "delete shadow line '%s'",
-				         spe->line));
+				SYSLOG(LOG_INFO, "delete shadow line '%s'",
+				       spe->line);
 			}
 			*changed = true;
 

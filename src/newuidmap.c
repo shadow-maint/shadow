@@ -116,8 +116,8 @@ int main(int argc, char **argv)
 		fprintf (stderr,
 			_("%s: Cannot determine your user name.\n"),
 			Prog);
-		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
-				(unsigned long) getuid ()));
+		SYSLOG(LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			(unsigned long) getuid());
 		return EXIT_FAILURE;
 	}
 

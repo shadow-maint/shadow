@@ -191,9 +191,9 @@ void setup_env (struct passwd *info)
 		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
 			fprintf (log_get_logfd(), _("Unable to cd to '%s'\n"),
 				 info->pw_dir);
-			SYSLOG ((LOG_WARN,
-				 "unable to cd to `%s' for user `%s'\n",
-				 info->pw_dir, info->pw_name));
+			SYSLOG(LOG_WARN,
+				"unable to cd to `%s' for user `%s'\n",
+				info->pw_dir, info->pw_name);
 			closelog ();
 			exit (EXIT_FAILURE);
 		}

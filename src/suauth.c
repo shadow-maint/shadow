@@ -67,9 +67,8 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		if (ENOENT == err) {
 			return NOACTION;
 		}
-		SYSLOG ((LOG_ERR,
-		         "could not open/read config file '%s': %s\n",
-		         SUAUTHFILE, strerror (err)));
+		SYSLOG(LOG_ERR, "could not open/read config file '%s': %s\n",
+		       SUAUTHFILE, strerror(err));
 		return DENY;
 	}
 
@@ -79,9 +78,9 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		lines++;
 
 		if (stpsep(temp, "\n") == NULL) {
-			SYSLOG ((LOG_ERR,
-				 "%s, line %jd: line too long or missing newline",
-				 SUAUTHFILE, lines));
+			SYSLOG(LOG_ERR,
+			       "%s, line %jd: line too long or missing newline",
+			       SUAUTHFILE, lines);
 			continue;
 		}
 
@@ -95,9 +94,8 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		from_users = strsep(&p, ":");
 		action = strsep(&p, ":");
 		if (action == NULL || p != NULL) {
-			SYSLOG ((LOG_ERR,
-				 "%s, line %jd. Bad number of fields.\n",
-				 SUAUTHFILE, lines));
+			SYSLOG(LOG_ERR, "%s, line %jd. Bad number of fields.\n",
+				SUAUTHFILE, lines);
 			continue;
 		}
 
@@ -106,32 +104,31 @@ check_su_auth(const char *actual_id, const char *wanted_id, bool su_to_root)
 		if (!applies (actual_id, from_users))
 			continue;
 		if (streq(action, "DENY")) {
-			SYSLOG ((su_to_root ? LOG_WARN : LOG_NOTICE,
-				 "DENIED su from '%s' to '%s' (%s)\n",
-				 actual_id, wanted_id, SUAUTHFILE));
+			SYSLOG(su_to_root ? LOG_WARN : LOG_NOTICE,
+				"DENIED su from '%s' to '%s' (%s)\n",
+				actual_id, wanted_id, SUAUTHFILE);
 			fputs (_("Access to su to that account DENIED.\n"),
 			       stderr);
 			fclose (authfile_fd);
 			return DENY;
 		} else if (streq(action, "NOPASS")) {
-			SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
-				 "NO password asked for su from '%s' to '%s' (%s)\n",
-				 actual_id, wanted_id, SUAUTHFILE));
+			SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
+				"NO password asked for su from '%s' to '%s' (%s)\n",
+				actual_id, wanted_id, SUAUTHFILE);
 			fputs (_("Password authentication bypassed.\n"),stderr);
 			fclose (authfile_fd);
 			return NOPWORD;
 		} else if (streq(action, "OWNPASS")) {
-			SYSLOG ((su_to_root ? LOG_NOTICE : LOG_INFO,
-				 "su from '%s' to '%s': asking for user's own password (%s)\n",
-				 actual_id, wanted_id, SUAUTHFILE));
+			SYSLOG(su_to_root ? LOG_NOTICE : LOG_INFO,
+				"su from '%s' to '%s': asking for user's own password (%s)\n",
+				actual_id, wanted_id, SUAUTHFILE);
 			fputs (_("Please enter your OWN password as authentication.\n"),
 			       stderr);
 			fclose (authfile_fd);
 			return OWNPWORD;
 		} else {
-			SYSLOG ((LOG_ERR,
-				 "%s, line %jd: unrecognized action!\n",
-				 SUAUTHFILE, lines));
+			SYSLOG(LOG_ERR, "%s, line %jd: unrecognized action!\n",
+				SUAUTHFILE, lines);
 		}
 	}
 	fclose (authfile_fd);
@@ -149,25 +146,22 @@ applies(const char *single, char *list)
 
 		if (streq(tok, "ALL")) {
 			if (state != 0) {
-				SYSLOG ((LOG_ERR,
-					 "%s, line %jd: ALL in bad place\n",
-					 SUAUTHFILE, lines));
+				SYSLOG(LOG_ERR, "%s, line %jd: ALL in bad place\n",
+					SUAUTHFILE, lines);
 				return 0;
 			}
 			state = 1;
 		} else if (streq(tok, "EXCEPT")) {
 			if (state != 1) {
-				SYSLOG ((LOG_ERR,
-					 "%s, line %jd: EXCEPT in bas place\n",
-					 SUAUTHFILE, lines));
+				SYSLOG(LOG_ERR, "%s, line %jd: EXCEPT in bas place\n",
+					SUAUTHFILE, lines);
 				return 0;
 			}
 			state = 2;
 		} else if (streq(tok, "GROUP")) {
 			if ((state != 0) && (state != 2)) {
-				SYSLOG ((LOG_ERR,
-					 "%s, line %jd: GROUP in bad place\n",
-					 SUAUTHFILE, lines));
+				SYSLOG(LOG_ERR, "%s, line %jd: GROUP in bad place\n",
+					SUAUTHFILE, lines);
 				return 0;
 			}
 			state = (state == 0) ? 3 : 4;
@@ -178,9 +172,9 @@ applies(const char *single, char *list)
 					return 1;
 				break;
 			case 1:	/* An all */
-				SYSLOG ((LOG_ERR,
-					 "%s, line %jd: expect another token after ALL\n",
-					 SUAUTHFILE, lines));
+				SYSLOG(LOG_ERR,
+				       "%s, line %jd: expect another token after ALL\n",
+				       SUAUTHFILE, lines);
 				return 0;
 			case 2:	/* All except */
 				if (streq(tok, single))

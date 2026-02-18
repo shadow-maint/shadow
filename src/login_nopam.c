@@ -106,9 +106,9 @@ login_access(const char *user, const char *from)
 
 			lineno++;
 			if (stpsep(line, "\n") == NULL) {
-				SYSLOG ((LOG_ERR,
-					 "%s: line %jd: missing newline or line too long",
-					 TABLE, lineno));
+				SYSLOG(LOG_ERR,
+					"%s: line %jd: missing newline or line too long",
+					TABLE, lineno);
 				continue;
 			}
 			if (strprefix(line, "#")) {
@@ -123,15 +123,13 @@ login_access(const char *user, const char *from)
 			users = strsep(&p, ":");
 			froms = strsep(&p, ":");
 			if (froms == NULL || p != NULL) {
-				SYSLOG ((LOG_ERR,
-					 "%s: line %jd: bad field count",
-					 TABLE, lineno));
+				SYSLOG(LOG_ERR, "%s: line %jd: bad field count",
+				       TABLE, lineno);
 				continue;
 			}
 			if (perm[0] != '+' && perm[0] != '-') {
-				SYSLOG ((LOG_ERR,
-					 "%s: line %jd: bad first field",
-					 TABLE, lineno));
+				SYSLOG(LOG_ERR, "%s: line %jd: bad first field",
+					TABLE, lineno);
 				continue;
 			}
 			match = (   list_match (froms, from, from_match)
@@ -140,7 +138,7 @@ login_access(const char *user, const char *from)
 		(void) fclose (fp);
 	} else if (errno != ENOENT) {
 		int err = errno;
-		SYSLOG ((LOG_ERR, "cannot open %s: %s", TABLE, strerror (err)));
+		SYSLOG(LOG_ERR, "cannot open %s: %s", TABLE, strerror(err));
 	}
 	return (!match || strprefix(line, "+"))?1:0;
 }
@@ -270,7 +268,7 @@ static const char *resolve_hostname (const char *string)
 
 	gai_err = getaddrinfo(string, NULL, NULL, &addrs);
 	if (gai_err != 0) {
-		SYSLOG ((LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err)));
+		SYSLOG(LOG_ERR, "getaddrinfo(%s): %s", string, gai_strerror(gai_err));
 		return string;
 	}
 
@@ -278,7 +276,7 @@ static const char *resolve_hostname (const char *string)
 	gai_err = getnameinfo(addrs[0].ai_addr, addrs[0].ai_addrlen,
 	                      host, countof(host), NULL, 0, NI_NUMERICHOST);
 	if (gai_err != 0) {
-		SYSLOG ((LOG_ERR, "getnameinfo(%s): %s", string, gai_strerror(gai_err)));
+		SYSLOG(LOG_ERR, "getnameinfo(%s): %s", string, gai_strerror(gai_err));
 		addr_str = string;
 	}
 
