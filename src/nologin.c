@@ -7,10 +7,12 @@
 
 #ident "$Id$"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <syslog.h>
 #include <unistd.h>
+
 
 int main (void)
 {
@@ -29,8 +31,8 @@ int main (void)
 	char *ssh_origcmd = getenv("SSH_ORIGINAL_COMMAND");
 	uid = getuid (); /* getuid() is always successful */
 	openlog ("nologin", LOG_CONS, LOG_AUTH);
-	syslog (LOG_CRIT, "Attempted login by %s (UID: %d) on %s%s%s",
-	        user, uid, tty,
+	syslog (LOG_CRIT, "Attempted login by %s (UID: %jd) on %s%s%s",
+	        user, (intmax_t) uid, tty,
 		(ssh_origcmd ? " SSH_ORIGINAL_COMMAND=" : ""),
 		(ssh_origcmd ? ssh_origcmd : ""));
 	closelog ();

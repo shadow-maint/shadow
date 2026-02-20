@@ -22,6 +22,7 @@
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
+#include "atoi/getnum.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -939,9 +940,7 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	uid_t  owner_uid;
 
 	if (strisdigit(owner)) {
-		i = sscanf(owner, "%d", &owner_uid);
-		if (i != 1) {
-			// should not happen
+		if (get_uid(owner, &owner_uid) == -1) {
 			free(*uids);
 			*uids = NULL;
 			return -1;

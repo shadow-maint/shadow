@@ -34,12 +34,13 @@ void subsystem (const struct passwd *pw)
 	/*
 	 * Prevent endless loop on misconfigured systems.
 	 */
-	if (++depth > MAX_DEPTH) {
+	if (depth >= MAX_DEPTH) {
 		printf (_("Maximum subsystem depth reached\n"));
 		SYSLOG ((LOG_WARN, MAX_SUBROOT2));
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
+	depth++;
 
 	/*
 	 * The new root directory must begin with a "/" character.
