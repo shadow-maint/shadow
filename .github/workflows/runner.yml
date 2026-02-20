@@ -16,6 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
+
     - name: debug
       run: |
         id
@@ -27,17 +28,22 @@ jobs:
         cat /proc/self/uid_map
         cat /proc/self/status
         systemd-detect-virt
+
     - name: Install dependencies
       id: dependencies
       uses: ./.github/actions/install-dependencies
+
     - name: configure
       run: |
         autoreconf -v -f --install
         ./autogen.sh --without-selinux --disable-man --with-yescrypt
+
     - run: make
     - run: make install DESTDIR=${HOME}/rootfs
     - run: sudo make install
+
     - name: run tests in shell with tty
+      # Run tests inside a pseudo-TTY because some parts expect one.
       shell: 'script -q -e -c "bash {0}"'
       run: |
         set -e
@@ -69,7 +75,9 @@ jobs:
         make -j5
         make check
 
-  container-build:
+  # Run container builds using Ansible without elevated privileges.
+  # This isolates unprivileged logic and keeps failures clearly attributable.
+  container-build-unprivileged:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -89,17 +97,65 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install ansible
 
-    - name: Build container
+    - name: Build container (unprivileged)
       run: |
         pushd share/ansible/
-        ansible-playbook playbook.yml -i inventory.ini -e 'distribution=${{ matrix.os }}'
+        ansible-playbook playbook-unprivileged.yml \
+          -i inventory.ini \
+          -e "distribution=${{ matrix.os }}"
         popd
 
     - name: Store artifacts
+      # Always upload logs to allow debugging even on failure.
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-build
+        name: ${{ matrix.os }}-unprivileged-build
+        path: |
+          ./share/ansible/build-out/config.log
+          ./share/ansible/build-out/config.h
+          ./share/ansible/build-out/build.log
+          ./share/ansible/build-out/test-suite.log
+          ./tests/system/pytest.log
+          ./tests/system/artifacts
+        if-no-files-found: ignore
+
+  # Run container builds requiring elevated privileges.
+  # Separated from unprivileged runs to make CI faster to debug and structurally clearer.
+  container-build-privileged:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [alpine, debian, fedora, opensuse]
+
+    steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install ansible
+
+    - name: Build container (privileged)
+      run: |
+        pushd share/ansible/
+        sudo ansible-playbook playbook-privileged.yml \
+          -i inventory.ini \
+          -e "distribution=${{ matrix.os }}"
+        popd
+
+    - name: Store artifacts
+      # Always upload logs to allow debugging even on failure.
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-privileged-build
         path: |
           ./share/ansible/build-out/config.log
           ./share/ansible/build-out/config.h

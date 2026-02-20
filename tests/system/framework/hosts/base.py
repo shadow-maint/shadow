@@ -8,6 +8,7 @@ from pytest_mh import MultihostBackupHost, MultihostHost
 from pytest_mh.utils.fs import LinuxFileSystem
 
 from ..config import ShadowMultihostDomain
+from .btrfs import Btrfs
 
 __all__ = [
     "BaseHost",
@@ -43,6 +44,7 @@ class BaseLinuxHost(MultihostHost[ShadowMultihostDomain]):
         super().__init__(*args, **kwargs)
 
         self.fs: LinuxFileSystem = LinuxFileSystem(self)
+        self.btrfs: Btrfs = Btrfs(self)
         self._os_release: dict = {}
         self._distro_name: str = "unknown"
         self._distro_major: int = 0
