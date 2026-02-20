@@ -29,15 +29,14 @@ static const char Prog[] = "expiry";
 static bool cflg = false;
 
 /* local function prototypes */
-static void catch_signals(int);
+static void catch_signals (MAYBE_UNUSED int sig);
 NORETURN static void usage (int status);
 static void process_flags (int argc, char **argv);
 
 /*
  * catch_signals - signal catcher
  */
-static void
-catch_signals(int)
+static void catch_signals (MAYBE_UNUSED int sig)
 {
 	_exit (10);
 }

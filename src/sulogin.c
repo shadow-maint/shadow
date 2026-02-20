@@ -49,8 +49,7 @@ static void catch_signals (int);
 static int pw_entry(const char *name, struct passwd *pwent);
 
 
-static void
-catch_signals(int)
+static void catch_signals (MAYBE_UNUSED int sig)
 {
 	_exit (1);
 }
