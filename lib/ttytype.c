@@ -17,6 +17,7 @@
 
 #include "defines.h"
 #include "getdef.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
@@ -48,7 +49,7 @@ void ttytype (const char *line)
 			perror (typefile);
 		return;
 	}
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets_a(buf, fp) != NULL) {
 		if (strprefix(buf, "#")) {
 			continue;
 		}

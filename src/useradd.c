@@ -42,6 +42,7 @@
 #include "fs/mkstemp/fmkomstemp.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fgets/fgets.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
@@ -353,7 +354,7 @@ get_defaults(const struct option_flags *flags)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets_a(buf, fp) != NULL) {
 		stpsep(buf, "\n");
 
 		cp = stpsep(buf, "=");
@@ -597,7 +598,7 @@ set_defaults(void)
 		goto skip;
 	}
 
-	while (fgets(buf, sizeof(buf), ifp) != NULL) {
+	while (fgets_a(buf, ifp) != NULL) {
 		char  *val;
 
 		if (stpsep(buf, "\n") == NULL) {

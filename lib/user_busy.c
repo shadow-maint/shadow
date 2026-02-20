@@ -23,6 +23,7 @@
 #include "atoi/getnum.h"
 #include "defines.h"
 #include "fs/readlink/readlinknul.h"
+#include "io/fgets/fgets.h"
 #include "prototypes.h"
 #ifdef ENABLE_SUBIDS
 #include "subordinateio.h"
@@ -128,7 +129,7 @@ static int check_status (const char *name, const char *sname, uid_t uid)
 	if (NULL == sfile) {
 		return 0;
 	}
-	while (fgets(line, sizeof(line), sfile) != NULL) {
+	while (fgets_a(line, sfile) != NULL) {
 		if (strprefix(line, "Uid:\t")) {
 			unsigned long ruid, euid, suid;
 

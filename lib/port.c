@@ -17,6 +17,7 @@
 #include <string.h>
 
 #include "defines.h"
+#include "io/fgets/fgets.h"
 #include "port.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
@@ -139,7 +140,7 @@ getportent(void)
 	 */
 
 next:
-	if (fgets(buf, sizeof(buf), ports) == NULL) {
+	if (fgets_a(buf, ports) == NULL) {
 		errno = saveerr;
 		return NULL;
 	}

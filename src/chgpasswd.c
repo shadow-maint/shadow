@@ -29,6 +29,7 @@
 #endif
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fgets/fgets.h"
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
@@ -392,7 +393,7 @@ int main (int argc, char **argv)
 	 * group entry for each group will be looked up in the appropriate
 	 * file (gshadow or group) and the password changed.
 	 */
-	while (fgets(buf, sizeof(buf), stdin) != NULL) {
+	while (fgets_a(buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),

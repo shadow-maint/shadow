@@ -33,6 +33,7 @@
 #include "shadowio.h"
 /*@-exitarg@*/
 #include "exitcodes.h"
+#include "io/fgets/fgets.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
 #include "string/strerrno.h"
@@ -435,14 +436,14 @@ int main (int argc, char **argv)
 	 * last change date is set in the age only if aging information is
 	 * present.
 	 */
-	while (fgets(buf, sizeof(buf), stdin) != NULL) {
+	while (fgets_a(buf, stdin) != NULL) {
 		char  *cp;
 
 		line++;
 		if (stpsep(buf, "\n") == NULL) {
 			if (feof (stdin) == 0) {
 				// Drop all remaining characters on this line.
-				while (fgets(buf, sizeof(buf), stdin) != NULL) {
+				while (fgets_a(buf, stdin) != NULL) {
 					if (strchr(buf, '\n'))
 						break;
 				}
