@@ -2,7 +2,6 @@
 mandir = @mandir@/cs
 
 man_MANS = \
-	man1/expiry.1 \
 	man5/faillog.5 \
 	man8/faillog.8 \
 	man1/gpasswd.1 \

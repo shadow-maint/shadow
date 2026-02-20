@@ -5,7 +5,6 @@ XMLFILES = \
 	$(top_srcdir)/man/chgpasswd.8.xml \
 	$(top_srcdir)/man/chpasswd.8.xml \
 	$(top_srcdir)/man/chsh.1.xml \
-	$(top_srcdir)/man/expiry.1.xml \
 	$(top_srcdir)/man/faillog.5.xml \
 	$(top_srcdir)/man/faillog.8.xml \
 	$(top_srcdir)/man/gpasswd.1.xml \
