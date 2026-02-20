@@ -229,7 +229,7 @@ msgstr "%s үшін атын орнату мүмкін емес\n"
 
 #, fuzzy, c-format
 #| msgid "%s: line %d: chown %s failed: %s\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: жол %d: chown %s сәтсіз: %s\n"
 
 #, fuzzy, c-format

@@ -212,7 +212,7 @@ msgstr "कनफिगरेसन सूचनाको लागि खाल
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: फाइल खोल्न सकिएन\n"
 
 #, fuzzy, c-format

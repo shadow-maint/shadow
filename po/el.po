@@ -238,7 +238,7 @@ msgstr "Αδυναμία ρύθμισης του ονόματος χρήστη %
 
 #, fuzzy, c-format
 #| msgid "%s: can't open file\n"
-msgid "%s: stpeprintf failed!\n"
+msgid "%s: seprintf failed!\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
 
 #, fuzzy, c-format

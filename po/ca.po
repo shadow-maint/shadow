@@ -229,8 +229,8 @@ msgid "%s: Could not set caps\n"
 msgstr "%s: No s'han pogut establir les «capabilities»\n"
 
 #, c-format
-msgid "%s: stpeprintf failed!\n"
-msgstr "%s: ha fallat stpeprintf!\n"
+msgid "%s: seprintf failed!\n"
+msgstr "%s: ha fallat seprintf!\n"
 
 #, c-format
 msgid "%s: open of %s failed: %s\n"
