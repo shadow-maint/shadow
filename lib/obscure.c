@@ -12,6 +12,7 @@
 
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -25,10 +26,6 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 
-
-#if WITH_LIBBSD == 0
-#include "freezero.h"
-#endif /* WITH_LIBBSD */
 
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
@@ -59,7 +56,7 @@ static bool similar (/*@notnull@*/const char *old, /*@notnull@*/const char *new)
 
 	/*
 	 * XXX - sometimes this fails when changing from a simple password
-	 * to a really long one (MD5).  For now, I just return success if
+	 * to a really long one.  For now, I just return success if
 	 * the new password is long enough.  Please feel free to suggest
 	 * something better...  --marekm
 	 */
@@ -115,19 +112,8 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 	/*@notnull@*/const char *old,
 	/*@notnull@*/const char *new)
 {
-	int maxlen, minlen;
-	size_t oldlen, newlen;
-	char *new1, *old1;
-	const char *msg;
-
-	oldlen = strlen (old);
-	newlen = strlen (new);
-
-	obscure_get_range(&minlen, &maxlen);
-
-	if (newlen < (size_t) minlen) {
+	if (strlen(new) < pass_min_len())
 		return _("too short");
-	}
 
 	/*
 	 * Remaining checks are optional.
@@ -136,39 +122,7 @@ static /*@observer@*//*@null@*/const char *obscure_msg (
 		return NULL;
 	}
 
-	msg = password_check(old, new);
-	if (NULL != msg) {
-		return msg;
-	}
-
-	if (maxlen == -1) {
-		return NULL;
-	}
-
-	/* The traditional crypt() truncates passwords to 8 chars.  It is
-	   possible to circumvent the above checks by choosing an easy
-	   8-char password and adding some random characters to it...
-	   Example: "password$%^&*123".  So check it again, this time
-	   truncated to the maximum length.  Idea from npasswd.  --marekm */
-
-	if (   (oldlen <= (size_t) maxlen)
-	    && (newlen <= (size_t) maxlen)) {
-		return NULL;
-	}
-
-	new1 = xstrdup (new);
-	old1 = xstrdup (old);
-	if (newlen > (size_t) maxlen)
-		stpcpy(&new1[maxlen], "");
-	if (oldlen > (size_t) maxlen)
-		stpcpy(&old1[maxlen], "");
-
-	msg = password_check(old1, new1);
-
-	freezero (new1, newlen);
-	freezero (old1, oldlen);
-
-	return msg;
+	return password_check(old, new);
 }
 
 /*
@@ -191,47 +145,12 @@ obscure(const char *old, const char *new)
 	return true;
 }
 
-/*
- * obscure_get_range - retrieve min and max password lengths
- *
- *  Returns minimum and maximum allowed lengths of a password
- *  to pass obscure checks.
- */
-void
-obscure_get_range(int *minlen, int *maxlen)
+size_t
+pass_min_len(void)
 {
-	int        val;
-	const char *method;
+	int  val;
 
 	/* Minimum length is 0, even if -1 is configured. */
 	val = getdef_num("PASS_MIN_LEN", 0);
-	*minlen = val == -1 ? 0 : val;
-
-	/* Maximum password length check is optional. */
-	*maxlen = -1;
-
-	if (!getdef_bool("OBSCURE_CHECKS_ENAB")) {
-		return;
-	}
-
-	method = getdef_str ("ENCRYPT_METHOD");
-	if (NULL == method) {
-		if (getdef_bool ("MD5_CRYPT_ENAB")) {
-			return;
-		}
-	} else {
-		if (   streq(method, "MD5")
-		    || streq(method, "SHA256")
-		    || streq(method, "SHA512")
-#ifdef USE_BCRYPT
-		    || streq(method, "BCRYPT")
-#endif
-#ifdef USE_YESCRYPT
-		    || streq(method, "YESCRYPT")
-#endif
-		    ) {
-			return;
-		}
-	}
-	*maxlen = getdef_num ("PASS_MAX_LEN", 8);
+	return val == -1 ? 0 : val;
 }

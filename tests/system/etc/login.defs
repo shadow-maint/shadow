@@ -274,13 +274,6 @@ PASS_CHANGE_TRIES	5
 PASS_ALWAYS_WARN	yes
 
 #
-# Number of significant characters in the password for crypt().
-# Default is 8, don't change unless your crypt() is better.
-# Ignored if MD5_CRYPT_ENAB set to "yes".
-#
-#PASS_MAX_LEN		8
-
-#
 # Require password before chfn(1)/chsh(1) can make any changes.
 #
 CHFN_AUTH		yes
@@ -301,35 +294,16 @@ CHFN_RESTRICT		rwh
 #LOGIN_STRING		"%s's Password: "
 
 #
-# Only works if compiled with MD5_CRYPT defined:
-# If set to "yes", new passwords will be encrypted using the MD5-based
-# algorithm compatible with the one used by recent releases of FreeBSD.
-# It supports passwords of unlimited length and longer salt strings.
-# Set to "no" if you need to copy encrypted passwords to other systems
-# which don't understand the new algorithm.  Default is "no".
-#
-# Note: If you use PAM, it is recommended to use a value consistent with
-# the PAM modules configuration.
-#
-# This variable is deprecated. You should use ENCRYPT_METHOD instead.
-#
-#MD5_CRYPT_ENAB	no
-
-#
 # Only works if compiled with ENCRYPTMETHOD_SELECT defined:
-# If set to MD5, MD5-based algorithm will be used for encrypting password
 # If set to SHA256, SHA256-based algorithm will be used for encrypting password
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to BCRYPT, BCRYPT-based algorithm will be used for encrypting password
 # If set to YESCRYPT, YESCRYPT-based algorithm will be used for encrypting password
-# If set to DES, DES-based algorithm will be used for encrypting password (default)
-# MD5 and DES should not be used for new hashes, see crypt(5) for recommendations.
-# Overrides the MD5_CRYPT_ENAB option
 #
 # Note: If you use PAM, it is recommended to use a value consistent with
 # the PAM modules configuration.
 #
-#ENCRYPT_METHOD DES
+#ENCRYPT_METHOD SHA512
 
 #
 # Only works if ENCRYPT_METHOD is set to SHA256 or SHA512.

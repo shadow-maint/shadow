@@ -12,19 +12,13 @@
     <para>
       It can take one of these values: <phrase condition="bcrypt">
       <replaceable>BCRYPT</replaceable>,</phrase>
-      <replaceable>DES</replaceable> (default),
-      <replaceable>MD5</replaceable>,
       <replaceable>SHA256</replaceable>,
       <replaceable>SHA512</replaceable>,
       <phrase condition="yescrypt">
       <replaceable>YESCRYPT</replaceable></phrase>.
-      MD5 and DES should not be used for new hashes, see
+      See
       <refentrytitle>crypt</refentrytitle><manvolnum>5</manvolnum>
       for recommendations.
-    </para>
-    <para>
-      Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option>
-      variable.
     </para>
     <para condition="pam">
       Note: this only affects the generation of group passwords.
