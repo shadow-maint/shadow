@@ -334,16 +334,12 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 #endif /* !USE_XCRYPT_GENSALT */
 
 /*
- * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
- * in /etc/login.defs is "yes", the salt string will be prefixed by "$1$"
- * (magic) and pw_encrypt() will execute the MD5-based FreeBSD-compatible
- * version of crypt() instead of the standard one.
- * Other methods can be set with ENCRYPT_METHOD
+ * Generate 8 base64 ASCII characters of random salt.
+ * Methods can be set with ENCRYPT_METHOD
  *
  * The method can be forced with the meth parameter.
  * If NULL, the method will be defined according to the ENCRYPT_METHOD
- * variable, and if not set according to the MD5_CRYPT_ENAB variable,
- * which can both be set inside the login.defs file.
+ * variable, which can be set inside the login.defs file.
  *
  * If meth is specified, an additional parameter can be provided.
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
@@ -359,14 +355,7 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	bzero(result, GENSALT_SETTING_SIZE);
 
-	if (NULL != meth)
-		method = meth;
-	else {
-		method = getdef_str ("ENCRYPT_METHOD");
-		if (NULL == method) {
-			method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
-		}
-	}
+	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
 	if (streq(method, "MD5")) {
 		MAGNUM(result, '1');
@@ -392,33 +381,20 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (streq(method, "SHA512")) {
+sha512:
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
-	} else if (!streq(method, "DES")) {
+	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
-			   "Defaulting to DES.\n"),
+			   "Defaulting to SHA512.\n"),
 			 method);
-		salt_len = MAX_SALT_SIZE;
-		rounds = 0;
-		bzero(result, GENSALT_SETTING_SIZE);
+		goto sha512;
 	}
 
 #if USE_XCRYPT_GENSALT
-	/*
-	 * Prepare DES setting for crypt_gensalt(), if result
-	 * has not been filled with anything previously.
-	 */
-	if (streq(result, "")) {
-		/* Avoid -Wunused-but-set-variable. */
-		salt_len = GENSALT_SETTING_SIZE - 1;
-		rounds = 0;
-		memset(result, '.', salt_len);
-		stpcpy(&result[salt_len], "");
-	}
-
 	char *retval = crypt_gensalt (result, rounds, NULL, 0);
 
 	/* Should not happen, but... */

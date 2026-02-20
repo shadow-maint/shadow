@@ -156,7 +156,6 @@ login_defs_v = \
 	MAIL_CHECK_ENAB.xml \
 	MAIL_DIR.xml \
 	MAX_MEMBERS_PER_GROUP.xml \
-	MD5_CRYPT_ENAB.xml \
 	MOTD_FILE.xml \
 	NOLOGINS_FILE.xml \
 	NONEXISTENT.xml \
@@ -164,7 +163,7 @@ login_defs_v = \
 	PASS_ALWAYS_WARN.xml \
 	PASS_CHANGE_TRIES.xml \
 	PASS_MAX_DAYS.xml \
-	PASS_MAX_LEN.xml \
+	PASS_MIN_LEN.xml \
 	PASS_MIN_DAYS.xml \
 	PASS_WARN_AGE.xml \
 	PORTTIME_CHECKS_ENAB.xml \

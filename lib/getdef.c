@@ -63,7 +63,6 @@ struct itemdef {
 	{"OBSCURE_CHECKS_ENAB", NULL},		\
 	{"PASS_ALWAYS_WARN", NULL},		\
 	{"PASS_CHANGE_TRIES", NULL},		\
-	{"PASS_MAX_LEN", NULL},			\
 	{"PASS_MIN_LEN", NULL},			\
 	{"PORTTIME_CHECKS_ENAB", NULL},		\
 	{"QUOTAS_ENAB", NULL},			\
@@ -107,7 +106,6 @@ static struct itemdef def_table[] = {
 	{"MAIL_DIR", NULL},
 	{"MAIL_FILE", NULL},
 	{"MAX_MEMBERS_PER_GROUP", NULL},
-	{"MD5_CRYPT_ENAB", NULL},
 	{"NONEXISTENT", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},

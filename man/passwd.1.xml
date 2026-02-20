@@ -8,11 +8,10 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY BCRYPT_MIN_ROUNDS     SYSTEM "login.defs.d/BCRYPT_MIN_ROUNDS.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
-<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY OBSCURE_CHECKS_ENAB   SYSTEM "login.defs.d/OBSCURE_CHECKS_ENAB.xml">
 <!ENTITY PASS_ALWAYS_WARN      SYSTEM "login.defs.d/PASS_ALWAYS_WARN.xml">
 <!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
-<!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
+<!ENTITY PASS_MIN_LEN          SYSTEM "login.defs.d/PASS_MIN_LEN.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
 <!ENTITY YESCRYPT_COST_FACTOR  SYSTEM "login.defs.d/YESCRYPT_COST_FACTOR.xml">
 <!-- SHADOW-CONFIG-HERE -->
@@ -109,10 +108,10 @@
       <title>Hints for user passwords</title>
       <para>
 	The security of a password depends on the strength of the
-	encryption algorithm and the size of the key space. The legacy
-	<emphasis>UNIX</emphasis> System encryption method is based on the
-	NBS DES algorithm. More recent methods are now recommended (see
-	<option>ENCRYPT_METHOD</option>). The size of the key space
+	hashing method and the size of the key space.
+	The hashing method can be selected with
+	<option>ENCRYPT_METHOD</option>.
+	The size of the key space
 	depends on the randomness of the selected password.
       </para>
 
@@ -400,11 +399,10 @@
     </para>
     <variablelist>
       &ENCRYPT_METHOD;
-      &MD5_CRYPT_ENAB;
       &OBSCURE_CHECKS_ENAB;
       &PASS_ALWAYS_WARN;
       &PASS_CHANGE_TRIES;
-      &PASS_MAX_LEN; <!-- documents also PASS_MIN_LEN -->
+      &PASS_MIN_LEN;
       &SHA_CRYPT_MIN_ROUNDS;
     </variablelist>
   </refsect1>
