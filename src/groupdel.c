@@ -166,9 +166,7 @@ static void close_files(const struct option_flags *flags)
 	              "delete-group",
 	              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-	SYSLOG ((LOG_INFO,
-	         "group '%s' removed from %s",
-	         group_name, gr_dbname ()));
+	SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, gr_dbname());
 	del_cleanup (cleanup_report_del_group_group);
 
 	cleanup_unlock_group (&process_selinux);
@@ -190,9 +188,7 @@ static void close_files(const struct option_flags *flags)
 		              "delete-shadow-group",
 		              group_name, group_id, SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "group '%s' removed from %s",
-		         group_name, sgr_dbname ()));
+		SYSLOG(LOG_INFO, "group '%s' removed from %s", group_name, sgr_dbname());
 		del_cleanup (cleanup_report_del_group_gshadow);
 
 		cleanup_unlock_gshadow (&process_selinux);
@@ -200,7 +196,7 @@ static void close_files(const struct option_flags *flags)
 	}
 #endif				/* SHADOWGRP */
 
-	SYSLOG ((LOG_INFO, "group '%s' removed\n", group_name));
+	SYSLOG(LOG_INFO, "group '%s' removed\n", group_name);
 	del_cleanup (cleanup_report_del_group);
 }
 
@@ -246,7 +242,7 @@ static void open_files(const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		SYSLOG(LOG_WARN, "cannot open %s", gr_dbname());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -255,7 +251,7 @@ static void open_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
+			SYSLOG(LOG_WARN, "cannot open %s", sgr_dbname());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}

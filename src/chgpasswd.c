@@ -86,7 +86,7 @@ static void fail_exit (int code, bool process_selinux)
 	if (gr_locked) {
 		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
@@ -95,7 +95,7 @@ static void fail_exit (int code, bool process_selinux)
 	if (sgr_locked) {
 		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 	}
@@ -341,12 +341,12 @@ static void close_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
 			fail_exit (1, process_selinux);
 		}
 		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 		sgr_locked = false;
@@ -357,12 +357,12 @@ static void close_files(const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
 		fail_exit (1, process_selinux);
 	}
 	if (gr_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 		/* continue */
 	}
 	gr_locked = false;

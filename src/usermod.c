@@ -442,7 +442,7 @@ new_pw_passwd(char *pw_pass, bool process_selinux)
 		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-passwd", user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
+		SYSLOG(LOG_INFO, "lock user '%s' password", user_newname);
 		pw_pass = xaprintf("!%s", pw_pass);
 	} else if (Uflg && strprefix(pw_pass, "!")) {
 		if (pw_pass[1] == '\0') {
@@ -457,14 +457,14 @@ new_pw_passwd(char *pw_pass, bool process_selinux)
 		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-password", user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
+		SYSLOG(LOG_INFO, "unlock user '%s' password", user_newname);
 		memmove(pw_pass, pw_pass + 1, strlen(pw_pass));
 	} else if (pflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK,
 		              "updating-password", user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user '%s' password", user_newname));
+		SYSLOG(LOG_INFO, "change user '%s' password", user_newname);
 		pw_pass = xstrdup (user_pass);
 	}
 	return pw_pass;
@@ -493,9 +493,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		audit_logger (AUDIT_USER_MGMT,
 		              "changing-name", user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user name '%s' to '%s'",
-		         pwent->pw_name, user_newname));
+		SYSLOG(LOG_INFO, "change user name '%s' to '%s'",
+		       pwent->pw_name, user_newname);
 		pwent->pw_name = xstrdup (user_newname);
 	}
 	/* Update the password in passwd if there is no shadow file or if
@@ -513,9 +512,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		audit_logger (AUDIT_USER_MGMT,
 		              "changing-uid", user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' UID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_uid, user_newid));
+		SYSLOG(LOG_INFO, "change user '%s' UID from '%d' to '%d'",
+		       pwent->pw_name, pwent->pw_uid, user_newid);
 		pwent->pw_uid = user_newid;
 	}
 	if (gflg) {
@@ -524,9 +522,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		              "changing-primary-group",
 		              user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' GID from '%d' to '%d'",
-		         pwent->pw_name, pwent->pw_gid, user_newgid));
+		SYSLOG(LOG_INFO, "change user '%s' GID from '%d' to '%d'",
+		       pwent->pw_name, pwent->pw_gid, user_newgid);
 		pwent->pw_gid = user_newgid;
 	}
 	if (cflg) {
@@ -543,9 +540,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		              "changing-home-dir",
 		              user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' home from '%s' to '%s'",
-		         pwent->pw_name, pwent->pw_dir, user_newhome));
+		SYSLOG(LOG_INFO, "change user '%s' home from '%s' to '%s'",
+		       pwent->pw_name, pwent->pw_dir, user_newhome);
 
 		if (!streq(user_newhome, ""))
 			stpcpy(stprspn(user_newhome + 1, "/"), "");
@@ -558,9 +554,8 @@ static void new_pwent (struct passwd *pwent, bool process_selinux)
 		              "changing-shell",
 		              user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' shell from '%s' to '%s'",
-		         pwent->pw_name, pwent->pw_shell, user_newshell));
+		SYSLOG(LOG_INFO, "change user '%s' shell from '%s' to '%s'",
+		       pwent->pw_name, pwent->pw_shell, user_newshell);
 		pwent->pw_shell = user_newshell;
 	}
 }
@@ -589,9 +584,8 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 		              "changing-inactive-days",
 		              user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' inactive from '%ld' to '%ld'",
-		         spent->sp_namp, spent->sp_inact, user_newinactive));
+		SYSLOG(LOG_INFO, "change user '%s' inactive from '%ld' to '%ld'",
+		       spent->sp_namp, spent->sp_inact, user_newinactive);
 		spent->sp_inact = user_newinactive;
 	}
 	if (eflg) {
@@ -605,9 +599,8 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 		              "changing-expiration-date",
 		              user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO,
-		         "change user '%s' expiration from '%s' to '%s'",
-		         spent->sp_namp, old_exp, new_exp));
+		SYSLOG(LOG_INFO, "change user '%s' expiration from '%s' to '%s'",
+		       spent->sp_namp, old_exp, new_exp);
 		spent->sp_expire = user_newexpire;
 	}
 
@@ -642,7 +635,7 @@ fail_exit (int code, bool process_selinux)
 	if (gr_locked) {
 		if (gr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
@@ -650,7 +643,7 @@ fail_exit (int code, bool process_selinux)
 	if (sgr_locked) {
 		if (sgr_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 			/* continue */
 		}
 	}
@@ -658,14 +651,14 @@ fail_exit (int code, bool process_selinux)
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -673,14 +666,14 @@ fail_exit (int code, bool process_selinux)
 	if (sub_uid_locked) {
 		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 			/* continue */
 		}
 	}
 	if (sub_gid_locked) {
 		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 			/* continue */
 		}
 	}
@@ -766,10 +759,10 @@ update_group(const struct group *grp, bool process_selinux)
 				              ngrp->gr_name,
 				              SHADOW_AUDIT_SUCCESS);
 #endif
-				SYSLOG ((LOG_INFO,
-					 "change '%s' to '%s' in group '%s'",
-					 user_name, user_newname,
-					 ngrp->gr_name));
+				SYSLOG(LOG_INFO,
+					"change '%s' to '%s' in group '%s'",
+					user_name, user_newname,
+					ngrp->gr_name);
 			}
 		} else {
 			/* User was a member but is no more a
@@ -784,9 +777,8 @@ update_group(const struct group *grp, bool process_selinux)
 			              ngrp->gr_name,
 			              SHADOW_AUDIT_SUCCESS);
 #endif
-			SYSLOG ((LOG_INFO,
-				 "delete '%s' from group '%s'",
-				 user_name, ngrp->gr_name));
+			SYSLOG(LOG_INFO, "delete '%s' from group '%s'",
+				user_name, ngrp->gr_name);
 		}
 	} else if (is_member) {
 		/* User was not a member but is now a member this
@@ -801,8 +793,8 @@ update_group(const struct group *grp, bool process_selinux)
 		              ngrp->gr_name,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
-			 user_newname, ngrp->gr_name));
+		SYSLOG(LOG_INFO, "add '%s' to group '%s'",
+			user_newname, ngrp->gr_name);
 	}
 	if (!changed)
 		goto free_ngrp;
@@ -811,7 +803,7 @@ update_group(const struct group *grp, bool process_selinux)
 		fprintf (stderr,
 			 _("%s: failed to prepare the new %s entry '%s'\n"),
 			 Prog, gr_dbname (), ngrp->gr_name);
-		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname (), ngrp->gr_name));
+		SYSLOG(LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname(), ngrp->gr_name);
 		fail_exit (E_GRP_UPDATE, process_selinux);
 	}
 
@@ -897,9 +889,8 @@ update_gshadow(const struct sgrp *sgrp, bool process_selinux)
 		              user_name, AUDIT_NO_ID, "grp", nsgrp->sg_namp,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO,
-			 "change admin '%s' to '%s' in shadow group '%s'",
-			 user_name, user_newname, nsgrp->sg_namp));
+		SYSLOG(LOG_INFO, "change admin '%s' to '%s' in shadow group '%s'",
+			user_name, user_newname, nsgrp->sg_namp);
 	}
 
 	if (was_member) {
@@ -920,10 +911,9 @@ update_gshadow(const struct sgrp *sgrp, bool process_selinux)
 				              user_name, AUDIT_NO_ID, "grp",
 				              nsgrp->sg_namp, 1);
 #endif
-				SYSLOG ((LOG_INFO,
-					 "change '%s' to '%s' in shadow group '%s'",
-					 user_name, user_newname,
-					 nsgrp->sg_namp));
+				SYSLOG(LOG_INFO,
+					"change '%s' to '%s' in shadow group '%s'",
+					user_name, user_newname, nsgrp->sg_namp);
 			}
 		} else {
 			/* User was a member but is no more a
@@ -937,9 +927,8 @@ update_gshadow(const struct sgrp *sgrp, bool process_selinux)
 			              user_name, AUDIT_NO_ID, "grp",
 			              nsgrp->sg_namp, 1);
 #endif
-			SYSLOG ((LOG_INFO,
-				 "delete '%s' from shadow group '%s'",
-				 user_name, nsgrp->sg_namp));
+			SYSLOG(LOG_INFO, "delete '%s' from shadow group '%s'",
+				user_name, nsgrp->sg_namp);
 		}
 	} else if (is_member) {
 		/* User was not a member but is now a member this
@@ -953,8 +942,8 @@ update_gshadow(const struct sgrp *sgrp, bool process_selinux)
 		              user_newname, AUDIT_NO_ID, "grp",
 		              nsgrp->sg_namp, 1);
 #endif
-		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
-			 user_newname, nsgrp->sg_namp));
+		SYSLOG(LOG_INFO, "add '%s' to shadow group '%s'",
+			user_newname, nsgrp->sg_namp);
 	}
 	if (!changed)
 		goto free_nsgrp;
@@ -966,8 +955,8 @@ update_gshadow(const struct sgrp *sgrp, bool process_selinux)
 		fprintf (stderr,
 			 _("%s: failed to prepare the new %s entry '%s'\n"),
 			 Prog, sgr_dbname (), nsgrp->sg_namp);
-		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'",
-			 sgr_dbname (), nsgrp->sg_namp));
+		SYSLOG(LOG_WARN, "failed to prepare the new %s entry '%s'",
+			sgr_dbname(), nsgrp->sg_namp);
 		fail_exit (E_GRP_UPDATE, process_selinux);
 	}
 
@@ -1486,16 +1475,14 @@ static void close_files(const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
 	if (is_shadow_pwd && (spw_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR,
-		         "failure while writing changes to %s",
-		         spw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
 
@@ -1504,9 +1491,8 @@ static void close_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failure while writing changes to %s",
-			         gr_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s",
+			       gr_dbname());
 			fail_exit (E_GRP_UPDATE, process_selinux);
 		}
 #ifdef SHADOWGRP
@@ -1515,9 +1501,8 @@ static void close_files(const struct option_flags *flags)
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, sgr_dbname ());
-				SYSLOG ((LOG_ERR,
-				         "failure while writing changes to %s",
-				         sgr_dbname ()));
+				SYSLOG(LOG_ERR, "failure while writing changes to %s",
+				       sgr_dbname());
 				fail_exit (E_GRP_UPDATE, process_selinux);
 			}
 		}
@@ -1528,9 +1513,7 @@ static void close_files(const struct option_flags *flags)
 				fprintf (stderr,
 				         _("%s: failed to unlock %s\n"),
 				         Prog, sgr_dbname ());
-				SYSLOG ((LOG_ERR,
-				         "failed to unlock %s",
-				         sgr_dbname ()));
+				SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 				/* continue */
 			}
 		}
@@ -1539,9 +1522,7 @@ static void close_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failed to unlock %s",
-			         gr_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
 	}
@@ -1551,9 +1532,7 @@ static void close_files(const struct option_flags *flags)
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
 			         Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR,
-			         "failed to unlock %s",
-			         spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
@@ -1561,7 +1540,7 @@ static void close_files(const struct option_flags *flags)
 		fprintf (stderr,
 		         _("%s: failed to unlock %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 
@@ -1576,12 +1555,12 @@ static void close_files(const struct option_flags *flags)
 	if (vflg || Vflg) {
 		if (sub_uid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
 			fail_exit (E_SUB_UID_UPDATE, process_selinux);
 		}
 		if (sub_uid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_uid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
 			/* continue */
 		}
 		sub_uid_locked = false;
@@ -1589,12 +1568,12 @@ static void close_files(const struct option_flags *flags)
 	if (wflg || Wflg) {
 		if (sub_gid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
 			fail_exit (E_SUB_GID_UPDATE, process_selinux);
 		}
 		if (sub_gid_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sub_gid_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 			/* continue */
 		}
 		sub_gid_locked = false;

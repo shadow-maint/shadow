@@ -57,7 +57,7 @@ static pam_handle_t *pamh = NULL;
 
 #define PAM_FAIL_CHECK if (retcode != PAM_SUCCESS) { \
 	fprintf(stderr,"\n%s\n",pam_strerror(pamh, retcode)); \
-	SYSLOG((LOG_ERR,"%s",pam_strerror(pamh, retcode))); \
+	SYSLOG(LOG_ERR,"%s",pam_strerror(pamh, retcode)); \
 	(void) pam_end(pamh, retcode); \
 	exit(1); \
    }
@@ -509,9 +509,9 @@ int main (int argc, char **argv)
 	 * root), but not if run by root.
 	 */
 	if (!amroot && (err != 0)) {
-		SYSLOG ((LOG_ERR,
-				 "No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
-				 err));
+		SYSLOG(LOG_ERR,
+		       "No session entry, error %d.  You must exec \"login\" from the lowest level \"sh\"",
+		       err);
 		exit (1);
 	}
 
@@ -617,8 +617,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("login: PAM Failure, aborting: %s\n"),
 		         pam_strerror (pamh, retcode));
-		SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
-		         pam_strerror (pamh, retcode)));
+		SYSLOG(LOG_ERR, "Couldn't initialize PAM: %s", pam_strerror(pamh, retcode));
 		exit (99);
 	}
 
@@ -688,9 +687,9 @@ int main (int argc, char **argv)
 			failent_user = get_failent_user (pam_user);
 
 			if (retcode == PAM_MAXTRIES) {
-				SYSLOG ((LOG_NOTICE,
-				         "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
-				         failcount, fromhost, failent_user));
+				SYSLOG(LOG_NOTICE,
+				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
+				       failcount, fromhost, failent_user);
 				fprintf (stderr,
 				         _("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
@@ -699,13 +698,13 @@ int main (int argc, char **argv)
 			} else if (retcode == PAM_ABORT) {
 				/* Serious problems, quit now */
 				(void) fputs (_("login: abort requested by PAM\n"), stderr);
-				SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
+				SYSLOG(LOG_ERR, "PAM_ABORT returned from pam_authenticate()");
 				PAM_END;
 				exit(99);
 			} else if (retcode != PAM_SUCCESS) {
-				SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%u)%s FOR '%s', %s",
+				SYSLOG(LOG_NOTICE, "FAILED LOGIN (%u)%s FOR '%s', %s",
 				         failcount, fromhost, failent_user,
-				         pam_strerror (pamh, retcode)));
+				         pam_strerror(pamh, retcode));
 				failed = true;
 			}
 
@@ -732,9 +731,9 @@ int main (int argc, char **argv)
 			(void) puts (_("Login incorrect"));
 
 			if (failcount >= retries) {
-				SYSLOG ((LOG_NOTICE,
-				         "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
-				         failcount, fromhost, failent_user));
+				SYSLOG(LOG_NOTICE,
+				       "TOO MANY LOGIN TRIES (%u)%s FOR '%s'",
+				       failcount, fromhost, failent_user);
 				fprintf (stderr,
 				         _("Maximum number of tries exceeded (%u)\n"),
 				         failcount);
@@ -780,7 +779,7 @@ int main (int argc, char **argv)
 
 	pwd = xgetpwnam (username);
 	if (NULL == pwd) {
-		SYSLOG ((LOG_ERR, "cannot find user %s", failent_user));
+		SYSLOG(LOG_ERR, "cannot find user %s", failent_user);
 		fprintf (stderr,
 		         _("Cannot find user (%s)\n"),
 		         username);
@@ -885,9 +884,8 @@ int main (int argc, char **argv)
 				 * shadow. SHADOW_PASSWD_STRING indicates
 				 * that the password shall be in shadow.
 				 */
-				SYSLOG ((LOG_WARN,
-				         "no shadow password for '%s'%s",
-				         username, fromhost));
+				SYSLOG(LOG_WARN, "no shadow password for '%s'%s",
+				       username, fromhost);
 			}
 		}
 
@@ -903,8 +901,8 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		SYSLOG ((LOG_WARN, "invalid password for '%s' %s",
-		         failent_user, fromhost));
+		SYSLOG(LOG_WARN, "invalid password for '%s' %s",
+		       failent_user, fromhost);
 		failed = true;
 
 	      auth_ok:
@@ -917,21 +915,20 @@ int main (int argc, char **argv)
 		    && (NULL != pwd)
 		    && (0 == pwd->pw_uid)
 		    && !is_console) {
-			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s", fromhost));
+			SYSLOG(LOG_CRIT, "ILLEGAL ROOT LOGIN %s", fromhost);
 			failed = true;
 		}
 		if (   !failed
 		    && !login_access(username, (!streq(hostname, "")) ? hostname : tty)) {
-			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
-			         username, fromhost));
+			SYSLOG(LOG_WARN, "LOGIN '%s' REFUSED %s",
+			       username, fromhost);
 			failed = true;
 		}
 		if (   (NULL != pwd)
 		    && getdef_bool ("FAILLOG_ENAB")
 		    && !failcheck (pwd->pw_uid, &faillog, failed)) {
-			SYSLOG ((LOG_CRIT,
-			         "exceeded failure limit for '%s' %s",
-			         username, fromhost));
+			SYSLOG(LOG_CRIT, "exceeded failure limit for '%s' %s",
+			       username, fromhost);
 			failed = true;
 		}
 		if (!failed) {
@@ -948,8 +945,7 @@ int main (int argc, char **argv)
 
 		retries--;
 		if (retries <= 0) {
-			SYSLOG ((LOG_CRIT, "REPEATED login failures%s",
-			         fromhost));
+			SYSLOG(LOG_CRIT, "REPEATED login failures%s", fromhost);
 		}
 
 		/*
@@ -1001,8 +997,8 @@ int main (int argc, char **argv)
 	 */
 	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
 	    && !isttytime (username, tty, time (NULL))) {
-		SYSLOG ((LOG_WARN, "invalid login time for '%s'%s",
-		         username, fromhost));
+		SYSLOG(LOG_WARN, "invalid login time for '%s'%s",
+		       username, fromhost);
 		closelog ();
 		bad_time_notify ();
 		exit (1);
@@ -1069,9 +1065,9 @@ int main (int argc, char **argv)
 			pw_free (pwd);
 			pwd = xgetpwnam (username);
 			if (NULL == pwd) {
-				SYSLOG ((LOG_ERR,
-				         "cannot find user %s after update of expired password",
-				         username));
+				SYSLOG(LOG_ERR,
+				       "cannot find user %s after update of expired password",
+				       username);
 				exit (1);
 			}
 			spw_free (spwd);
@@ -1121,7 +1117,7 @@ int main (int argc, char **argv)
 	 */
 	err = update_utmp(username, tty, hostname, initial_pid);
 	if (err != 0) {
-		SYSLOG ((LOG_WARN, "Unable to update utmp entry for %s", username));
+		SYSLOG(LOG_WARN, "Unable to update utmp entry for %s", username);
 	}
 #endif /* ENABLE_LOGIND */
 
@@ -1185,9 +1181,9 @@ int main (int argc, char **argv)
 			if (   (0 != faillog.fail_max)
 			    && (faillog.fail_cnt >= faillog.fail_max)) {
 				(void) puts (_("Warning: login re-enabled after temporary lockout."));
-				SYSLOG ((LOG_WARN,
-				         "login '%s' re-enabled after temporary lockout (%d failures)",
-				         username, (int) faillog.fail_cnt));
+				SYSLOG(LOG_WARN,
+				       "login '%s' re-enabled after temporary lockout (%d failures)",
+				       username, (int) faillog.fail_cnt);
 			}
 		}
 #ifdef ENABLE_LASTLOG
@@ -1228,9 +1224,9 @@ int main (int argc, char **argv)
 	(void) signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
 	if (0 == pwd->pw_uid) {
-		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
+		SYSLOG(LOG_NOTICE, "ROOT LOGIN %s", fromhost);
 	} else if (getdef_bool ("LOG_OK_LOGINS")) {
-		SYSLOG ((LOG_INFO, "'%s' logged in %s", username, fromhost));
+		SYSLOG(LOG_INFO, "'%s' logged in %s", username, fromhost);
 	}
 	closelog ();
 	tmp = getdef_str ("FAKE_SHELL");

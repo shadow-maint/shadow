@@ -52,14 +52,14 @@ static void fail_exit (int status, bool process_selinux)
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
 	}
 	if (pw_locked) {
 		if (pw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 			/* continue */
 		}
 	}
@@ -208,25 +208,25 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (3, process_selinux);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
 			 _("%s: cannot delete %s\n"), Prog, SHADOW);
-		SYSLOG ((LOG_ERR, "cannot delete %s", SHADOW));
+		SYSLOG(LOG_ERR, "cannot delete %s", SHADOW);
 		fail_exit (3, process_selinux);
 	}
 
 	if (spw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 		/* continue */
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
 

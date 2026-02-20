@@ -46,9 +46,9 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (fd < 0) {
-		SYSLOG ((LOG_WARN,
-		         "Can't write faillog entry for UID %lu in %s: %m",
-		         (unsigned long) uid, FAILLOG_FILE));
+		SYSLOG(LOG_WARN,
+		       "Can't write faillog entry for UID %lu in %s: %m",
+		       (unsigned long) uid, FAILLOG_FILE);
 		return;
 	}
 
@@ -109,9 +109,9 @@ err_write:
 		errno = saved_errno;
 	}
 err_close:
-	SYSLOG ((LOG_WARN,
-	         "Can't write faillog entry for UID %lu to %s: %m",
-	         (unsigned long) uid, FAILLOG_FILE));
+	SYSLOG(LOG_WARN,
+	       "Can't write faillog entry for UID %lu to %s: %m",
+	       (unsigned long) uid, FAILLOG_FILE);
 }
 
 static bool too_many_failures (const struct faillog *fl)
@@ -162,10 +162,10 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 
 	fd = open (FAILLOG_FILE, failed?O_RDONLY:O_RDWR);
 	if (fd < 0) {
-		SYSLOG ((LOG_WARN,
-		         "Can't open the faillog file (%s) to check UID %lu: %m; "
-		         "User access authorized.",
-		         FAILLOG_FILE, (unsigned long) uid));
+		SYSLOG(LOG_WARN,
+		       "Can't open the faillog file (%s) to check UID %lu: %m; "
+		       "User access authorized.",
+		       FAILLOG_FILE, (unsigned long) uid);
 		return 1;
 	}
 
@@ -224,9 +224,9 @@ err_write:
 		errno = saved_errno;
 	}
 err_close:
-	SYSLOG ((LOG_WARN,
-	         "Can't reset faillog entry for UID %lu in %s: %m",
-	         (unsigned long) uid, FAILLOG_FILE));
+	SYSLOG(LOG_WARN,
+	       "Can't reset faillog entry for UID %lu in %s: %m",
+	       (unsigned long) uid, FAILLOG_FILE);
 	return 1;
 }
 
