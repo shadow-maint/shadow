@@ -32,7 +32,7 @@ Don't use some libc functions without Really Good Reasons:
 	It is difficult to check for truncation after snprintf(3).
 
     strcmp(3)
-	Use streq() instead.
+	Use streq(3) instead.
 	The return value of strcmp(3) is confusing.
 	strcmp(3) would be legitimate for sorting strings.
 
@@ -104,8 +104,8 @@ strchr/ - Character search and counting
     strchrscnt()
 	Count the number of occurrences of several characters.
 
-    strnul()
-	Return a pointer to the terminating null byte.  (s + strlen(s))
+    strnul(3)
+	Return a pointer to the terminating null byte.
 
 strstr/ - String search
 
@@ -121,7 +121,7 @@ strstr/ - String search
 strcmp/ - String comparison
 
   s/
-    streq()
+    streq(3)
 	Return true if the strings are equal.
 
     strpfx()  // Unimplemented
@@ -131,7 +131,7 @@ strcmp/ - String comparison
 	Return true if the string ends with a suffix.
 
     strcaseeq()
-	Like streq(), but ignore upper-/lower-case.
+	Like streq(3), but ignore upper-/lower-case.
 
     strcasepfx()  // Unimplemented
 	Like strpfx(), but ignore upper-/lower-case.
