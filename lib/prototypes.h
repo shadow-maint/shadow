@@ -133,10 +133,10 @@ extern int find_new_uid (bool sys_user,
 
 #ifdef ENABLE_SUBIDS
 /* find_new_sub_gids.c */
-extern int find_new_sub_gids (gid_t *range_start, unsigned long *range_count);
+extern int find_new_sub_gids (id_t *range_start, unsigned long *range_count);
 
 /* find_new_sub_uids.c */
-extern int find_new_sub_uids (uid_t *range_start, unsigned long *range_count);
+extern int find_new_sub_uids (id_t *range_start, unsigned long *range_count);
 #endif				/* ENABLE_SUBIDS */
 
 /* getgr_nam_gid.c */

@@ -25,11 +25,11 @@
  *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
+int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 {
 	unsigned long min, max;
 	unsigned long count;
-	gid_t start;
+	id_t start;
 
 	assert (range_start != NULL);
 	assert (range_count != NULL);
@@ -47,7 +47,7 @@ int find_new_sub_gids (gid_t *range_start, unsigned long *range_count)
 	}
 
 	start = sub_gid_find_free_range(min, max, count);
-	if (start == (gid_t)-1) {
+	if (start == (id_t)-1) {
 		fprintf (log_get_logfd(),
 		         _("%s: Can't get unique subordinate GID range\n"),
 		         log_get_progname());

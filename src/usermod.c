@@ -161,6 +161,7 @@ static bool
     Vflg = false,		/* delete subordinate uids */
     wflg = false,		/*    add subordinate gids */
     Wflg = false,		/* delete subordinate gids */
+    Sflg = false,		/* auto add subordinate ids */
 #endif				/* ENABLE_SUBIDS */
     uflg = false,		/* specify new user ID */
     Uflg = false;		/* unlock the password */
@@ -375,6 +376,32 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 	*head = entry;
 	return 1;
 }
+
+static int
+find_range(struct id_range_list_entry **head,
+           int (*find_fn)(id_t *range_start, unsigned long *range_count))
+{
+	struct id_range_list_entry *entry;
+	struct id_range range;
+	unsigned long count;
+
+	if (find_fn(&range.first, &count) != 0)
+		return 0;
+
+	range.last = range.first + count;
+
+	entry = malloc_T(1, struct id_range_list_entry);
+	if (entry == NULL) {
+		fprintf(stderr, "%s: malloc: %s\n", Prog, strerrno());
+		return 0;
+	}
+
+	entry->next = *head;
+	entry->range = range;
+	*head = entry;
+
+	return 1;
+}
 #endif				/* ENABLE_SUBIDS */
 
 /*
@@ -421,6 +448,7 @@ usage (int status)
 	(void) fputs (_("  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"), usageout);
 	(void) fputs (_("  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"), usageout);
 	(void) fputs (_("  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"), usageout);
+	(void) fputs (_("  -S, --add-subids              add entries to sub[ud]id based on system defaults\n"), usageout);
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 	(void) fputs (_("  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account\n"), usageout);
@@ -1038,6 +1066,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 			{"del-subuids",  required_argument, NULL, 'V'},
 			{"add-subgids",  required_argument, NULL, 'w'},
 			{"del-subgids",  required_argument, NULL, 'W'},
+			{"add-subids",   no_argument,       NULL, 'S'},
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 			{"selinux-user",  required_argument, NULL, 'Z'},
@@ -1048,7 +1077,7 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 		while ((c = getopt_long (argc, argv,
 		                         "abc:d:e:f:g:G:hl:Lmop:rR:s:u:UP:"
 #ifdef ENABLE_SUBIDS
-		                         "v:w:V:W:"
+		                         "v:w:V:W:S"
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
 			                 "Z:"
@@ -1244,6 +1273,12 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 					exit(E_BAD_ARG);
 				}
 				Wflg = true;
+				break;
+			case 'S':
+				Sflg = true;
+				/* -S implies vflg and wflg */
+				vflg = true;
+				wflg = true;
 				break;
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_SELINUX
@@ -2234,6 +2269,21 @@ int main (int argc, char **argv)
 		grp_update (process_selinux);
 	}
 #ifdef ENABLE_SUBIDS
+	if (Sflg) {
+		if (find_range (&add_sub_uids, find_new_sub_uids) == 0) {
+			fprintf (stderr,
+				_("%s: unable to find new subordinate uid range\n"),
+				Prog);
+			fail_exit (E_SUB_UID_UPDATE, process_selinux);
+		}
+		if (find_range (&add_sub_gids, find_new_sub_gids) == 0) {
+			fprintf (stderr,
+				_("%s: unable to find new subordinate gid range\n"),
+				Prog);
+			fail_exit (E_SUB_GID_UPDATE, process_selinux);
+		}
+	}
+
 	if (Vflg) {
 		struct id_range_list_entry  *ptr;
 

@@ -501,6 +501,19 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry condition="subids">
+	<term>
+	  <option>-S</option>, <option>--add-subids</option>
+	</term>
+	<listitem>
+	  <para>
+	    Add subordinate uids and gids to the user's account.
+	  </para>
+	  <para>
+	     An appropriate uid and gid range is automatically selected from /etc/login.defs defaults.
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>
 	  <option>-Z</option>, <option>--selinux-user</option>&nbsp;<replaceable>SEUSER</replaceable>
