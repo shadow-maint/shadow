@@ -2463,7 +2463,9 @@ should_assign_subuid(void)
 		return false;
 	if (!sub_uid_file_present())
 		return false;
-	if (rflg && !Fflg)
+	if (Fflg)
+		return true;
+	if (rflg)
 		return false;
 	if (user_id == 0)
 		return false;
@@ -2491,7 +2493,9 @@ should_assign_subgid(void)
 		return false;
 	if (!sub_gid_file_present())
 		return false;
-	if (rflg && !Fflg)
+	if (Fflg)
+		return true;
+	if (rflg)
 		return false;
 	if (user_id == 0)
 		return false;
