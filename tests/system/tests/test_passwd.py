@@ -69,3 +69,28 @@ def test_passwd__change_password_as_root_interactive(shadow: Shadow):
     assert shadow_entry.min_days == 0, "Incorrect min days"
     assert shadow_entry.max_days == 99999, "Incorrect max days"
     assert shadow_entry.warn_days == 7, "Incorrect warn days"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_passwd__lock_password(shadow: Shadow):
+    """
+    :title: Lock user password
+    :setup:
+        1. Create test user
+    :steps:
+        1. Lock user password using -l flag
+        2. Check the user's shadow entry
+    :expectedresults:
+        1. User's password is locked
+        2. User's shadow entry shows locked password (starts with !)
+    :customerscenario: False
+    """
+    shadow.useradd("tuser")
+
+    shadow.passwd("-l tuser")
+
+    shadow_entry = shadow.tools.getent.shadow("tuser")
+    assert shadow_entry is not None, "User should be found"
+    assert shadow_entry.name == "tuser", "Incorrect username"
+    assert shadow_entry.password is not None, "Password should not be None"
+    assert shadow_entry.password.startswith("!"), "Password should be locked"
