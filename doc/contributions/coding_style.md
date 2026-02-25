@@ -6,7 +6,10 @@ Each language follows its own established conventions and style guidelines.
 
 ## C code
 
-* For a general guidance refer to the
+* For a general guidance refer to this
+[style guide](https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/tree/CONTRIBUTING.d/style/c).
+
+* For stuff not covered there, follow the
 [Linux kernel coding style](https://www.kernel.org/doc/html/latest/process/coding-style.html)
 
 * Patches that change the existing coding style are not welcome, as they make
