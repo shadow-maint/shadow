@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -8,24 +8,11 @@
 
 #include "config.h"
 
-#include <stdbool.h>
 #include <string.h>
 
-#include "attr.h"
 
-
-ATTR_STRING(1)
-ATTR_STRING(2)
-inline bool streq(const char *s1, const char *s2);
-
-
-// strings equal
-/* Return true if s1 and s2 compare equal.  */
-inline bool
-streq(const char *s1, const char *s2)
-{
-	return strcmp(s1, s2) == 0;
-}
+// streq - strings equal
+#define streq(s1, s2)  (!strcmp(s1, s2))
 
 
 #endif  // include guard
