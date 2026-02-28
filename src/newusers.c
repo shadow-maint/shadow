@@ -55,8 +55,8 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
-#include "string/strtok/stpsep.h"
-#include "string/strtok/strsep2arr.h"
+#include "string/strsep/stpsep.h"
+#include "string/strsep/strsep2arr.h"
 
 struct option_flags {
 	bool chroot;

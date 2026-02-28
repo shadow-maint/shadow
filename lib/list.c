@@ -18,7 +18,7 @@
 #include "string/strchr/strchrcnt.h"
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
-#include "string/strtok/strsep2ls.h"
+#include "string/strsep/strsep2ls.h"
 
 
 /*

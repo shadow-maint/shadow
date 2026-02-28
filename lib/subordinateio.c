@@ -25,7 +25,7 @@
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/strsep2arr.h"
+#include "string/strsep/strsep2arr.h"
 
 
 #define ID_SIZE 31
