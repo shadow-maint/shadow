@@ -9,8 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -34,7 +32,7 @@
 #include "shadow/gshadow/sgrp.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 /*
  * Structures
