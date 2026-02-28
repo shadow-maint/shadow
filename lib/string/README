@@ -60,6 +60,11 @@ Don't use some libc functions without Really Good Reasons:
 	strlcat(3) is vulnerable to DoS.
 	Also, it is difficult to check for truncation after strlcat(3).
 
+    strtok(3)
+	Use strsep(3) or stpsep() instead.
+	strtok(3) has internal state, which makes it very difficult to
+	understand.
+
 
 Specific guidelines:
 ====================
