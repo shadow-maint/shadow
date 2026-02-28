@@ -69,6 +69,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
+#include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"
 
@@ -2248,9 +2249,10 @@ static void create_home(const struct option_flags *flags)
 	   owner root:root.
 	 */
 	strcpy(path, "");
+	if (strspn(bhome, "/"))
+		strcat(path, "/");
 	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
-		/* Avoid turning a relative path into an absolute path. */
-		if (strprefix(bhome, "/") || !streq(path, ""))
+		if (!streq(stpspn(path, "/"), ""))
 			strcat(path, "/");
 
 		strcat(path, cp);
