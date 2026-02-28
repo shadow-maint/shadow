@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#ifndef SHADOW_INCLUDE_LIB_STRING_STRTOK_STRSEP2LS_H_
-#define SHADOW_INCLUDE_LIB_STRING_STRTOK_STRSEP2LS_H_
+#ifndef SHADOW_INCLUDE_LIB_STRING_STRSEP_STRSEP2LS_H_
+#define SHADOW_INCLUDE_LIB_STRING_STRSEP_STRSEP2LS_H_
 
 
 #include "config.h"
@@ -14,7 +14,7 @@
 
 #include "attr.h"
 #include "sizeof.h"
-#include "string/strtok/strsep2arr.h"
+#include "string/strsep/strsep2arr.h"
 
 
 // strsep2ls_a - string separate to list-of-strings array
