@@ -2142,7 +2142,7 @@ usr_update (unsigned long subuid_count, unsigned long subgid_count,
 static void create_home(const struct option_flags *flags)
 {
 	char    path[strlen(prefix_user_home) + 2];
-	char    *bhome, *cp;
+	char    *bhome, *cp, *p;
 	mode_t  mode;
 	bool    process_selinux;
 
@@ -2175,8 +2175,12 @@ static void create_home(const struct option_flags *flags)
 	strcpy(path, "");
 	if (strspn(bhome, "/"))
 		strcat(path, "/");
-	for (cp = strtok(bhome, "/"); cp != NULL; cp = strtok(NULL, "/")) {
+	p = bhome;
+	while (NULL != (cp = strsep(&p, "/"))) {
 		bool  dir_created;
+
+		if (streq(cp, ""))
+			continue;
 
 		if (!streq(stpspn(path, "/"), ""))
 			strcat(path, "/");
