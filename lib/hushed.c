@@ -24,7 +24,7 @@
 #include "prototypes.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 /*

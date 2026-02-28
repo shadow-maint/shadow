@@ -70,7 +70,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strspn/stpspn.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 #include "sysconf.h"
 
 #undef NDEBUG
