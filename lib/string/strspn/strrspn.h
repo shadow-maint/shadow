@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024, Alejandro Colomar <alx@kernel.org>
+// SPDX-FileCopyrightText: 2024-2026, Alejandro Colomar <alx@kernel.org>
 // SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -20,19 +20,20 @@ ATTR_STRING(2)
 inline size_t strrspn_(const char *s, const char *accept);
 
 
-// string rear substring prefix length
+// strrspn_ - string rear span
 inline size_t
 strrspn_(const char *s, const char *accept)
 {
+	size_t      spn;
 	const char  *p;
 
 	p = strnul(s);
-	while (p > s) {
+	for (spn = 0; p > s; spn++) {
 		p--;
 		if (strchr(accept, *p) == NULL)
-			return p + 1 - s;
+			return spn;
 	}
-	return 0;
+	return spn;
 }
 
 
