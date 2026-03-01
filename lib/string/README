@@ -235,7 +235,7 @@ sprintf/ - Formatted string creation
 strspn/ - String span searching
 
 	Naming conventions:
-	-  'r': reverse (search from the end).
+	-  'r': rear (search from the end).
 	-  'c': complement (negate the second argument).
 	-  'stp': return a pointer instead of a length.
 
@@ -243,20 +243,23 @@ strspn/ - String span searching
 	Like strspn(3), but return a pointer instead of an offset.
 	It is useful for skipping leading white space.
 
-    strrspn()
-	Use stprspn() instead.
-	Return the offset of a suffix segment consisting only of
+    strrspn_()
+	Return the length of a trailing span consisting only of
 	characters in 'accept'.
+	It is useful for determining if a string ends with characters
+	in "accept".
     stprspn()
-	Like strrspn(), but return a pointer instead of an offset.
+	Like strrspn(), but return a pointer instead of a length.
 	It is useful for removing trailing white space.
 
     strrcspn()
 	Use stprcspn() instead.
-	Return the offset of a suffix segment consisting only of
+	Return the length of a trailing span consisting only of
 	characters not in 'reject'.
+	It is useful for determining if a string ends with characters
+	not in "reject".
     stprcspn()
-	Like strrcspn(), but return a pointer instead of an offset.
+	Like strrcspn(), but return a pointer instead of a length.
 	This is rarely useful.  It was useful for implementing
 	basename().
 
