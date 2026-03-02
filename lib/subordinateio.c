@@ -626,17 +626,53 @@ bool local_sub_uid_assigned(const char *owner)
 
 bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
 {
-	struct subid_nss_ops *h;
-	bool found;
 	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_range(owner, start, count, ID_TYPE_UID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	bool close_db = false;
+	bool exists;
+	bool found;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return have_range(&subordinate_uid_db, owner, start, count);
 	}
-	return have_range (&subordinate_uid_db, owner, start, count);
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->has_range(owner, start, count, ID_TYPE_UID, &found);
+			if (status == SUBID_STATUS_SUCCESS)
+				return found;
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				continue; // User not found in this database, try the next one.
+
+			return false; // Error occurred.
+		} else {
+			// Local "files" database
+			if (!subordinate_uid_db.isopen) {
+				if (sub_uid_open(O_RDONLY) == 0)
+					return false;
+				close_db = true;
+			}
+
+			found = have_range(&subordinate_uid_db, owner, start, count);
+			exists = range_exists(&subordinate_uid_db, owner);
+
+			if (close_db)
+				sub_uid_close(true);
+
+			if (found)
+				return true;
+			if (!exists)
+				continue; // User does not have any ranges; try the next database.
+			return false; // User has ranges but does not own the requested range.
+		}
+	}
+
+	// Searched all databases and didn't find the range.
+	return false;
 }
 
 /*
@@ -791,17 +827,53 @@ int sub_gid_open (int mode)
 
 bool have_sub_gids(const char *owner, gid_t start, unsigned long count)
 {
-	struct subid_nss_ops *h;
-	bool found;
 	enum subid_status status;
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->has_range(owner, start, count, ID_TYPE_GID, &found);
-		if (status == SUBID_STATUS_SUCCESS && found)
-			return true;
-		return false;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	bool close_db = false;
+	bool exists;
+	bool found;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return have_range(&subordinate_gid_db, owner, start, count);
 	}
-	return have_range(&subordinate_gid_db, owner, start, count);
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->has_range(owner, start, count, ID_TYPE_GID, &found);
+			if (status == SUBID_STATUS_SUCCESS)
+				return found;
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				continue; // Group not found in this database, try the next one.
+
+			return false; // Error occurred.
+		} else {
+			// Local "files" database
+			if (!subordinate_gid_db.isopen) {
+				if (sub_gid_open(O_RDONLY) == 0)
+					return false;
+				close_db = true;
+			}
+
+			found = have_range(&subordinate_gid_db, owner, start, count);
+			exists = range_exists(&subordinate_gid_db, owner);
+
+			if (close_db)
+				sub_gid_close(true);
+
+			if (found)
+				return true;
+			if (!exists)
+				continue; // Group does not have any ranges; try the next database.
+			return false; // Group has ranges but does not own the requested range.
+		}
+	}
+
+	// Searched all databases and didn't find the range.
+	return false;
 }
 
 bool local_sub_gid_assigned(const char *owner)
