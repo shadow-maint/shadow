@@ -48,6 +48,55 @@ static void nss_exit(void) {
 	}
 }
 
+static struct subid_nss_ops *
+open_and_check_nss_module(const char *libname) {
+	void                  *h;
+	struct subid_nss_ops  *nss_ops;
+
+	h = dlopen(libname, RTLD_LAZY);
+	if (!h) {
+		fprintf(log_get_logfd(), "Error opening %s: %s\n", libname, dlerror());
+		fprintf(log_get_logfd(), "Using files\n");
+		return NULL;
+	}
+
+	nss_ops = malloc_T(1, struct subid_nss_ops);
+	if (!nss_ops) {
+		fprintf(log_get_logfd(), "Failed to allocate memory for subid NSS module %s\n", libname);
+		dlclose(h);
+		return NULL;
+	}
+
+	nss_ops->has_range = dlsym(h, "shadow_subid_has_range");
+	if (!nss_ops->has_range) {
+		fprintf(log_get_logfd(), "%s did not provide @has_range@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
+	if (!nss_ops->list_owner_ranges) {
+		fprintf(log_get_logfd(), "%s did not provide @list_owner_ranges@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
+	if (!nss_ops->find_subid_owners) {
+		fprintf(log_get_logfd(), "%s did not provide @find_subid_owners@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->free = dlsym(h, "shadow_subid_free");
+	if (!nss_ops->free) {
+		fprintf(log_get_logfd(), "%s did not provide @free@\n", libname);
+		goto close_lib;
+	}
+
+	nss_ops->handle = h;
+	return nss_ops;
+
+close_lib:
+	dlclose(h);
+	free(nss_ops);
+	return NULL;
+}
+
 // nsswitch_path is an argument only to support testing.
 void
 nss_init(const char *nsswitch_path) {
@@ -108,42 +157,13 @@ nss_init(const char *nsswitch_path) {
 		goto null_subid;
 	}
 	stprintf_a(libname, "libsubid_%s.so", p);
-	h = dlopen(libname, RTLD_LAZY);
-	if (!h) {
-		fprintf(log_get_logfd(), "Error opening %s: %s\n", libname, dlerror());
-		fprintf(log_get_logfd(), "Using files\n");
+	subid_nss = open_and_check_nss_module(libname);
+	if (!subid_nss) {
+		fprintf(log_get_logfd(), "Failed to initialize subid NSS module %s\n", libname);
 		goto null_subid;
 	}
-	subid_nss = malloc_T(1, struct subid_nss_ops);
-	if (!subid_nss) {
-		goto close_lib;
-	}
-	subid_nss->has_range = dlsym(h, "shadow_subid_has_range");
-	if (!subid_nss->has_range) {
-		fprintf(log_get_logfd(), "%s did not provide @has_range@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
-	if (!subid_nss->list_owner_ranges) {
-		fprintf(log_get_logfd(), "%s did not provide @list_owner_ranges@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
-	if (!subid_nss->find_subid_owners) {
-		fprintf(log_get_logfd(), "%s did not provide @find_subid_owners@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->free = dlsym(h, "shadow_subid_free");
-	if (!subid_nss->free) {
-		fprintf(log_get_logfd(), "%s did not provide @subid_free@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->handle = h;
 	goto done;
 
-close_lib:
-	dlclose(h);
-	free(subid_nss);
 null_subid:
 	subid_nss = NULL;
 
