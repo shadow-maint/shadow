@@ -564,7 +564,7 @@ static bool have_range(struct commonio_db *db,
 			rc = sub_uid_open(O_RDONLY);
 		else
 			rc = sub_gid_open(O_RDONLY);
-		if (rc < 0)
+		if (!rc)
 			return false;
 	}
 
