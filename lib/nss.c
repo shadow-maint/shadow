@@ -101,10 +101,14 @@ close_lib:
 // nsswitch_path is an argument only to support testing.
 void
 nss_init(const char *nsswitch_path) {
+	struct subid_nss_db **tail = &subid_nss_db_head;
+	struct subid_nss_ops *ops;
+	struct subid_nss_db *new_db;
+	const char *delimiters = " \t\n";
+	char *token;
 	char    *line = NULL, *p;
 	char    libname[64];
 	FILE    *nssfp = NULL;
-	void    *h;
 	size_t  len = 0;
 
 	if (atomic_flag_test_and_set(&nss_init_started)) {
@@ -136,37 +140,61 @@ nss_init(const char *nsswitch_path) {
 		if (!strcaseprefix(line, "subid:"))
 			continue;
 		p = &line[6];
-		p = stpspn(p, " \t\n");
+		p = stpspn(p, delimiters);
 		if (!streq(p, ""))
 			break;
 		p = NULL;
 	}
-	if (p == NULL) {
-		goto null_subid;
-	}
-	if (stpsep(p, " \t\n") == NULL) {
-		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
-		// subid_nss has to be null here, but to ease reviews:
-		goto null_subid;
-	}
-	if (streq(p, "files")) {
-		goto null_subid;
-	}
-	if (strlen(p) > 50) {
-		fprintf(log_get_logfd(), "Subid NSS module name too long (longer than 50 characters): %s\n", p);
-		fprintf(log_get_logfd(), "Using files\n");
-		goto null_subid;
-	}
-	stprintf_a(libname, "libsubid_%s.so", p);
-	subid_nss = open_and_check_nss_module(libname);
-	if (!subid_nss) {
-		fprintf(log_get_logfd(), "Failed to initialize subid NSS module %s\n", libname);
-		goto null_subid;
-	}
-	goto done;
 
-null_subid:
-	subid_nss = NULL;
+	if (p == NULL) {
+		// Use NULL to indicate the built-in "files" database
+		subid_nss_db_head = NULL;
+		goto done;
+	}
+
+	while (NULL != (token = strsep(&p, delimiters))) {
+		if (*token == '\0') {
+ 			continue;
+		}
+
+		if (streq(token, "files")) {
+			// Use NULL to indicate the built-in "files" database
+			ops = NULL;
+		} else {
+			if (stprintf_a(libname, "libsubid_%s.so", token) == -1) {
+				fprintf(log_get_logfd(), "Subid NSS module name too long: %s\n", token);
+				continue;
+			}
+
+			ops = open_and_check_nss_module(libname);
+			if (!ops) {
+				continue;
+			}
+		}
+
+		new_db = malloc_T(1, struct subid_nss_db);
+		if (!new_db) {
+			if (ops) {
+				dlclose(ops->handle);
+				free(ops);
+				ops = NULL;
+			}
+
+			fprintf(log_get_logfd(), "Failed to allocate memory for subid NSS module %s, skipping\n", token);
+			continue;
+		}
+
+		new_db->ops = ops;
+		new_db->next = NULL;
+		*tail = new_db;
+		tail = &new_db->next;
+	}
+
+	if (subid_nss_db_head == NULL) {
+		// No vaild NSS database loaded, using "files" only.
+		// NULL indicates the built-in "files" database, so we can continue, but log a warning.
+		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
+	}
 
 done:
 	atomic_store(&nss_init_completed, true);
