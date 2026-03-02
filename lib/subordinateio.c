@@ -1158,22 +1158,11 @@ static int append_uids(uid_t **uids, const char *owner, int n)
 	return n+1;
 }
 
-int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
+static int find_local_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 {
 	const struct subordinate_range *range;
-	struct subid_nss_ops *h;
-	enum subid_status status;
 	struct commonio_db *db;
 	int n = 0;
-
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->find_subid_owners(id, id_type, uids, &n);
-		// Several ways we could handle the error cases here.
-		if (status != SUBID_STATUS_SUCCESS)
-			return -1;
-		return n;
-	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
