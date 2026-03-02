@@ -34,7 +34,6 @@
 static atomic_flag nss_init_started;
 static atomic_bool nss_init_completed;
 
-static struct subid_nss_ops *subid_nss;
 static struct subid_nss_db *subid_nss_db_head;
 
 bool nss_is_initialized() {
@@ -216,11 +215,6 @@ done:
 		atexit(nss_exit);
 		fclose(nssfp);
 	}
-}
-
-struct subid_nss_ops *get_subid_nss_handle() {
-	nss_init(NULL);
-	return subid_nss;
 }
 
 struct subid_nss_db *

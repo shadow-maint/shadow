@@ -294,7 +294,6 @@ struct subid_nss_ops {
 	void *handle;
 };
 
-extern struct subid_nss_ops *get_subid_nss_handle(void);
 extern struct subid_nss_db *get_subid_nss_db(void);
 
 
