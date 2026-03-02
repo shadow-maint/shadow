@@ -41,11 +41,24 @@ bool nss_is_initialized() {
 	return atomic_load(&nss_init_completed);
 }
 
-static void nss_exit(void) {
-	if (nss_is_initialized() && subid_nss) {
-		dlclose(subid_nss->handle);
-		free(subid_nss);
-		subid_nss = NULL;
+static void
+nss_exit(void) {
+	struct subid_nss_db *current;
+	struct subid_nss_db *next;
+
+	if (nss_is_initialized() && subid_nss_db_head) {
+		current = subid_nss_db_head;
+		while (current) {
+			next = current->next;
+			if (current->ops) {
+				dlclose(current->ops->handle);
+				free(current->ops);
+			}
+			free(current);
+			current = next;
+		}
+
+		subid_nss_db_head = NULL;
 	}
 }
 
