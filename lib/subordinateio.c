@@ -966,7 +966,7 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
 }
 
 /*
- * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subordinate_range ***ranges)
+ * static int list_local_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
  *
  * @owner: username
  * @id_type: UID or GUID
@@ -977,31 +977,22 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
  * UID number.  If id_type is UID, then subuids are returned, else
  * subgids are given.
 
- * Returns the number of ranges found, or < 0 on error.
+ * Returns the number of ranges found in local files only, or < 0 on error.
+ * NSS modules are not consulted by this function.
  *
  * The caller must free the subordinate range list.
  */
-int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
+static int list_local_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
 {
 	// TODO - need to handle owner being either uid or username
 	struct subid_range *ranges = NULL;
 	const struct subordinate_range *range;
 	struct commonio_db *db;
-	enum subid_status status;
 	int count = 0;
-	struct subid_nss_ops *h;
 	char id[ID_SIZE];
 	bool have_owner_id;
 
 	*in_ranges = NULL;
-
-	h = get_subid_nss_handle();
-	if (h) {
-		status = h->list_owner_ranges(owner, id_type, in_ranges, &count);
-		if (status == SUBID_STATUS_SUCCESS)
-			return count;
-		return -1;
-	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
