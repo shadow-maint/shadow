@@ -1036,6 +1036,91 @@ out:
 	return count;
 }
 
+/*
+ * int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range ***ranges)
+ *
+ * @owner: username
+ * @id_type: UID or GUID
+ * @ranges: pointer to array of ranges into which results will be placed.
+ *
+ * Fills in the subuid or subgid ranges which are owned by the specified
+ * user.  Username may be a username or a string representation of a
+ * UID number.  If id_type is UID, then subuids are returned, else
+ * subgids are given.
+
+ * Returns the number of ranges found, or < 0 on error.
+ *
+ * The caller must free the subordinate range list.
+ */
+int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **ranges)
+{
+	enum subid_status status;
+	int count = 0;
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h = NULL;
+	struct subid_range *our_ranges;
+	bool error = false;
+
+	*ranges = NULL;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return list_local_owner_ranges(owner, id_type, ranges);
+	}
+
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->list_owner_ranges(owner, id_type, ranges, &count);
+
+			if (status == SUBID_STATUS_SUCCESS) {
+				if (count > 0) {
+					our_ranges = malloc_T(count, struct subid_range);
+					if (!our_ranges)
+						goto fail;
+
+					memcpy(our_ranges, *ranges, count * sizeof(struct subid_range));
+					h->free(*ranges);
+					*ranges = our_ranges;
+				}
+				return count;
+			}
+			if (status == SUBID_STATUS_UNKNOWN_USER)
+				goto next;
+			if (status == SUBID_STATUS_ERROR || status == SUBID_STATUS_ERROR_CONN)
+				goto fail;
+		} else {
+			// Local "files" database.
+			count = list_local_owner_ranges(owner, id_type, ranges);
+			if (count > 0)
+				return count;
+			if (count == 0)
+				goto next;
+			if (count < 0)
+				goto fail;
+		}
+
+	fail:
+		error = true;
+
+	next:
+		if (*ranges) {
+			if (h)
+				h->free(*ranges);
+			else
+				free(*ranges);
+			*ranges = NULL;
+		}
+
+		if (error)
+			return -1;
+	}
+
+	// Searched all databases but 0 ranges found.
+	return 0;
+}
+
 static int append_uids(uid_t **uids, const char *owner, int n)
 {
 	int    i;
