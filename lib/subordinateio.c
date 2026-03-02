@@ -647,7 +647,11 @@ bool have_sub_uids(const char *owner, uid_t start, unsigned long count)
  */
 int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -657,7 +661,11 @@ int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_uid_remove (const char *owner, uid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -809,7 +817,11 @@ bool local_sub_gid_assigned(const char *owner)
  */
 int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -819,7 +831,11 @@ int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
 int sub_gid_remove (const char *owner, gid_t start, unsigned long count)
 {
-	if (get_subid_nss_handle()) {
+	struct subid_nss_db *db;
+
+	db = get_subid_nss_db();
+	if (db && db->ops) {
+		// NSS module configured and the first database is not "files".
 		errno = EOPNOTSUPP;
 		return 0;
 	}
@@ -1050,11 +1066,16 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse)
 {
 	struct commonio_db *db;
+	struct subid_nss_db *nss_db;
 	const struct subordinate_range *r;
 	bool ret;
 
-	if (get_subid_nss_handle())
+	nss_db = get_subid_nss_db();
+	if (nss_db && nss_db->ops) {
+		// NSS module configured and the first database is not "files".
+		errno = EOPNOTSUPP;
 		return false;
+	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
@@ -1123,10 +1144,15 @@ out:
 bool release_subid_range(struct subordinate_range *range, enum subid_type id_type)
 {
 	struct commonio_db *db;
+	struct subid_nss_db *nss_db;
 	bool ret;
 
-	if (get_subid_nss_handle())
+	nss_db = get_subid_nss_db();
+	if (nss_db && nss_db->ops) {
+		// NSS module configured and the first database is not "files".
+		errno = EOPNOTSUPP;
 		return false;
+	}
 
 	switch (id_type) {
 	case ID_TYPE_UID:
