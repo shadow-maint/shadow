@@ -193,3 +193,44 @@ def test_useradd__set_expire_date_with_empty_date(shadow: Shadow, expiration_dat
     assert result is not None, "User should be found"
     assert result.name == "tuser1", "Incorrect username"
     assert result.expiration_date is None, "Expiration date should be empty"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__additional_options(shadow: Shadow):
+    """
+    :title: Create user with comment, expiredate, inactive, shell and custom home
+    :setup:
+        1. Create user with multiple additional options
+    :steps:
+        1. Check passwd entry
+        2. Check shadow entry
+        3. Check home directory
+    :expectedresults:
+        1. Passwd attributes are correct
+        2. Shadow expiration and inactive values are correct
+        3. Home directory exists
+    :customerscenario: False
+    """
+
+    shadow.useradd(
+        "testuser "
+        "--comment 'comment testuser' "
+        "--expiredate 2006-02-04 "
+        "--shell /bin/bash "
+        "--inactive 12 "
+        "--home-dir /nonexistenthomedir"
+    )
+
+    passwd_entry = shadow.tools.getent.passwd("testuser")
+    assert passwd_entry is not None, "User should exist"
+    assert passwd_entry.name == "testuser"
+    assert passwd_entry.home == "/nonexistenthomedir"
+    assert passwd_entry.shell == "/bin/bash"
+    assert passwd_entry.gecos == "comment testuser"
+
+    shadow_entry = shadow.tools.getent.shadow("testuser")
+    assert shadow_entry is not None, "Shadow entry should exist"
+    assert shadow_entry.name == "testuser"
+    assert shadow_entry.expiration_date == 13183, f"Expected expiration_date 13183, got {shadow_entry.expiration_date}"
+    assert shadow_entry.inactivity_days == 12, "Inactive days should be 12"
+    assert shadow.fs.exists("/nonexistenthomedir"), "Home directory should exist"
