@@ -1200,6 +1200,71 @@ static int find_local_subid_owners(unsigned long id, enum subid_type id_type, ui
 	return n;
 }
 
+int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
+{
+	struct subid_nss_db *db;
+	struct subid_nss_ops *h;
+	enum subid_status status;
+	int n = 0;
+	int count = 0;
+	bool error = false;
+	uid_t *new_uids = NULL;
+	uid_t *all_uids = NULL;
+
+	*uids = NULL;
+
+	db = get_subid_nss_db();
+	if (!db) {
+		// No NSS module configured, search local files only.
+		return find_local_subid_owners(id, id_type, uids);
+	}
+
+	// Search for all databases and aggregate results.
+	for (; db; db = db->next) {
+		h = db->ops;
+		if (h) {
+			status = h->find_subid_owners(id, id_type, &new_uids, &count);
+			if (status != SUBID_STATUS_SUCCESS)
+				count = -1;
+		} else {
+			count = find_local_subid_owners(id, id_type, &new_uids);
+		}
+
+		if (count <= 0)
+			goto next;
+
+		if (count > 0) {
+			all_uids = reallocf_T(all_uids, n + count, uid_t);
+			if (!all_uids)
+				goto fail;
+			memcpy(all_uids + n, new_uids, count * sizeof(uid_t));
+			n += count;
+			goto next;
+		}
+
+	fail:
+		error = true;
+
+	next:
+		if (new_uids) {
+			if (h)
+				h->free(new_uids);
+			else
+				free(new_uids);
+			new_uids = NULL;
+		}
+
+		if (error) {
+			if (all_uids)
+				free(all_uids);
+			return -1;
+		}
+	}
+
+	*uids = all_uids;
+	return n;
+}
+
 bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse)
 {
 	struct commonio_db *db;
