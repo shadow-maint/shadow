@@ -25,18 +25,27 @@
 
 // NSS plugin handling for subids
 // If nsswitch has a line like
-//    subid: sssd
-// then sssd will be consulted for subids.  Unlike normal NSS dbs,
-// only one db is supported at a time.  That's open to debate, but
-// the subids are a pretty limited resource, and local files seem
-// bound to step on any other allocations leading to insecure
-// conditions.
+//    subid: sss
+// then the sss module (libsubid_sss.so) will be consulted for subids.
+// If nsswitch has a line specifying multiple databases, like:
+//    subid: sss files
+// then databases will be consulted in the specified order. The search
+// stops as soon as the user is found in a database, even if no subids
+// are defined there. For example, if 'sss' knows the user but provides
+// no subids, 'files' will not be consulted.
+//
+// While multiple databases are now supported, the subids are a pretty
+// limited resource. Mixing local files with network allocations
+// (like sssd) requires careful management. Misconfigurations would
+// lead to overlapping ID mappings. Use with caution.
+
 static atomic_flag nss_init_started;
 static atomic_bool nss_init_completed;
 
 static struct subid_nss_db *subid_nss_db_head;
 
-bool nss_is_initialized() {
+bool
+nss_is_initialized(void) {
 	return atomic_load(&nss_init_completed);
 }
 
@@ -113,15 +122,16 @@ close_lib:
 // nsswitch_path is an argument only to support testing.
 void
 nss_init(const char *nsswitch_path) {
-	struct subid_nss_db **tail = &subid_nss_db_head;
-	struct subid_nss_ops *ops;
-	struct subid_nss_db *new_db;
-	const char *delimiters = " \t\n";
-	char *token;
-	char    *line = NULL, *p;
-	char    libname[64];
-	FILE    *nssfp = NULL;
-	size_t  len = 0;
+	char                  libname[64];
+	char                  *line = NULL;
+	char                  *p;
+	char                  *token;
+	FILE                  *nssfp = NULL;
+	size_t                len = 0;
+	const char            *delimiters = " \t\n";
+	struct subid_nss_db   *new_db;
+	struct subid_nss_db   **tail = &subid_nss_db_head;
+	struct subid_nss_ops  *ops;
 
 	if (atomic_flag_test_and_set(&nss_init_started)) {
 		// Another thread has started nss_init, wait for it to complete
@@ -134,7 +144,7 @@ nss_init(const char *nsswitch_path) {
 		nsswitch_path = NSSWITCH;
 
 	// read nsswitch.conf to check for a line like:
-	//   subid:	files
+	//   subid:	sss files
 	nssfp = fopen(nsswitch_path, "r");
 	if (!nssfp) {
 		if (errno != ENOENT)
@@ -222,4 +232,3 @@ get_subid_nss_db(void) {
 	nss_init(NULL);
 	return subid_nss_db_head;
 }
-
