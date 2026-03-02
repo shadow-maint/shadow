@@ -690,11 +690,23 @@ uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
  */
 bool want_subuid_file(void)
 {
-	if (get_subid_nss_handle() != NULL)
-		return false;
+	struct subid_nss_db *db;
+
 	if (getdef_ulong("SUB_UID_COUNT", 65536) == 0)
 		return false;
-	return true;
+
+	db = get_subid_nss_db();
+	if (db == NULL)
+		return true;
+
+	for (; db; db = db->next) {
+		if (db->ops == NULL) {
+			// Local "files" database is used.
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /*
@@ -705,11 +717,23 @@ bool want_subuid_file(void)
  */
 bool want_subgid_file(void)
 {
-	if (get_subid_nss_handle() != NULL)
-		return false;
+	struct subid_nss_db *db;
+
 	if (getdef_ulong("SUB_GID_COUNT", 65536) == 0)
 		return false;
-	return true;
+
+	db = get_subid_nss_db();
+	if (db == NULL)
+		return true;
+
+	for (; db; db = db->next) {
+		if (db->ops == NULL) {
+			// Local "files" database is used.
+			return true;
+		}
+	}
+
+	return false;
 }
 
 static struct commonio_db subordinate_gid_db = {
