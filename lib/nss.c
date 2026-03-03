@@ -94,11 +94,12 @@ nss_init(const char *nsswitch_path) {
 	if (p == NULL) {
 		goto null_subid;
 	}
-	if (stpsep(p, " \t\n") == NULL) {
+	if (stpsep(p, "\n") == NULL) {
 		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
 		// subid_nss has to be null here, but to ease reviews:
 		goto null_subid;
 	}
+	stpsep(p, " \t");
 	if (streq(p, "files")) {
 		goto null_subid;
 	}
