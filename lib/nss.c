@@ -79,23 +79,23 @@ nss_init(const char *nsswitch_path) {
 	}
 	p = NULL;
 	while (getline(&line, &len, nssfp) != -1) {
+		if (stpsep(line, "\n") == NULL) {
+			fprintf(log_get_logfd(), "%s: Non-text file.\n", nsswitch_path);
+			goto null_subid;
+		}
 		if (strprefix(line, "#"))
 			continue;
-		if (strlen(line) < 8)
+		if (strlen(line) < 7)
 			continue;
 		if (!strcaseprefix(line, "subid:"))
 			continue;
 		p = &line[6];
-		p = stpspn(p, " \t\n");
+		p = stpspn(p, " \t");
 		if (!streq(p, ""))
 			break;
 		p = NULL;
 	}
 	if (p == NULL) {
-		goto null_subid;
-	}
-	if (stpsep(p, "\n") == NULL) {
-		fprintf(log_get_logfd(), "%s: Non-text file.\n", nsswitch_path);
 		goto null_subid;
 	}
 	stpsep(p, " \t");
