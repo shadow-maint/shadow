@@ -77,9 +77,6 @@
 #define Y_COST_MAX 11
 #endif
 
-/* Fixed salt len for md5crypt. */
-#define MD5_CRYPT_SALT_SIZE 8
-
 /* Generate salt of size salt_size. */
 #define MAX_SALT_SIZE 44
 #define MIN_SALT_SIZE 8
@@ -355,12 +352,13 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 
 	bzero(result, GENSALT_SETTING_SIZE);
 
-	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "DES";
+	method = meth ?: getdef_str("ENCRYPT_METHOD") ?: "SHA512";
 
-	if (streq(method, "MD5")) {
-		MAGNUM(result, '1');
-		salt_len = MD5_CRYPT_SALT_SIZE;
-		rounds = 0;
+	if (streq(method, "SHA256")) {
+		MAGNUM(result, '5');
+		salt_len = SHA_CRYPT_SALT_SIZE;
+		rounds = SHA_get_salt_rounds (arg);
+		SHA_salt_rounds_to_buf (result, rounds);
 #ifdef USE_BCRYPT
 	} else if (streq(method, "BCRYPT")) {
 		BCRYPTMAGNUM(result);
@@ -375,39 +373,21 @@ static /*@observer@*/const char *gensalt (size_t salt_size)
 		rounds = YESCRYPT_get_salt_cost (arg);
 		YESCRYPT_salt_cost_to_buf (result, rounds);
 #endif /* USE_YESCRYPT */
-	} else if (streq(method, "SHA256")) {
-		MAGNUM(result, '5');
-		salt_len = SHA_CRYPT_SALT_SIZE;
-		rounds = SHA_get_salt_rounds (arg);
-		SHA_salt_rounds_to_buf (result, rounds);
 	} else if (streq(method, "SHA512")) {
+sha512:
 		MAGNUM(result, '6');
 		salt_len = SHA_CRYPT_SALT_SIZE;
 		rounds = SHA_get_salt_rounds (arg);
 		SHA_salt_rounds_to_buf (result, rounds);
-	} else if (!streq(method, "DES")) {
+	} else {
 		fprintf (log_get_logfd(),
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
-			   "Defaulting to DES.\n"),
+			   "Defaulting to SHA512.\n"),
 			 method);
-		salt_len = MAX_SALT_SIZE;
-		rounds = 0;
-		bzero(result, GENSALT_SETTING_SIZE);
+		goto sha512;
 	}
 
 #if USE_XCRYPT_GENSALT
-	/*
-	 * Prepare DES setting for crypt_gensalt(), if result
-	 * has not been filled with anything previously.
-	 */
-	if (streq(result, "")) {
-		/* Avoid -Wunused-but-set-variable. */
-		salt_len = GENSALT_SETTING_SIZE - 1;
-		rounds = 0;
-		memset(result, '.', salt_len);
-		stpcpy(&result[salt_len], "");
-	}
-
 	char *retval = crypt_gensalt (result, rounds, NULL, 0);
 
 	/* Should not happen, but... */

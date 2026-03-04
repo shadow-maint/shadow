@@ -129,8 +129,7 @@ static void usage (int status)
 #ifndef USE_PAM
 	(void) fprintf (usageout,
 	                _("  -c, --crypt-method METHOD     the crypt method (one of %s)\n"),
-	                "NONE DES MD5"
-	                " SHA256 SHA512"
+	                "NONE SHA256 SHA512"
 #if defined(USE_BCRYPT)
 	                " BCRYPT"
 #endif
@@ -733,9 +732,7 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (   !streq(crypt_method, "DES")
-		    && !streq(crypt_method, "MD5")
-		    && !streq(crypt_method, "NONE")
+		if (   !streq(crypt_method, "NONE")
 		    && !streq(crypt_method, "SHA256")
 		    && !streq(crypt_method, "SHA512")
 #ifdef USE_BCRYPT
