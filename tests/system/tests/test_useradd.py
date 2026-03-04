@@ -234,3 +234,31 @@ def test_useradd__additional_options(shadow: Shadow):
     assert shadow_entry.expiration_date == 13183, f"Expected expiration_date 13183, got {shadow_entry.expiration_date}"
     assert shadow_entry.inactivity_days == 12, "Inactive days should be 12"
     assert shadow.fs.exists("/nonexistenthomedir"), "Home directory should exist"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__specified_uid(shadow: Shadow):
+    """
+    :title: Add a new user with a specific UID
+    :setup:
+        1. Create user with custom UID 4242
+    :steps:
+        1. Check passwd entry
+        2. Check group entry
+    :expectedresults:
+        1. Passwd entry has UID 4242
+        2. Group entry matching 4242
+    :customerscenario: False
+    """
+    shadow.useradd("test1 -u 4242")
+
+    passwd_entry = shadow.tools.getent.passwd("test1")
+    assert passwd_entry is not None, "User test1 should be found in passwd"
+    assert passwd_entry.name == "test1", "Incorrect username"
+    assert passwd_entry.uid == 4242, f"Incorrect UID (expected 4242, got {passwd_entry.uid})"
+    assert passwd_entry.gid == 4242, f"Incorrect GID (expected 4242, got {passwd_entry.gid})"
+
+    group_entry = shadow.tools.getent.group("test1")
+    assert group_entry is not None, "Group test1 should be found"
+    assert group_entry.name == "test1", "Incorrect group name"
+    assert group_entry.gid == 4242, f"Incorrect GID (expected 4242, got {group_entry.gid})"
