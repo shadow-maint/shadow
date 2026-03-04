@@ -26,6 +26,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 
 
@@ -172,7 +173,7 @@ static /*@observer@*/void SHA_salt_rounds_to_buf (char *buf, unsigned long round
 	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 17);
 
-	(void) snprintf (buf + buf_begin, 18, "rounds=%lu$", rounds);
+	stprintf(buf + buf_begin, 18, "rounds=%lu$", rounds);
 }
 
 #ifdef USE_BCRYPT
@@ -250,7 +251,7 @@ static /*@observer@*/void BCRYPT_salt_rounds_to_buf (char *buf, unsigned long ro
 	 */
 	assert (GENSALT_SETTING_SIZE > buf_begin + 3);
 
-	(void) snprintf (buf + buf_begin, 4, "%2.2lu$", rounds);
+	stprintf(buf + buf_begin, 4, "%2.2lu$", rounds);
 }
 #endif /* USE_BCRYPT */
 
