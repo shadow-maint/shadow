@@ -8,19 +8,21 @@
 
 #include "config.h"
 
+#include <stddef.h>
 #include <stdlib.h>
 
-#include "search/cmp/cmp.h"
 #include "sizeof.h"
 
 
 // qsort_T - sort type-safe
 #define qsort_T(T, ...)         qsort_T_(typeas(T), __VA_ARGS__)
-#define qsort_T_(T, a, n, cmp)  do                                    \
+#define qsort_T_(T, ...)                                              \
+((static inline void                                                  \
+  (size_t n;                                                          \
+   T a[n], size_t n, int (*cmp)(const T *, const T *)))               \
 {                                                                     \
-	_Generic(a, T *: (void)0);                                    \
 	qsort(a, n, sizeof(T), cmp);                                  \
-} while (0)
+}(__VA_ARGS__))
 
 #define QSORT(T, ...)  qsort_T(T, __VA_ARGS__, CMP(T))
 
