@@ -65,6 +65,10 @@ Don't use some libc functions without Really Good Reasons:
 	strtok(3) has internal state, which makes it very difficult to
 	understand.
 
+    strtok_r(3)
+	Use strsep(3) or stpsep() instead.
+	strtok_r(3)'s behavior is difficult to understand.
+
 
 Specific guidelines:
 ====================
