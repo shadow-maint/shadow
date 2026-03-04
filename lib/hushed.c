@@ -60,7 +60,7 @@ bool hushed (const char *username)
 	 * file exists in the user's home directory.
 	 */
 
-	if (hushfile[0] != '/') {
+	if (!strspn(hushfile, "/")) {
 		stprintf_a(buf, "%s/%s", pw->pw_dir, hushfile);
 		return (access (buf, F_OK) == 0);
 	}
