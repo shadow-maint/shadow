@@ -30,7 +30,8 @@
 #include "shadowlog.h"
 #include <sys/resource.h>
 
-#include "atoi/a2i.h"
+#include <a2i.h>
+
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"

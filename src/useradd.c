@@ -33,8 +33,9 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <a2i.h>
+
 #include "alloc/malloc.h"
-#include "atoi/a2i.h"
 #include "atoi/getnum.h"
 #include "chkname.h"
 #include "defines.h"

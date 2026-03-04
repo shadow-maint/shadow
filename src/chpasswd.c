@@ -19,10 +19,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <a2i.h>
+
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
-#include "atoi/a2i.h"
 #include "chkhash.h"
 #include "defines.h"
 #include "nscd.h"
