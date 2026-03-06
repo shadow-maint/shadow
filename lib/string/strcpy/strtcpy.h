@@ -22,13 +22,14 @@
 
 
 ATTR_STRING(2)
-inline ssize_t strtcpy(char *restrict dst, const char *restrict src,
-    size_t dsize);
+inline ssize_t strtcpy(size_t dsize;
+    char dst[restrict dsize], const char *restrict src, size_t dsize);
 
 
 // strtcpy - string truncate copy
 inline ssize_t
-strtcpy(char *restrict dst, const char *restrict src, size_t dsize)
+strtcpy(size_t dsize;
+    char dst[restrict dsize], const char *restrict src, size_t dsize)
 {
 	bool    trunc;
 	size_t  dlen, slen;
