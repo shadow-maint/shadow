@@ -63,6 +63,7 @@
 #include "string/strcmp/strcaseeq.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
+#include "string/strspn/strrspn.h"
 #include "string/strspn/stprspn.h"
 #include "string/strtok/stpsep.h"
 
@@ -315,7 +316,7 @@ static bool from_match (char *tok, const char *string)
 	} else if (strcaseeq(tok, "LOCAL")) {	/* LOCAL: no dots */
 		if (!strchr(string, '.'))
 			return true;
-	} else if (   (!streq(tok, "") && tok[strlen(tok) - 1] == '.') /* network */
+	} else if (   strrspn_(tok, ".")  /* network */
 		   && strprefix(resolve_hostname(string), tok)) {
 		return true;
 	}
