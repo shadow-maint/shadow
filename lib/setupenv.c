@@ -32,7 +32,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strspn/stpspn.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 #ifndef USE_PAM

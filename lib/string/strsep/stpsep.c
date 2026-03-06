@@ -4,7 +4,7 @@
 
 #include "config.h"
 
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 extern inline char *stpsep(char *s, const char *delim);

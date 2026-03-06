@@ -36,7 +36,7 @@
 #include "string/memset/memzero.h"
 #include "string/strcmp/streq.h"
 #include "string/strerrno.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 /*

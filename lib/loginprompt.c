@@ -23,7 +23,7 @@
 #include "string/memset/memzero.h"
 #include "string/strcpy/strtcpy.h"
 #include "string/strspn/stpspn.h"
-#include "string/strtok/stpsep.h"
+#include "string/strsep/stpsep.h"
 
 
 static void
