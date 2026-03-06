@@ -40,6 +40,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "io/fgets/fgets.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -1021,7 +1022,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets(buf, sizeof(buf), stdin) != NULL) {
+	while (fgets_a(buf, stdin) != NULL) {
 		line++;
 		if (stpsep(buf, "\n") == NULL && feof(stdin) == 0) {
 			fprintf (stderr, _("%s: line %jd: line too long\n"),
