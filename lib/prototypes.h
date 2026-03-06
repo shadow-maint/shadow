@@ -228,6 +228,11 @@ extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 extern void nss_init(const char *nsswitch_path);
 extern bool nss_is_initialized(void);
 
+struct subid_nss_db {
+	struct subid_nss_ops *ops;
+	struct subid_nss_db *next;
+};
+
 struct subid_nss_ops {
 	/*
 	 * nss_has_range: does a user own a given subid range
@@ -289,7 +294,7 @@ struct subid_nss_ops {
 	void *handle;
 };
 
-extern struct subid_nss_ops *get_subid_nss_handle(void);
+extern struct subid_nss_db *get_subid_nss_db(void);
 
 
 /* pam_pass_non_interactive.c */

@@ -41,20 +41,26 @@
     <para>
       The delegation of the subordinate uids can be configured via the
       <replaceable>subid</replaceable> field in
-      <filename>/etc/nsswitch.conf</filename> file. Only one value can be set
-      as the delegation source. Setting this field to
-      <replaceable>files</replaceable> configures the delegation of uids to
-      <filename>/etc/subuid</filename>. Setting any other value treats
-      the delegation as a plugin following with a name of the form
-      <replaceable>libsubid_$value.so</replaceable>. If the value or plugin is
-      missing, then the subordinate uid delegation falls back to
+      <filename>/etc/nsswitch.conf</filename> file. Multiple values can be
+      specified, separated by whitespace. These values will be consulted in order.
+      Setting this field to <replaceable>files</replaceable> configures the
+      delegation of uids to <filename>/etc/subuid</filename>. Setting any other
+      value treats the delegation as a plugin following with a name of the form
+      <replaceable>libsubid_$value.so</replaceable>. If the plugin is missing
+      or fails to load, it is ignored. If no plugin configures successfully,
+      the subordinate uid delegation falls back to
       <replaceable>files</replaceable>.
     </para>
     <para>
-      Note, that <command>newusers</command>, <command>useradd</command>, and
+      Note that the search stops as soon as the user exists in a delegation
+      database, even if no subids are defined for that user there.
+    </para>
+    <para>
+      Also note, that <command>newusers</command>, <command>useradd</command>, and
       <command>usermod</command> will only create entries in
-      <filename>/etc/subuid</filename> if subid delegation is managed via subid
-      files.
+      <filename>/etc/subuid</filename> if the <replaceable>subid</replaceable>
+      delegation is not configured or <replaceable>files</replaceable> is the
+      first configured value.
     </para>
   </refsect1>
 

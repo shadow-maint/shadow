@@ -14,8 +14,11 @@ export LD_LIBRARY_PATH=.:${build_path}/lib/.libs:$LD_LIBRARY_PATH
 ./test_nss 1
 ./test_nss 2
 ./test_nss 3
+./test_nss 4
+./test_nss 5
 
 unshare -Urm ./test_range
+unshare -Urm ./test_list
 
 log_status "$0" "SUCCESS"
 
