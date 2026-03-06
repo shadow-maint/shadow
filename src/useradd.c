@@ -42,6 +42,7 @@
 #include "fs/mkstemp/fmkomstemp.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "list.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwauth.h"
