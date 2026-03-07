@@ -247,7 +247,6 @@ static int create_backup (const char *name, FILE * fp)
 	struct stat sb;
 	struct utimbuf ub;
 	FILE *bkfp;
-	int c;
 
 	stprintf_a(tmpf, "%s.cioXXXXXX", name);
 	if (fstat (fileno (fp), &sb) != 0) {
@@ -259,16 +258,29 @@ static int create_backup (const char *name, FILE * fp)
 		return -1;
 	}
 
-	/* TODO: faster copy, not one-char-at-a-time.  --marekm */
-	c = 0;
-	if (fseek (fp, 0, SEEK_SET) == 0) {
-		while ((c = getc (fp)) != EOF) {
-			if (putc (c, bkfp) == EOF) {
-				break;
+	if (fseek (fp, 0, SEEK_SET) != 0) {
+		(void) fclose (bkfp);
+		unlink(tmpf);
+		return -1;
+	}
+	{
+		char buf[BUFSIZ];
+		size_t n;
+
+		while ((n = fread (buf, 1, sizeof buf, fp)) > 0) {
+			if (fwrite (buf, 1, n, bkfp) != n) {
+				(void) fclose (bkfp);
+				unlink(tmpf);
+				return -1;
 			}
 		}
+		if (ferror (fp) != 0) {
+			(void) fclose (bkfp);
+			unlink(tmpf);
+			return -1;
+		}
 	}
-	if ((c != EOF) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
+	if (fflush (bkfp) != 0) {
 		(void) fclose (bkfp);
 		unlink(tmpf);
 		return -1;
