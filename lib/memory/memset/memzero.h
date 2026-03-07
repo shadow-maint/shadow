@@ -27,9 +27,7 @@ inline void *memzero(void *ptr, size_t size);
 inline void *
 memzero(void *ptr, size_t size)
 {
-#if defined(HAVE_MEMSET_EXPLICIT)
-	memset_explicit(ptr, 0, size);
-#elif defined(HAVE_EXPLICIT_BZERO)
+#if defined(HAVE_EXPLICIT_BZERO)
 	explicit_bzero(ptr, size);
 #else
 	bzero(ptr, size);
