@@ -10,4 +10,3 @@
 
 
 extern inline void *memzero_(volatile void *ptr, size_t size);
-extern inline char *strzero_(volatile char *s);
