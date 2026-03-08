@@ -54,6 +54,9 @@
 )
 
 
+#define QVoidptrof_(p)  typeof(1?(p):(void*){0})
+#define QVoid_of(p)     typeof((QVoidptrof(p)){0}[0])
+
 #define CQChar_of(s)  typeof                                          \
 (                                                                     \
 	_Generic(s,                                                   \
