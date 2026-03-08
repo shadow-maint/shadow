@@ -64,6 +64,7 @@
 	)                                                             \
 )
 #define CQChar_of(s)    QChar_of(const, s)
+#define VQChar_of(s)    QChar_of(volatile, s)
 
 
 #endif  // include guard
