@@ -14,14 +14,18 @@
 #include "memory/memset/memzero.h"
 
 
-inline char *strzero(char *s);
+// strzero - string zero (explicit)
+#define strzero(s)       ((VQChar_of(s) *) strzero_(s))
+
+
+inline char *strzero_(volatile char *s);
 
 
 // strzero - string zero (explicit)
 inline char *
-strzero(char *s)
+strzero_(volatile char *s)
 {
-	return memzero(s, strlen(s));
+	return (char *) memzero(s, strlen(s));
 }
 
 

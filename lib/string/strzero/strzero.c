@@ -7,4 +7,4 @@
 #include "string/strzero/strzero.h"
 
 
-extern inline char *strzero(char *s);
+extern inline char *strzero_(volatile char *s);
