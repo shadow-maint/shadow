@@ -22,11 +22,15 @@
 // memzero - memory zero (explicit)
 #define memzero(p, ...)  ((QVoid_of(p) *) memzero_(p, __VA_ARGS__))
 // strzero - string zero (explicit)
-#define strzero(s)       ((VQChar_of(s) *) strzero_(s))
+#define strzero(s)                                                    \
+({                                                                    \
+	VQChar_of(s)  *s_ = s;                                        \
+	                                                              \
+	memzero(s_, strlen(s_));                                      \
+})
 
 
 inline void *memzero_(volatile void *ptr, size_t size);
-inline char *strzero_(volatile char *s);
 
 
 inline void *
@@ -34,13 +38,6 @@ memzero_(volatile void *ptr, size_t size)
 {
 	explicit_bzero((void *) ptr, size);
 	return (void *) ptr;
-}
-
-
-inline char *
-strzero_(volatile char *s)
-{
-	return (char *) memzero(s, strlen(s));
 }
 
 
