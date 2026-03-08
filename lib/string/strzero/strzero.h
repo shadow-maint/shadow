@@ -15,18 +15,12 @@
 
 
 // strzero - string zero (explicit)
-#define strzero(s)       ((VQChar_of(s) *) strzero_(s))
-
-
-inline volatile char *strzero_(volatile char *s);
-
-
-// strzero - string zero (explicit)
-inline volatile char *
-strzero_(volatile char *s)
-{
-	return memzero_explicit(s, strlen(s));
-}
+#define strzero(s)                                                    \
+({                                                                    \
+	VQChar_of(s)  *s_ = s;                                        \
+	                                                              \
+	memzero_explicit(s_, strlen(s_));                                      \
+})
 
 
 #endif  // include guard
