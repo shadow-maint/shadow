@@ -40,10 +40,8 @@
 
 #define Qchar_of(Q, s)   typeof                                       \
 (                                                                     \
-	_Generic(s,                                                   \
-		Q char *:  (Q char){0},                               \
+	_Generic((Qvoid_of(s) *){0},                                  \
 		Q void *:  (Q char){0},                               \
-		char *:    (char){0},                                 \
 		void *:    (char){0}                                  \
 	)                                                             \
 )
