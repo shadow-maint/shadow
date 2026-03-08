@@ -13,30 +13,34 @@
 #include <string.h>
 
 #include "sizeof.h"
+#include "typetraits.h"
 
 
 // memzero_a - memory zero (explicit) array
 #define memzero_a(arr)  memzero(arr, sizeof_a(arr))
 
-
-inline void *memzero(void *ptr, size_t size);
-inline char *strzero(char *s);
-
-
 // memzero - memory zero (explicit)
+#define memzero(p, ...)  ((QVoid_of(p) *) memzero_(p, __VA_ARGS__))
+// strzero - string zero (explicit)
+#define strzero(s)       ((VQChar_of(s) *) strzero_(s))
+
+
+inline void *memzero_(volatile void *ptr, size_t size);
+inline char *strzero_(volatile char *s);
+
+
 inline void *
-memzero(void *ptr, size_t size)
+memzero_(volatile void *ptr, size_t size)
 {
-	explicit_bzero(ptr, size);
-	return ptr;
+	explicit_bzero((void *) ptr, size);
+	return (void *) ptr;
 }
 
 
-// strzero - string zero (explicit)
 inline char *
-strzero(char *s)
+strzero_(volatile char *s)
 {
-	return memzero(s, strlen(s));
+	return (char *) memzero(s, strlen(s));
 }
 
 
