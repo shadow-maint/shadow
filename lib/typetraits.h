@@ -54,7 +54,7 @@
 )
 
 
-#define QChar_of(s)  typeof                                           \
+#define CQChar_of(s)  typeof                                          \
 (                                                                     \
 	_Generic(s,                                                   \
 		const char *:  (const char){0},                       \
