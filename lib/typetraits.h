@@ -35,6 +35,9 @@
 )
 
 
+#define Qvoidptr_of_(p)  typeof(1?(p):(void*){0})
+#define Qvoid_of(p)      typeof((Qvoidptr_of_(p)){0}[0])
+
 #define Qchar_of(Q, s)   typeof                                       \
 (                                                                     \
 	_Generic(s,                                                   \
