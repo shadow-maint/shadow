@@ -50,3 +50,5 @@ test-driver
 __pycache__/
 tests/system/artifacts/
 tests/system/pytest.log
+tests/**/tmp/
+tests/testsuite.log

@@ -1253,6 +1253,12 @@ run_test ./subids/68_invalid_subuid_file2/useradd.test
 run_test ./subids/69_invalid_subuid_file3/useradd.test
 run_test ./subids/70_invalid_subuid_file4/useradd.test
 run_test ./subids/71_useradd_subids_for_system/useradd.test
+run_test ./subids/72_userdel_uid_based_subuid_range/userdel.test
+run_test ./subids/73_userdel_uid_and_name_based_ranges/userdel.test
+run_test ./subids/74_useradd_subuid_store_by_uid/useradd.test
+run_test ./subids/75_usermod_create_subuid_range_by_uid/usermod.test
+run_test ./subids/76_usermod_remove_uid_based_subuid_range/usermod.test
+run_test ./subids/77_newusers_subuid_store_by_uid/newusers.test
 run_test ./newuidmap/01_newuidmap/newuidmap.test
 run_test ./newuidmap/02_newuidmap_relaxed_gid_check/newuidmap.test
 run_test ./newgidmap/01_newgidmap/newgidmap.test

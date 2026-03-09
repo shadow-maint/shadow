@@ -1,0 +1,1 @@
+login.defs with SUB_UID_STORE_BY_UID=yes and SUB_GID_STORE_BY_UID=yes; newusers adds user with subids stored by UID number

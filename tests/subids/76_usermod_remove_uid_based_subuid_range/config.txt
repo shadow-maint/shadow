@@ -1,0 +1,1 @@
+user foo with UID 1000, subordinate UIDs and GIDs stored by UID number (1000:100000:10000)
