@@ -661,17 +661,43 @@ static void update_user (bool process_selinux)
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
 #ifdef ENABLE_SUBIDS
-	if (is_sub_uid && sub_uid_remove(user_name, 0, ULONG_MAX) == 0) {
-		fprintf (stderr,
-			_("%s: cannot remove entry %lu from %s\n"),
-			Prog, (unsigned long)user_id, sub_uid_dbname ());
-		fail_exit (E_SUB_UID_UPDATE, process_selinux);
+	if (is_sub_uid) {
+		char *sub_uid_owner_id = xaprintf ("%u", (unsigned int) user_id);
+
+		if (sub_uid_remove(user_name, 0, ULONG_MAX) == 0) {
+			fprintf (stderr,
+				_("%s: cannot remove entry %lu from %s\n"),
+				Prog, (unsigned long)user_id, sub_uid_dbname ());
+			free (sub_uid_owner_id);
+			fail_exit (E_SUB_UID_UPDATE, process_selinux);
+		}
+		if (sub_uid_remove(sub_uid_owner_id, 0, ULONG_MAX) == 0) {
+			fprintf (stderr,
+				_("%s: cannot remove entry %lu from %s\n"),
+				Prog, (unsigned long)user_id, sub_uid_dbname ());
+			free (sub_uid_owner_id);
+			fail_exit (E_SUB_UID_UPDATE, process_selinux);
+		}
+		free (sub_uid_owner_id);
 	}
-	if (is_sub_gid && sub_gid_remove(user_name, 0, ULONG_MAX) == 0) {
-		fprintf (stderr,
-			_("%s: cannot remove entry %lu from %s\n"),
-			Prog, (unsigned long)user_id, sub_gid_dbname ());
-		fail_exit (E_SUB_GID_UPDATE, process_selinux);
+	if (is_sub_gid) {
+		char *sub_gid_owner_id = xaprintf ("%u", (unsigned int) user_id);
+
+		if (sub_gid_remove(user_name, 0, ULONG_MAX) == 0) {
+			fprintf (stderr,
+				_("%s: cannot remove entry %lu from %s\n"),
+				Prog, (unsigned long)user_id, sub_gid_dbname ());
+			free (sub_gid_owner_id);
+			fail_exit (E_SUB_GID_UPDATE, process_selinux);
+		}
+		if (sub_gid_remove(sub_gid_owner_id, 0, ULONG_MAX) == 0) {
+			fprintf (stderr,
+				_("%s: cannot remove entry %lu from %s\n"),
+				Prog, (unsigned long)user_id, sub_gid_dbname ());
+			free (sub_gid_owner_id);
+			fail_exit (E_SUB_GID_UPDATE, process_selinux);
+		}
+		free (sub_gid_owner_id);
 	}
 #endif				/* ENABLE_SUBIDS */
 #ifdef WITH_AUDIT

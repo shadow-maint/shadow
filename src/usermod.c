@@ -2265,6 +2265,7 @@ int main (int argc, char **argv)
 
 	if (Vflg) {
 		struct id_range_list_entry  *ptr;
+		char *sub_uid_owner_id = xaprintf ("%u", (unsigned int) user_id);
 
 		for (ptr = del_sub_uids; ptr != NULL; ptr = ptr->next) {
 			id_t  count = ptr->range.last - ptr->range.first + 1;
@@ -2276,29 +2277,47 @@ int main (int argc, char **argv)
 				        (uintmax_t) ptr->range.first,
 				        (uintmax_t) ptr->range.last,
 				        sub_uid_dbname());
+				free (sub_uid_owner_id);
+				fail_exit (E_SUB_UID_UPDATE, process_selinux);
+			}
+			if (sub_uid_remove(sub_uid_owner_id, ptr->range.first, count) == 0) {
+				fprintf(stderr,
+				        _("%s: failed to remove uid range %ju-%ju from '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_uid_dbname());
+				free (sub_uid_owner_id);
 				fail_exit (E_SUB_UID_UPDATE, process_selinux);
 			}
 		}
+		free (sub_uid_owner_id);
 	}
 	if (vflg) {
 		struct id_range_list_entry  *ptr;
+		char *sub_uid_owner = getdef_bool ("SUB_UID_STORE_BY_UID")
+		                      ? xaprintf ("%u", (unsigned int) user_newid)
+		                      : xstrdup (user_newname);
 
 		for (ptr = add_sub_uids; ptr != NULL; ptr = ptr->next) {
 			id_t  count = ptr->range.last - ptr->range.first + 1;
 
-			if (sub_uid_add(user_name, ptr->range.first, count) == 0) {
+			if (sub_uid_add(sub_uid_owner, ptr->range.first, count) == 0) {
 				fprintf(stderr,
 				        _("%s: failed to add uid range %ju-%ju to '%s'\n"),
 				        Prog,
 				        (uintmax_t) ptr->range.first,
 				        (uintmax_t) ptr->range.last,
 				        sub_uid_dbname());
+				free (sub_uid_owner);
 				fail_exit (E_SUB_UID_UPDATE, process_selinux);
 			}
 		}
+		free (sub_uid_owner);
 	}
 	if (Wflg) {
 		struct id_range_list_entry  *ptr;
+		char *sub_gid_owner_id = xaprintf ("%u", (unsigned int) user_id);
 
 		for (ptr = del_sub_gids; ptr != NULL; ptr = ptr->next) {
 			id_t  count = ptr->range.last - ptr->range.first + 1;
@@ -2310,26 +2329,43 @@ int main (int argc, char **argv)
 				        (uintmax_t) ptr->range.first,
 				        (uintmax_t) ptr->range.last,
 				        sub_gid_dbname());
+				free (sub_gid_owner_id);
+				fail_exit (E_SUB_GID_UPDATE, process_selinux);
+			}
+			if (sub_gid_remove(sub_gid_owner_id, ptr->range.first, count) == 0) {
+				fprintf(stderr,
+				        _("%s: failed to remove gid range %ju-%ju from '%s'\n"),
+				        Prog,
+				        (uintmax_t) ptr->range.first,
+				        (uintmax_t) ptr->range.last,
+				        sub_gid_dbname());
+				free (sub_gid_owner_id);
 				fail_exit (E_SUB_GID_UPDATE, process_selinux);
 			}
 		}
+		free (sub_gid_owner_id);
 	}
 	if (wflg) {
 		struct id_range_list_entry  *ptr;
+		char *sub_gid_owner = getdef_bool ("SUB_GID_STORE_BY_UID")
+		                      ? xaprintf ("%u", (unsigned int) user_newid)
+		                      : xstrdup (user_newname);
 
 		for (ptr = add_sub_gids; ptr != NULL; ptr = ptr->next) {
 			id_t  count = ptr->range.last - ptr->range.first + 1;
 
-			if (sub_gid_add(user_name, ptr->range.first, count) == 0) {
+			if (sub_gid_add(sub_gid_owner, ptr->range.first, count) == 0) {
 				fprintf(stderr,
 				        _("%s: failed to add gid range %ju-%ju to '%s'\n"),
 				        Prog,
 				        (uintmax_t) ptr->range.first,
 				        (uintmax_t) ptr->range.last,
 				        sub_gid_dbname());
+				free (sub_gid_owner);
 				fail_exit (E_SUB_GID_UPDATE, process_selinux);
 			}
 		}
+		free (sub_gid_owner);
 	}
 #endif				/* ENABLE_SUBIDS */
 	close_files (&flags);

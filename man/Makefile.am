@@ -183,7 +183,9 @@ login_defs_v = \
 	USERGROUPS_ENAB.xml \
 	USE_TCB.xml \
 	SUB_GID_COUNT.xml \
+	SUB_GID_STORE_BY_UID.xml \
 	SUB_UID_COUNT.xml \
+	SUB_UID_STORE_BY_UID.xml \
 	SYS_GID_MAX.xml \
 	SYS_UID_MAX.xml \
 	YESCRYPT_COST_FACTOR.xml
