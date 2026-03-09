@@ -1646,18 +1646,20 @@ static void open_files (bool process_selinux)
 		         Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
-	if (is_shadow_pwd && (spw_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, spw_dbname ());
-		fail_exit (E_PW_UPDATE, process_selinux);
-	}
-	spw_locked = true;
-	if (is_shadow_pwd && (spw_open (O_CREAT | O_RDWR) == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"),
-		         Prog, spw_dbname ());
-		fail_exit (E_PW_UPDATE, process_selinux);
+	if (is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg)) {
+		if (spw_lock () == 0) {
+			fprintf (stderr,
+				_("%s: cannot lock %s; try again later.\n"),
+				Prog, spw_dbname ());
+			fail_exit (E_PW_UPDATE, process_selinux);
+		}
+		spw_locked = true;
+		if (is_shadow_pwd && (spw_open (O_CREAT | O_RDWR) == 0)) {
+			fprintf (stderr,
+				_("%s: cannot open %s\n"),
+				Prog, spw_dbname ());
+			fail_exit (E_PW_UPDATE, process_selinux);
+		}
 	}
 
 	if (Gflg || lflg) {
