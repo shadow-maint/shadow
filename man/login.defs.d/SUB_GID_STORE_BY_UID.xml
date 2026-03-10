@@ -1,0 +1,16 @@
+<!--
+   SPDX-FileCopyrightText: 2026, shadow-utils contributors
+   SPDX-License-Identifier: BSD-3-Clause
+-->
+<varlistentry condition="subids">
+  <term><option>SUB_GID_STORE_BY_UID</option> (boolean)</term>
+  <listitem>
+    <para>
+      If set to <replaceable>yes</replaceable>,
+      subordinate group ID entries in <filename>/etc/subgid</filename>
+      are stored using the numeric user ID
+      rather than the username.
+      The default value is <replaceable>no</replaceable>.
+    </para>
+  </listitem>
+</varlistentry>
