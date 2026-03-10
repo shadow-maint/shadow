@@ -666,13 +666,22 @@ NORETURN
 static void
 fail_exit (int code, bool process_selinux)
 {
-	if (gr_locked) {
-		if (gr_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
+#ifdef ENABLE_SUBIDS
+	if (sub_gid_locked) {
+		if (sub_gid_unlock (process_selinux) == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
 			/* continue */
 		}
 	}
+	if (sub_uid_locked) {
+		if (sub_uid_unlock (process_selinux) == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
+			/* continue */
+		}
+	}
+#endif				/* ENABLE_SUBIDS */
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
 		if (sgr_unlock (process_selinux) == 0) {
@@ -682,6 +691,13 @@ fail_exit (int code, bool process_selinux)
 		}
 	}
 #endif
+	if (gr_locked) {
+		if (gr_unlock (process_selinux) == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
+			/* continue */
+		}
+	}
 	if (spw_locked) {
 		if (spw_unlock (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
@@ -696,22 +712,6 @@ fail_exit (int code, bool process_selinux)
 			/* continue */
 		}
 	}
-#ifdef ENABLE_SUBIDS
-	if (sub_uid_locked) {
-		if (sub_uid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-			/* continue */
-		}
-	}
-	if (sub_gid_locked) {
-		if (sub_gid_unlock (process_selinux) == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname ());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-			/* continue */
-		}
-	}
-#endif				/* ENABLE_SUBIDS */
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_MGMT,
