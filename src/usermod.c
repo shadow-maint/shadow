@@ -1513,7 +1513,7 @@ static void close_files(const struct option_flags *flags)
 		SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
-	if (is_shadow_pwd && (spw_close (process_selinux) == 0)) {
+	if (spw_locked && (spw_close (process_selinux) == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
@@ -1521,7 +1521,7 @@ static void close_files(const struct option_flags *flags)
 		fail_exit (E_PW_UPDATE, process_selinux);
 	}
 
-	if (Gflg || lflg) {
+	if (gr_locked) {
 		if (gr_close (process_selinux) == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
@@ -1551,6 +1551,7 @@ static void close_files(const struct option_flags *flags)
 				SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
 				/* continue */
 			}
+			sgr_locked = false;
 		}
 #endif
 		if (gr_unlock (process_selinux) == 0) {
@@ -1560,6 +1561,7 @@ static void close_files(const struct option_flags *flags)
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
 			/* continue */
 		}
+		gr_locked = false;
 	}
 
 	if (is_shadow_pwd) {
@@ -1570,6 +1572,7 @@ static void close_files(const struct option_flags *flags)
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
 			/* continue */
 		}
+		spw_locked = false;
 	}
 	if (pw_unlock (process_selinux) == 0) {
 		fprintf (stderr,
@@ -1578,16 +1581,10 @@ static void close_files(const struct option_flags *flags)
 		SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
 		/* continue */
 	}
-
 	pw_locked = false;
-	spw_locked = false;
-	gr_locked = false;
-#ifdef	SHADOWGRP
-	sgr_locked = false;
-#endif
 
 #ifdef ENABLE_SUBIDS
-	if (vflg || Vflg) {
+	if (sub_uid_locked) {
 		if (sub_uid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname ());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
@@ -1600,7 +1597,7 @@ static void close_files(const struct option_flags *flags)
 		}
 		sub_uid_locked = false;
 	}
-	if (wflg || Wflg) {
+	if (sub_gid_locked) {
 		if (sub_gid_close (process_selinux) == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname ());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
