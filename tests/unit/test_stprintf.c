@@ -13,9 +13,10 @@
 #include <stdint.h>  // Required by <cmocka.h>
 #include <cmocka.h>
 
-#include "sizeof.h"
-#include "string/sprintf/snprintf.h"
 #include "attr.h"
+#include "sizeof.h"
+#include "string/sprintf/stprintf.h"
+
 
 static void test_stprintf_a_trunc(MAYBE_UNUSED void ** _1);
 static void test_stprintf_a_ok(MAYBE_UNUSED void ** _1);

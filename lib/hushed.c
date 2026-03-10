@@ -21,7 +21,7 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strtok/stpsep.h"
 
