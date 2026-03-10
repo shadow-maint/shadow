@@ -22,6 +22,8 @@
 #include "alloc/malloc.h"
 #include "alloc/reallocf.h"
 #include "atoi/a2i.h"
+#include "atoi/getnum.h"
+#include "shadow/passwd/getpw.h"
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/sprintf/snprintf.h"
 #include "string/strcmp/streq.h"
@@ -141,6 +143,27 @@ static struct commonio_ops subordinate_ops = {
 	NULL,			/* open_hook */
 	NULL,			/* close_hook */
 };
+
+// is_same_user: test whether two strings identify the same user.
+static bool
+is_same_user(const char *a, const char *b)
+{
+	uid_t                uid_a;
+	uid_t                uid_b;
+	const struct passwd  *pw;
+
+	pw = getpw_uid_or_nam(a);
+	if (NULL == pw)
+		return false;
+	uid_a = pw->pw_uid;
+
+	pw = getpw_uid_or_nam(b);
+	if (NULL == pw)
+		return false;
+	uid_b = pw->pw_uid;
+
+	return uid_a == uid_b;
+}
 
 /*
  * range_exists: check whether @owner owns any ranges
