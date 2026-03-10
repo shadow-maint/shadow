@@ -178,7 +178,7 @@ static bool range_exists(struct commonio_db *db, const char *owner)
 	const struct subordinate_range *range;
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
-		if (streq(range->owner, owner))
+		if (is_same_user(range->owner, owner))
 			return true;
 	}
 	return false;
@@ -479,7 +479,7 @@ static int remove_range (struct commonio_db *db,
 		last = first + range->count - 1;
 
 		/* Skip entries with a different owner */
-		if (!streq(range->owner, owner)) {
+		if (!is_same_user(range->owner, owner)) {
 			continue;
 		}
 
@@ -894,15 +894,12 @@ static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
  */
 int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_range **in_ranges)
 {
-	// TODO - need to handle owner being either uid or username
 	struct subid_range *ranges = NULL;
 	const struct subordinate_range *range;
 	struct commonio_db *db;
 	enum subid_status status;
 	int count = 0;
 	struct subid_nss_ops *h;
-	char id[ID_SIZE];
-	bool have_owner_id;
 
 	*in_ranges = NULL;
 
@@ -931,13 +928,9 @@ int list_owner_ranges(const char *owner, enum subid_type id_type, struct subid_r
 		return -1;
 	}
 
-	have_owner_id = get_owner_id(owner, id_type, id);
-
 	commonio_rewind(db);
 	while (NULL != (range = commonio_next(db))) {
-		if (   streq(range->owner, owner)
-		    || (have_owner_id && streq(range->owner, id)))
-		{
+		if (is_same_user(range->owner, owner)) {
 			ranges = append_range(ranges, range, count++);
 			if (ranges == NULL) {
 				count = -1;
@@ -1087,8 +1080,7 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 	commonio_rewind(db);
 	if (reuse) {
 		while (NULL != (r = commonio_next(db))) {
-			// TODO account for username vs uid_t
-			if (!streq(r->owner, range->owner))
+			if (!is_same_user(r->owner, range->owner))
 				continue;
 			if (r->count >= range->count) {
 				range->count = r->count;
