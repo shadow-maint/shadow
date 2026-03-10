@@ -39,6 +39,7 @@ jobs:
         ./autogen.sh --without-selinux --disable-man --with-yescrypt
 
     - run: make
+    - run: make check
     - run: make install DESTDIR=${HOME}/rootfs
     - run: sudo make install
 
