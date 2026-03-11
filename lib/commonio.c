@@ -612,8 +612,10 @@ commonio_open(struct commonio_db *db, int mode)
 	while (getline(&buf, &buflen, db->fp) != -1) {
 		struct commonio_entry  *p;
 
-		if (stpsep(buf, "\n") == NULL)
+		if (stpsep(buf, "\n") == NULL) {
+			fprintf(log_get_logfd(), _("%s: Non-text file.\n"), db->filename);
 			goto cleanup_buf;
+		}
 
 		line = strdup (buf);
 		if (NULL == line) {
