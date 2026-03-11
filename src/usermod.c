@@ -100,6 +100,10 @@
 /* invalid shadow time indicating missing entry */
 #define MISSING_TIME	-2
 
+#ifndef NGROUPS_MAX
+#define NGROUPS_MAX		65536
+#endif
+
 /*
  * Structures
  */
@@ -2203,6 +2207,8 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
+	if (sys_ngroups == -1)
+		sys_ngroups = NGROUPS_MAX;
 	user_groups = xmalloc_T(sys_ngroups + 1, char *);
 	user_groups[0] = NULL;
 
