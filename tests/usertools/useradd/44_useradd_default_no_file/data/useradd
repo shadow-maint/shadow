@@ -1,7 +1,6 @@
 # useradd defaults file
 GROUP=100
 HOME=/toto
-INACTIVE=-1
 EXPIRE=
 SHELL=
 SKEL=/etc/skel

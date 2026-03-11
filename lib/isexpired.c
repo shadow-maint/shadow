@@ -18,7 +18,6 @@
 #include <pwd.h>
 #include <time.h>
 
-#include "adds.h"
 #include "defines.h"
 #include "prototypes.h"
 #include "string/strcmp/streq.h"
@@ -35,8 +34,6 @@
  * Return value:
  *	0: the password is still valid
  *	1: the password has expired, it must be changed
- *	2: the password has expired since a long time and the account is
- *	   now disabled. (password cannot be changed)
  *	3: the account has expired
  */
 int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
@@ -71,33 +68,6 @@ int isexpired (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 	    && streq(pw->pw_passwd, SHADOW_PASSWD_STRING)) {
 		return 1;
 	}
-
-	if (   (sp->sp_lstchg > 0)
-	    && (sp->sp_max >= 0)
-	    && (sp->sp_inact >= 0)
-	    && (now >= addsl(sp->sp_lstchg, sp->sp_max, sp->sp_inact)))
-	{
-		return 2;
-	}
-
-	/*
-	 * The last and max fields must be present for an account
-	 * to have an expired password.
-	 */
-
-	if (   (-1 == sp->sp_lstchg)
-	    || (-1 == sp->sp_max)) {
-		return 0;
-	}
-
-	/*
-	 * Calculate today's day and the day on which the password
-	 * is going to expire.  If that date has already passed,
-	 * the password has expired.
-	 */
-
-	if (now >= addsl(sp->sp_lstchg, sp->sp_max))
-		return 1;
 
 	return 0;
 }
