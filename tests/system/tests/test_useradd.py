@@ -302,3 +302,29 @@ def test_useradd__two_users_same_ids(shadow: Shadow):
 
     group_entry2 = shadow.tools.getent.group("test2")
     assert group_entry2 is None, "Group test2 should not be found"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__add_user_with_existing_uid(shadow: Shadow):
+    """
+    :title: Verify useradd fails when adding user with existing UID without -o flag
+    :setup:
+        1. Create first user with UID 4242
+    :steps:
+        1. Check passwd entry for first user
+        2. Try to create second user with same UID 4242 without using -o flag
+    :expectedresults:
+        1. First user exists in passwd with UID 4242
+        2. Second user creation fails with error
+    :customerscenario: False
+    """
+    shadow.useradd("test1 -u 4242")
+
+    passwd_entry = shadow.tools.getent.passwd("test1")
+    assert passwd_entry is not None, "passwd_entry is None"
+    assert passwd_entry.uid == 4242, "First user should still have UID 4242"
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.useradd("test2 -u 4242")
+
+    assert exc_info.value.rc == 4, f"Expected return code 4 (UID already in use), got {exc_info.value.rc}"
