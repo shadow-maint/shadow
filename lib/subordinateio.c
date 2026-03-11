@@ -634,7 +634,21 @@ int sub_uid_add (const char *owner, uid_t start, unsigned long count)
 		errno = EOPNOTSUPP;
 		return 0;
 	}
-	return add_range (&subordinate_uid_db, owner, start, count);
+	if (getdef_bool("SUB_UID_STORE_BY_UID")) {
+		char                 uid_string[ID_SIZE];
+		const struct passwd  *pw;
+
+		pw = getpw_uid_or_nam(owner);
+		if (NULL == pw)
+			return 0;
+
+		if (stprintf_a(uid_string, "%u", pw->pw_uid) == -1)
+			return 0;
+
+		return add_range(&subordinate_uid_db, uid_string, start, count);
+	} else {
+		return add_range(&subordinate_uid_db, owner, start, count);
+	}
 }
 
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
@@ -772,7 +786,21 @@ int sub_gid_add (const char *owner, gid_t start, unsigned long count)
 		errno = EOPNOTSUPP;
 		return 0;
 	}
-	return add_range (&subordinate_gid_db, owner, start, count);
+	if (getdef_bool("SUB_GID_STORE_BY_UID")) {
+		char                 uid_string[ID_SIZE];
+		const struct passwd  *pw;
+
+		pw = getpw_uid_or_nam(owner);
+		if (NULL == pw)
+			return 0;
+
+		if (stprintf_a(uid_string, "%u", pw->pw_uid) == -1)
+			return 0;
+
+		return add_range(&subordinate_gid_db, uid_string, start, count);
+	} else {
+		return add_range(&subordinate_gid_db, owner, start, count);
+	}
 }
 
 /* Return 1 on success.  on failure, return 0 and set errno appropriately */
