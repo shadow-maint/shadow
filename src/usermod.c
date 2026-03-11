@@ -382,14 +382,14 @@ prepend_range(const char *str, struct id_range_list_entry **head)
 }
 
 static int
-find_range(struct id_range_list_entry **head,
-           int (*find_fn)(id_t *range_start, unsigned long *range_count))
+find_range(struct id_range_list_entry **head, uid_t uid,
+           int (*find_fn)(uid_t uid, id_t *range_start, unsigned long *range_count))
 {
 	struct id_range_list_entry *entry;
 	struct id_range range;
 	unsigned long count;
 
-	if (find_fn(&range.first, &count) != 0)
+	if (find_fn(uid, &range.first, &count) != 0)
 		return 0;
 
 	range.last = range.first + count;
@@ -2253,13 +2253,13 @@ int main (int argc, char **argv)
 	}
 #ifdef ENABLE_SUBIDS
 	if (Sflg) {
-		if (find_range (&add_sub_uids, find_new_sub_uids) == 0) {
+		if (find_range (&add_sub_uids, user_id, find_new_sub_uids) == 0) {
 			fprintf (stderr,
 				_("%s: unable to find new subordinate uid range\n"),
 				Prog);
 			fail_exit (E_SUB_UID_UPDATE, process_selinux);
 		}
-		if (find_range (&add_sub_gids, find_new_sub_gids) == 0) {
+		if (find_range (&add_sub_gids, user_id, find_new_sub_gids) == 0) {
 			fprintf (stderr,
 				_("%s: unable to find new subordinate gid range\n"),
 				Prog);

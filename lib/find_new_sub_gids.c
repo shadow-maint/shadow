@@ -20,6 +20,119 @@
 #include "subordinateio.h"
 
 /*
+ * find_new_sub_gids_deterministic - Assign a subordinate GID range by UID.
+ *
+ * Calculates a deterministic subordinate GID range for a given UID based
+ * on its offset from UID_MIN.  Loads SUB_GID_COUNT from login.defs and
+ * writes it back to *range_count on success.
+ *
+ * BASE FORMULA:
+ *   uid_offset     = uid - UID_MIN
+ *   logical_offset = uid_offset * SUB_GID_COUNT
+ *   start_id       = SUB_GID_MIN + logical_offset
+ *   end_id         = start_id + SUB_GID_COUNT - 1
+ *
+ * DETERMINISTIC MODE:
+ *   All arithmetic overflow is a hard error.  The assigned range must fit
+ *   entirely within [SUB_GID_MIN, SUB_GID_MAX].  Allocation is monotonic
+ *   and guaranteed non-overlapping.
+ *
+ * Return 0 on success, -1 if no GIDs are available.
+ */
+static int
+find_new_sub_gids_deterministic(uid_t uid,
+				id_t *range_start,
+				unsigned long *range_count)
+{
+	unsigned long  count;
+	unsigned long  space;
+	unsigned long  uid_min;
+	unsigned long  sub_gid_max;
+	unsigned long  sub_gid_min;
+	unsigned long  uid_offset;
+
+	assert (range_start != NULL);
+	assert (range_count != NULL);
+
+	uid_min = getdef_ulong ("UID_MIN", 1000UL);
+	sub_gid_min = getdef_ulong ("SUB_GID_MIN", 65536UL);
+	sub_gid_max = getdef_ulong ("SUB_GID_MAX", 4294967295UL);
+	count = getdef_ulong ("SUB_GID_COUNT", 65536UL);
+
+	if (uid < uid_min) {
+		fprintf(log_get_logfd(),
+		         _("%s: UID %ju is less than UID_MIN %lu,"
+		           " cannot calculate deterministic subordinate GIDs\n"),
+		         log_get_progname(),
+		         (uintmax_t)uid, uid_min);
+		return -1;
+	}
+
+	if (sub_gid_min > sub_gid_max || count == 0) {
+		fprintf(log_get_logfd(),
+		         _("%s: Invalid configuration: SUB_GID_MIN (%lu),"
+		           " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
+		         log_get_progname(),
+		         sub_gid_min, sub_gid_max, count);
+		return -1;
+	}
+
+	uid_offset = uid - uid_min;
+	space = sub_gid_max - sub_gid_min + 1;
+
+	if (count > space) {
+		fprintf(log_get_logfd(),
+		         _("%s: Not enough space for any subordinate GIDs"
+		           " (SUB_GID_MIN=%lu, SUB_GID_MAX=%lu,"
+		           " SUB_GID_COUNT=%lu)\n"),
+		         log_get_progname(),
+		         sub_gid_min, sub_gid_max, count);
+		return -1;
+	}
+
+	id_t  end_id;
+	id_t  product;
+	id_t  start_id;
+
+	if (__builtin_mul_overflow(uid_offset, count, &product)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (__builtin_add_overflow(sub_gid_min, product, &start_id)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (__builtin_add_overflow(start_id, count - 1, &end_id)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (end_id > sub_gid_max) {
+		fprintf(log_get_logfd(),
+		         _("%s: Deterministic subordinate GID range"
+		           " for UID %ju exceeds SUB_GID_MAX (%lu)\n"),
+		         log_get_progname(),
+		         (uintmax_t)uid, sub_gid_max);
+		return -1;
+	}
+
+	*range_start = start_id;
+	*range_count = count;
+	return 0;
+}
+
+/*
  * find_new_sub_gids_linear - Find an unused subordinate GID range via
  * linear search.
  *
@@ -69,10 +182,13 @@ find_new_sub_gids_linear(id_t *range_start, unsigned long *range_count)
  * Return 0 on success, -1 if no unused GIDs are available.
  */
 int
-find_new_sub_gids(id_t *range_start, unsigned long *range_count)
+find_new_sub_gids(uid_t uid, id_t *range_start, unsigned long *range_count)
 {
 	if (!range_start || !range_count)
 		return -1;
+
+	if (getdef_bool("SUB_GID_DETERMINISTIC"))
+		return find_new_sub_gids_deterministic(uid, range_start, range_count);
 
 	return find_new_sub_gids_linear(range_start, range_count);
 }
