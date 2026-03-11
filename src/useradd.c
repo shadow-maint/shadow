@@ -221,6 +221,10 @@ static bool home_added = false;
 #define DBTRFS_SUBVOLUME_HOME	"BTRFS_SUBVOLUME_HOME"
 #define DLOG_INIT		"LOG_INIT"
 
+#ifndef NGROUPS_MAX
+#define NGROUPS_MAX		65536
+#endif
+
 /* local function prototypes */
 NORETURN static void fail_exit (int, bool);
 static void get_defaults(const struct option_flags *);
@@ -2529,6 +2533,8 @@ int main (int argc, char **argv)
 #endif
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
+	if (sys_ngroups == -1)
+		sys_ngroups = NGROUPS_MAX;
 	user_groups = xmalloc_T(1 + sys_ngroups, char *);
 	/*
 	 * Initialize the list to be empty
