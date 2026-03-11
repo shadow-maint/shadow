@@ -9,23 +9,27 @@
 #ifdef ENABLE_SUBIDS
 
 #include <assert.h>
-#include <stdio.h>
 #include <errno.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
 
-#include "prototypes.h"
-#include "subordinateio.h"
 #include "getdef.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "subordinateio.h"
 
 /*
- * find_new_sub_gids - Find a new unused range of GIDs.
+ * find_new_sub_gids_linear - Find an unused subordinate GID range via
+ * linear search.
  *
- * If successful, find_new_sub_gids provides a range of unused
- * user IDs in the [SUB_GID_MIN:SUB_GID_MAX] range.
+ * Loads SUB_GID_COUNT from login.defs and writes the allocated count back
+ * to *range_count on success.
  *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
+static int
+find_new_sub_gids_linear(id_t *range_start, unsigned long *range_count)
 {
 	unsigned long min, max;
 	unsigned long count;
@@ -58,7 +62,21 @@ int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 	*range_count = count;
 	return 0;
 }
+
+/*
+ * find_new_sub_gids - Find a new unused range of subordinate GIDs.
+ *
+ * Return 0 on success, -1 if no unused GIDs are available.
+ */
+int
+find_new_sub_gids(id_t *range_start, unsigned long *range_count)
+{
+	if (!range_start || !range_count)
+		return -1;
+
+	return find_new_sub_gids_linear(range_start, range_count);
+}
+
 #else				/* !ENABLE_SUBIDS */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
-
