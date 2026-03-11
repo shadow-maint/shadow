@@ -97,6 +97,9 @@
 
 #define VALID(s)  (!strpbrk(s, ":\n"))
 
+/* invalid shadow time indicating missing entry */
+#define MISSING_TIME	-2
+
 /*
  * Structures
  */
@@ -127,10 +130,10 @@ static const char *user_selinux = "";
 static const char *user_selinux_range = NULL;
 #endif				/* WITH_SELINUX */
 static char *user_newshell;
-static long user_expire;
-static long user_newexpire;
-static long user_inactive;
-static long user_newinactive;
+static long user_expire = MISSING_TIME;
+static long user_newexpire = MISSING_TIME;
+static long user_inactive = MISSING_TIME;
+static long user_newinactive = MISSING_TIME;
 static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
 
