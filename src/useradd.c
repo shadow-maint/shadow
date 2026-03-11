@@ -2076,7 +2076,7 @@ static void tallylog_reset (const char *user_name)
 		break;
 	case 0: /* child */
 		pname = Basename(pam_tally2);
-		execl(pam_tally2, pname, "--user", user_name, "--reset", "--quiet", NULL);
+		execl(pam_tally2, pname, "--user", user_name, "--reset", "--quiet", (char *) NULL);
 		/* If we come here, something has gone terribly wrong */
 		perror(pam_tally2);
 		exit(42);       /* don't continue, we now have 2 processes running! */
