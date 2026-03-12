@@ -24,7 +24,6 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#include <assert.h>
 
 #include "alloc/malloc.h"
 #include "attr.h"
@@ -50,10 +49,14 @@
 #include "string/strftime.h"
 #include "sysconf.h"
 
+#ifdef USE_PAM
+# include "pam_defs.h"
+#endif
+
+#include <assert.h>
+
 
 #ifdef USE_PAM
-#include "pam_defs.h"
-
 static pam_handle_t *pamh = NULL;
 
 #define PAM_FAIL_CHECK if (retcode != PAM_SUCCESS) { \

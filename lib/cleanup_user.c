@@ -6,7 +6,6 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <stdio.h>
 
 #include "defines.h"
@@ -14,6 +13,9 @@
 #include "shadowio.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
+#include <assert.h>
+
 
 /*
  * cleanup_report_add_user - Report failure to add a user to the system

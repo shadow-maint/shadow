@@ -7,12 +7,8 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <paths.h>
 #include <stdio.h>
-
-#include <assert.h>
 
 #include "atoi/getnum.h"
 #include "defines.h"
@@ -35,6 +31,8 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
+
+#include <assert.h>
 
 
 static char *passwd_db_file = NULL;

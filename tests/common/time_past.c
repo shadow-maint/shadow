@@ -11,10 +11,11 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <assert.h>
 
 
 typedef time_t (*time_type) (time_t *t);

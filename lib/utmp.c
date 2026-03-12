@@ -15,7 +15,6 @@
 #include "getdef.h"
 
 #include <utmpx.h>
-#include <assert.h>
 #include <paths.h>
 #include <sys/param.h>
 #include <sys/types.h>
@@ -40,7 +39,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
-#ident "$Id$"
+#include <assert.h>
 
 
 #define UTX_LINESIZE  countof(memberof(struct utmpx, ut_line))

@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <signal.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -24,6 +21,8 @@
 #include "string/strcpy/strtcpy.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
+
+#include <assert.h>
 
 
 static void

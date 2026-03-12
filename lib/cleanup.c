@@ -6,10 +6,12 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <stdio.h>
 
 #include "prototypes.h"
+
+#include <assert.h>
+
 
 /*
  * The cleanup_functions stack.

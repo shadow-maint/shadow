@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -73,6 +70,8 @@
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"
+
+#include <assert.h>
 
 
 #ifndef SKEL_DIR
