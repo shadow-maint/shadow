@@ -30,6 +30,13 @@
 #define CTYPE_XDIGIT_C    CTYPE_DIGIT_C "abcdefABCDEF"
 #define CTYPE_ASCII_C     CTYPE_PRINT_C CTYPE_CNTRL_C /*NUL*/
 
+#define CTYPE_CNTRL_C0    CTYPE_CNTRL_C
+#define CTYPE_CNTRL_C1                                                \
+	"\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8A\x8B\x8C\x8D\x8E\x8F" \
+	"\x90\x91\x92\x93\x94\x95\x96\x97\x99\x99\x9A\x9B\x9C\x9D\x9E\x9F"
+
+#define CTYPE_CNTRL_C0C1  CTYPE_CNTRL_C0 CTYPE_CNTRL_C1
+
 
 // isascii_c - is [:ascii:] C-locale
 #define isascii_c(c)      (!!strchr(CTYPE_ASCII_C, c))
@@ -44,6 +51,9 @@
 #define isgraph_c(c)      (!streq(strchrnul(CTYPE_GRAPH_C, c), ""))
 #define isprint_c(c)      (!streq(strchrnul(CTYPE_PRINT_C, c), ""))
 #define isxdigit_c(c)     (!streq(strchrnul(CTYPE_XDIGIT_C, c), ""))
+
+// iscntrl_c0c1 - is control-character (C0 or C1)
+#define iscntrl_c0c1(c)   (!!strchr(CTYPE_CNTRL_C0C1, c))
 
 
 #endif  // include guard
