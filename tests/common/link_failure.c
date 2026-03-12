@@ -11,11 +11,12 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <assert.h>
 
 
 typedef int (*link_type) (const char *oldpath, const char *newpath);

@@ -8,7 +8,6 @@
 
 #ifdef ENABLE_SUBIDS
 
-#include <assert.h>
 #include <stdio.h>
 #include <errno.h>
 
@@ -16,6 +15,9 @@
 #include "subordinateio.h"
 #include "getdef.h"
 #include "shadowlog.h"
+
+#include <assert.h>
+
 
 /*
  * find_new_sub_gids - Find a new unused range of GIDs.

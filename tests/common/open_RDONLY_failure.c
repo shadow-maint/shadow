@@ -11,10 +11,11 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <assert.h>
 
 
 typedef int (*open_type) (const char *pathname, int flag, ...);

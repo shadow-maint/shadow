@@ -8,10 +8,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
-
 #include "alloc/malloc.h"
 #include "prototypes.h"
 #include "defines.h"
@@ -19,6 +15,8 @@
 #include "string/strcmp/streq.h"
 #include "string/strdup/strdup.h"
 #include "string/strtok/strsep2ls.h"
+
+#include <assert.h>
 
 
 /*

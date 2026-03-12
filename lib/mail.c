@@ -8,9 +8,9 @@
  */
 
 #include "config.h"
+
 #include "prototypes.h"
 #include "defines.h"
-#include <assert.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <string.h>
@@ -18,7 +18,7 @@
 #include "getdef.h"
 #include "string/sprintf/aprintf.h"
 
-#ident "$Id$"
+#include <assert.h>
 
 
 void mailcheck (void)

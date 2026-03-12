@@ -11,7 +11,6 @@
 
 #ident "$Id$"
 
-#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -68,6 +67,8 @@
 #include "string/strspn/stprspn.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
+
+#include <assert.h>
 
 
 /*

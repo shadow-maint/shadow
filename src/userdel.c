@@ -8,7 +8,7 @@
  */
 
 #include "config.h"
-#include <assert.h>
+
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -52,6 +52,8 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
+
+#include <assert.h>
 
 
 /*

@@ -13,9 +13,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -33,6 +30,8 @@
 #include "string/strdup/strdup.h"
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
+
+#include <assert.h>
 
 
 #ifndef USE_PAM
