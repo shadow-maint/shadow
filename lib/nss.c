@@ -13,7 +13,7 @@
 #include "prototypes.h"
 #include "../libsubid/subid.h"
 #include "shadowlog.h"
-#include "string/sprintf/snprintf.h"
+#include "string/sprintf/stprintf.h"
 #include "string/strcmp/strcaseprefix.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"

@@ -27,7 +27,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "sizeof.h"
-#include "string/sprintf/stpeprintf.h"
+#include "string/sprintf/seprintf.h"
 #include "string/strcmp/streq.h"
 #include "string/strerrno.h"
 
@@ -184,13 +184,13 @@ void write_mapping(int proc_dir_fd, int ranges, const struct map_range *mappings
 	mapping = mappings;
 	for (idx = 0; idx < ranges; idx++, mapping++) {
 		/* Append this range to the string that will be written */
-		pos = stpeprintf(pos, end, "%lu %lu %lu\n",
+		pos = seprintf(pos, end, "%lu %lu %lu\n",
 		                 mapping->upper,
 		                 mapping->lower,
 		                 mapping->count);
 	}
 	if (pos == end || pos == NULL) {
-		fprintf(log_get_logfd(), _("%s: stpeprintf failed!\n"), log_get_progname());
+		fprintf(log_get_logfd(), _("%s: seprintf failed!\n"), log_get_progname());
 		exit(EXIT_FAILURE);
 	}
 
