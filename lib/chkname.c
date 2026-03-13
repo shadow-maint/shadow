@@ -68,7 +68,7 @@ is_valid_name(const char *name)
 	 || streq(name, "..")
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
-	 || strchriscntrl(name)
+	 || strchriscntrl_c0c1(name)
 	 || strisdigit(name))
 	{
 		errno = EINVAL;

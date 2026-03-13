@@ -9,4 +9,4 @@
 #include <stdbool.h>
 
 
-extern inline bool strchriscntrl(const char *s);
+extern inline bool strchriscntrl_c0c1(const char *s);
