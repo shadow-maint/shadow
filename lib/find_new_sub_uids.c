@@ -32,10 +32,22 @@
  *   start_id       = SUB_UID_MIN + logical_offset
  *   end_id         = start_id + SUB_UID_COUNT - 1
  *
- * DETERMINISTIC MODE:
+ * DETERMINISTIC-SAFE MODE (default):
  *   All arithmetic overflow is a hard error.  The assigned range must fit
  *   entirely within [SUB_UID_MIN, SUB_UID_MAX].  Allocation is monotonic
  *   and guaranteed non-overlapping.
+ *
+ * UNSAFE_SUB_UID_DETERMINISTIC_WRAP MODE:
+ *   Activated with UNSAFE_SUB_UID_DETERMINISTIC_WRAP yes
+ *
+ *   WARNING: SECURITY RISK!
+ *   WARNING: MAY CAUSE RANGE OVERLAPS!
+ *   WARNING: MAY CAUSE CONTAINER ESCAPES!
+ *
+ *   The subordinate UID space is treated as a ring.  Arithmetic overflow
+ *   is normalised via modulo over [SUB_UID_MIN, SUB_UID_MAX].
+ *   This means ranges MAY overlap for large UID populations!
+ *   Intended only for development, testing, or constrained lab environments.
  *
  * Return 0 on success, -1 if no UIDs are available.
  */
@@ -44,6 +56,7 @@ find_new_sub_uids_deterministic(uid_t uid,
 				id_t *range_start,
 				unsigned long *range_count)
 {
+	bool           allow_wrap;
 	unsigned long  count;
 	unsigned long  space;
 	unsigned long  uid_min;
@@ -58,6 +71,7 @@ find_new_sub_uids_deterministic(uid_t uid,
 	sub_uid_min = getdef_ulong ("SUB_UID_MIN", 65536UL);
 	sub_uid_max = getdef_ulong ("SUB_UID_MAX", 4294967295UL);
 	count = getdef_ulong ("SUB_UID_COUNT", 65536UL);
+	allow_wrap = getdef_bool ("UNSAFE_SUB_UID_DETERMINISTIC_WRAP");
 
 	if (uid < uid_min) {
 		fprintf(log_get_logfd(),
@@ -88,6 +102,20 @@ find_new_sub_uids_deterministic(uid_t uid,
 		         log_get_progname(),
 		         sub_uid_min, sub_uid_max, count);
 		return -1;
+	}
+
+	if (allow_wrap) {
+		/*
+		 * UNSAFE_SUB_UID_DETERMINISTIC_WRAP MODE
+		 *
+		 * Promote to uintmax_t before multiplying to avoid truncation on
+		 * 32-bit platforms where unsigned long is 32 bits.
+		 */
+		uintmax_t logical_offset = (uintmax_t)uid_offset * (uintmax_t)count;
+
+		*range_start = (id_t)(sub_uid_min + (unsigned long)(logical_offset % space));
+		*range_count = count;
+		return 0;
 	}
 
 	id_t  end_id;
