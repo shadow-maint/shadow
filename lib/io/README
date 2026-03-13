@@ -1,0 +1,29 @@
+General guidelines:
+===================
+
+-  If there's a *_a() macro that wraps an API, use the macro if
+   possible.  These use countof() to add bounds safety.
+
+-  If there's a *_T() macro that wraps an API, use the macro if
+   possible.  These use _Generic() to add type safety.
+   Prefer *_a() macros over *_T() macros.
+
+-  If there's an upper-case macro that wraps a function, use the macro
+   if possible.  These use macro magic to add safety.
+   Prefer *_T() macros over upper-case macros.
+
+
+Specific guidelines:
+====================
+	Under lib/io/ we provide a set of APIs to do IO.
+	In this section, we provide a broad overview.
+
+fgets/ - Read lines
+
+    fgets_a()
+	Like fgets(3), but takes an array.
+
+syslog.h - System log
+
+    SYSLOG()
+	Like syslog(3), but uses the C locale if necessary.
