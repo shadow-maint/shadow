@@ -33,8 +33,7 @@
 
 #include "defines.h"
 #include "chkname.h"
-#include "string/ctype/strchrisascii.h"
-#include "string/ctype/strisascii.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strcaseeq.h"
 #include "sysconf.h"
