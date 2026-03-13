@@ -22,11 +22,7 @@ inline bool
 strchriscntrl(const char *s)
 {
 	for (; !streq(s, ""); s++) {
-		unsigned char  c = *s;
-
-		if (iscntrl_c(c))
-			return true;
-		if (c >= 0x80 && c <= 0x9F)
+		if (iscntrl_c0c1(*s))
 			return true;
 	}
 
