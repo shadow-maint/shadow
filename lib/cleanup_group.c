@@ -15,9 +15,6 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 /*
  * cleanup_report_add_group - Report failure to add a group to the system

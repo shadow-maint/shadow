@@ -20,9 +20,6 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 static void change_root (const char* newroot);
 

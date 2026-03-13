@@ -22,9 +22,6 @@
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 static void
 login_exit(MAYBE_UNUSED int _1)
