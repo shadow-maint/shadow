@@ -328,3 +328,42 @@ def test_useradd__add_user_with_existing_uid(shadow: Shadow):
         shadow.useradd("test2 -u 4242")
 
     assert exc_info.value.rc == 4, f"Expected return code 4 (UID already in use), got {exc_info.value.rc}"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__invalid_numeric_primary_group(shadow: Shadow):
+    """
+    :title: Add a new user with a specified non-existing gid
+    :setup:
+        1. Verify user "test1" and group "4242" does not exist in system
+    :steps:
+        1. Attempt to create user with -g 4242 option
+        2. Verify command fails with appropriate error code
+        3. Check error message content
+        4. Verify no changes were made to system files
+        5. Verify home directory was not created
+    :expectedresults:
+        1. Useradd command fails
+        2. Return code is 6 (invalid group)
+        3. Error message indicates group doesn't exist
+        4. No entries are added to passwd group
+        5. No home directory is created
+    :customerscenario: False
+    """
+    assert shadow.tools.getent.passwd("test1") is None, "User test1 should not exist before test"
+    assert shadow.tools.getent.group("4242") is None, "Group 4242 should not exist before test"
+
+    with pytest.raises(ProcessError) as exc_info:
+        shadow.useradd("test1 -g 4242")
+
+    actual_rc = getattr(exc_info.value, "rc", getattr(exc_info.value, "returncode", None))
+    assert actual_rc == 6, f"Expected return code 6 (invalid group), got {actual_rc}"
+
+    error_output = exc_info.value.stderr.lower() if exc_info.value.stderr else ""
+    assert (
+        "group" in error_output and "does not exist" in error_output
+    ), f"Error message should indicate group doesn't exist. Got: {error_output}"
+
+    assert shadow.tools.getent.passwd("test1") is None, "User test1 should not be found in passwd"
+    assert shadow.tools.getent.group("test1") is None, "Group test1 should not be found"
+    assert not shadow.fs.exists("/home/test1"), "Home directory should not be created"
