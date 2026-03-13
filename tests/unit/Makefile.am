@@ -65,6 +65,7 @@ test_chkhash_LDADD = \
 
 test_chkname_SOURCES = \
     ../../lib/chkname.c \
+    ../../lib/sysconf.c \
     test_chkname.c \
     $(NULL)
 test_chkname_CFLAGS = \

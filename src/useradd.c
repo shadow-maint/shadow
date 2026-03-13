@@ -72,6 +72,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
+#include "sysconf.h"
 
 
 #ifndef SKEL_DIR
@@ -153,7 +154,7 @@ static bool pw_locked = false;
 static bool gr_locked = false;
 static bool spw_locked = false;
 static char **user_groups;	/* NULL-terminated list */
-static long sys_ngroups;
+static size_t sys_ngroups;
 static bool do_grp_update = false;	/* group files need to be updated */
 
 extern int allow_bad_names;
@@ -220,10 +221,6 @@ static bool home_added = false;
 #define DCREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL"
 #define DBTRFS_SUBVOLUME_HOME	"BTRFS_SUBVOLUME_HOME"
 #define DLOG_INIT		"LOG_INIT"
-
-#ifndef NGROUPS_MAX
-#define NGROUPS_MAX		65536
-#endif
 
 /* local function prototypes */
 NORETURN static void fail_exit (int, bool);
@@ -764,7 +761,7 @@ static int get_groups(char *list, const struct option_flags *flags)
 {
 	struct group *grp;
 	bool errors = false;
-	int ngroups = 0;
+	size_t ngroups = 0;
 	bool process_selinux;
 
 	process_selinux = !flags->chroot && !flags->prefix;
@@ -825,7 +822,7 @@ static int get_groups(char *list, const struct option_flags *flags)
 
 		if (ngroups == sys_ngroups) {
 			fprintf (stderr,
-			         _("%s: too many groups specified (max %d).\n"),
+			         _("%s: too many groups specified (max %zu).\n"),
 			         Prog, ngroups);
 			gr_free(grp);
 			break;
@@ -2532,9 +2529,7 @@ int main (int argc, char **argv)
 	audit_help_open ();
 #endif
 
-	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	if (sys_ngroups == -1)
-		sys_ngroups = NGROUPS_MAX;
+	sys_ngroups = ngroups_max_size();
 	user_groups = xmalloc_T(1 + sys_ngroups, char *);
 	/*
 	 * Initialize the list to be empty

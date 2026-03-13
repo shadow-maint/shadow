@@ -37,27 +37,10 @@
 #include "string/ctype/strisascii/strisdigit.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strcaseeq.h"
-
-
-#ifndef  LOGIN_NAME_MAX
-# define LOGIN_NAME_MAX  256
-#endif
+#include "sysconf.h"
 
 
 int allow_bad_names = false;
-
-
-size_t
-login_name_max_size(void)
-{
-	long  conf;
-
-	conf = sysconf(_SC_LOGIN_NAME_MAX);
-	if (conf == -1)
-		return LOGIN_NAME_MAX;
-
-	return conf;
-}
 
 
 static bool
