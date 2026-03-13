@@ -32,9 +32,6 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 static char *passwd_db_file = NULL;
 static char *spw_db_file = NULL;

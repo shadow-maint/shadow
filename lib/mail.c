@@ -18,9 +18,6 @@
 #include "getdef.h"
 #include "string/sprintf/aprintf.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 void mailcheck (void)
 {

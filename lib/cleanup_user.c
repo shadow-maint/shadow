@@ -14,9 +14,6 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 
-#undef NDEBUG
-#include <assert.h>
-
 
 /*
  * cleanup_report_add_user - Report failure to add a user to the system
