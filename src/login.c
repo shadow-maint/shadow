@@ -48,6 +48,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 #include "string/strftime.h"
+#include "sysconf.h"
 
 
 #ifdef USE_PAM
