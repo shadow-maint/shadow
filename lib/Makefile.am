@@ -173,6 +173,8 @@ libshadow_la_SOURCES = \
 	shadow/gshadow/sgetsgent.h \
 	shadow/gshadow/sgrp.c \
 	shadow/gshadow/sgrp.h \
+	shadow/passwd/getpw.c \
+	shadow/passwd/getpw.h \
 	shadow/passwd/sgetpwent.c \
 	shadow/passwd/sgetpwent.h \
 	shadow/shadow/sgetspent.c \

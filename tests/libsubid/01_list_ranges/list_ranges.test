@@ -17,19 +17,21 @@ trap 'log_status "$0" "FAILURE"; restore_config' 0
 change_config
 
 echo -n "list foo's ranges..."
-${build_path}/src/getsubids foo > /tmp/subuidlistout
-${build_path}/src/getsubids -g foo > /tmp/subgidlistout
+${build_path}/src/getsubids nobody > /tmp/subuidlistout
+${build_path}/src/getsubids -g nobody > /tmp/subgidlistout
 echo "OK"
 
 echo -n "Check the subuid ranges..."
-[ $(wc -l /tmp/subuidlistout | awk '{ print $1 }') -eq 2 ]
-grep "0: foo 300000 10000" /tmp/subuidlistout
-grep "1: foo 400000 10000" /tmp/subuidlistout
+[ $(wc -l /tmp/subuidlistout | awk '{ print $1 }') -eq 3 ]
+grep "0: nobody 200000 10000" /tmp/subuidlistout
+grep "1: nobody 300000 10000" /tmp/subuidlistout
+grep "2: nobody 400000 10000" /tmp/subuidlistout
 echo "OK"
 
 echo -n "Check the subgid ranges..."
-[ $(wc -l /tmp/subgidlistout | awk '{ print $1 }') -eq 1 ]
-grep "0: foo 200000 10000" /tmp/subgidlistout
+[ $(wc -l /tmp/subgidlistout | awk '{ print $1 }') -eq 2 ]
+grep "0: nobody 200000 10000" /tmp/subgidlistout
+grep "1: nobody 210000 10000" /tmp/subgidlistout
 echo "OK"
 
 log_status "$0" "SUCCESS"
