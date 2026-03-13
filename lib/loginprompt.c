@@ -22,6 +22,7 @@
 #include "string/strspn/stpspn.h"
 #include "string/strtok/stpsep.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

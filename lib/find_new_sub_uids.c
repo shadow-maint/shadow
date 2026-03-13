@@ -16,6 +16,7 @@
 #include "getdef.h"
 #include "shadowlog.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

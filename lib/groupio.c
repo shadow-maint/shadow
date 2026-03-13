@@ -24,6 +24,7 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

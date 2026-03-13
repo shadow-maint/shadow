@@ -35,6 +35,7 @@
 #include "string/strerrno.h"
 #include "string/strftime.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

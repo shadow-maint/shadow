@@ -16,6 +16,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strtok/strsep2ls.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

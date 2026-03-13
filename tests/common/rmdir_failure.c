@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#undef NDEBUG
 #include <assert.h>
 
 

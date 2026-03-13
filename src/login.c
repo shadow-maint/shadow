@@ -52,6 +52,7 @@
 # include "pam_defs.h"
 #endif
 
+#undef NDEBUG
 #include <assert.h>
 
 

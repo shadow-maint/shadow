@@ -30,6 +30,7 @@
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

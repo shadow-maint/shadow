@@ -24,6 +24,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

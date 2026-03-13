@@ -20,6 +20,7 @@
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 
