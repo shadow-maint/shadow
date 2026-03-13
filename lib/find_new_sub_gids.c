@@ -32,10 +32,22 @@
  *   start_id       = SUB_GID_MIN + logical_offset
  *   end_id         = start_id + SUB_GID_COUNT - 1
  *
- * DETERMINISTIC MODE:
+ * DETERMINISTIC-SAFE MODE (default):
  *   All arithmetic overflow is a hard error.  The assigned range must fit
  *   entirely within [SUB_GID_MIN, SUB_GID_MAX].  Allocation is monotonic
  *   and guaranteed non-overlapping.
+ *
+ * UNSAFE_SUB_GID_DETERMINISTIC_WRAP MODE:
+ *   Activated with UNSAFE_SUB_GID_DETERMINISTIC_WRAP yes
+ *
+ *   WARNING: SECURITY RISK!
+ *   WARNING: MAY CAUSE RANGE OVERLAPS!
+ *   WARNING: MAY CAUSE CONTAINER ESCAPES!
+ *
+ *   The subordinate GID space is treated as a ring.  Arithmetic overflow
+ *   is normalised via modulo over [SUB_GID_MIN, SUB_GID_MAX].
+ *   This means ranges MAY overlap for large UID populations!
+ *   Intended only for development, testing, or constrained lab environments.
  *
  * Return 0 on success, -1 if no GIDs are available.
  */
@@ -44,7 +56,9 @@ find_new_sub_gids_deterministic(uid_t uid,
 				id_t *range_start,
 				unsigned long *range_count)
 {
+	bool           allow_wrap;
 	unsigned long  count;
+	unsigned long  slot;
 	unsigned long  slots;
 	unsigned long  space;
 	unsigned long  uid_min;
@@ -56,6 +70,7 @@ find_new_sub_gids_deterministic(uid_t uid,
 	sub_gid_min = getdef_ulong ("SUB_GID_MIN", 65536UL);
 	sub_gid_max = getdef_ulong ("SUB_GID_MAX", 4294967295UL);
 	count = getdef_ulong ("SUB_GID_COUNT", 65536UL);
+	allow_wrap = getdef_bool ("UNSAFE_SUB_GID_DETERMINISTIC_WRAP");
 
 	if (uid < uid_min) {
 		fprintf(log_get_logfd(),
@@ -96,17 +111,22 @@ find_new_sub_gids_deterministic(uid_t uid,
 
 	uid_offset = uid - uid_min;
 	slots = space / count;
+	slot = uid_offset;
 
 	if (uid_offset >= slots) {
-		fprintf(log_get_logfd(),
-		         _("%s: Deterministic subordinate GID range"
-		           " for UID %ju exceeds SUB_GID_MAX (%lu)\n"),
-		         log_get_progname(),
-		         (uintmax_t)uid, sub_gid_max);
-		return -1;
+		if (allow_wrap) {
+			slot = uid_offset % slots;
+		} else {
+			fprintf(log_get_logfd(),
+	         		_("%s: Deterministic subordinate GID range"
+				  " for UID %ju exceeds SUB_GID_MAX (%lu)\n"),
+	         		log_get_progname(),
+	         		(uintmax_t)uid, sub_gid_max);
+			return -1;
+		}
 	}
 
-	*range_start = sub_gid_min + uid_offset * count;
+	*range_start = sub_gid_min + slot * count;
 	*range_count = count;
 	return 0;
 }
