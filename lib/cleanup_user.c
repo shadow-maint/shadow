@@ -14,6 +14,7 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

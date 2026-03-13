@@ -38,6 +38,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strerrno.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

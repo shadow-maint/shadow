@@ -35,6 +35,7 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

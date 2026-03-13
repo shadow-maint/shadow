@@ -71,6 +71,7 @@
 #include "string/strtok/stpsep.h"
 #include "sysconf.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

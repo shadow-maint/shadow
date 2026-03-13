@@ -39,6 +39,7 @@
 #include "string/strdup/strdup.h"
 #include "string/strdup/strndup.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

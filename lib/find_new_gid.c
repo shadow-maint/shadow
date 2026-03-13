@@ -20,6 +20,7 @@
 #include "string/strerrno.h"
 
 
+#undef NDEBUG
 #include <assert.h>
 
 

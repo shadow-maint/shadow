@@ -69,6 +69,7 @@
 #include "time/day_to_str.h"
 #include "typetraits.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

@@ -10,6 +10,7 @@
 
 #include "prototypes.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 

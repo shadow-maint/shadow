@@ -40,6 +40,7 @@
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
 
+#undef NDEBUG
 #include <assert.h>
 
 
