@@ -17,8 +17,7 @@
 #include <string.h>
 
 #include "prototypes.h"
-#include "string/ctype/strisascii.h"
-#include "string/ctype/strchrisascii.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strspn/stpspn.h"
 #include "string/strspn/stprspn.h"
