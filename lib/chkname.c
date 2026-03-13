@@ -33,8 +33,7 @@
 
 #include "defines.h"
 #include "chkname.h"
-#include "string/ctype/strchrisascii/strchriscntrl.h"
-#include "string/ctype/strisascii/strisdigit.h"
+#include "string/ctype/isascii.h"
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strcaseeq.h"
 
@@ -68,8 +67,8 @@ is_valid_name(const char *name)
 	 || streq(name, "..")
 	 || strspn(name, "-")
 	 || strpbrk(name, " \"#',/:;")
-	 || strchriscntrl(name)
-	 || strisdigit(name))
+	 || strchriscntrl_c0c1(name)
+	 || strisdigit_c(name))
 	{
 		errno = EINVAL;
 		return false;
@@ -87,26 +86,16 @@ is_valid_name(const char *name)
 	 * sake of Samba 3.x "add machine script"
 	 */
 
-	if (!((*name >= 'a' && *name <= 'z') ||
-	      (*name >= 'A' && *name <= 'Z') ||
-	      (*name >= '0' && *name <= '9') ||
-	      *name == '_' ||
-	      *name == '.'))
-	{
+	if (!ispfchar_c(*name)) {
 		errno = EILSEQ;
 		return false;
 	}
 
 	while (!streq(++name, "")) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= 'A' && *name <= 'Z') ||
-		      (*name >= '0' && *name <= '9') ||
-		      *name == '_' ||
-		      *name == '.' ||
-		      *name == '-' ||
-		      streq(name, "$")
-		     ))
-		{
+		if (streq(name, "$"))  // Samba
+			return true;
+
+		if (!ispfchar_c(*name)) {
 			errno = EILSEQ;
 			return false;
 		}
