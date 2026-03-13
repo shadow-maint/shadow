@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "string/strcmp/streq.h"
+#include "string/strspn/stpspn.h"
 
 
 #define CTYPE_CNTRL_C                                                 \
@@ -44,6 +45,15 @@
 #define isgraph_c(c)      (!streq(strchrnul(CTYPE_GRAPH_C, c), ""))
 #define isprint_c(c)      (!streq(strchrnul(CTYPE_PRINT_C, c), ""))
 #define isxdigit_c(c)     (!streq(strchrnul(CTYPE_XDIGIT_C, c), ""))
+
+
+// strisascii_c - string is [:ascii:] C-locale
+#define strisdigit_c(s)   streq(stpspn(s, CTYPE_DIGIT_C), "")
+#define strisprint_c(s)   streq(stpspn(s, CTYPE_PRINT_C), "")
+
+
+// strchriscntrl_c - string character is [:cntrl:] C-locale
+#define strchriscntrl_c(s)  (!!strpbrk(s, CTYPE_CNTRL_C))
 
 
 #endif  // include guard
