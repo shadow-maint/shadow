@@ -1,0 +1,89 @@
+#!/bin/sh
+
+set -x
+
+echo "starting getsubids tests"
+
+check_val() {
+	expected="$1"
+	shift
+	out=$("$@" 2>&1)
+	if [ "$out" != "$expected" ]; then
+		echo "FAIL: $*"
+		echo "Expected: $expected"
+		echo "Got:      $out"
+		exit 1
+	fi
+}
+
+touch /etc/passwd
+mount --bind ./passwd /etc/passwd
+
+export LD_LIBRARY_PATH=.:${build_path}/libsubid/.libs:$LD_LIBRARY_PATH
+touch /etc/nsswitch.conf
+mount --bind ./nsswitch3.conf /etc/nsswitch.conf
+cleanup1() {
+    umount /etc/nsswitch.conf
+}
+trap cleanup1 EXIT HUP INT TERM
+check_val "0: user1 100000 65536" ${build_path}/src/.libs/getsubids user1
+check_val "Error fetching ranges" ${build_path}/src/.libs/getsubids user2
+check_val "0: group1 100000 65536" ${build_path}/src/.libs/getsubids -g group1
+check_val "0: ubuntu 200000 100000" ${build_path}/src/.libs/getsubids ubuntu
+check_val "Error fetching ranges" ${build_path}/src/.libs/getsubids error
+
+umount /etc/nsswitch.conf
+
+mount --bind ./nsswitch1.conf /etc/nsswitch.conf
+touch /etc/subuid /etc/subgid
+mount --bind ./subuid /etc/subuid
+mount --bind ./subuid /etc/subgid
+
+cleanup2() {
+    umount /etc/subuid
+    umount /etc/subgid
+    umount /etc/nsswitch.conf
+}
+trap cleanup2 EXIT HUP INT TERM
+check_val "Error fetching ranges" ${build_path}/src/.libs/getsubids user1
+check_val "0: user2 300000 65536" ${build_path}/src/.libs/getsubids user2
+check_val "0: user2 300000 65536" ${build_path}/src/.libs/getsubids -g user2
+check_val "0: ubuntu 400000 65536" ${build_path}/src/.libs/getsubids ubuntu
+
+umount /etc/subuid
+umount /etc/nsswitch.conf
+
+# nsswitch4: files zzz
+# subuid has user2, ubuntu, error, conn
+# zzz has user1, ubuntu (different range)
+mount --bind ./subuid /etc/subuid
+mount --bind ./nsswitch4.conf /etc/nsswitch.conf
+
+cleanup3() {
+    umount /etc/subuid
+    umount /etc/nsswitch.conf
+}
+trap cleanup3 EXIT HUP INT TERM
+
+check_val "0: user1 100000 65536" ${build_path}/src/.libs/getsubids user1
+check_val "0: user2 300000 65536" ${build_path}/src/.libs/getsubids user2
+check_val "0: ubuntu 400000 65536" ${build_path}/src/.libs/getsubids ubuntu
+
+umount /etc/nsswitch.conf
+
+# nsswitch5: zzz files
+mount --bind ./nsswitch5.conf /etc/nsswitch.conf
+
+cleanup4() {
+    umount /etc/subuid
+    umount /etc/nsswitch.conf
+}
+trap cleanup4 EXIT HUP INT TERM
+
+check_val "0: user1 100000 65536" ${build_path}/src/.libs/getsubids user1
+check_val "0: user2 300000 65536" ${build_path}/src/.libs/getsubids user2
+check_val "0: ubuntu 200000 100000" ${build_path}/src/.libs/getsubids ubuntu
+check_val "Error fetching ranges" ${build_path}/src/.libs/getsubids error
+
+echo "check_range tests complete"
+exit 0

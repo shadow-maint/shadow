@@ -6,60 +6,30 @@
 #include <string.h>
 #include "alloc/malloc.h"
 
-enum subid_status shadow_subid_has_any_range(const char *owner, enum subid_type t, bool *result)
-{
-	if (strcmp(owner, "ubuntu") == 0) {
-		*result = true;
-		return SUBID_STATUS_SUCCESS;
-	}
-	if (strcmp(owner, "error") == 0) {
-		*result = false;
-		return SUBID_STATUS_ERROR;
-	}
-	if (strcmp(owner, "unknown") == 0) {
-		*result = false;
-		return SUBID_STATUS_UNKNOWN_USER;
-	}
-	if (strcmp(owner, "conn") == 0) {
-		*result = false;
-		return SUBID_STATUS_ERROR_CONN;
-	}
-	if (t == ID_TYPE_UID) {
-		*result = strcmp(owner, "user1") == 0;
-		return SUBID_STATUS_SUCCESS;
-	}
-
-	*result = strcmp(owner, "group1") == 0;
-	return SUBID_STATUS_SUCCESS;
-}
-
 enum subid_status shadow_subid_has_range(const char *owner, unsigned long start, unsigned long count, enum subid_type t, bool *result)
 {
-	if (strcmp(owner, "ubuntu") == 0 &&
-	    start >= 200000 &&
-	    count <= 100000) {
-		*result = true;
+	if (strcmp(owner, "ubuntu") == 0) {
+		*result = start >= 200000 && start + count <= 200000 + 100000;
 		return SUBID_STATUS_SUCCESS;
 	}
+
+	if (strcmp(owner, "user1") == 0 && t == ID_TYPE_UID) {
+		*result = start >= 100000 && start + count <= 100000 + 65536;
+		return SUBID_STATUS_SUCCESS;
+	}
+
+	if (strcmp(owner, "group1") == 0 && t == ID_TYPE_GID) {
+		*result = start >= 100000 && start + count <= 100000 + 65536;
+		return SUBID_STATUS_SUCCESS;
+	}
+
 	*result = false;
 	if (strcmp(owner, "error") == 0)
 		return SUBID_STATUS_ERROR;
-	if (strcmp(owner, "unknown") == 0)
-		return SUBID_STATUS_UNKNOWN_USER;
 	if (strcmp(owner, "conn") == 0)
 		return SUBID_STATUS_ERROR_CONN;
 
-	if (t == ID_TYPE_UID && strcmp(owner, "user1") != 0)
-		return SUBID_STATUS_SUCCESS;
-	if (t == ID_TYPE_GID && strcmp(owner, "group1") != 0)
-		return SUBID_STATUS_SUCCESS;
-
-	if (start < 100000)
-		return SUBID_STATUS_SUCCESS;
-	if (count >= 65536)
-		return SUBID_STATUS_SUCCESS;
-	*result = true;
-	return SUBID_STATUS_SUCCESS;
+	return SUBID_STATUS_UNKNOWN_USER;
 }
 
 // So if 'user1' or 'ubuntu' is defined in passwd, we'll return those values,
@@ -109,34 +79,38 @@ enum subid_status shadow_subid_list_owner_ranges(const char *owner, enum subid_t
 	*count = 0;
 	if (strcmp(owner, "error") == 0)
 		return SUBID_STATUS_ERROR;
-	if (strcmp(owner, "unknown") == 0)
-		return SUBID_STATUS_UNKNOWN_USER;
 	if (strcmp(owner, "conn") == 0)
 		return SUBID_STATUS_ERROR_CONN;
 
 	*in_ranges = NULL;
-	if (strcmp(owner, "user1") != 0 && strcmp(owner, "ubuntu") != 0 &&
-	    strcmp(owner, "group1") != 0)
-		return SUBID_STATUS_SUCCESS;
-	if (id_type == ID_TYPE_GID && strcmp(owner, "user1") == 0)
-		return SUBID_STATUS_SUCCESS;
-	if (id_type == ID_TYPE_UID && strcmp(owner, "group1") == 0)
-		return SUBID_STATUS_SUCCESS;
 	ranges = malloc_T(1, struct subid_range);
 	if (!ranges)
 		return SUBID_STATUS_ERROR;
-	if (strcmp(owner, "user1") == 0 || strcmp(owner, "group1") == 0) {
-		ranges[0].start = 100000;
-		ranges[0].count = 65536;
-	} else {
-		ranges[0].start = 200000;
-		ranges[0].count = 100000;
-	}
 
 	*count = 1;
 	*in_ranges = ranges;
 
-	return SUBID_STATUS_SUCCESS;
+	if (strcmp(owner, "user1") == 0 && id_type == ID_TYPE_UID) {
+		ranges[0].start = 100000;
+		ranges[0].count = 65536;
+		return SUBID_STATUS_SUCCESS;
+	}
+
+	if (strcmp(owner, "group1") == 0 && id_type == ID_TYPE_GID) {
+		ranges[0].start = 100000;
+		ranges[0].count = 65536;
+		return SUBID_STATUS_SUCCESS;
+	}
+
+	if (strcmp(owner, "ubuntu") == 0) {
+		ranges[0].start = 200000;
+		ranges[0].count = 100000;
+		return SUBID_STATUS_SUCCESS;
+	}
+
+	free(ranges);
+	*in_ranges = NULL;
+	return SUBID_STATUS_UNKNOWN_USER;
 }
 
 void shadow_subid_free(void *ptr)

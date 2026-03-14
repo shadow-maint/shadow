@@ -25,37 +25,113 @@
 
 // NSS plugin handling for subids
 // If nsswitch has a line like
-//    subid: sssd
-// then sssd will be consulted for subids.  Unlike normal NSS dbs,
-// only one db is supported at a time.  That's open to debate, but
-// the subids are a pretty limited resource, and local files seem
-// bound to step on any other allocations leading to insecure
-// conditions.
+//    subid: sss
+// then the sss module (libsubid_sss.so) will be consulted for subids.
+// If nsswitch has a line specifying multiple databases, like:
+//    subid: sss files
+// then databases will be consulted in the specified order. The search
+// stops as soon as the user is found in a database, even if no subids
+// are defined there. For example, if 'sss' knows the user but provides
+// no subids, 'files' will not be consulted.
+//
+// While multiple databases are now supported, the subids are a pretty
+// limited resource. Mixing local files with network allocations
+// (like sssd) requires careful management. Misconfigurations would
+// lead to overlapping ID mappings. Use with caution.
+
 static atomic_flag nss_init_started;
 static atomic_bool nss_init_completed;
 
-static struct subid_nss_ops *subid_nss;
+static struct subid_nss_db *subid_nss_db_head;
 
-bool nss_is_initialized() {
+bool
+nss_is_initialized(void) {
 	return atomic_load(&nss_init_completed);
 }
 
-static void nss_exit(void) {
-	if (nss_is_initialized() && subid_nss) {
-		dlclose(subid_nss->handle);
-		free(subid_nss);
-		subid_nss = NULL;
+static void
+nss_exit(void) {
+	struct subid_nss_db *current;
+	struct subid_nss_db *next;
+
+	if (nss_is_initialized() && subid_nss_db_head) {
+		current = subid_nss_db_head;
+		while (current) {
+			next = current->next;
+			if (current->ops) {
+				dlclose(current->ops->handle);
+				free(current->ops);
+			}
+			free(current);
+			current = next;
+		}
+
+		subid_nss_db_head = NULL;
 	}
+}
+
+static struct subid_nss_ops *
+open_and_check_nss_module(const char *libname) {
+	void                  *h;
+	struct subid_nss_ops  *nss_ops;
+
+	h = dlopen(libname, RTLD_LAZY);
+	if (!h) {
+		fprintf(log_get_logfd(), "Error opening %s: %s\n", libname, dlerror());
+		fprintf(log_get_logfd(), "Using files\n");
+		return NULL;
+	}
+
+	nss_ops = malloc_T(1, struct subid_nss_ops);
+	if (!nss_ops) {
+		fprintf(log_get_logfd(), "Failed to allocate memory for subid NSS module %s\n", libname);
+		dlclose(h);
+		return NULL;
+	}
+
+	nss_ops->has_range = dlsym(h, "shadow_subid_has_range");
+	if (!nss_ops->has_range) {
+		fprintf(log_get_logfd(), "%s did not provide @has_range@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
+	if (!nss_ops->list_owner_ranges) {
+		fprintf(log_get_logfd(), "%s did not provide @list_owner_ranges@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
+	if (!nss_ops->find_subid_owners) {
+		fprintf(log_get_logfd(), "%s did not provide @find_subid_owners@\n", libname);
+		goto close_lib;
+	}
+	nss_ops->free = dlsym(h, "shadow_subid_free");
+	if (!nss_ops->free) {
+		fprintf(log_get_logfd(), "%s did not provide @free@\n", libname);
+		goto close_lib;
+	}
+
+	nss_ops->handle = h;
+	return nss_ops;
+
+close_lib:
+	dlclose(h);
+	free(nss_ops);
+	return NULL;
 }
 
 // nsswitch_path is an argument only to support testing.
 void
 nss_init(const char *nsswitch_path) {
-	char    *line = NULL, *p;
-	char    libname[64];
-	FILE    *nssfp = NULL;
-	void    *h;
-	size_t  len = 0;
+	char                  libname[64];
+	char                  *line = NULL;
+	char                  *p;
+	char                  *token;
+	FILE                  *nssfp = NULL;
+	size_t                len = 0;
+	const char            *delimiters = " \t\n";
+	struct subid_nss_db   *new_db;
+	struct subid_nss_db   **tail = &subid_nss_db_head;
+	struct subid_nss_ops  *ops;
 
 	if (atomic_flag_test_and_set(&nss_init_started)) {
 		// Another thread has started nss_init, wait for it to complete
@@ -68,7 +144,7 @@ nss_init(const char *nsswitch_path) {
 		nsswitch_path = NSSWITCH;
 
 	// read nsswitch.conf to check for a line like:
-	//   subid:	files
+	//   subid:	sss files
 	nssfp = fopen(nsswitch_path, "r");
 	if (!nssfp) {
 		if (errno != ENOENT)
@@ -86,66 +162,61 @@ nss_init(const char *nsswitch_path) {
 		if (!strcaseprefix(line, "subid:"))
 			continue;
 		p = &line[6];
-		p = stpspn(p, " \t\n");
+		p = stpspn(p, delimiters);
 		if (!streq(p, ""))
 			break;
 		p = NULL;
 	}
-	if (p == NULL) {
-		goto null_subid;
-	}
-	if (stpsep(p, " \t\n") == NULL) {
-		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
-		// subid_nss has to be null here, but to ease reviews:
-		goto null_subid;
-	}
-	if (streq(p, "files")) {
-		goto null_subid;
-	}
-	if (strlen(p) > 50) {
-		fprintf(log_get_logfd(), "Subid NSS module name too long (longer than 50 characters): %s\n", p);
-		fprintf(log_get_logfd(), "Using files\n");
-		goto null_subid;
-	}
-	stprintf_a(libname, "libsubid_%s.so", p);
-	h = dlopen(libname, RTLD_LAZY);
-	if (!h) {
-		fprintf(log_get_logfd(), "Error opening %s: %s\n", libname, dlerror());
-		fprintf(log_get_logfd(), "Using files\n");
-		goto null_subid;
-	}
-	subid_nss = malloc_T(1, struct subid_nss_ops);
-	if (!subid_nss) {
-		goto close_lib;
-	}
-	subid_nss->has_range = dlsym(h, "shadow_subid_has_range");
-	if (!subid_nss->has_range) {
-		fprintf(log_get_logfd(), "%s did not provide @has_range@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->list_owner_ranges = dlsym(h, "shadow_subid_list_owner_ranges");
-	if (!subid_nss->list_owner_ranges) {
-		fprintf(log_get_logfd(), "%s did not provide @list_owner_ranges@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->find_subid_owners = dlsym(h, "shadow_subid_find_subid_owners");
-	if (!subid_nss->find_subid_owners) {
-		fprintf(log_get_logfd(), "%s did not provide @find_subid_owners@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->free = dlsym(h, "shadow_subid_free");
-	if (!subid_nss->free) {
-		fprintf(log_get_logfd(), "%s did not provide @subid_free@\n", libname);
-		goto close_lib;
-	}
-	subid_nss->handle = h;
-	goto done;
 
-close_lib:
-	dlclose(h);
-	free(subid_nss);
-null_subid:
-	subid_nss = NULL;
+	if (p == NULL) {
+		// Use NULL to indicate the built-in "files" database
+		subid_nss_db_head = NULL;
+		goto done;
+	}
+
+	while (NULL != (token = strsep(&p, delimiters))) {
+		if (*token == '\0') {
+ 			continue;
+		}
+
+		if (streq(token, "files")) {
+			// Use NULL to indicate the built-in "files" database
+			ops = NULL;
+		} else {
+			if (stprintf_a(libname, "libsubid_%s.so", token) == -1) {
+				fprintf(log_get_logfd(), "Subid NSS module name too long: %s\n", token);
+				continue;
+			}
+
+			ops = open_and_check_nss_module(libname);
+			if (!ops) {
+				continue;
+			}
+		}
+
+		new_db = malloc_T(1, struct subid_nss_db);
+		if (!new_db) {
+			if (ops) {
+				dlclose(ops->handle);
+				free(ops);
+				ops = NULL;
+			}
+
+			fprintf(log_get_logfd(), "Failed to allocate memory for subid NSS module %s, skipping\n", token);
+			continue;
+		}
+
+		new_db->ops = ops;
+		new_db->next = NULL;
+		*tail = new_db;
+		tail = &new_db->next;
+	}
+
+	if (subid_nss_db_head == NULL) {
+		// No vaild NSS database loaded, using "files" only.
+		// NULL indicates the built-in "files" database, so we can continue, but log a warning.
+		fprintf(log_get_logfd(), "No usable subid NSS module found, using files\n");
+	}
 
 done:
 	atomic_store(&nss_init_completed, true);
@@ -156,7 +227,8 @@ done:
 	}
 }
 
-struct subid_nss_ops *get_subid_nss_handle() {
+struct subid_nss_db *
+get_subid_nss_db(void) {
 	nss_init(NULL);
-	return subid_nss;
+	return subid_nss_db_head;
 }
