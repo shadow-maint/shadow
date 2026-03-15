@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id: $"
-
-#include <assert.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -32,6 +29,9 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strneq.h"
 #include "string/strcmp/strprefix.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 #ifdef __linux__

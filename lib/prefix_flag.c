@@ -7,12 +7,8 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
 #include <paths.h>
 #include <stdio.h>
-
-#include <assert.h>
 
 #include "atoi/getnum.h"
 #include "defines.h"

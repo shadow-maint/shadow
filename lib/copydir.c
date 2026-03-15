@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
@@ -37,6 +34,9 @@
 #include "string/strcmp/streq.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 static /*@null@*/const char *src_orig;

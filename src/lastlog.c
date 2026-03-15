@@ -19,7 +19,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
-#include <assert.h>
 #ifdef HAVE_LL_HOST
 #include <net/if.h>
 #endif
@@ -35,6 +34,9 @@
 #include "string/memset/memzero.h"
 #include "string/strerrno.h"
 #include "string/strftime.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 /*

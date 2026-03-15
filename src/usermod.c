@@ -11,7 +11,6 @@
 
 #ident "$Id$"
 
-#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -69,6 +68,9 @@
 #include "sysconf.h"
 #include "time/day_to_str.h"
 #include "typetraits.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 /*

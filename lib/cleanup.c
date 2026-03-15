@@ -6,10 +6,13 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <stdio.h>
 
 #include "prototypes.h"
+
+#undef NDEBUG
+#include <assert.h>
+
 
 /*
  * The cleanup_functions stack.

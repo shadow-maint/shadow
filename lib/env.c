@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +23,9 @@
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/strprefix.h"
 #include "string/strdup/strdup.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 /*

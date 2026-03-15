@@ -6,10 +6,7 @@
 
 #include "config.h"
 
-#ident "$Id:$"
-
 #ifdef USE_PAM
-#include <assert.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,6 +19,10 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/memset/memzero.h"
+
+#undef NDEBUG
+#include <assert.h>
+
 
 /*@null@*/ /*@only@*/static const char *non_interactive_password = NULL;
 static int ni_conv (int num_msg,

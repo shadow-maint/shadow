@@ -14,9 +14,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,6 +24,9 @@
 #include "prototypes.h"
 #include "shadowlog.h"
 #include "string/strcmp/streq.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 #if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \

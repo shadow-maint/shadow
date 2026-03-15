@@ -6,7 +6,6 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <stdio.h>
 
 #include "attr.h"
@@ -15,6 +14,7 @@
 #include "sgroupio.h"
 #include "prototypes.h"
 #include "shadowlog.h"
+
 
 /*
  * cleanup_report_add_group - Report failure to add a group to the system

@@ -20,8 +20,6 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 
-#include <assert.h>
-
 
 static void change_root (const char* newroot);
 

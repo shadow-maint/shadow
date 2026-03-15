@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -42,6 +39,9 @@
 #include "string/strcmp/strprefix.h"
 #include "string/strerrno.h"
 #include "string/strtok/stpsep.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 /* local function prototypes */

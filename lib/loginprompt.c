@@ -9,9 +9,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <signal.h>
 #include <stddef.h>
 #include <stdio.h>

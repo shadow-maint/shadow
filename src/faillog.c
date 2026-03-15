@@ -17,7 +17,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
-#include <assert.h>
 
 #include "atoi/a2i.h"
 #include "defines.h"
@@ -30,6 +29,8 @@
 #include "string/strerrno.h"
 #include "string/strftime.h"
 
+#undef NDEBUG
+#include <assert.h>
 
 
 /* local function prototypes */

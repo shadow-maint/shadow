@@ -6,10 +6,12 @@
 #define _GNU_SOURCE
 #include <dlfcn.h>
 #include <errno.h>
-#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#undef NDEBUG
+#include <assert.h>
 
 
 typedef FILE * (*fopen_type) (const char *path, const char *mode);

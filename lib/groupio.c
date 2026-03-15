@@ -10,9 +10,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <stdio.h>
 
 #include "alloc/calloc.h"
@@ -26,6 +23,9 @@
 #include "shadow/group/sgetgrent.h"
 #include "string/sprintf/aprintf.h"
 #include "string/strcmp/streq.h"
+
+#undef NDEBUG
+#include <assert.h>
 
 
 static /*@null@*/struct commonio_entry *merge_group_entries (

@@ -8,7 +8,6 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <errno.h>
@@ -19,6 +18,10 @@
 #include "getdef.h"
 #include "shadowlog.h"
 #include "string/strerrno.h"
+
+#undef NDEBUG
+#include <assert.h>
+
 
 /*
  * get_ranges - Get the minimum and maximum ID ranges for the search

@@ -8,7 +8,6 @@
 
 #ifdef ENABLE_SUBIDS
 
-#include <assert.h>
 #include <stdio.h>
 #include <errno.h>
 
@@ -16,6 +15,10 @@
 #include "subordinateio.h"
 #include "getdef.h"
 #include "shadowlog.h"
+
+#undef NDEBUG
+#include <assert.h>
+
 
 /*
  * find_new_sub_uids - Find a new unused range of UIDs.

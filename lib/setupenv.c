@@ -13,9 +13,6 @@
 
 #include "config.h"
 
-#ident "$Id$"
-
-#include <assert.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/stat.h>
