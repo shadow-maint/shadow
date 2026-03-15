@@ -1183,8 +1183,10 @@ int main (int argc, char **argv)
 			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) != 0)
 			{
 				fprintf (stderr,
-					_("%s: can't find subordinate user range\n"),
-					Prog);
+					_("%s: can't find subordinate user range: %s\n"),
+					Prog, strerrno());
+				SYSLOG(LOG_WARN, "can't find subordinate user range: %s\n",
+				       strerrno());
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_uid_add(fields[0], sub_uid_start, sub_uid_count) == 0)
@@ -1204,8 +1206,10 @@ int main (int argc, char **argv)
 			unsigned long sub_gid_count = 0;
 			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) != 0) {
 				fprintf (stderr,
-					_("%s: can't find subordinate group range\n"),
-					Prog);
+					_("%s: can't find subordinate group range: %s\n"),
+					Prog, strerrno());
+				SYSLOG(LOG_WARN, "can't find subordinate group range: %s\n",
+				       strerrno());
 				fail_exit (EXIT_FAILURE, process_selinux);
 			}
 			if (sub_gid_add(fields[0], sub_gid_start, sub_gid_count) == 0) {
