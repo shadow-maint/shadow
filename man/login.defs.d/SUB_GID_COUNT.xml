@@ -147,3 +147,49 @@
     </refsect2>
   </listitem>
 </varlistentry>
+<varlistentry condition="subids">
+  <term><option>UNSAFE_SUB_GID_DETERMINISTIC_WRAP</option> (boolean)</term>
+  <listitem>
+    <para>
+      <emphasis role="bold">
+        WARNING: SECURITY RISK - MAY CAUSE RANGE OVERLAPS AND PRIVILEGE ESCALATION!
+      </emphasis>
+    </para>
+    <para>
+      Only effective when <option>SUB_GID_DETERMINISTIC</option> is set to
+      <replaceable>yes</replaceable>.
+    </para>
+    <para>
+      When set to <replaceable>yes</replaceable> (WRAP MODE),
+      allows the deterministic range calculation to wrap around using
+      modulo arithmetic when a UID would overflow the configured subordinate ID space.
+      The subordinate ID space is treated as a ring buffer.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+        Range overlaps can lead to container escapes and privilege escalation.
+        For example, with
+          <option>SUB_GID_MIN</option>=100000,
+          <option>SUB_GID_MAX</option>=200000,
+          <option>SUB_GID_COUNT</option>=65536,
+      User A (UID 1000) gets range [100000, 165535] and
+      User B (UID 1001) wraps and overlaps with User A.
+      User B's container can now access files from User A's containers.
+    </para>
+    <para>
+      Use <emphasis role="bold">only</emphasis> in development, testing,
+      or tightly constrained lab environments.
+    </para>
+    <para>
+      When set to <replaceable>no</replaceable> (default),
+      any arithmetic overflow or range exceeding
+      <option>SUB_GID_MAX</option> is a hard error.
+      This guarantees non-overlapping, monotonic allocation.
+    </para>
+    <para>
+      The default value for
+      <option>UNSAFE_SUB_GID_DETERMINISTIC_WRAP</option> is
+      <replaceable>no</replaceable>.
+    </para>
+  </listitem>
+</varlistentry>

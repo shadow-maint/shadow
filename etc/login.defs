@@ -254,6 +254,24 @@ SUB_UID_COUNT		    65536
 #SUB_UID_DETERMINISTIC	no
 
 #
+# Allow deterministic subordinate UID calculation to wrap around using
+# modulo arithmetic when a UID would overflow the configured subordinate
+# ID space. Only effective when SUB_UID_DETERMINISTIC is "yes".
+#
+# When disabled (default), any arithmetic overflow is a hard error,
+# ensuring non-overlapping monotonic allocation.
+#
+# WARNING: SECURITY RISK - MAY CAUSE RANGE OVERLAPS AND PRIVILEGE ESCALATION!
+#
+# When enabled (WRAP MODE), the subordinate ID space is treated as a ring
+# buffer. Uses modulo arithmetic to handle overflow. May cause range
+# overlaps between users.
+#
+# Default: no
+#
+#UNSAFE_SUB_UID_DETERMINISTIC_WRAP	no
+
+#
 # Min/max values for automatic gid selection in groupadd(8)
 #
 GID_MIN			 1000
@@ -278,6 +296,24 @@ SUB_GID_COUNT		    65536
 # Default: no
 #
 #SUB_GID_DETERMINISTIC	no
+
+#
+# Allow deterministic subordinate GID calculation to wrap around using
+# modulo arithmetic when a UID would overflow the configured subordinate
+# ID space. Only effective when SUB_GID_DETERMINISTIC is "yes".
+#
+# When disabled (default), any arithmetic overflow is a hard error,
+# ensuring non-overlapping monotonic allocation.
+#
+# WARNING: SECURITY RISK - MAY CAUSE RANGE OVERLAPS AND PRIVILEGE ESCALATION!
+#
+# When enabled (WRAP MODE), the subordinate ID space is treated as a ring
+# buffer. Uses modulo arithmetic to handle overflow. May cause range
+# overlaps between users.
+#
+# Default: no
+#
+#UNSAFE_SUB_GID_DETERMINISTIC_WRAP      no
 
 #
 # Max number of login(1) retries if password is bad
