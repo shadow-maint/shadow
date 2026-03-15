@@ -34,9 +34,6 @@ int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 	unsigned long count;
 	id_t start;
 
-	assert (range_start != NULL);
-	assert (range_count != NULL);
-
 	min = getdef_ulong ("SUB_GID_MIN", 100000UL);
 	max = getdef_ulong ("SUB_GID_MAX", 600100000UL);
 	count = getdef_ulong ("SUB_GID_COUNT", 65536);
