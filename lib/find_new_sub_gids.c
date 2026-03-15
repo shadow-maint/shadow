@@ -9,23 +9,168 @@
 #ifdef ENABLE_SUBIDS
 
 #include <assert.h>
-#include <stdio.h>
 #include <errno.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
 
-#include "prototypes.h"
-#include "subordinateio.h"
 #include "getdef.h"
+#include "prototypes.h"
 #include "shadowlog.h"
+#include "subordinateio.h"
 
 /*
- * find_new_sub_gids - Find a new unused range of GIDs.
+ * find_new_sub_gids_deterministic - Assign a subordinate GID range by UID.
  *
- * If successful, find_new_sub_gids provides a range of unused
- * user IDs in the [SUB_GID_MIN:SUB_GID_MAX] range.
+ * Calculates a deterministic subordinate GID range for a given UID based
+ * on its offset from UID_MIN.  Loads SUB_GID_COUNT from login.defs and
+ * writes it back to *range_count on success.
+ *
+ * BASE FORMULA:
+ *   uid_offset     = uid - UID_MIN
+ *   logical_offset = uid_offset * SUB_GID_COUNT
+ *   start_id       = SUB_GID_MIN + logical_offset
+ *   end_id         = start_id + SUB_GID_COUNT - 1
+ *
+ * DETERMINISTIC-SAFE MODE (default):
+ *   All arithmetic overflow is a hard error.  The assigned range must fit
+ *   entirely within [SUB_GID_MIN, SUB_GID_MAX].  Allocation is monotonic
+ *   and guaranteed non-overlapping.
+ *
+ * UNSAFE_SUB_GID_DETERMINISTIC_WRAP MODE:
+ *   Activated with UNSAFE_SUB_GID_DETERMINISTIC_WRAP yes
+ *
+ *   WARNING: SECURITY RISK!
+ *   WARNING: MAY CAUSE RANGE OVERLAPS!
+ *   WARNING: MAY CAUSE CONTAINER ESCAPES!
+ *
+ *   The subordinate GID space is treated as a ring.  Arithmetic overflow
+ *   is normalised via modulo over [SUB_GID_MIN, SUB_GID_MAX].
+ *   This means ranges MAY overlap for large UID populations!
+ *   Intended only for development, testing, or constrained lab environments.
+ *
+ * Return 0 on success, -1 if no GIDs are available.
+ */
+static int
+find_new_sub_gids_deterministic(uid_t uid,
+				id_t *range_start,
+				unsigned long *range_count)
+{
+	bool           allow_wrap;
+	unsigned long  count;
+	unsigned long  space;
+	unsigned long  uid_min;
+	unsigned long  sub_gid_max;
+	unsigned long  sub_gid_min;
+	unsigned long  uid_offset;
+
+	assert (range_start != NULL);
+	assert (range_count != NULL);
+
+	uid_min = getdef_ulong ("UID_MIN", 1000UL);
+	sub_gid_min = getdef_ulong ("SUB_GID_MIN", 65536UL);
+	sub_gid_max = getdef_ulong ("SUB_GID_MAX", 4294967295UL);
+	count = getdef_ulong ("SUB_GID_COUNT", 65536UL);
+	allow_wrap = getdef_bool ("UNSAFE_SUB_GID_DETERMINISTIC_WRAP");
+
+	if (uid < uid_min) {
+		fprintf(log_get_logfd(),
+		         _("%s: UID %ju is less than UID_MIN %lu,"
+		           " cannot calculate deterministic subordinate GIDs\n"),
+		         log_get_progname(),
+		         (uintmax_t)uid, uid_min);
+		return -1;
+	}
+
+	if (sub_gid_min > sub_gid_max || count == 0) {
+		fprintf(log_get_logfd(),
+		         _("%s: Invalid configuration: SUB_GID_MIN (%lu),"
+		           " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
+		         log_get_progname(),
+		         sub_gid_min, sub_gid_max, count);
+		return -1;
+	}
+
+	uid_offset = uid - uid_min;
+	space = sub_gid_max - sub_gid_min + 1;
+
+	if (count > space) {
+		fprintf(log_get_logfd(),
+		         _("%s: Not enough space for any subordinate GIDs"
+		           " (SUB_GID_MIN=%lu, SUB_GID_MAX=%lu,"
+		           " SUB_GID_COUNT=%lu)\n"),
+		         log_get_progname(),
+		         sub_gid_min, sub_gid_max, count);
+		return -1;
+	}
+
+	if (allow_wrap) {
+		/*
+		* UNSAFE_SUB_GID_DETERMINISTIC_WRAP MODE
+		*
+		* Promote to uintmax_t before multiplying to avoid truncation on
+		* 32-bit platforms where unsigned long is 32 bits.
+		*/
+		uintmax_t logical_offset = (uintmax_t)uid_offset * (uintmax_t)count;
+
+		*range_start = (id_t)(sub_gid_min + (unsigned long)(logical_offset % space));
+		*range_count = count;
+		return 0;
+	}
+
+	id_t  end_id;
+	id_t  product;
+	id_t  start_id;
+
+	if (__builtin_mul_overflow(uid_offset, count, &product)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (__builtin_add_overflow(sub_gid_min, product, &start_id)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (__builtin_add_overflow(start_id, count - 1, &end_id)) {
+		fprintf(log_get_logfd(),
+		         _("%s: Overflow calculating deterministic"
+		           " subordinate GID range for UID %ju\n"),
+		         log_get_progname(), (uintmax_t)uid);
+		return -1;
+	}
+
+	if (end_id > sub_gid_max) {
+		fprintf(log_get_logfd(),
+		         _("%s: Deterministic subordinate GID range"
+		           " for UID %ju exceeds SUB_GID_MAX (%lu)\n"),
+		         log_get_progname(),
+		         (uintmax_t)uid, sub_gid_max);
+		return -1;
+	}
+
+	*range_start = start_id;
+	*range_count = count;
+	return 0;
+}
+
+/*
+ * find_new_sub_gids_linear - Find an unused subordinate GID range via
+ * linear search.
+ *
+ * Loads SUB_GID_COUNT from login.defs and writes the allocated count back
+ * to *range_count on success.
  *
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
+static int
+find_new_sub_gids_linear(id_t *range_start, unsigned long *range_count)
 {
 	unsigned long min, max;
 	unsigned long count;
@@ -58,7 +203,24 @@ int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 	*range_count = count;
 	return 0;
 }
+
+/*
+ * find_new_sub_gids - Find a new unused range of subordinate GIDs.
+ *
+ * Return 0 on success, -1 if no unused GIDs are available.
+ */
+int
+find_new_sub_gids(uid_t uid, id_t *range_start, unsigned long *range_count)
+{
+	if (!range_start || !range_count)
+		return -1;
+
+	if (getdef_bool("SUB_GID_DETERMINISTIC"))
+		return find_new_sub_gids_deterministic(uid, range_start, range_count);
+
+	return find_new_sub_gids_linear(range_start, range_count);
+}
+
 #else				/* !ENABLE_SUBIDS */
 extern int ISO_C_forbids_an_empty_translation_unit;
 #endif				/* !ENABLE_SUBIDS */
-

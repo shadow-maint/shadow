@@ -22,3 +22,174 @@
     </para>
   </listitem>
 </varlistentry>
+<varlistentry condition="subids">
+  <term><option>SUB_UID_DETERMINISTIC</option> (boolean)</term>
+  <listitem>
+    <para>
+      If set to <replaceable>yes</replaceable>,
+      the commands
+      <command>useradd</command>,
+      <command>usermod</command>,
+      and
+      <command>newusers</command>
+      will calculate subordinate UID ranges deterministically
+      based on the user's UID
+      instead of searching for the next free range.
+       The formula used is:
+    </para>
+    <literallayout>
+      start = SUB_UID_MIN + ((UID - UID_MIN) * SUB_UID_COUNT)
+      end   = start + SUB_UID_COUNT - 1
+    </literallayout>
+    <para>
+      This ensures the same UID always receives the same subordinate UID
+      range on every system,
+      making it suitable for environments with centralized user management
+      (LDAP, NIS, etc.)
+      or
+      synchronized UIDs across systems.
+    </para>
+    <para>
+      If <option>SUB_UID_DETERMINISTIC</option> is enabled,
+      you can use
+      <command>usermod --add-subuids -S</command>
+      to produce deterministic subuids.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+      Because <option>UID_MIN</option> is used to calculate the ranges,
+      any change of <option>UID_MIN</option> will disrupt the algorithm.
+      <option>UID_MAX</option> is used to calculate the ranges,
+      any change of <option>UID_MAX</option> will disrupt the algorithm.
+      Users with identities less than <option>UID_MIN</option>
+      are incompatible with <option>SUB_UID_DETERMINISTIC</option>,
+      but can still be set manually.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+      Do not mix deterministic and linear (default) allocation on the same system
+      or across systems sharing <filename>/etc/subuid</filename>
+      via network storage (NFS, etc.).
+      Mixing allocation methods
+      <emphasis role="bold">
+      will cause subordinate ID range conflicts and overlaps
+      </emphasis>.
+    </para>
+    <para>
+      The default value for <option>SUB_UID_DETERMINISTIC</option> is
+      <replaceable>no</replaceable>.
+    </para>
+    <refsect2>
+      <title>Range Calculation Examples</title>
+      <para>
+        With default configuration
+        (<option>UID_MIN</option>=1000,
+        <option>SUB_UID_MIN</option>=100000,
+        <option>SUB_UID_COUNT</option>=65536):
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry>UID</entry>
+              <entry>Calculation</entry>
+              <entry>Subordinate UID Range</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>1000</entry>
+              <entry>100000 + ((1000-1000) * 65536)</entry>
+              <entry>100000-165535</entry>
+            </row>
+            <row>
+              <entry>1001</entry>
+              <entry>100000 + ((1001-1000) * 65536)</entry>
+              <entry>165536-231071</entry>
+            </row>
+            <row>
+              <entry>1002</entry>
+              <entry>100000 + ((1002-1000) * 65536)</entry>
+              <entry>231072-296607</entry>
+            </row>
+            <row>
+              <entry>1100</entry>
+              <entry>100000 + ((1100-1000) * 65536)</entry>
+              <entry>6653600-6719135</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </refsect2>
+    <refsect2>
+      <title>Subordinate ID Space Planning</title>
+      <para>
+        When planning subordinate ID allocation,
+        calculate the maximum number of users the space can accommodate:
+      </para>
+      <literallayout>
+      capacity = (SUB_UID_MAX - SUB_UID_MIN) / SUB_UID_COUNT
+      </literallayout>
+      <para>
+        With default values: (600100000 - 100000) / 65536 ≈ 9155 users.
+      </para>
+      <para>
+        For high-density environments with many users and smaller allocations:
+      </para>
+      <literallayout>
+        SUB_UID_COUNT  4096
+        SUB_UID_MIN    100000
+        SUB_UID_MAX    10000000
+      </literallayout>
+      <para>
+        This gives: (10000000 - 100000) / 4096 ≈ 2417 users.
+      </para>
+    </refsect2>
+  </listitem>
+</varlistentry>
+<varlistentry condition="subids">
+  <term><option>UNSAFE_SUB_UID_DETERMINISTIC_WRAP</option> (boolean)</term>
+  <listitem>
+    <para>
+      <emphasis role="bold">
+        WARNING: SECURITY RISK - MAY CAUSE RANGE OVERLAPS AND PRIVILEGE ESCALATION!
+      </emphasis>
+    </para>
+    <para>
+      Only effective when <option>SUB_UID_DETERMINISTIC</option> is set to
+      <replaceable>yes</replaceable>.
+    </para>
+    <para>
+      When set to <replaceable>yes</replaceable> (WRAP MODE),
+      allows the deterministic range calculation to wrap around using
+      modulo arithmetic when a UID would overflow the configured subordinate ID space.
+      The subordinate ID space is treated as a ring buffer.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+        Range overlaps can lead to container escapes and privilege escalation.
+        For example, with
+          <option>SUB_UID_MIN</option>=100000,
+          <option>SUB_UID_MAX</option>=200000,
+          <option>SUB_UID_COUNT</option>=65536,
+      User A (UID 1000) gets range [100000, 165535] and
+      User B (UID 1001) wraps and overlaps with User A.
+      User B's container can now access files from User A's containers.
+    </para>
+    <para>
+      Use <emphasis role="bold">only</emphasis> in development, testing,
+      or tightly constrained lab environments.
+    </para>
+    <para>
+      When set to <replaceable>no</replaceable> (default),
+      any arithmetic overflow or range exceeding
+      <option>SUB_UID_MAX</option> is a hard error.
+      This guarantees non-overlapping, monotonic allocation.
+    </para>
+    <para>
+      The default value for
+      <option>UNSAFE_SUB_UID_DETERMINISTIC_WRAP</option> is
+      <replaceable>no</replaceable>.
+    </para>
+  </listitem>
+</varlistentry>
