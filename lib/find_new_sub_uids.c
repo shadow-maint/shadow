@@ -38,11 +38,6 @@ int find_new_sub_uids (id_t *range_start, unsigned long *range_count)
 	max = getdef_ulong ("SUB_UID_MAX", 600100000UL);
 	count = getdef_ulong ("SUB_UID_COUNT", 65536);
 
-	if (min > max || count >= max || (min + count - 1) > max) {
-		errno = ERANGE;
-		return -1;
-	}
-
 	start = sub_uid_find_free_range(min, max, count);
 	if (start == -1)
 		return -1;
