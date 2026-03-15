@@ -8,7 +8,6 @@
 
 #ifdef ENABLE_SUBIDS
 
-#include <assert.h>
 #include <stdio.h>
 #include <errno.h>
 
@@ -31,29 +30,14 @@ int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 	unsigned long count;
 	id_t start;
 
-	assert (range_start != NULL);
-	assert (range_count != NULL);
-
 	min = getdef_ulong ("SUB_GID_MIN", 100000UL);
 	max = getdef_ulong ("SUB_GID_MAX", 600100000UL);
 	count = getdef_ulong ("SUB_GID_COUNT", 65536);
 
-	if (min > max || count >= max || (min + count - 1) > max) {
-		(void) fprintf (log_get_logfd(),
-				_("%s: Invalid configuration: SUB_GID_MIN (%lu),"
-				  " SUB_GID_MAX (%lu), SUB_GID_COUNT (%lu)\n"),
-			log_get_progname(), min, max, count);
-		return -1;
-	}
-
 	start = sub_gid_find_free_range(min, max, count);
-	if (start == (id_t)-1) {
-		fprintf (log_get_logfd(),
-		         _("%s: Can't get unique subordinate GID range\n"),
-		         log_get_progname());
-		SYSLOG(LOG_WARN, "no more available subordinate GIDs on the system");
+	if (start == -1)
 		return -1;
-	}
+
 	*range_start = start;
 	*range_count = count;
 	return 0;

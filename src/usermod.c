@@ -2255,14 +2255,18 @@ int main (int argc, char **argv)
 	if (Sflg) {
 		if (find_range (&add_sub_uids, find_new_sub_uids) == 0) {
 			fprintf (stderr,
-				_("%s: unable to find new subordinate uid range\n"),
-				Prog);
+				_("%s: unable to find new subordinate uid range: %s\n"),
+				Prog, strerrno());
+			SYSLOG(LOG_WARN, "unable to find new subordinate uid range: %s\n",
+			       strerrno());
 			fail_exit (E_SUB_UID_UPDATE, process_selinux);
 		}
 		if (find_range (&add_sub_gids, find_new_sub_gids) == 0) {
 			fprintf (stderr,
-				_("%s: unable to find new subordinate gid range\n"),
-				Prog);
+				_("%s: unable to find new subordinate gid range: %s\n"),
+				Prog, strerrno());
+			SYSLOG(LOG_WARN, "unable to find new subordinate gid range: %s\n",
+			       strerrno());
 			fail_exit (E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
