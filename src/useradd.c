@@ -2657,16 +2657,20 @@ int main (int argc, char **argv)
 	if (is_sub_uid && subuid_count != 0) {
 		if (find_new_sub_uids(&sub_uid_start, &subuid_count) < 0) {
 			fprintf (stderr,
-			         _("%s: can't create subordinate user IDs\n"),
-			         Prog);
+			         _("%s: can't create subordinate user IDs: %s\n"),
+			         Prog, strerrno());
+			SYSLOG(LOG_WARN, "can't create subordinate user IDs: %s\n",
+			       strerrno());
 			fail_exit(E_SUB_UID_UPDATE, process_selinux);
 		}
 	}
 	if (is_sub_gid && subgid_count != 0) {
 		if (find_new_sub_gids(&sub_gid_start, &subgid_count) < 0) {
 			fprintf (stderr,
-			         _("%s: can't create subordinate group IDs\n"),
-			         Prog);
+			         _("%s: can't create subordinate group IDs: %s\n"),
+			         Prog, strerrno());
+			SYSLOG(LOG_WARN, "can't create subordinate group IDs: %s\n",
+			       strerrno());
 			fail_exit(E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
