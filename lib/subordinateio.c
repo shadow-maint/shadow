@@ -344,14 +344,13 @@ static int subordinate_range_cmp (const void *p1, const void *p2)
  * @max: the highest uid to find
  * @count: the number of uids needed
  *
- * Return the lowest new uid, or ULONG_MAX on failure.
+ * Return the lowest new uid, or -1 on failure.
  */
-static unsigned long find_free_range(struct commonio_db *db,
-				     unsigned long min, unsigned long max,
-				     unsigned long count)
+static id_t
+find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 {
+	id_t                           low, high;
 	const struct subordinate_range *range;
-	unsigned long low, high;
 
 	/* When given invalid parameters fail */
 	if ((count == 0) || (max < min))
@@ -363,8 +362,10 @@ static unsigned long find_free_range(struct commonio_db *db,
 
 	low = min;
 	while (NULL != (range = commonio_next(db))) {
-		unsigned long first = range->start;
-		unsigned long last = first + range->count - 1;
+		id_t  first, last;
+
+		first = range->start;
+		last = first + range->count - 1;
 
 		/* Find the top end of the hole before this range */
 		high = first;
@@ -389,7 +390,7 @@ static unsigned long find_free_range(struct commonio_db *db,
 	if (((max - low) + 1) >= count)
 		return low;
 fail:
-	return ULONG_MAX;
+	return -1;
 }
 
 /*
@@ -676,9 +677,7 @@ int sub_uid_unlock (bool process_selinux)
 
 uid_t sub_uid_find_free_range(uid_t min, uid_t max, unsigned long count)
 {
-	unsigned long start;
-	start = find_free_range (&subordinate_uid_db, min, max, count);
-	return start == ULONG_MAX ? (uid_t) -1 : start;
+	return find_free_range(&subordinate_uid_db, min, max, count);
 }
 
 
@@ -814,9 +813,7 @@ int sub_gid_unlock (bool process_selinux)
 
 gid_t sub_gid_find_free_range(gid_t min, gid_t max, unsigned long count)
 {
-	unsigned long start;
-	start = find_free_range (&subordinate_gid_db, min, max, count);
-	return start == ULONG_MAX ? (gid_t) -1 : start;
+	return find_free_range(&subordinate_gid_db, min, max, count);
 }
 
 static bool get_owner_id(const char *owner, enum subid_type id_type, char *id)
@@ -1025,6 +1022,7 @@ int find_subid_owners(unsigned long id, enum subid_type id_type, uid_t **uids)
 
 bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, bool reuse)
 {
+	id_t               start;
 	struct commonio_db *db;
 	const struct subordinate_range *r;
 	bool ret;
@@ -1075,12 +1073,12 @@ bool new_subid_range(struct subordinate_range *range, enum subid_type id_type, b
 		}
 	}
 
-	range->start = find_free_range(db, range->start, ULONG_MAX, range->count);
-
-	if (range->start == ULONG_MAX) {
+	start = find_free_range(db, range->start, -1, range->count);
+	if (start == -1) {
 		ret = false;
 		goto out;
 	}
+	range->start = start;
 
 	ret = add_range(db, range->owner, range->start, range->count) == 1;
 
