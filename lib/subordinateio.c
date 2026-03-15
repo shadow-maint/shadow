@@ -335,8 +335,7 @@ find_free_range(struct commonio_db *db, id_t min, id_t max, unsigned long count)
 	id_t                           low, high;
 	const struct subordinate_range *range;
 
-	/* When given invalid parameters fail */
-	if ((count == 0) || (max < min)) {
+	if (count == 0 || max < min || count - 1 > max - min) {
 		errno = ERANGE;
 		return -1;
 	}
