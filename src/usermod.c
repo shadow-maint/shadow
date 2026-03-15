@@ -1807,7 +1807,7 @@ static void usr_update(const struct option_flags *flags)
 	}
 
 	if (lflg || uflg || gflg || cflg || dflg || sflg || pflg
-	    || Lflg || Uflg) {
+	    || Lflg || Uflg || spwd == &spent) {
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
