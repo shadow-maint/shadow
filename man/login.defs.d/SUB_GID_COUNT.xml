@@ -22,3 +22,128 @@
     </para>
   </listitem>
 </varlistentry>
+<varlistentry condition="subids">
+  <term><option>SUB_GID_DETERMINISTIC</option> (boolean)</term>
+  <listitem>
+    <para>
+      If set to <replaceable>yes</replaceable>,
+      the commands
+      <command>useradd</command>,
+      <command>usermod</command>,
+      and
+      <command>newusers</command>
+      will calculate subordinate GID ranges deterministically
+      based on the user's UID
+      instead of searching for the next free range.
+       The formula used is:
+    </para>
+    <literallayout>
+      start = SUB_GID_MIN + ((UID - UID_MIN) * SUB_GID_COUNT)
+      end   = start + SUB_GID_COUNT - 1
+    </literallayout>
+    <para>
+      This ensures the same UID always receives the same subordinate GID
+      range on every system,
+      making it suitable for environments with centralized user management
+      (LDAP, NIS, etc.)
+      or
+      synchronized UIDs across systems.
+    </para>
+    <para>
+      If <option>SUB_GID_DETERMINISTIC</option> is enabled,
+      you can use
+      <command>usermod --add-subgids -S</command>
+      to produce deterministic subgids.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+      Because <option>UID_MIN</option> is used to calculate the ranges,
+      any change of <option>UID_MIN</option> will disrupt the algorithm.
+      <option>UID_MAX</option> is used to calculate the ranges,
+      any change of <option>UID_MAX</option> will disrupt the algorithm.
+      Users with identities less than <option>UID_MIN</option>
+      are incompatible with <option>SUB_GID_DETERMINISTIC</option>,
+      but can still be set manually.
+    </para>
+    <para>
+      <emphasis role="bold">WARNING</emphasis>:
+      Do not mix deterministic and linear (default) allocation on the same system
+      or across systems sharing <filename>/etc/subgid</filename>
+      via network storage (NFS, etc.).
+      Mixing allocation methods
+      <emphasis role="bold">
+      will cause subordinate ID range conflicts and overlaps
+      </emphasis>.
+    </para>
+    <para>
+      The default value for <option>SUB_GID_DETERMINISTIC</option> is
+      <replaceable>no</replaceable>.
+    </para>
+    <refsect2>
+      <title>Range Calculation Examples</title>
+      <para>
+        With default configuration
+        (<option>UID_MIN</option>=1000,
+        <option>SUB_GID_MIN</option>=100000,
+        <option>SUB_GID_COUNT</option>=65536):
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry>UID</entry>
+              <entry>Calculation</entry>
+              <entry>Subordinate GID Range</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>1000</entry>
+              <entry>100000 + ((1000-1000) * 65536)</entry>
+              <entry>100000-165535</entry>
+            </row>
+            <row>
+              <entry>1001</entry>
+              <entry>100000 + ((1001-1000) * 65536)</entry>
+              <entry>165536-231071</entry>
+            </row>
+            <row>
+              <entry>1002</entry>
+              <entry>100000 + ((1002-1000) * 65536)</entry>
+              <entry>231072-296607</entry>
+            </row>
+            <row>
+              <entry>1100</entry>
+              <entry>100000 + ((1100-1000) * 65536)</entry>
+              <entry>6653600-6719135</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </refsect2>
+    <refsect2>
+      <title>Subordinate ID Space Planning</title>
+      <para>
+        When planning subordinate ID allocation,
+        calculate the maximum number of users the space can accommodate:
+      </para>
+      <literallayout>
+      capacity = (SUB_GID_MAX - SUB_GID_MIN) / SUB_GID_COUNT
+      </literallayout>
+      <para>
+        With default values: (600100000 - 100000) / 65536 ≈ 9155 users.
+      </para>
+      <para>
+        For high-density environments with many users and smaller allocations:
+      </para>
+      <literallayout>
+        SUB_GID_COUNT  4096
+        SUB_GID_MIN    100000
+        SUB_GID_MAX    10000000
+      </literallayout>
+      <para>
+        This gives: (10000000 - 100000) / 4096 ≈ 2417 users.
+      </para>
+    </refsect2>
+  </listitem>
+</varlistentry>

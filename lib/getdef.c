@@ -121,9 +121,11 @@ static struct itemdef def_table[] = {
 	{"YESCRYPT_COST_FACTOR", NULL},
 #endif
 	{"SUB_GID_COUNT", NULL},
+	{"SUB_GID_DETERMINISTIC", NULL},
 	{"SUB_GID_MAX", NULL},
 	{"SUB_GID_MIN", NULL},
 	{"SUB_UID_COUNT", NULL},
+	{"SUB_UID_DETERMINISTIC", NULL},
 	{"SUB_UID_MAX", NULL},
 	{"SUB_UID_MIN", NULL},
 	{"SULOG_FILE", NULL},
