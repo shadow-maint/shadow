@@ -8,7 +8,6 @@
 
 #ifdef ENABLE_SUBIDS
 
-#include <assert.h>
 #include <stdio.h>
 #include <errno.h>
 
@@ -30,9 +29,6 @@ int find_new_sub_uids (id_t *range_start, unsigned long *range_count)
 	unsigned long min, max;
 	unsigned long count;
 	id_t start;
-
-	assert (range_start != NULL);
-	assert (range_count != NULL);
 
 	min = getdef_ulong ("SUB_UID_MIN", 100000UL);
 	max = getdef_ulong ("SUB_UID_MAX", 600100000UL);
