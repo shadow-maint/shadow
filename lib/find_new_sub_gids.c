@@ -44,7 +44,7 @@ int find_new_sub_gids (id_t *range_start, unsigned long *range_count)
 	}
 
 	start = sub_gid_find_free_range(min, max, count);
-	if (start == (id_t)-1) {
+	if (start == -1) {
 		errno = EUSERS;
 		return -1;
 	}
