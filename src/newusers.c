@@ -1180,7 +1180,7 @@ int main (int argc, char **argv)
 		if (is_sub_uid && !local_sub_uid_assigned(fields[0])) {
 			uid_t sub_uid_start = 0;
 			unsigned long sub_uid_count = 0;
-			if (find_new_sub_uids(&sub_uid_start, &sub_uid_count) != 0)
+			if (find_new_sub_uids(newpw.pw_uid, &sub_uid_start, &sub_uid_count) != 0)
 			{
 				fprintf (stderr,
 					_("%s: can't find subordinate user range: %s\n"),
@@ -1204,7 +1204,7 @@ int main (int argc, char **argv)
 		if (is_sub_gid && !local_sub_gid_assigned(fields[0])) {
 			gid_t sub_gid_start = 0;
 			unsigned long sub_gid_count = 0;
-			if (find_new_sub_gids(&sub_gid_start, &sub_gid_count) != 0) {
+			if (find_new_sub_gids(newpw.pw_uid, &sub_gid_start, &sub_gid_count) != 0) {
 				fprintf (stderr,
 					_("%s: can't find subordinate group range: %s\n"),
 					Prog, strerrno());

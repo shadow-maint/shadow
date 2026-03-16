@@ -2655,7 +2655,7 @@ int main (int argc, char **argv)
 
 #ifdef ENABLE_SUBIDS
 	if (is_sub_uid && subuid_count != 0) {
-		if (find_new_sub_uids(&sub_uid_start, &subuid_count) < 0) {
+		if (find_new_sub_uids(user_id, &sub_uid_start, &subuid_count) < 0) {
 			fprintf (stderr,
 			         _("%s: can't create subordinate user IDs: %s\n"),
 			         Prog, strerrno());
@@ -2665,7 +2665,7 @@ int main (int argc, char **argv)
 		}
 	}
 	if (is_sub_gid && subgid_count != 0) {
-		if (find_new_sub_gids(&sub_gid_start, &subgid_count) < 0) {
+		if (find_new_sub_gids(user_id, &sub_gid_start, &subgid_count) < 0) {
 			fprintf (stderr,
 			         _("%s: can't create subordinate group IDs: %s\n"),
 			         Prog, strerrno());
