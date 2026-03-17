@@ -664,12 +664,10 @@ static void new_spent (struct spwd *spent, bool process_selinux)
 	}
 }
 
-/*
- * fail_exit - exit with an error code after unlocking files
- */
-NORETURN
+
+// unlock_db - unlock database files
 static void
-fail_exit(int code, bool process_selinux)
+unlock_db(bool process_selinux)
 {
 #ifdef ENABLE_SUBIDS
 	if (lk.subgid) {
@@ -688,8 +686,8 @@ fail_exit(int code, bool process_selinux)
 			lk.subuid = false;
 		}
 	}
-#endif				/* ENABLE_SUBIDS */
-#ifdef	SHADOWGRP
+#endif
+#ifdef SHADOWGRP
 	if (lk.sgr) {
 		if (sgr_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
@@ -723,6 +721,17 @@ fail_exit(int code, bool process_selinux)
 			lk.pw = false;
 		}
 	}
+}
+
+
+/*
+ * fail_exit - exit with an error code after unlocking files
+ */
+NORETURN
+static void
+fail_exit(int code, bool process_selinux)
+{
+	unlock_db(process_selinux);
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_MGMT,
