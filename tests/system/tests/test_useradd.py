@@ -360,3 +360,34 @@ def test_useradd__invalid_numeric_primary_group(shadow: Shadow):
     assert shadow.tools.getent.passwd("test1") is None, "User test1 should not be found in passwd"
     assert shadow.tools.getent.group("test1") is None, "Group test1 should not be found"
     assert not shadow.fs.exists("/home/test1"), "Home directory should not be created"
+
+
+@pytest.mark.topology(KnownTopology.Shadow)
+def test_useradd__valid_group_as_primary(shadow: Shadow):
+    """
+    :title: Add a new user with a valid existing group as primary
+    :steps:
+        1. Create a group
+        2. Check group entry
+        3. Create user with that group as primary
+        4. Check passwd entry
+    :expectedresults:
+        1. Group created successfully
+        2. Group attributes are correct
+        3. User created with the specified group as primary
+        4. User's GID matches the group's GID
+    :customerscenario: False
+    """
+    shadow.groupadd("testgroup")
+
+    group_entry = shadow.tools.getent.group("testgroup")
+    assert group_entry is not None, "Group testgroup should exist"
+    assert group_entry.name == "testgroup", f"Incorrect group name, expected 'testgroup', got '{group_entry.name}'"
+
+    shadow.useradd("testuser -g testgroup")
+
+    passwd_entry = shadow.tools.getent.passwd("testuser")
+    assert passwd_entry is not None, "User testuser should exist"
+    assert (
+        passwd_entry.gid == group_entry.gid
+    ), f"User's GID ({passwd_entry.gid}) should match group's GID ({group_entry.gid})"
