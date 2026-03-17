@@ -1619,14 +1619,16 @@ static void close_files(const struct option_flags *flags)
 static void
 open_files(bool process_selinux)
 {
-	if (pw_lock() == 0) {
-		fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, pw_dbname());
-		fail_exit(E_PW_UPDATE, process_selinux);
-	}
-	lk.pw = true;
-	if (pw_open(O_CREAT | O_RDWR) == 0) {
-		fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
-		fail_exit(E_PW_UPDATE, process_selinux);
+	if (true) {
+		if (pw_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, pw_dbname());
+			fail_exit(E_PW_UPDATE, process_selinux);
+		}
+		lk.pw = true;
+		if (pw_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
+			fail_exit(E_PW_UPDATE, process_selinux);
+		}
 	}
 	if (is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg)) {
 		if (spw_lock() == 0) {
@@ -1639,7 +1641,6 @@ open_files(bool process_selinux)
 			fail_exit(E_PW_UPDATE, process_selinux);
 		}
 	}
-
 	if (Gflg || lflg) {
 		/*
 		 * Lock and open the group file. This will load all of the
@@ -1654,20 +1655,20 @@ open_files(bool process_selinux)
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
 			fail_exit(E_GRP_UPDATE, process_selinux);
 		}
-#ifdef SHADOWGRP
-		if (is_shadow_grp) {
-			if (sgr_lock() == 0) {
-				fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
-				fail_exit(E_GRP_UPDATE, process_selinux);
-			}
-			lk.sgr = true;
-			if (sgr_open(O_CREAT | O_RDWR) == 0) {
-				fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
-				fail_exit(E_GRP_UPDATE, process_selinux);
-			}
-		}
-#endif
 	}
+#ifdef SHADOWGRP
+	if ((Gflg || lflg) && is_shadow_grp) {
+		if (sgr_lock() == 0) {
+			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
+			fail_exit(E_GRP_UPDATE, process_selinux);
+		}
+		lk.sgr = true;
+		if (sgr_open(O_CREAT | O_RDWR) == 0) {
+			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
+			fail_exit(E_GRP_UPDATE, process_selinux);
+		}
+	}
+#endif
 #ifdef ENABLE_SUBIDS
 	if (vflg || Vflg) {
 		if (sub_uid_lock() == 0) {
@@ -1691,7 +1692,7 @@ open_files(bool process_selinux)
 			fail_exit(E_SUB_GID_UPDATE, process_selinux);
 		}
 	}
-#endif				/* ENABLE_SUBIDS */
+#endif
 }
 
 /*
