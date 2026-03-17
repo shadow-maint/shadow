@@ -1610,88 +1610,130 @@ static void close_files(const struct option_flags *flags)
 		fail_exit(ret, process_selinux);
 }
 
-/*
- * open_files - lock and open the password files
- *
- *	open_files() opens the two password files.
- */
-static void
-open_files(bool process_selinux)
+// open_db - lock and open database files
+static int
+open_db(struct lk_db_files *f, bool process_selinux)
 {
-	if (true) {
+	int  ret;
+
+	if (f->spw)
+		f->pw = true;
+	if (f->pw) {
 		if (pw_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, pw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 		lk.pw = true;
 		if (pw_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, pw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 	}
-	if (is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg)) {
+	if (f->spw) {
 		if (spw_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, spw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 		lk.spw = true;
 		if (spw_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, spw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 	}
-	if (Gflg || lflg) {
-		/*
-		 * Lock and open the group file. This will load all of the
-		 * group entries.
-		 */
+
+#ifdef SHADOWGRP
+	if (f->sgr)
+		f->gr = true;
+#endif
+	if (f->gr) {
 		if (gr_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, gr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 		lk.gr = true;
 		if (gr_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, gr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 	}
 #ifdef SHADOWGRP
-	if ((Gflg || lflg) && is_shadow_grp) {
+	if (f->sgr) {
 		if (sgr_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 		lk.sgr = true;
 		if (sgr_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 	}
 #endif
+
 #ifdef ENABLE_SUBIDS
-	if (vflg || Vflg) {
+	if (f->subuid) {
 		if (sub_uid_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sub_uid_dbname());
-			fail_exit(E_SUB_UID_UPDATE, process_selinux);
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
 		}
 		lk.subuid = true;
 		if (sub_uid_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sub_uid_dbname());
-			fail_exit(E_SUB_UID_UPDATE, process_selinux);
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
 		}
 	}
-	if (wflg || Wflg) {
+	if (f->subgid) {
 		if (sub_gid_lock() == 0) {
 			fprintf(stderr, _("%s: cannot lock %s; try again later.\n"), Prog, sub_gid_dbname());
-			fail_exit(E_SUB_GID_UPDATE, process_selinux);
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
 		}
 		lk.subgid = true;
 		if (sub_gid_open(O_CREAT | O_RDWR) == 0) {
 			fprintf(stderr, _("%s: cannot open %s\n"), Prog, sub_gid_dbname());
-			fail_exit(E_SUB_GID_UPDATE, process_selinux);
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
 		}
 	}
 #endif
+	return 0;
+fail:
+	unlock_db(process_selinux);
+	return ret;
+}
+
+
+static void
+open_files(bool process_selinux)
+{
+	int  ret;
+
+	struct lk_db_files  f = {
+		.pw = true,
+		.spw = is_shadow_pwd && (lflg || pflg || eflg || fflg || Lflg || Uflg),
+		.gr = Gflg || lflg,
+	#ifdef SHADOWGRP
+		.sgr = (Gflg || lflg) && is_shadow_grp,
+	#endif
+	#ifdef ENABLE_SUBIDS
+		.subuid = vflg || Vflg,
+		.subgid = wflg || Wflg,
+	#endif
+	};
+
+	ret = open_db(&f, process_selinux);
+	if (ret != 0)
+		fail_exit(ret, process_selinux);
 }
 
 /*
