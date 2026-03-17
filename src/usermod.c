@@ -1608,14 +1608,16 @@ open_files(bool process_selinux)
 			fail_exit(E_GRP_UPDATE, process_selinux);
 		}
 #ifdef SHADOWGRP
-		if (is_shadow_grp && (sgr_lock() == 0)) {
-			eprintf(_("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
-		}
-		sgr_locked = true;
-		if (is_shadow_grp && (sgr_open(O_CREAT | O_RDWR) == 0)) {
-			eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+		if (is_shadow_grp) {
+			if (sgr_lock() == 0) {
+				eprintf(_("%s: cannot lock %s; try again later.\n"), Prog, sgr_dbname());
+				fail_exit(E_GRP_UPDATE, process_selinux);
+			}
+			sgr_locked = true;
+			if (sgr_open(O_CREAT | O_RDWR) == 0) {
+				eprintf(_("%s: cannot open %s\n"), Prog, sgr_dbname());
+				fail_exit(E_GRP_UPDATE, process_selinux);
+			}
 		}
 #endif
 	}
