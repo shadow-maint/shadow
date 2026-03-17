@@ -671,14 +671,16 @@ fail_exit(int code, bool process_selinux)
 		if (sub_gid_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-			/* continue */
+		} else {
+			lk.subgid = false;
 		}
 	}
 	if (lk.subuid) {
 		if (sub_uid_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-			/* continue */
+		} else {
+			lk.subuid = false;
 		}
 	}
 #endif				/* ENABLE_SUBIDS */
@@ -687,7 +689,8 @@ fail_exit(int code, bool process_selinux)
 		if (sgr_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-			/* continue */
+		} else {
+			lk.sgr = false;
 		}
 	}
 #endif
@@ -695,21 +698,24 @@ fail_exit(int code, bool process_selinux)
 		if (gr_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
-			/* continue */
+		} else {
+			lk.gr = false;
 		}
 	}
 	if (lk.spw) {
 		if (spw_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
-			/* continue */
+		} else {
+			lk.spw = false;
 		}
 	}
 	if (lk.pw) {
 		if (pw_unlock(process_selinux) == 0) {
 			eprintf(_("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
-			/* continue */
+		} else {
+			lk.pw = false;
 		}
 	}
 
