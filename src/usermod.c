@@ -1587,7 +1587,7 @@ open_files(bool process_selinux)
 			fail_exit(E_PW_UPDATE, process_selinux);
 		}
 		spw_locked = true;
-		if (is_shadow_pwd && (spw_open(O_CREAT | O_RDWR) == 0)) {
+		if (spw_open(O_CREAT | O_RDWR) == 0) {
 			eprintf(_("%s: cannot open %s\n"), Prog, spw_dbname());
 			fail_exit(E_PW_UPDATE, process_selinux);
 		}
