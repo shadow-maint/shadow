@@ -1520,29 +1520,24 @@ process_flags(int argc, char **argv, struct option_flags *flags)
 #endif				/* ENABLE_SUBIDS */
 }
 
-/*
- * close_files - close all of the files that were opened
- *
- *	close_files() closes all of the files that were opened for this new
- *	user. This causes any modified entries to be written out.
- */
-static void close_files(const struct option_flags *flags)
-{
-	bool process_selinux;
 
-	process_selinux = !flags->chroot && !flags->prefix;
+// close_db - close and unlock database files
+static int
+close_db(bool process_selinux)
+{
+	int  ret;
 
 #ifdef ENABLE_SUBIDS
 	if (lk.subgid) {
 		if (sub_gid_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_gid_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_gid_dbname());
-			fail_exit(E_SUB_GID_UPDATE, process_selinux);
+			ret = E_SUB_GID_UPDATE;
+			goto fail;
 		}
 		if (sub_gid_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-			/* continue */
 		}
 		lk.subgid = false;
 	}
@@ -1550,28 +1545,27 @@ static void close_files(const struct option_flags *flags)
 		if (sub_uid_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sub_uid_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sub_uid_dbname());
-			fail_exit(E_SUB_UID_UPDATE, process_selinux);
+			ret = E_SUB_UID_UPDATE;
+			goto fail;
 		}
 		if (sub_uid_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-			/* continue */
 		}
 		lk.subuid = false;
 	}
-#endif				/* ENABLE_SUBIDS */
-
+#endif
 #ifdef SHADOWGRP
 	if (lk.sgr) {
 		if (sgr_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 		if (sgr_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-			/* continue */
 		}
 		lk.sgr = false;
 	}
@@ -1580,12 +1574,12 @@ static void close_files(const struct option_flags *flags)
 		if (gr_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
-			fail_exit(E_GRP_UPDATE, process_selinux);
+			ret = E_GRP_UPDATE;
+			goto fail;
 		}
 		if (gr_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
-			/* continue */
 		}
 		lk.gr = false;
 	}
@@ -1593,12 +1587,12 @@ static void close_files(const struct option_flags *flags)
 		if (spw_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", spw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 		if (spw_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
-			/* continue */
 		}
 		lk.spw = false;
 	}
@@ -1606,25 +1600,44 @@ static void close_files(const struct option_flags *flags)
 		if (pw_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", pw_dbname());
-			fail_exit(E_PW_UPDATE, process_selinux);
+			ret = E_PW_UPDATE;
+			goto fail;
 		}
 		if (pw_unlock(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
 			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
-			/* continue */
 		}
 		lk.pw = false;
 	}
 
-	/*
-	 * Close the DBM and/or flat files
-	 */
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 	endsgent();
 #endif
 	endgrent();
 	endspent();
 	endpwent();
+	return 0;
+fail:
+	unlock_db(process_selinux);
+	return ret;
+}
+
+/*
+ * close_files - close all of the files that were opened
+ *
+ *	close_files() closes all of the files that were opened for this new
+ *	user. This causes any modified entries to be written out.
+ */
+static void close_files(const struct option_flags *flags)
+{
+	int   ret;
+	bool  process_selinux;
+
+	process_selinux = !flags->chroot && !flags->prefix;
+
+	ret = close_db(process_selinux);
+	if (ret != 0)
+		fail_exit(ret, process_selinux);
 }
 
 /*
