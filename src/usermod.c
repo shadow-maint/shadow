@@ -1541,22 +1541,22 @@ static void close_files(const struct option_flags *flags)
 	}
 #endif				/* ENABLE_SUBIDS */
 
-	if (gr_locked) {
 #ifdef SHADOWGRP
-		if (sgr_locked) {
-			if (sgr_close(process_selinux) == 0) {
-				fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname());
-				SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
-				fail_exit(E_GRP_UPDATE, process_selinux);
-			}
-			if (sgr_unlock(process_selinux) == 0) {
-				fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-				SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-				/* continue */
-			}
-			sgr_locked = false;
+	if (sgr_locked) {
+		if (sgr_close(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failure while writing changes to %s", sgr_dbname());
+			fail_exit(E_GRP_UPDATE, process_selinux);
 		}
+		if (sgr_unlock(process_selinux) == 0) {
+			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
+			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
+			/* continue */
+		}
+		sgr_locked = false;
+	}
 #endif
+	if (gr_locked) {
 		if (gr_close(process_selinux) == 0) {
 			fprintf(stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname());
 			SYSLOG(LOG_ERR, "failure while writing changes to %s", gr_dbname());
