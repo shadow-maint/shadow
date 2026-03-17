@@ -1527,6 +1527,7 @@ close_db(bool process_selinux)
 {
 	int  ret;
 
+	ret = 0;
 #ifdef ENABLE_SUBIDS
 	if (lk.subgid) {
 		if (sub_gid_close(process_selinux) == 0) {
@@ -1535,11 +1536,6 @@ close_db(bool process_selinux)
 			ret = E_SUB_GID_UPDATE;
 			goto fail;
 		}
-		if (sub_gid_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_gid_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_gid_dbname());
-		}
-		lk.subgid = false;
 	}
 	if (lk.subuid) {
 		if (sub_uid_close(process_selinux) == 0) {
@@ -1548,11 +1544,6 @@ close_db(bool process_selinux)
 			ret = E_SUB_UID_UPDATE;
 			goto fail;
 		}
-		if (sub_uid_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sub_uid_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sub_uid_dbname());
-		}
-		lk.subuid = false;
 	}
 #endif
 #ifdef SHADOWGRP
@@ -1563,11 +1554,6 @@ close_db(bool process_selinux)
 			ret = E_GRP_UPDATE;
 			goto fail;
 		}
-		if (sgr_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", sgr_dbname());
-		}
-		lk.sgr = false;
 	}
 #endif
 	if (lk.gr) {
@@ -1577,11 +1563,6 @@ close_db(bool process_selinux)
 			ret = E_GRP_UPDATE;
 			goto fail;
 		}
-		if (gr_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", gr_dbname());
-		}
-		lk.gr = false;
 	}
 	if (lk.spw) {
 		if (spw_close(process_selinux) == 0) {
@@ -1590,11 +1571,6 @@ close_db(bool process_selinux)
 			ret = E_PW_UPDATE;
 			goto fail;
 		}
-		if (spw_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", spw_dbname());
-		}
-		lk.spw = false;
 	}
 	if (lk.pw) {
 		if (pw_close(process_selinux) == 0) {
@@ -1603,11 +1579,6 @@ close_db(bool process_selinux)
 			ret = E_PW_UPDATE;
 			goto fail;
 		}
-		if (pw_unlock(process_selinux) == 0) {
-			fprintf(stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname());
-			SYSLOG(LOG_ERR, "failed to unlock %s", pw_dbname());
-		}
-		lk.pw = false;
 	}
 
 #ifdef SHADOWGRP
@@ -1616,7 +1587,6 @@ close_db(bool process_selinux)
 	endgrent();
 	endspent();
 	endpwent();
-	return 0;
 fail:
 	unlock_db(process_selinux);
 	return ret;
