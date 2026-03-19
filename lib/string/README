@@ -21,7 +21,7 @@ Don't use some libc functions without Really Good Reasons:
 
 <stdio.h>
     asprintf(3)
-	Use aprintf() instead.
+	Use aprintf(3) instead.
 	It is difficult to handle errors after asprintf(3).
 	Also, it makes it more difficult for static analyzers to check
 	that memory is later free(3)d appropriately.
@@ -209,7 +209,7 @@ strcpy/ - String copying
 
 sprintf/ - Formatted string creation
 
-    aprintf()
+    aprintf(3)
 	sprintf(3) variant that allocates.
 	It has better interface than asprintf(3).
 
